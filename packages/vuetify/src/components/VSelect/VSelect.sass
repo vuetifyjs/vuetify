@@ -7,6 +7,10 @@
   .v-select__selection--disabled
     color: map-deep-get($material, 'text', 'disabled')
 
+  &.v-text-field--solo-inverted.v-input--is-focused
+    .v-select__selection--comma
+      color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
+
 .v-select
   position: relative // For **attach** prop
 
@@ -138,6 +142,7 @@
     align-items: center
     display: flex
     max-width: 100%
+    min-width: 0
     width: 100%
 
   &:not(.v-text-field--single-line):not(.v-text-field--outlined)

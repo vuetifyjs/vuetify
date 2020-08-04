@@ -1,6 +1,5 @@
 {
   "heading": "# A-la-carte (ツリーシェーキング)",
-  "headingText": "コンポーネントフレームワークであるVuetifyは、常に水平方向に成長します。プロジェクトによっては、小さな **パッケージサイズ** が必要な場合があります。アラカルトシステムを使用すると、インポートするコンポーネントを選択し、ビルドサイズを大幅に「小さくする」ことができます。 [Vue CLI プラグイン](/getting-started/quick-start#vue-cli-install) で作成された新しいプロジェクトでは、デフォルトで有効になっています。",
   "treeshakeWarning": "ツリーシェーキングは、**production mode** のWebpack 4でのみ機能します。 Vue CLI 3を使用する場合、自動的に適用されます。",
   "loaderHeader1": "## vuetify-loader",
   "loaderText1a": "使用しているすべてのコンポーネントを追跡するのは非常に面倒です。 [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) は使用するすべてのVuetifyコンポーネントを、使用する場所で自動的にインポートすることで、この苦痛を軽減します。また、webpackは表示するチャンクに必要なコンポーネントのみをロードするため、コード分割がより効果的になります。",

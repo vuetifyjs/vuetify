@@ -1,0 +1,4 @@
+$rounded: (
+  'sm': $border-radius-root / 3,
+  'lg': $border-radius-root * 2
+);

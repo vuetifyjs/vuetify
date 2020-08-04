@@ -26,6 +26,11 @@
       "desc": "Menu can be offset by the Y axis to make the activator visible.",
       "uninverted": true
     },
+    "rounded": {
+      "heading": "### Rounded",
+      "desc": "Menus can have their border-radius set by the `rounded` prop. Additional information about rounded classes is on the [Border Radius page](/styles/border-radius).",
+      "uninverted": true
+    },
     "close-on-click": {
       "heading": "### Close on click",
       "desc": "Menu can be closed when lost focus.",
@@ -73,6 +78,7 @@
   "props": {
     "closeOnClick": "Designates if menu should close on outside-activator click",
     "closeOnContentClick": "Designates if menu should close when its content is clicked",
+    "closeDelay": "Milliseconds to wait before closing component. Only works with the **open-on-hover** prop",
     "dark": "Mixins.Themeable.props.dark",
     "light": "Mixins.Themeable.props.light",
     "disabled": "Disables the menu",
@@ -81,6 +87,7 @@
     "offsetX": "Offset the menu on the x-axis. Works in conjunction with direction left/right",
     "offsetY": "Offset the menu on the y-axis. Works in conjunction with direction top/bottom",
     "maxHeight": "Sets the max height of the menu content",
+    "openDelay": "Milliseconds to wait before opening component. Only works with the **open-on-hover** prop",
     "openOnClick": "Designates whether menu should open on activator click",
     "openOnHover": "Designates whether menu should open on activator hover",
     "origin": "Mixins.Transitionable.props.origin",

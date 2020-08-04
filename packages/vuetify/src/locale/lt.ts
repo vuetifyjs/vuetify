@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} pasirinkta',
+    nextMonthAriaLabel: 'Kitą mėnesį',
+    nextYearAriaLabel: 'Kitais metais',
+    prevMonthAriaLabel: 'Praeita mėnesį',
+    prevYearAriaLabel: 'Praeiti metai',
   },
   noDataText: 'Nėra duomenų',
   carousel: {

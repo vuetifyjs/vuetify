@@ -27,3 +27,9 @@ defineComponent({
     const vuetify = useVuetify()
   },
 })
+
+VBtn.extend()
+
+Vue.extend({
+  extends: VBtn,
+})

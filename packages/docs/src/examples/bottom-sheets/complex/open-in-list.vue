@@ -1,10 +1,11 @@
 <template>
   <div class="text-center">
     <v-bottom-sheet v-model="sheet">
-      <template v-slot:activator="{ on }">
+      <template v-slot:activator="{ on, attrs }">
         <v-btn
           color="purple"
           dark
+          v-bind="attrs"
           v-on="on"
         >
           Open In

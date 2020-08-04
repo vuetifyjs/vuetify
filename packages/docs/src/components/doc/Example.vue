@@ -2,7 +2,7 @@
   <v-card
     :loading="loading"
     :min-height="loading ? 200 : undefined"
-    class="mb-12"
+    class="mb-12 v-example"
     outlined
   >
     <v-toolbar
@@ -64,7 +64,7 @@
             target="_blank"
             v-on="on"
           >
-            <v-icon>mdi-github-circle</v-icon>
+            <v-icon>mdi-github</v-icon>
           </v-btn>
         </template>
 
@@ -87,7 +87,7 @@
       </v-tooltip>
     </v-toolbar>
 
-    <v-expand-transition v-if="parsed">
+    <v-expand-transition v-if="pen">
       <v-card
         v-show="expand"
         color="#2d2d2d"
@@ -97,7 +97,7 @@
       >
         <v-item-group
           v-model="selected"
-          class="pa-2"
+          class="pa-2 d-flex"
           mandatory
         >
           <template v-for="(section, i) in sections">
@@ -119,9 +119,33 @@
               </v-btn>
             </v-item>
           </template>
+
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                aria-label="Copy Example Code"
+                class="ml-auto"
+                icon
+                @click="copyMarkup"
+                v-on="on"
+              >
+                <v-icon>mdi-content-copy</v-icon>
+              </v-btn>
+            </template>
+
+            Copy Example Code
+          </v-tooltip>
         </v-item-group>
 
         <v-divider />
+
+        <pre
+          v-if="template"
+          ref="pre"
+          aria-hidden="true"
+          class="v-example__code"
+          v-html="template"
+        />
 
         <v-window v-model="selected">
           <template v-for="(section, i) in sections">
@@ -135,7 +159,8 @@
                   :filename="false"
                   :value="file"
                   class="mb-0"
-                >{{ parsed[section] }}</doc-markup>
+                  no-copy
+                >{{ pen[section] }}</doc-markup>
               </div>
             </v-window-item>
           </template>
@@ -144,9 +169,9 @@
     </v-expand-transition>
 
     <doc-codepen
-      v-if="parsed"
+      v-if="pen"
       ref="codepen"
-      :pen="parsed"
+      :pen="pen"
     />
 
     <v-fade-transition>
@@ -168,14 +193,17 @@
 
 <script>
   // Utilities
-  import {
-    get,
-  } from 'vuex-pathify'
-
-  import { getBranch } from '@/util/helpers'
   import kebabCase from 'lodash/kebabCase'
+  import { get } from 'vuex-pathify'
+  import {
+    copyElementContent,
+    getBranch,
+  } from '@/util/helpers'
+  import codepen from '@/mixins/codepen'
 
   export default {
+    mixins: [codepen],
+
     props: {
       eager: Boolean,
       value: {
@@ -187,12 +215,13 @@
     data: vm => ({
       branch: 'master',
       component: undefined,
+      copyTimeout: false,
       dark: false,
       expand: false,
       loading: false,
       observer: null,
-      parsed: undefined,
       selected: 'template',
+      template: false,
     }),
 
     computed: {
@@ -210,7 +239,7 @@
         return this.internalValue.newIn
       },
       sections () {
-        return ['template', 'style', 'script'].filter(section => this.parsed[section])
+        return ['template', 'script', 'style'].filter(section => this.pen[section])
       },
     },
 
@@ -238,21 +267,6 @@
     },
 
     methods: {
-      boot (res) {
-        const template = this.parseTemplate('template', res)
-        const style = this.parseTemplate('style', res)
-        const script = this.parseTemplate('script', res)
-        const codepenResources = this.parseTemplate('codepen-resources', res)
-        const codepenAdditional = this.parseTemplate('codepen-additional', res)
-
-        this.parsed = {
-          template,
-          style,
-          script,
-          codepenResources,
-          codepenAdditional,
-        }
-      },
       async getFiles () {
         this.loading = true
         await this.importTemplate()
@@ -280,13 +294,24 @@
           .then(comp => this.boot(comp.default))
           .then(this.unobserve)
       },
-      kebabCase,
-      parseTemplate (target, template) {
-        const string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`
-        const regex = new RegExp(string, 'g')
-        const parsed = regex.exec(template) || []
-        return parsed[1] || ''
+      async copyMarkup () {
+        const markups = Array.from(this.$el.querySelectorAll('pre'))
+        const template = []
+
+        for (const markup of markups) {
+          template.push(markup.innerHTML)
+        }
+
+        this.template = template.join('\n\n')
+
+        // Wait for $refs.pre to hydrate
+        await this.$nextTick()
+
+        copyElementContent(this.$refs.pre)
+
+        this.template = false
       },
+      kebabCase,
       sendToCodepen () {
         this.$refs.codepen.submit()
       },
@@ -303,56 +328,21 @@
 </script>
 
 <style lang="sass">
-@import '~vuetify/src/styles/settings/_variables.scss'
+  .v-example
+    &:not(:first-child) .v-example__container
+      border-left: 1px solid rgba(#FFF, .12)
 
-#snackbars, #data-tables
-  .component-example .application--example
-    z-index: auto
-
-.v-example__container
-  height: 100%
-  max-height: calc(100vh - 275px)
-  overflow-y: auto
-
-.v-example:not(:first-child) .v-example__container
-  border-left: 1px solid rgba(#FFF, .12)
-
-.component-example
-  // margin-bottom: 32px
-
-  .application--example
-    position: relative
-    transition: .3s map-get($transition, 'swing')
-    overflow: hidden
-    z-index: 0
-
-    > div,
-    > form,
-    > footer
-      width: 100%
-
-  .component-example__panel
-    .v-expansion-panel__body
-      border: none
-
-    .v-tab, .markup
+    &__container
       height: 100%
-
-    .v-tabs
-      border: none
-      max-height: 500px
+      max-height: calc(100vh - 275px)
       overflow-y: auto
 
-    > li
-      border: none
+    &__code
+      opacity: 0
+      pointer-events: none
+      position: absolute
+      z-index: -9999
 
-  .justify
-    text-align: justify
-
-  aside.v-navigation-drawer,
-  .v-overlay
-    z-index: 1
-
-  nav.v-toolbar
-    z-index: 0
+      > *
+        position: absolute
 </style>

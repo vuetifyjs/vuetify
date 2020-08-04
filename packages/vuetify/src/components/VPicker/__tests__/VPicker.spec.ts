@@ -41,6 +41,34 @@ describe('VPicker.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render flat component and match snapshot', () => {
+    const wrapper = mountFunction({
+      slots: {
+        default: [compileToFunctions('<span>default</span>')],
+        title: [compileToFunctions('<span>title</span>')],
+      },
+      props: {
+        flat: true,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component with elevation and match snapshot', () => {
+    const wrapper = mountFunction({
+      slots: {
+        default: [compileToFunctions('<span>default</span>')],
+        title: [compileToFunctions('<span>title</span>')],
+      },
+      props: {
+        elevation: 15,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render dark component and match snapshot', () => {
     const wrapper = mountFunction({
       propsData: {

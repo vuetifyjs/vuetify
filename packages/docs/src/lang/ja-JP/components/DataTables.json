@@ -32,6 +32,18 @@
     "headers": {
       "desc": "`items` と `headers` スロットは <kbd>td/th</kbd> タグを受け付けることができます。行の全体を制御したい場合は、 <kbd>tr</kbd> を受け付けることができます。"
     },
+    "footer-props": {
+      "desc": "`v-data-table`は`v-data-footer`コンポーネントを使用してデフォルトのフッターをレンダリングします。 `footer-props`を使用して、このコンポーネントにpropを渡すことができます。"
+    },
+    "multi-sort": {
+      "desc": "`multi-sort` propを使うと、複数のカラムを同時にソートすることができます。これを有効にすると、`sort-by` と `sort-desc` の両方に配列を渡して、単一の値ではなくプログラムでソートを制御することができます。"
+    },
+    "customize-header": {
+      "desc": "動的スロット `header.<name>` を使用して、特定の列のみをカスタマイズできます。 `<name>`は、 `headers`に送信される対応するヘッダーアイテムの` value`プロパティの名前です。"
+    },
+    "customize-rows": {
+      "desc": "動的スロット `item.<name>`を使用して、特定の列のみをカスタマイズできます。 `<name>`は、 `headers`に送信される対応するヘッダーアイテムの` value`プロパティの名前です。したがって、カロリー列をカスタマイズするには、 `item.calories`スロットを使用します。"
+    },
     "progress": {
       "heading": "### スロット: progress",
       "desc": "`progress` スロットは、Data Table のローディング状態の表示をカスタマイズする際に使用します。デフォルトでは `indeterminate` が設定された `v-progress-linear` が使用されます。"
@@ -48,12 +60,18 @@
       "heading": "### 外部からのソート指定",
       "desc": "`pagination` prop を使用することで外部からソートも制御できます。 使用するには `.sync` modifier を適用する必要があります。 prop でデフォルトでソートに使用するカラムを設定することもできます。"
     },
+    "headerless": {
+      "desc": "`hide-default-header` と `hide-default-footer` propを適用すると、デフォルトのヘッダとフッタをそれぞれ削除することができます。"
+    },
     "edit-dialog": {
       "desc": "`v-edit-dialog` コンポーネントは、 `v-data-table` 内でデータを直接編集するために使用できます。**persistent** propを追加することで、外側をクリックしたときに `v-edit-dialog` が閉じるのをブロックできます。"
     },
     "crud": {
       "heading": "### CRUD アクション",
       "desc": "各行を編集するために `v-dialog` コンポーネントを使用した、CRUD アクション付き Data table のサンプルです。"
+    },
+    "virtualized": {
+      "desc": "`virtual-rows` propを使うと、行のレンダリングを仮想化することができ、行数が多い場合にデータテーブルのパフォーマンスを向上させることができます。このpropでは `body`, `body.prepend`, `body.append` スロットは使えないことに注意してください。"
     },
     "custom-filter": {
       "heading": "### カスタムフィルタ",

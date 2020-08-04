@@ -79,7 +79,7 @@
                     left
                     size="20"
                   >
-                    mdi-github-face
+                    mdi-github
                   </v-icon>
 
                   Github
@@ -113,12 +113,14 @@
               <a
                 href="https://www.vuemastery.com/"
                 target="_blank"
-                rel="noopener"
-              >
-                Vue Mastery
-              </a>.
+                @click="$ga.event('home', 'click', 'vuemastery link')"
+              >Vue Mastery</a>.
 
-              Watch Vue Mastery’s free <a href="https://www.vuemastery.com/courses/beautify-with-vuetify/getting-started-with-vuetify/">Vuetify lesson</a>.
+              Watch Vue Mastery’s free&nbsp;<a
+                href="https://www.vuemastery.com/courses/beautify-with-vuetify/getting-started-with-vuetify/"
+                target="_blank"
+                @click="$ga.event('home', 'click', 'vuemastery link')"
+              >Vuetify lesson</a>.
             </div>
           </v-col>
         </v-row>
@@ -136,9 +138,6 @@
 <style lang="sass">
   #home-hero
     background: linear-gradient(to bottom, #1867c0, #5CBBF6)
-
-    &.theme--dark
-      background: linear-gradient(to bottom, #2196F3, #5CBBF6)
 
     a:not(.v-btn)
       color: inherit

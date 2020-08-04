@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-  <a href="https://travis-ci.org/vuetifyjs/vuetify">
-    <img src="https://img.shields.io/travis/vuetifyjs/vuetify/dev.svg" alt="travis ci badge">
+  <a href="https://github.com/vuetifyjs/vuetify/actions?query=workflow%3ACI">
+    <img src="https://github.com/vuetifyjs/vuetify/workflows/CI/badge.svg?branch=master&event=push" alt="CI badge">
   </a>
   <a href="https://codecov.io/gh/vuetifyjs/vuetify">
     <img src="https://img.shields.io/codecov/c/github/vuetifyjs/vuetify.svg" alt="Coverage">
@@ -42,11 +42,11 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
 
 <ul>
   <li>
-    <a href="https://github.com/users/johnleider/sponsorship">Support through Github</a>
-    <strong><small>(supports John)</small></strong>
+    <a href="https://github.com/users/johnleider/sponsorship">Become a backer or sponsor on GitHub</a>
+    or <a href="https://www.patreon.com/vuetify">Patreon</a> <small>(supports John and Heather)</small>
   </li>
   <li>
-    <a href="https://opencollective.com/vuetify">Support through OpenCollective</a>
+    <a href="https://opencollective.com/vuetify">Become a backer or sponsor on Open Collective</a>
     <strong><small>(supports the Dev team)</small></strong>
   </li>
   <li>
@@ -56,13 +56,15 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
     <a href="https://paypal.me/vuetify">Make a one-time payment with Paypal</a>
   </li>
   <li>
-    <a href="https://vuetifyjs.com/professional-support/consulting?ref=github">Book time with John</a>
+    <a href="https://vuetifyjs.com/professional-support/consulting?ref=github">Book time with the Team</a>
   </li>
 </ul>
 
-<h2 align="center"><b>Sponsors</b></h2>
+### What's the difference between Patreon and OpenCollective
 
-<h4 align="center"><b>Premiere</b></h4>
+Funds donated via Patreon go directly to support John and Heather's full-time work on Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
+
+<h3 align="center"><b>Premiere Sponsors</b></h3>
 
 <table>
   <tbody>
@@ -76,7 +78,7 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
   </tbody>
 </table>
 
-<h4 align="center"><b>Diamond</b></h4>
+<h3 align="center"><b>Diamond Sponsors</b></h3>
 
 <table>
   <tbody>
@@ -105,7 +107,7 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
   </tbody>
 </table>
 
-<h4 align="center">Platinum</h4>
+<h3 align="center"><b>Platinum Sponsors</b></h3>
 
 <table>
   <tbody>
@@ -147,22 +149,44 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
 
 <br>
 
-<h4 align="center"><b>Open Collective Sponsors</b></h4>
+<h3 align="center"><b>Sponsors via <a href="https://opencollective.com/vuetify">Open Collective</a></b></h3>
 
 <div align="center">
   <a href="https://opencollective.com/vuetify">
     <img src="https://opencollective.com/static/images/become_sponsor.svg" alt="Donate to OpenCollective">
   </a>
   <br>
-  <a href="https://opencollective.com/vuetify/sponsor/1/website" target="_blank">
-    <img src="https://opencollective.com/vuetify/sponsor/1/avatar.svg">
-  </a>
-  <a href="https://opencollective.com/vuetify/sponsor/2/website" target="_blank">
-    <img src="https://opencollective.com/vuetify/sponsor/2/avatar.svg">
-  </a>
-  <a href="https://opencollective.com/vuetify/sponsor/3/website" target="_blank">
-    <img src="https://opencollective.com/vuetify/sponsor/3/avatar.svg">
-  </a>
+</div>
+
+<!-- start bronze oc sponsors -->
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <a href="https://papersowl.com/write-my-paper-for-me">
+          <img src="https://logo.clearbit.com/papersowl.com" height="32">
+        </a>
+      </td>
+      <td>
+        <a href="https://edusson.com/write-my-essay-online">
+          <img src="https://logo.clearbit.com/edusson.com" height="40">
+        </a>
+      </td>
+      <td>
+        <a href="https://getform.io/">
+          <img src="https://opencollective-production.s3-us-west-1.amazonaws.com/2d3b7590-f25a-11e8-95fe-d7ea40ac9667.png" height="40">
+        </a>
+      </td>
+      <td>
+        <a href="https://volleyballlife.com/">
+          <img src="https://logo.clearbit.com/volleyballlife.com" height="40">
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- end bronze oc sponsors -->
+
 </div>
 
 <br>
@@ -271,7 +295,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
         </a>
       </td>
       <td>
-        A supplementary Vue CLI plugin used by <a href="https:/github.com/vuetifyjs.com/vue-cli-preset-vuetify">vue-cli-preset-vuetify</a>
+        A supplementary Vue CLI plugin used by <a href="https:/github.com/vuetifyjs/preset">@vuetify/preset</a>
       </td>
     </tr>
     <tr>
@@ -380,7 +404,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-preset-vuetify">vue-cli-preset-vuetify</a>
+        <a href="https://github.com/vuetifyjs/preset">@vuetify/preset</a>
       </td>
       <td>
         n/a
@@ -427,12 +451,15 @@ To check out the [component api explorer](https://vuetifyjs.com/components/api-e
 For help and support questions, please use our [community chat](https://community.vuetifyjs.com). This issue list of this repo is **exclusively** for bug reports and feature requests.
 
 ### Issues
+
 Please make sure to read the [Important Information](https://github.com/vuetifyjs/vuetify/blob/master/.github/CONTRIBUTING.md#important-information) before opening an issue. Issues not confirming to the guidelines may be closed immediately.
 
-### Changlog
+### Changelog
+
 Detailed changes for each release are documented in the [release notes](https://github.com/vuetifyjs/vuetify/releases).
 
 ### Contributing
+
 Developers interested in contributing should read the [Code of Conduct](./CODE_OF_CONDUCT.md) and the [Contribution Guide](https://vuetifyjs.com/getting-started/contributing).
 
 > Please do **not** ask general questions in an issue. Issues are only to report bugs, suggest
@@ -464,6 +491,7 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 </a>
 
 ### 📑 License
+
 [MIT](http://opensource.org/licenses/MIT)
 
 Copyright (c) 2016-present Vuetify LLC

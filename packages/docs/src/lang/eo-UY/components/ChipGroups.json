@@ -39,5 +39,8 @@
     "prependIcon": "crwdns39738:0crwdne39738:0",
     "prevIcon": "crwdns39740:0crwdne39740:0",
     "showArrows": "crwdns43096:0crwdne43096:0"
+  },
+  "events": {
+    "change": "crwdns56970:0crwdne56970:0"
   }
 }

@@ -147,9 +147,7 @@ export default baseMixins.extend<options>().extend({
       },
     },
     isDirty (): boolean {
-      return (this.lazyValue != null &&
-        this.lazyValue.toString().length > 0) ||
-        this.badInput
+      return this.lazyValue?.toString().length > 0 || this.badInput
     },
     isEnclosed (): boolean {
       return (
@@ -320,6 +318,9 @@ export default baseMixins.extend<options>().extend({
         },
       })
     },
+    genControl () {
+      return VInput.options.methods.genControl.call(this)
+    },
     genDefaultSlot () {
       return [
         this.genFieldset(),
@@ -346,7 +347,7 @@ export default baseMixins.extend<options>().extend({
           absolute: true,
           color: this.validationState,
           dark: this.dark,
-          disabled: this.disabled,
+          disabled: this.isDisabled,
           focused: !this.isSingle && (this.isFocused || !!this.validationState),
           for: this.computedId,
           left: this.labelPosition.left,
@@ -377,15 +378,15 @@ export default baseMixins.extend<options>().extend({
       return this.$createElement('input', {
         style: {},
         domProps: {
-          value: this.lazyValue,
+          value: (this.type === 'number' && Object.is(this.lazyValue, -0)) ? '-0' : this.lazyValue,
         },
         attrs: {
           ...this.attrs$,
           autofocus: this.autofocus,
-          disabled: this.disabled,
+          disabled: this.isDisabled,
           id: this.computedId,
           placeholder: this.placeholder,
-          readonly: this.readonly,
+          readonly: this.isReadonly,
           type: this.type,
         },
         on: Object.assign(listeners, {
@@ -431,7 +432,7 @@ export default baseMixins.extend<options>().extend({
       e && this.$nextTick(() => this.$emit('blur', e))
     },
     onClick () {
-      if (this.isFocused || this.disabled || !this.$refs.input) return
+      if (this.isFocused || this.isDisabled || !this.$refs.input) return
 
       this.$refs.input.focus()
     },
@@ -472,9 +473,11 @@ export default baseMixins.extend<options>().extend({
       VInput.options.methods.onMouseUp.call(this, e)
     },
     setLabelWidth () {
-      if (!this.outlined || !this.$refs.label) return
+      if (!this.outlined) return
 
-      this.labelWidth = Math.min(this.$refs.label.scrollWidth * 0.75 + 6, (this.$el as HTMLElement).offsetWidth - 24)
+      this.labelWidth = this.$refs.label
+        ? Math.min(this.$refs.label.scrollWidth * 0.75 + 6, (this.$el as HTMLElement).offsetWidth - 24)
+        : 0
     },
     setPrefixWidth () {
       if (!this.$refs.prefix) return

@@ -100,6 +100,19 @@ export interface DataPagination {
   itemsLength: number
 }
 
+export interface DataItemProps {
+  item: any
+  select: (v: boolean) => void
+  isSelected: boolean
+  expand: (v: boolean) => void
+  isExpanded: boolean
+  isMobile: boolean
+}
+
+export interface DataTableItemProps extends DataItemProps {
+  headers: DataTableHeader[]
+}
+
 export interface DataScopeProps {
   originalItemsLength: number
   items: any[]
@@ -207,6 +220,7 @@ export interface CalendarEventParsed {
   endTimestampIdentifier: number
   allDay: boolean
   index: number
+  category: string | false
 }
 
 export interface CalendarEventVisual {
@@ -221,17 +235,25 @@ export interface CalendarDaySlotScope extends CalendarTimestamp {
   outside: boolean
   index: number
   week: CalendarTimestamp[]
+  category: string | undefined | null
 }
 
-export type CalendarTimeToY = (time: CalendarTimestamp | number | string) => number
+export type CalendarTimeToY = (time: CalendarTimestamp | number | string, clamp?: boolean) => number
+
+export type CalendarTimeDelta = (time: CalendarTimestamp | number | string) => number | false
 
 export interface CalendarDayBodySlotScope extends CalendarDaySlotScope {
   timeToY: CalendarTimeToY
+  timeDelta: CalendarTimeDelta
 }
 
-export type CalendarEventOverlapMode = (events: CalendarEventParsed[], firstWeekday: number, overlapThreshold: number) => (day: CalendarDaySlotScope, dayEvents: CalendarEventParsed[], timed: boolean) => CalendarEventVisual[]
+export type CalendarEventOverlapMode = (events: CalendarEventParsed[], firstWeekday: number, overlapThreshold: number) => (day: CalendarDaySlotScope, dayEvents: CalendarEventParsed[], timed: boolean, reset: boolean) => CalendarEventVisual[]
 
 export type CalendarEventColorFunction = (event: CalendarEvent) => string
+
+export type CalendarEventTimedFunction = (event: CalendarEvent) => boolean
+
+export type CalendarEventCategoryFunction = (event: CalendarEvent) => string
 
 export type CalendarEventNameFunction = (event: CalendarEventParsed, timedEvent: boolean) => string
 
@@ -243,6 +265,7 @@ export interface DataTableHeader<T extends any = any> {
   align?: 'start' | 'center' | 'end'
   sortable?: boolean
   filterable?: boolean
+  groupable?: boolean
   divider?: boolean
   class?: string | string[]
   width?: string | number
@@ -254,3 +277,5 @@ export type DataItemsPerPageOption = (number | {
   text: string
   value: number
 });
+
+export type RowClassFunction = (item: any) => null | undefined | string | string[] | Record<string, boolean>

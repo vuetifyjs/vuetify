@@ -55,14 +55,16 @@
       "transition": false
     },
     "v-checkbox": {
-      "height": false
+      "height": false,
+      "loading": false
     },
     "v-radio": {
       "height": false
     },
     "v-radio-group": {
       "color": false,
-      "height": false
+      "height": false,
+      "loading": false
     },
     "v-switch": {
       "height": false
@@ -74,6 +76,10 @@
     },
     "v-file-input": {
       "readonly": false
+    },
+    "v-tooltip": {
+      "dark": false,
+      "light": false
     }
   }
 }

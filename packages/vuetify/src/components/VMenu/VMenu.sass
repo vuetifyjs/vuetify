@@ -9,7 +9,6 @@
   &__content
     position: absolute
     display: inline-block
-    border-radius: $menu-content-border-radius
     max-width: 80%
     overflow-y: auto
     overflow-x: hidden
@@ -17,7 +16,8 @@
     // This is required for an issue on Chrome 65
     // that prevents scrolling after a menu is opened
     will-change: transform
-    +elevation(8)
+    +elevation($menu-content-elevation)
+    +radius($menu-content-border-radius)
 
     &--active
       pointer-events: none

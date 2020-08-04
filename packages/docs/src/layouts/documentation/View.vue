@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <v-main>
     <v-responsive
       class="mx-auto overflow-visible"
       max-width="1024"
@@ -17,7 +17,7 @@
         <documentation-contribution />
       </v-container>
     </v-responsive>
-  </v-content>
+  </v-main>
 </template>
 
 <script>

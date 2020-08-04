@@ -12,6 +12,7 @@
   contain: layout style
   display: inline-flex
   flex-direction: column
+  font-size: $picker-font-size
   vertical-align: top
   position: relative
 
@@ -88,3 +89,6 @@
     +rtl()
       margin-right: $picker-landscape-title-width
       margin-left: 0
+
+.v-picker--flat
+  +elevation(0)

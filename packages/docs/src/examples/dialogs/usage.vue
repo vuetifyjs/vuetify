@@ -4,10 +4,11 @@
       v-model="dialog"
       width="500"
     >
-      <template v-slot:activator="{ on }">
+      <template v-slot:activator="{ on, attrs }">
         <v-btn
           color="red lighten-2"
           dark
+          v-bind="attrs"
           v-on="on"
         >
           Click Me
@@ -15,10 +16,7 @@
       </template>
 
       <v-card>
-        <v-card-title
-          class="headline grey lighten-2"
-          primary-title
-        >
+        <v-card-title class="headline grey lighten-2">
           Privacy Policy
         </v-card-title>
 

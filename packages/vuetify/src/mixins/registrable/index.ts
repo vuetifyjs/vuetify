@@ -36,15 +36,11 @@ export function provide (namespace: string, self = false) {
   return Vue.extend({
     name: 'registrable-provide',
 
-    methods: self ? {} : {
-      register: null,
-      unregister: null,
-    },
     provide (): object {
       return {
         [namespace]: self ? this : {
-          register: this.register,
-          unregister: this.unregister,
+          register: (this as any).register,
+          unregister: (this as any).unregister,
         },
       }
     },

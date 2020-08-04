@@ -357,4 +357,12 @@ describe('VCheckbox.ts', () => { // eslint-disable-line max-statements
 
     expect(input.html()).toMatchSnapshot()
   })
+
+  it('should be render colored checkbox', () => {
+    const wrapper = mountFunction({
+      propsData: { color: 'yellow' },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

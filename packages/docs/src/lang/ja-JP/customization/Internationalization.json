@@ -6,7 +6,6 @@
   "availableLocalesText": "現在Vuetifyは、以下の言語の翻訳を提供しています:",
   "alertInfo": "Vuetifyは基本的な変換関数 `t`のみを提供します。Vuetifyの[vue-i18n](#vue-i-18-n) との統合を利用するために、より高度な国際化機能に推奨されます。",
   "createTranslation": "## 翻訳を作成する",
-  "createTranslationText": "独自の翻訳を作成するには、以下のコードを使用するか、ファイル `vuetify/src/locale/en.ts` をコピーして名前を変更し、変更を加えます。",
   "customComponents": "## カスタムコンポーネント",
   "customComponentsText": "国際化エンジンにフックする必要があるカスタム Vuetify コンポーネントを構築する場合は、`$vuetify.lang` API の一部である `t` 関数を使用できます。",
   "api": {
@@ -15,6 +14,5 @@
     "t": "内部的に使用される翻訳関数"
   },
   "vueI18nHeader": "## Vue i18n",
-  "vueI18nText1": "vue-i18n パッケージを使用している場合は、Vuetify と簡単に統合できます。これにより、すべての翻訳を 1 か所に保存できます。メッセージ内の$vuetifyのエントリを作成し、対応する言語の変更を追加するだけです。次に、カスタム翻訳関数を指定して vue-i18n を Vuetify に接続します (以下の例に示すように)。使用可能なすべてのキーの完全なリストについては、[ここを移動](#create-a-translation) 。",
   "vueI18nText2": "外部ローカリゼーションプラグインを使用する際の重要な注意点は、現在のロケールにローカリゼーションが存在しない場合、vuetifyが自動的に英語を使用しないことです。そのため、必ずプラグインには英語のローカライズと独自のローカライズを提供してください。"
 }

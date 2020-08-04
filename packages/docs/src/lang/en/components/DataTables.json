@@ -19,7 +19,7 @@
     },
     "group": {
       "heading": "### Grouped rows",
-      "desc": "Using the `group-by` and `group-desc` props you can group rows on an item property. The `show-group-by` prop will show a group button in the default header."
+      "desc": "Using the `group-by` and `group-desc` props you can group rows on an item property. The `show-group-by` prop will show a group button in the default header. You can use the `groupable` property on header items to disable the group button."
     },
     "dense": {
       "heading": "### Dense",
@@ -117,6 +117,7 @@
       "headersLength": "Can be used in combination with `hide-default-header` to specify the number of columns in the table to allow expansion rows and loading bar to function properly",
       "height": "Set an explicit height of table",
       "hideDefaultHeader": "Hide the default headers",
+      "itemClass": "Property on supplied `items` that contains item's row class or function that takes an item as an argument and returns the class of corresponding row",
       "mobileBreakpoint": "Used to set when to toggle between regular table and mobile view",
       "showSelect": "Shows the select checkboxes in both the header and rows (if using default rows)",
       "showExpand": "Shows the expand toggle in default rows",
@@ -134,6 +135,17 @@
       "onIcon": "The icon used when active.",
       "ripple": "Mixins.Rippleable.props.ripple",
       "value": "A boolean value that represents whether the simple checkbox is checked."
+    },
+    "v-data-table-header": {
+      "disableSort": "Toggles rendering of sort button",
+      "everyItem": "Indicates if all items in table are selected",
+      "headers": "Array of header items to display",
+      "mobile": "Renders mobile view of headers",
+      "options": "Options object. Identical to the one on `v-data-table`",
+      "showGroupBy": "Shows group by button",
+      "singleSelect": "Toggles rendering of select-all checkbox",
+      "someItems": "Indicates if one or more items in table are selected",
+      "sortIcon": "Icon used for sort button"
     }
   },
   "slots": {
@@ -172,7 +184,9 @@
       "save": "Emits when edit-dialog save button is pressed"
     },
     "v-data-table": {
-      "click:row": "Emits when a table row is clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`."
+      "click:row": "Emits when a table row is clicked. This event provides 2 arguements: the first is the item that was clicked and the second is the remaining related data provided by the `item` slot. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
+      "contextmenu:row": "Emits when a table row is right-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
+      "dblclick:row": "Emits when a table row is double-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`."
     },
     "v-simple-checkbox": {
       "click": "Event that is emitted when the component is clicked"

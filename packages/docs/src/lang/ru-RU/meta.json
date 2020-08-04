@@ -26,6 +26,9 @@
   "introduction/meet-the-team": {
     "title": "Познакомьтесь с командой"
   },
+  "introduction/sponsors-and-backers": {
+    "title": "Спонсоры"
+  },
   "getting-started/quick-start": {
     "title": "Быстрый старт",
     "keywords": "quick start, vuetify templates, get started"
@@ -39,6 +42,9 @@
   },
   "components/api-explorer": {
     "title": "Обзор API"
+  },
+  "components/aspect-ratios": {
+    "title": "Соотношение сторон"
   },
   "professional-support/consulting": {
     "title": "Консультации и поддержка"

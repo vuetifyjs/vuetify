@@ -9,15 +9,17 @@ import { consoleError } from '../../util/console'
 import mixins from '../../util/mixins'
 
 // Types
-import { PropType } from 'vue'
-import { InputMessage, InputValidationRules } from 'types'
+import { PropValidator } from 'vue/types/options'
+import { InputMessage, InputValidationRules } from 'vuetify/types'
+
+const baseMixins = mixins(
+  Colorable,
+  RegistrableInject<'form', any>('form'),
+  Themeable,
+)
 
 /* @vue/component */
-export default mixins(
-  Colorable,
-  RegistrableInject('form'),
-  Themeable
-).extend({
+export default baseMixins.extend({
   name: 'validatable',
 
   props: {
@@ -28,23 +30,23 @@ export default mixins(
       default: 1,
     },
     errorMessages: {
-      type: [String, Array] as PropType<InputMessage>,
+      type: [String, Array],
       default: () => [],
-    },
+    } as PropValidator<InputMessage | null>,
     messages: {
-      type: [String, Array] as PropType<InputMessage>,
+      type: [String, Array],
       default: () => [],
-    },
+    } as PropValidator<InputMessage | null>,
     readonly: Boolean,
     rules: {
-      type: Array as PropType<InputValidationRules>,
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<InputValidationRules>,
     success: Boolean,
     successMessages: {
-      type: [String, Array] as PropType<InputMessage>,
+      type: [String, Array],
       default: () => [],
-    },
+    } as PropValidator<InputMessage | null>,
     validateOnBlur: Boolean,
     value: { required: false },
   },
@@ -64,7 +66,7 @@ export default mixins(
 
   computed: {
     computedColor (): string | undefined {
-      if (this.disabled) return undefined
+      if (this.isDisabled) return undefined
       if (this.color) return this.color
       // It's assumed that if the input is on a
       // dark background, the user will want to
@@ -96,7 +98,7 @@ export default mixins(
       return this.validationTarget.length > 0
     },
     hasState (): boolean {
-      if (this.disabled) return false
+      if (this.isDisabled) return false
 
       return (
         this.hasSuccess ||
@@ -122,6 +124,21 @@ export default mixins(
         this.$emit('input', val)
       },
     },
+    isDisabled (): boolean {
+      return this.disabled || (
+        !!this.form &&
+        this.form.disabled
+      )
+    },
+    isInteractive (): boolean {
+      return !this.isDisabled && !this.isReadonly
+    },
+    isReadonly (): boolean {
+      return this.readonly || (
+        !!this.form &&
+        this.form.readonly
+      )
+    },
     shouldValidate (): boolean {
       if (this.externalError) return true
       if (this.isResetting) return false
@@ -134,7 +151,7 @@ export default mixins(
       return this.validationTarget.slice(0, Number(this.errorCount))
     },
     validationState (): string | undefined {
-      if (this.disabled) return undefined
+      if (this.isDisabled) return undefined
       if (this.hasError && this.shouldValidate) return 'error'
       if (this.hasSuccess) return 'success'
       if (this.hasColor) return this.computedColor
@@ -143,9 +160,9 @@ export default mixins(
     validationTarget (): InputValidationRules {
       if (this.internalErrorMessages.length > 0) {
         return this.internalErrorMessages
-      } else if (this.successMessages.length > 0) {
+      } else if (this.successMessages && this.successMessages.length > 0) {
         return this.internalSuccessMessages
-      } else if (this.messages.length > 0) {
+      } else if (this.messages && this.messages.length > 0) {
         return this.internalMessages
       } else if (this.shouldValidate) {
         return this.errorBucket
@@ -172,7 +189,7 @@ export default mixins(
       // if disabled
       if (
         !val &&
-        !this.disabled
+        !this.isDisabled
       ) {
         this.hasFocused = true
         this.validateOnBlur && this.$nextTick(this.validate)
@@ -209,7 +226,7 @@ export default mixins(
   },
 
   methods: {
-    genInternalMessages (messages: InputMessage): InputValidationRules {
+    genInternalMessages (messages: InputMessage | null): InputValidationRules {
       if (!messages) return []
       else if (Array.isArray(messages)) return messages
       else return [messages]

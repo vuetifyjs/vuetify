@@ -21,10 +21,11 @@
       :offset-x="offsetX"
       :offset-y="offsetY"
     >
-      <template v-slot:activator="{ on }">
+      <template v-slot:activator="{ on, attrs }">
         <v-btn
           color="primary"
           dark
+          v-bind="attrs"
           v-on="on"
         >
           Dropdown

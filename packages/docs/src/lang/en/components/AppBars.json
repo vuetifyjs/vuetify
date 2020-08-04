@@ -30,7 +30,7 @@
     },
     "app-bar-nav": {
       "heading": "### Toggle Navigation Drawers",
-      "desc": "Using the functional component `v-app-bar-nav-icon` you can toggle the state of other components such as a [v-navigation-drawer](/components/navigation-drawer)."
+      "desc": "Using the functional component `v-app-bar-nav-icon` you can toggle the state of other components such as a [v-navigation-drawer](/components/navigation-drawers)."
     },
     "scroll-threshold": {
       "heading": "### Scroll threshold",

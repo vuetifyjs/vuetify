@@ -23,10 +23,7 @@
         hide-titles
       />
 
-      <supporters-sponsor-btn
-        :to="`/${$route.params.lang}/introduction/sponsors-and-backers/`"
-        large
-      />
+      <supporters-sponsor-btn large />
     </v-sheet>
   </base-section>
 </template>

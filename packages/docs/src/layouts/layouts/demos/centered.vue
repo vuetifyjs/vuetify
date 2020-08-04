@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-content>
+    <v-main>
       <v-container
         class="fill-height"
         fluid
@@ -21,7 +21,7 @@
                 flat
               >
                 <v-toolbar-title>Login form</v-toolbar-title>
-                <v-spacer />
+                <v-spacer></v-spacer>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
                     <v-btn
@@ -36,48 +36,34 @@
                   </template>
                   <span>Source</span>
                 </v-tooltip>
-                <v-tooltip right>
-                  <template v-slot:activator="{ on }">
-                    <v-btn
-                      icon
-                      large
-                      href="https://codepen.io/johnjleider/pen/pMvGQO"
-                      target="_blank"
-                      v-on="on"
-                    >
-                      <v-icon>mdi-codepen</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Codepen</span>
-                </v-tooltip>
               </v-toolbar>
               <v-card-text>
                 <v-form>
                   <v-text-field
                     label="Login"
                     name="login"
-                    prepend-icon="person"
+                    prepend-icon="mdi-account"
                     type="text"
-                  />
+                  ></v-text-field>
 
                   <v-text-field
                     id="password"
                     label="Password"
                     name="password"
-                    prepend-icon="lock"
+                    prepend-icon="mdi-lock"
                     type="password"
-                  />
+                  ></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-spacer />
+                <v-spacer></v-spacer>
                 <v-btn color="primary">Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 

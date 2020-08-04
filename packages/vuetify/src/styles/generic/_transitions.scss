@@ -1,7 +1,7 @@
 @mixin transition-default() {
   &-enter-active,
   &-leave-active {
-    transition: $primary-transition;
+    transition: $primary-transition !important;
   }
 
   &-move {

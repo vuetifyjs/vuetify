@@ -9,6 +9,7 @@
     <template v-slot:activator="{ attrs, on }">
       <v-btn
         :aria-label="$t('Vuetify.AppToolbar.ecosystem')"
+        class="hidden-md-and-down"
         text
         v-bind="attrs"
         v-on="on"
@@ -109,12 +110,12 @@
         {
           text: vm.$t('Vuetify.AppToolbar.github'),
           href: 'https://github.com/vuetifyjs/vuetify',
-          icon: 'mdi-github-box',
+          icon: 'mdi-github',
         },
         {
           text: vm.$t('Vuetify.AppToolbar.twitter'),
           href: 'https://twitter.com/vuetifyjs',
-          icon: 'mdi-twitter-box',
+          icon: 'mdi-twitter',
         },
       ],
     }),

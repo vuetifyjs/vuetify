@@ -18,7 +18,7 @@
 
         <v-list-item link>
           <v-list-item-action>
-            <v-icon>mdi-contact-mail</v-icon>
+            <v-icon>mdi-email</v-icon>
           </v-list-item-action>
 
           <v-list-item-content>
@@ -33,14 +33,14 @@
       color="cyan"
       dark
     >
-      <v-spacer />
+      <v-spacer></v-spacer>
 
       <v-toolbar-title>Application</v-toolbar-title>
 
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     </v-app-bar>
 
-    <v-content>
+    <v-main>
       <v-container
         class="fill-height"
         fluid
@@ -65,34 +65,18 @@
 
               <span>Source</span>
             </v-tooltip>
-
-            <v-tooltip right>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  icon
-                  large
-                  href="https://codepen.io/johnjleider/pen/WVbPgz"
-                  target="_blank"
-                  v-on="on"
-                >
-                  <v-icon large>mdi-codepen</v-icon>
-                </v-btn>
-              </template>
-
-              <span>Codepen</span>
-            </v-tooltip>
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
 
     <v-footer
       color="cyan"
       app
     >
-      <v-spacer />
+      <v-spacer></v-spacer>
 
-      <span class="white--text">&copy; 2019</span>
+      <span class="white--text">&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
 </template>

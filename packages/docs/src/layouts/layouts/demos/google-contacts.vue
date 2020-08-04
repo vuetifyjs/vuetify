@@ -80,7 +80,7 @@
       color="blue darken-3"
       dark
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title
         style="width: 300px"
         class="ml-0 pl-4"
@@ -94,8 +94,8 @@
         prepend-inner-icon="mdi-magnify"
         label="Search"
         class="hidden-sm-and-down"
-      />
-      <v-spacer />
+      ></v-text-field>
+      <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>mdi-apps</v-icon>
       </v-btn>
@@ -113,10 +113,10 @@
           <v-img
             src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
             alt="Vuetify"
-          /></v-avatar>
+          ></v-img></v-avatar>
       </v-btn>
     </v-app-bar>
-    <v-content>
+    <v-main>
       <v-container
         class="fill-height"
         fluid
@@ -139,23 +139,9 @@
             </template>
             <span>Source</span>
           </v-tooltip>
-          <v-tooltip right>
-            <template v-slot:activator="{ on }">
-              <v-btn
-                icon
-                large
-                href="https://codepen.io/johnjleider/pen/MNYLdL"
-                target="_blank"
-                v-on="on"
-              >
-                <v-icon large>mdi-codepen</v-icon>
-              </v-btn>
-            </template>
-            <span>Codepen</span>
-          </v-tooltip>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
     <v-btn
       bottom
       color="pink"
@@ -196,38 +182,38 @@
                 </v-avatar>
                 <v-text-field
                   placeholder="Name"
-                />
+                ></v-text-field>
               </v-row>
             </v-col>
             <v-col cols="6">
               <v-text-field
                 prepend-icon="mdi-account-card-details-outline"
                 placeholder="Company"
-              />
+              ></v-text-field>
             </v-col>
             <v-col cols="6">
               <v-text-field
                 placeholder="Job title"
-              />
+              ></v-text-field>
             </v-col>
             <v-col cols="12">
               <v-text-field
                 prepend-icon="mdi-mail"
                 placeholder="Email"
-              />
+              ></v-text-field>
             </v-col>
             <v-col cols="12">
               <v-text-field
                 type="tel"
                 prepend-icon="mdi-phone"
                 placeholder="(000) 000 - 0000"
-              />
+              ></v-text-field>
             </v-col>
             <v-col cols="12">
               <v-text-field
                 prepend-icon="mdi-text"
                 placeholder="Notes"
-              />
+              ></v-text-field>
             </v-col>
           </v-row>
         </v-container>
@@ -236,7 +222,7 @@
             text
             color="primary"
           >More</v-btn>
-          <v-spacer />
+          <v-spacer></v-spacer>
           <v-btn
             text
             color="primary"
@@ -286,7 +272,7 @@
             { text: 'Other contacts' },
           ],
         },
-        { icon: 'mdi-settings', text: 'Settings' },
+        { icon: 'mdi-cog', text: 'Settings' },
         { icon: 'mdi-message', text: 'Send feedback' },
         { icon: 'mdi-help-circle', text: 'Help' },
         { icon: 'mdi-cellphone-link', text: 'App downloads' },

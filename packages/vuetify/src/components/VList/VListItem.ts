@@ -159,9 +159,8 @@ export default baseMixins.extend<options>().extend({
       ...data.attrs,
       ...this.genAttrs(),
     }
-    data.on = {
-      ...data.on,
-      click: this.click,
+    data[this.to ? 'nativeOn' : 'on'] = {
+      ...data[this.to ? 'nativeOn' : 'on'],
       keydown: (e: KeyboardEvent) => {
         /* istanbul ignore else */
         if (e.keyCode === keyCodes.enter) this.click(e)
@@ -170,14 +169,18 @@ export default baseMixins.extend<options>().extend({
       },
     }
 
+    if (this.inactive) tag = 'div'
+    if (this.inactive && this.to) {
+      data.on = data.nativeOn
+      delete data.nativeOn
+    }
+
     const children = this.$scopedSlots.default
       ? this.$scopedSlots.default({
         active: this.isActive,
         toggle: this.toggle,
       })
       : this.$slots.default
-
-    tag = this.inactive ? 'div' : tag
 
     return h(tag, this.setTextColor(this.color, data), children)
   },

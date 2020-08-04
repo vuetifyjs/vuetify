@@ -1,6 +1,7 @@
 {
   "heading": "# 组合框",
   "headingText": "`v-combobox` 组件是一个 [v-autocomplete](/components/autocompletes) ，允许用户输入在提供的 **tems** 中不存在的值。创建的项目将作为字符串返回。",
+  "objectReturnAlert": "由于 Combobox 允许用户输入，所以它  **总是** 返回提供给它的完整值（例如，当 Object 的列表时，总是返回一个 Object）。这是因为没有办法区分一个值是用户输入还是对象查询 [GitHub问题](https://github.com/vuetifyjs/vuetify/issues/5479)",
   "usageText": "使用组合框，您可以允许用户创建可能不在提供的项列表中显示的新值。",
   "examples": {
     "no-data": {

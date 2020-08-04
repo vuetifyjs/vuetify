@@ -15,6 +15,9 @@
       "heading": "### オートコンプリートのカスタムフィルタ",
       "desc": "'filter' propを使用して、カスタムロジックで個々の項目をフィルター処理できます。この例では、名前でアイテムをフィルタリングします"
     },
+    "asynchronous": {
+      "desc": "検索クエリに基づいて外部からデータを読み込む必要がある場合があります。`autocomplete` propを使用するときは、`search-input` propを **.sync** 修飾子と一緒に使ってください。また、新しい `cache-items` propも利用します。これは `items` propに渡されたすべてのアイテムの一意のリストを保持し、非同期アイテムと **multiple** propを使う場合は **必須** です。"
+    },
     "advanced": {
       "heading": "### 高度なスロット",
       "desc": "`v-autocomplete` コンポーネントは非常に柔軟性が高く、あらゆるユースケースに対応できます。**no-data** 、 **item** および **selection**スロットのカスタム表示を作成して、ユニークなユーザー体験を提供します。_slots_ を使用すると、アプリケーションの外観を簡単にカスタマイズすることができます。"
@@ -29,8 +32,11 @@
   },
   "props": {
     "allowOverflow": "メニューが画面からオーバーフローするのを許可する",
+    "autoSelectFirst": "検索時には、常に最初のオプションを強調表示します",
     "dark": "Components.Inputs.props.dark",
     "filter": "検索時に使用されるフィルター 処理アルゴリズム。[example](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L36)",
+    "hideNoData": "表示するオプションがない場合、メニューを非表示にします。結果が非同期でフェッチされる前にメニューが開かないようにするのに役立ちます。 `items`配列がまだ開いていない場合は、変化したときにメニューを開く効果もあります。",
+    "noFilter": "検索時にフィルタリングを適用しません。データをサーバー側でフィルタリングしている場合に便利です。",
     "searchInput": "検索値。`.sync` 修飾子と共に使用できます。"
   }
 }

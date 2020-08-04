@@ -1,6 +1,10 @@
 // Components
 import VBanner from '../VBanner'
 
+// Services
+import { Breakpoint } from '../../../services/breakpoint'
+import { preset } from '../../../presets/default'
+
 // Utilities
 import {
   mount,
@@ -25,6 +29,8 @@ describe('VBanner.ts', () => {
               bar: 0,
             },
             breakpoint: {
+              mobile: true,
+              mobileBreakpoint: 1264,
               width: 1000,
             },
           },
@@ -187,9 +193,7 @@ describe('VBanner.ts', () => {
       },
       mocks: {
         $vuetify: {
-          breakpoint: {
-            width: 900,
-          },
+          breakpoint: new Breakpoint(preset),
         },
       },
     })

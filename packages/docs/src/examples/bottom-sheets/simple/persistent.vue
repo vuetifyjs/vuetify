@@ -1,10 +1,11 @@
 <template>
   <div class="text-center">
     <v-bottom-sheet v-model="sheet" persistent>
-      <template v-slot:activator="{ on }">
+      <template v-slot:activator="{ on, attrs }">
         <v-btn
           color="green"
           dark
+          v-bind="attrs"
           v-on="on"
         >
           Open Persistent
@@ -13,7 +14,7 @@
       <v-sheet class="text-center" height="200px">
         <v-btn
           class="mt-6"
-          flat
+          text
           color="error"
           @click="sheet = !sheet"
         >close</v-btn>

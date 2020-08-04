@@ -12,7 +12,6 @@ install(Vue, {
     ...VCard
   },
   directives: {
-    Ripple,
     ...directives
   }
 })
@@ -25,4 +24,10 @@ Vue.extend({
   directives: {
     Ripple
   }
+})
+
+VBtn.extend()
+
+Vue.extend({
+  extends: VBtn,
 })
