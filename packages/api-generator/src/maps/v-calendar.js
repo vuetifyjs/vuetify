@@ -17,7 +17,7 @@ module.exports = {
       },
       {
         name: 'day-body',
-        props: VTimestampWithTime,
+        props: VTimestampWithTimeCategory,
       },
       {
         name: 'day-header',
