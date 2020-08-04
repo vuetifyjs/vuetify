@@ -1,6 +1,6 @@
 <template>
   <div>
-    <subheading
+    <app-title
       v-if="path"
       :path="path"
       class="mb-0 pl-1"

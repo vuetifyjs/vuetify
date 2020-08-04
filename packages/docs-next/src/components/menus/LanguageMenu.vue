@@ -1,5 +1,8 @@
 <template>
-  <app-menu key="language-menu">
+  <app-menu
+    key="language-menu"
+    :items="items"
+  >
     <template #activator="{ attrs, on }">
       <v-btn
         :icon="$vuetify.breakpoint.smAndDown"
@@ -14,14 +17,15 @@
       </v-btn>
     </template>
 
-    <v-list-item
-      v-for="(item, index) in locales"
-      :key="index"
-      dense
-      @click="switchLocale(item.locale)"
-    >
-      <v-list-item-title v-text="item.name" />
-    </v-list-item>
+    <template #item="{ index, item }">
+      <v-list-item
+        :key="index"
+        class="v-list-item--default"
+        @click="switchLocale(item.locale)"
+      >
+        <v-list-item-title v-text="item.title" />
+      </v-list-item>
+    </template>
   </app-menu>
 </template>
 
@@ -42,6 +46,12 @@
       translating: get('pages/translating'),
       current () {
         return this.locales.find(l => l.locale === this.locale) || {}
+      },
+      items () {
+        return [
+          { heading: 'Translations' },
+          ...this.locales,
+        ]
       },
     },
 

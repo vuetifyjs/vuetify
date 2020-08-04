@@ -1,5 +1,8 @@
 <template>
-  <app-menu v-if="$vuetify.breakpoint.mdAndUp">
+  <app-menu
+    v-if="$vuetify.breakpoint.mdAndUp"
+    :items="items"
+  >
     <template #activator="{ attrs, on }">
       <app-btn
         class="text-lowercase mr-2"
@@ -11,17 +14,6 @@
         <app-chevron-down />
       </app-btn>
     </template>
-
-    <v-list-item
-      v-for="(item, index) in items"
-      :key="index"
-      :href="item.href"
-      dense
-      rel="noopener"
-      target="_blank"
-    >
-      <v-list-item-title v-text="item.title" />
-    </v-list-item>
   </app-menu>
 </template>
 
@@ -35,6 +27,7 @@
     computed: {
       items () {
         return [
+          { heading: 'documentation' },
           {
             title: '1.5.x',
             href: 'https://v15.vuetifyjs.com',

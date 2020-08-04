@@ -19,11 +19,42 @@
     </template>
 
     <app-sheet>
-      <slot />
+      <slot v-if="$slots.default" />
+
+      <default-list
+        v-else
+        :items="items"
+      >
+        <template
+          v-if="$scopedSlots.item"
+          #item="props"
+        >
+          <slot
+            name="item"
+            v-bind="{ ...props }"
+          />
+        </template>
+      </default-list>
     </app-sheet>
   </v-menu>
 </template>
 
 <script>
-  export default { name: 'AppMenu' }
+  export default {
+    name: 'AppMenu',
+
+    components: {
+      DefaultList: () => import(
+        /* webpackChunkName: "default-list" */
+        '@/layouts/default/List'
+      ),
+    },
+
+    props: {
+      items: {
+        type: Array,
+        default: () => ([]),
+      },
+    },
+  }
 </script>

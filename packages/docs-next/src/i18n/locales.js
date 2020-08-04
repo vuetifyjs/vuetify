@@ -1,34 +1,34 @@
 module.exports = [
   {
-    name: 'English',
+    title: 'English',
     locale: 'en',
   },
   {
-    name: 'Deutsch',
+    title: 'Deutsch',
     locale: 'de-DE',
   },
   {
-    name: 'Français',
+    title: 'Français',
     locale: 'fr-FR',
   },
   {
-    name: 'Русский',
+    title: 'Русский',
     locale: 'ru-RU',
   },
   {
-    name: '简体中文',
+    title: '简体中文',
     locale: 'zh-CN',
   },
   {
-    name: '한국어',
+    title: '한국어',
     locale: 'ko-KR',
   },
   {
-    name: '日本語',
+    title: '日本語',
     locale: 'ja-JP',
   },
   {
-    name: 'Help translate',
+    title: 'Help translate',
     locale: 'eo-UY',
   },
 ]

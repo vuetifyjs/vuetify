@@ -4,7 +4,10 @@
     :rel="item.href ? 'nofollow' : undefined"
     :target="item.href ? '_blank' : undefined"
     :to="item.to"
+    class="v-list-item--default"
     color="primary"
+    v-bind="$attrs"
+    v-on="$listeners"
   >
     <v-list-item-icon v-if="item.icon">
       <v-icon v-text="item.icon" />
@@ -28,3 +31,12 @@
     },
   }
 </script>
+
+<style lang="sass">
+  .v-list-item.v-list-item--default
+    min-height: 32px
+
+    > .v-list-item__icon
+      margin-bottom: 6px
+      margin-top: 6px
+</style>

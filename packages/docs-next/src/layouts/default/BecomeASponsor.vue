@@ -1,13 +1,12 @@
 <template>
   <div class="pt-4 pb-3 px-2">
-    <i18n
-      class="ml-2 text-caption text--secondary"
+    <app-caption
+      class="ml-2"
       path="premiere-sponsors"
-      tag="div"
     />
 
     <sponsor
-      class="mb-5"
+      class="mb-3"
       slug="qomplx"
     />
 

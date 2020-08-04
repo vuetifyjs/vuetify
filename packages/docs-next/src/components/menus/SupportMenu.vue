@@ -1,5 +1,5 @@
 <template>
-  <app-menu>
+  <app-menu :items="items">
     <template #activator="{ attrs, on }">
       <app-btn
         path="support"
@@ -11,38 +11,75 @@
         <app-chevron-down />
       </app-btn>
     </template>
-
-    <div
-      class="text-caption px-4 pt-3 pb-1 text--secondary"
-      v-text="$t('professional-support')"
-    />
-
-    <v-list-item
-      v-for="page in pages"
-      :key="page"
-      :to="{
-        name: 'Documentation',
-        params: {
-          category: 'professional-support',
-          page,
-        }
-      }"
-      dense
-    >
-      <v-list-item-title v-text="$t(page)" />
-    </v-list-item>
   </app-menu>
 </template>
 
 <script>
+  // Utilities
+  import { get } from 'vuex-pathify'
+
   export default {
     name: 'SupportMenu',
 
-    data: () => ({
-      pages: [
-        'consulting',
-        'enterprise',
-      ],
-    }),
+    computed: {
+      locale: get('route/params@locale'),
+      items () {
+        return [
+          { heading: 'professional-support' },
+          {
+            title: this.$t('consulting'),
+            to: {
+              name: 'Documentation',
+              params: {
+                category: 'professional-support',
+                page: 'consulting',
+              },
+            },
+          },
+          {
+            title: this.$t('enterprise'),
+            to: {
+              name: 'Documentation',
+              params: {
+                category: 'professional-support',
+                page: 'enterprise',
+              },
+            },
+          },
+          { divider: true },
+          { heading: 'community-support' },
+          {
+            title: this.$t('discord'),
+            href: 'https://community.vuetifyjs.com/',
+          },
+          {
+            title: this.$t('github-discussions'),
+            href: 'https://discussions.vuetifyjs.com/',
+          },
+          { divider: true },
+          { heading: 'resources-and-tools' },
+          {
+            title: this.$t('file-a-bug-report'),
+            href: 'https://issues.vuetifyjs.com/',
+          },
+          {
+            title: this.$t('codepen-template'),
+            href: 'https://template.vuetifyjs.com/',
+          },
+          {
+            title: this.$t('github-issues'),
+            href: 'https://github.com/vuetifyjs/vuetify/issues/',
+          },
+          {
+            title: this.$t('documentation-status'),
+            href: 'https://status.vuetifyjs.com/',
+          },
+          {
+            title: this.$t('stack-overflow'),
+            href: 'https://stackoverflow.com/search?q=vuetify',
+          },
+        ]
+      },
+    },
   }
 </script>
