@@ -1,18 +1,25 @@
 <template>
   <component
     :is="component"
-    class="app-link text-decoration-none primary--text font-weight-medium d-inline-flex align-center"
+    class="app-link text-decoration-none primary--text font-weight-medium d-inline-block"
     v-bind="attrs"
   >
-    <slot />
+    <div
+      class="d-inline-flex align-center"
+      @click="onClick"
+    >
+      <slot v-if="!isSamePage" />
 
-    <v-icon
-      v-if="icon"
-      class="ml-1"
-      color="primary"
-      size=".875rem"
-      v-text="icon"
-    />
+      <v-icon
+        v-if="icon"
+        :class="`m${isSamePage ? 'r' : 'l'}-1`"
+        color="primary"
+        size=".875rem"
+        v-text="icon"
+      />
+
+      <slot v-if="isSamePage" />
+    </div>
   </component>
 </template>
 
@@ -56,6 +63,19 @@
           !this.isExternal &&
           this.href.startsWith('#')
         )
+      },
+    },
+
+    methods: {
+      // vue-router scroll-behavior is skipped
+      // on same page hash changes. Manually
+      // run $vuetify goTo scroll function
+      onClick (e) {
+        if (!this.isSamePage) return
+
+        e.preventDefault()
+
+        this.$vuetify.goTo(this.href)
       },
     },
   }
