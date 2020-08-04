@@ -15,13 +15,41 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 
 <promoted-ad slug="vuetify-discord" />
 
+## Table of Contents
+
+* [My application won't compile due to sass / scss errors.](#sass-compile-error)
+* [Are there examples on how the v2 grid compares to v1.5?](#v2-v15-grid)
+* [Error: Cannot find module 'node-sass'.](#cannot-find-module-sass)
+* [Invalid CSS after @content: expected "}", was "($material-light);".](#invalid-css-content)
+* [My application is not working.](#my-application-is-not-working)
+* [I'm seeing $attrs is readonly and/or $listeners is readonly in the console.](#attrs-is-readonly)
+* [I'm seeing Error in ./node_modules/vuetify/src/dir/file.js Module parse "failed": Unexpected token (&lt;lineno&gt;:&lt;characterno&gt;) in the terminal.](#unexpected-token)
+* [Is there a codepen template with router?](#codepen-template-with-router)
+* [How do I extend Vuetify components?](#extend-components)
+* [My application does not look correct.](#my-application-does-not-look-correct)
+* [Menu/Dialog/Navigation drawer are not opening properly.](#menu-dialog-drawer)
+* [The scrollbar is showing even though my content is not overflowing vertically.](#scrollbar-overflow)
+* [How do I vertically center content?](#vertically-center-content)
+* [My _/_ link is active when I'm on _/home_ page.](#link-active-home)
+* [Why isn't my application responsive on mobile devices?](#mobile-responsiveness)
+* [How do I use Font Awesome, Material Design Icons or Material Icons?](#custom-icons)
+* [Why does &lt;v-dialog> close immediately after clicking the button?](#dialog-close-click)
+* [How do I upgrade to the latest version?](#latest-version-upgrade)
+* [How do a report a bug or request a feature](#report-request-feature)
+* [The vuetify-loader doesn't load all components](#vuetify-loader-components)
+* [How long will version 1.5 be supported?](#v15-lts)
+* [How do I get to the v1.5 documentation?](#v15-docs)
+* [[Vue warn]: Unknown custom element: &lt;v-app>](#unknown-element)
+* [SCRIPT5022: Expected identifier, string or number](#script5022)
+* [When adding typescript - Error: Could not find a declaration file for module 'vuetify/lib'](#typescript-declaration-file)
+
 ## Questions
 
 Have a question that belongs here? Tell us in our [Discord Community](https://community.vuetifyjs.com/) or create a request on our [Issue Generator](https://issues.vuetifyjs.com/).
 
 ---
 
-* **My application won't compile due to sass / scss errors.**
+* **My application won't compile due to sass / scss errors.**{ #sass-compile-error }
 
   Ensure that you are using the proper options object in accordance with your sass-loader version.
 
@@ -60,49 +88,49 @@ module.exports = {
 
 <br>
 
-* **Are there examples on how the v2 grid compares to v1.5?**
+* **Are there examples on how the v2 grid compares to v1.5?**{ #v2-v15-grid }
 
   Yes, you can view [grid examples here](https://gist.github.com/johnleider/207f63c9d30fb77042a0bb0258c5ab32).
 
 <br>
 
-* **Error: Cannot find module 'node-sass'.**
+* **Error: Cannot find module 'node-sass'.**{ #cannot-find-module-sass }
 
   Ensure that your `@vue/cli packages` located in `package.json` are at least **^3.5.0**.
 
 <br>
 
-* **Invalid CSS after @content: expected "}", was "($material-light);".**
+* **Invalid CSS after @content: expected "}", was "($material-light);".**{ #invalid-css-content}
 
   Ensure that you are using `sass` instead of `node-sass` in your **package.json**.
 
 <br>
 
-* **My application is not working.**
+* **My application is not working.**{ #my-application-is-not-working }
 
   First, ensure that you're using the latest version of Vue.js and Vuetify. Try to reproduce it in codepen using the following [template](https://template.vuetifyjs.com/). If you are unable to reproduce the issue outside of your environment, this usually means the issue resides locally. If you are still unable to resolve your issue, please provide your codepen and issue in **#need-help** in the [community](https://chat.vuetifyjs.com).
 
 <br>
 
-* **I am receiving an err similar to the following:<br>`$attrs is readonly` and/or `$listeners is readonly` in the console.**
+* **I'm seeing `$attrs is readonly` and/or `$listeners is readonly` in the console**{ #attrs-is-readonly }
 
   Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning messages. There is currenty an on-going [Github discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases. If you have additional questions please join us in our [online community](https://community.vuetifyjs.com).
 
 <br>
 
-* **I'm receiving an error similar to the following:<br>Error in ./node_modules/vuetify/src/dir/file.js Module parse "failed": Unexpected token (&lt;lineno&gt;:&lt;characterno&gt;).**
+* **I'm seeing `Error in ./node_modules/vuetify/src/dir/file.js Module parse "failed": Unexpected token (&lt;lineno&gt;:&lt;characterno&gt;)` in the terminal.**{ #unexpected-token }
 
   If you're using an IDE, such as IntelliJ IDEA or WebStorm, it will often add automatic imports pointing to the `vuetify/src/` directory for components you use.  Change the import statement path from `vuetify/src/` to `vuetify/es5/`.
 
 <br>
 
-* **Is there a codepen template with router?**
+* **Is there a codepen template with router?**{ #codepen-template-with-router }
 
   Yes. [Vuetify Codepen Router Template](https://codepen.io/johnjleider/pen/PMZvpr).
 
 <br>
 
-* **How do I extend Vuetify components?**
+* **How do I extend Vuetify components?**{ #extend-components }
 
   Vuetify components are easily extendable by importing it and using the `extends` option in vue. [Codepen Example](https://codepen.io/whoistobias/pen/yLNgjwy)
 
@@ -130,35 +158,35 @@ export default {
 
 <br>
 
-* **My application does not look correct.**
+* **My application does not look correct.**{ #my-application-does-not-look-correct }
 
   Vuetify requires the use of the `v-app` component. It should wrap your entire application and is the center point for much of the framework functionality including themes. Ensure that you are following the proper markup documented in the [Application](/components/application/) page.
 
 <br>
 
-* **Menu/Dialog/Navigation drawer are not opening properly.**
+* **Menu/Dialog/Navigation drawer are not opening properly.**{ #menu-dialog-drawer }
 
   Ensure that your components are wrapped with a `v-app` element. If you are using an element to activate the component that is not placed into the **activator** slot, ensure that you stop propagation of the click event. These components utilize the **v-outside-click** directive and will immediately close.
 
 <br>
 
-* **The scrollbar is showing even though my content is not overflowing vertically.**
+* **The scrollbar is showing even though my content is not overflowing vertically.**{ #scrollbar-overflow }
 
   Vuetify uses a slightly modified version of [ress reset](https://github.com/filipelinhares/ress) which by default turns on the html scrollbar to normalize behavior between browsers. This is a design choice and has been debated numerous times. There are pros and cons to having and not having it and as of now, the vote is in favor of leaving it as is. If you wish to disable this functionality, simply add `html { overflow-y: auto }` to your style file. Find more information on the [CSS Reset](/styles/css-reset/) page.
 
-* **How do I vertically center content?**
+* **How do I vertically center content?**{ #vertically-center-content }
 
   Apply the **fill-height** prop to `v-container`. This helper class normally only adds **height: 100%**, but for the container, it also looks for a child `v-layout` and applies the needed classes to vertically center the content.
 
 <br>
 
-* **My _/_ link is active when I'm on _/home_ page.**
+* **My _/_ link is active when I'm on _/home_ page.**{ #link-active-home }
 
   Add the **exact** to the link that points to absolute /. For more information on this, you can visit the official Vue router [documentation](https://router.vuejs.org/en/api/router-link.html).
 
 <br>
 
-* **Why isn't my application responsive on mobile devices?**
+* **Why isn't my application responsive on mobile devices?**{ #mobile-responsiveness }
 
   Ensure that you have the proper meta tags inside of the `<head>` section of your index.html.
 
@@ -173,13 +201,13 @@ export default {
 
 <br>
 
-* **How do I use Font Awesome, Material Design Icons or Material Icons?**
+* **How do I use Font Awesome, Material Design Icons or Material Icons?**{ #custom-icons }
 
   You can find more information in our [icon guide](/customization/icons/).
 
 <br>
 
-* **Why does &lt;v-dialog> close immediately after clicking the button?**
+* **Why does &lt;v-dialog> close immediately after clicking the button?**{ #dialog-close-click }
 
   When not using the **activator** slot for `v-menu` and `v-dialog` for example, you must manually stop the _propagation_ of the click event. To do this, simply add the _.stop_ modifier to the click event.
 
@@ -209,7 +237,7 @@ export default {
 
 <br>
 
-* **How do I upgrade to the latest version?**
+* **How do I upgrade to the latest version?**{ #latest-version-upgrade }
 
   For a detailed guide on how to upgrade to the latest version, navigate to the [Releases and Migrations](/getting-started/releases-and-migrations/) page. In addition, lll required changes are noted in the **Upgrade Guide** of all releases.
 
@@ -232,43 +260,43 @@ export default {
 
 <br>
 
-* **How do a report a bug or request a feature**
+* **How do a report a bug or request a feature**{ #report-request-feature }
 
   In order to ensure all required information is provided, we have created an [Issue Generator](https://issues.vuetifyjs.com) that helps you through the process. Any issue created not using the generator will automatically be closed, so please use it.
 
 <br>
 
-* **The vuetify-loader doesn't load all components**
+* **The vuetify-loader doesn't load all components**{ #vuetify-loader-components }
 
   The vuetify-loader has limitations in _dynamic_ components. Make sure to checkout the [limitations](/customization/a-la-carte#limitations) section for more information.
 
 <br>
 
-* **How long will version 1.5 be supported?**
+* **How long will version 1.5 be supported?**{ #v15-lts }
 
   Until July 2020. More information is located on the [Long-term Support](/introduction/long-term-support/) page.
 
 <br>
 
-* **How do I get to the v1.5 documentation?**
+* **How do I get to the v1.5 documentation?**{ #v15-docs }
 
   [https://v15.vuetifyjs.com](https://v15.vuetifyjs.com)
 
 <br>
 
-* **[Vue warn]: Unknown custom element: &lt;v-app>**
+* **[Vue warn]: Unknown custom element: &lt;v-app>**{ #unknown-element }
 
   Ensure that you have the latest version of [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) and [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) installed in your **package.json**.
 
 <br>
 
-* **SCRIPT5022: Expected identifier, string or number**
+* **SCRIPT5022: Expected identifier, string or number**{ #script5022 }
 
   In order to support **modern mode** in vue-cli-3, `vuetify/lib` is not transpiled. You must tell vue-cli to transpile the `vuetify` package. This is configured automatically when installing the Vuetify cli plugin. If you are using an older version, simple add 'vuetify' to your `vue.config.js` **transpileDependencies** array.
 
 <br>
 
-* **When adding typescript - Error: Could not find a declaration file for module 'vuetify/lib'**
+* **When adding typescript - Error: Could not find a declaration file for module 'vuetify/lib'**{ #typescript-declaration-file }
 
   Update the **compilerOptions** key in `tsconfig.json` with the vuetify type:
 
