@@ -20,7 +20,7 @@
     computed: {
       items () {
         return [
-          { heading: 'professional-support' },
+          { heading: this.$t('professional-support') },
           {
             title: this.$t('consulting'),
             to: {
@@ -42,7 +42,7 @@
             },
           },
           { divider: true },
-          { heading: 'community-support' },
+          { heading: this.$t('community-support') },
           {
             title: this.$t('discord'),
             href: 'https://community.vuetifyjs.com/',
@@ -52,7 +52,7 @@
             href: 'https://discussions.vuetifyjs.com/',
           },
           { divider: true },
-          { heading: 'resources-and-tools' },
+          { heading: this.$t('resources-and-tools') },
           {
             title: this.$t('file-a-bug-report'),
             href: 'https://issues.vuetifyjs.com/',

@@ -49,7 +49,7 @@
       },
       items () {
         return [
-          { heading: 'Translations' },
+          { heading: this.$t('translations') },
           ...this.locales,
         ]
       },

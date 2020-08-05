@@ -27,7 +27,7 @@
     computed: {
       items () {
         return [
-          { heading: 'documentation' },
+          { heading: this.$t('documentation') },
           {
             title: '1.5.x',
             href: 'https://v15.vuetifyjs.com',
@@ -35,6 +35,22 @@
           {
             title: '1.0.x',
             href: 'https://v1.vuetifyjs.com',
+          },
+          { divider: true },
+          { heading: this.$t('releases') },
+          {
+            title: this.$t('release-notes'),
+            to: {
+              name: 'Documentation',
+              params: {
+                category: 'getting-started',
+                page: 'release-notes',
+              },
+            },
+          },
+          {
+            title: this.$t('github-releases'),
+            href: 'https://github.com/vuetifyjs/vuetify/releases',
           },
         ]
       },

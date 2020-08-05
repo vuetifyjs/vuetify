@@ -5,11 +5,11 @@
     nav
   >
     <template v-for="(item, i) in items">
-      <app-title
+      <div
         v-if="item.heading"
         :key="`heading-${i}`"
-        :path="item.heading"
-        class="pt-2 pb-1 px-2"
+        class="pt-2 pb-1 px-2 text-subtitle-2 font-weight-black"
+        v-text="item.heading"
       />
 
       <v-divider

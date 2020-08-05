@@ -20,7 +20,7 @@
     computed: {
       items () {
         return [
-          { heading: 'documentation' },
+          { heading: this.$t('documentation') },
           {
             title: this.$t('guide'),
             to: {
