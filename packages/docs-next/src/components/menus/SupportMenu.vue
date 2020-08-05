@@ -2,7 +2,6 @@
   <app-menu :items="items">
     <template #activator="{ attrs, on }">
       <app-btn
-        path="support"
         v-bind="attrs"
         v-on="on"
       >
@@ -15,14 +14,10 @@
 </template>
 
 <script>
-  // Utilities
-  import { get } from 'vuex-pathify'
-
   export default {
     name: 'SupportMenu',
 
     computed: {
-      locale: get('route/params@locale'),
       items () {
         return [
           { heading: 'professional-support' },

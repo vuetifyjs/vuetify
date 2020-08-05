@@ -15,14 +15,9 @@
 </template>
 
 <script>
-  // Utilities
-  import { get } from 'vuex-pathify'
-
   export default {
     name: 'AppBtn',
 
     props: { path: String },
-
-    computed: { locale: get('route/params@locale') },
   }
 </script>

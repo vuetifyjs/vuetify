@@ -6,8 +6,9 @@
     left
     max-height="500"
     offset-y
-    open-delay="100"
+    open-delay="60"
     open-on-hover
+    transition="slide-y-transition"
     v-bind="$attrs"
     v-on="$listeners"
   >
