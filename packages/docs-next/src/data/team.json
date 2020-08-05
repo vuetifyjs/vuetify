@@ -1,0 +1,173 @@
+{
+  "johnleider": {
+    "focus": [
+      "[vuetifyjs/*](https://github.com/vuetifyjs)"
+    ],
+    "funding": [
+      "[GitHub Sponsors](https://github.com/sponsors/johnleider)",
+      "[Patreon](https://patreon.com/vuetify)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "linkedin": "john-leider-626183a2",
+    "location": "Fort Worth, TX, USA",
+    "name": "John Leider",
+    "team": "company",
+    "twitter": "zeroskillz",
+    "work": "CEO @ Vuetify"
+  },
+  "heatherleider": {
+    "focus": [
+      "[vuetifyjs/*](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "Fort Worth, TX, USA",
+    "name": "Heather Leider",
+    "team": "company",
+    "twitter": "grneyedgrl01",
+    "work": "COO @ Vuetify"
+  },
+  "KaelWD": {
+    "focus": [
+      "[vuetifyjs/*](https://github.com/vuetifyjs)",
+      "[vuetify-loader](https://github.com/vuetifyjs/vuetify-loader)",
+      "[eslint-plugin-vuetify](https://github.com/vuetifyjs/eslint-plugin-vuetify)"
+    ],
+    "funding": [
+      "[GitHub Sponsors](https://github.com/sponsors/kaelwd)",
+      "[Patreon](https://patreon.com/kaelwd)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "Melbourne, Australia",
+    "name": "Kael Watts-Deuchar",
+    "team": "core",
+    "twitter": "kaelwd"
+  },
+  "nekosaur": {
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "Swedish",
+      "English"
+    ],
+    "location": "Malmö, Sweden",
+    "name": "Albert Kaaman",
+    "team": "core"
+  },
+  "jacekkarczmarczyk": {
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "Polish",
+      "English"
+    ],
+    "location": "Warsaw, Poland",
+    "name": "Jacek Karczmarczyk",
+    "team": "core"
+  },
+  "MajesticPotatoe": {
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)",
+      "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
+    ],
+    "funding": [
+      "[GitHub Sponsors](https://github.com/sponsors/majesticpotatoe)",
+      "[Open Collective](https://opencollective.com/vuetify)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "linkedin": "andrew-henry-01049830",
+    "location": "Rochester, NY, USA",
+    "name": "Andrew Henry",
+    "team": "core",
+    "twitter": "SeeMWhyK"
+  },
+  "bdeo": {
+    "focus": [
+      "**vuetifyjs/issue-helper**"
+    ],
+    "languages": [
+      "English"
+    ],
+    "funding": [
+      "[GitHub Sponsors](https://github.com/sponsors/bdeo)"
+    ],
+    "linkedin": "andrew-henry-01049830",
+    "location": "Philadelphia, PA, USA",
+    "name": "Brandon Deo",
+    "team": "core"
+  },
+  "sh7dm": {
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "Russian",
+      "English"
+    ],
+    "location": "Russian Federation",
+    "name": "Dmitry Sharshakov",
+    "team": "core"
+  },
+  "johannaRlee": {
+    "focus": [
+      "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "linkedin": "johannaklay",
+    "location": "DFW, TX, USA",
+    "name": "Johanna Lee",
+    "team": "core",
+    "twitter": "johannaRlee"
+  },
+  "chewy94": {
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "linkedin": "sean-kimball-b50922126",
+    "location": "Goodyear, Arizona, USA",
+    "name": "Sean Kimball",
+    "team": "core"
+  },
+  "vanessalvarez8a": {
+    "focus": [
+      "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
+    ],
+    "languages": [
+      "English",
+      "Spanish"
+    ],
+    "linkedin": "vanessaalvarez",
+    "location": "Dallas, TX, USA",
+    "name": "Vanessa Alvarez",
+    "team": "core",
+    "twitter": "vanessalvarez8a"
+  },
+  "phiter": {
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "Portuguese",
+      "English"
+    ],
+    "linkedin": "phiter",
+    "location": "Belo Horizonte, Brazil",
+    "name": "Phiter Fernandes",
+    "team": "contributors",
+    "twitter": "phiterf"
+  }
+}

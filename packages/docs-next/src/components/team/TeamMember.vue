@@ -1,5 +1,5 @@
 <template>
-  <v-lazy min-height="192">
+  <v-lazy min-height="128">
     <div class="d-flex">
       <v-avatar size="72">
         <v-img :src="member.avatar" />
