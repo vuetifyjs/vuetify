@@ -31,7 +31,9 @@
       <template v-if="!$vuetify.breakpoint.mobile">
         <v-spacer />
 
-        <guide-link />
+        <learn-menu />
+
+        <team-link />
 
         <support-menu />
 

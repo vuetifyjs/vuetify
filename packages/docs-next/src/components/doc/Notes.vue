@@ -63,7 +63,7 @@
   import { sortBy } from 'lodash'
 
   export default {
-    name: 'ReleaseNotes',
+    name: 'Notes',
 
     data: () => ({
       branch: undefined,

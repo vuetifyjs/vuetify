@@ -7,6 +7,7 @@ related:
   - /professional-support/consulting/
   - /introduction/roadmap/
   - /introduction/meet-the-team/
+nav: Why Vuetify?
 ---
 
 # Why Vuetify

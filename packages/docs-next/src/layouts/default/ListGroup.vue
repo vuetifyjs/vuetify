@@ -71,8 +71,6 @@
 
 <style lang="sass">
   .v-list-group.v-list-group--default
-    margin-bottom: 4px
-
     .v-list-group__header
       min-height: 32px
 

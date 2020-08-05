@@ -24,11 +24,14 @@
     "title": "getting-started",
     "icon": "$mdiSpeedometer",
     "items": [
-      "quick-start",
-      "pre-made-layouts",
+      "installation",
+      "release-notes",
+      "upgrade-guide",
+      "accessibility",
       "browser-support",
+      "treeshaking",
+      "pre-made-layouts",
       "unit-testing",
-      "releases-and-migrations",
       "contributing"
     ]
   },
@@ -36,14 +39,13 @@
     "title": "customization",
     "icon": "$mdiCogs",
     "items": [
-      "accessibility",
-      "treeshaking",
       "breakpoints",
       "global-config",
+      "scrolling",
       "icons",
       "internationalization",
-      "rtl",
       "presets",
+      "rtl",
       "sass-variables",
       "theme"
     ]
@@ -62,8 +64,7 @@
       "float",
       "spacing",
       "text-and-typography",
-      "transitions",
-      "scroll"
+      "transitions"
     ]
   },
   {

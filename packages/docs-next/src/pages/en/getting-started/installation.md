@@ -9,7 +9,7 @@ related:
   - /company/advertise-with-us/
 ---
 
-# Quick start
+# Installation
 
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast application.
 
