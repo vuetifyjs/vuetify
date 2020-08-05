@@ -9,6 +9,8 @@ meta:
 
 Vuetify is _not_ a one person show. We have a very active and engaged team that is **constantly striving** to bring developers a better experience. Keep in mind the below is not an exhaustive list of all the individuals that help make Vuetify great. **Thank you** for your support and thank you for using Vuetify!
 
+<promoted-ad slug="vuetify-github-sponsors" />
+
 ## Core Team
 
 <team-members />
