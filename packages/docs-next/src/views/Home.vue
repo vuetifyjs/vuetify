@@ -28,7 +28,7 @@
             name: 'Documentation',
             params: {
               category: 'getting-started',
-              page: 'quick-start'
+              page: 'installation'
             }
           }"
         >
