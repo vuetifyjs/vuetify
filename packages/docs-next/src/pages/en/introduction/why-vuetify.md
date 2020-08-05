@@ -10,7 +10,7 @@ related:
 nav: Why Vuetify?
 ---
 
-# Why Vuetify
+# Why Vuetify?{ #why-vuetify }
 
 Vuetify is the #1 component library for Vue.js and has been in active development since 2016. The goal of the project is to provide users with everything that is needed to build rich and engaging web applications using the [Material Design specification](https://material.io/guidelines/). It accomplishes that with a consistent update cycle, Long-term Support **(LTS)** for previous versions, responsive community engagement, a vast ecosystem of resources and a dedication to quality components.
 
