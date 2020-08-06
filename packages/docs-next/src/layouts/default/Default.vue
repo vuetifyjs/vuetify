@@ -132,12 +132,16 @@
           ? this.$i18n.t(item.title)
           : this.pages[to] || item.title
 
+        const modified = this.modified[to] || {}
+
         const created = {
           ...item,
+          fresh: modified.fresh,
           group: parent && group,
           items,
           title,
           to,
+          updated: modified.updated,
         }
 
         for (const key in created) {

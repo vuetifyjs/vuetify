@@ -41,14 +41,14 @@ function getModified (files) {
     // console.log(file)
     const dir = filePath.replace(/^\.\/src\/pages/, '').replace(/\.\w+$/, '/')
     const now = new Date()
-    const birth = file.birthtime
-    const modified = file.mtime
+    const birth = new Date(file.birthtime)
+    const modified = new Date(file.mtime)
 
     pages[dir] = {
       birth: format(birth, 'P, pp'),
+      fresh: differenceInDays(now, birth) < 7,
       modified: format(modified, 'P, pp'),
-      new: differenceInDays(now, birth) < 15,
-      updated: differenceInDays(now, modified) < 30,
+      updated: differenceInDays(now, modified) < 15,
     }
 
     return pages

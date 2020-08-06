@@ -46,7 +46,7 @@
   "contents": "Contents",
   "contribute": {
     "edit-page": "@:edit This @:page on {url}",
-    "last-updated": "Last Updated:"
+    "last-updated": "Last @:updated:"
   },
   "community": "Community",
   "community-support": "@:community @.lower:support",
@@ -156,6 +156,7 @@
   "ui": "UI",
   "ultra-wide": "Ultra-wide",
   "unread": "View Unread ({number})",
+  "updated": "Updated",
   "video-courses": "Video courses",
   "view-in-github": "View on @:github",
   "view-source": "View source",

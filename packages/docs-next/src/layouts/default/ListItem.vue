@@ -16,6 +16,11 @@
     <v-list-item-content>
       <v-list-item-title v-text="item.title" />
     </v-list-item-content>
+
+    <modified-chip
+      v-bind="item"
+      class="flex-0-1-auto ml-2"
+    />
   </v-list-item>
 </template>
 
