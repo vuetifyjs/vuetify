@@ -20,7 +20,7 @@
             :value="item"
             active-class="deep-purple--text text--accent-4"
           >
-            <template v-slot:default="{ active, toggle }">
+            <template v-slot:default="{ active }">
               <v-list-item-content>
                 <v-list-item-title v-text="item"></v-list-item-title>
               </v-list-item-content>
@@ -28,9 +28,7 @@
               <v-list-item-action>
                 <v-checkbox
                   :input-value="active"
-                  :true-value="item"
                   color="deep-purple accent-4"
-                  @click="toggle"
                 ></v-checkbox>
               </v-list-item-action>
             </template>
