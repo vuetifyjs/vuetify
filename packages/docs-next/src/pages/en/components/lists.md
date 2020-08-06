@@ -120,13 +120,13 @@ Using the `v-list-group` component you can create up to **2** levels in depth us
 
 For three line lists, the subtitle will clamp vertically at 2 lines and then ellipsis. This feature uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers.
 
+<example file="v-list/prop-three-line" />
+
 #### Two lines and subheader
 
 Lists can contain subheaders, dividers, and can contain 1 or more lines. The subtitle will overflow with ellipsis if it extends past one line.
 
 <example file="v-list/prop-two-line-and-subheader" />
-
-<example file="v-list/prop-three-line" />
 
 ### Slots
 

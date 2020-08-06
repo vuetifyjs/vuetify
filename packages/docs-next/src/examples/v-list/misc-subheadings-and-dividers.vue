@@ -47,12 +47,11 @@
         multiple
       >
         <v-list-item>
-          <template v-slot:default="{ active, toggle }">
+          <template v-slot:default="{ active, }">
             <v-list-item-action>
               <v-checkbox
                 :input-value="active"
                 color="primary"
-                @click="toggle"
               ></v-checkbox>
             </v-list-item-action>
 
@@ -64,12 +63,11 @@
         </v-list-item>
 
         <v-list-item>
-          <template v-slot:default="{ active, toggle }">
+          <template v-slot:default="{ active }">
             <v-list-item-action>
               <v-checkbox
                 :input-value="active"
                 color="primary"
-                @click="toggle"
               ></v-checkbox>
             </v-list-item-action>
 
@@ -81,12 +79,11 @@
         </v-list-item>
 
         <v-list-item>
-          <template v-slot:default="{ active, toggle }">
+          <template v-slot:default="{ active }">
             <v-list-item-action>
               <v-checkbox
                 :input-value="active"
                 color="primary"
-                @click="toggle"
               ></v-checkbox>
             </v-list-item-action>
 
@@ -98,12 +95,11 @@
         </v-list-item>
 
         <v-list-item>
-          <template v-slot:default="{ active, toggle }">
+          <template v-slot:default="{ active }">
             <v-list-item-action>
               <v-checkbox
                 :input-value="active"
                 color="primary"
-                @click="toggle"
               ></v-checkbox>
             </v-list-item-action>
 
