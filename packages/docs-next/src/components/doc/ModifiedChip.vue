@@ -1,7 +1,7 @@
 <template>
   <v-chip
     v-if="fresh || updated"
-    :color="color"
+    :color="fresh ? '#00C58E' : '#1697f6'"
     class="px-1 align-self-center text-uppercase"
     dark
     label
@@ -20,12 +20,6 @@
     props: {
       fresh: Boolean,
       updated: Boolean,
-    },
-
-    computed: {
-      color () {
-        return this.fresh ? '#00C58E' : 'primary'
-      },
     },
   }
 </script>

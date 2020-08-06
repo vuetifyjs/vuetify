@@ -86,7 +86,7 @@
       <v-theme-provider :dark="dark">
         <v-sheet
           class="pa-4"
-          rounded="t"
+          rounded
         >
           <vue-file
             :file="file"
