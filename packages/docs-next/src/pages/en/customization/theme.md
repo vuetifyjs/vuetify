@@ -1,15 +1,16 @@
 ---
 meta:
-  title: Premium Themes
+  title: Theme configuration
   description: Setup your application's theme and supplemental colors in a flash.
   keywords: themes
 related:
   - /styles/colors/
   - /styles/transitions/
   - /getting-started/pre-made-layouts/
+nav: Theme
 ---
 
-# Premium Themes
+# Theme configuration
 
 Easily change the colors of your application programmatically. Rebuild the default stylesheet and customize various aspects of the framework for your particular needs.
 
@@ -32,9 +33,7 @@ import Vuetify from 'vuetify/lib'
 Vue.use(Vuetify)
 
 export default new Vuetify({
-  theme: {
-    dark: true,
-  },
+  theme: { dark: true },
 })
 ```
 
@@ -259,7 +258,9 @@ export default new Vuetify({
 ```
 
 <alert type="warning">
+
   The provided `themeCache` object **must** contain a `get` and `set` method. Use them for retrieving and setting the *generated css* string.
+
 </alert>
 
 Caching can also be done through [lru-cache](https://github.com/isaacs/node-lru-cache). This is specifically useful for SSR (Server Side Rendered) applications.
@@ -274,9 +275,7 @@ const themeCache = new LRU({
 
 export default new Vuetify({
   theme: {
-    options: {
-      themeCache,
-    },
+    options: { themeCache },
   },
 })
 ```
@@ -286,7 +285,12 @@ export default new Vuetify({
 Enabling `customProperties` will also generate a [css variable](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) for each theme color, which you can then use in your components' `<style>` blocks.
 
 <alert type="warning">
-  Custom properties are not natively supported in Internet Explorer. Polyfills (with some limitations) are available: [https://github.com/nuxodin/ie11CustomProperties](https://github.com/nuxodin/ie11CustomProperties), [https://github.com/jhildenbiddle/css-vars-ponyfill](https://github.com/jhildenbiddle/css-vars-ponyfill).
+
+  Custom properties are not natively supported in Internet Explorer. Polyfills are available—**with some limitations**—for Internet Explorer 11:
+
+* [Custom properties polyfill](https://github.com/nuxodin/ie11CustomProperties)
+* [Css vars polyfill](https://github.com/jhildenbiddle/css-vars-ponyfill)
+
 </alert>
 
 ```js
@@ -297,9 +301,7 @@ import Vuetify from 'vuetify/lib'
 
 export default new Vuetify({
   theme: {
-    options: {
-      customProperties: true,
-    },
+    options: { customProperties: true },
   },
 })
 ```
@@ -333,9 +335,7 @@ import Vuetify from 'vuetify/lib'
 
 export default new Vuetify({
   theme: {
-    options: {
-      cspNonce: 'dQw4w9WgXcQ',
-    },
+    options: { cspNonce: 'dQw4w9WgXcQ' },
   },
 })
 ```
@@ -363,11 +363,11 @@ The Vuetify theme system is propagated through the [provide](https://vuejs.org/v
 
 ### API
 
-- [v-theme-provider](../../api/v-theme-provider)
+* [v-theme-provider](../../api/v-theme-provider)
 
-### Usage
+### Example
 
-In this example, the bottom card inherits from the root of **$vuetify.theme.dark**.
+Use the `v-theme-provider` to manually overwrite all children component's current theme **(light/dark)**. In the following example, the root `v-card` is explicitly set to `dark` with 2 children lists. The first one inherits from the parent `v-card` while the second is explicity set to match the **root** Vuetify theme.
 
 <example file="theme/misc-provider" />
 

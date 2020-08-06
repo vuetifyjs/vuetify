@@ -61,7 +61,14 @@
     },
 
     watch: {
+      '$vuetify.theme.dark' (val) {
+        if (this.dark === val) return
+
+        this.dark = val
+      },
       dark (val) {
+        if (this.$vuetify.theme.dark === val) return
+
         this.$vuetify.theme.dark = val
       },
     },

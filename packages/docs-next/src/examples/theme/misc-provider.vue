@@ -1,14 +1,18 @@
 <template>
-  <v-card dark>
+  <v-card
+    dark
+    flat
+  >
     <v-toolbar
-      color="primary"
       flat
+      height="72"
     >
       <v-switch
         v-model="$vuetify.theme.dark"
-        hide-details
+        hint="This toggles the global state of the Vuetify theme"
         inset
-        label="Theme Dark"
+        label="Vuetify Theme Dark"
+        persistent-hint
       ></v-switch>
     </v-toolbar>
 
@@ -16,35 +20,29 @@
       <v-list>
         <v-subheader>I inherit dark from my parent</v-subheader>
 
-        <v-list-item>
-          <v-list-item-title>One</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item>
-          <v-list-item-title>Two</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item>
-          <v-list-item-title>Three</v-list-item-title>
+        <v-list-item
+          v-for="item in items"
+          :key="item"
+        >
+          <v-list-item-title v-text="item"></v-list-item-title>
         </v-list-item>
       </v-list>
 
-      <v-divider class="my-8"></v-divider>
+      <v-divider class="mb-y"></v-divider>
 
       <v-theme-provider root>
-        <v-list>
-          <v-subheader>I inherit from the root $vuetify.theme.dark</v-subheader>
+        <v-list rounded="b">
+          <v-subheader>
+            <span>I inherit from the root</span>
 
-          <v-list-item>
-            <v-list-item-title>One</v-list-item-title>
-          </v-list-item>
+            <strong>&nbsp;$vuetify.theme.dark</strong>
+          </v-subheader>
 
-          <v-list-item>
-            <v-list-item-title>Two</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Three</v-list-item-title>
+          <v-list-item
+            v-for="item in items"
+            :key="item"
+          >
+            <v-list-item-title v-text="item"></v-list-item-title>
           </v-list-item>
         </v-list>
       </v-theme-provider>
@@ -61,16 +59,6 @@
       },
     },
 
-    data: vm => ({
-      initialDark: vm.$vuetify
-        ? vm.$vuetify.theme.dark
-        : false,
-    }),
-
-    beforeDestroy () {
-      if (!this.$vuetify) return
-
-      this.$vuetify.theme.dark = this.initialDark
-    },
+    data: () => ({ items: ['One', 'Two', 'Three'] }),
   }
 </script>
