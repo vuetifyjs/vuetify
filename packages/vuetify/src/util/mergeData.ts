@@ -148,7 +148,7 @@ export function mergeListeners (
 
       if (dest[event]) {
         // Merge previous and new listeners. Note that dest[event] must not be
-        // altered, event if it was already an array. This is due to the fact
+        // altered, even if it was already an array. This is due to the fact
         // that neither "target" or "source" must be altered.
         dest[event] = [...wrapInArray(dest[event]), ...wrapInArray(listeners[event])]
       } else {
