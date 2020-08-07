@@ -139,19 +139,24 @@ export function mergeListeners (
   if (!target) return source
   if (!source) return target
 
-  let event: string
+  const dest: { [key: string]: Function | Function[] } = {}
 
-  for (event of Object.keys(source)) {
-    // Concat function to array of functions if callback present.
-    if (target[event]) {
-      // Insert current iteration data in beginning of merged array.
-      target[event] = wrapInArray(target[event])
-      ;(target[event] as Function[]).push(...wrapInArray(source[event]))
-    } else {
-      // Straight assign.
-      target[event] = source[event]
+  for (const listeners of [target, source]) {
+    for (const event in listeners) {
+      if (!listeners[event]) continue
+      if (Array.isArray(listeners[event]) && listeners[event].length === 0) continue
+
+      if (dest[event]) {
+        // Merge previousa and new listeners. Note that dest[event] must not be
+        // altered, event if it was already an array. This is due to the fact
+        // that neither "target" or "source" must be altered.
+        dest[event] = [...wrapInArray(dest[event]), ...wrapInArray(listeners[event])]
+      } else {
+        // Straight assign.
+        dest[event] = listeners[event]
+      }
     }
   }
 
-  return target
+  return dest
 }
