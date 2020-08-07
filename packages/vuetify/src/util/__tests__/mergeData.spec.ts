@@ -1,11 +1,33 @@
 import { mergeClasses, mergeListeners, mergeStyles } from '../mergeData'
 
+function copy(value) {
+  if (Array.isArray(value)) {
+    return value.map(copy)
+  }
+  if (typeof value === 'object' && value !== null) {
+    const dest = {}
+    for (const key in value) dest[key] = copy(value[key])
+    return dest
+  }
+  return value
+}
+
 function verifyFactory (mergeMethod: (target: any, source: any) => any) {
   return function verify (target: any, source: any, expected: any) {
+    const targetSnapshot = typeof target === 'object' ? copy(target) : null
+    const sourceSnapshot = typeof source === 'object' ? copy(source) : null
+
     if (expected === target) {
       expect(mergeMethod(target, source)).toBe(expected)
     } else {
       expect(mergeMethod(target, source)).toStrictEqual(expected)
+    }
+
+    if (targetSnapshot) {
+      expect(targetSnapshot).toStrictEqual(target)
+    }
+    if (sourceSnapshot) {
+      expect(sourceSnapshot).toStrictEqual(source)
     }
   }
 }
