@@ -150,7 +150,7 @@ export function mergeListeners (
         // Merge previous and new listeners. Note that dest[event] must not be
         // altered, even if it was already an array. This is due to the fact
         // that neither "target" or "source" must be altered.
-        dest[event] = [...wrapInArray(dest[event]), ...wrapInArray(listeners[event])]
+        dest[event] = ([] as Function[]).concat(dest[event], listeners[event])
       } else {
         // Straight assign.
         dest[event] = listeners[event]
