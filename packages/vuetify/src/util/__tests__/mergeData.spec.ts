@@ -1,6 +1,6 @@
 import { mergeClasses, mergeListeners, mergeStyles } from '../mergeData'
 
-function copy(value) {
+function copy (value) {
   if (Array.isArray(value)) {
     return value.map(copy)
   }
