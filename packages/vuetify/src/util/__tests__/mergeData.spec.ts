@@ -24,10 +24,10 @@ function verifyFactory (mergeMethod: (target: any, source: any) => any) {
     }
 
     if (targetSnapshot) {
-      expect(targetSnapshot).toStrictEqual(target)
+      expect(target).toStrictEqual(targetSnapshot)
     }
     if (sourceSnapshot) {
-      expect(sourceSnapshot).toStrictEqual(source)
+      expect(source).toStrictEqual(sourceSnapshot)
     }
   }
 }
