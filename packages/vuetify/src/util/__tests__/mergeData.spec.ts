@@ -1,12 +1,13 @@
+import { isObject } from '../helpers'
 import { mergeClasses, mergeListeners, mergeStyles } from '../mergeData'
 
-function copy (value) {
+function simpleClone (value) {
   if (Array.isArray(value)) {
-    return value.map(copy)
+    return value.map(simpleClone)
   }
-  if (typeof value === 'object' && value !== null) {
+  if (isObject(value)) {
     const dest = {}
-    for (const key in value) dest[key] = copy(value[key])
+    for (const key in value) dest[key] = simpleClone(value[key])
     return dest
   }
   return value
@@ -14,8 +15,8 @@ function copy (value) {
 
 function verifyFactory (mergeMethod: (target: any, source: any) => any) {
   return function verify (target: any, source: any, expected: any) {
-    const targetSnapshot = typeof target === 'object' ? copy(target) : null
-    const sourceSnapshot = typeof source === 'object' ? copy(source) : null
+    const targetClone = simpleClone(target)
+    const sourceClone = simpleClone(source)
 
     if (expected === target) {
       expect(mergeMethod(target, source)).toBe(expected)
@@ -23,11 +24,12 @@ function verifyFactory (mergeMethod: (target: any, source: any) => any) {
       expect(mergeMethod(target, source)).toStrictEqual(expected)
     }
 
-    if (targetSnapshot) {
-      expect(target).toStrictEqual(targetSnapshot)
+    // Ensure that mergeMethod does not mutate anything
+    if (isObject(target)) {
+      expect(target).toStrictEqual(targetClone)
     }
-    if (sourceSnapshot) {
-      expect(source).toStrictEqual(sourceSnapshot)
+    if (isObject(source)) {
+      expect(source).toStrictEqual(sourceClone)
     }
   }
 }
