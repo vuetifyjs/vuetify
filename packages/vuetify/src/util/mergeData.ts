@@ -141,19 +141,19 @@ export function mergeListeners (
 
   const dest: { [key: string]: Function | Function[] } = {}
 
-  for (const listeners of [target, source]) {
-    for (const event in listeners) {
-      if (!listeners[event]) continue
-      if (Array.isArray(listeners[event]) && listeners[event].length === 0) continue
+  let i = 2
+
+  while (i--) {
+    for (const event in arguments[i]) {
+      if (!arguments[i][event]) continue
 
       if (dest[event]) {
-        // Merge previous and new listeners. Note that dest[event] must not be
-        // altered, even if it was already an array. This is due to the fact
-        // that neither "target" or "source" must be altered.
-        dest[event] = ([] as Function[]).concat(dest[event], listeners[event])
+        // Merge current listeners before (because we are iterating backwards).
+        // Note that neither "target" or "source" must be altered.
+        dest[event] = ([] as Function[]).concat(arguments[i][event], dest[event])
       } else {
         // Straight assign.
-        dest[event] = listeners[event]
+        dest[event] = arguments[i][event]
       }
     }
   }
