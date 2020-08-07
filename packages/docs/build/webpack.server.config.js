@@ -17,7 +17,7 @@ module.exports = merge(base, {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.runtime.common.js'
+      vue$: 'vue/dist/vue.runtime.common.js'
     }
   },
   // https://webpack.js.org/configuration/externals/#externals
