@@ -382,7 +382,7 @@ export const BaseSlideGroup = mixins<options &
       }, this.$vuetify.rtl, this.scrollOffset)
     },
     setWidths /* istanbul ignore next */  () {
-      Window.prototype.requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
         const { content, wrapper } = this.$refs
 
         this.widths = {
