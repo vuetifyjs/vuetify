@@ -14,3 +14,5 @@ lerna-debug.log
 
 # Istanbul coverage
 coverage/
+
+.vercel
