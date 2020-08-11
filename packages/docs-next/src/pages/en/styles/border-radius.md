@@ -74,7 +74,7 @@ The **rounded** helper classes allow you to modify the *border radius* of an ele
 
 #### Rounding by side
 
-Border radius is configurable on a per side basis using the infix classes, **t, r, b, l**; e.g. `.rounded-br-xl` and `.rounded-tr`.
+Border radius is configurable on a per side basis using the infix classes, **t, r, b, l**; e.g. `.rounded-b-xl` and `.rounded-t`.
 
 <example file="border-radius/misc-rounding-by-side" />
 
