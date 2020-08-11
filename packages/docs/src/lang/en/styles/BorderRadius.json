@@ -9,7 +9,7 @@
   "removingHeading": "## Removing Border Radius",
   "removingText1": "Use the `.rounded-0` helper class to *remove* all of an elements radius or select by side or corner; e.g. `.rounded-l-0` and `.rounded-tr-0`.",
   "sidesHeading": "## Rounding sides separately",
-  "sidesText1": "Border radius is configurable on a per side basis using the infix classes, **t, r, b, l**; e.g. `.rounded-br-xl` and `.rounded-tr`.",
+  "sidesText1": "Border radius is configurable on a per side basis using the infix classes, **t, r, b, l**; e.g. `.rounded-b-xl` and `.rounded-t`.",
   "cornersHeading": "## Rounding corners separately",
   "cornersText1": "Border radius is configurable on a per corner basis using the infix classes, **tl, tr, br, bl**; e.g. `.rounded-br-xl` and `.rounded-tr`.",
   "customizingHeading": "## Customizing",
