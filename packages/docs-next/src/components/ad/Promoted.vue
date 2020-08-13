@@ -23,7 +23,7 @@
             <v-img
               :alt="`Link to ${current.title}`"
               :src="logo"
-              class="mr-6 ml-4"
+              class="mx-2"
               contain
               height="56"
               max-width="56"
