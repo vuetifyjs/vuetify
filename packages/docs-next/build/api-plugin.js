@@ -52,7 +52,7 @@ function createMdFile (component, data) {
     const headerLine = header === 'sass'
       ? '## SASS Variables\n'
       : `## ${capitalize(header)}\n`
-    const table = genTable(value)
+    const table = genTable(value, header === 'props')
     str += headerLine
     str += table
   }

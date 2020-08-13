@@ -5,6 +5,10 @@ function capitalize (str) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+function camelToKebab (str) {
+  return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+}
+
 function genTableHeader (headers) {
   const headerLine = []
   const dividerLine = []
@@ -22,7 +26,7 @@ function genTableHeader (headers) {
   ]
 }
 
-function genTableRow (headers, row) {
+function genTableRow (headers, row, kebabNames) {
   const headerRow = []
 
   for (const header of headers) {
@@ -33,7 +37,7 @@ function genTableRow (headers, row) {
     if (['default', 'value', 'signature'].includes(header)) {
       value = `\`${row[header]}\``
     } else if (header === 'name') {
-      value = `<div class="font-weight-bold text-mono">${row[header]}</div>`
+      value = `<div class="font-weight-bold text-mono">${kebabNames ? camelToKebab(row[header]) : row[header]}</div>`
     } else if (header === 'type') {
       value = `<div class="text-mono">${row[header]}</div>`
     }
@@ -48,12 +52,12 @@ function genRowString (row) {
   return `| ${row.join(' | ')} |`
 }
 
-function genTable (tableData) {
+function genTable (tableData, kebabNames = false) {
   const headers = Object.keys(tableData[0])
   const table = genTableHeader(headers)
 
   for (const row of tableData) {
-    table.push(genTableRow(headers, row))
+    table.push(genTableRow(headers, row, kebabNames))
   }
 
   return `${table.join('\n')}\n\n`
