@@ -73,7 +73,6 @@
   // Utilities
   import { get } from 'vuex-pathify'
 
-  import { generateAPI } from '../../../build/api-gen'
   import genTable from '@/util/tables'
 
   export default {
@@ -145,6 +144,7 @@
     }),
 
     computed: {
+      locale: get('route/params@locale'),
       pages: get('pages/pages'),
       items () {
         const apiPages = []
@@ -164,9 +164,13 @@
         const apiItems = []
         for (const api of items) {
           const tables = {}
-          const data = generateAPI(api.text, api.lang)
-          for (const [header, value] of Object.entries(data)) {
-            if (header === 'mixins' || !value) continue
+          const { [this.locale]: data } = await import(
+            /* webpackChunkName: "api" */
+            /* webpackMode: "lazy" */
+            '../../../build/api'
+          ) || {}
+          for (const [header, value] of Object.entries(data[api.text])) {
+            if (header === 'mixins' || !value.length) continue
             const table = this.genTable(value)
             tables[header] = table
           }
