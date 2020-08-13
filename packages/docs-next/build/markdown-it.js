@@ -10,6 +10,7 @@ const md = require('markdown-it')({
     permalink: true,
     permalinkSymbol: '',
     permalinkClass: '',
+    slugify: str => encodeURIComponent(String(str).trim().toLowerCase()).replace(/%\d{2}/g, '-'),
   })
   .use(require('markdown-it-prism'))
   .use(require('markdown-it-header-sections'))
