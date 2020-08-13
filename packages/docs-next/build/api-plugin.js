@@ -6,7 +6,7 @@ const {
   generateCompList,
 } = require('./api-gen')
 const genTable = require('../src/util/tables')
-const { EN_LOCALE_ONLY } = require('../src/util/globals')
+const rimraf = require('rimraf')
 
 /* const camelizeRE = /-(\w)/g
 const camelize = str => {
@@ -67,7 +67,7 @@ function writeFile (component, locale) {
   const folder = `src/api/${locale}`
 
   if (!fs.existsSync(resolve(folder))) {
-    fs.mkdirSync(resolve(folder))
+    fs.mkdirSync(resolve(folder), { recursive: true })
   }
 
   const file = `${folder}/${component}.md`
@@ -83,8 +83,6 @@ function generateFiles () {
   const locales = generateLocaleList()
 
   for (const locale of locales) {
-    if (EN_LOCALE_ONLY && locale !== 'en') continue
-
     const pages = {}
 
     for (const component of components) {
@@ -101,6 +99,8 @@ function generateFiles () {
 
 class ApiPlugin {
   apply (compiler) {
+    rimraf.sync(resolve('src/api'))
+
     generateFiles()
 
     let changedFiles = []

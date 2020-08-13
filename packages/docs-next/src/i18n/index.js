@@ -3,7 +3,7 @@ import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 
 // Messages
-import { en } from '@/i18n/messages'
+import en from '@/i18n/messages/en.json'
 
 Vue.use(VueI18n)
 
