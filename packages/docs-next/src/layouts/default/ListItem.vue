@@ -18,6 +18,7 @@
     </v-list-item-content>
 
     <modified-chip
+      v-if="item.to"
       v-bind="item"
       class="flex-0-1-auto ml-2"
     />

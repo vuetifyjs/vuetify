@@ -1,13 +1,13 @@
 <template>
   <v-chip
-    v-if="fresh || updated"
-    :color="fresh ? '#00C58E' : '#1697f6'"
+    v-if="recent || !stale"
+    :color="recent ? '#00C58E' : '#1697f6'"
     class="px-1 align-self-center text-uppercase"
     dark
     label
     x-small
   >
-    <i18n :path="fresh ? 'new' : 'updated'" />
+    <i18n :path="recent ? 'new' : 'updated'" />
   </v-chip>
 </template>
 
@@ -18,8 +18,8 @@
     inheritAttrs: false,
 
     props: {
-      fresh: Boolean,
-      updated: Boolean,
+      recent: Boolean,
+      stale: Boolean,
     },
   }
 </script>

@@ -80,7 +80,7 @@
       async getModified () {
         const { default: modified } = await import(
           /* webpackChunkName: "modified-[request]" */
-          `@docs/${this.locale}/modified`
+          '@docs/modified'
         )
 
         this.modified = modified
@@ -116,9 +116,9 @@
         let to = item.to
         const parent = !!item.items || item.group
         const items = parent && this.genItems(item.items, group)
+        const page = to || (!items && item.title)
 
         if (!item.href) {
-          const page = to || (!items && item.title)
           const url = [
             this.locale,
             group,
@@ -132,16 +132,15 @@
           ? this.$i18n.t(item.title)
           : this.pages[to] || item.title
 
-        const modified = this.modified[to] || {}
+        const modified = this.modified[`/${group}/${page}/`] || {}
 
         const created = {
           ...item,
-          fresh: modified.fresh,
+          ...modified,
           group: parent && group,
           items,
           title,
           to,
-          updated: modified.updated,
         }
 
         for (const key in created) {
