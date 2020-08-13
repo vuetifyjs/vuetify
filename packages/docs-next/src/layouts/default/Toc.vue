@@ -123,9 +123,13 @@
           return offset < currentOffset
         })
 
-        const tindex = index > -1
+        let tindex = index > -1
           ? this.offsets.length - 1 - index
           : 0
+
+        if (currentOffset + window.innerHeight === document.documentElement.offsetHeight) {
+          tindex = this.toc.length - 1
+        }
 
         const hash = this.toc[tindex].to
 

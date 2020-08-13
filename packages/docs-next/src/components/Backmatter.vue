@@ -5,7 +5,6 @@
   >
     <app-heading
       :content="text"
-      :to="to"
       level="2"
     />
 
@@ -48,25 +47,12 @@
     computed: {
       locale: get('route/params@locale'),
       toc: sync('pages/toc'),
-      to () {
-        return `#${this.id}`
-      },
       text () {
         return this.$i18n.t('ready', { url: this.url })
       },
       url () {
         return `/${this.locale}/introduction/meet-the-team/`
       },
-    },
-
-    created () {
-      if (!this.toc.find(t => t.to === this.to)) {
-        this.toc.push({
-          to: this.to,
-          level: '2',
-          text: this.text,
-        })
-      }
     },
   }
 </script>

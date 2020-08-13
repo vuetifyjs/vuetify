@@ -4,6 +4,7 @@
     :class="['v-heading', map[level]]"
   >
     <a
+      v-if="href"
       :href="href"
       class="text-decoration-none"
       @click="onClick"
