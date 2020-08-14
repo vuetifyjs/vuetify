@@ -24,63 +24,61 @@
 
     <v-divider />
 
-    <v-lazy v-if="pen">
-      <div>
-        <v-expand-transition>
-          <div v-show="expand">
-            <v-item-group
-              v-model="selected"
-              class="pa-2"
-              mandatory
-            >
-              <template v-for="(section, i) in sections">
-                <v-item
-                  :key="`item-${i}`"
-                  :value="section"
-                >
-                  <template v-slot="{ active, toggle }">
-                    <v-btn
-                      :input-value="active"
-                      class="mr-2"
-                      text
-                      @click="toggle"
-                    >
-                      {{ section }}
-                    </v-btn>
-                  </template>
-                </v-item>
-              </template>
-            </v-item-group>
+    <div v-if="pen">
+      <v-expand-transition>
+        <div v-show="expand">
+          <v-item-group
+            v-model="selected"
+            class="pa-2"
+            mandatory
+          >
+            <template v-for="(section, i) in sections">
+              <v-item
+                :key="`item-${i}`"
+                :value="section"
+              >
+                <template v-slot="{ active, toggle }">
+                  <v-btn
+                    :input-value="active"
+                    class="mr-2"
+                    text
+                    @click="toggle"
+                  >
+                    {{ section }}
+                  </v-btn>
+                </template>
+              </v-item>
+            </template>
+          </v-item-group>
 
-            <v-divider />
+          <v-divider />
 
-            <v-window
-              v-model="selected"
-              class="grey lighten-5"
-            >
-              <template v-for="(section, i) in sections">
-                <v-window-item
-                  :key="`window-${i}`"
-                  :value="section"
-                >
-                  <markup
-                    :code="pen[section]"
-                    :rounded="false"
-                  />
-                </v-window-item>
-              </template>
-            </v-window>
+          <v-window
+            v-model="selected"
+            class="grey lighten-5"
+          >
+            <template v-for="(section, i) in sections">
+              <v-window-item
+                :key="`window-${i}`"
+                :value="section"
+              >
+                <markup
+                  :code="pen[section]"
+                  :rounded="false"
+                />
+              </v-window-item>
+            </template>
+          </v-window>
 
-            <v-divider />
-          </div>
-        </v-expand-transition>
+          <v-divider />
+        </div>
+      </v-expand-transition>
 
-        <codepen
-          ref="codepen"
-          :pen="pen"
-        />
-      </div>
-    </v-lazy>
+      <codepen
+        ref="codepen"
+        :pen="pen"
+      />
+    </div>
 
     <v-lazy :value="!file">
       <v-theme-provider :dark="dark">
