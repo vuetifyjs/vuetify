@@ -1,8 +1,8 @@
 <template>
   <v-sheet
-    :color="dark ? undefined : 'grey lighten-5'"
     class="overflow-hidden"
     rounded
+    outlined
   >
     <v-list-item
       v-if="item"
