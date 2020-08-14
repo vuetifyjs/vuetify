@@ -13,15 +13,16 @@
       <v-icon v-text="item.icon" />
     </v-list-item-icon>
 
+    <v-avatar
+      v-if="item.recent || item.stale != null"
+      class="flex-0-1-auto mr-2 ml-n3"
+      color="#00C58E"
+      size="4"
+    />
+
     <v-list-item-content>
       <v-list-item-title v-text="item.title" />
     </v-list-item-content>
-
-    <modified-chip
-      v-if="item.to"
-      v-bind="item"
-      class="flex-0-1-auto ml-2"
-    />
   </v-list-item>
 </template>
 
