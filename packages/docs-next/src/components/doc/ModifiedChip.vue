@@ -1,6 +1,6 @@
 <template>
   <v-chip
-    v-if="recent || !stale"
+    v-if="recent || stale != null"
     :color="recent ? '#00C58E' : '#1697f6'"
     class="px-1 align-self-center text-uppercase"
     dark
@@ -19,7 +19,10 @@
 
     props: {
       recent: Boolean,
-      stale: Boolean,
+      stale: {
+        type: Boolean,
+        default: null,
+      },
     },
   }
 </script>
