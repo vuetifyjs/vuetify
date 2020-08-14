@@ -34,50 +34,39 @@ const actions = {
 
 const getters = {
   alphabetical: (_, __, rootState) => {
-    const alphabetical = {}
-    const nav = []
+    const alphabetical = []
     const pages = rootState.pages.pages
 
-    for (const key in pages) {
-      if (key.indexOf('needs-triage') > -1) continue
+    const items = Object.entries(pages).map(([key, value]) => ({
+      title: value,
+      to: key,
+    }))
 
-      const title = pages[key]
-      const tstart = title.replace('v-', '')[0].toLowerCase()
+    const strip = str => str.replace(/^v-|\$/, '')
 
-      // if alpha
-      if (!tstart.match(/[a-z]/)) continue
+    const sorted = items.sort((a, b) => {
+      return strip(a.title).localeCompare(strip(b.title))
+    })
 
-      if (!alphabetical[tstart]) {
-        alphabetical[tstart] = {
+    let groupChar = null
+    for (const item of sorted) {
+      const itemChar = strip(item.title).toLowerCase().charAt(0)
+
+      if (itemChar !== groupChar) {
+        groupChar = itemChar
+
+        alphabetical.push({
           to: [],
           items: [],
-          icon: `$mdiAlpha${tstart.toUpperCase()}`,
-        }
+          icon: `$mdiAlpha${groupChar.toUpperCase()}`,
+        })
       }
 
-      alphabetical[tstart].items.push({
-        title: pages[key],
-        to: key,
-      })
-
-      alphabetical[tstart].to.push(key)
+      alphabetical[alphabetical.length - 1].items.push(item)
+      alphabetical[alphabetical.length - 1].to.push(item.to)
     }
 
-    for (const letter in alphabetical) {
-      const group = alphabetical[letter]
-      const items = group.items.sort((a, b) => {
-        const atitle = a.title
-        const btitle = b.title
-
-        return atitle > btitle
-          ? 1
-          : atitle < btitle ? -1 : 0
-      })
-
-      nav.push({ ...group, items })
-    }
-
-    return nav
+    return alphabetical
   },
 }
 
