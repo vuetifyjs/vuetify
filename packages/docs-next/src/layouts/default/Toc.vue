@@ -99,6 +99,8 @@
         this.offsets = offsets
       },
       findActiveIndex () {
+        if (this.$vuetify.breakpoint.mobile) return
+
         const currentOffset = (
           window.pageYOffset ||
           document.documentElement.offsetTop ||
