@@ -30,16 +30,16 @@ function genRoutes (data, prefix) {
 }
 
 function genDemos () {
-  const files = glob.sync(resolve('../src/examples/pre-made-layouts/*.vue'))
+  const files = glob.sync(resolve('../src/examples/whiteframes/*.vue'))
   const paths = []
 
   for (const file of files) {
     const route = file
-      .split('/pre-made-layouts/')
+      .split('/whiteframes/')
       .pop()
       .replace(/\.vue$/, '')
 
-    paths.push(`/examples/layouts/${route}`)
+    paths.push(`/examples/whiteframes/${route}`)
   }
 
   return paths

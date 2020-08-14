@@ -6,7 +6,7 @@ meta:
 related:
   - /components/lists/
   - /components/icons/
-  - /getting-started/pre-made-layouts/
+  - /getting-started/whiteframes/
 ---
 
 # Navigation drawers

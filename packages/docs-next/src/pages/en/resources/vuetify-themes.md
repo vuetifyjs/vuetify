@@ -4,7 +4,7 @@ meta:
   description: Vuetify offers numerous pre-build starter and premium themes. Kickstart your next application today, no design skills needed.
   keywords: vuetify themes, pre-built material themes, premium themes
 related:
-  - /getting-started/pre-made-layouts/
+  - /getting-started/whiteframes/
   - /customization/theme/
   - /getting-started/quick-start/
 ---

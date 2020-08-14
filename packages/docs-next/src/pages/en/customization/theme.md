@@ -6,7 +6,7 @@ meta:
 related:
   - /styles/colors/
   - /styles/transitions/
-  - /getting-started/pre-made-layouts/
+  - /getting-started/whiteframes/
 nav: Theme
 ---
 

@@ -6,7 +6,7 @@ meta:
 related:
   - /customization/theme/
   - /themes/premium/
-  - /getting-started/pre-made-layouts/
+  - /getting-started/whiteframes/
 ---
 
 # Colors

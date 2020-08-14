@@ -69,7 +69,7 @@ Applying the **app** prop automatically applies position: **fixed** to the layou
 
 ## Application components
 
-Below is a list of all the components that support the **app** prop and can be used as layout elements in your application. These can be mixed and matched and only **one** of each particular component should exist at any time. You can, however, swap them out and the layout will accommodate. For some examples displaying how you can build various layouts, checkout the [Pre-made layouts](/getting-started/pre-made-layouts) page.
+Below is a list of all the components that support the **app** prop and can be used as layout elements in your application. These can be mixed and matched and only **one** of each particular component should exist at any time. You can, however, swap them out and the layout will accommodate. For some examples displaying how you can build various layouts, checkout the [Pre-made layouts](/getting-started/whiteframes) page.
 
 Each of these application components have a designated location and priority that it affects within the layout system.
 

@@ -29,6 +29,8 @@ export function createRouter (vuetify, store, i18n) {
       locale([
         layout('Home', [route('Home')]),
 
+        route('Whiteframes', null, 'examples/whiteframes/:whiteframe'),
+
         layout('Default', [
           route('Documentation'),
         ], ':category/:page'),
