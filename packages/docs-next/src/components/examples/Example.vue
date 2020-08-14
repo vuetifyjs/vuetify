@@ -80,19 +80,17 @@
       />
     </div>
 
-    <v-lazy :value="!file">
-      <v-theme-provider :dark="dark">
-        <v-sheet
-          class="pa-4"
-          rounded
-        >
-          <vue-file
-            :file="file"
-            @error="hasError = true"
-          />
-        </v-sheet>
-      </v-theme-provider>
-    </v-lazy>
+    <v-theme-provider :dark="dark">
+      <v-sheet
+        class="pa-4"
+        rounded
+      >
+        <vue-file
+          :file="file"
+          @error="hasError = true"
+        />
+      </v-sheet>
+    </v-theme-provider>
   </v-sheet>
 </template>
 

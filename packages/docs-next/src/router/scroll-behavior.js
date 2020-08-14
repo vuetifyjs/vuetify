@@ -14,7 +14,7 @@ export default async function (vuetify, to, from, savedPosition) {
 
   // TODO: https://github.com/vuejs/vue-router/pull/3199
   // scroll-behavior is not called on
-  // load handled in views/Page.vue
+  // load handled in views/Documentation.vue
   return new Promise((resolve, reject) => {
     // Options 1
     const options = {}

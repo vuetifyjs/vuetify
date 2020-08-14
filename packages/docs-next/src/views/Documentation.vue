@@ -8,7 +8,7 @@
       max-width="868"
     >
       <skeleton-loader
-        v-if="loading"
+        v-if="!component"
         key="loader"
       />
 
@@ -24,12 +24,13 @@
 
 <script>
   // Utilities
-  import { genMetaData } from '@/util/metadata'
   import { error } from '@/util/routes'
+  import { genMetaData } from '@/util/metadata'
   import { get, sync } from 'vuex-pathify'
+  import { waitForReadystate } from '@/util/helpers'
 
   export default {
-    name: 'PageView',
+    name: 'DocumentationView',
 
     metaInfo () {
       // Check it fm exists
@@ -53,33 +54,42 @@
       )
     },
 
-    data: () => ({
-      component: undefined,
-      loading: false,
-    }),
+    data: () => ({ component: undefined }),
 
     computed: {
       ...sync('pages', [
         'frontmatter',
+        'loading',
         'toc',
       ]),
       ...get('route', [
+        'hash',
         'params@category',
         'params@locale',
         'params@page',
       ]),
+      initializing: sync('app/initializing'),
     },
 
     async created () {
-      const timeout = setTimeout(() => {
-        this.loading = true
-      }, 50)
+      this.initializing = new Promise(this.init)
+    },
 
-      await this.init()
+    async mounted () {
+      await waitForReadystate()
+      await this.initializing
 
-      clearTimeout(timeout)
+      if (this.loading.length) {
+        await Promise.all(this.loading)
 
-      this.loading = false
+        this.loading = []
+      }
+
+      if (this.hash) {
+        await this.$router.options.scrollBehavior({ hash: this.hash })
+      }
+
+      this.initializing = false
     },
 
     methods: {
@@ -97,7 +107,7 @@
           `@/${path.join('/')}.md`
         )
       },
-      async init () {
+      async init (resolve, reject) {
         let structure
 
         try {
@@ -108,6 +118,8 @@
           const component = await error()
 
           this.component = component.default
+
+          reject(e)
 
           return
         }
@@ -123,6 +135,8 @@
         this.frontmatter = attributes
         this.toc = toc
         this.component = vue.component
+
+        resolve()
       },
       async reset () {
         this.component = undefined

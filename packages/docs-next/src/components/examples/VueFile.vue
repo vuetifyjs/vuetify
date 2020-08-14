@@ -11,6 +11,9 @@
 </template>
 
 <script>
+  // Utilities
+  import { sync } from 'vuex-pathify'
+
   export default {
     name: 'VueFile',
 
@@ -23,28 +26,38 @@
       },
     },
 
-    data: () => ({
-      component: undefined,
-    }),
+    data: () => ({ component: undefined }),
 
-    async created () {
-      let component = {}
+    computed: { loading: sync('pages/loading') },
 
-      try {
-        component = await import(
-          /* webpackChunkName: "examples" */
-          /* webpackMode: "lazy-once" */
-          `../../examples/${this.file}.vue`
-        )
+    created () {
+      // Add pending promises to be resolved
+      // before processing scrollBehavior.
+      this.loading.push(new Promise(this.load))
+    },
 
-        this.$emit('loaded', component.default)
-      } catch (err) {
-        component = await import('./ExampleMissing')
+    methods: {
+      async load (resolve, reject) {
+        let component = {}
 
-        this.$emit('error', err)
-      }
+        try {
+          component = await import(
+            /* webpackChunkName: "examples" */
+            /* webpackMode: "lazy-once" */
+            `../../examples/${this.file}.vue`
+          )
 
-      this.component = component.default
+          this.$emit('loaded', component.default)
+        } catch (err) {
+          component = await import('./ExampleMissing')
+
+          this.$emit('error', err)
+        }
+
+        this.component = component.default
+
+        resolve()
+      },
     },
   }
 </script>
