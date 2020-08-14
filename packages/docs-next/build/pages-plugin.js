@@ -93,25 +93,7 @@ class Plugin {
 
     virtualModules.apply(compiler)
 
-    compiler.hooks.compilation.tap('PagesPlugin', () => {
-      if (!shouldWrite) return
-
-      for (const [key, value] of Object.entries(generateFiles())) {
-        virtualModules.writeModule(key, value)
-      }
-
-      shouldWrite = false
-    })
-
-    compiler.hooks.watchRun.tapPromise('PagesPlugin', async (comp) => {
-      const changedTimes = comp.watchFileSystem.watcher.mtimes
-      const changedFiles = Object.keys(changedTimes).map(filePath => filePath.replace(/\\/g, '/'))
-        .filter(filePath => filePath.indexOf('src/pages') >= 0)
-
-      if (changedFiles.length) {
-        shouldWrite = true
-      }
-
+    compiler.hooks.afterCompile.tapPromise('PagesPlugin', async () => {
       if (shouldWriteModified) {
         const modified = await getModified()
 
@@ -122,6 +104,19 @@ class Plugin {
 
         shouldWriteModified = false
       }
+
+      if (!shouldWrite) return
+
+      for (const [key, value] of Object.entries(generateFiles())) {
+        virtualModules.writeModule(key, value)
+      }
+
+      shouldWrite = false
+    })
+
+    compiler.hooks.watchRun.tapPromise('PagesPlugin', async compiler => {
+      shouldWrite = !!Object.keys(compiler.watchFileSystem.watcher.mtimes)
+        .find(path => path.indexOf('src/pages'))
     })
   }
 }
