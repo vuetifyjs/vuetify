@@ -21,7 +21,7 @@ $utilities: map-deep-merge(
       print: true,
       property: display,
       class: d,
-      values: none inline inline-block block table table-row table-cell flex inline-flex
+      values: none inline inline-block block table table-row table-cell flex inline-flex grid
     ),
     "float": (
       responsive: true,
@@ -135,6 +135,29 @@ $utilities: map-deep-merge(
         12: 12,
         last: 13,
       ),
+    ),
+
+    // Spacing  
+    "width": (
+      property: width,
+      class: w,
+      values: (
+        25: 25%,
+        50: 50%,
+        75: 75%,
+        100: 100%
+      )
+    ),
+
+    "height": (
+      property: height,
+      class: h,
+      values: (
+        25: 25%,
+        50: 50%,
+        75: 75%,
+        100: 100%
+      )
     ),
 
     // Margin utilities
