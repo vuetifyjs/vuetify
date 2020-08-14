@@ -1,8 +1,8 @@
 <template>
   <v-sheet
     class="overflow-hidden"
-    rounded
     outlined
+    rounded
   >
     <v-list-item
       v-if="item"
@@ -10,8 +10,8 @@
     >
       <v-list-item-icon>
         <v-icon
-          :color="colors[section]"
-          v-text="icon"
+          :color="categories[section].color"
+          v-text="categories[section].icon"
         />
       </v-list-item-icon>
 
@@ -36,27 +36,15 @@
 
     props: { to: String },
 
-    data: () => ({
-      colors: {
-        'getting-started': 'teal',
-        api: 'orange',
-        company: 'primary',
-        components: 'indigo darken-1',
-        customization: 'red',
-        directives: 'blue-grey',
-        introduction: 'primary',
-        'professional-support': 'amber darken-2',
-        styles: 'deep-purple accent-4',
-        themes: 'pink',
-      },
-      icon: undefined,
-      item: undefined,
-    }),
+    data: () => ({ item: undefined }),
 
     computed: {
+      ...get('app', [
+        'categories',
+        'nav',
+      ]),
       dark: get('user/theme@dark'),
       locale: get('route/params@locale'),
-      nav: get('app/nav'),
       pages: get('pages/pages'),
       section () {
         return this.to.split('/')[1]
@@ -80,9 +68,6 @@
         for (const item of items) {
           // If item is found, stop iterating
           if (this.item) break
-
-          // Set icon if available
-          if (item.icon) this.icon = item.icon
 
           // Check children
           if (item.items) {

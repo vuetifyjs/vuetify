@@ -8,6 +8,52 @@ import { ROOT_DISPATCH } from '@/store'
 // Data
 const state = {
   branch: getBranch(),
+  categories: {
+    api: {
+      icon: '$mdiBeaker',
+      color: 'orange',
+    },
+    'beginners-guide': {
+      icon: '$mdiBookshelf',
+      color: 'green',
+    },
+    company: {
+      icon: '$mdiVuetify',
+      color: 'blue darken-1',
+    },
+    components: {
+      icon: '$mdiViewDashboard',
+      color: 'indigo darken-1',
+    },
+    customization: {
+      icon: '$mdiCogs',
+      color: 'red',
+    },
+    directives: {
+      icon: '$mdiFunction',
+      color: 'blue-grey',
+    },
+    'getting-started': {
+      icon: '$mdiSpeedometer',
+      color: 'teal',
+    },
+    introduction: {
+      icon: '$mdiBookOpenPageVariant',
+      color: 'primary',
+    },
+    'professional-support': {
+      icon: '$mdiAtomVariant',
+      color: 'teal',
+    },
+    styles: {
+      icon: '$mdiPalette',
+      color: 'deep-purple accent-4',
+    },
+    themes: {
+      icon: '$mdiBookOpenPageVariant',
+      color: 'pink',
+    },
+  },
   drawer: null,
   initializing: false,
   modified: {},
@@ -49,8 +95,14 @@ const getters = {
     })
 
     let groupChar = null
-    for (const item of sorted) {
-      const itemChar = strip(item.title).toLowerCase().charAt(0)
+    for (const obj of sorted) {
+      const itemChar = strip(obj.title).toLowerCase().charAt(0)
+      const category = state.categories.itemChar || {}
+
+      const item = {
+        ...obj,
+        icon: category.icon,
+      }
 
       if (itemChar !== groupChar) {
         groupChar = itemChar
