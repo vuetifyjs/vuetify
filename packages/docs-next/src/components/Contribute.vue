@@ -48,13 +48,11 @@
         'modified',
       ]),
       ...get('route', [
-        'path',
         'params@category',
-        'params@locale',
         'params@page',
       ]),
       at () {
-        const stat = this.modified[this.path] || {}
+        const stat = this.modified[`/${this.category}/${this.page}/`] || {}
 
         return stat.modified
       },
