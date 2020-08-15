@@ -54,9 +54,9 @@ async function getModified () {
 
     pages[`/${path}/`] = {
       created: format(created, 'P, pp'),
+      fresh: differenceInDays(now, modified) < 15,
       modified: format(modified, 'P, pp'),
       recent: differenceInDays(now, created) < 7,
-      stale: differenceInDays(now, modified) > 15,
     }
 
     return pages

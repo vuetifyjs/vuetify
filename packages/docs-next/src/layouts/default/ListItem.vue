@@ -14,7 +14,7 @@
     </v-list-item-icon>
 
     <v-avatar
-      v-if="item.recent || item.stale != null"
+      v-if="item.recent || item.fresh"
       class="flex-0-1-auto mr-2 ml-n3"
       color="#00C58E"
       size="4"
