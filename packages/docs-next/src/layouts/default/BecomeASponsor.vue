@@ -1,16 +1,11 @@
 <template>
   <div class="pt-4 pb-3 px-2">
     <app-caption
-      class="ml-2"
+      class="ml-2 mb-3"
       path="premiere-sponsors"
     />
 
-    <sponsor
-      class="mb-3"
-      slug="qomplx"
-    />
-
-    <sponsor-link class="ml-2" />
+    <sponsor slug="qomplx" />
   </div>
 </template>
 

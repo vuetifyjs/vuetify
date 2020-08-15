@@ -4,10 +4,9 @@
     :aria-label="value.metadata.name"
     :href="value.metadata.href"
     :ripple="false"
-    class="pa-2 d-inline-block"
+    class="d-inline-block px-2 py-1"
     color="transparent"
     flat
-    max-height="72"
     rel="noopener"
     rounded
     target="_blank"
@@ -18,7 +17,6 @@
       :width="width"
       class="d-inline-block"
       contain
-      max-height="72"
     />
   </v-card>
 </template>
@@ -58,10 +56,10 @@
         return `${cdn}${logo}`
       },
       width () {
-        if (this.compact) return 115
-        if (this.comfortable) return 135
+        if (this.compact) return 125
+        if (this.comfortable) return 140
 
-        return 155
+        return 160
       },
       value () {
         return this.sponsor || this.sponsors.find(sponsor => {

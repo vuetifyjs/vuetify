@@ -10,12 +10,14 @@
     floating
     width="256"
   >
-    <headline
-      class="mb-2"
-      path="contents"
-    />
+    <template #prepend>
+      <headline
+        class="mb-2"
+        path="contents"
+      />
+    </template>
 
-    <ul>
+    <ul class="mb-6">
       <router-link
         v-for="({ to, level, text }, i) in toc"
         #default="{ href, navigate, isActive }"
@@ -40,6 +42,21 @@
         </li>
       </router-link>
     </ul>
+
+    <div class="ml-5">
+      <app-caption
+        class="ml-2 mb-3"
+        path="platinum-sponsors"
+      />
+
+      <sponsors
+        class="mb-3"
+        no-gutters
+        tier="2"
+      />
+
+      <sponsor-link class="ml-2" />
+    </div>
   </v-navigation-drawer>
 </template>
 

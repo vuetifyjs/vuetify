@@ -15,6 +15,10 @@
         type: String,
         default: 'caption',
       },
+      weight: {
+        type: String,
+        default: 'regular',
+      },
     },
   }
 </script>

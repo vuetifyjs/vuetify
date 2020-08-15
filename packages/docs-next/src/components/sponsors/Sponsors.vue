@@ -2,6 +2,8 @@
   <v-row
     align="center"
     dense
+    v-bind="$attrs"
+    v-on="$listeners"
   >
     <v-col
       v-for="sponsor in sponsors"
@@ -9,8 +11,8 @@
       cols="auto"
     >
       <sponsor
-        :comfortable="tier === 2"
-        :compact="tier > 2"
+        :comfortable="tier === 1"
+        :compact="tier > 1"
         :sponsor="sponsor"
       />
     </v-col>
