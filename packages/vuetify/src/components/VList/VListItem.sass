@@ -4,6 +4,7 @@
 +theme(v-list-item) using ($material)
   &--disabled
     color: map-deep-get($material, 'text', 'disabled')
+    pointer-events: none
 
   &:not(.v-list-item--active):not(.v-list-item--disabled)
     color: map-deep-get($material, 'text', 'primary') !important
