@@ -7,6 +7,11 @@
     flat
     v-bind="{ [`clipped-${rtl ? 'left' : 'right'}`]: true }"
   >
+    <v-app-bar-nav-icon
+      class="hidden-lg-and-up"
+      @click="drawer = !drawer"
+    />
+
     <vuetify-logo-alt v-if="$vuetify.breakpoint.mobile" />
 
     <v-spacer />

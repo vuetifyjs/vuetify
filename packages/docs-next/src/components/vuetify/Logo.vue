@@ -11,7 +11,6 @@
       :alt="$i18n.t('logo')"
       class="shrink"
       max-width="164"
-      transition="scale-transition"
     />
   </router-link>
 </template>
