@@ -2,7 +2,6 @@ require('dotenv').config()
 
 const path = require('path')
 const webpack = require('webpack')
-const vueConfig = require('./vue-loader.config')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
@@ -23,7 +22,7 @@ module.exports = {
   devtool,
   output: {
     path: resolve('../dist'),
-    publicPath: '/dist/',
+    publicPath: '/',
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].js'
   },
@@ -31,7 +30,7 @@ module.exports = {
     extensions: ['*', '.js', '.json', '.vue'],
     alias: {
       '@': path.resolve(__dirname, '../src'),
-      'vue$': 'vue/dist/vue.runtime.esm.js'
+      vue$: 'vue/dist/vue.runtime.esm.js'
     },
     symlinks: false
   },
@@ -48,7 +47,11 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: vueConfig
+        options: {
+          compilerOptions: {
+            preserveWhitespace: false
+          }
+        }
       },
       {
         test: /\.js$/,
