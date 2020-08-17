@@ -5,6 +5,7 @@
   "scripts": {
     "build": "vue-cli-service build",
     "build:api": "node build/api-gen",
+    "build:modified": "node build/modified",
     "dev": "yarn serve",
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
@@ -15,7 +16,6 @@
   "dependencies": {
     "core-js": "^3.6.4",
     "docsearch.js": "^2.6.3",
-    "git-date-extractor": "^3.0.0",
     "moment": "^2.24.0",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
@@ -46,6 +46,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "eslint-plugin-vuetify": "^1.0.0-beta.6",
     "frontmatter-markdown-loader": "^3.5.0",
+    "git-date-extractor": "^3.0.0",
     "html-loader": "^1.1.0",
     "http-server": "^0.12.3",
     "json-loader": "^0.5.7",

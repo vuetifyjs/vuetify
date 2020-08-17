@@ -80,7 +80,7 @@
       async getModified () {
         const { default: modified } = await import(
           /* webpackChunkName: "modified-[request]" */
-          '@docs/modified'
+          '@/data/modified'
         )
 
         this.modified = modified
