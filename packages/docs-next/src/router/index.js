@@ -73,7 +73,7 @@ export function createRouter (vuetify, store, i18n) {
 
   Vue.use(VueGtag, {
     bootstrap: IS_PROD,
-    config: { id: process.env.VUE_APP_GOOGLE_ANALYTICS },
+    config: { id: 'UA-75262397-3' },
   }, router)
 
   return router
