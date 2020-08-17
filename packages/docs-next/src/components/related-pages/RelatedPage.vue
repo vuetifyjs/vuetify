@@ -1,13 +1,6 @@
 <template>
-  <v-sheet
-    class="overflow-hidden"
-    outlined
-    rounded
-  >
-    <v-list-item
-      v-if="item"
-      :to="url"
-    >
+  <app-sheet v-if="item">
+    <v-list-item :to="url">
       <v-list-item-icon>
         <v-icon
           :color="categories[section].color"
@@ -24,7 +17,7 @@
         />
       </v-list-item-content>
     </v-list-item>
-  </v-sheet>
+  </app-sheet>
 </template>
 
 <script>
