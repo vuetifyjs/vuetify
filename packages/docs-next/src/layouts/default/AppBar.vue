@@ -7,37 +7,25 @@
     flat
     v-bind="{ [`clipped-${rtl ? 'left' : 'right'}`]: true }"
   >
-    <v-expand-x-transition>
-      <div
-        v-if="!search"
-        class="transition-swing"
-      >
-        <v-app-bar-nav-icon
-          class="hidden-md-and-up"
-          @click="drawer = !drawer"
-        />
-      </div>
-    </v-expand-x-transition>
+    <vuetify-logo-alt v-if="$vuetify.breakpoint.mobile" />
 
-    <template v-if="$vuetify.breakpoint.mobile">
-      <search-toggle />
+    <v-spacer />
 
-      <v-spacer />
+    <template v-if="!$vuetify.breakpoint.mobile">
+      <default-search />
+
+      <vertical-divider />
     </template>
 
-    <default-search v-if="!$vuetify.breakpoint.mobile || search" />
-
     <template v-if="!search">
-      <template v-if="!$vuetify.breakpoint.mobile">
-        <v-spacer />
-
+      <template v-if="!$vuetify.breakpoint.xsOnly">
         <learn-menu />
 
         <team-link />
 
         <support-menu />
 
-        <app-bar-divider />
+        <vertical-divider />
 
         <store-link />
 
@@ -48,7 +36,7 @@
 
       <notifications-menu />
 
-      <app-bar-divider v-show="!$vuetify.breakpoint.mobile" />
+      <vertical-divider v-show="!$vuetify.breakpoint.xsOnly" />
 
       <language-menu />
     </template>
@@ -56,9 +44,6 @@
 </template>
 
 <script>
-  // Components
-  import VDivider from 'vuetify/lib/components/VDivider'
-
   // Utilities
   import { sync } from 'vuex-pathify'
 
@@ -66,17 +51,6 @@
     name: 'DefaultBar',
 
     components: {
-      AppBarDivider: {
-        functional: true,
-
-        render (h) {
-          return h(VDivider, {
-            staticClass: 'mx-2 my-auto',
-            props: { inset: true, vertical: true },
-            style: { maxHeight: '16px' },
-          })
-        },
-      },
       DefaultSearch: () => import(
         /* webpackChunkName: "default-search" */
         '@/layouts/default/Search'

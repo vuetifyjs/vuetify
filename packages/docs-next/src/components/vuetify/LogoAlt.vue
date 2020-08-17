@@ -4,27 +4,15 @@
       name: 'Home',
       params: { locale }
     }"
-    :aria-label="$i18n.t('logo')"
-    class="d-none d-sm-flex align-center text--primary"
-    style="text-decoration: none;"
-    :title="$i18n.t('logo')"
-    @click.native="$vuetify.goTo(0)"
+    class="d-inline-block"
   >
     <v-img
-      :src="`https://cdn.vuetifyjs.com/images/logos/vuetify-logo-${theme.isDark ? 'dark' : 'light' }.png`"
+      :src="`https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-${theme.isDark ? 'dark' : 'light' }.svg`"
       :alt="$i18n.t('logo')"
-      class="shrink mr-2"
-      contain
+      class="shrink"
+      max-width="40"
       transition="scale-transition"
-      width="40"
     />
-
-    <v-sheet
-      class="display-1 hidden-sm-and-down font-weight-medium mr-0 mr-md-4"
-      color="transparent"
-    >
-      Vuetify
-    </v-sheet>
   </router-link>
 </template>
 
@@ -33,7 +21,7 @@
   import { get } from 'vuex-pathify'
 
   export default {
-    name: 'VuetifyAltLogo',
+    name: 'VuetifyLogoAlt',
 
     inject: ['theme'],
 

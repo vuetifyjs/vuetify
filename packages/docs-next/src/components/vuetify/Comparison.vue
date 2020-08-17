@@ -1,6 +1,7 @@
 <template>
   <v-sheet
-    class="mb-12 text-body-2"
+    class="mb-12 text-body-2 mx-auto"
+    max-width="1024"
     outlined
     rounded
   >
