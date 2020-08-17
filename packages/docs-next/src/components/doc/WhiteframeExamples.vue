@@ -4,8 +4,8 @@
       v-for="([name, whiteframe], i) in whiteframes"
       :key="i"
       cols="12"
-      sm="6"
-      md="4"
+      md="6"
+      lg="4"
     >
       <figure>
         <router-link
@@ -49,6 +49,7 @@
         'Extended toolbar',
         'System bar',
         'Inbox',
+        'Constrained',
       ].map(whiteframe => ([whiteframe, kebabCase(whiteframe)])),
     }),
   }
