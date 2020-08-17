@@ -9,10 +9,11 @@
     />
 
     <i18n
+      class="mb-3"
       path="ready-text"
       tag="div"
     >
-      <template v-slot:team>
+      <template #team>
         <i18n
           :href="url"
           path="team"
@@ -23,13 +24,11 @@
 
     <related-pages />
 
-    <up-next />
+    <app-divider class="mt-7 mb-5" />
 
-    <app-divider />
+    <up-next class="mb-4" />
 
-    <v-lazy>
-      <exit-ad />
-    </v-lazy>
+    <exit-ad class="mb-8" />
 
     <contribute />
   </section>

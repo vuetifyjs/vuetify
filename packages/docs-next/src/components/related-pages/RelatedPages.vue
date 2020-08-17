@@ -1,10 +1,11 @@
 <template>
-  <v-row>
+  <v-row dense>
     <v-col
       v-for="(to, i) in related"
       :key="i"
       cols="12"
-      md="4"
+      sm="6"
+      lg="4"
     >
       <related-page :to="to" />
     </v-col>

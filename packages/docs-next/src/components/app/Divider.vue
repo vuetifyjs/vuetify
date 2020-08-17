@@ -1,5 +1,5 @@
 <template>
-  <v-divider class="my-6" />
+  <v-divider />
 </template>
 
 <script>
