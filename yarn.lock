@@ -13586,11 +13586,6 @@ vscode-uri@^1.0.6:
   resolved "https://registry.yarnpkg.com/vscode-uri/-/vscode-uri-1.0.6.tgz#6b8f141b0bbc44ad7b07e94f82f168ac7608ad4d"
   integrity sha512-sLI2L0uGov3wKVb9EB+vIQBl9tVP90nqRvxSoJ35vI3NjxE8jfsE5DSOhWgSunHSZmKS4OCi2jrtfxK7uyp2ww==
 
-vue-analytics@^5.17.0:
-  version "5.17.0"
-  resolved "https://registry.yarnpkg.com/vue-analytics/-/vue-analytics-5.17.0.tgz#c9530b82b9b4acd111c9cba7d249adf4089746b3"
-  integrity sha512-1Cn/v06cGjmGDfRlG2hc0RF0sc2rNC88shOeLGNIlllSFv5GDZ9kLXGTPB9z9I+WyvFewyUONPIdQnpOls6h6w==
-
 vue-class-component@^7.1.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-7.1.0.tgz#b33efcb10e17236d684f70b1e96f1946ec793e87"
@@ -13617,6 +13612,11 @@ vue-eslint-parser@^5.0.0:
     espree "^4.1.0"
     esquery "^1.0.1"
     lodash "^4.17.11"
+
+vue-gtag@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/vue-gtag/-/vue-gtag-1.8.0.tgz#0707e744bca6bc00681cbf555786b48cd9d46f97"
+  integrity sha512-oM3DojStj3oLSgmgUTgKlj1nuUBK5u7nSzjn5BltbozmA72CjkRkMyZ/OfyVZwkHUS97Rh2LYf6QfwXMQ46ZRw==
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.3"

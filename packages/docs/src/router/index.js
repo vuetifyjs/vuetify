@@ -1,7 +1,7 @@
 // Vue
 import Vue from 'vue'
 import Router from 'vue-router'
-import VueAnalytics from 'vue-analytics'
+import VueGtag from 'vue-gtag'
 
 // Settings
 import redirects from './301.json'
@@ -52,18 +52,10 @@ export function createRouter () {
     return to.path.endsWith('/') ? next() : next(trailingSlash(to.path))
   })
 
-  Vue.use(VueAnalytics, {
-    autoTracking: {
-      page: process.env.NODE_ENV !== 'development',
-    },
-    debug: process.env.DEBUG ? {
-      enabled: true,
-      trace: false,
-      sendHitTask: true,
-    } : false,
-    id: 'UA-75262397-3',
-    router,
-  })
+  Vue.use(VueGtag, {
+    bootstrap: process.env.NODE_ENV !== 'development',
+    config: { id: 'UA-75262397-3' },
+  }, router)
 
   return router
 }

@@ -37,7 +37,7 @@
     "route-cache": "^0.4.4",
     "serve-favicon": "^2.5.0",
     "vee-validate": "^3.2.4",
-    "vue-analytics": "^5.17.0",
+    "vue-gtag": "^1.8.0",
     "vue-i18n": "^8.12.0",
     "vue-no-ssr": "^1.1.1",
     "vue-router": "^3.0.7",
