@@ -19,7 +19,6 @@
             :text="link.target"
             :subtext="link.section"
             no-markdown
-            @click.native="$ga.event('up-next', 'click', link.target, $route.path)"
           >
             <v-list-item-action>
               <v-icon>mdi-arrow-right</v-icon>

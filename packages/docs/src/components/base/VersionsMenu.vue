@@ -36,7 +36,6 @@
           :key="`archives-${i}`"
           v-bind="archive"
           no-markdown
-          @click="$ga.event('toolbar', 'click', 'versions', archive.text)"
         />
 
         <v-divider />
@@ -48,7 +47,6 @@
           :key="`releases-${i}`"
           v-bind="release"
           no-markdown
-          @click="$ga.event('toolbar', 'click', 'versions', release.text)"
         />
       </v-list>
     </v-card>

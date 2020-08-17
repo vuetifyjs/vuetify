@@ -33,7 +33,6 @@
                   class="primary--text ma-2 grow"
                   color="white"
                   x-large
-                  @click="$ga.event('home', 'click', 'get-started')"
                 >
                   <v-icon
                     left
@@ -51,7 +50,6 @@
                   color="white"
                   outlined
                   x-large
-                  @click="$ga.event('home', 'click', 'why-vuetify')"
                 >
                   <v-icon
                     left
@@ -73,7 +71,6 @@
                   light
                   x-large
                   depressed
-                  @click="$ga.event('home', 'click', 'github')"
                 >
                   <v-icon
                     left
@@ -113,13 +110,11 @@
               <a
                 href="https://www.vuemastery.com/"
                 target="_blank"
-                @click="$ga.event('home', 'click', 'vuemastery link')"
               >Vue Mastery</a>.
 
               Watch Vue Mastery’s free&nbsp;<a
                 href="https://www.vuemastery.com/courses/beautify-with-vuetify/getting-started-with-vuetify/"
                 target="_blank"
-                @click="$ga.event('home', 'click', 'vuemastery link')"
               >Vuetify lesson</a>.
             </div>
           </v-col>

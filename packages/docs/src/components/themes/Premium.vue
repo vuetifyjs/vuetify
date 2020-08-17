@@ -104,7 +104,6 @@
               depressed
               min-width="100"
               target="_blank"
-              @click="$ga.event('premium-themes-page', 'click', template.title)"
             >
               {{ $t(`Themes.Premium.${template.free ? 'downloadNow' : 'buyNow'}`) }}
             </v-btn>

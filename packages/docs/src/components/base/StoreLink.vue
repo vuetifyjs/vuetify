@@ -7,7 +7,6 @@
     style="min-width: 48px"
     target="_blank"
     text
-    @click="$ga.event('toolbar', 'click', 'store')"
   >
     <v-badge
       v-model="badge"

@@ -146,7 +146,6 @@
         this.updateItems(this.items)
       },
       onClick (slug) {
-        this.$ga.event('notification', 'click', slug)
         this.markViewed(slug)
         this.menu = false
       },

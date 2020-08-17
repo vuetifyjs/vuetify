@@ -5,7 +5,6 @@
     min-width="48"
     text
     :to="path"
-    @click="$ga.event('toolbar', 'click', 'enterprise')"
   >
     <base-nav-text>Vuetify.AppToolbar.enterprise</base-nav-text>
   </v-btn>

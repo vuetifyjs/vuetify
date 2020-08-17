@@ -7,7 +7,6 @@
     dark
     height="56"
     class="align-center"
-    @click="$ga.event('system-bar', 'click', 'vueschool')"
   >
     <v-responsive
       class="mx-auto shrink pr-12"

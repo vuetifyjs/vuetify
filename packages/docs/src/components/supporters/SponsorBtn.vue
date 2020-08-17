@@ -6,7 +6,6 @@
     rounded
     v-bind="$attrs"
     v-on="$listeners"
-    @click="$ga.event('sponsors', 'click', 'sponsor-btn')"
   >
     <v-icon left>mdi-vuetify</v-icon>
 

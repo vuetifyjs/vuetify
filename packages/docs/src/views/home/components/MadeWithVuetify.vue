@@ -20,7 +20,6 @@
         rel="noopener"
         target="_blank"
         title="Link to madewithvuejs.com"
-        @click="$ga.event('home', 'click', ' mwvjs')"
       >
         <v-img
           alt="Powered by madewithvuejs.com"

@@ -2,7 +2,6 @@
   <v-card
     :to="value.to"
     hover
-    @click.native="$ga.event('categories', 'click', $route.path, value.text)"
   >
     <v-card-title class="title pb-0 align-center">
       <span v-text="value.title" />
