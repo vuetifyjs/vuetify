@@ -14,7 +14,7 @@ related:
 
 Vuetify is always under development. We are constantly working towards improving the existing codebase, as well as adding new features and functionality that help make building applications even easier. Below is a tentative list of planned features. This is not an exhaustive list and is subject to change at any time without notice.
 
-<entry-ad />
+<promoted-ad slug="vuetify-github-sponsors" />
 
 ## In Development
 
@@ -45,6 +45,10 @@ The following versions have continued maintainance for backwards compatible fixe
 * **Notes:**: [v1.5 Release](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)
 * **Overview:**
   Added new component, `v-calendar`. Improved functionality of `v-sparkline` with new **bar** and **fill** properties. Improved `v-treeview` and prepared for LTS. Navigate to the [Long-term Support Page](/introduction/long-term-support) for more information on LTS.
+
+---
+
+<promoted-ad slug="vuetify-open-collective" />
 
 ## Released
 

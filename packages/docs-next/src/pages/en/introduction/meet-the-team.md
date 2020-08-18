@@ -19,6 +19,10 @@ While Vuetify (the framework) is [MIT Licensed](https://opensource.org/licenses/
 
 ## Core Team
 
+The core development team are Open Source developers that help guide the direction of the Vuetify and its ecosystem.
+
+<promoted-ad slug="vuetify-open-collective" />
+
 <team-members team="core" />
 
 ## Contributors
