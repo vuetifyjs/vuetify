@@ -137,7 +137,7 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
           <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/cosmic-logo-light.svg">
         </a>
       </td>
-    </tr>
+    </tr><tr></tr>
     <tr>
       <td>
         <a href="https://ekorre.hr/?ref=vuetify-github">
