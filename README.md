@@ -94,13 +94,13 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
         </a>
       </td>
       <td>
-        <a href="http://resaleai.com/?ref=vuetify-github">
-          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/resaleai_logo_blue.svg">
+        <a href="http://vuemastery.com/?ref=vuetify-github">
+          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
         </a>
       </td>
       <td>
-        <a href="http://vuemastery.com/?ref=vuetify-github">
-          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
+        <a href="http://www.skaletech.com/?ref=vuetify-github">
+          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/skale.png">
         </a>
       </td>
     </tr>
@@ -118,29 +118,35 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
         </a>
       </td>
       <td>
-        <a href="http://www.clearbluetechnologies.com/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/clear-blue.png">
-        </a>
-      </td>
-      <td>
         <a href="https://www.digitalmaas.com/?ref=vuetify-github">
-          <img height="50px" src="https://cdn.vuetifyjs.com/images/backers/digital-maas.svg">
+          <img height="42px" src="https://cdn.vuetifyjs.com/images/backers/digital-maas.svg">
         </a>
-      </td>
-      <td>
-        <a href="https://www.brightree.com/?ref=vuetify-github">
-          <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/brightree-logo-light.png">
-        </a>
-      </td>
-      <td>
-        <a href="https://www.alv-software.com/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/alv-software-logo-light.png">
-        </a>
-      </td>
       </td>
       <td>
         <a href="https://analytics.quantedsquare.com/?ref=vuetify-github">
           <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/quanted-square.svg">
+        </a>
+      </td>
+      <td>
+        <a href="https://www.hypeinnovation.com/home?ref=vuetify-github">
+          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/hype-logo-light.svg">
+        </a>
+      </td>
+      <td>
+        <a href="https://www.cosmicjs.com/?ref=vuetify-github">
+          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/cosmic-logo-light.svg">
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://ekorre.hr/?ref=vuetify-github">
+          <img height="32px" src="https://cdn.vuetifyjs.com/images/backers/ekorre-logo-light.png">
+        </a>
+      </td>
+      <td>
+        <a href="https://www.dealerdesk.de/?ref=vuetify-github">
+          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/dealerdesk-logo-light.png">
         </a>
       </td>
     </tr>
@@ -163,18 +169,13 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
   <tbody>
     <tr>
       <td>
+        <a href="http://crossword-solver.io/?ref=vuetify-github">
+          <img height="30px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/crossword-solver-logo-light.svg">
+        </a>
+      </td>
+      <td>
         <a href="https://papersowl.com/write-my-paper-for-me">
           <img src="https://logo.clearbit.com/papersowl.com" height="32">
-        </a>
-      </td>
-      <td>
-        <a href="https://edusson.com/write-my-essay-online">
-          <img src="https://logo.clearbit.com/edusson.com" height="40">
-        </a>
-      </td>
-      <td>
-        <a href="https://getform.io/">
-          <img src="https://opencollective-production.s3-us-west-1.amazonaws.com/2d3b7590-f25a-11e8-95fe-d7ea40ac9667.png" height="40">
         </a>
       </td>
       <td>
