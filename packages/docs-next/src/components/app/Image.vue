@@ -1,21 +1,18 @@
 <template>
   <figure>
-    <v-sheet
-      class="mb-2"
-      color="transparent"
-    >
+    <app-sheet class="mb-3">
       <v-img
         class="rounded mx-auto"
-        eager
         max-width="100%"
         v-bind="$attrs"
         v-on="$listeners"
       />
-    </v-sheet>
+    </app-sheet>
 
     <figcaption
-      class="caption text-center"
-      v-text="$attrs.alt"
+      v-if="caption"
+      class="text-subtitle-2 text-center text-capitalize"
+      v-text="caption"
     />
   </figure>
 </template>
@@ -25,5 +22,13 @@
     name: 'AppImg',
 
     inheritAttrs: false,
+
+    props: { name: String },
+
+    computed: {
+      caption () {
+        return this.name || this.$attrs.alt
+      },
+    },
   }
 </script>

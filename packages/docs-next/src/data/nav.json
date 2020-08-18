@@ -214,6 +214,7 @@
     "title": "resources",
     "icon": "$mdiTeach",
     "items": [
+      "made-with-vuetify",
       "vuetify-themes"
     ]
   },

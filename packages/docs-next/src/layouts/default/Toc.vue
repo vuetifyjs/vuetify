@@ -10,7 +10,10 @@
     floating
     width="256"
   >
-    <template #prepend>
+    <template
+      v-if="toc.length"
+      #prepend
+    >
       <headline
         class="mb-2"
         path="contents"
