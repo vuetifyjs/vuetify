@@ -209,10 +209,6 @@ export default VSelect.extend({
   },
 
   methods: {
-    onBlur (e?: Event) {
-      this.isFocused = false
-      e && this.$emit('blur', e)
-    },
     onFilteredItemsChanged (val: never[], oldVal: never[]) {
       // TODO: How is the watcher triggered
       // for duplicate items? no idea

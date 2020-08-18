@@ -572,9 +572,6 @@ export default baseMixins.extend<options>().extend({
     getValue (item: object) {
       return getPropertyFromItem(item, this.itemValue, this.getText(item))
     },
-    onBlur (e?: Event) {
-      e && this.$emit('blur', e)
-    },
     onChipInput (item: object) {
       if (this.multiple) this.selectItem(item)
       else this.setValue(null)
