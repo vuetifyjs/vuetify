@@ -7,31 +7,22 @@
       md="6"
       lg="4"
     >
-      <figure>
-        <router-link
-          :to="{
-            name: 'Whiteframes',
-            params: { whiteframe }
-          }"
-          rel="nofollow noopener"
-          target="_blank"
-        >
-          <app-sheet class="mb-1">
-            <v-img
-              :alt="`${name} layout`"
-              :aspect-ratio="16/9"
-              :src="`https://cdn.vuetifyjs.com/docs/images/layouts/${whiteframe}.svg`"
-              class="rounded"
-              width="100%"
-            />
-          </app-sheet>
-        </router-link>
-
-        <figcaption
-          class="overline text-center"
-          v-text="name"
+      <router-link
+        :to="{
+          name: 'Whiteframes',
+          params: { whiteframe }
+        }"
+        class="text--primary text-decoration-none"
+        rel="nofollow noopener"
+        target="_blank"
+      >
+        <app-img
+          :aspect-ratio="16/9"
+          :alt="`${name} layout`"
+          :name="name"
+          :src="`https://cdn.vuetifyjs.com/docs/images/layouts/${whiteframe}.svg`"
         />
-      </figure>
+      </router-link>
     </v-col>
   </v-row>
 </template>
