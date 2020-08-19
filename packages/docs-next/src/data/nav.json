@@ -218,12 +218,5 @@
       "made-with-vuetify",
       "themes"
     ]
-  },
-  {
-    "title": "company",
-    "icon": "$mdiVuetify",
-    "items": [
-      "advertising-with-us"
-    ]
   }
 ]
