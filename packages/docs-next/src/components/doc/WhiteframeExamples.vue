@@ -20,7 +20,7 @@
           :alt="`${name} layout`"
           :aspect-ratio="16/9"
           :name="name"
-          :src="`https://cdn.vuetifyjs.com/docs/images/layouts/${whiteframe}.svg`"
+          :src="`https://cdn.vuetifyjs.com/docs/images/whiteframes/${whiteframe}.svg`"
         />
       </router-link>
     </v-col>
@@ -41,6 +41,7 @@
         'System bar',
         'Inbox',
         'Constrained',
+        'Side navigation',
       ].map(whiteframe => ([whiteframe, kebabCase(whiteframe)])),
     }),
   }
