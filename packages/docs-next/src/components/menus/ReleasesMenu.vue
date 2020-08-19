@@ -32,10 +32,10 @@
             title: '1.5.x',
             href: 'https://v15.vuetifyjs.com',
           },
-          {
-            title: '1.0.x',
-            href: 'https://v1.vuetifyjs.com',
-          },
+          // {
+          //   title: '1.0.x',
+          //   href: 'https://v1.vuetifyjs.com',
+          // },
           { divider: true },
           { heading: this.$t('releases') },
           {
