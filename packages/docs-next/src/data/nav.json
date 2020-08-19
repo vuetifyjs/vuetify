@@ -214,8 +214,9 @@
     "title": "resources",
     "icon": "$mdiTeach",
     "items": [
+      "jobs-for-vue",
       "made-with-vuetify",
-      "vuetify-themes"
+      "themes"
     ]
   },
   {

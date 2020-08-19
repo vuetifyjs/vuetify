@@ -3,8 +3,8 @@
     :to="{
       name: 'Documentation',
       params: {
-        category: 'jobs',
-        page: 'for-vue'
+        category: 'resources',
+        page: 'jobs-for-vue'
       }
     }"
     icon="$mdiBriefcaseSearchOutline"

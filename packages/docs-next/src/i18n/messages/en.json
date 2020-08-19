@@ -89,6 +89,7 @@
   "introduction": "Introduction",
   "invert-example-colors": "Invert example colors",
   "jobs": "Jobs",
+  "jobs-for-vue": "@:jobs for Vue",
   "laptop": "Laptop",
   "large": "Large",
   "latest-release": "Latest @.lower:release",
