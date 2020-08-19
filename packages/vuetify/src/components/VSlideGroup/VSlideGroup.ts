@@ -381,22 +381,26 @@ export const BaseSlideGroup = mixins<options &
         wrapper: this.$refs.wrapper ? this.$refs.wrapper.clientWidth : 0,
       }, this.$vuetify.rtl, this.scrollOffset)
     },
-    setWidths /* istanbul ignore next */  () {
-      requestAnimationFrame(() => {
+    setWidths /* istanbul ignore next */ () {
+      this.requestAnimeFrame(() => {
         const { content, wrapper } = this.$refs
-
         this.widths = {
           content: content ? content.clientWidth : 0,
           wrapper: wrapper ? wrapper.clientWidth : 0,
         }
-
         this.isOverflowing = this.widths.wrapper < this.widths.content
-
         this.scrollIntoView()
       })
     },
+    requestAnimeFrame /* RequestAnimationFrame Polyfill */ (callback: FrameRequestCallback) {
+      if (typeof window === 'undefined') {
+        return callback
+      }
+      return window.requestAnimationFrame(() => {
+        window.setTimeout(callback, 1000 / 60)
+      })
+    },
   },
-
   render (h): VNode {
     return h('div', this.genData(), [
       this.genPrev(),
