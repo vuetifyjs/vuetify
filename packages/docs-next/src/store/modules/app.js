@@ -72,6 +72,7 @@ const actions = {
     dispatch('messages/fetch', null, ROOT_DISPATCH)
     dispatch('user/fetch', null, ROOT_DISPATCH)
     dispatch('ads/fetch', null, ROOT_DISPATCH)
+    dispatch('jobs/fetch', null, ROOT_DISPATCH)
   },
   showSnackbar ({ state }, data) {
     state.snackbar = Object.assign(state.snackbar, data)

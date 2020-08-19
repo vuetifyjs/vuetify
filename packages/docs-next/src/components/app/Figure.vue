@@ -6,7 +6,7 @@
         ...$attrs,
         ...attrs,
       }"
-      v-on="on"
+      v-on="$listeners"
     />
 
     <figcaption
