@@ -10,11 +10,11 @@ const state = {
   branch: getBranch(),
   categories: {
     api: {
-      icon: '$mdiBeaker',
+      icon: '$mdiFlaskOutline',
       color: 'orange',
     },
     'beginners-guide': {
-      icon: '$mdiBookshelf',
+      icon: '$mdiSchoolOutline',
       color: 'green',
     },
     company: {
@@ -22,11 +22,11 @@ const state = {
       color: 'blue darken-1',
     },
     components: {
-      icon: '$mdiViewDashboard',
+      icon: '$mdiViewDashboardOutline',
       color: 'indigo darken-1',
     },
     customization: {
-      icon: '$mdiCogs',
+      icon: '$mdiImageEditOutline',
       color: 'red',
     },
     directives: {
@@ -38,19 +38,19 @@ const state = {
       color: 'teal',
     },
     introduction: {
-      icon: '$mdiBookOpenPageVariant',
+      icon: '$mdiScriptTextOutline',
       color: 'primary',
     },
     'professional-support': {
-      icon: '$mdiAtomVariant',
+      icon: '$mdiConsole',
       color: 'teal',
     },
     styles: {
-      icon: '$mdiPalette',
+      icon: '$mdiPaletteOutline',
       color: 'deep-purple accent-4',
     },
     themes: {
-      icon: '$mdiBookOpenPageVariant',
+      icon: '$mdiScriptTextOutline',
       color: 'pink',
     },
   },

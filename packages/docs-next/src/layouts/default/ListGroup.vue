@@ -2,6 +2,7 @@
   <v-list-group
     :group="group"
     :prepend-icon="item.icon"
+    append-icon="$mdiMenuDown"
     class="v-list-group--default"
     no-action
     v-bind="$attrs"

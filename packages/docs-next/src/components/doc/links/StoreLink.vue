@@ -1,7 +1,7 @@
 <template>
   <app-tooltip-btn
     href="https://store.vuetifyjs.com/"
-    icon="$mdiCart"
+    icon="$mdiCartOutline"
     path="store"
     rel="noopener"
     target="_blank"

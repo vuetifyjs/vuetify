@@ -1,7 +1,7 @@
 [
   {
     "title": "introduction",
-    "icon": "$mdiBookOpenPageVariant",
+    "icon": "$mdiScriptTextOutline",
     "items": [
       "why-vuetify",
       "frequently-asked-questions",
@@ -15,7 +15,7 @@
   },
   {
     "title": "beginners-guide",
-    "icon": "$mdiBookshelf",
+    "icon": "$mdiSchoolOutline",
     "items": [
       "guide"
     ]
@@ -37,7 +37,7 @@
   },
   {
     "title": "customization",
-    "icon": "$mdiCogs",
+    "icon": "$mdiImageEditOutline",
     "items": [
       "breakpoints",
       "global-config",
@@ -52,7 +52,7 @@
   },
   {
     "title": "styles",
-    "icon": "$mdiPalette",
+    "icon": "$mdiPaletteOutline",
     "items": [
       "css-reset",
       "border-radius",
@@ -69,7 +69,7 @@
   },
   {
     "title": "ui-components",
-    "icon": "$mdiViewDashboard",
+    "icon": "$mdiViewDashboardOutline",
     "group": "components",
     "items": [
       "api-explorer",
@@ -186,7 +186,7 @@
   },
   {
     "title": "api",
-    "icon": "$mdiBeaker",
+    "icon": "$mdiFlaskOutline",
     "group": "api"
   },
   {
@@ -204,7 +204,7 @@
   },
   {
     "title": "professional-support",
-    "icon": "$mdiAtomVariant",
+    "icon": "$mdiConsole",
     "items": [
       "consulting",
       "enterprise"

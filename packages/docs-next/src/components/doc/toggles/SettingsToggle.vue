@@ -1,7 +1,7 @@
 <template>
   <app-tooltip-btn
     :input-value="settings"
-    icon="$mdiCog"
+    icon="$mdiCogOutline"
     path="settings"
     @click="settings = !settings"
   />

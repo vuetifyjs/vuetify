@@ -81,7 +81,7 @@
     data: () => ({
       apiItems: [],
       icons: {
-        component: '$mdiViewDashboard',
+        component: '$mdiViewDashboardOutline',
         directive: '$mdiFunction',
         functional: '$mdiViewStream',
         grid: '$mdiGrid',

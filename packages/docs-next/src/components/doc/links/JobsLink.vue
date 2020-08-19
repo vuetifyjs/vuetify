@@ -7,7 +7,7 @@
         page: 'for-vue'
       }
     }"
-    icon="$mdiBriefcaseSearch"
+    icon="$mdiBriefcaseSearchOutline"
     path="jobs"
   />
 </template>
