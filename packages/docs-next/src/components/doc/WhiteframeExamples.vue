@@ -42,6 +42,7 @@
         'Inbox',
         'Constrained',
         'Side navigation',
+        'Three column',
       ].map(whiteframe => ([whiteframe, kebabCase(whiteframe)])),
     }),
   }
