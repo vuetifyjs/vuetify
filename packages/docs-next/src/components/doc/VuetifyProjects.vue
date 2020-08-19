@@ -13,7 +13,7 @@
         rel="noopener"
         target="_blank"
       >
-        <app-img
+        <app-figure
           :alt="project.name"
           :name="project.name"
           :src="project.src"

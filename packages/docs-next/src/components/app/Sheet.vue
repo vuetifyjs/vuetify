@@ -3,6 +3,8 @@
     class="overflow-hidden"
     outlined
     rounded
+    v-bind="$attrs"
+    v-on="$listeners"
   >
     <slot />
   </v-sheet>

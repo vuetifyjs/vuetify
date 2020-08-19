@@ -16,9 +16,9 @@
         rel="nofollow noopener"
         target="_blank"
       >
-        <app-img
-          :aspect-ratio="16/9"
+        <app-figure
           :alt="`${name} layout`"
+          :aspect-ratio="16/9"
           :name="name"
           :src="`https://cdn.vuetifyjs.com/docs/images/layouts/${whiteframe}.svg`"
         />
