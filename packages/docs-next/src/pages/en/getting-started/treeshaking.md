@@ -6,7 +6,7 @@ meta:
 related:
   - /getting-started/unit-testing/
   - /customization/presets/
-  - /getting-started/beginners-guide/
+  - /beginners-guide/pre-amble/
 ---
 
 # Treeshaking

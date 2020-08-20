@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Beginner's Guide
+  title: Beginner's Guide pre-amble
   description: Page in Development 🔨. Check back soon for more information.
   keywords: guide, vuetify beginner, starting vuetify, vuetify guide
 related:
@@ -10,7 +10,7 @@ related:
 nav: Guide
 ---
 
-# Beginner's Guide
+# Pre-amble
 
 Page in Development 🔨. Check back soon for more information.
 

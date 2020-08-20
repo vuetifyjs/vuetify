@@ -6,7 +6,7 @@ meta:
 related:
   - /introduction/why-vuetify/
   - /introduction/frequently-asked-questions/
-  - /beginners-guide/guide/
+  - /beginners-guide/pre-amble/
 ---
 
 # Installation
