@@ -196,5 +196,18 @@
     "name": "Blaine Landowski",
     "team": "contributors",
     "twitter": "blalan05"
+  },
+  "avengerweb": {
+    "focus": [
+      "[vuetifyjs/*](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English",
+      "Russian"
+    ],
+    "linkedin": "vshchepotev",
+    "location": "Santa Clara, CA, USA",
+    "name": "Vadim Shchepotev",
+    "team": "contributors"
   }
 }
