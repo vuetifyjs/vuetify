@@ -61,4 +61,4 @@ export default {
       currentPage: 'Cari səhifə, Səhifə {0}',
     },
   },
-};
+}
