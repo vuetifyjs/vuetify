@@ -398,16 +398,15 @@ export default mixins(
       return rows
     },
     genDefaultRows (items: any[], props: DataScopeProps) {
-      return this.$scopedSlots['expanded-item']
-        ? items.map(item => this.genDefaultExpandedRow(item))
-        : items.map(item => this.genDefaultSimpleRow(item))
+      const genRow = this.$scopedSlots['expanded-item'] ? this.genDefaultExpandedRow : this.genDefaultSimpleRow
+      return items.map((item: any, index: number) => genRow(item, index))
     },
-    genDefaultExpandedRow (item: any): VNode {
+    genDefaultExpandedRow (item: any, index: number): VNode {
       const isExpanded = this.isExpanded(item)
       const classes = {
         'v-data-table__expanded v-data-table__expanded__row': isExpanded,
       }
-      const headerRow = this.genDefaultSimpleRow(item, classes)
+      const headerRow = this.genDefaultSimpleRow(item, index, classes)
       const expandedRow = this.$createElement('tr', {
         staticClass: 'v-data-table__expanded v-data-table__expanded__content',
       }, [this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders })])
@@ -421,7 +420,7 @@ export default mixins(
         this.$createElement('template', { slot: 'row.content' }, [expandedRow]),
       ])
     },
-    genDefaultSimpleRow (item: any, classes: Record<string, boolean> = {}): VNode {
+    genDefaultSimpleRow (item: any, index: number, classes: Record<string, boolean> = {}): VNode {
       const scopedSlots = getPrefixedScopedSlots('item.', this.$scopedSlots)
 
       const data = this.createItemProps(item)
@@ -472,9 +471,9 @@ export default mixins(
         on: {
           // TODO: for click, the first argument should be the event, and the second argument should be data,
           // but this is a breaking change so it's for v3
-          click: () => this.$emit('click:row', item, data),
-          contextmenu: (event: MouseEvent) => this.$emit('contextmenu:row', event, data),
-          dblclick: (event: MouseEvent) => this.$emit('dblclick:row', event, data),
+          click: () => this.$emit('click:row', item, data, index),
+          contextmenu: (event: MouseEvent) => this.$emit('contextmenu:row', event, data, index),
+          dblclick: (event: MouseEvent) => this.$emit('dblclick:row', event, data, index),
         },
       })
     },

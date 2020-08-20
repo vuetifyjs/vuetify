@@ -359,6 +359,36 @@ describe('VDataTable.ts', () => {
     expect(fn).toHaveBeenCalled()
   })
 
+  it.each([
+    'click',
+    'contextmenu',
+    'dblclick',
+  ])('should emit event when %sing on a random row with its correct row index', async event => {
+    const eventToEmit = event + ':row'
+    let _event, _data, _index
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+      },
+      listeners: {
+        [eventToEmit]: jest.fn((event, data, index) => {
+          _event = event
+          _data = data
+          _index = index
+        }),
+      },
+    })
+
+    const index = Math.round(Math.random() * (testItems.length - 1))
+    wrapper.findAll('tbody tr').at(index).trigger(event)
+    await wrapper.vm.$nextTick()
+
+    expect(_event).toBeTruthy()
+    expect(_data.item).toStrictEqual(testItems[index])
+    expect(_index).toBe(index)
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/8254
   it('should pass kebab-case footer props correctly', () => {
     const wrapper = mountFunction({
