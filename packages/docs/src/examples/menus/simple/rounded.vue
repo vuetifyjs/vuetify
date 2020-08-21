@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-center align-center">
+  <div class="d-flex flex-column justify-center align-center">
     <v-menu
       v-for="([text, rounded], index) in btns"
       :key="text"
@@ -9,7 +9,7 @@
       <template v-slot:activator="{ attrs, on }">
         <v-btn
           :color="colors[index]"
-          class="white--text ma-8"
+          class="white--text ma-2"
           v-bind="attrs"
           v-on="on"
         >
