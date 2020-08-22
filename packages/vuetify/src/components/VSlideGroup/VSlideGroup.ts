@@ -388,7 +388,7 @@ export const BaseSlideGroup = mixins<options &
         this.scrollIntoView()
       })
     },
-    requestAnimeFrame /* RequestAnimationFrame polyfill */ (callback: FrameRequestCallback) {
+    requestAnimeFrame /* RequestAnimationFrame Polyfill */ (callback: FrameRequestCallback) {
       if (typeof window === 'undefined') {
         return callback
       }
