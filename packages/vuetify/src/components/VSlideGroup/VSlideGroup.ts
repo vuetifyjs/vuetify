@@ -397,14 +397,6 @@ export const BaseSlideGroup = mixins<options &
         })
       }
     },
-    requestAnimeFrame /* RequestAnimationFrame polyfill */ (callback: FrameRequestCallback) {
-      if (typeof window === 'undefined') {
-        return callback
-      }
-      return window.requestAnimationFrame(() => {
-        window.setTimeout(callback, 1000 / 60)
-      })
-    },
   },
   render (h): VNode {
     return h('div', this.genData(), [
