@@ -37,7 +37,7 @@
           dark
           left
         >
-          mdi-minus_circle
+          mdi-minus-circle
         </v-icon>Cancel
       </v-btn>
     </div>
