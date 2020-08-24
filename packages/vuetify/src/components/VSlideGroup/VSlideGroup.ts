@@ -378,15 +378,24 @@ export const BaseSlideGroup = mixins<options &
       }, this.$vuetify.rtl, this.scrollOffset)
     },
     setWidths /* istanbul ignore next */ () {
-      this.requestAnimeFrame(() => {
-        const { content, wrapper } = this.$refs
-        this.widths = {
-          content: content ? content.clientWidth : 0,
-          wrapper: wrapper ? wrapper.clientWidth : 0,
-        }
-        this.isOverflowing = this.widths.wrapper < this.widths.content
-        this.scrollIntoView()
-      })
+      if (typeof window === 'undefined') {
+        setTimeout(() => {
+          this.setWidths()
+        }, 1000)
+      } else {
+        window.requestAnimationFrame(() => {
+          const { content, wrapper } = this.$refs
+
+          this.widths = {
+            content: content ? content.clientWidth : 0,
+            wrapper: wrapper ? wrapper.clientWidth : 0,
+          }
+
+          this.isOverflowing = this.widths.wrapper < this.widths.content
+
+          this.scrollIntoView()
+        })
+      }
     },
     requestAnimeFrame /* RequestAnimationFrame polyfill */ (callback: FrameRequestCallback) {
       if (typeof window === 'undefined') {
