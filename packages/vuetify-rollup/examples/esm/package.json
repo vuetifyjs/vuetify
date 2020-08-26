@@ -7,7 +7,7 @@
   "dependencies": {
     "cross-env": "^7.0.2",
     "http-server": "^0.12.3",
-    "vue": "^3.0.0-beta.14",
+    "vue": "^3.0.0-rc.8",
     "vuetify": "link:../../"
   }
 }

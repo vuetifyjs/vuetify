@@ -17,11 +17,11 @@ const base = {
 }
 
 const createConfig = format => {
-  if (format === 'lib') return createLib('esm')
+  if (format === 'lib') return createLib()
 
   return {
     ...base,
-    input: 'src/full.ts',
+    input: format === 'esm' ? 'src/index.ts' : 'src/cjs.ts',
     output: {
       file: `dist/vuetify.${format}.js`,
       format,
@@ -66,13 +66,13 @@ const createConfig = format => {
   }
 }
 
-const createLib = format => {
+const createLib = () => {
   return {
     ...base,
     input: 'src/index.ts',
     output: {
       dir: 'lib',
-      format,
+      format: 'esm',
     },
     preserveModules: true,
     plugins: [

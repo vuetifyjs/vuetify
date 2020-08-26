@@ -8,13 +8,13 @@
   },
   "dependencies": {
     "core-js": "^3.6.4",
-    "vue": "^3.0.0-beta.1",
+    "vue": "^3.0.0-rc.8",
     "vuetify": "link:../../"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.3.0",
     "@vue/cli-service": "~4.3.0",
-    "@vue/compiler-sfc": "^3.0.0-beta.1",
+    "@vue/compiler-sfc": "^3.0.0-rc.8",
     "vue-cli-plugin-vue-next": "~0.1.2",
     "webpack-bundle-analyzer": "^3.8.0"
   }

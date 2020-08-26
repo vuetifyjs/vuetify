@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import Playground from './Playground.vue'
-import Vuetify from '/src/full.ts'
+import Vuetify from '/src/cjs.ts'
 
 const app = createApp(Playground)
 

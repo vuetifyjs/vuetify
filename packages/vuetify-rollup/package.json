@@ -31,7 +31,7 @@
   },
   "main": "dist/vuetify.cjs.js",
   "module": "dist/vuetify.esm.js",
-  "types": "types/vuetify.d.ts",
+  "types": "dist/vuetify.d.ts",
   "sideEffects": [
     "*.sass",
     "*.scss",
@@ -101,14 +101,14 @@
     "sass": "^1.22.7",
     "ts-jest": "^26.0.0",
     "typescript": "^3.9.3",
-    "vite": "^0.16.12",
-    "vue": "3.0.0-beta.14",
+    "vite": "^1.0.0-rc.4",
+    "vue": "^3.0.0-rc.8",
     "vue-meta": "^2.0.5",
     "vue-router": "^3.0.7",
     "vuetify-loader": "^1.2.2"
   },
   "peerDependencies": {
-    "vue": "^3.0.0-beta.14"
+    "vue": "^3.0.0-rc.8"
   },
   "publishConfig": {
     "access": "public"

@@ -7,7 +7,7 @@ const createDts = () => {
     {
       input: 'src/index.ts',
       output: {
-        dir: 'types',
+        dir: 'lib',
         format: 'es',
       },
       preserveModules: true,
@@ -19,7 +19,7 @@ const createDts = () => {
       ],
     },
     {
-      input: 'types/index.d.ts',
+      input: 'lib/index.d.ts',
       output: {
         file: 'dist/vuetify.d.ts',
         format: 'es',

@@ -1,16 +1,13 @@
 import './VApp.sass'
 
 import { h, defineComponent } from 'vue'
-import { publicComponent } from '../../util/helpers'
 
-const VAppImpl = defineComponent({
+export const VApp = defineComponent({
+  name: 'VApp',
   setup (props, { slots, ...ctx }) {
-    const obj = Object.assign({}, { padding: '10px' })
     return () => h('div', {
       class: 'v-application',
-      styles: obj,
+      style: { padding: '10px' },
     }, [slots.default!()])
   },
 })
-
-export const VApp = publicComponent(VAppImpl)

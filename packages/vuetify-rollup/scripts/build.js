@@ -51,11 +51,28 @@ async function build () {
   // if building a specific format, do not remove dist.
   if (!formats) {
     await fs.remove('./dist')
+    await fs.remove('./lib')
   }
 
   const env =
     (pkg.buildOptions && pkg.buildOptions.env) ||
     (devOnly ? 'development' : 'production')
+
+  if (buildTypes && pkg.types) {
+    console.log()
+    console.log(
+      chalk.bold(chalk.yellow('Rolling up type definitions...')),
+    )
+
+    await execa(
+      'rollup',
+      [
+        '-c',
+        'rollup.types.js',
+      ],
+      { stdio: 'inherit' },
+    )
+  }
 
   await execa(
     'rollup',
@@ -73,57 +90,39 @@ async function build () {
         .filter(Boolean)
         .join(','),
     ].filter(Boolean),
-    { stdio: 'inherit' }
-  )
-
-  if (buildTypes && pkg.types) {
-    console.log()
-    console.log(
-      chalk.bold(chalk.yellow('Rolling up type definitions...'))
-    )
-
-    await execa(
-      'rollup',
-      [
-        '-c',
-        'rollup.types.js',
-      ],
-      { stdio: 'inherit' }
-    )
-
-    //  await fs.remove(`${pkgDir}/types`)
-  }
-}
-
-function checkAllSizes(targets) {
-  if (devOnly) {
-    return
-  }
-  console.log()
-  for (const target of targets) {
-    checkSize(target)
-  }
-  console.log()
-}
-
-function checkSize(target) {
-  const pkgDir = path.resolve(`packages/${target}`)
-  checkFileSize(`${pkgDir}/dist/${target}.global.prod.js`)
-}
-
-function checkFileSize(filePath) {
-  if (!fs.existsSync(filePath)) {
-    return
-  }
-  const file = fs.readFileSync(filePath)
-  const minSize = (file.length / 1024).toFixed(2) + 'kb'
-  const gzipped = gzipSync(file)
-  const gzippedSize = (gzipped.length / 1024).toFixed(2) + 'kb'
-  const compressed = compress(file)
-  const compressedSize = (compressed.length / 1024).toFixed(2) + 'kb'
-  console.log(
-    `${chalk.gray(
-      chalk.bold(path.basename(filePath))
-    )} min:${minSize} / gzip:${gzippedSize} / brotli:${compressedSize}`
+    { stdio: 'inherit' },
   )
 }
+
+// function checkAllSizes (targets) {
+//   if (devOnly) {
+//     return
+//   }
+//   console.log()
+//   for (const target of targets) {
+//     checkSize(target)
+//   }
+//   console.log()
+// }
+
+// function checkSize (target) {
+//   const pkgDir = path.resolve(`packages/${target}`)
+//   checkFileSize(`${pkgDir}/dist/${target}.global.prod.js`)
+// }
+
+// function checkFileSize (filePath) {
+//   if (!fs.existsSync(filePath)) {
+//     return
+//   }
+//   const file = fs.readFileSync(filePath)
+//   const minSize = (file.length / 1024).toFixed(2) + 'kb'
+//   const gzipped = gzipSync(file)
+//   const gzippedSize = (gzipped.length / 1024).toFixed(2) + 'kb'
+//   const compressed = compress(file)
+//   const compressedSize = (compressed.length / 1024).toFixed(2) + 'kb'
+//   console.log(
+//     `${chalk.gray(
+//       chalk.bold(path.basename(filePath)),
+//     )} min:${minSize} / gzip:${gzippedSize} / brotli:${compressedSize}`,
+//   )
+// }

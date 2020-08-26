@@ -1,9 +1,9 @@
 import './VAlert.sass'
 
 import { defineComponent, h } from 'vue'
-import { publicComponent } from '../../util/helpers'
 
-const VAlertImpl = defineComponent({
+export const VAlert = defineComponent({
+  name: 'VAlert',
   props: {
     type: {
       type: String,
@@ -19,5 +19,3 @@ const VAlertImpl = defineComponent({
     }, [context.slots.default!()])
   },
 })
-
-export const VAlert = publicComponent(VAlertImpl)

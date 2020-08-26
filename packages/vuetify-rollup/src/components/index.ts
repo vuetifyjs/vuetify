@@ -1,2 +1,2 @@
-export * from './VApp'
-export * from './VAlert'
+export { VApp } from './VApp'
+export { VAlert } from './VAlert'
