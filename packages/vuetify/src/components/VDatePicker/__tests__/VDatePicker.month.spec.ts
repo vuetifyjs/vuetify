@@ -72,6 +72,30 @@ describe('VDatePicker.ts', () => {
     expect(change).not.toHaveBeenCalled()
   })
 
+  it('should render flat picker', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: '2013-05',
+        flat: true,
+        type: 'month',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render picker with elevation', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: '2013-05',
+        elevation: 15,
+        type: 'month',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should not emit input event on year click if month is not allowed', async () => {
     const cb = jest.fn()
     const wrapper = mountFunction({
@@ -276,22 +300,24 @@ describe('VDatePicker.ts', () => {
   })
 
   it('should emit click/dblclick:month event', async () => {
+    const click = jest.fn()
+    const dblclick = jest.fn()
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05',
         type: 'month',
       },
+      listeners: {
+        'click:month': (value: any, event: any) => click(value, event instanceof Event),
+        'dblclick:month': (value: any, event: any) => dblclick(value, event instanceof Event),
+      },
     })
 
-    const click = jest.fn()
-    wrapper.vm.$on(`click:month`, click)
     wrapper.findAll('.v-date-picker-table--month tbody tr+tr td:first-child button').at(0).trigger('click')
-    expect(click).toHaveBeenCalledWith('2013-04')
+    expect(click).toHaveBeenCalledWith('2013-04', true)
 
-    const dblclick = jest.fn()
-    wrapper.vm.$on(`dblclick:month`, dblclick)
     wrapper.findAll('.v-date-picker-table--month tbody tr+tr td:first-child button').at(0).trigger('dblclick')
-    expect(dblclick).toHaveBeenCalledWith('2013-04')
+    expect(dblclick).toHaveBeenCalledWith('2013-04', true)
   })
 
   it('should handle date range select', async () => {

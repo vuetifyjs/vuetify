@@ -1,4 +1,5 @@
 export { ClickOutside } from './click-outside'
+export { Color } from './color'
 export { Intersect } from './intersect'
 export { Mutate } from './mutate'
 export { Resize } from './resize'

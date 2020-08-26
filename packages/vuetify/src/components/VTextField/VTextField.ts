@@ -346,7 +346,7 @@ export default baseMixins.extend<options>().extend({
           absolute: true,
           color: this.validationState,
           dark: this.dark,
-          disabled: this.disabled,
+          disabled: this.isDisabled,
           focused: !this.isSingle && (this.isFocused || !!this.validationState),
           for: this.computedId,
           left: this.labelPosition.left,
@@ -382,7 +382,7 @@ export default baseMixins.extend<options>().extend({
         attrs: {
           ...this.attrs$,
           autofocus: this.autofocus,
-          disabled: this.disabled,
+          disabled: this.isDisabled,
           id: this.computedId,
           placeholder: this.placeholder,
           readonly: this.readonly,
@@ -431,7 +431,7 @@ export default baseMixins.extend<options>().extend({
       e && this.$nextTick(() => this.$emit('blur', e))
     },
     onClick () {
-      if (this.isFocused || this.disabled || !this.$refs.input) return
+      if (this.isFocused || this.isDisabled || !this.$refs.input) return
 
       this.$refs.input.focus()
     },

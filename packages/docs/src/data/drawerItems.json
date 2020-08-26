@@ -49,6 +49,7 @@
     "icon": "mdi-palette",
     "children": [
       { "text": "cssReset", "to": "css-reset" },
+      { "new": true, "text": "borderRadius", "to": "border-radius" },
       { "text": "colors", "to": "colors" },
       { "text": "content", "to": "content" },
       { "text": "display", "to": "display" },
@@ -56,8 +57,7 @@
       { "text": "flex", "to": "flex" },
       { "text": "float", "to": "float" },
       { "text": "spacing", "to": "spacing" },
-      { "text": "text", "to": "text" },
-      { "text": "typography", "to": "typography" },
+      { "text": "text", "to": "text-and-typography" },
       { "text": "transitions", "to": "transitions" },
       { "text": "scroll", "to": "scroll" }
     ]
@@ -172,7 +172,8 @@
       { "text": "tabs", "to": "tabs" },
       { "text": "timelines", "to": "timelines" },
       { "text": "tooltips", "to": "tooltips" },
-      { "text": "treeview", "to": "treeview" }
+      { "text": "treeview", "to": "treeview" },
+      { "new": true, "text": "virtualScroll", "to": "virtual-scrollers" }
     ]
   },
   {
