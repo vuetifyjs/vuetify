@@ -2,6 +2,7 @@
 const fs = require('fs')
 const { resolve } = require('path')
 const api = require('./api')
+const sassApi = require('./sass-api')
 const genTable = require('../src/util/tables')
 const rimraf = require('rimraf')
 
@@ -37,11 +38,15 @@ function genFooter () {
   return `${footer.join('\n\n')}\n\n`
 }
 
-function createMdFile (component, data) {
+function createMdFile (component, data, locale) {
   let str = ''
 
   str += genFrontMatter(component)
   str += `# ${component} API\n\n`
+
+  if (sassApi[component]) {
+    data.sass = sassApi[component]
+  }
 
   for (const [header, value] of Object.entries(data)) {
     if (header === 'mixins' || !value.length) continue
@@ -49,7 +54,7 @@ function createMdFile (component, data) {
     const headerLine = header === 'sass'
       ? '## SASS Variables\n'
       : `## ${capitalize(header)}\n`
-    const table = genTable(value, header === 'props')
+    const table = genTable(value, locale)
     str += headerLine
     str += table
   }
@@ -60,7 +65,7 @@ function createMdFile (component, data) {
 }
 
 function writeFile (component, locale) {
-  const data = api[locale][component]
+  const data = api[component]
   const folder = `src/api/${locale}`
 
   if (!fs.existsSync(resolve(folder))) {
@@ -69,13 +74,15 @@ function writeFile (component, locale) {
 
   const file = `${folder}/${component}.md`
 
-  fs.writeFileSync(resolve(file), createMdFile(component, data))
+  fs.writeFileSync(resolve(file), createMdFile(component, data, locale))
 }
 
+const generateLocaleList = () => fs.readdirSync(resolve('./src/pages'))
+
 function generateFiles () {
-  const components = Object.keys(api.en)
+  const components = Object.keys(api)
   const files = {}
-  const locales = Object.keys(api)
+  const locales = generateLocaleList()
 
   for (const locale of locales) {
     const pages = {}

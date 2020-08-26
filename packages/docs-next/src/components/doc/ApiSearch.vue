@@ -164,14 +164,22 @@
         const apiItems = []
         for (const api of items) {
           const tables = {}
-          const { [this.locale]: data } = await import(
+          const { [api.text]: apiData } = await import(
             /* webpackChunkName: "api" */
             /* webpackMode: "lazy" */
             '../../../build/api'
           ) || {}
-          for (const [header, value] of Object.entries(data[api.text])) {
+          const { [api.text]: sassApiData } = await import(
+            /* webpackChunkName: "api" */
+            /* webpackMode: "lazy" */
+            '../../../build/sass-api'
+          ) || []
+          if (sassApiData.length) {
+            apiData.sass = sassApiData
+          }
+          for (const [header, value] of Object.entries(apiData)) {
             if (header === 'mixins' || !value.length) continue
-            const table = this.genTable(value)
+            const table = this.genTable(value, this.locale)
             tables[header] = table
           }
           apiItems.push({ ...api, tables })
