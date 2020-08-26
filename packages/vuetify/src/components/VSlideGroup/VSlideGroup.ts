@@ -379,20 +379,18 @@ export const BaseSlideGroup = mixins<options &
     },
     setWidths /* istanbul ignore next */ () {
       if (typeof window === 'undefined') {
+        this.widths = { content: 0, wrapper: 0 }
         setTimeout(() => {
           this.setWidths()
         }, 1000)
-      } else {
+      } else if (this.widths === { content: 0, wrapper: 0 }) {
         window.requestAnimationFrame(() => {
           const { content, wrapper } = this.$refs
-
           this.widths = {
             content: content ? content.clientWidth : 0,
             wrapper: wrapper ? wrapper.clientWidth : 0,
           }
-
           this.isOverflowing = this.widths.wrapper < this.widths.content
-
           this.scrollIntoView()
         })
       }
