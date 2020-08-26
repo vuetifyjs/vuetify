@@ -386,7 +386,7 @@ export default mixins(
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
         rows.push(this.$scopedSlots.item!({
-          ...this.createItemProps(item, i)
+          ...this.createItemProps(item, i),
         }))
 
         if (this.isExpanded(item)) {
