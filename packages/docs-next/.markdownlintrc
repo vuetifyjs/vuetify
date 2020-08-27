@@ -9,13 +9,13 @@
   "MD033": {
     "allowed_elements": [
       "alert",
-      "api-search",
       "app-img",
       "backmatter",
       "become-sponsor",
       "br",
       "breakpoints-table",
       "color-palette",
+      "component-api",
       "consulting-calendar",
       "contribute",
       "discovery-ad",
@@ -31,6 +31,7 @@
       "promoted-ad",
       "random-ad",
       "release-notes",
+      "sass-api",
       "sponsors",
       "sponsored-ad",
       "team-members",

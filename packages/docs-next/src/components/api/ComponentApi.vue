@@ -1,44 +1,11 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <v-autocomplete
+      <api-search
         :items="items"
-        clearable
         :label="$i18n.t('search-api')"
-        multiple
-        prepend-inner-icon="$mdiDatabaseSearch"
-        return-object
-        solo
         @input="genApi"
-      >
-        <template v-slot:selection="{ item, selected }">
-          <v-chip
-            :value="selected"
-            class="white--text"
-            color="primary"
-            label
-          >
-            <v-icon
-              left
-              v-text="item.icon"
-            />
-            <span v-text="item.text" />
-          </v-chip>
-        </template>
-
-        <template v-slot:item="{ attrs, item }">
-          <v-list-item-action>
-            <v-icon v-text="item.icon" />
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title
-              :id="attrs['aria-labelledby']"
-              v-text="item.text"
-            />
-            <v-list-item-subtitle v-text="$i18n.t(item.type)" />
-          </v-list-item-content>
-        </template>
-      </v-autocomplete>
+      />
     </v-col>
     <v-col
       v-for="api in apiItems"
@@ -76,7 +43,7 @@
   import genTable from '@/util/tables'
 
   export default {
-    name: 'ApiSearch',
+    name: 'ComponentApi',
 
     data: () => ({
       apiItems: [],
@@ -87,7 +54,7 @@
         grid: '$mdiGrid',
         transition: '$mdiClockFast',
       },
-      pageTypes: {
+      types: {
         'v-app-bar-nav-icon': 'functional',
         'v-breadcrumbs-divider': 'functional',
         'v-card-actions': 'functional',
@@ -140,7 +107,6 @@
         'v-row': 'grid',
         'v-spacer': 'grid',
       },
-      selected: [],
     }),
 
     computed: {
@@ -151,7 +117,7 @@
         for (const [path, page] of Object.entries(this.pages)) {
           const splitPage = path.split('/')
           if (splitPage.length > 3 && splitPage[2] === 'api') {
-            const pageItem = this.genPageItem(page, splitPage[1])
+            const pageItem = this.genSearchItem(page, splitPage[1])
             apiPages.push(pageItem)
           }
         }
@@ -173,8 +139,8 @@
             /* webpackChunkName: "api" */
             /* webpackMode: "lazy" */
             '../../../build/sass-api'
-          ) || []
-          if (sassApiData.length) {
+          ) || null
+          if (sassApiData) {
             apiData.sass = sassApiData
           }
           for (const [header, value] of Object.entries(apiData)) {
@@ -186,8 +152,8 @@
         }
         this.apiItems = apiItems
       },
-      genPageItem (page, lang) {
-        const type = this.pageTypes[page] || 'component'
+      genSearchItem (page, lang) {
+        const type = this.types[page] || 'component'
         return {
           text: page,
           value: `${lang}/${page}.md`,

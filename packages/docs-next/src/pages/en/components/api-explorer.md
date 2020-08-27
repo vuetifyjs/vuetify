@@ -11,6 +11,6 @@ Quickly search for and navigate all of the components in Material Design spec, p
 
 <entry-ad />
 
-<api-search />
+<component-api />
 
 <backmatter />
