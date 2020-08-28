@@ -18,6 +18,7 @@ describe('VSelect.ts', () => {
     document.body.appendChild(el)
     mountFunction = (options = {}) => {
       return mount(VSelect, {
+        attachToDocument: true,
         // https://github.com/vuejs/vue-test-utils/issues/1130
         sync: false,
         mocks: {
@@ -284,7 +285,6 @@ describe('VSelect.ts', () => {
 
   it('should populate select[multiple=false] when using value as an object', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
       propsData: {
         items: [
           { text: 'foo', value: { id: { subid: 1 } } },

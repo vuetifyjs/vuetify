@@ -14,6 +14,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
       return mount(VTextField, {
+        attachToDocument: true,
         // https://github.com/vuejs/vue-test-utils/issues/1130
         sync: false,
         mocks: {
@@ -290,7 +291,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
         })
       },
     }
-    const wrapper = mount(component)
+    const wrapper = mount(component, { attachToDocument: true })
 
     const input = wrapper.findAll('input').at(0)
 
@@ -401,7 +402,6 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
 
   it('should autofocus', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
       propsData: {
         autofocus: true,
       },
@@ -774,7 +774,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
         })
       },
     }
-    const wrapper = mount(component)
+    const wrapper = mount(component, { attachToDocument: true })
 
     const inputElement = wrapper.findAll('input').at(0)
     const clearIcon = wrapper.find('.v-input__icon--clear .v-icon')

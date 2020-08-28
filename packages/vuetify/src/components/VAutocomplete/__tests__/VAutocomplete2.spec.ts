@@ -17,6 +17,7 @@ describe('VAutocomplete.ts', () => {
 
     mountFunction = (options = {}) => {
       return mount(VAutocomplete, {
+        attachToDocument: true,
         // https://github.com/vuejs/vue-test-utils/issues/1130
         sync: false,
         mocks: {

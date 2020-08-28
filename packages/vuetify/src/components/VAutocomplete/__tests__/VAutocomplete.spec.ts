@@ -17,6 +17,7 @@ describe('VAutocomplete.ts', () => {
 
     mountFunction = (options = {}) => {
       return mount(VAutocomplete, {
+        attachToDocument: true,
         ...options,
         // https://github.com/vuejs/vue-test-utils/issues/1130
         sync: false,
@@ -225,7 +226,6 @@ describe('VAutocomplete.ts', () => {
   // eslint-disable-next-line max-statements
   it.skip('should change selected index', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
       propsData: {
         items: ['foo', 'bar', 'fizz'],
         multiple: true,
@@ -326,7 +326,6 @@ describe('VAutocomplete.ts', () => {
 
   it('should conditionally show the menu', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
       propsData: {
         items: ['foo', 'bar', 'fizz'],
       },

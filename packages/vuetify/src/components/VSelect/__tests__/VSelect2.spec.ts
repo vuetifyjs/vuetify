@@ -20,6 +20,7 @@ describe('VSelect.ts', () => {
     document.body.appendChild(el)
     mountFunction = (options = {}) => {
       return mount(VSelect, {
+        attachToDocument: true,
         // https://github.com/vuejs/vue-test-utils/issues/1130
         sync: false,
         mocks: {
@@ -160,7 +161,6 @@ describe('VSelect.ts', () => {
 
   it('should emit a single change event', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
       propsData: {
         attach: true,
         items: ['foo', 'bar'],
@@ -206,7 +206,6 @@ describe('VSelect.ts', () => {
   // Inspired by https://github.com/vuetifyjs/vuetify/pull/1425 - Thanks @kevmo314
   it('should open the select when focused and enter, space are pressed', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
       propsData: {
         items: ['foo', 'bar'],
       },
@@ -228,7 +227,6 @@ describe('VSelect.ts', () => {
 
   it('should not open the select when readonly and focused and enter, space, up or down are pressed', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
       propsData: {
         items: ['foo', 'bar'],
         readonly: true,
@@ -251,7 +249,6 @@ describe('VSelect.ts', () => {
 
   it('should clear input value', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
       propsData: {
         clearable: true,
         items: ['foo', 'bar'],
@@ -276,7 +273,6 @@ describe('VSelect.ts', () => {
 
   it('should be clearable with prop, dirty and single select', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
       propsData: {
         clearable: true,
         items: [1, 2],
@@ -298,7 +294,6 @@ describe('VSelect.ts', () => {
 
   it('should be clearable with prop, dirty and multi select', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
       propsData: {
         clearable: true,
         items: [1, 2],
@@ -354,7 +349,6 @@ describe('VSelect.ts', () => {
   // #1704
   it('should populate select when using value as an object', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
       propsData: {
         items: [
           { text: 'foo', value: { id: 1 } },
@@ -375,7 +369,6 @@ describe('VSelect.ts', () => {
   // Discovered when working on #1704
   it('should remove item when re-selecting it', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
       propsData: {
         eager: true,
         items: [

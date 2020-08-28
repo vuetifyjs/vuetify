@@ -12,13 +12,15 @@ describe('VTextarea.ts', () => {
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
-      return mount(VTextarea, options)
+      return mount(VTextarea, {
+        attachToDocument: true,
+        ...options,
+      })
     }
   })
 
   it('should calculate element height when using auto-grow prop', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
       propsData: {
         value: '',
         autoGrow: true,
@@ -64,7 +66,6 @@ describe('VTextarea.ts', () => {
     const calculateInputHeight = jest.fn()
 
     mountFunction({
-      attachToDocument: true,
       propsData: {
         autoGrow: true,
       },

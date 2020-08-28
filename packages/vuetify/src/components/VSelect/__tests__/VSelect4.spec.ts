@@ -23,6 +23,7 @@ describe('VSelect.ts', () => {
       document.body.appendChild(el)
 
       return mount(VSelect, {
+        attachToDocument: true,
         // https://github.com/vuejs/vue-test-utils/issues/1130
         sync: false,
         ...options,

@@ -16,6 +16,7 @@ describe('VCombobox.ts', () => {
 
     mountFunction = (options = {}) => {
       return mount(VCombobox, {
+        attachToDocument: true,
         // https://github.com/vuejs/vue-test-utils/issues/1130
         sync: false,
         mocks: {
@@ -52,7 +53,6 @@ describe('VCombobox.ts', () => {
 
   it('should not use search input when blurring', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
       propsData: {
         eager: true,
         items: [1, 12],
@@ -121,7 +121,6 @@ describe('VCombobox.ts', () => {
   // TODO: fails with TS 3.9
   it.skip('should clear value', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
     })
     await wrapper.vm.$nextTick()
 
@@ -156,7 +155,6 @@ describe('VCombobox.ts', () => {
   it('should call methods on blur', async () => {
     const updateCombobox = jest.fn()
     const wrapper = mountFunction({
-      attachToDocument: true,
       methods: {
         updateCombobox,
       },
@@ -203,7 +201,6 @@ describe('VCombobox.ts', () => {
 
   it('should conditionally show the menu', async () => {
     const wrapper = mountFunction({
-      attachToDocument: true,
       propsData: {
         items: ['foo', 'bar', 'fizz'],
         searchInput: 'foobar',

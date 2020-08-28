@@ -17,6 +17,7 @@ describe('VAutocomplete.ts', () => {
 
     mountFunction = (options = {}) => {
       return mount(VAutocomplete, {
+        attachToDocument: true,
         ...options,
         mocks: {
           $vuetify: {
