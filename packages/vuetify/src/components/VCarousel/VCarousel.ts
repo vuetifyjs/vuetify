@@ -12,6 +12,7 @@ import VProgressLinear from '../VProgressLinear'
 // Mixins
 // TODO: Move this into core components v2.0
 import ButtonGroup from '../../mixins/button-group'
+import Themeable from '../../mixins/themeable'
 
 // Utilities
 import { convertToUnit } from '../../util/helpers'
@@ -77,7 +78,7 @@ export default VWindow.extend({
       }
     },
     isDark (): boolean {
-      return this.dark || !this.light
+      return Themeable.options.computed.isDark.call(this)
     },
     isVertical (): boolean {
       return this.verticalDelimiters != null
