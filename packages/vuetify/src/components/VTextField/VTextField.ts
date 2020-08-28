@@ -427,8 +427,8 @@ export default baseMixins.extend<options>().extend({
         ref: type,
       }, this[type])
     },
-    getActiveElement() {
-      return this.$el.getRootNode().activeElement
+    getActiveElement () {
+      return (this.$el.getRootNode() as ShadowRoot | HTMLDocument).activeElement
     },
     onBlur (e?: Event) {
       this.isFocused = false
