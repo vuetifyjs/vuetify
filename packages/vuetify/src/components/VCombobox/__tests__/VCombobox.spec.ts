@@ -120,8 +120,7 @@ describe('VCombobox.ts', () => {
 
   // TODO: fails with TS 3.9
   it.skip('should clear value', async () => {
-    const wrapper = mountFunction({
-    })
+    const wrapper = mountFunction()
     await wrapper.vm.$nextTick()
 
     const change = jest.fn()
