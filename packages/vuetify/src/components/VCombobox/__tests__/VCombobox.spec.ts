@@ -234,6 +234,7 @@ describe('VCombobox.ts', () => {
       { text: 'Vuetify', value: 3 },
     ]
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         items,
       },
