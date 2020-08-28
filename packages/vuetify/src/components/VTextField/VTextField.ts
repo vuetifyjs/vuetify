@@ -428,7 +428,10 @@ export default baseMixins.extend<options>().extend({
       }, this[type])
     },
     getActiveElement () {
-      return (this.$el.getRootNode() as ShadowRoot | HTMLDocument).activeElement
+      const rootNode = this.$el.getRootNode
+        ? this.$el.getRootNode() as ShadowRoot | HTMLDocument
+        : document // IE11
+      return rootNode.activeElement
     },
     onBlur (e?: Event) {
       this.isFocused = false
