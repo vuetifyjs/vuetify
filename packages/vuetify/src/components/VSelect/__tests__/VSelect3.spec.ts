@@ -269,6 +269,7 @@ describe('VSelect.ts', () => {
   it('should use custom clear icon cb', async () => {
     const clearIconCb = jest.fn()
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         clearable: true,
         items: ['foo'],
@@ -350,7 +351,7 @@ describe('VSelect.ts', () => {
 
   // Inspired by https://github.com/vuetifyjs/vuetify/pull/1425 - Thanks @kevmo314
   it('should open the select when focused and enter, space, up or down are pressed', async () => {
-    const wrapper = mountFunction()
+    const wrapper = mountFunction({ attachToDocument: true })
 
     wrapper.vm.hasMouseDown = true
     wrapper.trigger('mouseup')

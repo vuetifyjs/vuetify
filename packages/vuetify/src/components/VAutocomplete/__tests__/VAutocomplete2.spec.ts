@@ -37,6 +37,7 @@ describe('VAutocomplete.ts', () => {
   // https://github.com/vuetifyjs/vuetify/issues/3793
   it('should reset menu index after selection', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         items: ['foo', 'bar'],
         value: 'foo',
@@ -54,6 +55,7 @@ describe('VAutocomplete.ts', () => {
 
   it('should not remove a disabled item', () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         chips: true,
         multiple: true,
@@ -156,6 +158,7 @@ describe('VAutocomplete.ts', () => {
 
   it('should not hide menu when no data but has no-data slot', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         combobox: true,
       },
@@ -172,7 +175,9 @@ describe('VAutocomplete.ts', () => {
 
   // https://github.com/vuetifyjs/vuetify/issues/2834
   it('should not update search if selectedIndex is > -1', () => {
-    const wrapper = mountFunction()
+    const wrapper = mountFunction({
+      attachToDocument: true,
+    })
 
     const input = wrapper.find('input')
     const element = input.element as HTMLInputElement
@@ -198,6 +203,7 @@ describe('VAutocomplete.ts', () => {
 
   it('should clear search input on clear callback', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         clearable: true,
         items: ['foo'],
@@ -278,6 +284,7 @@ describe('VAutocomplete.ts', () => {
 
   it('should not show menu when items are updated and hide-no-data is enabled ', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         hideNoData: true,
         items: ['Something first'],
@@ -345,6 +352,7 @@ describe('VAutocomplete.ts', () => {
 
   it('should auto select first', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         autoSelectFirst: true,
         items: [
@@ -373,6 +381,7 @@ describe('VAutocomplete.ts', () => {
   // https://github.com/vuetifyjs/vuetify/issues/4580
   it('should display menu when hide-no-date and hide-selected are enabled and selected item does not match search', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         items: [1, 2],
         value: 1,
@@ -396,6 +405,7 @@ describe('VAutocomplete.ts', () => {
 
   it('should retain search value when item selected and multiple is enabled', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         items: ['Sandra Adams', 'Ali Connors', 'Trevor Hansen', 'Tucker Smith'],
         multiple: true,
@@ -451,6 +461,7 @@ describe('VAutocomplete.ts', () => {
   it('should not replicate html select hotkeys in v-autocomplete', async () => {
     const onKeyPress = jest.fn()
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         items: ['aaa', 'foo', 'faa'],
       },

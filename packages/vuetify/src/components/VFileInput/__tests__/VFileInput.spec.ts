@@ -120,7 +120,9 @@ describe('VFileInput.ts', () => {
 
   it('should proxy icon and text click to input', () => {
     const fn = jest.fn()
-    const wrapper = mountFunction()
+    const wrapper = mountFunction({
+      attachToDocument: true,
+    })
 
     const input = wrapper.find('input').element
     input.click = fn
@@ -202,6 +204,7 @@ describe('VFileInput.ts', () => {
   it('should not emit change event when blurred', async () => {
     const change = jest.fn()
     const wrapper = mountFunction({
+      attachToDocument: true,
       listeners: {
         change,
       },

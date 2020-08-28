@@ -173,7 +173,9 @@ describe('VCombobox.ts', () => {
   })
 
   it('should emit custom value on blur', async () => {
-    const wrapper = mountFunction()
+    const wrapper = mountFunction({
+      attachToDocument: true,
+    })
 
     const input = wrapper.find('input')
     const element = input.element as HTMLInputElement
@@ -234,6 +236,7 @@ describe('VCombobox.ts', () => {
       { text: 'Vuetify', value: 3 },
     ]
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         items,
       },

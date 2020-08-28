@@ -206,6 +206,7 @@ describe('VAutocomplete.ts', () => {
 
   it('should not display menu when tab focused', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         items: [1, 2],
         value: 1,
@@ -405,7 +406,9 @@ describe('VAutocomplete.ts', () => {
   })
 
   it('should select input text on focus', async () => {
-    const wrapper = mountFunction()
+    const wrapper = mountFunction({
+      attachToDocument: true,
+    })
     const select = jest.fn()
     wrapper.vm.$refs.input.select = select
 

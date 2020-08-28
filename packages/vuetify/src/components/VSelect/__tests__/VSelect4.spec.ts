@@ -62,6 +62,7 @@ describe('VSelect.ts', () => {
   // https://github.com/vuetifyjs/vuetify/issues/4431
   it('should accept null and "" as values', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         clearable: true,
         items: [
@@ -88,6 +89,7 @@ describe('VSelect.ts', () => {
 
   it('should only calls change once when clearing', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         clearable: true,
         items: ['foo'],
@@ -171,6 +173,7 @@ describe('VSelect.ts', () => {
   // https://github.com/vuetifyjs/vuetify/issues/4853
   it('should select item after typing its first few letters', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         items: ['aaa', 'foo', 'faa'],
       },
@@ -192,6 +195,7 @@ describe('VSelect.ts', () => {
   // https://github.com/vuetifyjs/vuetify/issues/10406
   it('should load more items when typing', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         items: Array.from({ length: 24 }, (_, i) => 'Item ' + i).concat('foo'),
       },
@@ -341,6 +345,7 @@ describe('VSelect.ts', () => {
 
   it('should close menu when append icon is clicked', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         items: ['foo', 'bar'],
       },
@@ -359,6 +364,7 @@ describe('VSelect.ts', () => {
 
   it('should open menu when append icon is clicked', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         items: ['foo', 'bar'],
       },
@@ -376,6 +382,7 @@ describe('VSelect.ts', () => {
   // https://github.com/vuetifyjs/vuetify/issues/9960
   it('should not manipulate menu state if is readonly or disabled', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       data: () => ({ hasMouseDown: true }),
       propsData: { readonly: true },
     })

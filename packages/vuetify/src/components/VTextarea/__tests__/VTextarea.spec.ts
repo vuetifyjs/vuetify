@@ -114,7 +114,7 @@ describe('VTextarea.ts', () => {
   })
 
   it('should emit keydown event', () => {
-    const wrapper = mountFunction()
+    const wrapper = mountFunction({ attachToDocument: true })
     const keydown = jest.fn()
     const textarea = wrapper.find('textarea')
     wrapper.vm.$on('keydown', keydown)

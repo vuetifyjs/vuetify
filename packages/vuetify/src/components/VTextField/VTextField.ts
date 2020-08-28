@@ -431,9 +431,6 @@ export default baseMixins.extend<options>().extend({
       if (!this.$el.getRootNode) return document.activeElement // IE11
 
       const rootNode = this.$el.getRootNode()
-
-      if (rootNode === this.$el) return document.activeElement // jest
-
       return (rootNode as ShadowRoot | HTMLDocument).activeElement
     },
     onBlur (e?: Event) {

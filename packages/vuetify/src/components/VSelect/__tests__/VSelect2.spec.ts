@@ -97,6 +97,7 @@ describe('VSelect.ts', () => {
 
   it('should toggle menu on icon click', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         items: ['foo', 'bar'],
         'menu-props': {
@@ -397,6 +398,7 @@ describe('VSelect.ts', () => {
 
   it('should open menu when cleared with open-on-clear', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         clearable: true,
         openOnClear: true,
@@ -417,6 +419,7 @@ describe('VSelect.ts', () => {
   /* eslint-disable-next-line max-statements */
   it('should react to different key down', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         items: [1, 2, 3, 4],
       },
