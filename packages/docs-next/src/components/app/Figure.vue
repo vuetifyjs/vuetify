@@ -2,10 +2,7 @@
   <figure>
     <app-img
       class="mb-3"
-      v-bind="{
-        ...$attrs,
-        ...attrs,
-      }"
+      v-bind="$attrs"
       v-on="$listeners"
     />
 
