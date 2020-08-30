@@ -1,7 +1,8 @@
 <template>
   <v-list-group
+    v-model="model"
     :group="group"
-    :prepend-icon="item.icon"
+    :prepend-icon="icon"
     append-icon="$mdiMenuDown"
     class="v-list-group--default"
     no-action
@@ -48,9 +49,18 @@
       },
     },
 
+    data: () => ({ model: null }),
+
     computed: {
       group () {
         return this.genGroup(this.item.items)
+      },
+      icon () {
+        if (!this.item.icon) return undefined
+
+        const [off, on] = this.item.icon.split(':')
+
+        return this.model ? (on || off) : off
       },
     },
 
