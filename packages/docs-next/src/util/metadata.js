@@ -1,3 +1,6 @@
+// Globals
+import { IN_BROWSER } from '@/util/globals'
+
 export function genTwitterMetaInfo () {
   return parseMetaData('twitter', {
     domain: 'https://vuetifyjs.com/',
@@ -12,7 +15,7 @@ export function genOpenGraphMetaInfo (args) {
     site_name: 'Vuetify.js',
     title: args.title,
     type: 'website',
-    url: window.location.href,
+    url: IN_BROWSER ? window.location.href : '',
   })
 }
 

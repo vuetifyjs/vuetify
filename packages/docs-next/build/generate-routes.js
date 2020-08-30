@@ -1,14 +1,17 @@
-const path = require('path')
-const glob = require('glob')
 const { kebabCase } = require('lodash')
-
+const glob = require('glob')
+const path = require('path')
 const resolve = file => path.resolve(__dirname, file)
-
-const DATA_PATH_DOC_FILES = resolve('../src/pages/en/**/*.md')
 const DATA_PATH_API_FILES = resolve('../src/api/en/*.md')
-const languages = require('../src/i18n/locales')
-  .map(lang => lang.locale)
-  .filter(lang => lang !== 'eo-UY')
+const DATA_PATH_DOC_FILES = resolve('../src/pages/en/**/*.md')
+
+require('dotenv').config({ path: resolve('../.env.local') })
+
+const languages = process.env.EN_LOCALE_ONLY === 'true'
+  ? ['en']
+  : require('../src/i18n/locales')
+      .map(lang => lang.locale)
+      .filter(lang => lang !== 'eo-UY')
 
 function genRoutes (data, prefix) {
   const files = glob.sync(data)
@@ -23,7 +26,7 @@ function genRoutes (data, prefix) {
       .join('/')
 
     if (route === 'home') continue
-    paths.push(`/${prefix}${route}`)
+    paths.push(`/${prefix}${route}/`)
   }
 
   return paths
@@ -39,7 +42,7 @@ function genDemos () {
       .pop()
       .replace(/\.vue$/, '')
 
-    paths.push(`/examples/whiteframes/${route}`)
+    paths.push(`/examples/whiteframes/${route}/`)
   }
 
   return paths

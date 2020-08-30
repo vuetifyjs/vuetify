@@ -24,6 +24,9 @@
 </template>
 
 <script>
+  // Utilities
+  import { rpath } from '@/util/routes'
+
   export default {
     name: 'AppLink',
 
@@ -40,7 +43,7 @@
       attrs () {
         return this.isExternal
           ? { href: this.href, target: '_blank', rel: 'noopener' }
-          : { to: this.href }
+          : { to: { path: rpath(this.href) } }
       },
       component () {
         return !this.isExternal ? 'router-link' : 'a'

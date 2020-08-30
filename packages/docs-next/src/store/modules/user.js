@@ -25,6 +25,8 @@ const mutations = make.mutations(state)
 
 const actions = {
   fetch: async ({ commit }) => {
+    if (!IN_BROWSER) return
+
     const local = localStorage.getItem('vuetify@user') || '{}'
     const user = JSON.parse(local)
 

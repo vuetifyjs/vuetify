@@ -9,6 +9,7 @@
 <script>
   // Utilities
   import { sync } from 'vuex-pathify'
+  import { IN_BROWSER } from '@/util/globals'
 
   export default {
     name: 'SearchToggle',
@@ -17,7 +18,7 @@
 
     watch: {
       async search (val) {
-        if (!val) return
+        if (!val || !IN_BROWSER) return
 
         const search = document.getElementById('doc-search')
 

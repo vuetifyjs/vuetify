@@ -5,6 +5,7 @@
 <script>
   // Utilities
   import { wait } from '@/util/helpers'
+  import { IN_BROWSER } from '@/util/globals'
 
   export default {
     name: 'AdScript',
@@ -27,6 +28,8 @@
     data: () => ({ script: null }),
 
     async created () {
+      if (!IN_BROWSER) return
+
       const script = document.createElement('script')
       const onError = () => this.$emit('script:error')
 

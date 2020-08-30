@@ -8,6 +8,7 @@
 
   // Utilities
   import { get } from 'vuex-pathify'
+  import { IN_BROWSER } from '@/util/globals'
 
   export default {
     name: 'LocaleLayout',
@@ -15,7 +16,7 @@
     computed: { translating: get('pages/translating') },
 
     created () {
-      if (!this.translating) return
+      if (!IN_BROWSER || !this.translating) return
 
       const crowdin = document.createElement('script')
 

@@ -1,11 +1,9 @@
-/* eslint-disable no-console */
-// Imports
-import { register } from 'register-service-worker'
-
 // Globals
-import { IS_PROD } from './util/globals'
+const { IS_PROD, IN_BROWSER } = require('./util/globals')
 
-if (IS_PROD) {
+if (IS_PROD && IN_BROWSER) {
+  const { register } = require('register-service-worker')
+
   register(`${process.env.BASE_URL}service-worker.js`, {
     ready () {
       console.log(

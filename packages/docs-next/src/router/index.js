@@ -5,14 +5,14 @@ import Vue from 'vue'
 import VueGtag from 'vue-gtag'
 
 // Globals
-import { IS_PROD } from '@/util/globals'
+import { IS_PROD, IS_SERVER } from '@/util/globals'
 
-import { trailingSlash } from '@/util/helpers'
 import {
   abort,
   locale,
   layout,
   route,
+  rpath,
   redirect,
 } from '@/util/routes'
 
@@ -28,21 +28,15 @@ export function createRouter (vuetify, store, i18n) {
     routes: [
       locale([
         layout('Home', [route('Home')]),
-
-        route('Whiteframes', null, 'examples/whiteframes/:whiteframe'),
-
-        layout('Default', [
-          route('Documentation'),
-        ], ':category/:page'),
-
-        layout('Default', [abort()], '*'),
+        layout('Default', [route('Documentation')], ':category/:page/'),
+        route('Whiteframes', 'examples/whiteframes/:whiteframe/'),
+        layout('Default', [abort()]),
       ]),
-
       // Redirect for language fallback
       redirect('/:locale(%s)/*', to => to.params.pathMatch),
       // The previous one doesn't match if there's no slash after the language code
       redirect('/:locale(%s)'),
-      redirect(to => to.path),
+      redirect(),
     ],
   })
 
@@ -63,8 +57,8 @@ export function createRouter (vuetify, store, i18n) {
     })
   }
 
-  router.beforeEach((to, from, next) => {
-    return to.path.endsWith('/') ? next() : next(trailingSlash(to.path))
+  router.beforeEach(({ path }, from, next) => {
+    return path.endsWith('/') ? next() : next(rpath(path))
   })
 
   router.beforeEach((to, _, next) => {
@@ -72,7 +66,7 @@ export function createRouter (vuetify, store, i18n) {
   })
 
   Vue.use(VueGtag, {
-    bootstrap: IS_PROD,
+    bootstrap: IS_PROD && !IS_SERVER,
     config: { id: 'UA-75262397-3' },
   }, router)
 

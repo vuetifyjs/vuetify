@@ -1,7 +1,6 @@
 // Imports
 import locales from '@/i18n/locales'
 import { kebabCase } from 'lodash'
-import { leadingSlash, trailingSlash } from '@/util/helpers'
 
 // Globals
 import { IN_BROWSER } from '@/util/globals'
@@ -26,20 +25,20 @@ export function error (code = 404) {
   )
 }
 
-export function layout (layout = 'Default', children, path = '') {
-  const dir = kebabCase(layout)
+export function layout (name = 'Default', children = [], path = '') {
+  const dir = kebabCase(name)
 
   return {
     children,
     component: () => import(
       /* webpackChunkName: "layout-[request]" */
-      `@/layouts/${dir}/${layout}`
+      `@/layouts/${dir}/${name}`
     ),
     path,
   }
 }
 
-export function locale (children = []) {
+export function locale (children) {
   return layout(
     'Locale',
     children,
@@ -66,44 +65,37 @@ export function redirect (
   rhandler,
   fallback = fallbackLocale,
 ) {
-  if (typeof path === 'function') {
-    rhandler = path
-    path = '*'
+  if (typeof rhandler !== 'function') {
+    rhandler = to => to.path
   }
 
   path = path.replace('%s', fallback)
 
   return {
     path,
-    redirect: to => {
-      const locale = preferredLocale()
-      const rpath = rhandler(to)
-      const url = rpath !== ''
-        ? leadingSlash(trailingSlash(rpath))
-        : rpath
-
-      return `/${locale}${url}`
-    },
+    redirect: to => rpath(rhandler(to)),
   }
 }
 
-export function route (name, component, path = '') {
-  component = Object(component) === component
-    ? component
-    : { default: name }
+export function rpath (path = '') {
+  const locale = preferredLocale()
 
-  const components = {}
+  const route = [
+    locale,
+    ...path.split('/').filter(p => !!p && p !== locale),
+  ]
 
-  for (const [key, value] of Object.entries(component)) {
-    components[key] = () => import(
-      /* webpackChunkName: "views-[request]" */
-      `@/views/${value}`
-    )
-  }
+  return `/${route.join('/')}/`
+}
 
+export function route (name, path = '', strict = true) {
   return {
     name,
-    components,
+    component: () => import(
+      /* webpackChunkName: "views-[request]" */
+      `@/views/${name}`
+    ),
     path,
+    pathToRegexpOptions: { strict },
   }
 }

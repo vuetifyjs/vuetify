@@ -32,6 +32,8 @@
 </template>
 
 <script>
+  import { IN_BROWSER } from '@/util/globals'
+
   // This behavior should be easier to do with solo fields
   // TODO: Review this for v3
   export default {
@@ -81,7 +83,9 @@
       },
     },
 
-    mounted () {
+    async mounted () {
+      if (!IN_BROWSER) return
+
       document.onkeydown = e => {
         e = e || window.event
 
@@ -102,11 +106,13 @@
       )
       import(
         /* webpackChunkName: "docsearch" */
-        'docsearch.js'
+        'docsearch.js/dist/cdn/docsearch.min.js'
       ).then(this.init)
     },
 
     beforeDestroy () {
+      if (IN_BROWSER) return
+
       document.onkeydown = null
 
       this.docSearch.autocomplete.autocomplete.close()

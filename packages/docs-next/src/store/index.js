@@ -7,6 +7,9 @@ import pwaEvents from '@/plugins/pwa-events'
 // Modules
 import * as modules from './modules'
 
+// Globals
+import { IS_SERVER } from '@/util/globals'
+
 Vue.use(Vuex)
 
 export function createStore () {
@@ -24,7 +27,9 @@ export function createStore () {
     store.dispatch('user/update', mutation)
   })
 
-  store.dispatch('app/init')
+  if (!IS_SERVER) {
+    store.dispatch('app/init')
+  }
 
   return store
 }

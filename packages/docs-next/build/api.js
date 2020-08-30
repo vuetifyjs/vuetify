@@ -32632,7 +32632,7 @@ module.exports = {
     ],
     mixins: [],
   },
-  $vuetify: {
+  vuetify: {
     functions: [
       {
         name: 'goTo',

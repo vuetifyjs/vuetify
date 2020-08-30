@@ -19,6 +19,7 @@
 <script>
   // Utilities
   import { wait } from '@/util/helpers'
+  import { IN_BROWSER } from '@/util/globals'
 
   export default {
     name: 'AppCopyBtn',
@@ -37,6 +38,8 @@
 
     methods: {
       async copy () {
+        if (!IN_BROWSER) return
+
         const el = this.target()
 
         el.setAttribute('contenteditable', 'true')
