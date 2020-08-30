@@ -1,5 +1,8 @@
 <template>
-  <v-container fluid style="height: 300px">
+  <v-container
+    fluid
+    style="height: 300px"
+  >
     <v-row justify="center">
       <v-menu
         bottom
