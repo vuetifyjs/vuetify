@@ -55,6 +55,10 @@ Combining an avatar with other components allows you to build beautiful user int
 
 <example file="v-avatar/misc-advanced" />
 
+Another example combining avatar with menu.
+
+<example file="v-avatar/misc-avatar-menu" />
+
 #### Profile Card
 
 Using the **tile** prop, we can create a sleek hard-lined profile card.
