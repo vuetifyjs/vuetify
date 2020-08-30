@@ -21,7 +21,7 @@
           {{ newJobs.length }}
         </template>
 
-        <v-icon v-text="'$mdiBriefcaseSearchOutline'" />
+        <v-icon v-text="icon" />
       </v-badge>
     </template>
   </app-tooltip-btn>
@@ -36,6 +36,12 @@
 
     computed: {
       newJobs: get('jobs/newJobs'),
+      page: get('route/params@page'),
+      icon () {
+        return this.page === 'jobs-for-vue'
+          ? '$mdiBriefcaseVariant'
+          : '$mdiBriefcaseVariantOutline'
+      },
     },
   }
 </script>
