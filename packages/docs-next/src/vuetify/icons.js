@@ -2,6 +2,7 @@
 import {
   mdiAccount,
   mdiAlertCircle,
+  mdiAlertCircleOutline,
   mdiAlphaA,
   mdiAlphaB,
   mdiAlphaC,
@@ -105,6 +106,7 @@ import {
   mdiTagOutline,
   mdiTelevision,
   mdiTextBoxSearch,
+  mdiTextBoxSearchOutline,
   mdiThemeLightDark,
   mdiTranslate,
   mdiTwitter,
@@ -120,6 +122,7 @@ export const icons = {
   values: {
     mdiAccount,
     mdiAlertCircle,
+    mdiAlertCircleOutline,
     mdiAlphaA,
     mdiAlphaB,
     mdiAlphaC,
@@ -223,6 +226,7 @@ export const icons = {
     mdiTagOutline,
     mdiTelevision,
     mdiTextBoxSearch,
+    mdiTextBoxSearchOutline,
     mdiThemeLightDark,
     mdiTranslate,
     mdiTwitter,

@@ -4,10 +4,10 @@
     ref="search"
     v-model="search"
     :background-color="(!theme.isDark && !isFocused) ? 'grey lighten-3' : undefined"
-    :class="isSearching ? 'rounded-b-0' : ''"
+    :class="isSearching ? 'rounded-b-0' : ' rounded-lg'"
     :flat="!isFocused && !isSearching"
     :placeholder="placeholder"
-    class="doc-search mx-2 mx-md-4"
+    class="mx-2 mx-md-4"
     dense
     hide-details
     solo
@@ -23,7 +23,7 @@
     >
       <v-icon
         :color="!isFocused ? 'grey' : undefined"
-        class="mr-2"
+        class="ml-1 mr-2"
       >
         $mdiMagnify
       </v-icon>
@@ -204,8 +204,6 @@
 
       a
         text-decoration: none !important
-    .doc-search
-      border-radius: 8px
 
     &.theme--dark
       color: white
