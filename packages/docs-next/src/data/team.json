@@ -222,5 +222,19 @@
     "location": "Singapore",
     "name": "Ruan Yiping",
     "team": "contributors"
+  },
+  "Mert75": {
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)",
+      "[vuetifyjs/vue-cli-plugins](https://github.com/vuetifyjs/vue-cli-plugins)"
+    ],
+    "languages": [
+      "English",
+      "Dutch"
+    ],
+    "linkedin": "m-polat",
+    "location": "The Netherlands",
+    "name": "Mert Polat",
+    "team": "contributors"
   }
 }
