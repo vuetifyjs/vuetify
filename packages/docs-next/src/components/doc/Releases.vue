@@ -131,7 +131,6 @@
 <script>
   // Utilities
   import { get } from 'vuex-pathify'
-  import { wait } from '@/util/helpers'
 
   export default {
     name: 'Releases',
