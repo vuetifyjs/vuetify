@@ -1,9 +1,10 @@
 <template>
   <v-container
-    class="fill-height align-start py-12"
+    class="fill-height mt-n16 px-0"
+    fluid
     tag="section"
   >
-    <v-row>
+    <v-row no-gutters>
       <v-col cols="12">
         <component :is="component" />
       </v-col>
@@ -33,6 +34,7 @@
 
 <style lang="sass">
   #material-design-framework
-    > h1 > a
-      display: none
+    h1, h2, h3, h4, h5, h6
+      > a
+        display: none
 </style>
