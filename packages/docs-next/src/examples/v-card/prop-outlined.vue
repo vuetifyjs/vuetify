@@ -23,10 +23,11 @@
     </v-list-item>
 
     <v-card-actions>
-      <v-btn text>
-        Button
-      </v-btn>
-      <v-btn text>
+      <v-btn
+        outlined
+        rounded
+        text
+      >
         Button
       </v-btn>
     </v-card-actions>

@@ -17,12 +17,8 @@
     </v-card-subtitle>
 
     <v-card-actions>
-      <v-btn text>
-        Share
-      </v-btn>
-
       <v-btn
-        color="purple"
+        color="orange lighten-2"
         text
       >
         Explore

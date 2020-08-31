@@ -12,6 +12,10 @@
         <v-card-text>
           Greyhound divisively hello coldly wonderfully marginally far upon excluding.
         </v-card-text>
+
+        <v-card-actions>
+          Card actions
+        </v-card-actions>
       </v-card>
     </v-row>
   </v-container>
@@ -29,6 +33,7 @@
         elevation: 2,
         loading: false,
         outlined: false,
+        ripple: false,
         shaped: false,
         tile: false,
       },
@@ -36,7 +41,7 @@
         booleans: ['disabled', 'loading'],
         sliders: { elevation: [0, 24] },
       },
-      tabs: ['outlined', 'shaped', 'tile'],
+      tabs: ['outlined', 'ripple', 'shaped', 'tile'],
     }),
   }
 </script>
