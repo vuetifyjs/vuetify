@@ -23,18 +23,18 @@ Vuetify comes with over 10 custom css animations that can be applied to numerous
 
 ## API
 
-- [v-fab-transition](../../api/v-fab-transition)
-- [v-fade-transition](../../api/v-fade-transition)
-- [v-expand-transition](../../api/v-expand-transition)
-- [v-scale-transition](../../api/v-scale-transition)
-- [v-scroll-x-transition](../../api/v-scroll-x-transition)
-- [v-scroll-x-reverse-transition](../../api/v-scroll-x-reverse-transition)
-- [v-scroll-y-transition](../../api/v-scroll-y-transition)
-- [v-scroll-y-reverse-transition](../../api/v-scroll-y-reverse-transition)
-- [v-slide-x-transition](../../api/v-slide-x-transition)
-- [v-slide-x-reverse-transition](../../api/v-slide-x-reverse-transition)
-- [v-slide-y-transition](../../api/v-slide-y-transition)
-- [v-slide-y-reverse-transition](../../api/v-slide-y-reverse-transition)
+- [v-fab-transition](/api/v-fab-transition)
+- [v-fade-transition](/api/v-fade-transition)
+- [v-expand-transition](/api/v-expand-transition)
+- [v-scale-transition](/api/v-scale-transition)
+- [v-scroll-x-transition](/api/v-scroll-x-transition)
+- [v-scroll-x-reverse-transition](/api/v-scroll-x-reverse-transition)
+- [v-scroll-y-transition](/api/v-scroll-y-transition)
+- [v-scroll-y-reverse-transition](/api/v-scroll-y-reverse-transition)
+- [v-slide-x-transition](/api/v-slide-x-transition)
+- [v-slide-x-reverse-transition](/api/v-slide-x-reverse-transition)
+- [v-slide-y-transition](/api/v-slide-y-transition)
+- [v-slide-y-reverse-transition](/api/v-slide-y-reverse-transition)
 
 ## Examples
 

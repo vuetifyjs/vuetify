@@ -23,7 +23,7 @@ The `v-sheet` component is a transformable piece of _paper_ that provides a basi
 
 ## API
 
-- [v-sheet](../../api/v-sheet)
+- [v-sheet](/api/v-sheet)
 
 ## Examples
 

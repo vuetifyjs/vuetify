@@ -23,7 +23,7 @@ Pagination by default displays the number of pages based on the set **length** p
 
 ## API
 
-- [v-pagination](../../api/v-pagination)
+- [v-pagination](/api/v-pagination)
 
 ## Examples
 

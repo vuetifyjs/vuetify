@@ -23,7 +23,7 @@ Badges in their simplest form display to the upper right of the content that it 
 
 ## API
 
-- [v-badge](../../api/v-badge)
+- [v-badge](/api/v-badge)
 
 ## Examples
 

@@ -363,7 +363,7 @@ The Vuetify theme system is propagated through the [provide](https://vuejs.org/v
 
 ### API
 
-* [v-theme-provider](../../api/v-theme-provider)
+* [v-theme-provider](/api/v-theme-provider)
 
 ### Example
 

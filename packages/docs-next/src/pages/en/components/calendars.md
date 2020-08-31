@@ -23,10 +23,10 @@ A calendar has a type and a value which determines what type of calendar is show
 
 ## API
 
-- [v-calendar](../../api/v-calendar)
-- [v-calendar-daily](../../api/v-calendar-daily)
-- [v-calendar-monthly](../../api/v-calendar-monthly)
-- [v-calendar-weekly](../../api/v-calendar-weekly)
+- [v-calendar](/api/v-calendar)
+- [v-calendar-daily](/api/v-calendar-daily)
+- [v-calendar-monthly](/api/v-calendar-monthly)
+- [v-calendar-weekly](/api/v-calendar-weekly)
 
 ## Sub-components
 

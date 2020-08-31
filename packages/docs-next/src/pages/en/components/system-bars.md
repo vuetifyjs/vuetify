@@ -23,7 +23,7 @@ The `v-system-bar` component can be used for displaying statuses to the user. It
 
 ## API
 
-- [v-system-bar](../../api/v-system-bar)
+- [v-system-bar](/api/v-system-bar)
 
 ## Examples
 

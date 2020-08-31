@@ -23,7 +23,7 @@ The virtual scroller displays just enough records to fill the viewport and uses 
 
 ## API
 
-- [v-virtual-scroller](../../api/v-virtual-scroller)
+- [v-virtual-scroller](/api/v-virtual-scroller)
 
 ## Caveats
 

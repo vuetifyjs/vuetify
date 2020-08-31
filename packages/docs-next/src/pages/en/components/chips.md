@@ -23,7 +23,7 @@ Chips come in the following variations: closeable, filter, outlined, pill. The d
 
 ## API
 
-- [v-chip](../../api/v-chip)
+- [v-chip](/api/v-chip)
 
 ## Examples
 

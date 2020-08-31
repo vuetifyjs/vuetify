@@ -23,8 +23,8 @@ Buttons in their simplest form contain uppercase text, a slight elevation, hover
 
 ## API
 
-- [v-btn](../../api/v-btn)
-- [v-btn-toggle](../../api/v-btn-toggle)
+- [v-btn](/api/v-btn)
+- [v-btn-toggle](/api/v-btn-toggle)
 
 ## Caveats
 

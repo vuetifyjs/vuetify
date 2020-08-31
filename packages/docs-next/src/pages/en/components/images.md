@@ -23,7 +23,7 @@ The `v-img` component is packed with features to support rich media. Combined wi
 
 ## API
 
-- [v-img](../../api/v-img)
+- [v-img](/api/v-img)
 
 ## Caveats
 

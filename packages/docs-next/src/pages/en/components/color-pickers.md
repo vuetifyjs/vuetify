@@ -21,7 +21,7 @@ The `v-color-picker` allows you to select a color using a variety of input metho
 
 ## API
 
-- [v-color-picker](../../api/v-color-picker)
+- [v-color-picker](/api/v-color-picker)
 
 ## Examples
 

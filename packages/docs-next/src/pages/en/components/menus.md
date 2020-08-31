@@ -23,7 +23,7 @@ Remember to put the element that activates the menu in the `activator` slot.
 
 ## API
 
-- [v-menu](../../api/v-menu)
+- [v-menu](/api/v-menu)
 
 ## Examples
 

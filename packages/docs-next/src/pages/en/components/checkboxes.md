@@ -22,8 +22,8 @@ A `v-checkbox` in its simplest form provides a toggle between 2 values.
 
 ## API
 
-- [v-checkbox](../../api/v-checkbox)
-- [v-simple-checkbox](../../api/v-simple-checkbox)
+- [v-checkbox](/api/v-checkbox)
+- [v-simple-checkbox](/api/v-simple-checkbox)
 
 ## Examples
 

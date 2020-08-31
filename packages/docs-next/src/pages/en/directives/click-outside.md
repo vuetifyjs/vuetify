@@ -23,7 +23,7 @@ The `v-click-outside` directive allows you to provide a handler to be invoked wh
 
 ## API
 
-- [v-click-outside](../../api/v-click-outside)
+- [v-click-outside](/api/v-click-outside)
 
 ## Examples
 

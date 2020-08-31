@@ -23,7 +23,7 @@ The `v-input` component gives you a baseline to create your own custom inputs. I
 
 ## API
 
-- [v-input](../../api/v-input)
+- [v-input](/api/v-input)
 
 ## Caveats
 

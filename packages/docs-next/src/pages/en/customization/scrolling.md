@@ -22,7 +22,7 @@ The **goTo** method takes two parameters **target** and **options**. **target** 
 
 ## API
 
-- [$vuetify](../../api/$vuetify)
+- [$vuetify](/api/$vuetify)
 
 ## Use with router
 

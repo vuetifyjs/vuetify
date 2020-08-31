@@ -23,7 +23,7 @@ The `v-rating` component provides a simple interface for gathering user feedback
 
 ## API
 
-- [v-rating](../../api/v-rating)
+- [v-rating](/api/v-rating)
 
 ## Examples
 

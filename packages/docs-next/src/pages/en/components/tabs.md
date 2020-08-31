@@ -23,11 +23,11 @@ The `v-tabs` component is a styled extension of [v-item-group](/components/item-
 
 ## API
 
-- [v-tabs](../../api/v-tabs)
-- [v-tab](../../api/v-tab)
-- [v-tab-item](../../api/v-tab-item)
-- [v-tabs-items](../../api/v-tabs-items)
-- [v-tabs-slider](../../api/v-tabs-slider)
+- [v-tabs](/api/v-tabs)
+- [v-tab](/api/v-tab)
+- [v-tab-item](/api/v-tab-item)
+- [v-tabs-items](/api/v-tabs-items)
+- [v-tabs-slider](/api/v-tabs-slider)
 
 ## Sub-components
 

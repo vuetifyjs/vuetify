@@ -23,8 +23,8 @@ By default, breadcrumbs use a text divider. This can be any string.
 
 ## API
 
-- [v-breadcrumbs](../../api/v-breadcrumbs)
-- [v-breadcrumbs-item](../../api/v-breadcrumbs-item)
+- [v-breadcrumbs](/api/v-breadcrumbs)
+- [v-breadcrumbs-item](/api/v-breadcrumbs-item)
 
 ## Sub-components
 

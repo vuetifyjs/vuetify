@@ -23,7 +23,7 @@ The `v-skeleton-loader` component provides a user with a visual indicator that c
 
 ## API
 
-- [v-skeleton-loader](../../api/v-skeleton-loader)
+- [v-skeleton-loader](/api/v-skeleton-loader)
 
 ## Examples
 

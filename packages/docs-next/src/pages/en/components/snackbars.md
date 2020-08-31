@@ -23,7 +23,7 @@ a `v-snackbar` in its simplest form displays a temporary and closable notificati
 
 ## API
 
-- [v-snackbar](../../api/v-snackbar)
+- [v-snackbar](/api/v-snackbar)
 
 ## Examples
 

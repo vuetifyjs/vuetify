@@ -92,7 +92,7 @@ export default new Vuetify({
 
 ## API
 
-- [internationalization](../../api/internationalization)
+- [internationalization](/api/internationalization)
 
 ## Caveats
 

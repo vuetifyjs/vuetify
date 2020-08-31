@@ -23,8 +23,8 @@ The core usage of the `v-item-group` is to create groups of anything that should
 
 ## API
 
-- [v-item](../../api/v-item)
-- [v-item-group](../../api/v-item-group)
+- [v-item](/api/v-item)
+- [v-item-group](/api/v-item-group)
 
 ## Sub-components
 

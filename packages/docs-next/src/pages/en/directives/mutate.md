@@ -23,7 +23,7 @@ By default the `v-mutate` directive will enable all available options in the [Mu
 
 ## API
 
-- [v-mutate](../../api/v-mutate)
+- [v-mutate](/api/v-mutate)
 
 ## Examples
 

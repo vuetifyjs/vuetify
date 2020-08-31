@@ -23,7 +23,7 @@ A parallax causes a shift in a background image when the user scrolls the page.
 
 ## API
 
-- [v-parallax](../../api/v-parallax)
+- [v-parallax](/api/v-parallax)
 
 ## Examples
 

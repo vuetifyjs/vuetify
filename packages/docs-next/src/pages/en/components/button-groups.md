@@ -23,8 +23,8 @@ Toggle buttons allow you to create a styled group of buttons that can selected o
 
 ## API
 
-- [v-btn-toggle](../../api/v-btn-toggle)
-- [v-btn](../../api/v-btn)
+- [v-btn-toggle](/api/v-btn-toggle)
+- [v-btn](/api/v-btn)
 
 ## Examples
 

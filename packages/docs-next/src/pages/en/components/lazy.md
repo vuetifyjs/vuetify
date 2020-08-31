@@ -23,7 +23,7 @@ The `v-lazy` component by default will not render its contents until it has been
 
 ## API
 
-- [v-lazy](../../api/v-lazy)
+- [v-lazy](/api/v-lazy)
 
 ## Caveats
 

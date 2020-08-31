@@ -23,7 +23,7 @@ In its simplest form, `v-progress-linear` displays a horizontal progress bar. Us
 
 ## API
 
-- [v-progress-linear](../../api/v-progress-linear)
+- [v-progress-linear](/api/v-progress-linear)
 
 ## Examples
 

@@ -22,7 +22,7 @@ The default behavior is to bind to the window. If no additional configuration op
 
 ## API
 
-- [v-scroll](../../api/v-scroll)
+- [v-scroll](/api/v-scroll)
 
 ## Examples
 

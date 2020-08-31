@@ -23,7 +23,7 @@ A dialog contains two slots, one for its activator and one for its content (defa
 
 ## API
 
-- [v-dialog](../../api/v-dialog)
+- [v-dialog](/api/v-dialog)
 
 ## Examples
 

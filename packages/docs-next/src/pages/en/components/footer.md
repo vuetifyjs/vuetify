@@ -23,7 +23,7 @@ The `v-footer` component in its simplest form is a container.
 
 ## API
 
-- [v-footer](../../api/v-footer)
+- [v-footer](/api/v-footer)
 
 ## Examples
 

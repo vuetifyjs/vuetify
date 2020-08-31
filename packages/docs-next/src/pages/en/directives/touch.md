@@ -21,6 +21,6 @@ On a mobile device, try swiping in various directions.
 
 ## API
 
-- [v-touch](../../api/v-touch)
+- [v-touch](/api/v-touch)
 
 <backmatter />

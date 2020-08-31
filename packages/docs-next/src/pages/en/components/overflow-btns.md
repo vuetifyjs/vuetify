@@ -23,7 +23,7 @@ related:
 
 ## API
 
-- [v-overflow-btn](../../api/v-overflow-btn)
+- [v-overflow-btn](/api/v-overflow-btn)
 
 ## Examples
 

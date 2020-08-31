@@ -25,10 +25,10 @@ The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstra
 
 ## API
 
-- [v-container](../../api/v-container)
-- [v-row](../../api/v-row)
-- [v-col](../../api/v-col)
-- [v-spacer](../../api/v-spacer)
+- [v-container](/api/v-container)
+- [v-row](/api/v-row)
+- [v-col](/api/v-col)
+- [v-spacer](/api/v-spacer)
 
 ## Sub-components
 

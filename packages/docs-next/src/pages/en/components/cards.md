@@ -26,11 +26,11 @@ A card has 4 basic components, `v-card-title`, `v-card-subtitle`, `v-card-text` 
 - `v-card-actions`: The container used for placing **actions** for a card, such as [v-btn](/components/buttons) or [v-menu](/components/menus). Also applies *special margin* to buttons so that they properly line up with other card content areas.
 - `v-card-subtitle`: Provides a default **font-size** and **padding** for card subtitles. Font-size can be overwritten with [typography classes](/styles/typography).
 - `v-card-text`: Primarily used for **text content** in a card. Applies padding for text, reduces its font-size to .875rem.
-- `v-card-title`: Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with [typography classes](/styes/typography).
+- `v-card-title`: Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with [typography classes](/styles/typography).
 
 ## API
 
-- [v-card](../../api/v-card)
+- [v-card](/api/v-card)
 
 ## Examples
 
@@ -50,6 +50,12 @@ An **outlined** card has 0 elevation and contains a soft border.
 
 ### Misc
 
+#### Content wrapping
+
+The `v-card` component is useful for wrapping content.
+
+<example file="v-card/misc-content-wrapping" />
+
 #### Custom actions
 
 With a simple conditional, you can easily add supplementary text that is hidden until opened.
@@ -68,19 +74,13 @@ Using `v-flex`, you can create customized horizontal cards. Use the `contain` pr
 
 <example file="v-card/misc-horizontal-cards" />
 
-### Information card
+#### Information card
 
 Cards are entry points to more detailed information. To keep things concise, ensure to limit the number of actions the user can take.
 
 <example file="v-card/misc-information-card" />
 
-### Content wrapping
-
-The `v-card` component is useful for wrapping content.
-
-<example file="v-card/misc-content-wrapping" />
-
-### Media with text
+#### Media with text
 
 Using the layout system, we can add custom text anywhere within the background.
 

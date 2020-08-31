@@ -23,7 +23,7 @@ Tooltips can wrap any element.
 
 ## API
 
-- [v-tooltip](../../api/v-tooltip)
+- [v-tooltip](/api/v-tooltip)
 
 ## Caveats
 

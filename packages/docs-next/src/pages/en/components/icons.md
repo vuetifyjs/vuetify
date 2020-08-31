@@ -23,7 +23,7 @@ Icons come in two themes (light and dark), and five different sizes (x-small, sm
 
 ## API
 
-- [v-icon](../../api/v-icon)
+- [v-icon](/api/v-icon)
 
 ## Examples
 

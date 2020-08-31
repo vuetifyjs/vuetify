@@ -23,7 +23,7 @@ Dividers in their simplest form display a horizontal line.
 
 ## API
 
-- [v-divider](../../api/v-divider)
+- [v-divider](/api/v-divider)
 
 ## Examples
 

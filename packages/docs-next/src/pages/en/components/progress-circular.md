@@ -23,7 +23,7 @@ By default, progress circular uses the applications secondary color.
 
 ## API
 
-- [v-progress-circular](../../api/v-progress-circular)
+- [v-progress-circular](/api/v-progress-circular)
 
 ## Examples
 

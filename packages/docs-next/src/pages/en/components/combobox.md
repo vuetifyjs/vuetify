@@ -23,7 +23,7 @@ With Combobox, you can allow a user to create new values that may not be present
 
 ## API
 
-- [v-combobox](../../api/v-combo-box)
+- [v-combobox](/api/v-combo-box)
 
 ## Caveats
 

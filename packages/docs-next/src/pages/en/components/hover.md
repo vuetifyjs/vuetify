@@ -23,7 +23,7 @@ The `v-hover` component is a wrapper that should contain only one child element,
 
 ## API
 
-- [v-hover](../../api/v-hover)
+- [v-hover](/api/v-hover)
 
 ## Examples
 

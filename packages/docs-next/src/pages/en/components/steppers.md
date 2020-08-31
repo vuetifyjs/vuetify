@@ -23,11 +23,11 @@ A stepper can be used for a multitude of scenarios, including shopping carts, re
 
 ## API
 
-- [v-stepper](../../api/v-stepper)
-- [v-stepper-content](../../api/v-stepper-content)
-- [v-stepper-header](../../api/v-stepper-header)
-- [v-stepper-items](../../api/v-stepper-items)
-- [v-stepper-step](../../api/v-stepper-step)
+- [v-stepper](/api/v-stepper)
+- [v-stepper-content](/api/v-stepper-content)
+- [v-stepper-header](/api/v-stepper-header)
+- [v-stepper-items](/api/v-stepper-items)
+- [v-stepper-step](/api/v-stepper-step)
 
 ## Sub-components
 

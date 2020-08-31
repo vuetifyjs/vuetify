@@ -23,10 +23,10 @@ Expansion panels in their simplest form display a list of expandable items.
 
 ## API
 
-- [v-expansion-panels](../../api/v-expansion-panels'
-- [v-expansion-panel](../../api/v-expansion-panel)
-- [v-expansion-panel-header](../../api/v-expansion-panel-header)
-- [v-expansion-panel-content](../../api/v-expansion-panel-content)
+- [v-expansion-panels](/api/v-expansion-panels'
+- [v-expansion-panel](/api/v-expansion-panel)
+- [v-expansion-panel-header](/api/v-expansion-panel-header)
+- [v-expansion-panel-content](/api/v-expansion-panel-content)
 
 ## Sub-components
 

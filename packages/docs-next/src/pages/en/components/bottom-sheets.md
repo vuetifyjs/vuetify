@@ -23,7 +23,7 @@ Here we display an example list of actions that could be present in an applicati
 
 ## API
 
-- [v-bottom-sheet](../../api/v-bottom-sheet)
+- [v-bottom-sheet](/api/v-bottom-sheet)
 
 ## Examples
 

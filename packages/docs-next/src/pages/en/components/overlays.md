@@ -23,7 +23,7 @@ In its simplest form, the `v-overlay` component will add a dimmed layer over you
 
 ## API
 
-- [v-overlay](../../api/v-overlay)
+- [v-overlay](/api/v-overlay)
 
 ## Examples
 

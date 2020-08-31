@@ -23,7 +23,7 @@ Month pickers come in two orientation variations, portrait **(default)** and lan
 
 ## API
 
-- [v-date-picker](../../api/v-date-picker)
+- [v-date-picker](/api/v-date-picker)
 
 ## Caveats
 

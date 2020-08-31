@@ -23,7 +23,7 @@ While the bottom nav is meant to be used with the [vue-router](https://router.vu
 
 ## API
 
-- [v-bottom-navigation](../../api/v-bottom-navigation)
+- [v-bottom-navigation](/api/v-bottom-navigation)
 
 ## Examples
 

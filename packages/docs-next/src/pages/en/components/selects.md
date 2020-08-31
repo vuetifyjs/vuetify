@@ -21,7 +21,7 @@ Select fields components are used for collecting user provided information from 
 
 ## API
 
-- [v-select](../../api/v-select)
+- [v-select](/api/v-select)
 
 ## Caveats
 

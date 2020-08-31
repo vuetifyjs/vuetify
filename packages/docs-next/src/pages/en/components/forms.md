@@ -23,7 +23,7 @@ The internal `v-form` component makes it easy to add validation to form inputs. 
 
 ## API
 
-- [v-form](../../api/v-form)
+- [v-form](/api/v-form)
 
 ## Examples
 

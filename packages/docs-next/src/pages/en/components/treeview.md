@@ -24,7 +24,7 @@ A basic example
 
 ## API
 
-- [v-treeview](../../api/treeview)
+- [v-treeview](/api/treeview)
 
 ## Examples
 

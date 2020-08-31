@@ -23,7 +23,7 @@ Banners can have 1-2 lines of text, actions and icon.
 
 ## API
 
-- [v-banner](../../api/v-banner)
+- [v-banner](/api/v-banner)
 
 ## Examples
 

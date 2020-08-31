@@ -23,7 +23,7 @@ Avatars in their simplest form display content within a circular container.
 
 ## API
 
-- [v-avatar](../../api/v-avatar)
+- [v-avatar](/api/v-avatar)
 
 ### Props
 

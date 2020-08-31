@@ -23,8 +23,8 @@ Chip groups make it easy for users to select filtering options for more complex 
 
 ## API
 
-- [v-chip-group](../../api/v-chip-group)
-- [v-chip](../../api/v-chip)
+- [v-chip-group](/api/v-chip-group)
+- [v-chip](/api/v-chip)
 
 ## Examples
 

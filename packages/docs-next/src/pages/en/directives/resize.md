@@ -23,6 +23,6 @@ Resize your window and observe the values change..
 
 ## API
 
-- [v-resize](../../api/v-resize)
+- [v-resize](/api/v-resize)
 
 <backmatter />

@@ -23,7 +23,7 @@ Basic ripple functionality can be enabled just by using `v-ripple` directive on 
 
 ## API
 
-- [v-ripple](../../api/v-ripple)
+- [v-ripple](/api/v-ripple)
 
 ## Examples
 
