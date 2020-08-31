@@ -26,20 +26,8 @@
     "yarn": ">= 1.12.0"
   },
   "devDependencies": {
-    "@babel/helper-create-regexp-features-plugin": "^7.8.8",
-    "@typescript-eslint/eslint-plugin": "^2.34.0",
-    "@typescript-eslint/parser": "^2.34.0",
     "babel-jest": "^24.8.0",
     "cross-spawn": "^6.0.5",
-    "eslint": "^6.6.0",
-    "eslint-config-standard": "^13.0.1",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-local-rules": "^0.1.0",
-    "eslint-plugin-node": "^9.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
-    "eslint-plugin-vue": "^5.2.3",
-    "eslint-plugin-vuetify": "^1.0.0-beta.4",
     "husky": "^3.0.1",
     "inquirer": "^6.5.0",
     "jest": "^24.8.0",
@@ -56,7 +44,6 @@
     "typestrict": "^1.0.2",
     "vue": "^2.6.11",
     "vue-loader": "^15.7.1",
-    "vue-template-compiler": "^2.6.11",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
     "webpack-merge": "^4.2.1"

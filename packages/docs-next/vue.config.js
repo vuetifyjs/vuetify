@@ -15,6 +15,9 @@ module.exports = {
       ],
     },
   },
+  configureWebpack: {
+    resolve: { symlinks: false }
+  },
   pwa: {
     name: 'Vuetify-Docs',
     themeColor: '#094A7F',
