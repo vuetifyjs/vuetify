@@ -38,9 +38,13 @@ Using a predefined option will pre-fill defaults based upon the selected preset.
 
 ## Installing iconfonts
 
-You are required to include the specified icon library (even if using default). This can be done by including a CDN link or importing the icon library into your application
+You are required to include the specified icon library (even if using default). This can be done by including a CDN link or importing the icon library into your application.
 
 ### Material Design Icons
+
+Use this tool to search for any Material Design Icons and copy them to your clickboard by clicking the item.
+
+<icon-list />
 
 This is the default icon font for Vuetify. You can include it through a CDN:
 
