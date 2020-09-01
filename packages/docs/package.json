@@ -7,7 +7,7 @@
   "scripts": {
     "build": "vue-cli-service build",
     "serve": "vue-cli-service serve",
-    "dev": "yarn dev",
+    "dev": "yarn serve",
     "lint": "vue-cli-service lint",
     "build:all": "yarn build:client && yarn build:server && yarn prerender",
     "build:client": "yarn build",
