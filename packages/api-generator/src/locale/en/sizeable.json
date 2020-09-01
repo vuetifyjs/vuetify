@@ -1,0 +1,9 @@
+{
+  "props": {
+    "large": "Makes the component large.",
+    "medium": "Makes the component medium.",
+    "small": "Makes the component small.",
+    "xSmall": "Makes the component extra small.",
+    "xLarge": "Makes the component extra large."
+  }
+}

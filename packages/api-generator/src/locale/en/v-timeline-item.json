@@ -1,0 +1,16 @@
+{
+  "props": {
+    "fillDot": "Remove padding from dot container",
+    "hideDot": "Hide display of timeline dot",
+    "icon": "Specify icon for dot container",
+    "iconColor": "Applies specified color to the control - it can be the name of material color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). You can find list of built in classes on the [colors page](/styles/colors#material-colors).",
+    "large": "Large size dot",
+    "left": "Explicitly set the item to a left orientation",
+    "right": "Explicitly set the item to a right orientation",
+    "small": "Small size dot"
+  },
+  "slots": {
+    "icon": "Used to customize the icon inside the timeline item's dot",
+    "opposite": "Used to customize the opposite side of timeline items"
+  }
+}

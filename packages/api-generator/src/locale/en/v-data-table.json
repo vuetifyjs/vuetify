@@ -1,0 +1,48 @@
+{
+  "props": {
+    "calculateWidths": "Enables calculation of column widths. `widths` property will be available in select scoped slots",
+    "caption": "Set the caption (using `<caption>`)",
+    "dense": "Decreases the height of rows",
+    "expandIcon": "Icon used for expand toggle button.",
+    "fixedHeader": "Fixed header to top of table. **NOTE:** Does not work in IE11",
+    "headerProps": "Pass props to the default header. See 'v-data-table-header' API for more information",
+    "headers": "An array of objects that each describe a header column. See the example below for a definition of all properties",
+    "headersLength": "Can be used in combination with `hide-default-header` to specify the number of columns in the table to allow expansion rows and loading bar to function properly",
+    "height": "Set an explicit height of table",
+    "hideDefaultHeader": "Hide the default headers",
+    "itemClass": "Property on supplied `items` that contains item's row class or function that takes an item as an argument and returns the class of corresponding row",
+    "mobileBreakpoint": "Used to set when to toggle between regular table and mobile view",
+    "showSelect": "Shows the select checkboxes in both the header and rows (if using default rows)",
+    "showExpand": "Shows the expand toggle in default rows",
+    "showGroupBy": "Shows the group by toggle in the header and enables grouped rows",
+    "virtualRows": "Virtualizes the rendering of rows. Be aware that you can not use the `body`, `body.prepend` or `body.append` slots with this prop."
+  },
+  "slots": {
+    "body": "Slot to replace the default table `<tbody>`",
+    "body.append": "Appends elements to the end of the default table `<tbody>`",
+    "body.prepend": "Prepends elements to the start of the default table `<tbody>`",
+    "expanded-item": "Slot to customize expanded rows",
+    "footer": "Slot to add a custom footer",
+    "footer.page-text": "Slot to customize footer page text",
+    "group": "Slot to replace the default rendering of grouped rows",
+    "group.header": "Slot to customize the default rendering of group headers",
+    "group.summary": "Slot to customize the default rendering of group summaries",
+    "heading": "Slot to add a custom header",
+    "header.<name>": "Slot to customize a specific header column",
+    "header.data-table-select": "Slot to replace the default `v-simple-checkbox` in header",
+    "item": "Slot to replace the default rendering of a row",
+    "item.data-table-select": "Slot to replace the default `v-simple-checkbox` used when selecting rows",
+    "item.data-table-expand": "Slot to replace the default `v-icon` used when expanding rows",
+    "item.<name>": "Slot to customize a specific column",
+    "loading": "Defines content for when `loading` is true and no items are provided",
+    "no-data": "Defines content for when no items are provided",
+    "no-results": "Defines content for when `search` is provided but no results are found",
+    "progress": "Slot to replace the default `<v-progress-linear>` component",
+    "top": "Slot to add content above the table"
+  },
+  "events": {
+    "click:row": "Emits when a table row is clicked. This event provides 2 arguements: the first is the item data that was clicked and the second is the other related data provided by the `item` slot. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
+    "contextmenu:row": "Emits when a table row is right-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
+    "dblclick:row": "Emits when a table row is double-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`."
+  }
+}

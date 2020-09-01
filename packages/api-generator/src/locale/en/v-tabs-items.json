@@ -1,0 +1,5 @@
+{
+  "events": {
+    "change": "Emitted when user swipes between tabs."
+  }
+}

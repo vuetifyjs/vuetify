@@ -1,0 +1,5 @@
+{
+  "events": {
+    "change": "Emitted when the component value is changed by user interaction"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "options": {
+    "arg:target": "`v-scroll:#target=\"callback\"` The target watched for scroll changes. Defaults to window but can be changed to any valid id selector.",
+    "arg:self": "`v-scroll.self=\"callback\"` Binds to the element that the the directive is attached.",
+    "value": "`v-scroll=\"callback\"` The function to invoke on target scroll"
+  }
+}

@@ -2,6 +2,7 @@ const Vue = require('vue')
 const Vuetify = require('vuetify')
 const fs = require('fs')
 const map = require('./helpers/map')
+const locales = require('./helpers/locales')
 const deepmerge = require('./helpers/merge')
 const pkg = require('../package.json')
 
@@ -67,7 +68,6 @@ function getPropSource (name, mixins) {
   for (let i = 0; i < mixins.length; i++) {
     let mixin = mixins[i]
     if (mixin.name !== 'VueComponent') mixin = Vue.extend(mixin)
-
     if (mixin.options.name) {
       const source = Object.keys(mixin.options.props || {}).find(p => p === name) && mixin.options.name
       const found = getPropSource(name, [mixin.super].concat(mixin.options.extends).concat(mixin.options.mixins).filter(m => !!m)) || source
@@ -79,8 +79,10 @@ function getPropSource (name, mixins) {
 }
 
 function genProp (name, prop, mixins, cmp) {
+  // const component = (hyphenate(cmp).substr(0, 2) !== 'v-') ? `v-${hyphenate(cmp)}` : hyphenate(cmp)
   const type = getPropType(prop.type)
-  const source = getPropSource(name, mixins) || cmp
+  const propSource = getPropSource(name, mixins) || hyphenate(cmp)
+  const source = (propSource.slice(-10) === 'transition') ? 'transitions' : propSource
 
   return {
     name,
@@ -172,7 +174,8 @@ function parseVariables () {
   const folders = comps
     .trim()
     .replace(/export\s\*\sfrom\s'.\//g, '')
-    .split(`'\n`)
+    .replace(/'/g, '')
+    .split(`\n`)
   for (const folder of folders) {
     varPaths.push({ path: `${rootDir}/${folder}/_variables.scss`, tag: hyphenate(folder) })
   }
@@ -184,8 +187,10 @@ function parseVariables () {
   return variables
 }
 
+// Generate components and directives
 const components = {}
 const directives = {}
+const missingDescriptions = {}
 
 const installedComponents = Vue.options._base.options.components
 const installedDirectives = Vue.options._base.options.directives
@@ -209,7 +214,6 @@ for (const name in installedComponents) {
   if (map[kebabName]) {
     options = deepmerge(options, map[kebabName])
   }
-
   components[kebabName] = options
 }
 
@@ -219,6 +223,7 @@ for (const key of ['Mutate', 'Intersect', 'Ripple', 'Resize', 'Scroll', 'Touch',
   const lowerCaseVersion = hyphenate(key).toLowerCase()
   const vKey = `v-${lowerCaseVersion}`
   const directive = map[vKey]
+
   directive.type = getPropDefault(directive.default, directive.type)
   directives[vKey] = directive
 }
@@ -259,6 +264,67 @@ function writePlainFile (content, file) {
     stream.write(content)
     stream.end()
   })
+}
+
+function genMissingDescriptions (comp, name, missing) {
+  if (missing) {
+    if (!missingDescriptions[comp]) {
+      missingDescriptions[comp] = []
+    }
+    if (missingDescriptions[comp] && !missingDescriptions[comp].includes(name)) {
+      missingDescriptions[comp].push(name)
+    }
+  }
+}
+
+function genDescriptions (comp, type, item) {
+  const description = {}
+  for (const [locale, localeData] of Object.entries(locales)) {
+    // get description sass -> missing
+    if (type === 'sass') {
+      description[locale] = (localeData[comp] && localeData[comp][item.name])
+        ? localeData[comp][item.name]
+        : ''
+    } else {
+      // get description component -> inherited -> generic -> missing
+      description[locale] = (localeData[comp] && localeData[comp][type] && localeData[comp][type][item.name])
+        ? localeData[comp][type][item.name]
+        : (localeData[item.source] && localeData[item.source][type] && localeData[item.source][type][item.name])
+          ? localeData[item.source][type][item.name]
+          : (localeData.generic && localeData.generic[type] && localeData.generic[type][item.name])
+            ? localeData.generic[type][item.name]
+            : ''
+    }
+    if (type !== 'sass') {
+      genMissingDescriptions(item.source || comp, `${item.name} - ${type}`, !description.en)
+    }
+  }
+  return description
+}
+
+function genComponentApi (components) {
+  for (const [comp, compData] of Object.entries(components)) {
+    // attach descriptions
+    for (const [type, items] of Object.entries(compData)) {
+      if (!['mixins', 'type'].includes(type)) {
+        for (const item of items) {
+          item.description = genDescriptions(comp, type, item)
+        }
+      }
+    }
+  }
+  return components
+}
+
+function genSassApi () {
+  const sass = parseVariables()
+  for (const [comp, items] of Object.entries(sass)) {
+    if (!items || !items.length) continue
+    for (const item of items) {
+      item.description = genDescriptions(comp, 'sass', item)
+    }
+  }
+  return sass
 }
 
 const tags = Object.keys(components).reduce((t, k) => {
@@ -316,15 +382,14 @@ const fakeComponents = ts => {
   }).join('\n')
 }
 
-const variables = parseVariables()
-
 if (!fs.existsSync('dist')) {
   fs.mkdirSync('dist', 0o755)
 }
 
+// will likely want to tie in en desc
+// for vetur support at some point
 writeJsonFile(tags, 'dist/tags.json')
 writeJsonFile(attributes, 'dist/attributes.json')
-writeJsonFile(variables, 'dist/variables.json')
 writePlainFile(fakeComponents(false), 'dist/fakeComponents.js')
 writePlainFile(fakeComponents(true), 'dist/fakeComponents.ts')
 
@@ -346,7 +411,13 @@ const webTypes = {
 components['$vuetify'] = map['$vuetify']
 components['internationalization'] = map['internationalization']
 
-writeApiFile({ ...components, ...directives }, 'dist/api.js')
+// generate api for all locales
+const sassApi = genSassApi()
+const componentApi = genComponentApi({ ...components, ...directives })
+
+writeJsonFile(missingDescriptions, 'dist/missing-descriptions.json')
+writeApiFile(componentApi, 'dist/api.js')
+writeApiFile(sassApi, 'dist/sass-api.js')
 
 delete components['$vuetify']
 delete components['internationalization']

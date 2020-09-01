@@ -1,0 +1,7 @@
+{
+  "props": {
+    "activeClass": "Mixins.Routable.props.activeClass",
+    "disabled": "Mixins.Routable.props.disabled",
+    "value": "The value used when the component is selected in a group. If not provided, the index will be used."
+  }
+}

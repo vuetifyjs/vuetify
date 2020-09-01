@@ -1,0 +1,5 @@
+{
+  "props": {
+    "root": "Use the current value of `$vuetify.theme.dark` as opposed to the provided one."
+  }
+}
