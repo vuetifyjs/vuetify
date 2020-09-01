@@ -84,8 +84,16 @@ jobs:
   publish-docs:
     needs: [lint, test]
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+      - run: yarn global add now
 
       - name: Download eo-UY
         uses: crowdin/github-action@1.0.9
@@ -171,13 +179,6 @@ jobs:
           localization_branch_name: ${{ env.LOCAL_BRANCH }}
           crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
 
-      - name: deploy-to-vercel
-        uses: amondnet/vercel-action@v19.0.1+1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'
-          scope: ${{ secrets.VERCEL_ORG_ID }}
-          github-comment: false
+      - run: node scripts/deploy-and-alias.js ${{ github.ref }}
+        env:
+          NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
