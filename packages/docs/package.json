@@ -10,17 +10,15 @@
     "directory": "packages/docs"
   },
   "scripts": {
-    "build": "vue-cli-service build",
-    "serve": "vue-cli-service serve",
-    "dev": "yarn serve",
+    "build": "yarn build:client && yarn build:server && yarn prerender",
+    "dev": "vue-cli-service serve",
     "lint": "vue-cli-service lint --no-fix && yarn lint:md",
     "lint:fix": "vue-cli-service lint && yarn fix:md",
-    "build:all": "yarn build:client && yarn build:server && yarn prerender",
-    "build:client": "yarn build",
+    "build:client": "vue-cli-service build",
+    "build:server": "cross-env VUE_APP_WEBPACK_TARGET=node vue-cli-service build --no-clean",
     "build:modified": "node build/modified",
-    "build:server": "cross-env VUE_APP_WEBPACK_TARGET=node yarn build --no-clean",
-    "fix:md": "markdownlint --config .markdownlintrc src/pages/en --fix",
     "lint:md": "markdownlint --config .markdownlintrc src/pages/en",
+    "fix:md": "markdownlint --config .markdownlintrc src/pages/en --fix",
     "prerender": "node build/prerender",
     "prod": "http-server dist --proxy http://localhost:8080/?"
   },
