@@ -8,7 +8,7 @@ import pwaEvents from '@/plugins/pwa-events'
 import * as modules from './modules'
 
 // Globals
-import { IN_BROWSER, IS_SERVER } from '@/util/globals'
+import { IS_SERVER } from '@/util/globals'
 
 Vue.use(Vuex)
 

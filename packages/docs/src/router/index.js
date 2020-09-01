@@ -7,7 +7,7 @@ import { localeLookup } from '@/i18n/util'
 import redirects from './301.json'
 
 // Globals
-import { IS_PROD, IS_SERVER } from '@/util/globals'
+import { IS_SERVER } from '@/util/globals'
 
 import {
   abort,
