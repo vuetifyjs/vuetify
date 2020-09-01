@@ -27,22 +27,30 @@ const cssLoaders = [
 
 const sassLoaders = [
   ...cssLoaders,
-  { loader: 'sass-loader',
+  {
+    loader: 'sass-loader',
     options: {
       implementation: require('sass'),
-      fiber: require('fibers'),
-      indentedSyntax: true,
-    } },
+      sassOptions: {
+        fiber: require('fibers'),
+        indentedSyntax: true
+      }
+    }
+  }
 ]
 
 const scssLoaders = [
   ...cssLoaders,
-  { loader: 'sass-loader',
+  {
+    loader: 'sass-loader',
     options: {
       implementation: require('sass'),
-      fiber: require('fibers'),
-      indentedSyntax: false,
-    } },
+      sassOptions: {
+        fiber: require('fibers'),
+        indentedSyntax: false
+      }
+    }
+  }
 ]
 
 const config = merge(base, {
