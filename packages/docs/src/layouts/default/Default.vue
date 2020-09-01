@@ -1,5 +1,7 @@
 <template>
   <v-app>
+    <default-system-bar />
+
     <default-bar />
 
     <default-drawer />
@@ -35,6 +37,10 @@
       DefaultBar: () => import(
         /* webpackChunkName: "default-app-bar" */
         './AppBar'
+      ),
+      DefaultSystemBar: () => import(
+        /* webpackChunkName: "default-system-bar" */
+        './SystemBar'
       ),
       DefaultDrawer: () => import(
         /* webpackChunkName: "default-drawer" */

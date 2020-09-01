@@ -10,6 +10,7 @@ const state = {
     mini: false,
   },
   last: null,
+  promotion: null,
   notifications: [],
   rtl: false,
   theme: {
