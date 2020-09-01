@@ -17,6 +17,7 @@
       :width="width"
       class="d-inline-block"
       contain
+      max-height="78"
     />
   </v-card>
 </template>
@@ -56,10 +57,10 @@
         return `${cdn}${logo}`
       },
       width () {
-        if (this.compact) return 125
-        if (this.comfortable) return 140
+        if (this.compact) return 112
+        if (this.comfortable) return 148
 
-        return 160
+        return 212
       },
       value () {
         return this.sponsor || this.sponsors.find(sponsor => {

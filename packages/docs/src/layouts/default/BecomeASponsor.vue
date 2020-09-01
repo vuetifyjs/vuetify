@@ -5,7 +5,10 @@
       path="premiere-sponsors"
     />
 
-    <sponsor slug="qomplx" />
+    <sponsor
+      comfortable
+      slug="qomplx"
+    />
   </div>
 </template>
 

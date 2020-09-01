@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="fill-height mt-n16 px-0"
+    class="fill-height px-0"
     fluid
     tag="section"
   >

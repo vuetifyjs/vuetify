@@ -23,8 +23,8 @@
     <ul class="mb-6">
       <router-link
         v-for="({ to, level, text }, i) in toc"
-        #default="{ href, navigate, isActive }"
         :key="text"
+        #default="{ href, isActive }"
         :to="to"
       >
         <li
@@ -54,6 +54,7 @@
 
       <sponsors
         class="mb-3"
+        compact
         no-gutters
         tier="2"
       />

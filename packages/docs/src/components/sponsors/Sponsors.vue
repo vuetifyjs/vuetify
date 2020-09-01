@@ -1,6 +1,7 @@
 <template>
   <v-row
     align="center"
+    class="v-sponsors"
     dense
     v-bind="$attrs"
     v-on="$listeners"
@@ -11,20 +12,26 @@
       cols="auto"
     >
       <sponsor
-        :comfortable="tier === 1"
-        :compact="tier > 1"
+        :comfortable="comfortable || Number(tier) === 2"
+        :compact="compact || Number(tier) > 2"
         :sponsor="sponsor"
+        v-bind="$attrs"
       />
     </v-col>
   </v-row>
 </template>
 
 <script>
+  // Mixins
+  import Density from '@/mixins/density'
+
   // Utilities
   import { get } from 'vuex-pathify'
 
   export default {
     name: 'Sponsors',
+
+    mixins: [Density],
 
     props: {
       max: Number,
