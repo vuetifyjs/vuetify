@@ -84,23 +84,6 @@ jobs:
   publish-docs:
     needs: [lint, test]
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            **/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
-      - run: yarn global add now
-      - run: node scripts/deploy-and-alias.js ${{ github.ref }}
-        env:
-          NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
-
-  deploy-docs-next:
-    needs: [lint, test]
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
