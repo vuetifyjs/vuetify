@@ -73,13 +73,6 @@ export function createRouter (vuetify, store, i18n) {
     loadLocale(to.params.locale).then(() => next())
   })
 
-  router.afterEach((to, from) => {
-    if (
-      to.params.locale !== from.params.locale &&
-      [to.params.locale, from.params.locale].includes('eo-UY')
-    ) setTimeout(() => location.reload(), 250)
-  })
-
   Vue.use(VueGtag, {
     bootstrap: !IS_SERVER,
     config: { id: 'UA-75262397-3' },
