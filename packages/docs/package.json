@@ -18,7 +18,7 @@
     "build:all": "yarn build:client && yarn build:server && yarn prerender",
     "build:client": "yarn build",
     "build:modified": "node build/modified",
-    "build:server": "cross-env WEBPACK_TARGET=node yarn build --no-clean",
+    "build:server": "cross-env VUE_APP_WEBPACK_TARGET=node yarn build --no-clean",
     "fix:md": "markdownlint --config .markdownlintrc src/pages/en --fix",
     "lint:md": "markdownlint --config .markdownlintrc src/pages/en",
     "prerender": "node build/prerender",

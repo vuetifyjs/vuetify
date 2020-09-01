@@ -27,7 +27,7 @@ export function createStore () {
     store.dispatch('user/update', mutation)
   })
 
-  if (!IS_SERVER && IN_BROWSER) {
+  if (!IS_SERVER) {
     store.dispatch('app/init')
   }
 

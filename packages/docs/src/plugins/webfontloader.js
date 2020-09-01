@@ -5,10 +5,10 @@
  */
 
 // Globals
-import { IN_BROWSER, IS_SERVER } from '@/util/globals'
+import { IS_SERVER } from '@/util/globals'
 
 export async function loadFonts () {
-  if (IS_SERVER || !IN_BROWSER) return
+  if (IS_SERVER) return
 
   const WebFontLoader = await import('webfontloader')
 

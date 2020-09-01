@@ -81,7 +81,7 @@ export function createRouter (vuetify, store, i18n) {
   })
 
   Vue.use(VueGtag, {
-    bootstrap: IS_PROD && !IS_SERVER,
+    bootstrap: !IS_SERVER,
     config: { id: 'UA-75262397-3' },
   }, router)
 
