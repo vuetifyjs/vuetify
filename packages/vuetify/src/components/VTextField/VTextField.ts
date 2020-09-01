@@ -428,8 +428,9 @@ export default baseMixins.extend<options>().extend({
       }, this[type])
     },
     getRoot (): null | HTMLDocument | ShadowRoot {
-      // Shadow DOM not supported (IE11)
+      /* istanbul ignore next */
       if (!this.$el.getRootNode) {
+        // Shadow DOM not supported (IE11)
         let node: Node = this.$el
         while (node.parentNode) node = node.parentNode
         return node === document ? document : null
