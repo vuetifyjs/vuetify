@@ -5,6 +5,7 @@ on:
     branches:
       - 'master'
     paths:
+    - 'packages/api-generator/src/locale/en/**'
     - 'packages/docs-next/src/i18n/messages/en.json'
     - 'packages/docs-next/src/pages/en/**'
     - '.github/workflows/crowdin-uploads.yml'
