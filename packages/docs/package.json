@@ -4,6 +4,11 @@
   "private": true,
   "author": "John Leider <john@vuetifyjs.com>",
   "version": "2.3.10",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuetifyjs/vuetify.git",
+    "directory": "packages/docs"
+  },
   "scripts": {
     "build": "vue-cli-service build",
     "serve": "vue-cli-service serve",
@@ -21,6 +26,7 @@
   "dependencies": {
     "core-js": "^3.6.4",
     "docsearch.js": "^2.6.3",
+    "node-fetch": "^2.6.0",
     "register-service-worker": "^1.7.1",
     "vue-i18n": "^8.17.7",
     "vue-router": "^3.1.6",
@@ -31,9 +37,7 @@
   "devDependencies": {
     "@mdi/js": "^5.2.45",
     "@vuetify/vue-cli-plugin-base": "~0.3.5",
-    "babel-eslint": "^10.1.0",
     "cosmicjs": "^3.2.43",
-    "cross-env": "^7.0.2",
     "date-fns": "^2.14.0",
     "frontmatter-markdown-loader": "^3.5.0",
     "git-date-extractor": "^3.0.0",
@@ -70,11 +74,6 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vuetifyjs/vuetify.git",
-    "directory": "packages/docs-next"
   },
   "vuePlugins": {
     "service": [
