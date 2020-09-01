@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 workbox.core.setCacheNameDetails({ prefix: 'docs-next' })
 
-self.addEventListener('message', (event) => {
+self.addEventListener('message', event => {
   if (!event.data) return
 
   if (event.data === 'skipWaiting') {

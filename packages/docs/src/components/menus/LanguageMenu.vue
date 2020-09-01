@@ -22,8 +22,8 @@
         :key="index"
         class="v-list-item--default"
         :to="{ params: { locale: item.alternate || item.locale } }"
-        @click="switchLocale(item.alternate || item.locale)"
         replace
+        @click="switchLocale(item.alternate || item.locale)"
       >
         <v-list-item-title v-text="item.title" />
       </v-list-item>

@@ -96,7 +96,7 @@
         if (!this.icons.length || !this.search) return []
         if (!this.search) return this.icons
 
-        return this.icons.filter((item) => {
+        return this.icons.filter(item => {
           return item.toLowerCase().match(this.search.toLowerCase())
         })
       },
@@ -113,7 +113,7 @@
     },
 
     mounted () {
-      this.icons = Object.keys(allIcons).map((icon) => {
+      this.icons = Object.keys(allIcons).map(icon => {
         return kebabCase(icon)
       })
     },

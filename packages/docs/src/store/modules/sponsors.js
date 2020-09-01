@@ -23,7 +23,7 @@ const actions = {
 }
 
 const getters = {
-  byTier: (state) => {
+  byTier: state => {
     const tiers = {}
 
     for (const sponsor of state.all) {

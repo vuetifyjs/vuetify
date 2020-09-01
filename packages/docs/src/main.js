@@ -19,8 +19,6 @@ import App from './App.vue'
 // Globals
 import { IS_PROD } from '@/util/globals'
 
-import vuetify from './plugins/vuetify';
-
 Vue.config.productionTip = false
 
 registerPlugins(Vue)

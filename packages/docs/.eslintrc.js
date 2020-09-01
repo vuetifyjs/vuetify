@@ -1,18 +1,4 @@
 module.exports = {
-  root: true,
-  env: {
-    node: true,
-  },
-  extends: 'vuetify',
-  parserOptions: {
-    parser: 'babel-eslint',
-  },
-  rules: {
-    'no-console': 'off',
-    'no-debugger': 'off',
-    'no-unused-vars': 'warn',
-    'no-undef': 'warn',
-  },
   overrides: [
     {
       files: [
@@ -39,7 +25,7 @@ module.exports = {
         'src/examples/**/usage.vue',
       ],
       rules: {
-       'vue/html-self-closing': 'warn',
+        'vue/html-self-closing': 'warn',
       },
     },
   ],
