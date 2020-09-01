@@ -1,6 +1,0 @@
-{
-  "props": {
-    "rounded": "Designates the **border-radius** applied to the component. You can find more information on the [Border Radius page](/styles/border-radius).",
-    "tile": "Removes the component's **border-radius**."
-  }
-}

@@ -1,19 +1,33 @@
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-import minifyTheme from 'minify-css-string'
-import goTo from 'vuetify/es5/services/goto'
+/**
+ * plugins/vuetify.js
+ *
+ * Vuetify documentation: https://vuetifyjs.com/
+ */
 
-Vue.use(Vuetify)
+// Imports
+import { icons } from './icons'
+import Vuetify from 'vuetify/lib/framework'
 
-export function createVuetify () {
-  const vuetify = new Vuetify({
+// Globals
+import { IN_BROWSER, IS_PROD, IS_SERVER } from '@/util/globals'
+
+export function useVuetify (app) {
+  app.use(Vuetify)
+}
+
+export function createVuetify (store) {
+  return new Vuetify({
+    breakpoint: { mobileBreakpoint: 'md' },
+    icons,
     theme: {
+      dark: store.state.user.theme.dark,
       options: {
-        themeCache: typeof document !== 'undefined' ? {
+        themeCache: IN_BROWSER && IS_PROD ? {
           get: key => localStorage.getItem(key),
           set: (key, value) => localStorage.setItem(key, value),
         } : undefined,
-        minifyTheme,
+        minifyTheme: IS_SERVER ? require('minify-css-string') : undefined,
+        variations: false,
       },
       themes: {
         light: {
@@ -24,13 +38,6 @@ export function createVuetify () {
         },
       },
     },
+    rtl: store.state.user.rtl,
   })
-
-  // Using goTo for scroll options means it
-  // doesn't have access to framework.application
-  // stub it oout here so that it continues to work
-  // TODO: Figure out how to avoid this
-  goTo.framework = vuetify.framework
-
-  return vuetify
 }

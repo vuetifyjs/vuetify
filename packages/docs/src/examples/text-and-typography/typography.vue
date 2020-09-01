@@ -42,7 +42,9 @@
                       Font
                     </div>
 
-                    <div class="font-weight-medium">Roboto</div>
+                    <div class="font-weight-medium">
+                      Roboto
+                    </div>
                   </div>
 
                   <div>

@@ -1,3 +1,4 @@
+const { chunk } = require('lodash')
 const os = require('os')
 const fs = require('fs')
 const path = require('path')
@@ -14,21 +15,11 @@ const {
 const ProgressBar = require('progress')
 const { createBundleRenderer } = require('vue-server-renderer')
 
-const languages = require('../src/data/i18n/languages.json')
+const languages = require('../src/i18n/locales.js')
 const availableLanguages = languages.map(lang => lang.alternate || lang.locale)
 
 const threads = os.cpus().length
 const resolve = file => path.resolve(__dirname, file)
-
-function chunk (arr, chunkSize) {
-  const chunks = []
-
-  for (let i = 0; i < arr.length; i += chunkSize) {
-    chunks.push(arr.slice(i , i + chunkSize))
-  }
-
-  return chunks
-}
 
 function readFile (file) {
   return fs.readFileSync(resolve(file), 'utf-8')
@@ -62,7 +53,9 @@ if (isMainThread) {
     width: 64,
   })
 
-  chunk(routes, Math.round(routes.length / threads)).forEach((routes, index) => {
+  const numChunks = 2 * Math.round(routes.length / threads)
+
+  chunk(routes, numChunks).forEach((routes, index) => {
     const worker = new Worker(__filename, {
       workerData: { routes, template, bundle, clientManifest, index },
       stdout: true,
@@ -93,23 +86,15 @@ if (isMainThread) {
   })
 
   parentPort.postMessage({
-    message: `Renderer ${index} created`
+    message: `Renderer ${index} created`,
   })
 
   // Redirect console.log to the main thread
-  let currentRoute
   const write = process.stdout.write
-  process.stdout.write = data => {
-    parentPort.postMessage({
-      message: '\n' + currentRoute.fullPath + '\n' + data.toString()
-    })
-    return write.call(process.stdout, data)
-  }
+  process.stdout.write = data => write.call(process.stdout, data)
 
   forEachSequential(routes, route => {
-    currentRoute = route
     const start = performance.now()
-
     const context = {
       hostname: 'https://vuetifyjs.com', // TODO
       hreflangs: availableLanguages.reduce((acc, lang) => {
@@ -126,7 +111,7 @@ if (isMainThread) {
       const dir = path.join('./dist/', route.fullPath)
 
       return mkdirp(dir).then(() =>
-        writeFile(path.join(dir, 'index.html'), html, { encoding: 'utf-8' })
+        writeFile(path.join(dir, 'index.html'), html, { encoding: 'utf-8' }),
       ).then(() => {
         parentPort.postMessage({
           lastFile: route.fullPath,
