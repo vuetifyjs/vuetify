@@ -437,7 +437,7 @@ export default baseMixins.extend<options>().extend({
 
       const root = this.$el.getRootNode()
 
-      // Detect wether root is mounted in the dom
+      // Detect wether root is attached to the dom
       if (root.getRootNode({ composed: true }) !== document) return null
 
       return root as HTMLDocument | ShadowRoot
