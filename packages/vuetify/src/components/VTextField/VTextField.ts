@@ -427,14 +427,20 @@ export default baseMixins.extend<options>().extend({
         ref: type,
       }, this[type])
     },
-    getActiveElement () {
-      if (!this.$el.getRootNode) return document.activeElement // IE11
+    getRoot (): null | HTMLDocument | ShadowRoot {
+      // Shadow DOM not supported (IE11)
+      if (!this.$el.getRootNode) {
+        let node: Node = this.$el
+        while (node.parentNode) node = node.parentNode
+        return node === document ? document : null
+      }
 
-      const rootNode = this.$el.getRootNode()
+      const root = this.$el.getRootNode()
 
-      if (rootNode === this.$el) return document.activeElement // jest
+      // Detect wether root is mounted in the dom
+      if (root.getRootNode({ composed: true }) !== document) return null
 
-      return (rootNode as ShadowRoot | HTMLDocument).activeElement
+      return root as HTMLDocument | ShadowRoot
     },
     onBlur (e?: Event) {
       this.isFocused = false
@@ -448,7 +454,10 @@ export default baseMixins.extend<options>().extend({
     onFocus (e?: Event) {
       if (!this.$refs.input) return
 
-      if (this.getActiveElement() !== this.$refs.input) {
+      const root = this.getRoot()
+      if (!root) return
+
+      if (root.activeElement !== this.$refs.input) {
         return this.$refs.input.focus()
       }
 
@@ -502,9 +511,10 @@ export default baseMixins.extend<options>().extend({
       if (
         !this.autofocus ||
         typeof document === 'undefined' ||
-        !this.$refs.input ||
-        this.getActiveElement() === this.$refs.input
-      ) return false
+        !this.$refs.input) return false
+
+      const root = this.getRoot()
+      if (!root || root.activeElement === this.$refs.input) return false
 
       this.$refs.input.focus()
 
