@@ -5,8 +5,8 @@ on:
     branches:
       - 'master'
     paths:
-    - 'src/i18n/messages/en.json'
-    - 'src/pages/en/**'
+    - 'packages/docs-next/src/i18n/messages/en.json'
+    - 'packages/docs-next/src/pages/en/**'
     - '.github/workflows/crowdin-uploads.yml'
 
 env:
