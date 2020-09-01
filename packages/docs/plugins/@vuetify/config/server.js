@@ -46,7 +46,7 @@ module.exports = config => {
   config.externals(
     nodeExternals({
       // do not externalize CSS files in case we need to import it from a dep
-      allowlist: [/^vuetify/, /\.css*/],
+      allowlist: [/^vuetify/, /\.css*/, /^core-js/],
     }),
   )
 
