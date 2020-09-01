@@ -184,7 +184,7 @@
       },
     },
 
-    created () {
+    mounted () {
       fetch('https://api.github.com/repos/vuetifyjs/vuetify/releases?per_page=100', {
         headers: { 'Content-Type': 'application/json' },
         method: 'get',

@@ -67,7 +67,7 @@
 
     data: () => ({ featured: [] }),
 
-    created () {
+    mounted () {
       this.init()
     },
 
