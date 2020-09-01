@@ -6,7 +6,8 @@
   "version": "2.3.10",
   "scripts": {
     "build": "vue-cli-service build",
-    "dev": "vue-cli-service serve",
+    "serve": "vue-cli-service serve",
+    "dev": "yarn dev",
     "lint": "vue-cli-service lint",
     "build:all": "yarn build:client && yarn build:server && yarn prerender",
     "build:client": "yarn build",
