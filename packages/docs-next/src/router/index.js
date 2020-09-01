@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import scrollBehavior from './scroll-behavior'
 import Vue from 'vue'
 import VueGtag from 'vue-gtag'
+import { localeLookup } from '@/i18n/util'
+import redirects from './301.json'
 
 // Globals
 import { IS_PROD, IS_SERVER } from '@/util/globals'
@@ -27,6 +29,10 @@ export function createRouter (vuetify, store, i18n) {
     scrollBehavior: (...args) => scrollBehavior(vuetify, ...args),
     routes: [
       locale([
+        ...Object.keys(redirects).map(k => ({
+          path: k.replace(/^\//, ''),
+          redirect: () => redirects[k].replace(/^\//, ''),
+        })),
         layout('Home', [route('Home')]),
         layout('Default', [route('Documentation')], ':category/:page/'),
         route('Whiteframes', 'examples/whiteframes/:whiteframe/'),
@@ -47,9 +53,11 @@ export function createRouter (vuetify, store, i18n) {
       loadedLocales.includes(locale)
     ) return Promise.resolve()
 
+    const messagesFile = localeLookup(locale)
+
     return import(
       /* webpackChunkName: "locale-[request]" */
-      `@/i18n/messages/${locale}.json`
+      `@/i18n/messages/${messagesFile}.json`
     ).then(messages => {
       i18n.setLocaleMessage(locale, messages.default)
       loadedLocales.push(locale)
@@ -63,6 +71,13 @@ export function createRouter (vuetify, store, i18n) {
 
   router.beforeEach((to, _, next) => {
     loadLocale(to.params.locale).then(() => next())
+  })
+
+  router.afterEach((to, from) => {
+    if (
+      to.params.locale !== from.params.locale &&
+      [to.params.locale, from.params.locale].includes('eo-UY')
+    ) setTimeout(() => location.reload(), 250)
   })
 
   Vue.use(VueGtag, {

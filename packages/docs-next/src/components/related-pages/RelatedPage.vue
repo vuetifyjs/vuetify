@@ -23,6 +23,7 @@
 <script>
   // Utilities
   import { get } from 'vuex-pathify'
+  import { localeLookup } from '@/i18n/util'
 
   export default {
     name: 'RelatedPage',
@@ -43,7 +44,7 @@
         return this.to.split('/')[1]
       },
       url () {
-        return `/${this.locale}${this.to}`
+        return `/${localeLookup(this.locale)}${this.to}`
       },
     },
 

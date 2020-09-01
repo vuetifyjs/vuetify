@@ -41,6 +41,7 @@
   import { get } from 'vuex-pathify'
 
   import genTable from '@/util/tables'
+  import { localeLookup } from '@/i18n/util'
 
   export default {
     name: 'ComponentApi',
@@ -145,7 +146,7 @@
           }
           for (const [header, value] of Object.entries(apiData)) {
             if (header === 'mixins' || !value.length) continue
-            const table = this.genTable(value, this.locale)
+            const table = this.genTable(value, localeLookup(this.locale))
             tables[header] = table
           }
           apiItems.push({ ...api, tables })

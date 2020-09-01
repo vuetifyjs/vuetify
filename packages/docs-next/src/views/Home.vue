@@ -15,6 +15,7 @@
 <script>
   // Extensions
   import Documentation from './Documentation'
+  import { localeLookup } from '@/i18n/util'
 
   export default {
     name: 'HomeView',
@@ -22,10 +23,11 @@
     extends: Documentation,
 
     methods: {
-      async load () {
+      load () {
+        const locale = localeLookup(this.locale)
         return import(
           /* webpackChunkName: "home-page" */
-          `@/pages/${this.locale}/home.md`
+          `@/pages/${locale}/home.md`
         )
       },
     },

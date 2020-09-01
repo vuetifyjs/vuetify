@@ -28,6 +28,7 @@
   import { genMetaData } from '@/util/metadata'
   import { get, sync } from 'vuex-pathify'
   import { waitForReadystate } from '@/util/helpers'
+  import { localeLookup } from '@/i18n/util'
 
   export default {
     name: 'DocumentationView',
@@ -93,10 +94,10 @@
     },
 
     methods: {
-      async load () {
+      load () {
         const isApi = this.category === 'api'
         const namespace = isApi ? 'api' : 'pages'
-        const path = [namespace, this.locale]
+        const path = [namespace, localeLookup(this.locale)]
 
         if (!isApi) path.push(this.category)
 

@@ -21,7 +21,9 @@
       <v-list-item
         :key="index"
         class="v-list-item--default"
-        @click="switchLocale(item.locale)"
+        :to="{ params: { locale: item.alternate || item.locale } }"
+        @click="switchLocale(item.alternate || item.locale)"
+        replace
       >
         <v-list-item-title v-text="item.title" />
       </v-list-item>
@@ -56,19 +58,8 @@
     },
 
     methods: {
-      async switchLocale (locale) {
-        if (this.$i18n.locale === locale) return
-
-        const to = this.$router.resolve({ params: { locale } })
-
-        // If we're moving to or from crowdin language, we should
-        // refresh so that jipt script can be loaded or unloaded
-        if (
-          this.translating ||
-          locale === 'eo-UY'
-        ) setTimeout(() => this.$router.go(), 250)
-
-        await this.$router.replace(to.location)
+      switchLocale (locale) {
+        window.localStorage.setItem('currentLanguage', locale)
       },
     },
   }

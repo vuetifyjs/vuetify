@@ -36,7 +36,7 @@
 
 <script>
   // Utilities
-  import { get, sync } from 'vuex-pathify'
+  import { sync } from 'vuex-pathify'
 
   export default {
     name: 'Backmatter',
@@ -44,13 +44,12 @@
     data: () => ({ id: 'ready-for-more' }),
 
     computed: {
-      locale: get('route/params@locale'),
       toc: sync('pages/toc'),
       text () {
         return this.$i18n.t('ready', { url: this.url })
       },
       url () {
-        return `/${this.locale}/introduction/meet-the-team/`
+        return '/introduction/meet-the-team/'
       },
     },
   }

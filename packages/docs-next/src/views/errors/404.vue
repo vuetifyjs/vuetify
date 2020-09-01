@@ -12,7 +12,7 @@
         <p>The page you were looking for does not exist</p>
 
         <v-btn
-          :to="`/${lang}/getting-started/quick-start`"
+          :to="rpath('/getting-started/quick-start/')"
           color="primary"
           outlined
         >
@@ -24,13 +24,11 @@
 </template>
 
 <script>
+  import { rpath } from '@/util/routes'
+
   export default {
     name: 'FourOhFour',
-    props: {
-      lang: {
-        type: String,
-        default: 'en',
-      },
-    },
+
+    methods: { rpath },
   }
 </script>

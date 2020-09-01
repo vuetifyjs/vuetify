@@ -1,9 +1,6 @@
 <template>
   <router-link
-    :to="{
-      name: 'Home',
-      params: { locale }
-    }"
+    :to="{ name: 'Home' }"
     class="d-inline-block"
   >
     <v-img
@@ -17,14 +14,9 @@
 </template>
 
 <script>
-  // Utilities
-  import { get } from 'vuex-pathify'
-
   export default {
     name: 'VuetifyLogoAlt',
 
     inject: ['theme'],
-
-    computed: { locale: get('route/params@locale') },
   }
 </script>

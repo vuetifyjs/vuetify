@@ -22,6 +22,7 @@
 
   // Data
   import nav from '@/data/nav'
+  import { localeLookup } from '@/i18n/util'
 
   export default {
     name: 'DefaultLayout',
@@ -72,8 +73,14 @@
       locale: get('route/params@locale'),
     },
 
+    watch: {
+      locale () {
+        this.$nextTick(() => this.getPages())
+      },
+    },
+
     methods: {
-      async init () {
+      init () {
         this.getModified()
         this.getPages()
       },
@@ -86,14 +93,17 @@
         this.modified = modified
       },
       async getPages () {
-        const { default: api } = await import(
-          /* webpackChunkName: "api-pages-[request]" */
-          `@/api/${this.locale}/pages.json`
-        )
-        const { default: pages } = await import(
-          /* webpackChunkName: "local-pages-[request]" */
-          `@docs/${this.locale}/pages`
-        )
+        const locale = localeLookup(this.locale)
+        const [{ default: api }, { default: pages }] = await Promise.all([
+          import(
+            /* webpackChunkName: "api-pages-[request]" */
+            `@/api/${locale}/pages.json`
+            ),
+          import(
+            /* webpackChunkName: "local-pages-[request]" */
+            `@docs/${locale}/pages`
+            ),
+        ])
 
         this.pages = { ...pages, ...api }
         this.genNav()
@@ -125,6 +135,7 @@
             page,
           ].filter(v => v)
 
+          // to = this.$router.resolve(`/${url.join('/')}/`).resolved.path
           to = `/${url.join('/')}/`
         }
 

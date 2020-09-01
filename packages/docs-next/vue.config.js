@@ -6,6 +6,9 @@ module.exports = {
     extract: !IS_SERVER,
     sourceMap: !IS_SERVER,
   },
+  configureWebpack: {
+    devtool: 'source-map',
+  },
   devServer: {
     disableHostCheck: true,
     historyApiFallback: {
@@ -14,9 +17,6 @@ module.exports = {
         { from: /.*/, to: '/index.html' },
       ],
     },
-  },
-  configureWebpack: {
-    resolve: { symlinks: false }
   },
   pwa: {
     name: 'Vuetify-Docs',

@@ -34,7 +34,6 @@
 
     computed: {
       ...get('route', [
-        'params@locale',
         'params@page',
         'path',
       ]),

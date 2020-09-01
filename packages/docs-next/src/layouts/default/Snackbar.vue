@@ -46,6 +46,7 @@
   import { wait } from '@/util/helpers'
   import { differenceInDays } from 'date-fns'
   import { get, sync } from 'vuex-pathify'
+  import { localeLookup } from '@/i18n/util'
 
   export default {
     name: 'DefaultSnackbar',
@@ -63,7 +64,7 @@
 
         return href.startsWith('http')
           ? { href, target: '_blank', rel: 'noopener' }
-          : { to: `/${this.locale}${href}` }
+          : { to: `/${localeLookup(this.locale)}${href}` }
       },
       hasRecentlyViewed () {
         if (!this.last) return false
