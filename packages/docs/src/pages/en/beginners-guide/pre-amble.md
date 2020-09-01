@@ -28,15 +28,15 @@ The purpose of the Vuetify Beginner's Guide is to provide a comprehensive and di
 
 ### Blog Posts
 
-__Coming Soon__
+<alert type="info">Coming Soon</alert>
 
 ### Living Glossary
 
-__Coming Soon__
+<alert type="info">Coming Soon</alert>
 
 ### Vuetify Tutorials
 
-__Coming Soon__
+<alert type="info">Coming Soon</alert>
 
 ## Contributing
 
