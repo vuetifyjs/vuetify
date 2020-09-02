@@ -36,6 +36,6 @@ module.exports = config => {
     .rule('json')
     .resourceQuery(/blockType=codepen-resources/)
     .use('json')
-      .loader('json-loader')
-      .end()
+    .loader('json-loader')
+    .end()
 }

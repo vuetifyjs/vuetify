@@ -2,7 +2,6 @@
 const { md } = require('../../../build/markdown-it')
 const Mode = require('frontmatter-markdown-loader/mode')
 const path = require('path')
-const resolve = file => path.resolve(__dirname, file)
 
 // Globals
 const { IS_PROD } = require('../../../src/util/globals')
@@ -29,21 +28,6 @@ module.exports = config => {
       mode: [Mode.VUE_COMPONENT, Mode.BODY],
       vue: { root: 'markdown-body' },
     }))
-
-  config
-    .plugin('html')
-    .tap(args => {
-      const defaults = require(resolve('../../../src/data/metadata.json'))
-
-      return [
-        ...args.map(arg => {
-          return {
-            ...arg,
-            ...defaults,
-          }
-        }),
-      ]
-    })
 
   config.resolve.alias
     .set('vue$', 'vue/dist/vue.runtime.common.js')

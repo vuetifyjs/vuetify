@@ -1,5 +1,15 @@
+// Imports
+const path = require('path')
+const resolve = file => path.resolve(__dirname, file)
+
 // Globals
-const { IS_SERVER } = require('./src/util/globals')
+const { IS_PROD, IS_SERVER } = require('./src/util/globals')
+
+// Data
+const metadata = require(resolve('./src/data/metadata.json'))
+
+// Entry path
+const entry = resolve('./src/main.js')
 
 module.exports = {
   css: {
@@ -9,12 +19,25 @@ module.exports = {
   configureWebpack: {
     devtool: 'source-map',
   },
+  pages: IS_SERVER || !IS_PROD ? undefined : {
+    index: {
+      ...metadata,
+      entry,
+      filename: '_fallback.html',
+    },
+    crowdin: {
+      ...metadata,
+      entry,
+      template: resolve('./src/crowdin.template.html'),
+      filename: '_crowdin.html',
+    },
+  },
   devServer: {
     disableHostCheck: true,
     historyApiFallback: {
       rewrites: [
         // { from: /eo-UY\/.*/, to: '/_crowdin.html' },
-        { from: /.*/, to: '/index.html' },
+        // { from: /.*/, to: '/index.html' },
       ],
     },
   },
