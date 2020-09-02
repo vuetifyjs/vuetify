@@ -93,6 +93,9 @@ if (isMainThread) {
   const write = process.stdout.write
   process.stdout.write = data => write.call(process.stdout, data)
 
+  // Default metadata
+  const metadata = require(resolve('../src/data/metadata.json'))
+
   forEachSequential(routes, route => {
     const start = performance.now()
     const context = {
@@ -103,8 +106,8 @@ if (isMainThread) {
       }, ''),
       lang: route.locale,
       scripts: '',
-      title: 'Vuetify', // default title
       url: route.fullPath,
+      ...metadata,
     }
 
     return renderer.renderToString(context).then(html => {

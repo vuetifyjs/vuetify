@@ -2,6 +2,7 @@
 const { md } = require('../../../build/markdown-it')
 const Mode = require('frontmatter-markdown-loader/mode')
 const path = require('path')
+const resolve = file => path.resolve(__dirname, file)
 
 // Globals
 const { IS_PROD } = require('../../../src/util/globals')
@@ -19,26 +20,28 @@ module.exports = config => {
     .rule('markdown')
     .test(/\.md$/)
     .use('toc-loader')
-      .loader(path.resolve('./build/toc-loader.js'))
-      .end()
+    .loader(path.resolve('./build/toc-loader.js'))
+    .end()
     .use('frontmatter-markdown-loader')
-      .loader('frontmatter-markdown-loader')
-      .tap(() => ({
-        markdown: body => md.render(body),
-        mode: [Mode.VUE_COMPONENT, Mode.BODY],
-        vue: { root: 'markdown-body' },
-      }))
+    .loader('frontmatter-markdown-loader')
+    .tap(() => ({
+      markdown: body => md.render(body),
+      mode: [Mode.VUE_COMPONENT, Mode.BODY],
+      vue: { root: 'markdown-body' },
+    }))
 
   config
     .plugin('html')
     .tap(args => {
+      const defaults = require(resolve('../../../src/data/metadata.json'))
+
       return [
-        {
-          ...args[0],
-          title: 'Welcome to Vuetify | Vuetify.js',
-          description: 'Vuetify is a Material Design component framework for Vue.js. It aims to provide all the tools necessary to create beautiful content rich applications.',
-          keywords: 'vue, material design components, vue components, material design components, vuetify, vuetify.js, component framework',
-        },
+        ...args.map(arg => {
+          return {
+            ...arg,
+            ...defaults,
+          }
+        }),
       ]
     })
 
