@@ -15,6 +15,10 @@ module.exports = config => {
     .plugin('pages-plugin')
     .use(path.resolve('./build/pages-plugin.js'))
 
+  config.plugins.delete('html')
+  config.plugins.delete('preload')
+  config.plugins.delete('prefetch')
+
   config.module
     .rule('markdown')
     .test(/\.md$/)

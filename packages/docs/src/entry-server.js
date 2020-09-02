@@ -68,6 +68,9 @@ export default context => {
         // the initial data fetching on the client.
         context.state = store.state
 
+        // Inject vue-meta into template
+        context.meta = app.$meta()
+
         resolve(app)
       }).catch(e => {
         console.log('missing route break server')

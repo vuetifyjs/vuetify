@@ -26,7 +26,7 @@ export function createVuetify (store) {
           get: key => localStorage.getItem(key),
           set: (key, value) => localStorage.setItem(key, value),
         } : undefined,
-        minifyTheme: IS_SERVER ? require('minify-css-string') : undefined,
+        minifyTheme: IS_SERVER ? require('minify-css-string').default : undefined,
         variations: false,
       },
       themes: {

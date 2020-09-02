@@ -1,10 +1,5 @@
-// Globals
-import { IS_SERVER } from '@/util/globals'
+import Meta from 'vue-meta'
 
-export async function useMeta (app) {
-  if (IS_SERVER) return
-
-  const Meta = await import('vue-meta')
-
+export function useMeta (app) {
   app.use(Meta)
 }

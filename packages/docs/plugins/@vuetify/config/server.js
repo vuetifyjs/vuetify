@@ -16,16 +16,16 @@ module.exports = config => {
   config.plugin('VueSSRServerPlugin')
     .use(VueSSRServerPlugin)
 
-  config.devtool('source-map')
+  config.plugins.delete('pwa')
 
-  config.module
-    .rule('vue')
-    .use('vue-loader')
-    .tap(options => {
-      options.optimizeSSR = false
-
-      return options
-    })
+  // config.module
+  //   .rule('vue')
+  //   .use('vue-loader')
+  //   .tap(options => {
+  //     options.optimizeSSR = false
+  //
+  //     return options
+  //   })
 
   const isExtracting = config.plugins.has('extract-css')
 

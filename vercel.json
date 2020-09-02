@@ -10,12 +10,16 @@
   },
   "rewrites": [
     {
+      "source": "/eo-UY/(.*)",
+      "destination": "/_crowdin"
+    },
+    {
       "source": "/(.*)",
       "destination": "$1"
     },
     {
       "source": "/(.*)",
-      "destination": "/index"
+      "destination": "/_fallback"
     }
   ],
   "github": {

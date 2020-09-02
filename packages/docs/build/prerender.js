@@ -44,7 +44,7 @@ function forEachSequential (arr, cb) {
 
 if (isMainThread) {
   const routes = require('./generate-routes')
-  const template = readFile('../src/index.template.html')
+  const template = readFile('../src/ssr.template.html')
   const bundle = JSON.parse(readFile('../dist/vue-ssr-server-bundle.json'))
   const clientManifest = JSON.parse(readFile('../dist/vue-ssr-client-manifest.json'))
 
@@ -93,9 +93,6 @@ if (isMainThread) {
   const write = process.stdout.write
   process.stdout.write = data => write.call(process.stdout, data)
 
-  // Default metadata
-  const metadata = require(resolve('../src/data/metadata.json'))
-
   forEachSequential(routes, route => {
     const start = performance.now()
     const context = {
@@ -107,7 +104,6 @@ if (isMainThread) {
       lang: route.locale,
       scripts: '',
       url: route.fullPath,
-      ...metadata,
     }
 
     return renderer.renderToString(context).then(html => {

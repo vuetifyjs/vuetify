@@ -57,10 +57,14 @@
       },
     },
 
-    methods: {
-      switchLocale (locale) {
-        window.localStorage.setItem('currentLanguage', locale)
-      },
-    },
+    watch: {
+      locale (val, oldVal) {
+        if ([val, oldVal].includes('eo-UY')) {
+          location.reload()
+        } else {
+          window.localStorage.setItem('currentLanguage', locale)
+        }
+      }
+    }
   }
 </script>
