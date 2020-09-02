@@ -69,7 +69,7 @@
     "vue-cli-plugin-vuetify": "~2.0.7",
     "vue-cookies": "^1.7.0",
     "vue-gtag": "^1.6.5",
-    "vue-meta": "^2.3.3",
+    "vue-meta": "^2.4.0",
     "vue-prism-component": "^1.2.0",
     "vue-server-renderer": "^2.6.11",
     "vuelidate": "^0.7.5",
