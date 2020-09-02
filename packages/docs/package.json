@@ -35,6 +35,7 @@
     "webpack-node-externals": "^2.5.1"
   },
   "devDependencies": {
+    "@vuetify/api-generator": "^2.3.10",
     "@mdi/js": "^5.2.45",
     "@vue/cli-plugin-babel": "~4.5.3",
     "@vue/cli-plugin-eslint": "~4.5.4",

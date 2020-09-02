@@ -134,12 +134,12 @@
           const { [api.text]: apiData } = await import(
             /* webpackChunkName: "api" */
             /* webpackMode: "lazy" */
-            '../../../build/api'
+            '@vuetify/api-generator'
           ) || {}
           const { [api.text]: sassApiData } = await import(
             /* webpackChunkName: "api" */
             /* webpackMode: "lazy" */
-            '../../../build/sass-api'
+            '@vuetify/api-generator/dist/sass-api'
           ) || null
           if (sassApiData) {
             apiData.sass = sassApiData

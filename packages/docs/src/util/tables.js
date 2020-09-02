@@ -34,8 +34,10 @@ function genTableRow (headers, row, locale, kebabNames) {
 
     let value = row[header]
 
-    if (['default', 'value', 'signature'].includes(header)) {
+    if (['value', 'signature'].includes(header)) {
       value = `\`${row[header]}\``
+    } else if (header === 'default') {
+      value = row[header] ? `\`${row[header].toString().replace(/\n/g, '\`<br>\`')}\`` : ''
     } else if (header === 'description') {
       value = row[header][locale] || row[header].en
     } else if (header === 'name') {

@@ -1,8 +1,8 @@
 // Imports
 const fs = require('fs')
 const { resolve } = require('path')
-const api = require('./api')
-const sassApi = require('./sass-api')
+const api = require('@vuetify/api-generator')
+const sassApi = require('@vuetify/api-generator/dist/sass-api')
 const genTable = require('../src/util/tables')
 const rimraf = require('rimraf')
 

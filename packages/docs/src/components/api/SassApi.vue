@@ -33,7 +33,7 @@
 <script>
   // Utilities
   import { get } from 'vuex-pathify'
-  import sassApi from '../../../build/sass-api'
+  import sassApi from '@vuetify/api-generator/dist/sass-api'
 
   import genTable from '@/util/tables'
 
