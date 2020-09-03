@@ -67,13 +67,6 @@ function onMessage ({ message, error, lastFile, time }) {
 }
 
 function render ({ routes, template, bundle, clientManifest }) {
-  const renderer = createBundleRenderer(bundle, {
-    runInNewContext: false,
-    clientManifest,
-    shouldPrefetch: () => false,
-    template,
-  })
-
   // Redirect console.log to the main thread
   let currentRoute
   if (!isMainThread) {
@@ -87,6 +80,13 @@ function render ({ routes, template, bundle, clientManifest }) {
   }
 
   return forEachSequential(routes, route => {
+    const renderer = createBundleRenderer(bundle, {
+      runInNewContext: false,
+      clientManifest,
+      shouldPrefetch: () => false,
+      template,
+    })
+
     currentRoute = route
     const start = performance.now()
 
