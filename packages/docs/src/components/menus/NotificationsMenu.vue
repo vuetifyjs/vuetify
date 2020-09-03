@@ -25,7 +25,7 @@
               {{ unread.length }}
             </template>
 
-            <v-icon v-text="'$mdiBellOutline'" />
+            <v-icon v-text="`$mdiBell${unread.length === 0 ? 'Outline' : ''}`" />
           </v-badge>
         </template>
       </app-tooltip-btn>
