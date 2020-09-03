@@ -74,8 +74,6 @@ Once installed, update your nuxt.config.js file to include the Vuetify module in
 }
 ```
 
-<highlighted-ad slug="nuxt-community-vuetify-module" />
-
 ## Webpack install
 
 To install Vuetify into a Webpack project you need to add a few dependencies:
