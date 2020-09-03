@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
 import {
   mdiAccount,
-  mdiAlertCircle,
   mdiAlertCircleOutline,
+  mdiAlertOutline,
   mdiAlphaA,
   mdiAlphaB,
   mdiAlphaC,
@@ -84,6 +84,7 @@ import {
   mdiMonitor,
   mdiNewBox,
   mdiNumeric,
+  mdiAlertOctagonOutline,
   mdiOpenInNew,
   mdiOrderAlphabeticalAscending,
   mdiOrderBoolAscending,
@@ -115,14 +116,15 @@ import {
   mdiViewDashboardOutline,
   mdiViewStream,
   mdiVuetify,
+  mdiInformationOutline,
 } from '@mdi/js'
 
 export const icons = {
   iconfont: 'mdiSvg',
   values: {
     mdiAccount,
-    mdiAlertCircle,
     mdiAlertCircleOutline,
+    mdiAlertOutline,
     mdiAlphaA,
     mdiAlphaB,
     mdiAlphaC,
@@ -141,6 +143,7 @@ export const icons = {
     mdiAlphaP,
     mdiAlphaQ,
     mdiAlphaR,
+
     mdiAlphaS,
     mdiAlphaT,
     mdiAlphaU,
@@ -204,6 +207,7 @@ export const icons = {
     mdiMonitor,
     mdiNewBox,
     mdiNumeric,
+    mdiAlertOctagonOutline,
     mdiOpenInNew,
     mdiOrderAlphabeticalAscending,
     mdiOrderBoolAscending,
@@ -235,6 +239,8 @@ export const icons = {
     mdiViewDashboardOutline,
     mdiViewStream,
     mdiVuetify,
-    warning: mdiAlertCircle,
+    error: mdiAlertOctagonOutline,
+    info: mdiInformationOutline,
+    warning: mdiAlertOutline,
   },
 }

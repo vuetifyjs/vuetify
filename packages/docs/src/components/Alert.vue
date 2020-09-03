@@ -1,9 +1,9 @@
 <template>
   <v-alert
-    :class="$vuetify.theme.dark ? undefined : 'grey lighten-5'"
     border="left"
     class="v-alert--md"
-    colored-border
+    prominent
+    text
     v-bind="$attrs"
     v-on="$listeners"
   >
@@ -28,10 +28,19 @@
 </script>
 
 <style lang="sass">
-  .v-alert--md .v-markdown
-    p
-      line-height: initial
+  .v-alert--md
+    padding-bottom: 10px
+    padding-top: 10px
 
-      &:last-child
-        margin-bottom: 0
+    .v-alert__icon
+      height: 40px
+      margin: 0 16px 0 0
+      min-width: 40px
+
+    .v-markdown
+      p
+        line-height: initial
+
+        &:last-child
+          margin-bottom: 0
 </style>
