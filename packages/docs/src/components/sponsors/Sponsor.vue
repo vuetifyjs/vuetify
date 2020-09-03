@@ -17,6 +17,7 @@
       :width="width"
       class="d-inline-block"
       contain
+      eager
       max-height="78"
     />
   </v-card>
