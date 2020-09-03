@@ -2,7 +2,7 @@
   <v-system-bar v-if="hasPromotion" app height="84" dark>
     <a
       class="bts-banner"
-      href="https://vueschool.io/sales/back-to-school?friend=vuetify"
+      href="https://vueschool.io/sales/back-to-school?friend=vuetify&utm_source=vuetify&utm_medium=banner&utm_campaign=autumn"
       rel="noopener"
       target="_blank"
     />
