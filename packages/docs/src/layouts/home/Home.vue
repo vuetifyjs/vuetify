@@ -5,6 +5,8 @@
     <home-bar />
 
     <home-view />
+
+    <home-footer />
   </v-app>
 </template>
 
@@ -13,13 +15,17 @@
     name: 'HomeLayout',
 
     components: {
+      DefaultSystemBar: () => import(
+        /* webpackChunkName: "default-system-bar" */
+        '../default/SystemBar'
+      ),
       HomeBar: () => import(
         /* webpackChunkName: "home-app-bar" */
         './AppBar'
       ),
-      DefaultSystemBar: () => import(
-        /* webpackChunkName: "default-system-bar" */
-        '../default/SystemBar'
+      HomeFooter: () => import(
+        /* webpackChunkName: "home-footer" */
+        './Footer'
       ),
       HomeView: () => import(
         /* webpackChunkName: "home-view" */
