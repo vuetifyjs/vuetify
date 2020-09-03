@@ -42,42 +42,31 @@ function forEachSequential (arr, cb) {
   }, Promise.resolve())
 }
 
-if (isMainThread) {
-  const routes = require('./generate-routes')
-  const template = readFile('../src/ssr.template.html')
-  const bundle = JSON.parse(readFile('../dist/vue-ssr-server-bundle.json'))
-  const clientManifest = JSON.parse(readFile('../dist/vue-ssr-client-manifest.json'))
+function postMessage (data) {
+  if (isMainThread) {
+    onMessage(data)
+  } else {
+    parentPort.postMessage(data)
+  }
+}
 
-  const bar = new ProgressBar('[:bar] :percent | ETA: :etas | :current/:total | :timems | :lastFile', {
-    total: routes.length,
-    width: 64,
-  })
+let bar
+function onMessage ({ message, error, lastFile, time }) {
+  const interrupt = process.stdout.clearLine ? bar.interrupt.bind(bar) : console.log.bind(console)
 
-  const numChunks = 2 * Math.round(routes.length / threads)
+  if (message) {
+    interrupt(message)
+  }
+  if (error) {
+    interrupt('\n' + lastFile + '\n' + error)
+  }
 
-  chunk(routes, numChunks).forEach((routes, index) => {
-    const worker = new Worker(__filename, {
-      workerData: { routes, template, bundle, clientManifest, index },
-      stdout: true,
-    })
+  if (lastFile) {
+    bar.tick({ lastFile, time })
+  }
+}
 
-    const interrupt = process.stdout.clearLine ? bar.interrupt.bind(bar) : console.log.bind(console)
-    worker.on('message', ({ message, error, lastFile, time }) => {
-      if (message) {
-        interrupt(message)
-      }
-      if (error) {
-        interrupt('\n' + lastFile + '\n' + error)
-      }
-
-      if (lastFile) {
-        bar.tick({ lastFile, time })
-      }
-    })
-  })
-} else {
-  const { routes, template, bundle, clientManifest, index } = workerData
-
+function render ({ routes, template, bundle, clientManifest }) {
   const renderer = createBundleRenderer(bundle, {
     runInNewContext: false,
     clientManifest,
@@ -85,16 +74,22 @@ if (isMainThread) {
     template,
   })
 
-  parentPort.postMessage({
-    message: `Renderer ${index} created`,
-  })
-
   // Redirect console.log to the main thread
-  const write = process.stdout.write
-  process.stdout.write = data => write.call(process.stdout, data)
+  let currentRoute
+  if (!isMainThread) {
+    const write = process.stdout.write
+    process.stdout.write = data => {
+      parentPort.postMessage({
+        message: '\n' + currentRoute.fullPath + '\n' + data.toString(),
+      })
+      return write.call(process.stdout, data)
+    }
+  }
 
-  forEachSequential(routes, route => {
+  return forEachSequential(routes, route => {
+    currentRoute = route
     const start = performance.now()
+
     const context = {
       hostname: 'https://vuetifyjs.com', // TODO
       hreflangs: availableLanguages.reduce((acc, lang) => {
@@ -112,17 +107,45 @@ if (isMainThread) {
       return mkdirp(dir).then(() =>
         writeFile(path.join(dir, 'index.html'), html, { encoding: 'utf-8' }),
       ).then(() => {
-        parentPort.postMessage({
+        postMessage({
           lastFile: route.fullPath,
           time: Math.round(performance.now() - start),
         })
       })
     }).catch(err => {
-      parentPort.postMessage({
+      postMessage({
         error: err.stack,
         lastFile: route.fullPath,
         time: Math.round(performance.now() - start),
       })
     })
-  }).then(() => process.exit(0))
+  })
+}
+
+if (isMainThread) {
+  const routes = require('./generate-routes')
+  const template = readFile('../src/ssr.template.html')
+  const bundle = JSON.parse(readFile('../dist/vue-ssr-server-bundle.json'))
+  const clientManifest = JSON.parse(readFile('../dist/vue-ssr-client-manifest.json'))
+
+  bar = new ProgressBar('[:bar] :percent | ETA: :etas | :current/:total | :timems | :lastFile', {
+    total: routes.length,
+    width: 64,
+  })
+
+  if (process.env.NODE_ENV === 'debug') {
+    render({ routes, template, bundle, clientManifest })
+  } else {
+    const chunkSize = Math.ceil(routes.length / threads)
+    chunk(routes, chunkSize).forEach(routes => {
+      const worker = new Worker(__filename, {
+        workerData: { routes, template, bundle, clientManifest },
+        stdout: true,
+      })
+
+      worker.on('message', onMessage)
+    })
+  }
+} else {
+  render(workerData).then(() => process.exit(0))
 }
