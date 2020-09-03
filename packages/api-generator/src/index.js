@@ -408,7 +408,7 @@ const webTypes = {
   },
 }
 
-components['$vuetify'] = map['$vuetify']
+components['vuetify'] = map['vuetify']
 components['internationalization'] = map['internationalization']
 
 // generate api for all locales
