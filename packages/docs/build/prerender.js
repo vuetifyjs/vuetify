@@ -2,7 +2,6 @@ const { chunk } = require('lodash')
 const os = require('os')
 const fs = require('fs')
 const path = require('path')
-const util = require('util')
 const mkdirp = require('mkdirp')
 const { performance } = require('perf_hooks')
 const {
@@ -24,7 +23,7 @@ const resolve = file => path.resolve(__dirname, file)
 function readFile (file) {
   return fs.readFileSync(resolve(file), 'utf-8')
 }
-const writeFile = util.promisify(fs.writeFile)
+const writeFile = fs.promises.writeFile
 
 /**
  * Call cb for each item in arr, waiting for a returned
