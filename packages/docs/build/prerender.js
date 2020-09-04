@@ -17,7 +17,7 @@ const { createBundleRenderer } = require('vue-server-renderer')
 const languages = require('../src/i18n/locales.js')
 const availableLanguages = languages.map(lang => lang.alternate || lang.locale)
 
-const threads = os.cpus().length
+const threads = Math.ceil(os.cpus().length / 2)
 const resolve = file => path.resolve(__dirname, file)
 
 function readFile (file) {
