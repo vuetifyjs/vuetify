@@ -19,7 +19,7 @@
             $mdiSpeedometer
           </v-icon>
 
-          Get Started
+          {{ $t('home.get-started') }}
         </v-btn>
       </v-col>
 
@@ -41,7 +41,7 @@
             $mdiVuetify
           </v-icon>
 
-          Why Vuetify?
+          {{ $t('home.why-vuetify') }}
         </v-btn>
       </v-col>
 

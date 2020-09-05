@@ -149,22 +149,22 @@
         {
           icon: 'mdi-reddit',
           href: 'https://www.reddit.com/r/vuetifyjs',
-          title: 'reddit',
+          title: 'Reddit',
         },
         {
           icon: 'mdi-github',
           href: 'https://github.com/vuetifyjs/vuetify',
-          title: 'github',
+          title: 'GitHub',
         },
         {
           icon: 'mdi-twitter',
           href: 'https://twitter.com/vuetifyjs',
-          title: 'twitter',
+          title: 'Twitter',
         },
         {
           icon: 'mdi-discord',
           href: 'https://community.vuetifyjs.com',
-          title: 'discord',
+          title: 'Discord',
         },
       ],
     }),
