@@ -1,6 +1,5 @@
 // Imports
 import { createApp } from './main'
-import { IS_PROD } from '@/util/globals'
 
 const path = require('path')
 const resolve = file => path.resolve(__dirname, file)
@@ -18,8 +17,6 @@ global.fetch = require('node-fetch')
 export default context => {
   /* eslint-disable-next-line no-async-promise-executor */
   return new Promise(async (resolve, reject) => {
-    const s = IS_PROD && Date.now()
-
     let app
     let router
     let store
