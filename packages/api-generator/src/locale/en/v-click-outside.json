@@ -1,5 +1,3 @@
 {
-  "options": {
-    "value": "A callback or options object."
-  }
+  "argument": "A callback or options object."
 }

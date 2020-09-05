@@ -6,7 +6,6 @@ meta:
 related:
   - /components/cards/
   - /components/images/
-  - /components/api-explorer/
 ---
 
 # Intersection observer

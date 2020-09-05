@@ -6,7 +6,6 @@ meta:
 related:
   - /components/dialogs/
   - /directives/intersect/
-  - /components/api-explorer/
 ---
 
 # Click outside

@@ -6,6 +6,7 @@
     <prism
       ref="code"
       :code="code"
+      :language="language"
     />
   </app-code>
 </template>
@@ -33,6 +34,9 @@
       ),
     },
 
-    props: { code: String },
+    props: {
+      code: String,
+      language: String,
+    },
   }
 </script>

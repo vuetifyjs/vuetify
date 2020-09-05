@@ -102,13 +102,13 @@ module.exports = {
 
 ## Variable API
 
-There are many SASS/SCSS variables that can be customized across the entire Vuetify framework. Below is an example of a custom **variables** file. You can find more information about available [variables](#variable-api) below:
+There are many SASS/SCSS variables that can be customized across the entire Vuetify framework. You can browse all the variables using the tool below:
 
 <sass-api />
 
 ## Example variable file
 
-Below is an example of what a variable file looks like:
+Below is an example of what a custom variable file could look like:
 
 ```scss
 // src/sass/variables.scss

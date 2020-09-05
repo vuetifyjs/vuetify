@@ -6,7 +6,6 @@ meta:
 related:
   - /components/sheets/
   - /components/images/
-  - /components/api-explorer/
 ---
 
 # Mutation observer

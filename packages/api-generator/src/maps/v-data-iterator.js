@@ -3,6 +3,7 @@ const { DataFooterPageTextScopedProps } = require('./v-data-footer')
 
 const DataIteratorProps = DataProps.concat([
   { name: 'value', source: 'v-data-iterator' },
+  { name: 'itemKey', source: 'v-data-iterator' },
   { name: 'singleSelect', source: 'v-data-iterator' },
   { name: 'expanded', source: 'v-data-iterator' },
   { name: 'singleExpand', source: 'v-data-iterator' },
