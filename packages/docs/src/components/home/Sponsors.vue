@@ -41,12 +41,8 @@
     computed: {
       byTier: get('sponsors/byTier'),
       sponsors () {
-        return [
-          ...this.byTier[1],
-          ...this.byTier[2],
-          ...this.byTier[3],
-          ...this.byTier[4],
-        ]
+        return Object.values(this.byTier)
+          .reduce((tiers, tier) => tiers.concat(tier), [])
       },
       tiers () {
         return this.$vuetify.breakpoint.smAndUp
