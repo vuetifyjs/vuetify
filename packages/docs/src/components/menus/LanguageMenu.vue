@@ -23,7 +23,6 @@
         class="v-list-item--default"
         :to="{ params: { locale: item.alternate || item.locale } }"
         replace
-        @click="switchLocale(item.alternate || item.locale)"
       >
         <v-list-item-title v-text="item.title" />
       </v-list-item>
@@ -59,12 +58,12 @@
 
     watch: {
       locale (val, oldVal) {
-        if ([val, oldVal].includes('eo-UY')) {
+        if ([val, oldVal].includes('eo-UY') && val !== oldVal) {
           location.reload()
         } else {
-          window.localStorage.setItem('currentLanguage', locale)
+          window.localStorage.setItem('currentLanguage', val)
         }
-      }
-    }
+      },
+    },
   }
 </script>
