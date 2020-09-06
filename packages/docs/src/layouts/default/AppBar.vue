@@ -16,37 +16,35 @@
 
     <v-spacer />
 
-    <template v-if="!$vuetify.breakpoint.mobile">
-      <default-search />
+    <default-search />
+
+    <vertical-divider />
+
+    <template v-if="$vuetify.breakpoint.smAndUp">
+      <learn-menu />
+
+      <team-link />
+
+      <support-menu />
+
+      <enterprise-link v-if="$vuetify.breakpoint.mdAndUp" />
+
+      <vertical-divider />
+
+      <store-link />
+    </template>
+
+    <settings-toggle />
+
+    <template v-if="$vuetify.breakpoint.lgAndUp">
+      <jobs-link />
+
+      <notifications-menu />
 
       <vertical-divider />
     </template>
 
-    <template v-if="!search">
-      <template v-if="!$vuetify.breakpoint.xsOnly">
-        <learn-menu />
-
-        <team-link />
-
-        <support-menu />
-
-        <enterprise-link />
-
-        <vertical-divider />
-
-        <store-link />
-
-        <jobs-link />
-      </template>
-
-      <settings-toggle />
-
-      <notifications-menu />
-
-      <vertical-divider v-show="!$vuetify.breakpoint.xsOnly" />
-
-      <language-menu />
-    </template>
+    <language-menu />
   </v-app-bar>
 </template>
 

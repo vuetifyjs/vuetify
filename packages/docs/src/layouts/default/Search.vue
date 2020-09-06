@@ -17,10 +17,7 @@
     @focus="onFocus"
     @keydown.esc="onEsc"
   >
-    <template
-      v-if="!$vuetify.breakpoint.mobile"
-      #prepend-inner
-    >
+    <template #prepend-inner>
       <v-icon
         :color="!isFocused ? 'grey' : undefined"
         class="ml-1 mr-2"
@@ -166,6 +163,7 @@
         this.isFocused = true
       },
       resetSearch (timeout = 0) {
+        return
         clearTimeout(this.timeout)
 
         this.$nextTick(() => {
@@ -180,13 +178,6 @@
 </script>
 
 <style lang="sass">
-  @import '~vuetify/src/styles/settings/_elevations.scss'
-  @import '~vuetify/src/styles/tools/_elevation.sass'
-
-  .algolia-autocomplete
-    // flex: 1 1 auto
-    // position: fixed !important
-
   #app
     .algolia-docsearch-suggestion--title
       margin-bottom: 0
@@ -197,9 +188,10 @@
         clip-path: inset(0px -12px -12px -12px) !important
         box-shadow: 0px 1px 4px 0px rgba(32, 33, 36, 0.28) !important
         border-radius: 0 0 8px 8px
-        left: -48px !important
+        left: -52px !important
         top: 0px !important
-        min-width: calc(100% + 60px)
+        min-width: calc(100% + 64px)
+        max-width: calc(100%)
 
         [class^=ds-dataset-]
           border-radius: 0 0 8px 8px
