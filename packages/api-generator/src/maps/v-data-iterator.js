@@ -24,9 +24,9 @@ const DataIteratorEvents = DataEvents.concat([
 ])
 
 const DataIteratorSlots = [
-  { name: 'loading', source: 'data-iterator' },
-  { name: 'no-data', source: 'data-iterator' },
-  { name: 'no-results', source: 'data-iterator' },
+  { name: 'loading', source: 'v-data-iterator' },
+  { name: 'no-data', source: 'v-data-iterator' },
+  { name: 'no-results', source: 'v-data-iterator' },
 ]
 
 const DataIteratorItemScopedProps = {
