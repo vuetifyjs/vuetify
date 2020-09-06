@@ -163,7 +163,6 @@
         this.isFocused = true
       },
       resetSearch (timeout = 0) {
-        return
         clearTimeout(this.timeout)
 
         this.$nextTick(() => {
