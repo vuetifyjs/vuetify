@@ -1,11 +1,9 @@
 <template>
-  <app-sheet>
-    <v-img
-      rounded
-      v-bind="$attrs"
-      v-on="$listeners"
-    />
-  </app-sheet>
+  <v-img
+    class="rounded"
+    v-bind="$attrs"
+    v-on="$listeners"
+  />
 </template>
 
 <script>

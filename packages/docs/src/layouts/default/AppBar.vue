@@ -30,6 +30,8 @@
 
         <support-menu />
 
+        <enterprise-link />
+
         <vertical-divider />
 
         <store-link />

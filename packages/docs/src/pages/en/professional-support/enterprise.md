@@ -1,11 +1,11 @@
 ---
 meta:
-  title: Vuetify for enterprise
+  title: Vuetify for Enterprise
   description: Get the tools you need to continuously catalog and understand the open source software that your application depends on with the Tidelift subscription.
   keywords: vuetify enterprise, tidelift enterprise, tidelift vuetify
 ---
 
-# Vuetify for enterprise
+# Vuetify for Enterprise
 
 The Tidelift Subscription is a managed open source subscription for application dependencies covering millions of open source projects across JavaScript, Python, Java, PHP, Ruby, .NET, and more.
 

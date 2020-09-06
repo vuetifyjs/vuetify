@@ -22,6 +22,8 @@
 
     <support-menu />
 
+    <enterprise-link />
+
     <vertical-divider />
 
     <language-menu />
