@@ -9,12 +9,7 @@
 
       <thead>
         <tr class="text-left">
-          <i18n
-            v-for="(_, i) in $t('breakpoints-table.headings')"
-            :key="i"
-            :path="`breakpoints-table.headings[${i}]`"
-            tag="th"
-          />
+          <th v-for="header in headers" :key="header">{{ header }}</th>
         </tr>
       </thead>
 
@@ -138,5 +133,15 @@
         },
       ],
     }),
+    computed: {
+      headers () {
+        return [
+          this.$t('device'),
+          this.$t('code'),
+          this.$t('type'),
+          this.$t('range'),
+        ]
+      },
+    },
   }
 </script>

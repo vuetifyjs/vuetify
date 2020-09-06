@@ -50,10 +50,10 @@
       placeholder () {
         if (this.isFocused) return ''
 
-        let placeholder = 'Search Vuetify'
+        let placeholder = this.$t('search.placeholder')
 
         if (!this.$vuetify.breakpoint.mobile) {
-          placeholder += ' (press \'/\' to focus)'
+          placeholder += ' ' + this.$t('search.key-hint')
         }
 
         return placeholder

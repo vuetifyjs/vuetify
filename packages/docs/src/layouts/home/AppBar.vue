@@ -41,7 +41,7 @@
         outlined
         @click="promptInstaller"
       >
-        Install
+        {{ $t('pwa.install') }}
 
         <v-icon right>
           $mdiPlusCircle
@@ -55,7 +55,7 @@
         outlined
         @click="refreshContent"
       >
-        Refresh Content
+        {{ $t('pwa.refresh') }}
 
         <v-icon right>
           $mdiRefreshCircle

@@ -44,7 +44,7 @@
           { divider: true },
           { heading: this.$t('community-support') },
           {
-            title: this.$t('discord'),
+            title: 'Discord',
             href: 'https://community.vuetifyjs.com/',
           },
           {
