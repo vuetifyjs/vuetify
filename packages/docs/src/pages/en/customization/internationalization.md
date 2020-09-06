@@ -5,7 +5,7 @@ meta:
   keywords: i18n, language, internationalization
 related:
   - /customization/accessibility/
-  - /customization/rtl/
+  - /customization/bidirectionality/
 ---
 
 # Internationalization (i18n)

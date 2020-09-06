@@ -170,7 +170,11 @@
         cancelAnimationFrame(this.raf)
         clearTimeout(this.timeout)
 
-        if (this.scrolling || this.initializing) return
+        if (
+          this.scrolling ||
+          this.initializing ||
+          !this.toc.length
+        ) return
 
         this.timeout = setTimeout(this.findActiveIndex, 17)
       },
