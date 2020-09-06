@@ -133,9 +133,10 @@ const getDirectiveApi = (directiveName, locales) => {
 }
 
 const getVuetifyApi = locales => {
-  const api = loadMap('$vuetify')
+  const name = '$vuetify'
+  const api = deepmerge(loadMap(name), { name })
 
-  return addGenericApiDescriptions('$vuetify', api, locales, ['functions'])
+  return addGenericApiDescriptions(name, api, locales, ['functions'])
 }
 
 const DIRECTIVES = ['v-mutate', 'v-intersect', 'v-ripple', 'v-resize', 'v-scroll', 'v-touch', 'v-click-outside']

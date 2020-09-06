@@ -28,6 +28,8 @@ function genFooter () {
   return `${footer.join('\n\n')}\n\n`
 }
 
+const sanitize = str => str.replace(/\$/g, '')
+
 function createMdFile (component, data, locale) {
   let str = ''
 
@@ -41,7 +43,7 @@ function createMdFile (component, data, locale) {
       ? '## SASS Variables\n'
       : `## ${capitalize(header)}\n`
 
-    str += `<api-table name="${component}" field="${header}" />\n\n`
+    str += `<api-table name="${sanitize(component)}" field="${header}" />\n\n`
   }
 
   str += genFooter()
@@ -56,7 +58,7 @@ function writeFile (componentName, componentApi, locale) {
     fs.mkdirSync(resolve(folder), { recursive: true })
   }
 
-  fs.writeFileSync(resolve(`${folder}/${componentName}.md`), createMdFile(componentName, componentApi, locale))
+  fs.writeFileSync(resolve(`${folder}/${sanitize(componentName)}.md`), createMdFile(componentName, componentApi, locale))
 }
 
 function writeData (componentName, componentApi) {
@@ -66,7 +68,7 @@ function writeData (componentName, componentApi) {
     fs.mkdirSync(resolve(folder), { recursive: true })
   }
 
-  fs.writeFileSync(resolve(`${folder}/${componentName}.js`), `module.exports = ${JSON.stringify(componentApi, null, 2)}`)
+  fs.writeFileSync(resolve(`${folder}/${sanitize(componentName)}.js`), `module.exports = ${JSON.stringify(componentApi, null, 2)}`)
 }
 
 function generateFiles () {
@@ -78,7 +80,7 @@ function generateFiles () {
     for (const item of api.items) {
       writeFile(item.name, item, locale)
 
-      pages[`/${locale}/api/${item.name}/`] = item.name
+      pages[`/${locale}/api/${sanitize(item.name)}/`] = item.name
     }
 
     fs.writeFileSync(resolve(`src/api/${locale}/pages.json`), JSON.stringify(pages, null, 2))
