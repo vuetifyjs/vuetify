@@ -18,7 +18,11 @@ const loadLocale = (componentName, locale, fallback = {}) => {
 const loadMap = (componentName, fallback = {}) => {
   try {
     const map = require(`./maps/${componentName}`)
-    return Object.assign(fallback, map[componentName])
+    const combined = Object.assign(fallback, map[componentName])
+    // Make sure things are sorted
+    const categories = ['slots', 'events', 'functions']
+    categories.forEach(category => combined[category].sort((a, b) => a.name.localeCompare(b.name)))
+    return combined
   } catch {
     return fallback
   }

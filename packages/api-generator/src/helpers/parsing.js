@@ -80,7 +80,7 @@ function parseProps (component, array = [], mixin = false) {
     array.push(generated)
   })
 
-  return array.sort((a, b) => a.name > b.name)
+  return array.sort((a, b) => a.name.localeCompare(b.name))
 }
 
 function parseMixins (component) {
@@ -101,7 +101,7 @@ function parseMixins (component) {
     }
   }
 
-  return mixins.sort((a, b) => a > b)
+  return mixins.sort((a, b) => a.localeCompare(b))
 }
 
 function processVariableFile (path) {
