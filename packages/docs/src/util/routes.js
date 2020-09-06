@@ -1,6 +1,6 @@
 // Imports
 import locales from '@/i18n/locales'
-import { kebabCase } from 'lodash'
+import kebabCase from 'lodash/kebabCase'
 
 // Globals
 import { IN_BROWSER } from '@/util/globals'
