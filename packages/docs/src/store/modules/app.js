@@ -67,15 +67,15 @@ const mutations = make.mutations(state)
 
 const actions = {
   ...make.actions(state),
-  init: async ({ dispatch }) => {
-    dispatch('sponsors/fetch', null, ROOT_DISPATCH)
-    dispatch('messages/fetch', null, ROOT_DISPATCH)
+  init: async ({ dispatch, getters }) => {
+    if (getters.hasApi) {
+      dispatch('sponsors/fetch', null, ROOT_DISPATCH)
+      dispatch('messages/fetch', null, ROOT_DISPATCH)
+      dispatch('ads/fetch', null, ROOT_DISPATCH)
+    }
+
     dispatch('user/fetch', null, ROOT_DISPATCH)
-    dispatch('ads/fetch', null, ROOT_DISPATCH)
     dispatch('jobs/fetch', null, ROOT_DISPATCH)
-  },
-  showSnackbar ({ state }, data) {
-    state.snackbar = Object.assign(state.snackbar, data)
   },
 }
 
@@ -120,6 +120,12 @@ const getters = {
     }
 
     return alphabetical
+  },
+  hasApi: () => {
+    return (
+      process.env.VUE_APP_COSMIC_BUCKET_SLUG &&
+      process.env.VUE_APP_COSMIC_BUCKET_READ_KEY
+    )
   },
 }
 
