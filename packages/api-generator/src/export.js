@@ -5,36 +5,6 @@ const { hyphenate, pascalize, capitalize } = require('./helpers/text')
 const { getComponentsApi, getDirectivesApi } = require('./index')
 const pkg = require('../package.json')
 
-// Are fakeComponents still needed? Does webstorm not use webtypes now?
-
-// const fakeComponents = (components, ts) => {
-//   const imports = [
-//     `import Vue from 'vue'`,
-//   ]
-//   if (ts) imports.push(`import { PropValidator } from 'vue/types/options'`)
-//   const inspection = ts ? '' : `// noinspection JSUnresolvedFunction\n`
-
-//   return `${imports.join('\n')}\n\n` + Object.keys(components).map(component => {
-//     const propType = type => {
-//       if (type === 'any' || typeof type === 'undefined') return ts ? 'null as any as PropValidator<any>' : 'null'
-//       if (Array.isArray(type)) return `[${type.map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(',')}]`
-//       return type.charAt(0).toUpperCase() + type.slice(1)
-//     }
-//     const quoteProp = name => name.match(/-/) ? `'${name}'` : name
-//     const componentProps = components[component].props
-//     componentProps.sort((a, b) => {
-//       if (a.name < b.name) return -1
-//       return a.name === b.name ? 0 : 1
-//     })
-//     let props = componentProps.map(prop => `    ${quoteProp(prop.name)}: ${propType(prop.type)}`).join(',\n')
-//     if (props) props = `\n  props: {\n${props}\n  }\n`
-//     return `${inspection}Vue.component('${component}', {${props}})`
-//   }).join('\n')
-// }
-
-// writePlainFile(fakeComponents(false), 'dist/fakeComponents.js')
-// writePlainFile(fakeComponents(true), 'dist/fakeComponents.ts')
-
 const createVeturApi = () => {
   const components = getComponentsApi(['en'])
 

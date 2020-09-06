@@ -113,8 +113,6 @@ const getDirectiveApi = (directiveName, locales) => {
 
   if (!directive) throw new Error(`Could not find directive: ${directiveName}`)
 
-  // type: getPropDefault(directive.default, directive.type),
-
   const api = deepmerge(loadMap(directiveName), { name: directiveName, directive: true })
 
   return addDirectiveApiDescriptions(directiveName, api, locales)
@@ -190,8 +188,6 @@ const getCompleteApi = locales => {
 //     }
 //   }
 // }
-
-// console.log(getGlobalSassVariables(['en'])[0])
 
 module.exports = {
   getApi,
