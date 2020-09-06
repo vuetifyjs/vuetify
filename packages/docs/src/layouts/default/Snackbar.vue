@@ -52,7 +52,7 @@
     name: 'DefaultSnackbar',
 
     computed: {
-      last: sync('user/last'),
+      last: sync('user/last@notification'),
       notifications: sync('messages/notifications'),
       snack: sync('snackbar/value'),
       snackbar: sync('snackbar/snackbar'),

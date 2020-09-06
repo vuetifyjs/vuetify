@@ -14,6 +14,8 @@
 
     <default-snackbar />
 
+    <default-pwa-snackbar />
+
     <default-settings />
   </v-app>
 </template>
@@ -26,6 +28,7 @@
   import DefaultBar from './AppBar'
   import DefaultDrawer from './Drawer'
   import DefaultFabToTop from './FabToTop'
+  import DefaultPwaSnackbar from './PwaSnackbar'
   import DefaultSettings from './settings/Settings'
   import DefaultSnackbar from './Snackbar'
   import DefaultSystemBar from './SystemBar'
@@ -47,6 +50,7 @@
       DefaultBar,
       DefaultDrawer,
       DefaultFabToTop,
+      DefaultPwaSnackbar,
       DefaultSettings,
       DefaultSnackbar,
       DefaultSystemBar,

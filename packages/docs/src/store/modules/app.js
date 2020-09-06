@@ -74,6 +74,7 @@ const actions = {
       dispatch('ads/fetch', null, ROOT_DISPATCH)
     }
 
+    dispatch('pwa/init', null, ROOT_DISPATCH)
     dispatch('user/fetch', null, ROOT_DISPATCH)
     dispatch('jobs/fetch', null, ROOT_DISPATCH)
   },

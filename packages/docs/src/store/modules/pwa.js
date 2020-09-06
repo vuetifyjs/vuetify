@@ -1,33 +1,72 @@
-// Pathify
+// Utilities
+import { differenceInDays } from 'date-fns'
 import { make } from 'vuex-pathify'
+import { wait } from '@/util/helpers'
 
 const state = {
-  canInstall: false,
-  installPrompt: null,
-  updateAvailable: false,
-  updateDetail: null,
+  installEvent: false,
+  snackbar: false,
+  updateEvent: false,
 }
 
 const mutations = make.mutations(state)
 
 const actions = {
   ...make.actions(state),
-  promptInstaller ({ commit, state }) {
-    commit('canInstall', false)
-    state.installPrompt.prompt()
-    state.installPrompt.userChoice.then(choice => {
-      if (choice.outcome === 'accepted') {
-        console.log('Installation Accepted')
-      } else {
-        console.log('Installation Denied')
-      }
-      commit('installPrompt', null)
+  init: ({ commit, state }) => {
+    window.addEventListener('beforeinstallprompt', e => {
+      // Intercept default PWA install prompt
+      e.preventDefault()
+
+      // If updating, skip install
+      if (state.updateEvent) return
+
+      commit('snackbar', true)
+      commit('installEvent', e)
+    })
+
+    document.addEventListener('swUpdated', e => {
+      commit('snackbar', true)
+      commit('updateEvent', e.detail)
     })
   },
-  refreshContent ({ commit, state }) {
-    commit('updateAvailable', false)
-    if (!state.updateDetail || !state.updateDetail.waiting) return
-    state.updateDetail.waiting.postMessage('skipWaiting')
+  install: async ({ commit, state, rootState }) => {
+    const last = rootState.user.last.pwa
+
+    if (differenceInDays(Date.now(), Number(last)) < 30) {
+      return
+    }
+
+    const { prompt } = state.installEvent || {}
+
+    if (!prompt) return
+
+    const { outcome } = await prompt().userChoice
+
+    console.log(`PWA install was ${outcome}.`)
+
+    commit('snackbar', false)
+
+    if (outcome !== 'accepted') return
+
+    // Wait for snackbar to hide
+    await wait(500)
+
+    commit('installEvent', false)
+  },
+  update: async ({ commit, state }) => {
+    const { waiting } = state.updateEvent || {}
+
+    if (!waiting) return
+
+    waiting.postMessage('skipWaiting')
+
+    commit('snackbar', false)
+
+    // Wait for snackbar to hide
+    await wait(500)
+
+    commit('updateEvent', false)
   },
 }
 

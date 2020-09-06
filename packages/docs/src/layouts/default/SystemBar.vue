@@ -22,17 +22,17 @@
     name: 'HomeSystemBar',
 
     computed: {
-      promotion: sync('user/promotion'),
+      last: sync('user/last@promotion'),
       hasPromotion () {
-        if (!this.promotion) return true
+        if (!this.last) return true
 
-        return differenceInHours(Date.now(), Number(this.promotion)) > 1
+        return differenceInHours(Date.now(), Number(this.last)) > 1
       },
     },
 
     methods: {
       onClick () {
-        this.promotion = Date.now()
+        this.last = Date.now()
       },
     },
   }
