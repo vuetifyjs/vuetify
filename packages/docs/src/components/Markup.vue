@@ -7,6 +7,7 @@
       ref="code"
       :code="code"
       :language="language"
+      :inline="inline"
     />
   </app-code>
 </template>
@@ -37,6 +38,7 @@
     props: {
       code: String,
       language: String,
+      inline: Boolean,
     },
   }
 </script>

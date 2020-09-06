@@ -18,10 +18,10 @@
               <div class="font-weight-bold text-mono">{{ item[header] }}</div>
             </template>
             <template v-else-if="header === 'type' || header === 'signature'">
-              <div class="text-mono">{{ Array.isArray(item[header]) ? item[header].join(', ') : item[header] }}</div>
+              <div class="text-mono" v-html="getType(item[header])" />
             </template>
             <template v-else-if="header === 'default'">
-              <code>{{ getDefaultValue(item) }}</code>
+              <div class="text-mono" v-html="getDefaultValue(item)" />
             </template>
             <template v-else-if="header === 'description'">
               <app-md v-if="item[header][locale]">{{ item[header][locale] }}</app-md>
@@ -46,6 +46,10 @@
 
 <script>
   import { get } from 'vuex-pathify'
+  import Prism from 'prismjs'
+  import 'prismjs/themes/prism.css'
+  import 'prismjs/components/prism-scss'
+  import 'prismjs/components/prism-typescript'
 
   const getApi = name => {
     return import(
@@ -87,9 +91,14 @@
       this.api = (await getApi(this.name)).default
     },
     methods: {
+      getType (value) {
+        const type = Array.isArray(value) ? value.join(', ') : value
+        return Prism.highlight(type, Prism.languages.typescript)
+      },
       getDefaultValue (item) {
         const { default: defaultValue } = item
-        return defaultValue == null || typeof defaultValue === 'string' ? String(defaultValue) : JSON.stringify(defaultValue, null, 2)
+        const asd = defaultValue == null || typeof defaultValue === 'string' ? String(defaultValue) : JSON.stringify(defaultValue, null, 2)
+        return Prism.highlight(asd, this.field === 'sass' ? Prism.languages.scss : Prism.languages.typescript)
       },
       getLanguage (item) {
         if (item.snippet) return 'html'
