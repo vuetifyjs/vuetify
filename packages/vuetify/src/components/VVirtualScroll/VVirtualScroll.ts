@@ -116,6 +116,7 @@ export default Measurable.extend({
         modifiers: { self: true },
         value: this.onScroll,
       }],
+      on: this.$listeners,
     }, [content])
   },
 })

@@ -8,7 +8,6 @@
         outlined
         rel="sponsored"
         target="_blank"
-        @click="$ga.event('jobs', 'click', `${job.company} - ${job.id}`)"
       >
         <v-card-title class="white align-start">
           <v-avatar

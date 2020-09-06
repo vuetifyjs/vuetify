@@ -35,7 +35,6 @@
                     rel="noopener"
                     target="_blank"
                     width="450"
-                    @click="$ga.event('home', 'click', 'card', card.title)"
                   >
                     <v-img
                       :alt="card.title"

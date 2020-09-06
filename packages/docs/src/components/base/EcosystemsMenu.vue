@@ -38,7 +38,6 @@
         :key="ecosystem.text"
         v-bind="ecosystem"
         no-markdown
-        @click="$ga.event('toolbar', 'click', 'ecosystems', ecosystem.text)"
       />
 
       <v-divider />
@@ -50,7 +49,6 @@
         :key="social.text"
         v-bind="social"
         no-markdown
-        @click="$ga.event('toolbar', 'click', 'ecosystems', social.text)"
       />
     </v-list>
   </v-menu>

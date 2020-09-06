@@ -17,7 +17,6 @@
       max-height="78"
       class="flex-shrink-1"
       contain
-      @click="$ga.event('sponsors', 'click', value.metadata.name)"
     />
   </v-card>
 </template>
