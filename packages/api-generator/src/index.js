@@ -28,10 +28,20 @@ const loadMap = (componentName, fallback = {}) => {
   }
 }
 
+const getSources = api => {
+  return ['props', 'events', 'slots'].reduce((arr, category) => {
+    for (const item of api[category]) {
+      if (!arr.includes(item.source)) arr.push(item.source)
+    }
+    return arr
+  }, [])
+}
+
 const addComponentApiDescriptions = (componentName, api, locales) => {
   for (const localeName of locales) {
     const sources = [
       loadLocale(componentName, localeName),
+      ...getSources(api).map(source => loadLocale(source, localeName)),
       ...api.mixins.map(mixin => loadLocale(mixin, localeName)),
       loadLocale('generic', localeName),
     ]
