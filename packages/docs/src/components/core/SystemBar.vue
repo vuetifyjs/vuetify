@@ -1,101 +1,92 @@
 <template>
   <v-system-bar
-    v-if="!hasClosedBanner"
-    id="core-system-bar"
+    v-if="hasPromotion"
     app
-    color="#1B2E83"
     dark
-    height="56"
-    class="align-center"
+    height="84"
   >
-    <v-responsive
-      class="mx-auto shrink pr-12"
-      max-width="1280"
-    >
-      <a
-        class="d-flex py-3 align-center flex-nowrap"
-        href="https://vueschool.io/plans?friend=vuetify&utm_source=Vuetifyjs.com&utm_medium=Link&utm_content=Ad&utm_campaign=Flash%20March"
-        rel="sponsored"
-        target="_blank"
-        style="color: inherit;"
-      >
-        <v-img
-          class="mx-3"
-          contain
-
-          src="https://cdn.vuetifyjs.com/images/vuetify-ads/vue-school-2.png"
-        />
-
-        <v-divider
-          vertical
-          class="hidden-xs-only mx-3 mx-md-6"
-        />
-
-        <div
-          :class="{
-            [$vuetify.breakpoint.mdAndDown ? 'subtitle-2' : 'headline']: true
-          }"
-          class="text-uppercase font-weight-medium white--text text-right text-sm-left"
-        >
-          <span class="yellow--text font-weight-black">$40&nbsp;</span>
-          <span class="hidden-xs-only">OFF VUE SCHOOL'S</span>
-          VIDEO COURSES
-        </div>
-
-        <v-divider
-          class="ml-3 mr-2 ml-md-6 mr-md-5"
-          vertical
-        />
-
-        <v-img
-          :max-width="$vuetify.breakpoint.smAndDown ? 125 : 180"
-          class="d-none d-sm-inline-block"
-          contain
-          src="https://cdn.vuetifyjs.com/images/vuetify-ads/vueschool-group.png"
-        />
-
-        <v-btn
-          class="mx-5 hidden-md-and-down"
-          color="yellow"
-          depressed
-          light
-          rounded
-          small
-        >
-          Master Vue.js
-        </v-btn>
-      </a>
-    </v-responsive>
+    <a
+      class="bts-banner"
+      href="https://vueschool.io/sales/back-to-school?friend=vuetify&utm_source=vuetify&utm_medium=banner&utm_campaign=autumn"
+      rel="noopener"
+      target="_blank"
+    />
 
     <v-btn
-      class="core-system-bar__close mr-4"
+      absolute
+      right
       icon
-      small
-      @click.stop="hasClosedBanner = true"
+      @click="onClick"
     >
-      <v-icon class="mr-0">
-        mdi-close
-      </v-icon>
+      <v-icon>$close</v-icon>
     </v-btn>
   </v-system-bar>
 </template>
 
 <script>
+  // Utilities
+  import { differenceInHours } from 'date-fns'
+
   export default {
-    name: 'CoreSystemBar',
+    name: 'HomeSystemBar',
 
     data: () => ({
-      hasClosedBanner: true,
+      promotion: localStorage.getItem('vs-back-to-school'),
     }),
+
+    computed: {
+      hasPromotion () {
+        if (!this.promotion) return true
+
+        return differenceInHours(Date.now(), Number(this.promotion)) > 1
+      },
+    },
+
+    methods: {
+      onClick () {
+        this.promotion = Date.now()
+
+        localStorage.setItem('vs-back-to-school', this.promotion)
+      },
+    },
   }
 </script>
 
-<style lang="sass">
-  #core-system-bar
-    a
-      text-decoration: none
+<style type="text/css">
+  .bts-banner {
+    display: block;
+    height: inherit;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #1E204D;
+    background-color: #0D1337;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+      url(https://cdn.vuetifyjs.com/docs/images/promotions/back-to-school/bts-mobile.png),
+      linear-gradient(90deg, rgba(30,32,77,1) 50%, rgba(13,19,55,1) 100%);
+  }
 
-    .core-system-bar__close
-      position: absolute
-      right: 0
+  @media (min-width: 768px) {
+    .bts-banner {
+      background-image:
+        url(https://cdn.vuetifyjs.com/docs/images/promotions/back-to-school/bts-tablet.png),
+        linear-gradient(90deg, rgba(30,32,77,1) 50%, rgba(13,19,55,1) 100%);
+    }
+  }
+
+  @media (min-width: 992px) {
+    .bts-banner {
+      background-image:
+        url(https://cdn.vuetifyjs.com/docs/images/promotions/back-to-school/bts-desktop.png),
+        linear-gradient(90deg, rgba(30,32,77,1) 50%, rgba(13,19,55,1) 100%);
+    }
+  }
 </style>
