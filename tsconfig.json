@@ -63,8 +63,19 @@
     "emitDecoratorMetadata": true             /* Enables experimental support for emitting type metadata for decorators. */
   },
   "exclude": [
-    "**/*.spec.ts",
+    ".git",
+    ".vscode",
     "**/*.spec.js",
-    "node_modules"
+    "**/*.spec.ts",
+    "coverage",
+    "dist",
+    "es5",
+    "lib-temp",
+    "lib",
+    "node_modules",
+    "styles",
+    "temp",
+    "tmp",
+    "types"
   ]
 }
