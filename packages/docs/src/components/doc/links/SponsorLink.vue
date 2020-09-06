@@ -10,8 +10,6 @@
     }"
     color="primary"
     outlined
-    rounded
-    small
     v-bind="$attrs"
     v-on="$listeners"
   >

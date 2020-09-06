@@ -93,5 +93,6 @@
   "directives/ripples": "/directives/ripple",
   "directives/scrolling": "/directives/scroll",
   "directives/touch-support": "/directives/touch",
-  "customization/accessibility": "/getting-started/accessibility"
+  "customization/accessibility": "/getting-started/accessibility",
+  "customization/rtl": "/customization/bidirectionality"
 }

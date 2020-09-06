@@ -22,6 +22,13 @@
           v-bind="$attrs"
         />
       </v-col>
+
+      <v-col
+        cols="12"
+        class="text-center mt-3"
+      >
+        <sponsor-link large />
+      </v-col>
     </v-row>
   </v-sheet>
 </template>
@@ -43,11 +50,6 @@
       sponsors () {
         return Object.values(this.byTier)
           .reduce((tiers, tier) => tiers.concat(tier), [])
-      },
-      tiers () {
-        return this.$vuetify.breakpoint.smAndUp
-          ? [1, 2, 3, 4, 5]
-          : [1, 2, 3]
       },
     },
   }

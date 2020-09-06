@@ -39,13 +39,13 @@
     "title": "customization",
     "icon": "$mdiImageEditOutline:$mdiImageEdit",
     "items": [
+      "bidirectionality",
       "breakpoints",
       "global-config",
       "scrolling",
       "icons",
       "internationalization",
       "presets",
-      "rtl",
       "sass-variables",
       "theme"
     ]

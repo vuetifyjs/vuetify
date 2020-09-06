@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Accessibility
+  title: Accessibility (a11y)
   description: See examples and the advantages of having accessibility (a11y) support in Vuetify components.
   keywords: a11y, accessibility, usability
 related:
@@ -9,7 +9,7 @@ related:
   - /components/list-item-groups/
 ---
 
-# Accessibility
+# Accessibility (a11y)
 
 Web accessibility **(a11y for short)**, is the inclusive practice of ensuring there are no barriers that prevent the interaction with, or access to, websites on the World Wide Web by people with disabilities. Vuetify components are built to provide keyboard interactions for all mouse-based actions and utilize HTML5 semantic elements where applicable.
 
