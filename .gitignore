@@ -19,4 +19,4 @@ coverage/
 cypress/screenshots
 cypress/videos
 
-.now
+.vercel
