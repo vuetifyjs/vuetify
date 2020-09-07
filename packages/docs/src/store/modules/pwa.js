@@ -21,13 +21,13 @@ const actions = {
       // If updating, skip install
       if (state.updateEvent) return
 
-      commit('snackbar', true)
       commit('installEvent', e)
+      commit('snackbar', true)
     })
 
     document.addEventListener('swUpdated', e => {
-      commit('snackbar', true)
       commit('updateEvent', e.detail)
+      commit('snackbar', true)
     })
   },
   install: async ({ commit, state, rootState }) => {
@@ -41,7 +41,9 @@ const actions = {
 
     if (!prompt) return
 
-    const { outcome } = await prompt().userChoice
+    prompt()
+
+    const { outcome } = await state.installEvent.userChoice
 
     console.log(`PWA install was ${outcome}.`)
 
