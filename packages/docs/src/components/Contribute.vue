@@ -7,9 +7,7 @@
           path="contribute.edit-page"
         >
           <template v-slot:url>
-            <app-link :href="href">
-              <span v-text="$t('github')" />
-            </app-link>
+            <app-link :href="href">GitHub</app-link>
           </template>
         </i18n>
 
