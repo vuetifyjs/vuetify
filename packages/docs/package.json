@@ -35,7 +35,6 @@
     "webpack-node-externals": "^2.5.1"
   },
   "devDependencies": {
-    "@vuetify/api-generator": "^2.3.10",
     "@mdi/js": "^5.2.45",
     "@vue/cli-plugin-babel": "~4.5.3",
     "@vue/cli-plugin-eslint": "~4.5.4",
@@ -43,6 +42,7 @@
     "@vue/cli-plugin-router": "~4.5.3",
     "@vue/cli-plugin-vuex": "~4.5.3",
     "@vue/cli-service": "~4.5.3",
+    "@vuetify/api-generator": "^2.3.10",
     "@vuetify/vue-cli-plugin-base": "~0.3.5",
     "cosmicjs": "^3.2.43",
     "date-fns": "^2.14.0",

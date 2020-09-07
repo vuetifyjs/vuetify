@@ -20,7 +20,6 @@ const DataPagination = {
 
 const DataProps = [
   { name: 'items', source: 'v-data' },
-  { name: 'itemKey', source: 'v-data' },
   { name: 'options', source: 'v-data', type: 'DataOptions', example: DataOptions },
   { name: 'sortBy', source: 'v-data' },
   { name: 'sortDesc', source: 'v-data' },

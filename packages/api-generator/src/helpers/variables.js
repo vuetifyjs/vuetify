@@ -169,11 +169,6 @@ const VSelect = {
       source: 'v-select',
     },
     {
-      name: 'filter',
-      default: '(item: object, queryText: string, itemText: string): boolean',
-      source: 'v-select',
-    },
-    {
       name: 'valueComparator',
       default: '(a: any, b: any): boolean',
       source: 'v-select',

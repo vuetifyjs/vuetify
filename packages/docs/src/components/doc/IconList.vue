@@ -79,7 +79,7 @@
 
 <script>
   import * as allIcons from '@mdi/js'
-  import { kebabCase } from 'lodash'
+  import kebabCase from 'lodash/kebabCase'
 
   export default {
     name: 'IconList',

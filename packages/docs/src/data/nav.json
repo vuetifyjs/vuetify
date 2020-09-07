@@ -72,7 +72,6 @@
     "icon": "$mdiViewDashboardOutline:$mdiViewDashboard",
     "group": "components",
     "items": [
-      "api-explorer",
       "alerts",
       "application",
       "aspect-ratios",

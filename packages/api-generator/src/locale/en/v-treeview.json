@@ -36,7 +36,7 @@
     "append": "Appends content after label",
     "label": "Label content",
     "prepend": "Prepends content before label"
-},
+  },
   "events": {
     "input": "Emits the array of selected items when this value changes",
     "update:active": "Emits the array of active items when this value changes",

@@ -19,12 +19,7 @@
           `theme--${$vuetify.theme.isDark ? 'dark' : 'light'}`
         ]"
       >
-        <app-md
-          tag="div"
-          class="v-data-table__wrapper"
-        >
-          {{ api.table }}
-        </app-md>
+        <api-table :name="api.text" field="sass" />
       </div>
     </v-col>
   </v-row>
@@ -33,9 +28,7 @@
 <script>
   // Utilities
   import { get } from 'vuex-pathify'
-  import sassApi from '@vuetify/api-generator/dist/sass-api'
-
-  import genTable from '@/util/tables'
+  import sassApi from '@/api/sass'
 
   export default {
     name: 'SassApi',
@@ -59,7 +52,7 @@
       locale: get('route/params@locale'),
       items () {
         const items = []
-        for (const item of Object.keys(this.sassApi) || []) {
+        for (const item of this.sassApi) {
           const type = this.types[item] || 'component'
           items.push({
             text: item,
@@ -72,15 +65,8 @@
 
     methods: {
       async genApi (items) {
-        const apiItems = []
-        for (const item of items) {
-          const { text } = item
-          const table = this.genTable(this.sassApi[text], this.locale)
-          apiItems.push({ text, table })
-        }
-        this.apiItems = apiItems
+        this.apiItems = items
       },
-      genTable,
     },
   }
 </script>
