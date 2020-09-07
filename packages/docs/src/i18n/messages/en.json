@@ -88,7 +88,8 @@
     "why-vuetify": "Why Vuetify?"
   },
   "homepage": "Vuetify Home Ppage",
-  "install-documentation-locally": "Install Vuetify App?",
+  "install": "Install",
+  "install-vuetify-app": "Install Vuetify App?",
   "introduction": "Introduction",
   "invert-example-colors": "Invert example colors",
   "jobs": "Jobs",

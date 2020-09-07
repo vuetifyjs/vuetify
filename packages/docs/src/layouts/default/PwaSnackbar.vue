@@ -2,47 +2,44 @@
   <v-snackbar
     :value="snackbar"
     :vertical="isInstalling"
-    app
     bottom
+    class="v-snackbar--pwa"
     color="white"
     light
     right
     timeout="-1"
   >
-    <v-responsive
+
+    <v-list-item
       v-if="isInstalling"
-      max-width="350"
+      class="px-0 mb-2"
     >
-      <v-list-item class="px-0">
-        <v-list-item-icon class="mr-2 my-0 align-self-center">
-          <v-img
-            class="mx-auto"
-            contain
-            height="52"
-            src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-light.svg"
-            width="52"
-          />
-        </v-list-item-icon>
+      <v-list-item-icon class="mr-2 my-0 align-self-center">
+        <v-img
+          class="mx-auto"
+          contain
+          height="52"
+          src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-light.svg"
+          width="52"
+        />
+      </v-list-item-icon>
 
-        <v-list-item-content>
-          <v-list-item-title>
-            <i18n
-              v-if="path"
-              v-bind="{ path }"
-            />
-          </v-list-item-title>
+      <v-list-item-content>
+        <v-list-item-title>
+          <app-md v-if="path">
+            {{ $t(path) }}
+          </app-md>
+        </v-list-item-title>
 
-          <v-list-item-subtitle>
-            vuetifyjs.com
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-    </v-responsive>
+        <v-list-item-subtitle>
+          vuetifyjs.com
+        </v-list-item-subtitle>
+      </v-list-item-content>
+    </v-list-item>
 
-    <i18n
-      v-else-if="isUpdating"
-      v-bind="{ path }"
-    />
+    <app-md v-else-if="isUpdating">
+      {{ $t(path) }}
+    </app-md>
 
     <template
       v-if="action"
@@ -92,7 +89,7 @@
         'installEvent',
         'updateEvent',
       ]),
-      last: sync('user/last@pwa'),
+      last: sync('user/last@install'),
       snackbar: sync('pwa/snackbar'),
       action () {
         if (this.updateEvent) return 'refresh'
@@ -106,7 +103,7 @@
       },
       path () {
         if (this.updateEvent) return 'new-content-available'
-        if (this.installEvent) return 'install-documentation-locally'
+        if (this.installEvent) return 'install-vuetify-app'
       },
     },
 
@@ -126,3 +123,11 @@
     },
   }
 </script>
+
+<style lang="sass">
+  .v-snackbar--pwa
+
+    p
+      line-height: normal // v-snackbar__content sets this to 1.25rem 🤔
+      margin-bottom: 0 !important
+</style>
