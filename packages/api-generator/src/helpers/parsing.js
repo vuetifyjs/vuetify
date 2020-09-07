@@ -1,6 +1,6 @@
 const Vue = require('vue')
 const fs = require('fs')
-const { hyphenate, pascalize } = require('./text')
+const { kebabCase, pascalize } = require('./text')
 
 function parseFunctionParams (func) {
   const groups = /function\s_.*\((.*)\)\s\{.*/i.exec(func)
@@ -50,7 +50,7 @@ function getPropSource (name, mixins) {
     if (mixin.options.name) {
       const source = Object.keys(mixin.options.props || {}).find(p => p === name) && mixin.options.name
       const found = getPropSource(name, [mixin.super].concat(mixin.options.extends).concat(mixin.options.mixins).filter(m => !!m)) || source
-      if (found) return hyphenate(found)
+      if (found) return kebabCase(found)
     }
   }
 
@@ -59,7 +59,7 @@ function getPropSource (name, mixins) {
 
 function genProp (name, prop, mixins, cmp) {
   const type = getPropType(prop.type)
-  const propSource = getPropSource(name, mixins) || hyphenate(cmp)
+  const propSource = getPropSource(name, mixins) || kebabCase(cmp)
   const source = (propSource.slice(-10) === 'transition') ? 'transitions' : propSource
 
   return {

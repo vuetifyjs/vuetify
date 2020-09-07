@@ -1,6 +1,6 @@
 const Vue = require('vue')
 const Vuetify = require('vuetify')
-const { hyphenate, pascalize } = require('./helpers/text')
+const { kebabCase, pascalize } = require('./helpers/text')
 const { parseComponent, parseSassVariables, parseGlobalSassVariables } = require('./helpers/parsing')
 const deepmerge = require('./helpers/merge')
 
@@ -158,7 +158,7 @@ const getComponentsApi = locales => {
     if (!componentNameRegex.test(componentName)) continue
     if (EXCLUDES.includes(componentName)) continue
 
-    const kebabName = hyphenate(componentName)
+    const kebabName = kebabCase(componentName)
 
     components.push(getComponentApi(kebabName, locales))
   }

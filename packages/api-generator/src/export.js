@@ -1,7 +1,7 @@
 const rimraf = require('rimraf')
 const { resolve } = require('path')
 const { writeJsonFile } = require('./helpers/write')
-const { hyphenate, pascalize, capitalize } = require('./helpers/text')
+const { capitalize, kebabCase, pascalize } = require('./helpers/text')
 const { getComponentsApi, getDirectivesApi } = require('./index')
 const pkg = require('../package.json')
 
@@ -12,7 +12,7 @@ const createVeturApi = () => {
     return {
       ...obj,
       [component.name]: {
-        attributes: component.props.map(p => hyphenate(p.name)).sort(),
+        attributes: component.props.map(p => kebabCase(p.name)).sort(),
         description: '',
       },
     }
@@ -26,7 +26,7 @@ const createVeturApi = () => {
       else if (Array.isArray(type)) type = type.map(t => t.toLowerCase()).join('|')
       else type = type.toLowerCase()
 
-      a[`${component.name}/${hyphenate(prop.name)}`] = {
+      a[`${component.name}/${kebabCase(prop.name)}`] = {
         type,
         description: prop.description.en || '',
       }
