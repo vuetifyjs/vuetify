@@ -1,76 +1,24 @@
 <template>
   <v-snackbar
     :value="snackbar"
-    :vertical="isInstalling"
     bottom
     class="v-snackbar--pwa"
-    color="white"
-    light
     right
     timeout="-1"
+    vertical
   >
+    <app-md>{{ $t('new-content-available') }}</app-md>
 
-    <v-list-item
-      v-if="isInstalling"
-      class="px-0 mb-2"
-    >
-      <v-list-item-icon class="mr-2 my-0 align-self-center">
-        <v-img
-          class="mx-auto"
-          contain
-          height="52"
-          src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-light.svg"
-          width="52"
-        />
-      </v-list-item-icon>
-
-      <v-list-item-content>
-        <v-list-item-title>
-          <app-md v-if="path">
-            {{ $t(path) }}
-          </app-md>
-        </v-list-item-title>
-
-        <v-list-item-subtitle>
-          vuetifyjs.com
-        </v-list-item-subtitle>
-      </v-list-item-content>
-    </v-list-item>
-
-    <app-md v-else-if="isUpdating">
-      {{ $t(path) }}
-    </app-md>
-
-    <template
-      v-if="action"
-      #action="{ attrs }"
-    >
+    <template #action="{ attrs }">
       <app-btn
-        :text="false"
         class="primary"
-        depressed
-        min-width="70"
+        min-width="128"
         v-bind="attrs"
-        @click="onClick"
+        @click="update"
       >
         <i18n
-          :path="action"
           class="white--text"
-        />
-      </app-btn>
-
-      <app-btn
-        v-if="isInstalling"
-        class="ml-2"
-        min-width="70"
-        outlined
-        path="cancel"
-        v-bind="attrs"
-        @click="onCancel"
-      >
-        <i18n
-          path="cancel"
-          class="primary--text"
+          path="refresh"
         />
       </app-btn>
     </template>
@@ -79,53 +27,41 @@
 
 <script>
   // Utilities
-  import { call, get, sync } from 'vuex-pathify'
+  import { wait } from '@/util/helpers'
+  import { call, sync } from 'vuex-pathify'
 
   export default {
     name: 'DefaultPwaSnackbar',
 
     computed: {
-      ...get('pwa', [
-        'installEvent',
-        'updateEvent',
+      ...sync('pwa', [
+        'snackbar',
+        'sw',
       ]),
-      last: sync('user/last@install'),
-      snackbar: sync('pwa/snackbar'),
-      action () {
-        if (this.updateEvent) return 'refresh'
-        if (this.installEvent) return 'install'
-      },
-      isInstalling () {
-        return this.action === 'install'
-      },
-      isUpdating () {
-        return this.action === 'refresh'
-      },
-      path () {
-        if (this.updateEvent) return 'new-content-available'
-        if (this.installEvent) return 'install-vuetify-app'
+    },
+
+    watch: {
+      'sw.update': {
+        immediate: true,
+        async handler (val) {
+          if (!val) return
+
+          await wait(5000)
+
+          this.snackbar = true
+        },
       },
     },
 
-    methods: {
-      ...call('pwa', [
-        'install',
-        'update',
-      ]),
-      onCancel () {
-        this.snackbar = false
-        this.last = Date.now()
-      },
-      onClick () {
-        if (this.isUpdating) this.update()
-        else if (this.isInstalling) this.install()
-      },
-    },
+    methods: { update: call('pwa/update') },
   }
 </script>
 
 <style lang="sass">
-  .v-snackbar--pwa
+  .v-snack.v-snackbar--pwa
+    .v-snack__action
+      margin-left: auto
+      margin-right: auto
 
     p
       line-height: normal // v-snackbar__content sets this to 1.25rem 🤔

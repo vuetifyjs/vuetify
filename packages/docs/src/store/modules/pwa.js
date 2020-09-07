@@ -1,76 +1,44 @@
 // Utilities
-import { differenceInDays } from 'date-fns'
 import { make } from 'vuex-pathify'
-import { wait } from '@/util/helpers'
 
 const state = {
-  installEvent: false,
   snackbar: false,
-  updateEvent: false,
+  sw: {
+    install: null,
+    update: null,
+  },
 }
 
 const mutations = make.mutations(state)
 
 const actions = {
   ...make.actions(state),
-  init: ({ commit, state, rootState }) => {
-    const last = rootState.user.last.pwa
+  init: ({ commit }) => {
+    window.addEventListener('beforeinstallprompt', e => {
+      // Intercept default PWA install prompt
+      e.preventDefault()
 
-    if (
-      !last ||
-      differenceInDays(Date.now(), Number(last)) >= 30
-    ) {
-      window.addEventListener('beforeinstallprompt', e => {
-        // Intercept default PWA install prompt
-        e.preventDefault()
+      commit('sw', { ...state.sw, install: e })
+    })
 
-        // If updating, skip install
-        if (state.updateEvent) return
-
-        commit('installEvent', e)
-        commit('snackbar', true)
-      })
-    }
-
-    document.addEventListener('swUpdated', e => {
-      commit('updateEvent', e.detail)
-      commit('snackbar', true)
+    document.addEventListener('swupdatefound', e => {
+      commit('sw', { ...state.sw, update: e.detail })
     })
   },
-  install: async ({ commit, state, rootState }) => {
-    const last = rootState.user.last.pwa
+  install: async ({ commit, state }) => {
+    const response = await state.sw.install.prompt()
+    const accepted = response.userChoice.outcome === 'accepted'
 
-    if (
-      !last ||
-      differenceInDays(Date.now(), Number(last)) < 30
-    ) {
-      return
-    }
-
-    const { installEvent } = state || {}
-
-    if (!installEvent) return
-
-    await installEvent.prompt().userChoice
+    if (accepted) console.log(`[sw:vuetify] Installing Vuetify Documentation App...`)
 
     commit('snackbar', false)
-    // Wait for snackbar to hide
-    await wait(500)
-    commit('installEvent', false)
   },
   update: async ({ commit, state }) => {
-    const { waiting } = state.updateEvent || {}
+    console.log(`[sw:vuetify] Updating documentation content...`)
 
-    if (!waiting) return
-
-    waiting.postMessage('skipWaiting')
+    state.sw.update.waiting.postMessage('sw:update')
 
     commit('snackbar', false)
-
-    // Wait for snackbar to hide
-    await wait(500)
-
-    commit('updateEvent', false)
   },
 }
 

@@ -7,7 +7,12 @@
       target="_blank"
     />
 
-    <v-btn absolute right icon @click="onClick">
+    <v-btn
+      absolute
+      icon
+      right
+      @click="onClick"
+    >
       <v-icon>$close</v-icon>
     </v-btn>
   </v-system-bar>
@@ -15,8 +20,8 @@
 
 <script>
   // Utilities
-  import { sync } from 'vuex-pathify'
   import { differenceInHours } from 'date-fns'
+  import { sync } from 'vuex-pathify'
 
   export default {
     name: 'HomeSystemBar',
