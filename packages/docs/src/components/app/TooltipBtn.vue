@@ -27,10 +27,7 @@
         </v-btn>
       </template>
 
-      <i18n
-        :path="path"
-        tag="app-md"
-      />
+      <i18n :path="path" />
     </v-tooltip>
   </span>
 </template>
