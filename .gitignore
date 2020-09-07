@@ -20,3 +20,4 @@ cypress/screenshots
 cypress/videos
 
 .vercel
+.now
