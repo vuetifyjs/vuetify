@@ -32,28 +32,17 @@ const actions = {
   },
   install: async ({ commit, state, rootState }) => {
     const last = rootState.user.last.pwa
-
     if (differenceInDays(Date.now(), Number(last)) < 30) {
       return
     }
 
-    const { prompt } = state.installEvent || {}
-
-    if (!prompt) return
-
-    prompt()
-
-    const { outcome } = await state.installEvent.userChoice
-
-    console.log(`PWA install was ${outcome}.`)
+    const { installEvent } = state || {}
+    if (!installEvent) return
+    await installEvent.prompt().userChoice
 
     commit('snackbar', false)
-
-    if (outcome !== 'accepted') return
-
     // Wait for snackbar to hide
     await wait(500)
-
     commit('installEvent', false)
   },
   update: async ({ commit, state }) => {
