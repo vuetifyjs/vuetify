@@ -13,17 +13,24 @@ const mutations = make.mutations(state)
 
 const actions = {
   ...make.actions(state),
-  init: ({ commit, state }) => {
-    window.addEventListener('beforeinstallprompt', e => {
-      // Intercept default PWA install prompt
-      e.preventDefault()
+  init: ({ commit, state, rootState }) => {
+    const last = rootState.user.last.pwa
 
-      // If updating, skip install
-      if (state.updateEvent) return
+    if (
+      !last ||
+      differenceInDays(Date.now(), Number(last)) >= 30
+    ) {
+      window.addEventListener('beforeinstallprompt', e => {
+        // Intercept default PWA install prompt
+        e.preventDefault()
 
-      commit('installEvent', e)
-      commit('snackbar', true)
-    })
+        // If updating, skip install
+        if (state.updateEvent) return
+
+        commit('installEvent', e)
+        commit('snackbar', true)
+      })
+    }
 
     document.addEventListener('swUpdated', e => {
       commit('updateEvent', e.detail)
@@ -32,13 +39,29 @@ const actions = {
   },
   install: async ({ commit, state, rootState }) => {
     const last = rootState.user.last.pwa
-    if (differenceInDays(Date.now(), Number(last)) < 30) {
+
+    if (
+      !last ||
+      differenceInDays(Date.now(), Number(last)) < 30
+    ) {
       return
     }
 
     const { installEvent } = state || {}
+
     if (!installEvent) return
+
     await installEvent.prompt().userChoice
+
+    const { prompt } = state.installEvent || {}
+
+    if (!prompt) return
+
+    prompt()
+
+    const { outcome } = await state.installEvent.userChoice
+
+    console.log(`PWA install was ${outcome}.`)
 
     commit('snackbar', false)
     // Wait for snackbar to hide
