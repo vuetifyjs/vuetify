@@ -53,16 +53,6 @@ const actions = {
 
     await installEvent.prompt().userChoice
 
-    const { prompt } = state.installEvent || {}
-
-    if (!prompt) return
-
-    prompt()
-
-    const { outcome } = await state.installEvent.userChoice
-
-    console.log(`PWA install was ${outcome}.`)
-
     commit('snackbar', false)
     // Wait for snackbar to hide
     await wait(500)
