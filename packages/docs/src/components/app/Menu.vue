@@ -41,14 +41,13 @@
 </template>
 
 <script>
+  // Components
   import DefaultList from '@/layouts/default/List'
 
   export default {
     name: 'AppMenu',
 
-    components: {
-      DefaultList,
-    },
+    components: { DefaultList },
 
     props: {
       items: {

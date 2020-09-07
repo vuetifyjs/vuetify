@@ -58,9 +58,7 @@
   export default {
     name: 'DefaultBar',
 
-    components: {
-      DefaultSearch,
-    },
+    components: { DefaultSearch },
 
     computed: {
       ...sync('app', [

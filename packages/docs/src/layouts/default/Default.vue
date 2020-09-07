@@ -24,11 +24,11 @@
 
   // Components
   import DefaultBar from './AppBar'
-  import DefaultSystemBar from './SystemBar'
   import DefaultDrawer from './Drawer'
   import DefaultFabToTop from './FabToTop'
-  import DefaultSnackbar from './Snackbar'
   import DefaultSettings from './settings/Settings'
+  import DefaultSnackbar from './Snackbar'
+  import DefaultSystemBar from './SystemBar'
   import DefaultToc from './Toc'
   import DefaultView from './View'
 
@@ -45,11 +45,11 @@
 
     components: {
       DefaultBar,
-      DefaultSystemBar,
       DefaultDrawer,
       DefaultFabToTop,
-      DefaultSnackbar,
       DefaultSettings,
+      DefaultSnackbar,
+      DefaultSystemBar,
       DefaultToc,
       DefaultView,
     },

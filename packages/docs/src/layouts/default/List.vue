@@ -41,6 +41,7 @@
 </template>
 
 <script>
+  // Components
   import DefaultListGroup from './ListGroup'
   import DefaultListItem from './ListItem'
 

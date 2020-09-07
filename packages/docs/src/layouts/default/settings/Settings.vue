@@ -30,14 +30,14 @@
 </template>
 
 <script>
-  // Utilities
-  import { get, sync } from 'vuex-pathify'
-
   // Components
   import DefaultSettingsDrawerGrouping from './DrawerGrouping'
   import DefaultSettingsDrawerPrepend from './DrawerPrepend'
-  import DefaultSettingsTheme from './Theme'
   import DefaultSettingsRtl from './Rtl'
+  import DefaultSettingsTheme from './Theme'
+
+  // Utilities
+  import { get, sync } from 'vuex-pathify'
 
   export default {
     name: 'DefaultSettings',
@@ -45,8 +45,8 @@
     components: {
       DefaultSettingsDrawerGrouping,
       DefaultSettingsDrawerPrepend,
-      DefaultSettingsTheme,
       DefaultSettingsRtl,
+      DefaultSettingsTheme,
     },
 
     computed: {

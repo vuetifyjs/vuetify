@@ -34,6 +34,7 @@
 </template>
 
 <script>
+  // Components
   import DefaultListItem from './ListItem'
   import DefaultListSubGroup from './ListSubGroup'
 

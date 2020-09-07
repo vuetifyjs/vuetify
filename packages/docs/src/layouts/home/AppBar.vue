@@ -67,8 +67,11 @@
 </template>
 
 <script>
-  import { call, sync } from 'vuex-pathify'
+  // Components
   import DefaultSearch from '@/layouts/default/Search'
+
+  // Utilities
+  import { call, sync } from 'vuex-pathify'
 
   export default {
     name: 'HomeBar',

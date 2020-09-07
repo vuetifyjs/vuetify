@@ -11,6 +11,7 @@
 </template>
 
 <script>
+  // Components
   import DefaultSystemBar from '../default/SystemBar'
   import HomeBar from './AppBar'
   import HomeFooter from './Footer'

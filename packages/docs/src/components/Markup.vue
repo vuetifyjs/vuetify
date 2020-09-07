@@ -6,13 +6,14 @@
     <prism
       ref="code"
       :code="code"
-      :language="language"
       :inline="inline"
+      :language="language"
     />
   </app-code>
 </template>
 
 <script>
+  // Imports
   import 'markdown-it-prism'
   import 'prismjs/themes/prism.css'
   import 'prismjs/components/prism-bash'
@@ -24,19 +25,19 @@
   import 'prismjs/components/prism-scss'
   import 'prismjs/components/prism-stylus'
   import 'prismjs/components/prism-typescript'
+
+  // Components
   import Prism from 'vue-prism-component'
 
   export default {
     name: 'Markup',
 
-    components: {
-      Prism,
-    },
+    components: { Prism },
 
     props: {
       code: String,
-      language: String,
       inline: Boolean,
+      language: String,
     },
   }
 </script>

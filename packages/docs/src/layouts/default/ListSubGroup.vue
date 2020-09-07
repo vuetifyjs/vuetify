@@ -6,13 +6,13 @@
 </template>
 
 <script>
+  // Components
   import DefaultListGroup from './ListGroup'
+
   export default {
     name: 'DefaultListSubGroup',
 
-    components: {
-      DefaultListGroup,
-    },
+    components: { DefaultListGroup },
 
     props: {
       item: {
