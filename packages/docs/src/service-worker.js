@@ -1,5 +1,16 @@
-/* eslint-disable no-undef */
-workbox.core.setCacheNameDetails({ prefix: 'docs-next' })
+import { precacheAndRoute, matchPrecache } from 'workbox-precaching'
+import { setDefaultHandler } from 'workbox-routing'
+
+precacheAndRoute(self.__WB_MANIFEST)
+
+setDefaultHandler(({ url, request }) => {
+  if (
+    url.origin === self.location.origin &&
+    request.destination === 'document'
+  ) {
+    return fetch(request).catch(() => matchPrecache('/_fallback.html'))
+  }
+})
 
 self.addEventListener('message', event => {
   if (!event.data) return
@@ -8,6 +19,3 @@ self.addEventListener('message', event => {
     self.skipWaiting()
   }
 })
-
-self.__precacheManifest = [].concat(self.__precacheManifest || [])
-workbox.precaching.precacheAndRoute(self.__precacheManifest, {})

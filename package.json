@@ -78,5 +78,8 @@
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
     "webpack-merge": "^4.2.1"
+  },
+  "resolutions": {
+    "workbox-webpack-plugin": "^5.1.3"
   }
 }

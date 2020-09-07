@@ -1,7 +1,6 @@
 // Imports
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const HtmlPwaPlugin = require('@vue/cli-plugin-pwa')
 
 // Globals
 const { IS_PROD } = require('../../../src/util/globals')
@@ -29,27 +28,7 @@ module.exports = config => {
     filename: '_crowdin.html',
   }])
 
-  config.plugin('pwa').after('html-spa').tap(() => ([{
-    name: 'Vuetify-Docs',
-    themeColor: '#094A7F',
-    msTileColor: '#5CBBF6',
-    manifestOptions: {
-      background_color: '#5CBBF6',
-    },
-    appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: 'black',
-
-    // configure the workbox plugin
-    workboxPluginMode: 'InjectManifest',
-    workboxOptions: {
-      // swSrc is required in InjectManifest mode.
-      swSrc: 'src/service-worker.js',
-      exclude: [
-        /index\.html$/,
-      ],
-      // ...other Workbox options...
-    },
-  }]))
+  config.plugin('pwa').after('html-spa')
 
   config.optimization
     .minimize(IS_PROD)

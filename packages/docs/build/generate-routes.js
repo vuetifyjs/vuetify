@@ -56,6 +56,7 @@ const paths = [
 const routes = [{ locale: '', path: '', fullPath: '/' }]
 
 for (const locale of languages) {
+  routes.push({ locale, path: '', fullPath: `/${locale}/` })
   for (const path of paths) {
     routes.push({ locale, path, fullPath: `/${locale}${path}` })
   }
