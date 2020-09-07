@@ -22,6 +22,16 @@
   // Utilities
   import { get, sync } from 'vuex-pathify'
 
+  // Components
+  import DefaultBar from './AppBar'
+  import DefaultSystemBar from './SystemBar'
+  import DefaultDrawer from './Drawer'
+  import DefaultFabToTop from './FabToTop'
+  import DefaultSnackbar from './Snackbar'
+  import DefaultSettings from './settings/Settings'
+  import DefaultToc from './Toc'
+  import DefaultView from './View'
+
   // Data
   import nav from '@/data/nav'
   import { localeLookup } from '@/i18n/util'
@@ -34,38 +44,14 @@
     },
 
     components: {
-      DefaultBar: () => import(
-        /* webpackChunkName: "default-app-bar" */
-        './AppBar'
-      ),
-      DefaultSystemBar: () => import(
-        /* webpackChunkName: "default-system-bar" */
-        './SystemBar'
-      ),
-      DefaultDrawer: () => import(
-        /* webpackChunkName: "default-drawer" */
-        './Drawer'
-      ),
-      DefaultFabToTop: () => import(
-        /* webpackChunkName: "default-app-fab-to-top" */
-        './FabToTop'
-      ),
-      DefaultSnackbar: () => import(
-        /* webpackChunkName: "default-snackbar" */
-        './Snackbar'
-      ),
-      DefaultSettings: () => import(
-        /* webpackChunkName: "default-settings" */
-        './settings/Settings'
-      ),
-      DefaultToc: () => import(
-        /* webpackChunkName: "default-toc" */
-        './Toc'
-      ),
-      DefaultView: () => import(
-        /* webpackChunkName: "default-view" */
-        './View'
-      ),
+      DefaultBar,
+      DefaultSystemBar,
+      DefaultDrawer,
+      DefaultFabToTop,
+      DefaultSnackbar,
+      DefaultSettings,
+      DefaultToc,
+      DefaultView,
     },
 
     data: () => ({ unassigned: [] }),

@@ -80,7 +80,7 @@
       },
     },
 
-    async mounted () {
+    mounted () {
       if (!IN_BROWSER) return
 
       document.onkeydown = e => {

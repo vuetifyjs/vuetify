@@ -34,10 +34,8 @@
     name: 'DocumentationView',
 
     metaInfo () {
-      // Check it fm exists
       if (!this.frontmatter) return {}
 
-      // Check if meta exists
       const { meta } = this.frontmatter
 
       if (!meta) return
@@ -72,7 +70,7 @@
       initializing: sync('app/initializing'),
     },
 
-    async created () {
+    created () {
       this.initializing = new Promise(this.init)
     },
 

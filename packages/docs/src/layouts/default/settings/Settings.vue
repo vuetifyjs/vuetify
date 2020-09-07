@@ -33,26 +33,20 @@
   // Utilities
   import { get, sync } from 'vuex-pathify'
 
+  // Components
+  import DefaultSettingsDrawerGrouping from './DrawerGrouping'
+  import DefaultSettingsDrawerPrepend from './DrawerPrepend'
+  import DefaultSettingsTheme from './Theme'
+  import DefaultSettingsRtl from './Rtl'
+
   export default {
     name: 'DefaultSettings',
 
     components: {
-      DefaultSettingsDrawerGrouping: () => import(
-        /* webpackChunkName: "default-settings-drawer-grouping" */
-        './DrawerGrouping'
-      ),
-      DefaultSettingsDrawerPrepend: () => import(
-        /* webpackChunkName: "default-settings-drawer-prepend" */
-        './DrawerPrepend'
-      ),
-      DefaultSettingsTheme: () => import(
-        /* webpackChunkName: "default-settings-theme" */
-        './Theme'
-      ),
-      DefaultSettingsRtl: () => import(
-        /* webpackChunkName: "default-settings-rtl" */
-        './Rtl'
-      ),
+      DefaultSettingsDrawerGrouping,
+      DefaultSettingsDrawerPrepend,
+      DefaultSettingsTheme,
+      DefaultSettingsRtl,
     },
 
     computed: {

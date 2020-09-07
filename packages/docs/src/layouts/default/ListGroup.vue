@@ -34,12 +34,15 @@
 </template>
 
 <script>
+  import DefaultListItem from './ListItem'
+  import DefaultListSubGroup from './ListSubGroup'
+
   export default {
     name: 'DefaultListGroup',
 
     components: {
-      DefaultListItem: () => import('./ListItem'),
-      DefaultListSubGroup: () => import('./ListSubGroup'),
+      DefaultListItem,
+      DefaultListSubGroup,
     },
 
     props: {

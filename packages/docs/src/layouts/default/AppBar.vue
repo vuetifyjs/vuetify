@@ -52,14 +52,14 @@
   // Utilities
   import { sync } from 'vuex-pathify'
 
+  // Components
+  import DefaultSearch from '@/layouts/default/Search'
+
   export default {
     name: 'DefaultBar',
 
     components: {
-      DefaultSearch: () => import(
-        /* webpackChunkName: "default-search" */
-        '@/layouts/default/Search'
-      ),
+      DefaultSearch,
     },
 
     computed: {

@@ -24,15 +24,13 @@
   import 'prismjs/components/prism-scss'
   import 'prismjs/components/prism-stylus'
   import 'prismjs/components/prism-typescript'
+  import Prism from 'vue-prism-component'
 
   export default {
     name: 'Markup',
 
     components: {
-      Prism: () => import(
-        /* webpackChunkName: "vue-prism-component" */
-        'vue-prism-component'
-      ),
+      Prism,
     },
 
     props: {

@@ -68,12 +68,13 @@
 
 <script>
   import { call, sync } from 'vuex-pathify'
+  import DefaultSearch from '@/layouts/default/Search'
 
   export default {
     name: 'HomeBar',
 
     components: {
-      DefaultSearch: () => import('@/layouts/default/Search'),
+      DefaultSearch,
     },
 
     computed: {

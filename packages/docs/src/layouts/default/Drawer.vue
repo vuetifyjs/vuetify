@@ -29,22 +29,18 @@
   // Utilities
   import { get, sync } from 'vuex-pathify'
 
+  // Components
+  import DefaultBecomeASponsor from './BecomeASponsor'
+  import DefaultDrawerPrepend from './DrawerPrepend'
+  import DefaultList from './List'
+
   export default {
     name: 'DefaultDrawer',
 
     components: {
-      DefaultBecomeASponsor: () => import(
-        /* webpackChunkName: "default-become-a-sponsor" */
-        './BecomeASponsor'
-      ),
-      DefaultDrawerPrepend: () => import(
-        /* webpackChunkName: "default-drawer-prepend" */
-        './DrawerPrepend'
-      ),
-      DefaultList: () => import(
-        /* webpackChunkName: "default-list" */
-        './List'
-      ),
+      DefaultBecomeASponsor,
+      DefaultDrawerPrepend,
+      DefaultList,
     },
 
     computed: {
