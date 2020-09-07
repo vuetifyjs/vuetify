@@ -28,7 +28,7 @@
 </script>
 
 <style lang="sass">
-  .v-alert--md
+  .v-alert.v-alert--md
     padding-bottom: 10px
     padding-top: 10px
 
