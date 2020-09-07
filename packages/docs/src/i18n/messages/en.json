@@ -89,7 +89,7 @@
   },
   "homepage": "Vuetify Home Ppage",
   "install": "Install",
-  "install-vuetify-app": "Install Vuetify App?",
+  "install-vuetify": "Install Vuetify Documentation",
   "introduction": "Introduction",
   "invert-example-colors": "Invert example colors",
   "jobs": "Jobs",

@@ -21,7 +21,7 @@ module.exports = {
     quiet: true,
   },
   pwa: {
-    name: 'Vuetify-Docs',
+    name: 'Vuetify Documentation',
     themeColor: '#094A7F',
     msTileColor: '#5CBBF6',
     manifestOptions: {
