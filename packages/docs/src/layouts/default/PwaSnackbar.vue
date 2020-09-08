@@ -12,7 +12,6 @@
     <template #action="{ attrs }">
       <app-btn
         class="primary"
-        min-width="128"
         v-bind="attrs"
         @click="update"
       >
@@ -59,10 +58,6 @@
 
 <style lang="sass">
   .v-snack.v-snackbar--pwa
-    .v-snack__action
-      margin-left: auto
-      margin-right: auto
-
     p
       line-height: normal // v-snackbar__content sets this to 1.25rem 🤔
       margin-bottom: 0 !important
