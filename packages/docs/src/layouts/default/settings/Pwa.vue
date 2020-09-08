@@ -23,13 +23,13 @@
 
 <script>
   // Utilities
-  import { get } from 'vuex-pathify'
+  import { call } from 'vuex-pathify'
 
   export default {
     name: 'DefaultSettingsPwa',
 
     data: () => ({ path: 'install-vuetify' }),
 
-    computed: { install: get('pwa/sw@install') },
+    methods: { install: call('pwa/install') },
   }
 </script>
