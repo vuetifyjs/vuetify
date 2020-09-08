@@ -12,6 +12,14 @@
     <default-settings-drawer-prepend />
 
     <v-container>
+      <template v-if="!!install">
+        <default-settings-pwa />
+
+        <div class="mt-2 mb-3 mx-n3">
+          <v-divider />
+        </div>
+      </template>
+
       <default-settings-theme />
 
       <div class="mt-4 mb-3 mx-n3">
@@ -33,6 +41,7 @@
   // Components
   import DefaultSettingsDrawerGrouping from './DrawerGrouping'
   import DefaultSettingsDrawerPrepend from './DrawerPrepend'
+  import DefaultSettingsPwa from './Pwa'
   import DefaultSettingsRtl from './Rtl'
   import DefaultSettingsTheme from './Theme'
 
@@ -45,6 +54,7 @@
     components: {
       DefaultSettingsDrawerGrouping,
       DefaultSettingsDrawerPrepend,
+      DefaultSettingsPwa,
       DefaultSettingsRtl,
       DefaultSettingsTheme,
     },
@@ -55,6 +65,7 @@
         'theme@dark',
       ]),
       settings: sync('app/settings'),
+      install: get('pwa/sw@install'),
     },
   }
 </script>

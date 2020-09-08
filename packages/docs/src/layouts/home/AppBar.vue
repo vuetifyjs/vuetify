@@ -27,42 +27,6 @@
     <vertical-divider />
 
     <language-menu />
-
-    <template
-      v-if="canInstall || updateAvailable"
-      #extension
-    >
-      <v-spacer />
-
-      <v-btn
-        v-if="canInstall"
-        class="mx-1"
-        color="primary"
-        outlined
-        @click="promptInstaller"
-      >
-        {{ $t('pwa.install') }}
-
-        <v-icon right>
-          $mdiPlusCircle
-        </v-icon>
-      </v-btn>
-
-      <v-btn
-        v-if="updateAvailable"
-        class="mx-1"
-        color="primary"
-        outlined
-        @click="refreshContent"
-      >
-        {{ $t('pwa.refresh') }}
-
-        <v-icon right>
-          $mdiRefreshCircle
-        </v-icon>
-      </v-btn>
-      <v-spacer />
-    </template>
   </v-app-bar>
 </template>
 
@@ -71,31 +35,16 @@
   import DefaultSearch from '@/layouts/default/Search'
 
   // Utilities
-  import { call, sync } from 'vuex-pathify'
+  import { get, sync } from 'vuex-pathify'
 
   export default {
     name: 'HomeBar',
 
-    components: {
-      DefaultSearch,
-    },
+    components: { DefaultSearch },
 
     computed: {
-      ...sync('app', [
-        'search',
-      ]),
-      ...sync('pwa', [
-        'canInstall',
-        'updateAvailable',
-      ]),
-      ...sync('user', [
-        'theme@dark',
-        'rtl',
-      ]),
-    },
-
-    methods: {
-      ...call('pwa', ['promptInstaller', 'refreshContent']),
+      dark: sync('user/theme@dark'),
+      search: get('app/search'),
     },
   }
 </script>

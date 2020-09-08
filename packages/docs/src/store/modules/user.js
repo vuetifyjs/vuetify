@@ -9,8 +9,11 @@ const state = {
     alphabetical: false,
     mini: false,
   },
-  last: null,
-  promotion: null,
+  last: {
+    install: null,
+    notification: null,
+    promotion: null,
+  },
   notifications: [],
   rtl: false,
   theme: {
@@ -30,6 +33,12 @@ const actions = {
 
     const local = localStorage.getItem('vuetify@user') || '{}'
     const user = JSON.parse(local)
+
+    // Reset local store if using old variables
+    if (Object(user.last) !== user.last) {
+      delete user.last
+      delete user.promotion
+    }
 
     for (const key in user) {
       commit(key, user[key])

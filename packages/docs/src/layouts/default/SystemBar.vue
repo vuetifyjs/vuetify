@@ -7,7 +7,12 @@
       target="_blank"
     />
 
-    <v-btn absolute right icon @click="onClick">
+    <v-btn
+      absolute
+      icon
+      right
+      @click="onClick"
+    >
       <v-icon>$close</v-icon>
     </v-btn>
   </v-system-bar>
@@ -15,24 +20,24 @@
 
 <script>
   // Utilities
-  import { sync } from 'vuex-pathify'
   import { differenceInHours } from 'date-fns'
+  import { sync } from 'vuex-pathify'
 
   export default {
     name: 'HomeSystemBar',
 
     computed: {
-      promotion: sync('user/promotion'),
+      last: sync('user/last@promotion'),
       hasPromotion () {
-        if (!this.promotion) return true
+        if (!this.last) return true
 
-        return differenceInHours(Date.now(), Number(this.promotion)) > 1
+        return differenceInHours(Date.now(), Number(this.last)) > 1
       },
     },
 
     methods: {
       onClick () {
-        this.promotion = Date.now()
+        this.last = Date.now()
       },
     },
   }
