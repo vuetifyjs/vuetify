@@ -142,7 +142,7 @@
     }),
 
     computed: {
-      notifications: sync('messages/notifications'),
+      notifications: sync('notifications/all'),
       snack: sync('snackbar/value'),
       snackbar: sync('snackbar/snackbar'),
       unotifications: sync('user/notifications'),

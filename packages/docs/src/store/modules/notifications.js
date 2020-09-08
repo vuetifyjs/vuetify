@@ -1,10 +1,12 @@
-// Pathify
 // Utilities
-import bucket from '@/plugins/cosmicjs'
 import { make } from 'vuex-pathify'
+import { subDays } from 'date-fns'
+import bucket from '@/plugins/cosmicjs'
+
+console.log(subDays(Date.now(), 40).getTime())
 
 const state = {
-  notifications: [],
+  all: [],
 }
 
 const mutations = make.mutations(state)
@@ -17,9 +19,14 @@ const actions = {
       status: 'published',
       limit: 10,
       sort: '-created_at',
+      query: {
+        created_at: {
+          $gt: Math.ceil(subDays(Date.now(), 15).getTime() / 1000),
+        },
+      },
     })
 
-    commit('notifications', notifications || [])
+    commit('all', notifications || [])
   },
 }
 
