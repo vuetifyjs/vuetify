@@ -147,24 +147,24 @@
       ],
       socials: [
         {
-          icon: 'mdi-reddit',
+          icon: '$mdiReddit',
           href: 'https://www.reddit.com/r/vuetifyjs',
-          title: 'Reddit',
+          title: 'reddit',
         },
         {
-          icon: 'mdi-github',
+          icon: '$mdiGithub',
           href: 'https://github.com/vuetifyjs/vuetify',
-          title: 'GitHub',
+          title: 'github',
         },
         {
-          icon: 'mdi-twitter',
+          icon: '$mdiTwitter',
           href: 'https://twitter.com/vuetifyjs',
-          title: 'Twitter',
+          title: 'twitter',
         },
         {
-          icon: 'mdi-discord',
+          icon: '$mdiDiscord',
           href: 'https://community.vuetifyjs.com',
-          title: 'Discord',
+          title: 'discord',
         },
       ],
     }),

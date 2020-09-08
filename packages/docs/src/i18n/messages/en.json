@@ -62,6 +62,7 @@
   "documentation": "Documentation",
   "documentation-status": "Documentation status",
   "drawer-navigation-grouping": "Drawer navigation grouping",
+  "discord": "Discord",
   "done": "All done",
   "edit-in-codepen": "Edit in Codepen",
   "edit": "Edit",
@@ -77,6 +78,7 @@
   "functional": "Functional",
   "funding": "Funding",
   "getting-started": "Getting started",
+  "github": "GitHub",
   "github-discussions": "GitHub discussions",
   "github-issues": "GitHub issues",
   "github-releases": "GitHub releases",
@@ -189,5 +191,6 @@
   "video-courses": "Video courses",
   "view-in-github": "View on GitHub",
   "view-source": "View source",
-  "viewport": "Viewport"
+  "viewport": "Viewport",
+  "vuetify": "Vuetify"
 }
