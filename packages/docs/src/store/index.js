@@ -26,7 +26,8 @@ export function createStore () {
   })
 
   if (!IS_SERVER) {
-    store.dispatch('app/init')
+    store.dispatch('user/fetch')
+    store.dispatch('pwa/init')
   }
 
   return store
