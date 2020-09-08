@@ -3,8 +3,6 @@ import { make } from 'vuex-pathify'
 import { subDays } from 'date-fns'
 import bucket from '@/plugins/cosmicjs'
 
-console.log(subDays(Date.now(), 40).getTime())
-
 const state = {
   all: [],
 }
