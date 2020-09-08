@@ -8,9 +8,6 @@ import pathify from '@/plugins/vuex-pathify'
 // Modules
 import * as modules from './modules'
 
-// Globals
-import { IS_SERVER } from '@/util/globals'
-
 Vue.use(Vuex)
 
 export function createStore () {
@@ -24,11 +21,6 @@ export function createStore () {
 
     store.dispatch('user/update', mutation)
   })
-
-  if (!IS_SERVER) {
-    store.dispatch('user/fetch')
-    store.dispatch('pwa/init')
-  }
 
   return store
 }

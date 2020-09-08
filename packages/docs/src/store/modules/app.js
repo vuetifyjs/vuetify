@@ -68,13 +68,13 @@ const mutations = make.mutations(state)
 const actions = {
   ...make.actions(state),
   init: async ({ dispatch, getters }) => {
+    dispatch('user/fetch', null, ROOT_DISPATCH)
+    dispatch('pwa/init', null, ROOT_DISPATCH)
+
     if (getters.hasApi) {
       dispatch('sponsors/fetch', null, ROOT_DISPATCH)
-      dispatch('notifications/fetch', null, ROOT_DISPATCH)
       dispatch('ads/fetch', null, ROOT_DISPATCH)
     }
-
-    dispatch('jobs/fetch', null, ROOT_DISPATCH)
   },
 }
 

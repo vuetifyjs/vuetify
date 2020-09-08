@@ -125,7 +125,8 @@
 <script>
   // Utilities
   import { formatDate } from '@/util/date.js'
-  import { sync } from 'vuex-pathify'
+  import { call, get, sync } from 'vuex-pathify'
+  import { wait } from '@/util/helpers'
 
   export default {
     name: 'NotificationsMenu',
@@ -146,6 +147,7 @@
       snack: sync('snackbar/value'),
       snackbar: sync('snackbar/snackbar'),
       unotifications: sync('user/notifications'),
+      initializing: get('app/initializing'),
       done () {
         return this.filtered.length === 0
       },
@@ -183,7 +185,15 @@
       },
     },
 
+    async mounted () {
+      await this.initializing
+      await wait(3000)
+
+      this.fetch()
+    },
+
     methods: {
+      fetch: call('notifications/fetch'),
       toggle (slug) {
         this.unotifications = this.unotifications.includes(slug)
           ? this.unotifications.filter(n => n !== slug)
