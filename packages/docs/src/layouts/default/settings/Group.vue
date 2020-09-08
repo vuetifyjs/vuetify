@@ -60,6 +60,6 @@
 
 <style lang="sass">
   // Bug in Vuetify, ripple isn't inheriting border-radius
-  .v-card.v-card--group::before
+  .v-card--group::before
     border-radius: inherit
 </style>
