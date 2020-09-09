@@ -21,7 +21,7 @@
     "lint:md": "markdownlint --config .markdownlintrc src/pages/en",
     "fix:md": "markdownlint --config .markdownlintrc src/pages/en --fix",
     "prerender": "node build/prerender",
-    "prod": "http-server dist --proxy http://localhost:8080/?"
+    "prod": "ws -p 8080 -z -d dist"
   },
   "dependencies": {
     "core-js": "^3.6.4",
@@ -49,8 +49,8 @@
     "git-date-extractor": "^3.0.0",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^3.2.0",
-    "http-server": "^0.12.3",
     "json-loader": "^0.5.7",
+    "local-web-server": "^4.2.1",
     "lodash": "^4.17.19",
     "markdown-it": "^11.0.0",
     "markdown-it-anchor": "^5.3.0",
