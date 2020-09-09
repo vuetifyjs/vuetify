@@ -32,7 +32,7 @@ function getPages (files) {
   }, {})
 }
 
-function generateFiles () {
+function generateFiles (initial = false) {
   const generatedFiles = {}
   const langDirectories = glob.sync('./src/pages/*/')
 
@@ -42,8 +42,11 @@ function generateFiles () {
     const files = glob.sync(`${langDir}/**/*.md`)
     const lang = path.basename(langDir)
 
-    fs.writeFileSync(path.resolve(`src/pages/${lang}.js`), `export default require.context('./${lang}', true, /\\.md$/)`)
     generatedFiles[`node_modules/@docs/${lang}/pages.js`] = pages(files)
+
+    if (initial) {
+      fs.writeFileSync(path.resolve(`src/pages/${lang}.js`), `export default require.context('./${lang}', true, /\\.md$/)`)
+    }
   }
 
   return generatedFiles
@@ -51,7 +54,7 @@ function generateFiles () {
 
 class Plugin {
   apply (compiler) {
-    const files = generateFiles()
+    const files = generateFiles(true)
     let shouldWrite = false
 
     const virtualModules = new VirtualModulesPlugin(files)
