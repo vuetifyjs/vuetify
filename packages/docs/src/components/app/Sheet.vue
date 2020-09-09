@@ -1,9 +1,11 @@
 <template>
   <v-sheet
     class="overflow-hidden"
-    outlined
-    rounded
-    v-bind="$attrs"
+    v-bind="{
+      outlined: true,
+      rounded: true,
+      ...$attrs,
+    }"
     v-on="$listeners"
   >
     <slot />

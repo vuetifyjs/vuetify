@@ -1,14 +1,15 @@
 <template>
   <figure>
-    <app-img
-      class="mb-3"
-      v-bind="$attrs"
-      v-on="$listeners"
-    />
+    <app-sheet :outlined="outlined">
+      <app-img
+        v-bind="$attrs"
+        v-on="$listeners"
+      />
+    </app-sheet>
 
     <figcaption
       v-if="caption"
-      class="text-subtitle-2 text-center text-capitalize"
+      class="text-subtitle-2 text-center text-capitalize mt-3"
       v-text="caption"
     />
   </figure>
@@ -20,7 +21,10 @@
 
     inheritAttrs: false,
 
-    props: { name: String },
+    props: {
+      name: String,
+      outlined: Boolean,
+    },
 
     computed: {
       caption () {

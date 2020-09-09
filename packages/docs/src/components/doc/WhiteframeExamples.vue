@@ -21,6 +21,7 @@
           :aspect-ratio="16/9"
           :name="name"
           :src="`https://cdn.vuetifyjs.com/docs/images/whiteframes/${whiteframe}.svg`"
+          outlined
         />
       </router-link>
     </v-col>
