@@ -67,7 +67,7 @@ There are also responsive variations for `flex-direction`.
 
 ## Flex justify
 
-The `justify-content` flex setting can be changed using the flex justify classes. This by default will modify the flexbox items on the **x-axis** but is reversed when using `flex-direction: column`, modifying the **y-axis**. Choose from `start` (browser default), `end`, `center`, `between`, or `around`.
+The `justify-content` flex setting can be changed using the flex justify classes. This by default will modify the flexbox items on the **x-axis** but is reversed when using `flex-direction: column`, modifying the **y-axis**. Choose from `start` (browser default), `end`, `center`, `space-between`, or `space-around`.
 
 <example file="flex/flex-justify" />
 
