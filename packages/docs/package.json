@@ -35,7 +35,6 @@
     "webpack-node-externals": "^2.5.1"
   },
   "devDependencies": {
-    "@mdi/js": "^5.2.45",
     "@vue/cli-plugin-babel": "~4.5.3",
     "@vue/cli-plugin-eslint": "~4.5.4",
     "@vue/cli-plugin-pwa": "^4.5.4",
