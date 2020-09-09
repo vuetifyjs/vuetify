@@ -22,10 +22,6 @@ export function createVuetify (store) {
     theme: {
       dark: store.state.user.theme.dark,
       options: {
-        themeCache: IN_BROWSER && IS_PROD ? {
-          get: key => localStorage.getItem(key),
-          set: (key, value) => localStorage.setItem(key, value),
-        } : undefined,
         minifyTheme: IS_SERVER ? require('minify-css-string').default : undefined,
         variations: false,
       },

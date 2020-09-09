@@ -10,7 +10,7 @@ import { IS_SERVER } from '@/util/globals'
 export async function loadFonts () {
   if (IS_SERVER) return
 
-  const WebFontLoader = await import('webfontloader')
+  const WebFontLoader = await import(/* webpackChunkName: "webfontloader" */'webfontloader')
 
   WebFontLoader.load({
     google: {

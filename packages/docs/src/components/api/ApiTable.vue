@@ -53,7 +53,8 @@
 
   const getApi = name => {
     return import(
-      /* webpackChunkName: "api-data-[request]" */
+      /* webpackChunkName: "api-data" */
+      /* webpackMode: "eager" */
       `@/api/data/${name}.js`
     )
   }

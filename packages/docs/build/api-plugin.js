@@ -84,6 +84,7 @@ function generateFiles () {
     }
 
     fs.writeFileSync(resolve(`src/api/${locale}/pages.json`), JSON.stringify(pages, null, 2))
+    fs.writeFileSync(resolve(`src/api/${locale}.js`), `export default require.context('./${locale}', true, /\\.md$/)`)
   }
 
   for (const item of api.items) {

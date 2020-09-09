@@ -8,6 +8,7 @@
 
   // Utilities
   import { get } from 'vuex-pathify'
+  import { localeLookup } from '@/i18n/util'
 
   export default {
     name: 'WhiteframesView',
@@ -18,9 +19,10 @@
 
     methods: {
       async load () {
+        const locale = localeLookup(this.locale)
         return import(
-          /* webpackChunkName: "whiteframes-view" */
-          `@/pages/${this.locale}/getting-started/whiteframes.md`
+          /* webpackChunkName: "whiteframes-view-[request]" */
+          `@/pages/${locale}/getting-started/whiteframes.md`
         )
       },
     },

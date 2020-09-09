@@ -34,7 +34,7 @@ function getPages (files) {
 
 function generateFiles () {
   const generatedFiles = {}
-  const langDirectories = glob.sync('./src/pages/*')
+  const langDirectories = glob.sync('./src/pages/*/')
 
   const pages = files => `module.exports = ${JSON.stringify(getPages(files))};`
 
@@ -42,6 +42,7 @@ function generateFiles () {
     const files = glob.sync(`${langDir}/**/*.md`)
     const lang = path.basename(langDir)
 
+    fs.writeFileSync(path.resolve(`src/pages/${lang}.js`), `export default require.context('./${lang}', true, /\\.md$/)`)
     generatedFiles[`node_modules/@docs/${lang}/pages.js`] = pages(files)
   }
 

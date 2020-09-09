@@ -92,19 +92,25 @@
     },
 
     methods: {
-      load () {
+      async load () {
         const isApi = this.category === 'api'
-        const namespace = isApi ? 'api' : 'pages'
-        const path = [namespace, localeLookup(this.locale)]
+        const locale = localeLookup(this.locale)
 
+        const context = isApi
+          ? await import(
+            /* webpackChunkName: "api-[request]" */
+            `@/api/${locale}.js`
+          )
+          : await import(
+            /* webpackChunkName: "documentation-[request]" */
+            `@/pages/${locale}.js`
+          )
+
+        const path = ['.']
         if (!isApi) path.push(this.category)
-
         path.push(this.page)
 
-        return import(
-          /* webpackChunkName: "documentation-[request]" */
-          `@/${path.join('/')}.md`
-        )
+        return context.default(`${path.join('/')}.md`)
       },
       async init (resolve, reject) {
         let structure

@@ -56,7 +56,6 @@ const state = {
   },
   drawer: null,
   initializing: false,
-  modified: {},
   nav: [],
   search: false,
   settings: false,

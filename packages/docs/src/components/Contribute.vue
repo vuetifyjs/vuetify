@@ -37,20 +37,22 @@
   // Utilities
   import { get } from 'vuex-pathify'
 
+  // Data
+  import modified from '@/data/modified'
+
   export default {
     name: 'Contribute',
 
     computed: {
       ...get('app', [
         'branch',
-        'modified',
       ]),
       ...get('route', [
         'params@category',
         'params@page',
       ]),
       at () {
-        const stat = this.modified[`/${this.category}/${this.page}/`] || {}
+        const stat = modified[`/${this.category}/${this.page}/`] || {}
 
         return stat.modified
       },

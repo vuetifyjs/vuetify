@@ -15,6 +15,8 @@
 <script>
   // Extensions
   import Documentation from './Documentation'
+
+  // Utilities
   import { localeLookup } from '@/i18n/util'
 
   export default {
@@ -26,7 +28,7 @@
       load () {
         const locale = localeLookup(this.locale)
         return import(
-          /* webpackChunkName: "home-page" */
+          /* webpackChunkName: "home-page-[request]" */
           `@/pages/${locale}/home.md`
         )
       },

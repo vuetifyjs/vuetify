@@ -7,7 +7,7 @@ export default {
     async importTemplate () {
       try {
         const template = await import(
-          /* webpackChunkName: "examples-source-[request]" */
+          /* webpackChunkName: "examples-source" */
           /* webpackMode: "lazy-once" */
           `!raw-loader!../examples/${this.file}.vue`
         )

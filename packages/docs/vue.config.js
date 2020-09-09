@@ -38,7 +38,9 @@ module.exports = {
       additionalManifestEntries: [
         { url: '/_fallback.html', revision: Date.now().toString(16) },
       ],
-      dontCacheBustURLsMatching: /^\/(js|css).+~[A-Za-z0-9]{8}\.[A-Za-z0-9]{8}\.(js|css)$/,
+      exclude: [/\.map$/],
+      dontCacheBustURLsMatching: /^\/(js|css).+[A-Za-z0-9]{8}\.(js|css)$/,
+      maximumFileSizeToCacheInBytes: 5 * 1024 ** 2,
       // ...other Workbox options...
     },
   },

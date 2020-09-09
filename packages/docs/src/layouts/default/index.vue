@@ -37,6 +37,7 @@
 
   // Data
   import nav from '@/data/nav'
+  import modified from '@/data/modified'
   import { localeLookup } from '@/i18n/util'
 
   export default {
@@ -62,7 +63,6 @@
 
     computed: {
       ...sync('app', [
-        'modified',
         'nav',
       ]),
       pages: sync('pages/pages'),
@@ -77,16 +77,7 @@
 
     methods: {
       init () {
-        this.getModified()
         this.getPages()
-      },
-      async getModified () {
-        const { default: modified } = await import(
-          /* webpackChunkName: "modified-[request]" */
-          '@/data/modified'
-        )
-
-        this.modified = modified
       },
       async getPages () {
         const locale = localeLookup(this.locale)
@@ -94,11 +85,11 @@
           import(
             /* webpackChunkName: "api-pages-[request]" */
             `@/api/${locale}/pages.json`
-            ),
+          ),
           import(
-            /* webpackChunkName: "local-pages-[request]" */
+            /* webpackChunkName: "locale-pages-[request]" */
             `@docs/${locale}/pages`
-            ),
+          ),
         ])
 
         this.pages = { ...pages, ...api }
@@ -139,11 +130,9 @@
           ? this.$i18n.t(item.title)
           : this.pages[to] || item.title
 
-        const modified = this.modified[`/${group}/${page}/`] || {}
-
         const created = {
           ...item,
-          ...modified,
+          ...(modified[`/${group}/${page}/`] || {}),
           group: parent && group,
           items,
           title,

@@ -32,7 +32,7 @@ export function layout (name = 'Default', children = [], path = '') {
     children,
     component: () => import(
       /* webpackChunkName: "layout-[request]" */
-      `@/layouts/${dir}/${name}`
+      `@/layouts/${dir}/index.vue`
     ),
     path,
   }

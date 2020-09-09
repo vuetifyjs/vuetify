@@ -34,10 +34,15 @@ module.exports = config => {
     .minimize(IS_PROD)
     .splitChunks({
       chunks: 'all',
-      minSize: 30000,
-      maxSize: 100000,
+      minSize: 20000,
       maxAsyncRequests: 20,
       maxInitialRequests: 5,
+      cacheGroups: {
+        vuetify: {
+          test: /[\\/]vuetify[\\/]lib[\\/]/,
+          enforce: true,
+        },
+      },
     })
 
   config.target('web')
