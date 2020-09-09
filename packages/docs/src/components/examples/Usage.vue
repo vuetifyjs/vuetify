@@ -163,9 +163,6 @@
   // Mixins
   import Codepen from '@/mixins/codepen'
 
-  // Utilities
-  import { get } from 'vuex-pathify'
-
   export default {
     name: 'Usage',
 
@@ -190,7 +187,6 @@
     }),
 
     computed: {
-      initializing: get('app/initializing'),
       formatAttributes () {
         const attributeArray = []
         for (const [key, value] of Object.entries(this.usageProps)) {

@@ -6,7 +6,7 @@
 
 <script>
   // Utilities
-  import { call, get } from 'vuex-pathify'
+  import { call } from 'vuex-pathify'
 
   export default {
     name: 'App',
@@ -16,9 +16,7 @@
       titleTemplate: '%s | Vuetify.js',
     },
 
-    computed: { initializing: get('app/initializing') },
-
-    mounted () { this.initializing.then(this.init) },
+    mounted () { this.init() },
 
     methods: { init: call('app/init') },
   }

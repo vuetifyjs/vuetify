@@ -74,26 +74,11 @@ function addLinkRules (md) {
   }
 }
 
-function addTableRules (md) {
-  md.renderer.rules.table_open = (tokens, idx, options, env, self) => {
-    tokens[idx].tag = 'api-table'
-
-    return self.renderToken(tokens, idx, options)
-  }
-
-  md.renderer.rules.table_close = (tokens, idx, options, env, self) => {
-    tokens[idx].tag = 'api-table'
-
-    return self.renderToken(tokens, idx, options)
-  }
-}
-
 module.exports = {
   addCodeRules,
   addHeadingRules,
   addHrRules,
   addLinkRules,
   addImageRules,
-  addTableRules,
   addUnderlineRules,
 }

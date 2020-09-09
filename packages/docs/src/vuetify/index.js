@@ -9,7 +9,7 @@ import { icons } from './icons'
 import Vuetify from 'vuetify/lib/framework'
 
 // Globals
-import { IN_BROWSER, IS_PROD, IS_SERVER } from '@/util/globals'
+import { IS_SERVER } from '@/util/globals'
 
 export function useVuetify (app) {
   app.use(Vuetify)

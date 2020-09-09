@@ -45,7 +45,7 @@ function generateFiles (initial = false) {
     generatedFiles[`node_modules/@docs/${lang}/pages.js`] = pages(files)
 
     if (initial) {
-      fs.writeFileSync(path.resolve(`src/pages/${lang}.js`), `export default require.context('./${lang}', true, /\\.md$/)`)
+      fs.writeFileSync(path.resolve(`src/pages/${lang}.js`), `export default require.context('./${lang}', true, /\\.md$/)\n`)
     }
   }
 

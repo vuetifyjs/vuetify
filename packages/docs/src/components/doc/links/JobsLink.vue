@@ -30,13 +30,11 @@
 <script>
   // Utilities
   import { call, get } from 'vuex-pathify'
-  import { wait } from '@/util/helpers'
 
   export default {
     name: 'JobsLink',
 
     computed: {
-      initializing: get('app/initializing'),
       newJobs: get('jobs/newJobs'),
       page: get('route/params@page'),
       icon () {
@@ -47,9 +45,6 @@
     },
 
     async mounted () {
-      await this.initializing
-      await wait(3000)
-
       this.fetch()
     },
 

@@ -1,6 +1,3 @@
-// Globals
-import { IN_BROWSER } from '@/util/globals'
-
 export function genTwitterMetaInfo () {
   return parseMetaData('twitter', {
     domain: 'https://vuetifyjs.com/',
@@ -11,11 +8,8 @@ export function genTwitterMetaInfo () {
 export function genOpenGraphMetaInfo (args) {
   return parseMetaData('og', {
     description: args.description,
-    image: args.image || '',
     site_name: 'Vuetify.js',
     title: args.title,
-    type: 'website',
-    url: IN_BROWSER ? window.location.href : '',
   })
 }
 
@@ -41,7 +35,6 @@ export function genMetaData (
   title,
   description,
   keywords,
-  image,
 ) {
   const length = description.length
 
@@ -51,7 +44,6 @@ export function genMetaData (
 
   const options = {
     description,
-    image,
     keywords,
     title,
   }

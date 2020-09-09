@@ -57,7 +57,6 @@
       snack: sync('snackbar/value'),
       snackbar: sync('snackbar/snackbar'),
       unotifications: sync('user/notifications'),
-      initializing: get('app/initializing'),
       locale: get('route/params@locale'),
       bind () {
         const { action: href } = this.snackbar
@@ -74,28 +73,6 @@
     },
 
     watch: {
-      initializing: {
-        immediate: true,
-        async handler (val) {
-          if (
-            val ||
-            this.hasRecentlyViewed
-          ) return
-
-          await wait(3000)
-
-          const snackbar = this.notifications.find(notification => {
-            return !this.unotifications.includes(notification.slug)
-          })
-
-          if (!snackbar) return
-
-          this.snackbar = {
-            slug: snackbar.slug,
-            ...snackbar.metadata,
-          }
-        },
-      },
       snackbar (val) {
         if (!val.slug) return
 
@@ -108,6 +85,23 @@
         this.last = Date.now()
         this.snack = false
       },
+    },
+
+    async mounted () {
+      if (this.hasRecentlyViewed) return
+
+      await wait(3000)
+
+      const snackbar = this.notifications.find(notification => {
+        return !this.unotifications.includes(notification.slug)
+      })
+
+      if (!snackbar) return
+
+      this.snackbar = {
+        slug: snackbar.slug,
+        ...snackbar.metadata,
+      }
     },
   }
 </script>

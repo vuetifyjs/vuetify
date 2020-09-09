@@ -28,8 +28,9 @@ createApp({
 
       Promise.all(
         activated.map(c => {
-          return c.asyncData
-            ? c.asyncData({
+          const asyncData = c._Ctor[0].options.asyncData
+          return asyncData
+            ? asyncData({
               store,
               route: to,
             })

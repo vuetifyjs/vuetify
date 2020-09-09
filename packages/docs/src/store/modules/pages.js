@@ -6,6 +6,7 @@ const state = {
   loading: [],
   pages: {},
   toc: [],
+  md: undefined,
 }
 
 const mutations = make.mutations(state)

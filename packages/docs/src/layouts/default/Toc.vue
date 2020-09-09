@@ -91,7 +91,6 @@
         'hash',
         'path',
       ]),
-      initializing: get('app/initializing'),
       toc: get('pages/toc'),
     },
 
@@ -172,7 +171,6 @@
 
         if (
           this.scrolling ||
-          this.initializing ||
           !this.toc.length
         ) return
 

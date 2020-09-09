@@ -47,7 +47,8 @@ export default context => {
       Promise.all(
         matchedComponents.map(async c => {
           try {
-            await c.asyncData({
+            const asyncData = c._Ctor[0].options.asyncData
+            await asyncData({
               route: router.currentRoute,
               store,
             })

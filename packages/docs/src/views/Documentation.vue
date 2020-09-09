@@ -24,14 +24,39 @@
 
 <script>
   // Utilities
-  import { error } from '@/util/routes'
   import { genMetaData } from '@/util/metadata'
   import { get, sync } from 'vuex-pathify'
-  import { waitForReadystate } from '@/util/helpers'
   import { localeLookup } from '@/i18n/util'
+
+  async function load (route) {
+    const { category, page } = route.params
+    const isApi = category === 'api'
+    const locale = localeLookup(route.params.locale)
+
+    const context = isApi
+      ? await import(
+        /* webpackChunkName: "api-[request]" */
+        `@/api/${locale}.js`
+      )
+      : await import(
+        /* webpackChunkName: "documentation-[request]" */
+        `@/pages/${locale}.js`
+      )
+
+    const path = ['.']
+    if (!isApi) path.push(category)
+    path.push(page)
+
+    return context.default(`${path.join('/')}.md`)
+  }
 
   export default {
     name: 'DocumentationView',
+
+    async asyncData ({ route, store }) {
+      const md = await load(route)
+      store.state.pages.md = md
+    },
 
     metaInfo () {
       if (!this.frontmatter) return {}
@@ -53,98 +78,37 @@
       )
     },
 
-    data: () => ({ component: undefined }),
+    data: () => ({
+      component: undefined,
+    }),
 
     computed: {
       ...sync('pages', [
         'frontmatter',
-        'loading',
         'toc',
+        'md',
       ]),
       ...get('route', [
         'hash',
-        'params@category',
-        'params@locale',
         'params@page',
       ]),
-      initializing: sync('app/initializing'),
     },
 
     created () {
-      this.initializing = new Promise(this.init)
-    },
-
-    async mounted () {
-      await waitForReadystate()
-      await this.initializing
-
-      if (this.loading.length) {
-        await Promise.all(this.loading)
-
-        this.loading = []
-      }
-
-      if (this.hash) {
-        await this.$router.options.scrollBehavior({ hash: this.hash })
-      }
-
-      this.initializing = false
+      this.init(this.md)
     },
 
     methods: {
-      async load () {
-        const isApi = this.category === 'api'
-        const locale = localeLookup(this.locale)
-
-        const context = isApi
-          ? await import(
-            /* webpackChunkName: "api-[request]" */
-            `@/api/${locale}.js`
-          )
-          : await import(
-            /* webpackChunkName: "documentation-[request]" */
-            `@/pages/${locale}.js`
-          )
-
-        const path = ['.']
-        if (!isApi) path.push(this.category)
-        path.push(this.page)
-
-        return context.default(`${path.join('/')}.md`)
-      },
-      async init (resolve, reject) {
-        let structure
-
-        try {
-          structure = await this.load()
-        } catch (e) {
-          console.log(e)
-
-          const component = await error()
-
-          this.component = component.default
-
-          reject(e)
-
-          return
-        }
-
+      init (md) {
         const {
           attributes = {},
           toc = [],
           vue = {},
-        } = structure
-
+        } = md
         vue.component.name = this.page
-
         this.frontmatter = attributes
         this.toc = toc
         this.component = vue.component
-
-        resolve()
-      },
-      async reset () {
-        this.component = undefined
       },
     },
   }

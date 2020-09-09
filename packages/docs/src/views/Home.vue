@@ -19,19 +19,23 @@
   // Utilities
   import { localeLookup } from '@/i18n/util'
 
+  async function load (route) {
+    const locale = localeLookup(route.params.locale)
+
+    return import(
+      /* webpackChunkName: "home-page-[request]" */
+      `@/pages/${locale}/home.md`
+    )
+  }
+
   export default {
     name: 'HomeView',
 
     extends: Documentation,
 
-    methods: {
-      load () {
-        const locale = localeLookup(this.locale)
-        return import(
-          /* webpackChunkName: "home-page-[request]" */
-          `@/pages/${locale}/home.md`
-        )
-      },
+    async asyncData ({ route, store }) {
+      const md = await load(route)
+      store.state.pages.md = md
     },
   }
 </script>
