@@ -49,7 +49,7 @@
 </script>
 
 <style lang="sass">
-  .app-code
+  .v-sheet.app-code
     margin: 16px 0
     position: relative
     padding: 12px 50px 12px 16px
