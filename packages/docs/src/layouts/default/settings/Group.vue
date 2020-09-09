@@ -12,7 +12,7 @@
       mandatory
     >
       <v-col
-        v-for="({ cb, icon, text }) in items"
+        v-for="({ icon, text }) in items"
         :key="text"
         cols="6"
       >
