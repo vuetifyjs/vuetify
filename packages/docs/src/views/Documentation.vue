@@ -98,6 +98,14 @@
       this.init(this.md)
     },
 
+    async beforeRouteUpdate (to, from, next) {
+      await this.$options.asyncData({
+        route: to,
+        store: this.$store,
+      })
+      next()
+    },
+
     methods: {
       init (md) {
         const {
