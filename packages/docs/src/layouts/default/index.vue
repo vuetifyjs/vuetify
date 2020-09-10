@@ -1,7 +1,5 @@
 <template>
   <v-app>
-    <default-system-bar />
-
     <default-bar />
 
     <default-drawer />
@@ -31,7 +29,6 @@
   import DefaultPwaSnackbar from './PwaSnackbar'
   import DefaultSettings from './settings/Settings'
   import DefaultSnackbar from './Snackbar'
-  import DefaultSystemBar from './SystemBar'
   import DefaultToc from './Toc'
   import DefaultView from './View'
 
@@ -54,7 +51,6 @@
       DefaultPwaSnackbar,
       DefaultSettings,
       DefaultSnackbar,
-      DefaultSystemBar,
       DefaultToc,
       DefaultView,
     },
