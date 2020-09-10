@@ -98,7 +98,7 @@
               <v-spacer />
 
               <div class="text-right caption text--secondary">
-                via {{ $t(job.via) }}
+                via {{ job.via }}
               </div>
             </div>
           </v-card-text>

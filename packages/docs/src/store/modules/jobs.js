@@ -29,7 +29,7 @@ const actions = {
         ...values,
         ...company,
         isNew: publishedAt.for_humans.indexOf('day') > -1,
-        via: 'vue-jobs',
+        via: 'VueJobs',
       }
     })
 
