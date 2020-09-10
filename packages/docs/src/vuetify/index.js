@@ -16,7 +16,7 @@ export function useVuetify (app) {
 }
 
 export function createVuetify (store) {
-  return new Vuetify({
+  const vuetify = new Vuetify({
     breakpoint: { mobileBreakpoint: 'md' },
     icons,
     theme: {
@@ -36,4 +36,12 @@ export function createVuetify (store) {
     },
     rtl: store.state.user.rtl,
   })
+
+  if (!IS_SERVER) {
+    store.watch(state => state.user.theme.dark, val => {
+      vuetify.framework.theme.dark = val
+    })
+  }
+
+  return vuetify
 }

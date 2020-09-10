@@ -1,49 +1,47 @@
 // Utilities
 import { make } from 'vuex-pathify'
+import merge from 'lodash/merge'
 
 // Globals
 import { IN_BROWSER } from '@/util/globals'
 
-const state = {
-  drawer: {
-    alphabetical: false,
-    mini: false,
-  },
-  last: {
-    install: null,
-    notification: null,
-    promotion: null,
-  },
-  notifications: [],
-  rtl: false,
-  theme: {
-    dark: false,
-    system: false,
-    // Provides a 3rd state for the
-    // light theme w/ dark fences
-    mixed: false,
-  },
+const state = () => {
+  let data
+  if (IN_BROWSER) {
+    data = JSON.parse(localStorage.getItem('vuetify@user')) || {}
+
+    // Reset local store if using old variables
+    if (Object(data.last) !== data.last) {
+      delete data.last
+      delete data.promotion
+    }
+  }
+
+  return merge({
+    drawer: {
+      alphabetical: false,
+      mini: false,
+    },
+    last: {
+      install: null,
+      notification: null,
+      promotion: null,
+    },
+    notifications: [],
+    rtl: false,
+    theme: {
+      dark: false,
+      system: false,
+      // Provides a 3rd state for the
+      // light theme w/ dark fences
+      mixed: false,
+    },
+  }, data)
 }
 
 const mutations = make.mutations(state)
 
 const actions = {
-  fetch: async ({ commit }) => {
-    if (!IN_BROWSER) return
-
-    const local = localStorage.getItem('vuetify@user') || '{}'
-    const user = JSON.parse(local)
-
-    // Reset local store if using old variables
-    if (Object(user.last) !== user.last) {
-      delete user.last
-      delete user.promotion
-    }
-
-    for (const key in user) {
-      commit(key, user[key])
-    }
-  },
   update: ({ state }) => {
     if (!IN_BROWSER) return
 
