@@ -44,6 +44,7 @@
         'Constrained',
         'Side navigation',
         'Three column',
+        'Discord',
       ].map(whiteframe => ([whiteframe, kebabCase(whiteframe)])),
     }),
   }
