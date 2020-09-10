@@ -181,7 +181,7 @@
   },
   "transition": "Transition",
   "translations": "Translations",
-  "types": "Type | Types",
+  "type": "Type | Types",
   "twitter": "Twitter",
   "ui-components": "UI Components",
   "ui": "UI",

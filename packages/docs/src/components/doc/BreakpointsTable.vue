@@ -138,7 +138,7 @@
         return [
           this.$t('device'),
           this.$t('code'),
-          this.$t('type'),
+          this.$tc('type', 1),
           this.$t('range'),
         ]
       },
