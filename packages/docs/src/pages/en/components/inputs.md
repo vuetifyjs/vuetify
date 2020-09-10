@@ -28,7 +28,9 @@ The `v-input` component gives you a baseline to create your own custom inputs. I
 ## Caveats
 
 <alert type="warning">
+
   The `v-input` component is used as a wrapper for all of the Vuetify form controls. It does **NOT** inherit attributes as they are expected to be passed down to inner inputs.
+
 </alert>
 
 ## Examples

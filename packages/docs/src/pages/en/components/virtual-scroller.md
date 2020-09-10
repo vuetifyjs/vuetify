@@ -28,7 +28,9 @@ The virtual scroller displays just enough records to fill the viewport and uses 
 ## Caveats
 
 <alert type="info">
+
   We are in the *process* of integrating the `v-virtual-scroll` component into existing features and components. If you are interested in helping, please reach out to **John Leider** in the [Discord Community](https://community.vuetifyjs.com).
+
 </alert>
 
 ## Examples

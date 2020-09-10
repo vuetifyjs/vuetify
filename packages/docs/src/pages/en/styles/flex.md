@@ -104,7 +104,9 @@ There are also responsive variations for `justify-content`.
 The `align-items` flex setting can be changed using the flex align classes. This by default will modify the flexbox items on the **y-axis** but is reversed when using `flex-direction: column`, modifying the **x-axis**. Choose from `start`, `end`, `center`, `baseline`, or `stretch` (browser default).
 
 <alert type="info">
+
   When using flex align with IE11 you will need to set an explicit `height` as `min-height` will not suffice and cause undesired results.
+
 </alert>
 
 <example file="flex/flex-align" />
@@ -181,7 +183,9 @@ There are also responsive variations for `align-self-items`.
 Using the margin helper classes in a flexbox container, you can control the positioning of flex items on the **x-axis** or **y-axis** when using `flex-row` or `flex-column` respectively.
 
 <alert type="error">
+
   **IE11** does not properly support auto margins on flex items that have a parent with a non-default `justify-content` value. [See this StackOverflow answer](https://stackoverflow.com/a/37535548) for more details.
+
 </alert>
 
 <example file="flex/margins" />

@@ -8,11 +8,13 @@
     top
     @click="copy"
   >
-    <transition-icon
-      :wait="wait"
-      from="$mdiContentCopy"
-      to="$complete"
-    />
+    <v-fade-transition hide-on-leave>
+      <v-icon
+        :key="String(clicked)"
+        color="grey"
+        v-text="clicked ? '$complete' : '$mdiContentCopy'"
+      />
+    </v-fade-transition>
   </v-btn>
 </template>
 
@@ -32,7 +34,7 @@
     },
 
     data: () => ({
-      copied: false,
+      clicked: false,
       wait: 2000,
     }),
 
@@ -50,11 +52,11 @@
 
         el.removeAttribute('contenteditable')
 
-        this.copied = true
+        this.clicked = true
 
         await wait(this.wait)
 
-        this.copied = false
+        this.clicked = false
       },
     },
   }

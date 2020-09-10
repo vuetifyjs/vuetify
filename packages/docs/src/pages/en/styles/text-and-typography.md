@@ -67,7 +67,9 @@ There are also available alignment classes that support responsive displays.
 ### Decoration
 
 <alert type="info">
+
   **New in v2.3.0+**
+
 </alert>
 
 Remove text decoration with the `.text-decoration-none` class or add an *overline, underline or line-through* by using `.text-decoration-overline`, `.text-decoration-underline`, and `.text-decoration-line-through`.

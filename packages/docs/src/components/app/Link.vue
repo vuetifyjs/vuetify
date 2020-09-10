@@ -4,7 +4,7 @@
     class="app-link text-decoration-none primary--text font-weight-medium d-inline-block"
     v-bind="attrs"
   >
-    <div
+    <span
       class="d-inline-flex align-center"
       @click="onClick"
     >
@@ -19,7 +19,7 @@
       />
 
       <slot v-if="isSamePage" />
-    </div>
+    </span>
   </component>
 </template>
 

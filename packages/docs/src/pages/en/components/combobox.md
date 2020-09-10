@@ -28,15 +28,21 @@ With Combobox, you can allow a user to create new values that may not be present
 ## Caveats
 
 <alert type="error">
+
   As the Combobox allows user input, it **always** returns the full value provided to it (for example a list of Objects will always return an Object when selected). This is because there's no way to tell if a value is supposed to be user input or an object lookup [GitHub Issue](https://github.com/vuetifyjs/vuetify/issues/5479)
+
 </alert>
 
 <alert type="warning">
+
   The **auto** property of **menu-props** is only supported for the default input style.
+
 </alert>
 
 <alert type="info">
+
   Browser autocomplete is set to off by default, may vary by browser and may be ignored. [MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)
+
 </alert>
 
 ## Examples

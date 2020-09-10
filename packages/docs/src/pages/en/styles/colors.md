@@ -75,7 +75,9 @@ require('./src/sass/main.scss')
 ```
 
 <alert type="error">
+
   You **must** configure your webpack setup to use `sass`. If you are using a [pre-made template](/getting-started/quick-start#vue-cli-install) this will already be done for you.
+
 </alert>
 
 This can also be done within your main **App.vue** file. Keep in mind, depending on your project setup, this _will_ increase build times as every time your entry file is updated, the Sass files will be re-generated.

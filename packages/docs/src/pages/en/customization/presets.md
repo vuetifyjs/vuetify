@@ -85,7 +85,11 @@ export const preset: VuetifyPreset = {
 
 [Material Design](https://material.io/) is an opinionated visual language that can be overwhelming to work with when implementing highly customized designs. The new studies showcase the _flexibility_ of Material Theming and walk you through just how easy it is to create **unique** applications without the default Material appearance.
 
-<alert type="info">Vuetify presets are an in progress feature that will be enhanced over time as Vuetify gains new functionality</alert>
+<alert type="info">
+
+  Vuetify presets are an in progress feature that will be enhanced over time as Vuetify gains new functionality
+
+</alert>
 
 There are currently a total of **7 Material Studies** to choose from, each that have a corresponding preset plugin:
 
@@ -205,7 +209,11 @@ A Vuetify preset is a npm package that provides framework wide options and custo
     └── variables.scss  # SASS variables
 ```
 
-<alert type="warning">A custom preset **can not** itself contain a _preset_ property.</alert>
+<alert type="warning">
+
+  A custom preset **can not** itself contain a _preset_ property.
+
+</alert>
 
 ### Features
 

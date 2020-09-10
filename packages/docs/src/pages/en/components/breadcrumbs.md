@@ -35,7 +35,9 @@ v-breadcrumbs-item description
 ## Caveats
 
 <alert type="info">
+
   By default `v-breadcrumbs` will disable all crumbs up to the current page in a nested paths. You can prevent this behavior by using `exact: true` on each applicable breadcrumb in the `items` array.
+
 </alert>
 
 ## Examples

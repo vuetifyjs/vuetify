@@ -18,7 +18,9 @@ Use border utilities to quickly style the border-radius of any element.
 ## Caveats
 
 <alert type="info">
+
   The infixes **sm**, **lg**, and **xl** correlate to the border radius *size* and are not affected by breakpoints.
+
 </alert>
 
 ## Customizing

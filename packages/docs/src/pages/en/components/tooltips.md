@@ -28,7 +28,9 @@ Tooltips can wrap any element.
 ## Caveats
 
 <alert type="info">
+
   In order for `v-tooltip` to be positioned correctly a position prop ( `top` | `bottom` | `left` | `right` ) is required
+
 </alert>
 
 ## Examples

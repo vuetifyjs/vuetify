@@ -15,7 +15,7 @@ function addImageRules (md) {
     const src = token.attrGet('src')
     const title = token.attrGet('title')
 
-    return `<app-figure src="${src}" alt="${alt}" title="${title}" />`
+    return `<div><app-figure src="${src}" alt="${alt}" title="${title}" /></div>`
   }
 }
 

@@ -97,7 +97,9 @@ export default new Vuetify({
 ## Caveats
 
 <alert type="info">
+
   Vuetify provides only a basic translation function `t`. It is recommended for more advanced internationalization functions to make use of Vuetify's integration with [vue-i18n](#vue-i-18-n)
+
 </alert>
 
 ## Creating a translation

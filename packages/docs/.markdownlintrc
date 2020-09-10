@@ -47,5 +47,6 @@
       "vuetify-projects",
       "why-vuetify-cards"
     ]
-  }
+  },
+  "MD036": false
 }

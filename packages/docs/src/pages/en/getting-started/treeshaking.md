@@ -16,7 +16,9 @@ Being a component framework, Vuetify will always grow horizontally. Depending on
 <entry-ad />
 
 <alert type="error">
+
   Treeshaking will only work with Webpack 4 in **production mode**. This is automatic when using Vue CLI.
+
 </alert>
 
 ## Vuetify-loader
@@ -42,7 +44,9 @@ export default new Vuetify(opts)
 ```
 
 <alert type="info">
+
   The options object that you pass as the second argument to **Vue.use** can also include a components, directives and a transitions property.
+
 </alert>
 
 ### Vue config installation
@@ -94,7 +98,9 @@ npm install sass sass-loader fibers deepmerge -D
 ```
 
 <alert type="info">
+
   For a more detailed explanation on how to setup your application to handle SASS, please navigate to the [theme page](/customization/theme).
+
 </alert>
 
 After installation you will still need to configure your webpack.config.js to parse .sass files. For more information on how to do this with **fibers**, checkout the [official documentation](https://webpack.js.org/loaders/sass-loader/).

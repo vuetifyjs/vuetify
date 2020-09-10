@@ -184,7 +184,9 @@ These *conditional values* enable responsive functionality to Vuetify features t
 ### Mobile breakpoints
 
 <alert type="info">
+
   **New in v2.3.0+**
+
 </alert>
 
 The **mobileBreakpoint** option accepts breakpoint names (*xs, sm, md, lg, xl*) as a valid configuration option. Once set, the provided value is _propagated_ to supporting components such as [v-navigation-drawer](/components/navigation-drawers/).
@@ -217,7 +219,9 @@ In the next section we explore how to customize the **thresholds** that determin
 ### Thresholds
 
 <alert type="warning">
+
   This section modifies the `$grid-breakpoints` SASS variable. More information on setup is available on the [SASS variables](/customization/sass-variables/) page.
+
 </alert>
 
 The **thresholds** option modifies the values used for *viewport calculations*. The following snippet overrides *xs through lg* breakpoints and increases **scrollBarWidth** to _24_.

@@ -288,8 +288,8 @@ Enabling `customProperties` will also generate a [css variable](https://develope
 
   Custom properties are not natively supported in Internet Explorer. Polyfills are available—**with some limitations**—for Internet Explorer 11:
 
-* [Custom properties polyfill](https://github.com/nuxodin/ie11CustomProperties)
-* [Css vars polyfill](https://github.com/jhildenbiddle/css-vars-ponyfill)
+- [Custom properties polyfill](https://github.com/nuxodin/ie11CustomProperties)
+- [CSS vars polyfill](https://github.com/jhildenbiddle/css-vars-ponyfill)
 
 </alert>
 
@@ -363,7 +363,7 @@ The Vuetify theme system is propagated through the [provide](https://vuejs.org/v
 
 ### API
 
-* [v-theme-provider](/api/v-theme-provider)
+- [v-theme-provider](/api/v-theme-provider)
 
 ### Example
 

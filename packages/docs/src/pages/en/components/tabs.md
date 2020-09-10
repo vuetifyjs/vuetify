@@ -50,11 +50,15 @@ v-tabs-slider description
 ## Caveats
 
 <alert type="warning">
+
   When using the **dark** prop and **NOT** providing a custom **color**, the `v-tabs` component will default its color to _white_.
+
 </alert>
 
 <alert type="warning">
+
   When using `v-tab-item`'s that contain required input fields you must use the **eager** prop in order to validate the required fields that are not yet visible.
+
 </alert>
 
 ## Examples

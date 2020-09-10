@@ -103,7 +103,9 @@ echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
 ```
 
 <alert type="warning">
+
   Sometimes creating a `.czrc` file does not work using the **command prompt**. If you get unexpected results, create the file in your user folder located in the home directory. This is typically located on your primary harddrive in the `Users` folder.
+
 </alert>
 
 Congrats! Commitizen is installed! When you do commits, add your files like normal and replace `git commit -m "your message"` with `git cz` and follow the prompts.
@@ -151,12 +153,16 @@ Lastly, `git push` and open a pull request.
 ### Pull Requests For Docs
 
 <alert type="info">
+
   For any pull requests related to Vuetify docs, submit your pull request to the `master` branch.
+
 </alert>
 
 ### Pull Requests For Docs - Language
 
 <alert type="info">
+
   We do not accept PRs for any doc changes pertaining to languages other than `en`. All changes for languages other than `en` are to be submitting through our Crowdin project. To get started simply select `Help Translate` in the language drop down of the docs. Languages will not be added until they have at least 15% of their translations completed.
+
 </alert>
 <backmatter />

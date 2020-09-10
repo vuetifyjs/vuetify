@@ -20,6 +20,10 @@ These templates are known as **whiteframes** and are designed to provide a consi
 
 <whiteframe-examples />
 
-<alert type="info">Additional information on how these templates are structured is located on the [Application page](/components/application/).</alert>
+<alert type="info">
+
+  Additional information on how these templates are structured is located on the [Application page](/components/application/).
+
+</alert>
 
 <backmatter />

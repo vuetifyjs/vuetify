@@ -21,11 +21,15 @@ In Vuetify, the `v-app` component and the **app** prop on components like `v-nav
 - [v-main](/api/v-main)
 
 <alert type="error">
-In order for your application to work properly, you **must** wrap it in a `v-app` component. This component is required for ensuring proper **cross-browser compatibility**. Vuetify doesn't support multiple isolated Vuetify instances on a page. `v-app` can exist **anywhere** inside the body of your app, however, there should only be one and it must be the parent of **ALL** Vuetify components.
+
+  In order for your application to work properly, you **must** wrap it in a `v-app` component. This component is required for ensuring proper **cross-browser compatibility**. Vuetify doesn't support multiple isolated Vuetify instances on a page. `v-app` can exist **anywhere** inside the body of your app, however, there should only be one and it must be the parent of **ALL** Vuetify components.
+
 </alert>
 
 <alert type="info">
+
   If you are using multiple layouts in your application you will need to ensure each root layout file that will contain Vuetify components has a `v-app` at the root of its template.
+
 </alert>
 
 ## Default application markup
@@ -64,7 +68,9 @@ When using [vue-router](https://router.vuejs.org/) it is recommended that you pl
 ```
 
 <alert type="info">
-Applying the **app** prop automatically applies position: **fixed** to the layout element. If your application calls for an _absolute_ element, you can overwrite this functionality by using the **absolute** prop.
+
+  Applying the **app** prop automatically applies position: **fixed** to the layout element. If your application calls for an _absolute_ element, you can overwrite this functionality by using the **absolute** prop.
+
 </alert>
 
 ## Application components
@@ -104,7 +110,9 @@ console.log(this.$vuetify.application.top) // 56
 ```
 
 <alert type="error">
-In order for your application to work properly, you **must** wrap it in a `v-app` component. This component is required for ensuring proper **cross-browser compatibility**. Vuetify doesn't support multiple isolated Vuetify instances on a page. `v-app` can exist **anywhere** inside the body of your app, however, there should only be one and it must be the parent of **ALL** Vuetify components.
+
+  In order for your application to work properly, you **must** wrap it in a `v-app` component. This component is required for ensuring proper **cross-browser compatibility**. Vuetify doesn't support multiple isolated Vuetify instances on a page. `v-app` can exist **anywhere** inside the body of your app, however, there should only be one and it must be the parent of **ALL** Vuetify components.
+
 </alert>
 
 ## Accessibility

@@ -67,7 +67,9 @@ v-list-item-title description
 ## Caveats
 
 <alert type="info">
+
   If you are looking for stateful list items, please check out [v-list-item-group](/components/list-item-groups).
+
 </alert>
 
 ## Examples
