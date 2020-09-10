@@ -99,6 +99,8 @@
     },
 
     async beforeRouteUpdate (to, from, next) {
+      if (to.path === from.path) return next()
+
       await this.$options.asyncData({
         route: to,
         store: this.$store,
