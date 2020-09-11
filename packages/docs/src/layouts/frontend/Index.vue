@@ -1,7 +1,5 @@
 <template>
   <v-app>
-    <core-system-bar />
-
     <frontend-app-bar />
 
     <frontend-view />
