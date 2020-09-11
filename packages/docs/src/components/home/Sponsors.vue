@@ -5,31 +5,28 @@
     class="mx-auto"
     max-width="700"
   >
-    <v-row
-      dense
-      justify="center"
-    >
-      <v-col
-        v-for="sponsor in sponsors"
-        :key="sponsor.slug"
-        cols="auto"
-        md="3"
+    <v-responsive min-height="500">
+      <v-row
+        dense
+        justify="center"
       >
-        <sponsor
-          :comfortable="comfortable || Number(sponsor.metadata.tier) === 2"
-          :compact="compact || Number(sponsor.metadata.tier) > 2"
-          :sponsor="sponsor"
-          v-bind="$attrs"
-        />
-      </v-col>
+        <v-col
+          v-for="sponsor in sponsors"
+          :key="sponsor.slug"
+          cols="auto"
+          md="3"
+        >
+          <sponsor
+            :comfortable="comfortable || Number(sponsor.metadata.tier) === 2"
+            :compact="compact || Number(sponsor.metadata.tier) > 2"
+            :sponsor="sponsor"
+            v-bind="$attrs"
+          />
+        </v-col>
+      </v-row>
+    </v-responsive>
 
-      <v-col
-        cols="12"
-        class="text-center mt-3"
-      >
-        <sponsor-link large />
-      </v-col>
-    </v-row>
+    <sponsor-link large />
   </v-sheet>
 </template>
 

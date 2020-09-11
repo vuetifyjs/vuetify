@@ -18,7 +18,7 @@
       class="d-inline-block"
       contain
       eager
-      max-height="78"
+      max-height="64"
     />
   </v-card>
 </template>
