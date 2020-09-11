@@ -42,7 +42,16 @@ const state = () => {
 const mutations = make.mutations(state)
 
 const actions = {
-  update: ({ state }) => {
+  fetch ({ commit }) {
+    if (!IN_BROWSER) return
+
+    const data = state()
+
+    for (const key in data) {
+      commit(key, data[key])
+    }
+  },
+  update ({ state }) {
     if (!IN_BROWSER) return
 
     localStorage.setItem('vuetify@user', JSON.stringify(state))
