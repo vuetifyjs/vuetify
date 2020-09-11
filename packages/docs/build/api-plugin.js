@@ -37,7 +37,7 @@ function createMdFile (component, data, locale) {
   str += `# ${component} API\n\n`
 
   for (const [header, value] of Object.entries(data)) {
-    if (header === 'mixins' || !value.length) continue
+    if (['mixins', 'name'].includes(header) || !value.length) continue
 
     str += header === 'sass'
       ? '## SASS Variables\n'
