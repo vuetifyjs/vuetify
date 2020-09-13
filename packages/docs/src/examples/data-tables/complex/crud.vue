@@ -6,7 +6,7 @@
     class="elevation-1"
   >
     <template v-slot:top>
-      <v-toolbar flat color="white">
+      <v-toolbar flat>
         <v-toolbar-title>My CRUD</v-toolbar-title>
         <v-divider
           class="mx-4"
