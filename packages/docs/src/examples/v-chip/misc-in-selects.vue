@@ -6,7 +6,7 @@
     clearable
     label="Your favorite hobbies"
     multiple
-    prepend-icon="filter_list"
+    prepend-icon="mdi-filter-variant"
     solo
   >
     <template v-slot:selection="{ attrs, item, select, selected }">

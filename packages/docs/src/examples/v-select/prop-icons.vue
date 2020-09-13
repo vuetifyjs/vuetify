@@ -13,7 +13,7 @@
           menu-props="auto"
           label="Select"
           hide-details
-          prepend-icon="map"
+          prepend-icon="mdi-map"
           single-line
         ></v-select>
       </v-col>
@@ -26,7 +26,7 @@
         <v-select
           v-model="e2"
           :items="states"
-          append-outer-icon="map"
+          append-outer-icon="mdi-map"
           menu-props="auto"
           hide-details
           label="Select"

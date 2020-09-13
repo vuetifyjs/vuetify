@@ -60,33 +60,33 @@
       return {
         items: [
           {
-            action: 'move_to_inbox',
+            action: 'mdi-inbox-arrow-down',
             title: 'Inbox',
           },
           {
-            action: 'send',
+            action: 'mdi-send',
             title: 'Sent',
           },
           {
-            action: 'delete',
+            action: 'mdi-delete',
             title: 'Trash',
           },
           {
-            action: 'report',
+            action: 'mdi-alert-octagon',
             title: 'Spam',
           },
           { divider: true },
           { header: 'Labels' },
           {
-            action: 'label',
+            action: 'mdi-label',
             title: 'Family',
           },
           {
-            action: 'label',
+            action: 'mdi-label',
             title: 'Friends',
           },
           {
-            action: 'label',
+            action: 'mdi-label',
             title: 'Work',
           },
         ],

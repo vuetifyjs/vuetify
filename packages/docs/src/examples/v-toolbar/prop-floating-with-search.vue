@@ -11,12 +11,12 @@
     >
       <v-text-field
         hide-details
-        prepend-icon="search"
+        prepend-icon="mdi-magnify"
         single-line
       ></v-text-field>
 
       <v-btn icon>
-        <v-icon>my_location</v-icon>
+        <v-icon>mdi-crosshairs-gps</v-icon>
       </v-btn>
 
       <v-btn icon>

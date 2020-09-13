@@ -85,9 +85,9 @@
     computed: {
       activeFab () {
         switch (this.tabs) {
-          case 'one': return { color: 'success', icon: 'share' }
-          case 'two': return { color: 'red', icon: 'edit' }
-          case 'three': return { color: 'green', icon: 'keyboard_arrow_up' }
+          case 'one': return { color: 'success', icon: 'mdi-share-variant' }
+          case 'two': return { color: 'red', icon: 'mdi-pencil' }
+          case 'three': return { color: 'green', icon: 'mdi-chevron-up' }
           default: return {}
         }
       },

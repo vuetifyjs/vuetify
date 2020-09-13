@@ -41,21 +41,21 @@
       inset: true,
       items: [
         {
-          action: 'label',
+          action: 'mdi-label',
           title: 'List item 1',
         },
         {
           divider: true,
         },
         {
-          action: 'label',
+          action: 'mdi-label',
           title: 'List item 2',
         },
         {
           divider: true,
         },
         {
-          action: 'label',
+          action: 'mdi-label',
           title: 'List item 3',
         },
       ],

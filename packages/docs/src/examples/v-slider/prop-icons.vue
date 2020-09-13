@@ -7,7 +7,7 @@
     <v-card-text>
       <v-slider
         v-model="media"
-        prepend-icon="volume_up"
+        prepend-icon="mdi-volume-high"
       ></v-slider>
     </v-card-text>
 
@@ -16,7 +16,7 @@
     <v-card-text>
       <v-slider
         v-model="alarm"
-        append-icon="alarm"
+        append-icon="mdi-alarm"
       ></v-slider>
     </v-card-text>
 
@@ -25,8 +25,8 @@
     <v-card-text>
       <v-slider
         v-model="zoom"
-        append-icon="zoom_in"
-        prepend-icon="zoom_out"
+        append-icon="mdi-magnify-plus-outline"
+        prepend-icon="mdi-magnify-minus-outline"
         @click:append="zoomIn"
         @click:prepend="zoomOut"
       ></v-slider>
