@@ -152,7 +152,7 @@
                 <v-text-field
                   v-model="trip.start"
                   label="Start date"
-                  prepend-icon="event"
+                  prepend-icon="mdi-calendar"
                   readonly
                   v-bind="attrs"
                   v-on="on"
@@ -194,7 +194,7 @@
                 <v-text-field
                   v-model="trip.end"
                   label="End date"
-                  prepend-icon="event"
+                  prepend-icon="mdi-calendar"
                   readonly
                   v-bind="attrs"
                   v-on="on"

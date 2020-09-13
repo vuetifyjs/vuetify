@@ -99,7 +99,7 @@
         },
         {
           color: 'red',
-          icon: 'people',
+          icon: 'mdi-account-multiple',
           name: 'Social',
           new: 1,
           total: 3,
@@ -107,7 +107,7 @@
         },
         {
           color: 'teal',
-          icon: 'local_offer',
+          icon: 'mdi-tag',
           name: 'Promos',
           new: 2,
           total: 4,

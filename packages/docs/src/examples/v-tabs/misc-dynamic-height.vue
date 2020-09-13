@@ -7,12 +7,12 @@
       prominent
     >
       <v-text-field
-        append-icon="mic"
+        append-icon="mdi-microphone"
         class="mx-4"
         flat
         hide-details
         label="Search"
-        prepend-inner-icon="search"
+        prepend-inner-icon="mdi-magnify"
         solo-inverted
       ></v-text-field>
 
