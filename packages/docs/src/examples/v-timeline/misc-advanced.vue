@@ -132,7 +132,6 @@
       >
         <v-btn
           class="mx-0"
-          color="white"
         >
           Resend Email
         </v-btn>

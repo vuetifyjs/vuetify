@@ -3,6 +3,7 @@
     <v-switch
       v-model="offset"
       label="X offset"
+      color="primary"
     ></v-switch>
     <v-menu
       top

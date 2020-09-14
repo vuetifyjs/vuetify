@@ -42,7 +42,6 @@
     <v-expand-transition>
       <v-sheet
         v-if="model != null"
-        color="grey lighten-4"
         height="200"
         tile
       >
