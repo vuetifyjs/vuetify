@@ -3,7 +3,6 @@
     <v-sheet
       tile
       height="54"
-      color="grey lighten-3"
       class="d-flex"
     >
       <v-btn

@@ -11,12 +11,13 @@
     <v-row>
       <v-col cols="6">
         <v-switch
+          color="primary"
           value
           input-value="true"
         ></v-switch>
       </v-col>
       <v-col cols="6">
-        <v-switch></v-switch>
+        <v-switch color="primary"></v-switch>
       </v-col>
     </v-row>
     <v-row class="dark--text">
@@ -30,6 +31,7 @@
     <v-row>
       <v-col cols="6">
         <v-switch
+          color="primary"
           value
           input-value="true"
           disabled
