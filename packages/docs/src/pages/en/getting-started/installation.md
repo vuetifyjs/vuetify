@@ -78,6 +78,12 @@ Once installed, update your nuxt.config.js file to include the Vuetify module in
 }
 ```
 
+<alert type="info">
+
+  [Find more information for the Nuxt Community module on GitHub](https://github.com/nuxt-community/vuetify-module)
+
+</alert>
+
 ## Webpack install
 
 To install Vuetify into a Webpack project you need to add a few dependencies:
@@ -188,9 +194,9 @@ Vuetify uses Google's Roboto font and Material Design Icons. The simplest way to
 
 To test using Vuetify.js without installing a template from Vue CLI, copy the code below into your `index.html` file. This will pull the latest version of Vue and Vuetify, allowing you to start playing with components. You can also use the [Vuetify starter](https://template.vuetifyjs.com) on Codepen. While not recommended, if you need to utilize the CDN packages in a production environment, it is recommended that you scope the versions of your assets. For more information on how to do this, navigate to the jsdelivr website.
 
-<alert type="info">
+<alert type="warning">
 
-  In order for your application to work properly, you must wrap it in a v-app component. See the Application component page for more information.
+  In order for your application to work properly, you must wrap it in a `v-app` component. See the Application component page for more information.
 
 </alert>
 
@@ -267,7 +273,7 @@ yarn cordova-build-browser # Build Browser
 
 ## Usage with Capacitor
 
-To use Vuetify with **Capacitor**, add the [Capacitor](?) plugin via Vue CLI:
+To use Vuetify with **Capacitor**, add the [Capacitor](https://github.com/capacitor-community/vue-cli-plugin-capacitor) plugin via Vue CLI:
 
 ```bash
 # Install
@@ -290,7 +296,7 @@ export default ({
   Vue,      // the version of Vue being used in the VuePress app
   options,  // the options for the root Vue instance
   router,   // the router instance for the app
-  siteData  // site metadata
+  siteData,  // site metadata
 }) => {
   Vue.use(Vuetify)
 }
@@ -302,7 +308,6 @@ module.exports = {
     ['link', {
       rel: 'stylesheet',
       href: `https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css`
-
     }],
     ['script', { src: `https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js` }],
     ['script', { src: `https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js` }],
