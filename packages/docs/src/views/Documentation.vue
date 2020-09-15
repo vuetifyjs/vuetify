@@ -7,15 +7,7 @@
       class="mx-auto overflow-visible"
       max-width="868"
     >
-      <skeleton-loader
-        v-if="!component"
-        key="loader"
-      />
-
-      <keep-alive
-        v-else
-        max="3"
-      >
+      <keep-alive max="3">
         <component :is="component" />
       </keep-alive>
     </v-responsive>
@@ -24,6 +16,7 @@
 
 <script>
   // Utilities
+  import { IN_BROWSER } from '@/util/globals'
   import { genMetaData } from '@/util/metadata'
   import { get, sync } from 'vuex-pathify'
   import { localeLookup } from '@/i18n/util'
@@ -94,18 +87,14 @@
       ]),
     },
 
-    created () {
+    async created () {
+      if (IN_BROWSER && !this.$vuetify.isHydrating) {
+        await this.$options.asyncData({
+          route: this.$route,
+          store: this.$store,
+        })
+      }
       this.init(this.md)
-    },
-
-    async beforeRouteUpdate (to, from, next) {
-      if (to.path === from.path) return next()
-
-      await this.$options.asyncData({
-        route: to,
-        store: this.$store,
-      })
-      next()
     },
 
     methods: {
