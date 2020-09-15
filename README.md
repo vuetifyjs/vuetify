@@ -175,12 +175,12 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
       </td>
       <td>
         <a href="https://papersowl.com/write-my-paper-for-me">
-          <img src="https://logo.clearbit.com/papersowl.com" height="32">
+          <img src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/papersowl-logo-light.png" height="32">
         </a>
       </td>
       <td>
         <a href="https://volleyballlife.com/">
-          <img src="https://logo.clearbit.com/volleyballlife.com" height="40">
+          <img src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/volleyballlife-logo-light.png" height="40">
         </a>
       </td>
     </tr>
