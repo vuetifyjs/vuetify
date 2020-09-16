@@ -8,7 +8,7 @@
       <v-avatar left>
         <v-icon>mdi-account-circle</v-icon>
       </v-avatar>
-      Ranee
+      Mike
     </v-chip>
 
     <v-chip
