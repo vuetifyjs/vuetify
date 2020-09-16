@@ -83,6 +83,8 @@ module.exports = {
 }
 ```
 
+<discovery-ad />
+
 ## Required styles
 
 When you import from `vuetify/lib` the baseline framework styles are pulled in as well. Each component is individually responsible for their styles and will be compiled just the same. If you are using Vue CLI and the `vue-cli-plugin-vuetify` plugin, this is done for you automatically and you can **skip** this section. If you are working in a project where you do not have access to the cli, you can manually included the required packages:
