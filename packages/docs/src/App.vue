@@ -6,7 +6,8 @@
 
 <script>
   // Utilities
-  import { call } from 'vuex-pathify'
+  import { call, get } from 'vuex-pathify'
+  import { waitForReadystate } from '@/util/helpers'
 
   export default {
     name: 'App',
@@ -16,7 +17,20 @@
       titleTemplate: '%s | Vuetify.js',
     },
 
-    mounted () { this.init() },
+    computed: { hash: get('route/hash') },
+
+    async mounted () {
+      if (!this.hash) return
+
+      await this.init()
+      await waitForReadystate()
+
+      try {
+        this.$vuetify.goTo(this.hash)
+      } catch (e) {
+        console.log(e)
+      }
+    },
 
     methods: { init: call('app/init') },
   }
