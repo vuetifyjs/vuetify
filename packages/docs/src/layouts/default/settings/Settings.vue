@@ -4,6 +4,7 @@
     v-model="settings"
     :color="dark ? '#272727' : undefined"
     :right="!rtl"
+    disable-route-watcher
     fixed
     hide-overlay
     temporary
