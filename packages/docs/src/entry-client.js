@@ -1,4 +1,5 @@
 // Utilties
+import 'intersection-observer'
 import { createApp } from './main'
 
 // Globals

@@ -44,6 +44,6 @@ module.exports = {
       // ...other Workbox options...
     },
   },
-  transpileDependencies: ['vuetify'],
+  transpileDependencies: ['vuetify', 'markdown-it-prism'],
   lintOnSave: false,
 }

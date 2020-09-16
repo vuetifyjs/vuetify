@@ -51,13 +51,9 @@ export function preferredLocale (locale = 'en') {
 
   if (!IN_BROWSER) return locale
 
-  const preference =
-    window.localStorage.getItem('currentLanguage') ||
-    navigator.languages.find(l => l.match(languageRegexp))
+  const languages = navigator.languages && navigator.languages.find(l => l.match(languageRegexp))
 
-  return locales.findIndex(l => [l.alternate, l.locale].includes(preference)) !== -1
-    ? preference
-    : locale
+  return window.localStorage.getItem('currentLanguage') || languages || locale
 }
 
 export function redirect (

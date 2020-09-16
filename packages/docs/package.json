@@ -49,6 +49,7 @@
     "git-date-extractor": "^3.0.0",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^3.2.0",
+    "intersection-observer": "^0.11.0",
     "json-loader": "^0.5.7",
     "local-web-server": "^4.2.1",
     "lodash": "^4.17.19",

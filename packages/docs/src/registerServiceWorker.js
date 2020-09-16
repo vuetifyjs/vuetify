@@ -1,7 +1,7 @@
 // Imports
 const { IN_BROWSER, IS_PROD } = require('./util/globals')
 
-if (IN_BROWSER && IS_PROD) {
+if (IN_BROWSER && IS_PROD && navigator.serviceWorker) {
   const { register } = require('register-service-worker')
 
   register(`${process.env.BASE_URL}service-worker.js`, {
