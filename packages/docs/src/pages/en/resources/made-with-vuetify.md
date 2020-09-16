@@ -4,7 +4,7 @@ meta:
   description: todo
   keywords: todo
 related:
-  - /getting-started/whiteframes/
+  - /getting-started/wireframes/
   - /customization/theme/
   - /overview/sponsors-and-backers/
 ---

@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col
-      v-for="([name, whiteframe], i) in whiteframes"
+      v-for="([name, wireframe], i) in wireframes"
       :key="i"
       cols="12"
       md="6"
@@ -9,8 +9,8 @@
     >
       <router-link
         :to="{
-          name: 'Whiteframes',
-          params: { whiteframe }
+          name: 'Wireframes',
+          params: { wireframe }
         }"
         class="text--primary text-decoration-none"
         rel="nofollow noopener"
@@ -20,7 +20,7 @@
           :alt="`${name} layout`"
           :aspect-ratio="16/9"
           :name="name"
-          :src="`https://cdn.vuetifyjs.com/docs/images/whiteframes/${whiteframe}.svg`"
+          :src="`https://cdn.vuetifyjs.com/docs/images/wireframes/${wireframe}.svg`"
           outlined
         />
       </router-link>
@@ -33,10 +33,10 @@
   import kebabCase from 'lodash/kebabCase'
 
   export default {
-    name: 'WhiteframeExamples',
+    name: 'WireframeExamples',
 
     data: () => ({
-      whiteframes: [
+      wireframes: [
         'Base',
         'Extended toolbar',
         'System bar',
@@ -45,7 +45,7 @@
         'Side navigation',
         'Three column',
         'Discord',
-      ].map(whiteframe => ([whiteframe, kebabCase(whiteframe)])),
+      ].map(wireframe => ([wireframe, kebabCase(wireframe)])),
     }),
   }
 </script>

@@ -35,7 +35,7 @@ export function createRouter (vuetify, store, i18n) {
         })),
         layout('Home', [route('Home')]),
         layout('Default', [route('Documentation')], ':category/:page/'),
-        route('Whiteframes', 'examples/whiteframes/:whiteframe/'),
+        route('Wireframes', 'examples/wireframes/:wireframe/'),
         layout('Default', [abort()]),
       ]),
       // Redirect for language fallback

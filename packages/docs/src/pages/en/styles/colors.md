@@ -6,7 +6,7 @@ meta:
 related:
   - /customization/theme/
   - /themes/premium/
-  - /getting-started/whiteframes/
+  - /getting-started/wireframes/
 ---
 
 # Colors

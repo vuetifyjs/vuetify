@@ -1,5 +1,5 @@
 <template>
-  <vue-file :file="`whiteframes/${whiteframe}`" />
+  <vue-file :file="`wireframes/${wireframe}`" />
 </template>
 
 <script>
@@ -14,13 +14,13 @@
     const locale = localeLookup(route.params.locale)
 
     return import(
-      /* webpackChunkName: "whiteframes-view-[request]" */
-      `@/pages/${locale}/getting-started/whiteframes.md`
+      /* webpackChunkName: "wireframes-view-[request]" */
+      `@/pages/${locale}/getting-started/wireframes.md`
     )
   }
 
   export default {
-    name: 'WhiteframesView',
+    name: 'WireframesView',
 
     extends: Documentation,
 
@@ -29,6 +29,6 @@
       store.state.pages.md = md
     },
 
-    computed: { whiteframe: get('route/params@whiteframe') },
+    computed: { wireframe: get('route/params@wireframe') },
   }
 </script>

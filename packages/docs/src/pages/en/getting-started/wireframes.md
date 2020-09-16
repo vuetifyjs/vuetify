@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Whiteframes
+  title: Wireframes
   description: Select from a multitude of Vuetify Material Design layouts built to help kickstart your application.
   keywords: pre-defined layouts, layouts, application layout, material design layouts
 related:
@@ -9,7 +9,7 @@ related:
   - /resources/themes/
 ---
 
-# Whiteframes
+# Wireframes
 
 The Vuetify **layout system** makes it easy to rapidly scaffold an application's UI regions with litte effort.
 
@@ -17,9 +17,9 @@ The Vuetify **layout system** makes it easy to rapidly scaffold an application's
 
 ## Examples
 
-These templates are known as **whiteframes** and are designed to provide a consistent approach to layouts, layering, and shadows. They are a starting point that is meant to be modified to meet the specific needs of your application.
+These templates are known as **wireframes** and are designed to provide a consistent approach to layouts, layering, and shadows. They are a starting point that is meant to be modified to meet the specific needs of your application.
 
-<whiteframe-examples />
+<wireframe-examples />
 
 <alert type="info">
 

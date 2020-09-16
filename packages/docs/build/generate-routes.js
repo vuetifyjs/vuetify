@@ -10,8 +10,8 @@ require('dotenv').config({ path: resolve('../.env.local') })
 const languages = process.env.EN_LOCALE_ONLY === 'true'
   ? ['en']
   : require('../src/i18n/locales')
-      .map(lang => lang.locale)
-      .filter(lang => lang !== 'eo-UY')
+    .map(lang => lang.locale)
+    .filter(lang => lang !== 'eo-UY')
 
 function genRoutes (data, prefix) {
   const files = glob.sync(data)
@@ -33,16 +33,16 @@ function genRoutes (data, prefix) {
 }
 
 function genDemos () {
-  const files = glob.sync(resolve('../src/examples/whiteframes/*.vue'))
+  const files = glob.sync(resolve('../src/examples/wireframes/*.vue'))
   const paths = []
 
   for (const file of files) {
     const route = file
-      .split('/whiteframes/')
+      .split('/wireframes/')
       .pop()
       .replace(/\.vue$/, '')
 
-    paths.push(`/examples/whiteframes/${route}/`)
+    paths.push(`/examples/wireframes/${route}/`)
   }
 
   return paths
