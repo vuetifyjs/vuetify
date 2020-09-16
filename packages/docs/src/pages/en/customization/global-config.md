@@ -5,7 +5,7 @@ meta:
   keywords: vuetify config, global config, global vuetify config, configure vuetify options
 related:
   - /customization/accessibility/
-  - /customization/a-la-carte/
+  - /customization/treeshaking/
   - /customization/presets/
 ---
 

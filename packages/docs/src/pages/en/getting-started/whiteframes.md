@@ -6,6 +6,7 @@ meta:
 related:
   - /components/application/
   - /customization/theme/
+  - /resources/themes/
 ---
 
 # Whiteframes

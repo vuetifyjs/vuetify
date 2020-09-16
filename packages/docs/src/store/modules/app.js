@@ -13,10 +13,6 @@ const state = {
       icon: '$mdiFlaskOutline',
       color: 'orange',
     },
-    company: {
-      icon: '$mdiVuetify',
-      color: 'blue darken-1',
-    },
     components: {
       icon: '$mdiViewDashboardOutline',
       color: 'indigo darken-1',
@@ -44,6 +40,10 @@ const state = {
     'professional-support': {
       icon: '$mdiConsole',
       color: 'teal',
+    },
+    resources: {
+      icon: '$mdiTeach',
+      color: 'pink',
     },
     styles: {
       icon: '$mdiPaletteOutline',

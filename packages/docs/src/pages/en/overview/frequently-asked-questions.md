@@ -6,7 +6,7 @@ meta:
 related:
   - /getting-started/contributing/
   - /professional-support/consulting/
-  - /customization/a-la-carte/
+  - /customization/treeshaking/
 ---
 
 # Frequently asked questions
@@ -268,7 +268,7 @@ export default {
 
 * **The vuetify-loader doesn't load all components**{ #vuetify-loader-components }
 
-  The vuetify-loader has limitations in _dynamic_ components. Make sure to checkout the [limitations](/customization/a-la-carte#limitations) section for more information.
+  The vuetify-loader has limitations in _dynamic_ components. Make sure to checkout the [limitations](/customization/treeshaking#limitations) section for more information.
 
 <br>
 
