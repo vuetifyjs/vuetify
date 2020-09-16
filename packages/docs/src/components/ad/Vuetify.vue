@@ -30,7 +30,7 @@
 
       <v-list-item-content class="py-1">
         <v-list-item-title
-          class="font-weight-medium mb-1 subtitle-1 hidden-xs-only"
+          class="font-weight-medium subtitle-1 hidden-xs-only"
           v-text="current.title"
         />
 
