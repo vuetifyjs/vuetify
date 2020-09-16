@@ -16,6 +16,7 @@
 
 <script>
   // Utilities
+  import { error } from '@/util/routes'
   import { IN_BROWSER } from '@/util/globals'
   import { genMetaData } from '@/util/metadata'
   import { get, sync } from 'vuex-pathify'
@@ -40,7 +41,15 @@
     if (!isApi) path.push(category)
     path.push(page)
 
-    return context.default(`${path.join('/')}.md`)
+    try {
+      return context.default(`${path.join('/')}.md`)
+    } catch (err) {
+      return {
+        vue: {
+          component: (await error()).default,
+        },
+      }
+    }
   }
 
   export default {
