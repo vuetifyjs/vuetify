@@ -274,7 +274,7 @@ export default {
 
 * **How long will version 1.5 be supported?**{ #v15-lts }
 
-  Until July 2020. More information is located on the [Long-term Support](/introduction/long-term-support/) page.
+  Until July 2020. More information is located on the [Long-term Support](/overview/long-term-support/) page.
 
 <br>
 

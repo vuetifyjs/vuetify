@@ -5,7 +5,7 @@ meta:
   keywords: vuetify browser support
 related:
   - /getting-started/quick-start/
-  - /introduction/frequently-asked-questions/
+  - /overview/frequently-asked-questions/
   - /customization/sass-variables/
 ---
 

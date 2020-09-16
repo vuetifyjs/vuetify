@@ -5,7 +5,7 @@ meta:
   keywords: security, security vulnerability, disclosure policy, security disclosure
 nav: Security disclosure
 related:
-  - /introduction/long-term-support/
+  - /overview/long-term-support/
   - /professional-support/business/
   - /professional-support/enterprise/
 ---

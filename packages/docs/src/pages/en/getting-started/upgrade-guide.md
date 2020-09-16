@@ -4,9 +4,9 @@ meta:
   description: Keep your Vuetify up to date with the latest bug fixes, features, and functionality.
   keywords: migration, upgarde guide, upgrading vuetify
 related:
-  - /introduction/long-term-support/
+  - /overview/long-term-support/
   - /getting-started/contributing/
-  - /introduction/roadmap/
+  - /overview/roadmap/
 ---
 
 # Upgrade Guide

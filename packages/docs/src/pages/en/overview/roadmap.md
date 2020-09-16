@@ -5,9 +5,9 @@ meta:
   keywords: vuetify roadmap, future plans, new vuetify features
 nav: Roadmap
 related:
-  - /introduction/long-term-support/
+  - /overview/long-term-support/
   - /professional-support/consulting/
-  - /introduction/frequently-asked-questions/
+  - /overview/frequently-asked-questions/
 ---
 
 # The Vuetify roadmap
@@ -44,7 +44,7 @@ The following versions have continued maintainance for backwards compatible fixe
 * **Support until:** August 1st, 2020
 * **Notes:**: [v1.5 Release](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)
 * **Overview:**
-  Added new component, `v-calendar`. Improved functionality of `v-sparkline` with new **bar** and **fill** properties. Improved `v-treeview` and prepared for LTS. Navigate to the [Long-term Support Page](/introduction/long-term-support) for more information on LTS.
+  Added new component, `v-calendar`. Improved functionality of `v-sparkline` with new **bar** and **fill** properties. Improved `v-treeview` and prepared for LTS. Navigate to the [Long-term Support Page](/overview/long-term-support) for more information on LTS.
 
 ---
 
@@ -106,7 +106,7 @@ The following are the already released **minor** and **major** version updates. 
 * **Released:** July 2019
 * **Notes:**: [v2.0 Release](https://github.com/vuetifyjs/vuetify/releases/tag/v2.0.0)
 * **Overview:**
-  A complete rebuild of the framework core. Improving the layout and theme systems, platform integration, accessibility, RTL and performance. Update all components to the [Material Design 2](https://material.io/design/) specification. Add additional functionality to multiple existing components and setup v1.5 for [Long-term Support](/introduction/long-term-support).
+  A complete rebuild of the framework core. Improving the layout and theme systems, platform integration, accessibility, RTL and performance. Update all components to the [Material Design 2](https://material.io/design/) specification. Add additional functionality to multiple existing components and setup v1.5 for [Long-term Support](/overview/long-term-support).
 * **Objectives:**
   * Add new components
     * `v-app-bar`

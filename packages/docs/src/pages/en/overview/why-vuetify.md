@@ -5,8 +5,8 @@ meta:
   keywords: why vuetify, why choose vuetify, best vue framework, best ui framework
 related:
   - /professional-support/consulting/
-  - /introduction/roadmap/
-  - /introduction/meet-the-team/
+  - /overview/roadmap/
+  - /overview/meet-the-team/
 nav: Why Vuetify?
 ---
 
@@ -22,7 +22,7 @@ When you develop with Vuetify, you can expect a rich ecosystem of tooling and pl
 
 ## Design specification
 
-Vuetify is developed exactly according to [Material Design specification](https://material.io/guidelines/). Every component is hand crafted to bring you the best possible UI tools to your next great app. The development doesn't stop at the core components outlined in Google's spec. Through the support of community members and our [sponsors](/introduction/sponsors-and-backers), we have added over 15 new components including [calendars](/components/calendars/), [color pickers](/components/color-pickers/), [treeview](/components/treeview/) and many more.
+Vuetify is developed exactly according to [Material Design specification](https://material.io/guidelines/). Every component is hand crafted to bring you the best possible UI tools to your next great app. The development doesn't stop at the core components outlined in Google's spec. Through the support of community members and our [sponsors](/overview/sponsors-and-backers), we have added over 15 new components including [calendars](/components/calendars/), [color pickers](/components/color-pickers/), [treeview](/components/treeview/) and many more.
 
 ## Developer support
 

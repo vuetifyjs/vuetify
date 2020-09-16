@@ -5,7 +5,7 @@ meta:
   keywords: contribute, contributing, feature request
 related:
   - /getting-started/unit-testing/
-  - /introduction/frequently-asked-questions/
+  - /overview/frequently-asked-questions/
 ---
 
 # Contributing
@@ -91,7 +91,7 @@ The following are recommended packages to use when developing in Vuetify:
 
 ### Commitizen
 
-The [Vuetify team](https://vuetifyjs.com/introduction/meet-the-team/) uses [Commitizen](https://github.com/commitizen/cz-cli) for all repository commits. This allows for easy to read and organized commits with minimal change to normal commit functions. To get started, [globally install the commitizen package](https://github.com/commitizen/cz-cli#conventional-commit-messages-as-a-global-utility) using [yarn](https://yarnpkg.com/) by running the following commands in your terminal:
+The [Vuetify team](https://vuetifyjs.com/overview/meet-the-team/) uses [Commitizen](https://github.com/commitizen/cz-cli) for all repository commits. This allows for easy to read and organized commits with minimal change to normal commit functions. To get started, [globally install the commitizen package](https://github.com/commitizen/cz-cli#conventional-commit-messages-as-a-global-utility) using [yarn](https://yarnpkg.com/) by running the following commands in your terminal:
 
 ```bash
 # Install commitizen and the conventional changelog adapter
