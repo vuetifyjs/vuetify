@@ -94,5 +94,11 @@
   "directives/scrolling": "/directives/scroll",
   "directives/touch-support": "/directives/touch",
   "customization/accessibility": "/getting-started/accessibility",
-  "customization/rtl": "/customization/bidirectionality"
+  "customization/rtl": "/customization/bidirectionality",
+  "introduction/why-vuetify": "/overview/why-vuetify",
+  "introduction/frequently-asked-questions": "/overview/frequently-asked-questions",
+  "introduction/meet-the-team": "/overview/meet-the-team",
+  "introduction/sponsors-and-backers": "/overview/sponsors-and-backers",
+  "introduction/roadmap": "/overview/roadmap",
+  "introduction/long-term-support": "/overview/long-term-support"
 }
