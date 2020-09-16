@@ -17,7 +17,8 @@
     "title": "introduction",
     "icon": "$mdiScriptTextOutline:$mdiScriptText",
     "items": [
-      "what-is-vuetify"
+      "what-is-vuetify",
+      "layouts"
     ]
   },
   {
