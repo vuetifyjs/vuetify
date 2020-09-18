@@ -2,7 +2,7 @@
   <div>
     <app-text-field
       v-model="filter"
-      :placeholder="$i18n.t('search-jobs')"
+      :placeholder="$t('search-jobs')"
       class="mt-8 mb-12"
       clearable
       icon="$mdiBriefcaseSearchOutline"
@@ -57,7 +57,7 @@
               depressed
               small
             >
-              {{ $i18n.t('apply') }}
+              {{ $t('apply') }}
 
               <v-icon
                 right
@@ -83,7 +83,7 @@
                 label
                 x-small
               >
-                <span class="font-weight-bold">#{{ $i18n.t('new') }}</span>
+                <span class="font-weight-bold">#{{ $t('new') }}</span>
               </v-chip>
 
               <v-chip

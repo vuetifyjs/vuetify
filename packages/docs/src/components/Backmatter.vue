@@ -46,7 +46,7 @@
     computed: {
       toc: sync('pages/toc'),
       text () {
-        return this.$i18n.t('ready', { url: this.url })
+        return this.$t('ready', { url: this.url })
       },
       url () {
         return '/about/meet-the-team/'

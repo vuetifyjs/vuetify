@@ -23,7 +23,7 @@
             :key="i"
             :aria-label="social.title"
             :href="social.href"
-            :title="$i18n.t(social.title)"
+            :title="$t(social.title)"
             class="ma-3 d-inline-block"
             rel="noopener"
             target="_blank"
@@ -46,7 +46,7 @@
               <v-text-field
                 id="member_email"
                 v-model="email"
-                :label="$i18n.t('email-address')"
+                :label="$t('email-address')"
                 background-color="grey darken-3"
                 flat
                 name="member[email]"
@@ -61,7 +61,7 @@
                     type="submit"
                     value="Subscribe"
                   >
-                    {{ $i18n.t('subscribe') }}
+                    {{ $t('subscribe') }}
                   </v-btn>
                 </template>
               </v-text-field>
@@ -70,7 +70,7 @@
 
           <div class="text-center caption">
             <i18n path="subscribe-to-our">
-              <strong>{{ $i18n.t('newsletter') }}</strong>
+              <strong>{{ $t('newsletter') }}</strong>
             </i18n>
           </div>
         </v-col>
@@ -104,7 +104,7 @@
             <i18n path="copyright">
               &copy; 2016-{{ (new Date()).getFullYear() }}
 
-              {{ $i18n.t('vuetify') }}
+              {{ $t('vuetify') }}
             </i18n>
           </div>
 

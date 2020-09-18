@@ -3,7 +3,7 @@
     <v-col cols="12">
       <api-search
         :items="items"
-        :label="$i18n.t('search-sass-api')"
+        :label="$t('search-sass-api')"
         @input="genApi"
       />
     </v-col>

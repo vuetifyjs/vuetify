@@ -123,8 +123,8 @@
         }
 
         const path = item.title || item.heading
-        const title = this.$i18n.te(path)
-          ? this.$i18n.t(path)
+        const title = this.$te(path)
+          ? this.$t(path)
           : this.pages[to] || path
 
         const created = {

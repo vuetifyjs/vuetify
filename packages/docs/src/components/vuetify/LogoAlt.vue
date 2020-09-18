@@ -6,7 +6,7 @@
   >
     <v-img
       :src="`https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-${theme.isDark ? 'dark' : 'light' }.svg`"
-      :alt="$i18n.t('logo')"
+      :alt="$t('logo')"
       class="shrink"
       max-width="34"
       min-width="34"

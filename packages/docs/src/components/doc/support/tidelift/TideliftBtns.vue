@@ -8,7 +8,7 @@
       rel="noopener"
       target="_blank"
     >
-      {{ $i18n.t('tidelift.more') }}
+      {{ $t('tidelift.more') }}
     </v-btn>
 
     <v-btn
@@ -19,7 +19,7 @@
       rel="noopener"
       target="_blank"
     >
-      {{ $i18n.t('tidelift.demo') }}
+      {{ $t('tidelift.demo') }}
     </v-btn>
   </v-row>
 </template>

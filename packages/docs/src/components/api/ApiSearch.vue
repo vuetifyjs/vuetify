@@ -32,7 +32,7 @@
           :id="attrs['aria-labelledby']"
           v-text="item.text"
         />
-        <v-list-item-subtitle v-text="$i18n.t(item.type)" />
+        <v-list-item-subtitle v-text="$t(item.type)" />
       </v-list-item-content>
     </template>
   </v-autocomplete>

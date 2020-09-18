@@ -28,7 +28,7 @@
               small
               text-color="white"
             >
-              {{ $i18n.t(`premium-themes.${template.free ? 'free' : 'premium'}`) }}
+              {{ $t(`premium-themes.${template.free ? 'free' : 'premium'}`) }}
             </v-chip>
           </v-img>
 
@@ -44,7 +44,7 @@
           <v-responsive
             class="pa-4 body-2"
             min-height="95"
-            v-text="$i18n.t(template.description)"
+            v-text="$t(template.description)"
           />
 
           <v-card-actions
@@ -67,7 +67,7 @@
                       icon
                       target="_blank"
                       rel="noopener"
-                      :aria-label="$i18n.t('premium-themes.view-demo')"
+                      :aria-label="$t('premium-themes.view-demo')"
                       v-on="{ ...tooltip, ...menu }"
                     >
                       <v-icon color="primary">
@@ -75,7 +75,7 @@
                       </v-icon>
                     </v-btn>
                   </template>
-                  <span v-text="$i18n.t('premium-themes.view-demo')" />
+                  <span v-text="$t('premium-themes.view-demo')" />
                 </v-tooltip>
               </template>
               <v-list v-if="template.demoUrl.length > 1">
@@ -107,7 +107,7 @@
               min-width="100"
               target="_blank"
             >
-              {{ $i18n.t(`premium-themes.${template.free ? 'download-now' : 'buy-now'}`) }}
+              {{ $t(`premium-themes.${template.free ? 'download-now' : 'buy-now'}`) }}
             </v-btn>
           </v-card-actions>
         </v-card>

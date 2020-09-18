@@ -6,7 +6,7 @@
     <v-icon left>
       $mdiGithub
     </v-icon>
-    {{ $i18n.t('become-a-sponsor') }}
+    {{ $t('become-a-sponsor') }}
   </v-btn>
 </template>
 
