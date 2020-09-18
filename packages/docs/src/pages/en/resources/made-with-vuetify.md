@@ -6,7 +6,7 @@ meta:
 related:
   - /getting-started/wireframes/
   - /customization/theme/
-  - /overview/sponsors-and-backers/
+  - /about/sponsors-and-backers/
 ---
 
 # Made with Vuetify

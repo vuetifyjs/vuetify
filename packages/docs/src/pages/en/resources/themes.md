@@ -6,7 +6,7 @@ meta:
 related:
   - /getting-started/wireframes/
   - /customization/theme/
-  - /getting-started/quick-start/
+  - /getting-started/installation/
 ---
 
 # Vuetify Themes

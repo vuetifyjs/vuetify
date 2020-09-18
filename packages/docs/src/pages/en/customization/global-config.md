@@ -4,8 +4,8 @@ meta:
   description: Vuetify.config is an object containing global configuration options that modify the bootstrapping of your project.
   keywords: vuetify config, global config, global vuetify config, configure vuetify options
 related:
-  - /customization/accessibility/
-  - /customization/treeshaking/
+  - /getting-started/accessibility/
+  - /getting-started/treeshaking/
   - /customization/presets/
 ---
 

@@ -26,7 +26,7 @@
             to: {
               name: 'Documentation',
               params: {
-                category: 'professional-support',
+                category: 'introduction',
                 page: 'consulting',
               },
             },
@@ -36,7 +36,7 @@
             to: {
               name: 'Documentation',
               params: {
-                category: 'professional-support',
+                category: 'introduction',
                 page: 'enterprise',
               },
             },

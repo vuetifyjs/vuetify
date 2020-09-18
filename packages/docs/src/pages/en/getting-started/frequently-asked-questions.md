@@ -5,8 +5,8 @@ meta:
   keywords: frequently asked questions, faq
 related:
   - /getting-started/contributing/
-  - /professional-support/consulting/
-  - /customization/treeshaking/
+  - /introduction/consulting/
+  - /getting-started/treeshaking/
 ---
 
 # Frequently asked questions
@@ -268,13 +268,13 @@ export default {
 
 * **The vuetify-loader doesn't load all components**{ #vuetify-loader-components }
 
-  The vuetify-loader has limitations in _dynamic_ components. Make sure to checkout the [limitations](/customization/treeshaking#limitations) section for more information.
+  The vuetify-loader has limitations in _dynamic_ components. Make sure to checkout the [limitations](/getting-started/treeshaking/#limitations) section for more information.
 
 <br>
 
 * **How long will version 1.5 be supported?**{ #v15-lts }
 
-  Until July 2020. More information is located on the [Long-term Support](/overview/long-term-support/) page.
+  Until July 2020. More information is located on the [Long-term Support](/introduction/long-term-support/) page.
 
 <br>
 
@@ -313,7 +313,7 @@ export default {
 
 If you need help with an issue, please use one of our help channels:
 
-* [Vuetify Professional Support](/professional-support/consulting/)
+* [Vuetify Professional Support](/introduction/consulting/)
 * [Discord Community](https://community.vuetifyjs.com/)
 * [GitHub Discussions](https://discussions.vuetifyjs.com/)
 

@@ -4,9 +4,9 @@ meta:
   description: Get started with Vue and Vuetify in no time. Support for Vue CLI, Webpack, Nuxt and more.
   keywords: quick start, vuetify templates, installing vuetify, install vuetify
 related:
-  - /overview/why-vuetify/
-  - /overview/frequently-asked-questions/
-  - /beginners-guide/pre-amble/
+  - /introduction/why-vuetify/
+  - /getting-started/frequently-asked-questions/
+  - /introduction/what-is-vuetify/
 ---
 
 # Installation

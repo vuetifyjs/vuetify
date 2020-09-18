@@ -4,9 +4,9 @@ meta:
   description: Stay up to date with the latest release notes. The migration guides will also help you migrate applications though major releases.
   keywords: migration, releases, upgrading vuetify
 related:
-  - /overview/long-term-support/
+  - /introduction/long-term-support/
   - /getting-started/contributing/
-  - /overview/roadmap/
+  - /introduction/roadmap/
 ---
 
 # Release notes

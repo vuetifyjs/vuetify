@@ -4,9 +4,9 @@ meta:
   description: Vuetify provides long-term support to the last major release for 12 months for critical bugs and security vulnerabilities.
   keywords: lts, long-term support
 related:
-  - /overview/roadmap/
+  - /introduction/roadmap/
   - /getting-started/contributing/
-  - /overview/meet-the-team/
+  - /about/meet-the-team/
 ---
 
 # Long-term support
@@ -17,7 +17,7 @@ As a component framework, we understand that many projects that utilize Vuetify 
 
 ## Vuetify 2.0
 
-The latest version of Vuetify, based on the Material Design 2 specification. It includes multiple advancements over v1.5 and is the recommended version for the most up-to-date features and bug fixes. This version is actively maintained and has a [roadmap](/overview/roadmap) of upcoming features.
+The latest version of Vuetify, based on the Material Design 2 specification. It includes multiple advancements over v1.5 and is the recommended version for the most up-to-date features and bug fixes. This version is actively maintained and has a [roadmap](/introduction/roadmap/) of upcoming features.
 
 * 7 new components
 * Complete upgrade to the MD2 Specification

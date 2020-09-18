@@ -12,7 +12,7 @@
         <p>The page you were looking for does not exist</p>
 
         <v-btn
-          :to="rpath('/getting-started/quick-start/')"
+          :to="rpath('/getting-started/installation/')"
           color="primary"
           outlined
         >

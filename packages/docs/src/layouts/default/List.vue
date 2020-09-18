@@ -5,10 +5,10 @@
     nav
   >
     <template v-for="(item, i) in items">
-      <div
+      <v-subheader
         v-if="item.heading"
         :key="`heading-${i}`"
-        class="pt-2 pb-1 px-2 text-subtitle-2 font-weight-black"
+        class="text--primary font-weight-black text-uppercase"
         v-text="item.heading"
       />
 

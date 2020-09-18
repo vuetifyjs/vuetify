@@ -4,7 +4,7 @@ meta:
   description: Vuetify supports language Internationalization (i18n) from a wide range of locales and easily integrates vue-i18n.
   keywords: i18n, language, internationalization
 related:
-  - /customization/accessibility/
+  - /getting-started/accessibility/
   - /customization/bidirectionality/
 ---
 

@@ -49,7 +49,7 @@
         return this.$i18n.t('ready', { url: this.url })
       },
       url () {
-        return '/overview/meet-the-team/'
+        return '/about/meet-the-team/'
       },
     },
   }

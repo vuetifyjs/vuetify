@@ -4,9 +4,9 @@ meta:
   description: Learn how to create your Vuetify application from scratch. Browse API references, sample code, tutorials, and more.
   keywords: guide, vuetify beginner, starting vuetify, vuetify guide
 related:
-  - /introduction/layouts/
-  - /overview/why-vuetify/
-  - /professional-support/consulting/
+  - /getting-started/layouts/
+  - /introduction/why-vuetify/
+  - /introduction/consulting/
 nav: What is Vuetify?
 ---
 
@@ -22,13 +22,13 @@ Learn more about what Vuetify is, how to create an application from scratch, bro
 
 </alert>
 
-## What is Vuetify? { #what-is-vuetify }
+## What is Vuetify?
 
 Vuetify is a complete UI framework built on top of Vue.js. The goal of the project is to provide developers with tools to build rich and engaging user experiences. Unlike other frameworks, Vuetify is designed from the ground up to be easy to learn and rewarding to master with hundreds of carefully crafted components from the [Material Design](https://material.io/) specification.
 
 Vuetify takes a mobile first approach to design which means your application just works out of the box—whether it's on a phone, tablet, or desktop computer. Over
 
-If you are an experienced developer and want to compare Vuetify to other libraries/frameworks, check out our [Why Vuetify?](/overview/why-vuetify/) page.
+If you are an experienced developer and want to compare Vuetify to other libraries/frameworks, check out our [Why Vuetify?](/introduction/why-vuetify/) page.
 
 ## Getting started
 
@@ -46,7 +46,7 @@ Learn how to use Vuetify with one of the following topics:
 
 | Topic | Skill level | Time to read |
 | ------- | ----------- | ------------ |
-| [Layouts](/introduction/layouts/) | Beginner | 10 min |
+| [Layouts](/getting-started/layouts/) | Beginner | 10 min |
 
 Can't find what you're looking for? Help us improve! Please reach out to [john@vuetifyjs.com](mailto:john@vuetifyjs.com) with your feedback or join us in the Vuetify [Discord community](https://community.vuetifyjs.com/).
 

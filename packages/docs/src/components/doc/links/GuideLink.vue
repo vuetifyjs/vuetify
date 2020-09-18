@@ -3,8 +3,8 @@
     :to="{
       name: 'Documentation',
       params: {
-        category: 'beginners-guide',
-        page: 'guide'
+        category: 'introduction',
+        page: 'what-is-vuetify'
       }
     }"
     path="guide"

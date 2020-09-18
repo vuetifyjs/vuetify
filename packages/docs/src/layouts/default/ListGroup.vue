@@ -18,8 +18,23 @@
     </template>
 
     <template v-for="(child, i) in item.items">
+      <v-subheader
+        v-if="child.heading"
+        :key="`heading-${i}`"
+        class="text--primary font-weight-black text-uppercase"
+        inset
+        v-text="child.title"
+      />
+
+      <v-divider
+        v-else-if="child.divider"
+        :key="`divider-${i}`"
+        inset
+        class="my-2 ml-16"
+      />
+
       <default-list-group
-        v-if="child.items"
+        v-else-if="child.items"
         :key="`sub-group-${i}`"
         :item="child"
         sub-group

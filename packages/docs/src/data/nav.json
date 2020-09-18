@@ -1,24 +1,17 @@
 [
   {
-    "title": "overview",
-    "icon": "$mdiVuetify",
-    "items": [
-      "why-vuetify",
-      "frequently-asked-questions",
-      "meet-the-team",
-      "sponsors-and-backers",
-      "roadmap",
-      "long-term-support",
-      "security-disclosure",
-      "code-of-conduct"
-    ]
-  },
-  {
     "title": "introduction",
     "icon": "$mdiScriptTextOutline:$mdiScriptText",
     "items": [
       "what-is-vuetify",
-      "layouts"
+      "why-vuetify",
+      "roadmap",
+      "upgrade-guide",
+      { "divider": true },
+      { "heading": "professional-support" },
+      "consulting",
+      "enterprise",
+      "long-term-support"
     ]
   },
   {
@@ -26,14 +19,16 @@
     "icon": "$mdiSpeedometerMedium:$mdiSpeedometer",
     "items": [
       "installation",
-      "release-notes",
-      "upgrade-guide",
-      "accessibility",
       "browser-support",
-      "treeshaking",
       "wireframes",
-      "unit-testing",
-      "contributing"
+      "frequently-asked-questions",
+      "contributing",
+      { "divider": true },
+      { "heading": "guide" },
+      "layouts",
+      "accessibility",
+      "treeshaking",
+      "unit-testing"
     ]
   },
   {
@@ -203,20 +198,23 @@
     ]
   },
   {
-    "title": "professional-support",
-    "icon": "$mdiConsole",
-    "items": [
-      "consulting",
-      "enterprise"
-    ]
-  },
-  {
     "title": "resources",
     "icon": "$mdiTeach",
     "items": [
       "jobs-for-vue",
       "made-with-vuetify",
       "themes"
+    ]
+  },
+  {
+    "title": "about",
+    "icon": "$mdiVuetify",
+    "items": [
+      "release-notes",
+      "meet-the-team",
+      "sponsors-and-backers",
+      "security-disclosure",
+      "code-of-conduct"
     ]
   }
 ]

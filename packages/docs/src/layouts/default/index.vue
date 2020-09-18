@@ -122,9 +122,10 @@
           to = `/${url.join('/')}/`
         }
 
-        const title = this.$i18n.te(item.title)
-          ? this.$i18n.t(item.title)
-          : this.pages[to] || item.title
+        const path = item.title || item.heading
+        const title = this.$i18n.te(path)
+          ? this.$i18n.t(path)
+          : this.pages[to] || path
 
         const created = {
           ...item,

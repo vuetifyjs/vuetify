@@ -29,7 +29,7 @@
           :to="{
             name: 'Documentation',
             params: {
-              category: 'overview',
+              category: 'introduction',
               page: 'why-vuetify'
             }
           }"

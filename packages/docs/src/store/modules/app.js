@@ -33,13 +33,9 @@ const state = {
       icon: '$mdiScriptTextOutline',
       color: 'green',
     },
-    overview: {
+    about: {
       icon: '$mdiVuetify',
       color: 'primary',
-    },
-    'professional-support': {
-      icon: '$mdiConsole',
-      color: 'teal',
     },
     resources: {
       icon: '$mdiTeach',

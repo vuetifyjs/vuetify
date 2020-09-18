@@ -4,7 +4,7 @@
     :to="{
       name: 'Documentation',
       params: {
-        category: 'overview',
+        category: 'about',
         page: 'sponsors-and-backers'
       }
     }"
