@@ -40,7 +40,7 @@
 </script>
 
 <style lang="sass">
-  .v-list-item.v-list-item--default
+  .v-list-item.v-list-item.v-list-item--default
     min-height: 32px
 
     > .v-list-item__icon
