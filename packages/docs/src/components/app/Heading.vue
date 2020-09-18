@@ -6,7 +6,7 @@
     <a
       v-if="href"
       :href="href"
-      class="text-decoration-none"
+      class="text-decoration-none text-right text-md-left"
       @click="onClick"
     >
       #
@@ -64,7 +64,7 @@
       bottom: 0
       display: inline-block
       left: 0
-      margin-left: -.7em
+      margin: 0 -.7em
       position: absolute
       right: 0
       top: 0
