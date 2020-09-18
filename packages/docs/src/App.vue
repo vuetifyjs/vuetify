@@ -20,10 +20,10 @@
     computed: { hash: get('route/hash') },
 
     async mounted () {
-      if (!this.hash) return
-
-      await this.init()
       await waitForReadystate()
+      await this.init()
+
+      if (!this.hash) return
 
       try {
         this.$vuetify.goTo(this.hash)

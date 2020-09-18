@@ -115,7 +115,7 @@ const getters = {
     return alphabetical
   },
   hasApi: () => {
-    return (
+    return !!(
       process.env.VUE_APP_COSMIC_BUCKET_SLUG &&
       process.env.VUE_APP_COSMIC_BUCKET_READ_KEY
     )
