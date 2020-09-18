@@ -1,7 +1,5 @@
 <template>
   <v-app>
-    <core-system-bar />
-
     <core-snackbar />
 
     <documentation-app-bar />
