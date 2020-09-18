@@ -1,3 +1,4 @@
+import { Component } from 'vue'
 // Services
 import {
   Breakpoint,
@@ -23,6 +24,7 @@ export interface VuetifyPreset {
     thresholds: Breakpoint['thresholds']
   }
   icons: {
+    component?: Icons['component']
     iconfont: Icons['iconfont']
     // TODO: Remove partial for v3
     values: Partial<Icons['values']>

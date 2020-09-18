@@ -2,6 +2,7 @@
 import { Component } from 'vue'
 
 export interface Icons extends IconsOptions {
+  component?: Component | string
   iconfont: Iconfont
   values: VuetifyIcons
 }
