@@ -151,7 +151,7 @@
   "rtl": "RTL",
   "search": {
     "placeholder": "Search Vuetify",
-    "key-hint": "(press / to focus)"
+    "key-hint": "(press /)"
   },
   "search-api": "Search API",
   "search-jobs": "Search Jobs",

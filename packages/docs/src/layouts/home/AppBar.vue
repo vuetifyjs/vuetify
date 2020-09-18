@@ -6,33 +6,27 @@
     class="v-bar--underline"
     flat
   >
-    <vuetify-logo />
+    <component
+      :is="logo"
+      :key="logo"
+      :to="{
+        name: 'Documentation',
+        params: {
+          category: 'introduction',
+          page: 'what-is-vuetify'
+        }
+      }"
+    />
 
     <v-spacer />
 
-    <template v-if="!$vuetify.breakpoint.smAndDown || search">
-      <default-search />
-
-      <vertical-divider />
-    </template>
-
-    <learn-menu />
-
-    <team-link />
-
-    <support-menu />
-
-    <enterprise-link />
-
-    <vertical-divider />
-
-    <language-menu />
+    <default-app-bar-items />
   </v-app-bar>
 </template>
 
 <script>
   // Components
-  import DefaultSearch from '@/layouts/default/Search'
+  import DefaultAppBarItems from '@/layouts/default/AppBarItems'
 
   // Utilities
   import { get, sync } from 'vuex-pathify'
@@ -40,11 +34,16 @@
   export default {
     name: 'HomeBar',
 
-    components: { DefaultSearch },
+    components: { DefaultAppBarItems },
 
     computed: {
       dark: sync('user/theme@dark'),
       search: get('app/search'),
+      logo () {
+        return this.$vuetify.breakpoint.lgAndUp
+          ? 'vuetify-logo'
+          : 'vuetify-logo-alt'
+      },
     },
   }
 </script>

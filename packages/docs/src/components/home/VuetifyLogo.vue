@@ -1,10 +1,10 @@
 <template>
   <v-img
+    :height="size"
     :src="`https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-${theme.isDark ? 'dark' : 'light'}-atom.svg`"
+    :width="size"
     class="mx-auto"
-    height="400"
     max-width="100%"
-    width="400"
   />
 </template>
 
@@ -13,5 +13,11 @@
     name: 'HomeVuetifyLogo',
 
     inject: ['theme'],
+
+    computed: {
+      size () {
+        return this.$vuetify.breakpoint.smAndUp ? 400 : 250
+      },
+    },
   }
 </script>

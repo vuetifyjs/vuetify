@@ -6,12 +6,12 @@
       "what-is-vuetify",
       "why-vuetify",
       "roadmap",
+      "long-term-support",
       "upgrade-guide",
       { "divider": true },
       { "heading": "professional-support" },
       "consulting",
-      "enterprise",
-      "long-term-support"
+      "enterprise"
     ]
   },
   {

@@ -12,39 +12,15 @@
       @click="drawer = !drawer"
     />
 
-    <vuetify-logo-alt v-if="$vuetify.breakpoint.mobile" />
+    <vuetify-logo-alt
+      v-if="$vuetify.breakpoint.smOnly || $vuetify.breakpoint.mdOnly"
+      :to="{ name: 'Home' }"
+      class="ml-0 mr-2 ml-md-2"
+    />
 
     <v-spacer />
 
-    <default-search />
-
-    <vertical-divider />
-
-    <template v-if="$vuetify.breakpoint.smAndUp">
-      <learn-menu />
-
-      <team-link />
-
-      <support-menu />
-
-      <enterprise-link v-if="$vuetify.breakpoint.mdAndUp" />
-
-      <vertical-divider />
-
-      <store-link />
-    </template>
-
-    <settings-toggle />
-
-    <template v-if="$vuetify.breakpoint.lgAndUp">
-      <jobs-link />
-
-      <notifications-menu />
-
-      <vertical-divider />
-    </template>
-
-    <language-menu />
+    <default-app-bar-items />
   </v-app-bar>
 </template>
 
@@ -53,12 +29,12 @@
   import { sync } from 'vuex-pathify'
 
   // Components
-  import DefaultSearch from '@/layouts/default/Search'
+  import DefaultAppBarItems from '@/layouts/default/AppBarItems'
 
   export default {
     name: 'DefaultBar',
 
-    components: { DefaultSearch },
+    components: { DefaultAppBarItems },
 
     computed: {
       ...sync('app', [

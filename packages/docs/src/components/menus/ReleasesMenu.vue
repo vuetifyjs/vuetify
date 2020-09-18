@@ -1,8 +1,5 @@
 <template>
-  <app-menu
-    v-if="$vuetify.breakpoint.mdAndUp"
-    :items="items"
-  >
+  <app-menu :items="items">
     <template #activator="{ attrs, on }">
       <app-btn
         class="text-lowercase mr-2"

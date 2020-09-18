@@ -9,7 +9,7 @@ meta:
 
 <br>
 
-# Material Design Framework {.text-center .font-weight-light}
+# Material Design Framework
 
 Vuetify is a Vue UI Library with beautifully handcrafted Material Components. No design skills required — everything you need to create amazing applications is at your fingertips. {style="max-width: 768px" .mx-auto}
 

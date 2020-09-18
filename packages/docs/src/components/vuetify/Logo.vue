@@ -1,13 +1,15 @@
 <template>
   <router-link
-    :to="{ name: 'Home' }"
     class="d-inline-block"
+    v-bind="$attrs"
+    v-on="$listeners"
   >
     <v-img
       :src="`https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-${theme.isDark ? 'dark' : 'light' }-text.svg`"
       :alt="$i18n.t('logo')"
       class="shrink"
-      max-width="164"
+      max-width="148"
+      width="148"
     />
   </router-link>
 </template>

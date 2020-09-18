@@ -1,5 +1,8 @@
 <template>
-  <app-menu :items="items">
+  <app-menu
+    key="learn-menu"
+    :items="items"
+  >
     <template #activator="{ attrs, on }">
       <app-btn
         v-bind="attrs"
