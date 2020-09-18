@@ -144,11 +144,12 @@ Lastly, `git push` and open a pull request.
 
 <alert type="info">
 
-  Pull requests related to Vuetify:
-  - For **bug fixes** and **documentation updates** submit pull requests to `master`.
-  - For **new features** and **enhancements** submit pull requests to `dev`
-  - For **bugs** and **critical fixes** related to **v1.5/LTS** submit pull requests to `stable`
-  - For any **features** that contain **breaking changes** submit pull requests to `next`
+Pull requests related to Vuetify:
+
+- For **bug fixes** and **documentation updates** submit pull requests to `master`.
+- For **new features** and **enhancements** submit pull requests to `dev`
+- For **bugs** and **critical fixes** related to **v1.5/LTS** submit pull requests to `stable`
+- For any **features** that contain **breaking changes** submit pull requests to `next`
 
 </alert>
 
@@ -167,4 +168,5 @@ Lastly, `git push` and open a pull request.
   We do not accept PRs for any doc changes pertaining to languages other than `en`. All changes for languages other than `en` are to be submitting through our Crowdin project. To get started simply select `Help Translate` in the language drop down of the docs. Languages will not be added until they have at least 15% of their translations completed.
 
 </alert>
+
 <backmatter />
