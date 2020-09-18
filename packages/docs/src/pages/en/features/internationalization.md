@@ -10,7 +10,7 @@ related:
 
 # Internationalization (i18n)
 
-Vuetify supports language Internationalization (i18n) of its components. When bootstrapping your application you can specify available locales and the currently active locale with the **current** option. The **lang** service also supports easy integration with [vue-i18n](#vue-i-18-n).
+Vuetify supports language Internationalization (i18n) of its components. When bootstrapping your application you can specify available locales and the currently active locale with the **current** option. The **lang** service also supports easy integration with [vue-i18n](#vue-i18n).
 
 <entry-ad />
 
@@ -98,7 +98,7 @@ export default new Vuetify({
 
 <alert type="info">
 
-  Vuetify provides only a basic translation function `t`. It is recommended for more advanced internationalization functions to make use of Vuetify's integration with [vue-i18n](#vue-i-18-n)
+  Vuetify provides only a basic translation function `t`. It is recommended for more advanced internationalization functions to make use of Vuetify's integration with [vue-i18n](#vue-i18n)
 
 </alert>
 
@@ -137,7 +137,7 @@ If you are building custom Vuetify components that need to hook into the interna
 
 ## Vue i18n
 
-If you are using the vue-i18n package, you can very easily integrate it with Vuetify. This allows you to keep all of your translations in one place. Simply create an entry for $vuetify within your messages and add the corresponding language changes. Then hook up vue-i18n to Vuetify by supplying a custom translation function (as seen in the example below). For a complete list of all available keys, [navigate here](#create-a-translation).
+If you are using the vue-i18n package, you can very easily integrate it with Vuetify. This allows you to keep all of your translations in one place. Simply create an entry for $vuetify within your messages and add the corresponding language changes. Then hook up vue-i18n to Vuetify by supplying a custom translation function (as seen in the example below). For a complete list of all available keys, [navigate here](#creating-a-translation).
 
 An important note when using external localization plugins is that vuetify will not automatically fall back to using english if no localization exists for the current locale. So be sure to supply the plugin with the english localizations as well as your own.
 
