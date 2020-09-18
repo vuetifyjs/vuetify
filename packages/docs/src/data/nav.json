@@ -32,7 +32,7 @@
     ]
   },
   {
-    "title": "customization",
+    "title": "features",
     "icon": "$mdiImageEditOutline:$mdiImageEdit",
     "items": [
       "bidirectionality",

@@ -6,7 +6,7 @@ meta:
 related:
   - /getting-started/accessibility/
   - /getting-started/treeshaking/
-  - /customization/presets/
+  - /features/presets/
 ---
 
 # Global Configuration

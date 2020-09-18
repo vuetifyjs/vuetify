@@ -6,7 +6,7 @@ meta:
 related:
   - /components/menu/
   - /styles/colors/
-  - /customization/theme/
+  - /features/theme/
 ---
 
 # Color pickers

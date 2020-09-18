@@ -4,7 +4,7 @@ meta:
   description: Learn about the colors of Material Design. Consume the javascript color pack directly in your application.
   keywords: colors, material design colors, vuetify color pack, material color classes
 related:
-  - /customization/theme/
+  - /features/theme/
   - /themes/premium/
   - /getting-started/wireframes/
 ---

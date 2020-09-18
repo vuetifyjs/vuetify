@@ -4,7 +4,7 @@ meta:
   description: Vuetify comes equipped with a default markup that makes it easy to create layouts (boilerplate) for any Vue application.
   keywords: default layout, vuetify default markup, vuetify default layout
 related:
-  - /customization/theme/
+  - /features/theme/
   - /components/app-bars/
   - /components/navigation-drawers/
 ---

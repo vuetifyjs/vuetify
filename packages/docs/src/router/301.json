@@ -95,5 +95,14 @@
   "introduction/frequently-asked-questions": "/getting-started/frequently-asked-questions",
   "introduction/sponsors-and-backers": "/about/sponsors-and-backers",
   "professional-support/consulting": "/introduction/consulting",
-  "professional-support/enterprise": "/introduction/enterprise"
+  "professional-support/enterprise": "/introduction/enterprise",
+  "customization/bidirectionality": "/features/bidirectionality",
+  "customization/breakpoints": "/features/breakpoints",
+  "customization/global-config": "/features/global-config",
+  "customization/scrolling": "/features/scrolling",
+  "customization/icons": "/features/icons",
+  "customization/internationalization": "/features/internationalization",
+  "customization/presets": "/features/presets",
+  "customization/sass-variables": "/features/sass-variables",
+  "customization/theme": "/features/theme"
 }

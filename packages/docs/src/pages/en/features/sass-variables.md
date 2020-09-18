@@ -5,8 +5,8 @@ meta:
   keywords: sass variables, scss variables, modifying Vuetify styles
 related:
   - /styles/colors/
-  - /customization/theme/
-  - /customization/presets/
+  - /features/theme/
+  - /features/presets/
 ---
 
 # SASS variables
@@ -147,7 +147,7 @@ $headings: (
 ## Usage in components
 
 There are two ways to import and use Vuetify variables within your components, both which provide the same outcome. The first method is to import the default framework styles file:
-This is the preferred method if you are using [Presets](/customization/presets) or **not** using a variables file at all.
+This is the preferred method if you are using [Presets](/features/presets) or **not** using a variables file at all.
 
 ```html
 <style lang="sass">

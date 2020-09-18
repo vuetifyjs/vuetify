@@ -5,7 +5,7 @@ meta:
   keywords: a la carte, a-la-carte, vuetify single import, vuetify import, component importing, reduce vuetify size, treeshaking, tree shaking
 related:
   - /getting-started/unit-testing/
-  - /customization/presets/
+  - /features/presets/
   - /introduction/what-is-vuetify/
 ---
 
@@ -101,7 +101,7 @@ npm install sass sass-loader fibers deepmerge -D
 
 <alert type="info">
 
-  For a more detailed explanation on how to setup your application to handle SASS, please navigate to the [theme page](/customization/theme).
+  For a more detailed explanation on how to setup your application to handle SASS, please navigate to the [theme page](/features/theme).
 
 </alert>
 

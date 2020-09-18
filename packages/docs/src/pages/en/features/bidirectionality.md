@@ -5,7 +5,7 @@ meta:
   keywords: rtl, right-to-left, bidirectionality
 related:
   - /getting-started/accessibility/
-  - /customization/internationalization/
+  - /features/internationalization/
 nav: Bidirectionality (LTR/RTL)
 ---
 

@@ -5,7 +5,7 @@ meta:
   keywords: vuetify themes, pre-built material themes, premium themes
 related:
   - /getting-started/wireframes/
-  - /customization/theme/
+  - /features/theme/
   - /getting-started/installation/
 ---
 

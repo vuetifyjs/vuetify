@@ -5,13 +5,13 @@ meta:
   keywords: grids, vuetify grid component, layout component, flex component
 related:
   - /styles/flex/
-  - /customization/breakpoints/
+  - /features/breakpoints/
   - /styles/display/
 ---
 
 # Grid system
 
-Vuetify comes with a 12 point grid system built using <kbd>flex-box</kbd>. The grid is used to create specific layouts within an application's content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations, **xs**, **sm**, **md**, **lg** and **xl**. These resolutions are defined below in the Viewport Breakpoints table and can be modified by customizing the [Breakpoint service](/customization/breakpoints).
+Vuetify comes with a 12 point grid system built using <kbd>flex-box</kbd>. The grid is used to create specific layouts within an application's content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations, **xs**, **sm**, **md**, **lg** and **xl**. These resolutions are defined below in the Viewport Breakpoints table and can be modified by customizing the [Breakpoint service](/features/breakpoints).
 
 <promoted-ad slug="vuemastery-grids" />
 

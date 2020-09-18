@@ -6,7 +6,7 @@ meta:
 related:
   - /getting-started/installation/
   - /getting-started/frequently-asked-questions/
-  - /customization/sass-variables/
+  - /features/sass-variables/
 ---
 
 # Browser support

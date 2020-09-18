@@ -5,7 +5,7 @@ meta:
   keywords: pre-defined layouts, layouts, application layout, material design layouts
 related:
   - /components/application/
-  - /customization/theme/
+  - /features/theme/
   - /resources/themes/
 ---
 

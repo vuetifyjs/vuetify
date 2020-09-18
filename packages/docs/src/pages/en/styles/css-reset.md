@@ -6,7 +6,7 @@ meta:
 related:
   - /styles/colors/
   - /styles/typography/
-  - /customization/sass-variables/
+  - /features/sass-variables/
 ---
 
 # CSS Reset

@@ -4,8 +4,8 @@ meta:
   description: Presets are Vue CLI plugins that drastically alter the look and feel of your Vuetify application.
   keywords: vuetify presets, custom material design
 related:
-  - /customization/theme/
-  - /customization/sass-variables/
+  - /features/theme/
+  - /features/sass-variables/
   - /styles/colors/
 ---
 
@@ -293,7 +293,7 @@ module.exports = { preset }
 
 #### SASS variables
 
-This is a SASS/SCSS variables file which will overwrite existing framework values. You can find more information about available variables on the [Vuetify SASS Variables](/customization/sass-variables/#variable-api) documentation page or within the API section of a component.
+This is a SASS/SCSS variables file which will overwrite existing framework values. You can find more information about available variables on the [Vuetify SASS Variables](/features/sass-variables/#variable-api) documentation page or within the API section of a component.
 
 ```scss
 // preset/variables.scss

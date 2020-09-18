@@ -220,7 +220,7 @@ In the next section we explore how to customize the **thresholds** that determin
 
 <alert type="warning">
 
-  This section modifies the `$grid-breakpoints` SASS variable. More information on setup is available on the [SASS variables](/customization/sass-variables/) page.
+  This section modifies the `$grid-breakpoints` SASS variable. More information on setup is available on the [SASS variables](/features/sass-variables/) page.
 
 </alert>
 

@@ -5,7 +5,7 @@ meta:
   keywords: todo
 related:
   - /getting-started/wireframes/
-  - /customization/theme/
+  - /features/theme/
   - /about/sponsors-and-backers/
 ---
 

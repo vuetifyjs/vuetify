@@ -17,7 +17,7 @@ const state = {
       icon: '$mdiViewDashboardOutline',
       color: 'indigo darken-1',
     },
-    customization: {
+    features: {
       icon: '$mdiImageEditOutline',
       color: 'red',
     },
