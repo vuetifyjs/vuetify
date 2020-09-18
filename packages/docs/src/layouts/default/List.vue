@@ -15,7 +15,7 @@
       <v-divider
         v-else-if="item.divider"
         :key="`divider-${i}`"
-        class="my-2 ml-2 mr-n2"
+        class="mt-3 mb-2 ml-2 mr-n2"
       />
 
       <default-list-group

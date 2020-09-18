@@ -30,7 +30,7 @@
         v-else-if="child.divider"
         :key="`divider-${i}`"
         inset
-        class="my-2 ml-16"
+        class="mt-3 mb-2 ml-16"
       />
 
       <default-list-group
