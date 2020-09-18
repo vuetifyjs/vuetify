@@ -18,14 +18,18 @@ export class Icons extends Service implements IIcons {
 
   public values: IIcons['values']
 
+  public component: IIcons['component']
+
   constructor (preset: VuetifyPreset) {
     super()
 
     const {
       iconfont,
       values,
+      component,
     } = preset[Icons.property]
 
+    this.component = component
     this.iconfont = iconfont
     this.values = mergeDeep(
       presets[iconfont],
