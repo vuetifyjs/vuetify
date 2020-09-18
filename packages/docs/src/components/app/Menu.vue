@@ -2,7 +2,7 @@
   <v-menu
     bottom
     close-delay="100"
-    content-class="elevation-0 rounded"
+    content-class="rounded"
     left
     max-height="500"
     offset-y
@@ -19,7 +19,7 @@
       />
     </template>
 
-    <app-sheet>
+    <app-sheet :outlined="false">
       <slot v-if="$slots.default" />
 
       <default-list
