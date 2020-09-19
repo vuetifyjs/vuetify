@@ -1,29 +1,6 @@
-<template>
-  <component
-    :is="component"
-    class="app-link text-decoration-none primary--text font-weight-medium d-inline-block"
-    v-bind="attrs"
-  >
-    <span
-      class="d-inline-flex align-center"
-      @click="onClick"
-    >
-      <slot v-if="!isSamePage" />
-
-      <v-icon
-        v-if="icon"
-        :class="`m${isSamePage ? 'r' : 'l'}-1`"
-        color="primary"
-        size=".875rem"
-        v-text="icon"
-      />
-
-      <slot v-if="isSamePage" />
-    </span>
-  </component>
-</template>
-
 <script>
+  import { VIcon } from 'vuetify/lib/components/VIcon'
+
   export default {
     name: 'AppLink',
 
@@ -41,9 +18,6 @@
         return this.isExternal
           ? { href: this.href, target: '_blank', rel: 'noopener' }
           : { to: { path: this.href } }
-      },
-      component () {
-        return !this.isExternal ? 'router-link' : 'a'
       },
       icon () {
         if (this.isSamePage) return '$mdiPound'
@@ -77,6 +51,28 @@
 
         this.$vuetify.goTo(this.href)
       },
+    },
+
+    render (h) {
+      const children = []
+
+      if (!this.isSamePage) children.push(this.$slots.default)
+      if (this.icon) children.push(h(VIcon, {
+        class: `m${this.isSamePage ? 'r' : 'l'}-1`,
+        attrs: {
+          color: 'primary',
+          size: '.875rem',
+        },
+      }, [this.icon]))
+      if (this.isSamePage) children.push(this.$slots.default)
+
+      return h(this.isExternal ? 'a' : 'router-link', {
+        staticClass: 'app-link text-decoration-none primary--text font-weight-medium d-inline-block',
+        attrs: this.attrs,
+        [this.isExternal ? 'on' : 'nativeOn']: {
+          click: this.onClick,
+        },
+      }, children)
     },
   }
 </script>
