@@ -35,7 +35,7 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 * [How do I use Font Awesome, Material Design Icons or Material Icons?](#custom-icons)
 * [Why does &lt;v-dialog> close immediately after clicking the button?](#dialog-close-click)
 * [How do I upgrade to the latest version?](#latest-version-upgrade)
-* [How do a report a bug or request a feature](#report-request-feature)
+* [How do I report a bug or request a feature?](#report-request-feature)
 * [The vuetify-loader doesn't load all components](#vuetify-loader-components)
 * [How long will version 1.5 be supported?](#v15-lts)
 * [How do I get to the v1.5 documentation?](#v15-docs)
@@ -96,7 +96,7 @@ module.exports = {
 
 * **Error: Cannot find module 'node-sass'.**{ #cannot-find-module-sass }
 
-  Ensure that your `@vue/cli packages` located in `package.json` are at least **^3.5.0**.
+  Ensure that your `@vue/cli-*` packages located in `package.json` are at least **^3.5.0**.
 
 <br>
 
@@ -114,13 +114,13 @@ module.exports = {
 
 * **I'm seeing `$attrs is readonly` and/or `$listeners is readonly` in the console**{ #attrs-is-readonly }
 
-  Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning messages. There is currenty an on-going [Github discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases. If you have additional questions please join us in our [online community](https://community.vuetifyjs.com).
+  Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning messages. There is currenty an ongoing [Github discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases.
 
 <br>
 
-* **I'm seeing `Error in ./node_modules/vuetify/src/dir/file.js Module parse "failed": Unexpected token (&lt;lineno&gt;:&lt;characterno&gt;)` in the terminal.**{ #unexpected-token }
+* **I'm seeing `Error in ./node_modules/vuetify/src/dir/file.js Module parse failed: Unexpected token (<lineno>:<characterno>)` in the terminal.**{ #unexpected-token }
 
-  If you're using an IDE, such as IntelliJ IDEA or WebStorm, it will often add automatic imports pointing to the `vuetify/src/` directory for components you use.  Change the import statement path from `vuetify/src/` to `vuetify/es5/`.
+  If you're using an IDE, such as IntelliJ IDEA or WebStorm, it will often add automatic imports pointing to the `vuetify/src` directory for components you use. Change the import statement path from `vuetify/src` to `vuetify/lib`.
 
 <br>
 
@@ -209,7 +209,7 @@ export default {
 
 * **Why does &lt;v-dialog> close immediately after clicking the button?**{ #dialog-close-click }
 
-  When not using the **activator** slot for `v-menu` and `v-dialog` for example, you must manually stop the _propagation_ of the click event. To do this, simply add the _.stop_ modifier to the click event.
+  When not using the **activator** slot for `v-menu` and `v-dialog` for example, you must manually stop the propagation of the click event. To do this, simply add the `.stop` modifier to the click event.
 
 ```html
 <!-- Vue Component -->
@@ -239,7 +239,7 @@ export default {
 
 * **How do I upgrade to the latest version?**{ #latest-version-upgrade }
 
-  For a detailed guide on how to upgrade to the latest version, navigate to the [Releases and Migrations](/getting-started/releases-and-migrations/) page. In addition, lll required changes are noted in the **Upgrade Guide** of all releases.
+  For a detailed guide on how to upgrade to the latest version, navigate to the [Releases and Migrations](/getting-started/releases-and-migrations/) page. In addition, all required changes are noted in the **Upgrade Guide** of all releases.
 
   **Releases**:
 
@@ -260,13 +260,13 @@ export default {
 
 <br>
 
-* **How do a report a bug or request a feature**{ #report-request-feature }
+* **How do I report a bug or request a feature?**{ #report-request-feature }
 
   In order to ensure all required information is provided, we have created an [Issue Generator](https://issues.vuetifyjs.com) that helps you through the process. Any issue created not using the generator will automatically be closed, so please use it.
 
 <br>
 
-* **The vuetify-loader doesn't load all components**{ #vuetify-loader-components }
+* **The vuetify-loader doesn't load all components.**{ #vuetify-loader-components }
 
   The vuetify-loader has limitations in _dynamic_ components. Make sure to checkout the [limitations](/getting-started/treeshaking/#limitations) section for more information.
 
@@ -292,13 +292,13 @@ export default {
 
 * **SCRIPT5022: Expected identifier, string or number**{ #script5022 }
 
-  In order to support **modern mode** in vue-cli-3, `vuetify/lib` is not transpiled. You must tell vue-cli to transpile the `vuetify` package. This is configured automatically when installing the Vuetify cli plugin. If you are using an older version, simple add 'vuetify' to your `vue.config.js` **transpileDependencies** array.
+  In order to support **modern mode** in vue-cli-3, `vuetify/lib` is not transpiled. You must tell vue-cli to transpile the `vuetify` package. This is configured automatically when installing the Vuetify cli plugin. If you are using an older version, simply add 'vuetify' to the `transpileDependencies` array in `vue.config.js`.
 
 <br>
 
 * **When adding typescript - Error: Could not find a declaration file for module 'vuetify/lib'**{ #typescript-declaration-file }
 
-  Update the **compilerOptions** key in `tsconfig.json` with the vuetify type:
+  Update the `compilerOptions` key in `tsconfig.json` with the vuetify type:
 
 ```json
 // tsconfig.json

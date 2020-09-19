@@ -11,7 +11,7 @@ related:
 
 # Display Breakpoints
 
-With Vuetify you can control various aspects of your application based upon the `window` size. This service works in conjunction with [grids](/components/grids/) and other responsive helper classes (i.e. [display](/styles/display/)).
+With Vuetify you can control various aspects of your application based upon the window size. This service works in conjunction with [grids](/components/grids/) and other responsive helper classes (e.g. [display](/styles/display/)).
 
 <entry-ad />
 
@@ -51,7 +51,7 @@ In the following snippet, we use a switch statement and the current breakpoint n
 
 ## Usage
 
-Let's try a real world example with a `v-dialog` component. that you want to convert to a **full-screen** dialog on mobile devices. To track this we would need to determine the same of the screen relative to the value we are comparing to. In the following snippet we use the `mounted` and `beforeDestroy` lifecycle hooks to bind a _scroll_ listener to the `window`.
+Let's try a real world example with a `v-dialog` component that you want to convert to a fullscreen dialog on mobile devices. To track this we would need to determine the size of the screen relative to the value we are comparing to. In the following snippet we use the `mounted` and `beforeDestroy` lifecycle hooks to bind a `resize` listener to the window.
 
 ```html
 <!-- Vue Component -->
@@ -93,7 +93,7 @@ Even opting to use the [v-resize](/directives/resizing/) directive would require
 </template>
 ```
 
-The breakpoint service is _dynamic_ and updates when Vuetify **initially** boots and when the viewport is **resized**.
+The breakpoint service is _dynamic_ and updates when Vuetify **initially** boots and when the viewport is resized.
 
 ### Breakpoint service object
 
@@ -146,7 +146,7 @@ The following is the public signature for the breakpoint service:
 }
 ```
 
-Access these properties within Vue files by referencing `$vuetify.breakpoint.<property>`; where property corresponds to a value listed in the  [Breakpoint service](#breakpoint-service-object) object. In the following snippet we log the current viewport **width** to the console once the component fires the mounted lifecycle hook:
+Access these properties within Vue files by referencing `$vuetify.breakpoint.<property>`; where `<property>` corresponds to a value listed in the  [Breakpoint service](#breakpoint-service-object) object. In the following snippet we log the current viewport width to the console once the component fires the mounted lifecycle hook:
 
 ```html
 <!-- Vue Component -->
@@ -160,7 +160,7 @@ Access these properties within Vue files by referencing `$vuetify.breakpoint.<pr
 </script>
 ```
 
-While the `$vuetify` object supports SSR (Server-Side Rendering) including platforms such as NUXT, the breakpoint service detects the _height and width_ `window` values as **0**. This sets the initial breakpoint size to **xs** and in some cases can cause the layout to _snap_ in place when the client side is hydrated in NUXT. In the upcoming section we demonstrate how to use `boolean` breakpoint values in the *template and script* tags of Vue components.
+While the `$vuetify` object supports SSR (Server-Side Rendering) including platforms such as NUXT, the breakpoint service detects the height and width values as **0**. This sets the initial breakpoint size to **xs** and in some cases can cause the layout to _snap_ in place when the client side is hydrated in NUXT. In the upcoming section we demonstrate how to use `boolean` breakpoint values in the template and script tags of Vue components.
 
 ### Breakpoint conditionals
 
@@ -189,7 +189,7 @@ These *conditional values* enable responsive functionality to Vuetify features t
 
 </alert>
 
-The **mobileBreakpoint** option accepts breakpoint names (*xs, sm, md, lg, xl*) as a valid configuration option. Once set, the provided value is _propagated_ to supporting components such as [v-navigation-drawer](/components/navigation-drawers/).
+The `mobileBreakpoint` option accepts breakpoint names (*xs, sm, md, lg, xl*) as a valid configuration option. Once set, the provided value is propagated to supporting components such as [v-navigation-drawer](/components/navigation-drawers/).
 
 ```js
 // src/plugins/vuetify.js
@@ -204,7 +204,7 @@ export default new Vuetify({
 })
 ```
 
-Individual components can override their inherited **default** values by using the **mobile-breakpoint** property. In the following example we force `v-banner` into a *mobile state* when the viewport size is less than _1024px_:
+Individual components can override their inherited **default** values by using the `mobile-breakpoint` property. In the following example we force `v-banner` into a *mobile state* when the viewport size is less than _1024px_:
 
 ```html
 <template>
@@ -214,7 +214,7 @@ Individual components can override their inherited **default** values by using t
 </template>
 ```
 
-In the next section we explore how to customize the **thresholds** that determine size breaks.
+In the next section we explore how to customize the thresholds that determine size breaks.
 
 ### Thresholds
 
@@ -224,7 +224,7 @@ In the next section we explore how to customize the **thresholds** that determin
 
 </alert>
 
-The **thresholds** option modifies the values used for *viewport calculations*. The following snippet overrides *xs through lg* breakpoints and increases **scrollBarWidth** to _24_.
+The `thresholds` option modifies the values used for viewport calculations. The following snippet overrides *xs* through *lg* breakpoints and increases `scrollBarWidth` to _24_.
 
 ```js
 // src/plugins/vuetify.js
@@ -245,7 +245,7 @@ export default new Vuetify({
 })
 ```
 
-You may notice that there is no `xl` property on the **breakpoint service**; this is intentional. Viewport calculations always start at _0_ and work their way up. A value of _340_ for the `xs` threshold means that a window size of _0 to 340_ is considered to be an *extra small* screen.
+You may notice that there is no `xl` property on the breakpoint service, this is intentional. Viewport calculations always start at _0_ and work their way up. A value of _340_ for the `xs` threshold means that a window size of _0 to 340_ is considered to be an *extra small* screen.
 
 To propagate these changes to *css helper classes* we need to update the `$grid-breakpoints` SASS variable with our new values. On **large and extra-large** screens we *subtract* width of the browser's scrollbar from the defined breakpoints.
 

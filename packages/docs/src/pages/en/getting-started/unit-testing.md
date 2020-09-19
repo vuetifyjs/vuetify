@@ -11,13 +11,13 @@ related:
 
 # Unit Testing
 
-Unit tests are an important (and sometimes ignored) part of developing applications. They help us secure our processes and work flows, ensuring that the most critical parts of our projects are protected from accidental mistakes or oversights in our development. Because of this, Vue has its own testing utility called [vue-test-utils](https://vue-test-utils.vuejs.org/). It provides useful features for interacting with Vue components and works with many popular test runners.
+Unit tests are an important (and sometimes ignored) part of developing applications. They help us secure our processes and workflows, ensuring that the most critical parts of our projects are protected from accidental mistakes or oversights in our development. Because of this, Vue has its own testing utility called [vue-test-utils](https://vue-test-utils.vuejs.org/). It provides useful features for interacting with Vue components and works with many popular test runners.
 
 <entry-ad />
 
 <alert type="warning">
 
-  Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning **$attrs** or **$listeners** is read-only. There is currenty an on-going [Github discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases. If you have additional questions please join us in our [online community](https://community.vuetifyjs.com)
+  Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning "$attrs is readonly" or "$listeners is readonly". There is currenty an ongoing [Github discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases. If you have additional questions please join us in our [online community](https://community.vuetifyjs.com)
 
 </alert>
 

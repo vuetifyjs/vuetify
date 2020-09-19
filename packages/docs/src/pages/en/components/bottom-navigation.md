@@ -55,7 +55,7 @@ Adjust the style of buttons and icons by using the **horizontal** prop. This pos
 
 #### Scroll threshold
 
-Modify the **scroll-threshold** property to increase the distance a user must *scroll* before the `v-bottom-navigation` is hidden.
+Modify the **scroll-threshold** property to increase the distance a user must scroll before the `v-bottom-navigation` is hidden.
 
 <example file="v-bottom-navigation/prop-scroll-threshold" />
 

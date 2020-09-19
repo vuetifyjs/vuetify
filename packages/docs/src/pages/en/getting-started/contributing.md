@@ -144,12 +144,12 @@ Lastly, `git push` and open a pull request.
 
 <alert type="info">
 
-Pull requests related to Vuetify:
+  Pull requests related to Vuetify:
 
-- For **bug fixes** and **documentation updates** submit pull requests to `master`.
-- For **new features** and **enhancements** submit pull requests to `dev`
-- For **bugs** and **critical fixes** related to **v1.5/LTS** submit pull requests to `stable`
-- For any **features** that contain **breaking changes** submit pull requests to `next`
+  - For **bug fixes** and **documentation updates** submit pull requests to `master`.
+  - For **new features** and **enhancements** submit pull requests to `dev`
+  - For **bugs** and **critical fixes** related to **v1.5/LTS** submit pull requests to `stable`
+  - For any **features** that contain **breaking changes** submit pull requests to `next`
 
 </alert>
 

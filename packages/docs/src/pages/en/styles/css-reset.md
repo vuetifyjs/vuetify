@@ -48,7 +48,7 @@ These styles are automatically imported within **src/styles/generic/_reset.scss*
 
 Below is a list of additional *features* that ress provides over the default **normalize.css** functionality
 
-* Apply `box-sizing: border-box;` in all elements.
+* Apply `box-sizing: border-box` in all elements.
 * Reset `padding` and `margin` in all elements.
 * Specify `background-repeat: no-repeat` in all elements and pseudo elements.
 * Inherit `text-decoration` and `vertical-align` to `::before` and `::after`.

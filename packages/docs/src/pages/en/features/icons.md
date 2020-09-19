@@ -40,6 +40,12 @@ Using a predefined option will pre-fill defaults based upon the selected preset.
 
 You are required to include the specified icon library (even if using default). This can be done by including a CDN link or importing the icon library into your application.
 
+<alert type="info">
+
+  In this page "Material Icons" is used to refer to the [official google icons](https://material.io/resources/icons/) and "Material Design Icons" refers to the [extended third-party library](https://materialdesignicons.com/)
+
+</alert>
+
 ### Material Design Icons
 
 Use this tool to search for any Material Design Icons and copy them to your clickboard by clicking the item.
@@ -78,7 +84,7 @@ export default new Vuetify({
 
 ### Material Design Icons - JS SVG
 
-Use the SVG Path's as designated in [@mdi/js](https://www.npmjs.com/package/@mdi/js). This is the recommended installation when optimizing your application for production. You **ONLY** need to include this if you plan on using more than the default icons.
+Use the SVG paths as designated in [@mdi/js](https://www.npmjs.com/package/@mdi/js). This is the recommended installation when optimizing your application for production. You **ONLY** need to include this if you plan on using more than the default icons.
 
 ```bash
 $ yarn add @mdi/js -D
