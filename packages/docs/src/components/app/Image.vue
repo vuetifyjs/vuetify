@@ -1,6 +1,6 @@
 <template>
   <v-img
-    class="rounded"
+    class="rounded mx-auto"
     v-bind="$attrs"
     v-on="$listeners"
   />
