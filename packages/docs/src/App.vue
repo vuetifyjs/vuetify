@@ -22,6 +22,7 @@
     async mounted () {
       await waitForReadystate()
       await this.init()
+      await this.$nextTick()
 
       if (!this.hash) return
 

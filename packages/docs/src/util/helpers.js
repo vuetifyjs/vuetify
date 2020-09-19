@@ -28,15 +28,15 @@ export const wait = timeout => {
 export async function waitForReadystate () {
   if (
     !IN_BROWSER ||
-    document.readyState === 'complete'
+    document.readyState === 'interactive'
   ) return
 
   await new Promise(resolve => {
     const cb = () => {
       window.requestAnimationFrame(resolve)
-      window.removeEventListener('load', cb)
+      window.removeEventListener('DOMContentLoaded', cb)
     }
 
-    window.addEventListener('load', cb)
+    window.addEventListener('DOMContentLoaded', cb)
   })
 }
