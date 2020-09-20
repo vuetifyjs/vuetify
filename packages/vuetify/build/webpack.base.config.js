@@ -27,7 +27,6 @@ const sassLoaders = [
     options: {
       implementation: require('sass'),
       sassOptions: {
-        fiber: require('fibers'),
         indentedSyntax: true
       }
     }
@@ -41,7 +40,6 @@ const scssLoaders = [
     options: {
       implementation: require('sass'),
       sassOptions: {
-        fiber: require('fibers'),
         indentedSyntax: false
       }
     }
