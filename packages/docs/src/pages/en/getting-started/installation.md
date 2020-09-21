@@ -6,7 +6,7 @@ meta:
 related:
   - /introduction/why-vuetify/
   - /getting-started/frequently-asked-questions/
-  - /introduction/what-is-vuetify/
+  - /introduction/why-vuetify/
 ---
 
 # Installation

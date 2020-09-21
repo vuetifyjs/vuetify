@@ -3,7 +3,6 @@
     "title": "introduction",
     "icon": "$mdiScriptTextOutline:$mdiScriptText",
     "items": [
-      "what-is-vuetify",
       "why-vuetify",
       "long-term-support",
       "roadmap",

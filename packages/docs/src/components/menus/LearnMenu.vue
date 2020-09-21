@@ -30,7 +30,7 @@
               name: 'Documentation',
               params: {
                 category: 'introduction',
-                page: 'what-is-vuetify',
+                page: 'why-vuetify',
               },
             },
           },

@@ -6,7 +6,7 @@ meta:
 related:
   - /getting-started/unit-testing/
   - /features/presets/
-  - /introduction/what-is-vuetify/
+  - /introduction/why-vuetify/
 ---
 
 # Treeshaking
