@@ -12,8 +12,6 @@
       <template v-if="$vuetify.breakpoint.mdAndUp">
         <team-link />
 
-        <enterprise-link />
-
         <vertical-divider />
 
         <store-link />
