@@ -5,11 +5,8 @@
     "items": [
       "what-is-vuetify",
       "why-vuetify",
-      "roadmap",
       "long-term-support",
-      "upgrade-guide",
-      { "divider": true },
-      { "heading": "professional-support" },
+      "roadmap",
       "consulting",
       "enterprise"
     ]
@@ -20,30 +17,28 @@
     "items": [
       "installation",
       "browser-support",
-      "wireframes",
       "frequently-asked-questions",
-      "contributing",
-      { "divider": true },
-      { "heading": "guide" },
-      "layouts",
-      "accessibility",
-      "treeshaking",
-      "unit-testing"
+      "wireframes",
+      "release-notes",
+      "upgrade-guide"
     ]
   },
   {
     "title": "features",
     "icon": "$mdiImageEditOutline:$mdiImageEdit",
     "items": [
+      "accessibility",
       "bidirectionality",
       "breakpoints",
       "global-config",
-      "scrolling",
       "icons",
       "internationalization",
+      "layouts",
       "presets",
       "sass-variables",
-      "theme"
+      "scrolling",
+      "theme",
+      "treeshaking"
     ]
   },
   {
@@ -210,7 +205,6 @@
     "title": "about",
     "icon": "$mdiVuetify",
     "items": [
-      "release-notes",
       "meet-the-team",
       "sponsors-and-backers",
       "security-disclosure",

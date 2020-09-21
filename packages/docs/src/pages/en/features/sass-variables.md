@@ -17,7 +17,7 @@ Vuetify uses **SASS/SCSS** to craft the style and appearance of all aspects of t
 
 <alert type="warning">
 
-  Note: SASS/SCSS variables are only supported using [A-la-carte installation](/getting-started/treeshaking/). This is automatically setup when using the **vue-cli-plugin-vuetify** plugin.
+  Note: SASS/SCSS variables are only supported using [A-la-carte installation](/features/treeshaking/). This is automatically setup when using the **vue-cli-plugin-vuetify** plugin.
 
 </alert>
 
@@ -205,7 +205,7 @@ $headings: (
 
 ### Compilation time
 
-When using variables, the initial compilation of your application will increase. This is due to the fact that styles are updated in real time whenever you make a modification to a hoisted variable file. This is only experienced with the initial compilation step and can be improved by changing where you import Vuetify from. Keep in mind this _will not_ work if your application is affected by any of the [Vuetify loader limitations](/getting-started/treeshaking/#limitations); your application will still work, but not receive the performance increase.
+When using variables, the initial compilation of your application will increase. This is due to the fact that styles are updated in real time whenever you make a modification to a hoisted variable file. This is only experienced with the initial compilation step and can be improved by changing where you import Vuetify from. Keep in mind this _will not_ work if your application is affected by any of the [Vuetify loader limitations](/features/treeshaking/#limitations); your application will still work, but not receive the performance increase.
 
 ```js
 // src/plugins/vuetify.js

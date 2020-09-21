@@ -175,7 +175,7 @@ fonts.google.com/ -->
 
 ### Compilation time
 
-In order to update SASS variables in Vuetify, styles are recompiled during development and when your application is built for production. This _will_ increase your initial compilation time and _will_ be triggered any time you edit a **variables** file. If your application isn't affected by any of the [Vuetify loader limitations](/getting-started/treeshaking/#limitations), you can opt to import Vuetify from `vuetify/lib/framework`. This can decrease compilation time by up to _50%_.
+In order to update SASS variables in Vuetify, styles are recompiled during development and when your application is built for production. This _will_ increase your initial compilation time and _will_ be triggered any time you edit a **variables** file. If your application isn't affected by any of the [Vuetify loader limitations](/features/treeshaking/#limitations), you can opt to import Vuetify from `vuetify/lib/framework`. This can decrease compilation time by up to _50%_.
 
 ```js
 // src/plugins/vuetify.js

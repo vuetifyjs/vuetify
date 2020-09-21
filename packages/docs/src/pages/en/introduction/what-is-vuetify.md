@@ -4,7 +4,7 @@ meta:
   description: Learn how to create your Vuetify application from scratch. Browse API references, sample code, tutorials, and more.
   keywords: guide, vuetify beginner, starting vuetify, vuetify guide
 related:
-  - /getting-started/layouts/
+  - /features/layouts/
   - /introduction/why-vuetify/
   - /introduction/consulting/
 nav: What is Vuetify?
@@ -46,7 +46,7 @@ Learn how to use Vuetify with one of the following topics:
 
 | Topic | Skill level | Time to read |
 | ------- | ----------- | ------------ |
-| [Layouts](/getting-started/layouts/) | Beginner | 10 min |
+| [Layouts](/features/layouts/) | Beginner | 10 min |
 
 Can't find what you're looking for? Help us improve! Please reach out to [john@vuetifyjs.com](mailto:john@vuetifyjs.com) with your feedback or join us in the Vuetify [Discord community](https://community.vuetifyjs.com/).
 

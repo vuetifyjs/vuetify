@@ -6,7 +6,7 @@ meta:
 related:
   - /getting-started/contributing/
   - /introduction/consulting/
-  - /getting-started/treeshaking/
+  - /features/treeshaking/
 ---
 
 # Frequently asked questions
@@ -268,7 +268,7 @@ export default {
 
 * **The vuetify-loader doesn't load all components.**{ #vuetify-loader-components }
 
-  The vuetify-loader has limitations in _dynamic_ components. Make sure to checkout the [limitations](/getting-started/treeshaking/#limitations) section for more information.
+  The vuetify-loader has limitations in _dynamic_ components. Make sure to checkout the [limitations](/features/treeshaking/#limitations) section for more information.
 
 <br>
 
