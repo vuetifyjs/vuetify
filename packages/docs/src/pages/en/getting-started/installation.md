@@ -95,9 +95,9 @@ npm install vuetify
 ```
 
 ```bash
-yarn add sass sass-loader fibers deepmerge -D
+yarn add sass sass-loader deepmerge -D
 # OR
-npm install sass sass-loader fibers deepmerge -D
+npm install sass sass-loader deepmerge -D
 ```
 
 Once installed, locate your `webpack.config.js` file and copy the snippet below into the rules array. If you have an existing sass rule configured, you may need to apply some or all of the changes below. If you are you looking to utilize the vuetify-loader for treeshaking, ensure that you are on version >=4 of Webpack. You can find more information on setting it up with webpack on the [Treeshaking](/features/treeshaking/) page.
@@ -118,14 +118,12 @@ module.exports = {
             // Requires sass-loader@^7.0.0
             options: {
               implementation: require('sass'),
-              fiber: require('fibers'),
               indentedSyntax: true // optional
             },
             // Requires sass-loader@^8.0.0
             options: {
               implementation: require('sass'),
               sassOptions: {
-                fiber: require('fibers'),
                 indentedSyntax: true // optional
               },
             },
