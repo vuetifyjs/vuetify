@@ -4,7 +4,7 @@ meta:
   description: Vuetify is configurable and compatible with RTL languages.
   keywords: rtl, right-to-left, bidirectionality
 related:
-  - /getting-started/accessibility/
+  - /features/accessibility/
   - /features/internationalization/
 nav: Bidirectionality (LTR/RTL)
 ---

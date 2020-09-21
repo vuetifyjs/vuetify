@@ -96,6 +96,7 @@
   "introduction/sponsors-and-backers": "/about/sponsors-and-backers",
   "professional-support/consulting": "/introduction/consulting",
   "professional-support/enterprise": "/introduction/enterprise",
+  "customization/accessibility": "/features/accessibility",
   "customization/bidirectionality": "/features/bidirectionality",
   "customization/breakpoints": "/features/breakpoints",
   "customization/global-config": "/features/global-config",
