@@ -7,7 +7,7 @@
 <script>
   // Utilities
   import { call, get } from 'vuex-pathify'
-  import { waitForReadystate } from '@/util/helpers'
+  import { wait, waitForReadystate } from '@/util/helpers'
 
   export default {
     name: 'App',
@@ -22,9 +22,10 @@
     async mounted () {
       await waitForReadystate()
       await this.init()
-      await this.$nextTick()
 
       if (!this.hash) return
+
+      await wait(500)
 
       try {
         this.$vuetify.goTo(this.hash)
