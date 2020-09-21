@@ -1,11 +1,6 @@
 <template>
-  <v-lazy
-    min-height="498"
-  >
-    <v-card
-      class="mb-12"
-      outlined
-    >
+  <v-lazy min-height="498">
+    <app-sheet class="mb-12">
       <v-row no-gutters>
         <v-col
           cols="12"
@@ -155,7 +150,7 @@
           />
         </v-col>
       </v-row>
-    </v-card>
+    </app-sheet>
   </v-lazy>
 </template>
 
