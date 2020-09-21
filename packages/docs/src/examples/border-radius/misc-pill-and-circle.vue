@@ -1,19 +1,25 @@
 <template>
-  <v-container class="text-center">
-    <v-responsive
-      class="text-center grey lighten-2 rounded-pill d-inline-flex align-center justify-center ma-3"
-      height="64"
-      width="128"
+  <v-row class="text-center" justify="center">
+    <v-col
+      cols="12"
+      md="3"
     >
-      Pill
-    </v-responsive>
+      <div
+        class="pa-4 grey lighten-2 text-no-wrap rounded-pill"
+      >
+        .rounded-pill
+      </div>
+    </v-col>
 
-    <v-responsive
-      class="text-center grey lighten-2 rounded-circle d-inline-flex align-center justify-center ma-3"
-      height="64"
-      width="64"
+    <v-col
+      cols="12"
+      md="3"
     >
-      Circle
-    </v-responsive>
-  </v-container>
+      <div
+        class="pa-7 grey lighten-2 rounded-circle d-inline-block"
+      ></div>
+
+      <div>.rounded-circle</div>
+    </v-col>
+  </v-row>
 </template>

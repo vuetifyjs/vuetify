@@ -15,6 +15,10 @@ Use border utilities to quickly style the border-radius of any element.
 
 <entry-ad />
 
+## Usage
+
+<example file="border-radius/usage" />
+
 ## Caveats
 
 <alert type="info">
@@ -23,13 +27,13 @@ Use border utilities to quickly style the border-radius of any element.
 
 </alert>
 
-## Customizing
+## SASS Variables
 
 Configure or disable the border radius helper classes. Requires the use of the [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/vue-cli-plugin-vuetify) library and a configured `variables.s(c|a)ss` file. Additional information on how to configure variables is located on the [SASS Variables](/features/sass-variables) documentation page.
 
 Rounded sizes are based off of the `$border-radius-root` variable which has a default value of **0.25rem**.
 
-```sass
+```scss
 $rounded: (
   0: 0,
   'sm': $border-radius-root / 2,
@@ -45,7 +49,7 @@ $rounded: (
 
 You can change or add *border-radius* sizes by adding a list named `$rounded` in your project's `variables` file.
 
-```sass
+```scss
 $rounded: (
   'sm': $border-radius-root / 3,
   'lg': $border-radius-root * 2
