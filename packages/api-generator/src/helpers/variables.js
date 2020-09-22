@@ -6,7 +6,7 @@ const Validatable = {
   props: createItems(['disabled', 'readonly'], {
     default: false,
     source: 'validatable',
-    value: 'boolean',
+    type: 'boolean',
   }),
   events: [
     {
