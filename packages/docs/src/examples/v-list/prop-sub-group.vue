@@ -13,17 +13,17 @@
       </v-list-item>
 
       <v-list-group
-        prepend-icon="account_circle"
-        value="true"
+        :value="true"
+        prepend-icon="mdi-account-circle"
       >
         <template v-slot:activator>
           <v-list-item-title>Users</v-list-item-title>
         </template>
 
         <v-list-group
+          :value="true"
           no-action
           sub-group
-          value="true"
         >
           <template v-slot:activator>
             <v-list-item-content>
@@ -32,34 +32,38 @@
           </template>
 
           <v-list-item
-            v-for="(admin, i) in admins"
+            v-for="([title, icon], i) in admins"
             :key="i"
             link
           >
-            <v-list-item-title v-text="admin[0]"></v-list-item-title>
+            <v-list-item-title v-text="title"></v-list-item-title>
+
             <v-list-item-icon>
-              <v-icon v-text="admin[1]"></v-icon>
+              <v-icon v-text="icon"></v-icon>
             </v-list-item-icon>
           </v-list-item>
         </v-list-group>
 
         <v-list-group
-          sub-group
           no-action
+          sub-group
         >
           <template v-slot:activator>
             <v-list-item-content>
               <v-list-item-title>Actions</v-list-item-title>
             </v-list-item-content>
           </template>
+
           <v-list-item
-            v-for="(crud, i) in cruds"
+            v-for="([title, icon], i) in cruds"
             :key="i"
+            link
           >
-            <v-list-item-title v-text="crud[0]"></v-list-item-title>
-            <v-list-item-action>
-              <v-icon v-text="crud[1]"></v-icon>
-            </v-list-item-action>
+            <v-list-item-title v-text="title"></v-list-item-title>
+
+            <v-list-item-icon>
+              <v-icon v-text="icon"></v-icon>
+            </v-list-item-icon>
           </v-list-item>
         </v-list-group>
       </v-list-group>
@@ -71,14 +75,14 @@
   export default {
     data: () => ({
       admins: [
-        ['Management', 'people_outline'],
-        ['Settings', 'settings'],
+        ['Management', 'mdi-account-multiple-outline'],
+        ['Settings', 'mdi-cog-outline'],
       ],
       cruds: [
-        ['Create', 'add'],
-        ['Read', 'insert_drive_file'],
-        ['Update', 'update'],
-        ['Delete', 'delete'],
+        ['Create', 'mdi-plus-outline'],
+        ['Read', 'mdi-file-outline'],
+        ['Update', 'mdi-update'],
+        ['Delete', 'mdi-delete'],
       ],
     }),
   }
