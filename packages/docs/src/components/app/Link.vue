@@ -1,5 +1,9 @@
 <script>
+  // Components
   import { VIcon } from 'vuetify/lib/components/VIcon'
+
+  // Utilities
+  import { rpath } from '@/util/routes'
 
   export default {
     name: 'AppLink',
@@ -17,7 +21,7 @@
       attrs () {
         return this.isExternal
           ? { href: this.href, target: '_blank', rel: 'noopener' }
-          : { to: { path: this.href } }
+          : { to: { path: rpath(this.href) } }
       },
       icon () {
         if (this.isSamePage) return '$mdiPound'
@@ -57,13 +61,15 @@
       const children = []
 
       if (!this.isSamePage) children.push(this.$slots.default)
-      if (this.icon) children.push(h(VIcon, {
-        class: `m${this.isSamePage ? 'r' : 'l'}-1`,
-        attrs: {
-          color: 'primary',
-          size: '.875rem',
-        },
-      }, [this.icon]))
+      if (this.icon) {
+        children.push(h(VIcon, {
+          class: `m${this.isSamePage ? 'r' : 'l'}-1`,
+          attrs: {
+            color: 'primary',
+            size: '.875rem',
+          },
+        }, [this.icon]))
+      }
       if (this.isSamePage) children.push(this.$slots.default)
 
       return h(this.isExternal ? 'a' : 'router-link', {
