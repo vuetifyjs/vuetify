@@ -24,7 +24,7 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 * [Invalid CSS after @content: expected "}", was "($material-light);".](#invalid-css-content)
 * [My application is not working.](#my-application-is-not-working)
 * [I'm seeing $attrs is readonly and/or $listeners is readonly in the console.](#attrs-is-readonly)
-* [I'm seeing Error in ./node_modules/vuetify/src/dir/file.js Module parse "failed": Unexpected token (&lt;lineno&gt;:&lt;characterno&gt;) in the terminal.](#unexpected-token)
+* [I'm seeing Error Module parse "failed". Unexpected token in the terminal.](#unexpected-token)
 * [Is there a codepen template with router?](#codepen-template-with-router)
 * [How do I extend Vuetify components?](#extend-components)
 * [My application does not look correct.](#my-application-does-not-look-correct)
@@ -42,7 +42,7 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 * [How do I get to the v1.5 documentation?](#v15-docs)
 * [[Vue warn]: Unknown custom element: &lt;v-app>](#unknown-element)
 * [SCRIPT5022: Expected identifier, string or number](#script5022)
-* [When adding typescript - Error: Could not find a declaration file for module 'vuetify/lib'](#typescript-declaration-file)
+* [Error: Could not find a declaration file for module 'vuetify/lib'](#typescript-declaration-file)
 
 ## Questions
 
