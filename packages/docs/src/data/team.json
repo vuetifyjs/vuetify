@@ -249,5 +249,18 @@
     "name": "Yan Lee",
     "twitter": "P1kaP1kaChu_",
     "team": "contributors"
+  },
+  "DRoet": {
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English",
+      "Dutch"
+    ],
+    "linkedin": "daan-roet-2baaa5112",
+    "location": "The Netherlands",
+    "name": "Daan Roet",
+    "team": "contributors"
   }
 }
