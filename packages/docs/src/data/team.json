@@ -236,5 +236,18 @@
     "location": "The Netherlands",
     "name": "Mert Polat",
     "team": "contributors"
+  },
+  "AGDholo": {
+    "focus": [
+      "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
+    ],
+    "languages": [
+      "English",
+      "Chinese"
+    ],
+    "location": "China",
+    "name": "Yan Lee",
+    "twitter": "P1kaP1kaChu_",
+    "team": "contributors"
   }
 }
