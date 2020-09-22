@@ -69,7 +69,7 @@
 
 <script>
   // Utilities
-  import { get } from 'vuex-pathify'
+  import { get, sync } from 'vuex-pathify'
   import { wait } from '@/util/helpers'
 
   export default {
@@ -77,8 +77,6 @@
 
     data: () => ({
       offsets: [],
-      raf: null,
-      scrolling: false,
       timeout: null,
     }),
 
@@ -91,6 +89,7 @@
         'hash',
         'path',
       ]),
+      scrolling: sync('app/scrolling'),
       toc: get('pages/toc'),
     },
 
@@ -166,7 +165,6 @@
         })
       },
       onScroll () {
-        cancelAnimationFrame(this.raf)
         clearTimeout(this.timeout)
 
         if (

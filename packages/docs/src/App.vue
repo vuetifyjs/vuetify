@@ -6,7 +6,7 @@
 
 <script>
   // Utilities
-  import { call, get } from 'vuex-pathify'
+  import { call, get, sync } from 'vuex-pathify'
   import { wait, waitForReadystate } from '@/util/helpers'
 
   export default {
@@ -17,7 +17,10 @@
       titleTemplate: '%s | Vuetify.js',
     },
 
-    computed: { hash: get('route/hash') },
+    computed: {
+      scrolling: sync('app/scrolling'),
+      hash: get('route/hash'),
+    },
 
     async mounted () {
       await waitForReadystate()
@@ -27,11 +30,15 @@
 
       await wait(500)
 
+      this.scrolling = true
+
       try {
-        this.$vuetify.goTo(this.hash)
+        await this.$vuetify.goTo(this.hash)
       } catch (e) {
         console.log(e)
       }
+
+      this.scrolling = false
     },
 
     methods: { init: call('app/init') },
