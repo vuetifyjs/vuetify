@@ -21,7 +21,11 @@
       attrs () {
         return this.isExternal
           ? { href: this.href, target: '_blank', rel: 'noopener' }
-          : { to: { path: rpath(this.href) } }
+          : {
+            to: {
+              path: this.isSamePage ? this.href : rpath(this.href),
+            },
+          }
       },
       icon () {
         if (this.isSamePage) return '$mdiPound'
