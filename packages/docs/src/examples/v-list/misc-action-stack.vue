@@ -1,7 +1,7 @@
 <template>
   <v-card
-    max-width="500"
     class="mx-auto"
+    max-width="500"
   >
     <v-toolbar
       color="pink"
@@ -25,42 +25,45 @@
     <v-list two-line>
       <v-list-item-group
         v-model="selected"
-        multiple
         active-class="pink--text"
+        multiple
       >
         <template v-for="(item, index) in items">
           <v-list-item :key="item.title">
             <template v-slot:default="{ active }">
               <v-list-item-content>
                 <v-list-item-title v-text="item.title"></v-list-item-title>
+
                 <v-list-item-subtitle
                   class="text--primary"
                   v-text="item.headline"
                 ></v-list-item-subtitle>
+
                 <v-list-item-subtitle v-text="item.subtitle"></v-list-item-subtitle>
               </v-list-item-content>
 
               <v-list-item-action>
                 <v-list-item-action-text v-text="item.action"></v-list-item-action-text>
+
                 <v-icon
                   v-if="!active"
                   color="grey lighten-1"
                 >
-                  star_border
+                  mdi-star-outline
                 </v-icon>
 
                 <v-icon
                   v-else
-                  color="yellow"
+                  color="yellow darken-3"
                 >
-                  star
+                  mdi-star
                 </v-icon>
               </v-list-item-action>
             </template>
           </v-list-item>
 
           <v-divider
-            v-if="index + 1 < items.length"
+            v-if="index < items.length - 1"
             :key="index"
           ></v-divider>
         </template>
@@ -77,32 +80,32 @@
         {
           action: '15 min',
           headline: 'Brunch this weekend?',
-          title: 'Ali Connors',
           subtitle: "I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
+          title: 'Ali Connors',
         },
         {
           action: '2 hr',
           headline: 'Summer BBQ',
-          title: 'me, Scrott, Jennifer',
           subtitle: "Wish I could come, but I'm out of town this weekend.",
+          title: 'me, Scrott, Jennifer',
         },
         {
           action: '6 hr',
           headline: 'Oui oui',
-          title: 'Sandra Adams',
           subtitle: 'Do you have Paris recommendations? Have you ever been?',
+          title: 'Sandra Adams',
         },
         {
           action: '12 hr',
           headline: 'Birthday gift',
-          title: 'Trevor Hansen',
           subtitle: 'Have any ideas about what we should get Heidi for her birthday?',
+          title: 'Trevor Hansen',
         },
         {
           action: '18hr',
           headline: 'Recipe to try',
-          title: 'Britta Holt',
           subtitle: 'We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
+          title: 'Britta Holt',
         },
       ],
     }),
