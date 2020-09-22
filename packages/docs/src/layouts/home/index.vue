@@ -7,13 +7,16 @@
     <home-view />
 
     <home-footer />
+
+    <default-settings />
   </v-app>
 </template>
 
 <script>
   // Components
-  import HomeBar from './AppBar'
   import DefaultSystemBar from '@/layouts/default/SystemBar'
+  import DefaultSettings from '@/layouts/default/settings/Settings'
+  import HomeBar from './AppBar'
   import HomeFooter from './Footer'
   import HomeView from './View'
 
@@ -22,6 +25,7 @@
 
     components: {
       DefaultSystemBar,
+      DefaultSettings,
       HomeBar,
       HomeFooter,
       HomeView,
