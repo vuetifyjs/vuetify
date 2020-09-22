@@ -1,24 +1,28 @@
 <template>
-  <v-container>
-    <v-row>
-      <div class="mx-3"></div>
-      <v-card
-        v-bind="$attrs"
-        v-on="$listeners"
+  <v-card
+    class="grow"
+    v-bind="$attrs"
+    v-on="$listeners"
+  >
+    <v-card-title>Card title</v-card-title>
+
+    <v-card-subtitle>Subtitle text</v-card-subtitle>
+
+    <v-card-text>
+      Greyhound divisively hello coldly wonderfully marginally far upon excluding.
+    </v-card-text>
+
+    <v-card-actions>
+      <v-btn
+        v-for="n in 2"
+        :key="n"
+        text
+        color="primary"
       >
-        <v-card-title>Card title</v-card-title>
-        <v-card-subtitle>Secondary text</v-card-subtitle>
-
-        <v-card-text>
-          Greyhound divisively hello coldly wonderfully marginally far upon excluding.
-        </v-card-text>
-
-        <v-card-actions>
-          Card actions
-        </v-card-actions>
-      </v-card>
-    </v-row>
-  </v-container>
+        Action {{ n }}
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
@@ -33,7 +37,6 @@
         elevation: 2,
         loading: false,
         outlined: false,
-        ripple: false,
         shaped: false,
         tile: false,
       },
@@ -41,7 +44,7 @@
         booleans: ['disabled', 'loading'],
         sliders: { elevation: [0, 24] },
       },
-      tabs: ['outlined', 'ripple', 'shaped', 'tile'],
+      tabs: ['outlined', 'shaped', 'tile'],
     }),
   }
 </script>
