@@ -32,6 +32,7 @@
                 category: 'introduction',
                 page: 'why-vuetify',
               },
+              hash: '#guide',
             },
           },
           { divider: true },
