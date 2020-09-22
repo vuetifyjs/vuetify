@@ -17,6 +17,7 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 
 ## Table of Contents
 
+* [When will Vuetify v3 be released?](#version-3)
 * [My application won't compile due to sass / scss errors.](#sass-compile-error)
 * [Are there examples on how the v2 grid compares to v1.5?](#v2-v15-grid)
 * [Error: Cannot find module 'node-sass'.](#cannot-find-module-sass)
@@ -48,6 +49,12 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 Have a question that belongs here? Tell us in our [Discord Community](https://community.vuetifyjs.com/) or create a request on our [Issue Generator](https://issues.vuetifyjs.com/).
 
 ---
+
+* **When will Vuetify v3 be released?** { #version-3 }
+
+  Version 3 is currently under development and slated for release in Quarter 1 of 2021. Follow our progress on [Notion](https://notion.vuetifyjs.com) or read and overview of what's to come on our [Roadmap](/introduction/roadmap/).
+
+<br>
 
 * **My application won't compile due to sass / scss errors.**{ #sass-compile-error }
 
