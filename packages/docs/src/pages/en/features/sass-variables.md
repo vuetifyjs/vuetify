@@ -144,10 +144,19 @@ $headings: (
 );
 ```
 
-## Usage in components
+## Usage in templates
 
-There are two ways to import and use Vuetify variables within your components, both which provide the same outcome. The first method is to import the default framework styles file:
-This is the preferred method if you are using [Presets](/features/presets) or **not** using a variables file at all.
+You can access [global](/api/$vuetify/) and **per** component variables in Vue templates by importing from the Vuetify package.
+
+<alert type="info">
+
+  Importing variable files works the same in **SASS** and **SCSS** style templates
+
+</alert>
+
+### Global variables
+
+To access global SASS variables, import the main `styles.sass` file.
 
 ```html
 <style lang="sass">
@@ -159,18 +168,29 @@ This is the preferred method if you are using [Presets](/features/presets) or **
 </style>
 ```
 
-The second method is to import your project's _specific_ variables file. This is recommended if you are using your own variables file to import the global Vuetify styles.
-Keep in mind, it _does not matter_ which syntax you use, SASS or SCSS, when importing and using variable files.
+A complete list of global variables is located on the [$vuetify](/api/$vuetify/) API page.
+
+### Component variables
+
+To access per component SASS variables you must import its style file from the Vuetify package.
 
 ```html
 <style lang="scss">
-  @import '@/path/to/variables.scss';
+  @import '~vuetify/src/components/VStepper/_variables.scss';
 
   .custom-class {
-    border-radius: $border-radius-root;
+    padding: $stepper-step-padding;
   }
 </style>
 ```
+
+Detailed variable information is located on each component's API page; e.g. [v-alert](/api/v-alert/#sass-variables).
+
+<alert type="warning">
+
+  When importing Vuetify styles, ensure that your import is prefixed with a tilde **~**; e.g. `~vuetify/src/.../_variables.scss`
+
+</alert>
 
 ## Caveats
 
