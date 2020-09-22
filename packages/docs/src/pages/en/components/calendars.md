@@ -28,7 +28,7 @@ A calendar has a type and a value which determines what type of calendar is show
 - [v-calendar-monthly](/api/v-calendar-monthly)
 - [v-calendar-weekly](/api/v-calendar-weekly)
 
-## Sub-components
+<!-- ## Sub-components
 
 ### v-calendar-daily
 
@@ -40,7 +40,7 @@ v-calendar-monthly description
 
 ### v-calendar-weekly
 
-v-calendar-weekly description
+v-calendar-weekly description -->
 
 ## Examples
 

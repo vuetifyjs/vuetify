@@ -26,11 +26,11 @@ Similar to the [v-window](/components/windows) component, `v-slide-group` lets i
 - [v-slide-group](/api/v-slide-group)
 - [v-slide-item](/api/v-slide-item)
 
-## Sub-components
+<!-- ## Sub-components
 
 ### v-slide-item
 
-v-slide-item description
+v-slide-item description -->
 
 ## Examples
 

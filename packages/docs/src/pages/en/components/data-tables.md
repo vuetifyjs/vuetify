@@ -29,7 +29,7 @@ The standard data-table will by default render your data as simple rows.
 - [v-edit-dialog](/api/v-edit-dialog)
 - [v-simple-checkbox](/api/v-simple-checkbox)
 
-## Sub-components
+<!-- ## Sub-components
 
 ### v-data-table-header
 
@@ -45,7 +45,7 @@ v-edit-dialog description
 
 ### v-simple-checkbox
 
-v-simple-checkbox description
+v-simple-checkbox description -->
 
 ## Examples
 

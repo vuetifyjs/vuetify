@@ -29,7 +29,7 @@ A stepper can be used for a multitude of scenarios, including shopping carts, re
 - [v-stepper-items](/api/v-stepper-items)
 - [v-stepper-step](/api/v-stepper-step)
 
-## Sub-components
+<!-- ## Sub-components
 
 ### v-stepper-content
 
@@ -45,7 +45,7 @@ v-stepper-header description
 
 ### v-stepper-step
 
-v-stepper-step description
+v-stepper-step description -->
 
 ## Examples
 

@@ -27,11 +27,11 @@ Designed to easily cycle through content, `v-window` provides a simple interface
 - [v-window](/api/v-window)
 - [v-window-item](/api/v-window-item)
 
-## Sub-components
+<!-- ## Sub-components
 
 ### v-window-item
 
-v-window-item description
+v-window-item description -->
 
 ## Examples
 

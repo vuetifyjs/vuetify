@@ -28,7 +28,7 @@ Expansion panels in their simplest form display a list of expandable items.
 - [v-expansion-panel-header](/api/v-expansion-panel-header)
 - [v-expansion-panel-content](/api/v-expansion-panel-content)
 
-## Sub-components
+<!-- ## Sub-components
 
 ### v-expansion-panel
 
@@ -40,7 +40,7 @@ v-expansion-panel-header description
 
 ### v-expansion-panel-content
 
-v-expansion-panel-content description
+v-expansion-panel-content description -->
 
 ## Examples
 

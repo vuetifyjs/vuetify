@@ -27,11 +27,11 @@ The `v-timeline` is useful for stylistically displaying chronological informatio
 - [v-timeline](/api/v-timeline)
 - [v-timeline-item](/api/v-timeline-item)
 
-## Sub-components
+<!-- ## Sub-components
 
 ### v-timeline-item
 
-v-timeline-item description
+v-timeline-item description -->
 
 ## Examples
 
