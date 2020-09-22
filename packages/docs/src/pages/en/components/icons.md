@@ -69,4 +69,64 @@ You can manually import only the icons you use when using the [@mdi/js](https://
 
 <example file="v-icon/misc-mdi-svg" />
 
+## Accessibility
+
+Icons can convey all sorts of meaningful information, so it’s important that they reach the largest amount of people possible. There are two use cases you’ll want to consider:
+
+- **Decorative Icons** are only being used for visual or branding reinforcement. If they were removed from the page, users would still understand and be able to use your page.
+
+- **Semantic Icons** are ones that you’re using to convey meaning, rather than just pure decoration. This includes icons without text next to them used as interactive controls — buttons, form elements, toggles, etc.
+
+<alert type="error">
+
+  WAI-ARIA Authoring Practices 1.1 notes that `aria-hidden="false"` currently [behaves inconsistently across browsers](https://www.w3.org/TR/wai-aria-1.1/#aria-hidden).
+
+</alert>
+
+<alert type="info">
+
+  WIP: Our team will change to the component to not render `aria-hidden="false"` when you pass a label  prop.
+
+</alert>
+
+### Decorative Font Icons
+
+If your icons are purely decorative, you’ll need to manually add an attribute to each of your icons so they’re accessible.`aria-hidden`(automatically by vuetify)
+
+### Semantic Font Icons
+
+If your icons have semantic meaning, you need to provide a text alternative inside a (or similar) element. Also include appropriate CSS to visually hide the element while keeping it accessible to assisitive technologies.
+
+```html
+<v-icon aria-hidden="false">
+  mdi-account
+</v-icon>
+```
+
+### Decorative SVG Icons
+
+If your icons are purely decorative, you’ll need to manually add an attribute to each of your icons so they’re accessible.`aria-hidden`(automatically by vuetify)
+
+### Semantic SVG Icons
+
+If your icon has semantic meaning, all you need to do is throw a attribute.The attribute and the element are added so that your icons are properly accessible.`role="img"<v-icon>`.
+
+```html
+<v-icon aria-label="My Account" role="img" aria-hidden="false">
+  mdiAccount
+</v-icon>
+
+<script>
+import { mdiAccount } from "@mdi/js";
+
+export default {
+  data: () => ({
+    icons: {
+      mdiAccount
+    }
+  })
+};
+</script>
+```
+
 <backmatter />
