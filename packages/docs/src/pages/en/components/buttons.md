@@ -68,6 +68,8 @@ Using the loading prop, you can notify a user that there is processing taking pl
 
 <example file="v-btn/prop-loaders" />
 
+<random-ad />
+
 #### Outlined
 
 Outlined buttons inherit their borders from the current color applied.

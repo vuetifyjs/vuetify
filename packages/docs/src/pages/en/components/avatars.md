@@ -47,6 +47,8 @@ The `v-avatar` default slot will accept the `v-icon` component, an image, or tex
 
 <example file="v-avatar/slot-default" />
 
+<discovery-ad />
+
 ### Misc
 
 #### Advanced usage

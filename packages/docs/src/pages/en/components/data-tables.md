@@ -13,7 +13,7 @@ related:
 
 The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, inline-editing, and row selection.
 
-<entry-ad />
+<promoted-ad slug="vuetify-lux-admin-pro" />
 
 ## Usage
 

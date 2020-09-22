@@ -65,6 +65,8 @@ The **outlined** prop inverts the style of an alert, inheriting the currently ap
 
 <example file="v-alert/prop-outlined" />
 
+<discovery-ad />
+
 #### Prominent
 
 The **prominent** prop provides a more pronounced alert by increasing the height and applying a halo to the icon. When applying both **prominent** and **dense** together, the alert will take on the appearance of a normal alert but with the **prominent** icon effects.
