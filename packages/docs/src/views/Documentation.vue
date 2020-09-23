@@ -4,8 +4,8 @@
     tag="section"
   >
     <v-responsive
+      :max-width="category !== 'api' ? 868 : undefined"
       class="mx-auto overflow-visible"
-      max-width="868"
     >
       <keep-alive max="3">
         <component :is="component" />
@@ -17,9 +17,9 @@
 <script>
   // Utilities
   import { error } from '@/util/routes'
-  import { IN_BROWSER } from '@/util/globals'
   import { genMetaData } from '@/util/metadata'
   import { get, sync } from 'vuex-pathify'
+  import { IN_BROWSER } from '@/util/globals'
   import { localeLookup } from '@/i18n/util'
 
   async function load (route) {
@@ -38,7 +38,9 @@
       )
 
     const path = ['.']
+
     if (!isApi) path.push(category)
+
     path.push(page)
 
     try {
@@ -57,6 +59,7 @@
 
     async asyncData ({ route, store }) {
       const md = await load(route)
+
       store.state.pages.md = md
     },
 
@@ -80,9 +83,7 @@
       )
     },
 
-    data: () => ({
-      component: undefined,
-    }),
+    data: () => ({ component: undefined }),
 
     computed: {
       ...sync('pages', [
@@ -92,6 +93,7 @@
       ]),
       ...get('route', [
         'hash',
+        'params@category',
         'params@page',
       ]),
     },
@@ -103,6 +105,7 @@
           store: this.$store,
         })
       }
+
       this.init(this.md)
     },
 
@@ -113,6 +116,7 @@
           toc = [],
           vue = {},
         } = md
+
         vue.component.name = this.page
         this.frontmatter = attributes
         this.toc = toc
