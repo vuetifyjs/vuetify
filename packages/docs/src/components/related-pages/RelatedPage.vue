@@ -13,7 +13,7 @@
 
         <v-list-item-subtitle
           class="text-capitalize"
-          v-text="section"
+          v-text="startCase(section)"
         />
       </v-list-item-content>
     </v-list-item>
@@ -24,6 +24,7 @@
   // Utilities
   import { get } from 'vuex-pathify'
   import { rpath } from '@/util/routes'
+  import { startCase } from 'lodash'
 
   export default {
     name: 'RelatedPage',
@@ -53,6 +54,7 @@
     },
 
     methods: {
+      startCase,
       findRelatedPage (items) {
         for (const item of items) {
           // Check children
