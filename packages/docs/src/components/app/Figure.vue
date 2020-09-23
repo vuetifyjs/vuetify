@@ -7,8 +7,10 @@
       />
     </app-sheet>
 
+    <slot />
+
     <figcaption
-      v-if="caption"
+      v-if="!$slots.default && caption"
       class="text-subtitle-2 text-center text-capitalize mt-3"
       v-text="caption"
     />

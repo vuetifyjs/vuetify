@@ -13,8 +13,6 @@ related:
 
 Vuetify offers both **free** and **premium** pre-made themes designed to get you started in a flash. Free themes are available to install through Vue CLI or you can simply download the source.
 
-<entry-ad />
-
-<vuetify-ad slug="vuetify-zero-theme-pro" />
+<premium-themes />
 
 <backmatter />
