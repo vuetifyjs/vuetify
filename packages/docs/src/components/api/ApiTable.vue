@@ -6,37 +6,72 @@
     >
       <thead>
         <tr>
-          <th v-for="header in headers" :key="header">
-            <div class="text-capitalize">{{ header }}</div>
+          <th
+            v-for="header in headers"
+            :key="header"
+          >
+            <div
+              class="text-capitalize"
+              v-text="header"
+            />
           </th>
         </tr>
       </thead>
+
       <tbody>
         <template v-for="item in items">
-          <tr :key="item.name" :class="['regular-row', hasExtraRow(item) && 'has-extra-row']">
-            <td v-for="(header, i) in headers" :key="i">
+          <tr
+            :key="item.name"
+            :class="['regular-row', hasExtraRow(item) && 'has-extra-row']"
+          >
+            <td
+              v-for="(header, i) in headers"
+              :key="i"
+            >
               <template v-if="header === 'name'">
-                <div class="font-weight-bold text-mono">{{ item[header] }}</div>
+                <div
+                  class="font-weight-bold text-mono"
+                  v-text="item[header]"
+                />
               </template>
+
               <template v-else-if="header === 'type' || header === 'signature'">
-                <div class="text-mono" v-html="getType(item[header])" />
+                <div
+                  class="text-mono"
+                  v-html="getType(item[header])"
+                />
               </template>
+
               <template v-else-if="header === 'default'">
-                <div class="text-mono" v-html="getDefaultValue(item)" />
+                <div
+                  class="text-mono"
+                  v-html="getDefaultValue(item)"
+                />
               </template>
+
               <template v-else-if="header === 'description'">
                 <app-md v-if="item[header][locale]">{{ item[header][locale] }}</app-md>
               </template>
+
               <template v-else>
                 {{ item[header] }}
               </template>
             </td>
           </tr>
+
           <template v-if="hasExtraRow(item)">
-            <tr :key="`${item.name}_extra`" class="extra-row">
+            <tr
+              :key="`${item.name}_extra`"
+              class="extra-row "
+            >
               <td />
+
               <td :colspan="headers.length - 1">
-                <markup :language="getLanguage(item)" :code="getCode(item)" />
+                <markup
+                  :code="getCode(item)"
+                  :language="getLanguage(item)"
+                  class="mr-2 ml-4"
+                />
               </td>
             </tr>
           </template>
@@ -47,11 +82,14 @@
 </template>
 
 <script>
-  import { get } from 'vuex-pathify'
+  // Imports
   import Prism from 'prismjs'
   import 'prismjs/themes/prism.css'
   import 'prismjs/components/prism-scss'
   import 'prismjs/components/prism-typescript'
+
+  // Utilities
+  import { get } from 'vuex-pathify'
 
   const getApi = name => {
     return import(
@@ -72,13 +110,14 @@
 
   export default {
     name: 'ApiTable',
+
     props: {
       name: String,
       field: String,
     },
-    data: () => ({
-      api: null,
-    }),
+
+    data: () => ({ api: null }),
+
     computed: {
       headers () {
         return HEADERS[this.field]
@@ -86,21 +125,25 @@
       items () {
         return this.api ? this.api[this.field] : []
       },
-      ...get('route', [
-        'params@locale',
-      ]),
+      locale: get('route/params@locale'),
     },
+
     async created () {
       this.api = (await getApi(this.name)).default
     },
+
     methods: {
       getType (value) {
         const type = Array.isArray(value) ? value.join(', ') : value
+
         return Prism.highlight(type, Prism.languages.typescript)
       },
       getDefaultValue (item) {
         const { default: defaultValue } = item
-        const asd = defaultValue == null || typeof defaultValue === 'string' ? String(defaultValue) : JSON.stringify(defaultValue, null, 2)
+        const asd = defaultValue == null || typeof defaultValue === 'string'
+          ? String(defaultValue)
+          : JSON.stringify(defaultValue, null, 2)
+
         return Prism.highlight(asd, this.field === 'sass' ? Prism.languages.scss : Prism.languages.typescript)
       },
       getLanguage (item) {
@@ -109,10 +152,12 @@
       },
       getCode (item) {
         if (item.snippet || item.value) return this.genHtml(item.snippet || item.value)
+
         return this.genTypescript(item.example || item.props)
       },
       genTypescript (obj) {
         const str = JSON.stringify(obj, null, 2)
+
         return str.replace(/: "(.*)"/g, ': $1').replace(/"(.*)":/g, '$1:')
       },
       genHtml (obj) {
