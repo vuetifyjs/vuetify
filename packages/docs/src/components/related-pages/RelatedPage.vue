@@ -1,6 +1,9 @@
 <template>
-  <app-sheet>
-    <v-list-item :to="url">
+  <app-sheet min-height="61">
+    <v-list-item
+      v-if="item"
+      :to="item.to"
+    >
       <v-list-item-icon>
         <v-icon
           :color="categories[section].color"
@@ -11,10 +14,7 @@
       <v-list-item-content>
         <v-list-item-title v-text="item.title" />
 
-        <v-list-item-subtitle
-          class="text-capitalize"
-          v-text="startCase(section)"
-        />
+        <v-list-item-subtitle v-text="subtitle" />
       </v-list-item-content>
     </v-list-item>
   </app-sheet>
@@ -24,7 +24,7 @@
   // Utilities
   import { get } from 'vuex-pathify'
   import { rpath } from '@/util/routes'
-  import { startCase } from 'lodash'
+  import { upperFirst } from 'lodash'
 
   export default {
     name: 'RelatedPage',
@@ -41,6 +41,9 @@
       section () {
         return this.to.split('/')[1]
       },
+      subtitle () {
+        return upperFirst(this.section.replace('-', ' '))
+      },
       url () {
         return rpath(this.to)
       },
@@ -54,20 +57,21 @@
     },
 
     methods: {
-      startCase,
       findRelatedPage (items) {
         for (const item of items) {
-          // Check children
+          // If item has children, check
           if (item.items) {
             this.findRelatedPage(item.items)
 
             continue
           }
 
+          // Match the current url to the item's to property
           if (!this.url.startsWith(item.to)) {
             continue
           }
 
+          // Set item and break
           this.item = item
 
           break
