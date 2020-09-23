@@ -141,10 +141,13 @@ const parseSassVariables = componentName => {
 
 function parseGlobalSassVariables () {
   return [
-    { path: './../vuetify/src/styles/settings/_variables.scss', name: 'globals' },
-    { path: './../vuetify/src/styles/settings/_light.scss', name: 'light' },
-    { path: './../vuetify/src/styles/settings/_dark.scss', name: 'dark' },
-  ].map(item => ({ sass: processVariableFile(item.path), name: item.name }))
+    './../vuetify/src/styles/settings/_variables.scss',
+    './../vuetify/src/styles/settings/_light.scss',
+    './../vuetify/src/styles/settings/_dark.scss',
+  ].reduce((acc, path) => {
+    acc.push(...processVariableFile(path))
+    return acc
+  }, [])
 }
 
 function parseComponent (component) {

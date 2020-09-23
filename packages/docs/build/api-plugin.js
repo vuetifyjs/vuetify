@@ -77,7 +77,7 @@ function generateFiles () {
   for (const locale of localeList) {
     const pages = {}
 
-    for (const item of api.items) {
+    for (const item of api) {
       writeFile(item.name, item, locale)
 
       pages[`/${locale}/api/${sanitize(item.name)}/`] = item.name
@@ -87,17 +87,12 @@ function generateFiles () {
     fs.writeFileSync(resolve(`src/api/${locale}.js`), `export default require.context('./${locale}', true, /\\.md$/)`)
   }
 
-  for (const item of api.items) {
-    writeData(item.name, item)
-  }
-
-  for (const item of api.globalSass) {
+  for (const item of api) {
     writeData(item.name, item)
   }
 
   fs.writeFileSync(resolve(`src/api/sass.json`), JSON.stringify([
-    ...api.globalSass.map(item => item.name),
-    ...api.items.filter(item => item.component).map(item => item.name),
+    ...api.filter(item => item.component || item.name === '$vuetify').map(item => item.name),
   ]))
 }
 

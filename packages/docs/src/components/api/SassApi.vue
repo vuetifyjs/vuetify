@@ -19,7 +19,7 @@
           `theme--${$vuetify.theme.isDark ? 'dark' : 'light'}`
         ]"
       >
-        <api-table :name="api.text" field="sass" />
+        <api-table :name="api.text.replace('$', '')" field="sass" />
       </div>
     </v-col>
   </v-row>
@@ -41,9 +41,7 @@
         theme: '$mdiThemeLightDark',
       },
       types: {
-        dark: 'theme',
-        globals: 'functional',
-        light: 'theme',
+        $vuetify: 'functional',
       },
       sassApi,
     }),

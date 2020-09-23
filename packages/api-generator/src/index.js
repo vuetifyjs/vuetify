@@ -134,9 +134,10 @@ const getDirectiveApi = (directiveName, locales) => {
 
 const getVuetifyApi = locales => {
   const name = '$vuetify'
-  const api = deepmerge(loadMap(name), { name })
+  const sass = parseGlobalSassVariables()
+  const api = deepmerge(loadMap(name), { name, sass })
 
-  return addGenericApiDescriptions(name, api, locales, ['functions'])
+  return addGenericApiDescriptions(name, api, locales, ['functions', 'sass'])
 }
 
 const DIRECTIVES = ['v-mutate', 'v-intersect', 'v-ripple', 'v-resize', 'v-scroll', 'v-touch', 'v-click-outside']
@@ -175,22 +176,12 @@ const getDirectivesApi = locales => {
 
   return directives
 }
-
-const getGlobalSassVariables = locales => {
-  const items = parseGlobalSassVariables()
-
-  return items.map(item => addGenericApiDescriptions(item.name, item, locales, ['sass']))
-}
-
 const getCompleteApi = locales => {
-  return {
-    items: [
-      getVuetifyApi(locales),
-      ...getComponentsApi(locales),
-      ...getDirectivesApi(locales),
-    ].sort((a, b) => a.name.localeCompare(b.name)),
-    globalSass: getGlobalSassVariables(locales),
-  }
+  return [
+    getVuetifyApi(locales),
+    ...getComponentsApi(locales),
+    ...getDirectivesApi(locales),
+  ].sort((a, b) => a.name.localeCompare(b.name))
 }
 
 // function genMissingDescriptions (comp, name, missing) {
