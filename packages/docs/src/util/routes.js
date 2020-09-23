@@ -75,13 +75,14 @@ export function redirect (
 
 export function rpath (path = '') {
   const locale = preferredLocale()
+  const [url, hash] = path.split('#')
 
   const route = [
     locale,
-    ...path.split('/').filter(p => !!p && p !== locale),
+    ...url.split('/').filter(p => !!p && p !== locale),
   ]
 
-  return `/${route.join('/')}/`
+  return `/${route.join('/')}/${hash ? `#${hash}` : ''}`
 }
 
 export function route (name, path = '', strict = true) {

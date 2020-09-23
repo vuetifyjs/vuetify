@@ -1,5 +1,5 @@
 <template>
-  <app-sheet v-if="item">
+  <app-sheet>
     <v-list-item :to="url">
       <v-list-item-icon>
         <v-icon
@@ -23,7 +23,7 @@
 <script>
   // Utilities
   import { get } from 'vuex-pathify'
-  import { localeLookup } from '@/i18n/util'
+  import { rpath } from '@/util/routes'
 
   export default {
     name: 'RelatedPage',
@@ -37,32 +37,24 @@
         'categories',
         'nav',
       ]),
-      dark: get('user/theme@dark'),
-      locale: get('route/params@locale'),
-      pages: get('pages/pages'),
       section () {
         return this.to.split('/')[1]
       },
       url () {
-        return `/${localeLookup(this.locale)}${this.to}`
+        return rpath(this.to)
       },
     },
 
     watch: {
       nav: {
         immediate: true,
-        handler (val) {
-          this.findRelatedPage(val)
-        },
+        handler: 'findRelatedPage',
       },
     },
 
     methods: {
       findRelatedPage (items) {
         for (const item of items) {
-          // If item is found, stop iterating
-          if (this.item) break
-
           // Check children
           if (item.items) {
             this.findRelatedPage(item.items)
@@ -70,9 +62,13 @@
             continue
           }
 
-          if (item.to === this.url) {
-            this.item = item
+          if (!this.url.startsWith(item.to)) {
+            continue
           }
+
+          this.item = item
+
+          break
         }
       },
     },

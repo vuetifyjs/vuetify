@@ -6,6 +6,7 @@ meta:
 related:
   - /features/accessibility/
   - /features/internationalization/
+  - /styles/text-and-typography/#rtl-alignment
 nav: Bidirectionality (LTR/RTL)
 ---
 
