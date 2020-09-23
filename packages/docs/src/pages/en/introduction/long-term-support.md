@@ -4,7 +4,7 @@ meta:
   description: Vuetify provides long-term support to the last major release for 12 months for critical bugs and security vulnerabilities.
   keywords: lts, long-term support
 related:
-  - /introduction/roadmap/
+  - /introduction/enterprise/
   - /getting-started/contributing/
   - /about/meet-the-team/
 ---

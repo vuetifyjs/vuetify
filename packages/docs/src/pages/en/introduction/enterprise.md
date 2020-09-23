@@ -3,6 +3,10 @@ meta:
   title: Vuetify for Enterprise
   description: Get the tools you need to continuously catalog and understand the open source software that your application depends on with the Tidelift subscription.
   keywords: vuetify enterprise, tidelift enterprise, tidelift vuetify
+related:
+  - /introduction/consulting/
+  - /about/security-disclosure/
+  - /about/meet-the-team/
 ---
 
 # Vuetify for Enterprise
