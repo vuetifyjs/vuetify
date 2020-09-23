@@ -19,7 +19,7 @@ const actions = {
       sort: '-created_at',
       query: {
         created_at: {
-          $gt: Math.ceil(subDays(Date.now(), 15).getTime() / 1000),
+          $gt: Math.ceil(subDays(Date.now(), 60).getTime()),
         },
       },
     })
