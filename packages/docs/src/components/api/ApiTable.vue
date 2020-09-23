@@ -1,47 +1,49 @@
 <template>
-  <v-simple-table
-    v-bind="$attrs"
-    v-on="$listeners"
-  >
-    <thead>
-      <tr>
-        <th v-for="header in headers" :key="header">
-          <div class="text-capitalize">{{ header }}</div>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <template v-for="item in items">
-        <tr :key="item.name" :class="['regular-row', hasExtraRow(item) && 'has-extra-row']">
-          <td v-for="(header, i) in headers" :key="i">
-            <template v-if="header === 'name'">
-              <div class="font-weight-bold text-mono">{{ item[header] }}</div>
-            </template>
-            <template v-else-if="header === 'type' || header === 'signature'">
-              <div class="text-mono" v-html="getType(item[header])" />
-            </template>
-            <template v-else-if="header === 'default'">
-              <div class="text-mono" v-html="getDefaultValue(item)" />
-            </template>
-            <template v-else-if="header === 'description'">
-              <app-md v-if="item[header][locale]">{{ item[header][locale] }}</app-md>
-            </template>
-            <template v-else>
-              {{ item[header] }}
-            </template>
-          </td>
+  <app-sheet>
+    <v-simple-table
+      v-bind="$attrs"
+      v-on="$listeners"
+    >
+      <thead>
+        <tr>
+          <th v-for="header in headers" :key="header">
+            <div class="text-capitalize">{{ header }}</div>
+          </th>
         </tr>
-        <template v-if="hasExtraRow(item)">
-          <tr :key="`${item.name}_extra`" class="extra-row">
-            <td />
-            <td :colspan="headers.length - 1">
-              <markup :language="getLanguage(item)" :code="getCode(item)" />
+      </thead>
+      <tbody>
+        <template v-for="item in items">
+          <tr :key="item.name" :class="['regular-row', hasExtraRow(item) && 'has-extra-row']">
+            <td v-for="(header, i) in headers" :key="i">
+              <template v-if="header === 'name'">
+                <div class="font-weight-bold text-mono">{{ item[header] }}</div>
+              </template>
+              <template v-else-if="header === 'type' || header === 'signature'">
+                <div class="text-mono" v-html="getType(item[header])" />
+              </template>
+              <template v-else-if="header === 'default'">
+                <div class="text-mono" v-html="getDefaultValue(item)" />
+              </template>
+              <template v-else-if="header === 'description'">
+                <app-md v-if="item[header][locale]">{{ item[header][locale] }}</app-md>
+              </template>
+              <template v-else>
+                {{ item[header] }}
+              </template>
             </td>
           </tr>
+          <template v-if="hasExtraRow(item)">
+            <tr :key="`${item.name}_extra`" class="extra-row">
+              <td />
+              <td :colspan="headers.length - 1">
+                <markup :language="getLanguage(item)" :code="getCode(item)" />
+              </td>
+            </tr>
+          </template>
         </template>
-      </template>
-    </tbody>
-  </v-simple-table>
+      </tbody>
+    </v-simple-table>
+  </app-sheet>
 </template>
 
 <script>
