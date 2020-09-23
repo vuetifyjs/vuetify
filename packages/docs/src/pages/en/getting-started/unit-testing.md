@@ -4,9 +4,9 @@ meta:
   description: Learn how to create unit tests with vue-test-utils and Vuetify components in your Vue application.
   keywords: unit testing vuetify, testing vuetify, vuetify spec tests
 related:
-  - /introduction/long-term-support/
+  - /getting-started/frequently-asked-questions/
   - /getting-started/contributing/
-  - /introduction/consulting/
+  - /components/text-fields/
 ---
 
 # Unit Testing

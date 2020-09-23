@@ -6,6 +6,7 @@ meta:
 related:
   - /features/accessibility/
   - /features/bidirectionality/
+  - /introduction/why-vuetify/
 ---
 
 # Internationalization (i18n)

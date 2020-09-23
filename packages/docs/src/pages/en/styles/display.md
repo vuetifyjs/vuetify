@@ -5,7 +5,7 @@ meta:
   keywords: display helper classes, display classes, vuetify display
 related:
   - /styles/text-and-typography/
-  - /directives/resizing/
+  - /directives/resize/
   - /features/breakpoints/
 ---
 

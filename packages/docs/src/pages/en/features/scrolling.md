@@ -6,6 +6,7 @@ meta:
 related:
   - /directives/scroll/
   - /styles/content/
+  - /components/app-bars/
 ---
 
 # Goto: programmatic scrolling

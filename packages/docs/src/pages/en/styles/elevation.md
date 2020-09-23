@@ -6,6 +6,7 @@ meta:
 related:
   - /components/cards/
   - /components/sheets/
+  - /components/bottom-sheets/
 ---
 
 # Elevation

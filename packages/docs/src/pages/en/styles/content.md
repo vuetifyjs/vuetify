@@ -4,8 +4,9 @@ meta:
   description: Vuetify provides custom styling for various HTML elements.
   keywords: content, html, markup
 related:
-  - /styles/typography/
-  - /styles/alignment/
+  - /styles/text-and-typography/
+  - /styles/display/
+  - /styles/spacing/
 ---
 
 # Content

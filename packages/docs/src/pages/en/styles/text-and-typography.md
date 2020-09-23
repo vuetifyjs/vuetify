@@ -4,9 +4,9 @@ meta:
   description: View the various typography styles. From headings to captions, with various weights, sizes and italics.
   keywords: typography, headings, titles, text
 related:
-  - styles/display/
-  - styles/content/
-  - styles/typography/
+  - /styles/display/
+  - /styles/content/
+  - /components/subheaders/
 ---
 
 # Text and typography

@@ -5,7 +5,7 @@ meta:
   keywords: colors, material design colors, vuetify color pack, material color classes
 related:
   - /features/theme/
-  - /themes/premium/
+  - /resources/themes/
   - /getting-started/wireframes/
 ---
 

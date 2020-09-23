@@ -5,7 +5,7 @@ meta:
   keywords: ress.min, css reset, vuetify css reset
 related:
   - /styles/colors/
-  - /styles/typography/
+  - /styles/text-and-typography/
   - /features/sass-variables/
 ---
 

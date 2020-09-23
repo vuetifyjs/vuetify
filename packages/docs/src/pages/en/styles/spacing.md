@@ -4,8 +4,9 @@ meta:
   description: Spacing helper classes allow you to apply margin or padding to any element in increments from 1 to 5.
   keywords: spacing helper classes, spacing classes, vuetify spacing
 related:
-  - /styles/alignment
-  - /styles/content
+  - /styles/elevation/
+  - /styles/content/
+  - /components/grids/
 ---
 
 # Spacing

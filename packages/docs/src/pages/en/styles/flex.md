@@ -3,6 +3,10 @@ meta:
   title: CSS Flex helpers
   description: Flex helper classes allow you to modify flexbox parents and children.
   keywords: flex helper classes, flex classes, vuetify flex
+related:
+  - /styles/display/
+  - /components/grids/
+  - /styles/css-reset/
 ---
 
 # Flex

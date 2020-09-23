@@ -3,6 +3,10 @@ meta:
   title: CSS Float helpers
   description: Float helper classes allow you to control the float property of an element based upon the viewport size.
   keywords: float helper classes, float classes, vuetify float
+related:
+  - /styles/text-and-typography/
+  - /styles/transitions/
+  - /styles/content/
 ---
 
 # Float

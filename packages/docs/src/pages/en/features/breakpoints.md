@@ -6,7 +6,7 @@ meta:
 related:
   - /directives/resize/
   - /styles/display/
-  - /styles/typography/
+  - /styles/text-and-typography/
 ---
 
 # Display Breakpoints
@@ -81,7 +81,7 @@ Let's try a real world example with a `v-dialog` component that you want to conv
 </script>
 ```
 
-Even opting to use the [v-resize](/directives/resizing/) directive would require unnecessary boilerplate. Instead, let's access the **mobile** property of the `$vuetify.breakpoint` object. This will return boolean value of `true` or `false` depending upon if the current viewport is larger or smaller than the **mobile-breakpoint** option.
+Even opting to use the [v-resize](/directives/resize/) directive would require unnecessary boilerplate. Instead, let's access the **mobile** property of the `$vuetify.breakpoint` object. This will return boolean value of `true` or `false` depending upon if the current viewport is larger or smaller than the **mobile-breakpoint** option.
 
 ```html
 <!-- Vue Component -->
