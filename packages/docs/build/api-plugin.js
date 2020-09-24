@@ -17,7 +17,7 @@ function genFrontMatter (component) {
     `keywords: ${component}, api, vuetify`,
   ]
 
-  return `---\n${fm.join('\n')}\n---\n\n`
+  return `---\nmeta:\n${fm.map(s => '  ' + s).join('\n')}\n---\n\n`
 }
 
 function genFooter () {
