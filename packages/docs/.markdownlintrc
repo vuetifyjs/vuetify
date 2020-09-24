@@ -28,7 +28,7 @@
       "icon-list",
       "inline-ad",
       "kbd",
-      "wireframe-examples",
+      "premium-themes",
       "promoted-ad",
       "random-ad",
       "releases",
@@ -45,7 +45,8 @@
       "vue-jobs",
       "vuetify-comparison",
       "vuetify-projects",
-      "why-vuetify-cards"
+      "why-vuetify-cards",
+      "wireframe-examples"
     ]
   },
   "MD036": false
