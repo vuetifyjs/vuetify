@@ -8,7 +8,7 @@ export function genTwitterMetaInfo () {
 export function genOpenGraphMetaInfo (args) {
   return parseMetaData('og', {
     description: args.description,
-    site_name: 'Vuetify.js',
+    site_name: 'Vuetify',
     title: args.title,
   })
 }

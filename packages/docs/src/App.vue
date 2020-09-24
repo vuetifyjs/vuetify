@@ -14,7 +14,7 @@
 
     metaInfo: {
       title: 'Welcome to Vuetify',
-      titleTemplate: '%s | Vuetify.js',
+      titleTemplate: '%s | Vuetify',
     },
 
     computed: {
