@@ -1,6 +1,6 @@
 // Imports
-const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 
 // Globals
 const { IS_PROD } = require('../../../src/util/globals')
@@ -23,6 +23,7 @@ module.exports = config => {
     template: 'src/spa.template.html',
     filename: '_fallback.html',
   }])
+
   config.plugin('html-crowdin').use(HtmlWebpackPlugin, [{
     template: 'src/crowdin.template.html',
     filename: '_crowdin.html',
@@ -33,16 +34,16 @@ module.exports = config => {
   config.optimization
     .minimize(IS_PROD)
     .splitChunks({
-      chunks: 'all',
-      minSize: 20000,
-      maxAsyncRequests: 20,
-      maxInitialRequests: 5,
       cacheGroups: {
         vuetify: {
           test: /[\\/]vuetify[\\/]lib[\\/]/,
           enforce: true,
         },
       },
+      chunks: 'all',
+      maxAsyncRequests: 20,
+      maxInitialRequests: 5,
+      minSize: 20000,
     })
 
   config.target('web')

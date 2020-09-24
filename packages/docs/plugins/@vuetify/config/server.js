@@ -18,24 +18,23 @@ module.exports = config => {
 
   config.plugins.delete('pwa')
 
-  // config.module
-  //   .rule('vue')
-  //   .use('vue-loader')
-  //   .tap(options => {
-  //     options.optimizeSSR = false
-  //
-  //     return options
-  //   })
+  config.module
+    .rule('vue')
+    .use('vue-loader')
+    .tap(options => {
+      options.optimizeSSR = false
 
-  const isExtracting = config.plugins.has('extract-css')
+      return options
+    })
 
-  if (isExtracting) {
+  if (config.plugins.has('extract-css')) {
     const langs = ['css', 'postcss', 'scss', 'sass', 'less', 'stylus']
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
 
     for (const lang of langs) {
       for (const type of types) {
         const rule = config.module.rule(lang).oneOf(type)
+
         rule.uses.delete('extract-css-loader')
       }
     }
