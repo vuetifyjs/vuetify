@@ -18,7 +18,7 @@ Learn more about what Vuetify is, how to create an application from scratch, bro
 
 ## Getting started
 
-The easiest way to try Vuetify is to use our [Codepen Template](https://template.vuetifyjs.com/). This template is used by all examples within the documentation and is the perfect sandbox to play with the framework. If you prefer to use a local `index.html` file, we have a guide on how to [install via CDN](/getting-started/installation/#cdn-usage).
+The easiest way to try Vuetify is to use our [Codepen Template](https://template.vuetifyjs.com/). This template is used by all examples within the documentation and is the perfect sandbox to play with the framework. If you prefer to use a local `index.html` file, we have a guide on how to [install via CDN](/getting-started/installation/#usage-with-cdn).
 
 For additional installation options such as **Nuxt** and **Vuepress**,  visit the [Installation](/getting-started/installation/) page.
 
