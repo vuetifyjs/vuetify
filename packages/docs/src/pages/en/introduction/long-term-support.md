@@ -29,6 +29,12 @@ The latest version of Vuetify, based on the Material Design 2 specification. It 
 
 ## Vuetify 1.5 LTS
 
+<alert type="error">
+
+  v1.5 reached end of life on **July 31st, 2020** and is no longer actively maintained. It is recommended to update to the latest stable version of Vuetify using our [Upgrade guide](/getting-started/upgrade-guide/).
+
+</alert>
+
 The latest LTS version of Vuetify, based on the Material Design 1 specification. LTS stands for long-term support—which means 12 months, until July 2020, of free security and critical bug maintenance updates, guaranteed.
 
 Upgrading to v1.5? Check out the available upgrade guides:
