@@ -106,6 +106,8 @@
     events: ['name', 'description'],
     sass: ['name', 'default', 'description'],
     functions: ['name', 'signature', 'description'],
+    modifiers: ['name', 'type', 'description'],
+    argument: ['type', 'description'],
   }
 
   export default {
@@ -134,7 +136,7 @@
 
     methods: {
       getType (value) {
-        const type = Array.isArray(value) ? value.join(', ') : value
+        const type = Array.isArray(value) ? value.join(' | ') : value
 
         return Prism.highlight(type, Prism.languages.typescript)
       },

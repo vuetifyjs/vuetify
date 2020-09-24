@@ -1,6 +1,6 @@
 module.exports = {
   'v-intersect': {
-    argument: {
+    argument: [{
       name: 'value',
       default: undefined,
       type: ['Function', '{ handler: Function, options?: IntersectionObserverInit }'],
@@ -17,7 +17,7 @@ export default {
   }
 }
 </script>`,
-    },
+    }],
     modifiers: [
       {
         name: 'once',

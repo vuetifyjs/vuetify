@@ -1,10 +1,10 @@
 module.exports = {
   'v-resize': {
-    argument: {
+    argument: [{
       name: 'argument',
       type: ['Function'],
       default: undefined,
-    },
+    }],
     modifiers: [
       {
         name: 'quiet',

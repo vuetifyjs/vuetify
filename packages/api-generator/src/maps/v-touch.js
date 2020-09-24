@@ -1,6 +1,6 @@
 module.exports = {
   'v-touch': {
-    argument: {
+    argument: [{
       name: 'argument',
       type: ['object'],
       example: {
@@ -13,6 +13,6 @@ module.exports = {
         down: 'Function',
       },
       default: undefined,
-    },
+    }],
   },
 }

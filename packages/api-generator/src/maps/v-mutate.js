@@ -1,93 +1,6 @@
 module.exports = {
   'v-mutate': {
-    modifiers: [
-      {
-        name: 'once',
-        default: false,
-        type: ['boolean'],
-        snippet: `
-<template>
-  <div v-mutate.once="onMutate">...</div>
-</template>
-
-<script>
-  export default {
-    methods: {
-      onMutate (mutationsList, observer) {}
-    }
-  }
-</script>`,
-      },
-      {
-        name: 'attr',
-        default: true,
-        type: ['boolean'],
-        snippet: `
-<template>
-  <div v-mutate.attr="onMutate">...</div>
-</template>
-
-<script>
-  export default {
-    methods: {
-      onMutate (mutationsList, observer) {}
-    }
-  }
-</script>`,
-      },
-      {
-        name: 'char',
-        default: true,
-        type: ['boolean'],
-        snippet: `
-<template>
-  <div v-mutate.char="onMutate">...</div>
-</template>
-
-<script>
-  export default {
-    methods: {
-      onMutate (mutationsList, observer) {}
-    }
-  }
-</script>`,
-      },
-      {
-        name: 'child',
-        default: true,
-        type: ['boolean'],
-        snippet: `
-<template>
-  <div v-mutate.child="onMutate">...</div>
-</template>
-
-<script>
-  export default {
-    methods: {
-      onMutate (mutationsList, observer) {}
-    }
-  }
-</script>`,
-      },
-      {
-        name: 'sub',
-        default: true,
-        type: ['boolean'],
-        snippet: `
-<template>
-  <div v-mutate.attr.char.sub="onMutate">...</div>
-</template>
-
-<script>
-  export default {
-    methods: {
-      onMutate (mutationsList, observer) {}
-    }
-  }
-</script>`,
-      },
-    ],
-    argument: {
+    argument: [{
       name: 'argument',
       default: '(): {}',
       type: ['function', 'object'],
@@ -123,6 +36,93 @@ module.exports = {
     }
   }
 </script>`,
-    },
+    }],
+    modifiers: [
+      {
+        name: 'once',
+        default: false,
+        type: ['boolean'],
+        snippet: `
+  <template>
+    <div v-mutate.once="onMutate">...</div>
+  </template>
+
+  <script>
+    export default {
+      methods: {
+        onMutate (mutationsList, observer) {}
+      }
+    }
+  </script>`,
+      },
+      {
+        name: 'attr',
+        default: true,
+        type: ['boolean'],
+        snippet: `
+  <template>
+    <div v-mutate.attr="onMutate">...</div>
+  </template>
+
+  <script>
+    export default {
+      methods: {
+        onMutate (mutationsList, observer) {}
+      }
+    }
+  </script>`,
+      },
+      {
+        name: 'char',
+        default: true,
+        type: ['boolean'],
+        snippet: `
+  <template>
+    <div v-mutate.char="onMutate">...</div>
+  </template>
+
+  <script>
+    export default {
+      methods: {
+        onMutate (mutationsList, observer) {}
+      }
+    }
+  </script>`,
+      },
+      {
+        name: 'child',
+        default: true,
+        type: ['boolean'],
+        snippet: `
+  <template>
+    <div v-mutate.child="onMutate">...</div>
+  </template>
+
+  <script>
+    export default {
+      methods: {
+        onMutate (mutationsList, observer) {}
+      }
+    }
+  </script>`,
+      },
+      {
+        name: 'sub',
+        default: true,
+        type: ['boolean'],
+        snippet: `
+  <template>
+    <div v-mutate.attr.char.sub="onMutate">...</div>
+  </template>
+
+  <script>
+    export default {
+      methods: {
+        onMutate (mutationsList, observer) {}
+      }
+    }
+  </script>`,
+      },
+    ],
   },
 }

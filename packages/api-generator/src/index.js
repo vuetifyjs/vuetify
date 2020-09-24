@@ -69,12 +69,12 @@ const addComponentApiDescriptions = (componentName, api, locales) => {
 }
 
 const addDirectiveApiDescriptions = (directiveName, api, locales) => {
-  if (api.argument) {
+  if (api.argument.length) {
     for (const localeName of locales) {
       const source = loadLocale(directiveName, localeName)
-      if (!api.argument.description) api.argument.description = {}
+      if (!api.argument[0].description) api.argument[0].description = {}
 
-      api.argument.description[localeName] = source.argument || ''
+      api.argument[0].description[localeName] = source.argument || ''
     }
   }
 

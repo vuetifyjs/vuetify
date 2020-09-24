@@ -1,21 +1,13 @@
 module.exports = {
   'v-ripple': {
-    argument: {
+    argument: [{
       name: 'argument',
       type: ['object'],
       default: undefined,
-    },
-    modifiers: [
-      {
-        name: 'center',
-        default: 'false',
-        type: ['boolean'],
+      example: {
+        center: 'boolean',
+        class: 'string',
       },
-      {
-        name: 'class',
-        default: '',
-        type: ['string'],
-      },
-    ],
+    }],
   },
 }
