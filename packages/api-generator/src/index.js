@@ -148,7 +148,7 @@ const getApi = (name, locales) => {
   else return getComponentApi(name, locales)
 }
 
-const EXCLUDES = ['VMessages', 'VLabel']
+const EXCLUDES = ['VMessages', 'VLabel', 'VVirtualTable']
 
 const getComponentsApi = locales => {
   const components = []
