@@ -103,10 +103,10 @@ class ApiPlugin {
     generateFiles()
 
     let changedFiles = []
-    const sourcePaths = [resolve('../api-generator/maps'), resolve('../api-generator/locale')]
+    const sourcePaths = [resolve('../api-generator/src/maps'), (resolve('../api-generator/src/locale/en'))]
 
     compiler.hooks.afterCompile.tap('ApiPlugin', compilation => {
-      compilation.contextDependencies.add(...sourcePaths)
+      sourcePaths.forEach(sourcePath => compilation.contextDependencies.add(sourcePath))
     })
 
     compiler.hooks.watchRun.tap('ApiPlugin', async comp => {
@@ -126,7 +126,7 @@ class ApiPlugin {
       if (!changedFiles.length) return
 
       for (const filePath of changedFiles) {
-        const matches = /[/\\]([-a-z]+|\$vuetify)\.js$/i.exec(filePath)
+        const matches = /[/\\]([-a-z]+|\$vuetify)\.js(?:on)?$/i.exec(filePath)
         const [_, componentName] = matches
         const componentApi = getApi(componentName, localeList)
         writeData(componentName, componentApi)
