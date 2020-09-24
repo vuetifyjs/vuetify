@@ -107,6 +107,8 @@ jobs:
           localization_branch_name: ${{ env.LOCAL_BRANCH }}
           crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
 
+      - run: yarn run build:modified
+        working-directory: ./packages/docs
       - run: node scripts/deploy-and-alias.js ${{ github.ref }}
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
