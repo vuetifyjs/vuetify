@@ -40,7 +40,7 @@ export function createRouter (vuetify, store, i18n) {
       ]),
       // Redirect for language fallback
       redirect('/:locale(%s)/*', to => {
-        // fallbackLocale regex is too agressive and catches 'api' as well
+        // fallbackLocale regex is too aggressive and catches 'api' as well
         if (to.params.locale === 'api') return to.path
         return to.params.pathMatch
       }),

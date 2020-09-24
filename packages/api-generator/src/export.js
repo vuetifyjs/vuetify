@@ -76,7 +76,7 @@ const createWebTypesApi = () => {
         default: typeof prop.default !== 'string' ? JSON.stringify(prop.default) : prop.default,
         required: undefined, // TODO: implement this
         value: createTagValue(prop.type),
-        type: prop.type === 'boolean' ? 'boolean' : undefined, // this is deprecated but should be const 'boolean' for compatability with 2019.2
+        type: prop.type === 'boolean' ? 'boolean' : undefined, // this is deprecated but should be const 'boolean' for compatibility with 2019.2
       }
     }
 
@@ -119,7 +119,7 @@ const createWebTypesApi = () => {
     const createAttributeVueArgument = argument => {
       return {
         pattern: undefined,
-        description: argument.description.en || '',
+        description: argument.description && argument.description.en ? argument.description.en : '',
         'doc-url': getDocUrl(directive.name, 'argument'),
         required: undefined,
       }
