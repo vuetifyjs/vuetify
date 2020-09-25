@@ -1,6 +1,7 @@
 {
   "props": {
     "cancelText": "Sets the default text for the cancel button when using the **large** prop",
+    "eager": "Will force the components content to render on mounted. This is useful if you have content that will not be rendered in the DOM that you want crawled for SEO.",
     "large": "Attaches a submit and cancel button to the dialog",
     "saveText": "Sets the default text for the save button when using the **large** prop",
     "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own."

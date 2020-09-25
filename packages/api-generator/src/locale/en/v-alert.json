@@ -20,7 +20,6 @@
     "origin": "Sets the transition origin on the element. You can find more information on the MDN documentation [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin).",
     "outlined": "Makes the background transparent and applies a thin border.",
     "prominent": "Displays a larger vertically centered icon to draw more attention.",
-    "tag": "Specify a custom tag used on the root element.",
     "text": "Applies the defined **color** to text and a low opacity background of the same.",
     "tile": "Removes the component's border-radius.",
     "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own.",

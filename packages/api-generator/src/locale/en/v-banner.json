@@ -3,6 +3,7 @@
     "app": "When used inside of `v-main`, will calculate top based upon application `v-toolbar` and `v-system-bar`.",
     "icon": "Designates a specific icon.",
     "iconColor": "Designates a specific icon color.",
+    "mobileBreakpoint": "Sets the designated mobile breakpoint for the component.",
     "singleLine": "Forces the banner onto a single line.",
     "sticky": "Applies **position: sticky** to the component (**Evergreen browsers only**). You can find more information on the [MDN documentation for sticky position](https://developer.mozilla.org/en-US/docs/Web/CSS/position)."
   },
