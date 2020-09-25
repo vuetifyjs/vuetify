@@ -262,5 +262,22 @@
     "location": "The Netherlands",
     "name": "Daan Roet",
     "team": "contributors"
+  },
+  "jpntex": {
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "funding": [
+      "[GitHub Sponsors](https://github.com/sponsors/jpntex)"
+    ],
+    "languages": [
+      "English",
+      "Portuguese"
+    ],
+    "linkedin": "jpntex",
+    "work": "Indielayer",
+    "location": "Portugal",
+    "name": "João Teixeira",
+    "team": "contributors"
   }
 }
