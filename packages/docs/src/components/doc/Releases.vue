@@ -56,7 +56,7 @@
           <v-list-item-subtitle>
             <i18n path="published-on">
               <template #date>
-                <strong v-text="search.published_at" />
+                <strong v-text="props.item.published_at" />
               </template>
             </i18n>
           </v-list-item-subtitle>
