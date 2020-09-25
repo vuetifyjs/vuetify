@@ -8,7 +8,7 @@
       :to="prev.to"
       class="text-decoration-none body-1"
     >
-      <span class="text-h6 text--primary">←&nbsp;</span>
+      <span class="text-h6 text--primary" v-html="arrows.prev" />
       <span v-text="prev.title" />
     </router-link>
 
@@ -20,7 +20,7 @@
       class="text-decoration-none body-1"
     >
       <span v-text="next.title" />
-      <span class="text-h6 text--primary">&nbsp;→</span>
+      <span class="text-h6 text--primary" v-html="arrows.next" />
     </router-link>
   </div>
 </template>
@@ -64,6 +64,12 @@
       },
       next () {
         return this.leafs[this.currentIndex + 1]
+      },
+      arrows () {
+        return {
+          next: this.$vuetify.rtl ? '←&nbsp;' : '&nbsp;→',
+          prev: this.$vuetify.rtl ? '&nbsp;→' : '←&nbsp;',
+        }
       },
     },
   }
