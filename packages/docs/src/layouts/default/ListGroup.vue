@@ -52,11 +52,15 @@
 <script>
   // Components
   import DefaultListItem from './ListItem'
+  import VListGroup from './VListGroup'
 
   export default {
     name: 'DefaultListGroup',
 
-    components: { DefaultListItem },
+    components: {
+      DefaultListItem,
+      VListGroup,
+    },
 
     props: {
       item: {
