@@ -3,7 +3,7 @@
     "autoDraw": "Trace the length of the line when first rendered",
     "autoDrawDuration": "Amount of time (in ms) to run the trace animation",
     "autoDrawEasing": "The easing function to use for the trace animation",
-    "autoLineWidth": "Automatically expand bars to use space eficiently",
+    "autoLineWidth": "Automatically expand bars to use space efficiently",
     "data": "An array of data points",
     "fill": "Using the **fill** property allows you to better customize the look and feel of your sparkline.",
     "gradient": "An array of colors to use as a linear-gradient",

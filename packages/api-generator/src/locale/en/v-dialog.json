@@ -8,7 +8,7 @@
     "persistent": "Clicking outside of the element will not deactivate it.",
     "retainFocus": "Tab focus will return to the first child of the dialog by default. Disable this when using external tools that require focus such as TinyMCE or vue-clipboard.",
     "scrollable": "When set to true, expects a `v-card` and a `v-card-text` component with a designated height. For more information, check out the [scrollable example](/components/dialogs#scrollable).",
-    "transition": "Mixins.Transitionable.props.transition"
+    "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own."
   },
   "events": {
     "click:outside": "Event that fires when clicking outside an active dialog.",

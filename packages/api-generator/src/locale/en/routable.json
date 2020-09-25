@@ -9,9 +9,9 @@
     "link": "Designates that the component is a link. This is automatic when using the **href** or **to** prop.",
     "nuxt": "Specifies the link is a `nuxt-link`. For use with the [nuxt framework](https://nuxtjs.org/api/components-nuxt-link/).",
     "replace": "Setting **replace** prop will call `router.replace()` instead of `router.push()` when clicked, so the navigation will not leave a history record. You can find more information about the [**replace** prop](https://router.vuejs.org/api/#replace) on the vue-router documentation.",
-    "ripple": "Mixins.Rippleable.props.ripple",
+    "ripple": "Applies the [v-ripple](/directives/ripple) directive.",
     "to": "Denotes the target route of the link. You can find more information about the [**to** prop](https://router.vuejs.org/api/#to) on the vue-router documentation.",
-    "tag": "Components.Sheets.props.tag",
+    "tag": "Specify a custom tag used on the root element.",
     "target": "Designates the target attribute. This should only be applied when using the **href** prop."
   }
 }

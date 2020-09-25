@@ -5,7 +5,7 @@
     "headerColor": "Defines the header color. If not specified it will use the color defined by <code>color</code> prop or the default picker color",
     "landscape": "Orients picker horizontal",
     "noTitle": "Hide the picker title",
-    "scrollable": "Allows the use of the mousewheel in the picker",
+    "scrollable": "Allows the use of the mouse wheel in the picker",
     "value": "Picker value"
   }
 }

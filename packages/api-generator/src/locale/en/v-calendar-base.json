@@ -42,7 +42,7 @@
     "shortWeekdays": "Whether the short versions of a weekday should be used (Mon vs Monday).",
     "showIntervalLabel": "Checks if a given day and time should be displayed in the interval gutter of the `day` view.",
     "showMonthOnFirst": "Whether the name of the month should be displayed on the first day of the month.",
-    "showWeek": "Whether weeknumbers should be displayed when using the `month` view.",
+    "showWeek": "Whether week numbers should be displayed when using the `month` view.",
     "start": "The starting date on the calendar (inclusive) in the format of `YYYY-MM-DD`. This may be ignored depending on the `type` of the calendar.",
     "type": "A string which is one of `month`, `week`, `day`, `4day`, `custom-weekly`, `custom-daily`, and `category`. The custom types look at the `start` and `end` dates passed to the component as opposed to the `value`.",
     "v-model": "Sets the `value` property but also updates it when the link of a day is clicked.",
