@@ -1,3 +1,6 @@
+// Styles
+import './VWindow.sass'
+
 import VWindow from './VWindow'
 import VWindowItem from './VWindowItem'
 

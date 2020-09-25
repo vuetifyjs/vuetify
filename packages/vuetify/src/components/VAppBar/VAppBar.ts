@@ -1,6 +1,3 @@
-// Styles
-import './VAppBar.sass'
-
 // Extensions
 import VToolbar from '../VToolbar/VToolbar'
 

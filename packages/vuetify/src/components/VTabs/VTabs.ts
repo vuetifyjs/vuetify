@@ -1,6 +1,3 @@
-// Styles
-import './VTabs.sass'
-
 // Components
 import VTabsBar from './VTabsBar'
 import VTabsItems from './VTabsItems'

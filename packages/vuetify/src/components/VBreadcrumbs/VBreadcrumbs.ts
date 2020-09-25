@@ -1,6 +1,3 @@
-// Styles
-import './VBreadcrumbs.sass'
-
 // Types
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'

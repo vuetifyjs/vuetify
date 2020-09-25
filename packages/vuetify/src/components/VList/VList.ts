@@ -1,5 +1,3 @@
-// Styles
-import './VList.sass'
 import VListGroup from './VListGroup'
 
 // Components

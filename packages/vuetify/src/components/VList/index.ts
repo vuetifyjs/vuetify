@@ -1,3 +1,9 @@
+// Styles
+import './VList.sass'
+import './VListGroup.sass'
+import './VListItem.sass'
+import './VListItemGroup.sass'
+
 import { createSimpleFunctional } from '../../util/helpers'
 
 import VList from './VList'

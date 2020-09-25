@@ -1,5 +1,3 @@
-import './VSimpleTable.sass'
-
 import { convertToUnit } from '../../util/helpers'
 import Themeable from '../../mixins/themeable'
 import mixins from '../../util/mixins'

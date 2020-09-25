@@ -1,3 +1,6 @@
+import './VTimePickerClock.sass'
+import './VTimePickerTitle.sass'
+
 import VTimePicker from './VTimePicker'
 import VTimePickerClock from './VTimePickerClock'
 import VTimePickerTitle from './VTimePickerTitle'

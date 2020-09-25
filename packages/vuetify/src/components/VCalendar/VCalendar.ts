@@ -1,6 +1,3 @@
-// Styles
-// import '../../stylus/components/_calendar-daily.styl'
-
 // Types
 import { VNode, Component } from 'vue'
 

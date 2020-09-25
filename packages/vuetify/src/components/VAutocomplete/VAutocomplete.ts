@@ -1,6 +1,3 @@
-// Styles
-import './VAutocomplete.sass'
-
 // Extensions
 import VSelect, { defaultMenuProps as VSelectMenuProps } from '../VSelect/VSelect'
 import VTextField from '../VTextField/VTextField'

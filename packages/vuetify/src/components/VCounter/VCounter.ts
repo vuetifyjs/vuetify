@@ -1,6 +1,3 @@
-// Styles
-import './VCounter.sass'
-
 // Mixins
 import Themeable, { functionalThemeClasses } from '../../mixins/themeable'
 

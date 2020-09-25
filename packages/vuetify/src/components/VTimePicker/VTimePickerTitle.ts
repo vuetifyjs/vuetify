@@ -1,5 +1,3 @@
-import './VTimePickerTitle.sass'
-
 // Mixins
 import PickerButton from '../../mixins/picker-button'
 

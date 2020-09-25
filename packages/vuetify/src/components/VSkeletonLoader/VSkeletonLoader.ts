@@ -1,6 +1,3 @@
-// Styles
-import './VSkeletonLoader.sass'
-
 // Mixins
 import Elevatable from '../../mixins/elevatable'
 import Measurable from '../../mixins/measurable'

@@ -1,6 +1,3 @@
-// Styles
-import './VLabel.sass'
-
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Themeable, { functionalThemeClasses } from '../../mixins/themeable'

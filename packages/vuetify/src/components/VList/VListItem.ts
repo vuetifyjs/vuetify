@@ -1,6 +1,3 @@
-// Styles
-import './VListItem.sass'
-
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'

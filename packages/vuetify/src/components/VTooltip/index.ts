@@ -1,3 +1,5 @@
+import './VTooltip.sass'
+
 import VTooltip from './VTooltip'
 
 export { VTooltip }

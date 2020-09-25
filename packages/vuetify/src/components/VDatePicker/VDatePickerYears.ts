@@ -1,5 +1,3 @@
-import './VDatePickerYears.sass'
-
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Localable from '../../mixins/localable'

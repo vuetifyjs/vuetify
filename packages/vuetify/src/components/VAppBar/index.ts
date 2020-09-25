@@ -1,3 +1,6 @@
+// Styles
+import './VAppBar.sass'
+
 import VAppBar from './VAppBar'
 import VAppBarNavIcon from './VAppBarNavIcon'
 

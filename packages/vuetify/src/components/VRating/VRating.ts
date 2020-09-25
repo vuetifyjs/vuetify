@@ -1,6 +1,3 @@
-// Styles
-import './VRating.sass'
-
 // Components
 import VIcon from '../VIcon'
 

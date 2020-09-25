@@ -1,3 +1,6 @@
+// Styles
+import './VStepper.sass'
+
 import { createSimpleFunctional } from '../../util/helpers'
 import VStepper from './VStepper'
 import VStepperStep from './VStepperStep'

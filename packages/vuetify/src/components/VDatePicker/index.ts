@@ -1,3 +1,8 @@
+import './VDatePickerHeader.sass'
+import './VDatePickerTitle.sass'
+import './VDatePickerTable.sass'
+import './VDatePickerYears.sass'
+
 import VDatePicker from './VDatePicker'
 import VDatePickerTitle from './VDatePickerTitle'
 import VDatePickerHeader from './VDatePickerHeader'

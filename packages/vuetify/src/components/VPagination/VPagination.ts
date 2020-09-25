@@ -1,5 +1,3 @@
-import './VPagination.sass'
-
 import VIcon from '../VIcon'
 
 // Directives

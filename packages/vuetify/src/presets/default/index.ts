@@ -1,6 +1,3 @@
-// Styles
-import '../../styles/main.sass'
-
 // Locale
 import { en } from '../../locale'
 

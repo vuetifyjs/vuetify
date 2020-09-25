@@ -1,6 +1,3 @@
-import './VPicker.sass'
-import '../VCard/VCard.sass'
-
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Elevatable from '../../mixins/elevatable'

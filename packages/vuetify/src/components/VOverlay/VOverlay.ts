@@ -1,6 +1,3 @@
-// Styles
-import './VOverlay.sass'
-
 // Mixins
 import Colorable from './../../mixins/colorable'
 import Themeable from '../../mixins/themeable'

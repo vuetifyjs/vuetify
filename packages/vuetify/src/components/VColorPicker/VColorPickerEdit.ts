@@ -1,6 +1,3 @@
-// Styles
-import './VColorPickerEdit.sass'
-
 // Components
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'

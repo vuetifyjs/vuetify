@@ -1,5 +1,3 @@
-import './VDataFooter.sass'
-
 // Components
 import VSelect from '../VSelect/VSelect'
 import VIcon from '../VIcon'

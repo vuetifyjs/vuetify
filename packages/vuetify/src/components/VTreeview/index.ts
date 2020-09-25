@@ -1,3 +1,6 @@
+// Styles
+import './VTreeview.sass'
+
 import VTreeview from './VTreeview'
 import VTreeviewNode from './VTreeviewNode'
 

@@ -1,6 +1,3 @@
-// Styles
-import './VWindow.sass'
-
 // Types
 import { VNode, VNodeDirective } from 'vue/types/vnode'
 import { PropType } from 'vue'

@@ -1,6 +1,3 @@
-// Styles
-import './VSpeedDial.sass'
-
 // Mixins
 import Toggleable from '../../mixins/toggleable'
 import Positionable from '../../mixins/positionable'

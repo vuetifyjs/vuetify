@@ -1,6 +1,3 @@
-// Styles
-import './VListItemGroup.sass'
-
 // Extensions
 import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 

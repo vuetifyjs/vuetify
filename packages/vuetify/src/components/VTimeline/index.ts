@@ -1,3 +1,6 @@
+// Styles
+import './VTimeline.sass'
+
 import VTimeline from './VTimeline'
 import VTimelineItem from './VTimelineItem'
 

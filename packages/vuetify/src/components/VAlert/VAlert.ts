@@ -1,6 +1,3 @@
-// Styles
-import './VAlert.sass'
-
 // Extensions
 import VSheet from '../VSheet'
 

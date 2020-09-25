@@ -1,3 +1,6 @@
+// Styles
+import './VBreadcrumbs.sass'
+
 import VBreadcrumbs from './VBreadcrumbs'
 import VBreadcrumbsItem from './VBreadcrumbsItem'
 import VBreadcrumbsDivider from './VBreadcrumbsDivider'

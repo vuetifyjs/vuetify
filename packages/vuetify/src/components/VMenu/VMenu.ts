@@ -1,6 +1,3 @@
-// Styles
-import './VMenu.sass'
-
 // Components
 import { VThemeProvider } from '../VThemeProvider'
 

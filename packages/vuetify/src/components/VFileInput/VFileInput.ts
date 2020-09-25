@@ -1,6 +1,3 @@
-// Styles
-import './VFileInput.sass'
-
 // Extensions
 import VTextField from '../VTextField'
 

@@ -1,6 +1,3 @@
-// Styles
-import './VInput.sass'
-
 // Components
 import VIcon from '../VIcon'
 import VLabel from '../VLabel'

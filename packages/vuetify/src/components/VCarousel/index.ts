@@ -1,3 +1,6 @@
+// Styles
+import './VCarousel.sass'
+
 import VCarousel from './VCarousel'
 import VCarouselItem from './VCarouselItem'
 

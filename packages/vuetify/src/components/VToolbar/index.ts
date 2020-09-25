@@ -1,3 +1,6 @@
+// Styles
+import './VToolbar.sass'
+
 // Components
 import VToolbar from './VToolbar'
 

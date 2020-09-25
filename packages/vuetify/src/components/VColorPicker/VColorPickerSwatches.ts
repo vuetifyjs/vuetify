@@ -1,6 +1,3 @@
-// Styles
-import './VColorPickerSwatches.sass'
-
 // Components
 import VIcon from '../VIcon'
 

@@ -1,3 +1,5 @@
+import './VDataFooter.sass'
+
 import VDataIterator from './VDataIterator'
 import VDataFooter from './VDataFooter'
 

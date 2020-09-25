@@ -1,5 +1,3 @@
-import './VAvatar.sass'
-
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Measurable from '../../mixins/measurable'

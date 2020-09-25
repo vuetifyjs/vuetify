@@ -1,6 +1,3 @@
-// Style
-import './VParallax.sass'
-
 // Mixins
 import Translatable from '../../mixins/translatable'
 

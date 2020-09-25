@@ -1,5 +1,3 @@
-import './VDataTable.sass'
-
 // Types
 import { VNode, VNodeChildrenArrayContents, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'

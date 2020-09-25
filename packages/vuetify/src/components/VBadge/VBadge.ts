@@ -1,6 +1,3 @@
-// Styles
-import './VBadge.sass'
-
 // Components
 import VIcon from '../VIcon/VIcon'
 

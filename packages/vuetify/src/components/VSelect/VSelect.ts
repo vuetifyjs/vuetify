@@ -1,7 +1,3 @@
-// Styles
-import '../VTextField/VTextField.sass'
-import './VSelect.sass'
-
 // Components
 import VChip from '../VChip'
 import VMenu from '../VMenu'

@@ -1,3 +1,10 @@
+// Styles
+import './VDataTable.sass'
+import './VDataTableHeader.sass'
+import './VEditDialog.sass'
+import './VSimpleTable.sass'
+import './VVirtualTable.sass'
+
 import { createSimpleFunctional } from '../../util/helpers'
 
 import VDataTable from './VDataTable'

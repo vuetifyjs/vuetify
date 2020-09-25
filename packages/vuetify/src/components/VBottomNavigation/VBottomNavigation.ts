@@ -1,6 +1,3 @@
-// Styles
-import './VBottomNavigation.sass'
-
 // Mixins
 import Applicationable from '../../mixins/applicationable'
 import ButtonGroup from '../../mixins/button-group'

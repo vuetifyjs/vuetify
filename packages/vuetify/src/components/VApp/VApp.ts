@@ -1,6 +1,3 @@
-// Styles
-import './VApp.sass'
-
 // Mixins
 import Themeable from '../../mixins/themeable'
 

@@ -1,3 +1,5 @@
+// Styles
+import './VApp.sass'
 import VApp from './VApp'
 
 export { VApp }

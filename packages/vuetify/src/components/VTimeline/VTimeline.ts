@@ -1,6 +1,3 @@
-// Styles
-import './VTimeline.sass'
-
 // Types
 import { VNode } from 'vue'
 import mixins from '../../util/mixins'

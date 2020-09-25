@@ -1,6 +1,3 @@
-// Styles
-import './VNavigationDrawer.sass'
-
 // Components
 import VImg, { srcObject } from '../VImg/VImg'
 

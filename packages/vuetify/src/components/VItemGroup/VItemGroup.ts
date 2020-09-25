@@ -1,6 +1,3 @@
-// Styles
-import './VItemGroup.sass'
-
 // Mixins
 import Groupable from '../../mixins/groupable'
 import Proxyable from '../../mixins/proxyable'

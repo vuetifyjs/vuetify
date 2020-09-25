@@ -1,5 +1,3 @@
-import './VSimpleCheckbox.sass'
-
 import ripple from '../../directives/ripple'
 
 import Vue, { VNode, VNodeDirective } from 'vue'

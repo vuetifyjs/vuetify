@@ -1,6 +1,3 @@
-// Styles
-import './VCalendarWeekly.sass'
-
 // Types
 import { VNode } from 'vue'
 

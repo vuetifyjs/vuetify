@@ -1,6 +1,3 @@
-// Styles
-import './VTreeview.sass'
-
 // Types
 import { VNode, VNodeChildrenArrayContents, PropType } from 'vue'
 import { PropValidator } from 'vue/types/options'

@@ -1,6 +1,3 @@
-// Styles
-import './VVirtualScroll.sass'
-
 // Mixins
 import Measurable from '../../mixins/measurable'
 

@@ -1,6 +1,3 @@
-// Styles
-import './VCalendarWeekly.sass'
-
 // Mixins
 import VCalendarWeekly from './VCalendarWeekly'
 

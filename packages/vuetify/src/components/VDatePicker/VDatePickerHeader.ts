@@ -1,5 +1,3 @@
-import './VDatePickerHeader.sass'
-
 // Components
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'

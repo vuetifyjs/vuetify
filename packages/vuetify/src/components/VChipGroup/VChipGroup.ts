@@ -1,6 +1,3 @@
-// Styles
-import './VChipGroup.sass'
-
 // Extensions
 import { BaseSlideGroup } from '../VSlideGroup/VSlideGroup'
 

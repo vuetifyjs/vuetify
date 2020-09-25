@@ -1,6 +1,3 @@
-// Styles
-import './VCard.sass'
-
 // Extensions
 import VSheet from '../VSheet'
 

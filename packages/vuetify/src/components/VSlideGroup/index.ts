@@ -1,3 +1,6 @@
+// Styles
+import './VSlideGroup.sass'
+
 import VSlideGroup from './VSlideGroup'
 import VSlideItem from './VSlideItem'
 

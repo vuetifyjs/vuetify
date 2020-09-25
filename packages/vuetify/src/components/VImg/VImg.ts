@@ -1,6 +1,3 @@
-// Styles
-import './VImg.sass'
-
 // Directives
 import intersect from '../../directives/intersect'
 

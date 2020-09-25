@@ -1,6 +1,3 @@
-// Styles
-import '../VAutocomplete/VAutocomplete.sass'
-
 // Extensions
 import VSelect from '../VSelect/VSelect'
 import VAutocomplete from '../VAutocomplete/VAutocomplete'

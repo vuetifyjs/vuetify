@@ -1,6 +1,3 @@
-// Styles
-import './VCarousel.sass'
-
 // Extensions
 import VWindow from '../VWindow/VWindow'
 

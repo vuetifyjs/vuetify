@@ -1,6 +1,3 @@
-// Styles
-import './VBtnToggle.sass'
-
 // Mixins
 import ButtonGroup from '../../mixins/button-group'
 import Colorable from '../../mixins/colorable'

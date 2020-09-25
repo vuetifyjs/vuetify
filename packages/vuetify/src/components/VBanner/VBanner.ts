@@ -1,6 +1,3 @@
-// Styles
-import './VBanner.sass'
-
 // Extensions
 import VSheet from '../VSheet'
 

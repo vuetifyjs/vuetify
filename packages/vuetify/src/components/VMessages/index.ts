@@ -1,3 +1,6 @@
+// Styles
+import './VMessages.sass'
+
 import VMessages from './VMessages'
 
 export { VMessages }

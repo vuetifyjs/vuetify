@@ -1,3 +1,8 @@
+// Styles
+import './VCalendarCategory.sass'
+import './VCalendarDaily.sass'
+import './VCalendarWeekly.sass'
+
 import VCalendar from './VCalendar'
 import VCalendarDaily from './VCalendarDaily'
 import VCalendarWeekly from './VCalendarWeekly'

@@ -1,3 +1,8 @@
+// Styles
+import './VCheckbox.sass'
+import '../../styles/components/_selection-controls.sass'
+import './VSimpleCheckbox.sass'
+
 import VCheckbox from './VCheckbox'
 import VSimpleCheckbox from './VSimpleCheckbox'
 

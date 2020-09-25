@@ -1,3 +1,6 @@
+// Styles
+import './VMain.sass'
+
 import VMain from './VMain'
 
 export { VMain }

@@ -1,6 +1,3 @@
-// Styles
-import './VColorPicker.sass'
-
 // Components
 import VSheet from '../VSheet/VSheet'
 import VColorPickerPreview from './VColorPickerPreview'

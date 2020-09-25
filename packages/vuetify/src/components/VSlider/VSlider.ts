@@ -1,5 +1,3 @@
-import './VSlider.sass'
-
 // Components
 import VInput from '../VInput'
 import { VScaleTransition } from '../transitions'

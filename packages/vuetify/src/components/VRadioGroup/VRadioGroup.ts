@@ -1,7 +1,3 @@
-// Styles
-import '../../styles/components/_selection-controls.sass'
-import './VRadioGroup.sass'
-
 // Extensions
 import VInput from '../VInput'
 import { BaseItemGroup } from '../VItemGroup/VItemGroup'

@@ -1,6 +1,3 @@
-// Styles
-import './VCalendarCategory.sass'
-
 // Types
 import { VNode } from 'vue'
 

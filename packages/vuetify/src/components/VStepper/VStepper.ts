@@ -1,6 +1,3 @@
-// Styles
-import './VStepper.sass'
-
 // Components
 import VStepperStep from './VStepperStep'
 import VStepperContent from './VStepperContent'

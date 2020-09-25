@@ -1,6 +1,3 @@
-// Styles
-import './VDivider.sass'
-
 // Types
 import { VNode } from 'vue'
 

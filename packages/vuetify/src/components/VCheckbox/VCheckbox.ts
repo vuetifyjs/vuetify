@@ -1,7 +1,3 @@
-// Styles
-import './VCheckbox.sass'
-import '../../styles/components/_selection-controls.sass'
-
 // Components
 import VIcon from '../VIcon'
 import VInput from '../VInput'

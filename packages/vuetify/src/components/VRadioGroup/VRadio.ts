@@ -1,6 +1,3 @@
-// Styles
-import './VRadio.sass'
-
 // Components
 import VRadioGroup from './VRadioGroup'
 import VLabel from '../VLabel'

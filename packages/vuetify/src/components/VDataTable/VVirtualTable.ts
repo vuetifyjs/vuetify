@@ -1,5 +1,3 @@
-import './VVirtualTable.sass'
-
 // Components
 import VSimpleTable from './VSimpleTable'
 

@@ -1,5 +1,3 @@
-import './VResponsive.sass'
-
 // Mixins
 import Measurable, { NumberOrNumberString } from '../../mixins/measurable'
 

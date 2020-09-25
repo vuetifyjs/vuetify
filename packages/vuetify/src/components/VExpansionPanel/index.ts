@@ -1,3 +1,6 @@
+// Styles
+import './VExpansionPanel.sass'
+
 import VExpansionPanels from './VExpansionPanels'
 import VExpansionPanel from './VExpansionPanel'
 import VExpansionPanelContent from './VExpansionPanelContent'

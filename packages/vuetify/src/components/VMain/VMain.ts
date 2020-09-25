@@ -1,6 +1,3 @@
-// Styles
-import './VMain.sass'
-
 // Mixins
 import SSRBootable from '../../mixins/ssr-bootable'
 

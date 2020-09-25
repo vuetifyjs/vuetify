@@ -1,5 +1,3 @@
-import './VIcon.sass'
-
 // Mixins
 import BindsAttrs from '../../mixins/binds-attrs'
 import Colorable from '../../mixins/colorable'

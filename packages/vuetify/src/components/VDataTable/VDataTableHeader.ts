@@ -1,6 +1,3 @@
-// Styles
-import './VDataTableHeader.sass'
-
 // Components
 import VDataTableHeaderMobile from './VDataTableHeaderMobile'
 import VDataTableHeaderDesktop from './VDataTableHeaderDesktop'

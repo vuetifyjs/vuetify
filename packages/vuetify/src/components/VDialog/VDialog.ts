@@ -1,6 +1,3 @@
-// Styles
-import './VDialog.sass'
-
 // Components
 import { VThemeProvider } from '../VThemeProvider'
 

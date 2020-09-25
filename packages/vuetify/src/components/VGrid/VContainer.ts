@@ -1,6 +1,3 @@
-import './_grid.sass'
-import './VGrid.sass'
-
 import Grid from './grid'
 
 import mergeData from '../../util/mergeData'

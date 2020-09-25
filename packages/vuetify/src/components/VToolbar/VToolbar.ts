@@ -1,6 +1,3 @@
-// Styles
-import './VToolbar.sass'
-
 // Extensions
 import VSheet from '../VSheet/VSheet'
 

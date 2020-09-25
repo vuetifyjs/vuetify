@@ -1,6 +1,3 @@
-// Styles
-import './VFooter.sass'
-
 // Components
 import VSheet from '../VSheet/VSheet'
 

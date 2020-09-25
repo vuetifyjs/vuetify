@@ -1,6 +1,3 @@
-// Styles
-import './VExpansionPanel.sass'
-
 // Components
 import { BaseItemGroup, GroupableInstance } from '../VItemGroup/VItemGroup'
 import VExpansionPanel from './VExpansionPanel'

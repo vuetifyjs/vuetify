@@ -1,3 +1,6 @@
+// Styles
+import './VItemGroup.sass'
+
 import VItem from './VItem'
 import VItemGroup from './VItemGroup'
 

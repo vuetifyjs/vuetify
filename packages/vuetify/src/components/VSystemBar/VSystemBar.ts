@@ -1,6 +1,3 @@
-// Styles
-import './VSystemBar.sass'
-
 // Mixins
 import Applicationable from '../../mixins/applicationable'
 import Colorable from '../../mixins/colorable'

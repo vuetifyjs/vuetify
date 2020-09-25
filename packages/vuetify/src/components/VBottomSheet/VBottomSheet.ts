@@ -1,5 +1,3 @@
-import './VBottomSheet.sass'
-
 // Extensions
 import VDialog from '../VDialog/VDialog'
 

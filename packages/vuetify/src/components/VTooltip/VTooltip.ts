@@ -1,5 +1,3 @@
-import './VTooltip.sass'
-
 // Mixins
 import Activatable from '../../mixins/activatable'
 import Colorable from '../../mixins/colorable'

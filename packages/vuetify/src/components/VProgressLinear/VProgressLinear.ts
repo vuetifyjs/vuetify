@@ -1,5 +1,3 @@
-import './VProgressLinear.sass'
-
 // Components
 import {
   VFadeTransition,

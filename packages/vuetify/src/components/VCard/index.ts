@@ -1,3 +1,5 @@
+import './VCard.sass'
+
 import VCard from './VCard'
 import { createSimpleFunctional } from '../../util/helpers'
 

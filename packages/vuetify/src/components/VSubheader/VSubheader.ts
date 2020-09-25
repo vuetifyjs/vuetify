@@ -1,6 +1,3 @@
-// Styles
-import './VSubheader.sass'
-
 // Mixins
 import Themeable from '../../mixins/themeable'
 import mixins from '../../util/mixins'

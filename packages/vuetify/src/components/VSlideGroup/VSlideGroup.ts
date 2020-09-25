@@ -1,6 +1,3 @@
-// Styles
-import './VSlideGroup.sass'
-
 // Components
 import VIcon from '../VIcon'
 import { VFadeTransition } from '../transitions'

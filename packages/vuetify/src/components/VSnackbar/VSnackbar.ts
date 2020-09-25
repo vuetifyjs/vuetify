@@ -1,6 +1,3 @@
-// Styles
-import './VSnackbar.sass'
-
 // Components
 import VSheet from '../VSheet/VSheet'
 

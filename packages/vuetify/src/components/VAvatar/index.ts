@@ -1,3 +1,5 @@
+import './VAvatar.sass'
+
 import VAvatar from './VAvatar'
 
 export { VAvatar }

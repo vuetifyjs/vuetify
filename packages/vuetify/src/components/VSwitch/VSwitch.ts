@@ -1,7 +1,3 @@
-// Styles
-import '../../styles/components/_selection-controls.sass'
-import './VSwitch.sass'
-
 // Mixins
 import Selectable from '../../mixins/selectable'
 import VInput from '../VInput'

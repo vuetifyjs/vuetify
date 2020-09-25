@@ -1,5 +1,3 @@
-import '../VDatePickerTable.sass'
-
 // Directives
 import Touch from '../../../directives/touch'
 

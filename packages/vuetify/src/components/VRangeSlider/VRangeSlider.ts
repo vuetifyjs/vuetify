@@ -1,6 +1,3 @@
-// Styles
-import './VRangeSlider.sass'
-
 // Components
 import VSlider from '../VSlider'
 

@@ -1,6 +1,3 @@
-// Styles
-import './VProgressCircular.sass'
-
 // Mixins
 import Colorable from '../../mixins/colorable'
 

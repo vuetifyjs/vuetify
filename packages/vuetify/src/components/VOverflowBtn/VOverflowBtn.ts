@@ -1,6 +1,3 @@
-// Styles
-import './VOverflowBtn.sass'
-
 // Extensions
 import VSelect from '../VSelect/VSelect'
 import VAutocomplete from '../VAutocomplete'

@@ -1,6 +1,3 @@
-// Styles
-import './VEditDialog.sass'
-
 // Mixins
 import Returnable from '../../mixins/returnable'
 import Themeable from '../../mixins/themeable'
