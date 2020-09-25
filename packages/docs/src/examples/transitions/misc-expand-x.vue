@@ -18,7 +18,7 @@
           v-show="expand"
           height="100"
           width="100"
-          class="mx-auto"
+          class="mx-auto secondary"
         ></v-card>
       </v-expand-transition>
     </v-col>
@@ -39,7 +39,7 @@
           v-show="expand2"
           height="100"
           width="100"
-          class="mx-auto"
+          class="mx-auto secondary"
         ></v-card>
       </v-expand-x-transition>
     </v-col>

@@ -12,7 +12,7 @@
     <v-sheet
       :class="radius"
       :max-width="model === 6 ? 128 : 256"
-      class="mx-auto transition-swing"
+      class="mx-auto transition-swing secondary"
       elevation="12"
       height="128"
       width="100%"

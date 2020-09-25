@@ -6,7 +6,7 @@
       md="3"
     >
       <div
-        class="pa-4 text-center grey lighten-2 rounded-0"
+        class="pa-4 text-center secondary rounded-0"
         v-text="`.rounded-0`"
       ></div>
     </v-col>

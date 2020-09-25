@@ -1,7 +1,7 @@
 <template>
   <v-card
     class="pa-md-4 mx-lg-auto"
-    color="white"
+    color="secondary"
     width="250px"
   >
     <v-card-text>

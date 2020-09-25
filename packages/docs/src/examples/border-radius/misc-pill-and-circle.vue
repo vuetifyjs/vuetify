@@ -5,7 +5,7 @@
       md="3"
     >
       <div
-        class="pa-4 grey lighten-2 text-no-wrap rounded-pill"
+        class="pa-4 secondary text-no-wrap rounded-pill"
       >
         .rounded-pill
       </div>
@@ -16,7 +16,7 @@
       md="3"
     >
       <div
-        class="pa-7 grey lighten-2 rounded-circle d-inline-block"
+        class="pa-7 secondary rounded-circle d-inline-block"
       ></div>
 
       <div>.rounded-circle</div>

@@ -18,7 +18,7 @@
       >
         <template v-slot="{ active, toggle }">
           <v-sheet
-            :color="active ? 'grey lighten-4' : undefined"
+            :color="active ? $vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4' : undefined"
             class="px-4 pt-4 pb-3"
             tile
             style="cursor: pointer;"
