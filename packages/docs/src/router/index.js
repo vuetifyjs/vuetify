@@ -26,7 +26,7 @@ export function createRouter (vuetify, store, i18n) {
   const router = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
-    scrollBehavior: (...args) => scrollBehavior(vuetify, ...args),
+    scrollBehavior: (...args) => scrollBehavior(vuetify, store, ...args),
     routes: [
       locale([
         ...Object.keys(redirects).map(k => ({

@@ -120,7 +120,7 @@
 
         this.offsets = offsets
       },
-      findActiveIndex () {
+      async findActiveIndex () {
         if (this.$vuetify.breakpoint.mobile) return
 
         const currentOffset = (
@@ -159,10 +159,14 @@
 
         if (hash === this.hash) return
 
-        this.$router.replace({
+        this.scrolling = true
+
+        await this.$router.replace({
           path: this.path,
           hash,
         })
+
+        this.scrolling = false
       },
       onScroll () {
         clearTimeout(this.timeout)

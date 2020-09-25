@@ -1,10 +1,11 @@
 // Globals
 import { IN_BROWSER } from '@/util/globals'
 
-export default async function (vuetify, to, from, savedPosition) {
+export default async function (vuetify, store, to, from, savedPosition) {
   if (
     !IN_BROWSER ||
-    (from && to.path === from.path)
+    (from && to.path === from.path) ||
+    store.state.app.scrolling
   ) return
 
   let scrollTo = 0
