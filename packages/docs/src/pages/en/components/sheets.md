@@ -45,7 +45,7 @@ The **rounded** prop adds a default `border-radius` of _4px_. By default, the `v
 
 Sheets and components based on them can have different sizes and colors.
 
-The `v-sheet` component accepts custom [Material Design Color](/styles/colors/) values such as `warning`, `amber darken-3`, and `deep-purple accent`—as well as *rgb, rgba, and hexidecimal* values.
+The `v-sheet` component accepts custom [Material Design Color](/styles/colors/) values such as `warning`, `amber darken-3`, and `deep-purple accent`—as well as *rgb, rgba, and hexadecimal* values.
 
 <example file="v-sheet/prop-color" />
 

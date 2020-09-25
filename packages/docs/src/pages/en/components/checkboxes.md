@@ -11,7 +11,7 @@ related:
 
 # Checkboxes
 
-The `v-checkbox` component provides users the ability to choose between two distinct values. These are very similiar to a switch and can be used in complex forms and checklists. A simpler version, `v-simple-checkbox` is used primarily as a lightweight alternative in data-table components to select rows or display inline boolean data.
+The `v-checkbox` component provides users the ability to choose between two distinct values. These are very similar to a switch and can be used in complex forms and checklists. A simpler version, `v-simple-checkbox` is used primarily as a lightweight alternative in data-table components to select rows or display inline boolean data.
 <entry-ad />
 
 ## Usage

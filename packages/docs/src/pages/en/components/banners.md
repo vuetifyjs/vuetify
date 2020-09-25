@@ -1,7 +1,7 @@
 ---
 meta:
   title: Banner component
-  description: The banner component displays an important and succint message for a user to address. It can also provide actions for user to take.
+  description: The banner component displays an important and succinct message for a user to address. It can also provide actions for user to take.
   keywords: banners, vuetify banner component, vue banner component
 related:
   - /components/alerts/

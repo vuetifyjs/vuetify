@@ -95,7 +95,7 @@ If your icons are purely decorative, you’ll need to manually add an attribute 
 
 ### Semantic Font Icons
 
-If your icons have semantic meaning, you need to provide a text alternative inside a (or similar) element. Also include appropriate CSS to visually hide the element while keeping it accessible to assisitive technologies.
+If your icons have semantic meaning, you need to provide a text alternative inside a (or similar) element. Also include appropriate CSS to visually hide the element while keeping it accessible to assistive technologies.
 
 ```html
 <v-icon aria-hidden="false">
