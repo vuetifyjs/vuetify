@@ -212,7 +212,7 @@
         const indent = attributeArray.length ? '\r  ' : ''
         const tail = `${attributeArray.length ? '\r' : ''}></${this.name}>`
 
-        return `<${this.name}${indent}${attributeArray.join('\r\t')}${tail}`
+        return `<${this.name}${indent}${attributeArray.join('\r  ')}${tail}`
       },
     },
 
