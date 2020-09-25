@@ -2,12 +2,10 @@
   <div>
     <v-autocomplete
       v-model="search"
-      :background-color="`grey lighten-${isFocused ? '5' : '3'}`"
+      :background-color="backgroundColor"
       :class="isFocused ? 'rounded-b-0 rounded-t-lg' : 'rounded-lg'"
       :items="releases"
-      :menu-props="{
-        contentClass: 'notes-autocomplete rounded-b-lg elevation-0 grey lighten-5'
-      }"
+      :menu-props="menuProps"
       class="mt-8 mb-12"
       dense
       flat
@@ -157,7 +155,14 @@
 
         return stat.modified
       },
-
+      backgroundColor () {
+        return this.$vuetify.theme.dark ? undefined : `grey lighten-${this.isFocused ? '5' : '3'}`
+      },
+      menuProps () {
+        return {
+          contentClass: `notes-autocomplete rounded-b-lg elevation-0 grey ${this.$vuetify.theme.dark ? 'darken-4' : 'lighten-5'}`,
+        }
+      },
       tooltips () {
         return [
           {
