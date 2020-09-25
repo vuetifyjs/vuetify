@@ -28,7 +28,7 @@ Vuetify is a complete UI framework built on top of Vue.js. The goal of the proje
 
 Vuetify takes a mobile first approach to design which means your application just works out of the box—whether it's on a phone, tablet, or desktop computer. Over
 
-If you are an experienced developer and want to compare Vuetify to other libraries/frameworks, check out our [Why Vuetify?](/introduction/why-vuetify/) page.
+If you are an experienced developer and want to compare Vuetify to other libraries/frameworks, check out our [Vue Framework Comparison Chart](#comparison).
 
 ## Why Vuetify?
 

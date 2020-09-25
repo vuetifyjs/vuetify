@@ -1,5 +1,6 @@
 <template>
   <v-sheet
+    id="comparison"
     class="mb-12 text-body-2 mx-auto"
     max-width="1024"
     outlined
@@ -12,11 +13,11 @@
 
       <thead>
         <tr>
-          <th width="275px">
+          <th>
             <i18n
-              tag="strong"
-              class="text-body-1 font-weight-bold"
+              class="text-h6"
               path="features"
+              tag="strong"
             />
           </th>
 
@@ -25,13 +26,15 @@
             :key="i"
             class="text-center text-no-wrap"
           >
-            <div class="d-flex align-center justify-center">
+            <div class="d-flex align-center justify-center text-body-2">
               <v-img
                 v-if="framework.src"
                 :src="framework.src"
                 class="mr-2"
                 contain
+                height="16"
                 max-width="16"
+                width="16"
               />
 
               <div v-text="framework.name" />
@@ -46,9 +49,9 @@
           :key="i"
         >
           <i18n
-            tag="td"
-            class="text--secondary text-left"
             :path="`comparison.${key}`"
+            class="text--secondary text-left"
+            tag="td"
           />
 
           <td
@@ -77,12 +80,12 @@
       <tfoot class="text-center">
         <tr>
           <td
-            colspan="7"
             class="text-caption font-italic text--disabled"
+            colspan="7"
           >
             <i18n
-              tag="div"
               path="comparison.average"
+              tag="div"
             />
           </td>
         </tr>
@@ -107,45 +110,45 @@
       ],
       frameworks: [
         {
-          name: 'Vuetify',
-          src: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-light.png',
-          tree: 'Automatic',
-          release: 'Weekly',
           a11y: true,
-          lts: true,
-          rtl: true,
           enterprise: true,
+          lts: true,
+          name: 'Vuetify',
+          release: 'Weekly',
+          rtl: true,
+          src: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-light.png',
           themes: true,
+          tree: 'Automatic',
         },
         {
+          a11y: true,
           name: 'BootstrapVue',
           release: 'Bi-Weekly',
-          src: 'https://cdn.vuetifyjs.com/images/competitors/bootstrap-vue.png',
-          tree: 'Manual',
-          a11y: true,
           rtl: true,
+          src: 'https://cdn.vuetifyjs.com/images/competitors/bootstrap-vue.png',
           themes: true,
+          tree: 'Manual',
         },
         {
-          name: 'Buefy',
-          src: 'https://cdn.vuetifyjs.com/images/competitors/buefy.png',
-          release: 'Bi-Monthly',
-          tree: 'Manual',
           a11y: true,
+          name: 'Buefy',
+          release: 'Bi-Monthly',
+          src: 'https://cdn.vuetifyjs.com/images/competitors/buefy.png',
+          tree: 'Manual',
         },
         {
           name: 'Element UI',
-          src: 'https://cdn.vuetifyjs.com/images/competitors/element-ui.png',
           release: 'Bi-Weekly',
-          tree: 'Manual',
           rtl: true,
+          src: 'https://cdn.vuetifyjs.com/images/competitors/element-ui.png',
+          tree: 'Manual',
         },
         {
           name: 'Quasar',
-          src: 'https://cdn.vuetifyjs.com/images/competitors/quasar.png',
-          tree: 'Automatic',
           release: 'Bi-Weekly',
           rtl: true,
+          src: 'https://cdn.vuetifyjs.com/images/competitors/quasar.png',
+          tree: 'Automatic',
         },
       ],
     }),
