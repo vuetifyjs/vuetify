@@ -25,7 +25,7 @@ const actions = {
       sort: '-created_at',
     })
 
-    const products = JSON.parse(objects[0].metadata.products)
+    const products = objects && objects.length ? JSON.parse(objects[0].metadata.products) : []
 
     commit('all', products)
 

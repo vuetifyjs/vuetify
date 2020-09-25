@@ -1,7 +1,7 @@
 <template>
 
   <v-row>
-    <template v-if="!products.length">
+    <template v-if="!products">
       <v-col
         v-for="n in 10"
         :key="n"
@@ -12,6 +12,12 @@
           min-height="185"
           type="image"
         />
+      </v-col>
+    </template>
+
+    <template v-else-if="products.length === 0">
+      <v-col>
+        <v-alert type="error">Problem fetching themes</v-alert>
       </v-col>
     </template>
 
@@ -81,7 +87,7 @@
   export default {
     name: 'PremiumThemes',
 
-    data: () => ({ products: [] }),
+    data: () => ({ products: null }),
 
     async beforeCreate () {
       if (!this.$store.hasModule('shopify')) {
