@@ -21,16 +21,31 @@ A card has 4 basic components, `v-card-title`, `v-card-subtitle`, `v-card-text` 
 
 <usage name="v-card" />
 
-### Functional Components
-
-- `v-card-actions`: The container used for placing **actions** for a card, such as [v-btn](/components/buttons) or [v-menu](/components/menus). Also applies *special margin* to buttons so that they properly line up with other card content areas.
-- `v-card-subtitle`: Provides a default **font-size** and **padding** for card subtitles. Font-size can be overwritten with [typography classes](/styles/typography).
-- `v-card-text`: Primarily used for **text content** in a card. Applies padding for text, reduces its font-size to .875rem.
-- `v-card-title`: Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with [typography classes](/styles/typography).
-
 ## API
 
 - [v-card](/api/v-card)
+- [v-card-actions](/api/v-card-actions)
+- [v-card-subtitle](/api/v-card-subtitle)
+- [v-card-text](/api/v-card-text)
+- [v-card-title](/api/v-card-title)
+
+## Functional Components
+
+### v-card-actions
+
+The container used for placing **actions** for a card, such as [v-btn](/components/buttons) or [v-menu](/components/menus). Also applies *special margin* to buttons so that they properly line up with other card content areas.
+
+### v-card-subtitle
+
+Provides a default **font-size** and **padding** for card subtitles. Font-size can be overwritten with [typography classes](/styles/typography).
+
+### v-card-text
+
+Primarily used for **text content** in a card. Applies padding for text, reduces its font-size to .875rem.
+
+### v-card-title
+
+Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with [typography classes](/styles/typography).
 
 ## Examples
 
