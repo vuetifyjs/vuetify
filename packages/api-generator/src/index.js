@@ -148,7 +148,26 @@ const getApi = (name, locales) => {
   else return getComponentApi(name, locales)
 }
 
-const EXCLUDES = ['VMessages', 'VLabel', 'VVirtualTable']
+const EXCLUDES = [
+  'VCalendarCategory',
+  'VColorPickerCanvas',
+  'VColorPickerSwatches',
+  'VCounter',
+  'VData',
+  'VDatePickerDateTable',
+  'VDatePickerHeader',
+  'VDatePickerMonthTable',
+  'VDatePickerTitle',
+  'VDatePickerYears',
+  'VItem',
+  'VLabel',
+  'VMessages',
+  'VPicker',
+  'VTableOverflow',
+  'VTimePickerClock',
+  'VTimePickerTitle',
+  'VVirtualTable',
+]
 
 const getComponentsApi = locales => {
   const components = []
