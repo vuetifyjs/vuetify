@@ -46,7 +46,7 @@ The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstra
 
 ### v-spacer
 
-v-spacer description
+`v-spacer` is a basic yet versatile spacing component used to distribute remaining width in-between a parents child components. When placing a single `v-spacer` before or after the child components, the components will push to the right and left of its container. When more than one `v-spacer`'s are used between multiple components, the remaining width is evenly distributed between each spacer.
 
 ## Caveats
 
