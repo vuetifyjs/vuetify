@@ -1,10 +1,10 @@
-# docs-next
+# Docs
 
-![Crowdin Uploads](https://github.com/vuetifyjs/docs-next/workflows/Crowdin%20Uploads/badge.svg)
+![Crowdin Uploads](https://github.com/vuetifyjs/vuetify/workflows/Crowdin%20Uploads/badge.svg)
 
-![Crowdin Downloads](https://github.com/vuetifyjs/docs-next/workflows/Crowdin%20Downloads/badge.svg)
+![Crowdin Downloads](https://github.com/vuetifyjs/vuetify/workflows/Crowdin%20Downloads/badge.svg)
 
-![Vercel Deploy](https://github.com/vuetifyjs/docs-next/workflows/Vercel%20Deploy/badge.svg)
+![Vercel Deploy](https://github.com/vuetifyjs/vuetify/workflows/Vercel%20Deploy/badge.svg)
 
 ## Project setup
 

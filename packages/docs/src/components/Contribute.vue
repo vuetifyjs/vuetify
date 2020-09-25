@@ -57,7 +57,7 @@
         return stat.modified
       },
       href () {
-        return `https://github.com/vuetifyjs/docs-next/tree/${this.branch}/src/pages/en/${this.category}/${this.page}.md`
+        return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/src/pages/en/${this.category}/${this.page}.md`
       },
     },
   }
