@@ -37,7 +37,7 @@ The following releases are currently under development:
 
 ## Long-term support (LTS)
 
-The following versions have continued maintainance for backwards compatible fixes, major bugs, and security vulnerabilities. More information is located on the [Long-term support](/introduciton/long-term-support/) page.
+The following versions have continued maintenance for backwards compatible fixes, major bugs, and security vulnerabilities. More information is located on the [Long-term support](/introduction/long-term-support/) page.
 
 ### v1.5
 

@@ -48,7 +48,7 @@ You are required to include the specified icon library (even if using default). 
 
 ### Material Design Icons
 
-Use this tool to search for any Material Design Icons and copy them to your clickboard by clicking the item.
+Use this tool to search for any Material Design Icons and copy them to your clipboard by clicking the item.
 
 <icon-list />
 

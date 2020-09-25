@@ -11,7 +11,7 @@ related:
 
 # Wireframes
 
-The Vuetify **layout system** makes it easy to rapidly scaffold an application's UI regions with litte effort.
+The Vuetify **layout system** makes it easy to rapidly scaffold an application's UI regions with little effort.
 
 <promoted-ad slug="vuetify-zero-theme-pro" />
 
