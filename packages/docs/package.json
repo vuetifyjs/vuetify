@@ -21,7 +21,7 @@
     "lint:md": "markdownlint --config .markdownlintrc src/pages/en",
     "fix:md": "markdownlint --config .markdownlintrc src/pages/en --fix",
     "prerender": "node build/prerender",
-    "prod": "ws -p 8080 -z -d dist"
+    "prod": "ws -z -d dist"
   },
   "dependencies": {
     "core-js": "^3.6.4",
