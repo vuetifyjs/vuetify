@@ -7,19 +7,30 @@
 <script>
   // Utilities
   import { call, get, sync } from 'vuex-pathify'
+  import { genMetaData } from '@/util/metadata'
   import { wait, waitForReadystate } from '@/util/helpers'
+
+  // Data
+  import metadata from '@/data/metadata'
 
   export default {
     name: 'App',
 
-    metaInfo: {
-      title: 'Welcome to Vuetify',
-      titleTemplate: '%s | Vuetify',
+    metaInfo () {
+      const suffix = this.name !== 'Home' ? ' — Vuetify' : ''
+
+      return {
+        ...genMetaData(...Object.values(metadata)),
+        titleTemplate: chunk => `${chunk}${suffix}`,
+      }
     },
 
     computed: {
+      ...get('route', [
+        'hash',
+        'name',
+      ]),
       scrolling: sync('app/scrolling'),
-      hash: get('route/hash'),
     },
 
     async mounted () {

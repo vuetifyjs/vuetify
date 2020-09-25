@@ -1,5 +1,5 @@
 import Meta from 'vue-meta'
 
 export function useMeta (app) {
-  app.use(Meta)
+  app.use(Meta, { refreshOnceOnNavigation: true })
 }

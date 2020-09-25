@@ -1,11 +1,20 @@
 // Imports
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
+const metadata = require('../../../src/data/metadata')
 
 // Globals
 const { IS_PROD } = require('../../../src/util/globals')
 
 process.env.VUE_ENV = 'client'
+
+function useMetadata (template, filename) {
+  return [{
+    template: `src/${template}.template.html`,
+    filename: `${filename || `_${template}`}.html`,
+    ...metadata,
+  }]
+}
 
 module.exports = config => {
   require('./base')(config)
@@ -19,15 +28,11 @@ module.exports = config => {
   config.plugin('VueSSRClientPlugin')
     .use(VueSSRClientPlugin)
 
-  config.plugin('html-spa').use(HtmlWebpackPlugin, [{
-    template: 'src/spa.template.html',
-    filename: '_fallback.html',
-  }])
+  config.plugin('html-spa')
+    .use(HtmlWebpackPlugin, useMetadata('spa', '_fallback'))
 
-  config.plugin('html-crowdin').use(HtmlWebpackPlugin, [{
-    template: 'src/crowdin.template.html',
-    filename: '_crowdin.html',
-  }])
+  config.plugin('html-crowdin')
+    .use(HtmlWebpackPlugin, useMetadata('crowdin'))
 
   config.plugin('pwa').after('html-spa')
 
