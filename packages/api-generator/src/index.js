@@ -1,6 +1,6 @@
 const Vue = require('vue')
 const Vuetify = require('vuetify')
-const { kebabCase, pascalize } = require('./helpers/text')
+const { camelCase, kebabCase, pascalize } = require('./helpers/text')
 const { parseComponent, parseSassVariables, parseGlobalSassVariables } = require('./helpers/parsing')
 const deepmerge = require('./helpers/merge')
 
@@ -48,13 +48,14 @@ const addComponentApiDescriptions = (componentName, api, locales) => {
 
     for (const category of ['props', 'events', 'slots', 'functions', 'sass']) {
       for (const item of api[category]) {
+        const name = camelCase(item.name)
         let description = ''
         if (category === 'sass') {
-          description = (sources[0] && sources[0][category] && sources[0][category][item.name]) || ''
+          description = (sources[0] && sources[0][category] && sources[0][category][name]) || ''
         } else {
           description = sources.reduce((str, source) => {
             if (str) return str
-            return source[category] && source[category][item.name]
+            return source[category] && source[category][name]
           }, null)
         }
 

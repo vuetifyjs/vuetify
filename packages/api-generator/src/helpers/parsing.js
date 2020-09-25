@@ -63,7 +63,7 @@ function genProp (name, prop, mixins, cmp) {
   const source = (propSource.slice(-10) === 'transition') ? 'transitions' : propSource
 
   return {
-    name,
+    name: kebabCase(name),
     type,
     default: getPropDefault(prop.default, type),
     source,
