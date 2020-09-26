@@ -4,7 +4,7 @@
     tag="section"
   >
     <v-responsive
-      :max-width="category !== 'api' ? 868 : undefined"
+      :max-width="category !== 'api' ? 868 : 1368"
       class="mx-auto overflow-visible"
     >
       <keep-alive max="3">

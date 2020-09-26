@@ -1,6 +1,7 @@
 <template>
   <app-sheet>
     <v-simple-table
+      class="api-table"
       v-bind="$attrs"
       v-on="$listeners"
     >
@@ -9,6 +10,7 @@
           <th
             v-for="header in headers"
             :key="header"
+            :class="header"
           >
             <div
               class="text-capitalize"
@@ -138,15 +140,17 @@
       getType (value) {
         const type = Array.isArray(value) ? value.join(' | ') : value
 
-        return Prism.highlight(type, Prism.languages.typescript)
+        return Prism.highlight(String(type), Prism.languages.typescript)
       },
       getDefaultValue (item) {
         const { default: defaultValue } = item
-        const asd = defaultValue == null || typeof defaultValue === 'string'
+        const str = defaultValue == null || typeof defaultValue === 'string'
           ? String(defaultValue)
           : JSON.stringify(defaultValue, null, 2)
 
-        return Prism.highlight(asd, this.field === 'sass' ? Prism.languages.scss : Prism.languages.typescript)
+        if (str.startsWith('gh:')) return `<a target="_blank" href="https://github.com/vuetifyjs/vuetify/search?q=${str.slice(3)}">${str.slice(3)}</a>`
+
+        return Prism.highlight(str, this.field === 'sass' ? Prism.languages.scss : Prism.languages.typescript)
       },
       getLanguage (item) {
         if (item.snippet) return 'html'
@@ -158,8 +162,9 @@
         return this.genTypescript(item.example || item.props)
       },
       genTypescript (obj) {
-        const str = JSON.stringify(obj, null, 2)
+        if (typeof obj === 'string') return obj
 
+        const str = JSON.stringify(obj, null, 2)
         return str.replace(/: "(.*)"/g, ': $1').replace(/"(.*)":/g, '$1:')
       },
       genHtml (obj) {
@@ -173,24 +178,26 @@
   }
 </script>
 
-<style scoped>
-  .regular-row td {
-    padding: 8px 16px !important;
-  }
+<style lang="sass" scoped>
+  .api-table
+    th
+      &.name
+        width: 25%
+      &.type
+        width: 15%
 
-  .regular-row.has-extra-row td {
-    border-bottom: none !important;
-  }
+    .regular-row td
+      padding: 8px 16px !important
 
-  .extra-row:hover {
-    background: initial !important;
-  }
+    .regular-row.has-extra-row td
+      border-bottom: none !important
 
-  .extra-row td {
-    padding: 8px 0 !important;
-  }
+    .extra-row:hover
+      background: initial !important
 
-  .v-markdown ::v-deep p {
-    margin-bottom: 0;
-  }
+    .extra-row td
+      padding: 8px 0 !important
+
+    .v-markdown ::v-deep p
+      margin-bottom: 0
 </style>

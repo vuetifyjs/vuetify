@@ -1,7 +1,6 @@
 const Vue = require('vue')
 const Vuetify = require('vuetify')
 const { components: excludes } = require('./helpers/excludes')
-const defaultSlots = require('./helpers/default-slots')
 const { camelCase, kebabCase, pascalize } = require('./helpers/text')
 const { parseComponent, parseSassVariables, parseGlobalSassVariables } = require('./helpers/parsing')
 const deepmerge = require('./helpers/merge')
@@ -18,24 +17,23 @@ const loadLocale = (componentName, locale, fallback = {}) => {
 }
 
 const loadMap = (componentName, fallback = {}) => {
-  const hasDefault = defaultSlots.includes(componentName)
-  const defaultSlot = { name: 'default', props: undefined }
   try {
     const { [componentName]: map } = require(`./maps/${componentName}`)
-    map.slots = map.slots || []
-    const foundDefault = map.slots && map.slots.findIndex(slot => slot.name === 'default') > -1
-    if (!foundDefault && hasDefault) {
-      map.slots.push(defaultSlots)
-    }
-    const combined = Object.assign(fallback, map)
+
+    // Make sure all names are kebab-case
+    const combined = Object.assign(fallback, Object.keys(map).reduce((obj, key) => {
+      obj[key] = map[key].map(item => ({
+        ...item,
+        name: kebabCase(item.name),
+      }))
+      return obj
+    }, {}))
+
     // Make sure things are sorted
     const categories = ['slots', 'events', 'functions']
     categories.forEach(category => combined[category].sort((a, b) => a.name.localeCompare(b.name)))
     return combined
   } catch {
-    if (hasDefault) {
-      fallback.slots.push(defaultSlot)
-    }
     return fallback
   }
 }
@@ -60,7 +58,7 @@ const addComponentApiDescriptions = (componentName, api, locales) => {
 
     for (const category of ['props', 'events', 'slots', 'functions', 'sass']) {
       for (const item of api[category]) {
-        const name = camelCase(item.name)
+        const name = category === 'props' ? camelCase(item.name) : item.name
         let description = ''
         if (category === 'sass') {
           description = (sources[0] && sources[0][category] && sources[0][category][name]) || ''
