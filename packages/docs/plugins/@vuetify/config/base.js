@@ -4,7 +4,7 @@ const Mode = require('frontmatter-markdown-loader/mode')
 const path = require('path')
 
 // Globals
-const { IS_PROD } = require('../../../src/util/globals')
+const IS_PROD = process.env.NODE_ENV === 'production'
 
 module.exports = config => {
   config

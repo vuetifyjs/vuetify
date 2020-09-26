@@ -4,8 +4,7 @@ const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const metadata = require('../../../src/data/metadata')
 
 // Globals
-const { IS_PROD } = require('../../../src/util/globals')
-
+const IS_PROD = process.env.NODE_ENV === 'production'
 process.env.VUE_ENV = 'client'
 
 function useMetadata (template, filename) {
