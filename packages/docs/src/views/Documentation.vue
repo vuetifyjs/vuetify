@@ -17,7 +17,7 @@
 <script>
   // Utilities
   import { error } from '@/util/routes'
-  import { genMetaData } from '@/util/metadata'
+  import { genMetaInfo } from '@/util/metadata'
   import { get, sync } from 'vuex-pathify'
   import { IN_BROWSER } from '@/util/globals'
   import { localeLookup } from '@/i18n/util'
@@ -76,7 +76,7 @@
         title = '',
       } = meta
 
-      return genMetaData(
+      return genMetaInfo(
         title,
         description,
         keywords,

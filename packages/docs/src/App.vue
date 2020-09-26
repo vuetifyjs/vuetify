@@ -7,7 +7,7 @@
 <script>
   // Utilities
   import { call, get, sync } from 'vuex-pathify'
-  import { genMetaData } from '@/util/metadata'
+  import { genAppMetaInfo } from '@/util/metadata'
   import { wait, waitForReadystate } from '@/util/helpers'
 
   // Data
@@ -19,10 +19,10 @@
     metaInfo () {
       const suffix = this.name !== 'Home' ? ' — Vuetify' : ''
 
-      return {
-        ...genMetaData(...Object.values(metadata)),
+      return genAppMetaInfo({
+        ...metadata,
         titleTemplate: chunk => `${chunk}${suffix}`,
-      }
+      })
     },
 
     computed: {
