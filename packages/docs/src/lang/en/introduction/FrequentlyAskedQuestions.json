@@ -103,7 +103,7 @@
       ]
     },
     {
-      "q": "### How do a report a bug or request a feature",
+      "q": "### How do I report a bug or request a feature",
       "a": "In order to ensure all required information is provided, we have created an [Issue Generator](https://issues.vuetifyjs.com) that helps you through the process. Any issue created not using the generator will automatically be closed, so please use it."
     },
     {
