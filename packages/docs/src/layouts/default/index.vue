@@ -72,8 +72,9 @@
     },
 
     methods: {
-      init () {
+      async init () {
         this.getPages()
+        this.$load(['https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css'])
       },
       async getPages () {
         const locale = localeLookup(this.locale)

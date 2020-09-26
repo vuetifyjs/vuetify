@@ -7,24 +7,31 @@
 // Globals
 import { IS_SERVER } from '@/util/globals'
 
-export async function loadFonts () {
-  if (IS_SERVER) return
+export async function loadFonts (app) {
+  const loaded = []
 
-  const WebFontLoader = await import(/* webpackChunkName: "webfontloader" */'webfontloader')
+  const webFontLoader = !IS_SERVER
+    ? await import(/* webpackChunkName: "webfontloader" */'webfontloader')
+    : { load: () => {} }
 
-  WebFontLoader.load({
+  app.prototype.$load = pending => {
+    if (!pending) return
+
+    const urls = pending.filter(url => !loaded.includes(url))
+
+    if (!urls.length) return
+
+    loaded.push(...urls)
+
+    webFontLoader.load({
+      custom: { urls },
+      timeout: 2000,
+    })
+  }
+
+  webFontLoader.load({
     google: {
       families: ['Roboto:100,300,400,500,700,900&display=swap'],
-    },
-    custom: {
-      families: [
-        'Material Design Icons',
-        'Font Awesome 5',
-      ],
-      urls: [
-        'https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css',
-        'https://use.fontawesome.com/releases/v5.0.8/css/all.css',
-      ],
     },
   })
 }

@@ -7,6 +7,9 @@ related:
   - /features/icons/
   - /components/buttons/
   - /components/cards/
+assets:
+  - https://use.fontawesome.com/releases/v5.0.8/css/all.css
+  - https://fonts.googleapis.com/css?family=Material+Icons
 ---
 
 # Icons

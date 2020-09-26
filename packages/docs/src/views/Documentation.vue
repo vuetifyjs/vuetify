@@ -107,6 +107,7 @@
       }
 
       this.init(this.md)
+      this.$load(this.frontmatter.assets)
     },
 
     methods: {
