@@ -1,5 +1,6 @@
 const Vue = require('vue')
 const Vuetify = require('vuetify')
+const { components: excludes } = require('./helpers/excludes')
 const { camelCase, kebabCase, pascalize } = require('./helpers/text')
 const { parseComponent, parseSassVariables, parseGlobalSassVariables } = require('./helpers/parsing')
 const deepmerge = require('./helpers/merge')
@@ -149,27 +150,6 @@ const getApi = (name, locales) => {
   else return getComponentApi(name, locales)
 }
 
-const EXCLUDES = [
-  'VCalendarCategory',
-  'VColorPickerCanvas',
-  'VColorPickerSwatches',
-  'VCounter',
-  'VData',
-  'VDatePickerDateTable',
-  'VDatePickerHeader',
-  'VDatePickerMonthTable',
-  'VDatePickerTitle',
-  'VDatePickerYears',
-  'VItem',
-  'VLabel',
-  'VMessages',
-  'VPicker',
-  'VTableOverflow',
-  'VTimePickerClock',
-  'VTimePickerTitle',
-  'VVirtualTable',
-]
-
 const getComponentsApi = locales => {
   const components = []
   const installedComponents = Vue.options._base.options.components
@@ -177,7 +157,7 @@ const getComponentsApi = locales => {
 
   for (const componentName in installedComponents) {
     if (!componentNameRegex.test(componentName)) continue
-    if (EXCLUDES.includes(componentName)) continue
+    if (excludes.includes(componentName)) continue
 
     const kebabName = kebabCase(componentName)
 
@@ -196,6 +176,7 @@ const getDirectivesApi = locales => {
 
   return directives
 }
+
 const getCompleteApi = locales => {
   return [
     getVuetifyApi(locales),

@@ -1,5 +1,6 @@
 const Vue = require('vue')
 const fs = require('fs')
+const { props: excludes } = require('./excludes')
 const { kebabCase, pascalize } = require('./text')
 
 function parseFunctionParams (func) {
@@ -72,11 +73,13 @@ function genProp (name, prop, mixins, cmp) {
 
 function parseProps (component, array = [], mixin = false) {
   const options = component.options
+  const name = component.options.name
   const mixins = [component.super].concat(options.extends).concat(options.mixins).filter(m => !!m)
   const props = options.props || {}
 
   Object.keys(props).forEach(key => {
-    const generated = genProp(key, props[key], mixins, component.options.name)
+    if (excludes[name] && excludes[name].includes(key)) return
+    const generated = genProp(key, props[key], mixins, name)
     array.push(generated)
   })
 
