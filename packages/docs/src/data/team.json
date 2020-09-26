@@ -306,5 +306,18 @@
     "location": "PA, USA",
     "name": "Philip Diffenderfer",
     "team": "contributors"
+  },
+  "Leespiker": {
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "linkedin": "lee-marlow",
+    "location": "Seattle, WA",
+    "name": "Lee Marlow",
+    "team": "contributors",
+    "twitter": "Leespiker"
   }
 }
