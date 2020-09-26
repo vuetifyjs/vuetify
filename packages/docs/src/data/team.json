@@ -292,5 +292,19 @@
     "location": "Portugal",
     "name": "Pedro Vieira",
     "team": "contributors"
+  },
+  "ClickerMonkey": {
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "linkedin": "philip-diffenderfer-7890b323",
+    "twitter": "clickermonkey",
+    "work": "Unanet",
+    "location": "PA, USA",
+    "name": "Philip Diffenderfer",
+    "team": "contributors"
   }
 }
