@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'master'
-      - 'docs/import-next'
     paths:
     - 'packages/api-generator/src/locale/en/**'
     - 'packages/docs/src/i18n/messages/en.json'
