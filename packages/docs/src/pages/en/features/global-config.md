@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Global Configuration
+  title: Global configuration
   description: Vuetify.config is an object containing global configuration options that modify the bootstrapping of your project.
   keywords: vuetify config, global config, global vuetify config, configure vuetify options
 related:
@@ -9,9 +9,9 @@ related:
   - /features/presets/
 ---
 
-# Global Configuration
+# Global configuration
 
-Vuetify.config is an object containing global configuration options that modify bootstrapping options.
+`Vuetify.config` is an object containing global configuration options for modifying bootstrapping options.
 
 <entry-ad />
 

@@ -11,7 +11,7 @@ Vuetify is _not_ a one person show. We have a very active and engaged team that 
 
 ## Company
 
-While Vuetify (the framework) is [MIT Licensed](https://opensource.org/licenses/MIT) and Open Source, Vuetify (the company) is owned and operated by John and Heather Leider as a full-time Open Source business. You can support them by sponsoring Vuetify on **GitHub**.
+While Vuetify (the framework) is [MIT Licensed](https://opensource.org/licenses/MIT) and [Open Source](https://opensource.com/resources/what-open-source), Vuetify (the company) is owned and operated by John and Heather Leider as a full-time Open Source business. You can support them by sponsoring Vuetify on **GitHub**.
 
 <promoted-ad slug="vuetify-github-sponsors" />
 
@@ -19,13 +19,15 @@ While Vuetify (the framework) is [MIT Licensed](https://opensource.org/licenses/
 
 ## Core Team
 
-The core development team are Open Source developers that help guide the direction of the Vuetify and its ecosystem.
+The core development team are Open Source developers that help guide the direction of Vuetify and its ecosystem.
 
 <promoted-ad slug="vuetify-open-collective" />
 
 <team-members team="core" />
 
 ## Contributors
+
+From updating docs to fixing bugs to adding new components, contributors actively work towards improving Vuetify.
 
 <team-members team="contributors" />
 

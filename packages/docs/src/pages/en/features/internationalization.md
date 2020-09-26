@@ -91,10 +91,6 @@ export default new Vuetify({
 })
 ```
 
-## API
-
-- [internationalization](/api/internationalization)
-
 ## Caveats
 
 <alert type="info">
