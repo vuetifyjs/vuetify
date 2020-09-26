@@ -1,6 +1,7 @@
 const Vue = require('vue')
 const Vuetify = require('vuetify')
 const { components: excludes } = require('./helpers/excludes')
+const defaultSlots = require('./helpers/default-slots')
 const { camelCase, kebabCase, pascalize } = require('./helpers/text')
 const { parseComponent, parseSassVariables, parseGlobalSassVariables } = require('./helpers/parsing')
 const deepmerge = require('./helpers/merge')
@@ -17,14 +18,24 @@ const loadLocale = (componentName, locale, fallback = {}) => {
 }
 
 const loadMap = (componentName, fallback = {}) => {
+  const hasDefault = defaultSlots.includes(componentName)
+  const defaultSlot = { name: 'default', props: undefined }
   try {
-    const map = require(`./maps/${componentName}`)
-    const combined = Object.assign(fallback, map[componentName])
+    const { [componentName]: map } = require(`./maps/${componentName}`)
+    map.slots = map.slots || []
+    const foundDefault = map.slots && map.slots.findIndex(slot => slot.name === 'default') > -1
+    if (!foundDefault && hasDefault) {
+      map.slots.push(defaultSlots)
+    }
+    const combined = Object.assign(fallback, map)
     // Make sure things are sorted
     const categories = ['slots', 'events', 'functions']
     categories.forEach(category => combined[category].sort((a, b) => a.name.localeCompare(b.name)))
     return combined
   } catch {
+    if (hasDefault) {
+      fallback.slots.push(defaultSlot)
+    }
     return fallback
   }
 }
