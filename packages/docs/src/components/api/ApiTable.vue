@@ -182,9 +182,11 @@
   .api-table
     th
       &.name
-        width: 25%
+        width: 20%
       &.type
         width: 15%
+      &.signature
+        width: 25%
 
     .regular-row td
       padding: 8px 16px !important

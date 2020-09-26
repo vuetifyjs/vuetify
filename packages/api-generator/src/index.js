@@ -20,14 +20,14 @@ const loadMap = (componentName, fallback = {}) => {
   try {
     const { [componentName]: map } = require(`./maps/${componentName}`)
 
-    // Make sure all names are kebab-case
-    const combined = Object.assign(fallback, Object.keys(map).reduce((obj, key) => {
-      obj[key] = map[key].map(item => ({
+    // Make sure all prop names are kebab-case
+    const combined = Object.assign(fallback, {
+      ...map,
+      props: (map.props || []).map(item => ({
         ...item,
         name: kebabCase(item.name),
-      }))
-      return obj
-    }, {}))
+      })),
+    })
 
     // Make sure things are sorted
     const categories = ['slots', 'events', 'functions']
