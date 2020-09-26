@@ -57,10 +57,12 @@ export function parseMeta (
 
   for (const key in metadata) {
     const content = metadata[key]
+    const property = `${prefix}:${key}`
 
     meta.push({
+      vmid: property,
+      property,
       content,
-      property: `${prefix}:${key}`,
     })
   }
 
@@ -98,8 +100,8 @@ export function genMetaInfo (
   return {
     link: [],
     meta: [
-      { name: 'description', content: description },
-      { name: 'keywords', content: keywords },
+      { vmid: 'description', name: 'description', content: description },
+      { vmid: 'keywords', name: 'keywords', content: keywords },
       ...genFacebookMetaInfo(options),
       ...genOpenGraphMetaInfo(options),
       ...genTwitterMetaInfo(options),
