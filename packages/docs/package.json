@@ -15,7 +15,7 @@
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint --no-fix && yarn lint:md",
     "lint:fix": "vue-cli-service lint && yarn fix:md",
-    "build:client": "vue-cli-service build",
+    "build:client": "cross-env NODE_ENV=production vue-cli-service build",
     "build:server": "cross-env VUE_APP_WEBPACK_TARGET=node vue-cli-service build --no-clean",
     "build:modified": "node build/modified",
     "lint:md": "markdownlint --config .markdownlintrc src/pages/en",
