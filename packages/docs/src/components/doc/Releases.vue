@@ -118,7 +118,7 @@
       <v-divider />
 
       <div class="pa-4">
-        <app-md>
+        <app-md class="releases">
           {{ search ? search.body : ' ' }}
         </app-md>
       </div>
@@ -240,4 +240,7 @@
   .notes-autocomplete
     > .v-list.v-select-list
       background: transparent !important
+  .releases
+    img
+      max-width: 100%
 </style>
