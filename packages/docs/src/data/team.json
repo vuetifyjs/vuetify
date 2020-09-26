@@ -279,5 +279,18 @@
     "location": "Portugal",
     "name": "João Teixeira",
     "team": "contributors"
+  },
+  "peluprvi": {
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "Portuguese",
+      "English"
+    ],
+    "linkedin": "peluprvi",
+    "location": "Portugal",
+    "name": "Pedro Vieira",
+    "team": "contributors"
   }
 }
