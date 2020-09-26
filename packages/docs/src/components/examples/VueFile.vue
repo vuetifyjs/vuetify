@@ -11,9 +11,6 @@
 </template>
 
 <script>
-  // Utilities
-  import { sync } from 'vuex-pathify'
-
   export default {
     name: 'VueFile',
 
@@ -28,16 +25,12 @@
 
     data: () => ({ component: undefined }),
 
-    computed: { loading: sync('pages/loading') },
-
     created () {
-      // Add pending promises to be resolved
-      // before processing scrollBehavior.
-      this.loading.push(new Promise(this.load))
+      this.load()
     },
 
     methods: {
-      async load (resolve, reject) {
+      async load () {
         let component = {}
 
         try {
@@ -55,8 +48,6 @@
         }
 
         this.component = component.default
-
-        resolve()
       },
     },
   }
