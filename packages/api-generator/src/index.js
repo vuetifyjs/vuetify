@@ -185,17 +185,6 @@ const getCompleteApi = locales => {
   ].sort((a, b) => a.name.localeCompare(b.name))
 }
 
-// function genMissingDescriptions (comp, name, missing) {
-//   if (missing) {
-//     if (!missingDescriptions[comp]) {
-//       missingDescriptions[comp] = []
-//     }
-//     if (missingDescriptions[comp] && !missingDescriptions[comp].includes(name)) {
-//       missingDescriptions[comp].push(name)
-//     }
-//   }
-// }
-
 module.exports = {
   getApi,
   getCompleteApi,
