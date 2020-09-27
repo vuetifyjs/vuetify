@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Skeleton loaders component
+  title: Skeleton loader component
   description: The v-skeleton-loader component is a versatile tool that can fill many roles within a project. At its heart, the component provides an indication to the user that something is coming but not yet available.
   keywords: skeleton-loader, material loader, bar loader
 related:
@@ -31,15 +31,15 @@ The `v-skeleton-loader` component provides a user with a visual indicator that c
 
 #### Boilerplate component
 
-The `v-skeleton-loader` can be used as boilerplate designs when creating mockups. Mix and match various pre-defined options or create your own unique implementations. In this example, we are extending the `v-skeleton-loader` into a new component called `v-boilerplate` for use as a functional boilerplate component.
+The `v-skeleton-loader` can be used as boilerplate designs when creating mockups. Mix and match various pre-defined options or create your own unique implementations. In this example, we use a custom **data** property to apply the same props to multiple `v-skeleton-loader`'s at once.
 
 <example file="v-skeleton-loader/misc-boilerplate" />
 
-#### Implementation methods
+<!-- #### Implementation methods
 
 There are 2 ways that you can utilize the `v-skeleton-component`. The **default slot** or a **v-if** conditional. The built in slot is the most convenient and easiest to use, but generates an extra div once rendered. If the extra div is an issue in your setup, you can utilize a **v-if** conditional with a Vuetify [transition component](/styles/transitions) or a custom one.
 
-<example file="v-skeleton-loader/misc-implementation" />
+<example file="v-skeleton-loader/misc-implementation" /> -->
 
 ## Accessibility
 

@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`"
-    class="px-3 pt-3 pb-3"
+    class="pa-3"
   >
     <v-skeleton-loader
       class="mx-auto"
@@ -16,6 +16,10 @@
     // Vuetify components provide
     // a theme variable that is
     // used to determine dark
-    inject: ['theme'],
+    inject: {
+      theme: {
+        default: { isDark: false },
+      },
+    },
   }
 </script>
