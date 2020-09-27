@@ -2,6 +2,8 @@
 const { md } = require('../../../build/markdown-it')
 const Mode = require('frontmatter-markdown-loader/mode')
 const path = require('path')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin
 
 // Globals
 const IS_PROD = process.env.NODE_ENV === 'production'
@@ -46,7 +48,7 @@ module.exports = config => {
   }
 
   if (process.env.ANALYZE === 'true') {
-    config.plugin('BundleAnalyzerPlugin')
-      .use(require('webpack-bundle-analyzer'))
+    config.plugin('webpack-bundle-analyzer')
+      .use(BundleAnalyzerPlugin)
   }
 }
