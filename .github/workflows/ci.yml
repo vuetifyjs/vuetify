@@ -96,7 +96,7 @@ jobs:
       - run: yarn global add now
 
       - name: Download eo-UY
-        uses: crowdin/github-action@1.0.9
+        uses: crowdin/github-action@1.0.10
         with:
           config: crowdin.yml
           upload_sources: false
