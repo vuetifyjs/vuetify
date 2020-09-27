@@ -40,6 +40,25 @@
     },
 
     watch: {
+      async snackbar (val) {
+        // Snackbar is closing, unregister with application
+        if (!val) {
+          this.$vuetify.application.unregister(this._uid, 'snackbar')
+
+          return
+        }
+
+        await this.$nextTick()
+
+        const wrapper = this.$el.querySelector('.v-snackbar--pwa > .v-snack__wrapper')
+
+        // Register the snackbar element's height
+        this.$vuetify.application.register(
+          this._uid,
+          'snackbar',
+          wrapper.clientHeight
+        )
+      },
       'sw.update': {
         immediate: true,
         async handler (val) {
@@ -50,6 +69,12 @@
           this.snackbar = true
         },
       },
+    },
+
+    created () {
+      // Add snackbar property to application service
+      this.$set(this.$vuetify.application, 'snackbar', 0)
+      this.$set(this.$vuetify.application.application, 'snackbar', {})
     },
 
     methods: { update: call('pwa/update') },
