@@ -17,7 +17,9 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 
 ## Table of Contents
 
+* [How do I get to the old v2.3 documentation?](#v23-legacy)
 * [When will Vuetify v3 be released?](#version-3)
+* [Why is Search Vuetify not working properly?](#search-broke)
 * [My application won't compile due to sass / scss errors.](#sass-compile-error)
 * [Are there examples on how the v2 grid compares to v1.5?](#v2-v15-grid)
 * [Error: Cannot find module 'node-sass'.](#cannot-find-module-sass)
@@ -90,6 +92,18 @@ module.exports = {
   ],
 }
 ```
+
+<br>
+
+* **Why is Search Vuetify not working properly?**{ #search-broke }
+
+  At the moment, Algolia docsearch only crawls the main production site: [https://vuetifyjs.com/](https://vuetifyjs.com/).
+
+<br>
+
+* **How do I get to the old v2.3 documentation?**{ #v23-legacy }
+
+  Navigate to [https://v2.vuetifyjs.com/](https://v2.vuetifyjs.com/). It will remain active until the release of [Vuetify 3](/introduction/roadmap/#v30-titan) in 2021.
 
 <br>
 
