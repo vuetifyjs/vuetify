@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 // Imports
 import Cosmic from 'cosmicjs'
 
@@ -5,11 +7,9 @@ import Cosmic from 'cosmicjs'
 import { make } from 'vuex-pathify'
 
 const api = Cosmic()
-
-const bucket = api.bucket({
-  slug: process.env.VUE_APP_COSMIC_BUCKET_SLUG_STORE,
-  read_key: process.env.VUE_APP_COSMIC_BUCKET_READ_KEY_STORE,
-})
+const read_key = process.env.VUE_APP_COSMIC_BUCKET_READ_KEY_STORE
+const slug = process.env.VUE_APP_COSMIC_BUCKET_SLUG_STORE
+const bucket = api.bucket({ slug, read_key })
 
 const state = {
   all: [],
@@ -19,6 +19,8 @@ const mutations = make.mutations(state)
 
 const actions = {
   fetch: async ({ commit }) => {
+    if (!(slug && read_key)) return
+
     const { objects } = await bucket.getObjects({
       limit: 1,
       props: 'slug,title,metadata',

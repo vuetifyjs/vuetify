@@ -37,6 +37,12 @@ The following releases are currently under development:
 
 ## Long-term support (LTS)
 
+<alert type="error">
+
+  v1.5 reached end of life on **July 31st, 2020** and is no longer actively maintained. It is recommended to update to the latest stable version of Vuetify using our [Upgrade guide](/getting-started/upgrade-guide/).
+
+</alert>
+
 The following versions have continued maintenance for backwards compatible fixes, major bugs, and security vulnerabilities. More information is located on the [Long-term support](/introduction/long-term-support/) page.
 
 ### v1.5

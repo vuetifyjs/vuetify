@@ -1,17 +1,20 @@
 // Pathify
 import { make } from 'vuex-pathify'
 
+// Globals
+import { IN_BROWSER } from '@/util/globals'
+
 // Data
 const state = {
   all: [],
-  initializing: false,
 }
 
 const mutations = make.mutations(state)
 
 const actions = {
-  fetch: async ({ commit, state }) => {
-    commit('initializing', true)
+  fetch: async ({ commit }) => {
+    if (!IN_BROWSER) return
+
     const jobs = await fetch('https://vuejobs.com/api/jobs', {
       method: 'get',
       headers: { 'Content-Type': 'application/json' },
@@ -34,7 +37,6 @@ const actions = {
     })
 
     commit('all', all)
-    commit('initializing', false)
   },
 }
 

@@ -20,6 +20,16 @@ function genFrontMatter (component) {
   return `---\nmeta:\n${fm.map(s => '  ' + s).join('\n')}\n---\n\n`
 }
 
+function genHeader (component) {
+  const header = [
+    genFrontMatter(component),
+    `# ${component} API\n\n`,
+    '<entry-ad />',
+  ]
+
+  return `${header.join('\n\n')}\n\n`
+}
+
 function genFooter () {
   const footer = [
     '<backmatter />',
@@ -33,8 +43,7 @@ const sanitize = str => str.replace(/\$/g, '')
 function createMdFile (component, data, locale) {
   let str = ''
 
-  str += genFrontMatter(component)
-  str += `# ${component} API\n\n`
+  str += genHeader(component)
 
   for (const [header, value] of Object.entries(data)) {
     if (['mixins', 'name'].includes(header) || !value.length) continue

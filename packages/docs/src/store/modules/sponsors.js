@@ -12,6 +12,8 @@ const mutations = make.mutations(state)
 
 const actions = {
   fetch: async ({ commit }) => {
+    if (!bucket.available) return
+
     const { objects: items } = await bucket.getObjects({
       type: 'sponsors',
       props: 'slug,title,metadata',

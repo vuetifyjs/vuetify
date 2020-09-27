@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="category !== 'api'">
     <div class="blue-grey--text text--darken-1 d-flexalign-center justify-space-between">
       <div class="font-weight-medium d-flex align-baseline grow flex-wrap">
         <i18n
