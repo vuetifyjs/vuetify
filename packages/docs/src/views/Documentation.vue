@@ -1,6 +1,7 @@
 <template>
   <v-container
     class="pa-4 pa-sm-6 pa-md-8"
+    fluid
     tag="section"
   >
     <v-responsive
