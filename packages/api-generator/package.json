@@ -3,10 +3,11 @@
   "version": "2.3.10",
   "private": true,
   "description": "",
-  "main": "dist/api.js",
+  "main": "src/index.js",
   "scripts": {
     "debug": "babel-node inspect src/index.js",
-    "build": "node src/index.js",
+    "dev": "node src/index.js",
+    "build": "node src/export.js",
     "lint": "eslint --ext .js src -f codeframe --max-warnings 0",
     "lint:fix": "yarn lint --fix"
   },
@@ -14,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "deepmerge": "^4.0.0",
+    "rimraf": "^3.0.2",
     "vue": "^2.6.11",
     "vuetify": "^2.3.10"
   },

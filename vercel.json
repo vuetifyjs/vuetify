@@ -1,7 +1,0 @@
-{
-  "build": {
-    "env": {
-      "NODEJS_HELPERS": "0"
-    }
-  }
-}
