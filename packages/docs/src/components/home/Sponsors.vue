@@ -4,9 +4,13 @@
     v-if="sponsors.length"
     id="home-sponsors"
     class="mx-auto pa-3"
+    color="transparent"
     max-width="700"
   >
-    <v-responsive min-height="500">
+    <v-responsive
+      class="mb-12"
+      min-height="500"
+    >
       <v-row
         dense
         justify="center"
@@ -14,6 +18,7 @@
         <v-col
           v-for="sponsor in sponsors"
           :key="sponsor.slug"
+          class="d-flex align-center"
           cols="auto"
           md="3"
         >
