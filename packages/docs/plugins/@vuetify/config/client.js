@@ -1,7 +1,7 @@
 // Imports
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const metadata = require('../../../src/data/metadata')
+const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 
 // Globals
 const IS_PROD = process.env.NODE_ENV === 'production'
@@ -36,7 +36,6 @@ module.exports = config => {
   config.plugin('pwa').after('html-spa')
 
   config.optimization
-    .minimize(IS_PROD)
     .splitChunks({
       cacheGroups: {
         vuetify: {
@@ -49,6 +48,14 @@ module.exports = config => {
       maxInitialRequests: 5,
       minSize: 20000,
     })
+
+  config.optimization
+    .minimize(IS_PROD)
+    .minimizer('css')
+    .use(require('terser-webpack-plugin'))
+    .use(require('optimize-css-assets-webpack-plugin'), [{
+      cssProcessorOptions: { safe: true },
+    }])
 
   config.target('web')
 
