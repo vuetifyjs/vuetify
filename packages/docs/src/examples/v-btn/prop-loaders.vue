@@ -49,7 +49,7 @@
       Icon Loader
       <template v-slot:loader>
         <span class="custom-loader">
-          <v-icon light>cached</v-icon>
+          <v-icon light>mdi-cached</v-icon>
         </span>
       </template>
     </v-btn>
