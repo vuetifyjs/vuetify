@@ -32,12 +32,11 @@
                     v-text="link.icon"
                   />
                 </a>
-                <a
+                <v-btn
                   v-else
-                  href="javascript:void(0);"
-                  class="d-inline-flex text-decoration-none mr-1"
-                  rel="noopener"
-                  target="_blank"
+                  class="text-decoration-none mr-1"
+                  icon
+                  small
                   v-on="on"
                   @click.prevent="copyTextToClipboard(link.copyText)"
                 >
@@ -45,7 +44,7 @@
                     :color="link.color"
                     v-text="link.icon"
                   />
-                </a>
+                </v-btn>
               </template>
               <span>{{ link.tooltip }}</span>
             </v-tooltip>

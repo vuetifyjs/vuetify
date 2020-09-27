@@ -85,7 +85,7 @@
           <v-col cols="3">
             Select your destination of choice
             <br>
-            <a href="javascript:void(0)">Learn more</a>
+            <a href="#">Learn more</a>
           </v-col>
         </v-row>
 

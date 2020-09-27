@@ -91,13 +91,13 @@
                 <div @click.stop="">
                   Do you accept the
                   <a
-                    href="javascript:;"
-                    @click.stop="terms = true"
+                    href="#"
+                    @click.prevent="terms = true"
                   >terms</a>
                   and
                   <a
-                    href="javascript:;"
-                    @click.stop="conditions = true"
+                    href="#"
+                    @click.prevent="conditions = true"
                   >conditions?</a>
                 </div>
               </template>
