@@ -1,5 +1,6 @@
 {
   "johnleider": {
+    "discord": "johnleider#0001",
     "focus": [
       "[vuetifyjs/*](https://github.com/vuetifyjs)"
     ],
@@ -18,6 +19,7 @@
     "work": "CEO @ Vuetify"
   },
   "heatherleider": {
+    "discord": "heatherleider#7788",
     "focus": [
       "[vuetifyjs/*](https://github.com/vuetifyjs)"
     ],
@@ -31,6 +33,7 @@
     "work": "COO @ Vuetify"
   },
   "KaelWD": {
+    "discord": "Kaelwd#6373",
     "focus": [
       "[vuetifyjs/*](https://github.com/vuetifyjs)",
       "[vuetify-loader](https://github.com/vuetifyjs/vuetify-loader)",
@@ -49,6 +52,7 @@
     "twitter": "kaelwd"
   },
   "nekosaur": {
+    "discord": "nekosaur#5406",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],
@@ -61,6 +65,7 @@
     "team": "core"
   },
   "jacekkarczmarczyk": {
+    "discord": "jacek#3542",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],
@@ -73,6 +78,7 @@
     "team": "core"
   },
   "MajesticPotatoe": {
+    "discord": "MajesticPotatoe#4997",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)",
       "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
@@ -91,8 +97,9 @@
     "twitter": "SeeMWhyK"
   },
   "bdeo": {
+    "discord": "brandondeo#0001",
     "focus": [
-      "**vuetifyjs/issue-helper**"
+      "**vuetifyjs/vuetify-issue-helper**"
     ],
     "languages": [
       "English"
@@ -106,6 +113,7 @@
     "team": "core"
   },
   "sh7dm": {
+    "discord": "sh7dm#5240",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],
@@ -118,6 +126,7 @@
     "team": "core"
   },
   "johannaRlee": {
+    "discord": "johanna#7104",
     "focus": [
       "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
     ],
@@ -131,6 +140,7 @@
     "twitter": "johannaRlee"
   },
   "chewy94": {
+    "discord": "Sean Kimball#0001",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],
@@ -143,6 +153,7 @@
     "team": "core"
   },
   "vanessalvarez8a": {
+    "discord": "vanessalvarez8a#0374",
     "focus": [
       "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
     ],
@@ -157,6 +168,7 @@
     "twitter": "vanessalvarez8a"
   },
   "phiter": {
+    "discord": "Phiter#7665",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],
@@ -171,6 +183,7 @@
     "twitter": "phiterf"
   },
   "Kawacrepe": {
+    "discord": "Kawacrepe#8492",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],
@@ -185,6 +198,7 @@
     "twitter": "Kawacrepe"
   },
   "blalan05": {
+    "discord": "blalan05#3967",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],
@@ -198,6 +212,7 @@
     "twitter": "blalan05"
   },
   "avengerweb": {
+    "discord": "aven.dev#9784",
     "focus": [
       "[vuetifyjs/*](https://github.com/vuetifyjs)"
     ],
@@ -211,6 +226,7 @@
     "team": "contributors"
   },
   "YipingRuan": {
+    "discord": "Yiping#5650",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)",
       "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
@@ -224,6 +240,7 @@
     "team": "contributors"
   },
   "Mert75": {
+    "discord": "Mert75#5986",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)",
       "[vuetifyjs/vue-cli-plugins](https://github.com/vuetifyjs/vue-cli-plugins)"
@@ -238,6 +255,7 @@
     "team": "contributors"
   },
   "AGDholo": {
+    "discord": "AGD#5775",
     "focus": [
       "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
     ],
@@ -251,6 +269,7 @@
     "team": "contributors"
   },
   "DRoet": {
+    "discord": "daandelion#3861",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],
@@ -263,7 +282,22 @@
     "name": "Daan Roet",
     "team": "contributors"
   },
+  "Phlow2001": {
+    "discord": "Phlow#6986",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "linkedin": "jaymieblanchard",
+    "location": "Tallahassee, FL, USA",
+    "name": "Jay Blanchard",
+    "team": "contributors",
+    "work": "Senior Principle Engineer @ MCCI / JustFOIA"
+  },
   "jpntex": {
+    "discord": "joao.teixeira#4579",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],
@@ -275,12 +309,13 @@
       "Portuguese"
     ],
     "linkedin": "jpntex",
-    "work": "Indielayer",
     "location": "Portugal",
     "name": "João Teixeira",
-    "team": "contributors"
+    "team": "contributors",
+    "work": "Indielayer"
   },
   "peluprvi": {
+    "discord": "peluprvi#5973",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],
@@ -294,6 +329,7 @@
     "team": "contributors"
   },
   "ClickerMonkey": {
+    "discord": "ClickerMonkey#1852",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],
@@ -308,6 +344,7 @@
     "team": "contributors"
   },
   "Leespiker": {
+    "discord": "Leespiker#8418",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)"
     ],

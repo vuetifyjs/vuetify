@@ -24,7 +24,7 @@ const actions = {
     const all = []
 
     for (const key in team) {
-      const member = members.find(u => u.login === key)
+      const member = members.find(u => u.login.localeCompare(key, 'en', { sensitivity: 'base' }) === 0)
 
       if (!member) continue
 

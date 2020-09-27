@@ -12,19 +12,44 @@
             v-text="member.name"
           />
 
-          <a
-            v-for="link in links"
-            :key="link.href"
-            :href="link.href"
-            class="d-inline-flex text-decoration-none mr-1"
-            rel="noopener"
-            target="_blank"
-          >
-            <v-icon
-              :color="link.color"
-              v-text="link.icon"
-            />
-          </a>
+          <template v-for="link in links">
+            <v-tooltip
+              v-if="link.href || link.copyText"
+              :key="link.href || link.copyText"
+              top
+            >
+              <template #activator="{ on }">
+                <a
+                  v-if="link.href"
+                  :href="link.href"
+                  class="d-inline-flex text-decoration-none mr-1"
+                  rel="noopener"
+                  target="_blank"
+                  v-on="on"
+                >
+                  <v-icon
+                    :color="link.color"
+                    v-text="link.icon"
+                  />
+                </a>
+                <a
+                  v-else
+                  href="javascript:void(0);"
+                  class="d-inline-flex text-decoration-none mr-1"
+                  rel="noopener"
+                  target="_blank"
+                  v-on="on"
+                  @click.prevent="copyTextToClipboard(link.copyText)"
+                >
+                  <v-icon
+                    :color="link.color"
+                    v-text="link.icon"
+                  />
+                </a>
+              </template>
+              <span>{{ link.tooltip }}</span>
+            </v-tooltip>
+          </template>
         </div>
 
         <div
@@ -153,6 +178,7 @@
             color: '#40BBF4',
             href: `https://twitter.com/${this.member.twitter}`,
             icon: '$mdiTwitter',
+            tooltip: 'Twitter',
           })
         }
 
@@ -161,6 +187,7 @@
             color: '#24292E',
             href: `https://github.com/${this.member.github}`,
             icon: '$mdiGithub',
+            tooltip: 'Github',
           })
         }
 
@@ -169,10 +196,26 @@
             color: '#0077B5',
             href: `https://linkedin.com/in/${this.member.linkedin}`,
             icon: '$mdiLinkedin',
+            tooltip: 'LinkedIn',
+          })
+        }
+
+        if (this.member.discord) {
+          links.push({
+            color: '#738ADB',
+            copyText: this.member.discord,
+            icon: '$mdiDiscord',
+            tooltip: `Discord: ${this.member.discord} (click to copy)`,
           })
         }
 
         return links
+      },
+    },
+
+    methods: {
+      copyTextToClipboard (copyText) {
+        navigator.clipboard.writeText(copyText)
       },
     },
   }
