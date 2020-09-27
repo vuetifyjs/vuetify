@@ -151,10 +151,18 @@ const getVuetifyApi = locales => {
   return addGenericApiDescriptions(name, api, locales, ['functions', 'sass'])
 }
 
+const getInternationalizationApi = locales => {
+  const name = 'internationalization'
+  const api = deepmerge(loadMap(name), { name })
+
+  return addGenericApiDescriptions(name, api, locales, ['functions', 'props'])
+}
+
 const DIRECTIVES = ['v-mutate', 'v-intersect', 'v-ripple', 'v-resize', 'v-scroll', 'v-touch', 'v-click-outside']
 
 const getApi = (name, locales) => {
   if (name === '$vuetify') return getVuetifyApi(locales)
+  if (name === 'internationalization') return getInternationalizationApi(locales)
   if (DIRECTIVES.includes(name)) return getDirectiveApi(name, locales)
   else return getComponentApi(name, locales)
 }
@@ -189,6 +197,7 @@ const getDirectivesApi = locales => {
 const getCompleteApi = locales => {
   return [
     getVuetifyApi(locales),
+    getInternationalizationApi(locales),
     ...getComponentsApi(locales),
     ...getDirectivesApi(locales),
   ].sort((a, b) => a.name.localeCompare(b.name))

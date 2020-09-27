@@ -21,6 +21,10 @@ The **goTo** method takes two parameters **target** and **options**. **target** 
 
 <example file="scroll/usage" />
 
+## API
+
+- [$vuetify](/api/vuetify)
+
 ## Use with router
 
 The **goTo** function can be individually imported and invoked anywhere. This is particularly useful when hooking up to [vue-router](https://router.vuejs.org/).
