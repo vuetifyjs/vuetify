@@ -164,7 +164,7 @@
   import Codepen from '@/mixins/codepen'
 
   // Utilities
-  import { startCase } from 'lodash'
+  import startCase from 'lodash/startCase'
 
   export default {
     name: 'Usage',

@@ -24,7 +24,7 @@
   // Utilities
   import { get } from 'vuex-pathify'
   import { rpath } from '@/util/routes'
-  import { upperFirst } from 'lodash'
+  import upperFirst from 'lodash/upperFirst'
 
   export default {
     name: 'RelatedPage',
