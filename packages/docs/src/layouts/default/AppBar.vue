@@ -1,6 +1,6 @@
 <template>
   <v-app-bar
-    id="default-app-bar"
+    id="app-bar"
     :color="dark ? undefined : 'white'"
     app
     class="v-bar--underline"

@@ -2,11 +2,12 @@
   <v-text-field
     id="doc-search"
     ref="search"
-    v-model="search"
+    v-model="model"
     :background-color="(!theme.isDark && !isFocused) ? 'grey lighten-3' : undefined"
     :class="isSearching ? 'rounded-b-0' : ' rounded-lg'"
     :flat="!isFocused && !isSearching"
     :placeholder="placeholder"
+    autocomplete="off"
     class="mx-2 mx-md-4"
     dense
     hide-details
@@ -29,7 +30,11 @@
 </template>
 
 <script>
-  import { IN_BROWSER } from '@/util/globals'
+  // Utilities
+  import { get } from 'vuex-pathify'
+
+  // Globals
+  import { IN_BROWSER, IS_PROD } from '@/util/globals'
 
   // This behavior should be easier to do with solo fields
   // TODO: Review this for v3
@@ -39,14 +44,18 @@
     inject: ['theme'],
 
     data: () => ({
-      docSearch: {},
+      docsearch: {},
+      hasBooted: false,
       isFocused: false,
-      isSearching: false,
-      search: '',
+      model: '',
       timeout: null,
     }),
 
     computed: {
+      search: get('route/query@search'),
+      isSearching () {
+        return this.model && this.model.length > 0
+      },
       placeholder () {
         if (this.isFocused) return ''
 
@@ -62,21 +71,9 @@
 
     watch: {
       isSearching (val) {
-        if (val) {
-          this.$refs.search.focus()
-
-          return
-        }
-
-        this.resetSearch()
-      },
-      search (val) {
-        this.isSearching = Boolean(val && val.length)
-
-        if (val) return
-
-        this.docSearch.autocomplete.autocomplete.close()
-        this.docSearch.autocomplete.autocomplete.setVal('')
+        val
+          ? this.$refs.search.focus()
+          : this.resetSearch()
       },
     },
 
@@ -96,15 +93,8 @@
         }
       }
 
-      // eslint-disable-next-line no-unused-expressions
-      import(
-        /* webpackChunkName: "docsearch" */
-        'docsearch.js/dist/cdn/docsearch.min.css'
-      )
-      import(
-        /* webpackChunkName: "docsearch" */
-        'docsearch.js/dist/cdn/docsearch.min.js'
-      ).then(this.init)
+      // Focus and search if available
+      if (this.search) this.$refs.search.focus()
     },
 
     beforeDestroy () {
@@ -112,22 +102,21 @@
 
       document.onkeydown = null
 
-      this.docSearch.autocomplete.autocomplete.close()
-      this.docSearch.autocomplete.autocomplete.setVal('')
+      this.resetSearch()
     },
 
     methods: {
-      async init ({ default: docsearch }) {
+      async init (docsearch) {
         const vm = this
 
-        this.docSearch = docsearch({
+        this.docsearch = docsearch({
           apiKey: '259d4615e283a1bbaa3313b4eff7881c',
           autocompleteOptions: {
-            appendTo: '#default-app-bar',
+            appendTo: '#app-bar',
             autoselect: true,
             clearOnSelected: true,
+            debug: !IS_PROD,
             hint: false,
-            debug: process.env.NODE_ENV === 'development',
           },
           handleSelected (input, event, suggestion) {
             vm.$router.push(suggestion.url.split('.com').pop())
@@ -137,11 +126,10 @@
           inputSelector: '#doc-search',
         })
 
-        const { search } = this.$route.query
+        if (!this.search) return
 
-        if (!search) return
+        this.model = this.search
 
-        this.search = search
         this.$refs.search.focus()
 
         await this.$nextTick()
@@ -157,8 +145,23 @@
       onEsc () {
         this.$refs.search.blur()
       },
-      onFocus () {
+      async onFocus () {
         clearTimeout(this.timeout)
+
+        if (!this.hasBooted) {
+          Promise.all([
+            import(
+              /* webpackChunkName: "docsearch" */
+              'docsearch.js/dist/cdn/docsearch.min.js'
+            ),
+            import(
+              /* webpackChunkName: "docsearch" */
+              'docsearch.js/dist/cdn/docsearch.min.css'
+            ),
+          ]).then(([promise]) => this.init(promise.default))
+
+          this.hasBooted = true
+        }
 
         this.isFocused = true
       },
@@ -166,10 +169,13 @@
         clearTimeout(this.timeout)
 
         this.$nextTick(() => {
-          this.search = undefined
-          this.isSearching = false
-
+          this.model = undefined
           this.timeout = setTimeout(() => (this.isFocused = false), timeout)
+
+          if (!this.docsearch) return
+
+          this.docsearch.autocomplete.autocomplete.close()
+          this.docsearch.autocomplete.autocomplete.setVal('')
         })
       },
     },
