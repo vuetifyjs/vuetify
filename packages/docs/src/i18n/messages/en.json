@@ -11,7 +11,7 @@
   "breakpoints-table": {
     "caption": "Material Design Breakpoints",
     "footer": "{size} on desktop for browser scrollbar",
-    "large-tablet-to-laptop": "Large table to laptop",
+    "large-tablet-to-laptop": "Large tablet to laptop",
     "large-to-extra-large": "4k and ultra-wide",
     "small-to-large-handset": "Small to large phone",
     "small-to-medium-tablet": "Small to medium tablet",
