@@ -62,24 +62,10 @@ const mutations = make.mutations(state)
 
 const actions = {
   ...make.actions(state),
-  init: async ({ dispatch, getters }) => {
-    try {
-      await dispatch('user/fetch', null, ROOT_DISPATCH)
-    } catch (e) {
-      console.warn('Unable to fetch user')
-    }
+  init: async ({ dispatch }) => {
+    const modules = ['user/fetch', 'sponsors/fetch', 'ads/fetch', 'pwa/init']
 
-    dispatch('pwa/init', null, ROOT_DISPATCH)
-
-    if (getters.hasApi) {
-      try {
-        await dispatch('sponsors/fetch', null, ROOT_DISPATCH)
-      } catch (e) {
-        console.log('Unable to fetch sponsors')
-      }
-
-      dispatch('ads/fetch', null, ROOT_DISPATCH)
-    }
+    for (const module of modules) dispatch(module, null, ROOT_DISPATCH)
   },
 }
 

@@ -48,6 +48,7 @@
 
     <div class="ml-5">
       <app-caption
+        v-if="sponsors.length"
         class="ml-2 mb-3"
         path="platinum-sponsors"
       />
@@ -89,6 +90,7 @@
         'hash',
         'path',
       ]),
+      sponsors: get('sponsors/all'),
       scrolling: sync('app/scrolling'),
       toc: get('pages/toc'),
     },

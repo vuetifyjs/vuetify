@@ -1,8 +1,9 @@
 
 <template>
   <v-sheet
+    v-if="sponsors.length"
     id="home-sponsors"
-    class="mx-auto"
+    class="mx-auto pa-3"
     max-width="700"
   >
     <v-responsive min-height="500">
