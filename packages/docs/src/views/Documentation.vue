@@ -108,7 +108,14 @@
       }
 
       this.init(this.md)
-      this.$load(this.frontmatter.assets)
+
+      const { assets, actions = [] } = this.frontmatter
+
+      this.$load(assets)
+
+      for (const action of actions) {
+        this.$store.dispatch(action)
+      }
     },
 
     methods: {
