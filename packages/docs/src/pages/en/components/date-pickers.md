@@ -141,7 +141,7 @@ Formatting dates is possible also with external libs such as Moment.js or date-f
 
 #### Internationalization
 
-The date picker supports internationalization through the JavaScript Date object. Specify a BCP 47 language tag using the **locale** prop, and then set the first day of the week with the **first-dat-of-week** prop.
+The date picker supports internationalization through the JavaScript Date object. Specify a BCP 47 language tag using the **locale** prop, and then set the first day of the week with the **first-day-of-week** prop.
 
 <example file="v-date-picker/misc-internationalization" />
 
