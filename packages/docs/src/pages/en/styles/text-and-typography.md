@@ -42,6 +42,25 @@ The _value_ property is one of:
 - `caption`
 - `overline`
 
+<alert type="warning">
+
+Prior to v2.3.0, these classes were:
+
+- `.display-4`
+- `.display-3`
+- `.display-2`
+- `.display-1`
+- `.headline`
+- `.title`
+- `.subtitle-1`
+- `.subtitle-2`
+- `.body-1`
+- `.body-2`
+- `.caption`
+- `.overline`
+
+</alert>
+
 The following example demonstrates how the various sizes would appear at different breakpoints:
 
 <example file="text-and-typography/typography-breakpoints" />
