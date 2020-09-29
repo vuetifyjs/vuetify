@@ -29,9 +29,7 @@ const baseMixins = mixins(
   VInput,
   Intersectable({
     onVisible: [
-      'setLabelWidth',
-      'setPrefixWidth',
-      'setPrependWidth',
+      'onResize',
       'tryAutofocus',
     ],
   }),
@@ -53,7 +51,10 @@ const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', '
 export default baseMixins.extend<options>().extend({
   name: 'v-text-field',
 
-  directives: { resize, ripple },
+  directives: {
+    resize,
+    ripple,
+  },
 
   inheritAttrs: false,
 
@@ -228,9 +229,7 @@ export default baseMixins.extend<options>().extend({
 
   mounted () {
     this.autofocus && this.tryAutofocus()
-    this.setLabelWidth()
-    this.setPrefixWidth()
-    this.setPrependWidth()
+
     requestAnimationFrame(() => (this.isBooted = true))
   },
 
@@ -399,6 +398,7 @@ export default baseMixins.extend<options>().extend({
         ref: 'input',
         directives: [{
           name: 'resize',
+          modifiers: { quiet: true },
           value: this.onResize,
         }],
       })
