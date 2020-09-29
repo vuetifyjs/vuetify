@@ -30,7 +30,7 @@ Vuetify is a progressive framework that attempts to push web development to the 
 
 Vuetify utilizes features of ES2015/2017 that require the need to use polyfills for **Internet Explorer 11** and **Safari 9/10**.
 
-### Vue CLI
+## Vue CLI
 
 Unfortunately Vue CLI doesn't automatically bring IE11 compatibility in which you may encounter various errors (such as Symbol is not defined). To assist in resolving these errors you need to manually add `transpileDependencies` parameter in `vue.config.js`:
 
@@ -38,13 +38,13 @@ Unfortunately Vue CLI doesn't automatically bring IE11 compatibility in which yo
 // vue.config.js
 
 module.exports = {
-   transpileDependencies: ['vuetify']
+  transpileDependencies: ['vuetify']
 }
 ```
 
-### Webpack
+## Webpack
 
-If you are using a custom Webpack setup, you can install `core-js` and `regenerator-runtime`
+If you are using a custom Webpack setup, you will need to install the [core-js](https://github.com/zloirock/core-js) and [regenerator-runtime](https://github.com/facebook/regenerator/tree/master/packages/regenerator-runtime) packages. In your terminal, run the following command:
 
 ```bash
 yarn add core-js regenerator-runtime
@@ -52,22 +52,30 @@ yarn add core-js regenerator-runtime
 npm install core-js regenerator-runtime --save
 ```
 
-It is important to include the plugin as early as possible within your main **index.js** file. If using a Vuetify SSR package, this will apply to the **client-entry.js** file
+Include the plugin as _early_ as possible within your **main.js** file—or whatever the main entry point of your application is.
 
 ```js
 // src/main.js
 
-import "core-js/stable";
-import "regenerator-runtime/runtime";
+// Polyfills
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
+
+// Imports
 import Vue from 'vue'
 import vuetify from '@/plugins/vuetify'
 
-new Vue({
-  vuetify,
-}).$mount('#app')
+new Vue({ vuetify }).$mount('#app')
 ```
 
-It is recommended that you use `@babel/preset-env` with the corresponding polyfill to ensure only the necessary polyfills are added to your application. For more information on `@babel/preset-env`, [visit the documentation](https://babeljs.io/docs/en/next/babel-preset-env.html).
+<discovery-ad />
+
+<br>
+<br>
+
+### Babel preset-env
+
+Instead of manually installing and importing the polyfills that you need, we _recommend_ that you install [@babel/preset-env](https://github.com/babel/babel/tree/master/packages/babel-preset-env). This package ensures only the **necessary** polyfills are added to your application based upon your designated settings.
 
 ```bash
 yarn add @babel/preset-env -D
@@ -75,15 +83,7 @@ yarn add @babel/preset-env -D
 npm install @babel/preset-env -D
 ```
 
-Once installed, add the preset to your `.babelrc` or `babel.config.js`
-
-```json
-// .babelrc
-
-{
-  "presets": ["@babel/preset-env"]
-}
-```
+Once installed, add the preset to your `babel.config.js` file:
 
 ```js
 // babel.config.js
@@ -93,7 +93,17 @@ module.exports = {
 }
 ```
 
-### Template caveat
+or if using a `.babelrc` file:
+
+```json
+// .babelrc
+
+{
+  "presets": ["@babel/preset-env"]
+}
+```
+
+## Template caveat
 
 Due to Internet Explorer's limited support for `<template>` tags, you must send fully compiled dom elements to the browser. This can be done by either building your Vue code in advance or by creating helper components to replace the dom elements. For instance, if sent directly to IE, this will fail:
 
