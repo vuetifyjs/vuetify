@@ -52,18 +52,18 @@ The _value_ property is one of:
 
   <br>
 
-  - `.display-4`
-  - `.display-3`
-  - `.display-2`
-  - `.display-1`
-  - `.headline`
-  - `.title`
-  - `.subtitle-1`
-  - `.subtitle-2`
-  - `.body-1`
-  - `.body-2`
-  - `.caption`
-  - `.overline`
+- `.display-4`
+- `.display-3`
+- `.display-2`
+- `.display-1`
+- `.headline`
+- `.title`
+- `.subtitle-1`
+- `.subtitle-2`
+- `.body-1`
+- `.body-2`
+- `.caption`
+- `.overline`
 
 </alert>
 
