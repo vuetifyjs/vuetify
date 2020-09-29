@@ -42,22 +42,28 @@ The _value_ property is one of:
 - `caption`
 - `overline`
 
-<alert type="warning">
+<br>
 
-Prior to v2.3.0, these classes were:
+<alert type="success">
 
-- `.display-4`
-- `.display-3`
-- `.display-2`
-- `.display-1`
-- `.headline`
-- `.title`
-- `.subtitle-1`
-- `.subtitle-2`
-- `.body-1`
-- `.body-2`
-- `.caption`
-- `.overline`
+  **TIP**
+
+  In all versions prior to v2.3.0, these classes were one of the following:
+
+  <br>
+
+  - `.display-4`
+  - `.display-3`
+  - `.display-2`
+  - `.display-1`
+  - `.headline`
+  - `.title`
+  - `.subtitle-1`
+  - `.subtitle-2`
+  - `.body-1`
+  - `.body-2`
+  - `.caption`
+  - `.overline`
 
 </alert>
 
