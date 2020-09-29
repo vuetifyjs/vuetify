@@ -48,7 +48,7 @@ export default {
 // Variables you want to modify
 $btn-border-radius: 0px;
 
-// If you need to extend Vuetify SASS lists
+// Modifying a SASS map variable
 $material-light: ( cards: blue );
 
 @import '~vuetify/src/styles/styles.sass';
