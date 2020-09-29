@@ -17,7 +17,7 @@ The `v-btn-toggle` component is a simple wrapper for `v-item-group` built specif
 
 ## Usage
 
-Toggle buttons allow you to create a styled group of buttons that can selected or toggled under a single **v-model**.
+Toggle buttons allow you to create a styled group of buttons that can be selected or toggled under a single **v-model**.
 
 <example file="v-btn-toggle/usage" />
 
