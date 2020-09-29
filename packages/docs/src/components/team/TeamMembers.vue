@@ -21,7 +21,7 @@
 
 <script>
   // Utilities
-  import { call, get } from 'vuex-pathify'
+  import { get } from 'vuex-pathify'
 
   export default {
     name: 'TeamMembers',
@@ -34,12 +34,6 @@
         return this.all.filter(member => member.team === this.team)
       },
     },
-
-    mounted () {
-      this.fetch()
-    },
-
-    methods: { fetch: call('team/fetch') },
   }
 </script>
 

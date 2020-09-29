@@ -124,8 +124,10 @@
 
 <script>
   // Utilities
+  import { sync } from 'vuex-pathify'
   import { formatDate } from '@/util/date.js'
-  import { call, sync } from 'vuex-pathify'
+  import { subDays } from 'date-fns'
+  import bucket from '@/plugins/cosmicjs'
 
   export default {
     name: 'NotificationsMenu',
@@ -133,6 +135,7 @@
     inject: ['theme'],
 
     data: () => ({
+      all: [],
       archived: false,
       icons: {
         read: '$mdiEmailOpen',
@@ -142,7 +145,6 @@
     }),
 
     computed: {
-      notifications: sync('notifications/all'),
       snack: sync('snackbar/value'),
       snackbar: sync('snackbar/snackbar'),
       unotifications: sync('user/notifications'),
@@ -156,7 +158,7 @@
       // Map items to contain a viewed
       // property and format the date
       mapped () {
-        return this.notifications.map(item => {
+        return this.all.map(item => {
           return {
             ...item,
             created_at: formatDate(new Date(item.created_at)),
@@ -184,11 +186,25 @@
     },
 
     async mounted () {
-      this.fetch()
+      if (!bucket.available) return
+
+      const { objects: notifications } = await bucket.getObjects({
+        type: 'notifications',
+        props: 'created_at,metadata,slug,title',
+        status: 'published',
+        limit: 10,
+        sort: '-created_at',
+        query: {
+          created_at: {
+            $gt: Math.ceil(subDays(Date.now(), 60).getTime()),
+          },
+        },
+      })
+
+      this.all = notifications || []
     },
 
     methods: {
-      fetch: call('notifications/fetch'),
       toggle (slug) {
         this.unotifications = this.unotifications.includes(slug)
           ? this.unotifications.filter(n => n !== slug)

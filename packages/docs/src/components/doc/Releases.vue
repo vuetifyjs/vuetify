@@ -129,6 +129,7 @@
 <script>
   // Utilities
   import { get } from 'vuex-pathify'
+  import octokit from '@/plugins/octokit'
 
   export default {
     name: 'Releases',
@@ -189,32 +190,23 @@
       },
     },
 
-    mounted () {
-      fetch('https://api.github.com/repos/vuetifyjs/vuetify/releases?per_page=100', {
-        headers: { 'Content-Type': 'application/json' },
-        method: 'get',
-      })
-        .then(res => res.json())
-        .then(async res => {
-          this.isLoading = false
+    async mounted () {
+      const releases = []
+      const res = await octokit.request('GET /repos/vuetifyjs/vuetify/releases')
 
-          const releases = []
+      this.isLoading = false
 
-          for (const release of res) {
-            if (!release.name.startsWith('v2')) continue
+      for (const release of res.data) {
+        if (!release.name.startsWith('v2')) continue
 
-            releases.push({
-              ...release,
-              published_at: new Date(release.published_at).toDateString(),
-            })
-          }
-
-          this.releases = releases
-
-          this.search = releases[0]
+        releases.push({
+          ...release,
+          published_at: new Date(release.published_at).toDateString(),
         })
-        .catch(err => console.log(err))
-        .finally(() => (this.isLoading = false))
+      }
+
+      this.releases = releases
+      this.search = releases[0]
     },
 
     methods: {

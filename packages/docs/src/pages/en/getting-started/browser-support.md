@@ -28,12 +28,28 @@ Vuetify is a progressive framework that attempts to push web development to the 
 
 ## IE11 and Safari 9 support
 
-Vuetify utilizes features of ES2015/2017 that require the need to use polyfills for **Internet Explorer 11** and **Safari 9/10**. If you are using Vue CLI, this is done automatically for you. Otherwise, in your project directory, you can install `babel-polyfill`:
+Vuetify utilizes features of ES2015/2017 that require the need to use polyfills for **Internet Explorer 11** and **Safari 9/10**.
+
+### Vue CLI
+
+Unfortunately Vue CLI doesn't automatically bring IE11 compatibility in which you may encounter various errors (such as Symbol is not defined). To assist in resolving these errors you need to manually add `transpileDependencies` parameter in `vue.config.js`:
+
+```js
+// vue.config.js
+
+module.exports = {
+   transpileDependencies: ['vuetify']
+}
+```
+
+### Webpack
+
+If you are using a custom Webpack setup, you can install `core-js` and `regenerator-runtime`
 
 ```bash
-yarn add babel-polyfill
+yarn add core-js regenerator-runtime
 # OR
-npm install babel-polyfill --save
+npm install core-js regenerator-runtime --save
 ```
 
 It is important to include the plugin as early as possible within your main **index.js** file. If using a Vuetify SSR package, this will apply to the **client-entry.js** file
@@ -41,7 +57,8 @@ It is important to include the plugin as early as possible within your main **in
 ```js
 // src/main.js
 
-import 'babel-polyfill'
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import Vue from 'vue'
 import vuetify from '@/plugins/vuetify'
 
@@ -50,7 +67,7 @@ new Vue({
 }).$mount('#app')
 ```
 
-It is recommended that you use `babel-preset-env` with the corresponding polyfill to ensure only the necessary polyfills are added to your application. For more information on `babel-preset-env`, [visit the documentation](https://babeljs.io/docs/en/next/babel-preset-env.html).
+It is recommended that you use `@babel/preset-env` with the corresponding polyfill to ensure only the necessary polyfills are added to your application. For more information on `@babel/preset-env`, [visit the documentation](https://babeljs.io/docs/en/next/babel-preset-env.html).
 
 ```bash
 yarn add @babel/preset-env -D
@@ -76,11 +93,7 @@ module.exports = {
 }
 ```
 
-<alert type="info">
-
-  Unfortunately Vue CLI doesn't automatically bring IE11 compatibility in which you may encounter various errors (such as Symbol is not defined). To assist in resolving these errors you may need to manually add `transpileDependencies` parameter in `vue.config.js`.
-
-</alert>
+### Template caveat
 
 Due to Internet Explorer's limited support for `<template>` tags, you must send fully compiled dom elements to the browser. This can be done by either building your Vue code in advance or by creating helper components to replace the dom elements. For instance, if sent directly to IE, this will fail:
 
