@@ -29,7 +29,7 @@ When you run yarn serve, the vuetify-cli-plugin will automatically hoist the glo
 
 ## Nuxt install
 
-This section assumes you have already followed our Nuxt guide on the [Quick start](/getting-started/installation/#nuxt-install) page. The Nuxt Vuetify module exposes an interface to write the configuration. Ensure that you enable the `treeShake` first, this option will use [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) to enable automatic [treeshaking](/features/treeshaking)(Vuetify SASS variables Only works with treeshaking), enabled only for production by default. Then provide the `customVariables` file path option to custom SASS variables.
+This section assumes that you have already followed our Nuxt guide on the [Quick start](/getting-started/installation/#nuxt-install) page. The Nuxt Vuetify module exposes a `vuetify` property where you can configure the module. Ensure that you enable the `treeShake` option first. This option will use [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) to enable automatic [treeshaking](/features/treeshaking). This is required for custom SASS variables to work. Then provide the `customVariables` file path option to customize SASS variables.
 
 ```js
 // nuxt.config.js
