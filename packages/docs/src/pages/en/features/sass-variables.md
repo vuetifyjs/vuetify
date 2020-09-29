@@ -50,8 +50,6 @@ $btn-border-radius: 0px;
 
 // Modifying a SASS map variable
 $material-light: ( cards: blue );
-
-@import '~vuetify/src/styles/styles.sass';
 ```
 
 ## Webpack install
