@@ -1,7 +1,0 @@
-{
-  "props": {
-    "absolute": "Mixins.Positionable.props.absolute",
-    "fixed": "Mixins.Positionable.props.fixed",
-    "tag": "Components.Sheets.props.tag"
-  }
-}

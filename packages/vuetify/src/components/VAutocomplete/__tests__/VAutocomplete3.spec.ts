@@ -125,7 +125,8 @@ describe('VAutocomplete.ts', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/9654
-  it('should delete chip in single mode', () => {
+  // https://github.com/vuetifyjs/vuetify/issues/11639
+  it('should delete value when pressing backspace', () => {
     const wrapper = mountFunction({
       propsData: {
         chips: true,
@@ -141,6 +142,16 @@ describe('VAutocomplete.ts', () => {
     input.trigger('keydown.backspace')
 
     expect(wrapper.vm.internalValue).toBeUndefined()
+
+    wrapper.setProps({
+      multiple: true,
+      value: ['foo', 'bar'],
+    })
+
+    input.trigger('keydown.backspace')
+    input.trigger('keydown.backspace')
+
+    expect(wrapper.vm.internalValue).toEqual(['foo'])
   })
 
   it('should not change selectedIndex to 0 when backspace is pressed', () => {

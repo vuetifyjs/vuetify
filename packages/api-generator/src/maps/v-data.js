@@ -20,24 +20,23 @@ const DataPagination = {
 
 const DataProps = [
   { name: 'items', source: 'v-data' },
-  { name: 'itemKey', source: 'v-data' },
   { name: 'options', source: 'v-data', type: 'DataOptions', example: DataOptions },
   { name: 'sortBy', source: 'v-data' },
   { name: 'sortDesc', source: 'v-data' },
-  { name: 'customSort', source: 'v-data', default: '(items: any[], sortBy: string[], sortDesc: boolean[], locale: string, customSorters?: Record<string, compareFn>) => any[]' },
+  { name: 'customSort', source: 'v-data', default: 'gh:sortItems', example: '(items: any[], sortBy: string[], sortDesc: boolean[], locale: string, customSorters?: Record<string, compareFn>) => any[]' },
   { name: 'mustSort', source: 'v-data' },
   { name: 'multiSort', source: 'v-data' },
   { name: 'page', source: 'v-data' },
   { name: 'itemsPerPage', source: 'v-data' },
   { name: 'groupBy', source: 'v-data' },
   { name: 'groupDesc', source: 'v-data' },
-  { name: 'customGroup', source: 'v-data', default: '(items: any[], groupBy: string[], groupDesc: boolean[]) => Record<string, any[]>' },
+  { name: 'customGroup', source: 'v-data', default: 'gh:groupItems', example: '(items: any[], groupBy: string[], groupDesc: boolean[]) => Record<string, any[]>' },
   { name: 'locale', source: 'v-data' },
   { name: 'disableSort', source: 'v-data' },
   { name: 'disablePagination', source: 'v-data' },
   { name: 'disableFiltering', source: 'v-data' },
   { name: 'search', source: 'v-data' },
-  { name: 'customFilter', source: 'v-data', default: '(items: any[], search: string) => any[]' },
+  { name: 'customFilter', source: 'v-data', default: 'gh:searchItems', example: '(items: any[], search: string) => any[]' },
   { name: 'serverItemsLength', source: 'v-data' },
 ]
 

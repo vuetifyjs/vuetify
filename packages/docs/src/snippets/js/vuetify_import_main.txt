@@ -1,5 +1,0 @@
-// src/index.js
-
-import './src/sass/main.scss'
-// OR
-require('./src/sass/main.scss')

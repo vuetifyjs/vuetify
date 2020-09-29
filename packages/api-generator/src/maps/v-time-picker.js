@@ -1,5 +1,11 @@
 module.exports = {
   'v-time-picker': {
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
     events: [
       {
         name: 'input',

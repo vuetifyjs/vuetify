@@ -3,6 +3,8 @@ import './VTreeview.sass'
 
 // Types
 import { VNode, VNodeChildrenArrayContents, PropType } from 'vue'
+import { PropValidator } from 'vue/types/options'
+import { TreeviewItemFunction } from 'vuetify/types'
 
 // Components
 import VTreeviewNode, { VTreeviewNodeProps } from './VTreeviewNode'
@@ -23,7 +25,6 @@ import {
   filterTreeItems,
   filterTreeItem,
 } from './util/filterTreeItems'
-import { TreeviewItemFunction } from 'vuetify/types'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
 
@@ -54,21 +55,21 @@ export default mixins(
 
   props: {
     active: {
-      type: Array as PropType<NodeArray>,
+      type: Array,
       default: () => ([]),
-    },
+    } as PropValidator<NodeArray>,
     dense: Boolean,
     filter: Function as PropType<TreeviewItemFunction>,
     hoverable: Boolean,
     items: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => ([]),
-    },
+    } as PropValidator<any[]>,
     multipleActive: Boolean,
     open: {
-      type: Array as PropType<NodeArray>,
+      type: Array,
       default: () => ([]),
-    },
+    } as PropValidator<NodeArray>,
     openAll: Boolean,
     returnObject: {
       type: Boolean,
@@ -76,9 +77,9 @@ export default mixins(
     },
     search: String,
     value: {
-      type: Array as PropType<NodeArray>,
+      type: Array,
       default: () => ([]),
-    },
+    } as PropValidator<NodeArray>,
     ...VTreeviewNodeProps,
   },
 
@@ -409,7 +410,9 @@ export default mixins(
 
   render (h): VNode {
     const children: VNodeChildrenArrayContents = this.items.length
-      ? this.items.map(item => {
+      ? this.items.filter(item => {
+        return !this.isExcluded(getObjectValueByPath(item, this.itemKey))
+      }).map(item => {
         const genChild = VTreeviewNode.options.methods.genChild.bind(this)
 
         return genChild(item, getObjectValueByPath(item, this.itemDisabled))
