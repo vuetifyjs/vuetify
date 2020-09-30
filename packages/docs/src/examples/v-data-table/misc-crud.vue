@@ -197,7 +197,7 @@
       dialog (val) {
         val || this.close()
       },
-      dialogDelete( val ) {
+      dialogDelete (val) {
         val || this.closeDelete()
       },
     },
@@ -288,13 +288,13 @@
         this.dialog = true
       },
 
-      deleteItem( item ) {
+      deleteItem (item) {
         this.editedIndex = this.desserts.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialogDelete = true
       },
 
-      deleteItemConfirm( ) {
+      deleteItemConfirm () {
         this.desserts.splice(this.editedIndex, 1)
         this.closeDelete()
       },
@@ -307,12 +307,12 @@
         })
       },
 
-      closeDelete( ) {
+      closeDelete () {
         this.dialogDelete = false
         this.$nextTick(() => {
           this.editedItem = Object.assign({}, this.defaultItem)
           this.editedIndex = -1
-        });
+        })
       },
 
       save () {
