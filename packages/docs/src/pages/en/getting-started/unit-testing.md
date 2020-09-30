@@ -25,10 +25,10 @@ Unit tests are an important (and sometimes ignored) part of developing applicati
 
 Information on how to setup a test runner with Vue CLI can be found on the [official documentation](https://vue-test-utils.vuejs.org/guides/getting-started.html). At a glance, Vue CLI has getting started repositories for the following test runners:
 
-* [Jest](https://cli.vuejs.org/core-plugins/unit-jest.html)
-* [Mocha](https://cli.vuejs.org/core-plugins/unit-mocha.html)
-* [tape](https://github.com/eddyerburgh/vue-test-utils-tape-example)
-* [AVA](https://github.com/eddyerburgh/vue-test-utils-ava-example)
+- [Jest](https://cli.vuejs.org/core-plugins/unit-jest.html)
+- [Mocha](https://cli.vuejs.org/core-plugins/unit-mocha.html)
+- [tape](https://github.com/eddyerburgh/vue-test-utils-tape-example)
+- [AVA](https://github.com/eddyerburgh/vue-test-utils-ava-example)
 
 ## Bootstrapping Vuetify
 
@@ -318,12 +318,12 @@ describe('CustomNavigationDrawer.vue', () => {
 
 A complete list of all services available are listed below:
 
-* [application](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/application)
-* [breakpoint](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/breakpoint)
-* [goto](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/goto)
-* [icons](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/icons)
-* [lang](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/lang)
-* [theme](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/theme)
+- [application](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/application)
+- [breakpoint](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/breakpoint)
+- [goto](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/goto)
+- [icons](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/icons)
+- [lang](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/lang)
+- [theme](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/theme)
 
 ## E2E tests
 
