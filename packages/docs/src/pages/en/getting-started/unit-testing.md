@@ -21,7 +21,7 @@ Unit tests are an important (and sometimes ignored) part of developing applicati
 
 </alert>
 
-## Test runner setup
+## Test runners
 
 Information on how to setup a test runner with Vue CLI can be found on the [official documentation](https://vue-test-utils.vuejs.org/guides/getting-started.html). At a glance, Vue CLI has getting started repositories for the following test runners:
 
@@ -36,7 +36,7 @@ In order to properly utilize Typescript, Vuetify components extend the Vue objec
 This can vary between test runners. Make sure to reference the appropriate documentation on setup files.
 
 ```js
-// test/setup.js
+// tests/setup.js
 
 import Vue from 'vue'
 import Vuetify from 'vuetify'
@@ -52,7 +52,45 @@ Vue.use(Vuetify)
 
 ## Spec Tests
 
-Creating unit tests in Vuetify are similar to **vuex** and **vue-router** in that you will use the Vuetify object in a **localVue** instance and pass an instance to the mount functions options.
+Creating unit tests in Vuetify are similar to **vuex** and **vue-router** in that you will use the Vuetify object in a **localVue** instance and pass an instance to the mount functions options. The difference is that **Vuetify** won't be used by the localVue instance.
+
+```js
+// Imports
+import AppBtn from '../AppBtn.vue'
+import Vuetify from 'vuetify'
+
+// Utilities
+import { createLocalVue, mount } from '@vue/test-utils'
+
+describe('AppBtn.vue', () => {
+  const localVue = createLocalVue()
+
+  // DO NOT use Vuetify on the localInstance
+  // This is bootstrapped in the jest setup
+  // file located in ./tests/setup.js
+  //
+  // localVue.use(Vuetify)
+
+  const localVue = createLocalVue()
+  let vuetify
+
+  beforeEach(() => {
+    vuetify = new Vuetify()
+  })
+
+  it('should work', () => {
+    //
+  })
+})
+
+```
+
+<alert type="info">
+
+  In order to have proper **TypeScript** support, Vuetify has to extend the main _Vue_ object. This extension causes issues with Vuetify and multiple Vue instances when it comes to externalization. This caveat will not apply in **Vuetify 3**.
+
+</alert>
+
 Let's create an example test use-case that we might find in our application.
 
 ```html
@@ -61,7 +99,7 @@ Let's create an example test use-case that we might find in our application.
 <template>
   <v-card>
     <v-card-title>
-      <span v-text="title" />
+      <span v-text="title"></span>
 
       <v-spacer></v-spacer>
 
@@ -71,7 +109,7 @@ Let's create an example test use-case that we might find in our application.
     </v-card-title>
 
     <v-card-text>
-      <slot />
+      <slot></slot>
     </v-card-text>
   </v-card>
 </template>
@@ -101,14 +139,10 @@ import Vuetify from 'vuetify'
 import CustomCard from '@/components/CustomCard'
 
 // Utilities
-import {
-  mount,
-  createLocalVue
-} from '@vue/test-utils'
-
-const localVue = createLocalVue()
+import { createLocalVue, mount } from '@vue/test-utils'
 
 describe('CustomCard.vue', () => {
+  const localVue = createLocalVue()
   let vuetify
 
   beforeEach(() => {
@@ -119,9 +153,7 @@ describe('CustomCard.vue', () => {
     const wrapper = mount(CustomCard, {
       localVue,
       vuetify,
-      propsData: {
-        title: 'Foobar',
-      },
+      propsData: { title: 'Foobar' },
     })
 
     // With jest we can create snapshot files of the HTML output
@@ -138,9 +170,7 @@ describe('CustomCard.vue', () => {
     const wrapper = mount(CustomCard, {
       localVue,
       vuetify,
-      propsData: {
-        title: 'Foobar',
-      },
+      propsData: { title: 'Foobar' },
     })
 
     const event = jest.fn()
@@ -178,6 +208,13 @@ One of the most common duplicated code written in unit tests are the mount funct
 // test/CustomCard.spec.js
 
 describe('CustomCard.vue', () => {
+  const localVue = createLocalVue()
+  let vuetify
+
+  beforeEach(() => {
+    vuetify = new Vuetify()
+  })
+
   const mountFunction = options => {
     return mount(CustomCard, {
       localVue,
@@ -188,9 +225,7 @@ describe('CustomCard.vue', () => {
 
   it('should have a custom title and match snapshot', () => {
     const wrapper = mountFunction({
-      propsData: {
-        title: 'Fizzbuzz',
-      },
+      propsData: { title: 'Fizzbuzz' },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -213,10 +248,7 @@ import Vuetify from 'vuetify'
 import CustomAlert from '@/components/CustomAlert'
 
 // Utilities
-import {
-  mount,
-  createLocalVue
-} from '@vue/test-utils'
+import { createLocalVue, mount } from '@vue/test-utils'
 
 const localVue = createLocalVue()
 
@@ -224,7 +256,7 @@ describe('CustomAlert.vue', () => {
   let vuetify
 
   beforeEach(() => {
-    vuetify = new Vuetify({
+    vuetify = {
       mocks: {
         $vuetify: {
           lang: {
@@ -232,7 +264,7 @@ describe('CustomAlert.vue', () => {
           },
         },
       }
-    })
+    }
   })
 
   it('should have a custom title and match snapshot', () => {

@@ -42,9 +42,15 @@ The _value_ property is one of:
 - `caption`
 - `overline`
 
-<alert type="warning">
+<br>
 
-Prior to v2.3.0, these classes were:
+<alert type="success">
+
+  **TIP**
+
+  In all versions prior to v2.3.0, these classes were one of the following:
+
+  <br>
 
 - `.display-4`
 - `.display-3`
