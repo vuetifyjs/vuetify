@@ -77,6 +77,12 @@ export function createRouter (vuetify, store, i18n) {
     loadLocale(to.params.locale).then(() => next())
   })
 
+  router.afterEach((to, from) => {
+    if (to.path !== from.path && store.state.pwa.sw.update) {
+      store.dispatch('pwa/update')
+    }
+  })
+
   Vue.use(VueGtag, {
     bootstrap: !IS_SERVER,
     config: { id: 'UA-75262397-3' },

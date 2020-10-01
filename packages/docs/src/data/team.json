@@ -356,5 +356,17 @@
     "name": "Lee Marlow",
     "team": "contributors",
     "twitter": "Leespiker"
+  },
+  "ElijahKotyluk": {
+    "discord": "edk#4363",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "USA",
+    "name": "Elijah Kotyluk",
+    "team": "contributors"
   }
 }

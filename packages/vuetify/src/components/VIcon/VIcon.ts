@@ -86,9 +86,9 @@ const VIcon = mixins(
         (explicitSize && SIZE_MAP[explicitSize]) || convertToUnit(this.size)
       )
     },
-    // Component data for both font and svg icon.
+    // Component data for both font icon and SVG wrapper span
     getDefaultData (): VNodeData {
-      const data: VNodeData = {
+      return {
         staticClass: 'v-icon notranslate',
         class: {
           'v-icon--disabled': this.disabled,
@@ -105,8 +105,20 @@ const VIcon = mixins(
         },
         on: this.listeners$,
       }
+    },
+    getSvgWrapperData () {
+      const fontSize = this.getSize()
+      const wrapperData = {
+        ...this.getDefaultData(),
+        style: fontSize ? {
+          fontSize,
+          height: fontSize,
+          width: fontSize,
+        } : undefined,
+      }
+      this.applyColors(wrapperData)
 
-      return data
+      return wrapperData
     },
     applyColors (data: VNodeData): void {
       data.class = { ...data.class, ...this.themeClasses }
@@ -142,18 +154,8 @@ const VIcon = mixins(
     },
     renderSvgIcon (icon: string, h: CreateElement): VNode {
       const fontSize = this.getSize()
-      const wrapperData = {
-        ...this.getDefaultData(),
-        style: fontSize ? {
-          fontSize,
-          height: fontSize,
-          width: fontSize,
-        } : undefined,
-      }
-      wrapperData.class['v-icon--svg'] = true
-      this.applyColors(wrapperData)
-
       const svgData: VNodeData = {
+        class: 'v-icon__svg',
         attrs: {
           xmlns: 'http://www.w3.org/2000/svg',
           viewBox: '0 0 24 24',
@@ -164,7 +166,7 @@ const VIcon = mixins(
         },
       }
 
-      return h(this.hasClickListener ? 'button' : 'span', wrapperData, [
+      return h(this.hasClickListener ? 'button' : 'span', this.getSvgWrapperData(), [
         h('svg', svgData, [
           h('path', {
             attrs: {
@@ -178,8 +180,11 @@ const VIcon = mixins(
       icon: VuetifyIconComponent,
       h: CreateElement
     ): VNode {
-      const data = this.getDefaultData()
-      data.class['v-icon--is-component'] = true
+      const data: VNodeData = {
+        class: {
+          'v-icon__svg': true,
+        },
+      }
 
       const size = this.getSize()
       if (size) {
@@ -196,7 +201,9 @@ const VIcon = mixins(
       data.props = icon.props
       data.nativeOn = data.on
 
-      return h(component, data)
+      return h(this.hasClickListener ? 'button' : 'span', this.getSvgWrapperData(), [
+        h(component, data),
+      ])
     },
   },
 

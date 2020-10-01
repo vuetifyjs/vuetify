@@ -124,9 +124,10 @@
 
 <script>
   // Utilities
-  import { sync } from 'vuex-pathify'
   import { formatDate } from '@/util/date.js'
+  import { get, sync } from 'vuex-pathify'
   import { subDays } from 'date-fns'
+  import { wait } from '@/util/helpers'
   import bucket from '@/plugins/cosmicjs'
 
   export default {
@@ -145,9 +146,9 @@
     }),
 
     computed: {
-      snack: sync('snackbar/value'),
       snackbar: sync('snackbar/snackbar'),
       unotifications: sync('user/notifications'),
+      hasRecentlyViewed: get('user/hasRecentlyViewed'),
       done () {
         return this.filtered.length === 0
       },
@@ -202,6 +203,20 @@
       })
 
       this.all = notifications || []
+
+      if (
+        this.hasRecentlyViewed ||
+        !this.unread.length
+      ) return
+
+      await wait(3000)
+
+      const { slug, metadata } = this.unread[0]
+
+      this.snackbar = {
+        slug,
+        ...metadata,
+      }
     },
 
     methods: {

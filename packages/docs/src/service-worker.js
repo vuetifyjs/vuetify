@@ -9,7 +9,7 @@ setDefaultHandler(({ url, request }) => {
   if (
     url.origin === self.location.origin &&
     request.destination === 'document'
-  ) return matchPrecache('/_fallback.html')
+  ) return matchPrecache(url.pathname.startsWith('/eo-UY/') ? '_crowdin.html' : '/_fallback.html')
 })
 
 self.addEventListener('message', event => {
