@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "deepmerge": "^4.0.0",
-    "vue": "^3.0.0-rc.5",
+    "vue": "^3.0.0",
     "vuetify": "^2.3.7"
   },
   "devDependencies": {
