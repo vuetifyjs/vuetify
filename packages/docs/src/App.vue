@@ -19,10 +19,10 @@
     metaInfo () {
       const suffix = this.name !== 'Home' ? ' — Vuetify' : ''
 
-      return genAppMetaInfo({
-        ...metadata,
+      return {
+        ...genAppMetaInfo(metadata),
         titleTemplate: chunk => `${chunk}${suffix}`,
-      })
+      }
     },
 
     computed: {

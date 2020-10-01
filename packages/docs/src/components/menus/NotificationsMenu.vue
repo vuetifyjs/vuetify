@@ -125,7 +125,10 @@
 <script>
   // Utilities
   import { formatDate } from '@/util/date.js'
-  import { call, sync } from 'vuex-pathify'
+  import { get, sync } from 'vuex-pathify'
+  import { subDays } from 'date-fns'
+  import { wait } from '@/util/helpers'
+  import bucket from '@/plugins/cosmicjs'
 
   export default {
     name: 'NotificationsMenu',
@@ -133,6 +136,7 @@
     inject: ['theme'],
 
     data: () => ({
+      all: [],
       archived: false,
       icons: {
         read: '$mdiEmailOpen',
@@ -142,10 +146,9 @@
     }),
 
     computed: {
-      notifications: sync('notifications/all'),
-      snack: sync('snackbar/value'),
       snackbar: sync('snackbar/snackbar'),
       unotifications: sync('user/notifications'),
+      hasRecentlyViewed: get('user/hasRecentlyViewed'),
       done () {
         return this.filtered.length === 0
       },
@@ -156,7 +159,7 @@
       // Map items to contain a viewed
       // property and format the date
       mapped () {
-        return this.notifications.map(item => {
+        return this.all.map(item => {
           return {
             ...item,
             created_at: formatDate(new Date(item.created_at)),
@@ -184,11 +187,39 @@
     },
 
     async mounted () {
-      this.fetch()
+      if (!bucket.available) return
+
+      const { objects: notifications } = await bucket.getObjects({
+        type: 'notifications',
+        props: 'created_at,metadata,slug,title',
+        status: 'published',
+        limit: 10,
+        sort: '-created_at',
+        query: {
+          created_at: {
+            $gt: Math.ceil(subDays(Date.now(), 60).getTime()),
+          },
+        },
+      })
+
+      this.all = notifications || []
+
+      if (
+        this.hasRecentlyViewed ||
+        !this.unread.length
+      ) return
+
+      await wait(3000)
+
+      const { slug, metadata } = this.unread[0]
+
+      this.snackbar = {
+        slug,
+        ...metadata,
+      }
     },
 
     methods: {
-      fetch: call('notifications/fetch'),
       toggle (slug) {
         this.unotifications = this.unotifications.includes(slug)
           ? this.unotifications.filter(n => n !== slug)

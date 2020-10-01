@@ -71,7 +71,7 @@ As a final touch, let's add a gutter by wrapping the content in a `v-container` 
 </v-app>
 ```
 
-Up next, we take our newly established baseline and and enhance it with new layout components and customization options.
+Up next, we take our newly established baseline and enhance it with new layout components and customization options.
 
 ## Combining layout components
 

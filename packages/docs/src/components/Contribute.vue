@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="category !== 'api'">
     <div class="blue-grey--text text--darken-1 d-flexalign-center justify-space-between">
       <div class="font-weight-medium d-flex align-baseline grow flex-wrap">
         <i18n
@@ -57,7 +57,7 @@
         return stat.modified
       },
       href () {
-        return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/src/pages/en/${this.category}/${this.page}.md`
+        return `https://github.com/vuetifyjs/vuetify/tree/${this.branch}/packages/docs/src/pages/en/${this.category}/${this.page}.md`
       },
     },
   }

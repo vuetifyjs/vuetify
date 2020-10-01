@@ -1,30 +1,27 @@
-// Pathify
+// Utilities
 import { make } from 'vuex-pathify'
+import octokit from '@/plugins/octokit'
 
 // Data
 import team from '@/data/team'
 
 const state = {
   all: [],
-  initializing: false,
 }
 
 const mutations = make.mutations(state)
 
 const actions = {
   fetch: async ({ commit, state }) => {
-    if (state.initializing || state.all.length) return
+    if (state.all.length) return
 
-    commit('initializing', true)
-
-    const members = await fetch('https://api.github.com/orgs/vuetifyjs/members', {
-      method: 'get',
-      headers: { 'Content-Type': 'application/json' },
-    }).then(res => res.json())
     const all = []
+    const { data: members } = await octokit.request('GET /orgs/vuetifyjs/members')
 
     for (const key in team) {
-      const member = members.find(u => u.login.localeCompare(key, 'en', { sensitivity: 'base' }) === 0)
+      const member = members.find(u => u.login.localeCompare(key, 'en', {
+        sensitivity: 'base',
+      }) === 0)
 
       if (!member) continue
 
@@ -36,7 +33,6 @@ const actions = {
     }
 
     commit('all', all)
-    commit('initializing', false)
   },
 }
 

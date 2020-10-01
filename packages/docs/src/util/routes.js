@@ -9,6 +9,7 @@ import { IN_BROWSER } from '@/util/globals'
 const genericLocaleRegexp = /[a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3}/
 const fallbackLocale = genericLocaleRegexp.source
 const languagePattern = locales.map(lang => lang.alternate || lang.locale).join('|')
+const languageRegexp = new RegExp('^(' + languagePattern + ')$')
 
 export function abort (code = 404) {
   return {
@@ -47,13 +48,11 @@ export function locale (children) {
 }
 
 export function preferredLocale (locale = 'en') {
-  const languageRegexp = new RegExp('^(' + languagePattern + ')$')
-
   if (!IN_BROWSER) return locale
 
-  const languages = navigator.languages && navigator.languages.find(l => l.match(languageRegexp))
+  const languages = [].concat(window.localStorage.getItem('currentLanguage') || [], navigator.languages || [])
 
-  return window.localStorage.getItem('currentLanguage') || languages || locale
+  return languages.find(l => l.match(languageRegexp)) || locale
 }
 
 export function redirect (

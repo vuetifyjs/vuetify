@@ -107,7 +107,7 @@
     "funding": [
       "[GitHub Sponsors](https://github.com/sponsors/bdeo)"
     ],
-    "linkedin": "andrew-henry-01049830",
+    "linkedin": "brandondeo",
     "location": "Philadelphia, PA, USA",
     "name": "Brandon Deo",
     "team": "core"
@@ -356,5 +356,17 @@
     "name": "Lee Marlow",
     "team": "contributors",
     "twitter": "Leespiker"
+  },
+  "ElijahKotyluk": {
+    "discord": "edk#4363",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "USA",
+    "name": "Elijah Kotyluk",
+    "team": "contributors"
   }
 }

@@ -1,6 +1,7 @@
 <template>
   <v-container
     class="pa-4 pa-sm-6 pa-md-8"
+    fluid
     tag="section"
   >
     <v-responsive
@@ -107,7 +108,14 @@
       }
 
       this.init(this.md)
-      this.$load(this.frontmatter.assets)
+
+      const { assets, actions = [] } = this.frontmatter
+
+      this.$load(assets)
+
+      for (const action of actions) {
+        this.$store.dispatch(action)
+      }
     },
 
     methods: {

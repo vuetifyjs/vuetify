@@ -1,6 +1,9 @@
 // Utilities
 import { make } from 'vuex-pathify'
 
+// Globals
+import { IN_BROWSER } from '@/util/globals'
+
 const state = {
   snackbar: false,
   sw: {
@@ -14,6 +17,8 @@ const mutations = make.mutations(state)
 const actions = {
   ...make.actions(state),
   init: ({ commit }) => {
+    if (!IN_BROWSER) return
+
     window.addEventListener('beforeinstallprompt', e => {
       // Intercept default PWA install prompt
       e.preventDefault()

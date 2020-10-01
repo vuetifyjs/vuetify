@@ -44,10 +44,6 @@
 
     computed: {
       locale: get('route/params@locale'),
-      translating: get('pages/translating'),
-      current () {
-        return this.locales.find(l => l.locale === this.locale) || {}
-      },
       items () {
         return [
           { heading: this.$t('translations') },

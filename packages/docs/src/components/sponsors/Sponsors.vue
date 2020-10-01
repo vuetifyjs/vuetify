@@ -1,5 +1,6 @@
 <template>
   <v-row
+    v-if="sponsors"
     align="center"
     class="v-sponsors"
     dense

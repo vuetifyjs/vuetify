@@ -149,6 +149,7 @@
   "resources-and-tools": "Resources and tools",
   "resources": "Resources",
   "rtl": "RTL",
+  "scroll-to-top": "Scroll to top",
   "search": {
     "placeholder": "Search Vuetify",
     "key-hint": "(press /)"

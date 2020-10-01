@@ -2,7 +2,7 @@
 
 exports[`VIcon for component icon should render an svg icon 1`] = `
 <span aria-hidden="true"
-      class="v-icon notranslate v-icon--svg theme--light"
+      class="v-icon notranslate theme--light"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="0 0 24 24"
@@ -10,6 +10,7 @@ exports[`VIcon for component icon should render an svg icon 1`] = `
        width="24"
        role="img"
        aria-hidden="true"
+       class="v-icon__svg"
   >
     <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
     </path>
@@ -19,7 +20,7 @@ exports[`VIcon for component icon should render an svg icon 1`] = `
 
 exports[`VIcon for component icon should render an svg icon 2`] = `
 <span aria-hidden="true"
-      class="v-icon notranslate v-icon--svg theme--light"
+      class="v-icon notranslate theme--light"
       style="font-size: 36px; height: 36px; width: 36px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -28,6 +29,7 @@ exports[`VIcon for component icon should render an svg icon 2`] = `
        width="36px"
        role="img"
        aria-hidden="true"
+       class="v-icon__svg"
   >
     <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
     </path>
@@ -36,46 +38,62 @@ exports[`VIcon for component icon should render an svg icon 2`] = `
 `;
 
 exports[`VIcon for component icon should render component 1`] = `
-<div class="v-icon notranslate test-component v-icon--is-component theme--light"
-     aria-hidden="true"
+<span aria-hidden="true"
+      class="v-icon notranslate theme--light"
 >
-  test icon
-</div>
+  <div class="test-component v-icon__svg theme--light">
+    test icon
+  </div>
+</span>
 `;
 
 exports[`VIcon for component icon should set font size from helper prop 1`] = `
-<div class="v-icon notranslate test-component v-icon--is-component theme--light"
-     aria-hidden="true"
-     style="font-size: 16px; height: 16px; width: 16px;"
+<span aria-hidden="true"
+      class="v-icon notranslate theme--light"
+      style="font-size: 16px; height: 16px; width: 16px;"
 >
-  test icon
-</div>
+  <div class="test-component v-icon__svg theme--light"
+       style="font-size: 16px; height: 16px; width: 16px;"
+  >
+    test icon
+  </div>
+</span>
 `;
 
 exports[`VIcon for component icon should set font size from helper prop 2`] = `
-<div class="v-icon notranslate test-component v-icon--is-component theme--light"
-     aria-hidden="true"
+<span aria-hidden="true"
+      class="v-icon notranslate theme--light"
 >
-  test icon
-</div>
+  <div class="test-component v-icon__svg theme--light">
+    test icon
+  </div>
+</span>
 `;
 
 exports[`VIcon for component icon should set font size from helper prop 3`] = `
-<div class="v-icon notranslate test-component v-icon--is-component theme--light"
-     aria-hidden="true"
-     style="font-size: 36px; height: 36px; width: 36px;"
+<span aria-hidden="true"
+      class="v-icon notranslate theme--light"
+      style="font-size: 36px; height: 36px; width: 36px;"
 >
-  test icon
-</div>
+  <div class="test-component v-icon__svg theme--light"
+       style="font-size: 36px; height: 36px; width: 36px;"
+  >
+    test icon
+  </div>
+</span>
 `;
 
 exports[`VIcon for component icon should set font size from helper prop 4`] = `
-<div class="v-icon notranslate test-component v-icon--is-component theme--light"
-     aria-hidden="true"
-     style="font-size: 40px; height: 40px; width: 40px;"
+<span aria-hidden="true"
+      class="v-icon notranslate theme--light"
+      style="font-size: 40px; height: 40px; width: 40px;"
 >
-  test icon
-</div>
+  <div class="test-component v-icon__svg theme--light"
+       style="font-size: 40px; height: 40px; width: 40px;"
+  >
+    test icon
+  </div>
+</span>
 `;
 
 exports[`VIcon set font size from helper prop 1`] = `
