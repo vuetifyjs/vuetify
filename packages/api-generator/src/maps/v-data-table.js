@@ -168,7 +168,8 @@ module.exports = {
       },
       {
         name: 'customFilter',
-        default: '(value: any, search: string | null, item: any) => boolean',
+        default: 'gh:defaultFilter',
+        example: '(value: any, search: string | null, item: any) => boolean',
       },
     ]),
     slots: deepmerge(DataTableSlots, DataIteratorSlots),

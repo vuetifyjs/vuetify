@@ -1,0 +1,20 @@
+{
+  "props": {
+    "alignSelf": "Applies the [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) css property. Available options are **start**, **center**, **end**, **auto**, **baseline** and **stretch**.",
+    "cols": "Sets the default number of columns the component extends. Available options are **1 -> 12** and **auto**.",
+    "sm": "Changes the number of columns on small and greater breakpoints.",
+    "md": "Changes the number of columns on medium and greater breakpoints.",
+    "lg": "Changes the number of columns on large and greater breakpoints.",
+    "xl": "Changes the number of columns on extra large and greater breakpoints.",
+    "offset": "Sets the default offset for the column.",
+    "offsetSm": "Changes the offset of the component on small and greater breakpoints.",
+    "offsetMd": "Changes the offset of the component on medium and greater breakpoints.",
+    "offsetLg": "Changes the offset of the component on large and greater breakpoints.",
+    "offsetXl": "Changes the offset of the component on extra large and greater breakpoints.",
+    "order": "Sets the default [order](https://developer.mozilla.org/en-US/docs/Web/CSS/order) for the column.",
+    "orderSm": "Changes the order of the component on small and greater breakpoints.",
+    "orderMd": "Changes the order of the component on medium and greater breakpoints.",
+    "orderLg": "Changes the order of the component on large and greater breakpoints.",
+    "orderXl": "Changes the order of the component on extra large and greater breakpoints."
+  }
+}

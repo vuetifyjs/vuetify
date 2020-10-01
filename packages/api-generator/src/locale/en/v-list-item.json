@@ -1,0 +1,13 @@
+{
+  "props": {
+    "color": "Applies specified color to the control when in an **active** state or **input-value** is **true** - it can be the name of material color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`)",
+    "dense": "Lowers max height of list tiles",
+    "disabled": "Disables the component",
+    "inactive": "If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler",
+    "inputValue": "Controls the **active** state of the item. This is typically used to highlight the component",
+    "selectable": "Allow text selection inside `v-list-item`. This prop uses [user-select](https://developer.mozilla.org/en-US/docs/Web/CSS/user-select)",
+    "threeLine": "Increases list-item height for three lines. This prop uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers.",
+    "twoLine": "Increases list-item height for two lines. This prop uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers.",
+    "value": "The value used when a child of a [v-list-item-group](/components/list-item-groups)."
+  }
+}

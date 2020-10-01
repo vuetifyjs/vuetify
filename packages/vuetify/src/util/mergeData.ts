@@ -132,26 +132,30 @@ export function mergeClasses (target: any, source: any) {
   return target ? wrapInArray(target).concat(source) : source
 }
 
-export function mergeListeners (
-  target: { [key: string]: Function | Function[] } | undefined,
-  source: { [key: string]: Function | Function[] } | undefined
-) {
-  if (!target) return source
-  if (!source) return target
+export function mergeListeners (...args: [
+  { [key: string]: Function | Function[] } | undefined,
+  { [key: string]: Function | Function[] } | undefined
+]) {
+  if (!args[0]) return args[1]
+  if (!args[1]) return args[0]
 
-  let event: string
+  const dest: { [key: string]: Function | Function[] } = {}
 
-  for (event of Object.keys(source)) {
-    // Concat function to array of functions if callback present.
-    if (target[event]) {
-      // Insert current iteration data in beginning of merged array.
-      target[event] = wrapInArray(target[event])
-      ;(target[event] as Function[]).push(...wrapInArray(source[event]))
-    } else {
-      // Straight assign.
-      target[event] = source[event]
+  for (let i = 2; i--;) {
+    const arg = args[i]
+    for (const event in arg) {
+      if (!arg[event]) continue
+
+      if (dest[event]) {
+        // Merge current listeners before (because we are iterating backwards).
+        // Note that neither "target" or "source" must be altered.
+        dest[event] = ([] as Function[]).concat(arg[event], dest[event])
+      } else {
+        // Straight assign.
+        dest[event] = arg[event]
+      }
     }
   }
 
-  return target
+  return dest
 }

@@ -4,6 +4,8 @@
     outlined
     tile
   >
-    <div>I'm an inline flexbox container!</div>
+    <div>
+      I'm an inline flexbox container!
+    </div>
   </v-card>
 </template>
