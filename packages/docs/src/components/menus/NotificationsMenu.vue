@@ -90,10 +90,8 @@
         <v-list-item
           v-for="({ created_at, metadata, slug, title }) in filtered"
           :key="slug"
-          :href="metadata.action"
           :ripple="false"
-          target="_blank"
-          @click="toggle(slug)"
+          @click="select(slug)"
         >
           <v-list-item-content>
             <div
@@ -220,6 +218,18 @@
     },
 
     methods: {
+      select (slug) {
+        const { metadata } = this.all.find(notification => {
+          return notification.slug === slug
+        }) || {}
+
+        this.snackbar = {
+          slug,
+          ...metadata,
+        }
+
+        this.menu = false
+      },
       toggle (slug) {
         this.unotifications = this.unotifications.includes(slug)
           ? this.unotifications.filter(n => n !== slug)
