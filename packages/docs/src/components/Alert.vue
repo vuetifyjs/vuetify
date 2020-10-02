@@ -18,6 +18,6 @@
 
 <style lang="sass">
   .v-alert--doc
-    .v-alert__content p
+    .v-alert__content p:last-child
       margin-bottom: 0 !important
 </style>
