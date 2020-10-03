@@ -3,12 +3,12 @@ import { computed } from 'vue'
 
 // Types
 export interface ElevationProps {
-  elevation?: number | string
+  elevation?: number | string | null
   flat?: boolean
 }
 
 // Props
-export function elevationProps (
+export function makeElevationProps (
   defaults: Partial<ElevationProps> = {}
 ) {
   return {
@@ -36,9 +36,9 @@ export function useElevationClasses (props: ElevationProps) {
   const elevationClasses = computed(() => {
     const { elevation = props.flat ? 0 : undefined } = props
 
-    return (elevation != null && elevation !== '') ? {
-      class: { [`elevation-${elevation}`]: true },
-    } : {}
+    return (elevation != null && elevation !== '')
+      ? { [`elevation-${elevation}`]: true }
+      : {}
   })
 
   return { elevationClasses }
