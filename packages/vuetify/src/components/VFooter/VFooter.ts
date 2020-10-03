@@ -9,22 +9,20 @@ import Applicationable from '../../mixins/applicationable'
 import SSRBootable from '../../mixins/ssr-bootable'
 
 // Utilities
-import mixins from '../../util/mixins'
+import { defineComponent, h } from 'vue'
 import { convertToUnit } from '../../util/helpers'
 
-// Types
-import { VNode } from 'vue/types/vnode'
-
-/* @vue/component */
-export default mixins(
-  VSheet,
-  Applicationable('footer', [
-    'height',
-    'inset',
-  ]),
-  SSRBootable
-).extend({
+export default defineComponent({
   name: 'v-footer',
+
+  mixins: [
+    VSheet,
+    Applicationable('footer', [
+      'height',
+      'inset',
+    ]),
+    SSRBootable,
+  ],
 
   props: {
     height: {
@@ -45,7 +43,7 @@ export default mixins(
     },
     classes (): object {
       return {
-        ...VSheet.options.computed.classes.call(this),
+        ...VSheet.computed!.classes.call(this),
         'v-footer--absolute': this.absolute,
         'v-footer--fixed': !this.absolute && (this.app || this.fixed),
         'v-footer--padless': this.padless,
@@ -84,7 +82,7 @@ export default mixins(
       const height = parseInt(this.height)
 
       return {
-        ...VSheet.options.computed.styles.call(this),
+        ...VSheet.computed!.styles.call(this),
         height: isNaN(height) ? height : convertToUnit(height),
         left: convertToUnit(this.computedLeft),
         right: convertToUnit(this.computedRight),
@@ -103,13 +101,12 @@ export default mixins(
     },
   },
 
-  render (h): VNode {
+  render () {
     const data = this.setBackgroundColor(this.color, {
-      staticClass: 'v-footer',
-      class: this.classes,
+      class: ['v-footer', this.classes],
       style: this.styles,
     })
 
-    return h(this.tag, data, this.$slots.default)
+    return h(this.tag, data, this.$slots.default?.())
   },
 })

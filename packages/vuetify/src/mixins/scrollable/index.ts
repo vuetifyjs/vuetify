@@ -1,11 +1,6 @@
-// Directives
-import { Scroll } from '../../directives'
-
 // Utilities
+import { defineComponent } from 'vue'
 import { consoleWarn } from '../../util/console'
-
-// Types
-import Vue from 'vue'
 
 /**
  * Scrollable
@@ -15,11 +10,8 @@ import Vue from 'vue'
  * scrolling thresholds being
  * met.
  */
-/* @vue/component */
-export default Vue.extend({
+export default defineComponent({
   name: 'scrollable',
-
-  directives: { Scroll },
 
   props: {
     scrollTarget: String,

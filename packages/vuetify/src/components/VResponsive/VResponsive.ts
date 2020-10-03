@@ -4,14 +4,16 @@ import './VResponsive.sass'
 import Measurable, { NumberOrNumberString } from '../../mixins/measurable'
 
 // Types
-import { VNode } from 'vue'
+import type { VNode } from 'vue'
 
 // Utils
-import mixins from '../../util/mixins'
+import { defineComponent, h } from 'vue'
 
 /* @vue/component */
-export default mixins(Measurable).extend({
+export default defineComponent({
   name: 'v-responsive',
+
+  mixins: [Measurable],
 
   props: {
     aspectRatio: [String, Number] as NumberOrNumberString,
@@ -29,26 +31,25 @@ export default mixins(Measurable).extend({
     __cachedSizer (): VNode | [] {
       if (!this.aspectStyle) return []
 
-      return this.$createElement('div', {
+      return h('div', {
         style: this.aspectStyle,
-        staticClass: 'v-responsive__sizer',
+        class: 'v-responsive__sizer',
       })
     },
   },
 
   methods: {
     genContent (): VNode {
-      return this.$createElement('div', {
-        staticClass: 'v-responsive__content',
-      }, this.$slots.default)
+      return h('div', {
+        class: 'v-responsive__content',
+      }, this.$slots.default?.())
     },
   },
 
-  render (h): VNode {
+  render (): VNode {
     return h('div', {
-      staticClass: 'v-responsive',
+      class: 'v-responsive',
       style: this.measurableStyles,
-      on: this.$listeners,
     }, [
       this.__cachedSizer,
       this.genContent(),

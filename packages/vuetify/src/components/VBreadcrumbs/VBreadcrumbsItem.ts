@@ -1,11 +1,12 @@
+import { defineComponent, h } from 'vue'
 import Routable from '../../mixins/routable'
 
-import mixins from '../../util/mixins'
-import { VNode } from 'vue'
+import type { VNode } from 'vue'
 
-/* @vue/component */
-export default mixins(Routable).extend({
+export default defineComponent({
   name: 'v-breadcrumbs-item',
+
+  mixins: [Routable],
 
   props: {
     // In a breadcrumb, the currently
@@ -29,17 +30,14 @@ export default mixins(Routable).extend({
     },
   },
 
-  render (h): VNode {
+  render (): VNode {
     const { tag, data } = this.generateRouteLink()
 
     return h('li', [
       h(tag, {
         ...data,
-        attrs: {
-          ...data.attrs,
-          'aria-current': this.isActive && this.isLink ? 'page' : undefined,
-        },
-      }, this.$slots.default),
+        'aria-current': this.isActive && this.isLink ? 'page' : undefined,
+      }, this.$slots.default?.()),
     ])
   },
 })

@@ -1,10 +1,6 @@
 // Styles
 import './VChip.sass'
 
-// Types
-import { VNode } from 'vue'
-import mixins from '../../util/mixins'
-
 // Components
 import { VExpandXTransition } from '../transitions'
 import VIcon from '../VIcon'
@@ -18,21 +14,23 @@ import Routable from '../../mixins/routable'
 import Sizeable from '../../mixins/sizeable'
 
 // Utilities
+import { defineComponent, h, cloneVNode, withDirectives, vShow } from 'vue'
 import { breaking } from '../../util/console'
 
 // Types
-import { PropValidator, PropType } from 'vue/types/options'
+import type { VNode, Prop } from 'vue'
 
-/* @vue/component */
-export default mixins(
-  Colorable,
-  Sizeable,
-  Routable,
-  Themeable,
-  GroupableFactory('chipGroup'),
-  ToggleableFactory('inputValue')
-).extend({
+export default defineComponent({
   name: 'v-chip',
+
+  mixins: [
+    Colorable,
+    Sizeable,
+    Routable,
+    Themeable,
+    GroupableFactory('chipGroup'),
+    ToggleableFactory('inputValue'),
+  ],
 
   props: {
     active: {
@@ -42,11 +40,12 @@ export default mixins(
     activeClass: {
       type: String,
       default (): string | undefined {
-        if (!this.chipGroup) return ''
+        // TODO
+        // if (!this.chipGroup) return ''
 
-        return this.chipGroup.activeClass
+        // return this.chipGroup.activeClass
       },
-    } as any as PropValidator<string>,
+    } as Prop<string>,
     close: Boolean,
     closeIcon: {
       type: String,
@@ -68,7 +67,7 @@ export default mixins(
       default: 'span',
     },
     textColor: String,
-    value: null as any as PropType<any>,
+    value: null as any as Prop<any>,
   },
 
   data: () => ({
@@ -79,7 +78,7 @@ export default mixins(
     classes (): object {
       return {
         'v-chip': true,
-        ...Routable.options.computed.classes.call(this),
+        ...Routable.computed!.classes.call(this),
         'v-chip--clickable': this.isClickable,
         'v-chip--disabled': this.disabled,
         'v-chip--draggable': this.draggable,
@@ -99,7 +98,7 @@ export default mixins(
     },
     isClickable (): boolean {
       return Boolean(
-        Routable.options.computed.isClickable.call(this) ||
+        Routable.computed!.isClickable.call(this) ||
         this.chipGroup
       )
     },
@@ -130,61 +129,52 @@ export default mixins(
 
       if (this.isActive) {
         children.push(
-          this.$createElement(VIcon, {
-            staticClass: 'v-chip__filter',
-            props: { left: true },
-          }, this.filterIcon)
+          h(VIcon, {
+            class: 'v-chip__filter',
+            left: true,
+          }, () => this.filterIcon)
         )
       }
 
-      return this.$createElement(VExpandXTransition, children)
+      return h(VExpandXTransition, children)
     },
     genClose (): VNode {
-      return this.$createElement(VIcon, {
-        staticClass: 'v-chip__close',
-        props: {
-          right: true,
-          size: 18,
-        },
-        on: {
-          click: (e: Event) => {
-            e.stopPropagation()
-            e.preventDefault()
+      return h(VIcon, {
+        class: 'v-chip__close',
+        right: true,
+        size: 18,
+        onClick: (e: Event) => {
+          e.stopPropagation()
+          e.preventDefault()
 
-            this.$emit('click:close')
-            this.$emit('update:active', false)
-          },
+          this.$emit('click:close')
+          this.$emit('update:active', false)
         },
       }, this.closeIcon)
     },
     genContent (): VNode {
-      return this.$createElement('span', {
-        staticClass: 'v-chip__content',
+      return h('span', {
+        class: 'v-chip__content',
       }, [
         this.filter && this.genFilter(),
-        this.$slots.default,
+        this.$slots.default?.(),
         this.hasClose && this.genClose(),
       ])
     },
   },
 
-  render (h): VNode {
+  render (): VNode {
     const children = [this.genContent()]
-    let { tag, data } = this.generateRouteLink()
-
-    data.attrs = {
-      ...data.attrs,
+    const vnode = this.generateRouteLink(children)
+    const data: Dictionary = {
       draggable: this.draggable ? 'true' : undefined,
-      tabindex: this.chipGroup && !this.disabled ? 0 : data.attrs!.tabindex,
+      tabindex: this.chipGroup && !this.disabled ? 0 : this.$attrs.tabindex,
     }
-    data.directives!.push({
-      name: 'show',
-      value: this.active,
-    })
-    data = this.setBackgroundColor(this.color, data)
 
-    const color = this.textColor || (this.outlined && this.color)
+    const textColor = this.textColor || (this.outlined && this.color)
 
-    return h(tag, this.setTextColor(color, data), children)
+    return withDirectives(cloneVNode(vnode, this.setTextColor(textColor, this.setBackgroundColor(this.color, data))), [
+      [vShow, this.active],
+    ])
   },
 })

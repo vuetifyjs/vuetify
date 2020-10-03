@@ -2,8 +2,7 @@
 import './VBreadcrumbs.sass'
 
 // Types
-import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import type { VNode, Prop } from 'vue'
 
 // Components
 import VBreadcrumbsItem from './VBreadcrumbsItem'
@@ -13,13 +12,14 @@ import VBreadcrumbsDivider from './VBreadcrumbsDivider'
 import Themeable from '../../mixins/themeable'
 
 // Utils
-import mixins from '../../util/mixins'
+import { defineComponent, h } from 'vue'
 
-export default mixins(
-  Themeable
-  /* @vue/component */
-).extend({
+export default defineComponent({
   name: 'v-breadcrumbs',
+
+  mixins: [
+    Themeable,
+  ],
 
   props: {
     divider: {
@@ -29,13 +29,14 @@ export default mixins(
     items: {
       type: Array,
       default: () => ([]),
-    } as PropValidator<any[]>,
+    } as Prop<any[]>,
     large: Boolean,
   },
 
   computed: {
     classes (): object {
       return {
+        'v-breadcrumbs': true,
         'v-breadcrumbs--large': this.large,
         ...this.themeClasses,
       }
@@ -44,11 +45,11 @@ export default mixins(
 
   methods: {
     genDivider () {
-      return this.$createElement(VBreadcrumbsDivider, this.$slots.divider ? this.$slots.divider : this.divider)
+      return h(VBreadcrumbsDivider, this.$slots.divider ? this.$slots.divider() : this.divider)
     },
     genItems () {
       const items = []
-      const hasSlot = !!this.$scopedSlots.item
+      const hasSlot = !!this.$slots.item
       const keys = []
 
       for (let i = 0; i < this.items.length; i++) {
@@ -56,8 +57,8 @@ export default mixins(
 
         keys.push(item.text)
 
-        if (hasSlot) items.push(this.$scopedSlots.item!({ item }))
-        else items.push(this.$createElement(VBreadcrumbsItem, { key: keys.join('.'), props: item }, [item.text]))
+        if (hasSlot) items.push(this.$slots.item!({ item }))
+        else items.push(h(VBreadcrumbsItem, { key: keys.join('.'), ...item }, [item.text]))
 
         if (i < this.items.length - 1) items.push(this.genDivider())
       }
@@ -66,11 +67,10 @@ export default mixins(
     },
   },
 
-  render (h): VNode {
-    const children = this.$slots.default || this.genItems()
+  render (): VNode {
+    const children = this.$slots.default?.() || this.genItems()
 
     return h('ul', {
-      staticClass: 'v-breadcrumbs',
       class: this.classes,
     }, children)
   },

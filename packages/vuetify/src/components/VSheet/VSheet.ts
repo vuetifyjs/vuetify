@@ -2,29 +2,28 @@
 import './VSheet.sass'
 
 // Mixins
-import BindsAttrs from '../../mixins/binds-attrs'
 import Colorable from '../../mixins/colorable'
 import Elevatable from '../../mixins/elevatable'
 import Measurable from '../../mixins/measurable'
 import Roundable from '../../mixins/roundable'
 import Themeable from '../../mixins/themeable'
 
-// Helpers
-import mixins from '../../util/mixins'
+// Utilities
+import { defineComponent, h } from 'vue'
 
 // Types
-import { VNode } from 'vue'
+import type { VNode } from 'vue'
 
-/* @vue/component */
-export default mixins(
-  BindsAttrs,
-  Colorable,
-  Elevatable,
-  Measurable,
-  Roundable,
-  Themeable
-).extend({
+export default defineComponent({
   name: 'v-sheet',
+
+  mixins: [
+    Colorable,
+    Elevatable,
+    Measurable,
+    Roundable,
+    Themeable,
+  ],
 
   props: {
     outlined: Boolean,
@@ -51,17 +50,16 @@ export default mixins(
     },
   },
 
-  render (h): VNode {
+  render (): VNode {
     const data = {
       class: this.classes,
       style: this.styles,
-      on: this.listeners$,
     }
 
     return h(
       this.tag,
       this.setBackgroundColor(this.color, data),
-      this.$slots.default
+      this.$slots.default?.()
     )
   },
 })

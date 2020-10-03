@@ -14,22 +14,20 @@ import Mobile from '../../mixins/mobile'
 import Toggleable from '../../mixins/toggleable'
 
 // Utilities
-import mixins from '../../util/mixins'
-import {
-  convertToUnit,
-  getSlot,
-} from '../../util/helpers'
+import { defineComponent, h } from 'vue'
+import { convertToUnit } from '../../util/helpers'
 
-// Typeslint
-import { VNode } from 'vue'
+// Types
+import type { VNode } from 'vue'
 
-/* @vue/component */
-export default mixins(
-  VSheet,
-  Mobile,
-  Toggleable
-).extend({
+export default defineComponent({
   name: 'v-banner',
+
+  mixins: [
+    VSheet,
+    Mobile,
+    Toggleable,
+  ],
 
   inheritAttrs: false,
 
@@ -48,7 +46,8 @@ export default mixins(
   computed: {
     classes (): object {
       return {
-        ...VSheet.options.computed.classes.call(this),
+        ...VSheet.computed!.classes.call(this),
+        'v-banner': true,
         'v-banner--has-icon': this.hasIcon,
         'v-banner--is-mobile': this.isMobile,
         'v-banner--single-line': this.singleLine,
@@ -92,54 +91,48 @@ export default mixins(
       let content
 
       if (this.icon) {
-        content = this.$createElement(VIcon, {
-          props: {
-            color: this.iconColor,
-            size: 28,
-          },
+        content = h(VIcon, {
+          color: this.iconColor,
+          size: 28,
         }, [this.icon])
       } else {
-        content = this.$slots.icon
+        content = this.$slots.icon?.()
       }
 
-      return this.$createElement(VAvatar, {
-        staticClass: 'v-banner__icon',
-        props: {
-          color: this.color,
-          size: 40,
-        },
-        on: {
-          click: this.iconClick,
-        },
-      }, [content])
+      return h(VAvatar, {
+        class: 'v-banner__icon',
+        color: this.color,
+        size: 40,
+        onClick: this.iconClick,
+      }, content)
     },
     genText () {
-      return this.$createElement('div', {
-        staticClass: 'v-banner__text',
-      }, this.$slots.default)
+      return h('div', {
+        class: 'v-banner__text',
+      }, this.$slots.default?.())
     },
     genActions () {
-      const children = getSlot(this, 'actions', {
+      const children = this.$slots.actions?.({
         dismiss: () => this.isActive = false,
       })
 
       if (!children) return undefined
 
-      return this.$createElement('div', {
-        staticClass: 'v-banner__actions',
+      return h('div', {
+        class: 'v-banner__actions',
       }, children)
     },
     genContent () {
-      return this.$createElement('div', {
-        staticClass: 'v-banner__content',
+      return h('div', {
+        class: 'v-banner__content',
       }, [
         this.genIcon(),
         this.genText(),
       ])
     },
     genWrapper () {
-      return this.$createElement('div', {
-        staticClass: 'v-banner__wrapper',
+      return h('div', {
+        class: 'v-banner__wrapper',
       }, [
         this.genContent(),
         this.genActions(),
@@ -147,11 +140,9 @@ export default mixins(
     },
   },
 
-  render (h): VNode {
+  render (): VNode {
     return h(VExpandTransition, [
       h('div', this.setBackgroundColor(this.color, {
-        staticClass: 'v-banner',
-        attrs: this.attrs$,
         class: this.classes,
         style: this.styles,
         directives: [{

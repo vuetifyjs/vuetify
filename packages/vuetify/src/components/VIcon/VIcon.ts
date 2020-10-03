@@ -1,17 +1,16 @@
 import './VIcon.sass'
 
 // Mixins
-import BindsAttrs from '../../mixins/binds-attrs'
 import Colorable from '../../mixins/colorable'
 import Sizeable from '../../mixins/sizeable'
 import Themeable from '../../mixins/themeable'
 
 // Util
+import { defineComponent, h } from 'vue'
 import { convertToUnit, keys, remapInternalIcon } from '../../util/helpers'
 
 // Types
-import Vue, { CreateElement, VNode, VNodeChildren, VNodeData } from 'vue'
-import mixins from '../../util/mixins'
+import type { VNode } from 'vue'
 import { VuetifyIcon, VuetifyIconComponent } from 'vuetify/types/services/icons'
 
 enum SIZE_MAP {
@@ -31,14 +30,14 @@ function isSvgPath (icon: string): boolean {
   return (/^[mzlhvcsqta]\s*[-+.0-9][^mlhvzcsqta]+/i.test(icon) && /[\dz]$/i.test(icon) && icon.length > 4)
 }
 
-const VIcon = mixins(
-  BindsAttrs,
-  Colorable,
-  Sizeable,
-  Themeable
-  /* @vue/component */
-).extend({
+export default defineComponent({
   name: 'v-icon',
+
+  mixins: [
+    Colorable,
+    Sizeable,
+    Themeable,
+  ],
 
   props: {
     dense: Boolean,
@@ -58,16 +57,14 @@ const VIcon = mixins(
       return false
     },
     hasClickListener (): boolean {
-      return Boolean(
-        this.listeners$.click || this.listeners$['!click']
-      )
+      return false // TODO
     },
   },
 
   methods: {
     getIcon (): VuetifyIcon {
       let iconName = ''
-      if (this.$slots.default) iconName = this.$slots.default[0].text!.trim()
+      if (this.$slots.default) iconName = this.$slots.default()[0].children!.trim()
 
       return remapInternalIcon(this, iconName)
     },
@@ -87,33 +84,27 @@ const VIcon = mixins(
       )
     },
     // Component data for both font and svg icon.
-    getDefaultData (): VNodeData {
-      const data: VNodeData = {
-        staticClass: 'v-icon notranslate',
+    getDefaultData (): Dictionary {
+      return {
         class: {
+          'v-icon notranslate': true,
           'v-icon--disabled': this.disabled,
           'v-icon--left': this.left,
           'v-icon--link': this.hasClickListener,
           'v-icon--right': this.right,
           'v-icon--dense': this.dense,
         },
-        attrs: {
-          'aria-hidden': !this.hasClickListener,
-          disabled: this.hasClickListener && this.disabled,
-          type: this.hasClickListener ? 'button' : undefined,
-          ...this.attrs$,
-        },
-        on: this.listeners$,
+        'aria-hidden': !this.hasClickListener,
+        disabled: this.hasClickListener && this.disabled,
+        type: this.hasClickListener ? 'button' : undefined,
       }
-
-      return data
     },
-    applyColors (data: VNodeData): void {
+    applyColors (data: Dictionary): void {
       data.class = { ...data.class, ...this.themeClasses }
       this.setTextColor(this.color, data)
     },
-    renderFontIcon (icon: string, h: CreateElement): VNode {
-      const newChildren: VNodeChildren = []
+    renderFontIcon (icon: string): VNode {
+      const newChildren = []
       const data = this.getDefaultData()
 
       let iconType = 'material-icons'
@@ -140,9 +131,9 @@ const VIcon = mixins(
 
       return h(this.hasClickListener ? 'button' : this.tag, data, newChildren)
     },
-    renderSvgIcon (icon: string, h: CreateElement): VNode {
+    renderSvgIcon (icon: string): VNode {
       const fontSize = this.getSize()
-      const wrapperData = {
+      const wrapperData: Dictionary = {
         ...this.getDefaultData(),
         style: fontSize ? {
           fontSize,
@@ -153,31 +144,24 @@ const VIcon = mixins(
       wrapperData.class['v-icon--svg'] = true
       this.applyColors(wrapperData)
 
-      const svgData: VNodeData = {
-        attrs: {
-          xmlns: 'http://www.w3.org/2000/svg',
-          viewBox: '0 0 24 24',
-          height: fontSize || '24',
-          width: fontSize || '24',
-          role: 'img',
-          'aria-hidden': true,
-        },
+      const svgData = {
+        xmlns: 'http://www.w3.org/2000/svg',
+        viewBox: '0 0 24 24',
+        height: fontSize || '24',
+        width: fontSize || '24',
+        role: 'img',
+        'aria-hidden': true,
       }
 
       return h(this.hasClickListener ? 'button' : 'span', wrapperData, [
         h('svg', svgData, [
           h('path', {
-            attrs: {
-              d: icon,
-            },
+            d: icon,
           }),
         ]),
       ])
     },
-    renderSvgIconComponent (
-      icon: VuetifyIconComponent,
-      h: CreateElement
-    ): VNode {
+    renderSvgIconComponent (icon: VuetifyIconComponent): VNode {
       const data = this.getDefaultData()
       data.class['v-icon--is-component'] = true
 
@@ -200,42 +184,16 @@ const VIcon = mixins(
     },
   },
 
-  render (h: CreateElement): VNode {
+  render (): VNode {
     const icon = this.getIcon()
 
     if (typeof icon === 'string') {
       if (isSvgPath(icon)) {
-        return this.renderSvgIcon(icon, h)
+        return this.renderSvgIcon(icon)
       }
-      return this.renderFontIcon(icon, h)
+      return this.renderFontIcon(icon)
     }
 
-    return this.renderSvgIconComponent(icon, h)
-  },
-})
-
-export default Vue.extend({
-  name: 'v-icon',
-
-  $_wrapperFor: VIcon,
-
-  functional: true,
-
-  render (h, { data, children }): VNode {
-    let iconName = ''
-
-    // Support usage of v-text and v-html
-    if (data.domProps) {
-      iconName = data.domProps.textContent ||
-        data.domProps.innerHTML ||
-        iconName
-
-      // Remove nodes so it doesn't
-      // overwrite our changes
-      delete data.domProps.textContent
-      delete data.domProps.innerHTML
-    }
-
-    return h(VIcon, data, iconName ? [iconName] : children)
+    return this.renderSvgIconComponent(icon)
   },
 })

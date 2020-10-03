@@ -1,30 +1,32 @@
-import Vue, { VNodeData, PropType } from 'vue'
+import { Prop, defineComponent, withDirectives, h, VNodeChild } from 'vue'
 
 // Directives
 import Ripple, { RippleOptions } from '../../directives/ripple'
 
 // Utilities
 import { getObjectValueByPath } from '../../util/helpers'
+import type { Location } from 'vue-router'
 
-export default Vue.extend({
+export default defineComponent({
   name: 'routable',
 
-  directives: {
-    Ripple,
-  },
+  // TODO
+  // directives: {
+  //   Ripple,
+  // },
 
   props: {
     activeClass: String,
     append: Boolean,
     disabled: Boolean,
     exact: {
-      type: Boolean as PropType<boolean | undefined>,
+      type: Boolean,
       default: undefined,
-    },
+    } as Prop<boolean | undefined>,
     exactActiveClass: String,
     link: Boolean,
-    href: [String, Object],
-    to: [String, Object],
+    href: String,
+    to: [String, Object] as Prop<string | Location>,
     nuxt: Boolean,
     replace: Boolean,
     ripple: {
@@ -59,44 +61,36 @@ export default Vue.extend({
 
       return Boolean(
         this.isLink ||
-        this.$listeners.click ||
-        this.$listeners['!click'] ||
+        this.$attrs.onClick ||
+        this.$attrs.onClickCapture ||
         this.$attrs.tabindex
       )
     },
     isLink (): boolean {
-      return this.to || this.href || this.link
+      return !!(this.to || this.href || this.link)
     },
-    styles: () => ({}),
+    styles: (): object => ({}),
   },
 
   watch: {
-    $route: 'onRouteChange',
+    $route () {
+      this.onRouteChange()
+    },
   },
 
   methods: {
     click (e: MouseEvent): void {
       this.$emit('click', e)
     },
-    generateRouteLink () {
+    generateRouteLink (children: VNodeChild) {
       let exact = this.exact
       let tag
 
-      const data: VNodeData = {
-        attrs: {
-          tabindex: 'tabindex' in this.$attrs ? this.$attrs.tabindex : undefined,
-        },
+      const data: Dictionary = {
+        tabindex: 'tabindex' in this.$attrs ? this.$attrs.tabindex : undefined,
         class: this.classes,
         style: this.styles,
-        props: {},
-        directives: [{
-          name: 'ripple',
-          value: this.computedRipple,
-        }],
-        [this.to ? 'nativeOn' : 'on']: {
-          ...this.$listeners,
-          click: this.click,
-        },
+        onClick: this.click,
         ref: 'link',
       }
 
@@ -117,7 +111,7 @@ export default Vue.extend({
         }
 
         tag = this.nuxt ? 'nuxt-link' : 'router-link'
-        Object.assign(data.props, {
+        Object.assign(data, {
           to: this.to,
           exact,
           activeClass,
@@ -128,12 +122,14 @@ export default Vue.extend({
       } else {
         tag = (this.href && 'a') || this.tag || 'div'
 
-        if (tag === 'a' && this.href) data.attrs!.href = this.href
+        if (tag === 'a' && this.href) data.href = this.href
       }
 
       if (this.target) data.attrs!.target = this.target
 
-      return { tag, data }
+      return withDirectives(h(tag, data, children), [
+        [Ripple, this.computedRipple],
+      ])
     },
     onRouteChange () {
       if (!this.to || !this.$refs.link || !this.$route) return

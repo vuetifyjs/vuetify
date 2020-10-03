@@ -14,33 +14,30 @@ import SSRBootable from '../../mixins/ssr-bootable'
 import Toggleable from '../../mixins/toggleable'
 
 // Utilities
+import { defineComponent, cloneVNode, withDirectives } from 'vue'
 import { convertToUnit } from '../../util/helpers'
-import mixins from '../../util/mixins'
 
 // Types
-import { VNode } from 'vue'
+import type { VNode } from 'vue'
 
-const baseMixins = mixins(
-  VToolbar,
-  Scrollable,
-  SSRBootable,
-  Toggleable,
-  Applicationable('top', [
-    'clippedLeft',
-    'clippedRight',
-    'computedHeight',
-    'invertedScroll',
-    'isExtended',
-    'isProminent',
-    'value',
-  ])
-)
-
-/* @vue/component */
-export default baseMixins.extend({
+export default defineComponent({
   name: 'v-app-bar',
 
-  directives: { Scroll },
+  mixins: [
+    VToolbar,
+    Scrollable,
+    SSRBootable,
+    Toggleable,
+    Applicationable('top', [
+      'clippedLeft',
+      'clippedRight',
+      'computedHeight',
+      'invertedScroll',
+      'isExtended',
+      'isProminent',
+      'value',
+    ]),
+  ],
 
   props: {
     clippedLeft: Boolean,
@@ -70,7 +67,7 @@ export default baseMixins.extend({
     },
     canScroll (): boolean {
       return (
-        Scrollable.options.computed.canScroll.call(this) &&
+        Scrollable.computed!.canScroll.call(this) &&
         (
           this.invertedScroll ||
           this.elevateOnScroll ||
@@ -86,7 +83,7 @@ export default baseMixins.extend({
     },
     classes (): object {
       return {
-        ...VToolbar.options.computed.classes.call(this),
+        ...VToolbar.computed!.classes.call(this),
         'v-toolbar--collapse': this.collapse || this.collapseOnScroll,
         'v-app-bar': true,
         'v-app-bar--clipped': this.clippedLeft || this.clippedRight,
@@ -99,7 +96,7 @@ export default baseMixins.extend({
       }
     },
     computedContentHeight (): number {
-      if (!this.shrinkOnScroll) return VToolbar.options.computed.computedContentHeight.call(this)
+      if (!this.shrinkOnScroll) return VToolbar.computed!.computedContentHeight.call(this)
 
       const height = this.computedOriginalHeight
 
@@ -142,7 +139,7 @@ export default baseMixins.extend({
       return Number(parseFloat(opacity).toFixed(2))
     },
     computedOriginalHeight (): number {
-      let height = VToolbar.options.computed.computedContentHeight.call(this)
+      let height = VToolbar.computed!.computedContentHeight.call(this)
       if (this.isExtended) height += parseInt(this.extensionHeight)
       return height
     },
@@ -187,20 +184,20 @@ export default baseMixins.extend({
     },
     isCollapsed (): boolean {
       if (!this.collapseOnScroll) {
-        return VToolbar.options.computed.isCollapsed.call(this)
+        return VToolbar.computed!.isCollapsed.call(this)
       }
 
       return this.currentScroll > 0
     },
     isProminent (): boolean {
       return (
-        VToolbar.options.computed.isProminent.call(this) ||
+        VToolbar.computed!.isProminent.call(this) ||
         this.shrinkOnScroll
       )
     },
     styles (): object {
       return {
-        ...VToolbar.options.computed.styles.call(this),
+        ...VToolbar.computed!.styles.call(this),
         fontSize: convertToUnit(this.computedFontSize, 'rem'),
         marginTop: convertToUnit(this.computedMarginTop),
         transform: `translateY(${convertToUnit(this.computedTransform)})`,
@@ -237,13 +234,11 @@ export default baseMixins.extend({
 
   methods: {
     genBackground () {
-      const render = VToolbar.options.methods.genBackground.call(this)
+      const render = VToolbar.methods!.genBackground.call(this)
 
-      render.data = this._b(render.data || {}, render.tag!, {
+      return cloneVNode(render, {
         style: { opacity: this.computedOpacity },
       })
-
-      return render
     },
     updateApplication (): number {
       return this.invertedScroll
@@ -267,20 +262,13 @@ export default baseMixins.extend({
     },
   },
 
-  render (h): VNode {
-    const render = VToolbar.options.render.call(this, h)
+  render (): VNode {
+    const vnode = VToolbar.render!.call(this)
 
-    render.data = render.data || {}
-
-    if (this.canScroll) {
-      render.data.directives = render.data.directives || []
-      render.data.directives.push({
-        arg: this.scrollTarget,
-        name: 'scroll',
-        value: this.onScroll,
-      })
-    }
-
-    return render
+    return vnode
+    // TODO: convert scroll directive
+    // return withDirectives(vnode, this.canScroll ? [
+    //   [Scroll, { arg: this.scrollTarget, value: this.onScroll }],
+    // ] : [])
   },
 })

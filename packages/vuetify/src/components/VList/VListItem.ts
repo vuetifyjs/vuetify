@@ -1,3 +1,4 @@
+import { cloneVNode } from 'vue';
 // Styles
 import './VListItem.sass'
 
@@ -8,44 +9,32 @@ import { factory as GroupableFactory } from '../../mixins/groupable'
 import Themeable from '../../mixins/themeable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
 
-// Directives
-import Ripple from '../../directives/ripple'
-
 // Utilities
+import { defineComponent, h, withDirectives } from 'vue'
 import { keyCodes } from './../../util/helpers'
-import { ExtractVue } from './../../util/mixins'
 import { removed } from '../../util/console'
 
 // Types
-import mixins from '../../util/mixins'
-import { VNode } from 'vue'
-import { PropType, PropValidator } from 'vue/types/options'
+import type { Prop } from 'vue'
 
-const baseMixins = mixins(
-  Colorable,
-  Routable,
-  Themeable,
-  GroupableFactory('listItemGroup'),
-  ToggleableFactory('inputValue')
-)
+// interface options extends ExtractVue<typeof baseMixins> {
+//   $el: HTMLElement
+//   isInGroup: boolean
+//   isInList: boolean
+//   isInMenu: boolean
+//   isInNav: boolean
+// }
 
-interface options extends ExtractVue<typeof baseMixins> {
-  $el: HTMLElement
-  isInGroup: boolean
-  isInList: boolean
-  isInMenu: boolean
-  isInNav: boolean
-}
-
-/* @vue/component */
-export default baseMixins.extend<options>().extend({
+export default defineComponent({
   name: 'v-list-item',
 
-  directives: {
-    Ripple,
-  },
-
-  inheritAttrs: false,
+  mixins: [
+    Colorable,
+    Routable,
+    Themeable,
+    GroupableFactory('listItemGroup'),
+    ToggleableFactory('inputValue'),
+  ],
 
   inject: {
     isInGroup: {
@@ -62,6 +51,8 @@ export default baseMixins.extend<options>().extend({
     },
   },
 
+  inheritAttrs: false,
+
   props: {
     activeClass: {
       type: String,
@@ -70,7 +61,7 @@ export default baseMixins.extend<options>().extend({
 
         return this.listItemGroup.activeClass
       },
-    } as any as PropValidator<string>,
+    } as any as Prop<string>,
     dense: Boolean,
     inactive: Boolean,
     link: Boolean,
@@ -83,7 +74,7 @@ export default baseMixins.extend<options>().extend({
     },
     threeLine: Boolean,
     twoLine: Boolean,
-    value: null as any as PropType<any>,
+    value: null as any as Prop<any>,
   },
 
   data: () => ({
@@ -94,7 +85,7 @@ export default baseMixins.extend<options>().extend({
     classes (): object {
       return {
         'v-list-item': true,
-        ...Routable.options.computed.classes.call(this),
+        ...Routable.computed!.classes.call(this),
         'v-list-item--dense': this.dense,
         'v-list-item--disabled': this.disabled,
         'v-list-item--link': this.isClickable && !this.inactive,
@@ -106,7 +97,7 @@ export default baseMixins.extend<options>().extend({
     },
     isClickable (): boolean {
       return Boolean(
-        Routable.options.computed.isClickable.call(this) ||
+        Routable.computed!.isClickable.call(this) ||
         this.listItemGroup
       )
     },
@@ -131,7 +122,6 @@ export default baseMixins.extend<options>().extend({
       const attrs: Record<string, any> = {
         'aria-disabled': this.disabled ? true : undefined,
         tabindex: this.isClickable && !this.disabled ? 0 : -1,
-        ...this.$attrs,
       }
 
       if (this.$attrs.hasOwnProperty('role')) {
@@ -152,16 +142,16 @@ export default baseMixins.extend<options>().extend({
     },
   },
 
-  render (h): VNode {
-    let { tag, data } = this.generateRouteLink()
-
-    data.attrs = {
-      ...data.attrs,
+  render () {
+    const vnode = this.generateRouteLink(
+      this.$slots.default?.({
+        active: this.isActive,
+        toggle: this.toggle,
+      })
+    )
+    const data: Dictionary = {
       ...this.genAttrs(),
-    }
-    data[this.to ? 'nativeOn' : 'on'] = {
-      ...data[this.to ? 'nativeOn' : 'on'],
-      keydown: (e: KeyboardEvent) => {
+      onKeydown: (e: KeyboardEvent) => {
         /* istanbul ignore else */
         if (e.keyCode === keyCodes.enter) this.click(e)
 
@@ -169,19 +159,8 @@ export default baseMixins.extend<options>().extend({
       },
     }
 
-    if (this.inactive) tag = 'div'
-    if (this.inactive && this.to) {
-      data.on = data.nativeOn
-      delete data.nativeOn
-    }
+    if (this.inactive) vnode.type = 'div'
 
-    const children = this.$scopedSlots.default
-      ? this.$scopedSlots.default({
-        active: this.isActive,
-        toggle: this.toggle,
-      })
-      : this.$slots.default
-
-    return h(tag, this.setTextColor(this.color, data), children)
+    return cloneVNode(vnode, this.setTextColor(this.color, data))
   },
 })

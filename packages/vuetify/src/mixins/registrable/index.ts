@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import { VueConstructor } from 'vue/types/vue'
+import { defineComponent } from 'vue'
 import { consoleWarn } from '../../util/console'
 
 function generateWarning (child: string, parent: string) {
@@ -21,7 +20,7 @@ export function inject<
     unregister: generateWarning(child, parent),
   } : null
 
-  return Vue.extend({
+  return defineComponent({
     name: 'registrable-inject',
 
     inject: {
@@ -33,7 +32,7 @@ export function inject<
 }
 
 export function provide (namespace: string, self = false) {
-  return Vue.extend({
+  return defineComponent({
     name: 'registrable-provide',
 
     provide (): object {

@@ -2,12 +2,15 @@ import { factory as PositionableFactory } from '../positionable'
 import { TargetProp } from 'vuetify/types/services/application'
 
 // Util
-import mixins from '../../util/mixins'
+import { defineComponent } from 'vue'
 
 export default function applicationable (value: TargetProp, events: string[] = []) {
-  /* @vue/component */
-  return mixins(PositionableFactory(['absolute', 'fixed'])).extend({
+  return defineComponent({
     name: 'applicationable',
+
+    mixins: [
+      PositionableFactory(['absolute', 'fixed']),
+    ],
 
     props: {
       app: Boolean,
@@ -51,7 +54,7 @@ export default function applicationable (value: TargetProp, events: string[] = [
       this.removeApplication()
     },
 
-    destroyed () {
+    unmounted () {
       this.removeApplication()
     },
 

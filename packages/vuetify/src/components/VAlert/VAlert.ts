@@ -14,20 +14,20 @@ import Themeable from '../../mixins/themeable'
 import Transitionable from '../../mixins/transitionable'
 
 // Utilities
-import mixins from '../../util/mixins'
+import { defineComponent, h, vShow, withDirectives } from 'vue'
 import { breaking } from '../../util/console'
 
 // Types
-import { VNodeData } from 'vue'
-import { VNode } from 'vue/types'
+import type { VNode } from 'vue'
 
-/* @vue/component */
-export default mixins(
-  VSheet,
-  Toggleable,
-  Transitionable
-).extend({
+export default defineComponent({
   name: 'v-alert',
+
+  mixins: [
+    VSheet,
+    Toggleable,
+    Transitionable,
+  ],
 
   props: {
     border: {
@@ -53,7 +53,7 @@ export default mixins(
       default: '$cancel',
     },
     icon: {
-      default: '',
+      default: false,
       type: [Boolean, String],
       validator (val: boolean | string) {
         return typeof val === 'string' || val === false
@@ -83,9 +83,9 @@ export default mixins(
     __cachedBorder (): VNode | null {
       if (!this.border) return null
 
-      let data: VNodeData = {
-        staticClass: 'v-alert__border',
+      let data: Dictionary = {
         class: {
+          'v-alert__border': true,
           [`v-alert__border--${this.border}`]: true,
         },
       }
@@ -95,48 +95,42 @@ export default mixins(
         data.class['v-alert__border--has-color'] = true
       }
 
-      return this.$createElement('div', data)
+      return h('div', data)
     },
     __cachedDismissible (): VNode | null {
       if (!this.dismissible) return null
 
       const color = this.iconColor
 
-      return this.$createElement(VBtn, {
-        staticClass: 'v-alert__dismissible',
-        props: {
-          color,
-          icon: true,
-          small: true,
-        },
-        attrs: {
-          'aria-label': this.$vuetify.lang.t(this.closeLabel),
-        },
-        on: {
-          click: () => (this.isActive = false),
-        },
-      }, [
-        this.$createElement(VIcon, {
-          props: { color },
-        }, this.closeIcon),
-      ])
+      return h(VBtn, {
+        class: 'v-alert__dismissible',
+        color,
+        icon: true,
+        small: true,
+        'aria-label': this.$vuetify.lang.t(this.closeLabel),
+        onClick: () => (this.isActive = false),
+      }, () => h(VIcon, {
+        color,
+      }, () => this.closeIcon),
+      )
     },
     __cachedIcon (): VNode | null {
       if (!this.computedIcon) return null
 
-      return this.$createElement(VIcon, {
-        staticClass: 'v-alert__icon',
-        props: { color: this.iconColor },
-      }, this.computedIcon)
+      return h(VIcon, {
+        class: 'v-alert__icon',
+        color: this.iconColor,
+      }, () => this.computedIcon)
     },
     classes (): object {
       const classes: Record<string, boolean> = {
-        ...VSheet.options.computed.classes.call(this),
+        ...VSheet.computed!.classes.call(this),
+        'v-alert': true,
         'v-alert--border': Boolean(this.border),
-        'v-alert--dense': this.dense,
-        'v-alert--outlined': this.outlined,
-        'v-alert--prominent': this.prominent,
-        'v-alert--text': this.text,
+        'v-alert--dense': !!this.dense,
+        'v-alert--outlined': !!this.outlined,
+        'v-alert--prominent': !!this.prominent,
+        'v-alert--text': !!this.text,
       }
 
       if (this.border) {
@@ -145,24 +139,24 @@ export default mixins(
 
       return classes
     },
-    computedColor (): string {
+    computedColor (): string | undefined {
       return this.color || this.type
     },
     computedIcon (): string | boolean {
       if (this.icon === false) return false
       if (typeof this.icon === 'string' && this.icon) return this.icon
-      if (!['error', 'info', 'success', 'warning'].includes(this.type)) return false
+      if (!['error', 'info', 'success', 'warning'].includes(this.type!)) return false
 
       return `$${this.type}`
     },
     hasColoredIcon (): boolean {
-      return (
+      return !!(
         this.hasText ||
         (Boolean(this.border) && this.coloredBorder)
       )
     },
     hasText (): boolean {
-      return this.text || this.outlined
+      return !!(this.text || this.outlined)
     },
     iconColor (): string | undefined {
       return this.hasColoredIcon ? this.computedColor : undefined
@@ -174,7 +168,7 @@ export default mixins(
         !this.outlined
       ) return true
 
-      return Themeable.options.computed.isDark.call(this)
+      return Themeable.computed!.isDark.call(this)
     },
   },
 
@@ -188,39 +182,29 @@ export default mixins(
   methods: {
     genWrapper (): VNode {
       const children = [
-        this.$slots.prepend || this.__cachedIcon,
+        this.$slots.prepend?.() || this.__cachedIcon,
         this.genContent(),
         this.__cachedBorder,
-        this.$slots.append,
-        this.$scopedSlots.close
-          ? this.$scopedSlots.close({ toggle: this.toggle })
+        this.$slots.append?.(),
+        this.$slots.close
+          ? this.$slots.close({ toggle: this.toggle })
           : this.__cachedDismissible,
       ]
 
-      const data: VNodeData = {
-        staticClass: 'v-alert__wrapper',
-      }
-
-      return this.$createElement('div', data, children)
+      return h('div', {
+        class: 'v-alert__wrapper',
+      }, children)
     },
     genContent (): VNode {
-      return this.$createElement('div', {
-        staticClass: 'v-alert__content',
-      }, this.$slots.default)
+      return h('div', {
+        class: 'v-alert__content',
+      }, this.$slots.default?.())
     },
     genAlert (): VNode {
-      let data: VNodeData = {
-        staticClass: 'v-alert',
-        attrs: {
-          role: 'alert',
-        },
-        on: this.listeners$,
+      let data: Dictionary = {
+        role: 'alert',
         class: this.classes,
         style: this.styles,
-        directives: [{
-          name: 'show',
-          value: this.isActive,
-        }],
       }
 
       if (!this.coloredBorder) {
@@ -228,7 +212,9 @@ export default mixins(
         data = setColor(this.computedColor, data)
       }
 
-      return this.$createElement('div', data, [this.genWrapper()])
+      return withDirectives(h('div', data, [this.genWrapper()]), [
+        [vShow, this.isActive],
+      ])
     },
     /** @public */
     toggle () {
@@ -236,17 +222,15 @@ export default mixins(
     },
   },
 
-  render (h): VNode {
+  render (): VNode {
     const render = this.genAlert()
 
     if (!this.transition) return render
 
     return h('transition', {
-      props: {
-        name: this.transition,
-        origin: this.origin,
-        mode: this.mode,
-      },
+      name: this.transition,
+      origin: this.origin,
+      mode: this.mode,
     }, [render])
   },
 })

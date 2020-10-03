@@ -12,6 +12,7 @@ module.exports = {
   ],
   extends: ['plugin:jest/recommended'],
   rules: {
+    'no-array-constructor': 'off',
     'vue/html-self-closing': 'off',
     'vue/html-closing-bracket-spacing': 'off',
     "vue/max-attributes-per-line": ["error", {
@@ -21,6 +22,8 @@ module.exports = {
         "allowFirstLine": false
       }
     }],
+    'vue/one-component-per-file': 'off',
+    'vue/custom-event-name-casing': 'off',
     'local-rules/no-render-string-reference': 'error',
     'jest/no-disabled-tests': 'off',
     'jest/no-large-snapshots': 'warn',

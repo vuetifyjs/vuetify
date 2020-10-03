@@ -1,6 +1,5 @@
-import Vue from 'vue'
+import { defineComponent, DefineComponent } from 'vue'
 import { filterObjectOnKeys } from '../../util/helpers'
-import { OptionsVue, VueConstructor } from 'vue/types/vue'
 
 const availableProps = {
   absolute: Boolean,
@@ -12,12 +11,12 @@ const availableProps = {
 }
 type props = Record<keyof typeof availableProps, boolean>
 
-export type Positionable<S extends keyof props> = VueConstructor<Vue & { [P in S]: boolean }, { [P in S]: BooleanConstructor }>
+export type Positionable<S extends keyof props> = DefineComponent<{ [P in S]: BooleanConstructor }, unknown, unknown, {}, {}>
 
 export function factory <S extends keyof props> (selected?: S[]): Positionable<S>
-export function factory (selected: undefined): OptionsVue<Vue, {}, {}, {}, props, typeof availableProps>
+export function factory (selected: undefined): Positionable<keyof typeof availableProps>
 export function factory (selected: any[] = []): any {
-  return Vue.extend({
+  return defineComponent({
     name: 'positionable',
     props: selected.length ? filterObjectOnKeys(availableProps, selected) : availableProps,
   })
@@ -27,7 +26,8 @@ export default factory()
 
 // Add a `*` before the second `/`
 /* Tests /
-let single = factory(['top']).extend({
+let single = defineComponent({
+  extends: factory(['top']),
   created () {
     this.top
     this.bottom
@@ -35,7 +35,8 @@ let single = factory(['top']).extend({
   }
 })
 
-let some = factory(['top', 'bottom']).extend({
+let some = defineComponent({
+  extends: factory(['top', 'bottom']),
   created () {
     this.top
     this.bottom
@@ -43,7 +44,8 @@ let some = factory(['top', 'bottom']).extend({
   }
 })
 
-let all = factory().extend({
+let all = defineComponent({
+  extends: factory(),
   created () {
     this.top
     this.bottom

@@ -7,11 +7,8 @@ import Proxyable from '../../mixins/proxyable'
 import Themeable from '../../mixins/themeable'
 
 // Utilities
-import mixins from '../../util/mixins'
+import { defineComponent, h } from 'vue'
 import { consoleWarn } from '../../util/console'
-
-// Types
-import { VNode } from 'vue/types'
 
 export type GroupableInstance = InstanceType<typeof Groupable> & {
   id?: string
@@ -19,11 +16,13 @@ export type GroupableInstance = InstanceType<typeof Groupable> & {
   value?: any
  }
 
-export const BaseItemGroup = mixins(
-  Proxyable,
-  Themeable
-).extend({
+export const BaseItemGroup = defineComponent({
   name: 'base-item-group',
+
+  mixins: [
+    Proxyable,
+    Themeable,
+  ],
 
   props: {
     activeClass: {
@@ -103,7 +102,6 @@ export const BaseItemGroup = mixins(
   },
 
   methods: {
-
     genData (): object {
       return {
         class: this.classes,
@@ -247,13 +245,15 @@ export const BaseItemGroup = mixins(
     },
   },
 
-  render (h): VNode {
-    return h('div', this.genData(), this.$slots.default)
+  render () {
+    return h('div', this.genData(), this.$slots.default?.())
   },
 })
 
-export default BaseItemGroup.extend({
+export default defineComponent({
   name: 'v-item-group',
+
+  extends: BaseItemGroup,
 
   provide (): object {
     return {

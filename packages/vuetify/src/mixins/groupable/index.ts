@@ -1,37 +1,31 @@
 // Mixins
-import { Registrable, inject as RegistrableInject } from '../registrable'
+import { inject as RegistrableInject } from '../registrable'
 
 // Utilities
-import { ExtractVue } from '../../util/mixins'
-import { VueConstructor } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { defineComponent } from 'vue'
+import type { DefineComponent, Prop } from 'vue'
 
-/* eslint-disable-next-line no-use-before-define */
-export type Groupable<T extends string, C extends VueConstructor | null = null> = VueConstructor<ExtractVue<Registrable<T, C>> & {
-  activeClass: string
-  isActive: boolean
-  disabled: boolean
-  groupClasses: object
-  toggle (): void
-}>
-
-export function factory<T extends string, C extends VueConstructor | null = null> (
+export function factory<T extends string, C extends DefineComponent | null = null> (
   namespace: T,
   child?: string,
   parent?: string
-): Groupable<T, C> {
-  return RegistrableInject<T, C>(namespace, child, parent).extend({
+) {
+  return defineComponent({
     name: 'groupable',
+
+    extends: RegistrableInject<T, C>(namespace, child, parent),
 
     props: {
       activeClass: {
         type: String,
         default (): string | undefined {
-          if (!this[namespace]) return undefined
+          return undefined
+          // TODO
+          // if (!this[namespace]) return undefined
 
-          return this[namespace].activeClass
+          // return this[namespace].activeClass
         },
-      } as any as PropValidator<string>,
+      } as any as Prop<string>,
       disabled: Boolean,
     },
 
@@ -55,7 +49,7 @@ export function factory<T extends string, C extends VueConstructor | null = null
       this[namespace] && (this[namespace] as any).register(this)
     },
 
-    beforeDestroy () {
+    beforeUnmount () {
       this[namespace] && (this[namespace] as any).unregister(this)
     },
 

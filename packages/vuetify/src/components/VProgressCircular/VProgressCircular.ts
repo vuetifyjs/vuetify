@@ -5,14 +5,17 @@ import './VProgressCircular.sass'
 import Colorable from '../../mixins/colorable'
 
 // Utils
+import { defineComponent, h } from 'vue'
 import { convertToUnit } from '../../util/helpers'
 
 // Types
-import { VNode, VNodeChildren } from 'vue'
+import type { VNode } from 'vue'
 
 /* @vue/component */
-export default Colorable.extend({
+export default defineComponent({
   name: 'v-progress-circular',
+
+  mixins: [Colorable],
 
   props: {
     button: Boolean,
@@ -50,6 +53,7 @@ export default Colorable.extend({
 
     classes (): object {
       return {
+        'v-progress-circular': true,
         'v-progress-circular--indeterminate': this.indeterminate,
         'v-progress-circular--button': this.button,
       }
@@ -99,52 +103,44 @@ export default Colorable.extend({
 
   methods: {
     genCircle (name: string, offset: string | number): VNode {
-      return this.$createElement('circle', {
+      return h('circle', {
         class: `v-progress-circular__${name}`,
-        attrs: {
-          fill: 'transparent',
-          cx: 2 * this.viewBoxSize,
-          cy: 2 * this.viewBoxSize,
-          r: this.radius,
-          'stroke-width': this.strokeWidth,
-          'stroke-dasharray': this.strokeDashArray,
-          'stroke-dashoffset': offset,
-        },
+        fill: 'transparent',
+        cx: 2 * this.viewBoxSize,
+        cy: 2 * this.viewBoxSize,
+        r: this.radius,
+        'stroke-width': this.strokeWidth,
+        'stroke-dasharray': this.strokeDashArray,
+        'stroke-dashoffset': offset,
       })
     },
     genSvg (): VNode {
       const children = [
         this.indeterminate || this.genCircle('underlay', 0),
         this.genCircle('overlay', this.strokeDashOffset),
-      ] as VNodeChildren
+      ]
 
-      return this.$createElement('svg', {
+      return h('svg', {
         style: this.svgStyles,
-        attrs: {
-          xmlns: 'http://www.w3.org/2000/svg',
-          viewBox: `${this.viewBoxSize} ${this.viewBoxSize} ${2 * this.viewBoxSize} ${2 * this.viewBoxSize}`,
-        },
+        xmlns: 'http://www.w3.org/2000/svg',
+        viewBox: `${this.viewBoxSize} ${this.viewBoxSize} ${2 * this.viewBoxSize} ${2 * this.viewBoxSize}`,
       }, children)
     },
     genInfo (): VNode {
-      return this.$createElement('div', {
-        staticClass: 'v-progress-circular__info',
-      }, this.$slots.default)
+      return h('div', {
+        class: 'v-progress-circular__info',
+      }, this.$slots.default?.())
     },
   },
 
-  render (h): VNode {
+  render (): VNode {
     return h('div', this.setTextColor(this.color, {
-      staticClass: 'v-progress-circular',
-      attrs: {
-        role: 'progressbar',
-        'aria-valuemin': 0,
-        'aria-valuemax': 100,
-        'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue,
-      },
+      role: 'progressbar',
+      'aria-valuemin': 0,
+      'aria-valuemax': 100,
+      'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue,
       class: this.classes,
       style: this.styles,
-      on: this.$listeners,
     }), [
       this.genSvg(),
       this.genInfo(),

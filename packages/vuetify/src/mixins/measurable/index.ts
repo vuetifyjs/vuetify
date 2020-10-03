@@ -2,11 +2,11 @@
 import { convertToUnit } from '../../util/helpers'
 
 // Types
-import Vue, { PropType } from 'vue'
+import { defineComponent, Prop } from 'vue'
 
-export type NumberOrNumberString = PropType<string | number | undefined>
+export type NumberOrNumberString = Prop<string | number | undefined>
 
-export default Vue.extend({
+export default defineComponent({
   name: 'measurable',
 
   props: {

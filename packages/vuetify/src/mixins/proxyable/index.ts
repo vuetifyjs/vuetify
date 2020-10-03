@@ -1,17 +1,18 @@
-import Vue, { VueConstructor } from 'vue'
+import { defineComponent } from 'vue'
 
 /* eslint-disable-next-line no-use-before-define */
-export type Proxyable<T extends string = 'value'> = VueConstructor<Vue & {
-  internalLazyValue: unknown
-  internalValue: unknown
-} & Record<T, any>>
+// export type Proxyable<T extends string = 'value'> = VueConstructor<Vue & {
+//   internalLazyValue: unknown
+//   internalValue: unknown
+// } & Record<T, any>>
 
-export function factory<T extends string = 'value'> (prop?: T, event?: string): Proxyable<T>
+// TODO
+// export function factory<T extends string = 'value'> (prop?: T, event?: string): Proxyable<T>
 export function factory (
   prop = 'value',
   event = 'change'
 ) {
-  return Vue.extend({
+  return defineComponent({
     name: 'proxyable',
 
     model: {

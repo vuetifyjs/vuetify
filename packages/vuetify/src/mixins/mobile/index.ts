@@ -1,15 +1,16 @@
+import { defineComponent } from 'vue'
+
 // Types
 import { BreakpointName } from 'vuetify/types/services/breakpoint'
 import { deprecate } from '../../util/console'
-import Vue, { PropType } from 'vue'
+import type { Prop } from 'vue'
 
-/* @vue/component */
-export default Vue.extend({
+export default defineComponent({
   name: 'mobile',
 
   props: {
     mobileBreakpoint: {
-      type: [Number, String] as PropType<number | BreakpointName>,
+      type: [Number, String],
       default (): number | BreakpointName | undefined {
         // Avoid destroying unit
         // tests for users
@@ -21,7 +22,7 @@ export default Vue.extend({
         !isNaN(Number(v)) ||
         ['xs', 'sm', 'md', 'lg', 'xl'].includes(String(v))
       ),
-    },
+    } as Prop<number | BreakpointName>,
   },
 
   computed: {
@@ -37,7 +38,7 @@ export default Vue.extend({
       // the application's mobileBreakpoint
       if (mobileBreakpoint === this.mobileBreakpoint) return mobile
 
-      const mobileWidth = parseInt(this.mobileBreakpoint, 10)
+      const mobileWidth = parseInt(this.mobileBreakpoint!, 10)
       const isNumber = !isNaN(mobileWidth)
 
       return isNumber

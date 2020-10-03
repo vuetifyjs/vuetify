@@ -1,11 +1,10 @@
 // Utilities
+import { defineComponent, h, VNode } from 'vue'
 import { removed } from '../../util/console'
 
-// Types
-import Vue, { VNode } from 'vue'
-interface Toggleable extends Vue {
-  isActive?: boolean
-}
+// interface Toggleable extends Vue {
+//   isActive?: boolean
+// }
 
 /**
  * Bootable
@@ -15,8 +14,7 @@ interface Toggleable extends Vue {
  * Looks for change in "isActive" to automatically boot
  * Otherwise can be set manually
  */
-/* @vue/component */
-export default Vue.extend<Vue & Toggleable>().extend({
+export default defineComponent({
   name: 'bootable',
 
   props: {
@@ -48,7 +46,7 @@ export default Vue.extend<Vue & Toggleable>().extend({
 
   methods: {
     showLazyContent (content?: () => VNode[]): VNode[] {
-      return (this.hasContent && content) ? content() : [this.$createElement()]
+      return (this.hasContent && content) ? content() : [h('')]
     },
   },
 })

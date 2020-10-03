@@ -3,30 +3,28 @@ import './VSubheader.sass'
 
 // Mixins
 import Themeable from '../../mixins/themeable'
-import mixins from '../../util/mixins'
 
 // Types
-import { VNode } from 'vue'
+import { defineComponent, h } from 'vue'
 
-export default mixins(
-  Themeable
-  /* @vue/component */
-).extend({
+export default defineComponent({
   name: 'v-subheader',
+
+  mixins: [
+    Themeable,
+  ],
 
   props: {
     inset: Boolean,
   },
 
-  render (h): VNode {
+  render () {
     return h('div', {
-      staticClass: 'v-subheader',
       class: {
+        'v-subheader': true,
         'v-subheader--inset': this.inset,
         ...this.themeClasses,
       },
-      attrs: this.$attrs,
-      on: this.$listeners,
-    }, this.$slots.default)
+    }, this.$slots.default?.())
   },
 })

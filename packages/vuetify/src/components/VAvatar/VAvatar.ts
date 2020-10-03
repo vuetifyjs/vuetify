@@ -6,19 +6,20 @@ import Measurable from '../../mixins/measurable'
 import Roundable from '../../mixins/roundable'
 
 // Utilities
+import { defineComponent } from 'vue'
 import { convertToUnit } from '../../util/helpers'
 
 // Types
-import { VNode } from 'vue'
-import mixins from '../../util/mixins'
+import type { VNode } from 'vue'
 
-export default mixins(
-  Colorable,
-  Measurable,
-  Roundable,
-  /* @vue/component */
-).extend({
+export default defineComponent({
   name: 'v-avatar',
+
+  mixins: [
+    Colorable,
+    Measurable,
+    Roundable,
+  ],
 
   props: {
     left: Boolean,
@@ -32,6 +33,7 @@ export default mixins(
   computed: {
     classes (): object {
       return {
+        'v-avatar': true,
         'v-avatar--left': this.left,
         'v-avatar--right': this.right,
         ...this.roundedClasses,
@@ -49,12 +51,10 @@ export default mixins(
 
   render (h): VNode {
     const data = {
-      staticClass: 'v-avatar',
       class: this.classes,
       style: this.styles,
-      on: this.$listeners,
     }
 
-    return h('div', this.setBackgroundColor(this.color, data), this.$slots.default)
+    return h('div', this.setBackgroundColor(this.color, data), this.$slots.default?.())
   },
 })

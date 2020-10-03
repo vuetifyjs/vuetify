@@ -2,12 +2,10 @@
 import VInput from '../VInput/VInput'
 
 // Mixins
-import mixins from '../../util/mixins'
-import BindsAttrs from '../../mixins/binds-attrs'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Helpers
-import { VNode } from 'vue'
+import { defineComponent, h } from 'vue'
 
 type ErrorBag = Record<number, boolean>
 type VInputInstance = InstanceType<typeof VInput>
@@ -18,12 +16,12 @@ type Watchers = {
 }
 
 /* @vue/component */
-export default mixins(
-  BindsAttrs,
-  RegistrableProvide('form')
-  /* @vue/component */
-).extend({
+export default defineComponent({
   name: 'v-form',
+
+  mixins: [
+    RegistrableProvide('form'),
+  ],
 
   provide (): object {
     return { form: this }
@@ -129,16 +127,11 @@ export default mixins(
     },
   },
 
-  render (h): VNode {
+  render () {
     return h('form', {
-      staticClass: 'v-form',
-      attrs: {
-        novalidate: true,
-        ...this.attrs$,
-      },
-      on: {
-        submit: (e: Event) => this.$emit('submit', e),
-      },
-    }, this.$slots.default)
+      class: 'v-form',
+      novalidate: true,
+      onSubmit: (e: Event) => this.$emit('submit', e),
+    }, this.$slots.default?.())
   },
 })

@@ -37,6 +37,10 @@ export function useVuetify () {
 }
 
 export default class Vuetify {
+  static config = {
+    silent: false,
+  }
+
   public framework: Dictionary<VuetifyServiceContract> = {}
 
   public preset = {} as VuetifyPreset

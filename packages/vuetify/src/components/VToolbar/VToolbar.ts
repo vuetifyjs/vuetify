@@ -8,15 +8,17 @@ import VSheet from '../VSheet/VSheet'
 import VImg, { srcObject } from '../VImg/VImg'
 
 // Utilities
-import { convertToUnit, getSlot } from '../../util/helpers'
+import { defineComponent, h } from 'vue'
+import { convertToUnit } from '../../util/helpers'
 import { breaking } from '../../util/console'
 
 // Types
-import { VNode, PropType } from 'vue'
+import type { VNode, Prop } from 'vue'
 
-/* @vue/component */
-export default VSheet.extend({
+export default defineComponent({
   name: 'v-toolbar',
+
+  extends: VSheet,
 
   props: {
     absolute: Boolean,
@@ -33,9 +35,9 @@ export default VSheet.extend({
     prominent: Boolean,
     short: Boolean,
     src: {
-      type: [String, Object] as PropType<string | srcObject>,
+      type: [String, Object],
       default: '',
-    },
+    } as Prop<string | srcObject>,
     tag: {
       type: String,
       default: 'header',
@@ -69,7 +71,7 @@ export default VSheet.extend({
     },
     classes (): object {
       return {
-        ...VSheet.options.computed.classes.call(this),
+        ...VSheet.computed!.classes.call(this),
         'v-toolbar': true,
         'v-toolbar--absolute': this.absolute,
         'v-toolbar--bottom': this.bottom,
@@ -122,44 +124,43 @@ export default VSheet.extend({
         src: this.src,
       }
 
-      const image = this.$scopedSlots.img
-        ? this.$scopedSlots.img({ props })
-        : this.$createElement(VImg, { props })
+      const image = this.$slots.img
+        ? this.$slots.img({ props })
+        : h(VImg, { props })
 
-      return this.$createElement('div', {
-        staticClass: 'v-toolbar__image',
+      return h('div', {
+        class: 'v-toolbar__image',
       }, [image])
     },
     genContent () {
-      return this.$createElement('div', {
-        staticClass: 'v-toolbar__content',
+      return h('div', {
+        class: 'v-toolbar__content',
         style: {
           height: convertToUnit(this.computedContentHeight),
         },
-      }, getSlot(this))
+      }, this.$slots.default)
     },
     genExtension () {
-      return this.$createElement('div', {
-        staticClass: 'v-toolbar__extension',
+      return h('div', {
+        class: 'v-toolbar__extension',
         style: {
           height: convertToUnit(this.extensionHeight),
         },
-      }, getSlot(this, 'extension'))
+      }, this.$slots.extension)
     },
   },
 
-  render (h): VNode {
-    this.isExtended = this.extended || !!this.$scopedSlots.extension
+  render (): VNode {
+    this.isExtended = this.extended || !!this.$slots.extension
 
     const children = [this.genContent()]
     const data = this.setBackgroundColor(this.color, {
       class: this.classes,
       style: this.styles,
-      on: this.$listeners,
     })
 
     if (this.isExtended) children.push(this.genExtension())
-    if (this.src || this.$scopedSlots.img) children.unshift(this.genBackground())
+    if (this.src || this.$slots.img) children.unshift(this.genBackground())
 
     return h(this.tag, data, children)
   },

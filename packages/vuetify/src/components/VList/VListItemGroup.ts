@@ -8,13 +8,15 @@ import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 import Colorable from '../../mixins/colorable'
 
 // Utilities
-import mixins from '../../util/mixins'
+import { defineComponent } from 'vue'
 
-export default mixins(
-  BaseItemGroup,
-  Colorable
-).extend({
+export default defineComponent({
   name: 'v-list-item-group',
+
+  mixins: [
+    BaseItemGroup,
+    Colorable,
+  ],
 
   provide () {
     return {
@@ -26,7 +28,7 @@ export default mixins(
   computed: {
     classes (): object {
       return {
-        ...BaseItemGroup.options.computed.classes.call(this),
+        ...BaseItemGroup.computed!.classes.call(this),
         'v-list-item-group': true,
       }
     },
@@ -35,10 +37,8 @@ export default mixins(
   methods: {
     genData (): object {
       return this.setTextColor(this.color, {
-        ...BaseItemGroup.options.methods.genData.call(this),
-        attrs: {
-          role: 'listbox',
-        },
+        ...BaseItemGroup.methods!.genData.call(this),
+        role: 'listbox',
       })
     },
   },

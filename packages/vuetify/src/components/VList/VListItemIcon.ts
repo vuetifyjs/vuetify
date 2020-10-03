@@ -1,15 +1,11 @@
-// Types
-import Vue, { VNode } from 'vue'
+import { defineComponent, h } from 'vue'
 
-/* @vue/component */
-export default Vue.extend({
+export default defineComponent({
   name: 'v-list-item-icon',
 
-  functional: true,
-
-  render (h, { data, children }): VNode {
-    data.staticClass = (`v-list-item__icon ${data.staticClass || ''}`).trim()
-
-    return h('div', data, children)
+  setup (props, { slots }) {
+    return () => h('div', {
+      class: 'v-list-item__icon',
+    }, slots.default?.())
   },
 })

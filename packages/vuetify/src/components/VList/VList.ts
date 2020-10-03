@@ -6,7 +6,7 @@ import VListGroup from './VListGroup'
 import VSheet from '../VSheet/VSheet'
 
 // Types
-import { VNode } from 'vue'
+import { defineComponent, h } from 'vue'
 
 type VListGroupInstance = InstanceType<typeof VListGroup>
 
@@ -15,9 +15,10 @@ interface options extends InstanceType<typeof VSheet> {
   isInNav: boolean
 }
 
-/* @vue/component */
-export default VSheet.extend<options>().extend({
+export default defineComponent({
   name: 'v-list',
+
+  extends: VSheet,
 
   provide (): object {
     return {
@@ -54,7 +55,7 @@ export default VSheet.extend<options>().extend({
   computed: {
     classes (): object {
       return {
-        ...VSheet.options.computed.classes.call(this),
+        ...VSheet.computed!.classes.call(this),
         'v-list--dense': this.dense,
         'v-list--disabled': this.disabled,
         'v-list--flat': this.flat,
@@ -85,17 +86,17 @@ export default VSheet.extend<options>().extend({
     },
   },
 
-  render (h): VNode {
+  render () {
     const data = {
-      staticClass: 'v-list',
-      class: this.classes,
+      class: ['v-list', this.classes],
       style: this.styles,
-      attrs: {
-        role: this.isInNav || this.isInMenu ? undefined : 'list',
-        ...this.attrs$,
-      },
+      role: this.isInNav || this.isInMenu ? undefined : 'list',
     }
 
-    return h(this.tag, this.setBackgroundColor(this.color, data), [this.$slots.default])
+    return h(
+      this.tag,
+      this.setBackgroundColor(this.color, data),
+      this.$slots.default?.()
+    )
   },
 })

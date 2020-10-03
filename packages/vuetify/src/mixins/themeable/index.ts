@@ -1,29 +1,21 @@
-import Vue from 'vue'
-import { PropType, RenderContext } from 'vue/types/options'
+import { computed, defineComponent } from 'vue'
+import type { PropType } from 'vue'
 
-/* eslint-disable-next-line no-use-before-define */
-interface Themeable extends Vue {
-  theme: {
-    isDark: boolean
-  }
-}
+// export function functionalThemeClasses (context: RenderContext): object {
+//   const vm = {
+//     ...context.props,
+//     ...context.injections,
+//   }
+//   const isDark = Themeable.options.computed.isDark.call(vm)
+//   return Themeable.options.computed.themeClasses.call({ isDark })
+// }
 
-export function functionalThemeClasses (context: RenderContext): object {
-  const vm = {
-    ...context.props,
-    ...context.injections,
-  }
-  const isDark = Themeable.options.computed.isDark.call(vm)
-  return Themeable.options.computed.themeClasses.call({ isDark })
-}
-
-/* @vue/component */
-const Themeable = Vue.extend<Themeable>().extend({
+export default defineComponent({
   name: 'themeable',
 
   provide (): object {
     return {
-      theme: this.themeableProvide,
+      theme: computed(() => this.themeableProvide),
     }
   },
 
@@ -108,5 +100,3 @@ const Themeable = Vue.extend<Themeable>().extend({
     },
   },
 })
-
-export default Themeable

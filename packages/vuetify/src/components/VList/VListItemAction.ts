@@ -1,19 +1,18 @@
-// Types
-import Vue, { VNode } from 'vue'
+import { defineComponent, h } from 'vue'
 
-/* @vue/component */
-export default Vue.extend({
+export default defineComponent({
   name: 'v-list-item-action',
 
-  functional: true,
-
-  render (h, { data, children = [] }): VNode {
-    data.staticClass = data.staticClass ? `v-list-item__action ${data.staticClass}` : 'v-list-item__action'
-    const filteredChild = children.filter(VNode => {
-      return VNode.isComment === false && VNode.text !== ' '
-    })
-    if (filteredChild.length > 1) data.staticClass += ' v-list-item__action--stack'
-
-    return h('div', data, children)
+  setup (props, { attrs, slots }) {
+    return () => {
+      const children = slots.default?.()?.filter(vnode => {
+        return vnode.isComment === false && vnode.text !== ' '
+      })
+      return h('div', {
+        class: ['v-list-item__action', {
+          'v-list-item__action--stack': children?.length! > 1
+        }],
+      }, children)
+    }
   },
 })

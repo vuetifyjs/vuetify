@@ -5,11 +5,14 @@ import './VMain.sass'
 import SSRBootable from '../../mixins/ssr-bootable'
 
 // Types
-import { VNode } from 'vue'
+import { VNode, defineComponent, h } from 'vue'
 
-/* @vue/component */
-export default SSRBootable.extend({
+export default defineComponent({
   name: 'v-main',
+
+  mixins: [
+    SSRBootable,
+  ],
 
   props: {
     tag: {
@@ -33,9 +36,9 @@ export default SSRBootable.extend({
     },
   },
 
-  render (h): VNode {
+  render (): VNode {
     const data = {
-      staticClass: 'v-main',
+      class: 'v-main',
       style: this.styles,
       ref: 'main',
     }
@@ -43,8 +46,8 @@ export default SSRBootable.extend({
     return h(this.tag, data, [
       h(
         'div',
-        { staticClass: 'v-main__wrap' },
-        this.$slots.default
+        { class: 'v-main__wrap' },
+        this.$slots.default?.()
       ),
     ])
   },

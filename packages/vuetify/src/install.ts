@@ -54,6 +54,7 @@ export function install (app: App, options: VuetifyUseOptions = {}) {
   const vuetify = new Vuetify(preset)
 
   app.provide(VuetifySymbol, vuetify.framework)
+  app.config.globalProperties.$vuetify = vuetify.framework
 }
 
 install.version = __VUETIFY_VERSION__

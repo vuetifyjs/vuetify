@@ -2,15 +2,13 @@
 import { factory as GroupableFactory } from '../../mixins/groupable'
 
 // Utilities
-import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
 // Types
-import Vue from 'vue'
-import { VNode, ScopedSlotChildren } from 'vue/types/vnode'
+import { defineComponent, cloneVNode } from 'vue'
+import type { VNode } from 'vue'
 
-/* @vue/component */
-export const BaseItem = Vue.extend({
+export const BaseItem = defineComponent({
   props: {
     activeClass: String,
     value: {
@@ -29,17 +27,17 @@ export const BaseItem = Vue.extend({
   },
 
   render (): VNode {
-    if (!this.$scopedSlots.default) {
+    if (!this.$slots.default) {
       consoleWarn('v-item is missing a default scopedSlot', this)
 
       return null as any
     }
 
-    let element: VNode | ScopedSlotChildren
+    let element: VNode | VNode[]
 
     /* istanbul ignore else */
-    if (this.$scopedSlots.default) {
-      element = this.$scopedSlots.default({
+    if (this.$slots.default) {
+      element = this.$slots.default({
         active: this.isActive,
         toggle: this.toggle,
       })
@@ -55,17 +53,17 @@ export const BaseItem = Vue.extend({
       return element as any
     }
 
-    element.data = this._b(element.data || {}, element.tag!, {
-      class: { [this.activeClass]: this.isActive },
+    return cloneVNode(element, {
+      [this.activeClass]: this.isActive,
     })
-
-    return element
   },
 })
 
-export default mixins(
-  BaseItem,
-  GroupableFactory('itemGroup', 'v-item', 'v-item-group')
-).extend({
+export default defineComponent({
   name: 'v-item',
+
+  mixins: [
+    BaseItem,
+    GroupableFactory('itemGroup', 'v-item', 'v-item-group'),
+  ],
 })

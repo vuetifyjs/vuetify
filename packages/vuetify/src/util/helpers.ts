@@ -1,21 +1,21 @@
-import { VNode, VNodeDirective } from 'vue/types'
-import { VuetifyIcon } from 'vuetify/types/services/icons'
-import { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
+import { defineComponent, h } from 'vue'
+
+import type { VuetifyIcon } from 'vuetify/types/services/icons'
+import type { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
 
 export function createSimpleFunctional (
   c: string,
   el = 'div',
   name?: string
 ) {
-  return Vue.extend({
+  return defineComponent({
     name: name || c.replace(/__/g, '-'),
 
-    functional: true,
-
-    render (h, { data, children }): VNode {
-      data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
-
-      return h(el, data, children)
+    setup (props, { attrs, slots }) {
+      return () => h(el, {
+        class: c,
+        ...attrs,
+      }, slots.default?.())
     },
   })
 }
@@ -73,7 +73,7 @@ export function deepEqual (a: any, b: any): boolean {
 export function getObjectValueByPath (obj: any, path: string, fallback?: any): any {
   // credit: http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key#comment55278413_6491621
   if (obj == null || !path || typeof path !== 'string') return fallback
-  if (obj[path] !== undefined) return obj[path]
+  if (path in obj) return obj[path]
   path = path.replace(/\[(\w+)\]/g, '.$1') // convert indexes to properties
   path = path.replace(/^\./, '') // strip a leading dot
   return getNestedValue(obj, path.split('.'), fallback)

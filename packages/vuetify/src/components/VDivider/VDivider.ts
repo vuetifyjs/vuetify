@@ -2,20 +2,22 @@
 import './VDivider.sass'
 
 // Types
-import { VNode } from 'vue'
+import { defineComponent, h } from 'vue'
 
 // Mixins
 import Themeable from '../../mixins/themeable'
 
-export default Themeable.extend({
+export default defineComponent({
   name: 'v-divider',
+
+  mixins: [Themeable],
 
   props: {
     inset: Boolean,
     vertical: Boolean,
   },
 
-  render (h): VNode {
+  render () {
     // WAI-ARIA attributes
     let orientation
     if (!this.$attrs.role || this.$attrs.role === 'separator') {
@@ -28,12 +30,9 @@ export default Themeable.extend({
         'v-divider--vertical': this.vertical,
         ...this.themeClasses,
       },
-      attrs: {
-        role: 'separator',
-        'aria-orientation': orientation,
-        ...this.$attrs,
-      },
-      on: this.$listeners,
+      role: 'separator',
+      'aria-orientation': orientation,
+      ...this.$attrs,
     })
   },
 })

@@ -1,5 +1,7 @@
-import { FunctionalComponentOptions, VNode, VNodeData } from 'vue'
+import { defineComponent, h } from 'vue'
 import mergeData from '../../util/mergeData'
+
+import type { VNode } from 'vue'
 
 function mergeTransitions (
   dest: Function | Function[] = [],
@@ -13,11 +15,9 @@ export function createSimpleTransition (
   name: string,
   origin = 'top center 0',
   mode?: string
-): FunctionalComponentOptions {
-  return {
+) {
+  return defineComponent({
     name,
-
-    functional: true,
 
     props: {
       group: {
@@ -42,42 +42,38 @@ export function createSimpleTransition (
       },
     },
 
-    render (h, context): VNode {
-      const tag = `transition${context.props.group ? '-group' : ''}`
-      const data: VNodeData = {
-        props: {
+    setup (props, { attrs, slots }) {
+      return () => {
+        const tag = `transition${props.group ? '-group' : ''}`
+        const data: Dictionary = {
           name,
-          mode: context.props.mode,
-        },
-        on: {
-          beforeEnter (el: HTMLElement) {
-            el.style.transformOrigin = context.props.origin
-            el.style.webkitTransformOrigin = context.props.origin
+          mode: props.mode,
+          onBeforeEnter (el: HTMLElement) {
+            el.style.transformOrigin = props.origin
+            el.style.webkitTransformOrigin = props.origin
           },
-        },
-      }
+        }
 
-      if (context.props.leaveAbsolute) {
-        data.on!.leave = mergeTransitions(data.on!.leave, (el: HTMLElement) => (el.style.position = 'absolute'))
-      }
-      if (context.props.hideOnLeave) {
-        data.on!.leave = mergeTransitions(data.on!.leave, (el: HTMLElement) => (el.style.display = 'none'))
-      }
+        if (props.leaveAbsolute) {
+          data.onLeave = (el: HTMLElement) => (el.style.position = 'absolute')
+        }
+        if (props.hideOnLeave) {
+          data.onLeave = (el: HTMLElement) => (el.style.display = 'none')
+        }
 
-      return h(tag, mergeData(context.data, data), context.children)
+        return h(tag, mergeData(attrs, data), slots.default?.())
+      }
     },
-  }
+  })
 }
 
 export function createJavascriptTransition (
   name: string,
   functions: Record<string, any>,
   mode = 'in-out'
-): FunctionalComponentOptions {
-  return {
+) {
+  return defineComponent({
     name,
-
-    functional: true,
 
     props: {
       mode: {
@@ -86,15 +82,15 @@ export function createJavascriptTransition (
       },
     },
 
-    render (h, context): VNode {
-      return h(
+    setup (props, { attrs, slots }) {
+      return () => h(
         'transition',
-        mergeData(context.data, {
-          props: { name },
-          on: functions,
-        }),
-        context.children
+        {
+          name,
+          ...functions,
+        },
+        slots.default?.()
       )
     },
-  }
+  })
 }

@@ -15,39 +15,26 @@ import Routable from '../../mixins/routable'
 import Sizeable from '../../mixins/sizeable'
 
 // Utilities
-import mixins, { ExtractVue } from '../../util/mixins'
-import { breaking } from '../../util/console'
+import { cloneVNode, defineComponent, h } from 'vue'
 
 // Types
-import { VNode } from 'vue'
-import { PropValidator, PropType } from 'vue/types/options'
+import type { Prop, VNode } from 'vue'
 import { RippleOptions } from '../../directives/ripple'
 
-const baseMixins = mixins(
-  VSheet,
-  Routable,
-  Positionable,
-  Sizeable,
-  GroupableFactory('btnToggle'),
-  ToggleableFactory('inputValue')
-  /* @vue/component */
-)
-interface options extends ExtractVue<typeof baseMixins> {
-  $el: HTMLElement
-}
-
-export default baseMixins.extend<options>().extend({
+export default defineComponent({
   name: 'v-btn',
 
-  props: {
-    activeClass: {
-      type: String,
-      default (): string | undefined {
-        if (!this.btnToggle) return ''
+  mixins: [
+    VSheet,
+    Routable,
+    Positionable,
+    Sizeable,
+    GroupableFactory('btnToggle'),
+    ToggleableFactory('inputValue'),
+  ],
 
-        return this.btnToggle.activeClass
-      },
-    } as any as PropValidator<string>,
+  props: {
+    activeClass: String,
     block: Boolean,
     depressed: Boolean,
     fab: Boolean,
@@ -66,7 +53,7 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: 'button',
     },
-    value: null as any as PropType<any>,
+    value: null as any as Prop<any>,
   },
 
   data: () => ({
@@ -77,7 +64,7 @@ export default baseMixins.extend<options>().extend({
     classes (): any {
       return {
         'v-btn': true,
-        ...Routable.options.computed.classes.call(this),
+        ...Routable.computed!.classes.call(this),
         'v-btn--absolute': this.absolute,
         'v-btn--block': this.block,
         'v-btn--bottom': this.bottom,
@@ -138,19 +125,6 @@ export default baseMixins.extend<options>().extend({
     },
   },
 
-  created () {
-    const breakingProps = [
-      ['flat', 'text'],
-      ['outline', 'outlined'],
-      ['round', 'rounded'],
-    ]
-
-    /* istanbul ignore next */
-    breakingProps.forEach(([original, replacement]) => {
-      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
-    })
-  },
-
   methods: {
     click (e: MouseEvent): void {
       // TODO: Remove this in v3
@@ -160,39 +134,39 @@ export default baseMixins.extend<options>().extend({
       this.btnToggle && this.toggle()
     },
     genContent (): VNode {
-      return this.$createElement('span', {
-        staticClass: 'v-btn__content',
-      }, this.$slots.default)
+      return h('span', {
+        class: 'v-btn__content',
+      }, this.$slots.default?.())
     },
     genLoader (): VNode {
-      return this.$createElement('span', {
+      return h('span', {
         class: 'v-btn__loader',
-      }, this.$slots.loader || [this.$createElement(VProgressCircular, {
-        props: {
-          indeterminate: true,
-          size: 23,
-          width: 2,
-        },
+      }, this.$slots.loader?.() || [h(VProgressCircular, {
+        indeterminate: true,
+        size: 23,
+        width: 2,
       })])
     },
   },
 
-  render (h): VNode {
+  render (): VNode {
     const children = [
       this.genContent(),
       this.loading && this.genLoader(),
     ]
     const setColor = !this.isFlat ? this.setBackgroundColor : this.setTextColor
-    const { tag, data } = this.generateRouteLink()
+    const vnode = this.generateRouteLink(children)
+    const data: Dictionary = {}
 
-    if (tag === 'button') {
-      data.attrs!.type = this.type
-      data.attrs!.disabled = this.disabled
+    if (vnode.type === 'button') {
+      data.type = this.type
+      data.disabled = this.disabled
     }
-    data.attrs!.value = ['string', 'number'].includes(typeof this.value)
+    data.value = ['string', 'number'].includes(typeof this.value)
       ? this.value
       : JSON.stringify(this.value)
+    if (!this.disabled) setColor(this.color, data)
 
-    return h(tag, this.disabled ? data : setColor(this.color, data), children)
+    return cloneVNode(vnode, data)
   },
 })

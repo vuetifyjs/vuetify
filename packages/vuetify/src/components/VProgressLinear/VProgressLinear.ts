@@ -13,23 +13,21 @@ import Proxyable from '../../mixins/proxyable'
 import Themeable from '../../mixins/themeable'
 
 // Utilities
-import { convertToUnit, getSlot } from '../../util/helpers'
-import mixins from '../../util/mixins'
+import { defineComponent, h } from 'vue'
+import { convertToUnit } from '../../util/helpers'
 
 // Types
-import { FunctionalComponentOptions } from 'vue/types'
-import { VNode } from 'vue'
+import type { VNode, Component } from 'vue'
 
-const baseMixins = mixins(
-  Colorable,
-  PositionableFactory(['absolute', 'fixed', 'top', 'bottom']),
-  Proxyable,
-  Themeable
-)
-
-/* @vue/component */
-export default baseMixins.extend({
+export default defineComponent({
   name: 'v-progress-linear',
+
+  mixins: [
+    Colorable,
+    PositionableFactory(['absolute', 'fixed', 'top', 'bottom']),
+    Proxyable,
+    Themeable,
+  ],
 
   props: {
     active: {
@@ -76,37 +74,39 @@ export default baseMixins.extend({
 
   computed: {
     __cachedBackground (): VNode {
-      return this.$createElement('div', this.setBackgroundColor(this.backgroundColor || this.color, {
-        staticClass: 'v-progress-linear__background',
+      return h('div', this.setBackgroundColor(this.backgroundColor || this.color, {
+        class: 'v-progress-linear__background',
         style: this.backgroundStyle,
       }))
     },
     __cachedBar (): VNode {
-      return this.$createElement(this.computedTransition, [this.__cachedBarType])
+      return h(this.computedTransition, () => this.__cachedBarType)
     },
     __cachedBarType (): VNode {
       return this.indeterminate ? this.__cachedIndeterminate : this.__cachedDeterminate
     },
     __cachedBuffer (): VNode {
-      return this.$createElement('div', {
-        staticClass: 'v-progress-linear__buffer',
+      return h('div', {
+        class: 'v-progress-linear__buffer',
         style: this.styles,
       })
     },
     __cachedDeterminate (): VNode {
-      return this.$createElement('div', this.setBackgroundColor(this.color, {
-        staticClass: `v-progress-linear__determinate`,
+      return h('div', this.setBackgroundColor(this.color, {
+        class: `v-progress-linear__determinate`,
         style: {
           width: convertToUnit(this.normalizedValue, '%'),
         },
       }))
     },
     __cachedIndeterminate (): VNode {
-      return this.$createElement('div', {
-        staticClass: 'v-progress-linear__indeterminate',
-        class: {
-          'v-progress-linear__indeterminate--active': this.active,
-        },
+      return h('div', {
+        class: [
+          'v-progress-linear__indeterminate',
+          {
+            'v-progress-linear__indeterminate--active': this.active,
+          },
+        ],
       }, [
         this.genProgressBar('long'),
         this.genProgressBar('short'),
@@ -115,8 +115,8 @@ export default baseMixins.extend({
     __cachedStream (): VNode | null {
       if (!this.stream) return null
 
-      return this.$createElement('div', this.setTextColor(this.color, {
-        staticClass: 'v-progress-linear__stream',
+      return h('div', this.setTextColor(this.color, {
+        class: 'v-progress-linear__stream',
         style: {
           width: convertToUnit(100 - this.normalizedBuffer, '%'),
         },
@@ -135,6 +135,7 @@ export default baseMixins.extend({
     },
     classes (): object {
       return {
+        'v-progress-linear': true,
         'v-progress-linear--absolute': this.absolute,
         'v-progress-linear--fixed': this.fixed,
         'v-progress-linear--query': this.query,
@@ -145,7 +146,7 @@ export default baseMixins.extend({
         ...this.themeClasses,
       }
     },
-    computedTransition (): FunctionalComponentOptions {
+    computedTransition (): Component {
       return this.indeterminate ? VFadeTransition : VSlideXTransition
     },
     isReversed (): boolean {
@@ -158,7 +159,7 @@ export default baseMixins.extend({
       return this.normalize(this.internalLazyValue)
     },
     reactive (): boolean {
-      return Boolean(this.$listeners.change)
+      return Boolean(this.$attrs.onChange)
     },
     styles (): object {
       const styles: Record<string, any> = {}
@@ -177,12 +178,12 @@ export default baseMixins.extend({
 
   methods: {
     genContent () {
-      const slot = getSlot(this, 'default', { value: this.internalLazyValue })
+      const slot = this.$slots.default?.({ value: this.internalLazyValue })
 
       if (!slot) return null
 
-      return this.$createElement('div', {
-        staticClass: 'v-progress-linear__content',
+      return h('div', {
+        class: 'v-progress-linear__content',
       }, slot)
     },
     genListeners () {
@@ -195,9 +196,9 @@ export default baseMixins.extend({
       return listeners
     },
     genProgressBar (name: 'long' | 'short') {
-      return this.$createElement('div', this.setBackgroundColor(this.color, {
-        staticClass: 'v-progress-linear__indeterminate',
+      return h('div', this.setBackgroundColor(this.color, {
         class: {
+          'v-progress-linear__indeterminate': true,
           [name]: true,
         },
       }))
@@ -216,22 +217,19 @@ export default baseMixins.extend({
     },
   },
 
-  render (h): VNode {
+  render (): VNode {
     const data = {
-      staticClass: 'v-progress-linear',
-      attrs: {
-        role: 'progressbar',
-        'aria-valuemin': 0,
-        'aria-valuemax': this.normalizedBuffer,
-        'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue,
-      },
+      role: 'progressbar',
+      'aria-valuemin': 0,
+      'aria-valuemax': this.normalizedBuffer,
+      'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue,
       class: this.classes,
       style: {
         bottom: this.bottom ? 0 : undefined,
         height: this.active ? convertToUnit(this.height) : 0,
         top: this.top ? 0 : undefined,
       },
-      on: this.genListeners(),
+      // on: this.genListeners(),
     }
 
     return h('div', data, [

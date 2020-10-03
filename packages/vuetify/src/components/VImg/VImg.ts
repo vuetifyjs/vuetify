@@ -5,8 +5,7 @@ import './VImg.sass'
 import intersect from '../../directives/intersect'
 
 // Types
-import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import type { VNode, Prop } from 'vue'
 
 // Components
 import VResponsive from '../VResponsive'
@@ -15,8 +14,7 @@ import VResponsive from '../VResponsive'
 import Themeable from '../../mixins/themeable'
 
 // Utils
-import mixins from '../../util/mixins'
-import mergeData from '../../util/mergeData'
+import { defineComponent, h, cloneVNode, withDirectives, Transition } from 'vue'
 import { consoleWarn } from '../../util/console'
 
 // not intended for public use, this is passed in by vuetify-loader
@@ -27,16 +25,16 @@ export interface srcObject {
   aspect: number
 }
 
-const hasIntersect = typeof window !== 'undefined' && 'IntersectionObserver' in window
+// const hasIntersect = typeof window !== 'undefined' && 'IntersectionObserver' in window
+const hasIntersect = false // TODO: convert intersect directive
 
-/* @vue/component */
-export default mixins(
-  VResponsive,
-  Themeable,
-).extend({
+export default defineComponent({
   name: 'v-img',
 
-  directives: { intersect },
+  mixins: [
+    VResponsive,
+    Themeable,
+  ],
 
   props: {
     alt: String,
@@ -53,7 +51,7 @@ export default mixins(
         rootMargin: undefined,
         threshold: undefined,
       }),
-    } as PropValidator<IntersectionObserverInit>,
+    } as Prop<IntersectionObserverInit>,
     position: {
       type: String,
       default: 'center center',
@@ -62,7 +60,7 @@ export default mixins(
     src: {
       type: [String, Object],
       default: '',
-    } as PropValidator<string | srcObject>,
+    } as Prop<string | srcObject>,
     srcset: String,
     transition: {
       type: [Boolean, String],
@@ -93,9 +91,9 @@ export default mixins(
           lazySrc: this.lazySrc || this.src.lazySrc,
           aspect: Number(this.aspectRatio || this.src.aspect),
         } : {
-          src: this.src,
-          srcset: this.srcset,
-          lazySrc: this.lazySrc,
+          src: this.src!,
+          srcset: this.srcset!,
+          lazySrc: this.lazySrc!,
           aspect: Number(this.aspectRatio || 0),
         }
     },
@@ -108,9 +106,9 @@ export default mixins(
       if (this.gradient) backgroundImage.push(`linear-gradient(${this.gradient})`)
       if (src) backgroundImage.push(`url("${src}")`)
 
-      const image = this.$createElement('div', {
-        staticClass: 'v-image__image',
+      const image = h('div', {
         class: {
+          'v-image__image': true,
           'v-image__image--preload': this.isLoading,
           'v-image__image--contain': this.contain,
           'v-image__image--cover': !this.contain,
@@ -125,12 +123,10 @@ export default mixins(
       /* istanbul ignore if */
       if (!this.transition) return image
 
-      return this.$createElement('transition', {
-        attrs: {
-          name: this.transition,
-          mode: 'in-out',
-        },
-      }, [image])
+      return h(Transition, {
+        name: this.transition,
+        mode: 'in-out',
+      }, () => image)
     },
   },
 
@@ -227,9 +223,9 @@ export default mixins(
       poll()
     },
     genContent () {
-      const content: VNode = VResponsive.options.methods.genContent.call(this)
+      const content: VNode = VResponsive.methods!.genContent.call(this)
       if (this.naturalWidth) {
-        this._b(content.data!, 'div', {
+        return cloneVNode(content, {
           style: { width: `${this.naturalWidth}px` },
         })
       }
@@ -239,46 +235,29 @@ export default mixins(
     __genPlaceholder (): VNode | void {
       if (this.$slots.placeholder) {
         const placeholder = this.isLoading
-          ? [this.$createElement('div', {
-            staticClass: 'v-image__placeholder',
-          }, this.$slots.placeholder)]
+          ? [h('div', {
+            class: 'v-image__placeholder',
+          }, this.$slots.placeholder?.())]
           : []
 
         if (!this.transition) return placeholder[0]
 
-        return this.$createElement('transition', {
-          props: {
-            appear: true,
-            name: this.transition,
-          },
+        return h(Transition, {
+          appear: true,
+          name: this.transition,
         }, placeholder)
       }
     },
   },
 
-  render (h): VNode {
-    const node = VResponsive.options.render.call(this, h)
+  render (): VNode {
+    const node = VResponsive.render!.call(this)
 
-    const data = mergeData(node.data!, {
-      staticClass: 'v-image',
-      attrs: {
-        'aria-label': this.alt,
-        role: this.alt ? 'img' : undefined,
-      },
-      class: this.themeClasses,
-      // Only load intersect directive if it
-      // will work in the current browser.
-      directives: hasIntersect
-        ? [{
-          name: 'intersect',
-          modifiers: { once: true },
-          value: {
-            handler: this.init,
-            options: this.options,
-          },
-        }]
-        : undefined,
-    })
+    const data = {
+      class: ['v-image', this.themeClasses],
+      'aria-label': this.alt,
+      role: this.alt ? 'img' : undefined,
+    }
 
     node.children = [
       this.__cachedSizer,
@@ -287,6 +266,19 @@ export default mixins(
       this.genContent(),
     ] as VNode[]
 
-    return h(node.tag, data, node.children)
+    return withDirectives(
+      cloneVNode(node, data),
+      // Only load intersect directive if it
+      // will work in the current browser.
+      hasIntersect
+        ? [[intersect, {
+          modifiers: { once: true },
+          value: {
+            handler: this.init,
+            options: this.options,
+          },
+        }]]
+        : []
+    )
   },
 })

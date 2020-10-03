@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import { defineComponent } from 'vue'
 
 /**
  * SSRBootable
@@ -8,7 +8,7 @@ import Vue from 'vue'
  * Used in layout components (drawer, toolbar, content)
  * to avoid an entry animation when using SSR
  */
-export default Vue.extend({
+export default defineComponent({
   name: 'ssr-bootable',
 
   data: () => ({
