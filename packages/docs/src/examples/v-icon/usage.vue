@@ -50,15 +50,16 @@
             'blue',
             'purple',
           ],
+          size: [
+            'x-small',
+            'small',
+            'medium',
+            'large',
+            'x-large',
+          ],
         },
       },
-      tabs: [
-        'x-small',
-        'small',
-        'medium',
-        'large',
-        'x-large',
-      ],
+      tabs: [],
     }),
   }
 </script>
