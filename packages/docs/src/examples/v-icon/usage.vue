@@ -2,17 +2,18 @@
   <v-row
     align="center"
     justify="space-around"
+    class="flex-column"
   >
-    <v-select
-      v-model="icon"
-      :items="icons"
-    ></v-select>
     <v-icon
       v-bind="$attrs"
       v-on="$listeners"
     >
       {{ icon || 'mdi-plus' }}
     </v-icon>
+    <v-select
+      v-model="icon"
+      :items="icons"
+    ></v-select>
   </v-row>
 </template>
 
@@ -50,6 +51,8 @@
             'blue',
             'purple',
           ],
+        },
+        radioGroups: {
           size: [
             'x-small',
             'small',

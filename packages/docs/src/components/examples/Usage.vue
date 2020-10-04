@@ -140,6 +140,19 @@
                   {{ item }}
                 </v-btn>
               </v-btn-toggle>
+
+              <v-radio-group
+                v-for="(items, prop) in radioGroups"
+                :key="prop"
+                :label="startCase(prop)"
+              >
+                <v-radio
+                  v-for="item in items"
+                  :key="item"
+                  :label="item"
+                  @click="toggleRadioProp(items, item)"
+                />
+              </v-radio-group>
             </v-responsive>
           </div>
         </v-col>
@@ -178,6 +191,7 @@
     data: () => ({
       booleans: undefined,
       btnToggles: undefined,
+      radioGroups: undefined,
       dark: false,
       file: null,
       hasError: false,
@@ -234,6 +248,12 @@
         }
 
         this.tabs = data.tabs
+      },
+      toggleRadioProp (props, toggled) {
+        for (const prop of props) {
+          this.usageProps[prop] = false
+        }
+        this.usageProps[toggled] = true
       },
     },
   }
