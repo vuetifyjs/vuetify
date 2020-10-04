@@ -150,7 +150,7 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
 }
 
 export function kebabCase (str: string): string {
-  return (str || '').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+  return (str || '').replace(/\s([a-z])/gi, '-$1').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
 }
 
 export function isObject (obj: any): obj is object {
