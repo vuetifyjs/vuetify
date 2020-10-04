@@ -189,7 +189,7 @@ To access global SASS variables, import the main `styles.sass` file.
 </style>
 ```
 
-A complete list of global variables is located on the [$vuetify](/api/$vuetify/) API page.
+A complete list of global variables is located on the [$vuetify](/api/vuetify/) API page.
 
 ### Component variables
 
