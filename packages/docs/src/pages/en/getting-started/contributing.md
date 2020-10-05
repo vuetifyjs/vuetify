@@ -1,7 +1,7 @@
 ---
 meta:
   title: Contributing
-  description: Contributing to open source helps developers access amazing tools for free. Learn how you can help develop in the Vuetify framework.
+  description: Contributing to open source helps developers access amazing tools for free. Learn how you can help develop the Vuetify framework.
   keywords: contribute, contributing, feature request
 related:
   - /getting-started/unit-testing/
@@ -17,23 +17,29 @@ Vuetify is made possible by an amazing community that submits issues, creates pu
 
 ## Reporting Issues
 
-The issue list of this repo is exclusively for bug reports and feature requests. Non-conforming issues will be closed immediately. Before reporting an issue, ensure that:
+The issue list of this repo is exclusively for bug reports and feature requests. Non-conforming issues will be closed immediately. Before reporting an issue:
 
-- Search for a similar [issues](https://github.com/vuetifyjs/vuetify/issues), it may have been answered.
-- Try to reproduce with the [latest](https://github.com/vuetifyjs/vuetify/releases/latest) or [lts](https://github.com/vuetifyjs/vuetify/tree/stable) (long-term-support) version in a [codepen](https://template.vuetifyjs.com/) or repository that can be be cloned to produced the expected behavior.
+- Search for similar [issues](https://github.com/vuetifyjs/vuetify/issues), it may have been answered already.
+- Try to reproduce with the [latest](https://github.com/vuetifyjs/vuetify/releases/latest) or [lts](https://github.com/vuetifyjs/vuetify/tree/stable) (long-term-support) version in a [codepen](https://template.vuetifyjs.com/) or repository that can be cloned to produce the expected behavior.
 - The reproduction is **MINIMAL** and concise
 
-These steps ensure that we have all of the information *necessary* to quickly triage and resolve your issue. Once your reproduction is complete, submit a new issue using the [Vuetify Issue Creator](https://issues.vuetifyjs.com/).
+These steps ensure that we have all the information necessary to quickly triage and resolve your issue. Once your reproduction is complete, submit a new issue using the [Vuetify Issue Creator](https://issues.vuetifyjs.com/).
+
+When writing an issue please provide as much detail as possible. Note that "reproduction steps" should be a series of actions another developer should take after clicking your reproduction link, not a recollection of how you discovered the bug.
 
 ## Setting up your environment
 
-If you are making a [pull request](https://github.com/vuetifyjs/vuetify/pulls), please [fork the Vuetify repository](https://github.com/vuetifyjs/vuetify) before continuing; More information on forking repositories can be found in the [GitHub documentation](https://help.github.com/en/github/getting-started-with-github/fork-a-repo).
+Required software:
 
-If you are new to the process of contributing to Open Source, it's recommended that you clone using **https**. More information on [which remote URL](https://help.github.com/en/github/using-git/which-remote-url-should-i-use) to use can be found on the GitHub documentation page.
+- [Git](https://git-scm.com/) >v2.20
+- [Node.js](https://nodejs.org/) LTS
+- [Yarn](https://classic.yarnpkg.com/)
+
+Some of our dependencies use [node-gyp](https://github.com/nodejs/node-gyp#installation) to build themselves. You don't need to install node-gyp itself but may require additional tools, especially on windows. See the node-gyp documentation for more details.
+
+One you have everything installed, clone the repository:
 
 ```bash
-# Example of cloning the Vuetify repository (non fork)
-
 # Using HTTPS
 git clone https://github.com/vuetifyjs/vuetify.git
 
@@ -41,7 +47,13 @@ git clone https://github.com/vuetifyjs/vuetify.git
 git clone git@github.com:vuetifyjs/vuetify.git
 ```
 
-Once cloned, run the following commands:
+<alert type="info">
+
+[Which remote URL should I use?](https://docs.github.com/en/free-pro-team@latest/github/using-git/which-remote-url-should-i-use)
+
+</alert>
+
+Then install dependencies and perform an initial build to link all the packages together:
 
 ```bash
 # Navigate to the vuetify folder
@@ -54,120 +66,59 @@ yarn
 yarn build
 ```
 
-The build process compiles all of the Vuetify packages for development and may take awhile (grab some ☕). Once the packages are built, start your local development server by running <kbd>yarn dev</kbd> in the terminal.
+The build process compiles all the Vuetify packages for development and may take a while (grab some ☕). Once the packages are built, you can start developing.
 
 ## Starting your environment
 
-There are a few ways to start the development environments in the Vuetify mono-repo.
+There are a few ways to start the development environments in the Vuetify monorepo.
 
-```bash
-# All commands run from root directory
+### Vuetify
 
-# To start vuetify dev
-yarn dev
+The Vuetify library is located in `packages/vuetify`. In `packages/vuetify/dev` you will find a `Playground.vue` file; running `yarn dev` from the project root will start a dev server on [localhost:8080](http://localhost:8080/) with this file loaded. You can test your changes in the playground then copy its contents into your pull request when you're ready.
 
-# To access your local vuetify playground: http://localhost:8080
+You can also test vuetify in your own project using [`yarn link`](https://classic.yarnpkg.com/en/docs/cli/link/):
 
-# To start docs
-yarn dev docs
+- Navigate to `packages/vuetify`
+- Run `yarn link`
+- Navigate to your project's directory
+- Run `yarn link vuetify`
 
-# To access your local docs environment: http://localhost:8095
+If your project is using vuetify-loader you will have to run `yarn build:lib` in the vuetify package to see changes, otherwise you can use `yarn watch` for incremental builds.
 
-# To start a specific package
-yarn dev <package name>
+### Documentation
 
-# To build all packages
-yarn build
+The documentation is located in `packages/docs` but also uses some files from `packages/api-generator`. A dev server for the documentation can be started by running `yarn dev:docs` from the project root and will be available on [localhost:8095](http://localhost:8095/) by default.
 
-# To build a specific package
-yarn build <package name>
-
-# Package alias
-api-generator: api
-```
-
-## Recommended packages
-
-The following are recommended packages to use when developing in Vuetify:
-
-### Commitizen
-
-The [Vuetify team](https://vuetifyjs.com/about/meet-the-team/) uses [Commitizen](https://github.com/commitizen/cz-cli) for all repository commits. This allows for easy to read and organized commits with minimal change to normal commit functions. To get started, [globally install the commitizen package](https://github.com/commitizen/cz-cli#conventional-commit-messages-as-a-global-utility) using [yarn](https://yarnpkg.com/) by running the following commands in your terminal:
-
-```bash
-# Install commitizen and the conventional changelog adapter
-yarn global add commitizen cz-conventional-changelog
-
-# Then create a .czrc file that tells commitizen
-# which adapter to use globally.
-echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
-```
-
-<alert type="warning">
-
-  Sometimes creating a `.czrc` file does not work using the **command prompt**. If you get unexpected results, create the file in your user folder located in the home directory. This is typically located on your primary harddrive in the `Users` folder.
-
-</alert>
-
-Congrats! Commitizen is installed! When you do commits, add your files like normal and replace `git commit -m "your message"` with `git cz` and follow the prompts.
-
-See the next section for guidelines when writing commit messages
-
-## Commit Guidelines with Commitizen
-
-Commitizen provides a fluid interface for handling semantic versioning. This provides a great boilerplate making it easier to write patch notes.
-
-All commits should use [commitizen](https://github.com/commitizen/cz-cli) with the [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog) as noted above. Commits should follow the format `<type>: <subject>` or `<type>(scope): <subject>`
-
-### Commit types
-
-- **feat:** Commits that result in a new features or functionalities. Backwards compatible features will release with the next **MINOR** whereas breaking changes will be in the next **MAJOR**. The body of a commit with breaking changes must begin with `BREAKING CHANGE`, followed by a description of how the API has changed.
-- **fix:** Commits that provide fixes for bugs within vuetify's codebase.
-- **docs:** Commits that provide updates to the docs.
-- **style:** Commits that do not affect how the code runs, these are simply changes to formatting.
-- **refactor:** Commits that neither fixes a bug nor adds a feature.
-- **perf:** Commits that improve performance.
-- **test:** Commits that add missing or correct existing tests.
-- **chore:** Other commits that don't modify src or test files.
-- **revert:** Commits that revert previous commits.
+If you want to see changes from vuetify in the documentation you need to run `yarn build:lib` in the vuetify package before starting the documentation server.
 
 ## Submitting Changes / Pull Requests
 
-Before doing any commits, you will want to pull down the latest and greatest from dev. From here, merge, and resolve any conflicts between your branch and dev. Its a good rule of thumb to pull frequently as development is constantly happening.
+First you should create a fork of the vuetify repository to push your changes to. Information on forking repositories can be found in the [GitHub documentation](https://help.github.com/en/github/getting-started-with-github/fork-a-repo).
 
-In git, add all relevant files.
+Then add your fork as a remote in git:
 
-Commit with commitizen using the command `git cz`. From here you will follow through a series of props. Make sure to select the appropriate type (see **Commit Guidelines w/Commitizen** above)
+```bash
+# Using HTTPS
+git remote add upstream https://github.com/YOUR_USERNAME/vuetify.git
 
-Lastly, `git push` and open a pull request.
+# Using SSH
+git remote add upstream git@github.com:YOUR_USERNAME/vuetify.git
+```
 
-### Pull Requests For Vuetify
+### Choosing a base branch
 
-<alert type="info">
+Before starting development you should know which branch to base your changes on. If in doubt use master as changes to master can usually be merged into a different branch without rebasing.
 
-  Pull requests related to Vuetify:
-
-- For **bug fixes** and **documentation updates** submit pull requests to `master`.
-- For **new features** and **enhancements** submit pull requests to `dev`
-- For **bugs** and **critical fixes** related to **v1.5/LTS** submit pull requests to `stable`
-- For any **features** that contain **breaking changes** submit pull requests to `next`
-
-</alert>
-
-### Pull Requests For Docs
-
-<alert type="info">
-
-  For any pull requests related to Vuetify docs, submit your pull request to the `master` branch.
-
-</alert>
+| Type of change | Branch |
+| --- | --- |
+| Documentation | `master` |
+| Bug fixes | `master` |
+| New features | `dev` |
+| Features with breaking changes | `next` |
+| Bugs and critical fixes for v1.5/LTS | `stable` |
 
 ### Pull Requests For Docs - Language
 
-<alert type="info">
-
-  We do not accept PRs for any doc changes pertaining to languages other than `en`. All changes for languages other than `en` are to be submitting through our Crowdin project. To get started simply select `Help Translate` in the language drop down of the docs. Languages will not be added until they have at least 15% of their translations completed.
-
-</alert>
+We do not accept PRs for any doc changes pertaining to languages other than `en`. All changes for languages other than `en` are to be submitted through our Crowdin project. To get started simply select `Help Translate` in the language dropdown of the docs. Languages will not be added until they have at least 15% of their translations completed.
 
 <backmatter />
