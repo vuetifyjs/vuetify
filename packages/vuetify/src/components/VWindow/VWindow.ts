@@ -46,7 +46,7 @@ export default BaseItemGroup.extend({
     },
     reverse: {
       type: Boolean,
-      default: undefined,
+      default: false,
     },
     showArrows: Boolean,
     showArrowsOnHover: Boolean,
@@ -60,7 +60,6 @@ export default BaseItemGroup.extend({
 
   data () {
     return {
-      changedByDelimiters: false,
       internalHeight: undefined as undefined | string, // This can be fixed by child class.
       transitionHeight: undefined as undefined | string, // Intermediate height during transition.
       transitionCount: 0, // Number of windows in transition state.
@@ -83,7 +82,7 @@ export default BaseItemGroup.extend({
       if (!this.isBooted) return ''
 
       const axis = this.vertical ? 'y' : 'x'
-      const reverse = this.$vuetify.rtl && axis === 'x' ? !this.internalReverse : this.internalReverse
+      const reverse = this.internalReverse ? !this.isReverse : this.isReverse
       const direction = reverse ? '-reverse' : ''
 
       return `v-window-${axis}${direction}-transition`
@@ -105,12 +104,14 @@ export default BaseItemGroup.extend({
       })
     },
     internalReverse (): boolean {
-      return this.reverse ? !this.isReverse : this.isReverse
+      return this.$vuetify.rtl ? !this.reverse : this.reverse
     },
   },
 
   watch: {
-    internalIndex: 'updateReverse',
+    internalIndex (val, oldVal) {
+      this.isReverse = this.updateReverse(val, oldVal)
+    },
   },
 
   mounted () {
@@ -138,7 +139,7 @@ export default BaseItemGroup.extend({
     genIcon (
       direction: 'prev' | 'next',
       icon: string,
-      fn: () => void
+      click: () => void
     ) {
       return this.$createElement('div', {
         staticClass: `v-window__${direction}`,
@@ -149,10 +150,7 @@ export default BaseItemGroup.extend({
             'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`),
           },
           on: {
-            click: () => {
-              this.changedByDelimiters = true
-              fn()
-            },
+            click,
           },
         }, [
           this.$createElement(VIcon, {
@@ -211,8 +209,6 @@ export default BaseItemGroup.extend({
       return prevIndex
     },
     next () {
-      this.isReverse = this.$vuetify.rtl
-
       /* istanbul ignore if */
       if (!this.hasActiveItems || !this.hasNext) return
 
@@ -222,8 +218,6 @@ export default BaseItemGroup.extend({
       this.internalValue = this.getValue(item, nextIndex)
     },
     prev () {
-      this.isReverse = !this.$vuetify.rtl
-
       /* istanbul ignore if */
       if (!this.hasActiveItems || !this.hasPrev) return
 
@@ -233,12 +227,15 @@ export default BaseItemGroup.extend({
       this.internalValue = this.getValue(item, lastIndex)
     },
     updateReverse (val: number, oldVal: number) {
-      if (this.changedByDelimiters) {
-        this.changedByDelimiters = false
-        return
-      }
+      const lastIndex = this.items.length - 1
 
-      this.isReverse = val < oldVal
+      if (val === lastIndex && oldVal === 0) {
+        return true
+      } else if (val === 0 && oldVal === lastIndex) {
+        return false
+      } else {
+        return val < oldVal
+      }
     },
   },
 

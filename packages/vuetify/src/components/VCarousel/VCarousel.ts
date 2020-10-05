@@ -157,7 +157,7 @@ export default VWindow.extend({
           mandatory: this.mandatory,
         },
         on: {
-          change: (val: any) => {
+          change: (val: unknown) => {
             this.internalValue = val
           },
         },
