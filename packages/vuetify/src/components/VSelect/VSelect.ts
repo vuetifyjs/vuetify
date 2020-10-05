@@ -13,6 +13,7 @@ import VTextField from '../VTextField/VTextField'
 
 // Mixins
 import Comparable from '../../mixins/comparable'
+import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
 
 // Directives
@@ -41,12 +42,14 @@ export const defaultMenuProps = {
 const baseMixins = mixins(
   VTextField,
   Comparable,
+  Dependent,
   Filterable
 )
 
 interface options extends InstanceType<typeof baseMixins> {
   $refs: {
     menu: InstanceType<typeof VMenu>
+    content: HTMLElement
     label: HTMLElement
     input: HTMLInputElement
     'prepend-inner': HTMLElement
@@ -162,6 +165,7 @@ export default baseMixins.extend<options>().extend({
         value: {
           handler: this.blur,
           closeConditional: this.closeConditional,
+          include: () => this.getOpenDependentElements(),
         },
       }] : undefined
     },
