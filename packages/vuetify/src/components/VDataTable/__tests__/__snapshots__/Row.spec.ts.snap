@@ -24,6 +24,17 @@ exports[`Table Row should render non-string values 1`] = `
 </tr>
 `;
 
+exports[`Table Row should render with cellClass 1`] = `
+<tr>
+  <td class="text-start a">
+    0.68
+  </td>
+  <td class="text-start b c">
+    0.65
+  </td>
+</tr>
+`;
+
 exports[`Table Row should render without slots 1`] = `
 <tr>
   <td class="text-start">
