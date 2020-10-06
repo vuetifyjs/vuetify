@@ -13,6 +13,7 @@ import VTextField from '../VTextField/VTextField'
 
 // Mixins
 import Comparable from '../../mixins/comparable'
+import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
 
 // Directives
@@ -26,6 +27,7 @@ import { consoleError } from '../../util/console'
 // Types
 import mixins from '../../util/mixins'
 import { VNode, VNodeDirective, PropType, VNodeData } from 'vue'
+import { PropValidator } from 'vue/types/options'
 import { SelectItemKey } from 'vuetify/types'
 
 export const defaultMenuProps = {
@@ -40,12 +42,14 @@ export const defaultMenuProps = {
 const baseMixins = mixins(
   VTextField,
   Comparable,
+  Dependent,
   Filterable
 )
 
 interface options extends InstanceType<typeof baseMixins> {
   $refs: {
     menu: InstanceType<typeof VMenu>
+    content: HTMLElement
     label: HTMLElement
     input: HTMLInputElement
     'prepend-inner': HTMLElement
@@ -82,7 +86,7 @@ export default baseMixins.extend<options>().extend({
     items: {
       type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
     itemColor: {
       type: String,
       default: 'primary',
@@ -161,6 +165,7 @@ export default baseMixins.extend<options>().extend({
         value: {
           handler: this.blur,
           closeConditional: this.closeConditional,
+          include: () => this.getOpenDependentElements(),
         },
       }] : undefined
     },
@@ -247,19 +252,8 @@ export default baseMixins.extend<options>().extend({
       this.initialValue = val
       this.setSelectedItems()
     },
-    menuIsBooted () {
-      window.setTimeout(() => {
-        if (this.getContent() && this.getContent().addEventListener) {
-          this.getContent().addEventListener('scroll', this.onScroll, false)
-        }
-      })
-    },
     isMenuActive (val) {
       window.setTimeout(() => this.onMenuActiveChange(val))
-
-      if (!val) return
-
-      this.menuIsBooted = true
     },
     items: {
       immediate: true,
@@ -520,6 +514,7 @@ export default baseMixins.extend<options>().extend({
             this.isMenuActive = val
             this.isFocused = val
           },
+          scroll: this.onScroll,
         },
         ref: 'menu',
       }, [this.genList()])
@@ -729,7 +724,7 @@ export default baseMixins.extend<options>().extend({
       if (!this.isMenuActive) {
         requestAnimationFrame(() => (this.getContent().scrollTop = 0))
       } else {
-        if (this.lastItem >= this.computedItems.length) return
+        if (this.lastItem > this.computedItems.length) return
 
         const showMoreItems = (
           this.getContent().scrollHeight -

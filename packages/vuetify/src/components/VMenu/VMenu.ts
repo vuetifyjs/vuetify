@@ -353,6 +353,11 @@ export default baseMixins.extend({
         },
       } as VNodeData
 
+      if (this.$listeners.scroll) {
+        options.on = options.on || {}
+        options.on.scroll = this.$listeners.scroll
+      }
+
       if (!this.disabled && this.openOnHover) {
         options.on = options.on || {}
         options.on.mouseenter = this.mouseEnterHandler

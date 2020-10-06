@@ -112,4 +112,27 @@ describe('MobileRow', () => {
     expect(wrapper.findAll('p.test')).toHaveLength(2)
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render without header when hideDefaultHeader: true', () => {
+    const wrapper = mountFunction({
+      context: {
+        props: {
+          headers: [
+            { text: 'Petrol', value: 'petrol' },
+            { text: 'Diesel', value: 'diesel' },
+          ],
+          hideDefaultHeader: true,
+          item: {
+            petrol: 0.68,
+            diesel: 0.65,
+          },
+        },
+      },
+    })
+
+    expect(wrapper.findAll('tr')).toHaveLength(1)
+    expect(wrapper.findAll('td')).toHaveLength(2)
+    expect(wrapper.findAll('.v-data-table__mobile-row__header')).toHaveLength(0)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

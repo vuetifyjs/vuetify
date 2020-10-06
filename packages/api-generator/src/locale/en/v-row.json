@@ -1,0 +1,21 @@
+{
+  "props": {
+    "align": "Applies the [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) css property. Available options are **start**, **center**, **end**, **baseline** and **stretch**.",
+    "alignSm": "Changes the **align-items** property on small and greater breakpoints.",
+    "alignMd": "Changes the **align-items** property on medium and greater breakpoints.",
+    "alignLg": "Changes the **align-items** property on large and greater breakpoints.",
+    "alignXl": "Changes the **align-items** property on extra large and greater breakpoints.",
+    "alignContent": "Applies the [align-content](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content) css property. Available options are **start**, **center**, **end**, **space-between**, **space-around** and **stretch**.",
+    "alignContentSm": "Changes the **align-content** property on small and greater breakpoints.",
+    "alignContentMd": "Changes the **align-content** property on medium and greater breakpoints.",
+    "alignContentLg": "Changes the **align-content** property on large and greater breakpoints.",
+    "alignContentXl": "Changes the **align-content** property on extra large and greater breakpoints.",
+    "dense": "Reduces the gutter between `v-col`s.",
+    "justify": "Applies the [justify-content](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content) css property. Available options are **start**, **center**, **end**, **space-between** and **space-around**.",
+    "justifySm": "Changes the **justify-content** property on small and greater breakpoints.",
+    "justifyMd": "Changes the **justify-content** property on medium and greater breakpoints.",
+    "justifyLg": "Changes the **justify-content** property on large and greater breakpoints.",
+    "justifyXl": "Changes the **justify-content** property on extra large and greater breakpoints.",
+    "noGutters": "Removes the gutter between `v-col`s."
+  }
+}

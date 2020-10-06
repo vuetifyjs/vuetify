@@ -39,11 +39,12 @@ describe('VVirtualScroll.ts', () => {
     mock.mockRestore()
   })
 
-  it('should render component with scopedSlot and match snapshot', () => {
+  it('should render component with scopedSlot and match snapshot', async () => {
     const wrapper = mountFunction({
       propsData,
     })
 
+    await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
 

@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VDatePicker.ts should handle date range picker with null value 1`] = `
+<div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
+  <div>
+    &nbsp;
+  </div>
+</div>
+`;
+
 exports[`VDatePicker.ts should match snapshot with colored picker & header 1`] = `
 <div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title orange darken-1">
