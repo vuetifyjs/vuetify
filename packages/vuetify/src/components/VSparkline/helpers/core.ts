@@ -15,11 +15,7 @@ export function genPoints (
   return values.map((value, index) => {
     return {
       x: minX + index * gridX,
-      y:
-        maxY -
-        (value - minValue) * gridY +
-        +(index === totalValues - 1) * 0.00001 -
-        +(index === 0) * 0.00001,
+      y: maxY - (value - minValue) * gridY,
       value,
     }
   })

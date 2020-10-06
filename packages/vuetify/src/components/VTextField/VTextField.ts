@@ -147,9 +147,7 @@ export default baseMixins.extend<options>().extend({
       },
     },
     isDirty (): boolean {
-      return (this.lazyValue != null &&
-        this.lazyValue.toString().length > 0) ||
-        this.badInput
+      return this.lazyValue?.toString().length > 0 || this.badInput
     },
     isEnclosed (): boolean {
       return (
@@ -364,7 +362,7 @@ export default baseMixins.extend<options>().extend({
     genLegend () {
       const width = !this.singleLine && (this.labelValue || this.isDirty) ? this.labelWidth : 0
       const span = this.$createElement('span', {
-        domProps: { innerHTML: '&#8203;' },
+        domProps: { innerHTML: '' },
       })
 
       return this.$createElement('legend', {

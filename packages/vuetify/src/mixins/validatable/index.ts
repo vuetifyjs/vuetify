@@ -9,7 +9,7 @@ import { consoleError } from '../../util/console'
 import mixins from '../../util/mixins'
 
 // Types
-import { PropType } from 'vue'
+import { PropValidator } from 'vue/types/options'
 import { InputMessage, InputValidationRules } from 'vuetify/types'
 
 const baseMixins = mixins(
@@ -30,23 +30,23 @@ export default baseMixins.extend({
       default: 1,
     },
     errorMessages: {
-      type: [String, Array] as PropType<InputMessage>,
+      type: [String, Array],
       default: () => [],
-    },
+    } as PropValidator<InputMessage | null>,
     messages: {
-      type: [String, Array] as PropType<InputMessage>,
+      type: [String, Array],
       default: () => [],
-    },
+    } as PropValidator<InputMessage | null>,
     readonly: Boolean,
     rules: {
-      type: Array as PropType<InputValidationRules>,
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<InputValidationRules>,
     success: Boolean,
     successMessages: {
-      type: [String, Array] as PropType<InputMessage>,
+      type: [String, Array],
       default: () => [],
-    },
+    } as PropValidator<InputMessage | null>,
     validateOnBlur: Boolean,
     value: { required: false },
   },
@@ -160,9 +160,9 @@ export default baseMixins.extend({
     validationTarget (): InputValidationRules {
       if (this.internalErrorMessages.length > 0) {
         return this.internalErrorMessages
-      } else if (this.successMessages.length > 0) {
+      } else if (this.successMessages && this.successMessages.length > 0) {
         return this.internalSuccessMessages
-      } else if (this.messages.length > 0) {
+      } else if (this.messages && this.messages.length > 0) {
         return this.internalMessages
       } else if (this.shouldValidate) {
         return this.errorBucket
@@ -226,7 +226,7 @@ export default baseMixins.extend({
   },
 
   methods: {
-    genInternalMessages (messages: InputMessage): InputValidationRules {
+    genInternalMessages (messages: InputMessage | null): InputValidationRules {
       if (!messages) return []
       else if (Array.isArray(messages)) return messages
       else return [messages]

@@ -116,7 +116,7 @@ export default baseMixins.extend<options>().extend({
     computedRipple (): RippleOptions | boolean {
       const defaultRipple = this.icon || this.fab ? { circle: true } : true
       if (this.disabled) return false
-      else return this.ripple != null ? this.ripple : defaultRipple
+      else return this.ripple ?? defaultRipple
     },
     isFlat (): boolean {
       return Boolean(

@@ -14,7 +14,8 @@ import {
 } from '../../util/helpers'
 
 // Types
-import { PropType } from 'vue'
+import { PropType, VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 const defaultMenuProps = {
   ...VSelectMenuProps,
@@ -41,7 +42,7 @@ export default VSelect.extend({
       default: (item: any, queryText: string, itemText: string) => {
         return itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) > -1
       },
-    },
+    } as PropValidator<(item: any, queryText: string, itemText: string) => boolean>,
     hideNoData: Boolean,
     menuProps: {
       type: VSelect.options.props.menuProps.type,
@@ -203,6 +204,10 @@ export default VSelect.extend({
     this.setSearch()
   },
 
+  destroyed () {
+    document.removeEventListener('copy', this.onCopy)
+  },
+
   methods: {
     onFilteredItemsChanged (val: never[], oldVal: never[]) {
       // TODO: How is the watcher triggered
@@ -260,6 +265,19 @@ export default VSelect.extend({
         this.getDisabled(curItem)
       ) return
 
+      const lastIndex = this.selectedItems.length - 1
+
+      // Select the last item if
+      // there is no selection
+      if (
+        this.selectedIndex === -1 &&
+        lastIndex !== 0
+      ) {
+        this.selectedIndex = lastIndex
+
+        return
+      }
+
       const length = this.selectedItems.length
       const nextIndex = curIndex !== length - 1
         ? curIndex
@@ -299,7 +317,7 @@ export default VSelect.extend({
 
       return slot
     },
-    genSelections () {
+    genSelections (): VNode | never[] {
       return this.hasSlot || this.multiple
         ? VSelect.options.methods.genSelections.call(this)
         : []
@@ -395,7 +413,7 @@ export default VSelect.extend({
         this.setSearch()
       }
     },
-    hasItem (item: any) {
+    hasItem (item: any): boolean {
       return this.selectedValues.indexOf(this.getValue(item)) > -1
     },
     onCopy (event: ClipboardEvent) {

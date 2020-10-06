@@ -20,19 +20,6 @@ describe('rippleable.ts', () => {
     }
   })
 
-  it('should react to click', () => {
-    const onChange = jest.fn()
-    const wrapper = mountFunction({
-      methods: {
-        onChange,
-      },
-    })
-
-    wrapper.trigger('click')
-
-    expect(onChange).toHaveBeenCalledTimes(1)
-  })
-
   it('should match snapshot', () => {
     const wrapper = mountFunction()
 

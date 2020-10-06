@@ -15,6 +15,7 @@ import {
 
 // Types
 import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 export default Measurable.extend({
   name: 'v-virtual-scroll',
@@ -33,7 +34,7 @@ export default Measurable.extend({
     items: {
       type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
   },
 
   data: () => ({
@@ -57,7 +58,12 @@ export default Measurable.extend({
     },
   },
 
-  created () {
+  watch: {
+    height: 'onScroll',
+    itemHeight: 'onScroll',
+  },
+
+  mounted () {
     this.last = this.getLast(0)
   },
 
@@ -69,14 +75,15 @@ export default Measurable.extend({
       ).map(this.genChild)
     },
     genChild (item: any, index: number) {
-      const indexToRender = this.firstToRender + index
-      const top = convertToUnit(indexToRender * this.__itemHeight)
+      index += this.firstToRender
+
+      const top = convertToUnit(index * this.__itemHeight)
 
       return this.$createElement('div', {
         staticClass: 'v-virtual-scroll__item',
         style: { top },
-        key: indexToRender,
-      }, getSlot(this, 'default', { item, index }))
+        key: index,
+      }, getSlot(this, 'default', { index, item }))
     },
     getFirst (): number {
       return Math.floor(this.scrollTop / this.__itemHeight)
@@ -86,10 +93,8 @@ export default Measurable.extend({
 
       return first + Math.ceil(height / this.__itemHeight)
     },
-    onScroll (e: Event): void {
-      const target = e.currentTarget as HTMLElement
-
-      this.scrollTop = target.scrollTop
+    onScroll () {
+      this.scrollTop = this.$el.scrollTop
       this.first = this.getFirst()
       this.last = this.getLast(this.first)
     },
@@ -111,6 +116,7 @@ export default Measurable.extend({
         modifiers: { self: true },
         value: this.onScroll,
       }],
+      on: this.$listeners,
     }, [content])
   },
 })

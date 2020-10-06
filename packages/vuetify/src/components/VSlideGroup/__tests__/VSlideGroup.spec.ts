@@ -64,7 +64,6 @@ describe('VSlideGroup.ts', () => {
     })
 
     expect(wrapper.vm.hasNext).toBe(true)
-    expect(`[Vuetify] [UPGRADE] 'true' is deprecated, use 'mobile' instead`).toHaveBeenTipped()
   })
 
   it('should compute newOffset for active element', async () => {
@@ -244,7 +243,6 @@ describe('VSlideGroup.ts', () => {
     next.trigger('click')
     expect(scrollTo).toHaveBeenCalledTimes(2)
     expect(onClick).toHaveBeenCalledTimes(2)
-    expect(`[Vuetify] [UPGRADE] 'true' is deprecated, use 'mobile' instead`).toHaveBeenTipped()
   })
 
   it('should accept scoped slots', () => {
@@ -310,7 +308,7 @@ describe('VSlideGroup.ts', () => {
   it.each([
     [true, true, true, true],
     [true, true, false, true],
-    [true, false, true, true],
+    [true, false, true, false],
     [true, false, false, false],
     ['desktop', true, false, true],
     ['desktop', true, true, false],
@@ -334,9 +332,5 @@ describe('VSlideGroup.ts', () => {
     })
 
     expect(wrapper.vm.hasAffixes).toBe(hasAffixes)
-
-    if (showArrows === true) {
-      expect(`[Vuetify] [UPGRADE] 'true' is deprecated, use 'mobile' instead`).toHaveBeenTipped()
-    }
   })
 })
