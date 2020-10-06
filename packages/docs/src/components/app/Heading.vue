@@ -35,6 +35,7 @@
         2: 'text-h4 text-sm-h4 mb-3',
         3: 'text-h5 mb-2',
         4: 'text-h6 mb-2',
+        5: 'text-subtitle-1 font-weight-medium mb-2',
       },
     }),
 
