@@ -2,7 +2,7 @@
   <div>
     <v-card
       class="d-flex flex-row mb-6"
-      color="grey lighten-2"
+      :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
       flat
       tile
     >
@@ -18,7 +18,7 @@
     </v-card>
     <v-card
       class="d-flex flex-row-reverse"
-      color="grey lighten-2"
+      :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
       flat
       tile
     >

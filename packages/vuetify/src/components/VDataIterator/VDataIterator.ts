@@ -12,7 +12,8 @@ import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camel
 import { breaking, removed } from '../../util/console'
 
 // Types
-import { VNode, VNodeChildren, PropType } from 'vue'
+import { VNode, VNodeChildren } from 'vue'
+import { PropValidator } from 'vue/types/options'
 import { DataItemProps, DataScopeProps } from 'vuetify/types'
 
 /* @vue/component */
@@ -29,14 +30,14 @@ export default mixins(
       default: 'id',
     },
     value: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
     singleSelect: Boolean,
     expanded: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
     mobileBreakpoint: {
       ...Mobile.options.props.mobileBreakpoint,
       default: 600,

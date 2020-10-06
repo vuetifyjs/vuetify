@@ -6,9 +6,15 @@ module.exports = {
         value: 'boolean',
       },
     ],
-    slots: [{
-      name: 'action',
-      props: { attrs: 'object' },
-    }],
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+      {
+        name: 'action',
+        props: { attrs: 'object' },
+      },
+    ],
   },
 }

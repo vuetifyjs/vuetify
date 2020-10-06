@@ -1,6 +1,0 @@
-{
-  "props": {
-    "openDelay": "Millisecondes à attendre avant d'ouvrir le composant.",
-    "closeDelay": "Millisecondes à attendre avant de fermer le composant."
-  }
-}

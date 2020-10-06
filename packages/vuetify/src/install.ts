@@ -43,10 +43,28 @@ export function install (Vue: VueConstructor, args: VuetifyUseOptions = {}) {
       const options = this.$options as any
 
       if (options.vuetify) {
-        options.vuetify.init(this, options.ssrContext)
+        options.vuetify.init(this, this.$ssrContext)
         this.$vuetify = Vue.observable(options.vuetify.framework)
       } else {
         this.$vuetify = (options.parent && options.parent.$vuetify) || this
+      }
+    },
+    beforeMount () {
+      // @ts-ignore
+      if (this.$options.vuetify && this.$el && this.$el.hasAttribute('data-server-rendered')) {
+        // @ts-ignore
+        this.$vuetify.isHydrating = true
+        // @ts-ignore
+        this.$vuetify.breakpoint.update(true)
+      }
+    },
+    mounted () {
+      // @ts-ignore
+      if (this.$options.vuetify && this.$vuetify.isHydrating) {
+        // @ts-ignore
+        this.$vuetify.isHydrating = false
+        // @ts-ignore
+        this.$vuetify.breakpoint.update()
       }
     },
   })

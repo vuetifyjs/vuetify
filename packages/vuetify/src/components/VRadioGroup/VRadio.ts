@@ -13,7 +13,7 @@ import Colorable from '../../mixins/colorable'
 import { factory as GroupableFactory } from '../../mixins/groupable'
 import Rippleable from '../../mixins/rippleable'
 import Themeable from '../../mixins/themeable'
-import Selectable from '../../mixins/selectable'
+import Selectable, { prevent } from '../../mixins/selectable'
 
 // Utilities
 import { getSlot } from '../../util/helpers'
@@ -21,6 +21,7 @@ import { getSlot } from '../../util/helpers'
 // Types
 import { VNode, VNodeData } from 'vue'
 import mixins from '../../util/mixins'
+import { mergeListeners } from '../../util/mergeData'
 
 const baseMixins = mixins(
   BindsAttrs,
@@ -126,14 +127,8 @@ export default baseMixins.extend<options>().extend({
 
       return this.$createElement(VLabel, {
         on: {
-          click: (e: Event) => {
-            // Prevent label from
-            // causing the input
-            // to focus
-            e.preventDefault()
-
-            this.onChange()
-          },
+          // Label shouldn't cause the input to focus
+          click: prevent,
         },
         attrs: {
           for: this.computedId,
@@ -178,10 +173,13 @@ export default baseMixins.extend<options>().extend({
   },
 
   render (h): VNode {
-    const data = {
+    const data: VNodeData = {
       staticClass: 'v-radio',
       class: this.classes,
-    } as VNodeData
+      on: mergeListeners({
+        click: this.onChange,
+      }, this.listeners$),
+    }
 
     return h('div', data, [
       this.genRadio(),

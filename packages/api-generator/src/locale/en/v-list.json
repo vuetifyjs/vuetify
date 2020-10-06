@@ -1,0 +1,20 @@
+{
+  "props": {
+    "avatar": "Used to set minimum tile height on a single-line list item",
+    "dense": "Lowers max height of list tiles",
+    "disabled": "Disables all children `v-list-item` components",
+    "expand": "Will only collapse when explicitly closed",
+    "flat": "Remove the highlighted background on active `v-list-item`s",
+    "group": "Assign a route namespace. Accepts a string or regexp for determining active state",
+    "inactive": "If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler",
+    "link": "Applies `v-list-item` hover styles. Useful when using the item as an _activator_.",
+    "nav": "An alternative styling that reduces `v-list-item` width and rounds the corners. Typically used with **[v-navigation-drawer](/components/navigation-drawers)**",
+    "noAction": "Removes left padding assigned for action icons from group items",
+    "rounded": "Rounds the `v-list-item` edges",
+    "shaped": "Provides an alternative active style for `v-list-item`.",
+    "subGroup": "Designate the component as nested list group",
+    "subheader": "Removes top padding. Used when previous sibling is a header",
+    "threeLine": "Increases list-item height for three lines. This prop uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers.",
+    "twoLine": "Increases list-item height for two lines. This prop uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers."
+  }
+}

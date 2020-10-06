@@ -1,6 +1,0 @@
-{
-  "props": {
-    "error": "수동으로 인풋을 에러 상태로 만듬",
-    "validateOnBlur": "blur 이벤트까지 검증을 지연"
-  }
-}

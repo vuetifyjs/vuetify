@@ -4,7 +4,7 @@
       v-for="j in justify"
       :key="j"
       :class="`d-flex justify-${j} mb-6`"
-      color="grey lighten-2"
+      :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
       flat
       tile
     >

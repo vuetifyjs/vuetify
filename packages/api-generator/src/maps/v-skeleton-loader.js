@@ -3,7 +3,7 @@ module.exports = {
     props: [
       {
         name: 'type',
-        options: {
+        example: {
           actions: 'button@2',
           article: 'heading, paragraph',
           avatar: 'avatar',
