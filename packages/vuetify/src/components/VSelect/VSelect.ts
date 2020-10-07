@@ -711,10 +711,6 @@ export default baseMixins.extend<options>().extend({
         // or inside, toggle menu
         if (this.isAppendInner(e.target)) {
           this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
-        // If user is clicking in the container
-        // and field is enclosed, activate it
-        } else if (this.isEnclosed) {
-          this.isMenuActive = true
         }
       }
 

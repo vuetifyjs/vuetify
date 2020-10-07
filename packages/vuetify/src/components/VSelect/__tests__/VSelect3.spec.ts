@@ -7,6 +7,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
+// eslint-disable-next-line max-statements
 describe('VSelect.ts', () => {
   type Instance = InstanceType<typeof VSelect>
   let mountFunction: (options?: object) => Wrapper<Instance>
@@ -33,6 +34,10 @@ describe('VSelect.ts', () => {
         ...options,
       })
     }
+  })
+
+  afterEach(() => {
+    document.body.removeChild(el)
   })
 
   it('should select an item !multiple', async () => {
@@ -349,40 +354,58 @@ describe('VSelect.ts', () => {
   })
 
   // Inspired by https://github.com/vuetifyjs/vuetify/pull/1425 - Thanks @kevmo314
-  it('should open the select when focused and enter, space, up or down are pressed', async () => {
-    const wrapper = mountFunction()
+  it('should open the select when enter is pressed', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo', 'bar'],
+      },
+    })
 
-    wrapper.vm.hasMouseDown = true
-    wrapper.trigger('mouseup')
+    wrapper.find('input').trigger('keydown.enter')
+    await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.isMenuActive).toBe(false)
+    expect(document.body.querySelector('[data-app="true"]')).toMatchSnapshot()
+  })
 
-    wrapper.setProps({ filled: true })
-    wrapper.vm.hasMouseDown = true
-    wrapper.find('.v-input__slot').trigger('mouseup')
+  it('should open the select when space is pressed', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo', 'bar'],
+      },
+    })
 
-    expect(wrapper.vm.isMenuActive).toBe(true)
+    wrapper.find('input').trigger('keydown.space')
+    await wrapper.vm.$nextTick()
 
-    wrapper.setData({ isMenuActive: false })
-    wrapper.setProps({ filled: false, solo: true })
-    wrapper.vm.hasMouseDown = true
-    wrapper.find('.v-input__slot').trigger('mouseup')
+    expect(document.body.querySelector('[data-app="true"]')).toMatchSnapshot()
+  })
 
-    expect(wrapper.vm.isMenuActive).toBe(true)
+  it('should open the select is multiple and key up is pressed', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        multiple: true,
+        items: ['foo', 'bar'],
+      },
+    })
 
-    wrapper.setData({ isMenuActive: false })
-    wrapper.setProps({ solo: false, soloInverted: true })
-    wrapper.vm.hasMouseDown = true
-    wrapper.find('.v-input__slot').trigger('mouseup')
+    wrapper.find('input').trigger('keydown.up')
+    await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.isMenuActive).toBe(true)
+    expect(document.body.querySelector('[data-app="true"]')).toMatchSnapshot()
+  })
 
-    wrapper.setData({ isMenuActive: false })
-    wrapper.setProps({ soloInverted: false, outlined: true })
-    wrapper.vm.hasMouseDown = true
-    wrapper.find('.v-input__slot').trigger('mouseup')
+  it('should open the select is multiple and key down is pressed', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        multiple: true,
+        items: ['foo', 'bar'],
+      },
+    })
 
-    expect(wrapper.vm.isMenuActive).toBe(true)
+    wrapper.find('input').trigger('keydown.down')
+    await wrapper.vm.$nextTick()
+
+    expect(document.body.querySelector('[data-app="true"]')).toMatchSnapshot()
   })
 
   it('should return full items if using auto prop', async () => {
