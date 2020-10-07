@@ -22,8 +22,8 @@
     "clean": "lerna clean"
   },
   "engines": {
-    "node": ">= 11.7.1",
-    "yarn": ">= 1.12.0"
+    "node": "^12 || ^14",
+    "yarn": "^1.12"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -63,7 +63,7 @@
     "moment": "^2.27.0",
     "sass": "^1.26.11",
     "semver": "^6.2.0",
-    "shelljs": "^0.8.3",
+    "shelljs": "^0.8.4",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "ts-jest": "^24.1.0",
