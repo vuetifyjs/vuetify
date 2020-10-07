@@ -189,7 +189,7 @@ export default VAutocomplete.extend({
 
       // Reset search if using slot
       // to avoid a double input
-      if (isUsingSlot) this.internalSearch = undefined
+      if (isUsingSlot) this.internalSearch = null
     },
     updateSelf () {
       this.multiple ? this.updateTags() : this.updateCombobox()

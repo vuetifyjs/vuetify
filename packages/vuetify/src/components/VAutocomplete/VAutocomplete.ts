@@ -293,7 +293,7 @@ export default VSelect.extend({
       this.selectedIndex = nextIndex
     },
     clearableCallback () {
-      this.internalSearch = undefined
+      this.internalSearch = null
 
       VSelect.options.methods.clearableCallback.call(this)
     },

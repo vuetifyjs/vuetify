@@ -270,8 +270,8 @@ describe('VSelect.ts', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.internalValue).toBeUndefined()
-    expect(input).toHaveBeenCalledWith(undefined)
+    expect(wrapper.vm.internalValue).toBeNull()
+    expect(input).toHaveBeenCalledWith(null)
   })
 
   it('should be clearable with prop, dirty and single select', async () => {
@@ -292,7 +292,7 @@ describe('VSelect.ts', () => {
 
     clear.trigger('click')
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.internalValue).toBeUndefined()
+    expect(wrapper.vm.internalValue).toBeNull()
     expect(wrapper.vm.isMenuActive).toBe(false)
   })
 
