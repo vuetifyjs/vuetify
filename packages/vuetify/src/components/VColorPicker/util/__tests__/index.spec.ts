@@ -1,4 +1,4 @@
-import { parseColor, extractColor } from '../'
+import { parseColor, extractColor, VColorPickerColor } from '../'
 
 const red = {
   alpha: 1,
@@ -58,46 +58,24 @@ describe('VColorPicker Utils', () => {
   })
 
   describe('Extract color', () => {
-    it('should return the color object if the input is null', () => {
-      expect(extractColor(red, null)).toEqual(red)
-    })
+    const cases = [
+      [red, null, red],
+      [red, '#FF0000', red.hex],
+      [red, '#FF0000FF', red.hexa],
+      [red, { r: 255, g: 0, b: 0 }, { r: 255, g: 0, b: 0 }],
+      [red, { r: 255, g: 0, b: 0, a: 0 }, red.rgba],
+      [red, { h: 0, s: 1, l: 0.5 }, { h: 0, s: 1, l: 0.5 }],
+      [red, { h: 0, s: 1, l: 0.5, a: 1 }, red.hsla],
+      [red, { h: 0, s: 1, v: 1 }, { h: 0, s: 1, v: 1 }],
+      [red, { h: 0, s: 1, v: 1, a: 0.5 }, { h: 0, s: 1, v: 1, a: 1 }],
+      [red, undefined, red],
+      [red, 0, red],
+      [red, true, red],
+    ]
 
-    it('should return HEX color value if the input is a string and has a length of 7', () => {
-      expect(extractColor(red, '#FF0000')).toEqual(red.hex)
-    })
-
-    it('should return HEXA color value if the input is a string and has a length greater than 7', () => {
-      expect(extractColor(red, '#FF0000FF')).toEqual(red.hexa)
-    })
-
-    it('should return RGB value if the input is an RBG object with no alpha', () => {
-      expect(extractColor(red, { r: 255, g: 0, b: 0 })).toEqual({ r: 255, g: 0, b: 0 })
-    })
-
-    it('should return RGBA value if the input is an RBG object with alpha', () => {
-      expect(extractColor(red, { r: 255, g: 0, b: 0, a: 0 })).toEqual(red.rgba)
-    })
-
-    it('should return HSL value if the input is an HSL object with no alpha', () => {
-      expect(extractColor(red, { h: 0, s: 1, l: 0.5 })).toEqual({ h: 0, s: 1, l: 0.5 })
-    })
-
-    it('should return HSLA value if the input is an HSL object with alpha', () => {
-      expect(extractColor(red, { h: 0, s: 1, l: 0.5, a: 1 })).toEqual(red.hsla)
-    })
-
-    it('should return HSV value if the input is an HSV object with no alpha', () => {
-      expect(extractColor(red, { h: 0, s: 1, v: 1 })).toEqual({ h: 0, s: 1, v: 1 })
-    })
-
-    it('should return HSVA value if the input is an HSV object with alpha', () => {
-      expect(extractColor(red, { h: 0, s: 1, v: 1, a: 0.5 })).toEqual({ h: 0, s: 1, v: 1, a: 1 })
-    })
-
-    it('should return the color object if an invalid input is passed', () => {
-      expect(extractColor(red, undefined)).toEqual(red)
-      expect(extractColor(red)).toEqual(red)
-      expect(extractColor(red, true)).toEqual(red)
-    })
+    it.each(cases)('When given %p and %p, extractColor util should return %p',
+      (color: VColorPickerColor, input: any, result: any) => {
+        expect(extractColor(color, input)).toEqual(result)
+      })
   })
 })
