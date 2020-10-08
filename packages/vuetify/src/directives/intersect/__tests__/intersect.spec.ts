@@ -4,7 +4,7 @@ import { h } from 'vue'
 // Directives
 import Intersect from '../'
 
-describe('resize.ts', () => {
+describe('v-intersect', () => {
   it('should bind event on mounted', () => {
     const callback = jest.fn()
     const vnode = h('div')
@@ -25,7 +25,7 @@ describe('resize.ts', () => {
 
     Intersect.unmounted(el, {}, vnode, vnode)
 
-    expect((el as any)._observe).toBeFalsy()
+    expect((el as any)._observe).toBeUndefined()
   })
 
   it('should invoke callback once and unmount', () => {
@@ -49,6 +49,6 @@ describe('resize.ts', () => {
     }
 
     expect(callback).toHaveBeenCalledTimes(2)
-    expect((el as any)._observe).toBeFalsy()
+    expect((el as any)._observe).toBeUndefined()
   })
 })
