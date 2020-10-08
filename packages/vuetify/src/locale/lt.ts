@@ -61,4 +61,9 @@ export default {
       currentPage: 'Dabartinis puslapis, puslapis {0}',
     },
   },
+  rating: {
+    ariaLabel: {
+      icon: 'Rating Star {0}',
+    },
+  },
 }

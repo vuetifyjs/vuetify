@@ -61,4 +61,9 @@ export default {
       currentPage: 'Halaman Saat Ini, Halaman {0}',
     },
   },
+  rating: {
+    ariaLabel: {
+      icon: 'Rating Star {0}',
+    },
+  },
 }

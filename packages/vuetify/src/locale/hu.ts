@@ -61,4 +61,9 @@ export default {
       currentPage: 'Aktuális oldal: {0}',
     },
   },
+  rating: {
+    ariaLabel: {
+      icon: 'Rating Star {0}',
+    },
+  },
 }

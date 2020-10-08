@@ -53,6 +53,12 @@ Utilize the same sizing classes available in `v-icon` or provide your own with t
 
 <example file="v-rating/prop-size" />
 
+#### Icon Aria Label
+
+Provide a label to assistive technologies for icons.
+
+<example file="v-rating/icon-aria-label" />
+
 ### Slots
 
 #### Item slot

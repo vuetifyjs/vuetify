@@ -61,4 +61,9 @@ export default {
       currentPage: 'Gjeldende side, side {0}',
     },
   },
+  rating: {
+    ariaLabel: {
+      icon: 'Rating Star {0}',
+    },
+  },
 }

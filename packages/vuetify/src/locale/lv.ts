@@ -61,4 +61,9 @@ export default {
       currentPage: 'Pašreizējā lapa, lapa {0}',
     },
   },
+  rating: {
+    ariaLabel: {
+      icon: 'Rating Star {0}',
+    },
+  },
 }
