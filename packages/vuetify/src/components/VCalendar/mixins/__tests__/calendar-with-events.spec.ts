@@ -125,10 +125,10 @@ describe('calendar-with-events.ts', () => {
     // Depending on the time format of the underlying system
     // (12-hour with `h` || 12-hour with `hh` || 24-hour with `h` || 24-hour with `hh`),
     // we expect the value passed to be-
-    expect(wrapper.vm.formatTime(testData1, true)).toMatch(/^0?8:30( AM)?$/) // 8:30 AM || 08:30 AM || 8:30 || 08:30
-    expect(wrapper.vm.formatTime(testData2, true)).toMatch(/^(0?5:45 PM|17:45)$/) // 5:45 PM || 05:45 PM || 17:45
-    expect(wrapper.vm.formatTime(testData3, true)).toMatch(/^0?9:05( AM)?$/) // 9:05 AM || 09:05 AM || 9:05 || 09:45
-    expect(wrapper.vm.formatTime(testData4, true)).toMatch(/^(0?3 PM|15)$/) // 3 AM || 03 AM || 15
+    expect(wrapper.vm.formatTime(testData1, true)).toMatch(/^0?8:30( AM)?$/i) // 8:30 AM || 08:30 AM || 8:30 || 08:30
+    expect(wrapper.vm.formatTime(testData2, true)).toMatch(/^(0?5:45 PM|17:45)$/i) // 5:45 PM || 05:45 PM || 17:45
+    expect(wrapper.vm.formatTime(testData3, true)).toMatch(/^0?9:05( AM)?$/i) // 9:05 AM || 09:05 AM || 9:05 || 09:45
+    expect(wrapper.vm.formatTime(testData4, true)).toMatch(/^(0?3 PM|15)$/i) // 3 AM || 03 AM || 15
   })
 
   it('should get events map', async () => {
