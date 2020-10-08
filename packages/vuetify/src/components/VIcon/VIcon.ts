@@ -154,7 +154,7 @@ const VIcon = mixins(
     },
     renderSvgIcon (icon: string, h: CreateElement): VNode {
       const svgData: VNodeData = {
-        class: 'v-icon__svg',
+        class: 'v-icon__component',
         attrs: {
           xmlns: 'http://www.w3.org/2000/svg',
           viewBox: '0 0 24 24',
