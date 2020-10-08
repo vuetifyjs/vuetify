@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'แถวต่อหน้า:',
     ariaLabel: {
-      sortDescending: ': เรียงลำดับจากมากไปน้อย กดเพื่อปิดการเรียงลำดับ',
-      sortAscending: ': เรียงจากน้อยไปมาก กดเพื่อเรียงลำดับจากมากไปน้อย',
-      sortNone: ': ไม่ได้จัดเรียง กดเพื่อเรียงลำดับจากน้อยไปมาก',
+      sortDescending: 'เรียงลำดับจากมากไปน้อย กดเพื่อปิดการเรียงลำดับ',
+      sortAscending: 'เรียงจากน้อยไปมาก กดเพื่อเรียงลำดับจากมากไปน้อย',
+      sortNone: 'ไม่ได้จัดเรียง กดเพื่อเรียงลำดับจากน้อยไปมาก',
+      activateNone: 'Activate to remove sorting.',
+      activateDescending: 'Activate to sort descending.',
+      activateAscending: 'Activate to sort ascending.',
     },
     sortBy: 'จัดเรียงตาม',
   },
@@ -25,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: 'เลือก {0} วัน',
+    nextMonthAriaLabel: 'เดือนหน้า',
+    nextYearAriaLabel: 'ปีหน้า',
+    prevMonthAriaLabel: 'เดือนที่แล้ว',
+    prevYearAriaLabel: 'ปีก่อน',
   },
   noDataText: 'ไม่มีข้อมูล',
   carousel: {
@@ -44,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'การแบ่งหน้าการนำทาง',
+      next: 'หน้าต่อไป',
+      previous: 'หน้าที่แล้ว',
+      page: 'ไปที่หน้า {0}',
+      currentPage: 'หน้าปัจจุบันหน้า {0}',
+    },
   },
 }

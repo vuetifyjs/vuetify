@@ -1,5 +1,0 @@
-// Use this if you dont want annoying cmd popups
-$ npm install -g pm2@3.0.2
-
-// OR
-$ npm install -g pm2@latest

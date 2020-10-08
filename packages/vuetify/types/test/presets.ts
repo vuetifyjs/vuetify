@@ -19,6 +19,12 @@ new Vuetify({
 
 new Vuetify({
   breakpoint: {
+    mobileBreakpoint: 900,
+  },
+})
+
+new Vuetify({
+  breakpoint: {
     thresholds: {
       lg: 1,
       md: 2,
@@ -146,6 +152,7 @@ new Vuetify({
         get: (parsedTheme: VuetifyParsedTheme) => '',
         set: (parsedTheme: VuetifyParsedTheme, css: string) => {},
       },
+      variations: false,
     },
   },
 })

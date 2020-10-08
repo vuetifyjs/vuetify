@@ -15,6 +15,10 @@ describe('VImg.ts', () => {
     mountFunction = (options = {}) => {
       return mount(VImg, {
         ...options,
+        propsData: {
+          eager: true,
+          ...options.propsData,
+        },
       })
     }
   })
@@ -91,7 +95,6 @@ describe('VImg.ts', () => {
   it('should emit errors', () => {
     const wrapper = mountFunction({
       propsData: {
-        eager: true,
         src: LOAD_FAILURE_SRC,
       },
     })
@@ -103,7 +106,6 @@ describe('VImg.ts', () => {
 
     expect(error).toHaveBeenCalledTimes(2)
     expect(error).toHaveBeenCalledWith(LOAD_FAILURE_SRC)
-    expect('Image load failed').toHaveBeenWarned()
   })
 
   it('should have aria attributes', async () => {

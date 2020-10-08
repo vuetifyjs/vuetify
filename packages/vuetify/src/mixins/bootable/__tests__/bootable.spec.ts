@@ -42,7 +42,7 @@ describe('Bootable.ts', () => {
       },
     })
 
-    expect(wrapper.vm.showLazyContent('content')).toBe('content')
+    expect(wrapper.vm.showLazyContent(() => 'content')).toBe('content')
 
     const wrapperLazy = mountFunction({
       data: () => ({
@@ -50,13 +50,13 @@ describe('Bootable.ts', () => {
       }),
     })
 
-    expect(wrapperLazy.vm.showLazyContent('content')).toBeUndefined()
+    expect(wrapperLazy.vm.showLazyContent(() => 'content')).toMatchObject([{ isComment: true }])
     wrapperLazy.vm.isActive = true
     await wrapper.vm.$nextTick()
-    expect(wrapperLazy.vm.showLazyContent('content')).toBe('content')
+    expect(wrapperLazy.vm.showLazyContent(() => 'content')).toBe('content')
     wrapperLazy.vm.isActive = false
     await wrapper.vm.$nextTick()
-    expect(wrapperLazy.vm.showLazyContent('content')).toBe('content')
+    expect(wrapperLazy.vm.showLazyContent(() => 'content')).toBe('content')
   })
 
   it('should show if lazy and active at boot', async () => {
@@ -66,7 +66,7 @@ describe('Bootable.ts', () => {
       },
     })
 
-    expect(wrapper.vm.showLazyContent('content')).toBe('content')
+    expect(wrapper.vm.showLazyContent(() => 'content')).toBe('content')
   })
 
   it('should boot', async () => {

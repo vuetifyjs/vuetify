@@ -1,6 +1,3 @@
-// Styles
-import '../VCard/VCard.sass'
-
 // Components
 import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
 import VDivider from '../VDivider'
@@ -28,8 +25,9 @@ import {
 
 // Types
 import mixins from '../../util/mixins'
-import { VNode, PropType } from 'vue'
-import { SelectItemKey } from 'types'
+import { VNode, PropType, VNodeChildren } from 'vue'
+import { PropValidator } from 'vue/types/options'
+import { SelectItemKey } from 'vuetify/types'
 
 type ListTile = { item: any, disabled?: null | boolean, value?: boolean, index: number };
 
@@ -47,9 +45,9 @@ export default mixins(Colorable, Themeable).extend({
     dense: Boolean,
     hideSelected: Boolean,
     items: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
     itemDisabled: {
       type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'disabled',
@@ -66,9 +64,9 @@ export default mixins(Colorable, Themeable).extend({
     noFilter: Boolean,
     searchInput: null as unknown as PropType<any>,
     selectedItems: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
   },
 
   computed: {
@@ -126,9 +124,6 @@ export default mixins(Colorable, Themeable).extend({
     genHighlight (text: string): string {
       return `<span class="v-list-item__mask">${escapeHTML(text)}</span>`
     },
-    genLabelledBy (item: object) {
-      return `list-item-${this._uid}`
-    },
     getMaskedCharacters (text: string): {
       start: string
       middle: string
@@ -163,7 +158,7 @@ export default mixins(Colorable, Themeable).extend({
           // Default behavior in list does not
           // contain aria-selected by default
           'aria-selected': String(value),
-          'aria-labelledby': `${this.genLabelledBy(item)}-${index}`,
+          id: `list-item-${this._uid}-${index}`,
           role: 'option',
         },
         on: {
@@ -210,7 +205,6 @@ export default mixins(Colorable, Themeable).extend({
 
       return this.$createElement(VListItemContent,
         [this.$createElement(VListItemTitle, {
-          attrs: { id: `${this.genLabelledBy(item)}-${index}` },
           domProps: { innerHTML },
         })]
       )
@@ -235,7 +229,7 @@ export default mixins(Colorable, Themeable).extend({
   },
 
   render (): VNode {
-    const children = []
+    const children: VNodeChildren = []
     const itemsLength = this.items.length
     for (let index = 0; index < itemsLength; index++) {
       const item = this.items[index]
@@ -256,18 +250,14 @@ export default mixins(Colorable, Themeable).extend({
 
     this.$slots['append-item'] && children.push(this.$slots['append-item'])
 
-    return this.$createElement('div', {
-      staticClass: 'v-select-list v-card',
+    return this.$createElement(VList, {
+      staticClass: 'v-select-list',
       class: this.themeClasses,
-    }, [
-      this.$createElement(VList, {
-        attrs: {
-          id: this.$attrs.id,
-          role: 'listbox',
-          tabindex: -1,
-        },
-        props: { dense: this.dense },
-      }, children),
-    ])
+      attrs: {
+        role: 'listbox',
+        tabindex: -1,
+      },
+      props: { dense: this.dense },
+    }, children)
   },
 })

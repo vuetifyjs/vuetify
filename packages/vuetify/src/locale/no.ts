@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Rader per side:',
     ariaLabel: {
-      sortDescending: ': Sortert synkende. Aktiver for å fjerne sortering.',
-      sortAscending: ': Sortert stigende. Aktiver for å sortere synkende.',
-      sortNone: ': Ikke sortert. Aktiver for å sortere stigende.',
+      sortDescending: 'Sortert synkende.',
+      sortAscending: 'Sortert stigende.',
+      sortNone: 'Ikke sortert.',
+      activateNone: 'Aktiver for å fjerne sortering.',
+      activateDescending: 'Aktiver for å sortere synkende.',
+      activateAscending: 'Aktiver for å sortere stigende.',
     },
     sortBy: 'Sorter etter',
   },
@@ -25,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} valgt',
+    nextMonthAriaLabel: 'Neste måned',
+    nextYearAriaLabel: 'Neste år',
+    prevMonthAriaLabel: 'Forrige måned',
+    prevYearAriaLabel: 'Forrige år',
   },
   noDataText: 'Ingen data er tilgjengelig',
   carousel: {
@@ -44,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Paginasjonsnavigasjon',
+      next: 'Neste side',
+      previous: 'Forrige side',
+      page: 'Gå til side {0}',
+      currentPage: 'Gjeldende side, side {0}',
+    },
   },
 }

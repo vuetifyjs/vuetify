@@ -1,6 +1,6 @@
 import { VNode, VNodeDirective } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
-import { DataTableCompareFunction, SelectItemKey } from 'types'
+import { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
 
 export function createSimpleFunctional (
   c: string,
@@ -222,13 +222,23 @@ export function groupItems<T extends any = any> (
   items: T[],
   groupBy: string[],
   groupDesc: boolean[]
-): Record<string, T[]> {
+): ItemGroup<T>[] {
   const key = groupBy[0]
-  return items.reduce((acc, item) => {
+  const groups: ItemGroup<T>[] = []
+  let current = null
+  for (var i = 0; i < items.length; i++) {
+    const item = items[i]
     const val = getObjectValueByPath(item, key)
-    ;(acc[val] = acc[val] || []).push(item)
-    return acc
-  }, {} as Record<string, T[]>)
+    if (current !== val) {
+      current = val
+      groups.push({
+        name: val,
+        items: [],
+      })
+    }
+    groups[groups.length - 1].items.push(item)
+  }
+  return groups
 }
 
 export function wrapInArray<T> (v: T | T[] | null | undefined): T[] { return v != null ? Array.isArray(v) ? v : [v] : [] }
@@ -291,7 +301,7 @@ export function searchItems<T extends any = any> (items: T[], search: string): T
   search = search.toString().toLowerCase()
   if (search.trim() === '') return items
 
-  return items.filter(item => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
+  return items.filter((item: any) => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
 }
 
 /**
@@ -313,6 +323,17 @@ export function debounce (fn: Function, delay: number) {
   return (...args: any[]) => {
     clearTimeout(timeoutId)
     timeoutId = setTimeout(() => fn(...args), delay)
+  }
+}
+
+export function throttle<T extends (...args: any[]) => any> (fn: T, limit: number) {
+  let throttling = false
+  return (...args: Parameters<T>): void | ReturnType<T> => {
+    if (!throttling) {
+      throttling = true
+      setTimeout(() => throttling = false, limit)
+      return fn(...args)
+    }
   }
 }
 
@@ -397,4 +418,8 @@ export function mergeDeep (
   }
 
   return source
+}
+
+export function fillArray<T> (length: number, obj: T) {
+  return Array(length).fill(obj)
 }

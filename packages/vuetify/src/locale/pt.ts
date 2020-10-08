@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Linhas por página:',
     ariaLabel: {
-      sortDescending: ': Ordenado decrescente. Ative para remover a ordenação.',
-      sortAscending: ': Ordenado crescente. Ative para ordenar decrescente.',
-      sortNone: ': Não ordenado. Ative para ordenar crescente.',
+      sortDescending: 'Ordenado decrescente.',
+      sortAscending: 'Ordenado crescente.',
+      sortNone: 'Não ordenado.',
+      activateNone: 'Ative para remover a ordenação.',
+      activateDescending: 'Ative para ordenar decrescente.',
+      activateAscending: 'Ative para ordenar crescente.',
     },
     sortBy: 'Ordenar por',
   },
@@ -25,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} selecionado(s)',
+    nextMonthAriaLabel: 'Próximo mês',
+    nextYearAriaLabel: 'Próximo ano',
+    prevMonthAriaLabel: 'Mês anterior',
+    prevYearAriaLabel: 'Ano anterior',
   },
   noDataText: 'Não há dados disponíveis',
   carousel: {
@@ -44,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Navegação de paginação',
+      next: 'Próxima página',
+      previous: 'Página anterior',
+      page: 'Ir à página {0}',
+      currentPage: 'Página atual, página {0}',
+    },
   },
 }

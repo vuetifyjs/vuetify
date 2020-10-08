@@ -12,7 +12,7 @@
 
     > .row
       flex: 1 1 100%
-      max-width: 100%
+      max-width: calc(100% + #{$grid-gutter})
 
     > .layout
       height: 100%
@@ -86,7 +86,10 @@
     @while $m >= 0
       .flex.offset-#{$size}#{$m}
         // Offsets can only ever work in row layouts
-        margin-left: $m / $grid-columns * 100%
+        +ltr()
+          margin-left: $m / $grid-columns * 100%
+        +rtl()
+          margin-right: $m / $grid-columns * 100%
 
       $m: $m - 1
 

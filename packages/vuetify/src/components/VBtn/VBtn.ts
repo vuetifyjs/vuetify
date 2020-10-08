@@ -61,6 +61,7 @@ export default baseMixins.extend<options>().extend({
       default: 'button',
     },
     text: Boolean,
+    tile: Boolean,
     type: {
       type: String,
       default: 'button',
@@ -115,7 +116,7 @@ export default baseMixins.extend<options>().extend({
     computedRipple (): RippleOptions | boolean {
       const defaultRipple = this.icon || this.fab ? { circle: true } : true
       if (this.disabled) return false
-      else return this.ripple != null ? this.ripple : defaultRipple
+      else return this.ripple ?? defaultRipple
     },
     isFlat (): boolean {
       return Boolean(
@@ -152,6 +153,7 @@ export default baseMixins.extend<options>().extend({
 
   methods: {
     click (e: MouseEvent): void {
+      // TODO: Remove this in v3
       !this.retainFocusOnClick && !this.fab && e.detail && this.$el.blur()
       this.$emit('click', e)
 

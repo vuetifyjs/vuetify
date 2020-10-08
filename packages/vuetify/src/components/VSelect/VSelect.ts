@@ -8,6 +8,7 @@ import VMenu from '../VMenu'
 import VSelectList from './VSelectList'
 
 // Extensions
+import VInput from '../VInput'
 import VTextField from '../VTextField/VTextField'
 
 // Mixins
@@ -18,13 +19,15 @@ import Filterable from '../../mixins/filterable'
 import ClickOutside from '../../directives/click-outside'
 
 // Utilities
-import { getPropertyFromItem, keyCodes } from '../../util/helpers'
+import mergeData from '../../util/mergeData'
+import { getPropertyFromItem, getObjectValueByPath, keyCodes } from '../../util/helpers'
 import { consoleError } from '../../util/console'
 
 // Types
 import mixins from '../../util/mixins'
-import { VNode, VNodeDirective, PropType } from 'vue'
-import { SelectItemKey } from 'types'
+import { VNode, VNodeDirective, PropType, VNodeData } from 'vue'
+import { PropValidator } from 'vue/types/options'
+import { SelectItemKey } from 'vuetify/types'
 
 export const defaultMenuProps = {
   closeOnClick: false,
@@ -80,7 +83,7 @@ export default baseMixins.extend<options>().extend({
     items: {
       type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
     itemColor: {
       type: String,
       default: 'primary',
@@ -110,8 +113,7 @@ export default baseMixins.extend<options>().extend({
   data () {
     return {
       cachedItems: this.cacheItems ? this.items : [],
-      content: null as any,
-      isBooted: false,
+      menuIsBooted: false,
       isMenuActive: false,
       lastItem: 20,
       // As long as a value is defined, show it
@@ -157,11 +159,11 @@ export default baseMixins.extend<options>().extend({
     directives (): VNodeDirective[] | undefined {
       return this.isFocused ? [{
         name: 'click-outside',
-        value: this.blur,
-        args: {
+        value: {
+          handler: this.blur,
           closeConditional: this.closeConditional,
         },
-      } as VNodeDirective] : undefined
+      }] : undefined
     },
     dynamicHeight () {
       return 'auto'
@@ -246,19 +248,8 @@ export default baseMixins.extend<options>().extend({
       this.initialValue = val
       this.setSelectedItems()
     },
-    isBooted () {
-      this.$nextTick(() => {
-        if (this.content && this.content.addEventListener) {
-          this.content.addEventListener('scroll', this.onScroll, false)
-        }
-      })
-    },
     isMenuActive (val) {
-      this.$nextTick(() => this.onMenuActiveChange(val))
-
-      if (!val) return
-
-      this.isBooted = true
+      window.setTimeout(() => this.onMenuActiveChange(val))
     },
     items: {
       immediate: true,
@@ -277,10 +268,6 @@ export default baseMixins.extend<options>().extend({
     },
   },
 
-  mounted () {
-    this.content = this.$refs.menu && (this.$refs.menu as { [key: string]: any }).$refs.content
-  },
-
   methods: {
     /** @public */
     blur (e?: Event) {
@@ -292,8 +279,7 @@ export default baseMixins.extend<options>().extend({
     /** @public */
     activateMenu () {
       if (
-        this.disabled ||
-        this.readonly ||
+        !this.isInteractive ||
         this.isMenuActive
       ) return
 
@@ -301,17 +287,21 @@ export default baseMixins.extend<options>().extend({
     },
     clearableCallback () {
       this.setValue(this.multiple ? [] : undefined)
+      this.setMenuIndex(-1)
       this.$nextTick(() => this.$refs.input && this.$refs.input.focus())
 
       if (this.openOnClear) this.isMenuActive = true
     },
     closeConditional (e: Event) {
+      if (!this.isMenuActive) return true
+
       return (
         !this._isDestroyed &&
 
         // Click originates from outside the menu content
-        this.content &&
-        !this.content.contains(e.target) &&
+        // Multiple selects don't close when an item is clicked
+        (!this.getContent() ||
+        !this.getContent().contains(e.target as Node)) &&
 
         // Click originates from outside the element
         this.$el &&
@@ -335,10 +325,12 @@ export default baseMixins.extend<options>().extend({
 
       return (this.internalValue || []).findIndex((i: object) => this.valueComparator(this.getValue(i), itemValue))
     },
+    getContent () {
+      return this.$refs.menu && this.$refs.menu.$refs.content
+    },
     genChipSelection (item: object, index: number) {
       const isDisabled = (
-        this.disabled ||
-        this.readonly ||
+        !this.isInteractive ||
         this.getDisabled(item)
       )
 
@@ -367,7 +359,7 @@ export default baseMixins.extend<options>().extend({
     genCommaSelection (item: object, index: number, last: boolean) {
       const color = index === this.selectedIndex && this.computedColor
       const isDisabled = (
-        this.disabled ||
+        !this.isInteractive ||
         this.getDisabled(item)
       )
 
@@ -411,16 +403,42 @@ export default baseMixins.extend<options>().extend({
         this.genProgress(),
       ]
     },
+    genIcon (
+      type: string,
+      cb?: (e: Event) => void,
+      extraData?: VNodeData
+    ) {
+      const icon = VInput.options.methods.genIcon.call(this, type, cb, extraData)
+
+      if (type === 'append') {
+        // Don't allow the dropdown icon to be focused
+        icon.children![0].data = mergeData(icon.children![0].data!, {
+          attrs: {
+            tabindex: icon.children![0].componentOptions!.listeners && '-1',
+            'aria-hidden': 'true',
+            'aria-label': undefined,
+          },
+        })
+      }
+
+      return icon
+    },
     genInput (): VNode {
       const input = VTextField.options.methods.genInput.call(this)
 
       delete input.data!.attrs!.name
-      input.data!.domProps!.value = null
-      input.data!.attrs!.readonly = true
-      input.data!.attrs!.type = 'text'
-      input.data!.attrs!['aria-readonly'] = true
-      input.data!.attrs!.autocomplete = input.data!.attrs!.autocomplete || 'off'
-      input.data!.on!.keypress = this.onKeyPress
+
+      input.data = mergeData(input.data!, {
+        domProps: { value: null },
+        attrs: {
+          readonly: true,
+          type: 'text',
+          'aria-readonly': String(this.isReadonly),
+          'aria-activedescendant': getObjectValueByPath(this.$refs.menu, 'activeTile.id'),
+          autocomplete: getObjectValueByPath(input.data!, 'attrs.autocomplete', 'off'),
+        },
+        on: { keypress: this.onKeyPress },
+      })
 
       return input
     },
@@ -492,6 +510,7 @@ export default baseMixins.extend<options>().extend({
             this.isMenuActive = val
             this.isFocused = val
           },
+          scroll: this.onScroll,
         },
         ref: 'menu',
       }, [this.genList()])
@@ -534,7 +553,7 @@ export default baseMixins.extend<options>().extend({
           this.selectedIndex = index
         },
         selected: index === this.selectedIndex,
-        disabled: this.disabled || this.readonly,
+        disabled: !this.isInteractive,
       })
     },
     getMenuIndex () {
@@ -565,7 +584,7 @@ export default baseMixins.extend<options>().extend({
       this.selectedIndex = -1
     },
     onClick (e: MouseEvent) {
-      if (this.isDisabled) return
+      if (!this.isInteractive) return
 
       if (!this.isAppendInner(e.target)) {
         this.isMenuActive = true
@@ -575,6 +594,8 @@ export default baseMixins.extend<options>().extend({
         this.isFocused = true
         this.$emit('focus')
       }
+
+      this.$emit('click', e)
     },
     onEscDown (e: Event) {
       e.preventDefault()
@@ -586,7 +607,7 @@ export default baseMixins.extend<options>().extend({
     onKeyPress (e: KeyboardEvent) {
       if (
         this.multiple ||
-        this.readonly ||
+        !this.isInteractive ||
         this.disableLookup
       ) return
 
@@ -605,11 +626,15 @@ export default baseMixins.extend<options>().extend({
       })
       const item = this.allItems[index]
       if (index !== -1) {
+        this.lastItem = Math.max(this.lastItem, index + 5)
         this.setValue(this.returnObject ? item : this.getValue(item))
+        this.$nextTick(() => this.$refs.menu.getTiles())
         setTimeout(() => this.setMenuIndex(index))
       }
     },
     onKeyDown (e: KeyboardEvent) {
+      if (this.isReadonly && e.keyCode !== keyCodes.tab) return
+
       const keyCode = e.keyCode
       const menu = this.$refs.menu
 
@@ -675,7 +700,7 @@ export default baseMixins.extend<options>().extend({
       if (
         this.hasMouseDown &&
         e.which !== 3 &&
-        !this.isDisabled
+        this.isInteractive
       ) {
         // If append inner is present
         // and the target is itself
@@ -693,14 +718,14 @@ export default baseMixins.extend<options>().extend({
     },
     onScroll () {
       if (!this.isMenuActive) {
-        requestAnimationFrame(() => (this.content.scrollTop = 0))
+        requestAnimationFrame(() => (this.getContent().scrollTop = 0))
       } else {
-        if (this.lastItem >= this.computedItems.length) return
+        if (this.lastItem > this.computedItems.length) return
 
         const showMoreItems = (
-          this.content.scrollHeight -
-          (this.content.scrollTop +
-          this.content.clientHeight)
+          this.getContent().scrollHeight -
+          (this.getContent().scrollTop +
+          this.getContent().clientHeight)
         ) < 200
 
         if (showMoreItems) {
@@ -752,9 +777,13 @@ export default baseMixins.extend<options>().extend({
 
       // Cycle through available values to achieve
       // select native behavior
-      menu.getTiles()
-      keyCodes.up === keyCode ? menu.prevTile() : menu.nextTile()
-      menu.activeTile && menu.activeTile.click()
+      menu.isBooted = true
+
+      window.requestAnimationFrame(() => {
+        menu.getTiles()
+        keyCodes.up === keyCode ? menu.prevTile() : menu.nextTile()
+        menu.activeTile && menu.activeTile.click()
+      })
     },
     selectItem (item: object) {
       if (!this.multiple) {

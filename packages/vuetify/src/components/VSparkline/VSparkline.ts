@@ -8,7 +8,7 @@ import { genPath } from './helpers/path'
 
 // Types
 import Vue, { VNode } from 'vue'
-import { Prop } from 'vue/types/options'
+import { Prop, PropValidator } from 'vue/types/options'
 
 export type SparklineItem = number | { value: number }
 
@@ -79,9 +79,9 @@ export default mixins<options &
       default: false,
     },
     gradient: {
-      type: Array as Prop<string[]>,
+      type: Array,
       default: () => ([]),
-    },
+    } as PropValidator<string[]>,
     gradientDirection: {
       type: String as Prop<'top' | 'bottom' | 'left' | 'right'>,
       validator: (val: string) => ['top', 'bottom', 'left', 'right'].includes(val),
@@ -92,9 +92,9 @@ export default mixins<options &
       default: 75,
     },
     labels: {
-      type: Array as Prop<SparklineItem[]>,
+      type: Array,
       default: () => ([]),
-    },
+    } as PropValidator<SparklineItem[]>,
     labelSize: {
       type: [Number, String],
       default: 7,
@@ -118,9 +118,9 @@ export default mixins<options &
       validator: (val: string) => ['trend', 'bar'].includes(val),
     },
     value: {
-      type: Array as Prop<SparklineItem[]>,
+      type: Array,
       default: () => ([]),
-    },
+    } as PropValidator<SparklineItem[]>,
     width: {
       type: [Number, String],
       default: 300,
@@ -275,7 +275,7 @@ export default mixins<options &
         this.$createElement('stop', {
           attrs: {
             offset: index / len,
-            'stop-color': color || this.color || 'currentColor',
+            'stop-color': color || 'currentColor',
           },
         })
       )
@@ -284,10 +284,11 @@ export default mixins<options &
         this.$createElement('linearGradient', {
           attrs: {
             id: this._uid,
-            x1: +(gradientDirection === 'left'),
-            y1: +(gradientDirection === 'top'),
-            x2: +(gradientDirection === 'right'),
-            y2: +(gradientDirection === 'bottom'),
+            gradientUnits: 'userSpaceOnUse',
+            x1: gradientDirection === 'left' ? '100%' : '0',
+            y1: gradientDirection === 'top' ? '100%' : '0',
+            x2: gradientDirection === 'right' ? '100%' : '0',
+            y2: gradientDirection === 'bottom' ? '100%' : '0',
           },
         }, stops),
       ])
@@ -298,7 +299,7 @@ export default mixins<options &
           fontSize: '8',
           textAnchor: 'middle',
           dominantBaseline: 'mathematical',
-          fill: this.color || 'currentColor',
+          fill: 'currentColor',
         } as object, // TODO: TS 3.5 is too eager with the array type here
       }, children)
     },
@@ -307,7 +308,6 @@ export default mixins<options &
 
       return this.$createElement('path', {
         attrs: {
-          id: this._uid,
           d: genPath(points, this._radius, this.fill, this.parsedHeight),
           fill: this.fill ? `url(#${this._uid})` : 'none',
           stroke: this.fill ? 'none' : `url(#${this._uid})`,

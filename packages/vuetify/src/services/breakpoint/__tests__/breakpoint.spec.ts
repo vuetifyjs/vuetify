@@ -232,6 +232,7 @@ describe('Breakpoint.ts', () => {
 
   beforeEach(() => {
     breakpoint = new Breakpoint(preset)
+    breakpoint.init()
   })
 
   scenarios.slice(0, 1).forEach(scenario => {
@@ -277,11 +278,23 @@ describe('Breakpoint.ts', () => {
         thresholds: { xs: 400 },
       } as any,
     })
+    breakpoint.init()
 
     await resizeWindow(401)
     expect(breakpoint.xs).toBe(false)
 
     await resizeWindow(399)
     expect(breakpoint.xs).toBe(true)
+  })
+
+  it('should allow breakpoint strings for mobileBreakpoint', async () => {
+    breakpoint.mobileBreakpoint = 'lg'
+    await resizeWindow(1920)
+
+    expect(breakpoint.mobile).toBe(false)
+
+    await resizeWindow(600)
+
+    expect(breakpoint.mobile).toBe(true)
   })
 })

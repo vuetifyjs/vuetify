@@ -24,7 +24,7 @@
   transition-duration: 0.2s
   transition-timing-function: map-get($transition, 'fast-out-slow-in')
   will-change: transform
-  transition-property: transform, width
+  transition-property: transform, visibility, width
   +bootable()
 
   &.v-navigation-drawer--right
@@ -32,7 +32,7 @@
       left: 0
       right: initial
 
-  .v-list
+  .v-list:not(.v-select-list)
     background: inherit
 
 // Element
@@ -118,6 +118,9 @@
 
 .v-navigation-drawer--mobile
   z-index: 6
+
+.v-navigation-drawer--close
+  visibility: hidden
 
 .v-navigation-drawer--is-mobile,
 .v-navigation-drawer--temporary

@@ -12,13 +12,14 @@ import CalendarBase from './mixins/calendar-base'
 
 // Util
 import { getSlot } from '../../util/helpers'
+import { weekNumber } from '../../util/dateTimeUtils'
 import props from './util/props'
 import {
   createDayList,
   getDayIdentifier,
   createNativeLocaleFormatter,
 } from './util/timestamp'
-import { CalendarTimestamp, CalendarFormatter } from 'types'
+import { CalendarTimestamp, CalendarFormatter } from 'vuetify/types'
 
 /* @vue/component */
 export default CalendarBase.extend({
@@ -92,7 +93,15 @@ export default CalendarBase.extend({
       }, this.genHeadDays())
     },
     genHeadDays (): VNode[] {
-      return this.todayWeek.map(this.genHeadDay)
+      const header = this.todayWeek.map(this.genHeadDay)
+
+      if (this.showWeek) {
+        header.unshift(this.$createElement('div', {
+          staticClass: 'v-calendar-weekly__head-weeknumber',
+        }))
+      }
+
+      return header
     },
     genHeadDay (day: CalendarTimestamp, index: number): VNode {
       const outside = this.isOutside(this.days[index])
@@ -108,17 +117,40 @@ export default CalendarBase.extend({
       const days = this.days
       const weekDays = this.parsedWeekdays.length
       const weeks: VNode[] = []
+
       for (let i = 0; i < days.length; i += weekDays) {
-        weeks.push(this.genWeek(days.slice(i, i + weekDays)))
+        weeks.push(this.genWeek(days.slice(i, i + weekDays), this.getWeekNumber(days[i])))
       }
 
       return weeks
     },
-    genWeek (week: CalendarTimestamp[]): VNode {
+    genWeek (week: CalendarTimestamp[], weekNumber: number): VNode {
+      const weekNodes = week.map((day, index) => this.genDay(day, index, week))
+
+      if (this.showWeek) {
+        weekNodes.unshift(this.genWeekNumber(weekNumber))
+      }
+
       return this.$createElement('div', {
         key: week[0].date,
         staticClass: 'v-calendar-weekly__week',
-      }, week.map((day, index) => this.genDay(day, index, week)))
+      }, weekNodes)
+    },
+    getWeekNumber (determineDay: CalendarTimestamp) {
+      return weekNumber(
+        determineDay.year,
+        determineDay.month - 1,
+        determineDay.day,
+        this.parsedWeekdays[0],
+        parseInt(this.localeFirstDayOfYear)
+      )
+    },
+    genWeekNumber (weekNumber: number) {
+      return this.$createElement('div', {
+        staticClass: 'v-calendar-weekly__weeknumber',
+      }, [
+        this.$createElement('small', String(weekNumber)),
+      ])
     },
     genDay (day: CalendarTimestamp, index: number, week: CalendarTimestamp[]): VNode {
       const outside = this.isOutside(day)
@@ -171,7 +203,7 @@ export default CalendarBase.extend({
     return h('div', {
       staticClass: this.staticClass,
       class: this.classes,
-      nativeOn: {
+      on: {
         dragstart: (e: MouseEvent) => {
           e.preventDefault()
         },

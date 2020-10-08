@@ -1,34 +1,46 @@
 import { VNodeDirective } from 'vue'
 
-interface MutateVNodeDirective extends VNodeDirective {
-  options?: MutationObserverInit
+type MutateHandler = (
+  mutationsList: MutationRecord[],
+  observer: MutationObserver,
+) => void
+
+interface MutateVNodeDirective extends Omit<VNodeDirective, 'modifiers'> {
+  value?: MutateHandler | { handler: MutateHandler, options?: MutationObserverInit }
+  modifiers?: {
+    once?: boolean
+    attr?: boolean
+    child?: boolean
+    sub?: boolean
+    char?: boolean
+  }
 }
 
 function inserted (el: HTMLElement, binding: MutateVNodeDirective) {
-  const modifiers = binding.modifiers || /* istanbul ignore next */ {}
+  const modifiers = binding.modifiers || {}
   const value = binding.value
-  const isObject = typeof value === 'object'
-  const callback = isObject ? value.handler : value
+  const callback = typeof value === 'object' ? value.handler : value!
   const { once, ...modifierKeys } = modifiers
   const hasModifiers = Object.keys(modifierKeys).length > 0
-  const hasOptions = isObject && value.options
 
   // Options take top priority
-  const options = hasOptions ? value.options : hasModifiers
-    // If we have modifiers, use only those provided
-    ? {
-      attributes: modifierKeys.attr,
-      childList: modifierKeys.child,
-      subtree: modifierKeys.sub,
-      characterData: modifierKeys.char,
-    }
-    // Defaults to everything on
-    : {
-      attributes: true,
-      childList: true,
-      subtree: true,
-      characterData: true,
-    }
+  const options = typeof value === 'object' && value.options
+    ? value.options
+    : hasModifiers
+      // If we have modifiers, use only those provided
+      ? {
+        attributes: modifierKeys.attr,
+        childList: modifierKeys.child,
+        subtree: modifierKeys.sub,
+        characterData: modifierKeys.char,
+      }
+      // Defaults to everything on
+      : {
+        attributes: true,
+        childList: true,
+        subtree: true,
+        characterData: true,
+      }
 
   const observer = new MutationObserver((
     mutationsList: MutationRecord[],

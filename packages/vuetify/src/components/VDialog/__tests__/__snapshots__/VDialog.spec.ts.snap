@@ -6,7 +6,7 @@ exports[`VDialog.ts should only set tabindex if active 1`] = `
      style="z-index: 0;"
 >
   <div class="v-dialog"
-       style="display: none;"
+       style="transform-origin: center center; display: none;"
   >
   </div>
 </div>
@@ -19,7 +19,7 @@ exports[`VDialog.ts should only set tabindex if active 2`] = `
      tabindex="0"
 >
   <div class="v-dialog v-dialog--active"
-       style
+       style="transform-origin: center center;"
   >
   </div>
 </div>
@@ -29,15 +29,6 @@ exports[`VDialog.ts should render a disabled component and match snapshot 1`] = 
 <div role="dialog"
      class="v-dialog__container"
 >
-  <div role="document"
-       class="v-dialog__content"
-       style="z-index: 0;"
-  >
-    <div class="v-dialog"
-         style="display: none;"
-    >
-    </div>
-  </div>
 </div>
 `;
 
@@ -52,15 +43,6 @@ exports[`VDialog.ts should render a fullscreen component and match snapshot 1`] 
 <div role="dialog"
      class="v-dialog__container"
 >
-  <div role="document"
-       class="v-dialog__content"
-       style="z-index: 0;"
-  >
-    <div class="v-dialog v-dialog--fullscreen"
-         style="display: none;"
-    >
-    </div>
-  </div>
 </div>
 `;
 
@@ -68,15 +50,6 @@ exports[`VDialog.ts should render a persistent component and match snapshot 1`] 
 <div role="dialog"
      class="v-dialog__container"
 >
-  <div role="document"
-       class="v-dialog__content"
-       style="z-index: 0;"
-  >
-    <div class="v-dialog v-dialog--persistent"
-         style="display: none;"
-    >
-    </div>
-  </div>
 </div>
 `;
 
@@ -84,15 +57,6 @@ exports[`VDialog.ts should render a scrollable component and match snapshot 1`] 
 <div role="dialog"
      class="v-dialog__container"
 >
-  <div role="document"
-       class="v-dialog__content"
-       style="z-index: 0;"
-  >
-    <div class="v-dialog v-dialog--scrollable"
-         style="display: none;"
-    >
-    </div>
-  </div>
 </div>
 `;
 
@@ -100,15 +64,6 @@ exports[`VDialog.ts should render component and match snapshot 1`] = `
 <div role="dialog"
      class="v-dialog__container"
 >
-  <div role="document"
-       class="v-dialog__content"
-       style="z-index: 0;"
-  >
-    <div class="v-dialog"
-         style="display: none;"
-    >
-    </div>
-  </div>
 </div>
 `;
 
@@ -116,15 +71,6 @@ exports[`VDialog.ts should render component with custom origin and match snapsho
 <div role="dialog"
      class="v-dialog__container"
 >
-  <div role="document"
-       class="v-dialog__content"
-       style="z-index: 0;"
-  >
-    <div class="v-dialog"
-         style="display: none;"
-    >
-    </div>
-  </div>
 </div>
 `;
 
@@ -132,15 +78,6 @@ exports[`VDialog.ts should render component with custom transition and match sna
 <div role="dialog"
      class="v-dialog__container"
 >
-  <div role="document"
-       class="v-dialog__content"
-       style="z-index: 0;"
-  >
-    <div class="v-dialog"
-         style="display: none;"
-    >
-    </div>
-  </div>
 </div>
 `;
 
@@ -148,15 +85,6 @@ exports[`VDialog.ts should render component with custom width (max-width) and ma
 <div role="dialog"
      class="v-dialog__container"
 >
-  <div role="document"
-       class="v-dialog__content"
-       style="z-index: 0;"
-  >
-    <div class="v-dialog"
-         style="max-width: 100px; display: none;"
-    >
-    </div>
-  </div>
 </div>
 `;
 
@@ -164,14 +92,5 @@ exports[`VDialog.ts should render component with custom width and match snapshot
 <div role="dialog"
      class="v-dialog__container"
 >
-  <div role="document"
-       class="v-dialog__content"
-       style="z-index: 0;"
-  >
-    <div class="v-dialog"
-         style="width: 50%; display: none;"
-    >
-    </div>
-  </div>
 </div>
 `;

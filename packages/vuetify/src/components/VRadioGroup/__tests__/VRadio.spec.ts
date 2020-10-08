@@ -147,4 +147,12 @@ describe('VRadio.ts', () => {
     input.trigger('blur')
     expect(wrapper.vm.isFocused).toBe(false)
   })
+
+  it('should be render colored radio', () => {
+    const wrapper = mountFunction({
+      propsData: { color: 'yellow' },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

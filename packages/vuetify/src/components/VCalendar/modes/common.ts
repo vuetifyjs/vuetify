@@ -1,4 +1,4 @@
-import { CalendarEventParsed, CalendarEventVisual, CalendarTimestamp } from 'types'
+import { CalendarEventParsed, CalendarEventVisual, CalendarTimestamp } from 'vuetify/types'
 import { getTimestampIdentifier } from '../util/timestamp'
 
 const MILLIS_IN_DAY = 86400000
@@ -86,8 +86,8 @@ export function getOverlapGroupHandler (firstWeekday: number) {
       handler.groups = []
       handler.min = handler.max = -1
     },
-    getVisuals: (day: CalendarTimestamp, dayEvents: CalendarEventParsed[], timed: boolean) => {
-      if (day.weekday === firstWeekday || timed) {
+    getVisuals: (day: CalendarTimestamp, dayEvents: CalendarEventParsed[], timed: boolean, reset = false) => {
+      if (day.weekday === firstWeekday || reset) {
         handler.reset()
       }
 
@@ -127,6 +127,10 @@ export function getOverlapGroupHandler (firstWeekday: number) {
       })
 
       setColumnCount(handler.groups)
+
+      if (timed) {
+        handler.reset()
+      }
 
       return visuals
     },
