@@ -284,10 +284,11 @@ export default mixins<options &
         this.$createElement('linearGradient', {
           attrs: {
             id: this._uid,
-            x1: +(gradientDirection === 'left'),
-            y1: +(gradientDirection === 'top'),
-            x2: +(gradientDirection === 'right'),
-            y2: +(gradientDirection === 'bottom'),
+            gradientUnits: 'userSpaceOnUse',
+            x1: gradientDirection === 'left' ? '100%' : '0',
+            y1: gradientDirection === 'top' ? '100%' : '0',
+            x2: gradientDirection === 'right' ? '100%' : '0',
+            y2: gradientDirection === 'bottom' ? '100%' : '0',
           },
         }, stops),
       ])

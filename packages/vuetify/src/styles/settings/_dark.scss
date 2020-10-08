@@ -3,17 +3,20 @@
 $material-dark-elevation-colors: () !default;
 // https://material.io/design/color/dark-theme.html#properties
 // https://material.io/design/environment/elevation.html#default-elevations
-$material-dark-elevation-colors: (
-  '0': #000000,
-  '1': #1E1E1E,
-  '2': #222222,
-  '3': #252525,
-  '4': #272727,
-  '6': #2C2C2C,
-  '8': #2E2E2E,
-  '12': #333333,
-  '16': #363636,
-  '24': #373737
+$material-dark-elevation-colors: map-deep-merge(
+  (
+    '0': #000000,
+    '1': #1E1E1E,
+    '2': #222222,
+    '3': #252525,
+    '4': #272727,
+    '6': #2C2C2C,
+    '8': #2E2E2E,
+    '12': #333333,
+    '16': #363636,
+    '24': #373737
+  ),
+  $material-dark-elevation-colors
 );
 
 $material-dark: () !default;

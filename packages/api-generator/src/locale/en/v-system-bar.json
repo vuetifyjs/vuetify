@@ -1,0 +1,7 @@
+{
+  "props": {
+    "height": "Sets the height for the component.",
+    "lightsOut": "Reduces the system bar opacity.",
+    "window": "Increases the system bar height to 32px (24px default)."
+  }
+}

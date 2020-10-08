@@ -38,7 +38,7 @@
 
 <h2 align="center">Supporting Vuetify</h2>
 
-Vuetify is a MIT licensed project that is developed and maintained full-time by [John Leider](https://github.com/johnleider) and [Heather Leider](https://github.com/heatherleider); with support from the entire [Core Team](https://vuetifyjs.com/introduction/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
+Vuetify is a MIT licensed project that is developed and maintained full-time by [John Leider](https://github.com/johnleider) and [Heather Leider](https://github.com/heatherleider); with support from the entire [Core Team](https://vuetifyjs.com/about/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
 
 <ul>
   <li>
@@ -56,7 +56,7 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
     <a href="https://paypal.me/vuetify">Make a one-time payment with Paypal</a>
   </li>
   <li>
-    <a href="https://vuetifyjs.com/professional-support/consulting?ref=github">Book time with the Team</a>
+    <a href="https://vuetifyjs.com/introduction/consulting?ref=github">Book time with the Team</a>
   </li>
 </ul>
 
@@ -202,9 +202,9 @@ Vuetify is a Vue UI Library with beautifully handcrafted Components using the [M
 - A massive **Discord** [community](https://community.vuetifyjs.com)
 - **18 months** Long-term support for [Major releases](https://vuetifyjs.com/introduction/long-term-support/)
 - **IE11 / Safari 9** support with [polyfill](https://vuetifyjs.com/getting-started/browser-support/)
-- Extensive customization options with **SASS/SCSS** and [Presets](https://vuetifyjs.com/customization/presets/)
+- Extensive customization options with **SASS/SCSS** and [Presets](https://vuetifyjs.com/features/presets/)
 - Responsive support down to _320px_ width
-- [Consulting](https://vuetifyjs.com/professional-support/consulting/) and [Business](https://vuetifyjs.com/professional-support/business/) support
+- [Consulting](https://vuetifyjs.com/introduction/consulting/) support from Vuetify
 
 ###### Browser Support
 
@@ -445,7 +445,9 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
 
 ### Documentation
 
-To check out the [component api explorer](https://vuetifyjs.com/components/api-explorer) and docs, visit [vuetifyjs.com](https://vuetifyjs.com).
+To check out the docs, visit [vuetifyjs.com](https://vuetifyjs.com).
+
+![Crowdin Uploads](https://github.com/vuetifyjs/vuetify/workflows/Crowdin%20Uploads/badge.svg?branch=master)
 
 ### Questions
 

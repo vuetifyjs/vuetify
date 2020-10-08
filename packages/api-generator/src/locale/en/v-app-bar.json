@@ -1,0 +1,18 @@
+{
+  "props": {
+    "clippedLeft": "Designates that the application's `v-navigation-drawer` that is positioned on the left is below the app-bar.",
+    "clippedRight": "Designates that the application's `v-navigation-drawer` that is positioned on the right is below the app-bar.",
+    "collapseOnScroll": "Puts the app-bar into a collapsed state when scrolling.",
+    "elevateOnScroll": "Elevates the app-bar when scrolling.",
+    "fadeImgOnScroll": "When using the **src** prop or `img` slot, will fade the image when scrolling.",
+    "hideOnScroll": "Hides the app-bar when scrolling. Will still show the `extension` slot.",
+    "invertedScroll": "Hides the app-bar when scrolling down and displays it when scrolling up.",
+    "scrollOffScreen": "Hides the app-bar when scrolling. Will **NOT** show the `extension` slot.",
+    "shrinkOnScroll": "Shrinks a **prominent** toolbar to a **dense** or **short** (default) one when scrolling.",
+    "src": "Image source. See `v-img` for details"
+  },
+  "slots": {
+    "extension": "Slot positioned directly under the main content of the toolbar. Height of this slot can be set explicitly with the **extension-height** prop. If this slot has no content, the **extended** prop may be used instead.",
+    "img": "Expects the [v-img](/components/images) component. Scoped **props** should be applied with `v-bind=\"props\"`."
+  }
+}
