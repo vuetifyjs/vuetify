@@ -4,7 +4,7 @@ import { h } from 'vue'
 // Directives
 import Resize from '../'
 
-describe('resize.ts', () => {
+describe('v-resize', () => {
   it('should bind event on inserted', () => {
     const callback = jest.fn()
 
@@ -14,11 +14,11 @@ describe('resize.ts', () => {
     const vnode = h('div')
     const el = {}
 
-    Resize.mounted(el as HTMLElement, { value: callback } as any, vnode, null)
+    Resize.mounted!(el as HTMLElement, { value: callback } as any, vnode, null)
     expect(callback).toHaveBeenCalled()
     expect(window.addEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
 
-    Resize.unmounted(el as HTMLElement, {} as any, vnode, vnode)
+    Resize.unmounted!(el as HTMLElement, {} as any, vnode, vnode)
     expect(window.removeEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
 
     ;(window.addEventListener as jest.Mock).mockClear()
@@ -34,11 +34,11 @@ describe('resize.ts', () => {
     const vnode = h('div')
     const el = {}
 
-    Resize.mounted(el as HTMLElement, { value: callback, modifiers: { quiet: true } } as any, vnode, null)
+    Resize.mounted!(el as HTMLElement, { value: callback, modifiers: { quiet: true } } as any, vnode, null)
     expect(callback).not.toHaveBeenCalled()
     expect(window.addEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
 
-    Resize.unmounted(el as HTMLElement, {} as any, vnode, vnode)
+    Resize.unmounted!(el as HTMLElement, {} as any, vnode, vnode)
     expect(window.removeEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
 
     ;(window.addEventListener as jest.Mock).mockClear()

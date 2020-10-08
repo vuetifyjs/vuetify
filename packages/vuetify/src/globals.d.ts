@@ -31,8 +31,8 @@ declare global {
   interface HTMLElement {
     _clickOutside?: EventListenerOrEventListenerObject
     _onResize?: {
-      callback: () => void
-      options?: boolean | AddEventListenerOptions
+      handler: () => void
+      options: AddEventListenerOptions
     }
     _ripple?: {
       enabled?: boolean

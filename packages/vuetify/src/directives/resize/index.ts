@@ -1,36 +1,39 @@
 import { DirectiveBinding, ObjectDirective } from 'vue'
 
-interface ResizeDirectiveBinding extends DirectiveBinding {
-  value: (() => void) | undefined
+interface ResizeDirectiveBinding extends Omit<DirectiveBinding, 'modifiers'> {
+  value: (() => void)
+  modifiers?: {
+    active?: boolean
+    quiet?: boolean
+  }
 }
 
 function mounted (el: HTMLElement, binding: ResizeDirectiveBinding) {
-  const callback = binding.value!
-  const options = {
-    passive: !((binding.modifiers && binding.modifiers.active) || false)
-  } as AddEventListenerOptions
+  const handler = binding.value
+  const options: AddEventListenerOptions = {
+    passive: !binding.modifiers?.active,
+  }
 
-
-  window.addEventListener('resize', callback, options)
+  window.addEventListener('resize', handler, options)
   el._onResize = {
-    callback,
+    handler,
     options,
   }
 
-  if (!binding.modifiers || !binding.modifiers.quiet) {
-    callback()
+  if (!binding.modifiers?.quiet) {
+    handler()
   }
 }
 
 function unmounted (el: HTMLElement) {
   if (!el._onResize) return
 
-  const { callback, options } = el._onResize
-  window.removeEventListener('resize', callback, options)
+  const { handler, options } = el._onResize
+  window.removeEventListener('resize', handler, options)
   delete el._onResize
 }
 
-export const Resize: ObjectDirective<HTMLElement> = {
+export const Resize: ObjectDirective = {
   mounted,
   unmounted,
 }
