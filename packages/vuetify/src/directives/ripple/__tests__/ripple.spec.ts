@@ -12,7 +12,7 @@ import {
 // Directives
 import Ripple from '../'
 
-describe('ripple.ts', () => {
+describe('v-ripple', () => {
   it('Ripple with no value should render element with ripple enabled', () => {
     const Test = defineComponent(() =>
       () => withDirectives(
@@ -36,10 +36,10 @@ describe('ripple.ts', () => {
         [[Ripple, props.ripple.value]]
       )
     )
-    const app = createApp()
+    const app = createApp(Test)
     const el = document.createElement('div')
 
-    app.mount(Test, el, { ripple })
+    app.mount(el, { ripple })
 
     expect(el.querySelector('.a')['_ripple'].enabled).toBe(true)
 
