@@ -32,7 +32,8 @@
             'primary--text router-link-active': isActive,
             'text--disabled': !isActive,
             'pl-6': level === 3,
-            'pl-9': level === 4
+            'pl-9': level === 4,
+            'pl-12': level === 5,
           }"
           class="pl-3 text-body-2 py-1 font-weight-regular"
         >

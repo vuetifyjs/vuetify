@@ -197,7 +197,7 @@ export default {
 
   Apply the **fill-height** prop to `v-container`. This helper class normally only adds **height: 100%**, but for the container, it also looks for a child `v-layout` and applies the needed classes to vertically center the content.
 
-<br>
+<promoted-ad slug="vuetify-reddit" />
 
 - **My _/_ link is active when I'm on _/home_ page.**{ #link-active-home }
 

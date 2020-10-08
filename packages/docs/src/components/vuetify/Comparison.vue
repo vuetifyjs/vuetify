@@ -64,7 +64,7 @@
                 v-if="typeof framework[key] === 'boolean'"
                 color="success"
               >
-                $mdiCheckBold
+                $mdiRecord
               </v-icon>
 
               <span
