@@ -10,11 +10,47 @@ exports[`VCheckbox.ts should be disabled 1`] = `
 >
 `;
 
+exports[`VCheckbox.ts should be render colored checkbox 1`] = `
+<div class="v-input theme--light v-input--selection-controls v-input--checkbox">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-input--selection-controls__input">
+        <i aria-hidden="true"
+           class="v-icon notranslate material-icons theme--light"
+        >
+          $checkboxOff
+        </i>
+        <input aria-checked="false"
+               id="input-106"
+               role="checkbox"
+               type="checkbox"
+               value
+        >
+        <div class="v-input--selection-controls__ripple">
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <span name="message-transition"
+            tag="div"
+            class="v-messages__wrapper"
+      >
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`VCheckbox.ts should render themed component 1`] = `
 <div class="v-input theme--light v-input--selection-controls v-input--checkbox">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
+        <i aria-hidden="true"
+           class="v-icon notranslate material-icons theme--light"
+        >
+          $checkboxOff
+        </i>
         <input aria-checked="false"
                id="input-96"
                role="checkbox"
@@ -23,11 +59,6 @@ exports[`VCheckbox.ts should render themed component 1`] = `
         >
         <div class="v-input--selection-controls__ripple">
         </div>
-        <i aria-hidden="true"
-           class="v-icon notranslate material-icons theme--light"
-        >
-          $checkboxOff
-        </i>
       </div>
     </div>
     <div class="v-messages theme--light">
@@ -46,6 +77,11 @@ exports[`VCheckbox.ts should use custom icons 1`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
+        <i aria-hidden="true"
+           class="v-icon notranslate material-icons theme--light"
+        >
+          fizzbuzz
+        </i>
         <input aria-checked="mixed"
                id="input-91"
                role="checkbox"
@@ -54,11 +90,6 @@ exports[`VCheckbox.ts should use custom icons 1`] = `
         >
         <div class="v-input--selection-controls__ripple">
         </div>
-        <i aria-hidden="true"
-           class="v-icon notranslate material-icons theme--light"
-        >
-          fizzbuzz
-        </i>
       </div>
     </div>
     <div class="v-messages theme--light">
@@ -77,6 +108,11 @@ exports[`VCheckbox.ts should use custom icons 2`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
+        <i aria-hidden="true"
+           class="v-icon notranslate material-icons theme--light"
+        >
+          fizzbuzz
+        </i>
         <input aria-checked="mixed"
                id="input-91"
                role="checkbox"
@@ -85,11 +121,6 @@ exports[`VCheckbox.ts should use custom icons 2`] = `
         >
         <div class="v-input--selection-controls__ripple">
         </div>
-        <i aria-hidden="true"
-           class="v-icon notranslate material-icons theme--light"
-        >
-          fizzbuzz
-        </i>
       </div>
     </div>
     <div class="v-messages theme--light">
@@ -108,6 +139,11 @@ exports[`VCheckbox.ts should use custom icons 3`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
+        <i aria-hidden="true"
+           class="v-icon notranslate material-icons theme--light"
+        >
+          fizzbuzz
+        </i>
         <input aria-checked="mixed"
                id="input-91"
                role="checkbox"
@@ -116,11 +152,6 @@ exports[`VCheckbox.ts should use custom icons 3`] = `
         >
         <div class="v-input--selection-controls__ripple">
         </div>
-        <i aria-hidden="true"
-           class="v-icon notranslate material-icons theme--light"
-        >
-          fizzbuzz
-        </i>
       </div>
     </div>
     <div class="v-messages theme--light">

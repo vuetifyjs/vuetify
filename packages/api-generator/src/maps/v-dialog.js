@@ -2,6 +2,10 @@ module.exports = {
   'v-dialog': {
     slots: [
       {
+        name: 'default',
+        props: undefined,
+      },
+      {
         name: 'activator',
         props: {
           on: '{ [eventName]: eventHandler }',

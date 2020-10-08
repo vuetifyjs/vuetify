@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: '每頁列數：',
     ariaLabel: {
-      sortDescending: '：降序排列。點擊以移除排序方式。',
-      sortAscending: '：升序排列。點擊以降序排列。',
+      sortDescending: '：降序排列。',
+      sortAscending: '：升序排列。',
       sortNone: '無排序方式。點擊以升序排列。',
+      activateNone: '點擊以移除排序方式。',
+      activateDescending: '點擊以降序排列。',
+      activateAscending: '點擊以移除排序方式。',
     },
     sortBy: '排序方式',
   },
@@ -25,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '已選擇 {0}',
+    nextMonthAriaLabel: '下個月',
+    nextYearAriaLabel: '明年',
+    prevMonthAriaLabel: '前一個月',
+    prevYearAriaLabel: '前一年',
   },
   noDataText: '沒有資料',
   carousel: {
@@ -44,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: '分頁導航',
+      next: '下一頁',
+      previous: '上一頁',
+      page: '轉到頁面 {0}',
+      currentPage: '當前頁 {0}',
+    },
   },
 }

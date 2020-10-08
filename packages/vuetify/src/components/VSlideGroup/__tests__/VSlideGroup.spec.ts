@@ -1,10 +1,13 @@
 // Components
 import VSlideGroup from '../VSlideGroup'
 
+// Services
+import { Breakpoint } from '../../../services/breakpoint'
+import { preset } from '../../../presets/default'
+
 // Utilities
 import { ExtractVue } from '../../../util/mixins'
 import {
-  mount,
   shallowMount,
   Wrapper,
 } from '@vue/test-utils'
@@ -20,9 +23,7 @@ describe('VSlideGroup.ts', () => {
         mocks: {
           $vuetify: {
             rtl: false,
-            breakpoint: {
-              width: 1920,
-            },
+            breakpoint: new Breakpoint(preset),
           },
         },
         ...options,
@@ -63,16 +64,6 @@ describe('VSlideGroup.ts', () => {
     })
 
     expect(wrapper.vm.hasNext).toBe(true)
-  })
-
-  it('should be considered mobile', async () => {
-    const wrapper = mountFunction()
-
-    expect(wrapper.vm.isMobile).toBe(false)
-
-    wrapper.vm.$vuetify.breakpoint.width = 700
-
-    expect(wrapper.vm.isMobile).toBe(true)
   })
 
   it('should compute newOffset for active element', async () => {
@@ -255,7 +246,7 @@ describe('VSlideGroup.ts', () => {
   })
 
   it('should accept scoped slots', () => {
-    const wrapper = mount(VSlideGroup, {
+    const wrapper = mountFunction({
       computed: {
         hasAffixes: () => true,
         hasNext: () => true,
@@ -296,6 +287,7 @@ describe('VSlideGroup.ts', () => {
       mocks: {
         $vuetify: {
           rtl: true,
+          breakpoint: { mobileBreakpoint: 1264 },
         },
       },
     })
@@ -310,5 +302,35 @@ describe('VSlideGroup.ts', () => {
 
     expect(html1).not.toEqual(html2)
     expect(html2).toMatchSnapshot()
+  })
+
+  // showArrows | isOverflowing | isMobile | hasAffixes
+  it.each([
+    [true, true, true, true],
+    [true, true, false, true],
+    [true, false, true, false],
+    [true, false, false, false],
+    ['desktop', true, false, true],
+    ['desktop', true, true, false],
+    ['desktop', false, false, true],
+    ['desktop', false, true, false],
+    ['always', true, true, true],
+    ['always', true, false, true],
+    ['always', false, false, true],
+  ])('should conditionally show arrows with %s %s %s %s', (...opts) => {
+    const [
+      showArrows,
+      isOverflowing,
+      isMobile,
+      hasAffixes,
+    ] = opts
+
+    const wrapper = mountFunction({
+      data: () => ({ isOverflowing }),
+      computed: { isMobile: () => isMobile },
+      propsData: { showArrows },
+    })
+
+    expect(wrapper.vm.hasAffixes).toBe(hasAffixes)
   })
 })

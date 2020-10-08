@@ -1,7 +1,16 @@
-import { Application } from '../../../services/application'
+// Components
 import VNavigationDrawer from '../VNavigationDrawer'
-import { resizeWindow, touch } from '../../../../test'
 
+// Services
+import { Application } from '../../../services/application'
+import { Breakpoint } from '../../../services/breakpoint'
+import { preset } from '../../../presets/default'
+
+// Utilities
+import {
+  resizeWindow,
+  touch,
+} from '../../../../test'
 import {
   mount,
   MountOptions,
@@ -16,6 +25,8 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
 
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
+      const breakpoint = new Breakpoint(preset)
+      breakpoint.init()
       return mount(VNavigationDrawer, {
         ...options,
         mocks: {
@@ -24,9 +35,7 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
             theme: {
               dark: false,
             },
-            breakpoint: {
-              width: 1920,
-            },
+            breakpoint,
             application: new Application(),
           },
         },

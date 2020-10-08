@@ -1,10 +1,7 @@
 import Vue from 'vue'
 import { VNodeData } from 'vue/types/vnode'
 import { consoleError } from '../../util/console'
-
-function isCssColor (color?: string | false): boolean {
-  return !!color && !!color.match(/^(#|var\(--|(rgb|hsl)a?\()/)
-}
+import { isCssColor } from '../../util/colorUtils'
 
 export default Vue.extend({
   name: 'colorable',

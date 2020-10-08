@@ -1,4 +1,5 @@
-import { CalendarTimestamp, CalendarFormatter } from 'types'
+import { CalendarTimestamp, CalendarFormatter } from 'vuetify/types'
+import { isLeapYear } from '../../../util/dateTimeUtils'
 
 export const PARSE_REGEX: RegExp = /^(\d{4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
 export const PARSE_TIME: RegExp = /(\d\d?)(:(\d\d?)|)(:(\d\d?)|)/
@@ -12,8 +13,15 @@ export const MONTH_MIN = 1
 export const DAY_MIN = 1
 export const DAYS_IN_WEEK = 7
 export const MINUTES_IN_HOUR = 60
+export const MINUTE_MAX = 59
+export const MINUTES_IN_DAY = 24 * 60
 export const HOURS_IN_DAY = 24
+export const HOUR_MAX = 23
 export const FIRST_HOUR = 0
+export const OFFSET_YEAR = 10000
+export const OFFSET_MONTH = 100
+export const OFFSET_HOUR = 100
+export const OFFSET_TIME = 10000
 
 type CalendarTimestampFormatOptions = (timestamp: CalendarTimestamp, short: boolean) => object
 type CalendarTimestampOperation = (timestamp: CalendarTimestamp) => CalendarTimestamp
@@ -22,6 +30,8 @@ export type VTime = number | string | {
   minute: number
 }
 
+export type VTimestampInput = number | string | Date;
+
 export function getStartOfWeek (timestamp: CalendarTimestamp, weekdays: number[], today?: CalendarTimestamp): CalendarTimestamp {
   const start = copyTimestamp(timestamp)
   findWeekday(start, weekdays[0], prevDay)
@@ -29,6 +39,7 @@ export function getStartOfWeek (timestamp: CalendarTimestamp, weekdays: number[]
   if (today) {
     updateRelative(start, today, start.hasTime)
   }
+
   return start
 }
 
@@ -39,6 +50,7 @@ export function getEndOfWeek (timestamp: CalendarTimestamp, weekdays: number[], 
   if (today) {
     updateRelative(end, today, end.hasTime)
   }
+
   return end
 }
 
@@ -47,6 +59,7 @@ export function getStartOfMonth (timestamp: CalendarTimestamp): CalendarTimestam
   start.day = DAY_MIN
   updateWeekday(start)
   updateFormatted(start)
+
   return start
 }
 
@@ -55,7 +68,14 @@ export function getEndOfMonth (timestamp: CalendarTimestamp): CalendarTimestamp 
   end.day = daysInMonth(end.year, end.month)
   updateWeekday(end)
   updateFormatted(end)
+
   return end
+}
+
+export function validateTime (input: any): input is VTime {
+  return (typeof input === 'number' && isFinite(input)) ||
+    (!!PARSE_TIME.exec(input)) ||
+    (typeof input === 'object' && isFinite(input.hour) && isFinite(input.minute))
 }
 
 export function parseTime (input: any): number | false {
@@ -68,12 +88,14 @@ export function parseTime (input: any): number | false {
     if (!parts) {
       return false
     }
+
     return parseInt(parts[1]) * 60 + parseInt(parts[3] || 0)
   } else if (typeof input === 'object') {
     // when an object is given, it must have hour and minute
     if (typeof input.hour !== 'number' || typeof input.minute !== 'number') {
       return false
     }
+
     return input.hour * 60 + input.minute
   } else {
     // unsupported type
@@ -81,20 +103,44 @@ export function parseTime (input: any): number | false {
   }
 }
 
-export function validateTimestamp (input: any): boolean {
-  return !!PARSE_REGEX.exec(input)
+export function validateTimestamp (input: any): input is VTimestampInput {
+  return (typeof input === 'number' && isFinite(input)) ||
+    (typeof input === 'string' && !!PARSE_REGEX.exec(input)) ||
+    (input instanceof Date)
 }
 
-export function parseTimestamp (input: string, required?: false, now?: CalendarTimestamp): CalendarTimestamp | null
-export function parseTimestamp (input: string, required: true, now?: CalendarTimestamp): CalendarTimestamp
-export function parseTimestamp (input: string, required = false, now?: CalendarTimestamp): CalendarTimestamp | null {
+export function parseTimestamp (input: VTimestampInput, required?: false, now?: CalendarTimestamp): CalendarTimestamp | null
+export function parseTimestamp (input: VTimestampInput, required: true, now?: CalendarTimestamp): CalendarTimestamp
+export function parseTimestamp (input: VTimestampInput, required = false, now?: CalendarTimestamp): CalendarTimestamp | null {
+  if (typeof input === 'number' && isFinite(input)) {
+    input = new Date(input)
+  }
+
+  if (input instanceof Date) {
+    const date: CalendarTimestamp = parseDate(input)
+
+    if (now) {
+      updateRelative(date, now, date.hasTime)
+    }
+
+    return date
+  }
+
+  if (typeof input !== 'string') {
+    if (required) {
+      throw new Error(`${input} is not a valid timestamp. It must be a Date, number of seconds since Epoch, or a string in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
+    }
+    return null
+  }
+
   // YYYY-MM-DD hh:mm:ss
   const parts = PARSE_REGEX.exec(input)
 
   if (!parts) {
     if (required) {
-      throw new Error(`${input} is not a valid timestamp. It must be in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
+      throw new Error(`${input} is not a valid timestamp. It must be a Date, number of seconds since Epoch, or a string in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
     }
+
     return null
   }
 
@@ -143,15 +189,15 @@ export function parseDate (date: Date): CalendarTimestamp {
 }
 
 export function getDayIdentifier (timestamp: { year: number, month: number, day: number }): number {
-  return timestamp.year * 10000 + timestamp.month * 100 + timestamp.day
+  return timestamp.year * OFFSET_YEAR + timestamp.month * OFFSET_MONTH + timestamp.day
 }
 
 export function getTimeIdentifier (timestamp: { hour: number, minute: number }): number {
-  return timestamp.hour * 100 + timestamp.minute
+  return timestamp.hour * OFFSET_HOUR + timestamp.minute
 }
 
 export function getTimestampIdentifier (timestamp: CalendarTimestamp): number {
-  return getDayIdentifier(timestamp) * 10000 + getTimeIdentifier(timestamp)
+  return getDayIdentifier(timestamp) * OFFSET_TIME + getTimeIdentifier(timestamp)
 }
 
 export function updateRelative (timestamp: CalendarTimestamp, now: CalendarTimestamp, time = false): CalendarTimestamp {
@@ -168,6 +214,26 @@ export function updateRelative (timestamp: CalendarTimestamp, now: CalendarTimes
   timestamp.past = b < a
   timestamp.present = present
   timestamp.future = b > a
+
+  return timestamp
+}
+
+export function isTimedless (input: VTimestampInput): input is (Date | number) {
+  return (input instanceof Date) || (typeof input === 'number' && isFinite(input))
+}
+
+export function updateHasTime (timestamp: CalendarTimestamp, hasTime: boolean, now?: CalendarTimestamp): CalendarTimestamp {
+  if (timestamp.hasTime !== hasTime) {
+    timestamp.hasTime = hasTime
+    if (!hasTime) {
+      timestamp.hour = HOUR_MAX
+      timestamp.minute = MINUTE_MAX
+      timestamp.time = getTime(timestamp)
+    }
+    if (now) {
+      updateRelative(timestamp, now, timestamp.hasTime)
+    }
+  }
 
   return timestamp
 }
@@ -209,10 +275,6 @@ export function getWeekday (timestamp: CalendarTimestamp): number {
   }
 
   return timestamp.weekday
-}
-
-export function isLeapYear (year: number): boolean {
-  return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0)
 }
 
 export function daysInMonth (year: number, month: number) {
@@ -300,6 +362,7 @@ export function relativeDays (
   days = 1
 ): CalendarTimestamp {
   while (--days >= 0) mover(timestamp)
+
   return timestamp
 }
 
@@ -339,6 +402,13 @@ export function getWeekdaySkips (weekdays: number[]): number[] {
   }
 
   return skips
+}
+
+export function timestampToDate (timestamp: CalendarTimestamp): Date {
+  const time = `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
+  const date = timestamp.date
+
+  return new Date(`${date}T${time}:00+00:00`)
 }
 
 export function createDayList (
@@ -383,7 +453,7 @@ export function createIntervalList (timestamp: CalendarTimestamp, first: number,
   const intervals: CalendarTimestamp[] = []
 
   for (let i = 0; i < count; i++) {
-    const mins = (first + i) * minutes
+    const mins = first + (i * minutes)
     const int = copyTimestamp(timestamp)
     intervals.push(updateMinutes(int, mins, now))
   }
@@ -401,9 +471,8 @@ export function createNativeLocaleFormatter (locale: string, getOptions: Calenda
   return (timestamp, short) => {
     try {
       const intlFormatter = new Intl.DateTimeFormat(locale || undefined, getOptions(timestamp, short))
-      const time = `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
-      const date = timestamp.date
-      return intlFormatter.format(new Date(`${date}T${time}:00+00:00`))
+
+      return intlFormatter.format(timestampToDate(timestamp))
     } catch (e) {
       return ''
     }

@@ -7,6 +7,7 @@ import {
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
+import { waitAnimationFrame } from '../../../../test'
 
 describe('Overlayable.ts', () => {
   const Mock = Overlayable.extend({
@@ -40,7 +41,7 @@ describe('Overlayable.ts', () => {
 
     wrapper.vm.genOverlay()
 
-    await new Promise(resolve => window.requestAnimationFrame(resolve))
+    await waitAnimationFrame()
 
     expect(wrapper.vm.overlay).toBeTruthy()
 
@@ -59,6 +60,20 @@ describe('Overlayable.ts', () => {
     expect(wrapper.vm.overlay).toBeFalsy()
   })
 
+  it('should be removed', async () => {
+    const wrapper = mountFunction()
+
+    wrapper.vm.genOverlay()
+    wrapper.vm.removeOverlay()
+
+    await waitAnimationFrame()
+    expect(wrapper.vm.overlay.value).toBeFalsy()
+
+    const event = new Event('transitionend')
+    wrapper.vm.overlay.$el.dispatchEvent(event)
+    expect(wrapper.vm.overlay).toBeFalsy()
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/8473
   it('should get root element z-index if activeIndex is not available', async () => {
     const wrapper = mountFunction()
@@ -67,7 +82,7 @@ describe('Overlayable.ts', () => {
 
     wrapper.vm.genOverlay()
 
-    await new Promise(resolve => window.requestAnimationFrame(resolve))
+    await waitAnimationFrame()
 
     expect(wrapper.vm.overlay.zIndex).toBe(8)
   })

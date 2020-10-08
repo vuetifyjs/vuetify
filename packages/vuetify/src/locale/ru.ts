@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Строк на странице:',
     ariaLabel: {
-      sortDescending: ': Упорядочено по убыванию. Активируйте, чтобы убрать сортировку.',
-      sortAscending: ': Упорядочено по возрастанию. Активируйте для упорядочивания убыванию.',
-      sortNone: ': Не упорядочено. Активируйте для упорядочивания по возрастанию.',
+      sortDescending: 'Упорядочено по убыванию.',
+      sortAscending: 'Упорядочено по возрастанию.',
+      sortNone: 'Не упорядочено.',
+      activateNone: 'Активируйте, чтобы убрать сортировку.',
+      activateDescending: 'Активируйте для упорядочивания убыванию.',
+      activateAscending: 'Активируйте для упорядочивания по возрастанию.',
     },
     sortBy: 'Сортировать по',
   },
@@ -25,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} выбран',
+    nextMonthAriaLabel: 'Следующий месяц',
+    nextYearAriaLabel: 'Следующий год',
+    prevMonthAriaLabel: 'Прошлый месяц',
+    prevYearAriaLabel: 'Предыдущий год',
   },
   noDataText: 'Отсутствуют данные',
   carousel: {
@@ -44,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Навигация по страницам',
+      next: 'Следующая страница',
+      previous: 'Предыдущая страница',
+      page: 'Перейти на страницу {0}',
+      currentPage: 'Текущая страница, Страница {0}',
+    },
   },
 }

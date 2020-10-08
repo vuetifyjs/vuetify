@@ -5,6 +5,7 @@ import {
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
+import { wait } from '../../../../test'
 
 describe('VTextarea.ts', () => {
   type Instance = InstanceType<typeof VTextarea>
@@ -70,7 +71,7 @@ describe('VTextarea.ts', () => {
       methods: { calculateInputHeight },
     })
 
-    await new Promise(resolve => setTimeout(resolve, 0))
+    await wait()
     expect(calculateInputHeight).toHaveBeenCalled()
   })
 
@@ -133,7 +134,7 @@ describe('VTextarea.ts', () => {
       },
     })
 
-    await new Promise(resolve => setTimeout(resolve, 0))
+    await wait()
 
     expect(wrapper.vm.$refs.input.style.height).toBe('120px')
 

@@ -5,7 +5,7 @@
  */
 /* eslint-disable max-statements */
 import { VNodeData } from 'vue'
-import { camelize } from './helpers'
+import { camelize, wrapInArray } from './helpers'
 
 const pattern = {
   styleList: /;(?![^(]*\))/g,
@@ -41,7 +41,6 @@ export default function mergeData (): VNodeData {
   const mergeTarget: VNodeData & Dictionary<any> = {}
   let i: number = arguments.length
   let prop: string
-  let event: string
 
   // Allow for variadic argument length.
   while (i--) {
@@ -51,31 +50,15 @@ export default function mergeData (): VNodeData {
       switch (prop) {
         // Array merge strategy (array concatenation)
         case 'class':
-        case 'style':
         case 'directives':
-          if (!Array.isArray(mergeTarget[prop])) {
-            mergeTarget[prop] = []
+          if (arguments[i][prop]) {
+            mergeTarget[prop] = mergeClasses(mergeTarget[prop], arguments[i][prop])
           }
-
-          if (prop === 'style') {
-            let style: any[]
-            if (Array.isArray(arguments[i].style)) {
-              style = arguments[i].style
-            } else {
-              style = [arguments[i].style]
-            }
-            for (let j = 0; j < style.length; j++) {
-              const s = style[j]
-              if (typeof s === 'string') {
-                style[j] = parseStyle(s)
-              }
-            }
-            arguments[i].style = style
+          break
+        case 'style':
+          if (arguments[i][prop]) {
+            mergeTarget[prop] = mergeStyles(mergeTarget[prop], arguments[i][prop])
           }
-
-          // Repackaging in an array allows Vue runtime
-          // to merge class/style bindings regardless of type.
-          mergeTarget[prop] = mergeTarget[prop].concat(arguments[i][prop])
           break
         // Space delimited string concatenation strategy
         case 'staticClass':
@@ -98,22 +81,8 @@ export default function mergeData (): VNodeData {
         // uses the last given value to assign.
         case 'on':
         case 'nativeOn':
-          if (!mergeTarget[prop]) {
-            mergeTarget[prop] = {}
-          }
-          const listeners = mergeTarget[prop]!
-          for (event of Object.keys(arguments[i][prop] || {})) {
-            // Concat function to array of functions if callback present.
-            if (listeners[event]) {
-              // Insert current iteration data in beginning of merged array.
-              listeners[event] = Array<Function>().concat( // eslint-disable-line
-                listeners[event],
-                arguments[i][prop][event]
-              )
-            } else {
-              // Straight assign.
-              listeners[event] = arguments[i][prop][event]
-            }
+          if (arguments[i][prop]) {
+            mergeTarget[prop] = mergeListeners(mergeTarget[prop], arguments[i][prop])
           }
           break
         // Object merge strategy
@@ -124,19 +93,16 @@ export default function mergeData (): VNodeData {
         case 'staticStyle':
         case 'hook':
         case 'transition':
+          if (!arguments[i][prop]) {
+            break
+          }
           if (!mergeTarget[prop]) {
             mergeTarget[prop] = {}
           }
           mergeTarget[prop] = { ...arguments[i][prop], ...mergeTarget[prop] }
           break
         // Reassignment strategy (no merge)
-        case 'slot':
-        case 'key':
-        case 'ref':
-        case 'tag':
-        case 'show':
-        case 'keepAlive':
-        default:
+        default: // slot, key, ref, tag, show, keepAlive
           if (!mergeTarget[prop]) {
             mergeTarget[prop] = arguments[i][prop]
           }
@@ -145,4 +111,51 @@ export default function mergeData (): VNodeData {
   }
 
   return mergeTarget
+}
+
+export function mergeStyles (
+  target: undefined | string | object[] | object,
+  source: undefined | string | object[] | object
+) {
+  if (!target) return source
+  if (!source) return target
+
+  target = wrapInArray(typeof target === 'string' ? parseStyle(target) : target)
+
+  return (target as object[]).concat(typeof source === 'string' ? parseStyle(source) : source)
+}
+
+export function mergeClasses (target: any, source: any) {
+  if (!source) return target
+  if (!target) return source
+
+  return target ? wrapInArray(target).concat(source) : source
+}
+
+export function mergeListeners (...args: [
+  { [key: string]: Function | Function[] } | undefined,
+  { [key: string]: Function | Function[] } | undefined
+]) {
+  if (!args[0]) return args[1]
+  if (!args[1]) return args[0]
+
+  const dest: { [key: string]: Function | Function[] } = {}
+
+  for (let i = 2; i--;) {
+    const arg = args[i]
+    for (const event in arg) {
+      if (!arg[event]) continue
+
+      if (dest[event]) {
+        // Merge current listeners before (because we are iterating backwards).
+        // Note that neither "target" or "source" must be altered.
+        dest[event] = ([] as Function[]).concat(arg[event], dest[event])
+      } else {
+        // Straight assign.
+        dest[event] = arg[event]
+      }
+    }
+  }
+
+  return dest
 }

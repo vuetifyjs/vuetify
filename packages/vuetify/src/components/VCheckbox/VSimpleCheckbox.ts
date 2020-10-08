@@ -5,8 +5,12 @@ import ripple from '../../directives/ripple'
 import Vue, { VNode, VNodeDirective } from 'vue'
 import { VIcon } from '../VIcon'
 
+// Mixins
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
+
+// Utilities
+import mergeData from '../../util/mergeData'
 import { wrapInArray } from '../../util/helpers'
 
 export default Vue.extend({
@@ -42,7 +46,7 @@ export default Vue.extend({
     },
   },
 
-  render (h, { props, data }): VNode {
+  render (h, { props, data, listeners }): VNode {
     const children = []
 
     if (props.ripple && !props.disabled) {
@@ -74,18 +78,18 @@ export default Vue.extend({
       'v-simple-checkbox--disabled': props.disabled,
     }
 
-    return h('div', {
-      ...data,
-      class: classes,
-      on: {
-        click: (e: MouseEvent) => {
-          e.stopPropagation()
+    return h('div',
+      mergeData(data, {
+        class: classes,
+        on: {
+          click: (e: MouseEvent) => {
+            e.stopPropagation()
 
-          if (data.on && data.on.input && !props.disabled) {
-            wrapInArray(data.on.input).forEach(f => f(!props.value))
-          }
+            if (data.on && data.on.input && !props.disabled) {
+              wrapInArray(data.on.input).forEach(f => f(!props.value))
+            }
+          },
         },
-      },
-    }, children)
+      }), children)
   },
 })

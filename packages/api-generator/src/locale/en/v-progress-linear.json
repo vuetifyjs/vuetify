@@ -1,0 +1,20 @@
+{
+  "props": {
+    "active": "Reduce the height to 0, hiding component",
+    "backgroundColor": "Background color, set to component's color if null",
+    "backgroundOpacity": "Background opacity, if null it defaults to 0.3 if background color is not specified or 1 otherwise",
+    "bufferValue": "The percentage value for the buffer",
+    "indeterminate": "Constantly animates, use when loading progress is unknown.",
+    "query": "Animates like **indeterminate** prop but inverse",
+    "reverse": "Displays reversed progress (right to left in LTR mode and left to right in RTL)",
+    "rounded": "Adds a border radius to the progress component",
+    "stream": "An alternative style for portraying loading that works in tandem with **buffer-value**",
+    "striped": "Adds a stripe background to the filled portion of the progress component"
+  },
+  "slots": {
+    "default": "Provides the current value of the component"
+  },
+  "events": {
+    "change": "Emitted when the component value is changed by user interaction"
+  }
+}

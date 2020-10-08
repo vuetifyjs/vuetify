@@ -4,8 +4,8 @@ import App from './App'
 import Vuetify from 'vuetify'
 import { createApp } from 'vue'
 
-const app = createApp()
+const app = createApp(App)
 
 app.use(Vuetify)
 
-app.mount(App, '#app')
+app.mount('#app')

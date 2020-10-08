@@ -1,0 +1,27 @@
+@import './_variables.scss'
+
+// Theme
++theme(v-calendar-category) using ($material)
+  .v-calendar-category__column,
+  .v-calendar-category__column-header
+    border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
+
+.v-calendar-category
+  .v-calendar-category__category
+    text-align: center
+    
+  .v-calendar-daily__day-container
+    .v-calendar-category__columns
+      position: absolute
+      height: 100%
+      width: 100%
+      top: 0
+
+  .v-calendar-category__columns
+    display: flex
+    
+    .v-calendar-category__column,
+    .v-calendar-category__column-header
+      flex: 1 1 auto
+      width: 0
+      position: relative

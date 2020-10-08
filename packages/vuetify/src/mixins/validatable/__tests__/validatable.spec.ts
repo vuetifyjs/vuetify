@@ -4,6 +4,7 @@ import {
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
+import { wait } from '../../../../test'
 
 describe('validatable.ts', () => {
   const Mock = Validatable.extend({
@@ -195,12 +196,20 @@ describe('validatable.ts', () => {
     wrapper.setProps({ successMessages: [] })
 
     expect(wrapper.vm.hasSuccess).toBe(false)
+
+    wrapper.setProps({ successMessages: null })
+
+    expect(wrapper.vm.hasSuccess).toBe(false)
   })
 
   /* eslint-disable-next-line max-statements */
   it('should have messages', () => {
     const wrapper = mountFunction()
 
+    expect(wrapper.vm.hasMessages).toBe(false)
+
+    // Null message
+    wrapper.setProps({ messages: null })
     expect(wrapper.vm.hasMessages).toBe(false)
 
     // String message
@@ -212,6 +221,10 @@ describe('validatable.ts', () => {
     expect(wrapper.vm.hasMessages).toBe(true)
     wrapper.setProps({ messages: [] }) // Reset
 
+    // Null error
+    wrapper.setProps({ errorMessages: null })
+    expect(wrapper.vm.hasMessages).toBe(false)
+
     // String error
     wrapper.setProps({ errorMessages: 'bar' })
     expect(wrapper.vm.hasMessages).toBe(true)
@@ -221,11 +234,15 @@ describe('validatable.ts', () => {
     expect(wrapper.vm.hasMessages).toBe(true)
     wrapper.setProps({ errorMessages: [] }) // Reset
 
-    // String error
+    // Null success
+    wrapper.setProps({ successMessages: null })
+    expect(wrapper.vm.hasMessages).toBe(false)
+
+    // String success
     wrapper.setProps({ successMessages: 'fizz' })
     expect(wrapper.vm.hasMessages).toBe(true)
 
-    // Array error
+    // Array success
     wrapper.setProps({ successMessages: ['fizz'] })
     expect(wrapper.vm.hasMessages).toBe(true)
     wrapper.setProps({ successMessages: [] }) // Reset
@@ -338,7 +355,7 @@ describe('validatable.ts', () => {
     await wrapper.vm.$nextTick()
 
     // Wait for watcher's timeout
-    await new Promise(resolve => setTimeout(resolve, 0))
+    await wait()
 
     expect(wrapper.vm.hasInput).toBe(false)
     expect(wrapper.vm.hasFocused).toBe(false)

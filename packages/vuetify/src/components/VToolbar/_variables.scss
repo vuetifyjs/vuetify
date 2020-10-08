@@ -3,6 +3,9 @@
 $toolbar-btn-icon-size: 48px !default;
 $toolbar-content-padding-y: 4px !default;
 $toolbar-content-padding-x: 16px !default;
+$toolbar-elevation: 4 !default;
+$toolbar-border-radius: 0 !default;
+$toolbar-shaped-border-radius: map-get($rounded, 'xl') $toolbar-border-radius !default;
 $toolbar-title-padding: 20px !default;
 $toolbar-transition: 0.2s map-get($transition, 'fast-out-slow-in') transform,
                      0.2s map-get($transition, 'fast-out-slow-in') background-color,
