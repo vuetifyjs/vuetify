@@ -3,12 +3,12 @@ import createNativeLocaleFormatter from '../createNativeLocaleFormatter'
 describe('VDatePicker/util/createNativeLocaleFormatter.ts', () => {
   it('should format dates', () => {
     const formatter = createNativeLocaleFormatter(undefined, { day: 'numeric', timeZone: 'UTC' })
-    expect(formatter('2013-2-07')).toBe('7')
+    expect(formatter('2013-2-07')).toMatch(/7日?/)
   })
 
   it('should format date with year < 1000', () => {
     const formatter = createNativeLocaleFormatter(undefined, { year: 'numeric', timeZone: 'UTC' })
-    expect(formatter('13-2-07')).toBe('13')
+    expect(formatter('13-2-07')).toMatch(/13年?/)
   })
 
   it('should format dates if Intl is not defined', () => {

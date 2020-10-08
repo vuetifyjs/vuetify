@@ -31,7 +31,7 @@ describe('VDatePickerYears.ts', () => {
       },
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.html().replace('年', '')).toMatchSnapshot()
   })
 
   it('should respect min/max props', async () => {
@@ -42,8 +42,8 @@ describe('VDatePickerYears.ts', () => {
       },
     })
 
-    expect(wrapper.findAll('li:first-child').at(0).element.textContent).toBe('1238')
-    expect(wrapper.findAll('li:last-child').at(0).element.textContent).toBe('1234')
+    expect(wrapper.findAll('li:first-child').at(0).element.textContent).toMatch(/^1238年?/)
+    expect(wrapper.findAll('li:last-child').at(0).element.textContent).toMatch(/^1234年?/)
   })
 
   it('should not allow min to be greater then max', async () => {
@@ -54,8 +54,8 @@ describe('VDatePickerYears.ts', () => {
       },
     })
     expect(wrapper.findAll('li')).toHaveLength(1)
-    expect(wrapper.findAll('li').at(0).element.textContent).toBe('1234')
-    expect(wrapper.findAll('li').at(0).element.textContent).toBe('1234')
+    expect(wrapper.findAll('li').at(0).element.textContent).toMatch(/^1234年?/)
+    expect(wrapper.findAll('li').at(0).element.textContent).toMatch(/^1234年?/)
   })
 
   it('should emit event on year click', async () => {
