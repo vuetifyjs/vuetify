@@ -41,11 +41,18 @@ export class Breakpoint extends Service implements IBreakpoint {
 
   public xlOnly = false
 
-  public name = ''
+  // Value is xs to match v2.x functionality
+  public name: IBreakpoint['name'] = 'xs'
 
   public height = 0
 
   public width = 0
+
+  // TODO: Add functionality to detect this dynamically in v3
+  // Value is true to match v2.x functionality
+  public mobile = true
+
+  public mobileBreakpoint: IBreakpoint['mobileBreakpoint']
 
   public thresholds: IBreakpoint['thresholds']
 
@@ -57,17 +64,19 @@ export class Breakpoint extends Service implements IBreakpoint {
     super()
 
     const {
+      mobileBreakpoint,
       scrollBarWidth,
       thresholds,
     } = preset[Breakpoint.property]
 
+    this.mobileBreakpoint = mobileBreakpoint
     this.scrollBarWidth = scrollBarWidth
     this.thresholds = thresholds
-
-    this.init()
   }
 
   public init () {
+    this.update()
+
     /* istanbul ignore if */
     if (typeof window === 'undefined') return
 
@@ -76,24 +85,12 @@ export class Breakpoint extends Service implements IBreakpoint {
       this.onResize.bind(this),
       { passive: true }
     )
-
-    this.update()
-  }
-
-  private onResize () {
-    clearTimeout(this.resizeTimeout)
-
-    // Added debounce to match what
-    // v-resize used to do but was
-    // removed due to a memory leak
-    // https://github.com/vuetifyjs/vuetify/pull/2997
-    this.resizeTimeout = window.setTimeout(this.update.bind(this), 200)
   }
 
   /* eslint-disable-next-line max-statements */
-  private update () {
-    const height = this.getClientHeight()
-    const width = this.getClientWidth()
+  public update (ssr = false) {
+    const height = ssr ? 0 : this.getClientHeight()
+    const width = ssr ? 0 : this.getClientWidth()
 
     const xs = width < this.thresholds.xs
     const sm = width < this.thresholds.sm && !xs
@@ -139,6 +136,35 @@ export class Breakpoint extends Service implements IBreakpoint {
         this.name = 'xl'
         break
     }
+
+    if (typeof this.mobileBreakpoint === 'number') {
+      this.mobile = width < parseInt(this.mobileBreakpoint, 10)
+
+      return
+    }
+
+    const breakpoints = {
+      xs: 0,
+      sm: 1,
+      md: 2,
+      lg: 3,
+      xl: 4,
+    } as const
+
+    const current = breakpoints[this.name]
+    const max = breakpoints[this.mobileBreakpoint]
+
+    this.mobile = current <= max
+  }
+
+  private onResize () {
+    clearTimeout(this.resizeTimeout)
+
+    // Added debounce to match what
+    // v-resize used to do but was
+    // removed due to a memory leak
+    // https://github.com/vuetifyjs/vuetify/pull/2997
+    this.resizeTimeout = window.setTimeout(this.update.bind(this), 200)
   }
 
   // Cross-browser support as described in:

@@ -15,7 +15,7 @@ import mixins from '../../util/mixins'
 
 // Types
 import { VNode, PropType } from 'vue'
-import { DatePickerFormatter } from 'types'
+import { DatePickerFormatter } from 'vuetify/types'
 
 export default mixins(
   Colorable,
@@ -30,10 +30,12 @@ export default mixins(
     format: Function as PropType<DatePickerFormatter | undefined>,
     min: String,
     max: String,
+    nextAriaLabel: String,
     nextIcon: {
       type: String,
       default: '$next',
     },
+    prevAriaLabel: String,
     prevIcon: {
       type: String,
       default: '$prev',
@@ -71,18 +73,21 @@ export default mixins(
 
   methods: {
     genBtn (change: number) {
+      const ariaLabelId = change > 0 ? this.nextAriaLabel : this.prevAriaLabel
+      const ariaLabel = ariaLabelId ? this.$vuetify.lang.t(ariaLabelId) : undefined
       const disabled = this.disabled ||
         (change < 0 && this.min && this.calculateChange(change) < this.min) ||
         (change > 0 && this.max && this.calculateChange(change) > this.max)
 
       return this.$createElement(VBtn, {
+        attrs: { 'aria-label': ariaLabel },
         props: {
           dark: this.dark,
           disabled,
           icon: true,
           light: this.light,
         },
-        nativeOn: {
+        on: {
           click: (e: Event) => {
             e.stopPropagation()
             this.$emit('input', this.calculateChange(change))

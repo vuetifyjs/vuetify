@@ -13,6 +13,8 @@ import { VuetifyPreset } from 'vuetify/types/services/presets'
 
 export const preset: VuetifyPreset = {
   breakpoint: {
+    // TODO: update to MD2 spec in v3 - 1280
+    mobileBreakpoint: 1264,
     scrollBarWidth: 16,
     thresholds: {
       xs: 600,
@@ -42,6 +44,7 @@ export const preset: VuetifyPreset = {
       customProperties: undefined,
       minifyTheme: undefined,
       themeCache: undefined,
+      variations: true,
     },
     themes: {
       light: {

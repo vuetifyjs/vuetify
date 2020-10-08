@@ -43,16 +43,16 @@ export default baseMixins.extend<options>().extend({
   },
 
   render (h): VNode {
-    return h(VExpandTransition, [
+    return h(VExpandTransition, this.showLazyContent(() => [
       h('div', this.setBackgroundColor(this.color, {
         staticClass: 'v-expansion-panel-content',
         directives: [{
           name: 'show',
           value: this.isActive,
         }],
-      }), this.showLazyContent([
+      }), [
         h('div', { class: 'v-expansion-panel-content__wrap' }, getSlot(this)),
-      ])),
-    ])
+      ]),
+    ]))
   },
 })

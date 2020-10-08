@@ -7,6 +7,7 @@ import {
   MountOptions,
 } from '@vue/test-utils'
 import { keyCodes } from '../../../util/helpers'
+import mixins from '../../../util/mixins'
 
 describe('VEditDialog.ts', () => {
   type Instance = InstanceType<typeof VEditDialog>
@@ -94,39 +95,53 @@ describe('VEditDialog.ts', () => {
     expect(close).toHaveBeenCalledTimes(1)
   })
 
-  it('should react to input', () => {
-    const cancel = jest.fn()
-    const save = jest.fn()
-    const saveEvent = jest.fn()
+  it('should react to input', async () => {
+    jest.useFakeTimers()
 
-    const wrapper = mountFunction({
-      methods: {
-        cancel,
-        save,
+    const parentWrapper = mount({
+      template: `
+        <v-edit-dialog :return-value.sync="val">
+          <template v-slot:input>
+            <input v-model="val" class="test"/>
+          </template>
+        </v-edit-dialog>
+      `,
+      components: {
+        'v-edit-dialog': mixins(VEditDialog).extend({
+          render () {
+            return this.genContent()
+          },
+        }),
       },
-      render () {
-        return this.genContent()
-      },
-      slots: {
-        input: '<input class="test" />',
-      },
-      listeners: {
-        save: saveEvent,
+      data () {
+        return {
+          val: '',
+        }
       },
     })
 
+    const wrapper = parentWrapper.find(VEditDialog)
+    const field = parentWrapper.find('input.test')
     const input = wrapper.vm.$refs.content as HTMLElement
 
-    input.dispatchEvent(new KeyboardEvent('keydown', { keyCode: keyCodes.esc } as KeyboardEventInit))
-    expect(cancel).toHaveBeenCalledTimes(1)
-
-    const field = wrapper.find('input.test')
+    // Make sure originalValue gets set
+    wrapper.vm.isActive = true
     field.setValue('test')
+    input.dispatchEvent(new KeyboardEvent('keydown', { keyCode: keyCodes.esc } as KeyboardEventInit))
+    expect(wrapper.emitted('cancel')).toBeTruthy()
+    expect(wrapper.emitted('update:return-value')[0]).toEqual([''])
+    expect(wrapper.props('returnValue')).toBe('')
 
+    wrapper.vm.isActive = true
+    field.setValue('test')
     input.dispatchEvent(new KeyboardEvent('keydown', { keyCode: keyCodes.enter } as KeyboardEventInit))
-    expect(save).toHaveBeenCalledTimes(1)
-    expect(save).toHaveBeenLastCalledWith('test')
-    expect(saveEvent).toHaveBeenCalledTimes(1)
+    expect(wrapper.emitted('save')).toBeTruthy()
+    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function))
+    jest.advanceTimersByTime(0)
+    expect(wrapper.emitted('update:return-value')[1]).toEqual(['test'])
+    expect(wrapper.props('returnValue')).toBe('test')
+
+    jest.useRealTimers()
   })
 
   it('should render button', () => {

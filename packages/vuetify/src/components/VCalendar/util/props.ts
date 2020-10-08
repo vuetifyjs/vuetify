@@ -1,29 +1,28 @@
 
-import { validateTimestamp, parseDate, DAYS_IN_WEEK } from './timestamp'
+import { validateTimestamp, parseDate, DAYS_IN_WEEK, validateTime } from './timestamp'
 import { PropType } from 'vue'
-import { CalendarEvent, CalendarFormatter, CalendarTimestamp, CalendarEventOverlapMode } from 'types'
+import { CalendarEvent, CalendarFormatter, CalendarTimestamp, CalendarEventOverlapMode, CalendarEventNameFunction, CalendarEventColorFunction, CalendarEventCategoryFunction, CalendarEventTimedFunction } from 'vuetify/types'
 import { CalendarEventOverlapModes } from '../modes'
 import { PropValidator } from 'vue/types/options'
 
 export default {
   base: {
     start: {
-      type: String,
+      type: [String, Number, Date],
       validate: validateTimestamp,
       default: () => parseDate(new Date()).date,
     },
     end: {
-      type: String,
+      type: [String, Number, Date],
       validate: validateTimestamp,
     },
     weekdays: {
-      type: [Array, String],
+      type: [Array, String] as PropType<number[] | string>,
       default: () => [0, 1, 2, 3, 4, 5, 6],
       validate: validateWeekdays,
-    } as PropValidator<number[] | string>,
+    },
     hideHeader: {
       type: Boolean,
-      default: false,
     },
     shortWeekdays: {
       type: Boolean,
@@ -67,6 +66,10 @@ export default {
       default: 0,
       validate: validateNumber,
     },
+    firstTime: {
+      type: [Number, String, Object],
+      validate: validateTime,
+    },
     intervalCount: {
       type: [Number, String],
       default: 24,
@@ -86,6 +89,10 @@ export default {
     },
   },
   weeks: {
+    localeFirstDayOfYear: {
+      type: [String, Number],
+      default: 0,
+    },
     minWeeks: {
       validate: validateNumber,
       default: 1,
@@ -98,6 +105,7 @@ export default {
       type: Boolean,
       default: true,
     },
+    showWeek: Boolean,
     monthFormat: {
       type: Function as PropType<CalendarFormatter>,
       default: null,
@@ -109,8 +117,29 @@ export default {
       default: 'month',
     },
     value: {
-      type: String,
+      type: [String, Number, Date] as PropType<string | number | Date>,
       validate: validateTimestamp,
+    },
+  },
+  category: {
+    categories: {
+      type: [Array, String],
+      default: '',
+    },
+    categoryHideDynamic: {
+      type: Boolean,
+    },
+    categoryShowAll: {
+      type: Boolean,
+    },
+    categoryForInvalid: {
+      type: String,
+      default: '',
+    },
+    categoryDays: {
+      type: [Number, String],
+      default: 1,
+      validate: (x: any) => isFinite(parseInt(x)) && parseInt(x) > 0,
     },
   },
   events: {
@@ -126,20 +155,28 @@ export default {
       type: String,
       default: 'end',
     },
+    eventTimed: {
+      type: [String, Function] as PropType<string | CalendarEventTimedFunction>,
+      default: 'timed',
+    },
+    eventCategory: {
+      type: [String, Function] as PropType<string | CalendarEventCategoryFunction>,
+      default: 'category',
+    },
     eventHeight: {
       type: Number,
       default: 20,
     },
     eventColor: {
-      type: [String, Function],
+      type: [String, Function] as PropType<string | CalendarEventColorFunction>,
       default: 'primary',
     },
     eventTextColor: {
-      type: [String, Function],
+      type: [String, Function] as PropType<string | CalendarEventColorFunction>,
       default: 'white',
     },
     eventName: {
-      type: [String, Function],
+      type: [String, Function] as PropType<string | CalendarEventNameFunction>,
       default: 'name',
     },
     eventOverlapThreshold: {

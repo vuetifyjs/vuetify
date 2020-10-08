@@ -1,6 +1,6 @@
 import Vue, { VNode, PropType } from 'vue'
 import { getObjectValueByPath } from '../../util/helpers'
-import { DataTableHeader } from 'types'
+import { DataTableHeader } from 'vuetify/types'
 
 export default Vue.extend({
   name: 'row',
@@ -9,6 +9,7 @@ export default Vue.extend({
 
   props: {
     headers: Array as PropType<DataTableHeader[]>,
+    hideDefaultHeader: Boolean,
     item: Object,
     rtl: Boolean,
   },
@@ -42,7 +43,7 @@ export default Vue.extend({
         }, children),
       ]
 
-      if (header.value !== 'dataTableSelect') {
+      if (header.value !== 'dataTableSelect' && !props.hideDefaultHeader) {
         mobileRowChildren.unshift(
           h('div', {
             staticClass: 'v-data-table__mobile-row__header',

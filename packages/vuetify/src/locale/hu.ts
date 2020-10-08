@@ -1,18 +1,21 @@
 export default {
   badge: 'Jelvény',
-  close: 'Close',
+  close: 'Bezárás',
   dataIterator: {
     noResultsText: 'Nincs egyező találat',
-    loadingText: 'Loading item...',
+    loadingText: 'Betöltés...',
   },
   dataTable: {
     itemsPerPageText: 'Elem oldalanként:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: 'Csökkenő sorrendbe rendezve.',
+      sortAscending: 'Növekvő sorrendbe rendezve.',
+      sortNone: 'Rendezetlen.',
+      activateNone: 'Rendezés törlése.',
+      activateDescending: 'Aktiváld a csökkenő rendezésért.',
+      activateAscending: 'Aktiváld a növekvő rendezésért.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Rendezés',
   },
   dataFooter: {
     itemsPerPageText: 'Elem oldalanként:',
@@ -24,25 +27,38 @@ export default {
     pageText: '{0}-{1} / {2}',
   },
   datePicker: {
-    itemsSelected: '{0} kiválaszta/-ott',
+    itemsSelected: '{0} kiválasztva',
+    nextMonthAriaLabel: 'Következő hónap',
+    nextYearAriaLabel: 'Következő év',
+    prevMonthAriaLabel: 'Előző hónap',
+    prevYearAriaLabel: 'Előző év',
   },
   noDataText: 'Nincs elérhető adat',
   carousel: {
-    prev: 'Korábbi vizuális',
-    next: 'Következő vizuális',
+    prev: 'Előző',
+    next: 'Következő',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Dia {0}/{1}',
     },
   },
   calendar: {
     moreEvents: '{0} további',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} fájl',
+    counterSize: '{0} fájl ({1} összesen)',
   },
   timePicker: {
-    am: 'AM',
-    pm: 'PM',
+    am: 'de',
+    pm: 'du',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Oldal navigáció',
+      next: 'Következő oldal',
+      previous: 'Előző oldal',
+      page: 'Menj a(z) {0}. oldalra',
+      currentPage: 'Aktuális oldal: {0}',
+    },
   },
 }

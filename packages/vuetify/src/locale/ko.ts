@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: '페이지 당 행 수:',
     ariaLabel: {
-      sortDescending: ': 내림차순 정렬. 정렬을 취소하려면 활성화하세요.',
-      sortAscending: ': 오름차순 정렬. 내림차순 정렬을 위해 활성화하세요.',
-      sortNone: ': 정렬하지 않음. 오름차순 정렬을 위해 활성화하세요.',
+      sortDescending: '내림차순 정렬.',
+      sortAscending: '오름차순 정렬.',
+      sortNone: '정렬하지 않음.',
+      activateNone: '정렬을 취소하려면 활성화하세요.',
+      activateDescending: '내림차순 정렬을 위해 활성화하세요.',
+      activateAscending: '오름차순 정렬을 위해 활성화하세요.',
     },
     sortBy: 'Sort by',
   },
@@ -25,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} 선택됨',
+    nextMonthAriaLabel: '다음 달',
+    nextYearAriaLabel: '내년',
+    prevMonthAriaLabel: '지난달',
+    prevYearAriaLabel: '전년도',
   },
   noDataText: '데이터가 없습니다.',
   carousel: {
@@ -44,5 +51,14 @@ export default {
   timePicker: {
     am: '오전',
     pm: '오후',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Pagination Navigation',
+      next: '다음 페이지',
+      previous: '이전 페이지',
+      page: '고토 페이지 {0}',
+      currentPage: '현재 페이지, 페이지 {0}',
+    },
   },
 }

@@ -22,8 +22,8 @@ describe('VColorPicker/util/parseColor', () => {
   })
 
   it('should try to parse color if invalid hex string passed', () => {
-    expect(parseColor('#00gi').hex).toEqual('#00FF00')
-    expect(parseColor('#00gi').hexa).toEqual('#00FF00FF')
+    expect(parseColor('#00gi').hex).toEqual('#0000FF')
+    expect(parseColor('#00gi').hexa).toEqual('#0000FFFF')
   })
 
   it('should parse rgb object', () => {

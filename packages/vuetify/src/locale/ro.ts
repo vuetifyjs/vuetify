@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Rânduri pe pagină:',
     ariaLabel: {
-      sortDescending: ': Sorted descending. Activate to remove sorting.',
-      sortAscending: ': Sorted ascending. Activate to sort descending.',
-      sortNone: ': Not sorted. Activate to sort ascending.',
+      sortDescending: 'Sorted descending.',
+      sortAscending: 'Sorted ascending.',
+      sortNone: 'Not sorted.',
+      activateNone: 'Activate to remove sorting.',
+      activateDescending: 'Activate to sort descending.',
+      activateAscending: 'Activate to sort ascending.',
     },
     sortBy: 'Sort by',
   },
@@ -25,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} selectate',
+    nextMonthAriaLabel: 'Luna viitoare',
+    nextYearAriaLabel: 'Anul urmator',
+    prevMonthAriaLabel: 'Luna trecută',
+    prevYearAriaLabel: 'Anul precedent',
   },
   noDataText: 'Nu există date disponibile',
   carousel: {
@@ -44,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Navigare prin paginare',
+      next: 'Pagina următoare',
+      previous: 'Pagina anterioară',
+      page: 'Mergi la pagina {0}',
+      currentPage: 'Pagina curentă, pagina {0}',
+    },
   },
 }

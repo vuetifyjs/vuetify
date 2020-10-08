@@ -6,7 +6,7 @@ const Validatable = {
   props: createItems(['disabled', 'readonly'], {
     default: false,
     source: 'validatable',
-    value: 'boolean',
+    type: 'boolean',
   }),
   events: [
     {
@@ -84,6 +84,7 @@ const VInput = {
       'append',
       'default',
       'prepend',
+      'label',
     ], {
       props: undefined,
       source: 'v-input',
@@ -130,7 +131,6 @@ const VTextField = {
     ...VInput.slots,
     ...createItems([
       'append-outer',
-      'label',
       'prepend-inner',
       'progress',
     ], {
@@ -162,12 +162,10 @@ const VSelect = {
       example: {
         text: 'string | number | object',
         value: 'string | number | object',
+        disabled: 'boolean',
+        divider: 'boolean',
+        header: 'string',
       },
-      source: 'v-select',
-    },
-    {
-      name: 'filter',
-      default: '(item: object, queryText: string, itemText: string): boolean',
       source: 'v-select',
     },
     {
@@ -240,6 +238,7 @@ const VSlider = {
       },
       source: 'v-slider',
     },
+
   ],
 }
 
@@ -287,13 +286,32 @@ const VCalendarDay = {
   future: 'boolean',
 }
 
+const VCalendarEvent = {
+  input: 'any',
+  start: VTimestamp,
+  startIdentifier: 'number',
+  startTimestampIdentifier: 'number',
+  end: VTimestamp,
+  endIdentifier: 'number',
+  endTimestampIdentifier: 'number',
+  allDay: 'boolean',
+  index: 'number',
+  category: 'string',
+}
+
 const VCalendarEventSlot = {
   event: 'any',
+  eventParsed: VCalendarEvent,
   day: VCalendarDay,
   outside: 'boolean',
   start: 'boolean',
   end: 'boolean',
   timed: 'boolean',
+  singleline: 'boolean',
+  overlapsNoon: 'boolean',
+  formatTime: '(time: VTimestamp, ampm: boolean): string',
+  timeSummary: '(): string',
+  eventSummary: '(): string',
 }
 
 const VTimestampWithTime = {
@@ -310,14 +328,55 @@ const VTimestampWithTime = {
   past: 'boolean',
   present: 'boolean',
   future: 'boolean',
-  timeToY: '(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number',
+  timeToY: '(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number | false',
+  timeDelta: '(time: string | number | {hour: number, minute: number}): number | false',
   minutesToPixels: '(minutes: number): number',
   week: [VTimestamp],
+}
+
+const VTimestampWithCategory = {
+  date: 'string',
+  time: 'string',
+  year: 'number',
+  month: 'number',
+  day: 'number',
+  hour: 'number',
+  minute: 'number',
+  weekday: 'number',
+  hasDay: 'boolean',
+  hasTime: 'boolean',
+  past: 'boolean',
+  present: 'boolean',
+  future: 'boolean',
+  week: [VTimestamp],
+  category: 'string | null',
+}
+
+const VTimestampWithTimeCategory = {
+  date: 'string',
+  time: 'string',
+  year: 'number',
+  month: 'number',
+  day: 'number',
+  hour: 'number',
+  minute: 'number',
+  weekday: 'number',
+  hasDay: 'boolean',
+  hasTime: 'boolean',
+  past: 'boolean',
+  present: 'boolean',
+  future: 'boolean',
+  timeToY: '(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number | false',
+  timeDelta: '(time: string | number | {hour: number, minute: number}): number | false',
+  minutesToPixels: '(minutes: number): number',
+  week: [VTimestamp],
+  category: 'string | null',
 }
 
 module.exports = {
   createItems,
   VCalendarDay,
+  VCalendarEvent,
   VCalendarEventSlot,
   VGridProps,
   VInput,
@@ -325,6 +384,8 @@ module.exports = {
   VSlider,
   VTextField,
   VTimestamp,
+  VTimestampWithCategory,
   VTimestampWithTime,
+  VTimestampWithTimeCategory,
   VTreeviewScopedProps,
 }

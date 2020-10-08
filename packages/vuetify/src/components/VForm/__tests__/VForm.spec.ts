@@ -1,27 +1,47 @@
+// Libraries
 import Vue from 'vue'
+import Vuetify from '../../../framework'
+
+// Components
+import VForm from '../VForm'
+import VTextField from '../../VTextField'
+
+// Utilties
 import {
   mount,
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
-import VTextField from '../../VTextField'
-import VBtn from '../../VBtn'
-import VForm from '../VForm'
 
-const inputOne = Vue.component('input-one', {
-  render (h) {
-    return h(VTextField, {
-      props: [v => !!v || 'Required'],
-    })
-  },
-})
+import { wait } from '../../../../test'
 
 describe('VForm.ts', () => {
   type Instance = InstanceType<typeof VForm>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  let vuetify
+
   beforeEach(() => {
+    document.body.setAttribute('data-app', 'true')
+
+    vuetify = new Vuetify({
+      mocks: {
+        $vuetify: {
+          lang: {
+            t: (val: string) => val,
+          },
+          rtl: false,
+          theme: {
+            dark: false,
+          },
+        },
+      },
+    })
+
     mountFunction = (options?: MountOptions<Instance>) => {
-      return mount(VForm, options)
+      return mount(VForm, {
+        vuetify,
+        ...options,
+      })
     }
   })
 
@@ -153,7 +173,7 @@ describe('VForm.ts', () => {
     expect(Object.keys(wrapper.vm.errorBag)).toHaveLength(1)
 
     wrapper.vm.reset()
-    await new Promise(resolve => setTimeout(resolve, 0))
+    await wait()
     expect(Object.keys(wrapper.vm.errorBag)).toHaveLength(0)
   })
 
@@ -243,5 +263,23 @@ describe('VForm.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(validate).toHaveBeenCalledTimes(2)
+  })
+
+  it('should disable all inputs', async () => {
+    const inputs = [VTextField]
+
+    const wrapper = mountFunction({
+      propsData: { disabled: true },
+      slots: { default: inputs },
+    })
+
+    await wrapper.vm.$nextTick()
+
+    let disabledInputs = 0
+    wrapper.vm.inputs.forEach(input => {
+      if (input.isDisabled) disabledInputs++
+    })
+
+    expect(disabledInputs).toBe(inputs.length)
   })
 })

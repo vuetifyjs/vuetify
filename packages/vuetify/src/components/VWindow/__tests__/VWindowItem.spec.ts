@@ -15,6 +15,7 @@ import {
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
+import { waitAnimationFrame } from '../../../../test'
 
 describe('VWindowItem.ts', () => {
   type Instance = InstanceType<typeof VWindowItem>
@@ -49,7 +50,7 @@ describe('VWindowItem.ts', () => {
       },
     })
 
-    await new Promise(resolve => window.requestAnimationFrame(resolve))
+    await waitAnimationFrame()
 
     const item = wrapper.find(VWindowItem.options)
     // Before enter
@@ -141,7 +142,7 @@ describe('VWindowItem.ts', () => {
     expect(heightChanged).toHaveBeenCalledTimes(1)
 
     item.vm.onEnter(wrapper.$el)
-    await new Promise(resolve => requestAnimationFrame(resolve))
+    await waitAnimationFrame()
     expect(wrapper.vm.isActive).toBeTruthy()
 
     expect(heightChanged).toHaveBeenCalledTimes(1)

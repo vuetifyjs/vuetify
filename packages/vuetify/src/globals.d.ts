@@ -41,6 +41,8 @@ declare global {
       circle?: boolean
       touched?: boolean
       isTouch?: boolean
+      showTimer?: number
+      showTimerCommit?: (() => void) | null
     }
     _observe?: {
       init: boolean
@@ -50,9 +52,9 @@ declare global {
       observer: MutationObserver
     }
     _onScroll?: {
-      callback: EventListenerOrEventListenerObject
+      handler: EventListenerOrEventListenerObject
       options: boolean | AddEventListenerOptions
-      target: EventTarget
+      target?: EventTarget
     }
     _touchHandlers?: {
       [_uid: number]: TouchStoredHandlers
@@ -61,6 +63,10 @@ declare global {
 
   interface WheelEvent {
     path?: EventTarget[]
+  }
+
+  interface UIEvent {
+    initUIEvent (typeArg: string, canBubbleArg: boolean, cancelableArg: boolean, viewArg: Window, detailArg: number): void
   }
 
   function parseInt(s: string | number, radix?: number): number
@@ -95,8 +101,8 @@ declare module 'vue/types/vue' {
   >
 
   export interface Vue {
-    _uid: number
-    _isDestroyed: boolean
+    readonly _uid: number
+    readonly _isDestroyed: boolean
 
     /** bindObjectProps */
     _b (

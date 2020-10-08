@@ -8,9 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Rader per sida:',
     ariaLabel: {
-      sortDescending: ': Sorterat fallande. Aktivera för att ta bort sortering.',
-      sortAscending: ': Sorterat stigande. Aktivera för sortering fallande.',
-      sortNone: ': Osorterat. Aktivera för sortering stigande.',
+      sortDescending: 'Sorterat fallande.',
+      sortAscending: 'Sorterat stigande.',
+      sortNone: 'Osorterat.',
+      activateNone: 'Aktivera för att ta bort sortering.',
+      activateDescending: 'Aktivera för sortering fallande.',
+      activateAscending: 'Aktivera för sortering stigande.',
     },
     sortBy: 'Sortera efter',
   },
@@ -25,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} markerade',
+    nextMonthAriaLabel: 'Nästa månad',
+    nextYearAriaLabel: 'Nästa år',
+    prevMonthAriaLabel: 'Förra månaden',
+    prevYearAriaLabel: 'Förra året',
   },
   noDataText: 'Ingen data tillgänglig',
   carousel: {
@@ -44,5 +51,14 @@ export default {
   timePicker: {
     am: 'AM',
     pm: 'PM',
+  },
+  pagination: {
+    ariaLabel: {
+      wrapper: 'Pagination Navigation',
+      next: 'Nästa sida',
+      previous: 'Föregående sida',
+      page: 'Gå till sidan {0}',
+      currentPage: 'Aktuell sida, sida {0}',
+    },
   },
 }

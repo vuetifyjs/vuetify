@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VToolbar.ts should render an extended toolbar 1`] = `
-<header class="v-sheet v-sheet--tile theme--light v-toolbar v-toolbar--extended"
+<header class="v-sheet theme--light v-toolbar v-toolbar--extended"
         style="height: 112px;"
 >
   <div class="v-toolbar__content"
@@ -16,7 +16,7 @@ exports[`VToolbar.ts should render an extended toolbar 1`] = `
 `;
 
 exports[`VToolbar.ts should render an extended toolbar with specific height 1`] = `
-<header class="v-sheet v-sheet--tile theme--light v-toolbar v-toolbar--extended"
+<header class="v-sheet theme--light v-toolbar v-toolbar--extended"
         style="height: 106px;"
 >
   <div class="v-toolbar__content"

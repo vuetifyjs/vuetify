@@ -1,7 +1,10 @@
 @import '../../styles/styles.sass';
 
+$footer-border-radius: 0 !default;
+$footer-elevation: 0 !default;
 $footer-padding: 6px 16px !default;
 $footer-padless-padding: 0px !default;
+$footer-shaped-border-radius: map-get($rounded, 'xl') $footer-border-radius !default;
 $footer-transition-duration: 0.2s !default;
 $footer-transition-property: background-color, left, right !default;
 $footer-transition-timing-function: map-get($transition, 'fast-out-slow-in') !default;

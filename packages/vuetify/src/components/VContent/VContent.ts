@@ -1,51 +1,25 @@
-// Styles
-import './VContent.sass'
-
-// Mixins
-import SSRBootable from '../../mixins/ssr-bootable'
-
 // Types
 import { VNode } from 'vue'
 
+// Extensions
+import VMain from '../VMain/VMain'
+import { deprecate } from '../../util/console'
+
 /* @vue/component */
-export default SSRBootable.extend({
-  name: 'v-content',
+export default VMain.extend({
+  name: 'v-main',
 
-  props: {
-    tag: {
-      type: String,
-      default: 'main',
-    },
-  },
-
-  computed: {
-    styles (): object {
-      const {
-        bar, top, right, footer, insetFooter, bottom, left,
-      } = this.$vuetify.application
-
-      return {
-        paddingTop: `${top + bar}px`,
-        paddingRight: `${right}px`,
-        paddingBottom: `${footer + insetFooter + bottom}px`,
-        paddingLeft: `${left}px`,
-      }
-    },
+  created () {
+    deprecate('v-content', 'v-main', this)
   },
 
   render (h): VNode {
-    const data = {
-      staticClass: 'v-content',
-      style: this.styles,
-      ref: 'content',
-    }
+    // Add the legacy class names
+    const node = VMain.options.render.call(this, h)
 
-    return h(this.tag, data, [
-      h(
-        'div',
-        { staticClass: 'v-content__wrap' },
-        this.$slots.default
-      ),
-    ])
+    node.data!.staticClass += ' v-content'
+    node.children![0]!.data!.staticClass += ' v-content__wrap'
+
+    return h(node.tag, node.data, node.children)
   },
 })

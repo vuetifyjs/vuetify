@@ -1,4 +1,0 @@
-{
-  "heading": "Información general",
-  "headingText": "Al ser un framework de componentes, Vuetify siempre crecerá horizontalmente. Dependiendo de tu proyecto, un **tamaño de paquete** pequeño podría ser un requerimiento. El sistema A la carta te permite escoger cuáles componentes importar, lo que _reduce_ drásticamente el tamaño de tu proyecto una vez compilado. **Si ya tienes la plantilla `a-la-carte` instalada, puedes ir directo a la [guía](/guides/a-la-carte#application)**."
-}

@@ -8,6 +8,9 @@ import { VFadeTransition } from '../transitions'
 // Extensions
 import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
+// Mixins
+import Mobile from '../../mixins/mobile'
+
 // Directives
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
@@ -38,10 +41,14 @@ interface options extends Vue {
 
 export const BaseSlideGroup = mixins<options &
 /* eslint-disable indent */
-  ExtractVue<typeof BaseItemGroup>
+  ExtractVue<[
+    typeof BaseItemGroup,
+    typeof Mobile,
+  ]>
 /* eslint-enable indent */
 >(
-  BaseItemGroup
+  BaseItemGroup,
+  Mobile,
   /* @vue/component */
 ).extend({
   name: 'base-slide-group',
@@ -61,16 +68,20 @@ export const BaseSlideGroup = mixins<options &
       type: String,
       default: '$next',
     },
-    mobileBreakPoint: {
-      type: [Number, String],
-      default: 1264,
-      validator: (v: any) => !isNaN(parseInt(v)),
-    },
     prevIcon: {
       type: String,
       default: '$prev',
     },
-    showArrows: Boolean,
+    showArrows: {
+      type: [Boolean, String],
+      validator: v => (
+        typeof v === 'boolean' || [
+          'always',
+          'desktop',
+          'mobile',
+        ].includes(v)
+      ),
+    },
   },
 
   data: () => ({
@@ -101,10 +112,31 @@ export const BaseSlideGroup = mixins<options &
       }
     },
     hasAffixes (): Boolean {
-      return (
-        (this.showArrows || !this.isMobile) &&
-        this.isOverflowing
-      )
+      switch (this.showArrows) {
+        // Always show arrows on desktop & mobile
+        case 'always': return true
+
+        // Always show arrows on desktop
+        case 'desktop': return !this.isMobile
+
+        // Show arrows on mobile when overflowing.
+        // This matches the default 2.2 behavior
+        case true: return this.isOverflowing
+
+        // Always show on mobile
+        case 'mobile': return (
+          this.isMobile ||
+          this.isOverflowing
+        )
+
+        // https://material.io/components/tabs#scrollable-tabs
+        // Always show arrows when
+        // overflowed on desktop
+        default: return (
+          !this.isMobile &&
+          this.isOverflowing
+        )
+      }
     },
     hasNext (): boolean {
       if (!this.hasAffixes) return false
@@ -116,9 +148,6 @@ export const BaseSlideGroup = mixins<options &
     },
     hasPrev (): boolean {
       return this.hasAffixes && this.scrollOffset !== 0
-    },
-    isMobile (): boolean {
-      return this.$vuetify.breakpoint.width < this.mobileBreakPoint
     },
   },
 
@@ -143,9 +172,8 @@ export const BaseSlideGroup = mixins<options &
   },
 
   methods: {
+    // Always generate next for scrollable hint
     genNext (): VNode | null {
-      if (!this.hasAffixes) return null
-
       const slot = this.$scopedSlots.next
         ? this.$scopedSlots.next({})
         : this.$slots.next || this.__cachedNext
@@ -327,9 +355,9 @@ export const BaseSlideGroup = mixins<options &
       const itemOffset = clientWidth + offsetLeft
       const additionalOffset = clientWidth * 0.4
 
-      if (offsetLeft < currentScrollOffset) {
+      if (offsetLeft <= currentScrollOffset) {
         currentScrollOffset = Math.max(offsetLeft - additionalOffset, 0)
-      } else if (totalWidth < itemOffset) {
+      } else if (totalWidth <= itemOffset) {
         currentScrollOffset = Math.min(currentScrollOffset - (totalWidth - itemOffset - additionalOffset), widths.content - widths.wrapper)
       }
 

@@ -1,7 +1,0 @@
-<!-- Vue Component -->
-
-<template>
-  <v-dialog :fullscreen="$vuetify.breakpoint.xsOnly">
-    ...
-  </v-dialog>
-</template>
