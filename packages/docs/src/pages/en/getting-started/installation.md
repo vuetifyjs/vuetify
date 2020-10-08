@@ -37,6 +37,12 @@ Now that you have an instantiated project, you can add the Vuetify [Vue CLI pack
 vue add vuetify
 ```
 
+<alert type="warning">
+
+  This command will make changes to your `App.vue`, components folder, vue.config.js, etc. If you are adding vuetify to an existing project, please make sure you  commit your code to avoid any data loss. Please refer to the `Webpack Install` section to install in existing projects.
+
+</alert>
+
 ### Vue UI install
 
 Vuetify can also be installed using **Vue UI**, the new visual application for Vue CLI. Ensure that you have the latest version of Vue CLI installed, then from your terminal type:
