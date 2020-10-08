@@ -6,7 +6,7 @@ meta:
 nav: Security disclosure
 related:
   - /introduction/long-term-support/
-  - /introduction/consulting/
+  - /introduction/support/
   - /introduction/enterprise/
 ---
 

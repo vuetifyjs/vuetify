@@ -1,5 +1,5 @@
 <template>
-  <v-row id="consulting-calendar">
+  <v-row id="acuity-calendar">
     <v-col cols="12">
       <v-lazy>
         <iframe
@@ -20,5 +20,5 @@
 </template>
 
 <script>
-  export default { name: 'ConsultingCalendar' }
+  export default { name: 'AcuityCalendar' }
 </script>
