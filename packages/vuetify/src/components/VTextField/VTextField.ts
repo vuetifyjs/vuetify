@@ -196,7 +196,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   watch: {
-    labelValue: 'setLabelWidth',
+    // labelValue: 'setLabelWidth', // moved to mounted, see #11533
     outlined: 'setLabelWidth',
     label () {
       this.$nextTick(this.setLabelWidth)
@@ -228,6 +228,9 @@ export default baseMixins.extend<options>().extend({
   },
 
   mounted () {
+    // #11533
+    this.$watch(() => this.labelValue, this.setLabelWidth)
+
     this.autofocus && this.tryAutofocus()
 
     requestAnimationFrame(() => (this.isBooted = true))
