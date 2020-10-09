@@ -37,5 +37,11 @@ module.exports = {
         },
       },
     ],
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
   },
 }
