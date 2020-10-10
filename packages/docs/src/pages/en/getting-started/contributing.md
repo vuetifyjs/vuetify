@@ -173,7 +173,7 @@ Commit your changes following [our guidelines](#commit-guidelines), then push th
 
 ## Working with GitHub
 
-Vuetify's repository lives on [GitHub] and is the primary location for all development related information. In addition, we have a public Notion board with a detailed overview of our development process and status for [Vuetify 3](https://notion.vuetifyjs.com). These tools enable the [Core Team] to efficiently manage a large scale OSS project while also providing complete transparency of its progress with framework maintenance and development.
+Vuetify's repository lives on [GitHub](https://github.com/vuetifyjs/vuetify) and is the primary location for all development related information. In addition, we have a public Notion board with a detailed overview of our development process and status for [Vuetify 3](https://notion.vuetifyjs.com). These tools enable the [Core Team] to efficiently manage a large scale OSS project while also providing complete transparency of its progress with framework maintenance and development.
 
 Some of the more notable links within these services include:
 
@@ -202,7 +202,12 @@ The [Issues] board makes heavy use of GitHub's label system with some light auto
 
 #### For Docs - Language
 
-We **do not** accept PRs for any doc changes pertaining to languages other than `en`. All changes for languages other than `en` are to be submitted through our Crowdin project. To get started simply select `Help Translate` in the language drop down of the docs. Languages will not be added until they have at least 15% of their translations completed.
+We **do not** accept PRs for any documentation changes pertaining to languages other than `en`. All changes for languages other than `en` are to be submitted through our [Crowdin project](https://crowdin.com/project/vuetify). You can help translate in one of 2 ways:
+
+- Using in-context translation service directly through the documentation site. To get started simply select `Help Translate` in the language drop down in the docs.
+- Directly through the [Crowdin project](https://crowdin.com/project/vuetify).
+
+**Note**: Languages will not be added to the language drop down on the docs site until they have at least 50% of their translations completed.
 
 ### Requesting new features
 
