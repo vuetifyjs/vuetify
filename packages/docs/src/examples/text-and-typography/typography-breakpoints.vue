@@ -13,7 +13,7 @@
         <template v-slot="{ active, toggle }">
           <v-hover v-slot:default="{ hover }">
             <div
-              :class="[(active || hover) ? 'text--primary' : 'text--secondary', hover ? 'elevation-1' : '']"
+              :class="[(active || hover) ? 'text--primary' : 'text--secondary']"
               class="ma-3 text-center"
               style="cursor: pointer"
               @click="toggle"

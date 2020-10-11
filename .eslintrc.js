@@ -60,6 +60,10 @@ module.exports = {
     }],
     'no-prototype-builtins': 'off',
 
+    // TODO: remove when eslint >=7.5
+    // https://github.com/eslint/eslint/issues/13637
+    'no-unused-expressions': 'off',
+
     // Not in override, these apply to non-.vue files too
     'vue/name-property-casing': 'off',
     'vue/require-default-prop': 'off',

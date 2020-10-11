@@ -14,6 +14,7 @@ import Loadable from '../../mixins/loadable'
 import Validatable from '../../mixins/validatable'
 
 // Directives
+import resize from '../../directives/resize'
 import ripple from '../../directives/ripple'
 
 // Utilities
@@ -28,9 +29,7 @@ const baseMixins = mixins(
   VInput,
   Intersectable({
     onVisible: [
-      'setLabelWidth',
-      'setPrefixWidth',
-      'setPrependWidth',
+      'onResize',
       'tryAutofocus',
     ],
   }),
@@ -52,7 +51,10 @@ const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', '
 export default baseMixins.extend<options>().extend({
   name: 'v-text-field',
 
-  directives: { ripple },
+  directives: {
+    resize,
+    ripple,
+  },
 
   inheritAttrs: false,
 
@@ -194,7 +196,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   watch: {
-    labelValue: 'setLabelWidth',
+    // labelValue: 'setLabelWidth', // moved to mounted, see #11533
     outlined: 'setLabelWidth',
     label () {
       this.$nextTick(this.setLabelWidth)
@@ -226,10 +228,11 @@ export default baseMixins.extend<options>().extend({
   },
 
   mounted () {
+    // #11533
+    this.$watch(() => this.labelValue, this.setLabelWidth)
+
     this.autofocus && this.tryAutofocus()
-    this.setLabelWidth()
-    this.setPrefixWidth()
-    this.setPrependWidth()
+
     requestAnimationFrame(() => (this.isBooted = true))
   },
 
@@ -396,6 +399,11 @@ export default baseMixins.extend<options>().extend({
           keydown: this.onKeyDown,
         }),
         ref: 'input',
+        directives: [{
+          name: 'resize',
+          modifiers: { quiet: true },
+          value: this.onResize,
+        }],
       })
     },
     genMessages () {
@@ -510,6 +518,11 @@ export default baseMixins.extend<options>().extend({
       } else if (this.initialValue !== this.lazyValue) {
         this.$emit('change', this.lazyValue)
       }
+    },
+    onResize () {
+      this.setLabelWidth()
+      this.setPrefixWidth()
+      this.setPrependWidth()
     },
   },
 })

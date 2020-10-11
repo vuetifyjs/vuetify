@@ -1,0 +1,12 @@
+{
+  "props": {
+    "button": "Deprecated - Pending removal",
+    "fill": "Sets the fill color of the circle",
+    "indeterminate": "Constantly animates, use when loading progress is unknown.",
+    "query": "Animates like **indeterminate** prop but inverse",
+    "rotate": "Rotates the circle start point in deg",
+    "size": "Sets the diameter of the circle in pixels",
+    "value": "The percentage value for current progress",
+    "width": "Sets the stroke of the circle in pixels"
+  }
+}

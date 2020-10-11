@@ -1,0 +1,62 @@
+// TODO: remove in v2.3.8
+.v-card::before
+  border-radius: inherit !important
+
+.text-mono
+  font-family: monospace
+
+.markdown-body
+  a:not(:hover)
+    text-decoration: none
+
+  > section section
+    margin-bottom: 3rem
+
+h1
+  + p
+    font-size: 1.25rem
+    font-weight: 300
+
+ul, ol
+  margin-bottom: .5rem
+
+// Helpers
+.flex-1-1-auto
+  flex: 1 1 auto !important
+
+.flex-1-0-auto
+  flex: 1 0 auto !important
+
+.flex-0-1-auto
+  flex: 0 1 auto !important
+
+.flex-0-0-auto
+  flex: 0 0 auto !important
+
+.flex-1-1-100
+  flex: 1 1 100% !important
+
+.position-relative
+  position: relative !important
+
+.cursor-pointer
+  cursor: pointer
+
+.overflow-y-scroll
+  overflow-y: scroll
+
+.theme--light,
+.theme--dark
+  .v-bar--underline
+    border-width: 0 0 thin 0
+    border-style: solid
+
+    &.theme--light
+      border-bottom-color: #0000001F !important
+
+    &.theme--dark
+      border-bottom-color: #FFFFFF1F !important
+
+.v-application.theme--dark code
+  background: #1f1f1f
+  color: #d16f72

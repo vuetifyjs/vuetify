@@ -11,7 +11,7 @@
       "dom",
       "dom.iterable"
     ],
-    "allowJs": true,                          /* Allow javascript files to be compiled. */
+    "allowJs": false,                         /* Allow javascript files to be compiled. */
     // "checkJs": true,                       /* Report errors in .js files. */
     // "jsx": "preserve",                     /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
     // "declaration": true,                   /* Generates corresponding '.d.ts' file. */
