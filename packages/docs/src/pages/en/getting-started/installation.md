@@ -39,7 +39,7 @@ vue add vuetify
 
 <alert type="warning">
 
-  This command will make changes to your `App.vue`, components folder, vue.config.js, etc. If you are adding vuetify to an existing project, please make sure you  commit your code to avoid any data loss. Please refer to the `Webpack Install` section to install in existing projects.
+  This command will make changes to your project template files, components folder, vue.config.js, etc. If you are installing Vuetify via Vue-CLI, make sure you commit your code to avoid any potential data loss. Template changes can be skipped by selecting the advanced install option during install.
 
 </alert>
 
