@@ -55,7 +55,7 @@
           'multiple',
           'persistent-hint',
           'small-chips',
-        ]
+        ],
       },
       tabs: ['dense', 'filled', 'outlined', 'solo'],
     }),
