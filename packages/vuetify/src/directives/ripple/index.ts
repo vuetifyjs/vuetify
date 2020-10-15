@@ -29,8 +29,8 @@ export interface RippleOptions {
   circle?: boolean
 }
 
-interface RippleDirectiveBinding extends Omit<DirectiveBinding, 'modifiers'> {
-  value: boolean | { class: string }
+interface RippleDirectiveBinding extends Omit<DirectiveBinding, 'modifiers' | 'value'> {
+  value?: boolean | { class: string }
   modifiers: {
     center?: boolean
     circle?: boolean
@@ -258,20 +258,21 @@ function keyboardRippleHide (e: KeyboardEvent) {
 
 function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnabled: boolean) {
   const { value, modifiers } = binding
+  const enabled = isRippleEnabled(value)
 
-  if (!value) {
+  if (!enabled) {
     ripples.hide(el)
   }
 
   el._ripple = el._ripple || {}
-  el._ripple.enabled = !!value
+  el._ripple.enabled = enabled
   el._ripple.centered = modifiers.center
   el._ripple.circle = modifiers.circle
   if (isObject(value) && value.class) {
     el._ripple.class = value.class
   }
 
-  if (value && !wasEnabled) {
+  if (enabled && !wasEnabled) {
     el.addEventListener('touchstart', rippleShow, { passive: true })
     el.addEventListener('touchend', rippleHide, { passive: true })
     el.addEventListener('touchmove', rippleCancelShow, { passive: true })
@@ -286,7 +287,7 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
 
     // Anchor tags can be dragged, causes other hides to fail - #1537
     el.addEventListener('dragstart', rippleHide, { passive: true })
-  } else if (!value && wasEnabled) {
+  } else if (!enabled && wasEnabled) {
     removeListeners(el)
   }
 }
