@@ -14,7 +14,8 @@ module.exports = merge(baseWebpackConfig, {
   output: {
     filename: '[name].js',
     path: resolve('../dev'),
-    library: 'Vuetify'
+    publicPath: '/',
+    library: 'Vuetify',
   },
   resolve: {
     alias: { vuetify$: resolve('../src/entry-bundler.ts') }
