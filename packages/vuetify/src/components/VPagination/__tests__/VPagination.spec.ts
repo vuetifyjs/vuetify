@@ -293,4 +293,20 @@ describe('VPagination.ts', () => {
 
     expect(wrapper.vm.items).toEqual([1, 2, 3, 4])
   })
+
+  it('render the links as <a> tags', async () => {
+    const linkFn = jest.fn(i => i)
+    const wrapper = mountFunction({
+      propsData: {
+        linkFn,
+        length: 5,
+        value: 2,
+      },
+    })
+    jest.runAllTimers()
+
+    await wrapper.vm.$nextTick()
+    expect(linkFn).toHaveBeenCalled()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

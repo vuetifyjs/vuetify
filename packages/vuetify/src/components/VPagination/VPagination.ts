@@ -34,6 +34,7 @@ export default mixins(
       default: 0,
       validator: (val: number) => val % 1 === 0,
     },
+    linkFn: Function,
     nextIcon: {
       type: String,
       default: '$next',
@@ -122,6 +123,10 @@ export default mixins(
         ]
       }
     },
+
+    isLink (): Boolean {
+      return !!this.linkFn
+    },
   },
 
   watch: {
@@ -150,12 +155,12 @@ export default mixins(
       this.maxButtons = Math.floor((width - 96) / 42)
     },
     next (e: Event) {
-      e.preventDefault()
+      !this.linkFn && e.preventDefault()
       this.$emit('input', this.value + 1)
       this.$emit('next')
     },
     previous (e: Event) {
-      e.preventDefault()
+      !this.linkFn && e.preventDefault()
       this.$emit('input', this.value - 1)
       this.$emit('previous')
     },
@@ -170,15 +175,16 @@ export default mixins(
 
       return range
     },
-    genIcon (h: CreateElement, icon: string, disabled: boolean, fn: EventListener, label: String): VNode {
+    genIcon (h: CreateElement, icon: string, disabled: boolean, fn: EventListener, nextValue: Number, label: String): VNode {
       return h('li', [
-        h('button', {
+        h(this.isLink ? 'a' : 'button', {
           staticClass: 'v-pagination__navigation',
           class: {
             'v-pagination__navigation--disabled': disabled,
           },
           attrs: {
-            type: 'button',
+            href: this.isLink ? this.linkFn(nextValue) : undefined,
+            type: !this.isLink ? 'button' : undefined,
             'aria-label': label,
           },
           on: disabled ? {} : { click: fn },
@@ -190,13 +196,14 @@ export default mixins(
       const isCurrentPage = i === this.value
       const ariaLabel = isCurrentPage ? this.currentPageAriaLabel : this.pageAriaLabel
 
-      return h('button', this.setBackgroundColor(color, {
+      return h(this.isLink ? 'a' : 'button', this.setBackgroundColor(color, {
         staticClass: 'v-pagination__item',
         class: {
           'v-pagination__item--active': i === this.value,
         },
         attrs: {
-          type: 'button',
+          href: this.isLink ? this.linkFn(i) : undefined,
+          type: !this.isLink ? 'button' : undefined,
           'aria-current': isCurrentPage,
           'aria-label': this.$vuetify.lang.t(ariaLabel, i),
         },
@@ -230,12 +237,14 @@ export default mixins(
         this.$vuetify.rtl ? this.nextIcon : this.prevIcon,
         this.value <= 1,
         this.previous,
+        this.value - 1,
         this.$vuetify.lang.t(this.previousAriaLabel)),
       this.genItems(h),
       this.genIcon(h,
         this.$vuetify.rtl ? this.prevIcon : this.nextIcon,
         this.value >= this.length,
         this.next,
+        this.value + 1,
         this.$vuetify.lang.t(this.nextAriaLabel)),
     ]
 
