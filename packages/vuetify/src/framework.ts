@@ -1,8 +1,8 @@
-import { wrapInArray } from '@util/helpers'
+import { wrapInArray } from './util/helpers'
 import { InjectionKey, inject, App, ExtractPropTypes, getCurrentInstance, Prop } from 'vue'
 
 type MakeFactoryFunctions<T> = {
-  [K in keyof T]: T[K] extends Array<infer E>
+  [K in keyof T]: T[K] extends (infer E)[]
     ? () => E[]
     : T[K] extends Function
       ? T[K]
