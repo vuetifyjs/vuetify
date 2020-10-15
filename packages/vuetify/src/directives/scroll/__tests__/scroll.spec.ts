@@ -10,7 +10,7 @@ import {
 import Scroll from '../'
 import { scrollWindow } from '../../../../test'
 
-describe('scroll.ts', () => {
+describe('v-scroll', () => {
   const el = document.createElement('div')
   const mountFunction = (value: EventListenerOrEventListenerObject, selector?: string): HTMLElement => {
     const Test = defineComponent(() => () => withDirectives(h('div', { class: 'test' }), [[Scroll, value, selector]]))
