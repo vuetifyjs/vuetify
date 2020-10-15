@@ -3,7 +3,7 @@ import ClickOutside from '../'
 import { wait } from '../../../../test'
 
 function bootstrap (args?: object) {
-  let registeredHandler
+  let registeredHandler: (...args: any[]) => void
   const el = document.createElement('div')
 
   const binding = {
@@ -14,11 +14,11 @@ function bootstrap (args?: object) {
   }
 
   jest.spyOn(window.document.body, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
-    registeredHandler = eventHandler
+    registeredHandler = eventHandler as () => void
   })
   jest.spyOn(window.document.body, 'removeEventListener')
 
-  ClickOutside.inserted(el as HTMLElement, binding as any)
+  ClickOutside.mounted(el as HTMLElement, binding as any)
 
   return {
     callback: binding.value.handler,
@@ -27,12 +27,12 @@ function bootstrap (args?: object) {
   }
 }
 
-describe('click-outside.js', () => {
+describe('v-click-outside', () => {
   it('should register and unregister handler', () => {
     const { registeredHandler, el } = bootstrap()
     expect(window.document.body.addEventListener).toHaveBeenCalledWith('click', registeredHandler, true)
 
-    ClickOutside.unbind(el)
+    ClickOutside.unmounted(el)
     expect(window.document.body.removeEventListener).toHaveBeenCalledWith('click', registeredHandler, true)
   })
 
