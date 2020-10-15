@@ -5,7 +5,7 @@ meta:
   keywords: Vue.js Jobs, Vue.js careers, Vue.js job search, work in Vue.js, Vuetify jobs for Vue
 related:
   - /introduction/why-vuetify/
-  - /introduction/consulting/
+  - /introduction/support/
   - /introduction/enterprise/
 nav: Jobs for Vue
 ---

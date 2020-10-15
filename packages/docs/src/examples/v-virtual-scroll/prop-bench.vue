@@ -39,7 +39,7 @@
 
             <v-list-item-content>
               <v-list-item-title>
-                User Database Record <strong>ID {{ }}</strong>
+                User Database Record <strong>ID {{ item }}</strong>
               </v-list-item-title>
             </v-list-item-content>
 

@@ -6,7 +6,7 @@ meta:
 nav: Roadmap
 related:
   - /introduction/long-term-support/
-  - /introduction/consulting/
+  - /introduction/support/
   - /getting-started/frequently-asked-questions/
 ---
 

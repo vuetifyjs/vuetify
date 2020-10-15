@@ -188,7 +188,7 @@ const VIcon = mixins(
     ): VNode {
       const data: VNodeData = {
         class: {
-          'v-icon__svg': true,
+          'v-icon__component': true,
         },
       }
 

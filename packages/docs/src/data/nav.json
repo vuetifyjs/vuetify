@@ -6,7 +6,9 @@
       "why-vuetify",
       "long-term-support",
       "roadmap",
-      "consulting",
+      { "divider": true },
+      { "heading": "professional-support" },
+      "support",
       "enterprise"
     ]
   },

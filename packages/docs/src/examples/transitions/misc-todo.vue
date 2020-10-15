@@ -86,7 +86,7 @@
                 v-if="task.done"
                 color="success"
               >
-                check
+                mdi-check
               </v-icon>
             </v-scroll-x-transition>
           </v-list-item>
