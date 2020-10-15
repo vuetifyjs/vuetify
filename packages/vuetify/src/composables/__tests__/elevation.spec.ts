@@ -1,6 +1,6 @@
 // Effects
 import {
-  elevationProps,
+  makeElevationProps,
   ElevationProps,
   useElevationClasses,
 } from '../elevation'
@@ -19,24 +19,17 @@ describe('elevation.ts', () => {
     for (const [elevation, equal] of values) {
       const props = { elevation }
       const { elevationClasses } = useElevationClasses(props)
-      const expects = Object.keys(equal).length > 0 ? { class: equal } : equal
 
-      expect(elevationClasses.value).toEqual(expects)
+      expect(elevationClasses.value).toEqual(equal)
     }
 
     const { elevationClasses } = useElevationClasses({ flat: true })
 
-    expect(elevationClasses.value).toEqual({ class: { 'elevation-0': true } })
-  })
-
-  it('should generate and return elevation props', () => {
-    expect(elevationProps().elevation.default).toBeUndefined()
-    expect(elevationProps({ elevation: 2 }).elevation.default).toBe(2)
-    expect(elevationProps({ elevation: '22' }).elevation.default).toBe('22')
+    expect(elevationClasses.value).toEqual({ 'elevation-0': true })
   })
 
   it('should only allow numeric values between 0 and 24', () => {
-    const { elevation: { validator } } = elevationProps()
+    const { elevation: { validator } } = makeElevationProps()
     const validValues = [1, '24']
     const invalidValues = [-1, '25', false, true]
 
