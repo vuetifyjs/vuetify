@@ -235,7 +235,8 @@ export default baseMixins.extend({
       ) {
         // Find and focus the first available element inside the dialog
         const focusable = this.$refs.content.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
-        focusable.length && (focusable[0] as HTMLElement).focus()
+        const el = [...focusable].find(el => !el.hasAttribute('disabled')) as HTMLElement | undefined
+        el && el.focus()
       }
     },
     genContent () {
@@ -281,12 +282,12 @@ export default baseMixins.extend({
         directives: [
           {
             name: 'click-outside',
-            value: this.onClickOutside,
-            args: {
+            value: {
+              handler: this.onClickOutside,
               closeConditional: this.closeConditional,
               include: this.getOpenDependentElements,
             },
-          } as any,
+          },
           { name: 'show', value: this.isActive },
         ],
         style: {

@@ -6,6 +6,7 @@ import {
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
+import { waitAnimationFrame } from '../../../../test'
 
 describe('VTextField.ts', () => { // eslint-disable-line max-statements
   type Instance = InstanceType<typeof VTextField>
@@ -649,7 +650,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     // https://github.com/vuetifyjs/vuetify/issues/5913
     // Blur waits a requestAnimationFrame
     // to resolve a bug in MAC / Safari
-    await new Promise(resolve => window.requestAnimationFrame(resolve))
+    await waitAnimationFrame()
 
     expect(onBlur).toHaveBeenCalledTimes(1)
   })
@@ -856,5 +857,14 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     wrapper.vm.focus()
 
     expect(wrapper.vm.computedColor).toBe('primary')
+  })
+
+  it('should keep -0 in input when type is number', async () => {
+    const wrapper = mountFunction({
+      propsData: { type: 'number', value: -0 },
+    })
+
+    const input = wrapper.find('input')
+    expect(input.element.value).toBe('-0')
   })
 })

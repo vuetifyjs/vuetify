@@ -1,30 +1,45 @@
-import {
-  DirectiveBinding,
-  ObjectDirective,
-} from 'vue'
-import { passiveEventOptions } from '../../util/events'
+import { DirectiveBinding } from 'vue'
 
-interface ScrollDirectiveBinding extends DirectiveBinding {
-  arg?: string
-  value: EventListenerOrEventListenerObject
+interface ScrollDirectiveBinding extends Omit<DirectiveBinding, 'modifiers'> {
+  value: EventListener | {
+    handler: EventListener
+    options?: AddEventListenerOptions
+  } | EventListenerObject & { options?: AddEventListenerOptions }
+  modifiers?: {
+    self?: boolean
+  }
 }
 
 function mounted (el: HTMLElement, binding: ScrollDirectiveBinding) {
-  const callback = binding.value
-  const target = binding.arg ? document.querySelector(binding.arg) : window
+  const { self = false } = binding.modifiers || {}
+  const value = binding.value
+  const options = (typeof value === 'object' && value.options) || { passive: true }
+  const handler = typeof value === 'function' || 'handleEvent' in value ? value : value.handler
+
+  const target = self
+    ? el
+    : binding.arg
+      ? document.querySelector(binding.arg)
+      : window
 
   if (!target) return
 
-  target.addEventListener('scroll', callback, passiveEventOptions())
-  el._onScroll = { callback, target }
+  target.addEventListener('scroll', handler, options)
+
+  el._onScroll = {
+    handler,
+    options,
+    // Don't reference self
+    target: self ? undefined : target,
+  }
 }
 
 function unmounted (el: HTMLElement) {
   if (!el._onScroll) return
 
-  const { callback, target } = el._onScroll
+  const { handler, options, target = el } = el._onScroll
 
-  target.removeEventListener('scroll', callback, passiveEventOptions())
+  target.removeEventListener('scroll', handler, options)
   delete el._onScroll
 }
 
@@ -35,7 +50,7 @@ function updated (el: HTMLElement, binding: ScrollDirectiveBinding) {
   mounted(el, binding)
 }
 
-export const Scroll: ObjectDirective<HTMLElement> = {
+export const Scroll = {
   mounted,
   unmounted,
   updated,

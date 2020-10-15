@@ -1,0 +1,10 @@
+{
+  "props": {
+    "name": "Sets the component's name attribute",
+    "offIcon": "The icon used when inactive",
+    "onIcon": "The icon used when active"
+  },
+  "events": {
+    "change": "Emitted when the input is changed by user interaction"
+  }
+}

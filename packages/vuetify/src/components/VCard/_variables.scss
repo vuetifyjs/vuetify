@@ -13,7 +13,7 @@ $card-link-focus-opacity: 0.08 !default;
 $card-outlined-border-width: thin !default;
 $card-overflow-wrap: break-word !default;
 $card-raised-elevation: 8 !default;
-$card-shaped-border-radius: 24px !default;
+$card-shaped-border-radius: map-get($rounded, 'xl') $card-border-radius !default;
 $card-subtitle-padding: 16px !default;
 $card-text-font-size: map-deep-get($headings, 'subtitle-2', 'size') !default;
 $card-text-font-weight: 400 !default;

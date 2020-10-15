@@ -1,4 +1,8 @@
-import { VNodeDirective } from 'vue/types/vnode'
+// Types
+import {
+  DirectiveBinding,
+  ObjectDirective,
+} from 'vue'
 
 type ObserveHandler = (
   entries: IntersectionObserverEntry[],
@@ -6,20 +10,21 @@ type ObserveHandler = (
   isIntersecting: boolean,
 ) => void
 
-interface ObserveVNodeDirective extends Omit<VNodeDirective, 'modifiers'> {
-  value?: ObserveHandler | { handler: ObserveHandler, options?: IntersectionObserverInit }
-  modifiers?: {
+interface ObserveDirectiveBinding extends Omit<DirectiveBinding, 'modifiers'> {
+  value: ObserveHandler | { handler: ObserveHandler, options?: IntersectionObserverInit }
+  modifiers: {
     once?: boolean
     quiet?: boolean
   }
 }
 
-function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
+function mounted (el: HTMLElement, binding: ObserveDirectiveBinding) {
   const modifiers = binding.modifiers || {}
   const value = binding.value
   const { handler, options } = typeof value === 'object'
     ? value
     : { handler: value, options: {} }
+
   const observer = new IntersectionObserver((
     entries: IntersectionObserverEntry[] = [],
     observer: IntersectionObserver
@@ -42,7 +47,7 @@ function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
 
     // If has already been initted and
     // has the once modifier, unbind
-    if (el._observe.init && modifiers.once) unbind(el)
+    if (el._observe.init && modifiers.once) unmounted(el)
     // Otherwise, mark the observer as initted
     else (el._observe.init = true)
   }, options)
@@ -52,7 +57,7 @@ function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
   observer.observe(el)
 }
 
-function unbind (el: HTMLElement) {
+function unmounted (el: HTMLElement) {
   /* istanbul ignore if */
   if (!el._observe) return
 
@@ -60,9 +65,9 @@ function unbind (el: HTMLElement) {
   delete el._observe
 }
 
-export const Intersect = {
-  inserted,
-  unbind,
+export const Intersect: ObjectDirective<HTMLElement> = {
+  mounted,
+  unmounted,
 }
 
 export default Intersect

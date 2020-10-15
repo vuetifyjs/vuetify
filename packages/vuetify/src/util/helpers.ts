@@ -1,6 +1,6 @@
 import { VNode, VNodeDirective } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
-import { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'types'
+import { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
 
 export function createSimpleFunctional (
   c: string,
@@ -301,7 +301,7 @@ export function searchItems<T extends any = any> (items: T[], search: string): T
   search = search.toString().toLowerCase()
   if (search.trim() === '') return items
 
-  return items.filter(item => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
+  return items.filter((item: any) => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
 }
 
 /**
@@ -323,6 +323,17 @@ export function debounce (fn: Function, delay: number) {
   return (...args: any[]) => {
     clearTimeout(timeoutId)
     timeoutId = setTimeout(() => fn(...args), delay)
+  }
+}
+
+export function throttle<T extends (...args: any[]) => any> (fn: T, limit: number) {
+  let throttling = false
+  return (...args: Parameters<T>): void | ReturnType<T> => {
+    if (!throttling) {
+      throttling = true
+      setTimeout(() => throttling = false, limit)
+      return fn(...args)
+    }
   }
 }
 
@@ -407,4 +418,8 @@ export function mergeDeep (
   }
 
   return source
+}
+
+export function fillArray<T> (length: number, obj: T) {
+  return Array(length).fill(obj)
 }

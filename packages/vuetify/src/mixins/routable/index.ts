@@ -52,7 +52,7 @@ export default Vue.extend({
       return classes
     },
     computedRipple (): RippleOptions | boolean {
-      return this.ripple != null ? this.ripple : !this.disabled && this.isClickable
+      return this.ripple ?? (!this.disabled && this.isClickable)
     },
     isClickable (): boolean {
       if (this.disabled) return false

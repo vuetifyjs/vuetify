@@ -20,18 +20,19 @@ exports[`VImg.ts should display placeholders 1`] = `
 
 exports[`VImg.ts should display placeholders 2`] = `
 <div class="v-image v-responsive theme--light">
-  <div class="v-image__image v-image__image--preload v-image__image--cover"
-       style="background-image: url(lazy_src); background-position: center center;"
+  <div class="v-responsive__sizer"
+       style="padding-bottom: 56.25%;"
+  >
+  </div>
+  <div class="v-image__image v-image__image--cover"
+       style="background-image: url(full_src); background-position: center center;"
        name="fade-transition"
        mode="in-out"
   >
   </div>
-  <div class="v-image__placeholder">
-    <div>
-      loading...
-    </div>
-  </div>
-  <div class="v-responsive__content">
+  <div class="v-responsive__content"
+       style="width: 1600px;"
+  >
   </div>
 </div>
 `;
@@ -41,13 +42,19 @@ exports[`VImg.ts should have aria attributes 1`] = `
      role="img"
      class="v-image v-responsive theme--light"
 >
-  <div class="v-image__image v-image__image--preload v-image__image--cover"
-       style="background-position: center center;"
+  <div class="v-responsive__sizer"
+       style="padding-bottom: 56.25%;"
+  >
+  </div>
+  <div class="v-image__image v-image__image--cover"
+       style="background-image: url(LOAD_SUCCESS_SRC); background-position: center center;"
        name="fade-transition"
        mode="in-out"
   >
   </div>
-  <div class="v-responsive__content">
+  <div class="v-responsive__content"
+       style="width: 1600px;"
+  >
   </div>
 </div>
 `;
@@ -67,13 +74,19 @@ exports[`VImg.ts should load 1`] = `
 
 exports[`VImg.ts should load 2`] = `
 <div class="v-image v-responsive theme--light">
-  <div class="v-image__image v-image__image--preload v-image__image--cover"
-       style="background-position: center center;"
+  <div class="v-responsive__sizer"
+       style="padding-bottom: 56.25%;"
+  >
+  </div>
+  <div class="v-image__image v-image__image--cover"
+       style="background-image: url(LOAD_SUCCESS_SRC); background-position: center center;"
        name="fade-transition"
        mode="in-out"
   >
   </div>
-  <div class="v-responsive__content">
+  <div class="v-responsive__content"
+       style="width: 1600px;"
+  >
   </div>
 </div>
 `;
@@ -84,8 +97,8 @@ exports[`VImg.ts should override vuetify-loader values 1`] = `
        style="padding-bottom: 50%;"
   >
   </div>
-  <div class="v-image__image v-image__image--preload v-image__image--cover"
-       style="background-image: url(lazySrc_manual); background-position: center center;"
+  <div class="v-image__image v-image__image--cover"
+       style="background-image: url(LOAD_SUCCESS_SRC); background-position: center center;"
        name="fade-transition"
        mode="in-out"
   >
@@ -97,13 +110,19 @@ exports[`VImg.ts should override vuetify-loader values 1`] = `
 
 exports[`VImg.ts should update src 1`] = `
 <div class="v-image v-responsive theme--light">
-  <div class="v-image__image v-image__image--preload v-image__image--cover"
-       style="background-position: center center;"
+  <div class="v-responsive__sizer"
+       style="padding-bottom: 56.25%;"
+  >
+  </div>
+  <div class="v-image__image v-image__image--cover"
+       style="background-image: url(LOAD_SUCCESS_SRC); background-position: center center;"
        name="fade-transition"
        mode="in-out"
   >
   </div>
-  <div class="v-responsive__content">
+  <div class="v-responsive__content"
+       style="width: 1600px;"
+  >
   </div>
 </div>
 `;
@@ -165,13 +184,15 @@ exports[`VImg.ts should use vuetify-loader data 1`] = `
        style="padding-bottom: 100%;"
   >
   </div>
-  <div class="v-image__image v-image__image--preload v-image__image--cover"
-       style="background-image: url(lazySrc_auto); background-position: center center;"
+  <div class="v-image__image v-image__image--cover"
+       style="background-image: url(LOAD_SUCCESS_SRC); background-position: center center;"
        name="fade-transition"
        mode="in-out"
   >
   </div>
-  <div class="v-responsive__content">
+  <div class="v-responsive__content"
+       style="width: 1600px;"
+  >
   </div>
 </div>
 `;

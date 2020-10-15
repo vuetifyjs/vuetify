@@ -30,6 +30,7 @@ $material-dark: map-deep-merge(
     'calendar': (
       'background-color': #303030,
       'outside-background-color': #202020,
+      'weeknumber-background-color': #202020,
       'line-color': map-get($grey, 'base'),
       'interval-color': map-get($grey, 'lighten-3'),
       'interval-line-color': map-get($grey, 'darken-2'),
@@ -86,7 +87,7 @@ $material-dark: map-deep-merge(
       'disabled': rgba(map-get($shades, 'white'), 0.2),
       'discrete': map-get($shades, 'white')
     ),
-    'skeleton': linear-gradient(90deg, transparent, rgba(255, 255, 255, .05), transparent),
+    'skeleton': linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .05), rgba(255, 255, 255, 0)),
     'states': (
       'hover': 0.08,
       'focus': 0.24,

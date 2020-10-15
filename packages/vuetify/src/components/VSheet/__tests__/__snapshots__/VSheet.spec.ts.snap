@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSheet.ts should render a tile paper 1`] = `
-<div class="v-sheet v-sheet--tile theme--light">
+<div class="v-sheet theme--light rounded-0">
 </div>
 `;
 

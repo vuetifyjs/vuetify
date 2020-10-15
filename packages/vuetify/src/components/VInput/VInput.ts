@@ -21,11 +21,11 @@ import mergeData from '../../util/mergeData'
 // Types
 import { VNode, VNodeData, PropType } from 'vue'
 import mixins from '../../util/mixins'
-import { InputValidationRule } from 'types'
+import { InputValidationRule } from 'vuetify/types'
 
 const baseMixins = mixins(
   BindsAttrs,
-  Validatable
+  Validatable,
 )
 
 interface options extends InstanceType<typeof baseMixins> {
@@ -71,11 +71,11 @@ export default baseMixins.extend<options>().extend({
         'v-input--hide-details': !this.showDetails,
         'v-input--is-label-active': this.isLabelActive,
         'v-input--is-dirty': this.isDirty,
-        'v-input--is-disabled': this.disabled,
+        'v-input--is-disabled': this.isDisabled,
         'v-input--is-focused': this.isFocused,
         // <v-switch loading>.loading === '' so we can't just cast to boolean
         'v-input--is-loading': this.loading !== false && this.loading != null,
-        'v-input--is-readonly': this.readonly,
+        'v-input--is-readonly': this.isReadonly,
         'v-input--dense': this.dense,
         ...this.themeClasses,
       }
@@ -109,9 +109,6 @@ export default baseMixins.extend<options>().extend({
     },
     isDirty (): boolean {
       return !!this.lazyValue
-    },
-    isDisabled (): boolean {
-      return this.disabled || this.readonly
     },
     isLabelActive (): boolean {
       return this.isDirty
@@ -182,7 +179,7 @@ export default baseMixins.extend<options>().extend({
           'aria-label': hasListener ? kebabCase(type).split('-')[0] + ' icon' : undefined,
           color: this.validationState,
           dark: this.dark,
-          disabled: this.disabled,
+          disabled: this.isDisabled,
           light: this.light,
         },
         on: !hasListener
@@ -234,7 +231,7 @@ export default baseMixins.extend<options>().extend({
         props: {
           color: this.validationState,
           dark: this.dark,
-          disabled: this.disabled,
+          disabled: this.isDisabled,
           focused: this.hasState,
           for: this.computedId,
           light: this.light,

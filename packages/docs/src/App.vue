@@ -1,57 +1,57 @@
 <template>
-  <v-fade-transition mode="out-in">
+  <v-fade-transition appear>
     <router-view />
   </v-fade-transition>
 </template>
 
 <script>
-  // Mixins
-  import Meta from '@/mixins/meta'
-
   // Utilities
-  import { waitForReadystate } from '@/util/helpers'
+  import { call, get, sync } from 'vuex-pathify'
+  import { genAppMetaInfo } from '@/util/metadata'
+  import { wait, waitForReadystate } from '@/util/helpers'
+
+  // Data
+  import metadata from '@/data/metadata'
 
   export default {
     name: 'App',
 
-    mixins: [Meta],
+    metaInfo () {
+      const suffix = this.name !== 'Home' ? ' — Vuetify' : ''
 
-    watch: {
-      '$route.path' () {
-        typeof window !== 'undefined' && window.scrollTo(0, 0)
-      },
+      return {
+        ...genAppMetaInfo(metadata),
+        titleTemplate: chunk => `${chunk}${suffix}`,
+      }
     },
 
-    created () {
-      if (this.$ssrContext) return
-
-      this.$vuetify.theme.dark = localStorage.getItem('vuetify__documentation__theme') === 'true'
+    computed: {
+      ...get('route', [
+        'hash',
+        'name',
+      ]),
+      scrolling: sync('app/scrolling'),
     },
 
     async mounted () {
-      if (!this.$route.hash) return
-
-      await this.$nextTick()
       await waitForReadystate()
+      await this.init()
 
-      this.$vuetify.goTo(this.$route.hash)
+      if (!this.hash) return
+
+      await wait(500)
+
+      this.scrolling = true
+
+      try {
+        await this.$vuetify.goTo(this.hash)
+      } catch (e) {
+        console.log(e)
+      }
+
+      this.scrolling = false
     },
+
+    methods: { init: call('app/init') },
   }
 </script>
-
-<style lang="sass">
-  .text-decoration-none
-    text-decoration: none
-
-  .wf-loading .material-icons
-    display: none
-
-  .v-application .markdown code
-    box-shadow: none
-    color: #c0341d
-    background-color: #fbe5e1
-
-  .v-application .markdown kbd > code
-    background: transparent
-    color: inherit
-</style>

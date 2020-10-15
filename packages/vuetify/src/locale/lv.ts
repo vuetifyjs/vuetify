@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} izvēlēts',
+    nextMonthAriaLabel: 'Nākammēnes',
+    nextYearAriaLabel: 'Nākamgad',
+    prevMonthAriaLabel: 'Iepriekšējais mēnesis',
+    prevYearAriaLabel: 'Iepriekšējais gads',
   },
   noDataText: 'Nav pieejamu datu',
   carousel: {

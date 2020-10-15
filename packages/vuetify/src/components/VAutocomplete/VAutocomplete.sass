@@ -7,6 +7,19 @@
   input
     align-self: center
 
+  // Overwrite v-text-fields
+  // minimum-width default
+  &.v-select.v-input--is-focused
+    input
+      min-width: $autocomplete-focused-input
+
+  // Chips force input to wrap
+  // so we remove height and
+  // padding until focused
+  &:not(.v-input--is-focused).v-select--chips input
+    max-height: 0
+    padding: 0
+
   &--is-selecting-index
     input
       opacity: 0

@@ -29,7 +29,13 @@ module.exports = {
     }],
     'max-statements': ['error', 24],
     'no-console': 'off',
-    'comma-dangle': ['error', 'always-multiline'],
+    'comma-dangle': ['error', {
+      arrays: 'always-multiline',
+      objects: 'always-multiline',
+      imports: 'always-multiline',
+      exports: 'always-multiline',
+      functions: 'only-multiline'
+    }],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-return-assign': 'off',
@@ -90,7 +96,7 @@ module.exports = {
 
         // 'vuetify/grid-unknown-attributes': 'error',
         // 'vuetify/no-legacy-grid': 'error',
-        'vuetify/no-deprecated-classes': 'error'
+        // 'vuetify/no-deprecated-classes': 'error'
       }
     },
     {

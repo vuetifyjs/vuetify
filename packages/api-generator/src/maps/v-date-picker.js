@@ -1,5 +1,11 @@
 module.exports = {
   'v-date-picker': {
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
     events: [
       {
         name: 'input',
@@ -14,20 +20,16 @@ module.exports = {
         value: 'string',
       },
       {
-        name: 'click:date',
+        name: '<domevent>:date',
         value: 'string',
       },
       {
-        name: 'click:month',
+        name: '<domevent>:month',
         value: 'string',
       },
       {
-        name: 'dblclick:date',
-        value: 'string',
-      },
-      {
-        name: 'dblclick:month',
-        value: 'string',
+        name: '<domevent>:year',
+        value: 'number',
       },
     ],
   },

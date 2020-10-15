@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VPicker.ts should render component with elevation and match snapshot 1`] = `
+<div class="v-picker v-card theme--light">
+  <div class="v-picker__title primary">
+    <span>
+      title
+    </span>
+  </div>
+  <div class="v-picker__body theme--light"
+       style="width: 290px;"
+  >
+    <span>
+      default
+    </span>
+  </div>
+</div>
+`;
+
 exports[`VPicker.ts should render component with title and match snapshot 1`] = `
 <div class="v-picker v-card theme--light">
   <div class="v-picker__title primary">
@@ -37,6 +54,23 @@ exports[`VPicker.ts should render dark component and match snapshot 1`] = `
     </span>
   </div>
   <div class="v-picker__body theme--dark"
+       style="width: 290px;"
+  >
+    <span>
+      default
+    </span>
+  </div>
+</div>
+`;
+
+exports[`VPicker.ts should render flat component and match snapshot 1`] = `
+<div class="v-picker v-card theme--light">
+  <div class="v-picker__title primary">
+    <span>
+      title
+    </span>
+  </div>
+  <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <span>
