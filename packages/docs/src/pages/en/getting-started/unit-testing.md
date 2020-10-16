@@ -39,7 +39,7 @@ This can vary between test runners. Make sure to reference the appropriate docum
 // tests/setup.js
 
 import Vue from 'vue'
-import Vuetify from 'vuetify'
+import Vuetify from 'lib/vuetify'
 
 Vue.use(Vuetify)
 ```
