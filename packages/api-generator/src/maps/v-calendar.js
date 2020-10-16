@@ -160,6 +160,46 @@ module.exports = {
         value: VTimestampWithTime,
       },
       {
+        name: 'click:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'contextmenu:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'mousedown:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'mousemove:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'mouseup:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'mouseenter:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'mouseleave:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'touchstart:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'touchmove:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'touchend:event',
+        value: VCalendarEventSlot,
+      },
+      {
         name: 'click:day-category',
         value: VTimestampWithCategory,
       },
