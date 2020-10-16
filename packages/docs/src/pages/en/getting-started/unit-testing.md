@@ -39,7 +39,7 @@ This can vary between test runners. Make sure to reference the appropriate docum
 // tests/setup.js
 
 import Vue from 'vue'
-import Vuetify from 'lib/vuetify'
+import Vuetify from 'vuetify/lib'
 
 Vue.use(Vuetify)
 ```
@@ -57,7 +57,7 @@ Creating unit tests in Vuetify are similar to **vuex** and **vue-router** in tha
 ```js
 // Imports
 import AppBtn from '../AppBtn.vue'
-import Vuetify from 'vuetify'
+import Vuetify from 'vuetify/lib'
 
 // Utilities
 import { createLocalVue, mount } from '@vue/test-utils'
@@ -133,7 +133,7 @@ In the example above we have created a custom component with a **title** prop an
 
 // Libraries
 import Vue from 'vue'
-import Vuetify from 'vuetify'
+import Vuetify from 'vuetify/lib'
 
 // Components
 import CustomCard from '@/components/CustomCard'
@@ -242,7 +242,7 @@ Many of Vuetify's components utilize the global `$vuetify` object to derive sett
 
 // Libraries
 import Vue from 'vue'
-import Vuetify from 'vuetify'
+import Vuetify from 'vuetify/lib'
 
 // Components
 import CustomAlert from '@/components/CustomAlert'
@@ -285,7 +285,7 @@ Keep in mind, you **only need to stub** the services that are being used. such a
 
 // Libraries
 import Vue from 'vue'
-import Vuetify from 'vuetify'
+import Vuetify from 'vuetify/lib'
 
 // Components
 import CustomNavigationDrawer from '@/components/CustomNavigationDrawer'
