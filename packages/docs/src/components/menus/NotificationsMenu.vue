@@ -195,7 +195,7 @@
         sort: '-created_at',
         query: {
           created_at: {
-            $gt: Math.ceil(subDays(Date.now(), 60).getTime()),
+            $gt: subDays(Date.now(), 60).toISOString().slice(0, 10),
           },
         },
       })
