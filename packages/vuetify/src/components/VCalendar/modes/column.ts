@@ -3,7 +3,7 @@ import { getOverlapGroupHandler } from './common'
 
 const FULL_WIDTH = 100
 
-export const column: CalendarEventOverlapMode = (events, firstWeekday, overlapThreshold) => {
+export const column: CalendarEventOverlapMode = (events, firstWeekday) => {
   const handler = getOverlapGroupHandler(firstWeekday)
 
   return (day, dayEvents, timed, reset) => {

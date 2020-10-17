@@ -233,7 +233,7 @@ export default mixins(
 
       return getSlot(this, 'caption', props, true)
     },
-    genColgroup (props: DataScopeProps) {
+    genColgroup () {
       return this.$createElement('colgroup', this.computedHeaders.map(header => {
         return this.$createElement('col', {
           class: {
@@ -303,7 +303,7 @@ export default mixins(
 
       return props.groupedItems
         ? this.genGroupedRows(props.groupedItems, props)
-        : this.genRows(items, props)
+        : this.genRows(items)
     },
     genGroupedRows (groupedItems: ItemGroup<any>[], props: DataScopeProps) {
       return groupedItems.map(group => {
@@ -324,7 +324,7 @@ export default mixins(
     genDefaultGroupedRow (group: string, items: any[], props: DataScopeProps) {
       const isOpen = !!this.openCache[group]
       const children: VNodeChildren = [
-        this.$createElement('template', { slot: 'row.content' }, this.genRows(items, props)),
+        this.$createElement('template', { slot: 'row.content' }, this.genRows(items)),
       ]
       const toggleFn = () => this.$set(this.openCache, group, !this.openCache[group])
       const removeFn = () => props.updateOptions({ groupBy: [], groupDesc: [] })
@@ -377,10 +377,10 @@ export default mixins(
         },
       }, children)
     },
-    genRows (items: any[], props: DataScopeProps) {
-      return this.$scopedSlots.item ? this.genScopedRows(items, props) : this.genDefaultRows(items, props)
+    genRows (items: any[]) {
+      return this.$scopedSlots.item ? this.genScopedRows(items) : this.genDefaultRows(items)
     },
-    genScopedRows (items: any[], props: DataScopeProps) {
+    genScopedRows (items: any[]) {
       const rows = []
 
       for (let i = 0; i < items.length; i++) {
@@ -397,7 +397,7 @@ export default mixins(
 
       return rows
     },
-    genDefaultRows (items: any[], props: DataScopeProps) {
+    genDefaultRows (items: any[]) {
       return this.$scopedSlots['expanded-item']
         ? items.map(item => this.genDefaultExpandedRow(item))
         : items.map(item => this.genDefaultSimpleRow(item))
@@ -557,7 +557,7 @@ export default mixins(
       }, [
         this.proxySlot('top', getSlot(this, 'top', props, true)),
         this.genCaption(props),
-        this.genColgroup(props),
+        this.genColgroup(),
         this.genHeaders(props),
         this.genBody(props),
         this.proxySlot('bottom', this.genFooters(props)),

@@ -71,7 +71,7 @@ export default mixins(
       get (): boolean {
         return this.selecting === SelectingTimes.Hour
       },
-      set (v: boolean) {
+      set () {
         this.selecting = SelectingTimes.Hour
       },
     },
@@ -79,7 +79,7 @@ export default mixins(
       get (): boolean {
         return this.selecting === SelectingTimes.Minute
       },
-      set (v: boolean) {
+      set () {
         this.selecting = SelectingTimes.Minute
       },
     },
@@ -87,7 +87,7 @@ export default mixins(
       get (): boolean {
         return this.selecting === SelectingTimes.Second
       },
-      set (v: boolean) {
+      set () {
         this.selecting = SelectingTimes.Second
       },
     },

@@ -88,7 +88,7 @@ export default CalendarBase.extend({
       const isFirst: boolean = first.hour === interval.hour && first.minute === interval.minute
       return !isFirst
     },
-    intervalStyleDefault (_interval: CalendarTimestamp): object | undefined {
+    intervalStyleDefault (): object | undefined {
       return undefined
     },
     getTimestampAtEvent (e: MouseEvent | TouchEvent, day: CalendarTimestamp): CalendarTimestamp {

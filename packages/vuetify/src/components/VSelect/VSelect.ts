@@ -274,8 +274,8 @@ export default baseMixins.extend<options>().extend({
 
   methods: {
     /** @public */
-    blur (e?: Event) {
-      VTextField.options.methods.blur.call(this, e)
+    blur () {
+      VTextField.options.methods.blur.call(this)
       this.isMenuActive = false
       this.isFocused = false
       this.selectedIndex = -1
@@ -758,7 +758,7 @@ export default baseMixins.extend<options>().extend({
         // If we make it here,
         // the user has no selected indexes
         // and is probably tabbing out
-        this.blur(e)
+        this.blur()
       }
     },
     onUpDown (e: KeyboardEvent) {

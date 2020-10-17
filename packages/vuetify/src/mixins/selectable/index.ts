@@ -166,6 +166,7 @@ export default mixins(
       this.isFocused = true
     },
     /** @abstract */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onKeydown (e: Event) {},
   },
 })

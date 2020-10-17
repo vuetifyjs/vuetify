@@ -357,7 +357,7 @@ export default VSelect.extend({
       // proper location
       this.changeSelectedIndex(keyCode)
     },
-    onSpaceDown (e: KeyboardEvent) { /* noop */ },
+    onSpaceDown () { /* noop */ },
     onTabDown (e: KeyboardEvent) {
       VSelect.options.methods.onTabDown.call(this, e)
       this.updateSelf()

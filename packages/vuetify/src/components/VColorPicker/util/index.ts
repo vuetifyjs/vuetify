@@ -128,6 +128,7 @@ export function parseColor (color: any, oldColor: VColorPickerColor | null) {
 
 function stripAlpha (color: any, stripAlpha: boolean) {
   if (stripAlpha) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { a, ...rest } = color
 
     return rest

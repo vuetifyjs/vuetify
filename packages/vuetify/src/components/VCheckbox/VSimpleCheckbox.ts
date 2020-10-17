@@ -46,7 +46,7 @@ export default Vue.extend({
     },
   },
 
-  render (h, { props, data, listeners }): VNode {
+  render (h, { props, data }): VNode {
     const children = []
 
     if (props.ripple && !props.disabled) {

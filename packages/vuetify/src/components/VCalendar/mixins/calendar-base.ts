@@ -79,7 +79,7 @@ export default mixins(
 
       return createNativeLocaleFormatter(
         this.currentLocale,
-        (_tms, _short) => options
+        () => options
       )
     },
     weekdayFormatter (): CalendarFormatter {
@@ -115,7 +115,7 @@ export default mixins(
     getFormatter (options: object): CalendarFormatter {
       return createNativeLocaleFormatter(
         this.locale,
-        (_tms, _short) => options
+        () => options
       )
     },
   },

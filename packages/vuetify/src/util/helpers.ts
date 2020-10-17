@@ -260,6 +260,7 @@ export function upperFirst (str: string): string {
 export function groupItems<T extends any = any> (
   items: T[],
   groupBy: string[],
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   groupDesc: boolean[]
 ): ItemGroup<T>[] {
   const key = groupBy[0]
@@ -328,6 +329,7 @@ export function sortItems<T extends any = any> (
   })
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function defaultFilter (value: any, search: string | null, item: any) {
   return value != null &&
     search != null &&

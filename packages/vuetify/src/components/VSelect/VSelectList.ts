@@ -181,7 +181,7 @@ export default mixins(Colorable, Themeable).extend({
           this.action && !this.hideSelected && this.items.length > 0
             ? this.genAction(item, value)
             : null,
-          this.genTileContent(item, index),
+          this.genTileContent(item),
         ])
       }
 
@@ -200,7 +200,7 @@ export default mixins(Colorable, Themeable).extend({
         ? this.$createElement(VListItem, tile, scopedSlot)
         : scopedSlot
     },
-    genTileContent (item: any, index = 0): VNode {
+    genTileContent (item: any): VNode {
       const innerHTML = this.genFilteredText(this.getText(item))
 
       return this.$createElement(VListItemContent,

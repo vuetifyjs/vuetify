@@ -57,7 +57,7 @@ export default VCalendarDaily.extend({
     genDayHeaderCategory (day: CalendarTimestamp, scope: any): VNode {
       return this.$createElement('div', {
         staticClass: 'v-calendar-category__column-header',
-        on: this.getDefaultMouseEventHandlers(':day-category', e => {
+        on: this.getDefaultMouseEventHandlers(':day-category', () => {
           return this.getCategoryScope(this.getSlotScope(day), scope.category)
         }),
       }, [

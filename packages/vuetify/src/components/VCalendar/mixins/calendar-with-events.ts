@@ -115,7 +115,7 @@ export default CalendarBase.extend({
     eventNameFunction (): CalendarEventNameFunction {
       return typeof this.eventName === 'function'
         ? this.eventName
-        : (event, timedEvent) => escapeHTML(event.input[this.eventName as string] as string)
+        : event => escapeHTML(event.input[this.eventName as string] as string)
     },
     eventModeFunction (): CalendarEventOverlapMode {
       return typeof this.eventOverlapMode === 'function'
@@ -141,7 +141,7 @@ export default CalendarBase.extend({
         this.categoryMode ? this.eventCategoryFunction(input) : false,
       )
     },
-    formatTime (withTime: CalendarTimestamp, ampm: boolean): string {
+    formatTime (withTime: CalendarTimestamp): string {
       const formatter = this.getFormatter({
         timeZone: 'UTC',
         hour: 'numeric',
@@ -291,7 +291,7 @@ export default CalendarBase.extend({
       const overlapsNoon = event.start.hour < 12 && event.end.hour >= 12
       const singline = diffMinutes(event.start, event.end) <= this.parsedEventOverlapThreshold
       const formatTime = this.formatTime
-      const timeSummary = () => formatTime(event.start, overlapsNoon) + ' - ' + formatTime(event.end, true)
+      const timeSummary = () => formatTime(event.start) + ' - ' + formatTime(event.end)
       const eventSummary = () => {
         const name = this.eventNameFunction(event, timedEvent)
 
@@ -302,7 +302,7 @@ export default CalendarBase.extend({
 
             return `<strong>${name}</strong>${delimiter}${time}`
           } else {
-            const time = formatTime(event.start, true)
+            const time = formatTime(event.start)
 
             return `<strong>${time}</strong> ${name}`
           }
@@ -450,7 +450,7 @@ export default CalendarBase.extend({
 
         const children: VNode[] = []
 
-        visuals.forEach((visual, index) => {
+        visuals.forEach(visual => {
           while (children.length < visual.column) {
             children.push(this.genPlaceholder(day))
           }

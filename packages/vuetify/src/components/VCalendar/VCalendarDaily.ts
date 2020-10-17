@@ -82,7 +82,7 @@ export default CalendarWithIntervals.extend({
         key: day.date,
         staticClass: 'v-calendar-daily_head-day',
         class: this.getRelativeClasses(day),
-        on: this.getDefaultMouseEventHandlers(':day', _e => {
+        on: this.getDefaultMouseEventHandlers(':day', () => {
           return this.getSlotScope(day)
         }),
       }, [
@@ -120,7 +120,7 @@ export default CalendarWithIntervals.extend({
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },
           'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
-        }, _e => {
+        }, () => {
           return day
         }),
       }, this.dayFormatter(day, false))

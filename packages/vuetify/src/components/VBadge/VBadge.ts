@@ -177,6 +177,7 @@ export default mixins(
   render (h): VNode {
     const badge = [this.genBadgeWrapper()]
     const children = [getSlot(this)]
+    /* eslint-disable @typescript-eslint/no-unused-vars */
     const {
       'aria-atomic': _x,
       'aria-label': _y,
@@ -185,6 +186,7 @@ export default mixins(
       title,
       ...attrs
     } = this.$attrs
+    /* eslint-enable @typescript-eslint/no-unused-vars */
 
     if (this.inline && this.left) children.unshift(badge)
     else children.push(badge)

@@ -4,8 +4,9 @@ import { VuetifyServiceContract } from 'vuetify/types/services/index'
 // Types
 import Vue from 'vue'
 
-export class Service implements VuetifyServiceContract {
+export abstract class Service implements VuetifyServiceContract {
   framework = {}
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   init (root: Vue, ssrContext?: object) {}
 }

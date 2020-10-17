@@ -19,7 +19,7 @@ function firstWeekOffset (year: number, firstDayOfWeek: number, firstDayOfYear: 
   return -firstWeekDayOfYear + firstWeekDayInFirstWeek - 1
 }
 
-function dayOfYear (year: number, month: number, day: number, firstDayOfWeek: number) {
+function dayOfYear (year: number, month: number, day: number) {
   let dayOfYear = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334][month]
   if (month > 1 && isLeapYear(year)) {
     dayOfYear++
@@ -38,7 +38,7 @@ function weeksInYear (year: number, firstDayOfWeek: number, firstDayOfYear: numb
 
 export function weekNumber (year: number, month: number, day: number, firstDayOfWeek: number, localeFirstDayOfYear: number): number {
   const weekOffset = firstWeekOffset(year, firstDayOfWeek, localeFirstDayOfYear)
-  const week = Math.ceil((dayOfYear(year, month, day, firstDayOfWeek) - weekOffset) / 7)
+  const week = Math.ceil((dayOfYear(year, month, day) - weekOffset) / 7)
 
   if (week < 1) {
     return week + weeksInYear(year - 1, firstDayOfWeek, localeFirstDayOfYear)

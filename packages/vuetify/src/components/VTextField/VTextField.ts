@@ -242,7 +242,7 @@ export default baseMixins.extend<options>().extend({
       this.onFocus()
     },
     /** @public */
-    blur (e?: Event) {
+    blur () {
       // https://github.com/vuetifyjs/vuetify/issues/5913
       // Safari tab order gets broken if called synchronous
       window.requestAnimationFrame(() => {
