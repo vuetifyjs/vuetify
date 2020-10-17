@@ -111,9 +111,8 @@ module.exports = {
 
         // https://github.com/eslint/typescript-eslint-parser/issues/445
         // https://github.com/eslint/typescript-eslint-parser/issues/457
-        // enabled in tslint instead
         'no-unused-vars': 'off',
-        // '@typescript-eslint/no-unused-vars': 'error',
+        '@typescript-eslint/no-unused-vars': 'error',
 
         'no-redeclare': 'error',
         '@typescript-eslint/prefer-namespace-keyword': 'error',
@@ -127,7 +126,17 @@ module.exports = {
           }
         }],
         '@typescript-eslint/member-ordering': 'error',
-        '@typescript-eslint/type-annotation-spacing': 'error'
+        '@typescript-eslint/type-annotation-spacing': 'error',
+        '@typescript-eslint/array-type': 'error',
+        '@typescript-eslint/no-inferrable-types': 'error',
+        '@typescript-eslint/unified-signatures': 'error',
+        '@typescript-eslint/no-invalid-this': 'error',
+      }
+    },
+    {
+      files: '**/*.spec.ts',
+      rules: {
+        '@typescript-eslint/no-unused-vars': 'off',
       }
     }
   ]

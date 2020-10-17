@@ -60,8 +60,8 @@
     "test:win32": "cross-env NODE_ENV=test jest -i",
     "test:coverage": "yarn test --coverage",
     "test:types": "tsc -p ./types/test/tsconfig.json",
-    "lint": "concurrently -n \"tsc,tslint,eslint,types\" --kill-others-on-fail \"tsc --noEmit --pretty\" \"tslint -p . src/**/*.ts -t verbose\" \"eslint --ext .js,.ts src -f codeframe --max-warnings 0\" \"yarn test:types\"",
-    "lint:fix": "concurrently -n \"tsc,tslint,eslint,types\" \"tsc --noEmit --pretty\" \"tslint --fix -p . src/**/*.ts -t verbose\" \"eslint --fix --ext .js,.ts src\" \"yarn test:types\""
+    "lint": "concurrently -n \"tsc,eslint,types\" --kill-others-on-fail \"tsc --noEmit --pretty\" \"eslint --ext .js,.ts src -f codeframe --max-warnings 0\" \"yarn test:types\"",
+    "lint:fix": "concurrently -n \"tsc,eslint,types\" \"tsc --noEmit --pretty\" \"eslint --fix --ext .js,.ts src\" \"yarn test:types\""
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
@@ -70,6 +70,8 @@
     "@mdi/font": "^4.5.95",
     "@types/jest": "^24.9.1",
     "@types/node": "^12.6.8",
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/parser": "^2.31.0",
     "@vue/test-utils": "^1.0.0-beta.29",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",
@@ -97,7 +99,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "ts-loader": "^6.2.2",
-    "tslint": "^5.20.1",
+    "typescript": "^3.9.7",
     "url-loader": "^2.1.0",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.0.7",
