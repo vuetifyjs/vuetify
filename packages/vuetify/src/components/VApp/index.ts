@@ -1,4 +1,4 @@
-import VApp from './VApp'
+import VApp, { VLayout } from './VApp'
 
-export { VApp }
+export { VApp, VLayout }
 export default VApp
