@@ -94,8 +94,8 @@ export function getPropertyFromItem (
   return typeof value === 'undefined' ? fallback : value
 }
 
-export function createRange (length: number): number[] {
-  return Array.from({ length }, (v, k) => k)
+export function createRange (length: number, start = 0): number[] {
+  return Array.from({ length }, (v, k) => start + k)
 }
 
 export function getZIndex (el?: Element | null): number {

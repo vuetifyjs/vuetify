@@ -21,8 +21,14 @@ function generateDefault (propName: string, localDefault: any, type: any) {
   return (props: Record<string, unknown>) => {
     const vm = getCurrentInstance()
 
-    if (!vm || !vm.type.name) {
+    if (!vm) {
       console.warn('Unable to get current component instance when generating default prop value')
+
+      return localDefault
+    }
+
+    if (!vm.type.name) {
+      console.warn('The component is missing an explicit name, unable to generate default prop value')
 
       return localDefault
     }

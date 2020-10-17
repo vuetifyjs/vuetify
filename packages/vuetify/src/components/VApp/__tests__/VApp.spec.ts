@@ -2,31 +2,15 @@
 import VApp from '../VApp'
 
 // Utilities
-import type { VueWrapper } from '@vue/test-utils'
-import {
-  mount,
-} from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
+import { createMockVuetifyInstance } from '../../../../test'
 
 describe('VApp', () => {
-  type Instance = InstanceType<typeof VApp>
-  let mountFunction: (options?: object) => VueWrapper<Instance>
-
-  beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VApp, {
-        ...options,
-      })
-    }
-  })
-
   it('should match a snapshot', () => {
-    const wrapper = mountFunction({
-      mocks: {
-        $vuetify: {
-          rtl: false,
-          theme: {
-            dark: false,
-          },
+    const wrapper = mount(VApp, {
+      global: {
+        provide: {
+          ...createMockVuetifyInstance(),
         },
       },
     })
@@ -35,13 +19,10 @@ describe('VApp', () => {
   })
 
   it('should have data-app attribute', () => {
-    const wrapper = mountFunction({
-      mocks: {
-        $vuetify: {
-          rtl: false,
-          theme: {
-            dark: false,
-          },
+    const wrapper = mount(VApp, {
+      global: {
+        provide: {
+          ...createMockVuetifyInstance(),
         },
       },
     })
@@ -51,16 +32,13 @@ describe('VApp', () => {
   })
 
   it('should allow a custom id', () => {
-    const wrapper = mountFunction({
-      propsData: {
+    const wrapper = mount(VApp, {
+      attrs: {
         id: 'inspire',
       },
-      mocks: {
-        $vuetify: {
-          rtl: false,
-          theme: {
-            dark: false,
-          },
+      global: {
+        provide: {
+          ...createMockVuetifyInstance(),
         },
       },
     })

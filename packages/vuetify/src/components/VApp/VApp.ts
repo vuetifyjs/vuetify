@@ -1,23 +1,27 @@
 // Styles
 import './VApp.sass'
 
-import { defineComponent, computed, h, mergeProps } from 'vue'
+// Components
+import VThemeProvider from '../VThemeProvider'
+
+// Utilities
+import { defineComponent, h } from 'vue'
+import makeProps from '@/util/makeProps'
 
 export default defineComponent({
   name: 'VApp',
 
-  setup (props, { attrs, slots }) {
-    const classes = computed(() => ({
-      'v-application': true,
-    }))
+  props: makeProps({
+    theme: String,
+  }),
 
+  setup (props, { slots }) {
     return () => (
-      h('div', mergeProps(attrs, {
-        class: classes.value,
+      h(VThemeProvider, {
+        ...props,
+        class: 'v-application',
         'data-app': true,
-      }), h('div', {
-        class: 'v-application__wrap',
-      }, slots.default?.()))
+      }, () => h('div', { class: 'v-application__wrap' }, slots.default?.()))
     )
   },
 })

@@ -1,20 +1,5 @@
 @import '../../styles/styles.sass'
 
-// Theme
-+theme(v-application) using ($material)
-  background: map-get($material, 'background')
-  color: map-deep-get($material, 'text', 'primary')
-
-  .text
-    &--primary
-      color: map-deep-get($material, 'text', 'primary') !important
-
-    &--secondary
-      color: map-deep-get($material, 'text', 'secondary') !important
-
-    &--disabled
-      color: map-deep-get($material, 'text', 'disabled') !important
-
 .v-application
   display: flex
 

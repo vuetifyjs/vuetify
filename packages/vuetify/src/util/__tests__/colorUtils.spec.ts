@@ -1,6 +1,7 @@
 import {
   classToHex,
   colorToInt,
+  contrastRatio,
   intToHex,
   isCssColor,
   parseGradient,
@@ -129,6 +130,27 @@ describe('parseGradient', () => {
     expect(
       parseGradient('to top, var(--foo), rgba(#0000, .6)', colors, currentTheme)
     ).toBe('to top, var(--foo), rgba(0,0,0, .6)')
+  })
+})
+
+describe('contrastRatio', () => {
+  it.each([
+    ['#000000', '#000000', 1],
+    ['#FFFFFF', '#000000', 21],
+    ['#FF0000', '#000000', 5.252],
+    ['#EEEEEE', '#333333', 10.88977979803735],
+    ['#111111', '#222222', 1.1868686010078233],
+  ])('given %s and %s, should return contrast ratio value of %d', (first, second, ratio) => {
+    expect(contrastRatio(first, second)).toEqual(ratio)
+  })
+
+  it.each([
+    ['#FFFFFF', '#000000', 21],
+    ['#000000', '#FFFFFF', 21],
+    ['#EEEEEE', '#333333', 10.88977979803735],
+    ['#333333', '#EEEEEE', 10.88977979803735],
+  ])('should not care which order colors are checked', (first, second, ratio) => {
+    expect(contrastRatio(first, second)).toEqual(ratio)
   })
 })
 

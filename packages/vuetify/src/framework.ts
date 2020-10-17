@@ -1,7 +1,9 @@
 import { inject } from 'vue'
+import { createTheme } from './composables'
 
 // Types
 import type { InjectionKey, App } from 'vue'
+import type { ThemeInstance } from './composables'
 
 export interface VuetifyComponentDefaults {
   [key: string]: Record<string, unknown>
@@ -10,6 +12,7 @@ export interface VuetifyComponentDefaults {
 
 export interface VuetifyInstance {
   defaults: VuetifyComponentDefaults
+  theme: ThemeInstance
 }
 
 export interface VuetifyOptions {
@@ -55,6 +58,7 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
         global: {},
         ...defaults,
       },
+      theme: createTheme(),
     }
 
     app.provide(VuetifySymbol, vuetify)

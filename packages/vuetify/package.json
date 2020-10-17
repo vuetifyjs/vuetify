@@ -79,6 +79,7 @@
     "babel-polyfill": "^6.26.0",
     "concurrently": "^4.1.1",
     "cssnano": "^4.1.10",
+    "deepmerge": "^4.2.2",
     "dotenv": "^8.0.0",
     "eslint-plugin-jest": "^24.1.0",
     "file-loader": "^6.1.1",

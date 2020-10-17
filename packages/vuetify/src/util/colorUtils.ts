@@ -1,7 +1,8 @@
 // Utilities
 import { consoleWarn } from './console'
 import { chunk, padEnd } from './helpers'
-import { toXYZ } from './color/transformSRGB'
+import * as sRGB from '@/util/color/transformSRGB'
+import * as CIELAB from '@/util/color/transformCIELAB'
 
 // Types
 import type { VuetifyThemeVariant } from 'types/services/theme'
@@ -238,12 +239,33 @@ export function RGBtoInt (rgba: RGBA): ColorInt {
 /**
  * Returns the contrast ratio (1-21) between two colors.
  *
- * @param c1 First color
- * @param c2 Second color
+ * @param first First color
+ * @param second Second color
  */
-export function contrastRatio (c1: RGBA, c2: RGBA): number {
-  const [, y1] = toXYZ(RGBtoInt(c1))
-  const [, y2] = toXYZ(RGBtoInt(c2))
+export function contrastRatio (first: Color, second: Color): number {
+  const [, y1] = sRGB.toXYZ(colorToInt(first))
+  const [, y2] = sRGB.toXYZ(colorToInt(second))
 
   return (Math.max(y1, y2) + 0.05) / (Math.min(y1, y2) + 0.05)
+}
+
+export function colorToRGB (color: string) {
+  const int = colorToInt(color)
+  return {
+    r: (int & 0xFF0000) >> 16,
+    g: (int & 0xFF00) >> 8,
+    b: (int & 0xFF),
+  }
+}
+
+export function lighten (value: ColorInt, amount: number): ColorInt {
+  const lab = CIELAB.fromXYZ(sRGB.toXYZ(value))
+  lab[0] = lab[0] + amount * 10
+  return sRGB.fromXYZ(CIELAB.toXYZ(lab))
+}
+
+export function darken (value: ColorInt, amount: number): ColorInt {
+  const lab = CIELAB.fromXYZ(sRGB.toXYZ(value))
+  lab[0] = lab[0] - amount * 10
+  return sRGB.fromXYZ(CIELAB.toXYZ(lab))
 }

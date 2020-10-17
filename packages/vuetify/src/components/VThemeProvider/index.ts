@@ -1,4 +1,4 @@
-import VThemeProvider from './VThemeProvider'
+import { VThemeProvider } from './VThemeProvider'
 
 export { VThemeProvider }
 export default VThemeProvider

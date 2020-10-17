@@ -68,3 +68,7 @@
       $result: map-merge($result, ( $key: map-deep-merge($parent-value, $child) ))
 
   @return $result
+
+@function theme-color($color, $opacity: 1)
+  $color: rgba(var(--v-theme-#{$color}), $opacity)
+  @return $color
