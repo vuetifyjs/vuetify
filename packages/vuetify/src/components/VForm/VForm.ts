@@ -42,13 +42,14 @@ export default mixins(
     inputs: [] as VInputInstance[],
     watchers: [] as Watchers[],
     errorBag: {} as ErrorBag,
+    isValid: false as Boolean,
   }),
 
   watch: {
     errorBag: {
       handler (val) {
         const errors = Object.values(val).includes(true)
-
+        this.isValid = !errors
         this.$emit('input', !errors)
       },
       deep: true,
@@ -130,6 +131,12 @@ export default mixins(
   },
 
   render (h): VNode {
+    const children = this.$scopedSlots.default
+      ? this.$scopedSlots.default({
+        formIsValid: this.isValid,
+      })
+      : this.$slots.default
+
     return h('form', {
       staticClass: 'v-form',
       attrs: {
@@ -139,6 +146,6 @@ export default mixins(
       on: {
         submit: (e: Event) => this.$emit('submit', e),
       },
-    }, this.$slots.default)
+    }, children)
   },
 })
