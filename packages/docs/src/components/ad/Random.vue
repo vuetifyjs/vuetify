@@ -1,5 +1,5 @@
 <template>
-  <vuetify-ad />
+  <vuetify-ad :medium="medium" />
 </template>
 
 <script>
@@ -10,6 +10,10 @@
     name: 'RandomAd',
 
     extends: VuetifyAd,
+
+    props: {
+      medium: String,
+    },
 
     computed: {
       ads () {
