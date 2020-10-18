@@ -1,34 +1,34 @@
-import { VNode, VNodeDirective } from 'vue/types'
+// import { VNode, VNodeDirective } from 'vue/types'
 import { VuetifyIcon } from 'vuetify/types/services/icons'
 import { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
 
-export function createSimpleFunctional (
-  c: string,
-  el = 'div',
-  name?: string
-) {
-  return Vue.extend({
-    name: name || c.replace(/__/g, '-'),
+// export function createSimpleFunctional (
+//   c: string,
+//   el = 'div',
+//   name?: string
+// ) {
+//   return Vue.extend({
+//     name: name || c.replace(/__/g, '-'),
 
-    functional: true,
+//     functional: true,
 
-    render (h, { data, children }): VNode {
-      data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
+//     render (h, { data, children }): VNode {
+//       data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
 
-      return h(el, data, children)
-    },
-  })
-}
+//       return h(el, data, children)
+//     },
+//   })
+// }
 
-export type BindingConfig = Pick<VNodeDirective, 'arg' | 'modifiers' | 'value'>
-export function directiveConfig (binding: BindingConfig, defaults = {}): VNodeDirective {
-  return {
-    ...defaults,
-    ...binding.modifiers,
-    value: binding.arg,
-    ...(binding.value || {}),
-  }
-}
+// export type BindingConfig = Pick<VNodeDirective, 'arg' | 'modifiers' | 'value'>
+// export function directiveConfig (binding: BindingConfig, defaults = {}): VNodeDirective {
+//   return {
+//     ...defaults,
+//     ...binding.modifiers,
+//     value: binding.arg,
+//     ...(binding.value || {}),
+//   }
+// }
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1

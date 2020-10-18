@@ -30,10 +30,18 @@ module.exports = {
     'jest/prefer-to-contain': 'warn',
     'jest/prefer-to-have-length': 'warn'
   },
-  overrides: [{
-    files: 'dev/Playground.vue',
-    rules: {
-      'max-len': 'off'
-    }
-  }],
+  overrides: [
+    {
+      files: 'dev/Playground.vue',
+      rules: {
+        'max-len': 'off'
+      }
+    },
+    {
+      files: '**/*.spec.ts',
+      rules: {
+        'vue/one-component-per-file': 'off',
+      },
+    },
+  ],
 }

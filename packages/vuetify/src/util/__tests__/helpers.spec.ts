@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue.common.js'
+// import Vue from 'vue/dist/vue.common.js'
 import {
   deepEqual,
   getNestedValue,
@@ -107,6 +107,7 @@ describe('helpers', () => {
     expect(deepEqual({ date: currentDate }, { date: futureDate })).toEqual(false)
 
     const circular = {}
+    // @ts-ignore
     circular.me = circular
 
     expect(deepEqual({ r: circular }, { r: circular })).toEqual(true)
@@ -212,62 +213,62 @@ describe('helpers', () => {
     expect(convertToUnit('foo')).toBe('foo')
   })
 
-  describe('getSlotType', () => {
-    it('should detect old slots', () => {
-      const vm = new Vue({
-        components: {
-          foo: { render: h => h('div') },
-        },
-        template: `<foo ref="foo"><template slot="bar">hello</template></foo>`,
-      }).$mount()
+  // describe('getSlotType', () => {
+  //   it('should detect old slots', () => {
+  //     const vm = new Vue({
+  //       components: {
+  //         foo: { render: h => h('div') },
+  //       },
+  //       template: `<foo ref="foo"><template slot="bar">hello</template></foo>`,
+  //     }).$mount()
 
-      expect(getSlotType(vm.$refs.foo, 'bar')).toBe('normal')
-    })
+  //     expect(getSlotType(vm.$refs.foo, 'bar')).toBe('normal')
+  //   })
 
-    it('should detect old scoped slots', () => {
-      const vm = new Vue({
-        components: {
-          foo: { render: h => h('div') },
-        },
-        template: `<foo ref="foo"><template slot="bar" slot-scope="data">hello</template></foo>`,
-      }).$mount()
+  //   it('should detect old scoped slots', () => {
+  //     const vm = new Vue({
+  //       components: {
+  //         foo: { render: h => h('div') },
+  //       },
+  //       template: `<foo ref="foo"><template slot="bar" slot-scope="data">hello</template></foo>`,
+  //     }).$mount()
 
-      expect(getSlotType(vm.$refs.foo, 'bar')).toBe('scoped')
-    })
+  //     expect(getSlotType(vm.$refs.foo, 'bar')).toBe('scoped')
+  //   })
 
-    it('should detect bare v-slot', () => {
-      const vm = new Vue({
-        components: {
-          foo: { render: h => h('div') },
-        },
-        template: `<foo ref="foo"><template #bar>hello</template></foo>`,
-      }).$mount()
+  //   it('should detect bare v-slot', () => {
+  //     const vm = new Vue({
+  //       components: {
+  //         foo: { render: h => h('div') },
+  //       },
+  //       template: `<foo ref="foo"><template #bar>hello</template></foo>`,
+  //     }).$mount()
 
-      expect(getSlotType(vm.$refs.foo, 'bar', true)).toBe('v-slot')
-    })
+  //     expect(getSlotType(vm.$refs.foo, 'bar', true)).toBe('v-slot')
+  //   })
 
-    it('should detect bound v-slot', () => {
-      const vm = new Vue({
-        components: {
-          foo: { render: h => h('div') },
-        },
-        template: `<foo ref="foo"><template #bar="data">hello</template></foo>`,
-      }).$mount()
+  //   it('should detect bound v-slot', () => {
+  //     const vm = new Vue({
+  //       components: {
+  //         foo: { render: h => h('div') },
+  //       },
+  //       template: `<foo ref="foo"><template #bar="data">hello</template></foo>`,
+  //     }).$mount()
 
-      expect(getSlotType(vm.$refs.foo, 'bar', true)).toBe('scoped')
-    })
+  //     expect(getSlotType(vm.$refs.foo, 'bar', true)).toBe('scoped')
+  //   })
 
-    it('should count bare v-slot as scoped', () => {
-      const vm = new Vue({
-        components: {
-          foo: { render: h => h('div') },
-        },
-        template: `<foo ref="foo"><template #bar>hello</template></foo>`,
-      }).$mount()
+  //   it('should count bare v-slot as scoped', () => {
+  //     const vm = new Vue({
+  //       components: {
+  //         foo: { render: h => h('div') },
+  //       },
+  //       template: `<foo ref="foo"><template #bar>hello</template></foo>`,
+  //     }).$mount()
 
-      expect(getSlotType(vm.$refs.foo, 'bar')).toBe('scoped')
-    })
-  })
+  //     expect(getSlotType(vm.$refs.foo, 'bar')).toBe('scoped')
+  //   })
+  // })
 
   it('humanReadableFileSize should format file sizes with base 1024', () => {
     expect(humanReadableFileSize(0, true)).toBe('0 B')
