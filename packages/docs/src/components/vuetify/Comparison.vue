@@ -25,6 +25,7 @@
             v-for="(framework, i) in frameworks"
             :key="i"
             class="text-center text-no-wrap"
+            :class="{ 'primary font-weight-bold white--text rounded-t' : framework.name == 'Vuetify'}"
           >
             <div class="d-flex align-center justify-center text-body-2">
               <v-img
@@ -37,7 +38,7 @@
                 width="16"
               />
 
-              <div v-text="framework.name" />
+              <div :class="{ 'font-weight-bold' : framework.name == 'Vuetify'}" v-text="framework.name" />
             </div>
           </th>
         </tr>
@@ -58,6 +59,7 @@
             v-for="(framework, j) in frameworks"
             :key="j"
             class="text-center"
+            :class="{'green lighten-4' : framework.name == 'Vuetify'}"
           >
             <template v-if="framework[key]">
               <v-icon
@@ -70,6 +72,7 @@
               <span
                 v-else-if="typeof framework[key] === 'string'"
                 class="font-weight-light"
+                :class="{'green--text font-weight-bold' : framework.name == 'Vuetify'}"
                 v-text="framework[key]"
               />
             </template>
