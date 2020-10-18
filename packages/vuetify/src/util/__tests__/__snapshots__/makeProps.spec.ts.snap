@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`makeProps should handle function prop correctly 1`] = `
+<div>
+  this should be visible
+</div>
+`;
+
+exports[`makeProps should handle prop with default factory function 1`] = `
+<div>
+  {"bar":"baz"}
+</div>
+`;

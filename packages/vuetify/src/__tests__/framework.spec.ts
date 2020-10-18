@@ -1,74 +1,59 @@
 // Framework
-import Vuetify, { useVuetify, VuetifySymbol } from '../framework'
+import { mount } from '@vue/test-utils'
+import { createVuetify } from '../framework'
 
-// Types
-import { Service } from '../services/service'
+describe('framework', () => {
+  describe('install', () => {
+    it('should return install function', () => {
+      const vuetify = createVuetify()
 
-class MockService extends Service {
-  static property = 'mock'
-}
-
-describe('framework.ts', () => {
-  it.skip('should initialize a Vuetify service', () => {
-    const vuetify = new Vuetify()
-
-    expect('mock' in vuetify.framework).toBe(false)
-
-    vuetify.use(MockService)
-
-    expect('mock' in vuetify.framework).toBe(true)
-  })
-
-  it.skip('should merge user options with default preset', () => {
-    const vuetify = new Vuetify({
-      icons: { iconfont: 'fa' },
-      lang: {
-        current: 'es',
-        locales: {
-          es: { foo: 'bar' },
-        },
-      },
-      theme: {
-        themes: {
-          dark: {
-            primary: 'blue',
-          },
-        },
-      },
+      expect('install' in vuetify).toBe(true)
     })
 
-    expect(vuetify.preset).toMatchSnapshot()
-  })
+    it('should install provided components', () => {
+      const Foo = { name: 'Foo', template: '<div/>' }
+      const vuetify = createVuetify({
+        components: {
+          Foo,
+        },
+      })
 
-  it.skip('should merge user options with global and default preset', () => {
-    const vuetify = new Vuetify({
-      lang: { current: 'en' },
-      theme: { dark: false },
-      preset: {
-        lang: {
-          current: 'es',
-          locales: {
-            es: { foo: 'bar' },
-          },
+      const TestComponent = {
+        name: 'TestComponent',
+        props: {},
+        template: '<foo/>',
+      }
+
+      mount(TestComponent, {
+        global: {
+          plugins: [vuetify],
         },
-        theme: {
-          dark: true,
-          themes: {
-            dark: {
-              primary: 'blue',
-            },
-          },
-        },
-      },
+      })
+
+      expect('[Vue warn]: Failed to resolve component: foo').not.toHaveBeenTipped()
     })
 
-    expect(vuetify.preset).toMatchSnapshot()
-  })
+    it('should install provided directives', () => {
+      const Foo = { mounted: () => null }
+      const vuetify = createVuetify({
+        directives: {
+          Foo,
+        },
+      })
 
-  // inject modified in __mocks__
-  it('should return injected value', () => {
-    const vuetify = useVuetify()
+      const TestComponent = {
+        name: 'TestComponent',
+        props: {},
+        template: '<div v-foo/>',
+      }
 
-    expect(vuetify).toEqual(VuetifySymbol)
+      mount(TestComponent, {
+        global: {
+          plugins: [vuetify],
+        },
+      })
+
+      expect('[Vue warn]: Failed to resolve directive: foo').not.toHaveBeenTipped()
+    })
   })
 })

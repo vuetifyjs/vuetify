@@ -29,8 +29,6 @@ export const useVuetify = () => {
 
 export const createVuetify = (options: VuetifyOptions = {}) => {
   const install = (app: App) => {
-    console.log('Installing Vuetify...')
-
     const {
       components = {},
       directives = {},
