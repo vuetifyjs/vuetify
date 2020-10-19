@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import VTimePicker from './VTimePicker'
 import VTimePickerClock from './VTimePickerClock'
 import VTimePickerTitle from './VTimePickerTitle'

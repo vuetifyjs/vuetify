@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import { validateNumber } from '../props'
 
 describe.skip('props.ts', () => {

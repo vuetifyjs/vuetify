@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import './VGrid.sass'
 
 import Vue, { PropOptions } from 'vue'

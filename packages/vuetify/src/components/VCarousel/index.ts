@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import VCarousel from './VCarousel'
 import VCarouselItem from './VCarouselItem'
 

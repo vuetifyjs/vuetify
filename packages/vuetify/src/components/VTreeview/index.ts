@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import VTreeview from './VTreeview'
 import VTreeviewNode from './VTreeviewNode'
 

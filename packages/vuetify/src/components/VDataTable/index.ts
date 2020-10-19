@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import { createSimpleFunctional } from '../../util/helpers'
 
 import VDataTable from './VDataTable'

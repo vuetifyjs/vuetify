@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 // Extensions
 import VWindowItem from '../VWindow/VWindowItem'
 

@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import { DirectiveBinding, ObjectDirective } from 'vue'
 
 interface ResizeDirectiveBinding extends Omit<DirectiveBinding, 'modifiers'> {

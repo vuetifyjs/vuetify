@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import { FunctionalComponentOptions, VNode, VNodeData } from 'vue'
 import mergeData from '../../util/mergeData'
 

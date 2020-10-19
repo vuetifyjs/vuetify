@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 enum SelectingTimes {
   Hour = 1,
   Minute = 2,

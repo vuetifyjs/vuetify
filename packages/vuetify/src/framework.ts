@@ -1,5 +1,5 @@
 import { wrapInArray } from './util/helpers'
-import { InjectionKey, inject, App, ExtractPropTypes, getCurrentInstance, Prop } from 'vue'
+import { InjectionKey, inject, App, getCurrentInstance, Prop, ExtractPropTypes } from 'vue'
 
 type MakeFactoryFunctions<T> = {
   [K in keyof T]: T[K] extends (infer E)[]
@@ -11,6 +11,7 @@ type MakeFactoryFunctions<T> = {
         : T[K]
 }
 
+// @ts-ignore
 type ExtractDefaultTypes<T> = Partial<MakeFactoryFunctions<Required<ExtractPropTypes<T>>>>
 
 export interface VuetifyComponentDefaults {}

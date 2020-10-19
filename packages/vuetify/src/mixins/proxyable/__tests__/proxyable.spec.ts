@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 // import Proxyable, { factory as Proxy } from '../'
 import {
   mount,

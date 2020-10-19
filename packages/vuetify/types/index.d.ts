@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import { Component, App, Directive } from 'vue'
 import './lib'
 import './alacarte'

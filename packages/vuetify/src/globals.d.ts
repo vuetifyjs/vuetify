@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable max-len */
 
 import {

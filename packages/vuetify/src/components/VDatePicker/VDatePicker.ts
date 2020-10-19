@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 // Components
 import VDatePickerTitle from './VDatePickerTitle'
 import VDatePickerHeader from './VDatePickerHeader'

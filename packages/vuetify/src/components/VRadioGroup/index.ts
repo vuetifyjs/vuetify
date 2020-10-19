@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import VRadioGroup from './VRadioGroup'
 import VRadio from './VRadio'
 

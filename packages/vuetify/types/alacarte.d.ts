@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 declare module 'vuetify/es5/install' {
   import { VueConstructor } from 'vue'
 

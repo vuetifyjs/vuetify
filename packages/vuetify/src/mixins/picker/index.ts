@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 // Components
 // import VPicker from '../../components/VPicker'
 

@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 /* eslint-disable no-multi-spaces */
 // Extensions
 import { Service } from '../service'

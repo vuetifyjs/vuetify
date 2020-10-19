@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import Vue from 'vue'
 import { VNodeData } from 'vue/types/vnode'
 import { consoleError } from '../../util/console'

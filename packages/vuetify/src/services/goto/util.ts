@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import Vue from 'vue'
 
 // Return target's cumulative offset from the top

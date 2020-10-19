@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import pad from '../pad'
 
 describe.skip('VDatePicker/util/pad.ts', () => {

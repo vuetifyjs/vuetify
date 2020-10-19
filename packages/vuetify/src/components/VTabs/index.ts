@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import VTabs from './VTabs'
 import VTab from './VTab'
 import VTabsItems from './VTabsItems'

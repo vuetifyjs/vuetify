@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 // Styles
 import '../VTextField/VTextField.sass'
 import './VSelect.sass'

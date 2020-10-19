@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import { parseEvent } from '../../util/events'
 import {
   getVisuals, hasOverlap,

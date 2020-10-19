@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import { Point, Boundary, Bar } from '../VSparkline'
 
 export function genPoints (

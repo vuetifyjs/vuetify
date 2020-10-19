@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import { VNode, VNodeChildrenArrayContents } from 'vue'
 import mixins from '../../util/mixins'
 import VSelect from '../VSelect/VSelect'

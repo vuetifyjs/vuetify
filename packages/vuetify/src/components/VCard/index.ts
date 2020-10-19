@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import VCard from './VCard'
 import { createSimpleFunctional } from '../../util/helpers'
 

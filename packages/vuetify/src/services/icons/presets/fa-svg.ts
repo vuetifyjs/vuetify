@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import { VuetifyIcons } from 'vuetify/types/services/icons'
 import { Component } from 'vue'
 import icons from './fa'

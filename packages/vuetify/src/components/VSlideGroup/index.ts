@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import VSlideGroup from './VSlideGroup'
 import VSlideItem from './VSlideItem'
 

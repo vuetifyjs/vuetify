@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import { App, defineComponent } from 'vue'
 
 import Vuetify, {

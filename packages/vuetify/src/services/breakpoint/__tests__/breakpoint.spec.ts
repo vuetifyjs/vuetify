@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import { resizeWindow } from '../../../../test'
 import { Breakpoint } from '../'
 import { preset } from '../../../presets/default'

@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import VBreadcrumbs from './VBreadcrumbs'
 import VBreadcrumbsItem from './VBreadcrumbsItem'
 import VBreadcrumbsDivider from './VBreadcrumbsDivider'

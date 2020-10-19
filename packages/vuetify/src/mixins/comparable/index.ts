@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import Vue from 'vue'
 import { PropValidator } from 'vue/types/options'
 import { deepEqual } from '../../util/helpers'

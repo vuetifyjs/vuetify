@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import VAppBar from './VAppBar'
 import VAppBarNavIcon from './VAppBarNavIcon'
 

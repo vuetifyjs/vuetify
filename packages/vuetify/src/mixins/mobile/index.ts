@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 // Types
 import { BreakpointName } from 'vuetify/types/services/breakpoint'
 import { deprecate } from '../../util/console'

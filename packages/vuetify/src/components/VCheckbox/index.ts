@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import VCheckbox from './VCheckbox'
 import VSimpleCheckbox from './VSimpleCheckbox'
 

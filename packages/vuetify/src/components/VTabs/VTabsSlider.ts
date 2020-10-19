@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 // Mixins
 import Colorable from '../../mixins/colorable'
 

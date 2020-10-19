@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 declare module 'vuetify/es5/util/colors' {
   interface BaseColor {
     readonly base: string

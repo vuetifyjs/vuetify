@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import Vue, { VueConstructor } from 'vue'
 
 /* eslint-disable-next-line no-use-before-define */

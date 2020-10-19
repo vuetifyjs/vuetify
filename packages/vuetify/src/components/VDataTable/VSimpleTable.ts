@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import './VSimpleTable.sass'
 
 import { convertToUnit } from '../../util/helpers'

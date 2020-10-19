@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 // Styles
 import './VList.sass'
 import VListGroup from './VListGroup'

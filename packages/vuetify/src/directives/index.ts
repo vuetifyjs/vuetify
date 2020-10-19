@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 export { ClickOutside } from './click-outside'
 // export { Color } from './color'
 export { Intersect } from './intersect'

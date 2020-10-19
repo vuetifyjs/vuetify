@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Styles
 import '../../styles/main.sass'
 

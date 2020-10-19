@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import './VPagination.sass'
 
 import VIcon from '../VIcon'

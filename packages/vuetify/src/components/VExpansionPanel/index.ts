@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import VExpansionPanels from './VExpansionPanels'
 import VExpansionPanel from './VExpansionPanel'
 import VExpansionPanelContent from './VExpansionPanelContent'

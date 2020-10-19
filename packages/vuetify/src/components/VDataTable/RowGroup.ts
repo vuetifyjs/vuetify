@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import Vue, { VNode } from 'vue'
 
 export default Vue.extend({

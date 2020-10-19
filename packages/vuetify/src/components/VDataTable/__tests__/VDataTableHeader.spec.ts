@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 // Components
 // import VDataTableHeader from '../VDataTableHeader'
 // import VSelect from '../../VSelect/VSelect'

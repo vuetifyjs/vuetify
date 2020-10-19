@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import './_grid.sass'
 import { createSimpleFunctional } from '../../util/helpers'
 

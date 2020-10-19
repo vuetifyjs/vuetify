@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import { filterTreeItem, filterTreeItems } from '../filterTreeItems'
 
 describe.skip('filterTreeItems.ts', () => {

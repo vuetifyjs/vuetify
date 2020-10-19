@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 // Extensions
 import { BaseItemGroup } from '../../components/VItemGroup/VItemGroup'
 

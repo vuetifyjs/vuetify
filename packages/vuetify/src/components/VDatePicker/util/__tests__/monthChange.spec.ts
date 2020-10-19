@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import monthChange from '../monthChange'
 
 describe.skip('VDatePicker/util/monthChange.ts', () => {

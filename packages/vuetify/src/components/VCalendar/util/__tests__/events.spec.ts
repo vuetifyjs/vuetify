@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* tslint:disable */
+/* eslint-disable */
 import { parseTimestamp, getDayIdentifier } from '../timestamp'
 import { parseEvent, isEventOn, isEventOverlapping } from '../events'
 
