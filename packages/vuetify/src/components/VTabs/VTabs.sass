@@ -47,6 +47,8 @@
         .v-slide-group__next
           display: initial
           visibility: hidden
+          &--disabled
+            display: none
 
     // https://github.com/vuetifyjs/vuetify/issues/6932
     &:not(.v-tabs--right)
@@ -54,6 +56,8 @@
         .v-slide-group__prev
           display: initial
           visibility: hidden
+          &--disabled
+            display: none
 
 // Element
 .v-tabs-bar
