@@ -1,5 +1,8 @@
-import VDataIterator from '../VDataIterator'
-import { Lang } from '../../../services/lang'
+// Components
+// import VDataIterator from '../VDataIterator'
+
+// Services
+// import { Lang } from '../../../services/lang'
 import {
   mount,
   MountOptions,
@@ -9,19 +12,19 @@ import Vue from 'vue'
 import { Breakpoint } from '../../../services/breakpoint'
 import { preset } from '../../../presets/default'
 
-Vue.prototype.$vuetify = {
-  icons: {
-    values: {
-      prev: 'mdi-chevron-left',
-      next: 'mdi-chevron-right',
-      dropdown: 'mdi-menu-down',
-      first: 'mdi-page-first',
-      last: 'mdi-page-last',
-    },
-  },
-}
+// Vue.prototype.$vuetify = {
+//   icons: {
+//     values: {
+//       prev: 'mdi-chevron-left',
+//       next: 'mdi-chevron-right',
+//       dropdown: 'mdi-menu-down',
+//       first: 'mdi-page-first',
+//       last: 'mdi-page-last',
+//     },
+//   },
+// }
 
-describe('VDataIterator.ts', () => {
+describe.skip('VDataIterator.ts', () => {
   type Instance = InstanceType<typeof VDataIterator>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

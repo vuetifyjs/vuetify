@@ -9,7 +9,7 @@ import {
   mount,
 } from '@vue/test-utils'
 
-describe('ripple.ts', () => {
+describe.skip('ripple.ts', () => {
   let mountFunction: (options?: object) => Wrapper<Vue>
 
   beforeEach(() => {

@@ -1,7 +1,7 @@
 import { parseTimestamp, getDayIdentifier } from '../timestamp'
 import { parseEvent, isEventOn, isEventOverlapping } from '../events'
 
-describe('events.ts', () => {
+describe.skip('events.ts', () => {
   it('should parse events', () => {
     expect(parseEvent({
       start: '2019-02-13',

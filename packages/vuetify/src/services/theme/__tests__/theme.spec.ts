@@ -28,7 +28,7 @@ const FillVariant = (variant: Partial<VuetifyThemeVariant> = {}) => {
   }
 }
 
-describe('Theme.ts', () => {
+describe.skip('Theme.ts', () => {
   function rootFactory () {
     return mergeDeep(JSON.parse(JSON.stringify(preset)), {
       theme: {

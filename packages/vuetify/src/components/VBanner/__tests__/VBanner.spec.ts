@@ -1,5 +1,5 @@
 // Components
-import VBanner from '../VBanner'
+// import VBanner from '../VBanner'
 
 // Services
 import { Breakpoint } from '../../../services/breakpoint'
@@ -14,7 +14,7 @@ import {
 // Types
 import { ExtractVue } from '../../../util/mixins'
 
-describe('VBanner.ts', () => {
+describe.skip('VBanner.ts', () => {
   type Instance = ExtractVue<typeof VBanner>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

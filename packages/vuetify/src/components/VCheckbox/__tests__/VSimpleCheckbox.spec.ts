@@ -3,9 +3,11 @@ import {
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
-import VSimpleCheckbox from '../VSimpleCheckbox'
 
-describe('VSimpleCheckbox.ts', () => {
+// Components
+// import VSimpleCheckbox from '../VSimpleCheckbox'
+
+describe.skip('VSimpleCheckbox.ts', () => {
   type Instance = InstanceType<typeof VSimpleCheckbox>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

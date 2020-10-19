@@ -1,6 +1,6 @@
 import { filterTreeItem, filterTreeItems } from '../filterTreeItems'
 
-describe('filterTreeItems.ts', () => {
+describe.skip('filterTreeItems.ts', () => {
   it('should filter single tree item', () => {
     expect(filterTreeItem({ text: 'foo' }, 'foo', 'text')).toBeTruthy()
     expect(filterTreeItem({ text: 'foo' }, 'bar', 'text')).toBeFalsy()

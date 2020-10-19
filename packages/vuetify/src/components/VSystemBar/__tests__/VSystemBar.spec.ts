@@ -2,7 +2,7 @@
 import Vue from 'vue'
 
 // Components
-import VSystemBar from '../VSystemBar'
+// import VSystemBar from '../VSystemBar'
 
 // Utilities
 import {
@@ -11,7 +11,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VSystemBar.ts', () => {
+describe.skip('VSystemBar.ts', () => {
   type Instance = InstanceType<typeof VSystemBar>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

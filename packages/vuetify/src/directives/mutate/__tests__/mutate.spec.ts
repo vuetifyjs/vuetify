@@ -21,7 +21,7 @@ import Mutate from '../'
   }
 }
 
-describe('mutate.ts', () => {
+describe.skip('mutate.ts', () => {
   it('should bind event on inserted', () => {
     const callback = jest.fn()
     const el = document.createElement('div') as any

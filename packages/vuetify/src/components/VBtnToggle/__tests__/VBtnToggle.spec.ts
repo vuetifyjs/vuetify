@@ -1,5 +1,5 @@
 // Components
-import VBtnToggle from '../VBtnToggle'
+// import VBtnToggle from '../VBtnToggle'
 
 // Utilities
 import {
@@ -10,7 +10,7 @@ import {
 // Types
 import { ExtractVue } from '../../../util/mixins'
 
-describe('VBtnToggle.ts', () => {
+describe.skip('VBtnToggle.ts', () => {
   type Instance = ExtractVue<typeof VBtnToggle>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

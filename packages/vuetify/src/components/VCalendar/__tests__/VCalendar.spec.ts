@@ -1,5 +1,7 @@
+// Components
+// import VCalendar from '../VCalendar'
+
 import { parseDate } from '../util/timestamp'
-import VCalendar from '../VCalendar'
 import {
   mount,
   Wrapper,
@@ -7,7 +9,7 @@ import {
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
 
-describe('VCalendar', () => {
+describe.skip('VCalendar', () => {
   type Instance = ExtractVue<typeof VCalendar>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

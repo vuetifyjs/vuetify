@@ -1,4 +1,6 @@
-import VCalendarDaily from '../VCalendarDaily'
+// Components
+// import VCalendarDaily from '../VCalendarDaily'
+
 import {
   mount,
   Wrapper,
@@ -6,7 +8,7 @@ import {
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
 
-describe('VCalendarDaily', () => {
+describe.skip('VCalendarDaily', () => {
   type Instance = ExtractVue<typeof VCalendarDaily>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

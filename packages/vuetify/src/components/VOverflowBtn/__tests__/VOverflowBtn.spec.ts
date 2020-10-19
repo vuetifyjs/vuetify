@@ -1,5 +1,5 @@
 // Components
-import VOverflowBtn from '../VOverflowBtn'
+// import VOverflowBtn from '../VOverflowBtn'
 
 // Utilities
 import {
@@ -8,7 +8,7 @@ import {
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
 
-describe('VOverflowBtn.js', () => {
+describe.skip('VOverflowBtn.js', () => {
   type Instance = ExtractVue<typeof VOverflowBtn>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

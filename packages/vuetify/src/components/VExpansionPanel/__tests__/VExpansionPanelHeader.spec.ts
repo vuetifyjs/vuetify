@@ -1,5 +1,5 @@
 // Components
-import VExpansionPanelHeader from '../VExpansionPanelHeader'
+// import VExpansionPanelHeader from '../VExpansionPanelHeader'
 
 // Utilities
 import {
@@ -7,7 +7,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VExpansionPanelHeader', () => {
+describe.skip('VExpansionPanelHeader', () => {
   type Instance = InstanceType<typeof VExpansionPanelHeader>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

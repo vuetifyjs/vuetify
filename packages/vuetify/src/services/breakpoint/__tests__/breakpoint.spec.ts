@@ -2,7 +2,7 @@ import { resizeWindow } from '../../../../test'
 import { Breakpoint } from '../'
 import { preset } from '../../../presets/default'
 
-describe('Breakpoint.ts', () => {
+describe.skip('Breakpoint.ts', () => {
   let breakpoint: Breakpoint
   const scenarios = [
     {

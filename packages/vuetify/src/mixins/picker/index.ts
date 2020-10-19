@@ -1,5 +1,5 @@
 // Components
-import VPicker from '../../components/VPicker'
+// import VPicker from '../../components/VPicker'
 
 // Mixins
 import Colorable from '../colorable'

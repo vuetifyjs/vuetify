@@ -1,8 +1,13 @@
-import VDataTableHeader from '../VDataTableHeader'
-import { Lang } from '../../../services/lang'
-import ripple from '../../../directives/ripple'
-import VSelect from '../../VSelect/VSelect'
-import { preset } from '../../../presets/default'
+// Components
+// import VDataTableHeader from '../VDataTableHeader'
+// import VSelect from '../../VSelect/VSelect'
+
+// Directives
+// import ripple from '../../../directives/ripple'
+
+// Services
+// import { Lang } from '../../../services/lang'
+// import { preset } from '../../../presets/default'
 
 import {
   mount,
@@ -25,21 +30,21 @@ const testHeaders = [
   { text: 'Iron (%)', value: 'iron' },
 ]
 
-Vue.prototype.$vuetify = {
-  rtl: false,
-  lang: new Lang(preset),
-  theme: {
-    dark: false,
-  },
-}
-Vue.directive('ripple', ripple)
+// Vue.prototype.$vuetify = {
+//   rtl: false,
+//   lang: new Lang(preset),
+//   theme: {
+//     dark: false,
+//   },
+// }
+// Vue.directive('ripple', ripple)
 
-describe('VDataTableHeader.ts', () => {
+describe.skip('VDataTableHeader.ts', () => {
   type Instance = InstanceType<typeof VDataTableHeader>
   let mountFunction: (options?: MountOptions<Instance>, isMobile?: boolean) => Wrapper<Instance>
 
   ;[false, true].forEach(isMobile => {
-    describe(isMobile ? 'mobile' : 'desktop', () => { // eslint-disable-line jest/valid-describe
+    describe.skip(isMobile ? 'mobile' : 'desktop', () => { // eslint-disable-line jest/valid-describe
       beforeEach(() => {
         document.body.setAttribute('data-app', 'true')
 

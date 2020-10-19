@@ -1,14 +1,14 @@
 // Components
-import VProgressLinear from '../VProgressLinear'
+// import VProgressLinear from '../VProgressLinear'
 
 // Utilities
 import {
   mount,
   Wrapper,
 } from '@vue/test-utils'
-import { compileToFunctions } from 'vue-template-compiler'
 
-describe('VProgressLinear.ts', () => {
+
+describe.skip('VProgressLinear.ts', () => {
   type Instance = InstanceType<typeof VProgressLinear>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

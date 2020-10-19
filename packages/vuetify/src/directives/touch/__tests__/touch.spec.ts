@@ -11,7 +11,7 @@ import {
 } from '@vue/test-utils'
 import { touch } from '../../../../test'
 
-describe('touch.ts', () => {
+describe.skip('touch.ts', () => {
   let mountFunction: (value?: object) => Wrapper<Vue>
 
   beforeEach(() => {

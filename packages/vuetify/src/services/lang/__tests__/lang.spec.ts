@@ -4,7 +4,7 @@ import { Lang } from '../index'
 // Preset
 import { preset } from '../../../presets/default'
 
-describe('$vuetify.lang', () => {
+describe.skip('$vuetify.lang', () => {
   let lang: Lang
 
   beforeEach(() => {

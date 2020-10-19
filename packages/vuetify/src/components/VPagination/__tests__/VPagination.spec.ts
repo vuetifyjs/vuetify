@@ -1,4 +1,5 @@
-import VPagination from '../VPagination'
+// Components
+// import VPagination from '../VPagination'
 import {
   mount,
   MountOptions,
@@ -6,20 +7,20 @@ import {
 } from '@vue/test-utils'
 import Vue from 'vue'
 
-Vue.prototype.$vuetify = {
-  rtl: false,
-  icons: {
-    values: {
-      next: 'mdi-chevron-right',
-      prev: 'mdi-chevron-left',
-    },
-  },
-  lang: {
-    t: str => str,
-  },
-}
+// Vue.prototype.$vuetify = {
+//   rtl: false,
+//   icons: {
+//     values: {
+//       next: 'mdi-chevron-right',
+//       prev: 'mdi-chevron-left',
+//     },
+//   },
+//   lang: {
+//     t: str => str,
+//   },
+// }
 
-describe('VPagination.ts', () => {
+describe.skip('VPagination.ts', () => {
   type Instance = InstanceType<typeof VPagination>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

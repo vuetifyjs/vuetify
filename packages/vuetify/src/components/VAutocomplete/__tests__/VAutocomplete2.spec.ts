@@ -1,14 +1,13 @@
 // Components
-import VAutocomplete from '../VAutocomplete'
+// import VAutocomplete from '../VAutocomplete'
 
 // Utilities
 import {
   mount,
   Wrapper,
 } from '@vue/test-utils'
-import { compileToFunctions } from 'vue-template-compiler'
 
-describe('VAutocomplete.ts', () => {
+describe.skip('VAutocomplete.ts', () => {
   type Instance = InstanceType<typeof VAutocomplete>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

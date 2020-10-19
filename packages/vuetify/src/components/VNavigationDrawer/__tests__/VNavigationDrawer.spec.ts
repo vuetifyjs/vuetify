@@ -1,5 +1,5 @@
 // Components
-import VNavigationDrawer from '../VNavigationDrawer'
+// import VNavigationDrawer from '../VNavigationDrawer'
 
 // Services
 import { Application } from '../../../services/application'
@@ -19,7 +19,7 @@ import {
 
 beforeEach(() => resizeWindow(1920, 1080))
 
-describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
+describe.skip('VNavigationDrawer', () => { // eslint-disable-line max-statements
   type Instance = InstanceType<typeof VNavigationDrawer>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

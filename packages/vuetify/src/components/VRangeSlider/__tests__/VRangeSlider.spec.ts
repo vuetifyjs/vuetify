@@ -1,11 +1,13 @@
-import VRangeSlider from '../VRangeSlider'
 import {
   mount,
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VRangeSlider.ts', () => {
+// Components
+// import VRangeSlider from '../VRangeSlider'
+
+describe.skip('VRangeSlider.ts', () => {
   type Instance = InstanceType<typeof VRangeSlider>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

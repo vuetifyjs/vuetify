@@ -1,6 +1,6 @@
 // Components
-import VRadio from '../VRadio'
-import VRadioGroup from '../VRadioGroup'
+// import VRadio from '../VRadio'
+// import VRadioGroup from '../VRadioGroup'
 
 // Utilities
 import {
@@ -9,7 +9,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VRadioGroup.ts', () => {
+describe.skip('VRadioGroup.ts', () => {
   type Instance = InstanceType<typeof VRadioGroup>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

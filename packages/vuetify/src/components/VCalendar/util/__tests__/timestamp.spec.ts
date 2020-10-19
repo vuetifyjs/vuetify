@@ -23,7 +23,7 @@ import {
   relativeDays,
 } from '../timestamp'
 
-describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-statements
+describe.skip('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-statements
   it('should parse time number', () => {
     expect(parseTime(0)).toBe(0)
     expect(parseTime(120)).toBe(120)
@@ -431,7 +431,7 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
     expect(getWeekdaySkips([1, 5, 1, 3, 4, 2, 6])).toEqual([0, 1, 1, 1, 1, 1, 2])
   })
 
-  describe('createDayList', () => {
+  describe.skip('createDayList', () => {
     it('should create day list', () => {
       const skips = getWeekdaySkips([0, 1, 2, 3, 4, 5, 6])
       const skips1 = getWeekdaySkips([1, 1, 1, 1, 1, 1, 0])

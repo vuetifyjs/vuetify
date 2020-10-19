@@ -1,11 +1,13 @@
-import VTimelineItem from '../VTimelineItem'
 import {
   mount,
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VTimelineItem.ts', () => {
+// Components
+// import VTimelineItem from '../VTimelineItem'
+
+describe.skip('VTimelineItem.ts', () => {
   type Instance = InstanceType<typeof VTimelineItem>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

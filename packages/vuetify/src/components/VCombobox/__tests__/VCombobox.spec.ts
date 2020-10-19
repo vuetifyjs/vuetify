@@ -1,5 +1,5 @@
 // Components
-import VCombobox from '../VCombobox'
+// import VCombobox from '../VCombobox'
 
 // Utilities
 import {
@@ -7,7 +7,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VCombobox.ts', () => {
+describe.skip('VCombobox.ts', () => {
   type Instance = InstanceType<typeof VCombobox>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

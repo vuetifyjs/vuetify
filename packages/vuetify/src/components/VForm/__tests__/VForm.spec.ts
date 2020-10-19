@@ -3,8 +3,8 @@ import Vue from 'vue'
 import Vuetify from '../../../framework'
 
 // Components
-import VForm from '../VForm'
-import VTextField from '../../VTextField'
+// import VForm from '../VForm'
+// import VTextField from '../../VTextField'
 
 // Utilties
 import {
@@ -15,7 +15,7 @@ import {
 
 import { wait } from '../../../../test'
 
-describe('VForm.ts', () => {
+describe.skip('VForm.ts', () => {
   type Instance = InstanceType<typeof VForm>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   let vuetify

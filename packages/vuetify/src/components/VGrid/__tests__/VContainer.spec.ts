@@ -1,5 +1,5 @@
 // Components
-import VContainer from '../VContainer'
+// import VContainer from '../VContainer'
 
 // Utilities
 import {
@@ -8,7 +8,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VContainer.ts', () => {
+describe.skip('VContainer.ts', () => {
   type Instance = InstanceType<typeof VContainer>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

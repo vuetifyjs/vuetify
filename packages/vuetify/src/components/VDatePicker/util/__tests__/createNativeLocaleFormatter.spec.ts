@@ -1,6 +1,6 @@
 import createNativeLocaleFormatter from '../createNativeLocaleFormatter'
 
-describe('VDatePicker/util/createNativeLocaleFormatter.ts', () => {
+describe.skip('VDatePicker/util/createNativeLocaleFormatter.ts', () => {
   it('should format dates', () => {
     const formatter = createNativeLocaleFormatter(undefined, { day: 'numeric', timeZone: 'UTC' })
     expect(formatter('2013-2-07')).toBe('7')

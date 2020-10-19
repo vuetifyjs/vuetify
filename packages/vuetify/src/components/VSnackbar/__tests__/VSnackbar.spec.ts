@@ -1,5 +1,5 @@
 // Components
-import VSnackbar from '../VSnackbar'
+// import VSnackbar from '../VSnackbar'
 
 // Utilities
 import {
@@ -8,7 +8,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VSnackbar.ts', () => {
+describe.skip('VSnackbar.ts', () => {
   type Instance = InstanceType<typeof VSnackbar>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

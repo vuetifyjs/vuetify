@@ -1,5 +1,5 @@
 // Components
-import VSkeletonLoader, { HTMLSkeletonLoaderElement } from '../VSkeletonLoader'
+// import VSkeletonLoader, { HTMLSkeletonLoaderElement } from '../VSkeletonLoader'
 
 // Utilities
 import {
@@ -8,7 +8,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VSkeletonLoader.ts', () => {
+describe.skip('VSkeletonLoader.ts', () => {
   type Instance = InstanceType<typeof VSkeletonLoader>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

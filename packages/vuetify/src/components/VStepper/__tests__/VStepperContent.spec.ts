@@ -2,11 +2,11 @@
 import Vue from 'vue'
 
 // Components
-import VStepperContent from '../VStepperContent'
-import {
-  VTabTransition,
-  VTabReverseTransition,
-} from '../../transitions'
+// import VStepperContent from '../VStepperContent'
+// import {
+//   VTabTransition,
+//   VTabReverseTransition,
+// } from '../../transitions'
 
 // Utilities
 import {
@@ -18,7 +18,7 @@ import { wait } from '../../../../test'
 
 const tip = '[Vuetify] The v-stepper-content component must be used inside a v-stepper'
 
-describe('VStepperContent.ts', () => {
+describe.skip('VStepperContent.ts', () => {
   type Instance = InstanceType<typeof VStepperContent>
   let mountFunction: (options?: object) => Wrapper<Instance>
   let localVue: typeof Vue

@@ -1,7 +1,7 @@
 // Components
-import VMenu from '../VMenu'
-import VCard from '../../VCard/VCard'
-import VListItem from '../../VList/VListItem'
+// import VMenu from '../VMenu'
+// import VCard from '../../VCard/VCard'
+// import VListItem from '../../VList/VListItem'
 
 // Utilities
 import {
@@ -11,7 +11,7 @@ import {
 import { keyCodes } from '../../../util/helpers'
 import { waitAnimationFrame } from '../../../../test'
 
-describe('VMenu.ts', () => {
+describe.skip('VMenu.ts', () => {
   type Instance = InstanceType<typeof VMenu>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

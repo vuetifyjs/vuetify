@@ -1,5 +1,5 @@
-// Component
-import VVirtualScroll from '../VVirtualScroll'
+// Components
+// import VVirtualScroll from '../VVirtualScroll'
 
 // Utilities
 import {
@@ -7,7 +7,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VVirtualScroll.ts', () => {
+describe.skip('VVirtualScroll.ts', () => {
   type Instance = InstanceType<typeof VVirtualScroll>
   let mountFunction: (options?: object) => Wrapper<Instance>
   let propsData: Object

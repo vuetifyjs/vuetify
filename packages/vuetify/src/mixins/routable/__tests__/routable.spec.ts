@@ -1,7 +1,7 @@
-import Routable from '../'
+// import Routable from '../'
 import { mount } from '@vue/test-utils'
 
-describe('routable.ts', () => {
+describe.skip('routable.ts', () => {
   it('should generate exact route link with to="/" and undefined exact', async () => {
     const wrapper = mount({
       mixins: [Routable],
