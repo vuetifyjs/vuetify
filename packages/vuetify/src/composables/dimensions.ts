@@ -25,7 +25,7 @@ const allDimensionsProps = {
 }
 
 // Types
-type PropValue = string | number | undefined
+type PropValue = string | number | null | undefined
 type PropNames = keyof typeof allDimensionsProps
 
 // Effect
