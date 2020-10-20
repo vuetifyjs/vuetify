@@ -1,19 +1,21 @@
 <template>
   <v-container style="max-width: 500px">
     <v-text-field
-      v-model="task"
+      v-model="newTask"
       label="What are you working on?"
       solo
       @keydown.enter="create"
     >
-      <v-fade-transition v-slot:append>
-        <v-icon
-          v-if="task"
-          @click="create"
-        >
-          add_circle
-        </v-icon>
-      </v-fade-transition>
+      <template v-slot:append>
+        <v-fade-transition>
+          <v-icon
+            v-if="newTask"
+            @click="create"
+          >
+            add_circle
+          </v-icon>
+        </v-fade-transition>
+      </template>
     </v-text-field>
 
     <h2 class="display-1 success--text pl-4">
@@ -86,7 +88,7 @@
                 v-if="task.done"
                 color="success"
               >
-                check
+                mdi-check
               </v-icon>
             </v-scroll-x-transition>
           </v-list-item>
@@ -109,7 +111,7 @@
           text: 'Fizzbuzz',
         },
       ],
-      task: null,
+      newTask: null,
     }),
 
     computed: {
@@ -128,10 +130,10 @@
       create () {
         this.tasks.push({
           done: false,
-          text: this.task,
+          text: this.newTask,
         })
 
-        this.task = null
+        this.newTask = null
       },
     },
   }

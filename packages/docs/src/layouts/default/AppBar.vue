@@ -18,8 +18,6 @@
       class="ml-0 mr-2 ml-md-2"
     />
 
-    <v-spacer />
-
     <default-app-bar-items />
   </v-app-bar>
 </template>

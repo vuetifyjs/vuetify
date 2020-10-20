@@ -74,7 +74,7 @@
       messages: [
         {
           from: 'You',
-          message: 'Sure, I\'ll see you later.',
+          message: `Sure, I'll see you later.`,
           time: '10:42am',
           color: 'deep-purple lighten-1',
         },

@@ -6,7 +6,7 @@
     v-bind="$attrs"
   >
     <v-hover>
-      <template v-slot="{ hover }">
+      <template #default="{ hover }">
         <a v-bind="adAttrs">
           <v-sheet
             class="overflow-none position-relative d-flex px-4 py-2 align-center"
@@ -55,10 +55,9 @@
 
     computed: {
       icon () {
-        switch (this.current.metadata.type) {
-          case 'Video': return '$mdiPlayCircle'
-          default: return '$mdiVuetify'
-        }
+        return this.current.metadata.type === 'Video'
+          ? '$mdiPlayCircle'
+          : '$mdiVuetify'
       },
     },
   }

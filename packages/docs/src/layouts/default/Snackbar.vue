@@ -18,7 +18,7 @@
       />
     </div>
 
-    <template v-slot:action="{ attrs }">
+    <template #action="{ attrs }">
       <v-btn
         class="mr-2"
         text

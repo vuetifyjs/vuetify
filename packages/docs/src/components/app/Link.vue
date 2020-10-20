@@ -64,6 +64,10 @@
     render (h) {
       const children = []
 
+      if (!this.isExternal && !this.attrs.to) {
+        return null
+      }
+
       if (!this.isSamePage) children.push(this.$slots.default)
       if (this.icon) {
         children.push(h(VIcon, {

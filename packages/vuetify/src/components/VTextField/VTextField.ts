@@ -131,7 +131,7 @@ export default baseMixins.extend<options>().extend({
       if (typeof this.counterValue === 'function') {
         return this.counterValue(this.internalValue)
       }
-      return (this.internalValue || '').toString().length
+      return [...(this.internalValue || '')].length
     },
     hasCounter (): boolean {
       return this.counter !== false && this.counter != null
@@ -196,7 +196,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   watch: {
-    labelValue: 'setLabelWidth',
+    // labelValue: 'setLabelWidth', // moved to mounted, see #11533
     outlined: 'setLabelWidth',
     label () {
       this.$nextTick(this.setLabelWidth)
@@ -228,6 +228,9 @@ export default baseMixins.extend<options>().extend({
   },
 
   mounted () {
+    // #11533
+    this.$watch(() => this.labelValue, this.setLabelWidth)
+
     this.autofocus && this.tryAutofocus()
 
     requestAnimationFrame(() => (this.isBooted = true))
@@ -275,8 +278,8 @@ export default baseMixins.extend<options>().extend({
     genIconSlot () {
       const slot = []
 
-      if (this.$slots['append']) {
-        slot.push(this.$slots['append'] as VNode[])
+      if (this.$slots.append) {
+        slot.push(this.$slots.append as VNode[])
       } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
       }
@@ -373,7 +376,7 @@ export default baseMixins.extend<options>().extend({
     },
     genInput () {
       const listeners = Object.assign({}, this.listeners$)
-      delete listeners['change'] // Change should not be bound externally
+      delete listeners.change // Change should not be bound externally
 
       return this.$createElement('input', {
         style: {},

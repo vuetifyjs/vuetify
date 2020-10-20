@@ -88,12 +88,15 @@
 
       <template v-else>
         <v-list-item
-          v-for="({ created_at, metadata, slug, title }) in filtered"
+          v-for="({
+            created_at_formated: created_at,
+            metadata,
+            slug,
+            title
+          }) in filtered"
           :key="slug"
-          :href="metadata.action"
           :ripple="false"
-          target="_blank"
-          @click="toggle(slug)"
+          @click="select(slug)"
         >
           <v-list-item-content>
             <div
@@ -124,9 +127,9 @@
 
 <script>
   // Utilities
+  import { differenceInDays } from 'date-fns'
   import { formatDate } from '@/util/date.js'
   import { get, sync } from 'vuex-pathify'
-  import { subDays } from 'date-fns'
   import { wait } from '@/util/helpers'
   import bucket from '@/plugins/cosmicjs'
 
@@ -160,9 +163,12 @@
       // property and format the date
       mapped () {
         return this.all.map(item => {
+          const date = new Date(item.created_at)
+
           return {
             ...item,
-            created_at: formatDate(new Date(item.created_at)),
+            created_at: date.getTime(),
+            created_at_formatted: formatDate(date),
             viewed: this.unotifications.includes(item.slug),
           }
         })
@@ -195,11 +201,6 @@
         status: 'published',
         limit: 10,
         sort: '-created_at',
-        query: {
-          created_at: {
-            $gt: Math.ceil(subDays(Date.now(), 60).getTime()),
-          },
-        },
       })
 
       this.all = notifications || []
@@ -211,7 +212,10 @@
 
       await wait(3000)
 
-      const { slug, metadata } = this.unread[0]
+      /* eslint-disable-next-line camelcase */
+      const { created_at, slug, metadata } = this.unread[0]
+
+      if (differenceInDays(Date.now(), created_at) > 60) return
 
       this.snackbar = {
         slug,
@@ -220,6 +224,18 @@
     },
 
     methods: {
+      select (slug) {
+        const { metadata } = this.all.find(notification => {
+          return notification.slug === slug
+        }) || {}
+
+        this.snackbar = {
+          slug,
+          ...metadata,
+        }
+
+        this.menu = false
+      },
       toggle (slug) {
         this.unotifications = this.unotifications.includes(slug)
           ? this.unotifications.filter(n => n !== slug)

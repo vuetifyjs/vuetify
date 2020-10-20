@@ -9,7 +9,7 @@
       <v-item
         v-for="n in length"
         :key="n"
-        v-slot:default="{ active, toggle }"
+        v-slot="{ active, toggle }"
       >
         <div>
           <v-btn

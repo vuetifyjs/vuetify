@@ -89,7 +89,7 @@ describe('layout > col', () => {
     expect(wrapper.classes()).toHaveLength(6)
   })
 
-  it("should apply boolean breakpoint classes for 'sm', 'md', 'lg', 'xl' prop", async () => {
+  it(`should apply boolean breakpoint classes for 'sm', 'md', 'lg', 'xl' prop`, async () => {
     const wrapper = mount(VCol, {
       propsData: {
         sm: true,
@@ -108,7 +108,7 @@ describe('layout > col', () => {
     expect(wrapper.classes()).toHaveLength(5)
   })
 
-  it("should apply boolean breakpoint classes for 'sm', 'md', 'lg', 'xl' prop set to empty string", async () => {
+  it(`should apply boolean breakpoint classes for 'sm', 'md', 'lg', 'xl' prop set to empty string`, async () => {
     const wrapper = mount(VCol, {
       propsData: {
         sm: '',

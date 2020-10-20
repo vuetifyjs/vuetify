@@ -90,21 +90,6 @@ describe('VRadio.ts', () => {
     expect(change).toHaveBeenCalledTimes(1)
   })
 
-  it('should not generate own colors when parent is in error', async () => {
-    const wrapper = mountFunction({
-      provide: {
-        radioGroup: {
-          register: () => {},
-          unregister: () => {},
-        },
-      },
-    })
-
-    wrapper.setData({ isActive: true })
-
-    await wrapper.vm.$nextTick()
-  })
-
   it('should use custom icons', () => {
     const wrapper = mountFunction({
       propsData: {
