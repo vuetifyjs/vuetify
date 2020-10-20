@@ -37,7 +37,7 @@ describe('VTextarea.ts', () => {
 
     // TODO: switch to e2e, jest doesn't do inline styles
     expect(wrapper.html()).toMatchSnapshot()
-    expect(el.element.style.getPropertyValue('height').length).not.toBe(0)
+    expect(el.element.style.getPropertyValue('height')).not.toHaveLength(0)
   })
 
   it('should watch lazy value', async () => {

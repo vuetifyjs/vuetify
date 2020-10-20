@@ -701,6 +701,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onMouseUp (e: MouseEvent) {
+      // eslint-disable-next-line sonarjs/no-collapsible-if
       if (
         this.hasMouseDown &&
         e.which !== 3 &&

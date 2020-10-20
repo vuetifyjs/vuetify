@@ -104,21 +104,6 @@ describe('VSnackbar.ts', () => {
   })
 
   it.each([
-    [undefined, false],
-    [false, false],
-    [true, true],
-  ])('should conditionally invoke setTimeout method using %s', (value, expected) => {
-    const setTimeout = jest.fn()
-
-    mountFunction({
-      propsData: { value },
-      methods: { setTimeout },
-    })
-
-    expect(setTimeout.mock.calls.length > 0).toBe(expected)
-  })
-
-  it.each([
     [undefined, true],
     [100, true],
     [0, false],

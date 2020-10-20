@@ -24,7 +24,7 @@
       <router-link
         v-for="({ to, level, text }, i) in toc"
         :key="text"
-        #default="{ href, isActive }"
+        v-slot="{ href, isActive }"
         :to="to"
       >
         <li

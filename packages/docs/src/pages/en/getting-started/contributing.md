@@ -121,7 +121,7 @@ The **App.vue** file used for Vuetify development is located in `packages/vuetif
 
 ### Documentation
 
-The documentation is located in `packages/docs` but also uses some files from `packages/api-generator`. A dev server for the documentation can be started by running `yarn dev docs` from the project root and will be available on [localhost:8095](http://localhost:8095/) by default.
+The documentation is located in `packages/docs` but also uses some files from `packages/api-generator`. A dev server for the documentation can be started by running `yarn dev docs` from the project root and will be available on [localhost:8080](http://localhost:8080/) by default.
 
 If you want to see changes from Vuetify in the documentation you need to run `yarn build:lib` in the vuetify package before starting the documentation server.
 

@@ -24,7 +24,7 @@
         height="300"
         item-height="64"
       >
-        <template v-slot="{ item }">
+        <template v-slot:default="{ item }">
           <v-list-item :key="item">
             <v-list-item-action>
               <v-btn

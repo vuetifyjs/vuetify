@@ -61,8 +61,8 @@ export class Theme extends Service {
     }
   }
 
-  // When setting css, check for element
-  // and apply new values
+  // When setting css, check for element and apply new values
+  /* eslint-disable-next-line accessor-pairs */
   set css (val: string) {
     if (this.vueMeta) {
       if (this.isVueMeta23) {

@@ -13,7 +13,7 @@
     />
   </app-ad>
 
-  <random-ad v-else />
+  <random-ad v-else :medium="medium" />
 </template>
 
 <script>
@@ -22,6 +22,10 @@
 
   export default {
     name: 'BsaAd',
+
+    props: {
+      medium: String,
+    },
 
     data: () => ({ error: false }),
 

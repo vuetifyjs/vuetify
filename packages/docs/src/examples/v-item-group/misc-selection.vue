@@ -15,7 +15,7 @@
             cols="12"
             md="6"
           >
-            <v-item v-slot:default="{ active, toggle }">
+            <v-item v-slot="{ active, toggle }">
               <v-img
                 :src="`https://cdn.vuetifyjs.com/images/${item.src}`"
                 height="150"
