@@ -269,9 +269,10 @@ export default mixins(
       this.checkMultipleProp()
       this.setInputDate()
 
-      if (!this.isMultiple && this.value && !this.pickerDate) {
-        this.tableDate = sanitizeDateString(this.inputDate, this.type === 'month' ? 'year' : 'month')
-      } else if (this.isMultiple && this.multipleValue.length && (!oldValue || !(oldValue as string[]).length) && !this.pickerDate) {
+      if (
+        (!this.isMultiple && this.value && !this.pickerDate) ||
+        (this.isMultiple && this.multipleValue.length && (!oldValue || !oldValue.length) && !this.pickerDate)
+      ) {
         this.tableDate = sanitizeDateString(this.inputDate, this.type === 'month' ? 'year' : 'month')
       }
     },

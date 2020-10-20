@@ -31,7 +31,7 @@ export function factory (prop = 'value', event = 'input') {
   })
 }
 
-/* eslint-disable-next-line no-redeclare */
+/* eslint-disable-next-line @typescript-eslint/no-redeclare */
 const Toggleable = factory()
 
 export default Toggleable

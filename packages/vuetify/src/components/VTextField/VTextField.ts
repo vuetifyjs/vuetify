@@ -278,8 +278,8 @@ export default baseMixins.extend<options>().extend({
     genIconSlot () {
       const slot = []
 
-      if (this.$slots['append']) {
-        slot.push(this.$slots['append'] as VNode[])
+      if (this.$slots.append) {
+        slot.push(this.$slots.append as VNode[])
       } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
       }
@@ -376,7 +376,7 @@ export default baseMixins.extend<options>().extend({
     },
     genInput () {
       const listeners = Object.assign({}, this.listeners$)
-      delete listeners['change'] // Change should not be bound externally
+      delete listeners.change // Change should not be bound externally
 
       return this.$createElement('input', {
         style: {},

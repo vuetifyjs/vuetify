@@ -330,6 +330,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     const change = jest.fn()
     let value = 'test'
     const component = {
+      // eslint-disable-next-line sonarjs/no-identical-functions
       render (h) {
         return h(VTextField, {
           on: {

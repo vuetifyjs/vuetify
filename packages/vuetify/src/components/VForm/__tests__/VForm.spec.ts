@@ -15,6 +15,16 @@ import {
 
 import { wait } from '../../../../test'
 
+const errorInput = {
+  render (h) {
+    return h(VTextField, {
+      props: {
+        rules: [v => v === 1 || 'Error'],
+      },
+    })
+  },
+}
+
 describe('VForm.ts', () => {
   type Instance = InstanceType<typeof VForm>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
@@ -135,15 +145,7 @@ describe('VForm.ts', () => {
         lazyValidation: true,
       },
       slots: {
-        default: [{
-          render (h) {
-            return h(VTextField, {
-              props: {
-                rules: [v => v === 1 || 'Error'],
-              },
-            })
-          },
-        }],
+        default: [errorInput],
       },
     })
 
@@ -233,26 +235,7 @@ describe('VForm.ts', () => {
     const validate = jest.fn(() => false)
     const wrapper = mountFunction({
       slots: {
-        default: [
-          {
-            render (h) {
-              return h(VTextField, {
-                props: {
-                  rules: [v => v === 1 || 'Error'],
-                },
-              })
-            },
-          },
-          {
-            render (h) {
-              return h(VTextField, {
-                props: {
-                  rules: [v => v === 1 || 'Error'],
-                },
-              })
-            },
-          },
-        ],
+        default: Array(2).fill(errorInput),
       },
     })
 

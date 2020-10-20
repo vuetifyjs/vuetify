@@ -3,7 +3,7 @@ export default {
   close: 'Fermer',
   dataIterator: {
     noResultsText: 'Aucun enregistrement correspondant trouvé',
-    loadingText: "Chargement de l'élément...",
+    loadingText: 'Chargement de l\'élément...',
   },
   dataTable: {
     itemsPerPageText: 'Lignes par page:',

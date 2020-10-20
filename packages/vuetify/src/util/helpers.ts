@@ -89,8 +89,11 @@ export function getNestedValue (obj: any, path: (string | number)[], fallback?: 
 export function deepEqual (a: any, b: any): boolean {
   if (a === b) return true
 
-  if (a instanceof Date && b instanceof Date) {
-    // If the values are Date, they were convert to timestamp with getTime and compare it
+  // eslint-disable-next-line sonarjs/no-collapsible-if
+  if (
+    a instanceof Date && b instanceof Date
+  ) {
+    // If the values are Date, convert them to timestamps and compare
     if (a.getTime() !== b.getTime()) return false
   }
 

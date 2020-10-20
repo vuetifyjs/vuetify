@@ -1,9 +1,9 @@
 <template>
   <validation-observer
     ref="observer"
-    v-slot=""
+    v-slot="{ invalid }"
   >
-    <form>
+    <form @submit.prevent="submit">
       <validation-provider
         v-slot="{ errors }"
         name="Name"
@@ -44,7 +44,7 @@
         ></v-select>
       </validation-provider>
       <validation-provider
-        v-slot=""
+        v-slot="{ errors }"
         rules="required"
         name="checkbox"
       >
@@ -60,7 +60,8 @@
 
       <v-btn
         class="mr-4"
-        @click="submit"
+        type="submit"
+        :disabled="invalid"
       >
         submit
       </v-btn>
@@ -101,7 +102,6 @@
       name: '',
       email: '',
       select: null,
-      errors: null,
       items: [
         'Item 1',
         'Item 2',
