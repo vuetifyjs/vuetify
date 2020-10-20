@@ -26,6 +26,7 @@ import {
 // Types
 import mixins from '../../util/mixins'
 import { VNode, PropType, VNodeChildren } from 'vue'
+import { PropValidator } from 'vue/types/options'
 import { SelectItemKey } from 'vuetify/types'
 
 type ListTile = { item: any, disabled?: null | boolean, value?: boolean, index: number };
@@ -44,9 +45,9 @@ export default mixins(Colorable, Themeable).extend({
     dense: Boolean,
     hideSelected: Boolean,
     items: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
     itemDisabled: {
       type: [String, Array, Function] as PropType<SelectItemKey>,
       default: 'disabled',
@@ -63,9 +64,9 @@ export default mixins(Colorable, Themeable).extend({
     noFilter: Boolean,
     searchInput: null as unknown as PropType<any>,
     selectedItems: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
   },
 
   computed: {
@@ -131,7 +132,7 @@ export default mixins(Colorable, Themeable).extend({
       const searchInput = (this.searchInput || '').toString().toLocaleLowerCase()
       const index = text.toLocaleLowerCase().indexOf(searchInput)
 
-      if (index < 0) return { start: '', middle: text, end: '' }
+      if (index < 0) return { start: text, middle: '', end: '' }
 
       const start = text.slice(0, index)
       const middle = text.slice(index, index + searchInput.length)

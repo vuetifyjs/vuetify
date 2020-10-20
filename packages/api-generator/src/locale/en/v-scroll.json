@@ -1,0 +1,7 @@
+{
+  "argument": "The function to invoke on target scroll",
+  "modifiers": {
+    "#target": "The target watched for scroll changes. Defaults to window but can be changed to any valid id selector.",
+    "self": "Binds to the element that the the directive is attached."
+  }
+}

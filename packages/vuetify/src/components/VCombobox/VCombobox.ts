@@ -9,7 +9,7 @@ import VAutocomplete from '../VAutocomplete/VAutocomplete'
 import { keyCodes } from '../../util/helpers'
 
 // Types
-import { PropType } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
 export default VAutocomplete.extend({
@@ -17,9 +17,9 @@ export default VAutocomplete.extend({
 
   props: {
     delimiters: {
-      type: Array as PropType<string[]>,
+      type: Array,
       default: () => ([]),
-    },
+    } as PropValidator<string[]>,
     returnObject: {
       type: Boolean,
       default: true,
@@ -166,7 +166,7 @@ export default VAutocomplete.extend({
       }
     },
     setValue (value?: any) {
-      VSelect.options.methods.setValue.call(this, value != null ? value : this.internalSearch)
+      VSelect.options.methods.setValue.call(this, value ?? this.internalSearch)
     },
     updateEditing () {
       const value = this.internalValue.slice()
@@ -230,7 +230,7 @@ export default VAutocomplete.extend({
     onPaste (event: ClipboardEvent) {
       if (!this.multiple || this.searchIsDirty) return
 
-      const pastedItemText = event.clipboardData!.getData('text/vnd.vuetify.autocomplete.item+plain')
+      const pastedItemText = event.clipboardData?.getData('text/vnd.vuetify.autocomplete.item+plain')
       if (pastedItemText && this.findExistingIndex(pastedItemText as any) === -1) {
         event.preventDefault()
         VSelect.options.methods.selectItem.call(this, pastedItemText as any)

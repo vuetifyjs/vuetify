@@ -333,7 +333,7 @@ export default CalendarBase.extend({
             on: this.getDefaultMouseEventHandlers(':event', nativeEvent => ({ ...scope, nativeEvent })),
             directives: [{
               name: 'ripple',
-              value: this.eventRipple != null ? this.eventRipple : true,
+              value: this.eventRipple ?? true,
             }],
             ...data,
           })
@@ -379,7 +379,7 @@ export default CalendarBase.extend({
         },
         directives: [{
           name: 'ripple',
-          value: this.eventRipple != null ? this.eventRipple : true,
+          value: this.eventRipple ?? true,
         }],
         on: {
           click: () => this.$emit('click:more', day),

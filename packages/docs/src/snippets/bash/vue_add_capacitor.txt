@@ -1,5 +1,0 @@
-# Install
-$ vue add @nklayman/capacitor
-
-# Usage
-$ yarn capacitor:serve

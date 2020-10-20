@@ -25,6 +25,8 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
 
   beforeEach(() => {
     mountFunction = (options?: MountOptions<Instance>) => {
+      const breakpoint = new Breakpoint(preset)
+      breakpoint.init()
       return mount(VNavigationDrawer, {
         ...options,
         mocks: {
@@ -33,7 +35,7 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
             theme: {
               dark: false,
             },
-            breakpoint: new Breakpoint(preset),
+            breakpoint,
             application: new Application(),
           },
         },
@@ -68,11 +70,13 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
   })
 
   it('should not resize the content when permanent and stateless', async () => {
-    const wrapper = mountFunction({ propsData: {
-      app: true,
-      permanent: true,
-      stateless: true,
-    } })
+    const wrapper = mountFunction({
+      propsData: {
+        app: true,
+        permanent: true,
+        stateless: true,
+      },
+    })
 
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.$vuetify.application.left).toBe(256)
@@ -149,9 +153,11 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
   })
 
   it('should update content padding when temporary state is changed', async () => {
-    const wrapper = mountFunction({ propsData: {
-      app: true,
-    } })
+    const wrapper = mountFunction({
+      propsData: {
+        app: true,
+      },
+    })
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.$vuetify.application.left).toBe(256)
@@ -164,9 +170,11 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
   })
 
   it('should update content padding when permanent state is changed', async () => {
-    const wrapper = mountFunction({ propsData: {
-      app: true,
-    } })
+    const wrapper = mountFunction({
+      propsData: {
+        app: true,
+      },
+    })
     await resizeWindow(800)
     wrapper.vm.$vuetify.breakpoint.width = 800
     await wrapper.vm.$nextTick()
@@ -181,9 +189,11 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
   })
 
   it('should update content padding when miniVariant is changed', async () => {
-    const wrapper = mountFunction({ propsData: {
-      app: true,
-    } })
+    const wrapper = mountFunction({
+      propsData: {
+        app: true,
+      },
+    })
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.$vuetify.application.left).toBe(256)
@@ -197,9 +207,11 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
 
   it('should not remain mobile when temporary is toggled', async () => {
     await resizeWindow(800)
-    const wrapper = mountFunction({ propsData: {
-      temporary: true,
-    } })
+    const wrapper = mountFunction({
+      propsData: {
+        temporary: true,
+      },
+    })
 
     await resizeWindow(1920)
     expect(wrapper.vm.isMobile).toBe(false)
@@ -224,11 +236,13 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
 
   it('should update content padding when mobile is toggled', async () => {
     const input = jest.fn()
-    const wrapper = mountFunction({ propsData: {
-      app: true,
-      fixed: true,
-      value: true,
-    } })
+    const wrapper = mountFunction({
+      propsData: {
+        app: true,
+        fixed: true,
+        value: true,
+      },
+    })
     await wrapper.vm.$nextTick()
 
     wrapper.vm.$on('input', input)

@@ -30,7 +30,7 @@ describe('VWindow.ts', () => {
     }
   })
 
-  it('it should return the correct transition', async () => {
+  it('should return the correct transition', async () => {
     const wrapper = mountFunction()
     // Force booted
     wrapper.setData({ isBooted: true })

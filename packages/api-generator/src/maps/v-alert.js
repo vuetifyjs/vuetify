@@ -2,6 +2,10 @@ module.exports = {
   'v-alert': {
     slots: [
       {
+        name: 'default',
+        props: undefined,
+      },
+      {
         name: 'append',
         props: undefined,
       },
