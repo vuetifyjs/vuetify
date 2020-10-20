@@ -22,8 +22,8 @@
     "clean": "lerna clean"
   },
   "engines": {
-    "node": "^14.13.1",
-    "yarn": "^1.23.0"
+    "node": "^12.19.0",
+    "yarn": "^1.22.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -78,7 +78,6 @@
     "vuex": "^3.0.1",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
-    "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.2.1"
   },
   "resolutions": {
