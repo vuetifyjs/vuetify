@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import VDataTableHeader from '../VDataTableHeader'
 import { Lang } from '../../../services/lang'
 import ripple from '../../../directives/ripple'

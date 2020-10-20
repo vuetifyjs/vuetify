@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import VCalendarDaily from '../VCalendarDaily'
 import {
   mount,

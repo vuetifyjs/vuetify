@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import Times from '../times'
 import {
   mount,

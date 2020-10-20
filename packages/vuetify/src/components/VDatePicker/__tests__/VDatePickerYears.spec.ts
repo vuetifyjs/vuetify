@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import VDatePickerYears from '../VDatePickerYears'
 import {
   mount,

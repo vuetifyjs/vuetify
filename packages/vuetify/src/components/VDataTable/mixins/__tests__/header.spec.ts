@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import Header from '../header'
 import {
   mount,

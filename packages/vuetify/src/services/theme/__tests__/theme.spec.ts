@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 // Service
 import { Theme } from '../index'
 

@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import Row from '../Row'
 import {
   mount,

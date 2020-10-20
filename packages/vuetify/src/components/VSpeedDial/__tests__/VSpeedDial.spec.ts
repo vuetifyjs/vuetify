@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 // Components
 import VSpeedDial from '../VSpeedDial'
 import VBtn from '../../VBtn/VBtn'

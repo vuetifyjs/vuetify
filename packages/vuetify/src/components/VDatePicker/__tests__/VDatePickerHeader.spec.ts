@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import VDatePickerHeader from '../VDatePickerHeader'
 import { Lang } from '../../../services/lang'
 import { preset } from '../../../presets/default'

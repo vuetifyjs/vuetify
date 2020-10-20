@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import VApp from '../../../components/VApp'
 import Detachable from '../'
 import { mount } from '@vue/test-utils'

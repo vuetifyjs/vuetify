@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import Vue from 'vue'
 import VTextField from '../VTextField'
 import VProgressLinear from '../../VProgressLinear'

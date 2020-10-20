@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import VColorPickerCanvas from '../VColorPickerCanvas'
 import {
   mount,

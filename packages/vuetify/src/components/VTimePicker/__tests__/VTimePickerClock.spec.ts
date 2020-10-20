@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import VTimePickerClock from '../VTimePickerClock'
 import { touch } from '../../../../test'
 import { mount } from '@vue/test-utils'

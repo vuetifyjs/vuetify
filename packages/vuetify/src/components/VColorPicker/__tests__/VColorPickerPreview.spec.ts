@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import VColorPickerPreview from '../VColorPickerPreview'
 import {
   mount,

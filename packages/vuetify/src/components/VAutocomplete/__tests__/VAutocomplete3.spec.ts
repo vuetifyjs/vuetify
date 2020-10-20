@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 // Components
 import VAutocomplete from '../VAutocomplete'
 

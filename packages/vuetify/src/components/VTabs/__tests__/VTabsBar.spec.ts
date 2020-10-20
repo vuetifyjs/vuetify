@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 // Components
 import VTab from '../VTab'
 import VTabsBar from '../VTabsBar'

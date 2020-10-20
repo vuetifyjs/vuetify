@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 // Extensions
 import { BaseSlideGroup } from '../VSlideGroup/VSlideGroup'
 

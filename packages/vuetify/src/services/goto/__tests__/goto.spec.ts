@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 // Lib
 import { mount } from '@vue/test-utils'
 

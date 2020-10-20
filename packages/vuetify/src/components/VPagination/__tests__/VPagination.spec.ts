@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import VPagination from '../VPagination'
 import {
   mount,

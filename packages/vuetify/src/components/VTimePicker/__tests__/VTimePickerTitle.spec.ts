@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import Vue from 'vue'
 import VTimePickerTitle from '../VTimePickerTitle'
 import { SelectingTimes } from '../VTimePicker'

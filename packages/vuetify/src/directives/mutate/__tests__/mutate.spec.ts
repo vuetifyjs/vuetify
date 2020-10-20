@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 // Directives
 import Mutate from '../'
 

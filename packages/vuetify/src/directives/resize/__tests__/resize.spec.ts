@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 // Setup
 import { h } from 'vue'
 

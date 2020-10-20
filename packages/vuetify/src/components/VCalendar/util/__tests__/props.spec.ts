@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import { validateNumber } from '../props'
 
 describe('props.ts', () => {

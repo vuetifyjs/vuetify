@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import * as easingPatterns from '../easing-patterns'
 
 describe('easing-patterns.ts', () => {

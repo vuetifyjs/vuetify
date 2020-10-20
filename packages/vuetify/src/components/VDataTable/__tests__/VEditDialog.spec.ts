@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import VEditDialog from '../VEditDialog'
 import VMenu from '../../VMenu'
 

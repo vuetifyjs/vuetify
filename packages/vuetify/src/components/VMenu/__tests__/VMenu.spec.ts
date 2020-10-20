@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 // Components
 import VMenu from '../VMenu'
 import VCard from '../../VCard/VCard'

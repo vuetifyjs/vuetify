@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 // Libraries
 import Vue from 'vue'
 import Vuetify from '../../../framework'

@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 // Components
 import VBreadcrumbs from '../VBreadcrumbs'
 import VBreadcrumbsItem from '../VBreadcrumbsItem'

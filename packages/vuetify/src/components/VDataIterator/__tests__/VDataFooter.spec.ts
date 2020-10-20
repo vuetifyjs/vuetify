@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import VDataFooter from '../VDataFooter'
 import { Lang } from '../../../services/lang'
 import {

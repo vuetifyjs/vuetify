@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import Vue from 'vue'
 import { mount } from '@vue/test-utils'
 import VCol from '../VCol'

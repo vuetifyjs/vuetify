@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import VInput from '../VInput'
 import {
   mount,

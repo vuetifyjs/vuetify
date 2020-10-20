@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import VSimpleTable from '../VSimpleTable'
 import {
   mount,

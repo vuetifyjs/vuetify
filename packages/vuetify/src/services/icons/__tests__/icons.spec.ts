@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 // Service
 import { Icons } from '../index'
 

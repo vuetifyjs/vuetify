@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 // Directives
 import ClickOutside from '../'
 import { wait } from '../../../../test'

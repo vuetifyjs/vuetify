@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import CalendarWithIntervals from '../calendar-with-intervals'
 import { CalendarTimestamp } from 'vuetify/types'
 import { parseTimestamp } from '../../util/timestamp'

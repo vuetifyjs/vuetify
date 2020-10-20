@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import VVirtualTable from '../VVirtualTable'
 import {
   mount,

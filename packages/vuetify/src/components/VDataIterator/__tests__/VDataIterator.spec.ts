@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import VDataIterator from '../VDataIterator'
 import { Lang } from '../../../services/lang'
 import {

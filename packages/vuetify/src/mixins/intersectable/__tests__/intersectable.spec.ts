@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import intersectable from '../index'
 
 import {

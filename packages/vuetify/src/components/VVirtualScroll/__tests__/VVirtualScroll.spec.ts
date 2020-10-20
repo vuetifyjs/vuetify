@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 // Component
 import VVirtualScroll from '../VVirtualScroll'
 

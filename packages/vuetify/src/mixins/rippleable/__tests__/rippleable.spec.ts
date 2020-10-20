@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import Rippleable from '../'
 import {
   mount,

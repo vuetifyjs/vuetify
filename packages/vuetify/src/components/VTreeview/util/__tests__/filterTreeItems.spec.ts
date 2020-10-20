@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import { filterTreeItem, filterTreeItems } from '../filterTreeItems'
 
 describe('filterTreeItems.ts', () => {

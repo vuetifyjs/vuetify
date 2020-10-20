@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import dependent from '../'
 import toggleable from '../../toggleable'
 import { mount } from '@vue/test-utils'
