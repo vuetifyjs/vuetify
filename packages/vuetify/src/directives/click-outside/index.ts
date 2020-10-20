@@ -25,15 +25,6 @@ function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirec
   // with non-toggleable components
   if (!e || isActive(e) === false) return
 
-  // If click was triggered programmaticaly (domEl.click()) then
-  // it shouldn't be treated as click-outside
-  // Chrome/Firefox support isTrusted property
-  // IE/Edge support pointerType property (empty if not triggered
-  // by pointing device)
-  if (('isTrusted' in e && !e.isTrusted) ||
-    ('pointerType' in e && !e.pointerType)
-  ) return
-
   // Check if additional elements were passed to be included in check
   // (click must be outside all included elements, if any)
   const elements = ((typeof binding.value === 'object' && binding.value.include) || (() => []))()

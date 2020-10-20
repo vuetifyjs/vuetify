@@ -11,9 +11,12 @@ describe('v-intersect', () => {
     const el = document.createElement('div')
     document.body.appendChild(el)
 
-    Intersect.mounted(el, {
-      value: callback,
-      modifiers: { quiet: true } } as any,
+    Intersect.mounted(
+      el,
+      {
+        value: callback,
+        modifiers: { quiet: true }
+      } as any,
       vnode,
       null
     )

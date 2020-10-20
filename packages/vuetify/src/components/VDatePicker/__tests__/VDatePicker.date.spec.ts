@@ -51,11 +51,13 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
   })
 
   it('should work with year < 1000', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        value: '0005-11-01',
-      },
-    })
+    expect(() => {
+      mountFunction({
+        propsData: {
+          value: '0005-11-01',
+        },
+      })
+    }).not.toThrow()
   })
 
   it('should display the correct year when model is null', () => {
