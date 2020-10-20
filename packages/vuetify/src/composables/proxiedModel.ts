@@ -16,12 +16,11 @@ export function useProxiedModel<
   transformOut: (value: Inner) => Props[Prop] = (v: any) => v,
 ) {
   const vm = getCurrentInstance()
+
+  if (!vm) consoleError('useProxiedModel must be called from inside a setup function')
+
   const propIsDefined = computed(() => {
-    if (!vm || !vm.vnode.props) {
-      consoleError('useProxiedModel must be called from inside a setup function')
-      return false
-    }
-    return typeof props[prop] !== 'undefined' && (vm.vnode.props.hasOwnProperty(prop) || vm.vnode.props.hasOwnProperty(kebabCase(prop)))
+    return typeof props[prop] !== 'undefined' && (vm?.vnode.props?.hasOwnProperty(prop) || vm?.vnode.props?.hasOwnProperty(kebabCase(prop)))
   })
 
   const internal = ref(transformIn(propIsDefined.value ? props[prop] : defaultValue)) as Ref<Inner>
