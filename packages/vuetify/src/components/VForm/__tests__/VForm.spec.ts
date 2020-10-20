@@ -106,39 +106,6 @@ describe('VForm.ts', () => {
     expect(Object.keys(wrapper.vm.errorBag)).toHaveLength(1)
   })
 
-  // TODO: Figure out how to test this with the updated v-form
-  /*
-  it.skip('should only watch children if not lazy', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        lazyValidation: true
-      },
-      slots: {
-        default: [VTextField]
-      }
-    })
-
-    const input = wrapper.vm.getInputs()[0]
-    wrapper.vm.watchChild(input)
-    input.shouldValidate = true
-    wrapper.vm.watchChild(input)
-    await wrapper.vm.$nextTick()
-
-    // beware, depends on number of computeds in VTextField
-    const watchers = 28
-    expect(input._watchers).toHaveLength(watchers)
-    input.shouldValidate = false
-    wrapper.vm.watchChild(input)
-    await wrapper.vm.$nextTick()
-
-    expect(input._watchers).toHaveLength(watchers + 1)
-    input.shouldValidate = true
-    await wrapper.vm.$nextTick()
-
-    expect(Object.keys(wrapper.vm.errorBag)).toHaveLength(1)
-  })
-  */
-
   it('should emit input when calling validate on lazy-validated form', async () => {
     const wrapper = mountFunction({
       propsData: {

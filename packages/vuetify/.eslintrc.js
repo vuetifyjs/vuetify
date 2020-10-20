@@ -30,6 +30,8 @@ module.exports = {
     'jest/prefer-to-be-undefined': 'warn',
     'jest/prefer-to-contain': 'warn',
     'jest/prefer-to-have-length': 'warn',
+    'jest/no-standalone-expect': 'off',
+    'jest/no-conditional-expect': 'off',
   },
   overrides: [
     {
