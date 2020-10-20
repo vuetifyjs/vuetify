@@ -10842,6 +10842,244 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
 </div>
 `;
 
+exports[`VDataTable.ts should respect mustSort property on options 1`] = `
+<div class="v-data-table theme--light">
+  <div class="v-data-table__wrapper">
+    <table>
+      <colgroup>
+        <col class>
+      </colgroup>
+      <thead class="v-data-table-header v-data-table-header-mobile">
+        <tr>
+          <th>
+            <div class="v-data-table-header-mobile__wrapper">
+              <div class="v-input v-input--hide-details theme--light v-text-field v-select">
+                <div class="v-input__control">
+                  <div role="button"
+                       aria-haspopup="listbox"
+                       aria-expanded="false"
+                       aria-owns="list-700"
+                       class="v-input__slot"
+                  >
+                    <div class="v-select__slot">
+                      <label for="input-700"
+                             class="v-label theme--light"
+                             style="left: 0px; position: absolute;"
+                      >
+                        Sort by
+                      </label>
+                      <div class="v-select__selections">
+                        <input id="input-700"
+                               readonly="readonly"
+                               type="text"
+                               aria-readonly="false"
+                               autocomplete="off"
+                        >
+                      </div>
+                      <div class="v-input__append-inner">
+                        <div class="v-input__icon v-input__icon--append">
+                          <i aria-hidden="true"
+                             class="v-icon notranslate material-icons theme--light"
+                          >
+                            $dropdown
+                          </i>
+                        </div>
+                      </div>
+                      <input type="hidden">
+                    </div>
+                    <div class="v-menu">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Frozen Yogurt
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Ice cream sandwich
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Eclair
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Cupcake
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Gingerbread
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Jelly bean
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Lollipop
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Honeycomb
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Donut
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              KitKat
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="v-data-footer">
+    <div class="v-data-footer__select">
+      Rows per page:
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
+        <div class="v-input__control">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="list-704"
+               class="v-input__slot"
+          >
+            <div class="v-select__slot">
+              <div class="v-select__selections">
+                <div class="v-select__selection v-select__selection--comma">
+                  10
+                </div>
+                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                       id="input-704"
+                       readonly="readonly"
+                       type="text"
+                       aria-readonly="false"
+                       autocomplete="off"
+                >
+              </div>
+              <div class="v-input__append-inner">
+                <div class="v-input__icon v-input__icon--append">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $dropdown
+                  </i>
+                </div>
+              </div>
+              <input type="hidden"
+                     value="10"
+              >
+            </div>
+            <div class="v-menu">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-data-footer__pagination">
+      1-10 of 10
+    </div>
+    <div class="v-data-footer__icons-before">
+      <button type="button"
+              disabled="disabled"
+              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Previous page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon notranslate material-icons theme--light"
+          >
+            $prev
+          </i>
+        </span>
+      </button>
+    </div>
+    <div class="v-data-footer__icons-after">
+      <button type="button"
+              disabled="disabled"
+              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Next page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon notranslate material-icons theme--light"
+          >
+            $next
+          </i>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`VDataTable.ts should search group-by column 1`] = `
 <div class="v-data-table theme--light">
   <div class="v-data-table__wrapper">

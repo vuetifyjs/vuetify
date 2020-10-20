@@ -3,7 +3,7 @@
     v-if="bar"
     app
     class="justify-center"
-    color="grey darken-4"
+    color="#1697F6"
     dark
     window
   >
@@ -11,16 +11,22 @@
 
     <v-spacer />
 
-    <a
-      class="text-subtitle-1 white--text text-decoration-none text-body-2"
-      href="https://v2.vuetifyjs.com"
-      rel="noopener"
-      target="_blank"
-    >
-      Looking for the old docs?
+    <div>
+      You are browsing the new v2.x documentation.
 
-      <v-icon small>$mdiOpenInNew</v-icon>
-    </a>
+      <a
+        class="text-subtitle-1 white--text text-decoration-none text-body-2"
+        href="https://v2.vuetifyjs.com"
+        rel="noopener"
+        target="_blank"
+      >
+        Click here
+
+        <v-icon small class="mr-0">$mdiOpenInNew</v-icon>
+      </a>
+
+      for the old v2.x documentation.
+    </div>
 
     <v-spacer />
 

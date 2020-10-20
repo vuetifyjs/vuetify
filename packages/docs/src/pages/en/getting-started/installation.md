@@ -37,6 +37,12 @@ Now that you have an instantiated project, you can add the Vuetify [Vue CLI pack
 vue add vuetify
 ```
 
+<alert type="warning">
+
+  This command will make changes to your project template files, components folder, vue.config.js, etc. If you are installing Vuetify via Vue-CLI, make sure you commit your code to avoid any potential data loss. Template changes can be skipped by selecting the advanced install option during install.
+
+</alert>
+
 ### Vue UI install
 
 Vuetify can also be installed using **Vue UI**, the new visual application for Vue CLI. Ensure that you have the latest version of Vue CLI installed, then from your terminal type:

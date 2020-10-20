@@ -6,7 +6,7 @@ meta:
 related:
   - /getting-started/installation/
   - /getting-started/wireframes/
-  - /introduction/consulting/
+  - /introduction/support/
 ---
 
 

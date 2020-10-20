@@ -5,7 +5,7 @@
       :open-on-click="filteredIcons.length > 0"
       offset-y
     >
-      <template v-slot:activator="{ on, attrs }">
+      <template #activator="{ on, attrs }">
         <v-text-field
           v-model="search"
           hide-details
@@ -17,7 +17,7 @@
           @click:clear="reset"
           v-on="on"
         >
-          <template v-slot:prepend-inner>
+          <template #prepend-inner>
             <v-icon
               v-if="copied"
               color="primary"
@@ -27,7 +27,7 @@
             <code class="mx-1 py-1">mdi-</code>
           </template>
 
-          <template v-slot:append>
+          <template #append>
             <span
               v-if="copied"
               class="text--primary pt-1"
@@ -44,7 +44,7 @@
           :item-height="56"
           :height="Math.min(filteredIcons.length * 56, 336)"
         >
-          <template v-slot="{ item }">
+          <template #default="{ item }">
             <v-list-item
               :key="item"
               @click.stop="copy(item)"

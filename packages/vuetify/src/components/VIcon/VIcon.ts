@@ -153,17 +153,23 @@ const VIcon = mixins(
       return h(this.hasClickListener ? 'button' : this.tag, data, newChildren)
     },
     renderSvgIcon (icon: string, h: CreateElement): VNode {
-      const fontSize = this.getSize()
       const svgData: VNodeData = {
         class: 'v-icon__svg',
         attrs: {
           xmlns: 'http://www.w3.org/2000/svg',
           viewBox: '0 0 24 24',
-          height: fontSize || '24',
-          width: fontSize || '24',
           role: 'img',
           'aria-hidden': true,
         },
+      }
+
+      const size = this.getSize()
+      if (size) {
+        svgData.style = {
+          fontSize: size,
+          height: size,
+          width: size,
+        }
       }
 
       return h(this.hasClickListener ? 'button' : 'span', this.getSvgWrapperData(), [
@@ -182,7 +188,7 @@ const VIcon = mixins(
     ): VNode {
       const data: VNodeData = {
         class: {
-          'v-icon__svg': true,
+          'v-icon__component': true,
         },
       }
 

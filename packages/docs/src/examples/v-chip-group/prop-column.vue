@@ -1,26 +1,45 @@
 <template>
-  <v-row justify="space-around">
+  <v-row justify="center">
     <v-col
       cols="12"
-      sm="6"
-      md="4"
-      lg="3"
+      sm="7"
+      md="6"
+      lg="5"
     >
       <v-sheet
         elevation="10"
-        class="pa-4"
+        rounded="xl"
       >
-        <v-chip-group
-          column
-          active-class="primary--text"
+        <v-sheet
+          class="pa-3 primary text-right"
+          dark
+          rounded="t-xl"
         >
-          <v-chip
-            v-for="tag in tags"
-            :key="tag"
+          <v-btn icon>
+            <v-icon>mdi-content-save-cog-outline</v-icon>
+          </v-btn>
+
+          <v-btn
+            class="ml-2"
+            icon
           >
-            {{ tag }}
-          </v-chip>
-        </v-chip-group>
+            <v-icon>mdi-check-bold</v-icon>
+          </v-btn>
+        </v-sheet>
+
+        <div class="pa-4">
+          <v-chip-group
+            active-class="primary--text"
+            column
+          >
+            <v-chip
+              v-for="tag in tags"
+              :key="tag"
+            >
+              {{ tag }}
+            </v-chip>
+          </v-chip-group>
+        </div>
       </v-sheet>
     </v-col>
   </v-row>

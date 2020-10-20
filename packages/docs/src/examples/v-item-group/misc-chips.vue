@@ -28,7 +28,7 @@
         <v-item
           v-for="n in 8"
           :key="n"
-          v-slot:default="{ active, toggle }"
+          v-slot="{ active, toggle }"
         >
           <v-chip
             active-class="purple--text"

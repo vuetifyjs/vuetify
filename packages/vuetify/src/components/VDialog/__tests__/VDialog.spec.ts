@@ -159,6 +159,7 @@ describe('VDialog.ts', () => {
         disabled: true,
       },
       scopedSlots: {
+        // eslint-disable-next-line sonarjs/no-identical-functions
         activator ({ on }) {
           return this.$createElement('div', {
             staticClass: 'activator',
@@ -237,6 +238,7 @@ describe('VDialog.ts', () => {
         disabled: true,
       },
       scopedSlots: {
+        // eslint-disable-next-line sonarjs/no-identical-functions
         activator ({ on }) {
           return this.$createElement('div', {
             staticClass: 'activator',
@@ -258,6 +260,7 @@ describe('VDialog.ts', () => {
     const clickOutside = jest.fn()
     const wrapper = mountFunction({
       scopedSlots: {
+        // eslint-disable-next-line sonarjs/no-identical-functions
         activator ({ on }) {
           return this.$createElement('div', {
             staticClass: 'activator',
@@ -326,6 +329,7 @@ describe('VDialog.ts', () => {
         hideOverlay: true,
       },
       scopedSlots: {
+        // eslint-disable-next-line sonarjs/no-identical-functions
         activator ({ on }) {
           return this.$createElement('div', {
             staticClass: 'activator',

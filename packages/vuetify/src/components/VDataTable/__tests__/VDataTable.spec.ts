@@ -965,6 +965,8 @@ describe('VDataTable.ts', () => {
 
     wrapper.find('th').trigger('click')
     await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should hide group button when column is not groupable', async () => {

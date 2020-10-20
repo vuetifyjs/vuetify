@@ -21,7 +21,7 @@
             flat
             solo-inverted
             hide-details
-            prepend-inner-icon="search"
+            prepend-inner-icon="mdi-magnify"
             label="Search"
           ></v-text-field>
           <template v-if="$vuetify.breakpoint.mdAndUp">
@@ -32,7 +32,7 @@
               solo-inverted
               hide-details
               :items="keys"
-              prepend-inner-icon="search"
+              prepend-inner-icon="mdi-magnify"
               label="Sort by"
             ></v-select>
             <v-spacer></v-spacer>

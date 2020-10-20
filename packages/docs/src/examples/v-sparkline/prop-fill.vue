@@ -22,14 +22,14 @@
           align="center"
         >
           <v-item-group
-            v-model="gradient"
+            v-model="selectedGradient"
             mandatory
           >
             <v-row>
               <v-item
                 v-for="(gradient, i) in gradients"
                 :key="i"
-                v-slot:default="{ active, toggle }"
+                v-slot="{ active, toggle }"
                 :value="gradient"
               >
                 <v-card
@@ -120,7 +120,7 @@
   export default {
     data: () => ({
       fill: true,
-      gradient: gradients[4],
+      selectedGradient: gradients[4],
       gradients,
       padding: 8,
       radius: 10,

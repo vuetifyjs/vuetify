@@ -1,5 +1,5 @@
 <template>
-  <v-hover v-slot:default="{ hover }">
+  <v-hover v-slot="{ hover }">
     <v-card
       class="mx-auto"
       color="grey lighten-4"

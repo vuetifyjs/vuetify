@@ -1,14 +1,14 @@
 <template>
   <v-container fluid>
     <v-switch
-      v-model="expand"
+      v-model="singleExpand"
       label="Expand Single Item"
     ></v-switch>
     <v-data-iterator
-      :items="items"
+      :items="desserts"
       item-key="name"
       :items-per-page="4"
-      :single-expand="expand"
+      :single-expand="singleExpand"
       hide-default-footer
     >
       <template v-slot:default="{ items, isExpanded, expand }">
@@ -90,8 +90,8 @@
 <script>
   export default {
     data: () => ({
-      expand: false,
-      items: [
+      singleExpand: false,
+      desserts: [
         {
           name: 'Frozen Yogurt',
           calories: 159,
