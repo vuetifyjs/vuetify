@@ -2,10 +2,10 @@
 // eslint-disable
 
 // Libraries
-import Vue from 'vue'
+// import Vue from 'vue'
 
 // Components
-import VLabel from '../VLabel'
+// import VLabel from '../VLabel'
 
 // Utilities
 import {

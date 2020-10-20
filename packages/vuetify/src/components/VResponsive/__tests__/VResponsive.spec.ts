@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VResponsive from '../VResponsive'
+// import VResponsive from '../VResponsive'
 
 // Utilities
 import {

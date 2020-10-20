@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VFooter from '../VFooter'
+// import VFooter from '../VFooter'
 
 // Utilities
 import {

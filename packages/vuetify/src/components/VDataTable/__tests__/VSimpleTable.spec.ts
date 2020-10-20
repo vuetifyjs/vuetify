@@ -1,7 +1,7 @@
 // @ts-nocheck
 // eslint-disable
 
-import VSimpleTable from '../VSimpleTable'
+// import VSimpleTable from '../VSimpleTable'
 import {
   mount,
   Wrapper,

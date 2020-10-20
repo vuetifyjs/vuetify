@@ -149,6 +149,7 @@ module.exports = {
         '@typescript-eslint/no-inferrable-types': 'error',
         '@typescript-eslint/unified-signatures': 'error',
         '@typescript-eslint/no-invalid-this': 'error',
+        '@typescript-eslint/consistent-type-imports': 'error',
       },
     },
   ],

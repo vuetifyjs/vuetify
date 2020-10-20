@@ -1,7 +1,7 @@
 // @ts-nocheck
 // eslint-disable
 
-import { filterTreeItem, filterTreeItems } from '../filterTreeItems'
+// import { filterTreeItem, filterTreeItems } from '../filterTreeItems'
 
 describe.skip('filterTreeItems.ts', () => {
   it('should filter single tree item', () => {

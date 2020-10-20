@@ -1,18 +1,18 @@
 // @ts-nocheck
 // eslint-disable
 
-import Times from '../times'
+// import Times from '../times'
 import {
   mount,
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
-import { ExtractVue } from '../../../../util/mixins'
-import { CalendarTimestamp } from 'vuetify/types'
+// import { ExtractVue } from '../../../../util/mixins'
+// import { CalendarTimestamp } from 'vuetify/types'
 
-const Mock = Times.extend({
-  render: h => h('div'),
-})
+// const Mock = Times.extend({
+//   render: h => h('div'),
+// })
 
 describe.skip('times.ts', () => {
   type Instance = ExtractVue<typeof Mock>

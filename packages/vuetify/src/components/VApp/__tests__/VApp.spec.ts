@@ -4,12 +4,12 @@ import VApp from '../VApp'
 // Utilities
 import {
   mount,
-  Wrapper,
+  VueWrapper,
 } from '@vue/test-utils'
 
 describe('VApp', () => {
   type Instance = InstanceType<typeof VApp>
-  let mountFunction: (options?: object) => Wrapper<Instance>
+  let mountFunction: (options?: object) => VueWrapper<Instance>
 
   beforeEach(() => {
     mountFunction = (options = {}) => {

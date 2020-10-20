@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VImg from '../VImg'
+// import VImg from '../VImg'
 
 // Utilities
 import {

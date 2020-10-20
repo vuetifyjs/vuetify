@@ -6,7 +6,7 @@ import {
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
-import VCheckbox from '../VCheckbox'
+// import VCheckbox from '../VCheckbox'
 
 describe.skip('VCheckbox.ts', () => { // eslint-disable-line max-statements
   type Instance = InstanceType<typeof VCheckbox>

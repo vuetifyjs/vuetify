@@ -6,8 +6,8 @@ import {
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
-import VCard from '../VCard'
-import { ExtractVue } from '../../../util/mixins'
+// import VCard from '../VCard'
+// import { ExtractVue } from '../../../util/mixins'
 
 describe.skip('VCard.vue', () => {
   type Instance = ExtractVue<typeof VCard>

@@ -1,15 +1,15 @@
 // @ts-nocheck
 // eslint-disable
 
-import Vue from 'vue'
+// import Vue from 'vue'
 import {
   mount,
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
-import VTreeview from '../VTreeview'
-import { ExtractVue } from '../../../util/mixins'
-import { wait } from '../../../../test'
+// import VTreeview from '../VTreeview'
+// import { ExtractVue } from '../../../util/mixins'
+// import { wait } from '../../../../test'
 
 const singleRootTwoChildren = [
   { id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }, { id: 2, name: 'Child 2' }] },

@@ -1,7 +1,7 @@
 // @ts-nocheck
 // eslint-disable
 
-import VTimeline from '../VTimeline'
+// import VTimeline from '../VTimeline'
 import { mount } from '@vue/test-utils'
 
 describe.skip('VTimeline.ts', () => {

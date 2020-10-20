@@ -1,13 +1,13 @@
 // @ts-nocheck
 // eslint-disable
 
-import VColorPickerCanvas from '../VColorPickerCanvas'
+// import VColorPickerCanvas from '../VColorPickerCanvas'
 import {
   mount,
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
-import { fromRGBA } from '../util'
+// import { fromRGBA } from '../util'
 
 function createMouseEvent (x: number, y: number): MouseEvent {
   return {

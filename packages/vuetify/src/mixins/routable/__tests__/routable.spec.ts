@@ -1,7 +1,7 @@
 // @ts-nocheck
 // eslint-disable
 
-import Routable from '../'
+// import Routable from '../'
 import { mount } from '@vue/test-utils'
 
 describe.skip('routable.ts', () => {

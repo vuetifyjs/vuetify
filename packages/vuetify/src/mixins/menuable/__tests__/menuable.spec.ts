@@ -1,7 +1,7 @@
 // @ts-nocheck
 // eslint-disable
 
-import Menuable from '../'
+// import Menuable from '../'
 import {
   mount,
   MountOptions,

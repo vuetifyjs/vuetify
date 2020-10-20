@@ -308,20 +308,6 @@ export function searchItems<T extends any = any> (items: T[], search: string): T
   return items.filter((item: any) => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
 }
 
-/**
- * Returns:
- *  - 'normal' for old style slots - `<template slot="default">`
- *  - 'scoped' for old style scoped slots (`<template slot="default" slot-scope="data">`) or bound v-slot (`#default="data"`)
- *  - 'v-slot' for unbound v-slot (`#default`) - only if the third param is true, otherwise counts as scoped
- */
-export function getSlotType<T extends boolean = false> (vm: Vue, name: string, split?: T): (T extends true ? 'v-slot' : never) | 'normal' | 'scoped' | void {
-  if (vm.$slots[name] && vm.$scopedSlots[name] && (vm.$scopedSlots[name] as any).name) {
-    return split ? 'v-slot' as any : 'scoped'
-  }
-  if (vm.$slots[name]) return 'normal'
-  if (vm.$scopedSlots[name]) return 'scoped'
-}
-
 export function debounce (fn: Function, delay: number) {
   let timeoutId = 0 as any
   return (...args: any[]) => {
@@ -346,15 +332,6 @@ export function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
     obj[k.replace(prefix, '')] = scopedSlots[k]
     return obj
   }, {})
-}
-
-export function getSlot (vm: Vue, name = 'default', data?: object | (() => object), optional = false) {
-  if (vm.$scopedSlots[name]) {
-    return vm.$scopedSlots[name]!(data instanceof Function ? data() : data)
-  } else if (vm.$slots[name] && (!data || optional)) {
-    return vm.$slots[name]
-  }
-  return undefined
 }
 
 export function clamp (value: number, min = 0, max = 1) {

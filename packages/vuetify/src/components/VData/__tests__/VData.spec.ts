@@ -1,7 +1,7 @@
 // @ts-nocheck
 // eslint-disable
 
-import VData from '../VData'
+// import VData from '../VData'
 import {
   mount,
   MountOptions,

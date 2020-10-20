@@ -6,12 +6,12 @@ import {
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
-import CalendarWithEvents from '../calendar-with-events'
-import { parseTimestamp } from '../../util/timestamp'
+// import CalendarWithEvents from '../calendar-with-events'
+// import { parseTimestamp } from '../../util/timestamp'
 
-const Mock = CalendarWithEvents.extend({
-  render: h => h('div'),
-})
+// const Mock = CalendarWithEvents.extend({
+//   render: h => h('div'),
+// })
 
 describe.skip('calendar-with-events.ts', () => {
   type Instance = InstanceType<typeof Mock>

@@ -2,10 +2,10 @@
 // eslint-disable
 
 // Libraries
-import Vue from 'vue'
+// import Vue from 'vue'
 
 // Components
-import VAvatar from '../VAvatar'
+// import VAvatar from '../VAvatar'
 
 // Utilities
 import {

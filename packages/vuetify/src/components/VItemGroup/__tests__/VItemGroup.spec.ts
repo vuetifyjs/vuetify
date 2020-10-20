@@ -2,11 +2,11 @@
 // eslint-disable
 
 // Libraries
-import Vue from 'vue'
+// import Vue from 'vue'
 
 // Components
-import VItem from '../VItem'
-import VItemGroup from '../VItemGroup'
+// import VItem from '../VItem'
+// import VItemGroup from '../VItemGroup'
 
 // Utilities
 import {
@@ -16,18 +16,18 @@ import {
 } from '@vue/test-utils'
 import { ExtractVue } from './../../../util/mixins'
 
-const vm = new Vue()
-const defaultSlot = ({ toggle }) => vm.$createElement('div', { on: { click: toggle } }, 'foobar')
+// const vm = new Vue()
+// const defaultSlot = ({ toggle }) => vm.$createElement('div', { on: { click: toggle } }, 'foobar')
 
-const Mock = {
-  name: 'test',
-
-  render: h => h(VItem, {
-    scopedSlots: {
-      default: defaultSlot,
-    },
-  }),
-}
+// const Mock = {
+//   name: 'test',
+//
+//   render: h => h(VItem, {
+//     scopedSlots: {
+//       default: defaultSlot,
+//     },
+//   }),
+// }
 
 describe.skip('VItemGroup', () => {
   type Instance = ExtractVue<typeof VItemGroup>

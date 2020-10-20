@@ -1,13 +1,13 @@
 // @ts-nocheck
 // eslint-disable
 
-import MobileRow from '../MobileRow'
+// import MobileRow from '../MobileRow'
 import {
   mount,
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
-import Vue from 'vue'
+// import Vue from 'vue'
 
 describe.skip('MobileRow', () => {
   type Instance = InstanceType<typeof MobileRow>

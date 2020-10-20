@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VParallax from '../VParallax'
+// import VParallax from '../VParallax'
 
 // Utilities
 import {

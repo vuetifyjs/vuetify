@@ -1,10 +1,10 @@
 // @ts-nocheck
 // eslint-disable
 
-import VDatePickerMonthTable from '../VDatePickerMonthTable'
-import { Lang } from '../../../services/lang'
+// import VDatePickerMonthTable from '../VDatePickerMonthTable'
+// import { Lang } from '../../../services/lang'
 
-import { preset } from '../../../presets/default'
+// import { preset } from '../../../presets/default'
 import {
   mount,
   MountOptions,

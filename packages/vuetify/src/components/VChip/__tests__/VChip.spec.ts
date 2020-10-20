@@ -2,13 +2,13 @@
 // eslint-disable
 
 // Libraries
-import Vue from 'vue'
+// import Vue from 'vue'
 
 // Plugins
 import Router from 'vue-router'
 
 // Components
-import VChip from '../VChip'
+// import VChip from '../VChip'
 
 // Utilities
 import {

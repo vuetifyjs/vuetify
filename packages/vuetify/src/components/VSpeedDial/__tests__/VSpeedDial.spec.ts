@@ -2,16 +2,16 @@
 // eslint-disable
 
 // Components
-import VSpeedDial from '../VSpeedDial'
-import VBtn from '../../VBtn/VBtn'
-import VTooltip from '../../VTooltip/VTooltip'
+// import VSpeedDial from '../VSpeedDial'
+// import VBtn from '../../VBtn/VBtn'
+// import VTooltip from '../../VTooltip/VTooltip'
 
 // Utilities
 import {
   mount,
   Wrapper,
 } from '@vue/test-utils'
-import { compileToFunctions } from 'vue-template-compiler'
+// import { compileToFunctions } from 'vue-template-compiler'
 
 describe.skip('VSpeedDial.ts', () => {
   type Instance = InstanceType<typeof VSpeedDial>

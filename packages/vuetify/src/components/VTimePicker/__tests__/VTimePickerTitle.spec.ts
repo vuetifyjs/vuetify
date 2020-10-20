@@ -1,20 +1,20 @@
 // @ts-nocheck
 // eslint-disable
 
-import Vue from 'vue'
-import VTimePickerTitle from '../VTimePickerTitle'
-import { SelectingTimes } from '../VTimePicker'
-import { Lang } from '../../../services/lang'
-import { preset } from '../../../presets/default'
+// import Vue from 'vue'
+// import VTimePickerTitle from '../VTimePickerTitle'
+// import { SelectingTimes } from '../VTimePicker'
+// import { Lang } from '../../../services/lang'
+// import { preset } from '../../../presets/default'
 import {
   mount,
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
 
-Vue.prototype.$vuetify = {
-  lang: new Lang(preset),
-}
+// Vue.prototype.$vuetify = {
+//   lang: new Lang(preset),
+// }
 
 describe.skip('VTimePickerTitle.ts', () => {
   type Instance = InstanceType<typeof VTimePickerTitle>

@@ -2,12 +2,12 @@
 // eslint-disable
 
 // Libraries
-import Vue from 'vue'
-import Vuetify from '../../../framework'
+// import Vue from 'vue'
+// import Vuetify from '../../../framework'
 
 // Components
-import VForm from '../VForm'
-import VTextField from '../../VTextField'
+// import VForm from '../VForm'
+// import VTextField from '../../VTextField'
 
 // Utilties
 import {
@@ -16,7 +16,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-import { wait } from '../../../../test'
+// import { wait } from '../../../../test'
 
 const errorInput = {
   render (h) {

@@ -1,7 +1,7 @@
 // @ts-nocheck
 // eslint-disable
 
-import { parseColor } from '../'
+// import { parseColor } from '../'
 
 const red = {
   alpha: 1,

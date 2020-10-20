@@ -2,15 +2,15 @@
 // eslint-disable
 
 // Libraries
-import Vue from 'vue'
+// import Vue from 'vue'
 
 // Components
-import VSelect from '../VSelect'
-import {
-  VListItem,
-  VListItemTitle,
-  VListItemContent,
-} from '../../VList'
+// import VSelect from '../VSelect'
+// import {
+//   VListItem,
+//   VListItemTitle,
+//   VListItemContent,
+// } from '../../VList'
 
 // Utilities
 import {

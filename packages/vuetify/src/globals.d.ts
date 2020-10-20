@@ -1,19 +1,22 @@
+// @ts-nocheck
+// eslint-disable
+
 /* eslint-disable max-len */
 
-import {
-  VueConstructor,
-  ComponentOptions,
-  FunctionalComponentOptions,
-  VNodeData,
-} from 'vue'
-import { CombinedVueInstance, Vue } from 'vue/types/vue'
-import {
-  RecordPropsDefinition,
-  ThisTypedComponentOptionsWithArrayProps,
-  ThisTypedComponentOptionsWithRecordProps,
-} from 'vue/types/options'
-import { MetaInfo } from 'vue-meta/types'
-import { TouchStoredHandlers } from './directives/touch'
+// import {
+//   VueConstructor,
+//   ComponentOptions,
+//   FunctionalComponentOptions,
+//   VNodeData,
+// } from 'vue'
+// import { CombinedVueInstance, Vue } from 'vue/types/vue'
+// import {
+//   RecordPropsDefinition,
+//   ThisTypedComponentOptionsWithArrayProps,
+//   ThisTypedComponentOptionsWithRecordProps,
+// } from 'vue/types/options'
+// import { MetaInfo } from 'vue-meta/types'
+// import { TouchStoredHandlers } from './directives/touch'
 
 declare global {
   interface Window {

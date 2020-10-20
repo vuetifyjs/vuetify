@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VTab from '../VTab'
+// import VTab from '../VTab'
 
 // Utilities
 import {

@@ -1,7 +1,7 @@
 // @ts-nocheck
 // eslint-disable
 
-import VTooltip from '../VTooltip'
+// import VTooltip from '../VTooltip'
 import {
   mount,
   MountOptions,

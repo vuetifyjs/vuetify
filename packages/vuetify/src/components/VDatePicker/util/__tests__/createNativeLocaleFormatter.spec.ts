@@ -1,7 +1,7 @@
 // @ts-nocheck
 // eslint-disable
 
-import createNativeLocaleFormatter from '../createNativeLocaleFormatter'
+// import createNativeLocaleFormatter from '../createNativeLocaleFormatter'
 
 describe.skip('VDatePicker/util/createNativeLocaleFormatter.ts', () => {
   it('should format dates', () => {

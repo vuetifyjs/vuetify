@@ -15,7 +15,7 @@ describe('v-intersect', () => {
       el,
       {
         value: callback,
-        modifiers: { quiet: true }
+        modifiers: { quiet: true },
       } as any,
       vnode,
       null

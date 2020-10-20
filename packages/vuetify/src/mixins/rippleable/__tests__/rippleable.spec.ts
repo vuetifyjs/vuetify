@@ -1,7 +1,7 @@
 // @ts-nocheck
 // eslint-disable
 
-import Rippleable from '../'
+// import Rippleable from '../'
 import {
   mount,
   MountOptions,

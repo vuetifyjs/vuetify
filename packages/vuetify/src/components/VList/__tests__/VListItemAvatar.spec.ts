@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VListItemAvatar from '../VListItemAvatar'
+// import VListItemAvatar from '../VListItemAvatar'
 
 // Utilities
 import {
@@ -11,7 +11,7 @@ import {
 } from '@vue/test-utils'
 
 // Types
-import { ExtractVue } from '../../../util/mixins'
+// import { ExtractVue } from '../../../util/mixins'
 
 describe.skip('VListItemAvatar.ts', () => {
   type Instance = ExtractVue<typeof VListItemAvatar>

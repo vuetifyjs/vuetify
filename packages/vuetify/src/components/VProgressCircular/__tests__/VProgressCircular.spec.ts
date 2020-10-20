@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VProgressCircular from '../VProgressCircular'
+// import VProgressCircular from '../VProgressCircular'
 
 // Utilities
 import {

@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VSparkline from '../VSparkline'
+// import VSparkline from '../VSparkline'
 
 // Utilities
 import {

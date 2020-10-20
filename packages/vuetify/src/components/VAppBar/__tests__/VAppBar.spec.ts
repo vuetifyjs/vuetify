@@ -2,18 +2,18 @@
 // eslint-disable
 
 // Libraries
-import Vue from 'vue'
+// import Vue from 'vue'
 
 // Components
-import VAppBar from '../VAppBar'
+// import VAppBar from '../VAppBar'
 
 // Utilities
 import {
   mount,
   Wrapper,
 } from '@vue/test-utils'
-import { ExtractVue } from '../../../util/mixins'
-import { scrollWindow } from '../../../../test'
+// import { ExtractVue } from '../../../util/mixins'
+// import { scrollWindow } from '../../../../test'
 
 describe.skip('AppBar.ts', () => {
   type Instance = ExtractVue<typeof VAppBar>

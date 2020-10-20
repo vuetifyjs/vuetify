@@ -2,17 +2,17 @@
 // eslint-disable
 
 // Components
-import VMenu from '../VMenu'
-import VCard from '../../VCard/VCard'
-import VListItem from '../../VList/VListItem'
+// import VMenu from '../VMenu'
+// import VCard from '../../VCard/VCard'
+// import VListItem from '../../VList/VListItem'
 
 // Utilities
 import {
   mount,
   Wrapper,
 } from '@vue/test-utils'
-import { keyCodes } from '../../../util/helpers'
-import { waitAnimationFrame } from '../../../../test'
+// import { keyCodes } from '../../../util/helpers'
+// import { waitAnimationFrame } from '../../../../test'
 
 describe.skip('VMenu.ts', () => {
   type Instance = InstanceType<typeof VMenu>

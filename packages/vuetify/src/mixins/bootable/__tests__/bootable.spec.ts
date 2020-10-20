@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import Bootable from '../index'
+// import Bootable from '../index'
 
 // Utilities
 import {

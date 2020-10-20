@@ -1,7 +1,7 @@
 // @ts-nocheck
 // eslint-disable
 
-import intersectable from '../index'
+// import intersectable from '../index'
 
 import {
   mount,

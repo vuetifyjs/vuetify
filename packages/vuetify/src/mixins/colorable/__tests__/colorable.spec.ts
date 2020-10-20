@@ -1,7 +1,7 @@
 // @ts-nocheck
 // eslint-disable
 
-import Colorable from '../'
+// import Colorable from '../'
 import {
   mount,
   MountOptions,

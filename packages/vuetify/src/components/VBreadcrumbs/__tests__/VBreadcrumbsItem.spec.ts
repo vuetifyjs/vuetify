@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VBreadcrumbsItem from '../VBreadcrumbsItem'
+// import VBreadcrumbsItem from '../VBreadcrumbsItem'
 
 // Utilities
 import {

@@ -2,11 +2,11 @@
 // eslint-disable
 
 // Libraries
-import Vue from 'vue'
+// import Vue from 'vue'
 
 // Components
-import VBottomNavigation from '../VBottomNavigation'
-import VBtn from '../../VBtn/VBtn'
+// import VBottomNavigation from '../VBottomNavigation'
+// import VBtn from '../../VBtn/VBtn'
 
 // Utilities
 import {

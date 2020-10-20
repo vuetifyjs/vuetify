@@ -1,13 +1,13 @@
 // @ts-nocheck
 // eslint-disable
 
-import Validatable from '../'
+// import Validatable from '../'
 import {
   mount,
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
-import { wait } from '../../../../test'
+// import { wait } from '../../../../test'
 
 describe.skip('validatable.ts', () => {
   const Mock = Validatable.extend({

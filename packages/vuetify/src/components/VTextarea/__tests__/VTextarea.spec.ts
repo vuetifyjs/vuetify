@@ -1,14 +1,14 @@
 // @ts-nocheck
 // eslint-disable
 
-import { keyCodes } from '../../../util/helpers'
-import VTextarea from '../VTextarea'
+// import { keyCodes } from '../../../util/helpers'
+// import VTextarea from '../VTextarea'
 import {
   mount,
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
-import { wait } from '../../../../test'
+// import { wait } from '../../../../test'
 
 describe.skip('VTextarea.ts', () => {
   type Instance = InstanceType<typeof VTextarea>

@@ -1,25 +1,25 @@
 // @ts-nocheck
 // eslint-disable
 
-import VDatePicker from '../VDatePicker'
-import { Lang } from '../../../services/lang'
+// import VDatePicker from '../VDatePicker'
+// import { Lang } from '../../../services/lang'
 import {
   mount,
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
-import Vue from 'vue'
-import { preset } from '../../../presets/default'
-import en from '../../../locale/en'
+// import Vue from 'vue'
+// import { preset } from '../../../presets/default'
+// import en from '../../../locale/en'
 
-Vue.prototype.$vuetify = {
-  icons: {
-    values: {
-      next: 'mdi-chevron-right',
-      prev: 'mdi-chevron-left',
-    },
-  },
-}
+// Vue.prototype.$vuetify = {
+//   icons: {
+//     values: {
+//       next: 'mdi-chevron-right',
+//       prev: 'mdi-chevron-left',
+//     },
+//   },
+// }
 
 describe.skip('VDatePicker.ts', () => {
   type Instance = InstanceType<typeof VDatePicker>

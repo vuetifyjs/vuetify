@@ -1,24 +1,24 @@
 // @ts-nocheck
 // eslint-disable
 
-import VApp from '../../../components/VApp'
-import Detachable from '../'
+// import VApp from '../../../components/VApp'
+// import Detachable from '../'
 import { mount } from '@vue/test-utils'
 
-const Mock = Detachable.extend({
-  name: 'mock',
-
-  render (h) {
-    const content = h('div', {
-      staticClass: 'content',
-      ref: 'content',
-    })
-
-    return h('div', {
-      staticClass: 'mock',
-    }, [this.$slots.default, content])
-  },
-})
+// const Mock = Detachable.extend({
+//   name: 'mock',
+//
+//   render (h) {
+//     const content = h('div', {
+//       staticClass: 'content',
+//       ref: 'content',
+//     })
+//
+//     return h('div', {
+//       staticClass: 'mock',
+//     }, [this.$slots.default, content])
+//   },
+// })
 
 describe.skip('detachable.ts', () => {
   it('should detach to app', async () => {

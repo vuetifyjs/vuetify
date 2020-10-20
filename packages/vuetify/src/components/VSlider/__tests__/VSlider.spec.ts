@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VSlider from '../VSlider'
+// import VSlider from '../VSlider'
 
 // Utilities
 import {

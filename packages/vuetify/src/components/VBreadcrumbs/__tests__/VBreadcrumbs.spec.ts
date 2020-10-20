@@ -2,8 +2,8 @@
 // eslint-disable
 
 // Components
-import VBreadcrumbs from '../VBreadcrumbs'
-import VBreadcrumbsItem from '../VBreadcrumbsItem'
+// import VBreadcrumbs from '../VBreadcrumbs'
+// import VBreadcrumbsItem from '../VBreadcrumbsItem'
 
 // Utilities
 import { compileToFunctions } from 'vue-template-compiler'

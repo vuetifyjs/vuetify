@@ -2,17 +2,17 @@
 // eslint-disable
 
 // Directives
-import Touch from '../'
+// import Touch from '../'
 
 // Libraries
-import Vue from 'vue'
+// import Vue from 'vue'
 
 // Utilities
 import {
   mount,
   Wrapper,
 } from '@vue/test-utils'
-import { touch } from '../../../../test'
+// import { touch } from '../../../../test'
 
 describe.skip('touch.ts', () => {
   let mountFunction: (value?: object) => Wrapper<Vue>

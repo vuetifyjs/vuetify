@@ -3,7 +3,7 @@
 
 
 // Components
-import Grid from '../grid'
+// import Grid from '../grid'
 
 // Utilities
 import {
@@ -11,7 +11,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-const Mock = Grid('test')
+// const Mock = Grid('test')
 
 describe.skip('VGrid.ts', () => {
   type Instance = InstanceType<typeof Mock>

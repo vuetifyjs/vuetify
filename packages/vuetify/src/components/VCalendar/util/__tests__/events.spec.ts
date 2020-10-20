@@ -1,8 +1,8 @@
 // @ts-nocheck
 // eslint-disable
 
-import { parseTimestamp, getDayIdentifier } from '../timestamp'
-import { parseEvent, isEventOn, isEventOverlapping } from '../events'
+// import { parseTimestamp, getDayIdentifier } from '../timestamp'
+// import { parseEvent, isEventOn, isEventOverlapping } from '../events'
 
 describe.skip('events.ts', () => {
   it('should parse events', () => {

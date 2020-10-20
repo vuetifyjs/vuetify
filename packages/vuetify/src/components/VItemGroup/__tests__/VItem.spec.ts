@@ -2,10 +2,10 @@
 // eslint-disable
 
 // Libraries
-import Vue from 'vue'
+// import Vue from 'vue'
 
 // Components
-import VItem from '../VItem'
+// import VItem from '../VItem'
 
 // Utilities
 import {

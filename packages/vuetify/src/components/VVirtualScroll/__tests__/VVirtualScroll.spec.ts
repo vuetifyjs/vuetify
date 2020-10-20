@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Component
-import VVirtualScroll from '../VVirtualScroll'
+// import VVirtualScroll from '../VVirtualScroll'
 
 // Utilities
 import {

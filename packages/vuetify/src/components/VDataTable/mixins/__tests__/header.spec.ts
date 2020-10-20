@@ -1,13 +1,13 @@
 // @ts-nocheck
 // eslint-disable
 
-import Header from '../header'
+// import Header from '../header'
 import {
   mount,
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
-import { wrapInArray } from '../../../../util/helpers'
+// import { wrapInArray } from '../../../../util/helpers'
 
 describe.skip('VDataTable/header.ts', () => {
   type Instance = InstanceType<typeof Header>

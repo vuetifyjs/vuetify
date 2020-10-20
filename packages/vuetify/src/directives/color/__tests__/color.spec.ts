@@ -2,10 +2,10 @@
 // eslint-disable
 
 // Vue
-import Vue from 'vue'
+// import Vue from 'vue'
 
 // Directives
-import Color from '../'
+// import Color from '../'
 
 // Utilities
 import {

@@ -1,7 +1,7 @@
 // @ts-nocheck
 // eslint-disable
 
-import VTimelineItem from '../VTimelineItem'
+// import VTimelineItem from '../VTimelineItem'
 import {
   mount,
   MountOptions,

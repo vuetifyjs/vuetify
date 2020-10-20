@@ -1,14 +1,14 @@
 // @ts-nocheck
 // eslint-disable
 
-import { parseDate } from '../util/timestamp'
-import VCalendar from '../VCalendar'
+// import { parseDate } from '../util/timestamp'
+// import VCalendar from '../VCalendar'
 import {
   mount,
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
-import { ExtractVue } from '../../../util/mixins'
+// import { ExtractVue } from '../../../util/mixins'
 
 describe.skip('VCalendar', () => {
   type Instance = ExtractVue<typeof VCalendar>

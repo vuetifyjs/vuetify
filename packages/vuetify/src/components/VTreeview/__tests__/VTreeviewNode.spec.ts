@@ -1,26 +1,26 @@
 // @ts-nocheck
 // eslint-disable
 
-import Vue from 'vue'
-import VTreeviewNode from '../VTreeviewNode'
+// import Vue from 'vue'
+// import VTreeviewNode from '../VTreeviewNode'
 import {
   mount,
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
 
-Vue.prototype.$vuetify = {
-  icons: {
-    values: {
-      subgroup: 'arrow_drop_down',
-    },
-  },
-}
+// Vue.prototype.$vuetify = {
+//   icons: {
+//     values: {
+//       subgroup: 'arrow_drop_down',
+//     },
+//   },
+// }
 
 const singleRootTwoChildren = { id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }, { id: 2, name: 'Child 2' }] }
 
-const vm = new Vue()
-const defaultSlot = () => vm.$createElement('div', 'foobar')
+// const vm = new Vue()
+// const defaultSlot = () => vm.$createElement('div', 'foobar')
 
 const Mock = {
   name: 'test',

@@ -1,16 +1,16 @@
 // @ts-nocheck
 // eslint-disable
 
-import VEditDialog from '../VEditDialog'
-import VMenu from '../../VMenu'
+// import VEditDialog from '../VEditDialog'
+// import VMenu from '../../VMenu'
 
 import {
   mount,
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
-import { keyCodes } from '../../../util/helpers'
-import mixins from '../../../util/mixins'
+// import { keyCodes } from '../../../util/helpers'
+// import mixins from '../../../util/mixins'
 
 describe.skip('VEditDialog.ts', () => {
   type Instance = InstanceType<typeof VEditDialog>

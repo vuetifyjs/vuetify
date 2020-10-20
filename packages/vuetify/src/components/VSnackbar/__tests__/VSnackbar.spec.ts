@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VSnackbar from '../VSnackbar'
+// import VSnackbar from '../VSnackbar'
 
 // Utilities
 import {

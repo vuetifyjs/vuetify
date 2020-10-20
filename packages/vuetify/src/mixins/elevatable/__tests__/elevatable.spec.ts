@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Mixins
-import Elevatable from '../'
+// import Elevatable from '../'
 
 // Utilities
 import {
@@ -10,9 +10,9 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-const Component = Elevatable.extend({
-  render: h => h('div'),
-})
+// const Component = Elevatable.extend({
+//   render: h => h('div'),
+// })
 
 describe.skip('elevatable.ts', () => {
   type Instance = InstanceType<typeof Component>

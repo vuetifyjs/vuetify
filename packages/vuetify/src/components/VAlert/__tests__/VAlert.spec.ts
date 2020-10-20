@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VAlert from '../VAlert'
+// import VAlert from '../VAlert'
 
 // Utilities
 import {
@@ -11,7 +11,7 @@ import {
 } from '@vue/test-utils'
 
 // Types
-import { ExtractVue } from '../../../util/mixins'
+// import { ExtractVue } from '../../../util/mixins'
 
 describe.skip('VAlert.ts', () => {
   type Instance = ExtractVue<typeof VAlert>

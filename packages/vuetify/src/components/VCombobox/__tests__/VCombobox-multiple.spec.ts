@@ -2,14 +2,14 @@
 // eslint-disable
 
 // Components
-import VCombobox from '../VCombobox'
+// import VCombobox from '../VCombobox'
 
 // Utilities
 import {
   mount,
   Wrapper,
 } from '@vue/test-utils'
-import { keyCodes } from '../../../util/helpers'
+// import { keyCodes } from '../../../util/helpers'
 
 describe.skip('VCombobox.ts', () => {
   type Instance = InstanceType<typeof VCombobox>

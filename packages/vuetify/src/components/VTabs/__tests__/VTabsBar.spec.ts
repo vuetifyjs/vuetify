@@ -2,8 +2,8 @@
 // eslint-disable
 
 // Components
-import VTab from '../VTab'
-import VTabsBar from '../VTabsBar'
+// import VTab from '../VTab'
+// import VTabsBar from '../VTabsBar'
 
 // Utilities
 import {
@@ -13,7 +13,7 @@ import {
 } from '@vue/test-utils'
 
 // Types
-import { ExtractVue } from '../../../util/mixins'
+// import { ExtractVue } from '../../../util/mixins'
 
 describe.skip('VTabsBar.ts', () => {
   type Instance = ExtractVue<typeof VTabsBar>

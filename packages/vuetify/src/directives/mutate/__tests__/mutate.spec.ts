@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Directives
-import Mutate from '../'
+// import Mutate from '../'
 
 (global as any).MutationObserver = class { // Mock MutationObserver
   _callback: Function

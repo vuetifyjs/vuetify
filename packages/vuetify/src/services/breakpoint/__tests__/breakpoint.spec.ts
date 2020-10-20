@@ -1,9 +1,9 @@
 // @ts-nocheck
 // eslint-disable
 
-import { resizeWindow } from '../../../../test'
-import { Breakpoint } from '../'
-import { preset } from '../../../presets/default'
+// import { resizeWindow } from '../../../../test'
+// import { Breakpoint } from '../'
+// import { preset } from '../../../presets/default'
 
 describe.skip('Breakpoint.ts', () => {
   let breakpoint: Breakpoint

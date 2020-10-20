@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VDialog from '../VDialog'
+// import VDialog from '../VDialog'
 
 // Utilities
 import {

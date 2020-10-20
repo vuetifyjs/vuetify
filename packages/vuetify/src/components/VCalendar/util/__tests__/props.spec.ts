@@ -1,7 +1,7 @@
 // @ts-nocheck
 // eslint-disable
 
-import { validateNumber } from '../props'
+// import { validateNumber } from '../props'
 
 describe.skip('props.ts', () => {
   it('should return true if number is valid', () => {

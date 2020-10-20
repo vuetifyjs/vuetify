@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VListGroup from '../VListGroup'
+// import VListGroup from '../VListGroup'
 
 // Utilities
 import {

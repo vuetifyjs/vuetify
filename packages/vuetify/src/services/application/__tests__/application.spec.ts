@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Services
-import { Application } from '../index'
+// import { Application } from '../index'
 
 describe.skip('Application.ts', () => {
   let app: Application

@@ -2,14 +2,14 @@
 // eslint-disable
 
 // Libraries
-import Vue from 'vue'
+// import Vue from 'vue'
 
 // Components
-import VStepperContent from '../VStepperContent'
-import {
-  VTabTransition,
-  VTabReverseTransition,
-} from '../../transitions'
+// import VStepperContent from '../VStepperContent'
+// import {
+//   VTabTransition,
+//   VTabReverseTransition,
+// } from '../../transitions'
 
 // Utilities
 import {
@@ -17,7 +17,7 @@ import {
   mount,
   Wrapper,
 } from '@vue/test-utils'
-import { wait } from '../../../../test'
+// import { wait } from '../../../../test'
 
 const tip = '[Vuetify] The v-stepper-content component must be used inside a v-stepper'
 

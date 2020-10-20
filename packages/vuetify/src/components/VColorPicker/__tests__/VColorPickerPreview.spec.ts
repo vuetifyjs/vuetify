@@ -1,13 +1,13 @@
 // @ts-nocheck
 // eslint-disable
 
-import VColorPickerPreview from '../VColorPickerPreview'
+// import VColorPickerPreview from '../VColorPickerPreview'
 import {
   mount,
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
-import { fromRGBA } from '../util'
+// import { fromRGBA } from '../util'
 
 describe.skip('VColorPickerPreview.ts', () => {
   type Instance = InstanceType<typeof VColorPickerPreview>

@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import Selectable from '../index'
+// import Selectable from '../index'
 
 // Utilities
 import {

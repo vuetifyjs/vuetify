@@ -1,7 +1,7 @@
 // @ts-nocheck
 // eslint-disable
 
-import pad from '../pad'
+// import pad from '../pad'
 
 describe.skip('VDatePicker/util/pad.ts', () => {
   it('should pad 1-digit numbers', () => {

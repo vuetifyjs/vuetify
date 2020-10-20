@@ -1,24 +1,24 @@
 // @ts-nocheck
 // eslint-disable
 
-import VDataTable from '../VDataTable'
+// import VDataTable from '../VDataTable'
 import {
   mount,
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
-import { Breakpoint } from '../../../services/breakpoint'
-import ripple from '../../../directives/ripple/index'
-import Vue from 'vue'
-import { Lang } from '../../../services/lang'
-import { preset } from '../../../presets/default'
-import { resizeWindow } from '../../../../test'
+// import { Breakpoint } from '../../../services/breakpoint'
+// import ripple from '../../../directives/ripple/index'
+// import Vue from 'vue'
+// import { Lang } from '../../../services/lang'
+// import { preset } from '../../../presets/default'
+// import { resizeWindow } from '../../../../test'
 
-Vue.prototype.$vuetify = {
-  rtl: false,
-  lang: new Lang(preset),
-}
-Vue.directive('ripple', ripple)
+// Vue.prototype.$vuetify = {
+//   rtl: false,
+//   lang: new Lang(preset),
+// }
+// Vue.directive('ripple', ripple)
 
 const testHeaders = [
   {

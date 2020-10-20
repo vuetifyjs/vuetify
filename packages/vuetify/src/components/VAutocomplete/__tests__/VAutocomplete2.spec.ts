@@ -2,14 +2,14 @@
 // eslint-disable
 
 // Components
-import VAutocomplete from '../VAutocomplete'
+// import VAutocomplete from '../VAutocomplete'
 
 // Utilities
 import {
   mount,
   Wrapper,
 } from '@vue/test-utils'
-import { compileToFunctions } from 'vue-template-compiler'
+// import { compileToFunctions } from 'vue-template-compiler'
 
 describe.skip('VAutocomplete.ts', () => {
   type Instance = InstanceType<typeof VAutocomplete>

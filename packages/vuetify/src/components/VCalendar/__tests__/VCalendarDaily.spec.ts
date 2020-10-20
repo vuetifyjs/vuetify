@@ -1,13 +1,13 @@
 // @ts-nocheck
 // eslint-disable
 
-import VCalendarDaily from '../VCalendarDaily'
+// import VCalendarDaily from '../VCalendarDaily'
 import {
   mount,
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
-import { ExtractVue } from '../../../util/mixins'
+// import { ExtractVue } from '../../../util/mixins'
 
 describe.skip('VCalendarDaily', () => {
   type Instance = ExtractVue<typeof VCalendarDaily>

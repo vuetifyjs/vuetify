@@ -2,10 +2,10 @@
 // eslint-disable
 
 // Libraries
-import Vue from 'vue'
+// import Vue from 'vue'
 
 // Directives
-import Ripple from '../'
+// import Ripple from '../'
 
 // Utilities
 import {

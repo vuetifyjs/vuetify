@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VOverlay from '../VOverlay'
+// import VOverlay from '../VOverlay'
 
 // Utilities
 import {

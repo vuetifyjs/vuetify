@@ -2,8 +2,8 @@
 // eslint-disable
 
 // Components
-import VWindow from '../VWindow'
-import VWindowItem from '../VWindowItem'
+// import VWindow from '../VWindow'
+// import VWindowItem from '../VWindowItem'
 
 // Utilities
 import {
@@ -11,7 +11,7 @@ import {
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
-import { touch } from '../../../../test'
+// import { touch } from '../../../../test'
 
 describe.skip('VWindow.ts', () => {
   type Instance = InstanceType<typeof VWindow>

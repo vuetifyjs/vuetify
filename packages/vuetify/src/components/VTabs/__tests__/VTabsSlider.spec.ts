@@ -2,13 +2,13 @@
 // eslint-disable
 
 // Components
-import VTabsSlider from '../VTabsSlider'
+// import VTabsSlider from '../VTabsSlider'
 
 // Utilities
 import { mount, Wrapper } from '@vue/test-utils'
 
 // Types
-import Vue from 'vue'
+// import Vue from 'vue'
 
 describe.skip('VTabsSlider.ts', () => {
   let mountFunction: (options?: object) => Wrapper<Vue>

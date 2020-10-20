@@ -2,14 +2,14 @@
 // eslint-disable
 
 // Components
-import VProgressLinear from '../VProgressLinear'
+// import VProgressLinear from '../VProgressLinear'
 
 // Utilities
 import {
   mount,
   Wrapper,
 } from '@vue/test-utils'
-import { compileToFunctions } from 'vue-template-compiler'
+// import { compileToFunctions } from 'vue-template-compiler'
 
 describe.skip('VProgressLinear.ts', () => {
   type Instance = InstanceType<typeof VProgressLinear>

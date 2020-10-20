@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VMessages from '../VMessages'
+// import VMessages from '../VMessages'
 
 // Utilities
 import {
@@ -11,7 +11,7 @@ import {
 } from '@vue/test-utils'
 
 // Types
-import { ExtractVue } from '../../../util/mixins'
+// import { ExtractVue } from '../../../util/mixins'
 
 describe.skip('VMessages.ts', () => {
   type Instance = ExtractVue<typeof VMessages>

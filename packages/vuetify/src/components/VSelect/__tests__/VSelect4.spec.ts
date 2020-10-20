@@ -2,10 +2,10 @@
 // eslint-disable
 
 // Components
-import VSelect from '../VSelect'
+// import VSelect from '../VSelect'
 
 // Utilities
-import { waitAnimationFrame } from '../../../../test'
+// import { waitAnimationFrame } from '../../../../test'
 import {
   mount,
   Wrapper,

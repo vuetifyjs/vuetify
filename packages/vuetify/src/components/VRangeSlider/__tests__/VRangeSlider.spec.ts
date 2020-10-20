@@ -1,7 +1,7 @@
 // @ts-nocheck
 // eslint-disable
 
-import VRangeSlider from '../VRangeSlider'
+// import VRangeSlider from '../VRangeSlider'
 import {
   mount,
   MountOptions,

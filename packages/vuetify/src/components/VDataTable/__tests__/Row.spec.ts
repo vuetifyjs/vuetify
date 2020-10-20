@@ -1,13 +1,13 @@
 // @ts-nocheck
 // eslint-disable
 
-import Row from '../Row'
+// import Row from '../Row'
 import {
   mount,
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
-import Vue from 'vue'
+// import Vue from 'vue'
 
 describe.skip('Table Row', () => {
   type Instance = InstanceType<typeof Row>

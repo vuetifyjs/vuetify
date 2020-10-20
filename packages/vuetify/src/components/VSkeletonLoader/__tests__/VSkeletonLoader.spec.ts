@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VSkeletonLoader, { HTMLSkeletonLoaderElement } from '../VSkeletonLoader'
+// import VSkeletonLoader, { HTMLSkeletonLoaderElement } from '../VSkeletonLoader'
 
 // Utilities
 import {

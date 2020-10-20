@@ -2,17 +2,17 @@
 // eslint-disable
 
 // Components
-import VBadge from '../VBadge'
+// import VBadge from '../VBadge'
 
 // Utilities
 import {
   mount,
   Wrapper,
 } from '@vue/test-utils'
-import { compileToFunctions } from 'vue-template-compiler'
+// import { compileToFunctions } from 'vue-template-compiler'
 
 // Types
-import { ExtractVue } from '../../../util/mixins'
+// import { ExtractVue } from '../../../util/mixins'
 
 describe.skip('VBadge.ts', () => {
   type Instance = ExtractVue<typeof VBadge>

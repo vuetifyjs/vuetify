@@ -1,15 +1,15 @@
 // @ts-nocheck
 // eslint-disable
 
-import Vue from 'vue'
-import VTextField from '../VTextField'
-import VProgressLinear from '../../VProgressLinear'
+// import Vue from 'vue'
+// import VTextField from '../VTextField'
+// import VProgressLinear from '../../VProgressLinear'
 import {
   mount,
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
-import { waitAnimationFrame } from '../../../../test'
+// import { waitAnimationFrame } from '../../../../test'
 
 describe.skip('VTextField.ts', () => { // eslint-disable-line max-statements
   type Instance = InstanceType<typeof VTextField>

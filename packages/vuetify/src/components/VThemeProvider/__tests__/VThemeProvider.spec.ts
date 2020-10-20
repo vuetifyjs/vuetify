@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VThemeProvider from '../VThemeProvider'
+// import VThemeProvider from '../VThemeProvider'
 
 // Utilities
 import {

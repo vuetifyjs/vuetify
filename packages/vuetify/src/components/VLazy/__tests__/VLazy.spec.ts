@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VLazy from '../VLazy'
+// import VLazy from '../VLazy'
 
 // Utilities
 import {

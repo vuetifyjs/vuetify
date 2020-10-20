@@ -2,7 +2,7 @@
 // eslint-disable
 
 // Components
-import VExpansionPanelHeader from '../VExpansionPanelHeader'
+// import VExpansionPanelHeader from '../VExpansionPanelHeader'
 
 // Utilities
 import {
