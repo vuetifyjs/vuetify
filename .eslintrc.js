@@ -30,7 +30,10 @@ module.exports = {
       ignoreStrings: true,
     }],
     'max-statements': ['error', 24],
-    quotes: ['error', 'single', { allowTemplateLiterals: true }],
+    quotes: ['error', 'single', {
+      avoidEscape: true,
+      allowTemplateLiterals: true,
+    }],
     'no-console': 'off',
     'comma-dangle': ['error', {
       arrays: 'always-multiline',
@@ -117,7 +120,10 @@ module.exports = {
         'no-undef': 'off',
 
         quotes: 'off',
-        '@typescript-eslint/quotes': ['error', 'single', { allowTemplateLiterals: true }],
+        '@typescript-eslint/quotes': ['error', 'single', {
+          avoidEscape: true,
+          allowTemplateLiterals: true,
+        }],
 
         'no-redeclare': 'off',
         '@typescript-eslint/no-redeclare': 'error',

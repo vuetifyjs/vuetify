@@ -136,8 +136,8 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('[Vue warn]: Error in created hook: "TypeError: Cannot set property \'vnode\' of undefined"').toHaveBeenWarned()
-    expect('TypeError: Cannot set property \'vnode\' of undefined').toHaveBeenWarned()
+    expect(`[Vue warn]: Error in created hook: "TypeError: Cannot set property 'vnode' of undefined"`).toHaveBeenWarned()
+    expect(`TypeError: Cannot set property 'vnode' of undefined`).toHaveBeenWarned()
   })
 
   it('should load children when selecting, but not render', async () => {

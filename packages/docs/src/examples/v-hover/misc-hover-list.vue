@@ -72,7 +72,7 @@
       items: [
         {
           title: 'New Releases',
-          text: 'It\'s New Release Friday',
+          text: `It's New Release Friday`,
           subtext: 'Newly released songs. Updated daily.',
           img: 'http://lorempixel.com/output/nightlife-q-c-640-480-5.jpg',
         },
