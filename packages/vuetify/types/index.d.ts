@@ -194,6 +194,12 @@ export type InputMessage = string | string[]
 
 export type InputValidationRules = (InputValidationRule | string)[]
 
+export type CalendarCategory = (false | null | string | {
+  name: string
+})
+
+export type CalendarCategoryTextFunction = (category: CalendarCategory) => string
+
 export interface CalendarTimestamp {
   date: string
   time: string
@@ -208,6 +214,7 @@ export interface CalendarTimestamp {
   past: boolean
   present: boolean
   future: boolean
+  category?: CalendarCategory
 }
 
 export type CalendarFormatter = (timestamp: CalendarTimestamp, short: boolean) => string

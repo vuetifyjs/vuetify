@@ -43,7 +43,7 @@ interface VCalendarRenderProps {
   component: string | Component
   maxDays: number
   weekdays: number[]
-  categories: string[]
+  categories: any[]
 }
 
 /* @vue/component */
@@ -170,11 +170,16 @@ export default CalendarWithEvents.extend({
         timeZone: 'UTC', month: 'short',
       })
     },
-    parsedCategories (): string[] {
+    parsedCategories (): any[] {
       return typeof this.categories === 'string' && this.categories
         ? this.categories.split(/\s*,\s*/)
         : Array.isArray(this.categories)
-          ? this.categories as string[]
+          ? this.categories.map((v: any) => {
+            const categoryName = this.parsedCategoryText(v)
+            if (typeof v === 'string') v = { name: v }
+            v.categoryName = categoryName
+            return v
+          }) as any[]
           : []
     },
   },
@@ -193,6 +198,11 @@ export default CalendarWithEvents.extend({
   },
 
   methods: {
+    parsedCategoryText (category: any): string {
+      return typeof this.categoryText === 'string'
+        ? category[this.categoryText as string]
+        : this.categoryText(category) as string
+    },
     checkChange (): void {
       const { lastStart, lastEnd } = this
       const { start, end } = this.renderProps
@@ -294,10 +304,10 @@ export default CalendarWithEvents.extend({
     timestampToDate (timestamp: CalendarTimestamp): Date {
       return timestampToDate(timestamp)
     },
-    getCategoryList (categories: string[]): string[] {
+    getCategoryList (categories: any[]): string[] {
       if (!this.noEvents) {
         const categoryMap = categories.reduce((map, category, index) => {
-          map[category] = { index, count: 0 }
+          map[category.categoryName] = { index, count: 0 }
 
           return map
         }, Object.create(null))
@@ -335,9 +345,10 @@ export default CalendarWithEvents.extend({
           }
         }
 
-        categories = Object.keys(categoryMap)
+        categories = categories.filter(v => {
+          return Object.keys(categoryMap).includes(v.categoryName)
+        })
       }
-
       return categories
     },
   },

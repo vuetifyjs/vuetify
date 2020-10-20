@@ -1,7 +1,7 @@
 
 import { validateTimestamp, parseDate, DAYS_IN_WEEK, validateTime } from './timestamp'
 import { PropType } from 'vue'
-import { CalendarEvent, CalendarFormatter, CalendarTimestamp, CalendarEventOverlapMode, CalendarEventNameFunction, CalendarEventColorFunction, CalendarEventCategoryFunction, CalendarEventTimedFunction } from 'vuetify/types'
+import { CalendarEvent, CalendarFormatter, CalendarTimestamp, CalendarEventOverlapMode, CalendarEventNameFunction, CalendarEventColorFunction, CalendarEventCategoryFunction, CalendarEventTimedFunction, CalendarCategoryTextFunction } from 'vuetify/types'
 import { CalendarEventOverlapModes } from '../modes'
 import { PropValidator } from 'vue/types/options'
 
@@ -125,6 +125,9 @@ export default {
     categories: {
       type: [Array, String],
       default: '',
+    },
+    categoryText: {
+      type: [String, Function] as PropType<string | CalendarCategoryTextFunction>,
     },
     categoryHideDynamic: {
       type: Boolean,
