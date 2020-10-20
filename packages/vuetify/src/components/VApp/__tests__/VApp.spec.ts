@@ -1,6 +1,3 @@
-// @ts-nocheck
-// eslint-disable
-
 // Components
 import VApp from '../VApp'
 
@@ -10,7 +7,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VApp.ts', () => {
+describe('VApp', () => {
   type Instance = InstanceType<typeof VApp>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

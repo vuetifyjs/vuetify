@@ -11,7 +11,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VLazy.ts', () => {
+describe.skip('VLazy.ts', () => {
   type Instance = InstanceType<typeof VLazy>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

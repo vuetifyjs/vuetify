@@ -28,7 +28,7 @@ const rectMock: DOMRect = {
   y: 0,
 }
 
-describe('VColorPickerCanvas.ts', () => {
+describe.skip('VColorPickerCanvas.ts', () => {
   type Instance = InstanceType<typeof VColorPickerCanvas>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

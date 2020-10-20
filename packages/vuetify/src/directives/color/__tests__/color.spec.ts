@@ -13,7 +13,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('color.ts', () => {
+describe.skip('color.ts', () => {
   let mountFunction: () => Wrapper<Vue>
 
   beforeEach(() => {

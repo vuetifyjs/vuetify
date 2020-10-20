@@ -11,7 +11,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VRadio.ts', () => {
+describe.skip('VRadio.ts', () => {
   type Instance = InstanceType<typeof VRadio>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

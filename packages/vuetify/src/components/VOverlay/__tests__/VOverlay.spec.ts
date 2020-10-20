@@ -10,7 +10,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VOverlay.ts', () => {
+describe.skip('VOverlay.ts', () => {
   type Instance = InstanceType<typeof VOverlay>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

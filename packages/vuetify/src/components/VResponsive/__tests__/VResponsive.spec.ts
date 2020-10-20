@@ -10,7 +10,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VResponsive.ts', () => {
+describe.skip('VResponsive.ts', () => {
   type Instance = InstanceType<typeof VResponsive>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

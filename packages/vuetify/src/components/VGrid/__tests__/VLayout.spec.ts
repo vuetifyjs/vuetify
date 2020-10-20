@@ -11,7 +11,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VLayout.ts', () => {
+describe.skip('VLayout.ts', () => {
   type Instance = InstanceType<typeof VLayout>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

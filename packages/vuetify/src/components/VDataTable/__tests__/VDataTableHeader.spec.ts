@@ -37,7 +37,7 @@ Vue.prototype.$vuetify = {
 }
 Vue.directive('ripple', ripple)
 
-describe('VDataTableHeader.ts', () => {
+describe.skip('VDataTableHeader.ts', () => {
   type Instance = InstanceType<typeof VDataTableHeader>
   let mountFunction: (options?: MountOptions<Instance>, isMobile?: boolean) => Wrapper<Instance>
 

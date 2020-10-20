@@ -24,7 +24,7 @@ function genDependentMixin () {
   }
 }
 
-describe('dependent.ts', () => {
+describe.skip('dependent.ts', () => {
   beforeEach(() => {
     document.body.setAttribute('data-app', 'true')
   })

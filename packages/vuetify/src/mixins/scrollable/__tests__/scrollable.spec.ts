@@ -11,7 +11,7 @@ import {
 } from '@vue/test-utils'
 import { scrollWindow } from '../../../../test'
 
-describe('Scrollable.ts', () => {
+describe.skip('Scrollable.ts', () => {
   type Instance = InstanceType<typeof Scrollable>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

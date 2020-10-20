@@ -8,7 +8,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VTimelineItem.ts', () => {
+describe.skip('VTimelineItem.ts', () => {
   type Instance = InstanceType<typeof VTimelineItem>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

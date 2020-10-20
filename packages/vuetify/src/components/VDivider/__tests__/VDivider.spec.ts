@@ -14,7 +14,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VDivider', () => {
+describe.skip('VDivider', () => {
   let mountFunction: (options?: object) => Wrapper<Vue>
   let localVue: typeof Vue
 

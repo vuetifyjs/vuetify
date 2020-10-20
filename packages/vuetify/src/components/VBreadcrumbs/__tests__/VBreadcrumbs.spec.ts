@@ -12,7 +12,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VBreadcrumbs.ts', () => {
+describe.skip('VBreadcrumbs.ts', () => {
   type Instance = InstanceType<typeof VBreadcrumbs>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

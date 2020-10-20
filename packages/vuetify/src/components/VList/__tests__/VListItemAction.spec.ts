@@ -15,7 +15,7 @@ import { functionalContext } from '../../../../test'
 // Types
 import { ExtractVue } from '../../../util/mixins'
 
-describe('VListItemAction.ts', () => {
+describe.skip('VListItemAction.ts', () => {
   type Instance = ExtractVue<typeof VListItemAction>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

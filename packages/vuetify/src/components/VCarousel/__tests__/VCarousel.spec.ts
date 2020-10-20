@@ -17,7 +17,7 @@ import {
 } from '@vue/test-utils'
 import { waitAnimationFrame } from '../../../../test'
 
-describe('VCarousel.ts', () => {
+describe.skip('VCarousel.ts', () => {
   type Instance = InstanceType<typeof VCarousel>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

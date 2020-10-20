@@ -20,7 +20,7 @@ import {
 } from '@vue/test-utils'
 import { waitAnimationFrame } from '../../../../test'
 
-describe('VWindowItem.ts', () => {
+describe.skip('VWindowItem.ts', () => {
   type Instance = InstanceType<typeof VWindowItem>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   let router: Router

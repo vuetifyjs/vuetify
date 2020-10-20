@@ -24,7 +24,7 @@ Vue.prototype.$vuetify = {
   },
 }
 
-describe('VDataIterator.ts', () => {
+describe.skip('VDataIterator.ts', () => {
   type Instance = InstanceType<typeof VDataIterator>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

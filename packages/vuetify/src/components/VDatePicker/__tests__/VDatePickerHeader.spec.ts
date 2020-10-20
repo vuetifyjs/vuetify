@@ -20,7 +20,7 @@ Vue.prototype.$vuetify = {
   },
 }
 
-describe('VDatePickerHeader.ts', () => {
+describe.skip('VDatePickerHeader.ts', () => {
   type Instance = InstanceType<typeof VDatePickerHeader>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

@@ -13,7 +13,7 @@ const Mock = CalendarWithEvents.extend({
   render: h => h('div'),
 })
 
-describe('calendar-with-events.ts', () => {
+describe.skip('calendar-with-events.ts', () => {
   type Instance = InstanceType<typeof Mock>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

@@ -10,7 +10,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VSparkline.ts', () => {
+describe.skip('VSparkline.ts', () => {
   type Instance = InstanceType<typeof VSparkline>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

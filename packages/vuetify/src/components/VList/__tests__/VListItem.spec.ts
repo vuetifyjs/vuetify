@@ -10,7 +10,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VListItem.ts', () => {
+describe.skip('VListItem.ts', () => {
   type Instance = InstanceType<typeof VListItem>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

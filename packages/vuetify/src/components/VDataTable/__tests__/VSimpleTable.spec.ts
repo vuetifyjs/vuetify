@@ -8,7 +8,7 @@ import {
   MountOptions,
 } from '@vue/test-utils'
 
-describe('VSimpleTable.ts', () => {
+describe.skip('VSimpleTable.ts', () => {
   type Instance = InstanceType<typeof VSimpleTable>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

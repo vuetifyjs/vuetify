@@ -9,7 +9,7 @@ import {
 } from '@vue/test-utils'
 import Vue from 'vue'
 
-describe('Table Row', () => {
+describe.skip('Table Row', () => {
   type Instance = InstanceType<typeof Row>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

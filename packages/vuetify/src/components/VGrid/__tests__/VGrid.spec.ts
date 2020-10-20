@@ -13,7 +13,7 @@ import {
 
 const Mock = Grid('test')
 
-describe('VGrid.ts', () => {
+describe.skip('VGrid.ts', () => {
   type Instance = InstanceType<typeof Mock>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

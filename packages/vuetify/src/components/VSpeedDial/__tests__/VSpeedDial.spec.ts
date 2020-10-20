@@ -13,7 +13,7 @@ import {
 } from '@vue/test-utils'
 import { compileToFunctions } from 'vue-template-compiler'
 
-describe('VSpeedDial.ts', () => {
+describe.skip('VSpeedDial.ts', () => {
   type Instance = InstanceType<typeof VSpeedDial>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

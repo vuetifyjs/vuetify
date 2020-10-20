@@ -11,7 +11,7 @@ import {
 } from '@vue/test-utils'
 import { keyCodes } from '../../../util/helpers'
 
-describe('VAutocomplete.ts', () => {
+describe.skip('VAutocomplete.ts', () => {
   type Instance = InstanceType<typeof VAutocomplete>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

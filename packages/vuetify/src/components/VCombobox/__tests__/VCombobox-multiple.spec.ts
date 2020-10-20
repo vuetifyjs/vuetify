@@ -11,7 +11,7 @@ import {
 } from '@vue/test-utils'
 import { keyCodes } from '../../../util/helpers'
 
-describe('VCombobox.ts', () => {
+describe.skip('VCombobox.ts', () => {
   type Instance = InstanceType<typeof VCombobox>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

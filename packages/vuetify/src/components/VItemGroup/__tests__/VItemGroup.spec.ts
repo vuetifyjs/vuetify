@@ -29,7 +29,7 @@ const Mock = {
   }),
 }
 
-describe('VItemGroup', () => {
+describe.skip('VItemGroup', () => {
   type Instance = ExtractVue<typeof VItemGroup>
   let mountFunction: (options?: object) => Wrapper<Instance>
   let localVue: typeof Vue

@@ -20,7 +20,7 @@ const Mock = Detachable.extend({
   },
 })
 
-describe('detachable.ts', () => {
+describe.skip('detachable.ts', () => {
   it('should detach to app', async () => {
     const localMock = Mock
     const wrapper = mount(VApp, {

@@ -28,7 +28,7 @@ const errorInput = {
   },
 }
 
-describe('VForm.ts', () => {
+describe.skip('VForm.ts', () => {
   type Instance = InstanceType<typeof VForm>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   let vuetify

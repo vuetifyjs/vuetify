@@ -12,7 +12,7 @@ import {
 } from '@vue/test-utils'
 import { waitAnimationFrame } from '../../../../test'
 
-describe('Overlayable.ts', () => {
+describe.skip('Overlayable.ts', () => {
   const Mock = Overlayable.extend({
     data: () => ({
       isActive: false,

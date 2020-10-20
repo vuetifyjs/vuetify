@@ -10,7 +10,7 @@ import {
 } from '@vue/test-utils'
 import { wait } from '../../../../test'
 
-describe('VTextarea.ts', () => {
+describe.skip('VTextarea.ts', () => {
   type Instance = InstanceType<typeof VTextarea>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

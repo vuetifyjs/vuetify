@@ -10,7 +10,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VParallax.ts', () => {
+describe.skip('VParallax.ts', () => {
   type Instance = InstanceType<typeof VParallax>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

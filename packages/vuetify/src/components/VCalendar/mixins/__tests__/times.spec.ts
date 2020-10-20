@@ -14,7 +14,7 @@ const Mock = Times.extend({
   render: h => h('div'),
 })
 
-describe('times.ts', () => {
+describe.skip('times.ts', () => {
   type Instance = ExtractVue<typeof Mock>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

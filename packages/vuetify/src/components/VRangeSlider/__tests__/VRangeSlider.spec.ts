@@ -8,7 +8,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VRangeSlider.ts', () => {
+describe.skip('VRangeSlider.ts', () => {
   type Instance = InstanceType<typeof VRangeSlider>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

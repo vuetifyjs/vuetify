@@ -16,7 +16,7 @@ Vue.prototype.$vuetify = {
   lang: new Lang(preset),
 }
 
-describe('VTimePickerTitle.ts', () => {
+describe.skip('VTimePickerTitle.ts', () => {
   type Instance = InstanceType<typeof VTimePickerTitle>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

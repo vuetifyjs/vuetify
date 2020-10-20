@@ -14,7 +14,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VIcon', () => {
+describe.skip('VIcon', () => {
   let mountFunction: (ctx?: object, name?: string) => Wrapper<Vue>
   let localVue: typeof Vue
 

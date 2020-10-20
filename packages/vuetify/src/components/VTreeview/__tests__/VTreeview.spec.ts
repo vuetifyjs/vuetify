@@ -19,7 +19,7 @@ const threeLevels = [
   { id: 0, name: 'Root', children: [{ id: 1, name: 'Child', children: [{ id: 2, name: 'Grandchild' }] }, { id: 3, name: 'Child' }] },
 ]
 
-describe('VTreeView.ts', () => { // eslint-disable-line max-statements
+describe.skip('VTreeView.ts', () => { // eslint-disable-line max-statements
   type Instance = ExtractVue<typeof VTreeview>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

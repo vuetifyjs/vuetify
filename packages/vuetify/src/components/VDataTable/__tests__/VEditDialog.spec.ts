@@ -12,7 +12,7 @@ import {
 import { keyCodes } from '../../../util/helpers'
 import mixins from '../../../util/mixins'
 
-describe('VEditDialog.ts', () => {
+describe.skip('VEditDialog.ts', () => {
   type Instance = InstanceType<typeof VEditDialog>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

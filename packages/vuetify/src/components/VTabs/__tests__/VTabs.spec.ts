@@ -24,7 +24,7 @@ const TabsItemsMock = {
   render: () => {},
 }
 
-describe('VTabs.ts', () => {
+describe.skip('VTabs.ts', () => {
   type Instance = ExtractVue<typeof VTabs>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

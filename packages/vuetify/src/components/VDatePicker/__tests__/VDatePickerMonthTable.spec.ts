@@ -11,7 +11,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VDatePickerMonthTable.ts', () => {
+describe.skip('VDatePickerMonthTable.ts', () => {
   type Instance = InstanceType<typeof VDatePickerMonthTable>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

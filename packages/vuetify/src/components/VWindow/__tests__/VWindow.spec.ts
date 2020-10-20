@@ -13,7 +13,7 @@ import {
 } from '@vue/test-utils'
 import { touch } from '../../../../test'
 
-describe('VWindow.ts', () => {
+describe.skip('VWindow.ts', () => {
   type Instance = InstanceType<typeof VWindow>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

@@ -20,7 +20,7 @@ import {
 const oneMBFile = new File([new ArrayBuffer(1048576)], 'test')
 const twoMBFile = new File([new ArrayBuffer(2097152)], 'test')
 
-describe('VFileInput.ts', () => {
+describe.skip('VFileInput.ts', () => {
   type Instance = InstanceType<typeof VFileInput>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

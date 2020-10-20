@@ -13,7 +13,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VSheet.ts', () => {
+describe.skip('VSheet.ts', () => {
   let mountFunction: (options?: object) => Wrapper<Vue>
 
   beforeEach(() => {

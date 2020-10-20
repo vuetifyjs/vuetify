@@ -4,7 +4,7 @@
 // Services
 import { Application } from '../index'
 
-describe('Application.ts', () => {
+describe.skip('Application.ts', () => {
   let app: Application
 
   beforeEach(() => {

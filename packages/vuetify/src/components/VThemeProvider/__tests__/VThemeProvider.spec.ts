@@ -11,7 +11,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VThemeProvider.ts', () => {
+describe.skip('VThemeProvider.ts', () => {
   type Instance = InstanceType<typeof VThemeProvider>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

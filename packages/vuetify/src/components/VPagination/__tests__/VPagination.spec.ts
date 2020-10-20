@@ -22,7 +22,7 @@ Vue.prototype.$vuetify = {
   },
 }
 
-describe('VPagination.ts', () => {
+describe.skip('VPagination.ts', () => {
   type Instance = InstanceType<typeof VPagination>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

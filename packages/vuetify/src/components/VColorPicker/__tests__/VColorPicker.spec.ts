@@ -8,7 +8,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VColorPicker.ts', () => {
+describe.skip('VColorPicker.ts', () => {
   type Instance = InstanceType<typeof VColorPicker>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   let el

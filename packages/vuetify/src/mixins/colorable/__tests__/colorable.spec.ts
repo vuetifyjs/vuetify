@@ -8,7 +8,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('colorable.ts', () => {
+describe.skip('colorable.ts', () => {
   const Mock = Colorable.extend({
     render: h => h('div'),
   })

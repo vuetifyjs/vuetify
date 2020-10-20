@@ -29,7 +29,7 @@ function createBtn (val = null) {
   })
 }
 
-describe('VBottomNavigation.ts', () => {
+describe.skip('VBottomNavigation.ts', () => {
   type Instance = InstanceType<typeof VBottomNavigation>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

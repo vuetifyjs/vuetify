@@ -46,7 +46,7 @@ const MockScopedLabel = {
   }),
 }
 
-describe('VTreeViewNode.ts', () => {
+describe.skip('VTreeViewNode.ts', () => {
   type Instance = InstanceType<typeof VTreeviewNode>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   let treeview

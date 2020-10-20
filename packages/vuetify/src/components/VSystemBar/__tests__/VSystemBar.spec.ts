@@ -14,7 +14,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VSystemBar.ts', () => {
+describe.skip('VSystemBar.ts', () => {
   type Instance = InstanceType<typeof VSystemBar>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

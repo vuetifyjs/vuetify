@@ -15,7 +15,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VSlideGroup.ts', () => {
+describe.skip('VSlideGroup.ts', () => {
   type Instance = ExtractVue<typeof VSlideGroup>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

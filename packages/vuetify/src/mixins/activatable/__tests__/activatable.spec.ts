@@ -16,7 +16,7 @@ import {
 import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
 import { wait } from '../../../../test'
 
-describe('activatable.ts', () => {
+describe.skip('activatable.ts', () => {
   const Mock = Activatable.extend({
     data: () => ({
       isActive: false,

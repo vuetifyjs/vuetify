@@ -10,7 +10,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VFooter.ts', () => {
+describe.skip('VFooter.ts', () => {
   type Instance = InstanceType<typeof VFooter>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

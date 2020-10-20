@@ -14,7 +14,7 @@ const Component = Elevatable.extend({
   render: h => h('div'),
 })
 
-describe('elevatable.ts', () => {
+describe.skip('elevatable.ts', () => {
   type Instance = InstanceType<typeof Component>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

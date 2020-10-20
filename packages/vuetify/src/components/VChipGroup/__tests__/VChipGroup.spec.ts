@@ -17,7 +17,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VChipGroup.ts', () => {
+describe.skip('VChipGroup.ts', () => {
   let mountFunction: (options?: object) => Wrapper<Vue>
   let router: Router
   let localVue: typeof Vue

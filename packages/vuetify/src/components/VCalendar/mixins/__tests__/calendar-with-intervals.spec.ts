@@ -28,7 +28,7 @@ const createTouchEvent = (x, y) => ({
   currentTarget: document.body,
 })
 
-describe('calendar-with-intervals.ts', () => {
+describe.skip('calendar-with-intervals.ts', () => {
   type Instance = ExtractVue<typeof Mock>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

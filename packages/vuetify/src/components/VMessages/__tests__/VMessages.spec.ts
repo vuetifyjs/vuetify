@@ -13,7 +13,7 @@ import {
 // Types
 import { ExtractVue } from '../../../util/mixins'
 
-describe('VMessages.ts', () => {
+describe.skip('VMessages.ts', () => {
   type Instance = ExtractVue<typeof VMessages>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

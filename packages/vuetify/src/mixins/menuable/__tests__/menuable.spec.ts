@@ -8,7 +8,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('menuable.ts', () => {
+describe.skip('menuable.ts', () => {
   const Mock = Menuable.extend({
     render: h => h('div'),
   })

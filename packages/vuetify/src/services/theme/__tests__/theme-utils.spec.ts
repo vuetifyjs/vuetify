@@ -6,7 +6,7 @@ import {
   parse,
 } from '../utils'
 
-describe('theme-utilities.ts', () => {
+describe.skip('theme-utilities.ts', () => {
   let parsedTheme
 
   beforeEach(() => {

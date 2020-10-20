@@ -21,7 +21,7 @@ import { wait } from '../../../../test'
 
 const tip = '[Vuetify] The v-stepper-content component must be used inside a v-stepper'
 
-describe('VStepperContent.ts', () => {
+describe.skip('VStepperContent.ts', () => {
   type Instance = InstanceType<typeof VStepperContent>
   let mountFunction: (options?: object) => Wrapper<Instance>
   let localVue: typeof Vue

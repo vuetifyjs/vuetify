@@ -21,7 +21,7 @@ Vue.prototype.$vuetify = {
   },
 }
 
-describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
+describe.skip('VDatePicker.ts', () => { // eslint-disable-line max-statements
   type Instance = InstanceType<typeof VDatePicker>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

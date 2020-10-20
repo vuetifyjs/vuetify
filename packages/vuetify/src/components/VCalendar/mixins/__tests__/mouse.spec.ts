@@ -14,7 +14,7 @@ const Mock = Mouse.extend({
   render: h => h('div'),
 })
 
-describe('mouse.ts', () => {
+describe.skip('mouse.ts', () => {
   type Instance = ExtractVue<typeof Mock>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

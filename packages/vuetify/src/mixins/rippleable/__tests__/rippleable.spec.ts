@@ -8,7 +8,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('rippleable.ts', () => {
+describe.skip('rippleable.ts', () => {
   const Mock = Rippleable.extend({
     render () {
       return this.genRipple()
