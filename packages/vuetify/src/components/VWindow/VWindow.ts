@@ -18,13 +18,13 @@ import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 export default BaseItemGroup.extend({
   name: 'v-window',
 
+  directives: { Touch },
+
   provide (): object {
     return {
       windowGroup: this,
     }
   },
-
-  directives: { Touch },
 
   props: {
     activeClass: {

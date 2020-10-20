@@ -16,7 +16,7 @@
         v-bind="$attrs"
         v-on="$listeners"
       >
-        <template v-slot="{ item }">
+        <template v-slot:default="{ item }">
           <div class="px-2">
             I'm item number {{ item }}
           </div>

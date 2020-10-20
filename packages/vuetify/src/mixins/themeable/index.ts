@@ -1,24 +1,14 @@
 import Vue from 'vue'
 import { PropType, RenderContext } from 'vue/types/options'
 
-/* eslint-disable-next-line no-use-before-define */
-interface Themeable extends Vue {
+interface options extends Vue {
   theme: {
     isDark: boolean
   }
 }
 
-export function functionalThemeClasses (context: RenderContext): object {
-  const vm = {
-    ...context.props,
-    ...context.injections,
-  }
-  const isDark = Themeable.options.computed.isDark.call(vm)
-  return Themeable.options.computed.themeClasses.call({ isDark })
-}
-
 /* @vue/component */
-const Themeable = Vue.extend<Themeable>().extend({
+const Themeable = Vue.extend<options>().extend({
   name: 'themeable',
 
   provide (): object {
@@ -110,3 +100,12 @@ const Themeable = Vue.extend<Themeable>().extend({
 })
 
 export default Themeable
+
+export function functionalThemeClasses (context: RenderContext): object {
+  const vm = {
+    ...context.props,
+    ...context.injections,
+  }
+  const isDark = Themeable.options.computed.isDark.call(vm)
+  return Themeable.options.computed.themeClasses.call({ isDark })
+}

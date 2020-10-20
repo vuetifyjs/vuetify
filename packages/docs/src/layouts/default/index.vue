@@ -40,10 +40,6 @@
   export default {
     name: 'DefaultLayout',
 
-    beforeRouteEnter (to, from, next) {
-      next(vm => vm.init())
-    },
-
     components: {
       DefaultBar,
       DefaultDrawer,
@@ -53,6 +49,10 @@
       DefaultSnackbar,
       DefaultToc,
       DefaultView,
+    },
+
+    beforeRouteEnter (to, from, next) {
+      next(vm => vm.init())
     },
 
     data: () => ({ unassigned: [] }),

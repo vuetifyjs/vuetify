@@ -19,7 +19,7 @@
               <v-slide-item
                 v-for="(prop) in tabs"
                 :key="prop"
-                #default="{ active, toggle }"
+                v-slot="{ active, toggle }"
               >
                 <v-btn
                   :input-value="active"
@@ -182,9 +182,9 @@
   export default {
     name: 'Usage',
 
-    inject: ['theme'],
-
     mixins: [Codepen],
+
+    inject: ['theme'],
 
     props: { name: String },
 

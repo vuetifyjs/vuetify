@@ -8,7 +8,7 @@
     v-bind="$attrs"
     v-on="$listeners"
   >
-    <template v-slot:selection="{ item, selected }">
+    <template #selection="{ item, selected }">
       <v-chip
         :value="selected"
         class="white--text"
@@ -23,7 +23,7 @@
       </v-chip>
     </template>
 
-    <template v-slot:item="{ attrs, item }">
+    <template #item="{ attrs, item }">
       <v-list-item-action>
         <v-icon v-text="item.icon" />
       </v-list-item-action>

@@ -5,7 +5,6 @@ import {
 } from '@vue/test-utils'
 import CalendarWithEvents from '../calendar-with-events'
 import { parseTimestamp } from '../../util/timestamp'
-import { parseEvent } from '../../util/events'
 
 const Mock = CalendarWithEvents.extend({
   render: h => h('div'),

@@ -40,7 +40,7 @@ describe('VEditDialog.ts', () => {
   it('should render custom button texts', () => {
     const wrapper = mountFunction({
       propsData: {
-        cancelText: 'I don\'t want to modify that!',
+        cancelText: `I don't want to modify that!`,
         saveText: 'Save it!',
       },
     })

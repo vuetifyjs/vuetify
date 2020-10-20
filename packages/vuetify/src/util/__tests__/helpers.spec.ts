@@ -106,7 +106,7 @@ describe('helpers', () => {
     expect(deepEqual(currentDate, futureDate)).toEqual(false)
     expect(deepEqual({ date: currentDate }, { date: futureDate })).toEqual(false)
 
-    const circular = {}
+    const circular = {} // eslint-disable-line sonarjs/prefer-object-literal
     circular.me = circular
 
     expect(deepEqual({ r: circular }, { r: circular })).toEqual(true)

@@ -52,7 +52,7 @@ describe('events.ts', () => {
     expect(isEventOverlapping(parsed, getDayIdentifier(parseTimestamp('2019-02-16')), getDayIdentifier(parseTimestamp('2019-02-18')))).toBeFalsy()
   })
 
-  it('should throw an error if start isn\'t defined', () => {
+  it(`should throw an error if start isn't defined`, () => {
     const fn = () => parseEvent({
       end: '2019-02-15',
     }, 0, 'start', 'end')
