@@ -21,7 +21,6 @@ module.exports = {
         allowFirstLine: false,
       },
     }],
-    'vue/component-definition-name-casing': ['error', 'kebab-case'],
     'local-rules/no-render-string-reference': 'error',
     'jest/no-disabled-tests': 'off',
     'jest/no-large-snapshots': 'warn',
@@ -38,12 +37,6 @@ module.exports = {
       files: 'dev/Playground.vue',
       rules: {
         'max-len': 'off',
-      },
-    },
-    {
-      files: '**/*.spec.ts',
-      rules: {
-        'vue/component-definition-name-casing': 'off',
       },
     },
   ],
