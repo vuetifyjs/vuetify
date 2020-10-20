@@ -1,5 +1,8 @@
+// Utilities
 import { mount } from '@vue/test-utils'
 import { defineComponent, h } from 'vue'
+
+// Composables
 import { useProxiedModel } from '..'
 
 const TestComponent = defineComponent({
@@ -22,8 +25,10 @@ const TestComponentWithPropDefaultValue = defineComponent({
       default: 'propDefaultValue',
     },
   },
+  // eslint-disable-next-line sonarjs/no-identical-functions
   setup (props, ctx) {
     const proxiedModel = useProxiedModel(props, ctx, 'foo', 'syncDefaultValue')
+    // eslint-disable-next-line sonarjs/no-identical-functions
     return () => h('div', {
       onClick: () => proxiedModel.value = 'internal',
     }, [props.foo, proxiedModel.value].join(','))

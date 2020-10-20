@@ -1,4 +1,3 @@
-// import Vue from 'vue/dist/vue.common.js'
 import {
   deepEqual,
   getNestedValue,
@@ -8,8 +7,8 @@ import {
   arrayDiff,
   getObjectValueByPath,
   humanReadableFileSize,
-  sortItems,
   kebabCase,
+  sortItems,
 } from '../helpers'
 
 describe('helpers', () => {
@@ -365,17 +364,20 @@ describe('helpers', () => {
 })
 
 describe('kebabCase', () => {
-  it('should convert string to kebab case', () => {
-    expect(kebabCase('PascalCase')).toBe('pascal-case')
-    expect(kebabCase('camelCase')).toBe('camel-case')
-    expect(kebabCase('kebab-case')).toBe('kebab-case')
-    expect(kebabCase('ALLCAPS')).toBe('allcaps')
-    expect(kebabCase('this is a sentence')).toBe('this-is-a-sentence')
-    expect(kebabCase('WhatIsThis')).toBe('what-is-this')
+  it.each([
+    ['PascalCase', 'pascal-case'],
+    ['camelCase', 'camel-case'],
+    ['kebab-case', 'kebab-case'],
+    ['ALLCAPS', 'allcaps'],
+    ['this is a sentence', 'this-is-a-sentence'],
+  ])('should convert "%s" to "%s"', (input, expected) => {
+    expect(kebabCase(input)).toBe(expected)
   })
 
-  it('should handle null values', () => {
-    expect(kebabCase(null)).toBe('')
-    expect(kebabCase(undefined)).toBe('')
+  it.each([
+    [null],
+    [undefined],
+  ])('should handle %s values', input => {
+    expect(kebabCase(input)).toBe('')
   })
 })

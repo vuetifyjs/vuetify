@@ -1,10 +1,11 @@
+// Utilities
 import { ref, computed, getCurrentInstance, SetupContext, Ref } from 'vue'
 import { kebabCase } from '../util/helpers'
 import { consoleError } from '../util/console'
 
 export function useProxiedModel<
   Inner,
-  Props extends {},
+  Props extends Record<string, unknown>,
   Prop extends Extract<keyof Props, string>,
 > (
   props: Props,
@@ -19,7 +20,7 @@ export function useProxiedModel<
   if (!vm) consoleError('useProxiedModel must be called from inside a setup function')
 
   const propIsDefined = computed(() => {
-    return typeof props[prop] !== 'undefined' && (vm?.vnode.props?.hasOwnProperty(prop) || vm?.vnode.props?.hasOwnProperty(kebabCase(prop)))
+    return !!(typeof props[prop] !== 'undefined' && (vm?.vnode.props?.hasOwnProperty(prop) || vm?.vnode.props?.hasOwnProperty(kebabCase(prop))))
   })
 
   const internal = ref(transformIn(propIsDefined.value ? props[prop] : defaultValue)) as Ref<Inner>
