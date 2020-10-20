@@ -138,11 +138,11 @@ new Vue({
 
 The following components are now **lazy** by default. This means they will not render their content until they are explicitly activated. This drastically improves performance but may not be wanted depending upon your application's needs _(i.e. For SEO purposes)_. To return to the previous behavior, use the **eager** prop.
 
-* `v-badge`
-* `v-menu`
-* `v-tooltip`
-* `v-dialog`
-* `v-bottom-sheet`
+- `v-badge`
+- `v-menu`
+- `v-tooltip`
+- `v-dialog`
+- `v-bottom-sheet`
 
 `vuetify/lib` is now compiled to **es6**. This means supporting IE requires [`transpileDependencies`](https://cli.vuejs.org/config/#transpiledependencies) or similar to be used, along with `@babel/polyfill`. Transpile dependencies are automatically added when using vue-cli-3. If you have an older version, you can simple add 'vuetify' to the list.
 
@@ -223,8 +223,8 @@ const opts = {
 }
 ```
 
-* Now defaults to use [mdi](https://materialdesignicons.com/) icons. For information on how to install please navigate [here](https://vuetifyjs.com/features/icons#install-material-design-icons)
-* Is now located under the **icons** property of the Vuetify options
+- Now defaults to use [mdi](https://materialdesignicons.com/) icons. For information on how to install please navigate [here](https://vuetifyjs.com/features/icons#install-material-design-icons)
+- Is now located under the **icons** property of the Vuetify options
 
 If you want to use a custom iconfont, you must set it up in the initial Vuetify options now.
 
@@ -288,24 +288,24 @@ this.$vuetify.lang.t(...)
 
 The grid has been rebuilt modeled after bootstrap. The existing grid still works and needs some slight modifications. [Kael](https://github.com/KaelWD) has created an eslint plugin to help with this process.
 
-* [eslint-plugin-vuetify](https://github.com/vuetifyjs/eslint-plugin-vuetify) **to fix most of these for you**
-* Spacing helpers have changed to represent the number of 4px intervals from 0-12 (0-48px)
-  * eg. px-7 is 7 * 4 = 28px
-  * 3 → 4
-  * 4 → 6
-  * 5 → 12
-* Most "breakpointed" and "non-breakpointed" helpers have been normalized, eg. `.text-xs-center` is now `text-center` as it applies to all screen widths unless overridden
-* Children of `.d-flex` no longer have extra flex rules applied. This can be done manually with `.flex-grow-1`
-* Helper classes changed:
-  * `.fluid` → `.container--fluid`
-  * `.scroll-y` → `.overflow-y-auto`
-  * `.hide-overflow` → `.overflow-hidden`
-  * `.show-overflow` → `.overflow-visible`
-  * `.no-wrap` → `.text-no-wrap`
-  * `.ellipsis` → `.text-truncate`
-  * `.left` → `.float-left`
-  * `.right` → `.float-right`
-* `<v-layout row>` should not be used as `.row` is now part of the new grid instead (#7956)
+- [eslint-plugin-vuetify](https://github.com/vuetifyjs/eslint-plugin-vuetify) **to fix most of these for you**
+- Spacing helpers have changed to represent the number of 4px intervals from 0-12 (0-48px)
+- eg. px-7 is 7 * 4 = 28px
+- 3 → 4
+- 4 → 6
+- 5 → 12
+- Most "breakpointed" and "non-breakpointed" helpers have been normalized, eg. `.text-xs-center` is now `text-center` as it applies to all screen widths unless overridden
+- Children of `.d-flex` no longer have extra flex rules applied. This can be done manually with `.flex-grow-1`
+- Helper classes changed:
+- `.fluid` → `.container--fluid`
+- `.scroll-y` → `.overflow-y-auto`
+- `.hide-overflow` → `.overflow-hidden`
+- `.show-overflow` → `.overflow-visible`
+- `.no-wrap` → `.text-no-wrap`
+- `.ellipsis` → `.text-truncate`
+- `.left` → `.float-left`
+- `.right` → `.float-right`
+- `<v-layout row>` should not be used as `.row` is now part of the new grid instead (#7956)
 
 Use the following regex to update spacing classes:
 
@@ -347,29 +347,29 @@ npm install sass -D
 
 The root font-size (per MD2 specification) is now _16px_.
 
-* The following typography classes have been replaced:
-  * subheading → subtitle-1
+- The following typography classes have been replaced:
+- subheading → subtitle-1
 
 ### Event names
 
 All event names has been changed from camelCase to kebab-case:
 
-* `update:searchInput` → `update:search-input`
-* `update:inputValue` → `update:input-value`
-* `update:miniVariant` → `update:mini-variant`
-* `update:pickerDate` → `update:picker-date`
-* `update:selectingYear` → `update:selecting-year`
-* `tableDate` → `update:table-date`
-* `update:returnValue` → `update:return-value`
+- `update:searchInput` → `update:search-input`
+- `update:inputValue` → `update:input-value`
+- `update:miniVariant` → `update:mini-variant`
+- `update:pickerDate` → `update:picker-date`
+- `update:selectingYear` → `update:selecting-year`
+- `tableDate` → `update:table-date`
+- `update:returnValue` → `update:return-value`
 
 ### Activators
 
-* Components with activators, `v-tooltip`, `v-menu`, `v-dialog`, `v-list-group` and `v-bottom-sheet` must now be bound using the new [v-slot](https://vuejs.org/v2/guide/components-slots.html#Named-Slots) syntax
-  * Requires Vue@2.6
-* We understand this is considerably more verbose than the v1.5 counterpart. We are still exploring ways to support the new **v-slot** in a more concise manner
-  * You can find more information on the official Vue documentation for [Destructuring Slot Props](https://vuejs.org/v2/guide/components-slots.html#Destructuring-Slot-Props)
-  * You can find more information on the official Vue documentation for [v-slot](https://vuejs.org/v2/guide/components-slots.html#Named-Slots)
-* The upside to this change is it is easier to support nested activators and provide proper a11y support
+- Components with activators, `v-tooltip`, `v-menu`, `v-dialog`, `v-list-group` and `v-bottom-sheet` must now be bound using the new [v-slot](https://vuejs.org/v2/guide/components-slots.html#Named-Slots) syntax
+- Requires Vue@2.6
+- We understand this is considerably more verbose than the v1.5 counterpart. We are still exploring ways to support the new **v-slot** in a more concise manner
+- You can find more information on the official Vue documentation for [Destructuring Slot Props](https://vuejs.org/v2/guide/components-slots.html#Destructuring-Slot-Props)
+- You can find more information on the official Vue documentation for [v-slot](https://vuejs.org/v2/guide/components-slots.html#Named-Slots)
+- The upside to this change is it is easier to support nested activators and provide proper a11y support
 
 #### Regular activator
 
@@ -460,12 +460,12 @@ All form inputs default to white when using the **dark** prop unless the applica
 
 These are previous deprecations from earlier versions that have now been removed:
 
-* `<v-text-field textarea>` will no longer render `<v-textarea>`
-* `<v-select autocomplete>` will no longer render `<v-autocomplete>`
-* `<v-select combobox>` will no longer render `<v-combobox>`
-* `<v-select overflow>` will no longer render `<v-overflow-btn>`
-* `<v-select segmented>` will no longer render `<v-overflow-btn segmented>`
-* `<v-select editable>` will no longer render `<v-overflow-btn editable>`
+- `<v-text-field textarea>` will no longer render `<v-textarea>`
+- `<v-select autocomplete>` will no longer render `<v-autocomplete>`
+- `<v-select combobox>` will no longer render `<v-combobox>`
+- `<v-select overflow>` will no longer render `<v-overflow-btn>`
+- `<v-select segmented>` will no longer render `<v-overflow-btn segmented>`
+- `<v-select editable>` will no longer render `<v-overflow-btn editable>`
 
 ### Individual Components
 
@@ -473,8 +473,8 @@ These are the changes required for existing components.
 
 #### v-app
 
-* Component classes have been prepended with **v-**. eg `.application` → `.v-application`
-* The dark and light prop no longer have an effect on application theme variants
+- Component classes have been prepended with **v-**. eg `.application` → `.v-application`
+- The dark and light prop no longer have an effect on application theme variants
 
 ```html
 <!-- v1.5 src/App.vue -->
@@ -501,7 +501,7 @@ export default new Vuetify({
 
 #### v-alert
 
-* Alerts are visible by default
+- Alerts are visible by default
 
 ```html
 <!-- v1.5 -->
@@ -525,38 +525,38 @@ export default new Vuetify({
 
 #### v-bottom-nav
 
-* Renamed from `v-bottom-nav` to `v-bottom-navigation`
+- Renamed from `v-bottom-nav` to `v-bottom-navigation`
 
 #### v-bottom-navigation
 
-* The **color** prop is now **background-color**
-* The **color** prop now affects the active `<v-btn>` color
+- The **color** prop is now **background-color**
+- The **color** prop now affects the active `<v-btn>` color
 
 #### v-bottom-sheet-transition
 
-* Component has been removed
+- Component has been removed
 **Developer notes:** _Was never explicitly listed in API_
 
 #### v-btn
 
-* The **flat** prop is now **text**
-* The **round** prop is now **rounded**
-* No longer has explicit margin
+- The **flat** prop is now **text**
+- The **round** prop is now **rounded**
+- No longer has explicit margin
 
 #### v-card-media
 
-* Component has been removed
+- Component has been removed
 
 #### v-carousel
 
-* The **cycle** prop is no longer implicit, must be defined in order to have screens switch
+- The **cycle** prop is no longer implicit, must be defined in order to have screens switch
 
 #### v-chip
 
-* The **value** prop is now **active**
-* **value** no longer controls visibility. **input** event emitted when clicking
-* The **selected** prop is now **input-value** or **v-model**
-* The **close** event is now **click:close**
+- The **value** prop is now **active**
+- **value** no longer controls visibility. **input** event emitted when clicking
+- The **selected** prop is now **input-value** or **v-model**
+- The **close** event is now **click:close**
 
 #### v-data-iterator and v-data-table
 
@@ -564,42 +564,42 @@ Data table (and iterator) have been rewritten from the ground up to be both easi
 
 #### Shared
 
-* **disable-initial-sort** has been removed. Neither component initially sorts data anymore. Use **sort-by** (or **options**) prop to sort
-* **filter** prop has been removed. Instead use **custom-filter**. This was done in an effort to make custom filtering less confusing
-  * The signature for **custom-filter** has changed from `(items: object[], search: string, filter: Filter): object[]` to `(value: any, search: string, item: any) => boolean`
-* **pagination** prop has been removed. Instead use the separate props such as **page**, **sort-by**, etc. If you want to provide a single object you can use the new **options** prop instead. **NOTE**: The **options** prop has a different object structure than **pagination**. Check API docs for details
-* **total-items** prop has been renamed to **server-items-length**
-* **hide-actions** prop has been renamed to **hide-default-footer**. Also it no longer changes the visible items per page
-* Props related to the default footer have been move to the **footer-props** prop. These are:
-  * **prev-icon**
-  * **next-icon**
-  * **rows-per-page-items** → **items-per-page-options**
-  * **rows-per-page-text** → **items-per-page-text**
-* The **expand** prop has been removed
+- **disable-initial-sort** has been removed. Neither component initially sorts data anymore. Use **sort-by** (or **options**) prop to sort
+- **filter** prop has been removed. Instead use **custom-filter**. This was done in an effort to make custom filtering less confusing
+- The signature for **custom-filter** has changed from `(items: object[], search: string, filter: Filter): object[]` to `(value: any, search: string, item: any) => boolean`
+- **pagination** prop has been removed. Instead use the separate props such as **page**, **sort-by**, etc. If you want to provide a single object you can use the new **options** prop instead. **NOTE**: The **options** prop has a different object structure than **pagination**. Check API docs for details
+- **total-items** prop has been renamed to **server-items-length**
+- **hide-actions** prop has been renamed to **hide-default-footer**. Also it no longer changes the visible items per page
+- Props related to the default footer have been move to the **footer-props** prop. These are:
+- **prev-icon**
+- **next-icon**
+- **rows-per-page-items** → **items-per-page-options**
+- **rows-per-page-text** → **items-per-page-text**
+- The **expand** prop has been removed
 
 #### v-data-iterator
 
-* The **content-tag**, **content-props**, **content-class** props have been removed. Instead simply use the default scoped slot to implement your intended markup.
+- The **content-tag**, **content-props**, **content-class** props have been removed. Instead simply use the default scoped slot to implement your intended markup.
 
 #### v-data-table
 
-* **items** slot has been renamed to **item**
-* **headers** slot renamed to **header**
-* **item** slot (and **header**) now require you to define a `<tr>` element. Previously this was optional
-* **expand** slot renamed to **expanded-item**. It no longer includes an expansion transition, and the slot is inside the `<tr>` element so that you can define your own `<td>` columns. To get back to a similar look as in 1.5, you will need a `<td>` with *colspan* equal to the number of columns in your header
-* **hide-header** has been renamed to **hide-default-header**
-* **select-all** has been renamed to **show-select**. This will also render a checkbox on each item row as long as you are not defining a slot that overrides the internal row rendering (such as **item** or **body**)
-* Props related to the default header have been moved to the **header-props** prop. These are:
-  * **sort-icon**
+- **items** slot has been renamed to **item**
+- **headers** slot renamed to **header**
+- **item** slot (and **header**) now require you to define a `<tr>` element. Previously this was optional
+- **expand** slot renamed to **expanded-item**. It no longer includes an expansion transition, and the slot is inside the `<tr>` element so that you can define your own `<td>` columns. To get back to a similar look as in 1.5, you will need a `<td>` with *colspan* equal to the number of columns in your header
+- **hide-header** has been renamed to **hide-default-header**
+- **select-all** has been renamed to **show-select**. This will also render a checkbox on each item row as long as you are not defining a slot that overrides the internal row rendering (such as **item** or **body**)
+- Props related to the default header have been moved to the **header-props** prop. These are:
+- **sort-icon**
 
 #### v-expansion-panel et a
 
-* Many components have been renamed and props moved
-  * `v-expansion-panel` → `v-expansion-panels`
-  * `v-expansion-panel-content` → `v-expansion-panel`
-* New components
-  * `v-expansion-panel-header`
-  * `v-expansion-panel-content`
+- Many components have been renamed and props moved
+- `v-expansion-panel` → `v-expansion-panels`
+- `v-expansion-panel-content` → `v-expansion-panel`
+- New components
+- `v-expansion-panel-header`
+- `v-expansion-panel-content`
 
 ```html
 <!-- v1.5 -->
@@ -639,36 +639,36 @@ Data table (and iterator) have been rewritten from the ground up to be both easi
 
 #### v-footer
 
-* Now has explicit padding to match other similar MD components. Can be removed with the **padless** prop or a helper class, `class="pa-0"`
+- Now has explicit padding to match other similar MD components. Can be removed with the **padless** prop or a helper class, `class="pa-0"`
 
 #### v-jumbotron
 
-* Component has been removed
+- Component has been removed
 
 #### v-list et a
 
-* Many components have been renamed
-  * `v-list-tile` → `v-list-item`
-  * `v-list-tile-action` → `v-list-item-action`
-  * `v-list-tile-avatar` → `v-list-item-avatar`
-  * `v-list-tile-content` → `v-list-item-content`
-  * `v-list-tile-title` → `v-list-item-title`
-  * `v-list-tile-sub-title` → `v-list-item-subtitle`
-  * The **avatar** prop has been removed
+- Many components have been renamed
+- `v-list-tile` → `v-list-item`
+- `v-list-tile-action` → `v-list-item-action`
+- `v-list-tile-avatar` → `v-list-item-avatar`
+- `v-list-tile-content` → `v-list-item-content`
+- `v-list-tile-title` → `v-list-item-title`
+- `v-list-tile-sub-title` → `v-list-item-subtitle`
+- The **avatar** prop has been removed
 
 #### v-list-group
 
-* Can no longer use `v-list-item`s in the activator slot
-  * listeners are passed through to the internal `v-list-item` for activators
-  * use `v-list-item-content`/`v-list-item-title` etc instead
+- Can no longer use `v-list-item`s in the activator slot
+- listeners are passed through to the internal `v-list-item` for activators
+- use `v-list-item-content`/`v-list-item-title` etc instead
 
 #### v-navigation-drawer
 
-* Default width has been changed from 300px to 256px. You can adjust it using **width** prop.
+- Default width has been changed from 300px to 256px. You can adjust it using **width** prop.
 
 #### v-select - v-autocomplete - v-combobox - v-overflow-btn
 
-* Now passes **attributes** and **listeners** to **item** slot for proper a11y support (split from tile to match other implementations).
+- Now passes **attributes** and **listeners** to **item** slot for proper a11y support (split from tile to match other implementations).
 
 ```html
 <!-- v1.5 -->
@@ -698,12 +698,12 @@ The item scoped slot value of `{ tile }` is now `{ attrs, on }`. is now bound si
 
 #### v-select
 
-* No longer has a default **autocomplete** of on
+- No longer has a default **autocomplete** of on
 
 #### v-speed-dial
 
-* Icons no longer have inferred swapping for activator through css
-* The activator slot will provide a model in the future
+- Icons no longer have inferred swapping for activator through css
+- The activator slot will provide a model in the future
 
 ```html
 <!-- v1.5 -->
@@ -739,16 +739,16 @@ The item scoped slot value of `{ tile }` is now `{ attrs, on }`. is now bound si
 
 #### v-tabs
 
-* The **color** prop is now **background-color**. Color now affects the default text and slider color
-* Various class names have been changed throughout
-  * **v-tab__div** removed, use **v-tab**
-  * **v-tab__item** → **v-tab**
-  * **v-tabs__slider** → **v-tabs-slider**
-  * **v-tabs__bar** → **v-tabs-bar**
+- The **color** prop is now **background-color**. Color now affects the default text and slider color
+- Various class names have been changed throughout
+- **v-tab__div** removed, use **v-tab**
+- **v-tab__item** → **v-tab**
+- **v-tabs__slider** → **v-tabs-slider**
+- **v-tabs__bar** → **v-tabs-bar**
 
 #### v-tabs-items
 
-* No longer implicitly inherits the `v-tabs` model when nested. Must have **:value** or **v-model** explicitly bound.
+- No longer implicitly inherits the `v-tabs` model when nested. Must have **:value** or **v-model** explicitly bound.
 
 ```html
 <!-- v1.5 -->
@@ -776,11 +776,11 @@ _Developer notes: The tabs-items component does not have to be provided and is o
 
 #### v-text-field
 
-* The **mask** prop and functionality has been removed. Instead you can use 3rd party libraries such as `vue-the-mask`.
+- The **mask** prop and functionality has been removed. Instead you can use 3rd party libraries such as `vue-the-mask`.
 
 #### v-text-field - v-select - v-textarea - v-autocomplete - v-combobox
 
-* The **box** prop is now **filled**
+- The **box** prop is now **filled**
 
 ```html
 <!-- v1.5 -->
@@ -796,7 +796,7 @@ _Developer notes: The tabs-items component does not have to be provided and is o
 
 #### v-text-field - v-select - v-textarea - v-autocomplete - v-combobox - v-btn - v-alert
 
-* The **outline** prop is now **outlined**
+- The **outline** prop is now **outlined**
 
 ```html
 <!-- v1.5 -->
@@ -816,7 +816,7 @@ _Developer notes: The tabs-items component does not have to be provided and is o
 
 #### v-toolbar
 
-* All existing scrolling techniques and `app` functionality has been deprecated and moved to `v-app-bar`
+- All existing scrolling techniques and `app` functionality has been deprecated and moved to `v-app-bar`
 
 ## I need help
 

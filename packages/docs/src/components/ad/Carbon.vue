@@ -51,6 +51,7 @@
 
       img
         border-radius: 4px 0 0 4px
+        max-height: 100px
 
     .carbon-text
       color: inherit

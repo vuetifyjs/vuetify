@@ -125,6 +125,7 @@ export interface DataScopeProps {
   options: DataOptions
   updateOptions: (obj: any) => void
   sort: (value: string) => void
+  sortArray: (sortBy: string[]) => void
   group: (value: string) => void
   groupedItems: ItemGroup<any>[] | null
 }
