@@ -369,7 +369,6 @@ describe('kebabCase', () => {
     ['camelCase', 'camel-case'],
     ['kebab-case', 'kebab-case'],
     ['ALLCAPS', 'allcaps'],
-    ['this is a sentence', 'this-is-a-sentence'],
   ])('should convert "%s" to "%s"', (input, expected) => {
     expect(kebabCase(input)).toBe(expected)
   })
