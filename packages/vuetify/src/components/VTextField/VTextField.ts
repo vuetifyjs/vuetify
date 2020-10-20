@@ -131,7 +131,7 @@ export default baseMixins.extend<options>().extend({
       if (typeof this.counterValue === 'function') {
         return this.counterValue(this.internalValue)
       }
-      return (this.internalValue || '').toString().length
+      return [...(this.internalValue || '')].length
     },
     hasCounter (): boolean {
       return this.counter !== false && this.counter != null

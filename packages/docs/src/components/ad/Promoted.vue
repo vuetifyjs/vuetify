@@ -54,6 +54,13 @@
 
     inheritAttrs: false,
 
+    props: {
+      medium: {
+        type: String,
+        default: 'promoted-ad',
+      },
+    },
+
     computed: {
       bg () {
         return this.current.metadata.images.background.url
