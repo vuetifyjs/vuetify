@@ -1,5 +1,4 @@
-import { ref, computed, getCurrentInstance } from 'vue'
-import type { SetupContext, Ref } from 'vue'
+import { ref, computed, getCurrentInstance, SetupContext, Ref } from 'vue'
 import { kebabCase } from '../util/helpers'
 import { consoleError } from '../util/console'
 
