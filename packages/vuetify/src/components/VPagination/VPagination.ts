@@ -89,6 +89,10 @@ export default mixins(
     items (): (string | number)[] {
       const totalVisible = parseInt(this.totalVisible, 10)
 
+      if (totalVisible === 0) {
+        return []
+      }
+
       const maxLength = Math.min(
         Math.max(0, totalVisible) || this.length,
         Math.max(0, this.maxButtons) || this.length,
