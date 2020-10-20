@@ -149,7 +149,7 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
   }
 }
 
-export function kebabCase (str: string): string {
+export function kebabCase (str: string | null | undefined): string {
   return (str || '').replace(/\s([a-z])/gi, '-$1').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
 }
 

@@ -375,7 +375,7 @@ describe('kebabCase', () => {
   })
 
   it('should handle null values', () => {
-    expect(kebabCase(null as any)).toBe('')
-    expect(kebabCase(undefined as any)).toBe('')
+    expect(kebabCase(null)).toBe('')
+    expect(kebabCase(undefined)).toBe('')
   })
 })
