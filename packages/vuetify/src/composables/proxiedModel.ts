@@ -1,6 +1,7 @@
 import { ref, computed, getCurrentInstance } from 'vue'
 import type { SetupContext, Ref } from 'vue'
 import { kebabCase } from '../util/helpers'
+import { consoleError } from '../util/console'
 
 export function useProxiedModel<
   Inner,
@@ -16,7 +17,10 @@ export function useProxiedModel<
 ) {
   const vm = getCurrentInstance()
   const propIsDefined = computed(() => {
-    if (!vm || !vm.vnode.props) return false
+    if (!vm || !vm.vnode.props) {
+      consoleError('useProxiedModel must be called from inside a setup function')
+      return false
+    }
     return typeof props[prop] !== 'undefined' && (vm.vnode.props.hasOwnProperty(prop) || vm.vnode.props.hasOwnProperty(kebabCase(prop)))
   })
 
