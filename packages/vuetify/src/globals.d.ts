@@ -1,6 +1,3 @@
-// @ts-nocheck
-// eslint-disable
-
 /* eslint-disable max-len */
 
 // import {
@@ -16,7 +13,7 @@
 //   ThisTypedComponentOptionsWithRecordProps,
 // } from 'vue/types/options'
 // import { MetaInfo } from 'vue-meta/types'
-// import { TouchStoredHandlers } from './directives/touch'
+import type { TouchStoredHandlers } from './directives/touch'
 
 declare global {
   interface Window {

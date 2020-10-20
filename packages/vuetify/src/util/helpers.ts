@@ -1,6 +1,6 @@
-import { VNode, VNodeDirective } from 'vue/types'
-import { VuetifyIcon } from 'vuetify/types/services/icons'
-import { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
+// import { VNode, VNodeDirective } from 'vue/types'
+import type { VuetifyIcon } from 'vuetify/types/services/icons'
+import type { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
 
 export function createSimpleFunctional (
   c: string,
