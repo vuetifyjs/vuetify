@@ -16,8 +16,7 @@ import {
   provide,
   ref,
 } from 'vue'
-/* eslint-disable vue/one-component-per-file */
-// Styles
+import { convertToUnit } from '../../util/helpers'
 
 export const VuetifyAppKey: InjectionKey<any> = Symbol.for('vuetify-app')
 
@@ -34,13 +33,13 @@ export default defineComponent({
         right: 0,
         top: 0,
       },
-      groups: [] as object[],
+      groups: [] as object[][],
     })
 
     provide(VuetifyAppKey, {
       register (props: Record<any, unknown>, update) {
         const group = Number(props.group)
-        const groups = data.value.groups.slice()
+        const groups: object[][] = data.value.groups.slice()
         const registree = { ...props, update }
 
         if (group == null) {
@@ -52,8 +51,7 @@ export default defineComponent({
         }
 
         data.value.groups = groups
-
-        updateStyles(data)
+        data.value.area = updateArea(data)
       },
     })
 
@@ -74,46 +72,35 @@ function updateStyles (data) {
     if (!group) continue
 
     for (const item of group) {
-      const style = {
-        right: `${right}px`,
-        top: `${top}px`,
-        bottom: `${bottom}px`,
-        left: `${left}px`,
-        height: undefined,
-        width: undefined,
+      const { height, position, width } = item
+      const isTop = position === 'top'
+      const isRight = position === 'right'
+      const isBottom = position === 'bottom'
+      const isLeft = position === 'left'
+      const isYAxis = isTop || isBottom
+
+      item.update({
+        bottom: isTop ? 'auto' : convertToUnit(bottom),
+        height: isYAxis ? convertToUnit(height) : undefined,
+        left: isRight ? 'auto' : convertToUnit(left),
+        right: isLeft ? 'auto' : convertToUnit(right),
+        top: isBottom ? 'auto' : convertToUnit(top),
+        width: !isYAxis ? convertToUnit(width) : undefined,
+      })
+
+      if (isTop) {
+        top += Number(height)
+      } else if (isRight) {
+        right += Number(width)
+      } else if (isBottom) {
+        bottom += Number(height)
+      } else if (isLeft) {
+        left += Number(width)
       }
-
-      if (item.position === 'top') {
-        style.bottom = 'auto'
-        style.height = `${item.height}px`
-
-        top += Number(item.height)
-      }
-
-      if (item.position === 'right') {
-        style.left = 'auto'
-        style.width = `${item.width}px`
-
-        right += Number(item.width)
-      }
-
-      if (item.position === 'bottom') {
-        style.top = 'auto'
-        style.height = `${item.height}px`
-
-        bottom += Number(item.height)
-      }
-
-      if (item.position === 'left') {
-        style.right = 'auto'
-        style.width = `${item.width}px`
-
-        left += Number(item.width)
-      }
-
-      item.update(style)
     }
   }
+
+  return { top, right, bottom, left }
 }
 
 export const VLayout = defineComponent({
@@ -133,11 +120,7 @@ export const VLayout = defineComponent({
     onMounted(() => {
       const app = inject(VuetifyAppKey)
 
-      app.register(props, styles => {
-        console.log('registering')
-
-        style.value = styles
-      })
+      app.register(props, styles => style.value = styles)
     })
 
     attrs = mergeData(attrs, {
