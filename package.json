@@ -22,8 +22,8 @@
     "clean": "lerna clean"
   },
   "engines": {
-    "node": "^12 || ^14",
-    "yarn": "^1.12"
+    "node": "^8",
+    "yarn": "^1"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -82,5 +82,8 @@
   },
   "resolutions": {
     "workbox-webpack-plugin": "^5.1.3"
+  },
+  "dependencies": {
+    "vuetify": "^2.3.15"
   }
 }

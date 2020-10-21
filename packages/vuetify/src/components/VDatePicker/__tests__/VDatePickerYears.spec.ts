@@ -4,6 +4,7 @@ import {
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
+import { defaultFormat } from 'moment'
 
 describe('VDatePickerYears.ts', () => {
   type Instance = InstanceType<typeof VDatePickerYears>
@@ -31,7 +32,8 @@ describe('VDatePickerYears.ts', () => {
       },
     })
 
-    expect(wrapper.html().replace('年', '')).toMatchSnapshot()
+    expect(wrapper.findAll('li:first-child').at(0).element.textContent).toMatch(/^[0-9]+年?/)
+    expect(wrapper.findAll('li:last-child').at(0).element.textContent).toMatch(/^[0-9]+年?/)
   })
 
   it('should respect min/max props', async () => {
