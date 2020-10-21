@@ -26,7 +26,7 @@
           end: '2019-01-07 10:00',
         },
         {
-          name: 'Thomas\' Birthday',
+          name: `Thomas' Birthday`,
           start: '2019-01-10',
         },
         {

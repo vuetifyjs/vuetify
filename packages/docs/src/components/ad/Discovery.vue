@@ -7,6 +7,13 @@
 
     extends: VuetifyAd,
 
+    props: {
+      medium: {
+        type: String,
+        default: 'discovery-ad',
+      },
+    },
+
     computed: {
       ads () {
         return this.all.filter(({ metadata }) => {

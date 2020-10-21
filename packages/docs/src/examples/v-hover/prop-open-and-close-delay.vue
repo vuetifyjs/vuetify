@@ -5,7 +5,7 @@
       sm="6"
     >
       <v-hover
-        v-slot:default="{ hover }"
+        v-slot="{ hover }"
         open-delay="200"
       >
         <v-card
@@ -27,7 +27,7 @@
       sm="6"
     >
       <v-hover
-        v-slot:default="{ hover }"
+        v-slot="{ hover }"
         close-delay="200"
       >
         <v-card

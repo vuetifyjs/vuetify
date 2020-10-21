@@ -7,7 +7,7 @@
     <v-list shaped>
       <v-subheader>REPORTS</v-subheader>
       <v-list-item-group
-        v-model="item"
+        v-model="selectedItem"
         color="primary"
       >
         <v-list-item
@@ -29,7 +29,7 @@
 <script>
   export default {
     data: () => ({
-      item: 1,
+      selectedItem: 1,
       items: [
         { text: 'Real-Time', icon: 'mdi-clock' },
         { text: 'Audience', icon: 'mdi-account' },

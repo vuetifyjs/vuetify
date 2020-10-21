@@ -63,8 +63,6 @@ import Vuetify from 'vuetify'
 import { createLocalVue, mount } from '@vue/test-utils'
 
 describe('AppBtn.vue', () => {
-  const localVue = createLocalVue()
-
   // DO NOT use Vuetify on the localInstance
   // This is bootstrapped in the jest setup
   // file located in ./tests/setup.js

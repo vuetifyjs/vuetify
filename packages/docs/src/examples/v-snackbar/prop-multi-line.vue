@@ -33,7 +33,7 @@
     data: () => ({
       multiLine: true,
       snackbar: false,
-      text: 'I\'m a multi-line snackbar.',
+      text: `I'm a multi-line snackbar.`,
     }),
   }
 </script>
