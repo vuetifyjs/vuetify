@@ -1,4 +1,4 @@
-import { CalendarTimestamp, CalendarFormatter } from 'vuetify/types'
+import { CalendarFormatter, CalendarTimestamp } from 'vuetify/types'
 import { isLeapYear } from '../../../util/dateTimeUtils'
 
 export const PARSE_REGEX = /^(\d{4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/

@@ -12,8 +12,8 @@ import VWindowItem from '../VWindowItem'
 import {
   createLocalVue,
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 import { waitAnimationFrame } from '../../../../test'
 

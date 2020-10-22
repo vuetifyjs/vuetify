@@ -23,7 +23,7 @@ import { convertToUnit, getSlot } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode, VNodeDirective, PropType } from 'vue'
+import { PropType, VNode, VNodeDirective } from 'vue'
 import { TouchWrapper } from 'vuetify/types'
 
 const baseMixins = mixins(

@@ -10,10 +10,10 @@ import { getNestedValue } from '../../util/helpers'
 import Vue from 'vue'
 import { VuetifyPreset } from 'vuetify/types/services/presets'
 import {
+  Theme as ITheme,
   VuetifyParsedTheme,
   VuetifyThemes,
   VuetifyThemeVariant,
-  Theme as ITheme,
 } from 'vuetify/types/services/theme'
 
 export class Theme extends Service {

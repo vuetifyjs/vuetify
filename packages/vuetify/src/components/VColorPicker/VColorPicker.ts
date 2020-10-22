@@ -9,7 +9,7 @@ import VColorPickerEdit, { Mode, modes } from './VColorPickerEdit'
 import VColorPickerSwatches from './VColorPickerSwatches'
 
 // Helpers
-import { VColorPickerColor, parseColor, fromRGBA, extractColor, hasAlpha } from './util'
+import { extractColor, fromRGBA, hasAlpha, parseColor, VColorPickerColor } from './util'
 import mixins from '../../util/mixins'
 import { deepEqual } from '../../util/helpers'
 
@@ -18,7 +18,7 @@ import Elevatable from '../../mixins/elevatable'
 import Themeable from '../../mixins/themeable'
 
 // Types
-import { VNode, PropType } from 'vue'
+import { PropType, VNode } from 'vue'
 
 export default mixins(Elevatable, Themeable).extend({
   name: 'v-color-picker',

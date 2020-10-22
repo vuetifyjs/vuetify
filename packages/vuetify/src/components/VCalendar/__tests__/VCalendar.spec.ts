@@ -2,8 +2,8 @@ import { parseDate } from '../util/timestamp'
 import VCalendar from '../VCalendar'
 import {
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
 

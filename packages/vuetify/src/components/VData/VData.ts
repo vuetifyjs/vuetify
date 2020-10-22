@@ -1,15 +1,15 @@
 // Helpers
-import { wrapInArray, sortItems, deepEqual, groupItems, searchItems, fillArray } from '../../util/helpers'
+import { deepEqual, fillArray, groupItems, searchItems, sortItems, wrapInArray } from '../../util/helpers'
 import Vue, { VNode } from 'vue'
 
 // Types
 import {
+  DataGroupFunction,
   DataOptions,
   DataPagination,
   DataScopeProps,
-  DataSortFunction,
-  DataGroupFunction,
   DataSearchFunction,
+  DataSortFunction,
   ItemGroup,
 } from 'vuetify/types'
 import { PropValidator } from 'vue/types/options'

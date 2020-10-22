@@ -1,5 +1,5 @@
-import { parseTimestamp, getDayIdentifier } from '../timestamp'
-import { parseEvent, isEventOn, isEventOverlapping } from '../events'
+import { getDayIdentifier, parseTimestamp } from '../timestamp'
+import { isEventOn, isEventOverlapping, parseEvent } from '../events'
 
 describe('events.ts', () => {
   it('should parse events', () => {

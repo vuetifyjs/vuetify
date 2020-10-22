@@ -1,5 +1,5 @@
 // Types
-import Vue, { VNode, PropType } from 'vue'
+import Vue, { PropType, VNode } from 'vue'
 import { DataTableHeader } from 'vuetify/types'
 
 // Utils

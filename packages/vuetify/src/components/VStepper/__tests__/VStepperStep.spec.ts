@@ -6,8 +6,8 @@ import VStepperStep from '../VStepperStep'
 // Utilities
 import {
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 
 Vue.prototype.$vuetify = {

@@ -8,8 +8,8 @@ import { consoleError, consoleWarn } from '../../util/console'
 // Types
 import { VuetifyPreset } from 'vuetify/types/services/presets'
 import {
-  VuetifyLocale,
   Lang as ILang,
+  VuetifyLocale,
 } from 'vuetify/types/services/lang'
 
 const LANG_PREFIX = '$vuetify.'

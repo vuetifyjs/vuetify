@@ -16,10 +16,10 @@ import { weekNumber } from '../../util/dateTimeUtils'
 import props from './util/props'
 import {
   createDayList,
-  getDayIdentifier,
   createNativeLocaleFormatter,
+  getDayIdentifier,
 } from './util/timestamp'
-import { CalendarTimestamp, CalendarFormatter } from 'vuetify/types'
+import { CalendarFormatter, CalendarTimestamp } from 'vuetify/types'
 
 /* @vue/component */
 export default CalendarBase.extend({

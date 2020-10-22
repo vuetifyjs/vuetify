@@ -20,7 +20,7 @@ import { breaking } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
-import { PropValidator, PropType } from 'vue/types/options'
+import { PropType, PropValidator } from 'vue/types/options'
 import { RippleOptions } from '../../directives/ripple'
 
 const baseMixins = mixins(

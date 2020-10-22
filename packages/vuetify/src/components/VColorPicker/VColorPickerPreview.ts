@@ -5,11 +5,11 @@ import './VColorPickerPreview.sass'
 import VSlider from '../VSlider/VSlider'
 
 // Utilities
-import { RGBtoCSS, RGBAtoCSS } from '../../util/colorUtils'
+import { RGBAtoCSS, RGBtoCSS } from '../../util/colorUtils'
 
 // Types
-import Vue, { VNode, VNodeData, PropType } from 'vue'
-import { VColorPickerColor, fromHSVA } from './util'
+import Vue, { PropType, VNode, VNodeData } from 'vue'
+import { fromHSVA, VColorPickerColor } from './util'
 
 export default Vue.extend({
   name: 'v-color-picker-preview',

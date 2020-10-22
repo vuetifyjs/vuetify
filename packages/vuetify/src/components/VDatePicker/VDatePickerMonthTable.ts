@@ -2,7 +2,7 @@
 import DatePickerTable from './mixins/date-picker-table'
 
 // Utils
-import { pad, createNativeLocaleFormatter } from './util'
+import { createNativeLocaleFormatter, pad } from './util'
 import mixins from '../../util/mixins'
 
 // Types

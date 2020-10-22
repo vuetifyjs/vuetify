@@ -1,4 +1,4 @@
-import { VNodeDirective, VNode } from 'vue/types/vnode'
+import { VNode, VNodeDirective } from 'vue/types/vnode'
 import { keys } from '../../util/helpers'
 import { TouchHandlers, TouchValue, TouchWrapper } from 'vuetify/types'
 

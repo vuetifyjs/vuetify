@@ -1,8 +1,8 @@
 import Times from '../times'
 import {
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../../util/mixins'
 import { CalendarTimestamp } from 'vuetify/types'

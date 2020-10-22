@@ -3,7 +3,7 @@ import Colorable from '../../mixins/colorable'
 
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
-import { genPoints, genBars } from './helpers/core'
+import { genBars, genPoints } from './helpers/core'
 import { genPath } from './helpers/path'
 
 // Types

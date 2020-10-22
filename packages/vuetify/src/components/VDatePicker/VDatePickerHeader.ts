@@ -14,7 +14,7 @@ import { createNativeLocaleFormatter, monthChange } from './util'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode, PropType } from 'vue'
+import { PropType, VNode } from 'vue'
 import { DatePickerFormatter } from 'vuetify/types'
 
 export default mixins(

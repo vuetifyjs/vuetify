@@ -12,7 +12,7 @@ import pad from '../VDatePicker/util/pad'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode, PropType } from 'vue'
+import { PropType, VNode } from 'vue'
 import { SelectingTimes } from './SelectingTimes'
 
 const rangeHours24 = createRange(24)

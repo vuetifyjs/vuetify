@@ -21,12 +21,12 @@ import ClickOutside from '../../directives/click-outside'
 
 // Utilities
 import mergeData from '../../util/mergeData'
-import { getPropertyFromItem, getObjectValueByPath, keyCodes } from '../../util/helpers'
+import { getObjectValueByPath, getPropertyFromItem, keyCodes } from '../../util/helpers'
 import { consoleError } from '../../util/console'
 
 // Types
 import mixins from '../../util/mixins'
-import { VNode, VNodeDirective, PropType, VNodeData } from 'vue'
+import { PropType, VNode, VNodeData, VNodeDirective } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import { SelectItemKey } from 'vuetify/types'
 

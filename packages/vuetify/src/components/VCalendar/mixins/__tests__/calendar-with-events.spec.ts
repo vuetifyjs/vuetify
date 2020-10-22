@@ -1,7 +1,7 @@
 import {
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 import CalendarWithEvents from '../calendar-with-events'
 import { parseTimestamp } from '../../util/timestamp'

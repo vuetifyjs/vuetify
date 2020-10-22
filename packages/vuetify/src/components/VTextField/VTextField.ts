@@ -23,7 +23,7 @@ import { breaking, consoleWarn } from '../../util/console'
 
 // Types
 import mixins from '../../util/mixins'
-import { VNode, PropType } from 'vue/types'
+import { PropType, VNode } from 'vue/types'
 
 const baseMixins = mixins(
   VInput,

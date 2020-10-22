@@ -3,8 +3,8 @@ import { CalendarTimestamp } from 'vuetify/types'
 import { parseTimestamp } from '../../util/timestamp'
 import {
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../../util/mixins'
 

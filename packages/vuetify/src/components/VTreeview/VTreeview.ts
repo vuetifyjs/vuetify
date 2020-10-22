@@ -2,7 +2,7 @@
 import './VTreeview.sass'
 
 // Types
-import { VNode, VNodeChildrenArrayContents, PropType } from 'vue'
+import { PropType, VNode, VNodeChildrenArrayContents } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import { TreeviewItemFunction } from 'vuetify/types'
 
@@ -22,8 +22,8 @@ import {
 import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 import {
-  filterTreeItems,
   filterTreeItem,
+  filterTreeItems,
 } from './util/filterTreeItems'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>

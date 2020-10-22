@@ -13,15 +13,15 @@ import Resize from '../../../directives/resize'
 // Util
 import props from '../util/props'
 import {
-  parseTimestamp,
-  getWeekdaySkips,
   createDayList,
   createNativeLocaleFormatter,
-  getStartOfWeek,
   getEndOfWeek,
+  getStartOfWeek,
   getTimestampIdentifier,
+  getWeekdaySkips,
+  parseTimestamp,
 } from '../util/timestamp'
-import { CalendarTimestamp, CalendarFormatter } from 'vuetify/types'
+import { CalendarFormatter, CalendarTimestamp } from 'vuetify/types'
 
 export default mixins(
   Colorable,

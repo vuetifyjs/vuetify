@@ -1,10 +1,10 @@
 /* eslint-disable max-len */
 
 import {
-  VueConstructor,
   ComponentOptions,
   FunctionalComponentOptions,
   VNodeData,
+  VueConstructor,
 } from 'vue'
 import { CombinedVueInstance, Vue } from 'vue/types/vue'
 import {

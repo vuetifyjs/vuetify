@@ -25,7 +25,7 @@ import {
 
 // Types
 import mixins from '../../util/mixins'
-import { VNode, PropType, VNodeChildren } from 'vue'
+import { PropType, VNode, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import { SelectItemKey } from 'vuetify/types'
 

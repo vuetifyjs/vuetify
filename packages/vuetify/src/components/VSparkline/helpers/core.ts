@@ -1,4 +1,4 @@
-import { Point, Boundary, Bar } from '../VSparkline'
+import { Bar, Boundary, Point } from '../VSparkline'
 
 export function genPoints (
   values: number[],

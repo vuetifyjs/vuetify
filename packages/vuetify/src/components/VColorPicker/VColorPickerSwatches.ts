@@ -6,13 +6,13 @@ import VIcon from '../VIcon'
 
 // Helpers
 import colors from '../../util/colors'
-import { VColorPickerColor, fromHex, parseColor } from './util'
+import { fromHex, parseColor, VColorPickerColor } from './util'
 import { convertToUnit, deepEqual } from '../../util/helpers'
 import mixins from '../../util/mixins'
 import Themeable from '../../mixins/themeable'
 
 // Types
-import { VNode, PropType } from 'vue'
+import { PropType, VNode } from 'vue'
 import { contrastRatio } from '../../util/colorUtils'
 
 function parseDefaultColors (colors: Record<string, Record<string, string>>) {

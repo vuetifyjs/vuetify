@@ -3,10 +3,10 @@ import './VColorPickerCanvas.sass'
 
 // Helpers
 import { clamp, convertToUnit } from '../../util/helpers'
-import { fromHSVA, VColorPickerColor, fromRGBA } from './util'
+import { fromHSVA, fromRGBA, VColorPickerColor } from './util'
 
 // Types
-import Vue, { VNode, PropType } from 'vue'
+import Vue, { PropType, VNode } from 'vue'
 
 export default Vue.extend({
   name: 'v-color-picker-canvas',

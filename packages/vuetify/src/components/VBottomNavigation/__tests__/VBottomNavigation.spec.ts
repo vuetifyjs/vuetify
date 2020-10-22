@@ -8,8 +8,8 @@ import VBtn from '../../VBtn/VBtn'
 // Utilities
 import {
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 
 function createBtn (val = null) {

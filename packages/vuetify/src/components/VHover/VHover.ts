@@ -7,7 +7,7 @@ import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
 // Types
-import { VNode, ScopedSlotChildren } from 'vue/types/vnode'
+import { ScopedSlotChildren, VNode } from 'vue/types/vnode'
 
 export default mixins(
   Delayable,

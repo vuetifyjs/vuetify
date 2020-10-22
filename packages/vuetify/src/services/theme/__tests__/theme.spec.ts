@@ -10,9 +10,9 @@ import { mergeDeep } from '../../../util/helpers'
 // Types
 import Vue from 'vue'
 import {
+  ThemeOptions,
   VuetifyParsedTheme,
   VuetifyThemeVariant,
-  ThemeOptions,
 } from 'vuetify/types/services/theme'
 
 const FillVariant = (variant: Partial<VuetifyThemeVariant> = {}) => {

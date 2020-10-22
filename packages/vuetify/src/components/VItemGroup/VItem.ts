@@ -7,7 +7,7 @@ import { consoleWarn } from '../../util/console'
 
 // Types
 import Vue from 'vue'
-import { VNode, ScopedSlotChildren } from 'vue/types/vnode'
+import { ScopedSlotChildren, VNode } from 'vue/types/vnode'
 
 /* @vue/component */
 export const BaseItem = Vue.extend({

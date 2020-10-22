@@ -2,7 +2,7 @@
 // import '../../stylus/components/_calendar-daily.styl'
 
 // Types
-import { VNode, Component } from 'vue'
+import { Component, VNode } from 'vue'
 
 // Mixins
 import CalendarWithEvents from './mixins/calendar-with-events'
@@ -10,23 +10,23 @@ import CalendarWithEvents from './mixins/calendar-with-events'
 // Util
 import props from './util/props'
 import {
-  DAYS_IN_MONTH_MAX,
-  DAY_MIN,
-  DAYS_IN_WEEK,
-  parseTimestamp,
-  validateTimestamp,
-  relativeDays,
-  nextDay,
-  prevDay,
   copyTimestamp,
-  updateFormatted,
-  updateWeekday,
-  updateRelative,
-  getStartOfMonth,
+  DAY_MIN,
+  DAYS_IN_MONTH_MAX,
+  DAYS_IN_WEEK,
   getEndOfMonth,
+  getStartOfMonth,
+  nextDay,
+  parseTimestamp,
+  prevDay,
+  relativeDays,
+  timestampToDate,
+  updateFormatted,
+  updateRelative,
+  updateWeekday,
+  validateTimestamp,
   VTime,
   VTimestampInput,
-  timestampToDate,
 } from './util/timestamp'
 
 // Calendars
@@ -34,7 +34,7 @@ import VCalendarMonthly from './VCalendarMonthly'
 import VCalendarDaily from './VCalendarDaily'
 import VCalendarWeekly from './VCalendarWeekly'
 import VCalendarCategory from './VCalendarCategory'
-import { CalendarTimestamp, CalendarFormatter } from 'vuetify/types'
+import { CalendarFormatter, CalendarTimestamp } from 'vuetify/types'
 
 // Types
 interface VCalendarRenderProps {

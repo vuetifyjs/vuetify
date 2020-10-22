@@ -1,8 +1,8 @@
 import VDataTable from '../VDataTable'
 import {
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 import { Breakpoint } from '../../../services/breakpoint'
 import ripple from '../../../directives/ripple/index'

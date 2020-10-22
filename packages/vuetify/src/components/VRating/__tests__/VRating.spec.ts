@@ -7,8 +7,8 @@ import VRating from '../VRating'
 // Utilities
 import {
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
 

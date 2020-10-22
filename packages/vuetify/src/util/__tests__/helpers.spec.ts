@@ -1,12 +1,12 @@
 import Vue from 'vue/dist/vue.common.js'
 import {
+  arrayDiff,
+  convertToUnit,
   deepEqual,
   getNestedValue,
-  getPropertyFromItem,
-  convertToUnit,
-  getSlotType,
-  arrayDiff,
   getObjectValueByPath,
+  getPropertyFromItem,
+  getSlotType,
   humanReadableFileSize,
   sortItems,
 } from '../helpers'

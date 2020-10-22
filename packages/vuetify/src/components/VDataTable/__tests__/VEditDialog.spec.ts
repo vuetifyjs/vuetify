@@ -3,8 +3,8 @@ import VMenu from '../../VMenu'
 
 import {
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 import { keyCodes } from '../../../util/helpers'
 import mixins from '../../../util/mixins'

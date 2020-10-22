@@ -8,7 +8,7 @@ import Themeable from '../../mixins/themeable'
 
 // Helpers
 import mixins from '../../util/mixins'
-import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camelizeObjectKeys } from '../../util/helpers'
+import { camelizeObjectKeys, deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot } from '../../util/helpers'
 import { breaking, removed } from '../../util/console'
 
 // Types

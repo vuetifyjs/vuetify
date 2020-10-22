@@ -13,7 +13,7 @@ import { mergeListeners } from '../../util/mergeData'
 import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
-import Vue, { VNode, PropType } from 'vue'
+import Vue, { PropType, VNode } from 'vue'
 import { DatePickerFormatter } from 'vuetify/types'
 
 interface options extends Vue {

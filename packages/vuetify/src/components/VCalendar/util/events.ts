@@ -1,12 +1,12 @@
 import {
-  parseTimestamp,
   getDayIdentifier,
   getTimestampIdentifier,
-  OFFSET_TIME,
   isTimedless,
+  OFFSET_TIME,
+  parseTimestamp,
   updateHasTime,
 } from './timestamp'
-import { CalendarTimestamp, CalendarEvent, CalendarEventParsed } from 'vuetify/types'
+import { CalendarEvent, CalendarEventParsed, CalendarTimestamp } from 'vuetify/types'
 
 export function parseEvent (
   input: CalendarEvent,

@@ -4,8 +4,8 @@ import Vue from 'vue'
 // Components
 import VStepperContent from '../VStepperContent'
 import {
-  VTabTransition,
   VTabReverseTransition,
+  VTabTransition,
 } from '../../transitions'
 
 // Utilities

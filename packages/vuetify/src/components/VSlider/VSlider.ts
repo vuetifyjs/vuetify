@@ -12,11 +12,11 @@ import Loadable from '../../mixins/loadable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { addOnceEventListener, deepEqual, keyCodes, createRange, convertToUnit, passiveSupported } from '../../util/helpers'
+import { addOnceEventListener, convertToUnit, createRange, deepEqual, keyCodes, passiveSupported } from '../../util/helpers'
 import { consoleWarn } from '../../util/console'
 
 // Types
-import Vue, { VNode, VNodeChildrenArrayContents, PropType } from 'vue'
+import Vue, { PropType, VNode, VNodeChildrenArrayContents } from 'vue'
 import { ScopedSlotChildren } from 'vue/types/vnode'
 import { PropValidator } from 'vue/types/options'
 

@@ -3,12 +3,12 @@ import DatePickerTable from './mixins/date-picker-table'
 
 // Utils
 import { weekNumber } from '../../util/dateTimeUtils'
-import { pad, createNativeLocaleFormatter, monthChange } from './util'
+import { createNativeLocaleFormatter, monthChange, pad } from './util'
 import { createRange } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode, VNodeChildren, PropType } from 'vue'
+import { PropType, VNode, VNodeChildren } from 'vue'
 import { DatePickerFormatter } from 'vuetify/types'
 
 export default mixins(

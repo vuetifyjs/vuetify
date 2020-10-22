@@ -9,9 +9,9 @@ import { preset } from '../../../presets/default'
 
 // Libraries
 import {
-  Wrapper,
   mount,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 
 const oneMBFile = new File([new ArrayBuffer(1048576)], 'test')

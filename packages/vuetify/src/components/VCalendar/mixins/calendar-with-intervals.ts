@@ -5,16 +5,16 @@ import CalendarBase from './calendar-base'
 // Util
 import props from '../util/props'
 import {
-  parseTime,
   copyTimestamp,
-  updateMinutes,
   createDayList,
   createIntervalList,
   createNativeLocaleFormatter,
-  VTime,
   MINUTES_IN_DAY,
+  parseTime,
+  updateMinutes,
+  VTime,
 } from '../util/timestamp'
-import { CalendarTimestamp, CalendarFormatter, CalendarDayBodySlotScope } from 'vuetify/types'
+import { CalendarDayBodySlotScope, CalendarFormatter, CalendarTimestamp } from 'vuetify/types'
 
 /* @vue/component */
 export default CalendarBase.extend({

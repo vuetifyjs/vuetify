@@ -1,18 +1,18 @@
 // Utilities
 import {
-  HSVA,
-  HSVAtoRGBA,
-  HSVAtoHex,
-  RGBA,
   Hex,
-  RGBAtoHSVA,
+  Hexa,
   HexToHSVA,
   HSLA,
-  HSVAtoHSLA,
-  RGBAtoHex,
   HSLAtoHSVA,
+  HSVA,
+  HSVAtoHex,
+  HSVAtoHSLA,
+  HSVAtoRGBA,
   parseHex,
-  Hexa,
+  RGBA,
+  RGBAtoHex,
+  RGBAtoHSVA,
 } from '../../../util/colorUtils'
 
 export interface VColorPickerColor {

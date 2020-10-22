@@ -2,7 +2,7 @@
 import { Service } from '../service'
 
 // Types
-import { TargetPropValues, TargetProp, Application as IApplication } from 'vuetify/types/services/application'
+import { Application as IApplication, TargetProp, TargetPropValues } from 'vuetify/types/services/application'
 
 export class Application extends Service implements IApplication {
   static property: 'application' = 'application'

@@ -8,7 +8,7 @@ import { getSlot, getSlotType } from '../../util/helpers'
 import { consoleError } from '../../util/console'
 
 // Types
-import { VNode, PropType } from 'vue'
+import { PropType, VNode } from 'vue'
 
 type Listeners = Dictionary<(e: MouseEvent & KeyboardEvent & FocusEvent) => void>
 

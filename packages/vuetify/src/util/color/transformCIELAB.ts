@@ -1,4 +1,4 @@
-import { XYZ, LAB } from '../colorUtils'
+import { LAB, XYZ } from '../colorUtils'
 
 const delta = 0.20689655172413793 // 6÷29
 

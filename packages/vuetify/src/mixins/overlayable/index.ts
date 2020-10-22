@@ -3,10 +3,10 @@ import VOverlay from '../../components/VOverlay'
 
 // Utilities
 import {
-  keyCodes,
   addOnceEventListener,
   addPassiveEventListener,
   getZIndex,
+  keyCodes,
 } from '../../util/helpers'
 
 // Types

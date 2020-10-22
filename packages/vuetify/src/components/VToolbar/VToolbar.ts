@@ -12,7 +12,7 @@ import { convertToUnit, getSlot } from '../../util/helpers'
 import { breaking } from '../../util/console'
 
 // Types
-import { VNode, PropType } from 'vue'
+import { PropType, VNode } from 'vue'
 
 /* @vue/component */
 export default VSheet.extend({

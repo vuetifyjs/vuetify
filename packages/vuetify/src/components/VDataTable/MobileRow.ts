@@ -1,4 +1,4 @@
-import Vue, { VNode, PropType } from 'vue'
+import Vue, { PropType, VNode } from 'vue'
 import { getObjectValueByPath } from '../../util/helpers'
 import { DataTableHeader } from 'vuetify/types'
 

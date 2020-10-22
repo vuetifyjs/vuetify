@@ -1,8 +1,8 @@
 import VSimpleTable from '../VSimpleTable'
 import {
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('VSimpleTable.ts', () => {

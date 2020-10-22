@@ -21,7 +21,7 @@ import Sizeable from '../../mixins/sizeable'
 import { breaking } from '../../util/console'
 
 // Types
-import { PropValidator, PropType } from 'vue/types/options'
+import { PropType, PropValidator } from 'vue/types/options'
 
 /* @vue/component */
 export default mixins(

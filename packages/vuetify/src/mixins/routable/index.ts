@@ -1,4 +1,4 @@
-import Vue, { VNodeData, PropType } from 'vue'
+import Vue, { PropType, VNodeData } from 'vue'
 
 // Directives
 import Ripple, { RippleOptions } from '../../directives/ripple'

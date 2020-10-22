@@ -10,7 +10,7 @@ import Menuable from '../../mixins/menuable'
 import Toggleable from '../../mixins/toggleable'
 
 // Helpers
-import { convertToUnit, keyCodes, getSlotType } from '../../util/helpers'
+import { convertToUnit, getSlotType, keyCodes } from '../../util/helpers'
 import { consoleError } from '../../util/console'
 
 // Types

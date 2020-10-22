@@ -19,26 +19,26 @@ import {
   CalendarEventOverlapModes,
 } from '../modes'
 import {
-  getDayIdentifier, diffMinutes,
+  diffMinutes, getDayIdentifier,
 } from '../util/timestamp'
 import {
-  parseEvent,
-  isEventStart,
   isEventOn,
   isEventOverlapping,
+  isEventStart,
+  parseEvent,
 } from '../util/events'
 import {
-  CalendarTimestamp,
-  CalendarEventParsed,
-  CalendarEventVisual,
-  CalendarEventColorFunction,
-  CalendarEventNameFunction,
-  CalendarEventTimedFunction,
-  CalendarDaySlotScope,
   CalendarDayBodySlotScope,
-  CalendarEventOverlapMode,
+  CalendarDaySlotScope,
   CalendarEvent,
   CalendarEventCategoryFunction,
+  CalendarEventColorFunction,
+  CalendarEventNameFunction,
+  CalendarEventOverlapMode,
+  CalendarEventParsed,
+  CalendarEventTimedFunction,
+  CalendarEventVisual,
+  CalendarTimestamp,
 } from 'vuetify/types'
 
 // Types

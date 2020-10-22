@@ -1,7 +1,7 @@
 // Components
 import {
-  VTabTransition,
   VTabReverseTransition,
+  VTabTransition,
 } from '../transitions'
 
 // Mixins
@@ -14,7 +14,7 @@ import { convertToUnit } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode, FunctionalComponentOptions, VNodeData } from 'vue'
+import { FunctionalComponentOptions, VNode, VNodeData } from 'vue'
 
 const baseMixins = mixins(
   RegistrableInject('stepper', 'v-stepper-content', 'v-stepper'),

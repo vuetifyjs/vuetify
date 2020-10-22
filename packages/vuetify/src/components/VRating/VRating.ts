@@ -16,7 +16,7 @@ import { createRange } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode, VNodeDirective, VNodeChildren } from 'vue'
+import { VNode, VNodeChildren, VNodeDirective } from 'vue'
 
 type ItemSlotProps = {
   index: number

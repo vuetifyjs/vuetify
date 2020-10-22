@@ -1,19 +1,19 @@
 import './VDataTable.sass'
 
 // Types
-import { VNode, VNodeChildrenArrayContents, VNodeChildren } from 'vue'
+import { VNode, VNodeChildren, VNodeChildrenArrayContents } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import {
-  DataTableHeader,
-  DataTableFilterFunction,
-  DataScopeProps,
+  DataItemsPerPageOption,
   DataOptions,
   DataPagination,
+  DataScopeProps,
   DataTableCompareFunction,
-  DataItemsPerPageOption,
+  DataTableFilterFunction,
+  DataTableHeader,
+  DataTableItemProps,
   ItemGroup,
   RowClassFunction,
-  DataTableItemProps,
 } from 'vuetify/types'
 
 // Components
@@ -37,7 +37,7 @@ import ripple from '../../directives/ripple'
 
 // Helpers
 import mixins from '../../util/mixins'
-import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, defaultFilter, camelizeObjectKeys, getPropertyFromItem } from '../../util/helpers'
+import { camelizeObjectKeys, deepEqual, defaultFilter, getObjectValueByPath, getPrefixedScopedSlots, getPropertyFromItem, getSlot } from '../../util/helpers'
 import { breaking } from '../../util/console'
 import { mergeClasses } from '../../util/mergeData'
 

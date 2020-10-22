@@ -1,8 +1,8 @@
 import VVirtualTable from '../VVirtualTable'
 import {
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 import Vue from 'vue'
 

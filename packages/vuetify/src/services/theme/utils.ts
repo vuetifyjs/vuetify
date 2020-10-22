@@ -1,4 +1,4 @@
-import { colorToInt, intToHex, colorToHex, ColorInt } from '../../util/colorUtils'
+import { ColorInt, colorToHex, colorToInt, intToHex } from '../../util/colorUtils'
 import * as sRGB from '../../util/color/transformSRGB'
 import * as LAB from '../../util/color/transformCIELAB'
 import {

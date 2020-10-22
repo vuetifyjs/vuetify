@@ -1,8 +1,8 @@
 import Row from '../Row'
 import {
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 import Vue from 'vue'
 

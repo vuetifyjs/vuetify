@@ -6,7 +6,7 @@ import Themeable from '../../mixins/themeable'
 
 // Types
 import mixins, { ExtractVue } from '../../util/mixins'
-import Vue, { VNode, PropType, VNodeData } from 'vue'
+import Vue, { PropType, VNode, VNodeData } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 interface Point {

@@ -6,8 +6,8 @@ import VIcon from '../VIcon'
 import VBtn from '../VBtn'
 
 // Types
-import Vue, { VNode, VNodeChildrenArrayContents, PropType } from 'vue'
-import { DataPagination, DataOptions, DataItemsPerPageOption } from 'vuetify/types'
+import Vue, { PropType, VNode, VNodeChildrenArrayContents } from 'vue'
+import { DataItemsPerPageOption, DataOptions, DataPagination } from 'vuetify/types'
 import { PropValidator } from 'vue/types/options'
 
 export default Vue.extend({

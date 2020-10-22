@@ -1,8 +1,8 @@
 import RowGroup from '../RowGroup'
 import {
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 
 describe('Table RowGroup', () => {

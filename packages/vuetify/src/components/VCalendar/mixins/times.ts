@@ -1,9 +1,9 @@
 import Vue from 'vue'
 
 import {
-  validateTimestamp,
-  parseTimestamp,
   parseDate,
+  parseTimestamp,
+  validateTimestamp,
 } from '../util/timestamp'
 import { CalendarTimestamp } from 'vuetify/types'
 

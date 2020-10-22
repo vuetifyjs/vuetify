@@ -14,7 +14,7 @@ import Themeable from '../../mixins/themeable'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode, CreateElement, VNodeChildrenArrayContents } from 'vue'
+import { CreateElement, VNode, VNodeChildrenArrayContents } from 'vue'
 
 /* @vue/component */
 export default mixins(

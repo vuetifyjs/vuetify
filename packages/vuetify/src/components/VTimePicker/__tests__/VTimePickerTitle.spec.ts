@@ -5,8 +5,8 @@ import { Lang } from '../../../services/lang'
 import { preset } from '../../../presets/default'
 import {
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 
 Vue.prototype.$vuetify = {

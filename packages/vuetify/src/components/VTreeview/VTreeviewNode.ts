@@ -9,10 +9,10 @@ import Colorable from '../../mixins/colorable'
 
 // Utils
 import mixins, { ExtractVue } from '../../util/mixins'
-import { getObjectValueByPath, createRange } from '../../util/helpers'
+import { createRange, getObjectValueByPath } from '../../util/helpers'
 
 // Types
-import { VNode, VNodeChildren, PropType } from 'vue'
+import { PropType, VNode, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 type VTreeViewInstance = InstanceType<typeof VTreeview>

@@ -28,11 +28,11 @@ import {
 } from 'vue/types/options'
 import { VNode } from 'vue'
 import {
-  DatePickerFormatter,
-  DatePickerMultipleFormatter,
   DatePickerAllowedDatesFunction,
   DatePickerEventColors,
   DatePickerEvents,
+  DatePickerFormatter,
+  DatePickerMultipleFormatter,
   DatePickerType,
 } from 'vuetify/types'
 

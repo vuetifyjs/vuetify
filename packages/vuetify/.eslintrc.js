@@ -41,6 +41,10 @@ module.exports = {
     'no-return-assign': 'off',
     'no-use-before-define': 'off',
     'prefer-rest-params': 'off',
+    'sort-imports': ['error', {
+      ignoreCase: true,
+      ignoreDeclarationSort: true,
+    }],
     'no-redeclare': 'off',
     '@typescript-eslint/no-redeclare': ['error'],
     '@typescript-eslint/no-explicit-any': 'off',

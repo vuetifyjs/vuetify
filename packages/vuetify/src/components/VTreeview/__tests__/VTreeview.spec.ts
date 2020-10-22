@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import {
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 import VTreeview from '../VTreeview'
 import { ExtractVue } from '../../../util/mixins'

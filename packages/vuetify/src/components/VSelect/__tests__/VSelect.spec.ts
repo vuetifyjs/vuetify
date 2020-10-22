@@ -5,8 +5,8 @@ import Vue from 'vue'
 import VSelect from '../VSelect'
 import {
   VListItem,
-  VListItemTitle,
   VListItemContent,
+  VListItemTitle,
 } from '../../VList'
 
 // Utilities

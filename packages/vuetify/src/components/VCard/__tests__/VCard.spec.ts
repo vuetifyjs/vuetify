@@ -1,7 +1,7 @@
 import {
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 import VCard from '../VCard'
 import { ExtractVue } from '../../../util/mixins'

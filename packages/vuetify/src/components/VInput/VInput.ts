@@ -19,7 +19,7 @@ import {
 import mergeData from '../../util/mergeData'
 
 // Types
-import { VNode, VNodeData, PropType } from 'vue'
+import { PropType, VNode, VNodeData } from 'vue'
 import mixins from '../../util/mixins'
 import { InputValidationRule } from 'vuetify/types'
 

@@ -18,7 +18,7 @@ import { convertToUnit } from '../../util/helpers'
 import { breaking } from '../../util/console'
 
 // Types
-import { VNode, PropType } from 'vue'
+import { PropType, VNode } from 'vue'
 
 export default VWindow.extend({
   name: 'v-carousel',

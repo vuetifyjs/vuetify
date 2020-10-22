@@ -1,7 +1,7 @@
 import {
   mount,
-  Wrapper,
   MountOptions,
+  Wrapper,
 } from '@vue/test-utils'
 import VSimpleCheckbox from '../VSimpleCheckbox'
 

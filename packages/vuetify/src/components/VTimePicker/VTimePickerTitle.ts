@@ -8,7 +8,7 @@ import { pad } from '../VDatePicker/util'
 import mixins from '../../util/mixins'
 
 import { SelectingTimes } from './SelectingTimes'
-import { VNode, PropType } from 'vue'
+import { PropType, VNode } from 'vue'
 
 export default mixins(
   PickerButton,

@@ -1,6 +1,6 @@
 import {
-  createSimpleTransition,
   createJavascriptTransition,
+  createSimpleTransition,
 } from './createTransition'
 
 import ExpandTransitionGenerator from './expand-transition'
