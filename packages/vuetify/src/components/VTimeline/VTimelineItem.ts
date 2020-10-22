@@ -12,7 +12,7 @@ import Colorable from '../../mixins/colorable'
 
 const baseMixins = mixins(
   Colorable,
-  Themeable
+  Themeable,
 /* @vue/component */
 )
 

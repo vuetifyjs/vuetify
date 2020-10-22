@@ -206,7 +206,7 @@ export default mixins(Colorable, Themeable).extend({
       return this.$createElement(VListItemContent,
         [this.$createElement(VListItemTitle, {
           domProps: { innerHTML },
-        })]
+        })],
       )
     },
     hasItem (item: object) {

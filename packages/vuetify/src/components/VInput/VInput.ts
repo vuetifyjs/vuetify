@@ -168,7 +168,7 @@ export default baseMixins.extend<options>().extend({
     genIcon (
       type: string,
       cb?: (e: Event) => void,
-      extraData: VNodeData = {}
+      extraData: VNodeData = {},
     ) {
       const icon = (this as any)[`${type}Icon`]
       const eventName = `click:${kebabCase(type)}`
@@ -185,30 +185,30 @@ export default baseMixins.extend<options>().extend({
         on: !hasListener
           ? undefined
           : {
-            click: (e: Event) => {
-              e.preventDefault()
-              e.stopPropagation()
+              click: (e: Event) => {
+                e.preventDefault()
+                e.stopPropagation()
 
-              this.$emit(eventName, e)
-              cb && cb(e)
+                this.$emit(eventName, e)
+                cb && cb(e)
+              },
+              // Container has g event that will
+              // trigger menu open if enclosed
+              mouseup: (e: Event) => {
+                e.preventDefault()
+                e.stopPropagation()
+              },
             },
-            // Container has g event that will
-            // trigger menu open if enclosed
-            mouseup: (e: Event) => {
-              e.preventDefault()
-              e.stopPropagation()
-            },
-          },
       }, extraData)
 
       return this.$createElement('div', {
-        staticClass: `v-input__icon`,
+        staticClass: 'v-input__icon',
         class: type ? `v-input__icon--${kebabCase(type)}` : undefined,
       }, [
         this.$createElement(
           VIcon,
           data,
-          icon
+          icon,
         ),
       ])
     },
@@ -259,7 +259,7 @@ export default baseMixins.extend<options>().extend({
     genSlot (
       type: string,
       location: string,
-      slot: (VNode | VNode[])[]
+      slot: (VNode | VNode[])[],
     ) {
       if (!slot.length) return null
 

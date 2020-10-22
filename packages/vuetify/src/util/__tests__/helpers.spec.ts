@@ -218,7 +218,7 @@ describe('helpers', () => {
         components: {
           foo: { render: h => h('div') },
         },
-        template: `<foo ref="foo"><template slot="bar">hello</template></foo>`,
+        template: '<foo ref="foo"><template slot="bar">hello</template></foo>',
       }).$mount()
 
       expect(getSlotType(vm.$refs.foo, 'bar')).toBe('normal')
@@ -229,7 +229,7 @@ describe('helpers', () => {
         components: {
           foo: { render: h => h('div') },
         },
-        template: `<foo ref="foo"><template slot="bar" slot-scope="data">hello</template></foo>`,
+        template: '<foo ref="foo"><template slot="bar" slot-scope="data">hello</template></foo>',
       }).$mount()
 
       expect(getSlotType(vm.$refs.foo, 'bar')).toBe('scoped')
@@ -240,7 +240,7 @@ describe('helpers', () => {
         components: {
           foo: { render: h => h('div') },
         },
-        template: `<foo ref="foo"><template #bar>hello</template></foo>`,
+        template: '<foo ref="foo"><template #bar>hello</template></foo>',
       }).$mount()
 
       expect(getSlotType(vm.$refs.foo, 'bar', true)).toBe('v-slot')
@@ -251,7 +251,7 @@ describe('helpers', () => {
         components: {
           foo: { render: h => h('div') },
         },
-        template: `<foo ref="foo"><template #bar="data">hello</template></foo>`,
+        template: '<foo ref="foo"><template #bar="data">hello</template></foo>',
       }).$mount()
 
       expect(getSlotType(vm.$refs.foo, 'bar', true)).toBe('scoped')
@@ -262,7 +262,7 @@ describe('helpers', () => {
         components: {
           foo: { render: h => h('div') },
         },
-        template: `<foo ref="foo"><template #bar>hello</template></foo>`,
+        template: '<foo ref="foo"><template #bar>hello</template></foo>',
       }).$mount()
 
       expect(getSlotType(vm.$refs.foo, 'bar')).toBe('scoped')

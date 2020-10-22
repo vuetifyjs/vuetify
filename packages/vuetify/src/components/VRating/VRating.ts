@@ -34,7 +34,7 @@ export default mixins(
   Delayable,
   Rippleable,
   Sizeable,
-  Themeable
+  Themeable,
 ).extend({
   name: 'v-rating',
 

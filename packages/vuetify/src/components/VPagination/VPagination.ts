@@ -20,7 +20,7 @@ import { VNode, CreateElement, VNodeChildrenArrayContents } from 'vue'
 export default mixins(
   Colorable,
   Intersectable({ onVisible: ['init'] }),
-  Themeable
+  Themeable,
 ).extend({
   name: 'v-pagination',
 
@@ -92,7 +92,7 @@ export default mixins(
       const maxLength = Math.min(
         Math.max(0, totalVisible) || this.length,
         Math.max(0, this.maxButtons) || this.length,
-        this.length
+        this.length,
       )
 
       if (this.length <= maxLength) {

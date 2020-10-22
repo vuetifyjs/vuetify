@@ -83,7 +83,7 @@ export class Breakpoint extends Service implements IBreakpoint {
     window.addEventListener(
       'resize',
       this.onResize.bind(this),
-      { passive: true }
+      { passive: true },
     )
   }
 
@@ -174,7 +174,7 @@ export class Breakpoint extends Service implements IBreakpoint {
     if (typeof document === 'undefined') return 0 // SSR
     return Math.max(
       document.documentElement!.clientWidth,
-      window.innerWidth || 0
+      window.innerWidth || 0,
     )
   }
 
@@ -183,7 +183,7 @@ export class Breakpoint extends Service implements IBreakpoint {
     if (typeof document === 'undefined') return 0 // SSR
     return Math.max(
       document.documentElement!.clientHeight,
-      window.innerHeight || 0
+      window.innerHeight || 0,
     )
   }
 }

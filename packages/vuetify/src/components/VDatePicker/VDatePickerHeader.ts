@@ -20,7 +20,7 @@ import { DatePickerFormatter } from 'vuetify/types'
 export default mixins(
   Colorable,
   Localable,
-  Themeable
+  Themeable,
 /* @vue/component */
 ).extend({
   name: 'v-date-picker-header',

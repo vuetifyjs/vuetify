@@ -2,7 +2,7 @@ import { Point, Boundary, Bar } from '../VSparkline'
 
 export function genPoints (
   values: number[],
-  boundary: Boundary
+  boundary: Boundary,
 ): Point[] {
   const { minX, maxX, minY, maxY } = boundary
   const totalValues = values.length
@@ -23,7 +23,7 @@ export function genPoints (
 
 export function genBars (
   values: number[],
-  boundary: Boundary
+  boundary: Boundary,
 ): Bar[] {
   const { minX, maxX, minY, maxY } = boundary
   const totalValues = values.length

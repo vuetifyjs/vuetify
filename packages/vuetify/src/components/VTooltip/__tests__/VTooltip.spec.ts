@@ -210,7 +210,7 @@ describe('VTooltip', () => {
     expect(cb).toHaveBeenCalledWith(false)
   })
 
-  it(`should warn if activator isn't scoped`, () => {
+  it('should warn if activator isn\'t scoped', () => {
     mountFunction({
       propsData: {
         openDelay: 0,
@@ -221,10 +221,10 @@ describe('VTooltip', () => {
       },
     })
 
-    expect(`[Vuetify] The activator slot must be bound, try '<template v-slot:activator="{ on }"><v-btn v-on="on">'`).toHaveBeenWarned()
+    expect('[Vuetify] The activator slot must be bound, try \'<template v-slot:activator="{ on }"><v-btn v-on="on">\'').toHaveBeenWarned()
   })
 
-  it(`should open and close`, () => {
+  it('should open and close', () => {
     jest.useFakeTimers()
     const wrapper = mountFunction({
       propsData: {

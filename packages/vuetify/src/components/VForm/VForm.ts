@@ -20,7 +20,7 @@ type Watchers = {
 /* @vue/component */
 export default mixins(
   BindsAttrs,
-  RegistrableProvide('form')
+  RegistrableProvide('form'),
   /* @vue/component */
 ).extend({
   name: 'v-form',

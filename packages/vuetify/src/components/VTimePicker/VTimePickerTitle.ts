@@ -11,7 +11,7 @@ import { SelectingTimes } from './SelectingTimes'
 import { VNode, PropType } from 'vue'
 
 export default mixins(
-  PickerButton
+  PickerButton,
 /* @vue/component */
 ).extend({
   name: 'v-time-picker-title',

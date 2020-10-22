@@ -29,7 +29,7 @@ export default mixins<options &
 /* eslint-enable indent */
 >(
   Colorable,
-  Localable
+  Localable,
 /* @vue/component */
 ).extend({
   name: 'v-date-picker-years',

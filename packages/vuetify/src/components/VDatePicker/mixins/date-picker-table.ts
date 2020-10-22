@@ -35,7 +35,7 @@ type CalculateTableDateFunction = (v: number) => string
 export default mixins(
   Colorable,
   Localable,
-  Themeable
+  Themeable,
 /* @vue/component */
 ).extend({
   directives: { Touch },

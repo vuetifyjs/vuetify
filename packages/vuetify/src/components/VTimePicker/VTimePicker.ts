@@ -27,7 +27,7 @@ type AllowFunction = (val: number) => boolean
 
 export default mixins(
   Picker,
-  PickerButton
+  PickerButton,
 /* @vue/component */
 ).extend({
   name: 'v-time-picker',
@@ -273,12 +273,12 @@ export default mixins(
       const range = type === 'minute'
         ? range60
         : (type === 'second'
-          ? range60
-          : (this.isAmPm
-            ? (value < 12
-              ? rangeHours12am
-              : rangeHours12pm)
-            : rangeHours24))
+            ? range60
+            : (this.isAmPm
+                ? (value < 12
+                    ? rangeHours12am
+                    : rangeHours12pm)
+                : rangeHours24))
       const first = range.find(v => allowedFn((v + value) % range.length + range[0]))
       return ((first || 0) + value) % range.length + range[0]
     },
@@ -289,8 +289,8 @@ export default mixins(
             this.selecting === SelectingTimes.Hour
               ? this.isAllowedHourCb
               : (this.selecting === SelectingTimes.Minute
-                ? this.isAllowedMinuteCb
-                : this.isAllowedSecondCb),
+                  ? this.isAllowedMinuteCb
+                  : this.isAllowedSecondCb),
           color: this.color,
           dark: this.dark,
           disabled: this.disabled,
@@ -308,8 +308,8 @@ export default mixins(
           value: this.selecting === SelectingTimes.Hour
             ? this.inputHour
             : (this.selecting === SelectingTimes.Minute
-              ? this.inputMinute
-              : this.inputSecond),
+                ? this.inputMinute
+                : this.inputSecond),
         },
         on: {
           input: this.onInput,

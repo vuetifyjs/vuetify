@@ -16,7 +16,7 @@ import { PropType } from 'vue'
 const baseMixins = mixins(
   Comparable,
   BaseItemGroup,
-  VInput
+  VInput,
 )
 
 /* @vue/component */

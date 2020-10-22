@@ -19,7 +19,7 @@ import Vue, { VNode, VueConstructor } from 'vue'
 
 const baseMixins = mixins(
   Colorable,
-  RegistrableInject<'expansionPanel', VueConstructor<Vue>>('expansionPanel', 'v-expansion-panel-header', 'v-expansion-panel')
+  RegistrableInject<'expansionPanel', VueConstructor<Vue>>('expansionPanel', 'v-expansion-panel-header', 'v-expansion-panel'),
 )
 
 interface options extends ExtractVue<typeof baseMixins> {

@@ -331,10 +331,10 @@ export default CalendarBase.extend({
               value: this.eventRipple ?? true,
             }],
             ...data,
-          })
+          }),
         ), slot
           ? slot(scope)
-          : [this.genName(eventSummary)]
+          : [this.genName(eventSummary)],
       )
     },
     genName (eventSummary: () => string): VNode {
@@ -393,7 +393,7 @@ export default CalendarBase.extend({
       const end = getDayIdentifier(this.days[this.days.length - 1])
 
       return this.parsedEvents.filter(
-        event => isEventOverlapping(event, start, end)
+        event => isEventOverlapping(event, start, end),
       )
     },
     isEventForCategory (event: CalendarEventParsed, category: string | undefined | null): boolean {
@@ -406,7 +406,7 @@ export default CalendarBase.extend({
       const firstWeekday = this.eventWeekdays[0]
 
       return this.parsedEvents.filter(
-        event => isEventStart(event, day, identifier, firstWeekday)
+        event => isEventStart(event, day, identifier, firstWeekday),
       )
     },
     getEventsForDayAll (day: CalendarDaySlotScope): CalendarEventParsed[] {
@@ -416,7 +416,7 @@ export default CalendarBase.extend({
       return this.parsedEvents.filter(
         event => event.allDay &&
           (this.categoryMode ? isEventOn(event, identifier) : isEventStart(event, day, identifier, firstWeekday)) &&
-          this.isEventForCategory(event, day.category)
+          this.isEventForCategory(event, day.category),
       )
     },
     getEventsForDayTimed (day: CalendarDaySlotScope): CalendarEventParsed[] {
@@ -425,7 +425,7 @@ export default CalendarBase.extend({
       return this.parsedEvents.filter(
         event => !event.allDay &&
           isEventOn(event, identifier) &&
-          this.isEventForCategory(event, day.category)
+          this.isEventForCategory(event, day.category),
       )
     },
     getScopedSlots () {
@@ -436,7 +436,7 @@ export default CalendarBase.extend({
       const mode = this.eventModeFunction(
         this.parsedEvents,
         this.eventWeekdays[0],
-        this.parsedEventOverlapThreshold
+        this.parsedEventOverlapThreshold,
       )
 
       const isNode = (input: VNode | false): input is VNode => !!input

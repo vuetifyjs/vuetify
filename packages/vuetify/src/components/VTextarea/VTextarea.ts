@@ -19,7 +19,7 @@ interface options extends Vue {
 const baseMixins = mixins<options &
   InstanceType<typeof VTextField>
 >(
-  VTextField
+  VTextField,
 )
 
 /* @vue/component */

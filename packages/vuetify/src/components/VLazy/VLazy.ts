@@ -15,7 +15,7 @@ import { PropValidator } from 'vue/types/options'
 
 export default mixins(
   Measurable,
-  Toggleable
+  Toggleable,
 ).extend({
   name: 'VLazy',
 

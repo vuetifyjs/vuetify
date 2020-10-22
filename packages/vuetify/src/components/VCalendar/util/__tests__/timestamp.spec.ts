@@ -387,7 +387,7 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
     expect(createNativeLocaleFormatter('ru-RU', () => {})(parseTimestamp('2019-02-08'))).toBe('2019-2-8')
   })
 
-  it(`should return emptyFormatter if Intl isn't defined`, () => {
+  it('should return emptyFormatter if Intl isn\'t defined', () => {
     const intl = global.Intl
     global.Intl = undefined
     expect(createNativeLocaleFormatter('', () => {})(parseTimestamp('2019-02-08'))).toBe('')
@@ -453,7 +453,7 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
         end,
         today,
         skips,
-        Number.MAX_SAFE_INTEGER
+        Number.MAX_SAFE_INTEGER,
       )
 
       expect(days).toEqual([
@@ -480,7 +480,7 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
         end,
         today,
         skips,
-        Number.MAX_SAFE_INTEGER
+        Number.MAX_SAFE_INTEGER,
       )
 
       expect(days).toMatchSnapshot()

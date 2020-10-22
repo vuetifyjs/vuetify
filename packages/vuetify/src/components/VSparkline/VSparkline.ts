@@ -50,7 +50,7 @@ export default mixins<options &
   ]>
 /* eslint-enable indent */
 >(
-  Colorable
+  Colorable,
 ).extend({
   name: 'VSparkline',
 
@@ -184,7 +184,7 @@ export default mixins<options &
       return Boolean(
         this.showLabels ||
         this.labels.length > 0 ||
-        this.$scopedSlots.label
+        this.$scopedSlots.label,
       )
     },
     parsedLabels (): SparklineText[] {
@@ -250,10 +250,10 @@ export default mixins<options &
           } else {
             path.style.transformOrigin = 'bottom center'
             path.style.transition = 'none'
-            path.style.transform = `scaleY(0)`
+            path.style.transform = 'scaleY(0)'
             path.getBoundingClientRect()
             path.style.transition = `transform ${this.autoDrawDuration}ms ${this.autoDrawEasing}`
-            path.style.transform = `scaleY(1)`
+            path.style.transform = 'scaleY(1)'
           }
           this.lastLength = length
         })
@@ -277,7 +277,7 @@ export default mixins<options &
             offset: index / len,
             'stop-color': color || 'currentColor',
           },
-        })
+        }),
       )
 
       return this.$createElement('defs', [

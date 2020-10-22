@@ -141,13 +141,13 @@ export class Theme extends Service {
 
   private fillVariant (
     theme: Partial<VuetifyThemeVariant> = {},
-    dark: boolean
+    dark: boolean,
   ): VuetifyThemeVariant {
     const defaultTheme = this.themes[dark ? 'dark' : 'light']
 
     return Object.assign({},
       defaultTheme,
-      theme
+      theme,
     )
   }
 
@@ -277,7 +277,7 @@ export class Theme extends Service {
     return ThemeUtils.parse(
       this.currentTheme || {},
       undefined,
-      getNestedValue(this.options, ['variations'], true)
+      getNestedValue(this.options, ['variations'], true),
     )
   }
 

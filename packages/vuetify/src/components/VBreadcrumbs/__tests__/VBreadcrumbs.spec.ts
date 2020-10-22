@@ -53,7 +53,7 @@ describe('VBreadcrumbs.ts', () => {
       },
     })
 
-    expect(`Duplicate keys detected: 'a'`).not.toHaveBeenWarned()
+    expect('Duplicate keys detected: \'a\'').not.toHaveBeenWarned()
   })
 
   it('should use slot to render items if present', () => {

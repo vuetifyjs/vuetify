@@ -8,7 +8,7 @@ export type Proxyable<T extends string = 'value'> = VueConstructor<Vue & {
 export function factory<T extends string = 'value'> (prop?: T, event?: string): Proxyable<T>
 export function factory (
   prop = 'value',
-  event = 'change'
+  event = 'change',
 ) {
   return Vue.extend({
     name: 'proxyable',

@@ -74,7 +74,7 @@ function formatComponentName (vm: any, includeFile?: boolean): string {
   }
 
   return (
-    (name ? `<${classify(name)}>` : `<Anonymous>`) +
+    (name ? `<${classify(name)}>` : '<Anonymous>') +
     (file && includeFile !== false ? ` at ${file}` : '')
   )
 }

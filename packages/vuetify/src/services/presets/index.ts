@@ -38,7 +38,7 @@ export class Presets extends Service {
 
     parent.preset = mergeDeep(
       mergeDeep(defaultPreset, globalPreset),
-      preset
+      preset,
     ) as VuetifyPreset
   }
 }

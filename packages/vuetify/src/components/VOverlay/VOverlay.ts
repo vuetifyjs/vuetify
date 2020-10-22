@@ -16,7 +16,7 @@ import { VNode } from 'vue'
 export default mixins(
   Colorable,
   Themeable,
-  Toggleable
+  Toggleable,
 ).extend({
   name: 'v-overlay',
 

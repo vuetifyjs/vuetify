@@ -13,7 +13,7 @@ import mixins from '../../util/mixins'
 /* @vue/component */
 export default mixins(
   BaseSlideGroup,
-  Colorable
+  Colorable,
 ).extend({
   name: 'v-chip-group',
 

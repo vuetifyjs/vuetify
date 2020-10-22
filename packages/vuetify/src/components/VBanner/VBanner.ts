@@ -27,7 +27,7 @@ import { VNode } from 'vue'
 export default mixins(
   VSheet,
   Mobile,
-  Toggleable
+  Toggleable,
 ).extend({
   name: 'v-banner',
 

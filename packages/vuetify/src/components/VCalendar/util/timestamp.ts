@@ -359,7 +359,7 @@ export function prevDay (timestamp: CalendarTimestamp): CalendarTimestamp {
 export function relativeDays (
   timestamp: CalendarTimestamp,
   mover: CalendarTimestampOperation = nextDay,
-  days = 1
+  days = 1,
 ): CalendarTimestamp {
   while (--days >= 0) mover(timestamp)
 
@@ -417,7 +417,7 @@ export function createDayList (
   now: CalendarTimestamp,
   weekdaySkips: number[],
   max = 42,
-  min = 0
+  min = 0,
 ): CalendarTimestamp[] {
   const stop = getDayIdentifier(end)
   const days: CalendarTimestamp[] = []

@@ -14,7 +14,7 @@ export function filterTreeItems (
   idKey: string,
   textKey: string,
   childrenKey: string,
-  excluded: Set<string | number>
+  excluded: Set<string | number>,
 ): boolean {
   if (filter(item, search, textKey)) {
     return true

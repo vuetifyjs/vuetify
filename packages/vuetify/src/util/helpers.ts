@@ -6,7 +6,7 @@ import { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/type
 export function createSimpleFunctional (
   c: string,
   el = 'div',
-  name?: string
+  name?: string,
 ) {
   return Vue.extend({
     name: name || c.replace(/__/g, '-'),
@@ -35,7 +35,7 @@ export function addOnceEventListener (
   el: EventTarget,
   eventName: string,
   cb: (event: Event) => void,
-  options: boolean | AddEventListenerOptions = false
+  options: boolean | AddEventListenerOptions = false,
 ): void {
   var once = (event: Event) => {
     cb(event)
@@ -64,7 +64,7 @@ export function addPassiveEventListener (
   el: EventTarget,
   event: string,
   cb: EventHandlerNonNull | (() => void),
-  options: {}
+  options: {},
 ): void {
   el.addEventListener(event, cb, passiveSupported ? options : false)
 }
@@ -125,7 +125,7 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
 export function getPropertyFromItem (
   item: object,
   property: SelectItemKey,
-  fallback?: any
+  fallback?: any,
 ): any {
   if (property == null) return item === undefined ? fallback : item
 
@@ -264,12 +264,12 @@ export function upperFirst (str: string): string {
 export function groupItems<T extends any = any> (
   items: T[],
   groupBy: string[],
-  groupDesc: boolean[]
+  groupDesc: boolean[],
 ): ItemGroup<T>[] {
   const key = groupBy[0]
   const groups: ItemGroup<T>[] = []
   let current = null
-  for (var i = 0; i < items.length; i++) {
+  for (let i = 0; i < items.length; i++) {
     const item = items[i]
     const val = getObjectValueByPath(item, key)
     if (current !== val) {
@@ -291,7 +291,7 @@ export function sortItems<T extends any = any> (
   sortBy: string[],
   sortDesc: boolean[],
   locale: string,
-  customSorters?: Record<string, DataTableCompareFunction<T>>
+  customSorters?: Record<string, DataTableCompareFunction<T>>,
 ): T[] {
   if (sortBy === null || !sortBy.length) return items
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
@@ -440,7 +440,7 @@ export function camelizeObjectKeys (obj: Record<string, any> | null | undefined)
 
 export function mergeDeep (
   source: Dictionary<any> = {},
-  target: Dictionary<any> = {}
+  target: Dictionary<any> = {},
 ) {
   for (const key in target) {
     const sourceProperty = source[key]

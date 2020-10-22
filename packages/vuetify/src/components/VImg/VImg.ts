@@ -88,16 +88,16 @@ export default mixins(
     normalisedSrc (): srcObject {
       return this.src && typeof this.src === 'object'
         ? {
-          src: this.src.src,
-          srcset: this.srcset || this.src.srcset,
-          lazySrc: this.lazySrc || this.src.lazySrc,
-          aspect: Number(this.aspectRatio || this.src.aspect),
-        } : {
-          src: this.src,
-          srcset: this.srcset,
-          lazySrc: this.lazySrc,
-          aspect: Number(this.aspectRatio || 0),
-        }
+            src: this.src.src,
+            srcset: this.srcset || this.src.srcset,
+            lazySrc: this.lazySrc || this.src.lazySrc,
+            aspect: Number(this.aspectRatio || this.src.aspect),
+          } : {
+            src: this.src,
+            srcset: this.srcset,
+            lazySrc: this.lazySrc,
+            aspect: Number(this.aspectRatio || 0),
+          }
     },
     __cachedImage (): VNode | [] {
       if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc || this.gradient)) return []
@@ -151,7 +151,7 @@ export default mixins(
     init (
       entries?: IntersectionObserverEntry[],
       observer?: IntersectionObserver,
-      isIntersecting?: boolean
+      isIntersecting?: boolean,
     ) {
       // If the current browser supports the intersection
       // observer api, the image is not observable, and
@@ -192,10 +192,10 @@ export default mixins(
         if (image.decode) {
           image.decode().catch((err: DOMException) => {
             consoleWarn(
-              `Failed to decode image, trying to render anyway\n\n` +
+              'Failed to decode image, trying to render anyway\n\n' +
               `src: ${this.normalisedSrc.src}` +
               (err.message ? `\nOriginal error: ${err.message}` : ''),
-              this
+              this,
             )
           }).then(this.onLoad)
         } else {
@@ -240,8 +240,8 @@ export default mixins(
       if (this.$slots.placeholder) {
         const placeholder = this.isLoading
           ? [this.$createElement('div', {
-            staticClass: 'v-image__placeholder',
-          }, this.$slots.placeholder)]
+              staticClass: 'v-image__placeholder',
+            }, this.$slots.placeholder)]
           : []
 
         if (!this.transition) return placeholder[0]
@@ -270,13 +270,13 @@ export default mixins(
       // will work in the current browser.
       directives: hasIntersect
         ? [{
-          name: 'intersect',
-          modifiers: { once: true },
-          value: {
-            handler: this.init,
-            options: this.options,
-          },
-        }]
+            name: 'intersect',
+            modifiers: { once: true },
+            value: {
+              handler: this.init,
+              options: this.options,
+            },
+          }]
         : undefined,
     })
 

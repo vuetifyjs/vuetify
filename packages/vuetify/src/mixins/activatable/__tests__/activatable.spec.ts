@@ -104,7 +104,7 @@ describe('activatable.ts', () => {
     expect(runDelay).toHaveBeenLastCalledWith('close')
   })
 
-  it(`should warn when activator hasn't got a scope`, () => {
+  it('should warn when activator hasn\'t got a scope', () => {
     mountFunction({
       slots: {
         activator: '<div></div>',
@@ -114,7 +114,7 @@ describe('activatable.ts', () => {
       },
     })
 
-    expect(`The activator slot must be bound, try '<template v-slot:activator="{ on }"><v-btn v-on="on">'`).toHaveBeenWarned()
+    expect('The activator slot must be bound, try \'<template v-slot:activator="{ on }"><v-btn v-on="on">\'').toHaveBeenWarned()
   })
 
   it('should bind listeners to custom activator', async () => {

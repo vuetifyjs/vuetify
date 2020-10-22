@@ -16,7 +16,7 @@ const baseMixins = mixins(
   // Must be after routable
   // to overwrite activeClass
   GroupableFactory('tabsBar'),
-  Themeable
+  Themeable,
 )
 
 interface options extends ExtractVue<typeof baseMixins> {
@@ -57,7 +57,7 @@ export default baseMixins.extend<options>().extend(
         const resolve = this.$router.resolve(
           this.to,
           this.$route,
-          this.append
+          this.append,
         )
 
         to = resolve.href

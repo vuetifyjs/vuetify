@@ -71,7 +71,7 @@ function setGradientColor (
 function updateColor (
   el: HTMLElement,
   binding: VNodeDirective,
-  node: VNode
+  node: VNode,
 ) {
   const currentTheme = node.context!.$vuetify.theme.currentTheme
 
@@ -89,7 +89,7 @@ function updateColor (
 function update (
   el: HTMLElement,
   binding: VNodeDirective,
-  node: VNode
+  node: VNode,
 ) {
   if (binding.value === binding.oldValue) return
 

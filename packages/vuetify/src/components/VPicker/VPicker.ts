@@ -17,7 +17,7 @@ import mixins from '../../util/mixins'
 export default mixins(
   Colorable,
   Elevatable,
-  Themeable
+  Themeable,
 ).extend({
   name: 'v-picker',
 

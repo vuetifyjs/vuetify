@@ -115,7 +115,7 @@ export default function mergeData (): VNodeData {
 
 export function mergeStyles (
   target: undefined | string | object[] | object,
-  source: undefined | string | object[] | object
+  source: undefined | string | object[] | object,
 ) {
   if (!target) return source
   if (!source) return target

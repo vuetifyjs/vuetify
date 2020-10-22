@@ -29,7 +29,7 @@ export class Icons extends Service implements IIcons {
     this.iconfont = iconfont
     this.values = mergeDeep(
       presets[iconfont],
-      values
+      values,
     ) as IIcons['values']
   }
 }

@@ -48,7 +48,7 @@ export default CalendarBase.extend({
         this.times.today,
         this.weekdaySkips,
         Number.MAX_SAFE_INTEGER,
-        minDays
+        minDays,
       )
     },
     todayWeek (): CalendarTimestamp[] {
@@ -62,7 +62,7 @@ export default CalendarBase.extend({
         today,
         this.weekdaySkips,
         this.parsedWeekdays.length,
-        this.parsedWeekdays.length
+        this.parsedWeekdays.length,
       )
     },
     monthFormatter (): CalendarFormatter {
@@ -75,7 +75,7 @@ export default CalendarBase.extend({
 
       return createNativeLocaleFormatter(
         this.currentLocale,
-        (_tms, short) => short ? shortOptions : longOptions
+        (_tms, short) => short ? shortOptions : longOptions,
       )
     },
   },
@@ -142,7 +142,7 @@ export default CalendarBase.extend({
         determineDay.month - 1,
         determineDay.day,
         this.parsedWeekdays[0],
-        parseInt(this.localeFirstDayOfYear)
+        parseInt(this.localeFirstDayOfYear),
       )
     },
     genWeekNumber (weekNumber: number) {
@@ -187,7 +187,7 @@ export default CalendarBase.extend({
         }, _e => day),
       }, hasMonth
         ? this.monthFormatter(day, this.shortMonths) + ' ' + this.dayFormatter(day, false)
-        : this.dayFormatter(day, false)
+        : this.dayFormatter(day, false),
       )
     },
     genDayMonth (day: CalendarTimestamp): VNode | string {

@@ -312,10 +312,10 @@ export default mixins(
 
       const output = this.multiple
         ? (
-          this.multipleValue.indexOf(newInput) === -1
-            ? this.multipleValue.concat([newInput])
-            : this.multipleValue.filter(x => x !== newInput)
-        )
+            this.multipleValue.indexOf(newInput) === -1
+              ? this.multipleValue.concat([newInput])
+              : this.multipleValue.filter(x => x !== newInput)
+          )
         : newInput
 
       this.$emit('input', output)

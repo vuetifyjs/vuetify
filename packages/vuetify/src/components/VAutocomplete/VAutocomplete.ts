@@ -408,7 +408,7 @@ export default VSelect.extend({
 
       if (!this.valueComparator(
         this.internalSearch,
-        this.getValue(this.internalValue)
+        this.getValue(this.internalValue),
       )) {
         this.setSearch()
       }

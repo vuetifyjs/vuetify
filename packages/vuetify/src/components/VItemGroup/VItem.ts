@@ -65,7 +65,7 @@ export const BaseItem = Vue.extend({
 
 export default mixins(
   BaseItem,
-  GroupableFactory('itemGroup', 'v-item', 'v-item-group')
+  GroupableFactory('itemGroup', 'v-item', 'v-item-group'),
 ).extend({
   name: 'v-item',
 })

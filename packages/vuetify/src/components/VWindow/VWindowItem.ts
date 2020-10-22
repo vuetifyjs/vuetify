@@ -17,7 +17,7 @@ import { VNode } from 'vue'
 
 const baseMixins = mixins(
   Bootable,
-  GroupableFactory('windowGroup', 'v-window-item', 'v-window')
+  GroupableFactory('windowGroup', 'v-window-item', 'v-window'),
 )
 
 interface options extends ExtractVue<typeof baseMixins> {

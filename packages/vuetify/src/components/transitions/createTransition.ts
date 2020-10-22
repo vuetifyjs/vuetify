@@ -12,7 +12,7 @@ function mergeTransitions (
 export function createSimpleTransition (
   name: string,
   origin = 'top center 0',
-  mode?: string
+  mode?: string,
 ): FunctionalComponentOptions {
   return {
     name,
@@ -72,7 +72,7 @@ export function createSimpleTransition (
 export function createJavascriptTransition (
   name: string,
   functions: Record<string, any>,
-  mode = 'in-out'
+  mode = 'in-out',
 ): FunctionalComponentOptions {
   return {
     name,
@@ -93,7 +93,7 @@ export function createJavascriptTransition (
           props: { name },
           on: functions,
         }),
-        context.children
+        context.children,
       )
     },
   }

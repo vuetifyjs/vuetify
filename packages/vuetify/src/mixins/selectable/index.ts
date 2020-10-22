@@ -16,7 +16,7 @@ export function prevent (e: Event) {
 export default mixins(
   VInput,
   Rippleable,
-  Comparable
+  Comparable,
 ).extend({
   name: 'selectable',
 

@@ -125,7 +125,7 @@ describe('VSnackbar.ts', () => {
 
     // TODO: remove in v3
     if (timeout === 0) {
-      expect(`[Vuetify] [UPGRADE] 'timeout="0"' is deprecated, use '-1' instead.`).toHaveBeenTipped()
+      expect('[Vuetify] [UPGRADE] \'timeout="0"\' is deprecated, use \'-1\' instead.').toHaveBeenTipped()
     }
   })
 })

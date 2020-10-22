@@ -35,7 +35,7 @@ const VIcon = mixins(
   BindsAttrs,
   Colorable,
   Sizeable,
-  Themeable
+  Themeable,
   /* @vue/component */
 ).extend({
   name: 'v-icon',
@@ -59,7 +59,7 @@ const VIcon = mixins(
     },
     hasClickListener (): boolean {
       return Boolean(
-        this.listeners$.click || this.listeners$['!click']
+        this.listeners$.click || this.listeners$['!click'],
       )
     },
   },
@@ -184,7 +184,7 @@ const VIcon = mixins(
     },
     renderSvgIconComponent (
       icon: VuetifyIconComponent,
-      h: CreateElement
+      h: CreateElement,
     ): VNode {
       const data: VNodeData = {
         class: {

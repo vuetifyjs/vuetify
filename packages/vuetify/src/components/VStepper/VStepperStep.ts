@@ -19,7 +19,7 @@ type VuetifyStepperRuleValidator = () => string | boolean
 
 const baseMixins = mixins(
   Colorable,
-  RegistrableInject('stepper', 'v-stepper-step', 'v-stepper')
+  RegistrableInject('stepper', 'v-stepper-step', 'v-stepper'),
 )
 
 interface options extends InstanceType<typeof baseMixins> {

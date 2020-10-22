@@ -22,7 +22,7 @@ function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
     : { handler: value, options: {} }
   const observer = new IntersectionObserver((
     entries: IntersectionObserverEntry[] = [],
-    observer: IntersectionObserver
+    observer: IntersectionObserver,
   ) => {
     /* istanbul ignore if */
     if (!el._observe) return // Just in case, should never fire

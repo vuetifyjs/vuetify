@@ -325,7 +325,7 @@ describe('VDatePicker.ts', () => {
     wrapper.vm.$on('input', cb)
     wrapper.find('.v-date-picker-table--month tbody tr:first-child td:nth-child(3) button').trigger('click')
     expect(cb.mock.calls[0][0]).toEqual(
-      expect.arrayContaining([fromDate])
+      expect.arrayContaining([fromDate]),
     )
 
     wrapper.find('.v-date-picker-table--month tbody tr:first-child+tr+tr td:nth-child(2) button').trigger('click')

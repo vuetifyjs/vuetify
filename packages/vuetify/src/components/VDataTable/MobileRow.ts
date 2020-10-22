@@ -47,7 +47,7 @@ export default Vue.extend({
         mobileRowChildren.unshift(
           h('div', {
             staticClass: 'v-data-table__mobile-row__header',
-          }, [header.text])
+          }, [header.text]),
         )
       }
 

@@ -24,7 +24,7 @@ const baseMixins = mixins(
   Colorable,
   PositionableFactory(['absolute', 'fixed', 'top', 'bottom']),
   Proxyable,
-  Themeable
+  Themeable,
 )
 
 /* @vue/component */
@@ -95,7 +95,7 @@ export default baseMixins.extend({
     },
     __cachedDeterminate (): VNode {
       return this.$createElement('div', this.setBackgroundColor(this.color, {
-        staticClass: `v-progress-linear__determinate`,
+        staticClass: 'v-progress-linear__determinate',
         style: {
           width: convertToUnit(this.normalizedValue, '%'),
         },

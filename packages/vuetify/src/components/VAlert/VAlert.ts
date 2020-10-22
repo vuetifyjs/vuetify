@@ -25,7 +25,7 @@ import { VNode } from 'vue/types'
 export default mixins(
   VSheet,
   Toggleable,
-  Transitionable
+  Transitionable,
 ).extend({
   name: 'v-alert',
 

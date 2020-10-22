@@ -28,7 +28,7 @@ export default mixins(
   Localable,
   Mouse,
   Themeable,
-  Times
+  Times,
 /* @vue/component */
 ).extend({
   name: 'calendar-base',
@@ -67,7 +67,7 @@ export default mixins(
         this.parsedStart,
         this.parsedEnd,
         this.times.today,
-        this.weekdaySkips
+        this.weekdaySkips,
       )
     },
     dayFormatter (): CalendarFormatter {
@@ -79,7 +79,7 @@ export default mixins(
 
       return createNativeLocaleFormatter(
         this.currentLocale,
-        (_tms, _short) => options
+        (_tms, _short) => options,
       )
     },
     weekdayFormatter (): CalendarFormatter {
@@ -92,7 +92,7 @@ export default mixins(
 
       return createNativeLocaleFormatter(
         this.currentLocale,
-        (_tms, short) => short ? shortOptions : longOptions
+        (_tms, short) => short ? shortOptions : longOptions,
       )
     },
   },
@@ -115,7 +115,7 @@ export default mixins(
     getFormatter (options: object): CalendarFormatter {
       return createNativeLocaleFormatter(
         this.locale,
-        (_tms, _short) => options
+        (_tms, _short) => options,
       )
     },
   },

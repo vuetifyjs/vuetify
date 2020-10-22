@@ -19,7 +19,7 @@ import { DataItemProps, DataScopeProps } from 'vuetify/types'
 /* @vue/component */
 export default mixins(
   Mobile,
-  Themeable
+  Themeable,
 ).extend({
   name: 'v-data-iterator',
 

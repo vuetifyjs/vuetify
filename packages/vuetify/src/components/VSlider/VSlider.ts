@@ -35,7 +35,7 @@ export default mixins<options &
 /* eslint-enable indent */
 >(
   VInput,
-  Loadable
+  Loadable,
 /* @vue/component */
 ).extend({
   name: 'v-slider',
@@ -360,7 +360,7 @@ export default mixins<options &
       onDrag: Function,
       onFocus: Function,
       onBlur: Function,
-      ref = 'thumb'
+      ref = 'thumb',
     ): VNode {
       const children = [this.genThumb()]
 
@@ -408,7 +408,7 @@ export default mixins<options &
 
       const transform = this.vertical
         ? `translateY(20%) translateY(${(Number(this.thumbSize) / 3) - 1}px) translateX(55%) rotate(135deg)`
-        : `translateY(-20%) translateY(-12px) translateX(-50%) rotate(45deg)`
+        : 'translateY(-20%) translateY(-12px) translateX(-50%) rotate(45deg)'
 
       return this.$createElement(VScaleTransition, {
         props: { origin: 'bottom center' },

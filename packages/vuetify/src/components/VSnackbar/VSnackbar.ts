@@ -28,7 +28,7 @@ export default mixins(
     'left',
     'right',
     'top',
-  ])
+  ]),
 /* @vue/component */
 ).extend({
   name: 'v-snackbar',

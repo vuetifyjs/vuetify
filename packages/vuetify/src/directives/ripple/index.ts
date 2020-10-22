@@ -38,7 +38,7 @@ function isKeyboardEvent (e: VuetifyRippleEvent): e is KeyboardEvent {
 const calculate = (
   e: VuetifyRippleEvent,
   el: HTMLElement,
-  value: RippleOptions = {}
+  value: RippleOptions = {},
 ) => {
   let localX = 0
   let localY = 0
@@ -75,7 +75,7 @@ const ripples = {
   show (
     e: VuetifyRippleEvent,
     el: HTMLElement,
-    value: RippleOptions = {}
+    value: RippleOptions = {},
   ) {
     if (!el._ripple || !el._ripple.enabled) {
       return

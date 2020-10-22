@@ -19,7 +19,7 @@ type VTreeViewInstance = InstanceType<typeof VTreeview>
 
 const baseMixins = mixins(
   Colorable,
-  RegistrableInject('treeview')
+  RegistrableInject('treeview'),
 )
 
 interface options extends ExtractVue<typeof baseMixins> {

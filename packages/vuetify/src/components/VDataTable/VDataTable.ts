@@ -53,7 +53,7 @@ function searchTableItems (
   search: string | null,
   headersWithCustomFilters: DataTableHeader[],
   headersWithoutCustomFilters: DataTableHeader[],
-  customFilter: DataTableFilterFunction
+  customFilter: DataTableFilterFunction,
 ) {
   search = typeof search === 'string' ? search.trim() : null
 
@@ -460,7 +460,7 @@ export default mixins(
         key: getObjectValueByPath(item, this.itemKey),
         class: mergeClasses(
           { ...classes, 'v-data-table__selected': data.isSelected },
-          getPropertyFromItem(item, this.itemClass)
+          getPropertyFromItem(item, this.itemClass),
         ),
         props: {
           headers: this.computedHeaders,

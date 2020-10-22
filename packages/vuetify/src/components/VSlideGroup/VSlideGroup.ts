@@ -330,14 +330,14 @@ export const BaseSlideGroup = mixins<options &
         this.scrollOffset = this.calculateCenteredOffset(
           this.selectedItem.$el as HTMLElement,
           this.widths,
-          this.$vuetify.rtl
+          this.$vuetify.rtl,
         )
       } else if (this.isOverflowing) {
         this.scrollOffset = this.calculateUpdatedOffset(
           this.selectedItem.$el as HTMLElement,
           this.widths,
           this.$vuetify.rtl,
-          this.scrollOffset
+          this.scrollOffset,
         )
       }
     },

@@ -54,11 +54,11 @@ describe('colorToInt', () => {
     colorToInt('#6')
     colorToInt('red')
 
-    expect(`Colors cannot be negative: '-1'`).toHaveBeenTipped()
-    expect(`'#1000000' is not a valid rgb color`).toHaveBeenTipped()
-    expect(`'#13' is not a valid rgb color`).toHaveBeenTipped()
-    expect(`'#6' is not a valid rgb color`).toHaveBeenTipped()
-    expect(`'red' is not a valid rgb color`).toHaveBeenTipped()
+    expect('Colors cannot be negative: \'-1\'').toHaveBeenTipped()
+    expect('\'#1000000\' is not a valid rgb color').toHaveBeenTipped()
+    expect('\'#13\' is not a valid rgb color').toHaveBeenTipped()
+    expect('\'#6\' is not a valid rgb color').toHaveBeenTipped()
+    expect('\'red\' is not a valid rgb color').toHaveBeenTipped()
   })
 })
 
@@ -121,13 +121,13 @@ describe('transformCIELAB', () => {
 describe('parseGradient', () => {
   it('should replace colors with their valid forms', () => {
     expect(
-      parseGradient('to top, red lighten-1, rgba(#000, .8)', colors, currentTheme)
+      parseGradient('to top, red lighten-1, rgba(#000, .8)', colors, currentTheme),
     ).toBe('to top, #ff6666, rgba(0,0,0, .8)')
     expect(
-      parseGradient('to top, #fff, primary', colors, currentTheme)
+      parseGradient('to top, #fff, primary', colors, currentTheme),
     ).toBe('to top, #fff, #1976d2')
     expect(
-      parseGradient('to top, var(--foo), rgba(#0000, .6)', colors, currentTheme)
+      parseGradient('to top, var(--foo), rgba(#0000, .6)', colors, currentTheme),
     ).toBe('to top, var(--foo), rgba(0,0,0, .6)')
   })
 })

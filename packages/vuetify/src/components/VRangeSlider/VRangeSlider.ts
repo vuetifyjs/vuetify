@@ -66,7 +66,7 @@ export default VSlider.extend({
     },
     inputWidth (): number[] {
       return this.internalValue.map((v: number) => (
-        this.roundValue(v) - this.minValue) / (this.maxValue - this.minValue) * 100
+        this.roundValue(v) - this.minValue) / (this.maxValue - this.minValue) * 100,
       )
     },
   },

@@ -313,7 +313,7 @@ export default Vue.extend({
         this.internalOptions.groupDesc,
         this.internalOptions.page,
         true,
-        false
+        false,
       )
       this.updateOptions({ groupBy, groupDesc, page })
     },
@@ -326,7 +326,7 @@ export default Vue.extend({
         this.internalOptions.sortDesc,
         this.internalOptions.page,
         this.internalOptions.mustSort,
-        this.internalOptions.multiSort
+        this.internalOptions.multiSort,
       )
       this.updateOptions({ sortBy, sortDesc, page })
     },

@@ -14,7 +14,7 @@ type Listeners = Dictionary<(e: MouseEvent & KeyboardEvent & FocusEvent) => void
 
 const baseMixins = mixins(
   Delayable,
-  Toggleable
+  Toggleable,
 )
 
 /* @vue/component */
@@ -52,7 +52,7 @@ export default baseMixins.extend({
     const slotType = getSlotType(this, 'activator', true)
 
     if (slotType && ['v-slot', 'normal'].includes(slotType)) {
-      consoleError(`The activator slot must be bound, try '<template v-slot:activator="{ on }"><v-btn v-on="on">'`, this)
+      consoleError('The activator slot must be bound, try \'<template v-slot:activator="{ on }"><v-btn v-on="on">\'', this)
     }
 
     this.addActivatorEvents()

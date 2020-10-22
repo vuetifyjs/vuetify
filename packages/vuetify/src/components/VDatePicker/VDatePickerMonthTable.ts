@@ -10,7 +10,7 @@ import { VNode } from 'vue'
 import { DatePickerFormatter } from 'vuetify/types'
 
 export default mixins(
-  DatePickerTable
+  DatePickerTable,
 /* @vue/component */
 ).extend({
   name: 'v-date-picker-month-table',

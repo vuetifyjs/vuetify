@@ -20,7 +20,7 @@ type VTabInstance = InstanceType<typeof VTab>
 export default mixins(
   BaseSlideGroup,
   SSRBootable,
-  Themeable
+  Themeable,
   /* @vue/component */
 ).extend({
   name: 'v-tabs-bar',

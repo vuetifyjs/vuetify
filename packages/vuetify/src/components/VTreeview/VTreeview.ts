@@ -44,7 +44,7 @@ type NodeState = {
 
 export default mixins(
   RegistrableProvide('treeview'),
-  Themeable
+  Themeable,
   /* @vue/component */
 ).extend({
   name: 'v-treeview',
@@ -105,7 +105,7 @@ export default mixins(
           this.itemKey,
           this.itemText,
           this.itemChildren,
-          excluded
+          excluded,
         )
       }
 
@@ -411,12 +411,12 @@ export default mixins(
   render (h): VNode {
     const children: VNodeChildrenArrayContents = this.items.length
       ? this.items.filter(item => {
-        return !this.isExcluded(getObjectValueByPath(item, this.itemKey))
-      }).map(item => {
-        const genChild = VTreeviewNode.options.methods.genChild.bind(this)
+          return !this.isExcluded(getObjectValueByPath(item, this.itemKey))
+        }).map(item => {
+          const genChild = VTreeviewNode.options.methods.genChild.bind(this)
 
-        return genChild(item, getObjectValueByPath(item, this.itemDisabled))
-      })
+          return genChild(item, getObjectValueByPath(item, this.itemDisabled))
+        })
       /* istanbul ignore next */
       : this.$slots.default! // TODO: remove type annotation with TS 3.2
 

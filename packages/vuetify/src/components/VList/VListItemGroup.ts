@@ -12,7 +12,7 @@ import mixins from '../../util/mixins'
 
 export default mixins(
   BaseItemGroup,
-  Colorable
+  Colorable,
 ).extend({
   name: 'v-list-item-group',
 

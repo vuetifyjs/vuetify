@@ -125,7 +125,7 @@ describe('validatable.ts', () => {
 
     wrapper.vm.validate()
 
-    expect(`Rules should return a string or boolean, received 'undefined' instead`).toHaveBeenWarned()
+    expect('Rules should return a string or boolean, received \'undefined\' instead').toHaveBeenWarned()
 
     // Force validation state
     wrapper.setProps({ rules: [false] })

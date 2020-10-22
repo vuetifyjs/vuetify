@@ -15,7 +15,7 @@ import { VNode } from 'vue'
 export default mixins(
   Colorable,
   Elevatable,
-  Themeable
+  Themeable,
 /* @vue/component */
 ).extend({
   name: 'picker',

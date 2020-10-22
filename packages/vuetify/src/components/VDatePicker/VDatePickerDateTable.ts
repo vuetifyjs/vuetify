@@ -12,7 +12,7 @@ import { VNode, VNodeChildren, PropType } from 'vue'
 import { DatePickerFormatter } from 'vuetify/types'
 
 export default mixins(
-  DatePickerTable
+  DatePickerTable,
 /* @vue/component */
 ).extend({
   name: 'v-date-picker-date-table',
@@ -71,7 +71,7 @@ export default mixins(
         this.displayedMonth,
         dayInMonth,
         parseInt(this.firstDayOfWeek),
-        parseInt(this.localeFirstDayOfYear)
+        parseInt(this.localeFirstDayOfYear),
       )
     },
     genWeekNumber (weekNumber: number) {

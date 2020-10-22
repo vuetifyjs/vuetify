@@ -90,7 +90,7 @@ export default BaseItemGroup.extend({
     },
     hasActiveItems (): boolean {
       return Boolean(
-        this.items.find(item => !item.disabled)
+        this.items.find(item => !item.disabled),
       )
     },
     hasNext (): boolean {
@@ -138,7 +138,7 @@ export default BaseItemGroup.extend({
     genIcon (
       direction: 'prev' | 'next',
       icon: string,
-      fn: () => void
+      fn: () => void,
     ) {
       return this.$createElement('div', {
         staticClass: `v-window__${direction}`,
