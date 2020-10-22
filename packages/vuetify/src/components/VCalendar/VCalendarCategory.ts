@@ -41,7 +41,6 @@ export default VCalendarDaily.extend({
       }
 
       const children = this.parsedCategories.map(category => {
-        console.log(category)
         return this.genDayHeaderCategory(day, this.getCategoryScope(scope, category))
       })
 
