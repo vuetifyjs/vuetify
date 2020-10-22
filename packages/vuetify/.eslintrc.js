@@ -65,27 +65,42 @@ module.exports = {
     'no-return-assign': 'off',
     'no-use-before-define': 'off',
     'prefer-rest-params': 'off',
+    quotes: ['error', 'single', {
+      avoidEscape: true,
+      allowTemplateLiterals: true,
+    }],
     'sort-destructure-keys/sort-destructure-keys': 'error',
     'sort-imports': ['error', {
       ignoreCase: true,
       ignoreDeclarationSort: true,
     }],
     'no-redeclare': 'off',
-    '@typescript-eslint/no-redeclare': ['error'],
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/ban-types': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/no-unused-vars': 'off',
-    '@typescript-eslint/no-empty-function': 'off',
-    '@typescript-eslint/ban-ts-comment': 'off',
-    '@typescript-eslint/no-empty-interface': 'off',
   },
   overrides: [
     {
       files: 'dev/Playground.vue',
       rules: {
         'max-len': 'off',
+      },
+    },
+    {
+      files: '**/*.ts',
+      rules: {
+        'max-len': 'off',
+        quotes: 'off',
+        '@typescript-eslint/ban-types': 'off',
+        '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/no-empty-function': 'off',
+        '@typescript-eslint/no-empty-interface': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-non-null-assertion': 'off',
+        '@typescript-eslint/no-redeclare': 'error',
+        '@typescript-eslint/no-unused-vars': 'off',
+        '@typescript-eslint/quotes': ['error', 'single', {
+          avoidEscape: true,
+          allowTemplateLiterals: true,
+        }],
       },
     },
     {
