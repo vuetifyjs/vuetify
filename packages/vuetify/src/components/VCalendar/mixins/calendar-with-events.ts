@@ -133,8 +133,7 @@ export default CalendarBase.extend({
     eventColorFunction (e: CalendarEvent): string {
       return typeof this.eventColor === 'function'
         ? this.eventColor(e)
-        : e.color ? e.color
-          : this.eventColor
+        : e.color || this.eventColor
     },
     parseEvent (input: CalendarEvent, index = 0): CalendarEventParsed {
       return parseEvent(

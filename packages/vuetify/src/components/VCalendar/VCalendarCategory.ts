@@ -47,7 +47,7 @@ export default VCalendarDaily.extend({
 
       return [this.$createElement('div', data, children)]
     },
-    getCategoryScope (scope: any, category: any) {
+    getCategoryScope (scope: any, category: { categoryName: string }) {
       return {
         ...scope,
         category: category.categoryName === this.categoryForInvalid ? null : category,
@@ -64,7 +64,7 @@ export default VCalendarDaily.extend({
         getSlot(this, 'day-header', scope),
       ])
     },
-    genDayHeaderCategoryTitle (categoryName: any) {
+    genDayHeaderCategoryTitle (categoryName: string | null) {
       return this.$createElement('div', {
         staticClass: 'v-calendar-category__category',
       }, categoryName === null ? this.categoryForInvalid : categoryName)
@@ -122,7 +122,7 @@ export default VCalendarDaily.extend({
 
       return [this.$createElement('div', data, children)]
     },
-    genDayBodyCategory (day: CalendarTimestamp, category: any): VNode {
+    genDayBodyCategory (day: CalendarTimestamp, category: { categoryName: string }): VNode {
       const data = {
         staticClass: 'v-calendar-category__column',
         on: this.getDefaultMouseEventHandlers(':time-category', e => {
