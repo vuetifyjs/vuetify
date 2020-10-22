@@ -6334,6 +6334,7 @@ eslint-plugin-jest@^24.1.0:
   integrity sha512-827YJ+E8B9PvXu/0eiVSNFfxxndbKv+qE/3GSMhdorCaeaOehtqHGX2YDW9B85TEOre9n/zscledkFW/KbnyGg==
   dependencies:
     "@typescript-eslint/experimental-utils" "^4.0.1"
+    node "^8.17.0 || ^12.19.0"
 
 eslint-plugin-local-rules@^0.1.1:
   version "0.1.1"
