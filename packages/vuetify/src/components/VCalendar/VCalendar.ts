@@ -35,6 +35,7 @@ import VCalendarDaily from './VCalendarDaily'
 import VCalendarWeekly from './VCalendarWeekly'
 import VCalendarCategory from './VCalendarCategory'
 import { CalendarTimestamp, CalendarFormatter } from 'vuetify/types'
+import { Parser } from './util/parser'
 
 // Types
 interface VCalendarRenderProps {
@@ -171,16 +172,7 @@ export default CalendarWithEvents.extend({
       })
     },
     parsedCategories (): any[] {
-      return typeof this.categories === 'string' && this.categories
-        ? this.categories.split(/\s*,\s*/)
-        : Array.isArray(this.categories)
-          ? this.categories.map((v: any) => {
-            const categoryName = this.parsedCategoryText(v)
-            if (typeof v === 'string') v = { name: v }
-            v.categoryName = categoryName
-            return v
-          }) as any[]
-          : []
+      return Parser.getParsedCategories(this.categories, this.categoryText)
     },
   },
 
@@ -198,11 +190,6 @@ export default CalendarWithEvents.extend({
   },
 
   methods: {
-    parsedCategoryText (category: any): string {
-      return typeof this.categoryText === 'string'
-        ? category[this.categoryText as string]
-        : this.categoryText(category) as string
-    },
     checkChange (): void {
       const { lastStart, lastEnd } = this
       const { start, end } = this.renderProps

@@ -11,6 +11,7 @@ import VCalendarDaily from './VCalendarDaily'
 import { convertToUnit, getSlot } from '../../util/helpers'
 import { CalendarTimestamp } from 'types'
 import props from './util/props'
+import { Parser } from './util/parser'
 
 /* @vue/component */
 export default VCalendarDaily.extend({
@@ -26,25 +27,11 @@ export default VCalendarDaily.extend({
         ...this.themeClasses,
       }
     },
-    parsedCategories (): string[] {
-      return typeof this.categories === 'string' && this.categories
-        ? this.categories.split(/\s*,\s*/)
-        : Array.isArray(this.categories)
-          ? this.categories.map((v: any) => {
-            const categoryName = this.parsedCategoryText(v)
-            if (typeof v === 'string') v = { name: v }
-            v.categoryName = categoryName
-            return v
-          }) as string[]
-          : []
+    parsedCategories (): any[] {
+      return Parser.getParsedCategories(this.categories, this.categoryText)
     },
   },
   methods: {
-    parsedCategoryText (category: any): string {
-      return typeof this.categoryText === 'string'
-        ? category[this.categoryText as string]
-        : this.categoryText(category) as string
-    },
     genDayHeader (day: CalendarTimestamp, index: number): VNode[] {
       const data = {
         staticClass: 'v-calendar-category__columns',
@@ -54,6 +41,7 @@ export default VCalendarDaily.extend({
       }
 
       const children = this.parsedCategories.map(category => {
+        console.log(category)
         return this.genDayHeaderCategory(day, this.getCategoryScope(scope, category))
       })
 
