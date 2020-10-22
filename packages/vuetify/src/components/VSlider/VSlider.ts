@@ -529,8 +529,8 @@ export default mixins<options &
       const click = this.vertical ? 'clientY' : 'clientX'
 
       const {
-        [start]: trackStart,
         [length]: trackLength,
+        [start]: trackStart,
       } = this.$refs.track.getBoundingClientRect() as any
       const clickOffset = 'touches' in e ? (e as any).touches[0][click] : e[click] // Can we get rid of any here?
 
@@ -548,7 +548,7 @@ export default mixins<options &
     parseKeyDown (e: KeyboardEvent, value: number) {
       if (!this.isInteractive) return
 
-      const { pageup, pagedown, end, home, left, right, down, up } = keyCodes
+      const { down, end, home, left, pagedown, pageup, right, up } = keyCodes
 
       if (![pageup, pagedown, end, home, left, right, down, up].includes(e.keyCode)) return
 

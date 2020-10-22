@@ -13,7 +13,7 @@ interface TouchVNodeDirective extends VNodeDirective {
 }
 
 const handleGesture = (wrapper: TouchWrapper) => {
-  const { touchstartX, touchendX, touchstartY, touchendY } = wrapper
+  const { touchendX, touchendY, touchstartX, touchstartY } = wrapper
   const dirRatio = 0.5
   const minDistance = 16
   wrapper.offsetX = touchendX - touchstartX

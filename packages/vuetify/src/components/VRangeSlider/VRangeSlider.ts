@@ -176,7 +176,7 @@ export default VSlider.extend({
           return
         }
 
-        const { value, isInsideTrack } = this.parseMouseMove(e)
+        const { isInsideTrack, value } = this.parseMouseMove(e)
 
         if (isInsideTrack) {
           this.activeThumb = this.getIndexOfClosestValue(this.internalValue, value)
@@ -191,7 +191,7 @@ export default VSlider.extend({
       }
     },
     onMouseMove (e: MouseEvent) {
-      const { value, isInsideTrack } = this.parseMouseMove(e)
+      const { isInsideTrack, value } = this.parseMouseMove(e)
 
       if (isInsideTrack && this.activeThumb === null) {
         this.activeThumb = this.getIndexOfClosestValue(this.internalValue, value)

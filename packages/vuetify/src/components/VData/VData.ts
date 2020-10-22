@@ -96,7 +96,7 @@ export default Vue.extend({
       internalOptions = Object.assign(internalOptions, this.options)
     }
 
-    const { sortBy, sortDesc, groupBy, groupDesc } = internalOptions
+    const { groupBy, groupDesc, sortBy, sortDesc } = internalOptions
     const sortDiff = sortBy.length - sortDesc.length
     const groupDiff = groupBy.length - groupDesc.length
 

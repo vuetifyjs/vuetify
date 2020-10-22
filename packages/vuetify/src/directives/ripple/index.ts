@@ -91,7 +91,7 @@ const ripples = {
       container.className += ` ${value.class}`
     }
 
-    const { radius, scale, x, y, centerX, centerY } = calculate(e, el, value)
+    const { centerX, centerY, radius, scale, x, y } = calculate(e, el, value)
 
     const size = `${radius * 2}px`
     animation.className = 'v-ripple__animation'

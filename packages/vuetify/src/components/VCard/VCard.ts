@@ -75,7 +75,7 @@ export default mixins(
   },
 
   render (h): VNode {
-    const { tag, data } = this.generateRouteLink()
+    const { data, tag } = this.generateRouteLink()
 
     data.style = this.styles
 

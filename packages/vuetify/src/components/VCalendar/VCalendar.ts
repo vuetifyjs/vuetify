@@ -146,7 +146,7 @@ export default CalendarWithEvents.extend({
       return this.type === 'category'
     },
     title (): string {
-      const { start, end } = this.renderProps
+      const { end, start } = this.renderProps
       const spanYears = start.year !== end.year
       const spanMonths = spanYears || start.month !== end.month
 
@@ -194,8 +194,8 @@ export default CalendarWithEvents.extend({
 
   methods: {
     checkChange (): void {
-      const { lastStart, lastEnd } = this
-      const { start, end } = this.renderProps
+      const { lastEnd, lastStart } = this
+      const { end, start } = this.renderProps
       if (!lastStart || !lastEnd ||
         start.date !== lastStart.date ||
         end.date !== lastEnd.date) {
@@ -343,7 +343,7 @@ export default CalendarWithEvents.extend({
   },
 
   render (h): VNode {
-    const { start, end, maxDays, component, weekdays, categories } = this.renderProps
+    const { categories, component, end, maxDays, start, weekdays } = this.renderProps
 
     return h(component, {
       staticClass: 'v-calendar',

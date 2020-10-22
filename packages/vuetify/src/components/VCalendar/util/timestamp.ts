@@ -282,7 +282,7 @@ export function daysInMonth (year: number, month: number) {
 }
 
 export function copyTimestamp (timestamp: CalendarTimestamp): CalendarTimestamp {
-  const { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future } = timestamp
+  const { date, day, future, hasDay, hasTime, hour, minute, month, past, present, time, weekday, year } = timestamp
 
   return { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future }
 }

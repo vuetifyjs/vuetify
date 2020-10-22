@@ -95,7 +95,7 @@ export default Vue.extend({
     },
     ...alignContentProps,
   },
-  render (h, { props, data, children }) {
+  render (h, { children, data, props }) {
     // Super-fast memoization based on props, 5x faster than JSON.stringify
     let cacheKey = ''
     for (const prop in props) {

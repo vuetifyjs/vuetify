@@ -89,7 +89,7 @@ export default baseMixins.extend<options>().extend(
   },
 
   render (h): VNode {
-    const { tag, data } = this.generateRouteLink()
+    const { data, tag } = this.generateRouteLink()
 
     data.attrs = {
       ...data.attrs,

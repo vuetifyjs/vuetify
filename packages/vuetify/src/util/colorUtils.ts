@@ -92,7 +92,7 @@ export function colorToHex (color: Color): string {
  * @param color HSVA color as an array [0-360, 0-1, 0-1, 0-1]
  */
 export function HSVAtoRGBA (hsva: HSVA): RGBA {
-  const { h, s, v, a } = hsva
+  const { a, h, s, v } = hsva
   const f = (n: number) => {
     const k = (n + (h / 60)) % 6
     return v - v * s * Math.max(Math.min(k, 4 - k, 1), 0)
@@ -138,7 +138,7 @@ export function RGBAtoHSVA (rgba: RGBA): HSVA {
 }
 
 export function HSVAtoHSLA (hsva: HSVA): HSLA {
-  const { h, s, v, a } = hsva
+  const { a, h, s, v } = hsva
 
   const l = v - (v * s / 2)
 
@@ -148,7 +148,7 @@ export function HSVAtoHSLA (hsva: HSVA): HSLA {
 }
 
 export function HSLAtoHSVA (hsl: HSLA): HSVA {
-  const { h, s, l, a } = hsl
+  const { a, h, l, s } = hsl
 
   const v = l + s * Math.min(l, 1 - l)
 

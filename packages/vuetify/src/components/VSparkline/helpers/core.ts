@@ -4,7 +4,7 @@ export function genPoints (
   values: number[],
   boundary: Boundary,
 ): Point[] {
-  const { minX, maxX, minY, maxY } = boundary
+  const { maxX, maxY, minX, minY } = boundary
   const totalValues = values.length
   const maxValue = Math.max(...values)
   const minValue = Math.min(...values)
@@ -25,7 +25,7 @@ export function genBars (
   values: number[],
   boundary: Boundary,
 ): Bar[] {
-  const { minX, maxX, minY, maxY } = boundary
+  const { maxX, maxY, minX, minY } = boundary
   const totalValues = values.length
   let maxValue = Math.max(...values)
   let minValue = Math.min(...values)

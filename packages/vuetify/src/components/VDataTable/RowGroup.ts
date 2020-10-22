@@ -21,7 +21,7 @@ export default Vue.extend({
     },
   },
 
-  render (h, { slots, props }): VNode {
+  render (h, { props, slots }): VNode {
     const computedSlots = slots()
     const children = []
 

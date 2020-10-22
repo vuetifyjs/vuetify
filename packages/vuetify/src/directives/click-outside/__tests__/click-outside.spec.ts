@@ -29,7 +29,7 @@ function bootstrap (args?: object) {
 
 describe('click-outside.js', () => {
   it('should register and unregister handler', () => {
-    const { registeredHandler, el } = bootstrap()
+    const { el, registeredHandler } = bootstrap()
     expect(window.document.body.addEventListener).toHaveBeenCalledWith('click', registeredHandler, true)
 
     ClickOutside.unbind(el)
@@ -37,7 +37,7 @@ describe('click-outside.js', () => {
   })
 
   it('should call the callback when closeConditional returns true', async () => {
-    const { registeredHandler, callback } = bootstrap({ closeConditional: () => true })
+    const { callback, registeredHandler } = bootstrap({ closeConditional: () => true })
     const event = { target: document.createElement('div') }
 
     registeredHandler(event)
@@ -46,7 +46,7 @@ describe('click-outside.js', () => {
   })
 
   it('should not call the callback when closeConditional returns false', async () => {
-    const { registeredHandler, callback, el } = bootstrap({ closeConditional: () => false })
+    const { callback, el, registeredHandler } = bootstrap({ closeConditional: () => false })
 
     registeredHandler({ target: el })
     await wait()
@@ -54,7 +54,7 @@ describe('click-outside.js', () => {
   })
 
   it('should not call the callback when closeConditional is not provided', async () => {
-    const { registeredHandler, callback, el } = bootstrap()
+    const { callback, el, registeredHandler } = bootstrap()
 
     registeredHandler({ target: el })
     await wait()
@@ -62,7 +62,7 @@ describe('click-outside.js', () => {
   })
 
   it('should not call the callback when clicked in element', async () => {
-    const { registeredHandler, callback, el } = bootstrap({ closeConditional: () => true })
+    const { callback, el, registeredHandler } = bootstrap({ closeConditional: () => true })
 
     registeredHandler({ target: el })
     await wait()
@@ -70,7 +70,7 @@ describe('click-outside.js', () => {
   })
 
   it('should not call the callback when clicked in elements', async () => {
-    const { registeredHandler, callback, el } = bootstrap({
+    const { callback, el, registeredHandler } = bootstrap({
       closeConditional: () => true,
       include: () => [el],
     })
@@ -81,7 +81,7 @@ describe('click-outside.js', () => {
   })
 
   it('should not call the callback when event is not fired by user action', async () => {
-    const { registeredHandler, callback } = bootstrap({ closeConditional: () => true })
+    const { callback, registeredHandler } = bootstrap({ closeConditional: () => true })
 
     registeredHandler({ isTrusted: false })
     await wait()

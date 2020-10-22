@@ -95,7 +95,7 @@ export default Vue.extend({
       default: 'div',
     },
   },
-  render (h, { props, data, children, parent }): VNode {
+  render (h, { children, data, parent, props }): VNode {
     // Super-fast memoization based on props, 5x faster than JSON.stringify
     let cacheKey = ''
     for (const prop in props) {

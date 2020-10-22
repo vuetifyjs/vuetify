@@ -183,7 +183,7 @@ export default baseMixins.extend<options>().extend({
       this.loading && this.genLoader(),
     ]
     const setColor = !this.isFlat ? this.setBackgroundColor : this.setTextColor
-    const { tag, data } = this.generateRouteLink()
+    const { data, tag } = this.generateRouteLink()
 
     if (tag === 'button') {
       data.attrs!.type = this.type

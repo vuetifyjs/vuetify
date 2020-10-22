@@ -364,7 +364,7 @@ export const BaseSlideGroup = mixins<options &
       return rtl ? -currentScrollOffset : currentScrollOffset
     },
     calculateCenteredOffset (selectedElement: HTMLElement, widths: Widths, rtl: boolean): number {
-      const { offsetLeft, clientWidth } = selectedElement
+      const { clientWidth, offsetLeft } = selectedElement
 
       if (rtl) {
         const offsetCentered = widths.content - offsetLeft - clientWidth / 2 - widths.wrapper / 2

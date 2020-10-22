@@ -21,7 +21,7 @@ export default SSRBootable.extend({
   computed: {
     styles (): object {
       const {
-        bar, top, right, footer, insetFooter, bottom, left,
+        bar, bottom, footer, insetFooter, left, right, top,
       } = this.$vuetify.application
 
       return {

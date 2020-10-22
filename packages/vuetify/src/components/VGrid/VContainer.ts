@@ -20,7 +20,7 @@ export default Grid('container').extend({
       default: false,
     },
   },
-  render (h, { props, data, children }) {
+  render (h, { children, data, props }) {
     let classes
     const { attrs } = data
     if (attrs) {

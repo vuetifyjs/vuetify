@@ -11,7 +11,7 @@ export default Vue.extend({
 
   functional: true,
 
-  render (h, { slots, listeners, props, data }) {
+  render (h, { data, listeners, props, slots }) {
     const d = Object.assign(data, {
       staticClass: (`v-app-bar__nav-icon ${data.staticClass || ''}`).trim(),
       props: {

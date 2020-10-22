@@ -63,7 +63,7 @@ export default Vue.extend({
 
   methods: {
     emitColor (x: number, y: number) {
-      const { left, top, width, height } = this.boundingRect
+      const { height, left, top, width } = this.boundingRect
 
       this.$emit('update:color', fromHSVA({
         h: this.color.hue,

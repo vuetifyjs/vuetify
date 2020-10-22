@@ -9,6 +9,7 @@ module.exports = {
   plugins: [
     'jest',
     'eslint-plugin-local-rules',
+    'sort-destructure-keys',
     '@typescript-eslint',
   ],
   extends: ['standard', 'plugin:@typescript-eslint/recommended', 'plugin:jest/recommended'],
@@ -64,6 +65,7 @@ module.exports = {
     'no-return-assign': 'off',
     'no-use-before-define': 'off',
     'prefer-rest-params': 'off',
+    'sort-destructure-keys/sort-destructure-keys': 'error',
     'sort-imports': ['error', {
       ignoreCase: true,
       ignoreDeclarationSort: true,

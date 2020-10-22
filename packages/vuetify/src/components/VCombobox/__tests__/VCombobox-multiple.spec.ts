@@ -49,7 +49,7 @@ describe('VCombobox.ts', () => {
   }
 
   it('should create new values when tagging', async () => {
-    const { wrapper, change } = createMultipleCombobox({})
+    const { change, wrapper } = createMultipleCombobox({})
 
     const input = wrapper.find('input')
     const element = input.element as HTMLInputElement
@@ -82,7 +82,7 @@ describe('VCombobox.ts', () => {
   })
 
   it('should delete a tagged item when selected and backspace/delete is pressed', async () => {
-    const { wrapper, change } = createMultipleCombobox({
+    const { change, wrapper } = createMultipleCombobox({
       value: ['foo', 'bar'],
     })
 
@@ -107,7 +107,7 @@ describe('VCombobox.ts', () => {
   })
 
   it('should add a tag on enter using the current searchValue', async () => {
-    const { wrapper, change } = createMultipleCombobox({
+    const { change, wrapper } = createMultipleCombobox({
       items: ['bar'],
     })
 
@@ -127,7 +127,7 @@ describe('VCombobox.ts', () => {
   })
 
   it.skip('should add a tag on left arrow and select the previous tag', async () => {
-    const { wrapper, change } = createMultipleCombobox({
+    const { change, wrapper } = createMultipleCombobox({
       value: ['foo'],
       items: ['foo', 'bar'],
     })
@@ -145,7 +145,7 @@ describe('VCombobox.ts', () => {
   })
 
   it('should remove a duplicate tag and add it to the end', async () => {
-    const { wrapper, change } = createMultipleCombobox({
+    const { change, wrapper } = createMultipleCombobox({
       value: ['foo', 'bar'],
     })
 
@@ -164,7 +164,7 @@ describe('VCombobox.ts', () => {
   })
 
   it('should add tag with valid search value on blur', async () => {
-    const { wrapper, change } = createMultipleCombobox({})
+    const { change, wrapper } = createMultipleCombobox({})
 
     const input = wrapper.find('input')
     const element = input.element as HTMLInputElement
@@ -180,7 +180,7 @@ describe('VCombobox.ts', () => {
   })
 
   it('should be able to add a tag from user input after deleting a tag with delete', async () => {
-    const { wrapper, change } = createMultipleCombobox({
+    const { change, wrapper } = createMultipleCombobox({
       multiple: true,
       value: ['foo', 'bar'],
     })
@@ -211,7 +211,7 @@ describe('VCombobox.ts', () => {
   })
 
   it('should be able to add a tag from user input after clicking a deletable chip', async () => {
-    const { wrapper, change } = createMultipleCombobox({
+    const { change, wrapper } = createMultipleCombobox({
       chips: true,
       clearable: true,
       deletableChips: true,
@@ -269,7 +269,7 @@ describe('VCombobox.ts', () => {
 
   // eslint-disable-next-line max-statements
   it('should create new items when a delimiter is entered', async () => {
-    const { wrapper, change } = createMultipleCombobox({
+    const { change, wrapper } = createMultipleCombobox({
       delimiters: [', ', 'baz'],
     })
 
@@ -342,7 +342,7 @@ describe('VCombobox.ts', () => {
   })
 
   it('should paste as item if source of pasted text is item in another v-combobox/v-autocomplete', async () => {
-    const { wrapper, change } = createMultipleCombobox({
+    const { change, wrapper } = createMultipleCombobox({
       items: ['aaa', 'bbb'],
     })
 
@@ -363,7 +363,7 @@ describe('VCombobox.ts', () => {
   })
 
   it('should paste as text if source of pasted text is not item in another v-combobox/v-autocomplete', async () => {
-    const { wrapper, change } = createMultipleCombobox({
+    const { change, wrapper } = createMultipleCombobox({
       items: ['aaa', 'bbb'],
     })
 
@@ -383,7 +383,7 @@ describe('VCombobox.ts', () => {
   })
 
   it('should not add search to list when selecting items with keyboard', async () => {
-    const { wrapper, change } = createMultipleCombobox({
+    const { change, wrapper } = createMultipleCombobox({
       chips: true,
       multiple: true,
       items: ['aaa', 'bbb'],

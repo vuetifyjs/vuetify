@@ -14,7 +14,7 @@ export default Vue.extend({
     rtl: Boolean,
   },
 
-  render (h, { props, slots, data }): VNode {
+  render (h, { data, props, slots }): VNode {
     const computedSlots = slots()
 
     const columns: VNode[] = props.headers.map((header: DataTableHeader) => {

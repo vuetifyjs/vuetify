@@ -13,7 +13,7 @@ export function createSimpleFunctional (
 
     functional: true,
 
-    render (h, { data, children }): VNode {
+    render (h, { children, data }): VNode {
       data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
 
       return h(el, data, children)

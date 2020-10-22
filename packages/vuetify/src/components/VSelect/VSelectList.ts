@@ -114,7 +114,7 @@ export default mixins(Colorable, Themeable).extend({
 
       if (!this.searchInput || this.noFilter) return escapeHTML(text)
 
-      const { start, middle, end } = this.getMaskedCharacters(text)
+      const { end, middle, start } = this.getMaskedCharacters(text)
 
       return `${escapeHTML(start)}${this.genHighlight(middle)}${escapeHTML(end)}`
     },
@@ -140,9 +140,9 @@ export default mixins(Colorable, Themeable).extend({
       return { start, middle, end }
     },
     genTile ({
-      item,
-      index,
       disabled = null,
+      index,
+      item,
       value = false,
     }: ListTile): VNode | VNode[] | undefined {
       if (!value) value = this.hasItem(item)

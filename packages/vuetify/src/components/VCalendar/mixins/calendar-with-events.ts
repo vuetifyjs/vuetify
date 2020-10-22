@@ -159,7 +159,7 @@ export default CalendarBase.extend({
       const eventsMap = this.getEventsMap()
 
       for (const date in eventsMap) {
-        const { parent, events, more } = eventsMap[date]
+        const { events, more, parent } = eventsMap[date]
         if (!more) {
           break
         }

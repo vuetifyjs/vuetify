@@ -28,9 +28,9 @@ export default Vue.extend({
     isMobile (): boolean {
       const {
         mobile,
-        width,
-        name,
         mobileBreakpoint,
+        name,
+        width,
       } = this.$vuetify.breakpoint
 
       // Check if local mobileBreakpoint matches

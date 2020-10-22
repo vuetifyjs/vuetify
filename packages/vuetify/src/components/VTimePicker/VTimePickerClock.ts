@@ -191,7 +191,7 @@ export default mixins<options &
       e.preventDefault()
       if (!this.isDragging && e.type !== 'click') return
 
-      const { width, top, left } = this.$refs.clock.getBoundingClientRect()
+      const { left, top, width } = this.$refs.clock.getBoundingClientRect()
       const { width: innerWidth } = this.$refs.innerClock.getBoundingClientRect()
       const { clientX, clientY } = 'touches' in e ? e.touches[0] : e
       const center = { x: width / 2, y: -width / 2 }

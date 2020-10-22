@@ -290,7 +290,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   render (h): VNode {
-    const { tab, slider, items, item } = this.parseNodes()
+    const { item, items, slider, tab } = this.parseNodes()
 
     return h('div', {
       staticClass: 'v-tabs',

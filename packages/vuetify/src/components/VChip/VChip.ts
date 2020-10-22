@@ -170,7 +170,7 @@ export default mixins(
 
   render (h): VNode {
     const children = [this.genContent()]
-    let { tag, data } = this.generateRouteLink()
+    let { data, tag } = this.generateRouteLink()
 
     data.attrs = {
       ...data.attrs,

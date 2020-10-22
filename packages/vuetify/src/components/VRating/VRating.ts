@@ -97,8 +97,8 @@ export default mixins(
         large,
         light,
         medium,
-        small,
         size,
+        small,
         xLarge,
         xSmall,
       } = this.$props

@@ -27,7 +27,7 @@ export default Vue.extend({
     mobile: Boolean,
   },
 
-  render (h, { props, data, slots }) {
+  render (h, { data, props, slots }) {
     dedupeModelListeners(data)
     const children = rebuildSlots(slots(), h)
 

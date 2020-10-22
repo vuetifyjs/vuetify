@@ -81,6 +81,7 @@
     "cssnano": "^4.1.10",
     "dotenv": "^8.0.0",
     "eslint-plugin-jest": "^24.1.0",
+    "eslint-plugin-sort-destructure-keys": "^1.3.5",
     "file-loader": "^4.1.0",
     "fork-ts-checker-webpack-plugin": "^1.6.0",
     "friendly-errors-webpack-plugin": "^1.7.0",

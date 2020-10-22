@@ -234,7 +234,7 @@ export default Vue.extend({
 
   functional: true,
 
-  render (h, { data, children }): VNode {
+  render (h, { children, data }): VNode {
     let iconName = ''
 
     // Support usage of v-text and v-html

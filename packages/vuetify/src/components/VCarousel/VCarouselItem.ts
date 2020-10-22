@@ -38,7 +38,7 @@ export default baseMixins.extend({
       ]
     },
     genWindowItem () {
-      const { tag, data } = this.generateRouteLink()
+      const { data, tag } = this.generateRouteLink()
 
       data.staticClass = 'v-window-item'
       data.directives!.push({
