@@ -32,9 +32,9 @@ createApp({
           const asyncData = c._Ctor[0].options.asyncData
           return asyncData
             ? asyncData({
-              store,
-              route: to,
-            })
+                store,
+                route: to,
+              })
             : Promise.resolve()
         }),
       ).finally(next)
