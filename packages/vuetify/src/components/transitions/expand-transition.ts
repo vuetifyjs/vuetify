@@ -34,6 +34,7 @@ export default function (expandedParentClass = '', x = false) {
 
       el.style[sizeProperty] = '0'
 
+      // eslint-disable-next-line no-void
       void el.offsetHeight // force reflow
 
       el.style.transition = initialStyle.transition
@@ -59,6 +60,7 @@ export default function (expandedParentClass = '', x = false) {
 
       el.style.overflow = 'hidden'
       el.style[sizeProperty] = `${el[offsetProperty]}px`
+      // eslint-disable-next-line no-void
       void el.offsetHeight // force reflow
 
       requestAnimationFrame(() => (el.style[sizeProperty] = '0'))

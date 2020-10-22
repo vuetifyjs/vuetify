@@ -185,9 +185,8 @@ export default mixins(Colorable, Themeable).extend({
         ])
       }
 
-      const parent = this
       const scopedSlot = this.$scopedSlots.item({
-        parent,
+        parent: this,
         item,
         attrs: {
           ...tile.attrs,

@@ -178,7 +178,7 @@ export default baseMixins.extend({
       return getSlot(this, 'default', this.getValueProxy(), true)
     },
     getValueProxy (): object {
-      const self = this
+      const self = this // eslint-disable-line @typescript-eslint/no-this-alias
       return {
         get value () {
           return self.isActive

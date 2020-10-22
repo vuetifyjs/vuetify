@@ -36,6 +36,7 @@ module.exports = {
     'comma-dangle': ['error', 'always-multiline'],
     'import/export': 'off',
     'multiline-ternary': 'off',
+    'no-case-declarations': 'off',
     'no-prototype-builtins': 'off',
     'no-return-assign': 'off',
     'no-use-before-define': 'off',
@@ -62,6 +63,7 @@ module.exports = {
       files: '**/*.spec.ts',
       rules: {
         'vue/component-definition-name-casing': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
       },
     },
   ],

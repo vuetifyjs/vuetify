@@ -37,7 +37,7 @@ export function addOnceEventListener (
   cb: (event: Event) => void,
   options: boolean | AddEventListenerOptions = false,
 ): void {
-  var once = (event: Event) => {
+  const once = (event: Event) => {
     cb(event)
     el.removeEventListener(eventName, once, options)
   }
