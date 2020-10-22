@@ -3,6 +3,7 @@ import { removed } from '../../util/console'
 
 // Types
 import Vue, { VNode } from 'vue'
+
 interface Toggleable extends Vue {
   isActive?: boolean
 }

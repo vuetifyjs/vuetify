@@ -34,7 +34,30 @@ module.exports = {
     'jest/no-standalone-expect': 'off',
     'jest/no-conditional-expect': 'off',
     'comma-dangle': ['error', 'always-multiline'],
+    'function-call-argument-newline': [
+      'error',
+      'consistent',
+    ],
     'import/export': 'off',
+    'import/newline-after-import': 'error',
+    // 'padding-line-between-statements': [
+    //   'error',
+    //   {
+    //     blankLine: 'always',
+    //     prev: ['const', 'let', 'var'],
+    //     next: '*',
+    //   },
+    //   {
+    //     blankLine: 'never',
+    //     prev: ['const', 'let', 'var'],
+    //     next: ['const', 'let', 'var'],
+    //   },
+    //   {
+    //     blankLine: 'always',
+    //     prev: '*',
+    //     next: 'return',
+    //   },
+    // ],
     'multiline-ternary': 'off',
     'no-case-declarations': 'off',
     'no-prototype-builtins': 'off',

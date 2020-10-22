@@ -90,6 +90,7 @@ export default Vue.extend({
             }
           },
         },
-      }), children)
+      }),
+      children)
   },
 })

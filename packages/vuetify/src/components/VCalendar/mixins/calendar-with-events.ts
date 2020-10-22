@@ -332,7 +332,8 @@ export default CalendarBase.extend({
             }],
             ...data,
           }),
-        ), slot
+        ),
+        slot
           ? slot(scope)
           : [this.genName(eventSummary)],
       )
