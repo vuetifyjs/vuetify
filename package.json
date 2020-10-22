@@ -22,7 +22,7 @@
     "clean": "lerna clean"
   },
   "engines": {
-    "node": "^8",
+    "node": "^8.17.0 || ^12.19.0",
     "yarn": "^1"
   },
   "devDependencies": {
