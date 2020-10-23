@@ -1,6 +1,6 @@
 import type { VuetifyIcon } from 'vuetify/types/services/icons'
 import type { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
-import type { ComponentInternalInstance } from 'vue'
+import type { ComponentInternalInstance, Slots } from 'vue'
 
 import { defineComponent, h } from 'vue'
 
@@ -107,11 +107,11 @@ export function getZIndex (el?: Element | null): number {
   return index
 }
 
-const tagsToReplace = {
+const tagsToReplace: Dictionary<string> = {
   '&': '&amp;',
   '<': '&lt;',
   '>': '&gt;',
-} as any
+}
 
 export function escapeHTML (str: string): string {
   return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
@@ -138,10 +138,6 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
   } else {
     return `${Number(str)}${unit}`
   }
-}
-
-export function kebabCase (str: string | null | undefined): string {
-  return (str ?? '').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
 }
 
 export function isObject (obj: any): obj is object {
@@ -195,6 +191,10 @@ export const camelize = (str: string): string => {
   return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
 }
 
+export function kebabCase (str: string | null | undefined): string {
+  return (str ?? '').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+}
+
 /**
  * Returns the set difference of B and A, i.e. the set of elements in B but not in A
  */
@@ -236,7 +236,12 @@ export function groupItems<T extends any = any> (
   return groups
 }
 
-export function wrapInArray<T> (v: T | T[] | null | undefined): T[] { return v != null ? Array.isArray(v) ? v : [v] : [] }
+export function wrapInArray<T> (v: T | T[] | null | undefined): T[] {
+  return v == null
+    ? []
+    : Array.isArray(v)
+      ? v : [v]
+}
 
 export function sortItems<T extends any = any> (
   items: T[],
@@ -318,11 +323,16 @@ export function throttle<T extends (...args: any[]) => any> (fn: T, limit: numbe
   }
 }
 
-export function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
-  return Object.keys(scopedSlots).filter(k => k.startsWith(prefix)).reduce((obj: any, k: string) => {
-    obj[k.replace(prefix, '')] = scopedSlots[k]
-    return obj
-  }, {})
+/**
+ * Filters slots to only those starting with `prefix`, removing the prefix
+ */
+export function getPrefixedSlots (prefix: string, slots: Slots): Slots {
+  return Object.keys(slots)
+    .filter(k => k.startsWith(prefix))
+    .reduce<Writable<Slots>>((obj, k) => {
+      obj[k.replace(prefix, '')] = slots[k]
+      return obj
+    }, {})
 }
 
 export function clamp (value: number, min = 0, max = 1) {

@@ -47,13 +47,23 @@ declare global {
   }
 
   interface UIEvent {
-    initUIEvent (typeArg: string, canBubbleArg: boolean, cancelableArg: boolean, viewArg: Window, detailArg: number): void
+    initUIEvent (
+      typeArg: string,
+      canBubbleArg: boolean,
+      cancelableArg: boolean,
+      viewArg: Window,
+      detailArg: number,
+    ): void
   }
 
   function parseInt(s: string | number, radix?: number): number
   function parseFloat(string: string | number): number
 
   export type Dictionary<T> = Record<string, T>
+
+  export type Writable<T> = {
+    -readonly [P in keyof T]: T[P];
+  }
 
   export const __VUETIFY_VERSION__: string
   export const __REQUIRED_VUE__: string
