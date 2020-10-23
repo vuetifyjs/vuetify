@@ -56,7 +56,7 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
     <a href="https://paypal.me/vuetify">Make a one-time payment with Paypal</a>
   </li>
   <li>
-    <a href="https://vuetifyjs.com/introduction/consulting?ref=github">Book time with the Team</a>
+    <a href="https://vuetifyjs.com/introduction/support/?ref=github">Book time with the Team</a>
   </li>
 </ul>
 
@@ -204,7 +204,7 @@ Vuetify is a Vue UI Library with beautifully handcrafted Components using the [M
 - **IE11 / Safari 9** support with [polyfill](https://vuetifyjs.com/getting-started/browser-support/)
 - Extensive customization options with **SASS/SCSS** and [Presets](https://vuetifyjs.com/features/presets/)
 - Responsive support down to _320px_ width
-- [Consulting](https://vuetifyjs.com/introduction/consulting/) support from Vuetify
+- [Direct support](https://vuetifyjs.com/introduction/support/) support from Vuetify
 
 ###### Browser Support
 
@@ -445,7 +445,9 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
 
 ### Documentation
 
-To check out the [component api explorer](https://vuetifyjs.com/components/api-explorer) and docs, visit [vuetifyjs.com](https://vuetifyjs.com).
+To check out the docs, visit [vuetifyjs.com](https://vuetifyjs.com).
+
+![Crowdin Uploads](https://github.com/vuetifyjs/vuetify/workflows/Crowdin%20Uploads/badge.svg?branch=master)
 
 ### Questions
 

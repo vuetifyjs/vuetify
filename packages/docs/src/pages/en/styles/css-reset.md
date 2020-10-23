@@ -48,21 +48,21 @@ These styles are automatically imported within **src/styles/generic/_reset.scss*
 
 Below is a list of additional *features* that ress provides over the default **normalize.css** functionality
 
-* Apply `box-sizing: border-box` in all elements.
-* Reset `padding` and `margin` in all elements.
-* Specify `background-repeat: no-repeat` in all elements and pseudo elements.
-* Inherit `text-decoration` and `vertical-align` to `::before` and `::after`.
-* Remove the `outline` when hovering in all browsers.
-* Specify `font-family: monospace` in code elements.
-* Reset `border-radius` in input elements.
-* Specify font inheritance of form elements.
-* Remove the default button styling in all browsers.
-* Specify textarea resizability to vertical.
-* Apply `cursor: pointer` to button elements.
-* Apply `tab-size: 4` in `html`.
-* Style `select` like a standard input.
-* Style `cursor` by aria attributes.
-* Hide content from screens but not screen readers.
+- Apply `box-sizing: border-box` in all elements.
+- Reset `padding` and `margin` in all elements.
+- Specify `background-repeat: no-repeat` in all elements and pseudo elements.
+- Inherit `text-decoration` and `vertical-align` to `::before` and `::after`.
+- Remove the `outline` when hovering in all browsers.
+- Specify `font-family: monospace` in code elements.
+- Reset `border-radius` in input elements.
+- Specify font inheritance of form elements.
+- Remove the default button styling in all browsers.
+- Specify textarea resizability to vertical.
+- Apply `cursor: pointer` to button elements.
+- Apply `tab-size: 4` in `html`.
+- Style `select` like a standard input.
+- Style `cursor` by aria attributes.
+- Hide content from screens but not screen readers.
 
 For a complete list of all applied styles, see the [ress css stylesheet](https://github.com/filipelinhares/ress/blob/master/ress.css).
 

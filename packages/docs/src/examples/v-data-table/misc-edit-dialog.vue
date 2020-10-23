@@ -39,8 +39,6 @@
             <div class="mt-4 title">
               Update Iron
             </div>
-          </template>
-          <template v-slot:input>
             <v-text-field
               v-model="props.item.iron"
               :rules="[max25chars]"

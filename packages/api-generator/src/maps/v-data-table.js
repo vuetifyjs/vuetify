@@ -3,10 +3,10 @@ const { DataDefaultScopedSlotProps, DataOptions } = require('./v-data')
 const { DataIteratorEvents, DataIteratorProps, DataIteratorSlots, DataIteratorItemScopedProps } = require('./v-data-iterator')
 const { DataFooterPageTextScopedProps } = require('./v-data-footer')
 
-const TableHeader = {
+const DataTableHeader = {
   text: 'string',
   value: 'string',
-  'align?': '\'start\' | \'center\' | \'end\'',
+  'align?': `'start' | 'center' | 'end'`,
   'sortable?': 'boolean',
   'filterable?': 'boolean',
   'groupable?': 'boolean',
@@ -20,7 +20,7 @@ const TableHeader = {
 
 const dataString = `{
   expand: (value: boolean) => void,
-  headers: TableHeader[],
+  headers: DataTableHeader[],
   isExpanded: boolean,
   isMobile: boolean,
   isSelected: boolean,
@@ -47,7 +47,7 @@ const DataTableEvents = [
 
 const DataTableHeaderScopedProps = {
   props: {
-    headers: 'TableHeader[]',
+    headers: 'DataTableHeader[]',
     options: DataOptions,
     mobile: 'boolean',
     showGroupBy: 'boolean',
@@ -68,22 +68,22 @@ const DataTableFooterScopedProps = {
     itemsPerPageText: 'string',
   },
   on: '{}',
-  headers: 'TableHeader[]',
+  headers: 'DataTableHeader[]',
   widths: '[]',
 }
 
 const DataTableHeaderColumnScopedProps = {
-  header: 'TableHeader',
+  header: 'DataTableHeader',
 }
 
 const DataTableItemScopedProps = {
   ...DataIteratorItemScopedProps,
-  headers: 'TableHeader[]',
+  headers: 'DataTableHeader[]',
 }
 
 const DataTableItemColumnScopedProps = {
   item: 'any',
-  header: 'TableHeader',
+  header: 'DataTableHeader',
   value: 'any',
 }
 
@@ -99,12 +99,12 @@ const DataTableHeaderSelectScopedProps = {
 
 const DataTableExpandedItemScopedProps = {
   item: 'any',
-  headers: 'TableHeader[]',
+  headers: 'DataTableHeader[]',
 }
 
 const DataTableBodyScopedProps = {
   ...DataDefaultScopedSlotProps,
-  headers: 'TableHeader[]',
+  headers: 'DataTableHeader[]',
   isMobile: 'boolean',
   isSelected: '(item: any) => boolean',
   select: '(item: any, value: boolean) => void',
@@ -116,14 +116,14 @@ const DataGroupScopedProps = {
   group: 'string',
   options: DataOptions,
   items: 'any[]',
-  headers: 'TableHeader[]',
+  headers: 'i DataTableHeader[]',
 }
 
 const DataGroupHeaderScopedProps = {
   group: 'string',
   groupBy: DataOptions.groupBy,
   items: 'any[]',
-  headers: 'TableHeader[]',
+  headers: 'DataTableHeader[]',
   isOpen: 'boolean',
   toggle: '() => void',
   remove: '() => void',
@@ -133,7 +133,7 @@ const DataGroupSummaryScopedProps = {
   group: 'string',
   groupBy: DataOptions.groupBy,
   items: 'any[]',
-  headers: 'TableHeader[]',
+  headers: 'DataTableHeader[]',
   isOpen: 'boolean',
   toggle: '() => void',
 }
@@ -164,8 +164,8 @@ module.exports = {
     props: deepmerge(DataIteratorProps, [
       {
         name: 'headers',
-        type: 'TableHeader[]',
-        example: TableHeader,
+        type: 'DataTableHeader[]',
+        example: DataTableHeader,
       },
       {
         name: 'customFilter',
@@ -176,7 +176,7 @@ module.exports = {
     slots: deepmerge(DataTableSlots, DataIteratorSlots),
     events: DataTableEvents,
   },
-  TableHeader,
+  DataTableHeader,
   DataTableEvents,
   DataTableHeaderScopedProps,
   DataTableSlots,

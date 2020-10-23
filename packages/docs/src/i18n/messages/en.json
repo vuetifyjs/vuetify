@@ -37,7 +37,6 @@
   },
   "component": "Component",
   "components": "Components",
-  "consulting": "Consulting",
   "contents": "Contents",
   "contribute": {
     "edit-page": "Edit this page on {url}",
@@ -62,6 +61,7 @@
   "documentation": "Documentation",
   "documentation-status": "Documentation status",
   "drawer-navigation-grouping": "Drawer navigation grouping",
+  "direct-support": "Direct support",
   "discord": "Discord",
   "done": "All done",
   "edit-in-codepen": "Edit in Codepen",
