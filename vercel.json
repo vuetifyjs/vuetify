@@ -25,6 +25,7 @@
     }
   ],
   "github": {
+    "enabled": false,
     "autoAlias": false,
     "silent": true
   }
