@@ -15,6 +15,12 @@ module.exports = {
     }],
     ['@babel/plugin-proposal-nullish-coalescing-operator', { loose: true }],
     ['@babel/plugin-proposal-optional-chaining', { loose: true }],
+    ['module-resolver', {
+      root: ['.'],
+      alias: {
+        '@/*': 'src/*',
+      },
+    }],
   ],
   env: {
     test: {
@@ -24,18 +30,6 @@ module.exports = {
           modules: 'commonjs',
         }],
         '@babel/preset-typescript',
-      ],
-      plugins: [
-        ['module-resolver', {
-          root: ['./src'],
-          alias: {
-            '~components': 'components',
-            '~directives': 'directives',
-            '~mixins': 'mixins',
-            '~scss': 'scss',
-            '~util': 'util',
-          },
-        }],
       ],
     },
     es5: {
