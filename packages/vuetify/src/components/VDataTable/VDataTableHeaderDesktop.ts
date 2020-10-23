@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Helpers
 import { VNode, VNodeData } from 'vue'
 import mixins from '../../util/mixins'

@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Helpers
 import { convertToUnit } from '../../util/helpers'
 

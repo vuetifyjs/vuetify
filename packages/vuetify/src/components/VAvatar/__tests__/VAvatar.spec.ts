@@ -1,8 +1,11 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Libraries
-import Vue from 'vue'
+// import Vue from 'vue'
 
 // Components
-import VAvatar from '../VAvatar'
+// import VAvatar from '../VAvatar'
 
 // Utilities
 import {
@@ -11,7 +14,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VAvatar', () => {
+describe.skip('VAvatar', () => {
   let mountFunction: (options?: object) => Wrapper<Vue>
   let localVue: typeof Vue
 

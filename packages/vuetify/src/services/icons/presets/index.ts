@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import mdiSvg from './mdi-svg'
 import md from './md'
 import mdi from './mdi'

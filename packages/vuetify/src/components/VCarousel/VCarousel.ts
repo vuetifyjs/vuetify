@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import './VCarousel.sass'
 

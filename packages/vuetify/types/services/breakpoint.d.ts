@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 // Types
 export type BreakpointName = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 

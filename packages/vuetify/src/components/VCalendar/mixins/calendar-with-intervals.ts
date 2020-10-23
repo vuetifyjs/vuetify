@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 
 // Mixins
 import CalendarBase from './calendar-base'

@@ -2,12 +2,14 @@
   "compilerOptions": {
     /* Basic Options */
     "target": "es5",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */
-    "module": "es2015",                       /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
+    "module": "es2020",                       /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
     "lib": [                                  /* Specify library files to be included in the compilation */
       "es2015",
       "es2016",
       "es2017",
       "es2018",
+      "es2019",
+      "es2020",
       "dom",
       "dom.iterable"
     ],
@@ -63,8 +65,6 @@
     "emitDecoratorMetadata": true             /* Enables experimental support for emitting type metadata for decorators. */
   },
   "exclude": [
-    "**/*.spec.ts",
-    "**/*.spec.js",
     "node_modules"
   ]
 }

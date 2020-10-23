@@ -1,5 +1,8 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
-import VResponsive from '../VResponsive'
+// import VResponsive from '../VResponsive'
 
 // Utilities
 import {
@@ -7,7 +10,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VResponsive.ts', () => {
+describe.skip('VResponsive.ts', () => {
   type Instance = InstanceType<typeof VResponsive>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

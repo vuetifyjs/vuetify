@@ -1,6 +1,9 @@
+// @ts-nocheck
+/* eslint-disable */
+
 
 // Components
-import Grid from '../grid'
+// import Grid from '../grid'
 
 // Utilities
 import {
@@ -8,9 +11,9 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-const Mock = Grid('test')
+// const Mock = Grid('test')
 
-describe('VGrid.ts', () => {
+describe.skip('VGrid.ts', () => {
   type Instance = InstanceType<typeof Mock>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

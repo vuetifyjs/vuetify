@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import Vue from 'vue'
 import { PropType, RenderContext } from 'vue/types/options'
 

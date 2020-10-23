@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
 import { VData } from '../VData'
 import VDataFooter from './VDataFooter'

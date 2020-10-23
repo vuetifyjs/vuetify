@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
 import VOverlay from '../../components/VOverlay'
 

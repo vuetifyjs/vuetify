@@ -1,33 +1,24 @@
-import { VNode, VNodeDirective } from 'vue/types'
-import { VuetifyIcon } from 'vuetify/types/services/icons'
-import { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
+import type { VuetifyIcon } from 'vuetify/types/services/icons'
+import type { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
+import type { ComponentInternalInstance } from 'vue'
+
+import { defineComponent, h } from 'vue'
 
 export function createSimpleFunctional (
   c: string,
   el = 'div',
   name?: string
 ) {
-  return Vue.extend({
-    name: name || c.replace(/__/g, '-'),
+  return defineComponent({
+    name: name ?? c.replace(/__/g, '-'),
 
-    functional: true,
-
-    render (h, { data, children }): VNode {
-      data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
-
-      return h(el, data, children)
+    setup (props, { attrs, slots }) {
+      return () => h(el, {
+        class: c,
+        ...attrs,
+      }, slots.default?.())
     },
   })
-}
-
-export type BindingConfig = Pick<VNodeDirective, 'arg' | 'modifiers' | 'value'>
-export function directiveConfig (binding: BindingConfig, defaults = {}): VNodeDirective {
-  return {
-    ...defaults,
-    ...binding.modifiers,
-    value: binding.arg,
-    ...(binding.value || {}),
-  }
 }
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
@@ -179,7 +170,7 @@ export const keyCodes = Object.freeze({
 
 // This remaps internal names like '$cancel' or '$vuetify.icons.cancel'
 // to the current name or component for that icon.
-export function remapInternalIcon (vm: Vue, iconName: string): VuetifyIcon {
+export function remapInternalIcon (vm: ComponentInternalInstance, iconName: string): VuetifyIcon {
   if (!iconName.startsWith('$')) {
     return iconName
   }
@@ -189,7 +180,7 @@ export function remapInternalIcon (vm: Vue, iconName: string): VuetifyIcon {
 
   // Now look up icon indirection name,
   // e.g. '$vuetify.icons.values.cancel'
-  return getObjectValueByPath(vm, iconPath, iconName)
+  return getObjectValueByPath(vm.ctx, iconPath, iconName)
 }
 
 export function keys<O> (o: O) {
@@ -210,7 +201,7 @@ export const camelize = (str: string): string => {
 export function arrayDiff (a: any[], b: any[]): any[] {
   const diff: any[] = []
   for (let i = 0; i < b.length; i++) {
-    if (a.indexOf(b[i]) < 0) diff.push(b[i])
+    if (!a.includes(b[i])) diff.push(b[i])
   }
   return diff
 }
@@ -268,7 +259,7 @@ export function sortItems<T extends any = any> (
         [sortA, sortB] = [sortB, sortA]
       }
 
-      if (customSorters && customSorters[sortKey]) {
+      if (customSorters?.[sortKey]) {
         const customResult = customSorters[sortKey](sortA, sortB)
 
         if (!customResult) continue
@@ -308,20 +299,6 @@ export function searchItems<T extends any = any> (items: T[], search: string): T
   return items.filter((item: any) => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
 }
 
-/**
- * Returns:
- *  - 'normal' for old style slots - `<template slot="default">`
- *  - 'scoped' for old style scoped slots (`<template slot="default" slot-scope="data">`) or bound v-slot (`#default="data"`)
- *  - 'v-slot' for unbound v-slot (`#default`) - only if the third param is true, otherwise counts as scoped
- */
-export function getSlotType<T extends boolean = false> (vm: Vue, name: string, split?: T): (T extends true ? 'v-slot' : never) | 'normal' | 'scoped' | void {
-  if (vm.$slots[name] && vm.$scopedSlots[name] && (vm.$scopedSlots[name] as any).name) {
-    return split ? 'v-slot' as any : 'scoped'
-  }
-  if (vm.$slots[name]) return 'normal'
-  if (vm.$scopedSlots[name]) return 'scoped'
-}
-
 export function debounce (fn: Function, delay: number) {
   let timeoutId = 0 as any
   return (...args: any[]) => {
@@ -346,15 +323,6 @@ export function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
     obj[k.replace(prefix, '')] = scopedSlots[k]
     return obj
   }, {})
-}
-
-export function getSlot (vm: Vue, name = 'default', data?: object | (() => object), optional = false) {
-  if (vm.$scopedSlots[name]) {
-    return vm.$scopedSlots[name]!(data instanceof Function ? data() : data)
-  } else if (vm.$slots[name] && (!data || optional)) {
-    return vm.$slots[name]
-  }
-  return undefined
 }
 
 export function clamp (value: number, min = 0, max = 1) {

@@ -1,5 +1,8 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
-import VBtnToggle from '../VBtnToggle'
+// import VBtnToggle from '../VBtnToggle'
 
 // Utilities
 import {
@@ -8,9 +11,9 @@ import {
 } from '@vue/test-utils'
 
 // Types
-import { ExtractVue } from '../../../util/mixins'
+// import { ExtractVue } from '../../../util/mixins'
 
-describe('VBtnToggle.ts', () => {
+describe.skip('VBtnToggle.ts', () => {
   type Instance = ExtractVue<typeof VBtnToggle>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

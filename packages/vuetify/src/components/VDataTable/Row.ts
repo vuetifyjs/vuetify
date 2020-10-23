@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Types
 import Vue, { VNode, PropType } from 'vue'
 import { DataTableHeader } from 'vuetify/types'

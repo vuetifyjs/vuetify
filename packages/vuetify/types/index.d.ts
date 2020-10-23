@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import { Component, App, Directive } from 'vue'
 import './lib'
 import './alacarte'
@@ -73,7 +76,7 @@ export interface VuetifyUseOptions extends VuetifyUserPreset {
 // Public types
 export type TreeviewItemFunction = (item: object, search: string, textKey: string) => boolean
 
-export type SelectItemKey = string | (string | number)[] | ((item: object, fallback?: any) => any)
+export type SelectItemKey = string | (string | number)[] | ((item: Dictionary<any>, fallback?: any) => any)
 
 export interface ItemGroup<T> {
   name: string

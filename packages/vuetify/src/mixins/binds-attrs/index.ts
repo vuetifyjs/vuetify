@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import Vue, { WatchHandler } from 'vue'
 
 /**

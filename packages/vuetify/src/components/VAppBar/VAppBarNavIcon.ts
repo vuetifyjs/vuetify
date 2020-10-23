@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
 import VIcon from '../VIcon'
 import VBtn from '../VBtn/VBtn'

@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import Vue, { VueConstructor } from 'vue'
 
 export type Proxyable<T extends string = 'value'> = VueConstructor<Vue & {

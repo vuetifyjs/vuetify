@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { VNodeDirective } from 'vue'
 
 type MutateHandler = (

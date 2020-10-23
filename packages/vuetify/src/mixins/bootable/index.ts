@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Utilities
 import { removed } from '../../util/console'
 

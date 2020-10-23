@@ -7,15 +7,15 @@
     "hooks": {
       "prepare-commit-msg": "node scripts/prepare-commit-message.js",
       "commit-msg": "node scripts/lint-commit-message.js",
-      "pre-commit": "node scripts/warn-npm-install.js"
+      "pre-commit": "node scripts/warn-npm-install.js && yarn run lint && yarn lerna run test"
     }
   },
   "scripts": {
     "dev": "node scripts/dev.js",
     "build": "node scripts/build.js",
     "start": "lerna run start --scope vuetifyjs.com --stream",
-    "lint": "lerna run lint --parallel --stream",
-    "lint:fix": "lerna run lint:fix --parallel",
+    "lint": "lerna run lint --parallel --stream --scope vuetify",
+    "lint:fix": "lerna run lint:fix --parallel --scope vuetify",
     "version": "node scripts/confirm-npm-tag.js",
     "prepare": "node scripts/post-install.js",
     "postversion": "node scripts/post-release-merge.js",
@@ -26,13 +26,13 @@
     "yarn": "^1.12"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
-    "@babel/helper-create-regexp-features-plugin": "^7.8.8",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.4.4",
-    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
-    "@babel/plugin-proposal-optional-chaining": "^7.6.0",
-    "@babel/preset-env": "^7.5.5",
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.1",
+    "@babel/helper-create-regexp-features-plugin": "^7.12.1",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.12.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/plugin-proposal-optional-chaining": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
     "@babel/preset-typescript": "^7.12.1",
     "@mdi/js": "^5.2.45",
     "@octokit/core": "^3.1.2",

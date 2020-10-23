@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 const padStart = (string: number | string, targetLength: number, padString: string) => {
   targetLength = targetLength >> 0
   string = String(string)

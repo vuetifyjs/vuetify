@@ -1,7 +1,7 @@
 // Effects
+import type { ElevationProps } from '../elevation'
 import {
   makeElevationProps,
-  ElevationProps,
   useElevationClasses,
 } from '../elevation'
 
