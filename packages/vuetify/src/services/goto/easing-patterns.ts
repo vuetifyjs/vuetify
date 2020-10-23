@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 export type EasingFunction = (t: number) => number
 

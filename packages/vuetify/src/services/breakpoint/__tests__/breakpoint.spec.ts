@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // import { resizeWindow } from '../../../../test'
 // import { Breakpoint } from '../'

@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // import VTimePickerClock from '../VTimePickerClock'
 // import { touch } from '../../../../test'

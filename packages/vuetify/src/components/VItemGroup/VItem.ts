@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // Mixins
 import { factory as GroupableFactory } from '../../mixins/groupable'

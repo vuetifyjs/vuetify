@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // Styles
 // import '../../stylus/components/_calendar-daily.styl'

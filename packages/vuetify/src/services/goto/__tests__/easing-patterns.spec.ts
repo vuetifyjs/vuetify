@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 import * as easingPatterns from '../easing-patterns'
 

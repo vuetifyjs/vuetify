@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // import VDatePickerTitle from '../VDatePickerTitle'
 import {

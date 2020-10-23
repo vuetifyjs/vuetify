@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 import { DatePickerAllowedDatesFunction } from 'vuetify/types'
 

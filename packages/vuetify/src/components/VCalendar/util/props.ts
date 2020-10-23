@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 
 import { validateTimestamp, parseDate, DAYS_IN_WEEK, validateTime } from './timestamp'

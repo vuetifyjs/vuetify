@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // Types
 import mixins, { ExtractVue } from '../../util/mixins'

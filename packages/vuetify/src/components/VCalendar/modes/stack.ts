@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 import { CalendarEventOverlapMode, CalendarEventVisual } from 'vuetify/types'
 import { getOverlapGroupHandler, getVisuals, hasOverlap, getNormalizedRange } from './common'

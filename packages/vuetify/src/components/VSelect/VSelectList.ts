@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // Components
 import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'

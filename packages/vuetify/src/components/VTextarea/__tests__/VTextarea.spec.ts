@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // import { keyCodes } from '../../../util/helpers'
 // import VTextarea from '../VTextarea'

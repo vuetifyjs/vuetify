@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 import { CalendarEventParsed, CalendarEventVisual, CalendarTimestamp } from 'vuetify/types'
 import { getTimestampIdentifier } from '../util/timestamp'

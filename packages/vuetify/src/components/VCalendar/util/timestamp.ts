@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 import { CalendarTimestamp, CalendarFormatter } from 'vuetify/types'
 import { isLeapYear } from '../../../util/dateTimeUtils'

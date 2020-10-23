@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // Types
 import { BreakpointName } from 'vuetify/types/services/breakpoint'

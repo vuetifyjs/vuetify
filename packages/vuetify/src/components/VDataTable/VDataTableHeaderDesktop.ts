@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // Helpers
 import { VNode, VNodeData } from 'vue'

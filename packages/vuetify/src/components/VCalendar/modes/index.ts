@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 import { CalendarEventOverlapMode } from 'vuetify/types'
 import { stack } from './stack'

@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // Components
 // import VThemeProvider from '../VThemeProvider'

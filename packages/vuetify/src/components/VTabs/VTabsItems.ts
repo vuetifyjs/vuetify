@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // Extensions
 import VWindow from '../VWindow/VWindow'

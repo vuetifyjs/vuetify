@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // Mixins
 import { Registrable, inject as RegistrableInject } from '../registrable'

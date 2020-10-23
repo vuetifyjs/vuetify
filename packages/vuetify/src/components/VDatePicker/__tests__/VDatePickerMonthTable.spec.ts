@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // import VDatePickerMonthTable from '../VDatePickerMonthTable'
 // import { Lang } from '../../../services/lang'

@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 import { VNodeDirective, VNode } from 'vue/types/vnode'
 import { keys } from '../../util/helpers'

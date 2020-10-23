@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 import Vue, { VNode } from 'vue'
 import VProgressLinear from '../../components/VProgressLinear'

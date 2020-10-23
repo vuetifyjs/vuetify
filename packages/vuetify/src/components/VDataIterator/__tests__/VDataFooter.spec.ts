@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // import VDataFooter from '../VDataFooter'
 // import { Lang } from '../../../services/lang'

@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // import VDataTableHeader from '../VDataTableHeader'
 // import { Lang } from '../../../services/lang'

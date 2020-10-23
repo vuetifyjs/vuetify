@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // import Vue from 'vue'
 // import { Lang } from '../../../services/lang'

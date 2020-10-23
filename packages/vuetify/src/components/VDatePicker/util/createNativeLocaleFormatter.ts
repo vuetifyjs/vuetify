@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 import pad from './pad'
 import { DatePickerFormatter } from 'vuetify/types'

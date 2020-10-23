@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // Contracts
 import { VuetifyServiceContract } from 'vuetify/types/services/index'

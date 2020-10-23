@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 import { VuetifyIcons } from 'vuetify/types/services/icons'
 import { Component } from 'vue'

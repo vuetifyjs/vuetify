@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // import Routable from '../'
 import { mount } from '@vue/test-utils'

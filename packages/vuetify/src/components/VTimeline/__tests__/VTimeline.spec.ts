@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // import VTimeline from '../VTimeline'
 import { mount } from '@vue/test-utils'

@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 /* eslint-disable no-multi-spaces */
 // Extensions

@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 import { colorToInt, intToHex, colorToHex, ColorInt } from '../../util/colorUtils'
 import * as sRGB from '../../util/color/transformSRGB'

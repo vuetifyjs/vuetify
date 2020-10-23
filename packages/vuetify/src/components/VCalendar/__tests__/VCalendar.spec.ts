@@ -1,5 +1,5 @@
 // @ts-nocheck
-// eslint-disable
+/* eslint-disable */
 
 // import { parseDate } from '../util/timestamp'
 // import VCalendar from '../VCalendar'
