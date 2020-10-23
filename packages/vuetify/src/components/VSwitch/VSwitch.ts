@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import '../../styles/components/_selection-controls.sass'
 import './VSwitch.sass'
@@ -49,7 +52,7 @@ export default Selectable.extend({
     attrs (): object {
       return {
         'aria-checked': String(this.isActive),
-        'aria-disabled': String(this.disabled),
+        'aria-disabled': String(this.isDisabled),
         role: 'switch',
       }
     },

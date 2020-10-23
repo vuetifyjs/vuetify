@@ -1,6 +1,6 @@
 # Backers
 
-You can join them in supporting Vuetify.js by [sponsoring through Github](https://www.patreon.com/vuetify)
+You can join them in supporting Vuetify by [sponsoring through Github](https://github.com/sponsors/johnleider)
 
 ### Premiere
 - [QOMPLX](https://www.qomplx.com/)
@@ -8,16 +8,18 @@ You can join them in supporting Vuetify.js by [sponsoring through Github](https:
 ### Diamond
 - [LMAX Exchange](https://www.lmax.com/)
 - [Intygrate](http://intygrate.com/)
-- [Resale AI](http://resaleai.com/)
-- [Vue Mastery](https://vuemastery.com/)
+- [Vue Mastery](http://vuemastery.com/)
+- [Skale Technologies](http://www.skaletech.com/)
+- [Crossword Solver](http://crossword-solver.io/)
 
 ### Platinum
 - [rateGenius](https://application.rategenius.com/) <!-- Ravi Alamuri -->
-- [Clearblue Technologies](http://www.clearbluetechnologies.com/) <!-- Mark Windrim -->
 - [DigitalMaas](https://www.digitalmaas.com/) <!-- Scott Francis -->
-- [Brighttree](https://www.brightree.com/)
-- [Asolvi](http://asolvi.com/) <!-- Sverre Dreier -->
 - [Quanted Square](https://analytics.quantedsquare.com/)
+- [Hype](https://www.hypeinnovation.com/home)
+- [Cosmic](https://www.cosmicjs.com/)
+- [Ekorre](https://ekorre.hr/)
+- [Dealer Desk](https://www.dealerdesk.de/)
 
 ### Gold
 - [Xavier Escoté](http://www.deister.net/)
@@ -66,7 +68,7 @@ You can join them in supporting Vuetify.js by [sponsoring through Github](https:
 - ikedaosushi
 - mantis
 - flipvh
-- hueachilles
+- [quickytools](https://www.quickytools.com) <!-- hueachilles -->
 - J-Sek
 - erichelgeson
 - dylancopeland

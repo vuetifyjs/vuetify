@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import './VChip.sass'
 
@@ -144,6 +147,7 @@ export default mixins(
         staticClass: 'v-chip__close',
         props: {
           right: true,
+          size: 18,
         },
         on: {
           click: (e: Event) => {

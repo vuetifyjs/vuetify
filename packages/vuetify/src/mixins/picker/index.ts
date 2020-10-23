@@ -1,8 +1,12 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
 import VPicker from '../../components/VPicker'
 
 // Mixins
 import Colorable from '../colorable'
+import Elevatable from '../../mixins/elevatable'
 import Themeable from '../themeable'
 
 // Utils
@@ -13,12 +17,14 @@ import { VNode } from 'vue'
 
 export default mixins(
   Colorable,
+  Elevatable,
   Themeable
 /* @vue/component */
 ).extend({
   name: 'picker',
 
   props: {
+    flat: Boolean,
     fullWidth: Boolean,
     headerColor: String,
     landscape: Boolean,
@@ -60,6 +66,8 @@ export default mixins(
         props: {
           color: this.headerColor || this.color,
           dark: this.dark,
+          elevation: this.elevation,
+          flat: this.flat,
           fullWidth: this.fullWidth,
           landscape: this.landscape,
           light: this.light,

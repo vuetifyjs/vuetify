@@ -1,6 +1,9 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Types
 import Vue, { VNode, PropType } from 'vue'
-import { DataTableHeader } from 'types'
+import { DataTableHeader } from 'vuetify/types'
 
 // Utils
 import { getObjectValueByPath } from '../../util/helpers'
@@ -38,10 +41,13 @@ export default Vue.extend({
       const textAlign = `text-${header.align || 'start'}`
 
       return h('td', {
-        class: {
-          [textAlign]: true,
-          'v-data-table__divider': header.divider,
-        },
+        class: [
+          textAlign,
+          header.cellClass,
+          {
+            'v-data-table__divider': header.divider,
+          },
+        ],
       }, children)
     })
 

@@ -2,9 +2,10 @@
 @import './_variables.scss'
 
 +theme(v-text-field) using ($material)
-  border-color: map-get($material, 'input-bottom-line')
+  > .v-input__control > .v-input__slot:before
+    border-color: map-get($material, 'input-bottom-line')
 
-  &:not(.v-input--has-state):hover
+  &:not(.v-input--has-state):hover > .v-input__control > .v-input__slot:before
     border-color: map-deep-get($material, 'text', 'primary')
 
   &.v-input--is-disabled .v-input__slot::before
@@ -45,8 +46,9 @@
         > .v-input__control > .v-input__slot fieldset
           color: map-deep-get($material, 'text-fields', 'outlined')
 
-        > .v-input__control > .v-input__slot:hover fieldset
-          color: map-deep-get($material, 'text-fields', 'outlined-hover')
+        &:not(.v-input--is-disabled)
+          > .v-input__control > .v-input__slot:hover fieldset
+            color: map-deep-get($material, 'text-fields', 'outlined-hover')
 
       &.v-input--is-disabled
         > .v-input__control > .v-input__slot fieldset
@@ -67,7 +69,6 @@
   fieldset,
   .v-input__control,
   .v-input__slot
-    border-color: inherit
     border-radius: inherit
 
   fieldset,
@@ -86,12 +87,22 @@
   &.v-input--dense
     padding-top: 0
 
-    &:not(.v-text-field--outlined):not(.v-text-field--single-line)
+    &:not(.v-text-field--outlined)
       input
         padding: $text-field-dense-padding
 
     &[type=text]::-ms-clear
       display: none
+
+    .v-input__prepend-inner,
+    .v-input__append-inner
+      margin-top: $text-field-dense-append-prepend-margin
+
+    &:not(.v-text-field--enclosed):not(.v-text-field--full-width)
+      .v-input__prepend-inner,
+      .v-input__append-inner
+        .v-input__icon > .v-icon
+          margin-top: $text-field-dense-icon-append-prepend-margin-top
 
   .v-input__prepend-inner,
   .v-input__append-inner

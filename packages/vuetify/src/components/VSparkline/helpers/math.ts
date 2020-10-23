@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { Point } from '../VSparkline'
 
 function int (value: string | number): number {

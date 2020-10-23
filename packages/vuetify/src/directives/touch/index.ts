@@ -9,10 +9,10 @@ import {
   TouchHandlers,
   TouchValue,
   TouchWrapper
-} from 'types'
+} from 'vuetify/types'
 
 // Utilities
-import { keys } from '../../util/helpers'
+import { keys } from '@/util/helpers'
 
 export interface TouchStoredHandlers {
   touchstart: (e: TouchEvent) => void
@@ -21,7 +21,7 @@ export interface TouchStoredHandlers {
 }
 
 interface TouchDirectiveBinding extends DirectiveBinding {
-  value: TouchValue | undefined
+  value?: TouchValue
 }
 
 const handleGesture = (wrapper: TouchWrapper) => {
@@ -127,7 +127,7 @@ function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   delete target._touch
 }
 
-export const Touch: ObjectDirective<HTMLElement> = {
+export const Touch: ObjectDirective = {
   mounted,
   unmounted,
 }

@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Utilities
 import { removed } from '../../util/console'
 
@@ -47,8 +50,8 @@ export default Vue.extend<Vue & Toggleable>().extend({
   },
 
   methods: {
-    showLazyContent (content?: VNode[]): VNode[] | undefined {
-      return this.hasContent ? content : undefined
+    showLazyContent (content?: () => VNode[]): VNode[] {
+      return (this.hasContent && content) ? content() : [this.$createElement()]
     },
   },
 })

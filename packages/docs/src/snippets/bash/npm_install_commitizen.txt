@@ -1,8 +1,0 @@
-// Install commitizen
-$ npm install -g commitizen 
-
-// Then install commitizen adapter
-$ npm install -g cz-conventional-changelog
-
-// Then create a .czrc file
-$ echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc

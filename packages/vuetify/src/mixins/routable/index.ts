@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import Vue, { VNodeData, PropType } from 'vue'
 
 // Directives
@@ -52,7 +55,7 @@ export default Vue.extend({
       return classes
     },
     computedRipple (): RippleOptions | boolean {
-      return this.ripple != null ? this.ripple : !this.disabled && this.isClickable
+      return this.ripple ?? (!this.disabled && this.isClickable)
     },
     isClickable (): boolean {
       if (this.disabled) return false

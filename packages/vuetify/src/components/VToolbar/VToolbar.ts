@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import './VToolbar.sass'
 
@@ -39,10 +42,6 @@ export default VSheet.extend({
     tag: {
       type: String,
       default: 'header',
-    },
-    tile: {
-      type: Boolean,
-      default: true,
     },
   },
 

@@ -1,13 +1,16 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Libraries
-import Vue from 'vue'
+// import Vue from 'vue'
 
 // Components
-import VSelect from '../VSelect'
-import {
-  VListItem,
-  VListItemTitle,
-  VListItemContent,
-} from '../../VList'
+// import VSelect from '../VSelect'
+// import {
+//   VListItem,
+//   VListItemTitle,
+//   VListItemContent,
+// } from '../../VList'
 
 // Utilities
 import {
@@ -15,7 +18,8 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VSelect.ts', () => {
+// eslint-disable-next-line max-statements
+describe.skip('VSelect.ts', () => {
   type Instance = InstanceType<typeof VSelect>
   let mountFunction: (options?: object) => Wrapper<Instance>
   let el
@@ -41,6 +45,10 @@ describe('VSelect.ts', () => {
         ...options,
       })
     }
+  })
+
+  afterEach(() => {
+    document.body.removeChild(el)
   })
 
   it('should return numeric 0', async () => {
@@ -268,7 +276,7 @@ describe('VSelect.ts', () => {
 
     const wrapper = mountFunction({
       propsData: {
-        menuProps: { contentClass: 'v-menu-class' },
+        menuProps: { contentClass: 'v-menu-class', eager: true },
         items,
       },
     })

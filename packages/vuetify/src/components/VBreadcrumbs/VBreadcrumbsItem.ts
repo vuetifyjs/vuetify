@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import Routable from '../../mixins/routable'
 
 import mixins from '../../util/mixins'

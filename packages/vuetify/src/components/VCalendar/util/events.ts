@@ -1,25 +1,48 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import {
   parseTimestamp,
   getDayIdentifier,
   getTimestampIdentifier,
+  OFFSET_TIME,
+  isTimedless,
+  updateHasTime,
 } from './timestamp'
-import { CalendarTimestamp, CalendarEvent, CalendarEventParsed } from 'types'
+import { CalendarTimestamp, CalendarEvent, CalendarEventParsed } from 'vuetify/types'
 
-export function parseEvent (input: CalendarEvent, index: number, startProperty: string, endProperty: string): CalendarEventParsed {
-  const start: CalendarTimestamp = parseTimestamp(input[startProperty], true)
-  const end: CalendarTimestamp = (input[endProperty] ? parseTimestamp(input[endProperty], true) : start)
+export function parseEvent (
+  input: CalendarEvent,
+  index: number,
+  startProperty: string,
+  endProperty: string,
+  timed = false,
+  category: string | false = false,
+): CalendarEventParsed {
+  const startInput = input[startProperty]
+  const endInput = input[endProperty]
+  const startParsed: CalendarTimestamp = parseTimestamp(startInput, true)
+  const endParsed: CalendarTimestamp = (endInput ? parseTimestamp(endInput, true) : startParsed)
+  const start: CalendarTimestamp = isTimedless(startInput)
+    ? updateHasTime(startParsed, timed)
+    : startParsed
+  const end: CalendarTimestamp = isTimedless(endInput)
+    ? updateHasTime(endParsed, timed)
+    : endParsed
   const startIdentifier: number = getDayIdentifier(start)
   const startTimestampIdentifier: number = getTimestampIdentifier(start)
   const endIdentifier: number = getDayIdentifier(end)
   const endOffset: number = start.hasTime ? 0 : 2359
   const endTimestampIdentifier: number = getTimestampIdentifier(end) + endOffset
-  const allDay: boolean = !start.hasTime
+  const allDay = !start.hasTime
 
-  return { input, start, startIdentifier, startTimestampIdentifier, end, endIdentifier, endTimestampIdentifier, allDay, index }
+  return { input, start, startIdentifier, startTimestampIdentifier, end, endIdentifier, endTimestampIdentifier, allDay, index, category }
 }
 
 export function isEventOn (event: CalendarEventParsed, dayIdentifier: number): boolean {
-  return dayIdentifier >= event.startIdentifier && dayIdentifier <= event.endIdentifier
+  return dayIdentifier >= event.startIdentifier &&
+    dayIdentifier <= event.endIdentifier &&
+    dayIdentifier * OFFSET_TIME !== event.endTimestampIdentifier
 }
 
 export function isEventStart (event: CalendarEventParsed, day: CalendarTimestamp, dayIdentifier: number, firstWeekday: number): boolean {

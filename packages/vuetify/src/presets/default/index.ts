@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import '../../styles/main.sass'
 
@@ -9,10 +12,12 @@ import { en } from '../../locale'
 // import mdi from '../../services/icons/presets/mdi'
 
 // Types
-import { VuetifyPreset } from 'vuetify/types/services/presets'
+import type { VuetifyPreset } from 'vuetify/types/services/presets'
 
 export const preset: VuetifyPreset = {
   breakpoint: {
+    // TODO: update to MD2 spec in v3 - 1280
+    mobileBreakpoint: 1264,
     scrollBarWidth: 16,
     thresholds: {
       xs: 600,
@@ -42,6 +47,7 @@ export const preset: VuetifyPreset = {
       customProperties: undefined,
       minifyTheme: undefined,
       themeCache: undefined,
+      variations: true,
     },
     themes: {
       light: {

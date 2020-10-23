@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import './VRating.sass'
 
@@ -219,6 +222,7 @@ export default mixins(
       }
 
       return this.$createElement(VIcon, this.setTextColor(this.getColor(props), {
+        attrs: { tabindex: -1 }, // TODO: Add a11y support
         directives: this.directives,
         props: this.iconProps,
         on: listeners,

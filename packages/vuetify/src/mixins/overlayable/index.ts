@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
 import VOverlay from '../../components/VOverlay'
 
@@ -40,6 +43,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
   data () {
     return {
+      animationFrame: 0,
       overlay: null as InstanceType<typeof VOverlay> | null,
     }
   },
@@ -85,7 +89,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
       if (!this.overlay) this.createOverlay()
 
-      requestAnimationFrame(() => {
+      this.animationFrame = requestAnimationFrame(() => {
         if (!this.overlay) return
 
         if (this.activeZIndex !== undefined) {
@@ -114,6 +118,11 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
           this.overlay.$destroy()
           this.overlay = null
         })
+
+        // Cancel animation frame in case
+        // overlay is removed before it
+        // has finished its animation
+        cancelAnimationFrame(this.animationFrame)
 
         this.overlay.value = false
       }

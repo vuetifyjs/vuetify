@@ -14,52 +14,70 @@
       background: map-get($material, 'cards')
       box-shadow: inset 0 -1px 0 map-get($material, 'dividers')
 
-  thead
-    tr
-      &:last-child th
-        border-bottom: thin solid map-get($material, 'dividers')
+  > .v-data-table__wrapper
+    > table
+      > thead
+        > tr
+          > th
+            color: map-deep-get($material, 'text', 'secondary')
 
-      th
-        color: map-deep-get($material, 'text', 'secondary')
+          &:last-child
+            > th
+              border-bottom: thin solid map-get($material, 'dividers')
 
-  tbody
-    tr
-      &:not(:last-child) td
-        &:not(.v-data-table__mobile-row)
-          border-bottom: thin solid map-get($material, 'dividers')
+  > .v-data-table__wrapper
+    > table
+      > tbody
+        > tr
+          &:not(:last-child)
+            > td,
+            > th
+              &:not(.v-data-table__mobile-row)
+                border-bottom: thin solid map-get($material, 'dividers')
 
-        &:last-child
-          border-bottom: thin solid map-get($material, 'dividers')
+              &:last-child
+                border-bottom: thin solid map-get($material, 'dividers')
 
-      &.active
-        background: map-deep-get($material, 'table', 'active')
+          &.active
+            background: map-deep-get($material, 'table', 'active')
 
-      &:hover:not(.v-data-table__expanded__content)
-        background: map-deep-get($material, 'table', 'hover')
+          &:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper)
+            background: map-deep-get($material, 'table', 'hover')
 
 // Block
 .v-data-table
-  table
-    width: 100%
-    border-spacing: 0
+  // Do not inherit line-height
+  line-height: 1.5
+  max-width: 100%
 
-  td, th
-    padding: 0 16px
+  > .v-data-table__wrapper
+    > table
+      width: 100%
+      border-spacing: 0
 
-  th
-    user-select: none
-    font-size: $data-table-regular-header-font-size
-    height: $data-table-regular-header-height
+      > tbody,
+      > thead,
+      > tfoot
+        > tr
+          > td,
+          > th
+            padding: 0 16px
+            transition: height $secondary-transition
 
-    +ltr()
-      text-align: left
+          > th
+            user-select: none
+            font-size: $data-table-regular-header-font-size
+            height: $data-table-regular-header-height
 
-    +rtl()
-      text-align: right
+            +ltr()
+              text-align: left
 
-  td
-    font-size: $data-table-regular-row-font-size
-    height: $data-table-regular-row-height
+            +rtl()
+              text-align: right
+
+          > td
+            font-size: $data-table-regular-row-font-size
+            height: $data-table-regular-row-height
 
 // Elements
 .v-data-table__wrapper
@@ -73,32 +91,41 @@
     height: auto !important
     border: none !important
     padding: 0
+    position: relative
 
 // Modifiers
 .v-data-table--dense
-  td
-    height: $data-table-dense-row-height
-  th
-    height: $data-table-dense-header-height
+  > .v-data-table__wrapper
+    > table
+      > tbody,
+      > thead,
+      > tfoot
+        > tr
+          > td
+            height: $data-table-dense-row-height
+          > th
+            height: $data-table-dense-header-height
 
 .v-data-table--fixed-height
   .v-data-table__wrapper
     overflow-y: auto
 
 .v-data-table--fixed-header
-  .v-data-table__wrapper
+  > .v-data-table__wrapper
     overflow-y: auto
 
-  thead
-    th
-      border-bottom: 0px !important
-      position: sticky
-      top: 0
-      z-index: 2
+    > table
+      > thead
+        > tr
+          > th
+            border-bottom: 0px !important
+            position: sticky
+            top: 0
+            z-index: 2
 
-    tr:nth-child(2)
-      th
-        top: $data-table-regular-header-height
+        > tr:nth-child(2)
+          > th
+            top: $data-table-regular-header-height
 
   // Account for scroll bar
   .v-data-footer
@@ -108,8 +135,10 @@
     +rtl()
       margin-left: $data-table-scroll-bar-width
 
-.v-data-table--fixed.v-data-table--dense
-  thead
-    tr:nth-child(2)
-      th
-        top: $data-table-dense-header-height
+.v-data-table--fixed-header.v-data-table--dense
+  > .v-data-table__wrapper
+    > table
+      > thead
+        > tr:nth-child(2)
+          > th
+            top: $data-table-dense-header-height

@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Directives
 import Intersect from '../../directives/intersect'
 
@@ -19,9 +22,7 @@ export default function intersectable (options: { onVisible: string[] }) {
     mounted () {
       Intersect.inserted(this.$el as HTMLElement, {
         name: 'intersect',
-        value: {
-          handler: this.onObserve,
-        },
+        value: this.onObserve,
       })
     },
 

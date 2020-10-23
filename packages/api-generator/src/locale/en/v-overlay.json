@@ -1,0 +1,7 @@
+{
+  "props": {
+    "absolute": "Applies **position: absolute** to the component.",
+    "opacity": "Sets the overlay opacity",
+    "zIndex": "The z-index used for the component"
+  }
+}

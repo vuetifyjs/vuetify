@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import './VAutocomplete.sass'
 
@@ -6,10 +9,16 @@ import VSelect, { defaultMenuProps as VSelectMenuProps } from '../VSelect/VSelec
 import VTextField from '../VTextField/VTextField'
 
 // Utilities
-import { keyCodes } from '../../util/helpers'
+import mergeData from '../../util/mergeData'
+import {
+  getObjectValueByPath,
+  getPropertyFromItem,
+  keyCodes,
+} from '../../util/helpers'
 
 // Types
-import { PropType } from 'vue'
+import { PropType, VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 const defaultMenuProps = {
   ...VSelectMenuProps,
@@ -36,7 +45,7 @@ export default VSelect.extend({
       default: (item: any, queryText: string, itemText: string) => {
         return itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) > -1
       },
-    },
+    } as PropValidator<(item: any, queryText: string, itemText: string) => boolean>,
     hideNoData: Boolean,
     menuProps: {
       type: VSelect.options.props.menuProps.type,
@@ -82,7 +91,12 @@ export default VSelect.extend({
     filteredItems (): object[] {
       if (!this.isSearching || this.noFilter || this.internalSearch == null) return this.allItems
 
-      return this.allItems.filter(item => this.filter(item, String(this.internalSearch), String(this.getText(item))))
+      return this.allItems.filter(item => {
+        const value = getPropertyFromItem(item, this.itemText)
+        const text = value != null ? String(value) : ''
+
+        return this.filter(item, String(this.internalSearch), text)
+      })
     },
     internalSearch: {
       get (): string | undefined {
@@ -193,6 +207,10 @@ export default VSelect.extend({
     this.setSearch()
   },
 
+  destroyed () {
+    document.removeEventListener('copy', this.onCopy)
+  },
+
   methods: {
     onFilteredItemsChanged (val: never[], oldVal: never[]) {
       // TODO: How is the watcher triggered
@@ -241,32 +259,41 @@ export default VSelect.extend({
       }
     },
     deleteCurrentItem () {
-      if (this.readonly) return
+      const curIndex = this.selectedIndex
+      const curItem = this.selectedItems[curIndex]
 
-      const index = this.selectedItems.length - 1
+      // Do nothing if input or item is disabled
+      if (
+        !this.isInteractive ||
+        this.getDisabled(curItem)
+      ) return
 
-      if (this.selectedIndex === -1 && index !== 0) {
-        this.selectedIndex = index
+      const lastIndex = this.selectedItems.length - 1
+
+      // Select the last item if
+      // there is no selection
+      if (
+        this.selectedIndex === -1 &&
+        lastIndex !== 0
+      ) {
+        this.selectedIndex = lastIndex
+
         return
       }
 
-      const currentItem = this.selectedItems[this.selectedIndex]
+      const length = this.selectedItems.length
+      const nextIndex = curIndex !== length - 1
+        ? curIndex
+        : curIndex - 1
+      const nextItem = this.selectedItems[nextIndex]
 
-      if (this.getDisabled(currentItem)) return
-
-      const newIndex = this.selectedIndex === index
-        ? this.selectedIndex - 1
-        : this.selectedItems[this.selectedIndex + 1]
-          ? this.selectedIndex
-          : -1
-
-      if (newIndex === -1) {
+      if (!nextItem) {
         this.setValue(this.multiple ? [] : undefined)
       } else {
-        this.selectItem(currentItem)
+        this.selectItem(curItem)
       }
 
-      this.selectedIndex = newIndex
+      this.selectedIndex = nextIndex
     },
     clearableCallback () {
       this.internalSearch = undefined
@@ -276,12 +303,13 @@ export default VSelect.extend({
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
 
-      input.data = input.data || {}
-      input.data.attrs = input.data.attrs || {}
-      input.data.attrs.autocomplete = input.data.attrs.autocomplete || 'off'
-
-      input.data.domProps = input.data.domProps || {}
-      input.data.domProps.value = this.internalSearch
+      input.data = mergeData(input.data!, {
+        attrs: {
+          'aria-activedescendant': getObjectValueByPath(this.$refs.menu, 'activeTile.id'),
+          autocomplete: getObjectValueByPath(input.data!, 'attrs.autocomplete', 'off'),
+        },
+        domProps: { value: this.internalSearch },
+      })
 
       return input
     },
@@ -292,19 +320,19 @@ export default VSelect.extend({
 
       return slot
     },
-    genSelections () {
+    genSelections (): VNode | never[] {
       return this.hasSlot || this.multiple
         ? VSelect.options.methods.genSelections.call(this)
         : []
     },
-    onClick () {
-      if (this.isDisabled) return
+    onClick (e: MouseEvent) {
+      if (!this.isInteractive) return
 
       this.selectedIndex > -1
         ? (this.selectedIndex = -1)
         : this.onFocus()
 
-      this.activateMenu()
+      if (!this.isAppendInner(e.target)) this.activateMenu()
     },
     onInput (e: Event) {
       if (
@@ -337,7 +365,10 @@ export default VSelect.extend({
       VSelect.options.methods.onTabDown.call(this, e)
       this.updateSelf()
     },
-    onUpDown () {
+    onUpDown (e: Event) {
+      // Prevent screen from scrolling
+      e.preventDefault()
+
       // For autocomplete / combobox, cycling
       // interfers with native up/down behavior
       // instead activate the menu
@@ -385,7 +416,7 @@ export default VSelect.extend({
         this.setSearch()
       }
     },
-    hasItem (item: any) {
+    hasItem (item: any): boolean {
       return this.selectedValues.indexOf(this.getValue(item)) > -1
     },
     onCopy (event: ClipboardEvent) {
@@ -393,8 +424,8 @@ export default VSelect.extend({
 
       const currentItem = this.selectedItems[this.selectedIndex]
       const currentItemText = this.getText(currentItem)
-      event.clipboardData!.setData('text/plain', currentItemText)
-      event.clipboardData!.setData('text/vnd.vuetify.autocomplete.item+plain', currentItemText)
+      event.clipboardData?.setData('text/plain', currentItemText)
+      event.clipboardData?.setData('text/vnd.vuetify.autocomplete.item+plain', currentItemText)
       event.preventDefault()
     },
   },

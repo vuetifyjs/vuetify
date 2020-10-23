@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import './VListGroup.sass'
 
@@ -22,10 +25,11 @@ import { VExpandTransition } from '../transitions'
 
 // Utils
 import mixins, { ExtractVue } from '../../util/mixins'
+import { getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
-import { Route } from 'vue-router'
+// import { Route } from 'vue-router'
 
 const baseMixins = mixins(
   BindsAttrs,
@@ -160,16 +164,16 @@ export default baseMixins.extend<options>().extend({
         this.genAppendIcon(),
       ])
     },
-    genItems (): VNode {
-      return this.$createElement('div', {
-        staticClass: 'v-list-group__items',
-        directives: [{
-          name: 'show',
-          value: this.isActive,
-        }],
-      }, this.showLazyContent([
-        this.$createElement('div', this.$slots.default),
-      ]))
+    genItems (): VNode[] {
+      return this.showLazyContent(() => [
+        this.$createElement('div', {
+          staticClass: 'v-list-group__items',
+          directives: [{
+            name: 'show',
+            value: this.isActive,
+          }],
+        }, getSlot(this)),
+      ])
     },
     genPrependIcon (): VNode | null {
       const icon = this.subGroup && this.prependIcon == null
@@ -214,7 +218,7 @@ export default baseMixins.extend<options>().extend({
       class: this.classes,
     }), [
       this.genHeader(),
-      h(VExpandTransition, [this.genItems()]),
+      h(VExpandTransition, this.genItems()),
     ])
   },
 })

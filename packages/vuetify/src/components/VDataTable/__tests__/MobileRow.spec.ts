@@ -1,12 +1,15 @@
-import MobileRow from '../MobileRow'
+// @ts-nocheck
+/* eslint-disable */
+
+// import MobileRow from '../MobileRow'
 import {
   mount,
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
-import Vue from 'vue'
+// import Vue from 'vue'
 
-describe('MobileRow', () => {
+describe.skip('MobileRow', () => {
   type Instance = InstanceType<typeof MobileRow>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {
@@ -110,6 +113,29 @@ describe('MobileRow', () => {
     expect(wrapper.findAll('tr')).toHaveLength(1)
     expect(wrapper.findAll('td')).toHaveLength(2)
     expect(wrapper.findAll('p.test')).toHaveLength(2)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render without header when hideDefaultHeader: true', () => {
+    const wrapper = mountFunction({
+      context: {
+        props: {
+          headers: [
+            { text: 'Petrol', value: 'petrol' },
+            { text: 'Diesel', value: 'diesel' },
+          ],
+          hideDefaultHeader: true,
+          item: {
+            petrol: 0.68,
+            diesel: 0.65,
+          },
+        },
+      },
+    })
+
+    expect(wrapper.findAll('tr')).toHaveLength(1)
+    expect(wrapper.findAll('td')).toHaveLength(2)
+    expect(wrapper.findAll('.v-data-table__mobile-row__header')).toHaveLength(0)
     expect(wrapper.html()).toMatchSnapshot()
   })
 })

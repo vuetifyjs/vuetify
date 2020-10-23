@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
 import VInput from '../VInput/VInput'
 
@@ -25,10 +28,16 @@ export default mixins(
 ).extend({
   name: 'v-form',
 
+  provide (): object {
+    return { form: this }
+  },
+
   inheritAttrs: false,
 
   props: {
+    disabled: Boolean,
     lazyValidation: Boolean,
+    readonly: Boolean,
     value: Boolean,
   },
 

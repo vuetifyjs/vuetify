@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import '../VDatePickerTable.sass'
 
 // Directives
@@ -9,12 +12,26 @@ import Localable from '../../../mixins/localable'
 import Themeable from '../../../mixins/themeable'
 
 // Utils
+import { createItemTypeNativeListeners } from '../util'
 import isDateAllowed from '../util/isDateAllowed'
+import { mergeListeners } from '../../../util/mergeData'
 import mixins from '../../../util/mixins'
+import { throttle } from '../../../util/helpers'
 
 // Types
-import { VNodeChildren, PropType } from 'vue'
-import { DatePickerAllowedDatesFunction, DatePickerFormatter, DatePickerEvents, DatePickerEventColors, DatePickerEventColorValue, TouchWrapper } from 'types'
+import {
+  PropType,
+  VNodeChildren,
+} from 'vue'
+import { PropValidator } from 'vue/types/options'
+import {
+  DatePickerAllowedDatesFunction,
+  DatePickerEventColors,
+  DatePickerEventColorValue,
+  DatePickerEvents,
+  DatePickerFormatter,
+  TouchWrapper,
+} from 'vuetify/types'
 
 type CalculateTableDateFunction = (v: number) => string
 
@@ -32,13 +49,13 @@ export default mixins(
     disabled: Boolean,
     format: Function as PropType<DatePickerFormatter | undefined>,
     events: {
-      type: [Array, Function, Object] as PropType<DatePickerEvents>,
+      type: [Array, Function, Object],
       default: () => null,
-    },
+    } as PropValidator<DatePickerEvents | null>,
     eventColor: {
-      type: [Array, Function, Object, String] as PropType<DatePickerEventColors>,
+      type: [Array, Function, Object, String],
       default: () => 'warning',
-    },
+    } as PropValidator<DatePickerEventColors>,
     min: String,
     max: String,
     range: Boolean,
@@ -53,6 +70,7 @@ export default mixins(
 
   data: () => ({
     isReversing: false,
+    wheelThrottle: null as any,
   }),
 
   computed: {
@@ -73,10 +91,15 @@ export default mixins(
     },
   },
 
+  mounted () {
+    this.wheelThrottle = throttle(this.wheel, 250)
+  },
+
   methods: {
     genButtonClasses (isAllowed: boolean, isFloating: boolean, isSelected: boolean, isCurrent: boolean) {
       return {
         'v-size--default': !isFloating,
+        'v-date-picker-table__current': isCurrent,
         'v-btn--active': isSelected,
         'v-btn--flat': !isAllowed || this.disabled,
         'v-btn--text': isSelected === isCurrent,
@@ -89,17 +112,15 @@ export default mixins(
     genButtonEvents (value: string, isAllowed: boolean, mouseEventType: string) {
       if (this.disabled) return undefined
 
-      return {
+      return mergeListeners({
         click: () => {
-          isAllowed && !this.readonly && this.$emit('input', value)
-          this.$emit(`click:${mouseEventType}`, value)
+          if (isAllowed && !this.readonly) this.$emit('input', value)
         },
-        dblclick: () => this.$emit(`dblclick:${mouseEventType}`, value),
-      }
+      }, createItemTypeNativeListeners(this, `:${mouseEventType}`, value))
     },
     genButton (value: string, isFloating: boolean, mouseEventType: string, formatter: DatePickerFormatter) {
       const isAllowed = isDateAllowed(value, this.min, this.max, this.allowedDates)
-      const isSelected = this.isSelected(value)
+      const isSelected = this.isSelected(value) && isAllowed
       const isCurrent = value === this.current
       const setColor = isSelected ? this.setBackgroundColor : this.setTextColor
       const color = (isSelected || isCurrent) && (this.color || 'accent')
@@ -160,7 +181,6 @@ export default mixins(
       }, eventColors.map(color => this.$createElement('div', this.setBackgroundColor(color)))) : null
     },
     wheel (e: WheelEvent, calculateTableDate: CalculateTableDateFunction) {
-      e.preventDefault()
       this.$emit('update:table-date', calculateTableDate(e.deltaY))
     },
     touch (value: number, calculateTableDate: CalculateTableDateFunction) {
@@ -186,7 +206,10 @@ export default mixins(
           ...this.themeClasses,
         },
         on: (!this.disabled && this.scrollable) ? {
-          wheel: (e: WheelEvent) => this.wheel(e, calculateTableDate),
+          wheel: (e: WheelEvent) => {
+            e.preventDefault()
+            this.wheelThrottle(e, calculateTableDate)
+          },
         } : undefined,
         directives: [touchDirective],
       }, [transition])

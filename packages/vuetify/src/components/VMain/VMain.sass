@@ -1,0 +1,22 @@
+@import './_variables.scss'
+
+@mixin firefox()
+  @-moz-document url-prefix()
+    @content
+
+.v-main
+  +bootable()
+
+  display: flex
+  flex: 1 0 auto
+  max-width: 100%
+  transition: $main-transition
+
+  &__wrap
+    flex: 1 1 auto
+    max-width: 100%
+    position: relative
+
+  +firefox()
+    @media print
+      display: block

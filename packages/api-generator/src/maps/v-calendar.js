@@ -1,8 +1,12 @@
-const { VTimestamp, VTimestampWithTime, VCalendarDay, VCalendarEventSlot } = require('../helpers/variables')
+const { VTimestamp, VTimestampWithTime, VTimestampWithTimeCategory, VTimestampWithCategory, VCalendarDay, VCalendarEventSlot } = require('../helpers/variables')
 
 module.exports = {
   'v-calendar': {
     slots: [
+      {
+        name: 'category',
+        props: VTimestampWithCategory,
+      },
       {
         name: 'event',
         props: VCalendarEventSlot,
@@ -21,6 +25,10 @@ module.exports = {
       },
       {
         name: 'day-label',
+        props: VTimestamp,
+      },
+      {
+        name: 'day-label-header',
         props: VTimestamp,
       },
       {
@@ -58,6 +66,10 @@ module.exports = {
         signature: '(time: number | string | { hour: number, minute: number }, clamp: boolean = true): number | false',
       },
       {
+        name: 'timeDelta',
+        signature: '(time: number | string | { hour: number, minute: number }): number | false',
+      },
+      {
         name: 'minutesToPixels',
         signature: '(minutes: number): number',
       },
@@ -68,6 +80,18 @@ module.exports = {
       {
         name: 'getVisibleEvents',
         signature: '(): CalendarEventParsed[]',
+      },
+      {
+        name: 'parseEvent',
+        signature: '(input: CalendarEvent, index: number = 0): CalendarEventParsed',
+      },
+      {
+        name: 'parseTimestamp',
+        signature: '(input: VTimestampInput, required?: false): CalendarTimestamp | null',
+      },
+      {
+        name: 'timestampToDate',
+        signature: '(timestamp: CalendarTimestamp): Date',
       },
     ],
     events: [
@@ -136,6 +160,86 @@ module.exports = {
         value: VTimestampWithTime,
       },
       {
+        name: 'click:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'contextmenu:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'mousedown:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'mousemove:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'mouseup:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'mouseenter:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'mouseleave:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'touchstart:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'touchmove:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'touchend:event',
+        value: VCalendarEventSlot,
+      },
+      {
+        name: 'click:day-category',
+        value: VTimestampWithCategory,
+      },
+      {
+        name: 'contextmenu:day-category',
+        value: VTimestampWithCategory,
+      },
+      {
+        name: 'mousedown:day-category',
+        value: VTimestampWithCategory,
+      },
+      {
+        name: 'mousemove:day-category',
+        value: VTimestampWithCategory,
+      },
+      {
+        name: 'mouseup:day-category',
+        value: VTimestampWithCategory,
+      },
+      {
+        name: 'mouseenter:day-category',
+        value: VTimestampWithCategory,
+      },
+      {
+        name: 'mouseleave:day-category',
+        value: VTimestampWithCategory,
+      },
+      {
+        name: 'touchstart:day-category',
+        value: VTimestampWithCategory,
+      },
+      {
+        name: 'touchmove:day-category',
+        value: VTimestampWithCategory,
+      },
+      {
+        name: 'touchend:day-category',
+        value: VTimestampWithCategory,
+      },
+      {
         name: 'click:time',
         value: VTimestampWithTime,
       },
@@ -174,6 +278,46 @@ module.exports = {
       {
         name: 'touchend:time',
         value: VTimestampWithTime,
+      },
+      {
+        name: 'click:time-category',
+        value: VTimestampWithTimeCategory,
+      },
+      {
+        name: 'contextmenu:time-category',
+        value: VTimestampWithTimeCategory,
+      },
+      {
+        name: 'mousedown:time-category',
+        value: VTimestampWithTimeCategory,
+      },
+      {
+        name: 'mousemove:time-category',
+        value: VTimestampWithTimeCategory,
+      },
+      {
+        name: 'mouseup:time-category',
+        value: VTimestampWithTimeCategory,
+      },
+      {
+        name: 'mouseenter:time-category',
+        value: VTimestampWithTimeCategory,
+      },
+      {
+        name: 'mouseleave:time-category',
+        value: VTimestampWithTimeCategory,
+      },
+      {
+        name: 'touchstart:time-category',
+        value: VTimestampWithTimeCategory,
+      },
+      {
+        name: 'touchmove:time-category',
+        value: VTimestampWithTimeCategory,
+      },
+      {
+        name: 'touchend:time-category',
+        value: VTimestampWithTimeCategory,
       },
       {
         name: 'click:interval',

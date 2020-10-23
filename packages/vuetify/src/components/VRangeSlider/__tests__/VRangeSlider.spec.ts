@@ -1,11 +1,14 @@
-import VRangeSlider from '../VRangeSlider'
+// @ts-nocheck
+/* eslint-disable */
+
+// import VRangeSlider from '../VRangeSlider'
 import {
   mount,
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VRangeSlider.ts', () => {
+describe.skip('VRangeSlider.ts', () => {
   type Instance = InstanceType<typeof VRangeSlider>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
@@ -151,24 +154,6 @@ describe('VRangeSlider.ts', () => {
     expect(wrapper.vm.internalValue).toEqual([5, 25])
   })
 
-  it('should return the proper styles', () => {
-    const wrapper = mountFunction()
-
-    let styles = wrapper.vm.trackFillStyles
-
-    expect(styles.left).toBe('0%')
-    expect(styles.right).toBe('auto')
-    expect(styles.width).toBe('0%')
-    wrapper.vm.$vuetify.rtl = true
-
-    styles = wrapper.vm.trackFillStyles
-    expect(styles.left).toBe('auto')
-    expect(styles.right).toBe('0%')
-    expect(styles.width).toBe('0%')
-
-    wrapper.vm.$vuetify.rtl = undefined
-  })
-
   it('should render a vertical slider', async () => {
     const wrapper = mountFunction({
       propsData: {
@@ -219,5 +204,13 @@ describe('VRangeSlider.ts', () => {
 
       expect(wrapper.vm.internalValue).toEqual([0, 0])
     })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/6843
+  it('should be uniq id', async () => {
+    const wrapper = mountFunction()
+    const [min, max] = wrapper.vm.genInput()
+
+    expect(min.data.attrs.id).not.toEqual(max.data.attrs.id)
   })
 })

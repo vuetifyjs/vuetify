@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Mixins
 import Delayable from '../delayable'
 import Toggleable from '../toggleable'
@@ -9,6 +12,8 @@ import { consoleError } from '../../util/console'
 
 // Types
 import { VNode, PropType } from 'vue'
+
+type Listeners = Dictionary<(e: MouseEvent & KeyboardEvent & FocusEvent) => void>
 
 const baseMixins = mixins(
   Delayable,
@@ -29,18 +34,20 @@ export default baseMixins.extend({
     disabled: Boolean,
     internalActivator: Boolean,
     openOnHover: Boolean,
+    openOnFocus: Boolean,
   },
 
   data: () => ({
     // Do not use this directly, call getActivator() instead
     activatorElement: null as HTMLElement | null,
     activatorNode: [] as VNode[],
-    events: ['click', 'mouseenter', 'mouseleave'],
-    listeners: {} as Record<string, (e: MouseEvent & KeyboardEvent) => void>,
+    events: ['click', 'mouseenter', 'mouseleave', 'focus'],
+    listeners: {} as Listeners,
   }),
 
   watch: {
     activator: 'resetActivator',
+    openOnFocus: 'resetActivator',
     openOnHover: 'resetActivator',
   },
 
@@ -93,7 +100,7 @@ export default baseMixins.extend({
     genActivatorListeners () {
       if (this.disabled) return {}
 
-      const listeners: Record<string, (e: MouseEvent & KeyboardEvent) => void> = {}
+      const listeners: Listeners = {}
 
       if (this.openOnHover) {
         listeners.mouseenter = (e: MouseEvent) => {
@@ -108,6 +115,16 @@ export default baseMixins.extend({
         listeners.click = (e: MouseEvent) => {
           const activator = this.getActivator(e)
           if (activator) activator.focus()
+
+          e.stopPropagation()
+
+          this.isActive = !this.isActive
+        }
+      }
+
+      if (this.openOnFocus) {
+        listeners.focus = (e: FocusEvent) => {
+          this.getActivator(e)
 
           e.stopPropagation()
 
@@ -152,7 +169,7 @@ export default baseMixins.extend({
           activator = this.activatorNode[0].elm as HTMLElement
         }
       } else if (e) {
-        // Activated by a click event
+        // Activated by a click or focus event
         activator = (e.currentTarget || e.target) as HTMLElement
       }
 
@@ -189,6 +206,7 @@ export default baseMixins.extend({
       this.listeners = {}
     },
     resetActivator () {
+      this.removeActivatorEvents()
       this.activatorElement = null
       this.getActivator()
       this.addActivatorEvents()

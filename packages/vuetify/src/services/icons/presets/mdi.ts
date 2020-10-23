@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { VuetifyIcons } from 'vuetify/types/services/icons'
 
 const icons: VuetifyIcons = {
@@ -26,7 +29,7 @@ const icons: VuetifyIcons = {
   edit: 'mdi-pencil',
   ratingEmpty: 'mdi-star-outline',
   ratingFull: 'mdi-star',
-  ratingHalf: 'mdi-star-half',
+  ratingHalf: 'mdi-star-half-full',
   loading: 'mdi-cached',
   first: 'mdi-page-first',
   last: 'mdi-page-last',

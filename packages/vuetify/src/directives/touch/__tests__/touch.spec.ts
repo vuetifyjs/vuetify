@@ -29,7 +29,6 @@ describe('touch.ts', () => {
 
   it('should call directive handlers', () => {
     const down = jest.fn()
-
     touch(mountFunction({ down })).start(0, 0).end(0, 20)
     expect(down).toHaveBeenCalled()
 
@@ -66,7 +65,7 @@ describe('touch.ts', () => {
     expect(down).toHaveBeenCalled()
   })
 
-  it('should not call directive handlers if distance is too small ', async () => {
+  it('should not call directive handlers if distance is too small', async () => {
     const down = jest.fn()
     touch(mountFunction({ down })).start(0, 0).end(0, 10)
     expect(down).not.toHaveBeenCalled()

@@ -1,5 +1,0 @@
-// Preset variables
-$body-font-family: 'Rubik', sans-serif;
-$btn-font-weight: 500;
-$border-radius-root: 0;
-$chip-line-height: 1.5;

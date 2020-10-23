@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
 import VTimePickerTitle from './VTimePickerTitle'
 import VTimePickerClock from './VTimePickerClock'
@@ -338,7 +341,8 @@ export default mixins(
     genPickerTitle () {
       return this.$createElement(VTimePickerTitle, {
         props: {
-          ampm: this.ampmInTitle && this.isAmPm,
+          ampm: this.isAmPm,
+          ampmReadonly: this.isAmPm && !this.ampmInTitle,
           disabled: this.disabled,
           hour: this.inputHour,
           minute: this.inputMinute,
@@ -350,7 +354,7 @@ export default mixins(
         },
         on: {
           'update:selecting': (value: 1 | 2 | 3) => (this.selecting = value),
-          'update:period': this.setPeriod,
+          'update:period': (period: string) => this.$emit('update:period', period),
         },
         ref: 'title',
         slot: 'title',

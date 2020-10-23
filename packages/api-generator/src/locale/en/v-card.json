@@ -1,0 +1,12 @@
+{
+  "props": {
+    "contain": "Applies **background-size: contain** to the background image (when using the **img** prop).",
+    "flat": "Removes the card's elevation.",
+    "hover": "Will apply an elevation of 4dp when hovered (default 2dp). You can find more information on the [elevation page](/styles/elevation).",
+    "img": "Specifies an image background for the card. For more advanced implementations, it is recommended that you use the [v-img](/components/images) component. You can find a [v-img example here](/components/cards/#media-with-text).",
+    "raised": "Specifies a higher default elevation (8dp). You can find more information on the [elevation page](/styles/elevation)."
+  },
+  "events": {
+    "click": "Emitted when component is clicked - Will trigger component to ripple when clicked unless the `.native` modifier is used"
+  }
+}

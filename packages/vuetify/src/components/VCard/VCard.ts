@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import './VCard.sass'
 
@@ -31,9 +34,7 @@ export default mixins(
       type: [Number, String],
       default: 4,
     },
-    outlined: Boolean,
     raised: Boolean,
-    shaped: Boolean,
   },
 
   computed: {
@@ -46,9 +47,7 @@ export default mixins(
         'v-card--link': this.isClickable,
         'v-card--loading': this.loading,
         'v-card--disabled': this.disabled,
-        'v-card--outlined': this.outlined,
         'v-card--raised': this.raised,
-        'v-card--shaped': this.shaped,
         ...VSheet.options.computed.classes.call(this),
       }
     },
@@ -73,6 +72,7 @@ export default mixins(
 
       return this.$createElement('div', {
         staticClass: 'v-card__progress',
+        key: 'progress',
       }, [render])
     },
   },

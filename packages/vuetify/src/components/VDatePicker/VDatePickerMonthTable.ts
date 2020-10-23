@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Mixins
 import DatePickerTable from './mixins/date-picker-table'
 
@@ -7,7 +10,7 @@ import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
-import { DatePickerFormatter } from 'types'
+import { DatePickerFormatter } from 'vuetify/types'
 
 export default mixins(
   DatePickerTable

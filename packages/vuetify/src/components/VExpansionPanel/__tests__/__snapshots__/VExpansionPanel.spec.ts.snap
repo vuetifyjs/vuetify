@@ -8,10 +8,6 @@ exports[`VExpansionPanel should hide actions and match snapshot 1`] = `
           class="v-expansion-panel-header"
   >
   </button>
-  <div class="v-expansion-panel-content"
-       style="display: none;"
-  >
-  </div>
 </div>
 `;
 
@@ -33,6 +29,8 @@ exports[`VExpansionPanel should hide actions and match snapshot 2`] = `
   <div class="v-expansion-panel-content"
        style="display: none;"
   >
+    <div class="v-expansion-panel-content__wrap">
+    </div>
   </div>
 </div>
 `;

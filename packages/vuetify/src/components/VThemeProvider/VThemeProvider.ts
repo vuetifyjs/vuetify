@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Mixins
 import Themeable from '../../mixins/themeable'
 

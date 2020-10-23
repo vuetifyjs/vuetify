@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 export interface Theme {
   dark: boolean
   disable: boolean
@@ -8,6 +11,7 @@ export interface Theme {
     customProperties?: boolean
     minifyTheme?: ThemeMinifyTheme
     themeCache?: VuetifyThemeCache
+    variations?: boolean
   }
   themes: {
     dark: VuetifyThemeVariant
@@ -26,6 +30,7 @@ export interface ThemeOptions {
     customProperties?: boolean
     minifyTheme?: ThemeMinifyTheme
     themeCache?: VuetifyThemeCache
+    variations?: boolean
   }
   themes?: {
     dark?: Partial<VuetifyThemeVariant>

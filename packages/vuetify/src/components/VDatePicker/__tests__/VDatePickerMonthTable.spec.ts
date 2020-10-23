@@ -1,14 +1,17 @@
-import VDatePickerMonthTable from '../VDatePickerMonthTable'
-import { Lang } from '../../../services/lang'
+// @ts-nocheck
+/* eslint-disable */
 
-import { preset } from '../../../presets/default'
+// import VDatePickerMonthTable from '../VDatePickerMonthTable'
+// import { Lang } from '../../../services/lang'
+
+// import { preset } from '../../../presets/default'
 import {
   mount,
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VDatePickerMonthTable.ts', () => {
+describe.skip('VDatePickerMonthTable.ts', () => {
   type Instance = InstanceType<typeof VDatePickerMonthTable>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Extensions
 import VWindowItem from '../VWindow/VWindowItem'
 
@@ -6,6 +9,7 @@ import { VImg } from '../VImg'
 
 // Utilities
 import mixins from '../../util/mixins'
+import { getSlot } from '../../util/helpers'
 import Routable from '../../mixins/routable'
 
 // Types
@@ -30,12 +34,10 @@ export default baseMixins.extend({
             height: this.windowGroup.internalHeight,
           },
           on: this.$listeners,
-        }, [
-          this.$slots.default,
-          this.$createElement('template', {
-            slot: 'placeholder',
-          }, this.$slots.placeholder),
-        ]),
+          scopedSlots: {
+            placeholder: this.$scopedSlots.placeholder,
+          },
+        }, getSlot(this)),
       ]
     },
     genWindowItem () {
@@ -47,7 +49,7 @@ export default baseMixins.extend({
         value: this.isActive,
       })
 
-      return this.$createElement(tag, data, this.showLazyContent(this.genDefaultSlot()))
+      return this.$createElement(tag, data, this.genDefaultSlot())
     },
   },
 })

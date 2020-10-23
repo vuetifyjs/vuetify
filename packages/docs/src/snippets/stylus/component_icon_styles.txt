@@ -1,2 +1,0 @@
-.your-svg-icon
-  fill: currentColor

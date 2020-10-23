@@ -1,10 +1,9 @@
 const { VInput } = require('../helpers/variables')
 
-const slots = VInput.slots.filter(event => event.name !== 'message')
+VInput.slots = VInput.slots.filter(slot => !['append', 'prepend'].includes(slot.name))
 
 module.exports = {
   'v-radio': {
     ...VInput,
-    slots,
   },
 }

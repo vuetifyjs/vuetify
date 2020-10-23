@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 /* eslint-disable no-new */
 import Vue from 'vue'
 import Vuetify, { colors } from 'vuetify/lib'
@@ -14,6 +17,12 @@ new Vuetify({
 new Vuetify({
   breakpoint: {
     scrollBarWidth: 20,
+  },
+})
+
+new Vuetify({
+  breakpoint: {
+    mobileBreakpoint: 900,
   },
 })
 
@@ -146,6 +155,7 @@ new Vuetify({
         get: (parsedTheme: VuetifyParsedTheme) => '',
         set: (parsedTheme: VuetifyParsedTheme, css: string) => {},
       },
+      variations: false,
     },
   },
 })

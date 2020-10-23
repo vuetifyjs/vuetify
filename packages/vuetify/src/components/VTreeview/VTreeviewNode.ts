@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
 import { VExpandTransition } from '../transitions'
 import { VIcon } from '../VIcon'
@@ -12,7 +15,8 @@ import mixins, { ExtractVue } from '../../util/mixins'
 import { getObjectValueByPath, createRange } from '../../util/helpers'
 
 // Types
-import { VNode, PropType } from 'vue'
+import { VNode, VNodeChildren, PropType } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 type VTreeViewInstance = InstanceType<typeof VTreeview>
 
@@ -81,6 +85,11 @@ export const VTreeviewNodeProps = {
   },
   shaped: Boolean,
   transition: Boolean,
+  selectionType: {
+    type: String as PropType<'leaf' | 'independent'>,
+    default: 'leaf',
+    validator: (v: string) => ['leaf', 'independent'].includes(v),
+  },
 }
 
 /* @vue/component */
@@ -98,7 +107,8 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
     item: {
       type: Object,
       default: () => null,
-    },
+    } as PropValidator<Record<string, unknown> | null>,
+    parentIsDisabled: Boolean,
     ...VTreeviewNodeProps,
   },
 
@@ -112,14 +122,18 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
   }),
 
   computed: {
-    disabled (): string {
-      return getObjectValueByPath(this.item, this.itemDisabled)
+    disabled (): boolean {
+      return (
+        getObjectValueByPath(this.item, this.itemDisabled) ||
+        (this.parentIsDisabled && this.selectionType === 'leaf')
+      )
     },
     key (): string {
       return getObjectValueByPath(this.item, this.itemKey)
     },
     children (): any[] | null {
-      return getObjectValueByPath(this.item, this.itemChildren)
+      const children = getObjectValueByPath(this.item, this.itemChildren)
+      return children && children.filter((child: any) => !this.treeview.isExcluded(getObjectValueByPath(child, this.itemKey)))
     },
     text (): string {
       return getObjectValueByPath(this.item, this.itemText)
@@ -217,8 +231,6 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         slot: 'prepend',
         on: {
           click: (e: MouseEvent) => {
-            if (this.disabled) return
-
             e.stopPropagation()
 
             if (this.isLoading) return
@@ -232,12 +244,11 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
       return this.$createElement(VIcon, {
         staticClass: 'v-treeview-node__checkbox',
         props: {
-          color: this.isSelected ? this.selectedColor : undefined,
+          color: this.isSelected || this.isIndeterminate ? this.selectedColor : undefined,
+          disabled: this.disabled,
         },
         on: {
           click: (e: MouseEvent) => {
-            if (this.disabled) return
-
             e.stopPropagation()
 
             if (this.isLoading) return
@@ -261,7 +272,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         staticClass: 'v-treeview-node__level',
       }))
     },
-    genNode (): VNode {
+    genNode () {
       const children = [this.genContent()]
 
       if (this.selectable) children.unshift(this.genCheckbox())
@@ -281,11 +292,9 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         },
         on: {
           click: () => {
-            if (this.disabled) return
-
             if (this.openOnClick && this.hasChildren) {
-              this.open()
-            } else if (this.activatable) {
+              this.checkChildren().then(this.open)
+            } else if (this.activatable && !this.disabled) {
               this.isActive = !this.isActive
               this.treeview.updateActive(this.key, this.isActive)
               this.treeview.emitActive()
@@ -294,7 +303,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         },
       }), children)
     },
-    genChild (item: any): VNode {
+    genChild (item: any, parentIsDisabled: boolean) {
       return this.$createElement(VTreeviewNode, {
         key: getObjectValueByPath(item, this.itemKey),
         props: {
@@ -319,14 +328,16 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
           rounded: this.rounded,
           shaped: this.shaped,
           level: this.level + 1,
+          selectionType: this.selectionType,
+          parentIsDisabled,
         },
         scopedSlots: this.$scopedSlots,
       })
     },
-    genChildrenWrapper (): any {
+    genChildrenWrapper () {
       if (!this.isOpen || !this.children) return null
 
-      const children = [this.children.map(this.genChild)]
+      const children = [this.children.map(c => this.genChild(c, this.disabled))]
 
       return this.$createElement('div', {
         staticClass: 'v-treeview-node__children',
@@ -338,7 +349,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
   },
 
   render (h): VNode {
-    const children = [this.genNode()]
+    const children: VNodeChildren = [this.genNode()]
 
     if (this.transition) children.push(this.genTransition())
     else children.push(this.genChildrenWrapper())
@@ -352,7 +363,6 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         'v-treeview-node--rounded': this.rounded,
         'v-treeview-node--shaped': this.shaped,
         'v-treeview-node--selected': this.isSelected,
-        'v-treeview-node--excluded': this.treeview.isExcluded(this.key),
       },
       attrs: {
         'aria-expanded': String(this.isOpen),

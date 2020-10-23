@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import Vue from 'vue'
 
 import {
@@ -5,7 +8,7 @@ import {
   parseTimestamp,
   parseDate,
 } from '../util/timestamp'
-import { CalendarTimestamp } from 'types'
+import { CalendarTimestamp } from 'vuetify/types'
 
 export default Vue.extend({
   name: 'times',

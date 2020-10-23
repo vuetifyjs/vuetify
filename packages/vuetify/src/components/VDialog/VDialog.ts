@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import './VDialog.sass'
 
@@ -25,7 +28,7 @@ import {
 } from '../../util/helpers'
 
 // Types
-import { VNode } from 'vue'
+import { VNode, VNodeData } from 'vue'
 
 const baseMixins = mixins(
   Activatable,
@@ -235,71 +238,79 @@ export default baseMixins.extend({
       ) {
         // Find and focus the first available element inside the dialog
         const focusable = this.$refs.content.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
-        focusable.length && (focusable[0] as HTMLElement).focus()
+        const el = [...focusable].find(el => !el.hasAttribute('disabled')) as HTMLElement | undefined
+        el && el.focus()
       }
+    },
+    genContent () {
+      return this.showLazyContent(() => [
+        this.$createElement(VThemeProvider, {
+          props: {
+            root: true,
+            light: this.light,
+            dark: this.dark,
+          },
+        }, [
+          this.$createElement('div', {
+            class: this.contentClasses,
+            attrs: {
+              role: 'document',
+              tabindex: this.isActive ? 0 : undefined,
+              ...this.getScopeIdAttrs(),
+            },
+            on: { keydown: this.onKeydown },
+            style: { zIndex: this.activeZIndex },
+            ref: 'content',
+          }, [this.genTransition()]),
+        ]),
+      ])
+    },
+    genTransition () {
+      const content = this.genInnerContent()
+
+      if (!this.transition) return content
+
+      return this.$createElement('transition', {
+        props: {
+          name: this.transition,
+          origin: this.origin,
+          appear: true,
+        },
+      }, [content])
+    },
+    genInnerContent () {
+      const data: VNodeData = {
+        class: this.classes,
+        ref: 'dialog',
+        directives: [
+          {
+            name: 'click-outside',
+            value: {
+              handler: this.onClickOutside,
+              closeConditional: this.closeConditional,
+              include: this.getOpenDependentElements,
+            },
+          },
+          { name: 'show', value: this.isActive },
+        ],
+        style: {
+          transformOrigin: this.origin,
+        },
+      }
+
+      if (!this.fullscreen) {
+        data.style = {
+          ...data.style as object,
+          maxWidth: this.maxWidth === 'none' ? undefined : convertToUnit(this.maxWidth),
+          width: this.width === 'auto' ? undefined : convertToUnit(this.width),
+        }
+      }
+
+      return this.$createElement('div', data, this.getContentSlot())
     },
   },
 
   render (h): VNode {
-    const children = []
-    const data = {
-      class: this.classes,
-      ref: 'dialog',
-      directives: [
-        {
-          name: 'click-outside',
-          value: this.onClickOutside,
-          args: {
-            closeConditional: this.closeConditional,
-            include: this.getOpenDependentElements,
-          },
-        },
-        { name: 'show', value: this.isActive },
-      ],
-      style: {},
-    }
-
-    if (!this.fullscreen) {
-      data.style = {
-        maxWidth: this.maxWidth === 'none' ? undefined : convertToUnit(this.maxWidth),
-        width: this.width === 'auto' ? undefined : convertToUnit(this.width),
-      }
-    }
-
-    children.push(this.genActivator())
-
-    let dialog = h('div', data, this.showLazyContent(this.getContentSlot()))
-    if (this.transition) {
-      dialog = h('transition', {
-        props: {
-          name: this.transition,
-          origin: this.origin,
-        },
-      }, [dialog])
-    }
-
-    children.push(h('div', {
-      class: this.contentClasses,
-      attrs: {
-        role: 'document',
-        tabindex: this.isActive ? 0 : undefined,
-        ...this.getScopeIdAttrs(),
-      },
-      on: {
-        keydown: this.onKeydown,
-      },
-      style: { zIndex: this.activeZIndex },
-      ref: 'content',
-    }, [
-      this.$createElement(VThemeProvider, {
-        props: {
-          root: true,
-          light: this.light,
-          dark: this.dark,
-        },
-      }, [dialog]),
-    ]))
-
     return h('div', {
       staticClass: 'v-dialog__container',
       class: {
@@ -309,6 +320,9 @@ export default baseMixins.extend({
           this.attach === 'attach',
       },
       attrs: { role: 'dialog' },
-    }, children)
+    }, [
+      this.genActivator(),
+      this.genContent(),
+    ])
   },
 })

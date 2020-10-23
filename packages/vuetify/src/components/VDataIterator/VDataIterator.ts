@@ -1,20 +1,29 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
 import { VData } from '../VData'
 import VDataFooter from './VDataFooter'
 
 // Mixins
+import Mobile from '../../mixins/mobile'
 import Themeable from '../../mixins/themeable'
 
 // Helpers
+import mixins from '../../util/mixins'
 import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camelizeObjectKeys } from '../../util/helpers'
 import { breaking, removed } from '../../util/console'
 
 // Types
-import { VNode, VNodeChildren, PropType } from 'vue'
-import { DataScopeProps } from 'types'
+import { VNode, VNodeChildren } from 'vue'
+import { PropValidator } from 'vue/types/options'
+import { DataItemProps, DataScopeProps } from 'vuetify/types'
 
 /* @vue/component */
-export default Themeable.extend({
+export default mixins(
+  Mobile,
+  Themeable
+).extend({
   name: 'v-data-iterator',
 
   props: {
@@ -24,13 +33,17 @@ export default Themeable.extend({
       default: 'id',
     },
     value: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
     singleSelect: Boolean,
     expanded: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => [],
+    } as PropValidator<any[]>,
+    mobileBreakpoint: {
+      ...Mobile.options.props.mobileBreakpoint,
+      default: 600,
     },
     singleExpand: Boolean,
     loading: [Boolean, String],
@@ -191,23 +204,22 @@ export default Themeable.extend({
       this.expansion = expansion
       this.$emit('item-expanded', { item, value })
     },
-    createItemProps (item: any) {
-      const props = {
+    createItemProps (item: any): DataItemProps {
+      return {
         item,
         select: (v: boolean) => this.select(item, v),
         isSelected: this.isSelected(item),
         expand: (v: boolean) => this.expand(item, v),
         isExpanded: this.isExpanded(item),
+        isMobile: this.isMobile,
       }
-
-      return props
     },
     genEmptyWrapper (content: VNodeChildren) {
       return this.$createElement('div', content)
     },
     genEmpty (originalItemsLength: number, filteredItemsLength: number) {
       if (originalItemsLength === 0 && this.loading) {
-        const loading = this.$slots['loading'] || this.$vuetify.lang.t(this.loadingText)
+        const loading = this.$slots.loading || this.$vuetify.lang.t(this.loadingText)
         return this.genEmptyWrapper(loading)
       } else if (originalItemsLength === 0) {
         const noData = this.$slots['no-data'] || this.$vuetify.lang.t(this.noDataText)
@@ -295,6 +307,7 @@ export default Themeable.extend({
           this.internalCurrentItems = v
           this.$emit('current-items', v)
         },
+        'page-count': (v: number) => this.$emit('page-count', v),
       },
       scopedSlots: {
         default: this.genDefaultScopedSlot,

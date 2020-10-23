@@ -1,13 +1,30 @@
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-import goTo from 'vuetify/es5/services/goto'
+/**
+ * plugins/vuetify.js
+ *
+ * Vuetify documentation: https://vuetifyjs.com/
+ */
 
-Vue.use(Vuetify)
+// Imports
+import { icons } from './icons'
+import Vuetify from 'vuetify/lib/framework'
 
-export function createVuetify (ssrContext) {
+// Globals
+import { IS_SERVER } from '@/util/globals'
+
+export function useVuetify (app) {
+  app.use(Vuetify)
+}
+
+export function createVuetify (store) {
   const vuetify = new Vuetify({
-    ssr: Boolean(ssrContext),
+    breakpoint: { mobileBreakpoint: 'md' },
+    icons,
     theme: {
+      dark: store.state.user.theme.dark,
+      options: {
+        minifyTheme: IS_SERVER ? require('minify-css-string').default : undefined,
+        variations: false,
+      },
       themes: {
         light: {
           primary: '#1867C0',
@@ -17,20 +34,14 @@ export function createVuetify (ssrContext) {
         },
       },
     },
-    options: {
-      minifyTheme: css => {
-        return process.env.NODE_ENV === 'production'
-          ? css.replace(/[\s|\r\n|\r|\n]/g, '')
-          : css
-      },
-    },
+    rtl: store.state.user.rtl,
   })
 
-  // Using goTo for scroll options means it
-  // doesn't have access to framework.application
-  // stub it oout here so that it continues to work
-  // TODO: Figure out how to avoid this
-  goTo.framework = vuetify.framework
+  if (!IS_SERVER) {
+    store.watch(state => state.user.theme.dark, val => {
+      vuetify.framework.theme.dark = val
+    })
+  }
 
   return vuetify
 }

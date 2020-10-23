@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { VuetifyIcons } from 'vuetify/types/services/icons'
 
 const icons: VuetifyIcons = {
@@ -13,7 +16,7 @@ const icons: VuetifyIcons = {
   prev: 'fa fa-chevron-left',
   next: 'fa fa-chevron-right',
   checkboxOn: 'fa fa-check-square',
-  checkboxOff: 'far fa-square', // note 'far'
+  checkboxOff: 'fa fa-square-o',
   checkboxIndeterminate: 'fa fa-minus-square',
   delimiter: 'fa fa-circle', // for carousel
   sort: 'fa fa-sort-up',
