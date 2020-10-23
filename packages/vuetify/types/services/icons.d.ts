@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 // Types
 import { Component } from 'vue'
 
@@ -60,5 +63,8 @@ export interface VuetifyIcons {
   first: VuetifyIcon
   last: VuetifyIcon
   unfold: VuetifyIcon
+  file: VuetifyIcon
+  plus: VuetifyIcon
+  minus: VuetifyIcon
   [name: string]: VuetifyIcon
 }

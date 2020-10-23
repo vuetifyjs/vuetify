@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Helpers
 import { VNode, VNodeData } from 'vue'
 import mixins from '../../util/mixins'
@@ -79,7 +82,7 @@ export default mixins(header).extend({
       )
 
       if (!this.disableSort && (header.sortable || !header.hasOwnProperty('sortable'))) {
-        data.on['click'] = () => this.$emit('sort', header.value)
+        data.on.click = () => this.$emit('sort', header.value)
 
         const sortIndex = this.options.sortBy.findIndex(k => k === header.value)
         const beingSorted = sortIndex >= 0

@@ -1,8 +1,11 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { upperFirst } from '../../util/helpers'
 
 interface HTMLExpandElement extends HTMLElement {
   _parent?: (Node & ParentNode & HTMLElement) | null
-  _initialStyle: {
+  _initialStyle?: {
     transition: string
     overflow: string
     height?: string | null
@@ -25,7 +28,7 @@ export default function (expandedParentClass = '', x = false) {
     },
 
     enter (el: HTMLExpandElement) {
-      const initialStyle = el._initialStyle
+      const initialStyle = el._initialStyle!
 
       el.style.setProperty('transition', 'none', 'important')
       // Hide overflow to account for collapsed margins in the calculated height
@@ -76,8 +79,8 @@ export default function (expandedParentClass = '', x = false) {
   }
 
   function resetStyles (el: HTMLExpandElement) {
-    const size = el._initialStyle[sizeProperty]
-    el.style.overflow = el._initialStyle.overflow
+    const size = el._initialStyle![sizeProperty]
+    el.style.overflow = el._initialStyle!.overflow
     if (size != null) el.style[sizeProperty] = size
     delete el._initialStyle
   }

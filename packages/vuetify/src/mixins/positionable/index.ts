@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import Vue from 'vue'
 import { filterObjectOnKeys } from '../../util/helpers'
 import { OptionsVue, VueConstructor } from 'vue/types/vue'

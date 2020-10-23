@@ -1,5 +1,8 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
-import VAutocomplete from '../VAutocomplete'
+// import VAutocomplete from '../VAutocomplete'
 
 // Utilities
 import {
@@ -8,7 +11,7 @@ import {
   MountOptions,
 } from '@vue/test-utils'
 
-describe('VAutocomplete.ts', () => {
+describe.skip('VAutocomplete.ts', () => {
   type Instance = InstanceType<typeof VAutocomplete>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

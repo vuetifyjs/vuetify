@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Mixins
 import Delayable from '../../mixins/delayable'
 import Toggleable from '../../mixins/toggleable'

@@ -10,7 +10,6 @@ module.exports = {
     'VDatePickerMonthTable',
     'VDatePickerTitle',
     'VDatePickerYears',
-    'VItem',
     'VLabel',
     'VMessages',
     'VPicker',

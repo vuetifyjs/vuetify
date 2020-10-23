@@ -1,6 +1,8 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import Vue, { VueConstructor } from 'vue'
 
-/* eslint-disable-next-line no-use-before-define */
 export type Toggleable<T extends string = 'value'> = VueConstructor<Vue & { isActive: boolean } & Record<T, any>>
 
 export function factory<T extends string = 'value'> (prop?: T, event?: string): Toggleable<T>
@@ -31,7 +33,7 @@ export function factory (prop = 'value', event = 'input') {
   })
 }
 
-/* eslint-disable-next-line no-redeclare */
+/* eslint-disable-next-line @typescript-eslint/no-redeclare */
 const Toggleable = factory()
 
 export default Toggleable

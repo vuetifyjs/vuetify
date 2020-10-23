@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Directives
 import Intersect from '../../directives/intersect'
 

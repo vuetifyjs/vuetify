@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
 import { VData } from '../VData'
 import VDataFooter from './VDataFooter'
@@ -216,7 +219,7 @@ export default mixins(
     },
     genEmpty (originalItemsLength: number, filteredItemsLength: number) {
       if (originalItemsLength === 0 && this.loading) {
-        const loading = this.$slots['loading'] || this.$vuetify.lang.t(this.loadingText)
+        const loading = this.$slots.loading || this.$vuetify.lang.t(this.loadingText)
         return this.genEmptyWrapper(loading)
       } else if (originalItemsLength === 0) {
         const noData = this.$slots['no-data'] || this.$vuetify.lang.t(this.noDataText)

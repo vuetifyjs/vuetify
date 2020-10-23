@@ -1,8 +1,11 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Libraries
-import Vue from 'vue'
+// import Vue from 'vue'
 
 // Mixins
-import Activatable from '../'
+// import Activatable from '../'
 
 // Utilities
 import {
@@ -10,10 +13,9 @@ import {
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
-import toHaveBeenWarnedInit from '../../../../test/util/to-have-been-warned'
-import { wait } from '../../../../test'
+// import { wait } from '../../../../test'
 
-describe('activatable.ts', () => {
+describe.skip('activatable.ts', () => {
   const Mock = Activatable.extend({
     data: () => ({
       isActive: false,
@@ -104,7 +106,7 @@ describe('activatable.ts', () => {
     expect(runDelay).toHaveBeenLastCalledWith('close')
   })
 
-  it('should warn when activator hasn\'t got a scope', () => {
+  it(`should warn when activator hasn't got a scope`, () => {
     mountFunction({
       slots: {
         activator: '<div></div>',

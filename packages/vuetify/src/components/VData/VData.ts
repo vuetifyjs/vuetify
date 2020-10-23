@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Helpers
 import { wrapInArray, sortItems, deepEqual, groupItems, searchItems, fillArray } from '../../util/helpers'
 import Vue, { VNode } from 'vue'
@@ -172,7 +175,7 @@ export default Vue.extend({
       return this.isGrouped ? this.groupItems(this.computedItems) : null
     },
     scopedProps (): DataScopeProps {
-      const props = {
+      return {
         sort: this.sort,
         sortArray: this.sortArray,
         group: this.group,
@@ -183,8 +186,6 @@ export default Vue.extend({
         groupedItems: this.groupedItems,
         originalItemsLength: this.items.length,
       }
-
-      return props
     },
     computedOptions (): DataOptions {
       return { ...this.options } as DataOptions

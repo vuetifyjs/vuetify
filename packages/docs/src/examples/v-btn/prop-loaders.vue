@@ -69,6 +69,31 @@
   </div>
 </template>
 
+<script>
+  export default {
+    data () {
+      return {
+        loader: null,
+        loading: false,
+        loading2: false,
+        loading3: false,
+        loading4: false,
+        loading5: false,
+      }
+    },
+    watch: {
+      loader () {
+        const l = this.loader
+        this[l] = !this[l]
+
+        setTimeout(() => (this[l] = false), 3000)
+
+        this.loader = null
+      },
+    },
+  }
+</script>
+
 <style>
   .custom-loader {
     animation: loader 1s infinite;
@@ -107,28 +132,3 @@
     }
   }
 </style>
-
-<script>
-  export default {
-    data () {
-      return {
-        loader: null,
-        loading: false,
-        loading2: false,
-        loading3: false,
-        loading4: false,
-        loading5: false,
-      }
-    },
-    watch: {
-      loader () {
-        const l = this.loader
-        this[l] = !this[l]
-
-        setTimeout(() => (this[l] = false), 3000)
-
-        this.loader = null
-      },
-    },
-  }
-</script>

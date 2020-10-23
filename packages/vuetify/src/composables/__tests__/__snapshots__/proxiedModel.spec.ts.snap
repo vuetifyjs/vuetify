@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useProxiedModel should always use prop value if defined 1`] = `
+<div>
+  bar,bar
+</div>
+`;
+
+exports[`useProxiedModel should always use prop value if defined 2`] = `
+<div>
+  bar,bar
+</div>
+`;
+
+exports[`useProxiedModel should always use prop value if defined 3`] = `
+<div>
+  internal,internal
+</div>
+`;
+
+exports[`useProxiedModel should switch to using prop when it is defined 1`] = `
+<div>
+  ,syncDefaultValue
+</div>
+`;
+
+exports[`useProxiedModel should switch to using prop when it is defined 2`] = `
+<div>
+  ,internal
+</div>
+`;
+
+exports[`useProxiedModel should switch to using prop when it is defined 3`] = `
+<div>
+  new,new
+</div>
+`;
+
+exports[`useProxiedModel should use default prop value as first value if defined 1`] = `
+<div>
+  propDefaultValue,syncDefaultValue
+</div>
+`;
+
+exports[`useProxiedModel should use default prop value as first value if defined 2`] = `
+<div>
+  propDefaultValue,internal
+</div>
+`;
+
+exports[`useProxiedModel should use internal value if prop not defined 1`] = `
+<div>
+  ,syncDefaultValue
+</div>
+`;
+
+exports[`useProxiedModel should use internal value if prop not defined 2`] = `
+<div>
+  ,internal
+</div>
+`;
+
+exports[`useProxiedModel transforms should transform prop value 1`] = `
+<div>
+  ["1","2","3"]
+</div>
+`;
+
+exports[`useProxiedModel transforms should use internal value if prop not defined 1`] = `
+<div>
+  []
+</div>
+`;
+
+exports[`useProxiedModel transforms should use internal value if prop not defined 2`] = `
+<div>
+  ["2","3","4"]
+</div>
+`;

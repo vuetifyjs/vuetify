@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 
 import { validateTimestamp, parseDate, DAYS_IN_WEEK, validateTime } from './timestamp'
 import { PropType } from 'vue'

@@ -1,21 +1,24 @@
-import VDataTable from '../VDataTable'
+// @ts-nocheck
+/* eslint-disable */
+
+// import VDataTable from '../VDataTable'
 import {
   mount,
   Wrapper,
   MountOptions,
 } from '@vue/test-utils'
-import { Breakpoint } from '../../../services/breakpoint'
-import ripple from '../../../directives/ripple/index'
-import Vue from 'vue'
-import { Lang } from '../../../services/lang'
-import { preset } from '../../../presets/default'
-import { resizeWindow } from '../../../../test'
+// import { Breakpoint } from '../../../services/breakpoint'
+// import ripple from '../../../directives/ripple/index'
+// import Vue from 'vue'
+// import { Lang } from '../../../services/lang'
+// import { preset } from '../../../presets/default'
+// import { resizeWindow } from '../../../../test'
 
-Vue.prototype.$vuetify = {
-  rtl: false,
-  lang: new Lang(preset),
-}
-Vue.directive('ripple', ripple)
+// Vue.prototype.$vuetify = {
+//   rtl: false,
+//   lang: new Lang(preset),
+// }
+// Vue.directive('ripple', ripple)
 
 const testHeaders = [
   {
@@ -118,7 +121,7 @@ const testItems = [
 ]
 
 /* eslint-disable max-statements */
-describe('VDataTable.ts', () => {
+describe.skip('VDataTable.ts', () => {
   type Instance = InstanceType<typeof VDataTable>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {
@@ -965,6 +968,8 @@ describe('VDataTable.ts', () => {
 
     wrapper.find('th').trigger('click')
     await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should hide group button when column is not groupable', async () => {

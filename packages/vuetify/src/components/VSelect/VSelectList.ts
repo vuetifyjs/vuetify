@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
 import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
 import VDivider from '../VDivider'
@@ -132,7 +135,7 @@ export default mixins(Colorable, Themeable).extend({
       const searchInput = (this.searchInput || '').toString().toLocaleLowerCase()
       const index = text.toLocaleLowerCase().indexOf(searchInput)
 
-      if (index < 0) return { start: '', middle: text, end: '' }
+      if (index < 0) return { start: text, middle: '', end: '' }
 
       const start = text.slice(0, index)
       const middle = text.slice(index, index + searchInput.length)

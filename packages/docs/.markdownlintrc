@@ -8,6 +8,7 @@
   "MD029": false,
   "MD033": {
     "allowed_elements": [
+      "acuity-calendar",
       "alert",
       "app-img",
       "backmatter",
@@ -16,7 +17,6 @@
       "breakpoints-table",
       "color-palette",
       "component-api",
-      "consulting-calendar",
       "contribute",
       "discovery-ad",
       "entry-ad",

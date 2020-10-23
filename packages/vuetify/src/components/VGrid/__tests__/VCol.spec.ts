@@ -1,8 +1,11 @@
-import Vue from 'vue'
-import { mount } from '@vue/test-utils'
-import VCol from '../VCol'
+// @ts-nocheck
+/* eslint-disable */
 
-describe('layout > col', () => {
+// import Vue from 'vue'
+import { mount } from '@vue/test-utils'
+// import VCol from '../VCol'
+
+describe.skip('layout > col', () => {
   it('should have default expected structure', async () => {
     const wrapper = mount(VCol)
 
@@ -89,7 +92,7 @@ describe('layout > col', () => {
     expect(wrapper.classes()).toHaveLength(6)
   })
 
-  it("should apply boolean breakpoint classes for 'sm', 'md', 'lg', 'xl' prop", async () => {
+  it(`should apply boolean breakpoint classes for 'sm', 'md', 'lg', 'xl' prop`, async () => {
     const wrapper = mount(VCol, {
       propsData: {
         sm: true,
@@ -108,7 +111,7 @@ describe('layout > col', () => {
     expect(wrapper.classes()).toHaveLength(5)
   })
 
-  it("should apply boolean breakpoint classes for 'sm', 'md', 'lg', 'xl' prop set to empty string", async () => {
+  it(`should apply boolean breakpoint classes for 'sm', 'md', 'lg', 'xl' prop set to empty string`, async () => {
     const wrapper = mount(VCol, {
       propsData: {
         sm: '',

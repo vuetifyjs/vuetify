@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import '../../styles/main.sass'
 
@@ -9,7 +12,7 @@ import { en } from '../../locale'
 // import mdi from '../../services/icons/presets/mdi'
 
 // Types
-import { VuetifyPreset } from 'vuetify/types/services/presets'
+import type { VuetifyPreset } from 'vuetify/types/services/presets'
 
 export const preset: VuetifyPreset = {
   breakpoint: {

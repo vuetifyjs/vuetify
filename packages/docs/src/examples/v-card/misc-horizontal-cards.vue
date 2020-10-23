@@ -70,7 +70,7 @@
 
                 <v-card-subtitle v-text="item.artist"></v-card-subtitle>
 
-                <v-card-action>
+                <v-card-actions>
                   <v-btn
                     v-if="item.artist === 'Ellie Goulding'"
                     class="ml-2 mt-3"
@@ -92,7 +92,7 @@
                   >
                     START RADIO
                   </v-btn>
-                </v-card-action>
+                </v-card-actions>
               </div>
 
               <v-avatar

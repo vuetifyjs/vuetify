@@ -1,7 +1,10 @@
-import Vue from 'vue'
+// @ts-nocheck
+/* eslint-disable */
+
+// import Vue from 'vue'
 
 // Components
-import VStepperStep from '../VStepperStep'
+// import VStepperStep from '../VStepperStep'
 
 // Utilities
 import {
@@ -10,18 +13,18 @@ import {
   MountOptions,
 } from '@vue/test-utils'
 
-Vue.prototype.$vuetify = {
-  icons: {
-    values: {
-      complete: 'mdi-check',
-    },
-  },
-}
+// Vue.prototype.$vuetify = {
+//   icons: {
+//     values: {
+//       complete: 'mdi-check',
+//     },
+//   },
+// }
 
 const tip = '[Vuetify] The v-stepper-step component must be used inside a v-stepper'
 const warning = '[Vue warn]: Injection "stepClick" not found'
 
-describe('VStepperStep.ts', () => {
+describe.skip('VStepperStep.ts', () => {
   type Instance = InstanceType<typeof VStepperStep>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

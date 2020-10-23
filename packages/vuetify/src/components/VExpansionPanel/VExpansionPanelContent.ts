@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
 import VExpansionPanel from './VExpansionPanel'
 import { VExpandTransition } from '../transitions'

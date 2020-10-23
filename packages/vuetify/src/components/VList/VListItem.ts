@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import './VListItem.sass'
 
@@ -45,8 +48,6 @@ export default baseMixins.extend<options>().extend({
     Ripple,
   },
 
-  inheritAttrs: false,
-
   inject: {
     isInGroup: {
       default: false,
@@ -61,6 +62,8 @@ export default baseMixins.extend<options>().extend({
       default: false,
     },
   },
+
+  inheritAttrs: false,
 
   props: {
     activeClass: {

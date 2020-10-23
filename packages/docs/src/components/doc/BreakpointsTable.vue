@@ -122,7 +122,7 @@
           device: 'large',
           code: 'lg',
           type: 'desktop',
-          range: '960px > < 1264px*',
+          range: '1264px > < 1904px*',
         },
         {
           icon: '$mdiTelevision',

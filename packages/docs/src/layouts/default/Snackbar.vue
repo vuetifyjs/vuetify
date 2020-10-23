@@ -1,8 +1,8 @@
 <template>
   <v-snackbar
+    v-model="value"
     :color="snackbar.color"
     :timeout="-1"
-    :value="value"
     top
   >
     <div class="d-flex">
@@ -18,7 +18,7 @@
       />
     </div>
 
-    <template v-slot:action="{ attrs }">
+    <template #action="{ attrs }">
       <v-btn
         class="mr-2"
         text
@@ -43,7 +43,6 @@
 
 <script>
   // Utilities
-  import { differenceInDays } from 'date-fns'
   import { get, sync } from 'vuex-pathify'
   import { localeLookup } from '@/i18n/util'
 
@@ -55,7 +54,10 @@
         'snackbar',
         'value',
       ]),
-      last: sync('user/last@notification'),
+      ...sync('user', [
+        'notifications',
+        'last@notification',
+      ]),
       locale: get('route/params@locale'),
       bind () {
         const { action: href } = this.snackbar
@@ -63,11 +65,6 @@
         return href.startsWith('http')
           ? { href, target: '_blank', rel: 'noopener' }
           : { to: `/${localeLookup(this.locale)}${href}` }
-      },
-      hasRecentlyViewed () {
-        if (!this.last) return false
-
-        return differenceInDays(Date.now(), Number(this.last)) < 1
       },
     },
 
@@ -80,8 +77,8 @@
       value (val) {
         if (val) return
 
-        this.unotifications.push(this.snackbar.slug)
-        this.last = Date.now()
+        this.notifications.push(this.snackbar.slug)
+        this.notification = Date.now()
       },
     },
   }

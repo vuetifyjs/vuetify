@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 declare module 'vuetify/lib' {
   // eslint-disable-next-line import/no-duplicates
   import { VueConstructor, DirectiveOptions } from 'vue'

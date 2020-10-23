@@ -61,9 +61,9 @@ This is the default icon font for Vuetify. You can include it through a CDN:
 Or as a local dependency:
 
 ```bash
-$ yarn add @mdi/js -D
+$ yarn add @mdi/font -D
 // OR
-$ npm install @mdi/js -D
+$ npm install @mdi/font -D
 ```
 
 ```js

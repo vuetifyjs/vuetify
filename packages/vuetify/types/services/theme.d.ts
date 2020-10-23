@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 export interface Theme {
   dark: boolean
   disable: boolean

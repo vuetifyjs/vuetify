@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import Vue from 'vue'
 import { VueConstructor } from 'vue/types/vue'
 import { consoleWarn } from '../../util/console'

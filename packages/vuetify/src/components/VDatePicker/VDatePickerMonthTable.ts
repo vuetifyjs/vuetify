@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Mixins
 import DatePickerTable from './mixins/date-picker-table'
 

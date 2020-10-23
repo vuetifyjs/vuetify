@@ -1,18 +1,17 @@
-import { VNodeDirective } from 'vue/types/vnode'
-import { DirectiveOptions } from 'vue'
+import type { DirectiveBinding } from 'vue'
 
-interface ScrollVNodeDirective extends Omit<VNodeDirective, 'modifiers'> {
+interface ScrollDirectiveBinding extends Omit<DirectiveBinding, 'modifiers'> {
   value: EventListener | {
     handler: EventListener
-    options?: boolean | AddEventListenerOptions
-  } | EventListenerObject & { options?: boolean | AddEventListenerOptions }
+    options?: AddEventListenerOptions
+  } | EventListenerObject & { options?: AddEventListenerOptions }
   modifiers?: {
     self?: boolean
   }
 }
 
-function inserted (el: HTMLElement, binding: ScrollVNodeDirective) {
-  const { self = false } = binding.modifiers || {}
+function mounted (el: HTMLElement, binding: ScrollDirectiveBinding) {
+  const { self = false } = binding.modifiers ?? {}
   const value = binding.value
   const options = (typeof value === 'object' && value.options) || { passive: true }
   const handler = typeof value === 'function' || 'handleEvent' in value ? value : value.handler
@@ -35,7 +34,7 @@ function inserted (el: HTMLElement, binding: ScrollVNodeDirective) {
   }
 }
 
-function unbind (el: HTMLElement) {
+function unmounted (el: HTMLElement) {
   if (!el._onScroll) return
 
   const { handler, options, target = el } = el._onScroll
@@ -44,9 +43,17 @@ function unbind (el: HTMLElement) {
   delete el._onScroll
 }
 
+function updated (el: HTMLElement, binding: ScrollDirectiveBinding) {
+  if (binding.value === binding.oldValue) return
+
+  unmounted(el)
+  mounted(el, binding)
+}
+
 export const Scroll = {
-  inserted,
-  unbind,
-} as DirectiveOptions
+  mounted,
+  unmounted,
+  updated,
+}
 
 export default Scroll

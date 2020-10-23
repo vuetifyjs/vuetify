@@ -1,5 +1,8 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
-import VLazy from '../VLazy'
+// import VLazy from '../VLazy'
 
 // Utilities
 import {
@@ -8,7 +11,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VLazy.ts', () => {
+describe.skip('VLazy.ts', () => {
   type Instance = InstanceType<typeof VLazy>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
