@@ -23,7 +23,9 @@ describe('v-scroll', () => {
     const value = () => {}
     const targetElement = { addEventListener: jest.fn(), removeEventListener: jest.fn() } as any as Element
     const el = {} as HTMLElement
-    const querySelector = jest.spyOn(window.document, 'querySelector').mockImplementation(selector => selector === '.selector' ? targetElement : undefined)
+    const querySelector = jest.spyOn(window.document, 'querySelector').mockImplementation(
+      selector => selector === '.selector' ? targetElement : undefined
+    )
 
     Scroll.mounted(el, { value, arg: '.selector' } as any, null, null)
     expect(targetElement.addEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })

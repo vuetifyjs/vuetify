@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import type { TouchStoredHandlers } from './directives/touch'
 
 declare global {

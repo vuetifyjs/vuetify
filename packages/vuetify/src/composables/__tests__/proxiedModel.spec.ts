@@ -43,8 +43,6 @@ describe('useProxiedModel', () => {
 
     await wrapper.trigger('click')
     expect(wrapper.html()).toMatchSnapshot()
-
-    // expect('useProxiedModel target prop "foo" must have a default value of undefined').toHaveBeenThrown()
   })
 
   it('should always use prop value if defined', async () => {
@@ -100,7 +98,7 @@ describe('useProxiedModel', () => {
       setup (props, ctx) {
         const proxiedModel = useProxiedModel(props, ctx, 'foo', [],
           arr => {
-            return (arr || []).map(String)
+            return (arr ?? []).map(String)
           },
           arr => {
             return arr.map(v => parseInt(v, 10))
