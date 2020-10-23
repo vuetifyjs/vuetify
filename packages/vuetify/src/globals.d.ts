@@ -6,10 +6,6 @@ declare global {
   }
 
   interface Element {
-    getElementsByClassName(classNames: string): NodeListOf<HTMLElement>
-  }
-
-  interface HTMLElement {
     _clickOutside?: EventListenerOrEventListenerObject
     _onResize?: {
       handler: () => void
@@ -40,6 +36,8 @@ declare global {
     _touchHandlers?: {
       [_uid: number]: TouchStoredHandlers
     }
+
+    getElementsByClassName(classNames: string): NodeListOf<HTMLElement>
   }
 
   interface WheelEvent {

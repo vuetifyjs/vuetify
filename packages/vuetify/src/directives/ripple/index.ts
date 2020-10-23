@@ -5,11 +5,13 @@
 import './VRipple.sass'
 
 // Utilities
-import { consoleWarn } from '../../util/console'
-import { keyCodes } from '../../util/helpers'
+import { isObject, keyCodes } from '../../util/helpers'
 
 // Types
-import { VNode, VNodeDirective } from 'vue'
+import {
+  DirectiveBinding,
+  ObjectDirective,
+} from 'vue'
 
 type VuetifyRippleEvent = MouseEvent | TouchEvent | KeyboardEvent
 
@@ -28,6 +30,14 @@ export interface RippleOptions {
   class?: string
   center?: boolean
   circle?: boolean
+}
+
+interface RippleDirectiveBinding extends Omit<DirectiveBinding, 'modifiers' | 'value'> {
+  value?: boolean | { class: string }
+  modifiers: {
+    center?: boolean
+    circle?: boolean
+  }
 }
 
 function isTouchEvent (e: VuetifyRippleEvent): e is TouchEvent {
@@ -80,7 +90,7 @@ const ripples = {
     el: HTMLElement,
     value: RippleOptions = {}
   ) {
-    if (!el._ripple || !el._ripple.enabled) {
+    if (!el?._ripple?.enabled) {
       return
     }
 
@@ -124,7 +134,7 @@ const ripples = {
   },
 
   hide (el: HTMLElement | null) {
-    if (!el || !el._ripple || !el._ripple.enabled) return
+    if (!el?._ripple?.enabled) return
 
     const ripples = el.getElementsByClassName('v-ripple__animation')
 
@@ -161,8 +171,8 @@ function isRippleEnabled (value: any): value is true {
 
 function rippleShow (e: VuetifyRippleEvent) {
   const value: RippleOptions = {}
-  const element = e.currentTarget as HTMLElement
-  if (!element || !element._ripple || element._ripple.touched) return
+  const element = e.currentTarget as HTMLElement | undefined
+  if (!element?._ripple || element._ripple.touched) return
   if (isTouchEvent(e)) {
     element._ripple.touched = true
     element._ripple.isTouch = true
@@ -249,23 +259,22 @@ function keyboardRippleHide (e: KeyboardEvent) {
   rippleHide(e)
 }
 
-function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boolean) {
-  const enabled = isRippleEnabled(binding.value)
+function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnabled: boolean) {
+  const { value, modifiers } = binding
+  const enabled = isRippleEnabled(value)
+
   if (!enabled) {
     ripples.hide(el)
   }
+
   el._ripple = el._ripple || {}
   el._ripple.enabled = enabled
-  const value = binding.value || {}
-  if (value.center) {
-    el._ripple.centered = true
+  el._ripple.centered = modifiers.center
+  el._ripple.circle = modifiers.circle
+  if (isObject(value) && value.class) {
+    el._ripple.class = value.class
   }
-  if (value.class) {
-    el._ripple.class = binding.value.class
-  }
-  if (value.circle) {
-    el._ripple.circle = value.circle
-  }
+
   if (enabled && !wasEnabled) {
     el.addEventListener('touchstart', rippleShow, { passive: true })
     el.addEventListener('touchend', rippleHide, { passive: true })
@@ -299,27 +308,16 @@ function removeListeners (el: HTMLElement) {
   el.removeEventListener('dragstart', rippleHide)
 }
 
-function directive (el: HTMLElement, binding: VNodeDirective, node: VNode) {
+function mounted (el: HTMLElement, binding: DirectiveBinding) {
   updateRipple(el, binding, false)
-
-  if (process.env.NODE_ENV === 'development') {
-    // warn if an inline element is used, waiting for el to be in the DOM first
-    node.context && node.context.$nextTick(() => {
-      const computed = window.getComputedStyle(el)
-      if (computed && computed.display === 'inline') {
-        const context = (node as any).fnOptions ? [(node as any).fnOptions, node.context] : [node.componentInstance]
-        consoleWarn('v-ripple can only be used on block-level elements', ...context)
-      }
-    })
-  }
 }
 
-function unbind (el: HTMLElement) {
+function unmounted (el: HTMLElement) {
   delete el._ripple
   removeListeners(el)
 }
 
-function update (el: HTMLElement, binding: VNodeDirective) {
+function updated (el: HTMLElement, binding: DirectiveBinding) {
   if (binding.value === binding.oldValue) {
     return
   }
@@ -328,10 +326,10 @@ function update (el: HTMLElement, binding: VNodeDirective) {
   updateRipple(el, binding, wasEnabled)
 }
 
-export const Ripple = {
-  bind: directive,
-  unbind,
-  update,
+export const Ripple: ObjectDirective = {
+  mounted,
+  unmounted,
+  updated,
 }
 
 export default Ripple

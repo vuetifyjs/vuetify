@@ -1,123 +1,67 @@
-// @ts-nocheck
-/* eslint-disable */
-
-// Libraries
-// import Vue from 'vue'
+import { mount } from '@vue/test-utils'
+import { defineComponent } from 'vue'
 
 // Directives
-// import Ripple from '../'
+import Ripple from '../'
 
 // Utilities
-import {
-  mount,
-} from '@vue/test-utils'
+import { keyCodes } from '@/util/helpers'
 
-describe.skip('ripple.ts', () => {
-  let mountFunction: (options?: object) => Wrapper<Vue>
+const testComponent = defineComponent({
+  directives: { Ripple },
+  template: '<div class="a" v-ripple />',
+})
 
-  beforeEach(() => {
-    jest.useFakeTimers()
+describe('v-ripple', () => {
+  it('with no value should be enabled', () => {
+    const wrapper = mount(testComponent)
 
-    mountFunction = (options = {}) => {
-      const testComponent = Vue.component('test', {
-        directives: {
-          Ripple,
-        },
-        render (h) {
-          const data = {
-            directives: [{
-              name: 'ripple',
-            }],
-          }
-          return h('div', data)
-        },
-      })
-
-      return mount(testComponent, options)
-    }
+    expect(wrapper.element._ripple?.enabled).toBe(true)
   })
 
-  afterEach(() => {
-    jest.useRealTimers()
-  })
-
-  it('should render element with ripple enabled if no value is passed', () => {
-    const wrapper = mountFunction()
-
-    const div = wrapper.find('div')
-    expect(div.element._ripple.enabled).toBe(true)
-  })
-
-  it('should update element property reactively', () => {
-    const testComponent = Vue.component('test', {
-      directives: {
-        Ripple,
-      },
+  it('should update element property reactively', async () => {
+    const wrapper = mount({
+      directives: { Ripple },
       props: {
-        ripple: Boolean,
-        default: () => false,
+        ripple: {
+          type: Boolean,
+          default: true,
+        },
       },
-      render (h) {
-        const data = {
-          directives: [{
-            name: 'ripple',
-            value: this.ripple,
-          }],
-        }
-        return h('div', data)
-      },
+      template: '<div class="a" v-ripple="ripple" />',
     })
+    const el = wrapper.element
 
-    const wrapper = mount(testComponent, {
-      propsData: {
-        ripple: true,
-      },
-    })
+    expect(el._ripple?.enabled).toBe(true)
 
-    const div = wrapper.find('div')
-    expect(div.element._ripple.enabled).toBe(true)
+    await wrapper.setProps({ ripple: false })
+    expect(el._ripple?.enabled).toBe(false)
 
-    wrapper.setProps({ ripple: false })
-    expect(div.element._ripple.enabled).toBe(false)
-
-    wrapper.setProps({ ripple: true })
-    expect(div.element._ripple.enabled).toBe(true)
+    await wrapper.setProps({ ripple: true })
+    expect(el._ripple?.enabled).toBe(true)
   })
 
   it('should trigger ripple on mousedown', () => {
-    const wrapper = mountFunction()
+    jest.useFakeTimers()
+    const wrapper = mount(testComponent)
 
-    const mousedownEvent = new MouseEvent('mousedown', { detail: 1 })
+    const mousedownEvent = new MouseEvent('mousedown')
     wrapper.element.dispatchEvent(mousedownEvent)
 
     expect(wrapper.find('.v-ripple__container').exists()).toBe(true)
 
-    const mouseupEvent = new MouseEvent('mouseup', { detail: 1 })
+    const mouseupEvent = new MouseEvent('mouseup')
     wrapper.element.dispatchEvent(mouseupEvent)
 
     jest.runAllTimers()
     expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
   })
 
-  it('should trigger ripple on enter key press', () => {
-    const wrapper = mountFunction()
+  it.each(['enter', 'space'] as const)('should trigger ripple on %s key press', key => {
+    jest.useFakeTimers()
+    const wrapper = mount(testComponent)
 
-    const keydownEvent = new KeyboardEvent('keydown', { keyCode: 13 })
-    wrapper.element.dispatchEvent(keydownEvent)
-
-    expect(wrapper.find('.v-ripple__container').exists()).toBe(true)
-
-    const keyupEvent = new KeyboardEvent('keyup')
-    wrapper.element.dispatchEvent(keyupEvent)
-
-    jest.runAllTimers()
-    expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
-  })
-
-  it('should trigger ripple on space key press', () => {
-    const wrapper = mountFunction()
-
-    const keydownEvent = new KeyboardEvent('keydown', { keyCode: 32 })
+    const keydownEvent = new KeyboardEvent('keydown', { keyCode: keyCodes[key] })
     wrapper.element.dispatchEvent(keydownEvent)
 
     expect(wrapper.find('.v-ripple__container').exists()).toBe(true)
