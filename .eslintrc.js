@@ -27,10 +27,11 @@ module.exports = {
     // allow paren-less arrow functions
     'arrow-parens': ['error', 'as-needed'],
     // set maximum line characters
-    'max-len': ['error', 140, 4, {
+    'max-len': ['error', {
+      code: 140,
       ignoreUrls: true,
       ignoreTemplateLiterals: true,
-      ignoreStrings: true,
+      ignoreTrailingComments: true,
     }],
     'max-statements': ['error', 24],
     quotes: ['error', 'single', {

@@ -5,6 +5,6 @@ module.exports = {
   name: 'Vuetify',
   displayName: 'Vuetify',
   setupFiles: [
-    'jest-canvas-mock'
-  ]
+    'jest-canvas-mock',
+  ],
 }
