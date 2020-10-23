@@ -29,7 +29,7 @@ import { getSlot } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
-import { Route } from 'vue-router'
+// import { Route } from 'vue-router'
 
 const baseMixins = mixins(
   BindsAttrs,

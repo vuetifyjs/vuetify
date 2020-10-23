@@ -65,8 +65,6 @@
     "emitDecoratorMetadata": true             /* Enables experimental support for emitting type metadata for decorators. */
   },
   "exclude": [
-    "**/*.spec.ts",
-    "**/*.spec.js",
     "node_modules"
   ]
 }

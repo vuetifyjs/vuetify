@@ -1,33 +1,24 @@
-// import { VNode, VNodeDirective } from 'vue/types'
 import type { VuetifyIcon } from 'vuetify/types/services/icons'
 import type { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
+import type { ComponentInternalInstance } from 'vue'
+
+import { defineComponent, h } from 'vue'
 
 export function createSimpleFunctional (
   c: string,
   el = 'div',
   name?: string
 ) {
-  return Vue.extend({
-    name: name || c.replace(/__/g, '-'),
+  return defineComponent({
+    name: name ?? c.replace(/__/g, '-'),
 
-    functional: true,
-
-    render (h, { data, children }): VNode {
-      data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
-
-      return h(el, data, children)
+    setup (props, { attrs, slots }) {
+      return () => h(el, {
+        class: c,
+        ...attrs,
+      }, slots.default?.())
     },
   })
-}
-
-export type BindingConfig = Pick<VNodeDirective, 'arg' | 'modifiers' | 'value'>
-export function directiveConfig (binding: BindingConfig, defaults = {}): VNodeDirective {
-  return {
-    ...defaults,
-    ...binding.modifiers,
-    value: binding.arg,
-    ...(binding.value || {}),
-  }
 }
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
@@ -179,7 +170,7 @@ export const keyCodes = Object.freeze({
 
 // This remaps internal names like '$cancel' or '$vuetify.icons.cancel'
 // to the current name or component for that icon.
-export function remapInternalIcon (vm: Vue, iconName: string): VuetifyIcon {
+export function remapInternalIcon (vm: ComponentInternalInstance, iconName: string): VuetifyIcon {
   if (!iconName.startsWith('$')) {
     return iconName
   }
@@ -189,7 +180,7 @@ export function remapInternalIcon (vm: Vue, iconName: string): VuetifyIcon {
 
   // Now look up icon indirection name,
   // e.g. '$vuetify.icons.values.cancel'
-  return getObjectValueByPath(vm, iconPath, iconName)
+  return getObjectValueByPath(vm.ctx, iconPath, iconName)
 }
 
 export function keys<O> (o: O) {
@@ -210,7 +201,7 @@ export const camelize = (str: string): string => {
 export function arrayDiff (a: any[], b: any[]): any[] {
   const diff: any[] = []
   for (let i = 0; i < b.length; i++) {
-    if (a.indexOf(b[i]) < 0) diff.push(b[i])
+    if (!a.includes(b[i])) diff.push(b[i])
   }
   return diff
 }

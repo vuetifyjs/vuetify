@@ -1,5 +1,6 @@
 import { wrapInArray } from './util/helpers'
-import { InjectionKey, inject, App, ExtractPropTypes, getCurrentInstance, Prop } from 'vue'
+import type { InjectionKey, App, ExtractPropTypes, Prop } from 'vue'
+import { inject, getCurrentInstance } from 'vue'
 
 type MakeFactoryFunctions<T> = {
   [K in keyof T]: T[K] extends (infer E)[]
@@ -11,6 +12,7 @@ type MakeFactoryFunctions<T> = {
         : T[K]
 }
 
+// @ts-expect-error
 type ExtractDefaultTypes<T> = Partial<MakeFactoryFunctions<Required<ExtractPropTypes<T>>>>
 
 export interface VuetifyComponentDefaults {}
@@ -64,6 +66,7 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
     }
 
     app.provide(VuetifySymbol, vuetify)
+    app.config.globalProperties.$vuetify = vuetify
   }
 
   return { install }
@@ -74,7 +77,7 @@ const isFactory = (type: any) => {
   return wrapInArray(type).find((t: any) => t === Array || t === Object)
 }
 
-export const makeProps = <P extends Record<string, Prop<any>>>(props: P) => {
+export function makeProps<P extends Record<string, Prop<any>>> (props: P) {
   for (const key in props) {
     const propOptions = (props[key] as any)
 
@@ -84,7 +87,7 @@ export const makeProps = <P extends Record<string, Prop<any>>>(props: P) => {
   return props
 }
 
-const generateDefault = (propName: string, localDefault: any, type: any) => {
+function generateDefault (propName: string, localDefault: any, type: any) {
   return () => {
     const vm = getCurrentInstance()
 
@@ -102,10 +105,7 @@ const generateDefault = (propName: string, localDefault: any, type: any) => {
 }
 
 // TODO: Fix typings and shit
-const getGlobalDefault = <
-  C extends string,
-  P extends string
->(component: C, prop: P) => {
+function getGlobalDefault<C extends string, P extends string> (component: C, prop: P) {
   const vuetify = useVuetify()
   const key = component as keyof VuetifyComponentDefaults
   const defaults = vuetify.defaults[key] as any

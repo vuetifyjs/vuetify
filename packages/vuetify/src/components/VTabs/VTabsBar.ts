@@ -15,7 +15,7 @@ import SSRBootable from '../../mixins/ssr-bootable'
 import mixins from '../../util/mixins'
 
 // Types
-import { Route } from 'vue-router'
+// import { Route } from 'vue-router'
 import { VNode } from 'vue'
 
 type VTabInstance = InstanceType<typeof VTab>
