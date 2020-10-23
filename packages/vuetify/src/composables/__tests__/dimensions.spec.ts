@@ -89,15 +89,15 @@ describe('dimensions.ts', () => {
     })
   })
 
-  describe('dimensionsProps', () => {
+  describe('makeDimensionsProps', () => {
     it('should have correct structure', () => {
-      expect(dimensionsFactory('width').dimensionsProps()).toEqual({
+      expect(dimensionsFactory('width').makeDimensionsProps()).toEqual({
         width: {
           type: [Number, String],
         },
       })
 
-      expect(dimensionsFactory('width', 'minWidth').dimensionsProps()).toEqual({
+      expect(dimensionsFactory('width', 'minWidth').makeDimensionsProps()).toEqual({
         width: {
           type: [Number, String],
         },
@@ -106,7 +106,7 @@ describe('dimensions.ts', () => {
         },
       })
 
-      expect(dimensionsFactory().dimensionsProps()).toEqual({
+      expect(dimensionsFactory().makeDimensionsProps()).toEqual({
         height: {
           type: [Number, String],
         },
@@ -129,14 +129,14 @@ describe('dimensions.ts', () => {
     })
 
     it('should allow setting default values', () => {
-      expect(dimensionsFactory('width').dimensionsProps({ width: 100 })).toEqual({
+      expect(dimensionsFactory('width').makeDimensionsProps({ width: 100 })).toEqual({
         width: {
           type: [Number, String],
           default: 100,
         },
       })
 
-      expect(dimensionsFactory('width').dimensionsProps({ width: '200' })).toEqual({
+      expect(dimensionsFactory('width').makeDimensionsProps({ width: '200' })).toEqual({
         width: {
           type: [Number, String],
           default: '200',
