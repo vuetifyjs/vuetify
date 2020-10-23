@@ -184,10 +184,13 @@ export default baseMixins.extend({
     },
     show () {
       !this.fullscreen && !this.hideOverlay && this.genOverlay()
+      // Double nextTick to wait for lazy content to be generated
       this.$nextTick(() => {
-        this.previousActiveElement = document.activeElement as HTMLElement
-        this.$refs.content.focus()
-        this.bind()
+        this.$nextTick(() => {
+          this.previousActiveElement = document.activeElement as HTMLElement
+          this.$refs.content.focus()
+          this.bind()
+        })
       })
     },
     bind () {
