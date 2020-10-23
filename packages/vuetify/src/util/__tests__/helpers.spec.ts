@@ -184,7 +184,7 @@ describe('helpers', () => {
     expect(getPropertyFromItem(obj, 'c.0')).toEqual(2)
     expect(getPropertyFromItem(obj, 'c.2.d')).toEqual('d')
     expect(getPropertyFromItem(obj, 'c.2.d.x', 'fallback')).toEqual('fallback')
-    expect(getPropertyFromItem(obj, o => o.a.b + o.c[0])).toEqual(3)
+    expect(getPropertyFromItem(obj, o => +o.a.b + +o.c[0])).toEqual(3)
     expect(getPropertyFromItem(obj, ['c', 2, 'd'])).toEqual('d')
     expect(getPropertyFromItem(obj, 'x.y')).toEqual('comp')
     expect(getPropertyFromItem(obj, ['x', 'y'])).toEqual('nested')

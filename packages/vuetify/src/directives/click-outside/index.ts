@@ -1,4 +1,4 @@
-import { DirectiveBinding } from 'vue'
+import type { DirectiveBinding } from 'vue'
 
 interface ClickOutsideBindingArgs {
   handler: (e: Event) => void
@@ -21,9 +21,7 @@ function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirec
 
   // The include element callbacks below can be expensive
   // so we should avoid calling them when we're not active.
-  // Explicitly check for false to allow fallback compatibility
-  // with non-toggleable components
-  if (!e || isActive(e) === false) return
+  if (!e || !isActive(e)) return
 
   // Check if additional elements were passed to be included in check
   // (click must be outside all included elements, if any)
@@ -52,7 +50,7 @@ export const ClickOutside = {
     // iOS does not recognize click events on document
     // or body, this is the entire purpose of the v-app
     // component and [data-app], stop removing this
-    const app = document.querySelector('[data-app]') ||
+    const app = document.querySelector('[data-app]') ??
       document.body // This is only for unit tests
     app.addEventListener('click', onClick, true)
     el._clickOutside = onClick
@@ -61,9 +59,9 @@ export const ClickOutside = {
   unmounted (el: HTMLElement) {
     if (!el._clickOutside) return
 
-    const app = document.querySelector('[data-app]') ||
+    const app = document.querySelector('[data-app]') ??
       document.body // This is only for unit tests
-    app && app.removeEventListener('click', el._clickOutside, true)
+    app?.removeEventListener('click', el._clickOutside, true)
     delete el._clickOutside
   },
 }

@@ -2,9 +2,9 @@
 import VApp from '../VApp'
 
 // Utilities
+import type { VueWrapper } from '@vue/test-utils'
 import {
   mount,
-  VueWrapper,
 } from '@vue/test-utils'
 
 describe('VApp', () => {

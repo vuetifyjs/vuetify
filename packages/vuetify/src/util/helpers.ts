@@ -259,7 +259,7 @@ export function sortItems<T extends any = any> (
         [sortA, sortB] = [sortB, sortA]
       }
 
-      if (customSorters && customSorters[sortKey]) {
+      if (customSorters?.[sortKey]) {
         const customResult = customSorters[sortKey](sortA, sortB)
 
         if (!customResult) continue

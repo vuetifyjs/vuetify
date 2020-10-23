@@ -1,5 +1,5 @@
 // Types
-import {
+import type {
   DirectiveBinding,
   ObjectDirective,
 } from 'vue'

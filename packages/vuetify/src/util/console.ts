@@ -70,7 +70,7 @@ function formatComponentName (vm: any, includeFile?: boolean): string {
   const file = options.__file
   if (!name && file) {
     const match = file.match(/([^/\\]+)\.vue$/)
-    name = match && match[1]
+    name = match?.[1]
   }
 
   return (
