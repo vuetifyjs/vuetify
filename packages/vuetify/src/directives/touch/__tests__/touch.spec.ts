@@ -1,30 +1,25 @@
 // Directives
 import Touch from '../'
 
-// Libraries
-import {
-  defineComponent,
-  withDirectives,
-  h,
-  createApp,
-  DirectiveBinding
-} from 'vue'
-
 // Types
-import { TouchValue } from '../../../../types'
+import { nextTick } from 'vue'
+import type { TouchValue } from '@/../types'
 
 // Utilities
-import { touch } from '../../../../test'
+import { mount } from '@vue/test-utils'
+import { touch } from '@/../test'
 
-describe('touch.ts', () => {
-  const el = document.createElement('div')
-  const mountFunction = (value: TouchValue): HTMLElement => {
-    const Test = defineComponent(() => () => withDirectives(h('div', { class: 'test' }), [ [ Touch, value ] ]))
-    const app = createApp()
+describe('v-touch', () => {
+  const mountFunction = (value: TouchValue): Element => {
+    const wrapper = mount({
+      directives: { Touch },
+      props: {
+        value: Object,
+      },
+      template: '<div class="test" v-touch="value" />',
+    }, { props: { value } })
 
-    app.mount(Test, el)
-
-    return el.querySelector('.test')
+    return wrapper.element
   }
 
   it('should call directive handlers', () => {
@@ -85,9 +80,23 @@ describe('touch.ts', () => {
 
   it('should unmount', async () => {
     const start = jest.fn()
-    const el = mountFunction({ start })
+    const wrapper = mount({
+      directives: { Touch },
+      props: {
+        value: Object,
+        bound: Boolean,
+      },
+      template: '<div v-if="bound" class="test" v-touch="value" /><div v-else class="test" />',
+    }, {
+      props: {
+        value: { start },
+        bound: true,
+      },
+    })
+    const el = wrapper.element
 
-    Touch.unmounted(el, { value: {} } as DirectiveBinding, h('div'), null)
+    await nextTick()
+    await wrapper.setProps({ bound: false })
 
     touch(el).start(0, 0)
     expect(start.mock.calls).toHaveLength(0)

@@ -1,14 +1,12 @@
-// Setup
-import {
+// Types
+import type {
   DirectiveBinding,
   ObjectDirective,
 } from 'vue'
-
-// Types
-import {
+import type {
   TouchHandlers,
   TouchValue,
-  TouchWrapper
+  TouchWrapper,
 } from 'vuetify/types'
 
 // Utilities
@@ -20,7 +18,7 @@ export interface TouchStoredHandlers {
   touchmove: (e: TouchEvent) => void
 }
 
-interface TouchDirectiveBinding extends DirectiveBinding {
+interface TouchDirectiveBinding extends Omit<DirectiveBinding, 'value'> {
   value?: TouchValue
 }
 
@@ -47,8 +45,7 @@ function touchstart (event: TouchEvent, wrapper: TouchWrapper) {
   wrapper.touchstartX = touch.clientX
   wrapper.touchstartY = touch.clientY
 
-  wrapper.start &&
-    wrapper.start(Object.assign(event, wrapper))
+  wrapper.start?.({ ...event, ...wrapper })
 }
 
 function touchend (event: TouchEvent, wrapper: TouchWrapper) {
@@ -56,8 +53,7 @@ function touchend (event: TouchEvent, wrapper: TouchWrapper) {
   wrapper.touchendX = touch.clientX
   wrapper.touchendY = touch.clientY
 
-  wrapper.end &&
-    wrapper.end(Object.assign(event, wrapper))
+  wrapper.end?.({ ...event, ...wrapper })
 
   handleGesture(wrapper)
 }
@@ -67,10 +63,10 @@ function touchmove (event: TouchEvent, wrapper: TouchWrapper) {
   wrapper.touchmoveX = touch.clientX
   wrapper.touchmoveY = touch.clientY
 
-  wrapper.move && wrapper.move(Object.assign(event, wrapper))
+  wrapper.move?.({ ...event, ...wrapper })
 }
 
-function createHandlers (value: TouchHandlers): TouchStoredHandlers {
+function createHandlers (value: TouchHandlers = {}): TouchStoredHandlers {
   const wrapper = {
     touchstartX: 0,
     touchstartY: 0,
@@ -97,34 +93,36 @@ function createHandlers (value: TouchHandlers): TouchStoredHandlers {
 }
 
 function mounted (el: HTMLElement, binding: TouchDirectiveBinding) {
-  const value = binding.value!
-  const target = value.parent ? el.parentElement : el
-  const options = value.options || { passive: true }
+  const value = binding.value
+  const target = value?.parent ? el.parentElement : el
+  const options = value?.options ?? { passive: true }
+  const uid = binding.instance?.$.uid // TODO: use custom uid generator
 
-  // Needed to pass unit tests
-  if (!target) return
+  if (!target || !uid) return
 
-  const handlers = createHandlers(binding.value!)
+  const handlers = createHandlers(binding.value)
 
-  target._touch = handlers
+  target._touchHandlers = target._touchHandlers ?? Object.create(null)
+  target._touchHandlers![uid] = handlers
 
   keys(handlers).forEach(eventName => {
-    target.addEventListener(eventName, handlers[eventName] as EventListener, options)
+    target.addEventListener(eventName, handlers[eventName], options)
   })
 }
 
 function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
-  const target = binding.value!.parent ? el.parentElement : el
+  const target = binding.value?.parent ? el.parentElement : el
+  const uid = binding.instance?.$.uid
 
-  if (!target || !target._touch) return
+  if (!target?._touchHandlers || !uid) return
 
-  const handlers = target._touch
+  const handlers = target._touchHandlers[uid]
 
   keys(handlers).forEach(eventName => {
     target.removeEventListener(eventName, handlers[eventName])
   })
 
-  delete target._touch
+  delete target._touchHandlers[uid]
 }
 
 export const Touch: ObjectDirective = {
