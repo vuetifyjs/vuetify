@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 /* eslint-disable no-new */
 import Vue from 'vue'
 import Vuetify, { colors } from 'vuetify/lib'

@@ -1,18 +1,21 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
-import VListItemAction from '../VListItemAction'
+// import VListItemAction from '../VListItemAction'
 
 // Utilities
-import Vue from 'vue'
+// import Vue from 'vue'
 import {
   mount,
   Wrapper,
 } from '@vue/test-utils'
-import { functionalContext } from '../../../../test'
+// import { functionalContext } from '../../../../test'
 
 // Types
-import { ExtractVue } from '../../../util/mixins'
+// import { ExtractVue } from '../../../util/mixins'
 
-describe('VListItemAction.ts', () => {
+describe.skip('VListItemAction.ts', () => {
   type Instance = ExtractVue<typeof VListItemAction>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

@@ -75,7 +75,9 @@ describe('v-scroll', () => {
   })
 
   it('should not fail when unbinding element without _onScroll', () => {
-    Scroll.unmounted({} as HTMLElement, null, null, null)
+    expect(() => {
+      Scroll.unmounted({} as HTMLElement, null, null, null)
+    }).not.toThrow()
   })
 
   it('should call the callback on scroll', async () => {

@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import './VSimpleCheckbox.sass'
 
 import ripple from '../../directives/ripple'

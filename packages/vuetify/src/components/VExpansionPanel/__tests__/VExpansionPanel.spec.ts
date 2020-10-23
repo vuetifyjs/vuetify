@@ -1,7 +1,10 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
-import VExpansionPanel from '../VExpansionPanel'
-import VExpansionPanelHeader from '../VExpansionPanelHeader'
-import VExpansionPanelContent from '../VExpansionPanelContent'
+// import VExpansionPanel from '../VExpansionPanel'
+// import VExpansionPanelHeader from '../VExpansionPanelHeader'
+// import VExpansionPanelContent from '../VExpansionPanelContent'
 
 // Utilities
 import {
@@ -9,7 +12,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VExpansionPanel', () => {
+describe.skip('VExpansionPanel', () => {
   type Instance = InstanceType<typeof VExpansionPanel>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

@@ -1,4 +1,4 @@
-import { DirectiveBinding } from 'vue'
+import type { DirectiveBinding } from 'vue'
 
 interface ScrollDirectiveBinding extends Omit<DirectiveBinding, 'modifiers'> {
   value: EventListener | {
@@ -11,7 +11,7 @@ interface ScrollDirectiveBinding extends Omit<DirectiveBinding, 'modifiers'> {
 }
 
 function mounted (el: HTMLElement, binding: ScrollDirectiveBinding) {
-  const { self = false } = binding.modifiers || {}
+  const { self = false } = binding.modifiers ?? {}
   const value = binding.value
   const options = (typeof value === 'object' && value.options) || { passive: true }
   const handler = typeof value === 'function' || 'handleEvent' in value ? value : value.handler

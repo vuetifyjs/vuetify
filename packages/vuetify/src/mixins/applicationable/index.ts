@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { factory as PositionableFactory } from '../positionable'
 import { TargetProp } from 'vuetify/types/services/application'
 

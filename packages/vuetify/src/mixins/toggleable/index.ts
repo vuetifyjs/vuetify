@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import Vue, { VueConstructor } from 'vue'
 
 export type Toggleable<T extends string = 'value'> = VueConstructor<Vue & { isActive: boolean } & Record<T, any>>

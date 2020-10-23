@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import '../../styles/components/_selection-controls.sass'
 import './VRadioGroup.sass'

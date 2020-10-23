@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Style
 import './VParallax.sass'
 

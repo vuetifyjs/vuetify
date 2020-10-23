@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
 import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
 import VDivider from '../VDivider'

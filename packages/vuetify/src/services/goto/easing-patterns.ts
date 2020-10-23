@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 export type EasingFunction = (t: number) => number
 
 // linear

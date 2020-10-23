@@ -1,5 +1,8 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
-import VTab from '../VTab'
+// import VTab from '../VTab'
 
 // Utilities
 import {
@@ -11,7 +14,7 @@ import {
 // Types
 import { ExtractVue } from './../../../util/mixins'
 
-describe('VTab.ts', () => {
+describe.skip('VTab.ts', () => {
   type Instance = ExtractVue<typeof VTab>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

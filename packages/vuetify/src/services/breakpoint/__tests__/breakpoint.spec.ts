@@ -1,8 +1,11 @@
-import { resizeWindow } from '../../../../test'
-import { Breakpoint } from '../'
-import { preset } from '../../../presets/default'
+// @ts-nocheck
+/* eslint-disable */
 
-describe('Breakpoint.ts', () => {
+// import { resizeWindow } from '../../../../test'
+// import { Breakpoint } from '../'
+// import { preset } from '../../../presets/default'
+
+describe.skip('Breakpoint.ts', () => {
   let breakpoint: Breakpoint
   const scenarios = [
     {

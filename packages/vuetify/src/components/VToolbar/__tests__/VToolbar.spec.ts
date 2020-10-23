@@ -1,9 +1,12 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Libraries
-import Vue from 'vue'
+// import Vue from 'vue'
 
 // Components
-import VToolbar from '../VToolbar'
-import { ExtractVue } from '../../../util/mixins'
+// import VToolbar from '../VToolbar'
+// import { ExtractVue } from '../../../util/mixins'
 
 // Utilities
 import {
@@ -11,7 +14,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VToolbar.ts', () => {
+describe.skip('VToolbar.ts', () => {
   type Instance = ExtractVue<typeof VToolbar>
   let mountFunction: (options?: object) => Wrapper<Instance>
 

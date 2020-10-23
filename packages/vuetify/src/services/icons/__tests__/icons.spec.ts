@@ -1,10 +1,13 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Service
-import { Icons } from '../index'
+// import { Icons } from '../index'
 
 // Preset
-import { preset } from '../../../presets/default'
+// import { preset } from '../../../presets/default'
 
-describe('Icons.ts', () => {
+describe.skip('Icons.ts', () => {
   let icon
 
   it('should generate default icons', () => {

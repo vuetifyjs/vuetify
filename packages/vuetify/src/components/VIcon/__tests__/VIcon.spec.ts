@@ -1,8 +1,11 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Libraries
-import Vue from 'vue'
+// import Vue from 'vue'
 
 // Components
-import VIcon from '../VIcon'
+// import VIcon from '../VIcon'
 
 // Utilities
 import {
@@ -11,7 +14,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VIcon', () => {
+describe.skip('VIcon', () => {
   let mountFunction: (ctx?: object, name?: string) => Wrapper<Vue>
   let localVue: typeof Vue
 

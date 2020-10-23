@@ -9,7 +9,7 @@ class MockService extends Service {
 }
 
 describe('framework.ts', () => {
-  it('should initialize a Vuetify service', () => {
+  it.skip('should initialize a Vuetify service', () => {
     const vuetify = new Vuetify()
 
     expect('mock' in vuetify.framework).toBe(false)
@@ -19,7 +19,7 @@ describe('framework.ts', () => {
     expect('mock' in vuetify.framework).toBe(true)
   })
 
-  it('should merge user options with default preset', () => {
+  it.skip('should merge user options with default preset', () => {
     const vuetify = new Vuetify({
       icons: { iconfont: 'fa' },
       lang: {
@@ -40,7 +40,7 @@ describe('framework.ts', () => {
     expect(vuetify.preset).toMatchSnapshot()
   })
 
-  it('should merge user options with global and default preset', () => {
+  it.skip('should merge user options with global and default preset', () => {
     const vuetify = new Vuetify({
       lang: { current: 'en' },
       theme: { dark: false },

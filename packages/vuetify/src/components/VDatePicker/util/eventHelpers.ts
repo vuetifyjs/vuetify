@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import Vue from 'vue'
 
 export function createItemTypeNativeListeners (instance: Vue, itemTypeSuffix: string, value: any) {

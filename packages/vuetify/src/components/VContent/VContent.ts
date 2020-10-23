@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Types
 import { VNode } from 'vue'
 

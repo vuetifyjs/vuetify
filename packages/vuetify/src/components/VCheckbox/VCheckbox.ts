@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import './VCheckbox.sass'
 import '../../styles/components/_selection-controls.sass'

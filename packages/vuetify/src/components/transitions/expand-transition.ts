@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { upperFirst } from '../../util/helpers'
 
 interface HTMLExpandElement extends HTMLElement {
