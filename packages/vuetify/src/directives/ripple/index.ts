@@ -1,14 +1,11 @@
-// @ts-nocheck
-/* eslint-disable */
-
 // Styles
 import './VRipple.sass'
 
 // Utilities
-import { isObject, keyCodes } from '../../util/helpers'
+import { isObject, keyCodes } from '@/util/helpers'
 
 // Types
-import {
+import type {
   DirectiveBinding,
   ObjectDirective,
 } from 'vue'
@@ -66,7 +63,7 @@ const calculate = (
 
   let radius = 0
   let scale = 0.3
-  if (el._ripple && el._ripple.circle) {
+  if (el._ripple?.circle) {
     scale = 0.15
     radius = el.clientWidth / 2
     radius = value.center ? radius : radius + Math.sqrt((localX - radius) ** 2 + (localY - radius) ** 2) / 4
@@ -183,6 +180,7 @@ function rippleShow (e: VuetifyRippleEvent) {
     // already been registered as touch
     if (element._ripple.isTouch) return
   }
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   value.center = element._ripple.centered || isKeyboardEvent(e)
   if (element._ripple.class) {
     value.class = element._ripple.class
@@ -196,7 +194,7 @@ function rippleShow (e: VuetifyRippleEvent) {
       ripples.show(e, element, value)
     }
     element._ripple.showTimer = window.setTimeout(() => {
-      if (element && element._ripple && element._ripple.showTimerCommit) {
+      if (element?._ripple?.showTimerCommit) {
         element._ripple.showTimerCommit()
         element._ripple.showTimerCommit = null
       }
@@ -267,7 +265,7 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
     ripples.hide(el)
   }
 
-  el._ripple = el._ripple || {}
+  el._ripple = el._ripple ?? {}
   el._ripple.enabled = enabled
   el._ripple.centered = modifiers.center
   el._ripple.circle = modifiers.circle
