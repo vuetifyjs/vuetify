@@ -13,12 +13,12 @@
       <v-icon v-text="item.icon" />
     </v-list-item-icon>
 
-    <v-avatar
+    <!-- <v-avatar
       v-if="item.recent || item.fresh"
       class="flex-0-1-auto mr-2 ml-n3"
       color="#00C58E"
       size="4"
-    />
+    /> -->
 
     <v-list-item-content>
       <v-list-item-title v-text="item.title" />

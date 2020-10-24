@@ -17,7 +17,7 @@ When it comes to form validation, Vuetify has a multitude of integrations and ba
 
 ## Usage
 
-The internal `v-form` component makes it easy to add validation to form inputs. All input components have a **rules** prop which takes an array of functions. These functions allow you to specify conditions in which the field is _valid_ or _invalid_. Whenever the value of an input is changed, each function in the array will receive the new value. If a function returns false or a string, validation has failed.
+The internal `v-form` component makes it easy to add validation to form inputs. All input components have a **rules** prop which accepts a mixed array of types `function`, `boolean` and `string`. These allow you to specify conditions in which the input is _valid_ or _invalid_. Whenever the value of an input is changed, each function in the array will receive the new value and each array element will be evaluated. If a function or array element returns `false` or a `string`, validation has failed and the `string` value will be presented as an error message.
 
 <example file="v-form/usage" />
 
