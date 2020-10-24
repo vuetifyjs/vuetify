@@ -2,15 +2,15 @@ import {
   computed,
   getCurrentInstance,
   onBeforeUnmount,
-  Ref,
   ref,
   watch,
   onMounted,
 } from 'vue'
 import { consoleWarn } from '../util/console'
-import { passiveEventOptions } from '../util/events'
 
 // Types
+import type { Ref } from 'vue'
+
 export interface ScrollProps {
   scrollTarget?: string
   scrollThreshold?: string | number
@@ -58,11 +58,7 @@ export function useScroll (
   const isScrollingUp = ref(false)
 
   const computedScrollThreshold = computed(() => {
-    if (props.scrollThreshold != null) return Number(props.scrollThreshold)
-
-    if (scrollThreshold != null) return scrollThreshold.value
-
-    return 300
+    return Number(props.scrollThreshold ?? scrollThreshold ?? 300)
   })
 
   const onScroll = () => {
@@ -71,39 +67,40 @@ export function useScroll (
     if (!targetEl || (canScroll && !canScroll.value)) return
 
     previousScroll = currentScroll.value
-    currentScroll.value = ('window' in targetEl) ? (targetEl as Window).pageYOffset : (targetEl as Element).scrollTop
+    currentScroll.value = ('window' in targetEl) ? targetEl.pageYOffset : targetEl.scrollTop
 
     isScrollingUp.value = currentScroll.value < previousScroll
     currentThreshold.value = Math.abs(currentScroll.value - computedScrollThreshold.value)
   }
 
-  watch(isScrollingUp, () => (savedScroll.value = savedScroll.value || currentScroll.value), {
-    immediate: true,
+  watch(isScrollingUp, () => {
+    savedScroll.value = savedScroll.value || currentScroll.value
   })
 
-  watch(isScrollActive, () => (savedScroll.value = 0), {
-    immediate: true,
+  watch(isScrollActive, () => {
+    savedScroll.value = 0
   })
 
   onMounted(() => {
-    watch(() => props.scrollTarget, () => {
-      const newTarget = props.scrollTarget ? document.querySelector(props.scrollTarget) : window
+    watch(() => props.scrollTarget, scrollTarget => {
+      const newTarget = scrollTarget ? document.querySelector(scrollTarget) : window
 
       if (!newTarget) {
-        consoleWarn(`Unable to locate element with identifier ${props.scrollTarget}`, getCurrentInstance())
+        consoleWarn(`Unable to locate element with identifier ${scrollTarget}`, getCurrentInstance())
         return
       }
 
       if (newTarget === target.value) return
 
-      target.value && target.value.removeEventListener('scroll', onScroll, passiveEventOptions())
+      target.value?.removeEventListener('scroll', onScroll)
       target.value = newTarget
-      target.value.addEventListener('scroll', onScroll, passiveEventOptions())
-    }, {
-      immediate: true,
-    })
+      target.value.addEventListener('scroll', onScroll, { passive: true })
+    }, { immediate: true })
   })
 
+  onBeforeUnmount(() => {
+    target.value?.removeEventListener('scroll', onScroll)
+  })
 
   thresholdMetCallback && watch(() => (
     Math.abs(currentScroll.value - savedScroll.value) > computedScrollThreshold.value
@@ -113,21 +110,11 @@ export function useScroll (
       isScrollingUp: isScrollingUp.value,
       savedScroll,
     })
-  }, {
-    immediate: true,
-  })
+  }, { immediate: true })
 
   // Do we need this? If yes - seems that
   // there's no need to expose onScroll
-  canScroll && watch(canScroll, onScroll, {
-    immediate: true,
-  })
-
-  // TODO: get rid of getCurrentInstance, it is
-  // required only for tests to avoid warning
-  getCurrentInstance() && onBeforeUnmount(() => {
-    target.value && target.value.removeEventListener('scroll', onScroll, passiveEventOptions())
-  })
+  canScroll && watch(canScroll, onScroll, { immediate: true })
 
   return {
     isScrollActive,
