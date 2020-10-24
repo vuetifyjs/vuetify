@@ -1,5 +1,7 @@
-import Vue, { ComponentOptions } from 'vue'
-import { Wrapper } from '@vue/test-utils'
+// Setup
+import { ComponentOptions } from 'vue'
+
+// Utilities
 import toHaveBeenWarnedInit from './util/to-have-been-warned'
 
 export function functionalContext (context: ComponentOptions<Vue> = {}, children = []) {
@@ -14,14 +16,14 @@ export function functionalContext (context: ComponentOptions<Vue> = {}, children
   }
 }
 
-export function touch (element: Wrapper<any>) {
+export function touch (element: Element) {
   const createTrigger = (eventName: string) => (clientX: number, clientY: number) => {
     const touches = [{ clientX, clientY }]
     const event = new Event(eventName)
 
     ;(event as any).touches = touches
     ;(event as any).changedTouches = touches
-    element.element.dispatchEvent(event)
+    element.dispatchEvent(event)
 
     return touch(element)
   }

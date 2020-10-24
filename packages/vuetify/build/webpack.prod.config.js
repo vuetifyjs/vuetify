@@ -15,6 +15,8 @@ module.exports = merge(baseWebpackConfig, {
     libraryExport: 'default',
     // See https://github.com/webpack/webpack/issues/6522
     globalObject: `typeof self !== 'undefined' ? self : this`,
+    chunkLoading: false,
+    wasmLoading: false,
   },
   externals: {
     vue: {

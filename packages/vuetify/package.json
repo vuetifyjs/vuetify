@@ -37,7 +37,8 @@
   "sideEffects": [
     "*.sass",
     "*.scss",
-    "*.css"
+    "*.css",
+    "*.vue"
   ],
   "files": [
     "src/",

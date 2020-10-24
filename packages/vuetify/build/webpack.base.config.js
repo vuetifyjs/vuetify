@@ -49,10 +49,6 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.mjs', '.js', '.vue', '.json']
   },
-  output: {
-    chunkLoading: false,
-    wasmLoading: false,
-  },
   module: {
     rules: [
       {
