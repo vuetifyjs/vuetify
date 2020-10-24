@@ -26,7 +26,7 @@ export function makeSizeProps (defaults: Partial<SizeProps> = { size: 'default' 
 // Effect
 export function useSizeClasses (props: SizeProps) {
   const sizeClasses = computed(() => {
-    if (!props?.size) return null
+    if (!props.size) return null
 
     return `v-size--${props.size}`
   })
