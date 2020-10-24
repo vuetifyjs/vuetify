@@ -9,11 +9,11 @@ const baseWebpackConfig = require('./webpack.base.config')
 const resolve = file => path.resolve(__dirname, file)
 
 module.exports = merge(baseWebpackConfig, {
+  target: 'web',
   entry: ['babel-polyfill', './dev/index.js'],
   output: {
     filename: '[name].js',
     path: resolve('../dev'),
-    publicPath: '/dev/',
     library: 'Vuetify'
   },
   resolve: {
@@ -64,7 +64,7 @@ module.exports = merge(baseWebpackConfig, {
   },
   devServer: {
     contentBase: resolve('../dev'),
-    publicPath: '/dev/',
+    publicPath: '/',
     host: process.env.HOST || 'localhost',
     port: process.env.PORT || '8080',
     disableHostCheck: true,
