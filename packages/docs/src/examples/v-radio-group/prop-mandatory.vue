@@ -3,7 +3,7 @@
     <p>{{ radios || 'null' }}</p>
     <v-radio-group
       v-model="radios"
-      :mandatory="false"
+      :mandatory="true"
     >
       <v-radio
         label="Radio 1"

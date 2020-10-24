@@ -44,7 +44,7 @@ Radio-groups can be presented either as a row or a column, using their respectiv
 
 #### Mandatory
 
-Radio-groups are by default mandatory. This can be changed with the **mandatory** prop.
+Radio-groups are by default not mandatory. This can be changed with the **mandatory** prop.
 
 <example file="v-radio-group/prop-mandatory" />
 
