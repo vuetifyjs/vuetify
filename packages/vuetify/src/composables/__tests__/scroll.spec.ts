@@ -1,10 +1,12 @@
 import { ref } from 'vue'
+import { mount } from '@vue/test-utils'
 
 // Effects
 import {
   scrollProps,
   useScroll,
 } from '../scroll'
+import type { ScrollArguments } from '../scroll'
 
 // Utils
 import {
@@ -13,118 +15,112 @@ import {
   wait,
 } from '../../../test'
 
-describe('scroll.ts', () => {
-  describe('scrollProps', () => {
-    it('should have correct structure', () => {
-      expect(scrollProps()).toEqual({
-        scrollTarget: {
-          type: String,
-        },
-        scrollThreshold: {
-          type: [String, Number],
-        },
-      })
+describe('scrollProps', () => {
+  it('should allow setting default values', () => {
+    const wrapper = mount({
+      template: '<div />',
+      props: scrollProps({
+        scrollTarget: 'foo',
+        scrollThreshold: 500,
+      }),
     })
 
-    it('should allow setting default values', () => {
-      expect(scrollProps({ scrollTarget: 'foo', scrollThreshold: 500 })).toEqual({
-        scrollTarget: {
-          type: String,
-          default: 'foo',
-        },
-        scrollThreshold: {
-          type: [String, Number],
-          default: 500,
-        },
-      })
+    expect(wrapper.props()).toStrictEqual({
+      scrollTarget: 'foo',
+      scrollThreshold: 500,
     })
   })
+})
 
-  describe('useScroll', () => {
-    beforeEach(() => {
-      (window as any).pageYOffset = 0
-      document.body.scrollTop = 0
+describe('useScroll', () => {
+  function mountFunction (args?: ScrollArguments, options?: any) {
+    return mount({
+      props: scrollProps(),
+      setup (props) {
+        return useScroll(props, args)
+      },
+      template: '<div />',
+    }, options)
+  }
+
+  beforeEach(() => {
+    (window as any).pageYOffset = 0
+    document.body.scrollTop = 0
+  })
+
+  it('should set isScrollingUp', async () => {
+    const { vm } = mountFunction()
+
+    await scrollWindow(1000)
+    expect(vm.isScrollingUp).toBe(false)
+
+    await scrollWindow(0)
+    expect(vm.isScrollingUp).toBe(true)
+  })
+
+  it('should use a custom target', async () => {
+    const thresholdMetCallback = jest.fn()
+    mountFunction({ thresholdMetCallback }, {
+      props: { scrollTarget: 'body', scrollThreshold: 300 },
     })
 
-    it('should set isScrollingUp', async () => {
-      const { isScrollingUp } = useScroll({})
+    await wait()
+    expect(thresholdMetCallback).not.toHaveBeenCalled()
 
-      await wait()
+    await scrollElement(document.body, 1000)
+    expect(thresholdMetCallback).toHaveBeenCalled()
+  })
 
-      await scrollWindow(1000)
-      expect(isScrollingUp.value).toBe(false)
-
-      await scrollWindow(0)
-      expect(isScrollingUp.value).toBe(true)
+  it('should do nothing if !canScroll', async () => {
+    const thresholdMetCallback = jest.fn()
+    mountFunction({
+      thresholdMetCallback,
+      canScroll: ref(false),
+    }, {
+      props: { scrollTarget: 'body', scrollThreshold: 300 },
     })
 
-    it('should use a custom target', async () => {
-      const thresholdMetCallback = jest.fn()
+    await wait()
+    expect(thresholdMetCallback).not.toHaveBeenCalled()
 
-      useScroll({ scrollTarget: 'body', scrollThreshold: 300 }, { thresholdMetCallback })
+    await scrollElement(document.body, 1000)
+    expect(thresholdMetCallback).not.toHaveBeenCalled()
+  })
 
-      await wait()
-      expect(thresholdMetCallback).not.toHaveBeenCalled()
-
-      scrollElement(document.body, 1000)
-      await wait()
-      expect(thresholdMetCallback).toHaveBeenCalled()
+  it('should do something if canScroll', async () => {
+    const thresholdMetCallback = jest.fn()
+    mountFunction({
+      thresholdMetCallback,
+      canScroll: ref(true),
+    }, {
+      props: { scrollTarget: 'body', scrollThreshold: 300 },
     })
 
-    it('should do nothing if !canScroll', async () => {
-      const thresholdMetCallback = jest.fn()
+    await wait()
+    expect(thresholdMetCallback).not.toHaveBeenCalled()
 
-      useScroll({ scrollTarget: 'body', scrollThreshold: 300 }, {
-        thresholdMetCallback,
-        canScroll: ref(false),
-      })
+    await scrollElement(document.body, 1000)
+    expect(thresholdMetCallback).toHaveBeenCalled()
+  })
 
-      await wait()
-      expect(thresholdMetCallback).not.toHaveBeenCalled()
+  it('should reset savedScroll when isActive state changes', async () => {
+    const { vm } = mountFunction()
 
-      scrollElement(document.body, 1000)
-      await wait()
-      expect(thresholdMetCallback).not.toHaveBeenCalled()
-    })
+    await scrollWindow(1000)
+    expect(vm.savedScroll).toEqual(0)
 
-    it('should do something if canScroll', async () => {
-      const thresholdMetCallback = jest.fn()
+    await scrollWindow(900)
+    expect(vm.savedScroll).toEqual(900)
 
-      useScroll({ scrollTarget: 'body', scrollThreshold: 300 }, {
-        thresholdMetCallback,
-        canScroll: ref(true),
-      })
+    vm.isScrollActive = true
+    await wait()
+    expect(vm.savedScroll).toEqual(0)
+  })
 
-      await wait()
-      expect(thresholdMetCallback).not.toHaveBeenCalled()
+  it(`should warn if target isn't present`, async () => {
+    mountFunction(undefined, { props: { scrollTarget: '#test' } })
 
-      scrollElement(document.body, 1000)
-      await wait()
-      expect(thresholdMetCallback).toHaveBeenCalled()
-    })
-
-    it('should reset savedScroll when isActive state changes', async () => {
-      const { isScrollActive, isScrollingUp, savedScroll } = useScroll({})
-
-      await wait()
-
-      await scrollWindow(1000)
-      expect(savedScroll.value).toEqual(0)
-
-      await scrollWindow(900)
-      expect(savedScroll.value).toEqual(900)
-
-      isScrollActive.value = true
-      await wait()
-      expect(savedScroll.value).toEqual(0)
-    })
-
-    it('should warn if target isn\'t present', async () => {
-      useScroll({ scrollTarget: '#test' })
-
-      await wait()
-
-      expect('Unable to locate element with identifier #test').toHaveBeenTipped()
-    })
+    await wait()
+    expect('Unable to locate element with identifier #test').toHaveBeenTipped()
   })
 })

@@ -38,7 +38,7 @@ export function scrollProps (
   }
 }
 
-interface ScrollArguments {
+export interface ScrollArguments {
   thresholdMetCallback?: (data: ThresholdMetCallbackData) => void
   scrollThreshold?: Readonly<Ref<number>>
   canScroll?: Readonly<Ref<boolean>>
