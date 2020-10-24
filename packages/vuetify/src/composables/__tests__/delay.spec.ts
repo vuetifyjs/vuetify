@@ -1,86 +1,72 @@
-// Effects
-import {
-  delayProps,
-  useDelay,
-} from '../delay'
+import { mount } from '@vue/test-utils'
+import { delayProps, useDelay } from '../delay'
+import { wait } from '../../../test'
 
-describe('delay.ts', () => {
-  describe('delayProps', () => {
-    const props = delayProps({
+describe('delayProps', () => {
+  it('should allow setting default values', () => {
+    const wrapper = mount({
+      template: '<div />',
+      props: delayProps({
+        closeDelay: 42,
+        openDelay: 7,
+      }),
+    })
+
+    expect(wrapper.props()).toStrictEqual({
       closeDelay: 42,
       openDelay: 7,
     })
+  })
+})
 
-    expect(props).toEqual({
-      closeDelay: {
-        type: [Number, String],
-        default: 42,
-      },
-      openDelay: {
-        type: [Number, String],
-        default: 7,
-      },
-    })
+describe('useDelay', () => {
+  it.each(['runOpenDelay', 'runCloseDelay'] as const)('should call %s - callback', async methodName => {
+    const cb = jest.fn()
+    const runDelay = useDelay({
+      openDelay: 50,
+      closeDelay: 50,
+    }, cb)[methodName]
+
+    runDelay()
+
+    await wait(30)
+    expect(cb).not.toHaveBeenCalled()
+
+    await wait(30)
+    expect(cb).toHaveBeenCalledWith(methodName === 'runOpenDelay')
   })
 
-  describe('useDelay', () => {
-    const delayCallbackTestFactory = (methodName: 'runOpenDelay' | 'runCloseDelay') => async () => {
-      const cb = jest.fn()
-      const runDelay = useDelay({
-        openDelay: 50,
-        closeDelay: 50,
-      }, cb)[methodName]
+  it.each(['runOpenDelay', 'runCloseDelay'] as const)('should call %s - promise', async methodName => {
+    const cb = jest.fn(val => val)
+    const runDelay = useDelay({
+      openDelay: 50,
+      closeDelay: 50,
+    })[methodName]
 
-      runDelay()
+    const delay = runDelay().then(cb)
 
-      await wait(30)
-      expect(cb).not.toHaveBeenCalled()
+    await Promise.race([
+      delay,
+      wait(30),
+    ])
+    expect(cb).not.toHaveBeenCalled()
 
-      await wait(30)
-      expect(cb).toHaveBeenCalledWith(methodName === 'runOpenDelay')
-    }
+    await expect(delay).resolves.toBe(methodName === 'runOpenDelay')
+  })
 
-    const delayPromiseTestFactory = (methodName: 'runOpenDelay' | 'runCloseDelay') => async () => {
-      const cb = jest.fn()
-      const runDelay = useDelay({
-        openDelay: 50,
-        closeDelay: 50,
-      }, cb)[methodName]
+  it('should cancel delay when running a new one', async () => {
+    const cb = jest.fn()
+    const { runOpenDelay, runCloseDelay } = useDelay({
+      closeDelay: 50,
+      openDelay: 50,
+    }, cb)
 
-      await Promise.race([
-        runDelay(),
-        wait(30),
-      ])
-      expect(cb).not.toHaveBeenCalled()
+    runOpenDelay()
+    await wait(30)
+    runCloseDelay()
+    await wait(60)
 
-      await wait(30)
-      expect(cb).toHaveBeenCalledWith(methodName === 'runOpenDelay')
-    }
-
-    const wait = (delay: number) => new Promise(resolve => setTimeout(resolve, delay))
-
-    it('should call the callback on open', delayCallbackTestFactory('runOpenDelay'))
-
-    it('should call the callback on close', delayCallbackTestFactory('runCloseDelay'))
-
-    it('should return the promise on open', delayPromiseTestFactory('runOpenDelay'))
-
-    it('should return the promise on close', delayPromiseTestFactory('runCloseDelay'))
-
-    it('should cancel delay when running a new one', async () => {
-      const cb = jest.fn()
-      const { runOpenDelay, runCloseDelay } = useDelay({
-        closeDelay: 50,
-        openDelay: 50,
-      }, cb)
-
-      runOpenDelay()
-      await wait(30)
-      runCloseDelay()
-      await wait(60)
-
-      expect(cb).toHaveBeenCalledTimes(1)
-      expect(cb).toHaveBeenCalledWith(false)
-    })
+    expect(cb).toHaveBeenCalledTimes(1)
+    expect(cb).toHaveBeenCalledWith(false)
   })
 })

@@ -32,7 +32,7 @@ export function useDelay (props: DelayProps, cb?: (value: boolean) => void) {
 
     return new Promise(resolve => {
       delays[prop] = window.setTimeout(() => {
-        cb && cb(active) // eslint-disable-line standard/no-callback-literal
+        cb?.(active)
         resolve(active)
       }, parseInt(props[prop], 10))
     })
