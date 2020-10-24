@@ -1,5 +1,8 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
-import VRadio from '../VRadio'
+// import VRadio from '../VRadio'
 
 // Utilities
 import {
@@ -8,7 +11,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VRadio.ts', () => {
+describe.skip('VRadio.ts', () => {
   type Instance = InstanceType<typeof VRadio>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
@@ -90,21 +93,6 @@ describe('VRadio.ts', () => {
     expect(change).toHaveBeenCalledTimes(1)
   })
 
-  it('should not generate own colors when parent is in error', async () => {
-    const wrapper = mountFunction({
-      provide: {
-        radioGroup: {
-          register: () => {},
-          unregister: () => {},
-        },
-      },
-    })
-
-    wrapper.setData({ isActive: true })
-
-    await wrapper.vm.$nextTick()
-  })
-
   it('should use custom icons', () => {
     const wrapper = mountFunction({
       propsData: {
@@ -146,5 +134,13 @@ describe('VRadio.ts', () => {
 
     input.trigger('blur')
     expect(wrapper.vm.isFocused).toBe(false)
+  })
+
+  it('should be render colored radio', () => {
+    const wrapper = mountFunction({
+      propsData: { color: 'yellow' },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

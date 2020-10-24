@@ -1,23 +1,22 @@
-const merge = require('webpack-merge')
-const HappyPack = require('happypack')
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
-const { config: baseWebpackConfig, happyThreadPool } = require('./webpack.base.config')
+const webpack = require('webpack')
+const { merge } = require('webpack-merge')
+const baseWebpackConfig = require('./webpack.base.config')
 
-// Helpers
-const resolve = file => require('path').resolve(__dirname, file)
+const version = require('../package.json').version
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
-    app: './src/index.ts'
+    app: './src/entry-bundler.ts'
   },
   output: {
-    path: resolve('../dist'),
     publicPath: '/dist/',
     library: 'Vuetify',
     libraryTarget: 'umd',
     libraryExport: 'default',
     // See https://github.com/webpack/webpack/issues/6522
-    globalObject: 'typeof self !== \'undefined\' ? self : this'
+    globalObject: `typeof self !== 'undefined' ? self : this`,
+    chunkLoading: false,
+    wasmLoading: false,
   },
   externals: {
     vue: {
@@ -27,31 +26,15 @@ module.exports = merge(baseWebpackConfig, {
       root: 'Vue'
     }
   },
-  module: {
-    rules: [
-      {
-        test: /\.[jt]s$/,
-        use: 'happypack/loader?id=scripts',
-        exclude: /node_modules/
-      }
-    ]
-  },
   plugins: [
-    // TODO: hangs build
-    // new ForkTsCheckerWebpackPlugin({
-    //   checkSyntacticErrors: true,
-    //   tsconfig: resolve('../tsconfig.json')
-    // }),
-    new HappyPack({
-      id: 'scripts',
-      threadPool: happyThreadPool,
-      loaders: [
-        'babel-loader',
-        {
-          loader: 'ts-loader',
-          options: { happyPackMode: true }
-        }
-      ]
+    new webpack.BannerPlugin({
+      banner: `/*!
+* Vuetify v${version}
+* Forged by John Leider
+* Released under the MIT License.
+*/     `,
+      raw: true,
+      entryOnly: true
     })
   ]
 })

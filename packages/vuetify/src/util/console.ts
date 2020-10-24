@@ -1,4 +1,8 @@
+// import Vuetify from '../framework'
+
 function createMessage (message: string, vm?: any, parent?: any): string | void {
+  // if (Vuetify.config.silent) return
+
   if (parent) {
     vm = {
       _isVue: true,
@@ -66,7 +70,7 @@ function formatComponentName (vm: any, includeFile?: boolean): string {
   const file = options.__file
   if (!name && file) {
     const match = file.match(/([^/\\]+)\.vue$/)
-    name = match && match[1]
+    name = match?.[1]
   }
 
   return (

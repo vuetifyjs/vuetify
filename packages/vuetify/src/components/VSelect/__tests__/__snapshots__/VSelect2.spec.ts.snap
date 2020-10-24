@@ -173,7 +173,7 @@ exports[`VSelect.ts should use scoped slot for selection generation 1`] = `
 exports[`VSelect.ts should use slotted append-item 1`] = `
 <div role="listbox"
      tabindex="-1"
-     class="v-list v-select-list v-sheet v-sheet--tile theme--light theme--light"
+     class="v-list v-select-list v-sheet theme--light theme--light"
      id="list-13"
 >
   <div tabindex="0"
@@ -197,7 +197,7 @@ exports[`VSelect.ts should use slotted append-item 1`] = `
 exports[`VSelect.ts should use slotted prepend-item 1`] = `
 <div role="listbox"
      tabindex="-1"
-     class="v-list v-select-list v-sheet v-sheet--tile theme--light theme--light"
+     class="v-list v-select-list v-sheet theme--light theme--light"
      id="list-1"
 >
   <div>

@@ -3,17 +3,20 @@
 $material-dark-elevation-colors: () !default;
 // https://material.io/design/color/dark-theme.html#properties
 // https://material.io/design/environment/elevation.html#default-elevations
-$material-dark-elevation-colors: (
-  '0': #000000,
-  '1': #1E1E1E,
-  '2': #222222,
-  '3': #252525,
-  '4': #272727,
-  '6': #2C2C2C,
-  '8': #2E2E2E,
-  '12': #333333,
-  '16': #363636,
-  '24': #373737
+$material-dark-elevation-colors: map-deep-merge(
+  (
+    '0': #000000,
+    '1': #1E1E1E,
+    '2': #222222,
+    '3': #252525,
+    '4': #272727,
+    '6': #2C2C2C,
+    '8': #2E2E2E,
+    '12': #333333,
+    '16': #363636,
+    '24': #373737
+  ),
+  $material-dark-elevation-colors
 );
 
 $material-dark: () !default;
@@ -30,6 +33,7 @@ $material-dark: map-deep-merge(
     'calendar': (
       'background-color': #303030,
       'outside-background-color': #202020,
+      'weeknumber-background-color': #202020,
       'line-color': map-get($grey, 'base'),
       'interval-color': map-get($grey, 'lighten-3'),
       'interval-line-color': map-get($grey, 'darken-2'),
@@ -86,7 +90,7 @@ $material-dark: map-deep-merge(
       'disabled': rgba(map-get($shades, 'white'), 0.2),
       'discrete': map-get($shades, 'white')
     ),
-    'skeleton': linear-gradient(90deg, transparent, rgba(255, 255, 255, .05), transparent),
+    'skeleton': linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .05), rgba(255, 255, 255, 0)),
     'states': (
       'hover': 0.08,
       'focus': 0.24,

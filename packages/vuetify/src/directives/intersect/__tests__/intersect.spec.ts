@@ -1,15 +1,24 @@
+// Libraries
+import { h } from 'vue'
+
 // Directives
 import Intersect from '../'
 
-describe('resize.ts', () => {
-  it('should bind event on inserted', () => {
+describe('v-intersect', () => {
+  it('should bind event on mounted', () => {
     const callback = jest.fn()
+    const vnode = h('div')
     const el = document.createElement('div')
     document.body.appendChild(el)
 
-    Intersect.inserted(el, {
-      value: callback,
-      modifiers: { quiet: true } } as any
+    Intersect.mounted(
+      el,
+      {
+        value: callback,
+        modifiers: { quiet: true },
+      } as any,
+      vnode,
+      null
     )
 
     expect((el as any)._observe).toBeTruthy()
@@ -17,22 +26,23 @@ describe('resize.ts', () => {
 
     document.body.removeChild(el)
 
-    Intersect.unbind(el)
+    Intersect.unmounted(el, {}, vnode, vnode)
 
-    expect((el as any)._observe).toBeFalsy()
+    expect((el as any)._observe).toBeUndefined()
   })
 
-  it('should invoke callback once and unbind', () => {
+  it('should invoke callback once and unmount', () => {
+    const vnode = h('div')
     const el = document.createElement('div')
 
     document.body.appendChild(el)
 
     const callback = jest.fn()
 
-    Intersect.inserted(el, {
+    Intersect.mounted(el, {
       value: callback,
       modifiers: { once: true },
-    } as any)
+    } as any, vnode, null)
 
     expect(callback).toHaveBeenCalled()
     expect((el as any)._observe).toBeTruthy()
@@ -42,6 +52,6 @@ describe('resize.ts', () => {
     }
 
     expect(callback).toHaveBeenCalledTimes(2)
-    expect((el as any)._observe).toBeFalsy()
+    expect((el as any)._observe).toBeUndefined()
   })
 })

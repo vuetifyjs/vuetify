@@ -1,13 +1,13 @@
-import Vue from 'vue/dist/vue.common.js'
+// import Vue from 'vue/dist/vue.common.js'
 import {
   deepEqual,
   getNestedValue,
   getPropertyFromItem,
   convertToUnit,
-  getSlotType,
   arrayDiff,
   getObjectValueByPath,
   humanReadableFileSize,
+  kebabCase,
   sortItems,
 } from '../helpers'
 
@@ -106,7 +106,7 @@ describe('helpers', () => {
     expect(deepEqual(currentDate, futureDate)).toEqual(false)
     expect(deepEqual({ date: currentDate }, { date: futureDate })).toEqual(false)
 
-    const circular = {}
+    const circular = {} // eslint-disable-line sonarjs/prefer-object-literal
     circular.me = circular
 
     expect(deepEqual({ r: circular }, { r: circular })).toEqual(true)
@@ -185,7 +185,7 @@ describe('helpers', () => {
     expect(getPropertyFromItem(obj, 'c.0')).toEqual(2)
     expect(getPropertyFromItem(obj, 'c.2.d')).toEqual('d')
     expect(getPropertyFromItem(obj, 'c.2.d.x', 'fallback')).toEqual('fallback')
-    expect(getPropertyFromItem(obj, o => o.a.b + o.c[0])).toEqual(3)
+    expect(getPropertyFromItem(obj, o => +o.a.b + +o.c[0])).toEqual(3)
     expect(getPropertyFromItem(obj, ['c', 2, 'd'])).toEqual('d')
     expect(getPropertyFromItem(obj, 'x.y')).toEqual('comp')
     expect(getPropertyFromItem(obj, ['x', 'y'])).toEqual('nested')
@@ -210,63 +210,6 @@ describe('helpers', () => {
     expect(convertToUnit('3.14vw')).toBe('3.14vw')
 
     expect(convertToUnit('foo')).toBe('foo')
-  })
-
-  describe('getSlotType', () => {
-    it('should detect old slots', () => {
-      const vm = new Vue({
-        components: {
-          foo: { render: h => h('div') },
-        },
-        template: `<foo ref="foo"><template slot="bar">hello</template></foo>`,
-      }).$mount()
-
-      expect(getSlotType(vm.$refs.foo, 'bar')).toBe('normal')
-    })
-
-    it('should detect old scoped slots', () => {
-      const vm = new Vue({
-        components: {
-          foo: { render: h => h('div') },
-        },
-        template: `<foo ref="foo"><template slot="bar" slot-scope="data">hello</template></foo>`,
-      }).$mount()
-
-      expect(getSlotType(vm.$refs.foo, 'bar')).toBe('scoped')
-    })
-
-    it('should detect bare v-slot', () => {
-      const vm = new Vue({
-        components: {
-          foo: { render: h => h('div') },
-        },
-        template: `<foo ref="foo"><template #bar>hello</template></foo>`,
-      }).$mount()
-
-      expect(getSlotType(vm.$refs.foo, 'bar', true)).toBe('v-slot')
-    })
-
-    it('should detect bound v-slot', () => {
-      const vm = new Vue({
-        components: {
-          foo: { render: h => h('div') },
-        },
-        template: `<foo ref="foo"><template #bar="data">hello</template></foo>`,
-      }).$mount()
-
-      expect(getSlotType(vm.$refs.foo, 'bar', true)).toBe('scoped')
-    })
-
-    it('should count bare v-slot as scoped', () => {
-      const vm = new Vue({
-        components: {
-          foo: { render: h => h('div') },
-        },
-        template: `<foo ref="foo"><template #bar>hello</template></foo>`,
-      }).$mount()
-
-      expect(getSlotType(vm.$refs.foo, 'bar')).toBe('scoped')
-    })
   })
 
   it('humanReadableFileSize should format file sizes with base 1024', () => {
@@ -299,25 +242,64 @@ describe('helpers', () => {
 
   it('should sort items by single column', () => {
     let items
-    const getItems = () => [{ string: 'foo', number: 1 }, { string: 'bar', number: 2 }, { string: 'baz', number: 4 }, { string: 'fizzbuzz', number: 3 }]
+    const getItems = () => [
+      { string: 'foo', number: 1 },
+      { string: 'bar', number: 2 },
+      { string: 'baz', number: 4 },
+      { string: 'fizzbuzz', number: 3 },
+    ]
 
     sortItems(items = getItems(), ['string'], [], 'en')
-    expect(items).toStrictEqual([{ string: 'bar', number: 2 }, { string: 'baz', number: 4 }, { string: 'fizzbuzz', number: 3 }, { string: 'foo', number: 1 }])
+    expect(items).toStrictEqual([
+      { string: 'bar', number: 2 },
+      { string: 'baz', number: 4 },
+      { string: 'fizzbuzz', number: 3 },
+      { string: 'foo', number: 1 },
+    ])
 
     sortItems(items = getItems(), ['string'], [true], 'en')
-    expect(items).toStrictEqual([{ string: 'foo', number: 1 }, { string: 'fizzbuzz', number: 3 }, { string: 'baz', number: 4 }, { string: 'bar', number: 2 }])
+    expect(items).toStrictEqual([
+      { string: 'foo', number: 1 },
+      { string: 'fizzbuzz', number: 3 },
+      { string: 'baz', number: 4 },
+      { string: 'bar', number: 2 },
+    ])
 
     sortItems(items = getItems(), ['number'], [], 'en')
-    expect(items).toStrictEqual([{ string: 'foo', number: 1 }, { string: 'bar', number: 2 }, { string: 'fizzbuzz', number: 3 }, { string: 'baz', number: 4 }])
+    expect(items)
+      .toStrictEqual([
+        { string: 'foo', number: 1 },
+        { string: 'bar', number: 2 },
+        { string: 'fizzbuzz', number: 3 },
+        { string: 'baz', number: 4 },
+      ])
 
     sortItems(items = getItems(), ['number'], [true], 'en')
-    expect(items).toStrictEqual([{ string: 'baz', number: 4 }, { string: 'fizzbuzz', number: 3 }, { string: 'bar', number: 2 }, { string: 'foo', number: 1 }])
+    expect(items)
+      .toStrictEqual([
+        { string: 'baz', number: 4 },
+        { string: 'fizzbuzz', number: 3 },
+        { string: 'bar', number: 2 },
+        { string: 'foo', number: 1 },
+      ])
 
     sortItems(items = getItems(), ['number'], [], 'en', { number: (a, b) => b - a })
-    expect(items).toStrictEqual([{ string: 'baz', number: 4 }, { string: 'fizzbuzz', number: 3 }, { string: 'bar', number: 2 }, { string: 'foo', number: 1 }])
+    expect(items)
+      .toStrictEqual([
+        { string: 'baz', number: 4 },
+        { string: 'fizzbuzz', number: 3 },
+        { string: 'bar', number: 2 },
+        { string: 'foo', number: 1 },
+      ])
 
     sortItems(items = getItems(), ['number'], [true], 'en', { number: (a, b) => b - a })
-    expect(items).toStrictEqual([{ string: 'foo', number: 1 }, { string: 'bar', number: 2 }, { string: 'fizzbuzz', number: 3 }, { string: 'baz', number: 4 }])
+    expect(items)
+      .toStrictEqual([
+        { string: 'foo', number: 1 },
+        { string: 'bar', number: 2 },
+        { string: 'fizzbuzz', number: 3 },
+        { string: 'baz', number: 4 },
+      ])
   })
 
   it('should sort items with deep structure', () => {
@@ -329,36 +311,119 @@ describe('helpers', () => {
 
   it('should sort items by multiple columns', () => {
     let items
-    const getItems = () => [{ string: 'foo', number: 1 }, { string: 'bar', number: 3 }, { string: 'baz', number: 2 }, { string: 'baz', number: 1 }]
+    const getItems = () => [
+      { string: 'foo', number: 1 },
+      { string: 'bar', number: 3 },
+      { string: 'baz', number: 2 },
+      { string: 'baz', number: 1 },
+    ]
 
     sortItems(items = getItems(), ['string', 'number'], [], 'en')
-    expect(items).toStrictEqual([{ string: 'bar', number: 3 }, { string: 'baz', number: 1 }, { string: 'baz', number: 2 }, { string: 'foo', number: 1 }])
+    expect(items)
+      .toStrictEqual([
+        { string: 'bar', number: 3 },
+        { string: 'baz', number: 1 },
+        { string: 'baz', number: 2 },
+        { string: 'foo', number: 1 },
+      ])
 
     sortItems(items = getItems(), ['string', 'number'], [true, false], 'en')
-    expect(items).toStrictEqual([{ string: 'foo', number: 1 }, { string: 'baz', number: 1 }, { string: 'baz', number: 2 }, { string: 'bar', number: 3 }])
+    expect(items)
+      .toStrictEqual([
+        { string: 'foo', number: 1 },
+        { string: 'baz', number: 1 },
+        { string: 'baz', number: 2 },
+        { string: 'bar', number: 3 },
+      ])
 
     sortItems(items = getItems(), ['string', 'number'], [false, true], 'en')
-    expect(items).toStrictEqual([{ string: 'bar', number: 3 }, { string: 'baz', number: 2 }, { string: 'baz', number: 1 }, { string: 'foo', number: 1 }])
+    expect(items)
+      .toStrictEqual([
+        { string: 'bar', number: 3 },
+        { string: 'baz', number: 2 },
+        { string: 'baz', number: 1 },
+        { string: 'foo', number: 1 },
+      ])
 
     sortItems(items = getItems(), ['string', 'number'], [true, true], 'en')
-    expect(items).toStrictEqual([{ string: 'foo', number: 1 }, { string: 'baz', number: 2 }, { string: 'baz', number: 1 }, { string: 'bar', number: 3 }])
+    expect(items)
+      .toStrictEqual([
+        { string: 'foo', number: 1 },
+        { string: 'baz', number: 2 },
+        { string: 'baz', number: 1 },
+        { string: 'bar', number: 3 },
+      ])
 
     sortItems(items = getItems(), ['number', 'string'], [], 'en')
-    expect(items).toStrictEqual([{ string: 'baz', number: 1 }, { string: 'foo', number: 1 }, { string: 'baz', number: 2 }, { string: 'bar', number: 3 }])
+    expect(items)
+      .toStrictEqual([
+        { string: 'baz', number: 1 },
+        { string: 'foo', number: 1 },
+        { string: 'baz', number: 2 },
+        { string: 'bar', number: 3 },
+      ])
 
     sortItems(items = getItems(), ['number', 'string'], [true, false], 'en')
-    expect(items).toStrictEqual([{ string: 'bar', number: 3 }, { string: 'baz', number: 2 }, { string: 'baz', number: 1 }, { string: 'foo', number: 1 }])
+    expect(items)
+      .toStrictEqual([
+        { string: 'bar', number: 3 },
+        { string: 'baz', number: 2 },
+        { string: 'baz', number: 1 },
+        { string: 'foo', number: 1 },
+      ])
 
     sortItems(items = getItems(), ['number', 'string'], [false, true], 'en')
-    expect(items).toStrictEqual([{ string: 'foo', number: 1 }, { string: 'baz', number: 1 }, { string: 'baz', number: 2 }, { string: 'bar', number: 3 }])
+    expect(items)
+      .toStrictEqual([
+        { string: 'foo', number: 1 },
+        { string: 'baz', number: 1 },
+        { string: 'baz', number: 2 },
+        { string: 'bar', number: 3 },
+      ])
 
     sortItems(items = getItems(), ['number', 'string'], [true, true], 'en')
-    expect(items).toStrictEqual([{ string: 'bar', number: 3 }, { string: 'baz', number: 2 }, { string: 'foo', number: 1 }, { string: 'baz', number: 1 }])
+    expect(items)
+      .toStrictEqual([
+        { string: 'bar', number: 3 },
+        { string: 'baz', number: 2 },
+        { string: 'foo', number: 1 },
+        { string: 'baz', number: 1 },
+      ])
 
     sortItems(items = getItems(), ['string', 'number'], [], 'en', { number: (a, b) => b - a })
-    expect(items).toStrictEqual([{ string: 'bar', number: 3 }, { string: 'baz', number: 2 }, { string: 'baz', number: 1 }, { string: 'foo', number: 1 }])
+    expect(items)
+      .toStrictEqual([
+        { string: 'bar', number: 3 },
+        { string: 'baz', number: 2 },
+        { string: 'baz', number: 1 },
+        { string: 'foo', number: 1 },
+      ])
 
     sortItems(items = getItems(), ['number', 'string'], [], 'en', { number: (a, b) => b - a })
-    expect(items).toStrictEqual([{ string: 'bar', number: 3 }, { string: 'baz', number: 2 }, { string: 'baz', number: 1 }, { string: 'foo', number: 1 }])
+    expect(items)
+      .toStrictEqual([
+        { string: 'bar', number: 3 },
+        { string: 'baz', number: 2 },
+        { string: 'baz', number: 1 },
+        { string: 'foo', number: 1 },
+      ])
+  })
+})
+
+describe('kebabCase', () => {
+  it.each([
+    ['PascalCase', 'pascal-case'],
+    ['camelCase', 'camel-case'],
+    ['kebab-case', 'kebab-case'],
+    ['ALLCAPS', 'allcaps'],
+  ])('should convert "%s" to "%s"', (input, expected) => {
+    expect(kebabCase(input)).toBe(expected)
+  })
+
+  it.each([
+    [null],
+    [undefined],
+  ])('should handle %s values', input => {
+    expect(kebabCase(input)).toBe('')
   })
 })

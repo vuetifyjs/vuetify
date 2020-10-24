@@ -3,7 +3,7 @@ module.exports = {
     props: [
       {
         name: 'type',
-        options: {
+        example: {
           actions: 'button@2',
           article: 'heading, paragraph',
           avatar: 'avatar',
@@ -35,6 +35,12 @@ module.exports = {
           'table-tfoot': 'text@2, avatar@2',
           text: 'text',
         },
+      },
+    ],
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
       },
     ],
   },

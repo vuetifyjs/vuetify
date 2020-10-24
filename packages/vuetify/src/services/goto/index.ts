@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Extensions
 import { Service } from '../service'
 
@@ -57,7 +60,6 @@ function goTo (
   if (!ease) throw new TypeError(`Easing function "${settings.easing}" not found.`)
 
   // Cannot be tested properly in jsdom
-  // tslint:disable-next-line:promise-must-complete
   /* istanbul ignore next */
   return new Promise(resolve => requestAnimationFrame(function step (currentTime: number) {
     const timeElapsed = currentTime - startTime

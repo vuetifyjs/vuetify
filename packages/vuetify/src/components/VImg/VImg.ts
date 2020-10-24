@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import './VImg.sass'
 
@@ -53,7 +56,7 @@ export default mixins(
         rootMargin: undefined,
         threshold: undefined,
       }),
-    },
+    } as PropValidator<IntersectionObserverInit>,
     position: {
       type: String,
       default: 'center center',
@@ -77,6 +80,7 @@ export default mixins(
       isLoading: true,
       calculatedAspectRatio: undefined as number | undefined,
       naturalWidth: undefined as number | undefined,
+      hasError: false,
     }
   },
 
@@ -85,21 +89,21 @@ export default mixins(
       return Number(this.normalisedSrc.aspect || this.calculatedAspectRatio)
     },
     normalisedSrc (): srcObject {
-      return typeof this.src === 'string'
+      return this.src && typeof this.src === 'object'
         ? {
-          src: this.src,
-          srcset: this.srcset,
-          lazySrc: this.lazySrc,
-          aspect: Number(this.aspectRatio || 0),
-        } : {
           src: this.src.src,
           srcset: this.srcset || this.src.srcset,
           lazySrc: this.lazySrc || this.src.lazySrc,
           aspect: Number(this.aspectRatio || this.src.aspect),
+        } : {
+          src: this.src,
+          srcset: this.srcset,
+          lazySrc: this.lazySrc,
+          aspect: Number(this.aspectRatio || 0),
         }
     },
     __cachedImage (): VNode | [] {
-      if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc)) return []
+      if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc || this.gradient)) return []
 
       const backgroundImage: string[] = []
       const src = this.isLoading ? this.normalisedSrc.lazySrc : this.currentSrc
@@ -175,6 +179,7 @@ export default mixins(
       this.$emit('load', this.src)
     },
     onError () {
+      this.hasError = true
       this.$emit('error', this.src)
     },
     getSrc () {
@@ -202,6 +207,7 @@ export default mixins(
       }
       image.onerror = this.onError
 
+      this.hasError = false
       image.src = this.normalisedSrc.src
       this.sizes && (image.sizes = this.sizes)
       this.normalisedSrc.srcset && (image.srcset = this.normalisedSrc.srcset)
@@ -217,7 +223,7 @@ export default mixins(
           this.naturalWidth = naturalWidth
           this.calculatedAspectRatio = naturalWidth / naturalHeight
         } else {
-          timeout != null && setTimeout(poll, timeout)
+          timeout != null && !this.hasError && setTimeout(poll, timeout)
         }
       }
 

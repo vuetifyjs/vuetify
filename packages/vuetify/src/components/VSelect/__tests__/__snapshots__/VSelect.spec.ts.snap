@@ -352,7 +352,7 @@ exports[`VSelect.ts should render v-select correctly when using v-list-item in i
 exports[`VSelect.ts should use slotted no-data 1`] = `
 <div role="listbox"
      tabindex="-1"
-     class="v-list v-select-list v-sheet v-sheet--tile theme--light theme--light"
+     class="v-list v-select-list v-sheet theme--light theme--light"
      id="list-134"
 >
   <div tabindex="0"

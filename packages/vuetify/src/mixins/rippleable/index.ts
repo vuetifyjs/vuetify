@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Directives
 import ripple from '../../directives/ripple'
 
@@ -27,12 +30,8 @@ export default Vue.extend({
         name: 'ripple',
         value: { center: true },
       } as VNodeDirective)
-      data.on = Object.assign({
-        click: this.onChange,
-      }, this.$listeners)
 
       return this.$createElement('div', data)
     },
-    onChange () {},
   },
 })

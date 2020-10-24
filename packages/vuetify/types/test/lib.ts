@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import { App, defineComponent } from 'vue'
 
 import Vuetify, {
@@ -26,4 +29,10 @@ defineComponent({
   setup () {
     const vuetify = useVuetify()
   },
+})
+
+VBtn.extend()
+
+Vue.extend({
+  extends: VBtn,
 })

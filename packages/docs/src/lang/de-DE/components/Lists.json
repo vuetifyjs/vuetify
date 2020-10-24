@@ -1,7 +1,0 @@
-{
-  "props": {
-    "v-list-group": {
-      "ripple": "Mixins.Rippleable.props.ripple"
-    }
-  }
-}

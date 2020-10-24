@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { Point, Boundary, Bar } from '../VSparkline'
 
 export function genPoints (
@@ -15,11 +18,7 @@ export function genPoints (
   return values.map((value, index) => {
     return {
       x: minX + index * gridX,
-      y:
-        maxY -
-        (value - minValue) * gridY +
-        +(index === totalValues - 1) * 0.00001 -
-        +(index === 0) * 0.00001,
+      y: maxY - (value - minValue) * gridY,
       value,
     }
   })
@@ -38,7 +37,7 @@ export function genBars (
   if (maxValue < 0) maxValue = 0
 
   const gridX = maxX / totalValues
-  const gridY = (maxY - minY) / (maxValue - minValue)
+  const gridY = (maxY - minY) / ((maxValue - minValue) || 1)
   const horizonY = maxY - Math.abs(minValue * gridY)
 
   return values.map((value, index) => {

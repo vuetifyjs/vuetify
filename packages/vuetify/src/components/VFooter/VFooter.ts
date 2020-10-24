@@ -1,9 +1,14 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import './VFooter.sass'
 
+// Components
+import VSheet from '../VSheet/VSheet'
+
 // Mixins
 import Applicationable from '../../mixins/applicationable'
-import VSheet from '../VSheet/VSheet'
 import SSRBootable from '../../mixins/ssr-bootable'
 
 // Utilities
@@ -31,9 +36,9 @@ export default mixins(
     },
     inset: Boolean,
     padless: Boolean,
-    tile: {
-      type: Boolean,
-      default: true,
+    tag: {
+      type: String,
+      default: 'footer',
     },
   },
 
@@ -108,6 +113,6 @@ export default mixins(
       style: this.styles,
     })
 
-    return h('footer', data, this.$slots.default)
+    return h(this.tag, data, this.$slots.default)
   },
 })

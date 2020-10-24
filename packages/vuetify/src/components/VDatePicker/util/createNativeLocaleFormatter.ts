@@ -1,5 +1,8 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import pad from './pad'
-import { DatePickerFormatter } from 'types'
+import { DatePickerFormatter } from 'vuetify/types'
 
 interface SubstrOptions {
   start?: number

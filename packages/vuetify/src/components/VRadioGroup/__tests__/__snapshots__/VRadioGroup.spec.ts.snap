@@ -24,7 +24,7 @@ exports[`VRadioGroup.ts should match dense snapshot 1`] = `
                    name="radio-5"
                    value
             >
-            <div class="v-input--selection-controls__ripple primary--text">
+            <div class="v-input--selection-controls__ripple">
             </div>
           </div>
         </div>

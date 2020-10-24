@@ -4,7 +4,7 @@ import { chunk, padEnd } from './helpers'
 import { toXYZ } from './color/transformSRGB'
 
 // Types
-import { VuetifyThemeVariant } from 'types/services/theme'
+import type { VuetifyThemeVariant } from 'types/services/theme'
 
 export type ColorInt = number
 export type XYZ = [number, number, number]
@@ -29,7 +29,7 @@ export function colorToInt (color: Color): ColorInt {
   if (typeof color === 'number') {
     rgb = color
   } else if (typeof color === 'string') {
-    let c = color[0] === '#' ? color.substring(1) : color
+    let c = color.startsWith('#') ? color.substring(1) : color
     if (c.length === 3) {
       c = c.split('').map(char => char + char).join('')
     }
@@ -226,8 +226,8 @@ export function parseGradient (
 ) {
   return gradient.replace(/([a-z]+(\s[a-z]+-[1-5])?)(?=$|,)/gi, x => {
     return classToHex(x, colors, currentTheme) || x
-  }).replace(/(?<=rgba\()#[0-9a-f]+(?=,)/gi, x => {
-    return Object.values(HexToRGBA(parseHex(x))).slice(0, 3).join(',')
+  }).replace(/(rgba\()#[0-9a-f]+(?=,)/gi, x => {
+    return 'rgba(' + Object.values(HexToRGBA(parseHex(x.replace(/rgba\(/, '')))).slice(0, 3).join(',')
   })
 }
 

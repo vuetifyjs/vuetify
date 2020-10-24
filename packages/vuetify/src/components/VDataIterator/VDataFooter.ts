@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import './VDataFooter.sass'
 
 // Components
@@ -7,7 +10,7 @@ import VBtn from '../VBtn'
 
 // Types
 import Vue, { VNode, VNodeChildrenArrayContents, PropType } from 'vue'
-import { DataPagination, DataOptions, DataItemsPerPageOption } from 'types'
+import { DataPagination, DataOptions, DataItemsPerPageOption } from 'vuetify/types'
 import { PropValidator } from 'vue/types/options'
 
 export default Vue.extend({

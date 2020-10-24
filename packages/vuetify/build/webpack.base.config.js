@@ -1,16 +1,13 @@
 require('dotenv').config()
 
-const os = require('os')
-const HappyPack = require('happypack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
 const extractCSS = isProd || process.env.TARGET === 'development'
 
-exports.happyThreadPool = HappyPack.ThreadPool({
-  size: Math.min(os.cpus().length, 4)
-})
+const resolve = file => require('path').resolve(__dirname, file)
 
 const cssLoaders = [
   // https://github.com/webpack-contrib/mini-css-extract-plugin#user-content-advanced-configuration-example
@@ -22,38 +19,43 @@ const cssLoaders = [
 
 const sassLoaders = [
   ...cssLoaders,
-  { loader: 'sass-loader', options: {
-    implementation: require('sass'),
-    fiber: require('fibers'),
-    indentedSyntax: true
-  } }
+  {
+    loader: 'sass-loader',
+    options: {
+      implementation: require('sass'),
+      sassOptions: {
+        indentedSyntax: true
+      }
+    }
+  }
 ]
 
 const scssLoaders = [
   ...cssLoaders,
-  { loader: 'sass-loader', options: {
-    implementation: require('sass'),
-    fiber: require('fibers'),
-    indentedSyntax: false
-  } }
+  {
+    loader: 'sass-loader',
+    options: {
+      implementation: require('sass'),
+      sassOptions: {
+        indentedSyntax: false
+      }
+    }
+  }
 ]
 
-const plugins = [
-  new FriendlyErrorsWebpackPlugin({
-    clearConsole: true
-  })
-]
-
-exports.config = {
+module.exports = {
   mode: isProd ? 'production' : 'development',
+  devtool: 'source-map',
   resolve: {
-    extensions: ['*', '.js', '.json', '.vue', '.ts']
-  },
-  node: {
-    fs: 'empty'
+    extensions: ['.ts', '.mjs', '.js', '.vue', '.json']
   },
   module: {
     rules: [
+      {
+        test: /\.[jt]s$/,
+        use: 'babel-loader',
+        exclude: /node_modules/
+      },
       {
         test: /\.sass$/,
         use: sassLoaders
@@ -64,7 +66,17 @@ exports.config = {
       }
     ]
   },
-  plugins,
+  plugins: [
+    new FriendlyErrorsWebpackPlugin({
+      clearConsole: true
+    }),
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        configFile: resolve('../tsconfig.checks.json'),
+        mode: 'write-references'
+      }
+    }),
+  ],
   performance: {
     hints: false
   },

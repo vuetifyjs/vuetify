@@ -1,83 +1,114 @@
-import {
-  InjectionKey,
-  inject,
-  warn,
-} from 'vue'
+import { wrapInArray } from './util/helpers'
+import type { InjectionKey, App, ExtractPropTypes, Prop } from 'vue'
+import { inject, getCurrentInstance } from 'vue'
 
-// Preset
-import { preset as Preset } from './presets/default'
+type MakeFactoryFunctions<T> = {
+  [K in keyof T]: T[K] extends (infer E)[]
+    ? () => E[]
+    : T[K] extends Function
+      ? T[K]
+      : T[K] extends object
+        ? () => T[K]
+        : T[K]
+}
 
-// Utilities
-import { mergeDeep } from './util/helpers'
+// @ts-expect-error
+type ExtractDefaultTypes<T> = Partial<MakeFactoryFunctions<Required<ExtractPropTypes<T>>>>
 
-// Types
-import {
-  VuetifyUserPreset,
-  VuetifyPreset,
-} from 'vuetify/types'
-import {
-  VuetifyService,
-  VuetifyServiceContract,
-} from 'vuetify/types/services'
+export interface VuetifyComponentDefaults {}
 
-// Services
-import * as services from './services'
+export interface VuetifyInstance {
+  defaults: VuetifyComponentDefaults
+}
 
-export const VuetifySymbol: InjectionKey<Dictionary<VuetifyServiceContract>> = Symbol.for('vuetify')
+export interface VuetifyOptions {
+  components?: Record<string, any>
+  directives?: Record<string, any>
+  defaults?: VuetifyComponentDefaults
+}
 
-export function useVuetify () {
+export const VuetifySymbol: InjectionKey<VuetifyInstance> = Symbol.for('vuetify')
+
+export const useVuetify = () => {
   const vuetify = inject(VuetifySymbol)
 
-  /* istanbul ignore if */
   if (!vuetify) {
-    warn('Vuetify has not been installed on this app')
+    throw new Error('Vuetify has not been installed on this app')
   }
 
   return vuetify
 }
 
-export default class Vuetify {
-  public framework: Dictionary<VuetifyServiceContract> = {}
+export const createVuetify = (options: VuetifyOptions = {}) => {
+  const install = (app: App) => {
+    console.log('Installing Vuetify...')
 
-  public preset = {} as VuetifyPreset
+    const {
+      components = {},
+      directives = {},
+      defaults = {},
+    } = options
 
-  constructor (userPreset: VuetifyUserPreset = {}) {
-    this.init(userPreset)
-  }
+    for (const key in directives) {
+      const directive = directives[key]
 
-  // Called on the new vuetify instance
-  // bootstrap in install beforeCreate
-  // Exposes ssrContext if available
-  init (userPreset: VuetifyUserPreset) {
-    this.preset = this.mergePreset(userPreset)
-
-    let key: keyof typeof services
-    for (key in services) {
-      const service = services[key]
-
-      this.use(service)
-
-      // TODO: remove if https://www.notion.so/vuetify/0006-create-scroll-service-13bf10dcda0b447ea0bd3e9729c87e32
-      // is approved
-      this.framework[service.property].framework = this.framework
+      app.directive(key, directive)
     }
 
-    // rtl is not installed and
-    // will never be called by
-    // the init process
-    this.framework.rtl = Boolean(this.preset.rtl) as any
+    for (const key in components) {
+      const component = components[key]
+
+      app.component(key, component)
+    }
+
+    const vuetify: VuetifyInstance = {
+      defaults,
+    }
+
+    app.provide(VuetifySymbol, vuetify)
+    app.config.globalProperties.$vuetify = vuetify
   }
 
-  mergePreset ({ preset, ...userPreset }: VuetifyUserPreset) {
-    return mergeDeep(mergeDeep(Preset, preset), userPreset) as VuetifyPreset
+  return { install }
+}
+
+// Would be nice to have PropOptions here
+const isFactory = (type: any) => {
+  return wrapInArray(type).find((t: any) => t === Array || t === Object)
+}
+
+export function makeProps<P extends Record<string, Prop<any>>> (props: P) {
+  for (const key in props) {
+    const propOptions = (props[key] as any)
+
+    propOptions.default = generateDefault(key, propOptions.default, propOptions.type)
   }
 
-  // Instantiate a VuetifyService
-  use (Service: VuetifyService) {
-    const property = Service.property
+  return props
+}
 
-    if (property in this.framework) return
+function generateDefault (propName: string, localDefault: any, type: any) {
+  return () => {
+    const vm = getCurrentInstance()
 
-    this.framework[property] = new Service(this.preset)
+    if (!vm || !vm.type.name) {
+      console.warn('Unable to get current component instance when generating default prop value')
+
+      return localDefault
+    }
+
+    const globalDefault = getGlobalDefault(vm.type.name, propName)
+    const actualDefault = typeof globalDefault !== 'undefined' ? globalDefault : localDefault
+
+    return isFactory(type) ? actualDefault() : actualDefault
   }
+}
+
+// TODO: Fix typings and shit
+function getGlobalDefault<C extends string, P extends string> (component: C, prop: P) {
+  const vuetify = useVuetify()
+  const key = component as keyof VuetifyComponentDefaults
+  const defaults = vuetify.defaults[key] as any
+  if (defaults == null) return null
+  return defaults[prop]
 }

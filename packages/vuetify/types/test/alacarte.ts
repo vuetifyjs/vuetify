@@ -1,3 +1,6 @@
+// @ts-nocheck
+// eslint-disable
+
 import Vue from 'vue'
 
 import { install } from 'vuetify/es5/install'
@@ -12,7 +15,6 @@ install(Vue, {
     ...VCard
   },
   directives: {
-    Ripple,
     ...directives
   }
 })
@@ -25,4 +27,10 @@ Vue.extend({
   directives: {
     Ripple
   }
+})
+
+VBtn.extend()
+
+Vue.extend({
+  extends: VBtn,
 })

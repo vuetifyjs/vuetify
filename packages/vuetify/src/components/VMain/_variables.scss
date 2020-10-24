@@ -1,0 +1,6 @@
+@import '../../styles/styles.sass';
+
+$main-transition: 0.2s map-get($transition, 'fast-out-slow-in') !default;
+
+// TODO: remove in v3
+$content-transition: $main-transition !default;

@@ -1,11 +1,14 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
-import VFileInput from '../VFileInput'
+// import VFileInput from '../VFileInput'
 
 // Services
-import { Lang } from '../../../services/lang'
+// import { Lang } from '../../../services/lang'
 
 // Preset
-import { preset } from '../../../presets/default'
+// import { preset } from '../../../presets/default'
 
 // Libraries
 import {
@@ -17,7 +20,7 @@ import {
 const oneMBFile = new File([new ArrayBuffer(1048576)], 'test')
 const twoMBFile = new File([new ArrayBuffer(2097152)], 'test')
 
-describe('VFileInput.ts', () => {
+describe.skip('VFileInput.ts', () => {
   type Instance = InstanceType<typeof VFileInput>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
@@ -283,5 +286,13 @@ describe('VFileInput.ts', () => {
 
       expect(wrapper.vm.internalArrayValue).toEqual([])
     }
+  })
+
+  it('should set display none if hide-input prop is set', () => {
+    const wrapper = mountFunction({
+      propsData: { hideInput: true },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

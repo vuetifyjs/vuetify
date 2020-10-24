@@ -1,9 +1,13 @@
+// @ts-nocheck
+/* eslint-disable */
+
 /* eslint-disable no-multi-spaces */
 // Extensions
 import { Service } from '../service'
 
 // Utilities
 import * as ThemeUtils from './utils'
+import { getNestedValue } from '../../util/helpers'
 
 // Types
 import { VuetifyPreset } from 'vuetify'
@@ -53,8 +57,8 @@ export class Theme extends Service {
     this.init()
   }
 
-  // When setting css, check for element
-  // and apply new values
+  // When setting css, check for element and apply new values
+  /* eslint-disable-next-line accessor-pairs */
   set css (val: string) {
     if (this.vueMeta) {
       if (this.isVueMeta23) {
@@ -155,14 +159,12 @@ export class Theme extends Service {
     if (typeof document === 'undefined') return
 
     /* istanbul ignore next */
-    const options = this.options || {}
-
     this.styleEl = document.createElement('style')
     this.styleEl.type = 'text/css'
     this.styleEl.id = 'vuetify-theme-stylesheet'
 
-    if (options.cspNonce) {
-      this.styleEl.setAttribute('nonce', options.cspNonce)
+    if (this.options.cspNonce) {
+      this.styleEl.setAttribute('nonce', this.options.cspNonce)
     }
 
     document.head.appendChild(this.styleEl)
@@ -209,15 +211,14 @@ export class Theme extends Service {
         cssText: this.generatedStyles,
         type: 'text/css',
         id: 'vuetify-theme-stylesheet',
-        nonce: (this.options || {}).cspNonce,
+        nonce: this.options.cspNonce,
       }],
     })
   }
 
   private initSSR (ssrContext?: any) {
-    const options = this.options || {}
     // SSR
-    const nonce = options.cspNonce ? ` nonce="${options.cspNonce}"` : ''
+    const nonce = this.options.cspNonce ? ` nonce="${this.options.cspNonce}"` : ''
     ssrContext.head = ssrContext.head || ''
     ssrContext.head += `<style type="text/css" id="vuetify-theme-stylesheet"${nonce}>${this.generatedStyles}</style>`
   }
@@ -261,9 +262,11 @@ export class Theme extends Service {
   }
 
   get parsedTheme (): VuetifyParsedTheme {
-    /* istanbul ignore next */
-    const theme = this.currentTheme || {}
-    return ThemeUtils.parse(theme)
+    return ThemeUtils.parse(
+      this.currentTheme || {},
+      undefined,
+      getNestedValue(this.options, ['variations'], true)
+    )
   }
 
   // Is using v2.3 of vue-meta

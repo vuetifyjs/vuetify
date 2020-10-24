@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { colorToInt, intToHex, colorToHex, ColorInt } from '../../util/colorUtils'
 import * as sRGB from '../../util/color/transformSRGB'
 import * as LAB from '../../util/color/transformCIELAB'
@@ -8,7 +11,8 @@ import {
 
 export function parse (
   theme: Record<string, VuetifyThemeItem>,
-  isItem = false
+  isItem = false,
+  variations = true,
 ): VuetifyParsedTheme {
   const { anchor, ...variant } = theme
   const colors = Object.keys(variant)
@@ -20,13 +24,15 @@ export function parse (
 
     if (value == null) continue
 
-    if (isItem) {
+    if (!variations) {
+      parsedTheme[name] = { base: intToHex(colorToInt(value)) }
+    } else if (isItem) {
       /* istanbul ignore else */
       if (name === 'base' || name.startsWith('lighten') || name.startsWith('darken')) {
         parsedTheme[name] = colorToHex(value)
       }
     } else if (typeof value === 'object') {
-      parsedTheme[name] = parse(value, true)
+      parsedTheme[name] = parse(value, true, variations)
     } else {
       parsedTheme[name] = genVariations(name, colorToInt(value))
     }

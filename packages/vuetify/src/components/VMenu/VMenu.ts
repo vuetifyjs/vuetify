@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import './VMenu.sass'
 
@@ -11,6 +14,7 @@ import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable'
 import Returnable from '../../mixins/returnable'
+import Roundable from '../../mixins/roundable'
 import Toggleable from '../../mixins/toggleable'
 import Themeable from '../../mixins/themeable'
 
@@ -35,6 +39,7 @@ const baseMixins = mixins(
   Detachable,
   Menuable,
   Returnable,
+  Roundable,
   Toggleable,
   Themeable
 )
@@ -43,17 +48,17 @@ const baseMixins = mixins(
 export default baseMixins.extend({
   name: 'v-menu',
 
+  directives: {
+    ClickOutside,
+    Resize,
+  },
+
   provide (): object {
     return {
       isInMenu: true,
       // Pass theme through to default slot
       theme: this.theme,
     }
-  },
-
-  directives: {
-    ClickOutside,
-    Resize,
   },
 
   props: {
@@ -312,12 +317,12 @@ export default baseMixins.extend({
       if (!this.openOnHover && this.closeOnClick) {
         directives.push({
           name: 'click-outside',
-          value: () => { this.isActive = false },
-          args: {
+          value: {
+            handler: () => { this.isActive = false },
             closeConditional: this.closeConditional,
             include: () => [this.$el, ...this.getOpenDependentElements()],
           },
-        } as any)
+        })
       }
 
       return directives
@@ -331,6 +336,7 @@ export default baseMixins.extend({
         staticClass: 'v-menu__content',
         class: {
           ...this.rootThemeClasses,
+          ...this.roundedClasses,
           'v-menu__content--auto': this.auto,
           'v-menu__content--fixed': this.activatorFixed,
           menuable__content__active: this.isActive,
@@ -349,6 +355,11 @@ export default baseMixins.extend({
           keydown: this.onKeyDown,
         },
       } as VNodeData
+
+      if (this.$listeners.scroll) {
+        options.on = options.on || {}
+        options.on.scroll = this.$listeners.scroll
+      }
 
       if (!this.disabled && this.openOnHover) {
         options.on = options.on || {}

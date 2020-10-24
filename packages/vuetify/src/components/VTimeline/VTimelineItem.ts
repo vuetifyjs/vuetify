@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Types
 import mixins, { ExtractVue } from '../../util/mixins'
 import { VNode, VNodeData } from 'vue'

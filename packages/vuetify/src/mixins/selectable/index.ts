@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
 import VInput from '../../components/VInput'
 
@@ -7,6 +10,10 @@ import Comparable from '../comparable'
 
 // Utilities
 import mixins from '../../util/mixins'
+
+export function prevent (e: Event) {
+  e.preventDefault()
+}
 
 /* @vue/component */
 export default mixins(
@@ -72,8 +79,8 @@ export default mixins(
       return this.isActive
     },
     rippleState (): string | undefined {
-      return !this.disabled && !this.validationState
-        ? 'primary'
+      return !this.isDisabled && !this.validationState
+        ? undefined
         : this.validationState
     },
   },
@@ -92,14 +99,8 @@ export default mixins(
       if (!label) return label
 
       label!.data!.on = {
-        click: (e: Event) => {
-          // Prevent label from
-          // causing the input
-          // to focus
-          e.preventDefault()
-
-          this.onChange()
-        },
+        // Label shouldn't cause the input to focus
+        click: prevent,
       }
 
       return label
@@ -122,6 +123,7 @@ export default mixins(
           change: this.onChange,
           focus: this.onFocus,
           keydown: this.onKeydown,
+          click: prevent,
         },
         ref: 'input',
       })
@@ -129,8 +131,12 @@ export default mixins(
     onBlur () {
       this.isFocused = false
     },
+    onClick (e: Event) {
+      this.onChange()
+      this.$emit('click', e)
+    },
     onChange () {
-      if (this.isDisabled) return
+      if (!this.isInteractive) return
 
       const value = this.value
       let input = this.internalValue

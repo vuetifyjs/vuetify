@@ -17,7 +17,7 @@ export default defineComponent({
         'data-app': true,
       }), h('div', {
         class: 'v-application__wrap',
-      }, slots.default()))
+      }, slots.default?.()))
     )
   },
 })

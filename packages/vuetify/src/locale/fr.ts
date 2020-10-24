@@ -3,7 +3,7 @@ export default {
   close: 'Fermer',
   dataIterator: {
     noResultsText: 'Aucun enregistrement correspondant trouvé',
-    loadingText: "Chargement de l'élément...",
+    loadingText: `Chargement de l'élément...`,
   },
   dataTable: {
     itemsPerPageText: 'Lignes par page:',
@@ -28,6 +28,10 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} sélectionnés',
+    nextMonthAriaLabel: 'Le mois prochain',
+    nextYearAriaLabel: `L'année prochaine`,
+    prevMonthAriaLabel: 'Le mois précédent',
+    prevYearAriaLabel: 'Année précédente',
   },
   noDataText: 'Aucune donnée disponible',
   carousel: {

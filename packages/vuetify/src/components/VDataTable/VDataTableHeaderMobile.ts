@@ -1,10 +1,12 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { VNode, VNodeChildrenArrayContents } from 'vue'
 import mixins from '../../util/mixins'
 import VSelect from '../VSelect/VSelect'
 import VChip from '../VChip'
 import header from './mixins/header'
 import { wrapInArray } from '../../util/helpers'
-import { DataTableHeader } from 'types'
 
 export default mixins(header).extend({
   name: 'v-data-table-header-mobile',
@@ -36,7 +38,7 @@ export default mixins(header).extend({
 
       return this.$createElement(VChip, {
         staticClass: 'sortable',
-        nativeOn: {
+        on: {
           click: (e: MouseEvent) => {
             e.stopPropagation()
             this.$emit('sort', props.item.value)
@@ -52,12 +54,13 @@ export default mixins(header).extend({
           hideDetails: true,
           multiple: this.options.multiSort,
           value: this.options.multiSort ? this.options.sortBy : this.options.sortBy[0],
+          menuProps: { closeOnContentClick: true },
         },
         on: {
           change: (v: string | string[]) => this.$emit('sort', v),
         },
         scopedSlots: {
-          selection: props => this.genSortChip(props) as any, // TODO: whyyy?
+          selection: props => this.genSortChip(props),
         },
       })
     },
@@ -79,7 +82,13 @@ export default mixins(header).extend({
       }, [this.genSelectAll()]))
     }
 
-    const sortHeaders: DataTableHeader[] = this.headers.filter(h => h.sortable !== false && h.value !== 'data-table-select')
+    const sortHeaders = this.headers
+      .filter(h => h.sortable !== false && h.value !== 'data-table-select')
+      .map(h => ({
+        text: h.text,
+        value: h.value,
+      }))
+
     if (!this.disableSort && sortHeaders.length) {
       children.push(this.genSortSelect(sortHeaders))
     }

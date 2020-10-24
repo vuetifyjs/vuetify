@@ -1,15 +1,10 @@
-export interface BreakpointOptions {
-  scrollBarWidth?: number
-  thresholds?: Partial<BreakpointThresholds>
-}
+// @ts-nocheck
+// eslint-disable
 
-export interface BreakpointThresholds {
-  xs: number
-  sm: number
-  md: number
-  lg: number
-}
+// Types
+export type BreakpointName = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
+// Interfaces
 export interface Breakpoint {
   height: number
   lg: boolean
@@ -20,7 +15,7 @@ export interface Breakpoint {
   mdAndDown: boolean
   mdAndUp: boolean
   mdOnly: boolean
-  name: string
+  name: BreakpointName
   sm: boolean
   smAndDown: boolean
   smAndUp: boolean
@@ -30,6 +25,21 @@ export interface Breakpoint {
   xlOnly: boolean
   xs: boolean
   xsOnly: boolean
+  mobile: boolean
+  mobileBreakpoint: number | BreakpointName
   thresholds: BreakpointThresholds
   scrollBarWidth: number
+}
+
+export interface BreakpointOptions {
+  mobileBreakpoint?: number | BreakpointName
+  scrollBarWidth?: number
+  thresholds?: Partial<BreakpointThresholds>
+}
+
+export interface BreakpointThresholds {
+  xs: number
+  sm: number
+  md: number
+  lg: number
 }

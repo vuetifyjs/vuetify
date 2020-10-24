@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import '../VTextField/VTextField.sass'
 import './VSelect.sass'
@@ -13,6 +16,7 @@ import VTextField from '../VTextField/VTextField'
 
 // Mixins
 import Comparable from '../../mixins/comparable'
+import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
 
 // Directives
@@ -26,7 +30,8 @@ import { consoleError } from '../../util/console'
 // Types
 import mixins from '../../util/mixins'
 import { VNode, VNodeDirective, PropType, VNodeData } from 'vue'
-import { SelectItemKey } from 'types'
+import { PropValidator } from 'vue/types/options'
+import { SelectItemKey } from 'vuetify/types'
 
 export const defaultMenuProps = {
   closeOnClick: false,
@@ -40,12 +45,14 @@ export const defaultMenuProps = {
 const baseMixins = mixins(
   VTextField,
   Comparable,
+  Dependent,
   Filterable
 )
 
 interface options extends InstanceType<typeof baseMixins> {
   $refs: {
     menu: InstanceType<typeof VMenu>
+    content: HTMLElement
     label: HTMLElement
     input: HTMLInputElement
     'prepend-inner': HTMLElement
@@ -82,7 +89,7 @@ export default baseMixins.extend<options>().extend({
     items: {
       type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
     itemColor: {
       type: String,
       default: 'primary',
@@ -158,11 +165,12 @@ export default baseMixins.extend<options>().extend({
     directives (): VNodeDirective[] | undefined {
       return this.isFocused ? [{
         name: 'click-outside',
-        value: this.blur,
-        args: {
+        value: {
+          handler: this.blur,
           closeConditional: this.closeConditional,
+          include: () => this.getOpenDependentElements(),
         },
-      } as VNodeDirective] : undefined
+      }] : undefined
     },
     dynamicHeight () {
       return 'auto'
@@ -247,19 +255,8 @@ export default baseMixins.extend<options>().extend({
       this.initialValue = val
       this.setSelectedItems()
     },
-    menuIsBooted () {
-      window.setTimeout(() => {
-        if (this.getContent() && this.getContent().addEventListener) {
-          this.getContent().addEventListener('scroll', this.onScroll, false)
-        }
-      })
-    },
     isMenuActive (val) {
       window.setTimeout(() => this.onMenuActiveChange(val))
-
-      if (!val) return
-
-      this.menuIsBooted = true
     },
     items: {
       immediate: true,
@@ -289,8 +286,7 @@ export default baseMixins.extend<options>().extend({
     /** @public */
     activateMenu () {
       if (
-        this.disabled ||
-        this.readonly ||
+        !this.isInteractive ||
         this.isMenuActive
       ) return
 
@@ -341,8 +337,7 @@ export default baseMixins.extend<options>().extend({
     },
     genChipSelection (item: object, index: number) {
       const isDisabled = (
-        this.disabled ||
-        this.readonly ||
+        !this.isInteractive ||
         this.getDisabled(item)
       )
 
@@ -371,7 +366,7 @@ export default baseMixins.extend<options>().extend({
     genCommaSelection (item: object, index: number, last: boolean) {
       const color = index === this.selectedIndex && this.computedColor
       const isDisabled = (
-        this.disabled ||
+        !this.isInteractive ||
         this.getDisabled(item)
       )
 
@@ -445,7 +440,7 @@ export default baseMixins.extend<options>().extend({
         attrs: {
           readonly: true,
           type: 'text',
-          'aria-readonly': String(this.readonly),
+          'aria-readonly': String(this.isReadonly),
           'aria-activedescendant': getObjectValueByPath(this.$refs.menu, 'activeTile.id'),
           autocomplete: getObjectValueByPath(input.data!, 'attrs.autocomplete', 'off'),
         },
@@ -515,13 +510,14 @@ export default baseMixins.extend<options>().extend({
       }
 
       return this.$createElement(VMenu, {
-        attrs: { role: undefined, offsetY: true },
+        attrs: { role: undefined },
         props,
         on: {
           input: (val: boolean) => {
             this.isMenuActive = val
             this.isFocused = val
           },
+          scroll: this.onScroll,
         },
         ref: 'menu',
       }, [this.genList()])
@@ -564,7 +560,7 @@ export default baseMixins.extend<options>().extend({
           this.selectedIndex = index
         },
         selected: index === this.selectedIndex,
-        disabled: this.disabled || this.readonly,
+        disabled: !this.isInteractive,
       })
     },
     getMenuIndex () {
@@ -595,7 +591,7 @@ export default baseMixins.extend<options>().extend({
       this.selectedIndex = -1
     },
     onClick (e: MouseEvent) {
-      if (this.isDisabled) return
+      if (!this.isInteractive) return
 
       if (!this.isAppendInner(e.target)) {
         this.isMenuActive = true
@@ -618,7 +614,7 @@ export default baseMixins.extend<options>().extend({
     onKeyPress (e: KeyboardEvent) {
       if (
         this.multiple ||
-        this.readonly ||
+        !this.isInteractive ||
         this.disableLookup
       ) return
 
@@ -637,11 +633,15 @@ export default baseMixins.extend<options>().extend({
       })
       const item = this.allItems[index]
       if (index !== -1) {
+        this.lastItem = Math.max(this.lastItem, index + 5)
         this.setValue(this.returnObject ? item : this.getValue(item))
+        this.$nextTick(() => this.$refs.menu.getTiles())
         setTimeout(() => this.setMenuIndex(index))
       }
     },
     onKeyDown (e: KeyboardEvent) {
+      if (this.isReadonly && e.keyCode !== keyCodes.tab) return
+
       const keyCode = e.keyCode
       const menu = this.$refs.menu
 
@@ -704,20 +704,17 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onMouseUp (e: MouseEvent) {
+      // eslint-disable-next-line sonarjs/no-collapsible-if
       if (
         this.hasMouseDown &&
         e.which !== 3 &&
-        !this.isDisabled
+        this.isInteractive
       ) {
         // If append inner is present
         // and the target is itself
         // or inside, toggle menu
         if (this.isAppendInner(e.target)) {
           this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
-        // If user is clicking in the container
-        // and field is enclosed, activate it
-        } else if (this.isEnclosed) {
-          this.isMenuActive = true
         }
       }
 
@@ -727,7 +724,7 @@ export default baseMixins.extend<options>().extend({
       if (!this.isMenuActive) {
         requestAnimationFrame(() => (this.getContent().scrollTop = 0))
       } else {
-        if (this.lastItem >= this.computedItems.length) return
+        if (this.lastItem > this.computedItems.length) return
 
         const showMoreItems = (
           this.getContent().scrollHeight -

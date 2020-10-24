@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import './VAppBar.sass'
 
@@ -256,11 +259,12 @@ export default baseMixins.extend({
         return
       }
 
-      if (this.currentThreshold < this.computedScrollThreshold) return
-
       if (this.hideOnScroll) {
-        this.isActive = this.isScrollingUp
+        this.isActive = this.isScrollingUp ||
+          this.currentScroll < this.computedScrollThreshold
       }
+
+      if (this.currentThreshold < this.computedScrollThreshold) return
 
       this.savedScroll = this.currentScroll
     },

@@ -1,6 +1,9 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
-import VWindow from '../VWindow'
-import VWindowItem from '../VWindowItem'
+// import VWindow from '../VWindow'
+// import VWindowItem from '../VWindowItem'
 
 // Utilities
 import {
@@ -8,9 +11,9 @@ import {
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
-import { touch } from '../../../../test'
+// import { touch } from '../../../../test'
 
-describe('VWindow.ts', () => {
+describe.skip('VWindow.ts', () => {
   type Instance = InstanceType<typeof VWindow>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
@@ -30,7 +33,7 @@ describe('VWindow.ts', () => {
     }
   })
 
-  it('it should return the correct transition', async () => {
+  it('should return the correct transition', async () => {
     const wrapper = mountFunction()
     // Force booted
     wrapper.setData({ isBooted: true })

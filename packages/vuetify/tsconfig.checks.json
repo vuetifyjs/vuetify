@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.dev.json",
+  // Tests are currently very unsafe, skip linting types in them for now
+  "exclude": ["**/*.spec.ts"]
+}

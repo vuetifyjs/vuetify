@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import './VCheckbox.sass'
 import '../../styles/components/_selection-controls.sass'
@@ -57,7 +60,7 @@ export default Selectable.extend({
     // according to spec, should still show
     // a color when disabled and active
     validationState (): string | undefined {
-      if (this.disabled && !this.inputIndeterminate) return undefined
+      if (this.isDisabled && !this.inputIndeterminate) return undefined
       if (this.hasError && this.shouldValidate) return 'error'
       if (this.hasSuccess) return 'success'
       if (this.hasColor !== null) return this.computedColor

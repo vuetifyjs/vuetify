@@ -1,25 +1,23 @@
+const webpack = require('webpack')
 const path = require('path')
-const merge = require('webpack-merge')
-const HappyPack = require('happypack')
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const { merge } = require('webpack-merge')
 const VueLoader = require('vue-loader')
 // const { VuetifyProgressiveModule } = require('vuetify-loader')
-const { config: baseWebpackConfig, happyThreadPool } = require('./webpack.base.config')
+const baseWebpackConfig = require('./webpack.base.config')
 
 // Helpers
 const resolve = file => path.resolve(__dirname, file)
 
 module.exports = merge(baseWebpackConfig, {
-  devtool: 'source-map',
+  target: 'web',
   entry: ['babel-polyfill', './dev/index.js'],
   output: {
     filename: '[name].js',
     path: resolve('../dev'),
-    publicPath: '/dev/',
     library: 'Vuetify'
   },
   resolve: {
-    alias: { vuetify: resolve('../src') }
+    alias: { vuetify$: resolve('../src/entry-bundler.ts') }
   },
   module: {
     rules: [
@@ -31,16 +29,6 @@ module.exports = merge(baseWebpackConfig, {
         //     modules: [VuetifyProgressiveModule]
         //   }
         // }
-      },
-      {
-        test: /\.ts$/,
-        use: 'happypack/loader?id=ts',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.js$/,
-        use: 'happypack/loader?id=js',
-        exclude: /node_modules/
       },
       {
         test: /\.css$/,
@@ -76,36 +64,17 @@ module.exports = merge(baseWebpackConfig, {
   },
   devServer: {
     contentBase: resolve('../dev'),
-    publicPath: '/dev/',
+    publicPath: '/',
     host: process.env.HOST || 'localhost',
     port: process.env.PORT || '8080',
-    disableHostCheck: true
+    disableHostCheck: true,
   },
   plugins: [
     new VueLoader.VueLoaderPlugin(),
-    // new ForkTsCheckerWebpackPlugin({
-    //   checkSyntacticErrors: true,
-    //   tsconfig: resolve('../tsconfig.json')
-    // }),
-    new HappyPack({
-      id: 'ts',
-      threadPool: happyThreadPool,
-      loaders: [
-        'babel-loader',
-        {
-          loader: 'ts-loader',
-          options: {
-            appendTsSuffixTo: [/\.vue$/],
-            happyPackMode: true
-          }
-        },
-        // 'eslint-loader?cache=true?emitWarning=true'
-      ]
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"development"',
+      '__VUE_OPTIONS_API__': 'true',
+      '__VUE_PROD_DEVTOOLS__': 'true',
     }),
-    new HappyPack({
-      id: 'js',
-      threadPool: happyThreadPool,
-      loaders: ['babel-loader', /*'eslint-loader?cache=true?emitWarning=true'*/]
-    })
-  ]
+  ],
 })

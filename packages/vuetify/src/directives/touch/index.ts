@@ -1,6 +1,16 @@
-import { VNodeDirective, VNode } from 'vue/types/vnode'
-import { keys } from '../../util/helpers'
-import { TouchHandlers, TouchValue, TouchWrapper } from 'types'
+// Types
+import type {
+  DirectiveBinding,
+  ObjectDirective,
+} from 'vue'
+import type {
+  TouchHandlers,
+  TouchValue,
+  TouchWrapper,
+} from 'vuetify/types'
+
+// Utilities
+import { keys } from '@/util/helpers'
 
 export interface TouchStoredHandlers {
   touchstart: (e: TouchEvent) => void
@@ -8,7 +18,7 @@ export interface TouchStoredHandlers {
   touchmove: (e: TouchEvent) => void
 }
 
-interface TouchVNodeDirective extends VNodeDirective {
+interface TouchDirectiveBinding extends Omit<DirectiveBinding, 'value'> {
   value?: TouchValue
 }
 
@@ -35,8 +45,7 @@ function touchstart (event: TouchEvent, wrapper: TouchWrapper) {
   wrapper.touchstartX = touch.clientX
   wrapper.touchstartY = touch.clientY
 
-  wrapper.start &&
-    wrapper.start(Object.assign(event, wrapper))
+  wrapper.start?.({ ...event, ...wrapper })
 }
 
 function touchend (event: TouchEvent, wrapper: TouchWrapper) {
@@ -44,8 +53,7 @@ function touchend (event: TouchEvent, wrapper: TouchWrapper) {
   wrapper.touchendX = touch.clientX
   wrapper.touchendY = touch.clientY
 
-  wrapper.end &&
-    wrapper.end(Object.assign(event, wrapper))
+  wrapper.end?.({ ...event, ...wrapper })
 
   handleGesture(wrapper)
 }
@@ -55,10 +63,10 @@ function touchmove (event: TouchEvent, wrapper: TouchWrapper) {
   wrapper.touchmoveX = touch.clientX
   wrapper.touchmoveY = touch.clientY
 
-  wrapper.move && wrapper.move(Object.assign(event, wrapper))
+  wrapper.move?.({ ...event, ...wrapper })
 }
 
-function createHandlers (value: TouchHandlers): TouchStoredHandlers {
+function createHandlers (value: TouchHandlers = {}): TouchStoredHandlers {
   const wrapper = {
     touchstartX: 0,
     touchstartY: 0,
@@ -84,37 +92,42 @@ function createHandlers (value: TouchHandlers): TouchStoredHandlers {
   }
 }
 
-function inserted (el: HTMLElement, binding: TouchVNodeDirective, vnode: VNode) {
-  const value = binding.value!
-  const target = value.parent ? el.parentElement : el
-  const options = value.options || { passive: true }
+function mounted (el: HTMLElement, binding: TouchDirectiveBinding) {
+  const value = binding.value
+  const target = value?.parent ? el.parentElement : el
+  const options = value?.options ?? { passive: true }
+  const uid = binding.instance?.$.uid // TODO: use custom uid generator
 
-  // Needed to pass unit tests
-  if (!target) return
+  if (!target || !uid) return
 
-  const handlers = createHandlers(binding.value!)
-  target._touchHandlers = Object(target._touchHandlers)
-  target._touchHandlers![vnode.context!._uid] = handlers
+  const handlers = createHandlers(binding.value)
+
+  target._touchHandlers = target._touchHandlers ?? Object.create(null)
+  target._touchHandlers![uid] = handlers
 
   keys(handlers).forEach(eventName => {
-    target.addEventListener(eventName, handlers[eventName] as EventListener, options)
+    target.addEventListener(eventName, handlers[eventName], options)
   })
 }
 
-function unbind (el: HTMLElement, binding: TouchVNodeDirective, vnode: VNode) {
-  const target = binding.value!.parent ? el.parentElement : el
-  if (!target || !target._touchHandlers) return
+function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
+  const target = binding.value?.parent ? el.parentElement : el
+  const uid = binding.instance?.$.uid
 
-  const handlers = target._touchHandlers[vnode.context!._uid]
+  if (!target?._touchHandlers || !uid) return
+
+  const handlers = target._touchHandlers[uid]
+
   keys(handlers).forEach(eventName => {
     target.removeEventListener(eventName, handlers[eventName])
   })
-  delete target._touchHandlers[vnode.context!._uid]
+
+  delete target._touchHandlers[uid]
 }
 
-export const Touch = {
-  inserted,
-  unbind,
+export const Touch: ObjectDirective = {
+  mounted,
+  unmounted,
 }
 
 export default Touch
