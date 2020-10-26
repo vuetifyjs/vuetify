@@ -1,6 +1,7 @@
+// Utilities
 import * as vue from 'vue'
 import { mount } from '@vue/test-utils'
-import * as framework from '../../framework'
+import * as framework from '@/framework'
 import makeProps from '../makeProps'
 
 describe('makeProps', () => {

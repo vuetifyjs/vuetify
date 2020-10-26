@@ -1,12 +1,11 @@
+// Utilities
 import { getCurrentInstance } from 'vue'
+import { useVuetify } from '@/framework'
+import { wrapInArray } from '@/util/helpers'
 
 // Types
 import type { Prop } from 'vue'
 import type { VuetifyComponentDefaults } from '@/framework'
-
-// Utils
-import { useVuetify } from '@/framework'
-import { wrapInArray } from '@/util/helpers'
 
 export default function makeProps<P extends Record<string, Prop<any>>> (props: P) {
   for (const key in props) {
@@ -40,7 +39,9 @@ function getGlobalDefault<C extends string, P extends string> (component: C, pro
   const vuetify = useVuetify()
   const key = component as keyof VuetifyComponentDefaults
   const defaults = vuetify.defaults[key] as any
+
   if (defaults == null) return undefined
+
   return defaults[prop]
 }
 
