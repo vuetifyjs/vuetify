@@ -8,12 +8,14 @@ import VAppBar from './VAppBar'
 
 // Helpers
 import { convertToUnit } from '../../util/helpers'
+import { easeInOutCubic } from '../../services/goto/easing-patterns'
 
 const base = inject<'VAppBar', typeof VAppBar>('VAppBar', 'v-app-bar-title', 'v-app-bar')
 
 interface options extends ExtractVue<typeof base> {
   $refs: {
     content: Element
+    placeholder: Element
   }
 }
 
@@ -36,8 +38,9 @@ export default base.extend<options>().extend({
 
       const min = this.width
       const max = this.contentWidth
+      const ratio = easeInOutCubic(Math.min(1, this.VAppBar.scrollRatio * 1.5))
       return {
-        width: convertToUnit(min + (max - min) * this.VAppBar.scrollRatio),
+        width: convertToUnit(min + (max - min) * ratio),
         visibility: this.VAppBar.scrollRatio ? 'visible' : 'hidden',
       }
     },
@@ -45,14 +48,14 @@ export default base.extend<options>().extend({
 
   mounted () {
     this.updateDimensions()
-    this.contentWidth = this.$refs.content.getBoundingClientRect().width
   },
 
   methods: {
     updateDimensions (): void {
-      const dimensions = this.$el.getBoundingClientRect()
+      const dimensions = this.$refs.placeholder.getBoundingClientRect()
       this.width = dimensions.width
       this.left = dimensions.left
+      this.contentWidth = this.$refs.content.scrollWidth
     },
   },
 
@@ -70,6 +73,7 @@ export default base.extend<options>().extend({
         style: {
           visibility: this.VAppBar.scrollRatio ? 'hidden' : 'visible',
         },
+        ref: 'placeholder',
       }, [this.$slots.default]),
     ])
   },
