@@ -35,6 +35,7 @@ import VCalendarDaily from './VCalendarDaily'
 import VCalendarWeekly from './VCalendarWeekly'
 import VCalendarCategory from './VCalendarCategory'
 import { CalendarTimestamp, CalendarFormatter } from 'vuetify/types'
+import { Parser } from './util/parser'
 
 // Types
 interface VCalendarRenderProps {
@@ -43,7 +44,7 @@ interface VCalendarRenderProps {
   component: string | Component
   maxDays: number
   weekdays: number[]
-  categories: string[]
+  categories: any[]
 }
 
 /* @vue/component */
@@ -170,12 +171,8 @@ export default CalendarWithEvents.extend({
         timeZone: 'UTC', month: 'short',
       })
     },
-    parsedCategories (): string[] {
-      return typeof this.categories === 'string' && this.categories
-        ? this.categories.split(/\s*,\s*/)
-        : Array.isArray(this.categories)
-          ? this.categories as string[]
-          : []
+    parsedCategories (): any[] {
+      return Parser.getParsedCategories(this.categories, this.categoryText)
     },
   },
 
@@ -294,10 +291,10 @@ export default CalendarWithEvents.extend({
     timestampToDate (timestamp: CalendarTimestamp): Date {
       return timestampToDate(timestamp)
     },
-    getCategoryList (categories: string[]): string[] {
+    getCategoryList (categories: any[]): string[] {
       if (!this.noEvents) {
         const categoryMap = categories.reduce((map, category, index) => {
-          map[category] = { index, count: 0 }
+          map[category.categoryName] = { index, count: 0 }
 
           return map
         }, Object.create(null))
@@ -335,9 +332,8 @@ export default CalendarWithEvents.extend({
           }
         }
 
-        categories = Object.keys(categoryMap)
+        categories = categories.filter(v => Object.keys(categoryMap).includes(v.categoryName))
       }
-
       return categories
     },
   },

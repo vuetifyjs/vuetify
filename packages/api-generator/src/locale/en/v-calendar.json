@@ -5,6 +5,7 @@
     "categoryShowAll": "Set whether the `category` view should show all defined `categories` even if there are no events for a category.",
     "categoryForInvalid": "The category to place events in that have invalid categories. A category is invalid when it is not a string. By default events without a category are not displayed until this value is specified.",
     "categoryDays": "The number of days to render in the `category` view.",
+    "categoryText": "If categories is a list of objects, you can use this to determine what property to print out as the category text on the calendar. You can provide a function to do some logic or just define the prop name. It's similar to item-text on v-select",
     "dayFormat": "Formats day of the month string that appears in a day to a specified locale",
     "end": "The ending date on the calendar (inclusive) in the format of `YYYY-MM-DD`. This may be ignored depending on the `type` of the calendar.",
     "eventCategory": "Set property of *event*'s category. Instead of a property a function can be given which takes an event and returns the category.",
