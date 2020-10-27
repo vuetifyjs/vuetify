@@ -18,14 +18,14 @@
           <v-badge
             :value="unread.length"
             color="red"
+            dot
             left
             overlap
           >
-            <template #badge>
-              {{ unread.length }}
-            </template>
-
-            <v-icon v-text="`$mdiBell${unread.length === 0 ? 'Outline' : ''}`" />
+            <v-icon
+              class="mx-1"
+              v-text="`$mdiBell${unread.length === 0 ? 'Outline' : 'RingOutline'}`"
+            />
           </v-badge>
         </template>
       </app-tooltip-btn>
@@ -243,7 +243,7 @@
       },
       toggleAll () {
         this.unotifications = !this.archived
-          ? this.notifications.map(i => i.slug)
+          ? this.mapped.map(i => i.slug)
           : []
       },
     },
