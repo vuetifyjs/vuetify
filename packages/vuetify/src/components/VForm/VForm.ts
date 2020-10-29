@@ -42,7 +42,7 @@ export default mixins(
     inputs: [] as VInputInstance[],
     watchers: [] as Watchers[],
     errorBag: {} as ErrorBag,
-    isValid: false as Boolean,
+    isValid: false,
   }),
 
   watch: {
