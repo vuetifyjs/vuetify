@@ -175,7 +175,13 @@ const VSelect = {
     },
     {
       name: 'menuProps',
-      default: '{ "closeOnClick": false, "closeOnContentClick": false, "disableKeys": true, "openOnClick": false, "maxHeight": 304 }',
+      default: `{
+  closeOnClick: false,
+  closeOnContentClick: false,
+  disableKeys: true,
+  openOnClick: false,
+  maxHeight: 304
+}`,
       source: 'v-select',
     },
   ],
