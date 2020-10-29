@@ -221,6 +221,27 @@ const VSelect = {
   ],
 }
 
+const VAutocomplete = {
+  ...VSelect,
+  props: [
+    ...VSelect.props.filter(prop => prop.name !== 'menuProps'),
+    {
+      name: 'menuProps',
+      default: `{
+  closeOnClick: false,
+  closeOnContentClick: false,
+  disableKeys: true,
+  openOnClick: false,
+  maxHeight: 304,
+  offsetY: true,
+  offsetOverflow: true,
+  transition: false
+}`,
+      source: 'v-autocomplete',
+    },
+  ],
+}
+
 const VSlider = {
   ...VInput,
   events: [
@@ -387,6 +408,7 @@ module.exports = {
   VGridProps,
   VInput,
   VSelect,
+  VAutocomplete,
   VSlider,
   VTextField,
   VTimestamp,
