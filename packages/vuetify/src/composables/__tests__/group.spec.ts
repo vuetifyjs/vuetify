@@ -103,7 +103,7 @@ describe('group', () => {
       expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('should default to single selection', async () => {
+    it('should accept initial value', async () => {
       const wrapper = mount(GroupComponent, {
         props: {
           modelValue: 'two',

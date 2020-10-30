@@ -1,20 +1,20 @@
 // Utilities
-import { ref, provide, inject, computed, onBeforeUnmount } from 'vue'
+import { reactive, provide, inject, computed, onBeforeUnmount } from 'vue'
 import { wrapInArray, uuid, deepEqual } from '@/util/helpers'
 import { consoleWarn } from '@/util/console'
 import { useProxiedModel } from './proxiedModel'
 
 // Types
-import type { Ref, InjectionKey, SetupContext } from 'vue'
+import type { Ref, UnwrapRef, InjectionKey, SetupContext } from 'vue'
 
 interface GroupItem {
   id: string
-  value: Ref<any>
+  value: Ref<unknown>
 }
 
 interface GroupProps {
   [key: string]: any
-  modelValue?: any
+  modelValue?: unknown
   multiple?: boolean
   mandatory?: boolean
   max?: number
@@ -28,11 +28,10 @@ interface GroupProvide {
   isSelected: (id: string) => boolean
   prev: () => void
   next: () => void
-  items: Ref<GroupItem[]>
 }
 
 export function useGroupItem (
-  props: { value?: any },
+  props: { value?: unknown },
   injectKey: InjectionKey<GroupProvide>,
 ) {
   const group = inject(injectKey)
@@ -62,7 +61,7 @@ export function useGroupItem (
   }
 }
 
-const getIds = (items: GroupItem[], modelValue: any[]) => {
+const getIds = (items: UnwrapRef<GroupItem[]>, modelValue: any[]) => {
   const ids = []
 
   for (const item of items) {
@@ -77,7 +76,7 @@ const getIds = (items: GroupItem[], modelValue: any[]) => {
   return ids
 }
 
-const getValues = (items: GroupItem[], ids: any[]) => {
+const getValues = (items: UnwrapRef<GroupItem[]>, ids: any[]) => {
   const values = []
 
   for (const item of items) {
@@ -94,7 +93,7 @@ export function useGroup (
   context: SetupContext<any>,
   injectKey: InjectionKey<GroupProvide>
 ) {
-  const items = ref<GroupItem[]>([])
+  const items = reactive<GroupItem[]>([])
   const selected = useProxiedModel(
     props,
     context,
@@ -103,17 +102,17 @@ export function useGroup (
     v => {
       if (v == null) return []
 
-      return getIds(items.value, wrapInArray(v))
+      return getIds(items, wrapInArray(v))
     },
     v => {
-      const arr = getValues(items.value, v)
+      const arr = getValues(items, v)
 
       return props.multiple ? arr : arr[0]
     }
   )
 
   function register (item: GroupItem) {
-    items.value.push(item)
+    items.push(item)
 
     // If mandatory and nothing is selected,
     // then select this item
@@ -126,10 +125,11 @@ export function useGroup (
     selected.value = selected.value.filter(v => v !== id)
 
     if (props.mandatory && !selected.value.length) {
-      selected.value = [items.value[items.value.length - 1].id]
+      selected.value = [items[items.length - 1].id]
     }
 
-    items.value = items.value.filter(item => item.id !== id)
+    const index = items.findIndex(item => item.id === id)
+    items.splice(index, 1)
   }
 
   function toggle (id: string) {
@@ -172,22 +172,21 @@ export function useGroup (
     if (props.multiple) consoleWarn('This method is not supported when using "multiple" prop')
 
     // If there is nothing selected, then next value is first item
-    if (!selected.value.length) return items.value[0].id
+    if (!selected.value.length) return items[0].id
 
     const currentId = selected.value[0]
-    const currentIndex = items.value.findIndex(i => i.id === currentId)
-    const newIndex = (currentIndex + offset) % items.value.length
+    const currentIndex = items.findIndex(i => i.id === currentId)
+    const newIndex = (currentIndex + offset) % items.length
 
-    return items.value[newIndex].id
+    return items[newIndex].id
   }
 
   const state = {
     register,
     unregister,
     selected,
-    items,
     toggle,
-    prev: () => selected.value = [getOffsetId(items.value.length - 1)],
+    prev: () => selected.value = [getOffsetId(items.length - 1)],
     next: () => selected.value = [getOffsetId(1)],
     step: (steps: number) => selected.value = [getOffsetId(steps)],
     isSelected: (id: string) => selected.value.includes(id),
