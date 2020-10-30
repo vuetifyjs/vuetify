@@ -1,7 +1,11 @@
-// Setup
-import type { Prop } from 'vue'
 import { computed } from 'vue'
-import { convertToUnit } from '../util/helpers'
+
+// Types
+import type { Prop } from 'vue'
+
+// Utils
+import { convertToUnit, keys } from '@/util/helpers'
+import propsFactory from '@/util/propsFactory'
 
 // Props
 const allDimensionsProps = {
@@ -31,15 +35,12 @@ type PropNames = keyof typeof allDimensionsProps
 
 // Effect
 export function dimensionsFactory<S extends PropNames> (...possibleProps: S[]) {
-  const selectedProps = possibleProps.length ? possibleProps : Object.keys(allDimensionsProps) as S[]
+  const selectedProps = possibleProps.length ? possibleProps : keys(allDimensionsProps) as S[]
 
-  const makeDimensionsProps = (defaults?: Partial<Record<S, PropValue>>) => selectedProps.reduce((obj, prop) => {
-    obj[prop] = {
-      ...allDimensionsProps[prop],
-      default: defaults?.[prop],
-    }
+  const makeDimensionsProps = propsFactory(selectedProps.reduce((obj, prop) => {
+    obj[prop] = allDimensionsProps[prop]
     return obj
-  }, {} as Record<S, Prop<PropValue>>)
+  }, {} as Record<S, Prop<PropValue>>))
 
   const useDimensions = (props: Partial<Record<S, PropValue>>) => {
     const dimensions = computed(() => {
