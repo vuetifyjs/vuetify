@@ -1,12 +1,11 @@
+// Utilities
 import { getCurrentInstance } from 'vue'
+import { useVuetify } from '@/framework'
+import { wrapInArray } from '@/util/helpers'
 
 // Types
 import type { Prop } from 'vue'
 import type { VuetifyComponentDefaults } from '@/framework'
-
-// Utils
-import { useVuetify } from '@/framework'
-import { wrapInArray } from '@/util/helpers'
 
 export default function makeProps<P extends Record<string, Prop<any>>> (props: P) {
   for (const key in props) {
@@ -28,20 +27,22 @@ function generateDefault (propName: string, localDefault: any, type: any) {
       return localDefault
     }
 
-    const globalDefault = getGlobalDefault(vm.type.name, propName)
-    const actualDefault = typeof globalDefault !== 'undefined' ? globalDefault : localDefault
+    const vuetify = useVuetify()
+    const globalDefault = getDefaultValue('global', propName, vuetify.defaults)
+    const componentDefault = getDefaultValue(vm.type.name, propName, vuetify.defaults)
+    const actualDefault = typeof globalDefault !== 'undefined'
+      ? globalDefault
+      : typeof componentDefault !== 'undefined'
+        ? componentDefault
+        : localDefault
 
     return isFactory(type) ? actualDefault(props) : actualDefault
   }
 }
 
-// TODO: Fix typings and shit
-function getGlobalDefault<C extends string, P extends string> (component: C, prop: P) {
-  const vuetify = useVuetify()
-  const key = component as keyof VuetifyComponentDefaults
-  const defaults = vuetify.defaults[key] as any
-  if (defaults == null) return null
-  return defaults[prop]
+function getDefaultValue (sectionName: keyof VuetifyComponentDefaults, propName: string, defaults: VuetifyComponentDefaults) {
+  const section = defaults[sectionName]
+  return section?.[propName]
 }
 
 // Would be nice to have PropOptions here

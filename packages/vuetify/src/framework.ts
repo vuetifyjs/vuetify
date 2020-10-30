@@ -3,7 +3,10 @@ import { inject } from 'vue'
 // Types
 import type { InjectionKey, App } from 'vue'
 
-export interface VuetifyComponentDefaults {}
+export interface VuetifyComponentDefaults {
+  [key: string]: Record<string, unknown>
+  global: Record<string, unknown>
+}
 
 export interface VuetifyInstance {
   defaults: VuetifyComponentDefaults
@@ -12,7 +15,7 @@ export interface VuetifyInstance {
 export interface VuetifyOptions {
   components?: Record<string, any>
   directives?: Record<string, any>
-  defaults?: VuetifyComponentDefaults
+  defaults?: Partial<VuetifyComponentDefaults>
 }
 
 export const VuetifySymbol: InjectionKey<VuetifyInstance> = Symbol.for('vuetify')
@@ -29,8 +32,6 @@ export const useVuetify = () => {
 
 export const createVuetify = (options: VuetifyOptions = {}) => {
   const install = (app: App) => {
-    console.log('Installing Vuetify...')
-
     const {
       components = {},
       directives = {},
@@ -50,7 +51,10 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
     }
 
     const vuetify: VuetifyInstance = {
-      defaults,
+      defaults: {
+        global: {},
+        ...defaults,
+      },
     }
 
     app.provide(VuetifySymbol, vuetify)
