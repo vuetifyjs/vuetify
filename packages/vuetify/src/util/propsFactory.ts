@@ -31,7 +31,7 @@ export default function propsFactory<
   PropsTypes extends Readonly<ExtractPropTypes<PropsOptions>>,
 > (props: PropsOptions) {
   return <
-    Defaults extends Partial<PropsTypes>,
+    Defaults extends Partial<PropsTypes> = {},
     Props = Readonly<ExtractPropTypesDefault<PropsOptions, Defaults>>,
   >(defaults?: Defaults): NoNullableFields<ComponentObjectPropsOptions<Props>> => {
     if (!defaults) {
