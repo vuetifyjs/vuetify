@@ -31,15 +31,17 @@ function generateDefault (propName: string, localDefault: any, type: any) {
     const globalDefault = getDefaultValue('global', propName, vuetify.defaults)
     const componentDefault = getDefaultValue(vm.type.name, propName, vuetify.defaults)
     const actualDefault = typeof globalDefault !== 'undefined'
-      ? globalDefault : typeof componentDefault !== 'undefined'
-        ? componentDefault : localDefault
+      ? globalDefault
+      : typeof componentDefault !== 'undefined'
+        ? componentDefault
+        : localDefault
 
     return isFactory(type) ? actualDefault(props) : actualDefault
   }
 }
 
-function getDefaultValue (sectionName: string, propName: string, defaults: VuetifyComponentDefaults) {
-  const section = defaults[sectionName as keyof VuetifyComponentDefaults]
+function getDefaultValue (sectionName: keyof VuetifyComponentDefaults, propName: string, defaults: VuetifyComponentDefaults) {
+  const section = defaults[sectionName]
   return section?.[propName]
 }
 
