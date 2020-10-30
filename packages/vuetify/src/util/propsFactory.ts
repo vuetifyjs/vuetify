@@ -1,4 +1,4 @@
-import type { ComponentObjectPropsOptions, ExtractPropTypes, Prop } from 'vue'
+import type { ComponentObjectPropsOptions, ExtractPropTypes, PropType } from 'vue'
 
 /**
  * Creates a factory function for props definitions.
@@ -27,13 +27,14 @@ import type { ComponentObjectPropsOptions, ExtractPropTypes, Prop } from 'vue'
  */
 
 export default function propsFactory<
-  PropsOptions extends Readonly<ComponentObjectPropsOptions>,
-  PropsTypes extends Readonly<ExtractPropTypes<PropsOptions>>,
+  PropsOptions extends ComponentObjectPropsOptions,
+  PropsTypes extends ExtractPropTypes<PropsOptions>
 > (props: PropsOptions) {
   return <
-    Defaults extends Partial<PropsTypes> = {},
-    Props = Readonly<ExtractPropTypesDefault<PropsOptions, Defaults>>,
-  >(defaults?: Defaults): NoNullableFields<ComponentObjectPropsOptions<Props>> => {
+    Defaults extends PartialKeys<PropsTypes> = {}
+  >(
+    defaults?: Defaults
+  ): AppendDefault<PropsTypes, Defaults> => {
     if (!defaults) {
       return props as any
     } else {
@@ -58,46 +59,16 @@ export default function propsFactory<
   }
 }
 
-/**
- * Now for the fun stuff.
- * These types are copied from vue, with the addition of an extra generic
- * parameter so an object of default values can be supplied afterwards.
- */
-
-type RequiredKeysDefault<T, U extends { [K in keyof T]?: InferPropType<T[K]> }> = {
-  [K in keyof T]: T[K] extends Prop<infer V, infer D>
-    ? unknown extends D
-      ? T[K] extends
-        | { required: true }
-        | { default: any }
-        // don't mark Boolean props as undefined
-        | BooleanConstructor
-        | { type: BooleanConstructor }
-        ? K
-        : undefined extends U[K]
-          ? never
-          : K
-      : K
-    : never
-}[keyof T]
-
-type OptionalKeysDefault<T, U> = Exclude<keyof T, RequiredKeysDefault<T, U>>
-
-type InferPropType<T> = T extends null
-  ? any // null & true would fail to infer
-  : T extends { type: null | true }
-    ? any // As TS issue https://github.com/Microsoft/TypeScript/issues/14829 // somehow `ObjectConstructor` when inferred from { (): T } becomes `any` // `BooleanConstructor` when inferred from PropConstructor(with PropMethod) becomes `Boolean`
-    : T extends ObjectConstructor | { type: ObjectConstructor }
-      ? Record<string, any>
-      : T extends BooleanConstructor | { type: BooleanConstructor }
-        ? boolean
-        : T extends Prop<infer V, infer D> ? (unknown extends V ? D : V) : T
-
-type ExtractPropTypesDefault<O extends object, D extends { [K in keyof O]?: InferPropType<O[K]> } = {}> = {
-  [K in RequiredKeysDefault<O, D>]: InferPropType<O[K]>
-} & {
-  [K in OptionalKeysDefault<O, D>]?: InferPropType<O[K]>
+type AppendDefault<T, D extends PartialKeys<T>> = {
+  [P in keyof T]-?: {
+    type: PropType<PropTypeDefault<T[P], D[P]>>
+    default: PropTypeDefault<T[P], D[P]>
+  }
 }
 
-// Removes null and undefined from an object's properties
-type NoNullableFields<T> = { [P in keyof T]-?: NonNullable<T[P]> }
+type PropTypeDefault<T, D> = unknown extends D ? T : (NonNullable<T> | D)
+
+/**
+ * Like `Partial<T>` but doesn't care what the value is
+ */
+type PartialKeys<T> = { [P in keyof T]?: unknown }
