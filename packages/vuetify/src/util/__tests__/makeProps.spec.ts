@@ -11,6 +11,33 @@ describe('makeProps', () => {
 
     jest.spyOn(framework, 'useVuetify').mockReturnValueOnce({
       defaults: {
+        global: {
+          bar: 'hello world',
+        },
+        Foo: {
+          bar: 'something else',
+        },
+      },
+    })
+
+    const props = makeProps({
+      bar: {
+        type: String,
+        default: 'goodbye world',
+      },
+    })
+
+    // @ts-expect-error
+    expect(props.bar.default()).toBe('hello world')
+  })
+
+  it('should use component default if defined', () => {
+    // @ts-expect-error
+    jest.spyOn(vue, 'getCurrentInstance').mockReturnValueOnce({ type: { name: 'Foo' } })
+
+    jest.spyOn(framework, 'useVuetify').mockReturnValueOnce({
+      defaults: {
+        global: {},
         Foo: {
           bar: 'hello world',
         },
@@ -28,12 +55,14 @@ describe('makeProps', () => {
     expect(props.bar.default()).toBe('hello world')
   })
 
-  it('should use component default if global not defined', () => {
+  it('should use local default if global or component not defined', () => {
     // @ts-expect-error
     jest.spyOn(vue, 'getCurrentInstance').mockReturnValueOnce({ type: { name: 'Foo' } })
 
     jest.spyOn(framework, 'useVuetify').mockReturnValueOnce({
-      defaults: {},
+      defaults: {
+        global: {},
+      },
     })
 
     const props = makeProps({

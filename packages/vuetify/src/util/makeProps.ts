@@ -27,22 +27,20 @@ function generateDefault (propName: string, localDefault: any, type: any) {
       return localDefault
     }
 
-    const globalDefault = getGlobalDefault(vm.type.name, propName)
-    const actualDefault = typeof globalDefault !== 'undefined' ? globalDefault : localDefault
+    const vuetify = useVuetify()
+    const globalDefault = getDefaultValue('global', propName, vuetify.defaults)
+    const componentDefault = getDefaultValue(vm.type.name, propName, vuetify.defaults)
+    const actualDefault = typeof globalDefault !== 'undefined'
+      ? globalDefault : typeof componentDefault !== 'undefined'
+        ? componentDefault : localDefault
 
     return isFactory(type) ? actualDefault(props) : actualDefault
   }
 }
 
-// TODO: Fix typings and shit
-function getGlobalDefault<C extends string, P extends string> (component: C, prop: P) {
-  const vuetify = useVuetify()
-  const key = component as keyof VuetifyComponentDefaults
-  const defaults = vuetify.defaults[key] as any
-
-  if (defaults == null) return undefined
-
-  return defaults[prop]
+function getDefaultValue (sectionName: string, propName: string, defaults: VuetifyComponentDefaults) {
+  const section = defaults[sectionName as keyof VuetifyComponentDefaults]
+  return section?.[propName]
 }
 
 // Would be nice to have PropOptions here
