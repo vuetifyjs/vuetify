@@ -29,7 +29,6 @@ describe('elevation.ts', () => {
   })
 
   it('should only allow numeric values between 0 and 24', () => {
-    // @ts-expect-error
     const { elevation: { validator } } = makeElevationProps()
     const validValues = [1, '24']
     const invalidValues = [-1, '25', false, true]

@@ -1,4 +1,3 @@
-import type { Prop } from 'vue'
 import { computed } from 'vue'
 import propsFactory from '@/util/propsFactory'
 
@@ -22,7 +21,7 @@ export const makeElevationProps = propsFactory({
         value <= 24
       )
     },
-  } as Prop<number | string>,
+  },
   flat: Boolean,
 })
 
