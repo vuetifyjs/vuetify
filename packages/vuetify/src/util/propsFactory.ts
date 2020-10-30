@@ -38,7 +38,7 @@ export default function propsFactory<
       return Object.keys(props).reduce<any>((obj, prop) => {
         const definition = props[prop]
         if (prop in defaults) {
-          if (typeof definition === 'object' && definition != null) {
+          if (typeof definition === 'object' && definition != null && !Array.isArray(definition)) {
             obj[prop] = {
               ...definition,
               default: defaults[prop],
