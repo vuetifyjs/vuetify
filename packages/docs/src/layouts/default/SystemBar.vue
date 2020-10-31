@@ -40,6 +40,6 @@
   export default {
     name: 'HomeSystemBar',
 
-    data: () => ({ bar: true }),
+    data: () => ({ bar: false }),
   }
 </script>
