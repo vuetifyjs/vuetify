@@ -13,7 +13,6 @@ interface GroupItem {
 }
 
 interface GroupProps {
-  [key: string]: any
   modelValue?: unknown
   multiple?: boolean
   mandatory?: boolean

@@ -8,7 +8,7 @@ import { consoleError } from '../util/console'
 
 export function useProxiedModel<
   Inner,
-  Props extends Record<string, unknown>,
+  Props extends object,
   Prop extends Extract<keyof Props, string>,
 > (
   props: Props,
