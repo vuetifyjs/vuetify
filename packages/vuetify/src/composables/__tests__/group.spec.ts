@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, nextTick, reactive } from 'vue'
 import { useGroup, useGroupItem } from '../'
 
 describe('group', () => {
@@ -81,8 +81,10 @@ describe('group', () => {
         max: Number,
       },
       setup (props, context) {
-        useGroup(props, context, Symbol.for('test'))
-        return () => h('div', [
+        return useGroup(props, context, Symbol.for('test'))
+      },
+      render () {
+        return h('div', this.$slots.default?.() ?? [
           h(GroupItemComponent, { value: 'one' }),
           h(GroupItemComponent, { value: 'two' }),
         ])
@@ -192,6 +194,32 @@ describe('group', () => {
       expect(wrapper.emitted()['update:modelValue']).toEqual([
         [['one']],
       ])
+    })
+
+    it('should select newly inserted value', async () => {
+      const values = reactive(['one', 'two'])
+      const wrapper = mount(GroupComponent, {
+        props: {
+          modelValue: 'one',
+          multiple: false,
+          mandatory: false,
+        },
+        slots: {
+          default () {
+            return values.map(value => h(GroupItemComponent, { value, key: value }))
+          },
+        },
+      })
+
+      values.splice(1, 0, 'three')
+      await nextTick()
+      wrapper.vm.next()
+      await nextTick()
+
+      expect(wrapper.emitted()['update:modelValue']).toEqual([
+        ['three'],
+      ])
+      expect(wrapper.html()).toMatchSnapshot()
     })
   })
 
