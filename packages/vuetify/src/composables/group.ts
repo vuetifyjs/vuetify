@@ -1,5 +1,5 @@
 // Utilities
-import { reactive, provide, inject, computed, onBeforeUnmount } from 'vue'
+import { reactive, provide, inject, computed, onBeforeUnmount, toRef } from 'vue'
 import { wrapInArray, getUid, deepEqual } from '@/util/helpers'
 import { consoleWarn } from '@/util/console'
 import { useProxiedModel } from './proxiedModel'
@@ -43,7 +43,7 @@ export function useGroupItem (
 
   group.register({
     id,
-    value: computed(() => props.value),
+    value: toRef(props, 'value'),
   })
 
   onBeforeUnmount(() => {
