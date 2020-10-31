@@ -1,6 +1,6 @@
 // Utilities
 import { reactive, provide, inject, computed, onBeforeUnmount } from 'vue'
-import { wrapInArray, uuid, deepEqual } from '@/util/helpers'
+import { wrapInArray, getUid, deepEqual } from '@/util/helpers'
 import { consoleWarn } from '@/util/console'
 import { useProxiedModel } from './proxiedModel'
 
@@ -8,7 +8,7 @@ import { useProxiedModel } from './proxiedModel'
 import type { Ref, UnwrapRef, InjectionKey, SetupContext } from 'vue'
 
 interface GroupItem {
-  id: string
+  id: number
   value: Ref<unknown>
 }
 
@@ -21,10 +21,10 @@ interface GroupProps {
 
 interface GroupProvide {
   register: (item: GroupItem) => void
-  unregister: (id: string) => void
-  toggle: (id: string) => void
+  unregister: (id: number) => void
+  toggle: (id: number) => void
   selected: Ref<any[]>
-  isSelected: (id: string) => boolean
+  isSelected: (id: number) => boolean
   prev: () => void
   next: () => void
 }
@@ -39,7 +39,7 @@ export function useGroupItem (
     throw new Error(`Could not find useGroup injection for symbol ${injectKey}`)
   }
 
-  const id = uuid()
+  const id = getUid()
 
   group.register({
     id,
@@ -93,7 +93,7 @@ export function useGroup (
     }
   }
 
-  function unregister (id: string) {
+  function unregister (id: number) {
     selected.value = selected.value.filter(v => v !== id)
 
     if (props.mandatory && !selected.value.length) {
@@ -104,7 +104,7 @@ export function useGroup (
     items.splice(index, 1)
   }
 
-  function toggle (id: string) {
+  function toggle (id: number) {
     if (props.multiple) {
       const internalValue = selected.value.slice()
       const index = internalValue.findIndex(v => v === id)
@@ -161,7 +161,7 @@ export function useGroup (
     prev: () => selected.value = [getOffsetId(items.length - 1)],
     next: () => selected.value = [getOffsetId(1)],
     step: (steps: number) => selected.value = [getOffsetId(steps)],
-    isSelected: (id: string) => selected.value.includes(id),
+    isSelected: (id: number) => selected.value.includes(id),
   }
 
   provide(injectKey, state)
