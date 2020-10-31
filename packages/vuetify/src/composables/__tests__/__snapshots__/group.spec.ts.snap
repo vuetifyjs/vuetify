@@ -44,20 +44,6 @@ exports[`group with explicit values should emit new selection 1`] = `
 </div>
 `;
 
-exports[`group with explicit values should select newly inserted value 1`] = `
-<div>
-  <div class>
-    one
-  </div>
-  <div class="selected">
-    three
-  </div>
-  <div class>
-    two
-  </div>
-</div>
-`;
-
 exports[`group with implicit values should emit new selection 1`] = `
 <div>
   <div class="selected">

@@ -20,7 +20,7 @@ interface GroupProps {
 }
 
 interface GroupProvide {
-  register: (item: GroupItem) => void
+  register: (item: GroupItem, index?: number) => void
   unregister: (id: number) => void
   toggle: (id: number) => void
   selected: Ref<any[]>
@@ -30,7 +30,7 @@ interface GroupProvide {
 }
 
 export function useGroupItem (
-  props: { value?: unknown },
+  props: { value?: unknown, index?: number },
   injectKey: InjectionKey<GroupProvide>,
 ) {
   const group = inject(injectKey)
@@ -44,7 +44,7 @@ export function useGroupItem (
   group.register({
     id,
     value: toRef(props, 'value'),
-  })
+  }, props.index)
 
   onBeforeUnmount(() => {
     group.unregister(id)
@@ -83,8 +83,9 @@ export function useGroup (
     }
   )
 
-  function register (item: GroupItem) {
-    items.push(item)
+  function register (item: GroupItem, index?: number) {
+    if (index) items.splice(index, 0, item)
+    else items.push(item)
 
     // If mandatory and nothing is selected,
     // then select this item

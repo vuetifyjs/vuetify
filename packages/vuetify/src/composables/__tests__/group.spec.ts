@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { defineComponent, h, nextTick, reactive } from 'vue'
+import { defineComponent, h, nextTick, reactive, ref } from 'vue'
 import { useGroup, useGroupItem } from '../'
 
 describe('group', () => {
@@ -61,6 +61,7 @@ describe('group', () => {
     const GroupItemComponent = defineComponent({
       props: {
         value: [String, Number],
+        index: Number,
       },
       setup (props) {
         const item = useGroupItem(props, Symbol.for('test'))
@@ -206,7 +207,7 @@ describe('group', () => {
         },
         slots: {
           default () {
-            return values.map(value => h(GroupItemComponent, { value, key: value }))
+            return values.map((value, index) => h(GroupItemComponent, { value, index, key: value }))
           },
         },
       })
@@ -219,7 +220,6 @@ describe('group', () => {
       expect(wrapper.emitted()['update:modelValue']).toEqual([
         ['three'],
       ])
-      expect(wrapper.html()).toMatchSnapshot()
     })
   })
 
