@@ -60,33 +60,6 @@ export function useGroupItem (
   }
 }
 
-const getIds = (items: UnwrapRef<GroupItem[]>, modelValue: any[]) => {
-  const ids = []
-
-  for (const item of items) {
-    if (
-      (item.value != null && modelValue.find(value => deepEqual(value, item.value))) ||
-      modelValue.includes(item.id)
-    ) {
-      ids.push(item.id)
-    }
-  }
-
-  return ids
-}
-
-const getValues = (items: UnwrapRef<GroupItem[]>, ids: any[]) => {
-  const values = []
-
-  for (const item of items) {
-    if (ids.includes(item.id)) {
-      values.push(item.value != null ? item.value : item.id)
-    }
-  }
-
-  return values
-}
-
 export function useGroup (
   props: GroupProps,
   context: SetupContext<any>,
@@ -194,4 +167,31 @@ export function useGroup (
   provide(injectKey, state)
 
   return state
+}
+
+function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
+  const ids = []
+
+  for (const item of items) {
+    if (
+      (item.value != null && modelValue.find(value => deepEqual(value, item.value))) ||
+      modelValue.includes(item.id)
+    ) {
+      ids.push(item.id)
+    }
+  }
+
+  return ids
+}
+
+function getValues (items: UnwrapRef<GroupItem[]>, ids: any[]) {
+  const values = []
+
+  for (const item of items) {
+    if (ids.includes(item.id)) {
+      values.push(item.value != null ? item.value : item.id)
+    }
+  }
+
+  return values
 }
