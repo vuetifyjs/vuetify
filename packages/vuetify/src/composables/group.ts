@@ -84,7 +84,7 @@ export function useGroup (
   )
 
   function register (item: GroupItem, index?: number) {
-    if (index) items.splice(index, 0, item)
+    if (index != null) items.splice(index, 0, item)
     else items.push(item)
 
     // If mandatory and nothing is selected,
