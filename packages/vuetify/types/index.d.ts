@@ -33,7 +33,7 @@ export interface Vuetify {
   (app: App, options: VuetifyUseOptions): void
 }
 
-export function useVuetify (): Framework
+// export function useVuetify (): Framework
 export { Presets, VuetifyPreset, UserVuetifyPreset } from './services/presets';
 
 export type ComponentOrPack = Component & {

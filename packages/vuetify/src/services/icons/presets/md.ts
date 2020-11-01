@@ -1,7 +1,7 @@
 // @ts-nocheck
 /* eslint-disable */
 
-import { VuetifyIcons } from 'vuetify/types/services/icons'
+import type { VuetifyIcons } from '../../../components/icons'
 
 const icons: VuetifyIcons = {
   complete: 'check',

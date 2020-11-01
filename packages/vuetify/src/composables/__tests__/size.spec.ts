@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { makeSizeProps, useSizeClasses } from '../size'
+import { makeSizeProps, useSizeClass } from '../size'
 
 describe('size', () => {
   it('should warn if value is incorrect', () => {
@@ -26,8 +26,8 @@ describe('size', () => {
     [{ size: 'large' }, 'v-size--large'],
     [{ size: 'x-large' }, 'v-size--x-large'],
   ] as const)('should return the correct class given value %p', (input, expected) => {
-    const { sizeClasses } = useSizeClasses(input)
+    const { sizeClass } = useSizeClass(input)
 
-    expect(sizeClasses.value).toStrictEqual(expected)
+    expect(sizeClass.value).toStrictEqual(expected)
   })
 })

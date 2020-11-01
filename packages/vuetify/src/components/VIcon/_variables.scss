@@ -2,3 +2,15 @@
 
 $icon-size: 24px !default;
 $icon-size-dense: 20px !default;
+
+$icon-sizes: () !default;
+$icon-sizes: map-deep-merge(
+  (
+    'x-small': 16px,
+    'small': 20px,
+    'default': 24px,
+    'large': 28px,
+    'x-large': 32px,
+  ),
+  $icon-sizes
+);

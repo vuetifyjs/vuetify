@@ -298,3 +298,11 @@ $code-padding: .2em .4em !default;
 $kbd-padding: .2em .4rem !default;
 $input-top-spacing: 16px !default;
 $text-field-active-label-height: 12px !default;
+
+$sizes: (
+  'x-small',
+  'small',
+  'default',
+  'large',
+  'x-large'
+);

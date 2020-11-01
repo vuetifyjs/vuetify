@@ -1,9 +1,11 @@
 import { inject } from 'vue'
 import { createTheme, VuetifyThemeSymbol } from './composables/theme'
+import { VuetifyIconSymbol } from '@/composables/icons'
 
 // Types
 import type { InjectionKey, App } from 'vue'
 import type { ThemeOptions } from '@/composables/theme'
+import type { IconOptions } from '@/composables/icons'
 
 export interface VuetifyComponentDefaults {
   [key: string]: Record<string, unknown>
@@ -19,6 +21,7 @@ export interface VuetifyOptions {
   directives?: Record<string, any>
   defaults?: Partial<VuetifyComponentDefaults>
   theme?: ThemeOptions
+  icons?: IconOptions
 }
 
 export const VuetifySymbol: InjectionKey<VuetifyInstance> = Symbol.for('vuetify')
@@ -39,6 +42,7 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
       components = {},
       directives = {},
       defaults = {},
+      icons = {},
     } = options
 
     for (const key in directives) {
@@ -62,6 +66,7 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
 
     app.provide(VuetifySymbol, vuetify)
     app.provide(VuetifyThemeSymbol, createTheme(options.theme))
+    app.provide(VuetifyIconSymbol, icons)
     app.config.globalProperties.$vuetify = vuetify
   }
 

@@ -17,7 +17,6 @@
   align-items: center
   display: inline-flex
   font-feature-settings: 'liga'
-  font-size: $icon-size
   justify-content: center
   letter-spacing: normal
   line-height: 1
@@ -42,9 +41,6 @@
     width: 100%
     transition: opacity 0.2s map-get($transition, 'ease-in-out')
 
-  &--dense
-    font-size: $icon-size-dense
-
 .v-icon
   &--right
     margin-left: map-get($grid-gutters, 'md')
@@ -58,16 +54,16 @@
   &--disabled
     pointer-events: none
 
-  &--dense
-    &__component,
-    &__svg
-      height: $icon-size-dense
-
-  &__component
-    height: $icon-size
-    width: $icon-size
-
   &__svg
-    height: $icon-size
-    width: $icon-size
     fill: currentColor
+
+  @each $name in $sizes
+    &.v-size--#{$name}
+      font-size: map-get($icon-sizes, $name)
+      width: map-get($icon-sizes, $name)
+      height: map-get($icon-sizes, $name)
+
+      .v-icon__svg
+        width: map-get($icon-sizes, $name)
+        height: map-get($icon-sizes, $name)
+

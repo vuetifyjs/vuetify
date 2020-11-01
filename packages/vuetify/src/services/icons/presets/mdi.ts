@@ -1,7 +1,4 @@
-// @ts-nocheck
-/* eslint-disable */
-
-import { VuetifyIcons } from 'vuetify/types/services/icons'
+import type { VuetifyIcons } from '@/composables/icons'
 
 const icons: VuetifyIcons = {
   complete: 'mdi-check',
