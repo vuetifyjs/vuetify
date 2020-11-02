@@ -120,6 +120,16 @@ export default mixins(
   },
 
   methods: {
+    getChildrenTextContent (children: Array<VNode>): string {
+      return children.map(node => {
+        return node.children
+          ? this.getChildrenTextContent(node.children)
+          : node.text
+      }).join('')
+    },
+    getItemText (): string {
+      return this.$slots.default ? this.getChildrenTextContent(this.$slots.default) : ''
+    },
     click (e: MouseEvent): void {
       this.$emit('click', e)
 
@@ -157,12 +167,19 @@ export default mixins(
         },
       }, this.closeIcon)
     },
+    genDefault (): VNode {
+      return this.$createElement('span', {
+        staticClass: 'v-chip__content__content',
+      }, [
+        this.$slots.default,
+      ])
+    },
     genContent (): VNode {
       return this.$createElement('span', {
         staticClass: 'v-chip__content',
       }, [
         this.filter && this.genFilter(),
-        this.$slots.default,
+        this.genDefault(),
         this.hasClose && this.genClose(),
       ])
     },
@@ -176,6 +193,7 @@ export default mixins(
       ...data.attrs,
       draggable: this.draggable ? 'true' : undefined,
       tabindex: this.chipGroup && !this.disabled ? 0 : data.attrs!.tabindex,
+      title: this.$attrs.title || this.getItemText(),
     }
     data.directives!.push({
       name: 'show',
