@@ -8,6 +8,7 @@ import {
   addPassiveEventListener,
   getZIndex,
 } from '../../util/helpers'
+import { consoleWarn } from '../../util/console'
 
 // Types
 import Vue from 'vue'
@@ -71,9 +72,28 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
       overlay.$mount()
 
-      const parent = this.absolute
-        ? this.$el.parentNode
-        : document.querySelector('[data-app]')
+      let parent;
+      if (this.absolute) {
+        parent =  this.$el.parentNode // VOverlay component absolute prop current behaviour
+      } else {
+        let target;
+        if (this.attach == null || this.attach === false) {
+          // Default, detach to app
+          target = document.querySelector('[data-app]');
+        } else if (typeof this.attach === 'string') {
+          // CSS selector
+          target = document.querySelector(this.attach);
+        } else {
+          // DOM Element
+          target = this.attach;
+        }
+  
+        if (!target) {
+          consoleWarn(`Unable to locate target ${this.attach || '[data-app]'}`, this);
+          return;
+        }
+        parent = target
+      }
 
       parent && parent.insertBefore(overlay.$el, parent.firstChild)
 
