@@ -6,7 +6,7 @@ import { VNode } from 'vue'
 import { ExtractVue } from '../../util/mixins'
 import VAppBar from './VAppBar'
 
-// Helpers
+// Utilities
 import { convertToUnit } from '../../util/helpers'
 import { easeInOutCubic } from '../../services/goto/easing-patterns'
 

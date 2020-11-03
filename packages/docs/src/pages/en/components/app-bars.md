@@ -35,7 +35,7 @@ A styled icon button component created specifically for use with [v-toolbar](/co
 
 ### v-app-bar-title
 
-A modified [v-toolbar-title](/components/toolbars) specifically for use with the `shrink-on-scroll` prop. `v-toolbar-title` will be truncated on small screens (see [issue #12514](https://github.com/vuetifyjs/vuetify/issues/12514)) but this component uses absolute positioning to be fully visible when expanded. Don't use `v-app-bar-title` without `shrink-on-scroll` as it does add a resize watcher and some extra calculations.
+A modified [v-toolbar-title](/components/toolbars/) specifically for use with the `shrink-on-scroll` prop. `v-toolbar-title` will be truncated on small screens (see [issue #12514](https://github.com/vuetifyjs/vuetify/issues/12514)) but this component uses absolute positioning to be fully visible when expanded. Don't use `v-app-bar-title` without `shrink-on-scroll` as it does add a resize watcher and some extra calculations.
 
 ## Caveats
 
