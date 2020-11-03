@@ -23,9 +23,9 @@ export default base.extend<options>().extend({
   name: 'v-app-bar-title',
 
   data: () => ({
-    width: 0,
     contentWidth: 0,
     left: 0,
+    width: 0,
   }),
 
   watch: {
