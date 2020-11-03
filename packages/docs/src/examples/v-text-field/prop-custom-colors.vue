@@ -193,7 +193,7 @@
         form: Object.assign({}, defaultForm),
         rules: {
           age: [
-            val => val < 10 || 'I don\'t believe you!',
+            val => val < 10 || `I don't believe you!`,
           ],
           animal: [val => (val || '').length > 0 || 'This field is required'],
           name: [val => (val || '').length > 0 || 'This field is required'],

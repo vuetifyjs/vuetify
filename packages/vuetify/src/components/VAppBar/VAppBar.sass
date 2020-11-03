@@ -46,3 +46,13 @@
 .v-app-bar.v-app-bar--shrink-on-scroll
   .v-toolbar__title
     font-size: inherit
+
+.v-app-bar-title
+  &__placeholder,
+  &__content
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+  &__content
+    position: absolute

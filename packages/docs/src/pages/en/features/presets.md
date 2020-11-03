@@ -93,13 +93,13 @@ export const preset: VuetifyPreset = {
 
 There are currently a total of **7 Material Studies** to choose from, each that have a corresponding preset plugin:
 
-* [Basil](https://material.io/design/material-studies/basil.html)
-* [Crane](https://material.io/design/material-studies/crane.html)
-* [Fortnightly](https://material.io/design/material-studies/fortnightly.html)
-* [Owl](https://material.io/design/material-studies/owl.html)
-* [Rally](https://material.io/design/material-studies/rally.html)
-* [Reply](https://material.io/design/material-studies/reply.html)
-* [Shrine](https://material.io/design/material-studies/shrine.html)
+- [Basil](https://material.io/design/material-studies/basil.html)
+- [Crane](https://material.io/design/material-studies/crane.html)
+- [Fortnightly](https://material.io/design/material-studies/fortnightly.html)
+- [Owl](https://material.io/design/material-studies/owl.html)
+- [Rally](https://material.io/design/material-studies/rally.html)
+- [Reply](https://material.io/design/material-studies/reply.html)
+- [Shrine](https://material.io/design/material-studies/shrine.html)
 
 ### Installation
 
@@ -157,9 +157,9 @@ export default new Vuetify({
 
 Due to the [studies](https://material.io/design/material-studies/about-our-material-studies.html) being more visual than technical, presets are our _best-guess_ implementation. In many cases, styles and functionality must be inferred due to lack of information within the study's guidelines. There are also situations in which part of a study _**can not**_ or _**will not**_ be supported:
 
-* It requires changes to the framework
-* It's not currently possible with CSS
-* We haven't figured out how to support it yet
+- It requires changes to the framework
+- It's not currently possible with CSS
+- We haven't figured out how to support it yet
 
 ### Google fonts
 
@@ -193,10 +193,10 @@ export default new Vuetify()
 
 A Vuetify preset is a npm package that provides framework wide options and custom styling using Vue CLI. It consists of a SASS variables file, a CSS overrides file and the Vue CLI [Generator](https://cli.vuejs.org/dev-guide/generator-api.html) and [Plugin Service](https://cli.vuejs.org/dev-guide/plugin-api.html). Some of the features offered by presets are:
 
-* configures framework options with **pre-defined** values — can use any combination of the available [Vuetify options](#default-preset)
-* injects **custom SASS variables** for configuring existing Vuetify functionality; e.g. components. Presets use the [Vue CLI Plugin API](https://cli.vuejs.org/dev-guide/plugin-api.html#plugin-api) to hoist SASS variables during compilation
-* provides **global overrides** for styling that is not coverable through variables
-* a _streamlined approach_ to modifying a Vuetify application's style and options
+- configures framework options with **pre-defined** values — can use any combination of the available [Vuetify options](#default-preset)
+- injects **custom SASS variables** for configuring existing Vuetify functionality; e.g. components. Presets use the [Vue CLI Plugin API](https://cli.vuejs.org/dev-guide/plugin-api.html#plugin-api) to hoist SASS variables during compilation
+- provides **global overrides** for styling that is not coverable through variables
+- a _streamlined approach_ to modifying a Vuetify application's style and options
 
 ```bash
 # Vuetify preset plugin structure

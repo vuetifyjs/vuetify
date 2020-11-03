@@ -11,7 +11,7 @@
           cols="12"
           md="4"
         >
-          <v-hover v-slot:default="{ hover }">
+          <v-hover v-slot="{ hover }">
             <v-card
               :elevation="hover ? 12 : 2"
               :class="{ 'on-hover': hover }"
@@ -72,7 +72,7 @@
       items: [
         {
           title: 'New Releases',
-          text: "It's New Release Friday",
+          text: `It's New Release Friday`,
           subtext: 'Newly released songs. Updated daily.',
           img: 'http://lorempixel.com/output/nightlife-q-c-640-480-5.jpg',
         },

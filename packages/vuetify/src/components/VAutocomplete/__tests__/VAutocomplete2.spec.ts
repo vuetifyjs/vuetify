@@ -216,7 +216,7 @@ describe('VAutocomplete.ts', () => {
 
     icon.trigger('click')
 
-    expect(wrapper.vm.internalSearch).toBeUndefined()
+    expect(wrapper.vm.internalSearch).toBeNull()
   })
 
   it('should propagate content class', () => {
@@ -276,7 +276,7 @@ describe('VAutocomplete.ts', () => {
     expect(wrapper.vm.isMenuActive).toBe(true)
   })
 
-  it('should not show menu when items are updated and hide-no-data is enabled ', async () => {
+  it('should not show menu when items are updated and hide-no-data is enabled', async () => {
     const wrapper = mountFunction({
       propsData: {
         hideNoData: true,

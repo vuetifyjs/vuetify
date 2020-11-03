@@ -1,5 +1,5 @@
-const { VSelect } = require('../helpers/variables')
+const { VAutocomplete } = require('../helpers/variables')
 
 module.exports = {
-  'v-autocomplete': VSelect,
+  'v-autocomplete': VAutocomplete,
 }

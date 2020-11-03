@@ -40,6 +40,10 @@ describe('VSelect.ts', () => {
     }
   })
 
+  afterEach(() => {
+    document.body.removeChild(el)
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/4359
   // Vue modifies the `on` property of the
   // computed `listData` — easiest way to fix
@@ -72,18 +76,8 @@ describe('VSelect.ts', () => {
       },
     })
 
-    const icon = wrapper.find('.v-input__append-inner .v-icon')
-
     expect(wrapper.vm.selectedItems).toHaveLength(1)
     expect(wrapper.vm.isDirty).toBe(true)
-
-    icon.trigger('click')
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.selectedItems).toHaveLength(0)
-    expect(wrapper.vm.isDirty).toBe(false)
-    expect(wrapper.vm.internalValue).toBeUndefined()
   })
 
   it('should only calls change once when clearing', async () => {

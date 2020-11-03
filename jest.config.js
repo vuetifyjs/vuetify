@@ -23,7 +23,7 @@ module.exports = {
   transform: {
     '\\.(styl)$': 'jest-css-modules',
     '\\.(sass|scss)$': 'jest-css-modules',
-    '.*\\.(j|t)s$': 'ts-jest',
+    '.*\\.(j|t)s$': 'babel-jest',
   },
   collectCoverageFrom: [
     'src/**/*.{js,ts,tsx}',
@@ -41,11 +41,4 @@ module.exports = {
     '**/__tests__/**/*.spec.js',
     '**/__tests__/**/*.spec.ts',
   ],
-  globals: {
-    'ts-jest': {
-      babelConfig: true,
-      tsConfig: '<rootDir>/tsconfig.test.json',
-      diagnostics: false,
-    },
-  },
 }

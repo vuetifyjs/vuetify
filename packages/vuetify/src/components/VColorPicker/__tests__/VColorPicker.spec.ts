@@ -139,6 +139,8 @@ describe('VColorPicker.ts', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/9472
+  // https://github.com/vuetifyjs/vuetify/issues/10402
+  // TODO: snapshot is too complex for this
   it('should work correctly when initial value is null', () => {
     const wrapper = mountFunction({
       propsData: {
@@ -163,17 +165,6 @@ describe('VColorPicker.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         elevation: 15,
-      },
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  // https://github.com/vuetifyjs/vuetify/issues/10402
-  it('should not hide alpha if given initial value of null', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        value: null,
       },
     })
 

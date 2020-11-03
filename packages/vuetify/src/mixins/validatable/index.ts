@@ -236,7 +236,7 @@ export default baseMixins.extend({
       this.isResetting = true
       this.internalValue = Array.isArray(this.internalValue)
         ? []
-        : undefined
+        : null
     },
     /** @public */
     resetValidation () {

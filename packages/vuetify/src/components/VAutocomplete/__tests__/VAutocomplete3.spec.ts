@@ -141,7 +141,7 @@ describe('VAutocomplete.ts', () => {
     input.trigger('keydown.backspace')
     input.trigger('keydown.backspace')
 
-    expect(wrapper.vm.internalValue).toBeUndefined()
+    expect(wrapper.vm.internalValue).toBeNull()
 
     wrapper.setProps({
       multiple: true,

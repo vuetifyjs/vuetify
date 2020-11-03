@@ -40,10 +40,6 @@
   export default {
     name: 'DefaultLayout',
 
-    beforeRouteEnter (to, from, next) {
-      next(vm => vm.init())
-    },
-
     components: {
       DefaultBar,
       DefaultDrawer,
@@ -53,6 +49,10 @@
       DefaultSnackbar,
       DefaultToc,
       DefaultView,
+    },
+
+    beforeRouteEnter (to, from, next) {
+      next(vm => vm.init())
     },
 
     data: () => ({ unassigned: [] }),
@@ -122,12 +122,13 @@
           // to = this.$router.resolve(`/${url.join('/')}/`).resolved.path
           to = `/${url.join('/')}/`
         }
-
         const path = item.title || item.heading
-        const title = this.$te(path)
-          ? this.$t(path)
-          : this.pages[to] || path
-
+        const title = (
+          this.pages[to] ||
+          (this.$te(path) && this.$t(path)) ||
+          path ||
+          ''
+        )
         const created = {
           ...item,
           ...(modified[`/${group}/${page}/`] || {}),

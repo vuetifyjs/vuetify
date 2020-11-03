@@ -115,53 +115,50 @@ export default Vue.extend({
       ])
     },
     genInputs (): VNode[] | VNode {
-      switch (this.internalMode) {
-        case 'hexa': {
-          const hex = this.color.hexa
-          const value = this.hideAlpha && hex.endsWith('FF') ? hex.substr(0, 7) : hex
+      if (this.internalMode === 'hexa') {
+        const hex = this.color.hexa
+        const value = this.hideAlpha && hex.endsWith('FF') ? hex.substr(0, 7) : hex
+        return this.genInput(
+          'hex',
+          {
+            maxlength: this.hideAlpha ? 7 : 9,
+            disabled: this.disabled,
+          },
+          value,
+          {
+            change: (e: Event) => {
+              const el = e.target as HTMLInputElement
+              this.$emit('update:color', this.currentMode.from(parseHex(el.value)))
+            },
+          }
+        )
+      } else {
+        const inputs = this.hideAlpha ? this.currentMode.inputs!.slice(0, -1) : this.currentMode.inputs!
+        return inputs.map(([target, max, type]) => {
+          const value = this.color[this.internalMode as keyof VColorPickerColor] as any
           return this.genInput(
-            'hex',
+            target,
             {
-              maxlength: this.hideAlpha ? 7 : 9,
+              type: 'number',
+              min: 0,
+              max,
+              step: type === 'float' ? '0.01' : type === 'int' ? '1' : undefined,
               disabled: this.disabled,
             },
-            value,
+            this.getValue(value[target], type),
             {
-              change: (e: Event) => {
+              input: (e: Event) => {
                 const el = e.target as HTMLInputElement
-                this.$emit('update:color', this.currentMode.from(parseHex(el.value)))
+                const newVal = this.parseValue(el.value || '0', type)
+
+                this.$emit('update:color', this.currentMode.from(
+                  Object.assign({}, value, { [target]: newVal }),
+                  this.color.alpha
+                ))
               },
             }
           )
-        }
-        default: {
-          const inputs = this.hideAlpha ? this.currentMode.inputs!.slice(0, -1) : this.currentMode.inputs!
-          return inputs.map(([target, max, type]) => {
-            const value = this.color[this.internalMode as keyof VColorPickerColor] as any
-            return this.genInput(
-              target,
-              {
-                type: 'number',
-                min: 0,
-                max,
-                step: type === 'float' ? '0.01' : type === 'int' ? '1' : undefined,
-                disabled: this.disabled,
-              },
-              this.getValue(value[target], type),
-              {
-                input: (e: Event) => {
-                  const el = e.target as HTMLInputElement
-                  const newVal = this.parseValue(el.value || '0', type)
-
-                  this.$emit('update:color', this.currentMode.from(
-                    Object.assign({}, value, { [target]: newVal }),
-                    this.color.alpha
-                  ))
-                },
-              }
-            )
-          })
-        }
+        })
       }
     },
     genSwitch (): VNode {

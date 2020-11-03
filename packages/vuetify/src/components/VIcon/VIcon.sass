@@ -58,15 +58,16 @@
   &--disabled
     pointer-events: none
 
-  &--is-component
+  &--dense
+    &__component,
+    &__svg
+      height: $icon-size-dense
+
+  &__component
     height: $icon-size
     width: $icon-size
 
-  &--svg
+  &__svg
     height: $icon-size
     width: $icon-size
     fill: currentColor
-
-  &--dense
-    &--is-component
-      height: $icon-size-dense
