@@ -34,7 +34,7 @@ import VCalendarMonthly from './VCalendarMonthly'
 import VCalendarDaily from './VCalendarDaily'
 import VCalendarWeekly from './VCalendarWeekly'
 import VCalendarCategory from './VCalendarCategory'
-import { CalendarTimestamp, CalendarFormatter } from 'vuetify/types'
+import { CalendarTimestamp, CalendarFormatter, CalendarCategory } from 'vuetify/types'
 import { getParsedCategories } from './util/parser'
 
 // Types
@@ -44,7 +44,7 @@ interface VCalendarRenderProps {
   component: string | Component
   maxDays: number
   weekdays: number[]
-  categories: any[]
+  categories: CalendarCategory[]
 }
 
 /* @vue/component */
