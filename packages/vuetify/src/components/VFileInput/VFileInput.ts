@@ -165,7 +165,7 @@ export default VTextField.extend({
 
   methods: {
     clearableCallback () {
-      this.internalValue = this.isMultiple ? [] : undefined
+      this.internalValue = this.isMultiple ? [] : null
       this.$refs.input.value = ''
     },
     genChips () {

@@ -290,7 +290,7 @@ export default baseMixins.extend<options>().extend({
       this.isMenuActive = true
     },
     clearableCallback () {
-      this.setValue(this.multiple ? [] : undefined)
+      this.setValue(this.multiple ? [] : null)
       this.setMenuIndex(-1)
       this.$nextTick(() => this.$refs.input && this.$refs.input.focus())
 
