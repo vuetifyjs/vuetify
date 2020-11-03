@@ -9,9 +9,9 @@ import VCalendarDaily from './VCalendarDaily'
 
 // Util
 import { convertToUnit, getSlot } from '../../util/helpers'
-import { CalendarTimestamp } from 'types'
+import { CalendarCategory, CalendarTimestamp } from 'types'
 import props from './util/props'
-import { Parser } from './util/parser'
+import { getParsedCategories } from './util/parser'
 
 /* @vue/component */
 export default VCalendarDaily.extend({
@@ -27,8 +27,8 @@ export default VCalendarDaily.extend({
         ...this.themeClasses,
       }
     },
-    parsedCategories (): any[] {
-      return Parser.getParsedCategories(this.categories, this.categoryText)
+    parsedCategories (): CalendarCategory[] {
+      return getParsedCategories(this.categories, this.categoryText)
     },
   },
   methods: {
@@ -46,10 +46,12 @@ export default VCalendarDaily.extend({
 
       return [this.$createElement('div', data, children)]
     },
-    getCategoryScope (scope: any, category: { categoryName: string }) {
+    getCategoryScope (scope: any, category: CalendarCategory) {
+      const cat = typeof category === 'object' && category &&
+          category.categoryName === this.categoryForInvalid ? null : category
       return {
         ...scope,
-        category: category.categoryName === this.categoryForInvalid ? null : category,
+        category: cat,
       }
     },
     genDayHeaderCategory (day: CalendarTimestamp, scope: any): VNode {
@@ -116,7 +118,6 @@ export default VCalendarDaily.extend({
         staticClass: 'v-calendar-category__columns',
       }
 
-      // const children = this.parsedCategories.map(category => this.genDayBodyCategory(day, category))
       const children = [this.genDayBodyCategory(day, category)]
 
       return [this.$createElement('div', data, children)]

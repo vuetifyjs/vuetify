@@ -35,7 +35,7 @@ import VCalendarDaily from './VCalendarDaily'
 import VCalendarWeekly from './VCalendarWeekly'
 import VCalendarCategory from './VCalendarCategory'
 import { CalendarTimestamp, CalendarFormatter } from 'vuetify/types'
-import { Parser } from './util/parser'
+import { getParsedCategories } from './util/parser'
 
 // Types
 interface VCalendarRenderProps {
@@ -172,7 +172,7 @@ export default CalendarWithEvents.extend({
       })
     },
     parsedCategories (): any[] {
-      return Parser.getParsedCategories(this.categories, this.categoryText)
+      return getParsedCategories(this.categories, this.categoryText)
     },
   },
 

@@ -220,7 +220,9 @@ export type CalendarCategory =
   | null
   | string
   | {
-      name: string;
+      name?: string;
+      categoryName?: string;
+      [key: string]: any;
     };
 
 export type CalendarCategoryTextFunction = (
