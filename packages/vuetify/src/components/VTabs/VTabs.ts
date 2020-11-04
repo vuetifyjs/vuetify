@@ -131,6 +131,7 @@ export default baseMixins.extend<options>().extend({
     centerActive: 'callSlider',
     fixedTabs: 'callSlider',
     grow: 'callSlider',
+    iconsAndText: 'callSlider',
     right: 'callSlider',
     showArrows: 'callSlider',
     vertical: 'callSlider',
