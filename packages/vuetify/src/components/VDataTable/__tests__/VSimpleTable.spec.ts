@@ -104,15 +104,17 @@ describe('VSimpleTable.ts', () => {
     })
   })
 
-  it('should compute classes with bottom slot', () => {
+  it('should compute classes with top & bottom slots', () => {
     const wrapper = mountFunction({
       slots: {
+        top: '<div class="top">Header</div>',
         bottom: '<div class="bottom">Footer</div>',
       },
     })
 
     expect(wrapper.vm.classes).toMatchObject({
-      'v-data-table--has-footer': true,
+      'v-data-table--has-top': true,
+      'v-data-table--has-bottom': true,
     })
   })
 })
