@@ -403,8 +403,8 @@ export default CalendarBase.extend({
     },
     isEventForCategory (event: CalendarEventParsed, category: CalendarCategory): boolean {
       return !this.categoryMode ||
-        typeof category === 'object' && category.calendarName && 
-        category.categoryName === event.category ||
+        (typeof category === 'object' && category.calendarName &&
+        category.categoryName === event.category) ||
         (typeof event.category !== 'string' && category === null)
     },
     getEventsForDay (day: CalendarDaySlotScope): CalendarEventParsed[] {
