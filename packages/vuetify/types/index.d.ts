@@ -9,7 +9,11 @@ import { Breakpoint } from './services/breakpoint'
 import { Icons } from './services/icons'
 import { Lang } from './services/lang'
 import { Theme } from './services/theme'
-import { Presets, UserVuetifyPreset, VuetifyPreset } from './services/presets'
+import { 
+  Presets, 
+  UserVuetifyPreset, 
+  VuetifyPreset, 
+} from './services/presets'
 
 // Service Options
 import { GoToOptions } from './services/goto'
@@ -44,10 +48,7 @@ export interface VuetifyUseOptions {
 
 export interface Framework {
   readonly breakpoint: Breakpoint
-  readonly goTo: <T extends string | number | HTMLElement | Vue>(
-    target: T,
-    options?: GoToOptions
-  ) => Promise<T>
+  readonly goTo: <T extends string | number | HTMLElement | Vue>( target: T, options?: GoToOptions ) => Promise<T>
   application: Application
   theme: Theme
   icons: Icons
@@ -65,27 +66,19 @@ declare module 'vue/types/vue' {
 declare module 'vue/types/options' {
   export interface ComponentOptions<
     V extends Vue,
-    Data = DefaultData<V>,
-    Methods = DefaultMethods<V>,
-    Computed = DefaultComputed,
-    PropsDef = PropsDefinition<DefaultProps>,
-    Props = DefaultProps
-  > {
+    Data=DefaultData<V>,
+    Methods=DefaultMethods<V>,
+    Computed=DefaultComputed,
+    PropsDef=PropsDefinition<DefaultProps>,
+    Props=DefaultProps> {
     vuetify?: Vuetify
   }
 }
 
 // Public types
-export type TreeviewItemFunction = (
-  item: object,
-  search: string,
-  textKey: string
-) => boolean
+export type TreeviewItemFunction = ( item: object, search: string, textKey: string ) => boolean
 
-export type SelectItemKey =
-  | string
-  | (string | number)[]
-  | ((item: object, fallback?: any) => any)
+export type SelectItemKey = | string | (string | number)[] | ((item: object, fallback?: any) => any)
 
 export interface ItemGroup<T> {
   name: string
@@ -145,18 +138,15 @@ export type DataSortFunction<T extends any = any> = (
   sortDesc: boolean[],
   locale: string,
   customSorters?: Record<string, DataTableCompareFunction<T>>
-) => T[]
+) => T[];
 
 export type DataGroupFunction<T extends any = any> = (
   items: T[],
   groupBy: string[],
-  groupDesc: boolean[]
+  groupDesc: boolean[],
 ) => ItemGroup<T>[]
 
-export type DataSearchFunction<T extends any = any> = (
-  items: T[],
-  search: string
-) => T[]
+export type DataSearchFunction<T extends any = any> = ( items: T[], search: string ) => T[]
 
 export type DatePickerFormatter = (date: string) => string
 
@@ -164,15 +154,9 @@ export type DatePickerAllowedDatesFunction = (date: string) => boolean
 
 export type DatePickerEventColorValue = string | string[]
 
-export type DatePickerEvents =
-  | string[]
-  | ((date: string) => boolean | DatePickerEventColorValue)
-  | Record<string, DatePickerEventColorValue>
+export type DatePickerEvents = | string[] | ((date: string) => boolean | DatePickerEventColorValue) | Record<string, DatePickerEventColorValue>
 
-export type DatePickerEventColors =
-  | DatePickerEventColorValue
-  | Record<string, DatePickerEventColorValue>
-  | ((date: string) => DatePickerEventColorValue)
+export type DatePickerEventColors = | DatePickerEventColorValue | Record<string, DatePickerEventColorValue> | ((date: string) => DatePickerEventColorValue)
 
 export type DatePickerType = 'date' | 'month'
 
@@ -276,30 +260,16 @@ export interface CalendarDaySlotScope extends CalendarTimestamp {
   category: CalendarCategory
 }
 
-export type CalendarTimeToY = (
-  time: CalendarTimestamp | number | string,
-  clamp?: boolean
-) => number
+export type CalendarTimeToY = ( time: CalendarTimestamp | number | string, clamp?: boolean ) => number
 
-export type CalendarTimeDelta = (
-  time: CalendarTimestamp | number | string
-) => number | false
+export type CalendarTimeDelta = ( time: CalendarTimestamp | number | string ) => number | false
 
 export interface CalendarDayBodySlotScope extends CalendarDaySlotScope {
   timeToY: CalendarTimeToY
   timeDelta: CalendarTimeDelta
 }
 
-export type CalendarEventOverlapMode = (
-  events: CalendarEventParsed[],
-  firstWeekday: number,
-  overlapThreshold: number
-) => (
-  day: CalendarDaySlotScope,
-  dayEvents: CalendarEventParsed[],
-  timed: boolean,
-  reset: boolean
-) => CalendarEventVisual[]
+export type CalendarEventOverlapMode = ( events: CalendarEventParsed[], firstWeekday: number, overlapThreshold: number ) => ( day: CalendarDaySlotScope, dayEvents: CalendarEventParsed[], timed: boolean, reset: boolean ) => CalendarEventVisual[]
 
 export type CalendarEventColorFunction = (event: CalendarEvent) => string
 
@@ -307,16 +277,9 @@ export type CalendarEventTimedFunction = (event: CalendarEvent) => boolean
 
 export type CalendarEventCategoryFunction = (event: CalendarEvent) => string
 
-export type CalendarEventNameFunction = (
-  event: CalendarEventParsed,
-  timedEvent: boolean
-) => string
+export type CalendarEventNameFunction = ( event: CalendarEventParsed, timedEvent: boolean ) => string
 
-export type DataTableFilterFunction = (
-  value: any,
-  search: string | null,
-  item: any
-) => boolean
+export type DataTableFilterFunction = ( value: any, search: string | null, item: any ) => boolean
 
 export interface DataTableHeader<T extends any = any> {
   text: string
@@ -333,13 +296,9 @@ export interface DataTableHeader<T extends any = any> {
   sort?: DataTableCompareFunction<T>
 }
 
-export type DataItemsPerPageOption =
-  | number
-  | {
-      text: string
-      value: number
-    }
+export type DataItemsPerPageOption = (number | {
+  text: string
+  value: number
+});
 
-export type RowClassFunction = (
-  item: any
-) => null | undefined | string | string[] | Record<string, boolean>
+export type RowClassFunction = ( item: any ) => null | undefined | string | string[] | Record<string, boolean> 
