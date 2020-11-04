@@ -171,7 +171,7 @@ export default CalendarWithEvents.extend({
         timeZone: 'UTC', month: 'short',
       })
     },
-    parsedCategories (): any[] {
+    parsedCategories (): CalendarCategory[] {
       return getParsedCategories(this.categories, this.categoryText)
     },
   },
@@ -291,10 +291,10 @@ export default CalendarWithEvents.extend({
     timestampToDate (timestamp: CalendarTimestamp): Date {
       return timestampToDate(timestamp)
     },
-    getCategoryList (categories: any[]): string[] {
+    getCategoryList (categories: CalendarCategory[]): CalendarCategory[] {
       if (!this.noEvents) {
         const categoryMap = categories.reduce((map, category, index) => {
-          map[category.categoryName] = { index, count: 0 }
+          if(typeof category === 'object' && category.categoryName) map[category.categoryName] = { index, count: 0 }
 
           return map
         }, Object.create(null))
@@ -332,7 +332,11 @@ export default CalendarWithEvents.extend({
           }
         }
 
-        categories = categories.filter(v => Object.keys(categoryMap).includes(v.categoryName))
+        categories = categories.filter((v: CalendarCategory) => {
+          if(typeof v === 'object' && v.categoryName)
+            return Object.keys(categoryMap).includes(v.categoryName)
+          return false
+        })
       }
       return categories
     },

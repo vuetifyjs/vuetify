@@ -91,10 +91,10 @@ export default VCalendarDaily.extend({
         ...this.genDayBody(day, category),
       ])
     },
-    genDayIntervals (index: number, category: any): VNode[] {
+    genDayIntervals (index: number, category: CalendarCategory): VNode[] {
       return this.intervals[index].map(v => this.genDayInterval(v, category))
     },
-    genDayInterval (interval: CalendarTimestamp, category: any): VNode {
+    genDayInterval (interval: CalendarTimestamp, category: CalendarCategory): VNode {
       const height: string | undefined = convertToUnit(this.intervalHeight)
       const styler = this.intervalStyle || this.intervalStyleDefault
 
@@ -113,7 +113,7 @@ export default VCalendarDaily.extend({
 
       return this.$createElement('div', data, children)
     },
-    genDayBody (day: CalendarTimestamp, category: any): VNode[] {
+    genDayBody (day: CalendarTimestamp, category: CalendarCategory): VNode[] {
       const data = {
         staticClass: 'v-calendar-category__columns',
       }
@@ -122,7 +122,7 @@ export default VCalendarDaily.extend({
 
       return [this.$createElement('div', data, children)]
     },
-    genDayBodyCategory (day: CalendarTimestamp, category: { categoryName: string }): VNode {
+    genDayBodyCategory (day: CalendarTimestamp, category: CalendarCategory): VNode {
       const data = {
         staticClass: 'v-calendar-category__column',
         on: this.getDefaultMouseEventHandlers(':time-category', e => {

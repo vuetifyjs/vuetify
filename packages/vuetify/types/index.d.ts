@@ -216,8 +216,6 @@ export type InputMessage = string | string[];
 export type InputValidationRules = (InputValidationRule | string)[];
 
 export type CalendarCategory =
-  | false
-  | null
   | string
   | {
       name?: string;
@@ -280,7 +278,7 @@ export interface CalendarDaySlotScope extends CalendarTimestamp {
   outside: boolean;
   index: number;
   week: CalendarTimestamp[];
-  category: string | undefined | null;
+  category: CalendarCategory;
 }
 
 export type CalendarTimeToY = (

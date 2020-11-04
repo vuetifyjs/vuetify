@@ -39,6 +39,7 @@ import {
   CalendarEventOverlapMode,
   CalendarEvent,
   CalendarEventCategoryFunction,
+  CalendarCategory,
 } from 'vuetify/types'
 
 // Types
@@ -400,8 +401,9 @@ export default CalendarBase.extend({
         event => isEventOverlapping(event, start, end)
       )
     },
-    isEventForCategory (event: CalendarEventParsed, category: any): boolean {
+    isEventForCategory (event: CalendarEventParsed, category: CalendarCategory): boolean {
       return !this.categoryMode ||
+        typeof category === 'object' && category.calendarName && 
         category.categoryName === event.category ||
         (typeof event.category !== 'string' && category === null)
     },
