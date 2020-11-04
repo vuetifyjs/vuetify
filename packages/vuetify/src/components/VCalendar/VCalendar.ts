@@ -332,9 +332,9 @@ export default CalendarWithEvents.extend({
           }
         }
 
-        categories = categories.filter((v: CalendarCategory) => {
-          if (typeof v === 'object' && v.categoryName) {
-            return Object.keys(categoryMap).includes(v.categoryName)
+        categories = categories.filter((category: CalendarCategory) => {
+          if (typeof category === 'object' && category.categoryName) {
+            return categoryMap.hasOwnProperty(category.categoryName)
           }
           return false
         })
