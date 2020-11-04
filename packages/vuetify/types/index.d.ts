@@ -223,7 +223,7 @@ export interface CalendarTimestamp {
   category?: CalendarCategory
 }
 
-export type CalendarFormatter = ( timestamp: CalendarTimestamp, short: boolean ) => string
+export type CalendarFormatter = (timestamp: CalendarTimestamp, short: boolean) => string
 
 export interface CalendarEvent {
   [prop: string]: any
@@ -298,4 +298,4 @@ export type DataItemsPerPageOption = (number | {
   value: number
 });
 
-export type RowClassFunction = (item: any) => null | undefined | string | string[] | Record<string, boolean> 
+export type RowClassFunction = (item: any) => null | undefined | string | string[] | Record<string, boolean>
