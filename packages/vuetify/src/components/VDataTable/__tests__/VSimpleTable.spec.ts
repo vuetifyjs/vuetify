@@ -103,4 +103,16 @@ describe('VSimpleTable.ts', () => {
       'v-data-table--fixed-height': true,
     })
   })
+
+  it('should compute classes with bottom slot', () => {
+    const wrapper = mountFunction({
+      slots: {
+        bottom: '<div class="bottom">Footer</div>',
+      },
+    })
+
+    expect(wrapper.vm.classes).toMatchObject({
+      'v-data-table--has-footer': true,
+    })
+  })
 })

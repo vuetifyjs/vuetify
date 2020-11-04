@@ -106,6 +106,19 @@
           > th
             height: $data-table-dense-header-height
 
+.v-data-table--has-footer
+  > .v-data-table__wrapper
+    tbody
+      tr
+        &:last-child
+          &:hover
+            td
+              &:first-child
+                border-bottom-left-radius: 0
+
+              &:last-child
+                border-bottom-right-radius: 0
+
 .v-data-table--fixed-height
   .v-data-table__wrapper
     overflow-y: auto
