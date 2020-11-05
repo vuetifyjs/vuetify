@@ -22,7 +22,7 @@ interface GroupProps {
 interface GroupProvide {
   register: (item: GroupItem, index?: number) => void
   unregister: (id: number) => void
-  toggle: (id: number) => void
+  select: (id: number, value: boolean) => void
   selected: Ref<any[]>
   isSelected: (id: number) => boolean
   prev: () => void
@@ -56,7 +56,8 @@ export function useGroupItem (
 
   return {
     isSelected,
-    toggle: () => group.toggle(id),
+    toggle: () => group.select(id, !isSelected.value),
+    select: (value: boolean) => group.select(id, value),
   }
 }
 
@@ -105,7 +106,7 @@ export function useGroup (
     items.splice(index, 1)
   }
 
-  function toggle (id: number) {
+  function select (id: number, isSelected: boolean) {
     if (props.multiple) {
       const internalValue = selected.value.slice()
       const index = internalValue.findIndex(v => v === id)
@@ -116,7 +117,7 @@ export function useGroup (
       if (
         props.mandatory &&
         index > -1 &&
-        internalValue.length - 1 < 1
+        internalValue.length <= 1
       ) return
 
       // We can't add value if it would
@@ -127,16 +128,14 @@ export function useGroup (
         internalValue.length + 1 > props.max
       ) return
 
-      if (index > -1) internalValue.splice(index, 1)
-      else internalValue.push(id)
+      if (index < 0 && isSelected) internalValue.push(id)
+      else if (index >= 0 && !isSelected) internalValue.splice(index, 1)
 
       selected.value = internalValue
     } else {
-      const isSame = selected.value.includes(id)
+      if (props.mandatory && selected.value.includes(id)) return
 
-      if (props.mandatory && isSame) return
-
-      selected.value = isSame ? [] : [id]
+      selected.value = isSelected ? [id] : []
     }
   }
 
@@ -158,7 +157,7 @@ export function useGroup (
     register,
     unregister,
     selected,
-    toggle,
+    select,
     prev: () => selected.value = [getOffsetId(items.length - 1)],
     next: () => selected.value = [getOffsetId(1)],
     step: (steps: number) => selected.value = [getOffsetId(steps)],
