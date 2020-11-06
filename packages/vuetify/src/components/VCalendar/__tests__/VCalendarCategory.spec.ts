@@ -24,15 +24,27 @@ describe('VCalendarCategory', () => {
     }
   })
 
-  it('should render correctly without shortIntervals prop', async () => {
+  it('should test categoryText prop as a string', async () => {
     const wrapper = mountFunction({
       propsData: {
-        start: '2019-01-29',
-        end: '2019-02-04',
-        shortIntervals: false,
+        categories: [{ name: 'Nate' }],
+        categoryText: 'name',
       },
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.v-calendar-category__column-header').text()).toEqual('Nate')
+  })
+
+  it('should test categoryText prop as a function', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        categories: [{ name: 'Nate', age: 20 }],
+        categoryText (category) {
+          return category.age
+        },
+      },
+    })
+
+    expect(wrapper.find('.v-calendar-category__column-header').text()).toEqual('20')
   })
 })

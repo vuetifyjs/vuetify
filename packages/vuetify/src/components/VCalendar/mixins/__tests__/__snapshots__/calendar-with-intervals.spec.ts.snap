@@ -4543,3 +4543,24 @@ Array [
   ],
 ]
 `;
+
+exports[`calendar-with-intervals.ts should generate slot scope 1`] = `
+Object {
+  "date": "2019-02-08",
+  "day": 8,
+  "future": false,
+  "hasDay": true,
+  "hasTime": false,
+  "hour": 0,
+  "minute": 0,
+  "minutesToPixels": [Function],
+  "month": 2,
+  "past": false,
+  "present": false,
+  "time": "",
+  "timeDelta": [Function],
+  "timeToY": [Function],
+  "weekday": 5,
+  "year": 2019,
+}
+`;
