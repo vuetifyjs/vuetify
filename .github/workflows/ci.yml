@@ -114,7 +114,7 @@ jobs:
           upload_sources: false
           download_translations: true
           push_translations: false
-          export_only_approved: true
+          export_only_approved: false
           download_language: zh-CN
           localization_branch_name: ${{ env.LOCAL_BRANCH }}
           crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
