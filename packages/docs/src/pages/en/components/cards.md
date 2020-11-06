@@ -113,4 +113,10 @@ Using [v-list-items](/components/lists) and a [v-slider](/components/sliders), w
 
 <example file="v-card/misc-weather-card" />
 
+#### Card Reveal
+
+Using [v-expand-transition](https://vuetifyjs.com/en/api/v-expand-transition/) and an `@click` event you can have a card that reveals more information once the button is clicked, activating the hidden card to be revealed.
+
+<example file="v-card/misc-card-reveal" />
+
 <backmatter />
