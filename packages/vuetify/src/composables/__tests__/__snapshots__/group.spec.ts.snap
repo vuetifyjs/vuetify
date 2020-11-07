@@ -44,11 +44,31 @@ exports[`group with explicit values should emit new selection 1`] = `
 </div>
 `;
 
+exports[`group with explicit values should not emit new selection if clicking disabled item 1`] = `
+<div>
+  <div class>
+    one
+  </div>
+  <div class>
+    two
+  </div>
+</div>
+`;
+
 exports[`group with implicit values should emit new selection 1`] = `
 <div>
   <div class="selected">
   </div>
   <div class>
+  </div>
+</div>
+`;
+
+exports[`group with implicit values should set first non-disabled item as value when mandatory 1`] = `
+<div>
+  <div class>
+  </div>
+  <div class="selected">
   </div>
 </div>
 `;

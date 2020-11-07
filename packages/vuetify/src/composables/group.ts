@@ -1,5 +1,5 @@
 // Utilities
-import { reactive, provide, inject, computed, onBeforeUnmount, toRef } from 'vue'
+import { reactive, provide, inject, computed, onBeforeUnmount, toRef, onMounted } from 'vue'
 import { wrapInArray, getUid, deepEqual } from '@/util/helpers'
 import { consoleWarn } from '@/util/console'
 import { useProxiedModel } from './proxiedModel'
@@ -10,6 +10,7 @@ import type { Ref, UnwrapRef, InjectionKey, SetupContext } from 'vue'
 interface GroupItem {
   id: number
   value: Ref<unknown>
+  disabled: Ref<boolean | undefined>
 }
 
 interface GroupProps {
@@ -30,13 +31,13 @@ interface GroupProvide {
 }
 
 export function useGroupItem (
-  props: { value?: unknown, index?: number },
+  props: { value?: unknown, index?: number, disabled?: boolean },
   injectKey: InjectionKey<GroupProvide>,
 ) {
-  const group = inject(injectKey)
+  const group = inject(injectKey, null)
 
   if (!group) {
-    throw new Error(`Could not find useGroup injection for symbol ${injectKey}`)
+    throw new Error(`[Vuetify] Could not find useGroup injection with symbol ${injectKey.description}`)
   }
 
   const id = getUid()
@@ -44,6 +45,7 @@ export function useGroupItem (
   group.register({
     id,
     value: toRef(props, 'value'),
+    disabled: toRef(props, 'disabled'),
   }, props.index)
 
   onBeforeUnmount(() => {
@@ -85,14 +87,10 @@ export function useGroup (
   )
 
   function register (item: GroupItem, index?: number) {
-    if (index != null) items.splice(index, 0, item)
-    else items.push(item)
-
-    // If mandatory and nothing is selected,
-    // then select this item
-    if (props.mandatory && !selected.value.length) {
-      selected.value = [item.id]
-    }
+    // Is there a better way to fix this typing?
+    const unwrapped = item as unknown as UnwrapRef<GroupItem>
+    if (index != null) items.splice(index, 0, unwrapped)
+    else items.push(unwrapped)
   }
 
   function unregister (id: number) {
@@ -106,7 +104,18 @@ export function useGroup (
     items.splice(index, 1)
   }
 
+  onMounted(() => {
+    // If mandatory and nothing is selected, then select first non-disabled item
+    const item = items.find(item => !item.disabled)
+    if (item && props.mandatory && !selected.value.length) {
+      selected.value = [item.id]
+    }
+  })
+
   function select (id: number, isSelected: boolean) {
+    const item = items.find(item => item.id === id)
+    if (isSelected && item?.disabled) return
+
     if (props.multiple) {
       const internalValue = selected.value.slice()
       const index = internalValue.findIndex(v => v === id)

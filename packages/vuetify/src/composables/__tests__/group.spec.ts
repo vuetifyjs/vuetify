@@ -62,6 +62,7 @@ describe('group', () => {
       props: {
         value: [String, Number],
         index: Number,
+        disabled: Boolean,
       },
       setup (props) {
         const item = useGroupItem(props, Symbol.for('test'))
@@ -80,14 +81,15 @@ describe('group', () => {
         multiple: Boolean,
         mandatory: Boolean,
         max: Number,
+        disabled: Array,
       },
       setup (props, context) {
         return useGroup(props, context, Symbol.for('test'))
       },
       render () {
         return h('div', this.$slots.default?.() ?? [
-          h(GroupItemComponent, { value: 'one' }),
-          h(GroupItemComponent, { value: 'two' }),
+          h(GroupItemComponent, { value: 'one', disabled: !!this.disabled?.[0] }),
+          h(GroupItemComponent, { value: 'two', disabled: !!this.disabled?.[1] }),
         ])
       },
     })
@@ -102,6 +104,22 @@ describe('group', () => {
       expect(wrapper.emitted('update:modelValue')).toEqual([
         ['one'],
       ])
+
+      expect(wrapper.html()).toMatchSnapshot()
+    })
+
+    it('should not emit new selection if clicking disabled item', async () => {
+      const wrapper = mount(GroupComponent, {
+        props: {
+          disabled: [true, false],
+        },
+      })
+
+      const item = wrapper.findComponent(GroupItemComponent)
+
+      await item.trigger('click')
+
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined()
 
       expect(wrapper.html()).toMatchSnapshot()
     })
@@ -145,16 +163,17 @@ describe('group', () => {
       ])
     })
 
-    it('should set first item as value when mandatory', async () => {
+    it('should set first non-disabled item as value when mandatory', async () => {
       const wrapper = mount(GroupComponent, {
         props: {
           mandatory: true,
           multiple: false,
+          disabled: [true, false],
         },
       })
 
       expect(wrapper.emitted()['update:modelValue']).toEqual([
-        ['one'],
+        ['two'],
       ])
     })
 
@@ -225,6 +244,9 @@ describe('group', () => {
 
   describe('with implicit values', () => {
     const GroupItemComponent = defineComponent({
+      props: {
+        disabled: Boolean,
+      },
       setup (props) {
         const item = useGroupItem(props, Symbol.for('test'))
         return () => h('div', {
@@ -241,12 +263,13 @@ describe('group', () => {
         multiple: Boolean,
         mandatory: Boolean,
         max: Number,
+        disabled: Array,
       },
       setup (props, context) {
         useGroup(props, context, Symbol.for('test'))
         return () => h('div', [
-          h(GroupItemComponent),
-          h(GroupItemComponent),
+          h(GroupItemComponent, { disabled: !!props.disabled?.[0] }),
+          h(GroupItemComponent, { disabled: !!props.disabled?.[1] }),
         ])
       },
     })
@@ -300,15 +323,21 @@ describe('group', () => {
       expect(events[1][0][0]).not.toEqual(events[1][0][1])
     })
 
-    it('should set first item as value when mandatory', async () => {
+    it('should set first non-disabled item as value when mandatory', async () => {
       const wrapper = mount(GroupComponent, {
         props: {
           mandatory: true,
           multiple: false,
+          disabled: [true, false],
         },
       })
 
+      // selection happens in mounted so we need to await
+      // to be able to match snapshot
+      await wrapper.vm.$nextTick()
+
       expect(wrapper.emitted()['update:modelValue']).toHaveLength(1)
+      expect(wrapper.html()).toMatchSnapshot()
     })
 
     it('should not allow empty value when mandatory', async () => {
