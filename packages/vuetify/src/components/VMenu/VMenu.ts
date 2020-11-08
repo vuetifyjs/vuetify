@@ -454,7 +454,7 @@ export default baseMixins.extend({
         this.$nextTick(() => activator && activator.focus())
       } else if (
         !this.isActive &&
-        [keyCodes.up, keyCodes.down, keyCodes.home, keyCodes.end].includes(e.keyCode)
+        [keyCodes.up, keyCodes.down].includes(e.keyCode)
       ) {
         this.isActive = true
       }

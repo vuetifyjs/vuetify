@@ -259,7 +259,7 @@ describe('VMenu.ts', () => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should select first or last item when pressing home or end', async () => {
+  it('should select first or last item when pressing home or end on active menu', async () => {
     const event = (keyCode: number) => new KeyboardEvent('keydown', { keyCode })
     const wrapper = mountFunction({
       propsData: { eager: true },
@@ -275,17 +275,15 @@ describe('VMenu.ts', () => {
       },
     })
 
+    wrapper.setData({ isActive: true })
+
     wrapper.vm.onKeyDown(event(keyCodes.end))
-    expect(wrapper.vm.isActive).toBe(true)
 
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.listIndex).toBe(3)
 
-    wrapper.setData({ isActive: false })
-
     wrapper.vm.onKeyDown(event(keyCodes.home))
-    expect(wrapper.vm.isActive).toBe(true)
 
     await wrapper.vm.$nextTick()
 
