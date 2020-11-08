@@ -430,6 +430,7 @@ export default baseMixins.extend({
     },
     lastTile () {
       const tile = this.tiles[this.tiles.length - 1]
+
       if (!tile) return
 
       this.listIndex = this.tiles.length - 1
@@ -438,6 +439,7 @@ export default baseMixins.extend({
     },
     firstTile () {
       const tile = this.tiles[0]
+
       if (!tile) return
 
       this.listIndex = 0
