@@ -382,18 +382,20 @@ export const BaseSlideGroup = mixins<options &
       }, this.$vuetify.rtl, this.scrollOffset)
     },
     setWidths /* istanbul ignore next */  () {
-      window.requestAnimationFrame(() => {
-        const { content, wrapper } = this.$refs
-
-        this.widths = {
-          content: content ? content.clientWidth : 0,
-          wrapper: wrapper ? wrapper.clientWidth : 0,
-        }
-
-        this.isOverflowing = this.widths.wrapper < this.widths.content
-
-        this.scrollIntoView()
-      })
+      if (typeof window === 'undefined') {
+        this.widths = { content: 0, wrapper: 0 }
+        setTimeout(() => this.setWidths(), 1000)
+      } else if (this.widths === { content: 0, wrapper: 0 }) {
+        window.requestAnimationFrame(() => {
+          const { content, wrapper } = this.$refs
+          this.widths = {
+            content: typeof content !== 'undefined' ? content.clientWidth : 0,
+            wrapper: typeof wrapper !== 'undefined' ? wrapper.clientWidth : 0,
+          }
+          this.isOverflowing = this.widths.wrapper < this.widths.content
+          this.scrollIntoView()
+        })
+      }
     },
   },
 
