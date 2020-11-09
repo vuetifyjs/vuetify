@@ -95,6 +95,12 @@ Cards are entry points to more detailed information. To keep things concise, ens
 
 <example file="v-card/misc-information-card" />
 
+#### Card Reveal
+
+Using [v-expand-transition](https://vuetifyjs.com/en/api/v-expand-transition/) and a `@click` event you can have a card that reveals more information once the button is clicked, activating the hidden card to be revealed.
+
+<example file="v-card/misc-card-reveal" />
+
 #### Media with text
 
 Using the layout system, we can add custom text anywhere within the background.
@@ -112,11 +118,5 @@ The `v-card` component has multiple children components that help you build comp
 Using [v-list-items](/components/lists) and a [v-slider](/components/sliders), we are able to create a unique weather card. The list components ensure that we have consistent spacing and functionality while the slider component allows us to provide a useful interface of selection to the user.
 
 <example file="v-card/misc-weather-card" />
-
-#### Card Reveal
-
-Using [v-expand-transition](https://vuetifyjs.com/en/api/v-expand-transition/) and an `@click` event you can have a card that reveals more information once the button is clicked, activating the hidden card to be revealed.
-
-<example file="v-card/misc-card-reveal" />
 
 <backmatter />
