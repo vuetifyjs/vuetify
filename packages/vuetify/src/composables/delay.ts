@@ -1,22 +1,19 @@
+// Utilities
+import propsFactory from '@/util/propsFactory'
+
 export interface DelayProps {
-  closeDelay: number | string
-  openDelay: number | string
+  closeDelay?: number | string
+  openDelay?: number | string
 }
 
-export function delayProps (
-  defaults: Partial<DelayProps> = {}
-) {
-  return {
-    closeDelay: {
-      type: [Number, String],
-      default: defaults.closeDelay,
-    },
-    openDelay: {
-      type: [Number, String],
-      default: defaults.openDelay,
-    },
-  }
-}
+export const makeDelayProps = propsFactory({
+  closeDelay: {
+    type: [Number, String],
+  },
+  openDelay: {
+    type: [Number, String],
+  },
+})
 
 export function useDelay (props: DelayProps, cb?: (value: boolean) => void) {
   const delays: Partial<Record<keyof DelayProps, number>> = {}
@@ -34,7 +31,7 @@ export function useDelay (props: DelayProps, cb?: (value: boolean) => void) {
       delays[prop] = window.setTimeout(() => {
         cb?.(active)
         resolve(active)
-      }, parseInt(props[prop], 10))
+      }, parseInt(props[prop] ?? 0, 10))
     })
   }
 

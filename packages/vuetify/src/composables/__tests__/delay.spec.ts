@@ -1,12 +1,13 @@
+// Utilities
 import { mount } from '@vue/test-utils'
-import { delayProps, useDelay } from '../delay'
+import { makeDelayProps, useDelay } from '../delay'
 import { wait } from '../../../test'
 
 describe('delayProps', () => {
   it('should allow setting default values', () => {
     const wrapper = mount({
       template: '<div />',
-      props: delayProps({
+      props: makeDelayProps({
         closeDelay: 42,
         openDelay: 7,
       }),
