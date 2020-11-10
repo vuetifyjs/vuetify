@@ -1,5 +1,5 @@
 // Setup
-import { ComponentOptions } from 'vue'
+import type { ComponentOptions } from 'vue'
 
 // Utilities
 import toHaveBeenWarnedInit from './util/to-have-been-warned'
@@ -47,12 +47,20 @@ export const resizeWindow = (width = window.innerWidth, height = window.innerHei
   (window as any).innerWidth = width
   ;(window as any).innerHeight = height
   window.dispatchEvent(new Event('resize'))
+
   return wait(200)
 }
 
 export const scrollWindow = (y: number) => {
   (window as any).pageYOffset = y
   window.dispatchEvent(new Event('scroll'))
+
+  return wait(200)
+}
+
+export const scrollElement = (element: Element, y: number) => {
+  element.scrollTop = y
+  element.dispatchEvent(new Event('scroll'))
 
   return wait(200)
 }
