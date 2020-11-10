@@ -65,6 +65,12 @@ An **outlined** card has 0 elevation and contains a soft border.
 
 ### Misc
 
+#### Card Reveal
+
+Using [v-expand-transition](https://vuetifyjs.com/en/api/v-expand-transition/) and a `@click` event you can have a card that reveals more information once the button is clicked, activating the hidden card to be revealed.
+
+<example file="v-card/misc-card-reveal" />
+
 #### Content wrapping
 
 The `v-card` component is useful for wrapping content.
@@ -94,12 +100,6 @@ Using `v-flex`, you can create customized horizontal cards. Use the `contain` pr
 Cards are entry points to more detailed information. To keep things concise, ensure to limit the number of actions the user can take.
 
 <example file="v-card/misc-information-card" />
-
-#### Card Reveal
-
-Using [v-expand-transition](https://vuetifyjs.com/en/api/v-expand-transition/) and a `@click` event you can have a card that reveals more information once the button is clicked, activating the hidden card to be revealed.
-
-<example file="v-card/misc-card-reveal" />
 
 #### Media with text
 
