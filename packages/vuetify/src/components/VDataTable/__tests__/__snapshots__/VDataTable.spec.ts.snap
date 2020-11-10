@@ -11016,7 +11016,7 @@ exports[`VDataTable.ts should respect mustSort property on options 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-704"
                        readonly="readonly"
                        type="text"
