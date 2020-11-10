@@ -17,7 +17,7 @@ exports[`VDataFooter.ts should disable last page button if no items 1`] = `
               <div class="v-select__selection v-select__selection--comma">
                 10
               </div>
-              <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+              <input aria-label="Items per page:"
                      id="input-55"
                      readonly="readonly"
                      type="text"
@@ -118,7 +118,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
               <div class="v-select__selection v-select__selection--comma">
                 10
               </div>
-              <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+              <input aria-label="Items per page:"
                      id="input-24"
                      readonly="readonly"
                      type="text"
@@ -215,7 +215,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
               <div class="v-select__selection v-select__selection--comma">
                 10
               </div>
-              <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+              <input aria-label="Items per page:"
                      id="input-11"
                      readonly="readonly"
                      type="text"
@@ -312,7 +312,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
               <div class="v-select__selection v-select__selection--comma">
                 100
               </div>
-              <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+              <input aria-label="Items per page:"
                      id="input-2"
                      readonly="readonly"
                      type="text"
@@ -388,7 +388,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
               <div class="v-select__selection v-select__selection--comma">
                 10
               </div>
-              <input aria-label="$vuetify.dataFooter.itemsPerPageText"
+              <input aria-label="Items per page:"
                      id="input-46"
                      readonly="readonly"
                      type="text"
