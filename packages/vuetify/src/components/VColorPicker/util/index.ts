@@ -144,9 +144,9 @@ export function extractColor (color: VColorPickerColor, input: any) {
   }
 
   if (typeof input === 'object') {
-    if (has(input, ['r', 'g', 'b'])) return stripAlpha(color.rgba, !input.a)
-    else if (has(input, ['h', 's', 'l'])) return stripAlpha(color.hsla, !input.a)
-    else if (has(input, ['h', 's', 'v'])) return stripAlpha(color.hsva, !input.a)
+    if (has(input, ['r', 'g', 'b'])) return stripAlpha(color.rgba, (typeof input.a === 'undefined' || input.a === null))
+    else if (has(input, ['h', 's', 'l'])) return stripAlpha(color.hsla, (typeof input.a === 'undefined' || input.a === null))
+    else if (has(input, ['h', 's', 'v'])) return stripAlpha(color.hsva, (typeof input.a === 'undefined' || input.a === null))
   }
 
   return color
