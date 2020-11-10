@@ -6,7 +6,8 @@ import {
   watch,
   onMounted,
 } from 'vue'
-import { consoleWarn } from '../util/console'
+import { consoleWarn } from '@/util/console'
+import propsFactory from '@/util/propsFactory'
 
 // Types
 import type { Ref } from 'vue'
@@ -23,20 +24,14 @@ export interface ThresholdMetCallbackData {
 }
 
 // Props
-export function scrollProps (
-  defaults: Partial<ScrollProps> = {}
-) {
-  return {
-    scrollTarget: {
-      type: String,
-      default: defaults.scrollTarget,
-    },
-    scrollThreshold: {
-      type: [String, Number],
-      default: defaults.scrollThreshold,
-    },
-  }
-}
+export const makeScrollProps = propsFactory({
+  scrollTarget: {
+    type: String,
+  },
+  scrollThreshold: {
+    type: [String, Number],
+  },
+})
 
 export interface ScrollArguments {
   thresholdMetCallback?: (data: ThresholdMetCallbackData) => void

@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils'
 
 // Effects
 import {
-  scrollProps,
+  makeScrollProps,
   useScroll,
 } from '../scroll'
 import type { ScrollArguments } from '../scroll'
@@ -19,7 +19,7 @@ describe('scrollProps', () => {
   it('should allow setting default values', () => {
     const wrapper = mount({
       template: '<div />',
-      props: scrollProps({
+      props: makeScrollProps({
         scrollTarget: 'foo',
         scrollThreshold: 500,
       }),
@@ -35,7 +35,7 @@ describe('scrollProps', () => {
 describe('useScroll', () => {
   function mountFunction (args?: ScrollArguments, options?: any) {
     return mount({
-      props: scrollProps(),
+      props: makeScrollProps(),
       setup (props) {
         return useScroll(props, args)
       },
