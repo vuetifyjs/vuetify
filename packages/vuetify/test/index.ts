@@ -2,6 +2,10 @@ import Vue, { ComponentOptions } from 'vue'
 import { Wrapper } from '@vue/test-utils'
 import toHaveBeenWarnedInit from './util/to-have-been-warned'
 
+Vue.prototype.$vuetify = {
+  icons: {},
+}
+
 export function functionalContext (context: ComponentOptions<Vue> = {}, children = []) {
   if (!Array.isArray(children)) children = [children]
   return {
