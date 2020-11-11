@@ -476,5 +476,21 @@ describe('VSelect.ts', () => {
     await waitAnimationFrame()
 
     expect(wrapper.vm.internalValue).toBe(1)
+
+    // End key
+    event.keyCode = keyCodes.end
+    wrapper.vm.onKeyDown(event)
+
+    await waitAnimationFrame()
+
+    expect(wrapper.vm.internalValue).toBe(4)
+
+    // Home key
+    event.keyCode = keyCodes.home
+    wrapper.vm.onKeyDown(event)
+
+    await waitAnimationFrame()
+
+    expect(wrapper.vm.internalValue).toBe(1)
   })
 })
