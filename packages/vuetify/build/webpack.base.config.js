@@ -22,20 +22,28 @@ const cssLoaders = [
 
 const sassLoaders = [
   ...cssLoaders,
-  { loader: 'sass-loader', options: {
-    implementation: require('sass'),
-    fiber: require('fibers'),
-    indentedSyntax: true
-  } }
+  {
+    loader: 'sass-loader',
+    options: {
+      implementation: require('sass'),
+      sassOptions: {
+        indentedSyntax: true
+      }
+    }
+  }
 ]
 
 const scssLoaders = [
   ...cssLoaders,
-  { loader: 'sass-loader', options: {
-    implementation: require('sass'),
-    fiber: require('fibers'),
-    indentedSyntax: false
-  } }
+  {
+    loader: 'sass-loader',
+    options: {
+      implementation: require('sass'),
+      sassOptions: {
+        indentedSyntax: false
+      }
+    }
+  }
 ]
 
 const plugins = [

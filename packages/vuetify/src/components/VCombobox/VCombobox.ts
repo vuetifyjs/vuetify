@@ -189,7 +189,7 @@ export default VAutocomplete.extend({
 
       // Reset search if using slot
       // to avoid a double input
-      if (isUsingSlot) this.internalSearch = undefined
+      if (isUsingSlot) this.internalSearch = null
     },
     updateSelf () {
       this.multiple ? this.updateTags() : this.updateCombobox()
@@ -230,7 +230,7 @@ export default VAutocomplete.extend({
     onPaste (event: ClipboardEvent) {
       if (!this.multiple || this.searchIsDirty) return
 
-      const pastedItemText = event.clipboardData!.getData('text/vnd.vuetify.autocomplete.item+plain')
+      const pastedItemText = event.clipboardData?.getData('text/vnd.vuetify.autocomplete.item+plain')
       if (pastedItemText && this.findExistingIndex(pastedItemText as any) === -1) {
         event.preventDefault()
         VSelect.options.methods.selectItem.call(this, pastedItemText as any)

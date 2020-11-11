@@ -401,7 +401,7 @@ describe('VAutocomplete.ts', () => {
     wrapper.setData({ isMenuActive: false })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.lazySearch).toBeUndefined()
+    expect(wrapper.vm.lazySearch).toBeNull()
   })
 
   it('should select input text on focus', async () => {
@@ -448,6 +448,16 @@ describe('VAutocomplete.ts', () => {
     slot.trigger('click')
 
     expect(onFocus).toHaveBeenCalled()
+  })
+
+  it('should set isFocused to false onBlur', () => {
+    const wrapper = mountFunction()
+    const input = wrapper.find('input')
+
+    input.trigger('focus')
+    expect(wrapper.vm.isFocused).toBe(true)
+    wrapper.vm.onBlur(null)
+    expect(wrapper.vm.isFocused).toBe(false)
   })
 
   it('should react to keydown', () => {

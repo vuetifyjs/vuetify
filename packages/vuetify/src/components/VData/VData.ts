@@ -172,7 +172,7 @@ export default Vue.extend({
       return this.isGrouped ? this.groupItems(this.computedItems) : null
     },
     scopedProps (): DataScopeProps {
-      const props = {
+      return {
         sort: this.sort,
         sortArray: this.sortArray,
         group: this.group,
@@ -183,8 +183,6 @@ export default Vue.extend({
         groupedItems: this.groupedItems,
         originalItemsLength: this.items.length,
       }
-
-      return props
     },
     computedOptions (): DataOptions {
       return { ...this.options } as DataOptions

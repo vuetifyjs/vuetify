@@ -6,7 +6,7 @@ const Validatable = {
   props: createItems(['disabled', 'readonly'], {
     default: false,
     source: 'validatable',
-    value: 'boolean',
+    type: 'boolean',
   }),
   events: [
     {
@@ -169,18 +169,19 @@ const VSelect = {
       source: 'v-select',
     },
     {
-      name: 'filter',
-      default: '(item: object, queryText: string, itemText: string): boolean',
-      source: 'v-select',
-    },
-    {
       name: 'valueComparator',
       default: '(a: any, b: any): boolean',
       source: 'v-select',
     },
     {
       name: 'menuProps',
-      default: '{ "closeOnClick": false, "closeOnContentClick": false, "disableKeys": true, "openOnClick": false, "maxHeight": 304 }',
+      default: `{
+  closeOnClick: false,
+  closeOnContentClick: false,
+  disableKeys: true,
+  openOnClick: false,
+  maxHeight: 304
+}`,
       source: 'v-select',
     },
   ],
@@ -216,6 +217,27 @@ const VSelect = {
         disabled: 'boolean',
       },
       source: 'v-select',
+    },
+  ],
+}
+
+const VAutocomplete = {
+  ...VSelect,
+  props: [
+    ...VSelect.props.filter(prop => prop.name !== 'menuProps'),
+    {
+      name: 'menuProps',
+      default: `{
+  closeOnClick: false,
+  closeOnContentClick: false,
+  disableKeys: true,
+  openOnClick: false,
+  maxHeight: 304,
+  offsetY: true,
+  offsetOverflow: true,
+  transition: false
+}`,
+      source: 'v-autocomplete',
     },
   ],
 }
@@ -386,6 +408,7 @@ module.exports = {
   VGridProps,
   VInput,
   VSelect,
+  VAutocomplete,
   VSlider,
   VTextField,
   VTimestamp,

@@ -34,7 +34,7 @@ describe('AppBar.ts', () => {
     }
   })
 
-  it('should calculate paddings ', () => {
+  it('should calculate paddings', () => {
     const wrapper = mountFunction()
 
     wrapper.vm.$vuetify.application.left = 42
@@ -221,7 +221,7 @@ describe('AppBar.ts', () => {
     expect(wrapper.vm.computedOpacity).toBe(1)
 
     wrapper.setData({ currentScroll: 5 })
-    expect(wrapper.vm.computedOpacity).toBe(0.38)
+    expect(wrapper.vm.computedOpacity).toBe(0.375)
 
     wrapper.setData({ currentScroll: 100 })
     expect(wrapper.vm.computedOpacity).toBe(0)

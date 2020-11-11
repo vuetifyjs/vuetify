@@ -1,0 +1,23 @@
+{
+  "props": {
+    "alt": "Alternate text for screen readers. Leave empty for decorative images",
+    "aspectRatio": "Calculated as `width/height`, so for a 1920x1080px image this will be `1.7778`. Will be calculated automatically if omitted",
+    "contain": "Prevents the image from being cropped if it doesn't fit",
+    "eager": "Will force the components content to render on mounted. This is useful if you have content that will not be rendered in the DOM that you want crawled for SEO.",
+    "gradient": "Overlays a gradient onto the image. Only supports [linear-gradient](https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient) syntax, anything else should be done with classes (see examples)",
+    "lazySrc": "Something to show while waiting for the main image to load, typically a small base64-encoded thumbnail. Has a slight blur filter applied.\n\nUse [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) to generate automatically",
+    "options": "Options that are passed to the [Intersection observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) constructor.",
+    "position": "Overrides the default to change which parts get cropped off. Uses the same syntax as [`background-position`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-position)",
+    "sizes": "For use with `srcset`, see [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-sizes)",
+    "src": "The image URL. This prop is mandatory",
+    "srcset": "A set of alternate images to use based on device size. [Read more...](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset)",
+    "transition": "The transition to use when switching from `lazy-src` to `src`"
+  },
+  "slots": {
+    "placeholder": "Slot for image placeholder"
+  },
+  "events": {
+    "error": "Emitted when there is an error",
+    "load": "Emitted when image is loaded"
+  }
+}

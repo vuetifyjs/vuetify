@@ -1,5 +1,11 @@
 module.exports = {
   'v-window': {
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
     props: [
       {
         name: 'touch',

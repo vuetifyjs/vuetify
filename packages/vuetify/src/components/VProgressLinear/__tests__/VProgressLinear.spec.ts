@@ -191,6 +191,7 @@ describe('VProgressLinear.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         indeterminate: true,
+        query: true,
       },
     })
 

@@ -6,7 +6,6 @@ import { ExtractVue } from '../../util/mixins'
 import { VueConstructor } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-/* eslint-disable-next-line no-use-before-define */
 export type Groupable<T extends string, C extends VueConstructor | null = null> = VueConstructor<ExtractVue<Registrable<T, C>> & {
   activeClass: string
   isActive: boolean
@@ -67,7 +66,7 @@ export function factory<T extends string, C extends VueConstructor | null = null
   })
 }
 
-/* eslint-disable-next-line no-redeclare */
+/* eslint-disable-next-line @typescript-eslint/no-redeclare */
 const Groupable = factory('itemGroup')
 
 export default Groupable

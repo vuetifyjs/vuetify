@@ -1,5 +1,10 @@
 module.exports = {
   'v-spacer': {
-    slots: ['default'],
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
   },
 }

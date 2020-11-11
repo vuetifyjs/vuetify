@@ -12,6 +12,10 @@ module.exports = {
     ],
     slots: [
       {
+        name: 'default',
+        props: undefined,
+      },
+      {
         name: 'next',
         value: undefined,
       },

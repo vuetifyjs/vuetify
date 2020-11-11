@@ -38,7 +38,7 @@
 
 <h2 align="center">Supporting Vuetify</h2>
 
-Vuetify is a MIT licensed project that is developed and maintained full-time by [John Leider](https://github.com/johnleider) and [Heather Leider](https://github.com/heatherleider); with support from the entire [Core Team](https://vuetifyjs.com/introduction/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
+Vuetify is a MIT licensed project that is developed and maintained full-time by [John Leider](https://github.com/johnleider) and [Heather Leider](https://github.com/heatherleider); with support from the entire [Core Team](https://vuetifyjs.com/about/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
 
 <ul>
   <li>
@@ -56,7 +56,7 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
     <a href="https://paypal.me/vuetify">Make a one-time payment with Paypal</a>
   </li>
   <li>
-    <a href="https://vuetifyjs.com/professional-support/consulting?ref=github">Book time with the Team</a>
+    <a href="https://vuetifyjs.com/introduction/support/?ref=github">Book time with the Team</a>
   </li>
 </ul>
 
@@ -94,13 +94,13 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
         </a>
       </td>
       <td>
-        <a href="http://resaleai.com/?ref=vuetify-github">
-          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/resaleai_logo_blue.svg">
+        <a href="http://vuemastery.com/?ref=vuetify-github">
+          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
         </a>
       </td>
       <td>
-        <a href="http://vuemastery.com/?ref=vuetify-github">
-          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
+        <a href="http://www.skaletech.com/?ref=vuetify-github">
+          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/skale.png">
         </a>
       </td>
     </tr>
@@ -118,29 +118,35 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
         </a>
       </td>
       <td>
-        <a href="http://www.clearbluetechnologies.com/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/clear-blue.png">
-        </a>
-      </td>
-      <td>
         <a href="https://www.digitalmaas.com/?ref=vuetify-github">
-          <img height="50px" src="https://cdn.vuetifyjs.com/images/backers/digital-maas.svg">
+          <img height="42px" src="https://cdn.vuetifyjs.com/images/backers/digital-maas.svg">
         </a>
-      </td>
-      <td>
-        <a href="https://www.brightree.com/?ref=vuetify-github">
-          <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/brightree-logo-light.png">
-        </a>
-      </td>
-      <td>
-        <a href="https://www.alv-software.com/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/alv-software-logo-light.png">
-        </a>
-      </td>
       </td>
       <td>
         <a href="https://analytics.quantedsquare.com/?ref=vuetify-github">
           <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/quanted-square.svg">
+        </a>
+      </td>
+      <td>
+        <a href="https://www.hypeinnovation.com/home?ref=vuetify-github">
+          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/hype-logo-light.svg">
+        </a>
+      </td>
+      <td>
+        <a href="https://www.cosmicjs.com/?ref=vuetify-github">
+          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/cosmic-logo-light.svg">
+        </a>
+      </td>
+    </tr><tr></tr>
+    <tr>
+      <td>
+        <a href="https://ekorre.hr/?ref=vuetify-github">
+          <img height="32px" src="https://cdn.vuetifyjs.com/images/backers/ekorre-logo-light.png">
+        </a>
+      </td>
+      <td>
+        <a href="https://www.dealerdesk.de/?ref=vuetify-github">
+          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/dealerdesk-logo-light.png">
         </a>
       </td>
     </tr>
@@ -163,23 +169,18 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
   <tbody>
     <tr>
       <td>
+        <a href="http://crossword-solver.io/?ref=vuetify-github">
+          <img height="30px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/crossword-solver-logo-light.svg">
+        </a>
+      </td>
+      <td>
         <a href="https://papersowl.com/write-my-paper-for-me">
-          <img src="https://logo.clearbit.com/papersowl.com" height="32">
-        </a>
-      </td>
-      <td>
-        <a href="https://edusson.com/write-my-essay-online">
-          <img src="https://logo.clearbit.com/edusson.com" height="40">
-        </a>
-      </td>
-      <td>
-        <a href="https://getform.io/">
-          <img src="https://opencollective-production.s3-us-west-1.amazonaws.com/2d3b7590-f25a-11e8-95fe-d7ea40ac9667.png" height="40">
+          <img src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/papersowl-logo-light.png" height="32">
         </a>
       </td>
       <td>
         <a href="https://volleyballlife.com/">
-          <img src="https://logo.clearbit.com/volleyballlife.com" height="40">
+          <img src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/volleyballlife-logo-light.png" height="40">
         </a>
       </td>
     </tr>
@@ -201,16 +202,16 @@ Vuetify is a Vue UI Library with beautifully handcrafted Components using the [M
 - A massive **Discord** [community](https://community.vuetifyjs.com)
 - **18 months** Long-term support for [Major releases](https://vuetifyjs.com/introduction/long-term-support/)
 - **IE11 / Safari 9** support with [polyfill](https://vuetifyjs.com/getting-started/browser-support/)
-- Extensive customization options with **SASS/SCSS** and [Presets](https://vuetifyjs.com/customization/presets/)
+- Extensive customization options with **SASS/SCSS** and [Presets](https://vuetifyjs.com/features/presets/)
 - Responsive support down to _320px_ width
-- [Consulting](https://vuetifyjs.com/professional-support/consulting/) and [Business](https://vuetifyjs.com/professional-support/business/) support
+- [Direct support](https://vuetifyjs.com/introduction/support/) support from Vuetify
 
 ###### Browser Support
 
 Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [polyfills](https://vuetifyjs.com/getting-started/quick-start#ie-11-amp-safari-9-support)). Components are designed for a minimum width of _320px_.
 
 ### Vuetify Ecosystem
-
+#### Plugins
 <table>
   <thead>
     <tr>
@@ -300,97 +301,6 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-basil">vue-cli-plugin-vuetify-preset-basil</a>
-      </td>
-      <td>
-        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-basil">
-          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-preset-basil.svg" alt="Version">
-        </a>
-      </td>
-      <td>
-        A Vuetify Preset for the <a href="https://material.io/design/material-studies/basil.html">Basil Material Study</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-crane">vue-cli-plugin-vuetify-preset-crane</a>
-      </td>
-      <td>
-        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-crane">
-          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-preset-crane.svg" alt="Version">
-        </a>
-      </td>
-      <td>
-        A Vuetify Preset for the <a href="https://material.io/design/material-studies/crane.html">Crane Material Study</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-fortnightly">vue-cli-plugin-vuetify-preset-fortnightly</a>
-      </td>
-      <td>
-        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-fortnightly">
-          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-preset-fortnightly.svg" alt="Version">
-        </a>
-      </td>
-      <td>
-        A Vuetify Preset for the <a href="https://material.io/design/material-studies/fortnightly.html">Fortnightly Material Study</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-owl">vue-cli-plugin-vuetify-preset-owl</a>
-      </td>
-      <td>
-        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-owl">
-          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-preset-owl.svg" alt="Version">
-        </a>
-      </td>
-      <td>
-        A Vuetify Preset for the <a href="https://material.io/design/material-studies/owl.html">Owl Material Study</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-rally">vue-cli-plugin-vuetify-preset-rally</a>
-      </td>
-      <td>
-        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-rally">
-          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-preset-rally.svg" alt="Version">
-        </a>
-      </td>
-      <td>
-        A Vuetify Preset for the <a href="https://material.io/design/material-studies/rally.html">Rally Material Study</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-reply">vue-cli-plugin-vuetify-preset-reply</a>
-      </td>
-      <td>
-        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-reply">
-          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-preset-reply.svg" alt="Version">
-        </a>
-      </td>
-      <td>
-        A Vuetify Preset for the <a href="https://material.io/design/material-studies/reply.html">Reply Material Study</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-shrine">vue-cli-plugin-vuetify-preset-shrine</a>
-      </td>
-      <td>
-        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-shrine">
-          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-preset-shrine.svg" alt="Version">
-        </a>
-      </td>
-      <td>
-        A Vuetify Preset for the <a href="https://material.io/design/material-studies/shrine.html">Shrine Material Study</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
         <a href="https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/vue-cli-plugin-vuetify-storybook">vue-cli-plugin-vuetify-storybook</a>
       </td>
       <td>
@@ -442,9 +352,115 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
   </tbody>
 </table>
 
+#### Presets
+<table>
+  <thead>
+    <tr>
+      <th>Preset</th>
+      <th>Version</th>
+      <th>Study</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-basil">vue-cli-plugin-vuetify-preset-basil</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-basil">
+          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-preset-basil.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+        <a href="https://material.io/design/material-studies/basil.html">Basil Material Study</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-crane">vue-cli-plugin-vuetify-preset-crane</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-crane">
+          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-preset-crane.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+        <a href="https://material.io/design/material-studies/crane.html">Crane Material Study</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-fortnightly">vue-cli-plugin-vuetify-preset-fortnightly</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-fortnightly">
+          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-preset-fortnightly.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+        <a href="https://material.io/design/material-studies/fortnightly.html">Fortnightly Material Study</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-owl">vue-cli-plugin-vuetify-preset-owl</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-owl">
+          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-preset-owl.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+        <a href="https://material.io/design/material-studies/owl.html">Owl Material Study</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-rally">vue-cli-plugin-vuetify-preset-rally</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-rally">
+          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-preset-rally.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+        <a href="https://material.io/design/material-studies/rally.html">Rally Material Study</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-reply">vue-cli-plugin-vuetify-preset-reply</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-reply">
+          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-preset-reply.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+        <a href="https://material.io/design/material-studies/reply.html">Reply Material Study</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-shrine">vue-cli-plugin-vuetify-preset-shrine</a>
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-shrine">
+          <img src="https://img.shields.io/npm/v/vue-cli-plugin-vuetify-preset-shrine.svg" alt="Version">
+        </a>
+      </td>
+      <td>
+        <a href="https://material.io/design/material-studies/shrine.html">Shrine Material Study</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 ### Documentation
 
-To check out the [component api explorer](https://vuetifyjs.com/components/api-explorer) and docs, visit [vuetifyjs.com](https://vuetifyjs.com).
+To check out the docs, visit [vuetifyjs.com](https://vuetifyjs.com).
+
+![Crowdin Uploads](https://github.com/vuetifyjs/vuetify/workflows/Crowdin%20Uploads/badge.svg?branch=master)
 
 ### Questions
 

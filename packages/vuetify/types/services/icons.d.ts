@@ -61,5 +61,8 @@ export interface VuetifyIcons {
   first: VuetifyIcon
   last: VuetifyIcon
   unfold: VuetifyIcon
+  file: VuetifyIcon
+  plus: VuetifyIcon
+  minus: VuetifyIcon
   [name: string]: VuetifyIcon
 }
