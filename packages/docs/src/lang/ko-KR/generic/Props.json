@@ -1,9 +1,0 @@
-{
-  "auto": "선택 항목의 중앙 요소",
-  "centered": "탭을 중앙 정렬",
-  "falseValue": "거짓(falsy) 상태에 대한 값을 설정",
-  "fullWidth": "100% 너비(width)를 가지도록 강제",
-  "id": "컴포넌트의 DOM 아이디를 설정",
-  "textColor": "컨트롤 텍스트에 지정된 색을 적용",
-  "trueValue": "참(truthy) 상태에 대한 값을 설정"
-}

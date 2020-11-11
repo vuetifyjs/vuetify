@@ -18,7 +18,7 @@ describe('Application.ts', () => {
     expect(app.bar).toBe(0)
   })
 
-  it('should not update if value doesn\'t exist in application', () => {
+  it(`should not update if value doesn't exist in application`, () => {
     const spy = jest.spyOn(app, 'update')
 
     app.register(0, 'top', 24)

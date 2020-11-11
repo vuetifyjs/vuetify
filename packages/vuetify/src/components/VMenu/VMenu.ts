@@ -45,17 +45,17 @@ const baseMixins = mixins(
 export default baseMixins.extend({
   name: 'v-menu',
 
+  directives: {
+    ClickOutside,
+    Resize,
+  },
+
   provide (): object {
     return {
       isInMenu: true,
       // Pass theme through to default slot
       theme: this.theme,
     }
-  },
-
-  directives: {
-    ClickOutside,
-    Resize,
   },
 
   props: {
@@ -352,6 +352,11 @@ export default baseMixins.extend({
           keydown: this.onKeyDown,
         },
       } as VNodeData
+
+      if (this.$listeners.scroll) {
+        options.on = options.on || {}
+        options.on.scroll = this.$listeners.scroll
+      }
 
       if (!this.disabled && this.openOnHover) {
         options.on = options.on || {}

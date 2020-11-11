@@ -81,7 +81,7 @@ export default VAutocomplete.extend({
       const itemObj = this.computedItems.find(i => this.getValue(i) === itemValue) || item
 
       if (!itemObj.text || !itemObj.callback) {
-        consoleWarn('When using \'segmented\' prop without a selection slot, items must contain both a text and callback property', this)
+        consoleWarn('When using "segmented" prop without a selection slot, items must contain both a text and callback property', this)
         return null
       }
 

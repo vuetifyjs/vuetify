@@ -1,7 +1,0 @@
-<!-- Vue Component -->
-
-<template>
-  <div class="my-component">
-    {{ $vuetify.lang.t('$vuetify.my-component.text') }}
-  </div>
-</template>

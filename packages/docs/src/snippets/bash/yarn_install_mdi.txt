@@ -1,3 +1,0 @@
-$ yarn add @mdi/font -D
-// OR
-$ npm install @mdi/font -D

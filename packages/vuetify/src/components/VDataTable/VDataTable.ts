@@ -1,7 +1,8 @@
 import './VDataTable.sass'
 
 // Types
-import { VNode, VNodeChildrenArrayContents, VNodeChildren, PropType } from 'vue'
+import { VNode, VNodeChildrenArrayContents, VNodeChildren } from 'vue'
+import { PropValidator } from 'vue/types/options'
 import {
   DataTableHeader,
   DataTableFilterFunction,
@@ -14,7 +15,6 @@ import {
   RowClassFunction,
   DataTableItemProps,
 } from 'vuetify/types'
-import { PropValidator } from 'vue/types/options'
 
 // Components
 import { VData } from '../VData'
@@ -105,13 +105,13 @@ export default mixins(
       default: '$expand',
     },
     customFilter: {
-      type: Function as PropType<typeof defaultFilter>,
+      type: Function,
       default: defaultFilter,
-    },
+    } as PropValidator<typeof defaultFilter>,
     itemClass: {
-      type: [String, Function] as PropType<RowClassFunction | string>,
+      type: [String, Function],
       default: () => '',
-    },
+    } as PropValidator<RowClassFunction | string>,
     loaderHeight: {
       type: [Number, String],
       default: 4,
@@ -464,6 +464,7 @@ export default mixins(
         ),
         props: {
           headers: this.computedHeaders,
+          hideDefaultHeader: this.hideDefaultHeader,
           item,
           rtl: this.$vuetify.rtl,
         },

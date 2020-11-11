@@ -44,9 +44,6 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
       default: 'span',
     },
     transition: String,
-    zIndex: {
-      default: null,
-    },
   },
 
   data: () => ({

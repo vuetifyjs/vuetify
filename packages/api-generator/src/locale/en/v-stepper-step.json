@@ -1,0 +1,14 @@
+{
+  "props": {
+    "complete": "Marks step as complete",
+    "completeIcon": "Icon to display when step is marked as completed",
+    "editable": "Marks step as editable",
+    "editIcon": "Icon to display when step is editable",
+    "errorIcon": "Icon to display when step has an error",
+    "rules": "Accepts an array of functions that take an input value as an argument and return either `true` / `false` or a `string` with an error message",
+    "step": "Content to display inside step circle"
+  },
+  "events": {
+    "click": "Emitted when component is clicked"
+  }
+}

@@ -112,12 +112,12 @@ describe('VBanner.ts', () => {
 
     const icon = wrapper.find('.v-banner__icon')
 
-    // expect(fn).not.toHaveBeenCalled()
+    expect(fn).not.toHaveBeenCalled()
     icon.trigger('click')
-    // expect(fn).toHaveBeenCalled()
+    expect(fn).toHaveBeenCalled()
   })
 
-  it('should not render icon container if icon property and slot aren\'t passed', () => {
+  it(`should not render icon container if icon property and slot aren't passed`, () => {
     const wrapper = mountFunction({
       slots: {
         default: 'Hello, World!',
@@ -127,7 +127,7 @@ describe('VBanner.ts', () => {
     expect(wrapper.findAll('.v-banner__icon')).toHaveLength(0)
   })
 
-  it('should not render actions container if slot isn\'t passed', () => {
+  it(`should not render actions container if slot isn't passed`, () => {
     const wrapper = mountFunction({
       slots: {
         default: 'Hello, World!',

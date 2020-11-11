@@ -10,7 +10,7 @@ export default {
     ariaLabel: {
       sortDescending: 'Aflopend gesorteerd.',
       sortAscending: 'Oplopend gesorteerd.',
-      sortNone: 'Niet gesorterrd.',
+      sortNone: 'Niet gesorteerd.',
       activateNone: 'Activeer om de sortering te verwijderen.',
       activateDescending: 'Activeer om aflopend te sorteren.',
       activateAscending: 'Activeer om oplopend te sorteren.',

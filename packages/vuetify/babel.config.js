@@ -13,13 +13,17 @@ module.exports = {
       __VUETIFY_VERSION__: vuetifyPackage.version,
       __REQUIRED_VUE__: vuetifyPackage.peerDependencies.vue,
     }],
+    ['@babel/plugin-proposal-nullish-coalescing-operator', { loose: true }],
+    ['@babel/plugin-proposal-optional-chaining', { loose: true }],
   ],
   env: {
     test: {
       presets: [
         ['@babel/preset-env', {
           targets: { node: true },
+          modules: 'commonjs',
         }],
+        '@babel/preset-typescript',
       ],
       plugins: [
         ['module-resolver', {

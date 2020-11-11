@@ -42,7 +42,7 @@ describe('ripple.ts', () => {
     const wrapper = mountFunction()
 
     const div = wrapper.find('div')
-    expect(div.element['_ripple'].enabled).toBe(true)
+    expect(div.element._ripple.enabled).toBe(true)
   })
 
   it('should update element property reactively', () => {
@@ -72,13 +72,13 @@ describe('ripple.ts', () => {
     })
 
     const div = wrapper.find('div')
-    expect(div.element['_ripple'].enabled).toBe(true)
+    expect(div.element._ripple.enabled).toBe(true)
 
     wrapper.setProps({ ripple: false })
-    expect(div.element['_ripple'].enabled).toBe(false)
+    expect(div.element._ripple.enabled).toBe(false)
 
     wrapper.setProps({ ripple: true })
-    expect(div.element['_ripple'].enabled).toBe(true)
+    expect(div.element._ripple.enabled).toBe(true)
   })
 
   it('should trigger ripple on mousedown', () => {

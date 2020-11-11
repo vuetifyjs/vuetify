@@ -214,6 +214,7 @@ export default mixins(
         attrs: {
           role: 'alert',
         },
+        on: this.listeners$,
         class: this.classes,
         style: this.styles,
         directives: [{

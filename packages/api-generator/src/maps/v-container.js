@@ -1,3 +1,10 @@
 module.exports = {
-  'v-container': {},
+  'v-container': {
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
+  },
 }

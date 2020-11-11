@@ -1,6 +1,10 @@
 const shell = require('shelljs')
 
-const alias = process.argv[2]
+const alias = {
+  'refs/heads/master': 'vuetifyjs.com',
+  'refs/heads/dev': 'dev.vuetifyjs.com',
+  'refs/heads/docs/import-next': 'next.vuetifyjs.com',
+}[process.argv[2]]
 
 if (!alias) {
   console.error('Alias not defined')

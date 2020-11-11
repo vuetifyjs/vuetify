@@ -29,7 +29,7 @@ export default {
   datePicker: {
     itemsSelected: '{0} seleccionats',
     nextMonthAriaLabel: 'El mes que ve',
-    nextYearAriaLabel: 'L\'any que ve',
+    nextYearAriaLabel: `L'any que ve`,
     prevMonthAriaLabel: 'Mes anterior',
     prevYearAriaLabel: 'Any anterior',
   },

@@ -10,12 +10,5 @@ module.exports = {
         value: 'boolean',
       },
     ],
-    slots: [
-      ...VInput.slots,
-      {
-        name: 'label',
-        props: undefined,
-      },
-    ],
   },
 }

@@ -10,6 +10,7 @@
           :elevation="n - 1"
           height="100"
           width="100"
+          class="secondary"
         >
           <v-row
             class="fill-height"

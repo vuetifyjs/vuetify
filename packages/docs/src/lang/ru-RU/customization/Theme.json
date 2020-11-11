@@ -1,3 +1,0 @@
-{
-  "customizingText4": "Under the hood, Vuetify will generate css classes based upon these values that will be accessible in the DOM. These classes will follow the same markup as other helper classes, `primary` or `secondary--text` for example."
-}

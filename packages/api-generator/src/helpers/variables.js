@@ -6,7 +6,7 @@ const Validatable = {
   props: createItems(['disabled', 'readonly'], {
     default: false,
     source: 'validatable',
-    value: 'boolean',
+    type: 'boolean',
   }),
   events: [
     {
@@ -84,6 +84,7 @@ const VInput = {
       'append',
       'default',
       'prepend',
+      'label',
     ], {
       props: undefined,
       source: 'v-input',
@@ -130,7 +131,6 @@ const VTextField = {
     ...VInput.slots,
     ...createItems([
       'append-outer',
-      'label',
       'prepend-inner',
       'progress',
     ], {
@@ -162,12 +162,10 @@ const VSelect = {
       example: {
         text: 'string | number | object',
         value: 'string | number | object',
+        disabled: 'boolean',
+        divider: 'boolean',
+        header: 'string',
       },
-      source: 'v-select',
-    },
-    {
-      name: 'filter',
-      default: '(item: object, queryText: string, itemText: string): boolean',
       source: 'v-select',
     },
     {
@@ -177,7 +175,13 @@ const VSelect = {
     },
     {
       name: 'menuProps',
-      default: '{ "closeOnClick": false, "closeOnContentClick": false, "disableKeys": true, "openOnClick": false, "maxHeight": 304 }',
+      default: `{
+  closeOnClick: false,
+  closeOnContentClick: false,
+  disableKeys: true,
+  openOnClick: false,
+  maxHeight: 304
+}`,
       source: 'v-select',
     },
   ],
@@ -217,6 +221,27 @@ const VSelect = {
   ],
 }
 
+const VAutocomplete = {
+  ...VSelect,
+  props: [
+    ...VSelect.props.filter(prop => prop.name !== 'menuProps'),
+    {
+      name: 'menuProps',
+      default: `{
+  closeOnClick: false,
+  closeOnContentClick: false,
+  disableKeys: true,
+  openOnClick: false,
+  maxHeight: 304,
+  offsetY: true,
+  offsetOverflow: true,
+  transition: false
+}`,
+      source: 'v-autocomplete',
+    },
+  ],
+}
+
 const VSlider = {
   ...VInput,
   events: [
@@ -240,6 +265,7 @@ const VSlider = {
       },
       source: 'v-slider',
     },
+
   ],
 }
 
@@ -382,6 +408,7 @@ module.exports = {
   VGridProps,
   VInput,
   VSelect,
+  VAutocomplete,
   VSlider,
   VTextField,
   VTimestamp,

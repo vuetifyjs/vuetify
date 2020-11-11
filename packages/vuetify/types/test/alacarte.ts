@@ -12,7 +12,6 @@ install(Vue, {
     ...VCard
   },
   directives: {
-    Ripple,
     ...directives
   }
 })

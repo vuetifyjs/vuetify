@@ -1,0 +1,10 @@
+{
+  "props": {
+    "dense": "Makes icon smaller (20px)",
+    "disabled": "Disable the input",
+    "left": "Places the icon on the left, when used inside a button",
+    "right": "Places the icon on the right, when used inside a button",
+    "size": "Specifies a custom font size for the icon.",
+    "tag": "Specifies a custom tag to be used"
+  }
+}

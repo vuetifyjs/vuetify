@@ -12,7 +12,8 @@ import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camel
 import { breaking, removed } from '../../util/console'
 
 // Types
-import { VNode, VNodeChildren, PropType } from 'vue'
+import { VNode, VNodeChildren } from 'vue'
+import { PropValidator } from 'vue/types/options'
 import { DataItemProps, DataScopeProps } from 'vuetify/types'
 
 /* @vue/component */
@@ -29,14 +30,14 @@ export default mixins(
       default: 'id',
     },
     value: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
     singleSelect: Boolean,
     expanded: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<any[]>,
     mobileBreakpoint: {
       ...Mobile.options.props.mobileBreakpoint,
       default: 600,
@@ -245,7 +246,7 @@ export default mixins(
     },
     genEmpty (originalItemsLength: number, filteredItemsLength: number) {
       if (originalItemsLength === 0 && this.loading) {
-        const loading = this.$slots['loading'] || this.$vuetify.lang.t(this.loadingText)
+        const loading = this.$slots.loading || this.$vuetify.lang.t(this.loadingText)
         return this.genEmptyWrapper(loading)
       } else if (originalItemsLength === 0) {
         const noData = this.$slots['no-data'] || this.$vuetify.lang.t(this.noDataText)

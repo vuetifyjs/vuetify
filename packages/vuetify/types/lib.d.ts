@@ -59,6 +59,7 @@ declare module 'vuetify/lib' {
   const VDataTableHeader: VueConstructor
   const VSimpleTable: VueConstructor
   const VVirtualTable: VueConstructor
+  const VVirtualScroll: VueConstructor
   const VDatePicker: VueConstructor
   const VDatePickerTitle: VueConstructor
   const VDatePickerHeader: VueConstructor
@@ -229,6 +230,7 @@ declare module 'vuetify/lib' {
     VDataTableHeader,
     VSimpleTable,
     VVirtualTable,
+    VVirtualScroll,
     VDatePicker,
     VDatePickerTitle,
     VDatePickerHeader,

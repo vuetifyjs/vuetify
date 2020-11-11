@@ -186,6 +186,7 @@ describe('VSlider.ts', () => {
     expect(input).toHaveBeenCalledWith(50)
     slider.trigger('keydown.home')
     expect(input).toHaveBeenCalledWith(0)
+    slider.trigger('keydown.left')
     slider.trigger('keydown.end')
     expect(input).toHaveBeenCalledWith(100)
     slider.trigger('keydown.pagedown')
@@ -637,5 +638,20 @@ describe('VSlider.ts', () => {
     })
 
     expect(input).toHaveBeenCalledWith(-20)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/11569
+  it('should not fire change event onKeyDown if value is invalid', () => {
+    const change = jest.fn()
+    const wrapper = mountFunction({
+      propsData: { min: 1 },
+      listeners: { change },
+    })
+
+    const slider = wrapper.find('.v-slider__thumb-container')
+
+    slider.trigger('keydown.left')
+
+    expect(change).not.toHaveBeenCalled()
   })
 })

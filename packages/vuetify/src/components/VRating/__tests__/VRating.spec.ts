@@ -229,7 +229,7 @@ describe('VRating.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('it should bind mousemove listener', () => {
+  it('should bind mousemove listener', () => {
     const onMouseEnter = jest.fn()
     const wrapper = mountFunction({
       propsData: {

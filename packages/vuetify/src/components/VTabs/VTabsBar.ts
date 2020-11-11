@@ -68,7 +68,7 @@ export default mixins(
       /* istanbul ignore next */
       if (this.mandatory) return
 
-      const items = this.items as VTabInstance[]
+      const items = this.items as unknown as VTabInstance[]
       const newPath = val.path
       const oldPath = oldVal.path
 

@@ -14,6 +14,7 @@ import Loadable from '../../mixins/loadable'
 import Validatable from '../../mixins/validatable'
 
 // Directives
+import resize from '../../directives/resize'
 import ripple from '../../directives/ripple'
 
 // Utilities
@@ -28,9 +29,7 @@ const baseMixins = mixins(
   VInput,
   Intersectable({
     onVisible: [
-      'setLabelWidth',
-      'setPrefixWidth',
-      'setPrependWidth',
+      'onResize',
       'tryAutofocus',
     ],
   }),
@@ -52,7 +51,10 @@ const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', '
 export default baseMixins.extend<options>().extend({
   name: 'v-text-field',
 
-  directives: { ripple },
+  directives: {
+    resize,
+    ripple,
+  },
 
   inheritAttrs: false,
 
@@ -129,7 +131,7 @@ export default baseMixins.extend<options>().extend({
       if (typeof this.counterValue === 'function') {
         return this.counterValue(this.internalValue)
       }
-      return (this.internalValue || '').toString().length
+      return [...(this.internalValue || '')].length
     },
     hasCounter (): boolean {
       return this.counter !== false && this.counter != null
@@ -147,9 +149,7 @@ export default baseMixins.extend<options>().extend({
       },
     },
     isDirty (): boolean {
-      return (this.lazyValue != null &&
-        this.lazyValue.toString().length > 0) ||
-        this.badInput
+      return this.lazyValue?.toString().length > 0 || this.badInput
     },
     isEnclosed (): boolean {
       return (
@@ -196,7 +196,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   watch: {
-    labelValue: 'setLabelWidth',
+    // labelValue: 'setLabelWidth', // moved to mounted, see #11533
     outlined: 'setLabelWidth',
     label () {
       this.$nextTick(this.setLabelWidth)
@@ -228,10 +228,11 @@ export default baseMixins.extend<options>().extend({
   },
 
   mounted () {
+    // #11533
+    this.$watch(() => this.labelValue, this.setLabelWidth)
+
     this.autofocus && this.tryAutofocus()
-    this.setLabelWidth()
-    this.setPrefixWidth()
-    this.setPrependWidth()
+
     requestAnimationFrame(() => (this.isBooted = true))
   },
 
@@ -277,8 +278,8 @@ export default baseMixins.extend<options>().extend({
     genIconSlot () {
       const slot = []
 
-      if (this.$slots['append']) {
-        slot.push(this.$slots['append'] as VNode[])
+      if (this.$slots.append) {
+        slot.push(this.$slots.append as VNode[])
       } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
       }
@@ -375,7 +376,7 @@ export default baseMixins.extend<options>().extend({
     },
     genInput () {
       const listeners = Object.assign({}, this.listeners$)
-      delete listeners['change'] // Change should not be bound externally
+      delete listeners.change // Change should not be bound externally
 
       return this.$createElement('input', {
         style: {},
@@ -398,6 +399,11 @@ export default baseMixins.extend<options>().extend({
           keydown: this.onKeyDown,
         }),
         ref: 'input',
+        directives: [{
+          name: 'resize',
+          modifiers: { quiet: true },
+          value: this.onResize,
+        }],
       })
     },
     genMessages () {
@@ -512,6 +518,11 @@ export default baseMixins.extend<options>().extend({
       } else if (this.initialValue !== this.lazyValue) {
         this.$emit('change', this.lazyValue)
       }
+    },
+    onResize () {
+      this.setLabelWidth()
+      this.setPrefixWidth()
+      this.setPrependWidth()
     },
   },
 })

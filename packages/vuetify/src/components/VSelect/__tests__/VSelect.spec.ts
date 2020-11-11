@@ -15,6 +15,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
+// eslint-disable-next-line max-statements
 describe('VSelect.ts', () => {
   type Instance = InstanceType<typeof VSelect>
   let mountFunction: (options?: object) => Wrapper<Instance>
@@ -41,6 +42,10 @@ describe('VSelect.ts', () => {
         ...options,
       })
     }
+  })
+
+  afterEach(() => {
+    document.body.removeChild(el)
   })
 
   it('should return numeric 0', async () => {

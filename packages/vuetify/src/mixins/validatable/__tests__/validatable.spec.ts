@@ -81,7 +81,7 @@ describe('validatable.ts', () => {
     expect(wrapper.vm.errorBucket).toEqual([])
 
     // Function failing
-    wrapper.setProps({ rules: [() => false || 'fizzbuzz'] })
+    wrapper.setProps({ rules: [() => 'fizzbuzz'] })
 
     wrapper.vm.validate()
 
@@ -196,12 +196,20 @@ describe('validatable.ts', () => {
     wrapper.setProps({ successMessages: [] })
 
     expect(wrapper.vm.hasSuccess).toBe(false)
+
+    wrapper.setProps({ successMessages: null })
+
+    expect(wrapper.vm.hasSuccess).toBe(false)
   })
 
   /* eslint-disable-next-line max-statements */
   it('should have messages', () => {
     const wrapper = mountFunction()
 
+    expect(wrapper.vm.hasMessages).toBe(false)
+
+    // Null message
+    wrapper.setProps({ messages: null })
     expect(wrapper.vm.hasMessages).toBe(false)
 
     // String message
@@ -213,6 +221,10 @@ describe('validatable.ts', () => {
     expect(wrapper.vm.hasMessages).toBe(true)
     wrapper.setProps({ messages: [] }) // Reset
 
+    // Null error
+    wrapper.setProps({ errorMessages: null })
+    expect(wrapper.vm.hasMessages).toBe(false)
+
     // String error
     wrapper.setProps({ errorMessages: 'bar' })
     expect(wrapper.vm.hasMessages).toBe(true)
@@ -222,11 +234,15 @@ describe('validatable.ts', () => {
     expect(wrapper.vm.hasMessages).toBe(true)
     wrapper.setProps({ errorMessages: [] }) // Reset
 
-    // String error
+    // Null success
+    wrapper.setProps({ successMessages: null })
+    expect(wrapper.vm.hasMessages).toBe(false)
+
+    // String success
     wrapper.setProps({ successMessages: 'fizz' })
     expect(wrapper.vm.hasMessages).toBe(true)
 
-    // Array error
+    // Array success
     wrapper.setProps({ successMessages: ['fizz'] })
     expect(wrapper.vm.hasMessages).toBe(true)
     wrapper.setProps({ successMessages: [] }) // Reset
@@ -374,7 +390,7 @@ describe('validatable.ts', () => {
     wrapper.vm.reset()
 
     expect(wrapper.vm.isResetting).toBe(true)
-    expect(wrapper.vm.internalValue).toBeUndefined()
+    expect(wrapper.vm.internalValue).toBeNull()
 
     wrapper.setProps({ value: ['foobar'] })
 

@@ -14,7 +14,8 @@ import {
 } from '../../util/helpers'
 
 // Types
-import { PropType } from 'vue'
+import { PropType, VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 const defaultMenuProps = {
   ...VSelectMenuProps,
@@ -41,7 +42,7 @@ export default VSelect.extend({
       default: (item: any, queryText: string, itemText: string) => {
         return itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) > -1
       },
-    },
+    } as PropValidator<(item: any, queryText: string, itemText: string) => boolean>,
     hideNoData: Boolean,
     menuProps: {
       type: VSelect.options.props.menuProps.type,
@@ -49,8 +50,7 @@ export default VSelect.extend({
     },
     noFilter: Boolean,
     searchInput: {
-      type: String as PropType<string | undefined>,
-      default: undefined,
+      type: String as PropType<string | null>,
     },
   },
 
@@ -95,10 +95,10 @@ export default VSelect.extend({
       })
     },
     internalSearch: {
-      get (): string | undefined {
+      get (): string | null {
         return this.lazySearch
       },
-      set (val: any) {
+      set (val: any) { // TODO: this should be `string | null` but it breaks lots of other types
         this.lazySearch = val
 
         this.$emit('update:search-input', val)
@@ -176,7 +176,7 @@ export default VSelect.extend({
     isMenuActive (val) {
       if (val || !this.hasSlot) return
 
-      this.lazySearch = undefined
+      this.lazySearch = null
     },
     items (val, oldVal) {
       // If we are focused, the menu
@@ -201,6 +201,10 @@ export default VSelect.extend({
 
   created () {
     this.setSearch()
+  },
+
+  destroyed () {
+    document.removeEventListener('copy', this.onCopy)
   },
 
   methods: {
@@ -260,6 +264,19 @@ export default VSelect.extend({
         this.getDisabled(curItem)
       ) return
 
+      const lastIndex = this.selectedItems.length - 1
+
+      // Select the last item if
+      // there is no selection
+      if (
+        this.selectedIndex === -1 &&
+        lastIndex !== 0
+      ) {
+        this.selectedIndex = lastIndex
+
+        return
+      }
+
       const length = this.selectedItems.length
       const nextIndex = curIndex !== length - 1
         ? curIndex
@@ -267,7 +284,7 @@ export default VSelect.extend({
       const nextItem = this.selectedItems[nextIndex]
 
       if (!nextItem) {
-        this.setValue(this.multiple ? [] : undefined)
+        this.setValue(this.multiple ? [] : null)
       } else {
         this.selectItem(curItem)
       }
@@ -275,7 +292,7 @@ export default VSelect.extend({
       this.selectedIndex = nextIndex
     },
     clearableCallback () {
-      this.internalSearch = undefined
+      this.internalSearch = null
 
       VSelect.options.methods.clearableCallback.call(this)
     },
@@ -299,7 +316,7 @@ export default VSelect.extend({
 
       return slot
     },
-    genSelections () {
+    genSelections (): VNode | never[] {
       return this.hasSlot || this.multiple
         ? VSelect.options.methods.genSelections.call(this)
         : []
@@ -395,7 +412,7 @@ export default VSelect.extend({
         this.setSearch()
       }
     },
-    hasItem (item: any) {
+    hasItem (item: any): boolean {
       return this.selectedValues.indexOf(this.getValue(item)) > -1
     },
     onCopy (event: ClipboardEvent) {
@@ -403,8 +420,8 @@ export default VSelect.extend({
 
       const currentItem = this.selectedItems[this.selectedIndex]
       const currentItemText = this.getText(currentItem)
-      event.clipboardData!.setData('text/plain', currentItemText)
-      event.clipboardData!.setData('text/vnd.vuetify.autocomplete.item+plain', currentItemText)
+      event.clipboardData?.setData('text/plain', currentItemText)
+      event.clipboardData?.setData('text/vnd.vuetify.autocomplete.item+plain', currentItemText)
       event.preventDefault()
     },
   },

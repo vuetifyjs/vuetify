@@ -33,6 +33,10 @@ export default mixins(
     },
     inset: Boolean,
     padless: Boolean,
+    tag: {
+      type: String,
+      default: 'footer',
+    },
   },
 
   computed: {
@@ -106,6 +110,6 @@ export default mixins(
       style: this.styles,
     })
 
-    return h('footer', data, this.$slots.default)
+    return h(this.tag, data, this.$slots.default)
   },
 })
