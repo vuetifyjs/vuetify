@@ -26,6 +26,7 @@ const testHeaders = [
 ]
 
 Vue.prototype.$vuetify = {
+  icons: {},
   rtl: false,
   lang: new Lang(preset),
   theme: {
