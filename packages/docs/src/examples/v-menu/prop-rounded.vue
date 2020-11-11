@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-center align-center">
+  <v-row justify="space-around">
     <v-menu
       v-for="([text, rounded], index) in btns"
       :key="text"
@@ -9,7 +9,7 @@
       <template v-slot:activator="{ attrs, on }">
         <v-btn
           :color="colors[index]"
-          class="white--text ma-8"
+          class="white--text ma-5"
           v-bind="attrs"
           v-on="on"
         >
@@ -27,7 +27,7 @@
         </v-list-item>
       </v-list>
     </v-menu>
-  </div>
+  </v-row>
 </template>
 
 <script>

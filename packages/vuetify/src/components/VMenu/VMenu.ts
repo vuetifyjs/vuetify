@@ -384,7 +384,6 @@ export default baseMixins.extend({
         if (this.hasJustFocused) return
 
         this.hasJustFocused = true
-        this.isActive = true
       })
     },
     mouseLeaveHandler (e: MouseEvent) {
