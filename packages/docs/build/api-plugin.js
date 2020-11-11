@@ -4,7 +4,7 @@ const { resolve } = require('path')
 const { getApi, getCompleteApi } = require('@vuetify/api-generator')
 const rimraf = require('rimraf')
 
-const localeList = require('../src/i18n/locales').map(item => item.locale)
+const localeList = require('../src/i18n/locales').map(item => item.alternate || item.locale)
 
 const capitalize = str => {
   return str.charAt(0).toUpperCase() + str.slice(1)

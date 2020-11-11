@@ -113,7 +113,7 @@ export default Vue.extend({
         this.$vuetify.lang.t(this.itemsPerPageText),
         this.$createElement(VSelect, {
           attrs: {
-            'aria-label': this.itemsPerPageText,
+            'aria-label': this.$vuetify.lang.t(this.itemsPerPageText),
           },
           props: {
             disabled: this.disableItemsPerPage,

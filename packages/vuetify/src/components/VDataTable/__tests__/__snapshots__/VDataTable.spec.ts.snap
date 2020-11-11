@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VDataTable.ts should apply class from item to rows 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -329,7 +329,7 @@ exports[`VDataTable.ts should apply class from item to rows 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-672"
                        readonly="readonly"
                        type="text"
@@ -393,7 +393,7 @@ exports[`VDataTable.ts should apply class from item to rows 1`] = `
 `;
 
 exports[`VDataTable.ts should apply class function to rows 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -721,7 +721,7 @@ exports[`VDataTable.ts should apply class function to rows 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-656"
                        readonly="readonly"
                        type="text"
@@ -785,7 +785,7 @@ exports[`VDataTable.ts should apply class function to rows 1`] = `
 `;
 
 exports[`VDataTable.ts should apply class list to rows 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -1113,7 +1113,7 @@ exports[`VDataTable.ts should apply class list to rows 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-624"
                        readonly="readonly"
                        type="text"
@@ -1177,7 +1177,7 @@ exports[`VDataTable.ts should apply class list to rows 1`] = `
 `;
 
 exports[`VDataTable.ts should apply class unique to rows 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -1505,7 +1505,7 @@ exports[`VDataTable.ts should apply class unique to rows 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-640"
                        readonly="readonly"
                        type="text"
@@ -1569,7 +1569,7 @@ exports[`VDataTable.ts should apply class unique to rows 1`] = `
 `;
 
 exports[`VDataTable.ts should change page if item count decreases below page start 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -1769,7 +1769,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
 `;
 
 exports[`VDataTable.ts should default to first option in itemsPerPageOptions if it does not include itemsPerPage 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -2147,7 +2147,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
                 <div class="v-select__selection v-select__selection--comma">
                   6
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-408"
                        readonly="readonly"
                        type="text"
@@ -2211,7 +2211,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
 `;
 
 exports[`VDataTable.ts should handle object when checking if it should default to first option in itemsPerPageOptions 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -2789,7 +2789,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
                 <div class="v-select__selection v-select__selection--comma">
                   All
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-424"
                        readonly="readonly"
                        type="text"
@@ -2854,7 +2854,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
 `;
 
 exports[`VDataTable.ts should hide group button when column is not groupable 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -3432,7 +3432,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-720"
                        readonly="readonly"
                        type="text"
@@ -3497,7 +3497,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
 `;
 
 exports[`VDataTable.ts should limit page to current page count if not using server-items-length 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -3825,7 +3825,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-392"
                        readonly="readonly"
                        type="text"
@@ -3889,7 +3889,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
 `;
 
 exports[`VDataTable.ts should not limit page to current item count when using server-items-length 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -3972,7 +3972,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-344"
                        readonly="readonly"
                        type="text"
@@ -4036,7 +4036,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
 `;
 
 exports[`VDataTable.ts should not limit page to current item count when using server-items-length 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -4364,7 +4364,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-344"
                        readonly="readonly"
                        type="text"
@@ -4427,7 +4427,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
 `;
 
 exports[`VDataTable.ts should not search column with filterable set to false 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -5005,7 +5005,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-360"
                        readonly="readonly"
                        type="text"
@@ -5070,7 +5070,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
 `;
 
 exports[`VDataTable.ts should not search column with filterable set to false 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -5153,7 +5153,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-360"
                        readonly="readonly"
                        type="text"
@@ -5218,7 +5218,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
 `;
 
 exports[`VDataTable.ts should not search column with filterable set to false and has filter function 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -5446,7 +5446,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-376"
                        readonly="readonly"
                        type="text"
@@ -5511,7 +5511,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
 `;
 
 exports[`VDataTable.ts should not search column with filterable set to false and has filter function 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6089,7 +6089,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-376"
                        readonly="readonly"
                        type="text"
@@ -6154,7 +6154,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
 `;
 
 exports[`VDataTable.ts should not select item that is not selectable 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6374,7 +6374,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-490"
                        readonly="readonly"
                        type="text"
@@ -6439,7 +6439,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
 `;
 
 exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6542,7 +6542,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
 `;
 
 exports[`VDataTable.ts should render 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6580,7 +6580,7 @@ exports[`VDataTable.ts should render 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-6"
                        readonly="readonly"
                        type="text"
@@ -6645,7 +6645,7 @@ exports[`VDataTable.ts should render 1`] = `
 `;
 
 exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6680,7 +6680,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-328"
                        readonly="readonly"
                        type="text"
@@ -6747,7 +6747,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
 `;
 
 exports[`VDataTable.ts should render item slot when using group-by function 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6884,7 +6884,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-558"
                        readonly="readonly"
                        type="text"
@@ -6949,7 +6949,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
 `;
 
 exports[`VDataTable.ts should render loading state 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -7012,7 +7012,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-221"
                        readonly="readonly"
                        type="text"
@@ -7077,7 +7077,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
 `;
 
 exports[`VDataTable.ts should render loading state 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -7169,7 +7169,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-237"
                        readonly="readonly"
                        type="text"
@@ -7234,7 +7234,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
 `;
 
 exports[`VDataTable.ts should render with body slot 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -7313,7 +7313,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-39"
                        readonly="readonly"
                        type="text"
@@ -7377,7 +7377,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
 `;
 
 exports[`VDataTable.ts should render with data 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -7705,7 +7705,7 @@ exports[`VDataTable.ts should render with data 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-22"
                        readonly="readonly"
                        type="text"
@@ -7769,7 +7769,7 @@ exports[`VDataTable.ts should render with data 1`] = `
 `;
 
 exports[`VDataTable.ts should render with group scoped slot 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -7858,7 +7858,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-206"
                        readonly="readonly"
                        type="text"
@@ -7922,7 +7922,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
 `;
 
 exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -8369,7 +8369,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-138"
                        readonly="readonly"
                        type="text"
@@ -8433,7 +8433,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
 `;
 
 exports[`VDataTable.ts should render with grouped rows 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -8828,7 +8828,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-188"
                        readonly="readonly"
                        type="text"
@@ -8892,7 +8892,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
 `;
 
 exports[`VDataTable.ts should render with item scoped slot 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -8985,7 +8985,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-156"
                        readonly="readonly"
                        type="text"
@@ -9049,7 +9049,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
 `;
 
 exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -9402,7 +9402,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-100"
                        readonly="readonly"
                        type="text"
@@ -9466,7 +9466,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
 `;
 
 exports[`VDataTable.ts should render with showExpand 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -9850,7 +9850,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-60"
                        readonly="readonly"
                        type="text"
@@ -9914,7 +9914,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
 `;
 
 exports[`VDataTable.ts should render with showExpand 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -10298,7 +10298,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-60"
                        readonly="readonly"
                        type="text"
@@ -10362,7 +10362,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
 `;
 
 exports[`VDataTable.ts should render with showSelect 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -10779,7 +10779,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-82"
                        readonly="readonly"
                        type="text"
@@ -10843,7 +10843,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
 `;
 
 exports[`VDataTable.ts should respect mustSort property on options 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -11016,7 +11016,7 @@ exports[`VDataTable.ts should respect mustSort property on options 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-704"
                        readonly="readonly"
                        type="text"
@@ -11081,7 +11081,7 @@ exports[`VDataTable.ts should respect mustSort property on options 1`] = `
 `;
 
 exports[`VDataTable.ts should search group-by column 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -11228,7 +11228,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-533"
                        readonly="readonly"
                        type="text"
@@ -11293,7 +11293,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
 `;
 
 exports[`VDataTable.ts should search group-by column 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -11403,7 +11403,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-533"
                        readonly="readonly"
                        type="text"
@@ -11468,7 +11468,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
 `;
 
 exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -11811,7 +11811,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-608"
                        readonly="readonly"
                        type="text"
@@ -11876,7 +11876,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
 `;
 
 exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -12219,7 +12219,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-608"
                        readonly="readonly"
                        type="text"

@@ -20,6 +20,8 @@ export default mixins(Themeable).extend({
         'v-data-table--dense': this.dense,
         'v-data-table--fixed-height': !!this.height && !this.fixedHeader,
         'v-data-table--fixed-header': this.fixedHeader,
+        'v-data-table--has-top': !!this.$slots.top,
+        'v-data-table--has-bottom': !!this.$slots.bottom,
         ...this.themeClasses,
       }
     },
