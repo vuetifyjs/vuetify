@@ -212,12 +212,13 @@ export const keyCodes = Object.freeze({
   pagedown: 34,
 })
 
-// This remaps internal names like '$cancel' or '$vuetify.icons.cancel'
-// to the current name or component for that icon.
+/**
+ * This remaps internal names like '$cancel' or '$vuetify.icons.cancel'
+ * to the current name or component for that icon.
+ */
 export function remapInternalIcon (vm: Vue, iconName: string): VuetifyIcon {
   // Look for custom component in the configuration
-  const component = getObjectValueByPath(vm, '$vuetify.icons.component', null)
-  const usingCustomComponent = component != null
+  const component = vm.$vuetify.icons.component
 
   // Look for overrides
   if (iconName.startsWith('$')) {
@@ -232,7 +233,7 @@ export function remapInternalIcon (vm: Vue, iconName: string): VuetifyIcon {
     else return override
   }
 
-  if (!usingCustomComponent) {
+  if (component == null) {
     return iconName
   }
 
