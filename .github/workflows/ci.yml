@@ -102,8 +102,20 @@ jobs:
           upload_sources: false
           download_translations: true
           push_translations: false
-          export_only_approved: true
+          export_only_approved: false
           download_language: eo
+          localization_branch_name: ${{ env.LOCAL_BRANCH }}
+          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+
+      - name: Download zh-CN
+        uses: crowdin/github-action@1.0.9
+        with:
+          config: crowdin.yml
+          upload_sources: false
+          download_translations: true
+          push_translations: false
+          export_only_approved: false
+          download_language: zh-CN
           localization_branch_name: ${{ env.LOCAL_BRANCH }}
           crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
 

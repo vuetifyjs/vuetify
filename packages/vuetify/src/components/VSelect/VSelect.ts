@@ -317,6 +317,13 @@ export default baseMixins.extend<options>().extend({
       const uniqueValues = new Map()
       for (let index = 0; index < arr.length; ++index) {
         const item = arr[index]
+
+        // Do not deduplicate headers or dividers (#12517)
+        if (item.header || item.divider) {
+          uniqueValues.set(item, item)
+          continue
+        }
+
         const val = this.getValue(item)
 
         // TODO: comparator
@@ -661,13 +668,13 @@ export default baseMixins.extend<options>().extend({
         })
       }
 
-      // If menu is not active, up and down can do
+      // If menu is not active, up/down/home/end can do
       // one of 2 things. If multiple, opens the
       // menu, if not, will cycle through all
       // available options
       if (
         !this.isMenuActive &&
-        [keyCodes.up, keyCodes.down].includes(keyCode)
+        [keyCodes.up, keyCodes.down, keyCodes.home, keyCodes.end].includes(keyCode)
       ) return this.onUpDown(e)
 
       // If escape deactivate the menu
@@ -782,7 +789,20 @@ export default baseMixins.extend<options>().extend({
 
       window.requestAnimationFrame(() => {
         menu.getTiles()
-        keyCodes.up === keyCode ? menu.prevTile() : menu.nextTile()
+        switch (keyCode) {
+          case keyCodes.up:
+            menu.prevTile()
+            break
+          case keyCodes.down:
+            menu.nextTile()
+            break
+          case keyCodes.home:
+            menu.firstTile()
+            break
+          case keyCodes.end:
+            menu.lastTile()
+            break
+        }
         menu.activeTile && menu.activeTile.click()
       })
     },

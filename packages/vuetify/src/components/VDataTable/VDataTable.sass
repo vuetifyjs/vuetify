@@ -30,6 +30,24 @@
         &.v-data-table__expanded__content
           box-shadow: $data-table-expanded-content-box-shadow
 
+        &:first-child
+          &:hover
+            td
+              &:first-child
+                border-top-left-radius: $data-table-border-radius
+
+              &:last-child
+                border-top-right-radius: $data-table-border-radius
+
+        &:last-child
+          &:hover
+            td
+              &:first-child
+                border-bottom-left-radius: $data-table-border-radius
+
+              &:last-child
+                border-bottom-right-radius: $data-table-border-radius
+
     .v-data-table__mobile-table-row
       display: initial
 
@@ -47,7 +65,7 @@
 
   &__header
     font-weight: $data-table-mobile-row-header-font-weight
-    
+
     +ltr()
       padding-right: 16px
 
