@@ -52,6 +52,10 @@ We thank all of our project sponsors for their continued support of Vuetify. If 
 
 <sponsors tier="6" />
 
+## Apply for Sponsor Support
+
+<apply-sponsor />
+
 ## Cursory
 
 If you run a business and are using Vuetify in a revenue-generating product, it makes business sense to sponsor Vuetify development: *it ensures the project that your product relies on stays healthy and actively maintained*. Vuetify is a **full-time** job for John and Heather; your sponsorship and contributions help support them.
