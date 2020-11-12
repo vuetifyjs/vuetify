@@ -1,3 +1,20 @@
+const NextPrevSlots = [{
+  name: 'next',
+  props: {
+    attrs: '{ aria-label: string }',
+    on: '{ click: eventHandler }',
+  },
+  source: 'v-window',
+},
+{
+  name: 'prev',
+  props: {
+    attrs: '{ aria-label: string }',
+    on: '{ click: eventHandler }',
+  },
+  source: 'v-window',
+}]
+
 module.exports = {
   'v-window': {
     slots: [
@@ -5,20 +22,7 @@ module.exports = {
         name: 'default',
         props: undefined,
       },
-      {
-        name: 'next',
-        props: {
-          attrs: '{ aria-label: string }',
-          on: '{ click: eventHandler }',
-        },
-      },
-      {
-        name: 'prev',
-        props: {
-          attrs: '{ aria-label: string }',
-          on: '{ click: eventHandler }',
-        },
-      },
+      ...NextPrevSlots,
     ],
     props: [
       {
@@ -36,4 +40,5 @@ module.exports = {
       },
     ],
   },
+  NextPrevSlots,
 }
