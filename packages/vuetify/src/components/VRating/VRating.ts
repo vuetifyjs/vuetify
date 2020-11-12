@@ -73,7 +73,7 @@ export default mixins(
       type: Number,
       default: 0,
     },
-    iconAriaLabel: {
+    iconLabel: {
       type: String,
       default: '$vuetify.rating.ariaLabel.icon',
     },
@@ -225,8 +225,8 @@ export default mixins(
       return this.$createElement(VIcon, this.setTextColor(this.getColor(props), {
         attrs: {
           tabindex: -1,
-          'aria-label': this.$vuetify.lang.t(this.iconAriaLabel, i + 1),
-        }, // TODO: Add a11y support
+          'aria-label': this.$vuetify.lang.t(this.iconLabel, i + 1),
+        },
         directives: this.directives,
         props: this.iconProps,
         on: listeners,

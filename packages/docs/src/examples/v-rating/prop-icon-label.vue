@@ -1,7 +1,7 @@
 <template>
   <v-rating
     v-model="rating"
-    icon-aria-label="custom icon label text"
+    icon-label="custom icon label text"
   ></v-rating>
 </template>
 
