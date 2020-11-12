@@ -24,5 +24,13 @@
   "events": {
     "click": "Event that is emitted when the component is clicked",
     "input": "The updated bound model"
+  },
+  "headers": {
+    "events": "Events",
+    "functions": "Functions",
+    "links": "Component Pages",
+    "props": "Props",
+    "sass": "SASS Variables",
+    "slots": "Slots"
   }
 }
