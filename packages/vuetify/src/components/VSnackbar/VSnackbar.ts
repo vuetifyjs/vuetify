@@ -41,6 +41,7 @@ export default mixins(
       default: '',
     },
     multiLine: Boolean,
+    holdOnHover: Boolean,
     text: Boolean,
     timeout: {
       type: [Number, String],
@@ -171,6 +172,13 @@ export default mixins(
           name: 'show',
           value: this.isActive,
         }],
+        on: this.holdOnHover ? {
+          mouseenter: () => {
+            window.clearTimeout(this.activeTimeout)
+            this.activeTimeout = -1
+          },
+          mouseleave: this.setTimeout,
+        } : undefined,
       })
 
       return this.$createElement('div', data, [
