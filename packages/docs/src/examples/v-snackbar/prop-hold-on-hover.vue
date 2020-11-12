@@ -11,9 +11,9 @@
     <v-snackbar
       v-model="snackbar"
       hold-on-hover
-      :timeout="timeout"
+      timeout="2000"
     >
-      {{ text }}
+      I'll be open as long as you hover the snackbar
 
       <template v-slot:action="{ attrs }">
         <v-btn
@@ -33,8 +33,6 @@
   export default {
     data: () => ({
       snackbar: false,
-      text: "I'll be open as long as you hover the snackbar",
-      timeout: 2000,
     }),
   }
 </script>
