@@ -46,6 +46,7 @@ const DataTableEvents = [
 ].concat(DataIteratorEvents)
 
 const DataTableHeaderScopedProps = {
+  isMobile: 'boolean',
   props: {
     headers: 'DataTableHeader[]',
     options: DataOptions,
@@ -79,15 +80,18 @@ const DataTableHeaderColumnScopedProps = {
 const DataTableItemScopedProps = {
   ...DataIteratorItemScopedProps,
   headers: 'DataTableHeader[]',
+  isMobile: 'boolean',
 }
 
 const DataTableItemColumnScopedProps = {
+  isMobile: 'boolean',
   item: 'any',
   header: 'DataTableHeader',
   value: 'any',
 }
 
 const DataTableHeaderSelectScopedProps = {
+  isMobile: 'boolean',
   props: {
     value: 'boolean',
     indeterminate: 'boolean',
@@ -98,6 +102,7 @@ const DataTableHeaderSelectScopedProps = {
 }
 
 const DataTableExpandedItemScopedProps = {
+  isMobile: 'boolean',
   item: 'any',
   headers: 'DataTableHeader[]',
 }
@@ -115,6 +120,7 @@ const DataTableBodyScopedProps = {
 const DataGroupScopedProps = {
   group: 'string',
   options: DataOptions,
+  isMobile: 'boolean',
   items: 'any[]',
   headers: 'i DataTableHeader[]',
 }
@@ -122,6 +128,7 @@ const DataGroupScopedProps = {
 const DataGroupHeaderScopedProps = {
   group: 'string',
   groupBy: DataOptions.groupBy,
+  isMobile: 'boolean',
   items: 'any[]',
   headers: 'DataTableHeader[]',
   isOpen: 'boolean',
@@ -132,6 +139,7 @@ const DataGroupHeaderScopedProps = {
 const DataGroupSummaryScopedProps = {
   group: 'string',
   groupBy: DataOptions.groupBy,
+  isMobile: 'boolean',
   items: 'any[]',
   headers: 'DataTableHeader[]',
   isOpen: 'boolean',
@@ -147,7 +155,7 @@ const DataTableSlots = [
   { name: 'header', props: DataTableHeaderScopedProps },
   { name: 'header.data-table-select', props: DataTableHeaderSelectScopedProps },
   { name: 'header.<name>', props: DataTableHeaderColumnScopedProps },
-  { name: 'top', props: DataDefaultScopedSlotProps },
+  { name: 'top', props: { ...DataDefaultScopedSlotProps, isMobile: 'boolean' } },
   { name: 'progress' },
   { name: 'group', props: DataGroupScopedProps },
   { name: 'group.header', props: DataGroupHeaderScopedProps },
