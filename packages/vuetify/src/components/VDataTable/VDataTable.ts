@@ -120,6 +120,7 @@ export default mixins(
 
   data () {
     return {
+      internalPagination: null as DataPagination | null,
       internalGroupBy: [] as string[],
       openCache: {} as { [key: string]: boolean },
       widths: [] as number[],
@@ -223,10 +224,15 @@ export default mixins(
     customSortWithHeaders (items: any[], sortBy: string[], sortDesc: boolean[], locale: string) {
       return this.customSort(items, sortBy, sortDesc, locale, this.columnSorters)
     },
-    createItemProps (item: any): DataTableItemProps {
-      const props = VDataIterator.options.methods.createItemProps.call(this, item)
+    createItemProps (item: any, index: number): DataTableItemProps {
+      const props = VDataIterator.options.methods.createItemProps.call(this, item, index)
 
       return Object.assign(props, { headers: this.computedHeaders })
+    },
+    getItemIndex (index: number) {
+      return this.internalPagination
+        ? ((this.internalPagination.page - 1) * this.computedItemsPerPage + index)
+        : undefined
     },
     genCaption (props: DataScopeProps) {
       if (this.caption) return [this.$createElement('caption', [this.caption])]
@@ -385,13 +391,12 @@ export default mixins(
 
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
-        rows.push(this.$scopedSlots.item!({
-          ...this.createItemProps(item),
-          index: i,
-        }))
+        const index = this.getItemIndex(i)
+
+        rows.push(this.$scopedSlots.item!(this.createItemProps(item, index)))
 
         if (this.isExpanded(item)) {
-          rows.push(this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders }))
+          rows.push(this.$scopedSlots['expanded-item']!({ index, item, headers: this.computedHeaders }))
         }
       }
 
@@ -399,15 +404,15 @@ export default mixins(
     },
     genDefaultRows (items: any[], props: DataScopeProps) {
       return this.$scopedSlots['expanded-item']
-        ? items.map(item => this.genDefaultExpandedRow(item))
-        : items.map(item => this.genDefaultSimpleRow(item))
+        ? items.map((item, index) => this.genDefaultExpandedRow(item, this.getItemIndex(index)))
+        : items.map((item, index) => this.genDefaultSimpleRow(item, this.getItemIndex(index)))
     },
-    genDefaultExpandedRow (item: any): VNode {
+    genDefaultExpandedRow (item: any, index: number | undefined): VNode {
       const isExpanded = this.isExpanded(item)
       const classes = {
         'v-data-table__expanded v-data-table__expanded__row': isExpanded,
       }
-      const headerRow = this.genDefaultSimpleRow(item, classes)
+      const headerRow = this.genDefaultSimpleRow(item, index, classes)
       const expandedRow = this.$createElement('tr', {
         staticClass: 'v-data-table__expanded v-data-table__expanded__content',
       }, [this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders })])
@@ -421,10 +426,10 @@ export default mixins(
         this.$createElement('template', { slot: 'row.content' }, [expandedRow]),
       ])
     },
-    genDefaultSimpleRow (item: any, classes: Record<string, boolean> = {}): VNode {
+    genDefaultSimpleRow (item: any, index: number | undefined, classes: Record<string, boolean> = {}): VNode {
       const scopedSlots = getPrefixedScopedSlots('item.', this.$scopedSlots)
 
-      const data = this.createItemProps(item)
+      const data = this.createItemProps(item, index)
 
       if (this.showSelect) {
         const slot = scopedSlots['data-table-select']
@@ -465,6 +470,7 @@ export default mixins(
         props: {
           headers: this.computedHeaders,
           hideDefaultHeader: this.hideDefaultHeader,
+          index,
           item,
           rtl: this.$vuetify.rtl,
         },
@@ -587,7 +593,12 @@ export default mixins(
         'update:sort-desc': (v: boolean | boolean[]) => this.$emit('update:sort-desc', v),
         'update:group-by': (v: string | string[]) => this.$emit('update:group-by', v),
         'update:group-desc': (v: boolean | boolean[]) => this.$emit('update:group-desc', v),
-        pagination: (v: DataPagination, old: DataPagination) => !deepEqual(v, old) && this.$emit('pagination', v),
+        pagination: (v: DataPagination, old: DataPagination) => {
+          this.internalPagination = v
+          if (!deepEqual(v, old)) {
+            this.$emit('pagination', v)
+          }
+        },
         'current-items': (v: any[]) => {
           this.internalCurrentItems = v
           this.$emit('current-items', v)
