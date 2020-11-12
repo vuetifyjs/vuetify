@@ -329,6 +329,18 @@ exports[`VDatePickerDateTable.ts should match snapshot with first day of week 1`
             </div>
           </button>
         </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -651,6 +663,14 @@ exports[`VDatePickerDateTable.ts should render component and match snapshot 1`] 
               31
             </div>
           </button>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
         </td>
       </tr>
     </tbody>
@@ -977,6 +997,14 @@ exports[`VDatePickerDateTable.ts should render component and match snapshot for 
               31
             </div>
           </button>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
         </td>
       </tr>
     </tbody>
@@ -1305,6 +1333,14 @@ exports[`VDatePickerDateTable.ts should render component with events (array) and
             </div>
           </button>
         </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -1632,6 +1668,14 @@ exports[`VDatePickerDateTable.ts should render component with events (function) 
             </div>
           </button>
         </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -1958,6 +2002,14 @@ exports[`VDatePickerDateTable.ts should render component with events colored by 
               31
             </div>
           </button>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
         </td>
       </tr>
     </tbody>
@@ -2290,6 +2342,14 @@ exports[`VDatePickerDateTable.ts should render component with events colored by 
             </div>
           </button>
         </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -2616,6 +2676,14 @@ exports[`VDatePickerDateTable.ts should render component with showWeek and match
               28
             </div>
           </button>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
         </td>
       </tr>
     </tbody>
@@ -2971,6 +3039,14 @@ exports[`VDatePickerDateTable.ts should render disabled component and match snap
             </div>
           </button>
         </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -3293,6 +3369,14 @@ exports[`VDatePickerDateTable.ts should render readonly component and match snap
               31
             </div>
           </button>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
         </td>
       </tr>
     </tbody>
