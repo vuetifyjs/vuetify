@@ -8,7 +8,7 @@ import Themeable from '../../mixins/themeable'
 
 // Helpers
 import mixins from '../../util/mixins'
-import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camelizeObjectKeys } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camelizeObjectKeys, keyCodes } from '../../util/helpers'
 import { breaking, removed } from '../../util/console'
 
 // Types
@@ -68,7 +68,7 @@ export default mixins(
     selection: {} as Record<string, any>,
     expansion: {} as Record<string, boolean>,
     internalCurrentItems: [] as any[],
-    shiftKeyDown: false as boolean,
+    shiftKeyDown: false,
   }),
 
   computed: {
@@ -160,11 +160,11 @@ export default mixins(
 
   methods: {
     onKeyDown (e: KeyboardEvent): void {
-      if (e.keyCode !== 16) return
+      if (e.keyCode !== keyCodes.shift) return
       this.shiftKeyDown = true
     },
     onKeyUp (e: KeyboardEvent): void {
-      if (e.keyCode !== 16) return
+      if (e.keyCode !== keyCodes.shift) return
       this.shiftKeyDown = false
     },
     toggleSelectAll (value: boolean): void {
