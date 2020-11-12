@@ -8,10 +8,6 @@ const rimraf = require('rimraf')
 const localeList = require('../src/i18n/locales').map(item => item.alternate || item.locale)
 const pageToApi = require('../src/data/page-to-api')
 
-const capitalize = str => {
-  return str.charAt(0).toUpperCase() + str.slice(1)
-}
-
 function genApiLinks (component, header) {
   const links = Object.keys(pageToApi)
     .filter(page => pageToApi[page].includes(component))
