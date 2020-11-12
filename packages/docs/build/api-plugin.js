@@ -17,7 +17,7 @@ function genApiLinks (component, header) {
     .filter(page => pageToApi[page].includes(component))
     .reduce((acc, href) => {
       const name = href.split('/')[1]
-      acc.push(`- [${startCase(name)}](${href}))`)
+      acc.push(`- [${startCase(name)}](${href})`)
       return acc
     }, [])
 
