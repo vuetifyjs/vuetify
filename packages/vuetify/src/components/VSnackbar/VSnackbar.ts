@@ -175,7 +175,6 @@ export default mixins(
         on: this.holdOnHover ? {
           mouseenter: () => {
             window.clearTimeout(this.activeTimeout)
-            this.activeTimeout = -1
           },
           mouseleave: this.setTimeout,
         } : undefined,
