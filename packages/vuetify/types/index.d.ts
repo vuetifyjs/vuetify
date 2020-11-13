@@ -281,7 +281,7 @@ export type DataTableFilterFunction = (value: any, search: string | null, item: 
 export interface DataTableHeader<T extends any = any> {
   text: string
   value: string
-  align?: 'start' | 'center' | 'end'
+  align?: 'left' | 'center' | 'right'
   sortable?: boolean
   filterable?: boolean
   groupable?: boolean
