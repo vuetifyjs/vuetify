@@ -44,7 +44,7 @@ The **timeout** property lets you customize the delay before the `v-snackbar` is
 #### Stop timer on mouse hover
 
 The **hold-on-hover** property allows the timer to be stopped when users hover over the snackbar. After moving the cursor out of the snackbar area
-the timer will be resetted.
+the timer will be reset.
 
 <example file="v-snackbar/prop-hold-on-hover" />
 
