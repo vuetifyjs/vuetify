@@ -36,7 +36,7 @@ Optionally provide a `closeOnOutsideClick` handler that returns `true` or `false
 
 #### Include
 
-Optionally provide an `include` function in the `options` that returns an array of `HTMLElement`s. This function determines which additional elements that the click must be outside of.
+Optionally provide an `include` function in the `options` object that returns an array of `HTMLElement`s. This function determines which additional elements that the click must be outside of.
 
 <example file="v-click-outside/option-include" />
 
