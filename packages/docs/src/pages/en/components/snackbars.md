@@ -1,7 +1,7 @@
 ---
 meta:
   title: Snackbar component
-  description: The snackbar component informs user of a process that your application has performed is will perform. It can be temporary and often contains actions.
+  description: The snackbar component informs user of a process that your application has performed is will perform. It can be temporary and often contains actions. Timer will stop when user hovers over the snackbar.
   keywords: snackbars, vuetify snackbar component, vue snackbar component
 related:
   - /components/buttons/
@@ -40,13 +40,6 @@ The **multi-line** property extends the height of the `v-snackbar` to give you a
 The **timeout** property lets you customize the delay before the `v-snackbar` is hidden.
 
 <example file="v-snackbar/prop-timeout" />
-
-#### Stop timer on mouse hover
-
-The **hold-on-hover** property allows the timer to be stopped when users hover over the snackbar. After moving the cursor out of the snackbar area
-the timer will be reset.
-
-<example file="v-snackbar/prop-hold-on-hover" />
 
 #### Variants
 
