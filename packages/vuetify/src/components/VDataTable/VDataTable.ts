@@ -274,7 +274,10 @@ export default mixins(
         },
       }
 
-      const children: VNodeChildrenArrayContents = [getSlot(this, 'header', data)]
+      const children: VNodeChildrenArrayContents = [getSlot(this, 'header', {
+        ...data,
+        isMobile: this.isMobile,
+      })]
 
       if (!this.hideDefaultHeader) {
         const scopedSlots = getPrefixedScopedSlots('header.', this.$scopedSlots)
@@ -313,6 +316,7 @@ export default mixins(
           return this.$scopedSlots.group({
             group: group.name,
             options: props.options,
+            isMobile: this.isMobile,
             items: group.items,
             headers: this.computedHeaders,
           })
@@ -331,7 +335,16 @@ export default mixins(
 
       if (this.$scopedSlots['group.header']) {
         children.unshift(this.$createElement('template', { slot: 'column.header' }, [
-          this.$scopedSlots['group.header']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders, isOpen, toggle: toggleFn, remove: removeFn }),
+          this.$scopedSlots['group.header']!({
+            group,
+            groupBy: props.options.groupBy,
+            isMobile: this.isMobile,
+            items,
+            headers: this.computedHeaders,
+            isOpen,
+            toggle: toggleFn,
+            remove: removeFn,
+          }),
         ]))
       } else {
         const toggle = this.$createElement(VBtn, {
@@ -366,7 +379,15 @@ export default mixins(
 
       if (this.$scopedSlots['group.summary']) {
         children.push(this.$createElement('template', { slot: 'column.summary' }, [
-          this.$scopedSlots['group.summary']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders, isOpen, toggle: toggleFn }),
+          this.$scopedSlots['group.summary']!({
+            group,
+            groupBy: props.options.groupBy,
+            isMobile: this.isMobile,
+            items,
+            headers: this.computedHeaders,
+            isOpen,
+            toggle: toggleFn,
+          }),
         ]))
       }
 
@@ -388,10 +409,15 @@ export default mixins(
         rows.push(this.$scopedSlots.item!({
           ...this.createItemProps(item),
           index: i,
+          isMobile: this.isMobile,
         }))
 
         if (this.isExpanded(item)) {
-          rows.push(this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders }))
+          rows.push(this.$scopedSlots['expanded-item']!({
+            headers: this.computedHeaders,
+            isMobile: this.isMobile,
+            item,
+          }))
         }
       }
 
@@ -410,7 +436,11 @@ export default mixins(
       const headerRow = this.genDefaultSimpleRow(item, classes)
       const expandedRow = this.$createElement('tr', {
         staticClass: 'v-data-table__expanded v-data-table__expanded__content',
-      }, [this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders })])
+      }, [this.$scopedSlots['expanded-item']!({
+        headers: this.computedHeaders,
+        isMobile: this.isMobile,
+        item,
+      })])
 
       return this.$createElement(RowGroup, {
         props: {
@@ -428,7 +458,10 @@ export default mixins(
 
       if (this.showSelect) {
         const slot = scopedSlots['data-table-select']
-        scopedSlots['data-table-select'] = slot ? () => slot(data) : () => this.$createElement(VSimpleCheckbox, {
+        scopedSlots['data-table-select'] = slot ? () => slot({
+          ...data,
+          isMobile: this.isMobile,
+        }) : () => this.$createElement(VSimpleCheckbox, {
           staticClass: 'v-data-table__checkbox',
           props: {
             value: data.isSelected,
@@ -555,7 +588,10 @@ export default mixins(
       return this.$createElement(VSimpleTable, {
         props: simpleProps,
       }, [
-        this.proxySlot('top', getSlot(this, 'top', props, true)),
+        this.proxySlot('top', getSlot(this, 'top', {
+          ...props,
+          isMobile: this.isMobile,
+        }, true)),
         this.genCaption(props),
         this.genColgroup(props),
         this.genHeaders(props),

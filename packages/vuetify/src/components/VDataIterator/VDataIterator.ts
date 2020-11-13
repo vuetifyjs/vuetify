@@ -238,6 +238,7 @@ export default mixins(
           isSelected: this.isSelected,
           select: this.select,
           isExpanded: this.isExpanded,
+          isMobile: this.isMobile,
           expand: this.expand,
         })
       }
