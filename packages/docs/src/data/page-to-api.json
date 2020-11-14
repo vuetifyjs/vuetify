@@ -66,7 +66,7 @@
     "v-edit-dialog",
     "v-simple-checkbox"
   ],  
-  "date-pickers-month": ["v-date-picker"],
+  "components/date-pickers-month": ["v-date-picker"],
   "components/date-pickers": ["v-date-picker"],
   "components/dialogs": ["v-dialog"],
   "components/dividers": ["v-divider"],
@@ -76,7 +76,7 @@
     "v-expansion-panel-header",
     "v-expansion-panel-content"
   ],  
-  "file-inputs": ["v-file-input"],
+  "components/file-inputs": ["v-file-input"],
   "components/floating-action-buttons": [
     "v-btn",
     "v-speed-dial"
@@ -108,7 +108,7 @@
     "v-list-item-subtitle",
     "v-list-item-title"
   ],  
-  "lists": [
+  "components/lists": [
     "v-list",
     "v-list-item",
     "v-list-item-action",
@@ -120,7 +120,7 @@
     "v-list-item-subtitle",
     "v-list-item-title"
   ],  
-  "menus": ["v-menu"],
+  "components/menus": ["v-menu"],
   "components/navigation-drawers": ["v-navigation-drawer"],
   "components/overflow-btns": ["v-overflow-btn"],
   "components/overlays": ["v-overlay"],
@@ -168,7 +168,7 @@
     "v-tabs-items",
     "v-tabs-slider"
   ],  
-  "text-fields": ["v-text-field"],
+  "components/text-fields": ["v-text-field"],
   "components/textareas": ["v-textarea"],
   "components/time-pickers": ["v-time-picker"],
   "components/timelines": [
