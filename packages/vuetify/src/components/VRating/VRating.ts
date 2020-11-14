@@ -225,7 +225,7 @@ export default mixins(
       return this.$createElement(VIcon, this.setTextColor(this.getColor(props), {
         attrs: {
           tabindex: -1,
-          'aria-label': this.$vuetify.lang.t(this.iconLabel, i + 1),
+          'aria-label': this.$vuetify.lang.t(this.iconLabel, i + 1, Number(this.length)),
         },
         directives: this.directives,
         props: this.iconProps,
