@@ -1,10 +1,7 @@
 <template>
   <div>
     <p>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem
-      repellat ab similique nulla quisquam totam maxime tempora officia,
-      quibusdam fugit. Eaque quaerat autem reprehenderit optio explicabo,
-      molestias possimus ipsam numquam!
+      Apply for premium support on Discord by filling out this subscription form.
     </p>
     <v-form ref="form" v-model="valid">
       <v-container>
