@@ -44,10 +44,7 @@ export default BaseItemGroup.extend({
       type: [Boolean, String],
       default: '$prev',
     },
-    reverse: {
-      type: Boolean,
-      default: false,
-    },
+    reverse: Boolean,
     showArrows: Boolean,
     showArrowsOnHover: Boolean,
     touch: Object as PropType<TouchHandlers>,
@@ -149,9 +146,7 @@ export default BaseItemGroup.extend({
           attrs: {
             'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`),
           },
-          on: {
-            click,
-          },
+          on: { click },
         }, [
           this.$createElement(VIcon, {
             props: { large: true },
