@@ -364,7 +364,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
   <tbody>
     <tr>
       <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-plugins/tree/docs/readme-presets/packages/%40vuetify/material-studies/templates/vue-cli-plugin-vuetify-preset-basil">vue-cli-plugin-vuetify-preset-basil</a>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/%40vuetify/material-studies/templates/vue-cli-plugin-vuetify-preset-basil">vue-cli-plugin-vuetify-preset-basil</a>
       </td>
       <td>
         <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-basil">
