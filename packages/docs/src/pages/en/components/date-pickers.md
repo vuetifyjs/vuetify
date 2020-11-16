@@ -93,9 +93,9 @@ By default the current date is displayed using outlined button - **show-current*
 
 #### Show sibling months
 
-By default days from previous and next months are not visible. They can be displayed using the **show-sibling-months** prop.
+By default days from previous and next months are not visible. They can be displayed using the **show-adjacent-months** prop.
 
-<example file="v-date-picker/prop-show-sibling-months" />
+<example file="v-date-picker/prop-show-adjacent-months" />
 
 #### Width
 

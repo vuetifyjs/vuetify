@@ -26,7 +26,7 @@ export default mixins(
       type: [String, Number],
       default: 0,
     },
-    showSiblingMonths: Boolean,
+    showAdjacentMonths: Boolean,
     showWeek: Boolean,
     weekdayFormat: Function as PropType<DatePickerFormatter | undefined>,
   },
@@ -100,7 +100,7 @@ export default mixins(
       while (day--) {
         const date = `${prevMonthYear}-${pad(prevMonth + 1)}-${pad(firstDayFromPreviousMonth - day)}`
 
-        rows.push(this.$createElement('td', this.showSiblingMonths ? [
+        rows.push(this.$createElement('td', this.showAdjacentMonths ? [
           this.genButton(date, true, 'date', this.formatter, true),
         ] : []))
       }
@@ -128,7 +128,7 @@ export default mixins(
       while (rows.length < 7) {
         const date = `${nextMonthYear}-${pad(nextMonth + 1)}-${pad(nextMonthDay++)}`
 
-        rows.push(this.$createElement('td', this.showSiblingMonths ? [
+        rows.push(this.$createElement('td', this.showAdjacentMonths ? [
           this.genButton(date, true, 'date', this.formatter, true),
         ] : []))
       }

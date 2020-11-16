@@ -121,7 +121,7 @@ export default mixins(
       type: String,
       default: '$vuetify.datePicker.itemsSelected',
     },
-    showSiblingMonths: Boolean,
+    showAdjacentMonths: Boolean,
     showWeek: Boolean,
     // Function formatting currently selected date in the picker title
     titleDateFormat: Function as PropType<DatePickerFormatter | DatePickerMultipleFormatter | undefined>,
@@ -429,7 +429,7 @@ export default mixins(
           range: this.range,
           readonly: this.readonly,
           scrollable: this.scrollable,
-          showSiblingMonths: this.showSiblingMonths,
+          showAdjacentMonths: this.showAdjacentMonths,
           showWeek: this.showWeek,
           tableDate: `${pad(this.tableYear, 4)}-${pad(this.tableMonth + 1)}`,
           value: this.value,

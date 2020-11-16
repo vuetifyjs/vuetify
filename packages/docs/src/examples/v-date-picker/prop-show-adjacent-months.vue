@@ -1,7 +1,7 @@
 <template>
   <v-date-picker
     v-model="picker"
-    show-sibling-months
+    show-adjacent-months
   ></v-date-picker>
 </template>
 
