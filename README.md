@@ -223,7 +223,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
   <tbody>
     <tr>
       <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/cli-plugin-utils">@vuetify/cli-plugin-utils</a>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/%40vuetify/cli-plugin-utils">@vuetify/cli-plugin-utils</a>
       </td>
       <td>
         <a href="https://www.npmjs.com/package/@vuetify/cli-plugin-utils">
@@ -364,7 +364,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
   <tbody>
     <tr>
       <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-basil">vue-cli-plugin-vuetify-preset-basil</a>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/%40vuetify/material-studies/templates/vue-cli-plugin-vuetify-preset-basil">vue-cli-plugin-vuetify-preset-basil</a>
       </td>
       <td>
         <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-basil">
@@ -377,7 +377,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-crane">vue-cli-plugin-vuetify-preset-crane</a>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/%40vuetify/material-studies/templates/vue-cli-plugin-vuetify-preset-crane">vue-cli-plugin-vuetify-preset-crane</a>
       </td>
       <td>
         <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-crane">
@@ -390,7 +390,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-fortnightly">vue-cli-plugin-vuetify-preset-fortnightly</a>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/%40vuetify/material-studies/templates/vue-cli-plugin-vuetify-preset-fortnightly">vue-cli-plugin-vuetify-preset-fortnightly</a>
       </td>
       <td>
         <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-fortnightly">
@@ -403,7 +403,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-owl">vue-cli-plugin-vuetify-preset-owl</a>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/%40vuetify/material-studies/templates/vue-cli-plugin-vuetify-preset-owl">vue-cli-plugin-vuetify-preset-owl</a>
       </td>
       <td>
         <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-owl">
@@ -416,7 +416,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-rally">vue-cli-plugin-vuetify-preset-rally</a>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/%40vuetify/material-studies/templates/vue-cli-plugin-vuetify-preset-rally">vue-cli-plugin-vuetify-preset-rally</a>
       </td>
       <td>
         <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-rally">
@@ -429,7 +429,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-reply">vue-cli-plugin-vuetify-preset-reply</a>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/%40vuetify/material-studies/templates/vue-cli-plugin-vuetify-preset-reply">vue-cli-plugin-vuetify-preset-reply</a>
       </td>
       <td>
         <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-reply">
@@ -442,7 +442,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
     </tr>
     <tr>
       <td>
-        <a href="https://github.com/vuetifyjs/vue-cli-plugin-vuetify/tree/master/packages/vue-cli-plugin-vuetify-preset-shrine">vue-cli-plugin-vuetify-preset-shrine</a>
+        <a href="https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/%40vuetify/material-studies/templates/vue-cli-plugin-vuetify-preset-shrine">vue-cli-plugin-vuetify-preset-shrine</a>
       </td>
       <td>
         <a href="https://www.npmjs.com/package/vue-cli-plugin-vuetify-preset-shrine">
