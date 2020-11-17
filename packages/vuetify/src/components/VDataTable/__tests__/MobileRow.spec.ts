@@ -23,7 +23,6 @@ describe('MobileRow', () => {
             { text: 'Petrol', value: 'petrol' },
             { text: 'Diesel', value: 'diesel' },
           ],
-          index: 0,
           item: {
             petrol: 0.68,
             diesel: 0.65,
@@ -50,7 +49,6 @@ describe('MobileRow', () => {
             { value: 'undefined' },
             { value: 'null' },
           ],
-          index: 0,
           item: {
             string: 'string',
             number: 12.34,
@@ -74,7 +72,6 @@ describe('MobileRow', () => {
             { text: 'Petrol', value: 'petrol' },
             { text: 'Diesel', value: 'diesel' },
           ],
-          index: 0,
         },
       },
       slots: {
@@ -98,7 +95,6 @@ describe('MobileRow', () => {
             { text: 'Petrol', value: 'petrol' },
             { text: 'Diesel', value: 'diesel' },
           ],
-          index: 0,
           item: {
             petrol: 0.68,
             diesel: 0.65,
@@ -126,7 +122,6 @@ describe('MobileRow', () => {
             { text: 'Diesel', value: 'diesel' },
           ],
           hideDefaultHeader: true,
-          index: 0,
           item: {
             petrol: 0.68,
             diesel: 0.65,

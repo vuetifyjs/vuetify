@@ -120,7 +120,6 @@ export default mixins(
 
   data () {
     return {
-      internalPagination: null as DataPagination | null,
       internalGroupBy: [] as string[],
       openCache: {} as { [key: string]: boolean },
       widths: [] as number[],
@@ -587,12 +586,7 @@ export default mixins(
         'update:sort-desc': (v: boolean | boolean[]) => this.$emit('update:sort-desc', v),
         'update:group-by': (v: string | string[]) => this.$emit('update:group-by', v),
         'update:group-desc': (v: boolean | boolean[]) => this.$emit('update:group-desc', v),
-        pagination: (v: DataPagination, old: DataPagination) => {
-          this.internalPagination = v
-          if (!deepEqual(v, old)) {
-            this.$emit('pagination', v)
-          }
-        },
+        pagination: (v: DataPagination, old: DataPagination) => !deepEqual(v, old) && this.$emit('pagination', v),
         'current-items': (v: any[]) => {
           this.internalCurrentItems = v
           this.$emit('current-items', v)
@@ -600,7 +594,7 @@ export default mixins(
         'page-count': (v: number) => this.$emit('page-count', v),
       },
       scopedSlots: {
-        default: this.genDefaultScopedSlot as any,
+        default: this.genDefaultScopedSlot,
       },
     })
   },
