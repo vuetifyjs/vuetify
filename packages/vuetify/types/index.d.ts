@@ -106,6 +106,7 @@ export interface DataPagination {
 }
 
 export interface DataItemProps {
+  index: number
   item: any
   select: (v: boolean) => void
   isSelected: boolean

@@ -223,8 +223,8 @@ export default mixins(
     customSortWithHeaders (items: any[], sortBy: string[], sortDesc: boolean[], locale: string) {
       return this.customSort(items, sortBy, sortDesc, locale, this.columnSorters)
     },
-    createItemProps (item: any): DataTableItemProps {
-      const props = VDataIterator.options.methods.createItemProps.call(this, item)
+    createItemProps (item: any, index: number): DataTableItemProps {
+      const props = VDataIterator.options.methods.createItemProps.call(this, item, index)
 
       return Object.assign(props, { headers: this.computedHeaders })
     },
@@ -407,8 +407,7 @@ export default mixins(
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
         rows.push(this.$scopedSlots.item!({
-          ...this.createItemProps(item),
-          index: i,
+          ...this.createItemProps(item, i),
           isMobile: this.isMobile,
         }))
 
@@ -416,6 +415,7 @@ export default mixins(
           rows.push(this.$scopedSlots['expanded-item']!({
             headers: this.computedHeaders,
             isMobile: this.isMobile,
+            index: i,
             item,
           }))
         }
@@ -425,15 +425,15 @@ export default mixins(
     },
     genDefaultRows (items: any[], props: DataScopeProps) {
       return this.$scopedSlots['expanded-item']
-        ? items.map(item => this.genDefaultExpandedRow(item))
-        : items.map(item => this.genDefaultSimpleRow(item))
+        ? items.map((item, index) => this.genDefaultExpandedRow(item, index))
+        : items.map((item, index) => this.genDefaultSimpleRow(item, index))
     },
-    genDefaultExpandedRow (item: any): VNode {
+    genDefaultExpandedRow (item: any, index: number): VNode {
       const isExpanded = this.isExpanded(item)
       const classes = {
         'v-data-table__expanded v-data-table__expanded__row': isExpanded,
       }
-      const headerRow = this.genDefaultSimpleRow(item, classes)
+      const headerRow = this.genDefaultSimpleRow(item, index, classes)
       const expandedRow = this.$createElement('tr', {
         staticClass: 'v-data-table__expanded v-data-table__expanded__content',
       }, [this.$scopedSlots['expanded-item']!({
@@ -451,10 +451,10 @@ export default mixins(
         this.$createElement('template', { slot: 'row.content' }, [expandedRow]),
       ])
     },
-    genDefaultSimpleRow (item: any, classes: Record<string, boolean> = {}): VNode {
+    genDefaultSimpleRow (item: any, index: number, classes: Record<string, boolean> = {}): VNode {
       const scopedSlots = getPrefixedScopedSlots('item.', this.$scopedSlots)
 
-      const data = this.createItemProps(item)
+      const data = this.createItemProps(item, index)
 
       if (this.showSelect) {
         const slot = scopedSlots['data-table-select']
@@ -498,6 +498,7 @@ export default mixins(
         props: {
           headers: this.computedHeaders,
           hideDefaultHeader: this.hideDefaultHeader,
+          index,
           item,
           rtl: this.$vuetify.rtl,
         },
@@ -631,7 +632,7 @@ export default mixins(
         'page-count': (v: number) => this.$emit('page-count', v),
       },
       scopedSlots: {
-        default: this.genDefaultScopedSlot as any,
+        default: this.genDefaultScopedSlot,
       },
     })
   },

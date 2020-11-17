@@ -160,7 +160,7 @@ const DataTableSlots = [
   { name: 'group', props: DataGroupScopedProps },
   { name: 'group.header', props: DataGroupHeaderScopedProps },
   { name: 'group.summary', props: DataGroupSummaryScopedProps },
-  { name: 'item', props: { ...DataTableItemScopedProps, index: 'number' } },
+  { name: 'item', props: DataTableItemScopedProps },
   { name: 'item.data-table-select', props: DataTableItemScopedProps },
   { name: 'item.data-table-expand', props: DataTableItemScopedProps },
   { name: 'item.<name>', props: DataTableItemColumnScopedProps },

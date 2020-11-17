@@ -201,9 +201,10 @@ export default mixins(
       this.expansion = expansion
       this.$emit('item-expanded', { item, value })
     },
-    createItemProps (item: any): DataItemProps {
+    createItemProps (item: any, index: number): DataItemProps {
       return {
         item,
+        index,
         select: (v: boolean) => this.select(item, v),
         isSelected: this.isSelected(item),
         expand: (v: boolean) => this.expand(item, v),
@@ -244,7 +245,10 @@ export default mixins(
       }
 
       if (this.$scopedSlots.item) {
-        return props.items.map((item: any) => this.$scopedSlots.item!(this.createItemProps(item)))
+        return props.items.map((item: any, index) => this.$scopedSlots.item!(this.createItemProps(
+          item,
+          index
+        )))
       }
 
       return []
