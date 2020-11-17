@@ -10,6 +10,7 @@ export default Vue.extend({
   props: {
     headers: Array as PropType<DataTableHeader[]>,
     hideDefaultHeader: Boolean,
+    index: Number,
     item: Object,
     rtl: Boolean,
   },
@@ -30,7 +31,13 @@ export default Vue.extend({
       const regularSlot = computedSlots[slotName]
 
       if (scopedSlot) {
-        children.push(scopedSlot({ item: props.item, header, value }))
+        children.push(scopedSlot({
+          item: props.item,
+          isMobile: true,
+          header,
+          index: props.index,
+          value,
+        }))
       } else if (regularSlot) {
         children.push(regularSlot)
       } else {

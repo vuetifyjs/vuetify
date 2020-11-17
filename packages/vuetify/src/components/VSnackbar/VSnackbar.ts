@@ -171,6 +171,10 @@ export default mixins(
           name: 'show',
           value: this.isActive,
         }],
+        on: {
+          mouseenter: () => window.clearTimeout(this.activeTimeout),
+          mouseleave: this.setTimeout,
+        },
       })
 
       return this.$createElement('div', data, [

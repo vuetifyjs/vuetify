@@ -6,7 +6,7 @@ import { consoleWarn } from '../../util/console'
 import { mergeDeep } from '../../util/helpers'
 
 // Types
-import Framework from 'vuetify/types'
+import Vuetify from 'vuetify/types'
 import { Service } from '../service'
 import {
   UserVuetifyPreset,
@@ -18,7 +18,7 @@ export class Presets extends Service {
 
   constructor (
     parentPreset: Partial<UserVuetifyPreset>,
-    parent: InstanceType<typeof Framework>,
+    parent: Vuetify,
   ) {
     super()
 

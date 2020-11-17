@@ -26,6 +26,7 @@ export default mixins(
       type: [String, Number],
       default: 0,
     },
+    showAdjacentMonths: Boolean,
     showWeek: Boolean,
     weekdayFormat: Function as PropType<DatePickerFormatter | undefined>,
   },
@@ -81,6 +82,7 @@ export default mixins(
         }, String(weekNumber).padStart(2, '0')),
       ])
     },
+    // eslint-disable-next-line max-statements
     genTBody () {
       const children = []
       const daysInMonth = new Date(this.displayedYear, this.displayedMonth + 1, 0).getDate()
@@ -91,7 +93,18 @@ export default mixins(
         rows.push(this.genWeekNumber(this.getWeekNumber(1)))
       }
 
-      while (day--) rows.push(this.$createElement('td'))
+      const prevMonthYear = this.displayedMonth ? this.displayedYear : this.displayedYear - 1
+      const prevMonth = (this.displayedMonth + 11) % 12
+      const firstDayFromPreviousMonth = new Date(this.displayedYear, this.displayedMonth, 0).getDate()
+
+      while (day--) {
+        const date = `${prevMonthYear}-${pad(prevMonth + 1)}-${pad(firstDayFromPreviousMonth - day)}`
+
+        rows.push(this.$createElement('td', this.showAdjacentMonths ? [
+          this.genButton(date, true, 'date', this.formatter, true),
+        ] : []))
+      }
+
       for (day = 1; day <= daysInMonth; day++) {
         const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
 
@@ -106,6 +119,18 @@ export default mixins(
             rows.push(this.genWeekNumber(this.getWeekNumber(day + 7)))
           }
         }
+      }
+
+      const nextMonthYear = this.displayedMonth === 11 ? this.displayedYear + 1 : this.displayedYear
+      const nextMonth = (this.displayedMonth + 1) % 12
+      let nextMonthDay = 1
+
+      while (rows.length < 7) {
+        const date = `${nextMonthYear}-${pad(nextMonth + 1)}-${pad(nextMonthDay++)}`
+
+        rows.push(this.$createElement('td', this.showAdjacentMonths ? [
+          this.genButton(date, true, 'date', this.formatter, true),
+        ] : []))
       }
 
       if (rows.length) {

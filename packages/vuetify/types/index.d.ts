@@ -18,16 +18,16 @@ import {
 // Service Options
 import { GoToOptions } from './services/goto'
 
-declare const Vuetify: Vuetify
-export default Vuetify
-export interface Vuetify {
+export default class Vuetify {
+  constructor (preset?: Partial<UserVuetifyPreset>)
+
+  static install: PluginFunction<VuetifyUseOptions>
+  static version: string
+  static config: Config
+
   framework: Framework
-  install: PluginFunction<VuetifyUseOptions>
   preset: VuetifyPreset
   userPreset: UserVuetifyPreset
-  version: string
-  config: Config
-  new (preset?: Partial<UserVuetifyPreset>): Vuetify
 }
 
 export interface Config {
@@ -106,6 +106,7 @@ export interface DataPagination {
 }
 
 export interface DataItemProps {
+  index: number
   item: any
   select: (v: boolean) => void
   isSelected: boolean

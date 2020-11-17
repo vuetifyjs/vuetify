@@ -131,7 +131,7 @@ export default baseMixins.extend<options>().extend({
       if (typeof this.counterValue === 'function') {
         return this.counterValue(this.internalValue)
       }
-      return [...(this.internalValue || '')].length
+      return [...(this.internalValue || '').toString()].length
     },
     hasCounter (): boolean {
       return this.counter !== false && this.counter != null
@@ -187,11 +187,10 @@ export default baseMixins.extend<options>().extend({
       }
     },
     showLabel (): boolean {
-      return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder))
+      return this.hasLabel && !(this.isSingle && this.labelValue)
     },
     labelValue (): boolean {
-      return !this.isSingle &&
-        Boolean(this.isFocused || this.isLabelActive || this.placeholder)
+      return this.isFocused || this.isLabelActive
     },
   },
 
@@ -388,7 +387,7 @@ export default baseMixins.extend<options>().extend({
           autofocus: this.autofocus,
           disabled: this.isDisabled,
           id: this.computedId,
-          placeholder: this.placeholder,
+          placeholder: this.isFocused || !this.hasLabel ? this.placeholder : undefined,
           readonly: this.isReadonly,
           type: this.type,
         },

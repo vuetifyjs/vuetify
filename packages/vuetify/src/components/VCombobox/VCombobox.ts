@@ -177,19 +177,16 @@ export default VAutocomplete.extend({
       this.editingIndex = -1
     },
     updateCombobox () {
-      const isUsingSlot = Boolean(this.$scopedSlots.selection) || this.hasChips
-
-      // If search is not dirty and is
-      // using slot, do nothing
-      if (isUsingSlot && !this.searchIsDirty) return
+      // If search is not dirty, do nothing
+      if (!this.searchIsDirty) return
 
       // The internal search is not matching
       // the internal value, update the input
       if (this.internalSearch !== this.getText(this.internalValue)) this.setValue()
 
-      // Reset search if using slot
-      // to avoid a double input
-      if (isUsingSlot) this.internalSearch = undefined
+      // Reset search if using slot to avoid a double input
+      const isUsingSlot = Boolean(this.$scopedSlots.selection) || this.hasChips
+      if (isUsingSlot) this.internalSearch = null
     },
     updateSelf () {
       this.multiple ? this.updateTags() : this.updateCombobox()

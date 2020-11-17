@@ -51,6 +51,12 @@ Reverse `v-window` always displays reverse transition.
 
 <example file="v-window/prop-vertical" />
 
+#### Customized arrows
+
+Arrows can be customized by using **prev** and **next** slots.
+
+<example file="v-window/slots-next-prev" />
+
 ### Misc
 
 #### Account creation

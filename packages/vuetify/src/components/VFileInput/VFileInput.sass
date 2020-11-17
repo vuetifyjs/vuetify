@@ -42,6 +42,11 @@
 .v-file-input .v-text-field__slot
   min-height: $file-input-slot-min-height
 
+.v-file-input
+  &.v-input--dense
+    .v-text-field__slot
+      min-height: $file-input-slot-dense-min-height
+
 .v-file-input.v-text-field--filled:not(.v-text-field--single-line)
   .v-file-input__text
     padding-top: $file-input-filled-padding-top

@@ -41,7 +41,7 @@ Adjust the elevation of the `v-color-picker` component using the **elevation** o
 
 #### Inputs
 
-The number inputs can be hidden with the `hide-inputs` prop. You can also hide the mode switch icon with the `hide-mode-switch` prop. The mode can also be controlled externally through the `mode` prop.
+The number inputs can be hidden with the `hide-inputs` prop, and the sliders can be hidden with the `hide-sliders` prop. You can also hide the mode switch icon with the `hide-mode-switch` prop. The mode can also be controlled externally through the `mode` prop.
 
 <example file="v-color-picker/prop-inputs" />
 

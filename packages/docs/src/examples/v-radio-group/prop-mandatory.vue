@@ -3,7 +3,7 @@
     <p>{{ radios || 'null' }}</p>
     <v-radio-group
       v-model="radios"
-      :mandatory="false"
+      mandatory
     >
       <v-radio
         label="Radio 1"
@@ -21,7 +21,7 @@
   export default {
     data () {
       return {
-        radios: 'radio-1',
+        radios: null,
       }
     },
   }

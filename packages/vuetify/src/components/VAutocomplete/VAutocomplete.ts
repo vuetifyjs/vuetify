@@ -50,8 +50,7 @@ export default VSelect.extend({
     },
     noFilter: Boolean,
     searchInput: {
-      type: String as PropType<string | undefined>,
-      default: undefined,
+      type: String as PropType<string | null>,
     },
   },
 
@@ -96,10 +95,10 @@ export default VSelect.extend({
       })
     },
     internalSearch: {
-      get (): string | undefined {
+      get (): string | null {
         return this.lazySearch
       },
-      set (val: any) {
+      set (val: any) { // TODO: this should be `string | null` but it breaks lots of other types
         this.lazySearch = val
 
         this.$emit('update:search-input', val)
@@ -134,8 +133,7 @@ export default VSelect.extend({
       }
     },
     searchIsDirty (): boolean {
-      return this.internalSearch != null &&
-        this.internalSearch !== ''
+      return this.internalSearch != null
     },
     selectedItem (): any {
       if (this.multiple) return null
@@ -177,7 +175,7 @@ export default VSelect.extend({
     isMenuActive (val) {
       if (val || !this.hasSlot) return
 
-      this.lazySearch = undefined
+      this.lazySearch = null
     },
     items (val, oldVal) {
       // If we are focused, the menu
@@ -285,7 +283,7 @@ export default VSelect.extend({
       const nextItem = this.selectedItems[nextIndex]
 
       if (!nextItem) {
-        this.setValue(this.multiple ? [] : undefined)
+        this.setValue(this.multiple ? [] : null)
       } else {
         this.selectItem(curItem)
       }
@@ -293,7 +291,7 @@ export default VSelect.extend({
       this.selectedIndex = nextIndex
     },
     clearableCallback () {
-      this.internalSearch = undefined
+      this.internalSearch = null
 
       VSelect.options.methods.clearableCallback.call(this)
     },

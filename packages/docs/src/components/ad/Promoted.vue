@@ -3,7 +3,10 @@
     v-if="current"
     class="mb-8"
   >
-    <a v-bind="adAttrs">
+    <a
+      v-bind="adAttrs"
+      @click="onClick"
+    >
       <app-ad
         v-bind="$attrs"
         class="v-vuetify-ad--promoted"
@@ -90,6 +93,16 @@
         const { logo, preview } = this.current.metadata.images
 
         return (logo || preview).url
+      },
+    },
+
+    methods: {
+      onClick () {
+        this.$gtag.event('click', {
+          event_category: 'vuetify-ads',
+          event_label: this.slug,
+          value: 'promoted',
+        })
       },
     },
   }
