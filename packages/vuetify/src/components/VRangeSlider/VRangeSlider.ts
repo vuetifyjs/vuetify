@@ -145,7 +145,7 @@ export default VSlider.extend({
           const onDrag = (e: MouseEvent) => {
             this.isActive = true
             this.activeThumb = index
-            this.onThumbMouseDown(e)
+            this.onSliderMouseDown(e)
           }
           const onFocus = (e: Event) => {
             this.isFocused = true

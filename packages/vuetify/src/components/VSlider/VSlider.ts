@@ -259,6 +259,7 @@ export default mixins<options &
         }],
         on: {
           click: this.onSliderClick,
+          mousedown: this.onSliderMouseDown,
         },
       }, this.genChildren())
     },
@@ -272,7 +273,7 @@ export default mixins<options &
           this.inputWidth,
           this.isActive,
           this.isFocused,
-          this.onThumbMouseDown,
+          this.onSliderMouseDown,
           this.onFocus,
           this.onBlur,
         ),
@@ -446,7 +447,7 @@ export default mixins<options &
         [direction]: `${value}%`,
       }
     },
-    onThumbMouseDown (e: MouseEvent) {
+    onSliderMouseDown (e: MouseEvent) {
       e.preventDefault()
 
       this.oldValue = this.internalValue
