@@ -450,16 +450,6 @@ describe('VAutocomplete.ts', () => {
     expect(onFocus).toHaveBeenCalled()
   })
 
-  it('should set isFocused to false onBlur', () => {
-    const wrapper = mountFunction()
-    const input = wrapper.find('input')
-
-    input.trigger('focus')
-    expect(wrapper.vm.isFocused).toBe(true)
-    wrapper.vm.onBlur(null)
-    expect(wrapper.vm.isFocused).toBe(false)
-  })
-
   it('should react to keydown', () => {
     const activateMenu = jest.fn()
     const changeSelectedIndex = jest.fn()
