@@ -24,6 +24,7 @@ Lists come in three main variations. **single-line** (default), **two-line** and
 ## API
 
 - [v-list](/api/v-list)
+- [v-list-group](/api/v-list-group)
 - [v-list-item](/api/v-list-item)
 - [v-list-item-action](/api/v-list-item-action)
 - [v-list-item-action-text](/api/v-list-item-action-text)

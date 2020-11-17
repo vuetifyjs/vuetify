@@ -23,12 +23,13 @@ By default, the `v-list-item-group` operates similarly to `v-item-group`. If a *
 
 ## API
 
-- [v-list-item-group](/api/v-list-item-group)
+- [v-list-group](/api/v-list-group)
 - [v-list-item](/api/v-list-item)
 - [v-list-item-action](/api/v-list-item-action)
 - [v-list-item-action-text](/api/v-list-item-action-text)
 - [v-list-item-avatar](/api/v-list-item-avatar)
 - [v-list-item-content](/api/v-list-item-content)
+- [v-list-item-group](/api/v-list-item-group)
 - [v-list-item-subtitle](/api/v-list-item-subtitle)
 - [v-list-item-title](/api/v-list-item-title)
 
