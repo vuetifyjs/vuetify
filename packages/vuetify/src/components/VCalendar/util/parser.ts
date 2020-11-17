@@ -21,7 +21,7 @@ export function getParsedCategories (
       const categoryName = typeof v === 'string' ? v
         : typeof v === 'object' && v && typeof v.categoryName === 'string' ? v.categoryName
           : parsedCategoryText(v, categoryText)
-      return { categoryName }
+      return Object.assign({ categoryName }, v)
     })
   }
   return []
