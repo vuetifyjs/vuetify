@@ -31,7 +31,7 @@ A simple text field with placeholder and/or label.
 
 #### Counter
 
-Use a **counter** prop to inform a user of the character limit. The counter does not perform any validation by itself. You will need to pair it with either the internal validation system, or a 3rd party library. You can use it on regular, box or outlined text fields.
+Use a **counter** prop to inform a user of the character limit. The counter does not perform any validation by itself - you will need to pair it with either the internal validation system, or a 3rd party library. The counter can be customised with the **counter-value** prop and **counter** scoped slot.
 
 <example file="v-text-field/prop-counter" />
 
