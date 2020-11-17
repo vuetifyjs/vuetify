@@ -32,7 +32,7 @@ const DataIteratorSlots = [
 
 const DataIteratorItemScopedProps = {
   expand: '(v: boolean) => void',
-  index: 'number | undefined',
+  index: 'number',
   item: 'any',
   isExpanded: 'boolean',
   isMobile: 'boolean',

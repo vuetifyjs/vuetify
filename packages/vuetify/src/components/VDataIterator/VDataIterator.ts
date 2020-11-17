@@ -201,7 +201,7 @@ export default mixins(
       this.expansion = expansion
       this.$emit('item-expanded', { item, value })
     },
-    createItemProps (item: any, index: number | undefined): DataItemProps {
+    createItemProps (item: any, index: number): DataItemProps {
       return {
         item,
         index,
@@ -246,9 +246,7 @@ export default mixins(
       if (this.$scopedSlots.item) {
         return props.items.map((item: any, index) => this.$scopedSlots.item!(this.createItemProps(
           item,
-          props.pagination
-            ? ((props.pagination.page - 1) * props.pagination.itemsPerPage + index)
-            : undefined
+          (props.pagination.page - 1) * props.pagination.itemsPerPage + index
         )))
       }
 

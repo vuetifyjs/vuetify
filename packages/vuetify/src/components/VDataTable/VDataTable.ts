@@ -232,7 +232,7 @@ export default mixins(
     getItemIndex (index: number) {
       return this.internalPagination
         ? ((this.internalPagination.page - 1) * this.computedItemsPerPage + index)
-        : undefined
+        : -1
     },
     genCaption (props: DataScopeProps) {
       if (this.caption) return [this.$createElement('caption', [this.caption])]
@@ -407,7 +407,7 @@ export default mixins(
         ? items.map((item, index) => this.genDefaultExpandedRow(item, this.getItemIndex(index)))
         : items.map((item, index) => this.genDefaultSimpleRow(item, this.getItemIndex(index)))
     },
-    genDefaultExpandedRow (item: any, index: number | undefined): VNode {
+    genDefaultExpandedRow (item: any, index: number): VNode {
       const isExpanded = this.isExpanded(item)
       const classes = {
         'v-data-table__expanded v-data-table__expanded__row': isExpanded,
@@ -426,7 +426,7 @@ export default mixins(
         this.$createElement('template', { slot: 'row.content' }, [expandedRow]),
       ])
     },
-    genDefaultSimpleRow (item: any, index: number | undefined, classes: Record<string, boolean> = {}): VNode {
+    genDefaultSimpleRow (item: any, index: number, classes: Record<string, boolean> = {}): VNode {
       const scopedSlots = getPrefixedScopedSlots('item.', this.$scopedSlots)
 
       const data = this.createItemProps(item, index)

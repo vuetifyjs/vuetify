@@ -10,7 +10,10 @@ export default Vue.extend({
   props: {
     headers: Array as PropType<DataTableHeader[]>,
     hideDefaultHeader: Boolean,
-    index: Number,
+    index: {
+      type: Number,
+      required: true,
+    },
     item: Object,
     rtl: Boolean,
   },
