@@ -48,7 +48,7 @@ describe('VCalendarCategory', () => {
     expect(wrapper.find('.v-calendar-category__column-header').text()).toEqual('20')
   })
 
-  it('should pass entire cateogry to interal', () => {
+  it('should pass entire cateogry to interval style method', () => {
     function intervalStyle (obj) {
       expect(obj.category).toEqual({ name: 'Nate', age: 20, categoryName: 'Nate' })
     }
