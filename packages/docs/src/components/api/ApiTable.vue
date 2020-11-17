@@ -31,10 +31,17 @@
               :key="i"
             >
               <template v-if="header === 'name'">
-                <div
-                  class="font-weight-bold text-mono"
-                  v-text="item[header]"
-                />
+                <span
+                  :id="item[header].replace('$', '')"
+                  class="name-item text-mono ml-n2"
+                >
+                  <span class="primary--text">#</span>
+                  <app-link
+                    :href="`#${item[header].replace('$', '')}`"
+                    class="font-weight-bold"
+                    v-text="item[header]"
+                  />
+                </span>
               </template>
 
               <template v-else-if="header === 'type' || header === 'signature'">
@@ -202,4 +209,11 @@
 
     .v-markdown ::v-deep p
       margin-bottom: 0
+
+  .name-item
+    white-space: nowrap
+
+    &:not(:hover):not(:focus)
+      span
+        opacity: 0
 </style>

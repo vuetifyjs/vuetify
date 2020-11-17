@@ -283,7 +283,7 @@ export default mixins<options &
         attrs: {
           value: this.internalValue,
           id: this.computedId,
-          disabled: this.isDisabled,
+          disabled: true,
           readonly: true,
           tabindex: -1,
           ...this.$attrs,

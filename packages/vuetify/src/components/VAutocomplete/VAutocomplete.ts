@@ -133,8 +133,7 @@ export default VSelect.extend({
       }
     },
     searchIsDirty (): boolean {
-      return this.internalSearch != null &&
-        this.internalSearch !== ''
+      return this.internalSearch != null
     },
     selectedItem (): any {
       if (this.multiple) return null
@@ -320,11 +319,6 @@ export default VSelect.extend({
       return this.hasSlot || this.multiple
         ? VSelect.options.methods.genSelections.call(this)
         : []
-    },
-    onBlur (e?: Event) {
-      // Copy from VTextField, instead of inheriting from VSelect
-      this.isFocused = false
-      e && this.$nextTick(() => this.$emit('blur', e))
     },
     onClick (e: MouseEvent) {
       if (!this.isInteractive) return
