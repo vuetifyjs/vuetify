@@ -229,11 +229,6 @@ export default mixins(
 
       return Object.assign(props, { headers: this.computedHeaders })
     },
-    getItemIndex (index: number) {
-      return this.internalPagination
-        ? ((this.internalPagination.page - 1) * this.computedItemsPerPage + index)
-        : -1
-    },
     genCaption (props: DataScopeProps) {
       if (this.caption) return [this.$createElement('caption', [this.caption])]
 
@@ -391,12 +386,11 @@ export default mixins(
 
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
-        const index = this.getItemIndex(i)
 
-        rows.push(this.$scopedSlots.item!(this.createItemProps(item, index)))
+        rows.push(this.$scopedSlots.item!(this.createItemProps(item, i)))
 
         if (this.isExpanded(item)) {
-          rows.push(this.$scopedSlots['expanded-item']!({ index, item, headers: this.computedHeaders }))
+          rows.push(this.$scopedSlots['expanded-item']!({ index: i, item, headers: this.computedHeaders }))
         }
       }
 
@@ -404,8 +398,8 @@ export default mixins(
     },
     genDefaultRows (items: any[], props: DataScopeProps) {
       return this.$scopedSlots['expanded-item']
-        ? items.map((item, index) => this.genDefaultExpandedRow(item, this.getItemIndex(index)))
-        : items.map((item, index) => this.genDefaultSimpleRow(item, this.getItemIndex(index)))
+        ? items.map((item, index) => this.genDefaultExpandedRow(item, index))
+        : items.map((item, index) => this.genDefaultSimpleRow(item, index))
     },
     genDefaultExpandedRow (item: any, index: number): VNode {
       const isExpanded = this.isExpanded(item)

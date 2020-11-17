@@ -246,7 +246,7 @@ export default mixins(
       if (this.$scopedSlots.item) {
         return props.items.map((item: any, index) => this.$scopedSlots.item!(this.createItemProps(
           item,
-          (props.pagination.page - 1) * props.pagination.itemsPerPage + index
+          index
         )))
       }
 
