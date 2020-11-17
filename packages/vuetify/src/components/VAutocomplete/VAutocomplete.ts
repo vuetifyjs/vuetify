@@ -134,8 +134,7 @@ export default VSelect.extend({
       }
     },
     searchIsDirty (): boolean {
-      return this.internalSearch != null &&
-        this.internalSearch !== ''
+      return this.internalSearch != null
     },
     selectedItem (): any {
       if (this.multiple) return null
