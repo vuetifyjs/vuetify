@@ -13,5 +13,9 @@
   },
   "events": {
     "change": "Emitted when the component value is changed by user interaction"
+  },
+  "slots": {
+    "next": "Slot displaying the arrow switching to the next item",
+    "prev": "Slot displaying the arrow switching to the previous item"
   }
 }

@@ -368,6 +368,12 @@ exports[`VDatePicker.ts should match snapshot with colored picker & header 1`] =
                   </div>
                 </button>
               </td>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -736,6 +742,12 @@ exports[`VDatePicker.ts should match snapshot with colored picker 1`] = `
                     30
                   </div>
                 </button>
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
               </td>
             </tr>
           </tbody>
@@ -1117,6 +1129,8 @@ exports[`VDatePicker.ts should match snapshot with dark theme 1`] = `
                   </div>
                 </button>
               </td>
+              <td>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -1496,6 +1510,8 @@ exports[`VDatePicker.ts should match snapshot with default settings 1`] = `
                     31
                   </div>
                 </button>
+              </td>
+              <td>
               </td>
             </tr>
           </tbody>
@@ -3457,6 +3473,8 @@ exports[`VDatePicker.ts should render disabled picker 1`] = `
                   </div>
                 </button>
               </td>
+              <td>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -3836,6 +3854,8 @@ exports[`VDatePicker.ts should render flat picker 1`] = `
                     31
                   </div>
                 </button>
+              </td>
+              <td>
               </td>
             </tr>
           </tbody>
@@ -4217,6 +4237,8 @@ exports[`VDatePicker.ts should render picker with elevation 1`] = `
                   </div>
                 </button>
               </td>
+              <td>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -4596,6 +4618,8 @@ exports[`VDatePicker.ts should render readonly picker 1`] = `
                     31
                   </div>
                 </button>
+              </td>
+              <td>
               </td>
             </tr>
           </tbody>

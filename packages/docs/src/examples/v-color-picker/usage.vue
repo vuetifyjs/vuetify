@@ -33,6 +33,7 @@
         booleans: [
           'disabled',
           'hide-canvas',
+          'hide-sliders',
           'hide-inputs',
           'hide-mode-switch',
           'show-swatches',

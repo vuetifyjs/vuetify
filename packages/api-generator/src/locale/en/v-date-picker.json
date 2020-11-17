@@ -23,6 +23,7 @@
     "scrollable": "Allows changing displayed month with mouse scroll",
     "selectedItemsText": "Text used for translating the number of selected dates when using *multiple* prop. Can also be customizing globally in [Internationalization](/customization/internationalization).",
     "showCurrent": "Toggles visibility of the current date/month outline or shows the provided date/month as a current",
+    "showAdjacentMonths": "Toggles visibility of days from previous and next months",
     "showWeek": "Toggles visibility of the week numbers in the body of the calendar",
     "titleDateFormat": "Allows you to customize the format of the date string that appears in the title of the date picker. Called with date (ISO 8601 **date** string) arguments.",
     "type": "Determines the type of the picker - `date` for date picker, `month` for month picker",

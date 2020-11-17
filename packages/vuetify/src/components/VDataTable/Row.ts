@@ -29,7 +29,7 @@ export default Vue.extend({
       const regularSlot = computedSlots[slotName]
 
       if (scopedSlot) {
-        children.push(scopedSlot({ item: props.item, header, index: props.index, value }))
+        children.push(scopedSlot({ item: props.item, isMobile: false, header, index: props.index, value }))
       } else if (regularSlot) {
         children.push(regularSlot)
       } else {
