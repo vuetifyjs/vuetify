@@ -140,26 +140,31 @@ export default BaseItemGroup.extend({
       icon: string,
       fn: () => void
     ) {
+      const on = {
+        click: () => {
+          this.changedByDelimiters = true
+          fn()
+        },
+      }
+      const attrs = {
+        'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`),
+      }
+      const children = this.$scopedSlots[direction]?.({
+        on,
+        attrs,
+      }) ?? [this.$createElement(VBtn, {
+        props: { icon: true },
+        attrs,
+        on,
+      }, [
+        this.$createElement(VIcon, {
+          props: { large: true },
+        }, icon),
+      ])]
+
       return this.$createElement('div', {
         staticClass: `v-window__${direction}`,
-      }, [
-        this.$createElement(VBtn, {
-          props: { icon: true },
-          attrs: {
-            'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`),
-          },
-          on: {
-            click: () => {
-              this.changedByDelimiters = true
-              fn()
-            },
-          },
-        }, [
-          this.$createElement(VIcon, {
-            props: { large: true },
-          }, icon),
-        ]),
-      ])
+      }, children)
     },
     genControlIcons () {
       const icons = []
