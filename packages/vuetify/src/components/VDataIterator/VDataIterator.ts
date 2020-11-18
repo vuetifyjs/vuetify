@@ -69,6 +69,7 @@ export default mixins(
     expansion: {} as Record<string, boolean>,
     internalCurrentItems: [] as any[],
     shiftKeyDown: false,
+    lastEntry: -1,
   }),
 
   computed: {
@@ -198,18 +199,10 @@ export default mixins(
       if (value) selection[key] = item
       else delete selection[key]
 
-      if (this.shiftKeyDown && !this.singleSelect) {
-        const index = this.selectableItems.findIndex(x => x.name === item.name)
-        for (let i = index - 1; i >= 0; i--) {
-          const currentItem = this.selectableItems[i]
-          if (this.isSelected(currentItem) === value) break
-          const key = getObjectValueByPath(currentItem, this.itemKey)
-          if (value) selection[key] = currentItem
-          else delete selection[key]
-          emit && this.$emit('item-selected', { currentItem, value })
-        }
-      }
-
+      const index = this.selectableItems.findIndex(x => x.name === item.name)
+      if (this.lastEntry === -1) this.lastEntry = index
+      else if (this.shiftKeyDown && !this.singleSelect && emit) this.multipleSelect(value, emit, selection, index)
+      this.lastEntry = index
       if (this.singleSelect && emit) {
         const keys = Object.keys(this.selection)
         const old = keys.length && getObjectValueByPath(this.selection[keys[0]], this.itemKey)
@@ -217,6 +210,25 @@ export default mixins(
       }
       this.selection = selection
       emit && this.$emit('item-selected', { item, value })
+    },
+    multipleSelect (value = true, emit = true, selection: any, index: number): void {
+      if (index < this.lastEntry) {
+        for (let i = index; i <= this.lastEntry; i++) {
+          const currentItem = this.selectableItems[i]
+          const key = getObjectValueByPath(currentItem, this.itemKey)
+          if (value) selection[key] = currentItem
+          else delete selection[key]
+          emit && this.$emit('item-selected', { currentItem, value })
+        }
+      } else if (index > this.lastEntry) {
+        for (let i = this.lastEntry; i <= index; i++) {
+          const currentItem = this.selectableItems[i]
+          const key = getObjectValueByPath(currentItem, this.itemKey)
+          if (value) selection[key] = currentItem
+          else delete selection[key]
+          emit && this.$emit('item-selected', { currentItem, value })
+        }
+      }
     },
     isExpanded (item: any): boolean {
       return this.expansion[getObjectValueByPath(item, this.itemKey)] || false
