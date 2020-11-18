@@ -17,11 +17,12 @@ export function getParsedCategories (
 ): CalendarCategory[] {
   if (typeof categories === 'string') return categories.split(/\s*,\s/)
   if (Array.isArray(categories)) {
-    return categories.map((v: CalendarCategory) => {
-      const categoryName = typeof v === 'string' ? v
-        : typeof v === 'object' && v && typeof v.categoryName === 'string' ? v.categoryName
-          : parsedCategoryText(v, categoryText)
-      return Object.assign({ categoryName }, v)
+    return categories.map((category: CalendarCategory) => {
+      const categoryName = typeof category === 'string' ? category
+        : typeof category === 'object' && category && typeof category.categoryName === 'string' ? category.categoryName
+          : parsedCategoryText(category, categoryText)
+      if (typeof category === 'string') return { categoryName }
+      return Object.assign({ categoryName }, category)
     })
   }
   return []
