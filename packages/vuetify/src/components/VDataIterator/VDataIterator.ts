@@ -203,6 +203,7 @@ export default mixins(
       if (this.lastEntry === -1) this.lastEntry = index
       else if (this.shiftKeyDown && !this.singleSelect && emit) this.multipleSelect(value, emit, selection, index)
       this.lastEntry = index
+
       if (this.singleSelect && emit) {
         const keys = Object.keys(this.selection)
         const old = keys.length && getObjectValueByPath(this.selection[keys[0]], this.itemKey)
@@ -212,22 +213,14 @@ export default mixins(
       emit && this.$emit('item-selected', { item, value })
     },
     multipleSelect (value = true, emit = true, selection: any, index: number): void {
-      if (index < this.lastEntry) {
-        for (let i = index; i <= this.lastEntry; i++) {
-          const currentItem = this.selectableItems[i]
-          const key = getObjectValueByPath(currentItem, this.itemKey)
-          if (value) selection[key] = currentItem
-          else delete selection[key]
-          emit && this.$emit('item-selected', { currentItem, value })
-        }
-      } else if (index > this.lastEntry) {
-        for (let i = this.lastEntry; i <= index; i++) {
-          const currentItem = this.selectableItems[i]
-          const key = getObjectValueByPath(currentItem, this.itemKey)
-          if (value) selection[key] = currentItem
-          else delete selection[key]
-          emit && this.$emit('item-selected', { currentItem, value })
-        }
+      const start = index < this.lastEntry ? index : this.lastEntry
+      const end = index < this.lastEntry ? this.lastEntry : index
+      for (let i = start; i <= end; i++) {
+        const currentItem = this.selectableItems[i]
+        const key = getObjectValueByPath(currentItem, this.itemKey)
+        if (value) selection[key] = currentItem
+        else delete selection[key]
+        emit && this.$emit('item-selected', { currentItem, value })
       }
     },
     isExpanded (item: any): boolean {
