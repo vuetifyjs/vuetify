@@ -24,7 +24,7 @@ describe('VCalendarCategory', () => {
     }
   })
 
-  it('should test categoryText prop as a string', async () => {
+  it('should test categoryText prop as a string', () => {
     const wrapper = mountFunction({
       propsData: {
         categories: [{ name: 'Nate' }],
@@ -35,7 +35,7 @@ describe('VCalendarCategory', () => {
     expect(wrapper.find('.v-calendar-category__column-header').text()).toEqual('Nate')
   })
 
-  it('should test categoryText prop as a function', async () => {
+  it('should test categoryText prop as a function', () => {
     const wrapper = mountFunction({
       propsData: {
         categories: [{ name: 'Nate', age: 20 }],
@@ -46,5 +46,19 @@ describe('VCalendarCategory', () => {
     })
 
     expect(wrapper.find('.v-calendar-category__column-header').text()).toEqual('20')
+  })
+
+  it('should pass entire cateogry to interval style method', () => {
+    function intervalStyle (obj) {
+      expect(obj.category).toEqual({ name: 'Nate', age: 20, categoryName: 'Nate' })
+    }
+
+    const wrapper = mountFunction({
+      propsData: {
+        categories: [{ name: 'Nate', age: 20 }],
+        categoryText: 'name',
+        intervalStyle,
+      },
+    })
   })
 })
