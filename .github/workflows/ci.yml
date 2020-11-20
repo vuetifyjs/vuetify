@@ -53,7 +53,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn lerna run build --scope vuetify
-      - run: echo ::set-env name=RELEASE_TAG::${GITHUB_REF#refs/tags/}
+      - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
       - run: rm -rf release
       - run: cp -r ./packages/vuetify/dist release
       - run: for file in ./release/*.*; do mv "$file" "${file/release\/vuetify/release/vuetify-${RELEASE_TAG}}"; done
