@@ -61,4 +61,4 @@ export default {
       currentPage: 'Текуща страница, Страница {0}',
     },
   },
-};
+}
