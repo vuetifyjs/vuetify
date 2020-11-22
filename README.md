@@ -64,7 +64,7 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
 
 Funds donated via Patreon go directly to support John and Heather's full-time work on Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
 
-<h3 align="center"><b>Premiere Sponsors</b></h3>
+<h3 align="center"><b>Diamond Sponsors</b></h3>
 
 <table>
   <tbody>
@@ -78,7 +78,7 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
   </tbody>
 </table>
 
-<h3 align="center"><b>Diamond Sponsors</b></h3>
+<h3 align="center"><b>Platinum Sponsors</b></h3>
 
 <table>
   <tbody>
@@ -98,16 +98,11 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
           <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
         </a>
       </td>
-      <td>
-        <a href="http://www.skaletech.com/?ref=vuetify-github">
-          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/skale.png">
-        </a>
-      </td>
     </tr>
   </tbody>
 </table>
 
-<h3 align="center"><b>Platinum Sponsors</b></h3>
+<h3 align="center"><b>Gold Sponsors</b></h3>
 
 <table>
   <tbody>
@@ -123,8 +118,8 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
         </a>
       </td>
       <td>
-        <a href="https://analytics.quantedsquare.com/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/quanted-square.svg">
+        <a href="https://analytics.quantedsquare.com/">
+          <img height="36px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/quanted-square-light-sm.png">
         </a>
       </td>
       <td>
@@ -132,21 +127,35 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
           <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/hype-logo-light.svg">
         </a>
       </td>
+    </tr>
+    <tr></tr>
+    <tr>
       <td>
         <a href="https://www.cosmicjs.com/?ref=vuetify-github">
           <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/cosmic-logo-light.svg">
         </a>
       </td>
-    </tr><tr></tr>
-    <tr>
       <td>
-        <a href="https://ekorre.hr/?ref=vuetify-github">
-          <img height="32px" src="https://cdn.vuetifyjs.com/images/backers/ekorre-logo-light.png">
+        <a href="http://www.skaletech.com/?ref=vuetify-github">
+          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/skale.png">
         </a>
       </td>
       <td>
         <a href="https://www.dealerdesk.de/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/dealerdesk-logo-light.png">
+          <img height="26px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/dealerdesk-light-sm.png">
+        </a>
+      </td>
+      <td>
+        <a href="https://www.elfo.net/?ref=vuetify-github">
+          <img height="51px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/writers-per-hour.png">
+        </a>
+      </td>
+    </tr>
+    <tr></tr>
+    <tr>
+      <td>
+        <a href="https://ad.doubleclick.net/ddm/trackclk/N297201.3972065VUEPARTNERPROGRAM/B24927215.287498450;dc_trk_aid=481168480;dc_trk_cid=141067660;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;gdpr=$%7BGDPR%7D;gdpr_consent=$%7BGDPR_CONSENT_755%7D?https://www.ionos.de/partner?utm_source=Vue&utm_medium=paid-social&utm_campaign=ION-DEU-VUE-ABP-AWR-AgencyBusiness&utm_term=&utm_content=ION-DEU-VUE-ABP-AWR-AgencyBusiness&ac=OM.PU.PUo54K418813T7073a">
+          <img height="35px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/ionos-light-sm.png">
         </a>
       </td>
     </tr>
@@ -170,12 +179,7 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
     <tr>
       <td>
         <a href="http://crossword-solver.io/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/crossword-solver-logo-light.svg">
-        </a>
-      </td>
-      <td>
-        <a href="https://papersowl.com/write-my-paper-for-me">
-          <img src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/papersowl-logo-light.png" height="32">
+          <img height="44px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/crossword-solver-logo-light.svg">
         </a>
       </td>
       <td>
