@@ -107,7 +107,7 @@
   
   extend("regex", {
       ...regex,
-      message: "{_field_} {_value_} does not match {regex}"
+      message: "{_field_} {_value_} does not match {regex}",
   })
     
   extend('email', {
