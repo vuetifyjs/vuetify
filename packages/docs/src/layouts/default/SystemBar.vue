@@ -11,6 +11,7 @@
       href="https://store.vuetifyjs.com/?utm_source=vuetify&utm_medium=banner&utm_campaign=blackfriday&discount=SNEAKPEAK"
       rel="noopener"
       target="_blank"
+      @click="onClick"
     />
   </v-system-bar>
 </template>
@@ -35,6 +36,12 @@
     methods: {
       onClick () {
         this.last = Date.now()
+
+        this.$gtag.event('click', {
+          event_category: 'vuetify-banner',
+          event_label: 'black-friday-2020',
+          value: 'home',
+        })
       },
     },
   }
