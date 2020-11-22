@@ -1,45 +1,68 @@
 <template>
   <v-system-bar
-    v-if="bar"
+    v-if="hasPromotion"
     app
-    class="justify-center"
-    color="#1697F6"
+    color="#1D1D22"
     dark
-    window
+    height="84"
   >
-    <v-responsive max-width="24" />
-
-    <v-spacer />
-
-    <div>
-      You are browsing the new v2.x documentation.
-
-      <a
-        class="text-subtitle-1 white--text text-decoration-none text-body-2"
-        href="https://v2.vuetifyjs.com"
-        rel="noopener"
-        target="_blank"
-      >
-        Click here
-
-        <v-icon small class="mr-0">$mdiOpenInNew</v-icon>
-      </a>
-
-      for the old v2.x documentation.
-    </div>
-
-    <v-spacer />
-
-    <v-icon @click="bar = false">
-      $close
-    </v-icon>
+    <a
+      class="bf-banner"
+      href="https://store.vuetifyjs.com/?utm_source=vuetify&utm_medium=banner&utm_campaign=blackfriday&discount=SNEAKPEAK"
+      rel="noopener"
+      target="_blank"
+    />
   </v-system-bar>
 </template>
 
 <script>
+  // Utilities
+  // import { differenceInHours } from 'date-fns'
+  import { sync } from 'vuex-pathify'
+
   export default {
     name: 'HomeSystemBar',
 
-    data: () => ({ bar: false }),
+    computed: {
+      last: sync('user/last@promotion'),
+      hasPromotion () {
+        return true
+
+        // return differenceInHours(Date.now(), Number(this.last)) > 1
+      },
+    },
+
+    methods: {
+      onClick () {
+        this.last = Date.now()
+      },
+    },
   }
 </script>
+
+<style lang="sass">
+  .bf-banner
+    background-color: #1D1D22
+    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/black-friday-2020/bf-mobile.svg)
+    background-position: center
+    background-repeat: no-repeat
+    background-size: contain
+    bottom: 0
+    display: block
+    height: inherit
+    left: 0
+    overflow: hidden
+    position: absolute
+    right: 0
+    text-indent: 100%
+    top: 0
+    white-space: nowrap
+
+  @media (min-width: 660px)
+    .bf-banner
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/black-friday-2020/bf-tablet.svg)
+
+  @media (min-width: 992px)
+    .bf-banner
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/black-friday-2020/bf-desktop.svg)
+</style>
