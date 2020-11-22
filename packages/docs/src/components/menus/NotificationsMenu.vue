@@ -17,7 +17,7 @@
         <template #icon>
           <v-badge
             :value="unread.length"
-            color="red"
+            color="#ED561B"
             dot
             left
             overlap
