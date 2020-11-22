@@ -174,6 +174,9 @@
     .v-stepper__content, .v-stepper__wrapper
       transition: .3s map-get($transition, 'swing')
 
+  &--flat
+    +elevation(0, true)
+
   &--vertical
     padding-bottom: $stepper-vertical-padding-bottom
 
