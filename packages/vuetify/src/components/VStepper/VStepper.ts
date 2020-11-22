@@ -7,6 +7,7 @@ import VStepperContent from './VStepperContent'
 
 // Mixins
 import { provide as RegistrableProvide } from '../../mixins/registrable'
+import Elevatable from '../../mixins/elevatable'
 import Proxyable from '../../mixins/proxyable'
 import Themeable from '../../mixins/themeable'
 
@@ -19,6 +20,7 @@ import { VNode } from 'vue'
 
 const baseMixins = mixins(
   RegistrableProvide('stepper'),
+  Elevatable,
   Proxyable,
   Themeable
 )
@@ -39,6 +41,7 @@ export default baseMixins.extend({
 
   props: {
     altLabels: Boolean,
+    flat: Boolean,
     nonLinear: Boolean,
     vertical: Boolean,
   },
@@ -62,6 +65,7 @@ export default baseMixins.extend({
     classes (): object {
       return {
         'v-stepper--is-booted': this.isBooted,
+        'v-stepper--flat': this.flat,
         'v-stepper--vertical': this.vertical,
         'v-stepper--alt-labels': this.altLabels,
         'v-stepper--non-linear': this.nonLinear,
