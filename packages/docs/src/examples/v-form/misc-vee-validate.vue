@@ -109,7 +109,7 @@
       ...regex,
       message: "{_field_} {_value_} does not match {regex}",
   })
-    
+
   extend('email', {
     ...email,
     message: 'Email must be valid',
