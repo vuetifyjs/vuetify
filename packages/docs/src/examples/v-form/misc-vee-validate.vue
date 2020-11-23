@@ -104,7 +104,7 @@
     ...max,
     message: '{_field_} may not be greater than {length} characters',
   })
-  
+
   extend('regex', {
     ...regex,
     message: '{_field_} {_value_} does not match {regex}',
