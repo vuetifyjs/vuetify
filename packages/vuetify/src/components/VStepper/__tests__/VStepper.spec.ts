@@ -28,4 +28,14 @@ describe('VStepper.ts', () => {
 
     expect(wrapper.vm.internalValue).toBe(0)
   })
+
+  it('should render a flat stepper', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        flat: true,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

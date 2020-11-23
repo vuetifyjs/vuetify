@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VStepper.ts should render a flat stepper 1`] = `
+<div class="v-stepper v-stepper--flat theme--light">
+</div>
+`;
