@@ -90,10 +90,15 @@
 </template>
 
 <script>
-  import { required, email, max, regex } from 'vee-validate/dist/rules'
+  import { required, digits, email, max, regex } from 'vee-validate/dist/rules'
   import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
 
   setInteractionMode('eager')
+
+  extend('digits', {
+    ...digits,
+    message: '{_field_} needs to be {length} digits. ({_value_})',
+  })
 
   extend('required', {
     ...required,
