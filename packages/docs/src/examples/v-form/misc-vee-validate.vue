@@ -24,7 +24,7 @@
           required: true,
           digits: 7,
           regex: '^71|72|74|76|81|82|84|85|86|87|88|89\d{5}$'
-          }"
+        }"
       >
         <v-text-field
           v-model="phoneNumber"
