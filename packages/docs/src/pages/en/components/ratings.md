@@ -57,7 +57,7 @@ Utilize the same sizing classes available in `v-icon` or provide your own with t
 
 Provide a label to assistive technologies for icons.
 
-<example file="v-rating/icon-label" />
+<example file="v-rating/prop-icon-label" />
 
 ### Slots
 
