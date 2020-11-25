@@ -118,7 +118,7 @@ export default baseMixins.extend<options>().extend({
     enter () {
       setTimeout(() => {
         window.scrollTo({
-          top: 0
+          top: 0,
         })
       }, 1000)
       let scrollHeight = 0
