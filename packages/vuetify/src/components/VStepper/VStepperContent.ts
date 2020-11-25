@@ -117,7 +117,7 @@ export default baseMixins.extend<options>().extend({
     },
     enter () {
       setTimeout(() => {
-        window.scrollTo({
+        this.$refs.wrapper.scrollTo({
           top: 0,
         })
       }, 1000)
