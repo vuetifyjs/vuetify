@@ -116,6 +116,12 @@ export default baseMixins.extend<options>().extend({
       this.height = 'auto'
     },
     enter () {
+      setTimeout(() => {
+        window.scrollTo({
+          top: 0
+        })
+      }, 1000)
+      
       let scrollHeight = 0
 
       // Render bug with height
