@@ -121,7 +121,6 @@ export default baseMixins.extend<options>().extend({
           top: 0
         })
       }, 1000)
-      
       let scrollHeight = 0
 
       // Render bug with height
