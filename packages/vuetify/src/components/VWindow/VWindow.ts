@@ -146,7 +146,12 @@ export default BaseItemGroup.extend({
           attrs: {
             'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`),
           },
-          on: { click },
+          on: {
+            click: (e: Event) => {
+              e.stopPropagation()
+              click()
+            },
+          },
         }, [
           this.$createElement(VIcon, {
             props: { large: true },
