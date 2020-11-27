@@ -13,35 +13,50 @@
       target="_blank"
       @click="onClick"
     />
+
+    <v-btn
+      fab
+      small
+      absolute
+      right
+      @click="onClose"
+    >
+      <v-icon class="mr-0">$clear</v-icon>
+    </v-btn>
   </v-system-bar>
 </template>
 
 <script>
   // Utilities
-  // import { differenceInHours } from 'date-fns'
-  import { sync } from 'vuex-pathify'
+  import { differenceInHours, isBefore } from 'date-fns'
+  import { get, sync } from 'vuex-pathify'
 
   export default {
-    name: 'HomeSystemBar',
+    name: 'DefaultSystemBar',
 
     computed: {
       last: sync('user/last@promotion'),
+      name: get('route/name'),
       hasPromotion () {
-        return true
+        const now = Date.now()
 
-        // return differenceInHours(Date.now(), Number(this.last)) > 1
+        return (
+          isBefore(now, new Date(2020, 12, 1)) &&
+          differenceInHours(now, Number(this.last)) > 1
+        )
       },
     },
 
     methods: {
       onClick () {
-        this.last = Date.now()
-
         this.$gtag.event('click', {
           event_category: 'vuetify-banner',
           event_label: 'black-friday-2020',
-          value: 'home',
+          value: this.name.toLowerCase(),
         })
+      },
+      onClose () {
+        this.last = Date.now()
       },
     },
   }
