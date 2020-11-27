@@ -8,7 +8,7 @@
 
     <home-footer />
 
-    <default-snackbar />
+    <!-- <default-snackbar /> -->
 
     <default-settings />
   </v-app>
