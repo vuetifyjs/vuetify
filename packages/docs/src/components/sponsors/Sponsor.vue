@@ -10,6 +10,7 @@
     rel="noopener"
     rounded
     target="_blank"
+    @click="onClick"
   >
     <v-img
       :alt="value.metadata.name"
@@ -41,6 +42,7 @@
     },
 
     computed: {
+      name: get('route/name'),
       sponsors: get('sponsors/all'),
       src () {
         const {
@@ -66,6 +68,16 @@
       value () {
         return this.sponsor || this.sponsors.find(sponsor => {
           return sponsor.slug === this.slug
+        })
+      },
+    },
+
+    methods: {
+      onClick () {
+        this.$gtag.event('click', {
+          event_category: 'vuetify-sponsor',
+          event_label: this.value.slug,
+          value: this.name.toLowerCase(),
         })
       },
     },
