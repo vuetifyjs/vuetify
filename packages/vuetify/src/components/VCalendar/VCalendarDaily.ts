@@ -192,6 +192,10 @@ export default CalendarWithIntervals.extend({
           height,
           ...styler(interval),
         },
+        on: {
+          dragover: (event: DragEvent) => event.preventDefault(),
+          drop: (event: DragEvent) => this.$emit('drop:event', { event, interval }),
+        },
       }
 
       const children = getSlot(this, 'interval', () => this.getSlotScope(interval))
