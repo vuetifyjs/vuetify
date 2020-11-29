@@ -225,14 +225,12 @@ export default BaseItemGroup.extend({
       const itemsLength = this.items.length
       const lastIndex = itemsLength - 1
 
-      if (itemsLength > 2) {
-        if (val === lastIndex && oldVal === 0) {
-          return true
-        } else if (val === 0 && oldVal === lastIndex) {
-          return false
-        } else {
-          return val < oldVal
-        }
+      if (itemsLength <= 2) return val < oldVal
+
+      if (val === lastIndex && oldVal === 0) {
+        return true
+      } else if (val === 0 && oldVal === lastIndex) {
+        return false
       } else {
         return val < oldVal
       }
