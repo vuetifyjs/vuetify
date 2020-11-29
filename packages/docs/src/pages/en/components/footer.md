@@ -29,12 +29,6 @@ The `v-footer` component in its simplest form is a container.
 
 ### Props
 
-#### Absolute Footer
-
-The `absolute` prop positions footers absolutely at the bottom of their parent container.
-
-<example file="v-footer/prop-absolute" />
-
 #### Padless Footer
 
 The `padless` prop removes all default padding from the footer component.

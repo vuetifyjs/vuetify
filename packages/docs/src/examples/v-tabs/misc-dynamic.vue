@@ -14,6 +14,7 @@
     </v-tabs>
     <v-card-text class="text-center">
       <v-btn
+        :disabled="!length"
         text
         @click="length--"
       >

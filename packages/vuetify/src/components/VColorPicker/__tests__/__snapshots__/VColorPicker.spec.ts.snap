@@ -29,6 +29,7 @@ exports[`VColorPicker.ts should change canvas height 1`] = `
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="0"
                        id="input-15"
+                       disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -65,6 +66,7 @@ exports[`VColorPicker.ts should change canvas height 1`] = `
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="1"
                        id="input-16"
+                       disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -171,6 +173,7 @@ exports[`VColorPicker.ts should hide canvas 1`] = `
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="0"
                        id="input-35"
+                       disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -207,6 +210,7 @@ exports[`VColorPicker.ts should hide canvas 1`] = `
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="1"
                        id="input-36"
+                       disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -325,6 +329,7 @@ exports[`VColorPicker.ts should hide inputs 1`] = `
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="0"
                        id="input-45"
+                       disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -361,6 +366,7 @@ exports[`VColorPicker.ts should hide inputs 1`] = `
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="1"
                        id="input-46"
+                       disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -426,6 +432,7 @@ exports[`VColorPicker.ts should not show alpha controls if given hex value witho
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="120"
                        id="input-70"
+                       disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -534,6 +541,7 @@ exports[`VColorPicker.ts should render color picker 1`] = `
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="0"
                        id="input-5"
+                       disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -570,6 +578,7 @@ exports[`VColorPicker.ts should render color picker 1`] = `
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="1"
                        id="input-6"
+                       disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -688,6 +697,7 @@ exports[`VColorPicker.ts should render flat picker 1`] = `
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="0"
                        id="input-89"
+                       disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -724,6 +734,7 @@ exports[`VColorPicker.ts should render flat picker 1`] = `
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="1"
                        id="input-90"
+                       disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -842,6 +853,7 @@ exports[`VColorPicker.ts should render picker with elevation 1`] = `
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="0"
                        id="input-99"
+                       disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -878,6 +890,7 @@ exports[`VColorPicker.ts should render picker with elevation 1`] = `
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="1"
                        id="input-100"
+                       disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -996,6 +1009,7 @@ exports[`VColorPicker.ts should show swatches 1`] = `
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="0"
                        id="input-25"
+                       disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -1032,6 +1046,7 @@ exports[`VColorPicker.ts should show swatches 1`] = `
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="1"
                        id="input-26"
+                       disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -1968,6 +1983,7 @@ exports[`VColorPicker.ts should work correctly when initial value is null 1`] = 
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="0"
                        id="input-79"
+                       disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
                 >
@@ -2004,6 +2020,7 @@ exports[`VColorPicker.ts should work correctly when initial value is null 1`] = 
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="1"
                        id="input-80"
+                       disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
                 >
