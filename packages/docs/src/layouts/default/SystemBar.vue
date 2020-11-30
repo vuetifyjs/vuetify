@@ -7,8 +7,8 @@
     height="84"
   >
     <a
-      class="bf-banner"
-      href="https://store.vuetifyjs.com/?utm_source=vuetify&utm_medium=banner&utm_campaign=blackfriday"
+      class="cm-banner"
+      href="https://store.vuetifyjs.com/?utm_source=vuetify&utm_medium=banner&utm_campaign=cybermonday"
       rel="noopener"
       target="_blank"
       @click="onClick"
@@ -51,7 +51,7 @@
       onClick () {
         this.$gtag.event('click', {
           event_category: 'vuetify-banner',
-          event_label: 'black-friday-2020',
+          event_label: 'cyber-monday-2020',
           value: this.name.toLowerCase(),
         })
       },
@@ -63,9 +63,9 @@
 </script>
 
 <style lang="sass">
-  .bf-banner
+  .cm-banner
     background-color: #1D1D22
-    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/black-friday-2020/bf-mobile.svg)
+    background-image: url(https://vuetifyjs.b-cdn.net/docs/images/promotions/cyber-monday-2020/cm-mobile.svg)
     background-position: center
     background-repeat: no-repeat
     background-size: contain
@@ -81,10 +81,10 @@
     white-space: nowrap
 
   @media (min-width: 660px)
-    .bf-banner
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/black-friday-2020/bf-tablet.svg)
+    .cm-banner
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/cyber-monday-2020/cm-tablet.svg)
 
   @media (min-width: 992px)
-    .bf-banner
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/black-friday-2020/bf-desktop.svg)
+    .cm-banner
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/cyber-monday-2020/cm-desktop.svg)
 </style>
