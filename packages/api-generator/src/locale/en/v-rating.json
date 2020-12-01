@@ -8,6 +8,7 @@
     "halfIcon": "The icon displayed when half (requires **half-increments** prop)",
     "halfIncrements": "Allows the selection of half increments",
     "hover": "Provides visual feedback when hovering over icons",
+    "iconLabel": "The **aria-label** used for icons",
     "length": "The amount of ratings to show",
     "readonly": "Removes all hover effects and pointer events",
     "value": "The rating value"

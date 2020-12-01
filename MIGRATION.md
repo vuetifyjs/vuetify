@@ -757,7 +757,7 @@ _Developer notes: The tabs-items component does not have to be provided and is o
 <v-text-field filled></v-text-field>
 ```
 
-#### `v-text-field`, `v-select`, `v-textarea`, `v-autocomplete`, `v-combobox`, `v-btn`, `v-alert`
+#### `v-text-field`, `v-select`, `v-textarea`, `v-autocomplete`, `v-combobox`, `v-btn`, `v-alert`, `v-chip`
 * The **outline** prop is now **outlined**
 
 ```vue
