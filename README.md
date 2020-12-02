@@ -154,7 +154,7 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
     <tr></tr>
     <tr>
       <td>
-        <a href="https://ad.doubleclick.net/ddm/trackclk/N297201.3972065VUEPARTNERPROGRAM/B24993926.288786702;dc_trk_aid=482395011;dc_trk_cid=141852548;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755}?https://www.ionos.com/partner?utm_source=Vue&utm_medium=paid-social&utm_campaign=ION-USA-VUE-ABP-AWR-AgencyBusiness&utm_term=&utm_content=ION-USA-VUE-ABP-AWR-AgencyBusiness&ac=OM.US.USo54K418913T7073a">
+        <a href="https://www.ionos.com/partner">
           <img height="35px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/ionos-light-sm.png">
         </a>
       </td>
