@@ -70,184 +70,184 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-on-success: 0,0,0;
       --v-theme-on-warning: 0,0,0;
     }
-    .v-theme-provider .bg-primary-lighten-1 {
+    .bg-primary-lighten-1 {
       background: rgb(var(--v-theme-primary-lighten-1));
     }
-    .v-theme-provider .text-primary-lighten-1 {
+    .text-primary-lighten-1 {
       color: rgb(var(--v-theme-primary-lighten-1));
     }
-    .v-theme-provider .border-primary-lighten-1 {
+    .border-primary-lighten-1 {
       border-color: rgb(var(--v-theme-primary-lighten-1));
     }
-    .v-theme-provider .bg-primary-lighten-2 {
+    .bg-primary-lighten-2 {
       background: rgb(var(--v-theme-primary-lighten-2));
     }
-    .v-theme-provider .text-primary-lighten-2 {
+    .text-primary-lighten-2 {
       color: rgb(var(--v-theme-primary-lighten-2));
     }
-    .v-theme-provider .border-primary-lighten-2 {
+    .border-primary-lighten-2 {
       border-color: rgb(var(--v-theme-primary-lighten-2));
     }
-    .v-theme-provider .bg-primary-darken-1 {
+    .bg-primary-darken-1 {
       background: rgb(var(--v-theme-primary-darken-1));
     }
-    .v-theme-provider .text-primary-darken-1 {
+    .text-primary-darken-1 {
       color: rgb(var(--v-theme-primary-darken-1));
     }
-    .v-theme-provider .border-primary-darken-1 {
+    .border-primary-darken-1 {
       border-color: rgb(var(--v-theme-primary-darken-1));
     }
-    .v-theme-provider .bg-secondary-lighten-1 {
+    .bg-secondary-lighten-1 {
       background: rgb(var(--v-theme-secondary-lighten-1));
     }
-    .v-theme-provider .text-secondary-lighten-1 {
+    .text-secondary-lighten-1 {
       color: rgb(var(--v-theme-secondary-lighten-1));
     }
-    .v-theme-provider .border-secondary-lighten-1 {
+    .border-secondary-lighten-1 {
       border-color: rgb(var(--v-theme-secondary-lighten-1));
     }
-    .v-theme-provider .bg-secondary-lighten-2 {
+    .bg-secondary-lighten-2 {
       background: rgb(var(--v-theme-secondary-lighten-2));
     }
-    .v-theme-provider .text-secondary-lighten-2 {
+    .text-secondary-lighten-2 {
       color: rgb(var(--v-theme-secondary-lighten-2));
     }
-    .v-theme-provider .border-secondary-lighten-2 {
+    .border-secondary-lighten-2 {
       border-color: rgb(var(--v-theme-secondary-lighten-2));
     }
-    .v-theme-provider .bg-secondary-darken-1 {
+    .bg-secondary-darken-1 {
       background: rgb(var(--v-theme-secondary-darken-1));
     }
-    .v-theme-provider .text-secondary-darken-1 {
+    .text-secondary-darken-1 {
       color: rgb(var(--v-theme-secondary-darken-1));
     }
-    .v-theme-provider .border-secondary-darken-1 {
+    .border-secondary-darken-1 {
       border-color: rgb(var(--v-theme-secondary-darken-1));
     }
-    .v-theme-provider .bg-background {
+    .bg-background {
       background: rgb(var(--v-theme-background));
     }
-    .v-theme-provider .text-background {
+    .text-background {
       color: rgb(var(--v-theme-background));
     }
-    .v-theme-provider .border-background {
+    .border-background {
       border-color: rgb(var(--v-theme-background));
     }
-    .v-theme-provider .bg-surface {
+    .bg-surface {
       background: rgb(var(--v-theme-surface));
     }
-    .v-theme-provider .text-surface {
+    .text-surface {
       color: rgb(var(--v-theme-surface));
     }
-    .v-theme-provider .border-surface {
+    .border-surface {
       border-color: rgb(var(--v-theme-surface));
     }
-    .v-theme-provider .bg-primary {
+    .bg-primary {
       background: rgb(var(--v-theme-primary));
     }
-    .v-theme-provider .text-primary {
+    .text-primary {
       color: rgb(var(--v-theme-primary));
     }
-    .v-theme-provider .border-primary {
+    .border-primary {
       border-color: rgb(var(--v-theme-primary));
     }
-    .v-theme-provider .bg-secondary {
+    .bg-secondary {
       background: rgb(var(--v-theme-secondary));
     }
-    .v-theme-provider .text-secondary {
+    .text-secondary {
       color: rgb(var(--v-theme-secondary));
     }
-    .v-theme-provider .border-secondary {
+    .border-secondary {
       border-color: rgb(var(--v-theme-secondary));
     }
-    .v-theme-provider .bg-accent {
+    .bg-accent {
       background: rgb(var(--v-theme-accent));
     }
-    .v-theme-provider .text-accent {
+    .text-accent {
       color: rgb(var(--v-theme-accent));
     }
-    .v-theme-provider .border-accent {
+    .border-accent {
       border-color: rgb(var(--v-theme-accent));
     }
-    .v-theme-provider .bg-error {
+    .bg-error {
       background: rgb(var(--v-theme-error));
     }
-    .v-theme-provider .text-error {
+    .text-error {
       color: rgb(var(--v-theme-error));
     }
-    .v-theme-provider .border-error {
+    .border-error {
       border-color: rgb(var(--v-theme-error));
     }
-    .v-theme-provider .bg-info {
+    .bg-info {
       background: rgb(var(--v-theme-info));
     }
-    .v-theme-provider .text-info {
+    .text-info {
       color: rgb(var(--v-theme-info));
     }
-    .v-theme-provider .border-info {
+    .border-info {
       border-color: rgb(var(--v-theme-info));
     }
-    .v-theme-provider .bg-success {
+    .bg-success {
       background: rgb(var(--v-theme-success));
     }
-    .v-theme-provider .text-success {
+    .text-success {
       color: rgb(var(--v-theme-success));
     }
-    .v-theme-provider .border-success {
+    .border-success {
       border-color: rgb(var(--v-theme-success));
     }
-    .v-theme-provider .bg-warning {
+    .bg-warning {
       background: rgb(var(--v-theme-warning));
     }
-    .v-theme-provider .text-warning {
+    .text-warning {
       color: rgb(var(--v-theme-warning));
     }
-    .v-theme-provider .border-warning {
+    .border-warning {
       border-color: rgb(var(--v-theme-warning));
     }
-    .v-theme-provider .on-primary-lighten-1 {
+    .on-primary-lighten-1 {
       color: rgb(var(--v-theme-on-primary-lighten-1));
     }
-    .v-theme-provider .on-primary-lighten-2 {
+    .on-primary-lighten-2 {
       color: rgb(var(--v-theme-on-primary-lighten-2));
     }
-    .v-theme-provider .on-primary-darken-1 {
+    .on-primary-darken-1 {
       color: rgb(var(--v-theme-on-primary-darken-1));
     }
-    .v-theme-provider .on-secondary-lighten-1 {
+    .on-secondary-lighten-1 {
       color: rgb(var(--v-theme-on-secondary-lighten-1));
     }
-    .v-theme-provider .on-secondary-lighten-2 {
+    .on-secondary-lighten-2 {
       color: rgb(var(--v-theme-on-secondary-lighten-2));
     }
-    .v-theme-provider .on-secondary-darken-1 {
+    .on-secondary-darken-1 {
       color: rgb(var(--v-theme-on-secondary-darken-1));
     }
-    .v-theme-provider .on-background {
+    .on-background {
       color: rgb(var(--v-theme-on-background));
     }
-    .v-theme-provider .on-surface {
+    .on-surface {
       color: rgb(var(--v-theme-on-surface));
     }
-    .v-theme-provider .on-primary {
+    .on-primary {
       color: rgb(var(--v-theme-on-primary));
     }
-    .v-theme-provider .on-secondary {
+    .on-secondary {
       color: rgb(var(--v-theme-on-secondary));
     }
-    .v-theme-provider .on-accent {
+    .on-accent {
       color: rgb(var(--v-theme-on-accent));
     }
-    .v-theme-provider .on-error {
+    .on-error {
       color: rgb(var(--v-theme-on-error));
     }
-    .v-theme-provider .on-info {
+    .on-info {
       color: rgb(var(--v-theme-on-info));
     }
-    .v-theme-provider .on-success {
+    .on-success {
       color: rgb(var(--v-theme-on-success));
     }
-    .v-theme-provider .on-warning {
+    .on-warning {
       color: rgb(var(--v-theme-on-warning));
     }
 

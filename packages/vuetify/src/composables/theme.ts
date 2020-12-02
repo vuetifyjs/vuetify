@@ -227,12 +227,12 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
     const firstTheme = Object.keys(computedThemes.value)[0]
     for (const key of Object.keys(computedThemes.value[firstTheme])) {
       if (/on-[a-z]/.test(key)) {
-        lines.push(...createCssClass(`.v-theme-provider .${key}`, [`color: rgb(var(--v-theme-${key}))`]))
+        lines.push(...createCssClass(`.${key}`, [`color: rgb(var(--v-theme-${key}))`]))
       } else {
         lines.push(
-          ...createCssClass(`.v-theme-provider .bg-${key}`, [`background: rgb(var(--v-theme-${key}))`]),
-          ...createCssClass(`.v-theme-provider .text-${key}`, [`color: rgb(var(--v-theme-${key}))`]),
-          ...createCssClass(`.v-theme-provider .border-${key}`, [`border-color: rgb(var(--v-theme-${key}))`]),
+          ...createCssClass(`.bg-${key}`, [`background: rgb(var(--v-theme-${key}))`]),
+          ...createCssClass(`.text-${key}`, [`color: rgb(var(--v-theme-${key}))`]),
+          ...createCssClass(`.border-${key}`, [`border-color: rgb(var(--v-theme-${key}))`]),
         )
       }
     }
