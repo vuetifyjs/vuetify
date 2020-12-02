@@ -136,11 +136,6 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
         </a>
       </td>
       <td>
-        <a href="http://www.skaletech.com/?ref=vuetify-github">
-          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/skale.png">
-        </a>
-      </td>
-      <td>
         <a href="https://www.dealerdesk.de/?ref=vuetify-github">
           <img height="26px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/dealerdesk-light-sm.png">
         </a>
@@ -150,9 +145,6 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
           <img height="51px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/writers-per-hour.png">
         </a>
       </td>
-    </tr>
-    <tr></tr>
-    <tr>
       <td>
         <a href="https://www.ionos.com/partner">
           <img height="35px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/ionos-light-sm.png">
