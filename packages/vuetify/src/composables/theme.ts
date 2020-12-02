@@ -1,7 +1,7 @@
 // Utilities
 import { computed, inject, provide, ref, watch } from 'vue'
 import { useVuetify } from '@/framework'
-import { colorToInt, colorToRGB, contrastRatio, createRange, intToHex, lighten, darken } from '@/util'
+import { colorToInt, colorToRGB, createRange, intToHex, lighten, darken, getLuma } from '@/util'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
@@ -147,17 +147,7 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
   const themes = ref<Record<string, ThemeOption>>(combinedOptions.themes)
   const variations = ref(combinedOptions.variations)
 
-  const toHex = (v: number) => `#${v.toString(16).repeat(3)}`
-
-  const genOnColor = (color: string) => {
-    // naive solution
-    const goal = 8
-    let curr = 0
-    while (contrastRatio(color, toHex(curr)) < goal && curr < 255) {
-      curr += 1
-    }
-    return toHex(curr)
-  }
+  const genOnColor = (color: string) => intToHex(getLuma(color) > 0.18 ? 0x0 : 0xffffff)
 
   const genColorVariations = (name: string, color: string) => {
     const obj: Record<string, string> = {}

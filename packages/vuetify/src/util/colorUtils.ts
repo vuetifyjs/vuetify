@@ -236,19 +236,6 @@ export function RGBtoInt (rgba: RGBA): ColorInt {
   return (rgba.r << 16) + (rgba.g << 8) + rgba.b
 }
 
-/**
- * Returns the contrast ratio (1-21) between two colors.
- *
- * @param first First color
- * @param second Second color
- */
-export function contrastRatio (first: Color, second: Color): number {
-  const [, y1] = sRGB.toXYZ(colorToInt(first))
-  const [, y2] = sRGB.toXYZ(colorToInt(second))
-
-  return (Math.max(y1, y2) + 0.05) / (Math.min(y1, y2) + 0.05)
-}
-
 export function colorToRGB (color: string) {
   const int = colorToInt(color)
   return {
@@ -268,4 +255,27 @@ export function darken (value: ColorInt, amount: number): ColorInt {
   const lab = CIELAB.fromXYZ(sRGB.toXYZ(value))
   lab[0] = lab[0] - amount * 10
   return sRGB.fromXYZ(CIELAB.toXYZ(lab))
+}
+
+/**
+ * Calculate the relative luminance of a given color
+ * @see https://www.w3.org/TR/WCAG20/#relativeluminancedef
+ */
+export function getLuma (color: Color) {
+  const rgb = colorToInt(color)
+
+  return sRGB.toXYZ(rgb)[1]
+}
+
+/**
+ * Returns the contrast ratio (1-21) between two colors.
+ * @see https://www.w3.org/TR/WCAG20/#contrast-ratiodef
+ */
+export function getContrast (first: Color, second: Color) {
+  const l1 = getLuma(first)
+  const l2 = getLuma(second)
+
+  const light = Math.max(l1, l2)
+  const dark = Math.min(l1, l2)
+  return (light + 0.05) / (dark + 0.05)
 }

@@ -22,20 +22,20 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-info: 33,150,243;
       --v-theme-success: 76,175,80;
       --v-theme-warning: 251,140,0;
-      --v-theme-on-primary-lighten-1: 255,255,255;
+      --v-theme-on-primary-lighten-1: 0,0,0;
       --v-theme-on-primary-lighten-2: 0,0,0;
       --v-theme-on-primary-darken-1: 255,255,255;
       --v-theme-on-secondary-lighten-1: 255,255,255;
       --v-theme-on-secondary-lighten-2: 255,255,255;
-      --v-theme-on-secondary-darken-1: 204,204,204;
+      --v-theme-on-secondary-darken-1: 255,255,255;
       --v-theme-on-background: 0,0,0;
       --v-theme-on-surface: 0,0,0;
       --v-theme-on-primary: 255,255,255;
-      --v-theme-on-secondary: 238,238,238;
+      --v-theme-on-secondary: 255,255,255;
       --v-theme-on-accent: 0,0,0;
-      --v-theme-on-error: 255,255,255;
-      --v-theme-on-info: 255,255,255;
-      --v-theme-on-success: 255,255,255;
+      --v-theme-on-error: 0,0,0;
+      --v-theme-on-info: 0,0,0;
+      --v-theme-on-success: 0,0,0;
       --v-theme-on-warning: 0,0,0;
     }
     .theme--dark {
@@ -56,18 +56,18 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-warning: 251,140,0;
       --v-theme-on-primary-lighten-1: 0,0,0;
       --v-theme-on-primary-lighten-2: 0,0,0;
-      --v-theme-on-primary-darken-1: 255,255,255;
+      --v-theme-on-primary-darken-1: 0,0,0;
       --v-theme-on-secondary-lighten-1: 255,255,255;
       --v-theme-on-secondary-lighten-2: 255,255,255;
-      --v-theme-on-secondary-darken-1: 204,204,204;
+      --v-theme-on-secondary-darken-1: 255,255,255;
       --v-theme-on-background: 255,255,255;
-      --v-theme-on-surface: 221,221,221;
-      --v-theme-on-primary: 255,255,255;
-      --v-theme-on-secondary: 238,238,238;
-      --v-theme-on-accent: 255,255,255;
-      --v-theme-on-error: 255,255,255;
-      --v-theme-on-info: 255,255,255;
-      --v-theme-on-success: 255,255,255;
+      --v-theme-on-surface: 255,255,255;
+      --v-theme-on-primary: 0,0,0;
+      --v-theme-on-secondary: 255,255,255;
+      --v-theme-on-accent: 0,0,0;
+      --v-theme-on-error: 0,0,0;
+      --v-theme-on-info: 0,0,0;
+      --v-theme-on-success: 0,0,0;
       --v-theme-on-warning: 0,0,0;
     }
     .v-theme-provider .bg-primary-lighten-1 {
