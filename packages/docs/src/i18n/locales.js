@@ -5,7 +5,8 @@ module.exports = [
   },
   {
     title: '日本語',
-    locale: 'ja',
+    locale: 'ja-JP',
+    alternate: 'ja',
   },
   {
     title: '简体中文',
