@@ -107,6 +107,18 @@ jobs:
           localization_branch_name: ${{ env.LOCAL_BRANCH }}
           crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
 
+      - name: Download ja
+        uses: crowdin/github-action@1.0.13
+        with:
+          config: crowdin.yml
+          upload_sources: false
+          download_translations: true
+          push_translations: false
+          export_only_approved: false
+          download_language: ja
+          localization_branch_name: ${{ env.LOCAL_BRANCH }}
+          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+
       - name: Download zh-CN
         uses: crowdin/github-action@1.0.13
         with:
