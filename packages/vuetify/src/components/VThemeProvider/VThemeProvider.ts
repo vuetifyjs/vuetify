@@ -1,9 +1,6 @@
-// Styles
-import './VThemeProvider.sass'
-
 // Utilities
 import { defineComponent, h } from 'vue'
-import { provideTheme } from '../../composables/theme'
+import { provideTheme } from '@/composables'
 import makeProps from '@/util/makeProps'
 
 export const VThemeProvider = defineComponent({

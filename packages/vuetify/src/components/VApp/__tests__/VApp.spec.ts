@@ -4,6 +4,7 @@ import VApp from '../VApp'
 // Utilities
 import { mount } from '@vue/test-utils'
 import { createMockVuetifyInstance } from '../../../../test'
+import { createTheme, VuetifyThemeSymbol } from '@/composables'
 
 describe('VApp', () => {
   it('should match a snapshot', () => {
@@ -11,6 +12,7 @@ describe('VApp', () => {
       global: {
         provide: {
           ...createMockVuetifyInstance(),
+          [VuetifyThemeSymbol as symbol]: createTheme(),
         },
       },
     })
@@ -23,6 +25,7 @@ describe('VApp', () => {
       global: {
         provide: {
           ...createMockVuetifyInstance(),
+          [VuetifyThemeSymbol as symbol]: createTheme(),
         },
       },
     })
@@ -39,6 +42,7 @@ describe('VApp', () => {
       global: {
         provide: {
           ...createMockVuetifyInstance(),
+          [VuetifyThemeSymbol as symbol]: createTheme(),
         },
       },
     })

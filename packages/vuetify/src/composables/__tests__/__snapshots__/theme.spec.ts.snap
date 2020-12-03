@@ -38,6 +38,10 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-on-success: 0,0,0;
       --v-theme-on-warning: 0,0,0;
     }
+    .theme--light {
+      background: rgb(var(--v-theme-background));
+      color: rgb(var(--v-theme-on-background));
+    }
     .theme--dark {
       --v-theme-primary-lighten-1: 81,176,255;
       --v-theme-primary-lighten-2: 117,204,255;
@@ -69,6 +73,10 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-on-info: 0,0,0;
       --v-theme-on-success: 0,0,0;
       --v-theme-on-warning: 0,0,0;
+    }
+    .theme--dark {
+      background: rgb(var(--v-theme-background));
+      color: rgb(var(--v-theme-on-background));
     }
     .bg-primary-lighten-1 {
       background: rgb(var(--v-theme-primary-lighten-1));

@@ -1,9 +1,9 @@
 import { inject } from 'vue'
-import { createTheme } from './composables'
+import { createTheme, VuetifyThemeSymbol } from './composables'
 
 // Types
 import type { InjectionKey, App } from 'vue'
-import type { ThemeInstance } from './composables'
+import type { ThemeOptions } from '@/composables'
 
 export interface VuetifyComponentDefaults {
   [key: string]: Record<string, unknown>
@@ -12,13 +12,13 @@ export interface VuetifyComponentDefaults {
 
 export interface VuetifyInstance {
   defaults: VuetifyComponentDefaults
-  theme: ThemeInstance
 }
 
 export interface VuetifyOptions {
   components?: Record<string, any>
   directives?: Record<string, any>
   defaults?: Partial<VuetifyComponentDefaults>
+  theme?: ThemeOptions
 }
 
 export const VuetifySymbol: InjectionKey<VuetifyInstance> = Symbol.for('vuetify')
@@ -58,10 +58,10 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
         global: {},
         ...defaults,
       },
-      theme: createTheme(),
     }
 
     app.provide(VuetifySymbol, vuetify)
+    app.provide(VuetifyThemeSymbol, createTheme(options.theme))
     app.config.globalProperties.$vuetify = vuetify
   }
 

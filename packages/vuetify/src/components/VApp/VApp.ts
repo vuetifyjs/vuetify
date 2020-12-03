@@ -1,12 +1,12 @@
 // Styles
 import './VApp.sass'
 
-// Components
-import VThemeProvider from '../VThemeProvider'
-
 // Utilities
 import { defineComponent, h } from 'vue'
 import makeProps from '@/util/makeProps'
+
+// Composables
+import { useTheme } from '@/composables'
 
 export default defineComponent({
   name: 'VApp',
@@ -16,12 +16,16 @@ export default defineComponent({
   }),
 
   setup (props, { slots }) {
+    const { themeClass } = useTheme()
     return () => (
-      h(VThemeProvider, {
+      h('div', {
         ...props,
-        class: 'v-application',
+        class: [
+          'v-application',
+          themeClass.value,
+        ],
         'data-app': true,
-      }, () => h('div', { class: 'v-application__wrap' }, slots.default?.()))
+      }, h('div', { class: 'v-application__wrap' }, slots.default?.()))
     )
   },
 })

@@ -247,6 +247,8 @@ export function colorToRGB (color: string) {
 
 export function lighten (value: ColorInt, amount: number): ColorInt {
   const lab = CIELAB.fromXYZ(sRGB.toXYZ(value))
+  // TODO: why this false positive?
+  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
   lab[0] = lab[0] + amount * 10
   return sRGB.fromXYZ(CIELAB.toXYZ(lab))
 }

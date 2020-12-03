@@ -2,8 +2,9 @@
 import { VThemeProvider } from '../VThemeProvider'
 
 // Utilities
-import { defineComponent, h, ref } from 'vue'
+import { defineComponent, h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { createTheme, VuetifyThemeSymbol } from '@/composables'
 import { createMockVuetifyInstance } from '../../../../test'
 
 describe('VThemeProvider.ts', () => {
@@ -15,6 +16,7 @@ describe('VThemeProvider.ts', () => {
       global: {
         provide: {
           ...createMockVuetifyInstance(),
+          [VuetifyThemeSymbol as symbol]: createTheme(),
         },
       },
     })
@@ -27,16 +29,13 @@ describe('VThemeProvider.ts', () => {
       props: {},
       global: {
         provide: {
-          ...createMockVuetifyInstance({
-            theme: {
-              defaultTheme: ref('foo'),
-            },
-          }),
+          ...createMockVuetifyInstance(),
+          [VuetifyThemeSymbol as symbol]: createTheme(),
         },
       },
     })
 
-    expect(wrapper.classes('theme--foo')).toBeTruthy()
+    expect(wrapper.classes('theme--light')).toBeTruthy()
   })
 
   it('should not use parent value if nested', async () => {
@@ -51,10 +50,9 @@ describe('VThemeProvider.ts', () => {
     const wrapper = mount(Test, {
       global: {
         provide: {
-          ...createMockVuetifyInstance({
-            theme: {
-              defaultTheme: ref('contrast'),
-            },
+          ...createMockVuetifyInstance(),
+          [VuetifyThemeSymbol as symbol]: createTheme({
+            defaultTheme: 'contrast',
           }),
         },
       },

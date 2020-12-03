@@ -1,6 +1,5 @@
 // Utilities
 import { computed, inject, provide, ref, watch } from 'vue'
-import { useVuetify } from '@/framework'
 import { colorToInt, colorToRGB, createRange, intToHex, lighten, darken, getLuma } from '@/util'
 
 // Types
@@ -49,61 +48,14 @@ export type ThemeOptions = Partial<InternalThemeOptions>
 
 export interface ThemeInstance {
   themes: Ref<Record<string, InternalTheme>>
-  defaultTheme: Ref<string>
-  setTheme: (key: string, theme: ThemeOption) => void
-}
-
-interface ThemeProvide {
-  themeClass: Ref<string>
   current: Ref<string>
-  next: () => void
-  prev: () => void
+  themeClass: Ref<string>
   setTheme: (key: string, theme: ThemeOption) => void
+  prev: () => void
+  next: () => void
 }
 
-const VuetifyThemeSymbol: InjectionKey<ThemeProvide> = Symbol.for('vuetify:theme')
-
-const step = <T>(arr: T[], current: T, steps: number): T => arr[(arr.indexOf(current) + arr.length + steps) % arr.length]
-
-export const provideTheme = (props: { theme?: string } = {}): ThemeProvide => {
-  const vuetify = useVuetify()
-  const themeProvide = inject(VuetifyThemeSymbol, null)
-
-  const internal = ref<string | null>(null)
-  const current = computed<string>({
-    get: () => {
-      return props.theme ?? internal.value ?? themeProvide?.current.value ?? vuetify.theme.defaultTheme.value
-    },
-    set (theme: string) {
-      internal.value = theme
-    },
-  })
-
-  const themeClass = computed(() => `theme--${current.value}`)
-
-  const next = () => current.value = step(Object.keys(vuetify.theme.themes.value), current.value, 1)
-  const prev = () => current.value = step(Object.keys(vuetify.theme.themes.value), current.value, -1)
-
-  const newThemeProvide: ThemeProvide = {
-    themeClass,
-    current,
-    next,
-    prev,
-    setTheme: vuetify.theme.setTheme,
-  }
-
-  provide(VuetifyThemeSymbol, newThemeProvide)
-
-  return newThemeProvide
-}
-
-export const useTheme = () => {
-  const theme = inject(VuetifyThemeSymbol)
-
-  if (!theme) throw new Error('Could not find vuetify theme provider')
-
-  return theme
-}
+export const VuetifyThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme')
 
 const defaultThemeOptions: ThemeOptions = {
   defaultTheme: 'light',
@@ -137,15 +89,28 @@ const defaultThemeOptions: ThemeOptions = {
   },
 }
 
+const step = <T>(arr: T[], current: T, steps: number): T => arr[(arr.indexOf(current) + arr.length + steps) % arr.length]
+
+const next = (
+  current: Ref<string>,
+  themes: Ref<Record<string, InternalTheme>>
+) => () => current.value = step(Object.keys(themes.value), current.value, 1)
+
+const prev = (
+  current: Ref<string>,
+  themes: Ref<Record<string, InternalTheme>>
+) => () => current.value = step(Object.keys(themes.value), current.value, -1)
+
 export const createTheme = (options?: ThemeOptions): ThemeInstance => {
   const combinedOptions = {
     ...defaultThemeOptions,
-    ...(options as InternalThemeOptions),
-  }
+    ...options,
+  } as InternalThemeOptions
   const styleEl = ref<HTMLStyleElement | undefined>()
-  const defaultTheme = ref<string>(combinedOptions.defaultTheme)
+  const current = ref<string>(combinedOptions.defaultTheme)
   const themes = ref<Record<string, ThemeOption>>(combinedOptions.themes)
   const variations = ref(combinedOptions.variations)
+  const themeClass = computed(() => `theme--${current.value}`)
 
   const genOnColor = (color: string) => intToHex(getLuma(color) > 0.18 ? 0x0 : 0xffffff)
 
@@ -220,6 +185,10 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
     const lines = []
     for (const themeName of Object.keys(computedThemes.value)) {
       lines.push(...createCssClass(`.theme--${themeName}`, genCssVariables(themeName)))
+      lines.push(...createCssClass(`.theme--${themeName}`, [
+        `background: rgb(var(--v-theme-background))`,
+        `color: rgb(var(--v-theme-on-background))`,
+      ]))
     }
 
     // Assumption is that all theme objects have the same keys, so it doesn't matter which one
@@ -244,7 +213,48 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
 
   return {
     themes: computedThemes,
-    defaultTheme,
     setTheme: (key: string, theme: ThemeOption) => themes.value[key] = theme,
+    current,
+    themeClass,
+    prev: prev(current, computedThemes),
+    next: next(current, computedThemes),
   }
+}
+
+export const provideTheme = (props: { theme?: string } = {}) => {
+  const theme = inject(VuetifyThemeSymbol, null)
+  if (!theme) throw new Error('Could not find vuetify theme provider')
+
+  const internal = ref<string | null>(null)
+  const current = computed<string>({
+    get: () => {
+      return props.theme ?? internal.value ?? theme?.current.value
+    },
+    set (theme: string) {
+      internal.value = theme
+    },
+  })
+
+  const themeClass = computed(() => `theme--${current.value}`)
+
+  const newTheme: ThemeInstance = {
+    themes: theme.themes,
+    setTheme: theme.setTheme,
+    current,
+    themeClass,
+    prev: prev(current, theme.themes),
+    next: next(current, theme.themes),
+  }
+
+  provide(VuetifyThemeSymbol, newTheme)
+
+  return newTheme
+}
+
+export const useTheme = () => {
+  const theme = inject(VuetifyThemeSymbol)
+
+  if (!theme) throw new Error('Could not find theme')
+
+  return theme
 }
