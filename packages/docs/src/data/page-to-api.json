@@ -179,10 +179,7 @@
   ],
   "components/toolbars": ["v-toolbar"],
   "components/tooltips": ["v-tooltip"],
-  "components/treeview": [
-    "v-treeview",
-    "v-treeview-node"
-  ],
+  "components/treeview": ["v-treeview"],
   "components/virtual-scroller": ["v-virtual-scroll"],
   "components/windows": [
     "v-window",

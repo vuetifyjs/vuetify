@@ -25,7 +25,6 @@ A basic example
 ## API
 
 - [v-treeview](/api/v-treeview)
-- [v-treeview-node](/api/v-treeview-node)
 
 ## Examples
 
