@@ -1,6 +1,5 @@
 import Vue, { VueConstructor } from 'vue'
 
-/* eslint-disable-next-line no-use-before-define */
 export type Proxyable<T extends string = 'value'> = VueConstructor<Vue & {
   internalLazyValue: unknown
   internalValue: unknown
@@ -54,7 +53,7 @@ export function factory (
   })
 }
 
-/* eslint-disable-next-line no-redeclare */
+/* eslint-disable-next-line @typescript-eslint/no-redeclare */
 const Proxyable = factory()
 
 export default Proxyable

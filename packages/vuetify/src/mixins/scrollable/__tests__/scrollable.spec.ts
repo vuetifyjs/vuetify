@@ -103,7 +103,7 @@ describe('Scrollable.ts', () => {
     expect(wrapper.vm.savedScroll).toBe(0)
   })
 
-  it('should warn if target isn\'t present', async () => {
+  it(`should warn if target isn't present`, async () => {
     mountFunction({
       propsData: {
         scrollTarget: '#test',

@@ -81,7 +81,7 @@ describe('validatable.ts', () => {
     expect(wrapper.vm.errorBucket).toEqual([])
 
     // Function failing
-    wrapper.setProps({ rules: [() => false || 'fizzbuzz'] })
+    wrapper.setProps({ rules: [() => 'fizzbuzz'] })
 
     wrapper.vm.validate()
 

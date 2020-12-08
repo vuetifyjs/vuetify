@@ -1,3 +1,0 @@
-$ yarn add sass sass-loader fibers deepmerge -D
-// OR
-$ npm install sass sass-loader fibers deepmerge -D

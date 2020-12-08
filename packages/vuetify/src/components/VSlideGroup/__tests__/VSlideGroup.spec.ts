@@ -210,7 +210,7 @@ describe('VSlideGroup.ts', () => {
     expect(fn).toHaveBeenCalled()
   })
 
-  it('it should scroll from affix click', async () => {
+  it('should scroll from affix click', async () => {
     const onClick = jest.fn()
     const scrollTo = jest.fn()
     const setWidths = jest.fn()

@@ -22,7 +22,7 @@ export default {
     itemsPerPageAll: 'すべて',
     nextPage: '次のページ',
     prevPage: '前のページ',
-    firstPage: '一ページ目',
+    firstPage: '最初のページ',
     lastPage: '最後のページ',
     pageText: '{0}-{1} 件目 / {2}件',
   },
@@ -38,7 +38,7 @@ export default {
     prev: '前のビジュアル',
     next: '次のビジュアル',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'カルーセルのスライド {0}件目 / {1}件',
     },
   },
   calendar: {
@@ -57,8 +57,13 @@ export default {
       wrapper: 'ページネーションナビゲーション',
       next: '次のページ',
       previous: '前のページ',
-      page: 'ページに移動 {0}',
+      page: '{0}ページ目に移動',
       currentPage: '現在のページ、ページ {0}',
+    },
+  },
+  rating: {
+    ariaLabel: {
+      icon: 'Rating {0} of {1}',
     },
   },
 }

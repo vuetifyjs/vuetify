@@ -1,6 +1,9 @@
 <template>
   <v-container class="grey lighten-5">
-    <v-row no-gutters style="flex-wrap: nowrap;">
+    <v-row
+      no-gutters
+      style="flex-wrap: nowrap;"
+    >
       <v-col
         cols="2"
         class="flex-grow-0 flex-shrink-0"

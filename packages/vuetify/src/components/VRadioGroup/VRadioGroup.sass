@@ -2,8 +2,14 @@
 @import '../../styles/styles.sass'
 
 .v-input--radio-group
+  legend.v-label
+    cursor: text
+    font-size: 14px
+    height: auto
+
   &__input
     border: none
+    cursor: default
     display: flex
     width: 100%
 
@@ -23,6 +29,9 @@
       flex-wrap: wrap
 
   &--column
+    legend
+      padding-bottom: $radio-group-padding
+
     .v-radio:not(:last-child):not(:only-child)
       margin-bottom: $radio-group-padding
 

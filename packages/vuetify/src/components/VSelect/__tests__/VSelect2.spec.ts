@@ -37,6 +37,10 @@ describe('VSelect.ts', () => {
     }
   })
 
+  afterEach(() => {
+    document.body.removeChild(el)
+  })
+
   it('should use slotted prepend-item', () => {
     const wrapper = mountFunction({
       propsData: {

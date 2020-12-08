@@ -134,8 +134,7 @@ export default VSelect.extend({
       }
     },
     searchIsDirty (): boolean {
-      return this.internalSearch != null &&
-        this.internalSearch !== ''
+      return this.internalSearch != null
     },
     selectedItem (): any {
       if (this.multiple) return null
@@ -421,8 +420,8 @@ export default VSelect.extend({
 
       const currentItem = this.selectedItems[this.selectedIndex]
       const currentItemText = this.getText(currentItem)
-      event.clipboardData!.setData('text/plain', currentItemText)
-      event.clipboardData!.setData('text/vnd.vuetify.autocomplete.item+plain', currentItemText)
+      event.clipboardData?.setData('text/plain', currentItemText)
+      event.clipboardData?.setData('text/vnd.vuetify.autocomplete.item+plain', currentItemText)
       event.preventDefault()
     },
   },

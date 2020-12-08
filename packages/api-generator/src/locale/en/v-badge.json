@@ -1,0 +1,18 @@
+{
+  "props": {
+    "avatar": "Removes badge padding for the use of the `v-avatar` in the **badge** slot.",
+    "bordered": "Applies a **2px** by default and **1.5px** border around the badge when using the **dot** property.",
+    "content": "Any content you want injected as text into the badge.",
+    "dot": "Reduce the size of the badge and hide its contents",
+    "icon": "Designates a specific icon used in the badge.",
+    "inline": "Moves the badge to be inline with the wrapping element. Supports the usage of the **left** prop.",
+    "label": "The **aria-label** used for the badge",
+    "offsetX": "Offset the badge on the x-axis.",
+    "offsetY": "Offset the badge on the y-axis.",
+    "overlap": "Overlaps the slotted content on top of the component.",
+    "tile": "Removes the component's border-radius."
+  },
+  "slots": {
+    "badge": "The slot used for the badge's content."
+  }
+}

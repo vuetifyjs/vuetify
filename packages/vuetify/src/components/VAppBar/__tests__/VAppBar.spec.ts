@@ -34,7 +34,7 @@ describe('AppBar.ts', () => {
     }
   })
 
-  it('should calculate paddings ', () => {
+  it('should calculate paddings', () => {
     const wrapper = mountFunction()
 
     wrapper.vm.$vuetify.application.left = 42

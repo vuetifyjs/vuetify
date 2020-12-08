@@ -1,7 +1,0 @@
-{
-  "props": {
-    "hideOverlay": "オーバーレイを非表示にします。",
-    "overlayColor": "オーバーレイの色を設定します。",
-    "overlayOpacity": "オーバーレイの不透明度を設定します。"
-  }
-}

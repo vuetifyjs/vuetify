@@ -1,0 +1,15 @@
+{
+  "props": {
+    "app": "Respects boundaries of—and will not overlap with—other `app` components like `v-app-bar`, `v-navigation-drawer`, and `v-footer`.",
+    "centered": "Positions the snackbar in the center of the screen, (x and y axis).",
+    "contentClass": "Apply a custom class to the snackbar content",
+    "multiLine": "Gives the snackbar a larger minimum height.",
+    "text": "Applies the defined **color** to text and a low opacity background of the same.",
+    "timeout": "Time (in milliseconds) to wait until snackbar is automatically hidden.  Use `-1` to keep open indefinitely (`0` in version < 2.3 ). It is recommended for this number to be between `4000` and `10000`. Changes to this property will reset the timeout.",
+    "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own.",
+    "vertical": "Stacks snackbar content on top of the actions (button)."
+  },
+  "slots": {
+    "action": "Used to bind styles to [v-btn](/components/buttons) to match MD2 specification."
+  }
+}

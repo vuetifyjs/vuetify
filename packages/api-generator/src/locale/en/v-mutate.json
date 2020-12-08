@@ -1,0 +1,10 @@
+{
+  "argument": "The function to invoke when the target element is updated.",
+  "modifiers": {
+    "once": "Will only invoke the provided user callback once, then directive will be unbound.",
+    "attr": "Sets the value of [attributes](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/attributes) to true.",
+    "child": "Sets the value of [childList](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/childList) to true.",
+    "char": "Sets the value of [characterData](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/characterData) to true.",
+    "sub": "Sets the value of [subtree](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe#Parameters) to true."
+  }
+}

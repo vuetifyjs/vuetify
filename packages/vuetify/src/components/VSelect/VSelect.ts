@@ -13,6 +13,7 @@ import VTextField from '../VTextField/VTextField'
 
 // Mixins
 import Comparable from '../../mixins/comparable'
+import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
 
 // Directives
@@ -41,12 +42,14 @@ export const defaultMenuProps = {
 const baseMixins = mixins(
   VTextField,
   Comparable,
+  Dependent,
   Filterable
 )
 
 interface options extends InstanceType<typeof baseMixins> {
   $refs: {
     menu: InstanceType<typeof VMenu>
+    content: HTMLElement
     label: HTMLElement
     input: HTMLInputElement
     'prepend-inner': HTMLElement
@@ -162,6 +165,7 @@ export default baseMixins.extend<options>().extend({
         value: {
           handler: this.blur,
           closeConditional: this.closeConditional,
+          include: () => this.getOpenDependentElements(),
         },
       }] : undefined
     },
@@ -313,6 +317,13 @@ export default baseMixins.extend<options>().extend({
       const uniqueValues = new Map()
       for (let index = 0; index < arr.length; ++index) {
         const item = arr[index]
+
+        // Do not deduplicate headers or dividers (#12517)
+        if (item.header || item.divider) {
+          uniqueValues.set(item, item)
+          continue
+        }
+
         const val = this.getValue(item)
 
         // TODO: comparator
@@ -697,6 +708,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onMouseUp (e: MouseEvent) {
+      // eslint-disable-next-line sonarjs/no-collapsible-if
       if (
         this.hasMouseDown &&
         e.which !== 3 &&
@@ -707,10 +719,6 @@ export default baseMixins.extend<options>().extend({
         // or inside, toggle menu
         if (this.isAppendInner(e.target)) {
           this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
-        // If user is clicking in the container
-        // and field is enclosed, activate it
-        } else if (this.isEnclosed) {
-          this.isMenuActive = true
         }
       }
 

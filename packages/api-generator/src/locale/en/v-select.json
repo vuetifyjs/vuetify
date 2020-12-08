@@ -1,0 +1,46 @@
+{
+  "props": {
+    "attach": "Specifies which DOM element that this component should detach to. String can be any valid querySelector and Object can be any valid Node. This will attach to the root `v-app` component by default.",
+    "autocomplete": "Filter the items in the list based on user input",
+    "cacheItems": "Keeps a local _unique_ copy of all items that have been passed through the **items** prop.",
+    "chips": "Changes display of selections to chips",
+    "combobox": "The single select variant of **tags**",
+    "dark": "Applies the dark theme variant to the component. This will default the components color to _white_ unless you've configured your [application theme](/customization/theme) to **dark** or if you are using the **color** prop on the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
+    "debounceSearch": "Debounces the search input value being emitted",
+    "deletableChips": "Adds a remove icon to selected chips",
+    "disabled": "Disables the input",
+    "disableLookup": "Disables keyboard lookup",
+    "eager": "Will force the components content to render on mounted. This is useful if you have content that will not be rendered in the DOM that you want crawled for SEO.",
+    "editable": " Creates an editable button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
+    "filter": "The function used for filtering items",
+    "hideSelected": "Do not display in the select menu items that are already selected",
+    "itemColor": "Sets color of selected items",
+    "itemDisabled": "Set property of **items**'s disabled value",
+    "items": "Can be an array of objects or array of strings. When using objects, will look for a text, value and disabled keys. This can be changed using the **item-text**, **item-value** and **item-disabled** props.  Objects that have a **header** or **divider** property are considered special cases and generate a list header or divider; these items are not selectable.",
+    "itemText": "Set property of **items**'s text value",
+    "itemValue": "Set property of **items**'s value - **must be primitive**. Dot notation is supported. **Note:** This is currently not supported with `v-combobox` [GitHub Issue](https://github.com/vuetifyjs/vuetify/issues/5479)",
+    "menuProps": "Pass props through to the `v-menu` component. Accepts either a string for boolean props `menu-props=\"auto, overflowY\"`, or an object `:menu-props=\"{ auto: true, overflowY: true }\"`",
+    "minWidth": "Sets the minimum width of the select's `v-menu` content",
+    "multiple": "Changes select to multiple. Accepts array for value",
+    "multiLine": "Causes label to float when the select component is focused or dirty",
+    "noDataText": "Display text when there is no data",
+    "openOnClear": "When using the **clearable** prop, once cleared, the select menu will either open or stay open, depending on the current state",
+    "overflow": "Creates an overflow button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
+    "returnObject": "Changes the selection behavior to return the object directly rather than the value specified with **item-value**",
+    "searchInput": "Use the **.sync** modifier to catch user input from the search input",
+    "segmented": "Creates a segmented button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
+    "smallChips": "Changes display of selections to chips with the **small** property",
+    "tags": "Tagging functionality, allows the user to create new values not available from the **items** prop",
+    "valueComparator": "The comparison algorithm used for values. [More info](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts)"
+  },
+  "slots": {
+    "append-item": "Adds an item after menu content",
+    "item": "Define a custom item appearance",
+    "prepend-item": "Adds an item before menu content",
+    "selection": "Define a custom selection appearance"
+  },
+  "events": {
+    "update:list-index": "Emitted when menu item is selected using keyboard arrows",
+    "update:search-input": "The `search-input.sync` event"
+  }
+}

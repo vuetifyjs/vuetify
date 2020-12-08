@@ -49,16 +49,16 @@ const baseMixins = mixins(
 export default baseMixins.extend({
   name: 'v-navigation-drawer',
 
-  provide (): object {
-    return {
-      isInNav: this.tag === 'nav',
-    }
-  },
-
   directives: {
     ClickOutside,
     Resize,
     Touch,
+  },
+
+  provide (): object {
+    return {
+      isInNav: this.tag === 'nav',
+    }
   },
 
   props: {
@@ -230,7 +230,7 @@ export default baseMixins.extend({
     },
     styles (): object {
       const translate = this.isBottom ? 'translateY' : 'translateX'
-      const styles = {
+      return {
         height: convertToUnit(this.height),
         top: !this.isBottom ? convertToUnit(this.computedTop) : 'auto',
         maxHeight: this.computedMaxHeight != null
@@ -239,8 +239,6 @@ export default baseMixins.extend({
         transform: `${translate}(${convertToUnit(this.computedTransform, '%')})`,
         width: convertToUnit(this.computedWidth),
       }
-
-      return styles
     },
   },
 

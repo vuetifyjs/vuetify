@@ -1,0 +1,10 @@
+{
+  "props": {
+    "altLabels": "Places the labels beneath the step",
+    "nonLinear": "Allow user to jump to any step",
+    "vertical": "Display steps vertically"
+  },
+  "events": {
+    "change": "Emitted when step is changed by user interaction"
+  }
+}
