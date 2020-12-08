@@ -98,7 +98,7 @@ export default CalendarWithEvents.extend({
           break
         case '4day':
           component = VCalendarDaily
-          end = relativeDays(copyTimestamp(end), nextDay, 4)
+          end = relativeDays(copyTimestamp(end), nextDay, 3)
           updateFormatted(end)
           maxDays = 4
           weekdays = [
