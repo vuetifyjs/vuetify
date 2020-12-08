@@ -239,7 +239,7 @@ export default baseMixins.extend<options>().extend({
       }, this.$slots.label || this.label)
     },
     genMessages () {
-      if (!this.showDetails) return null
+      if (this.hideDetails === true) return null
 
       return this.$createElement(VMessages, {
         props: {

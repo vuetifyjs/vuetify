@@ -196,10 +196,10 @@ describe('VInput.ts', () => {
       },
     })
 
-    expect(wrapper.vm.genMessages()).toBeNull()
+    expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ error: true })
-    expect(wrapper.vm.genMessages()).toBeNull()
+    expect(wrapper.vm.genMessages()).not.toBeNull()
 
     wrapper.setProps({ errorMessages: 'required' })
     expect(wrapper.vm.genMessages()).not.toBeNull()

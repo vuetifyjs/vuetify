@@ -146,7 +146,12 @@ export default BaseItemGroup.extend({
           attrs: {
             'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`),
           },
-          on: { click },
+          on: {
+            click: (e: Event) => {
+              e.stopPropagation()
+              click()
+            },
+          },
         }, [
           this.$createElement(VIcon, {
             props: { large: true },
@@ -222,7 +227,10 @@ export default BaseItemGroup.extend({
       this.internalValue = this.getValue(item, lastIndex)
     },
     updateReverse (val: number, oldVal: number) {
-      const lastIndex = this.items.length - 1
+      const itemsLength = this.items.length
+      const lastIndex = itemsLength - 1
+
+      if (itemsLength <= 2) return val < oldVal
 
       if (val === lastIndex && oldVal === 0) {
         return true
