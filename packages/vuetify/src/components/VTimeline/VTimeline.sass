@@ -99,6 +99,10 @@
     &:before
       top: calc(50% - #{$timeline-wedge-size} + 2px)
 
+  > .v-card--link
+    &:focus:before
+      opacity: 1 !important
+
 // Modifiers
 .v-timeline--align-top
   .v-timeline-item__dot
