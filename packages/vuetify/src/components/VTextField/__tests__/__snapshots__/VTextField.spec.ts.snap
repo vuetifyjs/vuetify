@@ -108,15 +108,6 @@ exports[`VTextField.ts should hide messages if no messages and hide-details is a
         >
       </div>
     </div>
-    <div class="v-text-field__details">
-      <div class="v-messages theme--light">
-        <span name="message-transition"
-              tag="div"
-              class="v-messages__wrapper"
-        >
-        </span>
-      </div>
-    </div>
   </div>
 </div>
 `;

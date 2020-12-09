@@ -407,7 +407,7 @@ export default baseMixins.extend<options>().extend({
       })
     },
     genMessages () {
-      if (this.hideDetails === true) return null
+      if (!this.showDetails) return null
 
       const messagesNode = VInput.options.methods.genMessages.call(this)
       const counterNode = this.genCounter()
