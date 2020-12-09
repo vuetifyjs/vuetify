@@ -12,11 +12,11 @@ export const VThemeProvider = defineComponent({
     },
   }),
 
-  setup (props, { slots }) {
-    const { themeClass } = provideTheme(props)
+  setup (props, context) {
+    const { themeClass } = provideTheme(props, context)
 
     return () => h('div', {
       class: ['v-theme-provider', themeClass.value],
-    }, [h('div', [slots.default?.()])])
+    }, [h('div', [context.slots.default?.()])])
   },
 })

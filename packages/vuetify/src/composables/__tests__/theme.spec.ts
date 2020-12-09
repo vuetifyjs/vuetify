@@ -3,8 +3,19 @@
 import { createTheme } from '../'
 
 describe('createTheme', () => {
+  beforeEach(() => {
+    const child = document.querySelector('#vuetify-theme-stylesheet')
+    child && document.head.removeChild(child)
+  })
+
   it('should create style element', async () => {
     createTheme()
+
+    expect(document.head).toMatchSnapshot()
+  })
+
+  it('should not generate style element if disabled', async () => {
+    createTheme(false)
 
     expect(document.head).toMatchSnapshot()
   })
@@ -24,13 +35,14 @@ describe('createTheme', () => {
     ]
 
     for (const color of colors) {
-      expect(theme.themes.value.light).toHaveProperty(color)
+      expect(theme.themes.value.light.colors).toHaveProperty(color)
     }
   })
 
   it('should generate color variants', async () => {
     const theme = createTheme({
       variations: {
+        colors: ['primary', 'secondary'],
         lighten: 2,
         darken: 2,
       },
@@ -39,24 +51,29 @@ describe('createTheme', () => {
     for (const color of ['primary', 'secondary']) {
       for (const variant of ['lighten', 'darken']) {
         for (const amount of [1, 2]) {
-          expect(theme.themes.value.light).toHaveProperty(`${color}-${variant}-${amount}`)
-          expect(theme.themes.value.light).toHaveProperty(`on-${color}-${variant}-${amount}`)
+          expect(theme.themes.value.light.colors).toHaveProperty(`${color}-${variant}-${amount}`)
+          expect(theme.themes.value.light.colors).toHaveProperty(`on-${color}-${variant}-${amount}`)
         }
       }
     }
   })
 
   it('should update existing theme', async () => {
-    const theme = createTheme()
+    const theme = createTheme({
+      variations: false,
+    })
 
-    expect(theme.themes.value.light.background).not.toEqual('#FF0000')
+    expect(theme.themes.value.light.colors.background).not.toEqual('#FF0000')
 
     theme.setTheme('light', {
       ...theme.themes.value.light,
-      background: '#FF0000',
+      colors: {
+        ...theme.themes.value.light.colors,
+        background: '#FF0000',
+      },
     })
 
-    expect(theme.themes.value.light.background).toEqual('#FF0000')
+    expect(theme.themes.value.light.colors.background).toEqual('#FF0000')
   })
 
   // it('should use vue-meta@2.3 functionality', () => {

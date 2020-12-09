@@ -21,7 +21,7 @@ describe('VThemeProvider.ts', () => {
       },
     })
 
-    expect(wrapper.classes('theme--dark')).toBeTruthy()
+    expect(wrapper.classes('v-theme--dark')).toBeTruthy()
   })
 
   it('should use default theme from options', async () => {
@@ -35,7 +35,7 @@ describe('VThemeProvider.ts', () => {
       },
     })
 
-    expect(wrapper.classes('theme--light')).toBeTruthy()
+    expect(wrapper.classes('v-theme--light')).toBeTruthy()
   })
 
   it('should not use parent value if nested', async () => {
