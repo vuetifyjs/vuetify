@@ -58,6 +58,8 @@
   padding-top: $text-field-active-label-height
   margin-top: $input-top-spacing - $text-field-active-label-height
 
+  &__prefix
+    line-height: $text-field-line-height
   input
     flex: 1 1 auto
     line-height: $text-field-line-height
@@ -88,6 +90,7 @@
     padding-top: 0
 
     &:not(.v-text-field--outlined)
+      .v-text-field__prefix,
       input
         padding: $text-field-dense-padding
 
