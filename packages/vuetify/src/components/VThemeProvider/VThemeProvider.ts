@@ -10,6 +10,10 @@ export const VThemeProvider = defineComponent({
     theme: {
       type: String,
     },
+    // TODO: Better name
+    newContext: {
+      type: Boolean,
+    },
   }),
 
   setup (props, context) {

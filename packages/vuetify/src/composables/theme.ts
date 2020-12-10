@@ -265,18 +265,20 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
   }
 }
 
-export const provideTheme = (props: { theme?: string } = {}, context: SetupContext) => {
+export const provideTheme = (props: { theme?: string, newContext?: boolean } = {}, context: SetupContext) => {
   const theme = inject(VuetifyThemeSymbol, null)
   if (!theme) throw new Error('Could not find vuetify theme provider')
 
+  const internal = ref<string | null>(null)
   const current = computed<string>({
     get: () => {
-      return props.theme ?? theme?.current.value
+      return internal.value ?? props.theme ?? theme?.current.value
     },
     set (value: string) {
-      if (theme && !props.theme) {
+      if (theme && !props.theme && !props.newContext) {
         theme.current.value = value
       } else {
+        internal.value = value
         context.emit('update:theme', value)
       }
     },
