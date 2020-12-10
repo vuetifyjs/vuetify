@@ -3,15 +3,15 @@ import VApp from '../VApp'
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { createMockVuetifyInstance } from '../../../../test'
 import { createTheme, VuetifyThemeSymbol } from '@/composables'
+import { VuetifySymbol } from '@/framework'
 
 describe('VApp', () => {
   it('should match a snapshot', () => {
     const wrapper = mount(VApp, {
       global: {
         provide: {
-          ...createMockVuetifyInstance(),
+          [VuetifySymbol as symbol]: { defaults: { global: {} },
           [VuetifyThemeSymbol as symbol]: createTheme(),
         },
       },
@@ -24,7 +24,7 @@ describe('VApp', () => {
     const wrapper = mount(VApp, {
       global: {
         provide: {
-          ...createMockVuetifyInstance(),
+          [VuetifySymbol as symbol]: { defaults: { global: {} },
           [VuetifyThemeSymbol as symbol]: createTheme(),
         },
       },
@@ -41,7 +41,7 @@ describe('VApp', () => {
       },
       global: {
         provide: {
-          ...createMockVuetifyInstance(),
+          [VuetifySymbol as symbol]: { defaults: { global: {} },
           [VuetifyThemeSymbol as symbol]: createTheme(),
         },
       },

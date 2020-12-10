@@ -4,8 +4,6 @@ import type { ComponentOptions } from 'vue'
 // Utilities
 import toHaveBeenWarnedInit from './util/to-have-been-warned'
 
-export * from './util/mocks'
-
 export function functionalContext (context: ComponentOptions<Vue> = {}, children = []) {
   if (!Array.isArray(children)) children = [children]
   return {

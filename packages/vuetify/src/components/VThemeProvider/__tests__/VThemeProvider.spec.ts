@@ -5,7 +5,7 @@ import { VThemeProvider } from '../VThemeProvider'
 import { defineComponent, h } from 'vue'
 import { mount } from '@vue/test-utils'
 import { createTheme, VuetifyThemeSymbol } from '@/composables'
-import { createMockVuetifyInstance } from '../../../../test'
+import { VuetifySymbol } from '@/framework'
 
 describe('VThemeProvider.ts', () => {
   it('should use theme defined in prop', async () => {
@@ -15,7 +15,7 @@ describe('VThemeProvider.ts', () => {
       },
       global: {
         provide: {
-          ...createMockVuetifyInstance(),
+          [VuetifySymbol as symbol]: { defaults: { global: {} } },
           [VuetifyThemeSymbol as symbol]: createTheme(),
         },
       },
@@ -26,10 +26,9 @@ describe('VThemeProvider.ts', () => {
 
   it('should use default theme from options', async () => {
     const wrapper = mount(VThemeProvider, {
-      props: {},
       global: {
         provide: {
-          ...createMockVuetifyInstance(),
+          [VuetifySymbol as symbol]: { defaults: { global: {} } },
           [VuetifyThemeSymbol as symbol]: createTheme(),
         },
       },
@@ -50,7 +49,7 @@ describe('VThemeProvider.ts', () => {
     const wrapper = mount(Test, {
       global: {
         provide: {
-          ...createMockVuetifyInstance(),
+          [VuetifySymbol as symbol]: { defaults: { global: {} } },
           [VuetifyThemeSymbol as symbol]: createTheme({
             defaultTheme: 'contrast',
           }),
