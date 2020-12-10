@@ -71,8 +71,6 @@ export interface ThemeInstance {
   themeClass: Ref<string>
   setTheme: (key: string, theme: ThemeDefinition) => void
   getTheme: (key: string) => InternalThemeDefinition
-  prev: () => void
-  next: () => void
 }
 
 export const VuetifyThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme')
@@ -117,18 +115,6 @@ const defaultThemeOptions: InternalThemeOptions = {
   },
 }
 
-const step = <T>(arr: T[], current: T, steps: number): T => arr[(arr.indexOf(current) + arr.length + steps) % arr.length]
-
-const next = (
-  current: Ref<string>,
-  themes: Ref<Record<string, InternalThemeDefinition>>
-) => () => current.value = step(Object.keys(themes.value), current.value, 1)
-
-const prev = (
-  current: Ref<string>,
-  themes: Ref<Record<string, InternalThemeDefinition>>
-) => () => current.value = step(Object.keys(themes.value), current.value, -1)
-
 const parseThemeOptions = (options?: ThemeOptions): InternalThemeOptions => {
   if (options == null) return defaultThemeOptions
   if (options === false) return { ...defaultThemeOptions, isDisabled: true } as InternalThemeOptions
@@ -146,7 +132,6 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
   const current = ref<string>(parsedOptions.defaultTheme)
   const themes = ref<Record<string, ThemeDefinition>>(parsedOptions.themes)
   const variations = ref(parsedOptions.variations)
-  const themeClass = computed(() => parsedOptions.isDisabled ? '' : `v-theme--${current.value}`)
 
   const genOnColor = (color: string) => intToHex(getLuma(color) > 0.18 ? 0x0 : 0xffffff)
 
@@ -259,9 +244,7 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
     setTheme: (key: string, theme: ThemeDefinition) => themes.value[key] = theme,
     getTheme: (key: string) => computedThemes.value[key],
     current,
-    themeClass,
-    prev: prev(current, computedThemes),
-    next: next(current, computedThemes),
+    themeClass: computed(() => parsedOptions.isDisabled ? '' : `v-theme--${current.value}`),
   }
 }
 
@@ -287,14 +270,9 @@ export const provideTheme = (props: { theme?: string, newContext?: boolean } = {
   const themeClass = computed(() => theme.isDisabled ? '' : `v-theme--${current.value}`)
 
   const newTheme: ThemeInstance = {
-    isDisabled: theme.isDisabled,
-    themes: theme.themes,
-    setTheme: theme.setTheme,
-    getTheme: theme.getTheme,
+    ...theme,
     current,
     themeClass,
-    prev: prev(current, theme.themes),
-    next: next(current, theme.themes),
   }
 
   provide(VuetifyThemeSymbol, newTheme)
