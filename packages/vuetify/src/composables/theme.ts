@@ -133,8 +133,6 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
   const themes = ref<Record<string, ThemeDefinition>>(parsedOptions.themes)
   const variations = ref(parsedOptions.variations)
 
-  const genOnColor = (color: string) => intToHex(getLuma(color) > 0.18 ? 0x0 : 0xffffff)
-
   const genColorVariations = (name: string, color: string) => {
     const obj: Record<string, string> = {}
     for (const variation of (['lighten', 'darken'] as const)) {
@@ -162,7 +160,7 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
         if (/on-[a-z]/.test(color) || theme.colors[`on-${color}`]) continue
 
         const onColor = `on-${color}` as keyof OnColors
-        theme.colors[onColor] = genOnColor(theme.colors[color]!)
+        theme.colors[onColor] = intToHex(getLuma(theme.colors[color]!) > 0.18 ? 0x0 : 0xffffff)
       }
 
       obj[key] = theme as InternalThemeDefinition
@@ -250,7 +248,8 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
 
 export const provideTheme = (props: { theme?: string, newContext?: boolean } = {}, context: SetupContext) => {
   const theme = inject(VuetifyThemeSymbol, null)
-  if (!theme) throw new Error('Could not find vuetify theme provider')
+
+  if (!theme) throw new Error('Could not find Vuetify theme injection')
 
   const internal = ref<string | null>(null)
   const current = computed<string>({
@@ -283,7 +282,7 @@ export const provideTheme = (props: { theme?: string, newContext?: boolean } = {
 export const useTheme = () => {
   const theme = inject(VuetifyThemeSymbol)
 
-  if (!theme) throw new Error('Could not find theme')
+  if (!theme) throw new Error('Could not find Vuetify theme injection')
 
   return theme
 }
