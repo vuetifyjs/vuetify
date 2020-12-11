@@ -1,10 +1,17 @@
 module.exports = {
-  'v-item-group': {
-    events: [
+  "v-item-group": {
+    props: [
       {
-        name: 'change',
-        value: 'any[] | any',
+        name: "tag",
+        type: "string",
+        default: "'div'",
       },
     ],
-  },
-}
+    events: [
+      {
+        name: "change",
+        value: "any[] | any"
+      }
+    ]
+  }
+};
