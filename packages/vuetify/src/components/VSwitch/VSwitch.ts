@@ -77,12 +77,15 @@ export default Selectable.extend({
       ]
     },
     genSwitch (): VNode {
+      // title attr is used on parent directly, so that its hover effect includes VLabel; this avoids a duplicate
+      const switchAttrs = { ...this.attrs$ }
+      delete switchAttrs.title
       return this.$createElement('div', {
         staticClass: 'v-input--selection-controls__input',
       }, [
         this.genInput('checkbox', {
           ...this.attrs,
-          ...this.attrs$,
+          ...switchAttrs,
         }),
         this.genRipple(this.setTextColor(this.validationState, {
           directives: [{
