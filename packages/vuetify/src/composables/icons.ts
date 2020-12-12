@@ -4,7 +4,7 @@ import { computed, h, inject } from 'vue'
 // Types
 import type { Component, InjectionKey } from 'vue'
 
-export type VuetifyIcon = string
+export type VuetifyIcon = string | Component
 
 export interface VuetifyIcons {
   [name: string]: VuetifyIcon
@@ -46,7 +46,7 @@ export interface VuetifyIcons {
 interface IconProps {
   tag: string
   type: string
-  icon: string
+  icon: VuetifyIcon
   disabled?: Boolean
   class?: unknown[]
   style?: Record<string, unknown> | null
@@ -54,14 +54,14 @@ interface IconProps {
 
 export interface IconPreset {
   component: (props: IconProps) => Component
-  values: VuetifyIcons
+  values?: Partial<VuetifyIcons>
 }
 
 export type IconOptions = Record<string, IconPreset>
 
 export const VuetifyIconSymbol: InjectionKey<IconOptions> = Symbol.for('vuetify:icons')
 
-export const useIcon = (props: { icon: string, type: string }) => {
+export const useIcon = (props: { icon: VuetifyIcon, type: string }) => {
   const icons = inject(VuetifyIconSymbol)
 
   if (!icons) throw new Error('Missing Vuetify Icons provide!')
@@ -77,9 +77,15 @@ export const useIcon = (props: { icon: string, type: string }) => {
       }
     }
 
+    let icon: VuetifyIcon = props.icon
+
+    if (typeof props.icon === 'string' && props.icon.startsWith('$') && preset.values) {
+      icon = preset.values[props.icon.slice(1)] ?? icon
+    }
+
     return {
       component: preset.component,
-      icon: props.icon.startsWith('$') ? preset.values[props.icon.slice(1)] : props.icon,
+      icon,
     }
   })
 

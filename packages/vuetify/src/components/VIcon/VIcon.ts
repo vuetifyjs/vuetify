@@ -5,6 +5,10 @@ import { computed, defineComponent, h } from 'vue'
 import { useIcon, makeSizeProps, useSizeClass } from '@/composables'
 import makeProps from '@/util/makeProps'
 
+// Types
+import type { PropType } from 'vue'
+import type { VuetifyIcon } from '@/composables'
+
 export const VSvgIcon = defineComponent({
   name: 'VSvgIcon',
   inheritAttrs: false,
@@ -98,7 +102,7 @@ export default defineComponent({
       default: 'i',
     },
     icon: {
-      type: String,
+      type: [String, Object] as PropType<VuetifyIcon>,
       required: true,
     },
     type: {

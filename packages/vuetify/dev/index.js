@@ -3,6 +3,7 @@ import '@mdi/font/css/materialdesignicons.css'
 import { createVuetify, VLigatureIcon, VClassIcon, VSvgIcon } from 'vuetify'
 import { createApp, h } from 'vue'
 import App from './App'
+import { AbTesting } from 'mdue'
 
 const app = createApp(App)
 const vuetify = createVuetify({
@@ -29,6 +30,15 @@ const vuetify = createVuetify({
       component: props => h(VClassIcon, props),
       values: {
         close: 'fas fa-times',
+      },
+    },
+    mdue: {
+      component: props => {
+        const { icon, ...rest } = props
+        return h(rest.tag, rest, [h(props.icon)])
+      },
+      values: {
+        close: AbTesting,
       },
     },
   },

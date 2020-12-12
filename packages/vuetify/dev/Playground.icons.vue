@@ -6,7 +6,7 @@
       <button @click="type = 'mdi'">mdi</button>
       <button @click="type = 'mdi-svg'">mdi-svg</button>
       <button @click="type = 'fa5'">fa5</button>
-      <button @click="type = 'hero'">custom</button>
+      <button @click="type = 'mdue'">custom</button>
     </div>
     <input type="checkbox" :checked="disabled === true" @change="disabled = !disabled" /><label>disabled</label>
     <input :value="icon" @change="e => icon = e.target.value">
