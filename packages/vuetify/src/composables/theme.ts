@@ -118,6 +118,7 @@ const defaultThemeOptions: InternalThemeOptions = {
 const parseThemeOptions = (options?: ThemeOptions): InternalThemeOptions => {
   if (options == null) return defaultThemeOptions
   if (options === false) return { ...defaultThemeOptions, isDisabled: true } as InternalThemeOptions
+
   return {
     ...defaultThemeOptions,
     ...options,
@@ -141,6 +142,7 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
         obj[`${name}-${variation}-${amount}`] = intToHex(fn(colorToInt(color), amount))
       }
     }
+
     return obj
   }
 

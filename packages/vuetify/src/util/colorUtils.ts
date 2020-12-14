@@ -238,6 +238,7 @@ export function RGBtoInt (rgba: RGBA): ColorInt {
 
 export function colorToRGB (color: string) {
   const int = colorToInt(color)
+
   return {
     r: (int & 0xFF0000) >> 16,
     g: (int & 0xFF00) >> 8,
@@ -250,12 +251,14 @@ export function lighten (value: ColorInt, amount: number): ColorInt {
   // TODO: why this false positive?
   // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
   lab[0] = lab[0] + amount * 10
+
   return sRGB.fromXYZ(CIELAB.toXYZ(lab))
 }
 
 export function darken (value: ColorInt, amount: number): ColorInt {
   const lab = CIELAB.fromXYZ(sRGB.toXYZ(value))
   lab[0] = lab[0] - amount * 10
+
   return sRGB.fromXYZ(CIELAB.toXYZ(lab))
 }
 
@@ -279,5 +282,6 @@ export function getContrast (first: Color, second: Color) {
 
   const light = Math.max(l1, l2)
   const dark = Math.min(l1, l2)
+
   return (light + 0.05) / (dark + 0.05)
 }
