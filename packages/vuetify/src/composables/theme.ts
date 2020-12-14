@@ -248,6 +248,13 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
   }
 }
 
+/**
+ * Used to either set up and provide a new theme instance, or to pass
+ * along the closest available already provided instance.
+ *
+ * A new theme instance will be created if either `theme` prop is provided,
+ * or if `newContext` prop is true
+ */
 export const provideTheme = (props: { theme?: string, newContext?: boolean } = {}, context: SetupContext) => {
   const theme = inject(VuetifyThemeSymbol, null)
 
@@ -281,6 +288,9 @@ export const provideTheme = (props: { theme?: string, newContext?: boolean } = {
   return newTheme
 }
 
+/**
+ * Injects and returns closest available provided theme instance.
+ */
 export const useTheme = () => {
   const theme = inject(VuetifyThemeSymbol)
 
