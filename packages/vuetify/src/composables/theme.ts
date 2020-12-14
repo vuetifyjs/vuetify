@@ -226,7 +226,7 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
         lines.push(...createCssClass(`.${key}`, [`color: rgb(var(--v-theme-${key}))`]))
       } else {
         lines.push(
-          ...createCssClass(`.bg-${key}`, [`background: rgb(var(--v-theme-${key}))`]),
+          ...createCssClass(`.bg-${key}`, [`background: rgb(var(--v-theme-${key}))`, `color: rgb(var(--v-theme-on-${key}))`]),
           ...createCssClass(`.text-${key}`, [`color: rgb(var(--v-theme-${key}))`]),
           ...createCssClass(`.border-${key}`, [`border-color: rgb(var(--v-theme-${key}))`]),
         )
