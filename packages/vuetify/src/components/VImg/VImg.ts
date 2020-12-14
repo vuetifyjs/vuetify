@@ -216,7 +216,12 @@ export default mixins(
       const poll = () => {
         let { naturalHeight, naturalWidth } = img
 
-        if (img.src.endsWith('.svg') && naturalHeight === 0 && naturalWidth === 0) {
+        if (
+          img.src &&
+          img.src.endsWith('.svg') &&
+          naturalHeight === 0 &&
+          naturalWidth === 0
+        ) {
           naturalHeight = 1
           naturalWidth = 1
         }
