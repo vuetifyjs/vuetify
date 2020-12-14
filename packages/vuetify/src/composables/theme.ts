@@ -81,7 +81,7 @@ const defaultThemeOptions: InternalThemeOptions = {
   variations: {
     colors: ['primary', 'secondary'],
     darken: 1,
-    lighten: 2,
+    lighten: 0,
   },
   themes: {
     light: {
