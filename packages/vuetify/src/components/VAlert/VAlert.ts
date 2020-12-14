@@ -168,13 +168,16 @@ export default mixins(
       return this.hasColoredIcon ? this.computedColor : undefined
     },
     isDark (): boolean {
-      if (
-        this.type &&
-        !this.coloredBorder &&
-        !this.outlined
-      ) return true
-
-      return Themeable.options.computed.isDark.call(this)
+      if (this.dark === true) {
+        // explicitly dark
+        return true
+      } else if (this.light === true) {
+        // explicitly light
+        return false
+      } else {
+        // inherit from parent, or default false if there is none
+        return this.theme.isDark
+      }
     },
   },
 
