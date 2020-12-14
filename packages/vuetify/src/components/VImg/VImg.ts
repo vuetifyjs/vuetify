@@ -214,7 +214,12 @@ export default mixins(
     },
     pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {
-        const { naturalHeight, naturalWidth } = img
+        let { naturalHeight, naturalWidth } = img
+
+        if (img.src.endsWith('.svg') && naturalHeight === 0 && naturalWidth === 0) {
+          naturalHeight = 1
+          naturalWidth = 1
+        }
 
         if (naturalHeight || naturalWidth) {
           this.naturalWidth = naturalWidth
