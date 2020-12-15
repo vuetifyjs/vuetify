@@ -8,6 +8,10 @@ import Comparable from '../comparable'
 // Utilities
 import mixins from '../../util/mixins'
 
+export function prevent (e: Event) {
+  e.preventDefault()
+}
+
 /* @vue/component */
 export default mixins(
   VInput,
@@ -92,14 +96,8 @@ export default mixins(
       if (!label) return label
 
       label!.data!.on = {
-        click: (e: Event) => {
-          // Prevent label from
-          // causing the input
-          // to focus
-          e.preventDefault()
-
-          this.onChange()
-        },
+        // Label shouldn't cause the input to focus
+        click: prevent,
       }
 
       return label
@@ -122,12 +120,17 @@ export default mixins(
           change: this.onChange,
           focus: this.onFocus,
           keydown: this.onKeydown,
+          click: prevent,
         },
         ref: 'input',
       })
     },
     onBlur () {
       this.isFocused = false
+    },
+    onClick (e: Event) {
+      this.onChange()
+      this.$emit('click', e)
     },
     onChange () {
       if (!this.isInteractive) return

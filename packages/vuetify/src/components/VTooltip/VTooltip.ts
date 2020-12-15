@@ -44,9 +44,6 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
       default: 'span',
     },
     transition: String,
-    zIndex: {
-      default: null,
-    },
   },
 
   data: () => ({
@@ -181,6 +178,12 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
       }
 
       return listeners
+    },
+    genActivatorAttributes () {
+      return {
+        'aria-haspopup': true,
+        'aria-expanded': String(this.isActive),
+      }
     },
     genTransition () {
       const content = this.genContent()

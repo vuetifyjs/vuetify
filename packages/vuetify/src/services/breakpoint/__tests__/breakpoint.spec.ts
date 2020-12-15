@@ -232,6 +232,7 @@ describe('Breakpoint.ts', () => {
 
   beforeEach(() => {
     breakpoint = new Breakpoint(preset)
+    breakpoint.init()
   })
 
   scenarios.slice(0, 1).forEach(scenario => {
@@ -277,6 +278,7 @@ describe('Breakpoint.ts', () => {
         thresholds: { xs: 400 },
       } as any,
     })
+    breakpoint.init()
 
     await resizeWindow(401)
     expect(breakpoint.xs).toBe(false)

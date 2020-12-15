@@ -6,7 +6,8 @@ import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
 // Types
-import { VNode, PropType } from 'vue'
+import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 import mixins from '../../util/mixins'
 
 // Utilities
@@ -18,9 +19,9 @@ export default mixins(Colorable, Themeable).extend({
 
   props: {
     value: {
-      type: Array as PropType<string[]>,
+      type: Array,
       default: () => ([]),
-    },
+    } as PropValidator<string[]>,
   },
 
   methods: {

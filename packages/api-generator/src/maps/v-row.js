@@ -1,5 +1,10 @@
 module.exports = {
   'v-row': {
-    slots: ['default'],
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
   },
 }

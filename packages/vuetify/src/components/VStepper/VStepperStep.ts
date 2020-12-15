@@ -12,7 +12,8 @@ import ripple from '../../directives/ripple'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode, PropType } from 'vue'
+import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 type VuetifyStepperRuleValidator = () => string | boolean
 
@@ -52,9 +53,9 @@ export default baseMixins.extend<options>().extend({
       default: '$error',
     },
     rules: {
-      type: Array as PropType<VuetifyStepperRuleValidator[]>,
+      type: Array,
       default: () => [],
-    },
+    } as PropValidator<VuetifyStepperRuleValidator[]>,
     step: [Number, String],
   },
 

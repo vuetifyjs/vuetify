@@ -1,12 +1,14 @@
 module.exports = {
   'v-click-outside': {
-    options: [
-      {
-        name: 'value',
-        default: 'undefined',
-        type: '((e: Event) => void) | ClickOutsideBindingArgs',
-        snippet: 'ts_directive_click_outside_value',
+    argument: [{
+      name: 'argument',
+      type: ['((e: Event) => void)', 'ClickOutsideBindingArgs'],
+      default: undefined,
+      example: {
+        handler: '(e: Event) => void',
+        'closeConditional?': '(e: Event) => boolean',
+        'include?': '() => HTMLElement[]',
       },
-    ],
+    }],
   },
 }

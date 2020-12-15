@@ -80,6 +80,7 @@ export default baseMixins.extend({
       animateTimeout: -1,
       isActive: !!this.value,
       stackMinZIndex: 200,
+      previousActiveElement: null as HTMLElement | null,
     }
   },
 
@@ -116,6 +117,7 @@ export default baseMixins.extend({
       } else {
         this.removeOverlay()
         this.unbind()
+        this.previousActiveElement?.focus()
       }
     },
     fullscreen (val) {
@@ -182,9 +184,13 @@ export default baseMixins.extend({
     },
     show () {
       !this.fullscreen && !this.hideOverlay && this.genOverlay()
+      // Double nextTick to wait for lazy content to be generated
       this.$nextTick(() => {
-        this.$refs.content.focus()
-        this.bind()
+        this.$nextTick(() => {
+          this.previousActiveElement = document.activeElement as HTMLElement
+          this.$refs.content.focus()
+          this.bind()
+        })
       })
     },
     bind () {

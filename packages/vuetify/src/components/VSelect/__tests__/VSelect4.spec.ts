@@ -40,6 +40,10 @@ describe('VSelect.ts', () => {
     }
   })
 
+  afterEach(() => {
+    document.body.removeChild(el)
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/4359
   // Vue modifies the `on` property of the
   // computed `listData` — easiest way to fix

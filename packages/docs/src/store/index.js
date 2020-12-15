@@ -1,7 +1,9 @@
 // Vue
 import Vue from 'vue'
 import Vuex from 'vuex'
-import pathify from 'vuex-pathify'
+
+// Utilities
+import pathify from '@/plugins/vuex-pathify'
 
 // Modules
 import * as modules from './modules'
@@ -14,7 +16,13 @@ export function createStore () {
     plugins: [pathify.plugin],
   })
 
-  store.dispatch('app/init')
+  store.subscribe(mutation => {
+    if (!mutation.type.startsWith('user/')) return
+
+    store.dispatch('user/update', mutation)
+  })
 
   return store
 }
+
+export const ROOT_DISPATCH = Object.freeze({ root: true })

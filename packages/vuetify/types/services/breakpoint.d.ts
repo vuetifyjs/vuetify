@@ -1,5 +1,5 @@
 // Types
-export type BreakpointName = number | 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type BreakpointName = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 // Interfaces
 export interface Breakpoint {
@@ -23,13 +23,13 @@ export interface Breakpoint {
   xs: boolean
   xsOnly: boolean
   mobile: boolean
-  mobileBreakpoint: BreakpointName
+  mobileBreakpoint: number | BreakpointName
   thresholds: BreakpointThresholds
   scrollBarWidth: number
 }
 
 export interface BreakpointOptions {
-  mobileBreakpoint?: BreakpointName
+  mobileBreakpoint?: number | BreakpointName
   scrollBarWidth?: number
   thresholds?: Partial<BreakpointThresholds>
 }

@@ -4,7 +4,8 @@ import './VVirtualTable.sass'
 import VSimpleTable from './VSimpleTable'
 
 // Types
-import { VNode, VNodeChildren, PropType } from 'vue'
+import { VNode, VNodeChildren } from 'vue'
+import { PropValidator } from 'vue/types/options'
 import mixins from '../../util/mixins'
 
 // Utiltiies
@@ -33,9 +34,9 @@ export default baseMixins.extend<options>().extend({
       default: 48,
     },
     items: {
-      type: Array as PropType<any[]>,
+      type: Array,
       default: () => ([]),
-    },
+    } as PropValidator<any[]>,
     rowHeight: {
       type: Number,
       default: 48,

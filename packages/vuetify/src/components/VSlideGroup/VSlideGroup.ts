@@ -355,9 +355,9 @@ export const BaseSlideGroup = mixins<options &
       const itemOffset = clientWidth + offsetLeft
       const additionalOffset = clientWidth * 0.4
 
-      if (offsetLeft < currentScrollOffset) {
+      if (offsetLeft <= currentScrollOffset) {
         currentScrollOffset = Math.max(offsetLeft - additionalOffset, 0)
-      } else if (totalWidth < itemOffset) {
+      } else if (totalWidth <= itemOffset) {
         currentScrollOffset = Math.min(currentScrollOffset - (totalWidth - itemOffset - additionalOffset), widths.content - widths.wrapper)
       }
 

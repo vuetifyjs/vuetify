@@ -53,7 +53,7 @@ export default mixins(
         rootMargin: undefined,
         threshold: undefined,
       }),
-    },
+    } as PropValidator<IntersectionObserverInit>,
     position: {
       type: String,
       default: 'center center',
@@ -86,17 +86,17 @@ export default mixins(
       return Number(this.normalisedSrc.aspect || this.calculatedAspectRatio)
     },
     normalisedSrc (): srcObject {
-      return typeof this.src === 'string'
+      return this.src && typeof this.src === 'object'
         ? {
-          src: this.src,
-          srcset: this.srcset,
-          lazySrc: this.lazySrc,
-          aspect: Number(this.aspectRatio || 0),
-        } : {
           src: this.src.src,
           srcset: this.srcset || this.src.srcset,
           lazySrc: this.lazySrc || this.src.lazySrc,
           aspect: Number(this.aspectRatio || this.src.aspect),
+        } : {
+          src: this.src,
+          srcset: this.srcset,
+          lazySrc: this.lazySrc,
+          aspect: Number(this.aspectRatio || 0),
         }
     },
     __cachedImage (): VNode | [] {

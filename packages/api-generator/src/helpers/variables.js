@@ -6,7 +6,7 @@ const Validatable = {
   props: createItems(['disabled', 'readonly'], {
     default: false,
     source: 'validatable',
-    value: 'boolean',
+    type: 'boolean',
   }),
   events: [
     {
@@ -166,11 +166,6 @@ const VSelect = {
         divider: 'boolean',
         header: 'string',
       },
-      source: 'v-select',
-    },
-    {
-      name: 'filter',
-      default: '(item: object, queryText: string, itemText: string): boolean',
       source: 'v-select',
     },
     {

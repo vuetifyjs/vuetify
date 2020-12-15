@@ -25,7 +25,9 @@ export default class Vuetify {
     silent: false,
   }
 
-  public framework: Dictionary<VuetifyServiceContract> = {}
+  public framework: Dictionary<VuetifyServiceContract> = {
+    isHydrating: false,
+  } as any
 
   public installed: string[] = []
 

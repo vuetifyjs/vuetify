@@ -9,8 +9,8 @@ export default Vue.extend({
 
   props: {
     mobileBreakpoint: {
-      type: [Number, String] as PropType<BreakpointName>,
-      default (): BreakpointName | undefined {
+      type: [Number, String] as PropType<number | BreakpointName>,
+      default (): number | BreakpointName | undefined {
         // Avoid destroying unit
         // tests for users
         return this.$vuetify

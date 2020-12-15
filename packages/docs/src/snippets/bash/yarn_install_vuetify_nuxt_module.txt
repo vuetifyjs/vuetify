@@ -1,3 +1,0 @@
-$ yarn add @nuxtjs/vuetify -D
-# OR
-$ npm install @nuxtjs/vuetify -D

@@ -14,7 +14,8 @@ import {
 } from '../../util/helpers'
 
 // Types
-import { PropType } from 'vue'
+import { PropType, VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 const defaultMenuProps = {
   ...VSelectMenuProps,
@@ -41,7 +42,7 @@ export default VSelect.extend({
       default: (item: any, queryText: string, itemText: string) => {
         return itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) > -1
       },
-    },
+    } as PropValidator<(item: any, queryText: string, itemText: string) => boolean>,
     hideNoData: Boolean,
     menuProps: {
       type: VSelect.options.props.menuProps.type,
@@ -133,8 +134,7 @@ export default VSelect.extend({
       }
     },
     searchIsDirty (): boolean {
-      return this.internalSearch != null &&
-        this.internalSearch !== ''
+      return this.internalSearch != null
     },
     selectedItem (): any {
       if (this.multiple) return null
@@ -201,6 +201,10 @@ export default VSelect.extend({
 
   created () {
     this.setSearch()
+  },
+
+  destroyed () {
+    document.removeEventListener('copy', this.onCopy)
   },
 
   methods: {
@@ -312,7 +316,7 @@ export default VSelect.extend({
 
       return slot
     },
-    genSelections () {
+    genSelections (): VNode | never[] {
       return this.hasSlot || this.multiple
         ? VSelect.options.methods.genSelections.call(this)
         : []
@@ -408,7 +412,7 @@ export default VSelect.extend({
         this.setSearch()
       }
     },
-    hasItem (item: any) {
+    hasItem (item: any): boolean {
       return this.selectedValues.indexOf(this.getValue(item)) > -1
     },
     onCopy (event: ClipboardEvent) {
@@ -416,8 +420,8 @@ export default VSelect.extend({
 
       const currentItem = this.selectedItems[this.selectedIndex]
       const currentItemText = this.getText(currentItem)
-      event.clipboardData!.setData('text/plain', currentItemText)
-      event.clipboardData!.setData('text/vnd.vuetify.autocomplete.item+plain', currentItemText)
+      event.clipboardData?.setData('text/plain', currentItemText)
+      event.clipboardData?.setData('text/vnd.vuetify.autocomplete.item+plain', currentItemText)
       event.preventDefault()
     },
   },

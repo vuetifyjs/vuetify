@@ -98,7 +98,7 @@ export default CalendarWithEvents.extend({
           break
         case '4day':
           component = VCalendarDaily
-          end = relativeDays(copyTimestamp(end), nextDay, 4)
+          end = relativeDays(copyTimestamp(end), nextDay, 3)
           updateFormatted(end)
           maxDays = 4
           weekdays = [
@@ -366,7 +366,7 @@ export default CalendarWithEvents.extend({
       on: {
         ...this.$listeners,
         'click:date': (day: CalendarTimestamp) => {
-          if (this.$listeners['input']) {
+          if (this.$listeners.input) {
             this.$emit('input', day.date)
           }
           if (this.$listeners['click:date']) {

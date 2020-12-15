@@ -44,32 +44,6 @@ describe('detachable.ts', () => {
     wrapper.destroy()
   })
 
-  it('should not detach when lazy', async () => {
-    const localMock = Mock
-    const wrapper = mount(VApp, {
-      attachToDocument: true,
-      slots: {
-        default: [{
-          render: h => h(localMock),
-        }],
-      },
-      mocks: {
-        $vuetify: {
-          rtl: false,
-          theme: {
-            dark: false,
-          },
-        },
-      },
-    })
-
-    const detach = wrapper.find(localMock)
-
-    expect(detach.vm.hasDetached).toBe(false)
-
-    wrapper.destroy()
-  })
-
   it('should attach and detach', () => {
     const localMock = Mock
     const elementMock = mount(Mock)

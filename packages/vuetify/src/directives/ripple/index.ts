@@ -13,12 +13,12 @@ type VuetifyRippleEvent = MouseEvent | TouchEvent | KeyboardEvent
 const DELAY_RIPPLE = 80
 
 function transform (el: HTMLElement, value: string) {
-  el.style['transform'] = value
-  el.style['webkitTransform'] = value
+  el.style.transform = value
+  el.style.webkitTransform = value
 }
 
 function opacity (el: HTMLElement, value: number) {
-  el.style['opacity'] = value.toString()
+  el.style.opacity = value.toString()
 }
 
 export interface RippleOptions {

@@ -13,6 +13,6 @@ function arrayMerge (a, b) {
   return arr
 }
 
-module.exports = function merge (a, b) {
-  return deepmerge(a, b, { arrayMerge })
+module.exports = function merge (...arr) {
+  return deepmerge.all(arr, { arrayMerge })
 }

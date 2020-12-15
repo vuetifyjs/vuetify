@@ -39,7 +39,7 @@ describe('VDataTableHeader.ts', () => {
   let mountFunction: (options?: MountOptions<Instance>, isMobile?: boolean) => Wrapper<Instance>
 
   ;[false, true].forEach(isMobile => {
-    describe(isMobile ? 'mobile' : 'desktop', () => { // eslint-disable-line jest/valid-describe
+    describe(isMobile ? 'mobile' : 'desktop', () => { // eslint-disable-line jest/valid-title
       beforeEach(() => {
         document.body.setAttribute('data-app', 'true')
 
