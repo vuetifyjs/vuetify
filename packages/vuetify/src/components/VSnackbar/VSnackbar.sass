@@ -7,14 +7,12 @@
 +sheet(v-snack__wrapper, $snackbar-elevation, $snackbar-border-radius, $snackbar-shaped-border-radius)
 
 .v-snack
-  bottom: $snackbar-bottom
   display: flex
   font-size: $snackbar-font-size
   justify-content: center
+  top: $snackbar-top
   left: $snackbar-left
   pointer-events: none
-  right: $snackbar-right
-  top: $snackbar-top
   width: 100%
 
   &:not(.v-snack--absolute)
@@ -91,16 +89,28 @@
 
   &--left
     justify-content: flex-start
+    left: $snackbar-left
+    right: initial
+
+  &--right
+    justify-content: flex-end
+    left: initial
+    right: $snackbar-right
+
+  &--bottom
+    top: initial
+    bottom: $snackbar-bottom
+
+  &--top
+    align-items: flex-start
+    top: $snackbar-top
+    bottom: initial
 
   &--multi-line &__wrapper
     min-height: $snackbar-multi-line-wrapper-min-height
 
-  &--right
-    justify-content: flex-end
-
   &:not(.v-snack--has-background) &__wrapper
     box-shadow: none !important
-
 
   &--text &__wrapper:before
     background-color: currentColor
@@ -113,9 +123,6 @@
     position: absolute
     right: 0
     top: 0
-
-  &--top
-    align-items: flex-start
 
   &--vertical &__wrapper
     flex-direction: column
