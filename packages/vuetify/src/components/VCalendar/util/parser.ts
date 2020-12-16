@@ -20,7 +20,8 @@ export function getParsedCategories (
     return categories.map((category: CalendarCategory) => {
       if (typeof category === 'string') return { categoryName: category }
 
-      const categoryName = typeof category.categoryName === 'string' ? category.categoryName
+      const categoryName = typeof category.categoryName === 'string'
+        ? category.categoryName
         : parsedCategoryText(category, categoryText)
       return { ...category, categoryName }
     })
