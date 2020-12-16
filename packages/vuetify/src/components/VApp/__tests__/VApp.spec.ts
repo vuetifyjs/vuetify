@@ -11,7 +11,7 @@ describe('VApp', () => {
     const wrapper = mount(VApp, {
       global: {
         provide: {
-          [VuetifySymbol as symbol]: { defaults: { global: {} },
+          [VuetifySymbol as symbol]: { defaults: { global: {} } },
           [VuetifyThemeSymbol as symbol]: createTheme(),
         },
       },
@@ -24,7 +24,7 @@ describe('VApp', () => {
     const wrapper = mount(VApp, {
       global: {
         provide: {
-          [VuetifySymbol as symbol]: { defaults: { global: {} },
+          [VuetifySymbol as symbol]: { defaults: { global: {} } },
           [VuetifyThemeSymbol as symbol]: createTheme(),
         },
       },
@@ -41,11 +41,12 @@ describe('VApp', () => {
       },
       global: {
         provide: {
-          [VuetifySymbol as symbol]: { defaults: { global: {} },
+          [VuetifySymbol as symbol]: { defaults: { global: {} } },
           [VuetifyThemeSymbol as symbol]: createTheme(),
         },
       },
     })
+
     const app = wrapper.find('.v-application')
     expect(app.attributes().id).toBe('inspire')
 
