@@ -46,16 +46,13 @@ export default baseMixins.extend<options>().extend({
   inheritAttrs: false,
 
   props: {
-    autofocus: Boolean,
-    fullWidth: Boolean,
-    singleLine: Boolean,
     length: {
       type: Number,
       default: 6,
     },
     onFinish: {
       type: Function,
-      default: ((rsp: string) => { console.log('onFinish() prop will return', rsp) }) as Function,
+      default: (() => { }) as Function,
     },
     type: {
       type: String,
@@ -77,13 +74,9 @@ export default baseMixins.extend<options>().extend({
         'v-input--hide-details': true,
         'v-text-field': true,
         'v-otp-input-field': true,
-        'v-text-field--full-width': this.fullWidth,
         'v-text-field--enclosed': true,
         'v-text-field--outlined': true,
       }
-    },
-    computedColor (): string | undefined {
-      return this.color || 'primary'
     },
     internalValue: {
       get (): any {
@@ -96,12 +89,6 @@ export default baseMixins.extend<options>().extend({
     },
     isDirty (): boolean {
       return this.lazyValue?.toString().length > 0 || this.badInput
-    },
-    isSingle (): boolean {
-      return (
-        this.singleLine ||
-        this.fullWidth
-      )
     },
   },
 
@@ -136,7 +123,7 @@ export default baseMixins.extend<options>().extend({
         style: { height: convertToUnit(this.height) },
         on: {
           click: () => this.onClick(otpIdx),
-          mousedown: this.onMouseDown,
+          mousedown: (e: Event) => this.onMouseDown(e, otpIdx),
           mouseup: (e: Event) => this.onMouseUp(e, otpIdx),
         },
         ref: `input-slot-${otpIdx}`,
@@ -167,18 +154,13 @@ export default baseMixins.extend<options>().extend({
       ])
     },
     genContent () {
-      return [
-        this.genWrapper(),
-      ]
-    },
-    genWrapper () {
       const cols = [...Array(this.length).keys()].map(x => {
         return this.genCol(x)
       })
 
-      return this.$createElement(VRow, {
+      return [this.$createElement(VRow, {
         staticClass: 'position-relative row--dense',
-      }, cols)
+      }, cols)]
     },
     genFieldset () {
       return this.$createElement('fieldset', {
@@ -188,14 +170,13 @@ export default baseMixins.extend<options>().extend({
       }, [this.genLegend()])
     },
     genLegend () {
-      const width = 0
       const span = this.$createElement('span', {
         domProps: { innerHTML: '&#8203;' },
       })
 
       return this.$createElement('legend', {
         style: {
-          width: !this.isSingle ? convertToUnit(width) : undefined,
+          width: '0px',
         },
       }, [span])
     },
@@ -206,15 +187,13 @@ export default baseMixins.extend<options>().extend({
       return this.$createElement('input', {
         style: {},
         domProps: {
-          value: (this.type === 'number' && Object.is(this.lazyValue, -0)) ? '-0' : this.otp[otpIdx],
+          value: this.otp[otpIdx],
         },
         attrs: {
           ...this.attrs$,
-          autofocus: this.autofocus,
           disabled: this.isDisabled,
           id: `${this.computedId}--${otpIdx}`,
-          readonly: this.isReadonly,
-          type: this.type,
+          class: `otp-field-box--${otpIdx}`,
           maxlength: 1,
         },
         on: Object.assign(listeners, {
@@ -227,9 +206,6 @@ export default baseMixins.extend<options>().extend({
         }),
         ref: `input-${otpIdx}`,
       })
-    },
-    genMessages () {
-      return null
     },
     genTextFieldSlot (otpIdx: number): VNode {
       return this.$createElement('div', {
@@ -277,7 +253,7 @@ export default baseMixins.extend<options>().extend({
           this.changeFocus(nextIndex)
         } else {
           this.clearFocus(otpIdx)
-          if (this.otp.length === this.length) { this.onCompleted() }
+          this.onCompleted()
         }
       }
     },
@@ -286,13 +262,15 @@ export default baseMixins.extend<options>().extend({
       input.blur()
     },
     onKeyDown (e: KeyboardEvent) {
-      if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
+      if (e.keyCode === keyCodes.enter) {
+        this.$emit('change', this.internalValue)
+      }
 
       this.$emit('keydown', e)
     },
-    onMouseDown (e: Event) {
+    onMouseDown (e: Event, otpIdx: number) {
       // Prevent input from being blurred
-      if (e.target !== this.$refs.input) {
+      if (e.target !== this.$refs[`input-${otpIdx}`]) {
         e.preventDefault()
         e.stopPropagation()
       }
@@ -324,11 +302,11 @@ export default baseMixins.extend<options>().extend({
 
       if (newOtp.length === this.length) { this.onCompleted(); this.clearFocus(targetFocus) }
     },
-    applyValue (index: number, inputVal: string, next?: Function) {
+    applyValue (index: number, inputVal: string, next: Function) {
       const newOtp: string[] = [...this.otp]
       newOtp[index] = inputVal
       this.otp = newOtp
-      if (next) { next() }
+      next()
     },
     changeFocus (index: number) {
       this.onFocus(undefined, index || 0)
@@ -344,27 +322,25 @@ export default baseMixins.extend<options>().extend({
       }
     },
     onKeyUp (event: KeyboardEvent, index: number) {
-      if (event) {
-        event.preventDefault()
-        const eventKey = event.key
-        if (['Tab', 'Shift', 'Meta', 'Control', 'Alt'].includes(eventKey)) {
-          return
-        }
-        if (['Delete'].includes(eventKey)) {
-          return
-        }
-        if (eventKey === 'ArrowLeft' || (eventKey === 'Backspace' && !this.otp[index])) {
-          return index > 0 && this.changeFocus(index - 1)
-        }
-        if (eventKey === 'ArrowRight') {
-          return index + 1 < this.length && this.changeFocus(index + 1)
-        }
+      event.preventDefault()
+      const eventKey = event.key
+      if (['Tab', 'Shift', 'Meta', 'Control', 'Alt'].includes(eventKey)) {
+        return
+      }
+      if (['Delete'].includes(eventKey)) {
+        return
+      }
+      if (eventKey === 'ArrowLeft' || (eventKey === 'Backspace' && !this.otp[index])) {
+        return index > 0 && this.changeFocus(index - 1)
+      }
+      if (eventKey === 'ArrowRight') {
+        return index + 1 < this.length && this.changeFocus(index + 1)
       }
     },
     onCompleted () {
-      const rsp = Object.values(this.otp).join('')
-      if (rsp.length === this.length) { this?.onFinish(rsp) } else {
-        this.changeFocus(0)
+      const rsp = this.otp.join('')
+      if (rsp.length === this.length) {
+        this?.onFinish(rsp)
       }
     },
   },
