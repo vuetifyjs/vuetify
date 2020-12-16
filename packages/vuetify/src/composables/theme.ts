@@ -128,10 +128,9 @@ const parseThemeOptions = (options?: ThemeOptions): InternalThemeOptions => {
 
 export const createTheme = (options?: ThemeOptions): ThemeInstance => {
   const parsedOptions = parseThemeOptions(options)
-
-  const styleEl = ref<HTMLStyleElement | undefined>()
-  const current = ref<string>(parsedOptions.defaultTheme)
-  const themes = ref<Record<string, ThemeDefinition>>(parsedOptions.themes)
+  const styleEl = ref<HTMLStyleElement>()
+  const current = ref(parsedOptions.defaultTheme)
+  const themes = ref(parsedOptions.themes)
   const variations = ref(parsedOptions.variations)
 
   const genColorVariations = (name: string, color: string) => {
@@ -276,7 +275,6 @@ export const provideTheme = (props: { theme?: string, newContext?: boolean } = {
   })
 
   const themeClass = computed(() => theme.isDisabled ? '' : `v-theme--${current.value}`)
-
   const newTheme: ThemeInstance = {
     ...theme,
     current,
