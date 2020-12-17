@@ -43,13 +43,15 @@ export interface VuetifyIcons {
   minus: VuetifyIcon
 }
 
-interface IconProps {
+export interface IconProps {
   tag: string
-  type: string
+  set: string
   icon: VuetifyIcon
   disabled?: Boolean
   class?: unknown[]
   style?: Record<string, unknown> | null
+  'aria-hidden': boolean
+  type?: string
 }
 
 export interface IconPreset {
@@ -61,15 +63,15 @@ export type IconOptions = Record<string, IconPreset>
 
 export const VuetifyIconSymbol: InjectionKey<IconOptions> = Symbol.for('vuetify:icons')
 
-export const useIcon = (props: { icon: VuetifyIcon, type: string }) => {
+export const useIcon = (props: { icon: VuetifyIcon, set: string }) => {
   const icons = inject(VuetifyIconSymbol)
 
   if (!icons) throw new Error('Missing Vuetify Icons provide!')
 
   const icon = computed(() => {
-    const preset = icons[props.type]
+    const set = icons[props.set]
 
-    if (!preset) {
+    if (!set) {
       // TODO: Throw error?
       return {
         component: () => h('div', ['error!']),
@@ -79,12 +81,12 @@ export const useIcon = (props: { icon: VuetifyIcon, type: string }) => {
 
     let icon: VuetifyIcon = props.icon
 
-    if (typeof props.icon === 'string' && props.icon.startsWith('$') && preset.values) {
-      icon = preset.values[props.icon.slice(1)] ?? icon
+    if (typeof props.icon === 'string' && props.icon.startsWith('$') && set.values) {
+      icon = set.values[props.icon.slice(1)] ?? icon
     }
 
     return {
-      component: preset.component,
+      component: set.component,
       icon,
     }
   })

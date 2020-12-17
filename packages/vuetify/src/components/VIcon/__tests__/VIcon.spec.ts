@@ -1,51 +1,53 @@
 // Components
-import VIcon from '../VIcon'
+import { VIcon, VClassIcon, VSvgIcon, VLigatureIcon } from '../'
 
 // Utilities
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import * as framework from '@/framework'
-import type { VuetifyIcons } from '@/composables'
+import { VuetifySymbol } from '@/framework'
+import { VuetifyIconSymbol } from '@/composables'
 
-describe('VIcon', () => {
-  let vuetifyMock: jest.SpyInstance
+// Types
+import type { IconProps } from '@/composables'
 
-  beforeEach(() => {
-    vuetifyMock = jest.spyOn(framework, 'useVuetify').mockImplementation(() => ({
+const globalOptions = {
+  provide: {
+    [VuetifySymbol as symbol]: {
       defaults: {
         global: {},
       },
-      icon: {
-        icons: {
-          checkboxOn: 'check_box',
-          checkboxOff: {
-            component: defineComponent({
-              props: {
-                foo: String,
-              },
-              setup (props) {
-                return () => h('div', [props.foo])
-              },
-            }),
-          },
-        } as unknown as VuetifyIcons,
+    },
+    [VuetifyIconSymbol as symbol]: {
+      mdi: {
+        component: (props: IconProps) => h(VClassIcon, props),
+        values: {
+          checkboxOn: 'mdi-check',
+        },
       },
-    }))
-  })
+      fa: {
+        component: (props: IconProps) => h(VClassIcon, props),
+      },
+      'material-icons': {
+        component: (props: IconProps) => h(VLigatureIcon, props),
+      },
+      svg: {
+        component: (props: IconProps) => h(VSvgIcon, props),
+      },
+    },
+  },
+}
 
-  afterEach(() => {
-    vuetifyMock.mockClear()
-  })
-
-  it('should render component', () => {
+describe('VIcon', () => {
+  it('should render ligature icon', () => {
     const wrapper = mount(VIcon, {
       props: {
+        set: 'material-icons',
         icon: 'add',
       },
+      global: globalOptions,
     })
 
-    expect(wrapper.text()).toBe('add')
-    expect(wrapper.element.className).toBe('v-icon notranslate material-icons theme--light')
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   // it('should render a colored component', () => {
@@ -56,19 +58,19 @@ describe('VIcon', () => {
   // })
 
   it('should render a disabled component', () => {
-    const wrapper = mount(VIcon, { props: { icon: 'add', disabled: true } })
+    const wrapper = mount(VIcon, { props: { icon: 'add', disabled: true }, global: globalOptions })
 
     expect(wrapper.element.classList).toContain('v-icon--disabled')
   })
 
   it('should use default size if none provided', () => {
-    const wrapper = mount(VIcon, { props: { icon: 'add' } })
+    const wrapper = mount(VIcon, { props: { icon: 'add' }, global: globalOptions })
 
     expect(wrapper.element.classList).toContain('v-size--default')
   })
 
   it('should use provided size', () => {
-    const wrapper = mount(VIcon, { props: { icon: 'add', size: 'x-small' } })
+    const wrapper = mount(VIcon, { props: { icon: 'add', size: 'x-small' }, global: globalOptions })
 
     expect(wrapper.element.classList).toContain('v-size--x-small')
   })
@@ -86,37 +88,29 @@ describe('VIcon', () => {
   // })
 
   it('should render a left aligned component', () => {
-    const wrapper = mount(VIcon, { props: { icon: 'add', left: true } })
+    const wrapper = mount(VIcon, { props: { icon: 'add', left: true }, global: globalOptions })
 
     expect(wrapper.element.classList).toContain('v-icon--left')
   })
 
   it('should render a right aligned component', () => {
-    const wrapper = mount(VIcon, { props: { icon: 'add', right: true } })
+    const wrapper = mount(VIcon, { props: { icon: 'add', right: true }, global: globalOptions })
 
     expect(wrapper.element.classList).toContain('v-icon--right')
   })
 
   it('should render a component with aria-hidden attr', () => {
-    const wrapper = mount(VIcon, { props: { icon: 'add' }, attrs: { 'aria-hidden': 'foo' } })
+    const wrapper = mount(VIcon, { props: { icon: 'add' }, attrs: { 'aria-hidden': 'foo' }, global: globalOptions })
 
     expect(wrapper.element.getAttribute('aria-hidden')).toBe('foo')
   })
 
-  it('should allow third-party icons when using <icon>- prefix', () => {
-    const wrapper = mount(VIcon, { props: { icon: 'fa-add' } })
+  it('should render a class icon', () => {
+    const wrapper = mount(VIcon, { props: { set: 'fa', icon: 'fa-add' }, global: globalOptions })
 
     expect(wrapper.text()).toBe('')
     expect(wrapper.element.classList).toContain('fa')
     expect(wrapper.element.classList).toContain('fa-add')
-  })
-
-  it('should support font awesome 5 icons when using <icon>- prefix', () => {
-    const wrapper = mount(VIcon, { props: { icon: 'fab fa-facebook' } })
-
-    expect(wrapper.text()).toBe('')
-    expect(wrapper.element.classList).toContain('fab')
-    expect(wrapper.element.classList).toContain('fa-facebook')
   })
 
   // it('should allow the use of v-text', () => {
@@ -169,10 +163,9 @@ describe('VIcon', () => {
   // })
 
   it('should render globally defined icon', () => {
-    const wrapper = mount(VIcon, { props: { icon: '$checkboxOn' } })
+    const wrapper = mount(VIcon, { props: { icon: '$checkboxOn' }, global: globalOptions })
 
-    expect(wrapper.text()).toBe('check_box')
-    expect(wrapper.element.className).toBe('v-icon notranslate material-icons theme--light')
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   //   it('should render MD left icon from $prev', () => {
@@ -184,21 +177,15 @@ describe('VIcon', () => {
   // })
 
   it('should use an <i> tag if none provided', () => {
-    const wrapper = mount(VIcon, { props: { icon: 'add' } })
+    const wrapper = mount(VIcon, { props: { icon: 'add' }, global: globalOptions })
 
     expect(wrapper.element.localName).toBe('i')
   })
 
-  it('sets tag from from prop if provided', () => {
-    const wrapper = mount(VIcon, { props: { icon: 'add', tag: 'span' } })
+  it('should use tag from from prop if provided', () => {
+    const wrapper = mount(VIcon, { props: { icon: 'add', tag: 'span' }, global: globalOptions })
 
     expect(wrapper.element.localName).toBe('span')
-  })
-
-  it('should render custom component', () => {
-    const wrapper = mount(VIcon, { props: { icon: '$checkboxOff' } })
-
-    expect(wrapper.html()).toMatchSnapshot()
   })
 
   //   it('should render a colored component', () => {
@@ -209,7 +196,7 @@ describe('VIcon', () => {
   //   })
 
   it('should render a disabled icon', () => {
-    const wrapper = mount(VIcon, { props: { icon: 'add', disabled: true } })
+    const wrapper = mount(VIcon, { props: { icon: 'add', disabled: true }, global: globalOptions })
 
     expect(wrapper.element.classList).toContain('v-icon--disabled')
   })
@@ -246,7 +233,7 @@ describe('VIcon', () => {
 
   it('should render clickable icon if click handler specified', () => {
     const clickHandler = jest.fn()
-    const wrapper = mount(VIcon, { props: { icon: 'add', onClick: clickHandler } })
+    const wrapper = mount(VIcon, { props: { set: 'mdi', icon: 'mdi-add', onClick: clickHandler }, global: globalOptions })
     wrapper.trigger('click')
 
     expect(wrapper.element.classList).toContain('v-icon--link')
@@ -262,7 +249,43 @@ describe('VIcon', () => {
   //   })
 
   it('should render an svg icon', async () => {
-    const wrapper = mount(VIcon, { props: { icon: 'M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z' } })
+    const wrapper = mount(VIcon, {
+      props: {
+        set: 'svg',
+        icon: 'M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z',
+      },
+      global: globalOptions,
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should add custom class', async () => {
+    const wrapper = mount(VIcon, {
+      props: {
+        icon: 'mdi-add',
+      },
+      attrs: {
+        class: 'custom',
+      },
+      global: globalOptions,
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should add custom style', async () => {
+    const wrapper = mount(VIcon, {
+      props: {
+        icon: 'mdi-add',
+      },
+      attrs: {
+        style: {
+          color: 'red',
+        },
+      },
+      global: globalOptions,
+    })
 
     expect(wrapper.html()).toMatchSnapshot()
   })

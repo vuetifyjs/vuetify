@@ -1,9 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VIcon should render an svg icon 1`] = `
-<i class="v-icon notranslate  v-size--default M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"
+exports[`VIcon should add custom class 1`] = `
+<i class="mdi mdi-add v-icon notranslate v-size--default custom"
    aria-hidden="true"
-   disabled="false"
+>
+</i>
+`;
+
+exports[`VIcon should add custom style 1`] = `
+<i class="mdi mdi-add v-icon notranslate v-size--default"
+   style="color: red;"
+   aria-hidden="true"
+>
+</i>
+`;
+
+exports[`VIcon should render an svg icon 1`] = `
+<i class="v-icon notranslate v-size--default"
+   aria-hidden="true"
 >
   <svg class="v-icon__svg"
        xmlns="http://www.w3.org/2000/svg"
@@ -17,13 +31,17 @@ exports[`VIcon should render an svg icon 1`] = `
 </i>
 `;
 
-exports[`VIcon should render custom component 1`] = `
-<i class="v-icon notranslate  v-size--default"
+exports[`VIcon should render globally defined icon 1`] = `
+<i class="mdi mdi-check v-icon notranslate v-size--default"
    aria-hidden="true"
-   disabled="false"
 >
-  <div class="v-icon__component">
-    bar
-  </div>
+</i>
+`;
+
+exports[`VIcon should render ligature icon 1`] = `
+<i class="material-icons v-icon notranslate v-size--default"
+   aria-hidden="true"
+>
+  add
 </i>
 `;

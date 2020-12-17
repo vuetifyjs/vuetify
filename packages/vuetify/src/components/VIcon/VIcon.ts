@@ -21,7 +21,7 @@ export const VSvgIcon = defineComponent({
       type: String,
       required: true,
     },
-    type: {
+    set: {
       type: String,
       required: true,
     },
@@ -54,14 +54,14 @@ export const VLigatureIcon = defineComponent({
       type: String,
       required: true,
     },
-    type: {
+    set: {
       type: String,
       required: true,
     },
   },
   setup (props) {
     return () => h(props.tag, {
-      class: props.type,
+      class: props.set,
     }, [props.icon])
   },
 })
@@ -77,14 +77,14 @@ export const VClassIcon = defineComponent({
       type: String,
       required: true,
     },
-    type: {
+    set: {
       type: String,
       required: true,
     },
   },
   setup (props) {
     return () => h(props.tag, {
-      class: [props.type, props.icon],
+      class: [props.set, props.icon],
     })
   },
 })
@@ -105,7 +105,7 @@ export default defineComponent({
       type: [String, Object] as PropType<VuetifyIcon>,
       required: true,
     },
-    type: {
+    set: {
       type: String,
       default: 'mdi',
     },
@@ -128,23 +128,25 @@ export default defineComponent({
     const classes = computed(() => ([
       'v-icon',
       'notranslate',
+      sizeClass.value,
       {
         'v-icon--disabled': props.disabled,
         'v-icon--left': props.left,
         'v-icon--right': props.right,
         'v-icon--link': hasClickListener,
       },
-      sizeClass.value,
     ]))
 
     return () => {
       return icon.value.component({
         ...context.attrs,
         tag,
-        type: props.type,
+        set: props.set,
         icon: icon.value.icon,
         class: classes.value,
         style: styles.value,
+        type: hasClickListener ? 'button' : undefined,
+        'aria-hidden': !hasClickListener,
       })
     }
   },
