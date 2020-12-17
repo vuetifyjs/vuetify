@@ -40,13 +40,13 @@ describe('VParallax.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should use empty alt tag when not supplied', async () => {
+  it('alt should be undefined when not supplied', async () => {
     const wrapper = mountFunction({
       attachToDocument: true,
     })
 
     const img = wrapper.find('img')
-    expect(img.attributes('alt')).toBe('')
+    expect(img.attributes('alt')).toBeUndefined()
     expect(wrapper.html()).toMatchSnapshot()
   })
 })
