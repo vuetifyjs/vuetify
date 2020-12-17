@@ -22,10 +22,7 @@ export default baseMixins.extend<options>().extend({
   name: 'v-parallax',
 
   props: {
-    alt: {
-      type: String,
-      default: '',
-    },
+    alt: String,
     height: {
       type: [String, Number],
       default: 500,
