@@ -115,7 +115,7 @@ const defaultThemeOptions: InternalThemeOptions = {
   },
 }
 
-const parseThemeOptions = (options?: ThemeOptions): InternalThemeOptions => {
+function parseThemeOptions (options?: ThemeOptions): InternalThemeOptions {
   if (options == null) return defaultThemeOptions
   if (options === false) return { ...defaultThemeOptions, isDisabled: true } as InternalThemeOptions
 
@@ -126,14 +126,14 @@ const parseThemeOptions = (options?: ThemeOptions): InternalThemeOptions => {
   } as InternalThemeOptions
 }
 
-export const createTheme = (options?: ThemeOptions): ThemeInstance => {
+export function createTheme (options?: ThemeOptions): ThemeInstance {
   const parsedOptions = parseThemeOptions(options)
   const styleEl = ref<HTMLStyleElement>()
   const current = ref(parsedOptions.defaultTheme)
   const themes = ref(parsedOptions.themes)
   const variations = ref(parsedOptions.variations)
 
-  const genColorVariations = (name: string, color: string) => {
+  function genColorVariations (name: string, color: string) {
     const obj: Record<string, string> = {}
     for (const variation of (['lighten', 'darken'] as const)) {
       const fn = variation === 'lighten' ? lighten : darken
@@ -170,7 +170,7 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
     }, {} as Record<string, InternalThemeDefinition>)
   })
 
-  const genCssVariables = (name: string) => {
+  function genCssVariables (name: string) {
     const theme = computedThemes.value[name]
 
     if (!theme) throw new Error(`Could not find theme ${name}`)
@@ -184,7 +184,7 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
     return variables
   }
 
-  const genStyleElement = () => {
+  function genStyleElement () {
     if (typeof document === 'undefined' || styleEl.value) return
 
     const el = document.createElement('style')
@@ -195,7 +195,7 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
     document.head.appendChild(styleEl.value)
   }
 
-  const createCssClass = (selector: string, content: string[]) => {
+  function createCssClass (selector: string, content: string[]) {
     return [
       `${selector} {\n`,
       ...content.map(line => `  ${line};\n`),
@@ -203,7 +203,7 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
     ]
   }
 
-  const updateStyles = () => {
+  function updateStyles () {
     if (parsedOptions.isDisabled) return
 
     genStyleElement()
@@ -254,7 +254,7 @@ export const createTheme = (options?: ThemeOptions): ThemeInstance => {
  * A new theme instance will be created if either `theme` prop is provided,
  * or if `newContext` prop is true
  */
-export const provideTheme = (props: { theme?: string, newContext?: boolean } = {}, context: SetupContext) => {
+export function provideTheme (props: { theme?: string, newContext?: boolean } = {}, context: SetupContext) {
   const theme = inject(VuetifyThemeSymbol, null)
 
   if (!theme) throw new Error('Could not find Vuetify theme injection')
@@ -289,7 +289,7 @@ export const provideTheme = (props: { theme?: string, newContext?: boolean } = {
 /**
  * Injects and returns closest available provided theme instance.
  */
-export const useTheme = () => {
+export function useTheme () {
   const theme = inject(VuetifyThemeSymbol)
 
   if (!theme) throw new Error('Could not find Vuetify theme injection')
