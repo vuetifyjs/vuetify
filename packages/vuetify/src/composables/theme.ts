@@ -75,23 +75,19 @@ export interface ThemeInstance {
 
 export const VuetifyThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme')
 
-const defaultThemeOptions: InternalThemeOptions = {
-  isDisabled: false,
+const defaultThemeOptions: ThemeOptions = {
   defaultTheme: 'light',
-  variations: {
-    colors: ['primary', 'secondary'],
-    darken: 1,
-    lighten: 0,
-  },
+  variations: { colors: [], lighten: 0, darken: 0 },
   themes: {
     light: {
       dark: false,
       colors: {
-        background: '#eeeeee',
+        background: '#e5e5e5',
         surface: '#aaaaaa',
-        primary: '#1976D2',
-        secondary: '#424242',
-        accent: '#82B1FF',
+        primary: '#6200ee',
+        'primary-darken-1': '#3700b3',
+        secondary: '#03dac6',
+        'secondary-darken-1': '#018786',
         error: '#FF5252',
         info: '#2196F3',
         success: '#4CAF50',
@@ -101,11 +97,12 @@ const defaultThemeOptions: InternalThemeOptions = {
     dark: {
       dark: true,
       colors: {
-        background: '#555555',
+        background: '#292929',
         surface: '#333333',
-        primary: '#2196F3',
-        secondary: '#424242',
-        accent: '#FF4081',
+        primary: '#bb86fc',
+        'primary-darken-1': '#3700b3',
+        secondary: '#03dac5',
+        'secondary-darken-1': '#03dac5',
         error: '#FF5252',
         info: '#2196F3',
         success: '#4CAF50',
@@ -115,14 +112,13 @@ const defaultThemeOptions: InternalThemeOptions = {
   },
 }
 
-function parseThemeOptions (options?: ThemeOptions): InternalThemeOptions {
-  if (options == null) return defaultThemeOptions
-  if (options === false) return { ...defaultThemeOptions, isDisabled: true } as InternalThemeOptions
+const parseThemeOptions = (options: ThemeOptions = defaultThemeOptions): InternalThemeOptions => {
+  if (!options) return { ...defaultThemeOptions, isDisabled: true } as InternalThemeOptions
 
   return {
     ...defaultThemeOptions,
     ...options,
-    variations: options.variations === false ? { colors: [], lighten: 0, darken: 0 } : options.variations ?? defaultThemeOptions.variations,
+    variations: options?.variations == null || options?.variations === false ? defaultThemeOptions.variations : options.variations,
   } as InternalThemeOptions
 }
 
@@ -132,18 +128,6 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
   const current = ref(parsedOptions.defaultTheme)
   const themes = ref(parsedOptions.themes)
   const variations = ref(parsedOptions.variations)
-
-  function genColorVariations (name: string, color: string) {
-    const obj: Record<string, string> = {}
-    for (const variation of (['lighten', 'darken'] as const)) {
-      const fn = variation === 'lighten' ? lighten : darken
-      for (const amount of createRange(variations.value[variation], 1)) {
-        obj[`${name}-${variation}-${amount}`] = intToHex(fn(colorToInt(color), amount))
-      }
-    }
-
-    return obj
-  }
 
   const computedThemes = computed(() => {
     return Object.keys(themes.value).reduce((obj, key) => {
@@ -169,6 +153,18 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
       return obj
     }, {} as Record<string, InternalThemeDefinition>)
   })
+
+  function genColorVariations (name: string, color: string) {
+    const obj: Record<string, string> = {}
+    for (const variation of (['lighten', 'darken'] as const)) {
+      const fn = variation === 'lighten' ? lighten : darken
+      for (const amount of createRange(variations.value[variation], 1)) {
+        obj[`${name}-${variation}-${amount}`] = intToHex(fn(colorToInt(color), amount))
+      }
+    }
+
+    return obj
+  }
 
   function genCssVariables (name: string) {
     const theme = computedThemes.value[name]

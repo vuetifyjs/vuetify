@@ -7,72 +7,52 @@ exports[`createTheme should create style element 1`] = `
     type="text/css"
   >
     .v-theme--light {
-      --v-theme-background: 238,238,238;
+      --v-theme-background: 229,229,229;
       --v-theme-surface: 170,170,170;
-      --v-theme-primary: 25,118,210;
-      --v-theme-secondary: 66,66,66;
-      --v-theme-accent: 130,177,255;
+      --v-theme-primary: 98,0,238;
+      --v-theme-primary-darken-1: 55,0,179;
+      --v-theme-secondary: 3,218,198;
+      --v-theme-secondary-darken-1: 1,135,134;
       --v-theme-error: 255,82,82;
       --v-theme-info: 33,150,243;
       --v-theme-success: 76,175,80;
       --v-theme-warning: 251,140,0;
-      --v-theme-primary-lighten-1: 72,143,239;
-      --v-theme-primary-lighten-2: 106,170,255;
-      --v-theme-primary-darken-1: 0,94,182;
-      --v-theme-secondary-lighten-1: 89,89,89;
-      --v-theme-secondary-lighten-2: 114,114,114;
-      --v-theme-secondary-darken-1: 44,44,44;
       --v-theme-on-background: 0,0,0;
       --v-theme-on-surface: 0,0,0;
       --v-theme-on-primary: 255,255,255;
-      --v-theme-on-secondary: 255,255,255;
-      --v-theme-on-accent: 0,0,0;
+      --v-theme-on-primary-darken-1: 255,255,255;
+      --v-theme-on-secondary: 0,0,0;
+      --v-theme-on-secondary-darken-1: 0,0,0;
       --v-theme-on-error: 0,0,0;
       --v-theme-on-info: 0,0,0;
       --v-theme-on-success: 0,0,0;
       --v-theme-on-warning: 0,0,0;
-      --v-theme-on-primary-lighten-1: 0,0,0;
-      --v-theme-on-primary-lighten-2: 0,0,0;
-      --v-theme-on-primary-darken-1: 255,255,255;
-      --v-theme-on-secondary-lighten-1: 255,255,255;
-      --v-theme-on-secondary-lighten-2: 255,255,255;
-      --v-theme-on-secondary-darken-1: 255,255,255;
     }
     .v-theme--light {
       background: rgb(var(--v-theme-background));
       color: rgb(var(--v-theme-on-background));
     }
     .v-theme--dark {
-      --v-theme-background: 85,85,85;
+      --v-theme-background: 41,41,41;
       --v-theme-surface: 51,51,51;
-      --v-theme-primary: 33,150,243;
-      --v-theme-secondary: 66,66,66;
-      --v-theme-accent: 255,64,129;
+      --v-theme-primary: 187,134,252;
+      --v-theme-primary-darken-1: 55,0,179;
+      --v-theme-secondary: 3,218,197;
+      --v-theme-secondary-darken-1: 3,218,197;
       --v-theme-error: 255,82,82;
       --v-theme-info: 33,150,243;
       --v-theme-success: 76,175,80;
       --v-theme-warning: 251,140,0;
-      --v-theme-primary-lighten-1: 81,176,255;
-      --v-theme-primary-lighten-2: 117,204,255;
-      --v-theme-primary-darken-1: 0,124,214;
-      --v-theme-secondary-lighten-1: 89,89,89;
-      --v-theme-secondary-lighten-2: 114,114,114;
-      --v-theme-secondary-darken-1: 44,44,44;
       --v-theme-on-background: 255,255,255;
       --v-theme-on-surface: 255,255,255;
       --v-theme-on-primary: 0,0,0;
-      --v-theme-on-secondary: 255,255,255;
-      --v-theme-on-accent: 0,0,0;
+      --v-theme-on-primary-darken-1: 255,255,255;
+      --v-theme-on-secondary: 0,0,0;
+      --v-theme-on-secondary-darken-1: 0,0,0;
       --v-theme-on-error: 0,0,0;
       --v-theme-on-info: 0,0,0;
       --v-theme-on-success: 0,0,0;
       --v-theme-on-warning: 0,0,0;
-      --v-theme-on-primary-lighten-1: 0,0,0;
-      --v-theme-on-primary-lighten-2: 0,0,0;
-      --v-theme-on-primary-darken-1: 0,0,0;
-      --v-theme-on-secondary-lighten-1: 255,255,255;
-      --v-theme-on-secondary-lighten-2: 255,255,255;
-      --v-theme-on-secondary-darken-1: 255,255,255;
     }
     .v-theme--dark {
       background: rgb(var(--v-theme-background));
@@ -80,6 +60,7 @@ exports[`createTheme should create style element 1`] = `
     }
     .bg-background {
       background: rgb(var(--v-theme-background));
+      color: rgb(var(--v-theme-on-background));
     }
     .text-background {
       color: rgb(var(--v-theme-background));
@@ -89,6 +70,7 @@ exports[`createTheme should create style element 1`] = `
     }
     .bg-surface {
       background: rgb(var(--v-theme-surface));
+      color: rgb(var(--v-theme-on-surface));
     }
     .text-surface {
       color: rgb(var(--v-theme-surface));
@@ -98,6 +80,7 @@ exports[`createTheme should create style element 1`] = `
     }
     .bg-primary {
       background: rgb(var(--v-theme-primary));
+      color: rgb(var(--v-theme-on-primary));
     }
     .text-primary {
       color: rgb(var(--v-theme-primary));
@@ -105,8 +88,19 @@ exports[`createTheme should create style element 1`] = `
     .border-primary {
       border-color: rgb(var(--v-theme-primary));
     }
+    .bg-primary-darken-1 {
+      background: rgb(var(--v-theme-primary-darken-1));
+      color: rgb(var(--v-theme-on-primary-darken-1));
+    }
+    .text-primary-darken-1 {
+      color: rgb(var(--v-theme-primary-darken-1));
+    }
+    .border-primary-darken-1 {
+      border-color: rgb(var(--v-theme-primary-darken-1));
+    }
     .bg-secondary {
       background: rgb(var(--v-theme-secondary));
+      color: rgb(var(--v-theme-on-secondary));
     }
     .text-secondary {
       color: rgb(var(--v-theme-secondary));
@@ -114,17 +108,19 @@ exports[`createTheme should create style element 1`] = `
     .border-secondary {
       border-color: rgb(var(--v-theme-secondary));
     }
-    .bg-accent {
-      background: rgb(var(--v-theme-accent));
+    .bg-secondary-darken-1 {
+      background: rgb(var(--v-theme-secondary-darken-1));
+      color: rgb(var(--v-theme-on-secondary-darken-1));
     }
-    .text-accent {
-      color: rgb(var(--v-theme-accent));
+    .text-secondary-darken-1 {
+      color: rgb(var(--v-theme-secondary-darken-1));
     }
-    .border-accent {
-      border-color: rgb(var(--v-theme-accent));
+    .border-secondary-darken-1 {
+      border-color: rgb(var(--v-theme-secondary-darken-1));
     }
     .bg-error {
       background: rgb(var(--v-theme-error));
+      color: rgb(var(--v-theme-on-error));
     }
     .text-error {
       color: rgb(var(--v-theme-error));
@@ -134,6 +130,7 @@ exports[`createTheme should create style element 1`] = `
     }
     .bg-info {
       background: rgb(var(--v-theme-info));
+      color: rgb(var(--v-theme-on-info));
     }
     .text-info {
       color: rgb(var(--v-theme-info));
@@ -143,6 +140,7 @@ exports[`createTheme should create style element 1`] = `
     }
     .bg-success {
       background: rgb(var(--v-theme-success));
+      color: rgb(var(--v-theme-on-success));
     }
     .text-success {
       color: rgb(var(--v-theme-success));
@@ -152,66 +150,13 @@ exports[`createTheme should create style element 1`] = `
     }
     .bg-warning {
       background: rgb(var(--v-theme-warning));
+      color: rgb(var(--v-theme-on-warning));
     }
     .text-warning {
       color: rgb(var(--v-theme-warning));
     }
     .border-warning {
       border-color: rgb(var(--v-theme-warning));
-    }
-    .bg-primary-lighten-1 {
-      background: rgb(var(--v-theme-primary-lighten-1));
-    }
-    .text-primary-lighten-1 {
-      color: rgb(var(--v-theme-primary-lighten-1));
-    }
-    .border-primary-lighten-1 {
-      border-color: rgb(var(--v-theme-primary-lighten-1));
-    }
-    .bg-primary-lighten-2 {
-      background: rgb(var(--v-theme-primary-lighten-2));
-    }
-    .text-primary-lighten-2 {
-      color: rgb(var(--v-theme-primary-lighten-2));
-    }
-    .border-primary-lighten-2 {
-      border-color: rgb(var(--v-theme-primary-lighten-2));
-    }
-    .bg-primary-darken-1 {
-      background: rgb(var(--v-theme-primary-darken-1));
-    }
-    .text-primary-darken-1 {
-      color: rgb(var(--v-theme-primary-darken-1));
-    }
-    .border-primary-darken-1 {
-      border-color: rgb(var(--v-theme-primary-darken-1));
-    }
-    .bg-secondary-lighten-1 {
-      background: rgb(var(--v-theme-secondary-lighten-1));
-    }
-    .text-secondary-lighten-1 {
-      color: rgb(var(--v-theme-secondary-lighten-1));
-    }
-    .border-secondary-lighten-1 {
-      border-color: rgb(var(--v-theme-secondary-lighten-1));
-    }
-    .bg-secondary-lighten-2 {
-      background: rgb(var(--v-theme-secondary-lighten-2));
-    }
-    .text-secondary-lighten-2 {
-      color: rgb(var(--v-theme-secondary-lighten-2));
-    }
-    .border-secondary-lighten-2 {
-      border-color: rgb(var(--v-theme-secondary-lighten-2));
-    }
-    .bg-secondary-darken-1 {
-      background: rgb(var(--v-theme-secondary-darken-1));
-    }
-    .text-secondary-darken-1 {
-      color: rgb(var(--v-theme-secondary-darken-1));
-    }
-    .border-secondary-darken-1 {
-      border-color: rgb(var(--v-theme-secondary-darken-1));
     }
     .on-background {
       color: rgb(var(--v-theme-on-background));
@@ -222,11 +167,14 @@ exports[`createTheme should create style element 1`] = `
     .on-primary {
       color: rgb(var(--v-theme-on-primary));
     }
+    .on-primary-darken-1 {
+      color: rgb(var(--v-theme-on-primary-darken-1));
+    }
     .on-secondary {
       color: rgb(var(--v-theme-on-secondary));
     }
-    .on-accent {
-      color: rgb(var(--v-theme-on-accent));
+    .on-secondary-darken-1 {
+      color: rgb(var(--v-theme-on-secondary-darken-1));
     }
     .on-error {
       color: rgb(var(--v-theme-on-error));
@@ -239,24 +187,6 @@ exports[`createTheme should create style element 1`] = `
     }
     .on-warning {
       color: rgb(var(--v-theme-on-warning));
-    }
-    .on-primary-lighten-1 {
-      color: rgb(var(--v-theme-on-primary-lighten-1));
-    }
-    .on-primary-lighten-2 {
-      color: rgb(var(--v-theme-on-primary-lighten-2));
-    }
-    .on-primary-darken-1 {
-      color: rgb(var(--v-theme-on-primary-darken-1));
-    }
-    .on-secondary-lighten-1 {
-      color: rgb(var(--v-theme-on-secondary-lighten-1));
-    }
-    .on-secondary-lighten-2 {
-      color: rgb(var(--v-theme-on-secondary-lighten-2));
-    }
-    .on-secondary-darken-1 {
-      color: rgb(var(--v-theme-on-secondary-darken-1));
     }
 
   </style>
