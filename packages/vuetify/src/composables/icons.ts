@@ -54,12 +54,12 @@ export interface IconProps {
   type?: string
 }
 
-export interface IconPreset {
+export interface IconSet {
   component: (props: IconProps) => Component
   values?: Partial<VuetifyIcons>
 }
 
-export type IconOptions = Record<string, IconPreset>
+export type IconOptions = Record<string, IconSet>
 
 export const VuetifyIconSymbol: InjectionKey<IconOptions> = Symbol.for('vuetify:icons')
 

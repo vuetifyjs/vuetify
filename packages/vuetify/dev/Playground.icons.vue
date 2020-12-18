@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-icon @click="foo" :type="type" :size="currentSize" :disabled="disabled" :icon="icon" aria-foo="asd" />
+    <v-icon @click="foo" :set="type" :size="currentSize" :disabled="disabled" :icon="icon" aria-foo="asd" />
     <div class="box">
       <button @click="type = 'material-icons'">material icons</button>
       <button @click="type = 'mdi'">mdi</button>
