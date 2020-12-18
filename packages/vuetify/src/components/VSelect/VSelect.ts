@@ -279,6 +279,7 @@ export default baseMixins.extend<options>().extend({
       this.isMenuActive = false
       this.isFocused = false
       this.selectedIndex = -1
+      this.setMenuIndex(-1)
     },
     /** @public */
     activateMenu () {
