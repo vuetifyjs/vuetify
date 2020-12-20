@@ -1,6 +1,8 @@
 {
   "props": {
     "altLabels": "Places the labels beneath the step",
+    "elevation": "Designates an elevation applied to the component between 0 and 24. You can find more information on the [elevation page](/styles/elevation).",
+    "flat": "Removes the stepper's elevation",
     "nonLinear": "Allow user to jump to any step",
     "vertical": "Display steps vertically"
   },
