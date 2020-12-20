@@ -54,6 +54,7 @@ export default baseMixins.extend<options>().extend({
     icon: Boolean,
     loading: Boolean,
     outlined: Boolean,
+    plain: Boolean,
     retainFocusOnClick: Boolean,
     rounded: Boolean,
     tag: {
@@ -91,6 +92,7 @@ export default baseMixins.extend<options>().extend({
         'v-btn--left': this.left,
         'v-btn--loading': this.loading,
         'v-btn--outlined': this.outlined,
+        'v-btn--plain': this.plain,
         'v-btn--right': this.right,
         'v-btn--round': this.isRound,
         'v-btn--rounded': this.rounded,
