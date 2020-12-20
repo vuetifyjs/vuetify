@@ -57,6 +57,12 @@ Steppers also have an alternative label style which places the title under the s
 
 <example file="v-stepper/prop-alternate-label" />
 
+#### Elevation
+
+Customize the elevation by using the **elevation** or **flat** prop. The **flat** prop is the equivalent of setting **elevation** to 0.
+
+<example file="v-stepper/prop-elevation" />
+
 #### Non linear
 
 Non-linear steppers allow the user to move through your process in whatever way they choose.
