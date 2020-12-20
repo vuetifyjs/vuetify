@@ -1,44 +1,62 @@
-// @ts-nocheck
-/* eslint-disable */
-
 // Components
-// import VThemeProvider from '../VThemeProvider'
+import { VThemeProvider } from '../VThemeProvider'
 
 // Utilities
-import {
-  mount,
-  MountOptions,
-  Wrapper,
-} from '@vue/test-utils'
+import { defineComponent, h } from 'vue'
+import { mount } from '@vue/test-utils'
+import { createTheme, VuetifyThemeSymbol } from '@/composables'
+import { VuetifySymbol } from '@/framework'
 
-describe.skip('VThemeProvider.ts', () => {
-  type Instance = InstanceType<typeof VThemeProvider>
-  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
-
-  beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VThemeProvider, {
-        ...options,
-      })
-    }
-  })
-
-  it('should change based upon root $vuetify', () => {
-    const wrapper = mountFunction({
-      provide: {
-        theme: { isDark: true },
+describe('VThemeProvider.ts', () => {
+  it('should use theme defined in prop', async () => {
+    const wrapper = mount(VThemeProvider, {
+      props: {
+        theme: 'dark',
       },
-      mocks: {
-        $vuetify: {
-          theme: { dark: false },
+      global: {
+        provide: {
+          [VuetifySymbol as symbol]: { defaults: { global: {} } },
+          [VuetifyThemeSymbol as symbol]: createTheme(),
         },
       },
     })
 
-    expect(wrapper.vm.isDark).toBe(true)
+    expect(wrapper.classes('v-theme--dark')).toBeTruthy()
+  })
 
-    wrapper.setProps({ root: true })
+  it('should use default theme from options', async () => {
+    const wrapper = mount(VThemeProvider, {
+      global: {
+        provide: {
+          [VuetifySymbol as symbol]: { defaults: { global: {} } },
+          [VuetifyThemeSymbol as symbol]: createTheme(),
+        },
+      },
+    })
 
-    expect(wrapper.vm.isDark).toBe(false)
+    expect(wrapper.classes('v-theme--light')).toBeTruthy()
+  })
+
+  it('should not use parent value if nested', async () => {
+    const Test = defineComponent({
+      setup () {
+        return () => h(VThemeProvider, () =>
+          h(VThemeProvider, { theme: 'dark' })
+        )
+      },
+    })
+
+    const wrapper = mount(Test, {
+      global: {
+        provide: {
+          [VuetifySymbol as symbol]: { defaults: { global: {} } },
+          [VuetifyThemeSymbol as symbol]: createTheme({
+            defaultTheme: 'contrast',
+          }),
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

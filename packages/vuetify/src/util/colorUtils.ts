@@ -1,7 +1,8 @@
 // Utilities
 import { consoleWarn } from './console'
 import { chunk, padEnd } from './helpers'
-import { toXYZ } from './color/transformSRGB'
+import * as sRGB from '@/util/color/transformSRGB'
+import * as CIELAB from '@/util/color/transformCIELAB'
 
 // Types
 import type { VuetifyThemeVariant } from 'types/services/theme'
@@ -235,15 +236,52 @@ export function RGBtoInt (rgba: RGBA): ColorInt {
   return (rgba.r << 16) + (rgba.g << 8) + rgba.b
 }
 
+export function colorToRGB (color: string) {
+  const int = colorToInt(color)
+
+  return {
+    r: (int & 0xFF0000) >> 16,
+    g: (int & 0xFF00) >> 8,
+    b: (int & 0xFF),
+  }
+}
+
+export function lighten (value: ColorInt, amount: number): ColorInt {
+  const lab = CIELAB.fromXYZ(sRGB.toXYZ(value))
+  // TODO: why this false positive?
+  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+  lab[0] = lab[0] + amount * 10
+
+  return sRGB.fromXYZ(CIELAB.toXYZ(lab))
+}
+
+export function darken (value: ColorInt, amount: number): ColorInt {
+  const lab = CIELAB.fromXYZ(sRGB.toXYZ(value))
+  lab[0] = lab[0] - amount * 10
+
+  return sRGB.fromXYZ(CIELAB.toXYZ(lab))
+}
+
+/**
+ * Calculate the relative luminance of a given color
+ * @see https://www.w3.org/TR/WCAG20/#relativeluminancedef
+ */
+export function getLuma (color: Color) {
+  const rgb = colorToInt(color)
+
+  return sRGB.toXYZ(rgb)[1]
+}
+
 /**
  * Returns the contrast ratio (1-21) between two colors.
- *
- * @param c1 First color
- * @param c2 Second color
+ * @see https://www.w3.org/TR/WCAG20/#contrast-ratiodef
  */
-export function contrastRatio (c1: RGBA, c2: RGBA): number {
-  const [, y1] = toXYZ(RGBtoInt(c1))
-  const [, y2] = toXYZ(RGBtoInt(c2))
+export function getContrast (first: Color, second: Color) {
+  const l1 = getLuma(first)
+  const l2 = getLuma(second)
 
-  return (Math.max(y1, y2) + 0.05) / (Math.min(y1, y2) + 0.05)
+  const light = Math.max(l1, l2)
+  const dark = Math.min(l1, l2)
+
+  return (light + 0.05) / (dark + 0.05)
 }

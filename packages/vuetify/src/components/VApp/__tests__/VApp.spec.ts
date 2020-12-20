@@ -2,31 +2,17 @@
 import VApp from '../VApp'
 
 // Utilities
-import type { VueWrapper } from '@vue/test-utils'
-import {
-  mount,
-} from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
+import { createTheme, VuetifyThemeSymbol } from '@/composables'
+import { VuetifySymbol } from '@/framework'
 
 describe('VApp', () => {
-  type Instance = InstanceType<typeof VApp>
-  let mountFunction: (options?: object) => VueWrapper<Instance>
-
-  beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VApp, {
-        ...options,
-      })
-    }
-  })
-
   it('should match a snapshot', () => {
-    const wrapper = mountFunction({
-      mocks: {
-        $vuetify: {
-          rtl: false,
-          theme: {
-            dark: false,
-          },
+    const wrapper = mount(VApp, {
+      global: {
+        provide: {
+          [VuetifySymbol as symbol]: { defaults: { global: {} } },
+          [VuetifyThemeSymbol as symbol]: createTheme(),
         },
       },
     })
@@ -35,13 +21,11 @@ describe('VApp', () => {
   })
 
   it('should have data-app attribute', () => {
-    const wrapper = mountFunction({
-      mocks: {
-        $vuetify: {
-          rtl: false,
-          theme: {
-            dark: false,
-          },
+    const wrapper = mount(VApp, {
+      global: {
+        provide: {
+          [VuetifySymbol as symbol]: { defaults: { global: {} } },
+          [VuetifyThemeSymbol as symbol]: createTheme(),
         },
       },
     })
@@ -51,19 +35,18 @@ describe('VApp', () => {
   })
 
   it('should allow a custom id', () => {
-    const wrapper = mountFunction({
-      propsData: {
+    const wrapper = mount(VApp, {
+      attrs: {
         id: 'inspire',
       },
-      mocks: {
-        $vuetify: {
-          rtl: false,
-          theme: {
-            dark: false,
-          },
+      global: {
+        provide: {
+          [VuetifySymbol as symbol]: { defaults: { global: {} } },
+          [VuetifyThemeSymbol as symbol]: createTheme(),
         },
       },
     })
+
     const app = wrapper.find('.v-application')
     expect(app.attributes().id).toBe('inspire')
 

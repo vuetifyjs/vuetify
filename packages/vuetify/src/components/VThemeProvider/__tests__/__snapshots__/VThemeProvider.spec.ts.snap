@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VThemeProvider.ts should not use parent value if nested 1`] = `
+<div class="v-theme-provider v-theme--contrast">
+  <div>
+    <div class="v-theme-provider v-theme--dark">
+      <div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
