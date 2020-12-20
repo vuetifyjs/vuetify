@@ -38,4 +38,17 @@ describe('VStepper.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should have the correct elevation', async () => {
+    const wrapper = mountFunction()
+
+    wrapper.setProps({ elevation: 0 })
+    expect(wrapper.classes('elevation-0')).toBe(true)
+
+    wrapper.setProps({ elevation: 12 })
+    expect(wrapper.classes('elevation-12')).toBe(true)
+
+    wrapper.setProps({ elevation: 24 })
+    expect(wrapper.classes('elevation-24')).toBe(true)
+  })
 })
