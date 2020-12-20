@@ -218,7 +218,7 @@ export default mixins(
 
         if (
           img.src &&
-          img.src.endsWith('.svg') &&
+          (img.src.endsWith('.svg') || img.src.startsWith('data:image/svg+xml')) &&
           naturalHeight === 0 &&
           naturalWidth === 0
         ) {
