@@ -221,21 +221,23 @@ export default baseMixins.extend<options>().extend({
     onClick (otpIdx: number) {
       if (this.isFocused || this.isDisabled || !this.$refs[`input-${otpIdx}`]) return
 
-      const input = this.$refs[`input-${otpIdx}`] as HTMLInputElement
-      input.focus()
+      this.onFocus(undefined, otpIdx)
     },
     onFocus (e?: Event, otpIdx?: number) {
+      e?.preventDefault()
+      e?.stopPropagation()
       const refKey = 'input-' + otpIdx
       if (!this.$refs[refKey]) return
 
+      const input = this.$refs[refKey] as HTMLInputElement
       if (document.activeElement !== this.$refs[refKey]) {
-        const input = this.$refs[refKey] as HTMLInputElement
         input.focus()
         return input.select()
       }
 
       if (!this.isFocused) {
         this.isFocused = true
+        input.select()
         e && this.$emit('focus', e)
       }
     },
