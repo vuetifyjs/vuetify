@@ -69,6 +69,7 @@ export default baseMixins.extend({
         'v-stepper--vertical': this.vertical,
         'v-stepper--alt-labels': this.altLabels,
         'v-stepper--non-linear': this.nonLinear,
+        ...this.elevationClasses,
         ...this.themeClasses,
       }
     },
