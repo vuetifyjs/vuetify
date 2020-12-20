@@ -7,7 +7,6 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 import { keyCodes } from '../../../util/helpers'
-import { consoleInfo } from '../../../util/console'
 
 describe('VCombobox.ts', () => {
   type Instance = InstanceType<typeof VCombobox>
