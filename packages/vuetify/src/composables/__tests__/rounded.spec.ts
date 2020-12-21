@@ -1,12 +1,11 @@
-import {
-  useBorderRadius,
-  borderRadiusClassNames,
-} from '../border-radius'
 import type {
-  BorderRadiusProps,
-} from '../border-radius'
+  IMaybeRoundedProps,
+} from '../rounded'
+import {
+  roundedClassNames,
+} from '../rounded'
 
-describe('border-radius', () => {
+describe('rounded', () => {
   const assertions = [
     // Rounded with 0
     [{ rounded: false }, ['rounded-0']],
@@ -34,15 +33,13 @@ describe('border-radius', () => {
     // All strings are accepted?
     [{ rounded: 'foo-bar-bazz-buzz' }, ['rounded-foo-bar-bazz-buzz']],
     [{ rounded: '!' }, ['rounded-!']],
-  ] as [BorderRadiusProps, string[]][]
+  ] as [IMaybeRoundedProps, string[]][]
 
   it.each(assertions)(
     'should return correct rounded classes',
     (propsData, expected) => {
-      const vm = useBorderRadius(propsData)
-      const subject = borderRadiusClassNames(propsData)
+      const subject = roundedClassNames(propsData)
 
-      expect(vm.borderRadiusClasses.value).toMatchObject(expected)
       expect(subject).toMatchObject(expected)
     },
   )
