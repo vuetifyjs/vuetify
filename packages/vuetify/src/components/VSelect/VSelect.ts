@@ -790,7 +790,8 @@ export default baseMixins.extend<options>().extend({
       window.requestAnimationFrame(() => {
         menu.getTiles()
         keyCodes.up === keyCode ? menu.prevTile() : menu.nextTile()
-        menu.activeTile && menu.activeTile.click()
+        const newItemValue = this.allItems[this.getMenuIndex()]
+        this.selectItem(newItemValue)
       })
     },
     selectItem (item: object) {
