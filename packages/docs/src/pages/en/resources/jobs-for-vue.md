@@ -10,7 +10,7 @@ related:
 nav: Jobs for Vue
 ---
 
-# Vue and Vuetify jobs
+<vue-jobs-header />
 
 Find top Vue.js developers, ready to join your team; or browse available openings and land your next job!
 
