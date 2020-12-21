@@ -1,15 +1,19 @@
 // Utilities
 import { computed } from 'vue'
+import type { Prop } from 'vue'
+
 import propsFactory from '@/util/propsFactory'
 
 // Types
+export type IRounded = typeof radius[number]
 export interface BorderRadiusProps {
-  rounded?: boolean | number | string
+  rounded?: IRounded
 }
 
 const radius = [
   true,
   false,
+  '',
   0,
   '0',
   'xs',
@@ -26,14 +30,16 @@ export const makeBorderRadiusProps = propsFactory({
   rounded: {
     type: [Boolean, Number, String],
     validator: (v: any) => radius.includes(v),
-  },
+  } as Prop<IRounded>,
 })
 
-// Effect
-export function useBorderRadiusClasses (props: BorderRadiusProps) {
-  const borderRadiusClasses = computed(() => {
+export const roundedClassNames = (
+  props: BorderRadiusProps,
+): string[] => {
+  const classes = []
+
+  if (props && 'rounded' in props) {
     const rounded = props.rounded
-    const classes = []
 
     if (rounded == null) {
       // noop
@@ -48,8 +54,15 @@ export function useBorderRadiusClasses (props: BorderRadiusProps) {
         classes.push(`rounded-${value}`)
       }
     }
+  }
 
-    return classes
+  return classes.sort()
+}
+
+// Effect
+export function useBorderRadius (props: BorderRadiusProps) {
+  const borderRadiusClasses = computed(() => {
+    return roundedClassNames(props)
   })
 
   return { borderRadiusClasses }
