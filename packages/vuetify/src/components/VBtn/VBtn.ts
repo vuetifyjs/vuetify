@@ -82,12 +82,14 @@ export default baseMixins.extend<options>().extend({
         'v-btn--absolute': this.absolute,
         'v-btn--block': this.block,
         'v-btn--bottom': this.bottom,
-        'v-btn--contained': this.contained,
-        'v-btn--depressed': (this.depressed) || this.outlined,
+        'v-btn--contained': this.isElevated, // TODO: remove v3
+        'v-btn--depressed': (this.depressed) || this.outlined, // TODO: remove v3
         'v-btn--disabled': this.disabled,
+        'v-btn--is-elevated': this.isElevated,
         'v-btn--fab': this.fab,
         'v-btn--fixed': this.fixed,
-        'v-btn--flat': this.isFlat,
+        'v-btn--flat': !this.isElevated, // TODO: remove v3,
+        'v-btn--has-bg': this.hasBg,
         'v-btn--icon': this.icon,
         'v-btn--left': this.left,
         'v-btn--loading': this.loading,
@@ -106,26 +108,23 @@ export default baseMixins.extend<options>().extend({
         ...this.sizeableClasses,
       }
     },
-    contained (): boolean {
-      return Boolean(
-        !this.isFlat &&
-        !this.depressed &&
-        // Contained class only adds elevation
-        // is not needed if user provides value
-        !this.elevation
-      )
-    },
     computedRipple (): RippleOptions | boolean {
       const defaultRipple = this.icon || this.fab ? { circle: true } : true
       if (this.disabled) return false
       else return this.ripple ?? defaultRipple
     },
-    isFlat (): boolean {
+    hasBg (): boolean {
+      return this.isElevated || this.depressed
+    },
+    isElevated (): boolean {
       return Boolean(
-        this.icon ||
-        this.text ||
-        this.outlined
-      )
+        !this.icon &&
+        !this.text &&
+        !this.outlined &&
+        !this.depressed &&
+        !this.disabled &&
+        !this.plain
+      ) || Number(this.elevation) > 0
     },
     isRound (): boolean {
       return Boolean(
@@ -184,8 +183,10 @@ export default baseMixins.extend<options>().extend({
       this.genContent(),
       this.loading && this.genLoader(),
     ]
-    const setColor = !this.isFlat ? this.setBackgroundColor : this.setTextColor
     const { tag, data } = this.generateRouteLink()
+    const setColor = (this.isElevated || this.depressed)
+      ? this.setBackgroundColor
+      : this.setTextColor
 
     if (tag === 'button') {
       data.attrs!.type = this.type
