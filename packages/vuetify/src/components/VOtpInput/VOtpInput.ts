@@ -6,10 +6,6 @@ import './VOtpInput.sass'
 import VInput from '../VInput'
 import { VRow, VCol } from '../VGrid'
 
-// Mixins
-import Intersectable from '../../mixins/intersectable'
-import Loadable from '../../mixins/loadable'
-
 // Directives
 import ripple from '../../directives/ripple'
 
@@ -23,11 +19,6 @@ import { VNode } from 'vue'
 
 const baseMixins = mixins(
   VInput,
-  Intersectable({
-    onVisible: [
-    ],
-  }),
-  Loadable,
 )
 interface options extends InstanceType<typeof baseMixins> {
   $refs: {
@@ -188,10 +179,12 @@ export default baseMixins.extend<options>().extend({
         style: {},
         domProps: {
           value: this.otp[otpIdx],
+          min: this.type === 'number' ? 0 : null,
         },
         attrs: {
           ...this.attrs$,
           disabled: this.isDisabled,
+          type: this.type,
           id: `${this.computedId}--${otpIdx}`,
           class: `otp-field-box--${otpIdx}`,
           maxlength: 1,

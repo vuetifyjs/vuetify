@@ -37,8 +37,8 @@ describe('VOtpInput.ts', () => {
     // const updateValue = jest.fn()
     const wrapper = mountFunction(
       {
-        methods: {
-          // updateValue,
+        propsData: {
+          type: 'number',
         },
       }
     )
