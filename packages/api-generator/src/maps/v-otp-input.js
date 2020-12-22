@@ -3,7 +3,7 @@ module.exports = {
     events: [
       {
         name: 'finish',
-        value: 'String',
+        value: 'any',
       },
     ],
   },
