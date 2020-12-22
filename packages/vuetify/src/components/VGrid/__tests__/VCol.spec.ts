@@ -40,7 +40,7 @@ describe('VCol', () => {
     expect(wrapper.html()).toBe('<div class="v-col-sm-5 v-col-md-4 v-col-lg-3 v-col-xl-2 v-col-6"></div>')
   })
 
-  it.only('should apply ".offset-*" classes with "offset-{bp}-{#}" props', async () => {
+  it('should apply ".offset-*" classes with "offset-{bp}-{#}" props', async () => {
     const wrapper = mount({
       components: { VCol },
       template: `<VCol offset="6" offset-sm="5" offset-md="4" offset-lg="3" offset-xl="2" />`,
@@ -49,7 +49,7 @@ describe('VCol', () => {
     expect(wrapper.html()).toBe('<div class="offset-sm-5 offset-md-4 offset-lg-3 offset-xl-2 v-col offset-6"></div>')
   })
 
-  it.only('should apply ".order-*" classes with "order-{bp}-{#}" props', async () => {
+  it('should apply ".order-*" classes with "order-{bp}-{#}" props', async () => {
     const wrapper = mount({
       components: { VCol },
       template: `<VCol order="6" order-sm="5" order-md="4" order-lg="3" order-xl="2" />`,
