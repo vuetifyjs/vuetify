@@ -219,7 +219,12 @@ const VSlider = {
   ...VInput,
   events: [
     ...VInput.events,
-    ...createItems(['start', 'end'], {
+    ...createItems([
+      'change',
+      'end',
+      'input',
+      'start',
+    ], {
       source: 'v-slider',
       value: 'number',
     }),
@@ -239,6 +244,22 @@ const VSlider = {
       source: 'v-slider',
     },
 
+  ],
+}
+
+const VRangeSlider = {
+  ...VSlider,
+  events: [
+    ...VInput.events,
+    ...createItems([
+      'change',
+      'end',
+      'input',
+      'start',
+    ], {
+      source: 'v-range-slider',
+      value: 'array',
+    }),
   ],
 }
 
@@ -382,6 +403,7 @@ module.exports = {
   VInput,
   VSelect,
   VSlider,
+  VRangeSlider,
   VTextField,
   VTimestamp,
   VTimestampWithCategory,
