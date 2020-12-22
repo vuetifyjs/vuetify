@@ -96,7 +96,7 @@ The **application service** is used to configure your Vuetify layout. It communi
   bar: number
   bottom: number
   footer: number
-  footerInset: number
+  insetFooter: number
   left: number
   right: number
   top: number
