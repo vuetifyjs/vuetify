@@ -60,7 +60,7 @@ export default baseMixins.extend<options>().extend({
         ...VInput.options.computed.classes.call(this),
         'v-input--hide-details': true,
         'v-text-field': true,
-        'v-otp-input-field': true,
+        'v-otp-input': true,
         'v-text-field--enclosed': true,
         'v-text-field--outlined': true,
       }
@@ -339,7 +339,6 @@ export default baseMixins.extend<options>().extend({
   },
   render (h): VNode {
     return h('div', {
-      staticClass: 'v-otp-input',
       class: this.classes,
     }, this.genContent())
   },
