@@ -76,6 +76,12 @@ Outlined buttons inherit their borders from the current color applied.
 
 <example file="v-btn/prop-outlined" />
 
+#### Plain
+
+Plain buttons have a lower baseline opacity that reacts to **hover** and **focus**.
+
+<example file="v-btn/prop-plain" />
+
 #### Rounded
 
 Rounded buttons behave the same as regular buttons but have rounded edges.
