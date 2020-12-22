@@ -1,6 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`VFlex.ts should work 1`] = `
-<div class="flex">
-</div>
-`;

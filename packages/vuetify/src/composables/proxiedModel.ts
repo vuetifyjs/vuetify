@@ -2,8 +2,7 @@
 import type { SetupContext, Ref } from 'vue'
 
 // Utilities
-import { ref, computed, getCurrentInstance } from 'vue'
-import { kebabCase } from '../util/helpers'
+import { ref, computed, getCurrentInstance, capitalize } from 'vue'
 import { consoleError } from '../util/console'
 
 export function useProxiedModel<
@@ -25,7 +24,7 @@ export function useProxiedModel<
   const propIsDefined = computed(() => {
     return !!(
       typeof props[prop] !== 'undefined' &&
-      (vm?.vnode.props?.hasOwnProperty(prop) || vm?.vnode.props?.hasOwnProperty(kebabCase(prop)))
+      (vm?.vnode.props?.hasOwnProperty(prop) || vm?.vnode.props?.hasOwnProperty(capitalize(prop)))
     )
   })
 

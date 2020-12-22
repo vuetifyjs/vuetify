@@ -1,7 +1,3 @@
-// @ts-nocheck
-/* eslint-disable */
-
-import './_grid.sass'
 import { createSimpleFunctional } from '../../util/helpers'
 
-export default createSimpleFunctional('spacer', 'div', 'v-spacer')
+export default createSimpleFunctional('flex-grow-1', 'div', 'VSpacer')
