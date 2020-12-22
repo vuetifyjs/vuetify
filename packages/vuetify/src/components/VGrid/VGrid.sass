@@ -15,8 +15,7 @@
   +make-row
 
   &--dense
-    margin-right: -$form-grid-gutter / 2
-    margin-left: -$form-grid-gutter / 2
+    margin: -$form-grid-gutter / 2
 
     > .v-col,
     > [class*="v-col-"]
@@ -25,8 +24,7 @@
 // Remove the negative margin from default .v-row, then the horizontal padding
 // from all immediate children columns (to prevent runaway style inheritance).
 .v-row--no-gutters
-  margin-right: 0
-  margin-left: 0
+  margin: 0
   > .v-col,
   > [class*="v-col-"]
     padding: 0
