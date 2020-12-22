@@ -220,12 +220,13 @@ describe('VOtpInput.ts', () => {
       propsData: {
         value: '',
         length: 2,
-        onFinish,
       },
       methods: {
         clearFocus,
       },
     })
+
+    wrapper.vm.$on('finish', onFinish)
 
     const input = wrapper.findAll('input').at(0)
     const input2 = wrapper.findAll('input').at(1)

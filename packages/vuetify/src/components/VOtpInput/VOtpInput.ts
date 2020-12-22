@@ -41,10 +41,6 @@ export default baseMixins.extend<options>().extend({
       type: Number,
       default: 6,
     },
-    onFinish: {
-      type: Function,
-      default: (() => { }) as Function,
-    },
     type: {
       type: String,
       default: 'text',
@@ -150,7 +146,9 @@ export default baseMixins.extend<options>().extend({
       })
 
       return [this.$createElement(VRow, {
-        staticClass: 'position-relative row--dense',
+        attrs: {
+          dense: true,
+        },
       }, cols)]
     },
     genFieldset () {
@@ -335,7 +333,7 @@ export default baseMixins.extend<options>().extend({
     onCompleted () {
       const rsp = this.otp.join('')
       if (rsp.length === this.length) {
-        this?.onFinish(rsp)
+        this.$emit('finish', rsp)
       }
     },
   },

@@ -3,8 +3,8 @@
     <div class="ma-auto position-relative" style="max-width: 300px">
       <v-otp-input
         v-model="otp"
-        :on-finish="onFinish"
         :disabled="loading"
+        @finish="onFinish"
       ></v-otp-input>
       <div
         v-if="loading"

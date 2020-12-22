@@ -8,8 +8,8 @@
         <div class="ma-auto" style="max-width: 320px">
           <v-otp-input
             v-model="otp"
-            :on-finish="onOtpFinished"
             v-bind="$attrs"
+            @finish="onOtpFinished"
             v-on="$listeners"
           ></v-otp-input>
         </div>

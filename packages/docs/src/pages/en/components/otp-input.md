@@ -35,7 +35,7 @@ Applied dark theme, listen to value fill to affect button component.
 
 <example file="v-otp-input/prop-dark" />
 
-#### Process (on-finish) with progress spinner
+#### Process (@finish event) with progress spinner
 
 You can easily compose a loader to process the OTP input when completed insertion.
 
