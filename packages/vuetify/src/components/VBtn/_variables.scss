@@ -19,7 +19,7 @@ $btn-transition-fn: map-get($transition, 'fast-out-slow-in') !default;
 $btn-transition: opacity 0.2s map-get($transition, 'ease-in-out') !default;
 $btn-states: (
   'states': (
-    'active': $btn-active-opacity,
+    'activated': $btn-active-opacity,
     'focus': $btn-focus-opacity,
     'hover': $btn-hover-opacity
   )
