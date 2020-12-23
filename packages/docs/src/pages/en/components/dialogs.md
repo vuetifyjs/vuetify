@@ -37,7 +37,7 @@ Due to limited space, full-screen dialogs may be more appropriate for mobile dev
 
 #### Transitions
 
-You can make the dialog appearing from the top or the bottom.
+You can make the dialog appear from the top or the bottom.
 
 <example file="v-dialog/prop-transitions" />
 
