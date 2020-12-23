@@ -2,26 +2,27 @@
 
 You can join them in supporting Vuetify by [sponsoring through Github](https://github.com/sponsors/johnleider)
 
-### Premiere
+### Diamond
 - [QOMPLX](https://www.qomplx.com/)
 
-### Diamond
+### Platinum
 - [LMAX Exchange](https://www.lmax.com/)
 - [Intygrate](http://intygrate.com/)
 - [Vue Mastery](http://vuemastery.com/)
-- [Skale Technologies](http://www.skaletech.com/)
 - [Crossword Solver](http://crossword-solver.io/)
 
-### Platinum
+### Gold
 - [rateGenius](https://application.rategenius.com/) <!-- Ravi Alamuri -->
 - [DigitalMaas](https://www.digitalmaas.com/) <!-- Scott Francis -->
 - [Quanted Square](https://analytics.quantedsquare.com/)
 - [Hype](https://www.hypeinnovation.com/home)
 - [Cosmic](https://www.cosmicjs.com/)
-- [Ekorre](https://ekorre.hr/)
+- [Skale Technologies](http://www.skaletech.com/)
 - [Dealer Desk](https://www.dealerdesk.de/)
+- [Writers per Hour](https://writersperhour.com/buy-essay/)
+- [IONOS](https://ad.doubleclick.net/ddm/trackclk/N297201.3972065VUEPARTNERPROGRAM/B24927215.287498450;dc_trk_aid=481168480;dc_trk_cid=141067660;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;gdpr=$%7BGDPR%7D;gdpr_consent=$%7BGDPR_CONSENT_755%7D?https://www.ionos.de/partner?utm_source=Vue&utm_medium=paid-social&utm_campaign=ION-DEU-VUE-ABP-AWR-AgencyBusiness&utm_term=&utm_content=ION-DEU-VUE-ABP-AWR-AgencyBusiness&ac=OM.PU.PUo54K418813T7073a)
 
-### Gold
+### Silver
 - [Xavier Escoté](http://www.deister.net/)
 - [Zweidenker](http://zweidenker.de) <!-- Christian Denker -->
 - [Software IDM](https://softwareidm.com/) <!-- Peter Sidebotham -->

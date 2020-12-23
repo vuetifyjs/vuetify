@@ -165,6 +165,7 @@ const DataTableSlots = [
   { name: 'item.data-table-expand', props: DataTableItemScopedProps },
   { name: 'item.<name>', props: DataTableItemColumnScopedProps },
   { name: 'expanded-item', props: DataTableExpandedItemScopedProps },
+  ...DataIteratorSlots.filter(slot => !['default'].includes(slot.name)),
 ]
 
 module.exports = {
@@ -181,7 +182,7 @@ module.exports = {
         example: '(value: any, search: string | null, item: any) => boolean',
       },
     ]),
-    slots: deepmerge(DataTableSlots, DataIteratorSlots),
+    slots: DataTableSlots,
     events: DataTableEvents,
   },
   DataTableHeader,

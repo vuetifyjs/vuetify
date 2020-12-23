@@ -22,7 +22,7 @@ The following releases are currently under development:
 
 ### v3.0 (Titan)
 
-- **Target Release:** Summer 2021
+- **Target Release:** Q3 2021
 - **Alpha:** Q4 2020
 - **Overview:**
   The entire framework will be converted to the new [composition api](https://vue-composition-api-rfc.netlify.com/) coming in Vue 3. Details of this conversion process are outlined in our [v3 Notion Board](https://notion.vuetifyjs.com) along with information about release schedules, proposed new functionality and more. Vuetify 3 is being developed with the pre-releases (alpha/beta) of Vue 3 and is expected to release shortly after the next Vue version is officially released. Due to this, the target release quarter is variable and will change according to the progress of Vue 3.
