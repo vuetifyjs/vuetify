@@ -26,7 +26,7 @@
         selects: {
           color: [
             'white',
-            'gray darken-2',
+            'grey darken-2',
             'warning',
             'error',
             'success',
