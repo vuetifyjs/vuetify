@@ -166,6 +166,7 @@ declare module 'vuetify/lib' {
   const VFabTransition: VueConstructor
   const VDialogTransition: VueConstructor
   const VDialogBottomTransition: VueConstructor
+  const VDialogTopTransition: VueConstructor
   const VFadeTransition: VueConstructor
   const VScaleTransition: VueConstructor
   const VScrollXTransition: VueConstructor
@@ -337,6 +338,7 @@ declare module 'vuetify/lib' {
     VFabTransition,
     VDialogTransition,
     VDialogBottomTransition,
+    VDialogTopTransition,
     VFadeTransition,
     VScaleTransition,
     VScrollXTransition,

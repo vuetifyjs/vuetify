@@ -404,7 +404,7 @@ describe.skip('VAutocomplete.ts', () => {
     wrapper.setData({ isMenuActive: false })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.lazySearch).toBeUndefined()
+    expect(wrapper.vm.lazySearch).toBeNull()
   })
 
   it('should select input text on focus', async () => {

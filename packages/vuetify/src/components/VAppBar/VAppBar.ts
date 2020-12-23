@@ -45,6 +45,10 @@ export default baseMixins.extend({
 
   directives: { Scroll },
 
+  provide (): object {
+    return { VAppBar: this }
+  },
+
   props: {
     clippedLeft: Boolean,
     clippedRight: Boolean,
@@ -80,7 +84,7 @@ export default baseMixins.extend({
           this.hideOnScroll ||
           this.collapseOnScroll ||
           this.isBooted ||
-          // If falsey, user has provided an
+          // If falsy, user has provided an
           // explicit value which should
           // overwrite anything we do
           !this.value
@@ -101,28 +105,25 @@ export default baseMixins.extend({
         'v-app-bar--shrink-on-scroll': this.shrinkOnScroll,
       }
     },
+    scrollRatio (): number {
+      const threshold = this.computedScrollThreshold
+      return Math.max((threshold - this.currentScroll) / threshold, 0)
+    },
     computedContentHeight (): number {
       if (!this.shrinkOnScroll) return VToolbar.options.computed.computedContentHeight.call(this)
 
-      const height = this.computedOriginalHeight
-
       const min = this.dense ? 48 : 56
-      const max = height
-      const difference = max - min
-      const iteration = difference / this.computedScrollThreshold
-      const offset = this.currentScroll * iteration
+      const max = this.computedOriginalHeight
 
-      return Math.max(min, max - offset)
+      return min + (max - min) * this.scrollRatio
     },
     computedFontSize (): number | undefined {
       if (!this.isProminent) return undefined
 
-      const max = this.dense ? 96 : 128
-      const difference = max - this.computedContentHeight
-      const increment = 0.00347
+      const min = 1.25
+      const max = 1.5
 
-      // 1.5rem to a minimum of 1.25rem
-      return Number((1.50 - difference * increment).toFixed(2))
+      return min + (max - min) * this.scrollRatio
     },
     computedLeft (): number {
       if (!this.app || this.clippedLeft) return 0
@@ -137,12 +138,7 @@ export default baseMixins.extend({
     computedOpacity (): number | undefined {
       if (!this.fadeImgOnScroll) return undefined
 
-      const opacity = Math.max(
-        (this.computedScrollThreshold - this.currentScroll) / this.computedScrollThreshold,
-        0
-      )
-
-      return Number(parseFloat(opacity).toFixed(2))
+      return this.scrollRatio
     },
     computedOriginalHeight (): number {
       let height = VToolbar.options.computed.computedContentHeight.call(this)

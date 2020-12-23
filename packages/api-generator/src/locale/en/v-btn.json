@@ -8,6 +8,7 @@
     "left": "Aligns the component towards the left. This should be used with the **absolute** or **fixed** props.",
     "loading": "Adds a loading icon animation",
     "outlined": "Makes the background transparent and applies a thin border.",
+    "plain": "Removes the default background change applied when hovering over the button.",
     "right": "Aligns the component towards the right. This should be used with the **absolute** or **fixed** props.",
     "rounded": "Applies a large border radius on the button.",
     "text": "Makes the background transparent.",

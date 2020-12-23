@@ -89,11 +89,13 @@
 
     data: () => ({ products: null }),
 
-    async beforeCreate () {
+    beforeCreate () {
       if (!this.$store.hasModule('shopify')) {
         this.$store.registerModule('shopify', shopify)
       }
+    },
 
+    async beforeMount () {
       const request = await this.$store.dispatch('shopify/fetch') || []
       const products = []
 
@@ -121,7 +123,9 @@
     },
 
     beforeDestroy () {
-      this.$store.unregisterModule('shopify')
+      if (this.$store.hasModule('shopify')) {
+        this.$store.unregisterModule('shopify')
+      }
     },
   }
 </script>

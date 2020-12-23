@@ -10,7 +10,7 @@ require('dotenv').config({ path: resolve('../.env.local') })
 const languages = process.env.EN_LOCALE_ONLY === 'true'
   ? ['en']
   : require('../src/i18n/locales')
-    .map(lang => lang.locale)
+    .map(lang => lang.alternate || lang.locale)
     .filter(lang => lang !== 'eo-UY')
 
 function genRoutes (data, prefix) {

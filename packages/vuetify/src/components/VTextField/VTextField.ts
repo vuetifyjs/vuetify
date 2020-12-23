@@ -134,7 +134,7 @@ export default baseMixins.extend<options>().extend({
       if (typeof this.counterValue === 'function') {
         return this.counterValue(this.internalValue)
       }
-      return [...(this.internalValue || '')].length
+      return [...(this.internalValue || '').toString()].length
     },
     hasCounter (): boolean {
       return this.counter !== false && this.counter != null
@@ -190,11 +190,10 @@ export default baseMixins.extend<options>().extend({
       }
     },
     showLabel (): boolean {
-      return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder))
+      return this.hasLabel && !(this.isSingle && this.labelValue)
     },
     labelValue (): boolean {
-      return !this.isSingle &&
-        Boolean(this.isFocused || this.isLabelActive || this.placeholder)
+      return this.isFocused || this.isLabelActive
     },
   },
 
@@ -315,14 +314,14 @@ export default baseMixins.extend<options>().extend({
 
       const max = this.counter === true ? this.attrs$.maxlength : this.counter
 
-      return this.$createElement(VCounter, {
-        props: {
-          dark: this.dark,
-          light: this.light,
-          max,
-          value: this.computedCounterValue,
-        },
-      })
+      const props = {
+        dark: this.dark,
+        light: this.light,
+        max,
+        value: this.computedCounterValue,
+      }
+
+      return this.$scopedSlots.counter?.({ props }) ?? this.$createElement(VCounter, { props })
     },
     genControl () {
       return VInput.options.methods.genControl.call(this)
@@ -391,7 +390,7 @@ export default baseMixins.extend<options>().extend({
           autofocus: this.autofocus,
           disabled: this.isDisabled,
           id: this.computedId,
-          placeholder: this.placeholder,
+          placeholder: this.isFocused || !this.hasLabel ? this.placeholder : undefined,
           readonly: this.isReadonly,
           type: this.type,
         },

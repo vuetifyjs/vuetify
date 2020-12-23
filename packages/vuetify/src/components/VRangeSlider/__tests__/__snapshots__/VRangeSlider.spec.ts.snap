@@ -7,11 +7,13 @@ exports[`VRangeSlider.ts should render a vertical slider 1`] = `
       <div class="v-slider v-slider--vertical theme--light">
         <input value="0"
                id="input-min-25"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
         >
         <input value="0"
                id="input-max-25"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
         >

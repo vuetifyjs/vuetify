@@ -92,7 +92,7 @@ Tick marks represent predetermined values to which the user can move the slider.
 
 #### Validation
 
-Vuetify includes simple validation through the **rules** prop. The prop accepts an array of callbacks. While validating rules, the current v-model value will be passed to the callback. This callback should return either `true` or a `String`, the error message.
+Vuetify includes simple validation through the **rules** prop. The prop accepts a mixed array of types `function`, `boolean` and `string`. When the input value changes, each element in the array will be validated. Functions pass the current v-model as an argument and must return either `true` / `false` or a `string` containing an error message.
 
 <example file="v-slider/prop-validation" />
 

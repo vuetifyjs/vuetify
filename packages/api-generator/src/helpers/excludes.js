@@ -17,6 +17,7 @@ module.exports = {
     'VTimePickerClock',
     'VTimePickerTitle',
     'VVirtualTable',
+    'VTreeviewNode',
   ],
   props: {
     'v-app': [

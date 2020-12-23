@@ -42,6 +42,7 @@ import {
   CalendarEventOverlapMode,
   CalendarEvent,
   CalendarEventCategoryFunction,
+  CalendarCategory,
 } from 'vuetify/types'
 
 // Types
@@ -83,7 +84,11 @@ export default CalendarBase.extend({
     ripple,
   },
 
-  props: props.events,
+  props: {
+    ...props.events,
+    ...props.calendar,
+    ...props.category,
+  },
 
   computed: {
     noEvents (): boolean {
@@ -94,11 +99,6 @@ export default CalendarBase.extend({
     },
     parsedEventOverlapThreshold (): number {
       return parseInt(this.eventOverlapThreshold)
-    },
-    eventColorFunction (): CalendarEventColorFunction {
-      return typeof this.eventColor === 'function'
-        ? this.eventColor
-        : () => (this.eventColor as string)
     },
     eventTimedFunction (): CalendarEventTimedFunction {
       return typeof this.eventTimed === 'function'
@@ -129,11 +129,16 @@ export default CalendarBase.extend({
       return this.parsedWeekdays
     },
     categoryMode (): boolean {
-      return false
+      return this.type === 'category'
     },
   },
 
   methods: {
+    eventColorFunction (e: CalendarEvent): string {
+      return typeof this.eventColor === 'function'
+        ? this.eventColor(e)
+        : e.color || this.eventColor
+    },
     parseEvent (input: CalendarEvent, index = 0): CalendarEventParsed {
       return parseEvent(
         input,
@@ -399,9 +404,10 @@ export default CalendarBase.extend({
         event => isEventOverlapping(event, start, end)
       )
     },
-    isEventForCategory (event: CalendarEventParsed, category: string | undefined | null): boolean {
+    isEventForCategory (event: CalendarEventParsed, category: CalendarCategory): boolean {
       return !this.categoryMode ||
-        category === event.category ||
+        (typeof category === 'object' && category.calendarName &&
+        category.categoryName === event.category) ||
         (typeof event.category !== 'string' && category === null)
     },
     getEventsForDay (day: CalendarDaySlotScope): CalendarEventParsed[] {

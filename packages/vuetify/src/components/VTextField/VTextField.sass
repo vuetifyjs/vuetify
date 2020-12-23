@@ -159,7 +159,6 @@
 
   & > .v-input__control > .v-input__slot
     cursor: text
-    transition: background $primary-transition
 
     &:before,
     &:after
@@ -176,6 +175,7 @@
       border-width: thin 0 0 0
 
     &:after
+      background-color: currentColor
       border-color: currentColor
       border-style: solid
       border-width: thin 0 thin 0
@@ -342,6 +342,7 @@
       padding: $text-field-enclosed-details-padding
 
     .v-text-field__details
+      padding-top: $text-field-details-padding-top
       margin-bottom: $text-field-details-margin-bottom
 
   &--reverse

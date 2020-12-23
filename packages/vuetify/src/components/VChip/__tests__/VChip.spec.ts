@@ -33,6 +33,13 @@ describe.skip('VChip.ts', () => {
         sync: false,
         localVue,
         router,
+        mocks: {
+          $vuetify: {
+            lang: {
+              t: (val: string) => val,
+            },
+          },
+        },
         ...options,
       })
     }

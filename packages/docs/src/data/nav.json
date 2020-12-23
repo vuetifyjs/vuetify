@@ -106,6 +106,7 @@
           "inputs",
           "overflow-btns",
           "radio-buttons",
+          "range-sliders",
           "selects",
           "sliders",
           "switches",

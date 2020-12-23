@@ -11,7 +11,7 @@ related:
 
 # Colors
 
-Out of the box you get access to all colors in the [Material Design spec](https://material.io/guidelines/style/color.html) through **sass** and **javascript**. These values can be used within your style sheets, your component files and on actual components via the **color class** system.
+Out of the box you get access to all colors in the [Material Design spec](https://material.io/design/color/the-color-system.html) through **sass** and **javascript**. These values can be used within your style sheets, your component files and on actual components via the **color class** system.
 
 <entry-ad />
 
