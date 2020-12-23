@@ -137,6 +137,18 @@ const VTextField = {
       props: undefined,
       source: 'v-text-field',
     }),
+    {
+      name: 'counter',
+      source: 'v-text-field',
+      props: {
+        props: {
+          dark: 'boolean',
+          light: 'boolean',
+          max: 'string | number',
+          value: 'string',
+        },
+      },
+    },
   ],
 }
 

@@ -311,14 +311,14 @@ export default baseMixins.extend<options>().extend({
 
       const max = this.counter === true ? this.attrs$.maxlength : this.counter
 
-      return this.$createElement(VCounter, {
-        props: {
-          dark: this.dark,
-          light: this.light,
-          max,
-          value: this.computedCounterValue,
-        },
-      })
+      const props = {
+        dark: this.dark,
+        light: this.light,
+        max,
+        value: this.computedCounterValue,
+      }
+
+      return this.$scopedSlots.counter?.({ props }) ?? this.$createElement(VCounter, { props })
     },
     genControl () {
       return VInput.options.methods.genControl.call(this)
