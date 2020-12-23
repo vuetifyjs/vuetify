@@ -16,6 +16,7 @@ export const VFabTransition = createSimpleTransition('fab-transition', 'center c
 // Generic transitions
 export const VDialogTransition = createSimpleTransition('dialog-transition')
 export const VDialogBottomTransition = createSimpleTransition('dialog-bottom-transition')
+export const VDialogTopTransition = createSimpleTransition('dialog-top-transition')
 export const VFadeTransition = createSimpleTransition('fade-transition')
 export const VScaleTransition = createSimpleTransition('scale-transition')
 export const VScrollXTransition = createSimpleTransition('scroll-x-transition')
@@ -37,6 +38,7 @@ export default {
     VCarouselReverseTransition,
     VDialogTransition,
     VDialogBottomTransition,
+    VDialogTopTransition,
     VFabTransition,
     VFadeTransition,
     VMenuTransition,
