@@ -174,6 +174,19 @@ export default mixins(
       this.getSrc()
       this.isLoading = false
       this.$emit('load', this.src)
+
+      if (this.image &&
+          typeof this.src === 'string' &&
+          (this.src.endsWith('.svg') || this.src.startsWith('data:image/svg+xml')) &&
+          this.naturalWidth === undefined
+      ) {
+        if (this.image.naturalHeight && this.image.naturalWidth) {
+          this.calculatedAspectRatio = this.image.naturalWidth / this.image.naturalHeight
+        } else {
+          this.naturalWidth = 1
+          this.calculatedAspectRatio = 1
+        }
+      }
     },
     onError () {
       this.hasError = true
@@ -214,17 +227,7 @@ export default mixins(
     },
     pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {
-        let { naturalHeight, naturalWidth } = img
-
-        if (
-          img.src &&
-          (img.src.endsWith('.svg') || img.src.startsWith('data:image/svg+xml')) &&
-          naturalHeight === 0 &&
-          naturalWidth === 0
-        ) {
-          naturalHeight = 1
-          naturalWidth = 1
-        }
+        const { naturalHeight, naturalWidth } = img
 
         if (naturalHeight || naturalWidth) {
           this.naturalWidth = naturalWidth
