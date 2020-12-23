@@ -23,6 +23,8 @@ Currently Vuetify provides translations in the following languages:
 
 - **af** - Afrikaans (Afrikaans)
 - **ar** - Arabic (اللغة العربية)
+- **az** - Azerbaijani (Azərbaycan)
+- **bg** - Bulgarian (български)
 - **ca** - Catalan (català)
 - **ckb** - Central Kurdish (کوردی)
 - **cs** - Czech (čeština)
