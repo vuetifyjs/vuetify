@@ -177,10 +177,10 @@ export default mixins(
 
       if (this.image &&
           typeof this.src === 'string' &&
-          (this.src.endsWith('.svg') || this.src.startsWith('data:image/svg+xml')) &&
-          this.naturalWidth === undefined
+          (this.src.endsWith('.svg') || this.src.startsWith('data:image/svg+xml'))
       ) {
         if (this.image.naturalHeight && this.image.naturalWidth) {
+          this.naturalWidth = this.image.naturalWidth
           this.calculatedAspectRatio = this.image.naturalWidth / this.image.naturalHeight
         } else {
           this.naturalWidth = 1
@@ -233,6 +233,7 @@ export default mixins(
           this.naturalWidth = naturalWidth
           this.calculatedAspectRatio = naturalWidth / naturalHeight
         } else {
+          if (!this.isLoading) return
           timeout != null && !this.hasError && setTimeout(poll, timeout)
         }
       }
