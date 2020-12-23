@@ -131,17 +131,21 @@ export default Vue.extend({
     },
     genPaginationInfo () {
       let children: VNodeChildrenArrayContents = ['–']
+      const itemsLength: number = this.pagination.itemsLength
+      let pageStart: number = this.pagination.pageStart
+      let pageStop: number = this.pagination.pageStop
 
       if (this.pagination.itemsLength && this.pagination.itemsPerPage) {
-        const itemsLength = this.pagination.itemsLength
-        const pageStart = this.pagination.pageStart + 1
-        const pageStop = itemsLength < this.pagination.pageStop || this.pagination.pageStop < 0
+        pageStart = this.pagination.pageStart + 1
+        pageStop = itemsLength < this.pagination.pageStop || this.pagination.pageStop < 0
           ? itemsLength
           : this.pagination.pageStop
 
         children = this.$scopedSlots['page-text']
           ? [this.$scopedSlots['page-text']!({ pageStart, pageStop, itemsLength })]
           : [this.$vuetify.lang.t(this.pageText, pageStart, pageStop, itemsLength)]
+      } else if (this.$scopedSlots['page-text']) {
+        children = [this.$scopedSlots['page-text']!({ pageStart, pageStop, itemsLength })]
       }
 
       return this.$createElement('div', {

@@ -127,7 +127,7 @@ module.exports = {
 
 - **My application is not working.**{ #my-application-is-not-working }
 
-  First, ensure that you're using the latest version of Vue.js and Vuetify. Try to reproduce it in codepen using the following [template](https://template.vuetifyjs.com/). If you are unable to reproduce the issue outside of your environment, this usually means the issue resides locally. If you are still unable to resolve your issue, please provide your codepen and issue in **#need-help** in the [community](https://chat.vuetifyjs.com).
+  First, ensure that you're using the latest version of Vue.js and Vuetify. Try to reproduce it in codepen using the following [template](https://template.vuetifyjs.com/). If you are unable to reproduce the issue outside of your environment, this usually means the issue resides locally. If you are still unable to resolve your issue, please reach out to our [community](https://community.vuetifyjs.com) by providing your codepen and issue in the appropriate help channel.
 
 <br>
 

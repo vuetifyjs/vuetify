@@ -61,4 +61,9 @@ export default {
       currentPage: 'Aktuální stránka, stránka {0}',
     },
   },
+  rating: {
+    ariaLabel: {
+      icon: 'Rating {0} of {1}',
+    },
+  },
 }

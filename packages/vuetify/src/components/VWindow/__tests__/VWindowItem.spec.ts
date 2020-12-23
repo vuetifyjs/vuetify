@@ -153,6 +153,11 @@ describe('VWindowItem.ts', () => {
       slots: {
         default: [VWindowItem, VWindowItem, VWindowItem],
       },
+      mocks: {
+        $vuetify: {
+          rtl: false,
+        },
+      },
     })
 
     const items = wrapper.vm.items

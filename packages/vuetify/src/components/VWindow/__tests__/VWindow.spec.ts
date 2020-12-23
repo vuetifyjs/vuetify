@@ -56,31 +56,34 @@ describe('VWindow.ts', () => {
         default: [
           VWindowItem,
           VWindowItem,
+          VWindowItem,
         ],
       },
     })
 
+    wrapper.setData({ isBooted: true })
+
     // Reverse implicitly set by changed index
     wrapper.setProps({ value: 1 })
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.internalReverse).toBeFalsy()
+    expect(wrapper.vm.isReverse).toBeFalsy()
 
     // Reverse implicitly set by changed index
     wrapper.setProps({ value: 0 })
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.internalReverse).toBeTruthy()
+    expect(wrapper.vm.isReverse).toBeTruthy()
 
     // Reverse explicit prop override
     wrapper.setProps({ reverse: false })
-    expect(wrapper.vm.internalReverse).toBeTruthy()
+    expect(wrapper.vm.computedTransition.includes('reverse')).toBeTruthy()
 
     // Reverse explicit prop override
     wrapper.setProps({ reverse: true })
-    expect(wrapper.vm.internalReverse).toBeFalsy()
+    expect(wrapper.vm.computedTransition.includes('reverse')).toBeFalsy()
 
     // Reverts back to local isReverse
     wrapper.setProps({ reverse: undefined })
-    expect(wrapper.vm.internalReverse).toBeTruthy()
+    expect(wrapper.vm.computedTransition.includes('reverse')).toBeTruthy()
   })
 
   it('should increment and decrement current value', async () => {
