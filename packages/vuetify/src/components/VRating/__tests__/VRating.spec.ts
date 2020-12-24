@@ -14,6 +14,7 @@ import { ExtractVue } from '../../../util/mixins'
 
 Vue.prototype.$vuetify = {
   rtl: false,
+  icons: {},
   lang: {
     t: str => str,
   },

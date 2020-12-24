@@ -36,6 +36,10 @@ export const BaseItemGroup = mixins(
       default: null,
     },
     multiple: Boolean,
+    tag: {
+      type: String,
+      default: 'div',
+    },
   },
 
   data () {
@@ -248,7 +252,7 @@ export const BaseItemGroup = mixins(
   },
 
   render (h): VNode {
-    return h('div', this.genData(), this.$slots.default)
+    return h(this.tag, this.genData(), this.$slots.default)
   },
 })
 

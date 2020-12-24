@@ -53,7 +53,7 @@
 
               <template v-else-if="header === 'default'">
                 <div
-                  class="text-mono"
+                  class="text-mono text-pre"
                   v-html="getDefaultValue(item)"
                 />
               </template>

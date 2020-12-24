@@ -137,6 +137,18 @@ const VTextField = {
       props: undefined,
       source: 'v-text-field',
     }),
+    {
+      name: 'counter',
+      source: 'v-text-field',
+      props: {
+        props: {
+          dark: 'boolean',
+          light: 'boolean',
+          max: 'string | number',
+          value: 'string',
+        },
+      },
+    },
   ],
 }
 
@@ -175,7 +187,13 @@ const VSelect = {
     },
     {
       name: 'menuProps',
-      default: '{ "closeOnClick": false, "closeOnContentClick": false, "disableKeys": true, "openOnClick": false, "maxHeight": 304 }',
+      default: `{
+  closeOnClick: false,
+  closeOnContentClick: false,
+  disableKeys: true,
+  openOnClick: false,
+  maxHeight: 304
+}`,
       source: 'v-select',
     },
   ],
@@ -211,6 +229,27 @@ const VSelect = {
         disabled: 'boolean',
       },
       source: 'v-select',
+    },
+  ],
+}
+
+const VAutocomplete = {
+  ...VSelect,
+  props: [
+    ...VSelect.props.filter(prop => prop.name !== 'menuProps'),
+    {
+      name: 'menuProps',
+      default: `{
+  closeOnClick: false,
+  closeOnContentClick: false,
+  disableKeys: true,
+  openOnClick: false,
+  maxHeight: 304,
+  offsetY: true,
+  offsetOverflow: true,
+  transition: false
+}`,
+      source: 'v-autocomplete',
     },
   ],
 }
@@ -402,6 +441,7 @@ module.exports = {
   VGridProps,
   VInput,
   VSelect,
+  VAutocomplete,
   VSlider,
   VRangeSlider,
   VTextField,

@@ -216,19 +216,37 @@ export const keyCodes = Object.freeze({
   pagedown: 34,
 })
 
-// This remaps internal names like '$cancel' or '$vuetify.icons.cancel'
-// to the current name or component for that icon.
+/**
+ * This remaps internal names like '$cancel' or '$vuetify.icons.cancel'
+ * to the current name or component for that icon.
+ */
 export function remapInternalIcon (vm: Vue, iconName: string): VuetifyIcon {
-  if (!iconName.startsWith('$')) {
+  // Look for custom component in the configuration
+  const component = vm.$vuetify.icons.component
+
+  // Look for overrides
+  if (iconName.startsWith('$')) {
+    // Get the target icon name
+    const iconPath = `$vuetify.icons.values.${iconName.split('$').pop()!.split('.').pop()}`
+
+    // Now look up icon indirection name,
+    // e.g. '$vuetify.icons.values.cancel'
+    const override = getObjectValueByPath(vm, iconPath, iconName)
+
+    if (typeof override === 'string') iconName = override
+    else return override
+  }
+
+  if (component == null) {
     return iconName
   }
 
-  // Get the target icon name
-  const iconPath = `$vuetify.icons.values.${iconName.split('$').pop()!.split('.').pop()}`
-
-  // Now look up icon indirection name,
-  // e.g. '$vuetify.icons.values.cancel'
-  return getObjectValueByPath(vm, iconPath, iconName)
+  return {
+    component,
+    props: {
+      icon: iconName,
+    },
+  }
 }
 
 export function keys<O> (o: O) {
@@ -268,14 +286,14 @@ export function groupItems<T extends any = any> (
 ): ItemGroup<T>[] {
   const key = groupBy[0]
   const groups: ItemGroup<T>[] = []
-  let current = null
+  let current
   for (var i = 0; i < items.length; i++) {
     const item = items[i]
-    const val = getObjectValueByPath(item, key)
+    const val = getObjectValueByPath(item, key, null)
     if (current !== val) {
       current = val
       groups.push({
-        name: val,
+        name: val ?? '',
         items: [],
       })
     }

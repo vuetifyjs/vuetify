@@ -34,7 +34,8 @@ import VCalendarMonthly from './VCalendarMonthly'
 import VCalendarDaily from './VCalendarDaily'
 import VCalendarWeekly from './VCalendarWeekly'
 import VCalendarCategory from './VCalendarCategory'
-import { CalendarTimestamp, CalendarFormatter } from 'vuetify/types'
+import { CalendarTimestamp, CalendarFormatter, CalendarCategory } from 'vuetify/types'
+import { getParsedCategories } from './util/parser'
 
 // Types
 interface VCalendarRenderProps {
@@ -43,7 +44,7 @@ interface VCalendarRenderProps {
   component: string | Component
   maxDays: number
   weekdays: number[]
-  categories: string[]
+  categories: CalendarCategory[]
 }
 
 /* @vue/component */
@@ -170,12 +171,8 @@ export default CalendarWithEvents.extend({
         timeZone: 'UTC', month: 'short',
       })
     },
-    parsedCategories (): string[] {
-      return typeof this.categories === 'string' && this.categories
-        ? this.categories.split(/\s*,\s*/)
-        : Array.isArray(this.categories)
-          ? this.categories as string[]
-          : []
+    parsedCategories (): CalendarCategory[] {
+      return getParsedCategories(this.categories, this.categoryText)
     },
   },
 
@@ -294,10 +291,10 @@ export default CalendarWithEvents.extend({
     timestampToDate (timestamp: CalendarTimestamp): Date {
       return timestampToDate(timestamp)
     },
-    getCategoryList (categories: string[]): string[] {
+    getCategoryList (categories: CalendarCategory[]): CalendarCategory[] {
       if (!this.noEvents) {
         const categoryMap = categories.reduce((map, category, index) => {
-          map[category] = { index, count: 0 }
+          if (typeof category === 'object' && category.categoryName) map[category.categoryName] = { index, count: 0 }
 
           return map
         }, Object.create(null))
@@ -335,9 +332,13 @@ export default CalendarWithEvents.extend({
           }
         }
 
-        categories = Object.keys(categoryMap)
+        categories = categories.filter((category: CalendarCategory) => {
+          if (typeof category === 'object' && category.categoryName) {
+            return categoryMap.hasOwnProperty(category.categoryName)
+          }
+          return false
+        })
       }
-
       return categories
     },
   },

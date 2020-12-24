@@ -370,6 +370,9 @@ $utilities: map-deep-merge(
       values: (
         wrap: normal,
         no-wrap: nowrap,
+        pre: pre,
+        pre-line: pre-line,
+        pre-wrap: pre-wrap,
       )
     ),
     "overflow-wrap": (

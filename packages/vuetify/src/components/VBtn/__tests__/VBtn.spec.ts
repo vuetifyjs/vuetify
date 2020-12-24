@@ -15,7 +15,7 @@ import {
 } from '@vue/test-utils'
 import { compileToFunctions } from 'vue-template-compiler'
 
-describe('VBtn.ts', () => {
+describe('VBtn.ts', () => { // eslint-disable-line max-statements
   let mountFunction: (options?: object) => Wrapper<Vue>
   let router: Router
   let localVue: typeof Vue
@@ -182,6 +182,16 @@ describe('VBtn.ts', () => {
 
     expect(wrapper.classes('v-btn--outlined')).toBe(true)
     expect(wrapper.classes('v-btn--depressed')).toBe(true)
+  })
+
+  it('should have v-btn--plain class when plain prop is set to true', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        plain: true,
+      },
+    })
+
+    expect(wrapper.classes('v-btn--plain')).toBe(true)
   })
 
   it('should have the correct icon classes', () => {

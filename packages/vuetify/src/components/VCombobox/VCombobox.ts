@@ -186,7 +186,7 @@ export default VAutocomplete.extend({
 
       // Reset search if using slot to avoid a double input
       const isUsingSlot = Boolean(this.$scopedSlots.selection) || this.hasChips
-      if (isUsingSlot) this.internalSearch = undefined
+      if (isUsingSlot) this.internalSearch = null
     },
     updateSelf () {
       this.multiple ? this.updateTags() : this.updateCombobox()

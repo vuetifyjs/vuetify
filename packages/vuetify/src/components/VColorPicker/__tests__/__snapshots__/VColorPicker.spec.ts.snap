@@ -300,6 +300,25 @@ exports[`VColorPicker.ts should hide canvas 1`] = `
 </div>
 `;
 
+exports[`VColorPicker.ts should hide controls 1`] = `
+<div class="v-color-picker v-sheet theme--light theme--light"
+     style="max-width: 300px;"
+>
+  <div class="v-color-picker__canvas"
+       style="width: 300px; height: 150px;"
+  >
+    <canvas width="300"
+            height="150"
+    >
+    </canvas>
+    <div class="v-color-picker__canvas-dot"
+         style="width: 10px; height: 10px; transform: translate(295px, -5px);"
+    >
+    </div>
+  </div>
+</div>
+`;
+
 exports[`VColorPicker.ts should hide inputs 1`] = `
 <div class="v-color-picker v-sheet theme--light theme--light"
      style="max-width: 300px;"
@@ -328,7 +347,7 @@ exports[`VColorPicker.ts should hide inputs 1`] = `
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="0"
-                       id="input-45"
+                       id="input-52"
                        disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
@@ -365,7 +384,7 @@ exports[`VColorPicker.ts should hide inputs 1`] = `
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="1"
-                       id="input-46"
+                       id="input-53"
                        disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
@@ -403,6 +422,80 @@ exports[`VColorPicker.ts should hide inputs 1`] = `
 </div>
 `;
 
+exports[`VColorPicker.ts should hide sliders 1`] = `
+<div class="v-color-picker v-sheet theme--light theme--light"
+     style="max-width: 300px;"
+>
+  <div class="v-color-picker__canvas"
+       style="width: 300px; height: 150px;"
+  >
+    <canvas width="300"
+            height="150"
+    >
+    </canvas>
+    <div class="v-color-picker__canvas-dot"
+         style="width: 10px; height: 10px; transform: translate(295px, -5px);"
+    >
+    </div>
+  </div>
+  <div class="v-color-picker__controls">
+    <div class="v-color-picker__edit">
+      <div class="v-color-picker__input">
+        <input type="number"
+               min="0"
+               max="255"
+               step="1"
+        >
+        <span>
+          R
+        </span>
+      </div>
+      <div class="v-color-picker__input">
+        <input type="number"
+               min="0"
+               max="255"
+               step="1"
+        >
+        <span>
+          G
+        </span>
+      </div>
+      <div class="v-color-picker__input">
+        <input type="number"
+               min="0"
+               max="255"
+               step="1"
+        >
+        <span>
+          B
+        </span>
+      </div>
+      <div class="v-color-picker__input">
+        <input type="number"
+               min="0"
+               max="1"
+               step="0.01"
+        >
+        <span>
+          A
+        </span>
+      </div>
+      <button type="button"
+              class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon notranslate material-icons theme--light"
+          >
+            $unfold
+          </i>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`VColorPicker.ts should not show alpha controls if given hex value without alpha 1`] = `
 <div class="v-color-picker v-sheet theme--light theme--light"
      style="max-width: 300px;"
@@ -431,7 +524,7 @@ exports[`VColorPicker.ts should not show alpha controls if given hex value witho
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="120"
-                       id="input-70"
+                       id="input-81"
                        disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
@@ -696,7 +789,7 @@ exports[`VColorPicker.ts should render flat picker 1`] = `
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="0"
-                       id="input-89"
+                       id="input-100"
                        disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
@@ -733,7 +826,7 @@ exports[`VColorPicker.ts should render flat picker 1`] = `
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="1"
-                       id="input-90"
+                       id="input-101"
                        disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
@@ -852,7 +945,7 @@ exports[`VColorPicker.ts should render picker with elevation 1`] = `
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="0"
-                       id="input-99"
+                       id="input-110"
                        disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
@@ -889,7 +982,7 @@ exports[`VColorPicker.ts should render picker with elevation 1`] = `
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="1"
-                       id="input-100"
+                       id="input-111"
                        disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
@@ -1982,7 +2075,7 @@ exports[`VColorPicker.ts should work correctly when initial value is null 1`] = 
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="0"
-                       id="input-79"
+                       id="input-90"
                        disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
@@ -2019,7 +2112,7 @@ exports[`VColorPicker.ts should work correctly when initial value is null 1`] = 
             <div class="v-input__slot">
               <div class="v-slider v-slider--horizontal theme--light">
                 <input value="1"
-                       id="input-80"
+                       id="input-91"
                        disabled="disabled"
                        readonly="readonly"
                        tabindex="-1"
