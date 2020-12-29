@@ -93,7 +93,8 @@ export default mixins(
   },
 
   methods: {
-    genButtonClasses (isAllowed: boolean, isFloating: boolean, isSelected: boolean, isCurrent: boolean) {
+    genButtonClasses (isAllowed: boolean, isFloating: boolean, isSelected: boolean, isCurrent: boolean,
+                      isFirst: boolean, isLast: boolean) {
       return {
         'v-size--default': !isFloating,
         'v-date-picker-table__current': isCurrent,
@@ -103,6 +104,8 @@ export default mixins(
         'v-btn--rounded': isFloating,
         'v-btn--disabled': !isAllowed || this.disabled,
         'v-btn--outlined': isCurrent && !isSelected,
+        'v-date-picker__firstInRange': isFirst,
+        'v-date-picker__lastInRange': isLast,
         ...this.themeClasses,
       }
     },
@@ -121,10 +124,13 @@ export default mixins(
       const isCurrent = value === this.current
       const setColor = isSelected ? this.setBackgroundColor : this.setTextColor
       const color = (isSelected || isCurrent) && (this.color || 'accent')
+      const isFirst = this.range && value === this.value[0]
+      const isLast = this.range && value === this.value.length - 1
 
       return this.$createElement('button', setColor(color, {
         staticClass: 'v-btn',
-        class: this.genButtonClasses(isAllowed && !isOtherMonth, isFloating, isSelected, isCurrent),
+        class: this.genButtonClasses(isAllowed && !isOtherMonth, isFloating, isSelected, isCurrent,
+          isFirst, isLast),
         attrs: {
           type: 'button',
         },
