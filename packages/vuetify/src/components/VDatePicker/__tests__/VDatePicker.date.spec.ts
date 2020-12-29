@@ -705,7 +705,7 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
 
     expect(wrapper.findAll('button.v-date-picker__firstInRange').exists()).toBe(true)
     expect(wrapper.findAll('button.v-date-picker__lastInRange').exists()).toBe(true)
-  });
+  })
 
   it('should set proper tableDate', async () => {
     const wrapper = mountFunction({
