@@ -104,8 +104,8 @@ export default mixins(
         'v-btn--rounded': isFloating,
         'v-btn--disabled': !isAllowed || this.disabled,
         'v-btn--outlined': isCurrent && !isSelected,
-        'v-date-picker__firstInRange': isFirst,
-        'v-date-picker__lastInRange': isLast,
+        'v-date-picker--first_in_range': isFirst,
+        'v-date-picker--last_in_range': isLast,
         ...this.themeClasses,
       }
     },

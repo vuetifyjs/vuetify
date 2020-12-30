@@ -699,12 +699,16 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         range: true,
+        showCurrent: '2019-01',
+        type: 'date',
         value: ['2019-01-06', '2019-01-16'],
       },
     })
 
-    expect(wrapper.findAll('button.v-date-picker__firstInRange').exists()).toBe(true)
-    expect(wrapper.findAll('button.v-date-picker__lastInRange').exists()).toBe(true)
+    expect(wrapper.findAll('.v-date-picker-table--date tbody button.v-date-picker--first_in_range')
+      .exists()).toBe(true)
+    expect(wrapper.findAll('.v-date-picker-table--date tbody button.v-date-picker--last_in_range')
+      .exists()).toBe(true)
   })
 
   it('should set proper tableDate', async () => {
