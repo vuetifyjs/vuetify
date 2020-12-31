@@ -355,5 +355,19 @@
     "location": "USA",
     "name": "Elijah Kotyluk",
     "team": "core"
+  },
+  "juddfranklin": {
+    "discord": "juddfranklin#1712",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)",
+      "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "CA, USA",
+    "name": "Judd Franklin",
+    "team": "contributors",
+    "linkedin": "judd-franklin"
   }
 }
