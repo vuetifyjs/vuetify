@@ -259,6 +259,7 @@ export default mixins<options &
         }],
         on: {
           click: this.onSliderClick,
+          mousedown: this.onSliderMouseDown,
         },
       }, this.genChildren())
     },
@@ -272,7 +273,7 @@ export default mixins<options &
           this.inputWidth,
           this.isActive,
           this.isFocused,
-          this.onThumbMouseDown,
+          this.onSliderMouseDown,
           this.onFocus,
           this.onBlur,
         ),
@@ -446,7 +447,7 @@ export default mixins<options &
         [direction]: `${value}%`,
       }
     },
-    onThumbMouseDown (e: MouseEvent) {
+    onSliderMouseDown (e: MouseEvent) {
       e.preventDefault()
 
       this.oldValue = this.internalValue
@@ -455,10 +456,12 @@ export default mixins<options &
 
       const mouseUpOptions = passiveSupported ? { passive: true, capture: true } : true
       const mouseMoveOptions = passiveSupported ? { passive: true } : false
+
       if ('touches' in e) {
         this.app.addEventListener('touchmove', this.onMouseMove, mouseMoveOptions)
         addOnceEventListener(this.app, 'touchend', this.onSliderMouseUp, mouseUpOptions)
       } else {
+        this.onMouseMove(e)
         this.app.addEventListener('mousemove', this.onMouseMove, mouseMoveOptions)
         addOnceEventListener(this.app, 'mouseup', this.onSliderMouseUp, mouseUpOptions)
       }
