@@ -406,4 +406,53 @@ describe('VCombobox.ts', () => {
     expect(wrapper.vm.internalSearch).toBe('a')
     expect(change).toHaveBeenCalledWith(['aaa'])
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/12781
+  // eslint-disable-next-line max-statements
+  it('should correctly add items after deletion and blur', async () => {
+    const { wrapper, change } = createMultipleCombobox({
+      multiple: true,
+      chips: true,
+      value: ['foo', 'bar'],
+      items: ['foo', 'bar'],
+    })
+
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    // delete 'bar'
+    input.trigger('focus')
+    input.trigger('keydown.left')
+    expect(wrapper.vm.selectedIndex).toBe(1)
+    input.trigger('keydown.delete')
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenCalledWith(['foo'])
+    expect(wrapper.vm.selectedIndex).toBe(0)
+
+    // Lose focus
+    input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenCalledWith(['foo'])
+
+    // Add 'bar' again
+    input.trigger('focus')
+    element.value = 'bar'
+    input.trigger('input')
+    input.trigger('keydown.down')
+    await wrapper.vm.$nextTick()
+    input.trigger('keydown.enter')
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenLastCalledWith(['foo', 'bar'])
+
+    // Set 'bar' as search input
+    element.value = 'bar'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalSearch).toBe('bar')
+
+    // Lose focus
+    input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenLastCalledWith(['foo', 'bar'])
+  })
 })
