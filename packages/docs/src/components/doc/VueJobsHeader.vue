@@ -6,38 +6,65 @@
     >
       <v-card>
         <v-card-title v-text="'Create a job listing'" />
-        <v-card-text v-text="'Lorem ipsum dolor sit amet consectetur, adiplicing elit.'" />
+        <v-card-text class="pb-0" v-text="'Lorem ipsum dolor sit amet consectetur, adiplicing elit.'" />
         <v-card-text>
-          <v-form ref="job-form">
-            <v-text-field
-              filled
-              label="Stuff"
-            />
-            <v-text-field
-              filled
-              label="Stuff"
-            />
-            <div class="d-flex justify-space-between">
+          <v-form ref="job-form" v-model="valid">
+            <div class="d-flex justify-space-between align-center">
+              <v-hover v-slot="{ hover }">
+                <v-avatar
+                  class="mr-10"
+                  :style="`transition: background .2s ease-in-out; ${hover && 'cursor: pointer;'}`"
+                  size="84"
+                  :color="hover ? 'teal' : 'teal darken-2'"
+                  @click="true"
+                >
+                  <span v-text="'Click to Upload'" />
+                </v-avatar>
+              </v-hover>
               <v-text-field
-                class="mr-15"
+                v-model="job.company.title"
+                class="pt-7"
                 filled
-                label="Stuff"
-              />
-              <v-text-field
-                filled
-                label="Stuff"
+                label="Company Name"
               />
             </div>
             <v-text-field
+              v-model="job.title"
               filled
-              label="Stuff"
+              label="Job Title"
+            />
+            <v-text-field
+              v-model="job.description"
+              filled
+              label="Job Description"
+            />
+            <div class="d-flex justify-space-between">
+              <v-text-field
+                v-model="job.city"
+                class="mr-15"
+                filled
+                label="City"
+              />
+              <v-text-field
+                v-model="job.country"
+                filled
+                label="Country"
+              />
+            </div>
+            <v-select
+              v-model="job.type"
+              filled
+              multiple
+              label="Job Type"
+              :items="['Full-Time', 'Part-Time', 'Remote']"
             />
             <v-checkbox
+              v-model="accepted"
               label="Accept"
             />
           </v-form>
         </v-card-text>
-        <v-card-actions class="justify-space-between">
+        <v-card-text class="d-flex justify-space-between">
           <v-btn
             text
             v-text="'Cancel'"
@@ -47,7 +74,7 @@
             color="success"
             v-text="'Submit'"
           />
-        </v-card-actions>
+        </v-card-text>
       </v-card>
     </v-dialog>
     <div class="d-flex align-center justify-space-between mb-4">
@@ -60,7 +87,20 @@
   export default {
     name: 'VueJobsHeader',
     data: () => ({
+      accepted: false,
       dialog: true,
+      job: {
+        city: '',
+        company: {
+          image: '',
+          title: '',
+        },
+        country: '',
+        description: '',
+        title: '',
+        type: [],
+      },
+      valid: false,
     }),
   }
 </script>
