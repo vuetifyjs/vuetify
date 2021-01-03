@@ -66,6 +66,17 @@
         small
       />
     </div>
+
+    <div class="ml-5">
+      <app-caption
+        class="ml-2 mt-3 mb-3"
+        path="vuetify-support"
+      />
+      <xscode-link
+        class="ml-2 px-2"
+        small
+      />
+    </div>
   </v-navigation-drawer>
 </template>
 

@@ -47,7 +47,8 @@
       "vuetify-comparison",
       "vuetify-projects",
       "why-vuetify-cards",
-      "wireframe-examples"
+      "wireframe-examples",
+      "xscode-banner"
     ]
   },
   "MD036": false
