@@ -15,24 +15,24 @@
 </template>
 
 <script>
-export default {
-  name: 'XscodeLink',
-  methods: {
-    openChat () {
-      const options = {
-        position: {
-          bottom: '30px',
-          right: '30px',
-        },
-        search: {
-          organization_id: 2219,
-        },
-        view: 'search',
-      }
-      window.xscode.ready.then(() => {
-        window.xscode.widgetOpen(options)
-      })
+  export default {
+    name: 'XscodeLink',
+    methods: {
+      openChat () {
+        const options = {
+          position: {
+            bottom: '30px',
+            right: '30px',
+          },
+          search: {
+            organization_id: 2219,
+          },
+          view: 'search',
+        }
+        window.xscode.ready.then(() => {
+          window.xscode.widgetOpen(options)
+        })
+      },
     },
-  },
-}
+  }
 </script>
