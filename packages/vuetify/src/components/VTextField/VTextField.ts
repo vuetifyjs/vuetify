@@ -348,6 +348,7 @@ export default baseMixins.extend<options>().extend({
         props: {
           absolute: true,
           color: this.validationState,
+          hasPlaceholder: !!this.placeholder,
           dark: this.dark,
           disabled: this.isDisabled,
           focused: !this.isSingle && (this.isFocused || !!this.validationState),
