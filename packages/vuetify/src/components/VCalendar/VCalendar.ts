@@ -297,7 +297,7 @@ export default CalendarWithEvents.extend({
           if (typeof category === 'object' && category.categoryName) map[category.categoryName] = { index, count: 0 }
 
           return map
-        })
+        }, {})
 
         if (!this.categoryHideDynamic || !this.categoryShowAll) {
           let categoryLength = categories.length
