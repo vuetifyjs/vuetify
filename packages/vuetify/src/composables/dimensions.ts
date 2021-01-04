@@ -1,63 +1,42 @@
+// Utilities
 import { computed } from 'vue'
-
-// Types
-import type { Prop } from 'vue'
-
-// Utils
-import { convertToUnit, keys } from '@/util/helpers'
+import { convertToUnit } from '@/util/helpers'
 import propsFactory from '@/util/propsFactory'
 
-// Props
-const allDimensionsProps = {
-  height: {
-    type: [Number, String],
-  },
-  maxHeight: {
-    type: [Number, String],
-  },
-  maxWidth: {
-    type: [Number, String],
-  },
-  minHeight: {
-    type: [Number, String],
-  },
-  minWidth: {
-    type: [Number, String],
-  },
-  width: {
-    type: [Number, String],
-  },
+// Types
+export interface DimensionProps {
+  height?: number | string
+  maxHeight?: number | string
+  maxWidth?: number | string
+  minHeight?: number | string
+  minWidth?: number | string
+  width?: number | string
 }
 
-// Types
-type PropValue = string | number | null | undefined
-type PropNames = keyof typeof allDimensionsProps
+export type DimensionKey = keyof DimensionProps
+export type DimensionStyles = Partial<Record<DimensionKey, string>>
 
-// Effect
-export function dimensionsFactory<S extends PropNames> (...possibleProps: S[]) {
-  const selectedProps = possibleProps.length ? possibleProps : keys(allDimensionsProps) as S[]
+export const makeDimensionProps = propsFactory({
+  height: { type: [Number, String] },
+  maxHeight: { type: [Number, String] },
+  maxWidth: { type: [Number, String] },
+  minHeight: { type: [Number, String] },
+  minWidth: { type: [Number, String] },
+  width: { type: [Number, String] },
+})
 
-  const makeDimensionsProps = propsFactory(selectedProps.reduce((obj, prop) => {
-    obj[prop] = allDimensionsProps[prop]
-    return obj
-  }, {} as Record<S, Prop<PropValue>>))
+export function useDimensionStyles (props: DimensionProps) {
+  const dimensionStyles = computed(() => {
+    const properties = Object.keys(props) as DimensionKey[]
 
-  const useDimensions = (props: Partial<Record<S, PropValue>>) => {
-    const dimensions = computed(() => {
-      return selectedProps.reduce((obj, key) => {
-        const value: PropValue = props[key]
-        if (value) {
-          obj.style[key] = convertToUnit(value)
-        }
-        return obj
-      }, { style: {} } as { style: Record<S, string | undefined> })
-    })
+    return properties.reduce((acc, cur) => {
+      const value = props[cur]
 
-    return { dimensions }
-  }
+      if (value != null) acc[cur] = convertToUnit(value)
 
-  return {
-    makeDimensionsProps,
-    useDimensions,
-  }
+      return acc
+    }, {} as DimensionStyles)
+  })
+
+  return { dimensionStyles }
 }
