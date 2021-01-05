@@ -154,6 +154,16 @@ export default VAutocomplete.extend({
         this.updateEditing()
       } else {
         VAutocomplete.options.methods.selectItem.call(this, item)
+
+        // if selected item contains search value,
+        // remove the search string
+        if (
+          this.internalSearch &&
+          this.multiple &&
+          this.getText(item).includes(this.internalSearch)
+        ) {
+          this.internalSearch = null
+        }
       }
     },
     setSelectedItems () {
