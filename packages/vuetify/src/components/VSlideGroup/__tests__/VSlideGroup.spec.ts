@@ -333,4 +333,60 @@ describe('VSlideGroup.ts', () => {
 
     expect(wrapper.vm.hasAffixes).toBe(hasAffixes)
   })
+
+  it('should has affixes on desktop when scrollOffset greater than 0', async () => {
+    const wrapper = mountFunction({
+      data: () => ({
+        scrollOffset: 200,
+      }),
+      computed: { isMobile: () => false },
+    })
+
+    expect(wrapper.vm.hasAffixes).toBe(true)
+
+    await wrapper.setProps({ showArrows: true })
+    expect(wrapper.vm.hasAffixes).toBe(true)
+
+    await wrapper.setProps({ showArrows: 'mobile' })
+    expect(wrapper.vm.hasAffixes).toBe(true)
+  })
+
+  it('should calculateNewOffset when call scrollIntoView and last item position is not into view', () => {
+    const calculateNewOffset = jest.fn()
+
+    const wrapper = mountFunction({
+      data: () => ({
+        items: [{ $el: {} }],
+      }),
+      methods: { calculateNewOffset },
+    })
+
+    const setWrapperPosition = ({ left = 0, right = 0 } = {}) => {
+      wrapper.vm.$refs.wrapper.getBoundingClientRect = () => ({ left, right } as DOMRectReadOnly)
+    }
+
+    const setLastItemPosition = ({ left = 0, right = 0 } = {}) => {
+      wrapper.vm.items[wrapper.vm.items.length - 1].$el.getBoundingClientRect = () => ({ left, right } as DOMRectReadOnly)
+    }
+
+    setWrapperPosition({ left: 100 })
+    setLastItemPosition({ left: 50 })
+
+    wrapper.vm.scrollIntoView()
+
+    expect(calculateNewOffset).toHaveBeenCalledTimes(1)
+
+    calculateNewOffset.mockClear()
+
+    // RTL
+
+    wrapper.vm.$vuetify.rtl = true
+
+    setWrapperPosition({ right: 50 })
+    setLastItemPosition({ right: 100 })
+
+    wrapper.vm.scrollIntoView()
+
+    expect(calculateNewOffset).toHaveBeenCalledTimes(1)
+  })
 })

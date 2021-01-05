@@ -116,7 +116,7 @@ describe('VRangeSlider.ts', () => {
     container.trigger('mousedown')
 
     expect(wrapper.vm.isActive).toBeTruthy()
-    expect(wrapper.vm.activeThumb).toBe(0)
+    expect(wrapper.vm.activeThumb).toBe(1)
   })
 
   it('should set internal value', () => {
