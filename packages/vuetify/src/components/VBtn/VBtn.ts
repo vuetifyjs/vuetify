@@ -10,6 +10,7 @@ import VProgressCircular from '../VProgressCircular'
 // Mixins
 import { factory as GroupableFactory } from '../../mixins/groupable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
+import Elevatable from '../../mixins/elevatable'
 import Positionable from '../../mixins/positionable'
 import Routable from '../../mixins/routable'
 import Sizeable from '../../mixins/sizeable'
@@ -108,6 +109,11 @@ export default baseMixins.extend<options>().extend({
         ...this.sizeableClasses,
       }
     },
+    computedElevation (): string | number | undefined {
+      if (this.disabled) return undefined
+
+      return Elevatable.options.computed.computedElevation.call(this)
+    },
     computedRipple (): RippleOptions | boolean {
       const defaultRipple = this.icon || this.fab ? { circle: true } : true
       if (this.disabled) return false
@@ -123,8 +129,9 @@ export default baseMixins.extend<options>().extend({
         !this.outlined &&
         !this.depressed &&
         !this.disabled &&
-        !this.plain
-      ) || Number(this.elevation) > 0
+        !this.plain &&
+        (this.elevation != null || Number(this.elevation) < 1)
+      )
     },
     isRound (): boolean {
       return Boolean(
