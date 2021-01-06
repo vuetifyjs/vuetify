@@ -4,6 +4,9 @@ import { convertToUnit } from '@/util/helpers'
 import propsFactory from '@/util/propsFactory'
 
 // Types
+export type DimensionKey = keyof DimensionProps
+export type DimensionStyles = Partial<Record<DimensionKey, string>>
+
 export interface DimensionProps {
   height?: number | string
   maxHeight?: number | string
@@ -13,9 +16,7 @@ export interface DimensionProps {
   width?: number | string
 }
 
-export type DimensionKey = keyof DimensionProps
-export type DimensionStyles = Partial<Record<DimensionKey, string>>
-
+// Composables
 export const makeDimensionProps = propsFactory({
   height: { type: [Number, String] },
   maxHeight: { type: [Number, String] },
@@ -29,18 +30,18 @@ export function useDimension (props: DimensionProps) {
   const dimensionStyles = computed(() => {
     const styles: DimensionStyles = {}
     const height = convertToUnit(props.height)
-    const minHeight = convertToUnit(props.minHeight)
     const maxHeight = convertToUnit(props.maxHeight)
-    const width = convertToUnit(props.width)
-    const minWidth = convertToUnit(props.minWidth)
     const maxWidth = convertToUnit(props.maxWidth)
+    const minHeight = convertToUnit(props.minHeight)
+    const minWidth = convertToUnit(props.minWidth)
+    const width = convertToUnit(props.width)
 
     if (height) styles.height = height
-    if (minHeight) styles.minHeight = minHeight
     if (maxHeight) styles.maxHeight = maxHeight
-    if (width) styles.width = width
-    if (minWidth) styles.minWidth = minWidth
     if (maxWidth) styles.maxWidth = maxWidth
+    if (minHeight) styles.minHeight = minHeight
+    if (minWidth) styles.minWidth = minWidth
+    if (width) styles.width = width
 
     return styles
   })
