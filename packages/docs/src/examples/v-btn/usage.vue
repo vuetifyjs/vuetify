@@ -36,7 +36,6 @@
         medium: false,
         outlined: false,
         plain: false,
-        raised: false,
         rounded: false,
         small: false,
         text: false,
