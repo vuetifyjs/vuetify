@@ -81,9 +81,7 @@ export default Selectable.extend({
 
   methods: {
     genCheckbox () {
-      // title attr is used on parent directly, so that its hover effect includes VLabel; this avoids a duplicate
-      const checkboxAttrs = { ...this.attrs$ }
-      delete checkboxAttrs.title
+      const { title, ...checkboxAttrs } = this.attrs$
       return this.$createElement('div', {
         staticClass: 'v-input--selection-controls__input',
       }, [

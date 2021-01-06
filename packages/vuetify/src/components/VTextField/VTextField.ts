@@ -376,9 +376,7 @@ export default baseMixins.extend<options>().extend({
     genInput () {
       const listeners = Object.assign({}, this.listeners$)
       delete listeners.change // Change should not be bound externally
-      // title attr is used on parent directly, so that its hover effect includes VLabel; this avoids a duplicate
-      const inputAttrs = { ...this.attrs$ }
-      delete inputAttrs.title
+      const { title, ...inputAttrs } = this.attrs$
 
       return this.$createElement('input', {
         style: {},
