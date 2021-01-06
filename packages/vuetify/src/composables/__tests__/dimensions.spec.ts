@@ -1,5 +1,5 @@
 // Utilities
-import { useDimensionStyles } from '../'
+import { useDimension } from '../'
 
 // Types
 import type { DimensionProps } from '../'
@@ -14,7 +14,7 @@ describe('dimensions.ts', () => {
     [{ minWidth: 104 }, { minWidth: '104px' }],
     [{ width: 105 }, { width: '105px' }],
   ])('should have proper styles', (props, expected) => {
-    const { dimensionStyles } = useDimensionStyles(props as DimensionProps)
+    const { dimensionStyles } = useDimension(props as DimensionProps)
 
     expect(dimensionStyles.value).toEqual(expected)
   })
