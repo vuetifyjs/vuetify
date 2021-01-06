@@ -49,7 +49,7 @@ exports[`VDataFooter.ts should disable last page button if no items 1`] = `
   <div class="v-data-footer__icons-before">
     <button type="button"
             disabled="disabled"
-            class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+            class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="First page"
     >
       <span class="v-btn__content">
@@ -61,7 +61,7 @@ exports[`VDataFooter.ts should disable last page button if no items 1`] = `
     </button>
     <button type="button"
             disabled="disabled"
-            class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+            class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="Previous page"
     >
       <span class="v-btn__content">
@@ -75,7 +75,7 @@ exports[`VDataFooter.ts should disable last page button if no items 1`] = `
   <div class="v-data-footer__icons-after">
     <button type="button"
             disabled="disabled"
-            class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+            class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="Next page"
     >
       <span class="v-btn__content">
@@ -87,7 +87,7 @@ exports[`VDataFooter.ts should disable last page button if no items 1`] = `
     </button>
     <button type="button"
             disabled="disabled"
-            class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+            class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="Last page"
     >
       <span class="v-btn__content">
@@ -149,7 +149,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
   </div>
   <div class="v-data-footer__icons-before">
     <button type="button"
-            class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+            class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="First page"
     >
       <span class="v-btn__content">
@@ -160,7 +160,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
       </span>
     </button>
     <button type="button"
-            class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+            class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="Previous page"
     >
       <span class="v-btn__content">
@@ -173,7 +173,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
   </div>
   <div class="v-data-footer__icons-after">
     <button type="button"
-            class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+            class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="Next page"
     >
       <span class="v-btn__content">
@@ -184,7 +184,7 @@ exports[`VDataFooter.ts should render first & last icons with showFirstLastPage 
       </span>
     </button>
     <button type="button"
-            class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+            class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="Last page"
     >
       <span class="v-btn__content">
@@ -246,7 +246,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
   </div>
   <div class="v-data-footer__icons-before">
     <button type="button"
-            class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+            class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="First page"
     >
       <span class="v-btn__content">
@@ -257,7 +257,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
       </span>
     </button>
     <button type="button"
-            class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+            class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="Previous page"
     >
       <span class="v-btn__content">
@@ -270,7 +270,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
   </div>
   <div class="v-data-footer__icons-after">
     <button type="button"
-            class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+            class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="Next page"
     >
       <span class="v-btn__content">
@@ -281,7 +281,7 @@ exports[`VDataFooter.ts should render in RTL mode 1`] = `
       </span>
     </button>
     <button type="button"
-            class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+            class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="Last page"
     >
       <span class="v-btn__content">
@@ -343,7 +343,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
   </div>
   <div class="v-data-footer__icons-before">
     <button type="button"
-            class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+            class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="Previous page"
     >
       <span class="v-btn__content">
@@ -357,7 +357,7 @@ exports[`VDataFooter.ts should render with custom itemsPerPage 1`] = `
   <div class="v-data-footer__icons-after">
     <button type="button"
             disabled="disabled"
-            class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+            class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="Next page"
     >
       <span class="v-btn__content">
@@ -419,7 +419,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
   </div>
   <div class="v-data-footer__icons-before">
     <button type="button"
-            class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+            class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="Previous page"
     >
       <span class="v-btn__content">
@@ -435,7 +435,7 @@ exports[`VDataFooter.ts should show current page if has showCurrentPage 1`] = `
   </span>
   <div class="v-data-footer__icons-after">
     <button type="button"
-            class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+            class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
             aria-label="Next page"
     >
       <span class="v-btn__content">
