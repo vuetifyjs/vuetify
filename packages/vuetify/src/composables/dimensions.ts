@@ -18,12 +18,12 @@ export interface DimensionProps {
 
 // Composables
 export const makeDimensionProps = propsFactory({
-  height: { type: [Number, String] },
-  maxHeight: { type: [Number, String] },
-  maxWidth: { type: [Number, String] },
-  minHeight: { type: [Number, String] },
-  minWidth: { type: [Number, String] },
-  width: { type: [Number, String] },
+  height: [Number, String],
+  maxHeight: [Number, String],
+  maxWidth: [Number, String],
+  minHeight: [Number, String],
+  minWidth: [Number, String],
+  width: [Number, String],
 })
 
 export function useDimension (props: DimensionProps) {
