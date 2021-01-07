@@ -24,7 +24,6 @@ export default mixins(Themeable).extend({
       type: String,
       default: 'primary',
     },
-    hasPlaceholder: Boolean,
     disabled: Boolean,
     focused: Boolean,
     for: String,
@@ -44,7 +43,7 @@ export default mixins(Themeable).extend({
     const data = {
       staticClass: 'v-label',
       class: {
-        'v-label--active': props.value || props.hasPlaceholder,
+        'v-label--active': props.value,
         'v-label--is-disabled': props.disabled,
         ...functionalThemeClasses(ctx),
       },
