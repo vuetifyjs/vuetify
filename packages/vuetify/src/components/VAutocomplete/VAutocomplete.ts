@@ -168,7 +168,8 @@ export default VSelect.extend({
         document.addEventListener('copy', this.onCopy)
         this.$refs.input && this.$refs.input.select()
       } else {
-        document.removeEventListener('copy', this.onCopy)
+        document.removeEventListener('copy', this.onCopy);
+        (this.$_menuProps as any).closeOnContentClick && this.$refs.input.blur()
         this.updateSelf()
       }
     },
