@@ -4,9 +4,6 @@ import { convertToUnit } from '@/util/helpers'
 import propsFactory from '@/util/propsFactory'
 
 // Types
-export type DimensionKey = keyof DimensionProps
-export type DimensionStyles = Partial<Record<DimensionKey, string>>
-
 export interface DimensionProps {
   height?: number | string
   maxHeight?: number | string
@@ -15,6 +12,9 @@ export interface DimensionProps {
   minWidth?: number | string
   width?: number | string
 }
+
+type DimensionKey = keyof DimensionProps
+type DimensionStyles = Partial<Record<DimensionKey, string>>
 
 // Composables
 export const makeDimensionProps = propsFactory({
