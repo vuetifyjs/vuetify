@@ -130,7 +130,7 @@ export default baseMixins.extend<options>().extend({
     genAttrs () {
       const attrs: Record<string, any> = {
         'aria-disabled': this.disabled ? true : undefined,
-        tabindex: this.isClickable && !this.disabled ? 0 : -1,
+        tabindex: 'safari' in window ? false : this.isClickable && !this.disabled ? 0 : -1,
         ...this.$attrs,
       }
 
