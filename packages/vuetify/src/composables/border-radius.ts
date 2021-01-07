@@ -3,36 +3,12 @@ import { computed } from 'vue'
 import propsFactory from '@/util/propsFactory'
 
 // Types
-import type { PropType } from 'vue'
-
-export type BorderRadiusProp = typeof radius[number]
-
 export interface BorderRadiusProps {
-  rounded?: BorderRadiusProp
+  rounded?: boolean | string | number | null
 }
 
-const radius = [
-  true,
-  false,
-  null,
-  '',
-  0,
-  '0',
-  'xs',
-  'sm',
-  'lg',
-  'xl',
-  'circle',
-  'pill',
-  'shaped',
-  'tile',
-] as const
-
 export const makeBorderRadiusProps = propsFactory({
-  rounded: {
-    type: [Boolean, Number, String] as PropType<BorderRadiusProp>,
-    validator: (v: any) => radius.includes(v),
-  },
+  rounded: [Boolean, Number, String],
 })
 
 // Composables
