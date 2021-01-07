@@ -13,15 +13,15 @@
     <template #icon>
       <v-badge
         :value="newJobs.length"
-        color="red"
+        color="#ED561B"
+        dot
         left
         overlap
       >
-        <template #badge>
-          {{ newJobs.length }}
-        </template>
-
-        <v-icon v-text="icon" />
+        <v-icon
+          class="mx-1"
+          v-text="icon"
+        />
       </v-badge>
     </template>
   </app-tooltip-btn>

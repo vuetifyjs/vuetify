@@ -15,6 +15,14 @@ import {
 } from '@vue/test-utils'
 // import { ExtractVue } from '../../../util/mixins'
 
+// Vue.prototype.$vuetify = {
+//   rtl: false,
+//   icons: {},
+//   lang: {
+//     t: str => str,
+//   },
+// }
+
 describe.skip('VRating.ts', () => {
   type Instance = ExtractVue<typeof VRating>
   let mountFunction: (options?: object) => Wrapper<Instance>
@@ -27,6 +35,9 @@ describe.skip('VRating.ts', () => {
         mocks: {
           $vuetify: {
             rtl: false,
+            lang: {
+              t: str => str,
+            },
           },
         },
         ...options,
@@ -188,6 +199,9 @@ describe.skip('VRating.ts', () => {
       mocks: {
         $vuetify: {
           rtl: true,
+          lang: {
+            t: str => str,
+          },
         },
       },
     })

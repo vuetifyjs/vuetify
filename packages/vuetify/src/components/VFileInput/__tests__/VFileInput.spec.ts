@@ -143,7 +143,7 @@ describe.skip('VFileInput.ts', () => {
     })
 
     wrapper.vm.clearableCallback()
-    expect(wrapper.vm.internalValue).toBeUndefined()
+    expect(wrapper.vm.internalValue).toBeNull()
 
     const wrapper2 = mountFunction({
       attrs: { multiple: '' },

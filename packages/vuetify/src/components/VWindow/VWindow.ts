@@ -47,10 +47,7 @@ export default BaseItemGroup.extend({
       type: [Boolean, String],
       default: '$prev',
     },
-    reverse: {
-      type: Boolean,
-      default: undefined,
-    },
+    reverse: Boolean,
     showArrows: Boolean,
     showArrowsOnHover: Boolean,
     touch: Object as PropType<TouchHandlers>,
@@ -86,7 +83,7 @@ export default BaseItemGroup.extend({
       if (!this.isBooted) return ''
 
       const axis = this.vertical ? 'y' : 'x'
-      const reverse = this.$vuetify.rtl && axis === 'x' ? !this.internalReverse : this.internalReverse
+      const reverse = this.internalReverse ? !this.isReverse : this.isReverse
       const direction = reverse ? '-reverse' : ''
 
       return `v-window-${axis}${direction}-transition`
@@ -108,12 +105,14 @@ export default BaseItemGroup.extend({
       })
     },
     internalReverse (): boolean {
-      return this.reverse ? !this.isReverse : this.isReverse
+      return this.$vuetify.rtl ? !this.reverse : this.reverse
     },
   },
 
   watch: {
-    internalIndex: 'updateReverse',
+    internalIndex (val, oldVal) {
+      this.isReverse = this.updateReverse(val, oldVal)
+    },
   },
 
   mounted () {
@@ -141,28 +140,34 @@ export default BaseItemGroup.extend({
     genIcon (
       direction: 'prev' | 'next',
       icon: string,
-      fn: () => void
+      click: () => void
     ) {
+      const on = {
+        click: (e: Event) => {
+          e.stopPropagation()
+          this.changedByDelimiters = true
+          click()
+        },
+      }
+      const attrs = {
+        'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`),
+      }
+      const children = this.$scopedSlots[direction]?.({
+        on,
+        attrs,
+      }) ?? [this.$createElement(VBtn, {
+        props: { icon: true },
+        attrs,
+        on,
+      }, [
+        this.$createElement(VIcon, {
+          props: { large: true },
+        }, icon),
+      ])]
+
       return this.$createElement('div', {
         staticClass: `v-window__${direction}`,
-      }, [
-        this.$createElement(VBtn, {
-          props: { icon: true },
-          attrs: {
-            'aria-label': this.$vuetify.lang.t(`$vuetify.carousel.${direction}`),
-          },
-          on: {
-            click: () => {
-              this.changedByDelimiters = true
-              fn()
-            },
-          },
-        }, [
-          this.$createElement(VIcon, {
-            props: { large: true },
-          }, icon),
-        ]),
-      ])
+      }, children)
     },
     genControlIcons () {
       const icons = []
@@ -214,8 +219,6 @@ export default BaseItemGroup.extend({
       return prevIndex
     },
     next () {
-      this.isReverse = this.$vuetify.rtl
-
       /* istanbul ignore if */
       if (!this.hasActiveItems || !this.hasNext) return
 
@@ -225,8 +228,6 @@ export default BaseItemGroup.extend({
       this.internalValue = this.getValue(item, nextIndex)
     },
     prev () {
-      this.isReverse = !this.$vuetify.rtl
-
       /* istanbul ignore if */
       if (!this.hasActiveItems || !this.hasPrev) return
 
@@ -236,12 +237,18 @@ export default BaseItemGroup.extend({
       this.internalValue = this.getValue(item, lastIndex)
     },
     updateReverse (val: number, oldVal: number) {
-      if (this.changedByDelimiters) {
-        this.changedByDelimiters = false
-        return
-      }
+      const itemsLength = this.items.length
+      const lastIndex = itemsLength - 1
 
-      this.isReverse = val < oldVal
+      if (itemsLength <= 2) return val < oldVal
+
+      if (val === lastIndex && oldVal === 0) {
+        return true
+      } else if (val === 0 && oldVal === lastIndex) {
+        return false
+      } else {
+        return val < oldVal
+      }
     },
   },
 

@@ -18,6 +18,7 @@ export default mixins(Measurable).extend({
 
   props: {
     aspectRatio: [String, Number] as NumberOrNumberString,
+    contentClass: String,
   },
 
   computed: {
@@ -43,6 +44,7 @@ export default mixins(Measurable).extend({
     genContent (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-responsive__content',
+        class: this.contentClass,
       }, this.$slots.default)
     },
   },

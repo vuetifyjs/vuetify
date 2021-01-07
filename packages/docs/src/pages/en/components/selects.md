@@ -61,7 +61,7 @@ You can use **dense** prop to reduce the field height and lower max height of li
 
 #### Disabled
 
-You cannot use disabled `v-select`.
+Applying the **disabled** prop to a `v-select` will prevent a user from interacting with the component.
 
 <example file="v-select/prop-disabled" />
 

@@ -17,6 +17,12 @@ Get started with Vuetify, the world’s most popular Vue.js framework for buildi
 
 ## Vue CLI Install
 
+<alert type="error">
+
+  The current version of Vuetify does not support Vue 3. Support for Vue 3 will come with the release of [Vuetify v3](/introduction/roadmap/#v30-titan). When creating a new project, please ensure you selected Vue 2 from the Vue CLI prompts, or that you are installing to an existing Vue 2 project.
+
+</alert>
+
 <alert type="warning">
 
   For information on how to use Vue CLI, visit the [official documentation](https://cli.vuejs.org/).

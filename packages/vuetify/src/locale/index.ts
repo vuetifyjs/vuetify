@@ -1,5 +1,6 @@
 export { default as af } from './af'
 export { default as ar } from './ar'
+export { default as bg } from './bg'
 export { default as ca } from './ca'
 export { default as ckb } from './ckb'
 export { default as cs } from './cs'

@@ -5,6 +5,7 @@
     "dotSize": "Changes the size of the selection dot on the canvas",
     "flat": "Removes elevation",
     "hideCanvas": "Hides canvas",
+    "hideSliders": "Hides sliders",
     "hideInputs": "Hides inputs",
     "hideModeSwitch": "Hides mode switch",
     "mode": "Sets mode of inputs. Available modes are 'rgba', 'hsla', and 'hexa'. Can be synced with the `.sync` modifier.",

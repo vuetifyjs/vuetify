@@ -219,7 +219,7 @@ describe.skip('VAutocomplete.ts', () => {
 
     icon.trigger('click')
 
-    expect(wrapper.vm.internalSearch).toBeUndefined()
+    expect(wrapper.vm.internalSearch).toBeNull()
   })
 
   it('should propagate content class', () => {

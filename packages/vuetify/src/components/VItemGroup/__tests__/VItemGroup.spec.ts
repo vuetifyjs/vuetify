@@ -380,4 +380,14 @@ describe.skip('VItemGroup', () => {
     expect(wrapper.vm.selectedIndex).toBe(2)
     expect(wrapper.vm.selectedItem).toEqual(wrapper.vm.items[2])
   })
+
+  it('should render with a specified tag when the tag prop is provided with a value', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        tag: 'button',
+      },
+    })
+
+    expect(wrapper.is('button')).toBe(true)
+  })
 })

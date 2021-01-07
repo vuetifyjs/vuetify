@@ -6,7 +6,7 @@ export default {
     loadingText: `Chargement de l'élément...`,
   },
   dataTable: {
-    itemsPerPageText: 'Lignes par page:',
+    itemsPerPageText: 'Lignes par page :',
     ariaLabel: {
       sortDescending: 'Tri décroissant.',
       sortAscending: 'Tri croissant.',
@@ -18,7 +18,7 @@ export default {
     sortBy: 'Trier par',
   },
   dataFooter: {
-    itemsPerPageText: 'Élements par page:',
+    itemsPerPageText: 'Élements par page :',
     itemsPerPageAll: 'Tous',
     nextPage: 'Page suivante',
     prevPage: 'Page précédente',
@@ -27,7 +27,7 @@ export default {
     pageText: '{0}-{1} de {2}',
   },
   datePicker: {
-    itemsSelected: '{0} sélectionnés',
+    itemsSelected: '{0} sélectionné(s)',
     nextMonthAriaLabel: 'Le mois prochain',
     nextYearAriaLabel: `L'année prochaine`,
     prevMonthAriaLabel: 'Le mois précédent',
@@ -38,15 +38,15 @@ export default {
     prev: 'Visuel précédent',
     next: 'Visuel suivant',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Diapositive {0} de {1}',
     },
   },
   calendar: {
-    moreEvents: '{0} plus',
+    moreEvents: '{0} de plus',
   },
   fileInput: {
-    counter: '{0} fichiers',
-    counterSize: '{0} fichiers ({1} au total)',
+    counter: '{0} fichier(s)',
+    counterSize: '{0} fichier(s) ({1} au total)',
   },
   timePicker: {
     am: 'AM',
@@ -59,6 +59,11 @@ export default {
       previous: 'Page précédente',
       page: 'Aller à la page {0}',
       currentPage: 'Page actuelle, Page {0}',
+    },
+  },
+  rating: {
+    ariaLabel: {
+      icon: 'Rating {0} of {1}',
     },
   },
 }
