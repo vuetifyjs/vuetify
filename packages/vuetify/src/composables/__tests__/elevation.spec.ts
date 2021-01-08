@@ -2,7 +2,7 @@
 import type { ElevationProps } from '../elevation'
 import {
   makeElevationProps,
-  useElevationClasses,
+  useElevation,
 } from '../elevation'
 
 describe('elevation.ts', () => {
@@ -18,12 +18,12 @@ describe('elevation.ts', () => {
 
     for (const [elevation, equal] of values) {
       const props = { elevation }
-      const { elevationClasses } = useElevationClasses(props)
+      const { elevationClasses } = useElevation(props)
 
       expect(elevationClasses.value).toEqual(equal)
     }
 
-    const { elevationClasses } = useElevationClasses({ flat: true })
+    const { elevationClasses } = useElevation({ flat: true })
 
     expect(elevationClasses.value).toEqual({ 'elevation-0': true })
   })

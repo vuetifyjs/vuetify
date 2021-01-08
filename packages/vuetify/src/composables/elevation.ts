@@ -26,7 +26,7 @@ export const makeElevationProps = propsFactory({
 })
 
 // Effect
-export function useElevationClasses (props: ElevationProps) {
+export function useElevation (props: ElevationProps) {
   const elevationClasses = computed(() => {
     const { elevation = props.flat ? 0 : undefined } = props
 
