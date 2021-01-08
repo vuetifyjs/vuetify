@@ -68,7 +68,7 @@ export interface ThemeInstance {
   isDisabled: boolean
   themes: Ref<Record<string, InternalThemeDefinition>>
   current: Ref<string>
-  themeClass: Ref<string>
+  themeClasses: Ref<string>
   setTheme: (key: string, theme: ThemeDefinition) => void
   getTheme: (key: string) => InternalThemeDefinition
 }
@@ -239,7 +239,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
     setTheme: (key: string, theme: ThemeDefinition) => themes.value[key] = theme,
     getTheme: (key: string) => computedThemes.value[key],
     current,
-    themeClass: computed(() => parsedOptions.isDisabled ? '' : `v-theme--${current.value}`),
+    themeClasses: computed(() => parsedOptions.isDisabled ? '' : `v-theme--${current.value}`),
   }
 }
 
@@ -270,11 +270,11 @@ export function provideTheme (props: { theme?: string, newContext?: boolean } = 
     },
   })
 
-  const themeClass = computed(() => theme.isDisabled ? '' : `v-theme--${current.value}`)
+  const themeClasses = computed(() => theme.isDisabled ? '' : `v-theme--${current.value}`)
   const newTheme: ThemeInstance = {
     ...theme,
     current,
-    themeClass,
+    themeClasses,
   }
 
   provide(VuetifyThemeSymbol, newTheme)

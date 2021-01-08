@@ -17,10 +17,10 @@ export const VThemeProvider = defineComponent({
   }),
 
   setup (props, context) {
-    const { themeClass } = provideTheme(props, context)
+    const { themeClasses } = provideTheme(props, context)
 
     return () => h('div', {
-      class: ['v-theme-provider', themeClass.value],
+      class: ['v-theme-provider', themeClasses.value],
     }, [h('div', [context.slots.default?.()])])
   },
 })
