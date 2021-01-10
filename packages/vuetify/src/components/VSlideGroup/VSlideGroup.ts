@@ -17,6 +17,7 @@ import Touch from '../../directives/touch'
 
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
+import { passiveSupported } from '../../util/helpers'
 
 // Types
 import Vue, { VNode } from 'vue'
@@ -394,6 +395,8 @@ export const BaseSlideGroup = mixins<options &
       }, this.$vuetify.rtl, this.scrollOffset)
     },
     setWidths /* istanbul ignore next */  () {
+      if (!passiveSupported) return
+
       window.requestAnimationFrame(() => {
         const { content, wrapper } = this.$refs
 
