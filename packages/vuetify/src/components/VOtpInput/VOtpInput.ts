@@ -4,7 +4,6 @@ import './VOtpInput.sass'
 
 // Extensions
 import VInput from '../VInput'
-import { VRow, VCol } from '../VGrid'
 
 // Directives
 import ripple from '../../directives/ripple'
@@ -135,7 +134,8 @@ export default baseMixins.extend<options>().extend({
         class: this.classes,
       }), [this.genControl(otpIdx)])
 
-      return this.$createElement(VCol, {
+      return this.$createElement('div', {
+        staticClass: 'col-input',
       }, [
         node,
       ])
@@ -145,10 +145,8 @@ export default baseMixins.extend<options>().extend({
         return this.genCol(x)
       })
 
-      return [this.$createElement(VRow, {
-        attrs: {
-          dense: true,
-        },
+      return [this.$createElement('div', {
+        staticClass: 'row-container',
       }, cols)]
     },
     genFieldset () {

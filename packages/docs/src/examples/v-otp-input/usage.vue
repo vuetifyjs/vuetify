@@ -21,9 +21,7 @@
 <script>
   export default {
     name: 'Usage',
-
     inheritAttrs: false,
-
     props: {
       maxWidth: {
         type: Number,
