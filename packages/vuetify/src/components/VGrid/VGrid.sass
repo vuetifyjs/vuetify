@@ -1,7 +1,7 @@
 @import '../../styles/styles.sass'
 @import './_mixins'
 
-.container
+.v-container
   +make-container
   +make-container-max-widths
 
@@ -11,22 +11,22 @@
 // Row
 //
 // Rows contain and clear the floats of your columns.
-.row
+.v-row
   +make-row
 
   &--dense
     margin: -$form-grid-gutter / 2
 
-    > .col,
-    > [class*="col-"]
+    > .v-col,
+    > [class*="v-col-"]
       padding: $form-grid-gutter / 2
 
-// Remove the negative margin from default .row, then the horizontal padding
+// Remove the negative margin from default .v-row, then the horizontal padding
 // from all immediate children columns (to prevent runaway style inheritance).
-.no-gutters
+.v-row--no-gutters
   margin: 0
-  > .col,
-  > [class*="col-"]
+  > .v-col,
+  > [class*="v-col-"]
     padding: 0
 
 // Columns

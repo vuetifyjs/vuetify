@@ -7,7 +7,6 @@ import {
   arrayDiff,
   getObjectValueByPath,
   humanReadableFileSize,
-  kebabCase,
   sortItems,
 } from '../helpers'
 
@@ -407,23 +406,5 @@ describe('helpers', () => {
         { string: 'baz', number: 1 },
         { string: 'foo', number: 1 },
       ])
-  })
-})
-
-describe('kebabCase', () => {
-  it.each([
-    ['PascalCase', 'pascal-case'],
-    ['camelCase', 'camel-case'],
-    ['kebab-case', 'kebab-case'],
-    ['ALLCAPS', 'allcaps'],
-  ])('should convert "%s" to "%s"', (input, expected) => {
-    expect(kebabCase(input)).toBe(expected)
-  })
-
-  it.each([
-    [null],
-    [undefined],
-  ])('should handle %s values', input => {
-    expect(kebabCase(input)).toBe('')
   })
 })

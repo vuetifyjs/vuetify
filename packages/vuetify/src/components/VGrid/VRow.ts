@@ -1,40 +1,38 @@
-// @ts-nocheck
-/* eslint-disable */
-
 import './VGrid.sass'
 
-import Vue, { PropOptions } from 'vue'
-import mergeData from '../../util/mergeData'
-import { upperFirst } from '../../util/helpers'
+import { capitalize, computed, defineComponent, h } from 'vue'
+import makeProps from '@/util/makeProps'
 
-// no xs
-const breakpoints = ['sm', 'md', 'lg', 'xl']
+// Types
+import type { Prop } from 'vue'
 
-const ALIGNMENT = ['start', 'end', 'center']
+const breakpoints = ['sm', 'md', 'lg', 'xl'] as const // no xs
 
-function makeProps (prefix: string, def: () => PropOptions) {
+const ALIGNMENT = ['start', 'end', 'center'] as const
+
+function makeRowProps (prefix: string, def: () => Prop<string, null>) {
   return breakpoints.reduce((props, val) => {
-    props[prefix + upperFirst(val)] = def()
+    props[prefix + capitalize(val)] = def()
     return props
-  }, {} as Dictionary<PropOptions>)
+  }, {} as Dictionary<Prop<string, null>>)
 }
 
 const alignValidator = (str: any) => [...ALIGNMENT, 'baseline', 'stretch'].includes(str)
-const alignProps = makeProps('align', () => ({
+const alignProps = makeRowProps('align', () => ({
   type: String,
   default: null,
   validator: alignValidator,
 }))
 
 const justifyValidator = (str: any) => [...ALIGNMENT, 'space-between', 'space-around'].includes(str)
-const justifyProps = makeProps('justify', () => ({
+const justifyProps = makeRowProps('justify', () => ({
   type: String,
   default: null,
   validator: justifyValidator,
 }))
 
 const alignContentValidator = (str: any) => [...ALIGNMENT, 'space-between', 'space-around', 'stretch'].includes(str)
-const alignContentProps = makeProps('alignContent', () => ({
+const alignContentProps = makeRowProps('alignContent', () => ({
   type: String,
   default: null,
   validator: alignContentValidator,
@@ -67,12 +65,10 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: string)
   return className.toLowerCase()
 }
 
-const cache = new Map<string, any[]>()
+export default defineComponent({
+  name: 'VRow',
 
-export default Vue.extend({
-  name: 'v-row',
-  functional: true,
-  props: {
+  props: makeProps({
     tag: {
       type: String,
       default: 'div',
@@ -97,17 +93,12 @@ export default Vue.extend({
       validator: alignContentValidator,
     },
     ...alignContentProps,
-  },
-  render (h, { props, data, children }) {
-    // Super-fast memoization based on props, 5x faster than JSON.stringify
-    let cacheKey = ''
-    for (const prop in props) {
-      cacheKey += String((props as any)[prop])
-    }
-    let classList = cache.get(cacheKey)
+  }),
 
-    if (!classList) {
-      classList = []
+  setup (props, { slots }) {
+    const classes = computed(() => {
+      const classList: any[] = []
+
       // Loop through `align`, `justify`, `alignContent` breakpoint props
       let type: keyof typeof propMap
       for (type in propMap) {
@@ -119,23 +110,18 @@ export default Vue.extend({
       }
 
       classList.push({
-        'no-gutters': props.noGutters,
-        'row--dense': props.dense,
+        'v-row--no-gutters': props.noGutters,
+        'v-row--dense': props.dense,
         [`align-${props.align}`]: props.align,
         [`justify-${props.justify}`]: props.justify,
         [`align-content-${props.alignContent}`]: props.alignContent,
       })
 
-      cache.set(cacheKey, classList)
-    }
+      return classList
+    })
 
-    return h(
-      props.tag,
-      mergeData(data, {
-        staticClass: 'row',
-        class: classList,
-      }),
-      children
-    )
+    return () => h(props.tag, {
+      class: ['v-row', classes.value],
+    }, slots.default?.())
   },
 })

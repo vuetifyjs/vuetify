@@ -1,14 +1,12 @@
-// @ts-nocheck
-/* eslint-disable */
-
 import './VGrid.sass'
 
-import Vue, { VNode, PropOptions } from 'vue'
-import mergeData from '../../util/mergeData'
-import { upperFirst } from '../../util/helpers'
+import { defineComponent, computed, h, capitalize } from 'vue'
+import makeProps from '@/util/makeProps'
 
-// no xs
-const breakpoints = ['sm', 'md', 'lg', 'xl']
+// Types
+import type { Prop } from 'vue'
+
+const breakpoints = ['sm', 'md', 'lg', 'xl'] as const // no xs
 
 const breakpointProps = (() => {
   return breakpoints.reduce((props, val) => {
@@ -17,27 +15,27 @@ const breakpointProps = (() => {
       default: false,
     }
     return props
-  }, {} as Dictionary<PropOptions>)
+  }, {} as Dictionary<Prop<boolean | string | number, false>>)
 })()
 
 const offsetProps = (() => {
   return breakpoints.reduce((props, val) => {
-    props['offset' + upperFirst(val)] = {
+    props['offset' + capitalize(val)] = {
       type: [String, Number],
       default: null,
     }
     return props
-  }, {} as Dictionary<PropOptions>)
+  }, {} as Dictionary<Prop<string | number, null>>)
 })()
 
 const orderProps = (() => {
   return breakpoints.reduce((props, val) => {
-    props['order' + upperFirst(val)] = {
+    props['order' + capitalize(val)] = {
       type: [String, Number],
       default: null,
     }
     return props
-  }, {} as Dictionary<PropOptions>)
+  }, {} as Dictionary<Prop<string | number, null>>)
 })()
 
 const propMap = {
@@ -47,7 +45,7 @@ const propMap = {
 }
 
 function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean | string | number) {
-  let className = type
+  let className: string = type
   if (val == null || val === false) {
     return undefined
   }
@@ -55,11 +53,14 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean
     const breakpoint = prop.replace(type, '')
     className += `-${breakpoint}`
   }
+  if (type === 'col') {
+    className = 'v-' + className
+  }
   // Handling the boolean style prop when accepting [Boolean, String, Number]
   // means Vue will not convert <v-col sm></v-col> to sm: true for us.
   // Since the default is false, an empty string indicates the prop's presence.
   if (type === 'col' && (val === '' || val === true)) {
-    // .col-md
+    // .v-col-md
     return className.toLowerCase()
   }
   // .order-md-6
@@ -67,12 +68,10 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean
   return className.toLowerCase()
 }
 
-const cache = new Map<string, any[]>()
+export default defineComponent({
+  name: 'VCol',
 
-export default Vue.extend({
-  name: 'v-col',
-  functional: true,
-  props: {
+  props: makeProps({
     cols: {
       type: [Boolean, String, Number],
       default: false,
@@ -97,17 +96,12 @@ export default Vue.extend({
       type: String,
       default: 'div',
     },
-  },
-  render (h, { props, data, children, parent }): VNode {
-    // Super-fast memoization based on props, 5x faster than JSON.stringify
-    let cacheKey = ''
-    for (const prop in props) {
-      cacheKey += String((props as any)[prop])
-    }
-    let classList = cache.get(cacheKey)
+  }),
 
-    if (!classList) {
-      classList = []
+  setup (props, { slots }) {
+    const classes = computed(() => {
+      const classList: any[] = []
+
       // Loop through `col`, `offset`, `order` breakpoint props
       let type: keyof typeof propMap
       for (type in propMap) {
@@ -118,20 +112,22 @@ export default Vue.extend({
         })
       }
 
-      const hasColClasses = classList.some(className => className.startsWith('col-'))
+      const hasColClasses = classList.some(className => className.startsWith('v-col-'))
 
       classList.push({
-        // Default to .col if no other col-{bp}-* classes generated nor `cols` specified.
-        col: !hasColClasses || !props.cols,
-        [`col-${props.cols}`]: props.cols,
+        // Default to .v-col if no other col-{bp}-* classes generated nor `cols` specified.
+        'v-col': !hasColClasses || !props.cols,
+        [`v-col-${props.cols}`]: props.cols,
         [`offset-${props.offset}`]: props.offset,
         [`order-${props.order}`]: props.order,
         [`align-self-${props.alignSelf}`]: props.alignSelf,
       })
 
-      cache.set(cacheKey, classList)
-    }
+      return classList
+    })
 
-    return h(props.tag, mergeData(data, { class: classList }), children)
+    return () => h(props.tag, {
+      class: classes.value,
+    }, slots.default?.())
   },
 })

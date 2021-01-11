@@ -1,31 +1,30 @@
-// @ts-nocheck
-/* eslint-disable */
-
 // Components
-// import VContainer from '../VContainer'
+import VContainer from '../VContainer'
 
 // Utilities
-import {
-  mount,
-  MountOptions,
-  Wrapper,
-} from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
+import * as framework from '@/framework'
 
-describe.skip('VContainer.ts', () => {
-  type Instance = InstanceType<typeof VContainer>
-  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+function mountFunction (template: string) {
+  return mount({
+    components: { VContainer },
+    template,
+  })
+}
 
+describe('VContainer', () => {
   beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VContainer, {
-        ...options,
-      })
-    }
+    jest.spyOn(framework, 'useVuetify').mockReturnValue({
+      defaults: { global: {} },
+    })
+  })
+  afterEach(() => {
+    jest.spyOn(framework, 'useVuetify').mockRestore()
   })
 
   it('should work', () => {
-    const wrapper = mountFunction()
+    const wrapper = mountFunction(`<VContainer />`)
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.html()).toBe('<div class="v-container"></div>')
   })
 })

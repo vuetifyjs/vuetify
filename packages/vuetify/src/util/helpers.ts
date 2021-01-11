@@ -2,20 +2,26 @@ import type { VuetifyIcon } from 'vuetify/types/services/icons'
 import type { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
 import type { ComponentInternalInstance, Slots } from 'vue'
 
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, capitalize, camelize } from 'vue'
 
 export function createSimpleFunctional (
-  c: string,
-  el = 'div',
+  klass: string,
+  tag = 'div',
   name?: string
 ) {
   return defineComponent({
-    name: name ?? c.replace(/__/g, '-'),
+    name: name ?? capitalize(camelize(klass.replace(/__/g, '-'))),
 
-    setup (props, { attrs, slots }) {
-      return () => h(el, {
-        class: c,
-        ...attrs,
+    props: {
+      tag: {
+        type: String,
+        default: tag,
+      },
+    },
+
+    setup (props, { slots }) {
+      return () => h(props.tag, {
+        class: klass,
       }, slots.default?.())
     },
   })
@@ -202,18 +208,6 @@ export function keys<O> (o: O) {
 }
 
 /**
- * Camelize a hyphen-delimited string.
- */
-const camelizeRE = /-(\w)/g
-export const camelize = (str: string): string => {
-  return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
-}
-
-export function kebabCase (str: string | null | undefined): string {
-  return (str ?? '').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
-}
-
-/**
  * Returns the set difference of B and A, i.e. the set of elements in B but not in A
  */
 export function arrayDiff (a: any[], b: any[]): any[] {
@@ -222,13 +216,6 @@ export function arrayDiff (a: any[], b: any[]): any[] {
     if (!a.includes(b[i])) diff.push(b[i])
   }
   return diff
-}
-
-/**
- * Makes the first character of a string uppercase
- */
-export function upperFirst (str: string): string {
-  return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
 export function groupItems<T extends any = any> (
