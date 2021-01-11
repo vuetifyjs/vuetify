@@ -1,27 +1,17 @@
-// @ts-nocheck
-/* eslint-disable */
-
 // Components
-// import VResponsive from '../VResponsive'
+import VResponsive from '../VResponsive'
 
 // Utilities
-import {
-  mount,
-  Wrapper,
-} from '@vue/test-utils'
+import { h } from 'vue'
+import { mount } from '@vue/test-utils'
 
-describe.skip('VResponsive.ts', () => {
-  type Instance = InstanceType<typeof VResponsive>
-  let mountFunction: (options?: object) => Wrapper<Instance>
-
-  beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VResponsive, {
-        ...options,
-      })
-    }
+function mountFunction (options = {}) {
+  return mount(VResponsive, {
+    ...options,
   })
+}
 
+describe('VResponsive', () => {
   it('should force aspect ratio', () => {
     const wrapper = mountFunction({
       propsData: { aspectRatio: 16 / 9 },
@@ -33,7 +23,7 @@ describe.skip('VResponsive.ts', () => {
   it('should render content', () => {
     const wrapper = mountFunction({
       slots: {
-        default: { render: h => h('div', ['content']) },
+        default: () => h('div', ['content']),
       },
     })
 

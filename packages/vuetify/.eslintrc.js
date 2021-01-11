@@ -1,4 +1,7 @@
 module.exports = {
+  parserOptions: {
+    project: './packages/vuetify/tsconfig.dev.json',
+  },
   globals: {
     __VUETIFY_VERSION__: true,
     __REQUIRED_VUE__: true,

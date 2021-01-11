@@ -1,62 +1,49 @@
-// @ts-nocheck
-/* eslint-disable */
-
 import './VResponsive.sass'
 
-// Mixins
-import Measurable, { NumberOrNumberString } from '../../mixins/measurable'
+import { defineComponent, h, computed } from 'vue'
+import makeProps from '@/util/makeProps'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
-// Types
-import { VNode } from 'vue'
+export function useAspectStyles (props: { aspectRatio?: string | number }) {
+  return {
+    aspectStyles: computed(() => {
+      const ratio = Number(props.aspectRatio)
 
-// Utils
-import mixins from '../../util/mixins'
-
-/* @vue/component */
-export default mixins(Measurable).extend({
-  name: 'v-responsive',
-
-  props: {
-    aspectRatio: [String, Number] as NumberOrNumberString,
-    contentClass: String,
-  },
-
-  computed: {
-    computedAspectRatio (): number {
-      return Number(this.aspectRatio)
-    },
-    aspectStyle (): object | undefined {
-      return this.computedAspectRatio
-        ? { paddingBottom: (1 / this.computedAspectRatio) * 100 + '%' }
+      return ratio
+        ? { paddingBottom: String(1 / ratio * 100) + '%' }
         : undefined
-    },
-    __cachedSizer (): VNode | [] {
-      if (!this.aspectStyle) return []
+    }),
+  }
+}
 
-      return this.$createElement('div', {
-        style: this.aspectStyle,
-        staticClass: 'v-responsive__sizer',
-      })
-    },
-  },
+export default defineComponent({
+  name: 'VResponsive',
 
-  methods: {
-    genContent (): VNode {
-      return this.$createElement('div', {
-        staticClass: 'v-responsive__content',
-        class: this.contentClass,
-      }, this.$slots.default)
-    },
-  },
+  props: makeProps({
+    aspectRatio: [String, Number],
+    contentClass: String,
+    ...makeDimensionProps(),
+  }),
 
-  render (h): VNode {
-    return h('div', {
-      staticClass: 'v-responsive',
-      style: this.measurableStyles,
-      on: this.$listeners,
+  setup (props, { slots }) {
+    const { dimensionStyles } = useDimension(props)
+    const { aspectStyles } = useAspectStyles(props)
+
+    return () => h('div', {
+      class: ['v-responsive'],
+      style: [dimensionStyles.value],
     }, [
-      this.__cachedSizer,
-      this.genContent(),
+      h('div', {
+        class: 'v-responsive__sizer',
+        style: aspectStyles.value,
+      }),
+      slots.additional?.(),
+      h('div', {
+        class: [
+          'v-responsive__content',
+          props.contentClass,
+        ],
+      }, slots.default?.()),
     ])
   },
 })

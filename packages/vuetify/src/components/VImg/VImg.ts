@@ -1,47 +1,48 @@
-// @ts-nocheck
-/* eslint-disable */
-
-// Styles
 import './VImg.sass'
 
-// Directives
-import intersect from '../../directives/intersect'
-
-// Types
-import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+// Vue
+import {
+  defineComponent,
+  computed,
+  h,
+  ref,
+  withDirectives,
+  watch,
+  onMounted,
+  Transition,
+} from 'vue'
+import type { Prop } from 'vue'
 
 // Components
-import VResponsive from '../VResponsive'
+import { VResponsive } from '../VResponsive'
 
-// Mixins
-import Themeable from '../../mixins/themeable'
+// Composables
+// import { provideTheme } from '@/composables/theme'
+
+// Directives
+import intersect from '@/directives/intersect'
+import type { ObserveDirectiveBinding } from '@/directives/intersect'
 
 // Utils
-import mixins from '../../util/mixins'
-import mergeData from '../../util/mergeData'
-import { consoleWarn } from '../../util/console'
+import makeProps from '@/util/makeProps'
+import { useDirective } from '@/util/useDirective'
 
 // not intended for public use, this is passed in by vuetify-loader
 export interface srcObject {
-  src: string
+  src?: string
   srcset?: string
-  lazySrc: string
+  lazySrc?: string
   aspect: number
 }
 
 const hasIntersect = typeof window !== 'undefined' && 'IntersectionObserver' in window
 
-/* @vue/component */
-export default mixins(
-  VResponsive,
-  Themeable,
-).extend({
-  name: 'v-img',
+export default defineComponent({
+  name: 'VImg',
 
-  directives: { intersect },
-
-  props: {
+  props: makeProps({
+    theme: String,
+    aspectRatio: [String, Number],
     alt: String,
     contain: Boolean,
     eager: Boolean,
@@ -56,7 +57,7 @@ export default mixins(
         rootMargin: undefined,
         threshold: undefined,
       }),
-    } as PropValidator<IntersectionObserverInit>,
+    } as Prop<IntersectionObserverInit>,
     position: {
       type: String,
       default: 'center center',
@@ -65,243 +66,198 @@ export default mixins(
     src: {
       type: [String, Object],
       default: '',
-    } as PropValidator<string | srcObject>,
+    } as Prop<string | srcObject>,
     srcset: String,
     transition: {
       type: [Boolean, String],
       default: 'fade-transition',
-    },
-  },
+      validator: val => val !== true,
+    } as Prop<string | false, string>,
+  }),
 
-  data () {
-    return {
-      currentSrc: '', // Set from srcset
-      image: null as HTMLImageElement | null,
-      isLoading: true,
-      calculatedAspectRatio: undefined as number | undefined,
-      naturalWidth: undefined as number | undefined,
-      hasError: false,
-    }
-  },
+  setup (props, ctx) {
+    const { slots, emit } = ctx
 
-  computed: {
-    computedAspectRatio (): number {
-      return Number(this.normalisedSrc.aspect || this.calculatedAspectRatio)
-    },
-    normalisedSrc (): srcObject {
-      return this.src && typeof this.src === 'object'
+    // TODO: figure out how to mock in tests
+    // const { themeClasses } = provideTheme(props, ctx)
+
+    const currentSrc = ref('') // Set from srcset
+    const image = ref<HTMLImageElement>()
+    const isLoading = ref(true)
+    const calculatedAspectRatio = ref<number>()
+    const naturalWidth = ref<number>()
+    const hasError = ref(false)
+
+    const normalisedSrc = computed<srcObject>(() => {
+      return props.src && typeof props.src === 'object'
         ? {
-          src: this.src.src,
-          srcset: this.srcset || this.src.srcset,
-          lazySrc: this.lazySrc || this.src.lazySrc,
-          aspect: Number(this.aspectRatio || this.src.aspect),
+          src: props.src.src,
+          srcset: props.srcset || props.src.srcset,
+          lazySrc: props.lazySrc || props.src.lazySrc,
+          aspect: Number(props.aspectRatio || props.src.aspect),
         } : {
-          src: this.src,
-          srcset: this.srcset,
-          lazySrc: this.lazySrc,
-          aspect: Number(this.aspectRatio || 0),
+          src: props.src,
+          srcset: props.srcset,
+          lazySrc: props.lazySrc,
+          aspect: Number(props.aspectRatio || 0),
         }
-    },
-    __cachedImage (): VNode | [] {
-      if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc || this.gradient)) return []
+    })
+    const aspectRatio = computed(() => Number(normalisedSrc.value.aspect || calculatedAspectRatio.value))
 
-      const backgroundImage: string[] = []
-      const src = this.isLoading ? this.normalisedSrc.lazySrc : this.currentSrc
+    watch(() => props.src, () => {
+      if (!isLoading.value) init(true)
+      else loadImage()
+    })
+    // TODO: getSrc when window width changes
 
-      if (this.gradient) backgroundImage.push(`linear-gradient(${this.gradient})`)
-      if (src) backgroundImage.push(`url("${src}")`)
+    onMounted(() => init())
 
-      const image = this.$createElement('div', {
-        staticClass: 'v-image__image',
-        class: {
-          'v-image__image--preload': this.isLoading,
-          'v-image__image--contain': this.contain,
-          'v-image__image--cover': !this.contain,
-        },
-        style: {
-          backgroundImage: backgroundImage.join(', '),
-          backgroundPosition: this.position,
-        },
-        key: +this.isLoading,
-      })
-
-      /* istanbul ignore if */
-      if (!this.transition) return image
-
-      return this.$createElement('transition', {
-        attrs: {
-          name: this.transition,
-          mode: 'in-out',
-        },
-      }, [image])
-    },
-  },
-
-  watch: {
-    src () {
-      // Force re-init when src changes
-      if (!this.isLoading) this.init(undefined, undefined, true)
-      else this.loadImage()
-    },
-    '$vuetify.breakpoint.width': 'getSrc',
-  },
-
-  mounted () {
-    this.init()
-  },
-
-  methods: {
-    init (
-      entries?: IntersectionObserverEntry[],
-      observer?: IntersectionObserver,
-      isIntersecting?: boolean
-    ) {
+    function init (isIntersecting?: boolean) {
       // If the current browser supports the intersection
       // observer api, the image is not observable, and
       // the eager prop isn't being used, do not load
       if (
         hasIntersect &&
         !isIntersecting &&
-        !this.eager
+        !props.eager
       ) return
 
-      if (this.normalisedSrc.lazySrc) {
+      if (normalisedSrc.value.lazySrc) {
         const lazyImg = new Image()
-        lazyImg.src = this.normalisedSrc.lazySrc
-        this.pollForSize(lazyImg, null)
+        lazyImg.src = normalisedSrc.value.lazySrc
+        pollForSize(lazyImg, null)
       }
-      /* istanbul ignore else */
-      if (this.normalisedSrc.src) this.loadImage()
-    },
-    onLoad () {
-      this.getSrc()
-      this.isLoading = false
-      this.$emit('load', this.src)
+      if (normalisedSrc.value.src) loadImage()
+    }
+
+    function loadImage () {
+      const img = image.value = new Image()
+
+      img.onload = () => {
+        /* istanbul ignore if */
+        if (img.decode) {
+          img.decode().catch().then(onLoad)
+        } else {
+          onLoad()
+        }
+      }
+      img.onerror = onError
+
+      hasError.value = false
+      img.src = normalisedSrc.value.src ?? ''
+      props.sizes && (img.sizes = props.sizes)
+      normalisedSrc.value.srcset && (img.srcset = normalisedSrc.value.srcset)
+
+      normalisedSrc.value.aspect || pollForSize(img)
+      getSrc()
+    }
+
+    function onLoad () {
+      getSrc()
+      isLoading.value = false
+      emit('load', props.src)
 
       if (
-        this.image &&
-        (this.normalisedSrc.src.endsWith('.svg') || this.normalisedSrc.src.startsWith('data:image/svg+xml'))
+        image.value &&
+        (normalisedSrc.value.src?.endsWith('.svg') || normalisedSrc.value.src?.startsWith('data:image/svg+xml'))
       ) {
-        if (this.image.naturalHeight && this.image.naturalWidth) {
-          this.naturalWidth = this.image.naturalWidth
-          this.calculatedAspectRatio = this.image.naturalWidth / this.image.naturalHeight
+        if (image.value.naturalHeight && image.value.naturalWidth) {
+          naturalWidth.value = image.value.naturalWidth
+          calculatedAspectRatio.value = image.value.naturalWidth / image.value.naturalHeight
         } else {
-          this.calculatedAspectRatio = 1
+          calculatedAspectRatio.value = 1
         }
       }
-    },
-    onError () {
-      this.hasError = true
-      this.$emit('error', this.src)
-    },
-    getSrc () {
-      /* istanbul ignore else */
-      if (this.image) this.currentSrc = this.image.currentSrc || this.image.src
-    },
-    loadImage () {
-      const image = new Image()
-      this.image = image
+    }
 
-      image.onload = () => {
-        /* istanbul ignore if */
-        if (image.decode) {
-          image.decode().catch((err: DOMException) => {
-            consoleWarn(
-              `Failed to decode image, trying to render anyway\n\n` +
-              `src: ${this.normalisedSrc.src}` +
-              (err.message ? `\nOriginal error: ${err.message}` : ''),
-              this
-            )
-          }).then(this.onLoad)
-        } else {
-          this.onLoad()
-        }
-      }
-      image.onerror = this.onError
+    function onError () {
+      hasError.value = true
+      emit('error', props.src)
+    }
 
-      this.hasError = false
-      image.src = this.normalisedSrc.src
-      this.sizes && (image.sizes = this.sizes)
-      this.normalisedSrc.srcset && (image.srcset = this.normalisedSrc.srcset)
+    function getSrc () {
+      const img = image.value
+      if (img) currentSrc.value = img.currentSrc || img.src
+    }
 
-      this.aspectRatio || this.pollForSize(image)
-      this.getSrc()
-    },
-    pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
+    function pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {
-        const { naturalHeight, naturalWidth } = img
+        const { naturalHeight: imgHeight, naturalWidth: imgWidth } = img
 
-        if (naturalHeight || naturalWidth) {
-          this.naturalWidth = naturalWidth
-          this.calculatedAspectRatio = naturalWidth / naturalHeight
-        } else if (!img.complete && this.isLoading && !this.hasError && timeout != null) {
+        if (imgHeight || imgWidth) {
+          naturalWidth.value = imgWidth
+          calculatedAspectRatio.value = imgWidth / imgHeight
+        } else if (!img.complete && isLoading.value && !hasError.value && timeout != null) {
           setTimeout(poll, timeout)
         }
       }
 
       poll()
-    },
-    genContent () {
-      const content: VNode = VResponsive.options.methods.genContent.call(this)
-      if (this.naturalWidth) {
-        this._b(content.data!, 'div', {
-          style: { width: `${this.naturalWidth}px` },
-        })
-      }
+    }
 
-      return content
-    },
-    __genPlaceholder (): VNode | void {
-      if (this.$slots.placeholder) {
-        const placeholder = this.isLoading
-          ? [this.$createElement('div', {
-            staticClass: 'v-image__placeholder',
-          }, this.$slots.placeholder)]
-          : []
+    const __image = computed(() => {
+      if (!(normalisedSrc.value.src || normalisedSrc.value.lazySrc || props.gradient)) return
 
-        if (!this.transition) return placeholder[0]
+      const backgroundImage: string[] = []
+      const src = isLoading.value ? normalisedSrc.value.lazySrc : currentSrc.value
 
-        return this.$createElement('transition', {
-          props: {
-            appear: true,
-            name: this.transition,
-          },
-        }, placeholder)
-      }
-    },
-  },
+      if (props.gradient) backgroundImage.push(`linear-gradient(${props.gradient})`)
+      if (src) backgroundImage.push(`url("${src}")`)
 
-  render (h): VNode {
-    const node = VResponsive.options.render.call(this, h)
+      const image = h('div', {
+        class: ['v-img__image', {
+          'v-img__image--preload': isLoading.value,
+          'v-img__image--contain': props.contain,
+          'v-img__image--cover': !props.contain,
+        }],
+        style: {
+          backgroundImage: backgroundImage.join(', '),
+          backgroundPosition: props.position,
+        },
+        key: +isLoading.value,
+      })
 
-    const data = mergeData(node.data!, {
-      staticClass: 'v-image',
-      attrs: {
-        'aria-label': this.alt,
-        role: this.alt ? 'img' : undefined,
-      },
-      class: this.themeClasses,
-      // Only load intersect directive if it
-      // will work in the current browser.
-      directives: hasIntersect
-        ? [{
-          name: 'intersect',
-          modifiers: { once: true },
-          value: {
-            handler: this.init,
-            options: this.options,
-          },
-        }]
-        : undefined,
+      /* istanbul ignore if */
+      if (!props.transition) return image
+
+      return h(Transition, {
+        name: props.transition,
+        mode: 'in-out',
+      }, () => image)
     })
 
-    node.children = [
-      this.__cachedSizer,
-      this.__cachedImage,
-      this.__genPlaceholder(),
-      this.genContent(),
-    ] as VNode[]
+    const __placeholder = computed(() => {
+      if (!slots.placeholder) return
 
-    return h(node.tag, data, node.children)
+      const placeholder = isLoading.value
+        ? h('div', { class: 'v-img__placeholder' }, slots.placeholder())
+        : undefined
+
+      if (!props.transition) return placeholder
+
+      return h(Transition, {
+        appear: true,
+        name: props.transition,
+      }, () => placeholder)
+    })
+
+    return () => withDirectives(
+      h(VResponsive, {
+        class: ['v-img'/* , themeClasses.value */],
+        aspectRatio: aspectRatio.value,
+        'aria-label': props.alt,
+        role: props.alt ? 'img' : undefined,
+      }, {
+        additional: () => [__image.value, __placeholder.value],
+        default: slots.default,
+      }),
+      [useDirective<ObserveDirectiveBinding>(intersect, {
+        value: {
+          handler: init,
+          options: props.options,
+        },
+        modifiers: { once: true },
+      })]
+    )
   },
 })
