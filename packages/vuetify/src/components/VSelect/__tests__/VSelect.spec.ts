@@ -512,8 +512,8 @@ describe('VSelect.ts', () => {
     await waitAnimationFrame()
     expect(selectWrapper.vm.internalValue).toBe('Bar')
 
-    // Press key down once to move selected item from Bar to Foo
-    const keyUpEvent = new KeyboardEvent('keydown', { keyCode: keyCodes.up })
+    // Press key up once to move selected item from Bar to Foo
+    const keyUpEvent = new KeyboardEvent('keyup', { keyCode: keyCodes.up })
     selectWrapper.vm.onKeyDown(keyUpEvent)
     await waitAnimationFrame()
     expect(selectWrapper.vm.internalValue).toBe('Foo')
