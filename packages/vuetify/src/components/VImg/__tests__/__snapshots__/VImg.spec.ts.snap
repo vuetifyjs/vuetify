@@ -1,5 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VImg should display error slot 1`] = `
+<div class="v-responsive v-img">
+  <div class="v-responsive__sizer">
+  </div>
+  <transition-stub>
+    <div class="v-img__image v-img__image--preload v-img__image--cover"
+         style="background-position: center center;"
+    >
+    </div>
+  </transition-stub>
+  <transition-stub>
+    <div class="v-img__error">
+      <div>
+        Error loading image
+      </div>
+    </div>
+  </transition-stub>
+  <div class="v-responsive__content">
+  </div>
+</div>
+`;
+
 exports[`VImg should display placeholders 1`] = `
 <div class="v-responsive v-img">
   <div class="v-responsive__sizer">

@@ -110,6 +110,22 @@ describe('VImg', () => {
     expect(error).toHaveBeenCalledWith(LOAD_FAILURE_SRC)
   })
 
+  it('should display error slot', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        src: LOAD_FAILURE_SRC,
+      },
+      slots: {
+        error: () => h('div', 'Error loading image'),
+      },
+    })
+
+    jest.runOnlyPendingTimers()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should have aria attributes', async () => {
     const wrapper = mountFunction({
       propsData: {

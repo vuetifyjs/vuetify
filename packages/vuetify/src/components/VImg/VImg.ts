@@ -229,7 +229,7 @@ export default defineComponent({
     const __placeholder = computed(() => {
       if (!slots.placeholder) return
 
-      const placeholder = isLoading.value
+      const placeholder = isLoading.value && !hasError.value
         ? h('div', { class: 'v-img__placeholder' }, slots.placeholder())
         : undefined
 
@@ -241,6 +241,21 @@ export default defineComponent({
       }, () => placeholder)
     })
 
+    const __error = computed(() => {
+      if (!slots.error) return
+
+      const error = hasError.value
+        ? h('div', { class: 'v-img__error' }, slots.error())
+        : undefined
+
+      if (!props.transition) return error
+
+      return h(Transition, {
+        appear: true,
+        name: props.transition,
+      }, () => error)
+    })
+
     return () => withDirectives(
       h(VResponsive, {
         class: ['v-img'/* , themeClasses.value */],
@@ -248,7 +263,7 @@ export default defineComponent({
         'aria-label': props.alt,
         role: props.alt ? 'img' : undefined,
       }, {
-        additional: () => [__image.value, __placeholder.value],
+        additional: () => [__image.value, __placeholder.value, __error.value],
         default: slots.default,
       }),
       [useDirective<ObserveDirectiveBinding>(intersect, {
