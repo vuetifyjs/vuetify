@@ -180,7 +180,7 @@ function rippleShow (e: VuetifyRippleEvent) {
     // already been registered as touch
     if (element._ripple.isTouch) return
   }
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+
   value.center = element._ripple.centered || isKeyboardEvent(e)
   if (element._ripple.class) {
     value.class = element._ripple.class
