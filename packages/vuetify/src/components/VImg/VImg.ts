@@ -233,7 +233,7 @@ export default defineComponent({
     const __placeholder = computed(() => {
       if (!slots.placeholder) return
 
-      const placeholder = state.value === 'loading'
+      const placeholder = state.value === 'loading' || (state.value === 'error' && !slots.error)
         ? h('div', { class: 'v-img__placeholder' }, slots.placeholder())
         : undefined
 
