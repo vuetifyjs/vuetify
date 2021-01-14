@@ -5,10 +5,11 @@ exports[`VImg should display error slot 1`] = `
   <div class="v-responsive__sizer">
   </div>
   <transition-stub>
-    <div class="v-img__image v-img__image--preload v-img__image--cover"
-         style="background-position: center center;"
+    <img class="v-img__img v-img__img--contain"
+         style="display: none;"
     >
-    </div>
+  </transition-stub>
+  <transition-stub>
   </transition-stub>
   <transition-stub>
     <div class="v-img__error">
@@ -27,10 +28,12 @@ exports[`VImg should display placeholders 1`] = `
   <div class="v-responsive__sizer">
   </div>
   <transition-stub>
-    <div class="v-img__image v-img__image--preload v-img__image--cover"
-         style="background-image: url(lazy_src); background-position: center center;"
+    <img class="v-img__img v-img__img--contain"
+         style="display: none;"
     >
-    </div>
+  </transition-stub>
+  <transition-stub>
+    <img class="v-img__img v-img__img--preload v-img__img--contain">
   </transition-stub>
   <transition-stub>
     <div class="v-img__placeholder">
@@ -51,10 +54,9 @@ exports[`VImg should display placeholders 2`] = `
   >
   </div>
   <transition-stub>
-    <div class="v-img__image v-img__image--cover"
-         style="background-image: url(full_src); background-position: center center;"
-    >
-    </div>
+    <img class="v-img__img v-img__img--contain">
+  </transition-stub>
+  <transition-stub>
   </transition-stub>
   <transition-stub>
   </transition-stub>
@@ -73,10 +75,9 @@ exports[`VImg should have aria attributes 1`] = `
   >
   </div>
   <transition-stub>
-    <div class="v-img__image v-img__image--cover"
-         style="background-image: url(LOAD_SUCCESS_SRC); background-position: center center;"
-    >
-    </div>
+    <img class="v-img__img v-img__img--contain">
+  </transition-stub>
+  <transition-stub>
   </transition-stub>
   <div class="v-responsive__content">
   </div>
@@ -88,10 +89,11 @@ exports[`VImg should load 1`] = `
   <div class="v-responsive__sizer">
   </div>
   <transition-stub>
-    <div class="v-img__image v-img__image--preload v-img__image--cover"
-         style="background-position: center center;"
+    <img class="v-img__img v-img__img--contain"
+         style="display: none;"
     >
-    </div>
+  </transition-stub>
+  <transition-stub>
   </transition-stub>
   <div class="v-responsive__content">
   </div>
@@ -105,10 +107,9 @@ exports[`VImg should load 2`] = `
   >
   </div>
   <transition-stub>
-    <div class="v-img__image v-img__image--cover"
-         style="background-image: url(LOAD_SUCCESS_SRC); background-position: center center;"
-    >
-    </div>
+    <img class="v-img__img v-img__img--contain">
+  </transition-stub>
+  <transition-stub>
   </transition-stub>
   <div class="v-responsive__content">
   </div>
@@ -122,10 +123,31 @@ exports[`VImg should override vuetify-loader values 1`] = `
   >
   </div>
   <transition-stub>
-    <div class="v-img__image v-img__image--preload v-img__image--cover"
-         style="background-image: url(lazySrc_manual); background-position: center center;"
+    <img class="v-img__img v-img__img--contain"
+         style="display: none;"
     >
-    </div>
+  </transition-stub>
+  <transition-stub>
+    <img class="v-img__img v-img__img--preload v-img__img--contain">
+  </transition-stub>
+  <div class="v-responsive__content">
+  </div>
+</div>
+`;
+
+exports[`VImg should render a <picture> 1`] = `
+<div class="v-responsive v-img">
+  <div class="v-responsive__sizer"
+       style="padding-bottom: 56.25%;"
+  >
+  </div>
+  <transition-stub>
+    <picture class="v-img__picture">
+      <source srcset="LOAD_SUCCESS_SRC.webp">
+      <img class="v-img__img v-img__img--contain">
+    </picture>
+  </transition-stub>
+  <transition-stub>
   </transition-stub>
   <div class="v-responsive__content">
   </div>
@@ -139,10 +161,9 @@ exports[`VImg should update src 1`] = `
   >
   </div>
   <transition-stub>
-    <div class="v-img__image v-img__image--cover"
-         style="background-image: url(LOAD_SUCCESS_SRC); background-position: center center;"
-    >
-    </div>
+    <img class="v-img__img v-img__img--contain">
+  </transition-stub>
+  <transition-stub>
   </transition-stub>
   <div class="v-responsive__content">
   </div>
@@ -156,10 +177,9 @@ exports[`VImg should update src 2`] = `
   >
   </div>
   <transition-stub>
-    <div class="v-img__image v-img__image--cover"
-         style="background-image: url(LOAD_SUCCESS_SRC-1); background-position: center center;"
-    >
-    </div>
+    <img class="v-img__img v-img__img--contain">
+  </transition-stub>
+  <transition-stub>
   </transition-stub>
   <div class="v-responsive__content">
   </div>
@@ -171,10 +191,11 @@ exports[`VImg should update src while still loading 1`] = `
   <div class="v-responsive__sizer">
   </div>
   <transition-stub>
-    <div class="v-img__image v-img__image--preload v-img__image--cover"
-         style="background-position: center center;"
+    <img class="v-img__img v-img__img--contain"
+         style="display: none;"
     >
-    </div>
+  </transition-stub>
+  <transition-stub>
   </transition-stub>
   <div class="v-responsive__content">
   </div>
@@ -188,10 +209,9 @@ exports[`VImg should update src while still loading 2`] = `
   >
   </div>
   <transition-stub>
-    <div class="v-img__image v-img__image--cover"
-         style="background-image: url(LOAD_SUCCESS_SRC-1); background-position: center center;"
-    >
-    </div>
+    <img class="v-img__img v-img__img--contain">
+  </transition-stub>
+  <transition-stub>
   </transition-stub>
   <div class="v-responsive__content">
   </div>
@@ -205,10 +225,12 @@ exports[`VImg should use vuetify-loader data 1`] = `
   >
   </div>
   <transition-stub>
-    <div class="v-img__image v-img__image--preload v-img__image--cover"
-         style="background-image: url(lazySrc_auto); background-position: center center;"
+    <img class="v-img__img v-img__img--contain"
+         style="display: none;"
     >
-    </div>
+  </transition-stub>
+  <transition-stub>
+    <img class="v-img__img v-img__img--preload v-img__img--contain">
   </transition-stub>
   <div class="v-responsive__content">
   </div>

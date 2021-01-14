@@ -1,12 +1,10 @@
 @import './_variables.scss'
 
-+theme(v-img) using ($material)
-  color: map-deep-get($material, 'text', 'primary')
-
 .v-img
   z-index: 0
 
-.v-img__image,
+.v-img__img,
+.v-img__picture,
 .v-img__placeholder,
 .v-img__error
   z-index: -1
@@ -16,9 +14,7 @@
   width: 100%
   height: 100%
 
-.v-img__image
-  background-repeat: no-repeat
-
+.v-img__img
   &--preload
     filter: $img-preload-filter
 

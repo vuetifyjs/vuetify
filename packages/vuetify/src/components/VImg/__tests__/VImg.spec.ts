@@ -32,16 +32,20 @@ describe('VImg', () => {
   beforeAll(() => {
     jest.useFakeTimers()
     Object.defineProperty((global as any).Image.prototype, 'src', {
-      get () {},
+      get () {
+        return this._currentSrc
+      },
       set (src) {
         this._currentSrc = src
         if (src === LOAD_FAILURE_SRC) {
-          setTimeout(() => this.onerror?.(new Error('mocked error')))
+          setTimeout(() => {
+            this.dispatchEvent(new ErrorEvent('error'))
+          })
         } else {
           setTimeout(() => {
             this._naturalWidth = 1600
             this._naturalHeight = 900
-            this.onload?.()
+            this.dispatchEvent(new Event('load', { bubbles: false }))
           })
         }
       },
@@ -69,6 +73,20 @@ describe('VImg', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+
+    jest.runOnlyPendingTimers()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render a <picture>', async () => {
+    const wrapper = mountFunction({
+      propsData: { src: LOAD_SUCCESS_SRC },
+      slots: {
+        sources: () => h('source', { srcset: LOAD_SUCCESS_SRC + '.webp' }),
+      },
+    })
 
     jest.runOnlyPendingTimers()
     await wrapper.vm.$nextTick()
@@ -106,7 +124,7 @@ describe('VImg', () => {
 
     jest.runOnlyPendingTimers()
 
-    expect(error).toHaveBeenCalledTimes(2)
+    expect(error).toHaveBeenCalledTimes(1)
     expect(error).toHaveBeenCalledWith(LOAD_FAILURE_SRC)
   })
 
@@ -185,6 +203,9 @@ describe('VImg', () => {
     expect(wrapper.html()).toMatchSnapshot()
 
     await wrapper.setProps({ src: `${LOAD_SUCCESS_SRC}-1` })
+
+    jest.runOnlyPendingTimers()
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
   })

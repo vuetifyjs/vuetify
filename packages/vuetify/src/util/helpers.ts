@@ -1,8 +1,7 @@
 import type { VuetifyIcon } from 'vuetify/types/services/icons'
 import type { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
-import type { ComponentInternalInstance, Slots } from 'vue'
-
-import { defineComponent, h, capitalize, camelize } from 'vue'
+import type { ComponentInternalInstance, Slots, VNode, TransitionProps } from 'vue'
+import { Fragment, defineComponent, h, capitalize, camelize, Transition, mergeProps } from 'vue'
 
 export function createSimpleFunctional (
   klass: string,
@@ -415,3 +414,27 @@ export function getUid () {
   return getUid._uid++
 }
 getUid._uid = 0
+
+export function flattenFragments (nodes: VNode[]): VNode[] {
+  return nodes.map(node => {
+    if (node.type === Fragment) {
+      return flattenFragments(node.children as VNode[])
+    } else {
+      return node
+    }
+  }).flat()
+}
+
+export function maybeTransition <T extends VNode | VNode[] | undefined> (
+  props: { transition?: string | boolean },
+  data: TransitionProps,
+  vNodes: T
+): VNode | T {
+  if (!props.transition) return vNodes
+
+  return h(
+    Transition,
+    mergeProps({ name: props.transition }, data as any) as TransitionProps,
+    () => vNodes
+  )
+}
