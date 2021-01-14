@@ -166,8 +166,6 @@ export default defineComponent({
       if (img) currentSrc.value = img.currentSrc || img.src
     }
 
-    // TODO: set width/height to 1 if src is svg
-
     function pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {
         const { naturalHeight: imgHeight, naturalWidth: imgWidth } = img
@@ -177,6 +175,9 @@ export default defineComponent({
           naturalHeight.value = imgHeight
         } else if (!img.complete && state.value === 'loading' && timeout != null) {
           setTimeout(poll, timeout)
+        } else if (img.currentSrc.endsWith('.svg') || img.currentSrc.startsWith('data:image/svg+xml')) {
+          naturalWidth.value = 1
+          naturalHeight.value = 1
         }
       }
 
