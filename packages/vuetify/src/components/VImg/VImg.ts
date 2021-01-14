@@ -50,7 +50,6 @@ export default defineComponent({
     alt: String,
     cover: Boolean,
     eager: Boolean,
-    gradient: String,
     lazySrc: String,
     options: {
       type: Object,
