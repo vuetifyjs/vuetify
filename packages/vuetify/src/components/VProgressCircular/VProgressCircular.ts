@@ -3,15 +3,24 @@ import './VProgressCircular.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Intersectable from '../../mixins/intersectable'
 
 // Utils
 import { convertToUnit } from '../../util/helpers'
+import mixins from '../../util/mixins'
 
 // Types
-import { VNode, VNodeChildren } from 'vue'
+import { VNode, VNodeChildren, VNodeDirective } from 'vue'
 
 /* @vue/component */
-export default Colorable.extend({
+export default mixins(
+  Colorable,
+  Intersectable({
+    onVisible: [
+      'setVisible',
+    ],
+  })
+).extend({
   name: 'v-progress-circular',
 
   props: {
@@ -37,6 +46,7 @@ export default Colorable.extend({
 
   data: () => ({
     radius: 20,
+    visible: false,
   }),
 
   computed: {
@@ -112,6 +122,12 @@ export default Colorable.extend({
         },
       })
     },
+    genChildDirectives (): VNodeDirective[] {
+      return [{
+        name: 'show',
+        value: this.visible,
+      }]
+    },
     genSvg (): VNode {
       const children = [
         this.indeterminate || this.genCircle('underlay', 0),
@@ -119,6 +135,8 @@ export default Colorable.extend({
       ] as VNodeChildren
 
       return this.$createElement('svg', {
+        directives: this.genChildDirectives(),
+        key: 'svg',
         style: this.svgStyles,
         attrs: {
           xmlns: 'http://www.w3.org/2000/svg',
@@ -128,19 +146,26 @@ export default Colorable.extend({
     },
     genInfo (): VNode {
       return this.$createElement('div', {
+        directives: this.genChildDirectives(),
+        key: 'info',
         staticClass: 'v-progress-circular__info',
       }, this.$slots.default)
+    },
+    setVisible () {
+      this.visible = true
     },
   },
 
   render (h): VNode {
-    return h('div', this.setTextColor(this.color, {
+    return h('transition-group', this.setTextColor(this.color, {
       staticClass: 'v-progress-circular',
       attrs: {
         role: 'progressbar',
         'aria-valuemin': 0,
         'aria-valuemax': 100,
         'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue,
+        name: 'fade-transition',
+        tag: 'div',
       },
       class: this.classes,
       style: this.styles,
