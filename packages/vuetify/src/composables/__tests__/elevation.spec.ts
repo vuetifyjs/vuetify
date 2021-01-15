@@ -1,19 +1,18 @@
-// Effects
-import type { ElevationProps } from '../elevation'
+// Composables
 import {
   makeElevationProps,
   useElevation,
-} from '../elevation'
+} from '..'
 
 describe('elevation.ts', () => {
   it('should have the correct class', () => {
     const values = [
-      [1, { 'elevation-1': true }],
-      [undefined, {}],
-      [null, {}],
-      [20, { 'elevation-20': true }],
-      [0, { 'elevation-0': true }],
-      ['14', { 'elevation-14': true }],
+      [1, ['elevation-1']],
+      [undefined, []],
+      [null, []],
+      [20, ['elevation-20']],
+      [0, ['elevation-0']],
+      ['14', ['elevation-14']],
     ] as const
 
     for (const [elevation, equal] of values) {
@@ -22,10 +21,6 @@ describe('elevation.ts', () => {
 
       expect(elevationClasses.value).toEqual(equal)
     }
-
-    const { elevationClasses } = useElevation({ flat: true })
-
-    expect(elevationClasses.value).toEqual({ 'elevation-0': true })
   })
 
   it('should only allow numeric values between 0 and 24', () => {

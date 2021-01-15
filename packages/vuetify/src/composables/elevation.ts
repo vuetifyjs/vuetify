@@ -4,7 +4,6 @@ import propsFactory from '@/util/propsFactory'
 // Types
 export interface ElevationProps {
   elevation?: number | string | null
-  flat?: boolean
 }
 
 export const makeElevationProps = propsFactory({
@@ -22,17 +21,18 @@ export const makeElevationProps = propsFactory({
       )
     },
   },
-  flat: Boolean,
 })
 
 // Effect
 export function useElevation (props: ElevationProps) {
   const elevationClasses = computed(() => {
-    const { elevation = props.flat ? 0 : undefined } = props
+    const classes: string[] = []
 
-    return (elevation != null && elevation !== '')
-      ? { [`elevation-${elevation}`]: true }
-      : {}
+    if (props.elevation == null) return classes
+
+    classes.push(`elevation-${props.elevation}`)
+
+    return classes
   })
 
   return { elevationClasses }
