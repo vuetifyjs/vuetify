@@ -16,7 +16,8 @@ $rounded: map-deep-merge(
     'lg': $border-radius-root * 2,
     'xl': $border-radius-root * 6,
     'pill': 9999px,
-    'circle': 50%
+    'circle': 50%,
+    'shaped': $border-radius-root * 6 0
   ),
   $rounded
 );

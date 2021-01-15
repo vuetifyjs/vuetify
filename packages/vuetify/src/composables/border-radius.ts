@@ -14,18 +14,16 @@ export const makeBorderRadiusProps = propsFactory({
 // Composables
 export function useBorderRadius (props: BorderRadiusProps) {
   const borderRadiusClasses = computed(() => {
-    const classes = []
-    const rounded = props.rounded
+    const classes: string[] = []
 
-    /* istanbul ignore else */
-    if (rounded == null) {
-      // noop
-    } else if (rounded === true || rounded === '') {
+    if (props.rounded == null) return classes
+
+    if (props.rounded === true || props.rounded === '') {
       classes.push('rounded')
-    } else if ([false, 0, '0', 'tile'].includes(rounded)) {
+    } else if ([false, 0, '0', 'tile'].includes(props.rounded)) {
       classes.push('rounded-0')
-    } else if (typeof rounded === 'string') {
-      const values = rounded.split(' ')
+    } else if (typeof props.rounded === 'string') {
+      const values = props.rounded.split(' ')
 
       for (const value of values) {
         classes.push(`rounded-${value}`)
