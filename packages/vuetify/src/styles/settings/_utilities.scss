@@ -305,7 +305,7 @@ $utilities: map-deep-merge(
       values: $spacers
     ),
 
-    // Border
+    // Border radius
     "rounded": (
       property: border-radius,
       class: rounded,
@@ -350,6 +350,24 @@ $utilities: map-deep-merge(
       property: border-bottom-left-radius,
       class: rounded-bl,
       values: $rounded
+    ),
+
+    // Border
+    "border": (
+      property: border-width,
+      class: border,
+      values: (
+        0: 0,
+        null: thin,
+        4: 4px,
+        8: 8px,
+      )
+    ),
+
+    "border-style": (
+      property: border-style,
+      class: border,
+      values: solid dashed dotted double none
     ),
 
     // Text

@@ -1,0 +1,3 @@
+@mixin outlined($query: $query, $important: false)
+  border-style: map-get($query, 'border-style') if($important, !important, null)
+  border-width: map-get($query, 'border-width') if($important, !important, null)
