@@ -46,7 +46,7 @@ export default {
   },
   fileInput: {
     counter: "{0} tệp",
-    counterSize: "{0} files (tổng cộng {1})"
+    counterSize: "{0} tệp (tổng cộng {1})"
   },
   timePicker: {
     am: "SA",
