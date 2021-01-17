@@ -12,7 +12,7 @@ describe('VVirtualScroll.ts', () => {
   let mountFunction: (options?: object) => Wrapper<Instance>
   let propsData: Object
   let mock: jest.SpyInstance
-  const elementHeight: number = 100
+  const elementHeight = 100
 
   beforeEach(() => {
     mountFunction = (options = {}) => {

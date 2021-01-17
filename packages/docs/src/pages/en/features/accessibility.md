@@ -248,8 +248,8 @@ When the `v-list-item-group` component is rendered it have all the necessary a11
 
 While Vuetify attempts to make a11y as easy as possible in your application, there are times where additional information is needed. Below you can find a list of helpful resources.
 
-* [W3C Web Accessibility Initiative](https://www.w3.org/WAI/)
-* [WAI-ARIA Authoring Practices](https://www.w3.org/TR/wai-aria-practices-1.1/)
-* [The A11Y Project](https://a11yproject.com/)"
+- [W3C Web Accessibility Initiative](https://www.w3.org/WAI/)
+- [WAI-ARIA Authoring Practices](https://www.w3.org/TR/wai-aria-practices-1.1/)
+- [The A11Y Project](https://a11yproject.com/)"
 
 <backmatter />

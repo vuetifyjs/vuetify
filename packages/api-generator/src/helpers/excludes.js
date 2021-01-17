@@ -10,7 +10,6 @@ module.exports = {
     'VDatePickerMonthTable',
     'VDatePickerTitle',
     'VDatePickerYears',
-    'VItem',
     'VLabel',
     'VMessages',
     'VPicker',
@@ -18,6 +17,7 @@ module.exports = {
     'VTimePickerClock',
     'VTimePickerTitle',
     'VVirtualTable',
+    'VTreeviewNode',
   ],
   props: {
     'v-app': [

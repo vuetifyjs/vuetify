@@ -17,15 +17,15 @@
         <template #icon>
           <v-badge
             :value="unread.length"
-            color="red"
+            color="#ED561B"
+            dot
             left
             overlap
           >
-            <template #badge>
-              {{ unread.length }}
-            </template>
-
-            <v-icon v-text="`$mdiBell${unread.length === 0 ? 'Outline' : ''}`" />
+            <v-icon
+              class="mx-1"
+              v-text="`$mdiBell${unread.length === 0 ? 'Outline' : 'RingOutline'}`"
+            />
           </v-badge>
         </template>
       </app-tooltip-btn>
@@ -88,12 +88,15 @@
 
       <template v-else>
         <v-list-item
-          v-for="({ created_at, metadata, slug, title }) in filtered"
+          v-for="({
+            created_at_formated: created_at,
+            metadata,
+            slug,
+            title
+          }) in filtered"
           :key="slug"
-          :href="metadata.action"
           :ripple="false"
-          target="_blank"
-          @click="toggle(slug)"
+          @click="select(slug)"
         >
           <v-list-item-content>
             <div
@@ -124,9 +127,10 @@
 
 <script>
   // Utilities
-  import { sync } from 'vuex-pathify'
+  import { differenceInDays } from 'date-fns'
   import { formatDate } from '@/util/date.js'
-  import { subDays } from 'date-fns'
+  import { get, sync } from 'vuex-pathify'
+  import { wait } from '@/util/helpers'
   import bucket from '@/plugins/cosmicjs'
 
   export default {
@@ -145,9 +149,9 @@
     }),
 
     computed: {
-      snack: sync('snackbar/value'),
       snackbar: sync('snackbar/snackbar'),
       unotifications: sync('user/notifications'),
+      hasRecentlyViewed: get('user/hasRecentlyViewed'),
       done () {
         return this.filtered.length === 0
       },
@@ -159,9 +163,12 @@
       // property and format the date
       mapped () {
         return this.all.map(item => {
+          const date = new Date(item.created_at)
+
           return {
             ...item,
-            created_at: formatDate(new Date(item.created_at)),
+            created_at: date.getTime(),
+            created_at_formatted: formatDate(date),
             viewed: this.unotifications.includes(item.slug),
           }
         })
@@ -194,17 +201,41 @@
         status: 'published',
         limit: 10,
         sort: '-created_at',
-        query: {
-          created_at: {
-            $gt: Math.ceil(subDays(Date.now(), 60).getTime()),
-          },
-        },
       })
 
       this.all = notifications || []
+
+      if (
+        this.hasRecentlyViewed ||
+        !this.unread.length
+      ) return
+
+      await wait(3000)
+
+      /* eslint-disable-next-line camelcase */
+      const { created_at, slug, metadata } = this.unread[0]
+
+      if (differenceInDays(Date.now(), created_at) > 60) return
+
+      this.snackbar = {
+        slug,
+        ...metadata,
+      }
     },
 
     methods: {
+      select (slug) {
+        const { metadata } = this.all.find(notification => {
+          return notification.slug === slug
+        }) || {}
+
+        this.snackbar = {
+          slug,
+          ...metadata,
+        }
+
+        this.menu = false
+      },
       toggle (slug) {
         this.unotifications = this.unotifications.includes(slug)
           ? this.unotifications.filter(n => n !== slug)
@@ -212,7 +243,7 @@
       },
       toggleAll () {
         this.unotifications = !this.archived
-          ? this.notifications.map(i => i.slug)
+          ? this.mapped.map(i => i.slug)
           : []
       },
     },

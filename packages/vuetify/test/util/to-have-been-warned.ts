@@ -1,6 +1,4 @@
 // From Vue, slightly modified
-import Mock = jest.Mock
-
 function noop () { }
 
 if (typeof console === 'undefined') {
@@ -15,7 +13,7 @@ console.info = noop
 
 const asserted: string[] = []
 
-function createCompareFn (spy: Mock) {
+function createCompareFn (spy: jest.Mock) {
   const hasWarned = (msg: string) => {
     for (const args of spy.mock.calls) {
       if (args.some((arg: any) => (
@@ -40,8 +38,8 @@ function createCompareFn (spy: Mock) {
 }
 
 function toHaveBeenWarnedInit () {
-  let warn: Mock
-  let error: Mock
+  let warn: jest.Mock
+  let error: jest.Mock
   beforeAll(() => {
     warn = jest.spyOn(console, 'warn').mockImplementation(noop)
     error = jest.spyOn(console, 'error').mockImplementation(noop)

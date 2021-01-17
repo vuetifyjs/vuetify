@@ -131,7 +131,7 @@ export default baseMixins.extend<options>().extend({
       if (typeof this.counterValue === 'function') {
         return this.counterValue(this.internalValue)
       }
-      return (this.internalValue || '').toString().length
+      return [...(this.internalValue || '').toString()].length
     },
     hasCounter (): boolean {
       return this.counter !== false && this.counter != null
@@ -187,16 +187,15 @@ export default baseMixins.extend<options>().extend({
       }
     },
     showLabel (): boolean {
-      return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder))
+      return this.hasLabel && !(this.isSingle && this.labelValue)
     },
     labelValue (): boolean {
-      return !this.isSingle &&
-        Boolean(this.isFocused || this.isLabelActive || this.placeholder)
+      return this.isFocused || this.isLabelActive
     },
   },
 
   watch: {
-    labelValue: 'setLabelWidth',
+    // labelValue: 'setLabelWidth', // moved to mounted, see #11533
     outlined: 'setLabelWidth',
     label () {
       this.$nextTick(this.setLabelWidth)
@@ -228,6 +227,9 @@ export default baseMixins.extend<options>().extend({
   },
 
   mounted () {
+    // #11533
+    this.$watch(() => this.labelValue, this.setLabelWidth)
+
     this.autofocus && this.tryAutofocus()
 
     requestAnimationFrame(() => (this.isBooted = true))
@@ -275,8 +277,8 @@ export default baseMixins.extend<options>().extend({
     genIconSlot () {
       const slot = []
 
-      if (this.$slots['append']) {
-        slot.push(this.$slots['append'] as VNode[])
+      if (this.$slots.append) {
+        slot.push(this.$slots.append as VNode[])
       } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
       }
@@ -309,14 +311,14 @@ export default baseMixins.extend<options>().extend({
 
       const max = this.counter === true ? this.attrs$.maxlength : this.counter
 
-      return this.$createElement(VCounter, {
-        props: {
-          dark: this.dark,
-          light: this.light,
-          max,
-          value: this.computedCounterValue,
-        },
-      })
+      const props = {
+        dark: this.dark,
+        light: this.light,
+        max,
+        value: this.computedCounterValue,
+      }
+
+      return this.$scopedSlots.counter?.({ props }) ?? this.$createElement(VCounter, { props })
     },
     genControl () {
       return VInput.options.methods.genControl.call(this)
@@ -362,7 +364,7 @@ export default baseMixins.extend<options>().extend({
     genLegend () {
       const width = !this.singleLine && (this.labelValue || this.isDirty) ? this.labelWidth : 0
       const span = this.$createElement('span', {
-        domProps: { innerHTML: '' },
+        domProps: { innerHTML: '&#8203;' },
       })
 
       return this.$createElement('legend', {
@@ -373,7 +375,7 @@ export default baseMixins.extend<options>().extend({
     },
     genInput () {
       const listeners = Object.assign({}, this.listeners$)
-      delete listeners['change'] // Change should not be bound externally
+      delete listeners.change // Change should not be bound externally
 
       return this.$createElement('input', {
         style: {},
@@ -385,7 +387,7 @@ export default baseMixins.extend<options>().extend({
           autofocus: this.autofocus,
           disabled: this.isDisabled,
           id: this.computedId,
-          placeholder: this.placeholder,
+          placeholder: this.isFocused || !this.hasLabel ? this.placeholder : undefined,
           readonly: this.isReadonly,
           type: this.type,
         },

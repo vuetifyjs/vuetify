@@ -10,7 +10,7 @@
       <v-slide-item
         v-for="n in 25"
         :key="n"
-        v-slot:default="{ active, toggle }"
+        v-slot="{ active, toggle }"
       >
         <v-btn
           class="mx-2"

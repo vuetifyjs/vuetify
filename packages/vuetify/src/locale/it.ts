@@ -11,7 +11,7 @@ export default {
       sortDescending: 'Ordinati in ordine decrescente.',
       sortAscending: 'Ordinati in ordine crescente.',
       sortNone: 'Non ordinato.',
-      activateNone: 'Attiva per rimuovere l\'ordinamento.',
+      activateNone: `Attiva per rimuovere l'ordinamento.`,
       activateDescending: 'Attiva per ordinare in ordine decrescente.',
       activateAscending: 'Attiva per ordinare in ordine crescente.',
     },
@@ -29,9 +29,9 @@ export default {
   datePicker: {
     itemsSelected: '{0} selezionati',
     nextMonthAriaLabel: 'Il prossimo mese',
-    nextYearAriaLabel: 'L\'anno prossimo',
+    nextYearAriaLabel: `L'anno prossimo`,
     prevMonthAriaLabel: 'Il mese scorso',
-    prevYearAriaLabel: 'L\'anno scorso',
+    prevYearAriaLabel: `L'anno scorso`,
   },
   noDataText: 'Nessun elemento disponibile',
   carousel: {
@@ -59,6 +59,11 @@ export default {
       previous: 'Pagina precedente',
       page: 'Vai alla pagina {0}',
       currentPage: 'Pagina corrente, pagina {0}',
+    },
+  },
+  rating: {
+    ariaLabel: {
+      icon: 'Rating {0} of {1}',
     },
   },
 }

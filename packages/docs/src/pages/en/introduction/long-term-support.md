@@ -19,11 +19,11 @@ As a component framework, we understand that many projects that utilize Vuetify 
 
 The latest version of Vuetify, based on the Material Design 2 specification. It includes multiple advancements over v1.5 and is the recommended version for the most up-to-date features and bug fixes. This version is actively maintained and has a [roadmap](/introduction/roadmap/) of upcoming features.
 
-* 7 new components
-* Complete upgrade to the MD2 Specification
-* Full Typescript Support
-* Improved accessibility and RTL support
-* Numerous bug fixes, QOL changes and performance improvements
+- 7 new components
+- Complete upgrade to the MD2 Specification
+- Full Typescript Support
+- Improved accessibility and RTL support
+- Numerous bug fixes, QOL changes and performance improvements
 
 > Upgrading from v1.5? Check out the available [upgrade guide](https://github.com/vuetifyjs/vuetify/releases/tag/v2.0.0#user-content-upgrade-guide).
 
@@ -40,11 +40,11 @@ The latest LTS version of Vuetify, based on the Material Design 1 specification.
 Upgrading to v1.5? Check out the available upgrade guides:
 1.5 Versions:
 
-* [Vuetify v1.5](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)
-* [Vuetify v1.4](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0)
-* [Vuetify v1.3](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0)
-* [Vuetify v1.2](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0)
-* [Vuetify v1.1](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0)
+- [Vuetify v1.5](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)
+- [Vuetify v1.4](https://github.com/vuetifyjs/vuetify/releases/tag/v1.4.0)
+- [Vuetify v1.3](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0)
+- [Vuetify v1.2](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0)
+- [Vuetify v1.1](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0)
 
 If you have any additional questions, please join our [Discord community](https://community.vuetifyjs.com).
 

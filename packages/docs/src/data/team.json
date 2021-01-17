@@ -112,19 +112,6 @@
     "name": "Brandon Deo",
     "team": "core"
   },
-  "sh7dm": {
-    "discord": "sh7dm#5240",
-    "focus": [
-      "[vuetifyjs](https://github.com/vuetifyjs)"
-    ],
-    "languages": [
-      "Russian",
-      "English"
-    ],
-    "location": "Russian Federation",
-    "name": "Dmitry Sharshakov",
-    "team": "core"
-  },
   "johannaRlee": {
     "discord": "johanna#7104",
     "focus": [
@@ -356,5 +343,31 @@
     "name": "Lee Marlow",
     "team": "contributors",
     "twitter": "Leespiker"
+  },
+  "ElijahKotyluk": {
+    "discord": "edk#4363",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "USA",
+    "name": "Elijah Kotyluk",
+    "team": "core"
+  },
+  "juddfranklin": {
+    "discord": "juddfranklin#1712",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)",
+      "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "CA, USA",
+    "name": "Judd Franklin",
+    "team": "contributors",
+    "linkedin": "judd-franklin"
   }
 }

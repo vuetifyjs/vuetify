@@ -6,7 +6,7 @@ meta:
 related:
   - /introduction/why-vuetify/
   - /getting-started/frequently-asked-questions/
-  - /introduction/why-vuetify/
+  - /getting-started/browser-support/
 ---
 
 # Installation
@@ -16,6 +16,12 @@ Get started with Vuetify, the world’s most popular Vue.js framework for buildi
 <entry-ad />
 
 ## Vue CLI Install
+
+<alert type="error">
+
+  The current version of Vuetify does not support Vue 3. Support for Vue 3 will come with the release of [Vuetify v3](/introduction/roadmap/#v30-titan). When creating a new project, please ensure you selected Vue 2 from the Vue CLI prompts, or that you are installing to an existing Vue 2 project.
+
+</alert>
 
 <alert type="warning">
 
@@ -36,6 +42,12 @@ Now that you have an instantiated project, you can add the Vuetify [Vue CLI pack
 ```bash
 vue add vuetify
 ```
+
+<alert type="warning">
+
+  This command will make changes to your project template files, components folder, vue.config.js, etc. If you are installing Vuetify via Vue-CLI, make sure you commit your code to avoid any potential data loss. Template changes can be skipped by selecting the advanced install option during install.
+
+</alert>
 
 ### Vue UI install
 

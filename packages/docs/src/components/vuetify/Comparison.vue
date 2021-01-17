@@ -24,6 +24,7 @@
           <th
             v-for="(framework, i) in frameworks"
             :key="i"
+            :class="!i && 'blue darken-4 font-weight-medium white--text rounded-t'"
             class="text-center text-no-wrap"
           >
             <div class="d-flex align-center justify-center text-body-2">
@@ -32,9 +33,9 @@
                 :src="framework.src"
                 class="mr-2"
                 contain
-                height="16"
-                max-width="16"
-                width="16"
+                height="24"
+                max-width="24"
+                width="24"
               />
 
               <div v-text="framework.name" />
@@ -58,18 +59,23 @@
             v-for="(framework, j) in frameworks"
             :key="j"
             class="text-center"
+            :class="[
+              !j && 'green lighten-5',
+              i === features.length - 1 && 'rounded-b'
+            ]"
           >
             <template v-if="framework[key]">
               <v-icon
                 v-if="typeof framework[key] === 'boolean'"
                 color="success"
               >
-                $mdiCheckBold
+                $mdiRecord
               </v-icon>
 
               <span
                 v-else-if="typeof framework[key] === 'string'"
                 class="font-weight-light"
+                :class="!j && 'green--text'"
                 v-text="framework[key]"
               />
             </template>
@@ -116,7 +122,7 @@
           name: 'Vuetify',
           release: 'Weekly',
           rtl: true,
-          src: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-light.png',
+          src: 'https://cdn.vuetifyjs.com/docs/images/frameworks/vuetify.svg',
           themes: true,
           tree: 'Automatic',
         },
@@ -125,7 +131,7 @@
           name: 'BootstrapVue',
           release: 'Bi-Weekly',
           rtl: true,
-          src: 'https://cdn.vuetifyjs.com/images/competitors/bootstrap-vue.png',
+          src: 'https://cdn.vuetifyjs.com/docs/images/frameworks/bootstrap-vue.svg',
           themes: true,
           tree: 'Manual',
         },
@@ -133,21 +139,21 @@
           a11y: true,
           name: 'Buefy',
           release: 'Bi-Monthly',
-          src: 'https://cdn.vuetifyjs.com/images/competitors/buefy.png',
+          src: 'https://cdn.vuetifyjs.com/docs/images/frameworks/buefy.svg',
           tree: 'Manual',
         },
         {
           name: 'Element UI',
           release: 'Bi-Weekly',
           rtl: true,
-          src: 'https://cdn.vuetifyjs.com/images/competitors/element-ui.png',
+          src: 'https://cdn.vuetifyjs.com/docs/images/frameworks/element-ui.svg',
           tree: 'Manual',
         },
         {
           name: 'Quasar',
           release: 'Bi-Weekly',
           rtl: true,
-          src: 'https://cdn.vuetifyjs.com/images/competitors/quasar.png',
+          src: 'https://cdn.vuetifyjs.com/docs/images/frameworks/quasar.svg',
           tree: 'Automatic',
         },
       ],

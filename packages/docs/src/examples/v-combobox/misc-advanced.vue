@@ -85,7 +85,7 @@
       attach: null,
       colors: ['green', 'purple', 'indigo', 'cyan', 'teal', 'orange'],
       editing: null,
-      index: -1,
+      editingIndex: -1,
       items: [
         { header: 'Select an option or create one' },
         {
@@ -135,10 +135,10 @@
       edit (index, item) {
         if (!this.editing) {
           this.editing = item
-          this.index = index
+          this.editingIndex = index
         } else {
           this.editing = null
-          this.index = -1
+          this.editingIndex = -1
         }
       },
       filter (item, queryText, itemText) {

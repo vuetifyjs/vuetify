@@ -17,7 +17,7 @@
           @mouseup:time="endDrag"
           @mouseleave.native="cancelDrag"
         >
-          <template #event="{ event, timed, eventSummary }">
+          <template v-slot:event="{ event, timed, eventSummary }">
             <div
               class="v-event-draggable"
               v-html="eventSummary()"

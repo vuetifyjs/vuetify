@@ -16,7 +16,7 @@
         ] in classes"
         :key="c"
       >
-        <template v-slot="{ active, toggle }">
+        <template v-slot:default="{ active, toggle }">
           <v-sheet
             :color="active ? $vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4' : undefined"
             class="px-4 pt-4 pb-3"

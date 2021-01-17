@@ -19,7 +19,7 @@
               <v-slide-item
                 v-for="(prop) in tabs"
                 :key="prop"
-                #default="{ active, toggle }"
+                v-slot="{ active, toggle }"
               >
                 <v-btn
                   :input-value="active"
@@ -140,6 +140,19 @@
                   {{ item }}
                 </v-btn>
               </v-btn-toggle>
+
+              <v-radio-group
+                v-for="(items, prop) in radioGroups"
+                :key="prop"
+                :label="startCase(prop)"
+              >
+                <v-radio
+                  v-for="item in items"
+                  :key="item"
+                  :label="item"
+                  @click="toggleRadioProp(items, item)"
+                />
+              </v-radio-group>
             </v-responsive>
           </div>
         </v-col>
@@ -169,15 +182,19 @@
   export default {
     name: 'Usage',
 
-    inject: ['theme'],
-
     mixins: [Codepen],
 
-    props: { name: String },
+    inject: ['theme'],
+
+    props: {
+      name: String,
+      alt: String,
+    },
 
     data: () => ({
       booleans: undefined,
       btnToggles: undefined,
+      radioGroups: undefined,
       dark: false,
       file: null,
       hasError: false,
@@ -197,6 +214,7 @@
       },
       formatAttributes () {
         let attributeArray = []
+        const tag = this.alt || this.name
         for (const [key, value] of Object.entries(this.usageProps)) {
           if (!!value === false) continue
 
@@ -210,9 +228,9 @@
         attributeArray = attributeArray.sort()
 
         const indent = attributeArray.length ? '\r  ' : ''
-        const tail = `${attributeArray.length ? '\r' : ''}></${this.name}>`
+        const tail = `${attributeArray.length ? '\r' : ''}></${tag}>`
 
-        return `<${this.name}${indent}${attributeArray.join('\r  ')}${tail}`
+        return `<${tag}${indent}${attributeArray.join('\r  ')}${tail}`
       },
     },
 
@@ -234,6 +252,12 @@
         }
 
         this.tabs = data.tabs
+      },
+      toggleRadioProp (props, toggled) {
+        for (const prop of props) {
+          this.usageProps[prop] = false
+        }
+        this.usageProps[toggled] = true
       },
     },
   }

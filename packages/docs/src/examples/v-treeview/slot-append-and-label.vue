@@ -1,7 +1,7 @@
 <template>
   <v-treeview
     v-model="tree"
-    :open="open"
+    :open="initiallyOpen"
     :items="items"
     activatable
     item-key="name"
@@ -21,7 +21,7 @@
 <script>
   export default {
     data: () => ({
-      open: ['public'],
+      initiallyOpen: ['public'],
       files: {
         html: 'mdi-language-html5',
         js: 'mdi-nodejs',

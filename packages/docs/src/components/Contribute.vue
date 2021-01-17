@@ -6,7 +6,7 @@
           class="mb-2 mb-md-0"
           path="contribute.edit-page"
         >
-          <template v-slot:url>
+          <template #url>
             <app-link :href="href">GitHub</app-link>
           </template>
         </i18n>

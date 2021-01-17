@@ -67,7 +67,11 @@
           }
 
           // Match the current url to the item's to property
-          if (!this.url.startsWith(item.to)) {
+          if (
+            !this.url.startsWith(item.to) ||
+            item.divider ||
+            item.heading
+          ) {
             continue
           }
 

@@ -2,6 +2,7 @@
 import { Component } from 'vue'
 
 export interface Icons extends IconsOptions {
+  component?: Component | string
   iconfont: Iconfont
   values: VuetifyIcons
 }
@@ -60,5 +61,8 @@ export interface VuetifyIcons {
   first: VuetifyIcon
   last: VuetifyIcon
   unfold: VuetifyIcon
+  file: VuetifyIcon
+  plus: VuetifyIcon
+  minus: VuetifyIcon
   [name: string]: VuetifyIcon
 }

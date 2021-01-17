@@ -1,10 +1,11 @@
 declare module 'vuetify/lib' {
   // eslint-disable-next-line import/no-duplicates
   import { VueConstructor, DirectiveOptions } from 'vue'
-  import { Vuetify } from 'vuetify'
+  import Vuetify from 'vuetify'
   import { Colors } from 'vuetify/lib/util/colors'
 
-  const Vuetify: Vuetify
+  export default Vuetify
+
   const colors: Colors
   const ClickOutside: DirectiveOptions
   const Intersect: DirectiveOptions
@@ -161,6 +162,7 @@ declare module 'vuetify/lib' {
   const VFabTransition: VueConstructor
   const VDialogTransition: VueConstructor
   const VDialogBottomTransition: VueConstructor
+  const VDialogTopTransition: VueConstructor
   const VFadeTransition: VueConstructor
   const VScaleTransition: VueConstructor
   const VScrollXTransition: VueConstructor
@@ -174,7 +176,6 @@ declare module 'vuetify/lib' {
   const VExpandTransition: VueConstructor
   const VExpandXTransition: VueConstructor
 
-  export default Vuetify
   export {
     colors,
     ClickOutside,
@@ -332,6 +333,7 @@ declare module 'vuetify/lib' {
     VFabTransition,
     VDialogTransition,
     VDialogBottomTransition,
+    VDialogTopTransition,
     VFadeTransition,
     VScaleTransition,
     VScrollXTransition,

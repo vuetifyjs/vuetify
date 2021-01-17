@@ -13,7 +13,7 @@
       color="blue-grey"
       height="25"
     >
-      <template v-slot="{ value }">
+      <template v-slot:default="{ value }">
         <strong>{{ Math.ceil(value) }}%</strong>
       </template>
     </v-progress-linear>

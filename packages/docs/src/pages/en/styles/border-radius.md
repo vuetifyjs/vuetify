@@ -1,8 +1,8 @@
 ---
 meta:
   title: Border radius
-  description: Use border utilities to quickly style the border-radius of any element.
-  keywords: border radius classes, radius utilities, vuetify radius helper classes
+  description: Use border utilities to quickly style the border-radius of any element.
+  keywords: border radius classes, radius utilities, vuetify radius helper classes
 related:
   - /styles/text-and-typography/
   - /components/sheets/

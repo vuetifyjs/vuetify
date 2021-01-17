@@ -105,5 +105,6 @@
   "customization/internationalization": "/features/internationalization",
   "customization/presets": "/features/presets",
   "customization/sass-variables": "/features/sass-variables",
-  "customization/theme": "/features/theme"
+  "customization/theme": "/features/theme",
+  "introduction/consulting": "/introduction/support"
 }

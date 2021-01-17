@@ -2,7 +2,7 @@
   <div class="text--primary">
     <!-- Using the elevation prop -->
     <v-hover>
-      <template v-slot="{ hover }">
+      <template v-slot:default="{ hover }">
         <v-card
           :elevation="hover ? 24 : 6"
           class="mx-auto pa-6"
@@ -16,7 +16,7 @@
 
     <!-- Using a dynamic class -->
     <v-hover>
-      <template v-slot="{ hover }">
+      <template v-slot:default="{ hover }">
         <div
           :class="`elevation-${hover ? 24 : 6}`"
           class="mx-auto pa-6 transition-swing"

@@ -7,7 +7,7 @@
           :value="today"
           color="primary"
         >
-          <template v-slot:day="{ present, past, date }">
+          <template v-slot:day="{ past, date }">
             <v-row
               class="fill-height"
             >

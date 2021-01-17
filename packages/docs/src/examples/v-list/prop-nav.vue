@@ -32,7 +32,7 @@
         dense
       >
         <v-list-item-group
-          v-model="item"
+          v-model="selectedItem"
           color="primary"
         >
           <v-list-item
@@ -56,7 +56,7 @@
 <script>
   export default {
     data: () => ({
-      item: 0,
+      selectedItem: 0,
       items: [
         { text: 'My Files', icon: 'mdi-folder' },
         { text: 'Shared with me', icon: 'mdi-account-multiple' },

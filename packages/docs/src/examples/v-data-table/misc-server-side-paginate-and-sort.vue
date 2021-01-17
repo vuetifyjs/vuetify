@@ -38,24 +38,26 @@
       options: {
         handler () {
           this.getDataFromApi()
-            .then(data => {
-              this.desserts = data.items
-              this.totalDesserts = data.total
-            })
         },
         deep: true,
       },
     },
     mounted () {
       this.getDataFromApi()
-        .then(data => {
-          this.desserts = data.items
-          this.totalDesserts = data.total
-        })
     },
     methods: {
       getDataFromApi () {
         this.loading = true
+        this.fakeApiCall().then(data => {
+          this.desserts = data.items
+          this.totalDesserts = data.total
+          this.loading = false
+        })
+      },
+      /**
+       * In a real application this would be a call to fetch() or axios.get()
+       */
+      fakeApiCall () {
         return new Promise((resolve, reject) => {
           const { sortBy, sortDesc, page, itemsPerPage } = this.options
 
@@ -84,7 +86,6 @@
           }
 
           setTimeout(() => {
-            this.loading = false
             resolve({
               items,
               total,

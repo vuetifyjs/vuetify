@@ -1,9 +1,9 @@
 <template>
   <validation-observer
     ref="observer"
-    v-slot=""
+    v-slot="{ invalid }"
   >
-    <form>
+    <form @submit.prevent="submit">
       <validation-provider
         v-slot="{ errors }"
         name="Name"
@@ -14,6 +14,23 @@
           :counter="10"
           :error-messages="errors"
           label="Name"
+          required
+        ></v-text-field>
+      </validation-provider>
+      <validation-provider
+        v-slot="{ errors }"
+        name="phoneNumber"
+        :rules="{
+          required: true,
+          digits: 7,
+          regex: '^(71|72|74|76|81|82|84|85|86|87|88|89)\\d{5}$'
+        }"
+      >
+        <v-text-field
+          v-model="phoneNumber"
+          :counter="7"
+          :error-messages="errors"
+          label="Phone Number"
           required
         ></v-text-field>
       </validation-provider>
@@ -44,7 +61,7 @@
         ></v-select>
       </validation-provider>
       <validation-provider
-        v-slot=""
+        v-slot="{ errors }"
         rules="required"
         name="checkbox"
       >
@@ -60,7 +77,8 @@
 
       <v-btn
         class="mr-4"
-        @click="submit"
+        type="submit"
+        :disabled="invalid"
       >
         submit
       </v-btn>
@@ -72,10 +90,15 @@
 </template>
 
 <script>
-  import { required, email, max } from 'vee-validate/dist/rules'
+  import { required, digits, email, max, regex } from 'vee-validate/dist/rules'
   import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
 
   setInteractionMode('eager')
+
+  extend('digits', {
+    ...digits,
+    message: '{_field_} needs to be {length} digits. ({_value_})',
+  })
 
   extend('required', {
     ...required,
@@ -85,6 +108,11 @@
   extend('max', {
     ...max,
     message: '{_field_} may not be greater than {length} characters',
+  })
+
+  extend('regex', {
+    ...regex,
+    message: '{_field_} {_value_} does not match {regex}',
   })
 
   extend('email', {
@@ -99,9 +127,9 @@
     },
     data: () => ({
       name: '',
+      phoneNumber: '',
       email: '',
       select: null,
-      errors: null,
       items: [
         'Item 1',
         'Item 2',
@@ -117,6 +145,7 @@
       },
       clear () {
         this.name = ''
+        this.phoneNumber = ''
         this.email = ''
         this.select = null
         this.checkbox = null

@@ -29,7 +29,7 @@
       :item-height="50"
       height="300"
     >
-      <template v-slot="{ item }">
+      <template v-slot:default="{ item }">
         <v-list-item>
           <v-list-item-avatar>
             <v-avatar

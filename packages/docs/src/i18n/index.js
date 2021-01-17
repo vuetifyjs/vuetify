@@ -9,11 +9,9 @@ Vue.use(VueI18n)
 
 export function createI18n () {
   // const loadedLocales = ['en']
-  const i18n = new VueI18n({
+  return new VueI18n({
     locale: 'en',
     fallbackLocale: 'en',
     messages: { en },
   })
-
-  return i18n
 }

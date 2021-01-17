@@ -8,14 +8,17 @@
 
     <home-footer />
 
+    <!-- <default-snackbar /> -->
+
     <default-settings />
   </v-app>
 </template>
 
 <script>
   // Components
-  import DefaultSystemBar from '@/layouts/default/SystemBar'
   import DefaultSettings from '@/layouts/default/settings/Settings'
+  // import DefaultSnackbar from '@/layouts/default/Snackbar'
+  import DefaultSystemBar from '@/layouts/default/SystemBar'
   import HomeBar from './AppBar'
   import HomeFooter from './Footer'
   import HomeView from './View'
@@ -24,8 +27,9 @@
     name: 'HomeLayout',
 
     components: {
-      DefaultSystemBar,
       DefaultSettings,
+      DefaultSystemBar,
+      // DefaultSnackbar,
       HomeBar,
       HomeFooter,
       HomeView,

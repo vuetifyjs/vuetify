@@ -7,7 +7,7 @@
           v-model="value"
           type="week"
         >
-          <template #day-body="{ date, week }">
+          <template v-slot:day-body="{ date, week }">
             <div
               class="v-current-time"
               :class="{ first: date === week[0].date }"

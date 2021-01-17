@@ -80,13 +80,13 @@
         {
           action: '15 min',
           headline: 'Brunch this weekend?',
-          subtitle: "I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
+          subtitle: `I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
           title: 'Ali Connors',
         },
         {
           action: '2 hr',
           headline: 'Summer BBQ',
-          subtitle: "Wish I could come, but I'm out of town this weekend.",
+          subtitle: `Wish I could come, but I'm out of town this weekend.`,
           title: 'me, Scrott, Jennifer',
         },
         {

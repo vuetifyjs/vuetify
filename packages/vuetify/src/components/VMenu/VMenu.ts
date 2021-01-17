@@ -45,17 +45,17 @@ const baseMixins = mixins(
 export default baseMixins.extend({
   name: 'v-menu',
 
+  directives: {
+    ClickOutside,
+    Resize,
+  },
+
   provide (): object {
     return {
       isInMenu: true,
       // Pass theme through to default slot
       theme: this.theme,
     }
-  },
-
-  directives: {
-    ClickOutside,
-    Resize,
   },
 
   props: {
@@ -258,6 +258,10 @@ export default baseMixins.extend({
         this.nextTile()
       } else if (e.keyCode === keyCodes.up) {
         this.prevTile()
+      } else if (e.keyCode === keyCodes.end) {
+        this.lastTile()
+      } else if (e.keyCode === keyCodes.home) {
+        this.firstTile()
       } else if (e.keyCode === keyCodes.enter && this.listIndex !== -1) {
         this.tiles[this.listIndex].click()
       } else { return }
@@ -380,7 +384,6 @@ export default baseMixins.extend({
         if (this.hasJustFocused) return
 
         this.hasJustFocused = true
-        this.isActive = true
       })
     },
     mouseLeaveHandler (e: MouseEvent) {
@@ -423,6 +426,24 @@ export default baseMixins.extend({
 
       this.listIndex--
       if (tile.tabIndex === -1) this.prevTile()
+    },
+    lastTile () {
+      const tile = this.tiles[this.tiles.length - 1]
+
+      if (!tile) return
+
+      this.listIndex = this.tiles.length - 1
+
+      if (tile.tabIndex === -1) this.prevTile()
+    },
+    firstTile () {
+      const tile = this.tiles[0]
+
+      if (!tile) return
+
+      this.listIndex = 0
+
+      if (tile.tabIndex === -1) this.nextTile()
     },
     onKeyDown (e: KeyboardEvent) {
       if (e.keyCode === keyCodes.esc) {

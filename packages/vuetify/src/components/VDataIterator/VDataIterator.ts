@@ -201,9 +201,10 @@ export default mixins(
       this.expansion = expansion
       this.$emit('item-expanded', { item, value })
     },
-    createItemProps (item: any): DataItemProps {
+    createItemProps (item: any, index: number): DataItemProps {
       return {
         item,
+        index,
         select: (v: boolean) => this.select(item, v),
         isSelected: this.isSelected(item),
         expand: (v: boolean) => this.expand(item, v),
@@ -216,7 +217,7 @@ export default mixins(
     },
     genEmpty (originalItemsLength: number, filteredItemsLength: number) {
       if (originalItemsLength === 0 && this.loading) {
-        const loading = this.$slots['loading'] || this.$vuetify.lang.t(this.loadingText)
+        const loading = this.$slots.loading || this.$vuetify.lang.t(this.loadingText)
         return this.genEmptyWrapper(loading)
       } else if (originalItemsLength === 0) {
         const noData = this.$slots['no-data'] || this.$vuetify.lang.t(this.noDataText)
@@ -238,12 +239,16 @@ export default mixins(
           isSelected: this.isSelected,
           select: this.select,
           isExpanded: this.isExpanded,
+          isMobile: this.isMobile,
           expand: this.expand,
         })
       }
 
       if (this.$scopedSlots.item) {
-        return props.items.map((item: any) => this.$scopedSlots.item!(this.createItemProps(item)))
+        return props.items.map((item: any, index) => this.$scopedSlots.item!(this.createItemProps(
+          item,
+          index
+        )))
       }
 
       return []

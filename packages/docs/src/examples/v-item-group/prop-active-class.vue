@@ -8,7 +8,7 @@
           cols="12"
           md="4"
         >
-          <v-item v-slot:default="{ active, toggle }">
+          <v-item v-slot="{ active, toggle }">
             <v-card
               class="d-flex align-center"
               dark

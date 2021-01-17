@@ -1,4 +1,5 @@
 // Utilities
+import { differenceInDays } from 'date-fns'
 import { make } from 'vuex-pathify'
 import merge from 'lodash/merge'
 
@@ -58,7 +59,15 @@ const actions = {
   },
 }
 
-const getters = {}
+const getters = {
+  hasRecentlyViewed: state => {
+    const notification = state.last.notification
+
+    return notification
+      ? differenceInDays(Date.now(), Number(notification)) < 1
+      : false
+  },
+}
 
 export default {
   namespaced: true,

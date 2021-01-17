@@ -3,6 +3,7 @@
     <vuetify-ad
       v-if="$attrs.slug"
       :slug="$attrs.slug"
+      medium="entry-ad"
     />
 
     <carbon-ad v-else />

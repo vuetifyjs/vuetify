@@ -37,7 +37,7 @@
                 :key="`item-${i}`"
                 :value="section"
               >
-                <template v-slot="{ active, toggle }">
+                <template #default="{ active, toggle }">
                   <v-btn
                     :input-value="active"
                     class="mr-2"

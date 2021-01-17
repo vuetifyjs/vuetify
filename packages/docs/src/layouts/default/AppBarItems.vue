@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1-1-auto d-flex align-center">
+  <div class="flex-1-1-auto d-flex align-center justify-end">
     <default-search />
 
     <template v-if="$vuetify.breakpoint.smAndUp">

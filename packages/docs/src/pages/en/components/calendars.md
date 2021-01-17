@@ -82,7 +82,7 @@ Slots allow you to define the content for each day, time interval for the daily 
 
 #### Day body
 
-Using the `day-body` slot you can customize the calendar content for the day. In this example we add a line for the current time.
+Using the `day-body` slot you can customize the calendar content for the day. In this example we added a line for the current time.
 
 <example file="v-calendar/slot-day-body" />
 

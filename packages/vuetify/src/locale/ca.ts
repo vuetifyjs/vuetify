@@ -29,7 +29,7 @@ export default {
   datePicker: {
     itemsSelected: '{0} seleccionats',
     nextMonthAriaLabel: 'El mes que ve',
-    nextYearAriaLabel: 'L\'any que ve',
+    nextYearAriaLabel: `L'any que ve`,
     prevMonthAriaLabel: 'Mes anterior',
     prevYearAriaLabel: 'Any anterior',
   },
@@ -59,6 +59,11 @@ export default {
       previous: 'Pàgina anterior',
       page: 'Ves a la pàgina {0}',
       currentPage: 'Pàgina actual, pàgina {0}',
+    },
+  },
+  rating: {
+    ariaLabel: {
+      icon: 'Rating {0} of {1}',
     },
   },
 }

@@ -139,9 +139,7 @@ export default mixins<options &
       return this.step > 0 ? parseFloat(this.step) : 0
     },
     inputWidth (): number {
-      const value = (this.roundValue(this.internalValue) - this.minValue) / (this.maxValue - this.minValue) * 100
-
-      return value
+      return (this.roundValue(this.internalValue) - this.minValue) / (this.maxValue - this.minValue) * 100
     },
     trackFillStyles (): Partial<CSSStyleDeclaration> {
       const startDir = this.vertical ? 'bottom' : 'left'
@@ -261,6 +259,7 @@ export default mixins<options &
         }],
         on: {
           click: this.onSliderClick,
+          mousedown: this.onSliderMouseDown,
         },
       }, this.genChildren())
     },
@@ -274,7 +273,7 @@ export default mixins<options &
           this.inputWidth,
           this.isActive,
           this.isFocused,
-          this.onThumbMouseDown,
+          this.onSliderMouseDown,
           this.onFocus,
           this.onBlur,
         ),
@@ -285,7 +284,7 @@ export default mixins<options &
         attrs: {
           value: this.internalValue,
           id: this.computedId,
-          disabled: this.isDisabled,
+          disabled: true,
           readonly: true,
           tabindex: -1,
           ...this.$attrs,
@@ -448,7 +447,7 @@ export default mixins<options &
         [direction]: `${value}%`,
       }
     },
-    onThumbMouseDown (e: MouseEvent) {
+    onSliderMouseDown (e: MouseEvent) {
       e.preventDefault()
 
       this.oldValue = this.internalValue
@@ -457,10 +456,12 @@ export default mixins<options &
 
       const mouseUpOptions = passiveSupported ? { passive: true, capture: true } : true
       const mouseMoveOptions = passiveSupported ? { passive: true } : false
+
       if ('touches' in e) {
         this.app.addEventListener('touchmove', this.onMouseMove, mouseMoveOptions)
         addOnceEventListener(this.app, 'touchend', this.onSliderMouseUp, mouseUpOptions)
       } else {
+        this.onMouseMove(e)
         this.app.addEventListener('mousemove', this.onMouseMove, mouseMoveOptions)
         addOnceEventListener(this.app, 'mouseup', this.onSliderMouseUp, mouseUpOptions)
       }

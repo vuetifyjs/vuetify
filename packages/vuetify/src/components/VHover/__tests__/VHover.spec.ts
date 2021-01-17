@@ -11,6 +11,12 @@ import {
 } from '@vue/test-utils'
 import { wait } from '../../../../test'
 
+const vm = new Vue()
+const item = props => vm.$createElement('div', {
+  staticClass: 'foobar',
+  class: { fizzbuzz: props.hover },
+})
+
 describe('VHover.ts', () => {
   let mountFunction: (options?: object) => Wrapper<Vue>
 
@@ -23,12 +29,6 @@ describe('VHover.ts', () => {
   })
 
   it('should change class when hovered', async () => {
-    const vm = new Vue()
-    const item = props => vm.$createElement('div', {
-      staticClass: 'foobar',
-      class: { fizzbuzz: props.hover },
-    })
-
     const wrapper = mountFunction({
       scopedSlots: {
         default: item,
@@ -51,13 +51,7 @@ describe('VHover.ts', () => {
     expect(div.element.classList.contains('fizzbuzz')).toBe(false)
   })
 
-  it('should not react to changes when disable', async () => {
-    const vm = new Vue()
-    const item = props => vm.$createElement('div', {
-      staticClass: 'foobar',
-      class: { fizzbuzz: props.hover },
-    })
-
+  it('should not react to changes when disabled', async () => {
     const wrapper = mountFunction({
       propsData: {
         disabled: true,

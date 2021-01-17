@@ -137,6 +137,18 @@ const VTextField = {
       props: undefined,
       source: 'v-text-field',
     }),
+    {
+      name: 'counter',
+      source: 'v-text-field',
+      props: {
+        props: {
+          dark: 'boolean',
+          light: 'boolean',
+          max: 'string | number',
+          value: 'string',
+        },
+      },
+    },
   ],
 }
 
@@ -175,7 +187,13 @@ const VSelect = {
     },
     {
       name: 'menuProps',
-      default: '{ "closeOnClick": false, "closeOnContentClick": false, "disableKeys": true, "openOnClick": false, "maxHeight": 304 }',
+      default: `{
+  closeOnClick: false,
+  closeOnContentClick: false,
+  disableKeys: true,
+  openOnClick: false,
+  maxHeight: 304
+}`,
       source: 'v-select',
     },
   ],
@@ -215,11 +233,37 @@ const VSelect = {
   ],
 }
 
+const VAutocomplete = {
+  ...VSelect,
+  props: [
+    ...VSelect.props.filter(prop => prop.name !== 'menuProps'),
+    {
+      name: 'menuProps',
+      default: `{
+  closeOnClick: false,
+  closeOnContentClick: false,
+  disableKeys: true,
+  openOnClick: false,
+  maxHeight: 304,
+  offsetY: true,
+  offsetOverflow: true,
+  transition: false
+}`,
+      source: 'v-autocomplete',
+    },
+  ],
+}
+
 const VSlider = {
   ...VInput,
   events: [
     ...VInput.events,
-    ...createItems(['start', 'end'], {
+    ...createItems([
+      'change',
+      'end',
+      'input',
+      'start',
+    ], {
       source: 'v-slider',
       value: 'number',
     }),
@@ -239,6 +283,22 @@ const VSlider = {
       source: 'v-slider',
     },
 
+  ],
+}
+
+const VRangeSlider = {
+  ...VSlider,
+  events: [
+    ...VInput.events,
+    ...createItems([
+      'change',
+      'end',
+      'input',
+      'start',
+    ], {
+      source: 'v-range-slider',
+      value: 'array',
+    }),
   ],
 }
 
@@ -381,7 +441,9 @@ module.exports = {
   VGridProps,
   VInput,
   VSelect,
+  VAutocomplete,
   VSlider,
+  VRangeSlider,
   VTextField,
   VTimestamp,
   VTimestampWithCategory,

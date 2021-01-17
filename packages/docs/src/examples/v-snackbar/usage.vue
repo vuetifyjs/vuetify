@@ -29,7 +29,7 @@
   export default {
     data: () => ({
       snackbar: false,
-      text: 'Hello, I\'m a snackbar',
+      text: `Hello, I'm a snackbar`,
     }),
   }
 </script>

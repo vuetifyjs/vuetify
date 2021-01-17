@@ -5,7 +5,7 @@
   >
     <v-col cols="12">
       <v-hover
-        v-slot:default="{ hover }"
+        v-slot="{ hover }"
         disabled
       >
         <v-card

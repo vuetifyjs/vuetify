@@ -25,12 +25,12 @@
         return [
           { heading: this.$t('professional-support') },
           {
-            title: this.$t('consulting'),
+            title: this.$t('direct-support'),
             to: {
               name: 'Documentation',
               params: {
                 category: 'introduction',
-                page: 'consulting',
+                page: 'support',
               },
             },
           },

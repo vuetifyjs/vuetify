@@ -19,8 +19,8 @@ related:
 
 This option suppresses *all* Vuetify logs and warnings.
 
-* **Type:** `boolean`
-* **Default:** `false`
+- **Type:** `boolean`
+- **Default:** `false`
 
 ```js
 // src/plugins/vuetify.js

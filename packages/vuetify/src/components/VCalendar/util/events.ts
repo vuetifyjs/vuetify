@@ -31,7 +31,7 @@ export function parseEvent (
   const endIdentifier: number = getDayIdentifier(end)
   const endOffset: number = start.hasTime ? 0 : 2359
   const endTimestampIdentifier: number = getTimestampIdentifier(end) + endOffset
-  const allDay: boolean = !start.hasTime
+  const allDay = !start.hasTime
 
   return { input, start, startIdentifier, startTimestampIdentifier, end, endIdentifier, endTimestampIdentifier, allDay, index, category }
 }

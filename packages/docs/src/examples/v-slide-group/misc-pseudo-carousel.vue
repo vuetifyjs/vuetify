@@ -12,7 +12,7 @@
       <v-slide-item
         v-for="n in 15"
         :key="n"
-        v-slot:default="{ active, toggle }"
+        v-slot="{ active, toggle }"
       >
         <v-card
           :color="active ? 'primary' : 'grey lighten-1'"

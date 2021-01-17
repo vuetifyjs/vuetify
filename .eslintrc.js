@@ -2,39 +2,45 @@ module.exports = {
   root: true,
   parserOptions: {
     parser: '@typescript-eslint/parser',
-    ecmaVersion: 2017,
-    sourceType: 'module'
+    ecmaVersion: 2020,
+    sourceType: 'module',
   },
   extends: [
     'standard',
-    'plugin:vue/recommended'
+    'plugin:vue/recommended',
+    'plugin:sonarjs/recommended',
   ],
   env: {
     node: true,
     browser: true,
-    es6: true
+    es6: true,
   },
   plugins: [
     '@typescript-eslint',
-    'vuetify'
+    'sonarjs',
+    'vuetify',
   ],
   rules: {
     // allow paren-less arrow functions
     'arrow-parens': ['error', 'as-needed'],
     // set maximum line characters
     'max-len': ['error', 140, 4, {
-      'ignoreUrls': true,
-      'ignoreTemplateLiterals': true,
-      'ignoreStrings': true
+      ignoreUrls: true,
+      ignoreTemplateLiterals: true,
+      ignoreStrings: true,
     }],
     'max-statements': ['error', 24],
+    quotes: ['error', 'single', {
+      avoidEscape: true,
+      allowTemplateLiterals: true,
+    }],
     'no-console': 'off',
     'comma-dangle': ['error', {
       arrays: 'always-multiline',
       objects: 'always-multiline',
       imports: 'always-multiline',
       exports: 'always-multiline',
-      functions: 'only-multiline'
+      functions: 'only-multiline',
     }],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
@@ -48,24 +54,28 @@ module.exports = {
       {
         anonymous: 'always',
         named: 'always',
-        asyncArrow: 'always'
-      }
+        asyncArrow: 'always',
+      },
     ],
     'no-return-await': 'warn',
     'object-shorthand': ['error', 'always'],
     'no-extra-semi': 'error',
     'prefer-const': ['error', {
-      'destructuring': 'all',
-      'ignoreReadBeforeAssign': true
+      destructuring: 'all',
+      ignoreReadBeforeAssign: true,
     }],
     'no-prototype-builtins': 'off',
+    'no-void': 'off',
+    'no-case-declarations': 'off',
+
+    'sonarjs/cognitive-complexity': 'off',
+    'sonarjs/no-duplicate-string': 'off',
 
     // Not in override, these apply to non-.vue files too
-    'vue/name-property-casing': 'off',
     'vue/require-default-prop': 'off',
     'vue/require-prop-types': 'off',
-    'vue/prop-name-casing': 'error',
-    'vue/return-in-computed-property': 'off'
+    'vue/one-component-per-file': 'off',
+    'vue/custom-event-name-casing': ['error', { ignores: ['/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'] }],
   },
   overrides: [
     {
@@ -73,31 +83,32 @@ module.exports = {
       rules: {
         indent: 'off',
         'vue/script-indent': ['error', 2, {
-          'baseIndent': 1,
-          'switchCase': 1,
-          'ignores': []
+          baseIndent: 1,
+          switchCase: 1,
+          ignores: [],
         }],
         'vue/html-closing-bracket-newline': ['error', {
-          'singleline': 'never',
-          'multiline': 'always'
+          singleline: 'never',
+          multiline: 'always',
         }],
         'vue/html-closing-bracket-spacing': 'error',
         'vue/max-attributes-per-line': ['error', {
-          'singleline': 5,
-          'multiline': {
-            'max': 1,
-            'allowFirstLine': false
-          }
+          singleline: 5,
+          multiline: {
+            max: 1,
+            allowFirstLine: false,
+          },
         }],
         'vue/valid-v-on': 'off', // This rule doesn't allow empty event listeners
         'vue/no-v-html': 'off',
         'vue/singleline-html-element-content-newline': 'off',
         'vue/multiline-html-element-content-newline': 'off',
+        'vue/valid-v-slot': ['error', { allowModifiers: true }],
 
         // 'vuetify/grid-unknown-attributes': 'error',
         // 'vuetify/no-legacy-grid': 'error',
-        'vuetify/no-deprecated-classes': 'error'
-      }
+        'vuetify/no-deprecated-classes': 'error',
+      },
     },
     {
       files: '**/*.ts',
@@ -105,26 +116,40 @@ module.exports = {
         // Can't overload function exports with this enabled
         'import/export': 'off',
 
-        // https://github.com/eslint/typescript-eslint-parser/issues/445
-        // https://github.com/eslint/typescript-eslint-parser/issues/457
-        // enabled in tslint instead
-        'no-unused-vars': 'off',
-        // '@typescript-eslint/no-unused-vars': 'error',
+        // False positives on types
+        'no-undef': 'off',
 
-        'no-redeclare': 'error',
+        quotes: 'off',
+        '@typescript-eslint/quotes': ['error', 'single', {
+          avoidEscape: true,
+          allowTemplateLiterals: true,
+        }],
+
+        'no-redeclare': 'off',
+        '@typescript-eslint/no-redeclare': 'error',
+
+        'no-use-before-define': 'off',
+        '@typescript-eslint/no-use-before-define': ['error', 'nofunc'],
+
+        // Enabled in tsconfig
+        'no-unused-vars': 'off',
+
         '@typescript-eslint/prefer-namespace-keyword': 'error',
         '@typescript-eslint/adjacent-overload-signatures': 'error',
         '@typescript-eslint/member-delimiter-style': ['error', {
           multiline: {
-            delimiter: 'none'
+            delimiter: 'none',
           },
           singleline: {
-            delimiter: 'comma'
-          }
+            delimiter: 'comma',
+          },
         }],
         '@typescript-eslint/member-ordering': 'error',
-        '@typescript-eslint/type-annotation-spacing': 'error'
-      }
-    }
-  ]
+        '@typescript-eslint/type-annotation-spacing': 'error',
+        '@typescript-eslint/no-inferrable-types': 'error',
+        '@typescript-eslint/unified-signatures': 'error',
+        '@typescript-eslint/no-invalid-this': 'error',
+      },
+    },
+  ],
 }

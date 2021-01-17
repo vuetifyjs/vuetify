@@ -104,7 +104,7 @@ export function genMetaInfo (
       { vmid: 'keywords', name: 'keywords', content: keywords },
       ...genFacebookMetaInfo(options),
       ...genOpenGraphMetaInfo(options),
-      ...genTwitterMetaInfo(options),
+      ...genTwitterMetaInfo(),
     ],
     title,
   }

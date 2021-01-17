@@ -91,7 +91,7 @@
         this.message = 'Wait for it...'
         setTimeout(() => {
           this.loading = false
-          this.message = 'You\'ve clicked me!'
+          this.message = `You've clicked me!`
         }, 2000)
       },
     },

@@ -4,7 +4,7 @@
     justify="center"
   >
     <v-hover
-      v-slot:default="{ hover }"
+      v-slot="{ hover }"
       v-bind="$attrs"
       v-on="$listeners"
     >

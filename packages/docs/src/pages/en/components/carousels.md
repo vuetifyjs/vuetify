@@ -60,6 +60,12 @@ You can hide the carousel navigation controls with `:show-arrows="false"`.
 
 <example file="v-carousel/prop-hide-controls" />
 
+#### Customized arrows
+
+Arrows can be customized by using **prev** and **next** slots.
+
+<example file="v-carousel/slots-next-prev" />
+
 #### Hide delimiters
 
 You can hide the bottom controls with `hide-delimiters` prop.

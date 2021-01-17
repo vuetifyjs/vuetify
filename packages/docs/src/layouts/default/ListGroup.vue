@@ -8,7 +8,7 @@
     no-action
     v-bind="$attrs"
   >
-    <template v-slot:activator>
+    <template #activator>
       <v-list-item-content>
         <v-list-item-title
           v-if="item.title"

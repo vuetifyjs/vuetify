@@ -15,6 +15,10 @@ module.exports = {
           svg: 'always',
           math: 'always',
         }],
+        'vue/v-slot-style': ['warn', {
+          default: 'longform',
+          named: 'longform',
+        }],
         'vuetify/no-deprecated-classes': 'error',
         'vuetify/grid-unknown-attributes': 'error',
         'vuetify/no-legacy-grid': 'error',

@@ -35,10 +35,11 @@
         >
           <v-text-field
             v-model="title"
-            :rules="rules"
-            counter="25"
-            filled
-            label="Filled"
+            :rules="wordsRules"
+            counter="5"
+            hint="This field counts words instead of characters"
+            label="Custom counter from prop"
+            :counter-value="v => v.trim().split(' ').length"
           ></v-text-field>
         </v-col>
 
@@ -48,11 +49,15 @@
         >
           <v-text-field
             v-model="title"
-            :rules="rules"
-            counter="25"
-            label="Outlined"
-            outlined
-          ></v-text-field>
+            :rules="wordsRules"
+            counter="5"
+            hint="This field counts words instead of characters"
+            label="Custom counter from slot"
+          >
+            <template v-slot:counter="{ props }">
+              <v-counter v-bind="props" :value="title.trim().split(' ').length"></v-counter>
+            </template>
+          </v-text-field>
         </v-col>
       </v-row>
     </v-container>
@@ -66,6 +71,7 @@
         title: 'Preliminary report',
         description: 'California is a state in the western United States',
         rules: [v => v.length <= 25 || 'Max 25 characters'],
+        wordsRules: [v => v.trim().split(' ').length <= 5 || 'Max 5 words'],
       }
     },
   }

@@ -6,6 +6,10 @@ export default {
 
   props: {
     discover: Boolean,
+    medium: {
+      type: String,
+      default: 'docs',
+    },
     slug: {
       type: String,
       required: true,
@@ -49,7 +53,11 @@ export default {
         return `/${this.locale}${url}/`
       }
 
-      return `${url}?ref=vuetifyjs.com${query ? `&${query}` : ''}`
+      if (query && query.indexOf('utm_source') !== -1) {
+        return `${url}?${query}`
+      }
+
+      return `${url}?utm_source=vuetifyads&utm_medium=${this.medium}${query ? `&${query}` : ''}`
     },
     isSponsored () {
       if (!this.current) return undefined

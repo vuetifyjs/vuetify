@@ -121,6 +121,7 @@ export default mixins(
       type: String,
       default: '$vuetify.datePicker.itemsSelected',
     },
+    showAdjacentMonths: Boolean,
     showWeek: Boolean,
     // Function formatting currently selected date in the picker title
     titleDateFormat: Function as PropType<DatePickerFormatter | DatePickerMultipleFormatter | undefined>,
@@ -269,9 +270,10 @@ export default mixins(
       this.checkMultipleProp()
       this.setInputDate()
 
-      if (!this.isMultiple && this.value && !this.pickerDate) {
-        this.tableDate = sanitizeDateString(this.inputDate, this.type === 'month' ? 'year' : 'month')
-      } else if (this.isMultiple && this.multipleValue.length && (!oldValue || !(oldValue as string[]).length) && !this.pickerDate) {
+      if (
+        (!this.isMultiple && this.value && !this.pickerDate) ||
+        (this.isMultiple && this.multipleValue.length && (!oldValue || !oldValue.length) && !this.pickerDate)
+      ) {
         this.tableDate = sanitizeDateString(this.inputDate, this.type === 'month' ? 'year' : 'month')
       }
     },
@@ -427,6 +429,7 @@ export default mixins(
           range: this.range,
           readonly: this.readonly,
           scrollable: this.scrollable,
+          showAdjacentMonths: this.showAdjacentMonths,
           showWeek: this.showWeek,
           tableDate: `${pad(this.tableYear, 4)}-${pad(this.tableMonth + 1)}`,
           value: this.value,

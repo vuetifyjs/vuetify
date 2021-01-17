@@ -29,7 +29,7 @@
         md="6"
       >
         <a
-          :href="`https://store.vuetifyjs.com/products/${product.handle}/`"
+          :href="`https://store.vuetifyjs.com/products/${product.handle}?utm_source=vuetifyjs.com&utm_medium=themes`"
           class="text--primary text-decoration-none"
           rel="noopener"
           target="_blank"
@@ -89,11 +89,13 @@
 
     data: () => ({ products: null }),
 
-    async beforeCreate () {
+    beforeCreate () {
       if (!this.$store.hasModule('shopify')) {
         this.$store.registerModule('shopify', shopify)
       }
+    },
 
+    async beforeMount () {
       const request = await this.$store.dispatch('shopify/fetch') || []
       const products = []
 
@@ -121,7 +123,9 @@
     },
 
     beforeDestroy () {
-      this.$store.unregisterModule('shopify')
+      if (this.$store.hasModule('shopify')) {
+        this.$store.unregisterModule('shopify')
+      }
     },
   }
 </script>

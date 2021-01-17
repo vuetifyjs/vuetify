@@ -56,8 +56,8 @@
           'persistent-hint',
           'small-chips',
         ],
-        tabs: ['dense', 'filled', 'outlined', 'solo'],
       },
+      tabs: ['dense', 'filled', 'outlined', 'solo'],
     }),
   }
 </script>
