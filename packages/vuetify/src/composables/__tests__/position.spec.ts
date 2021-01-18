@@ -23,7 +23,7 @@ describe('position.ts', () => {
     [{ left: undefined }, {}],
     [{ right: false, left: '50' }, { left: '50px' }],
   ])('should have proper styles', (props, expected) => {
-    const { positionStyles } = usePosition(props as PositionProps)
+    const { positionStyles } = usePosition(props)
 
     expect(positionStyles.value).toEqual(expected)
   })
