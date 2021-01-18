@@ -46,24 +46,7 @@ Below is a list of the top Vue.js frameworks and the features that we feel are i
 
 So what are you waiting for? Head over to the [Installation](/getting-started/installation/) page and start building your next great idea today.
 
-## Feature Guides
-
-Learn more about the inner workings of Vuetify and become a skilled **v-developer** with our detailed feature guides. Each guide is designed to teach you how to get the most out of your development experience with information on: how to build responsive pages using [Layouts](/features/layouts/), how to customize the style of your application with [SASS variables](/features/sass-variables/), and how to slim down your application's package size via [Treeshaking](/features/treeshaking/), and more.
-
-| Feature | Skill level | Time to read |
-| ------- | ----------- | ------------ |
-| [Bidirectionality (LTR/RTL)](/features/bidirectionality/) | Beginner | 1 min |
-| [Global configuration](/features/global-config/) | Beginner | 1 min |
-| [Icons](/features/icons/) | Beginner | 15 min |
-| [Layouts](/features/layouts/) | Beginner | 5 min |
-| [Theme](/features/theme/) | Beginner | 15 min |
-| [Accessibility (a11y)](/features/accessibility) | Intermediate | 10 min |
-| [Breakpoints](/features/breakpoints) | Intermediate | 15 min |
-| [Internationalization (i18n)](/features/internationalization/) | Intermediate | 5 min |
-| [Programmatic scrolling](/features/scrolling/) | Intermediate | 2 min |
-| [SASS variables](/features/sass-variables/) | Intermediate | 10 min |
-| [Presets](/features/presets/) | Advanced | 15 min |
-| [Treeshaking](/features/treeshaking/) | Advanced | 15 min |
+Check out our [Beginners Guide](/getting-started/beginners-guide/) for more about what Vuetify contains, and guidance on how to use it.
 
 Can't find what you're looking for? Help us improve! Please reach out to [john@vuetifyjs.com](mailto:john@vuetifyjs.com) with your feedback or join us in the Vuetify [Discord community](https://community.vuetifyjs.com/).
 
