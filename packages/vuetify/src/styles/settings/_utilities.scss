@@ -356,14 +356,28 @@ $utilities: map-deep-merge(
     "border": (
       property: border-width,
       class: border,
-      values: (
-        0: 0,
-        null: thin,
-        4: 4px,
-        8: 8px,
-      )
+      values: $borders
     ),
-
+    "border-top": (
+      property: border-top-width,
+      class: border-t,
+      values: $borders
+    ),
+    "border-right": (
+      property: border-right-width,
+      class: border-r,
+      values: $borders
+    ),
+    "border-bottom": (
+      property: border-bottom-width,
+      class: border-b,
+      values: $borders
+    ),
+    "border-left": (
+      property: border-left-width,
+      class: border-l,
+      values: $borders
+    ),
     "border-style": (
       property: border-style,
       class: border,

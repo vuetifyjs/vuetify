@@ -4,24 +4,30 @@ import propsFactory from '@/util/propsFactory'
 
 // Types
 export interface OutlinedProps {
-  outlined?: boolean | string
+  outlined?: boolean | number | string
 }
 
 // Composables
 export const makeOutlinedProps = propsFactory({
-  outlined: [Boolean, String],
+  outlined: [Boolean, Number, String],
 })
 
 export function useOutlined (props: OutlinedProps) {
   const outlinedClasses = computed(() => {
     const classes: string[] = []
 
-    if (!props.outlined) return classes
+    if (props.outlined == null) return classes
 
-    if (typeof props.outlined === 'string') {
-      classes.push(`border-${props.outlined}`)
-    } else {
+    if (props.outlined === true) {
       classes.push('border')
+    } else if ([false, 0, '0'].includes(props.outlined)) {
+      classes.push('border-0')
+    } else if (typeof props.outlined === 'string') {
+      const values = props.outlined.split(' ')
+
+      for (const value of values) {
+        classes.push(`border-${value}`)
+      }
     }
 
     return classes

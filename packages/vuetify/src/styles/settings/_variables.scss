@@ -7,6 +7,19 @@ $font-size-root: 16px !default;
 $line-height-root: 1.5 !default;
 $border-radius-root: 4px !default;
 
+$borders: () !default;
+$borders: map-deep-merge(
+  (
+    0: 0,
+    null: thin,
+    sm: 1px,
+    md: 2px,
+    lg: 4px,
+    xl: 8px
+  ),
+  $borders
+);
+
 $rounded: () !default;
 $rounded: map-deep-merge(
   (
