@@ -11,7 +11,7 @@ type Position = typeof positionValues[number]
 
 export interface PositionProps {
   bottom?: boolean | number | string
-  left?: boolean | string
+  left?: boolean | number | string
   position?: Position
   right?: boolean | number | string
   top?: boolean | number | string
@@ -19,14 +19,14 @@ export interface PositionProps {
 
 // Composables
 export const makePositionProps = propsFactory({
-  bottom: [Boolean, String],
-  left: [Boolean, String],
+  bottom: [Boolean, Number, String],
+  left: [Boolean, Number, String],
   position: {
     type: String as PropType<Position>,
     validator: /* istanbul ignore next */ (v: any) => positionValues.includes(v),
   },
-  right: [Boolean, String],
-  top: [Boolean, String],
+  right: [Boolean, Number, String],
+  top: [Boolean, Number, String],
 })
 
 export function usePosition (props: PositionProps) {
