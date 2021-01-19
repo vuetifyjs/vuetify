@@ -406,6 +406,12 @@ $utilities: map-deep-merge(
         line-height
       ),
       values: $typography
+    ),
+    // Position
+    "position": (
+      property: position,
+      class: position,
+      values: static relative fixed absolute sticky
     )
   ),
   $utilities
