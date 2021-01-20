@@ -354,27 +354,32 @@ $utilities: map-deep-merge(
 
     // Border
     "border": (
-      property: border-width,
+      property: border-width border-style border-color,
       class: border,
       values: $borders
     ),
+    "border-opacity": (
+      property: --v-border-opacity,
+      class: border-opacity,
+      values: $border-opacities
+    ),
     "border-top": (
-      property: border-top-width,
+      property: border-top-width border-top-style border-top-color,
       class: border-t,
       values: $borders
     ),
     "border-right": (
-      property: border-right-width,
+      property: border-right-width border-right-style border-right-color,
       class: border-r,
       values: $borders
     ),
     "border-bottom": (
-      property: border-bottom-width,
+      property: border-bottom-width border-bottom-style border-bottom-color,
       class: border-b,
       values: $borders
     ),
     "border-left": (
-      property: border-left-width,
+      property: border-left-width border-left-style border-left-color,
       class: border-l,
       values: $borders
     ),
