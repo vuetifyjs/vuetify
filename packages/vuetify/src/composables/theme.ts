@@ -34,6 +34,7 @@ interface Colors extends BaseColors, OnColors {
 interface InternalThemeDefinition {
   dark: boolean
   colors: Colors
+  variables: Record<string, string | number>
 }
 
 interface ThemeDefinitionColors extends BaseColors, Partial<OnColors> {
@@ -43,6 +44,7 @@ interface ThemeDefinitionColors extends BaseColors, Partial<OnColors> {
 export interface ThemeDefinition {
   dark: boolean
   colors: ThemeDefinitionColors
+  variables: Record<string, string | number>
 }
 
 interface VariationsOptions {
@@ -93,6 +95,10 @@ const defaultThemeOptions: ThemeOptions = {
         success: '#4CAF50',
         warning: '#FB8C00',
       },
+      variables: {
+        'border-color': '0,0,0',
+        'border-opacity': 0.12,
+      },
     },
     dark: {
       dark: true,
@@ -107,6 +113,10 @@ const defaultThemeOptions: ThemeOptions = {
         info: '#2196F3',
         success: '#4CAF50',
         warning: '#FB8C00',
+      },
+      variables: {
+        'border-color': '255, 255, 255',
+        'border-opacity': 0.12,
       },
     },
   },
@@ -206,7 +216,15 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
 
     const lines = []
     for (const themeName of Object.keys(computedThemes.value)) {
-      lines.push(...createCssClass(`.v-theme--${themeName}`, genCssVariables(themeName)))
+      const variables = computedThemes.value[themeName].variables
+
+      lines.push(...createCssClass(`.v-theme--${themeName}`, [
+        ...genCssVariables(themeName),
+        ...Object.keys(variables).map(key => {
+          return `--v-${key}: ${variables[key]}`
+        }),
+      ]))
+
       lines.push(...createCssClass(`.v-theme--${themeName}`, [
         `background: rgb(var(--v-theme-background))`,
         `color: rgb(var(--v-theme-on-background))`,
@@ -223,7 +241,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
         lines.push(
           ...createCssClass(`.bg-${key}`, [`background: rgb(var(--v-theme-${key}))`, `color: rgb(var(--v-theme-on-${key}))`]),
           ...createCssClass(`.text-${key}`, [`color: rgb(var(--v-theme-${key}))`]),
-          ...createCssClass(`.border-${key}`, [`border-color: rgb(var(--v-theme-${key}))`]),
+          ...createCssClass(`.border-${key}`, [`--v-border-color: var(--v-theme-${key})`]),
         )
       }
     }
