@@ -101,7 +101,7 @@
   "customization/breakpoints": "/features/breakpoints",
   "customization/global-config": "/features/global-config",
   "customization/scrolling": "/features/scrolling",
-  "customization/icons": "/features/icons",
+  "customization/icons": "/features/icon-fonts",
   "customization/internationalization": "/features/internationalization",
   "customization/presets": "/features/presets",
   "customization/sass-variables": "/features/sass-variables",
