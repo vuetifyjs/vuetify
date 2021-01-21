@@ -5,7 +5,42 @@ $color-pack: true !default;
 $body-font-family: 'Roboto', sans-serif !default;
 $font-size-root: 16px !default;
 $line-height-root: 1.5 !default;
+$border-color-root: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $border-radius-root: 4px !default;
+$border-style-root: solid !default;
+
+$borders: () !default;
+$borders: map-deep-merge(
+  (
+    0: 0,
+    null: thin,
+    sm: 1px,
+    md: 2px,
+    lg: 4px,
+    xl: 8px
+  ),
+  $borders
+);
+
+@each $key, $border in $borders {
+  $borders: map-deep-merge(
+    $borders,
+    ( $key: $border $border-style-root $border-color-root )
+  )
+}
+
+$border-opacities: () !default;
+$border-opacities: map-deep-merge(
+  (
+    0: 0,
+    null: .12,
+    25: .25,
+    50: .50,
+    75: .75,
+    100: 1
+  ),
+  $border-opacities
+);
 
 $rounded: () !default;
 $rounded: map-deep-merge(

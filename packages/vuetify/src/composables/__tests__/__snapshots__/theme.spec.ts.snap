@@ -27,6 +27,8 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-on-info: 0,0,0;
       --v-theme-on-success: 0,0,0;
       --v-theme-on-warning: 0,0,0;
+      --v-border-color: 0,0,0;
+      --v-border-opacity: 0.12;
     }
     .v-theme--light {
       background: rgb(var(--v-theme-background));
@@ -53,6 +55,8 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-on-info: 0,0,0;
       --v-theme-on-success: 0,0,0;
       --v-theme-on-warning: 0,0,0;
+      --v-border-color: 255, 255, 255;
+      --v-border-opacity: 0.12;
     }
     .v-theme--dark {
       background: rgb(var(--v-theme-background));
@@ -66,7 +70,7 @@ exports[`createTheme should create style element 1`] = `
       color: rgb(var(--v-theme-background));
     }
     .border-background {
-      border-color: rgb(var(--v-theme-background));
+      --v-border-color: var(--v-theme-background);
     }
     .bg-surface {
       background: rgb(var(--v-theme-surface));
@@ -76,7 +80,7 @@ exports[`createTheme should create style element 1`] = `
       color: rgb(var(--v-theme-surface));
     }
     .border-surface {
-      border-color: rgb(var(--v-theme-surface));
+      --v-border-color: var(--v-theme-surface);
     }
     .bg-primary {
       background: rgb(var(--v-theme-primary));
@@ -86,7 +90,7 @@ exports[`createTheme should create style element 1`] = `
       color: rgb(var(--v-theme-primary));
     }
     .border-primary {
-      border-color: rgb(var(--v-theme-primary));
+      --v-border-color: var(--v-theme-primary);
     }
     .bg-primary-darken-1 {
       background: rgb(var(--v-theme-primary-darken-1));
@@ -96,7 +100,7 @@ exports[`createTheme should create style element 1`] = `
       color: rgb(var(--v-theme-primary-darken-1));
     }
     .border-primary-darken-1 {
-      border-color: rgb(var(--v-theme-primary-darken-1));
+      --v-border-color: var(--v-theme-primary-darken-1);
     }
     .bg-secondary {
       background: rgb(var(--v-theme-secondary));
@@ -106,7 +110,7 @@ exports[`createTheme should create style element 1`] = `
       color: rgb(var(--v-theme-secondary));
     }
     .border-secondary {
-      border-color: rgb(var(--v-theme-secondary));
+      --v-border-color: var(--v-theme-secondary);
     }
     .bg-secondary-darken-1 {
       background: rgb(var(--v-theme-secondary-darken-1));
@@ -116,7 +120,7 @@ exports[`createTheme should create style element 1`] = `
       color: rgb(var(--v-theme-secondary-darken-1));
     }
     .border-secondary-darken-1 {
-      border-color: rgb(var(--v-theme-secondary-darken-1));
+      --v-border-color: var(--v-theme-secondary-darken-1);
     }
     .bg-error {
       background: rgb(var(--v-theme-error));
@@ -126,7 +130,7 @@ exports[`createTheme should create style element 1`] = `
       color: rgb(var(--v-theme-error));
     }
     .border-error {
-      border-color: rgb(var(--v-theme-error));
+      --v-border-color: var(--v-theme-error);
     }
     .bg-info {
       background: rgb(var(--v-theme-info));
@@ -136,7 +140,7 @@ exports[`createTheme should create style element 1`] = `
       color: rgb(var(--v-theme-info));
     }
     .border-info {
-      border-color: rgb(var(--v-theme-info));
+      --v-border-color: var(--v-theme-info);
     }
     .bg-success {
       background: rgb(var(--v-theme-success));
@@ -146,7 +150,7 @@ exports[`createTheme should create style element 1`] = `
       color: rgb(var(--v-theme-success));
     }
     .border-success {
-      border-color: rgb(var(--v-theme-success));
+      --v-border-color: var(--v-theme-success);
     }
     .bg-warning {
       background: rgb(var(--v-theme-warning));
@@ -156,7 +160,7 @@ exports[`createTheme should create style element 1`] = `
       color: rgb(var(--v-theme-warning));
     }
     .border-warning {
-      border-color: rgb(var(--v-theme-warning));
+      --v-border-color: var(--v-theme-warning);
     }
     .on-background {
       color: rgb(var(--v-theme-on-background));

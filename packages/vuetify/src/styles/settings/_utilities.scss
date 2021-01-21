@@ -305,7 +305,7 @@ $utilities: map-deep-merge(
       values: $spacers
     ),
 
-    // Border
+    // Border radius
     "rounded": (
       property: border-radius,
       class: rounded,
@@ -350,6 +350,43 @@ $utilities: map-deep-merge(
       property: border-bottom-left-radius,
       class: rounded-bl,
       values: $rounded
+    ),
+
+    // Border
+    "border": (
+      property: border-width border-style border-color,
+      class: border,
+      values: $borders
+    ),
+    "border-opacity": (
+      property: --v-border-opacity,
+      class: border-opacity,
+      values: $border-opacities
+    ),
+    "border-top": (
+      property: border-top-width border-top-style border-top-color,
+      class: border-t,
+      values: $borders
+    ),
+    "border-right": (
+      property: border-right-width border-right-style border-right-color,
+      class: border-r,
+      values: $borders
+    ),
+    "border-bottom": (
+      property: border-bottom-width border-bottom-style border-bottom-color,
+      class: border-b,
+      values: $borders
+    ),
+    "border-left": (
+      property: border-left-width border-left-style border-left-color,
+      class: border-l,
+      values: $borders
+    ),
+    "border-style": (
+      property: border-style,
+      class: border,
+      values: solid dashed dotted double none
     ),
 
     // Text

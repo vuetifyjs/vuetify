@@ -1,0 +1,4 @@
+@mixin border($query: $query, $important: false)
+  border-color: map-get($query, 'border-color') if($important, !important, null)
+  border-style: map-get($query, 'border-style') if($important, !important, null)
+  border-width: map-get($query, 'border-width') if($important, !important, null)
