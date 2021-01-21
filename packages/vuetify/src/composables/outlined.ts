@@ -18,7 +18,7 @@ export function useOutlined (props: OutlinedProps) {
 
     if (props.outlined == null) return classes
 
-    if (props.outlined === true) {
+    if (props.outlined === true || props.outlined === '') {
       classes.push('border')
     } else if ([false, 0, '0'].includes(props.outlined)) {
       classes.push('border-0')
