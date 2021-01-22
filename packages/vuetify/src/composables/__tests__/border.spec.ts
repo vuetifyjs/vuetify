@@ -29,7 +29,6 @@ describe('border.ts', () => {
     [{ border: '' }, ['border']],
     // Border with 0 or false
     [{ border: '0' }, ['border-0']],
-    [{ border: false }, ['border-0']],
     [{ border: 0 }, ['border-0']],
     // Border with a word
     [{ border: 'tl' }, ['border-tl']],

@@ -16,16 +16,13 @@ export function useBorder (props: BorderProps) {
   const borderClasses = computed(() => {
     const classes: string[] = []
 
-    if (props.border == null) return classes
-
     if (props.border === true || props.border === '') {
       classes.push('border')
-    } else if ([false, 0, '0'].includes(props.border)) {
-      classes.push('border-0')
-    } else if (typeof props.border === 'string') {
-      const values = props.border.split(' ')
-
-      for (const value of values) {
+    } else if (
+      typeof props.border === 'string' ||
+      props.border === 0
+    ) {
+      for (const value of String(props.border).split(' ')) {
         classes.push(`border-${value}`)
       }
     }

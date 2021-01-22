@@ -27,7 +27,6 @@ describe('border-radius.ts', () => {
     [{ rounded: '' }, ['rounded']],
     // // Rounded with 0
     [{ rounded: '0' }, ['rounded-0']],
-    [{ rounded: false }, ['rounded-0']],
     [{ rounded: 0 }, ['rounded-0']],
     // // Rounded with a word
     [{ rounded: 'circle' }, ['rounded-circle']],
