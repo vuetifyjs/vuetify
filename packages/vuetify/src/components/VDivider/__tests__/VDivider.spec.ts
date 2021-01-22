@@ -2,20 +2,16 @@
 import VDivider from '../VDivider'
 
 // Utilities
-import { nextTick } from 'vue'
-import { mount } from '@vue/test-utils'
 import { createTheme, VuetifyThemeSymbol } from '@/composables'
+import { mount } from '@vue/test-utils'
+import { nextTick } from 'vue'
 import { VuetifySymbol } from '@/framework'
 
 describe('VDivider', () => {
-  let provide: any = {}
-
-  beforeEach(() => {
-    provide = {
-      [VuetifySymbol as symbol]: { defaults: { global: {} } },
-      [VuetifyThemeSymbol as symbol]: createTheme(),
-    }
-  })
+  const provide: any = {
+    [VuetifySymbol as symbol]: { defaults: { global: {} } },
+    [VuetifyThemeSymbol as symbol]: createTheme(),
+  }
 
   it('should match a snapshot', () => {
     const wrapper = mount(VDivider, {
