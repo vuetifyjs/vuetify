@@ -38,9 +38,6 @@ export default defineComponent({
 
     return () => (
       h('hr', {
-        ariaOrientation: attrs.role === 'separator'
-          ? props.vertical ? 'vertical' : 'horizontal'
-          : undefined,
         class: [
           'v-divider',
           {
@@ -50,8 +47,11 @@ export default defineComponent({
           themeClasses.value,
           borderClasses.value,
         ],
-        role: attrs.role || 'separator',
         style: [dimensionStyles.value],
+        ariaOrientation: !attrs.role || attrs.role === 'separator'
+          ? props.vertical ? 'vertical' : 'horizontal'
+          : undefined,
+        role: attrs.role || 'separator',
       })
     )
   },
