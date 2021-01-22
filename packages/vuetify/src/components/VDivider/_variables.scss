@@ -1,8 +1,19 @@
 @import '../../styles/styles.sass';
 
 // Defaults
+$divider-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $divider-border-style: solid !default;
 $divider-border-width: thin 0 0 0 !default;
+
+$divider-border-query: () !default;
+$divider-border-query: map-deep-merge(
+  (
+    'border-color': $divider-border-color,
+    'border-style': $divider-border-style,
+    'border-width': $divider-border-width
+  ),
+  $divider-border-query
+);
 
 // Inset
 $divider-inset-margin: 8px !default;

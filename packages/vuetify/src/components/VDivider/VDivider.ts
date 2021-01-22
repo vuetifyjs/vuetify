@@ -2,45 +2,57 @@
 import './VDivider.sass'
 
 // Utilities
-import { defineComponent, h, mergeProps } from 'vue'
+import { defineComponent, h } from 'vue'
 import makeProps from '@/util/makeProps'
 
 // Composables
-import { useTheme } from '@/composables'
+import {
+  makeBorderProps,
+  makeDimensionProps,
+  useBorder,
+  useDimension,
+  useTheme,
+} from '@/composables'
 
 export default defineComponent({
   name: 'VDivider',
 
-  inheritAttrs: false,
-
-  props: makeProps({
-    inset: Boolean,
-    vertical: Boolean,
-  }),
+  props: {
+    ...makeBorderProps(),
+    ...makeDimensionProps({
+      height: undefined,
+      maxHeight: undefined,
+      maxWidth: undefined,
+      width: undefined,
+    }),
+    ...makeProps({
+      inset: Boolean,
+      vertical: Boolean,
+    }),
+  },
 
   setup (props, { attrs }) {
+    const { borderClasses } = useBorder(props)
+    const { dimensionStyles } = useDimension(props)
     const { themeClasses } = useTheme()
 
     return () => (
-      h('hr', mergeProps(
-        {
-          class: [
-            'v-divider',
-            {
-              'v-divider--inset': props.inset,
-              'v-divider--vertical': props.vertical,
-            },
-            themeClasses.value,
-          ],
-        },
-        attrs,
-        {
-          ariaOrientation: !attrs.role || attrs.role === 'separator'
-            ? props.vertical ? 'vertical' : 'horizontal'
-            : undefined,
-          role: attrs.role || 'separator',
-        }
-      ))
+      h('hr', {
+        ariaOrientation: attrs.role === 'separator'
+          ? props.vertical ? 'vertical' : 'horizontal'
+          : undefined,
+        class: [
+          'v-divider',
+          {
+            'v-divider--inset': props.inset,
+            'v-divider--vertical': props.vertical,
+          },
+          themeClasses.value,
+          borderClasses.value,
+        ],
+        role: attrs.role || 'separator',
+        style: [dimensionStyles.value],
+      })
     )
   },
 })

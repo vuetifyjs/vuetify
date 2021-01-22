@@ -1,8 +1,8 @@
 @import './_variables.scss'
 
 .v-divider
-  border-style: $divider-border-style
-  border-width: $divider-border-width
+  @include border($divider-border-query)
+
   display: block
   flex: 1 1 100%
   height: 0px
