@@ -215,6 +215,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
     genStyleElement()
 
     const lines = []
+
     for (const themeName of Object.keys(computedThemes.value)) {
       const variables = computedThemes.value[themeName].variables
 
@@ -223,11 +224,6 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
         ...Object.keys(variables).map(key => {
           return `--v-${key}: ${variables[key]}`
         }),
-      ]))
-
-      lines.push(...createCssClass(`.v-theme--${themeName}`, [
-        `background: rgb(var(--v-theme-background))`,
-        `color: rgb(var(--v-theme-on-background))`,
       ]))
     }
 
