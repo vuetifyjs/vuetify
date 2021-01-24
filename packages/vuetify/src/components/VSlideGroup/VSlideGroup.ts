@@ -91,7 +91,7 @@ export const BaseSlideGroup = mixins<options &
     isOverflowing: false,
     resizeTimeout: 0,
     startX: 0,
-    disableSwipeHorizontal: false,
+    isSwipingHorizontal: false,
     isSwiping: false,
     scrollOffset: 0,
     widths: {
@@ -254,9 +254,6 @@ export const BaseSlideGroup = mixins<options &
     genWrapper (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-slide-group__wrapper',
-        class: {
-          'v-slide-group__wrapper--disable-swipe-horizonal': this.disableSwipeHorizontal,
-        },
         directives: [{
           name: 'touch',
           value: {
@@ -299,12 +296,14 @@ export const BaseSlideGroup = mixins<options &
         // in order to ensure disableSwipeHorizontal value is consistent between onTouchStart and onTouchEnd
         const diffX = e.touchmoveX - e.touchstartX
         const diffY = e.touchmoveY - e.touchstartY
-        this.disableSwipeHorizontal = Math.abs(diffX) <= Math.abs(diffY)
+        this.isSwipingHorizontal = Math.abs(diffX) > Math.abs(diffY)
         this.isSwiping = true
       }
-      if (!this.disableSwipeHorizontal) {
+      if (this.isSwipingHorizontal) {
         // sliding horizontally
         this.scrollOffset = this.startX - e.touchmoveX
+        // temporarily disable window vertical scrolling
+        document.documentElement.style.overflowY = 'hidden'
       }
     },
     onTouchEnd () {
@@ -331,6 +330,8 @@ export const BaseSlideGroup = mixins<options &
       }
 
       this.isSwiping = false
+      // rollback whole page scrolling to default
+      document.documentElement.style.removeProperty('overflow-y')
     },
     overflowCheck (e: TouchEvent, fn: (e: TouchEvent) => void) {
       e.stopPropagation()
