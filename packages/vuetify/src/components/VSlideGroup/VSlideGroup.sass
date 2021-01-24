@@ -43,7 +43,9 @@
   display: flex
   flex: 1 1 auto
   overflow: hidden
-  touch-action: none
+
+  &--disable-swipe-horizonal
+    touch-action: pan-y
 
 // Modifiers
 .v-slide-group__next,

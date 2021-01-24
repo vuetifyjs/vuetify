@@ -23,7 +23,9 @@ import Vue, { VNode } from 'vue'
 
 interface TouchEvent {
   touchstartX: number
+  touchstartY: number
   touchmoveX: number
+  touchmoveY: number
   stopPropagation: Function
 }
 
@@ -89,6 +91,8 @@ export const BaseSlideGroup = mixins<options &
     isOverflowing: false,
     resizeTimeout: 0,
     startX: 0,
+    disableSwipeHorizontal: false,
+    isSwiping: false,
     scrollOffset: 0,
     widths: {
       content: 0,
@@ -250,6 +254,9 @@ export const BaseSlideGroup = mixins<options &
     genWrapper (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-slide-group__wrapper',
+        class: {
+          'v-slide-group__wrapper--disable-swipe-horizonal': this.disableSwipeHorizontal,
+        },
         directives: [{
           name: 'touch',
           value: {
@@ -287,7 +294,18 @@ export const BaseSlideGroup = mixins<options &
       content.style.setProperty('willChange', 'transform')
     },
     onTouchMove (e: TouchEvent) {
-      this.scrollOffset = this.startX - e.touchmoveX
+      if (!this.isSwiping) {
+        // only calculate disableSwipeHorizontal during the first onTouchMove invoke
+        // in order to ensure disableSwipeHorizontal value is consistent between onTouchStart and onTouchEnd
+        const diffX = e.touchmoveX - e.touchstartX
+        const diffY = e.touchmoveY - e.touchstartY
+        this.disableSwipeHorizontal = Math.abs(diffX) <= Math.abs(diffY)
+        this.isSwiping = true
+      }
+      if (!this.disableSwipeHorizontal) {
+        // sliding horizontally
+        this.scrollOffset = this.startX - e.touchmoveX
+      }
     },
     onTouchEnd () {
       const { content, wrapper } = this.$refs
@@ -311,6 +329,8 @@ export const BaseSlideGroup = mixins<options &
           this.scrollOffset = maxScrollOffset
         }
       }
+
+      this.isSwiping = false
     },
     overflowCheck (e: TouchEvent, fn: (e: TouchEvent) => void) {
       e.stopPropagation()
