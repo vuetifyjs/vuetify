@@ -1,105 +1,50 @@
-// @ts-nocheck
-/* eslint-disable */
-
-// Libraries
-// import Vue from 'vue'
-
 // Components
-// import VDivider from '../VDivider'
+import VDivider from '../VDivider'
 
 // Utilities
-import {
-  createLocalVue,
-  mount,
-  Wrapper,
-} from '@vue/test-utils'
+import { createTheme, VuetifyThemeSymbol } from '@/composables'
+import { mount } from '@vue/test-utils'
+import { VuetifySymbol } from '@/framework'
 
-describe.skip('VDivider', () => {
-  let mountFunction: (options?: object) => Wrapper<Vue>
-  let localVue: typeof Vue
+describe('VDivider', () => {
+  function mountFunction (options = {}) {
+    return mount(VDivider, {
+      global: {
+        provide: {
+          [VuetifySymbol as symbol]: { defaults: { global: {} } },
+          [VuetifyThemeSymbol as symbol]: createTheme(),
+        },
+      },
+      ...options,
+    })
+  }
 
-  beforeEach(() => {
-    localVue = createLocalVue()
-
-    mountFunction = (options = {}) => {
-      return mount(VDivider, {
-        localVue,
-        ...options,
-      })
-    }
-  })
-
-  it('should render component and match snapshot', () => {
+  it('should match a snapshot', () => {
     const wrapper = mountFunction()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render an inset component', () => {
-    const wrapper = mountFunction({
-      propsData: { inset: true },
-    })
+  it.each([
+    [{ length: 256 }, 'max-width: 256px;'],
+    [{ length: '128', vertical: true }, 'max-height: 128px;'],
+    [{ thickness: 2 }, 'border-top-width: 2px;'],
+    [{ thickness: '5', vertical: true }, 'border-right-width: 5px;'],
+  ])('should have correct styles for %s', (propsData, expected) => {
+    const wrapper = mountFunction({ propsData })
 
-    expect(wrapper.classes('v-divider--inset')).toBe(true)
+    expect(wrapper.attributes('style')).toEqual(expected)
   })
 
-  it('should render a light component', () => {
-    const wrapper = mountFunction({
-      propsData: { light: true },
-    })
+  it.each([
+    [{}, ['horizontal', 'separator']],
+    [{ vertical: true }, ['vertical', 'separator']],
+    [{ role: 'foo' }, [undefined, 'foo']],
+  ])('should have correct attributes for %s', (propsData, expected) => {
+    const wrapper = mountFunction({ propsData })
+    const [ariaorientation, role] = expected
 
-    expect(wrapper.classes('theme--light')).toBe(true)
-  })
-
-  it('should render a dark component', () => {
-    const wrapper = mountFunction({
-      propsData: { dark: true },
-    })
-
-    expect(wrapper.classes('theme--dark')).toBe(true)
-  })
-
-  it('should render a vertical component', () => {
-    const wrapper = mountFunction({
-      propsData: { vertical: true },
-    })
-
-    expect(wrapper.classes('v-divider--vertical')).toBe(true)
-  })
-
-  it('should have separator role by default', () => {
-    const wrapper = mountFunction()
-
-    expect(wrapper.attributes('role')).toBe('separator')
-  })
-
-  it('should have aria-orientation horizontal by default', () => {
-    const wrapper = mountFunction()
-
-    expect(wrapper.attributes('aria-orientation')).toBe('horizontal')
-  })
-
-  it('should have aria-orientation vertical if vertical prop is set', () => {
-    const wrapper = mountFunction({
-      propsData: { vertical: true },
-    })
-
-    expect(wrapper.attributes('aria-orientation')).toBe('vertical')
-  })
-
-  it('should have presentation role if set in attrs', () => {
-    const wrapper = mountFunction({
-      attrs: { role: 'presentation' },
-    })
-
-    expect(wrapper.attributes('role')).toBe('presentation')
-  })
-
-  it('should have no aria-orientation if presentation role is set in attrs', () => {
-    const wrapper = mountFunction({
-      attrs: { role: 'presentation' },
-    })
-
-    expect(wrapper.attributes('aria-orientation')).toBeUndefined()
+    expect(wrapper.attributes().ariaorientation).toBe(ariaorientation)
+    expect(wrapper.attributes().role).toBe(role)
   })
 })

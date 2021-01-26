@@ -1,39 +1,36 @@
 @import './_variables.scss'
 
-+theme(v-divider) using ($material)
-  border-color: map-get($material, 'dividers')
-
 .v-divider
+  @include border($divider-query)
+
   display: block
-  flex: 1 1 0px
-  max-width: 100%
+  flex: $divider-flex
   height: 0px
   max-height: 0px
-  border: solid
-  border-width: thin 0 0 0
   transition: inherit
-
-  &--inset:not(.v-divider--vertical)
-    max-width: calc(100% - #{$divider-inset-margin})
-    +ltr()
-      margin-left: $divider-inset-margin
-
-    +rtl()
-      margin-right: $divider-inset-margin
 
   &--vertical
     align-self: stretch
-    border: solid
-    border-width: 0 thin 0 0
+    border-width: $divider-vertical-border-width
     display: inline-flex
     height: inherit
-    min-height: 100%
+    margin-left: $divider-vertical-margin-left
     max-height: 100%
     max-width: 0px
-    width: 0px
     vertical-align: text-bottom
+    width: 0px
 
-    &.v-divider--inset
-      margin-top: $divider-inset-margin-top
-      min-height: 0
-      max-height: $divider-inset-max-height
+  &--inset
+    &:not(.v-divider--vertical)
+      max-width: $divider-inset-max-width
+
+      @include ltr()
+        margin-left: $divider-inset-margin
+
+      @include rtl()
+        margin-right: $divider-inset-margin
+
+    &.v-divider--vertical
+      margin-bottom: $divider-vertical-inset-margin-bottom
+      margin-top: $divider-vertical-inset-margin-top
+      max-height: $divider-vertical-inset-max-height

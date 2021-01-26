@@ -1,5 +1,31 @@
 @import '../../styles/styles.sass';
 
+// Defaults
+$divider-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
+$divider-border-style: solid !default;
+$divider-border-width: thin 0 0 0 !default;
+$divider-flex: 1 1 100% !default;
+$divider-margin: 8px !default;
+
+$divider-query: () !default;
+$divider-query: map-deep-merge(
+  (
+    'border-color': $divider-border-color,
+    'border-style': $divider-border-style,
+    'border-width': $divider-border-width
+  ),
+  $divider-query
+);
+
+// Inset
 $divider-inset-margin: 72px !default;
-$divider-inset-margin-top: 8px !default;
-$divider-inset-max-height: calc(100% - 16px) !default;
+$divider-inset-max-width: calc(100% - #{$divider-inset-margin}) !default;
+
+// Vertical
+$divider-vertical-border-width: 0 thin 0 0 !default;
+$divider-vertical-margin-left: -1px !default;
+
+// Vertical & Inset
+$divider-vertical-inset-margin-bottom: $divider-margin !default;
+$divider-vertical-inset-margin-top: $divider-margin !default;
+$divider-vertical-inset-max-height: calc(100% - #{$divider-margin * 2}) !default;
