@@ -1,9 +1,9 @@
 @import '../../styles/styles.sass';
 
 // Defaults
-$sheet-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
-$sheet-border-style: solid !default;
-$sheet-border-width: 0 !default;
+$sheet-border-color: $border-color-root !default;
+$sheet-border-style: $border-style-root !default;
+$sheet-border-width: map-get($borders, 0) !default;
 $sheet-elevation: 0 !default;
 
 $sheet: () !default;
