@@ -40,7 +40,7 @@ describe('VDivider', () => {
     [{}, ['horizontal', 'separator']],
     [{ vertical: true }, ['vertical', 'separator']],
     [{ role: 'foo' }, [undefined, 'foo']],
-  ])('should have correct styles for %s', (propsData, expected) => {
+  ])('should have correct attributes for %s', (propsData, expected) => {
     const wrapper = mountFunction({ propsData })
     const [ariaorientation, role] = expected
 
