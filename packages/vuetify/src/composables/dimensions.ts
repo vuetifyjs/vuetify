@@ -13,9 +13,6 @@ export interface DimensionProps {
   width?: number | string
 }
 
-type DimensionKey = keyof DimensionProps
-type DimensionStyles = Partial<Record<DimensionKey, string>>
-
 // Composables
 export const makeDimensionProps = propsFactory({
   height: [Number, String],
@@ -27,24 +24,14 @@ export const makeDimensionProps = propsFactory({
 })
 
 export function useDimension (props: DimensionProps) {
-  const dimensionStyles = computed(() => {
-    const styles: DimensionStyles = {}
-    const height = convertToUnit(props.height)
-    const maxHeight = convertToUnit(props.maxHeight)
-    const maxWidth = convertToUnit(props.maxWidth)
-    const minHeight = convertToUnit(props.minHeight)
-    const minWidth = convertToUnit(props.minWidth)
-    const width = convertToUnit(props.width)
-
-    if (height) styles.height = height
-    if (maxHeight) styles.maxHeight = maxHeight
-    if (maxWidth) styles.maxWidth = maxWidth
-    if (minHeight) styles.minHeight = minHeight
-    if (minWidth) styles.minWidth = minWidth
-    if (width) styles.width = width
-
-    return styles
-  })
+  const dimensionStyles = computed(() => ({
+    height: convertToUnit(props.height),
+    maxHeight: convertToUnit(props.maxHeight),
+    maxWidth: convertToUnit(props.maxWidth),
+    minHeight: convertToUnit(props.minHeight),
+    minWidth: convertToUnit(props.minWidth),
+    width: convertToUnit(props.width),
+  }))
 
   return { dimensionStyles }
 }
