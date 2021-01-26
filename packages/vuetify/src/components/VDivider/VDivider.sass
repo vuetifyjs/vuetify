@@ -4,7 +4,7 @@
   @include border($divider-border-query)
 
   display: block
-  flex: 1 1 0px
+  flex: $divider-flex
   height: 0px
   max-height: 0px
   transition: inherit
@@ -22,9 +22,13 @@
 
   &--inset
     &:not(.v-divider--vertical)
-      margin-left: $divider-inset-margin-left
-      margin-right: $divider-inset-margin-right
       max-width: $divider-inset-max-width
+
+      @include ltr()
+        margin-left: $divider-inset-margin
+
+      @include rtl()
+        margin-right: $divider-inset-margin
 
     &.v-divider--vertical
       margin-bottom: $divider-vertical-inset-margin-bottom
