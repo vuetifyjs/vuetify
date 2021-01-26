@@ -1,4 +1,5 @@
 export * from './border-radius'
+export * from './color'
 export * from './dimensions'
 export * from './elevation'
 export * from './position'

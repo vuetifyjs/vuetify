@@ -1,79 +1,47 @@
-import { computed, ComputedRef, isRef, Ref } from 'vue'
+// Utilities
+import { computed } from 'vue'
+import { isCssColor } from '@/util/colorUtils'
 
-export interface ColorProps {
-  color?: string
-}
+// Types
+import type { Ref } from 'vue'
 
-export const colorProps = (defaults: Partial<ColorProps> = {}) => ({
-  color: {
-    type: String,
-    default: defaults.color,
-  },
-})
+export function useTextColor (color: Ref<string | null | undefined>) {
+  const cssColor = computed(() => isCssColor(color.value))
 
-const isCssColor = (color: string): boolean => !!color && !!color.match(/^(#|(rgb|hsl)a?\()/)
-const isProps = <T>(props: T | RefValue): props is T => !isRef(props)
-
-type PropValue = string | null | undefined
-type RefValue = Readonly<Ref<PropValue>>
-type ColorData = { class: Record<string, boolean> } | { style: Record<string, string> } | {}
-
-type TextColor = {
-  textColor: ComputedRef<ColorData>
-}
-
-export function useTextColor (props: ColorProps | RefValue): TextColor
-export function useTextColor<T extends Record<string, any>> (props: T, prop: keyof T): TextColor
-export function useTextColor<T extends Record<string, any>> (props: T | RefValue, prop: keyof T = 'color'): TextColor {
-  const textColor = computed(() => {
-    const color: PropValue = isProps(props) ? props[prop] : props.value
-
-    if (!color) return {}
-
-    if (isCssColor(color)) {
-      return {
-        style: {
-          color,
-          'caret-color': color,
-        },
-      }
-    }
-
-    const [colorName, colorModifier] = color.toString().trim().split(' ', 2)
+  const textColorStyles = computed(() => {
+    if (!color.value || !cssColor.value) return {}
 
     return {
-      class: {
-        [`${colorName}--text`]: true,
-        ...(colorModifier && { [`text--${colorModifier}`]: true }),
-      },
+      color: color.value,
+      'caret-color': color.value,
     }
   })
 
-  return { textColor }
+  const textColorClasses = computed(() => {
+    if (!color.value || cssColor.value) return null
+
+    return `text-${color.value}`
+  })
+
+  return { textColorStyles, textColorClasses }
 }
 
-type BackgroundColor = {
-  backgroundColor: ComputedRef<ColorData>
-}
+export function useBackgroundColor (color: Ref<string | null | undefined>) {
+  const cssColor = computed(() => isCssColor(color.value))
 
-export function useBackgroundColor (props: ColorProps | RefValue): BackgroundColor
-export function useBackgroundColor<T extends Record<string, any>> (props: T, prop: keyof T): BackgroundColor
-export function useBackgroundColor<T extends Record<string, any>> (props: T | RefValue, prop: keyof T = 'color'): BackgroundColor {
-  const backgroundColor = computed(() => {
-    const color: PropValue = isProps(props) ? props[prop] : props.value
-
-    if (!color) return {}
-
-    if (isCssColor(color)) {
-      return {
-        style: { 'background-color': color },
-      }
-    }
+  const backgroundColorStyles = computed(() => {
+    if (!color.value || !isCssColor(color.value)) return {}
 
     return {
-      class: { [color]: true },
+      'background-color': color.value,
     }
   })
 
-  return { backgroundColor }
+  const backgroundColorClasses = computed(() => {
+    if (!color.value || cssColor.value) return null
+
+    return `bg-${color.value}`
+  })
+
+  return { backgroundColorStyles, backgroundColorClasses }
 }
