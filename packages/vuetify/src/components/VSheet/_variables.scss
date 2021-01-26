@@ -3,7 +3,7 @@
 // Defaults
 $sheet-border-color: $border-color-root !default;
 $sheet-border-style: $border-style-root !default;
-$sheet-border-width: map-get($borders, 0) !default;
+$sheet-border-width: 0 !default;
 $sheet-elevation: 0 !default;
 
 $sheet: () !default;
