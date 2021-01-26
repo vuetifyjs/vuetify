@@ -4,43 +4,47 @@ import VDivider from '../VDivider'
 // Utilities
 import { createTheme, VuetifyThemeSymbol } from '@/composables'
 import { mount } from '@vue/test-utils'
-import { nextTick } from 'vue'
 import { VuetifySymbol } from '@/framework'
 
 describe('VDivider', () => {
-  const provide: any = {
-    [VuetifySymbol as symbol]: { defaults: { global: {} } },
-    [VuetifyThemeSymbol as symbol]: createTheme(),
+  function mountFunction (options = {}) {
+    return mount(VDivider, {
+      global: {
+        provide: {
+          [VuetifySymbol as symbol]: { defaults: { global: {} } },
+          [VuetifyThemeSymbol as symbol]: createTheme(),
+        },
+      },
+      ...options,
+    })
   }
 
   it('should match a snapshot', () => {
-    const wrapper = mount(VDivider, {
-      global: { provide },
-    })
+    const wrapper = mountFunction()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should have correct a11y attributes', async () => {
-    const wrapper = mount(VDivider, {
-      global: { provide },
-    })
+  it.each([
+    [{ length: 256 }, 'max-width: 256px;'],
+    [{ length: '128', vertical: true }, 'max-height: 128px;'],
+    [{ thickness: 2 }, 'border-top-width: 2px;'],
+    [{ thickness: '5', vertical: true }, 'border-right-width: 5px;'],
+  ])('should have correct styles for %s', (propsData, expected) => {
+    const wrapper = mountFunction({ propsData })
 
-    expect(wrapper.attributes().ariaorientation).toBe('horizontal')
-    expect(wrapper.attributes().role).toBe('separator')
+    expect(wrapper.attributes('style')).toEqual(expected)
+  })
 
-    wrapper.setProps({ vertical: true })
+  it.each([
+    [{}, ['horizontal', 'separator']],
+    [{ vertical: true }, ['vertical', 'separator']],
+    [{ role: 'foo' }, [undefined, 'foo']],
+  ])('should have correct styles for %s', (propsData, expected) => {
+    const wrapper = mountFunction({ propsData })
+    const [ariaorientation, role] = expected
 
-    await nextTick()
-
-    expect(wrapper.attributes().ariaorientation).toBe('vertical')
-    expect(wrapper.attributes().role).toBe('separator')
-
-    wrapper.setProps({ vertical: false, role: 'foo' })
-
-    await nextTick()
-
-    expect(wrapper.attributes().ariaorientation).toBeUndefined()
-    expect(wrapper.attributes().role).toBe('foo')
+    expect(wrapper.attributes().ariaorientation).toBe(ariaorientation)
+    expect(wrapper.attributes().role).toBe(role)
   })
 })
