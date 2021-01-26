@@ -10,7 +10,7 @@ import makeProps from '@/util/makeProps'
 import { useTheme } from '@/composables'
 
 // Types
-type DividerKey = 'maxHeight' | 'maxWidth' | 'minHeight' | 'minWidth'
+type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'maxHeight' | 'maxWidth'
 type DividerStyles = Partial<Record<DividerKey, string>>
 
 export default defineComponent({
@@ -31,15 +31,11 @@ export default defineComponent({
       const styles: DividerStyles = {}
 
       if (props.length) {
-        const length = convertToUnit(props.length)
-
-        styles[props.vertical ? 'maxHeight' : 'maxWidth'] = length
+        styles[props.vertical ? 'maxHeight' : 'maxWidth'] = convertToUnit(props.length)
       }
 
       if (props.thickness) {
-        const length = convertToUnit(props.thickness)
-
-        styles[props.vertical ? 'minWidth' : 'minHeight'] = length
+        styles[props.vertical ? 'borderRightWidth' : 'borderTopWidth'] = convertToUnit(props.thickness)
       }
 
       return styles
