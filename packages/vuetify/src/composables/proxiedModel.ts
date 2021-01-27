@@ -1,5 +1,5 @@
 // Types
-import type { SetupContext, Ref } from 'vue'
+import type { Ref } from 'vue'
 
 // Utilities
 import { ref, computed, getCurrentInstance, capitalize } from 'vue'
@@ -11,7 +11,6 @@ export function useProxiedModel<
   Prop extends Extract<keyof Props, string>,
 > (
   props: Props,
-  context: SetupContext<any>,
   prop: Prop,
   defaultValue?: Props[Prop],
   transformIn: (value?: Props[Prop]) => Inner = (v: any) => v,
@@ -37,7 +36,7 @@ export function useProxiedModel<
     },
     set (newValue) {
       internal.value = newValue
-      context.emit(`update:${prop}`, transformOut(newValue))
+      vm?.emit(`update:${prop}`, transformOut(newValue))
     },
   })
 }

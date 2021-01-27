@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { defineComponent, h, nextTick, reactive, ref } from 'vue'
+import { defineComponent, h, nextTick, reactive } from 'vue'
 import { useGroup, useGroupItem } from '../'
 
 describe('group', () => {
@@ -23,8 +23,8 @@ describe('group', () => {
       props: {
         modelValue: Object,
       },
-      setup (props, context) {
-        useGroup(props, context, Symbol.for('test'))
+      setup (props) {
+        useGroup(props, Symbol.for('test'))
         return () => h('div', [
           h(GroupItemComponent, { value: { foo: 1 } }),
           h(GroupItemComponent, { value: { bar: 2 } }),
@@ -83,8 +83,8 @@ describe('group', () => {
         max: Number,
         disabled: Array,
       },
-      setup (props, context) {
-        return useGroup(props, context, Symbol.for('test'))
+      setup (props) {
+        return useGroup(props, Symbol.for('test'))
       },
       render () {
         return h('div', this.$slots.default?.() ?? [
@@ -265,8 +265,8 @@ describe('group', () => {
         max: Number,
         disabled: Array,
       },
-      setup (props, context) {
-        useGroup(props, context, Symbol.for('test'))
+      setup (props) {
+        useGroup(props, Symbol.for('test'))
         return () => h('div', [
           h(GroupItemComponent, { disabled: !!props.disabled?.[0] }),
           h(GroupItemComponent, { disabled: !!props.disabled?.[1] }),
