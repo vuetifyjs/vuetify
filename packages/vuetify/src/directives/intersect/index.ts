@@ -5,12 +5,12 @@ import type {
 } from 'vue'
 
 type ObserveHandler = (
+  isIntersecting: boolean,
   entries: IntersectionObserverEntry[],
   observer: IntersectionObserver,
-  isIntersecting: boolean,
 ) => void
 
-interface ObserveDirectiveBinding extends Omit<DirectiveBinding, 'modifiers'> {
+export interface ObserveDirectiveBinding extends Omit<DirectiveBinding, 'modifiers'> {
   value: ObserveHandler | { handler: ObserveHandler, options?: IntersectionObserverInit }
   modifiers: {
     once?: boolean
@@ -42,7 +42,7 @@ function mounted (el: HTMLElement, binding: ObserveDirectiveBinding) {
     ) {
       const isIntersecting = Boolean(entries.find(entry => entry.isIntersecting))
 
-      handler(entries, observer, isIntersecting)
+      handler(isIntersecting, entries, observer)
     }
 
     // If has already been initted and

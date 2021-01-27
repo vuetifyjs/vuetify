@@ -1,47 +1,51 @@
-// @ts-nocheck
-/* eslint-disable */
-
 // Components
-// import VImg from '../VImg'
+import VImg from '../VImg'
 
 // Utilities
-import {
-  mount,
-  Wrapper,
-} from '@vue/test-utils'
+import { h } from 'vue'
+import { mount } from '@vue/test-utils'
+import * as framework from '@/framework'
 
-describe.skip('VImg.ts', () => {
-  type Instance = InstanceType<typeof VImg>
-  let mountFunction: (options?: object) => Wrapper<Instance>
-
-  beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VImg, {
-        ...options,
-        propsData: {
-          eager: true,
-          ...options.propsData,
-        },
-      })
-    }
+function mountFunction (options: any = {}) {
+  return mount(VImg, {
+    ...options,
+    propsData: {
+      eager: true,
+      ...options.propsData,
+    },
   })
+}
 
+describe('VImg', () => {
   const LOAD_FAILURE_SRC = 'LOAD_FAILURE_SRC'
   const LOAD_SUCCESS_SRC = 'LOAD_SUCCESS_SRC'
+
+  beforeEach(() => {
+    jest.spyOn(framework, 'useVuetify').mockReturnValue({
+      defaults: { global: {} },
+    })
+  })
+  afterEach(() => {
+    jest.spyOn(framework, 'useVuetify').mockRestore()
+  })
 
   beforeAll(() => {
     jest.useFakeTimers()
     Object.defineProperty((global as any).Image.prototype, 'src', {
-      get () {},
+      get () {
+        return this._currentSrc
+      },
       set (src) {
         this._currentSrc = src
         if (src === LOAD_FAILURE_SRC) {
-          setTimeout(() => this.onerror && this.onerror(new Error('mocked error')))
+          setTimeout(() => {
+            this.dispatchEvent(new ErrorEvent('error'))
+          })
         } else {
           setTimeout(() => {
             this._naturalWidth = 1600
             this._naturalHeight = 900
-            this.onload && this.onload()
+            this.dispatchEvent(new Event('load', { bubbles: false }))
           })
         }
       },
@@ -76,6 +80,20 @@ describe.skip('VImg.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render a <picture>', async () => {
+    const wrapper = mountFunction({
+      propsData: { src: LOAD_SUCCESS_SRC },
+      slots: {
+        sources: () => h('source', { srcset: LOAD_SUCCESS_SRC + '.webp' }),
+      },
+    })
+
+    jest.runOnlyPendingTimers()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should display placeholders', async () => {
     const wrapper = mountFunction({
       propsData: {
@@ -83,7 +101,7 @@ describe.skip('VImg.ts', () => {
         lazySrc: 'lazy_src',
       },
       slots: {
-        placeholder: { render: h => h('div', ['loading...']) },
+        placeholder: () => h('div', ['loading...']),
       },
     })
 
@@ -96,19 +114,34 @@ describe.skip('VImg.ts', () => {
   })
 
   it('should emit errors', () => {
+    const error = jest.fn()
+    mountFunction({
+      propsData: {
+        src: LOAD_FAILURE_SRC,
+        onError: error,
+      },
+    })
+
+    jest.runOnlyPendingTimers()
+
+    expect(error).toHaveBeenCalledTimes(1)
+    expect(error).toHaveBeenCalledWith(LOAD_FAILURE_SRC)
+  })
+
+  it('should display error slot', async () => {
     const wrapper = mountFunction({
       propsData: {
         src: LOAD_FAILURE_SRC,
       },
+      slots: {
+        error: () => h('div', 'Error loading image'),
+      },
     })
 
-    const error = jest.fn()
-    wrapper.vm.$on('error', error)
-
     jest.runOnlyPendingTimers()
+    await wrapper.vm.$nextTick()
 
-    expect(error).toHaveBeenCalledTimes(2)
-    expect(error).toHaveBeenCalledWith(LOAD_FAILURE_SRC)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should have aria attributes', async () => {
@@ -154,8 +187,6 @@ describe.skip('VImg.ts', () => {
       },
     })
 
-    jest.runOnlyPendingTimers()
-
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -171,7 +202,7 @@ describe.skip('VImg.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.setProps({ src: LOAD_SUCCESS_SRC + 1 })
+    await wrapper.setProps({ src: `${LOAD_SUCCESS_SRC}-1` })
 
     jest.runOnlyPendingTimers()
     await wrapper.vm.$nextTick()
@@ -188,8 +219,7 @@ describe.skip('VImg.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.setProps({ src: LOAD_SUCCESS_SRC + 1 })
-
+    await wrapper.setProps({ src: `${LOAD_SUCCESS_SRC}-1` })
     jest.runOnlyPendingTimers()
     await wrapper.vm.$nextTick()
 
