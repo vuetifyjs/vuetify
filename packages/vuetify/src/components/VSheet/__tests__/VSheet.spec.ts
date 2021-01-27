@@ -1,50 +1,26 @@
-// @ts-nocheck
-/* eslint-disable */
-
-// Libraries
-// import Vue from 'vue'
-
 // Components
-// import VSheet from '../VSheet'
+import VSheet from '..'
 
 // Utilities
-import {
-  shallowMount,
-  Wrapper,
-} from '@vue/test-utils'
+import { createTheme, VuetifyThemeSymbol } from '@/composables'
+import { mount } from '@vue/test-utils'
+import { VuetifySymbol } from '@/framework'
 
-describe.skip('VSheet.ts', () => {
-  let mountFunction: (options?: object) => Wrapper<Vue>
+describe('VSheet', () => {
+  function mountFunction (options = {}) {
+    return mount(VSheet, {
+      global: {
+        provide: {
+          [VuetifySymbol as symbol]: { defaults: { global: {} } },
+          [VuetifyThemeSymbol as symbol]: createTheme(),
+        },
+      },
+      ...options,
+    })
+  }
 
-  beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return shallowMount(VSheet, options)
-    }
-  })
-
-  it('should render component and match snapshot', () => {
+  it('should match a snapshot', () => {
     const wrapper = mountFunction()
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render a colored paper', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        color: 'blue lighten-1',
-      },
-    })
-
-    expect(wrapper.element.classList).toContain('blue')
-    expect(wrapper.element.classList).toContain('lighten-1')
-  })
-
-  it('should render a tile paper', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        tile: true,
-      },
-    })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
