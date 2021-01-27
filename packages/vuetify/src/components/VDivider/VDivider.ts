@@ -16,14 +16,12 @@ type DividerStyles = Partial<Record<DividerKey, string>>
 export default defineComponent({
   name: 'VDivider',
 
-  props: {
-    ...makeProps({
-      inset: Boolean,
-      length: [Number, String],
-      thickness: [Number, String],
-      vertical: Boolean,
-    }),
-  },
+  props: makeProps({
+    inset: Boolean,
+    length: [Number, String],
+    thickness: [Number, String],
+    vertical: Boolean,
+  }),
 
   setup (props, { attrs }) {
     const { themeClasses } = useTheme()
