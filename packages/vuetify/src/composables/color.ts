@@ -1,11 +1,18 @@
 // Utilities
-import { computed } from 'vue'
+import { computed, isRef } from 'vue'
 import { isCssColor } from '@/util/colorUtils'
 
 // Types
 import type { Ref } from 'vue'
 
-export function useTextColor (color: Ref<string | null | undefined>) {
+type ColorValue = string | null | undefined
+type TextColorData = { textColorStyles: Ref<{ color?: string, 'caret-color'?: string }>, textColorClasses: Ref<string | null> }
+type BackgroundColorData = { backgroundColorStyles: Ref<{ 'background-color'?: string }>, backgroundColorClasses: Ref<string | null> }
+
+export function useTextColor (color: Ref<ColorValue>): TextColorData
+export function useTextColor <T extends Record<string, any>>(props: T, name: keyof T): TextColorData
+export function useTextColor <T extends Record<string, any>> (props: T | Ref<ColorValue>, name?: keyof T): TextColorData {
+  const color: Ref<ColorValue> = isRef(props) ? props : computed(() => name && props[name])
   const cssColor = computed(() => isCssColor(color.value))
 
   const textColorStyles = computed(() => {
@@ -26,7 +33,10 @@ export function useTextColor (color: Ref<string | null | undefined>) {
   return { textColorStyles, textColorClasses }
 }
 
-export function useBackgroundColor (color: Ref<string | null | undefined>) {
+export function useBackgroundColor (color: Ref<ColorValue>): BackgroundColorData
+export function useBackgroundColor <T extends Record<string, any>>(props: T, name: keyof T): BackgroundColorData
+export function useBackgroundColor <T extends Record<string, any>> (props: T | Ref<ColorValue>, name?: keyof T): BackgroundColorData {
+  const color: Ref<ColorValue> = isRef(props) ? props : computed(() => name && props[name])
   const cssColor = computed(() => isCssColor(color.value))
 
   const backgroundColorStyles = computed(() => {

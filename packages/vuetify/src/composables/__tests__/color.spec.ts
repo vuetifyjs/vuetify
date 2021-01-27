@@ -11,7 +11,7 @@ describe('color.ts', () => {
       const props = reactive({
         color: null as string | null,
       })
-      const data = useTextColor(toRef(props, 'color'))
+      const data = useTextColor(props, 'color')
       expect(data.textColorClasses.value).toBeNull()
       expect(data.textColorStyles.value).toEqual({})
 
@@ -30,6 +30,16 @@ describe('color.ts', () => {
         color: '#ff00ff',
       })
     })
+
+    it('should allow ref argument', () => {
+      const props = reactive({
+        color: 'primary',
+      })
+      const data = useTextColor(toRef(props, 'color'))
+
+      expect(data.textColorClasses.value).toEqual('text-primary')
+      expect(data.textColorStyles.value).toEqual({})
+    })
   })
 
   describe('useBackgroundColor', () => {
@@ -37,7 +47,7 @@ describe('color.ts', () => {
       const props = reactive({
         bg: null as string | null,
       })
-      const data = useBackgroundColor(toRef(props, 'bg'))
+      const data = useBackgroundColor(props, 'bg')
       expect(data.backgroundColorClasses.value).toBeNull()
       expect(data.backgroundColorStyles.value).toEqual({})
 
@@ -54,6 +64,16 @@ describe('color.ts', () => {
       expect(data.backgroundColorStyles.value).toEqual({
         'background-color': '#ff00ff',
       })
+    })
+
+    it('should allow ref argument', () => {
+      const props = reactive({
+        color: 'primary',
+      })
+      const data = useBackgroundColor(toRef(props, 'color'))
+
+      expect(data.backgroundColorClasses.value).toEqual('bg-primary')
+      expect(data.backgroundColorStyles.value).toEqual({})
     })
   })
 })
