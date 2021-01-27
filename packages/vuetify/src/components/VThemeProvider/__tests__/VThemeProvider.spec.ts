@@ -4,7 +4,7 @@ import { VThemeProvider } from '../VThemeProvider'
 // Utilities
 import { defineComponent, h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { createTheme, VuetifyThemeSymbol } from '@/composables'
+import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
 import { VuetifySymbol } from '@/framework'
 
 describe('VThemeProvider.ts', () => {

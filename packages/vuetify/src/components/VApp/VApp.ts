@@ -6,7 +6,7 @@ import { defineComponent, h } from 'vue'
 import makeProps from '@/util/makeProps'
 
 // Composables
-import { useTheme } from '@/composables'
+import { useTheme } from '@/composables/theme'
 
 export default defineComponent({
   name: 'VApp',

@@ -1,11 +1,11 @@
 // Composables
-import { makeBorderProps, useBorder } from '..'
+import { makeBorderProps, useBorder } from '../border'
 
 // Utilities
 import { mount } from '@vue/test-utils'
 
 // Types
-import type { BorderProps } from '..'
+import type { BorderProps } from '../border'
 
 describe('border.ts', () => {
   it('should create border props', () => {

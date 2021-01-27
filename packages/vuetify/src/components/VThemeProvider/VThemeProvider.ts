@@ -1,6 +1,6 @@
 // Utilities
 import { defineComponent, h } from 'vue'
-import { provideTheme } from '@/composables'
+import { provideTheme } from '@/composables/theme'
 import makeProps from '@/util/makeProps'
 
 export const VThemeProvider = defineComponent({

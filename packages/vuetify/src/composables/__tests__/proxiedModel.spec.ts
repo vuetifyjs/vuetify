@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils'
 import { defineComponent, h } from 'vue'
 
 // Composables
-import { useProxiedModel } from '..'
+import { useProxiedModel } from '../proxiedModel'
 
 const TestComponent = defineComponent({
   props: {

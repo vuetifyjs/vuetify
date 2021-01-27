@@ -7,7 +7,7 @@ import { convertToUnit } from '@/util/helpers'
 import makeProps from '@/util/makeProps'
 
 // Composables
-import { useTheme } from '@/composables'
+import { useTheme } from '@/composables/theme'
 
 // Types
 type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'maxHeight' | 'maxWidth'

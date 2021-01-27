@@ -1,6 +1,6 @@
 /* eslint-disable jest/no-commented-out-tests */
 
-import { createTheme } from '../'
+import { createTheme } from '../theme'
 
 describe('createTheme', () => {
   beforeEach(() => {

@@ -1,9 +1,9 @@
 import { inject } from 'vue'
-import { createTheme, VuetifyThemeSymbol } from './composables'
+import { createTheme, VuetifyThemeSymbol } from './composables/theme'
 
 // Types
 import type { InjectionKey, App } from 'vue'
-import type { ThemeOptions } from '@/composables'
+import type { ThemeOptions } from '@/composables/theme'
 
 export interface VuetifyComponentDefaults {
   [key: string]: Record<string, unknown>

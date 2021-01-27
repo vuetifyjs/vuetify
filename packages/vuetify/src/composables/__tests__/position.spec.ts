@@ -1,8 +1,8 @@
 // Utilities
-import { usePosition } from '..'
+import { usePosition } from '../position'
 
 // Types
-import type { PositionProps } from '..'
+import type { PositionProps } from '../position'
 
 describe('position.ts', () => {
   it.each([

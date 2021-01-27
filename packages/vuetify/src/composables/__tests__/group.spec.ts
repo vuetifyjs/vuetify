@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { defineComponent, h, nextTick, reactive } from 'vue'
-import { useGroup, useGroupItem } from '../'
+import { useGroup, useGroupItem } from '../group'
 
 describe('group', () => {
   describe('with complex values', () => {

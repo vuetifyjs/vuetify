@@ -1,9 +1,9 @@
 // Utilities
-import { makeBorderRadiusProps, useBorderRadius } from '..'
+import { makeBorderRadiusProps, useBorderRadius } from '../border-radius'
 import { mount } from '@vue/test-utils'
 
 // Types
-import type { BorderRadiusProps } from '..'
+import type { BorderRadiusProps } from '../border-radius'
 
 describe('border-radius.ts', () => {
   it('should create border-radius props', () => {
