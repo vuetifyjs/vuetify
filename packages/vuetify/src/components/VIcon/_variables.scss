@@ -1,8 +1,5 @@
 @import '../../styles/styles.sass';
 
-$icon-size: 24px !default;
-$icon-size-dense: 20px !default;
-
 $icon-sizes: () !default;
 $icon-sizes: map-deep-merge(
   (

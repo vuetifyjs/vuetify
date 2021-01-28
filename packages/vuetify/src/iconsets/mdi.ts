@@ -1,6 +1,13 @@
-import type { VuetifyIcons } from '@/composables/icons'
+// Utilities
+import { h } from 'vue'
 
-const icons: VuetifyIcons = {
+// Components
+import { VClassIcon } from '@/components'
+
+// Types
+import type { IconSet, IconAliases } from '@/composables/icons'
+
+const aliases: IconAliases = {
   complete: 'mdi-check',
   cancel: 'mdi-close-circle',
   close: 'mdi-close',
@@ -36,4 +43,8 @@ const icons: VuetifyIcons = {
   minus: 'mdi-minus',
 }
 
-export default icons
+const mdi: IconSet = {
+  component: props => h(VClassIcon, { ...props, class: [props.class, 'mdi'] }),
+}
+
+export { aliases, mdi }

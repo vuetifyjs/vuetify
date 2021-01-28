@@ -17,13 +17,13 @@ export const makeSizeProps = propsFactory({
 })
 
 // Effect
-export function useSizeClass (props: SizeProps) {
-  const sizeClass = computed(() => {
+export function useSize (props: SizeProps) {
+  const sizeClasses = computed(() => {
     if (!props.size) return 'v-size--default'
     else if (!predefinedSizes.includes(props.size)) return null
 
     return `v-size--${props.size}`
   })
 
-  return { sizeClass }
+  return { sizeClasses }
 }

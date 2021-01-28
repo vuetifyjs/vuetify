@@ -1,9 +1,13 @@
-// @ts-nocheck
-/* eslint-disable */
+// Utilities
+import { h } from 'vue'
 
-import { VuetifyIcons } from 'vuetify/types/services/icons'
+// Components
+import { VClassIcon } from '@/components'
 
-const icons: VuetifyIcons = {
+// Types
+import type { IconSet, IconAliases } from '@/composables/icons'
+
+const aliases: IconAliases = {
   complete: 'fas fa-check',
   cancel: 'fas fa-times-circle',
   close: 'fas fa-times',
@@ -39,4 +43,8 @@ const icons: VuetifyIcons = {
   minus: 'fas fa-minus',
 }
 
-export default icons
+const fa: IconSet = {
+  component: props => h(VClassIcon, props),
+}
+
+export { aliases, fa }

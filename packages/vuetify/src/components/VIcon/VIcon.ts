@@ -2,26 +2,40 @@ import './VIcon.sass'
 
 // Utilities
 import { computed, defineComponent, h } from 'vue'
-import { useIcon, makeSizeProps, useSizeClass } from '@/composables'
+import { makeSizeProps, useSize } from '@/composables/size'
+import { useIcon } from '@/composables/icons'
 import makeProps from '@/util/makeProps'
 
 // Types
-import type { PropType } from 'vue'
-import type { VuetifyIcon } from '@/composables'
+import type { Component, PropType } from 'vue'
+import type { IconValue } from '@/composables/icons'
 
-export const VSvgIcon = defineComponent({
-  name: 'VSvgIcon',
-  inheritAttrs: false,
+export const VComponentIcon = defineComponent({
+  name: 'VComponentIcon',
   props: {
     icon: {
-      type: String,
+      type: [String, Object] as PropType<IconValue>,
       required: true,
     },
     tag: {
       type: String,
       required: true,
     },
-    set: {
+  },
+  setup (props) {
+    return () => h(props.tag, [h(props.icon as Component)])
+  },
+})
+
+export const VSvgIcon = defineComponent({
+  name: 'VSvgIcon',
+  inheritAttrs: false,
+  props: {
+    icon: {
+      type: [String, Object] as PropType<IconValue>,
+      required: true,
+    },
+    tag: {
       type: String,
       required: true,
     },
@@ -47,22 +61,16 @@ export const VLigatureIcon = defineComponent({
   name: 'VLigatureIcon',
   props: {
     icon: {
-      type: String,
+      type: [String, Object] as PropType<IconValue>,
       required: true,
     },
     tag: {
       type: String,
       required: true,
     },
-    set: {
-      type: String,
-      required: true,
-    },
   },
   setup (props) {
-    return () => h(props.tag, {
-      class: props.set,
-    }, [props.icon])
+    return () => h(props.tag, [props.icon as string])
   },
 })
 
@@ -70,21 +78,17 @@ export const VClassIcon = defineComponent({
   name: 'VClassIcon',
   props: {
     icon: {
-      type: String,
+      type: [String, Object] as PropType<IconValue>,
       required: true,
     },
     tag: {
       type: String,
       required: true,
     },
-    set: {
-      type: String,
-      required: true,
-    },
   },
   setup (props) {
     return () => h(props.tag, {
-      class: [props.set, props.icon],
+      class: [props.icon],
     })
   },
 })
@@ -102,48 +106,40 @@ export default defineComponent({
       default: 'i',
     },
     icon: {
-      type: [String, Object] as PropType<VuetifyIcon>,
+      type: [String, Object] as PropType<IconValue>,
       required: true,
-    },
-    set: {
-      type: String,
-      default: 'mdi',
     },
     ...makeSizeProps(),
   }),
 
   setup (props, context) {
-    const { sizeClass } = useSizeClass(props)
+    const { sizeClasses } = useSize(props)
     const { icon } = useIcon(props)
 
-    const styles = computed(() => !sizeClass.value ? ({
+    const styles = computed(() => !sizeClasses.value ? ({
       'font-size': props.size,
       width: props.size,
       height: props.size,
     }) : null)
 
-    const hasClickListener = !!context.attrs.onClick
-    const tag = hasClickListener ? 'button' : props.tag
-
-    const classes = computed(() => ([
-      'v-icon',
-      'notranslate',
-      sizeClass.value,
-      {
-        'v-icon--disabled': props.disabled,
-        'v-icon--left': props.left,
-        'v-icon--right': props.right,
-        'v-icon--link': hasClickListener,
-      },
-    ]))
-
     return () => {
+      const hasClickListener = !!context.attrs.onClick
+      const tag = hasClickListener ? 'button' : props.tag
+
       return icon.value.component({
-        ...context.attrs,
         tag,
-        set: props.set,
         icon: icon.value.icon,
-        class: classes.value,
+        class: [
+          'v-icon',
+          'notranslate',
+          sizeClasses.value,
+          {
+            'v-icon--disabled': props.disabled,
+            'v-icon--left': props.left,
+            'v-icon--right': props.right,
+            'v-icon--link': hasClickListener,
+          },
+        ],
         style: styles.value,
         type: hasClickListener ? 'button' : undefined,
         'aria-hidden': !hasClickListener,

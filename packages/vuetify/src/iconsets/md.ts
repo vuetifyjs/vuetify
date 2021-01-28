@@ -1,9 +1,13 @@
-// @ts-nocheck
-/* eslint-disable */
+// Utilities
+import { h } from 'vue'
 
-import type { VuetifyIcons } from '../../../components/icons'
+// Components
+import { VLigatureIcon } from '@/components'
 
-const icons: VuetifyIcons = {
+// Types
+import type { IconSet, IconAliases } from '@/composables/icons'
+
+const aliases: IconAliases = {
   complete: 'check',
   cancel: 'cancel',
   close: 'close',
@@ -39,4 +43,8 @@ const icons: VuetifyIcons = {
   minus: 'remove',
 }
 
-export default icons
+const md: IconSet = {
+  component: props => h(VLigatureIcon, { ...props, class: [props.class, 'material-icons'] }),
+}
+
+export { aliases, md }
