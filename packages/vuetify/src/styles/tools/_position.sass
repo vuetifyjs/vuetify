@@ -1,0 +1,4 @@
+@mixin position($query: $query, $important: false)
+  @each $position in map-get($query, 'position')
+    &--#{$position}
+      position: #{$position} if($important, !important, null)

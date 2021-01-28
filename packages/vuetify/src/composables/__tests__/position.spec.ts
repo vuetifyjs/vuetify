@@ -10,8 +10,10 @@ describe('position.ts', () => {
     [{ position: false }, undefined],
     [{ position: 'absolute' }, 'position-absolute'],
     [{ position: 'fixed' }, 'position-fixed'],
+    [{ absolute: true }, 'foo--absolute'],
+    [{ fixed: true }, 'foo--fixed'],
   ])('should have proper classes', (props, expected) => {
-    const { positionClasses } = usePosition(props as PositionProps)
+    const { positionClasses } = usePosition(props as PositionProps, 'foo')
 
     expect(positionClasses.value).toEqual(expected)
   })
@@ -23,7 +25,7 @@ describe('position.ts', () => {
     [{ left: undefined }, {}],
     [{ right: false, left: '50' }, { left: '50px' }],
   ])('should have proper styles', (props, expected) => {
-    const { positionStyles } = usePosition(props)
+    const { positionStyles } = usePosition(props, 'bar')
 
     expect(positionStyles.value).toEqual(expected)
   })

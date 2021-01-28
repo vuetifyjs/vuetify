@@ -1,6 +1,20 @@
 @import '../../styles/styles.sass';
 
-$sheet-border-radius: 0 !default;
+// Defaults
+$sheet-border-color: $border-color-root !default;
+$sheet-border-style: $border-style-root !default;
+$sheet-border-width: 0 !default;
 $sheet-elevation: 0 !default;
-$sheet-outlined-border-width: thin !default;
-$sheet-shaped-border-radius: map-get($rounded, 'xl') $sheet-border-radius !default;
+$sheet-positions: absolute fixed !default;
+
+$sheet-query: () !default;
+$sheet-query: map-deep-merge(
+  (
+    'border-color': $sheet-border-color,
+    'border-style': $sheet-border-style,
+    'border-width': $sheet-border-width,
+    'elevation': $sheet-elevation,
+    'position': $sheet-positions
+  ),
+  $sheet-query
+);

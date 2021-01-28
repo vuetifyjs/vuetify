@@ -10,7 +10,9 @@ const positionValues = ['static', 'relative', 'fixed', 'absolute', 'sticky'] as 
 type Position = typeof positionValues[number]
 
 export interface PositionProps {
+  absolute?: boolean
   bottom?: boolean | number | string
+  fixed?: boolean
   left?: boolean | number | string
   position?: Position
   right?: boolean | number | string
@@ -19,7 +21,9 @@ export interface PositionProps {
 
 // Composables
 export const makePositionProps = propsFactory({
+  absolute: Boolean,
   bottom: [Boolean, Number, String],
+  fixed: Boolean,
   left: [Boolean, Number, String],
   position: {
     type: String as PropType<Position>,
@@ -29,10 +33,13 @@ export const makePositionProps = propsFactory({
   top: [Boolean, Number, String],
 })
 
-export function usePosition (props: PositionProps) {
+export function usePosition (props: PositionProps, name: string) {
   const targets = ['top', 'right', 'bottom', 'left'] as const
 
   const positionClasses = computed(() => {
+    if (props.fixed) return `${name}--fixed`
+    if (props.absolute) return `${name}--absolute`
+
     return props.position ? `position-${props.position}` : undefined
   })
 
