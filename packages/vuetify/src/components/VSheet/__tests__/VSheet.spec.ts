@@ -2,7 +2,7 @@
 import VSheet from '..'
 
 // Utilities
-import { createTheme, VuetifyThemeSymbol } from '@/composables'
+import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
 import { mount } from '@vue/test-utils'
 import { VuetifySymbol } from '@/framework'
 
