@@ -13,64 +13,35 @@ import { useTheme } from '@/composables/theme'
 // Utilities
 import { computed, defineComponent, h } from 'vue'
 import makeProps from '@/util/makeProps'
-// import { createSimpleFunctional } from '@/util'
 
-// export const VBannerContent = defineComponent((props, context) => {
-//   return () => h('div', { class: 'v-banner__content' }, context.slots)
-// })
-
-// (props, context) => {
-//   console.log(context.slots.default?.())
-
-//   return () => h('div', {
-//     class: 'v-banner__content',
-//   }, context.slots.default?.())
-// }
-
-export function VBannerContent () {
-  return h(
-    defineComponent({
-      render () {
-        return h('div', this.$slots.default?.())
-      },
-    })
-  )
-}
-
-export function VBannerContent1 () {
-  return h(
-    defineComponent({
-      setup (props, context) {
-        return () => h('div', context.slots.default?.())
-      },
-    })
-  )
-}
-
-export function VBannerContent2 () {
-  return h(defineComponent((props, context) => {
-    return () => h('div', context.slots.default?.())
-  }))
-}
-
-export function VBannerContent3 () {
+function VBannerContent () {
   return defineComponent({
     render () {
-      return h('div', this.$slots.default?.())
+      return h('div', {
+        class: 'v-banner__content',
+      }, this.$slots.default?.())
     },
   })
 }
 
-export const VBannerContent4 = defineComponent(function (props, context) {
-  return h('div', 'foobar')
-})
+function VBannerActions () {
+  return defineComponent({
+    render () {
+      return h('div', {
+        class: 'v-banner__actions',
+      }, this.$slots.actions?.())
+    },
+  })
+}
 
-export const x = defineComponent(function VBC (props, context) {
-  return h('div', context.slots.default?.())
-})
-
-const VBannerContent5 = (props, context) => {
-  return h('div', { class: 'v-banner__actions' }, context.slots.default?.())
+function VBannerThumbnail () {
+  return defineComponent({
+    render () {
+      return h('div', {
+        class: 'v-banner__thumbnail',
+      }, this.$slots.thumbnail?.())
+    },
+  })
 }
 
 export default defineComponent({
@@ -87,7 +58,7 @@ export default defineComponent({
     ...makeTagProps(),
   }),
 
-  setup (props, context) {
+  setup (props, { slots }) {
     const { themeClasses } = useTheme()
     const { borderClasses } = useBorder(props)
     const { borderRadiusClasses } = useBorderRadius(props)
@@ -101,25 +72,19 @@ export default defineComponent({
       }
     })
 
-    const children: any = [
-      VBannerContent5(props, context),
-      // VBannerContent1(),
-      // VBannerContent2(),
-      // h(VBannerContent3()),
-      // h(VBannerContent4),
-    ]
+    const children = [h(VBannerContent(), props, slots)]
 
-    // if (slots.actions) {
-    //   children.push(h('div', { class: 'v-banner__actions' }, slots.actions?.()))
-    // }
+    if (slots.actions) {
+      children.push(
+        h(VBannerActions(), props, slots)
+      )
+    }
 
-    // if (props.avatar || props.icon || slots.thumbnail) {
-    //   children.unshift(
-    //     h('div', { class: 'v-banner__thumbnail' }, [
-    //       slots.thumbnail?.(),
-    //     ])
-    //   )
-    // }
+    if (props.avatar || props.icon || slots.thumbnail) {
+      children.unshift(
+        h(VBannerThumbnail(), props, slots)
+      )
+    }
 
     return () => (
       h(props.tag, {
