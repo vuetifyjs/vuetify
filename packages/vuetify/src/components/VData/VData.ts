@@ -158,7 +158,7 @@ export default Vue.extend({
     computedItems (): any[] {
       let items = this.filteredItems.slice()
 
-      if (!this.disableSort && this.serverItemsLength <= 0) {
+      if ((!this.disableSort || this.internalOptions.groupBy.length) && this.serverItemsLength <= 0) {
         items = this.sortItems(items)
       }
 
@@ -348,8 +348,13 @@ export default Vue.extend({
       }
     },
     sortItems (items: any[]): any[] {
-      let sortBy = this.internalOptions.sortBy
-      let sortDesc = this.internalOptions.sortDesc
+      let sortBy: string[] = []
+      let sortDesc: boolean[] = []
+
+      if (!this.disableSort) {
+        sortBy = this.internalOptions.sortBy
+        sortDesc = this.internalOptions.sortDesc
+      }
 
       if (this.internalOptions.groupBy.length) {
         sortBy = [...this.internalOptions.groupBy, ...sortBy]
