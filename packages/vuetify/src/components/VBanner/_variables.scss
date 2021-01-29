@@ -1,9 +1,44 @@
 @import '../../styles/styles.sass';
 
+// Defaults
+$banner-border-color: $border-color-root !default;
+$banner-border-radius: map-get($rounded, 0) !default;
+$banner-border-style: $border-style-root !default;
+$banner-border-width: 0 0 thin 0 !default;
+$banner-elevation: 0 !default;
+$banner-font-size: map-deep-get($headings, 'body-2', 'size') !default;
+$banner-positions: absolute fixed sticky !default;
+$banner-max-width: 720px !default;
+$banner-min-width: 344px !default;
+
+// Mobile
+$banner-mobile-padding: 10px 8px 8px 16px !default;
+
+// Desktop
+$banner-desktop-padding: 8px 8px 8px 24px !default;
+$banner-desktop-padding-rtl: 24px 8px 8px 8px !default;
+
+$banner-query: () !default;
+$banner-query: map-deep-merge(
+  (
+    'border-color': $banner-border-color,
+    'border-radius': $banner-border-radius,
+    'border-style': $banner-border-style,
+    'border-width': $banner-border-width,
+    'font-size': $banner-font-size,
+    'elevation': $banner-elevation,
+    'position': $banner-positions
+  ),
+  $banner-query
+);
+
+
+
+
+
+
 $banner-actions-start-margin: 90px !default;
 $banner-actions-margin: 8px !default;
-$banner-border-radius: 0 !default;
-$banner-elevation: 0 !default;
 $banner-line-height: 20px !default;
 $banner-start-padding: 24px !default;
 $banner-end-padding: 8px !default;

@@ -1,167 +1,143 @@
-// @ts-nocheck
-/* eslint-disable */
-
 // Styles
 import './VBanner.sass'
 
-// Extensions
-import VSheet from '../VSheet'
-
-// Components
-import VAvatar from '../VAvatar'
-import VIcon from '../VIcon'
-import { VExpandTransition } from '../transitions'
-
-// Mixins
-import Mobile from '../../mixins/mobile'
-import Toggleable from '../../mixins/toggleable'
+// Composables
+import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makePositionProps, usePosition } from '@/composables/position'
+import { makeTagProps } from '@/composables/tag'
+import { useTheme } from '@/composables/theme'
 
 // Utilities
-import mixins from '../../util/mixins'
-import {
-  convertToUnit,
-  getSlot,
-} from '../../util/helpers'
+import { computed, defineComponent, h } from 'vue'
+import makeProps from '@/util/makeProps'
+// import { createSimpleFunctional } from '@/util'
 
-// Typeslint
-import { VNode } from 'vue'
+// export const VBannerContent = defineComponent((props, context) => {
+//   return () => h('div', { class: 'v-banner__content' }, context.slots)
+// })
 
-/* @vue/component */
-export default mixins(
-  VSheet,
-  Mobile,
-  Toggleable
-).extend({
-  name: 'v-banner',
+// (props, context) => {
+//   console.log(context.slots.default?.())
 
-  inheritAttrs: false,
+//   return () => h('div', {
+//     class: 'v-banner__content',
+//   }, context.slots.default?.())
+// }
 
-  props: {
-    app: Boolean,
+export function VBannerContent () {
+  return h(
+    defineComponent({
+      render () {
+        return h('div', this.$slots.default?.())
+      },
+    })
+  )
+}
+
+export function VBannerContent1 () {
+  return h(
+    defineComponent({
+      setup (props, context) {
+        return () => h('div', context.slots.default?.())
+      },
+    })
+  )
+}
+
+export function VBannerContent2 () {
+  return h(defineComponent((props, context) => {
+    return () => h('div', context.slots.default?.())
+  }))
+}
+
+export function VBannerContent3 () {
+  return defineComponent({
+    render () {
+      return h('div', this.$slots.default?.())
+    },
+  })
+}
+
+export const VBannerContent4 = defineComponent(function (props, context) {
+  return h('div', 'foobar')
+})
+
+export const x = defineComponent(function VBC (props, context) {
+  return h('div', context.slots.default?.())
+})
+
+const VBannerContent5 = (props, context) => {
+  return h('div', { class: 'v-banner__actions' }, context.slots.default?.())
+}
+
+export default defineComponent({
+  name: 'VBanner',
+
+  props: makeProps({
+    avatar: String,
     icon: String,
-    iconColor: String,
-    singleLine: Boolean,
-    sticky: Boolean,
-    value: {
-      type: Boolean,
-      default: true,
-    },
-  },
+    ...makeBorderProps(),
+    ...makeBorderRadiusProps(),
+    ...makeDimensionProps(),
+    ...makeElevationProps(),
+    ...makePositionProps(),
+    ...makeTagProps(),
+  }),
 
-  computed: {
-    classes (): object {
+  setup (props, context) {
+    const { themeClasses } = useTheme()
+    const { borderClasses } = useBorder(props)
+    const { borderRadiusClasses } = useBorderRadius(props)
+    const { dimensionStyles } = useDimension(props)
+    const { elevationClasses } = useElevation(props)
+    const { positionClasses, positionStyles } = usePosition(props, 'v-banner')
+
+    const bannerClasses = computed(() => {
       return {
-        ...VSheet.options.computed.classes.call(this),
-        'v-banner--has-icon': this.hasIcon,
-        'v-banner--is-mobile': this.isMobile,
-        'v-banner--single-line': this.singleLine,
-        'v-banner--sticky': this.isSticky,
+
       }
-    },
-    hasIcon (): boolean {
-      return Boolean(this.icon || this.$slots.icon)
-    },
-    isSticky (): boolean {
-      return this.sticky || this.app
-    },
-    styles (): object {
-      const styles: Record<string, any> = { ...VSheet.options.computed.styles.call(this) }
+    })
 
-      if (this.isSticky) {
-        const top = !this.app
-          ? 0
-          : (this.$vuetify.application.bar + this.$vuetify.application.top)
+    const children: any = [
+      VBannerContent5(props, context),
+      // VBannerContent1(),
+      // VBannerContent2(),
+      // h(VBannerContent3()),
+      // h(VBannerContent4),
+    ]
 
-        styles.top = convertToUnit(top)
-        styles.position = 'sticky'
-        styles.zIndex = 1
-      }
+    // if (slots.actions) {
+    //   children.push(h('div', { class: 'v-banner__actions' }, slots.actions?.()))
+    // }
 
-      return styles
-    },
-  },
+    // if (props.avatar || props.icon || slots.thumbnail) {
+    //   children.unshift(
+    //     h('div', { class: 'v-banner__thumbnail' }, [
+    //       slots.thumbnail?.(),
+    //     ])
+    //   )
+    // }
 
-  methods: {
-    /** @public */
-    toggle () {
-      this.isActive = !this.isActive
-    },
-    iconClick (e: MouseEvent) {
-      this.$emit('click:icon', e)
-    },
-    genIcon () {
-      if (!this.hasIcon) return undefined
-
-      let content
-
-      if (this.icon) {
-        content = this.$createElement(VIcon, {
-          props: {
-            color: this.iconColor,
-            size: 28,
-          },
-        }, [this.icon])
-      } else {
-        content = this.$slots.icon
-      }
-
-      return this.$createElement(VAvatar, {
-        staticClass: 'v-banner__icon',
-        props: {
-          color: this.color,
-          size: 40,
-        },
-        on: {
-          click: this.iconClick,
-        },
-      }, [content])
-    },
-    genText () {
-      return this.$createElement('div', {
-        staticClass: 'v-banner__text',
-      }, this.$slots.default)
-    },
-    genActions () {
-      const children = getSlot(this, 'actions', {
-        dismiss: () => this.isActive = false,
-      })
-
-      if (!children) return undefined
-
-      return this.$createElement('div', {
-        staticClass: 'v-banner__actions',
+    return () => (
+      h(props.tag, {
+        class: [
+          'v-banner',
+          bannerClasses.value,
+          themeClasses.value,
+          borderClasses.value,
+          borderRadiusClasses.value,
+          elevationClasses.value,
+          positionClasses.value,
+        ],
+        style: [
+          dimensionStyles.value,
+          positionStyles.value,
+        ],
+        role: 'banner',
       }, children)
-    },
-    genContent () {
-      return this.$createElement('div', {
-        staticClass: 'v-banner__content',
-      }, [
-        this.genIcon(),
-        this.genText(),
-      ])
-    },
-    genWrapper () {
-      return this.$createElement('div', {
-        staticClass: 'v-banner__wrapper',
-      }, [
-        this.genContent(),
-        this.genActions(),
-      ])
-    },
-  },
-
-  render (h): VNode {
-    return h(VExpandTransition, [
-      h('div', this.setBackgroundColor(this.color, {
-        staticClass: 'v-banner',
-        attrs: this.attrs$,
-        class: this.classes,
-        style: this.styles,
-        directives: [{
-          name: 'show',
-          value: this.isActive,
-        }],
-      }), [this.genWrapper()]),
-    ])
+    )
   },
 })
