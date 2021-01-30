@@ -14,7 +14,19 @@ import { useTheme } from '@/composables/theme'
 import { computed, defineComponent, h } from 'vue'
 import makeProps from '@/util/makeProps'
 
-function VBannerContent () {
+export function VBannerActions () {
+  return defineComponent({
+    render () {
+      if (!this.$slots.actions) return undefined
+
+      return h('div', {
+        class: 'v-banner__actions',
+      }, this.$slots.actions?.())
+    },
+  })
+}
+
+export function VBannerContent () {
   return defineComponent({
     render () {
       return h('div', {
@@ -24,19 +36,20 @@ function VBannerContent () {
   })
 }
 
-function VBannerActions () {
+export function VBannerThumbnail () {
   return defineComponent({
-    render () {
-      return h('div', {
-        class: 'v-banner__actions',
-      }, this.$slots.actions?.())
+    props: {
+      avatar: String,
+      icon: String,
     },
-  })
-}
 
-function VBannerThumbnail () {
-  return defineComponent({
     render () {
+      if (
+        !this.$slots.thumbnail &&
+        !this.$props.avatar &&
+        !this.$props.icon
+      ) return undefined
+
       return h('div', {
         class: 'v-banner__thumbnail',
       }, this.$slots.thumbnail?.())
@@ -72,20 +85,6 @@ export default defineComponent({
       }
     })
 
-    const children = [h(VBannerContent(), props, slots)]
-
-    if (slots.actions) {
-      children.push(
-        h(VBannerActions(), props, slots)
-      )
-    }
-
-    if (props.avatar || props.icon || slots.thumbnail) {
-      children.unshift(
-        h(VBannerThumbnail(), props, slots)
-      )
-    }
-
     return () => (
       h(props.tag, {
         class: [
@@ -102,7 +101,11 @@ export default defineComponent({
           positionStyles.value,
         ],
         role: 'banner',
-      }, children)
+      }, [
+        h(VBannerThumbnail(), props, slots),
+        h(VBannerContent(), props, slots),
+        h(VBannerActions(), props, slots),
+      ])
     )
   },
 })
