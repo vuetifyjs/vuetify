@@ -47,12 +47,12 @@ module.exports = {
   mode: isProd ? 'production' : 'development',
   devtool: 'source-map',
   resolve: {
-    extensions: ['.ts', '.mjs', '.js', '.vue', '.json']
+    extensions: ['.ts', '.tsx', '.mjs', '.js', '.vue', '.json']
   },
   module: {
     rules: [
       {
-        test: /\.[jt]s$/,
+        test: /\.[jt]sx?$/,
         use: 'babel-loader',
         exclude: /node_modules/
       },
