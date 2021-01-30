@@ -61,6 +61,8 @@ v-tabs-slider description -->
 
 </alert>
 
+<promoted-ad slug="vuetify-zero-theme-pro" />
+
 ## Examples
 
 ### Props

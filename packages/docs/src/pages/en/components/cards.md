@@ -29,6 +29,8 @@ A card has 4 basic components, `v-card-title`, `v-card-subtitle`, `v-card-text` 
 - [v-card-text](/api/v-card-text)
 - [v-card-title](/api/v-card-title)
 
+<promoted-ad slug="vuetify-zero-theme-pro" />
+
 ## Functional Components
 
 ### v-card-actions
