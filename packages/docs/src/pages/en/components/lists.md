@@ -65,6 +65,8 @@ v-list-item-subtitle description
 
 v-list-item-title description -->
 
+<promoted-ad slug="vuetify-lux-admin-pro" />
+
 ## Caveats
 
 <alert type="info">
