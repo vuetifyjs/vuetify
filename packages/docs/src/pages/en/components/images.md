@@ -25,8 +25,6 @@ The `v-img` component is packed with features to support rich media. Combined wi
 
 - [v-img](/api/v-img)
 
-<promoted-ad slug="vuetify-zero-theme-pro" />
-
 ## Caveats
 
 <alert type="info">
@@ -34,6 +32,8 @@ The `v-img` component is packed with features to support rich media. Combined wi
   The `v-img` component uses the [v-intersect](/directives/intersect) directive which requires a [Polyfill](/directives/intersect#polyfill) for IE11 and Safari. If a browser that does not support this functionality is detected, the image will still load as normal.
 
 </alert>
+
+<promoted-ad slug="vuetify-zero-theme-pro" />
 
 ## Examples
 

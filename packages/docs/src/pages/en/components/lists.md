@@ -65,8 +65,6 @@ v-list-item-subtitle description
 
 v-list-item-title description -->
 
-<promoted-ad slug="vuetify-lux-admin-pro" />
-
 ## Caveats
 
 <alert type="info">
@@ -74,6 +72,8 @@ v-list-item-title description -->
   If you are looking for stateful list items, please check out [v-list-item-group](/components/list-item-groups).
 
 </alert>
+
+<promoted-ad slug="vuetify-lux-admin-pro" />
 
 ## Examples
 
