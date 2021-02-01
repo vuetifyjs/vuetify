@@ -77,6 +77,10 @@
       const matchMedia = this.getMatchMedia()
       if (!matchMedia) return
 
+      if (this.internalValue === 'system') {
+        this.dark = matchMedia.matches
+      }
+
       matchMedia.addEventListener('change', ({ matches }) => {
         if (this.system) {
           this.dark = matches
