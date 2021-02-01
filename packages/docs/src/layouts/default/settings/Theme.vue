@@ -81,11 +81,11 @@
         this.dark = matchMedia.matches
       }
 
-      matchMedia.addEventListener('change', ({ matches }) => {
+      matchMedia.onchange = ({ matches }) => {
         if (this.system) {
           this.dark = matches
         }
-      })
+      }
     },
 
     methods: {
