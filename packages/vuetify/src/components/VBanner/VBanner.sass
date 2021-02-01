@@ -6,46 +6,122 @@
   @include position($banner-query)
   @include rounded($banner-query)
 
-  align-items: center
-  display: flex
-  justify-content: space-between
-  flex-wrap: wrap
+  @include ltr()
+    padding-left: $banner-padding-start
+    padding-right: $banner-padding-end
+
+  @include rtl()
+    padding-right: $banner-padding-start
+    padding-left: $banner-padding-end
+
   font-size: $banner-font-size
-  min-width: $banner-min-width
+  padding-top: $banner-padding-top
+  padding-bottom: $banner-padding-bottom
   position: relative
-  width: 100%
+  width: $banner-width
   background-color: white !important
 
   &::after
     @include border($banner-query)
 
-    position: absolute
     bottom: 0
+    content: ''
     left: 0
+    position: absolute
     right: 0
     top: auto
-    content: ''
 
-  &--is-mobile
-    max-width: $banner-max-width
-
-  &--single-line &__content
-    // padding-top: 8px
+  &__actions,
+  &__content,
+  &__sizer
+    display: flex
+    flex: 1 1 auto
 
   &__actions
-    align-self: flex-end
-    display: inline-flex
+    align-items: flex-end
     justify-content: flex-end
-    margin-left: 90px
-    flex: 1 1 auto
-    padding: 8px
+
+    @include ltr()
+      margin-left: $banner-actions-margin-start
+
+    @include rtl()
+      margin-right: $banner-actions-margin-start
 
   &__content
     align-items: center
-    display: flex
-    flex: 1 1 auto
-    line-height: 20px
-    padding: 16px 24px 16px 24px
+    line-height: $banner-content-line-height
+    padding-bottom: $banner-content-padding-bottom
+
+  &__sizer
+    margin: 0 auto
+    max-width: $banner-sizer-max-width
 
   &__thumbnail
-    padding: 0 0 0 16px
+    border-radius: $banner-border-radius
+    flex: 0 1 auto
+
+    @include ltr()
+      margin-left: $banner-thumbnail-margin-start
+      margin-right: $banner-thumbnail-margin-end
+
+    @include rtl()
+      margin-right: $banner-thumbnail-margin-start
+      margin-left: $banner-thumbnail-margin-end
+
+
+    &__avatar
+      border-radius: $banner-avatar-border-radius
+
+  &--has-thumbnail
+    @include ltr()
+      padding-left: $banner-thumbnail-padding-start
+
+    @include rtl()
+      padding-right: $banner-thumbnail-padding-start
+
+  &--single-line
+    padding-top: $banner-single-line-padding-top
+
+    .v-banner__content
+      padding-bottom: $banner-single-line-content-padding-bottom
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+
+    .v-banner__sizer
+      flex-wrap: nowrap
+
+// Mobile
+.v-banner--is-mobile
+  .v-banner__sizer
+    max-width: $banner-mobile-sizer-max-width
+
+  .v-banner__thumbnail
+    @include ltr()
+      margin-right: $banner-mobile-thumbnail-padding-start
+
+    @include rtl()
+      margin-left: $banner-mobile-thumbnail-padding-start
+
+  &.v-banner--has-thumbnail
+    padding-top: $banner-mobile-padding-top
+
+    .v-banner__content
+      padding-bottom: $banner-mobile-content-padding-bottom
+
+  &.v-banner--single-line
+    padding-top: $banner-mobile-single-line-padding-top
+
+    .v-banner__actions
+      @include ltr()
+        margin-left: $banner-mobile-single-line-actions-margin-start
+
+      @include rtl()
+        margin-right: $banner-mobile-single-line-actions-margin-start
+
+  &:not(.v-banner--single-line)
+    .v-banner__content
+      padding-bottom: 12px
+
+    .v-banner__sizer
+      flex-wrap: wrap

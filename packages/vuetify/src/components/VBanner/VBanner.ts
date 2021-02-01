@@ -1,6 +1,11 @@
 // Styles
 import './VBanner.sass'
 
+// Components
+import VBannerActions from './VBannerActions'
+import VBannerContent from './VBannerContent'
+import { makeThumbnailProps } from './VBannerThumbnail'
+
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
@@ -14,61 +19,18 @@ import { useTheme } from '@/composables/theme'
 import { computed, defineComponent, h } from 'vue'
 import makeProps from '@/util/makeProps'
 
-export function VBannerActions () {
-  return defineComponent({
-    render () {
-      if (!this.$slots.actions) return undefined
-
-      return h('div', {
-        class: 'v-banner__actions',
-      }, this.$slots.actions?.())
-    },
-  })
-}
-
-export function VBannerContent () {
-  return defineComponent({
-    render () {
-      return h('div', {
-        class: 'v-banner__content',
-      }, this.$slots.default?.())
-    },
-  })
-}
-
-export function VBannerThumbnail () {
-  return defineComponent({
-    props: {
-      avatar: String,
-      icon: String,
-    },
-
-    render () {
-      if (
-        !this.$slots.thumbnail &&
-        !this.$props.avatar &&
-        !this.$props.icon
-      ) return undefined
-
-      return h('div', {
-        class: 'v-banner__thumbnail',
-      }, this.$slots.thumbnail?.())
-    },
-  })
-}
-
 export default defineComponent({
   name: 'VBanner',
 
   props: makeProps({
-    avatar: String,
-    icon: String,
+    singleLine: Boolean,
     ...makeBorderProps(),
     ...makeBorderRadiusProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makePositionProps(),
     ...makeTagProps(),
+    ...makeThumbnailProps(),
   }),
 
   setup (props, { slots }) {
@@ -81,7 +43,9 @@ export default defineComponent({
 
     const bannerClasses = computed(() => {
       return {
-
+        'v-banner--has-actions': slots.actions,
+        'v-banner--has-thumbnail': (props.avatar || props.icon || slots.thumbnail),
+        'v-banner--single-line': props.singleLine,
       }
     })
 
@@ -102,9 +66,10 @@ export default defineComponent({
         ],
         role: 'banner',
       }, [
-        h(VBannerThumbnail(), props, slots),
-        h(VBannerContent(), props, slots),
-        h(VBannerActions(), props, slots),
+        h('div', { class: 'v-banner__sizer' }, [
+          h(VBannerContent, props, slots),
+          slots.actions && h(VBannerActions, props, slots),
+        ]),
       ])
     )
   },
