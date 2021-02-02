@@ -15,13 +15,13 @@ export default defineComponent({
 
   props: makeProps(makeThumbnailProps()),
 
-  render () {
-    return h('div', {
+  setup (props, { slots }) {
+    return () => h('div', {
       class: 'v-banner__content',
     }, [
-      (this.$props.avatar || this.$props.icon) && h(VBannerThumbnail, this.$props, this.$slots),
-      this.$slots.thumbnail?.(),
-      this.$slots.default?.(),
+      (props.avatar || props.icon) && h(VBannerThumbnail, props, slots),
+      slots.thumbnail?.(),
+      slots.default?.(),
     ])
   },
 })

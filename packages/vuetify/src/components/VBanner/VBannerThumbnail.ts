@@ -19,25 +19,18 @@ export default defineComponent({
 
   props: makeProps(makeThumbnailProps()),
 
-  render () {
-    const children = []
-
-    if (this.$slots.thumbnail) {
-      children.push(this.$slots.thumbnail?.())
-    } else if (this.$props.avatar) {
-      children.push(
-        h('div', {
-          class: 'v-banner__thumbnail__avatar',
-          style: {
-            height: '36px',
-            width: '36px',
-          },
-        })
-      )
-    }
-
-    return h('div', {
+  setup (props, { slots }) {
+    return () => h('div', {
       class: 'v-banner__thumbnail',
-    }, children)
+    }, [
+      slots.thumbnail?.(),
+      props.avatar && h('div', {
+        class: 'v-banner__thumbnail__avatar',
+        style: {
+          height: '36px',
+          width: '36px',
+        },
+      }),
+    ])
   },
 })

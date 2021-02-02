@@ -9,9 +9,9 @@ export default defineComponent({
 
   inheritAttrs: false,
 
-  render () {
-    return h('div', {
+  setup (props, { slots }) {
+    return () => h('div', {
       class: 'v-banner__actions',
-    }, this.$slots.actions?.())
+    }, slots.actions?.())
   },
 })
