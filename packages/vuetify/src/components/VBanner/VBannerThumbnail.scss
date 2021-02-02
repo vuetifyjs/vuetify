@@ -2,6 +2,7 @@
 @import './index';
 
 .v-banner-thumbnail {
+  align-self: flex-start;
   flex: 0 1 auto;
 
   @include rounded($banner-query);
@@ -28,5 +29,7 @@
 }
 
 .v-banner-thumbnail__avatar {
-  border-radius: $banner-avatar-border-radius;
+  border-radius: $banner-thumbnail-avatar-border-radius;
+  height: $banner-thumbnail-avatar-height;
+  width: $banner-thumbnail-avatar-width;
 }

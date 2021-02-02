@@ -7,7 +7,7 @@
   padding-bottom: $banner-padding-bottom;
   position: relative;
   width: $banner-width;
-  background-color: white !important;
+  background-color: $banner-background-color;
 
   &::after {
     @include border($banner-query);
@@ -91,6 +91,7 @@
   max-width: $banner-sizer-max-width;
 
   .v-banner--is-mobile & {
+    max-width: $banner-mobile-sizer-max-width;
     flex-wrap: wrap;
   }
 
