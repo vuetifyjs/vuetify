@@ -63,14 +63,12 @@
   flex: 0 1 auto;
   justify-content: flex-end;
 
-  .v-banner--single-line & {
-    @include ltr() {
-      margin-left: $banner-actions-margin-start;
-    }
+  @include ltr() {
+    margin-left: $banner-actions-margin-start;
+  }
 
-    @include rtl() {
-      margin-right: $banner-actions-margin-start;
-    }
+  @include rtl() {
+    margin-right: $banner-actions-margin-start;
   }
 
   .v-banner--is-mobile & {
