@@ -1,25 +1,21 @@
 // Imports
 @import './index';
 
-.v-banner__content {
+.v-banner-content {
   align-items: center;
   display: flex;
   flex: 1 1 auto;
   line-height: $banner-content-line-height;
   padding-bottom: $banner-content-padding-bottom;
 
-  @include banner-mobile () {
+  &--is-mobile {
     padding-bottom: $banner-mobile-content-padding-bottom;
   }
 
-  @include banner-single-line () {
+  &--single-line {
     padding-bottom: $banner-single-line-content-padding-bottom;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-
-  @include banner-thumbnail () {
-    padding-bottom: $banner-mobile-content-padding-bottom;
   }
 }

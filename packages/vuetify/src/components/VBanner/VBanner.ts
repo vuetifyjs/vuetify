@@ -3,7 +3,6 @@ import './VBanner.scss'
 
 // Components
 import { makeThumbnailProps } from './VBannerThumbnail'
-import VBannerActions from './VBannerActions'
 import VBannerContent from './VBannerContent'
 
 // Composables
@@ -23,6 +22,7 @@ export default defineComponent({
   name: 'VBanner',
 
   props: makeProps({
+    mobile: Boolean,
     singleLine: Boolean,
     ...makeBorderProps(),
     ...makeBorderRadiusProps(),
@@ -43,8 +43,8 @@ export default defineComponent({
 
     const bannerClasses = computed(() => {
       return {
-        'v-banner--has-actions': !!slots.actions,
         'v-banner--has-thumbnail': (!!props.avatar || !!props.icon || !!slots.thumbnail),
+        'v-banner--is-mobile': props.mobile,
         'v-banner--single-line': props.singleLine,
       }
     })
@@ -68,7 +68,10 @@ export default defineComponent({
       }, [
         h('div', { class: 'v-banner__sizer' }, [
           h(VBannerContent, props, slots),
-          slots.actions && h(VBannerActions, props, slots),
+
+          slots.actions && h('div', {
+            class: 'v-banner__actions',
+          }, slots.actions?.()),
         ]),
       ])
     )

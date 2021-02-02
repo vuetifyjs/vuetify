@@ -5,7 +5,7 @@ exports[`VBanner should match a snapshot 1`] = `
      role="banner"
 >
   <div class="v-banner__sizer">
-    <div class="v-banner__content">
+    <div class="v-banner-content">
     </div>
   </div>
 </div>

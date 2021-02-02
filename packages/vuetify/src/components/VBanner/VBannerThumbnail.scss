@@ -1,9 +1,10 @@
 // Imports
 @import './index';
 
-.v-banner__thumbnail {
-  border-radius: $banner-border-radius;
+.v-banner-thumbnail {
   flex: 0 1 auto;
+
+  @include rounded($banner-query);
 
   @include ltr () {
     margin-left: $banner-thumbnail-margin-start;
@@ -15,7 +16,7 @@
     margin-left: $banner-thumbnail-margin-end;
   }
 
-  @include banner-mobile () {
+  &--is-mobile {
     @include ltr() {
       margin-right: $banner-mobile-thumbnail-padding-start;
     }
@@ -26,6 +27,6 @@
   }
 }
 
-.v-banner__avatar {
+.v-banner-thumbnail__avatar {
   border-radius: $banner-avatar-border-radius;
 }

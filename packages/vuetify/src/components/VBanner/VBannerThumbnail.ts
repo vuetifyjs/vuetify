@@ -17,15 +17,21 @@ export default defineComponent({
 
   inheritAttrs: false,
 
-  props: makeProps(makeThumbnailProps()),
+  props: makeProps({
+    mobile: Boolean,
+    ...makeThumbnailProps(),
+  }),
 
   setup (props, { slots }) {
     return () => h('div', {
-      class: 'v-banner__thumbnail',
+      class: {
+        'v-banner-thumbnail': true,
+        'v-banner-thumbnail--is-mobile': props.mobile,
+      },
     }, [
       slots.thumbnail?.(),
       props.avatar && h('div', {
-        class: 'v-banner__avatar',
+        class: 'v-banner-thumbnail__avatar',
         style: {
           height: '36px',
           width: '36px',

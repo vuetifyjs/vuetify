@@ -13,11 +13,19 @@ export default defineComponent({
 
   inheritAttrs: false,
 
-  props: makeProps(makeThumbnailProps()),
+  props: makeProps({
+    mobile: Boolean,
+    singleLine: Boolean,
+    ...makeThumbnailProps(),
+  }),
 
   setup (props, { slots }) {
     return () => h('div', {
-      class: 'v-banner__content',
+      class: {
+        'v-banner-content': true,
+        'v-banner-content--is-mobile': props.mobile,
+        'v-banner-content--single-line': props.singleLine,
+      },
     }, [
       (!!props.avatar || !!props.icon || !!slots.thumbnail) && h(VBannerThumbnail, props, slots),
       slots.default?.(),
