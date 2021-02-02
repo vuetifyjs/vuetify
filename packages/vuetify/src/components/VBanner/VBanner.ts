@@ -43,8 +43,8 @@ export default defineComponent({
 
     const bannerClasses = computed(() => {
       return {
-        'v-banner--has-actions': slots.actions,
-        'v-banner--has-thumbnail': (props.avatar || props.icon || slots.thumbnail),
+        'v-banner--has-actions': !!slots.actions,
+        'v-banner--has-thumbnail': (!!props.avatar || !!props.icon || !!slots.thumbnail),
         'v-banner--single-line': props.singleLine,
       }
     })
