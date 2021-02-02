@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VBannerContent should match a snapshot 1`] = `
+<div class="v-banner__content">
+</div>
+`;

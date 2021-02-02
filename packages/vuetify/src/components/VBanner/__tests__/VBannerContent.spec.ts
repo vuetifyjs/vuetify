@@ -1,15 +1,15 @@
 // Components
-import VBanner from '../VBanner'
+import VBannerContent from '../VBannerContent'
+import VBannerThumbnail from '../VBannerThumbnail'
 
 // Utilities
 import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
 import { mount } from '@vue/test-utils'
 import { VuetifySymbol } from '@/framework'
-import { h } from 'vue'
 
-describe('VBanner', () => {
+describe('VBannerContent', () => {
   function mountFunction (options = {}) {
-    return mount(VBanner, {
+    return mount(VBannerContent, {
       global: {
         provide: {
           [VuetifySymbol as symbol]: { defaults: { global: {} } },
@@ -26,11 +26,22 @@ describe('VBanner', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should generate actions slot', () => {
+  it('should generate thumbnail slot', () => {
     const wrapper = mountFunction({
-      slots: { actions: '<div>foobar</div>' },
+      slots: { thumbnail: '<div>foobar</div>' },
     })
 
     expect(wrapper.html()).toContain('<div>foobar</div>')
+  })
+
+  it.each([
+    [{}, false],
+    [{ avatar: 'foobar' }, true],
+    [{ icon: 'foobar' }, true],
+  ])('should generate actions slot', (props, expected) => {
+    const wrapper = mountFunction({ props })
+    const thumbnail = wrapper.findComponent(VBannerThumbnail)
+
+    expect(thumbnail.exists()).toBe(expected)
   })
 })

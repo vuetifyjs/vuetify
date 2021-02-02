@@ -19,8 +19,7 @@ export default defineComponent({
     return () => h('div', {
       class: 'v-banner__content',
     }, [
-      (props.avatar || props.icon) && h(VBannerThumbnail, props, slots),
-      slots.thumbnail?.(),
+      (!!props.avatar || !!props.icon || !!slots.thumbnail) && h(VBannerThumbnail, props, slots),
       slots.default?.(),
     ])
   },
