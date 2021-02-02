@@ -25,7 +25,7 @@ export default defineComponent({
     }, [
       slots.thumbnail?.(),
       props.avatar && h('div', {
-        class: 'v-banner__thumbnail__avatar',
+        class: 'v-banner__avatar',
         style: {
           height: '36px',
           width: '36px',
