@@ -1,0 +1,31 @@
+// Imports
+@import './index';
+
+.v-banner__thumbnail {
+  border-radius: $banner-border-radius;
+  flex: 0 1 auto;
+
+  @include ltr () {
+    margin-left: $banner-thumbnail-margin-start;
+    margin-right: $banner-thumbnail-margin-end;
+  }
+
+  @include rtl () {
+    margin-right: $banner-thumbnail-margin-start;
+    margin-left: $banner-thumbnail-margin-end;
+  }
+
+  @include banner-mobile () {
+    @include ltr() {
+      margin-right: $banner-mobile-thumbnail-padding-start;
+    }
+
+    @include rtl() {
+      margin-left: $banner-mobile-thumbnail-padding-start;
+    }
+  }
+}
+
+.v-banner__thumbnail__avatar {
+  border-radius: $banner-avatar-border-radius;
+}

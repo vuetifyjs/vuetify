@@ -1,3 +1,6 @@
+// Styles
+import './VBannerActions.scss'
+
 // Utilities
 import { defineComponent, h } from 'vue'
 

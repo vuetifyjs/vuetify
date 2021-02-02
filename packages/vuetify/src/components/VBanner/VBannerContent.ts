@@ -1,3 +1,6 @@
+// Styles
+import './VBannerContent.scss'
+
 // Components
 import VBannerThumbnail, { makeThumbnailProps } from './VBannerThumbnail'
 

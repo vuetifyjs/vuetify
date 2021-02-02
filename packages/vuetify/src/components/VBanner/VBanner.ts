@@ -1,10 +1,10 @@
 // Styles
-import './VBanner.sass'
+import './VBanner.scss'
 
 // Components
+import { makeThumbnailProps } from './VBannerThumbnail'
 import VBannerActions from './VBannerActions'
 import VBannerContent from './VBannerContent'
-import { makeThumbnailProps } from './VBannerThumbnail'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'

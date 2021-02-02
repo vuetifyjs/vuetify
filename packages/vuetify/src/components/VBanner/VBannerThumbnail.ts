@@ -1,3 +1,6 @@
+// Styles
+import './VBannerThumbnail.scss'
+
 // Utilities
 import { defineComponent, h } from 'vue'
 import makeProps from '@/util/makeProps'

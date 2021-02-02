@@ -1,0 +1,69 @@
+// Imports
+@import './index';
+
+.v-banner {
+  font-size: $banner-font-size;
+  padding-top: $banner-padding-top;
+  padding-bottom: $banner-padding-bottom;
+  position: relative;
+  width: $banner-width;
+  background-color: white !important;
+
+  &::after {
+    @include border($banner-query);
+
+    bottom: 0;
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: auto;
+  }
+
+  @include elevated($banner-query);
+  @include position($banner-query);
+  @include rounded($banner-query);
+
+  @include ltr() {
+    padding-left: $banner-padding-start;
+    padding-right: $banner-padding-end;
+  }
+
+  @include rtl() {
+    padding-right: $banner-padding-start;
+    padding-left: $banner-padding-end;
+  }
+
+  &--has-thumbnail {
+    @include ltr() {
+      padding-left: $banner-thumbnail-padding-start;
+    }
+
+    @include rtl() {
+      padding-right: $banner-thumbnail-padding-start;
+    }
+
+    &.v-banner--is-mobile {
+      padding-top: $banner-mobile-padding-top;
+    }
+  }
+
+  &--single-line {
+    padding-top: $banner-single-line-padding-top;
+  }
+}
+
+.v-banner__sizer {
+  display: flex;
+  flex: 1 1 auto;
+  margin: 0 auto;
+  max-width: $banner-sizer-max-width;
+
+  @include banner-mobile () {
+    flex-wrap: wrap;
+  }
+
+  @include banner-single-line () {
+    flex-wrap: nowrap;
+  }
+}

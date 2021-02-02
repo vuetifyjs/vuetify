@@ -1,0 +1,23 @@
+@mixin banner-single-line () {
+  .v-banner--single-line & {
+    @content;
+  }
+}
+
+@mixin banner-mobile () {
+  .v-banner--is-mobile & {
+    @content;
+  }
+}
+
+@mixin banner-mobile-single-line () {
+  .v-banner--single-line.v-banner--is-mobile & {
+    @content;
+  }
+}
+
+@mixin banner-thumbnail () {
+  .v-banner--thumbnail & {
+    @content;
+  }
+}

@@ -1,0 +1,29 @@
+// Imports
+@import './index';
+
+.v-banner__actions {
+  align-items: flex-end;
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+
+  @include banner-single-line () {
+    @include ltr() {
+      margin-left: $banner-actions-margin-start;
+    }
+
+    @include rtl() {
+      margin-right: $banner-actions-margin-start;
+    }
+  }
+
+  @include banner-mobile-single-line () {
+    @include ltr() {
+      margin-left: $banner-mobile-single-line-actions-margin-start;
+    }
+
+    @include rtl() {
+      margin-right: $banner-mobile-single-line-actions-margin-start;
+    }
+  }
+}
