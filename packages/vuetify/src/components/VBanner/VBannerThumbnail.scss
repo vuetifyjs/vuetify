@@ -3,9 +3,10 @@
 
 .v-banner-thumbnail {
   align-self: flex-start;
-  flex: 0 1 auto;
-
-  @include rounded($banner-query);
+  border-radius: $banner-thumbnail-border-radius;
+  flex: 0 0 auto;
+  height: $banner-thumbnail-height;
+  width: $banner-thumbnail-width;
 
   @include ltr () {
     margin-left: $banner-thumbnail-margin-start;
@@ -29,7 +30,19 @@
 }
 
 .v-banner-thumbnail__avatar {
-  border-radius: $banner-thumbnail-avatar-border-radius;
-  height: $banner-thumbnail-avatar-height;
-  width: $banner-thumbnail-avatar-width;
+  border-radius: inherit;
+  height: inherit;
+  width: inherit;
+}
+
+.v-banner-thumbnail__icon {
+  align-items: center;
+  background-color: rgb(var(--v-theme-primary));
+  border-radius: inherit;
+  color: $banner-thumbnail-icon-color;
+  display: inline-flex;
+  font-size: $banner-thumbnail-icon-font-size;
+  height: inherit;
+  width: inherit;
+  justify-content: center;
 }

@@ -30,7 +30,16 @@ export default defineComponent({
       },
     }, [
       slots.thumbnail?.(),
-      props.avatar && h('div', { class: 'v-banner-thumbnail__avatar' }),
+      props.avatar && h('img', {
+        class: 'v-banner-thumbnail__avatar',
+        src: props.avatar,
+      }),
+      props.icon && h('i', {
+        class: [
+          'v-banner-thumbnail__icon',
+          props.icon,
+        ],
+      }),
     ])
   },
 })
