@@ -371,6 +371,9 @@ export default baseMixins.extend<options>().extend({
         style: {
           width: !this.isSingle ? convertToUnit(width) : undefined,
         },
+        attrs: {
+          align: this.reverse ? 'right' : 'left',
+        },
       }, [span])
     },
     genInput () {

@@ -871,4 +871,27 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     const input = wrapper.find('input')
     expect(input.element.value).toBe('-0')
   })
+
+  it('should keep legend left by default', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        label: 'foo',
+        outlined: true,
+      },
+    })
+    const legend = wrapper.find('legend')
+    expect(legend.attributes('align')).toBe('left')
+  })
+
+  it('should move the legend right on reverse', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        label: 'foo',
+        reverse: true,
+        outlined: true,
+      },
+    })
+    const legend = wrapper.find('legend')
+    expect(legend.attributes('align')).toBe('right')
+  })
 })
