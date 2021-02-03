@@ -1,10 +1,6 @@
 // Styles
 import './VBanner.scss'
 
-// Components
-import { makeThumbnailProps } from './VBannerThumbnail'
-import VBannerContent from './VBannerContent'
-
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
@@ -15,13 +11,15 @@ import { makeTagProps } from '@/composables/tag'
 import { useTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, defineComponent, h } from 'vue'
+import { defineComponent, h } from 'vue'
 import makeProps from '@/util/makeProps'
 
 export default defineComponent({
   name: 'VBanner',
 
   props: makeProps({
+    avatar: [Boolean, String],
+    icon: [Boolean, String],
     mobile: Boolean,
     singleLine: Boolean,
     sticky: Boolean,
@@ -31,7 +29,6 @@ export default defineComponent({
     ...makeElevationProps(),
     ...makePositionProps(),
     ...makeTagProps(),
-    ...makeThumbnailProps(),
   }),
 
   setup (props, { slots }) {
@@ -42,20 +39,18 @@ export default defineComponent({
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-banner')
 
-    const bannerClasses = computed(() => {
-      return {
-        'v-banner--has-thumbnail': (!!props.avatar || !!props.icon || !!slots.thumbnail),
-        'v-banner--is-mobile': props.mobile,
-        'v-banner--single-line': props.singleLine,
-        'v-banner--sticky': props.sticky,
-      }
-    })
+    return () => {
+      const hasThumbnail = (!!props.avatar || !!props.icon || !!slots.thumbnail)
 
-    return () => (
-      h(props.tag, {
+      return h(props.tag, {
         class: [
-          'v-banner',
-          bannerClasses.value,
+          {
+            'v-banner': true,
+            'v-banner--has-thumbnail': hasThumbnail,
+            'v-banner--is-mobile': props.mobile,
+            'v-banner--single-line': props.singleLine,
+            'v-banner--sticky': props.sticky,
+          },
           themeClasses.value,
           borderClasses.value,
           borderRadiusClasses.value,
@@ -69,13 +64,28 @@ export default defineComponent({
         role: 'banner',
       }, [
         h('div', { class: 'v-banner__sizer' }, [
-          h(VBannerContent, props, slots),
+          h('div', { class: 'v-banner__content' }, [
+            hasThumbnail && h('div', { class: 'v-banner__thumbnail' }, [
+              slots.thumbnail?.(),
+              props.avatar && h('img', {
+                class: 'v-banner__avatar',
+                src: props.avatar,
+              }),
+              props.icon && h('i', {
+                class: [
+                  'v-banner__icon',
+                  props.icon,
+                ],
+              }),
+            ]),
+            h('div', { class: 'v-banner__text' }, slots.default?.()),
+          ]),
 
           slots.actions && h('div', {
             class: 'v-banner__actions',
           }, slots.actions?.()),
         ]),
       ])
-    )
+    }
   },
 })

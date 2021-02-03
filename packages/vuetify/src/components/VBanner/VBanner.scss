@@ -2,12 +2,12 @@
 @import './index';
 
 .v-banner {
+  background-color: $banner-background-color;
   font-size: $banner-font-size;
-  padding-top: $banner-padding-top;
   padding-bottom: $banner-padding-bottom;
+  padding-top: $banner-padding-top;
   position: relative;
   width: $banner-width;
-  background-color: $banner-background-color;
 
   &::after {
     @include border($banner-query);
@@ -64,7 +64,7 @@
 .v-banner__actions {
   align-items: flex-end;
   display: flex;
-  flex: 0 1 auto;
+  flex: 1 1 auto;
   justify-content: flex-end;
 
   @include ltr() {
@@ -88,6 +88,42 @@
   }
 }
 
+.v-banner__avatar {
+  border-radius: inherit;
+  height: inherit;
+  width: inherit;
+}
+
+.v-banner__content {
+  align-items: center;
+  display: flex;
+  flex: 1 1 auto;
+  line-height: $banner-content-line-height;
+  min-width: 0;
+  overflow: visible;
+  padding-bottom: $banner-content-padding-bottom;
+
+  .v-banner--is-mobile & {
+    padding-bottom: $banner-mobile-content-padding-bottom;
+  }
+
+  .v-banner--single-line & {
+    padding-bottom: $banner-single-line-content-padding-bottom;
+  }
+}
+
+.v-banner__icon {
+  align-items: center;
+  background-color: $banner-thumbnail-icon-background-color;
+  border-radius: inherit;
+  color: $banner-thumbnail-icon-color;
+  display: inline-flex;
+  font-size: $banner-thumbnail-icon-font-size;
+  height: inherit;
+  justify-content: center;
+  width: inherit;
+}
+
 .v-banner__sizer {
   display: flex;
   flex: 1 1 auto;
@@ -95,11 +131,47 @@
   max-width: $banner-sizer-max-width;
 
   .v-banner--is-mobile & {
-    max-width: $banner-mobile-sizer-max-width;
     flex-wrap: wrap;
+    max-width: $banner-mobile-sizer-max-width;
   }
 
   .v-banner--single-line & {
     flex-wrap: nowrap;
+  }
+}
+
+.v-banner__text {
+  .v-banner--single-line & {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.v-banner__thumbnail {
+  align-self: flex-start;
+  border-radius: $banner-thumbnail-border-radius;
+  flex: 0 0 auto;
+  height: $banner-thumbnail-height;
+  width: $banner-thumbnail-width;
+
+  @include ltr () {
+    margin-left: $banner-thumbnail-margin-start;
+    margin-right: $banner-thumbnail-margin-end;
+  }
+
+  @include rtl () {
+    margin-right: $banner-thumbnail-margin-start;
+    margin-left: $banner-thumbnail-margin-end;
+  }
+
+  .v-banner--is-mobile & {
+    @include ltr() {
+      margin-right: $banner-mobile-thumbnail-padding-start;
+    }
+
+    @include rtl() {
+      margin-left: $banner-mobile-thumbnail-padding-start;
+    }
   }
 }

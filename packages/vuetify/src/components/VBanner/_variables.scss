@@ -20,13 +20,14 @@ $banner-single-line-padding-top: 8px !default;
 $banner-sizer-max-width: 720px !default;
 $banner-sticky-top: 0 !default;
 $banner-thumbnail-border-radius: map-get($rounded, 'circle') !default;
+$banner-thumbnail-height: 40px !default;
+$banner-thumbnail-icon-background-color: rgb(var(--v-theme-primary)) !default;
 $banner-thumbnail-icon-color: rgb(var(--v-theme-on-primary)) !default;
 $banner-thumbnail-icon-font-size: 28px !default;
-$banner-thumbnail-height: 40px !default;
-$banner-thumbnail-width: $banner-thumbnail-height !default;
 $banner-thumbnail-margin-end: 24px !default;
 $banner-thumbnail-margin-start: 0 !default;
 $banner-thumbnail-padding-start: 16px !default;
+$banner-thumbnail-width: $banner-thumbnail-height !default;
 $banner-width: 100% !default;
 
 // Mobile

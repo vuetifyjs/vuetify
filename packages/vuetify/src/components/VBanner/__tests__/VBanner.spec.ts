@@ -5,7 +5,6 @@ import VBanner from '../VBanner'
 import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
 import { mount } from '@vue/test-utils'
 import { VuetifySymbol } from '@/framework'
-import { h } from 'vue'
 
 describe('VBanner', () => {
   function mountFunction (options = {}) {
@@ -26,11 +25,25 @@ describe('VBanner', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should generate actions slot', () => {
+  it.each([
+    ['actions'],
+    ['thumbnail'],
+  ])('should generate slot content', slot => {
     const wrapper = mountFunction({
-      slots: { actions: '<div>foobar</div>' },
+      slots: { [slot]: '<div>foobar</div>' },
     })
 
     expect(wrapper.html()).toContain('<div>foobar</div>')
+  })
+
+  it.each([
+    [{}, false],
+    [{ avatar: 'foobar' }, true],
+    [{ icon: 'foobar' }, true],
+  ])('should generate actions slot', (props, expected) => {
+    const wrapper = mountFunction({ props })
+    const thumbnail = wrapper.find('.v-banner__thumbnail')
+
+    expect(thumbnail.exists()).toBe(expected)
   })
 })
