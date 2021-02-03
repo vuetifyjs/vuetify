@@ -61,8 +61,6 @@ v-tabs-slider description -->
 
 </alert>
 
-<promoted-ad slug="vuetify-zero-theme-pro" />
-
 ## Examples
 
 ### Props
@@ -72,6 +70,8 @@ v-tabs-slider description -->
 Make `v-tabs` lined up with the `v-toolbar-title` component using the **align-with-title** prop (`v-app-bar-nav-icon` or `v-btn` must be used in `v-toolbar`).
 
 <example file="v-tabs/prop-align-with-title" />
+
+<promoted-ad slug="vuetify-zero-theme-pro" />
 
 #### Center active
 

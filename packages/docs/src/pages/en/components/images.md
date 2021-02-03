@@ -33,8 +33,6 @@ The `v-img` component is packed with features to support rich media. Combined wi
 
 </alert>
 
-<promoted-ad slug="vuetify-zero-theme-pro" />
-
 ## Examples
 
 ### Props
@@ -44,6 +42,8 @@ The `v-img` component is packed with features to support rich media. Combined wi
 You can set a fixed aspect ratio if you want to change aspect ratio of the image.
 
 <example file="v-img/prop-aspect-ratio" />
+
+<promoted-ad slug="vuetify-zero-theme-pro" />
 
 #### Contain
 
