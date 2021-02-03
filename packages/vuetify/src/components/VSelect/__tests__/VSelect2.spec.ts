@@ -162,6 +162,75 @@ describe('VSelect.ts', () => {
     expect(wrapper.vm.computedCounterValue).toBe(2)
   })
 
+  it('should use counter value function', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo1', 'foo2'],
+        counter: true,
+        counterValue: (value?: string): number => 42,
+      },
+    })
+
+    const counter = wrapper.find('.v-counter')
+
+    expect(counter.element.innerHTML).toBe('42')
+
+    wrapper.setProps({ value: 'foo1' })
+
+    await wrapper.vm.$nextTick()
+
+    expect(counter.element.innerHTML).toBe('42')
+
+    wrapper.setProps({ counter: '50' })
+
+    await wrapper.vm.$nextTick()
+
+    expect(counter.element.innerHTML).toBe('42 / 50')
+
+    wrapper.setProps({
+      counterValue: (value?: string): number => 18,
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(counter.element.innerHTML).toBe('18 / 50')
+  })
+
+  it('should use counter value function with multiple', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo1', 'foo2'],
+        multiple: true,
+        counter: true,
+        counterValue: (value?: string[]): number => 43,
+      },
+    })
+
+    const counter = wrapper.find('.v-counter')
+
+    expect(counter.element.innerHTML).toBe('43')
+
+    wrapper.setProps({ value: ['foo1'] })
+
+    await wrapper.vm.$nextTick()
+
+    expect(counter.element.innerHTML).toBe('43')
+
+    wrapper.setProps({ counter: '50' })
+
+    await wrapper.vm.$nextTick()
+
+    expect(counter.element.innerHTML).toBe('43 / 50')
+
+    wrapper.setProps({
+      counterValue: (value?: string[]): number => 17,
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(counter.element.innerHTML).toBe('17 / 50')
+  })
+
   it('should emit a single change event', async () => {
     const wrapper = mountFunction({
       attachToDocument: true,

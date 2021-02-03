@@ -155,9 +155,15 @@ export default baseMixins.extend<options>().extend({
       return `list-${this._uid}`
     },
     computedCounterValue (): number {
-      return this.multiple
-        ? this.selectedItems.length
-        : (this.getText(this.selectedItems[0]) || '').toString().length
+      const value = this.multiple
+        ? this.selectedItems
+        : (this.getText(this.selectedItems[0]) || '').toString()
+
+      if (typeof this.counterValue === 'function') {
+        return this.counterValue(value)
+      }
+
+      return value.length
     },
     directives (): VNodeDirective[] | undefined {
       return this.isFocused ? [{
