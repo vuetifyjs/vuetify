@@ -55,6 +55,10 @@
       padding-top: $banner-mobile-single-line-padding-top;
     }
   }
+
+  &--sticky {
+    top: $banner-sticky-top;
+  }
 }
 
 .v-banner__actions {

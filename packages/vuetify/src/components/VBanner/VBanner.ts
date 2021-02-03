@@ -24,6 +24,7 @@ export default defineComponent({
   props: makeProps({
     mobile: Boolean,
     singleLine: Boolean,
+    sticky: Boolean,
     ...makeBorderProps(),
     ...makeBorderRadiusProps(),
     ...makeDimensionProps(),
@@ -46,6 +47,7 @@ export default defineComponent({
         'v-banner--has-thumbnail': (!!props.avatar || !!props.icon || !!slots.thumbnail),
         'v-banner--is-mobile': props.mobile,
         'v-banner--single-line': props.singleLine,
+        'v-banner--sticky': props.sticky,
       }
     })
 
