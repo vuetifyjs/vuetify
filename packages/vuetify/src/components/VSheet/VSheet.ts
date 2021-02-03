@@ -14,17 +14,19 @@ import { useTheme } from '@/composables/theme'
 import { defineComponent, h } from 'vue'
 import makeProps from '@/util/makeProps'
 
+export const makeSheetProps = () => ({
+  ...makeBorderProps(),
+  ...makeBorderRadiusProps(),
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makePositionProps(),
+  ...makeTagProps(),
+})
+
 export default defineComponent({
   name: 'VSheet',
 
-  props: makeProps({
-    ...makeBorderProps(),
-    ...makeBorderRadiusProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makePositionProps(),
-    ...makeTagProps(),
-  }),
+  props: makeProps(makeSheetProps()),
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme()
