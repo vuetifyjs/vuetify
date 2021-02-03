@@ -2,16 +2,16 @@
 import './VBanner.scss'
 
 // Composables
-import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import { makeElevationProps, useElevation } from '@/composables/elevation'
-import { makePositionProps, usePosition } from '@/composables/position'
-import { makeTagProps } from '@/composables/tag'
+import { useBorder } from '@/composables/border'
+import { useBorderRadius } from '@/composables/border-radius'
+import { useDimension } from '@/composables/dimensions'
+import { useElevation } from '@/composables/elevation'
+import { usePosition } from '@/composables/position'
 import { useTheme } from '@/composables/theme'
 
 // Utilities
 import { defineComponent, h } from 'vue'
+import { makeSheetProps } from '@/components/VSheet/VSheet'
 import makeProps from '@/util/makeProps'
 
 export default defineComponent({
@@ -23,12 +23,7 @@ export default defineComponent({
     mobile: Boolean,
     singleLine: Boolean,
     sticky: Boolean,
-    ...makeBorderProps(),
-    ...makeBorderRadiusProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makePositionProps(),
-    ...makeTagProps(),
+    ...makeSheetProps(),
   }),
 
   setup (props, { slots }) {
