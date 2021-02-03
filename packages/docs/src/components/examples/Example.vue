@@ -65,6 +65,7 @@
                 <markup
                   :code="pen[section]"
                   :rounded="false"
+                  :language="section === 'template-pug' ? 'pug' : undefined"
                 />
               </v-window-item>
             </template>
@@ -120,6 +121,7 @@
       sections () {
         return [
           'template',
+          'template-pug',
           'script',
           'style',
         ].filter(section => this.pen[section])

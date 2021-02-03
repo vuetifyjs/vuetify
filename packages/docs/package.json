@@ -32,7 +32,8 @@
     "vue-router": "^3.1.6",
     "vuetify": "^2.4.2",
     "vuex": "^3.4.0",
-    "webpack-node-externals": "^2.5.1"
+    "webpack-node-externals": "^2.5.1",
+    "xhtml2pug": "^1.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.3",

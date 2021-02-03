@@ -1,3 +1,5 @@
+import { convert } from 'xhtml2pug'
+
 export default {
   name: 'Codepen',
 
@@ -19,6 +21,12 @@ export default {
     },
     boot (res) {
       const template = this.parseTemplate('template', res)
+      let templatePug = template
+      if (templatePug) {
+        templatePug = templatePug.slice('<template>'.length).slice(0, -'</template>'.length)
+        templatePug = convert(templatePug, { bodyLess: true, attrComma: true, doubleQuotes: true, encode: false })
+        templatePug = `<template lang="pug">\n${templatePug}</template>`
+      }
       const style = this.parseTemplate('style', res)
       const script = this.parseTemplate('script', res)
       const codepenResources = this.parseTemplate('codepen-resources', res)
@@ -26,6 +34,7 @@ export default {
 
       this.pen = {
         template,
+        'template-pug': templatePug,
         style,
         script,
         codepenResources,
