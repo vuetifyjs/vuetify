@@ -1,9 +1,9 @@
 // Utilities
-import { defineComponent, h } from 'vue'
+import { defineComponent } from 'vue'
 import { provideTheme } from '@/composables/theme'
 import makeProps from '@/util/makeProps'
 
-export const VThemeProvider = defineComponent({
+export default defineComponent({
   name: 'VThemeProvider',
 
   props: makeProps({
@@ -19,8 +19,12 @@ export const VThemeProvider = defineComponent({
   setup (props, context) {
     const { themeClasses } = provideTheme(props, context)
 
-    return () => h('div', {
-      class: ['v-theme-provider', themeClasses.value],
-    }, [h('div', [context.slots.default?.()])])
+    return () => {
+      return (
+        <div class={['v-theme-provider', themeClasses.value]}>
+          <div>{ context.slots.default?.() }</div>
+        </div>
+      )
+    }
   },
 })
