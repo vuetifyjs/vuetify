@@ -10,18 +10,52 @@ import { makePositionProps, usePosition } from '@/composables/position'
 import { makeTagProps } from '@/composables/tag'
 import { useTheme } from '@/composables/theme'
 
+// Types
+import type { BorderProps } from '@/composables/border'
+import type { BorderRadiusProps } from '@/composables/border-radius'
+import type { DimensionProps } from '@/composables/dimensions'
+import type { ElevationProps } from '@/composables/elevation'
+import type { PositionProps } from '@/composables/position'
+
 // Utilities
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import makeProps from '@/util/makeProps'
 
-export const makeSheetProps = () => ({
-  ...makeBorderProps(),
-  ...makeBorderRadiusProps(),
-  ...makeDimensionProps(),
-  ...makeElevationProps(),
-  ...makePositionProps(),
-  ...makeTagProps(),
-})
+export function makeSheetProps () {
+  return {
+    ...makeBorderProps(),
+    ...makeBorderRadiusProps(),
+    ...makeDimensionProps(),
+    ...makeElevationProps(),
+    ...makePositionProps(),
+    ...makeTagProps(),
+  }
+}
+
+export interface SheetProps extends BorderProps, BorderRadiusProps, DimensionProps, ElevationProps, PositionProps {}
+
+export function useSheet (props: SheetProps, name: string) {
+  const { themeClasses } = useTheme()
+  const { borderClasses } = useBorder(props)
+  const { borderRadiusClasses } = useBorderRadius(props)
+  const { dimensionStyles } = useDimension(props)
+  const { elevationClasses } = useElevation(props)
+  const { positionClasses, positionStyles } = usePosition(props, name)
+
+  return {
+    sheetClasses: ref([
+      themeClasses.value,
+      borderClasses.value,
+      borderRadiusClasses.value,
+      elevationClasses.value,
+      positionClasses.value,
+    ]),
+    sheetStyles: ref([
+      dimensionStyles.value,
+      positionStyles.value,
+    ]),
+  }
+}
 
 export default defineComponent({
   name: 'VSheet',
@@ -29,27 +63,15 @@ export default defineComponent({
   props: makeProps(makeSheetProps()),
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme()
-    const { borderClasses } = useBorder(props)
-    const { borderRadiusClasses } = useBorderRadius(props)
-    const { dimensionStyles } = useDimension(props)
-    const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props, 'v-sheet')
+    const { sheetClasses, sheetStyles } = useSheet(props, 'v-sheet')
 
     return () => (
       h(props.tag, {
         class: [
           'v-sheet',
-          themeClasses.value,
-          borderClasses.value,
-          borderRadiusClasses.value,
-          elevationClasses.value,
-          positionClasses.value,
+          sheetClasses.value,
         ],
-        style: [
-          dimensionStyles.value,
-          positionStyles.value,
-        ],
+        style: sheetStyles.value,
       }, slots)
     )
   },
