@@ -44,7 +44,7 @@ describe('VDivider', () => {
     const wrapper = mountFunction({ propsData })
     const [ariaorientation, role] = expected
 
-    expect(wrapper.attributes().ariaorientation).toBe(ariaorientation)
+    expect(wrapper.attributes()['aria-orientation']).toBe(ariaorientation)
     expect(wrapper.attributes().role).toBe(role)
   })
 })

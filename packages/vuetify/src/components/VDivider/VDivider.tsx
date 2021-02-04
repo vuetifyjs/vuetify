@@ -1,8 +1,8 @@
 // Styles
-import './VDivider.sass'
+import './VDivider.scss'
 
 // Utilities
-import { computed, defineComponent, h } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { convertToUnit } from '@/util/helpers'
 import makeProps from '@/util/makeProps'
 
@@ -39,24 +39,26 @@ export default defineComponent({
       return styles
     })
 
-    return () => (
-      h('hr', {
-        class: [
-          'v-divider',
-          {
-            'v-divider--inset': props.inset,
-            'v-divider--vertical': props.vertical,
-          },
-          themeClasses.value,
-        ],
-        style: [
-          dividerStyles.value,
-        ],
-        ariaOrientation: !attrs.role || attrs.role === 'separator'
-          ? props.vertical ? 'vertical' : 'horizontal'
-          : undefined,
-        role: attrs.role || 'separator',
-      })
-    )
+    return () => {
+      return (
+        <hr
+          class={[
+            {
+              'v-divider': true,
+              'v-divider--inset': props.inset,
+              'v-divider--vertical': props.vertical,
+            },
+            themeClasses.value,
+          ]}
+          style={ dividerStyles.value }
+          aria-orientation={
+            !attrs.role || attrs.role === 'separator'
+              ? props.vertical ? 'vertical' : 'horizontal'
+              : undefined
+          }
+          role={`${attrs.role || 'separator'}`}
+        />
+      )
+    }
   },
 })
