@@ -1,167 +1,86 @@
-// @ts-nocheck
-/* eslint-disable */
-
 // Styles
-import './VBanner.sass'
+import './VBanner.scss'
 
-// Extensions
-import VSheet from '../VSheet'
-
-// Components
-import VAvatar from '../VAvatar'
-import VIcon from '../VIcon'
-import { VExpandTransition } from '../transitions'
-
-// Mixins
-import Mobile from '../../mixins/mobile'
-import Toggleable from '../../mixins/toggleable'
+// Composables
+import { useBorder } from '@/composables/border'
+import { useBorderRadius } from '@/composables/border-radius'
+import { useDimension } from '@/composables/dimensions'
+import { useElevation } from '@/composables/elevation'
+import { usePosition } from '@/composables/position'
+import { useTheme } from '@/composables/theme'
 
 // Utilities
-import mixins from '../../util/mixins'
-import {
-  convertToUnit,
-  getSlot,
-} from '../../util/helpers'
+import { defineComponent, h } from 'vue'
+import { makeSheetProps } from '@/components/VSheet/VSheet'
+import makeProps from '@/util/makeProps'
 
-// Typeslint
-import { VNode } from 'vue'
+export default defineComponent({
+  name: 'VBanner',
 
-/* @vue/component */
-export default mixins(
-  VSheet,
-  Mobile,
-  Toggleable
-).extend({
-  name: 'v-banner',
-
-  inheritAttrs: false,
-
-  props: {
-    app: Boolean,
-    icon: String,
-    iconColor: String,
+  props: makeProps({
+    avatar: [Boolean, String],
+    icon: [Boolean, String],
+    mobile: Boolean,
     singleLine: Boolean,
     sticky: Boolean,
-    value: {
-      type: Boolean,
-      default: true,
-    },
-  },
+    ...makeSheetProps(),
+  }),
 
-  computed: {
-    classes (): object {
-      return {
-        ...VSheet.options.computed.classes.call(this),
-        'v-banner--has-icon': this.hasIcon,
-        'v-banner--is-mobile': this.isMobile,
-        'v-banner--single-line': this.singleLine,
-        'v-banner--sticky': this.isSticky,
-      }
-    },
-    hasIcon (): boolean {
-      return Boolean(this.icon || this.$slots.icon)
-    },
-    isSticky (): boolean {
-      return this.sticky || this.app
-    },
-    styles (): object {
-      const styles: Record<string, any> = { ...VSheet.options.computed.styles.call(this) }
+  setup (props, { slots }) {
+    const { themeClasses } = useTheme()
+    const { borderClasses } = useBorder(props)
+    const { borderRadiusClasses } = useBorderRadius(props)
+    const { dimensionStyles } = useDimension(props)
+    const { elevationClasses } = useElevation(props)
+    const { positionClasses, positionStyles } = usePosition(props, 'v-banner')
 
-      if (this.isSticky) {
-        const top = !this.app
-          ? 0
-          : (this.$vuetify.application.bar + this.$vuetify.application.top)
+    return () => {
+      const hasThumbnail = (!!props.avatar || !!props.icon || !!slots.thumbnail)
 
-        styles.top = convertToUnit(top)
-        styles.position = 'sticky'
-        styles.zIndex = 1
-      }
-
-      return styles
-    },
-  },
-
-  methods: {
-    /** @public */
-    toggle () {
-      this.isActive = !this.isActive
-    },
-    iconClick (e: MouseEvent) {
-      this.$emit('click:icon', e)
-    },
-    genIcon () {
-      if (!this.hasIcon) return undefined
-
-      let content
-
-      if (this.icon) {
-        content = this.$createElement(VIcon, {
-          props: {
-            color: this.iconColor,
-            size: 28,
+      return h(props.tag, {
+        class: [
+          {
+            'v-banner': true,
+            'v-banner--has-thumbnail': hasThumbnail,
+            'v-banner--is-mobile': props.mobile,
+            'v-banner--single-line': props.singleLine,
+            'v-banner--sticky': props.sticky,
           },
-        }, [this.icon])
-      } else {
-        content = this.$slots.icon
-      }
-
-      return this.$createElement(VAvatar, {
-        staticClass: 'v-banner__icon',
-        props: {
-          color: this.color,
-          size: 40,
-        },
-        on: {
-          click: this.iconClick,
-        },
-      }, [content])
-    },
-    genText () {
-      return this.$createElement('div', {
-        staticClass: 'v-banner__text',
-      }, this.$slots.default)
-    },
-    genActions () {
-      const children = getSlot(this, 'actions', {
-        dismiss: () => this.isActive = false,
-      })
-
-      if (!children) return undefined
-
-      return this.$createElement('div', {
-        staticClass: 'v-banner__actions',
-      }, children)
-    },
-    genContent () {
-      return this.$createElement('div', {
-        staticClass: 'v-banner__content',
+          themeClasses.value,
+          borderClasses.value,
+          borderRadiusClasses.value,
+          elevationClasses.value,
+          positionClasses.value,
+        ],
+        style: [
+          dimensionStyles.value,
+          positionStyles.value,
+        ],
+        role: 'banner',
       }, [
-        this.genIcon(),
-        this.genText(),
-      ])
-    },
-    genWrapper () {
-      return this.$createElement('div', {
-        staticClass: 'v-banner__wrapper',
-      }, [
-        this.genContent(),
-        this.genActions(),
-      ])
-    },
-  },
+        h('div', { class: 'v-banner__sizer' }, [
+          h('div', { class: 'v-banner__content' }, [
+            hasThumbnail && h('div', { class: 'v-banner__thumbnail' }, [
+              slots.thumbnail?.(),
+              props.avatar && h('img', {
+                class: 'v-banner__avatar',
+                src: props.avatar,
+              }),
+              props.icon && h('i', {
+                class: [
+                  'v-banner__icon',
+                  props.icon,
+                ],
+              }),
+            ]),
+            h('div', { class: 'v-banner__text' }, slots.default?.()),
+          ]),
 
-  render (h): VNode {
-    return h(VExpandTransition, [
-      h('div', this.setBackgroundColor(this.color, {
-        staticClass: 'v-banner',
-        attrs: this.attrs$,
-        class: this.classes,
-        style: this.styles,
-        directives: [{
-          name: 'show',
-          value: this.isActive,
-        }],
-      }), [this.genWrapper()]),
-    ])
+          slots.actions && h('div', {
+            class: 'v-banner__actions',
+          }, slots.actions?.()),
+        ]),
+      ])
+    }
   },
 })
