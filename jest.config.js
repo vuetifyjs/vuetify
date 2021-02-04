@@ -8,6 +8,7 @@ module.exports = {
     '<rootDir>/test/index.ts',
   ],
   moduleFileExtensions: [
+    'tsx',
     'ts',
     'js',
   ],
@@ -23,7 +24,7 @@ module.exports = {
   transform: {
     '\\.(styl)$': 'jest-css-modules',
     '\\.(sass|scss)$': 'jest-css-modules',
-    '.*\\.(j|t)s$': 'babel-jest',
+    '.*\\.(j|t)sx?$': 'babel-jest',
   },
   collectCoverageFrom: [
     'src/**/*.{js,ts,tsx}',

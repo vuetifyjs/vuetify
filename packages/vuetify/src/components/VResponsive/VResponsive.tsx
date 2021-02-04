@@ -1,6 +1,6 @@
 import './VResponsive.sass'
 
-import { defineComponent, h, computed } from 'vue'
+import { defineComponent, computed } from 'vue'
 import makeProps from '@/util/makeProps'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
@@ -29,21 +29,12 @@ export default defineComponent({
     const { dimensionStyles } = useDimension(props)
     const { aspectStyles } = useAspectStyles(props)
 
-    return () => h('div', {
-      class: ['v-responsive'],
-      style: [dimensionStyles.value],
-    }, [
-      h('div', {
-        class: 'v-responsive__sizer',
-        style: aspectStyles.value,
-      }),
-      slots.additional?.(),
-      h('div', {
-        class: [
-          'v-responsive__content',
-          props.contentClass,
-        ],
-      }, slots.default?.()),
-    ])
+    return () => (
+      <div class="v-responsive" style={ dimensionStyles.value }>
+        <div class="v-responsive__sizer" style={ aspectStyles.value } />
+        { slots.additional?.() }
+        <div class={['v-responsive__content', props.contentClass]}>{ slots.default?.() }</div>
+      </div>
+    )
   },
 })

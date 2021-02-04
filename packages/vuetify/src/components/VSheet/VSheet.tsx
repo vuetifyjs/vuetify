@@ -18,7 +18,7 @@ import type { ElevationProps } from '@/composables/elevation'
 import type { PositionProps } from '@/composables/position'
 
 // Utilities
-import { defineComponent, h, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import makeProps from '@/util/makeProps'
 
 export function makeSheetProps () {
@@ -66,13 +66,11 @@ export default defineComponent({
     const { sheetClasses, sheetStyles } = useSheet(props, 'v-sheet')
 
     return () => (
-      h(props.tag, {
-        class: [
-          'v-sheet',
-          sheetClasses.value,
-        ],
-        style: sheetStyles.value,
-      }, slots)
+      <props.tag
+        class={['v-sheet', sheetClasses.value]}
+        style={ sheetStyles.value }
+        v-slots={ slots }
+      />
     )
   },
 })

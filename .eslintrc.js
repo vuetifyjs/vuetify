@@ -21,6 +21,7 @@ module.exports = {
   plugins: [
     '@typescript-eslint',
     'sonarjs',
+    'react',
     // 'vuetify',
   ],
   rules: {
@@ -164,6 +165,31 @@ module.exports = {
         '@typescript-eslint/prefer-string-starts-ends-with': 'error',
         '@typescript-eslint/prefer-ts-expect-error': 'warn',
         '@typescript-eslint/restrict-plus-operands': 'error',
+      },
+    },
+    {
+      files: '**/*.tsx',
+      rules: {
+        'react/jsx-boolean-value': 'error',
+        'react/jsx-closing-bracket-location': ['error', 'line-aligned'],
+        'react/jsx-curly-brace-presence': 'error',
+
+        // https://github.com/yannickcr/eslint-plugin-react/issues/2415
+        // 'react/jsx-curly-spacing': ['error', { when: 'always', spacing: { objectLiterals: 'never' } }],
+
+        'react/jsx-equals-spacing': 'error',
+        'react/jsx-first-prop-new-line': 'error',
+        'react/jsx-max-props-per-line': ['error', { when: 'multiline' }],
+        'react/jsx-no-comment-textnodes': 'error',
+        'react/jsx-tag-spacing': 'error',
+        'react/jsx-wrap-multilines': ['error', {
+          declaration: 'parens-new-line',
+          assignment: 'parens-new-line',
+          return: 'parens-new-line',
+          arrow: 'parens-new-line',
+          condition: 'parens-new-line',
+          logical: 'parens-new-line',
+        }],
       },
     },
   ],
