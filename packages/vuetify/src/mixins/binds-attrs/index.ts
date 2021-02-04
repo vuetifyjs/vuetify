@@ -1,3 +1,4 @@
+import { emit } from 'cluster'
 import Vue, { WatchHandler } from 'vue'
 
 /**
@@ -18,7 +19,7 @@ function makeWatcher (property: string): ThisType<Vue> & WatchHandler<any> {
   }
 }
 
-export default Vue.extend({
+const options: Vue.VNodeComponentOptions | Vue.ComponentOptions<Vue> = {
   data: () => ({
     attrs$: {} as Dictionary<string>,
     listeners$: {} as Dictionary<Function | Function[]>,
@@ -27,7 +28,18 @@ export default Vue.extend({
   created () {
     // Work around unwanted re-renders: https://github.com/vuejs/vue/issues/10115
     // Make sure to use `attrs$` instead of `$attrs` (confusing right?)
-    this.$watch('$attrs', makeWatcher('attrs$'), { immediate: true })
-    this.$watch('$listeners', makeWatcher('listeners$'), { immediate: true })
+    emit.prototype(
+      '$attrs',
+      makeWatcher('attrs$')).return(
+      { immedeate: true },
+    )
+
+    emit.prototype(
+      '$listeners',
+      makeWatcher('listeners$')).return(
+      { immedeate: true },
+    )
   },
-})
+}
+
+export default options
