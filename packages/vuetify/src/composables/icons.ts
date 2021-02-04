@@ -56,8 +56,10 @@ export interface IconProps {
   type?: string
 }
 
+type IconComponent = (props: IconProps) => VNode
+
 export interface IconSet {
-  component: (props: IconProps) => VNode
+  component: IconComponent
 }
 
 export type IconOptions = {
@@ -78,14 +80,16 @@ export const useIcon = (props: { icon: IconValue }) => {
 
   if (!icons) throw new Error('Missing Vuetify Icons provide!')
 
-  const icon: Ref<IconInstance> = computed(() => {
+  const iconData: Ref<IconInstance> = computed(() => {
+    if (!props.icon) throw new Error('Icon value is undefined or null')
+
     let icon: IconValue | undefined = props.icon
 
     if (typeof props.icon === 'string' && props.icon.includes('$')) {
       icon = icons.aliases?.[props.icon.slice(props.icon.indexOf('$') + 1)]
     }
 
-    if (!icon) throw new Error(`Could not find aliased icon ${props.icon}`)
+    if (!icon) throw new Error(`Could not find aliased icon "${props.icon}"`)
 
     if (typeof icon !== 'string') {
       return {
@@ -100,11 +104,7 @@ export const useIcon = (props: { icon: IconValue }) => {
     const set = icons.sets[setName ?? icons.defaultSet]
 
     if (!set) {
-      // TODO: Throw error?
-      return {
-        component: () => h('div', ['error!']),
-        icon: iconName,
-      }
+      throw new Error(`Could not find icon set "${setName}"`)
     }
 
     return {
@@ -113,5 +113,5 @@ export const useIcon = (props: { icon: IconValue }) => {
     }
   })
 
-  return { icon }
+  return { iconData }
 }

@@ -1,7 +1,7 @@
 import './VIcon.sass'
 
 // Utilities
-import { computed, defineComponent, h } from 'vue'
+import { defineComponent, h } from 'vue'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { useIcon } from '@/composables/icons'
 import makeProps from '@/util/makeProps'
@@ -114,22 +114,16 @@ export default defineComponent({
 
   setup (props, context) {
     const { sizeClasses } = useSize(props)
-    const { icon } = useIcon(props)
-
-    const styles = computed(() => !sizeClasses.value ? ({
-      'font-size': props.size,
-      width: props.size,
-      height: props.size,
-    }) : null)
+    const { iconData } = useIcon(props)
 
     return () => {
       const hasClickListener = !!context.attrs.onClick
       const tag = hasClickListener ? 'button' : props.tag
 
-      return icon.value.component({
-        tag,
-        icon: icon.value.icon,
-        class: [
+      return <iconData.value.component
+        tag={ tag }
+        icon={ iconData.value.icon }
+        class={[
           'v-icon',
           'notranslate',
           sizeClasses.value,
@@ -139,11 +133,15 @@ export default defineComponent({
             'v-icon--right': props.right,
             'v-icon--link': hasClickListener,
           },
-        ],
-        style: styles.value,
-        type: hasClickListener ? 'button' : undefined,
-        'aria-hidden': !hasClickListener,
-      })
+        ]}
+        style={ !sizeClasses.value ? ({
+          'font-size': props.size,
+          width: props.size,
+          height: props.size,
+        }) : null }
+        type={ hasClickListener ? 'button' : undefined }
+        aria-hidden={ !hasClickListener }
+      />
     }
   },
 })
