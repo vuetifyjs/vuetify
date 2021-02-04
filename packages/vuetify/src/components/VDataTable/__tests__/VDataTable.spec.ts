@@ -12,6 +12,7 @@ import { preset } from '../../../presets/default'
 import { resizeWindow } from '../../../../test'
 
 Vue.prototype.$vuetify = {
+  icons: {},
   rtl: false,
   lang: new Lang(preset),
 }

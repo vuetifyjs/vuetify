@@ -42,6 +42,14 @@ $material-dark: map-deep-merge(
       ),
     'cards': map-get($material-dark-elevation-colors, '1'),
     'chips': #555,
+    'code': (
+      'background': rgba(map-get($shades, 'white'), 0.1),
+      'color': currentColor
+    ),
+    'kbd': (
+      'background': #212529,
+      'color': map-get($shades, 'white')
+    ),
     'dividers': rgba(map-get($shades, 'white'), 0.12),
     'text': (
       'theme': map-get($shades, 'white'),

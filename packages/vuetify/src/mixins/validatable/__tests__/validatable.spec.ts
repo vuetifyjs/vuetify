@@ -390,7 +390,7 @@ describe('validatable.ts', () => {
     wrapper.vm.reset()
 
     expect(wrapper.vm.isResetting).toBe(true)
-    expect(wrapper.vm.internalValue).toBeUndefined()
+    expect(wrapper.vm.internalValue).toBeNull()
 
     wrapper.setProps({ value: ['foobar'] })
 

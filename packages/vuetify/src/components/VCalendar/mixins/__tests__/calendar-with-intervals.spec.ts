@@ -209,7 +209,6 @@ describe('calendar-with-intervals.ts', () => {
     expect(wrapper.vm.timeToY('23:50')).toBe(240)
 
     expect(wrapper.vm.timeToY('00:05')).toBe(0)
-
     expect(Math.round(wrapper.vm.timeToY('08:30', false) || 0)).toBe(2208)
     expect(wrapper.vm.timeToY('09:30', false)).toBe(2496)
     expect(wrapper.vm.timeToY('23:50', false)).toBe(6624)

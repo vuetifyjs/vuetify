@@ -18,6 +18,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
         sync: false,
         mocks: {
           $vuetify: {
+            icons: {},
             rtl: false,
           },
         },
@@ -365,6 +366,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
 
   it('should render component with async loading and custom progress and match snapshot', () => {
     Vue.prototype.$vuetify = {
+      icons: {},
       rtl: false,
     }
     const progress = Vue.component('test', {
@@ -845,6 +847,7 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
       propsData: { soloInverted: true },
       mocks: {
         $vuetify: {
+          icons: {},
           theme: { dark: false },
         },
       },

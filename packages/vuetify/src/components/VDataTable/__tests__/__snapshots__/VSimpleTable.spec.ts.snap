@@ -76,7 +76,7 @@ exports[`VSimpleTable.ts should render with custom wrapper 1`] = `
 `;
 
 exports[`VSimpleTable.ts should render with top & bottom slots 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-top v-data-table--has-bottom theme--light">
   <div class="top">
     Header
   </div>

@@ -25,12 +25,17 @@ The `v-app-bar` component is used for application-wide actions and information.
 
 - [v-app-bar](/api/v-app-bar)
 - [v-app-bar-nav-icon](/api/v-app-bar-nav-icon)
+- [v-app-bar-title](/api/v-app-bar-title)
 
 ## Sub-components
 
 ### v-app-bar-nav-icon
 
 A styled icon button component created specifically for use with [v-toolbar](/components/toolbars) and `v-app-bar`. Typically seen on the left side of a toolbar as a hamburger menu, it is often used to control the state of a navigation drawer. The `default` slot can be used to customize the icon and function of this component. This is a **functional** component.
+
+### v-app-bar-title
+
+A modified [v-toolbar-title](/components/toolbars/) specifically for use with the `shrink-on-scroll` prop. `v-toolbar-title` will be truncated on small screens (see [issue #12514](https://github.com/vuetifyjs/vuetify/issues/12514)) but this component uses absolute positioning to be fully visible when expanded. We don't recommend using `v-app-bar-title` without `shrink-on-scroll` as it does add a resize watcher and some extra calculations.
 
 ## Caveats
 

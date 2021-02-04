@@ -274,8 +274,8 @@ describe('VSelect.ts', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.internalValue).toBeUndefined()
-    expect(input).toHaveBeenCalledWith(undefined)
+    expect(wrapper.vm.internalValue).toBeNull()
+    expect(input).toHaveBeenCalledWith(null)
   })
 
   it('should be clearable with prop, dirty and single select', async () => {
@@ -296,7 +296,7 @@ describe('VSelect.ts', () => {
 
     clear.trigger('click')
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.internalValue).toBeUndefined()
+    expect(wrapper.vm.internalValue).toBeNull()
     expect(wrapper.vm.isMenuActive).toBe(false)
   })
 
@@ -471,6 +471,22 @@ describe('VSelect.ts', () => {
 
     // Up arrow
     event.keyCode = keyCodes.up
+    wrapper.vm.onKeyDown(event)
+
+    await waitAnimationFrame()
+
+    expect(wrapper.vm.internalValue).toBe(1)
+
+    // End key
+    event.keyCode = keyCodes.end
+    wrapper.vm.onKeyDown(event)
+
+    await waitAnimationFrame()
+
+    expect(wrapper.vm.internalValue).toBe(4)
+
+    // Home key
+    event.keyCode = keyCodes.home
     wrapper.vm.onKeyDown(event)
 
     await waitAnimationFrame()

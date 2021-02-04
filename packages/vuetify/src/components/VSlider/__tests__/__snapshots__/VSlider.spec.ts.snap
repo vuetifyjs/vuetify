@@ -7,6 +7,7 @@ exports[`VSlider.ts should change track styles in rtl 1`] = `
       <div class="v-slider v-slider--horizontal theme--light">
         <input value="0"
                id="input-91"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
         >
@@ -53,6 +54,7 @@ exports[`VSlider.ts should change track styles in rtl 2`] = `
       <div class="v-slider v-slider--horizontal theme--light">
         <input value="50"
                id="input-91"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
         >
@@ -99,9 +101,9 @@ exports[`VSlider.ts should change track styles in rtl 3`] = `
       <div class="v-slider v-slider--horizontal v-slider--disabled theme--light">
         <input value="50"
                id="input-91"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
-               disabled="disabled"
         >
         <div class="v-slider__track-container">
           <div class="v-slider__track-background"
@@ -146,6 +148,7 @@ exports[`VSlider.ts should change track styles in rtl 4`] = `
       <div class="v-slider v-slider--horizontal theme--light">
         <input value="0"
                id="input-91"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
         >
@@ -192,6 +195,7 @@ exports[`VSlider.ts should change track styles in rtl 5`] = `
       <div class="v-slider v-slider--horizontal theme--light">
         <input value="50"
                id="input-91"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
         >
@@ -238,9 +242,9 @@ exports[`VSlider.ts should change track styles in rtl 6`] = `
       <div class="v-slider v-slider--horizontal v-slider--disabled theme--light">
         <input value="50"
                id="input-91"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
-               disabled="disabled"
         >
         <div class="v-slider__track-container">
           <div class="v-slider__track-background"
@@ -285,6 +289,7 @@ exports[`VSlider.ts should correctly handle initial value of zero (#7320) 1`] = 
       <div class="v-slider v-slider--horizontal theme--light">
         <input value="0"
                id="input-111"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
         >
@@ -383,6 +388,7 @@ exports[`VSlider.ts should display label and have different aria-label 1`] = `
       <div class="v-slider v-slider--horizontal theme--light">
         <input value="0"
                id="input-95"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
                aria-label="bar"
@@ -431,6 +437,7 @@ exports[`VSlider.ts should match a snapshot 1`] = `
       <div class="v-slider v-slider--horizontal theme--light">
         <input value="0"
                id="input-1"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
         >
@@ -477,6 +484,7 @@ exports[`VSlider.ts should render component with thumbLabel and match a snapshot
       <div class="v-slider v-slider--horizontal theme--light">
         <input value="0"
                id="input-13"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
         >
@@ -536,6 +544,7 @@ exports[`VSlider.ts should render component with thumbLabel and match a snapshot
       <div class="v-slider v-slider--horizontal theme--light">
         <input value="0"
                id="input-13"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
         >
@@ -595,6 +604,7 @@ exports[`VSlider.ts should render component with ticks and match a snapshot 1`] 
       <div class="v-slider v-slider--horizontal theme--light">
         <input value="0"
                id="input-9"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
         >
@@ -663,6 +673,7 @@ exports[`VSlider.ts should render component with ticks and match a snapshot 2`] 
       <div class="v-slider v-slider--horizontal theme--light">
         <input value="0"
                id="input-9"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
         >
@@ -731,6 +742,7 @@ exports[`VSlider.ts should render vertical slider 1`] = `
       <div class="v-slider v-slider--vertical theme--light">
         <input value="0"
                id="input-5"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
         >
@@ -783,6 +795,7 @@ exports[`VSlider.ts should reverse label location when inverse 1`] = `
       <div class="v-slider v-slider--horizontal theme--light">
         <input value="0"
                id="input-87"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
         >
@@ -830,6 +843,7 @@ exports[`VSlider.ts should reverse label location when inverse 2`] = `
       <div class="v-slider v-slider--horizontal theme--light">
         <input value="0"
                id="input-87"
+               disabled="disabled"
                readonly="readonly"
                tabindex="-1"
         >

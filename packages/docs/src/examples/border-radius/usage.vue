@@ -30,7 +30,7 @@
       model: 3,
       rounded: [
         '0',
-        'xs',
+        'sm',
         'md',
         'lg',
         'xl',

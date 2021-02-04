@@ -24,12 +24,13 @@ Lists come in three main variations. **single-line** (default), **two-line** and
 ## API
 
 - [v-list](/api/v-list)
+- [v-list-group](/api/v-list-group)
 - [v-list-item](/api/v-list-item)
 - [v-list-item-action](/api/v-list-item-action)
 - [v-list-item-action-text](/api/v-list-item-action-text)
 - [v-list-item-avatar](/api/v-list-item-avatar)
 - [v-list-item-content](/api/v-list-item-content)
-- [v-list-item-group](/api/v-list-group)
+- [v-list-item-group](/api/v-list-item-group)
 - [v-list-item-icon](/api/v-list-item-icon)
 - [v-list-item-subtitle](/api/v-list-item-subtitle)
 - [v-list-item-title](/api/v-list-item-title)
@@ -85,6 +86,8 @@ v-list-item-title description -->
 #### Disabled
 
 You cannot interact with disabled `v-list`.
+
+<promoted-ad slug="vuetify-lux-admin-pro" />
 
 <example file="v-list/prop-disabled" />
 

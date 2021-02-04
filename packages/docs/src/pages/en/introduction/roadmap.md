@@ -22,18 +22,18 @@ The following releases are currently under development:
 
 ### v3.0 (Titan)
 
-- **Target Release:** Summer 2021
-- **Alpha:** Q4 2020
+- **Target Release:** Q3 2021
+- **Alpha:** Q1 2021
 - **Overview:**
-  The entire framework will be converted to the new [composition api](https://vue-composition-api-rfc.netlify.com/) coming in Vue 3. Details of this conversion process are outlined in our [v3 Notion Board](https://notion.vuetifyjs.com) along with information about release schedules, proposed new functionality and more. Vuetify 3 is being developed with the pre-releases (alpha/beta) of Vue 3 and is expected to release shortly after the next Vue version is officially released. Due to this, the target release quarter is variable and will change according to the progress of Vue 3.
+  The entire framework will be converted to the new [composition api](https://vue-composition-api-rfc.netlify.com/) coming in Vue 3. Details of this conversion process are outlined in our [v3 Notion Board](https://notion.vuetifyjs.com) along with information about release schedules, proposed new functionality and more. Progress related to individual components and phases can be tracked via [v3 GitHub Project](https://github.com/orgs/vuetifyjs/projects/7).
 - **Objectives:**
-- Create a set of guidelines for how Vuetify 3 will be developed, iterated on and released—[v3 Notion Board](https://notion.vuetifyjs.com)
-- Rebuild the framework using Vue 3 and the [composition api](https://vue-composition-api-rfc.netlify.com/)
-- Improve framework performance
-- Enhance Typescript support with Vue 3; updated typings
-- Make it easier to unit test, no global setup required
-- Restructure the framework core to support custom services
-- Update the Documentation with improved examples and more information
+  - Create a set of guidelines for how Vuetify 3 will be developed, iterated on and released—[v3 Notion Board](https://notion.vuetifyjs.com)
+  - Rebuild the framework using Vue 3 and the [composition api](https://vue-composition-api-rfc.netlify.com/)
+  - Improve framework performance
+  - Enhance Typescript support with Vue 3; updated typings
+  - Make it easier to unit test, no global setup required
+  - Restructure the framework core to support custom services
+  - Update the Documentation with improved examples and more information
 
 ## Long-term support (LTS)
 
@@ -61,6 +61,24 @@ The following versions have continued maintenance for backwards compatible fixes
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
 
+### v2.4 (Endurance)
+
+- **Released:** December 2020
+- **Notes:**: [v2.4 Release](https://github.com/vuetifyjs/vuetify/releases/tag/v2.4.0)
+- **Overview:**
+  The v2.4 release provides bug fixes, features and quality of life changes for Vuetify as we prepare for v3 Alpha. This release contains some new features that we are building into Vuetify 3 right now such as new slots for `v-carousel` and support for globally defined icon components.
+- **Objectives:**
+  - Add **plain** property for `v-btn`
+  - Add new locales
+    - Azerbaijani
+    - Central Kurdish
+  - Add typography css classes `text-pre` and `text-pre-wrap`
+  - Add new slots for `v-carousel`
+  - Support for a globally defined icon components
+  - Improved accessibility in the `v-menu` component
+
+---
+
 ### v2.3 (Liberator)
 
 - **Released:** June 2020
@@ -68,10 +86,10 @@ The following are the already released **minor** and **major** version updates. 
 - **Overview:**
   The v2.3 release was dropped earlier in the year to focus on v3 development but was revived when COVID-19 showed up. This release is packed full of quality of life changes, new features such as the `v-virtual-scroll` component, responsive typography css classes.
 - **Objectives:**
-- Add new css helper classes for `text-decoration`, `border-radius`, `typography`, and more.
-- Add new `v-virtual-scroll` component
-- Improve *Date Pickers, Data Tables, and Calendars*
-- Harden framework in preparation for **LTS version**
+  - Add new css helper classes for `text-decoration`, `border-radius`, `typography`, and more.
+  - Add new `v-virtual-scroll` component
+  - Improve *Date Pickers, Data Tables, and Calendars*
+  - Harden framework in preparation for **LTS version**
 
 ---
 
@@ -82,12 +100,12 @@ The following are the already released **minor** and **major** version updates. 
 - **Overview:**
   The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be _user customizable_. Will streamline the process for altering the default styles for the framework. Thousands of SASS variables will be added and a lookup tree for finding those variables will put into the documentation. For more information on Google's studies, please [navigate here](https://material.io/design/material-studies/about-our-material-studies.html).
 - **Objectives:**
-- Add _thousands_ of new SASS variables
-- Create a new Vuetify Service for bootstrapping pre-configured framework options; **Preset**
-- Create presets for the official [Material Design Studies](https://material.io/design/material-studies/about-our-material-studies.html)
-- Add new features and improve code styling of `v-badge`
-- Add new features and improve code styling of `v-expansion-panels`
-- new `v-theme-provider` component
+  - Add _thousands_ of new SASS variables
+  - Create a new Vuetify Service for bootstrapping pre-configured framework options; **Preset**
+  - Create presets for the official [Material Design Studies](https://material.io/design/material-studies/about-our-material-studies.html)
+  - Add new features and improve code styling of `v-badge`
+  - Add new features and improve code styling of `v-expansion-panels`
+  - new `v-theme-provider` component
 
 ---
 
@@ -98,13 +116,13 @@ The following are the already released **minor** and **major** version updates. 
 - **Overview:**
   A maintenance cycle to work on bugs from the v2.0 release. This includes performance issues, incorrect or missing a11y, RTL, regressions and general fixes. This will allow the team to catch up on the backlog of tasks that have accumulated over the 8 month development cycle of the previous release.
 - **Objectives:**
-- Add new components
-- `v-lazy`
-- `v-skeleton-loader
-- Add new directives
-- `v-intersect`
-- `v-mutate`
-- Add lazy loading support for `v-img`
+  - Add new components
+    - `v-lazy`
+    - `v-skeleton-loader`
+  - Add new directives
+    - `v-intersect`
+    - `v-mutate`
+  - Add lazy loading support for `v-img`
 
 ---
 
@@ -115,20 +133,20 @@ The following are the already released **minor** and **major** version updates. 
 - **Overview:**
   A complete rebuild of the framework core. Improving the layout and theme systems, platform integration, accessibility, RTL and performance. Update all components to the [Material Design 2](https://material.io/design/) specification. Add additional functionality to multiple existing components and setup v1.5 for [Long-term Support](/introduction/long-term-support).
 - **Objectives:**
-- Add new components
-- `v-app-bar`
-- `v-banner`
-- `v-chip-group`
-- `v-color-picker`
-- `v-file-input`
-- `v-list-item-group`
-- `v-overlay`
-- `v-simple-table`
-- `v-slide-group`
-- Complete update to Material Design 2
-- Convert from Javascript to Typescript
-- Convert from Stylus to Sass
-- Convert from avoriaz to vue-test-utils
+  - Add new components
+    - `v-app-bar`
+    - `v-banner`
+    - `v-chip-group`
+    - `v-color-picker`
+    - `v-file-input`
+    - `v-list-item-group`
+    - `v-overlay`
+    - `v-simple-table`
+    - `v-slide-group`
+  - Complete update to Material Design 2
+  - Convert from Javascript to Typescript
+  - Convert from Stylus to Sass
+  - Convert from avoriaz to vue-test-utils
 
 ## Archived
 

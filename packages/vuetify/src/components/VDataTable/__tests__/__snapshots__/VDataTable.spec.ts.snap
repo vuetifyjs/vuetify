@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VDataTable.ts should apply class from item to rows 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -329,7 +329,7 @@ exports[`VDataTable.ts should apply class from item to rows 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-672"
                        readonly="readonly"
                        type="text"
@@ -362,7 +362,7 @@ exports[`VDataTable.ts should apply class from item to rows 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -376,7 +376,7 @@ exports[`VDataTable.ts should apply class from item to rows 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -393,7 +393,7 @@ exports[`VDataTable.ts should apply class from item to rows 1`] = `
 `;
 
 exports[`VDataTable.ts should apply class function to rows 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -721,7 +721,7 @@ exports[`VDataTable.ts should apply class function to rows 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-656"
                        readonly="readonly"
                        type="text"
@@ -754,7 +754,7 @@ exports[`VDataTable.ts should apply class function to rows 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -768,7 +768,7 @@ exports[`VDataTable.ts should apply class function to rows 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -785,7 +785,7 @@ exports[`VDataTable.ts should apply class function to rows 1`] = `
 `;
 
 exports[`VDataTable.ts should apply class list to rows 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -1113,7 +1113,7 @@ exports[`VDataTable.ts should apply class list to rows 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-624"
                        readonly="readonly"
                        type="text"
@@ -1146,7 +1146,7 @@ exports[`VDataTable.ts should apply class list to rows 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -1160,7 +1160,7 @@ exports[`VDataTable.ts should apply class list to rows 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -1177,7 +1177,7 @@ exports[`VDataTable.ts should apply class list to rows 1`] = `
 `;
 
 exports[`VDataTable.ts should apply class unique to rows 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -1505,7 +1505,7 @@ exports[`VDataTable.ts should apply class unique to rows 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-640"
                        readonly="readonly"
                        type="text"
@@ -1538,7 +1538,7 @@ exports[`VDataTable.ts should apply class unique to rows 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -1552,7 +1552,7 @@ exports[`VDataTable.ts should apply class unique to rows 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -1569,7 +1569,7 @@ exports[`VDataTable.ts should apply class unique to rows 1`] = `
 `;
 
 exports[`VDataTable.ts should change page if item count decreases below page start 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -1737,7 +1737,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -1752,7 +1752,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -1769,7 +1769,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
 `;
 
 exports[`VDataTable.ts should default to first option in itemsPerPageOptions if it does not include itemsPerPage 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -2147,7 +2147,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
                 <div class="v-select__selection v-select__selection--comma">
                   6
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-408"
                        readonly="readonly"
                        type="text"
@@ -2180,7 +2180,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -2194,7 +2194,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -2211,7 +2211,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
 `;
 
 exports[`VDataTable.ts should handle object when checking if it should default to first option in itemsPerPageOptions 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -2789,7 +2789,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
                 <div class="v-select__selection v-select__selection--comma">
                   All
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-424"
                        readonly="readonly"
                        type="text"
@@ -2822,7 +2822,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -2837,7 +2837,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -2854,7 +2854,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
 `;
 
 exports[`VDataTable.ts should hide group button when column is not groupable 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -3432,7 +3432,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-720"
                        readonly="readonly"
                        type="text"
@@ -3465,7 +3465,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -3480,7 +3480,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -3497,7 +3497,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
 `;
 
 exports[`VDataTable.ts should limit page to current page count if not using server-items-length 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -3825,7 +3825,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-392"
                        readonly="readonly"
                        type="text"
@@ -3857,7 +3857,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -3872,7 +3872,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -3889,7 +3889,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
 `;
 
 exports[`VDataTable.ts should not limit page to current item count when using server-items-length 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -3972,7 +3972,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-344"
                        readonly="readonly"
                        type="text"
@@ -4004,7 +4004,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -4019,7 +4019,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -4036,7 +4036,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
 `;
 
 exports[`VDataTable.ts should not limit page to current item count when using server-items-length 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -4364,7 +4364,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-344"
                        readonly="readonly"
                        type="text"
@@ -4396,7 +4396,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -4410,7 +4410,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -4427,7 +4427,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
 `;
 
 exports[`VDataTable.ts should not search column with filterable set to false 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -5005,7 +5005,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-360"
                        readonly="readonly"
                        type="text"
@@ -5038,7 +5038,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -5053,7 +5053,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -5070,7 +5070,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
 `;
 
 exports[`VDataTable.ts should not search column with filterable set to false 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -5153,7 +5153,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-360"
                        readonly="readonly"
                        type="text"
@@ -5186,7 +5186,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -5201,7 +5201,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -5218,7 +5218,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
 `;
 
 exports[`VDataTable.ts should not search column with filterable set to false and has filter function 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -5446,7 +5446,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-376"
                        readonly="readonly"
                        type="text"
@@ -5479,7 +5479,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -5494,7 +5494,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -5511,7 +5511,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
 `;
 
 exports[`VDataTable.ts should not search column with filterable set to false and has filter function 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6089,7 +6089,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-376"
                        readonly="readonly"
                        type="text"
@@ -6122,7 +6122,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6137,7 +6137,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6154,7 +6154,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
 `;
 
 exports[`VDataTable.ts should not select item that is not selectable 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6374,7 +6374,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-490"
                        readonly="readonly"
                        type="text"
@@ -6407,7 +6407,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6422,7 +6422,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6439,7 +6439,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
 `;
 
 exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6510,7 +6510,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6525,7 +6525,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6542,7 +6542,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
 `;
 
 exports[`VDataTable.ts should render 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6580,7 +6580,7 @@ exports[`VDataTable.ts should render 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-6"
                        readonly="readonly"
                        type="text"
@@ -6613,7 +6613,7 @@ exports[`VDataTable.ts should render 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6628,7 +6628,7 @@ exports[`VDataTable.ts should render 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6645,7 +6645,7 @@ exports[`VDataTable.ts should render 1`] = `
 `;
 
 exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6680,7 +6680,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-328"
                        readonly="readonly"
                        type="text"
@@ -6715,7 +6715,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6730,7 +6730,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6747,7 +6747,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
 `;
 
 exports[`VDataTable.ts should render item slot when using group-by function 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6808,7 +6808,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -6820,7 +6820,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
             </button>
             name: Frozen Yogurt
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -6838,7 +6838,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -6850,7 +6850,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
             </button>
             name: Ice cream sandwich
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -6884,7 +6884,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-558"
                        readonly="readonly"
                        type="text"
@@ -6917,7 +6917,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6932,7 +6932,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6949,7 +6949,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
 `;
 
 exports[`VDataTable.ts should render loading state 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -7012,7 +7012,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-221"
                        readonly="readonly"
                        type="text"
@@ -7045,7 +7045,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -7060,7 +7060,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -7077,7 +7077,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
 `;
 
 exports[`VDataTable.ts should render loading state 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -7169,7 +7169,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-237"
                        readonly="readonly"
                        type="text"
@@ -7202,7 +7202,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -7217,7 +7217,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -7234,7 +7234,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
 `;
 
 exports[`VDataTable.ts should render with body slot 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -7313,7 +7313,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-39"
                        readonly="readonly"
                        type="text"
@@ -7346,7 +7346,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -7360,7 +7360,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -7377,7 +7377,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
 `;
 
 exports[`VDataTable.ts should render with data 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -7705,7 +7705,7 @@ exports[`VDataTable.ts should render with data 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-22"
                        readonly="readonly"
                        type="text"
@@ -7738,7 +7738,7 @@ exports[`VDataTable.ts should render with data 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -7752,7 +7752,7 @@ exports[`VDataTable.ts should render with data 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -7769,7 +7769,7 @@ exports[`VDataTable.ts should render with data 1`] = `
 `;
 
 exports[`VDataTable.ts should render with group scoped slot 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -7828,16 +7828,16 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
       </thead>
       <tbody>
         <div>
-          {"group":0,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"items":[{"name":"Jelly bean","calories":375,"fat":0,"carbs":94,"protein":0,"iron":"0%"},{"name":"Lollipop","calories":392,"fat":0.2,"carbs":98,"protein":0,"iron":"2%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
+          {"group":0,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"isMobile":true,"items":[{"name":"Jelly bean","calories":375,"fat":0,"carbs":94,"protein":0,"iron":"0%"},{"name":"Lollipop","calories":392,"fat":0.2,"carbs":98,"protein":0,"iron":"2%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"group":3.9,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"items":[{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
+          {"group":3.9,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"isMobile":true,"items":[{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"group":4,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"items":[{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%","class":"test"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
+          {"group":4,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"isMobile":true,"items":[{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%","class":"test"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"group":4.3,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"items":[{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%","class":["test","second"]}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
+          {"group":4.3,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"isMobile":true,"items":[{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%","class":["test","second"]}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
         </div>
       </tbody>
     </table>
@@ -7858,7 +7858,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-206"
                        readonly="readonly"
                        type="text"
@@ -7891,7 +7891,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -7905,7 +7905,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -7922,7 +7922,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
 `;
 
 exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -7983,7 +7983,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -7995,7 +7995,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
             calories: 159
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8057,7 +8057,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8069,7 +8069,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
             calories: 237
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8131,7 +8131,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8143,7 +8143,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
             calories: 262
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8205,7 +8205,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8217,7 +8217,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
             calories: 305
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8279,7 +8279,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8291,7 +8291,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
             calories: 356
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8369,7 +8369,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-138"
                        readonly="readonly"
                        type="text"
@@ -8402,7 +8402,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -8416,7 +8416,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -8433,7 +8433,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
 `;
 
 exports[`VDataTable.ts should render with grouped rows 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -8494,7 +8494,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8506,7 +8506,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </button>
             protein: 0
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8605,7 +8605,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8617,7 +8617,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </button>
             protein: 3.9
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8674,7 +8674,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8686,7 +8686,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </button>
             protein: 4
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8743,7 +8743,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8755,7 +8755,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </button>
             protein: 4.3
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8828,7 +8828,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-188"
                        readonly="readonly"
                        type="text"
@@ -8861,7 +8861,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -8875,7 +8875,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -8892,7 +8892,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
 `;
 
 exports[`VDataTable.ts should render with item scoped slot 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -8952,19 +8952,19 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
       </thead>
       <tbody>
         <div>
-          {"item":{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%","class":"test"},"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":0}
+          {"item":{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%","class":"test"},"index":0,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"item":{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%","class":["test","second"]},"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":1}
+          {"item":{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%","class":["test","second"]},"index":1,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"item":{"name":"Eclair","calories":262,"fat":16,"carbs":23,"protein":6,"iron":"7%","class":{"test":true,"second":false}},"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":2}
+          {"item":{"name":"Eclair","calories":262,"fat":16,"carbs":23,"protein":6,"iron":"7%","class":{"test":true,"second":false}},"index":2,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"item":{"name":"Cupcake","calories":305,"fat":3.7,"carbs":67,"protein":4.3,"iron":"8%"},"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":3}
+          {"item":{"name":"Cupcake","calories":305,"fat":3.7,"carbs":67,"protein":4.3,"iron":"8%"},"index":3,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"item":{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"},"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":4}
+          {"item":{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"},"index":4,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
         </div>
       </tbody>
     </table>
@@ -8985,7 +8985,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-156"
                        readonly="readonly"
                        type="text"
@@ -9018,7 +9018,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -9032,7 +9032,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -9049,7 +9049,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
 `;
 
 exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -9402,7 +9402,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-100"
                        readonly="readonly"
                        type="text"
@@ -9435,7 +9435,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -9449,7 +9449,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -9466,7 +9466,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
 `;
 
 exports[`VDataTable.ts should render with showExpand 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -9850,7 +9850,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-60"
                        readonly="readonly"
                        type="text"
@@ -9883,7 +9883,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -9897,7 +9897,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -9914,7 +9914,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
 `;
 
 exports[`VDataTable.ts should render with showExpand 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -10298,7 +10298,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-60"
                        readonly="readonly"
                        type="text"
@@ -10331,7 +10331,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -10345,7 +10345,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -10362,7 +10362,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
 `;
 
 exports[`VDataTable.ts should render with showSelect 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -10779,7 +10779,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-82"
                        readonly="readonly"
                        type="text"
@@ -10812,7 +10812,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -10826,7 +10826,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -10843,7 +10843,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
 `;
 
 exports[`VDataTable.ts should respect mustSort property on options 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -11016,7 +11016,7 @@ exports[`VDataTable.ts should respect mustSort property on options 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-704"
                        readonly="readonly"
                        type="text"
@@ -11049,7 +11049,7 @@ exports[`VDataTable.ts should respect mustSort property on options 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -11064,7 +11064,7 @@ exports[`VDataTable.ts should respect mustSort property on options 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -11081,7 +11081,7 @@ exports[`VDataTable.ts should respect mustSort property on options 1`] = `
 `;
 
 exports[`VDataTable.ts should search group-by column 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -11138,7 +11138,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -11150,7 +11150,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
             </button>
             name: Assistance
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -11175,7 +11175,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -11187,7 +11187,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
             </button>
             name: Candidat
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -11228,7 +11228,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-533"
                        readonly="readonly"
                        type="text"
@@ -11261,7 +11261,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -11276,7 +11276,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -11293,7 +11293,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
 `;
 
 exports[`VDataTable.ts should search group-by column 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -11350,7 +11350,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -11362,7 +11362,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
             </button>
             name: Candidat
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -11403,7 +11403,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-533"
                        readonly="readonly"
                        type="text"
@@ -11436,7 +11436,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -11451,7 +11451,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -11468,7 +11468,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
 `;
 
 exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -11811,7 +11811,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-608"
                        readonly="readonly"
                        type="text"
@@ -11844,7 +11844,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -11859,7 +11859,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -11876,7 +11876,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
 `;
 
 exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -12219,7 +12219,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-608"
                        readonly="readonly"
                        type="text"
@@ -12252,7 +12252,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -12267,7 +12267,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">

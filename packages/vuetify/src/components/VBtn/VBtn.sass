@@ -22,10 +22,10 @@
     .v-btn__loading
       color: map-deep-get($material, 'buttons', 'disabled') !important
 
-    &:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined)
+    &.v-btn--has-bg
       background-color: map-deep-get($material, 'buttons', 'focused') !important
 
-  &:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined)
+  &.v-btn--has-bg
     background-color: map-get($material, 'app-bar')
 
   &.v-btn--outlined.v-btn--text
@@ -34,7 +34,7 @@
   &.v-btn--icon
     color: map-deep-get($material, 'icons', 'active')
 
-  +states($material)
+  +states(map-deep-merge($material, $btn-states))
 
 // Block
 .v-btn
@@ -62,6 +62,7 @@
       font-size: $size
 
   &:before
+    background-color: currentColor
     border-radius: inherit
     bottom: 0
     color: inherit
@@ -73,9 +74,6 @@
     right: 0
     top: 0
     transition: $btn-transition
-
-  &:before
-    background-color: currentColor
 
   &:not(.v-btn--disabled)
     will-change: box-shadow
@@ -103,6 +101,8 @@
   // button content when clicked
   // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
   position: relative
+  transition: inherit
+  transition-property: opacity
 
   .v-icon--left,
   .v-icon--right
@@ -139,20 +139,8 @@
   width: 100%
 
 // Modifiers
-.v-btn:not(.v-btn--text):not(.v-btn--outlined)
-  &.v-btn--active:before
-    opacity: $btn-active-opacity
-
-  &:hover:before
-    opacity: $btn-hover-opacity
-
-  &:focus:before
-    opacity: $btn-focus-opacity
-
 .v-btn--absolute,
 .v-btn--fixed
-  position: absolute
-
   &.v-btn--right
     right: map-get($grid-gutters, 'lg')
 
@@ -165,13 +153,19 @@
   &.v-btn--bottom
     bottom: map-get($grid-gutters, 'lg')
 
+.v-btn--absolute
+  position: absolute
+
+.v-btn--fixed
+  position: fixed
+
 .v-btn--block
   display: flex
   flex: 1 0 auto
   min-width: 100% !important
   max-width: auto
 
-.v-btn--contained
+.v-btn--is-elevated
   +elevation(2)
 
   &:after
@@ -180,11 +174,16 @@
   &:active
     +elevation(8)
 
-.v-btn--depressed
-  box-shadow: none !important
+  &.v-btn--fab
+    +elevation(6)
+
+    &:after
+      +elevation(8)
+
+    &:active
+      +elevation(12)
 
 .v-btn--disabled
-  box-shadow: none
   pointer-events: none
 
 .v-btn--icon,
@@ -207,17 +206,8 @@
       width: #{$size}px
 
 .v-btn--fab
-  &.v-btn--contained
-    +elevation(6)
-
-    &:after
-      +elevation(8)
-
-    &:active
-      +elevation(12)
-
-  &.v-btn--fixed,
-  &.v-btn--absolute
+  &.v-btn--absolute,
+  &.v-btn--fixed
     z-index: 4
 
   @each $name, $size in $fab-sizes
@@ -232,9 +222,6 @@
         &.v-btn--top
           top: -#{$size / 2}px
 
-.v-btn--fixed
-  position: fixed
-
 .v-btn--loading
   pointer-events: none
   transition: none
@@ -245,28 +232,19 @@
 .v-btn--outlined
   border: $btn-outline-border-width solid currentColor
 
-.v-btn--outlined,
-.v-btn--round
-  .v-btn__content
-    .v-icon
-      color: currentColor
+.v-btn--plain
+  &::before
+    display: none
 
-.v-btn--outlined,
-.v-btn--flat,
-.v-btn--text
-  background-color: transparent
-
-.v-btn--outlined,
-.v-btn--round,
-.v-btn--rounded
-  &:before
-    border-radius: inherit
+  &:not(.v-btn--active):not(.v-btn--loading):not(:focus):not(:hover)
+    .v-btn__content
+      opacity: .62
 
 .v-btn--round
-  border-radius: 50%
+  +radius($btn-round-border-radius)
 
 .v-btn--rounded
-  border-radius: $btn-rounded-border-radius
+  +radius($btn-rounded-border-radius)
 
 .v-btn--tile
-  border-radius: 0
+  +radius($btn-tile-border-radius)

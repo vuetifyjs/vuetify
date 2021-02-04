@@ -12,6 +12,7 @@ const DataTableHeader = {
   'groupable?': 'boolean',
   'divider?': 'boolean',
   'class?': 'string | string[]',
+  'cellClass?': 'string | string[]',
   'width?': 'string | number',
   'filter?': '(value: any, search: string, item: any) => boolean',
   'sort?': '(a: any, b: any) => number',
@@ -45,6 +46,7 @@ const DataTableEvents = [
 ].concat(DataIteratorEvents)
 
 const DataTableHeaderScopedProps = {
+  isMobile: 'boolean',
   props: {
     headers: 'DataTableHeader[]',
     options: DataOptions,
@@ -78,15 +80,18 @@ const DataTableHeaderColumnScopedProps = {
 const DataTableItemScopedProps = {
   ...DataIteratorItemScopedProps,
   headers: 'DataTableHeader[]',
+  isMobile: 'boolean',
 }
 
 const DataTableItemColumnScopedProps = {
+  isMobile: 'boolean',
   item: 'any',
   header: 'DataTableHeader',
   value: 'any',
 }
 
 const DataTableHeaderSelectScopedProps = {
+  isMobile: 'boolean',
   props: {
     value: 'boolean',
     indeterminate: 'boolean',
@@ -97,6 +102,7 @@ const DataTableHeaderSelectScopedProps = {
 }
 
 const DataTableExpandedItemScopedProps = {
+  isMobile: 'boolean',
   item: 'any',
   headers: 'DataTableHeader[]',
 }
@@ -114,6 +120,7 @@ const DataTableBodyScopedProps = {
 const DataGroupScopedProps = {
   group: 'string',
   options: DataOptions,
+  isMobile: 'boolean',
   items: 'any[]',
   headers: 'i DataTableHeader[]',
 }
@@ -121,6 +128,7 @@ const DataGroupScopedProps = {
 const DataGroupHeaderScopedProps = {
   group: 'string',
   groupBy: DataOptions.groupBy,
+  isMobile: 'boolean',
   items: 'any[]',
   headers: 'DataTableHeader[]',
   isOpen: 'boolean',
@@ -131,6 +139,7 @@ const DataGroupHeaderScopedProps = {
 const DataGroupSummaryScopedProps = {
   group: 'string',
   groupBy: DataOptions.groupBy,
+  isMobile: 'boolean',
   items: 'any[]',
   headers: 'DataTableHeader[]',
   isOpen: 'boolean',
@@ -146,16 +155,17 @@ const DataTableSlots = [
   { name: 'header', props: DataTableHeaderScopedProps },
   { name: 'header.data-table-select', props: DataTableHeaderSelectScopedProps },
   { name: 'header.<name>', props: DataTableHeaderColumnScopedProps },
-  { name: 'top', props: DataDefaultScopedSlotProps },
+  { name: 'top', props: { ...DataDefaultScopedSlotProps, isMobile: 'boolean' } },
   { name: 'progress' },
   { name: 'group', props: DataGroupScopedProps },
   { name: 'group.header', props: DataGroupHeaderScopedProps },
   { name: 'group.summary', props: DataGroupSummaryScopedProps },
-  { name: 'item', props: { ...DataTableItemScopedProps, index: 'number' } },
+  { name: 'item', props: DataTableItemScopedProps },
   { name: 'item.data-table-select', props: DataTableItemScopedProps },
   { name: 'item.data-table-expand', props: DataTableItemScopedProps },
   { name: 'item.<name>', props: DataTableItemColumnScopedProps },
   { name: 'expanded-item', props: DataTableExpandedItemScopedProps },
+  ...DataIteratorSlots.filter(slot => !['default'].includes(slot.name)),
 ]
 
 module.exports = {
@@ -172,7 +182,7 @@ module.exports = {
         example: '(value: any, search: string | null, item: any) => boolean',
       },
     ]),
-    slots: deepmerge(DataTableSlots, DataIteratorSlots),
+    slots: DataTableSlots,
     events: DataTableEvents,
   },
   DataTableHeader,

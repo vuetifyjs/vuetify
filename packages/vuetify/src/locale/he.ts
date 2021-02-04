@@ -61,4 +61,9 @@ export default {
       currentPage: '{0} עמוד נוכחי, עמוד',
     },
   },
+  rating: {
+    ariaLabel: {
+      icon: 'Rating {0} of {1}',
+    },
+  },
 }

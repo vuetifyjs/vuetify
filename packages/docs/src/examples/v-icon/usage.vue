@@ -34,6 +34,7 @@
       defaults: {
         color: null,
         dense: false,
+        disabled: false,
         large: false,
         medium: false,
         small: false,
@@ -41,7 +42,7 @@
         'x-small': false,
       },
       options: {
-        booleans: ['dense'],
+        booleans: ['disabled'],
         selects: {
           color: [
             'red',
@@ -56,6 +57,7 @@
           size: [
             'x-small',
             'small',
+            'dense',
             'medium',
             'large',
             'x-large',

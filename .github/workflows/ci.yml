@@ -53,7 +53,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn lerna run build --scope vuetify
-      - run: echo ::set-env name=RELEASE_TAG::${GITHUB_REF#refs/tags/}
+      - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
       - run: rm -rf release
       - run: cp -r ./packages/vuetify/dist release
       - run: for file in ./release/*.*; do mv "$file" "${file/release\/vuetify/release/vuetify-${RELEASE_TAG}}"; done
@@ -96,7 +96,7 @@ jobs:
       - run: yarn global add now
 
       - name: Download eo-UY
-        uses: crowdin/github-action@1.0.10
+        uses: crowdin/github-action@1.0.13
         with:
           config: crowdin.yml
           upload_sources: false
@@ -107,8 +107,20 @@ jobs:
           localization_branch_name: ${{ env.LOCAL_BRANCH }}
           crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
 
+      - name: Download ja
+        uses: crowdin/github-action@1.0.13
+        with:
+          config: crowdin.yml
+          upload_sources: false
+          download_translations: true
+          push_translations: false
+          export_only_approved: false
+          download_language: ja
+          localization_branch_name: ${{ env.LOCAL_BRANCH }}
+          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+
       - name: Download zh-CN
-        uses: crowdin/github-action@1.0.9
+        uses: crowdin/github-action@1.0.13
         with:
           config: crowdin.yml
           upload_sources: false
