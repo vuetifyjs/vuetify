@@ -208,12 +208,9 @@ export default defineComponent({
         props,
         { appear: true },
         withDirectives(
-          !sources ? img : h('picture', {
-            class: 'v-img__picture',
-          }, [
-            sources,
-            img,
-          ]),
+          sources
+            ? <picture class="v-img__picture">{sources}{img}</picture>
+            : img,
           [[vShow, state.value === 'loaded']]
         )
       )
@@ -223,10 +220,13 @@ export default defineComponent({
       return maybeTransition(
         props,
         {},
-        !!normalisedSrc.value.lazySrc && state.value !== 'loaded' ? h('img', {
-          class: ['v-img__img', 'v-img__img--preload', containClasses.value],
-          src: normalisedSrc.value.lazySrc,
-        }) : undefined
+        normalisedSrc.value.lazySrc && state.value !== 'loaded' ? (
+          <img
+            class={['v-img__img', 'v-img__img--preload', containClasses.value]}
+            src={ normalisedSrc.value.lazySrc }
+            alt=""
+          />
+        ) : undefined
       )
     })
 
@@ -234,7 +234,7 @@ export default defineComponent({
       if (!slots.placeholder) return
 
       const placeholder = state.value === 'loading' || (state.value === 'error' && !slots.error)
-        ? h('div', { class: 'v-img__placeholder' }, slots.placeholder())
+        ? <div class="v-img__placeholder">{ slots.placeholder() }</div>
         : undefined
 
       return maybeTransition(props, { appear: true }, placeholder)
@@ -244,22 +244,23 @@ export default defineComponent({
       if (!slots.error) return
 
       const error = state.value === 'error'
-        ? h('div', { class: 'v-img__error' }, slots.error())
+        ? <div class="v-img__error">{ slots.error() }</div>
         : undefined
 
       return maybeTransition(props, { appear: true }, error)
     })
 
     return () => withDirectives(
-      h(VResponsive, {
-        class: ['v-img'/* , themeClasses.value */],
-        aspectRatio: aspectRatio.value,
-        'aria-label': props.alt,
-        role: props.alt ? 'img' : undefined,
-      }, {
-        additional: () => [__image.value, __preloadImage.value, __placeholder.value, __error.value],
-        default: slots.default,
-      }),
+      <VResponsive
+        class="v-img"
+        aspectRatio={ aspectRatio.value }
+        aria-label={ props.alt }
+        role={ props.alt ? 'img' : undefined }
+        v-slots={{
+          additional: () => [__image.value, __preloadImage.value, __placeholder.value, __error.value],
+          default: slots.default,
+        }}
+      />,
       [useDirective<ObserveDirectiveBinding>(intersect, {
         value: {
           handler: init,

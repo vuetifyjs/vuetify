@@ -33,7 +33,9 @@ exports[`VImg should display placeholders 1`] = `
     >
   </transition-stub>
   <transition-stub>
-    <img class="v-img__img v-img__img--preload v-img__img--contain">
+    <img class="v-img__img v-img__img--preload v-img__img--contain"
+         alt
+    >
   </transition-stub>
   <transition-stub>
     <div class="v-img__placeholder">
@@ -128,7 +130,9 @@ exports[`VImg should override vuetify-loader values 1`] = `
     >
   </transition-stub>
   <transition-stub>
-    <img class="v-img__img v-img__img--preload v-img__img--contain">
+    <img class="v-img__img v-img__img--preload v-img__img--contain"
+         alt
+    >
   </transition-stub>
   <div class="v-responsive__content">
   </div>
@@ -230,7 +234,9 @@ exports[`VImg should use vuetify-loader data 1`] = `
     >
   </transition-stub>
   <transition-stub>
-    <img class="v-img__img v-img__img--preload v-img__img--contain">
+    <img class="v-img__img v-img__img--preload v-img__img--contain"
+         alt
+    >
   </transition-stub>
   <div class="v-responsive__content">
   </div>
