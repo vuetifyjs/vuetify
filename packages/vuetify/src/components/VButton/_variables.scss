@@ -1,0 +1,24 @@
+@import '../../styles/styles.sass';
+
+// Defaults
+$button-background-color: rgb(var(--v-theme-primary)) !default;
+$button-border-color: rgb(var(--v-theme-primary)) !default;
+$button-border-style: $border-style-root !default;
+$button-border-width: thin !default;
+$button-elevation: 2 !default;
+$button-height: 36px;
+$button-icon-color: rgb(var(--v-theme-primary)) !default;
+$button-positions: absolute fixed !default;
+
+$button-query: () !default;
+$button-query: map-deep-merge(
+  (
+    'border-color': $button-border-color,
+    'border-style': $button-border-style,
+    'border-width': $button-border-width,
+    'elevation': $button-elevation,
+    'height': $button-height,
+    'position': $button-positions
+  ),
+  $button-query
+);

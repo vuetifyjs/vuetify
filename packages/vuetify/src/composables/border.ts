@@ -12,12 +12,12 @@ export const makeBorderProps = propsFactory({
   border: [Boolean, Number, String],
 })
 
-export function useBorder (props: BorderProps) {
+export function useBorder (props: BorderProps, name: string) {
   const borderClasses = computed(() => {
     const classes: string[] = []
 
     if (props.border === true || props.border === '') {
-      classes.push('border')
+      classes.push(`${name}--border`)
     } else if (
       typeof props.border === 'string' ||
       props.border === 0

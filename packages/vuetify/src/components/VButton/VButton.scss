@@ -1,0 +1,77 @@
+// Imports
+@import './index';
+
+@mixin density ($query: $query, $density) {
+  height: map-get($query, 'height') + $density * 4;
+}
+
+.v-button {
+  align-items: center;
+  border-radius: 4px;
+  display: inline-flex;
+  font-size: .875rem;
+  font-weight: 500;
+  justify-content: center;
+  line-height: inherit;
+  min-width: 64px;
+  overflow: visible;
+  padding: 0 8px 0 8px;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  user-select: none;
+  vertical-align: middle;
+
+  @include density($button-query, 0);
+
+  &:not(:disabled) {
+    color: $button-background-color;
+  }
+
+  &--comfortable {
+    @include density($button-query, -2);
+  }
+
+  &--compact {
+    @include density($button-query, -3);
+  }
+
+  &--border {
+    @include border($button-query);
+
+    padding: 0 15px;
+  }
+
+  &--contained {
+    padding: 0 16px 0 16px;
+
+    &:not(:disabled) {
+      color: rgb(var(--v-theme-on-primary));
+      background-color: $button-background-color;
+    }
+  }
+
+  &--elevated {
+    @include elevation($button-elevation);
+  }
+}
+
+.v-button__text {
+  letter-spacing: .0892857143em;
+  text-indent: .0892857143em;
+
+  .v-button--border & {
+    color: rgb(var(--v-theme-primary));
+  }
+}
+
+.v-button__icon {
+  color: inherit;
+  display: inline-block;
+  font-size: 18px;
+  height: 18px;
+  line-height: 1;
+  margin-left: -4px;
+  margin-right: 8px;
+  width: 18px;
+}
