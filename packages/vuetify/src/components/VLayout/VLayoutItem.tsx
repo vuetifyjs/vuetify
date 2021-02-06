@@ -1,6 +1,6 @@
 // Utilities
 import { toRef, defineComponent, computed } from 'vue'
-import { getUid, randomHexColor } from '@/util'
+import { randomHexColor } from '@/util'
 
 // Composables
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
@@ -24,7 +24,7 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
-    const styles = useLayoutItem(props.name ?? `layout-item-${getUid()}`, computed(() => props.position ?? 'left'), toRef(props, 'size'))
+    const styles = useLayoutItem(props.name, computed(() => props.position ?? 'left'), toRef(props, 'size'))
 
     const background = randomHexColor()
 

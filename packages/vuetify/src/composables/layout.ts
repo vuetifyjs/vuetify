@@ -1,5 +1,6 @@
 // Utilities
 import { inject, provide, computed, ref, onBeforeUnmount } from 'vue'
+import { getUid } from '@/util'
 import propsFactory from '@/util/propsFactory'
 
 // Types
@@ -21,10 +22,12 @@ export const makeLayoutItemProps = propsFactory({
   },
 })
 
-export function useLayoutItem (id: string, position: Ref<Position>, amount: Ref<number | string>) {
+export function useLayoutItem (name: string | undefined, position: Ref<Position>, amount: Ref<number | string>) {
   const layout = inject(VuetifyLayoutKey)
 
   if (!layout) throw new Error('Could not find injected Vuetify layout')
+
+  const id = name ?? `layout-item-${getUid()}`
 
   const styles = layout.register(id, position, amount)
 
