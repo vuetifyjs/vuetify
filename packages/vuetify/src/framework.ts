@@ -1,6 +1,8 @@
 import { inject } from 'vue'
 import { createTheme, VuetifyThemeSymbol } from './composables/theme'
-import { VuetifyIconSymbol } from '@/composables/icons'
+import { defaultSets, VuetifyIconSymbol } from '@/composables/icons'
+import { mergeDeep } from './util'
+import { aliases, mdi } from '@/iconsets/mdi'
 
 // Types
 import type { InjectionKey, App } from 'vue'
@@ -66,7 +68,14 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
 
     app.provide(VuetifySymbol, vuetify)
     app.provide(VuetifyThemeSymbol, createTheme(options.theme))
-    app.provide(VuetifyIconSymbol, icons)
+    app.provide(VuetifyIconSymbol, mergeDeep({
+      defaultSet: 'mdi',
+      sets: {
+        ...defaultSets,
+        mdi,
+      },
+      aliases,
+    }, icons))
     app.config.globalProperties.$vuetify = vuetify
   }
 
