@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import Playground from './Playground.layout'
+  import Playground from './Playground'
   export default {
     name: 'App',
     components: {
