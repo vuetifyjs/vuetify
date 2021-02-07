@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VIcon should add custom class 1`] = `
-<i class="mdi mdi-add v-icon notranslate v-size--default custom"
+<i class="mdi-add mdi v-icon notranslate v-size--default custom"
    aria-hidden="true"
 >
 </i>
 `;
 
 exports[`VIcon should add custom style 1`] = `
-<i class="mdi mdi-add v-icon notranslate v-size--default"
+<i class="mdi-add mdi v-icon notranslate v-size--default"
    style="color: red;"
    aria-hidden="true"
 >
@@ -32,7 +32,7 @@ exports[`VIcon should render an svg icon 1`] = `
 `;
 
 exports[`VIcon should render globally defined icon 1`] = `
-<i class="mdi mdi-check v-icon notranslate v-size--default"
+<i class="mdi-check mdi v-icon notranslate v-size--default"
    aria-hidden="true"
 >
 </i>

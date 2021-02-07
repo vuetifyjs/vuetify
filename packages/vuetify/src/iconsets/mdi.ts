@@ -44,7 +44,7 @@ const aliases: IconAliases = {
 }
 
 const mdi: IconSet = {
-  component: props => h(VClassIcon, { ...props, class: [props.class, 'mdi'] }),
+  component: props => h(VClassIcon, { ...props, class: 'mdi' }),
 }
 
 export { aliases, mdi }

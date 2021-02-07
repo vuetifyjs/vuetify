@@ -120,28 +120,30 @@ export default defineComponent({
       const hasClickListener = !!context.attrs.onClick
       const tag = hasClickListener ? 'button' : props.tag
 
-      return <iconData.value.component
-        tag={ tag }
-        icon={ iconData.value.icon }
-        class={[
-          'v-icon',
-          'notranslate',
-          sizeClasses.value,
-          {
-            'v-icon--disabled': props.disabled,
-            'v-icon--left': props.left,
-            'v-icon--right': props.right,
-            'v-icon--link': hasClickListener,
-          },
-        ]}
-        style={ !sizeClasses.value ? ({
-          'font-size': props.size,
-          width: props.size,
-          height: props.size,
-        }) : null }
-        type={ hasClickListener ? 'button' : undefined }
-        aria-hidden={ !hasClickListener }
-      />
+      return (
+        <iconData.value.component
+          tag={ tag }
+          icon={ iconData.value.icon }
+          class={[
+            'v-icon',
+            'notranslate',
+            sizeClasses.value,
+            {
+              'v-icon--disabled': props.disabled,
+              'v-icon--left': props.left,
+              'v-icon--right': props.right,
+              'v-icon--link': hasClickListener,
+            },
+          ]}
+          style={ !sizeClasses.value ? ({
+            'font-size': props.size,
+            width: props.size,
+            height: props.size,
+          }) : null }
+          type={ hasClickListener ? 'button' : undefined }
+          aria-hidden={ !hasClickListener }
+        />
+      )
     }
   },
 })

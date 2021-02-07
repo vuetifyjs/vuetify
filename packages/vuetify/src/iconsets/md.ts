@@ -44,7 +44,7 @@ const aliases: IconAliases = {
 }
 
 const md: IconSet = {
-  component: props => h(VLigatureIcon, { ...props, class: [props.class, 'material-icons'] }),
+  component: props => h(VLigatureIcon, { ...props, class: 'material-icons' }),
 }
 
 export { aliases, md }
