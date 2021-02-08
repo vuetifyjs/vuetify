@@ -1,9 +1,25 @@
-@import '../../styles/styles.sass';
-
-$system-bar-font-size: map-deep-get($headings, 'body-2', 'size') !default;
-$system-bar-font-weight: map-deep-get($headings, 'body-2', 'weight') !default;
-$system-bar-icon-font-size: map-deep-get($headings, 'subtitle-1', 'size') !default;
+// Defaults
+$system-bar-background: rgba(var(--v-theme-on-background), 0.02) !default;
+$system-bar-border-radius: map-get($rounded, 0) !default;
+$system-bar-icon-color: rgba(var(--v-theme-on-background), 0.50) !default;
+$system-bar-elevation: 0 !default;
+$system-bar-flex: 1 1 auto !default;
+$system-bar-font-size: map-deep-get($headings, 'body-1', 'size') !default;
+$system-bar-font-weight: map-deep-get($headings, 'body-1', 'weight') !default;
+$system-bar-height: 24px !default;
+$system-bar-icon-font-size: 16px !default;
+$system-bar-lights-out-background: rgba(var(--v-theme-background), 0.7) !default;
 $system-bar-padding: 0 8px !default;
-$system-bar-icon-margin-right: 4px !default;
-$system-bar-window-icon-margin-right: 8px !default;
-$system-bar-window-icon-font-size: map-deep-get($headings, 'h6', 'size') !default;
+$system-bar-positions: absolute fixed !default;
+$system-bar-window-height: 32px !default;
+$system-bar-window-icon-font-size: 20px !default;
+
+$system-bar-query: () !default;
+$system-bar-query: map-deep-merge(
+  (
+    'border-radius': $system-bar-border-radius,
+    'elevation': $system-bar-elevation,
+    'position': $system-bar-positions
+  ),
+  $system-bar-query
+) !default;
