@@ -2,11 +2,10 @@
 import { VClassIcon, VComponentIcon, VSvgIcon } from '@/components'
 
 // Utilities
-import propsFactory from '@/util/propsFactory'
 import { computed, h, inject } from 'vue'
 
 // Types
-import type { Component, InjectionKey, PropType, Ref, VNode } from 'vue'
+import type { Component, InjectionKey, Ref, VNode } from 'vue'
 
 export type IconValue = string | Component
 
@@ -82,17 +81,6 @@ export const defaultSets: Record<string, IconSet> = {
 }
 
 // Composables
-export const makeIconProps = propsFactory({
-  icon: {
-    type: [String, Object] as PropType<IconValue>,
-    required: true,
-  },
-  tag: {
-    type: String,
-    required: true,
-  },
-})
-
 export const useIcon = (props: { icon: IconValue }) => {
   const icons = inject(VuetifyIconSymbol)
 

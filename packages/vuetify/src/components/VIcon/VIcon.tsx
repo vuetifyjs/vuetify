@@ -3,13 +3,25 @@ import './VIcon.sass'
 
 // Utilities
 import { defineComponent } from 'vue'
-import { makeIconProps, useIcon } from '@/composables/icons'
 import { makeSizeProps, useSize } from '@/composables/size'
+import { useIcon } from '@/composables/icons'
 import makeProps from '@/util/makeProps'
+import propsFactory from '@/util/propsFactory'
 
 // Types
 import type { IconValue } from '@/composables/icons'
 import type { PropType } from 'vue'
+
+export const makeIconProps = propsFactory({
+  icon: {
+    type: [String, Object] as PropType<IconValue>,
+    required: true,
+  },
+  tag: {
+    type: String,
+    required: true,
+  },
+})
 
 export const VComponentIcon = defineComponent({
   name: 'VComponentIcon',
