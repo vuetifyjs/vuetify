@@ -1,14 +1,40 @@
 @import '../../styles/styles.sass';
 
 // Defaults
-$button-background-color: rgb(var(--v-theme-primary)) !default;
+$button-affix-size: 18px;
+$button-affix-font-size: 18px !default;
+$button-affix-line-height: 1 !default;
+$button-affix-margin-end: 8px !default;
+$button-affix-margin-start: -4px !default;
 $button-border-color: rgb(var(--v-theme-primary)) !default;
+$button-border-padding: 0 15px !default;
+$button-border-radius: $border-radius-root !default;
 $button-border-style: $border-style-root !default;
 $button-border-width: thin !default;
+$button-color: rgb(var(--v-theme-primary)) !default;
+$button-contained-background-color: rgb(var(--v-theme-primary)) !default;
+$button-contained-color: rgb(var(--v-theme-on-primary)) !default;
+$button-contained-padding: 0 16px !default;
 $button-elevation: 2 !default;
-$button-height: 36px;
+$button-font-size: map-deep-get($headings, 'button', 'size') !default;
+$button-font-weight: map-deep-get($headings, 'button', 'weight') !default;
+$button-height: 36px !default;
+$button-icon-border-radius: map-get($rounded, 'circle') !default;
 $button-icon-color: rgb(var(--v-theme-primary)) !default;
+$button-icon-font-size: 24px !default;
+$button-icon-line-height: 1 !default;
+$button-icon-size: 48px !default;
+$button-line-height: inherit !default;
+$button-min-width: 64px !default;
+$button-overlay-background-color: rgb(var(--v-theme-primary)) !default;
+$button-overlay-contained-background-color: rgb(var(--v-theme-on-primary)) !default;
+$button-padding: 0 8px !default;
+$button-hover-elevation: 4 !default;
 $button-positions: absolute fixed !default;
+$button-text-border-color: rgb(var(--v-theme-primary)) !default;
+$button-text-letter-spacing: map-deep-get($headings, 'button', 'letter-spacing') !default;
+$button-text-transform: map-deep-get($headings, 'button', 'text-transform') !default;
+$button-vertical-align: middle !default;
 
 $button-query: () !default;
 $button-query: map-deep-merge(
@@ -21,4 +47,14 @@ $button-query: map-deep-merge(
     'position': $button-positions
   ),
   $button-query
+);
+
+$button-icon-query: () !default;
+$button-icon-query: map-deep-merge(
+  (
+    'border-radius': $button-icon-border-radius,
+    'font-size': $button-icon-font-size,
+    'size': $button-icon-size
+  ),
+  $button-icon-query
 );

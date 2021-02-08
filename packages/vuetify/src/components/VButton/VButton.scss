@@ -1,77 +1,165 @@
 // Imports
 @import './index';
 
-@mixin density ($query: $query, $density) {
-  height: map-get($query, 'height') + $density * 4;
-}
-
 .v-button {
   align-items: center;
-  border-radius: 4px;
+  border-radius: $button-border-radius;
   display: inline-flex;
-  font-size: .875rem;
-  font-weight: 500;
+  font-size: $button-font-size;
+  font-weight: $button-font-weight;
   justify-content: center;
-  line-height: inherit;
-  min-width: 64px;
+  line-height: $button-line-height;
   overflow: visible;
-  padding: 0 8px 0 8px;
+  padding: $button-padding;
   position: relative;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: $button-text-transform;
   user-select: none;
-  vertical-align: middle;
+  vertical-align: $button-vertical-align;
 
-  @include density($button-query, 0);
+  @include density($button-query, 0, 'height');
 
   &:not(:disabled) {
-    color: $button-background-color;
+    color: $button-color;
   }
 
-  &--comfortable {
-    @include density($button-query, -2);
-  }
-
-  &--compact {
-    @include density($button-query, -3);
+  &:not(.v-button--icon) {
+    min-width: $button-min-width;
   }
 
   &--border {
     @include border($button-query);
 
-    padding: 0 15px;
+    padding: $button-border-padding;
+  }
+
+  &--comfortable {
+    @include density($button-query, -2, 'height');
+
+    &.v-button--icon {
+      @include density($button-icon-query, -3, 'size');
+    }
+  }
+
+  &--compact {
+    @include density($button-query, -3, 'height');
+
+    &.v-button--icon {
+      @include density($button-icon-query, -5, 'size');
+    }
   }
 
   &--contained {
-    padding: 0 16px 0 16px;
+    padding: $button-contained-padding;
 
     &:not(:disabled) {
-      color: rgb(var(--v-theme-on-primary));
-      background-color: $button-background-color;
+      background-color: $button-contained-background-color;
+      color: $button-contained-color;
     }
   }
 
   &--elevated {
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+
     @include elevation($button-elevation);
+
+    &:hover {
+      @include elevation($button-hover-elevation);
+    }
+  }
+
+  &--icon {
+    font-size: $button-icon-font-size;
+
+    @include density($button-icon-query, 0, 'size');
+    @include rounded($button-icon-query);
   }
 }
 
 .v-button__text {
-  letter-spacing: .0892857143em;
-  text-indent: .0892857143em;
+  letter-spacing: $button-text-letter-spacing;
+  text-indent: $button-text-letter-spacing;
 
   .v-button--border & {
-    color: rgb(var(--v-theme-primary));
+    color: $button-text-border-color;
   }
 }
 
 .v-button__icon {
   color: inherit;
   display: inline-block;
-  font-size: 18px;
-  height: 18px;
-  line-height: 1;
-  margin-left: -4px;
-  margin-right: 8px;
-  width: 18px;
+  line-height: $button-icon-line-height;
+}
+
+.v-button__prepend-icon {
+  color: inherit;
+  display: inline-block;
+  font-size: $button-affix-size;
+  height: $button-affix-size;
+  line-height: $button-affix-line-height;
+  width: $button-affix-size;
+
+  @include ltr() {
+    margin-left: $button-affix-margin-start;
+    margin-right: $button-affix-margin-end;
+  }
+
+  @include rtl() {
+    margin-left: $button-affix-margin-end;
+    margin-right: $button-affix-margin-start;
+  }
+}
+
+.v-button__append-icon {
+  color: inherit;
+  display: inline-block;
+  font-size: $button-affix-size;
+  height: $button-affix-size;
+  line-height: $button-affix-line-height;
+  width: $button-affix-size;
+
+  @include ltr () {
+    margin-left: $button-affix-margin-end;
+    margin-right: $button-affix-margin-start;
+  }
+
+  @include rtl () {
+    margin-left: $button-affix-margin-start;
+    margin-right: $button-affix-margin-end;
+  }
+}
+
+.v-button__overlay {
+  border-radius: inherit;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+
+  &::before {
+    border-radius: inherit;
+    content: '';
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  .v-button--contained:hover & {
+    &::before {
+      background-color: $button-overlay-contained-background-color;
+      opacity: 0.08;
+    }
+  }
+
+  .v-button:not(.v-button--contained):hover & {
+    &::before {
+      background-color: $button-overlay-background-color;
+      opacity: 0.08;
+    }
+  }
 }

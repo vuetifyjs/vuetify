@@ -1,0 +1,12 @@
+@mixin density ($query: $query, $density, $property) {
+  $value: map-get($query, $property) + $density * $spacer;
+
+  @if $property == 'size' {
+    height: $value;
+    width: $value;
+    padding: ($value - map-get($query, 'font-size')) / 2;
+  }
+  @else if $property != null {
+    #{$property}: $value;
+  }
+}
