@@ -1,11 +1,12 @@
-// Utilities
-import { computed, h, inject } from 'vue'
-
 // Components
 import { VClassIcon, VComponentIcon, VSvgIcon } from '@/components'
 
+// Utilities
+import propsFactory from '@/util/propsFactory'
+import { computed, h, inject } from 'vue'
+
 // Types
-import type { Component, InjectionKey, Ref, VNode } from 'vue'
+import type { Component, InjectionKey, PropType, Ref, VNode } from 'vue'
 
 export type IconValue = string | Component
 
@@ -50,10 +51,6 @@ export interface IconProps {
   tag: string
   icon: IconValue
   disabled?: Boolean
-  class?: unknown[]
-  style?: Record<string, unknown> | null
-  'aria-hidden': boolean
-  type?: string
 }
 
 type IconComponent = (props: IconProps) => VNode
@@ -83,6 +80,18 @@ export const defaultSets: Record<string, IconSet> = {
     component: props => h(VClassIcon, props),
   },
 }
+
+// Composables
+export const makeIconProps = propsFactory({
+  icon: {
+    type: [String, Object] as PropType<IconValue>,
+    required: true,
+  },
+  tag: {
+    type: String,
+    required: true,
+  },
+})
 
 export const useIcon = (props: { icon: IconValue }) => {
   const icons = inject(VuetifyIconSymbol)

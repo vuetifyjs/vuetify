@@ -1,95 +1,82 @@
+// Styles
 import './VIcon.sass'
 
 // Utilities
-import { defineComponent, h } from 'vue'
+import { defineComponent } from 'vue'
+import { makeIconProps, useIcon } from '@/composables/icons'
 import { makeSizeProps, useSize } from '@/composables/size'
-import { useIcon } from '@/composables/icons'
 import makeProps from '@/util/makeProps'
 
 // Types
-import type { Component, PropType } from 'vue'
 import type { IconValue } from '@/composables/icons'
+import type { PropType } from 'vue'
 
 export const VComponentIcon = defineComponent({
   name: 'VComponentIcon',
-  props: {
-    icon: {
-      type: [String, Object] as PropType<IconValue>,
-      required: true,
-    },
-    tag: {
-      type: String,
-      required: true,
-    },
-  },
+
+  props: makeIconProps(),
+
   setup (props) {
-    return () => h(props.tag, [h(props.icon as Component)])
+    return () => {
+      const Icon = props.icon as string
+
+      return (
+        <props.tag>
+          <Icon />
+        </props.tag>
+      )
+    }
   },
 })
 
 export const VSvgIcon = defineComponent({
   name: 'VSvgIcon',
+
   inheritAttrs: false,
-  props: {
-    icon: {
-      type: [String, Object] as PropType<IconValue>,
-      required: true,
-    },
-    tag: {
-      type: String,
-      required: true,
-    },
-  },
-  setup (props, context) {
-    return () => h(props.tag, {
-      ...context.attrs,
-      style: null,
-    }, [
-      h('svg', {
-        style: context.attrs.style,
-        class: 'v-icon__svg',
-        xmlns: 'http://www.w3.org/2000/svg',
-        viewBox: '0 0 24 24',
-        role: 'img',
-        'aria-hidden': true,
-      }, [h('path', { d: props.icon })]),
-    ])
+
+  props: makeIconProps(),
+
+  setup (props, { attrs }) {
+    return () => {
+      return (
+        <props.tag style={ null }>
+          <svg
+            v-bind={ attrs }
+            class='v-icon__svg'
+            xmlns='http://www.w3.org/2000/svg'
+            viewBox='0 0 24 24'
+            role='img'
+            aria-hidden={true}
+          >
+            <path d={ props.icon as string }></path>
+          </svg>
+        </props.tag>
+      )
+    }
   },
 })
 
 export const VLigatureIcon = defineComponent({
   name: 'VLigatureIcon',
-  props: {
-    icon: {
-      type: [String, Object] as PropType<IconValue>,
-      required: true,
-    },
-    tag: {
-      type: String,
-      required: true,
-    },
-  },
+
+  props: makeIconProps(),
+
   setup (props) {
-    return () => h(props.tag, [props.icon as string])
+    return () => {
+      return (<props.tag>{ props.icon }</props.tag>)
+    }
   },
 })
 
 export const VClassIcon = defineComponent({
   name: 'VClassIcon',
-  props: {
-    icon: {
-      type: [String, Object] as PropType<IconValue>,
-      required: true,
-    },
-    tag: {
-      type: String,
-      required: true,
-    },
-  },
+
+  props: makeIconProps(),
+
   setup (props) {
-    return () => h(props.tag, {
-      class: [props.icon],
-    })
+    return () => {
+      return (<props.tag class={ props.icon }></props.tag>)
+    }
   },
 })
 
@@ -113,8 +100,8 @@ export default defineComponent({
   }),
 
   setup (props, context) {
-    const { sizeClasses } = useSize(props)
     const { iconData } = useIcon(props)
+    const { sizeClasses } = useSize(props)
 
     return () => {
       const hasClickListener = !!context.attrs.onClick
@@ -139,7 +126,7 @@ export default defineComponent({
             'font-size': props.size,
             width: props.size,
             height: props.size,
-          }) : null }
+          }) : undefined }
           type={ hasClickListener ? 'button' : undefined }
           aria-hidden={ !hasClickListener }
         />
