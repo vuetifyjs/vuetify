@@ -1,10 +1,16 @@
-@import '../../styles/styles.sass';
-
-$footer-border-radius: 0 !default;
+// Defaults
+$footer-border-radius: map-get($rounded, 0) !default;
+$footer-flex: 1 1 auto !default;
 $footer-elevation: 0 !default;
-$footer-padding: 6px 16px !default;
-$footer-padless-padding: 0px !default;
-$footer-shaped-border-radius: map-get($rounded, 'xl') $footer-border-radius !default;
-$footer-transition-duration: 0.2s !default;
-$footer-transition-property: background-color, left, right !default;
-$footer-transition-timing-function: map-get($transition, 'fast-out-slow-in') !default;
+$footer-padding: 8px 24px !default;
+$footer-positions: absolute fixed !default;
+
+$footer-query: () !default;
+$footer-query: map-deep-merge(
+  (
+    'border-radius': $footer-border-radius,
+    'elevation': $footer-elevation,
+    'position': $footer-positions
+  ),
+  $footer-query
+) !default;

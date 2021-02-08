@@ -1,4 +1,1 @@
-import VFooter from './VFooter'
-
-export { VFooter }
-export default VFooter
+export { default as VFooter } from './VFooter'
