@@ -384,7 +384,7 @@ export function flattenFragments (nodes: VNode[]): VNode[] {
   }).flat()
 }
 
-export function maybeTransition <T extends VNode | VNode[] | undefined> (
+export function maybeTransition <T extends VNode | VNode[] | false | undefined> (
   props: { transition?: string | boolean | TransitionProps },
   data: TransitionProps,
   vNodes: T

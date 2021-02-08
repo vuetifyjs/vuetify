@@ -1,13 +1,11 @@
 @import './_variables.scss'
 
 // Block
-.v-dialog
+.v-dialog .v-overlay__content
   border-radius: $dialog-border-radius
   margin: $dialog-margin
   overflow-y: auto
-  pointer-events: auto
-  transition: .3s map-get($transition, 'fast-in-fast-out')
-  width: 100%
+  transition: 3s map-get($transition, 'fast-in-fast-out')
   z-index: inherit
   +elevation($dialog-elevation)
 

@@ -1,10 +1,15 @@
 @import './_variables.scss'
 
-// Theme
-+theme(v-overlay) using ($material)
-  color: map-deep-get($material, 'text', 'primary')
-
 // Block
+.v-overlay-container
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  pointer-events: none
+  contain: strict
+
 .v-overlay
   align-items: center
   border-radius: inherit
@@ -15,7 +20,6 @@
   left: 0
   right: 0
   bottom: 0
-  pointer-events: none
   transition: $overlay-transition
 
 // Element
@@ -23,6 +27,7 @@
   position: relative
 
 .v-overlay__scrim
+  background: rgba(var(--v-theme-on-surface), $overlay-opacity)
   border-radius: inherit
   bottom: 0
   height: 100%
@@ -30,9 +35,7 @@
   position: absolute
   right: 0
   top: 0
-  transition: inherit
   width: 100%
-  will-change: opacity
 
 // Modifier
 .v-overlay--absolute
