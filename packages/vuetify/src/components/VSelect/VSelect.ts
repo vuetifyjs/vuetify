@@ -803,8 +803,7 @@ export default baseMixins.extend<options>().extend({
             menu.lastTile()
             break
         }
-        const newItemValue = this.allItems[this.getMenuIndex()]
-        this.selectItem(newItemValue)
+        this.selectItem(this.allItems[this.getMenuIndex()])
       })
     },
     selectItem (item: object) {
