@@ -54,6 +54,7 @@ Currently Vuetify provides translations in the following languages:
 - **sk** - Slovak (slovenčina)
 - **sl** - Slovene (slovenski jezik)
 - **srCyrl** - Serbian (српски језик)
+- **srLatn** - Serbian (srpski jezik)
 - **sv** - Swedish (svenska)
 - **th** - Thai (ไทย)
 - **tr** - Turkish (Türkçe)
