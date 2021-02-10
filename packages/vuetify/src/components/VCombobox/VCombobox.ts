@@ -160,7 +160,7 @@ export default VAutocomplete.extend({
         if (
           this.internalSearch &&
           this.multiple &&
-          this.getText(item).includes(this.internalSearch)
+          this.getText(item).toLocaleLowerCase().includes(this.internalSearch.toLocaleLowerCase())
         ) {
           this.internalSearch = null
         }
