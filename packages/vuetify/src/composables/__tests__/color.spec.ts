@@ -1,9 +1,8 @@
-import { reactive, toRef } from 'vue'
+// Composables
+import { useBackgroundColor, useTextColor } from '../color'
 
-import {
-  useTextColor,
-  useBackgroundColor,
-} from '../color'
+// Utilities
+import { reactive, toRef } from 'vue'
 
 describe('color.ts', () => {
   describe('useTextColor', () => {
