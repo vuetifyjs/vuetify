@@ -43,12 +43,12 @@
                         v-for="(icon, index) in icons"
                         :key="index"
                         :class="{ 'show-btns': hover }"
-                        color="transparent"
+                        :color="transparent"
                         icon
                       >
                         <v-icon
                           :class="{ 'show-btns': hover }"
-                          color="transparent"
+                          :color="transparent"
                         >
                           {{ icon }}
                         </v-icon>

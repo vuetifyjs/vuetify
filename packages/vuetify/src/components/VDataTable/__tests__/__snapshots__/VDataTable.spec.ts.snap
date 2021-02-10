@@ -362,7 +362,7 @@ exports[`VDataTable.ts should apply class from item to rows 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -376,7 +376,7 @@ exports[`VDataTable.ts should apply class from item to rows 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -754,7 +754,7 @@ exports[`VDataTable.ts should apply class function to rows 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -768,7 +768,7 @@ exports[`VDataTable.ts should apply class function to rows 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -1146,7 +1146,7 @@ exports[`VDataTable.ts should apply class list to rows 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -1160,7 +1160,7 @@ exports[`VDataTable.ts should apply class list to rows 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -1538,7 +1538,7 @@ exports[`VDataTable.ts should apply class unique to rows 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -1552,7 +1552,7 @@ exports[`VDataTable.ts should apply class unique to rows 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -1737,7 +1737,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -1752,7 +1752,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -2180,7 +2180,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -2194,7 +2194,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -2822,7 +2822,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -2837,7 +2837,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -3465,7 +3465,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -3480,7 +3480,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -3857,7 +3857,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -3872,7 +3872,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -4004,7 +4004,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -4019,7 +4019,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -4396,7 +4396,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -4410,7 +4410,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -5038,7 +5038,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -5053,7 +5053,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -5186,7 +5186,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -5201,7 +5201,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -5479,7 +5479,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -5494,7 +5494,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6122,7 +6122,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6137,7 +6137,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6407,7 +6407,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6422,7 +6422,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6510,7 +6510,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6525,7 +6525,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6613,7 +6613,7 @@ exports[`VDataTable.ts should render 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6628,7 +6628,7 @@ exports[`VDataTable.ts should render 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6715,7 +6715,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6730,7 +6730,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6808,7 +6808,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -6820,7 +6820,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
             </button>
             name: Frozen Yogurt
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -6838,7 +6838,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -6850,7 +6850,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
             </button>
             name: Ice cream sandwich
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -6917,7 +6917,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6932,7 +6932,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -7045,7 +7045,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -7060,7 +7060,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -7202,7 +7202,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -7217,7 +7217,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -7346,7 +7346,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -7360,7 +7360,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -7738,7 +7738,7 @@ exports[`VDataTable.ts should render with data 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -7752,7 +7752,7 @@ exports[`VDataTable.ts should render with data 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -7891,7 +7891,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -7905,7 +7905,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -7983,7 +7983,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -7995,7 +7995,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
             calories: 159
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8057,7 +8057,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8069,7 +8069,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
             calories: 237
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8131,7 +8131,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8143,7 +8143,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
             calories: 262
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8205,7 +8205,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8217,7 +8217,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
             calories: 305
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8279,7 +8279,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8291,7 +8291,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
             calories: 356
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8402,7 +8402,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -8416,7 +8416,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -8494,7 +8494,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8506,7 +8506,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </button>
             protein: 0
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8605,7 +8605,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8617,7 +8617,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </button>
             protein: 3.9
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8674,7 +8674,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8686,7 +8686,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </button>
             protein: 4
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8743,7 +8743,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8755,7 +8755,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </button>
             protein: 4.3
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8861,7 +8861,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -8875,7 +8875,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -9018,7 +9018,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -9032,7 +9032,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -9435,7 +9435,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -9449,7 +9449,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -9883,7 +9883,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -9897,7 +9897,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -10331,7 +10331,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -10345,7 +10345,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -10812,7 +10812,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -10826,7 +10826,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -11049,7 +11049,7 @@ exports[`VDataTable.ts should respect mustSort property on options 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -11064,7 +11064,7 @@ exports[`VDataTable.ts should respect mustSort property on options 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -11138,7 +11138,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -11150,7 +11150,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
             </button>
             name: Assistance
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -11175,7 +11175,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -11187,7 +11187,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
             </button>
             name: Candidat
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -11261,7 +11261,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -11276,7 +11276,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -11350,7 +11350,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -11362,7 +11362,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
             </button>
             name: Candidat
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -11436,7 +11436,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -11451,7 +11451,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -11844,7 +11844,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -11859,7 +11859,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -12252,7 +12252,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -12267,7 +12267,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">

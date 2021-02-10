@@ -8,6 +8,7 @@
     "showGroupBy": "Shows group by button",
     "singleSelect": "Toggles rendering of select-all checkbox",
     "someItems": "Indicates if one or more items in table are selected",
+    "sortByText": "Sets the label text used by the default sort-by selector when `v-data-table` is rendering the mobile view",
     "sortIcon": "Icon used for sort button"
   }
 }

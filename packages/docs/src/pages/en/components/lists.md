@@ -87,6 +87,8 @@ v-list-item-title description -->
 
 You cannot interact with disabled `v-list`.
 
+<promoted-ad slug="vuetify-lux-admin-pro" />
+
 <example file="v-list/prop-disabled" />
 
 #### Flat

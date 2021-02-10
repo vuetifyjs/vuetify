@@ -1,3 +1,4 @@
+import { keys } from '../../util/helpers'
 import { colorToInt, intToHex, colorToHex, ColorInt } from '../../util/colorUtils'
 import * as sRGB from '../../util/color/transformSRGB'
 import * as LAB from '../../util/color/transformCIELAB'
@@ -97,7 +98,7 @@ export function genStyles (theme: VuetifyParsedTheme, cssVar = false): string {
     css += genBaseColor(name, cssVar ? genColorVariable(name) : value.base)
     cssVar && (variablesCss += `  ${genColorVariableName(name)}: ${value.base};\n`)
 
-    const variants = Object.keys(value)
+    const variants = keys(value)
     for (let i = 0; i < variants.length; ++i) {
       const variant = variants[i]
       const variantValue = value[variant]
