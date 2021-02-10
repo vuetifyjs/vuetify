@@ -2,10 +2,10 @@
 import { VClassIcon, VComponentIcon, VSvgIcon } from '@/components'
 
 // Utilities
-import { computed, h, inject } from 'vue'
+import { computed, inject } from 'vue'
 
 // Types
-import type { Component, InjectionKey, Ref, VNode } from 'vue'
+import type { Component, InjectionKey, Ref } from 'vue'
 
 export type IconValue = string | Component
 
@@ -52,7 +52,7 @@ export interface IconProps {
   disabled?: Boolean
 }
 
-type IconComponent = (props: IconProps) => VNode
+type IconComponent = Component<IconProps>
 
 export interface IconSet {
   component: IconComponent
@@ -65,7 +65,7 @@ export type IconOptions = {
 }
 
 type IconInstance = {
-  component: (props: IconProps) => VNode
+  component: IconComponent
   icon: IconValue
 }
 
@@ -73,10 +73,10 @@ export const VuetifyIconSymbol: InjectionKey<IconOptions> = Symbol.for('vuetify:
 
 export const defaultSets: Record<string, IconSet> = {
   svg: {
-    component: props => h(VSvgIcon, props),
+    component: VSvgIcon,
   },
   class: {
-    component: props => h(VClassIcon, props),
+    component: VClassIcon,
   },
 }
 
@@ -99,7 +99,7 @@ export const useIcon = (props: { icon: IconValue }) => {
 
     if (typeof icon !== 'string') {
       return {
-        component: iconProps => h(VComponentIcon, iconProps as any), // TODO: fix any
+        component: VComponentIcon,
         icon,
       }
     }

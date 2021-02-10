@@ -58,7 +58,7 @@ export const VSvgIcon = defineComponent({
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 24 24'
             role='img'
-            aria-hidden={true}
+            aria-hidden
           >
             <path d={ props.icon as string }></path>
           </svg>
@@ -118,9 +118,10 @@ export default defineComponent({
     return () => {
       const hasClickListener = !!context.attrs.onClick
       const tag = hasClickListener ? 'button' : props.tag
+      const Component = iconData.value.component as any as string // TODO: vuejs/vue-next#3218
 
       return (
-        <iconData.value.component
+        <Component
           tag={ tag }
           icon={ iconData.value.icon }
           class={[
