@@ -804,7 +804,7 @@ export default baseMixins.extend<options>().extend({
             menu.lastTile()
             break
         }
-        menu.activeTile && menu.activeTile.click()
+        this.selectItem(this.allItems[this.getMenuIndex()])
       })
     },
     selectItem (item: object) {
