@@ -790,6 +790,9 @@ export default baseMixins.extend<options>().extend({
 
       window.requestAnimationFrame(() => {
         menu.getTiles()
+
+        if (!menu.hasClickableTiles) return this.activateMenu()
+
         switch (keyCode) {
           case keyCodes.up:
             menu.prevTile()
