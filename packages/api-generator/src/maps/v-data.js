@@ -42,11 +42,13 @@ const DataProps = [
 
 const DataDefaultScopedSlotProps = {
   items: 'any[]',
+  originalItemsLength: 'number',
   pagination: DataPagination,
   options: DataOptions,
-  groupedItems: 'Record<string, any[]>',
+  groupedItems: 'Array<{ name: string, items: any[] }>',
   updateOptions: '(obj: any) => void',
   sort: '(value: string) => void',
+  sortArray: '(sortBy: string[]) => void',
   group: '(value: string) => void',
 }
 
