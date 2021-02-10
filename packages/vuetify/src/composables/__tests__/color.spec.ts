@@ -13,15 +13,15 @@ describe('color.ts', () => {
       })
       const data = useTextColor(props, 'color')
       expect(data.textColorClasses.value).toBeNull()
-      expect(data.textColorStyles.value).toEqual({})
+      expect(data.textColorStyles.value).toBeNull()
 
       props.color = 'primary'
       expect(data.textColorClasses.value).toEqual('text-primary')
-      expect(data.textColorStyles.value).toEqual({})
+      expect(data.textColorStyles.value).toBeNull()
 
       props.color = ''
       expect(data.textColorClasses.value).toBeNull()
-      expect(data.textColorStyles.value).toEqual({})
+      expect(data.textColorStyles.value).toBeNull()
 
       props.color = '#ff00ff'
       expect(data.textColorClasses.value).toBeNull()
@@ -38,7 +38,7 @@ describe('color.ts', () => {
       const data = useTextColor(toRef(props, 'color'))
 
       expect(data.textColorClasses.value).toEqual('text-primary')
-      expect(data.textColorStyles.value).toEqual({})
+      expect(data.textColorStyles.value).toBeNull()
     })
   })
 
@@ -49,15 +49,15 @@ describe('color.ts', () => {
       })
       const data = useBackgroundColor(props, 'bg')
       expect(data.backgroundColorClasses.value).toBeNull()
-      expect(data.backgroundColorStyles.value).toEqual({})
+      expect(data.backgroundColorStyles.value).toBeNull()
 
       props.bg = 'primary'
       expect(data.backgroundColorClasses.value).toEqual('bg-primary')
-      expect(data.backgroundColorStyles.value).toEqual({})
+      expect(data.backgroundColorStyles.value).toBeNull()
 
       props.bg = ''
       expect(data.backgroundColorClasses.value).toBeNull()
-      expect(data.backgroundColorStyles.value).toEqual({})
+      expect(data.backgroundColorStyles.value).toBeNull()
 
       props.bg = '#ff00ff'
       expect(data.backgroundColorClasses.value).toBeNull()
@@ -73,7 +73,7 @@ describe('color.ts', () => {
       const data = useBackgroundColor(toRef(props, 'color'))
 
       expect(data.backgroundColorClasses.value).toEqual('bg-primary')
-      expect(data.backgroundColorStyles.value).toEqual({})
+      expect(data.backgroundColorStyles.value).toBeNull()
     })
   })
 })
