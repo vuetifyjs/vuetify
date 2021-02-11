@@ -36,7 +36,7 @@ export function useTextColor <T extends Record<string, any>> (props: T | Ref<Col
     return `text-${color.value}`
   })
 
-  return { textColorStyles, textColorClasses }
+  return { textColorClasses, textColorStyles }
 }
 
 export function useBackgroundColor (color: Ref<ColorValue>): BackgroundColorData
