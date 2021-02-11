@@ -1,1 +1,1 @@
-export { default as VIcon, VLigatureIcon, VClassIcon, VSvgIcon, VComponentIcon } from './VIcon'
+export { default as VIcon } from './VIcon'

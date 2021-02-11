@@ -1,10 +1,7 @@
 /* eslint-disable max-len */
 
-// Utilities
-import { h } from 'vue'
-
 // Components
-import { VSvgIcon } from '@/components'
+import { VSvgIcon } from '@/composables/icons'
 
 // Types
 import type { IconSet, IconAliases } from '@/composables/icons'
@@ -46,7 +43,7 @@ const aliases: IconAliases = {
 }
 
 const mdi: IconSet = {
-  component: props => h(VSvgIcon, props),
+  component: VSvgIcon,
 }
 
 export { aliases, mdi }

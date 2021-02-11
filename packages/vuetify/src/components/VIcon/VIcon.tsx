@@ -2,95 +2,15 @@
 import './VIcon.sass'
 
 // Utilities
-import { defineComponent } from 'vue'
+import { computed, ComputedRef, defineComponent } from 'vue'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { useIcon } from '@/composables/icons'
 import makeProps from '@/util/makeProps'
-import propsFactory from '@/util/propsFactory'
 
 // Types
 import type { IconValue } from '@/composables/icons'
 import type { PropType } from 'vue'
-
-export const makeIconProps = propsFactory({
-  icon: {
-    type: [String, Object] as PropType<IconValue>,
-    required: true,
-  },
-  tag: {
-    type: String,
-    required: true,
-  },
-})
-
-export const VComponentIcon = defineComponent({
-  name: 'VComponentIcon',
-
-  props: makeIconProps(),
-
-  setup (props) {
-    return () => {
-      const Icon = props.icon as string
-
-      return (
-        <props.tag>
-          <Icon />
-        </props.tag>
-      )
-    }
-  },
-})
-
-export const VSvgIcon = defineComponent({
-  name: 'VSvgIcon',
-
-  inheritAttrs: false,
-
-  props: makeIconProps(),
-
-  setup (props, { attrs }) {
-    return () => {
-      return (
-        <props.tag style={ null }>
-          <svg
-            v-bind={ attrs }
-            class='v-icon__svg'
-            xmlns='http://www.w3.org/2000/svg'
-            viewBox='0 0 24 24'
-            role='img'
-            aria-hidden
-          >
-            <path d={ props.icon as string }></path>
-          </svg>
-        </props.tag>
-      )
-    }
-  },
-})
-
-export const VLigatureIcon = defineComponent({
-  name: 'VLigatureIcon',
-
-  props: makeIconProps(),
-
-  setup (props) {
-    return () => {
-      return (<props.tag>{ props.icon }</props.tag>)
-    }
-  },
-})
-
-export const VClassIcon = defineComponent({
-  name: 'VClassIcon',
-
-  props: makeIconProps(),
-
-  setup (props) {
-    return () => {
-      return (<props.tag class={ props.icon }></props.tag>)
-    }
-  },
-})
+import { flattenFragments } from '@/util'
 
 export default defineComponent({
   name: 'VIcon',
@@ -101,22 +21,32 @@ export default defineComponent({
     right: Boolean,
     tag: {
       type: String,
-      required: false,
       default: 'i',
     },
     icon: {
       type: [String, Object] as PropType<IconValue>,
-      required: true,
     },
     ...makeSizeProps(),
   }),
 
-  setup (props, context) {
-    const { iconData } = useIcon(props)
+  setup (props, { attrs, slots }) {
+    let slotIcon: ComputedRef<string | undefined> | undefined
+    if (slots.default) {
+      slotIcon = computed(() => {
+        const slot = slots.default?.()
+        if (!slot) return
+
+        return flattenFragments(slot).filter(node =>
+          node.children && typeof node.children === 'string'
+        )[0]?.children as string
+      })
+    }
+
+    const { iconData } = useIcon(slotIcon || props)
     const { sizeClasses } = useSize(props)
 
     return () => {
-      const hasClickListener = !!context.attrs.onClick
+      const hasClickListener = !!attrs.onClick
       const tag = hasClickListener ? 'button' : props.tag
       const Component = iconData.value.component as any as string // TODO: vuejs/vue-next#3218
 

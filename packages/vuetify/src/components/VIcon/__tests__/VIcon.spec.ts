@@ -8,6 +8,7 @@ import { defaultSets, VuetifyIconSymbol } from '@/composables/icons'
 import { mdi } from '@/iconsets/mdi'
 import { md } from '@/iconsets/md'
 import { fa } from '@/iconsets/fa'
+import { h, Text } from 'vue'
 
 const globalOptions = {
   provide: {
@@ -36,6 +37,17 @@ describe('VIcon', () => {
     const wrapper = mount(VIcon, {
       props: {
         icon: 'md:add',
+      },
+      global: globalOptions,
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should support an icon name in the default slot', () => {
+    const wrapper = mount(VIcon, {
+      slots: {
+        default: () => h(Text, null, 'md:add'),
       },
       global: globalOptions,
     })

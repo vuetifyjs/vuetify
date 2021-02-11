@@ -1,8 +1,5 @@
-// Utilities
-import { h } from 'vue'
-
 // Components
-import { VClassIcon } from '@/components'
+import { VClassIcon } from '@/composables/icons'
 
 // Types
 import type { IconSet, IconAliases } from '@/composables/icons'
@@ -44,7 +41,7 @@ const aliases: IconAliases = {
 }
 
 const fa: IconSet = {
-  component: props => h(VClassIcon, props),
+  component: VClassIcon,
 }
 
 export { aliases, fa }

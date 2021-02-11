@@ -45,3 +45,11 @@ exports[`VIcon should render ligature icon 1`] = `
   add
 </i>
 `;
+
+exports[`VIcon should support an icon name in the default slot 1`] = `
+<i class="material-icons v-icon notranslate v-size--default"
+   aria-hidden="true"
+>
+  add
+</i>
+`;
