@@ -59,5 +59,5 @@ export function useBackgroundColor <T extends Record<string, any>> (props: T | R
     return `bg-${color.value}`
   })
 
-  return { backgroundColorStyles, backgroundColorClasses }
+  return { backgroundColorClasses, backgroundColorStyles }
 }
