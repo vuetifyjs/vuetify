@@ -1,5 +1,6 @@
 // const Vue = require('vue')
 const fs = require('fs')
+const path = require('path')
 const { props: excludes } = require('./excludes')
 const { kebabCase, pascalize } = require('./text')
 
@@ -160,7 +161,17 @@ function parseComponent (component) {
   }
 }
 
+function getComponentList () {
+  const components = []
+  const componentMaps = fs.readdirSync(path.resolve(path.dirname('../api-generator/src/maps-alpha/components/*')))
+  componentMaps.forEach(file => {
+    components.push(file.split('.')[0])
+  })
+  return components
+}
+
 module.exports = {
+  getComponentList,
   parseSassVariables,
   parseGlobalSassVariables,
   parseComponent,
