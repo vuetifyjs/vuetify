@@ -111,29 +111,18 @@
 
 .v-btn__overlay
   border-radius: inherit
-  height: 100%
-  left: 0
   position: absolute
   top: 0
-  width: 100%
+  right: 0
+  bottom: 0
+  left: 0
+  pointer-events: none
+  background-color: $button-overlay-background-color
+  opacity: 0
+  transition: opacity 0.2s ease-in-out
 
-  &::before
-    border-radius: inherit
-    content: ''
-    height: 100%
-    left: 0
-    opacity: 0
-    pointer-events: none
-    position: absolute
-    top: 0
-    width: 100%
+  .v-btn:hover &
+    opacity: 0.08
 
   .v-btn--contained:hover &
-    &::before
-      background-color: $button-overlay-contained-background-color
-      opacity: 0.08
-
-  .v-btn:not(.v-btn--contained):hover &
-    &::before
-      background-color: $button-overlay-background-color
-      opacity: 0.08
+    background-color: $button-overlay-contained-background-color

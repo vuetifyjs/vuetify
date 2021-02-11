@@ -1,5 +1,5 @@
 // Styles
-import './VBtn.scss'
+import './VBtn.sass'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
