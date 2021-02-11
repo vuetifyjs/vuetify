@@ -29,7 +29,7 @@ export default defineComponent({
     ...makeSizeProps(),
   }),
 
-  setup (props, { attrs, slots }) {
+  setup (props, { slots }) {
     let slotIcon: ComputedRef<string | undefined> | undefined
     if (slots.default) {
       slotIcon = computed(() => {
@@ -46,13 +46,11 @@ export default defineComponent({
     const { sizeClasses } = useSize(props)
 
     return () => {
-      const hasClickListener = !!attrs.onClick
-      const tag = hasClickListener ? 'button' : props.tag
       const Component = iconData.value.component as any as string // TODO: vuejs/vue-next#3218
 
       return (
         <Component
-          tag={ tag }
+          tag={ props.tag }
           icon={ iconData.value.icon }
           class={[
             'v-icon',
@@ -62,7 +60,6 @@ export default defineComponent({
               'v-icon--disabled': props.disabled,
               'v-icon--left': props.left,
               'v-icon--right': props.right,
-              'v-icon--link': hasClickListener,
             },
           ]}
           style={ !sizeClasses.value ? ({
@@ -70,8 +67,7 @@ export default defineComponent({
             width: props.size,
             height: props.size,
           }) : undefined }
-          type={ hasClickListener ? 'button' : undefined }
-          aria-hidden={ !hasClickListener }
+          aria-hidden="true"
         />
       )
     }

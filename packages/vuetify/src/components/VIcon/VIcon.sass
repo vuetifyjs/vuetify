@@ -5,9 +5,6 @@
 +theme(v-icon) using ($material)
   color: map-deep-get($material, 'icons', 'active')
 
-  &:focus::after
-    opacity: map-deep-get($material, 'states', 'focus')
-
   &.v-icon.v-icon--disabled
     color: map-deep-get($material, 'icons', 'inactive') !important
 
@@ -26,30 +23,11 @@
   vertical-align: middle
   user-select: none
 
-  &::after
-    background-color: currentColor
-    border-radius: 50%
-    content: ''
-    display: inline-block
-    height: 100%
-    left: 0
-    opacity: 0
-    pointer-events: none
-    position: absolute
-    top: 0
-    transform: scale(1.3)
-    width: 100%
-    transition: opacity 0.2s map-get($transition, 'ease-in-out')
-
 .v-icon
   &--right
     margin-left: map-get($grid-gutters, 'md')
   &--left
     margin-right: map-get($grid-gutters, 'md')
-
-  &.v-icon.v-icon--link
-    cursor: pointer
-    outline: none
 
   &--disabled
     pointer-events: none

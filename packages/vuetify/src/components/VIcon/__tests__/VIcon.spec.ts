@@ -139,17 +139,6 @@ describe('VIcon', () => {
   //     expect(wrapper.element.classList).toContain('text--lighten-1')
   //   })
 
-  it('should render clickable icon if click handler specified', () => {
-    const clickHandler = jest.fn()
-    const wrapper = mount(VIcon, { props: { icon: 'mdi-add', onClick: clickHandler }, global: globalOptions })
-    wrapper.trigger('click')
-
-    expect(wrapper.element.classList).toContain('v-icon--link')
-    expect(clickHandler).toHaveBeenCalled()
-    expect(wrapper.element.getAttribute('aria-hidden')).toBe('false')
-    expect(wrapper.element.getAttribute('type')).toBe('button')
-  })
-
   it('should render an svg icon', async () => {
     const wrapper = mount(VIcon, {
       props: {
