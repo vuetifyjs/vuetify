@@ -58,6 +58,7 @@ export default defineComponent({
 
     return () => (
       <props.tag
+        type="button"
         class={[
           'v-btn',
           {
