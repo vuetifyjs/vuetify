@@ -18,6 +18,8 @@
   text-transform: $button-text-transform
   user-select: none
   vertical-align: $button-vertical-align
+  transition: 0.28s map-get($transition, 'fast-out-slow-in')
+  transition-property: box-shadow, transform, opacity
 
   +density($button-query, 0, "height")
   +states('.v-btn__overlay')
@@ -43,8 +45,6 @@
     padding: $button-contained-padding
 
   &--elevated
-    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1)
-
     +elevation($button-elevation)
 
     &:hover
@@ -56,6 +56,17 @@
 
     +density($button-icon-query, 0, "size")
     +rounded($button-icon-query)
+
+  &--plain
+    opacity: .62
+
+    &:focus,
+    &:hover,
+    &.v-btn--active
+      opacity: 1
+
+    .v-btn__overlay
+      display: none
 
 .v-btn__content
   letter-spacing: $button-text-letter-spacing

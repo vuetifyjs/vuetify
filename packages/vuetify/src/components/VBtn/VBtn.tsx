@@ -20,13 +20,17 @@ export default defineComponent({
   directives: { Ripple },
 
   props: makeProps({
-    contained: Boolean,
-    elevated: Boolean,
+    text: Boolean,
+    flat: Boolean,
+    plain: Boolean,
     icon: [Boolean, String],
+
     color: {
       type: String,
       default: 'primary',
     },
+    disabled: Boolean,
+
     ...makeSheetProps(),
     ...makeDensityProps(),
     ...makeTagProps({ tag: 'button' }),
@@ -35,8 +39,17 @@ export default defineComponent({
   setup (props, { slots }) {
     const { sheetClasses, sheetStyles } = useSheet(props, 'v-btn')
     const { densityClasses } = useDensity(props, 'v-btn')
+
+    const isContained = computed(() => {
+      return !(props.text || props.plain || props.icon || props.outlined || props.border !== false)
+    })
+
+    const isElevated = computed(() => {
+      return isContained.value && !(props.disabled || props.flat)
+    })
+
     const colorData = computed(() => {
-      return props.contained
+      return isContained.value
         ? useBackgroundColor(props, 'color')
         : useTextColor(props, 'color')
     })
@@ -46,9 +59,10 @@ export default defineComponent({
         class={[
           'v-btn',
           {
-            'v-btn--contained': props.contained,
-            'v-btn--elevated': props.elevated,
+            'v-btn--contained': isContained.value,
+            'v-btn--elevated': isElevated.value,
             'v-btn--icon': !!props.icon,
+            'v-btn--plain': props.plain,
           },
           sheetClasses.value,
           densityClasses.value,
@@ -58,7 +72,7 @@ export default defineComponent({
           sheetStyles.value,
           colorData.value.styles,
         ]}
-        v-ripple
+        v-ripple={ !props.disabled }
       >
         <span class="v-btn__overlay" />
         <span class="v-btn__content">

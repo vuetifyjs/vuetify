@@ -1,6 +1,7 @@
 import type { DirectiveBinding, Directive, DirectiveArguments } from 'vue'
 
-interface Binding extends Omit<DirectiveBinding, 'modifiers'> {
+interface Binding extends Omit<DirectiveBinding, 'value' | 'modifiers'> {
+  value?: unknown
   modifiers: Dictionary<boolean | undefined>
 }
 

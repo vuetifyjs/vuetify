@@ -23,13 +23,13 @@ function opacity (el: HTMLElement, value: number) {
   el.style.opacity = value.toString()
 }
 
-export interface RippleOptions {
+interface RippleOptions {
   class?: string
   center?: boolean
   circle?: boolean
 }
 
-interface RippleDirectiveBinding extends Omit<DirectiveBinding, 'modifiers' | 'value'> {
+export interface RippleDirectiveBinding extends Omit<DirectiveBinding, 'modifiers' | 'value'> {
   value?: boolean | { class: string }
   modifiers: {
     center?: boolean
