@@ -87,7 +87,6 @@
     margin-left: $button-affix-margin-start
     margin-right: $button-affix-margin-end
 
-
   +rtl
     margin-left: $button-affix-margin-end
     margin-right: $button-affix-margin-start
@@ -104,12 +103,12 @@
     margin-left: $button-affix-margin-end
     margin-right: $button-affix-margin-start
 
-
   +rtl
     margin-left: $button-affix-margin-start
     margin-right: $button-affix-margin-end
 
 .v-btn__overlay
+  background-color: currentColor
   border-radius: inherit
   position: absolute
   top: 0
@@ -117,12 +116,8 @@
   bottom: 0
   left: 0
   pointer-events: none
-  background-color: $button-overlay-background-color
   opacity: 0
   transition: opacity 0.2s ease-in-out
 
   .v-btn:hover &
     opacity: 0.08
-
-  .v-btn--contained:hover &
-    background-color: $button-overlay-contained-background-color
