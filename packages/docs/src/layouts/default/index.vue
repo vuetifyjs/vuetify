@@ -36,7 +36,7 @@
   import DefaultView from './View'
 
   // Data
-  import nav from '@/data/nav'
+  import nav from '@/data/nav-alpha'
   import modified from '@/data/modified'
   import { localeLookup } from '@/i18n/util'
 
