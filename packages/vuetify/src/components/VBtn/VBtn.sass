@@ -9,6 +9,8 @@
   font-weight: $button-font-weight
   justify-content: center
   line-height: $button-line-height
+  min-width: $button-min-width
+  outline: none
   overflow: visible
   padding: $button-padding
   position: relative
@@ -18,12 +20,7 @@
   vertical-align: $button-vertical-align
 
   +density($button-query, 0, "height")
-
-  &:not(:disabled)
-    color: $button-color
-
-  &:not(.v-btn--icon)
-    min-width: $button-min-width
+  +states('.v-btn__overlay')
 
   &--border
     +border($button-query)
@@ -45,10 +42,6 @@
   &--contained
     padding: $button-contained-padding
 
-    &:not(:disabled)
-      background-color: $button-contained-background-color
-      color: $button-contained-color
-
   &--elevated
     transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1)
 
@@ -59,53 +52,13 @@
 
   &--icon
     font-size: $button-icon-font-size
+    min-width: 0
 
     +density($button-icon-query, 0, "size")
     +rounded($button-icon-query)
 
 .v-btn__content
   letter-spacing: $button-text-letter-spacing
-  text-indent: $button-text-letter-spacing
-
-  .v-btn--border &
-    color: $button-text-border-color
-
-.v-btn__icon
-  color: inherit
-  display: inline-block
-  line-height: $button-icon-line-height
-
-.v-btn__prepend-icon
-  color: inherit
-  display: inline-block
-  font-size: $button-affix-size
-  height: $button-affix-size
-  line-height: $button-affix-line-height
-  width: $button-affix-size
-
-  +ltr
-    margin-left: $button-affix-margin-start
-    margin-right: $button-affix-margin-end
-
-  +rtl
-    margin-left: $button-affix-margin-end
-    margin-right: $button-affix-margin-start
-
-.v-btn__append-icon
-  color: inherit
-  display: inline-block
-  font-size: $button-affix-size
-  height: $button-affix-size
-  line-height: $button-affix-line-height
-  width: $button-affix-size
-
-  +ltr
-    margin-left: $button-affix-margin-end
-    margin-right: $button-affix-margin-start
-
-  +rtl
-    margin-left: $button-affix-margin-start
-    margin-right: $button-affix-margin-end
 
 .v-btn__overlay
   background-color: currentColor
@@ -118,6 +71,3 @@
   pointer-events: none
   opacity: 0
   transition: opacity 0.2s ease-in-out
-
-  .v-btn:hover &
-    opacity: 0.08

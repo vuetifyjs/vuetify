@@ -80,14 +80,6 @@ $material-light: map-deep-merge(
       'discrete': map-get($shades, 'black')
     ),
     'skeleton': linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .3), rgba(255, 255, 255, 0)),
-    'states': (
-      'hover': 0.04,
-      'focus': 0.12,
-      'selected': 0.08,
-      'activated': 0.12,
-      'pressed': 0.16,
-      'dragged': 0.08
-    ),
     'tabs': rgba(0, 0, 0, 0.54),
     'toggle-buttons': (
       'color': map-get($shades, 'black')
