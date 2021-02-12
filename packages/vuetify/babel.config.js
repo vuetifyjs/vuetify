@@ -8,6 +8,7 @@ module.exports = {
     '@babel/preset-typescript',
   ],
   plugins: [
+    ['@vue/babel-plugin-jsx', { optimize: true, enableObjectSlots: false }],
     ['transform-define', {
       __VUETIFY_VERSION__: vuetifyPackage.version,
       __REQUIRED_VUE__: vuetifyPackage.peerDependencies.vue,

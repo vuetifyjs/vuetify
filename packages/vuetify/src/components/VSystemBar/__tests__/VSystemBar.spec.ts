@@ -1,59 +1,27 @@
-// @ts-nocheck
-/* eslint-disable */
-
-// Libraries
-// import Vue from 'vue'
-
 // Components
-// import VSystemBar from '../VSystemBar'
+import { VSystemBar } from '..'
 
 // Utilities
-import {
-  createLocalVue,
-  mount,
-  Wrapper,
-} from '@vue/test-utils'
+import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
+import { mount } from '@vue/test-utils'
+import { VuetifySymbol } from '@/framework'
 
-describe.skip('VSystemBar.ts', () => {
-  type Instance = InstanceType<typeof VSystemBar>
-  let mountFunction: (options?: object) => Wrapper<Instance>
-
-  beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VSystemBar, {
-        mocks: {
-          $vuetify: {
-            application: {
-              register: () => {},
-              unregister: () => {},
-            },
-          },
+describe('VSystemBar', () => {
+  function mountFunction (options = {}) {
+    return mount(VSystemBar, {
+      global: {
+        provide: {
+          [VuetifySymbol as symbol]: { defaults: { global: {} } },
+          [VuetifyThemeSymbol as symbol]: createTheme(),
         },
-        ...options,
-      })
-    }
-  })
-
-  it('should return the correct height', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        app: true,
-        height: 56,
       },
+      ...options,
     })
+  }
 
-    expect(wrapper.vm.computedHeight).toBe(56)
+  it('should match a snapshot', () => {
+    const wrapper = mountFunction()
 
-    wrapper.setProps({ height: '48' })
-    expect(wrapper.vm.computedHeight).toBe(48)
-
-    wrapper.setProps({ height: 'auto' })
-    expect(wrapper.vm.computedHeight).toBe('auto')
-
-    wrapper.setProps({ height: undefined })
-    expect(wrapper.vm.computedHeight).toBe(24)
-
-    wrapper.setProps({ window: true })
-    expect(wrapper.vm.computedHeight).toBe(32)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

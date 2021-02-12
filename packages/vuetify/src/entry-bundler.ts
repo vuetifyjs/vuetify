@@ -5,7 +5,6 @@ import * as directives from './directives'
 import * as framework from './framework'
 
 export * from './components'
-export * from './composables'
 export * from './framework'
 
 export const createVuetify = (options: framework.VuetifyOptions = {}) => {

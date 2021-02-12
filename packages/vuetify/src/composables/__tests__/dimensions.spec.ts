@@ -1,8 +1,8 @@
 // Utilities
-import { useDimension } from '..'
+import { useDimension } from '../dimensions'
 
 // Types
-import type { DimensionProps } from '..'
+import type { DimensionProps } from '../dimensions'
 
 describe('dimensions.ts', () => {
   it.each([

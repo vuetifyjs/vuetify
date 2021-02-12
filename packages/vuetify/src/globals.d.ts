@@ -1,4 +1,5 @@
 import type { TouchStoredHandlers } from './directives/touch'
+import type { VNode } from 'vue'
 
 declare global {
   interface HTMLCollection {
@@ -65,10 +66,23 @@ declare global {
 
   export const __VUETIFY_VERSION__: string
   export const __REQUIRED_VUE__: string
+
+  namespace JSX {
+    interface Element extends VNode {}
+    interface IntrinsicAttributes {
+      [name: string]: any
+    }
+  }
 }
 
 declare module '@vue/runtime-core' {
   export interface ComponentInternalInstance {
     ctx: Record<string, unknown>
+  }
+}
+
+declare module '@vue/runtime-dom' {
+  export interface HTMLAttributes {
+    style: any
   }
 }

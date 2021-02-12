@@ -1,4 +1,1 @@
-import VBanner from './VBanner'
-
-export { VBanner }
-export default VBanner
+export { default as VBanner } from './VBanner'

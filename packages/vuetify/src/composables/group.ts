@@ -5,7 +5,7 @@ import { consoleWarn } from '@/util/console'
 import { useProxiedModel } from './proxiedModel'
 
 // Types
-import type { Ref, UnwrapRef, InjectionKey, SetupContext } from 'vue'
+import type { Ref, UnwrapRef, InjectionKey } from 'vue'
 
 interface GroupItem {
   id: number
@@ -65,13 +65,11 @@ export function useGroupItem (
 
 export function useGroup (
   props: GroupProps,
-  context: SetupContext<any>,
   injectKey: InjectionKey<GroupProvide>
 ) {
   const items = reactive<GroupItem[]>([])
   const selected = useProxiedModel(
     props,
-    context,
     'modelValue',
     [],
     v => {

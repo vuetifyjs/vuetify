@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VSystemBar should match a snapshot 1`] = `
+<div class="v-system-bar v-theme--light">
+</div>
+`;

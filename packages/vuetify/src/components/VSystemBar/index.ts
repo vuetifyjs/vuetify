@@ -1,4 +1,1 @@
-import VSystemBar from './VSystemBar'
-
-export { VSystemBar }
-export default VSystemBar
+export { default as VSystemBar } from './VSystemBar'

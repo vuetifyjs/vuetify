@@ -1,8 +1,5 @@
 // Composables
-import {
-  makeElevationProps,
-  useElevation,
-} from '..'
+import { makeElevationProps, useElevation } from '../elevation'
 
 describe('elevation.ts', () => {
   it('should have the correct class', () => {

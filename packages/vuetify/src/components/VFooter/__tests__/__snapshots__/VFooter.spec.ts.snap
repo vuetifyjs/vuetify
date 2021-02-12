@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VFooter should match a snapshot 1`] = `
+<footer class="v-footer v-theme--light">
+</footer>
+`;

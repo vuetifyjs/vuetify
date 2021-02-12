@@ -1,19 +1,53 @@
-@import '../../styles/styles.sass';
-
-$banner-actions-start-margin: 90px !default;
-$banner-actions-margin: 8px !default;
-$banner-border-radius: 0 !default;
+// Defaults
+$banner-actions-margin-start: 90px !default;
+$banner-background-color: rgb(var(--v-theme-background)) !default;
+$banner-border-color: $border-color-root !default;
+$banner-border-radius: map-get($rounded, 0) !default;
+$banner-border-style: $border-style-root !default;
+$banner-border-width: 0 0 thin 0 !default;
+$banner-content-line-height: 1.25rem !default;
+$banner-content-padding-bottom: 8px !default;
 $banner-elevation: 0 !default;
+$banner-font-size: map-deep-get($headings, 'body-2', 'size') !default;
 $banner-line-height: 20px !default;
-$banner-start-padding: 24px !default;
-$banner-end-padding: 8px !default;
-$banner-y-padding: 16px !default;
-$banner-icon-padding: 16px !default;
-$banner-content-padding: 8px !default;
-$banner-mobile-padding: 10px !default;
-$banner-mobile-multiline-padding: 24px !default;
-$banner-mobile-start-padding: 16px !default;
-$banner-mobile-top-padding: 16px !default;
-$banner-mobile-actions-top-padding: 12px !default;
-$banner-mobile-singleline-padding: 36px !default;
-$banner-shaped-border-radius: map-get($rounded, 'xl') $banner-border-radius !default;
+$banner-padding-bottom: 8px !default;
+$banner-padding-end: 8px !default;
+$banner-padding-start: 24px !default;
+$banner-padding-top: 16px !default;
+$banner-positions: absolute fixed sticky !default;
+$banner-single-line-content-padding-bottom: 0 !default;
+$banner-single-line-padding-top: 8px !default;
+$banner-sizer-max-width: 720px !default;
+$banner-sticky-top: 0 !default;
+$banner-thumbnail-border-radius: map-get($rounded, 'circle') !default;
+$banner-thumbnail-height: 40px !default;
+$banner-thumbnail-icon-background-color: rgb(var(--v-theme-primary)) !default;
+$banner-thumbnail-icon-color: rgb(var(--v-theme-on-primary)) !default;
+$banner-thumbnail-icon-font-size: 28px !default;
+$banner-thumbnail-margin-end: 24px !default;
+$banner-thumbnail-margin-start: 0 !default;
+$banner-thumbnail-padding-start: 16px !default;
+$banner-thumbnail-width: $banner-thumbnail-height !default;
+$banner-width: 100% !default;
+
+// Mobile
+$banner-mobile-content-padding-bottom: 12px !default;
+$banner-mobile-padding-top: 24px !default;
+$banner-mobile-single-line-actions-margin-start: 36px !default;
+$banner-mobile-single-line-padding-top: 10px !default;
+$banner-mobile-sizer-max-width: 360px !default;
+$banner-mobile-thumbnail-padding-start: 16px !default;
+
+$banner-query: () !default;
+$banner-query: map-deep-merge(
+  (
+    'border-color': $banner-border-color,
+    'border-radius': $banner-border-radius,
+    'border-style': $banner-border-style,
+    'border-width': $banner-border-width,
+    'font-size': $banner-font-size,
+    'elevation': $banner-elevation,
+    'position': $banner-positions
+  ),
+  $banner-query
+);

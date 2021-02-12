@@ -42,7 +42,7 @@ function generateDefault (propName: string, localDefault: any, type: any) {
         ? componentDefault
         : localDefault
 
-    return isFactory(type) ? actualDefault(props) : actualDefault
+    return isFactory(actualDefault, type) ? actualDefault(props) : actualDefault
   }
 }
 
@@ -52,6 +52,6 @@ function getDefaultValue (sectionName: keyof VuetifyComponentDefaults, propName:
 }
 
 // Would be nice to have PropOptions here
-function isFactory (type: any) {
-  return !!wrapInArray(type).find(t => t === Array || t === Object)
+function isFactory (val: any, type: any) {
+  return typeof val === 'function' && !wrapInArray(type).includes(Function)
 }

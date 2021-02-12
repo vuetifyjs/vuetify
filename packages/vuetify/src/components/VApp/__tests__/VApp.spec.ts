@@ -3,7 +3,7 @@ import VApp from '../VApp'
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { createTheme, VuetifyThemeSymbol } from '@/composables'
+import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
 import { VuetifySymbol } from '@/framework'
 
 describe('VApp', () => {

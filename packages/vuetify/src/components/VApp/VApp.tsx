@@ -2,11 +2,11 @@
 import './VApp.sass'
 
 // Utilities
-import { defineComponent, h } from 'vue'
+import { defineComponent } from 'vue'
 import makeProps from '@/util/makeProps'
 
 // Composables
-import { useTheme } from '@/composables'
+import { useTheme } from '@/composables/theme'
 
 export default defineComponent({
   name: 'VApp',
@@ -17,15 +17,11 @@ export default defineComponent({
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme()
+
     return () => (
-      h('div', {
-        ...props,
-        class: [
-          'v-application',
-          themeClasses.value,
-        ],
-        'data-app': true,
-      }, h('div', { class: 'v-application__wrap' }, slots.default?.()))
+      <div class={['v-application', themeClasses.value]} data-app="true">
+        <div class="v-application__wrap">{ slots.default?.() }</div>
+      </div>
     )
   },
 })

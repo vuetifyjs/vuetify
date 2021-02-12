@@ -1,6 +1,6 @@
 import './VGrid.sass'
 
-import { defineComponent, h } from 'vue'
+import { defineComponent } from 'vue'
 import makeProps from '@/util/makeProps'
 
 export default defineComponent({
@@ -18,11 +18,14 @@ export default defineComponent({
   }),
 
   setup (props, { slots }) {
-    return () => h(props.tag, {
-      class: [
-        'v-container',
-        { 'v-container--fluid': props.fluid },
-      ],
-    }, slots.default?.())
+    return () => (
+      <props.tag
+        class={[
+          'v-container',
+          { 'v-container--fluid': props.fluid },
+        ]}
+        v-slots={ slots }
+      />
+    )
   },
 })
