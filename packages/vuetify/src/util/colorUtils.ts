@@ -20,8 +20,8 @@ export type Hex = string
 export type Hexa = string
 export type Color = string | number | {}
 
-export function isCssColor (color?: string | false): boolean {
-  return !!color && !!color.match(/^(#|var\(--|(rgb|hsl)a?\()/)
+export function isCssColor (color?: string | null | false): boolean {
+  return !!color && /^(#|var\(--|(rgb|hsl)a?\()/.test(color)
 }
 
 export function colorToInt (color: Color): ColorInt {

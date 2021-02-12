@@ -73,6 +73,7 @@ export interface ThemeInstance {
   themeClasses: Ref<string>
   setTheme: (key: string, theme: ThemeDefinition) => void
   getTheme: (key: string) => InternalThemeDefinition
+  hasColor: (color: string) => boolean
 }
 
 export const VuetifyThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme')
@@ -254,6 +255,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
     getTheme: (key: string) => computedThemes.value[key],
     current,
     themeClasses: computed(() => parsedOptions.isDisabled ? '' : `v-theme--${current.value}`),
+    hasColor: (color: string) => !!computedThemes.value[current.value].colors[color],
   }
 }
 

@@ -18,7 +18,7 @@ import type { ElevationProps } from '@/composables/elevation'
 import type { PositionProps } from '@/composables/position'
 
 // Utilities
-import { defineComponent, ref } from 'vue'
+import { defineComponent, computed } from 'vue'
 import makeProps from '@/util/makeProps'
 
 export function makeSheetProps () {
@@ -43,14 +43,14 @@ export function useSheet (props: SheetProps, name: string) {
   const { positionClasses, positionStyles } = usePosition(props, name)
 
   return {
-    sheetClasses: ref([
+    sheetClasses: computed(() => [
       themeClasses.value,
       borderClasses.value,
       borderRadiusClasses.value,
       elevationClasses.value,
       positionClasses.value,
     ]),
-    sheetStyles: ref([
+    sheetStyles: computed(() => [
       dimensionStyles.value,
       positionStyles.value,
     ]),
