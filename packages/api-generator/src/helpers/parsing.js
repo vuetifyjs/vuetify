@@ -1,4 +1,4 @@
-const Vue = require('vue')
+// const Vue = require('vue')
 const fs = require('fs')
 const { props: excludes } = require('./excludes')
 const { kebabCase, pascalize } = require('./text')
@@ -46,8 +46,8 @@ function getPropDefault (def, type) {
 function getPropSource (name, mixins) {
   const source = null
   for (let i = 0; i < mixins.length; i++) {
-    let mixin = mixins[i]
-    if (mixin.name !== 'VueComponent') mixin = Vue.extend(mixin)
+    const mixin = mixins[i]
+    // if (mixin.name !== 'VueComponent') mixin = Vue.extend(mixin)
     if (mixin.options.name) {
       const source = Object.keys(mixin.options.props || {}).find(p => p === name) && mixin.options.name
       const found = getPropSource(name, [mixin.super].concat(mixin.options.extends).concat(mixin.options.mixins).filter(m => !!m)) || source
@@ -91,9 +91,9 @@ function parseMixins (component) {
 
   let mixins = []
   for (let i = 0; i < component.options.mixins.length; i++) {
-    let mixin = component.options.mixins[i]
+    const mixin = component.options.mixins[i]
 
-    if (mixin.name !== 'VueComponent') mixin = Vue.extend(mixin)
+    // if (mixin.name !== 'VueComponent') mixin = Vue.extend(mixin)
 
     if (mixin.options.name) {
       mixins.push(mixin.options.name)

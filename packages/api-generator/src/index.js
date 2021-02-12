@@ -1,11 +1,11 @@
-const Vue = require('vue')
-const Vuetify = require('vuetify')
+// const Vue = require('vue')
+// const Vuetify = require('vuetify')
 const { components: excludes } = require('./helpers/excludes')
 const { camelCase, kebabCase, pascalize } = require('./helpers/text')
 const { parseComponent, parseSassVariables, parseGlobalSassVariables } = require('./helpers/parsing')
 const deepmerge = require('./helpers/merge')
 
-Vue.use(Vuetify)
+// Vue.use(Vuetify)
 
 const loadLocale = (componentName, locale, fallback = {}) => {
   try {
@@ -198,8 +198,8 @@ const getCompleteApi = locales => {
   return [
     getVuetifyApi(locales),
     getInternationalizationApi(locales),
-    ...getComponentsApi(locales),
-    ...getDirectivesApi(locales),
+    // ...getComponentsApi(locales),
+    // ...getDirectivesApi(locales),
   ].sort((a, b) => a.name.localeCompare(b.name))
 }
 
@@ -209,9 +209,9 @@ const getHeaderLocale = locale => {
 }
 
 module.exports = {
-  getApi,
+  getApi: () => [],
   getCompleteApi,
-  getComponentsApi,
-  getDirectivesApi,
+  getComponentsApi: () => [],
+  getDirectivesApi: () => [],
   getHeaderLocale,
 }
