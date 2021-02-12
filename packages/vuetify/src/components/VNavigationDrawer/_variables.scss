@@ -1,4 +1,18 @@
-@import '../../styles/styles.sass';
+// Defaults
+$navigation-drawer-border-color: $border-color-root !default;
+$navigation-drawer-border-style: $border-style-root !default;
+$navigation-drawer-border-width: 0 thin 0 0 !default;
+$navigation-drawer-elevation: 16 !default;
+$navigation-drawer-positions: absolute fixed !default;
 
-$navigation-drawer-border-width: 1px !default;
-$navigation-drawer-mobile-temporary-elevation: 16 !default;
+$navigation-drawer-query: () !default;
+$navigation-drawer-query: map-deep-merge(
+  (
+    'border-color': $navigation-drawer-border-color,
+    'border-style': $navigation-drawer-border-style,
+    'border-width': $navigation-drawer-border-width,
+    'elevation': $navigation-drawer-elevation,
+    'position': $navigation-drawer-positions
+  ),
+  $navigation-drawer-query
+);
