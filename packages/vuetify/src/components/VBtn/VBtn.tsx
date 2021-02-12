@@ -25,6 +25,8 @@ export default defineComponent({
     plain: Boolean,
     icon: [Boolean, String],
 
+    block: Boolean,
+
     color: {
       type: String,
       default: 'primary',
@@ -63,6 +65,7 @@ export default defineComponent({
             'v-btn--elevated': isElevated.value,
             'v-btn--icon': !!props.icon,
             'v-btn--plain': props.plain,
+            'v-btn--block': props.block,
           },
           sheetClasses.value,
           densityClasses.value,
