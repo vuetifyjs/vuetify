@@ -1,3 +1,6 @@
+// Styles
+import './VContent.sass'
+
 // Utilities
 import { defineComponent, inject } from 'vue'
 
@@ -12,15 +15,11 @@ export default defineComponent({
 
     if (!layout) throw new Error('Could not find injected Vuetify layout')
 
-    return () => <div
-      style={{
-        padding: layout.padding.value,
-        display: 'flex',
-        flex: '1 0 auto',
-        width: '100%',
-        flexDirection: 'column',
-        transition: 'all 0.3s ease-in-out',
-      }}
-    >{ slots.default?.() }</div>
+    return () => (
+      <div
+        class='v-content'
+        style={layout.contentStyles.value}
+      >{ slots.default?.() }</div>
+    )
   },
 })

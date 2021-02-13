@@ -1,24 +1,40 @@
 // Utilities
 import { inject, provide, computed, ref, onBeforeUnmount } from 'vue'
-import { getUid } from '@/util'
+import { getUid, convertToUnit } from '@/util'
 import propsFactory from '@/util/propsFactory'
 
 // Types
-import type { InjectionKey, Ref } from 'vue'
+import type { InjectionKey, Ref, Prop } from 'vue'
 
 type Position = 'top' | 'left' | 'right' | 'bottom'
 
 interface LayoutProvide {
   register: (id: string, position: Ref<Position>, amount: Ref<number | string>) => Ref<Record<string, unknown>>
   unregister: (id: string) => void
-  padding: Ref<string>
+  contentStyles: Ref<Record<string, unknown>>
 }
 
 export const VuetifyLayoutKey: InjectionKey<LayoutProvide> = Symbol.for('vuetify:layout')
 
+export const makeLayoutProps = propsFactory({
+  layout: {
+    type: Array,
+    default: () => ([]),
+  } as Prop<string[]>,
+  overlaps: {
+    type: Array,
+    default: () => ([]),
+  } as Prop<string[]>,
+  fullHeight: Boolean,
+})
+
 export const makeLayoutItemProps = propsFactory({
   name: {
     type: String,
+  },
+  size: {
+    type: [Number, String],
+    default: 300,
   },
 })
 
@@ -97,9 +113,16 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
     return generateLayers(props.layout ?? [], registered.value, positions, amounts)
   })
 
-  const padding = computed(() => {
+  const contentStyles = computed(() => {
     const layer = layers.value[layers.value.length - 1].layer
-    return `${layer.top}px ${layer.right}px ${layer.bottom}px ${layer.left}px`
+
+    return {
+      position: 'absolute',
+      left: convertToUnit(layer.left),
+      right: convertToUnit(layer.right),
+      top: convertToUnit(layer.top),
+      bottom: convertToUnit(layer.bottom),
+    }
   })
 
   provide(VuetifyLayoutKey, {
@@ -134,6 +157,7 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
           marginBottom: position.value !== 'top' ? `${item.layer.bottom}px` : undefined,
           [position.value]: 0,
           zIndex: layers.value.length - index,
+          position: 'absolute',
         }
       })
     },
@@ -142,6 +166,8 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
       amounts.delete(id)
       registered.value = registered.value.filter(v => v !== id)
     },
-    padding,
+    contentStyles,
   })
+
+  return { layoutClasses: ref('v-layout') }
 }

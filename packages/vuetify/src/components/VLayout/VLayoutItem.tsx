@@ -13,10 +13,6 @@ export default defineComponent({
 
   props: {
     ...makeLayoutItemProps(),
-    size: {
-      type: [Number, String],
-      default: 300,
-    },
     position: {
       type: String,
       required: true,
@@ -28,13 +24,13 @@ export default defineComponent({
 
     const background = randomHexColor()
 
-    return () => <div
-      style={{
-        position: 'absolute',
-        background,
-        transition: 'all 0.3s ease-in-out',
-        ...styles.value,
-      }}
-    >{ slots.default?.() }</div>
+    return () => (
+      <div
+        style={{
+          background,
+          ...styles.value,
+        }}
+      >{ slots.default?.() }</div>
+    )
   },
 })

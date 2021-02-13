@@ -1,41 +1,28 @@
+// Styles
+import './VLayout.sass'
+
 // Utilities
 import { defineComponent } from 'vue'
 import makeProps from '@/util/makeProps'
 
 // Composables
-import { createLayout } from '@/composables/layout'
-
-// Types
-import type { Prop } from 'vue'
+import { createLayout, makeLayoutProps } from '@/composables/layout'
 
 export default defineComponent({
   name: 'VLayout',
 
-  props: makeProps({
-    layout: {
-      type: Array,
-      default: () => ([]),
-    } as Prop<string[]>,
-    overlaps: {
-      type: Array,
-      default: () => ([])
-    } as Prop<string[]>,
-    fullHeight: Boolean,
-  }),
+  props: makeProps(makeLayoutProps()),
 
   setup (props, { slots }) {
-    createLayout(props)
+    const { layoutClasses } = createLayout(props)
 
-    return () =>
+    return () => (
       <div
+        class={layoutClasses.value}
         style={{
-          position: 'relative',
-          display: 'flex',
-          flex: '1 1 auto',
           height: props.fullHeight ? '100vh' : undefined,
-          overflow: 'hidden',
-          zIndex: 0,
         }}
       >{ slots.default?.() }</div>
+    )
   },
 })
