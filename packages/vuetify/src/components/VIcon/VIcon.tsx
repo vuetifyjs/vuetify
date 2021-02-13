@@ -46,10 +46,8 @@ export default defineComponent({
     const { sizeClasses } = useSize(props)
 
     return () => {
-      const Component = iconData.value.component as any as string // TODO: vuejs/vue-next#3218
-
       return (
-        <Component
+        <iconData.value.component
           tag={ props.tag }
           icon={ iconData.value.icon }
           class={[

@@ -1,11 +1,11 @@
 // Utilities
-import { computed, defineComponent, inject, isRef, PropType } from 'vue'
+import { computed, defineComponent, inject, isRef } from 'vue'
 
 // Types
-import type { Component, InjectionKey, Ref } from 'vue'
+import type { JSXComponent, PropType, InjectionKey, Ref } from 'vue'
 import propsFactory from '@/util/propsFactory'
 
-export type IconValue = string | Component
+export type IconValue = string | JSXComponent
 
 export interface IconAliases {
   [name: string]: IconValue
@@ -50,7 +50,7 @@ export interface IconProps {
   disabled?: Boolean
 }
 
-type IconComponent = Component<IconProps>
+type IconComponent = JSXComponent<IconProps>
 
 export interface IconSet {
   component: IconComponent
@@ -87,11 +87,9 @@ export const VComponentIcon = defineComponent({
 
   setup (props) {
     return () => {
-      const Icon = props.icon as string
-
       return (
         <props.tag>
-          <Icon />
+          <props.icon />
         </props.tag>
       )
     }
