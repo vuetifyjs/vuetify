@@ -4,7 +4,7 @@ import { useBackgroundColor, useColor, useTextColor } from '../color'
 // Utilities
 import { reactive, ref, toRef } from 'vue'
 
-describe('color.ts', () => {
+describe('color', () => {
   describe('useColor', () => {
     it('should return correct data', () => {
       const colors = ref<{ background?: string | null, text?: string | null }>({
@@ -23,13 +23,13 @@ describe('color.ts', () => {
       colors.value.background = '#ff00ff'
       expect(data.colorClasses.value).toEqual([])
       expect(data.colorStyles.value).toEqual({
-        'background-color': '#ff00ff',
+        backgroundColor: '#ff00ff',
       })
 
       colors.value.text = 'primary'
       expect(data.colorClasses.value).toEqual(['text-primary'])
       expect(data.colorStyles.value).toEqual({
-        'background-color': '#ff00ff',
+        backgroundColor: '#ff00ff',
       })
     })
   })
@@ -54,7 +54,7 @@ describe('color.ts', () => {
       props.color = '#ff00ff'
       expect(data.textColorClasses.value).toEqual([])
       expect(data.textColorStyles.value).toEqual({
-        'caret-color': '#ff00ff',
+        caretColor: '#ff00ff',
         color: '#ff00ff',
       })
     })
@@ -90,7 +90,7 @@ describe('color.ts', () => {
       props.bg = '#ff00ff'
       expect(data.backgroundColorClasses.value).toEqual([])
       expect(data.backgroundColorStyles.value).toEqual({
-        'background-color': '#ff00ff',
+        backgroundColor: '#ff00ff',
       })
     })
 

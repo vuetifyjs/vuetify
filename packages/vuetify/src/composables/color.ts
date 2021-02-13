@@ -3,27 +3,21 @@ import { computed, isRef } from 'vue'
 import { isCssColor } from '@/util/colorUtils'
 
 // Types
-import type { Ref } from 'vue'
-
-type ColorStyles = {
-  color?: string
-  'caret-color'?: string
-  'background-color'?: string
-}
+import type { Ref, CSSProperties } from 'vue'
 
 type ColorValue = string | null | undefined
 
 type TextColorData = {
   textColorClasses: Ref<string[]>
-  textColorStyles: Ref<Omit<ColorStyles, 'background-color'>>
+  textColorStyles: Ref<CSSProperties>
 }
 
 type BackgroundColorData = {
   backgroundColorClasses: Ref<string[]>
-  backgroundColorStyles: Ref<Pick<ColorStyles, 'background-color'>>
+  backgroundColorStyles: Ref<CSSProperties>
 }
 
-export function useColor (colors: Ref<{ background?: string | null, text?: string | null }>) {
+export function useColor (colors: Ref<{ background?: ColorValue, text?: ColorValue }>) {
   const backgroundIsCssColor = computed(() => isCssColor(colors.value.background))
   const textIsCssColor = computed(() => isCssColor(colors.value.text))
 
@@ -42,15 +36,15 @@ export function useColor (colors: Ref<{ background?: string | null, text?: strin
   })
 
   const colorStyles = computed(() => {
-    const styles: ColorStyles = {}
+    const styles: CSSProperties = {}
 
     if (colors.value.background && backgroundIsCssColor.value) {
-      styles['background-color'] = colors.value.background
+      styles.backgroundColor = colors.value.background
     }
 
     if (colors.value.text && textIsCssColor.value) {
       styles.color = colors.value.text
-      styles['caret-color'] = colors.value.text
+      styles.caretColor = colors.value.text
     }
 
     return styles
@@ -60,8 +54,11 @@ export function useColor (colors: Ref<{ background?: string | null, text?: strin
 }
 
 export function useTextColor (color: Ref<ColorValue>): TextColorData
-export function useTextColor <T extends Record<string, any>>(props: T, name: keyof T): TextColorData
-export function useTextColor <T extends Record<string, any>> (props: T | Ref<ColorValue>, name?: keyof T): TextColorData {
+export function useTextColor <T extends Record<K, ColorValue>, K extends string> (props: T, name: K): TextColorData
+export function useTextColor <T extends Record<K, ColorValue>, K extends string> (
+  props: T | Ref<ColorValue>,
+  name?: K
+): TextColorData {
   const colors = computed(() => ({
     text: isRef(props) ? props.value : (name ? props[name] : null),
   }))
@@ -75,8 +72,11 @@ export function useTextColor <T extends Record<string, any>> (props: T | Ref<Col
 }
 
 export function useBackgroundColor (color: Ref<ColorValue>): BackgroundColorData
-export function useBackgroundColor <T extends Record<string, any>>(props: T, name: keyof T): BackgroundColorData
-export function useBackgroundColor <T extends Record<string, any>> (props: T | Ref<ColorValue>, name?: keyof T): BackgroundColorData {
+export function useBackgroundColor <T extends Record<K, ColorValue>, K extends string> (props: T, name: K): BackgroundColorData
+export function useBackgroundColor <T extends Record<K, ColorValue>, K extends string> (
+  props: T | Ref<ColorValue>,
+  name?: K
+): BackgroundColorData {
   const colors = computed(() => ({
     background: isRef(props) ? props.value : (name ? props[name] : null),
   }))
