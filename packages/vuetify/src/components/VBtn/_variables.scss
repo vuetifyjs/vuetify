@@ -1,7 +1,7 @@
 @import '../../styles/styles.sass';
 
 // Defaults
-$button-border-color: rgb(var(--v-theme-primary)) !default;
+$button-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $button-border-padding: 0 15px !default;
 $button-border-radius: $border-radius-root !default;
 $button-border-style: $border-style-root !default;
