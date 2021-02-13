@@ -5,7 +5,7 @@ import './VBtn.sass'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeSheetProps, useSheet } from '@/components/VSheet/VSheet'
 import { makeTagProps } from '@/composables/tag'
-import { useBackgroundColor, useTextColor } from '@/composables/color'
+import { useColor } from '@/composables/color'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -50,11 +50,9 @@ export default defineComponent({
       return isContained.value && !(props.disabled || props.flat)
     })
 
-    const colorData = computed(() => {
-      return isContained.value
-        ? useBackgroundColor(props, 'color')
-        : useTextColor(props, 'color')
-    })
+    const { colorClasses, colorStyles } = useColor(computed(() => ({
+      [isContained.value ? 'background' : 'text']: props.color,
+    })))
 
     return () => (
       <props.tag
@@ -70,11 +68,11 @@ export default defineComponent({
           },
           sheetClasses.value,
           densityClasses.value,
-          colorData.value.classes,
+          colorClasses.value,
         ]}
         style={[
           sheetStyles.value,
-          colorData.value.styles,
+          colorStyles.value,
         ]}
         v-ripple={ !props.disabled }
       >
