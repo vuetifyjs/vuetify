@@ -73,6 +73,22 @@
     flex: 1 0 auto
     min-width: 100%
 
+  &--disabled
+    pointer-events: none
+
+    &.v-btn--disabled
+      color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
+      opacity: 1
+
+    &.v-btn--contained
+      background: rgb(var(--v-theme-surface))
+      box-shadow: none
+
+      .v-btn__overlay
+        // This is multiplied by the text opacity,
+        // so we need to divide it to get the desired value
+        opacity: ($button-disabled-overlay / $button-disabled-opacity)
+
 .v-btn__content
   letter-spacing: $button-text-letter-spacing
   text-indent: $button-text-letter-spacing

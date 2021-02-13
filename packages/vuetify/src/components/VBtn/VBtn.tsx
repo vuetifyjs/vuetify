@@ -65,6 +65,7 @@ export default defineComponent({
             'v-btn--icon': !!props.icon,
             'v-btn--plain': props.plain,
             'v-btn--block': props.block,
+            'v-btn--disabled': props.disabled,
           },
           sheetClasses.value,
           densityClasses.value,
@@ -74,6 +75,7 @@ export default defineComponent({
           sheetStyles.value,
           colorStyles.value,
         ]}
+        disabled={ props.disabled }
         v-ripple={ !props.disabled }
       >
         <span class="v-btn__overlay" />
