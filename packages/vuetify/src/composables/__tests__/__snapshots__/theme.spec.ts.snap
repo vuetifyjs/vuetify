@@ -42,25 +42,25 @@ exports[`createTheme should create style element 1`] = `
     }
     .v-theme--dark {
       --v-theme-background: 18,18,18;
-      --v-theme-background-overlay-multiplier: 2;
+      --v-theme-background-overlay-multiplier: 1;
       --v-theme-surface: 18,18,18;
-      --v-theme-surface-overlay-multiplier: 2;
+      --v-theme-surface-overlay-multiplier: 1;
       --v-theme-primary: 187,134,252;
-      --v-theme-primary-overlay-multiplier: 1;
+      --v-theme-primary-overlay-multiplier: 2;
       --v-theme-primary-darken-1: 55,0,179;
-      --v-theme-primary-darken-1-overlay-multiplier: 2;
+      --v-theme-primary-darken-1-overlay-multiplier: 1;
       --v-theme-secondary: 3,218,197;
-      --v-theme-secondary-overlay-multiplier: 1;
+      --v-theme-secondary-overlay-multiplier: 2;
       --v-theme-secondary-darken-1: 3,218,197;
-      --v-theme-secondary-darken-1-overlay-multiplier: 1;
+      --v-theme-secondary-darken-1-overlay-multiplier: 2;
       --v-theme-error: 207,102,121;
-      --v-theme-error-overlay-multiplier: 1;
+      --v-theme-error-overlay-multiplier: 2;
       --v-theme-info: 33,150,243;
-      --v-theme-info-overlay-multiplier: 1;
+      --v-theme-info-overlay-multiplier: 2;
       --v-theme-success: 76,175,80;
-      --v-theme-success-overlay-multiplier: 1;
+      --v-theme-success-overlay-multiplier: 2;
       --v-theme-warning: 251,140,0;
-      --v-theme-warning-overlay-multiplier: 1;
+      --v-theme-warning-overlay-multiplier: 2;
       --v-theme-on-background: 255,255,255;
       --v-theme-on-surface: 255,255,255;
       --v-theme-on-primary: 0,0,0;
