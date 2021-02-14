@@ -20,7 +20,7 @@ function transform (el: HTMLElement, value: string) {
 }
 
 function opacity (el: HTMLElement, value: number) {
-  el.style.opacity = value.toString()
+  el.style.opacity = `calc(${value} * var(--v-theme-overlay-multiplier))`
 }
 
 interface RippleOptions {
@@ -126,7 +126,7 @@ const ripples = {
       animation.classList.remove('v-ripple__animation--enter')
       animation.classList.add('v-ripple__animation--in')
       transform(animation, `translate(${centerX}, ${centerY}) scale3d(1,1,1)`)
-      opacity(animation, 0.25)
+      opacity(animation, 0.08)
     }, 0)
   },
 
