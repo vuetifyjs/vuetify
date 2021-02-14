@@ -19,14 +19,13 @@ describe('size', () => {
   })
 
   it.each([
-    [{ size: undefined }, null],
-    [{ size: 'x-small' }, 'v-size--x-small'],
-    [{ size: 'small' }, 'v-size--small'],
-    [{ size: 'default' }, 'v-size--default'],
-    [{ size: 'large' }, 'v-size--large'],
-    [{ size: 'x-large' }, 'v-size--x-large'],
+    [{ size: 'x-small' }, 'test--size-x-small'],
+    [{ size: 'small' }, 'test--size-small'],
+    [{ size: 'default' }, 'test--size-default'],
+    [{ size: 'large' }, 'test--size-large'],
+    [{ size: 'x-large' }, 'test--size-x-large'],
   ] as const)('should return the correct class given value %p', (input, expected) => {
-    const { sizeClasses } = useSizeClasses(input)
+    const { sizeClasses } = useSizeClasses(input, 'test')
 
     expect(sizeClasses.value).toStrictEqual(expected)
   })
