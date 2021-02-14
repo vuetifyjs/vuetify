@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import propsFactory from '@/util/propsFactory'
 
 // Types
-import type { Prop } from 'vue'
+import type { PropType } from 'vue'
 
 const allowedSizes = ['x-small', 'small', 'default', 'large', 'x-large'] as const
 
@@ -16,18 +16,16 @@ export interface SizeProps {
 // Props
 export const makeSizeProps = propsFactory({
   size: {
-    type: String,
+    type: String as PropType<Size>,
     default: 'default',
     validator: (v: any) => allowedSizes.includes(v),
-  } as Prop<Size>,
+  },
 })
 
 // Effect
-export function useSizeClasses (props: SizeProps) {
+export function useSizeClasses (props: SizeProps, name: string) {
   const sizeClasses = computed(() => {
-    if (!props.size) return null
-
-    return `v-size--${props.size}`
+    return `${name}--size-${props.size}`
   })
 
   return { sizeClasses }

@@ -14,6 +14,7 @@ import { Ripple, RippleDirectiveBinding } from '@/directives/ripple'
 import { computed, defineComponent, withDirectives } from 'vue'
 import makeProps from '@/util/makeProps'
 import { useDirective } from '@/util/useDirective'
+import { makeSizeProps, useSizeClasses } from '@/composables/size'
 
 export default defineComponent({
   name: 'VBtn',
@@ -32,13 +33,15 @@ export default defineComponent({
     },
     disabled: Boolean,
 
-    ...makeSheetProps(),
+    ...makeSizeProps(),
     ...makeDensityProps(),
     ...makeTagProps({ tag: 'button' }),
+    ...makeSheetProps(),
   }),
 
   setup (props, { slots }) {
     const { sheetClasses, sheetStyles } = useSheet(props, 'v-btn')
+    const { sizeClasses } = useSizeClasses(props, 'v-btn')
     const { densityClasses } = useDensity(props, 'v-btn')
 
     const isContained = computed(() => {
@@ -67,6 +70,7 @@ export default defineComponent({
             'v-btn--disabled': props.disabled,
           },
           sheetClasses.value,
+          sizeClasses.value,
           densityClasses.value,
           colorClasses.value,
         ]}

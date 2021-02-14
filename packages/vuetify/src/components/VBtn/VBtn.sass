@@ -5,14 +5,11 @@
   align-items: center
   border-radius: $button-border-radius
   display: inline-flex
-  font-size: $button-font-size
   font-weight: $button-font-weight
   justify-content: center
   line-height: $button-line-height
-  min-width: $button-min-width
   outline: none
   overflow: visible
-  padding: $button-padding
   position: relative
   text-decoration: none
   text-transform: $button-text-transform
@@ -21,41 +18,31 @@
   transition: 0.28s map-get($transition, 'fast-out-slow-in')
   transition-property: box-shadow, transform, opacity
 
-  +density($button-query, 0, "height")
+  @at-root
+    +sizes('v-btn', $button-query)
+    +density('v-btn', 'height', $button-density)
+
   +states('.v-btn__overlay')
 
+  &--icon
+    border-radius: $button-icon-border-radius
+    min-width: 0
+    padding: 0
+
+    .v-btn__content
+      font-size: (24em/14)
+
+    @at-root &
+      +density('v-btn', ('width', 'height'), $button-icon-density)
+
   &--border
-    +border($button-query)
-
-    padding: $button-border-padding
-
-  &--comfortable
-    +density($button-query, -2, "height")
-
-    &.v-btn--icon
-      +density($button-icon-query, -3, "size")
-
-  &--compact
-    +density($button-query, -3, "height")
-
-    &.v-btn--icon
-      +density($button-icon-query, -5, "size")
-
-  &--contained
-    padding: $button-contained-padding
+    +border($button-border)
 
   &--elevated
     +elevation($button-elevation)
 
     &:hover
       +elevation($button-hover-elevation)
-
-  &--icon
-    font-size: $button-icon-font-size
-    min-width: 0
-
-    +density($button-icon-query, 0, "size")
-    +rounded($button-icon-query)
 
   &--plain
     opacity: .62

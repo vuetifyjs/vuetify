@@ -2,11 +2,9 @@
 
 // Defaults
 $button-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
-$button-border-padding: 0 15px !default;
 $button-border-radius: $border-radius-root !default;
 $button-border-style: $border-style-root !default;
 $button-border-width: thin !default;
-$button-contained-padding: 0 16px !default;
 $button-disabled-opacity: 0.26 !default;
 $button-disabled-overlay: 0.12 !default;
 $button-elevation: 2 !default;
@@ -15,34 +13,39 @@ $button-font-weight: map-deep-get($headings, 'button', 'weight') !default;
 $button-height: 36px !default;
 $button-icon-border-radius: map-get($rounded, 'circle') !default;
 $button-icon-font-size: 24px !default;
-$button-icon-line-height: 1 !default;
 $button-icon-size: 48px !default;
 $button-line-height: inherit !default;
-$button-min-width: 64px !default;
-$button-padding: 0 8px !default;
 $button-hover-elevation: 4 !default;
 $button-positions: absolute fixed !default;
 $button-text-letter-spacing: map-deep-get($headings, 'button', 'letter-spacing') !default;
 $button-text-transform: map-deep-get($headings, 'button', 'text-transform') !default;
 $button-vertical-align: middle !default;
 
-$button-query: () !default;
-$button-query: map-deep-merge(
+$button-density: ('default': 0, 'comfortable': -2, 'compact': -3) !default;
+$button-icon-density: ('default': 3, 'comfortable': 0, 'compact': -2) !default;
+
+$button-border: () !default;
+$button-border: map-merge(
   (
     'border-color': $button-border-color,
     'border-style': $button-border-style,
     'border-width': $button-border-width,
-    'elevation': $button-elevation,
-    'height': $button-height,
-    'position': $button-positions
   ),
-  $button-query
+  $button-border
+);
+
+$button-query: () !default;
+$button-query: map-merge(
+    (
+      'height': $button-height,
+      'font-size': $button-font-size
+    ),
+    $button-query
 );
 
 $button-icon-query: () !default;
-$button-icon-query: map-deep-merge(
+$button-icon-query: map-merge(
   (
-    'border-radius': $button-icon-border-radius,
     'font-size': $button-icon-font-size,
     'size': $button-icon-size
   ),
