@@ -8,16 +8,15 @@ import { makeTagProps } from '@/composables/tag'
 import { useColor } from '@/composables/color'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import { Ripple, RippleDirectiveBinding } from '@/directives/ripple'
 
 // Utilities
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, withDirectives } from 'vue'
 import makeProps from '@/util/makeProps'
+import { useDirective } from '@/util/useDirective'
 
 export default defineComponent({
   name: 'VBtn',
-
-  directives: { Ripple },
 
   props: makeProps({
     text: Boolean,
@@ -54,7 +53,7 @@ export default defineComponent({
       [isContained.value ? 'background' : 'text']: props.color,
     })))
 
-    return () => (
+    return () => withDirectives(
       <props.tag
         type="button"
         class={[
@@ -76,7 +75,6 @@ export default defineComponent({
           colorStyles.value,
         ]}
         disabled={ props.disabled }
-        v-ripple={ !props.disabled }
       >
         <span class="v-btn__overlay" />
         <span class="v-btn__content">
@@ -85,7 +83,11 @@ export default defineComponent({
             : <i class={['v-btn__icon', props.icon]}></i>
           }
         </span>
-      </props.tag>
+      </props.tag>,
+      [useDirective<RippleDirectiveBinding>(Ripple, {
+        value: !props.disabled,
+        modifiers: { center: !!props.icon },
+      })]
     )
   },
 })
