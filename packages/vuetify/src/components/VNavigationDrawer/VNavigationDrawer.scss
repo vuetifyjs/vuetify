@@ -1,16 +1,15 @@
 @import './index';
 
 .v-navigation-drawer {
-  // -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
   background: rgb(var(--v-theme-surface));
-  height: 100%;
   display: flex;
-  max-width: 100%;
-  // pointer-events: auto;
-  width: 256px;
   flex-direction: column;
+  height: 100%;
+  max-width: 100%;
+  pointer-events: auto;
   top: 0;
-  transition: .3s ease;
+  width: 256px;
 
   @include border($navigation-drawer-query);
   @include position($navigation-drawer-query);
@@ -70,10 +69,12 @@
   }
 
   &--rail {
-    width: 72px;
+    &:not(.v-navigation-drawer--is-hovering.v-navigation-drawer--expand-on-hover) {
+      width: 72px;
 
-    &.v-navigation-drawer--dense {
-      width: 56px;
+      &.v-navigation-drawer--dense {
+        width: 56px;
+      }
     }
   }
 
@@ -84,17 +85,17 @@
 
 .v-navigation-drawer__content {
   flex: 1 1 auto;
-  overflow-y: auto;
-  overflow-x: hidden;
   height: 100%;
   max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .v-navigation-drawer__img {
+  height: 100%;
+  left: 0;
   position: absolute;
   top: 0;
-  left: 0;
-  height: 100%;
   width: 100%;
   z-index: -1;
 

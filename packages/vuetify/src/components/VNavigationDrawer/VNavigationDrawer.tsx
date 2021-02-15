@@ -3,9 +3,10 @@ import './VNavigationDrawer.scss'
 
 // Composables
 import { makeSheetProps, useSheet } from '@/components/VSheet/VSheet'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { defineComponent, ref } from 'vue'
+import { defineComponent, onBeforeMount, ref } from 'vue'
 import { makeTagProps } from '@/composables/tag'
 import { convertToUnit } from '@/util/helpers'
 import makeProps from '@/util/makeProps'
@@ -32,21 +33,31 @@ export default defineComponent({
     expandOnHover: Boolean,
     floating: Boolean,
     mobile: Boolean,
+    modelValue: Boolean,
+    permanent: Boolean,
     rail: Boolean,
-    railWidth: Number,
+    railWidth: [Number, String],
     src: String,
     temporary: Boolean,
-    width: Number
+    width: [Number, String]
   }),
 
   setup (props, { slots }) {
     const { sheetClasses, sheetStyles } = useSheet(props, 'v-navigation-drawer')
+    const isActive = useProxiedModel(props, 'modelValue')
     const isHovering = ref(false)
+
+    onBeforeMount(() => {
+      if (isActive.value == null) {
+        isActive.value = !props.mobile
+      }
+    })
 
     return () => {
       const hasImg = (slots.img || props.src)
-      const hasRail = (props.rail && (!props.expandOnHover || !isHovering.value))
-      const width = !hasRail ? props.width : props.railWidth + (props.dense ? -4 : 0) * 4
+      const hasRail = props.rail || props.expandOnHover
+      const translate = isActive.value ? 0 : -100
+      const width = hasRail ? props.railWidth : props.width
 
       return (
         <props.tag
@@ -60,6 +71,7 @@ export default defineComponent({
               'v-navigation-drawer--end': props.right,
               'v-navigation-drawer--expand-on-hover': props.expandOnHover,
               'v-navigation-drawer--floating': props.floating,
+              'v-navigation-drawer--is-hovering': isHovering.value,
               'v-navigation-drawer--is-mobile': props.mobile,
               'v-navigation-drawer--rail': props.rail,
               'v-navigation-drawer--right': props.right,
@@ -71,6 +83,7 @@ export default defineComponent({
           style={[
             sheetStyles.value,
             {
+              transform: `translateX(${convertToUnit(translate, '%')})`,
               width: convertToUnit(width)
             },
           ]}
