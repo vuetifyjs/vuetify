@@ -18,6 +18,8 @@ export const makeDelayProps = propsFactory({
 export function useDelay (props: DelayProps, cb?: (value: boolean) => void) {
   const delays: Partial<Record<keyof DelayProps, number>> = {}
 
+  if (!IN_BROWSER) return
+  
   const runDelayFactory = (prop: keyof DelayProps) => (): Promise<boolean> => {
     const active = prop === 'openDelay'
 
