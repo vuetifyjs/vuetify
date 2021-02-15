@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Icons
+  title: Icon Fonts
   description: Vuetify supports Material Design Icons, Font awesome and other icon sets through prefixes and global options.
   keywords: vue icon component, iconfont, icon libraries, vuetify icons
 related:
@@ -9,7 +9,7 @@ related:
   - /components/avatars/
 ---
 
-# Icons
+# Icon Fonts
 
 Vuetify comes bootstrapped with support for Material Design Icons, Material Icons, Font Awesome 4 and Font Awesome 5. By default, applications will default to use [Material Design Icons](https://materialdesignicons.com/).
 
@@ -36,7 +36,7 @@ export default new Vuetify({
 
 Using a predefined option will pre-fill defaults based upon the selected preset. This will overwrite the defaults of components that have default **icon** values. For more information, view the default [icon preset values](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/icons/presets).
 
-## Installing iconfonts
+## Installing icon fonts
 
 You are required to include the specified icon library (even if using default). This can be done by including a CDN link or importing the icon library into your application.
 

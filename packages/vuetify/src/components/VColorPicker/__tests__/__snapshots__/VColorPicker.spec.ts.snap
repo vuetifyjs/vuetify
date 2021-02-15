@@ -141,7 +141,7 @@ exports[`VColorPicker.ts should change canvas height 1`] = `
         </span>
       </div>
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+              class="v-btn v-btn--icon v-btn--round theme--light v-size--small"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -285,7 +285,7 @@ exports[`VColorPicker.ts should hide canvas 1`] = `
         </span>
       </div>
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+              class="v-btn v-btn--icon v-btn--round theme--light v-size--small"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -481,7 +481,7 @@ exports[`VColorPicker.ts should hide sliders 1`] = `
         </span>
       </div>
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+              class="v-btn v-btn--icon v-btn--round theme--light v-size--small"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -590,7 +590,7 @@ exports[`VColorPicker.ts should not show alpha controls if given hex value witho
         </span>
       </div>
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+              class="v-btn v-btn--icon v-btn--round theme--light v-size--small"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -746,7 +746,7 @@ exports[`VColorPicker.ts should render color picker 1`] = `
         </span>
       </div>
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+              class="v-btn v-btn--icon v-btn--round theme--light v-size--small"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -902,7 +902,7 @@ exports[`VColorPicker.ts should render flat picker 1`] = `
         </span>
       </div>
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+              class="v-btn v-btn--icon v-btn--round theme--light v-size--small"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -1058,7 +1058,7 @@ exports[`VColorPicker.ts should render picker with elevation 1`] = `
         </span>
       </div>
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+              class="v-btn v-btn--icon v-btn--round theme--light v-size--small"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -1214,7 +1214,7 @@ exports[`VColorPicker.ts should show swatches 1`] = `
         </span>
       </div>
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+              class="v-btn v-btn--icon v-btn--round theme--light v-size--small"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"
@@ -2188,7 +2188,7 @@ exports[`VColorPicker.ts should work correctly when initial value is null 1`] = 
         </span>
       </div>
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+              class="v-btn v-btn--icon v-btn--round theme--light v-size--small"
       >
         <span class="v-btn__content">
           <i aria-hidden="true"

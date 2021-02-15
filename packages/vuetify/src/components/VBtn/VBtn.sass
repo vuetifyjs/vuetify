@@ -102,6 +102,7 @@
   // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
   position: relative
   transition: inherit
+  transition-property: opacity
 
   .v-icon--left,
   .v-icon--right
@@ -230,11 +231,6 @@
 
 .v-btn--outlined
   border: $btn-outline-border-width solid currentColor
-
-.v-btn:not(.v-btn--has-bg)
-  .v-btn__content
-    .v-icon
-      color: currentColor
 
 .v-btn--plain
   &::before

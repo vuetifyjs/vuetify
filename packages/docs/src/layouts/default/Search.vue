@@ -52,6 +52,7 @@
     }),
 
     computed: {
+      locale: get('route/params@locale'),
       search: get('route/query@search'),
       isSearching () {
         return this.model && this.model.length > 0
@@ -117,6 +118,9 @@
             clearOnSelected: true,
             debug: !IS_PROD,
             hint: false,
+          },
+          algoliaOptions: {
+            facetFilters: [`language:${this.locale}`],
           },
           handleSelected (input, event, suggestion) {
             vm.$router.push(suggestion.url.split('.com').pop())

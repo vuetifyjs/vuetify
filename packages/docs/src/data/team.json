@@ -355,5 +355,35 @@
     "location": "USA",
     "name": "Elijah Kotyluk",
     "team": "core"
+  },
+  "juddfranklin": {
+    "discord": "juddfranklin#1712",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)",
+      "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "CA, USA",
+    "name": "Judd Franklin",
+    "team": "contributors",
+    "linkedin": "judd-franklin"
+  },
+  "ohadsh535": {
+    "discord": "ohadsh535#2375",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English",
+      "Hebrew"
+    ],
+    "linkedin": "ohadshi",
+    "location": "Tel Aviv, Israel",
+    "name": "Ohad Shitrit",
+    "team": "contributors",
+    "twitter": "Ohad_Shitrit",
+    "work": "Octa-Code"
   }
 }

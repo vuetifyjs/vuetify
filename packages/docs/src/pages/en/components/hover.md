@@ -17,7 +17,7 @@ The `v-hover` component provides a clean interface for handling hover states for
 
 ## Usage
 
-The `v-hover` component is a wrapper that should contain only one child element, and can trigger an event when hovered over. In order for `v-hover` to work properly, either the **value** prop should be set to `true` or the wrapped element should contain `slot-scope="{ wrapper }"`.
+The `v-hover` component is a wrapper that should contain only one child element, and can trigger an event when hovered over. In order for `v-hover` to work properly, either the **value** prop should be set to `true` or the wrapped element should contain `v-slot="{ wrapper }"`.
 
 <usage name="v-hover" />
 

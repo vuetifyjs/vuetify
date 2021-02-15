@@ -282,6 +282,7 @@ export default baseMixins.extend<options>().extend({
       this.isMenuActive = false
       this.isFocused = false
       this.selectedIndex = -1
+      this.setMenuIndex(-1)
     },
     /** @public */
     activateMenu () {
@@ -792,6 +793,9 @@ export default baseMixins.extend<options>().extend({
 
       window.requestAnimationFrame(() => {
         menu.getTiles()
+
+        if (!menu.hasClickableTiles) return this.activateMenu()
+
         switch (keyCode) {
           case keyCodes.up:
             menu.prevTile()
@@ -806,7 +810,7 @@ export default baseMixins.extend<options>().extend({
             menu.lastTile()
             break
         }
-        menu.activeTile && menu.activeTile.click()
+        this.selectItem(this.allItems[this.getMenuIndex()])
       })
     },
     selectItem (item: object) {

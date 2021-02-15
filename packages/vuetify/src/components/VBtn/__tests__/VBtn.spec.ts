@@ -155,38 +155,6 @@ describe.skip('VBtn.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.classes('foo')).toBe(true)
   })
 
-  it('should have v-btn--depressed class when using depressed prop', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        depressed: true,
-      },
-    })
-
-    expect(wrapper.classes('v-btn--depressed')).toBe(true)
-  })
-
-  it('should have v-btn--flat class when using flat and depressed props', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        depressed: true,
-        text: true,
-      },
-    })
-
-    expect(wrapper.classes('v-btn--text')).toBe(true)
-  })
-
-  it('should have v-btn--outlined and v-btn--depressed classes when using outlined prop', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        outlined: true,
-      },
-    })
-
-    expect(wrapper.classes('v-btn--outlined')).toBe(true)
-    expect(wrapper.classes('v-btn--depressed')).toBe(true)
-  })
-
   it('should have v-btn--plain class when plain prop is set to true', () => {
     const wrapper = mountFunction({
       propsData: {
@@ -287,7 +255,7 @@ describe.skip('VBtn.ts', () => { // eslint-disable-line max-statements
   it('should not add color classes if disabled', () => {
     const wrapper = mountFunction({
       propsData: {
-        color: 'primary--text text--darken-2',
+        color: 'primary darken-2',
       },
     })
 
