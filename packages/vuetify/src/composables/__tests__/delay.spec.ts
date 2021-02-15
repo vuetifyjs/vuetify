@@ -2,6 +2,8 @@
 import { mount } from '@vue/test-utils'
 import { makeDelayProps, useDelay } from '../delay'
 import { wait } from '../../../test'
+// Globals
+import { IN_BROWSER } from '../../util/globals'
 
 describe('delayProps', () => {
   it('should allow setting default values', () => {
