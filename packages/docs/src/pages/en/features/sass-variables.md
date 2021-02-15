@@ -167,7 +167,7 @@ $headings: (
 
 ## Usage in templates
 
-You can access [global](/api/$vuetify/) and **per** component variables in Vue templates by importing from the Vuetify package.
+You can access [global](/api/vuetify/) and **per** component variables in Vue templates by importing from the Vuetify package.
 
 <alert type="info">
 

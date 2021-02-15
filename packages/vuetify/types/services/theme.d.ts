@@ -66,8 +66,6 @@ export interface VuetifyParsedTheme {
 }
 
 export interface VuetifyParsedThemeItem {
-  [name: string]: string
-
   base: string
   lighten5: string
   lighten4: string
