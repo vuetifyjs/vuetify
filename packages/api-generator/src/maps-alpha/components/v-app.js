@@ -13,7 +13,6 @@ module.exports = {
   slots: [
     {
       name: 'default',
-      description: {},
     },
   ],
   events: [],
