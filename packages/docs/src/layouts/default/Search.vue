@@ -1,6 +1,12 @@
 <template>
   <!-- eslint-disable vue/attribute-hyphenation  -->
-  <v-menu v-model="menuModel" offset-y readonly max-height="75vh" @input="resetSearch">
+  <v-menu
+    v-model="menuModel"
+    max-height="75vh"
+    offset-y
+    readonly
+    @input="resetSearch"
+  >
     <template #activator="{ attrs }">
       <v-text-field
         ref="searchInput"
@@ -28,20 +34,23 @@
         </template>
       </v-text-field>
     </template>
+
     <v-card>
       <ais-instant-search
-        index-name="vuetifyjs"
         :search-client="searchClient"
         :search-function="searchFunction"
+        index-name="vuetifyjs"
       >
         <ais-configure
           :facetFilters="[`language:${locale}`]"
           :query="searchString"
         />
+
         <ais-hits v-slot="{ items }">
           <search-results :groups="transformItems(items)" />
         </ais-hits>
       </ais-instant-search>
+
       <ais-powered-by />
     </v-card>
   </v-menu>
@@ -51,8 +60,8 @@
   // Utilities
   import { get } from 'vuex-pathify'
   import { groupItems, sortItems } from 'vuetify/lib/util/helpers'
-  import SearchResults from './SearchResults'
   import algoliasearch from 'algoliasearch'
+  import SearchResults from './SearchResults'
 
   // Globals
   import { IN_BROWSER } from '@/util/globals'
@@ -62,20 +71,18 @@
   export default {
     name: 'DefaultSearch',
 
-    components: {
-      SearchResults,
-    },
+    components: { SearchResults },
 
     inject: ['theme'],
 
     data: () => ({
-      searchString: '',
+      isFocused: false,
       menuModel: false,
       searchClient: algoliasearch(
         'BH4D9OD16A', // docsearch app ID
         '259d4615e283a1bbaa3313b4eff7881c' // vuetify API key
       ),
-      isFocused: false,
+      searchString: '',
     }),
 
     computed: {
@@ -118,6 +125,7 @@
     methods: {
       async onFocus () {
         clearTimeout(this.timeout)
+
         this.isFocused = true
       },
       searchFunction (helper) {
@@ -127,15 +135,18 @@
         const sorted = sortItems([...items], ['hierarchy.lvl0', 'hierarchy.lvl1'], [false, false], this.locale)
           .map(item => {
             const url = new URL(item.url)
+
             return {
               ...item,
               url: url.href.split(url.origin).pop(),
             }
           })
         const groups = groupItems(sorted, ['hierarchy.lvl0'])
+
         groups.forEach(group => {
           group.items = groupItems(group.items, ['hierarchy.lvl1'])
         })
+
         return groups
       },
       resetSearch () {
@@ -166,13 +177,13 @@
     width: 0
 
     &, & > *
-      overflow: hidden
       display: flex
       flex-direction: column
+      overflow: hidden
 
   .ais-InstantSearch
-    min-height: 0
     flex: 1
+    min-height: 0
     overflow-y: auto
 
   .ais-PoweredBy
