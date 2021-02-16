@@ -120,12 +120,6 @@
         clearTimeout(this.timeout)
         this.isFocused = true
       },
-      init (algoliasearch) {
-        this.searchClient = algoliasearch(
-          'BH4D9OD16A', // docsearch app ID
-          '259d4615e283a1bbaa3313b4eff7881c' // vuetify API key
-        )
-      },
       searchFunction (helper) {
         helper.state.query && helper.search()
       },
