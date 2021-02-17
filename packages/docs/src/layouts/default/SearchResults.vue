@@ -53,7 +53,7 @@
               <v-list-item-subtitle
                 v-if="item.content"
                 class="text-caption text-wrap text--primary font-weight-regular pl-2"
-                v-html="item._highlightResult.content.value"
+                v-html="truncateContent(item)"
               />
             </v-list-item-content>
           </v-list-item>
@@ -84,6 +84,20 @@
         }
 
         return str
+      },
+      truncateContent (item) {
+        const val = item._highlightResult.content.value.trim()
+
+        // number of characters until the word after the end of the first mark
+        const withMark = val.match(/^.*?<\/mark>(.{4,}?\b)?/)?.[0].length ?? 0
+
+        // characters until the end of the first word after the 72char limit
+        const minLength = val.match(/^.{0,72}.?\b/)?.[0].length ?? 0
+
+        const length = Math.max(withMark, minLength)
+        const continues = val.length > length
+
+        return val.slice(0, length) + (continues ? '&mldr;' : '')
       },
     },
   }
