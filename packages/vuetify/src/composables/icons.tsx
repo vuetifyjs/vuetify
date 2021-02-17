@@ -1,9 +1,9 @@
 // Utilities
 import { computed, defineComponent, inject, isRef } from 'vue'
+import propsFactory from '@/util/propsFactory'
 
 // Types
 import type { JSXComponent, PropType, InjectionKey, Ref } from 'vue'
-import propsFactory from '@/util/propsFactory'
 
 export type IconValue = string | JSXComponent
 
