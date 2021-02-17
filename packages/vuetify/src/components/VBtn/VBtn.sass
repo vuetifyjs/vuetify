@@ -38,10 +38,14 @@
     +border($button-border)
 
   &--elevated
-    +elevation($button-elevation)
+    +elevation(map-get($button-elevation, 'default'))
 
-    &:hover
-      +elevation($button-hover-elevation)
+    &:hover,
+    &:focus
+      +elevation(map-get($button-elevation, 'hover'))
+
+    &:active
+      +elevation(map-get($button-elevation, 'active'))
 
   &--plain
     opacity: .62
