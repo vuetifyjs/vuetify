@@ -7,16 +7,18 @@
   display: inline-flex
   font-weight: $button-font-weight
   justify-content: center
+  letter-spacing: $button-text-letter-spacing
   line-height: $button-line-height
   outline: none
   overflow: visible
   position: relative
   text-decoration: none
+  text-indent: $button-text-letter-spacing
   text-transform: $button-text-transform
+  transition-property: box-shadow, transform, opacity
+  transition: 0.28s map-get($transition, 'fast-out-slow-in')
   user-select: none
   vertical-align: $button-vertical-align
-  transition: 0.28s map-get($transition, 'fast-out-slow-in')
-  transition-property: box-shadow, transform, opacity
 
   @at-root
     +sizes('v-btn', $button-query)
@@ -28,9 +30,6 @@
     border-radius: $button-icon-border-radius
     min-width: 0
     padding: 0
-
-    .v-btn__content
-      font-size: (24em/14)
 
     @at-root &
       +density('v-btn', ('width', 'height'), $button-icon-density)
@@ -75,11 +74,6 @@
         // This is multiplied by the text opacity,
         // so we need to divide it to get the desired value
         opacity: ($button-disabled-overlay / $button-disabled-opacity)
-
-.v-btn__content
-  letter-spacing: $button-text-letter-spacing
-  text-indent: $button-text-letter-spacing
-  line-height: normal
 
 .v-btn__overlay
   background-color: currentColor

@@ -10,6 +10,9 @@ import { useColor } from '@/composables/color'
 // Directives
 import { Ripple, RippleDirectiveBinding } from '@/directives/ripple'
 
+// Components
+import VIcon from '@/components/VIcon/VIcon'
+
 // Utilities
 import { computed, defineComponent, withDirectives } from 'vue'
 import makeProps from '@/util/makeProps'
@@ -33,10 +36,10 @@ export default defineComponent({
     },
     disabled: Boolean,
 
+    ...makeSheetProps(),
     ...makeSizeProps(),
     ...makeDensityProps(),
     ...makeTagProps({ tag: 'button' }),
-    ...makeSheetProps(),
   }),
 
   setup (props, { slots }) {
@@ -81,12 +84,11 @@ export default defineComponent({
         disabled={ props.disabled }
       >
         <span class="v-btn__overlay" />
-        <span class="v-btn__content">
-          { typeof props.icon === 'boolean'
-            ? slots.default?.()
-            : <i class={['v-btn__icon', props.icon]}></i>
-          }
-        </span>
+
+        { typeof props.icon === 'boolean'
+          ? slots.default?.()
+          : <VIcon icon={ props.icon } size={ props.size } />
+        }
       </props.tag>,
       [useDirective<RippleDirectiveBinding>(Ripple, {
         value: !props.disabled,

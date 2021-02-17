@@ -14,7 +14,7 @@ $button-height: 36px !default;
 $button-icon-border-radius: map-get($rounded, 'circle') !default;
 $button-icon-font-size: 24px !default;
 $button-icon-size: 48px !default;
-$button-line-height: inherit !default;
+$button-line-height: normal !default;
 $button-hover-elevation: 4 !default;
 $button-positions: absolute fixed !default;
 $button-text-letter-spacing: map-deep-get($headings, 'button', 'letter-spacing') !default;
