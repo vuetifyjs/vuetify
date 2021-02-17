@@ -202,7 +202,7 @@ describe('VListItem.ts', () => {
     const wrapper3 = mountFunction({
       provide: { isInGroup: true },
     })
-    expect(wrapper3.element.getAttribute('role')).toBe('listitem')
+    expect(wrapper3.element.getAttribute('role')).toBe('option')
 
     // In menu
     const wrapper4 = mountFunction({
