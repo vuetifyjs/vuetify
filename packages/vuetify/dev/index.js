@@ -1,22 +1,16 @@
-import '@mdi/font/css/materialdesignicons.css'
-
-import { createVuetify } from 'vuetify'
 import { createApp } from 'vue'
-import { aliases, mdi } from 'vuetify/src/iconsets/mdi'
+import vuetify from './vuetify'
 import App from './App'
+
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+
+library.add(fas)
 
 const app = createApp(App)
 
-const vuetify = createVuetify({
-  icons: {
-    defaultSet: 'mdi',
-    aliases,
-    sets: {
-      mdi,
-    },
-  },
-})
-
 app.use(vuetify)
+app.component('FontAwesomeIcon', FontAwesomeIcon)
 
 app.mount('#app')
