@@ -1,250 +1,92 @@
 // Imports
-@import './_variables.scss'
+@import ./index
 
-// Theme
-.v-btn:not(.v-btn--outlined)
-  &.primary,
-  &.secondary,
-  &.accent,
-  &.success,
-  &.error,
-  &.warning,
-  &.info
-    color: map-deep-get($material-dark, 'text', 'primary')
-
-+theme(v-btn) using ($material)
-  color: map-deep-get($material, 'text', 'primary')
-
-  &.v-btn--disabled
-    color: map-deep-get($material, 'buttons', 'disabled') !important
-
-    .v-icon,
-    .v-btn__loading
-      color: map-deep-get($material, 'buttons', 'disabled') !important
-
-    &.v-btn--has-bg
-      background-color: map-deep-get($material, 'buttons', 'focused') !important
-
-  &.v-btn--has-bg
-    background-color: map-get($material, 'app-bar')
-
-  &.v-btn--outlined.v-btn--text
-    border-color: map-get($material, 'dividers')
-
-  &.v-btn--icon
-    color: map-deep-get($material, 'icons', 'active')
-
-  +states(map-deep-merge($material, $btn-states))
-
-// Block
 .v-btn
   align-items: center
-  border-radius: $btn-border-radius
+  border-radius: $button-border-radius
   display: inline-flex
-  flex: 0 0 auto
-  font-weight: $btn-font-weight
-  letter-spacing: $btn-letter-spacing
+  font-weight: $button-font-weight
   justify-content: center
-  outline: 0
+  letter-spacing: $button-text-letter-spacing
+  line-height: $button-line-height
+  outline: none
+  overflow: visible
   position: relative
   text-decoration: none
-  text-indent: $btn-letter-spacing
-  text-transform: $btn-text-transform
-  transition-duration: $btn-transition-duration
+  text-indent: $button-text-letter-spacing
+  text-transform: $button-text-transform
   transition-property: box-shadow, transform, opacity
-  transition-timing-function: $btn-transition-fn
+  transition: 0.28s map-get($transition, 'fast-out-slow-in')
   user-select: none
-  vertical-align: middle
-  white-space: nowrap
+  vertical-align: $button-vertical-align
 
-  @each $name, $size in $btn-font-sizes
-    &.v-size--#{$name}
-      font-size: $size
+  @at-root
+    +sizes('v-btn', $button-query)
+    +density('v-btn', 'height', $button-density)
 
-  &:before
-    background-color: currentColor
-    border-radius: inherit
-    bottom: 0
-    color: inherit
-    content: ''
-    left: 0
-    opacity: 0
-    pointer-events: none
-    position: absolute
-    right: 0
-    top: 0
-    transition: $btn-transition
+  +states('.v-btn__overlay')
 
-  &:not(.v-btn--disabled)
-    will-change: box-shadow
+  &--icon
+    border-radius: $button-icon-border-radius
+    min-width: 0
+    padding: 0
 
-  &:not(.v-btn--round)
-    @each $name, $size in $btn-sizes
-      &.v-size--#{$name}
-        height: #{$size}px
-        min-width: #{round($size * 1.777777777777778)}px // default ratio
-        padding: 0 #{$size / 2.25}px
+    @at-root &
+      +density('v-btn', ('width', 'height'), $button-icon-density)
 
-  > .v-btn__content .v-icon
-    color: inherit
+  &--border
+    +border($button-border)
 
-// Elements
-.v-btn__content
-  align-items: center
-  color: inherit
-  display: flex
-  // https://github.com/vuetifyjs/vuetify/issues/7580
-  flex: 1 0 auto
-  justify-content: inherit
-  line-height: normal
-  // Fixes bug where IE11 moves
-  // button content when clicked
-  // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
-  position: relative
-  transition: inherit
-  transition-property: opacity
+  &--elevated
+    +elevation(map-get($button-elevation, 'default'))
 
-  .v-icon--left,
-  .v-icon--right
-    font-size: $btn-icon-font-size
-    height: $btn-icon-font-size
-    width: $btn-icon-font-size
-
-  .v-icon--left
-    +ltr()
-      margin-left: -4px
-      margin-right: 8px
-
-    +rtl()
-      margin-left: 8px
-      margin-right: -4px
-
-  .v-icon--right
-    +ltr()
-      margin-left: 8px
-      margin-right: -4px
-
-    +rtl()
-      margin-left: -4px
-      margin-right: 8px
-
-.v-btn__loader
-  align-items: center
-  display: flex
-  height: 100%
-  justify-content: center
-  left: 0
-  position: absolute
-  top: 0
-  width: 100%
-
-// Modifiers
-.v-btn--absolute,
-.v-btn--fixed
-  &.v-btn--right
-    right: map-get($grid-gutters, 'lg')
-
-  &.v-btn--left
-    left: map-get($grid-gutters, 'lg')
-
-  &.v-btn--top
-    top: map-get($grid-gutters, 'lg')
-
-  &.v-btn--bottom
-    bottom: map-get($grid-gutters, 'lg')
-
-.v-btn--absolute
-  position: absolute
-
-.v-btn--fixed
-  position: fixed
-
-.v-btn--block
-  display: flex
-  flex: 1 0 auto
-  min-width: 100% !important
-  max-width: auto
-
-.v-btn--is-elevated
-  +elevation(2)
-
-  &:after
-    +elevation(4)
-
-  &:active
-    +elevation(8)
-
-  &.v-btn--fab
-    +elevation(6)
-
-    &:after
-      +elevation(8)
+    &:hover,
+    &:focus
+      +elevation(map-get($button-elevation, 'hover'))
 
     &:active
-      +elevation(12)
+      +elevation(map-get($button-elevation, 'active'))
 
-.v-btn--disabled
+  &--plain
+    opacity: .62
+
+    &:focus,
+    &:hover,
+    &.v-btn--active
+      opacity: 1
+
+    .v-btn__overlay
+      display: none
+
+  &--block
+    display: flex
+    flex: 1 0 auto
+    min-width: 100%
+
+  &--disabled
+    pointer-events: none
+
+    &.v-btn--disabled
+      color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
+      opacity: 1
+
+    &.v-btn--contained
+      background: rgb(var(--v-theme-surface))
+      box-shadow: none
+
+      .v-btn__overlay
+        // This is multiplied by the text opacity,
+        // so we need to divide it to get the desired value
+        opacity: ($button-disabled-overlay / $button-disabled-opacity)
+
+.v-btn__overlay
+  background-color: currentColor
+  border-radius: inherit
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
   pointer-events: none
-
-.v-btn--icon,
-.v-btn--fab
-  min-height: 0
-  min-width: 0
-  padding: 0
-
-  @each $name, $size in $fab-icon-sizes
-    &.v-size--#{$name}
-      .v-icon
-        height: #{$size}px
-        font-size: #{$size}px
-        width: #{$size}px
-
-.v-btn--icon
-  @each $name, $size in $btn-sizes
-    &.v-size--#{$name}
-      height: #{$size}px
-      width: #{$size}px
-
-.v-btn--fab
-  &.v-btn--absolute,
-  &.v-btn--fixed
-    z-index: 4
-
-  @each $name, $size in $fab-sizes
-    &.v-size--#{$name}
-      height: #{$size}px
-      width: #{$size}px
-
-      &.v-btn--absolute
-        &.v-btn--bottom
-          bottom: -#{$size / 2}px
-
-        &.v-btn--top
-          top: -#{$size / 2}px
-
-.v-btn--loading
-  pointer-events: none
-  transition: none
-
-  .v-btn__content
-    opacity: 0
-
-.v-btn--outlined
-  border: $btn-outline-border-width solid currentColor
-
-.v-btn--plain
-  &::before
-    display: none
-
-  &:not(.v-btn--active):not(.v-btn--loading):not(:focus):not(:hover)
-    .v-btn__content
-      opacity: .62
-
-.v-btn--round
-  +radius($btn-round-border-radius)
-
-.v-btn--rounded
-  +radius($btn-rounded-border-radius)
-
-.v-btn--tile
-  +radius($btn-tile-border-radius)
+  opacity: 0
+  transition: opacity 0.2s ease-in-out

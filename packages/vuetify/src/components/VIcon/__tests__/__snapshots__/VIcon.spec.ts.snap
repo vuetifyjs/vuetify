@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VIcon should add custom class 1`] = `
-<i class="mdi-add mdi v-icon notranslate v-size--default custom"
+<i class="mdi-add mdi v-icon notranslate v-icon--size-default custom"
    aria-hidden="true"
 >
 </i>
 `;
 
 exports[`VIcon should add custom style 1`] = `
-<i class="mdi-add mdi v-icon notranslate v-size--default"
+<i class="mdi-add mdi v-icon notranslate v-icon--size-default"
    style="color: red;"
    aria-hidden="true"
 >
@@ -16,7 +16,7 @@ exports[`VIcon should add custom style 1`] = `
 `;
 
 exports[`VIcon should render an svg icon 1`] = `
-<i class="v-icon notranslate v-size--default"
+<i class="v-icon notranslate v-icon--size-default"
    aria-hidden="true"
 >
   <svg class="v-icon__svg"
@@ -32,14 +32,14 @@ exports[`VIcon should render an svg icon 1`] = `
 `;
 
 exports[`VIcon should render globally defined icon 1`] = `
-<i class="mdi-check mdi v-icon notranslate v-size--default"
+<i class="mdi-check mdi v-icon notranslate v-icon--size-default"
    aria-hidden="true"
 >
 </i>
 `;
 
 exports[`VIcon should render ligature icon 1`] = `
-<i class="material-icons v-icon notranslate v-size--default"
+<i class="material-icons v-icon notranslate v-icon--size-default"
    aria-hidden="true"
 >
   add
@@ -47,7 +47,7 @@ exports[`VIcon should render ligature icon 1`] = `
 `;
 
 exports[`VIcon should support an icon name in the default slot 1`] = `
-<i class="material-icons v-icon notranslate v-size--default"
+<i class="material-icons v-icon notranslate v-icon--size-default"
    aria-hidden="true"
 >
   add

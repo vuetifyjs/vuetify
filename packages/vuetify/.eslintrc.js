@@ -15,16 +15,9 @@ module.exports = {
   ],
   extends: ['plugin:jest/recommended'],
   rules: {
-    'vue/html-self-closing': 'off',
-    'vue/html-closing-bracket-spacing': 'off',
-    'vue/max-attributes-per-line': ['error', {
-      singleline: 1,
-      multiline: {
-        max: 1,
-        allowFirstLine: false,
-      },
-    }],
-    'local-rules/no-render-string-reference': 'error',
+    // 'vue/html-self-closing': 'off',
+    // 'vue/html-closing-bracket-spacing': 'off',
+    // 'local-rules/no-render-string-reference': 'error',
     'jest/no-disabled-tests': 'off',
     'jest/no-large-snapshots': 'warn',
     'jest/prefer-spy-on': 'warn',

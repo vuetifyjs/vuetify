@@ -36,7 +36,7 @@ export interface SheetProps extends BorderProps, BorderRadiusProps, DimensionPro
 
 export function useSheet (props: SheetProps, name: string) {
   const { themeClasses } = useTheme()
-  const { borderClasses } = useBorder(props)
+  const { borderClasses } = useBorder(props, name)
   const { borderRadiusClasses } = useBorderRadius(props)
   const { dimensionStyles } = useDimension(props)
   const { elevationClasses } = useElevation(props)

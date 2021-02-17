@@ -5,24 +5,23 @@ import propsFactory from '@/util/propsFactory'
 const predefinedSizes = ['x-small', 'small', 'default', 'large', 'x-large']
 
 export interface SizeProps {
-  size?: string
+  size: string | number
 }
 
 // Props
 export const makeSizeProps = propsFactory({
   size: {
-    type: String,
+    type: [String, Number],
     default: 'default',
   },
 })
 
 // Effect
-export function useSize (props: SizeProps) {
+export function useSize (props: SizeProps, name: string) {
   const sizeClasses = computed(() => {
-    if (!props.size) return 'v-size--default'
-    else if (!predefinedSizes.includes(props.size)) return null
-
-    return `v-size--${props.size}`
+    return predefinedSizes.includes(props.size as string)
+      ? `${name}--size-${props.size}`
+      : null
   })
 
   return { sizeClasses }

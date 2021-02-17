@@ -1,0 +1,22 @@
+$baseSizes: (
+  'x-small': -2,
+  'small': -1,
+  'default': 0,
+  'large': 1,
+  'x-large': 2
+) !default;
+
+@mixin sizes($name, $query) {
+  @each $sizeName, $multiplier in $baseSizes {
+    $size: map-get($query, 'font-size') + (2 * $multiplier) / 16;
+    $height: map-get($query, 'height') + (8 * $multiplier);
+
+    .#{$name}--size-#{$sizeName} {
+      --#{$name}-size: #{$size};
+      --#{$name}-height: #{$height};
+      font-size: $size;
+      min-width: round($height * 16/9);
+      padding: 0 ($height / 2.25);
+    }
+  }
+}

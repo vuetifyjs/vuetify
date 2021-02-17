@@ -182,10 +182,16 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
 
     if (!theme) throw new Error(`Could not find theme ${name}`)
 
+    const lightOverlay = theme.dark ? 2 : 1
+    const darkOverlay = theme.dark ? 1 : 2
+
     const variables: string[] = []
     for (const [key, value] of Object.entries(theme.colors)) {
       const rgb = colorToRGB(value!)
       variables.push(`--v-theme-${key}: ${rgb.r},${rgb.g},${rgb.b}`)
+      if (!key.startsWith('on-')) {
+        variables.push(`--v-theme-${key}-overlay-multiplier: ${getLuma(value) > 0.18 ? lightOverlay : darkOverlay}`)
+      }
     }
 
     return variables
@@ -236,7 +242,11 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
         lines.push(...createCssClass(`.${key}`, [`color: rgb(var(--v-theme-${key}))`]))
       } else {
         lines.push(
-          ...createCssClass(`.bg-${key}`, [`background: rgb(var(--v-theme-${key}))`, `color: rgb(var(--v-theme-on-${key}))`]),
+          ...createCssClass(`.bg-${key}`, [
+            `--v-theme-overlay-multiplier: var(--v-theme-${key}-overlay-multiplier)`,
+            `background: rgb(var(--v-theme-${key}))`,
+            `color: rgb(var(--v-theme-on-${key}))`,
+          ]),
           ...createCssClass(`.text-${key}`, [`color: rgb(var(--v-theme-${key}))`]),
           ...createCssClass(`.border-${key}`, [`--v-border-color: var(--v-theme-${key})`]),
         )

@@ -29,12 +29,22 @@
     fill: currentColor
 
   @each $name in $sizes
-    &.v-size--#{$name}
+    &--size-#{$name}
       font-size: map-get($icon-sizes, $name)
       width: map-get($icon-sizes, $name)
       height: map-get($icon-sizes, $name)
 
-      .v-icon__svg
-        width: map-get($icon-sizes, $name)
-        height: map-get($icon-sizes, $name)
+// Contextual styles
+.v-btn:not(.v-btn--icon) .v-icon
+  &--right
+    margin-left: calc(var(--v-btn-height) / 4.5)
+    margin-right: calc(var(--v-btn-height) / -9)
 
+  &--left
+    margin-left: calc(var(--v-btn-height) / -9)
+    margin-right: calc(var(--v-btn-height) / 4.5)
+
+  &--size-default
+    font-size: (18/14) * 1em
+    width: 1em
+    height: 1em

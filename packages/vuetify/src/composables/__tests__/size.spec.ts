@@ -2,21 +2,16 @@ import { useSize } from '../size'
 
 describe('size', () => {
   it.each([
-    [{ size: undefined }, 'v-size--default'],
-    [{ size: 'x-small' }, 'v-size--x-small'],
-    [{ size: 'small' }, 'v-size--small'],
-    [{ size: 'default' }, 'v-size--default'],
-    [{ size: 'large' }, 'v-size--large'],
-    [{ size: 'x-large' }, 'v-size--x-large'],
+    [{ size: 'x-small' }, 'test--size-x-small'],
+    [{ size: 'small' }, 'test--size-small'],
+    [{ size: 'default' }, 'test--size-default'],
+    [{ size: 'large' }, 'test--size-large'],
+    [{ size: 'x-large' }, 'test--size-x-large'],
+    [{ size: '100px' }, null],
+    [{ size: 100 }, null],
   ] as const)('should return the correct class given value %p', (input, expected) => {
-    const { sizeClasses } = useSize(input)
+    const { sizeClasses } = useSize(input, 'test')
 
     expect(sizeClasses.value).toStrictEqual(expected)
-  })
-
-  it('should return null if not a prefedined size', () => {
-    const { sizeClasses } = useSize({ size: '100px' })
-
-    expect(sizeClasses.value).toBeNull()
   })
 })

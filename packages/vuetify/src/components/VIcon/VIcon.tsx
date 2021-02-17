@@ -5,7 +5,7 @@ import './VIcon.sass'
 import { computed, ComputedRef, defineComponent } from 'vue'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { useIcon } from '@/composables/icons'
-import { flattenFragments } from '@/util'
+import { convertToUnit, flattenFragments } from '@/util'
 import makeProps from '@/util/makeProps'
 
 // Types
@@ -43,7 +43,7 @@ export default defineComponent({
     }
 
     const { iconData } = useIcon(slotIcon || props)
-    const { sizeClasses } = useSize(props)
+    const { sizeClasses } = useSize(props, 'v-icon')
 
     return () => {
       return (
@@ -61,9 +61,9 @@ export default defineComponent({
             },
           ]}
           style={ !sizeClasses.value ? ({
-            'font-size': props.size,
-            width: props.size,
-            height: props.size,
+            fontSize: convertToUnit(props.size),
+            width: convertToUnit(props.size),
+            height: convertToUnit(props.size),
           }) : undefined }
           aria-hidden="true"
         />
