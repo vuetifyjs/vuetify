@@ -64,10 +64,10 @@
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\""
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.30",
-    "@fortawesome/free-solid-svg-icons": "^5.14.0",
-    "@fortawesome/vue-fontawesome": "^0.1.10",
-    "@mdi/font": "^4.5.95",
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/vue-fontawesome": "^3.0.0-3",
+    "@mdi/font": "^5.9.55",
     "@types/jest": "^26.0.14",
     "@types/node": "^14.11.10",
     "@vue/babel-plugin-jsx": "^1.0.2",

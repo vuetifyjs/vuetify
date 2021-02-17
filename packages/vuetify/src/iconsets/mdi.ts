@@ -1,9 +1,13 @@
-// @ts-nocheck
-/* eslint-disable */
+// Utilities
+import { h } from 'vue'
 
-import { VuetifyIcons } from 'vuetify/types/services/icons'
+// Components
+import { VClassIcon } from '@/composables/icons'
 
-const icons: VuetifyIcons = {
+// Types
+import type { IconSet, IconAliases } from '@/composables/icons'
+
+const aliases: IconAliases = {
   complete: 'mdi-check',
   cancel: 'mdi-close-circle',
   close: 'mdi-close',
@@ -39,4 +43,9 @@ const icons: VuetifyIcons = {
   minus: 'mdi-minus',
 }
 
-export default icons
+const mdi: IconSet = {
+  // Not using mergeProps here, functional components merge props by default (?)
+  component: (props: any) => h(VClassIcon, { ...props, class: 'mdi' }),
+}
+
+export { aliases, mdi }

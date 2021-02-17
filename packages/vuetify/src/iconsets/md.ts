@@ -1,9 +1,13 @@
-// @ts-nocheck
-/* eslint-disable */
+// Utilities
+import { h } from 'vue'
 
-import { VuetifyIcons } from 'vuetify/types/services/icons'
+// Components
+import { VLigatureIcon } from '@/composables/icons'
 
-const icons: VuetifyIcons = {
+// Types
+import type { IconSet, IconAliases } from '@/composables/icons'
+
+const aliases: IconAliases = {
   complete: 'check',
   cancel: 'cancel',
   close: 'close',
@@ -39,4 +43,9 @@ const icons: VuetifyIcons = {
   minus: 'remove',
 }
 
-export default icons
+const md: IconSet = {
+  // Not using mergeProps here, functional components merge props by default (?)
+  component: props => h(VLigatureIcon, { ...props, class: 'material-icons' }),
+}
+
+export { aliases, md }

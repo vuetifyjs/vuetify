@@ -1,6 +1,5 @@
-import type { VuetifyIcon } from 'vuetify/types/services/icons'
 import type { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
-import type { ComponentInternalInstance, Slots, VNode, TransitionProps } from 'vue'
+import type { Slots, VNode, TransitionProps } from 'vue'
 import { Fragment, defineComponent, h, capitalize, camelize, Transition, mergeProps } from 'vue'
 
 export function createSimpleFunctional (
@@ -168,39 +167,6 @@ export const keyCodes = Object.freeze({
   pageup: 33,
   pagedown: 34,
 })
-
-/**
- * This remaps internal names like '$cancel' or '$vuetify.icons.cancel'
- * to the current name or component for that icon.
- */
-export function remapInternalIcon (vm: ComponentInternalInstance, iconName: string): VuetifyIcon {
-  // Look for custom component in the configuration
-  const component = (vm.ctx.$vuetify as any).icons.component
-
-  // Look for overrides
-  if (iconName.startsWith('$')) {
-    // Get the target icon name
-    const iconPath = `$vuetify.icons.values.${iconName.split('$').pop()!.split('.').pop()}`
-
-    // Now look up icon indirection name,
-    // e.g. '$vuetify.icons.values.cancel'
-    const override = getObjectValueByPath(vm.ctx, iconPath, iconName)
-
-    if (typeof override === 'string') iconName = override
-    else return override
-  }
-
-  if (component == null) {
-    return iconName
-  }
-
-  return {
-    component,
-    props: {
-      icon: iconName,
-    },
-  }
-}
 
 export function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]
