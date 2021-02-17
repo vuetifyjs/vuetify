@@ -28,7 +28,7 @@ exports[`VDatePicker.ts should match snapshot with colored picker & header 1`] =
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+                class="v-btn v-btn--icon v-btn--round theme--light v-size--default"
                 aria-label="Previous month"
         >
           <span class="v-btn__content">
@@ -46,7 +46,7 @@ exports[`VDatePicker.ts should match snapshot with colored picker & header 1`] =
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+                class="v-btn v-btn--icon v-btn--round theme--light v-size--default"
                 aria-label="Next month"
         >
           <span class="v-btn__content">
@@ -403,7 +403,7 @@ exports[`VDatePicker.ts should match snapshot with colored picker 1`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+                class="v-btn v-btn--icon v-btn--round theme--light v-size--default"
                 aria-label="Previous month"
         >
           <span class="v-btn__content">
@@ -421,7 +421,7 @@ exports[`VDatePicker.ts should match snapshot with colored picker 1`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+                class="v-btn v-btn--icon v-btn--round theme--light v-size--default"
                 aria-label="Next month"
         >
           <span class="v-btn__content">
@@ -778,7 +778,7 @@ exports[`VDatePicker.ts should match snapshot with dark theme 1`] = `
     <div>
       <div class="v-date-picker-header theme--dark">
         <button type="button"
-                class="v-btn v-btn--flat v-btn--icon v-btn--round theme--dark v-size--default"
+                class="v-btn v-btn--icon v-btn--round theme--dark v-size--default"
                 aria-label="Previous month"
         >
           <span class="v-btn__content">
@@ -796,7 +796,7 @@ exports[`VDatePicker.ts should match snapshot with dark theme 1`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--flat v-btn--icon v-btn--round theme--dark v-size--default"
+                class="v-btn v-btn--icon v-btn--round theme--dark v-size--default"
                 aria-label="Next month"
         >
           <span class="v-btn__content">
@@ -1160,7 +1160,7 @@ exports[`VDatePicker.ts should match snapshot with default settings 1`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+                class="v-btn v-btn--icon v-btn--round theme--light v-size--default"
                 aria-label="Previous month"
         >
           <span class="v-btn__content">
@@ -1178,7 +1178,7 @@ exports[`VDatePicker.ts should match snapshot with default settings 1`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+                class="v-btn v-btn--icon v-btn--round theme--light v-size--default"
                 aria-label="Next month"
         >
           <span class="v-btn__content">
@@ -3090,7 +3090,7 @@ exports[`VDatePicker.ts should render disabled picker 1`] = `
       <div class="v-date-picker-header v-date-picker-header--disabled theme--light">
         <button type="button"
                 disabled="disabled"
-                class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+                class="v-btn v-btn--disabled v-btn--icon v-btn--round theme--light v-size--default"
                 aria-label="Previous month"
         >
           <span class="v-btn__content">
@@ -3109,7 +3109,7 @@ exports[`VDatePicker.ts should render disabled picker 1`] = `
         </div>
         <button type="button"
                 disabled="disabled"
-                class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+                class="v-btn v-btn--disabled v-btn--icon v-btn--round theme--light v-size--default"
                 aria-label="Next month"
         >
           <span class="v-btn__content">
@@ -3504,7 +3504,7 @@ exports[`VDatePicker.ts should render flat picker 1`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+                class="v-btn v-btn--icon v-btn--round theme--light v-size--default"
                 aria-label="Previous month"
         >
           <span class="v-btn__content">
@@ -3522,7 +3522,7 @@ exports[`VDatePicker.ts should render flat picker 1`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+                class="v-btn v-btn--icon v-btn--round theme--light v-size--default"
                 aria-label="Next month"
         >
           <span class="v-btn__content">
@@ -3886,7 +3886,7 @@ exports[`VDatePicker.ts should render picker with elevation 1`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+                class="v-btn v-btn--icon v-btn--round theme--light v-size--default"
                 aria-label="Previous month"
         >
           <span class="v-btn__content">
@@ -3904,7 +3904,7 @@ exports[`VDatePicker.ts should render picker with elevation 1`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+                class="v-btn v-btn--icon v-btn--round theme--light v-size--default"
                 aria-label="Next month"
         >
           <span class="v-btn__content">
@@ -4268,7 +4268,7 @@ exports[`VDatePicker.ts should render readonly picker 1`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+                class="v-btn v-btn--icon v-btn--round theme--light v-size--default"
                 aria-label="Previous month"
         >
           <span class="v-btn__content">
@@ -4286,7 +4286,7 @@ exports[`VDatePicker.ts should render readonly picker 1`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+                class="v-btn v-btn--icon v-btn--round theme--light v-size--default"
                 aria-label="Next month"
         >
           <span class="v-btn__content">

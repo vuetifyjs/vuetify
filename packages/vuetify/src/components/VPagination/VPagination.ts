@@ -185,6 +185,7 @@ export default mixins(
             'v-pagination__navigation--disabled': disabled,
           },
           attrs: {
+            disabled,
             type: 'button',
             'aria-label': label,
           },

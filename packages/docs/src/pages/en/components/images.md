@@ -43,6 +43,8 @@ You can set a fixed aspect ratio if you want to change aspect ratio of the image
 
 <example file="v-img/prop-aspect-ratio" />
 
+<promoted-ad slug="vuetify-zero-theme-pro" />
+
 #### Contain
 
 If the provided aspect ratio doesn't match that of the actual image, the default behavior is to fill as much space as possible, clipping the sides of the image. Enabling the `contain` prop will prevent this, but will result in empty space at the sides.

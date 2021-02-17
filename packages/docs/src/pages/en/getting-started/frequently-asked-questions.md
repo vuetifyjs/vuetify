@@ -222,7 +222,7 @@ export default {
 
 - **How do I use Font Awesome, Material Design Icons or Material Icons?**{ #custom-icons }
 
-  You can find more information in our [icon guide](/features/icons/).
+  You can find more information in our [icon guide](/features/icon-fonts/).
 
 <br>
 

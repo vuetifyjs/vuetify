@@ -1,5 +1,7 @@
 import type { TouchStoredHandlers } from './directives/touch'
-import type { VNode } from 'vue'
+import type { VNode, ComponentPublicInstance, FunctionalComponent } from 'vue'
+
+import { IconProps } from '@/composables/icons'
 
 declare global {
   interface HTMLCollection {
@@ -73,6 +75,10 @@ declare global {
       [name: string]: any
     }
   }
+}
+
+declare module 'vue' {
+  export type JSXComponent<Props = any> = { new (): ComponentPublicInstance<Props> } | FunctionalComponent<Props>
 }
 
 declare module '@vue/runtime-core' {

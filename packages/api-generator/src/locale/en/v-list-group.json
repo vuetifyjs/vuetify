@@ -7,7 +7,8 @@
     "noAction": "Removes left padding assigned for action icons from group items",
     "prependIcon": "Prepends an icon to the component, uses the same syntax as `v-icon`",
     "ripple": "Applies the [v-ripple](/directives/ripple) directive.",
-    "subGroup": "Designate the component as nested list group"
+    "subGroup": "Designate the component as nested list group",
+    "value": "Expands / Collapse the list-group"
   },
   "slots": {
     "appendIcon": "Appends an icon to the component, uses the same syntax as `v-icon`",

@@ -4,7 +4,7 @@ meta:
   description: The icon component is compatible with multiple common icon fonts such as Material Design Icons, Font Awesome and more.
   keywords: icons, vuetify icon component, vue icon component
 related:
-  - /features/icons/
+  - /features/icon-fonts/
   - /components/buttons/
   - /components/cards/
 assets:
@@ -56,19 +56,19 @@ Icons can be used inside of buttons to add emphasis to the action.
 
 #### Font Awesome
 
-[Font Awesome](http://fontawesome.io/icons/) is also supported. Simply use the `fa-` prefixed icon name. Please note that you still need to include the Font Awesome icons in your project. For more information on how to install it, please navigate to the [installation page](/features/icons#install-font-awesome-5-icons)
+[Font Awesome](http://fontawesome.io/icons/) is also supported. Simply use the `fa-` prefixed icon name. Please note that you still need to include the Font Awesome icons in your project. For more information on how to install it, please navigate to the [installation page](/features/icon-fonts#install-font-awesome-5-icons)
 
 <example file="v-icon/misc-font-awesome" />
 
 #### Material Design
 
-[Material Design](https://material.io/tools/icons/?style=baseline) is also supported. For more information on how to install it please [navigate here](/features/icons#install-material-icons)
+[Material Design](https://material.io/tools/icons/?style=baseline) is also supported. For more information on how to install it please [navigate here](/features/icon-fonts#install-material-icons)
 
 <example file="v-icon/misc-md" />
 
 #### MDI SVG
 
-You can manually import only the icons you use when using the [@mdi/js](https://www.npmjs.com/package/@mdi/js) package. If you want to use SVG icons with `VIcon` component, read about using them [here](/features/icons#install-material-design-icons-js-svg).
+You can manually import only the icons you use when using the [@mdi/js](https://www.npmjs.com/package/@mdi/js) package. If you want to use SVG icons with `VIcon` component, read about using them [here](/features/icon-fonts#install-material-design-icons-js-svg).
 
 <example file="v-icon/misc-mdi-svg" />
 
