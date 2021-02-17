@@ -1,36 +1,28 @@
-const Vue = require('vue')
-const Vuetify = require('vuetify')
-const { components: excludes } = require('./helpers/excludes')
-const { camelCase, kebabCase, pascalize } = require('./helpers/text')
-const { parseComponent, parseSassVariables, parseGlobalSassVariables } = require('./helpers/parsing')
+// const Vue = require('vue')
+// const Vuetify = require('vuetify')
+// const { components: excludes } = require('./helpers/excludes')
+const { camelCase } = require('./helpers/text')
+const { getComponentList, parseSassVariables } = require('./helpers/parsing')
 const deepmerge = require('./helpers/merge')
 
-Vue.use(Vuetify)
+// Vue.use(Vuetify)
 
 const loadLocale = (componentName, locale, fallback = {}) => {
   try {
-    const data = require(`./locale/${locale}/${componentName}`)
+    const data = require(`./locale-alpha/${locale}/${componentName}`)
     return Object.assign(fallback, data)
   } catch (err) {
     return fallback
   }
 }
 
-const loadMap = (componentName, fallback = {}) => {
+const loadMap = (componentName, group, fallback = {}) => {
   try {
-    const { [componentName]: map } = require(`./maps/${componentName}`)
-
-    // Make sure all prop names are kebab-case
-    const combined = Object.assign(fallback, {
-      ...map,
-      props: (map.props || []).map(item => ({
-        ...item,
-        name: kebabCase(item.name),
-      })),
-    })
+    const map = require(`./maps-alpha/${group}/${componentName}`)
+    const combined = Object.assign(fallback, { ...map })
 
     // Make sure things are sorted
-    const categories = ['slots', 'events', 'functions']
+    const categories = ['slots', 'events', 'functions', 'mixins']
     categories.forEach(category => combined[category].sort((a, b) => a.name.localeCompare(b.name)))
     return combined
   } catch {
@@ -112,38 +104,25 @@ const addGenericApiDescriptions = (name, api, locales, categories) => {
 }
 
 const getComponentApi = (componentName, locales) => {
-  const pascalName = pascalize(componentName)
+  // if (!component) throw new Error(`Could not find component: ${componentName}`)
 
-  let component = Vue.options._base.options.components[pascalName]
-
-  if (component.options.$_wrapperFor) {
-    component = component.options.$_wrapperFor
-  }
-
-  if (!component) throw new Error(`Could not find component: ${componentName}`)
-
-  const propsAndMixins = parseComponent(component)
-  const slotsEventsAndFunctions = loadMap(componentName, { slots: [], events: [], functions: [] })
+  const componentMap = loadMap(componentName, 'components', { props: [], slots: [], events: [], functions: [], mixins: [] })
   const sassVariables = parseSassVariables(componentName)
 
-  const api = deepmerge(propsAndMixins, slotsEventsAndFunctions, { name: componentName, sass: sassVariables, component: true })
-  api.props = api.props.sort((a, b) => a.name.localeCompare(b.name))
+  const api = deepmerge(componentMap, { name: componentName, sass: sassVariables, component: true })
 
   return addComponentApiDescriptions(componentName, api, locales)
 }
 
 const getDirectiveApi = (directiveName, locales) => {
-  const pascalName = pascalize(directiveName.slice(2))
+  // if (!directive) throw new Error(`Could not find directive: ${directiveName}`)
 
-  const directive = Vue.options._base.options.directives[pascalName]
-
-  if (!directive) throw new Error(`Could not find directive: ${directiveName}`)
-
-  const api = deepmerge(loadMap(directiveName), { name: directiveName, directive: true })
+  const api = deepmerge(loadMap(directiveName, 'directives'), { name: directiveName, directive: true })
 
   return addDirectiveApiDescriptions(directiveName, api, locales)
 }
 
+/*
 const getVuetifyApi = locales => {
   const name = '$vuetify'
   const sass = parseGlobalSassVariables()
@@ -160,26 +139,23 @@ const getInternationalizationApi = locales => {
 }
 
 const DIRECTIVES = ['v-mutate', 'v-intersect', 'v-ripple', 'v-resize', 'v-scroll', 'v-touch', 'v-click-outside']
+*/
+
+const DIRECTIVES = ['v-intersect', 'v-ripple', 'v-resize', 'v-scroll', 'v-touch']
 
 const getApi = (name, locales) => {
-  if (name === '$vuetify') return getVuetifyApi(locales)
-  if (name === 'internationalization') return getInternationalizationApi(locales)
+  // if (name === '$vuetify') return getVuetifyApi(locales)
+  // if (name === 'internationalization') return getInternationalizationApi(locales)
   if (DIRECTIVES.includes(name)) return getDirectiveApi(name, locales)
   else return getComponentApi(name, locales)
 }
 
 const getComponentsApi = locales => {
   const components = []
-  const installedComponents = Vue.options._base.options.components
-  const componentNameRegex = /^(?:V[A-Z]|v-[a-z])/
+  const componentList = getComponentList()
 
-  for (const componentName in installedComponents) {
-    if (!componentNameRegex.test(componentName)) continue
-    if (excludes.includes(componentName)) continue
-
-    const kebabName = kebabCase(componentName)
-
-    components.push(getComponentApi(kebabName, locales))
+  for (const componentName of componentList) {
+    components.push(getComponentApi(componentName, locales))
   }
 
   return components
@@ -197,8 +173,8 @@ const getDirectivesApi = locales => {
 
 const getCompleteApi = locales => {
   return [
-    getVuetifyApi(locales),
-    getInternationalizationApi(locales),
+    // getVuetifyApi(locales),
+    // getInternationalizationApi(locales),
     ...getComponentsApi(locales),
     ...getDirectivesApi(locales),
   ].sort((a, b) => a.name.localeCompare(b.name))

@@ -1,0 +1,99 @@
+[
+  {
+    "title": "introduction",
+    "icon": "$mdiScriptTextOutline:$mdiScriptText",
+    "items": [
+      "why-vuetify",
+      "long-term-support",
+      "roadmap",
+      { "divider": true },
+      { "heading": "professional-support" },
+      "support",
+      "enterprise"
+    ]
+  },
+  {
+    "title": "getting-started",
+    "icon": "$mdiSpeedometerMedium:$mdiSpeedometer",
+    "items": [
+      "installation",
+      "browser-support",
+      "frequently-asked-questions",
+      "wireframes",
+      "unit-testing",
+      "release-notes",
+      "upgrade-guide",
+      "contributing"
+    ]
+  },
+  {
+    "title": "features",
+    "icon": "$mdiImageEditOutline:$mdiImageEdit",
+    "items": [
+      "breakpoints",
+      "global-config",
+      "icon-fonts",
+      "theme"
+    ]
+  },
+  {
+    "title": "styles",
+    "icon": "$mdiPaletteOutline:$mdiPalette",
+    "items": [
+      "border-radius",
+      "colors"
+    ]
+  },
+  {
+    "title": "ui-components",
+    "icon": "$mdiViewDashboardOutline:$mdiViewDashboard",
+    "group": "components",
+    "items": [
+      "application",
+      "aspect-ratios",
+      "banners",
+      "system-bars",
+      "dividers",
+      "footer",
+      "grids",
+      "icons",
+      "images",
+      "sheets"
+    ]
+  },
+  {
+    "title": "api",
+    "icon": "$mdiFlaskEmptyOutline:$mdiFlaskOutline",
+    "group": "api"
+  },
+  {
+    "title": "directives",
+    "icon": "$mdiFunction",
+    "items": [
+      "intersect",
+      "resize",
+      "ripple",
+      "scroll",
+      "touch"
+    ]
+  },
+  {
+    "title": "resources",
+    "icon": "$mdiTeach",
+    "items": [
+      "jobs-for-vue",
+      "made-with-vuetify",
+      "themes"
+    ]
+  },
+  {
+    "title": "about",
+    "icon": "$mdiVuetify",
+    "items": [
+      "meet-the-team",
+      "sponsors-and-backers",
+      "security-disclosure",
+      "code-of-conduct"
+    ]
+  }
+]

@@ -1,8 +1,10 @@
 module.exports = {
-  'v-touch': {
-    argument: [{
+  argument: [
+    {
       name: 'argument',
-      type: ['object'],
+      type: [
+        'object',
+      ],
       example: {
         move: 'Function',
         start: 'Function',
@@ -12,7 +14,7 @@ module.exports = {
         up: 'Function',
         down: 'Function',
       },
-      default: undefined,
-    }],
-  },
+    },
+  ],
+  props: [],
 }

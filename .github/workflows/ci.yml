@@ -5,7 +5,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
   CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-  CROWDIN_BRANCH: master
+  CROWDIN_BRANCH: next
   LOCAL_BRANCH: docs/update-from-crowdin
 
 jobs:
@@ -84,7 +84,7 @@ jobs:
   publish-docs:
     needs: [lint, test]
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev')
+    if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
