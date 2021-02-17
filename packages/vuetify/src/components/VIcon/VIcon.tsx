@@ -43,7 +43,7 @@ export default defineComponent({
     }
 
     const { iconData } = useIcon(slotIcon || props)
-    const { sizeClasses } = useSize(props)
+    const { sizeClasses } = useSize(props, 'v-icon')
 
     return () => {
       return (

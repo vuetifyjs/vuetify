@@ -29,7 +29,7 @@
     fill: currentColor
 
   @each $name in $sizes
-    &.v-size--#{$name}
+    &--size-#{$name}
       font-size: map-get($icon-sizes, $name)
       width: map-get($icon-sizes, $name)
       height: map-get($icon-sizes, $name)

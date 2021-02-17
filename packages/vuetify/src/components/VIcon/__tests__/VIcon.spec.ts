@@ -72,13 +72,13 @@ describe('VIcon', () => {
   it('should use default size if none provided', () => {
     const wrapper = mount(VIcon, { props: { icon: 'mdi-add' }, global: globalOptions })
 
-    expect(wrapper.element.classList).toContain('v-size--default')
+    expect(wrapper.element.classList).toContain('v-icon--size-default')
   })
 
   it('should use provided size', () => {
     const wrapper = mount(VIcon, { props: { icon: 'mdi-add', size: 'x-small' }, global: globalOptions })
 
-    expect(wrapper.element.classList).toContain('v-size--x-small')
+    expect(wrapper.element.classList).toContain('v-icon--size-x-small')
   })
 
   it('should render a specific size', () => {
@@ -179,5 +179,4 @@ describe('VIcon', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
-  // })
 })
