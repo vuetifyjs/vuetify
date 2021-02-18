@@ -6,6 +6,18 @@ exports[`makeProps should handle function prop correctly 1`] = `
 </div>
 `;
 
+exports[`makeProps should handle prop with [Boolean] type 1`] = `
+<div>
+  true
+</div>
+`;
+
+exports[`makeProps should handle prop with Boolean type 1`] = `
+<div>
+  true
+</div>
+`;
+
 exports[`makeProps should handle prop with default factory function 1`] = `
 <div>
   {"bar":"baz"}

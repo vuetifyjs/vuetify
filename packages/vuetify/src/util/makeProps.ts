@@ -5,19 +5,41 @@ import { wrapInArray } from '@/util/helpers'
 
 // Types
 import type { Prop } from 'vue'
-import type { VuetifyComponentDefaults } from '@/framework'
 
 export default function makeProps<P extends Record<string, Prop<any>>> (props: P) {
   for (const key in props) {
     const propOptions = (props[key] as any)
 
-    propOptions.default = generateDefault(key, propOptions.default, propOptions.type)
+    const isOptions = !(propOptions == null || Array.isArray(propOptions) || typeof propOptions === 'function')
+
+    const type = isOptions
+      ? propOptions.type
+      : propOptions
+
+    const localDefault = isOptions
+      ? propOptions.default
+      : undefined
+
+    const wrappedDefault = generateDefault(key, localDefault, type)
+
+    if (isOptions) {
+      propOptions.default = wrappedDefault
+    } else {
+      props[key] = { type, default: wrappedDefault } as any
+    }
   }
 
   return props
 }
 
 function generateDefault (propName: string, localDefault: any, type: any) {
+  if (
+    localDefault === undefined &&
+    (type === Boolean || (Array.isArray(type) && type.includes(Boolean)))
+  ) {
+    localDefault = false
+  }
+
   return (props: Record<string, unknown>) => {
     const vm = getCurrentInstance()
 
@@ -34,21 +56,16 @@ function generateDefault (propName: string, localDefault: any, type: any) {
     }
 
     const vuetify = useVuetify()
-    const globalDefault = getDefaultValue('global', propName, vuetify.defaults)
-    const componentDefault = getDefaultValue(vm.type.name, propName, vuetify.defaults)
-    const actualDefault = typeof globalDefault !== 'undefined'
-      ? globalDefault
-      : typeof componentDefault !== 'undefined'
-        ? componentDefault
+    const globalDefault = vuetify.defaults.global[propName]
+    const componentDefault = vuetify.defaults[vm.type.name]?.[propName]
+    const actualDefault = typeof componentDefault !== 'undefined'
+      ? componentDefault
+      : typeof globalDefault !== 'undefined'
+        ? globalDefault
         : localDefault
 
     return isFactory(actualDefault, type) ? actualDefault(props) : actualDefault
   }
-}
-
-function getDefaultValue (sectionName: keyof VuetifyComponentDefaults, propName: string, defaults: VuetifyComponentDefaults) {
-  const section = defaults[sectionName]
-  return section?.[propName]
 }
 
 // Would be nice to have PropOptions here

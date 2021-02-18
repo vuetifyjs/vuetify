@@ -14,9 +14,6 @@ describe('makeProps', () => {
         global: {
           bar: 'hello world',
         },
-        Foo: {
-          bar: 'something else',
-        },
       },
     })
 
@@ -37,9 +34,11 @@ describe('makeProps', () => {
 
     jest.spyOn(framework, 'useVuetify').mockReturnValueOnce({
       defaults: {
-        global: {},
-        Foo: {
+        global: {
           bar: 'hello world',
+        },
+        Foo: {
+          bar: 'something else',
         },
       },
     })
@@ -52,7 +51,7 @@ describe('makeProps', () => {
     })
 
     // @ts-expect-error
-    expect(props.bar.default()).toBe('hello world')
+    expect(props.bar.default()).toBe('something else')
   })
 
   it('should use local default if global or component not defined', () => {
@@ -92,6 +91,62 @@ describe('makeProps', () => {
           type: Object,
           default: () => ({}),
         },
+      }),
+      setup (props) {
+        return () => vue.h('div', {}, JSON.stringify(props.foo))
+      },
+    })
+
+    const wrapper = mount(TestComponent, {
+      global: {
+        plugins: [vuetify],
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should handle prop with Boolean type', () => {
+    const vuetify = framework.createVuetify({
+      defaults: {
+        TestComponent: {
+          foo: true,
+        },
+      },
+    })
+
+    const TestComponent = vue.defineComponent({
+      name: 'TestComponent',
+      props: makeProps({
+        foo: Boolean,
+      }),
+      setup (props) {
+        return () => vue.h('div', {}, JSON.stringify(props.foo))
+      },
+    })
+
+    const wrapper = mount(TestComponent, {
+      global: {
+        plugins: [vuetify],
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should handle prop with [Boolean] type', () => {
+    const vuetify = framework.createVuetify({
+      defaults: {
+        TestComponent: {
+          foo: true,
+        },
+      },
+    })
+
+    const TestComponent = vue.defineComponent({
+      name: 'TestComponent',
+      props: makeProps({
+        foo: [Boolean],
       }),
       setup (props) {
         return () => vue.h('div', {}, JSON.stringify(props.foo))

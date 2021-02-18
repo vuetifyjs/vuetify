@@ -10,7 +10,7 @@ import type { ThemeOptions } from '@/composables/theme'
 import type { IconOptions } from '@/composables/icons'
 
 export interface VuetifyComponentDefaults {
-  [key: string]: Record<string, unknown>
+  [key: string]: undefined | Record<string, unknown>
   global: Record<string, unknown>
 }
 

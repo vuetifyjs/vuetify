@@ -4,10 +4,22 @@ import VResponsive from '../VResponsive'
 // Utilities
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { VuetifySymbol } from '@/framework'
+
+const globalOptions = {
+  provide: {
+    [VuetifySymbol as symbol]: {
+      defaults: {
+        global: {},
+      },
+    },
+  },
+}
 
 function mountFunction (options = {}) {
   return mount(VResponsive, {
     ...options,
+    global: globalOptions,
   })
 }
 
