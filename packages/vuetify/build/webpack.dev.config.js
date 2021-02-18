@@ -10,7 +10,7 @@ const resolve = file => path.resolve(__dirname, file)
 
 module.exports = merge(baseWebpackConfig, {
   target: 'web',
-  entry: ['babel-polyfill', './dev/index.js'],
+  entry: ['./dev/index.js'],
   output: {
     filename: '[name].js',
     path: resolve('../dev'),
