@@ -1,5 +1,8 @@
-import type { FunctionalComponent } from 'vue'
+// Utilities
 import { defineComponent, TransitionGroup, Transition, h } from 'vue'
+
+// Types
+import type { FunctionalComponent } from 'vue'
 
 export function createSimpleTransition (
   name: string,
