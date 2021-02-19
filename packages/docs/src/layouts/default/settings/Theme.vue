@@ -73,7 +73,25 @@
       },
     },
 
+    created () {
+      const matchMedia = this.getMatchMedia()
+      if (!matchMedia) return
+
+      if (this.internalValue === 'system') {
+        this.dark = matchMedia.matches
+      }
+
+      matchMedia.onchange = ({ matches }) => {
+        if (this.system) {
+          this.dark = matches
+        }
+      }
+    },
+
     methods: {
+      getMatchMedia () {
+        return (IN_BROWSER && window.matchMedia) ? window.matchMedia('(prefers-color-scheme: dark)') : false
+      },
       setTheme (
         dark = false,
         mixed = false,
@@ -84,11 +102,10 @@
         this.system = system
       },
       setSystemTheme () {
-        if (!IN_BROWSER || !window.matchMedia) return
+        const matchMedia = this.getMatchMedia()
+        if (!matchMedia) return
 
-        const dark = window.matchMedia('(prefers-color-scheme: dark)').matches
-
-        this.setTheme(dark, this.mixed, true)
+        this.setTheme(matchMedia.matches, this.mixed, true)
       },
     },
   }

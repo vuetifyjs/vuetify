@@ -16,6 +16,7 @@
   },
   "events": {
     "update:indeterminate": "The **indeterminate.sync** event.",
-    "change": "Emitted when the input is changed by user interaction"
+    "change": "Emitted when the input is changed by user interaction",
+    "click": "Emitted when input is clicked. **Note:** the **change** event should be used instead of **click** when monitoring state change"
   }
 }
