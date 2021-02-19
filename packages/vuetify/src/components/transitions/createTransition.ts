@@ -4,7 +4,7 @@ import { defineComponent, TransitionGroup, Transition, h } from 'vue'
 // Types
 import type { FunctionalComponent } from 'vue'
 
-export function createSimpleTransition (
+export function createCssTransition (
   name: string,
   origin = 'top center 0',
   mode?: string
