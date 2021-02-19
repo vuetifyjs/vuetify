@@ -1,5 +1,5 @@
 // Styles
-import './VNavigationDrawer.scss'
+import './VNavigationDrawer.sass'
 
 // Composables
 import { makeSheetProps, useSheet } from '@/components/VSheet/VSheet'

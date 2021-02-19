@@ -1,0 +1,88 @@
+@import './index'
+
+.v-navigation-drawer
+  -webkit-overflow-scrolling: touch
+  background: rgb(var(--v-theme-surface))
+  display: flex
+  flex-direction: column
+  height: 100%
+  max-width: 100%
+  pointer-events: auto
+  top: 0
+  width: 256px
+
+  @include border($navigation-drawer-query)
+  @include position($navigation-drawer-query)
+  @include rounded($navigation-drawer-query)
+
+  &--absolute
+    z-index: 1
+
+  &--fixed
+    z-index: 6
+
+  &--bottom
+    height: 50%
+    bottom: 0
+    top: auto
+    min-width: 100%
+
+    @include elevated($navigation-drawer-query)
+
+  &--right:not(.v-navigation-drawer--floating)
+    border-width: 0 0 0 1px
+
+  &--start
+    left: 0
+    right: auto
+
+    @include ltr()
+      left: 0
+      right: auto
+
+  &--end
+    left: auto
+    right: 0
+
+    @include rtl()
+      left: auto
+      right: 0
+
+  &--floating
+    border-width: 0
+
+  &--is-mobile
+    &.v-navigation-drawer--bottom
+      height: 100%
+
+    @include elevated(( elevation: 16 ))
+
+  &--rail
+    &:not(.v-navigation-drawer--is-hovering.v-navigation-drawer--expand-on-hover)
+      width: 72px
+
+      &.v-navigation-drawer--dense
+        width: 56px
+
+  &--temporary
+    @include elevated($navigation-drawer-query)
+
+.v-navigation-drawer__content
+  flex: 1 1 auto
+  height: 100%
+  max-width: 100%
+  overflow-x: hidden
+  overflow-y: auto
+
+.v-navigation-drawer__img
+  height: 100%
+  left: 0
+  position: absolute
+  top: 0
+  width: 100%
+  z-index: -1
+
+  img
+    height: inherit
+    width: inherit
+    object-fit: cover
