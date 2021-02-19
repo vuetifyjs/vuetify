@@ -9,22 +9,29 @@
     />
 
     <v-fade-transition
-      v-if="jobs.length"
+      v-if="filtered.length"
       group
       hide-on-leave
       leave-absolute
     >
       <div
-        v-for="job in jobs"
+        v-for="job in filtered"
         :key="job.id"
       >
         <v-card
           :href="job.url"
-          class="mb-4 transition-swing"
+          class="mb-4 transition-swing job"
           outlined
           rel="sponsored"
           target="_blank"
         >
+          <v-overlay
+            v-if="job.isHighlighted"
+            absolute
+            color="primary"
+            opacity=".1"
+          />
+
           <v-list-item>
             <v-list-item-avatar>
               <v-img
@@ -68,11 +75,8 @@
             </v-btn>
           </v-list-item>
 
-          <v-card-text class="pb-2 pt-0">
-            <div
-              class="pb-2"
-              v-text="job.description"
-            />
+          <v-card-text class="pb-1 pt-0 pr-2">
+            <app-md v-text="job.description" />
 
             <div class="d-flex align-center text-lowercase">
               <v-chip
@@ -97,8 +101,8 @@
 
               <v-spacer />
 
-              <div class="text-right caption text--secondary">
-                via {{ job.via }}
+              <div class="powered-by align-self end justify-self-end pl-4 hidden-sm-and-down">
+                Job via {{ job.via }}
               </div>
             </div>
           </v-card-text>
@@ -119,7 +123,7 @@
 
     computed: {
       all: get('jobs/all'),
-      jobs () {
+      filtered () {
         if (!this.filter) return this.all
 
         return this.all.filter(job => {
@@ -132,3 +136,16 @@
     },
   }
 </script>
+
+<style lang="sass">
+  .job
+    .powered-by
+      color: rgba(0, 0, 0, .6)
+      font-size: 0.625rem
+      font-weight: 400
+      letter-spacing: 0.09375rem
+      text-transform: uppercase
+
+    &.theme--dark .powered-by
+      color: inherit
+</style>
