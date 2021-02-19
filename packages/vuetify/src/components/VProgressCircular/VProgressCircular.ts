@@ -6,24 +6,15 @@ import Intersect from '../../directives/intersect'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
-import Intersectable from '../../mixins/intersectable'
 
 // Utils
 import { convertToUnit } from '../../util/helpers'
-import mixins from '../../util/mixins'
 
 // Types
 import { VNode, VNodeChildren } from 'vue'
 
 /* @vue/component */
-export default mixins(
-  Colorable,
-  Intersectable({
-    onVisible: [
-      'setVisible',
-    ],
-  })
-).extend({
+export default Colorable.extend({
   name: 'v-progress-circular',
 
   props: {
@@ -51,17 +42,6 @@ export default mixins(
     radius: 20,
     isVisible: false,
   }),
-
-  mounted () {
-    Intersect.inserted(this.$el as HTMLElement, {
-      name: 'intersect',
-      value: this.onObserve,
-    })
-  },
-
-  destroyed () {
-    Intersect.unbind(this.$el as HTMLElement)
-  },
 
   computed: {
     calculatedSize (): number {
@@ -120,6 +100,17 @@ export default mixins(
     viewBoxSize (): number {
       return this.radius / (1 - Number(this.width) / +this.size)
     },
+  },
+
+  mounted () {
+    Intersect.inserted(this.$el as HTMLElement, {
+      name: 'intersect',
+      value: this.onObserve,
+    })
+  },
+
+  destroyed () {
+    Intersect.unbind(this.$el as HTMLElement)
   },
 
   methods: {
