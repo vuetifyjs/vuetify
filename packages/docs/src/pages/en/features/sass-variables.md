@@ -127,10 +127,9 @@ There are many SASS/SCSS variables that can be customized across the entire Vuet
 
 <alert type="info">
 
-  Some color related variables for components are defined in the global material-theme variables: `$material-light` / `$material-dark`
+  Some color-related variables for components are defined in the global material-theme variables: `$material-light` / `$material-dark`
 
 </alert>
-
 
 <sass-api />
 
