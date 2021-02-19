@@ -54,9 +54,10 @@
 
     watch: {
       locale (val, oldVal) {
-        if ([val, oldVal].includes('eo-UY') && val !== oldVal) {
+        if (val !== oldVal) {
           location.reload()
-        } else {
+        }
+        if (val !== 'eo-UY') {
           window.localStorage.setItem('currentLanguage', val)
         }
       },

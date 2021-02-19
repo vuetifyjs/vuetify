@@ -42,6 +42,12 @@ new Vuetify({
 
 new Vuetify({
   icons: {
+    component: {},
+  },
+})
+
+new Vuetify({
+  icons: {
     iconfont: 'fa',
     values: {
       cancel: 'foo',
