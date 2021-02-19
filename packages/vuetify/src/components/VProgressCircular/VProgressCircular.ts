@@ -1,6 +1,9 @@
 // Styles
 import './VProgressCircular.sass'
 
+// Directives
+import Intersect from '../../directives/intersect'
+
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Intersectable from '../../mixins/intersectable'
@@ -10,7 +13,7 @@ import { convertToUnit } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode, VNodeChildren, VNodeDirective } from 'vue'
+import { VNode, VNodeChildren } from 'vue'
 
 /* @vue/component */
 export default mixins(
@@ -46,8 +49,19 @@ export default mixins(
 
   data: () => ({
     radius: 20,
-    visible: false,
+    isVisible: false,
   }),
+
+  mounted () {
+    Intersect.inserted(this.$el as HTMLElement, {
+      name: 'intersect',
+      value: this.onObserve,
+    })
+  },
+
+  destroyed () {
+    Intersect.unbind(this.$el as HTMLElement)
+  },
 
   computed: {
     calculatedSize (): number {
@@ -60,6 +74,7 @@ export default mixins(
 
     classes (): object {
       return {
+        'v-progress-circular--visible': this.isVisible,
         'v-progress-circular--indeterminate': this.indeterminate,
         'v-progress-circular--button': this.button,
       }
@@ -122,12 +137,6 @@ export default mixins(
         },
       })
     },
-    genChildDirectives (): VNodeDirective[] {
-      return [{
-        name: 'show',
-        value: this.visible,
-      }]
-    },
     genSvg (): VNode {
       const children = [
         this.indeterminate || this.genCircle('underlay', 0),
@@ -135,8 +144,6 @@ export default mixins(
       ] as VNodeChildren
 
       return this.$createElement('svg', {
-        directives: this.genChildDirectives(),
-        key: 'svg',
         style: this.svgStyles,
         attrs: {
           xmlns: 'http://www.w3.org/2000/svg',
@@ -146,26 +153,22 @@ export default mixins(
     },
     genInfo (): VNode {
       return this.$createElement('div', {
-        directives: this.genChildDirectives(),
-        key: 'info',
         staticClass: 'v-progress-circular__info',
       }, this.$slots.default)
     },
-    setVisible () {
-      this.visible = true
+    onObserve (entries: IntersectionObserverEntry[], observer: IntersectionObserver, isIntersecting: boolean) {
+      this.isVisible = isIntersecting
     },
   },
 
   render (h): VNode {
-    return h('transition-group', this.setTextColor(this.color, {
+    return h('div', this.setTextColor(this.color, {
       staticClass: 'v-progress-circular',
       attrs: {
         role: 'progressbar',
         'aria-valuemin': 0,
         'aria-valuemax': 100,
         'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue,
-        name: 'fade-transition',
-        tag: 'div',
       },
       class: this.classes,
       style: this.styles,

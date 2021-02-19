@@ -62,17 +62,15 @@ exports[`VBtn.ts should render component with loader and match snapshot 1`] = `
   <span class="v-btn__content">
   </span>
   <span class="v-btn__loader">
-    <span role="progressbar"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          name="fade-transition"
-          tag="div"
-          class="v-progress-circular v-progress-circular--indeterminate"
-          style="height: 23px; width: 23px;"
+    <div role="progressbar"
+         aria-valuemin="0"
+         aria-valuemax="100"
+         class="v-progress-circular v-progress-circular--indeterminate"
+         style="height: 23px; width: 23px;"
     >
       <svg xmlns="http://www.w3.org/2000/svg"
            viewbox="21.904761904761905 21.904761904761905 43.80952380952381 43.80952380952381"
-           style="transform: rotate(0deg); display: none;"
+           style="transform: rotate(0deg);"
       >
         <circle fill="transparent"
                 cx="43.80952380952381"
@@ -85,11 +83,9 @@ exports[`VBtn.ts should render component with loader and match snapshot 1`] = `
         >
         </circle>
       </svg>
-      <div class="v-progress-circular__info"
-           style="display: none;"
-      >
+      <div class="v-progress-circular__info">
       </div>
-    </span>
+    </div>
   </span>
 </button>
 `;

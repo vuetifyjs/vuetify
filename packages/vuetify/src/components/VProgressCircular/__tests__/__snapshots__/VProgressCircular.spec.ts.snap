@@ -1,18 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VProgressCircular.ts should render component and match snapshot 1`] = `
-<span role="progressbar"
-      aria-valuemin="0"
-      aria-valuemax="100"
-      aria-valuenow="33"
-      name="fade-transition"
-      tag="div"
-      class="v-progress-circular"
-      style="height: 32px; width: 32px;"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-circular"
+     style="height: 32px; width: 32px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715"
-       style="transform: rotate(0deg); display: none;"
+       style="transform: rotate(0deg);"
   >
     <circle fill="transparent"
             cx="45.714285714285715"
@@ -35,29 +33,25 @@ exports[`VProgressCircular.ts should render component and match snapshot 1`] = `
     >
     </circle>
   </svg>
-  <div class="v-progress-circular__info"
-       style="display: none;"
-  >
+  <div class="v-progress-circular__info">
     <span>
       content
     </span>
   </div>
-</span>
+</div>
 `;
 
 exports[`VProgressCircular.ts should render component with button prop and match snapshot 1`] = `
-<span role="progressbar"
-      aria-valuemin="0"
-      aria-valuemax="100"
-      aria-valuenow="33"
-      name="fade-transition"
-      tag="div"
-      class="v-progress-circular v-progress-circular--button"
-      style="height: 40px; width: 40px;"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-circular v-progress-circular--button"
+     style="height: 40px; width: 40px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715"
-       style="transform: rotate(0deg); display: none;"
+       style="transform: rotate(0deg);"
   >
     <circle fill="transparent"
             cx="45.714285714285715"
@@ -80,26 +74,22 @@ exports[`VProgressCircular.ts should render component with button prop and match
     >
     </circle>
   </svg>
-  <div class="v-progress-circular__info"
-       style="display: none;"
-  >
+  <div class="v-progress-circular__info">
   </div>
-</span>
+</div>
 `;
 
 exports[`VProgressCircular.ts should render component with color prop and match snapshot 1`] = `
-<span role="progressbar"
-      aria-valuemin="0"
-      aria-valuemax="100"
-      aria-valuenow="33"
-      name="fade-transition"
-      tag="div"
-      class="v-progress-circular orange--text text--lighten-1"
-      style="height: 32px; width: 32px;"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-circular orange--text text--lighten-1"
+     style="height: 32px; width: 32px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715"
-       style="transform: rotate(0deg); display: none;"
+       style="transform: rotate(0deg);"
   >
     <circle fill="transparent"
             cx="45.714285714285715"
@@ -122,27 +112,23 @@ exports[`VProgressCircular.ts should render component with color prop and match 
     >
     </circle>
   </svg>
-  <div class="v-progress-circular__info"
-       style="display: none;"
-  >
+  <div class="v-progress-circular__info">
   </div>
-</span>
+</div>
 `;
 
 exports[`VProgressCircular.ts should render component with fill prop and match snapshot 1`] = `
-<span role="progressbar"
-      aria-valuemin="0"
-      aria-valuemax="100"
-      aria-valuenow="33"
-      name="fade-transition"
-      tag="div"
-      class="v-progress-circular"
-      style="height: 32px; width: 32px;"
-      fill="green lighten-1"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-circular"
+     style="height: 32px; width: 32px;"
+     fill="green lighten-1"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715"
-       style="transform: rotate(0deg); display: none;"
+       style="transform: rotate(0deg);"
   >
     <circle fill="transparent"
             cx="45.714285714285715"
@@ -165,25 +151,21 @@ exports[`VProgressCircular.ts should render component with fill prop and match s
     >
     </circle>
   </svg>
-  <div class="v-progress-circular__info"
-       style="display: none;"
-  >
+  <div class="v-progress-circular__info">
   </div>
-</span>
+</div>
 `;
 
 exports[`VProgressCircular.ts should render component with indeterminate prop and match snapshot 1`] = `
-<span role="progressbar"
-      aria-valuemin="0"
-      aria-valuemax="100"
-      name="fade-transition"
-      tag="div"
-      class="v-progress-circular v-progress-circular--indeterminate"
-      style="height: 32px; width: 32px;"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     class="v-progress-circular v-progress-circular--indeterminate"
+     style="height: 32px; width: 32px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715"
-       style="transform: rotate(0deg); display: none;"
+       style="transform: rotate(0deg);"
   >
     <circle fill="transparent"
             cx="45.714285714285715"
@@ -196,26 +178,22 @@ exports[`VProgressCircular.ts should render component with indeterminate prop an
     >
     </circle>
   </svg>
-  <div class="v-progress-circular__info"
-       style="display: none;"
-  >
+  <div class="v-progress-circular__info">
   </div>
-</span>
+</div>
 `;
 
 exports[`VProgressCircular.ts should render component with rotate prop and match snapshot 1`] = `
-<span role="progressbar"
-      aria-valuemin="0"
-      aria-valuemax="100"
-      aria-valuenow="33"
-      name="fade-transition"
-      tag="div"
-      class="v-progress-circular"
-      style="height: 32px; width: 32px;"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-circular"
+     style="height: 32px; width: 32px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715"
-       style="transform: rotate(29deg); display: none;"
+       style="transform: rotate(29deg);"
   >
     <circle fill="transparent"
             cx="45.714285714285715"
@@ -238,26 +216,22 @@ exports[`VProgressCircular.ts should render component with rotate prop and match
     >
     </circle>
   </svg>
-  <div class="v-progress-circular__info"
-       style="display: none;"
-  >
+  <div class="v-progress-circular__info">
   </div>
-</span>
+</div>
 `;
 
 exports[`VProgressCircular.ts should render component with size prop and match snapshot 1`] = `
-<span role="progressbar"
-      aria-valuemin="0"
-      aria-valuemax="100"
-      aria-valuenow="33"
-      name="fade-transition"
-      tag="div"
-      class="v-progress-circular"
-      style="height: 17px; width: 17px;"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-circular"
+     style="height: 17px; width: 17px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="26.153846153846157 26.153846153846157 52.307692307692314 52.307692307692314"
-       style="transform: rotate(0deg); display: none;"
+       style="transform: rotate(0deg);"
   >
     <circle fill="transparent"
             cx="52.307692307692314"
@@ -280,26 +254,22 @@ exports[`VProgressCircular.ts should render component with size prop and match s
     >
     </circle>
   </svg>
-  <div class="v-progress-circular__info"
-       style="display: none;"
-  >
+  <div class="v-progress-circular__info">
   </div>
-</span>
+</div>
 `;
 
 exports[`VProgressCircular.ts should render component with width prop and match snapshot 1`] = `
-<span role="progressbar"
-      aria-valuemin="0"
-      aria-valuemax="100"
-      aria-valuenow="33"
-      name="fade-transition"
-      tag="div"
-      class="v-progress-circular"
-      style="height: 32px; width: 32px;"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-circular"
+     style="height: 32px; width: 32px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
        viewbox="33.68421052631579 33.68421052631579 67.36842105263158 67.36842105263158"
-       style="transform: rotate(0deg); display: none;"
+       style="transform: rotate(0deg);"
   >
     <circle fill="transparent"
             cx="67.36842105263158"
@@ -322,9 +292,7 @@ exports[`VProgressCircular.ts should render component with width prop and match 
     >
     </circle>
   </svg>
-  <div class="v-progress-circular__info"
-       style="display: none;"
-  >
+  <div class="v-progress-circular__info">
   </div>
-</span>
+</div>
 `;

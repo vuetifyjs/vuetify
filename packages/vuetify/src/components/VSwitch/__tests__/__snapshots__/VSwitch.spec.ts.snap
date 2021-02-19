@@ -17,17 +17,15 @@ exports[`VSwitch.ts should render element with loader and match the snapshot 1`]
         <div class="v-input--switch__track theme--light">
         </div>
         <div class="v-input--switch__thumb theme--light">
-          <span role="progressbar"
-                aria-valuemin="0"
-                aria-valuemax="100"
-                name="fade-transition"
-                tag="div"
-                class="v-progress-circular v-progress-circular--indeterminate primary--text"
-                style="height: 16px; width: 16px;"
+          <div role="progressbar"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               class="v-progress-circular v-progress-circular--indeterminate primary--text"
+               style="height: 16px; width: 16px;"
           >
             <svg xmlns="http://www.w3.org/2000/svg"
                  viewbox="22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715"
-                 style="transform: rotate(0deg); display: none;"
+                 style="transform: rotate(0deg);"
             >
               <circle fill="transparent"
                       cx="45.714285714285715"
@@ -40,11 +38,9 @@ exports[`VSwitch.ts should render element with loader and match the snapshot 1`]
               >
               </circle>
             </svg>
-            <div class="v-progress-circular__info"
-                 style="display: none;"
-            >
+            <div class="v-progress-circular__info">
             </div>
-          </span>
+          </div>
         </div>
       </div>
     </div>

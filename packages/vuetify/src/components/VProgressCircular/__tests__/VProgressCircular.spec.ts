@@ -137,4 +137,11 @@ describe('VProgressCircular.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should set isVisible with onObserve', () => {
+    const wrapper = mountFunction()
+    expect(wrapper.vm.isVisible).toEqual(false)
+    wrapper.vm.onObserve(null, null, true)
+    expect(wrapper.vm.isVisible).toEqual(true)
+  })
 })
