@@ -36,12 +36,13 @@
     "prod": "ws -z -d dist"
   },
   "dependencies": {
+    "algoliasearch": "^4.8.5",
     "core-js": "^3.6.4",
-    "docsearch.js": "^2.6.3",
     "node-fetch": "^2.6.0",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.12",
     "vue-i18n": "^8.17.7",
+    "vue-instantsearch": "^3.4.3",
     "vue-router": "^3.1.6",
     "vuetify": "npm:vuetify@^2.4.0",
     "vuex": "^3.4.0",
