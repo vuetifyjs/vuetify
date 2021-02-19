@@ -38,7 +38,7 @@ export default defineComponent({
     modelValue: Boolean,
   }),
 
-  setup (props, { slots, emit }) {
+  setup (props, { attrs, slots, emit }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { dimensionStyles } = useDimension(props)
 
@@ -60,6 +60,7 @@ export default defineComponent({
           class='v-dialog'
           style={ dimensionStyles }
           transition={ props.transition }
+          { ...attrs }
         >
           { slots.default?.() }
         </VOverlay>
