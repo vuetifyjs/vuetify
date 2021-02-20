@@ -18,6 +18,7 @@ The `v-menu` component shows a menu at the position of the element used to activ
 ## Usage
 
 Remember to put the element that activates the menu in the `activator` slot.
+If the activator element is a Vue component it must be registered globally.
 
 <example file="v-menu/usage" />
 
