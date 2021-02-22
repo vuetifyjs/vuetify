@@ -2,7 +2,7 @@
 import './VProgressCircular.sass'
 
 // Directives
-import Intersect from '../../directives/intersect'
+import intersect from '../../directives/intersect'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
@@ -16,6 +16,8 @@ import { VNode, VNodeChildren } from 'vue'
 /* @vue/component */
 export default Colorable.extend({
   name: 'v-progress-circular',
+
+  directives: { intersect },
 
   props: {
     button: Boolean,
@@ -102,17 +104,6 @@ export default Colorable.extend({
     },
   },
 
-  mounted () {
-    Intersect.inserted(this.$el as HTMLElement, {
-      name: 'intersect',
-      value: this.onObserve,
-    })
-  },
-
-  destroyed () {
-    Intersect.unbind(this.$el as HTMLElement)
-  },
-
   methods: {
     genCircle (name: string, offset: string | number): VNode {
       return this.$createElement('circle', {
@@ -162,6 +153,10 @@ export default Colorable.extend({
         'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue,
       },
       class: this.classes,
+      directives: [{
+        name: 'intersect',
+        value: this.onObserve,
+      }],
       style: this.styles,
       on: this.$listeners,
     }), [
