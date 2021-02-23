@@ -120,7 +120,7 @@ export default VTextField.extend({
       return this.$attrs.hasOwnProperty('multiple')
     },
     text (): string[] {
-      if (!this.isDirty) return [this.placeholder]
+      if (!this.isDirty && (this.isFocused || !this.hasLabel)) return [this.placeholder]
 
       return this.internalArrayValue.map((file: File) => {
         const {

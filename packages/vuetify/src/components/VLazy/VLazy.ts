@@ -52,18 +52,13 @@ export default mixins(
 
   methods: {
     genContent () {
-      const slot = getSlot(this)
+      const children = this.isActive && getSlot(this)
 
-      /* istanbul ignore if */
-      if (!this.transition) return slot
-
-      const children = []
-
-      if (this.isActive) children.push(slot)
-
-      return this.$createElement('transition', {
-        props: { name: this.transition },
-      }, children)
+      return this.transition
+        ? this.$createElement('transition', {
+          props: { name: this.transition },
+        }, children)
+        : children
     },
     onObserve (
       entries: IntersectionObserverEntry[],

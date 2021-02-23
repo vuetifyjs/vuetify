@@ -18,6 +18,7 @@ import resize from '../../directives/resize'
 import ripple from '../../directives/ripple'
 
 // Utilities
+import { attachedRoot } from '../../util/dom'
 import { convertToUnit, keyCodes } from '../../util/helpers'
 import { breaking, consoleWarn } from '../../util/console'
 
@@ -446,7 +447,10 @@ export default baseMixins.extend<options>().extend({
     onFocus (e?: Event) {
       if (!this.$refs.input) return
 
-      if (document.activeElement !== this.$refs.input) {
+      const root = attachedRoot(this.$el)
+      if (!root) return
+
+      if (root.activeElement !== this.$refs.input) {
         return this.$refs.input.focus()
       }
 
@@ -500,9 +504,10 @@ export default baseMixins.extend<options>().extend({
       if (
         !this.autofocus ||
         typeof document === 'undefined' ||
-        !this.$refs.input ||
-        document.activeElement === this.$refs.input
-      ) return false
+        !this.$refs.input) return false
+
+      const root = attachedRoot(this.$el)
+      if (!root || root.activeElement === this.$refs.input) return false
 
       this.$refs.input.focus()
 
