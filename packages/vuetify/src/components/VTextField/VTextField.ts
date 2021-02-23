@@ -76,6 +76,7 @@ export default baseMixins.extend<options>().extend({
     placeholder: String,
     prefix: String,
     prependInnerIcon: String,
+    persistentPlaceholder: Boolean,
     reverse: Boolean,
     rounded: Boolean,
     shaped: Boolean,
@@ -190,7 +191,7 @@ export default baseMixins.extend<options>().extend({
       return this.hasLabel && !(this.isSingle && this.labelValue)
     },
     labelValue (): boolean {
-      return this.isFocused || this.isLabelActive
+      return this.isFocused || this.isLabelActive || this.persistentPlaceholder
     },
   },
 
@@ -387,7 +388,7 @@ export default baseMixins.extend<options>().extend({
           autofocus: this.autofocus,
           disabled: this.isDisabled,
           id: this.computedId,
-          placeholder: this.isFocused || !this.hasLabel ? this.placeholder : undefined,
+          placeholder: this.persistentPlaceholder || this.isFocused || !this.hasLabel ? this.placeholder : undefined,
           readonly: this.isReadonly,
           type: this.type,
         },
