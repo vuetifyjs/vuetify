@@ -1,7 +1,5 @@
-// @ts-nocheck
-/* eslint-disable */
-
-import { upperFirst } from '../../util/helpers'
+// Utilities
+import { camelize } from 'vue'
 
 interface HTMLExpandElement extends HTMLElement {
   _parent?: (Node & ParentNode & HTMLElement) | null
@@ -15,10 +13,10 @@ interface HTMLExpandElement extends HTMLElement {
 
 export default function (expandedParentClass = '', x = false) {
   const sizeProperty = x ? 'width' : 'height' as 'width' | 'height'
-  const offsetProperty = `offset${upperFirst(sizeProperty)}` as 'offsetHeight' | 'offsetWidth'
+  const offsetProperty = camelize(`offset-${sizeProperty}`) as 'offsetHeight' | 'offsetWidth'
 
   return {
-    beforeEnter (el: HTMLExpandElement) {
+    onBeforeEnter (el: HTMLExpandElement) {
       el._parent = el.parentNode as (Node & ParentNode & HTMLElement) | null
       el._initialStyle = {
         transition: el.style.transition,
@@ -27,7 +25,7 @@ export default function (expandedParentClass = '', x = false) {
       }
     },
 
-    enter (el: HTMLExpandElement) {
+    onEnter (el: HTMLExpandElement) {
       const initialStyle = el._initialStyle!
 
       el.style.setProperty('transition', 'none', 'important')
@@ -50,10 +48,10 @@ export default function (expandedParentClass = '', x = false) {
       })
     },
 
-    afterEnter: resetStyles,
-    enterCancelled: resetStyles,
+    onAfterEnter: resetStyles,
+    onEnterCancelled: resetStyles,
 
-    leave (el: HTMLExpandElement) {
+    onLeave (el: HTMLExpandElement) {
       el._initialStyle = {
         transition: '',
         overflow: el.style.overflow,
@@ -67,11 +65,11 @@ export default function (expandedParentClass = '', x = false) {
       requestAnimationFrame(() => (el.style[sizeProperty] = '0'))
     },
 
-    afterLeave,
-    leaveCancelled: afterLeave,
+    onAfterLeave,
+    onLeaveCancelled: onAfterLeave,
   }
 
-  function afterLeave (el: HTMLExpandElement) {
+  function onAfterLeave (el: HTMLExpandElement) {
     if (expandedParentClass && el._parent) {
       el._parent.classList.remove(expandedParentClass)
     }

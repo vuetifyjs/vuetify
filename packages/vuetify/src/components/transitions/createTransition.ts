@@ -1,40 +1,21 @@
-// @ts-nocheck
-/* eslint-disable */
+// Utilities
+import { defineComponent, TransitionGroup, Transition, h } from 'vue'
 
-import { FunctionalComponentOptions, VNode, VNodeData } from 'vue'
-import mergeData from '../../util/mergeData'
+// Types
+import type { FunctionalComponent, Prop } from 'vue'
 
-function mergeTransitions (
-  dest: Function | Function[] = [],
-  ...transitions: (Function | Function[])[]
-) {
-  /* eslint-disable-next-line no-array-constructor */
-  return Array<Function>().concat(dest, ...transitions)
-}
-
-export function createSimpleTransition (
+export function createCssTransition (
   name: string,
   origin = 'top center 0',
   mode?: string
-): FunctionalComponentOptions {
-  return {
+) {
+  return defineComponent({
     name,
 
-    functional: true,
-
     props: {
-      group: {
-        type: Boolean,
-        default: false,
-      },
-      hideOnLeave: {
-        type: Boolean,
-        default: false,
-      },
-      leaveAbsolute: {
-        type: Boolean,
-        default: false,
-      },
+      group: Boolean,
+      hideOnLeave: Boolean,
+      leaveAbsolute: Boolean,
       mode: {
         type: String,
         default: mode,
@@ -45,59 +26,49 @@ export function createSimpleTransition (
       },
     },
 
-    render (h, context): VNode {
-      const tag = `transition${context.props.group ? '-group' : ''}`
-      const data: VNodeData = {
-        props: {
+    setup (props, { slots }) {
+      return () => {
+        const tag = props.group ? TransitionGroup : Transition
+
+        return h(tag as FunctionalComponent, {
           name,
-          mode: context.props.mode,
-        },
-        on: {
-          beforeEnter (el: HTMLElement) {
-            el.style.transformOrigin = context.props.origin
-            el.style.webkitTransformOrigin = context.props.origin
+          mode: props.mode,
+          onBeforeEnter (el: HTMLElement) {
+            el.style.transformOrigin = props.origin
           },
-        },
+          onLeave (el: HTMLElement) {
+            if (props.leaveAbsolute) el.style.position = 'absolute'
+            if (props.hideOnLeave) el.style.display = 'none'
+          },
+        }, slots.default)
       }
-
-      if (context.props.leaveAbsolute) {
-        data.on!.leave = mergeTransitions(data.on!.leave, (el: HTMLElement) => (el.style.position = 'absolute'))
-      }
-      if (context.props.hideOnLeave) {
-        data.on!.leave = mergeTransitions(data.on!.leave, (el: HTMLElement) => (el.style.display = 'none'))
-      }
-
-      return h(tag, mergeData(context.data, data), context.children)
     },
-  }
+  })
 }
 
 export function createJavascriptTransition (
   name: string,
   functions: Record<string, any>,
   mode = 'in-out'
-): FunctionalComponentOptions {
-  return {
+) {
+  return defineComponent({
     name,
-
-    functional: true,
 
     props: {
       mode: {
         type: String,
         default: mode,
-      },
+      } as Prop<'in-out' | 'out-in' | 'default'>,
     },
 
-    render (h, context): VNode {
-      return h(
-        'transition',
-        mergeData(context.data, {
-          props: { name },
-          on: functions,
-        }),
-        context.children
-      )
+    setup (props, { slots }) {
+      return () => {
+        return h(Transition, {
+          name,
+          // mode: props.mode, // TODO: vuejs/vue-next#3104
+          ...functions,
+        }, slots.default)
+      }
     },
-  }
+  })
 }
