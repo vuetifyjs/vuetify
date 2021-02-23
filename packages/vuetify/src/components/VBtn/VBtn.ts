@@ -83,13 +83,10 @@ export default baseMixins.extend<options>().extend({
         'v-btn--absolute': this.absolute,
         'v-btn--block': this.block,
         'v-btn--bottom': this.bottom,
-        'v-btn--contained': this.isElevated, // TODO: remove v3
-        'v-btn--depressed': (this.depressed) || this.outlined, // TODO: remove v3
         'v-btn--disabled': this.disabled,
         'v-btn--is-elevated': this.isElevated,
         'v-btn--fab': this.fab,
         'v-btn--fixed': this.fixed,
-        'v-btn--flat': !this.isElevated, // TODO: remove v3,
         'v-btn--has-bg': this.hasBg,
         'v-btn--icon': this.icon,
         'v-btn--left': this.left,
@@ -120,7 +117,7 @@ export default baseMixins.extend<options>().extend({
       else return this.ripple ?? defaultRipple
     },
     hasBg (): boolean {
-      return this.isElevated || this.depressed
+      return !this.text && !this.plain && !this.outlined && !this.icon
     },
     isElevated (): boolean {
       return Boolean(
@@ -130,7 +127,7 @@ export default baseMixins.extend<options>().extend({
         !this.depressed &&
         !this.disabled &&
         !this.plain &&
-        (this.elevation != null || Number(this.elevation) < 1)
+        (this.elevation == null || Number(this.elevation) > 0)
       )
     },
     isRound (): boolean {
@@ -191,7 +188,7 @@ export default baseMixins.extend<options>().extend({
       this.loading && this.genLoader(),
     ]
     const { tag, data } = this.generateRouteLink()
-    const setColor = (this.isElevated || this.depressed)
+    const setColor = this.hasBg
       ? this.setBackgroundColor
       : this.setTextColor
 

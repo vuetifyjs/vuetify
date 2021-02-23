@@ -9,7 +9,7 @@ import Localable from '../../../mixins/localable'
 import Themeable from '../../../mixins/themeable'
 
 // Utils
-import { createItemTypeNativeListeners } from '../util'
+import { createItemTypeNativeListeners, sanitizeDateString } from '../util'
 import isDateAllowed from '../util/isDateAllowed'
 import { mergeListeners } from '../../../util/mergeData'
 import mixins from '../../../util/mixins'
@@ -177,6 +177,14 @@ export default mixins(
         staticClass: 'v-date-picker-table__events',
       }, eventColors.map(color => this.$createElement('div', this.setBackgroundColor(color)))) : null
     },
+    isValidScroll (e: WheelEvent, calculateTableDate: CalculateTableDateFunction) {
+      const tableDate = calculateTableDate(e.deltaY)
+      // tableDate is 'YYYY-MM' for DateTable and 'YYYY' for MonthTable
+      const sanitizeType = tableDate.split('-').length === 1 ? 'year' : 'month'
+      return (e.deltaY === 0) ||
+        (e.deltaY < 0 && (this.min ? tableDate >= sanitizeDateString(this.min, sanitizeType) : true)) ||
+        (e.deltaY > 0 && (this.max ? tableDate <= sanitizeDateString(this.max, sanitizeType) : true))
+    },
     wheel (e: WheelEvent, calculateTableDate: CalculateTableDateFunction) {
       this.$emit('update:table-date', calculateTableDate(e.deltaY))
     },
@@ -205,7 +213,7 @@ export default mixins(
         on: (!this.disabled && this.scrollable) ? {
           wheel: (e: WheelEvent) => {
             e.preventDefault()
-            this.wheelThrottle(e, calculateTableDate)
+            if (this.isValidScroll(e, calculateTableDate)) { this.wheelThrottle(e, calculateTableDate) }
           },
         } : undefined,
         directives: [touchDirective],

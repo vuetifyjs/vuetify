@@ -20,7 +20,7 @@
         :return-value.sync="dates"
         transition="scale-transition"
         offset-y
-        min-width="290px"
+        min-width="auto"
       >
         <template v-slot:activator="{ on, attrs }">
           <v-combobox
