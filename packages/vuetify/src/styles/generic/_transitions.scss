@@ -1,10 +1,10 @@
 @mixin transition-default() {
   &-enter-active {
-    transition: 0.3s $decelerated-easing;
+    transition: 0.3s $standard-easing;
   }
 
   &-leave-active {
-    transition: 0.3s $accelerated-easing;
+    transition: 0.3s $standard-easing;
   }
 
   &-move {
