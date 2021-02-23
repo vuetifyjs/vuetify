@@ -1,7 +1,7 @@
 {
   "props": {
     "bottom": "Expands from the bottom of the screen on mobile devices",
-    "clipped": "A clipped drawer rests under the application toolbar",
+    "clipped": "A clipped drawer rests under the application toolbar. **Note:** requires the **clipped-left** or **clipped-right** prop on `v-app-bar` to work as intended",
     "disableResizeWatcher": "Will automatically open/close drawer when resized depending if mobile or desktop.",
     "disableRouteWatcher": "Disables opening of navigation drawer when route changes",
     "expandOnHover": "Collapses the drawer to a **mini-variant** until hovering with the mouse",

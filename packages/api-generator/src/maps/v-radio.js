@@ -5,5 +5,12 @@ VInput.slots = VInput.slots.filter(slot => !['append', 'prepend'].includes(slot.
 module.exports = {
   'v-radio': {
     ...VInput,
+    events: [
+      ...VInput.events,
+      {
+        name: 'click',
+        value: 'MouseEvent',
+      },
+    ],
   },
 }

@@ -12,7 +12,7 @@
           transition="scale-transition"
           offset-y
           max-width="290px"
-          min-width="290px"
+          min-width="auto"
         >
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
@@ -45,7 +45,7 @@
           transition="scale-transition"
           offset-y
           max-width="290px"
-          min-width="290px"
+          min-width="auto"
         >
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
