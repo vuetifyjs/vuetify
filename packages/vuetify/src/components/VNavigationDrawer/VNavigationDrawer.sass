@@ -1,71 +1,77 @@
+// Imports
 @import './index'
 
 .v-navigation-drawer
-  -webkit-overflow-scrolling: touch
-  background: rgb(var(--v-theme-surface))
+  -webkit-overflow-scrolling: $navigation-drawer-overflow-scrolling
+  background: $navigation-drawer-background
   display: flex
   flex-direction: column
   height: 100%
   max-width: 100%
   pointer-events: auto
   top: 0
-  width: 256px
+  transition-duration: $navigation-drawer-transition-duration
+  transition-property: $navigation-drawer-transition-property
+  transition-timing-function: $navigation-drawer-transition-timing-function
+  width: $navigation-drawer-width
+  will-change: $navigation-drawer-will-change
 
   @include border($navigation-drawer-query)
+  @include elevated($navigation-drawer-query)
   @include position($navigation-drawer-query)
   @include rounded($navigation-drawer-query)
 
   &--absolute
-    z-index: 1
+    z-index: $navigation-drawer-absolute-z-index
 
   &--fixed
-    z-index: 6
+    z-index: $navigation-drawer-fixed-z-index
 
   &--bottom
-    height: 50%
     bottom: 0
-    top: auto
+    height: 50%
     min-width: 100%
+    top: auto
 
-    @include elevated($navigation-drawer-query)
-
-  &--right:not(.v-navigation-drawer--floating)
-    border-width: 0 0 0 1px
+    &.v-navigation-drawer--is-mobile
+      height: 100%
 
   &--start
-    left: 0
-    right: auto
-
     @include ltr()
+      border-right-width: $navigation-drawer-border-thin-width
       left: 0
       right: auto
 
-  &--end
-    left: auto
-    right: 0
-
     @include rtl()
+      border-left-width: $navigation-drawer-border-thin-width
       left: auto
       right: 0
 
+  &--end
+    @include ltr()
+      border-left-width: $navigation-drawer-border-thin-width
+      left: auto
+      right: 0
+
+    @include rtl()
+      border-right-width: $navigation-drawer-border-thin-width
+      left: 0
+      right: auto
+
   &--floating
-    border-width: 0
-
-  &--is-mobile
-    &.v-navigation-drawer--bottom
-      height: 100%
-
-    @include elevated(( elevation: 16 ))
+    border: $navigation-drawer-floating-border
 
   &--rail
-    &:not(.v-navigation-drawer--is-hovering.v-navigation-drawer--expand-on-hover)
-      width: 72px
+    width: $navigation-drawer-rail-width
 
-      &.v-navigation-drawer--dense
-        width: 56px
+    &.v-navigation-drawer--dense
+      width: $navigation-drawer-dense-rail-width
+
+    &.v-navigation-drawer--expand-on-hover.v-navigation-drawer--is-hovering
+      width: $navigation-drawer-width
 
   &--temporary
-    @include elevated($navigation-drawer-query)
+    @include elevated($navigation-drawer-temporary-query)
 
 .v-navigation-drawer__content
   flex: 1 1 auto
@@ -83,6 +89,6 @@
   z-index: -1
 
   img
-    height: inherit
-    width: inherit
-    object-fit: cover
+    height: $navigation-drawer-img-height
+    object-fit: $navigation-drawer-img-object-fit
+    width: $navigation-drawer-img-width
