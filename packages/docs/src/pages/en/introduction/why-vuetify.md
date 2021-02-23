@@ -54,7 +54,7 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 | ------- | ----------- | ------------ |
 | [Bidirectionality (LTR/RTL)](/features/bidirectionality/) | Beginner | 1 min |
 | [Global configuration](/features/global-config/) | Beginner | 1 min |
-| [Icons](/features/icons/) | Beginner | 15 min |
+| [Icons](/features/icon-fonts/) | Beginner | 15 min |
 | [Layouts](/features/layouts/) | Beginner | 5 min |
 | [Theme](/features/theme/) | Beginner | 15 min |
 | [Accessibility (a11y)](/features/accessibility) | Intermediate | 10 min |
