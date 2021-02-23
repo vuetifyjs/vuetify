@@ -48,16 +48,18 @@ export default defineComponent({
     const isHovering = ref(false)
 
     onBeforeMount(() => {
-      if (isActive.value == null) {
-        isActive.value = !props.mobile
-      }
+      if (isActive.value == null) isActive.value = !props.mobile
     })
 
     return () => {
       const hasImg = (slots.img || props.src)
       const hasRail = props.rail || props.expandOnHover
-      const translate = isActive.value ? 0 : -100
+      const transform = props.bottom ? 'Y' : 'X'
       const width = hasRail ? props.railWidth : props.width
+
+      const translate = (
+        (isActive.value ? 0 : 100) * (!props.right && !props.bottom ? -1 : 1)
+      )
 
       return (
         <props.tag
@@ -83,7 +85,7 @@ export default defineComponent({
           style={[
             sheetStyles.value,
             {
-              transform: `translateX(${convertToUnit(translate, '%')})`,
+              transform: `translate${transform}(${convertToUnit(translate, '%')})`,
               width: convertToUnit(width)
             },
           ]}
