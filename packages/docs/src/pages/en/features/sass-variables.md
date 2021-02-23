@@ -125,6 +125,12 @@ module.exports = {
 
 There are many SASS/SCSS variables that can be customized across the entire Vuetify framework. You can browse all the variables using the tool below:
 
+<alert type="info">
+
+  Some color-related variables for components are defined in the global material-theme variables: `$material-light` / `$material-dark`
+
+</alert>
+
 <sass-api />
 
 ## Example variable file

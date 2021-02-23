@@ -403,7 +403,7 @@ describe('VCombobox.ts', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.internalSearch).toBe('a')
+    expect(wrapper.vm.internalSearch).toBeNull()
     expect(change).toHaveBeenCalledWith(['aaa'])
   })
 
