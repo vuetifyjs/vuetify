@@ -162,6 +162,32 @@ describe('VSelect.ts', () => {
     expect(wrapper.vm.computedCounterValue).toBe(2)
   })
 
+  it('should return the correct counter value', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo', 'bar'],
+        value: 'foo',
+      },
+    })
+
+    expect(wrapper.vm.computedCounterValue).toBe(3)
+
+    wrapper.setProps({
+      multiple: true,
+      value: ['foo'],
+    })
+
+    expect(wrapper.vm.computedCounterValue).toBe(1)
+
+    wrapper.setProps({
+      counterValue: (value?: string): number => 2,
+      multiple: false,
+      value: undefined,
+    })
+
+    expect(wrapper.vm.computedCounterValue).toBe(2)
+  })
+
   it('should emit a single change event', async () => {
     const wrapper = mountFunction({
       attachToDocument: true,
