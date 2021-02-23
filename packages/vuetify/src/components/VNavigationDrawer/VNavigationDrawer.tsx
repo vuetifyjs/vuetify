@@ -76,9 +76,8 @@ export default defineComponent({
               'v-navigation-drawer--is-hovering': isHovering.value,
               'v-navigation-drawer--is-mobile': props.mobile,
               'v-navigation-drawer--rail': props.rail,
-              'v-navigation-drawer--right': props.right,
               'v-navigation-drawer--start': props.left || !props.right,
-              'v-navigation-drawer--temporary': props.temporary,
+              'v-navigation-drawer--temporary': props.temporary || props.mobile,
             },
             sheetClasses.value,
           ]}

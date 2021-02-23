@@ -1,18 +1,45 @@
 // Defaults
+$navigation-drawer-absolute-z-index: 1 !default;
+$navigation-drawer-background: rgb(var(--v-theme-surface)) !default;
 $navigation-drawer-border-color: $border-color-root !default;
+$navigation-drawer-border-radius: map-get($rounded, '0') !default;
 $navigation-drawer-border-style: $border-style-root !default;
-$navigation-drawer-border-width: 0 thin 0 0 !default;
-$navigation-drawer-elevation: 16 !default;
+$navigation-drawer-border-thin-width: thin !default;
+$navigation-drawer-border-width: 0 !default;
+$navigation-drawer-dense-rail-width: 56px !default;
+$navigation-drawer-elevation: 0 !default;
+$navigation-drawer-fixed-z-index: 6 !default;
+$navigation-drawer-floating-border: none !default;
+$navigation-drawer-img-height: inherit !default;
+$navigation-drawer-img-object-fit: cover !default;
+$navigation-drawer-img-width: inherit !default;
+$navigation-drawer-overflow-scrolling: touch !default;
 $navigation-drawer-positions: absolute fixed !default;
+$navigation-drawer-rail-width: 72px !default;
+$navigation-drawer-temporary-elevation: 16 !default;
+$navigation-drawer-transition-duration: 0.2s !default;
+$navigation-drawer-transition-property: box-shadow, transform, visibility, width !default;
+$navigation-drawer-transition-timing-function: $standard-easing !default;
+$navigation-drawer-width: 256px !default;
+$navigation-drawer-will-change: transform !default;
 
 $navigation-drawer-query: () !default;
 $navigation-drawer-query: map-deep-merge(
   (
     'border-color': $navigation-drawer-border-color,
     'border-style': $navigation-drawer-border-style,
+    'border-radius': $navigation-drawer-border-radius,
     'border-width': $navigation-drawer-border-width,
     'elevation': $navigation-drawer-elevation,
     'position': $navigation-drawer-positions
   ),
   $navigation-drawer-query
+);
+
+$navigation-drawer-temporary-query: () !default;
+$navigation-drawer-temporary-query: map-deep-merge(
+  (
+    'elevation': $navigation-drawer-temporary-elevation
+  ),
+  $navigation-drawer-temporary-query
 );
