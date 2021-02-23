@@ -2,7 +2,7 @@
 import { defineComponent, TransitionGroup, Transition, h } from 'vue'
 
 // Types
-import type { FunctionalComponent } from 'vue'
+import type { FunctionalComponent, Prop } from 'vue'
 
 export function createCssTransition (
   name: string,
@@ -58,16 +58,16 @@ export function createJavascriptTransition (
       mode: {
         type: String,
         default: mode,
-      },
+      } as Prop<'in-out' | 'out-in' | 'default'>,
     },
 
     setup (props, { slots }) {
       return () => {
-        return h(Transition as any, {
+        return h(Transition, {
           name,
-          // mode: props.mode, TODO: vuejs/vue-next#3104
+          // mode: props.mode, // TODO: vuejs/vue-next#3104
           ...functions,
-        }, () => slots.default?.())
+        }, slots.default)
       }
     },
   })
