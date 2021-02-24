@@ -1,13 +1,6 @@
 module.exports = {
-  mixins: [
-    'applicationable',
-    'colorable',
-    'elevatable',
-    'measurable',
-    'positionable',
-    'roundable',
-    'ssr-bootable',
-    'themeable',
+  composables: [
+    'tag',
     'v-sheet',
   ],
   props: [

@@ -1,6 +1,6 @@
 module.exports = {
-  mixins: [
-    'measurable',
+  composables: [
+    'dimensions',
   ],
   props: [
     {

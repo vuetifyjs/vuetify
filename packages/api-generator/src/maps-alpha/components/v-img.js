@@ -1,9 +1,5 @@
 module.exports = {
-  mixins: [
-    'measurable',
-    'themeable',
-    'v-responsive',
-  ],
+  composables: [],
   props: [
     {
       name: 'alt',

@@ -1,7 +1,5 @@
 module.exports = {
-  mixins: [
-    'themeable',
-  ],
+  composables: [],
   props: [
     {
       name: 'id',

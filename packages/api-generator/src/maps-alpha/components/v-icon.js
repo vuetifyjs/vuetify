@@ -1,8 +1,6 @@
 module.exports = {
-  mixins: [
-    'colorable',
-    'sizeable',
-    'themeable',
+  composables: [
+    'size',
   ],
   props: [
     {

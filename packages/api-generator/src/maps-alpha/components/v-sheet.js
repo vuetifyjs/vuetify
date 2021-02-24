@@ -1,10 +1,11 @@
 module.exports = {
-  mixins: [
-    'colorable',
-    'elevatable',
-    'measurable',
-    'roundable',
-    'themeable',
+  composables: [
+    'border',
+    'border-radius',
+    'dimensions',
+    'elevation',
+    'position',
+    'tag',
   ],
   props: [
     {

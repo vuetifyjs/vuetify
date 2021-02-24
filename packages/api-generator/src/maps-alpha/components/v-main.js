@@ -1,5 +1,5 @@
 module.exports = {
-  mixins: [],
+  composables: [],
   props: [
     {
       name: 'tag',
