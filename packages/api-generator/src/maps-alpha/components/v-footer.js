@@ -128,12 +128,6 @@ module.exports = {
       source: 'v-sheet',
     },
     {
-      name: 'tag',
-      type: 'string',
-      default: "'footer'",
-      source: 'v-sheet',
-    },
-    {
       name: 'tile',
       type: 'boolean',
       default: 'false',

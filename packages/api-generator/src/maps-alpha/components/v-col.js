@@ -138,12 +138,6 @@ module.exports = {
       source: 'v-col',
     },
     {
-      name: 'tag',
-      type: 'string',
-      default: "'div'",
-      source: 'v-col',
-    },
-    {
       name: 'xl',
       type: [
         'boolean',

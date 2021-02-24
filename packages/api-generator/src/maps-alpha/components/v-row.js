@@ -103,12 +103,6 @@ module.exports = {
       default: 'false',
       source: 'v-row',
     },
-    {
-      name: 'tag',
-      type: 'string',
-      default: "'div'",
-      source: 'v-row',
-    },
   ],
   slots: [
     {

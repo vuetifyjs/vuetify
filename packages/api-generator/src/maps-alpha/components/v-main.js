@@ -1,13 +1,8 @@
 module.exports = {
-  composables: [],
-  props: [
-    {
-      name: 'tag',
-      type: 'string',
-      default: "'main'",
-      source: 'v-main',
-    },
+  composables: [
+    'tag',
   ],
+  props: [],
   slots: [],
   events: [],
   functions: [],

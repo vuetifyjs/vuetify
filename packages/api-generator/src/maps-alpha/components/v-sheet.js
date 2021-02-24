@@ -102,12 +102,6 @@ module.exports = {
       source: 'v-sheet',
     },
     {
-      name: 'tag',
-      type: 'string',
-      default: 'div',
-      source: 'v-sheet',
-    },
-    {
       name: 'tile',
       type: 'boolean',
       default: 'false',

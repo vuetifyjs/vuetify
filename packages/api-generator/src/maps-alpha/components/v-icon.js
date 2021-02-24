@@ -67,12 +67,6 @@ module.exports = {
       source: 'sizeable',
     },
     {
-      name: 'tag',
-      type: 'string',
-      default: "'i'",
-      source: 'v-icon',
-    },
-    {
       name: 'x-large',
       type: 'boolean',
       default: 'false',

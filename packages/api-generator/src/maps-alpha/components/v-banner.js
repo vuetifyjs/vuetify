@@ -135,12 +135,6 @@ module.exports = {
       source: 'v-banner',
     },
     {
-      name: 'tag',
-      type: 'string',
-      default: "'div'",
-      source: 'v-sheet',
-    },
-    {
       name: 'tile',
       type: 'boolean',
       default: 'false',

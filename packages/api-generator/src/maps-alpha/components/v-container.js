@@ -1,5 +1,7 @@
 module.exports = {
-  composables: [],
+  composables: [
+    'tag',
+  ],
   props: [
     {
       name: 'fluid',
@@ -11,12 +13,6 @@ module.exports = {
       name: 'id',
       type: 'string',
       default: 'undefined',
-      source: 'v-container',
-    },
-    {
-      name: 'tag',
-      type: 'string',
-      default: "'div'",
       source: 'v-container',
     },
   ],

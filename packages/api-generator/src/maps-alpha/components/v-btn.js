@@ -253,12 +253,6 @@ module.exports = {
       source: 'sizeable',
     },
     {
-      name: 'tag',
-      type: 'string',
-      default: "'button'",
-      source: 'v-sheet',
-    },
-    {
       name: 'target',
       type: 'string',
       default: 'undefined',
