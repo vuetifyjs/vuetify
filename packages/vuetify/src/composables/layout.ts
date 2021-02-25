@@ -11,7 +11,7 @@ type Position = 'top' | 'left' | 'right' | 'bottom'
 interface LayoutProvide {
   register: (id: string, priority: Ref<number>, position: Ref<Position>, amount: Ref<number | string>) => Ref<Record<string, unknown>>
   unregister: (id: string) => void
-  contentStyles: Ref<Record<string, unknown>>
+  mainStyles: Ref<Record<string, unknown>>
 }
 
 export const VuetifyLayoutKey: InjectionKey<LayoutProvide> = Symbol.for('vuetify:layout')
@@ -37,6 +37,14 @@ export const makeLayoutItemProps = propsFactory({
     default: 300,
   },
 })
+
+export function useMain () {
+  const layout = inject(VuetifyLayoutKey)
+
+  if (!layout) throw new Error('Could not find injected Vuetify layout')
+
+  return layout
+}
 
 export function useLayoutItem (
   name: string | undefined,
@@ -121,7 +129,7 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
     return generateLayers(sortedEntries, registered.value, positions, amounts)
   })
 
-  const contentStyles = computed(() => {
+  const mainStyles = computed(() => {
     const layer = layers.value[layers.value.length - 1].layer
 
     return {
@@ -187,7 +195,7 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
       priorities.delete(id)
       registered.value = registered.value.filter(v => v !== id)
     },
-    contentStyles,
+    mainStyles,
   })
 
   return { layoutClasses: ref('v-layout'), get }
