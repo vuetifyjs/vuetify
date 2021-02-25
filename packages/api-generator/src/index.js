@@ -1,6 +1,7 @@
 // const Vue = require('vue')
 // const Vuetify = require('vuetify')
 // const { components: excludes } = require('./helpers/excludes')
+const { sortBy } = require('lodash')
 const { camelCase } = require('./helpers/text')
 const { getComponentList, parseSassVariables } = require('./helpers/parsing')
 const deepmerge = require('./helpers/merge')
@@ -102,20 +103,23 @@ const getComponentApi = (componentName, locales) => {
   const componentMap = loadMap(componentName, 'components', { composables: [], props: [], slots: [], events: [], functions: [] })
 
   // get composable props
+  const composableProps = []
   for (const composable of componentMap.composables) {
-    const composableMap = loadMap(composable, 'composables', { props: [] })
-    componentMap.props.push(...composableMap.props)
+    const props = composable.slice(0, 2) === 'v-'
+      ? getComponentApi(composable, locales).props
+      : loadMap(composable, 'composables', { props: [] }).props
+    composableProps.push(...props)
   }
 
   const sassVariables = parseSassVariables(componentName)
 
-  const api = deepmerge(componentMap, { name: componentName, sass: sassVariables, component: true })
+  const api = deepmerge(componentMap, { name: componentName, props: composableProps, sass: sassVariables, component: true })
 
   // Make sure things are sorted
   const categories = ['props', 'slots', 'events', 'functions']
-  categories.forEach(category => {
-    componentMap[category].sort((a, b) => a.name.localeCompare(b.name))
-  })
+  for (const category of categories) {
+    componentMap[category] = sortBy(componentMap[category], 'name')
+  }
 
   return addComponentApiDescriptions(componentName, api, locales)
 }
