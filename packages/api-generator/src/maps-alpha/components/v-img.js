@@ -40,7 +40,7 @@ module.exports = {
       default: {
         root: undefined,
         rootMargin: undefined,
-        threshold: undefined
+        threshold: undefined,
       },
       source: 'v-img',
     },
@@ -89,22 +89,13 @@ module.exports = {
   ],
   slots: [
     {
-      name: 'additional',
-    },
-    {
       name: 'default',
     },
     {
       name: 'error',
     },
     {
-      name: 'image',
-    },
-    {
       name: 'placeholder',
-    },
-    {
-      name: 'preloadImage',
     },
     {
       name: 'sources',

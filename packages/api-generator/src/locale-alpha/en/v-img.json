@@ -14,11 +14,8 @@
     "transition": "The transition to use when switching from `lazy-src` to `src`"
   },
   "slots": {
-    "additional": "`no description`",
     "error": "`no description`",
-    "image": "`no description`",
     "placeholder": "Slot for image placeholder",
-    "preloadImage": "`no description`",
     "sources": "`no description`"
   },
   "events": {

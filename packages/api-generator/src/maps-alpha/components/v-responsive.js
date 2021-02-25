@@ -23,9 +23,6 @@ module.exports = {
     {
       name: 'default',
     },
-    {
-      name: 'additional',
-    },
   ],
   events: [],
   functions: [],
