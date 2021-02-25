@@ -20,7 +20,12 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
-    const styles = useLayoutItem(props.name, computed(() => props.position ?? 'left'), toRef(props, 'size'))
+    const styles = useLayoutItem(
+      props.name,
+      toRef(props, 'priority'),
+      computed(() => props.position ?? 'left'),
+      toRef(props, 'size')
+    )
 
     const background = randomHexColor()
 

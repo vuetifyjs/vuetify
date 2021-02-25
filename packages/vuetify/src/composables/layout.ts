@@ -9,7 +9,7 @@ import type { InjectionKey, Ref, Prop } from 'vue'
 type Position = 'top' | 'left' | 'right' | 'bottom'
 
 interface LayoutProvide {
-  register: (id: string, position: Ref<Position>, amount: Ref<number | string>) => Ref<Record<string, unknown>>
+  register: (id: string, priority: Ref<number>, position: Ref<Position>, amount: Ref<number | string>) => Ref<Record<string, unknown>>
   unregister: (id: string) => void
   contentStyles: Ref<Record<string, unknown>>
 }
@@ -17,10 +17,6 @@ interface LayoutProvide {
 export const VuetifyLayoutKey: InjectionKey<LayoutProvide> = Symbol.for('vuetify:layout')
 
 export const makeLayoutProps = propsFactory({
-  layout: {
-    type: Array,
-    default: () => ([]),
-  } as Prop<string[]>,
   overlaps: {
     type: Array,
     default: () => ([]),
@@ -32,20 +28,29 @@ export const makeLayoutItemProps = propsFactory({
   name: {
     type: String,
   },
+  priority: {
+    type: Number,
+    default: 0,
+  },
   size: {
     type: [Number, String],
     default: 300,
   },
 })
 
-export function useLayoutItem (name: string | undefined, position: Ref<Position>, amount: Ref<number | string>) {
+export function useLayoutItem (
+  name: string | undefined,
+  priority: Ref<number>,
+  position: Ref<Position>,
+  amount: Ref<number | string>
+) {
   const layout = inject(VuetifyLayoutKey)
 
   if (!layout) throw new Error('Could not find injected Vuetify layout')
 
   const id = name ?? `layout-item-${getUid()}`
 
-  const styles = layout.register(id, position, amount)
+  const styles = layout.register(id, priority, position, amount)
 
   onBeforeUnmount(() => layout.unregister(id))
 
@@ -87,6 +92,7 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
   const registered = ref<string[]>([])
   const positions = new Map<string, Ref<Position>>()
   const amounts = new Map<string, Ref<number | string>>()
+  const priorities = new Map<string, Ref<number>>()
 
   const computedOverlaps = computed(() => {
     const map = new Map<string, { position: Position, amount: number }>()
@@ -110,7 +116,9 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
   })
 
   const layers = computed(() => {
-    return generateLayers(props.layout ?? [], registered.value, positions, amounts)
+    const entries = [...priorities.entries()]
+    const sortedEntries = entries.sort(([, a], [, b]) => a.value - b.value).map(([id]) => id)
+    return generateLayers(sortedEntries, registered.value, positions, amounts)
   })
 
   const contentStyles = computed(() => {
@@ -125,8 +133,20 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
     }
   })
 
+  const get = (id: string) => {
+    if (!registered.value.includes(id)) return null
+
+    const index = layers.value.findIndex(l => l.id === id)
+
+    return {
+      ...layers.value[index - 1].layer,
+      size: Number(amounts.get(id)!.value),
+    }
+  }
+
   provide(VuetifyLayoutKey, {
-    register: (id: string, position: Ref<Position>, amount: Ref<number | string>) => {
+    register: (id: string, priority: Ref<number>, position: Ref<Position>, amount: Ref<number | string>) => {
+      priorities.set(id, priority)
       positions.set(id, position)
       amounts.set(id, amount)
       registered.value.push(id)
@@ -164,10 +184,11 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
     unregister: (id: string) => {
       positions.delete(id)
       amounts.delete(id)
+      priorities.delete(id)
       registered.value = registered.value.filter(v => v !== id)
     },
     contentStyles,
   })
 
-  return { layoutClasses: ref('v-layout') }
+  return { layoutClasses: ref('v-layout'), get }
 }
