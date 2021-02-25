@@ -1,11 +1,11 @@
 {
   "props": {
-    "absolute": "`no description`",
-    "bottom": "`no description`",
-    "fixed": "`no description`",
-    "left": "`no description`",
+    "absolute": "Applies **position: absolute** to the component.",
+    "bottom": "Aligns the component towards the bottom.",
+    "fixed": "Applies **position: fixed** to the component.",
+    "left": "Aligns the component towards the left.",
     "position": "`no description`",
-    "right": "`no description`",
-    "top": "`no description`"
+    "right": "Aligns the component towards the right.",
+    "top": "Aligns the content towards the top."
   }
 }

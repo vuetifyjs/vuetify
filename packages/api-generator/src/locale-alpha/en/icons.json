@@ -1,6 +1,5 @@
 {
   "props": {
-    "icon": "`no description`",
-    "tag": "`no description`"
+    "icon": "Designates a specific icon."
   }
 }
