@@ -1,5 +1,10 @@
+// Styles
 import './VGrid.sass'
 
+// Composables
+import { makeTagProps } from '@/composables/tag'
+
+// Utilities
 import { defineComponent, computed, h, capitalize } from 'vue'
 import makeProps from '@/util/makeProps'
 
@@ -92,10 +97,7 @@ export default defineComponent({
       default: null,
       validator: (str: any) => ['auto', 'start', 'end', 'center', 'baseline', 'stretch'].includes(str),
     },
-    tag: {
-      type: String,
-      default: 'div',
-    },
+    ...makeTagProps(),
   }),
 
   setup (props, { slots }) {

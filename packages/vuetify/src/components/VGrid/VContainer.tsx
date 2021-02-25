@@ -1,5 +1,10 @@
+// Styles
 import './VGrid.sass'
 
+// Composables
+import { makeTagProps } from '@/composables/tag'
+
+// Utilities
 import { defineComponent } from 'vue'
 import makeProps from '@/util/makeProps'
 
@@ -7,14 +12,11 @@ export default defineComponent({
   name: 'VContainer',
 
   props: makeProps({
-    tag: {
-      type: String,
-      default: 'div',
-    },
     fluid: {
       type: Boolean,
       default: false,
     },
+    ...makeTagProps(),
   }),
 
   setup (props, { slots }) {
