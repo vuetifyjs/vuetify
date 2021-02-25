@@ -7,6 +7,7 @@ import { makeSizeProps, useSize } from '@/composables/size'
 import { useIcon } from '@/composables/icons'
 import { convertToUnit, flattenFragments } from '@/util'
 import makeProps from '@/util/makeProps'
+import { makeTagProps } from '@/composables/tag'
 
 // Types
 import type { IconValue } from '@/composables/icons'
@@ -19,14 +20,11 @@ export default defineComponent({
     disabled: Boolean,
     left: Boolean,
     right: Boolean,
-    tag: {
-      type: String,
-      default: 'i',
-    },
     icon: {
       type: [String, Object] as PropType<IconValue>,
     },
     ...makeSizeProps(),
+    ...makeTagProps({ tag: 'i' }),
   }),
 
   setup (props, { slots }) {
