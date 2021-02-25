@@ -8,7 +8,7 @@ module.exports = {
         'string',
       ],
       default: 'undefined',
-      source: 'dimension',
+      source: 'dimensions',
     },
     {
       name: 'max-height',
@@ -17,7 +17,7 @@ module.exports = {
         'string',
       ],
       default: 'undefined',
-      source: 'dimension',
+      source: 'dimensions',
     },
     {
       name: 'max-width',
@@ -26,7 +26,7 @@ module.exports = {
         'string',
       ],
       default: 'undefined',
-      source: 'dimension',
+      source: 'dimensions',
     },
     {
       name: 'min-height',
@@ -35,7 +35,7 @@ module.exports = {
         'string',
       ],
       default: 'undefined',
-      source: 'dimension',
+      source: 'dimensions',
     },
     {
       name: 'min-width',
@@ -44,7 +44,7 @@ module.exports = {
         'string',
       ],
       default: 'undefined',
-      source: 'dimension',
+      source: 'dimensions',
     },
     {
       name: 'width',
@@ -53,7 +53,7 @@ module.exports = {
         'string',
       ],
       default: 'undefined',
-      source: 'dimension',
+      source: 'dimensions',
     },
   ],
   slots: [],

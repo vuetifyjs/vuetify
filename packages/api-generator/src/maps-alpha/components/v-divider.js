@@ -2,22 +2,28 @@ module.exports = {
   composables: [],
   props: [
     {
-      name: 'dark',
-      type: 'boolean',
-      default: 'false',
-      source: 'themeable',
-    },
-    {
       name: 'inset',
       type: 'boolean',
       default: 'false',
       source: 'v-divider',
     },
     {
-      name: 'light',
-      type: 'boolean',
-      default: 'false',
-      source: 'themeable',
+      name: 'length',
+      type: [
+        'number',
+        'string',
+      ],
+      default: 'undefined',
+      source: 'v-divider',
+    },
+    {
+      name: 'thickness',
+      type: [
+        'number',
+        'string',
+      ],
+      default: 'undefined',
+      source: 'v-divider',
     },
     {
       name: 'vertical',

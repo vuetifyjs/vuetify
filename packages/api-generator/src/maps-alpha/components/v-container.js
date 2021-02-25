@@ -9,12 +9,6 @@ module.exports = {
       default: 'false',
       source: 'v-container',
     },
-    {
-      name: 'id',
-      type: 'string',
-      default: 'undefined',
-      source: 'v-container',
-    },
   ],
   slots: [
     {

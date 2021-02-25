@@ -7,199 +7,37 @@ module.exports = {
   ],
   props: [
     {
-      name: 'absolute',
-      type: 'boolean',
-      default: 'false',
-      source: 'positionable',
-    },
-    {
-      name: 'active-class',
-      type: 'string',
-      default: '',
-      source: 'routable',
-    },
-    {
-      name: 'append',
-      type: 'boolean',
-      default: 'false',
-      source: 'routable',
-    },
-    {
       name: 'block',
       type: 'boolean',
       default: 'false',
       source: 'v-btn',
     },
     {
-      name: 'bottom',
-      type: 'boolean',
-      default: 'false',
-      source: 'positionable',
-    },
-    {
       name: 'color',
       type: 'string',
-      default: 'undefined',
-      source: 'colorable',
-    },
-    {
-      name: 'dark',
-      type: 'boolean',
-      default: 'false',
-      source: 'themeable',
-    },
-    {
-      name: 'depressed',
-      type: 'boolean',
-      default: 'false',
+      default: "'primary'",
       source: 'v-btn',
     },
     {
       name: 'disabled',
       type: 'boolean',
       default: 'false',
-      source: 'routable',
-    },
-    {
-      name: 'elevation',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'elevatable',
-    },
-    {
-      name: 'exact',
-      type: 'boolean',
-      default: 'false',
-      source: 'routable',
-    },
-    {
-      name: 'exact-active-class',
-      type: 'string',
-      default: 'undefined',
-      source: 'routable',
-    },
-    {
-      name: 'fab',
-      type: 'boolean',
-      default: 'false',
       source: 'v-btn',
     },
     {
-      name: 'fixed',
+      name: 'flat',
       type: 'boolean',
       default: 'false',
-      source: 'positionable',
-    },
-    {
-      name: 'height',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
-    },
-    {
-      name: 'href',
-      type: [
-        'string',
-        'object',
-      ],
-      default: 'undefined',
-      source: 'routable',
+      source: 'v-btn',
     },
     {
       name: 'icon',
-      type: 'boolean',
+      type: [
+        'boolean',
+        'string',
+      ],
       default: 'false',
       source: 'v-btn',
-    },
-    {
-      name: 'input-value',
-      type: 'any',
-      default: 'undefined',
-      source: 'toggleable',
-    },
-    {
-      name: 'large',
-      type: 'boolean',
-      default: 'false',
-      source: 'sizeable',
-    },
-    {
-      name: 'left',
-      type: 'boolean',
-      default: 'false',
-      source: 'positionable',
-    },
-    {
-      name: 'light',
-      type: 'boolean',
-      default: 'false',
-      source: 'themeable',
-    },
-    {
-      name: 'link',
-      type: 'boolean',
-      default: 'false',
-      source: 'routable',
-    },
-    {
-      name: 'loading',
-      type: 'boolean',
-      default: 'false',
-      source: 'v-btn',
-    },
-    {
-      name: 'max-height',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
-    },
-    {
-      name: 'max-width',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
-    },
-    {
-      name: 'min-height',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
-    },
-    {
-      name: 'min-width',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
-    },
-    {
-      name: 'nuxt',
-      type: 'boolean',
-      default: 'false',
-      source: 'routable',
-    },
-    {
-      name: 'outlined',
-      type: 'boolean',
-      default: 'false',
-      source: 'v-sheet',
     },
     {
       name: 'plain',
@@ -208,55 +46,10 @@ module.exports = {
       source: 'v-btn',
     },
     {
-      name: 'replace',
-      type: 'boolean',
-      default: 'false',
-      source: 'routable',
-    },
-    {
-      name: 'retain-focus-on-click',
-      type: 'boolean',
-      default: 'false',
-      source: 'v-btn',
-    },
-    {
-      name: 'right',
-      type: 'boolean',
-      default: 'false',
-      source: 'positionable',
-    },
-    {
-      name: 'ripple',
-      type: [
-        'boolean',
-        'object',
-      ],
-      default: 'undefined',
-      source: 'routable',
-    },
-    {
-      name: 'rounded',
-      type: 'boolean',
-      default: 'false',
-      source: 'roundable',
-    },
-    {
-      name: 'shaped',
-      type: 'boolean',
-      default: 'false',
-      source: 'v-sheet',
-    },
-    {
-      name: 'small',
-      type: 'boolean',
-      default: 'false',
-      source: 'sizeable',
-    },
-    {
-      name: 'target',
+      name: 'tag',
       type: 'string',
-      default: 'undefined',
-      source: 'routable',
+      default: "'button'",
+      source: 'tag',
     },
     {
       name: 'text',
@@ -264,74 +57,12 @@ module.exports = {
       default: 'false',
       source: 'v-btn',
     },
-    {
-      name: 'tile',
-      type: 'boolean',
-      default: 'false',
-      source: 'roundable',
-    },
-    {
-      name: 'to',
-      type: [
-        'string',
-        'object',
-      ],
-      default: 'undefined',
-      source: 'routable',
-    },
-    {
-      name: 'top',
-      type: 'boolean',
-      default: 'false',
-      source: 'positionable',
-    },
-    {
-      name: 'type',
-      type: 'string',
-      default: "'button'",
-      source: 'v-btn',
-    },
-    {
-      name: 'value',
-      type: 'any',
-      default: 'undefined',
-      source: 'v-btn',
-    },
-    {
-      name: 'width',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
-    },
-    {
-      name: 'x-large',
-      type: 'boolean',
-      default: 'false',
-      source: 'sizeable',
-    },
-    {
-      name: 'x-small',
-      type: 'boolean',
-      default: 'false',
-      source: 'sizeable',
-    },
   ],
   slots: [
     {
       name: 'default',
     },
-    {
-      name: 'loader',
-    },
   ],
-  events: [
-    {
-      name: 'click',
-      value: 'Event',
-    },
-  ],
+  events: [],
   functions: [],
 }

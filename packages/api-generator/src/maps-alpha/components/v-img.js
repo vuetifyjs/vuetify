@@ -10,29 +10,17 @@ module.exports = {
     {
       name: 'aspect-ratio',
       type: [
-        'string',
         'number',
+        'string',
       ],
       default: 'undefined',
-      source: 'v-responsive',
-    },
-    {
-      name: 'contain',
-      type: 'boolean',
-      default: 'false',
       source: 'v-img',
     },
     {
-      name: 'content-class',
-      type: 'string',
-      default: 'undefined',
-      source: 'v-responsive',
-    },
-    {
-      name: 'dark',
+      name: 'cover',
       type: 'boolean',
       default: 'false',
-      source: 'themeable',
+      source: 'v-img',
     },
     {
       name: 'eager',
@@ -41,72 +29,19 @@ module.exports = {
       source: 'v-img',
     },
     {
-      name: 'gradient',
-      type: 'string',
-      default: 'undefined',
-      source: 'v-img',
-    },
-    {
-      name: 'height',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
-    },
-    {
       name: 'lazy-src',
       type: 'string',
       default: 'undefined',
       source: 'v-img',
     },
     {
-      name: 'light',
-      type: 'boolean',
-      default: 'false',
-      source: 'themeable',
-    },
-    {
-      name: 'max-height',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
-    },
-    {
-      name: 'max-width',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
-    },
-    {
-      name: 'min-height',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
-    },
-    {
-      name: 'min-width',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
-    },
-    {
       name: 'options',
       type: 'object',
-      default: {},
+      default: {
+        root: undefined,
+        rootMargin: undefined,
+        threshold: undefined
+      },
       source: 'v-img',
     },
     {
@@ -127,11 +62,17 @@ module.exports = {
         'string',
         'object',
       ],
-      default: 'undefined',
+      default: "''",
       source: 'v-img',
     },
     {
       name: 'srcset',
+      type: 'string',
+      default: 'undefined',
+      source: 'v-img',
+    },
+    {
+      name: 'theme',
       type: 'string',
       default: 'undefined',
       source: 'v-img',
@@ -142,25 +83,31 @@ module.exports = {
         'boolean',
         'string',
       ],
-      default: 'fade-transition',
+      default: "'fade-transition'",
       source: 'v-img',
-    },
-    {
-      name: 'width',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
     },
   ],
   slots: [
     {
+      name: 'additional',
+    },
+    {
       name: 'default',
     },
     {
+      name: 'error',
+    },
+    {
+      name: 'image',
+    },
+    {
       name: 'placeholder',
+    },
+    {
+      name: 'preloadImage',
+    },
+    {
+      name: 'sources',
     },
   ],
   events: [
@@ -170,6 +117,10 @@ module.exports = {
     },
     {
       name: 'load',
+      value: 'object | string',
+    },
+    {
+      name: 'loadstart',
       value: 'object | string',
     },
   ],

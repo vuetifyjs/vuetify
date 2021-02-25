@@ -1,5 +1,7 @@
 module.exports = {
-  composables: [],
+  composables: [
+    'tag',
+  ],
   props: [
     {
       name: 'align-self',
@@ -11,8 +13,8 @@ module.exports = {
       name: 'cols',
       type: [
         'boolean',
-        'string',
         'number',
+        'string',
       ],
       default: false,
       source: 'v-col',
@@ -21,8 +23,8 @@ module.exports = {
       name: 'lg',
       type: [
         'boolean',
-        'string',
         'number',
+        'string',
       ],
       default: false,
       source: 'v-col',
@@ -31,8 +33,8 @@ module.exports = {
       name: 'md',
       type: [
         'boolean',
-        'string',
         'number',
+        'string',
       ],
       default: false,
       source: 'v-col',
@@ -40,8 +42,8 @@ module.exports = {
     {
       name: 'offset',
       type: [
-        'string',
         'number',
+        'string',
       ],
       default: 'undefined',
       source: 'v-col',
@@ -49,8 +51,8 @@ module.exports = {
     {
       name: 'offset-lg',
       type: [
-        'string',
         'number',
+        'string',
       ],
       default: 'undefined',
       source: 'v-col',
@@ -58,8 +60,8 @@ module.exports = {
     {
       name: 'offset-md',
       type: [
-        'string',
         'number',
+        'string',
       ],
       default: 'undefined',
       source: 'v-col',
@@ -67,8 +69,8 @@ module.exports = {
     {
       name: 'offset-sm',
       type: [
-        'string',
         'number',
+        'string',
       ],
       default: 'undefined',
       source: 'v-col',
@@ -76,8 +78,8 @@ module.exports = {
     {
       name: 'offset-xl',
       type: [
-        'string',
         'number',
+        'string',
       ],
       default: 'undefined',
       source: 'v-col',
@@ -85,8 +87,8 @@ module.exports = {
     {
       name: 'order',
       type: [
-        'string',
         'number',
+        'string',
       ],
       default: 'undefined',
       source: 'v-col',
@@ -94,8 +96,8 @@ module.exports = {
     {
       name: 'order-lg',
       type: [
-        'string',
         'number',
+        'string',
       ],
       default: 'undefined',
       source: 'v-col',
@@ -103,8 +105,8 @@ module.exports = {
     {
       name: 'order-md',
       type: [
-        'string',
         'number',
+        'string',
       ],
       default: 'undefined',
       source: 'v-col',
@@ -112,8 +114,8 @@ module.exports = {
     {
       name: 'order-sm',
       type: [
-        'string',
         'number',
+        'string',
       ],
       default: 'undefined',
       source: 'v-col',
@@ -121,8 +123,8 @@ module.exports = {
     {
       name: 'order-xl',
       type: [
-        'string',
         'number',
+        'string',
       ],
       default: 'undefined',
       source: 'v-col',
@@ -131,8 +133,8 @@ module.exports = {
       name: 'sm',
       type: [
         'boolean',
-        'string',
         'number',
+        'string',
       ],
       default: false,
       source: 'v-col',
@@ -141,8 +143,8 @@ module.exports = {
       name: 'xl',
       type: [
         'boolean',
-        'string',
         'number',
+        'string',
       ],
       default: false,
       source: 'v-col',

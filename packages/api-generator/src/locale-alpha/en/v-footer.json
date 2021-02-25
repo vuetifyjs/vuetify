@@ -1,6 +1,0 @@
-{
-  "props": {
-    "inset": "Positions the toolbar offset from an application `v-navigation-drawer`",
-    "padless": "Remove all padding from the footer"
-  }
-}

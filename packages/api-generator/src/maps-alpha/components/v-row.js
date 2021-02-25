@@ -1,5 +1,7 @@
 module.exports = {
-  composables: [],
+  composables: [
+    'tag',
+  ],
   props: [
     {
       name: 'align',

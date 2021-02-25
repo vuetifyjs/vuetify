@@ -4,40 +4,10 @@ module.exports = {
   ],
   props: [
     {
-      name: 'app',
-      type: 'boolean',
-      default: 'false',
-      source: 'v-banner',
-    },
-    {
-      name: 'color',
+      name: 'avatar',
       type: 'string',
       default: 'undefined',
-      source: 'colorable',
-    },
-    {
-      name: 'dark',
-      type: 'boolean',
-      default: 'false',
-      source: 'themeable',
-    },
-    {
-      name: 'elevation',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'elevatable',
-    },
-    {
-      name: 'height',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
+      source: 'v-banner',
     },
     {
       name: 'icon',
@@ -46,81 +16,9 @@ module.exports = {
       source: 'v-banner',
     },
     {
-      name: 'icon-color',
-      type: 'string',
-      default: 'undefined',
+      name: 'mobile',
+      type: 'boolean',
       source: 'v-banner',
-    },
-    {
-      name: 'light',
-      type: 'boolean',
-      default: 'false',
-      source: 'themeable',
-    },
-    {
-      name: 'max-height',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
-    },
-    {
-      name: 'max-width',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
-    },
-    {
-      name: 'min-height',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
-    },
-    {
-      name: 'min-width',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
-    },
-    {
-      name: 'mobile-breakpoint',
-      type: [
-        'number',
-        'string',
-      ],
-      source: 'mobile',
-    },
-    {
-      name: 'outlined',
-      type: 'boolean',
-      default: 'false',
-      source: 'v-sheet',
-    },
-    {
-      name: 'rounded',
-      type: [
-        'boolean',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'roundable',
-    },
-    {
-      name: 'shaped',
-      type: 'boolean',
-      default: 'false',
-      source: 'v-sheet',
     },
     {
       name: 'single-line',
@@ -134,47 +32,18 @@ module.exports = {
       default: 'false',
       source: 'v-banner',
     },
-    {
-      name: 'tile',
-      type: 'boolean',
-      default: 'false',
-      source: 'roundable',
-    },
-    {
-      name: 'value',
-      type: 'boolean',
-      default: 'true',
-      source: 'toggleable',
-    },
-    {
-      name: 'width',
-      type: [
-        'number',
-        'string',
-      ],
-      default: 'undefined',
-      source: 'measurable',
-    },
   ],
   slots: [
     {
       name: 'actions',
-      props: {
-        dismiss: '(): void',
-      },
     },
     {
       name: 'default',
     },
     {
-      name: 'icon',
+      name: 'thumbnail',
     },
   ],
   events: [],
-  functions: [
-    {
-      name: 'toggle',
-      signature: '(): void',
-    },
-  ],
+  functions: [],
 }

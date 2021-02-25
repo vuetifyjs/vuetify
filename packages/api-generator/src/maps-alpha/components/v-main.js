@@ -3,7 +3,11 @@ module.exports = {
     'tag',
   ],
   props: [],
-  slots: [],
+  slots: [
+    {
+      name: 'default',
+    },
+  ],
   events: [],
   functions: [],
 }
