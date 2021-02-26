@@ -42,7 +42,7 @@ export default Colorable.extend({
 
   data: () => ({
     radius: 20,
-    isVisible: false,
+    isVisible: true,
   }),
 
   computed: {

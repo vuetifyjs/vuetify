@@ -19,6 +19,9 @@ describe('VProgressCircular.ts', () => {
 
   it('should render component and match snapshot', () => {
     const wrapper = mountFunction({
+      data: () => ({
+        isVisible: false,
+      }),
       propsData: {
         value: 33,
       },
@@ -139,6 +142,7 @@ describe('VProgressCircular.ts', () => {
   })
 
   it('should set isVisible with onObserve', () => {
+    expect((new VProgressCircular()).isVisible).toEqual(true)
     const wrapper = mountFunction()
     expect(wrapper.vm.isVisible).toEqual(false)
     wrapper.vm.onObserve(null, null, true)
