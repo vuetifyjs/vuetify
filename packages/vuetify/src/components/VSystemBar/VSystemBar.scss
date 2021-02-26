@@ -19,7 +19,7 @@
   }
 
   @include border($system-bar-query);
-  @include elevated($system-bar-query);
+  @include elevated($system-bar-elevation);
   @include position($system-bar-query);
   @include rounded($system-bar-query);
 

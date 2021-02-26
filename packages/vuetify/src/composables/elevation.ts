@@ -1,11 +1,14 @@
+// Utilities
 import { computed } from 'vue'
 import propsFactory from '@/util/propsFactory'
 
 // Types
 export interface ElevationProps {
   elevation?: number | string | null
+  flat?: boolean
 }
 
+// Composables
 export const makeElevationProps = propsFactory({
   elevation: {
     type: [Number, String],
@@ -21,18 +24,14 @@ export const makeElevationProps = propsFactory({
       )
     },
   },
+  flat: Boolean,
 })
 
-// Effect
-export function useElevation (props: ElevationProps) {
+export function useElevation (props: ElevationProps, name: string) {
   const elevationClasses = computed(() => {
-    const classes: string[] = []
+    if (props.flat) return `${name}--flat`
 
-    if (props.elevation == null) return classes
-
-    classes.push(`elevation-${props.elevation}`)
-
-    return classes
+    return props.elevation != null ? `elevation-${props.elevation}` : undefined
   })
 
   return { elevationClasses }

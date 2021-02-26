@@ -2,7 +2,7 @@
 $system-bar-background: rgba(var(--v-theme-on-background), 0.02) !default;
 $system-bar-border-radius: map-get($rounded, 0) !default;
 $system-bar-icon-color: rgba(var(--v-theme-on-background), 0.50) !default;
-$system-bar-elevation: 0 !default;
+$system-bar-default: 0 !default;
 $system-bar-flex: 1 1 auto !default;
 $system-bar-font-size: map-deep-get($headings, 'body-1', 'size') !default;
 $system-bar-font-weight: map-deep-get($headings, 'body-1', 'weight') !default;
@@ -18,8 +18,16 @@ $system-bar-query: () !default;
 $system-bar-query: map-deep-merge(
   (
     'border-radius': $system-bar-border-radius,
-    'elevation': $system-bar-elevation,
     'position': $system-bar-positions
   ),
   $system-bar-query
 ) !default;
+
+$system-bar-elevation: () !default;
+$system-bar-elevation: map-merge(
+  (
+    'default': $system-bar-default,
+    'flat': $system-bar-default,
+  ),
+  $system-bar-elevation,
+);

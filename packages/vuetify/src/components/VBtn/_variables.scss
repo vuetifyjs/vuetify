@@ -7,7 +7,12 @@ $button-border-style: $border-style-root !default;
 $button-border-width: thin !default;
 $button-disabled-opacity: 0.26 !default;
 $button-disabled-overlay: 0.12 !default;
-$button-elevation: ('default': 2, 'hover': 4, 'active': 8) !default;
+$button-elevation-active: 8 !default;
+$button-elevation-default: 0 !default;
+$button-elevation-elevated: 2 !default;
+$button-elevation-flat: 0 !default;
+$button-elevation-focus: 4 !default;
+$button-elevation-hover: 4 !default;
 $button-font-size: map-deep-get($headings, 'button', 'size') !default;
 $button-font-weight: map-deep-get($headings, 'button', 'weight') !default;
 $button-height: 36px !default;
@@ -31,6 +36,19 @@ $button-border: map-merge(
     'border-width': $button-border-width,
   ),
   $button-border
+);
+
+$button-elevation: () !default;
+$button-elevation: map-merge(
+  (
+    'active': $button-elevation-active,
+    'default': $button-elevation-default,
+    'elevated': $button-elevation-elevated,
+    'flat': $button-elevation-flat,
+    'focus': $button-elevation-focus,
+    'hover': $button-elevation-hover,
+  ),
+  $button-elevation
 );
 
 $button-query: () !default;

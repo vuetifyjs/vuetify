@@ -24,7 +24,6 @@ export default defineComponent({
 
   props: makeProps({
     text: Boolean,
-    flat: Boolean,
     plain: Boolean,
     icon: [Boolean, String],
 

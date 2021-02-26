@@ -3,10 +3,14 @@
 
 // Temporary name until the above is refactored
 @mixin elevated($query, $important: false)
-  $elevation: map-get($query, 'elevation')
+  $default: map-get($query, 'default')
+  $flat: map-get($query, 'flat')
 
-  box-shadow: map-get($shadow-key-umbra, $elevation), map-get($shadow-key-penumbra, $elevation), map-get($shadow-key-ambient, $elevation) if($important, !important, null)
+  box-shadow: map-get($shadow-key-umbra, $default), map-get($shadow-key-penumbra, $default), map-get($shadow-key-ambient, $default) if($important, !important, null)
 
+  @if $flat
+    &--flat
+      box-shadow: map-get($shadow-key-umbra, $flat), map-get($shadow-key-penumbra, $flat), map-get($shadow-key-ambient, $flat) if($important, !important, null)
 
 @mixin elevationTransition($duration: 280ms, $easing: cubic-bezier(0.4, 0, 0.2, 1))
   transition: box-shadow $duration $easing

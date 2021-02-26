@@ -39,7 +39,7 @@ export function useSheet (props: SheetProps, name: string) {
   const { borderClasses } = useBorder(props, name)
   const { borderRadiusClasses } = useBorderRadius(props)
   const { dimensionStyles } = useDimension(props)
-  const { elevationClasses } = useElevation(props)
+  const { elevationClasses } = useElevation(props, name)
   const { positionClasses, positionStyles } = usePosition(props, name)
 
   return {

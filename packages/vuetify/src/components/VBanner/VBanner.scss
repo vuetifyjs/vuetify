@@ -20,7 +20,7 @@
     top: auto;
   }
 
-  @include elevated($banner-query);
+  @include elevated($banner-elevation);
   @include position($banner-query);
   @include rounded($banner-query);
 

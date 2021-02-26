@@ -4,17 +4,17 @@ import { makeElevationProps, useElevation } from '../elevation'
 describe('elevation.ts', () => {
   it('should have the correct class', () => {
     const values = [
-      [1, ['elevation-1']],
-      [undefined, []],
-      [null, []],
-      [20, ['elevation-20']],
-      [0, ['elevation-0']],
-      ['14', ['elevation-14']],
+      [{ elevation: 1 }, 'elevation-1'],
+      [{ elevation: undefined }, undefined],
+      [{ elevation: null }, undefined],
+      [{ elevation: 20 }, 'elevation-20'],
+      [{ elevation: 0 }, 'elevation-0'],
+      [{ elevation: '14' }, 'elevation-14'],
+      [{ flat: true }, 'foo--flat'],
     ] as const
 
-    for (const [elevation, equal] of values) {
-      const props = { elevation }
-      const { elevationClasses } = useElevation(props)
+    for (const [props, equal] of values) {
+      const { elevationClasses } = useElevation(props, 'foo')
 
       expect(elevationClasses.value).toEqual(equal)
     }

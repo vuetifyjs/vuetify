@@ -7,7 +7,8 @@ $banner-border-style: $border-style-root !default;
 $banner-border-width: 0 0 thin 0 !default;
 $banner-content-line-height: 1.25rem !default;
 $banner-content-padding-bottom: 8px !default;
-$banner-elevation: 0 !default;
+$banner-elevation-default: 0 !default;
+$banner-elevation-flat: 0 !default;
 $banner-font-size: map-deep-get($headings, 'body-2', 'size') !default;
 $banner-line-height: 20px !default;
 $banner-padding-bottom: 8px !default;
@@ -46,8 +47,16 @@ $banner-query: map-deep-merge(
     'border-style': $banner-border-style,
     'border-width': $banner-border-width,
     'font-size': $banner-font-size,
-    'elevation': $banner-elevation,
     'position': $banner-positions
   ),
   $banner-query
+);
+
+$banner-elevation: () !default;
+$banner-elevation: map-deep-merge(
+  (
+    'default': $banner-elevation-default,
+    'flat': $banner-elevation-flat,
+  ),
+  $banner-elevation
 );

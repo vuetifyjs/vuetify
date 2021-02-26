@@ -2,7 +2,8 @@
 $footer-border-radius: map-get($rounded, 0) !default;
 $footer-flex: 1 1 auto !default;
 $footer-font-size: 14px;
-$footer-elevation: 0 !default;
+$footer-elevation-default: 0 !default;
+$footer-elevation-flat: 0 !default;
 $footer-padding: 8px 24px !default;
 $footer-positions: absolute fixed !default;
 
@@ -15,3 +16,12 @@ $footer-query: map-deep-merge(
   ),
   $footer-query
 ) !default;
+
+$footer-elevation: () !default;
+$footer-elevation: map-merge(
+  (
+    'default': $footer-elevation-default,
+    'flat': $footer-elevation-flat,
+  ),
+  $footer-elevation,
+);

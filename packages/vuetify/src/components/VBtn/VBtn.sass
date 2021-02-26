@@ -24,6 +24,7 @@
     +sizes('v-btn', $button-query)
     +density('v-btn', 'height', $button-density)
 
+  +elevated($button-elevation)
   +states('.v-btn__overlay')
 
   &--icon
@@ -38,11 +39,13 @@
     +border($button-border)
 
   &--elevated
-    +elevation(map-get($button-elevation, 'default'))
+    +elevation(map-get($button-elevation, 'elevated'))
 
-    &:hover,
-    &:focus
+    &:hover
       +elevation(map-get($button-elevation, 'hover'))
+
+    &:focus
+      +elevation(map-get($button-elevation, 'focus'))
 
     &:active
       +elevation(map-get($button-elevation, 'active'))
