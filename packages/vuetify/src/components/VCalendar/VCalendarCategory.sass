@@ -9,7 +9,7 @@
 .v-calendar-category
   .v-calendar-category__category
     text-align: center
-    
+
   .v-calendar-daily__day-container
     .v-calendar-category__columns
       position: absolute
@@ -19,9 +19,18 @@
 
   .v-calendar-category__columns
     display: flex
-    
+
     .v-calendar-category__column,
     .v-calendar-category__column-header
       flex: 1 1 auto
       width: 0
       position: relative
+
+    .v-calendar-category__column-header
+      min-width: $calendar-category-column-min-width
+
+  .v-calendar-category__horizontal-scrollable
+    width: 100%
+    overflow-x: scroll
+    .v-calendar-daily__day
+      min-width: $calendar-category-column-min-width
