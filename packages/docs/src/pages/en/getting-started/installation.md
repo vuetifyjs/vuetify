@@ -102,12 +102,12 @@ To install Vuetify into a Webpack project you need to add a few dependencies:
 
 ```bash
 yarn add vuetify
-// yarn add vuetify@npm:@vuetify/nightly@master
+// yarn add vuetify@npm:@vuetify/nightly
 // yarn add vuetify@npm:@vuetify/nightly@dev
 // yarn add vuetify@npm:@vuetify/nightly@next
 # OR
 npm install vuetify
-// npm install vuetify@npm:@vuetify/nightly@master
+// npm install vuetify@npm:@vuetify/nightly
 // npm install vuetify@npm:@vuetify/nightly@dev
 // npm install vuetify@npm:@vuetify/nightly@next
 ```
