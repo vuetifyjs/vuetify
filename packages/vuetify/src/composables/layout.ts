@@ -12,6 +12,13 @@ interface LayoutProvide {
   register: (id: string, priority: Ref<number>, position: Ref<Position>, amount: Ref<number | string>) => Ref<Record<string, unknown>>
   unregister: (id: string) => void
   mainStyles: Ref<Record<string, unknown>>
+  getLayoutItem: (id: string) => {
+    top: number
+    bottom: number
+    left: number
+    right: number
+    size: number
+  } | null
 }
 
 export const VuetifyLayoutKey: InjectionKey<LayoutProvide> = Symbol.for('vuetify:layout')
@@ -141,7 +148,7 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
     }
   })
 
-  const get = (id: string) => {
+  const getLayoutItem = (id: string) => {
     if (!registered.value.includes(id)) return null
 
     const index = layers.value.findIndex(l => l.id === id)
@@ -196,7 +203,8 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
       registered.value = registered.value.filter(v => v !== id)
     },
     mainStyles,
+    getLayoutItem,
   })
 
-  return { layoutClasses: ref('v-layout'), get }
+  return { layoutClasses: ref('v-layout') }
 }
