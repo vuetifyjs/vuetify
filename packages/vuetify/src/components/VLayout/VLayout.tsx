@@ -13,8 +13,13 @@ export default defineComponent({
 
   props: makeProps(makeLayoutProps()),
 
-  setup (props, { slots }) {
-    const { layoutClasses } = createLayout(props)
+  setup (props, { slots, expose }) {
+    const { layoutClasses, getLayoutItem, items } = createLayout(props)
+
+    expose({
+      getLayoutItem,
+      items,
+    })
 
     return () => (
       <div

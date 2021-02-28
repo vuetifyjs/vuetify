@@ -8,17 +8,21 @@ import type { InjectionKey, Ref, Prop } from 'vue'
 
 type Position = 'top' | 'left' | 'right' | 'bottom'
 
+type LayoutItem = {
+  id: string
+  top: number
+  bottom: number
+  left: number
+  right: number
+  size: number
+}
+
 interface LayoutProvide {
   register: (id: string, priority: Ref<number>, position: Ref<Position>, amount: Ref<number | string>) => Ref<Record<string, unknown>>
   unregister: (id: string) => void
   mainStyles: Ref<Record<string, unknown>>
-  getLayoutItem: (id: string) => {
-    top: number
-    bottom: number
-    left: number
-    right: number
-    size: number
-  } | null
+  getLayoutItem: (id: string) => LayoutItem | undefined
+  items: Ref<LayoutItem[]>
 }
 
 export const VuetifyLayoutKey: InjectionKey<LayoutProvide> = Symbol.for('vuetify:layout')
@@ -148,15 +152,21 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
     }
   })
 
+  const items = computed(() => {
+    return layers.value.slice(1).map(({ id }, index) => {
+      const { layer } = layers.value[index]
+      const size = amounts.get(id)
+
+      return {
+        id,
+        ...layer,
+        size: Number(size!.value),
+      }
+    })
+  })
+
   const getLayoutItem = (id: string) => {
-    if (!registered.value.includes(id)) return null
-
-    const index = layers.value.findIndex(l => l.id === id)
-
-    return {
-      ...layers.value[index - 1].layer,
-      size: Number(amounts.get(id)!.value),
-    }
+    return items.value.find(item => item.id === id)
   }
 
   provide(VuetifyLayoutKey, {
@@ -167,15 +177,17 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
       registered.value.push(id)
 
       return computed(() => {
-        const index = layers.value.findIndex(l => l.id === id)
+        const index = items.value.findIndex(i => i.id === id)
 
         if (index < 0) throw new Error(`Layout item "${id}" is missing from layout prop`)
 
-        const item = layers.value[index - 1]
+        const item = items.value[index]
+
+        if (!item) throw new Error(`Could not find layout item "${id}`)
 
         const overlap = computedOverlaps.value.get(id)
         if (overlap) {
-          item.layer[overlap.position] += overlap.amount
+          item[overlap.position] += overlap.amount
         }
 
         const isHorizontal = position.value === 'left' || position.value === 'right'
@@ -184,12 +196,12 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
         const amount = amounts.get(id)
 
         return {
-          width: !isHorizontal ? `calc(100% - ${item.layer.left}px - ${item.layer.right}px)` : `${amount?.value ?? 0}px`,
-          height: isHorizontal ? `calc(100% - ${item.layer.top}px - ${item.layer.bottom}px)` : `${amount?.value ?? 0}px`,
-          marginLeft: isOpposite ? undefined : `${item.layer.left}px`,
-          marginRight: isOpposite ? `${item.layer.right}px` : undefined,
-          marginTop: position.value !== 'bottom' ? `${item.layer.top}px` : undefined,
-          marginBottom: position.value !== 'top' ? `${item.layer.bottom}px` : undefined,
+          width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : `${amount?.value ?? 0}px`,
+          height: isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)` : `${amount?.value ?? 0}px`,
+          marginLeft: isOpposite ? undefined : `${item.left}px`,
+          marginRight: isOpposite ? `${item.right}px` : undefined,
+          marginTop: position.value !== 'bottom' ? `${item.top}px` : undefined,
+          marginBottom: position.value !== 'top' ? `${item.bottom}px` : undefined,
           [position.value]: 0,
           zIndex: layers.value.length - index,
           position: 'absolute',
@@ -204,7 +216,8 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
     },
     mainStyles,
     getLayoutItem,
+    items,
   })
 
-  return { layoutClasses: ref('v-layout') }
+  return { layoutClasses: ref('v-layout'), getLayoutItem, items }
 }
