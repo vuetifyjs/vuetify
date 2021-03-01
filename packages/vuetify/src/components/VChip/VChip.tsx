@@ -1,43 +1,26 @@
-// @ts-nocheck
-/* eslint-disable */
-
 // Styles
 import './VChip.sass'
 
-// Types
-import { VNode } from 'vue'
-import mixins from '../../util/mixins'
+// Composables
+import { makeTagProps } from '@/composables/tag'
+import { useColor } from '@/composables/color'
+
+// Directives
+import { Ripple, RippleDirectiveBinding } from '@/directives/ripple'
 
 // Components
-import { VExpandXTransition } from '../transitions'
-import VIcon from '../VIcon'
-
-// Mixins
-import Colorable from '../../mixins/colorable'
-import { factory as GroupableFactory } from '../../mixins/groupable'
-import Themeable from '../../mixins/themeable'
-import { factory as ToggleableFactory } from '../../mixins/toggleable'
-import Routable from '../../mixins/routable'
-import Sizeable from '../../mixins/sizeable'
+// import { VExpandXTransition } from '../transitions'
 
 // Utilities
-import { breaking } from '../../util/console'
+import { computed, defineComponent, withDirectives } from 'vue'
+import makeProps from '@/util/makeProps'
+import { useDirective } from '@/util/useDirective'
+import { makeSizeProps, useSize } from '@/composables/size'
 
-// Types
-import { PropValidator, PropType } from 'vue/types/options'
+export default defineComponent({
+  name: 'VChip',
 
-/* @vue/component */
-export default mixins(
-  Colorable,
-  Sizeable,
-  Routable,
-  Themeable,
-  GroupableFactory('chipGroup'),
-  ToggleableFactory('inputValue')
-).extend({
-  name: 'v-chip',
-
-  props: {
+  props: makeProps({
     active: {
       type: Boolean,
       default: true,
@@ -70,14 +53,70 @@ export default mixins(
     link: Boolean,
     outlined: Boolean,
     pill: Boolean,
-    tag: {
-      type: String,
-      default: 'span',
-    },
     textColor: String,
     value: null as any as PropType<any>,
-  },
 
+    ...makeSizeProps(),
+    ...makeTagProps({ tag: 'span' })
+  }),
+
+  setup (props, { slots }) {
+    const { sizeClasses } = useSize(props, 'v-chip')
+    
+    const isContained = computed(() => {
+      return !(props.outlined)
+    })
+
+    const isElevated = computed(() => {
+      return isContained.value && !(props.disabled)
+    })
+
+    const { colorClasses, colorStyles } = useColor(computed(() => ({
+      [isContained.value ? 'background' : 'text']: props.color
+    })))
+
+    return () => withDirectives(
+      <props.tag
+        class={[
+          'v-chip',
+          {
+            'v-chip--clickable': this.isClickable,
+            'v-chip--contained': isContained.value,
+            'v-chip--disabled': props.disabled,
+            'v-chip--elevated': isElevated.value,
+            'v-chip--draggable': props.draggable,
+            'v-chip--label': props.label,
+            'v-chip--link': props.isLink,
+            'v-chip--no-color': !props.color,
+            'v-chip--outlined': props.outlined,
+            'v-chip--pill': props.pill,
+            'v-chip--removable': props.hasClose,
+          },
+          colorClasses.value,
+          sizeClasses.value,
+        ]}
+        style={[
+          colorStyles.value
+        ]}
+        disabled={ props.disabled }
+      >
+
+      </props.tag>
+      [useDirective<RippleDirectiveBinding>(Ripple, {
+        value: !props.disabled
+      })]
+    )
+  }
+})
+
+// Mixins
+// import Colorable from '../../mixins/colorable'
+// import { factory as GroupableFactory } from '../../mixins/groupable'
+// import Themeable from '../../mixins/themeable'
+// import { factory as ToggleableFactory } from '../../mixins/toggleable'
+// import Routable from '../../mixins/routable'
+
+/*
   data: () => ({
     proxyClass: 'v-chip--active',
   }),
@@ -119,8 +158,9 @@ export default mixins(
       ['value', 'active'],
       ['@input', '@active.sync'],
     ]
-
+*/
     /* istanbul ignore next */
+    /*
     breakingProps.forEach(([original, replacement]) => {
       if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
     })
@@ -197,4 +237,4 @@ export default mixins(
 
     return h(tag, this.setTextColor(color, data), children)
   },
-})
+})*/
