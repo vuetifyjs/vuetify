@@ -1,8 +1,8 @@
 // Imports
-@import './_variables.scss'
+@import './index'
 
 .v-sheet
-  @include border($sheet-query)
-  @include elevated($sheet-query)
-  @include position($sheet-query)
-  @include rounded($sheet-query)
+  @include border($sheet-border-color, $sheet-border-style, $sheet-border-width)
+  @include elevated($sheet-elevation)
+  @include position($sheet-positions)
+  // Default missing in variables @include rounded($sheet-query)

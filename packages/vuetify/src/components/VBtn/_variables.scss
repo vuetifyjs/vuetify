@@ -1,5 +1,3 @@
-@import '../../styles/styles.sass';
-
 // Defaults
 $button-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $button-border-radius: $border-radius-root !default;
@@ -33,20 +31,20 @@ $button-border: map-merge(
   $button-border
 );
 
-$button-query: () !default;
-$button-query: map-merge(
+$button-sizes: () !default;
+$button-sizes: map-merge(
     (
       'height': $button-height,
       'font-size': $button-font-size
     ),
-    $button-query
+    $button-sizes
 );
 
-$button-icon-query: () !default;
-$button-icon-query: map-merge(
+$button-icon-sizes: () !default;
+$button-icon-sizes: map-merge(
   (
     'font-size': $button-icon-font-size,
     'size': $button-icon-size
   ),
-  $button-icon-query
+  $button-icon-sizes
 );

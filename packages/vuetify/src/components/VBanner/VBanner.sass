@@ -10,7 +10,7 @@
   width: $banner-width;
 
   &::after {
-    @include border($banner-query);
+    @include border($banner-border-color, $banner-border-style, $banner-border-width);
 
     bottom: 0;
     content: '';
@@ -20,9 +20,9 @@
     top: auto;
   }
 
-  @include elevated($banner-query);
-  @include position($banner-query);
-  @include rounded($banner-query);
+  @include elevated($banner-elevation);
+  @include position($banner-positions);
+  @include rounded($banner-border-radius);
 
   @include ltr() {
     padding-left: $banner-padding-start;
