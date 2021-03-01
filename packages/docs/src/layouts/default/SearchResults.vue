@@ -14,9 +14,10 @@
         v-text="group.name"
       />
 
-      <template v-for="child in group.items">
+      <template v-for="(child, ci) in group.items">
         <v-list-item
           v-if="child.items[0]._highlightResult.hierarchy.lvl1.matchLevel === 'full'"
+          :key="`search-${i}-${ci}`"
           :to="new URL(location.origin + child.items[0].url).pathname"
         >
           <v-list-item-content>
