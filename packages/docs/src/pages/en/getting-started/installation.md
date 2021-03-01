@@ -19,7 +19,7 @@ Get started with Vuetify, the world’s most popular Vue.js framework for buildi
 
 <alert type="error">
 
-  The current version of Vuetify does not support Vue 3. Support for Vue 3 will come with the release of [Vuetify v3](/introduction/roadmap/#v30-titan). When creating a new project, please ensure you selected Vue 2 from the Vue CLI prompts, or that you are installing to an existing Vue 2 project.
+  The current stable version of Vuetify does not support Vue 3. Support for Vue 3 will come with the release of [Vuetify v3](/introduction/roadmap/#v30-titan). When creating a new project meant for production, please ensure you selected Vue 2 from the Vue CLI prompts, or that you are installing to an existing Vue 2 project. If you would like to create or use Vuetify v3 in a test project, you can select v3 in the Vue CLI prompts.
 
 </alert>
 
@@ -102,8 +102,14 @@ To install Vuetify into a Webpack project you need to add a few dependencies:
 
 ```bash
 yarn add vuetify
+// yarn add vuetify@npm:@vuetify/nightly
+// yarn add vuetify@npm:@vuetify/nightly@dev
+// yarn add vuetify@npm:@vuetify/nightly@next
 # OR
 npm install vuetify
+// npm install vuetify@npm:@vuetify/nightly
+// npm install vuetify@npm:@vuetify/nightly@dev
+// npm install vuetify@npm:@vuetify/nightly@next
 ```
 
 ```bash
