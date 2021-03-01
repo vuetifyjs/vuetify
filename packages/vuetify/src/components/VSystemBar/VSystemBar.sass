@@ -18,10 +18,10 @@
     font-size: $system-bar-icon-font-size;
   }
 
-  @include border($system-bar-query);
-  @include elevated($system-bar-query);
-  @include position($system-bar-query);
-  @include rounded($system-bar-query);
+  // Defaults missing in variables @include border($system-bar-query);
+  @include elevated($system-bar-elevation);
+  @include position($system-bar-positions);
+  @include rounded($system-bar-border-radius);
 
   @include ltr() {
     text-align: right;

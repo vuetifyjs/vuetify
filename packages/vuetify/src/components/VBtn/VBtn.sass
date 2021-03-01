@@ -21,7 +21,7 @@
   vertical-align: $button-vertical-align
 
   @at-root
-    +sizes('v-btn', $button-query)
+    +sizes('v-btn', $button-sizes)
     +density('v-btn', 'height', $button-density)
 
   +states('.v-btn__overlay')
@@ -35,7 +35,7 @@
       +density('v-btn', ('width', 'height'), $button-icon-density)
 
   &--border
-    +border($button-border)
+    +border($button-border-color, $button-border-style, $button-border-width)
 
   &--elevated
     +elevation(map-get($button-elevation, 'default'))

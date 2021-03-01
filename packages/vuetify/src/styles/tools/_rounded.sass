@@ -1,2 +1,2 @@
-@mixin rounded($query, $important: false)
-  border-radius: map-get($query, 'border-radius') if($important, !important, null)
+@mixin rounded($radius: null, $important: false)
+  border-radius: $radius if($important, !important, null)
