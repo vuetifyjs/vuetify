@@ -32,5 +32,5 @@ export default defineComponent({
         </div>
       </props.tag>
     )
-  }
+  },
 })
