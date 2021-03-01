@@ -1,5 +1,10 @@
+// Styles
 import './VGrid.sass'
 
+// Composables
+import { makeTagProps } from '@/composables/tag'
+
+// Utilities
 import { capitalize, computed, defineComponent, h } from 'vue'
 import makeProps from '@/util/makeProps'
 
@@ -69,10 +74,6 @@ export default defineComponent({
   name: 'VRow',
 
   props: makeProps({
-    tag: {
-      type: String,
-      default: 'div',
-    },
     dense: Boolean,
     noGutters: Boolean,
     align: {
@@ -93,6 +94,7 @@ export default defineComponent({
       validator: alignContentValidator,
     },
     ...alignContentProps,
+    ...makeTagProps(),
   }),
 
   setup (props, { slots }) {
