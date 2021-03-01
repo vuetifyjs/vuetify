@@ -1,14 +1,14 @@
 // Styles
 import './VMain.sass'
 
-// Utilities
-import { defineComponent } from 'vue'
-import makeProps from '@/util/makeProps'
-
 // Composables
 import { makeTagProps } from '@/composables/tag'
 import { useMain } from '@/composables/layout'
 import { useSsrBoot } from '@/composables/ssrBoot'
+
+// Utilities
+import { defineComponent } from 'vue'
+import makeProps from '@/util/makeProps'
 
 export default defineComponent({
   name: 'VMain',
@@ -22,13 +22,13 @@ export default defineComponent({
     return () => (
       <props.tag
         class="v-main"
-        style={{
-          ...mainStyles.value,
-          ...ssrBootStyles.value,
-        }}
+        style={[
+          mainStyles.value,
+          ssrBootStyles.value,
+        ]}
       >
         <div class="v-main__wrap">
-          {slots.default?.()}
+          { slots.default?.() }
         </div>
       </props.tag>
     )

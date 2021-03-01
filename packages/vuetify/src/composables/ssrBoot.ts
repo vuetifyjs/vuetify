@@ -1,5 +1,7 @@
+// Utilities
 import { computed, onMounted, ref } from 'vue'
 
+// Composables
 export function useSsrBoot () {
   const isBooted = ref(false)
 
@@ -13,7 +15,5 @@ export function useSsrBoot () {
     transition: 'none !important',
   }) : undefined)
 
-  return {
-    ssrBootStyles,
-  }
+  return { ssrBootStyles }
 }

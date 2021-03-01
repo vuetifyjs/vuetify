@@ -196,15 +196,15 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
         const amount = amounts.get(id)
 
         return {
-          width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : `${amount?.value ?? 0}px`,
+          [position.value]: 0,
           height: isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)` : `${amount?.value ?? 0}px`,
           marginLeft: isOpposite ? undefined : `${item.left}px`,
           marginRight: isOpposite ? `${item.right}px` : undefined,
           marginTop: position.value !== 'bottom' ? `${item.top}px` : undefined,
           marginBottom: position.value !== 'top' ? `${item.bottom}px` : undefined,
-          [position.value]: 0,
-          zIndex: layers.value.length - index,
           position: 'absolute',
+          width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : `${amount?.value ?? 0}px`,
+          zIndex: layers.value.length - index,
         }
       })
     },

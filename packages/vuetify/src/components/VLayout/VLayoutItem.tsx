@@ -1,9 +1,8 @@
-// Utilities
-import { toRef, defineComponent, computed } from 'vue'
-import { randomHexColor } from '@/util'
-
 // Composables
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
+
+// Utilities
+import { toRef, defineComponent, computed } from 'vue'
 
 // Types
 import type { Prop } from 'vue'
@@ -12,11 +11,11 @@ export default defineComponent({
   name: 'VLayoutItem',
 
   props: {
-    ...makeLayoutItemProps(),
     position: {
       type: String,
       required: true,
-    } as Prop<'top' | 'left' | 'right' | 'bottom'>,
+    } as Prop<'top' | 'right' | 'bottom' | 'left'>,
+    ...makeLayoutItemProps(),
   },
 
   setup (props, { slots }) {
@@ -27,15 +26,10 @@ export default defineComponent({
       toRef(props, 'size')
     )
 
-    const background = randomHexColor()
-
     return () => (
-      <div
-        style={{
-          background,
-          ...styles.value,
-        }}
-      >{ slots.default?.() }</div>
+      <div style={ styles.value }>
+        { slots.default?.() }
+      </div>
     )
   },
 })
