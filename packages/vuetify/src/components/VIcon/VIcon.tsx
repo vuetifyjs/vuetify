@@ -6,8 +6,8 @@ import { computed, ComputedRef, defineComponent } from 'vue'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { useIcon } from '@/composables/icons'
 import { convertToUnit, flattenFragments } from '@/util'
-import makeProps from '@/util/makeProps'
 import { makeTagProps } from '@/composables/tag'
+import makeProps from '@/util/makeProps'
 
 // Types
 import type { IconValue } from '@/composables/icons'
