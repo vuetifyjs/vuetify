@@ -5,11 +5,7 @@
     "items": [
       "why-vuetify",
       "long-term-support",
-      "roadmap",
-      { "divider": true },
-      { "heading": "professional-support" },
-      "support",
-      "enterprise"
+      "roadmap"
     ]
   },
   {
@@ -18,11 +14,7 @@
     "items": [
       "installation",
       "browser-support",
-      "frequently-asked-questions",
-      "wireframes",
-      "unit-testing",
       "release-notes",
-      "upgrade-guide",
       "contributing"
     ]
   },
@@ -78,15 +70,6 @@
       "ripple",
       "scroll",
       "touch"
-    ]
-  },
-  {
-    "title": "resources",
-    "icon": "$mdiTeach",
-    "items": [
-      "jobs-for-vue",
-      "made-with-vuetify",
-      "themes"
     ]
   },
   {
