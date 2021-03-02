@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VBanner should match a snapshot 1`] = `
-<div class="v-banner  v-theme--light"
+<div class="v-banner v-theme--light"
      role="banner"
 >
   <div class="v-banner__sizer">
