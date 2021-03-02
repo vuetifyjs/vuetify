@@ -52,6 +52,34 @@ export default new Vuetify({
 })
 ```
 
+Define new colors pack.
+
+```js
+const opts = {
+  theme: {
+    themes: {
+      light: {
+        "my-color": "#FF00BB", // Automatically
+        // or
+        "my-color-2" : {
+          // define your color
+          base: '#6D7580',
+          darken4: '#09101D',
+          darken3: '#2C3A4B',
+          darken2: '#394452',
+          darken1: '#545D69',
+          lighten1: '#858C94',
+          lighten2: '#A5ABB3',
+          lighten3: '#DADEE3',
+          lighten4: '#EBEEF2',
+          lighten5: '#EBEEF2',
+        }
+      }
+    }
+  }
+}
+```
+
 ## Sass color pack
 
 While convenient, the color pack increases the CSS export size by ~30kb. Some projects may only require the default provided classes that are created at run-time from the Vuetify bootstrap. To disable this feature, you will have to _manually_ import and build the main **sass** file. This will require a [Sass loader](https://github.com/webpack-contrib/sass-loader) and a `.sass`/`.scss` file entry.
