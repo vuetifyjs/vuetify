@@ -4799,10 +4799,10 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.0.7.tgz#96d52988efc07444c108c7c6803ba7cc93e40045"
   integrity sha512-dn5FyfSc4ky424jH4FntiHno7Ss5yLkqKNmM/NXwANRnlkmqu74pnGetexDFVG5phMk9/FhwovUZCWGxsotVKg==
 
-"@vue/test-utils@^2.0.0-beta.7":
-  version "2.0.0-beta.7"
-  resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-2.0.0-beta.7.tgz#27751991e0b013ee4af487e51e16a58d477e5857"
-  integrity sha512-cAe7VqoxxkxTr/2N93UpW/LQbcUVKC+QRA3ZBq5ZWImtAf/8jtcdC2mQ9g4AKmSvyaKQtqxrRn4i/y5z7yrrKA==
+"@vue/test-utils@^2.0.0-rc.2":
+  version "2.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-2.0.0-rc.2.tgz#a43cb6d1a30d16bb50fa3561397ba1e252683f9d"
+  integrity sha512-doOtnkleRTiN5rk+Losawe9/8i//8rncZ3lIhz/1vnONHDnthF1XjlI7pGZ1RV5uZJ3IUt3yVjwY7W6q9WhlRw==
 
 "@vue/web-component-wrapper@^1.2.0":
   version "1.2.0"

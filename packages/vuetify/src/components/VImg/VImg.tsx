@@ -4,9 +4,11 @@ import './VImg.sass'
 import {
   computed,
   defineComponent,
+  getCurrentInstance,
   h,
   nextTick,
   onBeforeMount,
+  reactive,
   ref,
   vShow,
   watch,
@@ -74,14 +76,16 @@ export default defineComponent({
 
   emits: ['loadstart', 'load', 'error'],
 
-  setup (props, { emit, expose, slots }) {
+  setup (props, { emit, slots }) {
     const currentSrc = ref('') // Set from srcset
     const image = ref<HTMLImageElement>()
     const state = ref<'idle' | 'loading' | 'loaded' | 'error'>('idle')
     const naturalWidth = ref<number>()
     const naturalHeight = ref<number>()
 
-    expose({
+    // TODO: use expose() https://github.com/vuejs/vue-test-utils-next/issues/435
+    const vm = getCurrentInstance() as any
+    vm.setupState = reactive({
       currentSrc,
       image,
       state,
