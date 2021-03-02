@@ -1,45 +1,38 @@
 // Imports
-@import './index';
+@import './index'
 
-.v-system-bar {
-  align-items: center;
-  background: $system-bar-background;
-  display: flex;
-  flex: $system-bar-flex;
-  font-size: $system-bar-font-size;
-  font-weight: $system-bar-font-weight;
-  height: $system-bar-height;
-  justify-content: flex-end;
-  padding: $system-bar-padding;
-  position: relative;
+.v-system-bar
+  align-items: center
+  background: $system-bar-background
+  display: flex
+  flex: $system-bar-flex
+  font-size: $system-bar-font-size
+  font-weight: $system-bar-font-weight
+  height: $system-bar-height
+  justify-content: flex-end
+  padding: $system-bar-padding
+  position: relative
 
-  i {
-    color: $system-bar-icon-color;
-    font-size: $system-bar-icon-font-size;
-  }
+  i
+    color: $system-bar-icon-color
+    font-size: $system-bar-icon-font-size
 
-  // Defaults missing in variables @include border($system-bar-query);
-  @include elevated($system-bar-elevation);
-  @include position($system-bar-positions);
-  @include rounded($system-bar-border-radius);
+  // Defaults missing in variables @include border($system-bar-query)
+  @include elevated($system-bar-elevation)
+  @include position($system-bar-positions)
+  @include rounded($system-bar-border-radius)
 
-  @include ltr() {
-    text-align: right;
-  }
+  @include ltr()
+    text-align: right
 
-  @include rtl() {
-    text-align: left;
-  }
+  @include rtl()
+    text-align: left
 
-  &--lights-out {
-    background: $system-bar-lights-out-background;
-  }
+  &--lights-out
+    background: $system-bar-lights-out-background
 
-  &--window {
-    height: $system-bar-window-height;
+  &--window
+    height: $system-bar-window-height
 
-    i {
-      font-size: $system-bar-window-icon-font-size;
-    }
-  }
-}
+    i
+      font-size: $system-bar-window-icon-font-size

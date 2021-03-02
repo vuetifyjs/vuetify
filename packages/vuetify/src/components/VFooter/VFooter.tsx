@@ -1,5 +1,5 @@
 // Styles
-import './VFooter.scss'
+import './VFooter.sass'
 
 // Composables
 import { makeSheetProps, useSheet } from '@/components/VSheet/VSheet'

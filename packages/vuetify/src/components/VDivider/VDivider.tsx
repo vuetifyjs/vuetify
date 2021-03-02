@@ -1,5 +1,5 @@
 // Styles
-import './VDivider.scss'
+import './VDivider.sass'
 
 // Utilities
 import { computed, defineComponent } from 'vue'
