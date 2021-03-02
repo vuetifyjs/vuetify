@@ -25,14 +25,6 @@ The `v-img` component is packed with features to support rich media. Combined wi
 
 - [v-img](/api/v-img)
 
-## Caveats
-
-<alert type="info">
-
-  The `v-img` component uses the [v-intersect](/directives/intersect) directive which requires a [Polyfill](/directives/intersect#polyfill) for IE11 and Safari. If a browser that does not support this functionality is detected, the image will still load as normal.
-
-</alert>
-
 ## Examples
 
 ### Props
@@ -45,17 +37,9 @@ You can set a fixed aspect ratio if you want to change aspect ratio of the image
 
 <promoted-ad slug="vuetify-zero-theme-pro" />
 
-#### Contain
+#### Cover
 
-If the provided aspect ratio doesn't match that of the actual image, the default behavior is to fill as much space as possible, clipping the sides of the image. Enabling the `contain` prop will prevent this, but will result in empty space at the sides.
-
-<example file="v-img/prop-contain" />
-
-#### Gradients
-
-The `gradient` prop can be used to apply a simple gradient overlay to the image. More complex gradients should be written as a class on the content slot instead.
-
-<example file="v-img/prop-gradient" />
+If the provided aspect ratio doesn't match that of the actual image, the default behavior is to fill as much space as possible without cropping. To fill the entire available space use the `cover` prop.
 
 #### Height
 
@@ -72,6 +56,29 @@ The `gradient` prop can be used to apply a simple gradient overlay to the image.
 <example file="v-img/slot-placeholder" />
 
 ### Misc
+
+#### Future image formats
+
+By default `v-img` will render a basic `<img>` element. If you want to use `.webp` images with a fallback for older browsers (*cough* safari), you can pass a list of `<source>` elements to the `sources` slot:
+
+```html
+<v-img src="image.jpeg">
+  <template #sources>
+    <source srcset="image.webp">
+  </template>
+</v-img>
+```
+
+This will behave similarly to:
+
+```html
+<picture>
+  <source srcset="image.webp">
+  <img src="image.jpeg">
+</picture>
+```
+
+`srcset` and `media` attributes can also be used for art direction or alternate sizes, see [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture) for more.
 
 #### Grid
 

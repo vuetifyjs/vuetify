@@ -10,17 +10,16 @@
     "sizes": "For use with `srcset`, see [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-sizes).",
     "src": "The image URL. This prop is mandatory.",
     "srcset": "A set of alternate images to use based on device size. [Read more...](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset).",
-    "theme": "Theme to be applied to the component.",
     "transition": "The transition to use when switching from `lazy-src` to `src`."
   },
   "slots": {
-    "error": "Slot for when image is in error state.",
-    "placeholder": "Slot for image placeholder.",
-    "sources": "Slot for the html `<picture>` element."
+    "placeholder": "Display an overlay while the image is loading",
+    "error": "Will be shown if the image fails to load, replacing the placeholder slot",
+    "sources": "A list of `<source>` elements. If this slot is used v-img will render a `<picture>` instead of `<img>`"
   },
   "events": {
-    "error": "Emitted when there is an error.",
-    "load": "Emitted when image is loaded.",
-    "loadstart": "Emitted when image loading has started."
+    "error": "Emitted if the image fails to load",
+    "load": "Emitted when the image is loaded",
+    "loadstart": "Emitted when the image starts to load"
   }
 }

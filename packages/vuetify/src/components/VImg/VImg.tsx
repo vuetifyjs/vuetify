@@ -126,7 +126,7 @@ export default defineComponent({
 
       state.value = 'loading'
       nextTick(() => {
-        emit('loadstart', image.value?.currentSrc || props.src)
+        emit('loadstart', image.value?.currentSrc || normalisedSrc.value.src)
         if (!aspectRatio.value) pollForSize(image.value!)
         getSrc()
       })
@@ -141,12 +141,12 @@ export default defineComponent({
     function onLoad () {
       getSrc()
       state.value = 'loaded'
-      emit('load', image.value?.currentSrc || props.src)
+      emit('load', image.value?.currentSrc || normalisedSrc.value.src)
     }
 
     function onError () {
       state.value = 'error'
-      emit('error', image.value?.currentSrc || props.src)
+      emit('error', image.value?.currentSrc || normalisedSrc.value.src)
     }
 
     function getSrc () {
