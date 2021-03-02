@@ -14,7 +14,7 @@ $chip-pill-avatar-margin-before: -12px !default;
 $chip-pill-avatar-size: 32px !default;
 $chip-pill-filter-margin: 0 16px 0 0 !default;
 $chip-transition-duration: 0.28s !default;
-$chip-transition-fn: map-get($transition, 'fast-out-slow-in') !default;
+// $chip-transition-fn: map-get($transition, 'fast-out-slow-in') !default;
 $icon-outlined-border-width: thin !default;
 $chip-line-height: 20px !default;
 $chip-padding: 0 12px !default;

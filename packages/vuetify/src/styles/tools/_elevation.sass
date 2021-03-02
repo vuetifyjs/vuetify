@@ -2,8 +2,7 @@
   box-shadow: map-get($shadow-key-umbra, $z), map-get($shadow-key-penumbra, $z), map-get($shadow-key-ambient, $z) if($important, !important, null)
 
 // Temporary name until the above is refactored
-@mixin elevated($query, $important: false)
-  $elevation: map-get($query, 'elevation')
+@mixin elevated($elevation, $important: false)
 
   box-shadow: map-get($shadow-key-umbra, $elevation), map-get($shadow-key-penumbra, $elevation), map-get($shadow-key-ambient, $elevation) if($important, !important, null)
 

@@ -9,6 +9,7 @@ import { useColor } from '@/composables/color'
 import { Ripple, RippleDirectiveBinding } from '@/directives/ripple'
 
 // Components
+import VIcon from '@/components/VIcon/VIcon'
 // import { VExpandXTransition } from '../transitions'
 
 // Utilities
@@ -27,12 +28,8 @@ export default defineComponent({
     },
     activeClass: {
       type: String,
-      default (): string | undefined {
-        if (!this.chipGroup) return ''
-
-        return this.chipGroup.activeClass
-      },
-    } as any as PropValidator<string>,
+      default: '',
+    } as any,
     close: Boolean,
     closeIcon: {
       type: String,
@@ -41,6 +38,10 @@ export default defineComponent({
     closeLabel: {
       type: String,
       default: '$vuetify.close',
+    },
+    color: {
+      type: String,
+      default: 'primary',
     },
     disabled: Boolean,
     draggable: Boolean,
@@ -54,15 +55,15 @@ export default defineComponent({
     outlined: Boolean,
     pill: Boolean,
     textColor: String,
-    value: null as any as PropType<any>,
+    value: null as any,
 
     ...makeSizeProps(),
-    ...makeTagProps({ tag: 'span' })
+    ...makeTagProps({ tag: 'span' }),
   }),
 
   setup (props, { slots }) {
     const { sizeClasses } = useSize(props, 'v-chip')
-    
+
     const isContained = computed(() => {
       return !(props.outlined)
     })
@@ -71,8 +72,14 @@ export default defineComponent({
       return isContained.value && !(props.disabled)
     })
 
+    const hasClose = computed(() => {
+      return Boolean(props.close)
+    })
+
+    const isClickable = computed(() => {})
+
     const { colorClasses, colorStyles } = useColor(computed(() => ({
-      [isContained.value ? 'background' : 'text']: props.color
+      [isContained.value ? 'background' : 'text']: props.color,
     })))
 
     return () => withDirectives(
@@ -80,91 +87,51 @@ export default defineComponent({
         class={[
           'v-chip',
           {
-            'v-chip--clickable': this.isClickable,
+            'v-chip--clickable': isClickable.value,
             'v-chip--contained': isContained.value,
             'v-chip--disabled': props.disabled,
             'v-chip--elevated': isElevated.value,
             'v-chip--draggable': props.draggable,
             'v-chip--label': props.label,
-            'v-chip--link': props.isLink,
+            // 'v-chip--link': props.isLink,
             'v-chip--no-color': !props.color,
             'v-chip--outlined': props.outlined,
             'v-chip--pill': props.pill,
-            'v-chip--removable': props.hasClose,
+            'v-chip--removable': hasClose.value,
           },
           colorClasses.value,
           sizeClasses.value,
         ]}
         style={[
-          colorStyles.value
+          colorStyles.value,
         ]}
         disabled={ props.disabled }
       >
-
-      </props.tag>
+        <span class="v-chip__content">
+          { slots.default?.() }
+        </span>
+        {
+          props.close && (<VIcon
+            icon={props.closeIcon}
+            class="v-chip__close"
+            props={{
+              right: true,
+              size: 18,
+            }}
+          />)
+        }
+      </props.tag>,
       [useDirective<RippleDirectiveBinding>(Ripple, {
-        value: !props.disabled
+        value: !props.disabled,
       })]
     )
-  }
+  },
 })
-
-// Mixins
-// import Colorable from '../../mixins/colorable'
-// import { factory as GroupableFactory } from '../../mixins/groupable'
-// import Themeable from '../../mixins/themeable'
-// import { factory as ToggleableFactory } from '../../mixins/toggleable'
-// import Routable from '../../mixins/routable'
 
 /*
   data: () => ({
     proxyClass: 'v-chip--active',
   }),
-
-  computed: {
-    classes (): object {
-      return {
-        'v-chip': true,
-        ...Routable.options.computed.classes.call(this),
-        'v-chip--clickable': this.isClickable,
-        'v-chip--disabled': this.disabled,
-        'v-chip--draggable': this.draggable,
-        'v-chip--label': this.label,
-        'v-chip--link': this.isLink,
-        'v-chip--no-color': !this.color,
-        'v-chip--outlined': this.outlined,
-        'v-chip--pill': this.pill,
-        'v-chip--removable': this.hasClose,
-        ...this.themeClasses,
-        ...this.sizeableClasses,
-        ...this.groupClasses,
-      }
-    },
-    hasClose (): boolean {
-      return Boolean(this.close)
-    },
-    isClickable (): boolean {
-      return Boolean(
-        Routable.options.computed.isClickable.call(this) ||
-        this.chipGroup
-      )
-    },
-  },
-
-  created () {
-    const breakingProps = [
-      ['outline', 'outlined'],
-      ['selected', 'input-value'],
-      ['value', 'active'],
-      ['@input', '@active.sync'],
-    ]
-*/
-    /* istanbul ignore next */
-    /*
-    breakingProps.forEach(([original, replacement]) => {
-      if (this.$attrs.hasOwnProperty(original)) breaking(original, replacement, this)
-    })
-  },
 
   methods: {
     click (e: MouseEvent): void {
@@ -237,4 +204,5 @@ export default defineComponent({
 
     return h(tag, this.setTextColor(color, data), children)
   },
-})*/
+})
+*/

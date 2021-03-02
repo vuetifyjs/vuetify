@@ -19,7 +19,7 @@
   &:not(.v-chip--active)
     background: map-get($material, 'chips')
 
-  +states($material)
+  +states('.v-chip')
 
 // Block
 .v-chip
@@ -33,9 +33,6 @@
   padding: $chip-padding
   position: relative
   text-decoration: none
-  transition-duration: $chip-transition-duration
-  transition-property: box-shadow, opacity
-  transition-timing-function: $chip-transition-fn
   vertical-align: middle
   white-space: $chip-white-space
 
@@ -115,10 +112,6 @@
   .v-icon
     color: inherit
 
-.v-chip--link
-  &::before
-    transition: opacity $primary-transition
-
   &:focus::before
     opacity: $chip-link-focus-opacity
 
@@ -143,10 +136,6 @@
   // overwrite theme style
   &.v-icon
     color: inherit
-
-  &.expand-x-transition-leave-active,
-  &.expand-x-transition-enter
-    margin: 0
 
 .v-chip--pill
   .v-chip__filter
