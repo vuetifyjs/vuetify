@@ -1,7 +1,7 @@
 // Imports
 @import './index'
 
-.v-banner 
+.v-banner
   background-color: $banner-background-color
   font-size: $banner-font-size
   padding-bottom: $banner-padding-bottom
@@ -10,7 +10,7 @@
   width: $banner-width
 
   &::after
-    @include border($banner-border-color, $banner-border-style, $banner-border-width)
+    +border($banner-border-color, $banner-border-style, $banner-border-width)
 
     bottom: 0
     content: ''
@@ -18,38 +18,36 @@
     position: absolute
     right: 0
     top: auto
-  
 
-  @include elevated($banner-elevation)
-  @include position($banner-positions)
-  @include rounded($banner-border-radius)
+  +elevation($banner-elevation)
+  +position($banner-positions)
+  +rounded($banner-border-radius)
 
-  @include ltr()
+  +ltr()
     padding-left: $banner-padding-start
     padding-right: $banner-padding-end
-  
 
-  @include rtl()
+  +rtl()
     padding-right: $banner-padding-start
     padding-left: $banner-padding-end
-  
 
-  &--has-thumbnail 
-    @include ltr()
+
+  &--has-thumbnail
+    +ltr()
       padding-left: $banner-thumbnail-padding-start
-    
 
-    @include rtl() 
+
+    +rtl()
       padding-right: $banner-thumbnail-padding-start
-    
 
-    &.v-banner--is-mobile 
+
+    &.v-banner--is-mobile
       padding-top: $banner-mobile-padding-top
 
-  &--single-line 
+  &--single-line
     padding-top: $banner-single-line-padding-top
 
-    &.v-banner--is-mobile 
+    &.v-banner--is-mobile
       padding-top: $banner-mobile-single-line-padding-top
 
   &--sticky
@@ -61,19 +59,19 @@
   flex: 1 1 auto
   justify-content: flex-end
 
-  @include ltr()
+  +ltr()
     margin-left: $banner-actions-margin-start
 
-  @include rtl()
+  +rtl()
     margin-right: $banner-actions-margin-start
 
   .v-banner--is-mobile &
     flex-grow: 1
 
-    @include ltr()
+    +ltr()
       margin-left: $banner-mobile-single-line-actions-margin-start
 
-    @include rtl() 
+    +rtl()
       margin-right: $banner-mobile-single-line-actions-margin-start
 
 .v-banner__avatar
@@ -133,17 +131,17 @@
   height: $banner-thumbnail-height
   width: $banner-thumbnail-width
 
-  @include ltr ()
+  +ltr ()
     margin-left: $banner-thumbnail-margin-start
     margin-right: $banner-thumbnail-margin-end
 
-  @include rtl ()
+  +rtl ()
     margin-right: $banner-thumbnail-margin-start
     margin-left: $banner-thumbnail-margin-end
 
   .v-banner--is-mobile &
-    @include ltr()
+    +ltr()
       margin-right: $banner-mobile-thumbnail-padding-start
 
-    @include rtl()
+    +rtl()
       margin-left: $banner-mobile-thumbnail-padding-start
