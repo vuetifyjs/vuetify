@@ -46,23 +46,8 @@ export default new Vuetify({
         primary: colors.red.darken1, // #E53935
         secondary: colors.red.lighten4, // #FFCDD2
         accent: colors.indigo.base, // #3F51B5
-      },
-    },
-  },
-})
-```
-
-Define new colors pack.
-
-```js
-const opts = {
-  theme: {
-    themes: {
-      light: {
-        "my-color": "#FF00BB", // Automatically
-        // or
-        "my-color-2" : {
-          // define your color
+        myColor: '#FF00BB', // define custom as single hex color
+        myColor2" : { // define custom color using full color object
           base: '#6D7580',
           darken4: '#09101D',
           darken3: '#2C3A4B',
@@ -74,10 +59,10 @@ const opts = {
           lighten4: '#EBEEF2',
           lighten5: '#EBEEF2',
         }
-      }
-    }
-  }
-}
+      },
+    },
+  },
+})
 ```
 
 ## Sass color pack
