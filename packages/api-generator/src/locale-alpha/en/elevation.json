@@ -1,5 +1,5 @@
 {
   "props": {
-    "elevation": "`no description`"
+    "elevation": "Designates an elevation applied to the component between 0 and 24. You can find more information on the [elevation page](/styles/elevation)."
   }
 }
