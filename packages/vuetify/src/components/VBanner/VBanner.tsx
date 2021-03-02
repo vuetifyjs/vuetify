@@ -1,5 +1,5 @@
 // Styles
-import './VBanner.scss'
+import './VBanner.sass'
 
 // Composables
 import { makeSheetProps, useSheet } from '@/components/VSheet/VSheet'

@@ -1,5 +1,5 @@
 // Styles
-import './VSystemBar.scss'
+import './VSystemBar.sass'
 
 // Composables
 import { makeSheetProps, useSheet } from '@/components/VSheet/VSheet'
