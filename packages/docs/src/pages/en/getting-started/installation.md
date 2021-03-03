@@ -90,7 +90,7 @@ Have a question that belongs here? Tell us in our [Discord Community](https://co
 
 ## How to report an issue or bug
 
-For bugs related to the Alpha, please create a issue via our [Issue Generator](https://issues.vuetifyjs.com/). At this time we are only accepting bugs for the following:
+For bugs related to the Alpha, please create an issue via our [Issue Generator](https://issues.vuetifyjs.com/) using the following [Reproduction Template](https://v3-template.vuetifyjs.com/). At this time we are only accepting bugs for the following:
 
 - Vuetify components and functions available in the Alpha
 - Documentation content
