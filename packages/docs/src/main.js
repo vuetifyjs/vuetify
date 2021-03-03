@@ -1,6 +1,5 @@
 // Packages
 import Vue from 'vue'
-import Vuetify from 'vuetify/lib/framework'
 import InstantSearch from 'vue-instantsearch'
 
 // Bootstrap
@@ -37,8 +36,6 @@ export async function createApp ({
   const i18n = createI18n()
   const vuetify = createVuetify(store)
   const router = createRouter(vuetify, store, i18n)
-
-  store.state.app.version = Vuetify.version
 
   // sync the router with the vuex store.
   // this registers `store.state.route`

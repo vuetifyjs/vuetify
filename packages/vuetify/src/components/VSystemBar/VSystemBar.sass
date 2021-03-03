@@ -18,14 +18,14 @@
     font-size: $system-bar-icon-font-size
 
   // Defaults missing in variables @include border($system-bar-query)
-  @include elevated($system-bar-elevation)
-  @include position($system-bar-positions)
-  @include rounded($system-bar-border-radius)
+  +elevation($system-bar-elevation)
+  +position($system-bar-positions)
+  +rounded($system-bar-border-radius)
 
-  @include ltr()
+  +ltr()
     text-align: right
 
-  @include rtl()
+  +rtl()
     text-align: left
 
   &--lights-out

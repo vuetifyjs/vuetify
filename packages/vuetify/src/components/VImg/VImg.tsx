@@ -14,13 +14,10 @@ import {
   watch,
   withDirectives,
 } from 'vue'
-import type { Prop } from 'vue'
+import type { PropType } from 'vue'
 
 // Components
 import { VResponsive } from '../VResponsive'
-
-// Composables
-// import { provideTheme } from '@/composables/theme'
 
 // Directives
 import intersect from '@/directives/intersect'
@@ -45,14 +42,13 @@ export default defineComponent({
   name: 'VImg',
 
   props: makeProps({
-    theme: String,
     aspectRatio: [String, Number],
     alt: String,
     cover: Boolean,
     eager: Boolean,
     lazySrc: String,
     options: {
-      type: Object,
+      type: Object as PropType<IntersectionObserverInit>,
       // For more information on types, navigate to:
       // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
       default: () => ({
@@ -60,45 +56,41 @@ export default defineComponent({
         rootMargin: undefined,
         threshold: undefined,
       }),
-    } as Prop<IntersectionObserverInit>,
+    },
     position: {
       type: String,
       default: 'center center',
     },
     sizes: String,
     src: {
-      type: [String, Object],
+      type: [String, Object] as PropType<string | srcObject>,
       default: '',
-    } as Prop<string | srcObject>,
+    },
     srcset: String,
     transition: {
-      type: [Boolean, String],
+      type: [Boolean, String] as PropType<string | false>,
       default: 'fade-transition',
       validator: val => val !== true,
-    } as Prop<string | false, string>,
+    },
   }),
 
-  setup (props, ctx) {
-    const { slots, emit } = ctx
+  emits: ['loadstart', 'load', 'error'],
 
-    // TODO: figure out how to mock in tests
-    // const { themeClasses } = provideTheme(props, ctx)
-
+  setup (props, { emit, slots }) {
     const currentSrc = ref('') // Set from srcset
     const image = ref<HTMLImageElement>()
     const state = ref<'idle' | 'loading' | 'loaded' | 'error'>('idle')
     const naturalWidth = ref<number>()
     const naturalHeight = ref<number>()
 
+    // TODO: use expose() https://github.com/vuejs/vue-test-utils-next/issues/435
     const vm = getCurrentInstance() as any
     vm.setupState = reactive({
-      private: {
-        currentSrc,
-        image,
-        state,
-        naturalWidth,
-        naturalHeight,
-      },
+      currentSrc,
+      image,
+      state,
+      naturalWidth,
+      naturalHeight,
     })
 
     const normalisedSrc = computed<srcObject>(() => {
@@ -138,8 +130,8 @@ export default defineComponent({
 
       state.value = 'loading'
       nextTick(() => {
-        emit('loadstart', image.value?.currentSrc || props.src)
-        aspectRatio.value || pollForSize(image.value!)
+        emit('loadstart', image.value?.currentSrc || normalisedSrc.value.src)
+        if (!aspectRatio.value) pollForSize(image.value!)
         getSrc()
       })
 
@@ -153,12 +145,12 @@ export default defineComponent({
     function onLoad () {
       getSrc()
       state.value = 'loaded'
-      emit('load', image.value?.currentSrc || props.src)
+      emit('load', image.value?.currentSrc || normalisedSrc.value.src)
     }
 
     function onError () {
       state.value = 'error'
-      emit('error', image.value?.currentSrc || props.src)
+      emit('error', image.value?.currentSrc || normalisedSrc.value.src)
     }
 
     function getSrc () {

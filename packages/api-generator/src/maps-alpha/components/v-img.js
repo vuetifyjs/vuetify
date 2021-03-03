@@ -58,21 +58,12 @@ module.exports = {
     },
     {
       name: 'src',
-      type: [
-        'string',
-        'object',
-      ],
+      type: 'string',
       default: "''",
       source: 'v-img',
     },
     {
       name: 'srcset',
-      type: 'string',
-      default: 'undefined',
-      source: 'v-img',
-    },
-    {
-      name: 'theme',
       type: 'string',
       default: 'undefined',
       source: 'v-img',
@@ -104,15 +95,15 @@ module.exports = {
   events: [
     {
       name: 'error',
-      value: 'object | string',
+      value: 'string',
     },
     {
       name: 'load',
-      value: 'object | string',
+      value: 'string',
     },
     {
       name: 'loadstart',
-      value: 'object | string',
+      value: 'string',
     },
   ],
   functions: [],
