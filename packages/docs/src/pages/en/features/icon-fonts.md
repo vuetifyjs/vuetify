@@ -23,9 +23,9 @@ To change your font library, import one of the pre-defined icon sets or provide 
 // src/plugins/vuetify.js
 
 import { createVuetify } from 'vuetify'
-import { aliases, mdi } from 'vuetify/src/iconsets/mdi'
+import { aliases, mdi } from 'vuetify/lib/iconsets/mdi'
 
-export default new createVuetify({
+export default createVuetify({
   icons: {
     defaultSet: 'mdi',
     aliases,
@@ -58,10 +58,10 @@ Out of the box, Vuetify supports the use of multiple *different* icon sets at th
 // src/plugins/vuetify.js
 
 import { createVuetify } from 'vuetify'
-import { aliases, fa } from 'vuetify/src/iconsets/fa'
-import { mdi } from 'vuetify/src/iconsets/mdi'
+import { aliases, fa } from 'vuetify/lib/iconsets/fa'
+import { mdi } from 'vuetify/lib/iconsets/mdi'
 
-export default new createVuetify({
+export default createVuetify({
   icons: {
     defaultSet: 'fa',
     aliases,
@@ -84,7 +84,7 @@ export default new createVuetify({
 
   Note the `mdi:` prefix used in the *second* icon. It is necessary to provide the **correct** prefix when rendering icons that are **not** part of the default set.
 
-</alert>  
+</alert>
 
 ## Installing icon fonts
 
@@ -118,7 +118,7 @@ $ npm install @mdi/font -D
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 import { createVuetify } from 'vuetify/lib'
 
-export default new createVuetify({
+export default createVuetify({
   icons: {
     defaultSet: 'mdi', // This is already the default value - only for display purposes
   },
@@ -127,7 +127,7 @@ export default new createVuetify({
 <alert type="error">
 
   **DO NOT** use a CDN link without specifying a package *version*. Failure to do so can result in unexpected changes to your application with new releases.
- 
+
 </alert>
 
 Use this tool to search for any Material Design Icons and copy them to your clipboard by clicking the item.
@@ -148,9 +148,9 @@ $ npm install @mdi/js -D
 // src/plugins/vuetify.js
 
 import { createVuetify } from 'vuetify/lib'
-import { aliases, mdi } from 'vuetify/src/iconsets/mdi-svg'
+import { aliases, mdi } from 'vuetify/lib/iconsets/mdi-svg'
 
-export default new createVuetify({
+export default createVuetify({
   icons: {
     iconfont: 'mdi',
     aliases,
@@ -200,9 +200,9 @@ $ npm install material-design-icons-iconfont -D
 
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure your project is capable of handling css files
 import { createVuetify } from 'vuetify/lib'
-import { aliases, md } from 'vuetify/src/iconsets/md'
+import { aliases, md } from 'vuetify/lib/iconsets/md'
 
-export default new createVuetify({
+export default createVuetify({
   icons: {
     defaultSet: 'md',
     aliases,
@@ -249,11 +249,11 @@ $ npm install @fortawesome/fontawesome-free -D
 
 import '@fortawesome/fontawesome-free/css/all.css' // Ensure your project is capable of handling css files
 import { createVuetify } from 'vuetify'
-import { aliases, fa } from 'vuetify/src/iconsets/fa'
+import { aliases, fa } from 'vuetify/lib/iconsets/fa'
 
 Vue.use(Vuetify)
 
-export default new createVuetify({
+export default createVuetify({
   icons: {
     defaultSet: 'fa',
     aliases,
@@ -291,9 +291,9 @@ $ npm install font-awesome@4.7.0 -D
 
 import 'font-awesome/css/font-awesome.min.css' // Ensure your project is capable of handling css files
 import { createVuetify } from 'vuetify'
-import { aliases, fa } from 'vuetify/src/iconsets/fa4'
+import { aliases, fa } from 'vuetify/lib/iconsets/fa4'
 
-export default new createVuetify({
+export default createVuetify({
   icons: {
     defaultSet: 'fa',
     aliases,
@@ -327,7 +327,7 @@ Then register the global `font-awesome-icon` component and use the pre-defined `
 
 import Vue from 'vue'
 import { createVuetify } from 'vuetify'
-import { aliases, fa } from 'vuetify/src/iconsets/fa-svg'
+import { aliases, fa } from 'vuetify/lib/iconsets/fa-svg'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -335,7 +335,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 Vue.component('font-awesome-icon', FontAwesomeIcon) // Register component globally
 library.add(fas) // Include needed icons
 
-export default new createVuetify({
+export default createVuetify({
   icons: {
     defaultSet: 'fa',
     aliases,
@@ -433,9 +433,9 @@ If you are developing custom Vuetify components, you can extend the `aliases` ob
 // src/plugins/vuetify.js
 
 import { createVuetify } from 'vuetify/lib'
-import { aliases, mdi } from 'vuetify/src/iconsets/mdi'
+import { aliases, mdi } from 'vuetify/lib/iconsets/mdi'
 
-export default new createVuetify({
+export default createVuetify({
   icons: {
     aliases: {
       ...aliases,
