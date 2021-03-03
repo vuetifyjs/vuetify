@@ -1,6 +1,6 @@
 <template>
   <div class="flex-1-1-auto d-flex align-center justify-end">
-    <default-search />
+    <default-search v-if="branch === 'master'" />
 
     <template v-if="$vuetify.breakpoint.smAndUp">
       <vertical-divider />
@@ -33,11 +33,23 @@
 </template>
 
 <script>
+  // Components
   import DefaultSearch from '@/layouts/default/Search'
+
+  // Utilities
+  import { getBranch } from '@/util/helpers'
 
   export default {
     name: 'DefaultAppBarItems',
 
     components: { DefaultSearch },
+
+    data: () => ({
+      branch: 'next',
+    }),
+
+    mounted () {
+      this.branch = getBranch()
+    },
   }
 </script>
