@@ -6,7 +6,6 @@ $navigation-drawer-border-radius: map-get($rounded, '0') !default;
 $navigation-drawer-border-style: $border-style-root !default;
 $navigation-drawer-border-thin-width: thin !default;
 $navigation-drawer-border-width: 0 !default;
-$navigation-drawer-dense-rail-width: 56px !default;
 $navigation-drawer-elevation: 0 !default;
 $navigation-drawer-fixed-z-index: 6 !default;
 $navigation-drawer-floating-border: none !default;
@@ -15,12 +14,10 @@ $navigation-drawer-img-object-fit: cover !default;
 $navigation-drawer-img-width: inherit !default;
 $navigation-drawer-overflow-scrolling: touch !default;
 $navigation-drawer-positions: absolute fixed !default;
-$navigation-drawer-rail-width: 72px !default;
 $navigation-drawer-temporary-elevation: 16 !default;
 $navigation-drawer-transition-duration: 0.2s !default;
 $navigation-drawer-transition-property: box-shadow, transform, visibility, width !default;
 $navigation-drawer-transition-timing-function: $standard-easing !default;
-$navigation-drawer-width: 256px !default;
 $navigation-drawer-will-change: transform !default;
 
 $navigation-drawer-border: (
