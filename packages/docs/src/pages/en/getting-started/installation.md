@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Get started with Vuetify v3
+  title: Get started with Vuetify 3 Alpha
   description: Details for v3 alpha release - faq, changes, and upgrading.
   keywords: migration, releases, upgrading vuetify, alpha, v3
 related:
@@ -10,9 +10,9 @@ related:
 nav: Installation
 ---
 
-# v3 Alpha
+# Vuetify 3 Alpha
 
-Vuetify v3 Alpha is here! Below is a collection of information to help you get started and answer some frequently asked questions regarding the alpha.
+Vuetify 3 Alpha is here! Below is a collection of information to help you get started and answer some frequently asked questions regarding the alpha.
 
 <alert type="error">
 
@@ -52,14 +52,14 @@ cd my-app
 vue add vuetify
 ```
 
-Once prompted, choose V3 (alpha):
+Once prompted, choose v3 (alpha):
 
 ```bash
 ? Choose a preset: (Use arrow keys)
   Default (recommended)
   Prototype (rapid development)
   Configure (advanced)
-> V3 (alpha)
+> v3 (alpha)
 ```
 
 ## Frequently asked questions
@@ -67,7 +67,7 @@ Once prompted, choose V3 (alpha):
 ### Table of Contents
 
 - [What is included in the Alpha?](#included)
-- [When will Vuetify v3 be released?](#version-3)
+- [When will Vuetify 3 be released?](#version-3)
 - [Can I use it with Vite?](#vite)
 
 ### Questions
@@ -80,9 +80,9 @@ Have a question that belongs here? Tell us in our [Discord Community](https://co
 
   Currently most base functionality of Vuetify is included in the alpha. This includes core services such as theme, configuration, and layout. A small subset of base components are also included such as grid system, sheets, and buttons. For full list of available components, visit the **UI Component** and **API** sections.
 
-- **When will Vuetify v3 be released?** { #version-3 }
+- **When will Vuetify 3 be released?** { #version-3 }
 
-  Version 3 is currently under development. Alpha is the first step toward this. Follow our progress via our project on [Github](https://github.com/orgs/vuetifyjs/projects/7) or read and overview of what's to come on our [Roadmap](/introduction/roadmap/).
+  Version 3 is currently under development - Alpha is the first step toward this. Follow our progress via our project on [Github](https://github.com/orgs/vuetifyjs/projects/7) or read an overview of what's to come on our [Roadmap](/introduction/roadmap/).
 
 - **Can I use it with Vite?** { #vite }
 
@@ -103,6 +103,6 @@ For bugs related to the Alpha, please create a issue via our [Issue Generator](h
 
 ## How to connect with Vuetify team
 
-The Vuetify team can be reached via [Discord Community](https://community.vuetifyjs.com/). If you have questions or would like to discuss v3, come visit the #v3-discussion channel.
+The Vuetify team can be reached via [Discord Community](https://community.vuetifyjs.com/). If you have questions or would like to discuss Vuetify 3, come visit the #v3-discussion channel.
 
 <backmatter />

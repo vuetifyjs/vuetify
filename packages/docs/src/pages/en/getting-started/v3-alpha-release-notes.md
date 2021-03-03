@@ -1,17 +1,17 @@
 ---
 meta:
-  title: v3 Alpha release notes
+  title: Alpha release notes
   description: Stay up to date with the latest release notes. The migration guides will also help you migrate applications though major releases.
   keywords: migration, releases, upgrading vuetify, v3, alpha
 related:
-  - /getting-started/v3-alpha/
+  - /getting-started/installation/
   - /getting-started/contributing/
   - /introduction/roadmap/
 ---
 
-# v3 Alpha Release Notes
+# Alpha Release Notes
 
-This is a full master list of release notes covering all of v3 Alpha. This will be updated as new components and features become available. For more details and answers to common questions related to the v3 Alpha, visit the [v3 Alpha](/getting-started/v3-alpha/) page.
+This is a full master list of release notes covering all of Vuetify 3 Alpha. This will be updated as new components and features become available. For more details and answers to common questions related to the Alpha, visit the [Installation](/getting-started/installation/) page.
 
 ## Current changes
 
