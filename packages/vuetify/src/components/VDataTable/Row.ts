@@ -44,7 +44,10 @@ export default Vue.extend({
 
       const textAlign = `text-${header.align || 'start'}`
 
-      return h('td', {
+      return h(header.headerCell ? 'th' : 'td', {
+        attrs: {
+          scope: header.headerCell ? 'row' : undefined,
+        },
         class: [
           textAlign,
           header.cellClass,

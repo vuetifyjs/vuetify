@@ -64,6 +64,28 @@ describe('Table Row', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render with header cell', () => {
+    const wrapper = mountFunction({
+      context: {
+        props: {
+          headers: [
+            { text: 'Petrol', value: 'petrol', headerCell: true },
+            { text: 'Diesel', value: 'diesel' },
+          ],
+          item: {
+            petrol: 0.68,
+            diesel: 0.65,
+          },
+        },
+      },
+    })
+
+    expect(wrapper.findAll('tr')).toHaveLength(1)
+    expect(wrapper.findAll('th')).toHaveLength(1)
+    expect(wrapper.findAll('td')).toHaveLength(1)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render with cellClass', () => {
     const wrapper = mountFunction({
       context: {
