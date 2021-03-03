@@ -5,8 +5,8 @@ meta:
   keywords: migration, releases, upgrading vuetify, alpha, v3
 related:
   - /getting-started/contributing/
-  - /getting-started/installation/
   - /introduction/roadmap/
+  - /getting-started/v3-alpha-release-notes/
 nav: Installation
 ---
 
@@ -86,7 +86,7 @@ Have a question that belongs here? Tell us in our [Discord Community](https://co
 
 - **Can I use it with Vite?** { #vite }
 
-  Yes. We recommend creating a vue-cli project to see how the structure should look, but you should be able to transfer that over to work with Vite too. 
+  Yes. We recommend creating a vue-cli project to see how the structure should look, but you should be able to transfer that over to work with Vite too.
 
 ## How to report an issue or bug
 
