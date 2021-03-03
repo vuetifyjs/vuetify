@@ -41,7 +41,6 @@
     "*.vue"
   ],
   "files": [
-    "src/",
     "dist/",
     "lib/",
     "types/"
