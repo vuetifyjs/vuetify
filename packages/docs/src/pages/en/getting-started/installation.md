@@ -1,43 +1,30 @@
 ---
 meta:
-  title: v3 Alpha
+  title: Get started with Vuetify v3
   description: Details for v3 alpha release - faq, changes, and upgrading.
   keywords: migration, releases, upgrading vuetify, alpha, v3
 related:
   - /getting-started/contributing/
   - /getting-started/installation/
   - /introduction/roadmap/
+nav: Installation
 ---
 
 # v3 Alpha
 
-Vuetify v3 Alpha is here! below is a collection of information to help you get started and answer some frequently asked questions regarding the alpha.
-
-## Frequently asked questions
-
-### Table of Contents
-
-- [How can I install v3 Alpha?](#installation)
-- [What is included in the Alpha?](#included)
-- [When will Vuetify v3 be released?](#version-3)
-
-### Questions
-
-Have a question that belongs here? Tell us in our [Discord Community](https://community.vuetifyjs.com/) or create a request on our [Issue Generator](https://issues.vuetifyjs.com/).
-
----
-
-- **How can I install v3 Alpha?** { #installation }
-
-Installation of the alpha is limited to new cli projects at this time and intended primarily for testing. To get started you read the instructions.
-
-## Vuetify v3 Alpha install
+Vuetify v3 Alpha is here! Below is a collection of information to help you get started and answer some frequently asked questions regarding the alpha.
 
 <alert type="error">
 
 Before proceeding, it is important to note that this installation is intended primarily for testing purposes, and should not be considered for production applications.
 
 </alert>
+
+## Installation
+
+Installation of the alpha is limited to new cli projects at this time and intended primarily for testing. If you have any questions or run into issues, please reach out to our [Discord community](https://community.vuetifyjs.com/).
+
+### vue-cli
 
 In order for the installation to proceed correctly, **vue-cli 4.0** is required. Further instructions are available at [vue-cli](https://github.com/vuejs/vue-cli).
 
@@ -75,7 +62,19 @@ Once prompted, choose V3 (alpha):
 > V3 (alpha)
 ```
 
-If you have any questions or run into issues, please reach out to our [Discord community](https://community.vuetifyjs.com/).
+## Frequently asked questions
+
+### Table of Contents
+
+- [What is included in the Alpha?](#included)
+- [When will Vuetify v3 be released?](#version-3)
+- [Can I use it with Vite?](#vite)
+
+### Questions
+
+Have a question that belongs here? Tell us in our [Discord Community](https://community.vuetifyjs.com/) or create a request on our [Issue Generator](https://issues.vuetifyjs.com/).
+
+---
 
 - **What is included in the alpha?** { #included }
 
@@ -85,12 +84,16 @@ If you have any questions or run into issues, please reach out to our [Discord c
 
   Version 3 is currently under development. Alpha is the first step toward this. Follow our progress via our project on [Github](https://github.com/orgs/vuetifyjs/projects/7) or read and overview of what's to come on our [Roadmap](/introduction/roadmap/).
 
+- **Can I use it with Vite?** { #vite }
+
+  Yes. We recommend creating a vue-cli project to see how the structure should look, but you should be able to transfer that over to work with Vite too. 
+
 ## How to report an issue or bug
 
 For bugs related to the Alpha, please create a issue via our [Issue Generator](https://issues.vuetifyjs.com/). At this time we are only accepting bugs for the following:
 
 - Vuetify components and functions available in the Alpha
-- Documentations content
+- Documentation content
 
 <alert type="info">
 
