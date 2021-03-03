@@ -12,9 +12,9 @@
     "title": "getting-started",
     "icon": "$mdiSpeedometerMedium:$mdiSpeedometer",
     "items": [
+      "v3-alpha",
+      "v3-alpha-release-notes",
       "installation",
-      "browser-support",
-      "release-notes",
       "contributing"
     ]
   },
