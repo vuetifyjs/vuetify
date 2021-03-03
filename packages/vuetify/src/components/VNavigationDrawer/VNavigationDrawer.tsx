@@ -2,11 +2,12 @@
 import './VNavigationDrawer.sass'
 
 // Composables
+import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeSheetProps, useSheet } from '@/components/VSheet/VSheet'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { defineComponent, onBeforeMount, ref } from 'vue'
+import { computed, defineComponent, onBeforeMount, ref, toRef } from 'vue'
 import { makeTagProps } from '@/composables/tag'
 import { convertToUnit } from '@/util/helpers'
 import makeProps from '@/util/makeProps'
@@ -22,6 +23,10 @@ export default defineComponent({
   name: 'VNavigationDrawer',
 
   props: makeProps({
+    ...makeLayoutItemProps({
+      name: 'navigation-drawer',
+      size: 256,
+    }),
     ...makeSheetProps(),
     ...makeTagProps({ tag: 'nav' }),
     aligned: {
@@ -46,6 +51,17 @@ export default defineComponent({
     const { sheetClasses, sheetStyles } = useSheet(props, 'v-navigation-drawer')
     const isActive = useProxiedModel(props, 'modelValue')
     const isHovering = ref(false)
+    const styles = useLayoutItem(
+      props.name,
+      toRef(props, 'priority'),
+      computed(() => props.right ? 'right' : 'left'),
+      computed(() => {
+        if (!isActive.value) return 0
+        if (props.rail) return props.dense ? 56 : 72
+
+        return 256
+      })
+    )
 
     onBeforeMount(() => {
       if (isActive.value == null) isActive.value = !props.mobile
@@ -83,6 +99,7 @@ export default defineComponent({
           ]}
           style={[
             sheetStyles.value,
+            styles.value,
             {
               transform: `translate${transform}(${convertToUnit(translate, '%')})`,
               width: convertToUnit(width)

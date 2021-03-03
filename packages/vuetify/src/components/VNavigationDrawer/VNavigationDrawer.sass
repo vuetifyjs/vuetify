@@ -16,10 +16,10 @@
   width: $navigation-drawer-width
   will-change: $navigation-drawer-will-change
 
-  @include border($navigation-drawer-query)
-  @include elevated($navigation-drawer-query)
-  @include position($navigation-drawer-query)
-  @include rounded($navigation-drawer-query)
+  @include border($navigation-drawer-border...)
+  @include elevation($navigation-drawer-elevation)
+  @include position($navigation-drawer-positions)
+  @include rounded($navigation-drawer-border-radius)
 
   &--absolute
     z-index: $navigation-drawer-absolute-z-index
@@ -71,7 +71,7 @@
       width: $navigation-drawer-width
 
   &--temporary
-    @include elevated($navigation-drawer-temporary-query)
+    @include elevation($navigation-drawer-temporary-elevation)
 
 .v-navigation-drawer__content
   flex: 1 1 auto
