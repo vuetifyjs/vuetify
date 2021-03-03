@@ -19,10 +19,6 @@ export default VCalendarDaily.extend({
 
   props: props.category,
 
-  data: () => ({
-    horizontalScroll: null as any,
-  }),
-
   computed: {
     classes (): object {
       return {
@@ -43,15 +39,17 @@ export default VCalendarDaily.extend({
       scrollableDiv.scrollLeft = 0
     })
 
-    this.horizontalScroll = function (e: Event) {
+    // sync horizontal scroll
+    const horizontalScroll = function (e: Event) {
       const scrollingEle = e.target
-      horizontalScrollables.forEach(scrollableDiv => {
+      const eleToSync = horizontalScrollables.filter(ele => ele !== e.target)
+      eleToSync.forEach(scrollableDiv => {
         scrollableDiv.scrollLeft = (scrollingEle as any).scrollLeft
       })
     }
 
     horizontalScrollables.forEach(ele => {
-      ele.addEventListener('scroll', this.horizontalScroll)
+      ele.addEventListener('scroll', horizontalScroll)
     })
   },
   methods: {
