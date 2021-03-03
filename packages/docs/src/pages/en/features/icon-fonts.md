@@ -11,13 +11,13 @@ related:
 
 # Icon Fonts
 
-Vuetify comes with support for Material Design Icons, Material Icons, Font Awesome 4 and Font Awesome 5. By default, applications will use [Material Design Icons](https://materialdesignicons.com/).
+Out of the box, Vuetify supports 4 popular icon font libraries—[Material Design Icons](https://materialdesignicons.com/), [Material Icons](https://material.io/resources/icons/?style=baseline), [Font Awesome 4](https://fontawesome.com/v4.7.0/) and [Font Awesome 5](https://fontawesome.com/).
 
 <entry-ad />
 
 ## Usage
 
-In order to change your font library, you will need to either import one of our pre-defined icon sets, or provide your own.
+To change your font library, import one of the pre-defined icon sets or provide your own.
 
 ```js
 // src/plugins/vuetify.js
@@ -42,17 +42,17 @@ export default new createVuetify({
 </template>
 ```
 
-In the above example we are importing the provided `mdi` icon set and its aliases. The aliases are utilized to know which icon in a set is to be used when representing common actions such as close or expand in our internal components.
+In the above examples we import the default `mdi` icon set and its corresponding aliases. These aliases reference commonly used types of icons that are utilized by Vuetify components.
 
 <alert type="info">
 
-  While it is still possible to supply the icon value throught the default slot in Vuetify 3.0 (`<v-icon>mdi-home</v-icon>`), we recommend that you use the `icon` prop instead.
+  While it is still possible to supply the icon value through the default slot in Vuetify 3.0 (`<v-icon>mdi-home</v-icon>`), we recommend using the `icon` prop instead.
 
 </alert>
 
 ## Multiple icon sets
 
-You can of course use multiple icon sets at the same time. In the example below, the `fa` set is used as the default set, with `mdi` available as an extra set.
+Out of the box, Vuetify supports the use of multiple *different* icon sets at the same time. The following example demonstrates how to change the default icon font to Font Awesome (`fa`) while still maintaining access to the original Material Design Icons (`mdi`):
 
 ```js
 // src/plugins/vuetify.js
@@ -75,12 +75,16 @@ export default new createVuetify({
 
 ```html
 <template>
-  <v-icon icon="fas fa-plus" /> // This will render a FontAwesome icon
-  <v-icon icon="mdi:mdi-minus" /> // This will render an MDI icon
+  <v-icon icon="fas fa-plus" /> // This renders a FontAwesome icon
+  <v-icon icon="mdi:mdi-minus" /> // This renders a MDI icon
 </template>
 ```
 
-Note the `mdi:` prefix used for the second icon. It is necessary to provide the correct prefix when you want to render icons not from the default icon set.
+<alert type="info">
+
+  Note the `mdi:` prefix used in the *second* icon. It is necessary to provide the **correct** prefix when rendering icons that are **not** part of the default set.
+
+</alert>  
 
 ## Installing icon fonts
 
@@ -94,7 +98,7 @@ You are required to include the specified icon library (even when using the defa
 
 ### Material Design Icons
 
-This is the default icon set for Vuetify. You can include it through a CDN:
+This is the default icon set used by Vuetify. It supports local installation with a build process or a CDN link. The following shows how to add the CDN link to your `index.html`:
 
 ```html
 <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
@@ -120,6 +124,11 @@ export default new createVuetify({
   },
 })
 ```
+<alert type="error">
+
+  **DO NOT** use a CDN link without specifying a package *version*. Failure to do so can result in unexpected changes to your application with new releases.
+ 
+</alert>
 
 Use this tool to search for any Material Design Icons and copy them to your clipboard by clicking the item.
 
@@ -152,7 +161,7 @@ export default new createVuetify({
 })
 ```
 
-You can choose to import only the icons that you need, giving you a much smaller bundle size.
+To reduce bundle size, only import the icons that you need. The following example shows how to use an imported icon within a `.vue` template:
 
 ```html
 <template>
@@ -172,7 +181,7 @@ You can choose to import only the icons that you need, giving you a much smaller
 
 ### Material Icons
 
-For projects without a build process, it is recommended to import the icons from CDN
+For projects without a build process, it is recommended to import the icons from CDN.
 
 ```html
 <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
@@ -210,7 +219,7 @@ export default new createVuetify({
 </template>
 ```
 
-Some Material Icons are missing by default. For example, `person` and `person_outline` are available, but `visibility_outline` isn't, while `visibility` is. To use the missing icons, replace the existing `<link>` with the following one.
+Some Material Icons are missing by default. For example, `person` and `person_outline` are available, but `visibility_outline` isn't, while `visibility` is. To use the missing icons, replace the existing `<link>` with the following:
 
 ```html
 <link
@@ -345,9 +354,12 @@ export default new createVuetify({
 
 ## Creating a custom icon set
 
-As previously mentioned you can easily create your own icon set, as shown below. An icon set consists of an object with one property `component` which should be a functional component that receives props of type `IconsProps`.
+An icon set consists of an object with one property `component` which should be a functional component that receives props of type `IconsProps`.
 
-If this new custom icon set is supposed to be your default set, then you should also supply the necessary `aliases` so that Vuetify components know what icons to render.
+In order to use a custom icon set as the framework default, you **must** add the necessary *aliases* that correspond to values used by Vuetify components.
+
+The following snippet is a complete list of all supported icon types:
+
 
 ```ts
 // src/iconsets/custom.ts
