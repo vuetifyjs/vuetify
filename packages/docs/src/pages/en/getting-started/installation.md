@@ -77,7 +77,7 @@ In order for the installation to proceed correctly, **vue-cli 4.0** is required.
 
 Once installed, generate a project with the following command using the **vue-cli 4.0**:
 
-```
+```bash
 vue create my-app
 ```
 
@@ -89,6 +89,7 @@ When prompted, choose `Vue 3 Preview`:
   > Default (Vue 3 Preview) ([Vue 3] babel, eslint)
     Manually select features 
 ```
+
 It is recommended to commit or stash your changes at this point, in case you need to rollback the changes.
 
 Next, navigate to your project directory and add Vuetify to your project:
