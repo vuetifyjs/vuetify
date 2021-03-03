@@ -4653,7 +4653,7 @@
     webpack "^4.0.0"
     webpack-bundle-analyzer "^3.8.0"
     webpack-chain "^6.4.0"
-    webpack-dev-server "^3.11.0"
+    webpack-dev-server "3.9.0"
     webpack-merge "^4.2.2"
   optionalDependencies:
     vue-loader-v16 "npm:vue-loader@^16.0.0-beta.3"
