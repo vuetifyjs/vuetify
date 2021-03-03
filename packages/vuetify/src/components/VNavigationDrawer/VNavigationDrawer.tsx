@@ -61,8 +61,7 @@ export default defineComponent({
       toRef(props, 'priority'),
       computed(() => props.right ? 'right' : 'left'),
       computed(() => {
-        if (!props.modelValue || props.temporary) return 0
-        return width.value
+        return !props.modelValue || props.temporary ? 0 : width.value
       }),
     )
 
