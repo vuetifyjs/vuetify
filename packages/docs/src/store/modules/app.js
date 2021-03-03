@@ -55,7 +55,7 @@ const state = {
   scrolling: false,
   search: false,
   settings: false,
-  version: null,
+  version: process.env.VUE_APP_VERSION,
 }
 
 const mutations = make.mutations(state)
