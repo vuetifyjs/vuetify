@@ -65,52 +65,6 @@ This will start the Vue User Interface and open a new window in your browser. On
 
 ![Install Vuetify Plugin](https://cdn.vuetifyjs.com/images/quick-start/vue_ui.png "Vue UI Vuetify Plugin")
 
-## Vuetify v3 Alpha install
-
-<alert type="error">
-
-Before proceeding, it is important to note that this installation is intended primarily for testing purposes, and should not be considered for production applications.
-
-</alert>
-
-In order for the installation to proceed correctly, **vue-cli 4.0** is required. Further instructions are available at [vue-cli](https://github.com/vuejs/vue-cli).
-
-Once installed, generate a project with the following command using the **vue-cli 4.0**:
-
-```bash
-vue create my-app
-```
-
-When prompted, choose `Vue 3 Preview`:
-
-```bash
-? Please pick a preset: 
-    Default ([Vue 2] babel, eslint) 
-  > Default (Vue 3 Preview) ([Vue 3] babel, eslint)
-    Manually select features 
-```
-
-It is recommended to commit or stash your changes at this point, in case you need to rollback the changes.
-
-Next, navigate to your project directory and add Vuetify to your project:
-
-```bash
-cd my-app
-vue add vuetify
-```
-
-Once prompted, choose V3 (alpha):
-
-```bash
-? Choose a preset: (Use arrow keys)
-  Default (recommended) 
-  Prototype (rapid development) 
-  Configure (advanced) 
-> V3 (alpha)
-```
-
-If you have any questions or run into issues, please reach out to our [Discord community](https://community.vuetifyjs.com/).
-
 ## Nuxt install
 
 Vuetify can be added by installing the Nuxt Vuetify module.
