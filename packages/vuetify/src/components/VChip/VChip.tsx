@@ -55,6 +55,10 @@ export default defineComponent({
     link: Boolean,
     // outlined: Boolean,
     pill: Boolean,
+    ripple: {
+      type: Boolean,
+      default: true,
+    },
     textColor: String,
     value: null as any,
 
@@ -63,7 +67,8 @@ export default defineComponent({
     ...makeTagProps({ tag: 'span' }),
   }),
 
-  setup (props, { slots }) {
+  emits: ['close'],
+  setup (props, { slots, emit }) {
     const { sheetClasses, sheetStyles } = useSheet(props, 'v-chip')
 
     const { sizeClasses } = useSize(props, 'v-chip')
@@ -131,6 +136,7 @@ export default defineComponent({
         {
           props.close && (
             <VIcon
+              on-click={emit('close')}
               icon={props.closeIcon}
               class="v-chip__close"
               props={{
@@ -142,7 +148,7 @@ export default defineComponent({
         }
       </props.tag>,
       [useDirective<RippleDirectiveBinding>(Ripple, {
-        value: !props.disabled,
+        value: props.ripple && !props.disabled,
       })]
     )
   },
