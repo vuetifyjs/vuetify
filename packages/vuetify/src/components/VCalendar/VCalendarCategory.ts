@@ -104,7 +104,7 @@ export default VCalendarDaily.extend({
           staticClass: 'v-calendar-category__horizontal-scrollable',
         }, [
           this.$createElement('div', {
-            staticClass: 'v-calendar-daily__day-container',
+            staticClass: 'v-calendar-daily__day-body',
           }, [
             ...this.genDays(),
           ]),
