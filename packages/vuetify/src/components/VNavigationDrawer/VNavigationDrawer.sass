@@ -13,7 +13,6 @@
   transition-duration: $navigation-drawer-transition-duration
   transition-property: $navigation-drawer-transition-property
   transition-timing-function: $navigation-drawer-transition-timing-function
-  width: $navigation-drawer-width
   will-change: $navigation-drawer-will-change
 
   @include border($navigation-drawer-border...)
@@ -60,15 +59,6 @@
 
   &--floating
     border: $navigation-drawer-floating-border
-
-  &--rail
-    width: $navigation-drawer-rail-width
-
-    &.v-navigation-drawer--dense
-      width: $navigation-drawer-dense-rail-width
-
-    &.v-navigation-drawer--expand-on-hover.v-navigation-drawer--is-hovering
-      width: $navigation-drawer-width
 
   &--temporary
     @include elevation($navigation-drawer-temporary-elevation)

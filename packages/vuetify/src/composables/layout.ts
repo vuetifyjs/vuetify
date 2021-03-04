@@ -43,10 +43,6 @@ export const makeLayoutItemProps = propsFactory({
     type: Number,
     default: 0,
   },
-  size: {
-    type: [Number, String],
-    default: 300,
-  },
 })
 
 export function useMain () {

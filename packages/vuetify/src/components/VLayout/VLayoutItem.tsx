@@ -16,6 +16,10 @@ export default defineComponent({
       required: true,
     } as Prop<'top' | 'right' | 'bottom' | 'left'>,
     ...makeLayoutItemProps(),
+    size: {
+      type: Number,
+      default: 100
+    },
   },
 
   setup (props, { slots }) {

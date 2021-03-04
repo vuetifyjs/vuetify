@@ -25,7 +25,6 @@ export default defineComponent({
   props: makeProps({
     ...makeLayoutItemProps({
       name: 'navigation-drawer',
-      size: 256,
     }),
     ...makeSheetProps(),
     ...makeTagProps({ tag: 'nav' }),
@@ -34,33 +33,36 @@ export default defineComponent({
       default: 'top',
       validator: (v: any) => alignedValues.includes(v)
     },
-    dense: Boolean,
     expandOnHover: Boolean,
     floating: Boolean,
     mobile: Boolean,
     modelValue: Boolean,
     permanent: Boolean,
     rail: Boolean,
-    railWidth: [Number, String],
+    railWidth: {
+      type: [Number, String],
+      default: 72,
+    },
     src: String,
     temporary: Boolean,
-    width: [Number, String]
+    width: {
+      type: [Number, String],
+      default: 256,
+    },
   }),
 
   setup (props, { slots }) {
     const { sheetClasses, sheetStyles } = useSheet(props, 'v-navigation-drawer')
     const isActive = useProxiedModel(props, 'modelValue')
     const isHovering = ref(false)
+    const width = computed(() => Number(props.rail ? props.railWidth : props.width))
     const styles = useLayoutItem(
       props.name,
       toRef(props, 'priority'),
       computed(() => props.right ? 'right' : 'left'),
       computed(() => {
-        if (!isActive.value) return 0
-        if (props.rail) return props.dense ? 56 : 72
-
-        return 256
-      })
+        return !props.modelValue || props.temporary ? 0 : width.value
+      }),
     )
 
     onBeforeMount(() => {
@@ -69,9 +71,6 @@ export default defineComponent({
 
     return () => {
       const hasImg = (slots.img || props.src)
-      const hasRail = props.rail || props.expandOnHover
-      const transform = props.bottom ? 'Y' : 'X'
-      const width = hasRail ? props.railWidth : props.width
 
       const translate = (
         (isActive.value ? 0 : 100) * (!props.right && !props.bottom ? -1 : 1)
@@ -85,7 +84,6 @@ export default defineComponent({
             {
               'v-navigation-drawer': true,
               'v-navigation-drawer--bottom': props.bottom,
-              'v-navigation-drawer--dense': props.dense,
               'v-navigation-drawer--end': props.right,
               'v-navigation-drawer--expand-on-hover': props.expandOnHover,
               'v-navigation-drawer--floating': props.floating,
@@ -101,8 +99,8 @@ export default defineComponent({
             sheetStyles.value,
             styles.value,
             {
-              transform: `translate${transform}(${convertToUnit(translate, '%')})`,
-              width: convertToUnit(width)
+              transform: `translate${props.bottom ? 'Y' : 'X'}(${convertToUnit(translate, '%')})`,
+              width: props.temporary ? convertToUnit(width.value) : styles.value.width,
             },
           ]}
         >
