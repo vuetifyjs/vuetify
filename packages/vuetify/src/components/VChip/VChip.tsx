@@ -30,7 +30,7 @@ export default defineComponent({
     activeClass: {
       type: String,
       default: '',
-    } as any,
+    },
     close: Boolean,
     closeIcon: {
       type: String,
@@ -53,7 +53,6 @@ export default defineComponent({
     },
     label: Boolean,
     link: Boolean,
-    // outlined: Boolean,
     pill: Boolean,
     ripple: {
       type: Boolean,
@@ -67,7 +66,7 @@ export default defineComponent({
     ...makeTagProps({ tag: 'span' }),
   }),
 
-  emits: ['close'],
+  emits: ['click:close', 'update:active'],
   setup (props, { slots, emit }) {
     const { sheetClasses, sheetStyles } = useSheet(props, 'v-chip')
 
@@ -86,6 +85,13 @@ export default defineComponent({
     })
 
     const isClickable = computed(() => {})
+
+    const close = (e: Event) => {
+      e.stopPropagation()
+      e.preventDefault()
+      emit('click:close')
+      emit('update:active', false)
+    }
 
     const { colorClasses, colorStyles } = useColor(computed(() => ({
       [isContained.value ? 'background' : 'text']: props.color,
@@ -136,9 +142,10 @@ export default defineComponent({
         {
           props.close && (
             <VIcon
-              on-click={emit('close')}
+              onClick={close}
               icon={props.closeIcon}
               class="v-chip__close"
+              aria-label={props.closeLabel}
               props={{
                 right: true,
                 size: 18,
@@ -178,36 +185,6 @@ export default defineComponent({
       }
 
       return this.$createElement(VExpandXTransition, children)
-    },
-    genClose (): VNode {
-      return this.$createElement(VIcon, {
-        staticClass: 'v-chip__close',
-        props: {
-          right: true,
-          size: 18,
-        },
-        attrs: {
-          'aria-label': this.$vuetify.lang.t(this.closeLabel),
-        },
-        on: {
-          click: (e: Event) => {
-            e.stopPropagation()
-            e.preventDefault()
-
-            this.$emit('click:close')
-            this.$emit('update:active', false)
-          },
-        },
-      }, this.closeIcon)
-    },
-    genContent (): VNode {
-      return this.$createElement('span', {
-        staticClass: 'v-chip__content',
-      }, [
-        this.filter && this.genFilter(),
-        this.$slots.default,
-        this.hasClose && this.genClose(),
-      ])
     },
   },
 
