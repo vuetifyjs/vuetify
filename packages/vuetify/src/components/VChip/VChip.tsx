@@ -3,6 +3,7 @@ import './VChip.sass'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
+import { makeSheetProps, useSheet } from '@/components/VSheet/VSheet'
 import { useColor } from '@/composables/color'
 
 // Directives
@@ -52,16 +53,19 @@ export default defineComponent({
     },
     label: Boolean,
     link: Boolean,
-    outlined: Boolean,
+    // outlined: Boolean,
     pill: Boolean,
     textColor: String,
     value: null as any,
 
+    ...makeSheetProps(),
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'span' }),
   }),
 
   setup (props, { slots }) {
+    const { sheetClasses, sheetStyles } = useSheet(props, 'v-chip')
+
     const { sizeClasses } = useSize(props, 'v-chip')
 
     const isContained = computed(() => {
@@ -99,26 +103,42 @@ export default defineComponent({
             'v-chip--pill': props.pill,
             'v-chip--removable': hasClose.value,
           },
+          sheetClasses.value,
           colorClasses.value,
           sizeClasses.value,
         ]}
         style={[
+          sheetStyles.value,
           colorStyles.value,
         ]}
         disabled={ props.disabled }
+        draggable={ props.draggable }
       >
+        {
+          props.filter && (
+            <VIcon
+              icon={props.filterIcon}
+              class="v-chip__filter"
+              props={{
+                left: true,
+              }}
+            />
+          )
+        }
         <span class="v-chip__content">
           { slots.default?.() }
         </span>
         {
-          props.close && (<VIcon
-            icon={props.closeIcon}
-            class="v-chip__close"
-            props={{
-              right: true,
-              size: 18,
-            }}
-          />)
+          props.close && (
+            <VIcon
+              icon={props.closeIcon}
+              class="v-chip__close"
+              props={{
+                right: true,
+                size: 18,
+              }}
+            />
+          )
         }
       </props.tag>,
       [useDirective<RippleDirectiveBinding>(Ripple, {

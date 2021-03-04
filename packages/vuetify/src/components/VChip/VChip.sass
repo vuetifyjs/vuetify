@@ -1,25 +1,5 @@
 // Imports
-@import './index'
-
-// Theme
-.v-chip:not(.v-chip--outlined)
-  &.primary,
-  &.secondary,
-  &.accent,
-  &.success,
-  &.error,
-  &.warning,
-  &.info
-    color: map-deep-get($material-dark, 'text', 'primary')
-
-+theme(v-chip) using ($material)
-  border-color: map-get($material, 'dividers')
-  color: map-deep-get($material, 'text', 'primary')
-
-  &:not(.v-chip--active)
-    background: map-get($material, 'chips')
-
-  +states('.v-chip')
+@import './_index'
 
 // Block
 .v-chip
@@ -187,7 +167,7 @@
 
 .v-chip
   @each $name, $size in $icon-sizes
-    &.v-size--#{$name}
+    &.v-chip--size-#{$name}
       border-radius: #{map-get($size, 'height') / 2}px
       font-size: #{map-get($size, 'font-size')}px
       height: #{map-get($size, 'height')}px
