@@ -80,21 +80,14 @@
       />
     </div>
 
-    <v-theme-provider :dark="dark">
-      <v-sheet
-        class="pa-4"
-        rounded
-      >
-        <vue-file
-          :file="file"
-          @error="hasError = true"
-        />
-      </v-sheet>
-    </v-theme-provider>
+    <codepen-embed v-if="pen" :file="file.replace('/', '-')" :pen="pen"></codepen-embed>
+    <div v-else>HEY I'M LOADIN' HERE!</div>
+
   </v-sheet>
 </template>
 
 <script>
+  import CodepenEmbed from './CodepenEmbed'
   // Mixins
   import Codepen from '@/mixins/codepen'
 
@@ -105,6 +98,10 @@
     name: 'Example',
 
     mixins: [Codepen],
+
+    components: {
+      CodepenEmbed,
+    },
 
     props: { file: String },
 
