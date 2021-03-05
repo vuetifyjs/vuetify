@@ -18,7 +18,7 @@ Easily change the colors of your application programmatically. Vuetify supports 
 
 ## Setup
 
-Vuetify comes with two themes pre-installed, `light` and `dark`. To set the default theme of your application, use the `defaultTheme` option.
+Vuetify comes with two themes pre-installed, `light` and `dark`. To set the default theme of your application, use the **defaultTheme** option.
 
 ```js
 // src/plugins/vuetify.js
@@ -32,9 +32,9 @@ export default createVuetify({
 })
 ```
 
-Adding new themes is as easy as defining a new property in the `themes` object. A theme is a collection of colors and options that change the overall look and feel of your application. One of these options designates the theme as being either a `light` or `dark` variation. This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://material.io/design/color/dark-theme.html) page.
+Adding new themes is as easy as defining a new property in the **theme** object. A theme is a collection of colors and options that change the overall look and feel of your application. One of these options designates the theme as being either a **light** or **dark** variation. This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://material.io/design/color/dark-theme.html) page.
 
-You can use the `ThemeDefinition` type to help with type checking.
+Use the `ThemeDefinition` type to get type hints for the structure of the theme object.
 
 ```ts
 // src/plugins/vuetify.ts
@@ -69,12 +69,12 @@ export default createVuetify({
 
 ## Changing theme
 
-To dynamically change theme during runtime, you can use the `theme` prop on the `<v-app>` component.
+To dynamically change theme during runtime, add the **theme** prop to the `<v-app>` component.
 
 ```html
 <template>
   <v-app :theme="theme">
-    <v-btn @click="theme = theme === 'light' ? 'dark' : 'light'">toggle theme</v-btn>
+    <v-btn @click="toggleTheme">toggle theme</v-btn>
     ...
   </v-app>
 </template>
@@ -86,20 +86,28 @@ export default {
   setup () {
     const theme = ref('light')
 
-    return { theme }
+    return {
+      theme,
+      toggleTheme: () => theme.value = theme.value === 'light' ? 'dark' : 'light'
+    }
   }
 }
 </script>
 ```
 
-If there are parts of your application that need to have a different theme, you can use the `<v-theme-provider>` component. This will apply the specified theme to all components nested inside it.
+Use the `<v-theme-provider>` component to apply different themes to different sections of your application. In the following example, we apply a custom theme named `high-contrast`:
 
 ```html
 <template>
   <v-app>
-    ...
-    <v-theme-provider theme="someOtherTheme">
-      ...
+    <!-- uses the current default theme -->
+    <v-card>...</v-card>
+
+    <v-theme-provider theme="high-contrast">
+      <!-- uses the high-contrast theme -->
+      <v-card>
+         ...
+      </v-card>
     </v-theme-provider>
   </v-app>
 </template>
@@ -107,7 +115,7 @@ If there are parts of your application that need to have a different theme, you 
 
 ## Custom theme colors
 
-The Vuetify theme system supports adding custom colors. For any property added to the `colors` object, Vuetify will generate a number of css classes and variables for you to use in your application.
+The Vuetify theme system supports adding custom colors. For any property added to the **colors** object, Vuetify will generate a number of css classes and variables for you to use in your application.
 
 ```js
 // src/plugins/vuetify.js
@@ -133,7 +141,9 @@ export default createVuetify({
 ```html
 <template>
   <div class="bg-green on-green">background color with appropriate text color contrast</div>
+
   <div class="text-green">text color</div>
+
   <div class="border-green">border color</div>
 </template>
 
@@ -147,7 +157,7 @@ export default createVuetify({
 
 ## Color variations
 
-If you don't want to be bothered with coming up with lighten/darken variations of your colors, you can let Vuetify generate them for you using the `variations` property. The following configuration will generate 1 `lighten` variant and 2 `darken` variants for the `primary` and `secondary` colors.
+If you don't want to be bothered with coming up with lighten/darken variations of your colors, you can let Vuetify generate them for you using the **variations** property. The following configuration will generate 1 lighten variant and 2 darken variants for the `primary` and `secondary` colors.
 
 ```js
 // src/plugins/vuetify.js
@@ -172,14 +182,16 @@ export default createVuetify({
 ```html
 <template>
   <div class="text-primary-lighten-1">text color</div>
+
   <div class="text-primary-darken-1">text color</div>
+
   <div class="text-primary-darken-2">text color</div>
 </template>
 ```
 
 ## Disable theme
 
-You can disable theme functionality by setting the `theme` configuration property to `false`. This will prevent the creation of the Vuetify stylesheet, and theme classes will not be applied to components.
+The theme functionality can be disabled by setting the **theme** configuration property to `false`. This prevents the creation of the Vuetify stylesheet, and theme classes will not be applied to components.
 
 ```js
 // src/plugins/vuetify.js
@@ -193,6 +205,6 @@ export default createVuetify({
 
 ## Implementation
 
-Vuetify generates theme styles at run-time according to the given configuration. The generated styles will be placed in a `<style>` tag with an **id** of `vuetify-theme-stylesheet`.
+Vuetify generates theme styles at run-time according to the given configuration. The generated styles will be placed in the `<head>` section of you markup in a `<style>` tag with an **id** of `vuetify-theme-stylesheet`.
 
 <backmatter />
