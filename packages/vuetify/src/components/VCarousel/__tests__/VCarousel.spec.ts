@@ -126,7 +126,7 @@ describe('VCarousel.ts', () => {
     expect(wrapper.vm.internalHeight).toBe(300)
   })
 
-  it.only('should not change context to dark mode automatically', async () => {
+  it('should not change context to dark mode automatically', async () => {
     const wrapper = mountFunction()
 
     expect(wrapper.vm.isDark).toBe(false)
