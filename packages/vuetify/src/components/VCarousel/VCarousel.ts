@@ -77,7 +77,7 @@ export default VWindow.extend({
       }
     },
     isDark (): boolean {
-      return this.dark || !this.light
+      return this.dark === true || this.light === false
     },
     isVertical (): boolean {
       return this.verticalDelimiters != null

@@ -125,4 +125,29 @@ describe('VCarousel.ts', () => {
 
     expect(wrapper.vm.internalHeight).toBe(300)
   })
+
+  it.only('should not change context to dark mode automatically', async () => {
+    const wrapper = mountFunction()
+
+    expect(wrapper.vm.isDark).toBe(false)
+
+    wrapper.setProps({ dark: true })
+
+    expect(wrapper.vm.isDark).toBe(true)
+
+    wrapper.setProps({ dark: false })
+
+    expect(wrapper.vm.isDark).toBe(false)
+
+    // reset previous dark
+    wrapper.setProps({ dark: null })
+
+    wrapper.setProps({ light: true })
+
+    expect(wrapper.vm.isDark).toBe(false)
+
+    wrapper.setProps({ light: false })
+
+    expect(wrapper.vm.isDark).toBe(true)
+  })
 })
