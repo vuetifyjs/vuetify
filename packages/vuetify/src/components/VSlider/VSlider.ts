@@ -477,7 +477,6 @@ export default mixins<options &
       this.$emit('start', this.internalValue)
     },
     onSliderMouseUp (e: Event) {
-      console.log(e)
       e.stopPropagation()
       window.clearTimeout(this.mouseTimeout)
       this.thumbPressed = false
