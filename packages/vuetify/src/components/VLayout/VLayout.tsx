@@ -3,6 +3,7 @@ import './VLayout.sass'
 
 // Utilities
 import { defineComponent } from 'vue'
+import { useRender } from '@/util/useRender'
 import makeProps from '@/util/makeProps'
 
 // Composables
@@ -13,21 +14,21 @@ export default defineComponent({
 
   props: makeProps(makeLayoutProps()),
 
-  setup (props, { slots, expose }) {
+  setup (props, { slots }) {
     const { layoutClasses, getLayoutItem, items } = createLayout(props)
 
-    expose({
-      getLayoutItem,
-      items,
-    })
-
-    return () => (
+    useRender(() => (
       <div
         class={layoutClasses.value}
         style={{
           height: props.fullHeight ? '100vh' : undefined,
         }}
       >{ slots.default?.() }</div>
-    )
+    ))
+
+    return {
+      getLayoutItem,
+      items,
+    }
   },
 })

@@ -4,11 +4,9 @@ import './VImg.sass'
 import {
   computed,
   defineComponent,
-  getCurrentInstance,
   h,
   nextTick,
   onBeforeMount,
-  reactive,
   ref,
   vShow,
   watch,
@@ -25,6 +23,7 @@ import type { ObserveDirectiveBinding } from '@/directives/intersect'
 
 // Utils
 import makeProps from '@/util/makeProps'
+import { useRender } from '@/util/useRender'
 import { useDirective } from '@/util/useDirective'
 import { maybeTransition } from '@/util'
 
@@ -82,16 +81,6 @@ export default defineComponent({
     const state = ref<'idle' | 'loading' | 'loaded' | 'error'>('idle')
     const naturalWidth = ref<number>()
     const naturalHeight = ref<number>()
-
-    // TODO: use expose() https://github.com/vuejs/vue-test-utils-next/issues/435
-    const vm = getCurrentInstance() as any
-    vm.setupState = reactive({
-      currentSrc,
-      image,
-      state,
-      naturalWidth,
-      naturalHeight,
-    })
 
     const normalisedSrc = computed<srcObject>(() => {
       return props.src && typeof props.src === 'object'
@@ -242,7 +231,7 @@ export default defineComponent({
       return maybeTransition(props, { appear: true }, error)
     })
 
-    return () => withDirectives(
+    useRender(() => withDirectives(
       <VResponsive
         class="v-img"
         aspectRatio={ aspectRatio.value }
@@ -260,6 +249,14 @@ export default defineComponent({
         },
         modifiers: { once: true },
       })]
-    )
+    ))
+
+    return {
+      currentSrc,
+      image,
+      state,
+      naturalWidth,
+      naturalHeight,
+    }
   },
 })
