@@ -2,6 +2,7 @@
   <div :id="file" v-bind="attrs">
     <pre data-lang="html">{{ template }}</pre>
     <pre data-lang="js">{{ script }}</pre>
+    <pre :data-lang="style.language">{{ style.content }}</pre>
   </div>
 </template>
 
@@ -107,9 +108,10 @@
   }).use(vuetify).mount('#app')`
       },
       style () {
+        const language = /<style.*lang=["'](.*)["'].*>/.exec(this.pen.style || '')
         return {
           content: (this.pen.style || '').replace(/(<style.*?>|<\/style>)/g, '').replace(/\n {2}/g, '\n').trim(),
-          language: /<style.*lang=["'](.*)["'].*>/.exec(this.pen.style || ''),
+          language: language ?? 'css',
         }
       },
       template () {
