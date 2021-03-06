@@ -48,6 +48,9 @@ export default VAutocomplete.extend({
       return this.hasDisplayedItems ||
         (!!this.$slots['no-data'] && !this.hideNoData)
     },
+    searchIsDirty (): boolean {
+      return this.internalSearch != null
+    },
   },
 
   methods: {
