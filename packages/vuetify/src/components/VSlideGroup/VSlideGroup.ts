@@ -101,6 +101,14 @@ export const BaseSlideGroup = mixins<options &
   }),
 
   computed: {
+    /**
+     * A computed property that returns
+     * whether touch features is
+     * enabled or disabled
+     */
+    canTouch (): boolean {
+      return typeof window !== 'undefined'
+    },
     __cachedNext (): VNode {
       return this.genTransition('next')
     },
@@ -291,6 +299,8 @@ export const BaseSlideGroup = mixins<options &
       content.style.setProperty('willChange', 'transform')
     },
     onTouchMove (e: TouchEvent) {
+      if (!this.canTouch) return
+
       if (!this.isSwiping) {
         // only calculate disableSwipeHorizontal during the first onTouchMove invoke
         // in order to ensure disableSwipeHorizontal value is consistent between onTouchStart and onTouchEnd
@@ -299,6 +309,7 @@ export const BaseSlideGroup = mixins<options &
         this.isSwipingHorizontal = Math.abs(diffX) > Math.abs(diffY)
         this.isSwiping = true
       }
+
       if (this.isSwipingHorizontal) {
         // sliding horizontally
         this.scrollOffset = this.startX - e.touchmoveX
@@ -307,6 +318,8 @@ export const BaseSlideGroup = mixins<options &
       }
     },
     onTouchEnd () {
+      if (!this.canTouch) return
+
       const { content, wrapper } = this.$refs
       const maxScrollOffset = content.clientWidth - wrapper.clientWidth
 
