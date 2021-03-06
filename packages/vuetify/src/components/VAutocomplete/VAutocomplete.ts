@@ -349,7 +349,12 @@ export default VSelect.extend({
     onKeyDown (e: KeyboardEvent) {
       const keyCode = e.keyCode
 
-      VSelect.options.methods.onKeyDown.call(this, e)
+      if (
+        e.ctrlKey ||
+        ![keyCodes.home, keyCodes.end].includes(keyCode)
+      ) {
+        VSelect.options.methods.onKeyDown.call(this, e)
+      }
 
       // The ordering is important here
       // allows new value to be updated
