@@ -279,19 +279,19 @@ describe('VSlider.ts', () => {
 
     const container = wrapper.find('.v-slider__thumb-container')
 
-    expect(wrapper.vm.keyPressed).toBe(0)
+    expect(wrapper.vm.thumbPressed).toBe(false)
     expect(wrapper.vm.isActive).toBe(false)
 
     container.trigger('mousedown')
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.keyPressed).toBe(2)
+    expect(wrapper.vm.thumbPressed).toBe(true)
     expect(wrapper.vm.isActive).toBe(true)
 
     el.dispatchEvent(new Event('mouseup'))
 
-    expect(wrapper.vm.keyPressed).toBe(0)
+    expect(wrapper.vm.thumbPressed).toBe(false)
     expect(wrapper.vm.isActive).toBe(false)
 
     container.trigger('mousedown', {
@@ -300,20 +300,8 @@ describe('VSlider.ts', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.keyPressed).toBe(2)
+    expect(wrapper.vm.thumbPressed).toBe(true)
     expect(wrapper.vm.isActive).toBe(true)
-  })
-
-  it('should reset keys pressed', () => {
-    const wrapper = mountFunction()
-
-    wrapper.setData({ keyPressed: 5 })
-
-    expect(wrapper.vm.keyPressed).toBe(5)
-
-    wrapper.vm.onKeyUp()
-
-    expect(wrapper.vm.keyPressed).toBe(0)
   })
 
   it('should return a rounded value', () => {

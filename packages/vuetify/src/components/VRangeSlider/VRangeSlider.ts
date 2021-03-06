@@ -183,8 +183,16 @@ export default VSlider.extend({
       this.reevaluateSelected(value)
 
       this.oldValue = this.internalValue
-      this.keyPressed = 2
       this.isActive = true
+
+      if ((e.target as Element)?.matches('.v-slider__thumb-container, .v-slider__thumb-container *')) {
+        this.thumbPressed = true
+      } else {
+        window.clearTimeout(this.mouseTimeout)
+        this.mouseTimeout = window.setTimeout(() => {
+          this.thumbPressed = true
+        }, 300)
+      }
 
       const mouseUpOptions = passiveSupported ? { passive: true, capture: true } : true
       const mouseMoveOptions = passiveSupported ? { passive: true } : false
@@ -220,6 +228,10 @@ export default VSlider.extend({
     },
     onMouseMove (e: MouseEvent) {
       const { value, isInsideTrack } = this.parseMouseMove(e)
+
+      if (e.type === 'mousemove') {
+        this.thumbPressed = true
+      }
 
       if (isInsideTrack && this.activeThumb === null) {
         this.activeThumb = this.getIndexOfClosestValue(this.internalValue, value)
