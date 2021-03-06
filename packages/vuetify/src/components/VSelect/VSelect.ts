@@ -348,22 +348,23 @@ export default baseMixins.extend<options>().extend({
     },
     genChipSelection (item: object, index: number) {
       const isDisabled = (
-        !this.isInteractive ||
+        this.isDisabled ||
         this.getDisabled(item)
       )
+      const isInteractive = !isDisabled && this.isInteractive
 
       return this.$createElement(VChip, {
         staticClass: 'v-chip--select',
         attrs: { tabindex: -1 },
         props: {
-          close: this.deletableChips && !isDisabled,
+          close: this.deletableChips && isInteractive,
           disabled: isDisabled,
           inputValue: index === this.selectedIndex,
           small: this.smallChips,
         },
         on: {
           click: (e: MouseEvent) => {
-            if (isDisabled) return
+            if (!isInteractive) return
 
             e.stopPropagation()
 
@@ -377,7 +378,7 @@ export default baseMixins.extend<options>().extend({
     genCommaSelection (item: object, index: number, last: boolean) {
       const color = index === this.selectedIndex && this.computedColor
       const isDisabled = (
-        !this.isInteractive ||
+        this.isDisabled ||
         this.getDisabled(item)
       )
 
