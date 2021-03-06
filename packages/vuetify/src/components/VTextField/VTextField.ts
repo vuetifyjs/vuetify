@@ -378,6 +378,7 @@ export default baseMixins.extend<options>().extend({
     genInput () {
       const listeners = Object.assign({}, this.listeners$)
       delete listeners.change // Change should not be bound externally
+      const { title, ...inputAttrs } = this.attrs$
 
       return this.$createElement('input', {
         style: {},
@@ -385,7 +386,7 @@ export default baseMixins.extend<options>().extend({
           value: (this.type === 'number' && Object.is(this.lazyValue, -0)) ? '-0' : this.lazyValue,
         },
         attrs: {
-          ...this.attrs$,
+          ...inputAttrs,
           autofocus: this.autofocus,
           disabled: this.isDisabled,
           id: this.computedId,
