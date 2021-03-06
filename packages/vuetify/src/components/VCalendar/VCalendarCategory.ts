@@ -73,7 +73,7 @@ export default VCalendarDaily.extend({
     genDays (): VNode[] {
       const days: VNode[] = []
       this.days.forEach(d => {
-        const day = new Array(this.parsedCategories.length)
+        const day = new Array(this.parsedCategories.length || 1)
         day.fill(d)
         days.push(...day.map((v, i) => this.genDay(v, 0, i)))
       })
