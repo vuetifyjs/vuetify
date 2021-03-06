@@ -4,9 +4,12 @@
     outlined
     rounded
   >
-    <v-lazy @mouseenter="importTemplate">
-      <codepen-embed v-if="pen" :file="file.replace('/', '-')" :pen="pen"></codepen-embed>
-      <div v-else>Hover To Load ?</div>
+    <v-lazy @input="importTemplate">
+      <codepen-embed
+        v-if="pen"
+        :file="file.replace('/', '-')"
+        :pen="pen"
+      />
     </v-lazy>
   </v-sheet>
 </template>
@@ -22,11 +25,11 @@
   export default {
     name: 'Example',
 
-    mixins: [Codepen],
-
     components: {
       CodepenEmbed,
     },
+
+    mixins: [Codepen],
 
     props: { file: String },
 
