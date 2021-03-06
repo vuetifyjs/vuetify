@@ -43,6 +43,7 @@
       >
         <ais-configure
           :facetFilters="[`language:${locale}`]"
+          :hitsPerPage="50"
           :query="searchString"
         />
 
