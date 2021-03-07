@@ -82,7 +82,7 @@ export default createVuetify({
 
 <alert type="info">
 
-  Note the `mdi:` prefix used in the *second* icon. It is necessary to provide the **correct** prefix when rendering icons that are **not** part of the default set.
+  It is not necessary to provide a prefix (such as `mdi:`) for icons from the default set
 
 </alert>
 
@@ -152,7 +152,7 @@ import { aliases, mdi } from 'vuetify/lib/iconsets/mdi-svg'
 
 export default createVuetify({
   icons: {
-    iconfont: 'mdi',
+    defaultSet: 'mdi',
     aliases,
     sets: {
       mdi,
@@ -251,8 +251,6 @@ import '@fortawesome/fontawesome-free/css/all.css' // Ensure your project is cap
 import { createVuetify } from 'vuetify'
 import { aliases, fa } from 'vuetify/lib/iconsets/fa'
 
-Vue.use(Vuetify)
-
 export default createVuetify({
   icons: {
     defaultSet: 'fa',
@@ -269,6 +267,12 @@ export default createVuetify({
   <v-icon icon="fas fa-home" />
 </template>
 ```
+
+<alert type="error">
+
+  The JavaScript version (`all.js`) of the FontAwesome icons will **not** work with Vue
+
+</alert>
 
 ### Font Awesome 4 Icons
 
@@ -323,19 +327,21 @@ $ npm install @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fo
 Then register the global `font-awesome-icon` component and use the pre-defined `fa-svg` icon set. If you have access to Font Awesome Pro icons they can be added to the library in the same way.
 
 ```js
-// src/plugins/vuetify.js
+// src/main.js
 
-import Vue from 'vue'
+import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 import { aliases, fa } from 'vuetify/lib/iconsets/fa-svg'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 
-Vue.component('font-awesome-icon', FontAwesomeIcon) // Register component globally
+const app = createApp()
+
+app.component('font-awesome-icon', FontAwesomeIcon) // Register component globally
 library.add(fas) // Include needed icons
 
-export default createVuetify({
+const vuetify = createVuetify({
   icons: {
     defaultSet: 'fa',
     aliases,
@@ -344,6 +350,10 @@ export default createVuetify({
     },
   },
 })
+
+app.use(vuetify)
+
+app.mount('#app')
 ```
 
 ```html
