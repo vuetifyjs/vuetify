@@ -22,7 +22,8 @@ const loadLocale = (componentName, locale, fallback = {}) => {
 
 const loadMap = (componentName, group, fallback = {}) => {
   try {
-    const map = require(`./maps/${group}/${componentName}`)
+    const data = require(`./maps/${group}/${componentName}`)
+    const map = data[componentName] ? data[componentName] : data
     return Object.assign(fallback, { ...map })
   } catch (err) {
     return fallback
