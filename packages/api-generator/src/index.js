@@ -1,16 +1,19 @@
-// const Vue = require('vue')
-// const Vuetify = require('vuetify')
-// const { components: excludes } = require('./helpers/excludes')
+const { createApp } = require('vue')
+const { createVuetify } = require('vuetify')
+const { components: excludes } = require('./helpers/excludes')
 const { sortBy } = require('lodash')
-const { camelCase } = require('./helpers/text')
-const { getComponentList, parseSassVariables } = require('./helpers/parsing')
+const { camelCase, kebabCase } = require('./helpers/text')
+const { getPropType, parseSassVariables } = require('./helpers/parsing')
 const deepmerge = require('./helpers/merge')
 
-// Vue.use(Vuetify)
+const app = createApp()
+const vuetify = createVuetify()
+
+app.use(vuetify)
 
 const loadLocale = (componentName, locale, fallback = {}) => {
   try {
-    const data = require(`./locale-alpha/${locale}/${componentName}`)
+    const data = require(`./locale/${locale}/${componentName}`)
     return Object.assign(fallback, data)
   } catch (err) {
     return fallback
@@ -19,9 +22,9 @@ const loadLocale = (componentName, locale, fallback = {}) => {
 
 const loadMap = (componentName, group, fallback = {}) => {
   try {
-    const map = require(`./maps-alpha/${group}/${componentName}`)
+    const map = require(`./maps/${group}/${componentName}`)
     return Object.assign(fallback, { ...map })
-  } catch {
+  } catch (err) {
     return fallback
   }
 }
@@ -100,20 +103,26 @@ const addGenericApiDescriptions = (name, api, locales, categories) => {
 
 const getComponentApi = (componentName, locales) => {
   // if (!component) throw new Error(`Could not find component: ${componentName}`)
-  const componentMap = loadMap(componentName, 'components', { composables: [], props: [], slots: [], events: [], functions: [] })
+  const kebabName = kebabCase(componentName)
+  const componentMap = loadMap(kebabName, 'components', { props: [], slots: [], events: [], functions: [] })
 
-  // get composable props
-  const composableProps = []
-  for (const composable of componentMap.composables) {
-    const props = composable.slice(0, 2) === 'v-'
-      ? getComponentApi(composable, locales).props
-      : loadMap(composable, 'composables', { props: [] }).props
-    composableProps.push(...props)
-  }
+  const component = app._context.components[componentName]
+  const props = Object.keys(component.props).reduce((arr, key) => {
+    const prop = component.props[key]
+
+    const type = getPropType(prop.type)
+
+    return [...arr, {
+      name: kebabCase(key),
+      source: prop.source || kebabName,
+      default: prop.default(),
+      type,
+    }]
+  }, [])
 
   const sassVariables = parseSassVariables(componentName)
 
-  const api = deepmerge(componentMap, { name: componentName, props: composableProps, sass: sassVariables, component: true })
+  const api = deepmerge(componentMap, { name: kebabName, props, sass: sassVariables, component: true })
 
   // Make sure things are sorted
   const categories = ['props', 'slots', 'events', 'functions']
@@ -162,7 +171,9 @@ const getApi = (name, locales) => {
 
 const getComponentsApi = locales => {
   const components = []
-  const componentList = getComponentList()
+  const componentList = Object.keys(app._context.components)
+    .filter(name => !excludes.includes(name))
+    .filter(name => !name.endsWith('Transition')) // TODO: Filter out transitions for now
 
   for (const componentName of componentList) {
     components.push(getComponentApi(componentName, locales))

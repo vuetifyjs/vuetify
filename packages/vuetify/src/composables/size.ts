@@ -14,7 +14,7 @@ export const makeSizeProps = propsFactory({
     type: [String, Number],
     default: 'default',
   },
-})
+}, 'size')
 
 // Effect
 export function useSize (props: SizeProps, name: string) {
