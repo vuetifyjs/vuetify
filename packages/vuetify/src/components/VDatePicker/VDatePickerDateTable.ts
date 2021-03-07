@@ -115,7 +115,7 @@ export default mixins(
         if (rows.length % (this.showWeek ? 8 : 7) === 0) {
           children.push(this.genTR(rows))
           rows = []
-          if (this.showWeek && (day < daysInMonth)) {
+          if (this.showWeek && (day < daysInMonth || this.showAdjacentMonths)) {
             rows.push(this.genWeekNumber(this.getWeekNumber(day + 7)))
           }
         }
@@ -125,7 +125,7 @@ export default mixins(
       const nextMonth = (this.displayedMonth + 1) % 12
       let nextMonthDay = 1
 
-      while (rows.length < 7) {
+      while (rows.length < (this.showWeek ? 8 : 7)) {
         const date = `${nextMonthYear}-${pad(nextMonth + 1)}-${pad(nextMonthDay++)}`
 
         rows.push(this.$createElement('td', this.showAdjacentMonths ? [
