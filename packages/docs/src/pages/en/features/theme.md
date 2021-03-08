@@ -69,7 +69,7 @@ export default createVuetify({
 
 ## Changing theme
 
-To dynamically change theme during runtime, add the **theme** prop to the `<v-app>` component.
+To dynamically change theme during run-time, add the **theme** prop to the `<v-app>` component.
 
 ```html
 <template>
@@ -95,7 +95,7 @@ export default {
 </script>
 ```
 
-Use the `<v-theme-provider>` component to apply different themes to different sections of your application. In the following example, we apply a custom theme named `high-contrast`:
+Use the `<v-theme-provider>` component to dynamically apply different themes to *specific* sections of your application. In the following example, we apply a custom theme named `high-contrast`:
 
 ```html
 <template>
@@ -115,7 +115,7 @@ Use the `<v-theme-provider>` component to apply different themes to different se
 
 ## Custom theme colors
 
-The Vuetify theme system supports adding custom colors. For any property added to the **colors** object, Vuetify will generate a number of css classes and variables for you to use in your application.
+The Vuetify theme system supports adding *custom* colors. When configuring the Vuetify theme settings, add any number of custom colors to the **colors** object and Vuetify will generate a number of CSS classes and variables for you to use in your application.
 
 ```js
 // src/plugins/vuetify.js
@@ -205,6 +205,6 @@ export default createVuetify({
 
 ## Implementation
 
-Vuetify generates theme styles at run-time according to the given configuration. The generated styles will be placed in the `<head>` section of you markup in a `<style>` tag with an **id** of `vuetify-theme-stylesheet`.
+Vuetify generates theme styles at run-time according to the given configuration. The generated styles are injected into the `<head>` section of the DOM in a `<style>` tag with an **id** of `vuetify-theme-stylesheet`.
 
 <backmatter />
