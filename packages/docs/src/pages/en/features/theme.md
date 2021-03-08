@@ -157,7 +157,7 @@ export default createVuetify({
 
 ## Color variations
 
-If you don't want to be bothered with coming up with lighten/darken variations of your colors, you can let Vuetify generate them for you using the **variations** property. The following configuration will generate 1 lighten variant and 2 darken variants for the `primary` and `secondary` colors.
+The Vuetify theme system can help you generate any number of **variations** for the colors in your theme. The following example shows how to generate 1 lighten and 2 darken variants for the `primary` and `secondary` colors.
 
 ```js
 // src/plugins/vuetify.js
