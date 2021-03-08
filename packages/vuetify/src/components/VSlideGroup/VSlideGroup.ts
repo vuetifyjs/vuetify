@@ -101,11 +101,6 @@ export const BaseSlideGroup = mixins<options &
   }),
 
   computed: {
-    /**
-     * A computed property that returns
-     * whether touch features is
-     * enabled or disabled
-     */
     canTouch (): boolean {
       return typeof window !== 'undefined'
     },
