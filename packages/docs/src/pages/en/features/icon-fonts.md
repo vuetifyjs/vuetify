@@ -52,7 +52,7 @@ In the above examples we import the default `mdi` icon set and its corresponding
 
 ## Multiple icon sets
 
-Out of the box, Vuetify supports the use of multiple *different* icon sets at the same time. The following example demonstrates how to change the default icon font to Font Awesome (`fa`) while still maintaining access to the original Material Design Icons (`mdi`):
+Out of the box, Vuetify supports the use of multiple *different* icon sets at the same time. The following example demonstrates how to change the default icon font to Font Awesome (`fa`) while still maintaining access to the original Material Design Icons (`mdi`) through the use of a prefix:
 
 ```js
 // src/plugins/vuetify.js
@@ -82,7 +82,7 @@ export default createVuetify({
 
 <alert type="info">
 
-  It is not necessary to provide a prefix (such as `mdi:`) for icons from the default set
+  It is not necessary to provide a prefix (such as `mdi:`) for icons from the default icon set
 
 </alert>
 
@@ -270,7 +270,7 @@ export default createVuetify({
 
 <alert type="error">
 
-  The JavaScript version (`all.js`) of the FontAwesome icons will **not** work with Vue
+  The JavaScript version (`all.js`) of the FontAwesome icons will **NOT** work with Vue
 
 </alert>
 
