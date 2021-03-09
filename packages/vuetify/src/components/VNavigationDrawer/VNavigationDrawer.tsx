@@ -13,19 +13,16 @@ import { convertToUnit } from '@/util/helpers'
 import makeProps from '@/util/makeProps'
 
 // Types
-import { PropType } from 'vue'
+import type { PropType } from 'vue'
 
 const alignedValues = ['top', 'center', 'bottom'] as const
-
 type Alignment = typeof alignedValues[number]
 
 export default defineComponent({
   name: 'VNavigationDrawer',
 
   props: makeProps({
-    ...makeLayoutItemProps({
-      name: 'navigation-drawer',
-    }),
+    ...makeLayoutItemProps({ name: 'navigation-drawer' }),
     ...makeSheetProps(),
     ...makeTagProps({ tag: 'nav' }),
     aligned: {
