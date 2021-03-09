@@ -22,13 +22,10 @@ export default defineComponent({
   name: 'VNavigationDrawer',
 
   props: makeProps({
-    ...makeLayoutItemProps({ name: 'navigation-drawer' }),
-    ...makeSheetProps(),
-    ...makeTagProps({ tag: 'nav' }),
     aligned: {
       type: String as PropType<Alignment>,
       default: 'top',
-      validator: (v: any) => alignedValues.includes(v)
+      validator: (v: any) => alignedValues.includes(v),
     },
     expandOnHover: Boolean,
     floating: Boolean,
@@ -42,6 +39,11 @@ export default defineComponent({
     },
     src: String,
     temporary: Boolean,
+
+    ...makeLayoutItemProps({ name: 'navigation-drawer' }),
+    ...makeSheetProps(),
+    ...makeTagProps({ tag: 'nav' }),
+
     width: {
       type: [Number, String],
       default: 256,
@@ -83,8 +85,8 @@ export default defineComponent({
           onMouseenter={ () => (isHovering.value = true) }
           onMouseleave={ () => (isHovering.value = false) }
           class={[
+            'v-navigation-drawer',
             {
-              'v-navigation-drawer': true,
               'v-navigation-drawer--bottom': props.bottom,
               'v-navigation-drawer--end': props.right,
               'v-navigation-drawer--expand-on-hover': props.expandOnHover,
@@ -106,16 +108,14 @@ export default defineComponent({
             },
           ]}
         >
-          {
-            hasImg && (
-              <div class="v-navigation-drawer__img">
-                { slots.img
-                  ? slots.img?.({ src: props.src })
-                  : (<img src={ props.src } />)
-                }
-              </div>
-            )
-          }
+          { hasImg && (
+            <div class="v-navigation-drawer__img">
+              { slots.img
+                ? slots.img?.({ src: props.src })
+                : (<img src={ props.src } alt="" />)
+              }
+            </div>
+          )}
 
           { slots.prepend && (
             <div class="v-navigation-drawer__prepend">
