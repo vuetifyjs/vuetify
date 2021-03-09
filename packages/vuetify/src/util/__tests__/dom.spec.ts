@@ -1,21 +1,12 @@
-// @ts-nocheck
-/* eslint-disable */
-
-// import Vue from 'vue'
-import {
-  mount,
-} from '@vue/test-utils'
+import { defineComponent, h } from 'vue'
+import { mount } from '@vue/test-utils'
 import {
   attachedRoot,
 } from '../dom'
 
-const FooComponent = Vue.extend({
-  render (h) {
-    return h('div', ['foo'])
-  },
-})
+const FooComponent = defineComponent(() => () => h('div', ['foo']))
 
-describe.skip('dom', () => {
+describe('dom', () => {
   it('should properly detect an element\'s root', () => {
     const shadowHost = document.createElement('div')
     expect(attachedRoot(shadowHost)).toBeNull()
@@ -36,10 +27,10 @@ describe.skip('dom', () => {
   })
 
   it('should detect the root of mounted components', () => {
-    const attachedWrapper = mount(FooComponent, { attachToDocument: true })
+    const attachedWrapper = mount(FooComponent, { attachTo: 'body' })
     expect(attachedRoot(attachedWrapper.element)).toBe(document)
 
-    const detachedWrapper = mount(FooComponent, { attachToDocument: false })
+    const detachedWrapper = mount(FooComponent, { attachTo: undefined })
     expect(attachedRoot(detachedWrapper.element)).toBeNull()
   })
 })
