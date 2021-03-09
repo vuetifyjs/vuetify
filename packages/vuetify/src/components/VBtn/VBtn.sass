@@ -104,8 +104,10 @@
   transition: inherit
   transition-property: opacity
 
-  .v-icon--left,
-  .v-icon--right
+  // Increased specificity to overwrite in VIcon.sass
+  // iconfont css interference
+  .v-icon.v-icon--left,
+  .v-icon.v-icon--right
     font-size: $btn-icon-font-size
     height: $btn-icon-font-size
     width: $btn-icon-font-size

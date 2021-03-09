@@ -97,7 +97,7 @@ Time picker can have seconds input.
 
 #### Width
 
-You can specify allowed the picker's width or make it full width.
+You can specify the picker's width or make it full width.
 
 <example file="v-time-picker/prop-width" />
 

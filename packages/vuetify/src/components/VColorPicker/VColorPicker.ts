@@ -143,6 +143,7 @@ export default mixins(Elevatable, Themeable).extend({
         props: {
           dark: this.dark,
           light: this.light,
+          disabled: this.disabled,
           swatches: this.swatches,
           color: this.internalValue,
           maxHeight: this.swatchesMaxHeight,

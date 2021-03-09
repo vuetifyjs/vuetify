@@ -48,6 +48,9 @@ export default VAutocomplete.extend({
       return this.hasDisplayedItems ||
         (!!this.$slots['no-data'] && !this.hideNoData)
     },
+    searchIsDirty (): boolean {
+      return this.internalSearch != null
+    },
   },
 
   methods: {
@@ -113,7 +116,12 @@ export default VAutocomplete.extend({
     onKeyDown (e: KeyboardEvent) {
       const keyCode = e.keyCode
 
-      VSelect.options.methods.onKeyDown.call(this, e)
+      if (
+        e.ctrlKey ||
+        ![keyCodes.home, keyCodes.end].includes(keyCode)
+      ) {
+        VSelect.options.methods.onKeyDown.call(this, e)
+      }
 
       // If user is at selection index of 0
       // create a new tag

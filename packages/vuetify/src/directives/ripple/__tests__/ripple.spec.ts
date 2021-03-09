@@ -125,4 +125,24 @@ describe('ripple.ts', () => {
     jest.runAllTimers()
     expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
   })
+
+  it('should only ripple on one element', () => {
+    const wrapper = mount({
+      directives: { Ripple },
+      template: '<div v-ripple><div class="child" v-ripple></div></div>',
+    })
+
+    const child = wrapper.find('.child').element
+
+    const mousedownEvent = new MouseEvent('mousedown', { detail: 1, bubbles: true })
+    child.dispatchEvent(mousedownEvent)
+
+    expect(wrapper.findAll('.v-ripple__container')).toHaveLength(1)
+
+    const mouseupEvent = new MouseEvent('mouseup', { detail: 1, bubbles: true })
+    child.dispatchEvent(mouseupEvent)
+
+    jest.runAllTimers()
+    expect(wrapper.findAll('.v-ripple__container')).toHaveLength(0)
+  })
 })

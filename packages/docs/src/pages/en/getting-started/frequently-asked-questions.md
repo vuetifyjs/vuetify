@@ -54,7 +54,7 @@ Have a question that belongs here? Tell us in our [Discord Community](https://co
 
 - **When will Vuetify v3 be released?** { #version-3 }
 
-  Version 3 is currently under development and slated for release in Quarter 1 of 2021. Follow our progress on [Notion](https://notion.vuetifyjs.com) or read and overview of what's to come on our [Roadmap](/introduction/roadmap/).
+  Follow our progress on [GitHub](https://titan.vuetifyjs.com) or read and overview of what's to come on our [Roadmap](/introduction/roadmap/).
 
 <br>
 

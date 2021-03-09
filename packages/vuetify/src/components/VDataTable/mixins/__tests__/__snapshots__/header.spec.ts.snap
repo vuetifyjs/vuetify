@@ -3,13 +3,15 @@
 exports[`VDataTable/header.ts should generate select 1`] = `
 <div>
   <div class="v-data-table__checkbox v-simple-checkbox">
-    <div class="v-input--selection-controls__ripple">
+    <div class="v-input--selection-controls__input">
+      <i aria-hidden="true"
+         class="v-icon notranslate material-icons theme--light"
+      >
+        $checkboxOff
+      </i>
+      <div class="v-input--selection-controls__ripple">
+      </div>
     </div>
-    <i aria-hidden="true"
-       class="v-icon notranslate material-icons theme--light"
-    >
-      $checkboxOff
-    </i>
   </div>
 </div>
 `;
@@ -17,13 +19,15 @@ exports[`VDataTable/header.ts should generate select 1`] = `
 exports[`VDataTable/header.ts should generate select 2`] = `
 <div>
   <div class="v-data-table__checkbox v-simple-checkbox">
-    <div class="v-input--selection-controls__ripple">
+    <div class="v-input--selection-controls__input">
+      <i aria-hidden="true"
+         class="v-icon notranslate material-icons theme--light"
+      >
+        $checkboxOn
+      </i>
+      <div class="v-input--selection-controls__ripple">
+      </div>
     </div>
-    <i aria-hidden="true"
-       class="v-icon notranslate material-icons theme--light"
-    >
-      $checkboxOn
-    </i>
   </div>
 </div>
 `;
@@ -31,13 +35,15 @@ exports[`VDataTable/header.ts should generate select 2`] = `
 exports[`VDataTable/header.ts should generate select 3`] = `
 <div>
   <div class="v-data-table__checkbox v-simple-checkbox">
-    <div class="v-input--selection-controls__ripple">
+    <div class="v-input--selection-controls__input">
+      <i aria-hidden="true"
+         class="v-icon notranslate material-icons theme--light"
+      >
+        $checkboxIndeterminate
+      </i>
+      <div class="v-input--selection-controls__ripple">
+      </div>
     </div>
-    <i aria-hidden="true"
-       class="v-icon notranslate material-icons theme--light"
-    >
-      $checkboxIndeterminate
-    </i>
   </div>
 </div>
 `;

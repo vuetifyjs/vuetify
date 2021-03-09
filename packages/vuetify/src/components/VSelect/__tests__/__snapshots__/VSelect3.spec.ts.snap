@@ -78,14 +78,15 @@ exports[`VSelect.ts should open the select is multiple and key down is pressed 1
             class="v-simple-checkbox"
           >
             <div
-              class="v-input--selection-controls__ripple primary--text"
-            />
-            <i
-              aria-hidden="true"
-              class="v-icon notranslate material-icons theme--light"
+              class="v-input--selection-controls__input"
             >
-              $checkboxOff
-            </i>
+              <i
+                aria-hidden="true"
+                class="v-icon notranslate material-icons theme--light"
+              >
+                $checkboxOff
+              </i>
+            </div>
           </div>
         </div>
         <div
@@ -112,14 +113,15 @@ exports[`VSelect.ts should open the select is multiple and key down is pressed 1
             class="v-simple-checkbox"
           >
             <div
-              class="v-input--selection-controls__ripple primary--text"
-            />
-            <i
-              aria-hidden="true"
-              class="v-icon notranslate material-icons theme--light"
+              class="v-input--selection-controls__input"
             >
-              $checkboxOff
-            </i>
+              <i
+                aria-hidden="true"
+                class="v-icon notranslate material-icons theme--light"
+              >
+                $checkboxOff
+              </i>
+            </div>
           </div>
         </div>
         <div
@@ -165,14 +167,15 @@ exports[`VSelect.ts should open the select is multiple and key up is pressed 1`]
             class="v-simple-checkbox"
           >
             <div
-              class="v-input--selection-controls__ripple primary--text"
-            />
-            <i
-              aria-hidden="true"
-              class="v-icon notranslate material-icons theme--light"
+              class="v-input--selection-controls__input"
             >
-              $checkboxOff
-            </i>
+              <i
+                aria-hidden="true"
+                class="v-icon notranslate material-icons theme--light"
+              >
+                $checkboxOff
+              </i>
+            </div>
           </div>
         </div>
         <div
@@ -199,14 +202,15 @@ exports[`VSelect.ts should open the select is multiple and key up is pressed 1`]
             class="v-simple-checkbox"
           >
             <div
-              class="v-input--selection-controls__ripple primary--text"
-            />
-            <i
-              aria-hidden="true"
-              class="v-icon notranslate material-icons theme--light"
+              class="v-input--selection-controls__input"
             >
-              $checkboxOff
-            </i>
+              <i
+                aria-hidden="true"
+                class="v-icon notranslate material-icons theme--light"
+              >
+                $checkboxOff
+              </i>
+            </div>
           </div>
         </div>
         <div

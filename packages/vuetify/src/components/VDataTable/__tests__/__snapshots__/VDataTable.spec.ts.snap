@@ -6174,13 +6174,15 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
                    class="v-data-table-header-mobile__select"
               >
                 <div class="v-data-table__checkbox v-simple-checkbox">
-                  <div class="v-input--selection-controls__ripple">
+                  <div class="v-input--selection-controls__input">
+                    <i aria-hidden="true"
+                       class="v-icon notranslate material-icons theme--light"
+                    >
+                      $checkboxOff
+                    </i>
+                    <div class="v-input--selection-controls__ripple">
+                    </div>
                   </div>
-                  <i aria-hidden="true"
-                     class="v-icon notranslate material-icons theme--light"
-                  >
-                    $checkboxOff
-                  </i>
                 </div>
               </div>
               <div class="v-input v-input--hide-details theme--light v-text-field v-select">
@@ -6233,11 +6235,13 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
             </div>
             <div class="v-data-table__mobile-row__cell">
               <div class="v-data-table__checkbox v-simple-checkbox v-simple-checkbox--disabled">
-                <i aria-hidden="true"
-                   class="v-icon notranslate v-icon--disabled material-icons theme--light"
-                >
-                  $checkboxOff
-                </i>
+                <div class="v-input--selection-controls__input">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate v-icon--disabled material-icons theme--light"
+                  >
+                    $checkboxOff
+                  </i>
+                </div>
               </div>
             </div>
           </td>
@@ -6296,13 +6300,15 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
             </div>
             <div class="v-data-table__mobile-row__cell">
               <div class="v-data-table__checkbox v-simple-checkbox">
-                <div class="v-input--selection-controls__ripple">
+                <div class="v-input--selection-controls__input">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $checkboxOff
+                  </i>
+                  <div class="v-input--selection-controls__ripple">
+                  </div>
                 </div>
-                <i aria-hidden="true"
-                   class="v-icon notranslate material-icons theme--light"
-                >
-                  $checkboxOff
-                </i>
               </div>
             </div>
           </td>
@@ -10880,13 +10886,15 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                    class="v-data-table-header-mobile__select"
               >
                 <div class="v-data-table__checkbox v-simple-checkbox">
-                  <div class="v-input--selection-controls__ripple">
+                  <div class="v-input--selection-controls__input">
+                    <i aria-hidden="true"
+                       class="v-icon notranslate material-icons theme--light"
+                    >
+                      $checkboxOff
+                    </i>
+                    <div class="v-input--selection-controls__ripple">
+                    </div>
                   </div>
-                  <i aria-hidden="true"
-                     class="v-icon notranslate material-icons theme--light"
-                  >
-                    $checkboxOff
-                  </i>
                 </div>
               </div>
               <div class="v-input v-input--hide-details theme--light v-text-field v-select">
@@ -10939,13 +10947,15 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             </div>
             <div class="v-data-table__mobile-row__cell">
               <div class="v-data-table__checkbox v-simple-checkbox">
-                <div class="v-input--selection-controls__ripple">
+                <div class="v-input--selection-controls__input">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $checkboxOff
+                  </i>
+                  <div class="v-input--selection-controls__ripple">
+                  </div>
                 </div>
-                <i aria-hidden="true"
-                   class="v-icon notranslate material-icons theme--light"
-                >
-                  $checkboxOff
-                </i>
               </div>
             </div>
           </td>
@@ -11004,13 +11014,15 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             </div>
             <div class="v-data-table__mobile-row__cell">
               <div class="v-data-table__checkbox v-simple-checkbox">
-                <div class="v-input--selection-controls__ripple">
+                <div class="v-input--selection-controls__input">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $checkboxOff
+                  </i>
+                  <div class="v-input--selection-controls__ripple">
+                  </div>
                 </div>
-                <i aria-hidden="true"
-                   class="v-icon notranslate material-icons theme--light"
-                >
-                  $checkboxOff
-                </i>
               </div>
             </div>
           </td>
@@ -11069,13 +11081,15 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             </div>
             <div class="v-data-table__mobile-row__cell">
               <div class="v-data-table__checkbox v-simple-checkbox">
-                <div class="v-input--selection-controls__ripple">
+                <div class="v-input--selection-controls__input">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $checkboxOff
+                  </i>
+                  <div class="v-input--selection-controls__ripple">
+                  </div>
                 </div>
-                <i aria-hidden="true"
-                   class="v-icon notranslate material-icons theme--light"
-                >
-                  $checkboxOff
-                </i>
               </div>
             </div>
           </td>
@@ -11134,13 +11148,15 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             </div>
             <div class="v-data-table__mobile-row__cell">
               <div class="v-data-table__checkbox v-simple-checkbox">
-                <div class="v-input--selection-controls__ripple">
+                <div class="v-input--selection-controls__input">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $checkboxOff
+                  </i>
+                  <div class="v-input--selection-controls__ripple">
+                  </div>
                 </div>
-                <i aria-hidden="true"
-                   class="v-icon notranslate material-icons theme--light"
-                >
-                  $checkboxOff
-                </i>
               </div>
             </div>
           </td>
@@ -11199,13 +11215,15 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             </div>
             <div class="v-data-table__mobile-row__cell">
               <div class="v-data-table__checkbox v-simple-checkbox">
-                <div class="v-input--selection-controls__ripple">
+                <div class="v-input--selection-controls__input">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $checkboxOff
+                  </i>
+                  <div class="v-input--selection-controls__ripple">
+                  </div>
                 </div>
-                <i aria-hidden="true"
-                   class="v-icon notranslate material-icons theme--light"
-                >
-                  $checkboxOff
-                </i>
               </div>
             </div>
           </td>
