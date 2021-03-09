@@ -278,7 +278,6 @@ export default mixins<options &
           this.inputWidth,
           this.isActive,
           this.isFocused,
-          this.onSliderMouseDown,
           this.onFocus,
           this.onBlur,
         ),
@@ -363,7 +362,6 @@ export default mixins<options &
       valueWidth: number,
       isActive: boolean,
       isFocused: boolean,
-      onDrag: Function,
       onFocus: Function,
       onBlur: Function,
       ref = 'thumb'
@@ -398,8 +396,6 @@ export default mixins<options &
           focus: onFocus,
           blur: onBlur,
           keydown: this.onKeyDown,
-          touchstart: onDrag,
-          mousedown: onDrag,
         },
       }), children)
     },
@@ -498,11 +494,10 @@ export default mixins<options &
       this.isActive = false
     },
     onMouseMove (e: MouseEvent) {
-      const { value } = this.parseMouseMove(e)
       if (e.type === 'mousemove') {
         this.thumbPressed = true
       }
-      this.internalValue = value
+      this.internalValue = this.parseMouseMove(e)
     },
     onKeyDown (e: KeyboardEvent) {
       if (!this.isInteractive) return
@@ -556,10 +551,7 @@ export default mixins<options &
       if (this.vertical) clickPos = 1 - clickPos
       if (this.$vuetify.rtl) clickPos = 1 - clickPos
 
-      const isInsideTrack = clickOffset >= trackStart && clickOffset <= trackStart + trackLength
-      const value = parseFloat(this.min) + clickPos * (this.maxValue - this.minValue)
-
-      return { value, isInsideTrack }
+      return parseFloat(this.min) + clickPos * (this.maxValue - this.minValue)
     },
     parseKeyDown (e: KeyboardEvent, value: number) {
       if (!this.isInteractive) return
