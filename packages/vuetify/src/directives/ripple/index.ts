@@ -10,7 +10,9 @@ import type {
   ObjectDirective,
 } from 'vue'
 
-type VuetifyRippleEvent = MouseEvent | TouchEvent | KeyboardEvent
+const rippleStop = Symbol('rippleStop')
+
+type VuetifyRippleEvent = (MouseEvent | TouchEvent | KeyboardEvent) & { [rippleStop]?: boolean }
 
 const DELAY_RIPPLE = 80
 
@@ -169,7 +171,12 @@ function isRippleEnabled (value: any): value is true {
 function rippleShow (e: VuetifyRippleEvent) {
   const value: RippleOptions = {}
   const element = e.currentTarget as HTMLElement | undefined
-  if (!element?._ripple || element._ripple.touched) return
+
+  if (!element?._ripple || element._ripple.touched || e[rippleStop]) return
+
+  // Don't allow the event to trigger ripples on any other elements
+  e[rippleStop] = true
+
   if (isTouchEvent(e)) {
     element._ripple.touched = true
     element._ripple.isTouch = true

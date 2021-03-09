@@ -2,7 +2,7 @@
 @import './variables';
 
 @mixin button-sizes {
-  @each $sizeName, $multiplier in $baseSizes {
+  @each $sizeName, $multiplier in $size-scales {
     $size: map-get($button-sizes, 'font-size') + (2 * $multiplier) / 16;
     $height: map-get($button-sizes, 'height') + (8 * $multiplier);
 

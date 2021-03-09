@@ -277,6 +277,7 @@ export default mixins(
         },
       }
 
+      // TODO: rename to 'head'? (thead, tbody, tfoot)
       const children: VNodeChildrenArrayContents = [getSlot(this, 'header', {
         ...data,
         isMobile: this.isMobile,
@@ -536,6 +537,9 @@ export default mixins(
         getSlot(this, 'body.append', data, true),
       ])
     },
+    genFoot (props: DataScopeProps): VNode[] | undefined {
+      return this.$scopedSlots.foot?.(props)
+    },
     genFooters (props: DataScopeProps) {
       const data = {
         props: {
@@ -600,6 +604,7 @@ export default mixins(
         this.genColgroup(props),
         this.genHeaders(props),
         this.genBody(props),
+        this.genFoot(props),
         this.proxySlot('bottom', this.genFooters(props)),
       ])
     },

@@ -46,6 +46,7 @@ describe.skip('VAutocomplete.ts', () => {
   // https://github.com/vuetifyjs/vuetify/issues/7259
   it('should update search when same item is selected', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         items: ['foo'],
         value: 'foo',

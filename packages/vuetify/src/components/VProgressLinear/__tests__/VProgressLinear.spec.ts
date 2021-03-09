@@ -18,6 +18,9 @@ describe.skip('VProgressLinear.ts', () => {
   beforeEach(() => {
     mountFunction = (options = {}) => {
       return mount(VProgressLinear, {
+        data: () => ({
+          isVisible: false,
+        }),
         mocks: {
           $vuetify: {
             rtl: false,
@@ -276,5 +279,13 @@ describe.skip('VProgressLinear.ts', () => {
     })
 
     expect(wrapper.find('.v-progress-linear__stream')).toBeTruthy()
+  })
+
+  it('should set isVisible with onObserve', () => {
+    expect((new VProgressLinear()).isVisible).toEqual(true)
+    const wrapper = mountFunction()
+    expect(wrapper.vm.isVisible).toEqual(false)
+    wrapper.vm.onObserve(null, null, true)
+    expect(wrapper.vm.isVisible).toEqual(true)
   })
 })

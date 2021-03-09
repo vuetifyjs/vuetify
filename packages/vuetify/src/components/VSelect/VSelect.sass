@@ -1,14 +1,18 @@
 @import './_variables.scss'
 
 +theme(v-select) using ($material)
-  .v-select__selection--comma
+  .v-select__selections
     color: map-deep-get($material, 'text', 'primary')
+
+  &.v-input--is-disabled
+    .v-select__selections
+      color: map-deep-get($material, 'text', 'disabled')
 
   .v-select__selection--disabled
     color: map-deep-get($material, 'text', 'disabled')
 
   &.v-text-field--solo-inverted.v-input--is-focused
-    .v-select__selection--comma
+    .v-select__selections
       color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
 
 .v-select

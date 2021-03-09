@@ -136,7 +136,8 @@ export default VSelect.extend({
       }
     },
     searchIsDirty (): boolean {
-      return this.internalSearch != null
+      return this.internalSearch != null &&
+        this.internalSearch !== ''
     },
     selectedItem (): any {
       if (this.multiple) return null
@@ -172,6 +173,7 @@ export default VSelect.extend({
         this.$refs.input && this.$refs.input.select()
       } else {
         document.removeEventListener('copy', this.onCopy)
+        this.$refs.input && this.$refs.input.blur()
         this.updateSelf()
       }
     },
@@ -350,7 +352,12 @@ export default VSelect.extend({
     onKeyDown (e: KeyboardEvent) {
       const keyCode = e.keyCode
 
-      VSelect.options.methods.onKeyDown.call(this, e)
+      if (
+        e.ctrlKey ||
+        ![keyCodes.home, keyCodes.end].includes(keyCode)
+      ) {
+        VSelect.options.methods.onKeyDown.call(this, e)
+      }
 
       // The ordering is important here
       // allows new value to be updated

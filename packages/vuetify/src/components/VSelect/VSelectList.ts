@@ -102,6 +102,7 @@ export default mixins(Colorable, Themeable).extend({
           props: {
             color: this.color,
             value: inputValue,
+            ripple: false,
           },
           on: {
             input: () => this.$emit('select', item),

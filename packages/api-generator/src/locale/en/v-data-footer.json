@@ -15,6 +15,7 @@
     "showFirstLastPage": "Show first/last icons"
   },
   "slots": {
+    "prepend": "Adds content to the empty space in the footer",
     "pageText": "Defines content for the items-per-page text"
   },
   "events": {
