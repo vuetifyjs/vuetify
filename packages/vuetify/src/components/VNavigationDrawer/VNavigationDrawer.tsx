@@ -103,7 +103,6 @@ export default defineComponent({
             {
               transform: `translate${props.bottom ? 'Y' : 'X'}(${convertToUnit(translate, '%')})`,
               width: convertToUnit(width.value),
-              // width: isHovering.value ? convertToUnit(props.width) : styles.value.width,
             },
           ]}
         >
