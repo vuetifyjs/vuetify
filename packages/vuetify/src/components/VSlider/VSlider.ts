@@ -96,7 +96,8 @@ export default mixins<options &
   data: () => ({
     app: null as any,
     oldValue: null as any,
-    keyPressed: 0,
+    thumbPressed: false,
+    mouseTimeout: -1,
     isFocused: false,
     isActive: false,
     noClick: false, // Prevent click event if dragging took place, hack for #7915
@@ -130,7 +131,11 @@ export default mixins<options &
       },
     },
     trackTransition (): string {
-      return this.keyPressed >= 2 ? 'none' : ''
+      return this.thumbPressed
+        ? this.showTicks || this.stepNumeric
+          ? '0.1s cubic-bezier(0.25, 0.8, 0.5, 1)'
+          : 'none'
+        : ''
     },
     minValue (): number {
       return parseFloat(this.min)
@@ -276,7 +281,6 @@ export default mixins<options &
           this.inputWidth,
           this.isActive,
           this.isFocused,
-          this.onSliderMouseDown,
           this.onFocus,
           this.onBlur,
         ),
@@ -361,7 +365,6 @@ export default mixins<options &
       valueWidth: number,
       isActive: boolean,
       isFocused: boolean,
-      onDrag: Function,
       onFocus: Function,
       onBlur: Function,
       ref = 'thumb'
@@ -396,9 +399,6 @@ export default mixins<options &
           focus: onFocus,
           blur: onBlur,
           keydown: this.onKeyDown,
-          keyup: this.onKeyUp,
-          touchstart: onDrag,
-          mousedown: onDrag,
         },
       }), children)
     },
@@ -454,11 +454,19 @@ export default mixins<options &
       e.preventDefault()
 
       this.oldValue = this.internalValue
-      this.keyPressed = 2
       this.isActive = true
 
       const mouseUpOptions = passiveSupported ? { passive: true, capture: true } : true
       const mouseMoveOptions = passiveSupported ? { passive: true } : false
+
+      if ((e.target as Element)?.matches('.v-slider__thumb-container, .v-slider__thumb-container *')) {
+        this.thumbPressed = true
+      } else {
+        window.clearTimeout(this.mouseTimeout)
+        this.mouseTimeout = window.setTimeout(() => {
+          this.thumbPressed = true
+        }, 300)
+      }
 
       if ('touches' in e) {
         this.app.addEventListener('touchmove', this.onMouseMove, mouseMoveOptions)
@@ -473,7 +481,8 @@ export default mixins<options &
     },
     onSliderMouseUp (e: Event) {
       e.stopPropagation()
-      this.keyPressed = 0
+      window.clearTimeout(this.mouseTimeout)
+      this.thumbPressed = false
       const mouseMoveOptions = passiveSupported ? { passive: true } : false
       this.app.removeEventListener('touchmove', this.onMouseMove, mouseMoveOptions)
       this.app.removeEventListener('mousemove', this.onMouseMove, mouseMoveOptions)
@@ -488,8 +497,10 @@ export default mixins<options &
       this.isActive = false
     },
     onMouseMove (e: MouseEvent) {
-      const { value } = this.parseMouseMove(e)
-      this.internalValue = value
+      if (e.type === 'mousemove') {
+        this.thumbPressed = true
+      }
+      this.internalValue = this.parseMouseMove(e)
     },
     onKeyDown (e: KeyboardEvent) {
       if (!this.isInteractive) return
@@ -504,9 +515,6 @@ export default mixins<options &
 
       this.internalValue = value
       this.$emit('change', value)
-    },
-    onKeyUp () {
-      this.keyPressed = 0
     },
     onSliderClick (e: MouseEvent) {
       if (this.noClick) {
@@ -546,10 +554,7 @@ export default mixins<options &
       if (this.vertical) clickPos = 1 - clickPos
       if (this.$vuetify.rtl) clickPos = 1 - clickPos
 
-      const isInsideTrack = clickOffset >= trackStart && clickOffset <= trackStart + trackLength
-      const value = parseFloat(this.min) + clickPos * (this.maxValue - this.minValue)
-
-      return { value, isInsideTrack }
+      return parseFloat(this.min) + clickPos * (this.maxValue - this.minValue)
     },
     parseKeyDown (e: KeyboardEvent, value: number) {
       if (!this.isInteractive) return
@@ -562,8 +567,6 @@ export default mixins<options &
       const step = this.stepNumeric || 1
       const steps = (this.maxValue - this.minValue) / step
       if ([left, right, down, up].includes(e.keyCode)) {
-        this.keyPressed += 1
-
         const increase = this.$vuetify.rtl ? [left, up] : [right, up]
         const direction = increase.includes(e.keyCode) ? 1 : -1
         const multiplier = e.shiftKey ? 3 : (e.ctrlKey ? 2 : 1)

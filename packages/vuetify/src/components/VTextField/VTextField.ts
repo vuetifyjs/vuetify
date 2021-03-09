@@ -21,6 +21,7 @@ import resize from '../../directives/resize'
 import ripple from '../../directives/ripple'
 
 // Utilities
+import { attachedRoot } from '../../util/dom'
 import { convertToUnit, keyCodes } from '../../util/helpers'
 import { breaking, consoleWarn } from '../../util/console'
 
@@ -79,6 +80,7 @@ export default baseMixins.extend<options>().extend({
     placeholder: String,
     prefix: String,
     prependInnerIcon: String,
+    persistentPlaceholder: Boolean,
     reverse: Boolean,
     rounded: Boolean,
     shaped: Boolean,
@@ -193,7 +195,7 @@ export default baseMixins.extend<options>().extend({
       return this.hasLabel && !(this.isSingle && this.labelValue)
     },
     labelValue (): boolean {
-      return this.isFocused || this.isLabelActive
+      return this.isFocused || this.isLabelActive || this.persistentPlaceholder
     },
   },
 
@@ -379,6 +381,7 @@ export default baseMixins.extend<options>().extend({
     genInput () {
       const listeners = Object.assign({}, this.listeners$)
       delete listeners.change // Change should not be bound externally
+      const { title, ...inputAttrs } = this.attrs$
 
       return this.$createElement('input', {
         style: {},
@@ -386,11 +389,11 @@ export default baseMixins.extend<options>().extend({
           value: (this.type === 'number' && Object.is(this.lazyValue, -0)) ? '-0' : this.lazyValue,
         },
         attrs: {
-          ...this.attrs$,
+          ...inputAttrs,
           autofocus: this.autofocus,
           disabled: this.isDisabled,
           id: this.computedId,
-          placeholder: this.isFocused || !this.hasLabel ? this.placeholder : undefined,
+          placeholder: this.persistentPlaceholder || this.isFocused || !this.hasLabel ? this.placeholder : undefined,
           readonly: this.isReadonly,
           type: this.type,
         },
@@ -449,7 +452,10 @@ export default baseMixins.extend<options>().extend({
     onFocus (e?: Event) {
       if (!this.$refs.input) return
 
-      if (document.activeElement !== this.$refs.input) {
+      const root = attachedRoot(this.$el)
+      if (!root) return
+
+      if (root.activeElement !== this.$refs.input) {
         return this.$refs.input.focus()
       }
 
@@ -503,9 +509,10 @@ export default baseMixins.extend<options>().extend({
       if (
         !this.autofocus ||
         typeof document === 'undefined' ||
-        !this.$refs.input ||
-        document.activeElement === this.$refs.input
-      ) return false
+        !this.$refs.input) return false
+
+      const root = attachedRoot(this.$el)
+      if (!root || root.activeElement === this.$refs.input) return false
 
       this.$refs.input.focus()
 

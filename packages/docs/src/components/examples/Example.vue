@@ -4,97 +4,18 @@
     outlined
     rounded
   >
-    <v-lazy
-      min-height="52"
-      @mouseenter="importTemplate"
-    >
-      <div class="text-end pa-2">
-        <app-tooltip-btn
-          v-for="(tooltip, i) in tooltips"
-          :key="i"
-          :disabled="hasError"
-          :href="tooltip.href ? tooltip.href : undefined"
-          :icon="tooltip.icon"
-          :path="tooltip.path"
-          :target="tooltip.href ? '_blank' : undefined"
-          @click="tooltip.onClick"
-        />
-      </div>
-    </v-lazy>
-
-    <v-divider />
-
-    <div v-if="pen">
-      <v-expand-transition>
-        <div v-show="expand">
-          <v-item-group
-            v-model="selected"
-            class="pa-2"
-            mandatory
-          >
-            <template v-for="(section, i) in sections">
-              <v-item
-                :key="`item-${i}`"
-                :value="section"
-              >
-                <template #default="{ active, toggle }">
-                  <v-btn
-                    :input-value="active"
-                    class="mr-2"
-                    text
-                    @click="toggle"
-                  >
-                    {{ section }}
-                  </v-btn>
-                </template>
-              </v-item>
-            </template>
-          </v-item-group>
-
-          <v-divider />
-
-          <v-window
-            v-model="selected"
-            class="grey lighten-5"
-          >
-            <template v-for="(section, i) in sections">
-              <v-window-item
-                :key="`window-${i}`"
-                :value="section"
-              >
-                <markup
-                  :code="pen[section]"
-                  :rounded="false"
-                />
-              </v-window-item>
-            </template>
-          </v-window>
-
-          <v-divider />
-        </div>
-      </v-expand-transition>
-
-      <codepen
-        ref="codepen"
+    <v-lazy @input="importTemplate">
+      <codepen-embed
+        v-if="pen"
+        :file="file.replace('/', '-')"
         :pen="pen"
       />
-    </div>
-
-    <v-theme-provider :dark="dark">
-      <v-sheet
-        class="pa-4"
-        rounded
-      >
-        <vue-file
-          :file="file"
-          @error="hasError = true"
-        />
-      </v-sheet>
-    </v-theme-provider>
+    </v-lazy>
   </v-sheet>
 </template>
 
 <script>
+  import CodepenEmbed from './CodepenEmbed'
   // Mixins
   import Codepen from '@/mixins/codepen'
 
@@ -103,6 +24,10 @@
 
   export default {
     name: 'Example',
+
+    components: {
+      CodepenEmbed,
+    },
 
     mixins: [Codepen],
 

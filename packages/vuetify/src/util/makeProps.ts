@@ -2,6 +2,7 @@
 import { getCurrentInstance } from 'vue'
 import { useVuetify } from '@/framework'
 import { wrapInArray } from '@/util/helpers'
+import { consoleWarn } from '@/util/console'
 
 // Types
 import type { Prop } from 'vue'
@@ -44,13 +45,13 @@ function generateDefault (propName: string, localDefault: any, type: any) {
     const vm = getCurrentInstance()
 
     if (!vm) {
-      console.warn('Unable to get current component instance when generating default prop value')
+      consoleWarn('Unable to get current component instance when generating default prop value')
 
       return localDefault
     }
 
     if (!vm.type.name) {
-      console.warn('The component is missing an explicit name, unable to generate default prop value')
+      consoleWarn('The component is missing an explicit name, unable to generate default prop value')
 
       return localDefault
     }

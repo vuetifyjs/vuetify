@@ -13,10 +13,12 @@ $button-icon-border-radius: map-get($rounded, 'circle') !default;
 $button-icon-font-size: 24px !default;
 $button-icon-size: 48px !default;
 $button-line-height: normal !default;
+$button-padding-ratio: 2.25 !default;
 $button-positions: absolute fixed !default;
 $button-text-letter-spacing: map-deep-get($headings, 'button', 'letter-spacing') !default;
 $button-text-transform: map-deep-get($headings, 'button', 'text-transform') !default;
 $button-vertical-align: middle !default;
+$button-width-ratio: 16/9 !default;
 
 $button-density: ('default': 0, 'comfortable': -2, 'compact': -3) !default;
 $button-icon-density: ('default': 3, 'comfortable': 0, 'compact': -2) !default;

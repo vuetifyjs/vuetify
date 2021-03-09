@@ -51,6 +51,9 @@ export default VAutocomplete.extend({
       return this.hasDisplayedItems ||
         (!!this.$slots['no-data'] && !this.hideNoData)
     },
+    searchIsDirty (): boolean {
+      return this.internalSearch != null
+    },
   },
 
   methods: {
@@ -116,7 +119,12 @@ export default VAutocomplete.extend({
     onKeyDown (e: KeyboardEvent) {
       const keyCode = e.keyCode
 
-      VSelect.options.methods.onKeyDown.call(this, e)
+      if (
+        e.ctrlKey ||
+        ![keyCodes.home, keyCodes.end].includes(keyCode)
+      ) {
+        VSelect.options.methods.onKeyDown.call(this, e)
+      }
 
       // If user is at selection index of 0
       // create a new tag
@@ -157,6 +165,16 @@ export default VAutocomplete.extend({
         this.updateEditing()
       } else {
         VAutocomplete.options.methods.selectItem.call(this, item)
+
+        // if selected item contains search value,
+        // remove the search string
+        if (
+          this.internalSearch &&
+          this.multiple &&
+          this.getText(item).toLocaleLowerCase().includes(this.internalSearch.toLocaleLowerCase())
+        ) {
+          this.internalSearch = null
+        }
       }
     },
     setSelectedItems () {

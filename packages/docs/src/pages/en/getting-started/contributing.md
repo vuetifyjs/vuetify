@@ -173,7 +173,7 @@ Commit your changes following [our guidelines](#commit-guidelines), then push th
 
 ## Working with GitHub
 
-Vuetify's repository lives on [GitHub](https://github.com/vuetifyjs/vuetify) and is the primary location for all development related information. In addition, we have a public Notion board with a detailed overview of our development process and status for [Vuetify 3](https://notion.vuetifyjs.com). These tools enable the [Core Team] to efficiently manage a large scale OSS project while also providing complete transparency of its progress with framework maintenance and development.
+Vuetify's repository lives on [GitHub](https://github.com/vuetifyjs/vuetify) and is the primary location for all development related information. In addition, we have a public GitHub project with a detailed overview of what we are currently working on in [Vuetify 3](https://titan.vuetifyjs.com).
 
 Some of the more notable links within these services include:
 
@@ -182,13 +182,9 @@ Some of the more notable links within these services include:
 - [Issues]
 - [Discussions](https://github.com/vuetifyjs/vuetify/discussions)
 - [Projects](https://github.com/vuetifyjs/vuetify/projects)
+- [Coding Guidelines](https://github.com/vuetifyjs/vuetify/wiki/coding-guidelines)
 
 ---
-
-**Notion**
-
-- [Vuetify 3 Development Epic](https://www.notion.so/vuetify/Development-Epic-f94ee76662b04d8fafb93062b58df71b)
-- [Coding Guidelines](https://www.notion.so/vuetify/Coding-Guidelines-86c96a7da947421bb88515a966e71df0)
 
 The following sections are designed to familiarize you with our standard operating procedures for Vuetify development.
 

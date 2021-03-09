@@ -43,6 +43,7 @@
       >
         <ais-configure
           :facetFilters="[`language:${locale}`]"
+          :hitsPerPage="50"
           :query="searchString"
         />
 
@@ -112,6 +113,12 @@
 
     mounted () {
       if (!IN_BROWSER) return
+      if (this.search) {
+        this.$nextTick(() => {
+          this.searchString = this.search
+          this.$refs.searchInput.focus()
+        })
+      }
 
       document.addEventListener('keydown', this.onDocumentKeydown)
     },

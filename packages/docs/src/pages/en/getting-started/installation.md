@@ -62,6 +62,23 @@ Once prompted, choose v3 (alpha):
 > v3 (alpha)
 ```
 
+## Usage
+
+With Vue 3.0, the initialization process for Vue apps (and by extension Vuetify) has changed. With the new `createVuetify` method, the options passed to it have also changed. Please see the pages in the Features section of the documentation for further details.
+
+```js
+import { createApp } from 'vue'
+import { createVuetify } from 'vuetify'
+import App from './App.vue'
+
+const app = createApp(App)
+const vuetify = createVuetify(...) // Replaces new Vuetify(...)
+
+app.use(vuetify)
+
+app.mount('#app')
+```
+
 ## Frequently asked questions
 
 ### Table of Contents

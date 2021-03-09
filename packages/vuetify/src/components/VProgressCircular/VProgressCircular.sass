@@ -30,6 +30,11 @@
       stroke-dasharray: 80, 200
       stroke-dashoffset: 0px
 
+  &--indeterminate:not(&--visible)
+    > svg,
+    .v-progress-circular__overlay
+      animation-play-state: paused !important
+
   &__info
     align-items: center
     display: flex

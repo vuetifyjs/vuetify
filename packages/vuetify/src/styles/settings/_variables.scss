@@ -315,4 +315,12 @@ $sizes: (
   'default',
   'large',
   'x-large'
-);
+) !default;
+
+$size-scales: (
+  'x-small': -2,
+  'small': -1,
+  'default': 0,
+  'large': 1,
+  'x-large': 2
+) !default;
