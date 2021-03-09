@@ -1,22 +1,21 @@
 // Components
+import { VLayout } from '@/components/VLayout'
 import { VNavigationDrawer } from '..'
 
 // Utilities
-import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
+import { createVuetify } from '@/framework'
 import { mount } from '@vue/test-utils'
-import { VuetifySymbol } from '@/framework'
 
 describe('VNavigationDrawer', () => {
+  const vuetify = createVuetify()
+
   function mountFunction (options = {}) {
-    return mount(VNavigationDrawer, {
-      global: {
-        provide: {
-          [VuetifySymbol as symbol]: { defaults: { global: {} } },
-          [VuetifyThemeSymbol as symbol]: createTheme(),
-        },
-      },
+    return mount({
+      render: () => <VLayout><VNavigationDrawer /></VLayout>,
+    }, {
+      global: { plugins: [vuetify] },
       ...options,
-    })
+    }).findComponent(VNavigationDrawer)
   }
 
   it('should match a snapshot', () => {
