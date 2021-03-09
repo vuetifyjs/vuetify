@@ -52,13 +52,19 @@ export default defineComponent({
     const { sheetClasses, sheetStyles } = useSheet(props, 'v-navigation-drawer')
     const isActive = useProxiedModel(props, 'modelValue')
     const isHovering = ref(false)
-    const inFlow = computed(() => !isActive.value || props.temporary)
-    const width = computed(() => Number(props.rail ? props.railWidth : props.width))
+    const size = computed(() => Number(props.rail ? props.railWidth : props.width))
+    const width = computed(() => {
+      if (props.rail && props.expandOnHover && isHovering.value) {
+        return props.width
+      }
+
+      return size.value
+    })
     const styles = useLayoutItem(
       props.name,
       toRef(props, 'priority'),
       computed(() => props.right ? 'right' : 'left'),
-      computed(() => !inFlow.value ? width.value : 0),
+      computed(() => isActive.value && !props.temporary ? size.value : 0),
     )
 
     onBeforeMount(() => {
@@ -96,7 +102,8 @@ export default defineComponent({
             styles.value,
             {
               transform: `translate${props.bottom ? 'Y' : 'X'}(${convertToUnit(translate, '%')})`,
-              width: inFlow.value ? convertToUnit(width.value) : styles.value.width,
+              width: convertToUnit(width.value),
+              // width: isHovering.value ? convertToUnit(props.width) : styles.value.width,
             },
           ]}
         >
