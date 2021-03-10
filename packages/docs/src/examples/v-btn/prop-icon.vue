@@ -1,118 +1,55 @@
 <template>
-  <v-card flat>
-    <v-card-text>
-      <v-container
-        fluid
-        class="pa-0"
+  <v-container>
+    <v-row justify="space-between">
+      <v-btn
+        icon="mdi-heart"
+        color="primary"
+      />
+
+      <v-btn
+        icon="mdi-star"
+        color="secondary"
+      />
+
+      <v-btn
+        icon="mdi-cached"
+        color="info"
+      />
+
+      <v-btn
+        icon="mdi-thumb-up"
+        color="success"
+      />
+    </v-row>
+
+    <v-row justify="space-between">
+      <v-btn
+        icon
+        color="primary"
       >
-        <v-row>
-          <v-col cols="12">
-            <p>Normal</p>
-          </v-col>
+        <v-icon>mdi-heart</v-icon>
+      </v-btn>
 
-          <v-col
-            cols="12"
-            sm="3"
-          >
-            <v-btn
-              icon
-              color="pink"
-            >
-              <v-icon>mdi-heart</v-icon>
-            </v-btn>
-          </v-col>
+      <v-btn
+        icon
+        color="secondary"
+      >
+        <v-icon>mdi-star</v-icon>
+      </v-btn>
 
-          <v-col
-            cols="12"
-            sm="3"
-          >
-            <v-btn
-              icon
-              color="indigo"
-            >
-              <v-icon>mdi-star</v-icon>
-            </v-btn>
-          </v-col>
+      <v-btn
+        icon
+        color="info"
+      >
+        <v-icon>mdi-cached</v-icon>
+      </v-btn>
 
-          <v-col
-            cols="12"
-            sm="3"
-          >
-            <v-btn
-              icon
-              color="green"
-            >
-              <v-icon>mdi-cached</v-icon>
-            </v-btn>
-          </v-col>
-
-          <v-col
-            cols="12"
-            sm="3"
-          >
-            <v-btn
-              icon
-              color="deep-orange"
-            >
-              <v-icon>mdi-thumb-up</v-icon>
-            </v-btn>
-          </v-col>
-        </v-row>
-
-        <v-row class="mt-12">
-          <v-col cols="12">
-            <p>Disabled</p>
-          </v-col>
-
-          <v-col
-            cols="12"
-            sm="3"
-          >
-            <v-btn
-              icon
-              disabled
-            >
-              <v-icon>mdi-heart</v-icon>
-            </v-btn>
-          </v-col>
-
-          <v-col
-            cols="12"
-            sm="3"
-          >
-            <v-btn
-              icon
-              disabled
-            >
-              <v-icon>mdi-star</v-icon>
-            </v-btn>
-          </v-col>
-
-          <v-col
-            cols="12"
-            sm="3"
-          >
-            <v-btn
-              icon
-              disabled
-            >
-              <v-icon>mdi-cached</v-icon>
-            </v-btn>
-          </v-col>
-
-          <v-col
-            cols="12"
-            sm="3"
-          >
-            <v-btn
-              icon
-              disabled
-            >
-              <v-icon>mdi-thumb-up</v-icon>
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-card-text>
-  </v-card>
+      <v-btn
+        icon
+        color="success"
+      >
+        <v-icon>mdi-thumb-up</v-icon>
+      </v-btn>
+    </v-row>
+  </v-container>
 </template>

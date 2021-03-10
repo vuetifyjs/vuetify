@@ -15,11 +15,15 @@ The `v-btn` component replaces the standard html button with a material design t
 
 <entry-ad />
 
+<!--
+
 ## Usage
 
 Buttons in their simplest form contain uppercase text, a slight elevation, hover effect, and a ripple effect on click.
 
 <usage name="v-btn" />
+
+-->
 
 ## API
 
@@ -44,29 +48,27 @@ Buttons in their simplest form contain uppercase text, a slight elevation, hover
 
 <example file="v-btn/prop-block" />
 
-#### Depressed
+#### Flat
 
-**depressed** buttons still maintain their background color, but have no box shadow.
+**flat** buttons still maintain their background color, but have no box shadow.
 
-<example file="v-btn/prop-depressed" />
-
-#### Floating
-
-Floating buttons are rounded and usually contain an icon.
-
-<example file="v-btn/prop-floating" />
+<example file="v-btn/prop-flat" />
 
 #### Icon
 
-Icons can be used for the primary content of a button. This property makes the button rounded and applies the **text** prop styles.
+Icons can be used for the primary content of a button. Use the **icon** prop to either supply an icon in the default slot, or to directly use an icon.
 
 <example file="v-btn/prop-icon" />
+
+<!--
 
 #### Loaders
 
 Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use a `v-progress-circular` component but this can be customized.
 
 <example file="v-btn/prop-loaders" />
+
+--->
 
 <random-ad />
 
@@ -84,7 +86,7 @@ Using the loading prop, you can notify a user that there is processing taking pl
 
 #### Rounded
 
-**rounded** buttons behave the same as regular buttons but have rounded edges.
+Use the **rounded** prop to control the border radius of buttons.
 
 <example file="v-btn/prop-rounded" />
 
@@ -99,19 +101,5 @@ Buttons can be given different sizing options to fit a multitude of scenarios.
 Text buttons have no box shadow and no background. Only on hover is the container for the button shown. When used with the **color** prop, the supplied color is applied to the button text instead of the background.
 
 <example file="v-btn/prop-text" />
-
-#### Tile
-
-**tile** buttons behave the same as regular buttons but have no border radius.
-
-<example file="v-btn/prop-tile" />
-
-### Misc
-
-#### Raised
-
-**raised** buttons have a box shadow that increases when clicked. This is the default style.
-
-<example file="v-btn/misc-raised" />
 
 <backmatter />
