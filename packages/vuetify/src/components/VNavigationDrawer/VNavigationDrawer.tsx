@@ -66,7 +66,9 @@ export default defineComponent({
       props.name,
       toRef(props, 'priority'),
       computed(() => props.right ? 'right' : 'left'),
-      computed(() => isActive.value && !props.temporary ? size.value : 0),
+      computed(() => {
+        return props.permanent || (isActive.value && !props.temporary) ? size.value : 0
+      }),
     )
 
     onBeforeMount(() => {
@@ -77,7 +79,7 @@ export default defineComponent({
       const hasImg = (slots.img || props.src)
 
       const translate = (
-        (isActive.value ? 0 : 100) * (!props.right && !props.bottom ? -1 : 1)
+        (props.permanent || isActive.value ? 0 : 100) * (!props.right && !props.bottom ? -1 : 1)
       )
 
       return (

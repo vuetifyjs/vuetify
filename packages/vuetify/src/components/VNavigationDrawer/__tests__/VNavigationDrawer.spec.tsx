@@ -11,10 +11,13 @@ describe('VNavigationDrawer', () => {
 
   function mountFunction (options = {}) {
     return mount({
-      render: () => <VLayout><VNavigationDrawer /></VLayout>,
+      render: () => (
+        <VLayout>
+          <VNavigationDrawer { ...options } />
+        </VLayout>
+      ),
     }, {
       global: { plugins: [vuetify] },
-      ...options,
     }).findComponent(VNavigationDrawer)
   }
 
@@ -22,5 +25,47 @@ describe('VNavigationDrawer', () => {
     const wrapper = mountFunction()
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should change width when using rail, expandOnHover, and hovering', async () => {
+    const wrapper = mountFunction({ rail: true, expandOnHover: true })
+    const element = wrapper.element as HTMLElement
+
+    expect(element.style.width).toBe('72px')
+
+    await wrapper.trigger('mouseenter')
+
+    expect(element.style.width).toBe('256px')
+
+    await wrapper.trigger('mouseleave')
+
+    expect(element.style.width).toBe('72px')
+  })
+
+  it.each([
+    [{}, '256px'],
+    [{ rail: true }, '72px'],
+    [{ width: 300 }, '300px'],
+  ])('should have the correct width', (props, width) => {
+    const wrapper = mountFunction(props)
+    const element = wrapper.element as HTMLElement
+
+    expect(element.style.width).toBe(width)
+  })
+
+  it.each([
+    [{}, `translateX(0%)`],
+    [{ modelValue: true }, `translateX(0%)`],
+    [{ modelValue: false }, `translateX(-100%)`],
+    [{ modelValue: true, right: true }, `translateX(0%)`],
+    [{ modelValue: false, right: true }, `translateX(100%)`],
+    [{ bottom: true }, `translateY(0%)`],
+    [{ modelValue: true, bottom: true }, `translateY(0%)`],
+    [{ modelValue: false, bottom: true }, `translateY(100%)`],
+  ])('should have the correct translate', (props, translate) => {
+    const wrapper = mountFunction(props)
+    const element = wrapper.element as HTMLElement
+
+    expect(element.style.transform).toBe(translate)
   })
 })
