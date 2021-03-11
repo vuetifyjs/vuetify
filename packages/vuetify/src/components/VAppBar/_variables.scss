@@ -1,7 +1,23 @@
-@import '../../styles/styles.sass';
-
+$app-bar-border-color: $border-color-root !default;
 $app-bar-border-radius: 0 !default;
+$app-bar-border-style: $border-style-root !default;
+$app-bar-border-width: thin !default;
 $app-bar-elevation: 4 !default;
+$app-bar-flat-elevation: 0 !default;
+$app-bar-height: 64px !default;
+$app-bar-positions: absolute fixed !default;
+$app-bar-prominent-height: 128px !default;
+$app-bar-rounded-border-radius: $border-radius-root !default;
 $app-bar-scrolled-title-padding-bottom: 9px !default;
 $app-bar-shaped-border-radius: map-get($rounded, 'xl') $app-bar-border-radius !default;
-$app-bar-transition: .4s opacity map-get($transition, 'fast-out-slow-in') !default;
+$app-bar-transition-duration: 0.2s !default;
+$app-bar-transition-timing-function: $standard-easing !default;
+$app-bar-img-height: inherit !default;
+$app-bar-img-object-fit: cover !default;
+$app-bar-img-width: inherit !default;
+
+$app-bar-border: (
+  $app-bar-border-color,
+  $app-bar-border-style,
+  $app-bar-border-width
+) !default;
