@@ -24,4 +24,18 @@ describe('VSheet', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should use color prop if provided', async () => {
+    const wrapper = mountFunction({
+      props: {
+        color: 'primary',
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    await wrapper.setProps({ color: '#ff00ff' })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

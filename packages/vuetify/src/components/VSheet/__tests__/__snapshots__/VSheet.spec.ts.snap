@@ -4,3 +4,15 @@ exports[`VSheet should match a snapshot 1`] = `
 <div class="v-sheet v-theme--light">
 </div>
 `;
+
+exports[`VSheet should use color prop if provided 1`] = `
+<div class="v-sheet v-theme--light bg-primary">
+</div>
+`;
+
+exports[`VSheet should use color prop if provided 2`] = `
+<div class="v-sheet v-theme--light"
+     style="background-color: rgb(255, 0, 255);"
+>
+</div>
+`;

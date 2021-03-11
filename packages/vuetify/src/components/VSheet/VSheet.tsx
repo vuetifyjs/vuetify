@@ -9,6 +9,7 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeTagProps } from '@/composables/tag'
 import { useTheme } from '@/composables/theme'
+import { useBackgroundColor } from '@/composables/color'
 
 // Types
 import type { BorderProps } from '@/composables/border'
@@ -18,7 +19,7 @@ import type { ElevationProps } from '@/composables/elevation'
 import type { PositionProps } from '@/composables/position'
 
 // Utilities
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, toRef } from 'vue'
 import makeProps from '@/util/makeProps'
 
 export function makeSheetProps () {
@@ -32,7 +33,9 @@ export function makeSheetProps () {
   }
 }
 
-export interface SheetProps extends BorderProps, BorderRadiusProps, DimensionProps, ElevationProps, PositionProps {}
+export interface SheetProps extends BorderProps, BorderRadiusProps, DimensionProps, ElevationProps, PositionProps {
+  color?: string
+}
 
 export function useSheet (props: SheetProps, name: string) {
   const { themeClasses } = useTheme()
@@ -41,6 +44,7 @@ export function useSheet (props: SheetProps, name: string) {
   const { dimensionStyles } = useDimension(props)
   const { elevationClasses } = useElevation(props)
   const { positionClasses, positionStyles } = usePosition(props, name)
+  const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
 
   return {
     sheetClasses: computed(() => [
@@ -49,10 +53,12 @@ export function useSheet (props: SheetProps, name: string) {
       borderRadiusClasses.value,
       elevationClasses.value,
       positionClasses.value,
+      backgroundColorClasses.value,
     ]),
     sheetStyles: computed(() => [
       dimensionStyles.value,
       positionStyles.value,
+      backgroundColorStyles.value,
     ]),
   }
 }
@@ -60,7 +66,10 @@ export function useSheet (props: SheetProps, name: string) {
 export default defineComponent({
   name: 'VSheet',
 
-  props: makeProps(makeSheetProps()),
+  props: makeProps({
+    color: String,
+    ...makeSheetProps(),
+  }),
 
   setup (props, { slots }) {
     const { sheetClasses, sheetStyles } = useSheet(props, 'v-sheet')
