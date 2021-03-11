@@ -2,9 +2,14 @@
 import './VNavigationDrawer.sass'
 
 // Composables
+import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
-import { makeSheetProps, useSheet } from '@/components/VSheet/VSheet'
+import { makePositionProps, usePosition } from '@/composables/position'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, defineComponent, onBeforeMount, ref, toRef } from 'vue'
@@ -22,8 +27,12 @@ export default defineComponent({
   name: 'VNavigationDrawer',
 
   props: makeProps({
+    ...makeBorderProps(),
+    ...makeBorderRadiusProps(),
+    ...makeDimensionProps({ width: 256 }),
+    ...makeElevationProps(),
     ...makeLayoutItemProps({ name: 'navigation-drawer' }),
-    ...makeSheetProps(),
+    ...makePositionProps(),
     ...makeTagProps({ tag: 'nav' }),
     aligned: {
       type: String as PropType<Alignment>,
@@ -42,14 +51,16 @@ export default defineComponent({
     },
     src: String,
     temporary: Boolean,
-    width: {
-      type: [Number, String],
-      default: 256,
-    },
   }),
 
   setup (props, { slots }) {
-    const { sheetClasses, sheetStyles } = useSheet(props, 'v-navigation-drawer')
+    const { themeClasses } = useTheme()
+    const { borderClasses } = useBorder(props, 'v-navigation-drawer')
+    const { borderRadiusClasses } = useBorderRadius(props)
+    const { dimensionStyles } = useDimension(props)
+    const { elevationClasses } = useElevation(props)
+    const { positionClasses, positionStyles } = usePosition(props, 'v-navigation-drawer')
+
     const isActive = useProxiedModel(props, 'modelValue')
     const isHovering = ref(false)
     const size = computed(() => Number(props.rail ? props.railWidth : props.width))
@@ -94,10 +105,15 @@ export default defineComponent({
               'v-navigation-drawer--start': props.left || !props.right,
               'v-navigation-drawer--temporary': props.temporary || props.mobile,
             },
-            sheetClasses.value,
+            borderClasses.value,
+            borderRadiusClasses.value,
+            elevationClasses.value,
+            positionClasses.value,
+            themeClasses.value,
           ]}
           style={[
-            sheetStyles.value,
+            dimensionStyles.value,
+            positionStyles.value,
             styles.value,
             {
               transform: `translate${props.bottom ? 'Y' : 'X'}(${convertToUnit(translate, '%')})`,
