@@ -50,6 +50,19 @@ describe('VNavigationDrawer', () => {
   })
 
   it.each([
+    [{}, 'start'],
+    [{ aligned: 'start' }, 'start'],
+    [{ aligned: 'center' }, 'center'],
+    [{ aligned: 'end' }, 'end'],
+  ])('should apply the correct alignment class', (props, alignment) => {
+    const wrapper = mountFunction(props)
+    const element = wrapper.element as HTMLElement
+    const aclass = `v-navigation-drawer--aligned-${alignment}`
+
+    expect(element.classList.contains(aclass)).toBe(true)
+  })
+
+  it.each([
     [{}, '256px'],
     [{ rail: true }, '72px'],
     [{ width: 300 }, '300px'],

@@ -26,6 +26,15 @@
   &--fixed
     z-index: $navigation-drawer-fixed-z-index
 
+  &--aligned-start
+    justify-content: flex-start
+
+  &--aligned-center
+    justify-content: center
+
+  &--aligned-end
+    justify-content: flex-end
+
   &--bottom
     bottom: 0
     height: 50%
@@ -64,8 +73,8 @@
     @include elevation($navigation-drawer-temporary-elevation)
 
 .v-navigation-drawer__content
-  flex: 1 1 auto
-  height: 100%
+  flex: 0 1 auto
+  height: auto
   max-width: 100%
   overflow-x: hidden
   overflow-y: auto

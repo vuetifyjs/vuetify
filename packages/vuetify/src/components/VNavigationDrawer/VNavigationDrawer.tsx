@@ -20,7 +20,7 @@ import makeProps from '@/util/makeProps'
 // Types
 import type { PropType } from 'vue'
 
-const alignedValues = ['top', 'center', 'bottom'] as const
+const alignedValues = ['start', 'center', 'end'] as const
 type Alignment = typeof alignedValues[number]
 
 export default defineComponent({
@@ -36,7 +36,7 @@ export default defineComponent({
     ...makeTagProps({ tag: 'nav' }),
     aligned: {
       type: String as PropType<Alignment>,
-      default: 'top',
+      default: 'start',
       validator: (v: any) => alignedValues.includes(v),
     },
     expandOnHover: Boolean,
@@ -95,6 +95,7 @@ export default defineComponent({
           class={[
             'v-navigation-drawer',
             {
+              [`v-navigation-drawer--aligned-${props.aligned}`]: !!props.aligned,
               'v-navigation-drawer--bottom': props.bottom,
               'v-navigation-drawer--end': props.right,
               'v-navigation-drawer--expand-on-hover': props.expandOnHover,
