@@ -179,4 +179,20 @@ describe('VIcon', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should use provided color', async () => {
+    const wrapper = mount(VIcon, {
+      props: {
+        icon: 'mdi-close',
+        color: 'primary',
+      },
+      global: globalOptions,
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    await wrapper.setProps({ color: '#ff00ff' })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
