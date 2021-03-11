@@ -1,116 +1,69 @@
 <template>
-  <v-container
-    fluid
-    class="pa-0"
-  >
-    <v-row align="center">
-      <v-col
-        cols="12"
-        sm="6"
+  <div>
+    <div class="d-flex justify-space-around align-center flex-column flex-md-row fill-height">
+      <v-btn
+        size="x-small"
+        color="secondary"
       >
-        <div class="text-center">
-          <div class="my-2">
-            <v-btn
-              x-small
-              color="secondary"
-              dark
-            >
-              Extra small Button
-            </v-btn>
-          </div>
-          <div class="my-2">
-            <v-btn
-              small
-              color="primary"
-              dark
-            >
-              Small Button
-            </v-btn>
-          </div>
-          <div class="my-2">
-            <v-btn
-              color="warning"
-              dark
-            >
-              Normal Button
-            </v-btn>
-          </div>
-          <div class="my-2">
-            <v-btn
-              color="error"
-              dark
-              large
-            >
-              Large Button
-            </v-btn>
-          </div>
-          <div class="my-2">
-            <v-btn
-              x-large
-              color="success"
-              dark
-            >
-              Extra large Button
-            </v-btn>
-          </div>
-        </div>
-      </v-col>
-      <v-col
-        cols="12"
-        sm="6"
+        Extra small Button
+      </v-btn>
+
+      <v-btn
+        size="small"
+        color="primary"
       >
-        <div class="text-center">
-          <div class="my-2">
-            <v-btn
-              color="secondary"
-              fab
-              x-small
-              dark
-            >
-              <v-icon>mdi-television</v-icon>
-            </v-btn>
-          </div>
-          <div class="my-2">
-            <v-btn
-              color="primary"
-              fab
-              small
-              dark
-            >
-              <v-icon>mdi-pencil</v-icon>
-            </v-btn>
-          </div>
-          <div class="my-2">
-            <v-btn
-              color="warning"
-              fab
-              dark
-            >
-              <v-icon>mdi-account-circle</v-icon>
-            </v-btn>
-          </div>
-          <div class="my-2">
-            <v-btn
-              color="error"
-              fab
-              large
-              dark
-            >
-              <v-icon>mdi-alarm</v-icon>
-            </v-btn>
-          </div>
-          <div class="my-2">
-            <v-btn
-              color="success"
-              fab
-              x-large
-              dark
-            >
-              <v-icon>mdi-domain</v-icon>
-            </v-btn>
-          </div>
-        </div>
-      </v-col>
-    </v-row>
-  </v-container>
+        Small Button
+      </v-btn>
+
+      <v-btn
+        color="warning"
+      >
+        Normal Button
+      </v-btn>
+
+      <v-btn
+        color="error"
+        size="large"
+      >
+        Large Button
+      </v-btn>
+
+      <v-btn
+        size="x-large"
+        color="success"
+      >
+        Extra large Button
+      </v-btn>
+    </div>
+    <div class="d-flex justify-space-around align-center flex-column flex-md-row">
+      <v-btn
+        color="secondary"
+        icon="mdi-television"
+        size="x-small"
+      />
+
+      <v-btn
+        color="primary"
+        icon="mdi-pencil"
+        size="small"
+      />
+
+      <v-btn
+        color="warning"
+        icon="mdi-account-circle"
+      />
+
+      <v-btn
+        color="error"
+        icon="mdi-alarm"
+        size="large"
+      />
+
+      <v-btn
+        color="success"
+        icon="mdi-domain"
+        size="x-large"
+      />
+    </div>
+  </div>
 </template>
