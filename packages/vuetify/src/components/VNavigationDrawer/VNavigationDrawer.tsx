@@ -8,8 +8,8 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, defineComponent, onBeforeMount, ref, toRef } from 'vue'
-import { makeTagProps } from '@/composables/tag'
 import { convertToUnit } from '@/util/helpers'
+import { makeTagProps } from '@/composables/tag'
 import makeProps from '@/util/makeProps'
 
 // Types
@@ -22,6 +22,9 @@ export default defineComponent({
   name: 'VNavigationDrawer',
 
   props: makeProps({
+    ...makeLayoutItemProps({ name: 'navigation-drawer' }),
+    ...makeSheetProps(),
+    ...makeTagProps({ tag: 'nav' }),
     aligned: {
       type: String as PropType<Alignment>,
       default: 'top',
@@ -39,11 +42,6 @@ export default defineComponent({
     },
     src: String,
     temporary: Boolean,
-
-    ...makeLayoutItemProps({ name: 'navigation-drawer' }),
-    ...makeSheetProps(),
-    ...makeTagProps({ tag: 'nav' }),
-
     width: {
       type: [Number, String],
       default: 256,
@@ -56,11 +54,9 @@ export default defineComponent({
     const isHovering = ref(false)
     const size = computed(() => Number(props.rail ? props.railWidth : props.width))
     const width = computed(() => {
-      if (props.rail && props.expandOnHover && isHovering.value) {
-        return props.width
-      }
-
-      return size.value
+      return (props.rail && props.expandOnHover && isHovering.value)
+        ? props.width
+        : size.value
     })
     const styles = useLayoutItem(
       props.name,
@@ -77,7 +73,6 @@ export default defineComponent({
 
     return () => {
       const hasImg = (slots.img || props.src)
-
       const translate = (
         (props.permanent || isActive.value ? 0 : 100) * (!props.right && !props.bottom ? -1 : 1)
       )
