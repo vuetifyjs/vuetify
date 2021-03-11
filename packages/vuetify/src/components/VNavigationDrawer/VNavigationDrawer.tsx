@@ -50,6 +50,7 @@ export default defineComponent({
       default: 72,
     },
     src: String,
+    stateless: Boolean,
     temporary: Boolean,
   }),
 
@@ -63,6 +64,7 @@ export default defineComponent({
 
     const isActive = useProxiedModel(props, 'modelValue')
     const isHovering = ref(false)
+    const isStateful = computed(() => props.permanent || props.stateless)
     const size = computed(() => Number(props.rail ? props.railWidth : props.width))
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)
@@ -74,7 +76,10 @@ export default defineComponent({
       toRef(props, 'priority'),
       computed(() => props.right ? 'right' : 'left'),
       computed(() => {
-        return props.permanent || (isActive.value && !props.temporary) ? size.value : 0
+        return (
+          isStateful.value ||
+          (isActive.value && !props.temporary)
+        ) ? size.value : 0
       }),
     )
 
@@ -85,7 +90,7 @@ export default defineComponent({
     return () => {
       const hasImg = (slots.img || props.src)
       const translate = (
-        (props.permanent || isActive.value ? 0 : 100) * (!props.right && !props.bottom ? -1 : 1)
+        (isStateful.value || isActive.value ? 0 : 100) * (!props.right && !props.bottom ? -1 : 1)
       )
 
       return (

@@ -77,6 +77,8 @@ describe('VNavigationDrawer', () => {
     [{}, `translateX(0%)`],
     [{ modelValue: true }, `translateX(0%)`],
     [{ modelValue: false }, `translateX(-100%)`],
+    [{ modelValue: false, permanent: true }, `translateX(0%)`],
+    [{ modelValue: false, stateless: true }, `translateX(0%)`],
     [{ modelValue: true, right: true }, `translateX(0%)`],
     [{ modelValue: false, right: true }, `translateX(100%)`],
     [{ bottom: true }, `translateY(0%)`],
