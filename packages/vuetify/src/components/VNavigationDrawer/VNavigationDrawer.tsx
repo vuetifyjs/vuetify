@@ -17,12 +17,6 @@ import { convertToUnit } from '@/util/helpers'
 import { makeTagProps } from '@/composables/tag'
 import makeProps from '@/util/makeProps'
 
-// Types
-import type { PropType } from 'vue'
-
-const alignedValues = ['start', 'center', 'end'] as const
-type Alignment = typeof alignedValues[number]
-
 export default defineComponent({
   name: 'VNavigationDrawer',
 
@@ -34,11 +28,6 @@ export default defineComponent({
     ...makeLayoutItemProps(),
     ...makePositionProps(),
     ...makeTagProps({ tag: 'nav' }),
-    aligned: {
-      type: String as PropType<Alignment>,
-      default: 'start',
-      validator: (v: any) => alignedValues.includes(v),
-    },
     expandOnHover: Boolean,
     mobile: Boolean,
     modelValue: Boolean,
@@ -53,12 +42,12 @@ export default defineComponent({
   }),
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme()
     const { borderClasses } = useBorder(props, 'v-navigation-drawer')
     const { borderRadiusClasses } = useBorderRadius(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-navigation-drawer')
+    const { themeClasses } = useTheme()
 
     const isActive = useProxiedModel(props, 'modelValue')
     const isHovering = ref(false)
@@ -97,7 +86,6 @@ export default defineComponent({
           class={[
             'v-navigation-drawer',
             {
-              [`v-navigation-drawer--aligned-${props.aligned}`]: !!props.aligned,
               'v-navigation-drawer--bottom': props.bottom,
               'v-navigation-drawer--end': props.right,
               'v-navigation-drawer--expand-on-hover': props.expandOnHover,
