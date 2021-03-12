@@ -31,7 +31,7 @@ export default defineComponent({
     ...makeBorderRadiusProps(),
     ...makeDimensionProps({ width: 256 }),
     ...makeElevationProps(),
-    ...makeLayoutItemProps({ name: 'navigation-drawer' }),
+    ...makeLayoutItemProps(),
     ...makePositionProps(),
     ...makeTagProps({ tag: 'nav' }),
     aligned: {
@@ -40,7 +40,6 @@ export default defineComponent({
       validator: (v: any) => alignedValues.includes(v),
     },
     expandOnHover: Boolean,
-    floating: Boolean,
     mobile: Boolean,
     modelValue: Boolean,
     permanent: Boolean,
@@ -50,7 +49,6 @@ export default defineComponent({
       default: 72,
     },
     src: String,
-    stateless: Boolean,
     temporary: Boolean,
   }),
 
@@ -64,7 +62,6 @@ export default defineComponent({
 
     const isActive = useProxiedModel(props, 'modelValue')
     const isHovering = ref(false)
-    const isStateful = computed(() => props.permanent || props.stateless)
     const size = computed(() => Number(props.rail ? props.railWidth : props.width))
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)
@@ -77,7 +74,7 @@ export default defineComponent({
       computed(() => props.right ? 'right' : 'left'),
       computed(() => {
         return (
-          isStateful.value ||
+          props.permanent ||
           (isActive.value && !props.temporary)
         ) ? size.value : 0
       }),
@@ -90,7 +87,7 @@ export default defineComponent({
     return () => {
       const hasImg = (slots.img || props.src)
       const translate = (
-        (isStateful.value || isActive.value ? 0 : 100) * (!props.right && !props.bottom ? -1 : 1)
+        (props.permanent || isActive.value ? 0 : 100) * (!props.right && !props.bottom ? -1 : 1)
       )
 
       return (
@@ -104,7 +101,6 @@ export default defineComponent({
               'v-navigation-drawer--bottom': props.bottom,
               'v-navigation-drawer--end': props.right,
               'v-navigation-drawer--expand-on-hover': props.expandOnHover,
-              'v-navigation-drawer--floating': props.floating,
               'v-navigation-drawer--is-hovering': isHovering.value,
               'v-navigation-drawer--is-mobile': props.mobile,
               'v-navigation-drawer--rail': props.rail,
