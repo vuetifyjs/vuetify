@@ -21,7 +21,7 @@ export const makeDimensionProps = propsFactory({
   minHeight: [Number, String],
   minWidth: [Number, String],
   width: [Number, String],
-})
+}, 'dimension')
 
 export function useDimension (props: DimensionProps) {
   const dimensionStyles = computed(() => ({

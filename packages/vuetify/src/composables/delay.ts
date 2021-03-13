@@ -13,7 +13,7 @@ export interface DelayProps {
 export const makeDelayProps = propsFactory({
   closeDelay: [Number, String],
   openDelay: [Number, String],
-})
+}, 'delay')
 
 export function useDelay (props: DelayProps, cb?: (value: boolean) => void) {
   const delays: Partial<Record<keyof DelayProps, number>> = {}

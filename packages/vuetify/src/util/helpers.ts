@@ -1,6 +1,8 @@
 import type { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
 import type { Slots, VNode, TransitionProps } from 'vue'
 import { Fragment, defineComponent, h, capitalize, camelize, Transition, mergeProps } from 'vue'
+import { makeTagProps } from '@/composables/tag'
+import makeProps from './makeProps'
 
 export function createSimpleFunctional (
   klass: string,
@@ -10,12 +12,7 @@ export function createSimpleFunctional (
   return defineComponent({
     name: name ?? capitalize(camelize(klass.replace(/__/g, '-'))),
 
-    props: {
-      tag: {
-        type: String,
-        default: tag,
-      },
-    },
+    props: makeProps(makeTagProps({ tag })),
 
     setup (props, { slots }) {
       return () => h(props.tag, {

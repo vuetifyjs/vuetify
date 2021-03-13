@@ -31,7 +31,7 @@ export const makePositionProps = propsFactory({
   },
   right: [Boolean, Number, String],
   top: [Boolean, Number, String],
-})
+}, 'position')
 
 export function usePosition (props: PositionProps, name: string) {
   const targets = ['top', 'right', 'bottom', 'left'] as const
