@@ -94,7 +94,9 @@
     "stylus": "^0.54.8",
     "url-loader": "^2.1.0",
     "vue-meta": "^2.4.0",
-    "vuetify-loader": "^1.3.0"
+    "vuetify-loader": "^1.3.0",
+    "vue-i18n": "next",
+    "vue-intl": "latest"
   },
   "peerDependencies": {
     "vue": "^3.0.7"
