@@ -257,6 +257,12 @@ function keyboardRippleHide (e: KeyboardEvent) {
   rippleHide(e)
 }
 
+function keyboardRippleHideHandler (e: KeyboardEvent) {
+  if (e.keyCode !== keyCodes.enter) {
+    keyboardRippleHide(e)
+  }
+}
+
 function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boolean) {
   const enabled = isRippleEnabled(binding.value)
   if (!enabled) {
@@ -285,7 +291,7 @@ function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boo
     el.addEventListener('mouseleave', rippleHide)
 
     el.addEventListener('keydown', keyboardRippleShow)
-    el.addEventListener('keyup', keyboardRippleHide)
+    el.addEventListener('keyup', keyboardRippleHideHandler)
 
     // Anchor tags can be dragged, causes other hides to fail - #1537
     el.addEventListener('dragstart', rippleHide, { passive: true })
