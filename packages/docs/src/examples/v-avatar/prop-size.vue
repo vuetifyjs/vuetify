@@ -1,24 +1,23 @@
 <template>
   <v-row justify="space-around">
     <v-avatar
-      color="indigo"
-      size="36"
+      color="primary"
+      size="x-small"
     >
-      <span class="white--text headline">36</span>
+      <span class="headline">32</span>
     </v-avatar>
 
     <v-avatar
-      color="teal"
-      size="48"
+      color="secondary"
     >
-      <span class="white--text headline">48</span>
+      <span class="headline">48</span>
     </v-avatar>
 
     <v-avatar
-      color="orange"
-      size="62"
+      color="info"
+      size="x-large"
     >
-      <span class="white--text headline">62</span>
+      <span class="headline">64</span>
     </v-avatar>
   </v-row>
 </template>

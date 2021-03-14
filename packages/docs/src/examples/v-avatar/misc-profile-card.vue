@@ -21,7 +21,7 @@
             class="profile"
             color="grey"
             size="164"
-            tile
+            rounded="0"
           >
             <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
           </v-avatar>

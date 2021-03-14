@@ -1,10 +1,10 @@
 <template>
   <div class="text-center">
     <v-avatar
-      tile
+      rounded="0"
       color="blue"
     >
-      <v-icon dark>
+      <v-icon>
         mdi-alarm
       </v-icon>
     </v-avatar>

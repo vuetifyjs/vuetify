@@ -20,3 +20,8 @@
     display: inline-flex
     height: inherit
     width: inherit
+
+  @each $name in $sizes
+    &--size-#{$name}
+      width: map-get($avatar-sizes, $name)
+      height: map-get($avatar-sizes, $name)
