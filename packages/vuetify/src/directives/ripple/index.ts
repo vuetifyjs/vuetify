@@ -245,6 +245,10 @@ function keyboardRippleShow (e: KeyboardEvent) {
   if (!keyboardRipple && (e.keyCode === keyCodes.enter || e.keyCode === keyCodes.space)) {
     keyboardRipple = true
     rippleShow(e)
+
+    if (e.keyCode === keyCodes.enter) {
+      keyboardRippleHide(e)
+    }
   }
 }
 
