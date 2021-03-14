@@ -1,10 +1,6 @@
 // Imports
 @import './_variables.scss'
 
-+theme(v-badge) using ($material)
-  .v-badge__badge::after
-    border-color: map-get($material, 'cards')
-
 .v-badge
   display: inline-block
   line-height: $badge-line-height
@@ -12,34 +8,30 @@
 
   &__badge
     border-radius: $badge-border-radius
-    color: $badge-color
-    display: inline-block
+    display: flex
+    justify-content: center
+    align-items: center
     font-size: $badge-font-size
+    width: $badge-width
     height: $badge-height
     letter-spacing: $badge-letter-spacing
     line-height: 1
-    min-width: $badge-min-width
     padding: $badge-padding
     pointer-events: auto
     position: absolute
     text-align: center
     text-indent: 0
-    top: $badge-top
-    transition: $primary-transition
+    // transition: $primary-transition
     white-space: nowrap
-
-    +ltr()
-      right: $badge-right
-
-    +rtl()
-      left: $badge-right
 
     .v-icon
       color: inherit
       font-size: $badge-font-size
+      width: $badge-font-size
+      height: $badge-font-size
       margin: $badge-icon-margin
 
-    .v-img
+    img
       height: $badge-font-size
       width: $badge-font-size
 
@@ -59,12 +51,11 @@
       .v-avatar
         height: $badge-height !important
         min-width: 0 !important
-        max-width: $badge-min-width !important
 
   &--bordered
     .v-badge__badge::after
       border-radius: inherit
-      border-width: $badge-bordered-width
+      border-width: $badge-border-width
       border-style: solid
       bottom: 0
       content: ''
@@ -73,6 +64,7 @@
       right: 0
       top: 0
       transform: scale(1.15)
+      color: $badge-border-color
 
   &--dot
     .v-badge__badge
@@ -85,10 +77,6 @@
       &::after
         border-width: $badge-dot-border-width
 
-  &--icon
-    .v-badge__badge
-      padding: $badge-icon-padding
-
   &--inline
     align-items: center
     display: inline-flex
@@ -100,7 +88,3 @@
 
     .v-badge__wrapper
       margin: $badge-wrapper-margin
-
-  &--tile
-    .v-badge__badge
-      border-radius: 0

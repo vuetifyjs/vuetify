@@ -4448,10 +4448,10 @@
   resolved "https://registry.yarnpkg.com/@vue/babel-helper-vue-transform-on/-/babel-helper-vue-transform-on-1.0.2.tgz#9b9c691cd06fc855221a2475c3cc831d774bc7dc"
   integrity sha512-hz4R8tS5jMn8lDq6iD+yWL6XNB699pGIVLk7WSJnn1dbpjaazsjZQkieJoRX6gW5zpYSCFqQ7jUquPNY65tQYA==
 
-"@vue/babel-plugin-jsx@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@vue/babel-plugin-jsx/-/babel-plugin-jsx-1.0.2.tgz#6bfd8e39c48e53391a56705649f81a35fe20b6a1"
-  integrity sha512-1uZlQCLCeuqJgDYLCmg3qfsvTVtOQiXh278ES4bvPTYYbv2Bi/rElLETK6AdjI9xxzyTUf5n1QEiH8Xxz0eZrg==
+"@vue/babel-plugin-jsx@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@vue/babel-plugin-jsx/-/babel-plugin-jsx-1.0.3.tgz#ad5ee86ebc9fc40900add9914534e223c719eace"
+  integrity sha512-+52ZQFmrM0yh61dQlgwQlfHZXmYbswbQEL25SOSt9QkjegAdfIGu87oELw0l8H6cuJYazZCiNjPR9eU++ZIbxg==
   dependencies:
     "@babel/helper-module-imports" "^7.0.0"
     "@babel/plugin-syntax-jsx" "^7.0.0"
@@ -4653,7 +4653,7 @@
     webpack "^4.0.0"
     webpack-bundle-analyzer "^3.8.0"
     webpack-chain "^6.4.0"
-    webpack-dev-server "3.9.0"
+    webpack-dev-server "^3.11.0"
     webpack-merge "^4.2.2"
   optionalDependencies:
     vue-loader-v16 "npm:vue-loader@^16.0.0-beta.3"
