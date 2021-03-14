@@ -253,6 +253,13 @@ function keyboardRippleHide (e: KeyboardEvent) {
   rippleHide(e)
 }
 
+function focusRippleHide (e: FocusEvent) {
+  if (keyboardRipple === true) {
+    keyboardRipple = false
+    rippleHide(e)
+  }
+}
+
 function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boolean) {
   const enabled = isRippleEnabled(binding.value)
   if (!enabled) {
@@ -283,6 +290,8 @@ function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boo
     el.addEventListener('keydown', keyboardRippleShow)
     el.addEventListener('keyup', keyboardRippleHide)
 
+    el.addEventListener('blur', focusRippleHide)
+
     // Anchor tags can be dragged, causes other hides to fail - #1537
     el.addEventListener('dragstart', rippleHide, { passive: true })
   } else if (!enabled && wasEnabled) {
@@ -301,6 +310,7 @@ function removeListeners (el: HTMLElement) {
   el.removeEventListener('keydown', keyboardRippleShow)
   el.removeEventListener('keyup', keyboardRippleHide)
   el.removeEventListener('dragstart', rippleHide)
+  el.removeEventListener('blur', focusRippleHide)
 }
 
 function directive (el: HTMLElement, binding: VNodeDirective, node: VNode) {
