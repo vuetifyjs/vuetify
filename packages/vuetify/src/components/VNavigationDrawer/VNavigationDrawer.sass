@@ -6,7 +6,7 @@
   background: $navigation-drawer-background
   display: flex
   flex-direction: column
-  height: 100%
+  height: $navigation-drawer-height
   max-width: 100%
   pointer-events: auto
   top: 0
@@ -53,10 +53,10 @@
 
 .v-navigation-drawer__content
   flex: 0 1 auto
-  height: 100%
+  height: $navigation-drawer-content-height
   max-width: 100%
-  overflow-x: hidden
-  overflow-y: auto
+  overflow-x: $navigation-drawer-content-overflow-x
+  overflow-y: $navigation-drawer-content-overflow-y
 
 .v-navigation-drawer__img
   height: 100%
