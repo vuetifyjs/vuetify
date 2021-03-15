@@ -8,13 +8,13 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makePositionProps, usePosition } from '@/composables/position'
+import { makeTagProps } from '@/composables/tag'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, defineComponent, onBeforeMount, ref, toRef } from 'vue'
 import { convertToUnit } from '@/util/helpers'
-import { makeTagProps } from '@/composables/tag'
 import makeProps from '@/util/makeProps'
 
 export default defineComponent({
@@ -57,7 +57,7 @@ export default defineComponent({
         ? props.width
         : size.value
     })
-    const styles = useLayoutItem(
+    const layoutStyles = useLayoutItem(
       props.name,
       toRef(props, 'priority'),
       computed(() => props.right ? 'right' : 'left'),
@@ -103,8 +103,8 @@ export default defineComponent({
           ]}
           style={[
             dimensionStyles.value,
+            layoutStyles.value,
             positionStyles.value,
-            styles.value,
             {
               transform: `translate${props.bottom ? 'Y' : 'X'}(${convertToUnit(translate, '%')})`,
               width: convertToUnit(width.value),
