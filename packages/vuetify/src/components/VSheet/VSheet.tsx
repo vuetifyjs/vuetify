@@ -8,8 +8,8 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeTagProps } from '@/composables/tag'
-import { useTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
+import { useTheme } from '@/composables/theme'
 
 // Types
 import type { BorderProps } from '@/composables/border'
