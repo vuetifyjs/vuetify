@@ -53,18 +53,3 @@ exports[`VIcon should support an icon name in the default slot 1`] = `
   add
 </i>
 `;
-
-exports[`VIcon should use provided color 1`] = `
-<i class="mdi-close mdi v-icon notranslate v-icon--size-default text-primary"
-   aria-hidden="true"
->
-</i>
-`;
-
-exports[`VIcon should use provided color 2`] = `
-<i class="mdi-close mdi v-icon notranslate v-icon--size-default"
-   aria-hidden="true"
-   style="color: rgb(255, 0, 255); caret-color: #ff00ff;"
->
-</i>
-`;
