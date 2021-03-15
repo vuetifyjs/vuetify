@@ -7,26 +7,19 @@ import { consoleWarn } from '@/util/console'
 // Types
 import type { Prop } from 'vue'
 
-export default function makeProps<P extends Record<string, Prop<any>>> (props: P) {
+export default function makeProps<P extends Record<string, Prop<any> & { source?: string }>> (props: P) {
   for (const key in props) {
-    const propOptions = (props[key] as any)
+    const originalProp = props[key]
+    const isOptions = !(originalProp == null || Array.isArray(originalProp) || typeof originalProp === 'function')
 
-    const isOptions = !(propOptions == null || Array.isArray(propOptions) || typeof propOptions === 'function')
+    const propDefinition = (isOptions ? originalProp : { type: originalProp }) as any
+    const originalDefault = propDefinition.default
 
-    const type = isOptions
-      ? propOptions.type
-      : propOptions
+    const wrappedDefault = generateDefault(key, originalDefault, propDefinition.type)
 
-    const localDefault = isOptions
-      ? propOptions.default
-      : undefined
-
-    const wrappedDefault = generateDefault(key, localDefault, type)
-
-    if (isOptions) {
-      propOptions.default = wrappedDefault
-    } else {
-      props[key] = { type, default: wrappedDefault } as any
+    props[key] = {
+      ...propDefinition,
+      default: wrappedDefault,
     }
   }
 

@@ -28,31 +28,29 @@ import type { ComponentObjectPropsOptions, Prop, PropType } from 'vue'
 
 export default function propsFactory<
   PropsOptions extends ComponentObjectPropsOptions
-> (props: PropsOptions) {
+> (props: PropsOptions, source?: string) {
   return <Defaults extends PartialKeys<PropsOptions> = {}>(
     defaults?: Defaults
   ): AppendDefault<PropsOptions, Defaults> => {
-    if (!defaults) {
-      return props as any
-    } else {
-      return Object.keys(props).reduce<any>((obj, prop) => {
-        const definition = props[prop]
-        if (prop in defaults) {
-          if (typeof definition === 'object' && definition != null && !Array.isArray(definition)) {
-            obj[prop] = {
-              ...definition,
-              default: defaults[prop],
-            }
-          } else {
-            obj[prop] = { type: props[prop], default: defaults[prop] }
-          }
-        } else {
-          obj[prop] = definition
-        }
+    return Object.keys(props).reduce<any>((obj, prop) => {
+      const isObjectDefinition = typeof props[prop] === 'object' && props[prop] != null && !Array.isArray(props[prop])
+      const definition = isObjectDefinition ? props[prop] : { type: props[prop] }
 
-        return obj
-      }, {})
-    }
+      if (defaults && prop in defaults) {
+        obj[prop] = {
+          ...definition,
+          default: defaults[prop],
+        }
+      } else {
+        obj[prop] = definition
+      }
+
+      if (source) {
+        obj[prop].source = source
+      }
+
+      return obj
+    }, {})
   }
 }
 

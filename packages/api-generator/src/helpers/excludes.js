@@ -18,6 +18,10 @@ module.exports = {
     'VTimePickerTitle',
     'VVirtualTable',
     'VTreeviewNode',
+    'VClassIcon',
+    'VComponentIcon',
+    'VSvgIcon',
+    'VLigatureIcon',
   ],
   props: {
     'v-app': [

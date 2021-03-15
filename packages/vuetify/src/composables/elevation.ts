@@ -21,7 +21,7 @@ export const makeElevationProps = propsFactory({
       )
     },
   },
-})
+}, 'elevation')
 
 // Effect
 export function useElevation (props: ElevationProps) {

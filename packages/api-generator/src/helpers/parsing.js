@@ -178,4 +178,6 @@ module.exports = {
   parseSassVariables,
   parseGlobalSassVariables,
   parseComponent,
+  getPropType,
+  getPropDefault,
 }

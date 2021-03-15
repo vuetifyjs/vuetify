@@ -33,7 +33,7 @@ export const makeLayoutProps = propsFactory({
     default: () => ([]),
   } as Prop<string[]>,
   fullHeight: Boolean,
-})
+}, 'layout')
 
 export const makeLayoutItemProps = propsFactory({
   name: {
@@ -47,7 +47,7 @@ export const makeLayoutItemProps = propsFactory({
     type: [Number, String],
     default: 300,
   },
-})
+}, 'layout-item')
 
 export function useMain () {
   const layout = inject(VuetifyLayoutKey)

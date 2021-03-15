@@ -12,4 +12,4 @@ export const makeTagProps = propsFactory({
     type: String,
     default: 'div',
   },
-})
+}, 'tag')
