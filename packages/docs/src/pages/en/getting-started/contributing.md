@@ -205,6 +205,13 @@ We **do not** accept PRs for any documentation changes pertaining to languages o
 
 **Note**: Languages will not be added to the language drop down on the docs site until they have at least 50% of their translations completed.
 
+### Before resolving issues
+
+Vuetify has a large number of contributors and collaborative disagreements are inevitable. In order to be a respectful community member, before spending your time on resolving a certain issue, please make sure:
+
+- The issue has no linked pull request.
+- Or the issue has linked pull request and you found a better solution or any improvement should be made, instead of lodging a new pull request, propose the solution and discuss any amendment with the author to cultivate the best solution as a consequence of community collaboration.
+
 ### Requesting new features
 
 Vuetify uses the **RFC** (request for comments) process for new feature suggestions. It is intended to provide a consistent and controlled path for new features to enter the framework.
