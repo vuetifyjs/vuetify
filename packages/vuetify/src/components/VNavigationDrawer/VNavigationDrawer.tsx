@@ -40,7 +40,7 @@ export default defineComponent({
     width: {
       type: [Number, String],
       default: 256,
-    }
+    },
   }),
 
   setup (props, { slots }) {
