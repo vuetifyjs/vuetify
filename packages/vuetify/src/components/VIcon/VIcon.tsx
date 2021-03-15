@@ -2,12 +2,15 @@
 import './VIcon.sass'
 
 // Utilities
-import { computed, ComputedRef, defineComponent } from 'vue'
+import { computed, ComputedRef, defineComponent, toRef } from 'vue'
+import { convertToUnit, flattenFragments } from '@/util'
+import makeProps from '@/util/makeProps'
+
+// Composables
 import { makeSizeProps, useSize } from '@/composables/size'
 import { useIcon } from '@/composables/icons'
-import { convertToUnit, flattenFragments } from '@/util'
 import { makeTagProps } from '@/composables/tag'
-import makeProps from '@/util/makeProps'
+import { useTextColor } from '@/composables/color'
 
 // Types
 import type { IconValue } from '@/composables/icons'
@@ -17,6 +20,7 @@ export default defineComponent({
   name: 'VIcon',
 
   props: makeProps({
+    color: String,
     disabled: Boolean,
     left: Boolean,
     right: Boolean,
@@ -42,6 +46,7 @@ export default defineComponent({
 
     const { iconData } = useIcon(slotIcon || props)
     const { sizeClasses } = useSize(props, 'v-icon')
+    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
 
     return () => {
       return (
@@ -52,17 +57,21 @@ export default defineComponent({
             'v-icon',
             'notranslate',
             sizeClasses.value,
+            textColorClasses.value,
             {
               'v-icon--disabled': props.disabled,
               'v-icon--left': props.left,
               'v-icon--right': props.right,
             },
           ]}
-          style={ !sizeClasses.value ? ({
-            fontSize: convertToUnit(props.size),
-            width: convertToUnit(props.size),
-            height: convertToUnit(props.size),
-          }) : undefined }
+          style={[
+            !sizeClasses.value ? ({
+              fontSize: convertToUnit(props.size),
+              width: convertToUnit(props.size),
+              height: convertToUnit(props.size),
+            }) : undefined,
+            textColorStyles.value,
+          ]}
           aria-hidden="true"
         />
       )
