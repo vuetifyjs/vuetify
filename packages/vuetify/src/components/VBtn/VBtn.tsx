@@ -3,8 +3,13 @@ import './VBtn.sass'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeSheetProps, useSheet } from '@/components/VSheet/VSheet'
+import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makePositionProps, usePosition } from '@/composables/position'
 import { makeTagProps } from '@/composables/tag'
+import { useTheme } from '@/composables/theme'
 import { useColor } from '@/composables/color'
 
 // Directives
@@ -23,6 +28,15 @@ export default defineComponent({
   name: 'VBtn',
 
   props: makeProps({
+    ...makeBorderProps(),
+    ...makeBorderRadiusProps(),
+    ...makeDensityProps(),
+    ...makeDimensionProps(),
+    ...makeElevationProps(),
+    ...makePositionProps(),
+    ...makeSizeProps(),
+    ...makeTagProps({ tag: 'button' }),
+
     text: Boolean,
     flat: Boolean,
     plain: Boolean,
@@ -35,17 +49,17 @@ export default defineComponent({
       default: 'primary',
     },
     disabled: Boolean,
-
-    ...makeSheetProps(),
-    ...makeSizeProps(),
-    ...makeDensityProps(),
-    ...makeTagProps({ tag: 'button' }),
   }),
 
   setup (props, { slots }) {
-    const { sheetClasses, sheetStyles } = useSheet(props, 'v-btn')
-    const { sizeClasses } = useSize(props, 'v-btn')
+    const { borderClasses } = useBorder(props, 'v-btn')
+    const { borderRadiusClasses } = useBorderRadius(props)
     const { densityClasses } = useDensity(props, 'v-btn')
+    const { dimensionStyles } = useDimension(props)
+    const { elevationClasses } = useElevation(props)
+    const { positionClasses, positionStyles } = usePosition(props, 'v-btn')
+    const { sizeClasses } = useSize(props, 'v-btn')
+    const { themeClasses } = useTheme()
 
     const isContained = computed(() => {
       return !(props.text || props.plain || props.icon || props.outlined || props.border !== false)
@@ -72,14 +86,19 @@ export default defineComponent({
             'v-btn--block': props.block,
             'v-btn--disabled': props.disabled,
           },
-          sheetClasses.value,
-          sizeClasses.value,
-          densityClasses.value,
+          borderClasses.value,
+          borderRadiusClasses.value,
           colorClasses.value,
+          densityClasses.value,
+          elevationClasses.value,
+          positionClasses.value,
+          sizeClasses.value,
+          themeClasses.value,
         ]}
         style={[
-          sheetStyles.value,
           colorStyles.value,
+          dimensionStyles.value,
+          positionStyles.value,
         ]}
         disabled={ props.disabled }
       >

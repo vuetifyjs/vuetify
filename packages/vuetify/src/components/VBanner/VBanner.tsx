@@ -2,7 +2,13 @@
 import './VBanner.sass'
 
 // Composables
-import { makeSheetProps, useSheet } from '@/components/VSheet/VSheet'
+import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makePositionProps, usePosition } from '@/composables/position'
+import { makeTagProps } from '@/composables/tag'
+import { useTheme } from '@/composables/theme'
 
 // Utilities
 import { defineComponent } from 'vue'
@@ -12,16 +18,26 @@ export default defineComponent({
   name: 'VBanner',
 
   props: makeProps({
+    ...makeBorderProps(),
+    ...makeBorderRadiusProps(),
+    ...makeDimensionProps(),
+    ...makeElevationProps(),
+    ...makePositionProps(),
+    ...makeTagProps(),
     avatar: String,
     icon: String,
     mobile: Boolean,
     singleLine: Boolean,
     sticky: Boolean,
-    ...makeSheetProps(),
   }),
 
   setup (props, { slots }) {
-    const { sheetClasses, sheetStyles } = useSheet(props, 'v-banner')
+    const { borderClasses } = useBorder(props, 'v-banner')
+    const { borderRadiusClasses } = useBorderRadius(props)
+    const { dimensionStyles } = useDimension(props)
+    const { elevationClasses } = useElevation(props)
+    const { positionClasses, positionStyles } = usePosition(props, 'v-banner')
+    const { themeClasses } = useTheme()
 
     return () => {
       const hasThumbnail = (!!props.avatar || !!props.icon || !!slots.thumbnail)
@@ -36,9 +52,16 @@ export default defineComponent({
               'v-banner--single-line': props.singleLine,
               'v-banner--sticky': props.sticky,
             },
-            sheetClasses.value,
+            themeClasses.value,
+            borderClasses.value,
+            borderRadiusClasses.value,
+            elevationClasses.value,
+            positionClasses.value,
           ]}
-          style={ sheetStyles.value }
+          style={[
+            dimensionStyles.value,
+            positionStyles.value,
+          ]}
           role="banner"
         >
           <div class="v-banner__sizer">
