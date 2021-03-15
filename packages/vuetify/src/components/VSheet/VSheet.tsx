@@ -8,10 +8,11 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeTagProps } from '@/composables/tag'
+import { useBackgroundColor } from '@/composables/color'
 import { useTheme } from '@/composables/theme'
 
 // Utilities
-import { defineComponent } from 'vue'
+import { defineComponent, toRef } from 'vue'
 import makeProps from '@/util/makeProps'
 
 export default defineComponent({
@@ -24,10 +25,12 @@ export default defineComponent({
     ...makeElevationProps(),
     ...makePositionProps(),
     ...makeTagProps(),
+    color: String,
   }),
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme()
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { borderClasses } = useBorder(props, 'v-sheet')
     const { borderRadiusClasses } = useBorderRadius(props)
     const { dimensionStyles } = useDimension(props)
@@ -39,12 +42,14 @@ export default defineComponent({
         class={[
           'v-sheet',
           themeClasses.value,
+          backgroundColorClasses.value,
           borderClasses.value,
           borderRadiusClasses.value,
           elevationClasses.value,
           positionClasses.value,
         ]}
         style={[
+          backgroundColorStyles.value,
           dimensionStyles.value,
           positionStyles.value,
         ]}
