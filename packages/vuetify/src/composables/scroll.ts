@@ -31,7 +31,7 @@ export const makeScrollProps = propsFactory({
   scrollThreshold: {
     type: [String, Number],
   },
-})
+}, 'scroll')
 
 export interface ScrollArguments {
   thresholdMetCallback?: (data: ThresholdMetCallbackData) => void

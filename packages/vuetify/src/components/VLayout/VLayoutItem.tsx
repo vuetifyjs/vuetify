@@ -3,6 +3,7 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 
 // Utilities
 import { toRef, defineComponent, computed } from 'vue'
+import makeProps from '@/util/makeProps'
 
 // Types
 import type { Prop } from 'vue'
@@ -10,17 +11,13 @@ import type { Prop } from 'vue'
 export default defineComponent({
   name: 'VLayoutItem',
 
-  props: {
+  props: makeProps({
     position: {
       type: String,
       required: true,
     } as Prop<'top' | 'right' | 'bottom' | 'left'>,
     ...makeLayoutItemProps(),
-    size: {
-      type: Number,
-      default: 100
-    },
-  },
+  }),
 
   setup (props, { slots }) {
     const styles = useLayoutItem(
