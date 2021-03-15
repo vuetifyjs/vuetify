@@ -4,7 +4,6 @@ import './VNavigationDrawer.sass'
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makePositionProps, usePosition } from '@/composables/position'
@@ -23,7 +22,6 @@ export default defineComponent({
   props: makeProps({
     ...makeBorderProps(),
     ...makeBorderRadiusProps(),
-    ...makeDimensionProps({ width: 256 }),
     ...makeElevationProps(),
     ...makeLayoutItemProps(),
     ...makePositionProps(),
@@ -39,12 +37,15 @@ export default defineComponent({
     },
     src: String,
     temporary: Boolean,
+    width: {
+      type: [Number, String],
+      default: 256,
+    }
   }),
 
   setup (props, { slots }) {
     const { borderClasses } = useBorder(props, 'v-navigation-drawer')
     const { borderRadiusClasses } = useBorderRadius(props)
-    const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-navigation-drawer')
     const { themeClasses } = useTheme()
@@ -102,7 +103,6 @@ export default defineComponent({
             themeClasses.value,
           ]}
           style={[
-            dimensionStyles.value,
             layoutStyles.value,
             positionStyles.value,
             {
