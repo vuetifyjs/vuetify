@@ -13,7 +13,6 @@
     "permanent": "The drawer remains visible regardless of screen size",
     "right": "Places the navigation drawer on the right",
     "src": "Specifies a [v-img](/components/images) as the component's background.",
-    "stateless": "Remove all automated state functionality (resize, mobile, route) and manually control the drawer state",
     "temporary": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background",
     "touchless": "Disable mobile touch functionality",
     "value": "Controls whether the component is visible or hidden."
