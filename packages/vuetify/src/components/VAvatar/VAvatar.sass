@@ -5,18 +5,17 @@
   border-radius: $avatar-border-radius
   display: inline-flex
   justify-content: center
-  line-height: normal
+  line-height: $avatar-line-height
+  overflow: hidden
   position: relative
   text-align: center
-  vertical-align: middle
-  overflow: hidden
+  vertical-align: $avatar-vertical-align
 
-  img,
-  svg,
-  .v-icon,
-  .v-image,
-  .v-responsive__content
+  > *
     border-radius: inherit
-    display: inline-flex
-    height: inherit
     width: inherit
+
+  @each $name in $sizes
+    &--size-#{$name}
+      height: map-get($avatar-sizes, $name)
+      width: map-get($avatar-sizes, $name)

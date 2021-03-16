@@ -1,4 +1,1 @@
-import VAvatar from './VAvatar'
-
-export { VAvatar }
-export default VAvatar
+export { default as VAvatar } from './VAvatar'

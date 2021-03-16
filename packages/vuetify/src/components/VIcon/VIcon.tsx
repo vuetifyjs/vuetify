@@ -1,16 +1,16 @@
 // Styles
 import './VIcon.sass'
 
+// Composables
+import { makeSizeProps, useSize } from '@/composables/size'
+import { makeTagProps } from '@/composables/tag'
+import { useIcon } from '@/composables/icons'
+import { useTextColor } from '@/composables/color'
+
 // Utilities
 import { computed, ComputedRef, defineComponent, toRef } from 'vue'
 import { convertToUnit, flattenFragments } from '@/util'
 import makeProps from '@/util/makeProps'
-
-// Composables
-import { makeSizeProps, useSize } from '@/composables/size'
-import { useIcon } from '@/composables/icons'
-import { makeTagProps } from '@/composables/tag'
-import { useTextColor } from '@/composables/color'
 
 // Types
 import type { IconValue } from '@/composables/icons'

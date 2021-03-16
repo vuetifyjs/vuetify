@@ -1,11 +1,12 @@
 // Setup
 import { computed } from 'vue'
+import { convertToUnit } from '@/util'
 import propsFactory from '@/util/propsFactory'
 
 const predefinedSizes = ['x-small', 'small', 'default', 'large', 'x-large']
 
 export interface SizeProps {
-  size: string | number
+  size?: string | number
 }
 
 // Props
@@ -24,5 +25,13 @@ export function useSize (props: SizeProps, name: string) {
       : null
   })
 
-  return { sizeClasses }
+  const sizeStyles = computed(() => {
+    return !predefinedSizes.includes(props.size as string) && props.size
+      ? ({
+        width: convertToUnit(props.size),
+        height: convertToUnit(props.size),
+      }) : null
+  })
+
+  return { sizeClasses, sizeStyles }
 }
