@@ -6,7 +6,7 @@ import propsFactory from '@/util/propsFactory'
 const predefinedSizes = ['x-small', 'small', 'default', 'large', 'x-large']
 
 export interface SizeProps {
-  size: string | number
+  size?: string | number
 }
 
 // Props
@@ -26,7 +26,7 @@ export function useSize (props: SizeProps, name: string) {
   })
 
   const sizeStyles = computed(() => {
-    return !predefinedSizes.includes(props.size as string)
+    return !predefinedSizes.includes(props.size as string) && props.size
       ? ({
         width: convertToUnit(props.size),
         height: convertToUnit(props.size),
