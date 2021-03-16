@@ -4,7 +4,6 @@
 .v-badge
   display: inline-block
   line-height: $badge-line-height
-  position: relative
 
   &__badge
     border-radius: $badge-border-radius
@@ -12,7 +11,7 @@
     justify-content: center
     align-items: center
     font-size: $badge-font-size
-    width: $badge-width
+    min-width: $badge-min-width
     height: $badge-height
     letter-spacing: $badge-letter-spacing
     line-height: 1
@@ -29,20 +28,18 @@
       font-size: $badge-font-size
       width: $badge-font-size
       height: $badge-font-size
-      margin: $badge-icon-margin
+
+    .v-img
+      height: 100%
+      width: 100%
 
     img
-      height: $badge-font-size
-      width: $badge-font-size
+      height: 100%
+      width: 100%
 
   &__wrapper
-    flex: 0 1
-    height: 100%
-    left: 0
-    pointer-events: none
-    position: absolute
-    top: 0
-    width: 100%
+    display: flex
+    position: relative
 
   &--avatar
     .v-badge__badge

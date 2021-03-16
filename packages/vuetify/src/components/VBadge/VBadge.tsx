@@ -8,7 +8,7 @@ import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-rad
 import { makeTransitionProps, withTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, defineComponent, toRef, Transition } from 'vue'
+import { computed, defineComponent, toRef } from 'vue'
 import { convertToUnit } from '@/util/helpers'
 
 const extract = (obj: Record<string, unknown>, properties: string[]) => {
@@ -49,7 +49,10 @@ export default defineComponent({
     },
     offsetX: [Number, String],
     offsetY: [Number, String],
-    overlap: Boolean,
+    overlap: {
+      type: Boolean,
+      default: true,
+    },
     modelValue: {
       type: Boolean,
       default: true
@@ -123,41 +126,43 @@ export default defineComponent({
           ]}
           { ...attrs }
         >
-          { ctx.slots.default?.() }
-          { withTransition(
-              <span
-                v-show={props.modelValue}
-                class={[
-                  'v-badge__badge',
-                  backgroundColorClasses.value,
-                  textColorClasses.value,
-                  borderRadiusClasses.value,
-                ]}
-                style={[
-                  backgroundColorStyles.value,
-                  textColorStyles.value,
-                  locationStyles.value,
-                ]}
-                { ...{
-                    'aria-atomic': 'true',
-                    // TODO: locale string here
-                    // 'aria-label': label,
-                    'aria-live': 'polite',
-                    role: 'status',
-                    ...badgeAttrs,
+          <div class="v-badge__wrapper">
+            { ctx.slots.default?.() }
+            { withTransition(
+                <span
+                  v-show={props.modelValue}
+                  class={[
+                    'v-badge__badge',
+                    backgroundColorClasses.value,
+                    textColorClasses.value,
+                    borderRadiusClasses.value,
+                  ]}
+                  style={[
+                    backgroundColorStyles.value,
+                    textColorStyles.value,
+                    locationStyles.value,
+                  ]}
+                  { ...{
+                      'aria-atomic': 'true',
+                      // TODO: locale string here
+                      'aria-label': 'locale string here',
+                      'aria-live': 'polite',
+                      role: 'status',
+                      ...badgeAttrs,
+                    }
                   }
-                }
-              >
-                { props.dot
-                  ? undefined
-                  : ctx.slots.badge
-                    ? ctx.slots.badge()
-                    : props.content
-                }
-              </span>,
-              props.transition
-            )
-          }
+                >
+                  { props.dot
+                    ? undefined
+                    : ctx.slots.badge
+                      ? ctx.slots.badge()
+                      : props.content
+                  }
+                </span>,
+                props.transition
+              )
+            }
+          </div>
         </props.tag>
       )
     }
