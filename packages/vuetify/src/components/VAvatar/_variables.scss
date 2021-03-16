@@ -1,6 +1,8 @@
 @import '../../styles/styles.sass';
 
 $avatar-border-radius: 50% !default;
+$avatar-line-height: normal !default;
+$avatar-vertical-align: middle !default;
 
 $avatar-sizes: () !default;
 $avatar-sizes: map-deep-merge(
