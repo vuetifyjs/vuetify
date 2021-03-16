@@ -1,9 +1,10 @@
+// Styles
 import './VAvatar.sass'
 
 // Composables
-import { makeTagProps } from '@/composables/tag'
-import { makeSizeProps, useSize } from '@/composables/size'
 import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
+import { makeSizeProps, useSize } from '@/composables/size'
+import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
@@ -13,17 +14,17 @@ export default defineComponent({
   name: 'VAvatar',
 
   props: {
+    ...makeBorderRadiusProps(),
+    ...makeSizeProps(),
+    ...makeTagProps(),
     color: String,
     left: Boolean,
     right: Boolean,
-    ...makeTagProps(),
-    ...makeSizeProps(),
-    ...makeBorderRadiusProps(),
   },
 
   setup (props, { slots }) {
-    const { borderRadiusClasses } = useBorderRadius(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { borderRadiusClasses } = useBorderRadius(props)
     const { sizeClasses, sizeStyles } = useSize(props, 'v-avatar')
 
     return () => (
@@ -34,8 +35,8 @@ export default defineComponent({
             'v-avatar--left': props.left,
             'v-avatar--right': props.right,
           },
-          borderRadiusClasses.value,
           backgroundColorClasses.value,
+          borderRadiusClasses.value,
           sizeClasses.value,
         ]}
         style={[

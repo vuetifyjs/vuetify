@@ -6,10 +6,10 @@
   display: inline-flex
   justify-content: center
   line-height: normal
+  overflow: hidden
   position: relative
   text-align: center
   vertical-align: middle
-  overflow: hidden
 
   img,
   svg,
@@ -23,5 +23,5 @@
 
   @each $name in $sizes
     &--size-#{$name}
-      width: map-get($avatar-sizes, $name)
       height: map-get($avatar-sizes, $name)
+      width: map-get($avatar-sizes, $name)
