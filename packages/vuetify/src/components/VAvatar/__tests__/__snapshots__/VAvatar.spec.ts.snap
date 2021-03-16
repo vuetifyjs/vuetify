@@ -1,34 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VAvatar should have an v-avatar class 1`] = `
+exports[`VAvatar should match a snapshot 1`] = `
 <div class="v-avatar v-avatar--size-default">
 </div>
-`;
-
-exports[`VAvatar should render default slot content 1`] = `
-<div class="v-avatar v-avatar--size-default">
-  <span>
-    foo
-  </span>
-</div>
-`;
-
-exports[`VAvatar should respect color prop 1`] = `
-<div class="v-avatar bg-error v-avatar--size-default">
-</div>
-`;
-
-exports[`VAvatar should respect rounded prop 1`] = `
-<div class="v-avatar rounded-0 v-avatar--size-default">
-</div>
-`;
-
-exports[`VAvatar should respect size prop 1`] = `
-<div class="v-avatar v-avatar--size-large">
-</div>
-`;
-
-exports[`VAvatar should respect tag prop 1`] = `
-<span class="v-avatar v-avatar--size-default">
-</span>
 `;
