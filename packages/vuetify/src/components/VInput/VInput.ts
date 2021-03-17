@@ -154,6 +154,7 @@ export default baseMixins.extend<options>().extend({
     genControl () {
       return this.$createElement('div', {
         staticClass: 'v-input__control',
+        attrs: { title: this.attrs$.title },
       }, [
         this.genInputSlot(),
         this.genMessages(),

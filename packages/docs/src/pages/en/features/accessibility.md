@@ -131,6 +131,8 @@ However, when using slots there are conditions in which you will need to utilize
 
 <example file="accessibility/select-list-item" />
 
+<promoted-ad slug="vuetify-github-sponsors" />
+
 When providing a `v-list-item` component in a slot, the aria attributes are passed through the **attrs** data property and can be bound with `v-bind`.
 
 ```html

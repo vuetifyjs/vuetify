@@ -52,6 +52,12 @@
     }
   }
 
+  .dialog-top-transition {
+    &-enter, &-leave-to {
+      transform: translateY(-100%);
+    }
+  }
+
   .picker-transition,
   .picker-reverse-transition {
     &-enter-active,

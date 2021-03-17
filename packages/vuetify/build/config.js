@@ -14,33 +14,33 @@ const builds = {
       mode: 'development',
       output: {
         filename: 'vuetify.js',
-        libraryTarget: 'umd'
+        libraryTarget: 'umd',
       },
       plugins: [
         new MiniCssExtractPlugin({
-          filename: 'vuetify.css'
-        })
-      ]
-    }
+          filename: 'vuetify.css',
+        }),
+      ],
+    },
   },
   production: {
     config: {
       mode: 'production',
       output: {
         filename: 'vuetify.min.js',
-        libraryTarget: 'umd'
+        libraryTarget: 'umd',
       },
       plugins: [
         new MiniCssExtractPlugin({
-          filename: 'vuetify.min.css'
-        })
+          filename: 'vuetify.min.css',
+        }),
       ],
       performance: {
-        hints: false
-      }
+        hints: false,
+      },
     },
-    env: 'production'
-  }
+    env: 'production',
+  },
 }
 
 function genConfig (opts) {
@@ -48,8 +48,8 @@ function genConfig (opts) {
 
   config.plugins = config.plugins.concat([
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(opts.env || 'development')
-    })
+      'process.env.NODE_ENV': JSON.stringify(opts.env || 'development'),
+    }),
   ])
 
   if (opts.env) {
@@ -61,15 +61,15 @@ function genConfig (opts) {
 * Released under the MIT License.
 */     `,
         raw: true,
-        entryOnly: true
-      })
+        entryOnly: true,
+      }),
     ])
     config.optimization = {
       minimizer: [
         new TerserPlugin({
           cache: true,
           parallel: true,
-          sourceMap: true
+          sourceMap: true,
         }),
         new OptimizeCssAssetsPlugin({
           assetNameRegExp: /\.css$/g,
@@ -77,11 +77,11 @@ function genConfig (opts) {
           cssProcessorOptions: {
             discardComments: { removeAll: true },
             postcssZindex: false,
-            reduceIdents: false
+            reduceIdents: false,
           },
-          canPrint: false
-        })
-      ]
+          canPrint: false,
+        }),
+      ],
     }
   }
 

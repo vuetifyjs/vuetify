@@ -52,6 +52,10 @@ export default mixins(
     },
     mandatory: Boolean,
     shift: Boolean,
+    tag: {
+      type: String,
+      default: 'div',
+    },
   },
 
   data () {
@@ -120,6 +124,7 @@ export default mixins(
           this.mandatory ||
           this.value !== undefined
         ),
+        tag: this.tag,
         value: this.internalValue,
       },
       on: { change: this.updateValue },

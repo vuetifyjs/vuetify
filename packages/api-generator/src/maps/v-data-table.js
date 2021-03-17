@@ -150,7 +150,9 @@ const DataTableSlots = [
   { name: 'body.append', props: DataTableBodyScopedProps },
   { name: 'body.prepend', props: DataTableBodyScopedProps },
   { name: 'body', props: DataTableBodyScopedProps },
+  { name: 'foot', props: DataDefaultScopedSlotProps },
   { name: 'footer', props: DataTableFooterScopedProps },
+  { name: 'footer.prepend' },
   { name: 'footer.page-text', props: DataFooterPageTextScopedProps },
   { name: 'header', props: DataTableHeaderScopedProps },
   { name: 'header.data-table-select', props: DataTableHeaderSelectScopedProps },
@@ -165,6 +167,7 @@ const DataTableSlots = [
   { name: 'item.data-table-expand', props: DataTableItemScopedProps },
   { name: 'item.<name>', props: DataTableItemColumnScopedProps },
   { name: 'expanded-item', props: DataTableExpandedItemScopedProps },
+  ...DataIteratorSlots.filter(slot => !['default'].includes(slot.name)),
 ]
 
 module.exports = {
@@ -181,7 +184,7 @@ module.exports = {
         example: '(value: any, search: string | null, item: any) => boolean',
       },
     ]),
-    slots: deepmerge(DataTableSlots, DataIteratorSlots),
+    slots: DataTableSlots,
     events: DataTableEvents,
   },
   DataTableHeader,

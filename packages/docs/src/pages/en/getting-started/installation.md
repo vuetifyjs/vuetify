@@ -6,7 +6,7 @@ meta:
 related:
   - /introduction/why-vuetify/
   - /getting-started/frequently-asked-questions/
-  - /introduction/why-vuetify/
+  - /getting-started/browser-support/
 ---
 
 # Installation

@@ -8,18 +8,18 @@ events.splice(index, 1, {
   value: 'File[]',
 })
 
+const props = VTextField.props.filter(prop => !['readonly'].includes(prop.name))
+props.push({
+  name: 'multiple',
+  type: 'boolean',
+  default: 'false',
+  source: 'v-file-input',
+})
+
 module.exports = {
   'v-file-input': {
     ...VTextField,
-    props: [
-      ...VTextField.props,
-      {
-        name: 'multiple',
-        type: 'boolean',
-        default: 'false',
-        source: 'v-file-input',
-      },
-    ],
+    props,
     slots: [
       ...VTextField.slots,
       {

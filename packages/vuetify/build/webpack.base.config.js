@@ -9,7 +9,7 @@ const isProd = process.env.NODE_ENV === 'production'
 const extractCSS = isProd || process.env.TARGET === 'development'
 
 exports.happyThreadPool = HappyPack.ThreadPool({
-  size: Math.min(os.cpus().length, 4)
+  size: Math.min(os.cpus().length, 4),
 })
 
 const cssLoaders = [
@@ -17,7 +17,7 @@ const cssLoaders = [
   // TODO: remove style-loader: https://github.com/webpack-contrib/mini-css-extract-plugin/issues/34
   extractCSS ? MiniCssExtractPlugin.loader : 'style-loader',
   { loader: 'css-loader', options: { sourceMap: !isProd } },
-  { loader: 'postcss-loader', options: { sourceMap: !isProd } }
+  { loader: 'postcss-loader', options: { sourceMap: !isProd } },
 ]
 
 const sassLoaders = [
@@ -27,10 +27,10 @@ const sassLoaders = [
     options: {
       implementation: require('sass'),
       sassOptions: {
-        indentedSyntax: true
-      }
-    }
-  }
+        indentedSyntax: true,
+      },
+    },
+  },
 ]
 
 const scssLoaders = [
@@ -40,41 +40,41 @@ const scssLoaders = [
     options: {
       implementation: require('sass'),
       sassOptions: {
-        indentedSyntax: false
-      }
-    }
-  }
+        indentedSyntax: false,
+      },
+    },
+  },
 ]
 
 const plugins = [
   new FriendlyErrorsWebpackPlugin({
-    clearConsole: true
-  })
+    clearConsole: true,
+  }),
 ]
 
 exports.config = {
   mode: isProd ? 'production' : 'development',
   resolve: {
-    extensions: ['*', '.js', '.json', '.vue', '.ts']
+    extensions: ['*', '.js', '.json', '.vue', '.ts'],
   },
   node: {
-    fs: 'empty'
+    fs: 'empty',
   },
   module: {
     rules: [
       {
         test: /\.sass$/,
-        use: sassLoaders
+        use: sassLoaders,
       },
       {
         test: /\.scss$/,
-        use: scssLoaders
-      }
-    ]
+        use: scssLoaders,
+      },
+    ],
   },
   plugins,
   performance: {
-    hints: false
+    hints: false,
   },
-  stats: { children: false }
+  stats: { children: false },
 }

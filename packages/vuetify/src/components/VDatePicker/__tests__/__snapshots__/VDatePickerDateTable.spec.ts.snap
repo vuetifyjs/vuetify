@@ -2685,6 +2685,8 @@ exports[`VDatePickerDateTable.ts should render component with showWeek and match
         </td>
         <td>
         </td>
+        <td>
+        </td>
       </tr>
     </tbody>
   </table>

@@ -40,13 +40,13 @@ Buttons in their simplest form contain uppercase text, a slight elevation, hover
 
 #### Block
 
-Block buttons extend the full available width.
+**block** buttons extend the full available width.
 
 <example file="v-btn/prop-block" />
 
 #### Depressed
 
-Depressed buttons still maintain their background color, but have no box shadow.
+**depressed** buttons still maintain their background color, but have no box shadow.
 
 <example file="v-btn/prop-depressed" />
 
@@ -58,7 +58,7 @@ Floating buttons are rounded and usually contain an icon.
 
 #### Icon
 
-Icons can be used for the primary content of a button.
+Icons can be used for the primary content of a button. This property makes the button rounded and applies the **text** prop styles.
 
 <example file="v-btn/prop-icon" />
 
@@ -72,13 +72,19 @@ Using the loading prop, you can notify a user that there is processing taking pl
 
 #### Outlined
 
-Outlined buttons inherit their borders from the current color applied.
+**outlined** buttons inherit their borders from the current color applied.
 
 <example file="v-btn/prop-outlined" />
 
+#### Plain
+
+**plain** buttons have a lower baseline opacity that reacts to **hover** and **focus**.
+
+<example file="v-btn/prop-plain" />
+
 #### Rounded
 
-Rounded buttons behave the same as regular buttons but have rounded edges.
+**rounded** buttons behave the same as regular buttons but have rounded edges.
 
 <example file="v-btn/prop-rounded" />
 
@@ -90,13 +96,13 @@ Buttons can be given different sizing options to fit a multitude of scenarios.
 
 #### Text
 
-Text buttons have no box shadow and no background. Only on hover is the container for the button shown.
+Text buttons have no box shadow and no background. Only on hover is the container for the button shown. When used with the **color** prop, the supplied color is applied to the button text instead of the background.
 
 <example file="v-btn/prop-text" />
 
 #### Tile
 
-Tile buttons behave the same as regular buttons but have no border radius.
+**tile** buttons behave the same as regular buttons but have no border radius.
 
 <example file="v-btn/prop-tile" />
 
@@ -104,7 +110,7 @@ Tile buttons behave the same as regular buttons but have no border radius.
 
 #### Raised
 
-Raised buttons have a box shadow that increases when clicked. This is the default style.
+**raised** buttons have a box shadow that increases when clicked. This is the default style.
 
 <example file="v-btn/misc-raised" />
 

@@ -91,16 +91,20 @@
 
   &--left
     justify-content: flex-start
+    right: auto
 
   &--multi-line &__wrapper
     min-height: $snackbar-multi-line-wrapper-min-height
 
   &--right
     justify-content: flex-end
+    left: auto
 
   &:not(.v-snack--has-background) &__wrapper
     box-shadow: none !important
 
+  &--bottom
+    top: auto
 
   &--text &__wrapper:before
     background-color: currentColor
@@ -116,6 +120,7 @@
 
   &--top
     align-items: flex-start
+    bottom: auto
 
   &--vertical &__wrapper
     flex-direction: column
