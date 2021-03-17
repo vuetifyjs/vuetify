@@ -42,13 +42,6 @@ describe('VNavigationDrawer', () => {
     expect(element.style.width).toBe('72px')
   })
 
-  it('should render image when using src prop', () => {
-    const prop = mountFunction({ src: 'foo.png' })
-
-    expect(prop.find('img').exists()).toBe(true)
-    expect(prop.find('img').attributes().src).toBe('foo.png')
-  })
-
   it.each([
     [{}, '256px'],
     [{ rail: true }, '72px'],
