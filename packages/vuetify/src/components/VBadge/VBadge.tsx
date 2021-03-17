@@ -1,6 +1,9 @@
 // Styles
 import './VBadge.sass'
 
+// Components
+import { VIcon } from '@/components/VIcon'
+
 // Composables
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
@@ -68,6 +71,7 @@ export default defineComponent({
         return true
       }
     },
+    icon: String,
     ...makeTagProps(),
     ...makeBorderRadiusProps(),
     ...makeTransitionProps({
@@ -156,7 +160,9 @@ export default defineComponent({
                     ? undefined
                     : ctx.slots.badge
                       ? ctx.slots.badge()
-                      : props.content
+                      : props.icon
+                        ? <VIcon icon={props.icon} />
+                        : props.content
                   }
                 </span>,
                 props.transition
