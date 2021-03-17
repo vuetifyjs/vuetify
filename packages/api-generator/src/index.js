@@ -11,6 +11,12 @@ const vuetify = createVuetify()
 
 app.use(vuetify)
 
+const warn = console.warn
+console.warn = (...args) => {
+  if (args[0] === '[Vuetify] Unable to get current component instance when generating default prop value') return
+  return warn.apply(console, args)
+}
+
 const loadLocale = (componentName, locale, fallback = {}) => {
   try {
     const data = require(`./locale/${locale}/${componentName}`)
@@ -113,10 +119,13 @@ const getComponentApi = (componentName, locales) => {
 
     const type = getPropType(prop.type)
 
+    let defaultValue = typeof prop.default === 'function' ? prop.default() : prop.default
+    if (typeof defaultValue === 'string') defaultValue = '\'' + defaultValue + '\''
+
     return [...arr, {
       name: kebabCase(key),
       source: prop.source || kebabName,
-      default: prop.default(),
+      default: defaultValue,
       type,
     }]
   }, [])
