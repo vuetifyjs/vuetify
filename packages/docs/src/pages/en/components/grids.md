@@ -11,6 +11,9 @@ related:
 
 # Grid system
 
+> Seems like there has been an update - https://github.com/vuetifyjs/vuetify/issues/9233
+> xs does no longer work like the documentation implies
+
 Vuetify comes with a 12 point grid system built using flexbox. The grid is used to create specific layouts within an application's content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations, **xs**, **sm**, **md**, **lg** and **xl**. These resolutions are defined below in the Viewport Breakpoints table and can be modified by customizing the [Breakpoint service](/features/breakpoints).
 
 <promoted-ad slug="vuemastery-grids" />
