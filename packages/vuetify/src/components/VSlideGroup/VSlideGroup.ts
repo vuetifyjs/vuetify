@@ -121,12 +121,12 @@ export const BaseSlideGroup = mixins<options &
 
         // Show arrows on mobile when overflowing.
         // This matches the default 2.2 behavior
-        case true: return this.isOverflowing
+        case true: return this.isOverflowing || Math.abs(this.scrollOffset) > 0
 
         // Always show on mobile
         case 'mobile': return (
           this.isMobile ||
-          this.isOverflowing
+          (this.isOverflowing || Math.abs(this.scrollOffset) > 0)
         )
 
         // https://material.io/components/tabs#scrollable-tabs
@@ -134,7 +134,7 @@ export const BaseSlideGroup = mixins<options &
         // overflowed on desktop
         default: return (
           !this.isMobile &&
-          this.isOverflowing
+          (this.isOverflowing || Math.abs(this.scrollOffset) > 0)
         )
       }
     },
@@ -317,6 +317,18 @@ export const BaseSlideGroup = mixins<options &
       this.isOverflowing && fn(e)
     },
     scrollIntoView /* istanbul ignore next */ () {
+      if (!this.selectedItem && this.items.length) {
+        const lastItemPosition = this.items[this.items.length - 1].$el.getBoundingClientRect()
+        const wrapperPosition = this.$refs.wrapper.getBoundingClientRect()
+
+        if (
+          (this.$vuetify.rtl && wrapperPosition.right < lastItemPosition.right) ||
+          (!this.$vuetify.rtl && wrapperPosition.left > lastItemPosition.left)
+        ) {
+          this.scrollTo('prev')
+        }
+      }
+
       if (!this.selectedItem) {
         return
       }

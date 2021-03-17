@@ -12,7 +12,7 @@
         :return-value.sync="date"
         transition="scale-transition"
         offset-y
-        min-width="290px"
+        min-width="auto"
       >
         <template v-slot:activator="{ on, attrs }">
           <v-text-field
@@ -103,7 +103,7 @@
         :nudge-right="40"
         transition="scale-transition"
         offset-y
-        min-width="290px"
+        min-width="auto"
       >
         <template v-slot:activator="{ on, attrs }">
           <v-text-field

@@ -47,3 +47,9 @@ Vue.component('theme', {
     this.$vuetify.theme.themes.light.primary = 132
   },
 })
+
+Vue.component('icons', {
+  created () {
+    const component = this.$vuetify.icons.component
+  },
+})

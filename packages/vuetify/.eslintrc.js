@@ -12,6 +12,8 @@ module.exports = {
   ],
   extends: ['plugin:jest/recommended'],
   rules: {
+    'no-console': 'error',
+    'no-debugger': 'error',
     'vue/html-self-closing': 'off',
     'vue/html-closing-bracket-spacing': 'off',
     'vue/max-attributes-per-line': ['error', {
@@ -43,6 +45,7 @@ module.exports = {
     {
       files: '**/*.spec.ts',
       rules: {
+        'no-console': 'off',
         'vue/component-definition-name-casing': 'off',
       },
     },

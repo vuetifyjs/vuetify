@@ -10,6 +10,7 @@ import VProgressCircular from '../VProgressCircular'
 // Mixins
 import { factory as GroupableFactory } from '../../mixins/groupable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
+import Elevatable from '../../mixins/elevatable'
 import Positionable from '../../mixins/positionable'
 import Routable from '../../mixins/routable'
 import Sizeable from '../../mixins/sizeable'
@@ -82,13 +83,10 @@ export default baseMixins.extend<options>().extend({
         'v-btn--absolute': this.absolute,
         'v-btn--block': this.block,
         'v-btn--bottom': this.bottom,
-        'v-btn--contained': this.isElevated, // TODO: remove v3
-        'v-btn--depressed': (this.depressed) || this.outlined, // TODO: remove v3
         'v-btn--disabled': this.disabled,
         'v-btn--is-elevated': this.isElevated,
         'v-btn--fab': this.fab,
         'v-btn--fixed': this.fixed,
-        'v-btn--flat': !this.isElevated, // TODO: remove v3,
         'v-btn--has-bg': this.hasBg,
         'v-btn--icon': this.icon,
         'v-btn--left': this.left,
@@ -108,13 +106,18 @@ export default baseMixins.extend<options>().extend({
         ...this.sizeableClasses,
       }
     },
+    computedElevation (): string | number | undefined {
+      if (this.disabled) return undefined
+
+      return Elevatable.options.computed.computedElevation.call(this)
+    },
     computedRipple (): RippleOptions | boolean {
       const defaultRipple = this.icon || this.fab ? { circle: true } : true
       if (this.disabled) return false
       else return this.ripple ?? defaultRipple
     },
     hasBg (): boolean {
-      return this.isElevated || this.depressed
+      return !this.text && !this.plain && !this.outlined && !this.icon
     },
     isElevated (): boolean {
       return Boolean(
@@ -123,8 +126,9 @@ export default baseMixins.extend<options>().extend({
         !this.outlined &&
         !this.depressed &&
         !this.disabled &&
-        !this.plain
-      ) || Number(this.elevation) > 0
+        !this.plain &&
+        (this.elevation == null || Number(this.elevation) > 0)
+      )
     },
     isRound (): boolean {
       return Boolean(
@@ -184,7 +188,7 @@ export default baseMixins.extend<options>().extend({
       this.loading && this.genLoader(),
     ]
     const { tag, data } = this.generateRouteLink()
-    const setColor = (this.isElevated || this.depressed)
+    const setColor = this.hasBg
       ? this.setBackgroundColor
       : this.setTextColor
 
