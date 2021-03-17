@@ -3,7 +3,7 @@ const { createVuetify } = require('vuetify')
 const { components: excludes } = require('./helpers/excludes')
 const { sortBy } = require('lodash')
 const { kebabCase } = require('./helpers/text')
-const { getPropType, parseSassVariables } = require('./helpers/parsing')
+const { getPropType, parseSassVariables, getPropDefault } = require('./helpers/parsing')
 const deepmerge = require('./helpers/merge')
 
 const app = createApp()
@@ -124,13 +124,10 @@ const getComponentApi = (componentName, locales) => {
 
     const type = getPropType(prop.type)
 
-    let defaultValue = typeof prop.default === 'function' ? prop.default() : prop.default
-    if (typeof defaultValue === 'string') defaultValue = '\'' + defaultValue + '\''
-
     return [...arr, {
       name: kebabCase(key),
       source: prop.source || kebabName,
-      default: defaultValue,
+      default: getPropDefault(prop.default(), type),
       type,
     }]
   }, [])

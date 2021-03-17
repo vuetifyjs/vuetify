@@ -5,9 +5,11 @@ const { props: excludes } = require('./excludes')
 const { kebabCase, pascalize } = require('./text')
 
 function parseFunctionParams (func) {
-  const groups = /function\s_.*\((.*)\)\s\{.*/i.exec(func)
-  if (groups && groups.length > 1) return `(${groups[1]}) => {}`
-  else return 'null'
+  const [, regular] = /function\s\((.*)\)\s\{.*/i.exec(func) || []
+  const [, arrow] = /\((.*)\)\s=>\s\{.*/i.exec(func) || []
+  const args = regular || arrow
+
+  return args ? `(${args}) => {}` : undefined
 }
 
 function getPropType (type) {
@@ -21,19 +23,11 @@ function getPropType (type) {
 }
 
 function getPropDefault (def, type) {
-  if (def === '' ||
-    (def == null && type !== 'boolean' && type !== 'function')
-  ) {
-    return 'undefined'
-  } else if (typeof (def) === 'function' && type !== 'function') {
-    def = def.call({})
+  if (typeof def === 'function' && type !== 'function') {
+    return def.call({})
   }
 
-  if (type === 'boolean') {
-    return def ? 'true' : 'false'
-  }
-
-  if (type === 'string') {
+  if (typeof def === 'string') {
     return def ? `'${def}'` : def
   }
 
