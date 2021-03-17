@@ -117,6 +117,11 @@ const getComponentApi = (componentName, locales) => {
   const props = Object.keys(component.props).reduce((arr, key) => {
     const prop = component.props[key]
 
+    if (!prop.default || typeof prop.default !== 'function') {
+      console.warn(`Prop ${key} of component ${componentName} does not have default function. Make sure the component uses makeProps function.`)
+      return arr
+    }
+
     const type = getPropType(prop.type)
 
     let defaultValue = typeof prop.default === 'function' ? prop.default() : prop.default
