@@ -5,7 +5,7 @@ on:
     branches:
       - 'next'
     paths:
-    - 'packages/api-generator/src/locale-alpha/en/**'
+    - 'packages/api-generator/src/locale/en/**'
     - 'packages/docs/src/i18n/messages/en.json'
     - 'packages/docs/src/pages/en/**'
     - '.github/workflows/**'
