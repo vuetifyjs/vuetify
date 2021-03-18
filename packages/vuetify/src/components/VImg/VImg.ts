@@ -220,6 +220,7 @@ export default mixins(
       image.src = this.normalisedSrc.src
       this.sizes && (image.sizes = this.sizes)
       this.normalisedSrc.srcset && (image.srcset = this.normalisedSrc.srcset)
+      this.$emit('loadstart', this.normalisedSrc.src)
 
       this.aspectRatio || this.pollForSize(image)
       this.getSrc()
