@@ -32,12 +32,12 @@
             >
               <template v-if="header === 'name'">
                 <span
-                  :id="item[header].replace('$', '')"
+                  :id="`prop-${item[header].replace('$', '')}`"
                   class="name-item text-mono ml-n2"
                 >
                   <span class="primary--text">#</span>
                   <app-link
-                    :href="`#${item[header].replace('$', '')}`"
+                    :href="`#prop-${item[header].replace('$', '')}`"
                     class="font-weight-bold"
                     v-text="item[header]"
                   />
