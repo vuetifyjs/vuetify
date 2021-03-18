@@ -11,25 +11,21 @@ type TransitionProp = string | boolean | TransitionProps
 export const makeTransitionProps = propsFactory({
   transition: {
     type: [String, Boolean, Object] as PropType<TransitionProp>,
-    validator: (value: any) => {
-      return value !== true
-    },
+    validator: (value: any) => value !== true,
   },
 }, 'transition')
 
 export function withTransition <T extends VNode> (vnode: T, transition: TransitionProp) {
   // TODO: some way of checking if we have render context like withDirectives?
 
-  if (transition === false) return vnode
+  if (typeof transition === 'boolean') {
+    if (transition) consoleWarn('`transition` prop does not accept value `true`')
 
-  if (transition === true) {
-    consoleWarn('`transition` prop does not accept value `true`')
     return vnode
   }
 
-  const transitionProps = typeof transition === 'string' ? { name: transition } : transition
-
-  return h(Transition, transitionProps, {
-    default: () => vnode,
-  })
+  return h(Transition,
+    typeof transition === 'string' ? { name: transition } : transition,
+    { default: () => vnode }
+  )
 }

@@ -14,13 +14,12 @@
     min-width: $badge-min-width
     height: $badge-height
     letter-spacing: $badge-letter-spacing
-    line-height: 1
     padding: $badge-padding
     pointer-events: auto
     position: absolute
     text-align: center
     text-indent: 0
-    // transition: $primary-transition
+    transition: $badge-transition
     white-space: nowrap
 
     .v-icon
@@ -41,26 +40,18 @@
     display: flex
     position: relative
 
-  &--avatar
-    .v-badge__badge
-      padding: 0
-
-      .v-avatar
-        height: $badge-height !important
-        min-width: 0 !important
-
   &--bordered
     .v-badge__badge::after
       border-radius: inherit
       border-width: $badge-border-width
-      border-style: solid
+      border-style: $badge-border-style
       bottom: 0
       content: ''
       left: 0
       position: absolute
       right: 0
       top: 0
-      transform: scale(1.15)
+      transform: $badge-border-transform
       color: $badge-border-color
 
   &--dot
@@ -74,14 +65,3 @@
       &::after
         border-width: $badge-dot-border-width
 
-  &--inline
-    align-items: center
-    display: inline-flex
-    justify-content: center
-
-    .v-badge__badge,
-    .v-badge__wrapper
-      position: relative
-
-    .v-badge__wrapper
-      margin: $badge-wrapper-margin
