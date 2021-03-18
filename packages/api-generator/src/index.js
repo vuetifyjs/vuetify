@@ -1,8 +1,8 @@
-const { createApp } = require('vue')
+const { createApp, capitalize, camelize } = require('vue')
 const { createVuetify } = require('vuetify')
 const { components: excludes } = require('./helpers/excludes')
 const { sortBy } = require('lodash')
-const { camelCase, kebabCase } = require('./helpers/text')
+const { kebabCase } = require('./helpers/text')
 const { getPropType, parseSassVariables } = require('./helpers/parsing')
 const deepmerge = require('./helpers/merge')
 
@@ -55,7 +55,7 @@ const addComponentApiDescriptions = (componentName, api, locales) => {
 
     for (const category of ['props', 'events', 'slots', 'functions', 'sass']) {
       for (const item of api[category]) {
-        const name = category === 'props' ? camelCase(item.name) : item.name
+        const name = category === 'props' ? camelize(item.name) : item.name
         let description = ''
         if (category === 'sass') {
           description = (sources[0] && sources[0][category] && sources[0][category][name]) || ''
@@ -176,7 +176,7 @@ const getApi = (name, locales) => {
   // if (name === '$vuetify') return getVuetifyApi(locales)
   // if (name === 'internationalization') return getInternationalizationApi(locales)
   if (DIRECTIVES.includes(name)) return getDirectiveApi(name, locales)
-  else return getComponentApi(name, locales)
+  else return getComponentApi(capitalize(camelize(name)), locales)
 }
 
 const getComponentsApi = locales => {
