@@ -59,7 +59,7 @@ Currently Vuetify provides translations in the following languages:
 - **tr** - Turkish (Türkçe)
 - **uk** - Ukrainian (Українська)
 - **zhHans** - Chinese (中文)
-- **zhHant** - Chinese (中文)
+- **zhHant** - Chinese (正體中文)
 
 ```js
 // src/plugins/vuetify.js
