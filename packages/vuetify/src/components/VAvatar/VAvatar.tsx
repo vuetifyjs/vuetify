@@ -9,18 +9,19 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { defineComponent, toRef } from 'vue'
+import makeProps from '@/util/makeProps'
 
 export default defineComponent({
   name: 'VAvatar',
 
-  props: {
+  props: makeProps({
     ...makeBorderRadiusProps(),
     ...makeSizeProps(),
     ...makeTagProps(),
     color: String,
     left: Boolean,
     right: Boolean,
-  },
+  }),
 
   setup (props, { slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))

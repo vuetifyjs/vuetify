@@ -3,7 +3,7 @@ const { createVuetify } = require('vuetify')
 const { components: excludes } = require('./helpers/excludes')
 const { sortBy } = require('lodash')
 const { kebabCase } = require('./helpers/text')
-const { getPropType, parseSassVariables } = require('./helpers/parsing')
+const { getPropDefault, getPropType, parseSassVariables } = require('./helpers/parsing')
 const deepmerge = require('./helpers/merge')
 
 const app = createApp()
@@ -117,15 +117,17 @@ const getComponentApi = (componentName, locales) => {
   const props = Object.keys(component.props).reduce((arr, key) => {
     const prop = component.props[key]
 
-    const type = getPropType(prop.type)
+    if (!prop.default || typeof prop.default !== 'function') {
+      console.warn(`Prop ${key} of component ${componentName} does not have default function. Make sure the component uses makeProps function.`)
+      return arr
+    }
 
-    let defaultValue = typeof prop.default === 'function' ? prop.default() : prop.default
-    if (typeof defaultValue === 'string') defaultValue = '\'' + defaultValue + '\''
+    const type = getPropType(prop.type)
 
     return [...arr, {
       name: kebabCase(key),
       source: prop.source || kebabName,
-      default: defaultValue,
+      default: getPropDefault(prop.default(), type),
       type,
     }]
   }, [])

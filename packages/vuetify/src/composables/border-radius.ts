@@ -8,7 +8,10 @@ export interface BorderRadiusProps {
 }
 
 export const makeBorderRadiusProps = propsFactory({
-  rounded: [Boolean, Number, String],
+  rounded: {
+    type: [Boolean, Number, String],
+    default: undefined,
+  },
 }, 'border-radius')
 
 // Composables

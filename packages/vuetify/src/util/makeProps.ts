@@ -13,7 +13,11 @@ export default function makeProps<P extends Record<string, Prop<any> & { source?
     const isOptions = !(originalProp == null || Array.isArray(originalProp) || typeof originalProp === 'function')
 
     const propDefinition = (isOptions ? originalProp : { type: originalProp }) as any
-    const originalDefault = propDefinition.default
+    const originalDefault = propDefinition.hasOwnProperty('default')
+      ? propDefinition.default
+      : propDefinition.type === Boolean || (Array.isArray(propDefinition.type) && propDefinition.type.includes(Boolean))
+        ? false
+        : undefined
 
     const wrappedDefault = generateDefault(key, originalDefault, propDefinition.type)
 
@@ -27,13 +31,6 @@ export default function makeProps<P extends Record<string, Prop<any> & { source?
 }
 
 function generateDefault (propName: string, localDefault: any, type: any) {
-  if (
-    localDefault === undefined &&
-    (type === Boolean || (Array.isArray(type) && type.includes(Boolean)))
-  ) {
-    localDefault = false
-  }
-
   return (props: Record<string, unknown>) => {
     const vm = getCurrentInstance()
 
