@@ -3,7 +3,7 @@ const { createVuetify } = require('vuetify')
 const { components: excludes } = require('./helpers/excludes')
 const { sortBy } = require('lodash')
 const { kebabCase } = require('./helpers/text')
-const { getPropType, parseSassVariables, getPropDefault } = require('./helpers/parsing')
+const { getPropDefault, getPropType, parseSassVariables } = require('./helpers/parsing')
 const deepmerge = require('./helpers/merge')
 
 const app = createApp()
