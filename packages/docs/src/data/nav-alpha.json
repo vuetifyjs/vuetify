@@ -42,6 +42,7 @@
     "items": [
       "application",
       "aspect-ratios",
+      "badges",
       "banners",
       "buttons",
       "floating-action-buttons",

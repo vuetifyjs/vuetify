@@ -145,7 +145,7 @@ export default defineComponent({
                     backgroundColorStyles.value,
                     textColorStyles.value,
                     locationStyles.value,
-                  ]}
+                  ] as any} // TODO: Fix this :(
                   { ...{
                       'aria-atomic': 'true',
                       // TODO: locale string here
