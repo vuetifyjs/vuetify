@@ -56,7 +56,7 @@ Icons can be used inside of buttons to add emphasis to the action.
 
 #### Font Awesome
 
-[Font Awesome](https://fontawesome.io/icons/) is also supported. Simply use the `fa-` prefixed icon name. Please note that you still need to include the Font Awesome icons in your project. For more information on how to install it, please navigate to the [installation page](/features/icon-fonts#install-font-awesome-5-icons)
+[Font Awesome](https://fontawesome.com/icons/) is also supported. Simply use the `fa-` prefixed icon name. Please note that you still need to include the Font Awesome icons in your project. For more information on how to install it, please navigate to the [installation page](/features/icon-fonts#install-font-awesome-5-icons)
 
 <example file="v-icon/misc-font-awesome" />
 
