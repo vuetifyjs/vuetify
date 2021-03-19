@@ -43,7 +43,7 @@ export default defineComponent({
     },
     content: {
       type: String,
-      required: false
+      required: false,
     },
     dot: Boolean,
     label: {
@@ -58,7 +58,7 @@ export default defineComponent({
     },
     modelValue: {
       type: Boolean,
-      default: true
+      default: true,
     },
     location: {
       type: String,
@@ -69,13 +69,13 @@ export default defineComponent({
         if (!['top', 'bottom'].includes(vertical) || !['left', 'right'].includes(horizontal)) return false
 
         return true
-      }
+      },
     },
     icon: String,
     ...makeTagProps(),
     ...makeBorderRadiusProps(),
     ...makeTransitionProps({
-      transition: 'scale-rotate-transition'
+      transition: 'scale-rotate-transition',
     }),
   },
 
@@ -105,7 +105,7 @@ export default defineComponent({
         left: 'auto',
         right: 'auto',
         [vertical === 'top' ? 'bottom' : 'top']: calculatePosition(props.offsetY),
-        [horizontal === 'left' ? 'right' : 'left']: calculatePosition(props.offsetX)
+        [horizontal === 'left' ? 'right' : 'left']: calculatePosition(props.offsetX),
       }
     })
 
@@ -126,13 +126,15 @@ export default defineComponent({
               'v-badge--bordered': props.bordered,
               'v-badge--dot': props.dot,
               'v-badge--overlap': props.overlap,
-            }
+            },
           ]}
           { ...attrs }
         >
           <div class="v-badge__wrapper">
             { ctx.slots.default?.() }
-            { withTransition(
+
+            {
+              withTransition(
                 <span
                   v-show={props.modelValue}
                   class={[
@@ -146,7 +148,8 @@ export default defineComponent({
                     textColorStyles.value,
                     locationStyles.value,
                   ] as any} // TODO: Fix this :(
-                  { ...{
+                  {
+                    ...{
                       'aria-atomic': 'true',
                       // TODO: locale string here
                       'aria-label': 'locale string here',
@@ -156,14 +159,15 @@ export default defineComponent({
                     }
                   }
                 >
-                  { ctx.slots.badge
-                      ? ctx.slots.badge()
-                      : props.icon
-                        ? <VIcon icon={props.icon} />
-                        : props.content
+                  { ctx.slots.badge?.() }
+
+                  {
+                    !ctx.slots.badge && props.icon
+                      ? <VIcon icon={props.icon} />
+                      : props.content
                   }
                 </span>,
-                props.transition
+                props.transition,
               )
             }
           </div>
