@@ -1,67 +1,62 @@
 // Imports
-@import './_variables.scss'
+@import ./index
 
 .v-badge
   display: inline-block
   line-height: $badge-line-height
 
-  &__badge
-    border-radius: $badge-border-radius
-    display: flex
-    justify-content: center
-    align-items: center
-    font-size: $badge-font-size
-    min-width: $badge-min-width
-    height: $badge-height
-    letter-spacing: $badge-letter-spacing
-    padding: $badge-padding
-    pointer-events: auto
-    position: absolute
-    text-align: center
-    text-indent: 0
-    transition: $badge-transition
-    white-space: nowrap
+.v-badge__badge
+  align-items: center
+  border-radius: $badge-border-radius
+  display: flex
+  font-size: $badge-font-size
+  height: $badge-height
+  justify-content: center
+  letter-spacing: $badge-letter-spacing
+  min-width: $badge-min-width
+  padding: $badge-padding
+  pointer-events: auto
+  position: absolute
+  text-align: center
+  text-indent: 0
+  transition: $badge-transition
+  white-space: nowrap
 
-    .v-icon
-      color: inherit
-      font-size: $badge-font-size
-      width: $badge-font-size
-      height: $badge-font-size
-
-    .v-img
-      height: 100%
-      width: 100%
-
-    img
-      height: 100%
-      width: 100%
-
-  &__wrapper
-    display: flex
-    position: relative
-
-  &--bordered
-    .v-badge__badge::after
+  .v-badge--bordered &
+    &::after
       border-radius: inherit
-      border-width: $badge-border-width
       border-style: $badge-border-style
+      border-width: $badge-border-width
       bottom: 0
+      color: $badge-border-color
       content: ''
       left: 0
       position: absolute
       right: 0
       top: 0
       transform: $badge-border-transform
-      color: $badge-border-color
 
-  &--dot
-    .v-badge__badge
-      border-radius: $badge-dot-border-radius
-      height: $badge-dot-height
-      min-width: 0
-      padding: 0
-      width: $badge-dot-width
+  .v-badge--dot &
+    border-radius: $badge-dot-border-radius
+    height: $badge-dot-height
+    min-width: 0
+    padding: 0
+    width: $badge-dot-width
 
-      &::after
-        border-width: $badge-dot-border-width
+    &::after
+      border-width: $badge-dot-border-width
 
+  .v-icon
+    color: inherit
+    font-size: $badge-font-size
+    height: $badge-font-size
+    width: $badge-font-size
+
+  img,
+  .v-img
+    height: 100%
+    width: 100%
+
+.v-badge__wrapper
+  display: flex
+  position: relative
