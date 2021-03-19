@@ -8,7 +8,7 @@
             <template v-slot:activator="{ on }">
               <a
                 target="_blank"
-                href="http://vuetifyjs.com"
+                href="https://vuetifyjs.com"
                 @click.stop
                 v-on="on"
               >
