@@ -159,12 +159,13 @@ export default defineComponent({
                     }
                   }
                 >
-                  { ctx.slots.badge?.() }
-
-                  {
-                    !ctx.slots.badge && props.icon
-                      ? <VIcon icon={props.icon} />
-                      : props.content
+                  { props.dot
+                    ? undefined
+                    : ctx.slots.badge
+                      ? ctx.slots.badge()
+                      : props.icon
+                        ? <VIcon icon={props.icon} />
+                        : props.content
                   }
                 </span>,
                 props.transition,
