@@ -12,22 +12,7 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, defineComponent, toRef } from 'vue'
-import { convertToUnit } from '@/util/helpers'
-
-function extract (obj: Dictionary<unknown>, properties: string[]) {
-  const extracted: Dictionary<unknown> = {}
-  const rest: Dictionary<unknown> = {}
-
-  Object.entries(obj).forEach(([key, value]) => {
-    if (properties.includes(key)) {
-      extracted[key] = value
-    } else {
-      rest[key] = value
-    }
-  })
-
-  return [extracted, rest]
-}
+import { convertToUnit, extract } from '@/util/helpers'
 
 export default defineComponent({
   name: 'VBadge',
