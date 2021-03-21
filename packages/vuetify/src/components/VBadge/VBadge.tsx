@@ -149,7 +149,7 @@ export default defineComponent({
                 >
                   {
                     props.dot ? undefined :
-                    ctx.slots.badge ? ctx.slots.badge?.() :
+                    ctx.slots.badge ? ctx.slots.badge() :
                     props.icon ? <VIcon icon={props.icon} /> :
                     props.content
                   }
