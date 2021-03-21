@@ -7,12 +7,12 @@ import { VIcon } from '@/components/VIcon'
 // Composables
 import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
 import { makeTagProps } from '@/composables/tag'
-import { makeTransitionProps, withTransition } from '@/composables/transition'
+import { makeTransitionProps } from '@/composables/transition'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, defineComponent, toRef } from 'vue'
-import { convertToUnit, extract } from '@/util/helpers'
+import { convertToUnit, extract, maybeTransition } from '@/util'
 
 export default defineComponent({
   name: 'VBadge',
@@ -86,7 +86,7 @@ export default defineComponent({
         ...(!props.inline ? {
           [horizontal === 'left' ? 'right' : 'left']: calculatePosition(props.offsetX),
           [vertical === 'top' ? 'bottom' : 'top']: calculatePosition(props.offsetY),
-        } : {})
+        } : {}),
       }
     })
 
@@ -116,7 +116,9 @@ export default defineComponent({
             { ctx.slots.default?.() }
 
             {
-              withTransition(
+              maybeTransition(
+                props,
+                {},
                 <span
                   v-show={ props.modelValue }
                   class={[
@@ -143,7 +145,6 @@ export default defineComponent({
                           : props.content
                   }
                 </span>,
-                props.transition,
               )
             }
           </div>

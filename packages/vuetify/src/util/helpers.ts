@@ -165,6 +165,10 @@ export const keyCodes = Object.freeze({
   pagedown: 34,
 })
 
+export function keys<O> (o: O) {
+  return Object.keys(o) as (keyof O)[]
+}
+
 export function extract (obj: Dictionary<unknown>, properties: string[]) {
   const extracted: Dictionary<unknown> = {}
   const rest: Dictionary<unknown> = {}
@@ -178,10 +182,6 @@ export function extract (obj: Dictionary<unknown>, properties: string[]) {
   })
 
   return [extracted, rest]
-}
-
-export function keys<O> (o: O) {
-  return Object.keys(o) as (keyof O)[]
 }
 
 /**
