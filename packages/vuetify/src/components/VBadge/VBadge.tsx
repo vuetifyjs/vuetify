@@ -52,10 +52,7 @@ export default defineComponent({
     },
     offsetX: [Number, String],
     offsetY: [Number, String],
-    overlap: {
-      type: Boolean,
-      default: true,
-    },
+    floating: Boolean,
     modelValue: {
       type: Boolean,
       default: true,
@@ -85,7 +82,7 @@ export default defineComponent({
     const { borderRadiusClasses } = useBorderRadius(props)
 
     const position = computed(() => {
-      if (props.overlap) return props.dot ? 8 : 12
+      if (!props.floating) return props.dot ? 8 : 12
       return props.dot ? 2 : 4
     })
 
@@ -125,7 +122,7 @@ export default defineComponent({
             {
               'v-badge--bordered': props.bordered,
               'v-badge--dot': props.dot,
-              'v-badge--overlap': props.overlap,
+              'v-badge--floating': props.floating,
             },
           ]}
           { ...attrs }

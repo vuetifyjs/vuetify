@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VBadge should render component and match snapshot 1`] = `
-<div class="v-badge v-badge--overlap">
+<div class="v-badge">
   <div class="v-badge__wrapper">
     <span>
       element
@@ -22,8 +22,8 @@ exports[`VBadge should render component and match snapshot 1`] = `
 </div>
 `;
 
-exports[`VBadge should render component without badge 1`] = `
-<div class="v-badge v-badge--overlap">
+exports[`VBadge should render component and match snapshot 2`] = `
+<div class="v-badge">
   <div class="v-badge__wrapper">
     <span>
       element
@@ -45,16 +45,65 @@ exports[`VBadge should render component without badge 1`] = `
 </div>
 `;
 
-exports[`VBadge should render component without transition element 1`] = `
-<div class="v-badge v-badge--overlap">
+exports[`VBadge should render component and match snapshot 3`] = `
+<div class="v-badge v-badge--floating">
   <div class="v-badge__wrapper">
-    <span class="v-badge__badge bg-primary"
-          aria-atomic="true"
-          aria-label="locale string here"
-          aria-live="polite"
-          role="status"
-    >
+    <span>
+      element
     </span>
+    <transition-stub>
+      <span class="v-badge__badge bg-primary"
+            aria-atomic="true"
+            aria-label="locale string here"
+            aria-live="polite"
+            role="status"
+      >
+        <span>
+          content
+        </span>
+      </span>
+    </transition-stub>
+  </div>
+</div>
+`;
+
+exports[`VBadge should render component and match snapshot 4`] = `
+<div class="v-badge v-badge--dot">
+  <div class="v-badge__wrapper">
+    <span>
+      element
+    </span>
+    <transition-stub>
+      <span class="v-badge__badge bg-primary"
+            aria-atomic="true"
+            aria-label="locale string here"
+            aria-live="polite"
+            role="status"
+      >
+      </span>
+    </transition-stub>
+  </div>
+</div>
+`;
+
+exports[`VBadge should render component and match snapshot 5`] = `
+<div class="v-badge">
+  <div class="v-badge__wrapper">
+    <span>
+      element
+    </span>
+    <transition-stub>
+      <span class="v-badge__badge bg-primary"
+            aria-atomic="true"
+            aria-label="locale string here"
+            aria-live="polite"
+            role="status"
+      >
+        <span>
+          content
+        </span>
+      </span>
+    </transition-stub>
   </div>
 </div>
 `;

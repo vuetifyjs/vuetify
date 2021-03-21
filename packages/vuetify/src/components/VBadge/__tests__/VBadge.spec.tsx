@@ -7,13 +7,23 @@ import { createVuetify } from '@/framework'
 
 describe('VBadge', () => {
   const vuetify = createVuetify()
-  const mountFunction = (options?: any) => mount(VBadge, {
-    ...options,
-    global: { plugins: [vuetify] },
-  })
 
-  it('should render component and match snapshot', async () => {
+  function mountFunction (options?: any) {
+    return mount(VBadge, {
+      ...options,
+      global: { plugins: [vuetify] },
+    })
+  }
+
+  it.each([
+    [{ modelValue: true }],
+    [{ modelValue: false }],
+    [{ floating: true }],
+    [{ dot: true }],
+    [{ icon: 'foo' }],
+  ])('should render component and match snapshot', (props) => {
     const wrapper = mountFunction({
+      props,
       slots: {
         badge: () => <span>content</span>,
         default: () => <span>element</span>,
@@ -23,33 +33,21 @@ describe('VBadge', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component without badge', async () => {
-    const wrapper = mountFunction({
-      props: { modelValue: false },
-      slots: {
-        badge: () => <span>content</span>,
-        default: () => <span>element</span>,
-      },
-    })
+  // it('should render component with color prop', () => {
+  //   const wrapper = mountFunction({
+  //     props: { color: 'green' },
+  //     slots: { badge: () => <span>content</span> },
+  //   })
 
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  //   const badge = wrapper.find('.v-badge__badge')
+  //   expect(badge.classes('bg-green')).toBeTruthy()
+  // })
 
-  it('should render component with color prop', () => {
-    const wrapper = mountFunction({
-      props: { color: 'green' },
-      slots: { badge: () => <span>content</span> },
-    })
+  // it('should render component without transition element', () => {
+  //   const wrapper = mountFunction({
+  //     props: { transition: false },
+  //   })
 
-    const badge = wrapper.find('.v-badge__badge')
-    expect(badge.classes('bg-green')).toBeTruthy()
-  })
-
-  it('should render component without transition element', () => {
-    const wrapper = mountFunction({
-      props: { transition: false },
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  //   expect(wrapper.html()).toMatchSnapshot()
+  // })
 })
