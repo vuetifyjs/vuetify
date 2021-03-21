@@ -5,18 +5,18 @@ import './VBadge.sass'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { makeTagProps } from '@/composables/tag'
-import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
+import { makeTagProps } from '@/composables/tag'
 import { makeTransitionProps, withTransition } from '@/composables/transition'
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, defineComponent, toRef } from 'vue'
 import { convertToUnit } from '@/util/helpers'
 
-const extract = (obj: Record<string, unknown>, properties: string[]) => {
-  const extracted: Record<string, unknown> = {}
-  const rest: Record<string, unknown> = {}
+function extract (obj: Dictionary<unknown>, properties: string[]) {
+  const extracted: Dictionary<unknown> = {}
+  const rest: Dictionary<unknown> = {}
 
   Object.entries(obj).forEach(([key, value]) => {
     if (properties.includes(key)) {
@@ -35,27 +35,21 @@ export default defineComponent({
   inheritAttrs: false,
 
   props: {
+    ...makeBorderRadiusProps(),
+    ...makeTagProps(),
+    ...makeTransitionProps({ transition: 'scale-rotate-transition' }),
     bordered: Boolean,
-    textColor: String,
     color: {
       type: String,
       default: 'primary',
     },
-    content: {
-      type: String,
-      required: false,
-    },
+    content: String,
     dot: Boolean,
+    floating: Boolean,
+    icon: String,
     label: {
       type: String,
       default: '$vuetify.badge',
-    },
-    offsetX: [Number, String],
-    offsetY: [Number, String],
-    floating: Boolean,
-    modelValue: {
-      type: Boolean,
-      default: true,
     },
     location: {
       type: String,
@@ -69,41 +63,42 @@ export default defineComponent({
         )
       },
     },
-    icon: String,
-    ...makeTagProps(),
-    ...makeBorderRadiusProps(),
-    ...makeTransitionProps({
-      transition: 'scale-rotate-transition',
-    }),
+    modelValue: {
+      type: Boolean,
+      default: true,
+    },
+    offsetX: [Number, String],
+    offsetY: [Number, String],
+    textColor: String,
   },
 
   setup (props, ctx) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'textColor'))
     const { borderRadiusClasses } = useBorderRadius(props)
+    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'textColor'))
 
     const position = computed(() => {
       if (!props.floating) return props.dot ? 8 : 12
+
       return props.dot ? 2 : 4
     })
 
-    const calculatePosition = (offset?: number | string) => {
+    function calculatePosition (offset?: number | string) {
       return `calc(100% - ${convertToUnit(position.value + parseInt(offset ?? 0, 10))})`
     }
 
     const locationStyles = computed(() => {
-      const location = props.location && props.location.includes('-') ? props.location : 'top-right'
-      const [vertical, horizontal] = location.split('-')
+      const [vertical, horizontal] = (props.location ?? '').split('-')
 
       // TODO: RTL support
 
       return {
-        top: 'auto',
         bottom: 'auto',
         left: 'auto',
         right: 'auto',
-        [vertical === 'top' ? 'bottom' : 'top']: calculatePosition(props.offsetY),
+        top: 'auto',
         [horizontal === 'left' ? 'right' : 'left']: calculatePosition(props.offsetX),
+        [vertical === 'top' ? 'bottom' : 'top']: calculatePosition(props.offsetY),
       }
     })
 
@@ -134,36 +129,29 @@ export default defineComponent({
             {
               withTransition(
                 <span
-                  v-show={props.modelValue}
+                  v-show={ props.modelValue }
                   class={[
                     'v-badge__badge',
                     backgroundColorClasses.value,
-                    textColorClasses.value,
                     borderRadiusClasses.value,
+                    textColorClasses.value,
                   ]}
                   style={[
                     backgroundColorStyles.value,
-                    textColorStyles.value,
                     locationStyles.value,
+                    textColorStyles.value,
                   ] as any} // TODO: Fix this :(
-                  {
-                    ...{
-                      'aria-atomic': 'true',
-                      // TODO: locale string here
-                      'aria-label': 'locale string here',
-                      'aria-live': 'polite',
-                      role: 'status',
-                      ...badgeAttrs,
-                    }
-                  }
+                  aria-atomic="true"
+                  aria-label="locale string here" // TODO: locale string here
+                  aria-live="polite"
+                  role="status"
+                  { ...badgeAttrs }
                 >
-                  { props.dot
-                    ? undefined
-                    : ctx.slots.badge
-                      ? ctx.slots.badge()
-                      : props.icon
-                        ? <VIcon icon={props.icon} />
-                        : props.content
+                  {
+                    props.dot ? undefined :
+                    ctx.slots.badge ? ctx.slots.badge?.() :
+                    props.icon ? <VIcon icon={props.icon} /> :
+                    props.content
                   }
                 </span>,
                 props.transition,

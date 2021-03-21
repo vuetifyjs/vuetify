@@ -24,7 +24,7 @@ describe('VBadge', () => {
     [{ floating: true }],
     [{ icon: 'foo' }], // badge slot overrides icon
     [{ location: 'bottom-left' }],
-    [{ location: 'top-right' }],
+    [{ location: undefined }],
     [{ location: null }],
   ])('should render component and match snapshot with badge slot', (props) => {
     const wrapper = mountFunction({
