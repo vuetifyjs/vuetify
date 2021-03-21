@@ -19,9 +19,14 @@ describe('VBadge', () => {
     [{ modelValue: true }],
     [{ modelValue: false }],
     [{ floating: true }],
-    [{ dot: true }],
-    [{ icon: 'foo' }],
-  ])('should render component and match snapshot', (props) => {
+    [{ dot: true }], // takes priority over badge slot
+    [{ dot: true, floating: true }],
+    [{ floating: true }],
+    [{ icon: 'foo' }], // badge slot overrides icon
+    [{ location: 'bottom-left' }],
+    [{ location: 'top-right' }],
+    [{ location: null }],
+  ])('should render component and match snapshot with badge slot', (props) => {
     const wrapper = mountFunction({
       props,
       slots: {
@@ -33,21 +38,13 @@ describe('VBadge', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  // it('should render component with color prop', () => {
-  //   const wrapper = mountFunction({
-  //     props: { color: 'green' },
-  //     slots: { badge: () => <span>content</span> },
-  //   })
+  it.each([
+    [{ content: 'foo' }],
+    [{ content: 'foo', icon: 'bar' }],
+    [{ icon: 'foo' }],
+  ])('should render component and match snapshot without badge slot', (props) => {
+    const wrapper = mountFunction({ props })
 
-  //   const badge = wrapper.find('.v-badge__badge')
-  //   expect(badge.classes('bg-green')).toBeTruthy()
-  // })
-
-  // it('should render component without transition element', () => {
-  //   const wrapper = mountFunction({
-  //     props: { transition: false },
-  //   })
-
-  //   expect(wrapper.html()).toMatchSnapshot()
-  // })
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

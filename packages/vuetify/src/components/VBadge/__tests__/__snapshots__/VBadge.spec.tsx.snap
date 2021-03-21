@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VBadge should render component and match snapshot 1`] = `
+exports[`VBadge should render component and match snapshot with badge slot 1`] = `
 <div class="v-badge">
   <div class="v-badge__wrapper">
     <span>
@@ -22,7 +22,7 @@ exports[`VBadge should render component and match snapshot 1`] = `
 </div>
 `;
 
-exports[`VBadge should render component and match snapshot 2`] = `
+exports[`VBadge should render component and match snapshot with badge slot 2`] = `
 <div class="v-badge">
   <div class="v-badge__wrapper">
     <span>
@@ -45,7 +45,7 @@ exports[`VBadge should render component and match snapshot 2`] = `
 </div>
 `;
 
-exports[`VBadge should render component and match snapshot 3`] = `
+exports[`VBadge should render component and match snapshot with badge slot 3`] = `
 <div class="v-badge v-badge--floating">
   <div class="v-badge__wrapper">
     <span>
@@ -67,7 +67,7 @@ exports[`VBadge should render component and match snapshot 3`] = `
 </div>
 `;
 
-exports[`VBadge should render component and match snapshot 4`] = `
+exports[`VBadge should render component and match snapshot with badge slot 4`] = `
 <div class="v-badge v-badge--dot">
   <div class="v-badge__wrapper">
     <span>
@@ -86,7 +86,48 @@ exports[`VBadge should render component and match snapshot 4`] = `
 </div>
 `;
 
-exports[`VBadge should render component and match snapshot 5`] = `
+exports[`VBadge should render component and match snapshot with badge slot 5`] = `
+<div class="v-badge v-badge--dot v-badge--floating">
+  <div class="v-badge__wrapper">
+    <span>
+      element
+    </span>
+    <transition-stub>
+      <span class="v-badge__badge bg-primary"
+            aria-atomic="true"
+            aria-label="locale string here"
+            aria-live="polite"
+            role="status"
+      >
+      </span>
+    </transition-stub>
+  </div>
+</div>
+`;
+
+exports[`VBadge should render component and match snapshot with badge slot 6`] = `
+<div class="v-badge v-badge--floating">
+  <div class="v-badge__wrapper">
+    <span>
+      element
+    </span>
+    <transition-stub>
+      <span class="v-badge__badge bg-primary"
+            aria-atomic="true"
+            aria-label="locale string here"
+            aria-live="polite"
+            role="status"
+      >
+        <span>
+          content
+        </span>
+      </span>
+    </transition-stub>
+  </div>
+</div>
+`;
+
+exports[`VBadge should render component and match snapshot with badge slot 7`] = `
 <div class="v-badge">
   <div class="v-badge__wrapper">
     <span>
@@ -102,6 +143,129 @@ exports[`VBadge should render component and match snapshot 5`] = `
         <span>
           content
         </span>
+      </span>
+    </transition-stub>
+  </div>
+</div>
+`;
+
+exports[`VBadge should render component and match snapshot with badge slot 8`] = `
+<div class="v-badge">
+  <div class="v-badge__wrapper">
+    <span>
+      element
+    </span>
+    <transition-stub>
+      <span class="v-badge__badge bg-primary"
+            aria-atomic="true"
+            aria-label="locale string here"
+            aria-live="polite"
+            role="status"
+      >
+        <span>
+          content
+        </span>
+      </span>
+    </transition-stub>
+  </div>
+</div>
+`;
+
+exports[`VBadge should render component and match snapshot with badge slot 9`] = `
+<div class="v-badge">
+  <div class="v-badge__wrapper">
+    <span>
+      element
+    </span>
+    <transition-stub>
+      <span class="v-badge__badge bg-primary"
+            aria-atomic="true"
+            aria-label="locale string here"
+            aria-live="polite"
+            role="status"
+      >
+        <span>
+          content
+        </span>
+      </span>
+    </transition-stub>
+  </div>
+</div>
+`;
+
+exports[`VBadge should render component and match snapshot with badge slot 10`] = `
+<div class="v-badge">
+  <div class="v-badge__wrapper">
+    <span>
+      element
+    </span>
+    <transition-stub>
+      <span class="v-badge__badge bg-primary"
+            aria-atomic="true"
+            aria-label="locale string here"
+            aria-live="polite"
+            role="status"
+      >
+        <span>
+          content
+        </span>
+      </span>
+    </transition-stub>
+  </div>
+</div>
+`;
+
+exports[`VBadge should render component and match snapshot without badge slot 1`] = `
+<div class="v-badge">
+  <div class="v-badge__wrapper">
+    <transition-stub>
+      <span class="v-badge__badge bg-primary"
+            aria-atomic="true"
+            aria-label="locale string here"
+            aria-live="polite"
+            role="status"
+      >
+        foo
+      </span>
+    </transition-stub>
+  </div>
+</div>
+`;
+
+exports[`VBadge should render component and match snapshot without badge slot 2`] = `
+<div class="v-badge">
+  <div class="v-badge__wrapper">
+    <transition-stub>
+      <span class="v-badge__badge bg-primary"
+            aria-atomic="true"
+            aria-label="locale string here"
+            aria-live="polite"
+            role="status"
+      >
+        <i class="bar mdi v-icon notranslate v-icon--size-default"
+           aria-hidden="true"
+        >
+        </i>
+      </span>
+    </transition-stub>
+  </div>
+</div>
+`;
+
+exports[`VBadge should render component and match snapshot without badge slot 3`] = `
+<div class="v-badge">
+  <div class="v-badge__wrapper">
+    <transition-stub>
+      <span class="v-badge__badge bg-primary"
+            aria-atomic="true"
+            aria-label="locale string here"
+            aria-live="polite"
+            role="status"
+      >
+        <i class="foo mdi v-icon notranslate v-icon--size-default"
+           aria-hidden="true"
+        >
+        </i>
       </span>
     </transition-stub>
   </div>

@@ -61,11 +61,12 @@ export default defineComponent({
       type: String,
       default: 'top-right',
       validator: (value: string) => {
-        if (!value || !value.includes('-')) return false
-        const [vertical, horizontal] = value.split('-')
-        if (!['top', 'bottom'].includes(vertical) || !['left', 'right'].includes(horizontal)) return false
+        const [vertical, horizontal] = (value ?? '').split('-')
 
-        return true
+        return (
+          ['top', 'bottom'].includes(vertical) &&
+          ['left', 'right'].includes(horizontal)
+        )
       },
     },
     icon: String,
