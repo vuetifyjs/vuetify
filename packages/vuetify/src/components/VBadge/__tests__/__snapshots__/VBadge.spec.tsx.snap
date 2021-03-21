@@ -237,6 +237,72 @@ exports[`VBadge should render component and match snapshot with badge slot 11`] 
 </div>
 `;
 
+exports[`VBadge should render component and match snapshot with badge slot 12`] = `
+<div class="v-badge">
+  <div class="v-badge__wrapper">
+    <span>
+      element
+    </span>
+    <transition-stub>
+      <span class="v-badge__badge bg-primary"
+            aria-atomic="true"
+            aria-label="locale string here"
+            aria-live="polite"
+            role="status"
+      >
+        <span>
+          content
+        </span>
+      </span>
+    </transition-stub>
+  </div>
+</div>
+`;
+
+exports[`VBadge should render component and match snapshot with badge slot 13`] = `
+<div class="v-badge">
+  <div class="v-badge__wrapper">
+    <span>
+      element
+    </span>
+    <transition-stub>
+      <span class="v-badge__badge bg-primary"
+            aria-atomic="true"
+            aria-label="locale string here"
+            aria-live="polite"
+            role="status"
+      >
+        <span>
+          content
+        </span>
+      </span>
+    </transition-stub>
+  </div>
+</div>
+`;
+
+exports[`VBadge should render component and match snapshot with badge slot 14`] = `
+<div class="v-badge">
+  <div class="v-badge__wrapper">
+    <span>
+      element
+    </span>
+    <transition-stub>
+      <span class="v-badge__badge bg-primary"
+            aria-atomic="true"
+            aria-label="locale string here"
+            aria-live="polite"
+            role="status"
+      >
+        <span>
+          content
+        </span>
+      </span>
+    </transition-stub>
+  </div>
+</div>
+`;
+
 exports[`VBadge should render component and match snapshot without badge slot 1`] = `
 <div class="v-badge">
   <div class="v-badge__wrapper">
@@ -247,7 +313,9 @@ exports[`VBadge should render component and match snapshot without badge slot 1`
             aria-live="polite"
             role="status"
       >
-        foo
+        <span class="v-badge__content">
+          foo
+        </span>
       </span>
     </transition-stub>
   </div>
