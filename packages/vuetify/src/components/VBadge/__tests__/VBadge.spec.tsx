@@ -26,7 +26,7 @@ describe('VBadge', () => {
     [{ location: 'bottom-left' }],
     [{ location: undefined }],
     [{ location: null }],
-  ])('should render component and match snapshot with badge slot', (props) => {
+  ])('should render component and match snapshot with badge slot', (props: any) => {
     const wrapper = mountFunction({
       props,
       slots: {
@@ -42,7 +42,7 @@ describe('VBadge', () => {
     [{ content: 'foo' }],
     [{ content: 'foo', icon: 'bar' }],
     [{ icon: 'foo' }],
-  ])('should render component and match snapshot without badge slot', (props) => {
+  ])('should render component and match snapshot without badge slot', (props: any) => {
     const wrapper = mountFunction({ props })
 
     expect(wrapper.html()).toMatchSnapshot()

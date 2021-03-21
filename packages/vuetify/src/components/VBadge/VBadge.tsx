@@ -20,9 +20,6 @@ export default defineComponent({
   inheritAttrs: false,
 
   props: {
-    ...makeBorderRadiusProps(),
-    ...makeTagProps(),
-    ...makeTransitionProps({ transition: 'scale-rotate-transition' }),
     bordered: Boolean,
     color: {
       type: String,
@@ -55,6 +52,9 @@ export default defineComponent({
     offsetX: [Number, String],
     offsetY: [Number, String],
     textColor: String,
+    ...makeBorderRadiusProps(),
+    ...makeTagProps(),
+    ...makeTransitionProps({ transition: 'scale-rotate-transition' }),
   },
 
   setup (props, ctx) {
@@ -133,10 +133,10 @@ export default defineComponent({
                   { ...badgeAttrs }
                 >
                   {
-                    props.dot ? undefined :
-                    ctx.slots.badge ? ctx.slots.badge() :
-                    props.icon ? <VIcon icon={props.icon} /> :
-                    props.content
+                    props.dot ? undefined
+                      : ctx.slots.badge ? ctx.slots.badge?.()
+                        : props.icon ? <VIcon icon={props.icon} />
+                          : props.content
                   }
                 </span>,
                 props.transition,
