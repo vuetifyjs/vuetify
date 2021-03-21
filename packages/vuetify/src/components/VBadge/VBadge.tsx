@@ -46,6 +46,7 @@ export default defineComponent({
         )
       },
     },
+    max: [Number, String],
     modelValue: {
       type: Boolean,
       default: true,
@@ -91,6 +92,13 @@ export default defineComponent({
     })
 
     return () => {
+      const value = Number(props.content)
+      const content = (!props.max || isNaN(value))
+        ? props.content
+        : value <= props.max
+          ? value
+          : `${props.max}+`
+
       const [badgeAttrs, attrs] = extract(ctx.attrs, [
         'aria-atomic',
         'aria-label',
@@ -142,7 +150,7 @@ export default defineComponent({
                     props.dot ? undefined
                       : ctx.slots.badge ? ctx.slots.badge?.()
                         : props.icon ? <VIcon icon={props.icon} />
-                          : props.content
+                          : <span class="v-badge__content">{content}</span>
                   }
                 </span>,
               )
