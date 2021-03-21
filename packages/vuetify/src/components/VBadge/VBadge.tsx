@@ -63,9 +63,9 @@ export default defineComponent({
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'textColor'))
 
     const position = computed(() => {
-      if (!props.floating) return props.dot ? 8 : 12
-
-      return props.dot ? 2 : 4
+      return props.floating
+        ? (props.dot ? 2 : 4)
+        : (props.dot ? 8 : 12)
     })
 
     function calculatePosition (offset?: number | string) {
