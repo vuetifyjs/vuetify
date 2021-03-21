@@ -150,7 +150,7 @@ exports[`VBadge should render component and match snapshot with badge slot 7`] =
 `;
 
 exports[`VBadge should render component and match snapshot with badge slot 8`] = `
-<div class="v-badge">
+<div class="v-badge v-badge--inline">
   <div class="v-badge__wrapper">
     <span>
       element
@@ -194,6 +194,28 @@ exports[`VBadge should render component and match snapshot with badge slot 9`] =
 `;
 
 exports[`VBadge should render component and match snapshot with badge slot 10`] = `
+<div class="v-badge">
+  <div class="v-badge__wrapper">
+    <span>
+      element
+    </span>
+    <transition-stub>
+      <span class="v-badge__badge bg-primary"
+            aria-atomic="true"
+            aria-label="locale string here"
+            aria-live="polite"
+            role="status"
+      >
+        <span>
+          content
+        </span>
+      </span>
+    </transition-stub>
+  </div>
+</div>
+`;
+
+exports[`VBadge should render component and match snapshot with badge slot 11`] = `
 <div class="v-badge">
   <div class="v-badge__wrapper">
     <span>

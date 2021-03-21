@@ -23,6 +23,7 @@ describe('VBadge', () => {
     [{ dot: true, floating: true }],
     [{ floating: true }],
     [{ icon: 'foo' }], // badge slot overrides icon
+    [{ inline: true }],
     [{ location: 'bottom-left' }],
     [{ location: undefined }],
     [{ location: null }],

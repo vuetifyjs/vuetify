@@ -29,6 +29,7 @@ export default defineComponent({
     dot: Boolean,
     floating: Boolean,
     icon: String,
+    inline: Boolean,
     label: {
       type: String,
       default: '$vuetify.badge',
@@ -82,8 +83,10 @@ export default defineComponent({
         left: 'auto',
         right: 'auto',
         top: 'auto',
-        [horizontal === 'left' ? 'right' : 'left']: calculatePosition(props.offsetX),
-        [vertical === 'top' ? 'bottom' : 'top']: calculatePosition(props.offsetY),
+        ...(!props.inline ? {
+          [horizontal === 'left' ? 'right' : 'left']: calculatePosition(props.offsetX),
+          [vertical === 'top' ? 'bottom' : 'top']: calculatePosition(props.offsetY),
+        } : {})
       }
     })
 
@@ -104,6 +107,7 @@ export default defineComponent({
               'v-badge--bordered': props.bordered,
               'v-badge--dot': props.dot,
               'v-badge--floating': props.floating,
+              'v-badge--inline': props.inline,
             },
           ]}
           { ...attrs }

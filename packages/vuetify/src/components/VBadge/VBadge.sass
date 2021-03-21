@@ -46,6 +46,10 @@
     &::after
       border-width: $badge-dot-border-width
 
+  .v-badge--inline &
+    position: relative
+    vertical-align: $badge-inline-vertical-align
+
   .v-icon
     color: inherit
     font-size: $badge-font-size
@@ -60,3 +64,9 @@
 .v-badge__wrapper
   display: flex
   position: relative
+
+  .v-badge--inline &
+    align-items: center
+    display: inline-flex
+    justify-content: center
+    margin: $badge-wrapper-margin
