@@ -2,7 +2,10 @@
 @import './index'
 
 .v-sheet
-  +border($sheet-border-color, $sheet-border-style, $sheet-border-width)
+  +border(...$sheet-border)
   +elevation($sheet-elevation)
   +position($sheet-positions)
-  // Default missing in variables @include rounded($sheet-query)
+  +rounded($sheet-border-radius)
+
+  &--rounded
+    +rounded($sheet-rounded-border-radius)

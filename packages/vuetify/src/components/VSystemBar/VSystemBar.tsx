@@ -3,10 +3,10 @@ import './VSystemBar.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useTheme } from '@/composables/theme'
 
@@ -21,20 +21,20 @@ export default defineComponent({
     lightsOut: Boolean,
     window: Boolean,
     ...makeBorderProps(),
-    ...makeBorderRadiusProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makePositionProps(),
+    ...makeRoundedProps(),
     ...makeTagProps(),
   }),
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme()
     const { borderClasses } = useBorder(props, 'v-system-bar')
-    const { borderRadiusClasses } = useBorderRadius(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-system-bar')
+    const { roundedClasses } = useRounded(props, 'v-system-bar')
 
     return () => (
       <props.tag
@@ -46,9 +46,9 @@ export default defineComponent({
           },
           themeClasses.value,
           borderClasses.value,
-          borderRadiusClasses.value,
           elevationClasses.value,
           positionClasses.value,
+          roundedClasses.value,
         ]}
         style={[
           dimensionStyles.value,

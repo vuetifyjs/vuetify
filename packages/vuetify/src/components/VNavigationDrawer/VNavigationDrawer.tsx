@@ -3,10 +3,10 @@ import './VNavigationDrawer.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makePositionProps, usePosition } from '@/composables/position'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTheme } from '@/composables/theme'
@@ -21,10 +21,10 @@ export default defineComponent({
 
   props: makeProps({
     ...makeBorderProps(),
-    ...makeBorderRadiusProps(),
     ...makeElevationProps(),
     ...makeLayoutItemProps(),
     ...makePositionProps(),
+    ...makeRoundedProps(),
     ...makeTagProps({ tag: 'nav' }),
     expandOnHover: Boolean,
     mobile: Boolean,
@@ -45,9 +45,9 @@ export default defineComponent({
 
   setup (props, { slots }) {
     const { borderClasses } = useBorder(props, 'v-navigation-drawer')
-    const { borderRadiusClasses } = useBorderRadius(props)
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-navigation-drawer')
+    const { roundedClasses } = useRounded(props, 'v-navigation-drawer')
     const { themeClasses } = useTheme()
 
     const isActive = useProxiedModel(props, 'modelValue')
@@ -97,9 +97,9 @@ export default defineComponent({
               'v-navigation-drawer--temporary': props.temporary || props.mobile,
             },
             borderClasses.value,
-            borderRadiusClasses.value,
             elevationClasses.value,
             positionClasses.value,
+            roundedClasses.value,
             themeClasses.value,
           ]}
           style={[

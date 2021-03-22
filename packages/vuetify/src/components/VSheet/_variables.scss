@@ -1,18 +1,18 @@
 // Defaults
 $sheet-border-color: $border-color-root !default;
 $sheet-border-style: $border-style-root !default;
+$sheet-border-radius: 0 !default;
+$sheet-rounded-border-radius: $border-radius-root !default;
 $sheet-border-width: 0 !default;
 $sheet-elevation: 0 !default;
 $sheet-positions: absolute fixed !default;
 
-$sheet-query: () !default;
-$sheet-query: map-deep-merge(
+$sheet-border: () !default;
+$sheet-border: map-deep-merge(
   (
     'border-color': $sheet-border-color,
     'border-style': $sheet-border-style,
     'border-width': $sheet-border-width,
-    'elevation': $sheet-elevation,
-    'position': $sheet-positions
   ),
-  $sheet-query
+  $sheet-border
 );

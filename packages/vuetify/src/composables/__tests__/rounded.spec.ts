@@ -1,14 +1,14 @@
 // Utilities
-import { makeBorderRadiusProps, useBorderRadius } from '../border-radius'
+import { makeRoundedProps, useRounded } from '../rounded'
 import { mount } from '@vue/test-utils'
 
 // Types
-import type { BorderRadiusProps } from '../border-radius'
+import type { RoundedProps } from '../rounded'
 
-describe('border-radius.ts', () => {
-  it('should create border-radius props', () => {
+describe('rounded.ts', () => {
+  it('should create rounded props', () => {
     const wrapper = mount({
-      props: makeBorderRadiusProps(),
+      props: makeRoundedProps(),
       template: '<div/>',
     }, {
       propsData: { rounded: true },
@@ -23,8 +23,8 @@ describe('border-radius.ts', () => {
     [{ rounded: null }, []],
     [{ rounded: 1 }, []],
     // // Rounded only
-    [{ rounded: true }, ['rounded']],
-    [{ rounded: '' }, ['rounded']],
+    [{ rounded: true }, ['foo--rounded']],
+    [{ rounded: '' }, ['foo--rounded']],
     // // Rounded with 0
     [{ rounded: '0' }, ['rounded-0']],
     [{ rounded: 0 }, ['rounded-0']],
@@ -32,11 +32,11 @@ describe('border-radius.ts', () => {
     [{ rounded: 'circle' }, ['rounded-circle']],
     [{ rounded: 'shaped' }, ['rounded-shaped']],
     [{ rounded: 'pill' }, ['rounded-pill']],
-    // // Corner and axis border-radius
+    // // Corner and axis rounded
     [{ rounded: 'tr-xl br-lg' }, ['rounded-tr-xl', 'rounded-br-lg']],
-  ] as BorderRadiusProps[])('should return correct rounded classes', (props: BorderRadiusProps, expected: any) => {
-    const { borderRadiusClasses } = useBorderRadius(props)
+  ] as RoundedProps[])('should return correct rounded classes', (props: RoundedProps, expected: any) => {
+    const { roundedClasses } = useRounded(props, 'foo')
 
-    expect(borderRadiusClasses.value).toStrictEqual(expected)
+    expect(roundedClasses.value).toStrictEqual(expected)
   })
 })

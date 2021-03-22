@@ -4,7 +4,7 @@ import './VBtn.sass'
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
@@ -29,7 +29,7 @@ export default defineComponent({
 
   props: makeProps({
     ...makeBorderProps(),
-    ...makeBorderRadiusProps(),
+    ...makeRoundedProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -53,7 +53,7 @@ export default defineComponent({
 
   setup (props, { slots }) {
     const { borderClasses } = useBorder(props, 'v-btn')
-    const { borderRadiusClasses } = useBorderRadius(props)
+    const { roundedClasses } = useRounded(props, 'v-btn')
     const { densityClasses } = useDensity(props, 'v-btn')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
@@ -87,11 +87,11 @@ export default defineComponent({
             'v-btn--disabled': props.disabled,
           },
           borderClasses.value,
-          borderRadiusClasses.value,
           colorClasses.value,
           densityClasses.value,
           elevationClasses.value,
           positionClasses.value,
+          roundedClasses.value,
           sizeClasses.value,
           themeClasses.value,
         ]}

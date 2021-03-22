@@ -3,7 +3,7 @@ import './VFooter.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
@@ -19,10 +19,10 @@ export default defineComponent({
 
   props: makeProps({
     ...makeBorderProps(),
-    ...makeBorderRadiusProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makePositionProps(),
+    ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeTagProps({ tag: 'footer' }),
   }),
@@ -30,7 +30,7 @@ export default defineComponent({
   setup (props, { slots }) {
     const { themeClasses } = useTheme()
     const { borderClasses } = useBorder(props, 'v-footer')
-    const { borderRadiusClasses } = useBorderRadius(props)
+    const { roundedClasses } = useRounded(props, 'v-footer')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-footer')
@@ -39,11 +39,11 @@ export default defineComponent({
       <props.tag
         class={[
           'v-footer',
-          themeClasses.value,
           borderClasses.value,
-          borderRadiusClasses.value,
           elevationClasses.value,
           positionClasses.value,
+          roundedClasses.value,
+          themeClasses.value,
         ]}
         style={[
 

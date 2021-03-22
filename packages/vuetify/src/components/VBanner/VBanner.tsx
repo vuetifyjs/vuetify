@@ -3,7 +3,7 @@ import './VBanner.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
@@ -19,7 +19,7 @@ export default defineComponent({
 
   props: makeProps({
     ...makeBorderProps(),
-    ...makeBorderRadiusProps(),
+    ...makeRoundedProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makePositionProps(),
@@ -33,7 +33,7 @@ export default defineComponent({
 
   setup (props, { slots }) {
     const { borderClasses } = useBorder(props, 'v-banner')
-    const { borderRadiusClasses } = useBorderRadius(props)
+    const { roundedClasses } = useRounded(props, 'v-banner')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-banner')
@@ -54,7 +54,7 @@ export default defineComponent({
             },
             themeClasses.value,
             borderClasses.value,
-            borderRadiusClasses.value,
+            roundedClasses.value,
             elevationClasses.value,
             positionClasses.value,
           ]}

@@ -3,7 +3,7 @@ import './VSheet.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
@@ -20,10 +20,10 @@ export default defineComponent({
 
   props: makeProps({
     ...makeBorderProps(),
-    ...makeBorderRadiusProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makePositionProps(),
+    ...makeRoundedProps(),
     ...makeTagProps(),
     color: String,
   }),
@@ -32,10 +32,10 @@ export default defineComponent({
     const { themeClasses } = useTheme()
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { borderClasses } = useBorder(props, 'v-sheet')
-    const { borderRadiusClasses } = useBorderRadius(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-sheet')
+    const { roundedClasses } = useRounded(props, 'v-sheet')
 
     return () => (
       <props.tag
@@ -44,9 +44,9 @@ export default defineComponent({
           themeClasses.value,
           backgroundColorClasses.value,
           borderClasses.value,
-          borderRadiusClasses.value,
           elevationClasses.value,
           positionClasses.value,
+          roundedClasses.value,
         ]}
         style={[
           backgroundColorStyles.value,

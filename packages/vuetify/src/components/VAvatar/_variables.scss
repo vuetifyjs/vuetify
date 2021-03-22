@@ -1,7 +1,6 @@
-@import '../../styles/styles.sass';
-
-$avatar-border-radius: 50% !default;
+$avatar-border-radius: map-get($rounded, 'circle') !default;
 $avatar-line-height: normal !default;
+$avatar-rounded-border-radius: $border-radius-root !default;
 $avatar-vertical-align: middle !default;
 
 $avatar-sizes: () !default;

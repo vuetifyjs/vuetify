@@ -2,7 +2,7 @@
 import './VAvatar.sass'
 
 // Composables
-import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
@@ -15,7 +15,7 @@ export default defineComponent({
   name: 'VAvatar',
 
   props: makeProps({
-    ...makeBorderRadiusProps(),
+    ...makeRoundedProps(),
     ...makeSizeProps(),
     ...makeTagProps(),
     color: String,
@@ -25,7 +25,7 @@ export default defineComponent({
 
   setup (props, { slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const { borderRadiusClasses } = useBorderRadius(props)
+    const { roundedClasses } = useRounded(props, 'v-avatar')
     const { sizeClasses, sizeStyles } = useSize(props, 'v-avatar')
 
     return () => (
@@ -37,7 +37,7 @@ export default defineComponent({
             'v-avatar--right': props.right,
           },
           backgroundColorClasses.value,
-          borderRadiusClasses.value,
+          roundedClasses.value,
           sizeClasses.value,
         ]}
         style={[

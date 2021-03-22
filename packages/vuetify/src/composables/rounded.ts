@@ -3,24 +3,24 @@ import { computed } from 'vue'
 import propsFactory from '@/util/propsFactory'
 
 // Types
-export interface BorderRadiusProps {
+export interface RoundedProps {
   rounded?: boolean | string | number | null
 }
 
-export const makeBorderRadiusProps = propsFactory({
+// Composables
+export const makeRoundedProps = propsFactory({
   rounded: {
     type: [Boolean, Number, String],
     default: undefined,
   },
-}, 'border-radius')
+}, 'rounded')
 
-// Composables
-export function useBorderRadius (props: BorderRadiusProps) {
-  const borderRadiusClasses = computed(() => {
+export function useRounded (props: RoundedProps, name: string) {
+  const roundedClasses = computed(() => {
     const classes: string[] = []
 
     if (props.rounded === true || props.rounded === '') {
-      classes.push('rounded')
+      classes.push(`${name}--rounded`)
     } else if (
       typeof props.rounded === 'string' ||
       props.rounded === 0
@@ -33,5 +33,5 @@ export function useBorderRadius (props: BorderRadiusProps) {
     return classes
   })
 
-  return { borderRadiusClasses }
+  return { roundedClasses }
 }
