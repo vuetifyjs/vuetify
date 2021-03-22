@@ -4,14 +4,15 @@ import { makeBorderProps, useBorder } from '../border'
 // Utilities
 import { mount } from '@vue/test-utils'
 
+// Types
+import type { BorderProps } from '../border'
+
 describe('border.ts', () => {
   it('should create border props', () => {
     const wrapper = mount({
       props: makeBorderProps(),
       template: '<div/>',
-    }, {
-      propsData: { border: true },
-    })
+    }, { propsData: { border: true } as any })
 
     expect(wrapper.props().border).toBeDefined()
   })
@@ -23,9 +24,9 @@ describe('border.ts', () => {
     [{ border: 1 }, []],
     [{ outlined: false }, []],
     // Border only
-    [{ outlined: true }, ['test--border']],
-    [{ border: true }, ['test--border']],
-    [{ border: '' }, ['test--border']],
+    [{ outlined: true }, ['foo--border']],
+    [{ border: true }, ['foo--border']],
+    [{ border: '' }, ['foo--border']],
     // Border with 0 or false
     [{ border: '0' }, ['border-0']],
     [{ border: 0 }, ['border-0']],
@@ -34,7 +35,7 @@ describe('border.ts', () => {
     [{ border: 'tr opacity-50' }, ['border-tr', 'border-opacity-50']],
     [{ border: 'r-xl primary' }, ['border-r-xl', 'border-primary']],
   ] as const)('should have the correct class', (props, expected) => {
-    const { borderClasses } = useBorder(props, 'test')
+    const { borderClasses } = useBorder(props as BorderProps, 'foo')
 
     expect(borderClasses.value).toEqual(expected)
   })
