@@ -3,10 +3,10 @@ import './VBanner.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useTheme } from '@/composables/theme'
 
@@ -18,26 +18,26 @@ export default defineComponent({
   name: 'VBanner',
 
   props: makeProps({
-    ...makeBorderProps(),
-    ...makeRoundedProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makePositionProps(),
-    ...makeTagProps(),
     avatar: String,
     icon: String,
     mobile: Boolean,
     singleLine: Boolean,
     sticky: Boolean,
+    ...makeBorderProps(),
+    ...makeDimensionProps(),
+    ...makeElevationProps(),
+    ...makePositionProps(),
+    ...makeRoundedProps(),
+    ...makeTagProps(),
   }),
 
   setup (props, { slots }) {
+    const { themeClasses } = useTheme()
     const { borderClasses } = useBorder(props, 'v-banner')
-    const { roundedClasses } = useRounded(props, 'v-banner')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-banner')
-    const { themeClasses } = useTheme()
+    const { roundedClasses } = useRounded(props, 'v-banner')
 
     return () => {
       const hasThumbnail = (!!props.avatar || !!props.icon || !!slots.thumbnail)

@@ -1,10 +1,11 @@
-// Types
-import type { Ref } from 'vue'
-
 // Utilities
 import { ref, computed, getCurrentInstance, capitalize } from 'vue'
 import { consoleError } from '../util/console'
 
+// Types
+import type { Ref } from 'vue'
+
+// Composables
 export function useProxiedModel<
   Inner,
   Props extends object,

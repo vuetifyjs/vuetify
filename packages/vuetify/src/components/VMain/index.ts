@@ -1,5 +1,1 @@
-import VMain from './VMain'
-
-export { VMain }
-
-export default VMain
+export { default as VMain } from './VMain'

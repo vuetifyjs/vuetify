@@ -20,12 +20,6 @@ export default defineComponent({
   name: 'VNavigationDrawer',
 
   props: makeProps({
-    ...makeBorderProps(),
-    ...makeElevationProps(),
-    ...makeLayoutItemProps(),
-    ...makePositionProps(),
-    ...makeRoundedProps(),
-    ...makeTagProps({ tag: 'nav' }),
     expandOnHover: Boolean,
     mobile: Boolean,
     modelValue: Boolean,
@@ -41,14 +35,20 @@ export default defineComponent({
       type: [Number, String],
       default: 256,
     },
+    ...makeBorderProps(),
+    ...makeElevationProps(),
+    ...makeLayoutItemProps(),
+    ...makePositionProps(),
+    ...makeRoundedProps(),
+    ...makeTagProps({ tag: 'nav' }),
   }),
 
   setup (props, { slots }) {
+    const { themeClasses } = useTheme()
     const { borderClasses } = useBorder(props, 'v-navigation-drawer')
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-navigation-drawer')
     const { roundedClasses } = useRounded(props, 'v-navigation-drawer')
-    const { themeClasses } = useTheme()
 
     const isActive = useProxiedModel(props, 'modelValue')
     const isHovering = ref(false)
@@ -96,11 +96,11 @@ export default defineComponent({
               'v-navigation-drawer--start': props.left || !props.right,
               'v-navigation-drawer--temporary': props.temporary || props.mobile,
             },
+            themeClasses.value,
             borderClasses.value,
             elevationClasses.value,
             positionClasses.value,
             roundedClasses.value,
-            themeClasses.value,
           ]}
           style={[
             layoutStyles.value,

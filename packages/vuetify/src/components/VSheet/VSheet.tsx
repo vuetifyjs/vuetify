@@ -3,10 +3,10 @@ import './VSheet.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
 import { useTheme } from '@/composables/theme'
@@ -19,13 +19,13 @@ export default defineComponent({
   name: 'VSheet',
 
   props: makeProps({
+    color: String,
     ...makeBorderProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
-    color: String,
   }),
 
   setup (props, { slots }) {

@@ -1,6 +1,6 @@
 // Utilities
-import { inject, provide, computed, ref, onBeforeUnmount } from 'vue'
 import { getUid, convertToUnit } from '@/util'
+import { inject, provide, computed, ref, onBeforeUnmount } from 'vue'
 import propsFactory from '@/util/propsFactory'
 
 // Types
@@ -35,6 +35,7 @@ export const makeLayoutProps = propsFactory({
   fullHeight: Boolean,
 }, 'layout')
 
+// Composables
 export const makeLayoutItemProps = propsFactory({
   name: {
     type: String,

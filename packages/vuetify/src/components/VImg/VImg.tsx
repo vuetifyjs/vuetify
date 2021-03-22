@@ -12,7 +12,6 @@ import {
   watch,
   withDirectives,
 } from 'vue'
-import type { PropType } from 'vue'
 
 // Components
 import { VResponsive } from '../VResponsive'
@@ -22,15 +21,17 @@ import intersect from '@/directives/intersect'
 import type { ObserveDirectiveBinding } from '@/directives/intersect'
 
 // Utils
-import makeProps from '@/util/makeProps'
-import { useRender } from '@/util/useRender'
-import { useDirective } from '@/util/useDirective'
 import { maybeTransition } from '@/util'
+import { useDirective } from '@/util/useDirective'
+import { useRender } from '@/util/useRender'
+import makeProps from '@/util/makeProps'
 
 // Globals
 import { SUPPORTS_INTERSECTION } from '@/util/globals'
 
 // Types
+import type { PropType } from 'vue'
+
 // not intended for public use, this is passed in by vuetify-loader
 export interface srcObject {
   src?: string

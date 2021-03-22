@@ -1,15 +1,16 @@
-// Setup
+// Utilities
 import { computed } from 'vue'
 import { convertToUnit } from '@/util'
 import propsFactory from '@/util/propsFactory'
 
+// Types
 const predefinedSizes = ['x-small', 'small', 'default', 'large', 'x-large']
 
 export interface SizeProps {
   size?: string | number
 }
 
-// Props
+// Composables
 export const makeSizeProps = propsFactory({
   size: {
     type: [String, Number],
@@ -17,7 +18,6 @@ export const makeSizeProps = propsFactory({
   },
 }, 'size')
 
-// Effect
 export function useSize (props: SizeProps, name: string) {
   const sizeClasses = computed(() => {
     return predefinedSizes.includes(props.size as string)

@@ -15,12 +15,12 @@ export default defineComponent({
   name: 'VAvatar',
 
   props: makeProps({
-    ...makeRoundedProps(),
-    ...makeSizeProps(),
-    ...makeTagProps(),
     color: String,
     left: Boolean,
     right: Boolean,
+    ...makeRoundedProps(),
+    ...makeSizeProps(),
+    ...makeTagProps(),
   }),
 
   setup (props, { slots }) {
@@ -44,9 +44,8 @@ export default defineComponent({
           backgroundColorStyles.value,
           sizeStyles.value,
         ]}
-      >
-        { slots.default?.() }
-      </props.tag>
+        v-slots={ slots }
+      />
     )
   },
 })

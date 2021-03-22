@@ -17,6 +17,7 @@ type BackgroundColorData = {
   backgroundColorStyles: Ref<CSSProperties>
 }
 
+// Composables
 export function useColor (colors: Ref<{ background?: ColorValue, text?: ColorValue }>) {
   const backgroundIsCssColor = computed(() => isCssColor(colors.value.background))
   const textIsCssColor = computed(() => isCssColor(colors.value.text))

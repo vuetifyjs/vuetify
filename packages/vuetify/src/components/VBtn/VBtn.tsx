@@ -28,15 +28,6 @@ export default defineComponent({
   name: 'VBtn',
 
   props: makeProps({
-    ...makeBorderProps(),
-    ...makeRoundedProps(),
-    ...makeDensityProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makePositionProps(),
-    ...makeSizeProps(),
-    ...makeTagProps({ tag: 'button' }),
-
     text: Boolean,
     flat: Boolean,
     plain: Boolean,
@@ -49,9 +40,18 @@ export default defineComponent({
       default: 'primary',
     },
     disabled: Boolean,
+    ...makeBorderProps(),
+    ...makeRoundedProps(),
+    ...makeDensityProps(),
+    ...makeDimensionProps(),
+    ...makeElevationProps(),
+    ...makePositionProps(),
+    ...makeSizeProps(),
+    ...makeTagProps({ tag: 'button' }),
   }),
 
   setup (props, { slots }) {
+    const { themeClasses } = useTheme()
     const { borderClasses } = useBorder(props, 'v-btn')
     const { roundedClasses } = useRounded(props, 'v-btn')
     const { densityClasses } = useDensity(props, 'v-btn')
@@ -59,7 +59,6 @@ export default defineComponent({
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-btn')
     const { sizeClasses } = useSize(props, 'v-btn')
-    const { themeClasses } = useTheme()
 
     const isContained = computed(() => {
       return !(props.text || props.plain || props.icon || props.outlined || props.border !== false)
@@ -86,6 +85,7 @@ export default defineComponent({
             'v-btn--block': props.block,
             'v-btn--disabled': props.disabled,
           },
+          themeClasses.value,
           borderClasses.value,
           colorClasses.value,
           densityClasses.value,
@@ -93,7 +93,6 @@ export default defineComponent({
           positionClasses.value,
           roundedClasses.value,
           sizeClasses.value,
-          themeClasses.value,
         ]}
         style={[
           colorStyles.value,

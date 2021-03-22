@@ -4,7 +4,7 @@ import propsFactory from '@/util/propsFactory'
 
 // Types
 export interface BorderProps {
-  outlined: boolean
+  outlined?: boolean
   border?: boolean | number | string
 }
 
