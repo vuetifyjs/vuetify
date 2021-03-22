@@ -5,7 +5,7 @@ import './VBadge.sass'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeTransitionProps } from '@/composables/transition'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
@@ -54,14 +54,14 @@ export default defineComponent({
     offsetX: [Number, String],
     offsetY: [Number, String],
     textColor: String,
-    ...makeBorderRadiusProps(),
+    ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeTransitionProps({ transition: 'scale-rotate-transition' }),
   },
 
   setup (props, ctx) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const { borderRadiusClasses } = useBorderRadius(props)
+    const { roundedClasses } = useRounded(props, 'v-badge')
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'textColor'))
 
     const position = computed(() => {
@@ -132,7 +132,7 @@ export default defineComponent({
                   class={[
                     'v-badge__badge',
                     backgroundColorClasses.value,
-                    borderRadiusClasses.value,
+                    roundedClasses.value,
                     textColorClasses.value,
                   ]}
                   style={[
