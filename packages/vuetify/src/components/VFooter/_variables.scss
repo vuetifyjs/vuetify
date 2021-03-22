@@ -5,13 +5,4 @@ $footer-font-size: 14px;
 $footer-elevation: 0 !default;
 $footer-padding: 8px 24px !default;
 $footer-positions: absolute fixed !default;
-
-$footer-query: () !default;
-$footer-query: map-deep-merge(
-  (
-    'border-radius': $footer-border-radius,
-    'elevation': $footer-elevation,
-    'position': $footer-positions
-  ),
-  $footer-query
-) !default;
+$footer-rounded-border-radius: $border-radius-root !default;

@@ -1,10 +1,11 @@
 // Utilities
-import type { PropType } from 'vue'
 import { computed } from 'vue'
 import { convertToUnit } from '@/util/helpers'
 import propsFactory from '@/util/propsFactory'
 
 // Types
+import type { PropType } from 'vue'
+
 const positionValues = ['static', 'relative', 'fixed', 'absolute', 'sticky'] as const
 
 type Position = typeof positionValues[number]

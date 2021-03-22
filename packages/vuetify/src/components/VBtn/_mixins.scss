@@ -1,0 +1,14 @@
+@mixin button-sizes {
+  @each $sizeName, $multiplier in $size-scales {
+    $size: map-get($button-sizes, 'font-size') + (2 * $multiplier) / 16;
+    $height: map-get($button-sizes, 'height') + (8 * $multiplier);
+
+    .v-btn--size-#{$sizeName} {
+      --v-btn-size: #{$size};
+      --v-btn-height: #{$height};
+      font-size: $size;
+      min-width: round($height * $button-width-ratio);
+      padding: 0 ($height / $button-padding-ratio);
+    }
+  }
+}

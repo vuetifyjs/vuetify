@@ -10,6 +10,7 @@ export interface DelayProps {
   openDelay?: number | string
 }
 
+// Composables
 export const makeDelayProps = propsFactory({
   closeDelay: [Number, String],
   openDelay: [Number, String],

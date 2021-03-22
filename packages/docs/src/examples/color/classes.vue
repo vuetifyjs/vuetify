@@ -1,5 +1,5 @@
 <template>
-  <div class="purple darken-2 text-center">
-    <span class="white--text">Lorem ipsum</span>
+  <div class="bg-purple-darken-2 text-center">
+    <span class="text-white">Lorem ipsum</span>
   </div>
 </template>

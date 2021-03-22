@@ -27,9 +27,7 @@ export default defineComponent({
           ssrBootStyles.value,
         ]}
       >
-        <div class="v-main__wrap">
-          { slots.default?.() }
-        </div>
+        <div class="v-main__wrap" v-slots={ slots } />
       </props.tag>
     )
   },

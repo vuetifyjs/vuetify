@@ -2,106 +2,69 @@
 import { useBackgroundColor, useColor, useTextColor } from '../color'
 
 // Utilities
-import { reactive, ref, toRef } from 'vue'
+import { reactive, toRef } from 'vue'
 
-describe('color', () => {
+describe('color.ts', () => {
+  describe('useBackgroundColor', () => {
+    it('should allow ref argument or return null', () => {
+      const props = reactive({ color: 'primary' })
+      const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+
+      expect(backgroundColorClasses.value).toEqual(['bg-primary'])
+      expect(backgroundColorStyles.value).toEqual({})
+    })
+
+    it.each([
+      [{ bg: null }, [[], {}]],
+      [{ bg: '' }, [[], {}]],
+      [{ bg: 'primary' }, [['bg-primary'], {}]],
+      [{ bg: '#FF00FF' }, [[], { backgroundColor: '#FF00FF' }]],
+      // [{ bg: '#FF00FF' }, [[], { backgroundColor: '#FF00FF' }]],
+    ])('should return correct color classes and styles', (value, [classes, styles]) => {
+      const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(value as any, 'bg')
+
+      expect(backgroundColorClasses.value).toEqual(classes)
+      expect(backgroundColorStyles.value).toEqual(styles)
+    })
+  })
+
   describe('useColor', () => {
-    it('should return correct data', () => {
-      const colors = ref<{ background?: string | null, text?: string | null }>({
-        background: 'primary',
-        text: 'secondary',
-      })
+    it.each([
+      [{ background: null }, [[], {}]],
+      [{ background: '' }, [[], {}]],
+      [{ background: 'primary' }, [['bg-primary'], {}]],
+      [{ background: '#FF00FF' }, [[], { backgroundColor: '#FF00FF' }]],
+      [{ text: null }, [[], {}]],
+      [{ text: '' }, [[], {}]],
+      [{ text: 'primary' }, [['text-primary'], {}]],
+      [{ text: '#FF00FF' }, [[], { caretColor: '#FF00FF', color: '#FF00FF' }]],
+    ])('should return correct color classes and styles', (value, [classes, styles]) => {
+      const { colorClasses, colorStyles } = useColor({ value } as any)
 
-      const data = useColor(colors)
-      expect(data.colorClasses.value).toEqual(['bg-primary', 'text-secondary'])
-      expect(data.colorStyles.value).toEqual({})
-
-      colors.value.text = null
-      expect(data.colorClasses.value).toEqual(['bg-primary'])
-      expect(data.colorStyles.value).toEqual({})
-
-      colors.value.background = '#ff00ff'
-      expect(data.colorClasses.value).toEqual([])
-      expect(data.colorStyles.value).toEqual({
-        backgroundColor: '#ff00ff',
-      })
-
-      colors.value.text = 'primary'
-      expect(data.colorClasses.value).toEqual(['text-primary'])
-      expect(data.colorStyles.value).toEqual({
-        backgroundColor: '#ff00ff',
-      })
+      expect(colorClasses.value).toEqual(classes)
+      expect(colorStyles.value).toEqual(styles)
     })
   })
 
   describe('useTextColor', () => {
-    it('should return correct data', () => {
-      const props = reactive({
-        color: null as string | null,
-      })
-      const data = useTextColor(props, 'color')
-      expect(data.textColorClasses.value).toEqual([])
-      expect(data.textColorStyles.value).toEqual({})
+    it('should allow ref argument or return null', () => {
+      const props = reactive({ color: 'primary' })
+      const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
 
-      props.color = 'primary'
-      expect(data.textColorClasses.value).toEqual(['text-primary'])
-      expect(data.textColorStyles.value).toEqual({})
-
-      props.color = ''
-      expect(data.textColorClasses.value).toEqual([])
-      expect(data.textColorStyles.value).toEqual({})
-
-      props.color = '#ff00ff'
-      expect(data.textColorClasses.value).toEqual([])
-      expect(data.textColorStyles.value).toEqual({
-        caretColor: '#ff00ff',
-        color: '#ff00ff',
-      })
+      expect(textColorClasses.value).toEqual(['text-primary'])
+      expect(textColorStyles.value).toEqual({})
     })
 
-    it('should allow ref argument', () => {
-      const props = reactive({
-        color: 'primary',
-      })
-      const data = useTextColor(toRef(props, 'color'))
+    it.each([
+      [{ color: '' }, [[], {}]],
+      [{ color: null }, [[], {}]],
+      [{ color: 'primary' }, [['text-primary'], {}]],
+      [{ color: '#FF00FF' }, [[], { caretColor: '#FF00FF', color: '#FF00FF' }]],
+    ])('should return correct data', (value, [classes, styles]) => {
+      const { textColorClasses, textColorStyles } = useTextColor(value as any, 'color')
 
-      expect(data.textColorClasses.value).toEqual(['text-primary'])
-      expect(data.textColorStyles.value).toEqual({})
-    })
-  })
-
-  describe('useBackgroundColor', () => {
-    it('should return correct data', () => {
-      const props = reactive({
-        bg: null as string | null,
-      })
-      const data = useBackgroundColor(props, 'bg')
-      expect(data.backgroundColorClasses.value).toEqual([])
-      expect(data.backgroundColorStyles.value).toEqual({})
-
-      props.bg = 'primary'
-      expect(data.backgroundColorClasses.value).toEqual(['bg-primary'])
-      expect(data.backgroundColorStyles.value).toEqual({})
-
-      props.bg = ''
-      expect(data.backgroundColorClasses.value).toEqual([])
-      expect(data.backgroundColorStyles.value).toEqual({})
-
-      props.bg = '#ff00ff'
-      expect(data.backgroundColorClasses.value).toEqual([])
-      expect(data.backgroundColorStyles.value).toEqual({
-        backgroundColor: '#ff00ff',
-      })
-    })
-
-    it('should allow ref argument', () => {
-      const props = reactive({
-        color: 'primary',
-      })
-      const data = useBackgroundColor(toRef(props, 'color'))
-
-      expect(data.backgroundColorClasses.value).toEqual(['bg-primary'])
-      expect(data.backgroundColorStyles.value).toEqual({})
+      expect(textColorClasses.value).toEqual(classes)
+      expect(textColorStyles.value).toEqual(styles)
     })
   })
 })

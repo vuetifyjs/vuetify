@@ -1,3 +1,4 @@
+// Utilities
 import {
   computed,
   getCurrentInstance,
@@ -23,7 +24,7 @@ export interface ThresholdMetCallbackData {
   savedScroll: Ref<number>
 }
 
-// Props
+// Composables
 export const makeScrollProps = propsFactory({
   scrollTarget: {
     type: String,

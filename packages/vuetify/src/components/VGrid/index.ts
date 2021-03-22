@@ -1,11 +1,4 @@
-import VContainer from './VContainer'
-import VCol from './VCol'
-import VRow from './VRow'
-import VSpacer from './VSpacer'
-
-export {
-  VContainer,
-  VCol,
-  VRow,
-  VSpacer,
-}
+export { default as VContainer } from './VContainer'
+export { default as VCol } from './VCol'
+export { default as VRow } from './VRow'
+export { default as VSpacer } from './VSpacer'

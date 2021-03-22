@@ -1,8 +1,8 @@
 // Utilities
-import { reactive, provide, inject, computed, onBeforeUnmount, toRef, onMounted } from 'vue'
-import { wrapInArray, getUid, deepEqual } from '@/util/helpers'
 import { consoleWarn } from '@/util/console'
+import { reactive, provide, inject, computed, onBeforeUnmount, toRef, onMounted } from 'vue'
 import { useProxiedModel } from './proxiedModel'
+import { wrapInArray, getUid, deepEqual } from '@/util/helpers'
 
 // Types
 import type { Ref, UnwrapRef, InjectionKey } from 'vue'
@@ -30,6 +30,7 @@ interface GroupProvide {
   next: () => void
 }
 
+// Composables
 export function useGroupItem (
   props: { value?: unknown, index?: number, disabled?: boolean },
   injectKey: InjectionKey<GroupProvide>,

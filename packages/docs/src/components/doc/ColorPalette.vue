@@ -47,9 +47,7 @@
                   cols="8"
                   class="caption"
                 >
-                  <span v-if="key !== 'shades'">{{ key }}&nbsp;</span>
-
-                  <span v-if="key2 !== 'base'">{{ key2.replace(/(.*)(\d)/, '$1-$2') }}</span>
+                  <span>{{ getColorName(key, key2) }}</span>
                 </v-col>
 
                 <v-col
@@ -119,6 +117,15 @@
         ) return 'black--text'
 
         return 'white--text'
+      },
+      getColorName (key, key2) {
+        let name = key === 'shades' ? key2 : key
+
+        if (key !== 'shades' && key2 !== 'base') {
+          name += `-${key2.replace(/(.*)(\d)/, '$1-$2')}`
+        }
+
+        return name
       },
     },
   }

@@ -26,6 +26,9 @@
   &--fixed
     z-index: $navigation-drawer-fixed-z-index
 
+  &--rounded
+    @include rounded($navigation-drawer-rounded-border-radius)
+
   &--start
     @include ltr()
       border-right-width: $navigation-drawer-border-thin-width

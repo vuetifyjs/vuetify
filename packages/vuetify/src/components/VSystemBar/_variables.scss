@@ -11,6 +11,7 @@ $system-bar-icon-font-size: 16px !default;
 $system-bar-lights-out-background: rgba(var(--v-theme-background), 0.7) !default;
 $system-bar-padding: 0 8px !default;
 $system-bar-positions: absolute fixed !default;
+$system-bar-rounded-border-radius: map-get($rounded, 0) !default;
 $system-bar-window-height: 32px !default;
 $system-bar-window-icon-font-size: 20px !default;
 

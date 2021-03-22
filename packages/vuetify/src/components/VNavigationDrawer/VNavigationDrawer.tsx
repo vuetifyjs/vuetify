@@ -3,10 +3,10 @@ import './VNavigationDrawer.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeBorderRadiusProps, useBorderRadius } from '@/composables/border-radius'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makePositionProps, usePosition } from '@/composables/position'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTheme } from '@/composables/theme'
@@ -20,12 +20,6 @@ export default defineComponent({
   name: 'VNavigationDrawer',
 
   props: makeProps({
-    ...makeBorderProps(),
-    ...makeBorderRadiusProps(),
-    ...makeElevationProps(),
-    ...makeLayoutItemProps(),
-    ...makePositionProps(),
-    ...makeTagProps({ tag: 'nav' }),
     expandOnHover: Boolean,
     mobile: Boolean,
     modelValue: Boolean,
@@ -41,14 +35,20 @@ export default defineComponent({
       type: [Number, String],
       default: 256,
     },
+    ...makeBorderProps(),
+    ...makeElevationProps(),
+    ...makeLayoutItemProps(),
+    ...makePositionProps(),
+    ...makeRoundedProps(),
+    ...makeTagProps({ tag: 'nav' }),
   }),
 
   setup (props, { slots }) {
+    const { themeClasses } = useTheme()
     const { borderClasses } = useBorder(props, 'v-navigation-drawer')
-    const { borderRadiusClasses } = useBorderRadius(props)
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-navigation-drawer')
-    const { themeClasses } = useTheme()
+    const { roundedClasses } = useRounded(props, 'v-navigation-drawer')
 
     const isActive = useProxiedModel(props, 'modelValue')
     const isHovering = ref(false)
@@ -96,11 +96,11 @@ export default defineComponent({
               'v-navigation-drawer--start': props.left || !props.right,
               'v-navigation-drawer--temporary': props.temporary || props.mobile,
             },
+            themeClasses.value,
             borderClasses.value,
-            borderRadiusClasses.value,
             elevationClasses.value,
             positionClasses.value,
-            themeClasses.value,
+            roundedClasses.value,
           ]}
           style={[
             layoutStyles.value,

@@ -9,11 +9,11 @@
 
 // Put the loop in a function so it can't leak
 @each $color_name, $color_value in $shades {
-  .v-application .#{$color_name} {
+  .bg-#{$color_name} {
     @include background-color($color_value);
   }
 
-  .v-application .#{$color_name}--text {
+  .text-#{$color_name} {
     @include text-color($color_value);
   }
 }
@@ -22,20 +22,20 @@
   @each $color_name, $color_color in $colors {
     @each $color_type, $color_value in $color_color {
       @if ($color_type == 'base') {
-        .v-application .#{$color_name} {
+        .bg-#{$color_name} {
           @include background-color($color_value);
         }
 
-        .v-application .#{$color_name}--text {
+        .text-#{$color_name} {
           @include text-color($color_value);
         }
       }
       @else if ($color_type != 'shades') {
-        .v-application .#{$color_name}.#{$color_type} {
+        .bg-#{$color_name}-#{$color_type} {
           @include background-color($color_value);
         }
 
-        .v-application .#{$color_name}--text.text--#{$color_type} {
+        .text-#{$color_name}-#{$color_type} {
           @include text-color($color_value);
         }
       }

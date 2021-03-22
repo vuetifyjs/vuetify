@@ -1,3 +1,4 @@
+// Utilities
 import { computed } from 'vue'
 import propsFactory from '@/util/propsFactory'
 
@@ -6,6 +7,7 @@ export interface ElevationProps {
   elevation?: number | string | null
 }
 
+// Composables
 export const makeElevationProps = propsFactory({
   elevation: {
     type: [Number, String],
@@ -23,7 +25,6 @@ export const makeElevationProps = propsFactory({
   },
 }, 'elevation')
 
-// Effect
 export function useElevation (props: ElevationProps) {
   const elevationClasses = computed(() => {
     const classes: string[] = []
