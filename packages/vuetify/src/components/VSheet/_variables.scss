@@ -7,12 +7,8 @@ $sheet-border-width: 0 !default;
 $sheet-elevation: 0 !default;
 $sheet-positions: absolute fixed !default;
 
-$sheet-border: () !default;
-$sheet-border: map-deep-merge(
-  (
-    'border-color': $sheet-border-color,
-    'border-style': $sheet-border-style,
-    'border-width': $sheet-border-width,
-  ),
-  $sheet-border
-);
+$sheet-border: (
+  $sheet-border-color,
+  $sheet-border-style,
+  $sheet-border-width
+) !default;
