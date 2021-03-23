@@ -265,6 +265,7 @@ export default mixins<options &
         on: {
           click: this.onSliderClick,
           mousedown: this.onSliderMouseDown,
+          touchstart: this.onSliderMouseDown,
         },
       }, this.genChildren())
     },
@@ -465,14 +466,11 @@ export default mixins<options &
         }, 300)
       }
 
-      if ('touches' in e) {
-        this.app.addEventListener('touchmove', this.onMouseMove, mouseMoveOptions)
-        addOnceEventListener(this.app, 'touchend', this.onSliderMouseUp, mouseUpOptions)
-      } else {
-        this.onMouseMove(e)
-        this.app.addEventListener('mousemove', this.onMouseMove, mouseMoveOptions)
-        addOnceEventListener(this.app, 'mouseup', this.onSliderMouseUp, mouseUpOptions)
-      }
+      const isTouchEvent = 'touches' in e
+
+      this.onMouseMove(e)
+      this.app.addEventListener(isTouchEvent ? 'touchmove' : 'mousemove', this.onMouseMove, mouseMoveOptions)
+      addOnceEventListener(this.app, isTouchEvent ? 'touchend' : 'mouseup', this.onSliderMouseUp, mouseUpOptions)
 
       this.$emit('start', this.internalValue)
     },

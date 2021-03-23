@@ -294,14 +294,19 @@ describe('VSlider.ts', () => {
     expect(wrapper.vm.thumbPressed).toBe(false)
     expect(wrapper.vm.isActive).toBe(false)
 
-    container.trigger('mousedown', {
-      touches: [],
+    container.trigger('touchstart', {
+      touches: [{}],
     })
 
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.thumbPressed).toBe(true)
     expect(wrapper.vm.isActive).toBe(true)
+
+    el.dispatchEvent(new Event('touchend'))
+
+    expect(wrapper.vm.thumbPressed).toBe(false)
+    expect(wrapper.vm.isActive).toBe(false)
   })
 
   it('should return a rounded value', () => {

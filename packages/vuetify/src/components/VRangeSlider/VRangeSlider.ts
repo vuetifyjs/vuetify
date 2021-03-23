@@ -192,14 +192,11 @@ export default VSlider.extend({
       const mouseUpOptions = passiveSupported ? { passive: true, capture: true } : true
       const mouseMoveOptions = passiveSupported ? { passive: true } : false
 
-      if ('touches' in e) {
-        this.app.addEventListener('touchmove', this.onMouseMove, mouseMoveOptions)
-        addOnceEventListener(this.app, 'touchend', this.onSliderMouseUp, mouseUpOptions)
-      } else {
-        this.onMouseMove(e)
-        this.app.addEventListener('mousemove', this.onMouseMove, mouseMoveOptions)
-        addOnceEventListener(this.app, 'mouseup', this.onSliderMouseUp, mouseUpOptions)
-      }
+      const isTouchEvent = 'touches' in e
+
+      this.onMouseMove(e)
+      this.app.addEventListener(isTouchEvent ? 'touchmove' : 'mousemove', this.onMouseMove, mouseMoveOptions)
+      addOnceEventListener(this.app, isTouchEvent ? 'touchend' : 'mouseup', this.onSliderMouseUp, mouseUpOptions)
 
       this.$emit('start', this.internalValue)
     },
