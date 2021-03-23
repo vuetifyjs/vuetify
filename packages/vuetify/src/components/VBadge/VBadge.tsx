@@ -83,14 +83,14 @@ export default defineComponent({
         bottom: 'auto',
         left: 'auto',
         right: 'auto',
-        top: 'auto'
+        top: 'auto',
       }
-      
+
       if (!props.inline) {
         styles[horizontal === 'left' ? 'right' : 'left'] = calculatePosition(props.offsetX)
         styles[vertical === 'top' ? 'bottom' : 'top'] = calculatePosition(props.offsetY)
       }
-      
+
       return styles
     })
 
