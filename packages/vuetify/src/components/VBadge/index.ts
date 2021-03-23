@@ -1,4 +1,1 @@
-import VBadge from './VBadge'
-
-export { VBadge }
-export default VBadge
+export { default as VBadge } from './VBadge'

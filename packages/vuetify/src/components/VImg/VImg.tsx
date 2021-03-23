@@ -20,6 +20,9 @@ import { VResponsive } from '../VResponsive'
 import intersect from '@/directives/intersect'
 import type { ObserveDirectiveBinding } from '@/directives/intersect'
 
+// Composables
+import { makeTransitionProps } from '@/composables/transition'
+
 // Utils
 import { maybeTransition } from '@/util'
 import { useDirective } from '@/util/useDirective'
@@ -69,11 +72,7 @@ export default defineComponent({
       default: '',
     },
     srcset: String,
-    transition: {
-      type: [Boolean, String] as PropType<string | false>,
-      default: 'fade-transition',
-      validator: val => val !== true,
-    },
+    ...makeTransitionProps(),
   }),
 
   emits: ['loadstart', 'load', 'error'],
