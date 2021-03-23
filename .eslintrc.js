@@ -72,6 +72,10 @@ module.exports = {
     'no-prototype-builtins': 'off',
     'no-void': 'off',
     'no-case-declarations': 'off',
+    indent: ['error', 2, {
+      ...require('eslint-config-standard').rules.indent[2],
+      flatTernaryExpressions: true,
+    }],
 
     'sonarjs/cognitive-complexity': 'off',
     'sonarjs/no-duplicate-string': 'off',
