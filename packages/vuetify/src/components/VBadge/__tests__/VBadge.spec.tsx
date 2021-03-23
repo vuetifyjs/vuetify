@@ -5,7 +5,7 @@ import { VBadge } from '..'
 import { mount } from '@vue/test-utils'
 import { createVuetify } from '@/framework'
 
-describe('VBadge', () => {
+describe('VBadge.tsx', () => {
   const vuetify = createVuetify()
 
   function mountFunction (options?: any) {
