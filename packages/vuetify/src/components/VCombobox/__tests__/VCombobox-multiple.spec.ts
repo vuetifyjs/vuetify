@@ -455,4 +455,32 @@ describe('VCombobox.ts', () => {
     await wrapper.vm.$nextTick()
     expect(change).toHaveBeenLastCalledWith(['foo', 'bar'])
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/13274
+  it('should not add empty values', async () => {
+    const { wrapper, change } = createMultipleCombobox({
+      chips: true,
+      multiple: true,
+      items: ['foo'],
+      value: ['foo'],
+    })
+
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    // Add a value and then remove it
+    input.trigger('focus')
+    element.value = 'a'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+    element.value = ''
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+
+    // Lose focus
+    input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+
+    expect(change).not.toHaveBeenCalled()
+  })
 })
