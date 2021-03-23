@@ -79,16 +79,19 @@ export default defineComponent({
 
       // TODO: RTL support
 
-      return {
+      const styles = {
         bottom: 'auto',
         left: 'auto',
         right: 'auto',
-        top: 'auto',
-        ...(!props.inline ? {
-          [horizontal === 'left' ? 'right' : 'left']: calculatePosition(props.offsetX),
-          [vertical === 'top' ? 'bottom' : 'top']: calculatePosition(props.offsetY),
-        } : {}),
+        top: 'auto'
       }
+      
+      if (!props.inline) {
+        styles[horizontal === 'left' ? 'right' : 'left'] = calculatePosition(props.offsetX)
+        styles[vertical === 'top' ? 'bottom' : 'top'] = calculatePosition(props.offsetY)
+      }
+      
+      return styles
     })
 
     return () => {
