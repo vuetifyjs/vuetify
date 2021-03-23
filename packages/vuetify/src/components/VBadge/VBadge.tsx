@@ -96,11 +96,9 @@ export default defineComponent({
 
     return () => {
       const value = Number(props.content)
-      const content = (!props.max || isNaN(value))
-        ? props.content
-        : value <= props.max
-          ? value
-          : `${props.max}+`
+      const content = (!props.max || isNaN(value)) ? props.content
+        : value <= props.max ? value
+        : `${props.max}+`
 
       const [badgeAttrs, attrs] = extract(ctx.attrs, [
         'aria-atomic',
