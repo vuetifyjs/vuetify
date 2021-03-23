@@ -62,10 +62,12 @@
   &.v-text-field
     input
       flex: 1 1 // Doesn't resize on IE11 with 3rd param
-      margin-top: 0
       min-width: 0
       pointer-events: none
       position: relative
+      
+    &:not(.v-text-field--single-line) input
+      margin-top: 0
 
   @if $select-active-icon-flip
     &.v-select--is-menu-active

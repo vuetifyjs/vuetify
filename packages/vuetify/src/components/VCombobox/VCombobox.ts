@@ -214,10 +214,10 @@ export default VAutocomplete.extend({
 
       // If the user is not searching
       // and no menu item is selected
+      // or if the search is empty
       // do nothing
-      if (menuIndex < 0 &&
-        !this.searchIsDirty
-      ) return
+      if ((menuIndex < 0 && !this.searchIsDirty) ||
+          !this.internalSearch) return
 
       if (this.editingIndex > -1) {
         return this.updateEditing()

@@ -160,7 +160,7 @@
     "v-stepper-items",
     "v-stepper-step"
   ],  
-  "subheaders": ["v-subheader"],
+  "components/subheaders": ["v-subheader"],
   "components/switches": ["v-switch"],
   "components/system-bars": ["v-system-bar"],
   "components/tabs": [

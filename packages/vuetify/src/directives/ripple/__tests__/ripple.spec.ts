@@ -145,4 +145,18 @@ describe('ripple.ts', () => {
     jest.runAllTimers()
     expect(wrapper.findAll('.v-ripple__container')).toHaveLength(0)
   })
+
+  it('should hide ripple on blur if keyboardRipple is true', () => {
+    const wrapper = mountFunction()
+    const keydownEvent = new KeyboardEvent('keydown', { keyCode: 13 })
+    wrapper.element.dispatchEvent(keydownEvent)
+
+    expect(wrapper.find('.v-ripple__container').exists()).toBe(true)
+
+    const blurEvent = new FocusEvent('blur')
+    wrapper.element.dispatchEvent(blurEvent)
+
+    jest.runAllTimers()
+    expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
+  })
 })
