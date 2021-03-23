@@ -30,7 +30,9 @@ export default defineComponent({
         ]}
         data-app="true"
       >
-        <div class="v-application__wrap" v-slots={ slots } />
+        <div class="v-application__wrap">
+          { slots.default?.() }
+        </div>
       </div>
     )
   },
