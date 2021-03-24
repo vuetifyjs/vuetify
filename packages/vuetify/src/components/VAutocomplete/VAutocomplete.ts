@@ -99,7 +99,7 @@ export default VSelect.extend({
         return this.lazySearch
       },
       set (val: any) { // TODO: this should be `string | null` but it breaks lots of other types
-        // only emit update event when the new 
+        // emit update event only when the new
         // search value is different from previous
         if (this.lazySearch !== val) {
           this.lazySearch = val
