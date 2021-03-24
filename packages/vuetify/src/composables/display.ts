@@ -11,9 +11,9 @@ import { mergeDeep } from '@/util'
 export type DisplayBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 export interface DisplayOptions {
-  mobileBreakpoint?: number | DisplayBreakpoint
-  scrollBarWidth?: number
-  thresholds?: Partial<DisplayThresholds>
+  mobileBreakpoint: number | DisplayBreakpoint
+  scrollBarWidth: number
+  thresholds: DisplayThresholds
 }
 
 export interface DisplayThresholds {
@@ -25,29 +25,31 @@ export interface DisplayThresholds {
 }
 
 export interface DisplayInstance {
-  height: Ref<number>
-  lg: boolean
-  lgAndDown: boolean
-  lgAndUp: boolean
-  lgOnly: boolean
-  md: boolean
-  mdAndDown: boolean
-  mdAndUp: boolean
-  mdOnly: boolean
-  name: DisplayBreakpoint
-  sm: boolean
-  smAndDown: boolean
-  smAndUp: boolean
-  smOnly: boolean
-  xl: boolean
-  xlOnly: boolean
-  xs: boolean
-  xsOnly: boolean
-  mobile: boolean
-  mobileBreakpoint: number | DisplayBreakpoint
-  thresholds: DisplayThresholds
-  scrollBarWidth: number
-  width: Ref<number>
+  display: Ref<{
+    height: number
+    lg: boolean
+    lgAndDown: boolean
+    lgAndUp: boolean
+    lgOnly: boolean
+    md: boolean
+    mdAndDown: boolean
+    mdAndUp: boolean
+    mdOnly: boolean
+    name: DisplayBreakpoint
+    sm: boolean
+    smAndDown: boolean
+    smAndUp: boolean
+    smOnly: boolean
+    xl: boolean
+    xlOnly: boolean
+    xs: boolean
+    xsOnly: boolean
+    mobile: boolean
+    mobileBreakpoint: number | DisplayBreakpoint
+    thresholds: DisplayThresholds
+    scrollBarWidth: number
+    width: number
+  }>
 }
 
 export const VuetifyDisplaySymbol: InjectionKey<DisplayInstance> = Symbol.for('vuetify:display')
@@ -67,8 +69,8 @@ const defaultDisplayOptions: DisplayOptions = {
 
 // need lookup table that matches user agents to sizes
 
-const parseDisplayOptions = (options: DisplayOptions = defaultDisplayOptions) => {
-  return mergeDeep(defaultDisplayOptions, options)
+const parseDisplayOptions = (options: Partial<DisplayOptions> = defaultDisplayOptions) => {
+  return mergeDeep(defaultDisplayOptions, options) as DisplayOptions
 }
 
 // Cross-browser support as described in:
@@ -90,25 +92,11 @@ function getClientHeight () {
   )
 }
 
-export function useWindow () {
-  return {
-    height: ref(getClientHeight()),
-    width: ref(getClientWidth()),
-  }
-}
-
 export function createDisplay (options?: Partial<DisplayOptions>): DisplayInstance {
-  const { height, width } = useWindow()
-  const { mobileBreakpoint, scrollBarWidth, thresholds } = parseDisplayOptions(options)
+  const { thresholds, mobileBreakpoint, scrollBarWidth } = parseDisplayOptions(options)
 
-  const xs = width.value < thresholds.xs
-  const sm = width.value < thresholds.sm && !xs
-  const md = width.value < (thresholds.md - scrollBarWidth) && !(sm || xs)
-  const lg = width.value < (thresholds.lg - scrollBarWidth) && !(md || sm || xs)
-  const xl = width.value >= (thresholds.lg - scrollBarWidth)
-  const name = xs ? 'xs' : sm ? 'sm' : md ? 'md' : lg ? 'lg' : 'xl'
-  const breakpoint = Number(mobileBreakpoint)
-  const mobile = width.value < (!isNaN(breakpoint) ? breakpoint : thresholds[mobileBreakpoint])
+  const width = ref(getClientWidth())
+  const height = ref(getClientHeight())
 
   function onResize () {
     height.value = getClientHeight()
@@ -116,13 +104,22 @@ export function createDisplay (options?: Partial<DisplayOptions>): DisplayInstan
   }
 
   const display = computed(() => {
+    const xs = width.value < thresholds.xs
+    const sm = width.value < thresholds.sm && !xs
+    const md = width.value < (thresholds.md - scrollBarWidth) && !(sm || xs)
+    const lg = width.value < (thresholds.lg - scrollBarWidth) && !(md || sm || xs)
+    const xl = width.value >= (thresholds.lg - scrollBarWidth)
+    const name = xs ? 'xs' : sm ? 'sm' : md ? 'md' : lg ? 'lg' : 'xl' as DisplayBreakpoint
+    const breakpointValue = typeof mobileBreakpoint === 'number' ? mobileBreakpoint : thresholds[mobileBreakpoint]
+    const mobile = width.value < (breakpointValue - scrollBarWidth)
+
     return {
       xs,
       sm,
       md,
       lg,
       xl,
-      height,
+      height: height.value,
       xsOnly: xs,
       smOnly: sm,
       smAndDown: (xs || sm) && !(md || lg || xl),
@@ -139,7 +136,7 @@ export function createDisplay (options?: Partial<DisplayOptions>): DisplayInstan
       thresholds,
       mobileBreakpoint,
       scrollBarWidth,
-      width,
+      width: width.value,
     }
   })
 
