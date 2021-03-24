@@ -1,7 +1,7 @@
 // Utilities
 import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef } from 'vue'
 import { useProxiedModel } from './proxiedModel'
-import { consoleWarn, deepEqual, getUid, wrapInArray } from '@/util'
+import { consoleWarn, deepEqual, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { InjectionKey, Ref, UnwrapRef } from 'vue'
@@ -17,6 +17,7 @@ interface GroupProps {
   multiple?: boolean
   mandatory?: boolean
   max?: number
+  selectedClass?: string
 }
 
 interface GroupProvide {
@@ -27,11 +28,33 @@ interface GroupProvide {
   isSelected: (id: number) => boolean
   prev: () => void
   next: () => void
+  selectedClass: Ref<string | undefined>
 }
+
+export const makeGroupProps = propsFactory({
+  modelValue: {
+    type: [Number, Boolean, String, Array, Object],
+    default: undefined,
+  },
+  multiple: Boolean,
+  mandatory: Boolean,
+  max: Number,
+  selectedClass: String,
+}, 'group')
+
+export const makeGroupItemProps = propsFactory({
+  value: {
+    type: [Number, Boolean, String, Object],
+    default: undefined,
+  },
+  index: Number,
+  disabled: Boolean,
+  selectedClass: String,
+}, 'group-item')
 
 // Composables
 export function useGroupItem (
-  props: { value?: unknown, index?: number, disabled?: boolean },
+  props: { value?: unknown, index?: number, disabled?: boolean, selectedClass?: string },
   injectKey: InjectionKey<GroupProvide>,
 ) {
   const group = inject(injectKey, null)
@@ -56,10 +79,13 @@ export function useGroupItem (
     return group.isSelected(id)
   })
 
+  const selectedClass = computed(() => isSelected.value && (group.selectedClass.value ?? props.selectedClass))
+
   return {
     isSelected,
     toggle: () => group.select(id, !isSelected.value),
     select: (value: boolean) => group.select(id, value),
+    selectedClass,
   }
 }
 
@@ -169,6 +195,7 @@ export function useGroup (
     next: () => selected.value = [getOffsetId(1)],
     step: (steps: number) => selected.value = [getOffsetId(steps)],
     isSelected: (id: number) => selected.value.includes(id),
+    selectedClass: computed(() => props.selectedClass),
   }
 
   provide(injectKey, state)
