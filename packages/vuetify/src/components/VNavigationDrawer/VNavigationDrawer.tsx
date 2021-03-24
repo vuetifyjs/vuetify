@@ -9,6 +9,7 @@ import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useDisplay } from '@/composables/display'
 import { useTheme } from '@/composables/theme'
 
 // Utilities
@@ -45,6 +46,7 @@ export default defineComponent({
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme()
+    const { display } = useDisplay()
     const { borderClasses } = useBorder(props, 'v-navigation-drawer')
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-navigation-drawer')
@@ -52,6 +54,7 @@ export default defineComponent({
 
     const isActive = useProxiedModel(props, 'modelValue')
     const isHovering = ref(false)
+    const isMobile = display.value.mobile
     const size = computed(() => Number(props.rail ? props.railWidth : props.width))
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)
@@ -77,7 +80,7 @@ export default defineComponent({
     return () => {
       const hasImg = (slots.img || props.src)
       const translate = (
-        (props.permanent || isActive.value ? 0 : 100) * (!props.right && !props.bottom ? -1 : 1)
+        (!props.permanent && !isActive.value && !isMobile ? 100 : 0) * (!props.right && !props.bottom ? -1 : 1)
       )
 
       return (
@@ -91,7 +94,7 @@ export default defineComponent({
               'v-navigation-drawer--end': props.right,
               'v-navigation-drawer--expand-on-hover': props.expandOnHover,
               'v-navigation-drawer--is-hovering': isHovering.value,
-              'v-navigation-drawer--is-mobile': props.mobile,
+              'v-navigation-drawer--is-mobile': props.mobile || isMobile,
               'v-navigation-drawer--rail': props.rail,
               'v-navigation-drawer--start': props.left || !props.right,
               'v-navigation-drawer--temporary': props.temporary || props.mobile,
