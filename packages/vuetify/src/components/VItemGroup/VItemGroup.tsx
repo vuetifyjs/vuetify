@@ -22,7 +22,6 @@ export default defineComponent({
   }),
 
   setup (props, { slots }) {
-    console.log(props)
     const { isSelected, select, next, prev, step, selected } = useGroup(props, VItemGroupSymbol)
 
     return () => (
