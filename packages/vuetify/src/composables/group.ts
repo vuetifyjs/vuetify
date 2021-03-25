@@ -131,6 +131,16 @@ export function useGroup (
     items.splice(index, 1)
   }
 
+  watch(() => props.multiple, multiple => {
+    if (props.modelValue == null) return
+
+    if (multiple && !Array.isArray(props.modelValue)) {
+      selected.value = [...selected.value]
+    } else if (!multiple && Array.isArray(props.modelValue)) {
+      selected.value = selected.value.slice(0, 1)
+    }
+  }, { immediate: true })
+
   onMounted(() => {
     // If mandatory and nothing is selected, then select first non-disabled item
     const item = items.find(item => !item.disabled)
