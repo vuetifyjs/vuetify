@@ -143,10 +143,11 @@ export function useGroup (
 
   onMounted(() => {
     // If mandatory and nothing is selected, then select first non-disabled item
-    const item = items.find(item => !item.disabled)
-    if (item && props.mandatory && !selected.value.length) {
-      selected.value = [item.id]
-    }
+    // TODO: This should probably be behind prop?
+    // const item = items.find(item => !item.disabled)
+    // if (item && props.mandatory && !selected.value.length) {
+    //   selected.value = [item.id]
+    // }
   })
 
   onBeforeUnmount(() => {
