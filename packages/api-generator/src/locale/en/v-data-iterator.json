@@ -16,7 +16,7 @@
     "itemsPerPage": "Changes how many items per page should be visible. Can be used with `.sync` modifier",
     "loading": "If `true` and no items are provided, then a loading text will be shown",
     "loadingText": "Text shown when `loading` is true and no items are provided",
-    "locale": "Sets the locale of component. Used for translating internal text strings.",
+    "locale": "Sets the locale used for sorting. This is passed into [`Intl.Collator()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator) in the default `customSort` function",
     "mobileBreakpoint": "Used to set when to toggle between regular table and mobile view",
     "multiSort": "If `true` then one can sort on multiple properties",
     "mustSort": "If `true` then one can not disable sorting, it will always switch between ascending and descending",

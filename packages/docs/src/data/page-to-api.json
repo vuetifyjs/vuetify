@@ -54,7 +54,7 @@
   ],
   "components/chips": ["v-chip"],
   "components/color-pickers": ["v-color-picker"],
-  "components/combobox": ["v-combo-box"],
+  "components/combobox": ["v-combobox"],
   "components/data-iterators": [
     "v-data-iterator",
     "v-data-footer"

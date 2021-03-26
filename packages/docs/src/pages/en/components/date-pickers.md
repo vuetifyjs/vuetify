@@ -99,7 +99,7 @@ By default days from previous and next months are not visible. They can be displ
 
 #### Width
 
-You can specify allowed the picker's width or make it full width.
+You can specify the picker's width or make it full width.
 
 <example file="v-date-picker/prop-width" />
 

@@ -29,7 +29,11 @@ declare global {
   }
 
   interface HTMLElement {
-    _clickOutside?: EventListenerOrEventListenerObject
+    _clickOutside?: {
+      lastMousedownWasOutside: boolean
+      onClick: EventListener
+      onMousedown: EventListener
+    }
     _onResize?: {
       callback: () => void
       options?: boolean | AddEventListenerOptions

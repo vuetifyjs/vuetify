@@ -11,12 +11,11 @@
           color="grey lighten-3"
           height="424"
         >
-          <v-sheet-footer>
+          <sheet-footer>
             #1: (3r x 2c)
-          </v-sheet-footer>
+          </sheet-footer>
         </v-sheet>
       </v-col>
-
       <v-col
         class="d-flex"
         cols="12"
@@ -29,9 +28,9 @@
               color="green lighten-3"
               height="150"
             >
-              <v-sheet-footer>
+              <sheet-footer>
                 #2: (1r x 1c)
-              </v-sheet-footer>
+              </sheet-footer>
             </v-sheet>
           </v-col>
 
@@ -41,9 +40,9 @@
               color="yellow lighten-3"
               height="150"
             >
-              <v-sheet-footer>
+              <sheet-footer>
                 #3: (1r x 1c)
-              </v-sheet-footer>
+              </sheet-footer>
             </v-sheet>
           </v-col>
 
@@ -53,9 +52,9 @@
               color="red lighten-3"
               height="250"
             >
-              <v-sheet-footer>
+              <sheet-footer>
                 #5: (2r x 2c)
-              </v-sheet-footer>
+              </sheet-footer>
             </v-sheet>
           </v-col>
         </v-row>
@@ -70,9 +69,9 @@
           color="teal lighten-3"
           height="300"
         >
-          <v-sheet-footer>
+          <sheet-footer>
             #4: (2r x 1c)
-          </v-sheet-footer>
+          </sheet-footer>
         </v-sheet>
       </v-col>
 
@@ -86,9 +85,9 @@
           color="purple lighten-3"
           height="300"
         >
-          <v-sheet-footer>
+          <sheet-footer>
             #6: (2r x 1c)
-          </v-sheet-footer>
+          </sheet-footer>
         </v-sheet>
       </v-col>
     </v-row>
@@ -99,7 +98,7 @@
   export default {
     components: {
       // A simple helper component
-      VSheetFooter: {
+      SheetFooter: {
         functional: true,
 
         render (h, { children }) {

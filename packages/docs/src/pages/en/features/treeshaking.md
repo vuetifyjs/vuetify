@@ -87,7 +87,7 @@ module.exports = {
 
 ## Required styles
 
-When you import from `vuetify/lib` the baseline framework styles are pulled in as well. Each component is individually responsible for their styles and will be compiled just the same. If you are using Vue CLI and the `vue-cli-plugin-vuetify` plugin, this is done for you automatically and you can **skip** this section. If you are working in a project where you do not have access to the cli, you can manually included the required packages:
+When you import from `vuetify/lib`, the baseline framework styles are pulled in as well. Each component is individually responsible for its styles and will be compiled just the same. If you are using Vue CLI and the `vue-cli-plugin-vuetify` plugin, this is done for you automatically, and you can **skip** this section. If you are working on a project where you do not have access to the cli, you can manually include the required packages:
 
 ```bash
 yarn add sass sass-loader deepmerge -D
@@ -105,11 +105,11 @@ npm install sass sass-loader deepmerge -D
 
 </alert>
 
-After installation you will still need to configure your webpack.config.js to parse .sass files. For more information on how to do this, checkout the [official documentation](https://webpack.js.org/loaders/sass-loader/).
+After the installation, you will still need to configure your webpack.config.js to parse .sass files. For more information on how to do this, checkout the [official documentation](https://webpack.js.org/loaders/sass-loader/).
 
 ## Custom dynamic imports
 
-The vuetify-loader also allows you to write your own custom match functions to import your own project's components as well. This can be done in both Vue CLI and webpack projects.
+The `vuetify-loader` also allows you to write your own custom match functions to import your own project's components as well. This can be done in both Vue CLI and webpack projects.
 
 ```js
 // vue.config.js

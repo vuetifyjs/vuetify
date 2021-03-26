@@ -179,6 +179,23 @@ describe('VDataTable.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render with foot slot', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        itemsPerPage: 5,
+      },
+      scopedSlots: {
+        foot (props) {
+          return this.$createElement('tfoot', [props.items.length])
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it.skip('should render virtual table', () => {
     const wrapper = mountFunction({
       propsData: {
@@ -395,6 +412,22 @@ describe('VDataTable.ts', () => {
     expect(fn).toHaveBeenCalledWith(expect.objectContaining({
       page: 2,
     }))
+  })
+
+  it('should render footer.prepend slot content', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: [],
+        items: [{}],
+      },
+      scopedSlots: {
+        'footer.prepend' () {
+          return this.$createElement('div', ['footer.prepend slot content'])
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render footer.page-text slot content', () => {

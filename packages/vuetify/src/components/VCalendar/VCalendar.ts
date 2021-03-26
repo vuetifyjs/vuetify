@@ -293,11 +293,11 @@ export default CalendarWithEvents.extend({
     },
     getCategoryList (categories: CalendarCategory[]): CalendarCategory[] {
       if (!this.noEvents) {
-        const categoryMap = categories.reduce((map, category, index) => {
+        const categoryMap: any = categories.reduce((map: any, category, index) => {
           if (typeof category === 'object' && category.categoryName) map[category.categoryName] = { index, count: 0 }
 
           return map
-        }, Object.create(null))
+        }, {})
 
         if (!this.categoryHideDynamic || !this.categoryShowAll) {
           let categoryLength = categories.length
