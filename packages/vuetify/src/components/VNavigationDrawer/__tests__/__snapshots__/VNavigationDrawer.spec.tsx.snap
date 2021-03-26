@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VNavigationDrawer should match a snapshot 1`] = `
-<nav class="v-navigation-drawer v-navigation-drawer--start v-theme--light"
-     style="left: 0px; margin-left: 0px; margin-top: 0px; margin-bottom: 0px; position: absolute; width: 256px; z-index: 2; transform: translateX(0%);"
+<nav class="v-navigation-drawer v-navigation-drawer--start v-navigation-drawer--temporary v-theme--light"
+     style="left: 0px; margin-left: 0px; margin-top: 0px; margin-bottom: 0px; position: absolute; width: 256px; z-index: 2; transform: translateX(-105%);"
 >
   <div class="v-navigation-drawer__content">
   </div>

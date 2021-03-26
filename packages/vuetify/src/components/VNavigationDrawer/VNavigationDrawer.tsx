@@ -13,7 +13,7 @@ import { useDisplay } from '@/composables/display'
 import { useTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, defineComponent, onBeforeMount, ref, toRef } from 'vue'
+import { computed, defineComponent, onBeforeMount, ref, toRef, watch } from 'vue'
 import { convertToUnit } from '@/util/helpers'
 import makeProps from '@/util/makeProps'
 
@@ -21,8 +21,8 @@ export default defineComponent({
   name: 'VNavigationDrawer',
 
   props: makeProps({
+    disableResizeWatcher: Boolean,
     expandOnHover: Boolean,
-    mobile: Boolean,
     modelValue: Boolean,
     permanent: Boolean,
     rail: Boolean,
@@ -54,33 +54,40 @@ export default defineComponent({
 
     const isActive = useProxiedModel(props, 'modelValue')
     const isHovering = ref(false)
-    const isMobile = display.value.mobile
     const size = computed(() => Number(props.rail ? props.railWidth : props.width))
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)
         ? props.width
         : size.value
     })
+    const isMobile = computed(() => display.value.mobile)
+    const isTemporary = computed(() => !props.permanent && (isMobile.value || props.temporary))
     const layoutStyles = useLayoutItem(
       props.name,
       toRef(props, 'priority'),
       computed(() => props.right ? 'right' : 'left'),
-      computed(() => {
-        return (
-          props.permanent ||
-          (isActive.value && !props.temporary)
-        ) ? size.value : 0
-      }),
+      computed(() => !isTemporary.value ? size.value : 0),
     )
 
+    if (!props.disableResizeWatcher) {
+      watch(isMobile, val => !props.permanent && (isActive.value = !val))
+    }
+
+    watch(props, val => {
+      if (val.permanent) isActive.value = true
+    })
+
     onBeforeMount(() => {
-      if (isActive.value == null) isActive.value = !props.mobile
+      if (props.modelValue != null) return
+
+      isActive.value = !isMobile.value
     })
 
     return () => {
       const hasImg = (slots.img || props.src)
       const translate = (
-        (!props.permanent && !isActive.value && !isMobile ? 100 : 0) * (!props.right && !props.bottom ? -1 : 1)
+        (!props.permanent && !isActive.value ? 105 : 0) *
+        (!props.right && !props.bottom ? -1 : 1)
       )
 
       return (
@@ -94,10 +101,9 @@ export default defineComponent({
               'v-navigation-drawer--end': props.right,
               'v-navigation-drawer--expand-on-hover': props.expandOnHover,
               'v-navigation-drawer--is-hovering': isHovering.value,
-              'v-navigation-drawer--is-mobile': props.mobile || isMobile,
               'v-navigation-drawer--rail': props.rail,
               'v-navigation-drawer--start': props.left || !props.right,
-              'v-navigation-drawer--temporary': props.temporary || props.mobile,
+              'v-navigation-drawer--temporary': isTemporary.value,
             },
             themeClasses.value,
             borderClasses.value,
