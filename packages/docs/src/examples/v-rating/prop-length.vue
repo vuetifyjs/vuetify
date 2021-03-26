@@ -2,7 +2,7 @@
   <div class="text-center">
     <v-slider
       v-model="length"
-      color="red darken-4"
+      color="red-darken-4"
       min="1"
       max="15"
       label="Custom length"
@@ -10,9 +10,8 @@
     <v-rating
       v-model="rating"
       :length="length"
-      color="red lighten-3"
-      background-color="grey lighten-1"
-      large
+      color="red-lighten-3"
+      background-color="grey-lighten-1"
     ></v-rating>
     <div>
       <span class="text-caption text-uppercase">model:</span>

@@ -35,8 +35,8 @@
       <v-rating
         v-model="rating"
         background-color="white"
-        color="yellow accent-4"
-        dense
+        color="yellow-accent-4"
+        density="compact"
         half-increments
         hover
         size="18"

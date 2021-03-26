@@ -1,21 +1,326 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VRating.ts should render a scoped slot 1`] = `
+exports[`VRating.ts should change icon on hover 1`] = `
 <div class="v-rating">
-  <span>
-    foobar
-  </span>
-  <span>
-    foobar
-  </span>
-  <span>
-    foobar
-  </span>
-  <span>
-    foobar
-  </span>
-  <span>
-    foobar
-  </span>
+  <div class="v-rating__item">
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-primary v-btn--density-default v-btn--size-default"
+            aria-label="1"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+  <div class="v-rating__item">
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-primary v-btn--density-default v-btn--size-default"
+            aria-label="2"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+  <div class="v-rating__item">
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-primary v-btn--density-default v-btn--size-default"
+            aria-label="3"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+  <div class="v-rating__item">
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-accent v-btn--density-default v-btn--size-default"
+            aria-label="4"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+  <div class="v-rating__item">
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-accent v-btn--density-default v-btn--size-default"
+            aria-label="5"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`VRating.ts should render a scoped item slot 1`] = `
+<div class="v-rating">
+  <div class="v-rating__item">
+    <div>
+      0
+    </div>
+  </div>
+  <div class="v-rating__item">
+    <div>
+      1
+    </div>
+  </div>
+  <div class="v-rating__item">
+    <div>
+      2
+    </div>
+  </div>
+  <div class="v-rating__item">
+    <div>
+      3
+    </div>
+  </div>
+  <div class="v-rating__item">
+    <div>
+      4
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VRating.ts should render a scoped item-label slot 1`] = `
+<div class="v-rating">
+  <div class="v-rating__item">
+    <span>
+      foo
+    </span>
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-accent v-btn--density-default v-btn--size-default"
+            aria-label="1"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+  <div class="v-rating__item">
+    <span>
+      foo
+    </span>
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-accent v-btn--density-default v-btn--size-default"
+            aria-label="2"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+  <div class="v-rating__item">
+    <span>
+      foo
+    </span>
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-accent v-btn--density-default v-btn--size-default"
+            aria-label="3"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+  <div class="v-rating__item">
+    <span>
+      foo
+    </span>
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-accent v-btn--density-default v-btn--size-default"
+            aria-label="4"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+  <div class="v-rating__item">
+    <span>
+      foo
+    </span>
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-accent v-btn--density-default v-btn--size-default"
+            aria-label="5"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`VRating.ts should respond to prop value changes 1`] = `
+<div class="v-rating">
+  <div class="v-rating__item">
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-accent v-btn--density-default v-btn--size-default"
+            aria-label="1"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+  <div class="v-rating__item">
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-accent v-btn--density-default v-btn--size-default"
+            aria-label="2"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+  <div class="v-rating__item">
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-accent v-btn--density-default v-btn--size-default"
+            aria-label="3"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+  <div class="v-rating__item">
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-accent v-btn--density-default v-btn--size-default"
+            aria-label="4"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+  <div class="v-rating__item">
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-accent v-btn--density-default v-btn--size-default"
+            aria-label="5"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`VRating.ts should respond to prop value changes 2`] = `
+<div class="v-rating">
+  <div class="v-rating__item">
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-primary v-btn--density-default v-btn--size-default"
+            aria-label="1"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+  <div class="v-rating__item">
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-accent v-btn--density-default v-btn--size-default"
+            aria-label="2"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+  <div class="v-rating__item">
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-accent v-btn--density-default v-btn--size-default"
+            aria-label="3"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+  <div class="v-rating__item">
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-accent v-btn--density-default v-btn--size-default"
+            aria-label="4"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
+  <div class="v-rating__item">
+    <button type="button"
+            class="v-btn v-btn--icon v-theme--light text-accent v-btn--density-default v-btn--size-default"
+            aria-label="5"
+    >
+      <span class="v-btn__overlay">
+      </span>
+      <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default"
+         aria-hidden="true"
+      >
+      </i>
+    </button>
+  </div>
 </div>
 `;

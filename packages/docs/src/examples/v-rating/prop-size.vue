@@ -2,36 +2,36 @@
   <div class="text-center">
     <v-rating
       v-model="rating"
-      background-color="purple lighten-3"
+      background-color="purple-lighten-3"
       color="purple"
-      small
+      size="small"
     ></v-rating>
     <v-rating
       v-model="rating"
-      background-color="pink lighten-3"
+      background-color="pink-lighten-3"
       color="pink"
     ></v-rating>
     <v-rating
       v-model="rating"
-      background-color="orange lighten-3"
+      background-color="orange-lighten-3"
       color="orange"
-      medium
+      size="medium"
     ></v-rating>
     <v-rating
       v-model="rating"
-      background-color="green lighten-3"
+      background-color="green-lighten-3"
       color="green"
-      large
+      size="large"
     ></v-rating>
     <v-rating
       v-model="rating"
-      background-color="red lighten-3"
+      background-color="red-lighten-3"
       color="red"
-      x-large
+      size="x-large"
     ></v-rating>
     <v-rating
       v-model="rating"
-      background-color="indigo lighten-3"
+      background-color="indigo-lighten-3"
       color="indigo"
       size="64"
     ></v-rating>

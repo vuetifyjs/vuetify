@@ -15,11 +15,13 @@ The rating component is a specialized but crucial piece in building user widgets
 
 <entry-ad />
 
+<!--
 ## Usage
 
 The `v-rating` component provides a simple interface for gathering user feedback.
 
 <usage name="v-rating" />
+-->
 
 ## API
 
@@ -37,13 +39,13 @@ The `v-rating` component can be colored as you want, you can set both selected a
 
 #### Length
 
-Sometimes an application will call for a customized implementation. Easily change length or displayed icons.
+You can asily change the number of items using the **length** prop.
 
 <example file="v-rating/prop-length" />
 
 #### Incremented
 
-A rating can have 3 defined icons, **full-icon**, **half-icon** (with the **half-increments** prop) and **empty-icon**.
+A `v-rating` component can have 3 defined icons, **full-icon**, **half-icon** (with the **half-increments** prop) and **empty-icon**.
 
 <example file="v-rating/prop-half-increments" />
 
@@ -53,9 +55,9 @@ Utilize the same sizing classes available in `v-icon` or provide your own with t
 
 <example file="v-rating/prop-size" />
 
-#### Icon Label
+#### Aria Label
 
-Provide a label to assistive technologies for icons.
+Provide a label to assistive technologies for each item.
 
 <example file="v-rating/prop-icon-label" />
 

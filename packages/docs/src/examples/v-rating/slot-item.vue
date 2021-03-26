@@ -3,9 +3,9 @@
     <v-rating v-model="rating">
       <template v-slot:item="props">
         <v-icon
-          :color="props.isFilled ? genColor(props.index) : 'grey lighten-1'"
+          :color="props.isFilled ? genColor(props.index) : 'grey-lighten-1'"
           large
-          @click="props.click"
+          @click="props.onClick"
         >
           {{ props.isFilled ? 'mdi-star-circle' : 'mdi-star-circle-outline' }}
         </v-icon>

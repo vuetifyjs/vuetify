@@ -1,286 +1,209 @@
-// @ts-nocheck
-/* eslint-disable */
-
-// Libraries
-// import Vue from 'vue'
-
 // Components
-// import VRating from '../VRating'
+import VRating from '../VRating'
 
 // Utilities
-import {
-  mount,
-  Wrapper,
-  MountOptions,
-} from '@vue/test-utils'
-// import { ExtractVue } from '../../../util/mixins'
+import { mount } from '@vue/test-utils'
+import { createVuetify } from '@/framework'
+import { h } from '@vue/runtime-core'
 
-// Vue.prototype.$vuetify = {
-//   rtl: false,
-//   icons: {},
-//   lang: {
-//     t: str => str,
-//   },
-// }
+describe('VRating.ts', () => {
+  const vuetify = createVuetify()
+  const mountFunction = (options?: any) => {
+    return mount(VRating, {
+      ...options,
+      global: {
+        plugins: [vuetify],
+      },
+    })
+  }
 
-describe.skip('VRating.ts', () => {
-  type Instance = ExtractVue<typeof VRating>
-  let mountFunction: (options?: object) => Wrapper<Instance>
+  it('should respond to prop value changes', async () => {
+    const wrapper = mountFunction()
 
-  beforeEach(() => {
-    mountFunction = (options: MountOptions<Instance>) => {
-      return mount(VRating, {
-        // https://github.com/vuejs/vue-test-utils/issues/1130
-        sync: false,
-        mocks: {
-          $vuetify: {
-            rtl: false,
-            lang: {
-              t: str => str,
-            },
-          },
-        },
-        ...options,
-      })
-    }
+    expect(wrapper.html()).toMatchSnapshot()
+
+    await wrapper.setProps({ modelValue: 1 })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should not register directives if readonly or !ripple', () => {
+  it('should respond to user interaction', async () => {
+    const wrapper = mountFunction()
+
+    const items = wrapper.findAll('.v-rating__item > button')
+
+    await items[0].trigger('click')
+
+    expect(wrapper.emitted('update:modelValue')).toEqual([
+      [1],
+    ])
+  })
+
+  it('should not clear value if using clearable prop', async () => {
     const wrapper = mountFunction({
-      propsData: {
-        readonly: true,
+      props: {
+        modelValue: 1,
+        clearable: true,
       },
     })
 
-    expect(wrapper.vm.directives).toHaveLength(0)
+    const items = wrapper.findAll('.v-rating__item button')
 
-    wrapper.setProps({ readonly: false })
+    await items[0].trigger('click')
 
-    expect(wrapper.vm.directives).toHaveLength(1)
+    expect(wrapper.emitted('update:modelValue')).toEqual([
+      [0],
+    ])
 
-    wrapper.setProps({ ripple: false })
+    await wrapper.setProps({ modelValue: 1, clearable: false })
 
-    expect(wrapper.vm.directives).toHaveLength(0)
-  })
+    await items[0].trigger('click')
 
-  it('should respond to internal and prop value changes', async () => {
-    const wrapper = mountFunction()
-
-    const input = jest.fn()
-    wrapper.vm.$on('input', input)
-    expect(wrapper.vm.internalValue).toBe(0)
-
-    wrapper.setProps({ value: 1 })
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.internalValue).toBe(1)
-
-    expect(input).not.toHaveBeenCalled()
-
-    const icon = wrapper.findAll('.v-icon').at(1)
-
-    icon.trigger('click')
-
-    await wrapper.vm.$nextTick()
-
-    expect(input).toHaveBeenCalledWith(2)
-  })
-
-  it('should not null the rating if clicked on the current value unless clearable', async () => {
-    const wrapper = mountFunction()
-
-    const input = jest.fn()
-    wrapper.vm.$on('input', input)
-    expect(wrapper.vm.internalValue).toBe(0)
-
-    wrapper.setProps({ value: 1, clearable: false })
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.internalValue).toBe(1)
-
-    const icon = wrapper.find('.v-icon')
-
-    icon.trigger('click')
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.internalValue).toBe(1)
-
-    wrapper.setProps({ clearable: true })
-
-    icon.trigger('click')
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.internalValue).toBe(0)
+    expect(wrapper.emitted('update:modelValue')).toEqual([
+      [0],
+      [1],
+    ])
   })
 
   it('should not react to events when readonly', async () => {
     const wrapper = mountFunction({
-      propsData: {
+      props: {
         readonly: true,
       },
     })
 
-    const input = jest.fn()
-    wrapper.vm.$on('input', input)
+    const items = wrapper.findAll('.v-rating__item button')
 
-    const icon = wrapper.find('.v-icon')
+    await items[0].trigger('click')
 
-    icon.trigger('click')
-
-    await wrapper.vm.$nextTick()
-
-    expect(input).not.toHaveBeenCalled()
-
-    wrapper.setProps({ readonly: false })
-
-    icon.trigger('click')
-
-    await wrapper.vm.$nextTick()
-
-    expect(input).toHaveBeenCalledWith(1)
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
   })
 
-  it('should change hover index on mouse action', async () => {
-    jest.useFakeTimers()
-
+  it('should change icon on hover', async () => {
     const wrapper = mountFunction({
-      propsData: {
+      props: {
         hover: true,
       },
     })
 
-    const icons = wrapper.findAll('.v-icon')
-    const icon1 = icons.at(0)
-    const icon2 = icons.at(3)
+    const items = wrapper.findAll('.v-rating__item > button')
 
-    expect(wrapper.vm.hoverIndex).toBe(-1)
+    await items[2].trigger('mouseenter')
 
-    icon1.trigger('mouseenter')
-
-    jest.runAllTimers()
-
-    expect(wrapper.vm.hoverIndex).toBe(1)
-
-    icon2.trigger('mouseenter')
-
-    jest.runAllTimers()
-
-    expect(wrapper.vm.hoverIndex).toBe(4)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should check for half event', () => {
-    const wrapper = mountFunction()
+  // it('should check for half event', () => {
+  //   const wrapper = mountFunction()
 
-    const event = new MouseEvent('hover')
-    expect(wrapper.vm.genHoverIndex(event, 1)).toBe(2)
+  //   const event = new MouseEvent('hover')
+  //   expect(wrapper.vm.genHoverIndex(event, 1)).toBe(2)
 
-    wrapper.setProps({ halfIncrements: true })
+  //   wrapper.setProps({ halfIncrements: true })
 
-    expect(wrapper.vm.genHoverIndex({
-      pageX: 0,
-      target: {
-        getBoundingClientRect: () => ({ width: 10, left: 0 }),
-      },
-    }, 1)).toBe(1.5)
+  //   expect(wrapper.vm.genHoverIndex({
+  //     pageX: 0,
+  //     target: {
+  //       getBoundingClientRect: () => ({ width: 10, left: 0 }),
+  //     },
+  //   }, 1)).toBe(1.5)
 
-    expect(wrapper.vm.genHoverIndex({
-      pageX: 6,
-      target: {
-        getBoundingClientRect: () => ({ width: 10, left: 0 }),
-      },
-    }, 1)).toBe(2)
-  })
+  //   expect(wrapper.vm.genHoverIndex({
+  //     pageX: 6,
+  //     target: {
+  //       getBoundingClientRect: () => ({ width: 10, left: 0 }),
+  //     },
+  //   }, 1)).toBe(2)
+  // })
 
-  it('should check for half event in rtl', () => {
+  // it('should check for half event in rtl', () => {
+  //   const wrapper = mountFunction({
+  //     propsData: { halfIncrements: true },
+  //     mocks: {
+  //       $vuetify: {
+  //         rtl: true,
+  //         lang: {
+  //           t: str => str,
+  //         },
+  //       },
+  //     },
+  //   })
+
+  //   const event = new MouseEvent('hover')
+  //   expect(wrapper.vm.genHoverIndex(event, 1)).toBe(1.5)
+
+  //   wrapper.setProps({ halfIncrements: true })
+
+  //   expect(wrapper.vm.genHoverIndex({
+  //     pageX: 0,
+  //     target: {
+  //       getBoundingClientRect: () => ({ width: 10, left: 0 }),
+  //     },
+  //   }, 1)).toBe(2)
+
+  //   expect(wrapper.vm.genHoverIndex({
+  //     pageX: 6,
+  //     target: {
+  //       getBoundingClientRect: () => ({ width: 10, left: 0 }),
+  //     },
+  //   }, 1)).toBe(1.5)
+  // })
+
+  it('should render a scoped item slot', () => {
     const wrapper = mountFunction({
-      propsData: { halfIncrements: true },
-      mocks: {
-        $vuetify: {
-          rtl: true,
-          lang: {
-            t: str => str,
-          },
-        },
+      slots: {
+        item: (props: any) => h('div', props.index),
       },
-    })
-
-    const event = new MouseEvent('hover')
-    expect(wrapper.vm.genHoverIndex(event, 1)).toBe(1.5)
-
-    wrapper.setProps({ halfIncrements: true })
-
-    expect(wrapper.vm.genHoverIndex({
-      pageX: 0,
-      target: {
-        getBoundingClientRect: () => ({ width: 10, left: 0 }),
-      },
-    }, 1)).toBe(2)
-
-    expect(wrapper.vm.genHoverIndex({
-      pageX: 6,
-      target: {
-        getBoundingClientRect: () => ({ width: 10, left: 0 }),
-      },
-    }, 1)).toBe(1.5)
-  })
-
-  it('should render a scoped slot', () => {
-    const vm = new Vue()
-    const itemSlot = () => [vm.$createElement('span', 'foobar')]
-
-    const component = Vue.component('test', {
-      render: h => h(VRating, {
-        scopedSlots: {
-          item: itemSlot,
-        },
-      }),
-    })
-
-    const wrapper = mount(component, {
-      // https://github.com/vuejs/vue-test-utils/issues/1130
-      sync: false,
     })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should bind mousemove listener', () => {
-    const onMouseEnter = jest.fn()
+  it('should render a scoped item-label slot', () => {
     const wrapper = mountFunction({
-      propsData: {
-        halfIncrements: true,
-        hover: true,
+      slots: {
+        'item-label': () => h('span', ['foo']),
       },
-      methods: { onMouseEnter },
     })
 
-    const icon = wrapper.find('.v-icon')
-
-    icon.trigger('mousemove')
-
-    expect(onMouseEnter).toHaveBeenCalled()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should reset hoverIndex on mouse leave', () => {
-    jest.useFakeTimers()
-    const wrapper = mountFunction({
-      propsData: { hover: true },
-    })
+  // it('should bind mousemove listener', () => {
+  //   const onMouseEnter = jest.fn()
+  //   const wrapper = mountFunction({
+  //     propsData: {
+  //       halfIncrements: true,
+  //       hover: true,
+  //     },
+  //     methods: { onMouseEnter },
+  //   })
 
-    const icon = wrapper.find('.v-icon')
+  //   const icon = wrapper.find('.v-icon')
 
-    expect(wrapper.vm.hoverIndex).toBe(-1)
+  //   icon.trigger('mousemove')
 
-    icon.trigger('mouseenter')
-    jest.runAllTimers()
+  //   expect(onMouseEnter).toHaveBeenCalled()
+  // })
 
-    expect(wrapper.vm.hoverIndex).toBe(1)
+  // it('should reset hoverIndex on mouse leave', () => {
+  //   jest.useFakeTimers()
+  //   const wrapper = mountFunction({
+  //     propsData: { hover: true },
+  //   })
 
-    icon.trigger('mouseleave')
-    jest.runAllTimers()
+  //   const icon = wrapper.find('.v-icon')
 
-    expect(wrapper.vm.hoverIndex).toBe(-1)
-  })
+  //   expect(wrapper.vm.hoverIndex).toBe(-1)
+
+  //   icon.trigger('mouseenter')
+  //   jest.runAllTimers()
+
+  //   expect(wrapper.vm.hoverIndex).toBe(1)
+
+  //   icon.trigger('mouseleave')
+  //   jest.runAllTimers()
+
+  //   expect(wrapper.vm.hoverIndex).toBe(-1)
+  // })
 })
