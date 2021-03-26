@@ -35,6 +35,19 @@ const TestComponentWithPropDefaultValue = defineComponent({
   },
 })
 
+const TestComponentWithModelValueProp = defineComponent({
+  props: {
+    modelValue: String,
+  },
+  emits: ['update:modelValue'],
+  setup (props) {
+    const proxiedModel = useProxiedModel(props, 'modelValue')
+    return () => h('div', {
+      onClick: () => proxiedModel.value = 'internal',
+    }, [props.modelValue, proxiedModel.value].join(','))
+  },
+})
+
 describe('useProxiedModel', () => {
   it('should use default prop value as first value if defined', async () => {
     const wrapper = mount(TestComponentWithPropDefaultValue)
@@ -42,6 +55,16 @@ describe('useProxiedModel', () => {
     expect(wrapper.html()).toMatchSnapshot()
 
     await wrapper.trigger('click')
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should use prop value if defined with kebab case', async () => {
+    const wrapper = mount(TestComponentWithModelValueProp, {
+      props: {
+        'model-value': 'foobar',
+      },
+    })
+
     expect(wrapper.html()).toMatchSnapshot()
   })
 

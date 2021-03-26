@@ -60,6 +60,12 @@ exports[`useProxiedModel should use internal value if prop not defined 2`] = `
 </div>
 `;
 
+exports[`useProxiedModel should use prop value if defined with kebab case 1`] = `
+<div>
+  foobar,foobar
+</div>
+`;
+
 exports[`useProxiedModel transforms should transform prop value 1`] = `
 <div>
   ["1","2","3"]
