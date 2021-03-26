@@ -93,8 +93,14 @@ export default mixins(
   },
 
   methods: {
-    genButtonClasses (isAllowed: boolean, isFloating: boolean, isSelected: boolean, isCurrent: boolean,
-      isFirst: boolean, isLast: boolean) {
+    genButtonClasses (
+      isAllowed: boolean,
+      isFloating: boolean,
+      isSelected: boolean,
+      isCurrent: boolean,
+      isFirst: boolean,
+      isLast: boolean
+    ) {
       return {
         'v-size--default': !isFloating,
         'v-date-picker-table__current': isCurrent,
@@ -104,8 +110,8 @@ export default mixins(
         'v-btn--rounded': isFloating,
         'v-btn--disabled': !isAllowed || this.disabled,
         'v-btn--outlined': isCurrent && !isSelected,
-        'v-date-picker--first_in_range': isFirst,
-        'v-date-picker--last_in_range': isLast,
+        'v-date-picker--first-in-range': isFirst,
+        'v-date-picker--last-in-range': isLast,
         ...this.themeClasses,
       }
     },
@@ -133,8 +139,14 @@ export default mixins(
 
       return this.$createElement('button', setColor(color, {
         staticClass: 'v-btn',
-        class: this.genButtonClasses(isAllowed && !isOtherMonth, isFloating, isSelected, isCurrent,
-          isFirst, isLast),
+        class: this.genButtonClasses(
+          isAllowed && !isOtherMonth,
+          isFloating,
+          isSelected,
+          isCurrent,
+          isFirst,
+          isLast
+        ),
         attrs: {
           type: 'button',
         },

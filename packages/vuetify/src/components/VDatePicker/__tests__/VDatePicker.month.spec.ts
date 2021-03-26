@@ -343,9 +343,9 @@ describe('VDatePicker.ts', () => {
       },
     })
 
-    expect(wrapper.findAll('.v-date-picker-table--month tbody button.v-date-picker--first_in_range')
+    expect(wrapper.findAll('.v-date-picker-table--month tbody button.v-date-picker--first-in-range')
       .exists()).toBe(true)
-    expect(wrapper.findAll('.v-date-picker-table--month tbody button.v-date-picker--last_in_range')
+    expect(wrapper.findAll('.v-date-picker-table--month tbody button.v-date-picker--last-in-range')
       .exists()).toBe(true)
   })
 })
