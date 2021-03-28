@@ -38,7 +38,7 @@ export default mixins<options>().extend({
         mustSort: false,
       }),
     } as PropValidator<DataOptions>,
-    checkboxesColor: String,
+    checkboxColor: String,
     sortIcon: {
       type: String,
       default: '$sort',
@@ -56,7 +56,7 @@ export default mixins<options>().extend({
         props: {
           value: this.everyItem,
           indeterminate: !this.everyItem && this.someItems,
-          color: this.checkboxesColor ?? '',
+          color: this.checkboxColor ?? '',
         },
         on: {
           input: (v: boolean) => this.$emit('toggle-select-all', v),

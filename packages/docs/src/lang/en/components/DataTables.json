@@ -120,7 +120,7 @@
       "itemClass": "Property on supplied `items` that contains item's row class or function that takes an item as an argument and returns the class of corresponding row",
       "mobileBreakpoint": "Used to set when to toggle between regular table and mobile view",
       "showSelect": "Shows the select checkboxes in both the header and rows (if using default rows)",
-      "checkboxesColor": "Set the color of the checkboxes (showSelect must be used)",
+      "checkboxColor": "Set the color of the checkboxes (showSelect must be used)",
       "showExpand": "Shows the expand toggle in default rows",
       "showGroupBy": "Shows the group by toggle in the header and enables grouped rows",
       "virtualRows": "Virtualizes the rendering of rows. Be aware that you can not use the `body`, `body.prepend` or `body.append` slots with this prop."

@@ -31,7 +31,7 @@ const DataProps = [
   { name: 'itemsPerPage', source: 'v-data' },
   { name: 'groupBy', source: 'v-data' },
   { name: 'groupDesc', source: 'v-data' },
-  { name: 'checkboxesColor', source: 'v-data', type: 'string' },
+  { name: 'checkboxColor', source: 'v-data', type: 'string' },
   { name: 'customGroup', source: 'v-data', default: '(items: any[], groupBy: string[], groupDesc: boolean[]) => Record<string, any[]>' },
   { name: 'locale', source: 'v-data' },
   { name: 'disableSort', source: 'v-data' },
