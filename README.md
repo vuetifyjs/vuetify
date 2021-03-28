@@ -292,7 +292,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
         </a>
       </td>
       <td>
-        A supplementary Vue CLI plugin used by <a href="https:/github.com/vuetifyjs/preset">@vuetify/preset</a>
+        A supplementary Vue CLI plugin used by <a href="https://github.com/vuetifyjs/preset">@vuetify/preset</a>
       </td>
     </tr>
     <tr>
