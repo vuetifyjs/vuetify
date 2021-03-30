@@ -287,7 +287,7 @@ export function groupItems<T extends any = any> (
   const key = groupBy[0]
   const groups: ItemGroup<T>[] = []
   let current
-  for (var i = 0; i < items.length; i++) {
+  for (let i = 0; i < items.length; i++) {
     const item = items[i]
     const val = getObjectValueByPath(item, key, null)
     if (current !== val) {
