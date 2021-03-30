@@ -2,6 +2,8 @@
 
 $chip-avatar-size: 24px !default;
 $chip-close-size: 18px !default;
+$chip-font-size: map-deep-get($headings, 'body-1', 'size') !default;
+$chip-height: 36px !default;
 $chip-icon-margin-after: 6px !default;
 $chip-icon-margin-before: -6px !default;
 $chip-icon-right-margin-after: -4px !default;
@@ -23,6 +25,22 @@ $chip-disabled-opacity: 0.4 !default;
 $chip-filter-max-width: 24px !default;
 $chip-outlined-active-opacity: 0.08 !default;
 $chip-selected-opacity: 0.28 !default;
+
+$chip-padding-ratio: 2.25 !default;
+$chip-vertical-align: middle !default;
+$chip-width-ratio: 16/9 !default;
+
+$chip-sizes: () !default;
+$chip-sizes: map-merge(
+  (
+    'height': $chip-height,
+    'font-size': $chip-font-size
+  ),
+  $chip-sizes
+);
+
+$chip-density: ('default': 0, 'comfortable': -2, 'compact': -3) !default;
+
 $icon-sizes: () !default;
 $icon-sizes: map-deep-merge(
   (

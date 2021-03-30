@@ -2,6 +2,7 @@
 import './VChip.sass'
 
 // Composables
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
 import { makeSheetProps, useSheet } from '@/components/VSheet/VSheet'
 import { useColor } from '@/composables/color'
@@ -63,6 +64,7 @@ export default defineComponent({
 
     ...makeSheetProps(),
     ...makeSizeProps(),
+    ...makeDensityProps(),
     ...makeTagProps({ tag: 'span' }),
   }),
 
@@ -71,6 +73,7 @@ export default defineComponent({
     const { sheetClasses, sheetStyles } = useSheet(props, 'v-chip')
 
     const { sizeClasses } = useSize(props, 'v-chip')
+    const { densityClasses } = useDensity(props, 'v-chip')
 
     const isContained = computed(() => {
       return !(props.outlined)
@@ -117,6 +120,7 @@ export default defineComponent({
           sheetClasses.value,
           colorClasses.value,
           sizeClasses.value,
+          densityClasses.value,
         ]}
         style={[
           sheetStyles.value,

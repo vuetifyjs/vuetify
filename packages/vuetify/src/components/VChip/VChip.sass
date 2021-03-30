@@ -1,5 +1,5 @@
 // Imports
-@import './_index'
+@import ./index
 
 // Block
 .v-chip
@@ -15,6 +15,10 @@
   text-decoration: none
   vertical-align: middle
   white-space: $chip-white-space
+
+  @at-root
+    +chip-sizes()
+    +density('v-chip', 'height', $chip-density)
 
   &:before
     background-color: currentColor
