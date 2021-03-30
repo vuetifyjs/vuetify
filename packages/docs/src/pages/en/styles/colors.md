@@ -11,17 +11,17 @@ related:
 
 # Colors
 
-Out of the box you get access to all colors in the [Material Design spec](https://material.io/design/color/the-color-system.html) through **sass** and **javascript**. These values can be used within your style sheets, your component files and on actual components via the **color class** system.
+Out of the box you get access to all colors in the [Material Design specification](https://material.io/design/color/the-color-system.html) through **sass** and **javascript**. These values can be used within your style sheets, your component files and on actual components via the **color** prop.
 
 <entry-ad />
 
 ## Classes
 
-Each color from the spec gets converted to a **background** and **text** variant for styling within your application through a class, e.g. `<div class="red">` or `<span class="red--text">`. These class colors are defined [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_colors.scss).
+Each color from the specification gets converted to a **background** and **text** variant for styling within your application through a class, e.g. `<div class="bg-red">` or `<span class="text-red">`. These class colors are defined [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_colors.scss).
 
 <example file="color/classes" />
 
-Text colors also support **darken** and **lighten** variants using `text--{lighten|darken}-{n}`
+Text colors also support **darken** and **lighten** variants
 
 <example file="color/text-classes" />
 
@@ -31,21 +31,20 @@ Vuetify has an optional javascript color pack that you can import and use within
 
 ```js
 // src/plugins/vuetify.js
-
-import Vue from 'vue'
-import Vuetify from 'vuetify/lib'
+import { createVuetify } from 'vuetify/lib'
 
 import colors from 'vuetify/lib/util/colors'
 
-Vue.use(Vuetify)
-
-export default new Vuetify({
+export default createVuetify({
   theme: {
     themes: {
       light: {
-        primary: colors.red.darken1, // #E53935
-        secondary: colors.red.lighten4, // #FFCDD2
-        accent: colors.indigo.base, // #3F51B5
+        dark: false,
+        colors: {
+          primary: colors.red.darken1, // #E53935
+          secondary: colors.red.lighten4, // #FFCDD2
+          ...
+        }
       },
     },
   },
@@ -54,7 +53,7 @@ export default new Vuetify({
 
 ## Sass color pack
 
-While convenient, the color pack increases the CSS export size by ~30kb. Some projects may only require the default provided classes that are created at run-time from the Vuetify bootstrap. To disable this feature, you will have to _manually_ import and build the main **sass** file. This will require a [Sass loader](https://github.com/webpack-contrib/sass-loader) and a `.sass`/`.scss` file entry.
+While convenient, the color pack increases the CSS export size by ~30kb. Some projects may only require the classes that are created at run-time from the Vuetify **theme** system. To disable the color pack feature, you will have to _manually_ import and build the main **sass** file. This will require a [Sass loader](https://github.com/webpack-contrib/sass-loader) and a `.sass`/`.scss` file entry.
 
 ```sass
 // src/sass/main.scss

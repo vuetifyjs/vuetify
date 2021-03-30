@@ -1,4 +1,1 @@
-import VNavigationDrawer from './VNavigationDrawer'
-
-export { VNavigationDrawer }
-export default VNavigationDrawer
+export { default as VNavigationDrawer } from './VNavigationDrawer'

@@ -2,7 +2,13 @@
 import './VSystemBar.sass'
 
 // Composables
-import { makeSheetProps, useSheet } from '@/components/VSheet/VSheet'
+import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makePositionProps, usePosition } from '@/composables/position'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeTagProps } from '@/composables/tag'
+import { useTheme } from '@/composables/theme'
 
 // Utilities
 import { defineComponent } from 'vue'
@@ -14,11 +20,21 @@ export default defineComponent({
   props: makeProps({
     lightsOut: Boolean,
     window: Boolean,
-    ...makeSheetProps(),
+    ...makeBorderProps(),
+    ...makeDimensionProps(),
+    ...makeElevationProps(),
+    ...makePositionProps(),
+    ...makeRoundedProps(),
+    ...makeTagProps(),
   }),
 
   setup (props, { slots }) {
-    const { sheetClasses, sheetStyles } = useSheet(props, 'v-system-bar')
+    const { themeClasses } = useTheme()
+    const { borderClasses } = useBorder(props, 'v-system-bar')
+    const { dimensionStyles } = useDimension(props)
+    const { elevationClasses } = useElevation(props)
+    const { positionClasses, positionStyles } = usePosition(props, 'v-system-bar')
+    const { roundedClasses } = useRounded(props, 'v-system-bar')
 
     return () => (
       <props.tag
@@ -28,9 +44,16 @@ export default defineComponent({
             'v-system-bar--lights-out': props.lightsOut,
             'v-system-bar--window': props.window,
           },
-          sheetClasses.value,
+          themeClasses.value,
+          borderClasses.value,
+          elevationClasses.value,
+          positionClasses.value,
+          roundedClasses.value,
         ]}
-        style={ sheetStyles.value }
+        style={[
+          dimensionStyles.value,
+          positionStyles.value,
+        ]}
         v-slots={ slots }
       />
     )

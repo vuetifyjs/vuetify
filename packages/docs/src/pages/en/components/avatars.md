@@ -29,13 +29,13 @@ Avatars in their simplest form display content within a circular container.
 
 #### Size
 
-The `size` prop allows you to define the height and width of `v-avatar`. This prop scales both evenly with an aspect ratio of 1. `height` and `width` props will override this prop.
+The `size` prop allows you to change the height and width of `v-avatar`.
 
 <example file="v-avatar/prop-size" />
 
 #### Tile
 
-The `tile` prop removes the border radius from v-avatar leaving you with a simple square avatar.
+The `rounded` prop can be used to remove the border radius from v-avatar leaving you with a simple square avatar.
 
 <example file="v-avatar/prop-tile" />
 
@@ -43,7 +43,7 @@ The `tile` prop removes the border radius from v-avatar leaving you with a simpl
 
 #### Default
 
-The `v-avatar` default slot will accept the `v-icon` component, an image, or text. Mix and match these with other props to create something unique.
+The `v-avatar` default slot allows you to render content such as `v-icon` components, images, or text. Mix and match these with other props to create something unique.
 
 <example file="v-avatar/slot-default" />
 

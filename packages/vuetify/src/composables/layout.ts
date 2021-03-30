@@ -1,6 +1,6 @@
 // Utilities
-import { inject, provide, computed, ref, onBeforeUnmount } from 'vue'
 import { getUid, convertToUnit } from '@/util'
+import { inject, provide, computed, ref, onBeforeUnmount } from 'vue'
 import propsFactory from '@/util/propsFactory'
 
 // Types
@@ -33,8 +33,9 @@ export const makeLayoutProps = propsFactory({
     default: () => ([]),
   } as Prop<string[]>,
   fullHeight: Boolean,
-})
+}, 'layout')
 
+// Composables
 export const makeLayoutItemProps = propsFactory({
   name: {
     type: String,
@@ -47,7 +48,7 @@ export const makeLayoutItemProps = propsFactory({
     type: [Number, String],
     default: 300,
   },
-})
+}, 'layout-item')
 
 export function useMain () {
   const layout = inject(VuetifyLayoutKey)

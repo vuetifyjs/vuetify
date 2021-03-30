@@ -20,7 +20,7 @@ export const makeDensityProps = propsFactory({
     default: 'default',
     validator: (v: any) => allowedDensities.includes(v),
   },
-})
+}, 'density')
 
 export function useDensity (props: DensityProps, name: string) {
   const densityClasses = computed(() => {

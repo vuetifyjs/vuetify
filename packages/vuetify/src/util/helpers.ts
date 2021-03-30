@@ -1,6 +1,8 @@
 import type { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
 import type { Slots, VNode, TransitionProps } from 'vue'
 import { Fragment, defineComponent, h, capitalize, camelize, Transition, mergeProps } from 'vue'
+import { makeTagProps } from '@/composables/tag'
+import makeProps from './makeProps'
 
 export function createSimpleFunctional (
   klass: string,
@@ -10,12 +12,7 @@ export function createSimpleFunctional (
   return defineComponent({
     name: name ?? capitalize(camelize(klass.replace(/__/g, '-'))),
 
-    props: {
-      tag: {
-        type: String,
-        default: tag,
-      },
-    },
+    props: makeProps(makeTagProps({ tag })),
 
     setup (props, { slots }) {
       return () => h(props.tag, {
@@ -170,6 +167,21 @@ export const keyCodes = Object.freeze({
 
 export function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]
+}
+
+export function extract (obj: Dictionary<unknown>, properties: string[]) {
+  const extracted: Dictionary<unknown> = {}
+  const rest: Dictionary<unknown> = {}
+
+  Object.entries(obj).forEach(([key, value]) => {
+    if (properties.includes(key)) {
+      extracted[key] = value
+    } else {
+      rest[key] = value
+    }
+  })
+
+  return [extracted, rest]
 }
 
 /**
@@ -409,3 +421,5 @@ export const randomHexColor = () => {
   const n = (Math.random() * 0xfffff * 1000000).toString(16)
   return '#' + n.slice(0, 6)
 }
+
+export const toKebabCase = (str: string) => str.replace(/([A-Z])/g, match => `-${match.toLowerCase()}`)

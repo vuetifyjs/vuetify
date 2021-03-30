@@ -1,4 +1,1 @@
-import VSheet from './VSheet'
-
-export { VSheet }
-export default VSheet
+export { default as VSheet } from './VSheet'

@@ -2,8 +2,13 @@
 import './VFooter.sass'
 
 // Composables
-import { makeSheetProps, useSheet } from '@/components/VSheet/VSheet'
+import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makePositionProps, usePosition } from '@/composables/position'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
+import { useTheme } from '@/composables/theme'
 
 // Utilities
 import { defineComponent } from 'vue'
@@ -13,20 +18,38 @@ export default defineComponent({
   name: 'VFooter',
 
   props: makeProps({
-    ...makeSheetProps(),
+    ...makeBorderProps(),
+    ...makeDimensionProps(),
+    ...makeElevationProps(),
+    ...makePositionProps(),
+    ...makeRoundedProps(),
+    ...makeTagProps(),
     ...makeTagProps({ tag: 'footer' }),
   }),
 
   setup (props, { slots }) {
-    const { sheetClasses, sheetStyles } = useSheet(props, 'v-footer')
+    const { themeClasses } = useTheme()
+    const { borderClasses } = useBorder(props, 'v-footer')
+    const { dimensionStyles } = useDimension(props)
+    const { elevationClasses } = useElevation(props)
+    const { positionClasses, positionStyles } = usePosition(props, 'v-footer')
+    const { roundedClasses } = useRounded(props, 'v-footer')
 
     return () => (
       <props.tag
         class={[
           'v-footer',
-          sheetClasses.value,
+          themeClasses.value,
+          borderClasses.value,
+          elevationClasses.value,
+          positionClasses.value,
+          roundedClasses.value,
         ]}
-        style={ sheetStyles.value }
+        style={[
+
+          dimensionStyles.value,
+          positionStyles.value,
+        ]}
         v-slots={ slots }
       />
     )

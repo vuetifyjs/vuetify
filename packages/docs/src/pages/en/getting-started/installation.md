@@ -16,7 +16,7 @@ Vuetify 3 Alpha is here! Below is a collection of information to help you get st
 
 <alert type="error">
 
-Before proceeding, it is important to note that this installation is intended primarily for testing purposes, and should not be considered for production applications.
+  Before proceeding, it is important to note that this installation is intended primarily for testing purposes, and should not be considered for production applications.
 
 </alert>
 
@@ -52,15 +52,55 @@ cd my-app
 vue add vuetify
 ```
 
-Once prompted, choose v3 (alpha):
+Once prompted, choose `v3 (alpha)`:
 
 ```bash
 ? Choose a preset: (Use arrow keys)
   Default (recommended)
+  Preview (Vuetify 3 + Vite) 
   Prototype (rapid development)
+> V3 (alpha)
   Configure (advanced)
-> v3 (alpha)
 ```
+
+### Vite
+
+Installing Vuetify 3 using vite can be done using vue-cli[#vue-cli]. To start, use npm/yarn to set up your vite project outlined in the [Vite documentation](https://vitejs.dev/guide/#scaffolding-your-first-vite-project):
+
+```bash
+# npm 6.x
+npm init @vitejs/app my-app --template vue
+
+# npm 7+, extra double-dash is needed:
+npm init @vitejs/app my-app -- --template vue
+
+# yarn
+yarn create @vitejs/app my-app --template vue
+```
+
+Next, navigate to your project directory and add Vuetify to your project:
+
+```bash
+cd my-app
+vue add vuetify
+```
+
+Once prompted, choose `Preview (Vuetify 3 + Vite)`:
+
+```bash
+? Choose a preset: (Use arrow keys)
+  Default (recommended)
+> Preview (Vuetify 3 + Vite) 
+  Prototype (rapid development)
+  V3 (alpha)
+  Configure (advanced)
+```
+
+<alert type="warning">
+
+  During the vuetify cli installation there may be a warning regarding `conflicting versions for project dependency "vite"`. The cli will install the latest version of vite. Currently there is an issue with later versions of Vite. You will need to edit your `package.json` and set the Vite version to `~2.0.5` and rerun `yarn` / `npm i`.
+
+</alert>
 
 ## Usage
 
@@ -85,7 +125,7 @@ app.mount('#app')
 
 - [What is included in the Alpha?](#included)
 - [When will Vuetify 3 be released?](#version-3)
-- [Can I use it with Vite?](#vite)
+- [Can I use it with Vite?](#use-vite)
 
 ### Questions
 
@@ -101,9 +141,9 @@ Have a question that belongs here? Tell us in our [Discord Community](https://co
 
   Version 3 is currently under development - Alpha is the first step toward this. Follow our progress via our project on [Github](https://github.com/orgs/vuetifyjs/projects/7) or read an overview of what's to come on our [Roadmap](/introduction/roadmap/).
 
-- **Can I use it with Vite?** { #vite }
+- **Can I use it with Vite?** { #use-vite }
 
-  Yes. We recommend creating a vue-cli project to see how the structure should look, but you should be able to transfer that over to work with Vite too.
+  Yes. We recommend creating a new project using the [vite](#vite) installation instructions.
 
 ## How to report an issue or bug
 

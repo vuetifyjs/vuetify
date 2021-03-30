@@ -1,3 +1,1 @@
-import VImg from './VImg'
-
-export { VImg }
+export { default as VImg } from './VImg'

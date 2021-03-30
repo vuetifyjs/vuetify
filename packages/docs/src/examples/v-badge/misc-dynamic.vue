@@ -21,11 +21,10 @@
 
       <v-badge
         :content="messages"
-        :value="messages"
+        :model-value="messages"
         color="green"
-        overlap
       >
-        <v-icon large>
+        <v-icon size="large">
           mdi-vuetify
         </v-icon>
       </v-badge>

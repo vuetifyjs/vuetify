@@ -3,8 +3,13 @@ import './VBtn.sass'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeSheetProps, useSheet } from '@/components/VSheet/VSheet'
+import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makePositionProps, usePosition } from '@/composables/position'
 import { makeTagProps } from '@/composables/tag'
+import { useTheme } from '@/composables/theme'
 import { useColor } from '@/composables/color'
 
 // Directives
@@ -35,17 +40,25 @@ export default defineComponent({
       default: 'primary',
     },
     disabled: Boolean,
-
-    ...makeSheetProps(),
-    ...makeSizeProps(),
+    ...makeBorderProps(),
+    ...makeRoundedProps(),
     ...makeDensityProps(),
+    ...makeDimensionProps(),
+    ...makeElevationProps(),
+    ...makePositionProps(),
+    ...makeSizeProps(),
     ...makeTagProps({ tag: 'button' }),
   }),
 
   setup (props, { slots }) {
-    const { sheetClasses, sheetStyles } = useSheet(props, 'v-btn')
-    const { sizeClasses } = useSize(props, 'v-btn')
+    const { themeClasses } = useTheme()
+    const { borderClasses } = useBorder(props, 'v-btn')
+    const { roundedClasses } = useRounded(props, 'v-btn')
     const { densityClasses } = useDensity(props, 'v-btn')
+    const { dimensionStyles } = useDimension(props)
+    const { elevationClasses } = useElevation(props)
+    const { positionClasses, positionStyles } = usePosition(props, 'v-btn')
+    const { sizeClasses } = useSize(props, 'v-btn')
 
     const isContained = computed(() => {
       return !(props.text || props.plain || props.icon || props.outlined || props.border !== false)
@@ -72,14 +85,19 @@ export default defineComponent({
             'v-btn--block': props.block,
             'v-btn--disabled': props.disabled,
           },
-          sheetClasses.value,
-          sizeClasses.value,
-          densityClasses.value,
+          themeClasses.value,
+          borderClasses.value,
           colorClasses.value,
+          densityClasses.value,
+          elevationClasses.value,
+          positionClasses.value,
+          roundedClasses.value,
+          sizeClasses.value,
         ]}
         style={[
-          sheetStyles.value,
           colorStyles.value,
+          dimensionStyles.value,
+          positionStyles.value,
         ]}
         disabled={ props.disabled }
       >

@@ -1,6 +1,6 @@
 // Utilities
-import { computed, inject, provide, ref, watch } from 'vue'
 import { colorToInt, colorToRGB, createRange, intToHex, lighten, darken, getLuma } from '@/util'
+import { computed, inject, provide, ref, watch } from 'vue'
 
 // Types
 import type { InjectionKey, Ref, SetupContext } from 'vue'
@@ -133,6 +133,7 @@ const parseThemeOptions = (options: ThemeOptions = defaultThemeOptions): Interna
   } as InternalThemeOptions
 }
 
+// Composables
 export function createTheme (options?: ThemeOptions): ThemeInstance {
   const parsedOptions = parseThemeOptions(options)
   const styleEl = ref<HTMLStyleElement>()

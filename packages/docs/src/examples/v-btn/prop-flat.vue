@@ -1,28 +1,28 @@
 <template>
-  <v-row
-    align="center"
-    justify="space-around"
-  >
-    <v-btn depressed>
+  <div class="d-flex justify-space-around align-center flex-column flex-sm-row fill-height">
+    <v-btn flat>
       Normal
     </v-btn>
+
     <v-btn
-      depressed
-      color="primary"
+      flat
+      color="secondary"
     >
-      Primary
+      Secondary
     </v-btn>
+
     <v-btn
-      depressed
+      flat
       color="error"
     >
       Error
     </v-btn>
+
     <v-btn
-      depressed
+      flat
       disabled
     >
       Disabled
     </v-btn>
-  </v-row>
+  </div>
 </template>

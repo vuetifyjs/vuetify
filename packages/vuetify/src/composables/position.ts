@@ -1,10 +1,11 @@
 // Utilities
-import type { PropType } from 'vue'
 import { computed } from 'vue'
 import { convertToUnit } from '@/util/helpers'
 import propsFactory from '@/util/propsFactory'
 
 // Types
+import type { PropType } from 'vue'
+
 const positionValues = ['static', 'relative', 'fixed', 'absolute', 'sticky'] as const
 
 type Position = typeof positionValues[number]
@@ -31,7 +32,7 @@ export const makePositionProps = propsFactory({
   },
   right: [Boolean, Number, String],
   top: [Boolean, Number, String],
-})
+}, 'position')
 
 export function usePosition (props: PositionProps, name: string) {
   const targets = ['top', 'right', 'bottom', 'left'] as const

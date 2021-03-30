@@ -12,7 +12,6 @@ import {
   watch,
   withDirectives,
 } from 'vue'
-import type { PropType } from 'vue'
 
 // Components
 import { VResponsive } from '../VResponsive'
@@ -21,11 +20,20 @@ import { VResponsive } from '../VResponsive'
 import intersect from '@/directives/intersect'
 import type { ObserveDirectiveBinding } from '@/directives/intersect'
 
+// Composables
+import { makeTransitionProps } from '@/composables/transition'
+
 // Utils
-import makeProps from '@/util/makeProps'
-import { useRender } from '@/util/useRender'
-import { useDirective } from '@/util/useDirective'
 import { maybeTransition } from '@/util'
+import { useDirective } from '@/util/useDirective'
+import { useRender } from '@/util/useRender'
+import makeProps from '@/util/makeProps'
+
+// Globals
+import { SUPPORTS_INTERSECTION } from '@/util/globals'
+
+// Types
+import type { PropType } from 'vue'
 
 // not intended for public use, this is passed in by vuetify-loader
 export interface srcObject {
@@ -34,8 +42,6 @@ export interface srcObject {
   lazySrc?: string
   aspect: number
 }
-
-const hasIntersect = typeof window !== 'undefined' && 'IntersectionObserver' in window
 
 export default defineComponent({
   name: 'VImg',
@@ -66,11 +72,7 @@ export default defineComponent({
       default: '',
     },
     srcset: String,
-    transition: {
-      type: [Boolean, String] as PropType<string | false>,
-      default: 'fade-transition',
-      validator: val => val !== true,
-    },
+    ...makeTransitionProps(),
   }),
 
   emits: ['loadstart', 'load', 'error'],
@@ -112,7 +114,7 @@ export default defineComponent({
       // observer api, the image is not observable, and
       // the eager prop isn't being used, do not load
       if (
-        hasIntersect &&
+        SUPPORTS_INTERSECTION &&
         !isIntersecting &&
         !props.eager
       ) return

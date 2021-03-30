@@ -4,7 +4,7 @@ import propsFactory from '@/util/propsFactory'
 
 // Types
 export interface BorderProps {
-  outlined: boolean
+  outlined?: boolean
   border?: boolean | number | string
 }
 
@@ -12,7 +12,7 @@ export interface BorderProps {
 export const makeBorderProps = propsFactory({
   outlined: Boolean,
   border: [Boolean, Number, String],
-})
+}, 'border')
 
 export function useBorder (props: BorderProps, name: string) {
   const borderClasses = computed(() => {

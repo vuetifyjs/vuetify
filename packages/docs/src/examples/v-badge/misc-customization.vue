@@ -1,56 +1,45 @@
 <template>
-  <v-container>
-    <v-row
-      align="center"
-      justify="center"
+  <div class="d-flex justify-space-around align-center flex-column flex-md-row fill-height">
+    <v-badge
+      bordered
+      color="error"
+      icon="mdi-lock"
     >
-      <v-badge
-        bordered
+      <v-btn
         color="error"
-        icon="mdi-lock"
-        overlap
+        flat
       >
-        <v-btn
-          class="white--text"
-          color="error"
-          depressed
-        >
-          Lock Account
-        </v-btn>
-      </v-badge>
+        Lock Account
+      </v-btn>
+    </v-badge>
 
-      <div class="mx-3"></div>
+    <v-badge
+      bordered
+      location="bottom-right"
+      color="deep-purple-accent-4"
+      dot
+      offset-x="2"
+      offset-y="4"
+    >
+      <v-avatar size="large">
+        <v-img src="https://cdn.vuetifyjs.com/images/lists/2.jpg"></v-img>
+      </v-avatar>
+    </v-badge>
 
-      <v-badge
-        bordered
-        bottom
-        color="deep-purple accent-4"
-        dot
-        offset-x="10"
-        offset-y="10"
-      >
-        <v-avatar size="40">
-          <v-img src="https://cdn.vuetifyjs.com/images/lists/2.jpg"></v-img>
+    <div class="mx-3"></div>
+
+    <v-badge
+      bordered
+    >
+      <template v-slot:badge>
+        <v-avatar>
+          <v-img src="https://cdn.vuetifyjs.com/images/logos/v.png"></v-img>
         </v-avatar>
-      </v-badge>
+      </template>
 
-      <div class="mx-3"></div>
-
-      <v-badge
-        avatar
-        bordered
-        overlap
-      >
-        <template v-slot:badge>
-          <v-avatar>
-            <v-img src="https://cdn.vuetifyjs.com/images/logos/v.png"></v-img>
-          </v-avatar>
-        </template>
-
-        <v-avatar size="40">
-          <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
-        </v-avatar>
-      </v-badge>
-    </v-row>
-  </v-container>
+      <v-avatar size="large">
+        <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
+      </v-avatar>
+    </v-badge>
+  </div>
 </template>

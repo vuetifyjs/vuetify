@@ -1,5 +1,5 @@
 // Components
-import VSheet from '..'
+import { VSheet } from '..'
 
 // Utilities
 import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'

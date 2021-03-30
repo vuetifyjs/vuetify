@@ -1,7 +1,7 @@
 <template>
   <v-row justify="space-around">
-    <v-avatar color="indigo">
-      <v-icon dark>
+    <v-avatar color="info">
+      <v-icon>
         mdi-account-circle
       </v-icon>
     </v-avatar>

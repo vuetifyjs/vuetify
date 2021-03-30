@@ -1,3 +1,17 @@
-@import '../../styles/styles.sass';
+// Defaults
+$avatar-border-radius: map-get($rounded, 'circle') !default;
+$avatar-line-height: normal !default;
+$avatar-rounded-border-radius: $border-radius-root !default;
+$avatar-vertical-align: middle !default;
 
-$avatar-border-radius: 50% !default;
+$avatar-sizes: () !default;
+$avatar-sizes: map-deep-merge(
+  (
+    'x-small': 32px,
+    'small': 40px,
+    'default': 48px,
+    'large': 56px,
+    'x-large': 64px,
+  ),
+  $avatar-sizes
+);

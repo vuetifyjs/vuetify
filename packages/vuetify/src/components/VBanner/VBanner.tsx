@@ -2,7 +2,13 @@
 import './VBanner.sass'
 
 // Composables
-import { makeSheetProps, useSheet } from '@/components/VSheet/VSheet'
+import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makePositionProps, usePosition } from '@/composables/position'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeTagProps } from '@/composables/tag'
+import { useTheme } from '@/composables/theme'
 
 // Utilities
 import { defineComponent } from 'vue'
@@ -17,11 +23,21 @@ export default defineComponent({
     mobile: Boolean,
     singleLine: Boolean,
     sticky: Boolean,
-    ...makeSheetProps(),
+    ...makeBorderProps(),
+    ...makeDimensionProps(),
+    ...makeElevationProps(),
+    ...makePositionProps(),
+    ...makeRoundedProps(),
+    ...makeTagProps(),
   }),
 
   setup (props, { slots }) {
-    const { sheetClasses, sheetStyles } = useSheet(props, 'v-banner')
+    const { themeClasses } = useTheme()
+    const { borderClasses } = useBorder(props, 'v-banner')
+    const { dimensionStyles } = useDimension(props)
+    const { elevationClasses } = useElevation(props)
+    const { positionClasses, positionStyles } = usePosition(props, 'v-banner')
+    const { roundedClasses } = useRounded(props, 'v-banner')
 
     return () => {
       const hasThumbnail = (!!props.avatar || !!props.icon || !!slots.thumbnail)
@@ -36,9 +52,16 @@ export default defineComponent({
               'v-banner--single-line': props.singleLine,
               'v-banner--sticky': props.sticky,
             },
-            sheetClasses.value,
+            themeClasses.value,
+            borderClasses.value,
+            roundedClasses.value,
+            elevationClasses.value,
+            positionClasses.value,
           ]}
-          style={ sheetStyles.value }
+          style={[
+            dimensionStyles.value,
+            positionStyles.value,
+          ]}
           role="banner"
         >
           <div class="v-banner__sizer">

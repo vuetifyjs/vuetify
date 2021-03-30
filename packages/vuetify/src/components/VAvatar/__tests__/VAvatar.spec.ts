@@ -1,38 +1,25 @@
-// @ts-nocheck
-/* eslint-disable */
-
-// Libraries
-// import Vue from 'vue'
-
 // Components
-// import VAvatar from '../VAvatar'
+import { VAvatar } from '..'
 
 // Utilities
-import {
-  createLocalVue,
-  mount,
-  Wrapper,
-} from '@vue/test-utils'
+import { createVuetify } from '@/framework'
+import { mount } from '@vue/test-utils'
 
-describe.skip('VAvatar', () => {
-  let mountFunction: (options?: object) => Wrapper<Vue>
-  let localVue: typeof Vue
+describe('VAvatar', () => {
+  const vuetify = createVuetify()
 
-  beforeEach(() => {
-    localVue = createLocalVue()
+  function mountFunction (options = {}) {
+    return mount(VAvatar, {
+      global: {
+        plugins: [vuetify],
+      },
+      ...options,
+    })
+  }
 
-    mountFunction = (options = {}) => {
-      return mount(VAvatar, {
-        localVue,
-        ...options,
-      })
-    }
-  })
-
-  it('should have an v-avatar class', () => {
+  it('should match a snapshot', () => {
     const wrapper = mountFunction()
 
-    expect(wrapper.classes()).toContain('v-avatar')
     expect(wrapper.html()).toMatchSnapshot()
   })
 })

@@ -1,16 +1,25 @@
-// const Vue = require('vue')
-// const Vuetify = require('vuetify')
-// const { components: excludes } = require('./helpers/excludes')
+const { createApp, capitalize, camelize } = require('vue')
+const { createVuetify } = require('vuetify')
+const { components: excludes } = require('./helpers/excludes')
 const { sortBy } = require('lodash')
-const { camelCase } = require('./helpers/text')
-const { getComponentList, parseSassVariables } = require('./helpers/parsing')
+const { kebabCase } = require('./helpers/text')
+const { getPropDefault, getPropType, parseSassVariables } = require('./helpers/parsing')
 const deepmerge = require('./helpers/merge')
 
-// Vue.use(Vuetify)
+const app = createApp()
+const vuetify = createVuetify()
+
+app.use(vuetify)
+
+const warn = console.warn
+console.warn = (...args) => {
+  if (args[0] === '[Vuetify] Unable to get current component instance when generating default prop value') return
+  return warn.apply(console, args)
+}
 
 const loadLocale = (componentName, locale, fallback = {}) => {
   try {
-    const data = require(`./locale-alpha/${locale}/${componentName}`)
+    const data = require(`./locale/${locale}/${componentName}`)
     return Object.assign(fallback, data)
   } catch (err) {
     return fallback
@@ -19,9 +28,10 @@ const loadLocale = (componentName, locale, fallback = {}) => {
 
 const loadMap = (componentName, group, fallback = {}) => {
   try {
-    const map = require(`./maps-alpha/${group}/${componentName}`)
+    const data = require(`./maps/${group}/${componentName}`)
+    const map = data[componentName] ? data[componentName] : data
     return Object.assign(fallback, { ...map })
-  } catch {
+  } catch (err) {
     return fallback
   }
 }
@@ -45,7 +55,7 @@ const addComponentApiDescriptions = (componentName, api, locales) => {
 
     for (const category of ['props', 'events', 'slots', 'functions', 'sass']) {
       for (const item of api[category]) {
-        const name = category === 'props' ? camelCase(item.name) : item.name
+        const name = category === 'props' ? camelize(item.name) : item.name
         let description = ''
         if (category === 'sass') {
           description = (sources[0] && sources[0][category] && sources[0][category][name]) || ''
@@ -100,20 +110,31 @@ const addGenericApiDescriptions = (name, api, locales, categories) => {
 
 const getComponentApi = (componentName, locales) => {
   // if (!component) throw new Error(`Could not find component: ${componentName}`)
-  const componentMap = loadMap(componentName, 'components', { composables: [], props: [], slots: [], events: [], functions: [] })
+  const kebabName = kebabCase(componentName)
+  const componentMap = loadMap(kebabName, 'components', { props: [], slots: [], events: [], functions: [] })
 
-  // get composable props
-  const composableProps = []
-  for (const composable of componentMap.composables) {
-    const props = composable.slice(0, 2) === 'v-'
-      ? getComponentApi(composable, locales).props
-      : loadMap(composable, 'composables', { props: [] }).props
-    composableProps.push(...props)
-  }
+  const component = app._context.components[componentName]
+  const props = Object.keys(component.props).reduce((arr, key) => {
+    const prop = component.props[key]
+
+    if (!prop.default || typeof prop.default !== 'function') {
+      console.warn(`Prop ${key} of component ${componentName} does not have default function. Make sure the component uses makeProps function.`)
+      return arr
+    }
+
+    const type = getPropType(prop.type)
+
+    return [...arr, {
+      name: kebabCase(key),
+      source: prop.source || kebabName,
+      default: getPropDefault(prop.default(), type),
+      type,
+    }]
+  }, [])
 
   const sassVariables = parseSassVariables(componentName)
 
-  const api = deepmerge(componentMap, { name: componentName, props: composableProps, sass: sassVariables, component: true })
+  const api = deepmerge(componentMap, { name: kebabName, props, sass: sassVariables, component: true })
 
   // Make sure things are sorted
   const categories = ['props', 'slots', 'events', 'functions']
@@ -157,12 +178,14 @@ const getApi = (name, locales) => {
   // if (name === '$vuetify') return getVuetifyApi(locales)
   // if (name === 'internationalization') return getInternationalizationApi(locales)
   if (DIRECTIVES.includes(name)) return getDirectiveApi(name, locales)
-  else return getComponentApi(name, locales)
+  else return getComponentApi(capitalize(camelize(name)), locales)
 }
 
 const getComponentsApi = locales => {
   const components = []
-  const componentList = getComponentList()
+  const componentList = Object.keys(app._context.components)
+    .filter(name => !excludes.includes(name))
+    .filter(name => !name.endsWith('Transition')) // TODO: Filter out transitions for now
 
   for (const componentName of componentList) {
     components.push(getComponentApi(componentName, locales))

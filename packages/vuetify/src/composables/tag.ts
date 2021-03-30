@@ -6,10 +6,10 @@ export interface TagProps {
   tag: string
 }
 
-// Props
+// Composables
 export const makeTagProps = propsFactory({
   tag: {
     type: String,
     default: 'div',
   },
-})
+}, 'tag')

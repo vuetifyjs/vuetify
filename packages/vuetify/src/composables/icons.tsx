@@ -1,5 +1,6 @@
 // Utilities
 import { computed, defineComponent, inject, isRef } from 'vue'
+import makeProps from '@/util/makeProps'
 import propsFactory from '@/util/propsFactory'
 
 // Types
@@ -74,16 +75,17 @@ export const makeIconProps = propsFactory({
     type: [String, Object] as PropType<IconValue>,
     required: true,
   },
+  // Could not remove this and use makeTagProps, types complained because it is not required
   tag: {
     type: String,
     required: true,
   },
-})
+}, 'icon')
 
 export const VComponentIcon = defineComponent({
   name: 'VComponentIcon',
 
-  props: makeIconProps(),
+  props: makeProps(makeIconProps()),
 
   setup (props) {
     return () => {
@@ -101,7 +103,7 @@ export const VSvgIcon = defineComponent({
 
   inheritAttrs: false,
 
-  props: makeIconProps(),
+  props: makeProps(makeIconProps()),
 
   setup (props, { attrs }) {
     return () => {
@@ -125,7 +127,7 @@ export const VSvgIcon = defineComponent({
 export const VLigatureIcon = defineComponent({
   name: 'VLigatureIcon',
 
-  props: makeIconProps(),
+  props: makeProps(makeIconProps()),
 
   setup (props) {
     return () => {
@@ -137,7 +139,7 @@ export const VLigatureIcon = defineComponent({
 export const VClassIcon = defineComponent({
   name: 'VClassIcon',
 
-  props: makeIconProps(),
+  props: makeProps(makeIconProps()),
 
   setup (props) {
     return () => {
