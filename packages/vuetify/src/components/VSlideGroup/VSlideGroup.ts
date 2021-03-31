@@ -402,7 +402,10 @@ export const BaseSlideGroup = mixins<options &
           wrapper: wrapper ? wrapper.clientWidth : 0,
         }
 
-        this.isOverflowing = this.widths.wrapper < this.widths.content
+        // https://github.com/vuetifyjs/vuetify/issues/13212
+        // We add +1 to the wrappers width to prevent an issue where the `clientWidth`
+        // gets calculated wrongly by the browser if using a different zoom-level.
+        this.isOverflowing = this.widths.wrapper + 1 < this.widths.content
 
         this.scrollIntoView()
       })

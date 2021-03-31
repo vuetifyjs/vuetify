@@ -1,64 +1,98 @@
 <template>
-  <v-text-field
-    id="doc-search"
-    ref="search"
-    v-model="model"
-    :background-color="(!theme.isDark && !isFocused) ? 'grey lighten-3' : undefined"
-    :class="isSearching ? 'rounded-b-0' : ' rounded-lg'"
-    :flat="!isFocused && !isSearching"
-    :placeholder="placeholder"
-    autocomplete="off"
-    class="mx-2 mx-md-4"
-    dense
-    hide-details
-    solo
-    style="max-width: 450px;"
-    @blur="onBlur"
-    @clear="resetSearch"
-    @focus="onFocus"
-    @keydown.esc="onEsc"
+  <!-- eslint-disable vue/attribute-hyphenation  -->
+  <v-menu
+    v-model="menuModel"
+    max-height="75vh"
+    offset-y
+    readonly
+    @input="resetSearch"
   >
-    <template #prepend-inner>
-      <v-icon
-        :color="!isFocused ? 'grey' : undefined"
-        class="ml-1 mr-2"
+    <template #activator="{ attrs }">
+      <v-text-field
+        ref="searchInput"
+        v-model="searchString"
+        v-bind="attrs"
+        :background-color="(!theme.isDark && !isFocused) ? 'grey lighten-3' : undefined"
+        :class="isSearching ? 'rounded-b-0' : ' rounded-lg'"
+        :flat="!isFocused && !isSearching"
+        :placeholder="placeholder"
+        autocomplete="off"
+        class="mx-2 mx-md-4"
+        dense
+        hide-details
+        solo
+        style="max-width: 450px;"
+        @focus="onFocus"
       >
-        $mdiMagnify
-      </v-icon>
+        <template #prepend-inner>
+          <v-icon
+            :color="!isFocused ? 'grey' : undefined"
+            class="ml-1 mr-2"
+          >
+            $mdiMagnify
+          </v-icon>
+        </template>
+      </v-text-field>
     </template>
-  </v-text-field>
+
+    <v-card>
+      <ais-instant-search
+        :search-client="searchClient"
+        :search-function="searchFunction"
+        index-name="vuetifyjs"
+      >
+        <ais-configure
+          :facetFilters="[`language:${locale}`]"
+          :hitsPerPage="50"
+          :query="searchString"
+        />
+
+        <ais-hits v-slot="{ items }">
+          <search-results :groups="transformItems(items)" />
+        </ais-hits>
+      </ais-instant-search>
+
+      <ais-powered-by />
+    </v-card>
+  </v-menu>
 </template>
 
 <script>
   // Utilities
   import { get } from 'vuex-pathify'
+  import { groupItems, sortItems } from 'vuetify/lib/util/helpers'
+  import algoliasearch from 'algoliasearch'
+  import SearchResults from './SearchResults'
 
   // Globals
-  import { IN_BROWSER, IS_PROD } from '@/util/globals'
+  import { IN_BROWSER } from '@/util/globals'
 
   // This behavior should be easier to do with solo fields
   // TODO: Review this for v3
   export default {
     name: 'DefaultSearch',
 
+    components: { SearchResults },
+
     inject: ['theme'],
 
     data: () => ({
-      docsearch: {},
-      hasBooted: false,
       isFocused: false,
-      model: '',
-      timeout: null,
+      menuModel: false,
+      searchClient: algoliasearch(
+        'BH4D9OD16A', // docsearch app ID
+        '259d4615e283a1bbaa3313b4eff7881c' // vuetify API key
+      ),
+      searchString: '',
     }),
 
     computed: {
+      locale: get('route/params@locale'),
       search: get('route/query@search'),
       isSearching () {
-        return this.model && this.model.length > 0
+        return this.searchString && this.searchString.length > 0
       },
       placeholder () {
-        if (this.isFocused) return ''
-
         let placeholder = this.$t('search.placeholder')
 
         if (!this.$vuetify.breakpoint.mobile) {
@@ -72,155 +106,95 @@
     watch: {
       isSearching (val) {
         val
-          ? this.$refs.search.focus()
+          ? this.menuModel = true
           : this.resetSearch()
       },
     },
 
     mounted () {
       if (!IN_BROWSER) return
-
-      document.onkeydown = e => {
-        e = e || window.event
-
-        if (
-          e.key === '/' &&
-          e.target !== this.$refs.search.$refs.input
-        ) {
-          e.preventDefault()
-
-          this.$refs.search.focus()
-        }
+      if (this.search) {
+        this.$nextTick(() => {
+          this.searchString = this.search
+          this.$refs.searchInput.focus()
+        })
       }
 
-      // Focus and search if available
-      if (this.search) this.$refs.search.focus()
+      document.addEventListener('keydown', this.onDocumentKeydown)
     },
 
     beforeDestroy () {
       if (IN_BROWSER) return
 
-      document.onkeydown = null
-
-      this.resetSearch()
+      document.removeEventListener('keydown', this.onDocumentKeydown)
     },
 
     methods: {
-      async init (docsearch) {
-        const vm = this
-
-        this.docsearch = docsearch({
-          apiKey: '259d4615e283a1bbaa3313b4eff7881c',
-          autocompleteOptions: {
-            appendTo: '#app-bar',
-            autoselect: true,
-            clearOnSelected: true,
-            debug: !IS_PROD,
-            hint: false,
-          },
-          handleSelected (input, event, suggestion) {
-            vm.$router.push(suggestion.url.split('.com').pop())
-            vm.resetSearch(400)
-          },
-          indexName: 'vuetifyjs',
-          inputSelector: '#doc-search',
-        })
-
-        if (!this.search) return
-
-        this.model = this.search
-
-        this.$refs.search.focus()
-
-        await this.$nextTick()
-
-        // Dispatch an event to trigger agolia search menu
-        const event = new Event('input')
-
-        this.$refs.search.$refs.input.dispatchEvent(event)
-      },
-      onBlur () {
-        this.resetSearch()
-      },
-      onEsc () {
-        this.$refs.search.blur()
-      },
       async onFocus () {
         clearTimeout(this.timeout)
 
-        if (!this.hasBooted) {
-          Promise.all([
-            import(
-              /* webpackChunkName: "docsearch" */
-              'docsearch.js/dist/cdn/docsearch.min.js'
-            ),
-            import(
-              /* webpackChunkName: "docsearch" */
-              'docsearch.js/dist/cdn/docsearch.min.css'
-            ),
-          ]).then(([promise]) => this.init(promise.default))
-
-          this.hasBooted = true
-        }
-
         this.isFocused = true
       },
-      resetSearch (timeout = 0) {
+      searchFunction (helper) {
+        helper.state.query && helper.search()
+      },
+      transformItems (items) {
+        const sorted = sortItems([...items], ['hierarchy.lvl0', 'hierarchy.lvl1'], [false, false], this.locale)
+          .map(item => {
+            const url = new URL(item.url)
+
+            return {
+              ...item,
+              url: url.href.split(url.origin).pop(),
+            }
+          })
+        const groups = groupItems(sorted, ['hierarchy.lvl0'])
+
+        groups.forEach(group => {
+          group.items = groupItems(group.items, ['hierarchy.lvl1'])
+        })
+
+        return groups
+      },
+      resetSearch () {
         clearTimeout(this.timeout)
 
         this.$nextTick(() => {
-          this.model = undefined
-          this.timeout = setTimeout(() => (this.isFocused = false), timeout)
-
-          if (!this.docsearch) return
-
-          this.docsearch.autocomplete.autocomplete.close()
-          this.docsearch.autocomplete.autocomplete.setVal('')
+          this.searchString = ''
+          this.timeout = setTimeout(() => this.isFocused = false)
+          this.menuModel = false
         })
+      },
+      onDocumentKeydown (e) {
+        if (
+          e.key === '/' &&
+          e.target !== this.$refs.searchInput.$refs.input
+        ) {
+          e.preventDefault()
+
+          this.$refs.searchInput.focus()
+        }
       },
     },
   }
 </script>
 
-<style lang="sass">
-  #app
-    .algolia-docsearch-suggestion--title
-      margin-bottom: 0
+<style lang="sass" scoped>
+  .v-menu__content
+    width: 0
 
-    .algolia-autocomplete
+    &, & > *
+      display: flex
+      flex-direction: column
+      overflow: hidden
 
-      .ds-dropdown-menu
-        clip-path: inset(0px -12px -12px -12px) !important
-        box-shadow: 0px 1px 4px 0px rgba(32, 33, 36, 0.28) !important
-        border-radius: 0 0 8px 8px
-        left: -52px !important
-        top: 0px !important
-        min-width: calc(100% + 64px)
-        max-width: calc(100%)
+  .ais-InstantSearch
+    flex: 1
+    min-height: 0
+    overflow-y: auto
 
-        [class^=ds-dataset-]
-          border-radius: 0 0 8px 8px
-          border-color: transparent
-
-        &:before
-          display: none
-
-      a
-        text-decoration: none !important
-
-    &.theme--dark
-      color: white
-
-      [class^=ds-dataset-],
-      .algolia-docsearch-suggestion
-        background: #1E1E1E !important
-
-        .algolia-docsearch-suggestion--highlight
-          color: #2196f3
-
-        .algolia-docsearch-suggestion--title
-          color: #FFFFFF
-
-        .algolia-docsearch-suggestion--category-header
-          color: #a4a7ae
+  .ais-PoweredBy
+    display: flex
+    justify-content: flex-end
+    padding: 8px 8px 0
 </style>

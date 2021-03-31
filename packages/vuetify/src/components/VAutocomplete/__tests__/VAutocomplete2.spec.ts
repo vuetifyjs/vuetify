@@ -156,6 +156,7 @@ describe('VAutocomplete.ts', () => {
 
   it('should not hide menu when no data but has no-data slot', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         combobox: true,
       },
@@ -278,6 +279,7 @@ describe('VAutocomplete.ts', () => {
 
   it('should not show menu when items are updated and hide-no-data is enabled', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         hideNoData: true,
         items: ['Something first'],
@@ -373,6 +375,7 @@ describe('VAutocomplete.ts', () => {
   // https://github.com/vuetifyjs/vuetify/issues/4580
   it('should display menu when hide-no-date and hide-selected are enabled and selected item does not match search', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         items: [1, 2],
         value: 1,

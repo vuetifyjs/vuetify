@@ -155,9 +155,15 @@ export default baseMixins.extend<options>().extend({
       return `list-${this._uid}`
     },
     computedCounterValue (): number {
-      return this.multiple
-        ? this.selectedItems.length
-        : (this.getText(this.selectedItems[0]) || '').toString().length
+      const value = this.multiple
+        ? this.selectedItems
+        : (this.getText(this.selectedItems[0]) || '').toString()
+
+      if (typeof this.counterValue === 'function') {
+        return this.counterValue(value)
+      }
+
+      return value.length
     },
     directives (): VNodeDirective[] | undefined {
       return this.isFocused ? [{
@@ -342,22 +348,23 @@ export default baseMixins.extend<options>().extend({
     },
     genChipSelection (item: object, index: number) {
       const isDisabled = (
-        !this.isInteractive ||
+        this.isDisabled ||
         this.getDisabled(item)
       )
+      const isInteractive = !isDisabled && this.isInteractive
 
       return this.$createElement(VChip, {
         staticClass: 'v-chip--select',
         attrs: { tabindex: -1 },
         props: {
-          close: this.deletableChips && !isDisabled,
+          close: this.deletableChips && isInteractive,
           disabled: isDisabled,
           inputValue: index === this.selectedIndex,
           small: this.smallChips,
         },
         on: {
           click: (e: MouseEvent) => {
-            if (isDisabled) return
+            if (!isInteractive) return
 
             e.stopPropagation()
 
@@ -371,7 +378,7 @@ export default baseMixins.extend<options>().extend({
     genCommaSelection (item: object, index: number, last: boolean) {
       const color = index === this.selectedIndex && this.computedColor
       const isDisabled = (
-        !this.isInteractive ||
+        this.isDisabled ||
         this.getDisabled(item)
       )
 
@@ -448,6 +455,7 @@ export default baseMixins.extend<options>().extend({
           'aria-readonly': String(this.isReadonly),
           'aria-activedescendant': getObjectValueByPath(this.$refs.menu, 'activeTile.id'),
           autocomplete: getObjectValueByPath(input.data!, 'attrs.autocomplete', 'off'),
+          placeholder: (!this.isDirty && (this.isFocused || !this.hasLabel)) ? this.placeholder : undefined,
         },
         on: { keypress: this.onKeyPress },
       })
@@ -790,6 +798,9 @@ export default baseMixins.extend<options>().extend({
 
       window.requestAnimationFrame(() => {
         menu.getTiles()
+
+        if (!menu.hasClickableTiles) return this.activateMenu()
+
         switch (keyCode) {
           case keyCodes.up:
             menu.prevTile()
@@ -804,7 +815,7 @@ export default baseMixins.extend<options>().extend({
             menu.lastTile()
             break
         }
-        menu.activeTile && menu.activeTile.click()
+        this.selectItem(this.allItems[this.getMenuIndex()])
       })
     },
     selectItem (item: object) {

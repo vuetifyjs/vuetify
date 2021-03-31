@@ -728,4 +728,21 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
 
     expect(wrapper.find('.v-date-picker-title__date').html()).toMatchSnapshot()
   })
+
+  it('should correctly show weeks and dates when showWeek and showAdjacentMonths props are passed', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: '2021-02-01',
+        firstDayOfWeek: 1,
+        showWeek: true,
+        showAdjacentMonths: true,
+      },
+    })
+
+    const lastWeekEl = wrapper.find('.v-date-picker-table--date tbody tr:last-child td small')
+    const lastDayEl = wrapper.findAll('.v-date-picker-table--date tbody tr:last-child td button div').at(6)
+
+    expect(lastWeekEl.text()).toBe('09')
+    expect(lastDayEl.text()).toBe('7')
+  })
 })
