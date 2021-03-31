@@ -99,9 +99,12 @@ export default VSelect.extend({
         return this.lazySearch
       },
       set (val: any) { // TODO: this should be `string | null` but it breaks lots of other types
-        this.lazySearch = val
-
-        this.$emit('update:search-input', val)
+        // emit update event only when the new
+        // search value is different from previous
+        if (this.lazySearch !== val) {
+          this.lazySearch = val
+          this.$emit('update:search-input', val)
+        }
       },
     },
     isAnyValueAllowed (): boolean {
