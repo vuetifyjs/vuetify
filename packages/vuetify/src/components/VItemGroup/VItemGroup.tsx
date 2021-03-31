@@ -16,7 +16,7 @@ export default defineComponent({
 
   props: makeProps({
     ...makeGroupProps({
-      selectedClass: 'v-item--active',
+      selectedClass: 'v-item--selected',
     }),
     ...makeTagProps(),
   }),

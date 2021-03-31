@@ -23,11 +23,11 @@ describe('VItemGroup', () => {
       slots: {
         default: () => [
           h(VItem, { value: 'foo' }, {
-            default: ({ toggle }: any) => h('div', { id: 'item', onClick: toggle }, ['foo'])
+            default: ({ toggle }: any) => h('div', { id: 'item', onClick: toggle }, ['foo']),
           }),
           h(VItem, { value: 'bar' }, {
-            default: ({ toggle }: any) => h('div', { id: 'item', onClick: toggle }, ['bar'])
-          })
+            default: ({ toggle }: any) => h('div', { id: 'item', onClick: toggle }, ['bar']),
+          }),
         ],
       },
     })
@@ -52,11 +52,11 @@ describe('VItemGroup', () => {
       slots: {
         default: () => [
           h(VItem, { value: 'foo' }, {
-            default: ({ toggle }: any) => h('div', { id: 'item', onClick: toggle }, ['foo'])
+            default: ({ toggle }: any) => h('div', { id: 'item', onClick: toggle }, ['foo']),
           }),
           h(VItem, { value: 'bar' }, {
-            default: ({ toggle }: any) => h('div', { id: 'item', onClick: toggle }, ['bar'])
-          })
+            default: ({ toggle }: any) => h('div', { id: 'item', onClick: toggle }, ['bar']),
+          }),
         ],
       },
     })
@@ -79,11 +79,11 @@ describe('VItemGroup', () => {
       slots: {
         default: () => [
           h(VItem, { value: 'foo' }, {
-            default: ({ toggle }: any) => h('div', { id: 'item', onClick: toggle }, ['foo'])
+            default: ({ toggle }: any) => h('div', { id: 'item', onClick: toggle }, ['foo']),
           }),
           h(VItem, { value: 'bar' }, {
-            default: ({ toggle }: any) => h('div', { id: 'item', onClick: toggle }, ['bar'])
-          })
+            default: ({ toggle }: any) => h('div', { id: 'item', onClick: toggle }, ['bar']),
+          }),
         ],
       },
     })
@@ -109,11 +109,11 @@ describe('VItemGroup', () => {
       slots: {
         default: () => [
           h(VItem, { value: 'foo', disabled: true }, {
-            default: ({ toggle }: any) => h('div', { id: 'item', onClick: toggle }, ['foo'])
+            default: ({ toggle }: any) => h('div', { id: 'item', onClick: toggle }, ['foo']),
           }),
           h(VItem, { value: 'bar' }, {
-            default: ({ toggle }: any) => h('div', { id: 'item', onClick: toggle }, ['bar'])
-          })
+            default: ({ toggle }: any) => h('div', { id: 'item', onClick: toggle }, ['bar']),
+          }),
         ],
       },
     })
@@ -202,7 +202,7 @@ describe('VItemGroup', () => {
     const wrapper = mountFunction({
       props: {
         modelValue: 'foo',
-        'onUpdate:modelValue': change
+        'onUpdate:modelValue': change,
       },
       slots: {
         default: () => h(VItem, { value: 'foo' }, () => ['foo']),
