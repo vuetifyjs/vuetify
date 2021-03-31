@@ -3,6 +3,7 @@
 +theme(v-select) using ($material)
   .v-select__selections
     color: map-deep-get($material, 'text', 'primary')
+    min-height: $select-selections-min-height
 
   &.v-input--is-disabled
     .v-select__selections
