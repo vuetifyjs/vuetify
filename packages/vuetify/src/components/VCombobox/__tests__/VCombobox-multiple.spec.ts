@@ -483,4 +483,32 @@ describe('VCombobox.ts', () => {
 
     expect(change).not.toHaveBeenCalled()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/12351
+  it('should correctly handle duplicate items', async () => {
+    const { wrapper, change } = createMultipleCombobox({
+      chips: true,
+      multiple: true,
+      items: [
+        { text: 'foo', value: 'foo' },
+        { text: 'bar', value: 'bar' },
+      ],
+      value: [
+        { text: 'foo', value: 'foo' },
+      ],
+    })
+
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    input.trigger('focus')
+    element.value = 'foo'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toHaveBeenLastCalledWith([{ text: 'foo', value: 'foo' }])
+  })
 })
