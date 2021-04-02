@@ -3,8 +3,7 @@ import './VLayout.sass'
 
 // Utilities
 import { defineComponent } from 'vue'
-import { useRender } from '@/util/useRender'
-import makeProps from '@/util/makeProps'
+import { useRender, makeProps } from '@/util'
 
 // Composables
 import { createLayout, makeLayoutProps } from '@/composables/layout'

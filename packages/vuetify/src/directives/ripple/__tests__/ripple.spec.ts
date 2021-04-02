@@ -5,7 +5,7 @@ import { defineComponent } from 'vue'
 import Ripple from '../'
 
 // Utilities
-import { keyCodes } from '@/util/helpers'
+import { keyCodes } from '@/util'
 
 const testComponent = defineComponent({
   directives: { Ripple },

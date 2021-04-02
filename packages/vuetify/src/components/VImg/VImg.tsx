@@ -24,13 +24,13 @@ import type { ObserveDirectiveBinding } from '@/directives/intersect'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utils
-import { maybeTransition } from '@/util'
-import { useDirective } from '@/util/useDirective'
-import { useRender } from '@/util/useRender'
-import makeProps from '@/util/makeProps'
-
-// Globals
-import { SUPPORTS_INTERSECTION } from '@/util/globals'
+import {
+  maybeTransition,
+  useDirective,
+  useRender,
+  makeProps,
+  SUPPORTS_INTERSECTION,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'

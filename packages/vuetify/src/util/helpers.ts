@@ -1,26 +1,6 @@
 import type { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
 import type { Slots, VNode, TransitionProps } from 'vue'
-import { Fragment, defineComponent, h, capitalize, camelize, Transition, mergeProps } from 'vue'
-import { makeTagProps } from '@/composables/tag'
-import makeProps from './makeProps'
-
-export function createSimpleFunctional (
-  klass: string,
-  tag = 'div',
-  name?: string
-) {
-  return defineComponent({
-    name: name ?? capitalize(camelize(klass.replace(/__/g, '-'))),
-
-    props: makeProps(makeTagProps({ tag })),
-
-    setup (props, { slots }) {
-      return () => h(props.tag, {
-        class: klass,
-      }, slots.default?.())
-    },
-  })
-}
+import { Fragment, h, camelize, Transition, mergeProps } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1

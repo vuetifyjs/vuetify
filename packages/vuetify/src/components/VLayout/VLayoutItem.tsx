@@ -3,7 +3,7 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 
 // Utilities
 import { toRef, defineComponent, computed } from 'vue'
-import makeProps from '@/util/makeProps'
+import { makeProps } from '@/util'
 
 // Types
 import type { Prop } from 'vue'

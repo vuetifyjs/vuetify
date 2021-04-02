@@ -10,7 +10,7 @@ import type {
 } from 'vuetify/types'
 
 // Utilities
-import { keys } from '@/util/helpers'
+import { keys } from '@/util'
 
 export interface TouchStoredHandlers {
   touchstart: (e: TouchEvent) => void

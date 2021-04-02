@@ -1,7 +1,7 @@
 // Utilities
 import { computed, defineComponent, inject, isRef } from 'vue'
-import makeProps from '@/util/makeProps'
-import propsFactory from '@/util/propsFactory'
+import { makeProps } from '@/util/makeProps'
+import { propsFactory } from '@/util/propsFactory'
 
 // Types
 import type { JSXComponent, PropType, InjectionKey, Ref } from 'vue'

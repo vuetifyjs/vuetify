@@ -1,8 +1,7 @@
 // Utilities
-import { consoleWarn } from '@/util/console'
 import { reactive, provide, inject, computed, onBeforeUnmount, toRef, onMounted } from 'vue'
 import { useProxiedModel } from './proxiedModel'
-import { wrapInArray, getUid, deepEqual } from '@/util/helpers'
+import { consoleWarn, wrapInArray, getUid, deepEqual } from '@/util'
 
 // Types
 import type { Ref, UnwrapRef, InjectionKey } from 'vue'

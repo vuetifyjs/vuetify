@@ -7,8 +7,7 @@ import {
   watch,
   onMounted,
 } from 'vue'
-import { consoleWarn } from '@/util/console'
-import propsFactory from '@/util/propsFactory'
+import { consoleWarn, propsFactory } from '@/util'
 
 // Types
 import type { Ref } from 'vue'

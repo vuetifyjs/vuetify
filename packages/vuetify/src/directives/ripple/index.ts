@@ -2,7 +2,7 @@
 import './VRipple.sass'
 
 // Utilities
-import { isObject, keyCodes } from '@/util/helpers'
+import { isObject, keyCodes } from '@/util'
 
 // Types
 import type {

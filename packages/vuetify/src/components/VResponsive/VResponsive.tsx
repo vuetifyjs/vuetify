@@ -4,7 +4,7 @@ import './VResponsive.sass'
 // Utilities
 import { defineComponent, computed } from 'vue'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import makeProps from '@/util/makeProps'
+import { makeProps } from '@/util'
 
 // Composables
 export function useAspectStyles (props: { aspectRatio?: string | number }) {

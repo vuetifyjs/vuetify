@@ -8,7 +8,7 @@ import Intersect from '../../directives/intersect'
 import { consoleWarn } from '../../util/console'
 
 // Globals
-import { SUPPORTS_INTERSECTION } from '@/util/globals'
+import { SUPPORTS_INTERSECTION } from '@/util'
 
 // Types
 import Vue from 'vue'

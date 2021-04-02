@@ -1,7 +1,7 @@
 import { inject } from 'vue'
-import { createTheme, VuetifyThemeSymbol } from './composables/theme'
+import { mergeDeep } from '@/util'
+import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
 import { defaultSets, VuetifyIconSymbol } from '@/composables/icons'
-import { mergeDeep } from './util'
 import { aliases, mdi } from '@/iconsets/mdi'
 
 // Types

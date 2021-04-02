@@ -1,6 +1,6 @@
 // Utilities
 import { defineComponent, TransitionGroup, Transition, h } from 'vue'
-import makeProps from '@/util/makeProps'
+import { makeProps } from '@/util'
 
 // Types
 import type { FunctionalComponent, Prop } from 'vue'

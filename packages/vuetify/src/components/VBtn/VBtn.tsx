@@ -20,8 +20,8 @@ import VIcon from '@/components/VIcon/VIcon'
 
 // Utilities
 import { computed, defineComponent, withDirectives } from 'vue'
-import makeProps from '@/util/makeProps'
-import { useDirective } from '@/util/useDirective'
+import { makeProps, useDirective } from '@/util'
+
 import { makeSizeProps, useSize } from '@/composables/size'
 
 export default defineComponent({

@@ -6,7 +6,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { defineComponent, computed, h, capitalize } from 'vue'
-import makeProps from '@/util/makeProps'
+import { makeProps } from '@/util'
 
 // Types
 import type { Prop } from 'vue'
