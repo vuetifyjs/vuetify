@@ -5,7 +5,7 @@ import { defaultSets, VuetifyIconSymbol } from '@/composables/icons'
 import { aliases, mdi } from '@/iconsets/mdi'
 
 // Types
-import type { InjectionKey, App } from 'vue'
+import type { App, InjectionKey } from 'vue'
 import type { ThemeOptions } from '@/composables/theme'
 import type { IconOptions } from '@/composables/icons'
 

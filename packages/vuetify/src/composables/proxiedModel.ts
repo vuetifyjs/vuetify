@@ -1,5 +1,5 @@
 // Utilities
-import { ref, computed, getCurrentInstance } from 'vue'
+import { computed, getCurrentInstance, ref } from 'vue'
 import { consoleError, toKebabCase } from '@/util'
 
 // Types

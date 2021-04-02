@@ -1,4 +1,4 @@
-import { consoleWarn, consoleError } from '../console'
+import { consoleError, consoleWarn } from '../console'
 
 describe('console', () => {
   it('should generate a warning', () => {

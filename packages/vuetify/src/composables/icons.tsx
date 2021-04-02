@@ -4,7 +4,7 @@ import { makeProps } from '@/util/makeProps'
 import { propsFactory } from '@/util/propsFactory'
 
 // Types
-import type { JSXComponent, PropType, InjectionKey, Ref } from 'vue'
+import type { InjectionKey, JSXComponent, PropType, Ref } from 'vue'
 
 export type IconValue = string | JSXComponent
 

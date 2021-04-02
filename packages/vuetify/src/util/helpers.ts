@@ -1,6 +1,6 @@
-import type { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
-import type { Slots, VNode, TransitionProps } from 'vue'
-import { Fragment, h, camelize, Transition, mergeProps } from 'vue'
+import type { DataTableCompareFunction, ItemGroup, SelectItemKey } from 'vuetify/types'
+import type { Slots, TransitionProps, VNode } from 'vue'
+import { camelize, Fragment, h, mergeProps, Transition } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1

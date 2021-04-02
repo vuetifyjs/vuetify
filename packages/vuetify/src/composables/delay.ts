@@ -1,5 +1,5 @@
 // Utilities
-import { propsFactory, IN_BROWSER } from '@/util'
+import { IN_BROWSER, propsFactory } from '@/util'
 
 // Types
 export interface DelayProps {

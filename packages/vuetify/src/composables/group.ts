@@ -1,10 +1,10 @@
 // Utilities
-import { reactive, provide, inject, computed, onBeforeUnmount, toRef, onMounted } from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef } from 'vue'
 import { useProxiedModel } from './proxiedModel'
-import { consoleWarn, wrapInArray, getUid, deepEqual } from '@/util'
+import { consoleWarn, deepEqual, getUid, wrapInArray } from '@/util'
 
 // Types
-import type { Ref, UnwrapRef, InjectionKey } from 'vue'
+import type { InjectionKey, Ref, UnwrapRef } from 'vue'
 
 interface GroupItem {
   id: number
