@@ -79,7 +79,6 @@ module.exports = {
       'messages',
       'persistentHint',
       'prependIcon',
-      'readonly',
       'success',
       'successMessages',
       'validateOnBlur',
