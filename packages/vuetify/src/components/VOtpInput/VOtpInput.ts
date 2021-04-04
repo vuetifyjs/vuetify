@@ -21,7 +21,7 @@ const baseMixins = mixins(
 )
 interface options extends InstanceType<typeof baseMixins> {
   $refs: {
-    input: HTMLInputElement
+    input: HTMLInputElement[]
   }
 }
 
@@ -59,7 +59,6 @@ export default baseMixins.extend<options>().extend({
         ...VInput.options.computed.classes.call(this),
         'v-input--hide-details': true,
         'v-text-field': true,
-        'v-otp-input': true,
         'v-text-field--enclosed': true,
         'v-text-field--outlined': true,
       }
@@ -112,7 +111,6 @@ export default baseMixins.extend<options>().extend({
           mousedown: (e: Event) => this.onMouseDown(e, otpIdx),
           mouseup: (e: Event) => this.onMouseUp(e, otpIdx),
         },
-        ref: `input-slot-${otpIdx}`,
       }), [this.genDefaultSlot(otpIdx)])
     },
     genControl (otpIdx: number) {
@@ -180,6 +178,7 @@ export default baseMixins.extend<options>().extend({
         attrs: {
           ...this.attrs$,
           disabled: this.isDisabled,
+          readonly: this.isReadonly,
           type: this.type,
           id: `${this.computedId}--${otpIdx}`,
           class: `otp-field-box--${otpIdx}`,
@@ -193,7 +192,8 @@ export default baseMixins.extend<options>().extend({
           keydown: this.onKeyDown,
           keyup: (e: KeyboardEvent) => this.onKeyUp(e, otpIdx),
         }),
-        ref: `input-${otpIdx}`,
+        ref: 'input',
+        refInFor: true,
       })
     },
     genTextFieldSlot (otpIdx: number): VNode {
@@ -208,25 +208,25 @@ export default baseMixins.extend<options>().extend({
       e && this.$nextTick(() => this.$emit('blur', e))
     },
     onClick (otpIdx: number) {
-      if (this.isFocused || this.isDisabled || !this.$refs[`input-${otpIdx}`]) return
+      if (this.isFocused || this.isDisabled || !this.$refs.input[otpIdx]) return
 
       this.onFocus(undefined, otpIdx)
     },
     onFocus (e?: Event, otpIdx?: number) {
       e?.preventDefault()
       e?.stopPropagation()
-      const refKey = 'input-' + otpIdx
-      if (!this.$refs[refKey]) return
+      const elements = this.$refs.input as HTMLInputElement[]
+      const ref = this.$refs.input && elements[otpIdx || 0]
+      if (!ref) return
 
-      const input = this.$refs[refKey] as HTMLInputElement
-      if (document.activeElement !== this.$refs[refKey]) {
-        input.focus()
-        return input.select()
+      if (document.activeElement !== ref) {
+        ref.focus()
+        return ref.select()
       }
 
       if (!this.isFocused) {
         this.isFocused = true
-        input.select()
+        ref.select()
         e && this.$emit('focus', e)
       }
     },
@@ -249,7 +249,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     clearFocus (index: number) {
-      const input = this.$refs[`input-${index}`] as HTMLInputElement
+      const input = this.$refs.input[index] as HTMLInputElement
       input.blur()
     },
     onKeyDown (e: KeyboardEvent) {
@@ -261,7 +261,7 @@ export default baseMixins.extend<options>().extend({
     },
     onMouseDown (e: Event, otpIdx: number) {
       // Prevent input from being blurred
-      if (e.target !== this.$refs[`input-${otpIdx}`]) {
+      if (e.target !== this.$refs.input[otpIdx]) {
         e.preventDefault()
         e.stopPropagation()
       }
@@ -275,9 +275,6 @@ export default baseMixins.extend<options>().extend({
     },
     onPaste (event: ClipboardEvent, index: number) {
       const maxCursor = this.length - 1
-      // const clipboardData = event?.clipboardData?.getData('Text') ||
-      //   window?.clipboardData ||
-      //   event?.originalEvent.clipboardData
       const inputVal = event?.clipboardData?.getData('Text')
       const inputDataArray = inputVal?.split('') || []
       event.preventDefault()
@@ -337,7 +334,7 @@ export default baseMixins.extend<options>().extend({
   },
   render (h): VNode {
     return h('div', {
-      class: this.classes,
+      class: 'v-otp-input',
     }, this.genContent())
   },
 })

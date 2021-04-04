@@ -133,7 +133,7 @@ describe('VOtpInput.ts', () => {
     input.trigger('mouseup')
     input.trigger('mouseup')
 
-    expect(wrapper.vm.$refs['input-0']).toBe(element)
+    expect(wrapper.vm.$refs.input[0]).toBe(element)
     expect(focus).toHaveBeenCalledTimes(1)
   })
 
@@ -245,7 +245,7 @@ describe('VOtpInput.ts', () => {
     input2.trigger('input')
     await wrapper.vm.$nextTick()
 
-    const onFocus = jest.spyOn(wrapper.vm.$refs['input-0'], 'focus')
+    const onFocus = jest.spyOn(wrapper.vm.$refs.input[0], 'focus')
     expect(onFocus).toHaveBeenCalledTimes(0)
     expect(onFinish).toHaveBeenCalledTimes(1)
     expect(clearFocus).toHaveBeenCalledTimes(1)
@@ -271,7 +271,7 @@ describe('VOtpInput.ts', () => {
     input.trigger('input')
     await wrapper.vm.$nextTick()
 
-    const onFocus = jest.spyOn(wrapper.vm.$refs['input-0'], 'focus')
+    const onFocus = jest.spyOn(wrapper.vm.$refs.input[0], 'focus')
     expect(onFocus).toHaveBeenCalledTimes(0)
   })
 
