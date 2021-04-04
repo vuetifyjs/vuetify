@@ -115,7 +115,7 @@ export default CalendarBase.extend({
     eventNameFunction (): CalendarEventNameFunction {
       return typeof this.eventName === 'function'
         ? this.eventName
-        : (event, timedEvent) => escapeHTML(event.input[this.eventName as string] as string)
+        : (event, timedEvent) => escapeHTML(event.input[this.eventName as string] as string || '')
     },
     eventModeFunction (): CalendarEventOverlapMode {
       return typeof this.eventOverlapMode === 'function'
@@ -403,7 +403,7 @@ export default CalendarBase.extend({
     },
     isEventForCategory (event: CalendarEventParsed, category: CalendarCategory): boolean {
       return !this.categoryMode ||
-        (typeof category === 'object' && category.calendarName &&
+        (typeof category === 'object' && category.categoryName &&
         category.categoryName === event.category) ||
         (typeof event.category !== 'string' && category === null)
     },

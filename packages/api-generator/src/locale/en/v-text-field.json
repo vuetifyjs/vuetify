@@ -12,6 +12,7 @@
     "multiLine": "Turns into textarea",
     "noResize": "Removes the resize handle, only applies to **multi-line** and **textarea** props",
     "outlined": "Applies the outlined style to the input",
+    "persistentPlaceholder": "Forces placeholder to always be visible",
     "placeholder": "Sets the input’s placeholder text",
     "prefix": "Displays prefix text",
     "prependInnerIcon": "Prepends an icon inside the component's input, uses the same syntax as `v-icon`",

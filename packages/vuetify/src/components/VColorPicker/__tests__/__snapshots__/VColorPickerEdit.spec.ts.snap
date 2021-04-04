@@ -43,7 +43,7 @@ exports[`VColorPickerEdit.ts should change mode 1`] = `
     </span>
   </div>
   <button type="button"
-          class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+          class="v-btn v-btn--icon v-btn--round theme--light v-size--small"
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
@@ -99,7 +99,7 @@ exports[`VColorPickerEdit.ts should change mode 2`] = `
     </span>
   </div>
   <button type="button"
-          class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+          class="v-btn v-btn--icon v-btn--round theme--light v-size--small"
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
@@ -121,7 +121,7 @@ exports[`VColorPickerEdit.ts should change mode 3`] = `
     </span>
   </div>
   <button type="button"
-          class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+          class="v-btn v-btn--icon v-btn--round theme--light v-size--small"
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
@@ -177,7 +177,7 @@ exports[`VColorPickerEdit.ts should change mode 4`] = `
     </span>
   </div>
   <button type="button"
-          class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+          class="v-btn v-btn--icon v-btn--round theme--light v-size--small"
   >
     <span class="v-btn__content">
       <i aria-hidden="true"
@@ -283,7 +283,7 @@ exports[`VColorPickerEdit.ts should render with disabled 1`] = `
   </div>
   <button type="button"
           disabled="disabled"
-          class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+          class="v-btn v-btn--disabled v-btn--icon v-btn--round theme--light v-size--small"
   >
     <span class="v-btn__content">
       <i aria-hidden="true"

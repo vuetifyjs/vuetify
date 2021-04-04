@@ -7,7 +7,8 @@ const DataFooterPageTextScopedProps = {
 }
 
 const DataFooterSlots = [
-  { name: 'pageText', props: DataFooterPageTextScopedProps },
+  { name: 'prepend' },
+  { name: 'page-text', props: DataFooterPageTextScopedProps },
 ]
 
 const DataFooterEvents = [

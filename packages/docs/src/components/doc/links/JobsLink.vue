@@ -13,7 +13,7 @@
     <template #icon>
       <v-badge
         :value="newJobs.length"
-        color="red"
+        color="#ED561B"
         dot
         left
         overlap

@@ -1,0 +1,59 @@
+name: Nightly Release
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * 1' # 0200 Monday UTC
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix:
+        branch: ['master', 'dev', 'next']
+        include:
+          - branch: 'master'
+            tag: 'latest'
+            preid: 'prepatch'
+          - branch: 'dev'
+            tag: 'dev'
+            preid: 'preminor'
+          - branch: 'next'
+            tag: 'next'
+            preid: 'premajor'
+    env:
+      RELEASE_BRANCH: ${{ matrix.branch }}
+      RELEASE_TAG: ${{ matrix.tag }}
+      RELEASE_PREID: ${{ matrix.preid }}
+    steps:
+      - run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ matrix.branch }}
+          fetch-depth: 0
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+      - run: yarn --frozen-lockfile --non-interactive
+      - run: yarn lerna version --conventional-commits --conventional-prerelease --no-push --no-commit-hooks --preid "$RELEASE_BRANCH-$(date +'%Y%m%d')" --yes
+      - run: yarn conventional-changelog -p angular --outfile ./packages/vuetify/CHANGELOG.md -r 2
+      - run: >-
+          node -e "fs.writeFileSync(
+            './package.json',
+            JSON.stringify({ ...require('./package.json'), name: '@vuetify/nightly' }, null, 2)
+          )"
+        working-directory: ./packages/vuetify
+      - run: yarn lerna run build --scope @vuetify/nightly
+      - name: NPM Release
+        run: |
+          npm config set //registry.npmjs.org/:_authToken ${NPM_API_KEY:?}
+          npm publish ./packages/vuetify --tag $RELEASE_TAG --access public
+        env:
+          NPM_API_KEY: ${{ secrets.NPM_TOKEN }}
+          TAG_NAME: ${{ env.RELEASE_TAG }}

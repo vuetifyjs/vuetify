@@ -116,7 +116,7 @@ describe('VRangeSlider.ts', () => {
     container.trigger('mousedown')
 
     expect(wrapper.vm.isActive).toBeTruthy()
-    expect(wrapper.vm.activeThumb).toBe(0)
+    expect(wrapper.vm.activeThumb).toBe(1)
   })
 
   it('should set internal value', () => {
@@ -170,23 +170,6 @@ describe('VRangeSlider.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
-  it('should not change to another handle', async () => {
-    const setInternalValue = jest.fn()
-    const mockParseMouseMoveResult = { value: 1, isInsideTrack: true }
-    const wrapper = mountFunction({
-      methods: { parseMouseMove: e => mockParseMouseMoveResult, setInternalValue },
-      propsData: {
-        min: 0,
-        max: 1,
-        value: [0, 1],
-      },
-    })
-    wrapper.setData({ activeThumb: 0 })
-    wrapper.vm.onMouseMove(null)
-
-    expect(wrapper.vm.activeThumb).toEqual(0)
-    expect(setInternalValue).toHaveBeenCalledWith(1)
-  })
 
   // https://github.com/vuetifyjs/vuetify/issues/9818
   it('should accept falsy values', () => {
@@ -209,5 +192,25 @@ describe('VRangeSlider.ts', () => {
     const [min, max] = wrapper.vm.genInput()
 
     expect(min.data.attrs.id).not.toEqual(max.data.attrs.id)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/12733
+  it('should fill track color', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        trackFillColor: 'red',
+      },
+    })
+    expect(wrapper.find('.v-slider__track-fill.red').exists()).toBe(true)
+  })
+
+  it('should fill track color with rgba string', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        trackFillColor: 'rgba(255, 0, 0, 0.5)',
+      },
+    })
+    const trackFill = wrapper.find('.v-slider__track-fill')
+    expect(trackFill.attributes('style')).toBe('background-color: rgba(255, 0, 0, 0.5);')
   })
 })

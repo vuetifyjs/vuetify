@@ -2,8 +2,8 @@
   "props": {
     "dense": "Makes icon smaller (20px)",
     "disabled": "Disable the input",
-    "left": "Applies appropriate margins to the icon when placed to the **left** of another element or text. Typically used inside of a button",
-    "right": "Applies appropriate margins to the icon when placed to the **right** of another element or text. Typically used inside of a button",
+    "left": "Applies appropriate margins to the icon inside of a button when placed to the **left** of another element or text",
+    "right": "Applies appropriate margins to the icon inside of a button when placed to the **right** of another element or text",
     "size": "Specifies a custom font size for the icon",
     "tag": "Specifies a custom tag to be used"
   }

@@ -10,12 +10,20 @@ $btn-icon-font-size: 18px !default;
 $btn-icon-padding: 12px !default;
 $btn-letter-spacing: .0892857143em !default;
 $btn-outline-border-width: thin !default;
+$btn-round-border-radius: 50% !default;
 $btn-rounded-border-radius: 28px !default;
 $btn-text-transform: uppercase !default;
+$btn-tile-border-radius: 0 !default;
 $btn-transition-duration: 0.28s !default;
 $btn-transition-fn: map-get($transition, 'fast-out-slow-in') !default;
 $btn-transition: opacity 0.2s map-get($transition, 'ease-in-out') !default;
-
+$btn-states: (
+  'states': (
+    'activated': $btn-active-opacity,
+    'focus': $btn-focus-opacity,
+    'hover': $btn-hover-opacity
+  )
+);
 $btn-sizes: () !default;
 $btn-sizes: map-deep-merge(
   (

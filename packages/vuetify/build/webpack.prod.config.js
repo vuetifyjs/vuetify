@@ -1,6 +1,5 @@
 const merge = require('webpack-merge')
 const HappyPack = require('happypack')
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const { config: baseWebpackConfig, happyThreadPool } = require('./webpack.base.config')
 
 // Helpers
@@ -8,7 +7,7 @@ const resolve = file => require('path').resolve(__dirname, file)
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
-    app: './src/index.ts'
+    app: './src/index.ts',
   },
   output: {
     path: resolve('../dist'),
@@ -17,24 +16,24 @@ module.exports = merge(baseWebpackConfig, {
     libraryTarget: 'umd',
     libraryExport: 'default',
     // See https://github.com/webpack/webpack/issues/6522
-    globalObject: `typeof self !== 'undefined' ? self : this`
+    globalObject: `typeof self !== 'undefined' ? self : this`,
   },
   externals: {
     vue: {
       commonjs: 'vue',
       commonjs2: 'vue',
       amd: 'vue',
-      root: 'Vue'
-    }
+      root: 'Vue',
+    },
   },
   module: {
     rules: [
       {
         test: /\.[jt]s$/,
         use: 'happypack/loader?id=scripts',
-        exclude: /node_modules/
-      }
-    ]
+        exclude: /node_modules/,
+      },
+    ],
   },
   plugins: [
     // TODO: hangs build
@@ -49,9 +48,9 @@ module.exports = merge(baseWebpackConfig, {
         'babel-loader',
         {
           loader: 'ts-loader',
-          options: { happyPackMode: true }
-        }
-      ]
-    })
-  ]
+          options: { happyPackMode: true },
+        },
+      ],
+    }),
+  ],
 })

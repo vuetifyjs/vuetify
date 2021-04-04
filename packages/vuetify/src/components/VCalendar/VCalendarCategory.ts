@@ -71,11 +71,13 @@ export default VCalendarDaily.extend({
       }, categoryName === null ? this.categoryForInvalid : categoryName)
     },
     genDays (): VNode[] {
-      const d = this.days[0]
-      let days = this.days.slice()
-      days = new Array(this.parsedCategories.length)
-      days.fill(d)
-      return days.map((v, i) => this.genDay(v, 0, i))
+      const days: VNode[] = []
+      this.days.forEach(d => {
+        const day = new Array(this.parsedCategories.length || 1)
+        day.fill(d)
+        days.push(...day.map((v, i) => this.genDay(v, 0, i)))
+      })
+      return days
     },
     genDay (day: CalendarTimestamp, index: number, categoryIndex: number): VNode {
       const category = this.parsedCategories[categoryIndex]

@@ -75,7 +75,7 @@
         return this.date ? moment(this.date).format('dddd, MMMM Do YYYY') : ''
       },
       computedDateFormattedDatefns () {
-        return this.date ? format(this.date, 'EEEE, MMMM do yyyy') : ''
+        return this.date ? format(parseISO(this.date), 'EEEE, MMMM do yyyy') : ''
       },
     },
   }

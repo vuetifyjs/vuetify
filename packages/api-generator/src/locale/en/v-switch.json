@@ -7,6 +7,7 @@
     "multiple": "Changes expected model to an array"
   },
   "events": {
-    "change": "Emitted when the input is changed by user interaction"
+    "change": "Emitted when the input is changed by user interaction",
+    "click": "Emitted when input is clicked. **Note:** the **change** event should be used instead of **click** when monitoring state change"
   }
 }

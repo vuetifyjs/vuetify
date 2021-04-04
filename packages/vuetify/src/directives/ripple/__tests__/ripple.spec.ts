@@ -125,4 +125,38 @@ describe('ripple.ts', () => {
     jest.runAllTimers()
     expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
   })
+
+  it('should only ripple on one element', () => {
+    const wrapper = mount({
+      directives: { Ripple },
+      template: '<div v-ripple><div class="child" v-ripple></div></div>',
+    })
+
+    const child = wrapper.find('.child').element
+
+    const mousedownEvent = new MouseEvent('mousedown', { detail: 1, bubbles: true })
+    child.dispatchEvent(mousedownEvent)
+
+    expect(wrapper.findAll('.v-ripple__container')).toHaveLength(1)
+
+    const mouseupEvent = new MouseEvent('mouseup', { detail: 1, bubbles: true })
+    child.dispatchEvent(mouseupEvent)
+
+    jest.runAllTimers()
+    expect(wrapper.findAll('.v-ripple__container')).toHaveLength(0)
+  })
+
+  it('should hide ripple on blur if keyboardRipple is true', () => {
+    const wrapper = mountFunction()
+    const keydownEvent = new KeyboardEvent('keydown', { keyCode: 13 })
+    wrapper.element.dispatchEvent(keydownEvent)
+
+    expect(wrapper.find('.v-ripple__container').exists()).toBe(true)
+
+    const blurEvent = new FocusEvent('blur')
+    wrapper.element.dispatchEvent(blurEvent)
+
+    jest.runAllTimers()
+    expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
+  })
 })

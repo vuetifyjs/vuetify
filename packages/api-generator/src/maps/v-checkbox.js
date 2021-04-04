@@ -6,6 +6,10 @@ module.exports = {
     events: [
       ...VInput.events,
       {
+        name: 'change',
+        value: 'any',
+      },
+      {
         name: 'update:indeterminate',
         value: 'boolean',
       },

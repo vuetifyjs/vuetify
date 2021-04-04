@@ -35,7 +35,6 @@
         loading: false,
         medium: false,
         outlined: false,
-        raised: false,
         rounded: false,
         small: false,
         text: false,

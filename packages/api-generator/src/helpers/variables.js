@@ -137,6 +137,18 @@ const VTextField = {
       props: undefined,
       source: 'v-text-field',
     }),
+    {
+      name: 'counter',
+      source: 'v-text-field',
+      props: {
+        props: {
+          dark: 'boolean',
+          light: 'boolean',
+          max: 'string | number',
+          value: 'string',
+        },
+      },
+    },
   ],
 }
 
@@ -246,7 +258,12 @@ const VSlider = {
   ...VInput,
   events: [
     ...VInput.events,
-    ...createItems(['start', 'end'], {
+    ...createItems([
+      'change',
+      'end',
+      'input',
+      'start',
+    ], {
       source: 'v-slider',
       value: 'number',
     }),
@@ -266,6 +283,22 @@ const VSlider = {
       source: 'v-slider',
     },
 
+  ],
+}
+
+const VRangeSlider = {
+  ...VSlider,
+  events: [
+    ...VInput.events,
+    ...createItems([
+      'change',
+      'end',
+      'input',
+      'start',
+    ], {
+      source: 'v-range-slider',
+      value: 'array',
+    }),
   ],
 }
 
@@ -410,6 +443,7 @@ module.exports = {
   VSelect,
   VAutocomplete,
   VSlider,
+  VRangeSlider,
   VTextField,
   VTimestamp,
   VTimestampWithCategory,

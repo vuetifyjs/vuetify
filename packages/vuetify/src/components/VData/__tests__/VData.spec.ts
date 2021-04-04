@@ -102,6 +102,38 @@ describe('VData.ts', () => {
     }))
   })
 
+  it('should group items with null key and missing key as a null group', async () => {
+    const render = jest.fn()
+    const items = [
+      { id: 1, text: 'foo', baz: null },
+      { id: 2, text: 'bar', baz: 'one' },
+      { id: 3, text: 'baz' },
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        items,
+        groupBy: ['baz'],
+      },
+      scopedSlots: {
+        default: render,
+      },
+    })
+
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      groupedItems: [
+        {
+          name: '',
+          items: [items[0], items[2]],
+        },
+        {
+          name: 'one',
+          items: [items[1]],
+        },
+      ],
+    }))
+  })
+
   it('should group items by deep keys', async () => {
     const render = jest.fn()
     const items = [

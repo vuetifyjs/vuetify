@@ -568,13 +568,15 @@ exports[`VDataTableHeader.ts mobile should render with data-table-select header 
       <div class="v-data-table-header-mobile__wrapper">
         <div class="v-data-table-header-mobile__select">
           <div class="v-data-table__checkbox v-simple-checkbox">
-            <div class="v-input--selection-controls__ripple">
+            <div class="v-input--selection-controls__input">
+              <i aria-hidden="true"
+                 class="v-icon notranslate material-icons theme--light"
+              >
+                $checkboxOff
+              </i>
+              <div class="v-input--selection-controls__ripple">
+              </div>
             </div>
-            <i aria-hidden="true"
-               class="v-icon notranslate material-icons theme--light"
-            >
-              $checkboxOff
-            </i>
           </div>
         </div>
         <div class="v-input v-input--hide-details theme--light v-text-field v-select">

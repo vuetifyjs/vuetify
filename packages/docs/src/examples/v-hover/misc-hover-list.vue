@@ -43,12 +43,12 @@
                         v-for="(icon, index) in icons"
                         :key="index"
                         :class="{ 'show-btns': hover }"
-                        color="transparent"
+                        :color="transparent"
                         icon
                       >
                         <v-icon
                           :class="{ 'show-btns': hover }"
-                          color="transparent"
+                          :color="transparent"
                         >
                           {{ icon }}
                         </v-icon>
@@ -74,7 +74,7 @@
           title: 'New Releases',
           text: `It's New Release Friday`,
           subtext: 'Newly released songs. Updated daily.',
-          img: 'http://lorempixel.com/output/nightlife-q-c-640-480-5.jpg',
+          img: 'https://lorempixel.com/output/nightlife-q-c-640-480-5.jpg',
         },
         {
           title: 'Rock',
@@ -86,7 +86,7 @@
           title: 'Mellow Moods',
           text: 'Ambient Bass',
           subtext: 'Chill beats to mellow you out.',
-          img: 'http://lorempixel.com/output/abstract-q-c-640-480-6.jpg',
+          img: 'https://lorempixel.com/output/abstract-q-c-640-480-6.jpg',
         },
       ],
       transparent: 'rgba(255, 255, 255, 0)',
