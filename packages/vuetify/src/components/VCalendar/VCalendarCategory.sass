@@ -25,6 +25,7 @@
 
   .v-calendar-category__columns
     display: flex
+    width: min-content
 
     .v-calendar-category__column,
     .v-calendar-category__column-header
@@ -33,11 +34,4 @@
       position: relative
 
     .v-calendar-category__column-header
-      min-width: $calendar-category-column-min-width
-
-  .v-calendar-category__horizontal-scrollable
-    width: 100%
-    overflow-x: scroll
-    overflow-y: hidden
-    .v-calendar-daily__day
       min-width: $calendar-category-column-min-width

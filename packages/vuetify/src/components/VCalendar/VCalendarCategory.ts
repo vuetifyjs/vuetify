@@ -31,27 +31,6 @@ export default VCalendarDaily.extend({
       return getParsedCategories(this.categories, this.categoryText)
     },
   },
-  updated () {
-    const horizontalScrollables = Array.from(this.$el.getElementsByClassName('v-calendar-category__horizontal-scrollable'))
-
-    // reset all horizontalScrollables to left
-    horizontalScrollables.forEach(scrollableDiv => {
-      scrollableDiv.scrollLeft = 0
-    })
-
-    // sync horizontal scroll
-    const horizontalScroll = function (e: Event) {
-      const scrollingEle = e.target
-      const eleToSync = horizontalScrollables.filter(ele => ele !== e.target)
-      eleToSync.forEach(scrollableDiv => {
-        scrollableDiv.scrollLeft = (scrollingEle as any).scrollLeft
-      })
-    }
-
-    horizontalScrollables.forEach(ele => {
-      ele.addEventListener('scroll', horizontalScroll)
-    })
-  },
   methods: {
     genDayHeader (day: CalendarTimestamp, index: number): VNode[] {
       const data = {
@@ -65,11 +44,7 @@ export default VCalendarDaily.extend({
         return this.genDayHeaderCategory(day, this.getCategoryScope(scope, category))
       })
 
-      return [this.$createElement('div', {
-        staticClass: 'v-calendar-category__horizontal-scrollable',
-      }, [
-        this.$createElement('div', data, children),
-      ])]
+      return [this.$createElement('div', data, children)]
     },
     getCategoryScope (scope: any, category: CalendarCategory) {
       const cat = typeof category === 'object' && category &&
@@ -94,22 +69,6 @@ export default VCalendarDaily.extend({
       return this.$createElement('div', {
         staticClass: 'v-calendar-category__category',
       }, categoryName === null ? this.categoryForInvalid : categoryName)
-    },
-    genDayContainer (): VNode {
-      return this.$createElement('div', {
-        staticClass: 'v-calendar-daily__day-container',
-      }, [
-        this.genBodyIntervals(),
-        this.$createElement('div', {
-          staticClass: 'v-calendar-category__horizontal-scrollable',
-        }, [
-          this.$createElement('div', {
-            staticClass: 'v-calendar-daily__day-body',
-          }, [
-            ...this.genDays(),
-          ]),
-        ]),
-      ])
     },
     genDays (): VNode[] {
       const d = this.days[0]

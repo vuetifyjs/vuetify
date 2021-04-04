@@ -129,14 +129,6 @@ export default CalendarWithIntervals.extend({
       return this.$createElement('div', {
         staticClass: 'v-calendar-daily__body',
       }, [
-        this.genScrollArea(),
-      ])
-    },
-    genScrollArea (): VNode {
-      return this.$createElement('div', {
-        ref: 'scrollArea',
-        staticClass: 'v-calendar-daily__scroll-area',
-      }, [
         this.genPane(),
       ])
     },
