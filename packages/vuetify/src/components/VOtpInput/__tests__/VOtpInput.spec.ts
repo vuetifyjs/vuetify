@@ -43,7 +43,7 @@ describe('VOtpInput.ts', () => {
       }
     )
 
-    wrapper.vm.focus()
+    wrapper.vm.focus(null, 0)
 
     const focus = jest.fn()
     wrapper.vm.$on('focus', focus)
@@ -51,7 +51,6 @@ describe('VOtpInput.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.isFocused).toBe(true)
-    // expect(updateValue).toHaveBeenCalledTimes(1)
     wrapper.setProps({ value: 'foo' })
     await wrapper.vm.$nextTick()
     wrapper.setData({ isFocused: false })
@@ -61,12 +60,13 @@ describe('VOtpInput.ts', () => {
   it('should fire change event when pressing enter', async () => {
     const wrapper = mountFunction()
     const input = wrapper.findAll('input').at(0)
+    const element = input.element as HTMLInputElement
     const change = jest.fn()
 
     wrapper.vm.$on('change', change)
 
     input.trigger('focus')
-    input.element.value = 'a'
+    element.value = 'a'
     input.trigger('input')
     await wrapper.vm.$nextTick()
     input.trigger('focus')
@@ -155,12 +155,13 @@ describe('VOtpInput.ts', () => {
   it('should fire event when pressing keyboard defined keys', () => {
     const wrapper = mountFunction()
     const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
     const change = jest.fn()
 
     wrapper.vm.$on('change', change)
 
     input.trigger('focus')
-    input.element.value = '1'
+    element.value = '1'
     input.trigger('input')
     input.trigger('keydown.enter')
     input.trigger('keydown.enter')
