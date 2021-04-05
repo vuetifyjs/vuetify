@@ -5,7 +5,7 @@
   >
     <v-container class="pa-1">
       <v-item-group
-        v-model="selected"
+        v-model="selection"
         multiple
       >
         <v-row>
@@ -15,7 +15,7 @@
             cols="12"
             md="6"
           >
-            <v-item v-slot="{ active, toggle }">
+            <v-item v-slot="{ selected, toggle }">
               <v-img
                 :src="`https://cdn.vuetifyjs.com/images/${item.src}`"
                 height="150"
@@ -27,7 +27,7 @@
                   dark
                 >
                   <v-icon>
-                    {{ active ? 'mdi-heart' : 'mdi-heart-outline' }}
+                    {{ selected ? 'mdi-heart' : 'mdi-heart-outline' }}
                   </v-icon>
                 </v-btn>
               </v-img>
@@ -56,7 +56,7 @@
           src: 'backgrounds/md2.jpg',
         },
       ],
-      selected: [],
+      selection: [],
     }),
   }
 </script>
