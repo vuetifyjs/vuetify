@@ -485,7 +485,7 @@ describe('VCombobox.ts', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/10827
-  it('should not add empty chips after clear', async () => {
+  it('should not add empty chips after clear and re-select', async () => {
     const { wrapper, change } = createMultipleCombobox({
       chips: true,
       multiple: true,
