@@ -12,12 +12,14 @@ export default defineComponent({
   props: makeProps(makeGroupItemProps()),
 
   setup (props, { slots }) {
-    const { isSelected, select, toggle, selectedClass } = useGroupItem(props, VItemGroupSymbol)
+    const { isSelected, select, toggle, selectedClass, value, disabled } = useGroupItem(props, VItemGroupSymbol)
     return () => slots.default?.({
       isSelected: isSelected.value,
       selectedClass: selectedClass.value,
       select,
       toggle,
+      value: value.value,
+      disabled: disabled.value,
     })
   }
 })

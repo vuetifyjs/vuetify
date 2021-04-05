@@ -64,11 +64,13 @@ export function useGroupItem (
   }
 
   const id = getUid()
+  const value = toRef(props, 'value')
+  const disabled = toRef(props, 'disabled')
 
   group.register({
     id,
-    value: toRef(props, 'value'),
-    disabled: toRef(props, 'disabled'),
+    value,
+    disabled,
   }, props.index)
 
   onBeforeUnmount(() => {
@@ -86,6 +88,8 @@ export function useGroupItem (
     toggle: () => group.select(id, !isSelected.value),
     select: (value: boolean) => group.select(id, value),
     selectedClass,
+    value,
+    disabled,
   }
 }
 
@@ -199,7 +203,12 @@ export function useGroup (
 
     const currentId = selected.value[0]
     const currentIndex = items.findIndex(i => i.id === currentId)
-    const newIndex = (currentIndex + offset) % items.length
+
+    let newIndex = (currentIndex + offset) % items.length
+
+    while (items[newIndex].disabled) {
+      newIndex = (newIndex + 1) % items.length
+    }
 
     return items[newIndex].id
   }
