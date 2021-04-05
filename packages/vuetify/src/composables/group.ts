@@ -223,12 +223,12 @@ export function useGroup (
 
 function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
   const ids = []
-
   for (const item of items) {
-    if (
-      (item.value != null && modelValue.find(value => deepEqual(value, item.value))) ||
-      modelValue.includes(item.id)
-    ) {
+    if (item.value != null) {
+      if (modelValue.find(value => deepEqual(value, item.value))) {
+        ids.push(item.id)
+      }
+    } else if (modelValue.includes(item.id)) {
       ids.push(item.id)
     }
   }
