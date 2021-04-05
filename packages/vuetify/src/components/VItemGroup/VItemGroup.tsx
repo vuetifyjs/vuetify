@@ -7,7 +7,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { defineComponent } from 'vue'
-import makeProps from '@/util/makeProps'
+import { makeProps } from '@/util'
 
 export const VItemGroupSymbol = Symbol.for('vuetify:v-item-group')
 

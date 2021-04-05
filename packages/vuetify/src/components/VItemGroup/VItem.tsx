@@ -4,7 +4,7 @@ import { VItemGroupSymbol } from './VItemGroup'
 
 // Utilities
 import { defineComponent } from 'vue'
-import makeProps from '@/util/makeProps'
+import { makeProps } from '@/util'
 
 export default defineComponent({
   name: 'VItem',
