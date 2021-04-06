@@ -5,7 +5,7 @@ import './VGrid.sass'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent, computed, h, capitalize } from 'vue'
+import { capitalize, computed, defineComponent, h } from 'vue'
 import { makeProps } from '@/util'
 
 // Types

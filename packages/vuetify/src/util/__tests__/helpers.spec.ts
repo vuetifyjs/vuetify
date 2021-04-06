@@ -1,10 +1,10 @@
 import {
+  arrayDiff,
+  convertToUnit,
   deepEqual,
   getNestedValue,
-  getPropertyFromItem,
-  convertToUnit,
-  arrayDiff,
   getObjectValueByPath,
+  getPropertyFromItem,
   humanReadableFileSize,
   sortItems,
 } from '../helpers'

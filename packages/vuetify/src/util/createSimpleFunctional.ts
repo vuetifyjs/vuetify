@@ -1,4 +1,4 @@
-import { defineComponent, h, capitalize, camelize } from 'vue'
+import { camelize, capitalize, defineComponent, h } from 'vue'
 import { makeProps } from './makeProps'
 
 export function createSimpleFunctional (

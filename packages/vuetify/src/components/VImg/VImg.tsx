@@ -25,11 +25,11 @@ import { makeTransitionProps } from '@/composables/transition'
 
 // Utils
 import {
+  makeProps,
   maybeTransition,
+  SUPPORTS_INTERSECTION,
   useDirective,
   useRender,
-  makeProps,
-  SUPPORTS_INTERSECTION,
 } from '@/util'
 
 // Types

@@ -3,9 +3,9 @@ import {
   computed,
   getCurrentInstance,
   onBeforeUnmount,
+  onMounted,
   ref,
   watch,
-  onMounted,
 } from 'vue'
 import { consoleWarn, propsFactory } from '@/util'
 
