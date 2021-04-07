@@ -777,6 +777,7 @@ _Developer notes: The tabs-items component does not have to be provided and is o
 #### v-text-field
 
 - The **mask** prop and functionality has been removed. Instead you can use 3rd party libraries such as `vue-the-mask`.
+- The `prepend-icon-cb` and `prepend-inner-icon-cb` callbacks have been removed. Instead you can use the corresponding custom slot to add icons and assign callback functions.
 
 #### v-text-field - v-select - v-textarea - v-autocomplete - v-combobox
 
