@@ -632,6 +632,11 @@
   resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.12.13.tgz#174254d0f2424d8aefb4dd48057511247b0a9eeb"
   integrity sha512-C+10MXCXJLiR6IeG9+Wiejt9jmtFpxUc3MQqCmPY8hfCjyUGl9kT+B2okzEZrtykiwrc4dbCPdDoz0A/HQbDaA==
 
+"@babel/helper-plugin-utils@^7.13.0":
+  version "7.13.0"
+  resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.13.0.tgz#806526ce125aed03373bc416a828321e3a6a33af"
+  integrity sha512-ZPafIPSwzUlAoWT8DKs1W2VyF2gOWthGd5NGFMsBcMMol+ZhK+EQY/e6V96poa6PA/Bh+C9plWN0hXO1uB8AfQ==
+
 "@babel/helper-regex@^7.10.4":
   version "7.10.5"
   resolved "https://registry.yarnpkg.com/@babel/helper-regex/-/helper-regex-7.10.5.tgz#32dfbb79899073c415557053a19bd055aae50ae0"
@@ -5773,12 +5778,12 @@ babel-loader@^8.0.6, babel-loader@^8.1.0:
     pify "^4.0.1"
     schema-utils "^2.6.5"
 
-babel-plugin-add-import-extension@^1.4.3:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/babel-plugin-add-import-extension/-/babel-plugin-add-import-extension-1.4.3.tgz#9a153095f3c8bb820abbf168bbc71aba837e4e4a"
-  integrity sha512-NiKs80ucIlktWtQ6VGovyVprpgaDxqlo3fT2e2vIyF6k3+02YMmQt+QrBDOq/YImkK/pIXb/SKaO+FxKsfvNlA==
+babel-plugin-add-import-extension@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/babel-plugin-add-import-extension/-/babel-plugin-add-import-extension-1.5.1.tgz#bd32f1107fa297386d7a34bffe84c97a6879166f"
+  integrity sha512-/aEHejW3v0HqUDasz5fCmCwU6P2r9fyzyZfXzvTbU0bLqtC7yVKMWpK4bNDW+OZ24XR6N/tap0pqfRB0PZ7xrA==
   dependencies:
-    "@babel/helper-plugin-utils" "^7.10.4"
+    "@babel/helper-plugin-utils" "^7.13.0"
 
 babel-plugin-dynamic-import-node@^2.3.3:
   version "2.3.3"
