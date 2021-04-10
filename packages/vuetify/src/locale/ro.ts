@@ -66,4 +66,4 @@ export default {
       icon: 'Rating de {0} din {1}',
     },
   },
-};
+}
