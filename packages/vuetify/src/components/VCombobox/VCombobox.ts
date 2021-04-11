@@ -226,6 +226,12 @@ export default VAutocomplete.extend({
       const index = this.selectedItems.findIndex(item =>
         this.internalSearch === this.getText(item))
 
+      // If the duplicate item is an object,
+      // copy it, so that it can be added again later
+      const itemToSelect = index > -1 && typeof this.selectedItems[index] === 'object'
+        ? Object.assign({}, this.selectedItems[index])
+        : this.internalSearch
+
       // If it already exists, do nothing
       // this might need to change to bring
       // the duplicated item to the last entered
@@ -241,10 +247,6 @@ export default VAutocomplete.extend({
       // TODO: find out where
       if (menuIndex > -1) return (this.internalSearch = null)
 
-      // if search matches any object in selected list
-      // of items, add that object else add the
-      // search value as a new item.
-      const itemToSelect = index > -1 ? this.selectedItems[index] : this.internalSearch
       this.selectItem(itemToSelect)
 
       this.internalSearch = null
