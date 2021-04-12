@@ -38,7 +38,7 @@
             color="#385F73"
             dark
           >
-            <v-card-title class="headline">
+            <v-card-title class="text-h5">
               Unlimited music now
             </v-card-title>
 
@@ -64,7 +64,7 @@
             <div class="d-flex flex-no-wrap justify-space-between">
               <div>
                 <v-card-title
-                  class="headline"
+                  class="text-h5"
                   v-text="item.title"
                 ></v-card-title>
 
