@@ -1,13 +1,12 @@
 import { inject } from 'vue'
 import { createDisplay, VuetifyDisplaySymbol } from './composables/display'
 import { createTheme, VuetifyThemeSymbol } from './composables/theme'
-
+import { mergeDeep } from '@/util'
 import { defaultSets, VuetifyIconSymbol } from '@/composables/icons'
-import { mergeDeep } from './util'
 import { aliases, mdi } from '@/iconsets/mdi'
 
 // Types
-import type { InjectionKey, App } from 'vue'
+import type { App, InjectionKey } from 'vue'
 import type { DisplayOptions } from '@/composables/display'
 import type { ThemeOptions } from '@/composables/theme'
 import type { IconOptions } from '@/composables/icons'

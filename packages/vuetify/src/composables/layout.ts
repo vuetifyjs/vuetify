@@ -1,10 +1,9 @@
 // Utilities
-import { getUid, convertToUnit } from '@/util'
-import { inject, provide, computed, ref, onBeforeUnmount } from 'vue'
-import propsFactory from '@/util/propsFactory'
+import { computed, inject, onBeforeUnmount, provide, ref } from 'vue'
+import { convertToUnit, getUid, propsFactory } from '@/util'
 
 // Types
-import type { InjectionKey, Ref, Prop } from 'vue'
+import type { InjectionKey, Prop, Ref } from 'vue'
 
 type Position = 'top' | 'left' | 'right' | 'bottom'
 

@@ -73,7 +73,7 @@
     "@vue/test-utils": "2.0.0-beta.13",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",
-    "babel-plugin-add-import-extension": "^1.4.3",
+    "babel-plugin-add-import-extension": "^1.5.1",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-transform-define": "^2.0.0",
     "babel-polyfill": "^6.26.0",

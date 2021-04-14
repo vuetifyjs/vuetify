@@ -1,5 +1,5 @@
 import VCard from './VCard'
-import { createSimpleFunctional } from '../../util/helpers'
+import { createSimpleFunctional } from '@/util'
 
 const VCardActions = createSimpleFunctional('v-card__actions')
 const VCardSubtitle = createSimpleFunctional('v-card__subtitle')

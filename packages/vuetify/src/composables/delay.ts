@@ -1,8 +1,5 @@
 // Utilities
-import propsFactory from '@/util/propsFactory'
-
-// Globals
-import { IN_BROWSER } from '@/util/globals'
+import { IN_BROWSER, propsFactory } from '@/util'
 
 // Types
 export interface DelayProps {

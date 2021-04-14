@@ -9,8 +9,7 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ComputedRef, defineComponent, toRef } from 'vue'
-import { convertToUnit, flattenFragments } from '@/util'
-import makeProps from '@/util/makeProps'
+import { convertToUnit, flattenFragments, makeProps } from '@/util'
 
 // Types
 import type { IconValue } from '@/composables/icons'

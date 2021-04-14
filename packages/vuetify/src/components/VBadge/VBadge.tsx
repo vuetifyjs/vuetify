@@ -12,14 +12,14 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, defineComponent, toRef } from 'vue'
-import { convertToUnit, extract, maybeTransition } from '@/util'
+import { convertToUnit, extract, makeProps, maybeTransition } from '@/util'
 
 export default defineComponent({
   name: 'VBadge',
 
   inheritAttrs: false,
 
-  props: {
+  props: makeProps({
     bordered: Boolean,
     color: {
       type: String,
@@ -57,7 +57,7 @@ export default defineComponent({
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeTransitionProps({ transition: 'scale-rotate-transition' }),
-  },
+  }),
 
   setup (props, ctx) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))

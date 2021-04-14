@@ -1,4 +1,7 @@
-import { createSimpleFunctional } from '../../util/helpers'
+// @ts-nocheck
+/* eslint-disable */
+
+import { createSimpleFunctional } from '@/util'
 
 import VDataTable from './VDataTable'
 import VDataTableHeader from './VDataTableHeader'

@@ -9,7 +9,7 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { defineComponent, toRef } from 'vue'
-import makeProps from '@/util/makeProps'
+import { makeProps } from '@/util'
 
 export default defineComponent({
   name: 'VAvatar',

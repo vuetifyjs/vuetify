@@ -15,7 +15,7 @@ import { useTheme } from '@/composables/theme'
 // Utilities
 import { computed, defineComponent, onBeforeMount, ref, toRef, watch } from 'vue'
 import { convertToUnit } from '@/util/helpers'
-import makeProps from '@/util/makeProps'
+import { makeProps } from '@/util/makeProps'
 
 export default defineComponent({
   name: 'VNavigationDrawer',

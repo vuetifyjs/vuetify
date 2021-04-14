@@ -1,9 +1,9 @@
 // Utilities
 import { computed, isRef } from 'vue'
-import { isCssColor } from '@/util/colorUtils'
+import { isCssColor } from '@/util'
 
 // Types
-import type { Ref, CSSProperties } from 'vue'
+import type { CSSProperties, Ref } from 'vue'
 
 type ColorValue = string | null | undefined
 

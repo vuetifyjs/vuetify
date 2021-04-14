@@ -5,7 +5,7 @@ import { h } from 'vue'
 import { VLigatureIcon } from '@/composables/icons'
 
 // Types
-import type { IconSet, IconAliases } from '@/composables/icons'
+import type { IconAliases, IconSet } from '@/composables/icons'
 
 const aliases: IconAliases = {
   complete: 'check',

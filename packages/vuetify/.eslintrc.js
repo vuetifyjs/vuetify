@@ -13,13 +13,21 @@ module.exports = {
     'jest',
     'eslint-plugin-local-rules',
   ],
-  extends: ['plugin:jest/recommended'],
+  extends: [
+    'plugin:jest/recommended',
+    // 'plugin:import/typescript', // slow, only enable if needed
+  ],
   rules: {
     'no-console': 'error',
     'no-debugger': 'error',
+
     // 'vue/html-self-closing': 'off',
     // 'vue/html-closing-bracket-spacing': 'off',
     // 'local-rules/no-render-string-reference': 'error',
+
+    // 'import/no-cycle': 'warn',
+    // 'import/no-self-import': 'warn',
+
     'jest/no-disabled-tests': 'off',
     'jest/no-large-snapshots': 'warn',
     'jest/prefer-spy-on': 'warn',

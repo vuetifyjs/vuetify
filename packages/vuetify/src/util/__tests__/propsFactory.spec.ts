@@ -1,4 +1,4 @@
-import propsFactory from '../propsFactory'
+import { propsFactory } from '../propsFactory'
 
 test.each([
   [String, undefined, { type: String }],

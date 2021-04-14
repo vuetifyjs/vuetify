@@ -1,5 +1,5 @@
 import type { TouchStoredHandlers } from './directives/touch'
-import type { VNode, ComponentPublicInstance, FunctionalComponent } from 'vue'
+import type { ComponentPublicInstance, FunctionalComponent, VNode } from 'vue'
 
 import { IconProps } from '@/composables/icons'
 

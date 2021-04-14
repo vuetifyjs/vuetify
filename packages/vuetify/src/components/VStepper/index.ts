@@ -1,4 +1,4 @@
-import { createSimpleFunctional } from '../../util/helpers'
+import { createSimpleFunctional } from '@/util'
 import VStepper from './VStepper'
 import VStepperStep from './VStepperStep'
 import VStepperContent from './VStepperContent'

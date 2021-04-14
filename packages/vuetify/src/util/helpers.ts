@@ -1,26 +1,6 @@
-import type { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
-import type { Slots, VNode, TransitionProps } from 'vue'
-import { Fragment, defineComponent, h, capitalize, camelize, Transition, mergeProps } from 'vue'
-import { makeTagProps } from '@/composables/tag'
-import makeProps from './makeProps'
-
-export function createSimpleFunctional (
-  klass: string,
-  tag = 'div',
-  name?: string
-) {
-  return defineComponent({
-    name: name ?? capitalize(camelize(klass.replace(/__/g, '-'))),
-
-    props: makeProps(makeTagProps({ tag })),
-
-    setup (props, { slots }) {
-      return () => h(props.tag, {
-        class: klass,
-      }, slots.default?.())
-    },
-  })
-}
+import type { DataTableCompareFunction, ItemGroup, SelectItemKey } from 'vuetify/types'
+import type { Slots, TransitionProps, VNode } from 'vue'
+import { camelize, Fragment, h, mergeProps, Transition } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
@@ -421,3 +401,5 @@ export const randomHexColor = () => {
   const n = (Math.random() * 0xfffff * 1000000).toString(16)
   return '#' + n.slice(0, 6)
 }
+
+export const toKebabCase = (str: string) => str.replace(/([A-Z])/g, match => `-${match.toLowerCase()}`)

@@ -1,6 +1,6 @@
 // Utilities
-import { ref, computed, getCurrentInstance, capitalize } from 'vue'
-import { consoleError } from '../util/console'
+import { computed, getCurrentInstance, ref } from 'vue'
+import { consoleError, toKebabCase } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -24,7 +24,7 @@ export function useProxiedModel<
   const propIsDefined = computed(() => {
     return !!(
       typeof props[prop] !== 'undefined' &&
-      (vm?.vnode.props?.hasOwnProperty(prop) || vm?.vnode.props?.hasOwnProperty(capitalize(prop)))
+      (vm?.vnode.props?.hasOwnProperty(prop) || vm?.vnode.props?.hasOwnProperty(toKebabCase(prop)))
     )
   })
 
