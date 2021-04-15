@@ -1,8 +1,5 @@
 export default {
-  rtl: true,
-  badge: {
-    label: 'شارة',
-  },
+  badge: 'شارة',
   close: 'إغلاق',
   dataIterator: {
     noResultsText: 'لا توجد سجلات مطابقة',

@@ -1,6 +1,6 @@
 import type { DataTableCompareFunction, ItemGroup, SelectItemKey } from 'vuetify/types'
-import type { Slots, TransitionProps, VNode } from 'vue'
-import { camelize, Fragment, h, mergeProps, Transition } from 'vue'
+import type { Ref, Slots, TransitionProps, VNode } from 'vue'
+import { camelize, Fragment, h, isRef, mergeProps, ref, Transition } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
@@ -403,3 +403,11 @@ export const randomHexColor = () => {
 }
 
 export const toKebabCase = (str: string) => str.replace(/([A-Z])/g, match => `-${match.toLowerCase()}`)
+
+export type MaybeRef<T> = T | Ref<T>
+
+export type ExtractMaybeRef<P> = P extends MaybeRef<infer T> ? T : P;
+
+export function wrapInRef <T> (x: T) {
+  return (isRef(x) ? x : ref(x)) as Ref<ExtractMaybeRef<T>>
+}

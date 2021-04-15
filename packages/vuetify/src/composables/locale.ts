@@ -1,27 +1,32 @@
-import { computed, inject, isRef, provide, ref } from 'vue'
-import { getObjectValueByPath, consoleError, consoleWarn } from '@/util'
+import { computed, inject, provide } from 'vue'
+import { consoleError, consoleWarn, getObjectValueByPath, wrapInRef } from '@/util'
 
 import en from '@/locale/en'
 
 // Types
 import type { App, InjectionKey, Ref } from 'vue'
+import type { MaybeRef } from '@/util'
+
+export interface LocaleMessages {
+  [key: string]: LocaleMessages | string
+}
 
 export interface LocaleOptions {
   defaultLocale?: string
   fallbackLocale?: string
-  messages?: Record<string, any>
+  messages?: LocaleMessages
 }
 
 export interface LocaleProps {
   locale?: string
   fallbackLocale?: string
-  messages?: Record<string, any>
+  messages?: LocaleMessages
 }
 
 export interface LocaleInstance {
-  locale: Ref<string>
-  fallbackLocale: Ref<string>
-  messages: Ref<Record<string, any>>
+  current: Ref<string>
+  fallback: Ref<string>
+  messages: Ref<LocaleMessages>
   t: (key: string, ...params: unknown[]) => string
 }
 
@@ -29,7 +34,6 @@ export interface LocaleAdapter {
   createRoot: (app: App) => LocaleInstance
   getScope: () => LocaleInstance
   createScope: (options?: LocaleProps) => LocaleInstance
-  rtl?: Record<string, boolean>
 }
 
 export const VuetifyLocaleAdapterSymbol: InjectionKey<LocaleAdapter> = Symbol.for('vuetify:locale-adapter')
@@ -38,7 +42,7 @@ export const VuetifyLocaleSymbol: InjectionKey<LocaleInstance> = Symbol.for('vue
 export function provideLocale (props?: LocaleProps) {
   const adapter = inject(VuetifyLocaleAdapterSymbol)
 
-  if (!adapter) throw new Error('Could not find injected locale adapter')
+  if (!adapter) throw new Error('[Vuetify] Could not find injected locale adapter')
 
   return adapter.createScope(props)
 }
@@ -46,7 +50,7 @@ export function provideLocale (props?: LocaleProps) {
 export function useLocale () {
   const adapter = inject(VuetifyLocaleAdapterSymbol)
 
-  if (!adapter) throw new Error('Could not find injected locale adapter')
+  if (!adapter) throw new Error('[Vuetify] Could not find injected locale adapter')
 
   return adapter.getScope()
 }
@@ -75,7 +79,7 @@ const replace = (str: string, params: unknown[]) => {
 const createTranslateFunction = (
   current: Ref<string>,
   fallback: Ref<string>,
-  messages: Ref<Record<string, any>>,
+  messages: Ref<LocaleMessages>,
 ) => {
   return (key: string, ...params: unknown[]) => {
     if (!key.startsWith(LANG_PREFIX)) {
@@ -107,32 +111,24 @@ const createTranslateFunction = (
   }
 }
 
-type MaybeRef<T> = T | Ref<T>
-
-type ExtractMaybeRef<P> = P extends MaybeRef<infer T> ? T : P;
-
-const wrapInRef = <T>(x: T) => {
-  return (isRef(x) ? x : ref(x)) as Ref<ExtractMaybeRef<T>>
-}
-
 export function createDefaultLocaleAdapter (options?: LocaleOptions): LocaleAdapter {
   const createScope = (options: {
-    locale: MaybeRef<string>
-    fallbackLocale: MaybeRef<string>
-    messages: MaybeRef<Record<string, any>>
+    current: MaybeRef<string>
+    fallback: MaybeRef<string>
+    messages: MaybeRef<LocaleMessages>
   }) => {
-    const locale = wrapInRef(options.locale)
-    const fallbackLocale = wrapInRef(options.fallbackLocale)
+    const current = wrapInRef(options.current)
+    const fallback = wrapInRef(options.fallback)
     const messages = wrapInRef(options.messages)
 
-    return { locale, fallbackLocale, messages, t: createTranslateFunction(locale, fallbackLocale, messages) }
+    return { current, fallback, messages, t: createTranslateFunction(current, fallback, messages) }
   }
 
   return {
     createRoot: app => {
       const rootScope = createScope({
-        locale: options?.defaultLocale ?? 'en',
-        fallbackLocale: options?.fallbackLocale ?? 'en',
+        current: options?.defaultLocale ?? 'en',
+        fallback: options?.fallbackLocale ?? 'en',
         messages: options?.messages ?? { en },
       })
 
@@ -143,18 +139,18 @@ export function createDefaultLocaleAdapter (options?: LocaleOptions): LocaleAdap
     getScope: () => {
       const currentScope = inject(VuetifyLocaleSymbol)
 
-      if (!currentScope) throw new Error('Could not find injected locale')
+      if (!currentScope) throw new Error('[Vuetify] Could not find injected locale instance')
 
       return currentScope
     },
     createScope: options => {
       const currentScope = inject(VuetifyLocaleSymbol)
 
-      if (!currentScope) throw new Error('Could not find injected locale')
+      if (!currentScope) throw new Error('[Vuetify] Could not find injected locale instance')
 
       const newScope = createScope({
-        locale: computed(() => options?.locale ?? currentScope.locale.value),
-        fallbackLocale: computed(() => options?.locale ?? currentScope.fallbackLocale.value),
+        current: computed(() => options?.locale ?? currentScope.current.value),
+        fallback: computed(() => options?.locale ?? currentScope.fallback.value),
         messages: computed(() => options?.messages ?? currentScope.messages.value),
       })
 

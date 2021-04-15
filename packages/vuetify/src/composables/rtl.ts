@@ -1,11 +1,12 @@
-import { ref, inject, provide, computed } from 'vue'
+import { computed, inject, provide, ref } from 'vue'
+import { rtl } from '@/locale'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
 import type { LocaleInstance } from './locale'
 
 export interface RtlOptions {
-  rtl: Record<string, boolean>
+  rtl?: Record<string, boolean>
   isRtl?: boolean
 }
 
@@ -22,7 +23,7 @@ export const VuetifyRtlSymbol: InjectionKey<RtlInstance> = Symbol.for('vuetify:r
 
 export function createRtl (localeScope: LocaleInstance, options?: RtlOptions) {
   return createRtlScope({
-    rtl: options?.rtl ?? {}, // TODO: default rtl map
+    rtl: options?.rtl ?? rtl,
     isRtl: ref(options?.isRtl ?? false),
   }, localeScope)
 }
@@ -31,8 +32,8 @@ export function createRtlScope (currentScope: RtlInstance, localeScope: LocaleIn
   return {
     isRtl: computed(() => {
       if (!!options && typeof options.rtl === 'boolean') return options.rtl
-      if (localeScope.locale.value && currentScope.rtl.hasOwnProperty(localeScope.locale.value)) {
-        return currentScope.rtl[localeScope.locale.value]
+      if (localeScope.current.value && currentScope.rtl.hasOwnProperty(localeScope.current.value)) {
+        return currentScope.rtl[localeScope.current.value]
       }
 
       return currentScope.isRtl.value
@@ -44,7 +45,7 @@ export function createRtlScope (currentScope: RtlInstance, localeScope: LocaleIn
 export function provideRtl (localeScope: LocaleInstance, props: RtlProps) {
   const currentScope = inject(VuetifyRtlSymbol)
 
-  if (!currentScope) throw new Error('Could not find injected rtl')
+  if (!currentScope) throw new Error('[Vuetify] Could not find injected rtl instance')
 
   const newScope = createRtlScope(currentScope, localeScope, props)
 
@@ -56,7 +57,7 @@ export function provideRtl (localeScope: LocaleInstance, props: RtlProps) {
 export function useRtl () {
   const currentScope = inject(VuetifyRtlSymbol)
 
-  if (!currentScope) throw new Error('Could not find injected rtl')
+  if (!currentScope) throw new Error('[Vuetify] Could not find injected rtl instance')
 
   return currentScope
 }

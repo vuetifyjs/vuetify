@@ -1,6 +1,6 @@
+import { defineComponent } from 'vue'
 import { provideLocale } from '@/composables/locale'
 import { provideRtl } from '@/composables/rtl'
-import { defineComponent } from 'vue'
 import { makeProps } from '@/util'
 
 export default defineComponent({

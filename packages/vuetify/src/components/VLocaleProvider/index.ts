@@ -1,3 +1,1 @@
-import VLocaleProvider from './VLocaleProvider'
-
-export { VLocaleProvider }
+export { default as VLocaleProvider } from './VLocaleProvider'
