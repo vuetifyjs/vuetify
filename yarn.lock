@@ -2623,7 +2623,7 @@
     tunnel-agent "^0.6.0"
     uuid "^3.3.2"
 
-"@cypress/vue@^3.0.0-alpha.4":
+"@cypress/vue@^3.0.1":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@cypress/vue/-/vue-3.0.1.tgz#9899718dfb8608f98c343fe35a7cfc0a50376011"
   integrity sha512-7aSdwbtvCJnKR7MDZdJs3TB718LNo44JXvIidrtcZacOSPXjahvkZ8nQCyLIt/owKBFFaV4dvSn267Lq4ZIbzQ==

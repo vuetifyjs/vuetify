@@ -45,5 +45,13 @@ module.exports = {
         'max-len': 'off',
       },
     },
+    {
+      files: '**/*.cy.spec.{ts,tsx}',
+      rules: {
+        'jest/expect-expect': 'off',
+        'jest/valid-expect': 'off',
+        'no-unused-expressions': 'off',
+      },
+    },
   ],
 }
