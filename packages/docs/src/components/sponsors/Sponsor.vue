@@ -46,18 +46,13 @@
       sponsors: get('sponsors/all'),
       src () {
         const {
-          darklogo = '',
-          lightlogo = '',
+          logodark = { url: '' },
+          darkLogo = '',
+          logolight = { url: '' },
+          lightLogo = '',
         } = this.value.metadata
-        let cdn = ''
 
-        const logo = this.$vuetify.theme.dark ? (darklogo || lightlogo) : lightlogo
-
-        if (!logo.match('http')) {
-          cdn = 'https://cdn.vuetifyjs.com/images/'
-        }
-
-        return `${cdn}${logo}`
+        return !this.$vuetify.theme.dark ? logolight.url || lightLogo : logodark.url || darkLogo
       },
       width () {
         if (this.compact) return 112
