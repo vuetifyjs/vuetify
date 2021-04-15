@@ -63,6 +63,8 @@
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\""
   },
   "devDependencies": {
+    "@cypress/vue": "^3.0.0-alpha.4",
+    "@cypress/webpack-dev-server": "1.1.3",
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/vue-fontawesome": "^3.0.0-3",
@@ -79,6 +81,7 @@
     "babel-polyfill": "^6.26.0",
     "concurrently": "^4.1.1",
     "cssnano": "^4.1.10",
+    "cypress": "7.1.0",
     "deepmerge": "^4.2.2",
     "dotenv": "^8.0.0",
     "eslint-plugin-jest": "^24.1.0",
