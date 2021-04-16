@@ -8,13 +8,7 @@ import { IN_BROWSER, SUPPORTS_INTERSECTION, SUPPORTS_TOUCH } from '@/util/global
 import type { InjectionKey, Ref } from 'vue'
 import { mergeDeep } from '@/util'
 
-export type DisplayBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-
-export interface DisplayOptions {
-  mobileBreakpoint: number | DisplayBreakpoint
-  scrollBarWidth: number
-  thresholds: DisplayThresholds
-}
+export type DisplayBreakpoint = keyof DisplayThresholds
 
 export interface DisplayThresholds {
   xs: number
@@ -22,6 +16,18 @@ export interface DisplayThresholds {
   md: number
   lg: number
   xl: number
+}
+
+export interface DisplayOptions {
+  mobileBreakpoint?: number | DisplayBreakpoint
+  scrollBarWidth?: number
+  thresholds?: Partial<DisplayThresholds>
+}
+
+export interface InternalDisplayOptions {
+  mobileBreakpoint: number | DisplayBreakpoint
+  scrollBarWidth: number
+  thresholds: DisplayThresholds
 }
 
 export interface DisplayInstance {
@@ -69,8 +75,8 @@ const defaultDisplayOptions: DisplayOptions = {
 
 // need lookup table that matches user agents to sizes
 
-const parseDisplayOptions = (options: Partial<DisplayOptions> = defaultDisplayOptions) => {
-  return mergeDeep(defaultDisplayOptions, options) as DisplayOptions
+const parseDisplayOptions = (options: DisplayOptions = defaultDisplayOptions) => {
+  return mergeDeep(defaultDisplayOptions, options) as InternalDisplayOptions
 }
 
 // Cross-browser support as described in:
@@ -100,31 +106,31 @@ function getPlatform () {
   }
 
   const android = match(/android/)
+  const cordova = match(/cordova/)
   const electron = match(/electron/)
   const ios = match(/iphone|ipad|ipod/)
+  const linux = match(/linux/)
   const mac = match(/mac/)
   const opera = match(/opera/)
   const ssr = match(/ssr/)
-  const windows = match(/win/)
-  const mobile = android || ios || opera
-  const desktop = !mobile && !ssr
+  const win = match(/win/)
 
   return {
     android,
-    desktop,
+    cordova,
     electron,
     intersection: SUPPORTS_INTERSECTION,
     ios,
+    linux,
     mac,
-    mobile,
     opera,
     ssr,
     touch: SUPPORTS_TOUCH,
-    windows,
+    win,
   }
 }
 
-export function createDisplay (options?: Partial<DisplayOptions>): DisplayInstance {
+export function createDisplay (options?: DisplayOptions): DisplayInstance {
   const { thresholds, mobileBreakpoint, scrollBarWidth } = parseDisplayOptions(options)
 
   const platform = getPlatform()
@@ -144,9 +150,9 @@ export function createDisplay (options?: Partial<DisplayOptions>): DisplayInstan
     const xl = width.value >= (thresholds.lg - scrollBarWidth)
     const name = xs ? 'xs' : sm ? 'sm' : md ? 'md' : lg ? 'lg' : 'xl' as DisplayBreakpoint
     const breakpointValue = typeof mobileBreakpoint === 'number' ? mobileBreakpoint : thresholds[mobileBreakpoint]
-    const mobile = IN_BROWSER
+    const mobile = !platform.ssr
       ? width.value < (breakpointValue - scrollBarWidth)
-      : platform.mobile
+      : platform.android || platform.ios || platform.opera
 
     return {
       xs,
@@ -168,6 +174,7 @@ export function createDisplay (options?: Partial<DisplayOptions>): DisplayInstan
       xlOnly: xl,
       name,
       mobile,
+      platform,
       thresholds,
       mobileBreakpoint,
       scrollBarWidth,
@@ -175,7 +182,9 @@ export function createDisplay (options?: Partial<DisplayOptions>): DisplayInstan
     }
   })
 
-  window.addEventListener('resize', onResize, { passive: true })
+  if (IN_BROWSER) {
+    window.addEventListener('resize', onResize, { passive: true })
+  }
 
   return { display }
 }
@@ -184,10 +193,6 @@ export function useDisplay () {
   const display = inject(VuetifyDisplaySymbol)
 
   if (!display) throw new Error('Could not find Vuetify display injection')
-
-  // check breakpoint on component
-  // check breakpoint in display
-  // return whichever exists
 
   return display
 }
