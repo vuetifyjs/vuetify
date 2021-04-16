@@ -131,7 +131,7 @@
           <v-icon
             large
             :color="props.isFilled ? 'purple darken-4' : ''"
-            v-text="`mdi-numeric${props.index}-box`"
+            v-text="`mdi-numeric-${props.index}-box`"
           ></v-icon>
         </template>
       </v-rating>

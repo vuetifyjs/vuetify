@@ -3,7 +3,7 @@
     <v-data-iterator
       :items="items"
       :items-per-page.sync="itemsPerPage"
-      :page="page"
+      :page.sync="page"
       :search="search"
       :sort-by="sortBy.toLowerCase()"
       :sort-desc="sortDesc"

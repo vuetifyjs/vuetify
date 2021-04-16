@@ -22,6 +22,8 @@ Vuetify and the maintainers of thousands of other packages are working with Tide
 
 If you want the flexibility of open source and the confidence of commercial-grade software, this is for you.
 
+<br>
+
 <tidelift-btns />
 
 ## The Tidelift Subscription manages your dependencies for you
@@ -33,6 +35,8 @@ If you want the flexibility of open source and the confidence of commercial-grad
 - Get commercial assurances that don't come for free with open source packages, like intellectual property indemnification and support under a service level agreement. You expect these guarantees from proprietary software, and you can get them when using open source as well.
 
 The end result? All of the capabilities you expect from commercial-grade software, for the full breadth of open source you use. That means less time grappling with esoteric open source trivia, and more time building your own applications—and your business.
+
+<br>
 
 <tidelift-btns />
 

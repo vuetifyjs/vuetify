@@ -17,7 +17,7 @@
         color="primary"
         text
       >
-        Connecting Settings
+        Connection Settings
       </v-btn>
     </template>
   </v-banner>

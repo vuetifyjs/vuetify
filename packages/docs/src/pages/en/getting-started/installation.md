@@ -6,7 +6,7 @@ meta:
 related:
   - /introduction/why-vuetify/
   - /getting-started/frequently-asked-questions/
-  - /introduction/why-vuetify/
+  - /getting-started/browser-support/
 ---
 
 # Installation
@@ -132,7 +132,7 @@ module.exports = {
               implementation: require('sass'),
               indentedSyntax: true // optional
             },
-            // Requires sass-loader@^8.0.0
+            // Requires >= sass-loader@^8.0.0
             options: {
               implementation: require('sass'),
               sassOptions: {

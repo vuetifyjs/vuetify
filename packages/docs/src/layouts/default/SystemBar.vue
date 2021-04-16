@@ -1,14 +1,14 @@
 <template>
   <v-system-bar
-    v-if="false"
+    v-if="hasPromotion"
+    :style="{ background: `linear-gradient(to right, #04091D 45%, ${hasAltPromotion ? '#1D408C' : '#7A3FAB'})` }"
     app
-    color="#1D1D22"
     dark
-    height="84"
+    height="76"
   >
     <a
-      class="cm-banner"
-      href="https://store.vuetifyjs.com/?utm_source=vuetify&utm_medium=banner&utm_campaign=cybermonday"
+      :class="[`cm-banner${hasAltPromotion ? '-alt' : ''}`]"
+      href="https://vueschool.io/free-weekend/?friend=vuetify"
       rel="noopener"
       target="_blank"
       @click="onClick"
@@ -28,7 +28,7 @@
 
 <script>
   // Utilities
-  import { differenceInHours, isBefore } from 'date-fns'
+  // import { differenceInHours, isBefore } from 'date-fns'
   import { get, sync } from 'vuex-pathify'
 
   export default {
@@ -37,13 +37,17 @@
     computed: {
       last: sync('user/last@promotion'),
       name: get('route/name'),
+      hasAltPromotion () {
+        return true
+      },
       hasPromotion () {
-        const now = Date.now()
+        return false
+        // const now = Date.now()
 
-        return (
-          isBefore(now, new Date(2020, 12, 1)) &&
-          differenceInHours(now, Number(this.last)) > 1
-        )
+        // return (
+        //   isBefore(now, new Date(2021, 3, 29)) &&
+        //   differenceInHours(now, Number(this.last)) > 1
+        // )
       },
     },
 
@@ -51,7 +55,7 @@
       onClick () {
         this.$gtag.event('click', {
           event_category: 'vuetify-banner',
-          event_label: 'cyber-monday-2020',
+          event_label: 'vue-masterschool-free',
           value: this.name.toLowerCase(),
         })
       },
@@ -63,9 +67,8 @@
 </script>
 
 <style lang="sass">
-  .cm-banner
-    background-color: #1D1D22
-    background-image: url(https://vuetifyjs.b-cdn.net/docs/images/promotions/cyber-monday-2020/cm-mobile.svg)
+  .cm-banner,
+  .cm-banner-alt
     background-position: center
     background-repeat: no-repeat
     background-size: contain
@@ -80,11 +83,21 @@
     top: 0
     white-space: nowrap
 
-  @media (min-width: 660px)
-    .cm-banner
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/cyber-monday-2020/cm-tablet.svg)
+  .cm-banner
+    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vueschool-mobile.png)
 
-  @media (min-width: 992px)
-    .cm-banner
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/cyber-monday-2020/cm-desktop.svg)
+    @media (min-width: 660px)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vueschool-tablet.png)
+
+    @media (min-width: 992px)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vueschool-desktop.png)
+
+  .cm-banner-alt
+    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vs-2-mobile.png)
+
+    @media (min-width: 660px)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vs-2-tablet.png)
+
+    @media (min-width: 992px)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vs-2-desktop.png)
 </style>

@@ -54,44 +54,13 @@ Have a question that belongs here? Tell us in our [Discord Community](https://co
 
 - **When will Vuetify v3 be released?** { #version-3 }
 
-  Version 3 is currently under development and slated for release in Quarter 1 of 2021. Follow our progress on [Notion](https://notion.vuetifyjs.com) or read and overview of what's to come on our [Roadmap](/introduction/roadmap/).
+  Follow our progress on [GitHub](https://titan.vuetifyjs.com) or read and overview of what's to come on our [Roadmap](/introduction/roadmap/).
 
 <br>
 
 - **My application won't compile due to sass / scss errors.**{ #sass-compile-error }
 
-  Ensure that you are using the proper options object in accordance with your sass-loader version.
-
-```js
-// webpack.config.js
-
-module.exports = {
-  rules: [
-    {
-      test: /\.s(c|a)ss$/,
-      use: [
-        'vue-style-loader',
-        'css-loader',
-        {
-          loader: 'sass-loader',
-          // Requires sass-loader@^7.0.0
-          options: {
-            implementation: require('sass'),
-            indentedSyntax: true // optional
-          },
-          // Requires sass-loader@^8.0.0
-          options: {
-            implementation: require('sass'),
-            sassOptions: {
-              indentedSyntax: true // optional
-            },
-          },
-        },
-      ],
-    },
-  ],
-}
-```
+  Ensure that you are have webpack configured properly using the proper options object in accordance with your sass-loader version. See the [webpack install](/getting-started/installation/#webpack-install) section for details.
 
 <br>
 
@@ -222,7 +191,7 @@ export default {
 
 - **How do I use Font Awesome, Material Design Icons or Material Icons?**{ #custom-icons }
 
-  You can find more information in our [icon guide](/features/icons/).
+  You can find more information in our [icon guide](/features/icon-fonts/).
 
 <br>
 

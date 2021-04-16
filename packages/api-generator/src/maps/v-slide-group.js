@@ -6,7 +6,11 @@ module.exports = {
         value: 'any[] | any',
       },
       {
-        name: 'click:location',
+        name: 'click:prev',
+        value: 'void',
+      },
+      {
+        name: 'click:next',
         value: 'void',
       },
     ],
