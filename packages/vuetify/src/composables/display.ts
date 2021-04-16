@@ -2,7 +2,7 @@
 import { computed, inject, ref } from 'vue'
 
 // Globals
-import { IN_BROWSER } from '@/util/globals'
+import { IN_BROWSER, SUPPORTS_INTERSECTION, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
@@ -92,9 +92,42 @@ function getClientHeight () {
   )
 }
 
+function getPlatform () {
+  const userAgent = IN_BROWSER ? window.navigator.userAgent : 'ssr'
+
+  function match (regexp: RegExp) {
+    return Boolean(userAgent.match(regexp))
+  }
+
+  const android = match(/android/)
+  const electron = match(/electron/)
+  const ios = match(/iphone|ipad|ipod/)
+  const mac = match(/mac/)
+  const opera = match(/opera/)
+  const ssr = match(/ssr/)
+  const windows = match(/win/)
+  const mobile = android || ios || opera
+  const desktop = !mobile && !ssr
+
+  return {
+    android,
+    desktop,
+    electron,
+    intersection: SUPPORTS_INTERSECTION,
+    ios,
+    mac,
+    mobile,
+    opera,
+    ssr,
+    touch: SUPPORTS_TOUCH,
+    windows,
+  }
+}
+
 export function createDisplay (options?: Partial<DisplayOptions>): DisplayInstance {
   const { thresholds, mobileBreakpoint, scrollBarWidth } = parseDisplayOptions(options)
 
+  const platform = getPlatform()
   const width = ref(getClientWidth())
   const height = ref(getClientHeight())
 
@@ -111,7 +144,9 @@ export function createDisplay (options?: Partial<DisplayOptions>): DisplayInstan
     const xl = width.value >= (thresholds.lg - scrollBarWidth)
     const name = xs ? 'xs' : sm ? 'sm' : md ? 'md' : lg ? 'lg' : 'xl' as DisplayBreakpoint
     const breakpointValue = typeof mobileBreakpoint === 'number' ? mobileBreakpoint : thresholds[mobileBreakpoint]
-    const mobile = width.value < (breakpointValue - scrollBarWidth)
+    const mobile = IN_BROWSER
+      ? width.value < (breakpointValue - scrollBarWidth)
+      : platform.mobile
 
     return {
       xs,
