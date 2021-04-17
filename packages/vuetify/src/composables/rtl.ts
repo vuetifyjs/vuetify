@@ -7,7 +7,7 @@ import type { LocaleInstance } from './locale'
 
 export interface RtlOptions {
   rtl?: Record<string, boolean>
-  isRtl?: boolean
+  defaultRtl?: boolean
 }
 
 export interface RtlProps {
@@ -23,8 +23,11 @@ export const VuetifyRtlSymbol: InjectionKey<RtlInstance> = Symbol.for('vuetify:r
 
 export function createRtl (localeScope: LocaleInstance, options?: RtlOptions) {
   return createRtlScope({
-    rtl: options?.rtl ?? rtl,
-    isRtl: ref(options?.isRtl ?? false),
+    rtl: {
+      ...rtl,
+      ...(options?.rtl ?? {}),
+    },
+    isRtl: ref(options?.defaultRtl ?? false),
   }, localeScope)
 }
 

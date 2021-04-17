@@ -2677,59 +2677,6 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
-"@formatjs/ecma402-abstract@1.6.4":
-  version "1.6.4"
-  resolved "https://registry.yarnpkg.com/@formatjs/ecma402-abstract/-/ecma402-abstract-1.6.4.tgz#cff5ef03837fb6bae70b16d04940213c17e87884"
-  integrity sha512-ukFjGD9dLsxcD9D5AEshJqQElPQeUAlTALT/lzIV6OcYojyuU81gw/uXDUOrs6XW79jtOJwQDkLqHbCJBJMOTw==
-  dependencies:
-    tslib "^2.1.0"
-
-"@formatjs/icu-messageformat-parser@1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@formatjs/icu-messageformat-parser/-/icu-messageformat-parser-1.1.2.tgz#e0d41edcfd031c0627b0f40dfcce5883d765df5d"
-  integrity sha512-AgwoQ2XUL+bQ/v7t4TBJh9vsob8zXgfM3RNe3MvJBCVOEZ+9z8mszsqeae/DmJgLK6SDezJex5O9Vdiny58Pwg==
-  dependencies:
-    "@formatjs/ecma402-abstract" "1.6.4"
-    "@formatjs/icu-skeleton-parser" "1.1.1"
-    tslib "^2.1.0"
-
-"@formatjs/icu-skeleton-parser@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@formatjs/icu-skeleton-parser/-/icu-skeleton-parser-1.1.1.tgz#b2c39a7817816d68d31272947dded970f6d1d1c7"
-  integrity sha512-hkRJhjr9G0IE730Kxwq65+rz/2fdCckSJTPrKmViMxLNtRmIt6Hx67tffElr9/QSlpzGlXw9XAMdFOa1ylRrJQ==
-  dependencies:
-    "@formatjs/ecma402-abstract" "1.6.4"
-    tslib "^2.1.0"
-
-"@formatjs/intl-displaynames@4.0.12":
-  version "4.0.12"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-displaynames/-/intl-displaynames-4.0.12.tgz#9af9992e544aa96b32c3a4994d6fef878e0376c9"
-  integrity sha512-2f3nf5IcPYk2SCS83rJoV5y47OTL+YtHDa5G42KDgSA8ZgmgkN5OaYs3WF6a2RweMG9jp4LCTUmqS42LcAhJSw==
-  dependencies:
-    "@formatjs/ecma402-abstract" "1.6.4"
-    tslib "^2.1.0"
-
-"@formatjs/intl-listformat@5.0.13":
-  version "5.0.13"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-listformat/-/intl-listformat-5.0.13.tgz#5b13057a12642089108ddf4316bab976319fd941"
-  integrity sha512-z4vZ5FX6dsL2fbO7NCmmJXKXH9p0gubzZVSsmCOUBIuy6rODLD8kE2LVnefd4wnXEJi5/fAnwGT2NMjirWa71g==
-  dependencies:
-    "@formatjs/ecma402-abstract" "1.6.4"
-    tslib "^2.1.0"
-
-"@formatjs/intl@1.9.5":
-  version "1.9.5"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl/-/intl-1.9.5.tgz#02bc32ab9e52b7f0201c964a696609b6d455cca2"
-  integrity sha512-PEvdDuppTHW23B4s1nzKCY1wku3HYEgmV2ip02RspSUKl8p3t/TCwb1/U3Qwhgj3EUsjYdiaF1uyMj61eChAow==
-  dependencies:
-    "@formatjs/ecma402-abstract" "1.6.4"
-    "@formatjs/icu-messageformat-parser" "1.1.2"
-    "@formatjs/intl-displaynames" "4.0.12"
-    "@formatjs/intl-listformat" "5.0.13"
-    fast-memoize "^2.5.2"
-    intl-messageformat "9.6.4"
-    tslib "^2.1.0"
-
 "@fortawesome/fontawesome-common-types@^0.2.34":
   version "0.2.34"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.34.tgz#0a8c348bb23b7b760030f5b1d912e582be4ec915"
@@ -2794,44 +2741,6 @@
     cssnano "^4.0.0"
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
-
-"@intlify/core-base@9.0.0":
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/@intlify/core-base/-/core-base-9.0.0.tgz#3de223b8532c535d022e5be58f7d56a26d2fb12f"
-  integrity sha512-dxqakT94EV2bFshG3LENQUPWX9yJFCga1BOwJ6mz7J8LnAYVB9Kxw7NRyE2ybN31USW2IUTQH6WWR1yDbCiefQ==
-  dependencies:
-    "@intlify/message-compiler" "9.0.0"
-    "@intlify/message-resolver" "9.0.0"
-    "@intlify/runtime" "9.0.0"
-    "@intlify/shared" "9.0.0"
-
-"@intlify/message-compiler@9.0.0":
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/@intlify/message-compiler/-/message-compiler-9.0.0.tgz#8a1079f8aebcde33057ce769817691ce27ad3e0d"
-  integrity sha512-3oiLj+8z6koRYJwknazjilBsrqnJEAJywr/t39MYVy2yPmwOI1+NDfdDwM9U3ioA2RvsQEUICqW8gmjq1YIElw==
-  dependencies:
-    "@intlify/message-resolver" "9.0.0"
-    "@intlify/shared" "9.0.0"
-    source-map "0.6.1"
-
-"@intlify/message-resolver@9.0.0":
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/@intlify/message-resolver/-/message-resolver-9.0.0.tgz#0077ec24606b6486d238bdef9044e27729f4782c"
-  integrity sha512-LVK4cwu1l33yvBy0UQkEdXm6pZUcbbiparobruJXz+U8jRTmYHBprN59j59YKXEKcV43cHfzNveaQIm84bgxvQ==
-
-"@intlify/runtime@9.0.0":
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/@intlify/runtime/-/runtime-9.0.0.tgz#bf9415ff90c746a9be38a5c32f71cbbe9848eee8"
-  integrity sha512-UqCKduZezb5/qA+XPRfHVvXoLmhnQ8iKMyCh0Lg3ZwjW2vOMep/AgZU3T9cgESe67r4buPYHs7nOBSHbTdjNxg==
-  dependencies:
-    "@intlify/message-compiler" "9.0.0"
-    "@intlify/message-resolver" "9.0.0"
-    "@intlify/shared" "9.0.0"
-
-"@intlify/shared@9.0.0":
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/@intlify/shared/-/shared-9.0.0.tgz#d85b3b5f9033f377c5cf2202cf2459aa49948f36"
-  integrity sha512-0r4v7dnY8g/Jfx2swUWy2GyfH/WvIpWvkU4OIupvxDTWiE8RhcpbOCVvqpVh/xGi0proHQ/r2Dhc0QSItUsfDQ==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
@@ -4855,11 +4764,6 @@
     vue-template-es2015-compiler "^1.9.0"
   optionalDependencies:
     prettier "^1.18.2"
-
-"@vue/devtools-api@^6.0.0-beta.5":
-  version "6.0.0-beta.7"
-  resolved "https://registry.yarnpkg.com/@vue/devtools-api/-/devtools-api-6.0.0-beta.7.tgz#1d306613c93b9a837a3776b1b9255502662f850f"
-  integrity sha512-mIfqX8ZF6s2ulelIzfxGk9sFoigpoeK/2/DlWrtBGWfvwaK3kR1P2bxNkZ0LbJeuKHfcRP6hGZtGist7nxUN9A==
 
 "@vue/preload-webpack-plugin@^1.1.0":
   version "1.1.2"
@@ -9330,11 +9234,6 @@ fast-levenshtein@^2.0.6, fast-levenshtein@~2.0.4:
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
 
-fast-memoize@^2.5.2:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/fast-memoize/-/fast-memoize-2.5.2.tgz#79e3bb6a4ec867ea40ba0e7146816f6cdce9b57e"
-  integrity sha512-Ue0LwpDYErFbmNnZSF0UH6eImUwDmogUO1jyE+JbN2gsQz/jICm1Ve7t9QT0rNSsfJt+Hs4/S3GnsDVjL4HVrw==
-
 fastq@^1.6.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/fastq/-/fastq-1.8.0.tgz#550e1f9f59bbc65fe185cb6a9b4d95357107f481"
@@ -10907,15 +10806,6 @@ intersection-observer@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/intersection-observer/-/intersection-observer-0.11.0.tgz#f4ea067070326f68393ee161cc0a2ca4c0040c6f"
   integrity sha512-KZArj2QVnmdud9zTpKf279m2bbGfG+4/kn16UU0NL3pTVl52ZHiJ9IRNSsnn6jaHrL9EGLFM5eWjTx2fz/+zoQ==
-
-intl-messageformat@9.6.4:
-  version "9.6.4"
-  resolved "https://registry.yarnpkg.com/intl-messageformat/-/intl-messageformat-9.6.4.tgz#6ee964235c37b864359dc848b3dd5ea984cc8065"
-  integrity sha512-NCstnz4qiRYHRiFwAadptARV0XGv8dFtC6ZcDfjKlFePvyyQ9zkPXq28Tg7UPTfUZnOfGjnxgi0mMem/5/TbDw==
-  dependencies:
-    "@formatjs/icu-messageformat-parser" "1.1.2"
-    fast-memoize "^2.5.2"
-    tslib "^2.1.0"
 
 invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
@@ -16962,15 +16852,15 @@ source-map@0.5.6:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.6.tgz#75ce38f52bf0733c5a7f0c118d81334a2bb5f412"
   integrity sha1-dc449SvwczxafwwRjYEzSiu19BI=
 
-source-map@0.6.1, source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.0, source-map@~0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
-  integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
-
 source-map@^0.5.0, source-map@^0.5.6:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
   integrity sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=
+
+source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.0, source-map@~0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
+  integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
 source-map@^0.7.3, source-map@~0.7.2:
   version "0.7.3"
@@ -18003,11 +17893,6 @@ tslib@^1.8.1, tslib@^1.9.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
   integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
 
-tslib@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.1.0.tgz#da60860f1c2ecaa5703ab7d39bc05b6bf988b97a"
-  integrity sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A==
-
 tsscmp@1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/tsscmp/-/tsscmp-1.0.6.tgz#85b99583ac3589ec4bfef825b5000aa911d605eb"
@@ -18526,15 +18411,6 @@ vue-i18n@^8.17.7:
   resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.21.0.tgz#526450525fdbb9c877685b5ba6cb9573b73d3940"
   integrity sha512-pKBq6Kg5hNacFHMFgPbpYsFlDIMRu4Ew/tpvTWns14CZoCxt7B3tmSNdrLruGMMivnJu1rhhRqsQqT6YwHkuQQ==
 
-vue-i18n@next:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-9.0.0.tgz#a04c41d5ed3d5a068e923517bfaa0abcbc84e174"
-  integrity sha512-iks0eJDv/4cK/7tl/ooMUroNVVIGOK4kKS1PIHmPQk7QjT/sDfFM84vjPKgpARbw0GjJsOiADL43jufNfs9e9A==
-  dependencies:
-    "@intlify/core-base" "9.0.0"
-    "@intlify/shared" "9.0.0"
-    "@vue/devtools-api" "^6.0.0-beta.5"
-
 vue-instantsearch@^3.4.3:
   version "3.4.3"
   resolved "https://registry.yarnpkg.com/vue-instantsearch/-/vue-instantsearch-3.4.3.tgz#7b029d604c42d9992a024d709a9555a0869e4cc2"
@@ -18542,13 +18418,6 @@ vue-instantsearch@^3.4.3:
   dependencies:
     algoliasearch-helper "^3.1.0"
     instantsearch.js "^4.7.0"
-
-vue-intl@latest:
-  version "4.1.24"
-  resolved "https://registry.yarnpkg.com/vue-intl/-/vue-intl-4.1.24.tgz#ff79da64c8a816cd222071cd0ee42d8df06705e1"
-  integrity sha512-EyJ5lGCQChlKoDkG+skwuw0IhTHf1C37NDjTY6O8XaTi7xAHXKrdGp2NfpafKHrc3BLJs5O7b2OOm9x0YiwL3g==
-  dependencies:
-    "@formatjs/intl" "1.9.5"
 
 "vue-loader-v16@npm:vue-loader@^16.0.0-beta.3":
   version "16.0.0-beta.5"

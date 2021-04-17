@@ -24,6 +24,7 @@
       "breakpoints",
       "global-config",
       "icon-fonts",
+      "internationalization",
       "theme"
     ]
   },
