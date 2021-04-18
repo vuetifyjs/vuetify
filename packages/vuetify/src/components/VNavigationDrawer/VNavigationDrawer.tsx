@@ -23,7 +23,10 @@ export default defineComponent({
   props: makeProps({
     disableResizeWatcher: Boolean,
     expandOnHover: Boolean,
-    modelValue: Boolean,
+    modelValue: {
+      type: Boolean,
+      default: null,
+    },
     permanent: Boolean,
     rail: Boolean,
     railWidth: {
@@ -66,7 +69,7 @@ export default defineComponent({
       props.name,
       toRef(props, 'priority'),
       computed(() => props.right ? 'right' : 'left'),
-      computed(() => !isTemporary.value ? size.value : 0),
+      computed(() => !isTemporary.value && isActive.value ? size.value : 0),
     )
 
     if (!props.disableResizeWatcher) {
