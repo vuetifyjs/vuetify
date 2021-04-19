@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import { createVuetify } from '@/framework'
+import { createVuetify } from '@/entry-bundler'
 import { mount } from '@cypress/vue'
 import { h } from 'vue'
 import VBtn from './VBtn'
