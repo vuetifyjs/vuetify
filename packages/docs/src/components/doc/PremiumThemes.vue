@@ -29,7 +29,7 @@
         md="6"
       >
         <a
-          :href="`https://store.vuetifyjs.com/products/${product.handle}?utm_source=vuetifyjs.com&utm_medium=themes`"
+          :href="`https://store.vuetifyjs.com/products/${product.handle}?utm_source=vuetifyjs.com&utm_medium=uikits`"
           class="text--primary text-decoration-none"
           rel="noopener"
           target="_blank"

@@ -29,7 +29,7 @@
         md="6"
       >
         <a
-          :href="`https://store.vuetifyjs.com/products/${product.handle}?utm_source=vuetifyjs.com&utm_medium=uikits`"
+          :href="`https://store.vuetifyjs.com/products/${product.handle}`"
           class="text--primary text-decoration-none"
           rel="noopener"
           target="_blank"
@@ -74,7 +74,7 @@
   import shopify from '@/store/modules/shopify'
 
   export default {
-    name: 'VuetifyUIKits',
+    name: 'VuetifyKits',
 
     data: () => ({ products: [] }),
 
@@ -89,7 +89,7 @@
       const products = []
 
       for (const product of request) {
-        if (product.productType !== 'UIKits') continue
+        if (product.productType !== 'UI Kits') continue
 
         const variant = product.variants[0]
 
