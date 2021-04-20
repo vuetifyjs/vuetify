@@ -91,7 +91,7 @@ A multi-select can utilize `v-chip` as the display for selected items.
 
 #### Readonly
 
-You cannot use read-only `v-select`, but it looks default.
+You can use read-only with `v-select`, but it looks default.
 
 <example file="v-select/prop-readonly" />
 
