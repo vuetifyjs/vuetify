@@ -26,15 +26,15 @@ export default defineComponent({
 
     return () => (
       <props.tag class="v-item-group">
-        { slots.default?.({
-            isSelected,
-            select,
-            next,
-            prev,
-            step,
-            selected: selected.value,
-        }) }
+        {slots.default?.({
+          isSelected,
+          select,
+          next,
+          prev,
+          step,
+          selected: selected.value,
+        })}
       </props.tag>
     )
-  }
+  },
 })

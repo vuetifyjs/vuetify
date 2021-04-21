@@ -21,5 +21,5 @@ export default defineComponent({
       value: value.value,
       disabled: disabled.value,
     })
-  }
+  },
 })
