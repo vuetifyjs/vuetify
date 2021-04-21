@@ -263,34 +263,34 @@ describe('display.ts', () => {
   ])('should calculate breakpoint for %s', async (options, expected) => {
     await resizeWindow(options.width, options.height)
 
-    const { display } = createDisplay()
+    const display = createDisplay()
 
     for (const breakpoint of breakpoints) {
       const expectedValue = expected.includes(breakpoint)
 
-      expect(display.value[breakpoint]).toBe(expectedValue)
+      expect(display[breakpoint].value).toBe(expectedValue)
     }
   })
 
   it('should override default thresholds', async () => {
-    const { display } = createDisplay({
+    const { xs } = createDisplay({
       thresholds: { xs: 400 },
     })
 
     await resizeWindow(401)
-    expect(display.value.xs).toBe(false)
+    expect(xs.value).toBe(false)
 
     await resizeWindow(399)
-    expect(display.value.xs).toBe(true)
+    expect(xs.value).toBe(true)
   })
 
   it('should allow breakpoint strings for mobileBreakpoint', async () => {
-    const { display } = createDisplay({ mobileBreakpoint: 'lg' })
+    const { mobile } = createDisplay({ mobileBreakpoint: 'lg' })
 
     await resizeWindow(1920)
-    expect(display.value.mobile).toBe(false)
+    expect(mobile.value).toBe(false)
 
     await resizeWindow(600)
-    expect(display.value.mobile).toBe(true)
+    expect(mobile.value).toBe(true)
   })
 })

@@ -48,8 +48,8 @@ export default defineComponent({
   }),
 
   setup (props, { slots }) {
+    const { mobile } = useDisplay()
     const { themeClasses } = useTheme()
-    const { display } = useDisplay()
     const { borderClasses } = useBorder(props, 'v-navigation-drawer')
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-navigation-drawer')
@@ -63,8 +63,7 @@ export default defineComponent({
         ? props.width
         : size.value
     })
-    const isMobile = computed(() => display.value.mobile)
-    const isTemporary = computed(() => !props.permanent && (isMobile.value || props.temporary))
+    const isTemporary = computed(() => !props.permanent && (mobile.value || props.temporary))
     const layoutStyles = useLayoutItem(
       props.name,
       toRef(props, 'priority'),
@@ -73,7 +72,7 @@ export default defineComponent({
     )
 
     if (!props.disableResizeWatcher) {
-      watch(isMobile, val => !props.permanent && (isActive.value = !val))
+      watch(mobile, val => !props.permanent && (isActive.value = !val))
     }
 
     watch(props, val => {
@@ -83,7 +82,7 @@ export default defineComponent({
     onBeforeMount(() => {
       if (props.modelValue != null) return
 
-      isActive.value = !isMobile.value
+      isActive.value = !mobile.value
     })
 
     return () => {

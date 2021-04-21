@@ -1,11 +1,11 @@
 // Utilities
-import { computed, inject, ref } from 'vue'
+import { inject, reactive, ref, toRefs, watchEffect } from 'vue'
 
 // Globals
 import { IN_BROWSER, SUPPORTS_INTERSECTION, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
-import type { InjectionKey, Ref } from 'vue'
+import type { InjectionKey, ToRefs } from 'vue'
 import { mergeDeep } from '@/util'
 
 export type DisplayBreakpoint = keyof DisplayThresholds
@@ -30,35 +30,46 @@ export interface InternalDisplayOptions {
   thresholds: DisplayThresholds
 }
 
-export interface DisplayInstance {
-  display: Ref<{
-    height: number
-    lg: boolean
-    lgAndDown: boolean
-    lgAndUp: boolean
-    lgOnly: boolean
-    md: boolean
-    mdAndDown: boolean
-    mdAndUp: boolean
-    mdOnly: boolean
-    name: DisplayBreakpoint
-    sm: boolean
-    smAndDown: boolean
-    smAndUp: boolean
-    smOnly: boolean
-    xl: boolean
-    xlOnly: boolean
-    xs: boolean
-    xsOnly: boolean
-    mobile: boolean
-    mobileBreakpoint: number | DisplayBreakpoint
-    thresholds: DisplayThresholds
-    scrollBarWidth: number
-    width: number
-  }>
+export interface DisplayPlatform {
+  android: boolean
+  cordova: boolean
+  electron: boolean
+  ios: boolean
+  linux: boolean
+  mac: boolean
+  opera: boolean
+  ssr: boolean
+  win: boolean
 }
 
-export const VuetifyDisplaySymbol: InjectionKey<DisplayInstance> = Symbol.for('vuetify:display')
+export interface DisplayInstance {
+  height: number
+  lg: boolean
+  lgAndDown: boolean
+  lgAndUp: boolean
+  lgOnly: boolean
+  md: boolean
+  mdAndDown: boolean
+  mdAndUp: boolean
+  mdOnly: boolean
+  name: DisplayBreakpoint
+  sm: boolean
+  smAndDown: boolean
+  smAndUp: boolean
+  smOnly: boolean
+  xl: boolean
+  xlOnly: boolean
+  xs: boolean
+  xsOnly: boolean
+  mobile: boolean
+  mobileBreakpoint: number | DisplayBreakpoint
+  platform: DisplayPlatform
+  thresholds: DisplayThresholds
+  scrollBarWidth: number
+  width: number
+}
+
+export const VuetifyDisplaySymbol: InjectionKey<ToRefs<DisplayInstance>> = Symbol.for('vuetify:display')
 
 const defaultDisplayOptions: DisplayOptions = {
   mobileBreakpoint: 'md',
@@ -130,19 +141,21 @@ function getPlatform () {
   }
 }
 
-export function createDisplay (options?: DisplayOptions): DisplayInstance {
+export function createDisplay (options?: DisplayOptions): ToRefs<DisplayInstance> {
   const { thresholds, mobileBreakpoint, scrollBarWidth } = parseDisplayOptions(options)
 
-  const platform = getPlatform()
-  const width = ref(getClientWidth())
   const height = ref(getClientHeight())
+  const platform = getPlatform()
+  const state = reactive({} as DisplayInstance)
+  const width = ref(getClientWidth())
 
   function onResize () {
     height.value = getClientHeight()
     width.value = getClientWidth()
   }
 
-  const display = computed(() => {
+  // eslint-disable-next-line max-statements
+  watchEffect(() => {
     const xs = width.value < thresholds.xs
     const sm = width.value < thresholds.sm && !xs
     const md = width.value < (thresholds.md - scrollBarWidth) && !(sm || xs)
@@ -154,39 +167,37 @@ export function createDisplay (options?: DisplayOptions): DisplayInstance {
       ? width.value < (breakpointValue - scrollBarWidth)
       : platform.android || platform.ios || platform.opera
 
-    return {
-      xs,
-      sm,
-      md,
-      lg,
-      xl,
-      height: height.value,
-      xsOnly: xs,
-      smOnly: sm,
-      smAndDown: (xs || sm) && !(md || lg || xl),
-      smAndUp: !xs && (sm || md || lg || xl),
-      mdOnly: md,
-      mdAndDown: (xs || sm || md) && !(lg || xl),
-      mdAndUp: !(xs || sm) && (md || lg || xl),
-      lgOnly: lg,
-      lgAndDown: (xs || sm || md || lg) && !xl,
-      lgAndUp: !(xs || sm || md) && (lg || xl),
-      xlOnly: xl,
-      name,
-      mobile,
-      platform,
-      thresholds,
-      mobileBreakpoint,
-      scrollBarWidth,
-      width: width.value,
-    }
+    state.xs = xs
+    state.sm = sm
+    state.md = md
+    state.lg = lg
+    state.xl = xl
+    state.height = height.value
+    state.xsOnly = xs
+    state.smOnly = sm
+    state.smAndDown = (xs || sm) && !(md || lg || xl)
+    state.smAndUp = !xs && (sm || md || lg || xl)
+    state.mdOnly = md
+    state.mdAndDown = (xs || sm || md) && !(lg || xl)
+    state.mdAndUp = !(xs || sm) && (md || lg || xl)
+    state.lgOnly = lg
+    state.lgAndDown = (xs || sm || md || lg) && !xl
+    state.lgAndUp = !(xs || sm || md) && (lg || xl)
+    state.xlOnly = xl
+    state.mobile = mobile
+    state.mobileBreakpoint = mobileBreakpoint
+    state.name = name
+    state.platform = platform
+    state.scrollBarWidth = scrollBarWidth
+    state.thresholds = thresholds
+    state.width = width.value
   })
 
   if (IN_BROWSER) {
     window.addEventListener('resize', onResize, { passive: true })
   }
 
-  return { display }
+  return toRefs(state)
 }
 
 export function useDisplay () {
