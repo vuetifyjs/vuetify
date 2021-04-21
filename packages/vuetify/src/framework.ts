@@ -24,7 +24,7 @@ export interface VuetifyOptions {
   components?: Record<string, any>
   directives?: Record<string, any>
   defaults?: Partial<VuetifyComponentDefaults>
-  display?: Partial<DisplayOptions>
+  display?: DisplayOptions
   theme?: ThemeOptions
   icons?: IconOptions
 }
