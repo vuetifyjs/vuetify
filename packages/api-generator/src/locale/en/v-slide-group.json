@@ -12,6 +12,7 @@
   },
   "events": {
     "change": "Emitted when the component value is changed by user interaction",
-    "click:location": "Emitted when a slide item is selected inside of the slide group"
+    "click:prev": "Emitted when the prev is clicked",
+    "click:next": "Emitted when the next is clicked"
   }
 }

@@ -5,7 +5,7 @@
     v-bind="$attrs"
     v-on="$listeners"
   >
-    Im an Alert Usage Example
+    I'm an Alert Usage Example
   </v-alert>
 
   <v-btn

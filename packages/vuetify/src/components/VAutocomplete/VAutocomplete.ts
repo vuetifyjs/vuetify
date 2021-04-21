@@ -99,9 +99,12 @@ export default VSelect.extend({
         return this.lazySearch
       },
       set (val: any) { // TODO: this should be `string | null` but it breaks lots of other types
-        this.lazySearch = val
-
-        this.$emit('update:search-input', val)
+        // emit update event only when the new
+        // search value is different from previous
+        if (this.lazySearch !== val) {
+          this.lazySearch = val
+          this.$emit('update:search-input', val)
+        }
       },
     },
     isAnyValueAllowed (): boolean {
@@ -133,7 +136,8 @@ export default VSelect.extend({
       }
     },
     searchIsDirty (): boolean {
-      return this.internalSearch != null
+      return this.internalSearch != null &&
+        this.internalSearch !== ''
     },
     selectedItem (): any {
       if (this.multiple) return null
@@ -169,6 +173,7 @@ export default VSelect.extend({
         this.$refs.input && this.$refs.input.select()
       } else {
         document.removeEventListener('copy', this.onCopy)
+        this.$refs.input && this.$refs.input.blur()
         this.updateSelf()
       }
     },
@@ -347,7 +352,12 @@ export default VSelect.extend({
     onKeyDown (e: KeyboardEvent) {
       const keyCode = e.keyCode
 
-      VSelect.options.methods.onKeyDown.call(this, e)
+      if (
+        e.ctrlKey ||
+        ![keyCodes.home, keyCodes.end].includes(keyCode)
+      ) {
+        VSelect.options.methods.onKeyDown.call(this, e)
+      }
 
       // The ordering is important here
       // allows new value to be updated

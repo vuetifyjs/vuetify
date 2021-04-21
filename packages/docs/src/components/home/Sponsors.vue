@@ -18,9 +18,9 @@
         <v-col
           v-for="sponsor in sponsors"
           :key="sponsor.slug"
-          class="d-flex align-center"
+          :md="sponsor.metadata.tier > 1 ? 3 : 12"
+          class="d-flex align-center justify-center"
           cols="auto"
-          md="3"
         >
           <sponsor
             :comfortable="comfortable || Number(sponsor.metadata.tier) === 2"
