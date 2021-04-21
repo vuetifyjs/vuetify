@@ -29,7 +29,7 @@
         md="6"
       >
         <a
-          :href="`https://store.vuetifyjs.com/products/${product.handle}?utm_source=vuetifyjs.com&utm_medium=uikits`"
+          :href="`https://store.vuetifyjs.com/products/${product.handle}?utm_source=vuetifyjs.com&utm_medium=themes`"
           class="text--primary text-decoration-none"
           rel="noopener"
           target="_blank"
@@ -81,25 +81,23 @@
 </template>
 
 <script>
-  // Stores
-  import shopify from '@/store/modules/shopify'
+  // Utilities
+  import { call, get } from 'vuex-pathify'
 
   export default {
     name: 'PremiumThemes',
 
     data: () => ({ products: null }),
 
-    beforeCreate () {
-      if (!this.$store.hasModule('shopify')) {
-        this.$store.registerModule('shopify', shopify)
-      }
+    computed: {
+      all: get('shopify/all'),
     },
 
     async beforeMount () {
-      const request = await this.$store.dispatch('shopify/fetch') || []
+      await this.fetch()
       const products = []
 
-      for (const product of request) {
+      for (const product of this.all) {
         if (product.productType !== 'Themes') continue
 
         const variant = product.variants[0]
@@ -122,10 +120,8 @@
         })
     },
 
-    beforeDestroy () {
-      if (this.$store.hasModule('shopify')) {
-        this.$store.unregisterModule('shopify')
-      }
+    methods: {
+      fetch: call('shopify/fetch'),
     },
   }
 </script>
