@@ -1,5 +1,4 @@
 <template>
-
   <v-row>
     <template v-if="!products">
       <v-col
