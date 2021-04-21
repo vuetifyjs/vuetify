@@ -128,6 +128,15 @@
   display: flex
 
 // Modifiers
+.v-alert--border
+  &.v-alert--prominent
+    .v-alert__icon
+      +ltr()
+        margin-left: $alert-border-icon-margin
+
+      +rtl()
+        margin-right: $alert-border-icon-margin
+
 .v-alert--dense
   padding-top: $alert-padding / 2
   padding-bottom: $alert-padding / 2
@@ -148,19 +157,22 @@
     height: $alert-prominent-icon-size
     min-width: $alert-prominent-icon-size
 
-    &:after
-      background: currentColor !important
-      border-radius: 50%
-      bottom: 0
-      content: ''
-      left: 0
-      opacity: 0.16
-      position: absolute
-      right: 0
-      top: 0
-
     &.v-icon
       font-size: $alert-prominent-icon-font-size
+
+      &:after
+        background: currentColor !important
+        border-radius: 50%
+        bottom: 0
+        content: ''
+        left: 0
+        opacity: 0.16
+        position: absolute
+        right: 0
+        top: 0
+
+  &.v-alert--dense .v-alert__icon.v-icon::after
+    transform: scale(1)
 
 .v-alert--text
   background: transparent !important
