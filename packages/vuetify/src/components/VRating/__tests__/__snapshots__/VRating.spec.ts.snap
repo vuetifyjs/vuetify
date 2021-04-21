@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VRating.ts should change icon on hover 1`] = `
+exports[`VRating should change icon on hover 1`] = `
 <div class="v-rating">
   <div class="v-rating__item">
     <button type="button"
@@ -70,7 +70,7 @@ exports[`VRating.ts should change icon on hover 1`] = `
 </div>
 `;
 
-exports[`VRating.ts should render a scoped item slot 1`] = `
+exports[`VRating should render a scoped item slot 1`] = `
 <div class="v-rating">
   <div class="v-rating__item">
     <div>
@@ -100,7 +100,7 @@ exports[`VRating.ts should render a scoped item slot 1`] = `
 </div>
 `;
 
-exports[`VRating.ts should render a scoped item-label slot 1`] = `
+exports[`VRating should render a scoped item-label slot 1`] = `
 <div class="v-rating">
   <div class="v-rating__item">
     <span>
@@ -185,7 +185,7 @@ exports[`VRating.ts should render a scoped item-label slot 1`] = `
 </div>
 `;
 
-exports[`VRating.ts should respond to prop value changes 1`] = `
+exports[`VRating should respond to prop value changes 1`] = `
 <div class="v-rating">
   <div class="v-rating__item">
     <button type="button"
@@ -255,7 +255,7 @@ exports[`VRating.ts should respond to prop value changes 1`] = `
 </div>
 `;
 
-exports[`VRating.ts should respond to prop value changes 2`] = `
+exports[`VRating should respond to prop value changes 2`] = `
 <div class="v-rating">
   <div class="v-rating__item">
     <button type="button"

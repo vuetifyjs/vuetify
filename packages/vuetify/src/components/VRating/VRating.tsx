@@ -82,8 +82,9 @@ export default defineComponent({
         const isHalf = !!rect && (e.pageX - rect.left) < rect.width / 2
 
         // TODO: handle rtl
+        const isRtl = false
         // return isRtl ? !isHalf : isHalf
-        return isHalf
+        return isRtl ? !isHalf : isHalf
       }
 
       const genHoverIndex = (e: MouseEvent, i: number) => {
@@ -132,7 +133,7 @@ export default defineComponent({
                 rating.value += 0.5
               }
             } else {
-              let newValue = genHoverIndex(e, index)
+              const newValue = genHoverIndex(e, index)
               if (props.clearable && rating.value === newValue) {
                 rating.value = 0
               } else {
@@ -158,7 +159,7 @@ export default defineComponent({
           ripple: props.ripple,
           density: props.density,
           readonly: props.readonly,
-          tabindex: props.readonly ? -1 : undefined
+          tabindex: props.readonly ? -1 : undefined,
         }
       }
 
@@ -181,10 +182,10 @@ export default defineComponent({
     return () => (
       <props.tag
         class={[
-          "v-rating",
+          'v-rating',
           {
             'v-rating--readonly': props.readonly,
-          }
+          },
         ]}
         onKeydown={onKeydown}
       >
@@ -192,10 +193,10 @@ export default defineComponent({
           <div
             key={iconProps.index}
             class={[
-              "v-rating__item",
+              'v-rating__item',
               {
                 'v-rating__item--bottom': props.itemLabelPosition === 'bottom',
-              }
+              },
             ]}
           >
             {
@@ -225,5 +226,5 @@ export default defineComponent({
         ))}
       </props.tag>
     )
-  }
+  },
 })
