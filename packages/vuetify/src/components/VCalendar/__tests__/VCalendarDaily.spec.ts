@@ -53,6 +53,22 @@ describe('VCalendarDaily', () => {
     expect(wrapper.vm.scrollPush).toBe(123)
   })
 
+  it('should compute scrollPush properly', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        start: '2019-01-29',
+        end: '2019-02-04',
+      },
+    })
+
+    expect(wrapper.vm.getScrollPush()).toBe(0)
+
+    Object.defineProperty(wrapper.vm.$refs.scrollArea, 'offsetWidth', { value: 100 })
+    Object.defineProperty(wrapper.vm.$refs.pane, 'offsetWidth', { value: 25 })
+
+    expect(wrapper.vm.getScrollPush()).toBe(75)
+  })
+
   it('should render correctly with intervalMinutes prop', async () => {
     const wrapper = mountFunction({
       propsData: {
