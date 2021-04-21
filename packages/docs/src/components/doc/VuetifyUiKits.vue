@@ -73,7 +73,7 @@
   import shopify from '@/store/modules/shopify'
 
   export default {
-    name: 'VuetifyKits',
+    name: 'VuetifyUiKits',
 
     data: () => ({ products: [] }),
 
