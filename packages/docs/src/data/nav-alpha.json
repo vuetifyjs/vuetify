@@ -21,7 +21,7 @@
     "title": "features",
     "icon": "$mdiImageEditOutline:$mdiImageEdit",
     "items": [
-      "breakpoints",
+      "display-and-platform",
       "global-config",
       "icon-fonts",
       "theme"

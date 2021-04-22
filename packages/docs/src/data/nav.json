@@ -32,7 +32,7 @@
     "items": [
       "accessibility",
       "bidirectionality",
-      "display-and-platform",
+      "breakpoints",
       "global-config",
       "icon-fonts",
       "internationalization",
