@@ -346,7 +346,7 @@ This object is used for device viewport calculations.
 
 ## Using Setup
 
-Setup is a new feature of Vue 3 that enables more control over the
+Use the **display** composable alongside Vue 3's `setup` function to harness the power of the [Composition API](https://v3.vuejs.org/guide/composition-api-setup.html). In this example we show how to bind the **display** composable to the **fullscreen** property of `v-dialog`.
 
 ```html
 <template>
