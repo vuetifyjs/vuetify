@@ -40,7 +40,7 @@ The following shows how to access the application's display information:
 
 The **display** composable has a numerous configuration options, such as the ability to define custom values for breakpoints.
 
-For example, the `thresholds` option modifies the values used for viewport calculations. The following snippet overrides *xs* through *lg* values, mobileBreakpoint, and increases `scrollbarWidth`.
+For example, the **thresholds** option modifies the values used for viewport calculations. The following snippet overrides **thresholds** values *xs* through *lg*, sets **mobileBreakpoint** to `sm`, and sets the **scrollbarWidth** to `24`.
 
 ```js
 // src/plugins/vuetify.js
