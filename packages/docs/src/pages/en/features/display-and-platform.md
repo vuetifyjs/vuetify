@@ -375,7 +375,7 @@ Using JSX with setup can accomplish the same thing as a template. The following 
 
 ```tsx
 // Composables
-import { useDisplay } from 'vuetify/lib/compsables/display'
+import { useDisplay } from 'vuetify/lib/composables/display'
 
 export default {
   setup () {
