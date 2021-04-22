@@ -421,7 +421,7 @@ The breakpoint and conditional values return a `boolean` that is derived from th
 </script>
 ```
 
-Using the _dynamic_ display values, we are able to adjust the minimum height of [v-sheet](/components/sheets/) to **300** when on the _medium_ or greater breakpoint and only show rounded corners on _extra small_ screens:
+Using the _dynamic_ display values, we are able to adjust the minimum height of [v-sheet](/components/sheets/) to `300` when on the _medium_ breakpoint or greater and only show rounded corners on _extra small_ screens:
 
 ## Component Mobile Breakpoints
 
