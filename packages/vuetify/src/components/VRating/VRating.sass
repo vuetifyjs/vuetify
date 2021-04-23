@@ -1,8 +1,8 @@
-@import './_variables.scss'
+@import './index'
 
 .v-rating
   max-width: 100%
-  white-space: nowrap
+  white-space: $rating-white-space
 
   .v-icon
     +ltr()
@@ -15,9 +15,9 @@
     pointer-events: none
 
 .v-rating__item
+  align-items: $rating-item-align-items
   display: inline-flex
   flex-direction: column
-  align-items: center
 
   &--bottom
     flex-direction: column-reverse
