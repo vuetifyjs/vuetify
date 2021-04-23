@@ -5,10 +5,10 @@ import './VRating.sass'
 import { VBtn } from '../VBtn'
 
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeDensityProps } from '@/composables/density'
 import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRefs } from '@/composables/refs'
 
 // Utilities
@@ -22,6 +22,10 @@ export default defineComponent({
   name: 'VRating',
 
   props: makeProps({
+    ariaLabel: {
+      type: String,
+      default: '$vuetify.rating.ariaLabel',
+    },
     backgroundColor: {
       type: String,
       default: 'accent',
@@ -31,6 +35,7 @@ export default defineComponent({
       default: 'primary',
     },
     clearable: Boolean,
+    disabled: Boolean,
     emptyIcon: {
       type: String,
       default: '$ratingEmpty',
@@ -54,11 +59,6 @@ export default defineComponent({
       type: Number,
       default: 0,
     },
-    ariaLabel: {
-      type: String,
-      default: '$vuetify.rating.ariaLabel',
-    },
-    disabled: Boolean,
     itemLabels: Array as Prop<string[]>,
     itemLabelPosition: {
       type: String,
@@ -77,8 +77,8 @@ export default defineComponent({
     const hoverIndex = ref(-1)
 
     const icons = computed(() => {
-      const isHalfEvent = (e: MouseEvent): boolean => {
-        const rect = e.target && (e.target as HTMLElement).getBoundingClientRect()
+      function isHalfEvent (e: MouseEvent): boolean {
+        const rect = (e?.target as HTMLElement).getBoundingClientRect()
         const isHalf = !!rect && (e.pageX - rect.left) < rect.width / 2
 
         // TODO: handle rtl
@@ -87,16 +87,16 @@ export default defineComponent({
         return isRtl ? !isHalf : isHalf
       }
 
-      const genHoverIndex = (e: MouseEvent, i: number) => {
+      function genHoverIndex (e: MouseEvent, i: number) {
         const isHalf = props.halfIncrements && isHalfEvent(e)
 
         return i + (isHalf ? 0.5 : 1)
       }
 
-      const createSlotProps = (index: number) => {
-        const isHovering = props.hover && hoverIndex.value > -1
+      function createSlotProps (index: number) {
         const isFilled = Math.floor(rating.value) > index
         const isHovered = Math.floor(hoverIndex.value) > index
+        const isHovering = props.hover && hoverIndex.value > -1
         const isHalfHovered = !isHovered && (hoverIndex.value - index) % 1 > 0
         const isHalfFilled = !isFilled && (rating.value - index) % 1 > 0
 
@@ -107,11 +107,11 @@ export default defineComponent({
           : isHalfIcon ? props.halfIcon
           : props.emptyIcon
 
-        const onMouseenter = (e: MouseEvent): void => {
+        function onMouseenter (e: MouseEvent): void {
           hoverIndex.value = genHoverIndex(e, index)
         }
 
-        const onMouseleave = (): void => {
+        function onMouseleave (): void {
           hoverIndex.value = -1
         }
 
@@ -141,34 +141,34 @@ export default defineComponent({
               }
             }
           },
-          icon,
-          color: isFilled || isHalfFilled || isHovered ? props.color : props.backgroundColor,
-          size: props.size,
-          disabled: props.disabled,
           // TODO: fix when locale is done
           // ariaLabel: this.$vuetify.lang.t(props.iconLabel, index + 1, length.value)
           ariaLabel: String(index + 1),
-          isFilled,
-          isHovered,
-          isHalfHovered,
-          isHalfFilled,
-          index,
-          value: rating.value,
-          hasLabels: !!props.itemLabels?.length || !!slots['item-label'],
-          label: props.itemLabels && props.itemLabels[index],
-          ripple: props.ripple,
+          color: isFilled || isHalfFilled || isHovered ? props.color : props.backgroundColor,
           density: props.density,
+          disabled: props.disabled,
+          hasLabels: !!props.itemLabels?.length || !!slots['item-label'],
+          icon,
+          index,
+          isFilled,
+          isHalfFilled,
+          isHalfHovered,
+          isHovered,
+          label: props.itemLabels && props.itemLabels[index],
           readonly: props.readonly,
+          ripple: props.ripple,
+          size: props.size,
           tabindex: props.readonly ? -1 : undefined,
+          value: rating.value,
         }
       }
 
-      return createRange(length.value).map(i => createSlotProps(i))
+      return createRange(length.value).map(createSlotProps)
     })
 
     const { refs, updateRef } = useRefs<ComponentPublicInstance>()
 
-    const onKeydown = (e: KeyboardEvent) => {
+    function onKeydown (e: KeyboardEvent) {
       const increment = props.halfIncrements ? 0.5 : 1
       if (e.keyCode === keyCodes.left && rating.value > 0) {
         rating.value -= increment
@@ -205,7 +205,7 @@ export default defineComponent({
               : iconProps.label ? <span>{iconProps.label}</span>
               : <span>&nbsp;</span>
             }
-            {slots.item ? slots.item(iconProps) : (
+            { slots.item ? slots.item(iconProps) : (
               <VBtn
                 ref={(e: any) => updateRef(e, iconProps.index)}
                 color={iconProps.color}

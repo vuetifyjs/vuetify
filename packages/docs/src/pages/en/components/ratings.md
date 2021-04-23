@@ -11,7 +11,7 @@ related:
 
 # Ratings
 
-The rating component is a specialized but crucial piece in building user widgets. Collecting user feedback via ratings is a simple analytic that can provide a lot of feedback to your product or application.
+The `v-rating` component is a specialized but important piece in building user widgets. Collecting user feedback via ratings is a simple analytic that can provide a lot of feedback to your product or application.
 
 <entry-ad />
 
@@ -65,7 +65,7 @@ Provide a label to assistive technologies for each item.
 
 #### Item slot
 
-Slots are provided to give you even more freedom in how you display the rating.
+Slots enable advanced customization possibilities and provide you with more freedom in how you display the rating.
 
 <example file="v-rating/slot-item" />
 

@@ -9,8 +9,6 @@
 
 <script>
   export default {
-    data: () => ({
-      rating: 4,
-    }),
+    data: () => ({ rating: 4 }),
   }
 </script>

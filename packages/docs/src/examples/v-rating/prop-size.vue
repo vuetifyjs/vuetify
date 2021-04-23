@@ -6,29 +6,34 @@
       color="purple"
       size="small"
     ></v-rating>
+
     <v-rating
       v-model="rating"
       background-color="pink-lighten-3"
       color="pink"
     ></v-rating>
+
     <v-rating
       v-model="rating"
       background-color="orange-lighten-3"
       color="orange"
       size="medium"
     ></v-rating>
+
     <v-rating
       v-model="rating"
       background-color="green-lighten-3"
       color="green"
       size="large"
     ></v-rating>
+
     <v-rating
       v-model="rating"
       background-color="red-lighten-3"
       color="red"
       size="x-large"
     ></v-rating>
+
     <v-rating
       v-model="rating"
       background-color="indigo-lighten-3"
@@ -40,8 +45,6 @@
 
 <script>
   export default {
-    data: () => ({
-      rating: 4,
-    }),
+    data: () => ({ rating: 4 }),
   }
 </script>

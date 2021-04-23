@@ -7,7 +7,7 @@
           large
           @click="props.onClick"
         >
-          {{ props.isFilled ? 'mdi-star-circle' : 'mdi-star-circle-outline' }}
+          mdi-star-circle{{ props.isFilled ? '' : '-outline' }}
         </v-icon>
       </template>
     </v-rating>
@@ -20,6 +20,7 @@
       colors: ['green', 'purple', 'orange', 'indigo', 'red'],
       rating: 4.5,
     }),
+
     methods: {
       genColor (i) {
         return this.colors[i]
