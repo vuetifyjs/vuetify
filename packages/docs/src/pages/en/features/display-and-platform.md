@@ -280,7 +280,7 @@ This value indicates whether the current display width is less than the defined 
 
 ### platform
 
-This object contains information from the detected device's [userAgent](https://developer.mozilla.org/en-US/docs/Web/API/NavigatorID/userAgent) and whether it supports [touch]() and [intersection]().
+This object contains information from the detected device's [userAgent](https://developer.mozilla.org/en-US/docs/Web/API/NavigatorID/userAgent) and whether it supports **touch** and / or the [intersection API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
 
 * **Type:** `object`
 * **Default:**
