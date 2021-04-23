@@ -97,9 +97,7 @@
     "vuetify-loader": "^1.3.0"
   },
   "peerDependencies": {
-    "vue": "^3.0.7",
-    "vue-i18n": "next",
-    "vue-intl": "latest"
+    "vue": "^3.0.7"
   },
   "publishConfig": {
     "access": "public"

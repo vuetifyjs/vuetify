@@ -17,6 +17,7 @@ export interface RtlProps {
 export interface RtlInstance {
   rtl: Record<string, boolean>
   isRtl: Ref<boolean>
+  rtlClasses: Ref<string>
 }
 
 export const VuetifyRtlSymbol: InjectionKey<RtlInstance> = Symbol.for('vuetify:rtl')
@@ -28,20 +29,24 @@ export function createRtl (localeScope: LocaleInstance, options?: RtlOptions) {
       ...(options?.rtl ?? {}),
     },
     isRtl: ref(options?.defaultRtl ?? false),
+    rtlClasses: ref(''),
   }, localeScope)
 }
 
 export function createRtlScope (currentScope: RtlInstance, localeScope: LocaleInstance, options?: RtlProps): RtlInstance {
-  return {
-    isRtl: computed(() => {
-      if (!!options && typeof options.rtl === 'boolean') return options.rtl
-      if (localeScope.current.value && currentScope.rtl.hasOwnProperty(localeScope.current.value)) {
-        return currentScope.rtl[localeScope.current.value]
-      }
+  const isRtl = computed(() => {
+    if (!!options && typeof options.rtl === 'boolean') return options.rtl
+    if (localeScope.current.value && currentScope.rtl.hasOwnProperty(localeScope.current.value)) {
+      return currentScope.rtl[localeScope.current.value]
+    }
 
-      return currentScope.isRtl.value
-    }),
+    return currentScope.isRtl.value
+  })
+
+  return {
+    isRtl,
     rtl: currentScope.rtl,
+    rtlClasses: computed(() => isRtl.value ? 'v-locale--is-rtl' : 'v-locale--is-ltr'),
   }
 }
 

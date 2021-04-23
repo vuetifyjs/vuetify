@@ -18,8 +18,8 @@ export default defineComponent({
 
   setup (props, ctx) {
     const localeInstance = provideLocale(props)
-    provideRtl(localeInstance, props)
+    const { rtlClasses } = provideRtl(localeInstance, props)
 
-    return () => ctx.slots.default?.()
-  }
+    return () => <div class={rtlClasses.value}>{ctx.slots.default?.()}</div>
+  },
 })

@@ -19,10 +19,10 @@
         // SASS doesn't support dynamic mixin invocation
         // https://github.com/sass/sass/issues/626
         @if $mixin == 'ltr'
-          .v-application--is-ltr
+          .v-locale--is-ltr
             +generate-utility-body($utility, nth($dir, 2), $value, $infix)
         @else if $mixin == 'rtl'
-          .v-application--is-rtl
+          .v-locale--is-rtl
             +generate-utility-body($utility, nth($dir, 2), $value, $infix)
         @else
           @error 'Only RTL and LTR are supported'
