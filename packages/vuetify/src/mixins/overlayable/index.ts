@@ -2,12 +2,7 @@
 import VOverlay from '../../components/VOverlay'
 
 // Utilities
-import {
-  keyCodes,
-  addOnceEventListener,
-  addPassiveEventListener,
-  getZIndex,
-} from '../../util/helpers'
+import { keyCodes, addOnceEventListener, addPassiveEventListener, getZIndex } from '../../util/helpers'
 
 // Types
 import Vue from 'vue'
@@ -71,9 +66,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
       overlay.$mount()
 
-      const parent = this.absolute
-        ? this.$el.parentNode
-        : document.querySelector('[data-app]')
+      const parent = this.absolute ? this.$el.parentNode : document.querySelector('[data-app]')
 
       parent && parent.insertBefore(overlay.$el, parent.firstChild)
 
@@ -104,12 +97,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
     removeOverlay (showScroll = true) {
       if (this.overlay) {
         addOnceEventListener(this.overlay.$el, 'transitionend', () => {
-          if (
-            !this.overlay ||
-            !this.overlay.$el ||
-            !this.overlay.$el.parentNode ||
-            this.overlay.value
-          ) return
+          if (!this.overlay || !this.overlay.$el || !this.overlay.$el.parentNode || this.overlay.value) return
 
           this.overlay.$el.parentNode.removeChild(this.overlay.$el)
           this.overlay.$destroy()
@@ -132,7 +120,9 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
           ['INPUT', 'TEXTAREA', 'SELECT'].includes((e.target as Element).tagName) ||
           // https://github.com/vuetifyjs/vuetify/issues/4715
           (e.target as HTMLElement).isContentEditable
-        ) return
+        ) {
+          return
+        }
 
         const up = [keyCodes.up, keyCodes.pageup]
         const down = [keyCodes.down, keyCodes.pagedown]
@@ -146,9 +136,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
         }
       }
 
-      if (e.target === this.overlay ||
-        (e.type !== 'keydown' && e.target === document.body) ||
-        this.checkPath(e)) e.preventDefault()
+      if (e.target === this.overlay || (e.type !== 'keydown' && e.target === document.body) || this.checkPath(e)) e.preventDefault()
     },
     hasScrollbar (el?: Element) {
       if (!el || el.nodeType !== Node.ELEMENT_NODE) return false
@@ -156,9 +144,21 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       const style = window.getComputedStyle(el)
       return ['auto', 'scroll'].includes(style.overflowY!) && el.scrollHeight > el.clientHeight
     },
-    shouldScroll (el: Element, delta: number) {
-      if (el.scrollTop === 0 && delta < 0) return true
-      return el.scrollTop + el.clientHeight === el.scrollHeight && delta > 0
+    shouldScroll (this: any, el: Element, delta: number) {
+      const isAppWrapper = el.classList.contains('v-application')
+
+      if (isAppWrapper) return false
+
+      const alreadyAtTop = el.scrollTop === 0
+      const alreadyAtBottom = el.scrollTop + el.clientHeight === el.scrollHeight
+      const scrollingUp = delta < 0
+      const scrollingDown = delta > 0
+
+      if (!alreadyAtTop && scrollingUp) return true
+      if (!alreadyAtBottom && scrollingDown) return true
+      if ((alreadyAtTop || alreadyAtBottom) && !isAppWrapper) {
+        return this.shouldScroll(el.parentNode as Element, delta)
+      }
     },
     isInside (el: Element, parent: Element): boolean {
       if (el === parent) {
@@ -178,7 +178,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
         // getSelection returns null in firefox in some edge cases, can be ignored
         const selected = window.getSelection()!.anchorNode as Element
         if (dialog && this.hasScrollbar(dialog) && this.isInside(selected, dialog)) {
-          return this.shouldScroll(dialog, delta)
+          return !this.shouldScroll(dialog, delta)
         }
         return true
       }
@@ -190,7 +190,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
         if (el === document.documentElement) return true
         if (el === this.$refs.content) return true
 
-        if (this.hasScrollbar(el as Element)) return this.shouldScroll(el as Element, delta)
+        if (this.hasScrollbar(el as Element)) return !this.shouldScroll(el as Element, delta)
       }
 
       return true
