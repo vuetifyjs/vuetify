@@ -6,8 +6,8 @@ import type { InjectionKey, Ref } from 'vue'
 import type { LocaleInstance } from './locale'
 
 export interface RtlOptions {
-  rtl?: Record<string, boolean>
   defaultRtl?: boolean
+  rtl?: Record<string, boolean>
 }
 
 export interface RtlProps {
@@ -15,8 +15,8 @@ export interface RtlProps {
 }
 
 export interface RtlInstance {
-  rtl: Record<string, boolean>
   isRtl: Ref<boolean>
+  rtl: Record<string, boolean>
   rtlClasses: Ref<string>
 }
 
@@ -35,7 +35,7 @@ export function createRtl (localeScope: LocaleInstance, options?: RtlOptions) {
 
 export function createRtlScope (currentScope: RtlInstance, localeScope: LocaleInstance, options?: RtlProps): RtlInstance {
   const isRtl = computed(() => {
-    if (!!options && typeof options.rtl === 'boolean') return options.rtl
+    if (typeof options?.rtl === 'boolean') return options.rtl
     if (localeScope.current.value && currentScope.rtl.hasOwnProperty(localeScope.current.value)) {
       return currentScope.rtl[localeScope.current.value]
     }
@@ -46,11 +46,11 @@ export function createRtlScope (currentScope: RtlInstance, localeScope: LocaleIn
   return {
     isRtl,
     rtl: currentScope.rtl,
-    rtlClasses: computed(() => isRtl.value ? 'v-locale--is-rtl' : 'v-locale--is-ltr'),
+    rtlClasses: computed(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
   }
 }
 
-export function provideRtl (localeScope: LocaleInstance, props: RtlProps) {
+export function provideRtl (props: RtlProps, localeScope: LocaleInstance) {
   const currentScope = inject(VuetifyRtlSymbol)
 
   if (!currentScope) throw new Error('[Vuetify] Could not find injected rtl instance')
