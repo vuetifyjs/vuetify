@@ -97,10 +97,9 @@ export default defineComponent({
         const isFilled = Math.floor(rating.value) > index
         const isHovered = Math.floor(hoverIndex.value) > index
         const isHovering = props.hover && hoverIndex.value > -1
-        const isHalfHovered = !isHovered && (hoverIndex.value - index) % 1 > 0
-        const isHalfFilled = !isFilled && (rating.value - index) % 1 > 0
-
         const isFullIcon = isHovering ? isHovered : isFilled
+        const isHalfFilled = !isFilled && (rating.value - index) % 1 > 0
+        const isHalfHovered = !isHovered && (hoverIndex.value - index) % 1 > 0
         const isHalfIcon = isHovering ? isHalfHovered : isHalfFilled
 
         const icon = isFullIcon ? props.fullIcon
@@ -116,9 +115,6 @@ export default defineComponent({
         }
 
         return {
-          onMouseenter: props.hover ? onMouseenter : undefined,
-          onMouseleave: props.hover ? onMouseleave : undefined,
-          onMousemove: props.hover && props.halfIncrements ? onMouseenter : undefined,
           onClick: (e: MouseEvent) => {
             if (props.readonly) return
 
@@ -141,6 +137,9 @@ export default defineComponent({
               }
             }
           },
+          onMouseenter: props.hover ? onMouseenter : undefined,
+          onMouseleave: props.hover ? onMouseleave : undefined,
+          onMousemove: props.hover && props.halfIncrements ? onMouseenter : undefined,
           // TODO: fix when locale is done
           // ariaLabel: this.$vuetify.lang.t(props.iconLabel, index + 1, length.value)
           ariaLabel: String(index + 1),
@@ -208,18 +207,7 @@ export default defineComponent({
             { slots.item ? slots.item(iconProps) : (
               <VBtn
                 ref={(e: any) => updateRef(e, iconProps.index)}
-                color={iconProps.color}
-                ripple={iconProps.ripple}
-                size={iconProps.size}
-                icon={iconProps.icon}
-                onClick={iconProps.onClick}
-                onMouseenter={iconProps.onMouseenter}
-                onMouseleave={iconProps.onMouseleave}
-                onMousemove={iconProps.onMousemove}
-                aria-label={iconProps.ariaLabel}
-                disabled={iconProps.disabled}
-                density={iconProps.density}
-                tabindex={iconProps.tabindex}
+                {...iconProps}
               />
             )}
           </div>

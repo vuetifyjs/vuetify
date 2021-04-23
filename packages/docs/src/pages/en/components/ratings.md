@@ -39,13 +39,13 @@ The `v-rating` component can be colored as you want, you can set both selected a
 
 #### Length
 
-You can asily change the number of items using the **length** prop.
+Change the number of items by modifying the the **length** prop.
 
 <example file="v-rating/prop-length" />
 
 #### Incremented
 
-A `v-rating` component can have 3 defined icons, **full-icon**, **half-icon** (with the **half-increments** prop) and **empty-icon**.
+A `v-rating` component has 3 types of icons, **full-icon**, **half-icon** (with the **half-increments** prop) and **empty-icon**.
 
 <example file="v-rating/prop-half-increments" />
 
