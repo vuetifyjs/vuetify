@@ -384,15 +384,15 @@ export function flattenFragments (nodes: VNode[]): VNode[] {
 }
 
 export function maybeTransition <T extends VNode | VNode[] | undefined> (
-  props: { transition?: string | boolean },
+  props: { transition?: string | boolean | TransitionProps },
   data: TransitionProps,
   vNodes: T
 ): VNode | T {
-  if (!props.transition) return vNodes
+  if (!props.transition || typeof props.transition === 'boolean') return vNodes
 
   return h(
     Transition,
-    mergeProps({ name: props.transition }, data as any) as TransitionProps,
+    mergeProps(typeof props.transition === 'string' ? { name: props.transition } : props.transition as any, data as any),
     () => vNodes
   )
 }
