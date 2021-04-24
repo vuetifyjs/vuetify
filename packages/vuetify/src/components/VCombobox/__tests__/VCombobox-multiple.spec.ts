@@ -403,7 +403,121 @@ describe('VCombobox.ts', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.internalSearch).toBe('a')
+    expect(wrapper.vm.internalSearch).toBeNull()
     expect(change).toHaveBeenCalledWith(['aaa'])
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/12781
+  // eslint-disable-next-line max-statements
+  it('should correctly add items after deletion and blur', async () => {
+    const { wrapper, change } = createMultipleCombobox({
+      multiple: true,
+      chips: true,
+      value: ['foo', 'bar'],
+      items: ['foo', 'bar'],
+    })
+
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    // delete 'bar'
+    input.trigger('focus')
+    input.trigger('keydown.left')
+    expect(wrapper.vm.selectedIndex).toBe(1)
+    input.trigger('keydown.delete')
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenCalledWith(['foo'])
+    expect(wrapper.vm.selectedIndex).toBe(0)
+
+    // Lose focus
+    input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenCalledWith(['foo'])
+
+    // Add 'bar' again
+    input.trigger('focus')
+    element.value = 'bar'
+    input.trigger('input')
+    input.trigger('keydown.down')
+    await wrapper.vm.$nextTick()
+    input.trigger('keydown.enter')
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenLastCalledWith(['foo', 'bar'])
+
+    // Set 'bar' as search input
+    element.value = 'bar'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalSearch).toBe('bar')
+
+    // Lose focus
+    input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenLastCalledWith(['foo', 'bar'])
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/13274
+  it('should not add empty values', async () => {
+    const { wrapper, change } = createMultipleCombobox({
+      chips: true,
+      multiple: true,
+      items: ['foo'],
+      value: ['foo'],
+    })
+
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    // Add a value and then remove it
+    input.trigger('focus')
+    element.value = 'a'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+    element.value = ''
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+
+    // Lose focus
+    input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+
+    expect(change).not.toHaveBeenCalled()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/10827
+  it('should not add empty chips after clear and re-select', async () => {
+    const { wrapper, change } = createMultipleCombobox({
+      chips: true,
+      multiple: true,
+      clearable: true,
+      items: ['foo', 'bar'],
+      value: ['foo', 'bar'],
+    })
+
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    // Dbl click chip at index 1
+    const chip = wrapper.findAll('.v-chip').at(1)
+    chip.trigger('dblclick')
+    expect(wrapper.vm.editingIndex).toBe(1)
+    expect(wrapper.vm.internalSearch).toBe('bar')
+
+    // Click clear button
+    const clear = wrapper.find('.v-input__icon--clear .v-icon')
+    clear.trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenCalledWith([])
+    await wrapper.vm.$nextTick()
+
+    // Add 'foo'
+    input.trigger('focus')
+    element.value = 'foo'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+    input.trigger('keydown.enter')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toHaveBeenLastCalledWith(['foo'])
   })
 })

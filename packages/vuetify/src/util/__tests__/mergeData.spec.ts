@@ -1,11 +1,35 @@
+import { isObject } from '../helpers'
 import { mergeClasses, mergeListeners, mergeStyles } from '../mergeData'
+
+function simpleClone (value) {
+  if (Array.isArray(value)) {
+    return value.map(simpleClone)
+  }
+  if (isObject(value)) {
+    const dest = {}
+    for (const key in value) dest[key] = simpleClone(value[key])
+    return dest
+  }
+  return value
+}
 
 function verifyFactory (mergeMethod: (target: any, source: any) => any) {
   return function verify (target: any, source: any, expected: any) {
+    const targetClone = simpleClone(target)
+    const sourceClone = simpleClone(source)
+
     if (expected === target) {
       expect(mergeMethod(target, source)).toBe(expected)
     } else {
       expect(mergeMethod(target, source)).toStrictEqual(expected)
+    }
+
+    // Ensure that mergeMethod does not mutate anything
+    if (isObject(target)) {
+      expect(target).toStrictEqual(targetClone)
+    }
+    if (isObject(source)) {
+      expect(source).toStrictEqual(sourceClone)
     }
   }
 }

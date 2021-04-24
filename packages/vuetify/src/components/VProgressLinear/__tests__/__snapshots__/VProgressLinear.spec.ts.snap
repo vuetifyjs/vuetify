@@ -293,7 +293,7 @@ exports[`VProgressLinear.ts should render indeterminate progress with query prop
 <div role="progressbar"
      aria-valuemin="0"
      aria-valuemax="100"
-     class="v-progress-linear theme--light"
+     class="v-progress-linear v-progress-linear--query theme--light"
      style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"

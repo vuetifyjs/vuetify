@@ -99,6 +99,7 @@ export default mixins(Colorable, Themeable).extend({
           props: {
             color: this.color,
             value: inputValue,
+            ripple: false,
           },
           on: {
             input: () => this.$emit('select', item),
@@ -132,7 +133,7 @@ export default mixins(Colorable, Themeable).extend({
       const searchInput = (this.searchInput || '').toString().toLocaleLowerCase()
       const index = text.toLocaleLowerCase().indexOf(searchInput)
 
-      if (index < 0) return { start: '', middle: text, end: '' }
+      if (index < 0) return { start: text, middle: '', end: '' }
 
       const start = text.slice(0, index)
       const middle = text.slice(index, index + searchInput.length)

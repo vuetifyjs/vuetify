@@ -1,0 +1,28 @@
+<template>
+  <v-row
+    align="center"
+    justify="space-around"
+  >
+    <v-btn text>
+      Normal
+    </v-btn>
+    <v-btn
+      text
+      color="primary"
+    >
+      Primary
+    </v-btn>
+    <v-btn
+      text
+      color="error"
+    >
+      Error
+    </v-btn>
+    <v-btn
+      text
+      disabled
+    >
+      Disabled
+    </v-btn>
+  </v-row>
+</template>

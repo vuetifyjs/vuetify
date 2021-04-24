@@ -2,6 +2,10 @@ module.exports = {
   'v-banner': {
     slots: [
       {
+        name: 'default',
+        props: undefined,
+      },
+      {
         name: 'actions',
         props: {
           dismiss: '(): void',

@@ -61,4 +61,9 @@ export default {
       currentPage: '현재 페이지, 페이지 {0}',
     },
   },
+  rating: {
+    ariaLabel: {
+      icon: 'Rating {0} of {1}',
+    },
+  },
 }

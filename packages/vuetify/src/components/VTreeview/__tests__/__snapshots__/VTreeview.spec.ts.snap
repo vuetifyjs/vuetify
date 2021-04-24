@@ -76,19 +76,6 @@ exports[`VTreeView.ts should filter items 1`] = `
 exports[`VTreeView.ts should filter items 2`] = `
 <div class="v-treeview theme--light">
   <div aria-expanded="false"
-       class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded"
-  >
-    <div class="v-treeview-node__root">
-      <div class="v-treeview-node__level">
-      </div>
-      <div class="v-treeview-node__content">
-        <div class="v-treeview-node__label">
-          one
-        </div>
-      </div>
-    </div>
-  </div>
-  <div aria-expanded="false"
        class="v-treeview-node v-treeview-node--leaf"
   >
     <div class="v-treeview-node__root">
@@ -106,32 +93,6 @@ exports[`VTreeView.ts should filter items 2`] = `
 
 exports[`VTreeView.ts should filter items using custom item filter 1`] = `
 <div class="v-treeview theme--light">
-  <div aria-expanded="false"
-       class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded"
-  >
-    <div class="v-treeview-node__root">
-      <div class="v-treeview-node__level">
-      </div>
-      <div class="v-treeview-node__content">
-        <div class="v-treeview-node__label">
-          one
-        </div>
-      </div>
-    </div>
-  </div>
-  <div aria-expanded="false"
-       class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded"
-  >
-    <div class="v-treeview-node__root">
-      <div class="v-treeview-node__level">
-      </div>
-      <div class="v-treeview-node__content">
-        <div class="v-treeview-node__label">
-          two
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 `;
 
@@ -146,19 +107,6 @@ exports[`VTreeView.ts should filter items using custom item filter 2`] = `
       <div class="v-treeview-node__content">
         <div class="v-treeview-node__label">
           one
-        </div>
-      </div>
-    </div>
-  </div>
-  <div aria-expanded="false"
-       class="v-treeview-node v-treeview-node--leaf v-treeview-node--excluded"
-  >
-    <div class="v-treeview-node__root">
-      <div class="v-treeview-node__level">
-      </div>
-      <div class="v-treeview-node__content">
-        <div class="v-treeview-node__label">
-          two
         </div>
       </div>
     </div>

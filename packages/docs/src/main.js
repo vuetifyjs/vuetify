@@ -1,24 +1,31 @@
-// Polyfills for IE Support
-import 'babel-polyfill'
-import 'event-source-polyfill'
-
 // Packages
 import Vue from 'vue'
-import Vuetify from 'vuetify'
+import Vuetify from 'vuetify/lib/framework'
+import InstantSearch from 'vue-instantsearch'
 
 // Bootstrap
-import '@/components'
-import '@/plugins'
-import { createI18n } from '@/i18n/index'
-import { createRouter } from '@/router/index'
-import { createStore } from '@/store/index'
-import { createVuetify } from '@/vuetify/index'
+import { registerPlugins } from './plugins'
+import { createVuetify } from '@/vuetify'
+import { createStore } from '@/store'
+import { createRouter } from '@/router'
+import { createI18n } from '@/i18n'
 import { sync } from 'vuex-router-sync'
+
+// Service Worker
+import './registerServiceWorker'
 
 // Application
 import App from './App.vue'
 
-Vue.config.performance = process.env.NODE_ENV === 'development'
+// Globals
+import { IS_PROD } from '@/util/globals'
+
+Vue.config.productionTip = false
+
+Vue.use(InstantSearch)
+registerPlugins(Vue)
+
+Vue.config.performance = !IS_PROD
 
 // Expose a factory function that creates a fresh set of store, router,
 // app instances on each call (which is called for each SSR request)
@@ -27,11 +34,11 @@ export async function createApp ({
 } = {}, ssrContext) {
   // create store and router instances
   const store = createStore()
-  const router = createRouter()
-  const i18n = createI18n(ssrContext, router)
-  const vuetify = createVuetify(ssrContext)
+  const i18n = createI18n()
+  const vuetify = createVuetify(store)
+  const router = createRouter(vuetify, store, i18n)
 
-  store.state.app.currentVersion = Vuetify.version
+  store.state.app.version = Vuetify.version
 
   // sync the router with the vuex store.
   // this registers `store.state.route`
@@ -43,7 +50,6 @@ export async function createApp ({
   const app = new Vue({
     router,
     store,
-    ssrContext,
     i18n,
     vuetify,
     render: h => h(App),

@@ -1,18 +1,19 @@
 const { DataOptions, DataPagination } = require('./v-data')
 
-const DataFooterSlots = [
-  { name: 'pageText' },
-]
-
-const DataFooterEvents = [
-  { name: 'update:options', value: DataOptions },
-]
-
 const DataFooterPageTextScopedProps = {
   pageStart: 'number',
   pageStop: 'number',
   itemsLength: 'number',
 }
+
+const DataFooterSlots = [
+  { name: 'prepend' },
+  { name: 'page-text', props: DataFooterPageTextScopedProps },
+]
+
+const DataFooterEvents = [
+  { name: 'update:options', value: DataOptions },
+]
 
 const DataFooterProps = [
   {
@@ -30,10 +31,6 @@ module.exports = {
     props: DataFooterProps,
     slots: [
       ...DataFooterSlots,
-      {
-        name: 'page-text',
-        props: DataFooterPageTextScopedProps,
-      },
     ],
     events: DataFooterEvents,
   },

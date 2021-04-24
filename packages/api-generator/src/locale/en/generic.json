@@ -1,0 +1,38 @@
+{
+  "props": {
+    "auto": "Centers list on selected element",
+    "clearable": "Add input clear functionality, default icon is Material Design Icons **mdi-clear**",
+    "height": "Sets the height for the component",
+    "falseValue": "Sets value for falsy state",
+    "fullWidth": "Forces 100% width",
+    "id": "Sets the DOM id on the component",
+    "persistent": "Clicking outside or pressing **esc** key will not dismiss the dialog",
+    "size": "Sets the height and width of the component.",
+    "tag": "Specify a custom tag used on the root element.",
+    "textColor": "Applies a specified color to the control text",
+    "trueValue": "Sets value for truthy state",
+    "width": "Sets the width for the component."
+  },
+  "slots": {
+    "activator": "When used, will activate the component when clicked (or hover for specific components). This manually stops the event propagation. Without this slot, if you open the component through its model, you will need to manually stop the event propagation",
+    "append": "Adds an item inside the input and after input content",
+    "default": "The default Vue slot.",
+    "label": "Replaces the default label",
+    "prepend": "Adds an item outside the input and before input content",
+    "progress": "Slot for custom progress linear (displayed when **loading** prop is not equal to Boolean False)"
+  },
+  "events": {
+    "click": "Event that is emitted when the component is clicked",
+    "input": "The updated bound model"
+  },
+  "headers": {
+    "argument": "Argument",
+    "events": "Events",
+    "functions": "Functions",
+    "links": "Component Pages",
+    "modifiers": "Modifiers",
+    "props": "Props",
+    "sass": "SASS Variables",
+    "slots": "Slots"
+  }
+}

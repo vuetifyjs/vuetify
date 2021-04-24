@@ -129,7 +129,8 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
       return getObjectValueByPath(this.item, this.itemKey)
     },
     children (): any[] | null {
-      return getObjectValueByPath(this.item, this.itemChildren)
+      const children = getObjectValueByPath(this.item, this.itemChildren)
+      return children && children.filter((child: any) => !this.treeview.isExcluded(getObjectValueByPath(child, this.itemKey)))
     },
     text (): string {
       return getObjectValueByPath(this.item, this.itemText)
@@ -359,7 +360,6 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
         'v-treeview-node--rounded': this.rounded,
         'v-treeview-node--shaped': this.shaped,
         'v-treeview-node--selected': this.isSelected,
-        'v-treeview-node--excluded': this.treeview.isExcluded(this.key),
       },
       attrs: {
         'aria-expanded': String(this.isOpen),

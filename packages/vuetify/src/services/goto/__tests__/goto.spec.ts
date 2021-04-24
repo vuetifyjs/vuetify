@@ -60,7 +60,7 @@ describe('$vuetify.goTo', () => {
   it('should not throw error when using VueComponent as target', async () => {
     const btn = mount(VBtn)
 
-    await expect(goTo(btn.vm, { duration: 0 })).resolves.not.toBe(undefined)
+    await expect(goTo(btn.vm, { duration: 0 })).resolves.not.toBeUndefined()
   })
 
   it('should instantiate and return goto', () => {

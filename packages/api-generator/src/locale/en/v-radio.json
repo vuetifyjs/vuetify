@@ -1,0 +1,11 @@
+{
+  "props": {
+    "name": "Sets the component's name attribute",
+    "offIcon": "The icon used when inactive",
+    "onIcon": "The icon used when active"
+  },
+  "events": {
+    "change": "Emitted when the input is changed by user interaction",
+    "click": "Emitted when input is clicked. **Note:** the **change** event should be used instead of **click** when monitoring state change"
+  }
+}

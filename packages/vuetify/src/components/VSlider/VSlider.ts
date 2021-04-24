@@ -93,7 +93,8 @@ export default mixins<options &
   data: () => ({
     app: null as any,
     oldValue: null as any,
-    keyPressed: 0,
+    thumbPressed: false,
+    mouseTimeout: -1,
     isFocused: false,
     isActive: false,
     noClick: false, // Prevent click event if dragging took place, hack for #7915
@@ -127,7 +128,11 @@ export default mixins<options &
       },
     },
     trackTransition (): string {
-      return this.keyPressed >= 2 ? 'none' : ''
+      return this.thumbPressed
+        ? this.showTicks || this.stepNumeric
+          ? '0.1s cubic-bezier(0.25, 0.8, 0.5, 1)'
+          : 'none'
+        : ''
     },
     minValue (): number {
       return parseFloat(this.min)
@@ -139,9 +144,7 @@ export default mixins<options &
       return this.step > 0 ? parseFloat(this.step) : 0
     },
     inputWidth (): number {
-      const value = (this.roundValue(this.internalValue) - this.minValue) / (this.maxValue - this.minValue) * 100
-
-      return value
+      return (this.roundValue(this.internalValue) - this.minValue) / (this.maxValue - this.minValue) * 100
     },
     trackFillStyles (): Partial<CSSStyleDeclaration> {
       const startDir = this.vertical ? 'bottom' : 'left'
@@ -261,6 +264,8 @@ export default mixins<options &
         }],
         on: {
           click: this.onSliderClick,
+          mousedown: this.onSliderMouseDown,
+          touchstart: this.onSliderMouseDown,
         },
       }, this.genChildren())
     },
@@ -274,7 +279,6 @@ export default mixins<options &
           this.inputWidth,
           this.isActive,
           this.isFocused,
-          this.onThumbMouseDown,
           this.onFocus,
           this.onBlur,
         ),
@@ -285,7 +289,7 @@ export default mixins<options &
         attrs: {
           value: this.internalValue,
           id: this.computedId,
-          disabled: this.isDisabled,
+          disabled: true,
           readonly: true,
           tabindex: -1,
           ...this.$attrs,
@@ -359,7 +363,6 @@ export default mixins<options &
       valueWidth: number,
       isActive: boolean,
       isFocused: boolean,
-      onDrag: Function,
       onFocus: Function,
       onBlur: Function,
       ref = 'thumb'
@@ -394,9 +397,6 @@ export default mixins<options &
           focus: onFocus,
           blur: onBlur,
           keydown: this.onKeyDown,
-          keyup: this.onKeyUp,
-          touchstart: onDrag,
-          mousedown: onDrag,
         },
       }), children)
     },
@@ -448,28 +448,36 @@ export default mixins<options &
         [direction]: `${value}%`,
       }
     },
-    onThumbMouseDown (e: MouseEvent) {
+    onSliderMouseDown (e: MouseEvent) {
       e.preventDefault()
 
       this.oldValue = this.internalValue
-      this.keyPressed = 2
       this.isActive = true
 
       const mouseUpOptions = passiveSupported ? { passive: true, capture: true } : true
       const mouseMoveOptions = passiveSupported ? { passive: true } : false
-      if ('touches' in e) {
-        this.app.addEventListener('touchmove', this.onMouseMove, mouseMoveOptions)
-        addOnceEventListener(this.app, 'touchend', this.onSliderMouseUp, mouseUpOptions)
+
+      if ((e.target as Element)?.matches('.v-slider__thumb-container, .v-slider__thumb-container *')) {
+        this.thumbPressed = true
       } else {
-        this.app.addEventListener('mousemove', this.onMouseMove, mouseMoveOptions)
-        addOnceEventListener(this.app, 'mouseup', this.onSliderMouseUp, mouseUpOptions)
+        window.clearTimeout(this.mouseTimeout)
+        this.mouseTimeout = window.setTimeout(() => {
+          this.thumbPressed = true
+        }, 300)
       }
+
+      const isTouchEvent = 'touches' in e
+
+      this.onMouseMove(e)
+      this.app.addEventListener(isTouchEvent ? 'touchmove' : 'mousemove', this.onMouseMove, mouseMoveOptions)
+      addOnceEventListener(this.app, isTouchEvent ? 'touchend' : 'mouseup', this.onSliderMouseUp, mouseUpOptions)
 
       this.$emit('start', this.internalValue)
     },
     onSliderMouseUp (e: Event) {
       e.stopPropagation()
-      this.keyPressed = 0
+      window.clearTimeout(this.mouseTimeout)
+      this.thumbPressed = false
       const mouseMoveOptions = passiveSupported ? { passive: true } : false
       this.app.removeEventListener('touchmove', this.onMouseMove, mouseMoveOptions)
       this.app.removeEventListener('mousemove', this.onMouseMove, mouseMoveOptions)
@@ -484,8 +492,10 @@ export default mixins<options &
       this.isActive = false
     },
     onMouseMove (e: MouseEvent) {
-      const { value } = this.parseMouseMove(e)
-      this.internalValue = value
+      if (e.type === 'mousemove') {
+        this.thumbPressed = true
+      }
+      this.internalValue = this.parseMouseMove(e)
     },
     onKeyDown (e: KeyboardEvent) {
       if (!this.isInteractive) return
@@ -500,9 +510,6 @@ export default mixins<options &
 
       this.internalValue = value
       this.$emit('change', value)
-    },
-    onKeyUp () {
-      this.keyPressed = 0
     },
     onSliderClick (e: MouseEvent) {
       if (this.noClick) {
@@ -542,10 +549,7 @@ export default mixins<options &
       if (this.vertical) clickPos = 1 - clickPos
       if (this.$vuetify.rtl) clickPos = 1 - clickPos
 
-      const isInsideTrack = clickOffset >= trackStart && clickOffset <= trackStart + trackLength
-      const value = parseFloat(this.min) + clickPos * (this.maxValue - this.minValue)
-
-      return { value, isInsideTrack }
+      return parseFloat(this.min) + clickPos * (this.maxValue - this.minValue)
     },
     parseKeyDown (e: KeyboardEvent, value: number) {
       if (!this.isInteractive) return
@@ -558,8 +562,6 @@ export default mixins<options &
       const step = this.stepNumeric || 1
       const steps = (this.maxValue - this.minValue) / step
       if ([left, right, down, up].includes(e.keyCode)) {
-        this.keyPressed += 1
-
         const increase = this.$vuetify.rtl ? [left, up] : [right, up]
         const direction = increase.includes(e.keyCode) ? 1 : -1
         const multiplier = e.shiftKey ? 3 : (e.ctrlKey ? 2 : 1)

@@ -1,7 +1,0 @@
-<!-- Vue Component -->
-
-<template>
-  <v-data-iterator content-tag="v-layout">
-    ...
-  </v-data-iterator>
-</template>

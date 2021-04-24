@@ -136,8 +136,8 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('[Vue warn]: Error in created hook: "TypeError: Cannot set property \'vnode\' of undefined"').toHaveBeenWarned()
-    expect('TypeError: Cannot set property \'vnode\' of undefined').toHaveBeenWarned()
+    expect(`[Vue warn]: Error in created hook: "TypeError: Cannot set property 'vnode' of undefined"`).toHaveBeenWarned()
+    expect(`TypeError: Cannot set property 'vnode' of undefined`).toHaveBeenWarned()
   })
 
   it('should load children when selecting, but not render', async () => {
@@ -394,7 +394,7 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.nodes['Foobar']).toBeTruthy()
+    expect(wrapper.vm.nodes.Foobar).toBeTruthy()
 
     wrapper.setProps({ value: ['Foobar'] })
 
@@ -492,26 +492,30 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.setProps({ items: [
-      {
-        id: 1,
-        name: 'one',
-      },
-    ] })
+    wrapper.setProps({
+      items: [
+        {
+          id: 1,
+          name: 'one',
+        },
+      ],
+    })
 
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.setProps({ items: [
-      {
-        id: 1,
-        name: 'one',
-      },
-      {
-        id: 3,
-        name: 'three',
-      },
-    ] })
+    wrapper.setProps({
+      items: [
+        {
+          id: 1,
+          name: 'one',
+        },
+        {
+          id: 3,
+          name: 'three',
+        },
+      ],
+    })
 
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
@@ -544,7 +548,6 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.findAll('.v-treeview-node--excluded')).toHaveLength(1)
   })
 
   it('should filter items using custom item filter', async () => {
@@ -568,7 +571,6 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.findAll('.v-treeview-node--excluded')).toHaveLength(2)
 
     wrapper.setProps({
       search: 'yes',
@@ -577,7 +579,6 @@ describe('VTreeView.ts', () => { // eslint-disable-line max-statements
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.findAll('.v-treeview-node--excluded')).toHaveLength(1)
   })
 
   // TODO: fails with TS 3.9

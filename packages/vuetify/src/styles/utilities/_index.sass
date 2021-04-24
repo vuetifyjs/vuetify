@@ -1,3 +1,5 @@
+@use "sass:string"
+
 @import './_display.sass'
 @import './_screenreaders.sass'
 @import './_text.sass'
@@ -13,13 +15,28 @@
     @each $key, $utility in $utilities
       // The utility can be disabled with `false`, thus check if the utility is a map first
       // Only proceed if responsive media queries are enabled or if it's the base media query
-      @if type-of($utility) == "map" and (map-get($utility, responsive) or $infix == "")
-        +generate-utility($utility, $infix)
+      @if string.slice($key, -4) == ':ltr'
+        @if type-of($utility) == "map" and (map-get($utility, responsive) or $infix == "")
+          +generate-utility($utility, $infix, 'ltr')
+      @else if string.slice($key, -4) == ':rtl'
+        @if type-of($utility) == "map" and (map-get($utility, responsive) or $infix == "")
+          +generate-utility($utility, $infix, 'rtl')
+      @else
+        @if type-of($utility) == "map" and (map-get($utility, responsive) or $infix == "")
+          +generate-utility($utility, $infix, 'bidi')
+
 
 // Print utilities
 @media print
   @each $key, $utility in $utilities
     // The utility can be disabled with `false`, thus check if the utility is a map first
     // Then check if the utility needs print styles
-    @if type-of($utility) == "map" and map-get($utility, print) == true
-      +generate-utility($utility, "-print")
+    @if string.slice($key, -4) == ':ltr'
+      @if type-of($utility) == "map" and map-get($utility, print) == true
+        +generate-utility($utility, "-print", 'ltr')
+    @else if string.slice($key, -4) == ':rtl'
+      @if type-of($utility) == "map" and map-get($utility, print) == true
+        +generate-utility($utility, "-print", 'rtl')
+    @else
+      @if type-of($utility) == "map" and map-get($utility, print) == true
+        +generate-utility($utility, "-print", 'bidi')

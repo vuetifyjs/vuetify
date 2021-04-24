@@ -18,16 +18,16 @@ import {
 // Service Options
 import { GoToOptions } from './services/goto'
 
-declare const Vuetify: Vuetify
-export default Vuetify
-export interface Vuetify {
+export default class Vuetify {
+  constructor (preset?: Partial<UserVuetifyPreset>)
+
+  static install: PluginFunction<VuetifyUseOptions>
+  static version: string
+  static config: Config
+
   framework: Framework
-  install: PluginFunction<VuetifyUseOptions>
   preset: VuetifyPreset
   userPreset: UserVuetifyPreset
-  version: string
-  config: Config
-  new (preset?: Partial<UserVuetifyPreset>): Vuetify
 }
 
 export interface Config {
@@ -106,6 +106,7 @@ export interface DataPagination {
 }
 
 export interface DataItemProps {
+  index: number
   item: any
   select: (v: boolean) => void
   isSelected: boolean
@@ -125,6 +126,7 @@ export interface DataScopeProps {
   options: DataOptions
   updateOptions: (obj: any) => void
   sort: (value: string) => void
+  sortArray: (sortBy: string[]) => void
   group: (value: string) => void
   groupedItems: ItemGroup<any>[] | null
 }
@@ -193,6 +195,18 @@ export type InputMessage = string | string[]
 
 export type InputValidationRules = (InputValidationRule | string)[]
 
+export type CalendarCategory =
+  | string
+  | {
+      name?: string
+      categoryName?: string
+      [key: string]: any
+    }
+
+export type CalendarCategoryTextFunction = (
+  category: CalendarCategory
+) => string
+
 export interface CalendarTimestamp {
   date: string
   time: string
@@ -207,6 +221,7 @@ export interface CalendarTimestamp {
   past: boolean
   present: boolean
   future: boolean
+  category?: CalendarCategory
 }
 
 export type CalendarFormatter = (timestamp: CalendarTimestamp, short: boolean) => string
@@ -240,7 +255,7 @@ export interface CalendarDaySlotScope extends CalendarTimestamp {
   outside: boolean
   index: number
   week: CalendarTimestamp[]
-  category: string | undefined | null
+  category: CalendarCategory
 }
 
 export type CalendarTimeToY = (time: CalendarTimestamp | number | string, clamp?: boolean) => number
@@ -273,6 +288,7 @@ export interface DataTableHeader<T extends any = any> {
   groupable?: boolean
   divider?: boolean
   class?: string | string[]
+  cellClass?: string | string[]
   width?: string | number
   filter?: (value: any, search: string | null, item: any) => boolean
   sort?: DataTableCompareFunction<T>

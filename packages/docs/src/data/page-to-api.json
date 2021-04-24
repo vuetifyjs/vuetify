@@ -1,0 +1,213 @@
+{
+  "components/alerts": ["v-alert"],
+  "components/app-bars": [
+    "v-app-bar",
+    "v-app-bar-nav-icon"
+  ],
+  "components/application": [
+    "v-app",
+    "v-main"
+  ],
+  "components/aspect-ratios": ["v-responsive"],
+  "components/autocompletes": ["v-autocomplete"],
+  "components/avatars": ["v-avatar"],
+  "components/badges": ["v-badge"],
+  "components/banners": ["v-banner"],
+  "components/bottom-navigation": ["v-bottom-navigation"],
+  "components/bottom-sheets": ["v-bottom-sheet"],
+  "components/breadcrumbs": [
+    "v-breadcrumbs",
+    "v-breadcrumbs-item"
+  ],
+  "components/button-groups": [
+    "v-btn",
+    "v-btn-toggle"
+  ],
+  "components/buttons": [
+    "v-btn",
+    "v-btn-toggle"
+  ],
+  "components/calendars": [
+    "v-calendar",
+    "v-calendar-daily",
+    "v-calendar-monthly",
+    "v-calendar-weekly"
+  ],
+  "components/cards": [
+    "v-card",
+    "v-card-actions",
+    "v-card-subtitle",
+    "v-card-text",
+    "v-card-title"
+  ],
+  "components/carousels": [
+    "v-carousel",
+    "v-carousel-item"
+  ],
+  "components/checkboxes": [
+    "v-checkbox",
+    "v-simple-checkbox"
+  ],
+  "components/chip-groups": [
+    "v-chip",
+    "v-chip-group"
+  ],
+  "components/chips": ["v-chip"],
+  "components/color-pickers": ["v-color-picker"],
+  "components/combobox": ["v-combobox"],
+  "components/data-iterators": [
+    "v-data-iterator",
+    "v-data-footer"
+  ],
+  "components/data-tables": [
+    "v-data-table",
+    "v-data-table-header",
+    "v-data-footer",
+    "v-edit-dialog",
+    "v-simple-checkbox"
+  ],  
+  "components/date-pickers-month": ["v-date-picker"],
+  "components/date-pickers": ["v-date-picker"],
+  "components/dialogs": ["v-dialog"],
+  "components/dividers": ["v-divider"],
+  "components/expansion-panels": [
+    "v-expansion-panel",
+    "v-expansion-panels",
+    "v-expansion-panel-header",
+    "v-expansion-panel-content"
+  ],  
+  "components/file-inputs": ["v-file-input"],
+  "components/floating-action-buttons": [
+    "v-btn",
+    "v-speed-dial"
+  ],
+  "components/footer": ["v-footer"],
+  "components/forms": ["v-form"],
+  "components/grids": [
+    "v-col",
+    "v-container",
+    "v-row",
+    "v-spacer"
+  ],
+  "components/hover": ["v-hover"],
+  "components/icons": ["v-icon"],
+  "components/images": ["v-img"],
+  "components/inputs": ["v-input"],
+  "components/item-groups": [
+    "v-item",
+    "v-item-group"
+  ],
+  "components/lazy": ["v-lazy"],
+  "components/lists": [
+    "v-list",
+    "v-list-group",
+    "v-list-item",
+    "v-list-item-action",
+    "v-list-item-action-text",
+    "v-list-item-avatar",
+    "v-list-item-content",
+    "v-list-item-group",
+    "v-list-item-icon",
+    "v-list-item-subtitle",
+    "v-list-item-title"
+  ],  
+  "components/list-item-groups": [
+    "v-list-group",
+    "v-list-item",
+    "v-list-item-group",
+    "v-list-item-action",
+    "v-list-item-action-text",
+    "v-list-item-avatar",
+    "v-list-item-content",
+    "v-list-item-subtitle",
+    "v-list-item-title"
+  ],  
+  "components/menus": ["v-menu"],
+  "components/navigation-drawers": ["v-navigation-drawer"],
+  "components/overflow-btns": ["v-overflow-btn"],
+  "components/overlays": ["v-overlay"],
+  "components/paginations": ["v-pagination"],
+  "components/parallax": ["v-parallax"],
+  "components/progress-circular": ["v-progress-circular"],
+  "components/progress-linear": ["progress-linear"],
+  "components/radio-buttons": [
+    "v-radio",
+    "v-radio-group"
+  ],
+  "components/range-sliders": [
+    "v-range-slider",
+    "v-slider"
+  ],
+  "components/ratings": ["v-rating"],
+  "components/selects": ["v-select"],
+  "components/sheets": ["v-sheet"],
+  "components/simple-tables": ["v-simple-table"],
+  "components/skeleton-loaders": ["v-skeleton-loader"],
+  "components/slide-groups": [
+    "v-slide-group",
+    "v-slide-item"
+  ],
+  "components/sliders": [
+    "v-range-slider",
+    "v-slider"
+  ],
+  "components/snackbars": ["v-snackbar"],
+  "components/sparklines": ["v-sparkline"],
+  "components/steppers": [
+    "v-stepper",
+    "v-stepper-content",
+    "v-stepper-header",
+    "v-stepper-items",
+    "v-stepper-step"
+  ],  
+  "components/subheaders": ["v-subheader"],
+  "components/switches": ["v-switch"],
+  "components/system-bars": ["v-system-bar"],
+  "components/tabs": [
+    "v-tabs",
+    "v-tab",
+    "v-tab-item",
+    "v-tabs-items",
+    "v-tabs-slider"
+  ],  
+  "components/text-fields": ["v-text-field"],
+  "components/textareas": ["v-textarea"],
+  "components/time-pickers": ["v-time-picker"],
+  "components/timelines": [
+    "v-timeline",
+    "v-timeline-item"
+  ],
+  "components/toolbars": ["v-toolbar"],
+  "components/tooltips": ["v-tooltip"],
+  "components/treeview": ["v-treeview"],
+  "components/virtual-scroller": ["v-virtual-scroll"],
+  "components/windows": [
+    "v-window",
+    "v-window-item"
+  ],
+  "directives/click-outside": ["v-click-outside"],
+  "directives/intersect": ["v-intersect"],
+  "directives/mutate": ["v-mutate"],
+  "directives/resize": ["v-resize"],
+  "directives/ripple": ["v-ripple"],
+  "directives/scroll": ["v-scroll"],
+  "directives/touch": ["v-touch"],
+  "features/internationalization": ["internationalization"],
+  "features/scrolling": ["$vuetify"],
+  "features/theme": ["v-theme-provider"],
+  "styles/transitions": [
+    "v-fab-transition",
+    "v-fade-transition",
+    "v-expand-transition",
+    "v-scale-transition",
+    "v-scroll-x-transition",
+    "v-scroll-x-reverse-transition",
+    "v-scroll-y-transition",
+    "v-scroll-y-reverse-transition",
+    "v-slide-x-transition",
+    "v-slide-x-reverse-transition",
+    "v-slide-y-transition",
+    "v-slide-y-reverse-transition"
+  ]
+  
+}

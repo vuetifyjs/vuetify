@@ -1,5 +1,10 @@
 module.exports = {
   'v-lazy': {
-    slots: ['default'],
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
   },
 }

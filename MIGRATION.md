@@ -202,7 +202,7 @@ const opts = {
 }
 ```
 
-* Now defaults to use [mdi](https://materialdesignicons.com/) icons. For information on how to install please navigate [here](https://vuetifyjs.com/customization/icons#install-material-design-icons)
+* Now defaults to use [mdi](https://materialdesignicons.com/) icons. For information on how to install please navigate [here](https://vuetifyjs.com/features/icon-fonts/#material-design-icons)
 * Is now located under the **icons** property of the Vuetify options
 
 If you want to use a custom iconfont, you must set it up in the initial Vuetify options now.
@@ -757,7 +757,7 @@ _Developer notes: The tabs-items component does not have to be provided and is o
 <v-text-field filled></v-text-field>
 ```
 
-#### `v-text-field`, `v-select`, `v-textarea`, `v-autocomplete`, `v-combobox`, `v-btn`, `v-alert`
+#### `v-text-field`, `v-select`, `v-textarea`, `v-autocomplete`, `v-combobox`, `v-btn`, `v-alert`, `v-chip`
 * The **outline** prop is now **outlined**
 
 ```vue

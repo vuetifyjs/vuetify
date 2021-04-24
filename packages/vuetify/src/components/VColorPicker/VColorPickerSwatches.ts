@@ -48,6 +48,7 @@ export default mixins(Themeable).extend({
       type: Array as PropType<string[][]>,
       default: () => parseDefaultColors(colors),
     },
+    disabled: Boolean,
     color: Object as PropType<VColorPickerColor>,
     maxWidth: [Number, String],
     maxHeight: [Number, String],
@@ -73,7 +74,7 @@ export default mixins(Themeable).extend({
         staticClass: 'v-color-picker__color',
         on: {
           // TODO: Less hacky way of catching transparent
-          click: () => this.$emit('update:color', fromHex(color === 'transparent' ? '#00000000' : color)),
+          click: () => this.disabled || this.$emit('update:color', fromHex(color === 'transparent' ? '#00000000' : color)),
         },
       }, [content])
     },

@@ -1,5 +1,11 @@
 module.exports = {
   'v-date-picker': {
+    slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
+    ],
     events: [
       {
         name: 'input',
@@ -11,6 +17,10 @@ module.exports = {
       },
       {
         name: 'update:picker-date',
+        value: 'string',
+      },
+      {
+        name: 'update:active-picker',
         value: 'string',
       },
       {

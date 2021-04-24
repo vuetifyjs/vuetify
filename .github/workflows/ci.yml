@@ -1,6 +1,13 @@
 name: CI
 on: [push, pull_request]
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+  CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+  CROWDIN_BRANCH: master
+  LOCAL_BRANCH: docs/update-from-crowdin
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -46,7 +53,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn lerna run build --scope vuetify
-      - run: echo ::set-env name=RELEASE_TAG::${GITHUB_REF#refs/tags/}
+      - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
       - run: rm -rf release
       - run: cp -r ./packages/vuetify/dist release
       - run: for file in ./release/*.*; do mv "$file" "${file/release\/vuetify/release/vuetify-${RELEASE_TAG}}"; done
@@ -87,6 +94,48 @@ jobs:
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn global add now
+
+      - name: Download eo-UY
+        uses: crowdin/github-action@1.0.19
+        with:
+          config: crowdin.yml
+          upload_sources: false
+          download_translations: true
+          push_translations: false
+          export_only_approved: false
+          download_language: eo
+          localization_branch_name: ${{ env.LOCAL_BRANCH }}
+          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+          debug_mode: true
+
+      - name: Download ja
+        uses: crowdin/github-action@1.0.19
+        with:
+          config: crowdin.yml
+          upload_sources: false
+          download_translations: true
+          push_translations: false
+          export_only_approved: false
+          download_language: ja
+          localization_branch_name: ${{ env.LOCAL_BRANCH }}
+          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+          debug_mode: true
+
+      - name: Download zh-CN
+        uses: crowdin/github-action@1.0.19
+        with:
+          config: crowdin.yml
+          upload_sources: false
+          download_translations: true
+          push_translations: false
+          export_only_approved: false
+          download_language: zh-CN
+          localization_branch_name: ${{ env.LOCAL_BRANCH }}
+          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+          debug_mode: true
+
+      - run: yarn run build:modified
+        working-directory: ./packages/docs
       - run: node scripts/deploy-and-alias.js ${{ github.ref }}
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}

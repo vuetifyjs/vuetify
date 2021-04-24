@@ -23,7 +23,9 @@ import Vue, { VNode } from 'vue'
 
 interface TouchEvent {
   touchstartX: number
+  touchstartY: number
   touchmoveX: number
+  touchmoveY: number
   stopPropagation: Function
 }
 
@@ -89,6 +91,8 @@ export const BaseSlideGroup = mixins<options &
     isOverflowing: false,
     resizeTimeout: 0,
     startX: 0,
+    isSwipingHorizontal: false,
+    isSwiping: false,
     scrollOffset: 0,
     widths: {
       content: 0,
@@ -97,6 +101,9 @@ export const BaseSlideGroup = mixins<options &
   }),
 
   computed: {
+    canTouch (): boolean {
+      return typeof window !== 'undefined'
+    },
     __cachedNext (): VNode {
       return this.genTransition('next')
     },
@@ -121,12 +128,12 @@ export const BaseSlideGroup = mixins<options &
 
         // Show arrows on mobile when overflowing.
         // This matches the default 2.2 behavior
-        case true: return this.isOverflowing
+        case true: return this.isOverflowing || Math.abs(this.scrollOffset) > 0
 
         // Always show on mobile
         case 'mobile': return (
           this.isMobile ||
-          this.isOverflowing
+          (this.isOverflowing || Math.abs(this.scrollOffset) > 0)
         )
 
         // https://material.io/components/tabs#scrollable-tabs
@@ -134,7 +141,7 @@ export const BaseSlideGroup = mixins<options &
         // overflowed on desktop
         default: return (
           !this.isMobile &&
-          this.isOverflowing
+          (this.isOverflowing || Math.abs(this.scrollOffset) > 0)
         )
       }
     },
@@ -287,9 +294,27 @@ export const BaseSlideGroup = mixins<options &
       content.style.setProperty('willChange', 'transform')
     },
     onTouchMove (e: TouchEvent) {
-      this.scrollOffset = this.startX - e.touchmoveX
+      if (!this.canTouch) return
+
+      if (!this.isSwiping) {
+        // only calculate disableSwipeHorizontal during the first onTouchMove invoke
+        // in order to ensure disableSwipeHorizontal value is consistent between onTouchStart and onTouchEnd
+        const diffX = e.touchmoveX - e.touchstartX
+        const diffY = e.touchmoveY - e.touchstartY
+        this.isSwipingHorizontal = Math.abs(diffX) > Math.abs(diffY)
+        this.isSwiping = true
+      }
+
+      if (this.isSwipingHorizontal) {
+        // sliding horizontally
+        this.scrollOffset = this.startX - e.touchmoveX
+        // temporarily disable window vertical scrolling
+        document.documentElement.style.overflowY = 'hidden'
+      }
     },
     onTouchEnd () {
+      if (!this.canTouch) return
+
       const { content, wrapper } = this.$refs
       const maxScrollOffset = content.clientWidth - wrapper.clientWidth
 
@@ -311,12 +336,28 @@ export const BaseSlideGroup = mixins<options &
           this.scrollOffset = maxScrollOffset
         }
       }
+
+      this.isSwiping = false
+      // rollback whole page scrolling to default
+      document.documentElement.style.removeProperty('overflow-y')
     },
     overflowCheck (e: TouchEvent, fn: (e: TouchEvent) => void) {
       e.stopPropagation()
       this.isOverflowing && fn(e)
     },
     scrollIntoView /* istanbul ignore next */ () {
+      if (!this.selectedItem && this.items.length) {
+        const lastItemPosition = this.items[this.items.length - 1].$el.getBoundingClientRect()
+        const wrapperPosition = this.$refs.wrapper.getBoundingClientRect()
+
+        if (
+          (this.$vuetify.rtl && wrapperPosition.right < lastItemPosition.right) ||
+          (!this.$vuetify.rtl && wrapperPosition.left > lastItemPosition.left)
+        ) {
+          this.scrollTo('prev')
+        }
+      }
+
       if (!this.selectedItem) {
         return
       }
@@ -390,7 +431,10 @@ export const BaseSlideGroup = mixins<options &
           wrapper: wrapper ? wrapper.clientWidth : 0,
         }
 
-        this.isOverflowing = this.widths.wrapper < this.widths.content
+        // https://github.com/vuetifyjs/vuetify/issues/13212
+        // We add +1 to the wrappers width to prevent an issue where the `clientWidth`
+        // gets calculated wrongly by the browser if using a different zoom-level.
+        this.isOverflowing = this.widths.wrapper + 1 < this.widths.content
 
         this.scrollIntoView()
       })

@@ -43,6 +43,7 @@ describe('VAutocomplete.ts', () => {
   // https://github.com/vuetifyjs/vuetify/issues/7259
   it('should update search when same item is selected', async () => {
     const wrapper = mountFunction({
+      attachToDocument: true,
       propsData: {
         items: ['foo'],
         value: 'foo',
@@ -141,7 +142,7 @@ describe('VAutocomplete.ts', () => {
     input.trigger('keydown.backspace')
     input.trigger('keydown.backspace')
 
-    expect(wrapper.vm.internalValue).toBeUndefined()
+    expect(wrapper.vm.internalValue).toBeNull()
 
     wrapper.setProps({
       multiple: true,
@@ -202,5 +203,38 @@ describe('VAutocomplete.ts', () => {
     append.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isMenuActive).toBe(true)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/9489
+  it('should emit search-input update only once', async () => {
+    const onSearch = jest.fn()
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo', 'bar'],
+        value: 'foo',
+      },
+    })
+
+    wrapper.vm.$on('update:search-input', onSearch)
+
+    expect(onSearch).toHaveBeenCalledTimes(0)
+
+    wrapper.setData({ internalValue: 'bar' })
+
+    await wrapper.vm.$nextTick()
+
+    expect(onSearch).toHaveBeenCalledTimes(1)
+
+    wrapper.setData({ internalValue: 'foo' })
+
+    await wrapper.vm.$nextTick()
+
+    expect(onSearch).toHaveBeenCalledTimes(2)
+
+    wrapper.setData({ internalValue: 'foo' })
+
+    await wrapper.vm.$nextTick()
+
+    expect(onSearch).toHaveBeenCalledTimes(2)
   })
 })

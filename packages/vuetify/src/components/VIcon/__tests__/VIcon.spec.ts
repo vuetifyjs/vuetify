@@ -234,7 +234,6 @@ describe('VIcon', () => {
       const wrapper = mountFunction({}, '$testIcon')
 
       expect(wrapper.text()).toBe('test icon')
-      expect(wrapper.element.className).toBe('v-icon notranslate test-component v-icon--is-component theme--light')
       expect(wrapper.html()).toMatchSnapshot()
     })
 

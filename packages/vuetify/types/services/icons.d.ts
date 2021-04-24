@@ -9,13 +9,14 @@ export interface Icons extends IconsOptions {
 export type Iconfont = 'mdi' | 'mdiSvg' | 'md' | 'fa' | 'faSvg' | 'fa4'
 
 export interface IconsOptions {
+  component?: Component | string
   /**
    * Select a base icon font to use. Note that none of these are included, you must install them yourself
    *
    * md: <a href="https://material.io/icons">material.io</a> (default)
    * mdi: <a href="https://materialdesignicons.com">MDI</a>
    * fa: <a href="https://fontawesome.com/get-started/web-fonts-with-css">FontAwesome 5</a>
-   * fa4: <a href="">FontAwesome 4</a> TODO: link
+   * fa4: <a href="https://fontawesome.com/v4.7.0/">FontAwesome 4</a>
    * faSvg: <a href="https://fontawesome.com/how-to-use/on-the-web/using-with/vuejs">FontAwesome SVG</a>
    */
   iconfont?: Iconfont
@@ -60,5 +61,8 @@ export interface VuetifyIcons {
   first: VuetifyIcon
   last: VuetifyIcon
   unfold: VuetifyIcon
+  file: VuetifyIcon
+  plus: VuetifyIcon
+  minus: VuetifyIcon
   [name: string]: VuetifyIcon
 }

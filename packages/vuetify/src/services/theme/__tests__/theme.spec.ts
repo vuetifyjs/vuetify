@@ -192,9 +192,9 @@ describe('Theme.ts', () => {
 
     theme.init(anyInstance)
 
-    expect(typeof anyInstance.$options['metaInfo']).toBe('function')
+    expect(typeof anyInstance.$options.metaInfo).toBe('function')
 
-    const metaInfo = anyInstance.$options['metaInfo']()
+    const metaInfo = anyInstance.$options.metaInfo()
 
     expect(metaInfo).toBeTruthy()
     expect(metaInfo.style).toHaveLength(1)
