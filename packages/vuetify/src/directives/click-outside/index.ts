@@ -1,3 +1,4 @@
+import { attachedRoot } from '../../util/dom'
 import { VNodeDirective } from 'vue/types/vnode'
 
 interface ClickOutsideBindingArgs {
@@ -20,6 +21,12 @@ function checkEvent (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDire
   // Explicitly check for false to allow fallback compatibility
   // with non-toggleable components
   if (!e || checkIsActive(e, binding) === false) return false
+
+  // If we're clicking inside the shadowroot, then the app root doesn't get the same
+  // level of introspection as to _what_ we're clicking. We want to check to see if
+  // our target is the shadowroot parent container, and if it is, ignore.
+  const root = attachedRoot(el)
+  if (root instanceof ShadowRoot && root.host === e.target) return false
 
   // Check if additional elements were passed to be included in check
   // (click must be outside all included elements, if any)
@@ -49,6 +56,16 @@ function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirec
   }, 0)
 }
 
+function handleShadow (el: HTMLElement, callback: Function): void {
+  const root = attachedRoot(el)
+
+  callback(document.body)
+
+  if (root instanceof ShadowRoot) {
+    callback(root)
+  }
+}
+
 export const ClickOutside = {
   // [data-app] may not be found
   // if using bind, inserted makes
@@ -61,8 +78,10 @@ export const ClickOutside = {
       el._clickOutside!.lastMousedownWasOutside = checkEvent(e as PointerEvent, el, binding)
     }
 
-    document.body.addEventListener('click', onClick, true)
-    document.body.addEventListener('mousedown', onMousedown, true)
+    handleShadow(el, (app: HTMLElement) => {
+      app.addEventListener('click', onClick, true)
+      app.addEventListener('mousedown', onMousedown, true)
+    })
 
     el._clickOutside = {
       lastMousedownWasOutside: true,
@@ -74,8 +93,11 @@ export const ClickOutside = {
   unbind (el: HTMLElement) {
     if (!el._clickOutside) return
 
-    document.body.removeEventListener('click', el._clickOutside.onClick, true)
-    document.body.removeEventListener('mousedown', el._clickOutside.onMousedown, true)
+    handleShadow(el, (app: HTMLElement) => {
+      if (!app || !el._clickOutside) return
+      app.removeEventListener('click', el._clickOutside.onClick, true)
+      app.removeEventListener('mousedown', el._clickOutside.onMousedown, true)
+    })
 
     delete el._clickOutside
   },
