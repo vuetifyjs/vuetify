@@ -65,7 +65,10 @@ export default defineComponent({
       default: 'top',
       validator: (v: any) => ['top', 'bottom'].includes(v),
     },
-    ripple: Boolean,
+    ripple: {
+      type: Boolean,
+      default: true,
+    },
     ...makeDensityProps(),
     ...makeSizeProps(),
     ...makeTagProps(),
@@ -207,7 +210,18 @@ export default defineComponent({
             { slots.item ? slots.item(iconProps) : (
               <VBtn
                 ref={(e: any) => updateRef(e, iconProps.index)}
-                {...iconProps}
+                color={iconProps.color}
+                ripple={iconProps.ripple}
+                size={iconProps.size}
+                icon={iconProps.icon}
+                onClick={iconProps.onClick}
+                onMouseenter={iconProps.onMouseenter}
+                onMouseleave={iconProps.onMouseleave}
+                onMousemove={iconProps.onMousemove}
+                aria-label={iconProps.ariaLabel}
+                disabled={iconProps.disabled}
+                density={iconProps.density}
+                tabindex={iconProps.tabindex}
               />
             )}
           </div>
