@@ -158,6 +158,7 @@ export default defineComponent({
           isHovered,
           label: props.itemLabels && props.itemLabels[index],
           readonly: props.readonly,
+          ref: (e: any) => updateRef(e, index),
           ripple: props.ripple,
           size: props.size,
           tabindex: props.readonly ? -1 : undefined,
@@ -170,14 +171,20 @@ export default defineComponent({
 
     const { refs, updateRef } = useRefs<ComponentPublicInstance>()
 
+    function updateFocus () {
+      const index = Math.floor(rating.value - 0.5)
+      const el = refs.value[index]?.$el ?? refs.value[index]
+      el?.focus()
+    }
+
     function onKeydown (e: KeyboardEvent) {
       const increment = props.halfIncrements ? 0.5 : 1
       if (e.keyCode === keyCodes.left && rating.value > 0) {
         rating.value -= increment
-        nextTick(() => refs.value[Math.floor(rating.value)]?.$el.focus())
+        nextTick(updateFocus)
       } else if (e.keyCode === keyCodes.right && rating.value < length.value) {
         rating.value += increment
-        nextTick(() => refs.value[Math.floor(rating.value - 0.5)]?.$el.focus())
+        nextTick(updateFocus)
       }
     }
 
@@ -209,7 +216,7 @@ export default defineComponent({
             }
             { slots.item ? slots.item(iconProps) : (
               <VBtn
-                ref={(e: any) => updateRef(e, iconProps.index)}
+                ref={iconProps.ref}
                 color={iconProps.color}
                 ripple={iconProps.ripple}
                 size={iconProps.size}
