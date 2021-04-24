@@ -26,21 +26,21 @@ Recurring pledges come with **exclusive** perks such as priority GitHub issues, 
 
 ## Current Project Sponsors
 
-We thank all of our project sponsors for their continued support of Vuetify. If you have any questions about sponsorship, please reach out to [sponsor@vuetifyjs.com](sponsor@vuetifyjs.com) for more information.
-
-### Premier
-
-<sponsors tier="1" />
+We thank all of our project sponsors for their continued support of Vuetify. If you have any questions about sponsorship, please reach out to [sponsor@vuetifyjs.com](mailto:sponsor@vuetifyjs.com) for more information.
 
 ### Diamond
 
-<sponsors tier="2" />
+<sponsors tier="1" />
 
 ### Platinum
 
-<sponsors tier="3" />
+<sponsors tier="2" />
 
 ### Gold
+
+<sponsors tier="3" />
+
+### Silver
 
 <sponsors tier="4" />
 

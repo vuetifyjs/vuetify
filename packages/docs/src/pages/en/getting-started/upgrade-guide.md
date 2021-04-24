@@ -223,7 +223,7 @@ const opts = {
 }
 ```
 
-- Now defaults to use [mdi](https://materialdesignicons.com/) icons. For information on how to install please navigate [here](https://vuetifyjs.com/features/icons#install-material-design-icons)
+- Now defaults to use [mdi](https://materialdesignicons.com/) icons. For information on how to install please navigate [here](https://vuetifyjs.com/features/icon-fonts#install-material-design-icons)
 - Is now located under the **icons** property of the Vuetify options
 
 If you want to use a custom iconfont, you must set it up in the initial Vuetify options now.
@@ -817,6 +817,7 @@ _Developer notes: The tabs-items component does not have to be provided and is o
 #### v-toolbar
 
 - All existing scrolling techniques and `app` functionality has been deprecated and moved to `v-app-bar`
+- `v-toolbar-side-icon` → `v-app-bar-nav-icon`
 
 ## I need help
 

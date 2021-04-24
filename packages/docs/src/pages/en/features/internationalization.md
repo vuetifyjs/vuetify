@@ -23,7 +23,10 @@ Currently Vuetify provides translations in the following languages:
 
 - **af** - Afrikaans (Afrikaans)
 - **ar** - Arabic (اللغة العربية)
+- **az** - Azerbaijani (Azərbaycan)
+- **bg** - Bulgarian (български)
 - **ca** - Catalan (català)
+- **ckb** - Central Kurdish (کوردی)
 - **cs** - Czech (čeština)
 - **de** - German (Deutsch)
 - **el** - Greek (Ελληνικά)
@@ -51,12 +54,14 @@ Currently Vuetify provides translations in the following languages:
 - **sk** - Slovak (slovenčina)
 - **sl** - Slovene (slovenski jezik)
 - **srCyrl** - Serbian (српски језик)
+- **srLatn** - Serbian (srpski jezik)
 - **sv** - Swedish (svenska)
 - **th** - Thai (ไทย)
 - **tr** - Turkish (Türkçe)
 - **uk** - Ukrainian (Українська)
+- **vi** - Vietnamese (Tiếng Việt)
 - **zhHans** - Chinese (中文)
-- **zhHant** - Chinese (中文)
+- **zhHant** - Chinese (正體中文)
 
 ```js
 // src/plugins/vuetify.js

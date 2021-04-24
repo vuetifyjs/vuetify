@@ -61,4 +61,9 @@ export default {
       currentPage: 'پەڕەی ئێستا، پەڕە{0}',
     },
   },
+  rating: {
+    ariaLabel: {
+      icon: 'Rating {0} of {1}',
+    },
+  },
 }

@@ -35,11 +35,17 @@ Due to limited space, full-screen dialogs may be more appropriate for mobile dev
 
 <example file="v-dialog/prop-fullscreen" />
 
-#### Modal
+#### Transitions
 
-Similar to a Simple Dialog, except that it's not dismissed when touching outside.
+You can make the dialog appear from the top or the bottom.
 
-<example file="v-dialog/prop-modal" />
+<example file="v-dialog/prop-transitions" />
+
+#### Persistent
+
+Similar to a Simple Dialog, except that it's not dismissed when touching outside or pressing **esc** key.
+
+<example file="v-dialog/prop-persistent" />
 
 #### Scrollable
 

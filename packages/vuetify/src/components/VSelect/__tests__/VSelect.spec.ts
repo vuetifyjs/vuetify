@@ -3,6 +3,7 @@ import Vue from 'vue'
 
 // Components
 import VSelect from '../VSelect'
+import VDialog from '../../VDialog/VDialog'
 import {
   VListItem,
   VListItemTitle,
@@ -14,6 +15,8 @@ import {
   mount,
   Wrapper,
 } from '@vue/test-utils'
+import { keyCodes } from '../../../util/helpers'
+import { waitAnimationFrame } from '../../../../test'
 
 // eslint-disable-next-line max-statements
 describe('VSelect.ts', () => {
@@ -455,5 +458,69 @@ describe('VSelect.ts', () => {
     })
 
     expect(wrapper.vm.$attrs.autocomplete).toBe('on')
+  })
+
+  // Based on issue: https://github.com/vuetifyjs/vuetify/issues/12769
+  it('should cycle through selected items as per kep up & down without closing hosting menu dialog', async () => {
+    const items = ['Foo', 'Bar', 'Fizz', 'Buzz']
+
+    const dialogClickOutside = jest.fn()
+
+    const dialogWrapper = mount(VDialog, {
+      slots: {
+        default: {
+          render: h => h(VSelect, {
+            props: {
+              items,
+            },
+          }),
+        },
+      },
+      propsData: {
+        value: false,
+        fullscreen: true,
+      },
+      mocks: {
+        $vuetify: {
+          lang: {
+            t: (val: string) => val,
+          },
+          theme: {
+            dark: false,
+          },
+          breakpoint: {},
+        },
+      },
+    }) as Wrapper<InstanceType<typeof VDialog>>
+
+    dialogWrapper.vm.$on('click:outside', dialogClickOutside)
+
+    // Open dialog
+    dialogWrapper.setProps({ value: true })
+    await dialogWrapper.vm.$nextTick()
+
+    // Confirm Dialog is open
+    expect(dialogWrapper.vm.isActive).toBe(true)
+
+    const selectWrapper = dialogWrapper.find({ name: 'v-select' }) as Wrapper<Instance>
+
+    // Press key down twice to move selected item from null to Bar
+    const keyDownEvent = new KeyboardEvent('keydown', { keyCode: keyCodes.down })
+    selectWrapper.vm.onKeyDown(keyDownEvent)
+    await waitAnimationFrame()
+    selectWrapper.vm.onKeyDown(keyDownEvent)
+    await waitAnimationFrame()
+    expect(selectWrapper.vm.internalValue).toBe('Bar')
+
+    // Press key up once to move selected item from Bar to Foo
+    const keyUpEvent = new KeyboardEvent('keyup', { keyCode: keyCodes.up })
+    selectWrapper.vm.onKeyDown(keyUpEvent)
+    await waitAnimationFrame()
+    expect(selectWrapper.vm.internalValue).toBe('Foo')
+
+    // Confirm dialog click outside event has not been called
+    expect(dialogClickOutside).toHaveBeenCalledTimes(0)
+    // Confirm dialog is still open
+    expect(dialogWrapper.vm.isActive).toBe(true)
   })
 })

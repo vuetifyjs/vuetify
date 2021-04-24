@@ -61,4 +61,9 @@ export default {
       currentPage: '{0} الصفحة الحالية ، الصفحة',
     },
   },
+  rating: {
+    ariaLabel: {
+      icon: 'Rating {0} of {1}',
+    },
+  },
 }

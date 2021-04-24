@@ -15,7 +15,8 @@
     "showFirstLastPage": "Show first/last icons"
   },
   "slots": {
-    "pageText": "Defines content for the items-per-page text"
+    "prepend": "Adds content to the empty space in the footer",
+    "page-text": "Defines content for the items-per-page text"
   },
   "events": {
     "update:options": "The `.sync` event for `options` prop"

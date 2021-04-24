@@ -6,8 +6,10 @@ import VSlider from '../VSlider'
 
 // Helpers
 import {
+  addOnceEventListener,
   createRange,
   deepEqual,
+  passiveSupported,
 } from '../../util/helpers'
 
 // Types
@@ -113,7 +115,7 @@ export default VSlider.extend({
         },
         {
           class: this.isDisabled ? 'v-slider__track-background' : 'v-slider__track-fill',
-          color: this.isDisabled ? this.computedTrackColor : this.computedColor,
+          color: this.isDisabled ? this.computedTrackColor : this.computedTrackFillColor,
           styles: [this.inputWidth[0], Math.abs(this.inputWidth[1] - this.inputWidth[0]), padding, padding * -2],
         },
         {
@@ -142,11 +144,6 @@ export default VSlider.extend({
         this.genSteps(),
         createRange(2).map(index => {
           const value = this.internalValue[index]
-          const onDrag = (e: MouseEvent) => {
-            this.isActive = true
-            this.activeThumb = index
-            this.onThumbMouseDown(e)
-          }
           const onFocus = (e: Event) => {
             this.isFocused = true
             this.activeThumb = index
@@ -165,9 +162,43 @@ export default VSlider.extend({
           const isActive = this.isActive && this.activeThumb === index
           const isFocused = this.isFocused && this.activeThumb === index
 
-          return this.genThumbContainer(value, valueWidth, isActive, isFocused, onDrag, onFocus, onBlur, `thumb_${index}`)
+          return this.genThumbContainer(value, valueWidth, isActive, isFocused, onFocus, onBlur, `thumb_${index}`)
         }),
       ]
+    },
+    reevaluateSelected (value: number) {
+      this.activeThumb = this.getIndexOfClosestValue(this.internalValue, value)
+      const refName = `thumb_${this.activeThumb}`
+      const thumbRef = this.$refs[refName] as HTMLElement
+      thumbRef.focus()
+    },
+    onSliderMouseDown (e: MouseEvent) {
+      const value = this.parseMouseMove(e)
+
+      this.reevaluateSelected(value)
+
+      this.oldValue = this.internalValue
+      this.isActive = true
+
+      if ((e.target as Element)?.matches('.v-slider__thumb-container, .v-slider__thumb-container *')) {
+        this.thumbPressed = true
+      } else {
+        window.clearTimeout(this.mouseTimeout)
+        this.mouseTimeout = window.setTimeout(() => {
+          this.thumbPressed = true
+        }, 300)
+      }
+
+      const mouseUpOptions = passiveSupported ? { passive: true, capture: true } : true
+      const mouseMoveOptions = passiveSupported ? { passive: true } : false
+
+      const isTouchEvent = 'touches' in e
+
+      this.onMouseMove(e)
+      this.app.addEventListener(isTouchEvent ? 'touchmove' : 'mousemove', this.onMouseMove, mouseMoveOptions)
+      addOnceEventListener(this.app, isTouchEvent ? 'touchend' : 'mouseup', this.onSliderMouseUp, mouseUpOptions)
+
+      this.$emit('start', this.internalValue)
     },
     onSliderClick (e: MouseEvent) {
       if (!this.isActive) {
@@ -176,14 +207,9 @@ export default VSlider.extend({
           return
         }
 
-        const { value, isInsideTrack } = this.parseMouseMove(e)
+        const value = this.parseMouseMove(e)
 
-        if (isInsideTrack) {
-          this.activeThumb = this.getIndexOfClosestValue(this.internalValue, value)
-          const refName = `thumb_${this.activeThumb}`
-          const thumbRef = this.$refs[refName] as HTMLElement
-          thumbRef.focus()
-        }
+        this.reevaluateSelected(value)
 
         this.setInternalValue(value)
 
@@ -191,11 +217,13 @@ export default VSlider.extend({
       }
     },
     onMouseMove (e: MouseEvent) {
-      const { value, isInsideTrack } = this.parseMouseMove(e)
+      const value = this.parseMouseMove(e)
 
-      if (isInsideTrack && this.activeThumb === null) {
-        this.activeThumb = this.getIndexOfClosestValue(this.internalValue, value)
+      if (e.type === 'mousemove') {
+        this.thumbPressed = true
       }
+
+      this.activeThumb = this.getIndexOfClosestValue(this.internalValue, value)
 
       this.setInternalValue(value)
     },

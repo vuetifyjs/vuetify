@@ -11,11 +11,15 @@ const md = require('markdown-it')({
     permalinkSymbol: '',
     permalinkClass: '',
     slugify: str => {
-      const slug = String(str)
+      let slug = String(str)
         .trim()
         .toLowerCase()
-        .replace(/[^a-z0-9 -]/g, '')
+        .replace(/[^a-z0-9 -]/g, c => c.charCodeAt(0).toString(16))
         .replace(/\s+/g, '-')
+
+      if (slug.charAt(0).match(/[^a-z]/g)) {
+        slug = 'section-' + slug
+      }
 
       return encodeURIComponent(slug)
     },

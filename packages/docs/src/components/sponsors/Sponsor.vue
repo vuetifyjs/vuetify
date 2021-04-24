@@ -10,6 +10,7 @@
     rel="noopener"
     rounded
     target="_blank"
+    @click="onClick"
   >
     <v-img
       :alt="value.metadata.name"
@@ -41,21 +42,17 @@
     },
 
     computed: {
+      name: get('route/name'),
       sponsors: get('sponsors/all'),
       src () {
         const {
-          darklogo = '',
-          lightlogo = '',
+          logodark = { url: '' },
+          darkLogo = '',
+          logolight = { url: '' },
+          lightLogo = '',
         } = this.value.metadata
-        let cdn = ''
 
-        const logo = this.$vuetify.theme.dark ? (darklogo || lightlogo) : lightlogo
-
-        if (!logo.match('http')) {
-          cdn = 'https://cdn.vuetifyjs.com/images/'
-        }
-
-        return `${cdn}${logo}`
+        return !this.$vuetify.theme.dark ? logolight.url || lightLogo : logodark.url || darkLogo
       },
       width () {
         if (this.compact) return 112
@@ -66,6 +63,16 @@
       value () {
         return this.sponsor || this.sponsors.find(sponsor => {
           return sponsor.slug === this.slug
+        })
+      },
+    },
+
+    methods: {
+      onClick () {
+        this.$gtag.event('click', {
+          event_category: 'vuetify-sponsor',
+          event_label: this.value.slug,
+          value: this.name.toLowerCase(),
         })
       },
     },

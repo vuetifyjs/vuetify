@@ -1,14 +1,19 @@
 @import './_variables.scss'
 
 +theme(v-select) using ($material)
-  .v-select__selection--comma
+  .v-select__selections
     color: map-deep-get($material, 'text', 'primary')
+    min-height: $select-selections-min-height
+
+  &.v-input--is-disabled
+    .v-select__selections
+      color: map-deep-get($material, 'text', 'disabled')
 
   .v-select__selection--disabled
     color: map-deep-get($material, 'text', 'disabled')
 
   &.v-text-field--solo-inverted.v-input--is-focused
-    .v-select__selection--comma
+    .v-select__selections
       color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
 
 .v-select
@@ -58,10 +63,12 @@
   &.v-text-field
     input
       flex: 1 1 // Doesn't resize on IE11 with 3rd param
-      margin-top: 0
       min-width: 0
       pointer-events: none
       position: relative
+
+    &:not(.v-text-field--single-line) input
+      margin-top: 0
 
   @if $select-active-icon-flip
     &.v-select--is-menu-active

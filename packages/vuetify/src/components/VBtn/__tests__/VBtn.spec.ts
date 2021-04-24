@@ -15,7 +15,7 @@ import {
 } from '@vue/test-utils'
 import { compileToFunctions } from 'vue-template-compiler'
 
-describe('VBtn.ts', () => {
+describe('VBtn.ts', () => { // eslint-disable-line max-statements
   let mountFunction: (options?: object) => Wrapper<Vue>
   let router: Router
   let localVue: typeof Vue
@@ -152,36 +152,14 @@ describe('VBtn.ts', () => {
     expect(wrapper.classes('foo')).toBe(true)
   })
 
-  it('should have v-btn--depressed class when using depressed prop', () => {
+  it('should have v-btn--plain class when plain prop is set to true', () => {
     const wrapper = mountFunction({
       propsData: {
-        depressed: true,
+        plain: true,
       },
     })
 
-    expect(wrapper.classes('v-btn--depressed')).toBe(true)
-  })
-
-  it('should have v-btn--flat class when using flat and depressed props', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        depressed: true,
-        text: true,
-      },
-    })
-
-    expect(wrapper.classes('v-btn--text')).toBe(true)
-  })
-
-  it('should have v-btn--outlined and v-btn--depressed classes when using outlined prop', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        outlined: true,
-      },
-    })
-
-    expect(wrapper.classes('v-btn--outlined')).toBe(true)
-    expect(wrapper.classes('v-btn--depressed')).toBe(true)
+    expect(wrapper.classes('v-btn--plain')).toBe(true)
   })
 
   it('should have the correct icon classes', () => {
@@ -274,7 +252,7 @@ describe('VBtn.ts', () => {
   it('should not add color classes if disabled', () => {
     const wrapper = mountFunction({
       propsData: {
-        color: 'primary--text text--darken-2',
+        color: 'primary darken-2',
       },
     })
 

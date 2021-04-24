@@ -139,7 +139,7 @@ export default baseMixins.extend<options>().extend({
       } else if (this.isInNav) {
         // do nothing, role is inherit
       } else if (this.isInGroup) {
-        attrs.role = 'listitem'
+        attrs.role = 'option'
         attrs['aria-selected'] = String(this.isActive)
       } else if (this.isInMenu) {
         attrs.role = this.isClickable ? 'menuitem' : undefined

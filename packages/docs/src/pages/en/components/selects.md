@@ -61,7 +61,7 @@ You can use **dense** prop to reduce the field height and lower max height of li
 
 #### Disabled
 
-You cannot use disabled `v-select`.
+Applying the **disabled** prop to a `v-select` will prevent a user from interacting with the component.
 
 <example file="v-select/prop-disabled" />
 
@@ -91,7 +91,7 @@ A multi-select can utilize `v-chip` as the display for selected items.
 
 #### Readonly
 
-You cannot use read-only `v-select`, but it looks default.
+You can use the **read-only** prop on `v-select` which will prevent a user from changing its value.
 
 <example file="v-select/prop-readonly" />
 

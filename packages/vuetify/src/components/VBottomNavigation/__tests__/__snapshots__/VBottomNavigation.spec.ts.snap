@@ -12,13 +12,13 @@ exports[`VBottomNavigation.ts should be visible with a true value 2`] = `
      style="height: 56px; transform: none;"
 >
   <button type="button"
-          class="v-btn v-btn--contained theme--light v-size--default"
+          class="v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default"
   >
     <span class="v-btn__content">
     </span>
   </button>
   <button type="button"
-          class="v-btn v-btn--contained theme--light v-size--default"
+          class="v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default"
   >
     <span class="v-btn__content">
     </span>
@@ -38,13 +38,13 @@ exports[`VBottomNavigation.ts should be visible with a true value 4`] = `
      style="height: 56px; transform: translateY(100%);"
 >
   <button type="button"
-          class="v-btn v-btn--contained theme--light v-size--default"
+          class="v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default"
   >
     <span class="v-btn__content">
     </span>
   </button>
   <button type="button"
-          class="v-btn v-btn--contained theme--light v-size--default"
+          class="v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default"
   >
     <span class="v-btn__content">
     </span>
