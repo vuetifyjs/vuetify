@@ -817,6 +817,7 @@ _Developer notes: The tabs-items component does not have to be provided and is o
 #### v-toolbar
 
 - All existing scrolling techniques and `app` functionality has been deprecated and moved to `v-app-bar`
+- `v-toolbar-side-icon` → `v-app-bar-nav-icon`
 
 ## I need help
 

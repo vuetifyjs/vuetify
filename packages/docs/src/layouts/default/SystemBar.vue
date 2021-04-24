@@ -1,13 +1,13 @@
 <template>
   <v-system-bar
     v-if="hasPromotion"
+    :style="{ background: `linear-gradient(to right, #04091D 45%, ${hasAltPromotion ? '#1D408C' : '#7A3FAB'})` }"
     app
-    color="#04091D"
     dark
     height="76"
   >
     <a
-      class="cm-banner"
+      :class="[`cm-banner${hasAltPromotion ? '-alt' : ''}`]"
       href="https://vueschool.io/free-weekend/?friend=vuetify"
       rel="noopener"
       target="_blank"
@@ -28,7 +28,7 @@
 
 <script>
   // Utilities
-  import { differenceInHours, isBefore } from 'date-fns'
+  // import { differenceInHours, isBefore } from 'date-fns'
   import { get, sync } from 'vuex-pathify'
 
   export default {
@@ -37,13 +37,17 @@
     computed: {
       last: sync('user/last@promotion'),
       name: get('route/name'),
+      hasAltPromotion () {
+        return true
+      },
       hasPromotion () {
-        const now = Date.now()
+        return false
+        // const now = Date.now()
 
-        return (
-          isBefore(now, new Date(2021, 3, 29)) &&
-          differenceInHours(now, Number(this.last)) > 1
-        )
+        // return (
+        //   isBefore(now, new Date(2021, 3, 29)) &&
+        //   differenceInHours(now, Number(this.last)) > 1
+        // )
       },
     },
 
@@ -63,9 +67,8 @@
 </script>
 
 <style lang="sass">
-  .cm-banner
-    background-color: linear-gradient(to right, #04091D, #753DA4)
-    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vueschool-mobile.png)
+  .cm-banner,
+  .cm-banner-alt
     background-position: center
     background-repeat: no-repeat
     background-size: contain
@@ -80,11 +83,21 @@
     top: 0
     white-space: nowrap
 
-  @media (min-width: 660px)
-    .cm-banner
+  .cm-banner
+    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vueschool-mobile.png)
+
+    @media (min-width: 660px)
       background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vueschool-tablet.png)
 
-  @media (min-width: 992px)
-    .cm-banner
+    @media (min-width: 992px)
       background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vueschool-desktop.png)
+
+  .cm-banner-alt
+    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vs-2-mobile.png)
+
+    @media (min-width: 660px)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vs-2-tablet.png)
+
+    @media (min-width: 992px)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vs-2-desktop.png)
 </style>

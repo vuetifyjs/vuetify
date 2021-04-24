@@ -23,7 +23,9 @@ import Vue, { VNode } from 'vue'
 
 interface TouchEvent {
   touchstartX: number
+  touchstartY: number
   touchmoveX: number
+  touchmoveY: number
   stopPropagation: Function
 }
 
@@ -89,6 +91,8 @@ export const BaseSlideGroup = mixins<options &
     isOverflowing: false,
     resizeTimeout: 0,
     startX: 0,
+    isSwipingHorizontal: false,
+    isSwiping: false,
     scrollOffset: 0,
     widths: {
       content: 0,
@@ -97,6 +101,9 @@ export const BaseSlideGroup = mixins<options &
   }),
 
   computed: {
+    canTouch (): boolean {
+      return typeof window !== 'undefined'
+    },
     __cachedNext (): VNode {
       return this.genTransition('next')
     },
@@ -287,9 +294,27 @@ export const BaseSlideGroup = mixins<options &
       content.style.setProperty('willChange', 'transform')
     },
     onTouchMove (e: TouchEvent) {
-      this.scrollOffset = this.startX - e.touchmoveX
+      if (!this.canTouch) return
+
+      if (!this.isSwiping) {
+        // only calculate disableSwipeHorizontal during the first onTouchMove invoke
+        // in order to ensure disableSwipeHorizontal value is consistent between onTouchStart and onTouchEnd
+        const diffX = e.touchmoveX - e.touchstartX
+        const diffY = e.touchmoveY - e.touchstartY
+        this.isSwipingHorizontal = Math.abs(diffX) > Math.abs(diffY)
+        this.isSwiping = true
+      }
+
+      if (this.isSwipingHorizontal) {
+        // sliding horizontally
+        this.scrollOffset = this.startX - e.touchmoveX
+        // temporarily disable window vertical scrolling
+        document.documentElement.style.overflowY = 'hidden'
+      }
     },
     onTouchEnd () {
+      if (!this.canTouch) return
+
       const { content, wrapper } = this.$refs
       const maxScrollOffset = content.clientWidth - wrapper.clientWidth
 
@@ -311,6 +336,10 @@ export const BaseSlideGroup = mixins<options &
           this.scrollOffset = maxScrollOffset
         }
       }
+
+      this.isSwiping = false
+      // rollback whole page scrolling to default
+      document.documentElement.style.removeProperty('overflow-y')
     },
     overflowCheck (e: TouchEvent, fn: (e: TouchEvent) => void) {
       e.stopPropagation()

@@ -105,6 +105,7 @@ export default baseMixins.extend<options>().extend({
       attrs: {
         tabindex: this.isDisabled ? -1 : null,
         type: 'button',
+        'aria-expanded': this.isActive,
       },
       directives: [{
         name: 'ripple',
