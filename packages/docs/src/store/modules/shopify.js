@@ -22,7 +22,7 @@ const actions = {
     if (
       !(slug && read_key) ||
       state.all.length > 0
-    ) return
+    ) return Promise.resolve()
 
     const { objects } = await bucket.getObjects({
       limit: 1,
