@@ -109,6 +109,8 @@ const defaultThemeOptions: ThemeOptions = {
         'kbd-background-color': '#212529',
         'kbd-color': '#FFFFFF',
         'code-background-color': '#C2C2C2',
+        'divider-color': '0, 0, 0',
+        'divider-opacity': 0.12,
       },
     },
     dark: {
@@ -134,6 +136,8 @@ const defaultThemeOptions: ThemeOptions = {
         'kbd-background-color': '#212529',
         'kbd-color': '#FFFFFF',
         'code-background-color': '#B7B7B7',
+        'divider-color': '255, 255, 255',
+        'divider-opacity': 0.12,
       },
     },
   },

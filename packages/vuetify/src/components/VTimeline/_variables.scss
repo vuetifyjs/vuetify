@@ -7,12 +7,28 @@ $timeline-item-padding: 24px !default;
 
 $timeline-line-width: 2px !default;
 
-$timeline-wedge-size: 10px !default;
+$timeline-dot-border-radius: 50% !default;
 
-$timeline-dot-small-size: 24px !default;
-$timeline-dot-regular-size: 38px !default;
-$timeline-dot-large-size: 52px !default;
+$timeline-dot-sizes: () !default;
+$timeline-dot-sizes: map-deep-merge(
+  (
+    'x-small': 22px,
+    'small': 30px,
+    'default': 38px,
+    'large': 46px,
+    'x-large': 54px,
+  ),
+  $timeline-dot-sizes
+);
 
-$timeline-inner-dot-small-size: 18px !default;
-$timeline-inner-dot-regular-size: 30px !default;
-$timeline-inner-dot-large-size: 42px !default;
+$timeline-dot-border-sizes: () !default;
+$timeline-dot-border-sizes: map-deep-merge(
+  (
+    'x-small': 6px,
+    'small': 8px,
+    'default': 8px,
+    'large': 8px,
+    'x-large': 10px,
+  ),
+  $timeline-dot-border-sizes
+);
