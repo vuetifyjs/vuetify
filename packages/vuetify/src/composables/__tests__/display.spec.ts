@@ -18,7 +18,7 @@ const breakpoints = [
   'lgAndUp',
 ] as const
 
-describe('display.ts', () => {
+describe('display', () => {
   it.each([
     [
       {
@@ -253,15 +253,15 @@ describe('display.ts', () => {
   })
 
   it('should override default thresholds', async () => {
-    const { xs } = createDisplay({
-      thresholds: { xs: 400 },
+    const { name } = createDisplay({
+      thresholds: { sm: 400 },
     })
 
-    await resizeWindow(401)
-    expect(xs.value).toBe(false)
+    await resizeWindow(400)
+    expect(name.value).toBe('sm')
 
     await resizeWindow(399)
-    expect(xs.value).toBe(true)
+    expect(name.value).toBe('xs')
   })
 
   it('should allow breakpoint strings for mobileBreakpoint', async () => {

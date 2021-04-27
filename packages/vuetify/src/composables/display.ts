@@ -71,10 +71,11 @@ export const VuetifyDisplaySymbol: InjectionKey<ToRefs<DisplayInstance>> = Symbo
 const defaultDisplayOptions: DisplayOptions = {
   mobileBreakpoint: 'md',
   thresholds: {
-    xs: 600,
-    sm: 960,
-    md: 1280,
-    lg: 1920,
+    xs: 0,
+    sm: 600,
+    md: 960,
+    lg: 1280,
+    xl: 1920,
   },
 }
 
@@ -151,11 +152,11 @@ export function createDisplay (options?: DisplayOptions): ToRefs<DisplayInstance
 
   // eslint-disable-next-line max-statements
   watchEffect(() => {
-    const xs = width.value < thresholds.xs
-    const sm = width.value < thresholds.sm && !xs
-    const md = width.value < thresholds.md && !(sm || xs)
-    const lg = width.value < thresholds.lg && !(md || sm || xs)
-    const xl = width.value >= thresholds.lg
+    const xs = width.value < thresholds.sm
+    const sm = width.value < thresholds.md && !xs
+    const md = width.value < thresholds.lg && !(sm || xs)
+    const lg = width.value < thresholds.xl && !(md || sm || xs)
+    const xl = width.value >= thresholds.xl
     const name =
       xs ? 'xs'
       : sm ? 'sm'
