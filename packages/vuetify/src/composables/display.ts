@@ -53,14 +53,14 @@ export interface DisplayInstance {
   lg: boolean
   xl: boolean
   xxl: boolean
-  smAndDown: boolean
   smAndUp: boolean
-  mdAndDown: boolean
   mdAndUp: boolean
-  lgAndDown: boolean
   lgAndUp: boolean
-  xlAndDown: boolean
   xlAndUp: boolean
+  smAndDown: boolean
+  mdAndDown: boolean
+  lgAndDown: boolean
+  xlAndDown: boolean
   name: DisplayBreakpoint
   height: number
   width: number
@@ -181,14 +181,14 @@ export function createDisplay (options?: DisplayOptions): ToRefs<DisplayInstance
     state.lg = lg
     state.xl = xl
     state.xxl = xxl
-    state.smAndDown = !(md || lg || xl || xxl)
     state.smAndUp = !xs
-    state.mdAndDown = !(lg || xl || xxl)
     state.mdAndUp = !(xs || sm)
-    state.lgAndDown = !(xl || xxl)
     state.lgAndUp = !(xs || sm || md)
-    state.xlAndDown = !xxl
     state.xlAndUp = !(xs || sm || md || lg)
+    state.smAndDown = !(md || lg || xl || xxl)
+    state.mdAndDown = !(lg || xl || xxl)
+    state.lgAndDown = !(xl || xxl)
+    state.xlAndDown = !xxl
     state.name = name
     state.height = height.value
     state.width = width.value

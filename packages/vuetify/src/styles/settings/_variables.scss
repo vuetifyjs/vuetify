@@ -140,14 +140,14 @@ $display-breakpoints: map-deep-merge(
     'lg': '(min-width: #{map-get($grid-breakpoints, 'lg')}) and (max-width: #{map-get($grid-breakpoints, 'xl') - 1})',
     'xl': '(min-width: #{map-get($grid-breakpoints, 'xl')}) and (max-width: #{map-get($grid-breakpoints, 'xxl') - 1})',
     'xxl': '(min-width: #{map-get($grid-breakpoints, 'xxl')})',
-    'sm-and-down': '(max-width: #{map-get($grid-breakpoints, 'md') - 1})',
     'sm-and-up': '(min-width: #{map-get($grid-breakpoints, 'sm')})',
-    'md-and-down': '(max-width: #{map-get($grid-breakpoints, 'lg') - 1})',
     'md-and-up': '(min-width: #{map-get($grid-breakpoints, 'md')})',
-    'lg-and-down': '(max-width: #{map-get($grid-breakpoints, 'xl') - 1})',
     'lg-and-up': '(min-width: #{map-get($grid-breakpoints, 'lg')})',
-    'xl-and-down': '(max-width: #{map-get($grid-breakpoints, 'xxl') - 1})',
     'xl-and-up': '(min-width: #{map-get($grid-breakpoints, 'xl')})',
+    'sm-and-down': '(max-width: #{map-get($grid-breakpoints, 'md') - 1})',
+    'md-and-down': '(max-width: #{map-get($grid-breakpoints, 'lg') - 1})',
+    'lg-and-down': '(max-width: #{map-get($grid-breakpoints, 'xl') - 1})',
+    'xl-and-down': '(max-width: #{map-get($grid-breakpoints, 'xxl') - 1})',
   ),
   $display-breakpoints
 );
