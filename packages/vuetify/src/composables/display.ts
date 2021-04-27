@@ -3,7 +3,7 @@ import { inject, reactive, ref, toRefs, watchEffect } from 'vue'
 import { mergeDeep } from '@/util'
 
 // Globals
-import { IN_BROWSER, SUPPORTS_INTERSECTION, SUPPORTS_TOUCH } from '@/util/globals'
+import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
 import type { InjectionKey, ToRefs } from 'vue'
@@ -41,7 +41,6 @@ export interface DisplayPlatform {
   win: boolean
   mac: boolean
   linux: boolean
-  intersection: boolean
   touch: boolean
   ssr: boolean
 }
@@ -136,7 +135,6 @@ function getPlatform (): DisplayPlatform {
     win,
     mac,
     linux,
-    intersection: SUPPORTS_INTERSECTION,
     touch: SUPPORTS_TOUCH,
     ssr,
   }
