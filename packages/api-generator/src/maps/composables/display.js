@@ -2,52 +2,12 @@ module.exports = {
   display: {
     props: [
       {
-        name: 'xs',
-        type: 'boolean',
-        default: 'false',
-      },
-      {
-        name: 'sm',
-        type: 'boolean',
-        default: 'false',
-      },
-      {
-        name: 'md',
-        type: 'boolean',
-        default: 'false',
+        name: 'height',
+        type: 'number',
+        default: 0,
       },
       {
         name: 'lg',
-        type: 'boolean',
-        default: 'false',
-      },
-      {
-        name: 'xl',
-        type: 'boolean',
-        default: 'false',
-      },
-      {
-        name: 'xxl',
-        type: 'boolean',
-        default: 'false',
-      },
-      {
-        name: 'smAndDown',
-        type: 'boolean',
-        default: 'false',
-      },
-      {
-        name: 'smAndUp',
-        type: 'boolean',
-        default: 'false',
-      },
-      {
-        name: 'mdAndDown',
-        type: 'boolean',
-        default: 'false',
-      },
-      {
-        name: 'mdAndUp',
         type: 'boolean',
         default: 'false',
       },
@@ -62,29 +22,19 @@ module.exports = {
         default: 'false',
       },
       {
-        name: 'xlAndDown',
+        name: 'md',
         type: 'boolean',
         default: 'false',
       },
       {
-        name: 'xlAndUp',
+        name: 'mdAndDown',
         type: 'boolean',
         default: 'false',
       },
       {
-        name: 'name',
-        type: 'string',
-        default: '',
-      },
-      {
-        name: 'height',
-        type: 'number',
-        default: 0,
-      },
-      {
-        name: 'width',
-        type: 'number',
-        default: 0,
+        name: 'mdAndUp',
+        type: 'boolean',
+        default: 'false',
       },
       {
         name: 'mobile',
@@ -95,6 +45,11 @@ module.exports = {
         name: 'mobileBreakpoint',
         type: 'number | string',
         default: 'md',
+      },
+      {
+        name: 'name',
+        type: 'string',
+        default: '',
       },
       {
         name: 'platform',
@@ -113,6 +68,21 @@ module.exports = {
           touch: false,
           ssr: false,
         },
+      },
+      {
+        name: 'sm',
+        type: 'boolean',
+        default: 'false',
+      },
+      {
+        name: 'smAndDown',
+        type: 'boolean',
+        default: 'false',
+      },
+      {
+        name: 'smAndUp',
+        type: 'boolean',
+        default: 'false',
       },
       {
         name: 'thresholds',
@@ -139,6 +109,36 @@ export default {
   }
 }
         `,
+      },
+      {
+        name: 'width',
+        type: 'number',
+        default: 0,
+      },
+      {
+        name: 'xl',
+        type: 'boolean',
+        default: 'false',
+      },
+      {
+        name: 'xlAndDown',
+        type: 'boolean',
+        default: 'false',
+      },
+      {
+        name: 'xlAndUp',
+        type: 'boolean',
+        default: 'false',
+      },
+      {
+        name: 'xs',
+        type: 'boolean',
+        default: 'false',
+      },
+      {
+        name: 'xxl',
+        type: 'boolean',
+        default: 'false',
       },
     ],
   },
