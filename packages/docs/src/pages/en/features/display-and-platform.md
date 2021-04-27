@@ -40,7 +40,7 @@ The following shows how to access the application's display information:
 
 The **display** composable has a numerous configuration options, such as the ability to define custom values for breakpoints.
 
-For example, the **thresholds** option modifies the values used for viewport calculations. The following snippet overrides **thresholds** values *xs* through *lg*, sets **mobileBreakpoint** to `sm`, and sets the **scrollbarWidth** to `24`.
+For example, the **thresholds** option modifies the values used for viewport calculations. The following snippet overrides **thresholds** values *xs* through *lg* and sets **mobileBreakpoint** to `sm`.
 
 ```js
 // src/plugins/vuetify.js
@@ -52,12 +52,12 @@ export default new Vuetify({
   display: {
     mobileBreakpoint: 'sm',
     thresholds: {
-      xs: 340,
-      sm: 540,
-      md: 800,
-      lg: 1280,
+      xs: 0,
+      sm: 340,
+      md: 540,
+      lg: 800,
+      xl: 1280,
     },
-    scrollbarWidth: 24,
   },
 })
 ```
@@ -98,6 +98,7 @@ In the following example, we use a switch statement and the current breakpoint n
           case 'md': return 500
           case 'lg': return 600
           case 'xl': return 800
+          case 'xxl': return 1200
         }
       },
     },
@@ -115,18 +116,21 @@ In the following example, we use a switch statement and the current breakpoint n
   md: boolean
   lg: boolean
   xl: boolean
+  xxl: boolean
   smAndDown: boolean
   smAndUp: boolean
   mdAndDown: boolean
   mdAndUp: boolean
   lgAndDown: boolean
   lgAndUp: boolean
+  xlAndDown: boolean
+  xlAndUp: boolean
 
   // true if screen width < mobileBreakpoint
   mobile: boolean
-  mobileBreakpoint: number | 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  mobileBreakpoint: number | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 
-  // Current breakpoint name (e.g. 'xs' | 'sm' | 'md' | 'lg' | 'xl')
+  // Current breakpoint name (e.g. 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl')
   name: string
 
   // The current value of window.innerHeight and window.innerWidth
@@ -151,15 +155,14 @@ In the following example, we use a switch statement and the current breakpoint n
     ssr: boolean
   }
 
-  // Browser scrollbar width
-  scrollbarWidth: number
-
   // The values used to make Breakpoint calculations
   thresholds: {
     xs: number
     sm: number
     md: number
     lg: number
+    xl: number
+    xxl: number
   }
 }
 ```
@@ -196,56 +199,77 @@ This value indicates that the device width is between the **md** and **lg** thre
 
 ### xl
 
-This value indicates that the device width greater than the **lg** threshold value.
+This value indicates that the device width is between the **lg** and **xl** threshold values.
+
+* **Type:** `boolean`
+* **Default:** `false`
+
+### xxl
+
+This value indicates that the device width is greater than the **xl** threshold value.
 
 * **Type:** `boolean`
 * **Default:** `false`
 
 ### smAndDown
 
-This value indicates that the device width less than the **sm** threshold value.
+This value indicates that the device width is less than the **sm** threshold value.
 
 * **Type:** `boolean`
 * **Default:** `false`
 
 ### smAndUp
 
-This value indicates that the device width greater than the **sm** threshold value.
+This value indicates that the device width is greater than the **sm** threshold value.
 
 * **Type:** `boolean`
 * **Default:** `false`
 
 ### mdAndDown
 
-This value indicates that the device width less than the **md** threshold value.
+This value indicates that the device width is less than the **md** threshold value.
 
 * **Type:** `boolean`
 * **Default:** `false`
 
 ### mdAndUp
 
-This value indicates that the device width greater than the **md** threshold value.
+This value indicates that the device width is greater than the **md** threshold value.
 
 * **Type:** `boolean`
 * **Default:** `false`
 
 ### lgAndDown
 
-This value indicates that the device width less than the **lg** threshold value.
+This value indicates that the device width is less than the **lg** threshold value.
 
 * **Type:** `boolean`
 * **Default:** `false`
 
 ### lgAndUp
 
-This value indicates that the device width greater than the **lg** threshold value.
+This value indicates that the device width is greater than the **lg** threshold value.
+
+* **Type:** `boolean`
+* **Default:** `false`
+
+### xlAndDown
+
+This value indicates that the device width is less than the **xl** threshold value.
+
+* **Type:** `boolean`
+* **Default:** `false`
+
+### xlAndUp
+
+This value indicates that the device width is greater than the **xl** threshold value.
 
 * **Type:** `boolean`
 * **Default:** `false`
 
 ### name
 
-The name key correlates to the currently active breakpoint; e.g. **xs**, **sm**, **md**, **lg**, **xl**.
+The name key correlates to the currently active breakpoint; e.g. **xs**, **sm**, **md**, **lg**, **xl**, **xxl**.
 
 * **Type:** `string`
 * **Default:** `""`
@@ -303,13 +327,6 @@ This object contains information from the detected device's [userAgent](https://
     }
   ```
 
-### scrollbarWidth
-
-This value is the width of the browser scrollbar.
-
-* **Type:** `number`
-* **Default:** `16`
-
 ### thresholds
 
 This object is used for device viewport calculations.
@@ -319,11 +336,12 @@ This object is used for device viewport calculations.
 
   ```js
     {
-      xs: 600,
-      sm: 960,
-      md: 1280,
-      lg: 1920,
-      xl: 3840,
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
+      xxl: 2560,
     }
   ```
 
@@ -383,7 +401,7 @@ export default {
 
     return () => {
       return (
-        <v-dialog fullscreen={display.mobile.value}>
+        <v-dialog fullscreen={ display.mobile.value }>
           ...
         </v-dialog>
       )
@@ -401,8 +419,8 @@ Breakpoint and conditional values return a `boolean` that is derived from the cu
 
 <template>
   <v-sheet
-    :min-height="mdAndUp.value ? 300 : '20vh'"
-    :rounded="xs.value"
+    :min-height="mdAndUp ? 300 : '20vh'"
+    :rounded="xs"
   >
     ...
   </v-sheet>
