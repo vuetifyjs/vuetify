@@ -8,7 +8,7 @@ import { IN_BROWSER, SUPPORTS_INTERSECTION, SUPPORTS_TOUCH } from '@/util/global
 // Types
 import type { InjectionKey, ToRefs } from 'vue'
 
-export type DisplayBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+export type DisplayBreakpoint = keyof DisplayThresholds
 
 export interface DisplayThresholds {
   xs: number
