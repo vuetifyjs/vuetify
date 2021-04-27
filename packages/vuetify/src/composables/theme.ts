@@ -99,6 +99,8 @@ const defaultThemeOptions: ThemeOptions = {
       variables: {
         'border-color': '0, 0, 0',
         'border-opacity': 0.12,
+        'disabled-opacity': 0.38,
+        'icon-opacity': 0.54,
       },
     },
     dark: {
@@ -118,6 +120,8 @@ const defaultThemeOptions: ThemeOptions = {
       variables: {
         'border-color': '255, 255, 255',
         'border-opacity': 0.12,
+        'disabled-opacity': 0.38,
+        'icon-opacity': 0.70,
       },
     },
   },

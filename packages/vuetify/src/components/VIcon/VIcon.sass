@@ -1,50 +1,73 @@
 // Imports
 @import './index'
 
-// Increased specificity to overwrite
-// iconfont css interference
-.v-icon.v-icon
+.v-icon
   align-items: center
+  color: rgba($icon-color, $icon-color-opacity)
   display: inline-flex
   font-feature-settings: 'liga'
   justify-content: center
-  letter-spacing: normal
-  line-height: 1
+  letter-spacing: $icon-letter-spacing
+  line-height: $icon-line-height
   position: relative
-  text-indent: 0
-  transition: 0.3s $standard-easing, visibility 0s
-  vertical-align: middle
+  text-indent: $icon-text-indent
+  transition: $icon-transition
   user-select: none
+  vertical-align: $icon-vertical-align
 
-.v-icon
-  &--right
-    margin-left: map-get($grid-gutters, 'md')
   &--left
-    margin-right: map-get($grid-gutters, 'md')
+    @include ltr()
+      margin-right: $icon-margin-start
+
+    @include rtl()
+      margin-left: $icon-margin-end
+
+  &--right
+    @include ltr()
+      margin-left: $icon-margin-start
+
+    @include rtl()
+      margin-right: $icon-margin-end
 
   &--disabled
+    color: rgba($icon-disabled-color, $icon-disabled-color-opacity) !important
     pointer-events: none
-
-  &__svg
-    fill: currentColor
 
   @each $name in $sizes
     &--size-#{$name}
       font-size: map-get($icon-sizes, $name)
-      width: map-get($icon-sizes, $name)
       height: map-get($icon-sizes, $name)
+      width: map-get($icon-sizes, $name)
 
-// Contextual styles
-.v-btn:not(.v-btn--icon) .v-icon
-  &--right
-    margin-left: calc(var(--v-btn-height) / 4.5)
-    margin-right: calc(var(--v-btn-height) / -9)
+.v-icon__svg
+  fill: currentColor
 
-  &--left
-    margin-left: calc(var(--v-btn-height) / -9)
-    margin-right: calc(var(--v-btn-height) / 4.5)
+.v-icon
+  .v-btn &
+    color: inherit
 
   &--size-default
-    font-size: (18/14) * 1em
-    width: 1em
-    height: 1em
+    .v-btn:not(.v-btn--icon) &
+      font-size: $icon-btn-font-size
+      height: $icon-btn-height
+      width: $icon-btn-width
+
+  &--left
+    .v-btn:not(.v-btn--icon) &
+      @include ltr()
+        margin-left: calc(#{$icon-btn-margin-start})
+        margin-right: calc(#{$icon-btn-margin-end})
+
+      @include rtl()
+        margin-left: calc(#{$icon-btn-margin-end})
+        margin-right: calc(#{$icon-btn-margin-start})
+
+  &--right
+    .v-btn:not(.v-btn--icon) &
+      @include ltr()
+        margin-left: calc(#{$icon-btn-margin-end})
+        margin-right: calc(#{$icon-btn-margin-start})
+
+      @include rtl()
+        margin-left: calc(#{$icon-btn-margin-start})
+        margin-right: calc(#{$icon-btn-margin-end})
