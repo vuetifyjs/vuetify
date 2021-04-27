@@ -94,6 +94,7 @@ $grid-breakpoints: map-deep-merge(
     'md': 960px,
     'lg': 1280px,
     'xl': 1920px,
+    'xxl': 2560px,
   ),
   $grid-breakpoints
 );
@@ -111,7 +112,7 @@ $grid-gutters: map-deep-merge(
     'sm': $grid-gutter / 6,
     'md': $grid-gutter / 3,
     'lg': $grid-gutter * 2/3,
-    'xl': $grid-gutter
+    'xl': $grid-gutter,
   ),
   $grid-gutters
 );
@@ -121,7 +122,8 @@ $container-max-widths: map-deep-merge(
   (
     'md': map-get($grid-breakpoints, 'md') * 0.9375,
     'lg': map-get($grid-breakpoints, 'lg') * 0.9375,
-    'xl': map-get($grid-breakpoints, 'xl') * 0.9375
+    'xl': map-get($grid-breakpoints, 'xl') * 0.9375,
+    'xxl': map-get($grid-breakpoints, 'xxl') * 0.9375,
   ),
   $container-max-widths
 );
@@ -136,13 +138,16 @@ $display-breakpoints: map-deep-merge(
     'sm': '(min-width: #{map-get($grid-breakpoints, 'sm')}) and (max-width: #{map-get($grid-breakpoints, 'md') - 1})',
     'md': '(min-width: #{map-get($grid-breakpoints, 'md')}) and (max-width: #{map-get($grid-breakpoints, 'lg') - 1})',
     'lg': '(min-width: #{map-get($grid-breakpoints, 'lg')}) and (max-width: #{map-get($grid-breakpoints, 'xl') - 1})',
-    'xl': '(min-width: #{map-get($grid-breakpoints, 'xl')})',
+    'xl': '(min-width: #{map-get($grid-breakpoints, 'xl')}) and (max-width: #{map-get($grid-breakpoints, 'xxl') - 1})',
+    'xxl': '(min-width: #{map-get($grid-breakpoints, 'xxl')})',
     'sm-and-down': '(max-width: #{map-get($grid-breakpoints, 'md') - 1})',
     'sm-and-up': '(min-width: #{map-get($grid-breakpoints, 'sm')})',
     'md-and-down': '(max-width: #{map-get($grid-breakpoints, 'lg') - 1})',
     'md-and-up': '(min-width: #{map-get($grid-breakpoints, 'md')})',
     'lg-and-down': '(max-width: #{map-get($grid-breakpoints, 'xl') - 1})',
     'lg-and-up': '(min-width: #{map-get($grid-breakpoints, 'lg')})',
+    'xl-and-down': '(max-width: #{map-get($grid-breakpoints, 'xxl') - 1})',
+    'xl-and-up': '(min-width: #{map-get($grid-breakpoints, 'xl')})',
   ),
   $display-breakpoints
 );

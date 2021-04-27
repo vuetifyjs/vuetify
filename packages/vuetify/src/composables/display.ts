@@ -8,7 +8,7 @@ import { IN_BROWSER, SUPPORTS_INTERSECTION, SUPPORTS_TOUCH } from '@/util/global
 // Types
 import type { InjectionKey, ToRefs } from 'vue'
 
-export type DisplayBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type DisplayBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 
 export interface DisplayThresholds {
   xs: number
@@ -16,6 +16,7 @@ export interface DisplayThresholds {
   md: number
   lg: number
   xl: number
+  xxl: number
 }
 
 export interface DisplayOptions {
@@ -51,12 +52,15 @@ export interface DisplayInstance {
   md: boolean
   lg: boolean
   xl: boolean
+  xxl: boolean
   smAndDown: boolean
   smAndUp: boolean
   mdAndDown: boolean
   mdAndUp: boolean
   lgAndDown: boolean
   lgAndUp: boolean
+  xlAndDown: boolean
+  xlAndUp: boolean
   name: DisplayBreakpoint
   height: number
   width: number
@@ -76,6 +80,7 @@ const defaultDisplayOptions: DisplayOptions = {
     md: 960,
     lg: 1280,
     xl: 1920,
+    xxl: 2560,
   },
 }
 
@@ -156,13 +161,15 @@ export function createDisplay (options?: DisplayOptions): ToRefs<DisplayInstance
     const sm = width.value < thresholds.md && !xs
     const md = width.value < thresholds.lg && !(sm || xs)
     const lg = width.value < thresholds.xl && !(md || sm || xs)
-    const xl = width.value >= thresholds.xl
+    const xl = width.value < thresholds.xxl && !(lg || md || sm || xs)
+    const xxl = width.value >= thresholds.xxl
     const name =
       xs ? 'xs'
       : sm ? 'sm'
       : md ? 'md'
       : lg ? 'lg'
-      : 'xl'
+      : xl ? 'xl'
+      : 'xxl'
     const breakpointValue = typeof mobileBreakpoint === 'number' ? mobileBreakpoint : thresholds[mobileBreakpoint]
     const mobile = !platform.ssr
       ? width.value < breakpointValue
@@ -173,12 +180,15 @@ export function createDisplay (options?: DisplayOptions): ToRefs<DisplayInstance
     state.md = md
     state.lg = lg
     state.xl = xl
-    state.smAndDown = !(md || lg || xl)
+    state.xxl = xxl
+    state.smAndDown = !(md || lg || xl || xxl)
     state.smAndUp = !xs
-    state.mdAndDown = !(lg || xl)
+    state.mdAndDown = !(lg || xl || xxl)
     state.mdAndUp = !(xs || sm)
-    state.lgAndDown = !xl
+    state.lgAndDown = !(xl || xxl)
     state.lgAndUp = !(xs || sm || md)
+    state.xlAndDown = !xxl
+    state.xlAndUp = !(xs || sm || md || lg)
     state.name = name
     state.height = height.value
     state.width = width.value

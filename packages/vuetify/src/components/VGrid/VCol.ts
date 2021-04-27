@@ -11,7 +11,7 @@ import { makeProps } from '@/util'
 // Types
 import type { Prop } from 'vue'
 
-const breakpoints = ['sm', 'md', 'lg', 'xl'] as const // no xs
+const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
 
 const breakpointProps = (() => {
   return breakpoints.reduce((props, val) => {

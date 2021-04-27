@@ -10,12 +10,15 @@ const breakpoints = [
   'md',
   'lg',
   'xl',
+  'xxl',
   'smAndDown',
   'smAndUp',
   'mdAndDown',
   'mdAndUp',
   'lgAndDown',
   'lgAndUp',
+  'xlAndDown',
+  'xlAndUp',
 ] as const
 
 describe('display', () => {
@@ -32,6 +35,7 @@ describe('display', () => {
         'smAndDown',
         'mdAndDown',
         'lgAndDown',
+        'xlAndDown',
       ],
     ],
     [
@@ -46,6 +50,7 @@ describe('display', () => {
         'smAndDown',
         'mdAndDown',
         'lgAndDown',
+        'xlAndDown',
       ],
     ],
     [
@@ -61,6 +66,7 @@ describe('display', () => {
         'smAndUp',
         'mdAndDown',
         'lgAndDown',
+        'xlAndDown',
       ],
     ],
     [
@@ -75,6 +81,7 @@ describe('display', () => {
         'smAndDown',
         'mdAndDown',
         'lgAndDown',
+        'xlAndDown',
       ],
     ],
     [
@@ -90,6 +97,7 @@ describe('display', () => {
         'smAndUp',
         'mdAndDown',
         'lgAndDown',
+        'xlAndDown',
       ],
     ],
     [
@@ -105,6 +113,7 @@ describe('display', () => {
         'smAndUp',
         'mdAndDown',
         'lgAndDown',
+        'xlAndDown',
       ],
     ],
     [
@@ -120,6 +129,7 @@ describe('display', () => {
         'mdAndDown',
         'mdAndUp',
         'lgAndDown',
+        'xlAndDown',
       ],
     ],
     [
@@ -135,6 +145,7 @@ describe('display', () => {
         'mdAndDown',
         'mdAndUp',
         'lgAndDown',
+        'xlAndDown',
       ],
     ],
     [
@@ -150,6 +161,7 @@ describe('display', () => {
         'mdAndUp',
         'lgAndDown',
         'lgAndUp',
+        'xlAndDown',
       ],
     ],
     [
@@ -165,6 +177,7 @@ describe('display', () => {
         'mdAndDown',
         'mdAndUp',
         'lgAndDown',
+        'xlAndDown',
       ],
     ],
     [
@@ -180,6 +193,7 @@ describe('display', () => {
         'mdAndUp',
         'lgAndDown',
         'lgAndUp',
+        'xlAndDown',
       ],
     ],
     [
@@ -195,6 +209,7 @@ describe('display', () => {
         'mdAndDown',
         'mdAndUp',
         'lgAndDown',
+        'xlAndDown',
       ],
     ],
     [
@@ -209,6 +224,8 @@ describe('display', () => {
         'smAndUp',
         'mdAndUp',
         'lgAndUp',
+        'xlAndDown',
+        'xlAndUp',
       ],
     ],
     [
@@ -224,6 +241,7 @@ describe('display', () => {
         'mdAndUp',
         'lgAndDown',
         'lgAndUp',
+        'xlAndDown',
       ],
     ],
     [
@@ -231,13 +249,14 @@ describe('display', () => {
         description: 'WQHD (landscape)',
         width: 2560,
         height: 1440,
-        name: 'xl',
+        name: 'xxl',
       },
       [
-        'xl',
+        'xxl',
         'smAndUp',
         'mdAndUp',
         'lgAndUp',
+        'xlAndUp',
       ],
     ],
   ])('should calculate breakpoint for %s', async (options, expected) => {
@@ -245,11 +264,12 @@ describe('display', () => {
 
     const display = createDisplay()
 
-    for (const breakpoint of breakpoints) {
-      const expectedValue = expected.includes(breakpoint)
+    const matched = breakpoints.reduce<(typeof breakpoints[number])[]>((acc, breakpoint) => {
+      if (display[breakpoint].value) acc.push(breakpoint)
+      return acc
+    }, [])
 
-      expect(display[breakpoint].value).toBe(expectedValue)
-    }
+    expect(matched).toEqual(expected)
   })
 
   it('should override default thresholds', async () => {
