@@ -8,24 +8,23 @@ import { IN_BROWSER, SUPPORTS_INTERSECTION, SUPPORTS_TOUCH } from '@/util/global
 // Types
 import type { InjectionKey, ToRefs } from 'vue'
 
-export type DisplayBreakpoint = keyof DisplayThresholds
+export type DisplayBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 export interface DisplayThresholds {
   xs: number
   sm: number
   md: number
   lg: number
+  xl: number
 }
 
 export interface DisplayOptions {
   mobileBreakpoint?: number | DisplayBreakpoint
-  scrollbarWidth?: number
   thresholds?: Partial<DisplayThresholds>
 }
 
 export interface InternalDisplayOptions {
   mobileBreakpoint: number | DisplayBreakpoint
-  scrollbarWidth: number
   thresholds: DisplayThresholds
 }
 
@@ -52,10 +51,10 @@ export interface DisplayInstance {
   md: boolean
   lg: boolean
   xl: boolean
-  mdAndDown: boolean
-  mdAndUp: boolean
   smAndDown: boolean
   smAndUp: boolean
+  mdAndDown: boolean
+  mdAndUp: boolean
   lgAndDown: boolean
   lgAndUp: boolean
   name: DisplayBreakpoint
@@ -64,7 +63,6 @@ export interface DisplayInstance {
   mobile: boolean
   mobileBreakpoint: number | DisplayBreakpoint
   platform: DisplayPlatform
-  scrollbarWidth: number
   thresholds: DisplayThresholds
 }
 
@@ -72,7 +70,6 @@ export const VuetifyDisplaySymbol: InjectionKey<ToRefs<DisplayInstance>> = Symbo
 
 const defaultDisplayOptions: DisplayOptions = {
   mobileBreakpoint: 'md',
-  scrollbarWidth: 16,
   thresholds: {
     xs: 600,
     sm: 960,
@@ -140,7 +137,7 @@ function getPlatform (): DisplayPlatform {
 }
 
 export function createDisplay (options?: DisplayOptions): ToRefs<DisplayInstance> {
-  const { thresholds, mobileBreakpoint, scrollbarWidth } = parseDisplayOptions(options)
+  const { thresholds, mobileBreakpoint } = parseDisplayOptions(options)
 
   const height = ref(getClientHeight())
   const platform = getPlatform()
@@ -156,13 +153,18 @@ export function createDisplay (options?: DisplayOptions): ToRefs<DisplayInstance
   watchEffect(() => {
     const xs = width.value < thresholds.xs
     const sm = width.value < thresholds.sm && !xs
-    const md = width.value < (thresholds.md - scrollbarWidth) && !(sm || xs)
-    const lg = width.value < (thresholds.lg - scrollbarWidth) && !(md || sm || xs)
-    const xl = width.value >= (thresholds.lg - scrollbarWidth)
-    const name = xs ? 'xs' : sm ? 'sm' : md ? 'md' : lg ? 'lg' : 'xl' as DisplayBreakpoint
+    const md = width.value < thresholds.md && !(sm || xs)
+    const lg = width.value < thresholds.lg && !(md || sm || xs)
+    const xl = width.value >= thresholds.lg
+    const name =
+      xs ? 'xs'
+      : sm ? 'sm'
+      : md ? 'md'
+      : lg ? 'lg'
+      : 'xl'
     const breakpointValue = typeof mobileBreakpoint === 'number' ? mobileBreakpoint : thresholds[mobileBreakpoint]
     const mobile = !platform.ssr
-      ? width.value < (breakpointValue - scrollbarWidth)
+      ? width.value < breakpointValue
       : platform.android || platform.ios || platform.opera
 
     state.xs = xs
@@ -182,7 +184,6 @@ export function createDisplay (options?: DisplayOptions): ToRefs<DisplayInstance
     state.mobile = mobile
     state.mobileBreakpoint = mobileBreakpoint
     state.platform = platform
-    state.scrollbarWidth = scrollbarWidth
     state.thresholds = thresholds
   })
 
