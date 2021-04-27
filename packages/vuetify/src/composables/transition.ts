@@ -2,11 +2,11 @@
 import { propsFactory } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, TransitionProps } from 'vue'
 
 export const makeTransitionProps = propsFactory({
   transition: {
-    type: [Boolean, String] as PropType<string | false>,
+    type: [Boolean, String, Object] as PropType<string | false | TransitionProps>,
     default: 'fade-transition',
     validator: val => val !== true,
   },

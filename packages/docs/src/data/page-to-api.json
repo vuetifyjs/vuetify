@@ -195,6 +195,7 @@
   "features/internationalization": ["internationalization"],
   "features/scrolling": ["$vuetify"],
   "features/theme": ["v-theme-provider"],
+  "features/display-and-platform": ["display"],
   "styles/transitions": [
     "v-fab-transition",
     "v-fade-transition",
