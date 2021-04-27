@@ -1,0 +1,25 @@
+{
+  "props": {
+    "xs": "This value indicates that the device width greater than the **xs** threshold value.",
+    "sm": "This value indicates that the device width is between the **xs** and **sm** threshold values.",
+    "md": "This value indicates that the device width is between the **sm** and **md** threshold values.",
+    "lg": "This value indicates that the device width is between the **md** and **lg** threshold values.",
+    "xl": "This value indicates that the device width is between the **lg** and **xl** threshold values.",
+    "xxl": "This value indicates that the device width is greater than the **xl** threshold value.",
+    "smAndDown": "This value indicates that the device width is less than the **sm** threshold value.",
+    "smAndUp": "This value indicates that the device width is greater than the **sm** threshold value.",
+    "mdAndDown": "This value indicates that the device width is less than the **md** threshold value.",
+    "mdAndUp": "This value indicates that the device width is greater than the **md** threshold value.",
+    "lgAndDown": "This value indicates that the device width is less than the **lg** threshold value.",
+    "lgAndUp": "This value indicates that the device width is greater than the **lg** threshold value.",
+    "xlAndDown": "This value indicates that the device width is less than the **xl** threshold value.",
+    "xlAndUp": "This value indicates that the device width is greater than the **xl** threshold value.",
+    "name": "The name key correlates to the currently active breakpoint; e.g. **xs**, **sm**, **md**, **lg**, **xl**, **xxl**.",
+    "height": "This value is the current window height.",
+    "width": "This value is the current window width.",
+    "mobile": "This value indicates whether the current display width is less than the defined [mobileBreakpoint](#mobile-breakpoint)",
+    "mobileBreakpoint": "This value indicates whether the current display width is less than the defined [mobileBreakpoint](#mobile-breakpoint)",
+    "platform": "This object contains information from the detected device's [userAgent](https://developer.mozilla.org/en-US/docs/Web/API/NavigatorID/userAgent) and whether it supports **touch**.",
+    "thresholds": "This object is used for device viewport calculations."
+  }
+}
