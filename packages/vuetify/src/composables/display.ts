@@ -111,18 +111,18 @@ function getPlatform (): DisplayPlatform {
     return Boolean(userAgent.match(regexp))
   }
 
-  const android = match(/android/)
-  const ios = match(/iphone|ipad|ipod/)
-  const cordova = match(/cordova/)
-  const electron = match(/electron/)
-  const chrome = match(/chrome/)
-  const edge = match(/edge/)
-  const firefox = match(/firefox/)
-  const opera = match(/opera/)
-  const win = match(/win/)
-  const mac = match(/mac/)
-  const linux = match(/linux/)
-  const ssr = match(/ssr/)
+  const android = match(/android/i)
+  const ios = match(/iphone|ipad|ipod/i)
+  const cordova = match(/cordova/i)
+  const electron = match(/electron/i)
+  const chrome = match(/chrome/i)
+  const edge = match(/edge/i)
+  const firefox = match(/firefox/i)
+  const opera = match(/opera/i)
+  const win = match(/win/i)
+  const mac = match(/mac/i)
+  const linux = match(/linux/i)
+  const ssr = match(/ssr/i)
 
   return {
     android,
