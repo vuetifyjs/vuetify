@@ -72,7 +72,7 @@ export interface DisplayInstance {
 export const VuetifyDisplaySymbol: InjectionKey<ToRefs<DisplayInstance>> = Symbol.for('vuetify:display')
 
 const defaultDisplayOptions: DisplayOptions = {
-  mobileBreakpoint: 'md',
+  mobileBreakpoint: 'lg',
   thresholds: {
     xs: 0,
     sm: 600,
