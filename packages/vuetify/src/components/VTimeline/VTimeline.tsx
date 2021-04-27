@@ -2,11 +2,19 @@
 import './VTimeline.sass'
 
 // Types
-import type { InjectionKey, Ref, Prop } from 'vue'
+import type { InjectionKey, Prop, Ref } from 'vue'
+
+// Composables
+import { makeTagProps } from '@/composables/tag'
+
+// Helpers
+import { computed, defineComponent, provide, ref } from 'vue'
+import { makeProps } from '@/util'
 
 export type TimelineDirection = 'vertical' | 'horizontal'
 export type TimelineSide = 'before' | 'after' | undefined
 export type TimelineDotAlignment = 'start' | 'end' | undefined
+export type TimelineTruncateLine = 'start' | 'end' | 'both' | undefined
 
 interface TimelineInstance {
   reverse: Ref<boolean>
@@ -14,14 +22,6 @@ interface TimelineInstance {
   register: (id: number, index?: number) => { isEven: Ref<boolean> }
   unregister: (id: number) => void
 }
-
-// Composables
-import { makeTagProps } from '@/composables/tag'
-import { makeElevationProps } from '@/composables/elevation'
-
-// Helpers
-import { computed, defineComponent, provide, ref } from 'vue'
-import { makeProps } from '@/util'
 
 export const VTimelineSymbol: InjectionKey<TimelineInstance> = Symbol.for('vuetify:timeline')
 
@@ -39,7 +39,10 @@ export default defineComponent({
       type: String,
       validator: (v: any) => v == null || ['after', 'before'].includes(v),
     } as Prop<TimelineSide>,
-    ...makeElevationProps(),
+    truncateLine: {
+      type: String,
+      validator: (v: any) => v == null || ['start', 'end', 'both'].includes(v),
+    } as Prop<TimelineDotAlignment>,
     ...makeTagProps(),
   }),
 
@@ -69,20 +72,32 @@ export default defineComponent({
       unregister,
     })
 
+    const truncateLineClasses = computed(() => {
+      const startClass = 'v-timeline--truncate-line-start'
+      const endClass = 'v-timeline--truncate-line-end'
+
+      switch (props.truncateLine) {
+        case 'start': return startClass
+        case 'end': return endClass
+        case 'both': return [startClass, endClass]
+        default: return null
+      }
+    })
+
     return () => (
       <props.tag
         class={[
           'v-timeline',
           `v-timeline--${props.direction}`,
           {
-            // Position has to be set as well, otherwise timeline will be misaligned
             'v-timeline--hide-opposite': !!props.singleSide,
             'v-timeline--reverse': props.reverse,
-          }
+          },
+          truncateLineClasses.value,
         ]}
       >
         {ctx.slots.default?.()}
       </props.tag>
     )
-  }
+  },
 })

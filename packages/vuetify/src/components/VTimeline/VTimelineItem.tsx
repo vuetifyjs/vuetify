@@ -100,8 +100,8 @@ export default defineComponent({
               >
                 <div
                   class={[
-                      'v-timeline-item__inner-dot',
-                      ...backgroundColorClasses.value,
+                    'v-timeline-item__inner-dot',
+                    ...backgroundColorClasses.value,
                   ]}
                   style={backgroundColorStyles.value}
                 >
@@ -123,5 +123,5 @@ export default defineComponent({
         </div>
       </props.tag>
     )
-  }
+  },
 })

@@ -172,3 +172,28 @@
   .v-timeline-item__inner-dot
     height: inherit
     width: inherit
+
+.v-timeline--truncate-line-start
+  .v-timeline-item:first-child
+    +vertical(true)
+      &:before
+        height: 50%
+        top: 50%
+
+    +horizontal(true)
+      &:before
+        width: 50%
+        +ltr
+          left: 50%
+        +rtl
+          right: 50%
+
+.v-timeline--truncate-line-end
+  .v-timeline-item:last-child
+    +vertical(true)
+      &:before
+        height: 50%
+
+    +horizontal(true)
+      &:before
+        width: 50%

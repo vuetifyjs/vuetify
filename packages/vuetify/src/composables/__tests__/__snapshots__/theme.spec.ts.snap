@@ -45,6 +45,8 @@ exports[`createTheme should create style element 1`] = `
       --v-kbd-background-color: 33, 37, 41;
       --v-kbd-color: 255, 255, 255;
       --v-code-background-color: 194, 194, 194;
+      --v-divider-color: 0, 0, 0;
+      --v-divider-opacity: 0.12;
     }
     .v-theme--dark {
       --v-theme-background: 18,18,18;
@@ -85,6 +87,8 @@ exports[`createTheme should create style element 1`] = `
       --v-kbd-background-color: 33, 37, 41;
       --v-kbd-color: 255, 255, 255;
       --v-code-background-color: 183, 183, 183;
+      --v-divider-color: 255, 255, 255;
+      --v-divider-opacity: 0.12;
     }
     .bg-background {
       --v-theme-overlay-multiplier: var(--v-theme-background-overlay-multiplier);
