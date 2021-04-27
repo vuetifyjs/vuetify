@@ -24,6 +24,7 @@
       "display-and-platform",
       "global-config",
       "icon-fonts",
+      "internationalization",
       "theme"
     ]
   },
