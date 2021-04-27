@@ -8,8 +8,8 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { useDisplay } from '@/composables/display'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTheme } from '@/composables/theme'
 
 // Utilities
@@ -48,10 +48,10 @@ export default defineComponent({
   }),
 
   setup (props, { slots }) {
-    const { mobile } = useDisplay()
     const { themeClasses } = useTheme()
     const { borderClasses } = useBorder(props, 'v-navigation-drawer')
     const { elevationClasses } = useElevation(props)
+    const { mobile } = useDisplay()
     const { positionClasses, positionStyles } = usePosition(props, 'v-navigation-drawer')
     const { roundedClasses } = useRounded(props, 'v-navigation-drawer')
 
