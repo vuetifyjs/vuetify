@@ -76,6 +76,31 @@ const addComponentApiDescriptions = (componentName, api, locales) => {
   return api
 }
 
+const addComposableApiDescriptions = (componentName, api, locales) => {
+  for (const localeName of locales) {
+    const sources = [
+      loadLocale(componentName, localeName),
+      loadLocale('generic', localeName),
+    ]
+
+    for (const category of ['props']) {
+      for (const item of api[category]) {
+        const name = category === 'props' ? camelize(item.name) : item.name
+        const description = sources.reduce((str, source) => {
+          if (str) return str
+          return source[category] && source[category][name]
+        }, null)
+
+        if (!item.description) item.description = {}
+
+        item.description[localeName] = description || ''
+      }
+    }
+  }
+
+  return api
+}
+
 const addDirectiveApiDescriptions = (directiveName, api, locales) => {
   if (api.argument.length) {
     for (const localeName of locales) {
@@ -145,6 +170,14 @@ const getComponentApi = (componentName, locales) => {
   return addComponentApiDescriptions(componentName, api, locales)
 }
 
+const getComposableApi = (composableName, locales) => {
+  // if (!composable) throw new Error(`Could not find composable: ${composableName}`)
+
+  const api = deepmerge(loadMap(composableName, 'composables'), { name: composableName, composable: true })
+
+  return addComposableApiDescriptions(composableName, api, locales)
+}
+
 const getDirectiveApi = (directiveName, locales) => {
   // if (!directive) throw new Error(`Could not find directive: ${directiveName}`)
 
@@ -172,11 +205,13 @@ const getInternationalizationApi = locales => {
 const DIRECTIVES = ['v-mutate', 'v-intersect', 'v-ripple', 'v-resize', 'v-scroll', 'v-touch', 'v-click-outside']
 */
 
+const COMPOSABLES = ['display']
 const DIRECTIVES = ['v-intersect', 'v-ripple', 'v-resize', 'v-scroll', 'v-touch']
 
 const getApi = (name, locales) => {
   // if (name === '$vuetify') return getVuetifyApi(locales)
   // if (name === 'internationalization') return getInternationalizationApi(locales)
+  if (COMPOSABLES.includes(name)) return getComposableApi(name, locales)
   if (DIRECTIVES.includes(name)) return getDirectiveApi(name, locales)
   else return getComponentApi(capitalize(camelize(name)), locales)
 }
@@ -194,6 +229,16 @@ const getComponentsApi = locales => {
   return components
 }
 
+const getComposablesApi = locales => {
+  const composables = []
+
+  for (const composableName of COMPOSABLES) {
+    composables.push(getComposableApi(composableName, locales))
+  }
+
+  return composables
+}
+
 const getDirectivesApi = locales => {
   const directives = []
 
@@ -209,6 +254,7 @@ const getCompleteApi = locales => {
     // getVuetifyApi(locales),
     // getInternationalizationApi(locales),
     ...getComponentsApi(locales),
+    ...getComposablesApi(locales),
     ...getDirectivesApi(locales),
   ].sort((a, b) => a.name.localeCompare(b.name))
 }
@@ -222,6 +268,7 @@ module.exports = {
   getApi,
   getCompleteApi,
   getComponentsApi,
+  getComposablesApi,
   getDirectivesApi,
   getHeaderLocale,
 }

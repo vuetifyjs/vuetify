@@ -1,11 +1,13 @@
 import { inject } from 'vue'
+import { createDisplay, VuetifyDisplaySymbol } from './composables/display'
+import { createTheme, VuetifyThemeSymbol } from './composables/theme'
 import { mergeDeep } from '@/util'
-import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
 import { defaultSets, VuetifyIconSymbol } from '@/composables/icons'
 import { aliases, mdi } from '@/iconsets/mdi'
 
 // Types
 import type { App, InjectionKey } from 'vue'
+import type { DisplayOptions } from '@/composables/display'
 import type { ThemeOptions } from '@/composables/theme'
 import type { IconOptions } from '@/composables/icons'
 
@@ -22,6 +24,7 @@ export interface VuetifyOptions {
   components?: Record<string, any>
   directives?: Record<string, any>
   defaults?: Partial<VuetifyComponentDefaults>
+  display?: DisplayOptions
   theme?: ThemeOptions
   icons?: IconOptions
 }
@@ -67,6 +70,7 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
     }
 
     app.provide(VuetifySymbol, vuetify)
+    app.provide(VuetifyDisplaySymbol, createDisplay(options.display))
     app.provide(VuetifyThemeSymbol, createTheme(options.theme))
     app.provide(VuetifyIconSymbol, mergeDeep({
       defaultSet: 'mdi',
