@@ -10,17 +10,12 @@ const breakpoints = [
   'md',
   'lg',
   'xl',
-  'xsOnly',
-  'smOnly',
   'smAndDown',
   'smAndUp',
-  'mdOnly',
   'mdAndDown',
   'mdAndUp',
-  'lgOnly',
   'lgAndDown',
   'lgAndUp',
-  'xlOnly',
 ] as const
 
 describe('display.ts', () => {
@@ -34,7 +29,6 @@ describe('display.ts', () => {
       },
       [
         'xs',
-        'xsOnly',
         'smAndDown',
         'mdAndDown',
         'lgAndDown',
@@ -49,7 +43,6 @@ describe('display.ts', () => {
       },
       [
         'xs',
-        'xsOnly',
         'smAndDown',
         'mdAndDown',
         'lgAndDown',
@@ -64,7 +57,6 @@ describe('display.ts', () => {
       },
       [
         'sm',
-        'smOnly',
         'smAndDown',
         'smAndUp',
         'mdAndDown',
@@ -80,7 +72,6 @@ describe('display.ts', () => {
       },
       [
         'xs',
-        'xsOnly',
         'smAndDown',
         'mdAndDown',
         'lgAndDown',
@@ -95,7 +86,6 @@ describe('display.ts', () => {
       },
       [
         'sm',
-        'smOnly',
         'smAndDown',
         'smAndUp',
         'mdAndDown',
@@ -111,7 +101,6 @@ describe('display.ts', () => {
       },
       [
         'sm',
-        'smOnly',
         'smAndDown',
         'smAndUp',
         'mdAndDown',
@@ -127,7 +116,6 @@ describe('display.ts', () => {
       },
       [
         'md',
-        'mdOnly',
         'smAndUp',
         'mdAndDown',
         'mdAndUp',
@@ -143,7 +131,6 @@ describe('display.ts', () => {
       },
       [
         'md',
-        'mdOnly',
         'smAndUp',
         'mdAndDown',
         'mdAndUp',
@@ -159,7 +146,6 @@ describe('display.ts', () => {
       },
       [
         'lg',
-        'lgOnly',
         'smAndUp',
         'mdAndUp',
         'lgAndDown',
@@ -175,7 +161,6 @@ describe('display.ts', () => {
       },
       [
         'md',
-        'mdOnly',
         'smAndUp',
         'mdAndDown',
         'mdAndUp',
@@ -191,7 +176,6 @@ describe('display.ts', () => {
       },
       [
         'lg',
-        'lgOnly',
         'smAndUp',
         'mdAndUp',
         'lgAndDown',
@@ -207,7 +191,6 @@ describe('display.ts', () => {
       },
       [
         'md',
-        'mdOnly',
         'smAndUp',
         'mdAndDown',
         'mdAndUp',
@@ -223,7 +206,6 @@ describe('display.ts', () => {
       },
       [
         'xl',
-        'xlOnly',
         'smAndUp',
         'mdAndUp',
         'lgAndUp',
@@ -238,7 +220,6 @@ describe('display.ts', () => {
       },
       [
         'lg',
-        'lgOnly',
         'smAndUp',
         'mdAndUp',
         'lgAndDown',
@@ -254,7 +235,6 @@ describe('display.ts', () => {
       },
       [
         'xl',
-        'xlOnly',
         'smAndUp',
         'mdAndUp',
         'lgAndUp',
