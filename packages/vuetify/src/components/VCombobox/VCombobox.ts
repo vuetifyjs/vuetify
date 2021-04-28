@@ -217,10 +217,10 @@ export default VAutocomplete.extend({
 
       // If the user is not searching
       // and no menu item is selected
+      // or if the search is empty
       // do nothing
-      if (menuIndex < 0 &&
-        !this.searchIsDirty
-      ) return
+      if ((menuIndex < 0 && !this.searchIsDirty) ||
+          !this.internalSearch) return
 
       if (this.editingIndex > -1) {
         return this.updateEditing()
@@ -253,6 +253,11 @@ export default VAutocomplete.extend({
         event.preventDefault()
         VSelect.options.methods.selectItem.call(this, pastedItemText as any)
       }
+    },
+    clearableCallback () {
+      this.editingIndex = -1
+
+      VAutocomplete.options.methods.clearableCallback.call(this)
     },
   },
 })

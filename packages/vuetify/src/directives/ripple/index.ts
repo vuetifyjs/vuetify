@@ -264,10 +264,16 @@ function keyboardRippleHide (e: KeyboardEvent) {
   rippleHide(e)
 }
 
+function focusRippleHide (e: FocusEvent) {
+  if (keyboardRipple) {
+    keyboardRipple = false
+    rippleHide(e)
+  }
+}
+
 function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnabled: boolean) {
   const { value, modifiers } = binding
   const enabled = isRippleEnabled(value)
-
   if (!enabled) {
     ripples.hide(el)
   }
@@ -293,6 +299,8 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
     el.addEventListener('keydown', keyboardRippleShow)
     el.addEventListener('keyup', keyboardRippleHide)
 
+    el.addEventListener('blur', focusRippleHide)
+
     // Anchor tags can be dragged, causes other hides to fail - #1537
     el.addEventListener('dragstart', rippleHide, { passive: true })
   } else if (!enabled && wasEnabled) {
@@ -311,6 +319,7 @@ function removeListeners (el: HTMLElement) {
   el.removeEventListener('keydown', keyboardRippleShow)
   el.removeEventListener('keyup', keyboardRippleHide)
   el.removeEventListener('dragstart', rippleHide)
+  el.removeEventListener('blur', focusRippleHide)
 }
 
 function mounted (el: HTMLElement, binding: DirectiveBinding) {

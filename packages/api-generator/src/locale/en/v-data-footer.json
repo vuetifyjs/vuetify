@@ -16,7 +16,7 @@
   },
   "slots": {
     "prepend": "Adds content to the empty space in the footer",
-    "pageText": "Defines content for the items-per-page text"
+    "page-text": "Defines content for the items-per-page text"
   },
   "events": {
     "update:options": "The `.sync` event for `options` prop"

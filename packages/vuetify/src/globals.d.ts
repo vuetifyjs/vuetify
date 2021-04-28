@@ -9,7 +9,11 @@ declare global {
   }
 
   interface Element {
-    _clickOutside?: EventListenerOrEventListenerObject
+    _clickOutside?: {
+      lastMousedownWasOutside: boolean
+      onClick: EventListener
+      onMousedown: EventListener
+    }
     _onResize?: {
       handler: () => void
       options: AddEventListenerOptions

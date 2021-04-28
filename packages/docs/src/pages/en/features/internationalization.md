@@ -215,6 +215,6 @@ Currently Vuetify provides translations in the following languages:
 - **uk** - Ukrainian (Українська)
 - **vi** - Vietnamese (Tiếng Việt)
 - **zhHans** - Chinese (中文)
-- **zhHant** - Chinese (中文)
+- **zhHant** - Chinese (正體中文)
 
 <backmatter />

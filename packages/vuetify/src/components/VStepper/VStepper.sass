@@ -58,11 +58,12 @@
       +rtl()
         border-right: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
 
++sheet(v-stepper, $stepper-elevation, $stepper-border-radius, $stepper-shaped-border-radius)
+
 .v-stepper
   border-radius: $stepper-border-radius
   overflow: hidden
   position: relative
-  +elevation($stepper-elevation)
 
   &__header
     height: $stepper-header-height
@@ -169,6 +170,9 @@
 
     > .v-btn
       margin: $stepper-content-btn-margin
+
+  &--flat
+    +elevation(0, true)
 
   &--is-booted
     .v-stepper__content, .v-stepper__wrapper

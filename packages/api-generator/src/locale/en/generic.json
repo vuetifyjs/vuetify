@@ -5,7 +5,7 @@
     "height": "Sets the height for the component",
     "falseValue": "Sets value for falsy state",
     "fullWidth": "Forces 100% width",
-    "persistent": "Clicking outside will not dismiss the dialog",
+    "persistent": "Clicking outside or pressing **esc** key will not dismiss the dialog",
     "size": "Sets the height and width of the component.",
     "textColor": "Applies a specified color to the control text",
     "trueValue": "Sets value for truthy state",

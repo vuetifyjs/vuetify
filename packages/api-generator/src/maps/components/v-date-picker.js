@@ -20,6 +20,10 @@ module.exports = {
         value: 'string',
       },
       {
+        name: 'update:active-picker',
+        value: 'string',
+      },
+      {
         name: '<domevent>:date',
         value: 'string',
       },

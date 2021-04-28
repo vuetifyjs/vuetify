@@ -21,6 +21,7 @@ declare module 'vuetify/lib' {
   const VApp: VueConstructor
   const VAppBar: VueConstructor
   const VAppBarNavIcon: VueConstructor
+  const VAppBarTitle: VueConstructor
   const VAlert: VueConstructor
   const VAutocomplete: VueConstructor
   const VAvatar: VueConstructor
@@ -193,6 +194,7 @@ declare module 'vuetify/lib' {
     VApp,
     VAppBar,
     VAppBarNavIcon,
+    VAppBarTitle,
     VAlert,
     VAutocomplete,
     VAvatar,

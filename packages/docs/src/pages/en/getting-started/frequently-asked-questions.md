@@ -60,38 +60,7 @@ Have a question that belongs here? Tell us in our [Discord Community](https://co
 
 - **My application won't compile due to sass / scss errors.**{ #sass-compile-error }
 
-  Ensure that you are using the proper options object in accordance with your sass-loader version.
-
-```js
-// webpack.config.js
-
-module.exports = {
-  rules: [
-    {
-      test: /\.s(c|a)ss$/,
-      use: [
-        'vue-style-loader',
-        'css-loader',
-        {
-          loader: 'sass-loader',
-          // Requires sass-loader@^7.0.0
-          options: {
-            implementation: require('sass'),
-            indentedSyntax: true // optional
-          },
-          // Requires sass-loader@^8.0.0
-          options: {
-            implementation: require('sass'),
-            sassOptions: {
-              indentedSyntax: true // optional
-            },
-          },
-        },
-      ],
-    },
-  ],
-}
-```
+  Ensure that you are have webpack configured properly using the proper options object in accordance with your sass-loader version. See the [webpack install](/getting-started/installation/#webpack-install) section for details.
 
 <br>
 

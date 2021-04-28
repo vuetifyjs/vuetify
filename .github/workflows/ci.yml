@@ -106,6 +106,7 @@ jobs:
           download_language: eo
           localization_branch_name: ${{ env.LOCAL_BRANCH }}
           crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+          debug_mode: true
 
       - name: Download ja
         uses: crowdin/github-action@1.0.19
@@ -118,6 +119,7 @@ jobs:
           download_language: ja
           localization_branch_name: ${{ env.LOCAL_BRANCH }}
           crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+          debug_mode: true
 
       - name: Download zh-CN
         uses: crowdin/github-action@1.0.19
@@ -130,6 +132,7 @@ jobs:
           download_language: zh-CN
           localization_branch_name: ${{ env.LOCAL_BRANCH }}
           crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+          debug_mode: true
 
       - run: yarn run build:modified
         working-directory: ./packages/docs

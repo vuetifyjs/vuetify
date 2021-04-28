@@ -95,7 +95,12 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
       </td>
       <td>
         <a href="http://vuemastery.com/?ref=vuetify-github">
-          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
+          <img height="38px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
+        </a>
+      </td>
+      <td>
+        <a href="http://crossword-solver.io/">
+          <img height="50px" src="https://cdn.cosmicjs.com/098aa4e0-9749-11eb-bf6a-1ffd0f06b0f7-crossword-solver-logo-light.svg">
         </a>
       </td>
     </tr>
@@ -127,12 +132,22 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
           <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/hype-logo-light.svg">
         </a>
       </td>
+      <td>
+        <a href="https://www.cosmicjs.com/?ref=vuetify-github">
+          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/cosmic-logo-light.svg">
+        </a>
+      </td>
     </tr>
     <tr></tr>
     <tr>
       <td>
         <a href="https://www.cosmicjs.com/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/cosmic-logo-light.svg">
+          <img height="30px" src="https://cdn.cosmicjs.com/ae13a830-974a-11eb-bf6a-1ffd0f06b0f7-papersowl-logo-light.png">
+        </a>
+      </td>
+      <td>
+        <a href="https://www.elfo.net/?ref=vuetify-github">
+          <img height="26px" src="https://cdn.cosmicjs.com/9e2dd530-974a-11eb-bf6a-1ffd0f06b0f7-elfo-logo-light.png">
         </a>
       </td>
       <td>
@@ -141,13 +156,41 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
         </a>
       </td>
       <td>
-        <a href="https://www.elfo.net/?ref=vuetify-github">
+        <a href="https://writersperhour.com/buy-essay">
           <img height="51px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/writers-per-hour.png">
         </a>
       </td>
       <td>
         <a href="https://www.ionos.com/partner?utm_source=Vue&utm_medium=paid-social&utm_campaign=ION-USA-VUE-ABP-AWR-AgencyBusiness&utm_term=&utm_content=ION-USA-VUE-ABP-AWR-AgencyBusiness&ac=OM.US.USo54K418913T7073a"">
           <img height="35px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/ionos-light-sm.png">
+        </a>
+      </td>
+    </tr>
+    <tr></tr>
+    <tr>
+      <td>
+        <a href="https://www.topratedcasinosites.co.uk/">
+          <img height="30px" src="https://cdn.cosmicjs.com/d5a76910-9748-11eb-bf6a-1ffd0f06b0f7-toprated-light.png">
+        </a>
+      </td>
+      <td>
+        <a href="https://aussiecasinohex.com/">
+          <img height="38px" src="https://cdn.cosmicjs.com/5e118ca0-9748-11eb-bf6a-1ffd0f06b0f7-hex-light.png">
+        </a>
+      </td>
+      <td>
+        <a href="https://www.sumcumo.com/">
+          <img height="26px" src="https://cdn.cosmicjs.com/cd0aa3a0-974b-11eb-bf6a-1ffd0f06b0f7-sun-light.png">
+        </a>
+      </td>
+      <td>
+        <a href="https://www.leoboost.com/">
+          <img height="26px" src="https://cdn.cosmicjs.com/bfb5d890-9747-11eb-bf6a-1ffd0f06b0f7-leo-light.png">
+        </a>
+      </td>
+      <td>
+        <a href="https://goread.io/buy-instagram-followers">
+          <img height="26px" src="https://cdn.cosmicjs.com/3ab46070-9711-11eb-b593-972a7dbc1054-goread-light.png">
         </a>
       </td>
     </tr>
