@@ -13,10 +13,12 @@ import { useRefs } from '@/composables/refs'
 
 // Utilities
 import { computed, defineComponent, nextTick, ref } from 'vue'
-import { createRange, keyCodes, makeProps } from '@/util'
+import { clamp, createRange, keyCodes, makeProps } from '@/util'
 
 // Types
 import type { ComponentPublicInstance, Prop } from 'vue'
+import { useRtl } from '@/composables/rtl'
+import { useLocale } from '@/composables/locale'
 
 export default defineComponent({
   name: 'VRating',
@@ -24,7 +26,7 @@ export default defineComponent({
   props: makeProps({
     ariaLabel: {
       type: String,
-      default: '$vuetify.rating.ariaLabel',
+      default: '$vuetify.rating.ariaLabel.icon',
     },
     backgroundColor: {
       type: String,
@@ -75,101 +77,103 @@ export default defineComponent({
   }),
 
   setup (props, { slots }) {
+    const { t } = useLocale()
+    const { isRtl } = useRtl()
     const rating = useProxiedModel(props, 'modelValue')
-    const length = computed(() => Number(props.length))
+    const { refs, updateRef } = useRefs<ComponentPublicInstance>()
+
+    const range = computed(() => createRange(Number(props.length)))
     const hoverIndex = ref(-1)
 
-    const icons = computed(() => {
-      function isHalfEvent (e: MouseEvent): boolean {
-        const rect = (e?.target as HTMLElement).getBoundingClientRect()
-        const isHalf = !!rect && (e.pageX - rect.left) < rect.width / 2
+    function isHalfEvent (e: MouseEvent): boolean {
+      const rect = (e?.target as HTMLElement).getBoundingClientRect()
+      const isHalf = !!rect && (e.pageX - rect.left) < rect.width / 2
 
-        // TODO: handle rtl
-        const isRtl = false
-        // return isRtl ? !isHalf : isHalf
-        return isRtl ? !isHalf : isHalf
+      return isRtl ? !isHalf : isHalf
+    }
+
+    function genHoverIndex (e: MouseEvent, i: number) {
+      const isHalf = props.halfIncrements && isHalfEvent(e)
+
+      return i + (isHalf ? 0.5 : 1)
+    }
+
+    const itemState = computed(() => range.value.map(index => {
+      const isHovering = props.hover && hoverIndex.value > -1
+
+      const isFilled = Math.floor(rating.value) > index
+      const isHovered = Math.floor(hoverIndex.value) > index
+      const isHalfFilled = !isFilled && (rating.value - index) % 1 > 0
+      const isHalfHovered = !isHovered && (hoverIndex.value - index) % 1 > 0
+
+      const isFullIcon = isHovering ? isHovered : isFilled
+      const isHalfIcon = isHovering ? isHalfHovered : isHalfFilled
+
+      const icon = isFullIcon ? props.fullIcon
+        : isHalfIcon ? props.halfIcon
+        : props.emptyIcon
+
+      const color = isFilled || isHalfFilled || isHovered ? props.color : props.backgroundColor
+
+      return { isFilled, isHovered, isHalfFilled, isHalfHovered, icon, color }
+    }))
+
+    const eventState = computed(() => range.value.map(index => {
+      function onMouseenter (e: MouseEvent): void {
+        hoverIndex.value = genHoverIndex(e, index)
       }
 
-      function genHoverIndex (e: MouseEvent, i: number) {
-        const isHalf = props.halfIncrements && isHalfEvent(e)
-
-        return i + (isHalf ? 0.5 : 1)
+      function onMouseleave (): void {
+        hoverIndex.value = -1
       }
 
-      function createSlotProps (index: number) {
-        const isFilled = Math.floor(rating.value) > index
-        const isHovered = Math.floor(hoverIndex.value) > index
-        const isHovering = props.hover && hoverIndex.value > -1
-        const isFullIcon = isHovering ? isHovered : isFilled
-        const isHalfFilled = !isFilled && (rating.value - index) % 1 > 0
-        const isHalfHovered = !isHovered && (hoverIndex.value - index) % 1 > 0
-        const isHalfIcon = isHovering ? isHalfHovered : isHalfFilled
+      function onClick (e: MouseEvent) {
+        if (props.readonly) return
 
-        const icon = isFullIcon ? props.fullIcon
-          : isHalfIcon ? props.halfIcon
-          : props.emptyIcon
-
-        function onMouseenter (e: MouseEvent): void {
-          hoverIndex.value = genHoverIndex(e, index)
-        }
-
-        function onMouseleave (): void {
-          hoverIndex.value = -1
-        }
-
-        return {
-          onClick: (e: MouseEvent) => {
-            if (props.readonly) return
-
-            // If detail === 0 then click is triggered by keyboard
-            if (e.detail === 0) {
-              const currentIndex = Math.floor(rating.value)
-              if (rating.value - 1 === index && props.clearable) {
-                rating.value = 0
-              } else if (currentIndex !== index || !props.halfIncrements) {
-                rating.value = index + (props.halfIncrements ? 0.5 : 1)
-              } else {
-                rating.value += 0.5
-              }
-            } else {
-              const newValue = genHoverIndex(e, index)
-              if (props.clearable && rating.value === newValue) {
-                rating.value = 0
-              } else {
-                rating.value = newValue
-              }
-            }
-          },
-          onMouseenter: props.hover ? onMouseenter : undefined,
-          onMouseleave: props.hover ? onMouseleave : undefined,
-          onMousemove: props.hover && props.halfIncrements ? onMouseenter : undefined,
-          // TODO: fix when locale is done
-          // ariaLabel: this.$vuetify.lang.t(props.iconLabel, index + 1, length.value)
-          ariaLabel: String(index + 1),
-          color: isFilled || isHalfFilled || isHovered ? props.color : props.backgroundColor,
-          density: props.density,
-          disabled: props.disabled,
-          hasLabels: !!props.itemLabels?.length || !!slots['item-label'],
-          icon,
-          index,
-          isFilled,
-          isHalfFilled,
-          isHalfHovered,
-          isHovered,
-          label: props.itemLabels && props.itemLabels[index],
-          readonly: props.readonly,
-          ref: (e: any) => updateRef(e, index),
-          ripple: props.ripple,
-          size: props.size,
-          tabindex: props.readonly ? -1 : undefined,
-          value: rating.value,
+        // If detail === 0 then click is triggered by keyboard
+        if (e.detail === 0) {
+          const currentIndex = Math.floor(rating.value)
+          if (rating.value - 1 === index && props.clearable) {
+            rating.value = 0
+          } else if (currentIndex !== index || !props.halfIncrements) {
+            rating.value = index + (props.halfIncrements ? 0.5 : 1)
+          } else {
+            rating.value += 0.5
+          }
+        } else {
+          const newValue = genHoverIndex(e, index)
+          if (props.clearable && rating.value === newValue) {
+            rating.value = 0
+          } else {
+            rating.value = newValue
+          }
         }
       }
 
-      return createRange(length.value).map(createSlotProps)
-    })
+      return {
+        onClick,
+        onMouseenter: props.hover ? onMouseenter : undefined,
+        onMouseleave: props.hover ? onMouseleave : undefined,
+        onMousemove: props.hover && props.halfIncrements ? onMouseenter : undefined,
+        ref: (e: any) => updateRef(e, index),
+      }
+    }))
 
-    const { refs, updateRef } = useRefs<ComponentPublicInstance>()
+    const icons = computed(() => range.value.map(index => ({
+      ariaLabel: t(props.ariaLabel, index + 1, range.value.length),
+      density: props.density,
+      disabled: props.disabled,
+      hasLabels: !!props.itemLabels?.length || !!slots['item-label'],
+      index,
+      label: props.itemLabels && props.itemLabels[index],
+      readonly: props.readonly,
+      ripple: props.ripple,
+      size: props.size,
+      tabindex: props.readonly ? -1 : undefined,
+      value: rating.value,
+      ...itemState.value[index],
+      ...eventState.value[index],
+    })))
 
     function updateFocus () {
       const index = Math.floor(rating.value - 0.5)
@@ -178,14 +182,15 @@ export default defineComponent({
     }
 
     function onKeydown (e: KeyboardEvent) {
-      const increment = props.halfIncrements ? 0.5 : 1
-      if (e.keyCode === keyCodes.left && rating.value > 0) {
-        rating.value -= increment
-        nextTick(updateFocus)
-      } else if (e.keyCode === keyCodes.right && rating.value < length.value) {
-        rating.value += increment
-        nextTick(updateFocus)
-      }
+      if (![keyCodes.left, keyCodes.right].includes(e.keyCode)) return
+
+      let increment = props.halfIncrements ? 0.5 : 1
+
+      increment = e.keyCode === keyCodes.left ? -increment : increment
+      increment = isRtl.value ? -increment : increment
+
+      rating.value = clamp(rating.value + increment, 0, range.value.length)
+      nextTick(updateFocus)
     }
 
     return () => (
