@@ -89,7 +89,7 @@ export default defineComponent({
       const rect = (e?.target as HTMLElement).getBoundingClientRect()
       const isHalf = !!rect && (e.pageX - rect.left) < rect.width / 2
 
-      return isRtl ? !isHalf : isHalf
+      return isRtl.value ? !isHalf : isHalf
     }
 
     function genHoverIndex (e: MouseEvent, i: number) {
