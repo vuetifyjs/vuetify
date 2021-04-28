@@ -4,7 +4,7 @@
 
     .v-timeline-item__body
       #{if($direction == right or $direction == left, justify-content, align-items)}: if($direction == left or $direction == top, flex-start, flex-end)
-      #{if($direction == top or $direction == bottom, max-height, max-width)}: calc(#{if($direction == top, '100% - ', '')}#{$timeline-divider-center} - #{$timeline-divider-width / 2})
+      #{if($direction == top or $direction == bottom, max-height, max-width)}: calc(#{if($direction == top or $direction == left, '100% - ', '')}var(--v-timeline-line-position) - #{$timeline-divider-width / 2})
 
     .v-timeline-item__opposite
       #{if($direction == top or $direction == bottom, align-items, justify-content)}: #{if($direction == top or $direction == left, flex-end, flex-start)}

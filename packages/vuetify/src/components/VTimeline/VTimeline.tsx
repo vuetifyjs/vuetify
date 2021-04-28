@@ -43,6 +43,10 @@ export default defineComponent({
       type: String,
       validator: (v: any) => v == null || ['start', 'end', 'both'].includes(v),
     } as Prop<TimelineDotAlignment>,
+    linePosition: {
+      type: String,
+      default: '50%',
+    },
     ...makeTagProps(),
   }),
 
@@ -90,11 +94,14 @@ export default defineComponent({
           'v-timeline',
           `v-timeline--${props.direction}`,
           {
-            'v-timeline--hide-opposite': !!props.singleSide,
+            'v-timeline--single-side': !!props.singleSide,
             'v-timeline--reverse': props.reverse,
           },
           truncateLineClasses.value,
         ]}
+        style={{
+          '--v-timeline-line-position': props.linePosition,
+        }}
       >
         {ctx.slots.default?.()}
       </props.tag>

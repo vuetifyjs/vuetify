@@ -33,16 +33,17 @@
     position: absolute
 
   +vertical
+    +timeline-line-align(var(--v-timeline-line-position), left, right)
+
     &:before
       height: 100%
-      left: calc(#{$timeline-divider-center} - #{$timeline-line-width / 2})
       width: $timeline-line-width
 
   +horizontal
     &:before
       height: $timeline-line-width
       width: 100%
-      top: calc(#{$timeline-divider-center} - #{$timeline-line-width / 2})
+      top: calc(var(--v-timeline-line-position) - #{$timeline-line-width / 2})
 
 .v-timeline-item__wrapper
   display: flex
@@ -103,10 +104,10 @@
   align-self: center
 
   +vertical
-    max-width: calc(#{$timeline-divider-center} - #{$timeline-divider-width / 2})
+    max-width: calc(var(--v-timeline-line-position) - #{$timeline-divider-width / 2})
 
   +horizontal
-    max-height: calc(#{$timeline-divider-center} - #{$timeline-divider-width / 2})
+    max-height: calc(var(--v-timeline-line-position) - #{$timeline-divider-width / 2})
 
 // Modifiers
 .v-timeline-item--after
@@ -123,7 +124,7 @@
   +horizontal
     +timeline-item-align(bottom)
 
-.v-timeline--hide-opposite
+.v-timeline--single-side
   +vertical(true)
     .v-timeline-item--before
       +timeline-line-align($timeline-divider-width / 2, right, left)
