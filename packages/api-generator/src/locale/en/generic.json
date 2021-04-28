@@ -6,7 +6,7 @@
     "falseValue": "Sets value for falsy state",
     "fullWidth": "Forces 100% width",
     "id": "Sets the DOM id on the component",
-    "persistent": "Clicking outside will not dismiss the dialog",
+    "persistent": "Clicking outside or pressing **esc** key will not dismiss the dialog",
     "size": "Sets the height and width of the component.",
     "tag": "Specify a custom tag used on the root element.",
     "textColor": "Applies a specified color to the control text",
