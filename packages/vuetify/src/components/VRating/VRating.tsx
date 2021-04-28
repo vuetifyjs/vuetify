@@ -198,7 +198,7 @@ export default defineComponent({
         ]}
         onKeydown={onKeydown}
       >
-        {icons.value.map(iconProps => (
+        { icons.value.map(iconProps => (
           <div
             key={iconProps.index}
             class={[
@@ -230,9 +230,9 @@ export default defineComponent({
                 density={iconProps.density}
                 tabindex={iconProps.tabindex}
               />
-            )}
+            ) }
           </div>
-        ))}
+        )) }
       </props.tag>
     )
   },
