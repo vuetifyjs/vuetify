@@ -103,7 +103,7 @@ export default defineComponent({
           '--v-timeline-line-position': props.linePosition,
         }}
       >
-        {ctx.slots.default?.()}
+        { ctx.slots.default?.() }
       </props.tag>
     )
   },

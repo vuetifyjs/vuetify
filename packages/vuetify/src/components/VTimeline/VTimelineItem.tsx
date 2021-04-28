@@ -85,11 +85,11 @@ export default defineComponent({
       >
         <div class='v-timeline-item__wrapper'>
           <div class='v-timeline-item__body'>
-            {ctx.slots.default?.()}
+            { ctx.slots.default?.() }
           </div>
 
           <div class='v-timeline-item__divider'>
-            {!props.hideDot && (
+            { !props.hideDot && (
               <div
                 class={[
                   'v-timeline-item__dot',
@@ -112,14 +112,14 @@ export default defineComponent({
                   }
                 </div>
               </div>
-            )}
+            ) }
           </div>
 
-          {!hideOpposite.value && ctx.slots.opposite && (
+          { !hideOpposite.value && ctx.slots.opposite && (
             <div class='v-timeline-item__opposite'>
               {ctx.slots.opposite()}
             </div>
-          )}
+          ) }
         </div>
       </props.tag>
     )
