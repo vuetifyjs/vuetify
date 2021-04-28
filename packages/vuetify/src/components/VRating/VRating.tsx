@@ -16,7 +16,7 @@ import { computed, defineComponent, nextTick, ref } from 'vue'
 import { createRange, keyCodes, makeProps } from '@/util'
 
 // Types
-import type { ComponentPublicInstance, Prop, Ref } from 'vue'
+import type { ComponentPublicInstance, Prop } from 'vue'
 
 export default defineComponent({
   name: 'VRating',
@@ -75,7 +75,7 @@ export default defineComponent({
   }),
 
   setup (props, { slots }) {
-    const rating = useProxiedModel(props, 'modelValue') as any as Ref<number> // TODO: Why is type not working?
+    const rating = useProxiedModel(props, 'modelValue')
     const length = computed(() => Number(props.length))
     const hoverIndex = ref(-1)
 
