@@ -10,9 +10,6 @@ describe('VBtn', () => {
     mount(VBtn, {
       global: {
         plugins: [vuetify],
-        components: {
-          VBtn,
-        },
       },
       slots: {
         default: 'Button',
@@ -28,9 +25,6 @@ describe('VBtn', () => {
     {
       global: {
         plugins: [vuetify],
-        components: {
-          VBtn,
-        },
       },
     })
     expect(true).to.be.true
