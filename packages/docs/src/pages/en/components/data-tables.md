@@ -115,6 +115,12 @@ The data table exposes a **search** prop that allows you to filter your data.
 
 The `v-data-table` provides a large number of slots for customizing the table. This example showcases some of these slots and what you can do with each. It is important to note some slot (eg: `item`/`body`/`header`) will completely takes over the internal rendering of the component which will require you to re-implement functionalities such as selection and expansion. Some slots will override each other such as: `body` > `item` > `item.<name>` and `header`/`header.<name>`.
 
+<alert type="info">
+
+  Some slots such as `item.<name>` and `header.<name>` use modifiers to target more scoped slots. Eslint by default will throw errors when slots use modifiers. To disable these errors, add the following rule to your eslint configuration: `"vue/valid-v-slot": ["error", { "allowModifiers": true }]`.
+
+</alert>
+
 <example file="v-data-table/slot-main" />
 
 #### Header
