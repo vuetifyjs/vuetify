@@ -1,7 +1,7 @@
 ---
 meta:
   title: Timeline component
-  description: The timeline component is used to display chronological information horizontally.
+  description: The timeline component is used to display chronological information either vertically or horizontally.
   keywords: timelines, vuetify timeline component, vue timeline component
 related:
   - /components/cards/
@@ -16,11 +16,13 @@ The `v-timeline` is useful for stylistically displaying chronological informatio
 
 <entry-ad />
 
+<!--
 ## Usage
 
 `v-timeline`'s in their simplest form display a vertical timeline that should contain at least one `v-timeline-item`.
 
 <example file="v-timeline/usage" />
+-->
 
 ## API
 
@@ -43,29 +45,29 @@ Colored dots create visual breakpoints that make your timelines easier to read.
 
 <example file="v-timeline/prop-color" />
 
-#### Dense
+#### Single side
 
-**dense** timelines position all content to the right. In this example, `v-alert` replaces the card to provide a different design.
+**single-side** positions all items to one side of the timeline. In this example, `v-alert` replaces the card to provide a different design.
 
-<example file="v-timeline/prop-dense" />
+<example file="v-timeline/prop-single-side" />
 
 #### Icon dots
 
-Conditionally use icons within the `v-timeline-item`'s dot to provide additional context.
+Use icons within the `v-timeline-item` dot to provide additional context.
 
 <example file="v-timeline/prop-icon-dots" />
 
 #### Reverse
 
-You can reverse the direction of the timeline items by using the **reverse** prop. This works both in default and **dense** mode.
+You can mirror the placement of the timeline items by using the **reverse** prop.
 
 <example file="v-timeline/prop-reverse" />
 
-#### Small
+#### Size
 
-The **small** prop allows alternate styles to provide a unique design.
+The **size** prop allows you to customize the size of each dot.
 
-<example file="v-timeline/prop-small" />
+<example file="v-timeline/prop-size" />
 
 ### Slots
 
@@ -81,11 +83,13 @@ The **opposite** slot provides an additional layer of customization within your 
 
 <example file="v-timeline/slot-opposite" />
 
+<!--
 #### Timeline item default
 
 If you place a `v-card` inside of a `v-timeline-item`, a caret will appear on the side of the card.
 
 <example file="v-timeline/slot-timeline-item-default" />
+-->
 
 ### Misc
 

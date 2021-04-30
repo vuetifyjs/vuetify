@@ -4,16 +4,16 @@
       v-for="(year, i) in years"
       :key="i"
       :color="year.color"
-      small
+      size="small"
     >
       <template v-slot:opposite>
         <span
-          :class="`headline font-weight-bold ${year.color}--text`"
+          :class="`headline font-weight-bold text-${year.color}`"
           v-text="year.year"
         ></span>
       </template>
       <div class="py-4">
-        <h2 :class="`headline font-weight-light mb-4 ${year.color}--text`">
+        <h2 :class="`headline font-weight-light mb-4 ${year.color}`">
           Lorem ipsum
         </h2>
         <div>

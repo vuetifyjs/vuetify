@@ -61,7 +61,7 @@ export default defineComponent({
     const { elevationClasses } = useElevation(props)
 
     const sideClass = computed(() => {
-      let side = props.side ?? timeline.singleSide.value ?? (isEven.value ? 'before' : 'after')
+      let side = timeline.singleSide.value ?? props.side ?? (isEven.value ? 'before' : 'after')
 
       if (side && timeline.reverse.value) side = side === 'before' ? 'after' : 'before'
 

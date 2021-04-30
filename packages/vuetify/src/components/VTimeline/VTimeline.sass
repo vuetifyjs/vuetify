@@ -7,10 +7,6 @@
   &::before
     background: rgba(var(--v-divider-color), var(--v-divider-opacity))
 
-  .v-timeline-item
-    &::before
-      background: rgba(var(--v-divider-color), var(--v-divider-opacity))
-
   .v-timeline-item__dot
     background: rgb(var(--v-theme-surface))
 
@@ -19,27 +15,22 @@
   position: relative
   display: flex
 
-  +vertical(true)
-    flex-direction: column
-
-  +horizontal(true)
-    flex-direction: row
-
-.v-timeline-item
-  position: relative
-
   &:before
     content: ''
     position: absolute
 
-  +vertical
+  +vertical(true)
+    flex-direction: column
+
     +timeline-line-align(var(--v-timeline-line-position), left, right)
 
     &:before
       height: 100%
       width: $timeline-line-width
 
-  +horizontal
+  +horizontal(true)
+    flex-direction: row
+
     &:before
       height: $timeline-line-width
       width: 100%
@@ -175,26 +166,24 @@
     width: inherit
 
 .v-timeline--truncate-line-start
-  .v-timeline-item:first-child
-    +vertical(true)
-      &:before
-        height: 50%
-        top: 50%
+  +vertical(true)
+    &:before
+      height: 50%
+      top: 50%
 
-    +horizontal(true)
-      &:before
-        width: 50%
-        +ltr
-          left: 50%
-        +rtl
-          right: 50%
+  +horizontal(true)
+    &:before
+      width: 50%
+      +ltr
+        left: 50%
+      +rtl
+        right: 50%
 
 .v-timeline--truncate-line-end
-  .v-timeline-item:last-child
-    +vertical(true)
-      &:before
-        height: 50%
+  +vertical(true)
+    &:before
+      height: 50%
 
-    +horizontal(true)
-      &:before
-        width: 50%
+  +horizontal(true)
+    &:before
+      width: 50%
