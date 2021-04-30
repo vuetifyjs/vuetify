@@ -11,7 +11,6 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 // import { useDisplay } from '@/composables/display'
 // import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
@@ -24,7 +23,6 @@ export default defineComponent({
   props: makeProps({
     color: String,
     flat: Boolean,
-    height: [Number, String],
     modelValue: Boolean,
     prominent: Boolean,
     src: String,
@@ -32,15 +30,16 @@ export default defineComponent({
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
-    ...makeLayoutItemProps(),
     ...makePositionProps(),
     ...makeRoundedProps(),
-    ...makeLayoutItemProps({ name: 'app-bar' }),
+    ...makeLayoutItemProps({
+      name: 'app-bar',
+      size: 64,
+    }),
     ...makeTagProps({ tag: 'header' }),
   }),
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme()
     const { borderClasses } = useBorder(props, 'v-app-bar')
     const { densityClasses } = useDensity(props, 'v-app-bar')
     const { elevationClasses } = useElevation(props)
@@ -53,11 +52,11 @@ export default defineComponent({
       props.name,
       toRef(props, 'priority'),
       computed(() => 'top'),
-      computed(() => props.height || ''),
+      computed(() => props.size || ''),
     )
 
     return () => {
-      const hasImg = (slots.img || props.src)
+      const hasImg = !!(slots.img || props.src)
 
       return (
         <props.tag
@@ -68,7 +67,6 @@ export default defineComponent({
               'v-app-bar--flat': props.flat,
               'v-app-bar--prominent': props.prominent,
             },
-            themeClasses.value,
             backgroundColorClasses.value,
             borderClasses.value,
             densityClasses.value,
@@ -89,23 +87,25 @@ export default defineComponent({
                 : (<img src={ props.src } alt="" />)
               }
             </div>
-          )}
+          ) }
 
           { slots.prepend && (
             <div class="v-app-bar__prepend">
-              { slots.prepend?.() }
+              { slots.prepend() }
             </div>
-          )}
+          ) }
 
-          <div class="v-app-bar__content">
-            { slots.default?.() }
-          </div>
+          { slots.default && (
+            <div class="v-app-bar__content">
+              { slots.default() }
+            </div>
+          ) }
 
           { slots.append && (
             <div class="v-app-bar__append">
-              { slots.append?.() }
+              { slots.append() }
             </div>
-          )}
+          ) }
         </props.tag>
       )
     }
