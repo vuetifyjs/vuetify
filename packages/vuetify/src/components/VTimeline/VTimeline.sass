@@ -25,16 +25,22 @@
     +timeline-line-align(var(--v-timeline-line-position), left, right)
 
     &:before
-      height: 100%
+      height: calc(100% - var(--v-timeline-line-start, 0px) - var(--v-timeline-line-end, 0px))
       width: $timeline-line-width
+      top: var(--v-timeline-line-start)
 
   +horizontal(true)
     flex-direction: row
 
     &:before
       height: $timeline-line-width
-      width: 100%
+      width: calc(100% - var(--v-timeline-line-start, 0px) - var(--v-timeline-line-end, 0px))
       top: calc(var(--v-timeline-line-position) - #{$timeline-line-width / 2})
+
+      +ltr()
+        left: var(--v-timeline-line-start)
+      +rtl()
+        right: var(--v-timeline-line-start)
 
 .v-timeline-item__wrapper
   display: flex
@@ -164,26 +170,3 @@
   .v-timeline-item__inner-dot
     height: inherit
     width: inherit
-
-.v-timeline--truncate-line-start
-  +vertical(true)
-    &:before
-      height: 50%
-      top: 50%
-
-  +horizontal(true)
-    &:before
-      width: 50%
-      +ltr
-        left: 50%
-      +rtl
-        right: 50%
-
-.v-timeline--truncate-line-end
-  +vertical(true)
-    &:before
-      height: 50%
-
-  +horizontal(true)
-    &:before
-      width: 50%

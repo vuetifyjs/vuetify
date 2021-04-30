@@ -6,6 +6,7 @@ import type { InjectionKey, Prop, Ref } from 'vue'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
+import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Helpers
 import { computed, defineComponent, provide, ref } from 'vue'
@@ -88,8 +89,42 @@ export default defineComponent({
       }
     })
 
+    const truncateStart = ref(0)
+    const truncateEnd = ref(0)
+
+    const { resizeRef } = useResizeObserver(entries => {
+      if (!entries.length) return
+
+      const { target } = entries[0]
+      const targetRect = target.getBoundingClientRect()
+
+      const dots = target.querySelectorAll('.v-timeline-item__dot')
+
+      if (!dots.length) return
+
+      const firstDotRect = dots[0].getBoundingClientRect()
+      const lastDotRect = dots[dots.length - 1].getBoundingClientRect()
+
+      const startDirection = props.direction === 'vertical' ? 'top' : 'left'
+      const endDirection = props.direction === 'vertical' ? 'bottom' : 'right'
+      const sizeProperty = props.direction === 'vertical' ? 'height' : 'width'
+
+      truncateStart.value = firstDotRect[startDirection] - targetRect[startDirection] + (firstDotRect[sizeProperty] / 2)
+      truncateEnd.value = targetRect[endDirection] - lastDotRect[endDirection] + (lastDotRect[sizeProperty] / 2)
+    })
+
+    const truncateLineStyles = computed(() => {
+      if (!props.truncateLine) return
+
+      return {
+        '--v-timeline-line-start': `${['start', 'both'].includes(props.truncateLine) ? truncateStart.value : 0}px`,
+        '--v-timeline-line-end': `${['end', 'both'].includes(props.truncateLine) ? truncateEnd.value : 0}px`,
+      }
+    })
+
     return () => (
       <props.tag
+        ref={resizeRef}
         class={[
           'v-timeline',
           `v-timeline--${props.direction}`,
@@ -101,6 +136,7 @@ export default defineComponent({
         ]}
         style={{
           '--v-timeline-line-position': props.linePosition,
+          ...truncateLineStyles.value,
         }}
       >
         { ctx.slots.default?.() }
