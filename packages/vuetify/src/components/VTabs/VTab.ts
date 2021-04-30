@@ -95,8 +95,12 @@ export default baseMixins.extend<options>().extend(
       ...data.attrs,
       'aria-selected': String(this.isActive),
       role: 'tab',
-      tabindex: 0,
     }
+
+    if (!this.disabled) {
+      data.attrs.tabindex = 0
+    }
+
     data.on = {
       ...data.on,
       keydown: (e: KeyboardEvent) => {
