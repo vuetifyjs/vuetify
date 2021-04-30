@@ -26,7 +26,6 @@ The following releases are currently under development:
 - **Alpha:** Q1 2021
 - **Overview:**
   The next version of Vuetify is being built from the ground up to support Vue 3 using the [composition api](https://v3.vuejs.org/guide/composition-api-introduction.html).
-
 - **Objectives:**
   - Rebuild the framework using Vue 3 and the [composition api](https://vue-composition-api-rfc.netlify.com/)
   - Improve framework performance
