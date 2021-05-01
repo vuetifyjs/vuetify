@@ -18,7 +18,7 @@ export type TimelineDotAlignment = 'start' | 'end' | undefined
 export type TimelineTruncateLine = 'start' | 'end' | 'both' | undefined
 
 interface TimelineInstance {
-  reverse: Ref<boolean>
+  mirror: Ref<boolean>
   singleSide: Ref<TimelineSide>
   register: (id: number, index?: number) => { isEven: Ref<boolean> }
   unregister: (id: number) => void
@@ -35,7 +35,7 @@ export default defineComponent({
       default: 'vertical',
       validator: (v: any) => ['vertical', 'horizontal'].includes(v),
     } as Prop<TimelineDirection>,
-    reverse: Boolean,
+    mirror: Boolean,
     singleSide: {
       type: String,
       validator: (v: any) => v == null || ['after', 'before'].includes(v),
@@ -71,7 +71,7 @@ export default defineComponent({
     }
 
     provide(VTimelineSymbol, {
-      reverse: computed(() => props.reverse),
+      mirror: computed(() => props.mirror),
       singleSide: computed(() => props.singleSide),
       register,
       unregister,
@@ -130,7 +130,6 @@ export default defineComponent({
           `v-timeline--${props.direction}`,
           {
             'v-timeline--single-side': !!props.singleSide,
-            'v-timeline--reverse': props.reverse,
           },
           truncateLineClasses.value,
         ]}

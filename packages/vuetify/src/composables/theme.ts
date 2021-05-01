@@ -269,6 +269,8 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
         lines.push(
           ...createCssClass(`.bg-${key}`, [
             `--v-theme-overlay-multiplier: var(--v-theme-${key}-overlay-multiplier)`,
+            `--v-icon-color: var(--v-theme-on-${key})`,
+            `--v-icon-opacity: 1`,
             `background: rgb(var(--v-theme-${key}))`,
             `color: rgb(var(--v-theme-on-${key}))`,
           ]),

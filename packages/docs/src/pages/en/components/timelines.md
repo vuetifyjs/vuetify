@@ -57,11 +57,11 @@ Use icons within the `v-timeline-item` dot to provide additional context.
 
 <example file="v-timeline/prop-icon-dots" />
 
-#### Reverse
+#### Mirror
 
-You can mirror the placement of the timeline items by using the **reverse** prop.
+You can mirror the placement of the timeline items by using the **mirror** prop.
 
-<example file="v-timeline/prop-reverse" />
+<example file="v-timeline/prop-mirror" />
 
 #### Size
 

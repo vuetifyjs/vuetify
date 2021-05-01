@@ -63,7 +63,7 @@ export default defineComponent({
     const sideClass = computed(() => {
       let side = timeline.singleSide.value ?? props.side ?? (isEven.value ? 'before' : 'after')
 
-      if (side && timeline.reverse.value) side = side === 'before' ? 'after' : 'before'
+      if (side && timeline.mirror.value) side = side === 'before' ? 'after' : 'before'
 
       return side && `v-timeline-item--${side}`
     })
