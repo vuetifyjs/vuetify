@@ -68,7 +68,6 @@
 
     props: {
       color: String,
-      slug: String,
     },
   }
 </script>
