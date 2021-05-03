@@ -61,7 +61,7 @@ export default defineComponent({
     const { sizeClasses } = useSize(props, 'v-btn')
 
     const isContained = computed(() => {
-      return !(props.text || props.plain || props.icon || props.outlined || props.border !== false)
+      return !(props.text || props.plain || props.outlined || props.border !== false)
     })
 
     const isElevated = computed(() => {
