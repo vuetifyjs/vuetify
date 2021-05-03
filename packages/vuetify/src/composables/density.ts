@@ -7,7 +7,7 @@ import type { PropType } from 'vue'
 
 const allowedDensities = ['default', 'comfortable', 'compact'] as const
 
-type Density = typeof allowedDensities[number]
+export type Density = typeof allowedDensities[number]
 
 export interface DensityProps {
   density: Density
@@ -17,7 +17,7 @@ export interface DensityProps {
 export const makeDensityProps = propsFactory({
   density: {
     type: String as PropType<Density>,
-    default: 'default',
+    default: 'default' as Density,
     validator: (v: any) => allowedDensities.includes(v),
   },
 }, 'density')

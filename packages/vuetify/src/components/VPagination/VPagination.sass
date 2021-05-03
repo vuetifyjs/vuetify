@@ -1,82 +1,10 @@
 @import './_variables.scss'
 
-// Theme
-+theme(v-pagination) using ($material)
-  .v-pagination__item
-    background: map-get($material, 'cards')
-    color: map-deep-get($material, 'text', 'primary')
-
-    &--active
-      color: map-deep-get($material, 'text', 'theme')
-
-  .v-pagination__navigation
-    background: map-get($material, 'cards')
-
-.v-pagination
-  align-items: center
+.v-pagination__list
   display: inline-flex
   list-style-type: none
   justify-content: center
-  margin: 0
-  max-width: 100%
   width: 100%
 
-  &#{&}
-    padding-left: 0
-
-  > li
-    align-items: center
-    display: flex
-
-  &--circle
-    .v-pagination__item,
-    .v-pagination__more,
-    .v-pagination__navigation
-      border-radius: 50%
-
-  &--disabled
-    pointer-events: none
-    opacity: $pagination-disabled-opacity
-
-  &__item
-    background: transparent
-    border-radius: $pagination-border-radius
-    font-size: $pagination-item-font-size
-    height: $pagination-item-height
-    margin: $pagination-item-margin
-    min-width: $pagination-item-min-width
-    padding: $pagination-item-padding
-    text-decoration: none
-    transition: .3s map-get($transition, 'linear-out-slow-in')
-    width: auto
-    +elevation(2)
-
-    &--active
-      +elevation(4)
-
-  &__navigation
-    +elevation(2)
-    border-radius: $pagination-border-radius
-    display: inline-flex
-    justify-content: center
-    align-items: center
-    text-decoration: none
-    height: $pagination-navigation-height
-    width: $pagination-navigation-width
-    margin: $pagination-navigation-margin
-
-    .v-icon
-      transition: $secondary-transition
-      vertical-align: middle
-
-    &--disabled
-      opacity: $pagination-navigation-disabled-opacity
-      pointer-events: none
-
-  &__more
-    margin: $pagination-more-margin
-    display: inline-flex
-    align-items: flex-end
-    justify-content: center
-    height: $pagination-more-height
-    width: $pagination-more-width
+.v-pagination__item, .v-pagination__first, .v-pagination__prev, .v-pagination__next, .v-pagination__last
+  margin: $pagination-item-margin
