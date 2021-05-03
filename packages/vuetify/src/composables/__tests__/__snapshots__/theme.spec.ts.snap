@@ -39,7 +39,6 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-on-warning: 0,0,0;
       --v-border-color: 0, 0, 0;
       --v-border-opacity: 0.12;
-      --v-disabled-opacity: 0.38;
     }
     .v-theme--dark {
       --v-theme-background: 18,18,18;
@@ -74,7 +73,6 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-on-warning: 0,0,0;
       --v-border-color: 255, 255, 255;
       --v-border-opacity: 0.12;
-      --v-disabled-opacity: 0.38;
     }
     .bg-background {
       --v-theme-overlay-multiplier: var(--v-theme-background-overlay-multiplier);
