@@ -9,8 +9,6 @@
   padding: 8px 4px
   top: 0
   transition: .2s $standard-easing
-
-  @include elevation($app-bar-elevation)
   @include position($app-bar-positions)
   @include rounded($app-bar-border-radius)
 
@@ -20,6 +18,9 @@
 
   &--flat
     @include elevation($app-bar-flat-elevation)
+
+  &--is-active
+    @include elevation($app-bar-elevation)
 
   &--rounded
     @include rounded($app-bar-rounded-border-radius)

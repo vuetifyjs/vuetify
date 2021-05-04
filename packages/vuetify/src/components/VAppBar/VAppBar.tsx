@@ -70,6 +70,7 @@ export default defineComponent({
             {
               'v-app-bar--border': !!props.border,
               'v-app-bar--flat': props.flat,
+              'v-app-bar--is-active': isActive.value,
               'v-app-bar--prominent': props.prominent,
             },
             backgroundColorClasses.value,
