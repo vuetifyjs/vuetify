@@ -31,7 +31,7 @@
           v-slot="{ selected, selectedClass, toggle }"
         >
           <v-chip
-            :class="[selectedClass]"
+            :class="selectedClass"
             :input-value="selected"
             @click="toggle"
           >
