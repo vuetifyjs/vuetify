@@ -1,13 +1,14 @@
 @import './index'
 
 .v-app-bar
-  align-items: center
+  align-items: start
   background: rgb(var(--v-theme-surface))
   display: flex
   height: 64px
   left: 0
-  padding: 4px
+  padding: 8px 4px
   top: 0
+  transition: .2s $standard-easing
 
   @include elevation($app-bar-elevation)
   @include position($app-bar-positions)
@@ -16,21 +17,6 @@
   &--border
     @include elevation(0)
     @include border($app-bar-border...)
-
-  &--prominent
-    height: $app-bar-prominent-height
-
-  &--density-comfortable
-    height: 56px
-
-    &.v-app-bar--prominent
-      height: 112px
-
-  &--density-compact
-    height: 48px
-
-    &.v-app-bar--prominent
-      height: 96px
 
   &--flat
     @include elevation($app-bar-flat-elevation)
@@ -42,9 +28,6 @@
   align-items: center
   display: flex
   flex: 1 0 auto
-
-  .v-app-bar--prominent &
-    align-self: flex-start
 
 .v-app-bar__img
   height: 100%

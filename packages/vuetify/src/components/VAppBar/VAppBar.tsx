@@ -9,13 +9,13 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-// import { useDisplay } from '@/composables/display'
-// import { useProxiedModel } from '@/composables/proxiedModel'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { makeProps } from '@/util/makeProps'
 import { computed, defineComponent, toRef } from 'vue'
+import { convertToUnit } from '@/util'
 
 export default defineComponent({
   name: 'VAppBar',
@@ -23,7 +23,10 @@ export default defineComponent({
   props: makeProps({
     color: String,
     flat: Boolean,
-    modelValue: Boolean,
+    modelValue: {
+      type: Boolean,
+      default: true,
+    },
     prominent: Boolean,
     src: String,
     temporary: Boolean,
@@ -32,10 +35,7 @@ export default defineComponent({
     ...makeElevationProps(),
     ...makePositionProps(),
     ...makeRoundedProps(),
-    ...makeLayoutItemProps({
-      name: 'app-bar',
-      size: 64,
-    }),
+    ...makeLayoutItemProps({ name: 'app-bar' }),
     ...makeTagProps({ tag: 'header' }),
   }),
 
@@ -43,20 +43,25 @@ export default defineComponent({
     const { borderClasses } = useBorder(props, 'v-app-bar')
     const { densityClasses } = useDensity(props, 'v-app-bar')
     const { elevationClasses } = useElevation(props)
-    // const { mobile } = useDisplay()
     const { positionClasses, positionStyles } = usePosition(props, 'v-app-bar')
     const { roundedClasses } = useRounded(props, 'v-app-bar')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    // const isActive = useProxiedModel(props, 'modelValue')
+    const isActive = useProxiedModel(props, 'modelValue')
+    const height = computed(() => (
+      (props.prominent ? 128 : 64) -
+      (props.density === 'comfortable' ? 8 : 0) -
+      (props.density === 'compact' ? 16 : 0)
+    ))
     const layoutStyles = useLayoutItem(
       props.name,
       toRef(props, 'priority'),
       computed(() => 'top'),
-      computed(() => props.size || ''),
+      computed(() => isActive.value ? height.value : 0),
     )
 
     return () => {
       const hasImg = !!(slots.img || props.src)
+      const translate = !isActive.value ? -100 : 0
 
       return (
         <props.tag
@@ -78,6 +83,10 @@ export default defineComponent({
             backgroundColorStyles.value,
             layoutStyles.value,
             positionStyles.value,
+            {
+              height: convertToUnit(height.value),
+              transform: `translateY(${convertToUnit(translate, '%')})`,
+            },
           ]}
         >
           { hasImg && (
