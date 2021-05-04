@@ -22,7 +22,7 @@ export default defineComponent({
   }),
 
   setup (props, { slots }) {
-    const { isSelected, select, next, prev, step, selected } = useGroup(props, VItemGroupSymbol)
+    const { isSelected, select, next, prev, selected } = useGroup(props, VItemGroupSymbol)
 
     return () => (
       <props.tag class="v-item-group">
@@ -31,7 +31,6 @@ export default defineComponent({
           select,
           next,
           prev,
-          step,
           selected: selected.value,
         })}
       </props.tag>

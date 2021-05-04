@@ -185,23 +185,29 @@ export function useGroup (
     }
   }
 
-  function getOffsetId (offset: number) {
+  function step (offset: number) {
     // getting an offset from selected value obviously won't work with multiple values
     if (props.multiple) consoleWarn('This method is not supported when using "multiple" prop')
 
-    // If there is nothing selected, then next value is first item
-    if (!selected.value.length) return items[0].id
+    if (!selected.value.length) {
+      const item = items.find(item => !item.disabled)
+      item && (selected.value = [item.id])
+    } else {
+      const currentId = selected.value[0]
+      const currentIndex = items.findIndex(i => i.id === currentId)
 
-    const currentId = selected.value[0]
-    const currentIndex = items.findIndex(i => i.id === currentId)
+      let newIndex = (currentIndex + offset) % items.length
+      let newItem = items[newIndex]
 
-    let newIndex = (currentIndex + offset) % items.length
+      while (newItem.disabled && newIndex !== currentIndex) {
+        newIndex = (newIndex + offset) % items.length
+        newItem = items[newIndex]
+      }
 
-    while (items[newIndex].disabled) {
-      newIndex = (newIndex + 1) % items.length
+      if (newItem.disabled) return
+
+      selected.value = [items[newIndex].id]
     }
-
-    return items[newIndex].id
   }
 
   const state = {
@@ -209,9 +215,8 @@ export function useGroup (
     unregister,
     selected,
     select,
-    prev: () => selected.value = [getOffsetId(items.length - 1)],
-    next: () => selected.value = [getOffsetId(1)],
-    step: (steps: number) => selected.value = [getOffsetId(steps)],
+    prev: () => step(items.length - 1),
+    next: () => step(1),
     isSelected: (id: number) => selected.value.includes(id),
     selectedClass: computed(() => props.selectedClass),
   }
