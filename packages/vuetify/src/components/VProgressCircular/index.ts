@@ -1,4 +1,1 @@
-import VProgressCircular from './VProgressCircular'
-
-export { VProgressCircular }
-export default VProgressCircular
+export { default as VProgressCircular } from './VProgressCircular'
