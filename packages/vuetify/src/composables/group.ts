@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, ref, toRef, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef, watch } from 'vue'
 import { useProxiedModel } from './proxiedModel'
 import { consoleWarn, deepEqual, getUid, propsFactory, wrapInArray } from '@/util'
 
@@ -97,7 +97,7 @@ export function useGroup (
   props: GroupProps,
   injectKey: InjectionKey<GroupProvide>
 ) {
-  const isUnmounted = ref(false)
+  let isUnmounted = false
   const items = reactive<GroupItem[]>([])
   const selected = useProxiedModel(
     props,
@@ -123,7 +123,7 @@ export function useGroup (
   }
 
   function unregister (id: number) {
-    if (isUnmounted.value) return
+    if (isUnmounted) return
 
     selected.value = selected.value.filter(v => v !== id)
 
@@ -155,7 +155,7 @@ export function useGroup (
   })
 
   onBeforeUnmount(() => {
-    isUnmounted.value = true
+    isUnmounted = true
   })
 
   function select (id: number, isSelected: boolean) {
