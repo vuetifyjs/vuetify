@@ -1,10 +1,10 @@
 // Utilities
-import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef } from 'vue'
 import { useProxiedModel } from './proxiedModel'
 import { consoleWarn, deepEqual, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
-import type { InjectionKey, Ref, UnwrapRef } from 'vue'
+import type { InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
 
 interface GroupItem {
   id: number
@@ -15,7 +15,7 @@ interface GroupItem {
 interface GroupProps {
   modelValue?: unknown
   multiple?: boolean
-  mandatory?: boolean
+  mandatory?: boolean | 'force'
   max?: number
   selectedClass?: string
 }
@@ -37,7 +37,7 @@ export const makeGroupProps = propsFactory({
     default: undefined,
   },
   multiple: Boolean,
-  mandatory: Boolean,
+  mandatory: [Boolean, String] as PropType<boolean | 'force'>,
   max: Number,
   selectedClass: String,
 }, 'group')
@@ -127,31 +127,22 @@ export function useGroup (
 
     selected.value = selected.value.filter(v => v !== id)
 
-    if (props.mandatory && !selected.value.length) {
-      selected.value = [items[items.length - 1].id]
-    }
+    forceMandatoryValue()
 
     const index = items.findIndex(item => item.id === id)
     items.splice(index, 1)
   }
 
-  watch(() => props.multiple, multiple => {
-    if (props.modelValue == null) return
-
-    if (multiple && !Array.isArray(props.modelValue)) {
-      selected.value = [...selected.value]
-    } else if (!multiple && Array.isArray(props.modelValue)) {
-      selected.value = selected.value.slice(0, 1)
+  // If mandatory and nothing is selected, then select first non-disabled item
+  function forceMandatoryValue () {
+    const item = items.find(item => !item.disabled)
+    if (item && props.mandatory === 'force' && !selected.value.length) {
+      selected.value = [item.id]
     }
-  }, { immediate: true })
+  }
 
   onMounted(() => {
-    // If mandatory and nothing is selected, then select first non-disabled item
-    // TODO: This should probably be behind prop?
-    // const item = items.find(item => !item.disabled)
-    // if (item && props.mandatory && !selected.value.length) {
-    //   selected.value = [item.id]
-    // }
+    forceMandatoryValue()
   })
 
   onBeforeUnmount(() => {
