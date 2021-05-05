@@ -13,7 +13,7 @@ import {
 import { makeProps } from '@/util/makeProps'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { provideTheme } from '@/composables/theme'
-import { useBackgroundColor } from '@/composables/color'
+import { BackgroundColorData, useBackgroundColor } from '@/composables/color'
 import { useTeleport } from '@/composables/teleport'
 
 import type {
@@ -108,6 +108,29 @@ const MaybeTransition: FunctionalComponent<MaybeTransitionProps> = (props, { slo
   return <Transition name={ name as string } { ...rest }>{ slots.default?.() }</Transition>
 }
 
+interface ScrimProps {
+  modelValue: boolean
+  color: BackgroundColorData
+  [ley: string]: unknown
+}
+function Scrim (props: ScrimProps) {
+  const { modelValue, color, ...rest } = props
+  return (
+    <Transition name="fade-transition" appear>
+      { props.modelValue && (
+        <div
+          class={[
+            'v-overlay__scrim',
+            props.color.backgroundColorClasses.value,
+          ]}
+          style={ props.color.backgroundColorStyles.value }
+          { ...rest }
+        />
+      )}
+    </Transition>
+  )
+}
+
 export default defineComponent({
   name: 'VOverlay',
 
@@ -178,18 +201,11 @@ export default defineComponent({
               ]}
               {...attrs}
             >
-              <Transition name="fade-transition" appear>
-                { isActive.value && props.scrim && (
-                  <div
-                    class={[
-                      'v-overlay__scrim',
-                      scrimColor.backgroundColorClasses.value,
-                    ]}
-                    style={ scrimColor.backgroundColorStyles.value }
-                    onClick={ onScrimClick }
-                  />
-                )}
-              </Transition>
+              <Scrim
+                modelValue={ isActive.value && !!props.scrim }
+                color={ scrimColor }
+                onClick={ onScrimClick }
+              />
               <MaybeTransition name={ props.transition } appear>
                 { isActive.value && <div class="v-overlay__content">{ slots.default?.() }</div> }
               </MaybeTransition>

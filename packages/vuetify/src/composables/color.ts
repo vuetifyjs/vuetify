@@ -7,12 +7,12 @@ import type { CSSProperties, Ref } from 'vue'
 
 type ColorValue = string | null | undefined
 
-type TextColorData = {
+export interface TextColorData {
   textColorClasses: Ref<string[]>
   textColorStyles: Ref<CSSProperties>
 }
 
-type BackgroundColorData = {
+export interface BackgroundColorData {
   backgroundColorClasses: Ref<string[]>
   backgroundColorStyles: Ref<CSSProperties>
 }
