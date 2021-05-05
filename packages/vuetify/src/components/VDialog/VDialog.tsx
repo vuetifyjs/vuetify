@@ -9,9 +9,10 @@ import { VOverlay } from '@/components/VOverlay'
 //   convertToUnit,
 //   keyCodes,
 // } from '../../util/helpers'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeProps } from '@/util/makeProps'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { makeTransitionProps } from '@/composables/transition'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 export default defineComponent({
   name: 'VDialog',
@@ -30,12 +31,9 @@ export default defineComponent({
       default: true,
     },
     scrollable: Boolean,
-    transition: {
-      type: [String, Boolean],
-      default: 'dialog-transition',
-    },
     modelValue: Boolean,
     ...makeDimensionProps({ width: 'auto' }),
+    ...makeTransitionProps({ transition: 'dialog-transition' }),
   }),
 
   setup (props, { attrs, slots, emit }) {

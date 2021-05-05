@@ -10,18 +10,17 @@ import {
   Transition,
   watch,
 } from 'vue'
-import { makeProps } from '@/util/makeProps'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { provideTheme } from '@/composables/theme'
 import { BackgroundColorData, useBackgroundColor } from '@/composables/color'
+import { makeProps } from '@/util/makeProps'
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
+import { provideTheme } from '@/composables/theme'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTeleport } from '@/composables/teleport'
 
 import type {
-  FunctionalComponent,
   Prop,
   PropType,
   Ref,
-  TransitionProps,
 } from 'vue'
 
 function useBooted (isActive: Ref<boolean>) {
@@ -97,17 +96,6 @@ const scrollStrategies = [
   'reposition',
 ] as const
 
-interface MaybeTransitionProps extends Omit<TransitionProps, 'name'> {
-  name?: string | boolean
-}
-
-const MaybeTransition: FunctionalComponent<MaybeTransitionProps> = (props, { slots }) => {
-  if (!props.name) return slots.default?.()
-
-  const { name, ...rest } = props
-  return <Transition name={ name as string } { ...rest }>{ slots.default?.() }</Transition>
-}
-
 interface ScrimProps {
   modelValue: boolean
   color: BackgroundColorData
@@ -159,10 +147,7 @@ export default defineComponent({
       type: [String, Boolean],
       default: true,
     },
-    transition: {
-      type: [String, Boolean],
-      default: 'fade-transition',
-    },
+    ...makeTransitionProps(),
   }),
 
   setup (props, { slots, attrs }) {
@@ -206,7 +191,7 @@ export default defineComponent({
                 color={ scrimColor }
                 onClick={ onScrimClick }
               />
-              <MaybeTransition name={ props.transition } appear>
+              <MaybeTransition transition={ props.transition } appear>
                 { isActive.value && <div class="v-overlay__content">{ slots.default?.() }</div> }
               </MaybeTransition>
             </div>
