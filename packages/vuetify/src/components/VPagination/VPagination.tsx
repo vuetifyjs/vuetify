@@ -7,8 +7,8 @@ import type { Density } from '@/composables/density'
 import { VBtn } from '../VBtn'
 
 // Utilities
-import { computed, defineComponent, ref } from 'vue'
-import { createRange, makeProps } from '@/util'
+import { ComponentPublicInstance, computed, defineComponent, nextTick, ref } from 'vue'
+import { createRange, keyCodes, makeProps } from '@/util'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
@@ -20,6 +20,8 @@ import { makeRoundedProps } from '@/composables/rounded'
 import { makeSizeProps } from '@/composables/size'
 import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeBorderProps } from '@/composables/border'
+import { useRefs } from '@/composables/refs'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 export default defineComponent({
   name: 'VPagination',
@@ -98,6 +100,7 @@ export default defineComponent({
   }),
 
   setup (props, ctx) {
+    const page = useProxiedModel(props, 'modelValue')
     const { t } = useLocale()
     const { isRtl } = useRtl()
     const { resizeRef } = useResizeObserver(entries => {
@@ -123,11 +126,11 @@ export default defineComponent({
       return props.length
     })
 
-    const pages = computed(() => {
+    const range = computed(() => {
       if (props.length <= 0) return []
 
       if (totalVisible.value <= 3) {
-        return [Math.min(Math.max(props.start, props.modelValue), props.start + props.length)]
+        return [Math.min(Math.max(props.start, page.value), props.start + props.length)]
       }
 
       if (props.length <= totalVisible.value) {
@@ -139,24 +142,26 @@ export default defineComponent({
       const left = middle + even
       const right = props.length - middle + even
 
-      if (props.modelValue < left) {
+      if (page.value < left) {
         return [...createRange(Math.max(1, totalVisible.value - 2), props.start), '...', props.length]
-      } else if (props.modelValue > right) {
+      } else if (page.value > right) {
         const length = totalVisible.value - 2
         const start = props.length - length + props.start
         return [props.start, '...', ...createRange(length, start)]
       } else {
         const length = Math.max(1, totalVisible.value - 4)
-        const start = props.modelValue - Math.floor(length / 2) + props.start
+        const start = page.value - Math.floor(length / 2) + props.start
         return [props.start, '...', ...createRange(length, start), '...', props.length]
       }
     })
 
     function emit (e: Event, value: number, event?: string) {
       e.preventDefault()
-      ctx.emit('update:modelValue', value)
+      page.value = value
       event && ctx.emit(event, value)
     }
+
+    const { refs, updateRef } = useRefs<ComponentPublicInstance>()
 
     const items = computed(() => {
       const sharedProps = {
@@ -165,11 +170,12 @@ export default defineComponent({
         size: props.size,
       }
 
-      return pages.value.map((page, index) => {
-        if (typeof page === 'string') {
+      return range.value.map((item, index) => {
+        if (typeof item === 'string') {
           return {
             ...sharedProps,
-            page,
+            ref: (e: any) => updateRef(e, index),
+            page: item,
             icon: true,
             disabled: true,
             text: true,
@@ -179,17 +185,18 @@ export default defineComponent({
         } else {
           return {
             ...sharedProps,
-            page,
+            ref: (e: any) => updateRef(e, index),
+            page: item,
             icon: true,
             disabled: !!props.disabled,
             elevation: props.elevation,
             outlined: props.outlined,
             border: props.border,
-            text: page !== props.modelValue,
-            color: page === props.modelValue ? props.color : false,
-            ariaCurrent: page === props.modelValue,
-            ariaLabel: t(page === props.modelValue ? props.currentPageAriaLabel : props.pageAriaLabel, index + 1),
-            onClick: (e: Event) => emit(e, page),
+            text: item !== page.value,
+            color: item === page.value ? props.color : false,
+            ariaCurrent: item === page.value,
+            ariaLabel: t(item === page.value ? props.currentPageAriaLabel : props.pageAriaLabel, index + 1),
+            onClick: (e: Event) => emit(e, item),
           }
         }
       })
@@ -211,32 +218,48 @@ export default defineComponent({
           ...sharedProps,
           icon: isRtl.value ? props.lastIcon : props.firstIcon,
           onClick: (e: Event) => emit(e, props.start, 'first'),
-          disabled: !!props.disabled || props.modelValue <= props.start,
+          disabled: !!props.disabled || page.value <= props.start,
           ariaLabel: t(props.firstAriaLabel),
         } : undefined,
         prev: {
           ...sharedProps,
           icon: isRtl.value ? props.nextIcon : props.prevIcon,
-          onClick: (e: Event) => emit(e, props.modelValue - 1, 'prev'),
-          disabled: !!props.disabled || props.modelValue <= props.start,
+          onClick: (e: Event) => emit(e, page.value - 1, 'prev'),
+          disabled: !!props.disabled || page.value <= props.start,
           ariaLabel: t(props.previousAriaLabel),
         },
         next: {
           ...sharedProps,
           icon: isRtl.value ? props.prevIcon : props.nextIcon,
-          onClick: (e: Event) => emit(e, props.modelValue + 1, 'next'),
-          disabled: !!props.disabled || props.modelValue >= props.start + props.length - 1,
+          onClick: (e: Event) => emit(e, page.value + 1, 'next'),
+          disabled: !!props.disabled || page.value >= props.start + props.length - 1,
           ariaLabel: t(props.nextAriaLabel),
         },
         last: props.showFirstLastPage ? {
           ...sharedProps,
           icon: isRtl.value ? props.firstIcon : props.lastIcon,
           onClick: (e: Event) => emit(e, props.start + props.length - 1, 'last'),
-          disabled: !!props.disabled || props.modelValue >= props.start + props.length - 1,
+          disabled: !!props.disabled || page.value >= props.start + props.length - 1,
           ariaLabel: t(props.lastAriaLabel),
         } : undefined,
       }
     })
+
+    function updateFocus () {
+      const currentIndex = page.value - props.start
+      refs.value[currentIndex]?.$el.focus()
+    }
+
+    function onKeydown (e: KeyboardEvent) {
+      if (e.keyCode === keyCodes.left && !props.disabled && page.value > props.start) {
+        page.value = page.value - 1
+        nextTick(updateFocus)
+
+      } else if (e.keyCode === keyCodes.right && !props.disabled && page.value < props.start + props.length - 1) {
+        page.value = page.value + 1
+        nextTick(updateFocus)
+      }
+    }
 
     return () => (
       <props.tag
@@ -244,6 +267,7 @@ export default defineComponent({
         class='v-pagination'
         role='navigation'
         aria-label={t(props.ariaLabel)}
+        onKeydown={onKeydown}
       >
         <ul class='v-pagination__list'>
           {props.showFirstLastPage && (
