@@ -23,6 +23,9 @@ export default defineComponent({
   props: makeProps({
     color: String,
     flat: Boolean,
+    // TODO: Implement scrolling techniques
+    // hideOnScroll: Boolean,
+    // invertedScroll: Boolean,
     modelValue: {
       type: Boolean,
       default: true,
