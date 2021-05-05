@@ -90,6 +90,10 @@ export default defineComponent({
       type: [String, Boolean],
       default: 'primary',
     },
+    ellipsis: {
+      type: String,
+      default: '...'
+    },
     showFirstLastPage: Boolean,
     ...makeTagProps({ tag: 'nav' }),
     ...makeElevationProps({ elevation: 1 }),
@@ -143,15 +147,15 @@ export default defineComponent({
       const right = props.length - middle + even
 
       if (page.value < left) {
-        return [...createRange(Math.max(1, totalVisible.value - 2), props.start), '...', props.length]
+        return [...createRange(Math.max(1, totalVisible.value - 2), props.start), props.ellipsis, props.length]
       } else if (page.value > right) {
         const length = totalVisible.value - 2
         const start = props.length - length + props.start
-        return [props.start, '...', ...createRange(length, start)]
+        return [props.start, props.ellipsis, ...createRange(length, start)]
       } else {
         const length = Math.max(1, totalVisible.value - 4)
         const start = page.value - Math.floor(length / 2) + props.start
-        return [props.start, '...', ...createRange(length, start), '...', props.length]
+        return [props.start, props.ellipsis, ...createRange(length, start), props.ellipsis, props.length]
       }
     })
 
@@ -176,6 +180,7 @@ export default defineComponent({
             ...sharedProps,
             ref: (e: any) => updateRef(e, index),
             page: item,
+            ellipsis: true,
             icon: true,
             disabled: true,
             text: true,
@@ -187,6 +192,7 @@ export default defineComponent({
             ...sharedProps,
             ref: (e: any) => updateRef(e, index),
             page: item,
+            ellipsis: false,
             icon: true,
             disabled: !!props.disabled,
             elevation: props.elevation,
@@ -284,12 +290,12 @@ export default defineComponent({
             )}
           </li>
 
-          { items.value.map(({ page, ...item }, index) => (
+          { items.value.map(({ page, ellipsis, ...item }, index) => (
             <li
               key={`${index}_${page}`}
               class='v-pagination__item'
             >
-              { ctx.slots.item ? ctx.slots.item({ page, ...item }) : (
+              { ctx.slots.item ? ctx.slots.item({ page, ellipsis, ...item }) : (
                 <VBtn {...item}>{page}</VBtn>
               ) }
             </li>
