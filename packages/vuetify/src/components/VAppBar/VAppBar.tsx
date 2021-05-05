@@ -31,7 +31,7 @@ export default defineComponent({
       default: true,
     },
     prominent: Boolean,
-    src: String,
+    image: String,
     temporary: Boolean,
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -63,7 +63,7 @@ export default defineComponent({
     )
 
     return () => {
-      const hasImg = !!(slots.img || props.src)
+      const hasImage = !!(slots.image || props.image)
       const translate = !isActive.value ? -100 : 0
 
       return (
@@ -93,11 +93,11 @@ export default defineComponent({
             },
           ]}
         >
-          { hasImg && (
-            <div class="v-app-bar__img">
-              { slots.img
-                ? slots.img?.({ src: props.src })
-                : (<img src={ props.src } alt="" />)
+          { hasImage && (
+            <div class="v-app-bar__image">
+              { slots.image
+                ? slots.img?.({ src: props.image })
+                : (<img src={ props.image } alt="" />)
               }
             </div>
           ) }
