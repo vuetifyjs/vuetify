@@ -8,13 +8,13 @@ import {
   Teleport,
   toRef,
   Transition,
-  warn,
   watch,
 } from 'vue'
 import { makeProps } from '@/util/makeProps'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { provideTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
+import { useTeleport } from '@/composables/teleport'
 
 import type {
   FunctionalComponent,
@@ -23,36 +23,6 @@ import type {
   Ref,
   TransitionProps,
 } from 'vue'
-
-function useTeleport (target: Ref<boolean | string | Element>) {
-  const teleportTarget = computed(() => {
-    const _target = target.value
-
-    if (_target === true) return undefined
-
-    const targetElement =
-      _target === false ? document.body
-      : typeof _target === 'string' ? document.querySelector(_target)
-      : _target
-
-    if (targetElement == null) {
-      warn(`Unable to locate target ${_target}`)
-      return undefined
-    }
-
-    if (!useTeleport.cache.has(targetElement)) {
-      const el = document.createElement('div')
-      el.className = 'v-overlay-container'
-      targetElement.appendChild(el)
-      useTeleport.cache.set(targetElement, el)
-    }
-
-    return useTeleport.cache.get(targetElement)
-  })
-
-  return { teleportTarget }
-}
-useTeleport.cache = new WeakMap<Element, Element>()
 
 function useBooted (isActive: Ref<boolean>) {
   const isBooted = ref(false)
