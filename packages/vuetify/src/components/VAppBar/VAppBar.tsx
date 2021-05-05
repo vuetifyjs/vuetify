@@ -24,8 +24,12 @@ export default defineComponent({
     color: String,
     flat: Boolean,
     // TODO: Implement scrolling techniques
-    // hideOnScroll: Boolean,
-    // invertedScroll: Boolean,
+    // hideOnScroll: Boolean
+    // invertedScroll: Boolean
+    // collapseOnScroll: Boolean
+    // elevateOnScroll: Boolean
+    // shrinkOnScroll: Boolean
+    // fadeImageOnScroll: Boolean
     modelValue: {
       type: Boolean,
       default: true,
