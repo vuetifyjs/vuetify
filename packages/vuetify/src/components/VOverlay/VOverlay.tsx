@@ -8,7 +8,7 @@ import {
   Teleport,
   toRef,
   Transition,
-  watch,
+  watchEffect,
 } from 'vue'
 import { BackgroundColorData, useBackgroundColor } from '@/composables/color'
 import { makeProps } from '@/util/makeProps'
@@ -23,12 +23,11 @@ import type {
   Ref,
 } from 'vue'
 
-function useBooted (isActive: Ref<boolean>) {
-  const isBooted = ref(false)
+function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
+  const isBooted = ref(eager.value)
 
-  const unwatch = watch(isActive, val => {
-    if (val) {
-      unwatch()
+  watchEffect(() => {
+    if (eager.value || isActive.value) {
       isBooted.value = true
     }
   })
@@ -130,6 +129,7 @@ export default defineComponent({
       type: [Boolean, String, Element] as PropType<boolean | string | Element>,
       default: 'body',
     },
+    eager: Boolean,
     persistent: Boolean,
     modelValue: Boolean,
     positionStrategy: {
@@ -154,13 +154,17 @@ export default defineComponent({
     const isActive = useProxiedModel(props, 'modelValue')
     const { teleportTarget } = useTeleport(toRef(props, 'attach'))
     const { themeClasses } = provideTheme()
-    const { isBooted } = useBooted(isActive)
+    const { isBooted } = useBooted(isActive, toRef(props, 'eager'))
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
 
     function onScrimClick () {
       if (!props.persistent) isActive.value = false
+    }
+
+    function onAfterLeave () {
+      if (!props.eager) isBooted.value = false
     }
 
     return () => (
@@ -191,8 +195,12 @@ export default defineComponent({
                 color={ scrimColor }
                 onClick={ onScrimClick }
               />
-              <MaybeTransition transition={ props.transition } appear>
-                { isActive.value && <div class="v-overlay__content">{ slots.default?.() }</div> }
+              <MaybeTransition transition={ props.transition } appear onAfterLeave={ onAfterLeave }>
+                { isBooted.value && (
+                  <div class="v-overlay__content" v-show={ isActive.value }>
+                    { slots.default?.({ isActive: isActive.value }) }
+                  </div>
+                )}
               </MaybeTransition>
             </div>
           )}
