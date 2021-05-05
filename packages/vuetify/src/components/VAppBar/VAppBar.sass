@@ -4,7 +4,9 @@
   align-items: flex-start
   background: rgb($app-bar-background)
   display: flex
-  padding: $app-bar-padding
+  max-width: 100%
+  padding-left: $app-bar-padding-start
+  padding-right: $app-bar-padding-end
   transition: $app-bar-transition
 
   @include border($app-bar-border...)
@@ -22,6 +24,28 @@
     &.v-app-bar--bottom
       border-bottom-width: $app-bar-border-width
       border-top-width: $app-bar-border-thin-width
+
+  &--collapsed
+    max-width: $app-bar-collapsed-max-width
+    overflow: hidden
+
+    @include ltr()
+      border-bottom-right-radius: $app-bar-collapsed-border-radius
+
+    @include rtl()
+      border-bottom-left-radius: $app-bar-collapsed-border-radius
+
+  &--density-default
+    padding-bottom: $app-bar-density-default-padding
+    padding-top: $app-bar-density-default-padding
+
+  &--density-comfortable
+    padding-bottom: $app-bar-density-comfortable-padding
+    padding-top: $app-bar-density-comfortable-padding
+
+  &--density-compact
+    padding-bottom: $app-bar-density-compact-padding
+    padding-top: $app-bar-density-compact-padding
 
   &--flat
     @include elevation($app-bar-flat-elevation)
@@ -46,3 +70,11 @@
     height: $app-bar-image-height
     object-fit: $app-bar-image-object-fit
     width: $app-bar-image-width
+
+.v-app-bar__append
+  display: flex
+  flex: 0 1 auto
+
+.v-app-bar__prepend
+  display: flex
+  flex: 0 1 auto

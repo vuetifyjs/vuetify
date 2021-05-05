@@ -21,6 +21,7 @@ export default defineComponent({
   name: 'VAppBar',
 
   props: makeProps({
+    collapse: Boolean,
     color: String,
     flat: Boolean,
     // TODO: Implement scrolling techniques
@@ -76,6 +77,7 @@ export default defineComponent({
             'v-app-bar',
             {
               'v-app-bar--bottom': props.bottom,
+              'v-app-bar--collapsed': props.collapse,
               'v-app-bar--flat': props.flat,
               'v-app-bar--is-active': isActive.value,
               'v-app-bar--prominent': props.prominent,
