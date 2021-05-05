@@ -72,6 +72,153 @@ exports[`VPagination.ts should render component in RTL mode and match snapshot 1
 </nav>
 `;
 
+exports[`VPagination.ts should render correct pages when using start prop 1`] = `
+<nav class="v-pagination"
+     role="navigation"
+     aria-label="Pagination Navigation"
+>
+  <ul class="v-pagination__list">
+    <li class="v-pagination__prev">
+      <button type="button"
+              class="v-btn v-btn--icon v-btn--disabled v-theme--light v-btn--density-comfortable rounded-sm v-btn--size-default"
+              disabled
+              arialabel="Previous page"
+      >
+        <span class="v-btn__overlay">
+        </span>
+        <i class="mdi-chevron-left mdi v-icon notranslate v-icon--size-default"
+           aria-hidden="true"
+        >
+        </i>
+      </button>
+    </li>
+    <li class="v-pagination__item">
+      <button type="button"
+              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              ariacurrent="false"
+              arialabel="Goto Page 1"
+      >
+        <span class="v-btn__overlay">
+        </span>
+        3
+      </button>
+    </li>
+    <li class="v-pagination__item">
+      <button type="button"
+              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              ariacurrent="false"
+              arialabel="Goto Page 2"
+      >
+        <span class="v-btn__overlay">
+        </span>
+        4
+      </button>
+    </li>
+    <li class="v-pagination__item">
+      <button type="button"
+              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              ariacurrent="false"
+              arialabel="Goto Page 3"
+      >
+        <span class="v-btn__overlay">
+        </span>
+        5
+      </button>
+    </li>
+    <li class="v-pagination__item">
+      <button type="button"
+              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              ariacurrent="false"
+              arialabel="Goto Page 4"
+      >
+        <span class="v-btn__overlay">
+        </span>
+        6
+      </button>
+    </li>
+    <li class="v-pagination__item">
+      <button type="button"
+              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              ariacurrent="false"
+              arialabel="Goto Page 5"
+      >
+        <span class="v-btn__overlay">
+        </span>
+        7
+      </button>
+    </li>
+    <li class="v-pagination__item">
+      <button type="button"
+              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              ariacurrent="false"
+              arialabel="Goto Page 6"
+      >
+        <span class="v-btn__overlay">
+        </span>
+        8
+      </button>
+    </li>
+    <li class="v-pagination__item">
+      <button type="button"
+              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              ariacurrent="false"
+              arialabel="Goto Page 7"
+      >
+        <span class="v-btn__overlay">
+        </span>
+        9
+      </button>
+    </li>
+    <li class="v-pagination__item">
+      <button type="button"
+              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              ariacurrent="false"
+              arialabel="Goto Page 8"
+      >
+        <span class="v-btn__overlay">
+        </span>
+        10
+      </button>
+    </li>
+    <li class="v-pagination__item">
+      <button type="button"
+              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              ariacurrent="false"
+              arialabel="Goto Page 9"
+      >
+        <span class="v-btn__overlay">
+        </span>
+        11
+      </button>
+    </li>
+    <li class="v-pagination__item">
+      <button type="button"
+              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              ariacurrent="false"
+              arialabel="Goto Page 10"
+      >
+        <span class="v-btn__overlay">
+        </span>
+        12
+      </button>
+    </li>
+    <li class="v-pagination__next">
+      <button type="button"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable rounded-sm v-btn--size-default"
+              arialabel="Next page"
+      >
+        <span class="v-btn__overlay">
+        </span>
+        <i class="mdi-chevron-right mdi v-icon notranslate v-icon--size-default"
+           aria-hidden="true"
+        >
+        </i>
+      </button>
+    </li>
+  </ul>
+</nav>
+`;
+
 exports[`VPagination.ts should render disabled buttons with length equals to 0 1`] = `
 <nav class="v-pagination"
      role="navigation"
@@ -131,7 +278,7 @@ exports[`VPagination.ts should use totalVisible prop if defined 1`] = `
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 1"
       >
@@ -152,20 +299,9 @@ exports[`VPagination.ts should use totalVisible prop if defined 1`] = `
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 3"
-      >
-        <span class="v-btn__overlay">
-        </span>
-        47
-      </button>
-    </li>
-    <li class="v-pagination__item">
-      <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
-              ariacurrent="false"
-              arialabel="Goto Page 4"
       >
         <span class="v-btn__overlay">
         </span>
@@ -174,9 +310,9 @@ exports[`VPagination.ts should use totalVisible prop if defined 1`] = `
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
-              arialabel="Goto Page 5"
+              arialabel="Goto Page 4"
       >
         <span class="v-btn__overlay">
         </span>
@@ -187,7 +323,7 @@ exports[`VPagination.ts should use totalVisible prop if defined 1`] = `
       <button type="button"
               class="v-btn v-btn--contained v-btn--elevated v-btn--icon v-theme--light bg-primary v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="true"
-              arialabel="Page 6, Current Page"
+              arialabel="Page 5, Current Page"
       >
         <span class="v-btn__overlay">
         </span>
@@ -196,9 +332,9 @@ exports[`VPagination.ts should use totalVisible prop if defined 1`] = `
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
-              arialabel="Goto Page 7"
+              arialabel="Goto Page 6"
       >
         <span class="v-btn__overlay">
         </span>
@@ -207,13 +343,24 @@ exports[`VPagination.ts should use totalVisible prop if defined 1`] = `
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              ariacurrent="false"
+              arialabel="Goto Page 7"
+      >
+        <span class="v-btn__overlay">
+        </span>
+        52
+      </button>
+    </li>
+    <li class="v-pagination__item">
+      <button type="button"
+              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 8"
       >
         <span class="v-btn__overlay">
         </span>
-        52
+        53
       </button>
     </li>
     <li class="v-pagination__item">
@@ -228,7 +375,7 @@ exports[`VPagination.ts should use totalVisible prop if defined 1`] = `
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 10"
       >

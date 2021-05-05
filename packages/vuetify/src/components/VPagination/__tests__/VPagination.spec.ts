@@ -33,7 +33,7 @@ describe('VPagination.ts', () => {
 
   it.skip('should render component in RTL mode and match snapshot', async () => {
     const wrapper = mountFunction({
-      propsData: {
+      props: {
         length: 5,
         modelValue: 2,
       },
@@ -48,7 +48,7 @@ describe('VPagination.ts', () => {
 
   it('emits an event when pagination item is clicked', async () => {
     const wrapper = mountFunction({
-      propsData: {
+      props: {
         length: 5,
         modelValue: 1,
       },
@@ -62,7 +62,7 @@ describe('VPagination.ts', () => {
 
   it('should render disabled buttons with length equals to 0', async () => {
     const wrapper = mountFunction({
-      propsData: {
+      props: {
         length: 0,
         modelValue: 1,
       },
@@ -73,14 +73,23 @@ describe('VPagination.ts', () => {
 
   it('should use totalVisible prop if defined', async () => {
     const wrapper = mountFunction({
-      propsData: {
+      props: {
         length: 100,
         modelValue: 50,
         totalVisible: 10,
       },
     })
 
-    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render correct pages when using start prop', async () => {
+    const wrapper = mountFunction({
+      props: {
+        start: 3,
+        length: 10,
+      },
+    })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -92,7 +101,7 @@ describe('VPagination.ts', () => {
         maxButtons: 4,
       }),
 
-      propsData: {
+      props: {
         length: 40,
         totalVisible: 10,
       },
@@ -111,7 +120,7 @@ describe('VPagination.ts', () => {
         maxButtons: 0,
       }),
 
-      propsData: {
+      props: {
         length: 5,
         totalVisible: undefined,
       },
@@ -137,7 +146,7 @@ describe('VPagination.ts', () => {
   it.skip('should return length when maxButtons is less than 1', () => {
     const wrapper = mountFunction({
       data: () => ({ maxButtons: -3 }),
-      propsData: { length: 4 },
+      props: { length: 4 },
     })
 
     expect(wrapper.vm.items).toEqual([1, 2, 3, 4])

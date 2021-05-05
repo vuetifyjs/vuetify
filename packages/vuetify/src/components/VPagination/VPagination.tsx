@@ -35,6 +35,10 @@ export default defineComponent({
       default: 0,
       validator: (val: number) => val % 1 === 0,
     },
+    start: {
+      type: Number,
+      default: 1,
+    },
     totalVisible: [Number, String],
     nextIcon: {
       type: String,
@@ -123,11 +127,11 @@ export default defineComponent({
       if (props.length <= 0) return []
 
       if (totalVisible.value <= 3) {
-        return [props.modelValue || 1]
+        return [Math.min(Math.max(props.start, props.modelValue), props.start + props.length)]
       }
 
       if (props.length <= totalVisible.value) {
-        return createRange(props.length, 1)
+        return createRange(props.length, props.start)
       }
 
       const even = totalVisible.value % 2 === 0 ? 1 : 0
@@ -136,15 +140,15 @@ export default defineComponent({
       const right = props.length - middle + even
 
       if (props.modelValue < left) {
-        return [...createRange(Math.max(1, totalVisible.value - 2), 1), '...', props.length]
+        return [...createRange(Math.max(1, totalVisible.value - 2), props.start), '...', props.length]
       } else if (props.modelValue > right) {
         const length = totalVisible.value - 2
-        const start = props.length - length + 1
-        return [1, '...', ...createRange(length, start)]
+        const start = props.length - length + props.start
+        return [props.start, '...', ...createRange(length, start)]
       } else {
         const length = Math.max(1, totalVisible.value - 4)
-        const start = props.modelValue - Math.floor(length / 2)
-        return [1, '...', ...createRange(length, start), '...', props.length]
+        const start = props.modelValue - Math.floor(length / 2) + props.start
+        return [props.start, '...', ...createRange(length, start), '...', props.length]
       }
     })
 
@@ -179,8 +183,8 @@ export default defineComponent({
             icon: true,
             disabled: !!props.disabled,
             elevation: props.elevation,
-            outlined: page !== props.modelValue ?? props.outlined,
-            border: page !== props.modelValue ?? props.border,
+            outlined: props.outlined,
+            border: props.border,
             text: page !== props.modelValue,
             color: page === props.modelValue ? props.color : false,
             ariaCurrent: page === props.modelValue,
@@ -206,29 +210,29 @@ export default defineComponent({
         first: props.showFirstLastPage ? {
           ...sharedProps,
           icon: isRtl.value ? props.lastIcon : props.firstIcon,
-          onClick: (e: Event) => emit(e, 1, 'first'),
-          disabled: !!props.disabled || props.modelValue <= 1,
+          onClick: (e: Event) => emit(e, props.start, 'first'),
+          disabled: !!props.disabled || props.modelValue <= props.start,
           ariaLabel: t(props.firstAriaLabel),
         } : undefined,
         prev: {
           ...sharedProps,
           icon: isRtl.value ? props.nextIcon : props.prevIcon,
           onClick: (e: Event) => emit(e, props.modelValue - 1, 'prev'),
-          disabled: !!props.disabled || props.modelValue <= 1,
+          disabled: !!props.disabled || props.modelValue <= props.start,
           ariaLabel: t(props.previousAriaLabel),
         },
         next: {
           ...sharedProps,
           icon: isRtl.value ? props.prevIcon : props.nextIcon,
           onClick: (e: Event) => emit(e, props.modelValue + 1, 'next'),
-          disabled: !!props.disabled || props.modelValue >= props.length,
+          disabled: !!props.disabled || props.modelValue >= props.start + props.length - 1,
           ariaLabel: t(props.nextAriaLabel),
         },
         last: props.showFirstLastPage ? {
           ...sharedProps,
           icon: isRtl.value ? props.firstIcon : props.lastIcon,
-          onClick: (e: Event) => emit(e, props.length, 'last'),
-          disabled: !!props.disabled || props.modelValue >= props.length,
+          onClick: (e: Event) => emit(e, props.start + props.length - 1, 'last'),
+          disabled: !!props.disabled || props.modelValue >= props.start + props.length - 1,
           ariaLabel: t(props.lastAriaLabel),
         } : undefined,
       }
