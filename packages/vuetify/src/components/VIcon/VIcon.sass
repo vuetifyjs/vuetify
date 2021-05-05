@@ -3,7 +3,6 @@
 
 .v-icon
   align-items: center
-  color: rgba($icon-color, $icon-color-opacity)
   display: inline-flex
   font-feature-settings: 'liga'
   justify-content: center
@@ -11,7 +10,6 @@
   line-height: $icon-line-height
   position: relative
   text-indent: $icon-text-indent
-  transition: $icon-transition
   user-select: none
   vertical-align: $icon-vertical-align
 
@@ -29,10 +27,6 @@
     @include rtl()
       margin-right: $icon-margin-end
 
-  &--disabled
-    color: rgba($icon-disabled-color, $icon-disabled-color-opacity) !important
-    pointer-events: none
-
   @each $name in $sizes
     &--size-#{$name}
       font-size: map-get($icon-sizes, $name)
@@ -43,9 +37,6 @@
   fill: currentColor
 
 .v-icon
-  .v-btn &
-    color: inherit
-
   &--size-default
     .v-btn:not(.v-btn--icon) &
       font-size: $icon-btn-font-size
