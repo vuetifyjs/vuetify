@@ -32,31 +32,35 @@ export default defineComponent({
       default: 1,
     },
     disabled: Boolean,
+    start: {
+      type: Number,
+      default: 1,
+    },
     length: {
       type: Number,
       default: 0,
       validator: (val: number) => val % 1 === 0,
     },
-    start: {
-      type: Number,
-      default: 1,
-    },
     totalVisible: [Number, String],
-    nextIcon: {
+    firstIcon: {
       type: String,
-      default: '$next',
+      default: '$first',
     },
     prevIcon: {
       type: String,
       default: '$prev',
     },
-    firstIcon: {
+    nextIcon: {
       type: String,
-      default: '$first',
+      default: '$next',
     },
     lastIcon: {
       type: String,
       default: '$last',
+    },
+    ariaLabel: {
+      type: String,
+      default: '$vuetify.pagination.ariaLabel.root',
     },
     pageAriaLabel: {
       type: String,
@@ -66,6 +70,10 @@ export default defineComponent({
       type: String,
       default: '$vuetify.pagination.ariaLabel.currentPage',
     },
+    firstAriaLabel: {
+      type: String,
+      default: '$vuetify.pagination.ariaLabel.first',
+    },
     previousAriaLabel: {
       type: String,
       default: '$vuetify.pagination.ariaLabel.previous',
@@ -73,14 +81,6 @@ export default defineComponent({
     nextAriaLabel: {
       type: String,
       default: '$vuetify.pagination.ariaLabel.next',
-    },
-    ariaLabel: {
-      type: String,
-      default: '$vuetify.pagination.ariaLabel.root',
-    },
-    firstAriaLabel: {
-      type: String,
-      default: '$vuetify.pagination.ariaLabel.first',
     },
     lastAriaLabel: {
       type: String,
