@@ -106,9 +106,9 @@ export default defineComponent({
       if (!firstItem) return
 
       const totalWidth = contentRect.width
-      const itemWidth = firstItem.getBoundingClientRect().width
+      const itemWidth = firstItem.getBoundingClientRect().width + 10
 
-      maxButtons.value = Math.max(0, Math.floor((totalWidth - 96)/ itemWidth) - 2)
+      maxButtons.value = Math.max(0, Math.floor((totalWidth - 96)/ itemWidth))
     })
 
     const maxButtons = ref(-1)
