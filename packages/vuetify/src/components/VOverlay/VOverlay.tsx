@@ -6,33 +6,53 @@ import {
   defineComponent,
   ref,
   Teleport,
+  toRef,
   Transition,
+  warn,
   watch,
 } from 'vue'
-import makeProps from '@/util/makeProps'
+import { makeProps } from '@/util/makeProps'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { provideTheme } from '@/composables/theme'
+import { useBackgroundColor } from '@/composables/color'
 
 import type {
-  Ref,
   FunctionalComponent,
   Prop,
   PropType,
+  Ref,
   TransitionProps,
 } from 'vue'
-import { useBackgroundColor } from '@/composables/color'
 
-function useTeleport (target = document.body) {
-  if (!useTeleport.cache.has(target)) {
-    const el = document.createElement('div')
-    el.className = 'v-overlay-container'
-    target.appendChild(el)
-    useTeleport.cache.set(target, el)
-  }
+function useTeleport (target: Ref<boolean | string | Element>) {
+  const teleportTarget = computed(() => {
+    const _target = target.value
 
-  return { teleportTarget: useTeleport.cache.get(target) }
+    if (_target === true) return undefined
+
+    const targetElement =
+      _target === false ? document.body
+      : typeof _target === 'string' ? document.querySelector(_target)
+      : _target
+
+    if (targetElement == null) {
+      warn(`Unable to locate target ${_target}`)
+      return undefined
+    }
+
+    if (!useTeleport.cache.has(targetElement)) {
+      const el = document.createElement('div')
+      el.className = 'v-overlay-container'
+      targetElement.appendChild(el)
+      useTeleport.cache.set(targetElement, el)
+    }
+
+    return useTeleport.cache.get(targetElement)
+  })
+
+  return { teleportTarget }
 }
-useTeleport.cache = new WeakMap<HTMLElement, HTMLElement>()
+useTeleport.cache = new WeakMap<Element, Element>()
 
 function useBooted (isActive: Ref<boolean>) {
   const isBooted = ref(false)
@@ -125,6 +145,10 @@ export default defineComponent({
 
   props: makeProps({
     absolute: Boolean,
+    attach: {
+      type: [Boolean, String, Element] as PropType<boolean | string | Element>,
+      default: 'body',
+    },
     persistent: Boolean,
     modelValue: Boolean,
     positionStrategy: {
@@ -142,7 +166,6 @@ export default defineComponent({
       type: [String, Boolean],
       default: true,
     },
-    target: [],
     transition: {
       type: [String, Boolean],
       default: 'fade-transition',
@@ -151,7 +174,7 @@ export default defineComponent({
 
   setup (props, { slots, attrs }) {
     const isActive = useProxiedModel(props, 'modelValue')
-    const { teleportTarget } = useTeleport()
+    const { teleportTarget } = useTeleport(toRef(props, 'attach'))
     const { themeClasses } = provideTheme()
     const { isBooted } = useBooted(isActive)
     const scrimColor = useBackgroundColor(computed(() => {
@@ -172,7 +195,7 @@ export default defineComponent({
             onClick: () => isActive.value = !isActive.value,
           },
         }) }
-        <Teleport to={ teleportTarget }>
+        <Teleport to={ teleportTarget.value } disabled={ !teleportTarget.value }>
           { isBooted.value && (
             <div
               class={[

@@ -11,7 +11,7 @@ import { VOverlay } from '@/components/VOverlay'
 // } from '../../util/helpers'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import makeProps from '@/util/makeProps'
+import { makeProps } from '@/util/makeProps'
 
 export default defineComponent({
   name: 'VDialog',
