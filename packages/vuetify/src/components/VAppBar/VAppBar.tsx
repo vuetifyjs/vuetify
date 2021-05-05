@@ -62,20 +62,20 @@ export default defineComponent({
     const layoutStyles = useLayoutItem(
       props.name,
       toRef(props, 'priority'),
-      computed(() => 'top'),
+      computed(() => props.bottom ? 'bottom' : 'top'),
       computed(() => isActive.value ? height.value : 0),
     )
 
     return () => {
       const hasImage = !!(slots.image || props.image)
-      const translate = !isActive.value ? -100 : 0
+      const translate = (!isActive.value ? -100 : 0) * (props.bottom ? -1 : 1)
 
       return (
         <props.tag
           class={[
             'v-app-bar',
             {
-              'v-app-bar--border': !!props.border,
+              'v-app-bar--bottom': props.bottom,
               'v-app-bar--flat': props.flat,
               'v-app-bar--is-active': isActive.value,
               'v-app-bar--prominent': props.prominent,

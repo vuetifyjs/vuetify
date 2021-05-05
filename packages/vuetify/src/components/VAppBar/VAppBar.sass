@@ -1,26 +1,30 @@
 @import './index'
 
 .v-app-bar
-  align-items: start
-  background: rgb(var(--v-theme-surface))
+  align-items: flex-start
+  background: rgb($app-bar-background)
   display: flex
-  height: 64px
-  left: 0
-  padding: 8px 4px
-  top: 0
-  transition: .2s $standard-easing
+  padding: $app-bar-padding
+  transition: $app-bar-transition
+
+  @include border($app-bar-border...)
   @include position($app-bar-positions)
   @include rounded($app-bar-border-radius)
 
+  &--is-active
+    @include elevation($app-bar-elevation)
+
   &--border
-    @include elevation(0)
-    @include border($app-bar-border...)
+    border-bottom-width: $app-bar-border-thin-width
+
+    @include elevation($app-bar-flat-elevation)
+
+    &.v-app-bar--bottom
+      border-bottom-width: $app-bar-border-width
+      border-top-width: $app-bar-border-thin-width
 
   &--flat
     @include elevation($app-bar-flat-elevation)
-
-  &--is-active
-    @include elevation($app-bar-elevation)
 
   &--rounded
     @include rounded($app-bar-rounded-border-radius)
@@ -39,6 +43,6 @@
   z-index: -1
 
   img
-    height: $app-bar-img-height
-    object-fit: $app-bar-img-object-fit
-    width: $app-bar-img-width
+    height: $app-bar-image-height
+    object-fit: $app-bar-image-object-fit
+    width: $app-bar-image-width
