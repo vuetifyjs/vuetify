@@ -19,7 +19,10 @@ export default defineComponent({
   name: 'VSheet',
 
   props: makeProps({
-    color: String,
+    color: {
+      type: String,
+      default: 'surface',
+    },
     ...makeBorderProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
