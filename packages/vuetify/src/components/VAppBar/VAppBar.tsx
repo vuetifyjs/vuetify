@@ -9,13 +9,13 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { useBackgroundColor } from '@/composables/color'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { makeProps } from '@/util/makeProps'
 import { computed, defineComponent, toRef } from 'vue'
 import { convertToUnit } from '@/util'
+import { makeProps } from '@/util/makeProps'
 
 export default defineComponent({
   name: 'VAppBar',
