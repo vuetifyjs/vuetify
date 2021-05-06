@@ -20,5 +20,5 @@ $data-table-row-group-children-td-height: 35px !default;
 $data-table-scroll-bar-width: 17px !default;
 $edit-dialog-content-padding: 0 16px !default;
 $edit-dialog-actions-padding: 8px !default;
-$data-table-regular-header-font-size: map-deep-get($headings, 'caption', 'size') !default;
-$data-table-regular-row-font-size: map-deep-get($headings, 'subtitle-2', 'size') !default;
+$data-table-regular-header-font-size: map-deep-get($typography, 'caption', 'size') !default;
+$data-table-regular-row-font-size: map-deep-get($typography, 'subtitle-2', 'size') !default;

@@ -8,7 +8,7 @@ $banner-border-width: 0 0 thin 0 !default;
 $banner-content-line-height: 1.25rem !default;
 $banner-content-padding-bottom: 8px !default;
 $banner-elevation: 0 !default;
-$banner-font-size: map-deep-get($headings, 'body-2', 'size') !default;
+$banner-font-size: map-deep-get($typography, 'body-2', 'size') !default;
 $banner-line-height: 20px !default;
 $banner-padding-bottom: 8px !default;
 $banner-padding-end: 8px !default;

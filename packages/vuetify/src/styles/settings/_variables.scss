@@ -167,8 +167,8 @@ $font-weights: map-deep-merge(
 
 $heading-font-family: $body-font-family !default;
 
-$headings: () !default;
-$headings: map-deep-merge(
+$typography: () !default;
+$typography: map-deep-merge(
   (
     'h1': (
       'size': 6rem,
@@ -275,13 +275,13 @@ $headings: map-deep-merge(
       'text-transform': uppercase
     )
   ),
-  $headings
+  $typography
 );
 
-$typography: () !default;
-@each $type, $values in $headings {
-  $typography: map-deep-merge(
-    $typography,
+$flat-typography: () !default;
+@each $type, $values in $typography {
+  $flat-typography: map-deep-merge(
+    $flat-typography,
     (#{$type}: map-values($values))
   );
 }
@@ -307,11 +307,6 @@ $ripple-animation-visible-opacity: 0.15 !default;
 $bootable-transition: 0.2s $decelerated-easing !default;
 $blockquote-font-size: 18px !default;
 $blockquote-font-weight: 300 !default;
-$code-kbd-border-radius: 3px !default;
-$code-kbd-font-size: 85% !default;
-$code-kbd-font-weight: normal !default;
-$code-padding: .2em .4em !default;
-$kbd-padding: .2em .4rem !default;
 $input-top-spacing: 16px !default;
 $text-field-active-label-height: 12px !default;
 
