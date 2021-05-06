@@ -39,8 +39,8 @@
 
 .dialog-transition {
   &-enter-from, &-leave-to {
-    transform: scale(0.5);
-    opacity: 0;
+    //transform: scale(0.5);
+    opacity: -.2;
   }
 
   &-enter-to, &-leave-from {

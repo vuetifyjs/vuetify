@@ -14,17 +14,19 @@ export const makeTransitionProps = propsFactory({
 }, 'transition')
 
 interface MaybeTransitionProps extends TransitionProps {
-  transition?: string | boolean | TransitionProps
+  transition?: string | boolean | TransitionProps & { component?: any }
 }
 
 export const MaybeTransition: FunctionalComponent<MaybeTransitionProps> = (props, { slots }) => {
   const { transition, ...rest } = props
 
-  if (!props.transition || typeof props.transition === 'boolean') return slots.default?.()
+  if (!transition || typeof transition === 'boolean') return slots.default?.()
+
+  const { component = Transition, ...customProps } = typeof transition === 'object' ? transition : {}
 
   return h(
-    Transition,
-    mergeProps(typeof props.transition === 'string' ? { name: props.transition } : props.transition as any, rest as any),
+    component,
+    mergeProps(typeof transition === 'string' ? { name: transition } : customProps as any, rest as any),
     slots
   )
 }

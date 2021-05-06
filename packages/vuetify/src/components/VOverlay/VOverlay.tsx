@@ -195,12 +195,10 @@ export default defineComponent({
                 color={ scrimColor }
                 onClick={ onScrimClick }
               />
-              <MaybeTransition transition={ props.transition } appear onAfterLeave={ onAfterLeave }>
-                { isBooted.value && (
-                  <div class="v-overlay__content" v-show={ isActive.value }>
-                    { slots.default?.({ isActive: isActive.value }) }
-                  </div>
-                )}
+              <MaybeTransition transition={ props.transition } appear persisted onAfterLeave={ onAfterLeave }>
+                <div class="v-overlay__content" v-show={ isActive.value }>
+                  { slots.default?.({ isActive: isActive.value }) }
+                </div>
               </MaybeTransition>
             </div>
           )}

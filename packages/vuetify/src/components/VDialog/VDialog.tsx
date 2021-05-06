@@ -13,6 +13,7 @@ import { makeProps } from '@/util/makeProps'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { VDialogTransition } from '@/components/transitions'
 
 export default defineComponent({
   name: 'VDialog',
@@ -43,7 +44,7 @@ export default defineComponent({
     const activatorElement = ref()
 
     watch(activatorElement, () => {
-      console.log(activatorElement.value.getBoundingClientRect())
+      // console.log(activatorElement.value.getBoundingClientRect())
     })
 
     // slots.activator?.({
@@ -74,7 +75,10 @@ export default defineComponent({
         v-model={ isActive.value }
         class='v-dialog'
         style={ dimensionStyles.value }
-        transition={ props.transition }
+        transition={ mergeProps(
+          { component: VDialogTransition, target: activatorElement.value },
+          typeof props.transition === 'string' ? { name: props.transition } : props.transition as any
+        ) as any }
         { ...attrs }
         v-slots={{
           default: slots.default,
