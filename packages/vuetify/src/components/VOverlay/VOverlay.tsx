@@ -8,6 +8,7 @@ import {
   Teleport,
   toRef,
   Transition,
+  watch,
   watchEffect,
 } from 'vue'
 import { BackgroundColorData, useBackgroundColor } from '@/composables/color'
@@ -118,6 +119,21 @@ function Scrim (props: ScrimProps) {
   )
 }
 
+function getScrollParent (el?: HTMLElement) {
+  do {
+    if (hasScrollbar(el)) return el
+  } while (el = el?.parentElement!) // eslint-disable-line no-cond-assign
+
+  return document.scrollingElement as HTMLElement
+}
+
+function hasScrollbar (el?: HTMLElement) {
+  if (!el || el.nodeType !== Node.ELEMENT_NODE) return false
+
+  const style = window.getComputedStyle(el)
+  return ['auto', 'scroll'].includes(style.overflowY!) && el.scrollHeight > el.clientHeight
+}
+
 export default defineComponent({
   name: 'VOverlay',
 
@@ -167,6 +183,14 @@ export default defineComponent({
       if (!props.eager) isBooted.value = false
     }
 
+    const overlayRoot = ref<HTMLElement>()
+    const scrollParent = ref<HTMLElement>()
+    watch(isActive, val => {
+      if (val) scrollParent.value = getScrollParent(overlayRoot.value)
+      if (!scrollParent.value) return
+      scrollParent.value.style.overflow = val ? 'hidden' : ''
+    })
+
     return () => (
       <>
         { slots.activator?.({
@@ -188,6 +212,7 @@ export default defineComponent({
                 },
                 themeClasses.value,
               ]}
+              ref={ overlayRoot }
               {...attrs}
             >
               <Scrim
