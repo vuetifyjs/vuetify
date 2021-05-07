@@ -3,8 +3,7 @@ import './VProgressCircular.sass'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
-import { useTheme } from '@/composables/theme'
-import { useColor } from '@/composables/color'
+import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, defineComponent } from 'vue'
@@ -19,13 +18,13 @@ export default defineComponent({
       type: [Number, String],
       default: 0,
     },
-    size: {
-      type: [Number, String],
-      default: 32,
-    },
     color: {
       type: String,
       default: 'primary',
+    },
+    size: {
+      type: Number,
+      default: 32,
     },
     width: {
       type: [Number, String],
@@ -42,17 +41,15 @@ export default defineComponent({
     const radius = 20
     const isVisible = true
 
-    const { themeClasses } = useTheme()
+    const { textColorClasses, textColorStyles } = useTextColor(computed(() => (
+      props.color
+    )))
 
-    const { colorClasses, colorStyles } = useColor(computed(() => ({
-      text: props.color,
-    })))
+    const calculatedSize = computed(() => Number(props.size))
 
-    const calculatedSize = computed(():number => Number(props.size))
+    const circumference = computed(() => 2 * Math.PI * radius)
 
-    const circumference = computed((): number => 2 * Math.PI * radius)
-
-    const normalizedValue = computed((): number => {
+    const normalizedValue = computed(() => {
       if (props.value < 0) {
         return 0
       }
@@ -64,25 +61,25 @@ export default defineComponent({
       return parseFloat(props.value)
     })
 
-    const strokeDashArray = computed((): number => {
+    const strokeDashArray = computed(() => {
       return Math.round(circumference.value * 1000) / 1000
     })
 
-    const strokeDashOffset = computed((): string => {
-      return ((100 - normalizedValue.value) / 100) * circumference.value + 'px'
+    const strokeDashOffset = computed(() => {
+      return convertToUnit(((100 - normalizedValue.value) / 100) * circumference.value)
     })
 
-    const strokeWidth = computed((): number => {
+    const strokeWidth = computed(() => {
       return Number(props.width) / +props.size * viewBoxSize.value * 2
     })
 
-    const svgStyles = computed((): object => {
+    const svgStyles = computed(() => {
       return {
         transform: `rotate(${Number(props.rotate)}deg)`,
       }
     })
 
-    const viewBoxSize = computed((): number => {
+    const viewBoxSize = computed(() => {
       return radius / (1 - Number(props.width) / +props.size)
     })
 
@@ -95,13 +92,14 @@ export default defineComponent({
               'v-progress-circular--visible': isVisible,
               'v-progress-circular--indeterminate': props.indeterminate,
             },
-            themeClasses.value,
-            colorClasses.value,
+            textColorClasses.value,
           ]}
           style={[
-            colorStyles.value,
-            { height: convertToUnit(calculatedSize.value) },
-            { width: convertToUnit(calculatedSize.value) },
+            textColorStyles.value,
+            {
+              height: convertToUnit(calculatedSize.value),
+              width: convertToUnit(calculatedSize.value),
+            },
           ]}
           role="progressbar"
           aria-valuemin="0"
