@@ -45,3 +45,18 @@
 
 .v-overlay--active
   pointer-events: auto
+
+.v-overlay--animate
+  animation-duration: .15s
+  animation-name: animate-dialog
+  animation-timing-function: $accelerated-easing
+
+@keyframes animate-dialog
+  0%
+    transform: scale(1)
+
+  50%
+    transform: scale(1.03)
+
+  100%
+    transform: scale(1)

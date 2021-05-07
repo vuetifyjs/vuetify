@@ -21,12 +21,10 @@ export default defineComponent({
   props: makeProps({
     disabled: Boolean,
     fullscreen: Boolean,
-    noClickAnimation: Boolean,
     origin: {
       type: String,
       default: 'center center',
     },
-    persistent: Boolean,
     retainFocus: {
       type: Boolean,
       default: true,
@@ -70,21 +68,30 @@ export default defineComponent({
       })
     }
 
-    return () => (
-      <VOverlay
-        v-model={ isActive.value }
-        class='v-dialog'
-        style={ dimensionStyles.value }
-        transition={ mergeProps(
-          { component: VDialogTransition, target: activatorElement.value },
-          typeof props.transition === 'string' ? { name: props.transition } : props.transition as any
-        ) as any }
-        { ...attrs }
-        v-slots={{
-          default: slots.default,
-          activator,
-        }}
-      />
-    )
+    return () => {
+      const transition = mergeProps(
+        {
+          component: VDialogTransition,
+          target: activatorElement.value,
+        },
+        typeof props.transition === 'string'
+          ? { name: props.transition }
+          : props.transition as any
+      ) as any
+
+      return (
+        <VOverlay
+          v-model={ isActive.value }
+          class='v-dialog'
+          style={ dimensionStyles.value }
+          transition={ transition }
+          { ...attrs }
+          v-slots={{
+            default: slots.default,
+            activator,
+          }}
+        />
+      )
+    }
   },
 })

@@ -17,6 +17,7 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { provideTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTeleport } from '@/composables/teleport'
+import { ClickOutside } from '@/directives/click-outside'
 
 import type {
   Prop,
@@ -137,6 +138,8 @@ function hasScrollbar (el?: HTMLElement) {
 export default defineComponent({
   name: 'VOverlay',
 
+  directives: { ClickOutside },
+
   inheritAttrs: false,
 
   props: makeProps({
@@ -146,6 +149,7 @@ export default defineComponent({
       default: 'body',
     },
     eager: Boolean,
+    noClickAnimation: Boolean,
     persistent: Boolean,
     modelValue: Boolean,
     positionStrategy: {
@@ -175,8 +179,13 @@ export default defineComponent({
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
 
-    function onScrimClick () {
+    const animate = ref(false)
+    function onClickOutside () {
       if (!props.persistent) isActive.value = false
+      else if (!props.noClickAnimation) {
+        animate.value = true
+        window.setTimeout(() => animate.value = false, 150)
+      }
     }
 
     function onAfterLeave () {
@@ -209,6 +218,7 @@ export default defineComponent({
                 {
                   'v-overlay--absolute': props.absolute,
                   'v-overlay--active': isActive.value,
+                  'v-overlay--animate': animate.value,
                 },
                 themeClasses.value,
               ]}
@@ -218,10 +228,9 @@ export default defineComponent({
               <Scrim
                 modelValue={ isActive.value && !!props.scrim }
                 color={ scrimColor }
-                onClick={ onScrimClick }
               />
               <MaybeTransition transition={ props.transition } appear persisted onAfterLeave={ onAfterLeave }>
-                <div class="v-overlay__content" v-show={ isActive.value }>
+                <div class="v-overlay__content" v-show={ isActive.value } v-click-outside={ onClickOutside }>
                   { slots.default?.({ isActive: isActive.value }) }
                 </div>
               </MaybeTransition>
