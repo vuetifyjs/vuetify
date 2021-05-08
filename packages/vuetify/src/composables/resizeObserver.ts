@@ -3,7 +3,19 @@ import { onBeforeUnmount, ref, watch } from 'vue'
 
 export function useResizeObserver (callback: ResizeObserverCallback) {
   const resizeRef = ref<Element>()
-  const observer = new ResizeObserver(callback)
+  const contentRect = ref<DOMRectReadOnly>(new DOMRect(0, 0, 0, 0))
+  const contentBoxSize = ref<ResizeObserverSize>({ blockSize: 0, inlineSize: 0 })
+  const borderBoxSize = ref<ResizeObserverSize>({ blockSize: 0, inlineSize: 0 })
+
+  const observer = new ResizeObserver((entries: ResizeObserverEntry[]) => {
+    callback?.(entries, observer)
+
+    if (!entries.length) return
+
+    contentRect.value = entries[0].contentRect
+    contentBoxSize.value = entries[0].contentBoxSize[0]
+    borderBoxSize.value = entries[0].borderBoxSize[0]
+  })
 
   onBeforeUnmount(() => {
     observer.disconnect()
@@ -16,5 +28,5 @@ export function useResizeObserver (callback: ResizeObserverCallback) {
     flush: 'post',
   })
 
-  return { resizeRef }
+  return { resizeRef, contentRect, contentBoxSize, borderBoxSize }
 }
