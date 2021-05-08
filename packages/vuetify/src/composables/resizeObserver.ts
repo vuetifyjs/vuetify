@@ -1,11 +1,11 @@
 // Utilities
-import { onBeforeUnmount, ref, watch } from 'vue'
+import { onBeforeUnmount, readonly, ref, watch } from 'vue'
 
 export function useResizeObserver (callback: ResizeObserverCallback) {
   const resizeRef = ref<Element>()
-  const contentRect = ref<DOMRectReadOnly>(new DOMRect(0, 0, 0, 0))
-  const contentBoxSize = ref<ResizeObserverSize>({ blockSize: 0, inlineSize: 0 })
-  const borderBoxSize = ref<ResizeObserverSize>({ blockSize: 0, inlineSize: 0 })
+  const contentRect = ref<DOMRectReadOnly | undefined>()
+  const contentBoxSize = ref<ResizeObserverSize | undefined>()
+  const borderBoxSize = ref<ResizeObserverSize | undefined>()
 
   const observer = new ResizeObserver((entries: ResizeObserverEntry[]) => {
     callback?.(entries, observer)
@@ -22,11 +22,22 @@ export function useResizeObserver (callback: ResizeObserverCallback) {
   })
 
   watch(resizeRef, (newValue, oldValue) => {
-    if (oldValue) observer.unobserve(oldValue)
+    if (oldValue) {
+      observer.unobserve(oldValue)
+      contentRect.value = undefined
+      contentBoxSize.value = undefined
+      borderBoxSize.value = undefined
+    }
+
     if (newValue) observer.observe(newValue)
   }, {
     flush: 'post',
   })
 
-  return { resizeRef, contentRect, contentBoxSize, borderBoxSize }
+  return {
+    resizeRef,
+    contentRect: readonly(contentRect),
+    contentBoxSize: readonly(contentBoxSize),
+    borderBoxSize: readonly(borderBoxSize),
+  }
 }
