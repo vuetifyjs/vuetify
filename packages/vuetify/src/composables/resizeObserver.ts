@@ -1,7 +1,7 @@
 // Utilities
 import { onBeforeUnmount, readonly, ref, watch } from 'vue'
 
-export function useResizeObserver (callback: ResizeObserverCallback) {
+export function useResizeObserver (callback?: ResizeObserverCallback) {
   const resizeRef = ref<Element>()
   const contentRect = ref<DOMRectReadOnly | undefined>()
   const contentBoxSize = ref<ResizeObserverSize | undefined>()
