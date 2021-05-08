@@ -1,3 +1,4 @@
+// Utilities
 import { onBeforeUnmount, ref, watch } from 'vue'
 
 export function useResizeObserver (callback: ResizeObserverCallback) {
