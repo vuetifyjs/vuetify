@@ -28,6 +28,7 @@ export interface LocaleInstance {
   fallback: Ref<string>
   messages: Ref<LocaleMessages>
   t: (key: string, ...params: unknown[]) => string
+  n: (value: number) => string
 }
 
 export interface LocaleAdapter {
@@ -111,6 +112,14 @@ const createTranslateFunction = (
   }
 }
 
+function createNumberFunction (current: Ref<string>, fallback: Ref<string>) {
+  return (value: number, options?: Intl.NumberFormatOptions) => {
+    const numberFormat = new Intl.NumberFormat([current.value, fallback.value], options)
+
+    return numberFormat.format(value)
+  }
+}
+
 export function createDefaultLocaleAdapter (options?: LocaleOptions): LocaleAdapter {
   const createScope = (options: {
     current: MaybeRef<string>
@@ -121,7 +130,13 @@ export function createDefaultLocaleAdapter (options?: LocaleOptions): LocaleAdap
     const fallback = wrapInRef(options.fallback)
     const messages = wrapInRef(options.messages)
 
-    return { current, fallback, messages, t: createTranslateFunction(current, fallback, messages) }
+    return {
+      current,
+      fallback,
+      messages,
+      t: createTranslateFunction(current, fallback, messages),
+      n: createNumberFunction(current, fallback),
+    }
   }
 
   return {

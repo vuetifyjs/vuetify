@@ -105,7 +105,7 @@ export default defineComponent({
 
   setup (props, ctx) {
     const page = useProxiedModel(props, 'modelValue')
-    const { t } = useLocale()
+    const { t, n } = useLocale()
     const { isRtl } = useRtl()
     const { resizeRef } = useResizeObserver(entries => {
       if (!entries.length) return
@@ -191,7 +191,7 @@ export default defineComponent({
           return {
             ...sharedProps,
             ref: (e: any) => updateRef(e, index),
-            page: item,
+            page: n(item),
             ellipsis: false,
             icon: true,
             disabled: !!props.disabled,
