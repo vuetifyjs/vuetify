@@ -2,7 +2,7 @@
 import { onBeforeUnmount, ref, watch } from 'vue'
 
 export function useResizeObserver (callback: ResizeObserverCallback) {
-  const resizeRef = ref()
+  const resizeRef = ref<Element>()
   const observer = new ResizeObserver(callback)
 
   onBeforeUnmount(() => {
