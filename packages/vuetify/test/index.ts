@@ -66,7 +66,7 @@ export const scrollElement = (element: Element, y: number) => {
 }
 
 // Add a global mockup for IntersectionObserver
-(global as any).IntersectionObserver = class IntersectionObserver {
+class IntersectionObserver {
   callback?: (entries: any, observer: any) => {}
 
   constructor (callback: any) {
@@ -83,5 +83,29 @@ export const scrollElement = (element: Element, y: number) => {
     return null
   }
 }
+
+(global as any).IntersectionObserver = IntersectionObserver
+
+class ResizeObserver {
+  callback?: ResizeObserverCallback
+
+  constructor (callback: ResizeObserverCallback) {
+    this.callback = callback
+  }
+
+  observe () {
+    this.callback?.([], this)
+  }
+
+  unobserve () {
+    this.callback = undefined
+  }
+
+  disconnect () {
+    this.callback = undefined
+  }
+}
+
+(global as any).ResizeObserver = ResizeObserver
 
 toHaveBeenWarnedInit()
