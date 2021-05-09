@@ -54,11 +54,13 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Səhifələmə Naviqasiyası',
+      root: 'Səhifələmə Naviqasiyası',
       next: 'Növbəti səhifə',
       previous: 'Əvəvlki səhifə',
       page: 'Səhifəyə get {0}',
       currentPage: 'Cari səhifə, Səhifə {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {

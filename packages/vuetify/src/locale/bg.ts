@@ -54,11 +54,13 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Странициране',
+      root: 'Странициране',
       next: 'Следваща страница',
       previous: 'Предишна страница',
       page: 'Отиди на страница {0}',
       currentPage: 'Текуща страница, Страница {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {

@@ -54,11 +54,13 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Paginasjonsnavigasjon',
+      root: 'Paginasjonsnavigasjon',
       next: 'Neste side',
       previous: 'Forrige side',
       page: 'Gå til side {0}',
       currentPage: 'Gjeldende side, side {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {

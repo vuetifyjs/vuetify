@@ -54,11 +54,13 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Navigacija stranicama',
+      root: 'Navigacija stranicama',
       next: 'Sljedeća stranica',
       previous: 'Prethodna stranica',
       page: 'Idi na stranicu {0}',
       currentPage: 'Trenutna stranica, stranica {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {

@@ -22,6 +22,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeBorderProps } from '@/composables/border'
 import { useRefs } from '@/composables/refs'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useTheme } from '@/composables/theme'
 
 export default defineComponent({
   name: 'VPagination',
@@ -92,7 +93,7 @@ export default defineComponent({
     },
     ellipsis: {
       type: String,
-      default: '...'
+      default: '...',
     },
     showFirstLastPage: Boolean,
     ...makeTagProps({ tag: 'nav' }),
@@ -107,6 +108,7 @@ export default defineComponent({
     const page = useProxiedModel(props, 'modelValue')
     const { t, n } = useLocale()
     const { isRtl } = useRtl()
+    const { themeClasses } = useTheme()
     const { resizeRef } = useResizeObserver(entries => {
       if (!entries.length) return
 
@@ -119,7 +121,7 @@ export default defineComponent({
       const totalWidth = contentRect.width
       const itemWidth = firstItem.getBoundingClientRect().width + 10
 
-      maxButtons.value = Math.max(0, Math.floor((totalWidth - 96)/ itemWidth))
+      maxButtons.value = Math.max(0, Math.floor((totalWidth - 96) / itemWidth))
     })
 
     const maxButtons = ref(-1)
@@ -260,7 +262,6 @@ export default defineComponent({
       if (e.keyCode === keyCodes.left && !props.disabled && page.value > props.start) {
         page.value = page.value - 1
         nextTick(updateFocus)
-
       } else if (e.keyCode === keyCodes.right && !props.disabled && page.value < props.start + props.length - 1) {
         page.value = page.value + 1
         nextTick(updateFocus)
@@ -270,24 +271,27 @@ export default defineComponent({
     return () => (
       <props.tag
         ref={resizeRef}
-        class='v-pagination'
+        class={[
+          'v-pagination',
+          themeClasses.value,
+        ]}
         role='navigation'
         aria-label={t(props.ariaLabel)}
         onKeydown={onKeydown}
       >
         <ul class='v-pagination__list'>
-          {props.showFirstLastPage && (
+          { props.showFirstLastPage && (
             <li class='v-pagination__first'>
               { ctx.slots.first ? ctx.slots.first(controls.value.first) : (
                 <VBtn {...controls.value.first} />
-              )}
+              ) }
             </li>
-          )}
+          ) }
 
           <li class='v-pagination__prev'>
             { ctx.slots.prev ? ctx.slots.prev(controls.value.prev) : (
               <VBtn {...controls.value.prev} />
-            )}
+            ) }
           </li>
 
           { items.value.map(({ page, ellipsis, ...item }, index) => (
@@ -304,18 +308,18 @@ export default defineComponent({
           <li class='v-pagination__next'>
             { ctx.slots.next ? ctx.slots.next(controls.value.next) : (
               <VBtn {...controls.value.next} />
-            )}
+            ) }
           </li>
 
-          {props.showFirstLastPage && (
+          { props.showFirstLastPage && (
             <li class='v-pagination__last'>
               { ctx.slots.last ? ctx.slots.last(controls.value.last) : (
                 <VBtn {...controls.value.last} />
-              )}
+              ) }
             </li>
-          )}
+          ) }
         </ul>
       </props.tag>
     )
-  }
+  },
 })

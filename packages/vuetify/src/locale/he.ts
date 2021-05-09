@@ -54,11 +54,13 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'ניווט עימוד',
+      root: 'ניווט עימוד',
       next: 'עמוד הבא',
       previous: 'עמוד הקודם',
       page: '{0} לך לעמוד',
       currentPage: '{0} עמוד נוכחי, עמוד',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {

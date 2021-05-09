@@ -54,11 +54,13 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Puslapio naršymas',
+      root: 'Puslapio naršymas',
       next: 'Kitas puslapis',
       previous: 'Ankstesnis puslapis',
       page: 'Eiti į puslapį {0}',
       currentPage: 'Dabartinis puslapis, puslapis {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {

@@ -73,15 +73,14 @@ exports[`VPagination.ts should render component in RTL mode and match snapshot 1
 `;
 
 exports[`VPagination.ts should render correct pages when using start prop 1`] = `
-<nav class="v-pagination"
+<nav class="v-pagination v-theme--light"
      role="navigation"
      aria-label="Pagination Navigation"
 >
   <ul class="v-pagination__list">
     <li class="v-pagination__prev">
       <button type="button"
-              class="v-btn v-btn--icon v-btn--disabled v-theme--light v-btn--density-comfortable rounded-sm v-btn--size-default"
-              disabled
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable rounded-sm v-btn--size-default"
               arialabel="Previous page"
       >
         <span class="v-btn__overlay">
@@ -94,7 +93,7 @@ exports[`VPagination.ts should render correct pages when using start prop 1`] = 
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 1"
       >
@@ -105,7 +104,7 @@ exports[`VPagination.ts should render correct pages when using start prop 1`] = 
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 2"
       >
@@ -116,7 +115,7 @@ exports[`VPagination.ts should render correct pages when using start prop 1`] = 
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 3"
       >
@@ -127,7 +126,7 @@ exports[`VPagination.ts should render correct pages when using start prop 1`] = 
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 4"
       >
@@ -138,7 +137,7 @@ exports[`VPagination.ts should render correct pages when using start prop 1`] = 
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 5"
       >
@@ -149,7 +148,7 @@ exports[`VPagination.ts should render correct pages when using start prop 1`] = 
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 6"
       >
@@ -160,7 +159,7 @@ exports[`VPagination.ts should render correct pages when using start prop 1`] = 
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 7"
       >
@@ -171,7 +170,7 @@ exports[`VPagination.ts should render correct pages when using start prop 1`] = 
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 8"
       >
@@ -182,7 +181,7 @@ exports[`VPagination.ts should render correct pages when using start prop 1`] = 
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 9"
       >
@@ -193,7 +192,7 @@ exports[`VPagination.ts should render correct pages when using start prop 1`] = 
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 10"
       >
@@ -220,7 +219,7 @@ exports[`VPagination.ts should render correct pages when using start prop 1`] = 
 `;
 
 exports[`VPagination.ts should render disabled buttons with length equals to 0 1`] = `
-<nav class="v-pagination"
+<nav class="v-pagination v-theme--light"
      role="navigation"
      aria-label="Pagination Navigation"
 >
@@ -258,7 +257,7 @@ exports[`VPagination.ts should render disabled buttons with length equals to 0 1
 `;
 
 exports[`VPagination.ts should use totalVisible prop if defined 1`] = `
-<nav class="v-pagination"
+<nav class="v-pagination v-theme--light"
      role="navigation"
      aria-label="Pagination Navigation"
 >
@@ -278,7 +277,7 @@ exports[`VPagination.ts should use totalVisible prop if defined 1`] = `
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 1"
       >
@@ -299,7 +298,7 @@ exports[`VPagination.ts should use totalVisible prop if defined 1`] = `
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 3"
       >
@@ -310,7 +309,7 @@ exports[`VPagination.ts should use totalVisible prop if defined 1`] = `
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 4"
       >
@@ -332,7 +331,7 @@ exports[`VPagination.ts should use totalVisible prop if defined 1`] = `
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 6"
       >
@@ -343,7 +342,7 @@ exports[`VPagination.ts should use totalVisible prop if defined 1`] = `
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 7"
       >
@@ -354,7 +353,7 @@ exports[`VPagination.ts should use totalVisible prop if defined 1`] = `
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 8"
       >
@@ -375,7 +374,7 @@ exports[`VPagination.ts should use totalVisible prop if defined 1`] = `
     </li>
     <li class="v-pagination__item">
       <button type="button"
-              class="v-btn v-btn--icon v-theme--light v-btn--border v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
+              class="v-btn v-btn--icon v-theme--light v-btn--density-comfortable elevation-1 rounded-sm v-btn--size-default"
               ariacurrent="false"
               arialabel="Goto Page 10"
       >

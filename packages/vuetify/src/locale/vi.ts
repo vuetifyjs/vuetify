@@ -54,11 +54,13 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Điều hướng phân trang',
+      root: 'Điều hướng phân trang',
       next: 'Trang tiếp theo',
       previous: 'Trang trước',
       page: 'Đến trang {0}',
       currentPage: 'Trang hiện tại, Trang {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
