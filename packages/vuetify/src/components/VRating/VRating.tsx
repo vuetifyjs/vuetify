@@ -10,6 +10,9 @@ import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRefs } from '@/composables/refs'
+import { useRtl } from '@/composables/rtl'
+import { useLocale } from '@/composables/locale'
+import { useTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, defineComponent, nextTick, ref } from 'vue'
@@ -17,8 +20,6 @@ import { clamp, createRange, keyCodes, makeProps } from '@/util'
 
 // Types
 import type { ComponentPublicInstance, Prop } from 'vue'
-import { useRtl } from '@/composables/rtl'
-import { useLocale } from '@/composables/locale'
 
 export default defineComponent({
   name: 'VRating',
@@ -79,8 +80,9 @@ export default defineComponent({
   setup (props, { slots }) {
     const { t } = useLocale()
     const { isRtl } = useRtl()
-    const rating = useProxiedModel(props, 'modelValue')
+    const { themeClasses } = useTheme()
     const { refs, updateRef } = useRefs<ComponentPublicInstance>()
+    const rating = useProxiedModel(props, 'modelValue')
 
     const range = computed(() => createRange(Number(props.length)))
     const hoverIndex = ref(-1)
@@ -200,6 +202,7 @@ export default defineComponent({
           {
             'v-rating--readonly': props.readonly,
           },
+          themeClasses.value,
         ]}
         onKeydown={onKeydown}
       >

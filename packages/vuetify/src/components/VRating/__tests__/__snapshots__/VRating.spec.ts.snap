@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VRating should change icon on hover 1`] = `
-<div class="v-rating">
+<div class="v-rating v-theme--light">
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light text-primary v-btn--density-default v-btn--size-default"
@@ -71,7 +71,7 @@ exports[`VRating should change icon on hover 1`] = `
 `;
 
 exports[`VRating should render a scoped item slot 1`] = `
-<div class="v-rating">
+<div class="v-rating v-theme--light">
   <div class="v-rating__item">
     <div>
       0
@@ -101,7 +101,7 @@ exports[`VRating should render a scoped item slot 1`] = `
 `;
 
 exports[`VRating should render a scoped item-label slot 1`] = `
-<div class="v-rating">
+<div class="v-rating v-theme--light">
   <div class="v-rating__item">
     <span>
       foo
@@ -186,7 +186,7 @@ exports[`VRating should render a scoped item-label slot 1`] = `
 `;
 
 exports[`VRating should respond to prop value changes 1`] = `
-<div class="v-rating">
+<div class="v-rating v-theme--light">
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light text-accent v-btn--density-default v-btn--size-default"
@@ -256,7 +256,7 @@ exports[`VRating should respond to prop value changes 1`] = `
 `;
 
 exports[`VRating should respond to prop value changes 2`] = `
-<div class="v-rating">
+<div class="v-rating v-theme--light">
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light text-primary v-btn--density-default v-btn--size-default"
