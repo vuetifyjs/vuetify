@@ -179,12 +179,18 @@ export default defineComponent({
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
 
-    const animate = ref(false)
+    const contentEl = ref<HTMLElement>()
     function onClickOutside () {
       if (!props.persistent) isActive.value = false
       else if (!props.noClickAnimation) {
-        animate.value = true
-        window.setTimeout(() => animate.value = false, 150)
+        contentEl.value?.animate([
+          { transformOrigin: 'center' },
+          { transform: 'scale(1.03)' },
+          { transformOrigin: 'center' },
+        ], {
+          duration: 150,
+          easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+        })
       }
     }
 
@@ -218,7 +224,6 @@ export default defineComponent({
                 {
                   'v-overlay--absolute': props.absolute,
                   'v-overlay--active': isActive.value,
-                  'v-overlay--animate': animate.value,
                 },
                 themeClasses.value,
               ]}
@@ -230,7 +235,7 @@ export default defineComponent({
                 color={ scrimColor }
               />
               <MaybeTransition transition={ props.transition } appear persisted onAfterLeave={ onAfterLeave }>
-                <div class="v-overlay__content" v-show={ isActive.value } v-click-outside={ onClickOutside }>
+                <div class="v-overlay__content" v-show={ isActive.value } v-click-outside={ onClickOutside } ref={ contentEl }>
                   { slots.default?.({ isActive: isActive.value }) }
                 </div>
               </MaybeTransition>
