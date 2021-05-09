@@ -104,6 +104,14 @@ export default defineComponent({
     ...makeBorderProps(),
   }),
 
+  emits: [
+    'update:modelValue',
+    'first',
+    'prev',
+    'next',
+    'last',
+  ],
+
   setup (props, ctx) {
     const page = useProxiedModel(props, 'modelValue')
     const { t, n } = useLocale()
@@ -161,7 +169,7 @@ export default defineComponent({
       }
     })
 
-    function emit (e: Event, value: number, event?: string) {
+    function emit (e: Event, value: number, event?: 'first' | 'prev' | 'next' | 'last') {
       e.preventDefault()
       page.value = value
       event && ctx.emit(event, value)
@@ -180,6 +188,7 @@ export default defineComponent({
         if (typeof item === 'string') {
           return {
             ...sharedProps,
+            isSelected: false,
             ref: (e: any) => updateRef(e, index),
             page: item,
             ellipsis: true,
@@ -190,8 +199,10 @@ export default defineComponent({
             border: props.border,
           }
         } else {
+          const isSelected = item === page.value
           return {
             ...sharedProps,
+            isSelected,
             ref: (e: any) => updateRef(e, index),
             page: n(item),
             ellipsis: false,
@@ -200,10 +211,10 @@ export default defineComponent({
             elevation: props.elevation,
             outlined: props.outlined,
             border: props.border,
-            text: item !== page.value,
-            color: item === page.value ? props.color : false,
-            ariaCurrent: item === page.value,
-            ariaLabel: t(item === page.value ? props.currentPageAriaLabel : props.pageAriaLabel, index + 1),
+            text: !isSelected,
+            color: isSelected ? props.color : false,
+            ariaCurrent: isSelected,
+            ariaLabel: t(isSelected ? props.currentPageAriaLabel : props.pageAriaLabel, index + 1),
             onClick: (e: Event) => emit(e, item),
           }
         }
@@ -278,41 +289,48 @@ export default defineComponent({
         role='navigation'
         aria-label={t(props.ariaLabel)}
         onKeydown={onKeydown}
+        data-test='root'
       >
         <ul class='v-pagination__list'>
           { props.showFirstLastPage && (
-            <li class='v-pagination__first'>
+            <li class='v-pagination__first' data-test='first'>
               { ctx.slots.first ? ctx.slots.first(controls.value.first) : (
                 <VBtn {...controls.value.first} />
               ) }
             </li>
           ) }
 
-          <li class='v-pagination__prev'>
+          <li class='v-pagination__prev' data-test='prev'>
             { ctx.slots.prev ? ctx.slots.prev(controls.value.prev) : (
               <VBtn {...controls.value.prev} />
             ) }
           </li>
 
-          { items.value.map(({ page, ellipsis, ...item }, index) => (
+          { items.value.map(({ page, ellipsis, isSelected, ...item }, index) => (
             <li
               key={`${index}_${page}`}
-              class='v-pagination__item'
+              class={[
+                'v-pagination__item',
+                {
+                  'v-pagination__item--selected': isSelected,
+                }
+              ]}
+              data-test='item'
             >
-              { ctx.slots.item ? ctx.slots.item({ page, ellipsis, ...item }) : (
+              { ctx.slots.item ? ctx.slots.item({ page, ellipsis, isSelected, ...item }) : (
                 <VBtn {...item}>{page}</VBtn>
               ) }
             </li>
           )) }
 
-          <li class='v-pagination__next'>
+          <li class='v-pagination__next' data-test='next'>
             { ctx.slots.next ? ctx.slots.next(controls.value.next) : (
               <VBtn {...controls.value.next} />
             ) }
           </li>
 
           { props.showFirstLastPage && (
-            <li class='v-pagination__last'>
+            <li class='v-pagination__last' data-test='last'>
               { ctx.slots.last ? ctx.slots.last(controls.value.last) : (
                 <VBtn {...controls.value.last} />
               ) }
