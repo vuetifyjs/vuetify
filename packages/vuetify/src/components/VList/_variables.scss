@@ -18,8 +18,8 @@ $list-item-min-height: 48px !default;
 $list-item-two-line-min-height: 64px !default;
 $list-item-three-line-min-height: 88px !default;
 
-$list-item-title-font-size: map-deep-get($headings, 'subtitle-1', 'size') !default;
-$list-item-subtitle-font-size: map-deep-get($headings, 'subtitle-2', 'size') !default;
+$list-item-title-font-size: map-deep-get($typography, 'subtitle-1', 'size') !default;
+$list-item-subtitle-font-size: map-deep-get($typography, 'subtitle-2', 'size') !default;
 
 $list-item-dense-title-font-size: 0.8125rem !default;
 $list-item-dense-title-font-weight: 500 !default;
@@ -46,7 +46,7 @@ $list-group-nav-no-action-item-padding: 64px !default;
 $list-group-sub-group-item-padding: 80px !default;
 $list-item-padding: 0 16px !default;
 $list-item-action-margin: 12px 0 !default;
-$list-item-action-text-font-size: map-deep-get($headings, 'caption', 'size') !default;
+$list-item-action-text-font-size: map-deep-get($typography, 'caption', 'size') !default;
 $list-item-avatar-horizontal-margin: 8px !default;
 $list-item-content-padding: 12px 0 !default;
 $list-item-content-children-margin-bottom: 2px !default;

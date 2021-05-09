@@ -23,14 +23,6 @@ $material-light: map-deep-merge(
     ),
     'cards': map-get($shades, 'white'),
     'chips': #e0e0e0,
-    'code': (
-      'background': rgba(map-get($shades, 'black'), 0.05),
-      'color': currentColor
-    ),
-    'kbd': (
-      'background': #212529,
-      'color': map-get($shades, 'white')
-    ),
     'dividers': rgba(map-get($shades, 'black'), 0.12),
     'text': (
       'theme': map-get($shades, 'white'),

@@ -2,7 +2,7 @@
 
 $z: 24;
 @while $z >= 0 {
-  .v-application .elevation-#{$z} {
+  .elevation-#{$z} {
     @include elevation($z, $important: true);
   }
 

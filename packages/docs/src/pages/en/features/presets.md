@@ -307,7 +307,7 @@ $shrine-chip-padding: 0 8px;
 // Preset variables
 $body-font-family: 'Work Sans', sans-serif;
 $border-radius-root: 6px;
-$headings: (
+$typography: (
   'h1': (
     'font-family': 'Roboto', sans-serif;
     'letter-spacing': 0

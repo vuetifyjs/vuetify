@@ -462,7 +462,7 @@ $utilities: map-deep-merge(
         font-weight,
         line-height
       ),
-      values: $typography
+      values: $flat-typography
     ),
     // Position
     "position": (
