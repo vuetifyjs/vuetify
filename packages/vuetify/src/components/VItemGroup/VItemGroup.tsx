@@ -4,6 +4,7 @@ import './VItemGroup.sass'
 // Composables
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
+import { useTheme } from '@/composables/theme'
 
 // Utilities
 import { defineComponent } from 'vue'
@@ -22,10 +23,16 @@ export default defineComponent({
   }),
 
   setup (props, { slots }) {
+    const { themeClasses } = useTheme()
     const { isSelected, select, next, prev, selected } = useGroup(props, VItemGroupSymbol)
 
     return () => (
-      <props.tag class="v-item-group">
+      <props.tag
+        class={[
+          'v-item-group',
+          themeClasses.value,
+        ]}
+      >
         { slots.default?.({
           isSelected,
           select,
