@@ -73,6 +73,7 @@
     "@mdi/font": "^5.9.55",
     "@types/jest": "^26.0.14",
     "@types/node": "^14.11.10",
+    "@types/resize-observer-browser": "^0.1.5",
     "@vue/babel-plugin-jsx": "^1.0.3",
     "@vue/test-utils": "2.0.0-beta.13",
     "autoprefixer": "^9.6.1",
