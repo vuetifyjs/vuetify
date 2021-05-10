@@ -22,6 +22,10 @@ export default defineComponent({
     ...makeTagProps(),
   }),
 
+  emits: {
+    'update:modelValue': (value: any) => {},
+  },
+
   setup (props, { slots }) {
     const { themeClasses } = useTheme()
     const { isSelected, select, next, prev, selected } = useGroup(props, VItemGroupSymbol)
