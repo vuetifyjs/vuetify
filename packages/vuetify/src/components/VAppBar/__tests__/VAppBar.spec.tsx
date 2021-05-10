@@ -1,6 +1,6 @@
 // Components
 import { VAppBar } from '..'
-import { VLayout } from '@/components/VLayout'
+import { VLayout } from '@/components'
 
 // Utilities
 import { createVuetify } from '@/framework'

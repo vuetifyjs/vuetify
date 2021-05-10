@@ -1,5 +1,7 @@
 // Components
 import { VBtn } from '@/components/VBtn'
+
+// Utilities
 import { defineComponent } from 'vue'
 
 export default defineComponent({
