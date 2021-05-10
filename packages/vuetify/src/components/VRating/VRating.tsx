@@ -77,6 +77,10 @@ export default defineComponent({
     ...makeTagProps(),
   }),
 
+  emits: {
+    'update:modelValue': (value: number) => {},
+  },
+
   setup (props, { slots }) {
     const { t } = useLocale()
     const { isRtl } = useRtl()
