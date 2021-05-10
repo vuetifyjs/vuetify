@@ -1,5 +1,5 @@
 // Components
-import { VLayout } from '@/components/VLayout'
+import { VLayout } from '@/components'
 import { VNavigationDrawer } from '..'
 
 // Utilities

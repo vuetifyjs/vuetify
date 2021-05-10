@@ -1,6 +1,15 @@
 import './VImg.sass'
 
-// Vue
+// Components
+import { VResponsive } from '@/components'
+
+// Directives
+import intersect from '@/directives/intersect'
+
+// Composables
+import { makeTransitionProps } from '@/composables/transition'
+
+// Utilities
 import {
   computed,
   defineComponent,
@@ -12,18 +21,6 @@ import {
   watch,
   withDirectives,
 } from 'vue'
-
-// Components
-import { VResponsive } from '../VResponsive'
-
-// Directives
-import intersect from '@/directives/intersect'
-import type { ObserveDirectiveBinding } from '@/directives/intersect'
-
-// Composables
-import { makeTransitionProps } from '@/composables/transition'
-
-// Utils
 import {
   makeProps,
   maybeTransition,
@@ -33,6 +30,7 @@ import {
 } from '@/util'
 
 // Types
+import type { ObserveDirectiveBinding } from '@/directives/intersect'
 import type { PropType } from 'vue'
 
 // not intended for public use, this is passed in by vuetify-loader

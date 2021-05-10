@@ -1,5 +1,5 @@
 // Components
-import { VIcon } from '../'
+import { VIcon } from '..'
 
 // Utilities
 import { mount } from '@vue/test-utils'

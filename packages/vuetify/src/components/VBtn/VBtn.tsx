@@ -1,6 +1,9 @@
 // Styles
 import './VBtn.sass'
 
+// Components
+import { VIcon } from '@/components'
+
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -14,9 +17,6 @@ import { useColor } from '@/composables/color'
 
 // Directives
 import { Ripple, RippleDirectiveBinding } from '@/directives/ripple'
-
-// Components
-import VIcon from '@/components/VIcon/VIcon'
 
 // Utilities
 import { computed, defineComponent, withDirectives } from 'vue'
