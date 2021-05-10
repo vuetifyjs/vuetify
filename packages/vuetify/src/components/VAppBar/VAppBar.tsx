@@ -43,6 +43,7 @@ export default defineComponent({
       type: [Number, String],
       default: 48,
     },
+    floating: Boolean,
     image: String,
     modelValue: {
       type: Boolean,
@@ -96,6 +97,7 @@ export default defineComponent({
               'v-app-bar--bottom': props.bottom,
               'v-app-bar--collapsed': props.collapse,
               'v-app-bar--flat': props.flat,
+              'v-app-bar--floating': props.floating,
               'v-app-bar--is-active': isActive.value,
               'v-app-bar--prominent': props.prominent,
             },
