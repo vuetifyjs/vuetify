@@ -1,16 +1,16 @@
 // Components
-import { VAppBarNavIcon } from '..'
+import { VAppBarTitle } from '..'
 
 // Utilities
 import { createVuetify } from '@/framework'
 import { mount } from '@vue/test-utils'
 
-describe('VAppBarNavIcon', () => {
+describe('VAppBarTitle', () => {
   const vuetify = createVuetify()
 
   function mountFunction (options = {}) {
     return mount({
-      render: () => <VAppBarNavIcon />,
+      render: () => <VAppBarTitle />,
     }, {
       global: { plugins: [vuetify] },
     })
