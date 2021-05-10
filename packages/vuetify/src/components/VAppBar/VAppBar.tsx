@@ -69,7 +69,7 @@ export default defineComponent({
     const { positionClasses, positionStyles } = usePosition(props, 'v-app-bar')
     const { roundedClasses } = useRounded(props, 'v-app-bar')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const extension = ref<HTMLElement>()
+    const extension = ref<HTMLElement | boolean>(props.extended)
     const height = computed(() => (
       Number(props.prominent ? props.prominentHeight : props.height) +
       Number(extension.value ? props.extensionHeight : 0) -
