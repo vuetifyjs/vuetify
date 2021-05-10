@@ -63,6 +63,10 @@ export default defineComponent({
     ...makeTagProps({ tag: 'header' }),
   }),
 
+  emits: {
+    'update:modelValue': (value: boolean) => true,
+  },
+
   setup (props, { slots }) {
     const { borderClasses } = useBorder(props, 'v-app-bar')
     const { densityClasses } = useDensity(props, 'v-app-bar')
