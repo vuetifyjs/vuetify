@@ -55,8 +55,11 @@ export default defineComponent({
     const { roundedClasses } = useRounded(props, 'v-app-bar')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const isActive = useProxiedModel(props, 'modelValue')
+    const extension = computed(() => {
+      return slots.extension?.()
+    })
     const height = computed(() => (
-      (props.prominent ? 128 : 64) -
+      ((props.prominent || extension.value?.length) ? 128 : 64) -
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ))
@@ -108,21 +111,25 @@ export default defineComponent({
             </div>
           ) }
 
-          { slots.prepend && (
-            <div class="v-app-bar__prepend">
-              { slots.prepend() }
-            </div>
-          ) }
+          <div class="v-app-bar__content">
+            { slots.prepend && (
+              <div class="v-app-bar__prepend">
+                { slots.prepend() }
+              </div>
+            ) }
 
-          { slots.default && (
-            <div class="v-app-bar__content">
-              { slots.default() }
-            </div>
-          ) }
+            { slots.default?.() }
 
-          { slots.append && (
-            <div class="v-app-bar__append">
-              { slots.append() }
+            { slots.append && (
+              <div class="v-app-bar__append">
+                { slots.append() }
+              </div>
+            ) }
+          </div>
+
+          { slots.extension && (
+            <div class="v-app-bar__extension">
+              { slots.extension() }
             </div>
           ) }
         </props.tag>
