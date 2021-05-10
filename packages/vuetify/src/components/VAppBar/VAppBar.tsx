@@ -13,7 +13,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, defineComponent, toRef } from 'vue'
+import { computed, defineComponent, ref, toRef } from 'vue'
 import { convertToUnit } from '@/util'
 import { makeProps } from '@/util/makeProps'
 
@@ -35,7 +35,12 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    extended: Boolean,
     prominent: Boolean,
+    prominentHeight: {
+      type: [Number, String],
+      default: 128,
+    },
     image: String,
     temporary: Boolean,
     ...makeBorderProps(),
@@ -55,11 +60,14 @@ export default defineComponent({
     const { roundedClasses } = useRounded(props, 'v-app-bar')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const isActive = useProxiedModel(props, 'modelValue')
-    const extension = computed(() => {
-      return slots.extension?.()
-    })
+    const extension = ref<HTMLElement>()
     const height = computed(() => (
-      ((props.prominent || extension.value?.length) ? 128 : 64) -
+      (props.prominent
+        ? Number(props.prominentHeight) // 64px === NaN
+        : extension.value
+          ? 128
+          : 64
+      ) -
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ))
@@ -127,9 +135,9 @@ export default defineComponent({
             ) }
           </div>
 
-          { slots.extension && (
-            <div class="v-app-bar__extension">
-              { slots.extension() }
+          { (slots.extension || props.extended) && (
+            <div class="v-app-bar__extension" ref={ extension }>
+              { slots.extension?.() }
             </div>
           ) }
         </props.tag>
