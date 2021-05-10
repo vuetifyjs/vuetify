@@ -4,9 +4,12 @@
   align-items: flex-start
   background: rgb($app-bar-background)
   display: flex
+  flex-direction: column
+  justify-content: space-between
   max-width: 100%
   padding-left: $app-bar-padding-start
   padding-right: $app-bar-padding-end
+  position: relative
   transition: $app-bar-transition
 
   @include border($app-bar-border...)
@@ -56,7 +59,8 @@
 .v-app-bar__content
   align-items: center
   display: flex
-  flex: 1 0 auto
+  flex: 0 0 auto
+  width: 100%
 
 .v-app-bar__image
   height: 100%
@@ -74,6 +78,12 @@
 .v-app-bar__append
   display: flex
   flex: 0 1 auto
+
+  @include ltr()
+    margin-left: auto
+
+  @include rtl()
+    margin-right: auto
 
 .v-app-bar__prepend
   display: flex

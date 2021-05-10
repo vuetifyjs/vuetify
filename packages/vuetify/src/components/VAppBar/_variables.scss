@@ -11,7 +11,6 @@ $app-bar-density-compact-padding: 0 !default;
 $app-bar-density-default-padding: 8px !default;
 $app-bar-elevation: 4 !default;
 $app-bar-flat-elevation: 0 !default;
-$app-bar-height: 64px !default;
 $app-bar-image-height: inherit !default;
 $app-bar-image-object-fit: cover !default;
 $app-bar-image-width: inherit !default;
@@ -22,8 +21,8 @@ $app-bar-prominent-height: 128px !default;
 $app-bar-rounded-border-radius: $border-radius-root !default;
 $app-bar-scrolled-title-padding-bottom: 9px !default;
 $app-bar-shaped-border-radius: map-get($rounded, 'xl') $app-bar-border-radius !default;
-$app-bar-transition-duration: 0.2s !default;
-$app-bar-transition-timing-function: $standard-easing !default;
+$app-bar-title-font-size: map-deep-get($headings, 'h5', 'size') !default;
+$app-bar-title-padding: 6px 20px !default;
 $app-bar-transition: .2s $standard-easing !default;
 
 $app-bar-border: (
