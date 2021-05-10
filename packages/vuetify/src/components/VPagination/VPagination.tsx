@@ -104,13 +104,13 @@ export default defineComponent({
     ...makeBorderProps(),
   }),
 
-  emits: [
-    'update:modelValue',
-    'first',
-    'prev',
-    'next',
-    'last',
-  ],
+  emits: {
+    'update:modelValue': (value: number) => {},
+    first: (value: number) => {},
+    prev: (value: number) => {},
+    next: (value: number) => {},
+    last: (value: number) => {},
+  },
 
   setup (props, ctx) {
     const page = useProxiedModel(props, 'modelValue')
@@ -169,7 +169,8 @@ export default defineComponent({
       }
     })
 
-    function emit (e: Event, value: number, event?: 'first' | 'prev' | 'next' | 'last') {
+    // TODO: 'first' | 'prev' | 'next' | 'last' does not work here?
+    function emit (e: Event, value: number, event?: any) {
       e.preventDefault()
       page.value = value
       event && ctx.emit(event, value)
