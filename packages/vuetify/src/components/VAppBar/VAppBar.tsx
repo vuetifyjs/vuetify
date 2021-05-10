@@ -1,6 +1,9 @@
 // Styles
 import './VAppBar.sass'
 
+// Components
+import { VImg } from '@/components/VImg'
+
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
@@ -114,7 +117,7 @@ export default defineComponent({
             <div class="v-app-bar__image">
               { slots.image
                 ? slots.img?.({ src: props.image })
-                : (<img src={ props.image } alt="" />)
+                : (<VImg src={ props.image } alt="" cover />)
               }
             </div>
           ) }
