@@ -24,9 +24,6 @@ export default defineComponent({
   name: 'VAppBar',
 
   props: makeProps({
-    collapse: Boolean,
-    color: String,
-    flat: Boolean,
     // TODO: Implement scrolling techniques
     // hideOnScroll: Boolean
     // invertedScroll: Boolean
@@ -34,18 +31,28 @@ export default defineComponent({
     // elevateOnScroll: Boolean
     // shrinkOnScroll: Boolean
     // fadeImageOnScroll: Boolean
+    collapse: Boolean,
+    color: String,
+    flat: Boolean,
+    height: {
+      type: [Number, String],
+      default: 64,
+    },
+    extended: Boolean,
+    extensionHeight: {
+      type: [Number, String],
+      default: 48,
+    },
+    image: String,
     modelValue: {
       type: Boolean,
       default: true,
     },
-    extended: Boolean,
     prominent: Boolean,
     prominentHeight: {
       type: [Number, String],
       default: 128,
     },
-    image: String,
-    temporary: Boolean,
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
@@ -62,18 +69,14 @@ export default defineComponent({
     const { positionClasses, positionStyles } = usePosition(props, 'v-app-bar')
     const { roundedClasses } = useRounded(props, 'v-app-bar')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const isActive = useProxiedModel(props, 'modelValue')
     const extension = ref<HTMLElement>()
     const height = computed(() => (
-      (props.prominent
-        ? Number(props.prominentHeight) // 64px === NaN
-        : extension.value
-          ? 128
-          : 64
-      ) -
+      Number(props.prominent ? props.prominentHeight : props.height) +
+      Number(extension.value ? props.extensionHeight : 0) -
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ))
+    const isActive = useProxiedModel(props, 'modelValue')
     const layoutStyles = useLayoutItem(
       props.name,
       toRef(props, 'priority'),
@@ -117,7 +120,7 @@ export default defineComponent({
             <div class="v-app-bar__image">
               { slots.image
                 ? slots.img?.({ src: props.image })
-                : (<VImg src={ props.image } alt="" cover />)
+                : (<VImg src={ props.image } cover />)
               }
             </div>
           ) }
@@ -139,7 +142,11 @@ export default defineComponent({
           </div>
 
           { (slots.extension || props.extended) && (
-            <div class="v-app-bar__extension" ref={ extension }>
+            <div
+              class="v-app-bar__extension"
+              style={{ height: convertToUnit(props.extensionHeight) }}
+              ref={ extension }
+            >
               { slots.extension?.() }
             </div>
           ) }

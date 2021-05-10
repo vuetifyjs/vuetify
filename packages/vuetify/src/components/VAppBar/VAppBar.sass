@@ -7,6 +7,7 @@
   flex-direction: column
   justify-content: space-between
   max-width: 100%
+  overflow: hidden
   padding-left: $app-bar-padding-start
   padding-right: $app-bar-padding-end
   position: relative
@@ -38,18 +39,6 @@
     @include rtl()
       border-bottom-left-radius: $app-bar-collapsed-border-radius
 
-  &--density-default
-    padding-bottom: $app-bar-density-default-padding
-    padding-top: $app-bar-density-default-padding
-
-  &--density-comfortable
-    padding-bottom: $app-bar-density-comfortable-padding
-    padding-top: $app-bar-density-comfortable-padding
-
-  &--density-compact
-    padding-bottom: $app-bar-density-compact-padding
-    padding-top: $app-bar-density-compact-padding
-
   &--flat
     @include elevation($app-bar-flat-elevation)
 
@@ -60,6 +49,26 @@
   align-items: center
   display: flex
   flex: 0 0 auto
+  transition: inherit
+  width: 100%
+
+  .v-app-bar--density-default &
+    padding-bottom: $app-bar-density-default-padding
+    padding-top: $app-bar-density-default-padding
+
+  .v-app-bar--density-comfortable &
+    padding-bottom: $app-bar-density-comfortable-padding
+    padding-top: $app-bar-density-comfortable-padding
+
+  .v-app-bar--density-compact &
+    padding-bottom: $app-bar-density-compact-padding
+    padding-top: $app-bar-density-compact-padding
+
+.v-app-bar__extension
+  align-items: center
+  display: flex
+  flex: 0 0 auto
+  transition: inherit
   width: 100%
 
 .v-app-bar__image
