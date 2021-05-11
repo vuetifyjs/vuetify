@@ -53,8 +53,8 @@ module.exports = config => {
     .minimize(IS_PROD)
     .minimizer('css')
     .use(require('terser-webpack-plugin'))
-    .use(require('optimize-css-assets-webpack-plugin'), [{
-      cssProcessorOptions: { safe: true },
+    .use(require('css-minimizer-webpack-plugin'), [{
+      minimizerOptions: { safe: true },
     }])
 
   config.target('web')

@@ -13,8 +13,8 @@ const cssLoaders = [
   // https://github.com/webpack-contrib/mini-css-extract-plugin#user-content-advanced-configuration-example
   // TODO: remove style-loader: https://github.com/webpack-contrib/mini-css-extract-plugin/issues/34
   extractCSS ? MiniCssExtractPlugin.loader : 'style-loader',
-  { loader: 'css-loader', options: { sourceMap: !isProd } },
-  { loader: 'postcss-loader', options: { sourceMap: !isProd } }
+  { loader: 'css-loader', options: { sourceMap: true } },
+  { loader: 'postcss-loader', options: { sourceMap: true } }
 ]
 
 const sassLoaders = [
@@ -44,6 +44,7 @@ const scssLoaders = [
 ]
 
 module.exports = {
+  target: 'web',
   mode: isProd ? 'production' : 'development',
   devtool: 'source-map',
   resolve: {
