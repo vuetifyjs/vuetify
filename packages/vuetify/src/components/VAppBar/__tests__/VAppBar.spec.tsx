@@ -31,11 +31,8 @@ describe('VAppBar', () => {
     [{}, 64],
     [{ density: 'comfortable' }, 56],
     [{ density: 'compact' }, 48],
-    [{ extended: true }, 112],
-    [{ extended: true, extensionHeight: 56 }, 120],
     [{ height: 72 }, 72],
     [{ prominent: true }, 128],
-    [{ prominent: true, extended: true }, 176],
     [{ prominent: true, prominentHeight: 164 }, 164],
   ])('should have the correct height', async (props: any, expected: number) => {
     const wrapper = mountFunction(props)

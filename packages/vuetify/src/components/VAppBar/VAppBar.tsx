@@ -38,7 +38,6 @@ export default defineComponent({
       type: [Number, String],
       default: 64,
     },
-    extended: Boolean,
     extensionHeight: {
       type: [Number, String],
       default: 48,
@@ -74,7 +73,7 @@ export default defineComponent({
     const { positionClasses, positionStyles } = usePosition(props, 'v-app-bar')
     const { roundedClasses } = useRounded(props, 'v-app-bar')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const extension = ref<HTMLElement | boolean>(props.extended)
+    const extension = ref<HTMLElement | boolean>(!!slots.extension)
     const height = computed(() => (
       Number(props.prominent ? props.prominentHeight : props.height) +
       Number(extension.value ? props.extensionHeight : 0) -
@@ -147,7 +146,7 @@ export default defineComponent({
             ) }
           </div>
 
-          { (slots.extension || props.extended) && (
+          { slots.extension && (
             <div
               class="v-app-bar__extension"
               style={{ height: convertToUnit(props.extensionHeight) }}
