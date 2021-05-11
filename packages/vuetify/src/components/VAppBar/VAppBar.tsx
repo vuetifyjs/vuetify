@@ -80,7 +80,7 @@ export default defineComponent({
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ))
-    const isActive = useProxiedModel(props, 'modelValue')
+    const isActive = useProxiedModel(props, 'modelValue', props.modelValue)
     const layoutStyles = useLayoutItem(
       props.name,
       toRef(props, 'priority'),
