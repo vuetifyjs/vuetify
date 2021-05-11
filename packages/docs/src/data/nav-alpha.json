@@ -42,6 +42,7 @@
     "group": "components",
     "items": [
       "application",
+      "app-bars",
       "aspect-ratios",
       "badges",
       "banners",
