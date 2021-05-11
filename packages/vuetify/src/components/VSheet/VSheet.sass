@@ -2,13 +2,13 @@
 @import './index'
 
 .v-sheet
-  +border($sheet-border...)
-  +elevation($sheet-elevation)
-  +position($sheet-positions)
-  +rounded($sheet-border-radius)
+  @include border($sheet-border...)
+  @include elevation($sheet-elevation)
+  @include position($sheet-positions)
+  @include rounded($sheet-border-radius)
 
   &--border
     border-width: $sheet-border-thin-width
 
   &--rounded
-    +rounded($sheet-rounded-border-radius)
+    @include rounded($sheet-rounded-border-radius)
