@@ -21,7 +21,7 @@ $app-bar-prominent-height: 128px !default;
 $app-bar-rounded-border-radius: $border-radius-root !default;
 $app-bar-scrolled-title-padding-bottom: 9px !default;
 $app-bar-shaped-border-radius: map-get($rounded, 'xl') $app-bar-border-radius !default;
-$app-bar-title-font-size: map-deep-get($headings, 'h5', 'size') !default;
+$app-bar-title-font-size: map-deep-get($typography, 'h5', 'size') !default;
 $app-bar-title-padding: 6px 20px !default;
 $app-bar-transition: .2s $standard-easing !default;
 
