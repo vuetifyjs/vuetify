@@ -154,6 +154,19 @@
     "team": "core",
     "twitter": "vanessalvarez8a"
   },
+  "blalan05": {
+    "discord": "blalan05#3967",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "linkedin": "blalan05",
+    "location": "Wisconsin, USA",
+    "name": "Blaine Landowski",
+    "team": "core"
+  },
   "phiter": {
     "discord": "Phiter#7665",
     "focus": [
@@ -183,20 +196,6 @@
     "name": "Vincent Dhennin",
     "team": "contributors",
     "twitter": "Kawacrepe"
-  },
-  "blalan05": {
-    "discord": "blalan05#3967",
-    "focus": [
-      "[vuetifyjs](https://github.com/vuetifyjs)"
-    ],
-    "languages": [
-      "English"
-    ],
-    "linkedin": "blalan05",
-    "location": "Wisconsin, USA",
-    "name": "Blaine Landowski",
-    "team": "contributors",
-    "twitter": "blalan05"
   },
   "avengerweb": {
     "discord": "aven.dev#9784",
