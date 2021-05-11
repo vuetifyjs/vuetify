@@ -18,12 +18,12 @@ export function useBorder (props: BorderProps, name: string) {
   const borderClasses = computed(() => {
     const classes: string[] = []
 
-    if (props.outlined || !!props.border) {
+    if (props.outlined || props.border === true || props.border === '') {
       classes.push(`${name}--border`)
     }
 
     if (
-      typeof props.border === 'string' ||
+      (typeof props.border === 'string' && props.border !== '') ||
       props.border === 0
     ) {
       for (const value of String(props.border).split(' ')) {
