@@ -129,7 +129,7 @@
   "components/paginations": ["v-pagination"],
   "components/parallax": ["v-parallax"],
   "components/progress-circular": ["v-progress-circular"],
-  "components/progress-linear": ["progress-linear"],
+  "components/progress-linear": ["v-progress-linear"],
   "components/radio-buttons": [
     "v-radio",
     "v-radio-group"
