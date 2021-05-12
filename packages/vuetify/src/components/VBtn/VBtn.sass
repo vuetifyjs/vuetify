@@ -104,3 +104,28 @@
 .v-btn
   .v-app-bar &
     @include elevation($button-app-bar-elevation)
+
+  .v-bottom-navigation &
+    border-radius: 0
+    flex-direction: column
+    font-size: $button-bottom-navigation-font-size
+    height: inherit
+    opacity: .62
+    padding: 0 16px
+    max-width: 168px
+    min-width: 80px
+    text-transform: none
+    width: auto
+
+    @include elevation(0)
+
+  .v-bottom-navigation--grow &
+    width: 100%
+
+  .v-bottom-navigation--horizontal &
+    flex-direction: row
+
+  &--is-active
+    .v-bottom-navigation &
+      color: rgb(var(--v-theme-primary))
+      opacity: 1

@@ -1,5 +1,6 @@
 // Defaults
 $button-app-bar-elevation: 0 !default;
+$button-bottom-navigation-font-size: map-deep-get($typography, 'caption', 'size') !default;
 $button-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $button-border-radius: $border-radius-root !default;
 $button-border-style: $border-style-root !default;
