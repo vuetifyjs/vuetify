@@ -274,8 +274,8 @@ export default baseMixins.extend<options>().extend({
     genPrependSlot () {
       const slot = []
 
-      if (this.$slots.prepend) {
-        slot.push(this.$slots.prepend)
+      if (this.$scopedSlots.prepend) {
+        slot.push(this.$scopedSlots.prepend({}) || [])
       } else if (this.prependIcon) {
         slot.push(this.genIcon('prepend'))
       }
@@ -289,8 +289,8 @@ export default baseMixins.extend<options>().extend({
       // an appended inner icon, v-text-field
       // will overwrite this method in order to obtain
       // backwards compat
-      if (this.$slots.append) {
-        slot.push(this.$slots.append)
+      if (this.$scopedSlots.append) {
+        slot.push(...(this.$scopedSlots.append({}) || []))
       } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
       }
