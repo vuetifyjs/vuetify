@@ -15,6 +15,8 @@ interface ObserveVNodeDirective extends Omit<VNodeDirective, 'modifiers'> {
 }
 
 function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
+  if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return
+
   const modifiers = binding.modifiers || {}
   const value = binding.value
   const { handler, options } = typeof value === 'object'
