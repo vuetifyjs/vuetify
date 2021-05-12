@@ -10,18 +10,23 @@ $button-elevation: ('default': 2, 'hover': 4, 'active': 8) !default;
 $button-font-size: map-deep-get($typography, 'button', 'size') !default;
 $button-font-weight: map-deep-get($typography, 'button', 'weight') !default;
 $button-height: 36px !default;
+$button-stacked-height: 72px !default;
 $button-icon-border-radius: map-get($rounded, 'circle') !default;
 $button-icon-font-size: 24px !default;
 $button-icon-size: 48px !default;
 $button-line-height: normal !default;
+$button-stacked-line-height: 1.7 !default;
 $button-padding-ratio: 2.25 !default;
+$button-stacked-padding-ratio: 4.5 !default;
 $button-positions: absolute fixed !default;
 $button-text-letter-spacing: map-deep-get($typography, 'button', 'letter-spacing') !default;
 $button-text-transform: map-deep-get($typography, 'button', 'text-transform') !default;
 $button-vertical-align: middle !default;
 $button-width-ratio: 16/9 !default;
+$button-stacked-width-ratio: 1 !default;
 
 $button-density: ('default': 0, 'comfortable': -2, 'compact': -3) !default;
+$button-stacked-density: ('default': 0, 'comfortable': -4, 'compact': -6) !default;
 $button-icon-density: ('default': 3, 'comfortable': 0, 'compact': -2) !default;
 
 $button-border: () !default;
@@ -38,9 +43,22 @@ $button-sizes: () !default;
 $button-sizes: map-merge(
     (
       'height': $button-height,
-      'font-size': $button-font-size
+      'font-size': $button-font-size,
+      'width-ratio': $button-width-ratio,
+      'padding-ratio': $button-padding-ratio
     ),
     $button-sizes
+);
+
+$button-stacked-sizes: () !default;
+$button-stacked-sizes: map-merge(
+    (
+      'height': $button-stacked-height,
+      'font-size': $button-font-size,
+      'width-ratio': $button-stacked-width-ratio,
+      'padding-ratio': $button-stacked-padding-ratio
+    ),
+    $button-stacked-sizes
 );
 
 $button-icon-sizes: () !default;

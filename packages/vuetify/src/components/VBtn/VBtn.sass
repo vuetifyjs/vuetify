@@ -20,6 +20,7 @@
   transition-timing-function: $standard-easing
   user-select: none
   vertical-align: $button-vertical-align
+  flex-shrink: 0
 
   @at-root
     +button-sizes()
@@ -79,6 +80,14 @@
         // This is multiplied by the text opacity,
         // so we need to divide it to get the desired value
         opacity: ($button-disabled-overlay / $button-disabled-opacity)
+
+  &--stacked
+    flex-direction: column
+    line-height: $button-stacked-line-height
+
+    @at-root
+      @include button-sizes($button-stacked-sizes, true)
+      @include density('v-btn', 'height', $button-stacked-density)
 
 .v-btn__overlay
   background-color: currentColor

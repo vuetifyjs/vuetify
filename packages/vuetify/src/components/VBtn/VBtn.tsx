@@ -32,8 +32,11 @@ export default defineComponent({
     flat: Boolean,
     plain: Boolean,
     icon: [Boolean, String],
+    prependIcon: String,
+    appendIcon: String,
 
     block: Boolean,
+    stacked: Boolean,
 
     color: String,
     disabled: Boolean,
@@ -81,6 +84,7 @@ export default defineComponent({
             'v-btn--plain': props.plain,
             'v-btn--block': props.block,
             'v-btn--disabled': props.disabled,
+            'v-btn--stacked': props.stacked,
           },
           themeClasses.value,
           borderClasses.value,
@@ -100,10 +104,32 @@ export default defineComponent({
       >
         <span class="v-btn__overlay" />
 
+        { !props.icon && props.prependIcon && (
+          <VIcon
+            class="v-btn__icon"
+            icon={ props.prependIcon }
+            left={ !props.stacked }
+          />
+        )}
+
         { typeof props.icon === 'boolean'
           ? slots.default?.()
-          : <VIcon icon={ props.icon } size={ props.size } />
+          : (
+            <VIcon
+              class="v-btn__icon"
+              icon={ props.icon }
+              size={ props.size }
+            />
+          )
         }
+
+        { !props.icon && props.appendIcon && (
+          <VIcon
+            class="v-btn__icon"
+            icon={ props.appendIcon }
+            right={ !props.stacked }
+          />
+        )}
       </props.tag>,
       [useDirective<RippleDirectiveBinding>(Ripple, {
         value: !props.disabled,
