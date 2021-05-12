@@ -43,6 +43,12 @@
       height: $icon-btn-height
       width: $icon-btn-width
 
+      .v-bottom-navigation &
+        font-size: $icon-btn-bottom-navigation-font-size
+
+      .v-bottom-navigation:not(.v-bottom-navigation--horizontal) &
+        margin: 0
+
   &--left
     .v-btn:not(.v-btn--icon) &
       @include ltr()

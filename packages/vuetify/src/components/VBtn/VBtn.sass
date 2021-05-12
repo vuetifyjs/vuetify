@@ -110,11 +110,10 @@
     flex-direction: column
     font-size: $button-bottom-navigation-font-size
     height: inherit
-    opacity: .62
-    padding: 0 16px
-    max-width: 168px
-    min-width: 80px
-    text-transform: none
+    max-width: $button-bottom-navigation-max-width
+    min-width: $button-bottom-navigation-min-width
+    opacity: $button-bottom-navigation-opacity
+    text-transform: $button-bottom-navigation-text-transform
     width: auto
 
     @include elevation(0)
@@ -127,5 +126,5 @@
 
   &--is-active
     .v-bottom-navigation &
-      color: rgb(var(--v-theme-primary))
-      opacity: 1
+      color: rgb($button-bottom-navigation-active-color)
+      opacity: $button-bottom-navigation-active-opacity
