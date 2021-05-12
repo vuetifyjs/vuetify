@@ -1,9 +1,9 @@
-@mixin button-sizes ($map: $button-sizes) {
+@mixin button-sizes ($map: $button-sizes, $immediate: false) {
   @each $sizeName, $multiplier in $size-scales {
     $size: map-get($map, 'font-size') + (2 * $multiplier) / 16;
     $height: map-get($map, 'height') + (8 * $multiplier);
 
-    &.v-btn--size-#{$sizeName} {
+    #{if($immediate, &, '')}.v-btn--size-#{$sizeName} {
       --v-btn-size: #{$size};
       --v-btn-height: #{$height};
       font-size: $size;

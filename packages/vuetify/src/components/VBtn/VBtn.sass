@@ -84,8 +84,8 @@
     flex-direction: column
     line-height: $button-stacked-line-height
 
-    @at-root &
-      @include button-sizes($button-stacked-sizes)
+    @at-root
+      @include button-sizes($button-stacked-sizes, true)
       @include density('v-btn', 'height', $button-stacked-density)
 
 .v-btn__overlay
