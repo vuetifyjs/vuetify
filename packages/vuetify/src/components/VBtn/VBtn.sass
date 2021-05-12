@@ -82,6 +82,11 @@
 
   &--stacked
     flex-direction: column
+    line-height: $button-stacked-line-height
+
+    @at-root &
+      +button-sizes($button-stacked-sizes)
+      +density('v-btn', 'height', $button-stacked-density)
 
 .v-btn__overlay
   background-color: currentColor
