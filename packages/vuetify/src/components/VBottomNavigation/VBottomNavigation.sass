@@ -1,89 +1,111 @@
-@import './_variables.scss'
+@import './index'
 
-// Theme
-+theme(v-bottom-navigation) using ($material)
-  background-color: map-get($material, 'bottom-navigation')
-  color: map-deep-get($material, 'text', 'primary')
-
-  .v-btn:not(.v-btn--active)
-    color: map-deep-get($material, 'text', 'secondary') !important
-
-// Block
-.v-item-group.v-bottom-navigation
-  bottom: 0
+.v-bottom-navigation
+  // align-items: center
+  background: rgb($bottom-navigation-background)
   display: flex
-  left: 0
+  max-width: 100%
+  overflow: hidden
+  position: relative
+  transition: $bottom-navigation-transition
+
+  @include border($bottom-navigation-border...)
+  @include position($bottom-navigation-positions)
+  @include rounded($bottom-navigation-border-radius)
+
+  &--is-active
+    @include elevation($bottom-navigation-elevation)
+
+.v-bottom-navigation__content
+  display: flex
+  flex: 0 0 auto
   justify-content: center
+  transition: inherit
   width: 100%
-  +elevation(4)
+// Theme
+// +theme(v-bottom-navigation) using ($material)
+//   background-color: map-get($material, 'bottom-navigation')
+//   color: map-deep-get($material, 'text', 'primary')
 
-  .v-btn
-    background-color: transparent
-    border-radius: 0
-    box-shadow: none
-    flex: 0 1 auto
-    font-size: $bottom-nav-btn-font-size
-    height: inherit
-    max-width: $bottom-nav-btn-max-width
-    min-width: $bottom-nav-btn-min-width
-    position: relative
-    text-transform: none
+//   .v-btn:not(.v-btn--active)
+//     color: map-deep-get($material, 'text', 'secondary') !important
 
-    &:after
-      content: none
+// // Block
+// .v-item-group.v-bottom-navigation
+//   bottom: 0
+//   display: flex
+//   left: 0
+//   justify-content: center
+//   width: 100%
+//   +elevation(4)
 
-    .v-btn__content
-      flex-direction: column-reverse
-      height: inherit
+//   .v-btn
+//     background-color: transparent
+//     border-radius: 0
+//     box-shadow: none
+//     flex: 0 1 auto
+//     font-size: $bottom-nav-btn-font-size
+//     height: inherit
+//     max-width: $bottom-nav-btn-max-width
+//     min-width: $bottom-nav-btn-min-width
+//     position: relative
+//     text-transform: none
 
-      > *:not(.v-icon)
-        line-height: 1.2
+//     &:after
+//       content: none
 
-    &.v-btn--active
-      color: inherit
+//     .v-btn__content
+//       flex-direction: column-reverse
+//       height: inherit
 
-      &:not(:hover):before
-        opacity: 0
+//       > *:not(.v-icon)
+//         line-height: 1.2
 
-// Modifier
-.v-item-group.v-bottom-navigation--absolute,
-.v-item-group.v-bottom-navigation--fixed
-  z-index: 4
+//     &.v-btn--active
+//       color: inherit
 
-.v-item-group.v-bottom-navigation--absolute
-  position: absolute
+//       &:not(:hover):before
+//         opacity: 0
 
-.v-item-group.v-bottom-navigation--active
-  transform: translate(0, 0)
+// // Modifier
+// .v-item-group.v-bottom-navigation--absolute,
+// .v-item-group.v-bottom-navigation--fixed
+//   z-index: 4
 
-.v-item-group.v-bottom-navigation--fixed
-  position: fixed
+// .v-item-group.v-bottom-navigation--absolute
+//   position: absolute
 
-.v-item-group.v-bottom-navigation--grow
-  .v-btn
-    width: 100%
+// .v-item-group.v-bottom-navigation--active
+//   transform: translate(0, 0)
 
-.v-item-group.v-bottom-navigation--horizontal
-  .v-btn > .v-btn__content
-    flex-direction: row-reverse
+// .v-item-group.v-bottom-navigation--fixed
+//   position: fixed
 
-    > .v-icon
-      margin-bottom: 0
-      margin-right: 16px
+// .v-item-group.v-bottom-navigation--grow
+//   .v-btn
+//     width: 100%
 
-.v-item-group.v-bottom-navigation--shift
-  .v-btn .v-btn__content > *:not(.v-icon)
-    opacity: 0
-    position: absolute
-    top: $bottom-nav-shift-btn-top
-    transform: scale(.9)
-    transition: $primary-transition
+// .v-item-group.v-bottom-navigation--horizontal
+//   .v-btn > .v-btn__content
+//     flex-direction: row-reverse
 
-  .v-btn--active .v-btn__content
-    > .v-icon
-      transform: translateY(-8px)
+//     > .v-icon
+//       margin-bottom: 0
+//       margin-right: 16px
 
-    > *:not(.v-icon)
-      opacity: 1
-      top: $bottom-nav-shift-btn-active-top
-      transform: scale(1)
+// .v-item-group.v-bottom-navigation--shift
+//   .v-btn .v-btn__content > *:not(.v-icon)
+//     opacity: 0
+//     position: absolute
+//     top: $bottom-nav-shift-btn-top
+//     transform: scale(.9)
+//     transition: $primary-transition
+
+//   .v-btn--active .v-btn__content
+//     > .v-icon
+//       transform: translateY(-8px)
+
+//     > *:not(.v-icon)
+//       opacity: 1
+//       top: $bottom-nav-shift-btn-active-top
+//       transform: scale(1)
