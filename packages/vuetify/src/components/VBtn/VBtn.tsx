@@ -105,16 +105,30 @@ export default defineComponent({
         <span class="v-btn__overlay" />
 
         { !props.icon && props.prependIcon && (
-          <VIcon left={ !props.stacked } icon={ props.prependIcon } class="v-btn__icon" />
+          <VIcon
+            class="v-btn__icon"
+            icon={ props.prependIcon }
+            left={ !props.stacked }
+          />
         )}
 
         { typeof props.icon === 'boolean'
           ? slots.default?.()
-          : <VIcon icon={ props.icon } size={ props.size } class="v-btn__icon" />
+          : (
+            <VIcon
+              class="v-btn__icon"
+              icon={ props.icon }
+              size={ props.size }
+            />
+          )
         }
 
         { !props.icon && props.appendIcon && (
-          <VIcon right={ !props.stacked } icon={ props.appendIcon } class="v-btn__icon" />
+          <VIcon
+            class="v-btn__icon"
+            icon={ props.appendIcon }
+            right={ !props.stacked }
+          />
         )}
       </props.tag>,
       [useDirective<RippleDirectiveBinding>(Ripple, {
