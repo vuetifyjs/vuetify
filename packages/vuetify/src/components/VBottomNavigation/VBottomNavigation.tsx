@@ -14,7 +14,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, defineComponent, toRef } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { convertToUnit } from '@/util'
 import { makeProps } from '@/util/makeProps'
 
@@ -66,7 +66,7 @@ export default defineComponent({
     const isActive = useProxiedModel(props, 'modelValue', props.modelValue)
     const layoutStyles = useLayoutItem(
       props.name,
-      toRef(props, 'priority'),
+      computed(() => props.priority),
       computed(() => 'bottom'),
       computed(() => isActive.value ? height.value : 0),
     )
