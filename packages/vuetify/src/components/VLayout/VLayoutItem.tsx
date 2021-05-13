@@ -1,21 +1,29 @@
+// Styles
+import './VLayoutItem.sass'
+
 // Composables
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 
 // Utilities
-import { computed, defineComponent, toRef } from 'vue'
+import { defineComponent, toRef } from 'vue'
 import { makeProps } from '@/util'
 
 // Types
-import type { Prop } from 'vue'
+import type { PropType } from 'vue'
 
 export default defineComponent({
   name: 'VLayoutItem',
 
   props: makeProps({
     position: {
-      type: String,
+      type: String as PropType<'top' | 'right' | 'bottom' | 'left'>,
       required: true,
-    } as Prop<'top' | 'right' | 'bottom' | 'left'>,
+    },
+    size: {
+      type: [Number, String],
+      default: 300,
+    },
+    modelValue: Boolean,
     ...makeLayoutItemProps(),
   }),
 
@@ -23,12 +31,16 @@ export default defineComponent({
     const styles = useLayoutItem(
       props.name,
       toRef(props, 'priority'),
-      computed(() => props.position ?? 'left'),
-      toRef(props, 'size')
+      toRef(props, 'position'),
+      toRef(props, 'size'),
+      toRef(props, 'size'),
+      toRef(props, 'modelValue')
     )
 
     return () => (
-      <div style={ styles.value } v-slots={ slots } />
+      <div class='v-layout-item' style={ styles.value }>
+        { slots.default?.() }
+      </div>
     )
   },
 })

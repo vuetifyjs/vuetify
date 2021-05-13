@@ -17,7 +17,14 @@ type LayoutItem = {
 }
 
 interface LayoutProvide {
-  register: (id: string, priority: Ref<number>, position: Ref<Position>, amount: Ref<number | string>) => Ref<Record<string, unknown>>
+  register: (
+    id: string,
+    priority: Ref<number>,
+    position: Ref<Position>,
+    layoutSize: Ref<number | string>,
+    itemSize: Ref<number | string>,
+    active: Ref<boolean>
+  ) => Ref<Record<string, unknown>>
   unregister: (id: string) => void
   mainStyles: Ref<Record<string, unknown>>
   getLayoutItem: (id: string) => LayoutItem | undefined
@@ -43,10 +50,6 @@ export const makeLayoutItemProps = propsFactory({
     type: Number,
     default: 0,
   },
-  size: {
-    type: [Number, String],
-    default: 300,
-  },
 }, 'layout-item')
 
 export function useMain () {
@@ -61,7 +64,9 @@ export function useLayoutItem (
   name: string | undefined,
   priority: Ref<number>,
   position: Ref<Position>,
-  amount: Ref<number | string>
+  layoutSize: Ref<number | string>,
+  itemSize: Ref<number | string>,
+  active: Ref<boolean>,
 ) {
   const layout = inject(VuetifyLayoutKey)
 
@@ -69,7 +74,7 @@ export function useLayoutItem (
 
   const id = name ?? `layout-item-${getUid()}`
 
-  const styles = layout.register(id, priority, position, amount)
+  const styles = layout.register(id, priority, position, layoutSize, itemSize, active)
 
   onBeforeUnmount(() => layout.unregister(id))
 
@@ -80,19 +85,21 @@ const generateLayers = (
   layout: string[],
   registered: string[],
   positions: Map<string, Ref<Position>>,
-  amounts: Map<string, Ref<number | string>>
+  layoutSizes: Map<string, Ref<number | string>>,
+  activeItems: Map<string, Ref<boolean>>,
 ) => {
   let previousLayer = { top: 0, left: 0, right: 0, bottom: 0 }
   const layers = [{ id: '', layer: { ...previousLayer } }]
   const ids = !layout.length ? registered : layout.map(l => l.split(':')[0]).filter(l => registered.includes(l))
   for (const id of ids) {
     const position = positions.get(id)
-    const amount = amounts.get(id)
-    if (!position || !amount) continue
+    const amount = layoutSizes.get(id)
+    const active = activeItems.get(id)
+    if (!position || !amount || !active) continue
 
     const layer = {
       ...previousLayer,
-      [position.value]: parseInt(previousLayer[position.value], 10) + parseInt(amount.value, 10),
+      [position.value]: parseInt(previousLayer[position.value], 10) + (active.value ? parseInt(amount.value, 10) : 0),
     }
 
     layers.push({
@@ -110,8 +117,9 @@ const generateLayers = (
 export function createLayout (props: { layout?: string[], overlaps?: string[] }) {
   const registered = ref<string[]>([])
   const positions = new Map<string, Ref<Position>>()
-  const amounts = new Map<string, Ref<number | string>>()
+  const layoutSizes = new Map<string, Ref<number | string>>()
   const priorities = new Map<string, Ref<number>>()
+  const activeItems = new Map<string, Ref<boolean>>()
 
   const computedOverlaps = computed(() => {
     const map = new Map<string, { position: Position, amount: number }>()
@@ -122,8 +130,8 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
 
       const topPosition = positions.get(top)
       const bottomPosition = positions.get(bottom)
-      const topAmount = amounts.get(top)
-      const bottomAmount = amounts.get(bottom)
+      const topAmount = layoutSizes.get(top)
+      const bottomAmount = layoutSizes.get(bottom)
 
       if (!topPosition || !bottomPosition || !topAmount || !bottomAmount) continue
 
@@ -137,7 +145,7 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
   const layers = computed(() => {
     const entries = [...priorities.entries()]
     const sortedEntries = entries.sort(([, a], [, b]) => a.value - b.value).map(([id]) => id)
-    return generateLayers(sortedEntries, registered.value, positions, amounts)
+    return generateLayers(sortedEntries, registered.value, positions, layoutSizes, activeItems)
   })
 
   const mainStyles = computed(() => {
@@ -155,7 +163,7 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
   const items = computed(() => {
     return layers.value.slice(1).map(({ id }, index) => {
       const { layer } = layers.value[index]
-      const size = amounts.get(id)
+      const size = layoutSizes.get(id)
 
       return {
         id,
@@ -170,10 +178,18 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
   }
 
   provide(VuetifyLayoutKey, {
-    register: (id: string, priority: Ref<number>, position: Ref<Position>, amount: Ref<number | string>) => {
+    register: (
+      id: string,
+      priority: Ref<number>,
+      position: Ref<Position>,
+      layoutSize: Ref<number | string>,
+      itemSize: Ref<number | string>,
+      active: Ref<boolean>
+    ) => {
       priorities.set(id, priority)
       positions.set(id, position)
-      amounts.set(id, amount)
+      layoutSizes.set(id, layoutSize)
+      activeItems.set(id, active)
       registered.value.push(id)
 
       return computed(() => {
@@ -191,27 +207,28 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
         }
 
         const isHorizontal = position.value === 'left' || position.value === 'right'
-        const isOpposite = position.value === 'right'
-
-        const amount = amounts.get(id)
+        const isOppositeHorizontal = position.value === 'right'
+        const isOppositeVertical = position.value === 'bottom'
 
         return {
           [position.value]: 0,
-          height: isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)` : `${amount?.value ?? 0}px`,
-          marginLeft: isOpposite ? undefined : `${item.left}px`,
-          marginRight: isOpposite ? `${item.right}px` : undefined,
+          height: isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)` : `${itemSize.value}px`,
+          marginLeft: isOppositeHorizontal ? undefined : `${item.left}px`,
+          marginRight: isOppositeHorizontal ? `${item.right}px` : undefined,
           marginTop: position.value !== 'bottom' ? `${item.top}px` : undefined,
           marginBottom: position.value !== 'top' ? `${item.bottom}px` : undefined,
           position: 'absolute',
-          width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : `${amount?.value ?? 0}px`,
+          width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : `${itemSize.value}px`,
           zIndex: layers.value.length - index,
+          transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -110) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}%)`,
         }
       })
     },
     unregister: (id: string) => {
-      positions.delete(id)
-      amounts.delete(id)
       priorities.delete(id)
+      positions.delete(id)
+      layoutSizes.delete(id)
+      activeItems.delete(id)
       registered.value = registered.value.filter(v => v !== id)
     },
     mainStyles,
