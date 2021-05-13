@@ -195,6 +195,7 @@ export default baseMixins.extend<options>().extend({
     if (tag === 'button') {
       data.attrs!.type = this.type
       data.attrs!.disabled = this.disabled
+      if (this.loading) data.attrs!.tabindex = -1
     }
     data.attrs!.value = ['string', 'number'].includes(typeof this.value)
       ? this.value

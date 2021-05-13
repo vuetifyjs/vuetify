@@ -56,7 +56,8 @@ exports[`VBtn.ts should render component with color prop and match snapshot 2`] 
 `;
 
 exports[`VBtn.ts should render component with loader and match snapshot 1`] = `
-<button type="button"
+<button tabindex="-1"
+        type="button"
         class="v-btn v-btn--is-elevated v-btn--has-bg v-btn--loading theme--light v-size--default"
 >
   <span class="v-btn__content">
@@ -91,7 +92,8 @@ exports[`VBtn.ts should render component with loader and match snapshot 1`] = `
 `;
 
 exports[`VBtn.ts should render component with loader slot and match snapshot 1`] = `
-<button type="button"
+<button tabindex="-1"
+        type="button"
         class="v-btn v-btn--is-elevated v-btn--has-bg v-btn--loading theme--light v-size--default"
 >
   <span class="v-btn__content">
