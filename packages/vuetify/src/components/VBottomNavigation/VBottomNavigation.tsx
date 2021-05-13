@@ -9,7 +9,7 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useColor } from '@/composables/color'
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTheme } from '@/composables/theme'
 
@@ -22,6 +22,7 @@ export default defineComponent({
   name: 'VBottomNavigation',
 
   props: makeProps({
+    bgColor: String,
     color: String,
     grow: Boolean,
     height: {
@@ -53,7 +54,8 @@ export default defineComponent({
   setup (props, { slots }) {
     const { themeClasses } = useTheme()
     const { borderClasses } = useBorder(props, 'v-bottom-navigation')
-    const { colorClasses, colorStyles } = useColor(computed(() => ({ background: props.color })))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => props.bgColor))
+    const { textColorClasses, textColorStyles } = useTextColor(computed(() => props.color))
     const { densityClasses } = useDensity(props, 'v-bottom-navigation')
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-bottom-navigation')
@@ -85,15 +87,17 @@ export default defineComponent({
               'v-bottom-navigation--shift': props.mode === 'shift',
             },
             themeClasses.value,
-            colorClasses.value,
+            backgroundColorClasses.value,
             borderClasses.value,
+            textColorClasses.value,
             densityClasses.value,
             elevationClasses.value,
             positionClasses.value,
             roundedClasses.value,
           ]}
           style={[
-            colorStyles.value,
+            backgroundColorStyles.value,
+            textColorStyles.value,
             layoutStyles.value,
             positionStyles.value,
             {
@@ -102,9 +106,11 @@ export default defineComponent({
             },
           ]}
         >
-          <div class="v-bottom-navigation__content">
-            { slots.default?.() }
-          </div>
+          { slots.default && (
+            <div class="v-bottom-navigation__content">
+              { slots.default() }
+            </div>
+          ) }
         </props.tag>
       )
     }
