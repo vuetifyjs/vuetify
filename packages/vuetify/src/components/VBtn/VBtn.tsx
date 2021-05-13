@@ -113,7 +113,7 @@ export default defineComponent({
         )}
 
         { typeof props.icon === 'boolean'
-          ? <div class="v-btn__content">{ slots.default?.() }</div>
+          ? slots.default?.()
           : (
             <VIcon
               class="v-btn__icon"
