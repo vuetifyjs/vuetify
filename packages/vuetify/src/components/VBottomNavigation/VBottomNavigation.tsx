@@ -25,10 +25,6 @@ export default defineComponent({
     bgColor: String,
     color: String,
     grow: Boolean,
-    height: {
-      type: [Number, String],
-      default: 56,
-    },
     horizontal: Boolean,
     modelValue: {
       type: Boolean,
@@ -43,7 +39,10 @@ export default defineComponent({
     ...makeElevationProps(),
     ...makePositionProps(),
     ...makeRoundedProps(),
-    ...makeLayoutItemProps({ name: 'bottom-navigation' }),
+    ...makeLayoutItemProps({
+      name: 'bottom-navigation',
+      size: 56,
+    }),
     ...makeTagProps({ tag: 'header' }),
   }),
 
@@ -61,7 +60,7 @@ export default defineComponent({
     const { positionClasses, positionStyles } = usePosition(props, 'v-bottom-navigation')
     const { roundedClasses } = useRounded(props, 'v-bottom-navigation')
     const height = computed(() => (
-      Number(props.height) +
+      Number(props.size) +
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ))
