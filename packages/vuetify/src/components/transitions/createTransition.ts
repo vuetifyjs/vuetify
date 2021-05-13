@@ -58,10 +58,22 @@ export function createSimpleTransition (
       }
 
       if (context.props.leaveAbsolute) {
-        data.on!.leave = mergeTransitions(data.on!.leave, (el: HTMLElement) => (el.style.position = 'absolute'))
+        data.on!.leave = mergeTransitions(data.on!.leave, (el: HTMLElement) => {
+          (el as any)._initialPosition = el.style.position
+          el.style.position = 'absolute'
+        })
+        data.on!.afterLeave = mergeTransitions(data.on!.afterLeave, (el?: HTMLElement) => {
+          if (el) el.style.position = (el as any)._initialPosition || ''
+        })
       }
       if (context.props.hideOnLeave) {
-        data.on!.leave = mergeTransitions(data.on!.leave, (el: HTMLElement) => (el.style.display = 'none'))
+        data.on!.leave = mergeTransitions(data.on!.leave, (el: HTMLElement) => {
+          (el as any)._initialDisplay = el.style.display
+          el.style.display = 'none'
+        })
+        data.on!.afterLeave = mergeTransitions(data.on!.afterLeave, (el?: HTMLElement) => {
+          if (el) el.style.display = (el as any)._initialDisplay || ''
+        })
       }
 
       return h(tag, mergeData(context.data, data), context.children)
