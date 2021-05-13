@@ -9,8 +9,9 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useBackgroundColor } from '@/composables/color'
+import { useColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, defineComponent, toRef } from 'vue'
@@ -22,7 +23,6 @@ export default defineComponent({
 
   props: makeProps({
     color: String,
-    flat: Boolean,
     grow: Boolean,
     height: {
       type: [Number, String],
@@ -33,7 +33,10 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
-    shift: Boolean,
+    mode: {
+      type: String,
+      validator: (v: any) => !v || ['horizontal', 'shift'].includes(v),
+    },
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
@@ -48,12 +51,13 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
+    const { themeClasses } = useTheme()
     const { borderClasses } = useBorder(props, 'v-bottom-navigation')
+    const { colorClasses, colorStyles } = useColor(computed(() => ({ background: props.color })))
     const { densityClasses } = useDensity(props, 'v-bottom-navigation')
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-bottom-navigation')
     const { roundedClasses } = useRounded(props, 'v-bottom-navigation')
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const height = computed(() => (
       Number(props.height) +
       (props.density === 'comfortable' ? 8 : 0) -
@@ -76,11 +80,12 @@ export default defineComponent({
             'v-bottom-navigation',
             {
               'v-bottom-navigation--grow': props.grow,
-              'v-bottom-navigation--horizontal': props.horizontal,
+              'v-bottom-navigation--horizontal': props.mode === 'horizontal',
               'v-bottom-navigation--is-active': isActive.value,
-              'v-bottom-navigation--shift': props.shift,
+              'v-bottom-navigation--shift': props.mode === 'shift',
             },
-            backgroundColorClasses.value,
+            themeClasses.value,
+            colorClasses.value,
             borderClasses.value,
             densityClasses.value,
             elevationClasses.value,
@@ -88,7 +93,7 @@ export default defineComponent({
             roundedClasses.value,
           ]}
           style={[
-            backgroundColorStyles.value,
+            colorStyles.value,
             layoutStyles.value,
             positionStyles.value,
             {

@@ -109,7 +109,7 @@
     border-radius: 0
     flex-direction: column
     font-size: $button-bottom-navigation-font-size
-    height: inherit
+    height: auto
     max-width: $button-bottom-navigation-max-width
     min-width: $button-bottom-navigation-min-width
     opacity: $button-bottom-navigation-opacity
@@ -131,7 +131,7 @@
       transition-property: transform
       transition-duration: .2s
 
-    > .v-btn__content
+    > *:not(.v-icon)
       opacity: 0
       position: absolute
       top: 50%
@@ -142,13 +142,12 @@
 
   &--is-active
     .v-bottom-navigation &
-      color: rgb($button-bottom-navigation-active-color)
       opacity: $button-bottom-navigation-active-opacity
 
     .v-bottom-navigation--shift &
       > .v-icon
         transform: translateY(-7px)
 
-      > .v-btn__content
+      > *:not(.v-icon)
         opacity: 1
         transform: scale(1) translateY(5px)
