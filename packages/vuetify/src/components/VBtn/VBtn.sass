@@ -124,7 +124,31 @@
   .v-bottom-navigation--horizontal &
     flex-direction: row
 
+  .v-bottom-navigation--shift &
+    > .v-icon
+      transform: translateY(0)
+      transition: inherit
+      transition-property: transform
+      transition-duration: .2s
+
+    > .v-btn__content
+      opacity: 0
+      position: absolute
+      top: 50%
+      transform: scale(.8) translateY(10px)
+      transition: inherit
+      transition-property: transform, opacity
+      transition-duration: .2s
+
   &--is-active
     .v-bottom-navigation &
       color: rgb($button-bottom-navigation-active-color)
       opacity: $button-bottom-navigation-active-opacity
+
+    .v-bottom-navigation--shift &
+      > .v-icon
+        transform: translateY(-7px)
+
+      > .v-btn__content
+        opacity: 1
+        transform: scale(1) translateY(5px)
