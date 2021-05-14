@@ -22,7 +22,7 @@ interface LayoutProvide {
     priority: Ref<number>,
     position: Ref<Position>,
     layoutSize: Ref<number | string>,
-    itemSize: Ref<number | string>,
+    elementSize: Ref<number | string>,
     active: Ref<boolean>
   ) => Ref<Record<string, unknown>>
   unregister: (id: string) => void
@@ -65,7 +65,7 @@ export function useLayoutItem (
   priority: Ref<number>,
   position: Ref<Position>,
   layoutSize: Ref<number | string>,
-  itemSize: Ref<number | string>,
+  elementSize: Ref<number | string>,
   active: Ref<boolean>,
 ) {
   const layout = inject(VuetifyLayoutKey)
@@ -74,7 +74,7 @@ export function useLayoutItem (
 
   const id = name ?? `layout-item-${getUid()}`
 
-  const styles = layout.register(id, priority, position, layoutSize, itemSize, active)
+  const styles = layout.register(id, priority, position, layoutSize, elementSize, active)
 
   onBeforeUnmount(() => layout.unregister(id))
 
@@ -183,7 +183,7 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
       priority: Ref<number>,
       position: Ref<Position>,
       layoutSize: Ref<number | string>,
-      itemSize: Ref<number | string>,
+      elementSize: Ref<number | string>,
       active: Ref<boolean>
     ) => {
       priorities.set(id, priority)
@@ -212,13 +212,13 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
 
         return {
           [position.value]: 0,
-          height: isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)` : `${itemSize.value}px`,
+          height: isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)` : `${elementSize.value}px`,
           marginLeft: isOppositeHorizontal ? undefined : `${item.left}px`,
           marginRight: isOppositeHorizontal ? `${item.right}px` : undefined,
           marginTop: position.value !== 'bottom' ? `${item.top}px` : undefined,
           marginBottom: position.value !== 'top' ? `${item.bottom}px` : undefined,
           position: 'absolute',
-          width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : `${itemSize.value}px`,
+          width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : `${elementSize.value}px`,
           zIndex: layers.value.length - index,
           transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -110) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}%)`,
         }

@@ -38,7 +38,7 @@ export default defineComponent({
     )
 
     return () => (
-      <div class='v-layout-item' style={ styles.value }>
+      <div class="v-layout-item" style={ styles.value }>
         { slots.default?.() }
       </div>
     )
