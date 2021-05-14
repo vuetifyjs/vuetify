@@ -2,6 +2,7 @@
   "component": {
     "componentFolder": "./src",
     "testFiles": "**/*cy.spec.{js,jsx,ts,tsx}",
-    "video": false
+    "video": false,
+    "supportFile": "./cypress/support/index.ts"
   }
 }
