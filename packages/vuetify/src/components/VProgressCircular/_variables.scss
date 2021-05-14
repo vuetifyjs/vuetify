@@ -1,6 +1,16 @@
-$progress-circular-rotate-animation: progress-circular-rotate 1.4s linear
-  infinite !default;
+$progress-circular-rotate-animation: progress-circular-rotate 1.4s linear infinite !default;
 $progress-circular-rotate-dash: progress-circular-dash 1.4s ease-in-out infinite !default;
-$process-circular-intermediate-svg-transition: all 0.2s ease-in-out !default;
-$progress-circular-underlay-stroke: rgba(map-get($grey, "base"), 0.4) !default;
-$progress-circular-overlay-transition: all 0.6s ease-in-out !default;
+$progress-circular-intermediate-svg-transition: all 0.2s ease-in-out !default;
+$progress-circular-overlay-transition: all 0.6s ease-in-out, stroke-width 0s !default;
+
+$progress-circular-sizes: () !default;
+$progress-circular-sizes: map-deep-merge(
+  (
+    'x-small': 16px,
+    'small': 24px,
+    'default': 32px,
+    'large': 48px,
+    'x-large': 64px,
+  ),
+  $progress-circular-sizes
+);

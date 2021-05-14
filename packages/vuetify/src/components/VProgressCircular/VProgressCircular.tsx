@@ -6,8 +6,11 @@ import { makeTagProps } from '@/composables/tag'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, toRef } from 'vue'
 import { convertToUnit, makeProps } from '@/util'
+import { useTheme } from '@/composables/theme'
+import { useIntersectionObserver } from '@/composables/intersectionObserver'
+import { makeSizeProps, useSize } from '@/composables/size'
 
 export default defineComponent({
   name: 'VProgressCircular',
@@ -18,123 +21,107 @@ export default defineComponent({
       type: [Number, String],
       default: 0,
     },
+    bgColor: {
+      type: String,
+      default: 'surface',
+    },
     color: {
       type: String,
       default: 'primary',
-    },
-    size: {
-      type: Number,
-      default: 32,
     },
     width: {
       type: [Number, String],
       default: 4,
     },
-    value: {
+    modelValue: {
       type: [Number, String],
       default: 0,
     },
+    ...makeSizeProps(),
     ...makeTagProps({ tag: 'div' }),
   }),
 
   setup (props, { slots }) {
-    const radius = 20
-    const isVisible = true
+    const MAGIC_RADIUS_CONSTANT = 20
+    const CIRCUMFERENCE = 2 * Math.PI * MAGIC_RADIUS_CONSTANT
 
-    const { textColorClasses, textColorStyles } = useTextColor(computed(() => (
-      props.color
-    )))
+    const { themeClasses } = useTheme()
+    const { sizeClasses, sizeStyles } = useSize(props, 'v-progress-circular')
+    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
+    const { textColorClasses: underlayColorClasses, textColorStyles: underlayColorStyles } = useTextColor(toRef(props, 'bgColor'))
+    const { intersectionRef, isIntersecting } = useIntersectionObserver()
 
-    const calculatedSize = computed(() => Number(props.size))
-
-    const circumference = computed(() => 2 * Math.PI * radius)
-
-    const normalizedValue = computed(() => {
-      if (props.value < 0) {
-        return 0
-      }
-
-      if (props.value > 100) {
-        return 100
-      }
-
-      return parseFloat(props.value)
+    const normalizedValue = computed(() => Math.max(0, Math.min(100, parseFloat(props.modelValue))))
+    const width = computed(() => Number(props.width))
+    const size = computed(() => {
+      // Get size from element if size prop value is small, large etc
+      return sizeStyles.value ? Number(props.size) : intersectionRef.value
+        ? intersectionRef.value.getBoundingClientRect().width : Math.max(width.value, 32)
     })
+    const diameter = computed(() => (MAGIC_RADIUS_CONSTANT / (1 - width.value / size.value)) * 2)
+    const strokeWidth = computed(() => width.value / size.value * diameter.value)
+    const strokeDashOffset = computed(() => convertToUnit(((100 - normalizedValue.value) / 100) * CIRCUMFERENCE))
 
-    const strokeDashArray = computed(() => {
-      return Math.round(circumference.value * 1000) / 1000
-    })
-
-    const strokeDashOffset = computed(() => {
-      return convertToUnit(((100 - normalizedValue.value) / 100) * circumference.value)
-    })
-
-    const strokeWidth = computed(() => {
-      return Number(props.width) / +props.size * viewBoxSize.value * 2
-    })
-
-    const svgStyles = computed(() => {
-      return {
-        transform: `rotate(${Number(props.rotate)}deg)`,
-      }
-    })
-
-    const viewBoxSize = computed(() => {
-      return radius / (1 - Number(props.width) / +props.size)
-    })
-
-    return () =>
-      (
-        <props.tag
-          class={[
-            'v-progress-circular',
-            {
-              'v-progress-circular--visible': isVisible,
-              'v-progress-circular--indeterminate': props.indeterminate,
-            },
-            textColorClasses.value,
-          ]}
-          style={[
-            textColorStyles.value,
-            {
-              height: convertToUnit(calculatedSize.value),
-              width: convertToUnit(calculatedSize.value),
-            },
-          ]}
-          role="progressbar"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          aria-valuenow={ props.indeterminate ? undefined : normalizedValue.value }
+    return () => (
+      <props.tag
+        ref={ intersectionRef }
+        class={[
+          'v-progress-circular',
+          {
+            'v-progress-circular--visible': isIntersecting.value,
+            'v-progress-circular--indeterminate': props.indeterminate,
+          },
+          textColorClasses.value,
+          sizeClasses.value,
+          themeClasses.value,
+        ]}
+        style={[
+          textColorStyles.value,
+          sizeStyles.value,
+        ]}
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow={ props.indeterminate ? undefined : normalizedValue.value }
+      >
+        <svg
+          style={{
+            transform: `rotate(calc(-90deg + ${Number(props.rotate)}deg))`,
+          }}
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox={ `0 0 ${diameter.value} ${diameter.value}` }
         >
-          <svg
-            style={ svgStyles.value }
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox={ `${viewBoxSize.value} ${viewBoxSize.value} ${2 * viewBoxSize.value} ${2 * viewBoxSize.value}` }
-          >
-            <circle
-              class="v-progress-circular__underlay"
-              fill="transparent"
-              cx={ 2 * viewBoxSize.value }
-              cy={ 2 * viewBoxSize.value}
-              r={ radius }
-              stroke-width={ strokeWidth.value }
-              stroke-dasharray={ strokeDashArray.value }
-              stroke-dashoffset={ 0 }
-            >
-            </circle>
-            <circle
-              class="v-progress-circular__overlay"
-              fill="transparent"
-              cx={ 2 * viewBoxSize.value }
-              cy={ 2 * viewBoxSize.value}
-              r={ radius }
-              stroke-width={ strokeWidth.value }
-              stroke-dasharray={ strokeDashArray.value }
-              stroke-dashoffset={ strokeDashOffset.value }
-            >
-            </circle>
-          </svg>
-        </props.tag>
-      )
+          <circle
+            class={[
+              'v-progress-circular__underlay',
+              underlayColorClasses.value,
+            ]}
+            style={ underlayColorStyles.value }
+            fill="transparent"
+            cx='50%'
+            cy='50%'
+            r={ MAGIC_RADIUS_CONSTANT }
+            stroke-width={ strokeWidth.value }
+            stroke-dasharray={ CIRCUMFERENCE }
+            stroke-dashoffset={ 0 }
+          />
+          <circle
+            class="v-progress-circular__overlay"
+            fill="transparent"
+            cx='50%'
+            cy='50%'
+            r={ MAGIC_RADIUS_CONSTANT }
+            stroke-width={ strokeWidth.value }
+            stroke-dasharray={ CIRCUMFERENCE }
+            stroke-dashoffset={ strokeDashOffset.value }
+          />
+        </svg>
+        { slots.default ? (
+          <div class="v-progress-circular__content">
+            { slots.default() }
+          </div>
+        ) : undefined }
+      </props.tag>
+    )
   },
 })

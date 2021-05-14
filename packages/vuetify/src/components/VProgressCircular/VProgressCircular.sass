@@ -1,6 +1,7 @@
 // Imports
 @import ./index
 
+// Elements
 .v-progress-circular
   position: relative
   display: inline-flex
@@ -19,36 +20,43 @@
     right: 0
     z-index: 0
 
-  &--indeterminate
-    > svg
-      animation: $progress-circular-rotate-animation
-      transform-origin: center center
-      transition: $process-circular-intermediate-svg-transition
+.v-progress-circular__content
+  align-items: center
+  display: flex
+  justify-content: center
 
-    .v-progress-circular__overlay
-      animation: $progress-circular-rotate-dash
-      stroke-linecap: round
-      stroke-dasharray: 80, 200
-      stroke-dashoffset: 0px
+.v-progress-circular__underlay
+  stroke: currentColor
+  z-index: 1
 
-  &--indeterminate:not(&--visible)
-    > svg,
-    .v-progress-circular__overlay
-      animation-play-state: paused !important
+.v-progress-circular__overlay
+  stroke: currentColor
+  z-index: 2
+  transition: $progress-circular-overlay-transition
 
-  &__info
-    align-items: center
-    display: flex
-    justify-content: center
+// Modifiers
+.v-progress-circular
+  @each $name in $sizes
+    &--size-#{$name}
+      height: map-get($progress-circular-sizes, $name)
+      width: map-get($progress-circular-sizes, $name)
 
-  &__underlay
-    stroke: $progress-circular-underlay-stroke
-    z-index: 1
+.v-progress-circular--indeterminate
+  > svg
+    animation: $progress-circular-rotate-animation
+    transform-origin: center center
+    transition: $progress-circular-intermediate-svg-transition
 
-  &__overlay
-    stroke: currentColor
-    z-index: 2
-    transition: $progress-circular-overlay-transition
+  .v-progress-circular__overlay
+    animation: $progress-circular-rotate-dash
+    stroke-linecap: round
+    stroke-dasharray: 80, 200
+    stroke-dashoffset: 0px
+
+.v-progress-circular--indeterminate:not(.v-progress-circular--visible)
+  > svg,
+  .v-progress-circular__overlay
+    animation-play-state: paused !important
 
 @keyframes progress-circular-dash
   0%
@@ -65,4 +73,4 @@
 
 @keyframes progress-circular-rotate
   100%
-    transform: rotate(360deg)
+    transform: rotate(270deg)
