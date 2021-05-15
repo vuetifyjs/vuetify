@@ -1,69 +1,15 @@
-@import '../../styles/tools/_functions.sass';
+// Defaults
+$chip-background-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
+$chip-border-color: $border-color-root !default;
+$chip-border-radius: map-get($rounded, 'pill') !default;
+$chip-border-style: $border-style-root !default;
+$chip-border-thin-width: thin !default;
+$chip-border-width: 0 !default;
+$chip-elevation: 0 !default;
+$chip-rounded-border-radius: $border-radius-root !default;
 
-$chip-avatar-size: 24px !default;
-$chip-close-size: 18px !default;
-$chip-font-size: map-deep-get($typography, 'body-1', 'size') !default;
-$chip-height: 36px !default;
-$chip-icon-margin-after: 6px !default;
-$chip-icon-margin-before: -6px !default;
-$chip-icon-right-margin-after: -4px !default;
-$chip-icon-right-margin-before: 8px !default;
-$chip-icon-size: 24px !default;
-$chip-label-border-radius: $border-radius-root !default;
-$chip-link-focus-opacity: 0.32 !default;
-$chip-pill-avatar-margin-after: 8px !default;
-$chip-pill-avatar-margin-before: -12px !default;
-$chip-pill-avatar-size: 32px !default;
-$chip-pill-filter-margin: 0 16px 0 0 !default;
-$chip-transition-duration: 0.28s !default;
-// $chip-transition-fn: map-get($transition, 'fast-out-slow-in') !default;
-$icon-outlined-border-width: thin !default;
-$chip-line-height: 20px !default;
-$chip-padding: 0 12px !default;
-$chip-white-space: nowrap !default;
-$chip-disabled-opacity: 0.4 !default;
-$chip-filter-max-width: 24px !default;
-$chip-outlined-active-opacity: 0.08 !default;
-$chip-selected-opacity: 0.28 !default;
-
-$chip-padding-ratio: 2.25 !default;
-$chip-vertical-align: middle !default;
-$chip-width-ratio: 16/9 !default;
-
-$chip-sizes: () !default;
-$chip-sizes: map-merge(
-  (
-    'height': $chip-height,
-    'font-size': $chip-font-size
-  ),
-  $chip-sizes
-);
-
-$chip-density: ('default': 0, 'comfortable': -2, 'compact': -3) !default;
-
-$icon-sizes: () !default;
-$icon-sizes: map-deep-merge(
-  (
-    'x-small': (
-      'font-size': 10,
-      'height': 16
-    ),
-    'small': (
-      'font-size': 12,
-      'height': 24
-    ),
-    'default': (
-      'font-size': 14,
-      'height': 32
-    ),
-    'large': (
-      'font-size': 16,
-      'height': 54
-    ),
-    'x-large': (
-      'font-size': 18,
-      'height': 66
-    )
-  ),
-  $icon-sizes
-);
+$chip-border: (
+  $chip-border-color,
+  $chip-border-style,
+  $chip-border-width
+) !default;

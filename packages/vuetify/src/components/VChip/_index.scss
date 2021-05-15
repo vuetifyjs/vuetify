@@ -1,17 +1,3 @@
 @import '../../styles/styles.sass';
-@import './_variables.scss';
-
-@mixin chip-sizes {
-  @each $sizeName, $multiplier in $size-scales {
-    $size: map-get($chip-sizes, 'font-size') + (2 * $multiplier) / 16;
-    $height: map-get($chip-sizes, 'height') + (8 * $multiplier);
-
-    .v-chip--size-#{$sizeName} {
-      --v-chip-size: #{$size};
-      --v-chip-height: #{$height};
-      font-size: $size;
-      min-width: round($height * $chip-width-ratio);
-      padding: 0 ($height / $chip-padding-ratio);
-    }
-  }
-}
+@import './mixins';
+@import './variables';

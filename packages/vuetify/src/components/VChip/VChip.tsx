@@ -44,10 +44,7 @@ export default defineComponent({
       type: String,
       default: '$vuetify.close',
     },
-    color: {
-      type: String,
-      default: 'primary',
-    },
+    color: String,
     disabled: Boolean,
     draggable: Boolean,
     filter: Boolean,
@@ -57,11 +54,7 @@ export default defineComponent({
     },
     label: Boolean,
     link: Boolean,
-    pill: Boolean,
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
+    ripple: Boolean,
     textColor: String,
     value: null as any,
     ...makeBorderProps(),
@@ -69,7 +62,7 @@ export default defineComponent({
     ...makeElevationProps(),
     ...makeRoundedProps(),
     ...makeSizeProps(),
-    ...makeTagProps({ tag: 'span' }),
+    ...makeTagProps({ tag: 'button' }),
   }),
 
   emits: ['click:close', 'update:active'],
@@ -78,7 +71,6 @@ export default defineComponent({
     const { borderClasses } = useBorder(props, 'v-chip')
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props, 'v-chip')
-
     const { sizeClasses } = useSize(props, 'v-chip')
     const { densityClasses } = useDensity(props, 'v-chip')
 
@@ -121,7 +113,7 @@ export default defineComponent({
             // 'v-chip--link': props.isLink,
             'v-chip--no-color': !props.color,
             'v-chip--outlined': props.outlined,
-            'v-chip--pill': props.pill,
+            // 'v-chip--pill': props.pill,
             'v-chip--removable': hasClose.value,
           },
           themeClasses.value,
@@ -149,9 +141,9 @@ export default defineComponent({
             />
           )
         }
-        <span class="v-chip__content">
-          { slots.default?.() }
-        </span>
+
+        { slots.default?.() }
+
         {
           props.close && (
             <VIcon
