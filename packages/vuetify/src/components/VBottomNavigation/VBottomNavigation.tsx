@@ -6,7 +6,6 @@ import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
-import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
@@ -25,7 +24,6 @@ export default defineComponent({
     bgColor: String,
     color: String,
     grow: Boolean,
-    horizontal: Boolean,
     modelValue: {
       type: Boolean,
       default: true,
@@ -37,7 +35,6 @@ export default defineComponent({
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
-    ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeLayoutItemProps({
       name: 'bottom-navigation',
@@ -57,7 +54,6 @@ export default defineComponent({
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => props.color))
     const { densityClasses } = useDensity(props, 'v-bottom-navigation')
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props, 'v-bottom-navigation')
     const { roundedClasses } = useRounded(props, 'v-bottom-navigation')
     const height = computed(() => (
       Number(props.size) -
@@ -88,14 +84,12 @@ export default defineComponent({
             borderClasses.value,
             densityClasses.value,
             elevationClasses.value,
-            positionClasses.value,
             roundedClasses.value,
             textColorClasses.value,
           ]}
           style={[
             backgroundColorStyles.value,
             layoutStyles.value,
-            positionStyles.value,
             textColorStyles.value,
             {
               height: convertToUnit(height.value),
