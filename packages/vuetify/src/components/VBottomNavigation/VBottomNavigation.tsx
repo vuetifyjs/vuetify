@@ -73,8 +73,6 @@ export default defineComponent({
     )
 
     return () => {
-      const translate = !isActive.value ? 100 : 0
-
       return (
         <props.tag
           class={[
@@ -88,20 +86,20 @@ export default defineComponent({
             themeClasses.value,
             backgroundColorClasses.value,
             borderClasses.value,
-            textColorClasses.value,
             densityClasses.value,
             elevationClasses.value,
             positionClasses.value,
             roundedClasses.value,
+            textColorClasses.value,
           ]}
           style={[
             backgroundColorStyles.value,
-            textColorStyles.value,
             layoutStyles.value,
             positionStyles.value,
+            textColorStyles.value,
             {
               height: convertToUnit(height.value),
-              transform: `translateY(${convertToUnit(translate, '%')})`,
+              transform: `translateY(${convertToUnit(!isActive.value ? 100 : 0, '%')})`,
             },
           ]}
         >

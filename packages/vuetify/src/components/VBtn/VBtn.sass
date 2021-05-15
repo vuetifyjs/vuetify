@@ -105,6 +105,7 @@
   .v-app-bar &
     @include elevation($button-app-bar-elevation)
 
+.v-btn
   .v-bottom-navigation &
     filter: $button-bottom-navigation-filter
     flex-direction: column
@@ -135,7 +136,7 @@
     > *:not([class*='v-'])
       opacity: $button-bottom-navigation-shift-opacity
       position: absolute
-      top: 50%
+      top: $button-bottom-navigation-shift-top
       transform: $button-bottom-navigation-shift-transform
       transition: inherit
 
