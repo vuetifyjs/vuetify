@@ -2,10 +2,13 @@
 import './VChip.sass'
 
 // Composables
+import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { makeSheetProps, useSheet } from '@/components/VSheet/VSheet'
 import { useColor } from '@/composables/color'
+import { useTheme } from '@/composables/theme'
 
 // Directives
 import { Ripple, RippleDirectiveBinding } from '@/directives/ripple'
@@ -16,7 +19,7 @@ import VIcon from '@/components/VIcon/VIcon'
 
 // Utilities
 import { computed, defineComponent, withDirectives } from 'vue'
-import makeProps from '@/util/makeProps'
+import { makeProps } from '@/util/makeProps'
 import { useDirective } from '@/util/useDirective'
 import { makeSizeProps, useSize } from '@/composables/size'
 
@@ -61,16 +64,20 @@ export default defineComponent({
     },
     textColor: String,
     value: null as any,
-
-    ...makeSheetProps(),
-    ...makeSizeProps(),
+    ...makeBorderProps(),
     ...makeDensityProps(),
+    ...makeElevationProps(),
+    ...makeRoundedProps(),
+    ...makeSizeProps(),
     ...makeTagProps({ tag: 'span' }),
   }),
 
   emits: ['click:close', 'update:active'],
   setup (props, { slots, emit }) {
-    const { sheetClasses, sheetStyles } = useSheet(props, 'v-chip')
+    const { themeClasses } = useTheme()
+    const { borderClasses } = useBorder(props, 'v-chip')
+    const { elevationClasses } = useElevation(props)
+    const { roundedClasses } = useRounded(props, 'v-chip')
 
     const { sizeClasses } = useSize(props, 'v-chip')
     const { densityClasses } = useDensity(props, 'v-chip')
@@ -117,13 +124,15 @@ export default defineComponent({
             'v-chip--pill': props.pill,
             'v-chip--removable': hasClose.value,
           },
-          sheetClasses.value,
+          themeClasses.value,
+          borderClasses.value,
           colorClasses.value,
-          sizeClasses.value,
           densityClasses.value,
+          elevationClasses.value,
+          roundedClasses.value,
+          sizeClasses.value,
         ]}
         style={[
-          sheetStyles.value,
           colorStyles.value,
         ]}
         disabled={ props.disabled }

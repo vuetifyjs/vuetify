@@ -2,7 +2,7 @@
 
 $chip-avatar-size: 24px !default;
 $chip-close-size: 18px !default;
-$chip-font-size: map-deep-get($headings, 'body-1', 'size') !default;
+$chip-font-size: map-deep-get($typography, 'body-1', 'size') !default;
 $chip-height: 36px !default;
 $chip-icon-margin-after: 6px !default;
 $chip-icon-margin-before: -6px !default;
