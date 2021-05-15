@@ -60,7 +60,7 @@ export default defineComponent({
     const { positionClasses, positionStyles } = usePosition(props, 'v-bottom-navigation')
     const { roundedClasses } = useRounded(props, 'v-bottom-navigation')
     const height = computed(() => (
-      Number(props.size) +
+      Number(props.size) -
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ))
