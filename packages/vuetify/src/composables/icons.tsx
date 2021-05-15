@@ -1,10 +1,10 @@
 // Utilities
 import { computed, defineComponent, inject, isRef } from 'vue'
-import makeProps from '@/util/makeProps'
-import propsFactory from '@/util/propsFactory'
+import { makeProps } from '@/util/makeProps'
+import { propsFactory } from '@/util/propsFactory'
 
 // Types
-import type { JSXComponent, PropType, InjectionKey, Ref } from 'vue'
+import type { InjectionKey, JSXComponent, PropType, Ref } from 'vue'
 
 export type IconValue = string | JSXComponent
 
@@ -110,10 +110,10 @@ export const VSvgIcon = defineComponent({
       return (
         <props.tag { ...attrs } style={ null }>
           <svg
-            class='v-icon__svg'
-            xmlns='http://www.w3.org/2000/svg'
-            viewBox='0 0 24 24'
-            role='img'
+            class="v-icon__svg"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            role="img"
             aria-hidden="true"
           >
             <path d={ props.icon as string }></path>

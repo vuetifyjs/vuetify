@@ -1,12 +1,13 @@
 // Styles
 import './VResponsive.sass'
 
-// Utilities
-import { defineComponent, computed } from 'vue'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import makeProps from '@/util/makeProps'
-
 // Composables
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+
+// Utilities
+import { computed, defineComponent } from 'vue'
+import { makeProps } from '@/util'
+
 export function useAspectStyles (props: { aspectRatio?: string | number }) {
   return {
     aspectStyles: computed(() => {

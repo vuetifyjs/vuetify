@@ -3,8 +3,7 @@ import './VDivider.sass'
 
 // Utilities
 import { computed, defineComponent } from 'vue'
-import { convertToUnit } from '@/util/helpers'
-import makeProps from '@/util/makeProps'
+import { convertToUnit, makeProps } from '@/util'
 
 // Composables
 import { useTheme } from '@/composables/theme'

@@ -8,7 +8,7 @@ import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
 import { defineComponent } from 'vue'
-import makeProps from '@/util/makeProps'
+import { makeProps } from '@/util'
 
 export default defineComponent({
   name: 'VMain',

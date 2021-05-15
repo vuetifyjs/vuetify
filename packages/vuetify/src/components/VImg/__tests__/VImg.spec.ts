@@ -1,5 +1,5 @@
 // Components
-import VImg from '../VImg'
+import { VImg } from '..'
 
 // Utilities
 import { h } from 'vue'

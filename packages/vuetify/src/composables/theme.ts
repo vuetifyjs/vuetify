@@ -1,5 +1,5 @@
 // Utilities
-import { colorToInt, colorToRGB, createRange, intToHex, lighten, darken, getLuma } from '@/util'
+import { colorToInt, colorToRGB, createRange, darken, getLuma, intToHex, lighten } from '@/util'
 import { computed, inject, provide, ref, watch } from 'vue'
 
 // Types
@@ -99,6 +99,9 @@ const defaultThemeOptions: ThemeOptions = {
       variables: {
         'border-color': '0, 0, 0',
         'border-opacity': 0.12,
+        'kbd-background-color': '#212529',
+        'kbd-color': '#FFFFFF',
+        'code-background-color': '#C2C2C2',
       },
     },
     dark: {
@@ -118,6 +121,9 @@ const defaultThemeOptions: ThemeOptions = {
       variables: {
         'border-color': '255, 255, 255',
         'border-opacity': 0.12,
+        'kbd-background-color': '#212529',
+        'kbd-color': '#FFFFFF',
+        'code-background-color': '#B7B7B7',
       },
     },
   },
@@ -230,7 +236,11 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
       lines.push(...createCssClass(`.v-theme--${themeName}`, [
         ...genCssVariables(themeName),
         ...Object.keys(variables).map(key => {
-          return `--v-${key}: ${variables[key]}`
+          const value = variables[key]
+          const color = typeof value === 'string' && value.startsWith('#') ? colorToRGB(value) : undefined
+          const rgb = color ? `${color.r}, ${color.g}, ${color.b}` : undefined
+
+          return `--v-${key}: ${rgb ?? value}`
         }),
       ]))
     }

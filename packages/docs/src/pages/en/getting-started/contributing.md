@@ -217,7 +217,7 @@ Some changes though are _substantial_, and we ask that these be put through a bi
 
 In order to get a major feature added to Vuetify you must get your RFC merged into this repository as a `.md` file. The following is a guide on how to get started:
 
-- Fork the Vuetify RFC repo <http://github.com/vuetifyjs/rfcs>
+- Fork the Vuetify RFC repo <https://github.com/vuetifyjs/rfcs>
 
 - Copy `0000-template.md` to `active-rfcs/0000-my-feature.md` (where **my-feature** is descriptive. **do not** assign an RFC number yet).
 

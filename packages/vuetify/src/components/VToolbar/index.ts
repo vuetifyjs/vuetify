@@ -2,7 +2,7 @@
 import VToolbar from './VToolbar'
 
 // Utilities
-import { createSimpleFunctional } from '../../util/helpers'
+import { createSimpleFunctional } from '@/util'
 
 const VToolbarTitle = createSimpleFunctional('v-toolbar__title')
 const VToolbarItems = createSimpleFunctional('v-toolbar__items')

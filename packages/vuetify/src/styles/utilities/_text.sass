@@ -1,8 +1,7 @@
-.v-application
-  @each $name, $weight in $font-weights
-    .font-weight
-      &-#{$name}
-        font-weight: $weight !important
+@each $name, $weight in $font-weights
+  .font-weight
+    &-#{$name}
+      font-weight: $weight !important
 
-  .font-italic
-    font-style: italic !important
+.font-italic
+  font-style: italic !important

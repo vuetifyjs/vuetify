@@ -37,18 +37,28 @@ Here is a list of all the available support classes:
 
 - **.float-left**
 - **.float-right**
+- **.float-start**
+- **.float-end**
 - **.float-none**
 - **.float-sm-left**
 - **.float-sm-right**
+- **.float-sm-start**
+- **.float-sm-end**
 - **.float-sm-none**
 - **.float-md-left**
 - **.float-md-right**
+- **.float-md-start**
+- **.float-md-end**
 - **.float-md-none**
 - **.float-lg-left**
 - **.float-lg-right**
+- **.float-lg-start**
+- **.float-lg-end**
 - **.float-lg-none**
 - **.float-xl-left**
 - **.float-xl-right**
+- **.float-xl-start**
+- **.float-xl-end**
 - **.float-xl-none**
 
 <backmatter />

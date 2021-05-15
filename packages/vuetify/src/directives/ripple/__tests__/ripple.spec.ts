@@ -5,7 +5,7 @@ import { defineComponent } from 'vue'
 import Ripple from '../'
 
 // Utilities
-import { keyCodes } from '@/util/helpers'
+import { keyCodes } from '@/util'
 
 const testComponent = defineComponent({
   directives: { Ripple },
@@ -91,5 +91,19 @@ describe('v-ripple', () => {
 
     jest.runAllTimers()
     expect(wrapper.findAll('.v-ripple__container')).toHaveLength(0)
+  })
+
+  it('should hide ripple on blur if keyboardRipple is true', () => {
+    const wrapper = mount(testComponent)
+    const keydownEvent = new KeyboardEvent('keydown', { keyCode: 13 })
+    wrapper.element.dispatchEvent(keydownEvent)
+
+    expect(wrapper.find('.v-ripple__container').exists()).toBe(true)
+
+    const blurEvent = new FocusEvent('blur')
+    wrapper.element.dispatchEvent(blurEvent)
+
+    jest.runAllTimers()
+    expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
   })
 })

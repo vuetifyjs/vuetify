@@ -1,6 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import propsFactory from '@/util/propsFactory'
+import { propsFactory } from '@/util'
 
 // Types
 export interface BorderProps {
@@ -20,8 +20,10 @@ export function useBorder (props: BorderProps, name: string) {
 
     if (props.outlined || props.border === true || props.border === '') {
       classes.push(`${name}--border`)
-    } else if (
-      typeof props.border === 'string' ||
+    }
+
+    if (
+      (typeof props.border === 'string' && props.border !== '') ||
       props.border === 0
     ) {
       for (const value of String(props.border).split(' ')) {

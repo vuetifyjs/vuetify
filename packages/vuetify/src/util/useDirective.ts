@@ -1,4 +1,4 @@
-import type { DirectiveBinding, Directive, DirectiveArguments } from 'vue'
+import type { Directive, DirectiveArguments, DirectiveBinding } from 'vue'
 
 interface Binding extends Omit<DirectiveBinding, 'value' | 'modifiers'> {
   value?: unknown

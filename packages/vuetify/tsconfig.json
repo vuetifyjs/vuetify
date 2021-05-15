@@ -6,7 +6,13 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ],
+      "types": [
+        "jest",
+        "node"
+      ],
     }
   }
 }

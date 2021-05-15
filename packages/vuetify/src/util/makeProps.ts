@@ -1,13 +1,13 @@
 // Utilities
 import { getCurrentInstance } from 'vue'
+import { wrapInArray } from './helpers'
+import { consoleWarn } from './console'
 import { useVuetify } from '@/framework'
-import { wrapInArray } from '@/util/helpers'
-import { consoleWarn } from '@/util/console'
 
 // Types
 import type { Prop } from 'vue'
 
-export default function makeProps<P extends Record<string, Prop<any> & { source?: string }>> (props: P) {
+export function makeProps<P extends Record<string, Prop<any> & { source?: string }>> (props: P) {
   for (const key in props) {
     const originalProp = props[key]
     const isOptions = !(originalProp == null || Array.isArray(originalProp) || typeof originalProp === 'function')

@@ -1,26 +1,6 @@
-import type { DataTableCompareFunction, SelectItemKey, ItemGroup } from 'vuetify/types'
-import type { Slots, VNode, TransitionProps } from 'vue'
-import { Fragment, defineComponent, h, capitalize, camelize, Transition, mergeProps } from 'vue'
-import { makeTagProps } from '@/composables/tag'
-import makeProps from './makeProps'
-
-export function createSimpleFunctional (
-  klass: string,
-  tag = 'div',
-  name?: string
-) {
-  return defineComponent({
-    name: name ?? capitalize(camelize(klass.replace(/__/g, '-'))),
-
-    props: makeProps(makeTagProps({ tag })),
-
-    setup (props, { slots }) {
-      return () => h(props.tag, {
-        class: klass,
-      }, slots.default?.())
-    },
-  })
-}
+import type { DataTableCompareFunction, ItemGroup, SelectItemKey } from 'vuetify/types'
+import type { Ref, Slots, TransitionProps, VNode } from 'vue'
+import { camelize, Fragment, h, isRef, mergeProps, ref, Transition } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
@@ -163,6 +143,7 @@ export const keyCodes = Object.freeze({
   insert: 45,
   pageup: 33,
   pagedown: 34,
+  shift: 16,
 })
 
 export function keys<O> (o: O) {
@@ -404,15 +385,15 @@ export function flattenFragments (nodes: VNode[]): VNode[] {
 }
 
 export function maybeTransition <T extends VNode | VNode[] | undefined> (
-  props: { transition?: string | boolean },
+  props: { transition?: string | boolean | TransitionProps },
   data: TransitionProps,
   vNodes: T
 ): VNode | T {
-  if (!props.transition) return vNodes
+  if (!props.transition || typeof props.transition === 'boolean') return vNodes
 
   return h(
     Transition,
-    mergeProps({ name: props.transition }, data as any) as TransitionProps,
+    mergeProps(typeof props.transition === 'string' ? { name: props.transition } : props.transition as any, data as any),
     () => vNodes
   )
 }
@@ -423,3 +404,11 @@ export const randomHexColor = () => {
 }
 
 export const toKebabCase = (str: string) => str.replace(/([A-Z])/g, match => `-${match.toLowerCase()}`)
+
+export type MaybeRef<T> = T | Ref<T>
+
+export type ExtractMaybeRef<P> = P extends MaybeRef<infer T> ? T : P;
+
+export function wrapInRef <T> (x: T) {
+  return (isRef(x) ? x : ref(x)) as Ref<ExtractMaybeRef<T>>
+}

@@ -1,7 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import { convertToUnit } from '@/util'
-import propsFactory from '@/util/propsFactory'
+import { convertToUnit, propsFactory } from '@/util'
 
 // Types
 const predefinedSizes = ['x-small', 'small', 'default', 'large', 'x-large']

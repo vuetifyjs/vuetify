@@ -9,6 +9,7 @@
     }"
     class="jobs-link"
     path="jobs"
+    @click="onClick"
   >
     <template #icon>
       <v-badge
@@ -35,6 +36,7 @@
     name: 'JobsLink',
 
     computed: {
+      name: get('route/name'),
       newJobs: get('jobs/newJobs'),
       page: get('route/params@page'),
       icon () {
@@ -48,7 +50,16 @@
       this.fetch()
     },
 
-    methods: { fetch: call('jobs/fetch') },
+    methods: {
+      fetch: call('jobs/fetch'),
+      onClick () {
+        this.$gtag.event('click', {
+          event_category: 'toolbar',
+          event_label: 'jobs',
+          value: this.name,
+        })
+      },
+    },
   }
 </script>
 

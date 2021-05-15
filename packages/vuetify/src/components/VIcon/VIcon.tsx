@@ -9,8 +9,7 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ComputedRef, defineComponent, toRef } from 'vue'
-import { convertToUnit, flattenFragments } from '@/util'
-import makeProps from '@/util/makeProps'
+import { convertToUnit, flattenFragments, makeProps } from '@/util'
 
 // Types
 import type { IconValue } from '@/composables/icons'
@@ -21,7 +20,6 @@ export default defineComponent({
 
   props: makeProps({
     color: String,
-    disabled: Boolean,
     left: Boolean,
     right: Boolean,
     icon: {
@@ -59,7 +57,6 @@ export default defineComponent({
             sizeClasses.value,
             textColorClasses.value,
             {
-              'v-icon--disabled': props.disabled,
               'v-icon--left': props.left,
               'v-icon--right': props.right,
             },

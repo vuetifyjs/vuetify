@@ -21,9 +21,10 @@
     "title": "features",
     "icon": "$mdiImageEditOutline:$mdiImageEdit",
     "items": [
-      "breakpoints",
+      "display-and-platform",
       "global-config",
       "icon-fonts",
+      "internationalization",
       "theme"
     ]
   },
@@ -41,6 +42,7 @@
     "group": "components",
     "items": [
       "application",
+      "app-bars",
       "aspect-ratios",
       "badges",
       "banners",

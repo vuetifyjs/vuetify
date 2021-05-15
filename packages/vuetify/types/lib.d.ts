@@ -21,6 +21,7 @@ declare module 'vuetify/lib' {
   const VApp: VueConstructor
   const VAppBar: VueConstructor
   const VAppBarNavIcon: VueConstructor
+  const VAppBarTitle: VueConstructor
   const VAlert: VueConstructor
   const VAutocomplete: VueConstructor
   const VAvatar: VueConstructor
@@ -46,6 +47,7 @@ declare module 'vuetify/lib' {
   const VCarousel: VueConstructor
   const VCarouselItem: VueConstructor
   const VCheckbox: VueConstructor
+  const VCode: VueConstructor
   const VSimpleCheckbox: VueConstructor
   const VChip: VueConstructor
   const VChipGroup: VueConstructor
@@ -92,6 +94,7 @@ declare module 'vuetify/lib' {
   const VInput: VueConstructor
   const VItem: VueConstructor
   const VItemGroup: VueConstructor
+  const VKbd: VueConstructor
   const VLabel: VueConstructor
   const VLazy: VueConstructor
   const VListItemActionText: VueConstructor
@@ -193,6 +196,7 @@ declare module 'vuetify/lib' {
     VApp,
     VAppBar,
     VAppBarNavIcon,
+    VAppBarTitle,
     VAlert,
     VAutocomplete,
     VAvatar,

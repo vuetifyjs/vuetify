@@ -7,7 +7,7 @@ describe('locale.ts', () => {
     const imported = Object.keys(locales)
     const dir = fs.readdirSync(path.resolve(__dirname, '..')).filter(filename => !['index.ts', '__tests__'].includes(filename))
 
-    expect(dir).toHaveLength(imported.length)
+    expect(dir).toHaveLength(imported.length - 1) // Minus one for rtl object.
 
     dir.forEach(filename => expect(locales[filename.replace(/\.ts$/, '').replace('-', '')]).not.toBeUndefined())
   })
@@ -19,6 +19,6 @@ describe('locale.ts', () => {
     }, {})
     const enUnfilled = unfill(locales.en)
 
-    Object.values(locales).forEach(locale => expect(unfill(locale)).toStrictEqual(enUnfilled))
+    Object.entries(locales).forEach(([locale, messages]) => locale !== 'rtl' && expect(unfill(messages)).toStrictEqual(enUnfilled))
   })
 })

@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VAppBar should match a snapshot 1`] = `
+<header class="v-app-bar v-app-bar--is-active v-app-bar--density-default"
+        style="top: 0px; height: 64px; margin-left: 0px; margin-top: 0px; position: absolute; z-index: 2; transform: translateY(0%);"
+>
+  <div class="v-app-bar__content">
+  </div>
+</header>
+`;
+
+exports[`VAppBar should render image 1`] = `
+<header class="v-app-bar v-app-bar--is-active v-app-bar--density-default"
+        style="top: 0px; height: 64px; margin-left: 0px; margin-top: 0px; position: absolute; z-index: 2; transform: translateY(0%);"
+>
+  <div class="v-app-bar__image">
+    <div class="v-responsive v-img">
+      <div class="v-responsive__sizer">
+      </div>
+      <transition-stub>
+      </transition-stub>
+      <div class="v-responsive__content">
+      </div>
+    </div>
+  </div>
+  <div class="v-app-bar__content">
+  </div>
+</header>
+`;

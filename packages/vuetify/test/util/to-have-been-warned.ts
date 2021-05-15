@@ -4,11 +4,12 @@ function noop () { }
 if (typeof console === 'undefined') {
   (window as any).console = {
     warn: noop,
-    error: noop
+    error: noop,
   }
 }
 
 // avoid info messages during test
+// eslint-disable-next-line no-console
 console.info = noop
 
 const asserted: string[] = []
@@ -32,7 +33,7 @@ function createCompareFn (spy: jest.Mock) {
       pass: warned,
       message: warned
         ? () => (`Expected message "${msg}" not to have been warned`)
-        : () => (`Expected message "${msg}" to have been warned`)
+        : () => (`Expected message "${msg}" to have been warned`),
     }
   }
 }
@@ -41,11 +42,11 @@ function toHaveBeenWarnedInit () {
   let warn: jest.Mock
   let error: jest.Mock
   beforeAll(() => {
-    warn = jest.spyOn(console, 'warn').mockImplementation(noop)
-    error = jest.spyOn(console, 'error').mockImplementation(noop)
+    warn = jest.spyOn(console, 'warn').mockImplementation(noop) as any
+    error = jest.spyOn(console, 'error').mockImplementation(noop) as any
     expect.extend({
       toHaveBeenWarned: createCompareFn(error),
-      toHaveBeenTipped: createCompareFn(warn)
+      toHaveBeenTipped: createCompareFn(warn),
     })
   })
 

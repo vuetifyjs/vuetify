@@ -5,13 +5,13 @@ import './VGrid.sass'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent, computed, h, capitalize } from 'vue'
-import makeProps from '@/util/makeProps'
+import { capitalize, computed, defineComponent, h } from 'vue'
+import { makeProps } from '@/util'
 
 // Types
 import type { Prop } from 'vue'
 
-const breakpoints = ['sm', 'md', 'lg', 'xl'] as const // no xs
+const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
 
 const breakpointProps = (() => {
   return breakpoints.reduce((props, val) => {

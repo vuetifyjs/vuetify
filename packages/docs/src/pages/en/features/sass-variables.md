@@ -81,7 +81,7 @@ module.exports = {
               // This is the path to your variables
               prependData: "@import '@/styles/variables.scss'"
             },
-            // Requires sass-loader@^9.0.0
+            // Requires >= sass-loader@^9.0.0
             options: {
               // This is the path to your variables
               additionalData: "@import '@/styles/variables.scss'"
@@ -159,7 +159,7 @@ $btn-sizes: (
   'large': 54
 );
 
-$headings: (
+$typography: (
   'h1': (
     'size': 3.3125rem,
     'line-height': 1.15em
@@ -243,7 +243,7 @@ The following snippet is an example of what **NOT** to do.
 @import './overrides.sass';
 
 $card-border-radius: 6px;
-$headings: (
+$typography: (
   'h1': (
     'font-size': 2rem
   )

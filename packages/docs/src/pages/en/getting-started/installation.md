@@ -57,7 +57,7 @@ Once prompted, choose `v3 (alpha)`:
 ```bash
 ? Choose a preset: (Use arrow keys)
   Default (recommended)
-  Preview (Vuetify 3 + Vite) 
+  Preview (Vuetify 3 + Vite)
   Prototype (rapid development)
 > V3 (alpha)
   Configure (advanced)
@@ -90,7 +90,7 @@ Once prompted, choose `Preview (Vuetify 3 + Vite)`:
 ```bash
 ? Choose a preset: (Use arrow keys)
   Default (recommended)
-> Preview (Vuetify 3 + Vite) 
+> Preview (Vuetify 3 + Vite)
   Prototype (rapid development)
   V3 (alpha)
   Configure (advanced)

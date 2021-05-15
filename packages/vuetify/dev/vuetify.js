@@ -2,11 +2,17 @@ import '@mdi/font/css/materialdesignicons.css'
 import { createVuetify } from 'vuetify'
 import { aliases, mdi } from 'vuetify/src/iconsets/mdi'
 import { fa } from 'vuetify/src/iconsets/fa-svg'
+import { ar, en, ja, sv } from 'vuetify/src/locale'
 
 export default createVuetify({
-  // lang: {
-  //   locales,
-  // },
+  locale: {
+    messages: {
+      en,
+      ar,
+      sv,
+      ja,
+    },
+  },
   icons: {
     defaultSet: 'mdi',
     aliases,

@@ -2,7 +2,7 @@
 import * as vue from 'vue'
 import { mount } from '@vue/test-utils'
 import * as framework from '@/framework'
-import makeProps from '../makeProps'
+import { makeProps } from '../makeProps'
 
 describe('makeProps', () => {
   it('should use global default if defined', () => {

@@ -180,13 +180,13 @@ export default mixins(
         staticClass: 'v-date-picker-table__events',
       }, eventColors.map(color => this.$createElement('div', this.setBackgroundColor(color)))) : null
     },
-    isValidScroll (e: WheelEvent, calculateTableDate: CalculateTableDateFunction) {
-      const tableDate = calculateTableDate(e.deltaY)
+    isValidScroll (value: number, calculateTableDate: CalculateTableDateFunction) {
+      const tableDate = calculateTableDate(value)
       // tableDate is 'YYYY-MM' for DateTable and 'YYYY' for MonthTable
       const sanitizeType = tableDate.split('-').length === 1 ? 'year' : 'month'
-      return (e.deltaY === 0) ||
-        (e.deltaY < 0 && (this.min ? tableDate >= sanitizeDateString(this.min, sanitizeType) : true)) ||
-        (e.deltaY > 0 && (this.max ? tableDate <= sanitizeDateString(this.max, sanitizeType) : true))
+      return (value === 0) ||
+        (value < 0 && (this.min ? tableDate >= sanitizeDateString(this.min, sanitizeType) : true)) ||
+        (value > 0 && (this.max ? tableDate <= sanitizeDateString(this.max, sanitizeType) : true))
     },
     wheel (e: WheelEvent, calculateTableDate: CalculateTableDateFunction) {
       this.$emit('update:table-date', calculateTableDate(e.deltaY))
@@ -202,8 +202,10 @@ export default mixins(
       const touchDirective = {
         name: 'touch',
         value: {
-          left: (e: TouchWrapper) => (e.offsetX < -15) && this.touch(1, calculateTableDate),
-          right: (e: TouchWrapper) => (e.offsetX > 15) && this.touch(-1, calculateTableDate),
+          left: (e: TouchWrapper) => (e.offsetX < -15) &&
+            (this.isValidScroll(1, calculateTableDate) && this.touch(1, calculateTableDate)),
+          right: (e: TouchWrapper) => (e.offsetX > 15) &&
+            (this.isValidScroll(-1, calculateTableDate) && this.touch(-1, calculateTableDate)),
         },
       }
 
@@ -216,7 +218,7 @@ export default mixins(
         on: (!this.disabled && this.scrollable) ? {
           wheel: (e: WheelEvent) => {
             e.preventDefault()
-            if (this.isValidScroll(e, calculateTableDate)) { this.wheelThrottle(e, calculateTableDate) }
+            if (this.isValidScroll(e.deltaY, calculateTableDate)) { this.wheelThrottle(e, calculateTableDate) }
           },
         } : undefined,
         directives: [touchDirective],

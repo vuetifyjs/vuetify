@@ -237,6 +237,12 @@ legend {
   font: inherit; /* Change font properties to `inherit` in Chrome and Safari */
 }
 
+// Remove default password icon in EdgeHTML (#537)
+::-ms-clear,
+::-ms-reveal {
+  display: none
+}
+
 /* # =================================================================
    # Specify media element style
    # ================================================================= */

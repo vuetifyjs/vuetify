@@ -75,6 +75,8 @@ new Vue({
 }).$mount('#app')
 ```
 
+<promoted-ad slug="vuetify-open-collective" />
+
 #### Full Install
 
 ```js
@@ -267,6 +269,8 @@ import goTo from 'vuetify/es5/components/Vuetify/goTo'
 
 import goTo from 'vuetify/lib/services/goto'
 ```
+
+<promoted-ad type="theme" />
 
 ### Lang
 
@@ -817,9 +821,12 @@ _Developer notes: The tabs-items component does not have to be provided and is o
 #### v-toolbar
 
 - All existing scrolling techniques and `app` functionality has been deprecated and moved to `v-app-bar`
+- `v-toolbar-side-icon` → `v-app-bar-nav-icon`
 
 ## I need help
 
 If you are stuck and need help, don't fret! We have a very large and dedicated community that is able to provide help 24/7. Come to the [#release-migration](https://discord.gg/QHWSAbA) channel.
+
+<vuetify-ad slug="consulting-support" />
 
 <backmatter />

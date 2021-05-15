@@ -2,8 +2,8 @@ import {
   createApp,
   defineComponent,
   h,
-  withDirectives,
   reactive,
+  withDirectives,
 } from 'vue'
 
 // Directives

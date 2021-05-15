@@ -76,6 +76,10 @@ module.exports = {
       ...require('eslint-config-standard').rules.indent[2],
       flatTernaryExpressions: true,
     }],
+    'sort-imports': ['warn', {
+      ignoreDeclarationSort: true,
+      ignoreCase: true,
+    }],
 
     'sonarjs/cognitive-complexity': 'off',
     'sonarjs/no-duplicate-string': 'off',
@@ -174,6 +178,7 @@ module.exports = {
     {
       files: '**/*.tsx',
       rules: {
+        'jsx-quotes': 'error',
         'react/jsx-boolean-value': 'error',
         'react/jsx-closing-bracket-location': ['error', 'line-aligned'],
         'react/jsx-curly-brace-presence': 'error',

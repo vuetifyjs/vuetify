@@ -1,5 +1,4 @@
 import './styles/main.sass'
-
 import * as components from './components'
 import * as directives from './directives'
 import * as framework from './framework'

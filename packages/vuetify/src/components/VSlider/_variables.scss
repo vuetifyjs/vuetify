@@ -11,7 +11,7 @@ $slider-state-track-background-opacity: 0.4 !default;
 $slider-thumb-before-opacity: 0.3 !default;
 $slider-thumb-border-radius: 50% !default;
 $slider-thumb-focused-size-increase: 24px !default;
-$slider-thumb-label-font-size: map-deep-get($headings, 'caption', 'size') !default;
+$slider-thumb-label-font-size: map-deep-get($typography, 'caption', 'size') !default;
 $slider-thumb-label-height: 32px !default;
 $slider-thumb-label-transition: .3s map-get($transition, 'fast-in-fast-out') !default;
 $slider-thumb-label-width: 32px !default;

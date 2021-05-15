@@ -1,5 +1,5 @@
 // Components
-import VBanner from '../VBanner'
+import { VBanner } from '..'
 
 // Utilities
 import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'

@@ -1,20 +1,20 @@
 // Setup
-import type { ComponentOptions } from 'vue'
+// import type { ComponentOptions } from 'vue'
 
 // Utilities
 import toHaveBeenWarnedInit from './util/to-have-been-warned'
 
-export function functionalContext (context: ComponentOptions<Vue> = {}, children = []) {
-  if (!Array.isArray(children)) children = [children]
-  return {
-    context: {
-      data: {},
-      props: {},
-      ...context,
-    },
-    children,
-  }
-}
+// export function functionalContext (context: ComponentOptions<Vue> = {}, children = []) {
+//   if (!Array.isArray(children)) children = [children]
+//   return {
+//     context: {
+//       data: {},
+//       props: {},
+//       ...context,
+//     },
+//     children,
+//   }
+// }
 
 export function touch (element: Element) {
   const createTrigger = (eventName: string) => (clientX: number, clientY: number) => {
@@ -66,15 +66,15 @@ export const scrollElement = (element: Element, y: number) => {
 }
 
 // Add a global mockup for IntersectionObserver
-(global as any).IntersectionObserver = class IntersectionObserver {
-  callback: (entries: any, observer: any) => {}
+class IntersectionObserver {
+  callback?: (entries: any, observer: any) => {}
 
-  constructor (callback, options) {
+  constructor (callback: any) {
     this.callback = callback
   }
 
   observe () {
-    this.callback([], this)
+    this.callback?.([], this)
     return null
   }
 
@@ -83,5 +83,29 @@ export const scrollElement = (element: Element, y: number) => {
     return null
   }
 }
+
+(global as any).IntersectionObserver = IntersectionObserver
+
+class ResizeObserver {
+  callback?: ResizeObserverCallback
+
+  constructor (callback: ResizeObserverCallback) {
+    this.callback = callback
+  }
+
+  observe () {
+    this.callback?.([], this)
+  }
+
+  unobserve () {
+    this.callback = undefined
+  }
+
+  disconnect () {
+    this.callback = undefined
+  }
+}
+
+(global as any).ResizeObserver = ResizeObserver
 
 toHaveBeenWarnedInit()
