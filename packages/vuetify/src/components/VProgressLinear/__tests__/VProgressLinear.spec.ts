@@ -1,82 +1,40 @@
-// @ts-nocheck
-/* eslint-disable */
-
 // Components
-// import VProgressLinear from '../VProgressLinear'
+import { VProgressLinear } from '../'
 
 // Utilities
-import {
-  mount,
-  Wrapper,
-} from '@vue/test-utils'
-// import { compileToFunctions } from 'vue-template-compiler'
+import { mount } from '@vue/test-utils'
+import { createVuetify } from '@/framework'
+import { h, toRef } from '@vue/runtime-core'
 
-describe.skip('VProgressLinear.ts', () => {
-  type Instance = InstanceType<typeof VProgressLinear>
-  let mountFunction: (options?: object) => Wrapper<Instance>
-
-  beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VProgressLinear, {
-        data: () => ({
-          isVisible: false,
-        }),
-        mocks: {
-          $vuetify: {
-            rtl: false,
-          },
-        },
-        ...options,
-      })
-    }
+describe('VProgressLinear', () => {
+  const vuetify = createVuetify()
+  const mountFunction = (options?: any) => mount(VProgressLinear, {
+    global: {
+      plugins: [vuetify],
+    },
+    ...options,
   })
 
-  it('should render component and match snapshot', () => {
+  it('should render component and match snapshot', async () => {
     const wrapper = mountFunction({
-      propsData: {
-        value: 33,
+      props: {
+        modelValue: 33,
       },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.setProps({ value: -1, bufferValue: -1 })
-    const htmlMinus1 = wrapper.html()
+    await wrapper.setProps({ modelValue: -1, bufferValue: -1 })
+    expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.setProps({ value: 0, bufferValue: 0 })
-    const html0 = wrapper.html()
-
-    wrapper.setProps({ value: 100, bufferValue: 100 })
-    const html100 = wrapper.html()
-
-    wrapper.setProps({ value: 101, bufferValue: 101 })
-    const html101 = wrapper.html()
-
-    expect(htmlMinus1).toBe(html0)
-    expect(html100).toBe(html101)
-    expect(html0).not.toBe(html100)
-
-    wrapper.setProps({ value: '-1', bufferValue: '-1' })
-    const htmlMinus1String = wrapper.html()
-
-    wrapper.setProps({ value: '0', bufferValue: '0' })
-    const html0String = wrapper.html()
-
-    wrapper.setProps({ value: '100', bufferValue: '100' })
-    const html100String = wrapper.html()
-
-    wrapper.setProps({ value: '101', bufferValue: '101' })
-    const html101String = wrapper.html()
-
-    expect(htmlMinus1String).toBe(html0String)
-    expect(html100String).toBe(html101String)
-    expect(html0String).not.toBe(html100String)
+    await wrapper.setProps({ modelValue: 101, bufferValue: 101 })
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render inactive component and match snapshot', () => {
     const wrapper = mountFunction({
-      propsData: {
-        value: 33,
+      props: {
+        modelValue: 33,
         active: false,
       },
     })
@@ -85,14 +43,12 @@ describe.skip('VProgressLinear.ts', () => {
   })
 
   it('should render component in RTL mode', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        value: 33,
+    const wrapper = mount(VProgressLinear, {
+      props: {
+        modelValue: 33,
       },
-      mocks: {
-        $vuetify: {
-          rtl: true,
-        },
+      global: {
+        plugins: [createVuetify({ locale: { defaultLocale: 'ar' } })],
       },
     })
 
@@ -101,9 +57,9 @@ describe.skip('VProgressLinear.ts', () => {
 
   it('should render reversed component', () => {
     const wrapper = mountFunction({
-      propsData: {
+      props: {
         reverse: true,
-        value: 33,
+        modelValue: 33,
       },
     })
 
@@ -111,13 +67,13 @@ describe.skip('VProgressLinear.ts', () => {
   })
 
   it('should render reverse component in RTL mode', () => {
-    const wrapper = mountFunction({
-      propsData: {
+    const wrapper = mount(VProgressLinear, {
+      props: {
+        modelValue: 33,
         reverse: true,
-        value: 33,
       },
-      mocks: {
-        $vuetify: { rtl: true },
+      global: {
+        plugins: [createVuetify({ locale: { defaultLocale: 'ar' } })],
       },
     })
 
@@ -126,8 +82,8 @@ describe.skip('VProgressLinear.ts', () => {
 
   it('should render component with color and match snapshot', () => {
     const wrapper = mountFunction({
-      propsData: {
-        value: 33,
+      props: {
+        modelValue: 33,
         color: 'orange',
       },
     })
@@ -137,8 +93,8 @@ describe.skip('VProgressLinear.ts', () => {
 
   it('should render component with css color and match snapshot', () => {
     const wrapper = mountFunction({
-      propsData: {
-        value: 33,
+      props: {
+        modelValue: 33,
         color: '#336699',
       },
     })
@@ -148,10 +104,10 @@ describe.skip('VProgressLinear.ts', () => {
 
   it('should render component with color and background opacity and match snapshot', () => {
     const wrapper = mountFunction({
-      propsData: {
-        value: 33,
+      props: {
+        modelValue: 33,
         color: 'orange',
-        backgroundOpacity: 0.5,
+        bgOpacity: 0.5,
       },
     })
 
@@ -160,10 +116,10 @@ describe.skip('VProgressLinear.ts', () => {
 
   it('should render component with color and background color and match snapshot', () => {
     const wrapper = mountFunction({
-      propsData: {
-        value: 33,
+      props: {
+        modelValue: 33,
         color: 'orange',
-        backgroundColor: 'blue',
+        bgColor: 'blue',
       },
     })
 
@@ -172,11 +128,11 @@ describe.skip('VProgressLinear.ts', () => {
 
   it('should render component with color and background color and opacity and match snapshot', () => {
     const wrapper = mountFunction({
-      propsData: {
-        value: 33,
+      props: {
+        modelValue: 33,
         color: 'orange',
-        backgroundColor: 'blue',
-        backgroundOpacity: 0.5,
+        bgColor: 'blue',
+        bgOpacity: 0.5,
       },
     })
 
@@ -185,7 +141,7 @@ describe.skip('VProgressLinear.ts', () => {
 
   it('should render indeterminate progress and match snapshot', () => {
     const wrapper = mountFunction({
-      propsData: {
+      props: {
         indeterminate: true,
       },
     })
@@ -195,7 +151,7 @@ describe.skip('VProgressLinear.ts', () => {
 
   it('should render indeterminate progress with query prop and match snapshot', () => {
     const wrapper = mountFunction({
-      propsData: {
+      props: {
         indeterminate: true,
         query: true,
       },
@@ -206,25 +162,25 @@ describe.skip('VProgressLinear.ts', () => {
 
   it('should render component with buffer value and match snapshot', async () => {
     const wrapper = mountFunction({
-      propsData: {
-        value: 33,
+      props: {
+        modelValue: 33,
         bufferValue: 80,
       },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.setProps({
+    await wrapper.setProps({
       bufferValue: 0,
     })
-    await wrapper.vm.$nextTick()
+
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render component with buffer value and value > buffer value and match snapshot', () => {
     const wrapper = mountFunction({
-      propsData: {
-        value: 90,
+      props: {
+        modelValue: 90,
         bufferValue: 80,
       },
     })
@@ -234,27 +190,24 @@ describe.skip('VProgressLinear.ts', () => {
 
   it('should render default slot content', () => {
     const wrapper = mountFunction({
-      propsData: {
-        value: 90,
+      props: {
+        modelValue: 90,
         bufferValue: 80,
       },
       slots: {
-        default: [compileToFunctions('<div class="foobar">content</div>')],
+        default: () => h('div', { class: 'foobar' }, 'content'),
       },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.findAll('.foobar')).toHaveLength(1)
   })
 
-  it('should respond to click events', () => {
-    const change = jest.fn()
+  it('should respond to click events', async () => {
     const wrapper = mountFunction({
       attachToDocument: true,
-      propsData: {
-        value: 0,
+      props: {
+        modelValue: 0,
       },
-      listeners: { change },
     })
 
     const rect = wrapper.vm.$el.getBoundingClientRect()
@@ -264,28 +217,20 @@ describe.skip('VProgressLinear.ts', () => {
       width: 1000,
     })
 
-    expect(wrapper.vm.internalLazyValue).toBe(0)
+    await wrapper.trigger('click', { offsetX: 200 })
 
-    wrapper.trigger('click', { offsetX: 200 })
-
-    expect(wrapper.vm.internalLazyValue).toBe(20)
+    expect(wrapper.emitted('update:modelValue')).toEqual([
+      [20],
+    ])
   })
 
   it('should render a stream component', () => {
     const wrapper = mountFunction({
-      propsData: {
+      props: {
         stream: true,
       },
     })
 
     expect(wrapper.find('.v-progress-linear__stream')).toBeTruthy()
-  })
-
-  it('should set isVisible with onObserve', () => {
-    expect((new VProgressLinear()).isVisible).toEqual(true)
-    const wrapper = mountFunction()
-    expect(wrapper.vm.isVisible).toEqual(false)
-    wrapper.vm.onObserve(null, null, true)
-    expect(wrapper.vm.isVisible).toEqual(true)
   })
 })
