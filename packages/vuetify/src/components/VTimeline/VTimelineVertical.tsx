@@ -35,14 +35,7 @@ export default defineComponent({
           }}
         >
           { timeline.items.value.map((item, index) => (
-            <div
-              class="v-timeline-vertical__row"
-              key={item}
-              style={{
-                // @ts-ignore
-                // '--v-timeline-dot-size': convertToUnit(item.elements.divider.dotSize),
-              }}
-            >
+            <div class="v-timeline-vertical__row" key={item}>
               <div class="v-timeline-vertical__cell" ref={e => timeline.beforeRefs.value[index] = e} />
               <div
                 class="v-timeline-vertical__cell"

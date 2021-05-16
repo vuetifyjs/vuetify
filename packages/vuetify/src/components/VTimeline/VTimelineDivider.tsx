@@ -1,6 +1,6 @@
 import { useBackgroundColor } from '@/composables/color'
-import { useElevation } from '@/composables/elevation'
-import { useSize } from '@/composables/size'
+import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeSizeProps, useSize } from '@/composables/size'
 import { defineComponent } from 'vue'
 import { VIcon } from '../VIcon'
 
@@ -17,12 +17,12 @@ export default defineComponent({
     icon: String,
     iconColor: String,
     alignDot: String,
-    size: String,
-    elevation: String,
     color: {
       type: String,
-      default: 'primary',
+      default: 'secondary',
     },
+    ...makeSizeProps(),
+    ...makeElevationProps(),
   },
 
   setup (props, ctx) {

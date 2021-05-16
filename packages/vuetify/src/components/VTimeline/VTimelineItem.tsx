@@ -1,5 +1,5 @@
 // Types
-import type { Prop } from 'vue'
+import type { ComponentPublicInstance, Prop } from 'vue'
 import type { TimelineDotAlignment, TimelineSide } from './VTimeline'
 
 // Components
@@ -11,8 +11,8 @@ import { makeSizeProps } from '@/composables/size'
 import { makeElevationProps } from '@/composables/elevation'
 
 // Helpers
-import { computed, defineComponent, Fragment, inject, onBeforeUnmount, ref, Teleport, watchEffect } from 'vue'
-import { getUid, makeProps } from '@/util'
+import { computed, defineComponent, Fragment, inject, onBeforeUnmount, ref, Teleport, watch } from 'vue'
+import { convertToUnit, getUid, makeProps } from '@/util'
 import VTimelineSide from './VTimelineSide'
 import VTimelineDivider from './VTimelineDivider'
 
@@ -47,9 +47,6 @@ export default defineComponent({
   }),
 
   setup (props, ctx) {
-    const beforeContent = ref<any>()
-    const dividerContent = ref<any>()
-    const afterContent = ref<any>()
     const timeline = inject(VTimelineSymbol)
 
     if (!timeline) throw new Error('[Vuetify] Could not find v-timeline provider')
@@ -90,51 +87,51 @@ export default defineComponent({
       },
     }))
 
-    // const dotSize = ref(0)
-    // const dividerRef = ref<ComponentPublicInstance>()
-    // watch(dividerRef, newValue => {
-    //   if (!newValue) return
-    //   dotSize.value = newValue.$el.querySelector('.v-timeline-item__dot')?.getBoundingClientRect().width
-    // }, {
-    //   flush: 'post',
-    // })
+    const before = computed(() => side.value === 'before' ? body.value : opposite.value)
+    const after = computed(() => side.value === 'before' ? opposite.value : body.value)
 
-    watchEffect(() => {
-      beforeContent.value = side.value === 'before' ? body.value : opposite.value
-
-      dividerContent.value = {
-        // dotSize,
-        props: {
-          // ref: (e: any) => {
-          //   dividerRef.value = e
-          // },
-          hideDot: props.hideDot,
-          icon: props.icon,
-          iconColor: props.iconColor,
-          alignDot: props.alignDot,
-          size: props.size,
-          elevation: props.elevation,
-          color: props.elevation,
-        },
-        slots: {
-          default: ctx.slots.icon,
-        },
-      }
-
-      afterContent.value = side.value === 'before' ? opposite.value : body.value
+    const dotSize = ref(0)
+    const dotRef = ref<ComponentPublicInstance>()
+    watch(dotRef, newValue => {
+      if (!newValue) return
+      dotSize.value = newValue.$el.querySelector('.v-timeline-item__dot')?.getBoundingClientRect().width
+    }, {
+      flush: 'post',
     })
 
     return () => {
       return (
         <Fragment>
           <Teleport to={beforeRef.value} disabled={!beforeRef.value}>
-            <VTimelineSide {...props} {...beforeContent.value.props} v-slots={beforeContent.value.slots} />
+            <VTimelineSide
+              {...before.value.props}
+              style={{
+                '--v-timeline-dot-size': convertToUnit(dotSize.value),
+              }}
+              v-slots={before.value.slots}
+            />
           </Teleport>
           <Teleport to={dividerRef.value} disabled={!dividerRef.value}>
-            <VTimelineDivider {...props} {...dividerContent.value.props} v-slots={dividerContent.value.slots} />
+            <VTimelineDivider
+              ref={dotRef}
+              hideDot={props.hideDot}
+              icon={props.icon}
+              iconColor={props.iconColor}
+              alignDot={props.alignDot}
+              size={props.size}
+              elevation={props.elevation}
+              color={props.color}
+              v-slots={{ default: ctx.slots.icon }}
+            />
           </Teleport>
           <Teleport to={afterRef.value} disabled={!afterRef.value}>
-            <VTimelineSide {...props} {...afterContent.value.props} v-slots={afterContent.value.slots} />
+            <VTimelineSide
+              {...after.value.props}
+              style={{
+                '--v-timeline-dot-size': convertToUnit(dotSize.value),
+              }}
+              v-slots={after.value.slots}
+            />
           </Teleport>
         </Fragment>
       )
