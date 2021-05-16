@@ -10,7 +10,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Helpers
 import { computed, defineComponent, provide, ref } from 'vue'
-import { makeProps } from '@/util'
+import { convertToUnit, makeProps } from '@/util'
 
 export type TimelineDirection = 'vertical' | 'horizontal'
 export type TimelineSide = 'before' | 'after' | undefined
@@ -47,6 +47,10 @@ export default defineComponent({
     linePosition: {
       type: String,
       default: '50%',
+    },
+    lineWidth: {
+      type: [String, Number],
+      default: 2,
     },
     ...makeTagProps(),
   }),
@@ -135,6 +139,7 @@ export default defineComponent({
         ]}
         style={{
           '--v-timeline-line-position': props.linePosition,
+          '--v-timeline-line-width': convertToUnit(props.lineWidth),
           ...truncateLineStyles.value,
         }}
       >

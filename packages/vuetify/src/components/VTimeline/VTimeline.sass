@@ -26,16 +26,16 @@
 
     &:before
       height: calc(100% - var(--v-timeline-line-start, 0px) - var(--v-timeline-line-end, 0px))
-      width: $timeline-line-width
+      width: var(--v-timeline-line-width)
       top: var(--v-timeline-line-start)
 
   +horizontal(true)
     flex-direction: row
 
     &:before
-      height: $timeline-line-width
+      height: var(--v-timeline-line-width)
       width: calc(100% - var(--v-timeline-line-start, 0px) - var(--v-timeline-line-end, 0px))
-      top: calc(var(--v-timeline-line-position) - #{$timeline-line-width / 2})
+      top: calc(var(--v-timeline-line-position) - #{var(--v-timeline-line-width) / 2})
 
       +ltr()
         left: var(--v-timeline-line-start)

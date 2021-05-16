@@ -12,12 +12,12 @@
 @mixin timeline-line-align($center, $first, $second)
   &:before
     +ltr()
-      #{$first}: calc(#{$center} - #{$timeline-line-width / 2})
+      #{$first}: calc(#{$center} - #{var(--v-timeline-line-width) / 2})
       #{$second}: initial
 
     +rtl()
       #{$first}: initial
-      #{$second}: calc(#{$center} - #{$timeline-line-width / 2})
+      #{$second}: calc(#{$center} - #{var(--v-timeline-line-width) / 2})
 
 @mixin vertical($immediate: false)
   @at-root .v-timeline--vertical#{if($immediate, &, ' &')}
