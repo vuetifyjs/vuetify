@@ -53,6 +53,10 @@
   +horizontal
     padding: 0 $timeline-item-padding
 
+.v-timeline-item__line
+  z-index: 0
+  width: 100%
+
 .v-timeline-item__body
   position: relative
   height: 100%
@@ -64,15 +68,17 @@
   position: relative
   display: flex
   align-items: center
-  justify-content: center
+  flex-direction: row-reverse
 
-  +vertical
-    min-width: $timeline-divider-width
+  // +vertical
+  //   min-width: $timeline-divider-width
 
-  +horizontal
-    min-height: $timeline-divider-width
+  // +horizontal
+  //   min-height: $timeline-divider-width
 
 .v-timeline-item__dot
+  flex-shrink: 0
+  position: relative
   z-index: 2
   border-radius: $timeline-dot-border-radius
   display: flex

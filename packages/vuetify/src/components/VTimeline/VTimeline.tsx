@@ -11,6 +11,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 // Helpers
 import { computed, defineComponent, provide, ref } from 'vue'
 import { convertToUnit, makeProps } from '@/util'
+import VTimelineHorizontal from './VTimelineHorizontal'
 
 export type TimelineDirection = 'vertical' | 'horizontal'
 export type TimelineSide = 'before' | 'after' | undefined
@@ -20,8 +21,9 @@ export type TimelineTruncateLine = 'start' | 'end' | 'both' | undefined
 interface TimelineInstance {
   mirror: Ref<boolean>
   singleSide: Ref<TimelineSide>
-  register: (id: number, index?: number) => { isEven: Ref<boolean> }
+  register: (id: number, elements: { before: Ref<any>, divider: Ref<any>, after: Ref<any> }, index?: number) => { isEven: Ref<boolean> }
   unregister: (id: number) => void
+  items: Ref<{ id: number, elements: { before: Ref<any>, divider: Ref<any>, after: Ref<any> } }[]>
 }
 
 export const VTimelineSymbol: InjectionKey<TimelineInstance> = Symbol.for('vuetify:timeline')
@@ -56,22 +58,26 @@ export default defineComponent({
   }),
 
   setup (props, ctx) {
-    const items = ref<number[]>([])
+    const items = ref<{ id: number, elements: { before: Ref<any>, divider: Ref<any>, after: Ref<any> }}[]>([])
+    // const itemElements = new Map<number, { before: Ref<any>, divider: Ref<any>, after: Ref<any> }>()
 
-    function register (id: number, index?: number) {
+    function register (id: number, elements: { before: Ref<any>, divider: Ref<any>, after: Ref<any> }, index?: number) {
       if (index) {
-        items.value.splice(index, 0, id)
+        items.value.splice(index, 0, { id, elements })
       } else {
-        items.value.push(id)
+        items.value.push({ id, elements })
       }
 
-      const isEven = computed(() => items.value.indexOf(id) % 2 === 0)
+      // itemElements.set(id, elements)
+
+      const isEven = computed(() => !!items.value.find((v, i) => v.id === id && i % 2 === 0))
 
       return { isEven }
     }
 
     function unregister (id: number) {
-      items.value = items.value.filter(v => v !== id)
+      items.value = items.value.filter(v => v.id !== id)
+      // itemElements.delete(id)
     }
 
     provide(VTimelineSymbol, {
@@ -79,6 +85,7 @@ export default defineComponent({
       singleSide: computed(() => props.singleSide),
       register,
       unregister,
+      items,
     })
 
     const truncateLineClasses = computed(() => {
@@ -125,6 +132,8 @@ export default defineComponent({
         '--v-timeline-line-end': `${['end', 'both'].includes(props.truncateLine) ? truncateEnd.value : 0}px`,
       }
     })
+
+    if (props.direction === 'horizontal') return () => <VTimelineHorizontal {...props}>{ ctx.slots.default?.() }</VTimelineHorizontal>
 
     return () => (
       <props.tag
