@@ -4,8 +4,6 @@ import './VTimelineVertical.sass'
 
 // Components
 import { VTimelineSymbol } from './VTimeline'
-import VTimelineDivider from './VTimelineDivider'
-import VTimelineSide from './VTimelineSide'
 
 // Utilities
 import { defineComponent, inject } from 'vue'
@@ -39,26 +37,21 @@ export default defineComponent({
           { timeline.items.value.map((item, index) => (
             <div
               class="v-timeline-vertical__row"
-              key={item.id}
+              key={item}
               style={{
                 // @ts-ignore
-                '--v-timeline-dot-size': convertToUnit(item.elements.divider.dotSize),
+                // '--v-timeline-dot-size': convertToUnit(item.elements.divider.dotSize),
               }}
             >
-              <div class="v-timeline-vertical__cell">
-                <VTimelineSide {...props} {...item.elements.before.props} v-slots={item.elements.before.slots} />
-              </div>
+              <div class="v-timeline-vertical__cell" ref={e => timeline.beforeRefs.value[index] = e} />
               <div
                 class="v-timeline-vertical__cell"
                 style={{
                   width: '1%',
                 }}
-              >
-                <VTimelineDivider {...props} {...item.elements.divider.props} v-slots={item.elements.divider.slots} />
-              </div>
-              <div class="v-timeline-vertical__cell">
-                <VTimelineSide {...props} {...item.elements.after.props} v-slots={item.elements.after.slots} />
-              </div>
+                ref={e => timeline.dividerRefs.value[index] = e}
+              />
+              <div class="v-timeline-vertical__cell" ref={e => timeline.afterRefs.value[index] = e} />
             </div>
           ))}
           { ctx.slots.default?.() }

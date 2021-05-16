@@ -1,5 +1,5 @@
 // Types
-import type { ComponentPublicInstance, Prop } from 'vue'
+import type { Prop } from 'vue'
 import type { TimelineDotAlignment, TimelineSide } from './VTimeline'
 
 // Components
@@ -11,8 +11,10 @@ import { makeSizeProps } from '@/composables/size'
 import { makeElevationProps } from '@/composables/elevation'
 
 // Helpers
-import { computed, defineComponent, inject, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
+import { computed, defineComponent, Fragment, inject, onBeforeUnmount, ref, Teleport, watchEffect } from 'vue'
 import { getUid, makeProps } from '@/util'
+import VTimelineSide from './VTimelineSide'
+import VTimelineDivider from './VTimelineDivider'
 
 export default defineComponent({
   name: 'VTimelineItem',
@@ -45,16 +47,16 @@ export default defineComponent({
   }),
 
   setup (props, ctx) {
-    const before = ref<any>()
-    const divider = ref<any>()
-    const after = ref<any>()
+    const beforeContent = ref<any>()
+    const dividerContent = ref<any>()
+    const afterContent = ref<any>()
     const timeline = inject(VTimelineSymbol)
 
     if (!timeline) throw new Error('[Vuetify] Could not find v-timeline provider')
 
     const id = getUid()
 
-    const { isEven } = timeline.register(id, { before, divider, after }, props.index)
+    const { isEven, beforeRef, dividerRef, afterRef } = timeline.register(id, props.index)
 
     onBeforeUnmount(() => timeline.unregister(id))
 
@@ -88,24 +90,24 @@ export default defineComponent({
       },
     }))
 
-    const dotSize = ref(0)
-    const dividerRef = ref<ComponentPublicInstance>()
-    watch(dividerRef, newValue => {
-      if (!newValue) return
-      dotSize.value = newValue.$el.querySelector('.v-timeline-item__dot').getBoundingClientRect().width
-    }, {
-      flush: 'post',
-    })
+    // const dotSize = ref(0)
+    // const dividerRef = ref<ComponentPublicInstance>()
+    // watch(dividerRef, newValue => {
+    //   if (!newValue) return
+    //   dotSize.value = newValue.$el.querySelector('.v-timeline-item__dot')?.getBoundingClientRect().width
+    // }, {
+    //   flush: 'post',
+    // })
 
     watchEffect(() => {
-      before.value = side.value === 'before' ? body.value : opposite.value
+      beforeContent.value = side.value === 'before' ? body.value : opposite.value
 
-      divider.value = {
-        dotSize,
+      dividerContent.value = {
+        // dotSize,
         props: {
-          ref: (e: any) => {
-            dividerRef.value = e
-          },
+          // ref: (e: any) => {
+          //   dividerRef.value = e
+          // },
           hideDot: props.hideDot,
           icon: props.icon,
           iconColor: props.iconColor,
@@ -119,9 +121,23 @@ export default defineComponent({
         },
       }
 
-      after.value = side.value === 'before' ? opposite.value : body.value
+      afterContent.value = side.value === 'before' ? opposite.value : body.value
     })
 
-    return () => null
+    return () => {
+      return (
+        <Fragment>
+          <Teleport to={beforeRef.value} disabled={!beforeRef.value}>
+            <VTimelineSide {...props} {...beforeContent.value.props} v-slots={beforeContent.value.slots} />
+          </Teleport>
+          <Teleport to={dividerRef.value} disabled={!dividerRef.value}>
+            <VTimelineDivider {...props} {...dividerContent.value.props} v-slots={dividerContent.value.slots} />
+          </Teleport>
+          <Teleport to={afterRef.value} disabled={!afterRef.value}>
+            <VTimelineSide {...props} {...afterContent.value.props} v-slots={afterContent.value.slots} />
+          </Teleport>
+        </Fragment>
+      )
+    }
   },
 })

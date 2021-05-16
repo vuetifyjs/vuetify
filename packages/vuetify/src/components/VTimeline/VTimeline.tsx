@@ -2,14 +2,14 @@
 import './VTimeline.sass'
 
 // Types
-import type { InjectionKey, Prop, Ref } from 'vue'
+import type { ComponentInternalInstance, InjectionKey, Prop, Ref } from 'vue'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
 // import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Helpers
-import { computed, defineComponent, provide, ref } from 'vue'
+import { computed, defineComponent, onBeforeUpdate, provide, ref } from 'vue'
 import { makeProps } from '@/util'
 import VTimelineHorizontal from './VTimelineHorizontal'
 import VTimelineVertical from './VTimelineVertical'
@@ -19,12 +19,22 @@ export type TimelineSide = 'before' | 'after' | undefined
 export type TimelineDotAlignment = 'start' | 'end' | undefined
 export type TimelineTruncateLine = 'start' | 'end' | 'both' | undefined
 
+type VNodeRef = (ComponentInternalInstance | Element | undefined | null)
+
 interface TimelineInstance {
   mirror: Ref<boolean>
   singleSide: Ref<TimelineSide>
-  register: (id: number, elements: { before: any, divider: any, after: any }, index?: number) => { isEven: Ref<boolean> }
+  register: (id: number, index?: number) => {
+    isEven: Ref<boolean>,
+    beforeRef: Ref<VNodeRef>,
+    dividerRef: Ref<VNodeRef>,
+    afterRef: Ref<VNodeRef>
+  }
   unregister: (id: number) => void
-  items: Ref<{ id: number, elements: { before: any, divider: any, after: any } }[]>
+  beforeRefs: Ref<VNodeRef[]>
+  dividerRefs: Ref<VNodeRef[]>
+  afterRefs: Ref<VNodeRef[]>
+  items: Ref<number[]>
 }
 
 export const VTimelineSymbol: InjectionKey<TimelineInstance> = Symbol.for('vuetify:timeline')
@@ -63,22 +73,38 @@ export default defineComponent({
   }),
 
   setup (props, ctx) {
-    const items = ref<{ id: number, elements: { before: Ref<any>, divider: Ref<any>, after: Ref<any> }}[]>([])
+    const items = ref<number[]>([])
 
-    function register (id: number, elements: { before: Ref<any>, divider: Ref<any>, after: Ref<any> }, index?: number) {
+    const beforeRefs = ref<VNodeRef[]>([])
+    const dividerRefs = ref<VNodeRef[]>([])
+    const afterRefs = ref<VNodeRef[]>([])
+
+    onBeforeUpdate(() => {
+      beforeRefs.value = []
+      dividerRefs.value = []
+      afterRefs.value = []
+    })
+
+    function register (id: number, index?: number) {
       if (index) {
-        items.value.splice(index, 0, { id, elements })
+        items.value.splice(index, 0, id)
       } else {
-        items.value.push({ id, elements })
+        items.value.push(id)
       }
 
-      const isEven = computed(() => !!items.value.find((v, i) => v.id === id && i % 2 === 0))
+      const isEven = computed(() => items.value.indexOf(id) % 2 === 0)
+      const arrIndex = items.value.indexOf(id)
 
-      return { isEven }
+      return {
+        isEven,
+        beforeRef: computed(() => beforeRefs.value[arrIndex]),
+        dividerRef: computed(() => dividerRefs.value[arrIndex]),
+        afterRef: computed(() => afterRefs.value[arrIndex]),
+      }
     }
 
     function unregister (id: number) {
-      items.value = items.value.filter(v => v.id !== id)
+      items.value = items.value.filter(v => v !== id)
     }
 
     provide(VTimelineSymbol, {
@@ -87,6 +113,9 @@ export default defineComponent({
       register,
       unregister,
       items,
+      beforeRefs,
+      dividerRefs,
+      afterRefs,
     })
 
     // const truncateLineClasses = computed(() => {
