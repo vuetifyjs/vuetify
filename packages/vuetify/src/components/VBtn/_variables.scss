@@ -1,5 +1,22 @@
 // Defaults
 $button-app-bar-elevation: 0 !default;
+$button-bottom-navigation-elevation: 0 !default;
+$button-bottom-navigation-border-radius: 0 !default;
+$button-bottom-navigation-active-filter: grayscale(0) !default;
+$button-bottom-navigation-active-opacity: 1 !default;
+$button-bottom-navigation-filter: grayscale(1) !default;
+$button-bottom-navigation-font-size: map-deep-get($typography, 'caption', 'size') !default;
+$button-bottom-navigation-max-width: 168px !default;
+$button-bottom-navigation-min-width: 80px !default;
+$button-bottom-navigation-opacity: .64 !default;
+$button-bottom-navigation-shift-active-icon-transform: translateY(-7px) !default;
+$button-bottom-navigation-shift-active-transform: scale(1) translateY(5px) !default;
+$button-bottom-navigation-shift-icon-transform: translateY(0) !default;
+$button-bottom-navigation-shift-opacity: 0 !default;
+$button-bottom-navigation-shift-top: 50% !default;
+$button-bottom-navigation-shift-transform: scale(.8) translateY(10px) !default;
+$button-bottom-navigation-text-transform: none !default;
+$button-bottom-navigation-transition-duration: .2s !default;
 $button-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $button-border-radius: $border-radius-root !default;
 $button-border-style: $border-style-root !default;

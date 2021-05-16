@@ -1,7 +1,16 @@
-@import '../../styles/styles.sass';
+// Defaults
+$bottom-navigation-background: var(--v-theme-surface) !default;
+$bottom-navigation-border-color: $border-color-root !default;
+$bottom-navigation-border-radius: map-get($rounded, '0') !default;
+$bottom-navigation-border-style: $border-style-root !default;
+$bottom-navigation-border-thin-width: thin !default;
+$bottom-navigation-border-width: 0 !default;
+$bottom-navigation-elevation: 4 !default;
+$bottom-navigation-flat-elevation: 0 !default;
+$bottom-navigation-transition: .2s $standard-easing !default;
 
-$bottom-nav-btn-font-size: map-deep-get($typography, 'caption', 'size') !default;
-$bottom-nav-btn-min-width: 80px !default;
-$bottom-nav-btn-max-width: 168px !default;
-$bottom-nav-shift-btn-top: calc(100% - 12px) !default;
-$bottom-nav-shift-btn-active-top: calc(100% - 22px) !default;
+$bottom-navigation-border: (
+  $bottom-navigation-border-color,
+  $bottom-navigation-border-style,
+  $bottom-navigation-border-width
+) !default;
