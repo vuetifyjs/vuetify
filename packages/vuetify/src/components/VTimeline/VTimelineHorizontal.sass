@@ -1,5 +1,10 @@
+// Imports
+@import './_variables.scss'
+@import './_mixins.sass'
+
 .v-timeline-horizontal
   display: table
+  width: 100%
 
 .v-timeline-horizontal > div
   display: table-row
@@ -7,6 +12,18 @@
 .v-timeline-horizontal__cell
   display: table-cell
 
-
 .v-timeline-horizontal__divider > div
   vertical-align: middle
+
+.v-timeline-horizontal
+  .v-timeline-item__before
+    text-align: start
+    padding-left: calc(#{var(--v-timeline-dot-size) / 4})
+    padding-bottom: $timeline-item-padding
+
+  .v-timeline-item__after
+    padding-left: calc(#{var(--v-timeline-dot-size) / 4})
+    padding-top: $timeline-item-padding
+
+  .v-timeline-item__body
+    padding-right: $timeline-item-padding

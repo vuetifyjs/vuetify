@@ -55,20 +55,37 @@
 
 .v-timeline-item__line
   z-index: 0
-  width: 100%
+  // position: absolute
+
+  +horizontal
+    width: 100%
+    height: var(--v-timeline-line-width)
+    left: 0
+    right: 0
+
+  +vertical
+    width: var(--v-timeline-line-width)
+    height: 100%
+    top: 0
+    bottom: 0
 
 .v-timeline-item__body
   position: relative
   height: 100%
-  flex: 1 1 auto
-  align-self: center
-  display: flex
+  // flex: 1 1 auto
+  // align-self: center
+  // display: flex
 
 .v-timeline-item__divider
   position: relative
   display: flex
   align-items: center
-  flex-direction: row-reverse
+
+  +horizontal
+    flex-direction: row
+
+  +vertical
+    flex-direction: column
 
   // +vertical
   //   min-width: $timeline-divider-width
@@ -77,9 +94,9 @@
   //   min-height: $timeline-divider-width
 
 .v-timeline-item__dot
-  flex-shrink: 0
   position: relative
   z-index: 2
+  flex-shrink: 0
   border-radius: $timeline-dot-border-radius
   display: flex
   justify-content: center

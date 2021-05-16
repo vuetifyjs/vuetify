@@ -1,17 +1,19 @@
 // Styles
-import './VTimelineHorizontal.sass'
+import './VTimeline.sass'
+import './VTimelineVertical.sass'
 
 // Components
+import { VTimelineSymbol } from './VTimeline'
 import VTimelineDivider from './VTimelineDivider'
 import VTimelineSide from './VTimelineSide'
-import { VTimelineSymbol } from './VTimeline'
 
 // Utilities
 import { defineComponent, inject } from 'vue'
 import { convertToUnit } from '@/util'
 
 export default defineComponent({
-  name: 'VTimelineHorizontal',
+
+  name: 'VTimelineVertical',
 
   inheritAttrs: false,
 
@@ -28,33 +30,37 @@ export default defineComponent({
     return () => {
       return (
         <div
-          class="v-timeline-horizontal"
+          class="v-timeline-vertical"
           style={{
             // @ts-ignore
             '--v-timeline-line-width': convertToUnit(props.lineWidth),
           }}
         >
-          <div class="v-timeline-horizontal__before">
-            { timeline.items.value.map(item => (
-              <div class="v-timeline-horizontal__cell" key={item.id}>
+          { timeline.items.value.map((item, index) => (
+            <div
+              class="v-timeline-vertical__row"
+              key={item.id}
+              style={{
+                // @ts-ignore
+                '--v-timeline-dot-size': convertToUnit(item.elements.divider.dotSize),
+              }}
+            >
+              <div class="v-timeline-vertical__cell">
                 <VTimelineSide {...props} {...item.elements.before.props} v-slots={item.elements.before.slots} />
               </div>
-            )) }
-          </div>
-          <div class="v-timeline-horizontal__divider">
-            { timeline.items.value.map(item => (
-              <div class="v-timeline-horizontal__cell" key={item.id}>
+              <div
+                class="v-timeline-vertical__cell"
+                style={{
+                  width: '1%',
+                }}
+              >
                 <VTimelineDivider {...props} {...item.elements.divider.props} v-slots={item.elements.divider.slots} />
               </div>
-            )) }
-          </div>
-          <div class="v-timeline-horizontal__after">
-            { timeline.items.value.map(item => (
-              <div class="v-timeline-horizontal__cell" key={item.id}>
+              <div class="v-timeline-vertical__cell">
                 <VTimelineSide {...props} {...item.elements.after.props} v-slots={item.elements.after.slots} />
               </div>
-            )) }
-          </div>
+            </div>
+          ))}
           { ctx.slots.default?.() }
         </div>
       )
