@@ -64,7 +64,6 @@ export default defineComponent({
 
   setup (props, ctx) {
     const items = ref<{ id: number, elements: { before: Ref<any>, divider: Ref<any>, after: Ref<any> }}[]>([])
-    // const itemElements = new Map<number, { before: Ref<any>, divider: Ref<any>, after: Ref<any> }>()
 
     function register (id: number, elements: { before: Ref<any>, divider: Ref<any>, after: Ref<any> }, index?: number) {
       if (index) {
@@ -73,8 +72,6 @@ export default defineComponent({
         items.value.push({ id, elements })
       }
 
-      // itemElements.set(id, elements)
-
       const isEven = computed(() => !!items.value.find((v, i) => v.id === id && i % 2 === 0))
 
       return { isEven }
@@ -82,7 +79,6 @@ export default defineComponent({
 
     function unregister (id: number) {
       items.value = items.value.filter(v => v.id !== id)
-      // itemElements.delete(id)
     }
 
     provide(VTimelineSymbol, {
