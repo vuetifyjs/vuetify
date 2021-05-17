@@ -20,9 +20,9 @@
       #{$second}: calc(#{$center} - #{var(--v-timeline-line-width) / 2})
 
 @mixin vertical($immediate: false)
-  @at-root .v-timeline-vertical#{if($immediate, &, ' &')}
+  @at-root .v-timeline--vertical#{if($immediate, &, ' &')}
     @content
 
 @mixin horizontal($immediate: false)
-  @at-root .v-timeline-horizontal#{if($immediate, &, ' &')}
+  @at-root .v-timeline--horizontal#{if($immediate, &, ' &')}
     @content

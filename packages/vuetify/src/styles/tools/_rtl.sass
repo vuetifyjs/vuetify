@@ -7,3 +7,12 @@
   &.v-locale--is-ltr,
   .v-locale--is-ltr &
     @content
+
+@mixin rtltr($ltr-property, $rtl-property, $ltr-value, $rtl-value: $ltr-value)
+  .v-locale--is-ltr &
+    #{$ltr-property}: $ltr-value
+    #{$rtl-property}: initial
+
+  .v-locale--is-rtl &
+    #{$ltr-property}: initial
+    #{$rtl-property}: $rtl-value

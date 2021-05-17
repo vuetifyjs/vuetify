@@ -2,38 +2,27 @@
 import './VTimeline.sass'
 
 // Types
-import type { ComponentInternalInstance, InjectionKey, Prop, Ref } from 'vue'
+import type { InjectionKey, Prop, Ref } from 'vue'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
-// import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Helpers
-import { computed, defineComponent, onBeforeUpdate, provide, ref } from 'vue'
-import { makeProps } from '@/util'
-import VTimelineHorizontal from './VTimelineHorizontal'
-import VTimelineVertical from './VTimelineVertical'
+import { computed, defineComponent, provide, ref } from 'vue'
+import { convertToUnit, makeProps } from '@/util'
 
 export type TimelineDirection = 'vertical' | 'horizontal'
 export type TimelineSide = 'before' | 'after' | undefined
 export type TimelineDotAlignment = 'start' | 'end' | undefined
 export type TimelineTruncateLine = 'start' | 'end' | 'both' | undefined
 
-type VNodeRef = (ComponentInternalInstance | Element | undefined | null)
-
 interface TimelineInstance {
   mirror: Ref<boolean>
   singleSide: Ref<TimelineSide>
   register: (id: number, index?: number) => {
     isEven: Ref<boolean>,
-    beforeRef: Ref<VNodeRef>,
-    dividerRef: Ref<VNodeRef>,
-    afterRef: Ref<VNodeRef>
   }
   unregister: (id: number) => void
-  beforeRefs: Ref<VNodeRef[]>
-  dividerRefs: Ref<VNodeRef[]>
-  afterRefs: Ref<VNodeRef[]>
   items: Ref<number[]>
 }
 
@@ -75,16 +64,6 @@ export default defineComponent({
   setup (props, ctx) {
     const items = ref<number[]>([])
 
-    const beforeRefs = ref<VNodeRef[]>([])
-    const dividerRefs = ref<VNodeRef[]>([])
-    const afterRefs = ref<VNodeRef[]>([])
-
-    onBeforeUpdate(() => {
-      beforeRefs.value = []
-      dividerRefs.value = []
-      afterRefs.value = []
-    })
-
     function register (id: number, index?: number) {
       if (index) {
         items.value.splice(index, 0, id)
@@ -93,14 +72,8 @@ export default defineComponent({
       }
 
       const isEven = computed(() => items.value.indexOf(id) % 2 === 0)
-      const arrIndex = items.value.indexOf(id)
 
-      return {
-        isEven,
-        beforeRef: computed(() => beforeRefs.value[arrIndex]),
-        dividerRef: computed(() => dividerRefs.value[arrIndex]),
-        afterRef: computed(() => afterRefs.value[arrIndex]),
-      }
+      return { isEven }
     }
 
     function unregister (id: number) {
@@ -113,82 +86,32 @@ export default defineComponent({
       register,
       unregister,
       items,
-      beforeRefs,
-      dividerRefs,
-      afterRefs,
     })
 
-    // const truncateLineClasses = computed(() => {
-    //   const startClass = 'v-timeline--truncate-line-start'
-    //   const endClass = 'v-timeline--truncate-line-end'
-
-    //   switch (props.truncateLine) {
-    //     case 'start': return startClass
-    //     case 'end': return endClass
-    //     case 'both': return [startClass, endClass]
-    //     default: return null
-    //   }
-    // })
-
-    // const truncateStart = ref(0)
-    // const truncateEnd = ref(0)
-
-    // const { resizeRef } = useResizeObserver(entries => {
-    //   if (!entries.length) return
-
-    //   const { target } = entries[0]
-    //   const targetRect = target.getBoundingClientRect()
-
-    //   const dots = target.querySelectorAll('.v-timeline-item__dot')
-
-    //   if (!dots.length) return
-
-    //   const firstDotRect = dots[0].getBoundingClientRect()
-    //   const lastDotRect = dots[dots.length - 1].getBoundingClientRect()
-
-    //   const startDirection = props.direction === 'vertical' ? 'top' : 'left'
-    //   const endDirection = props.direction === 'vertical' ? 'bottom' : 'right'
-    //   const sizeProperty = props.direction === 'vertical' ? 'height' : 'width'
-
-    //   truncateStart.value = firstDotRect[startDirection] - targetRect[startDirection] + (firstDotRect[sizeProperty] / 2)
-    //   truncateEnd.value = targetRect[endDirection] - lastDotRect[endDirection] + (lastDotRect[sizeProperty] / 2)
-    // })
-
-    // const truncateLineStyles = computed(() => {
-    //   if (!props.truncateLine) return
-
-    //   return {
-    //     '--v-timeline-line-start': `${['start', 'both'].includes(props.truncateLine) ? truncateStart.value : 0}px`,
-    //     '--v-timeline-line-end': `${['end', 'both'].includes(props.truncateLine) ? truncateEnd.value : 0}px`,
-    //   }
-    // })
+    const gridStyles = computed(() => {
+      return {
+        gridTemplateAreas: props.direction === 'horizontal'
+          ? ['b', 'd', 'a'].map(c => `"${items.value.map(id => `${c}${id}`).join(' ')}"`).join(' ')
+          : items.value.map(id => `"b${id} d${id} a${id}"`).join(' '),
+      }
+    })
 
     return () => {
-      const DirectionalComponent = props.direction === 'horizontal' ? VTimelineHorizontal : VTimelineVertical
       return (
-        <DirectionalComponent {...props} key="horizontal">{ ctx.slots.default?.() }</DirectionalComponent>
+        <div
+          class={[
+            'v-timeline',
+            `v-timeline--${props.direction}`,
+          ]}
+          style={{
+            ...gridStyles.value,
+            // @ts-ignore
+            '--v-timeline-line-width': convertToUnit(props.lineWidth),
+          }}
+        >
+          { ctx.slots.default?.() }
+        </div>
       )
     }
-
-    // return () => (
-    //   <props.tag
-    //     ref={resizeRef}
-    //     class={[
-    //       'v-timeline',
-    //       `v-timeline--${props.direction}`,
-    //       {
-    //         'v-timeline--single-side': !!props.singleSide,
-    //       },
-    //       truncateLineClasses.value,
-    //     ]}
-    //     style={{
-    //       '--v-timeline-line-position': props.linePosition,
-    //       '--v-timeline-line-width': convertToUnit(props.lineWidth),
-    //       ...truncateLineStyles.value,
-    //     }}
-    //   >
-    //     { ctx.slots.default?.() }
-    //   </props.tag>
-    // )
   },
 })

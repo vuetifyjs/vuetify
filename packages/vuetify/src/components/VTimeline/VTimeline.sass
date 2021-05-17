@@ -4,43 +4,24 @@
 
 // Theme
 .v-timeline
-  &::before
-    background: rgba(var(--v-divider-color), var(--v-divider-opacity))
-
   .v-timeline-item__dot
     background: rgb(var(--v-theme-surface))
 
 // Elements
 .v-timeline
   position: relative
-  display: flex
-
-  &:before
-    content: ''
-    position: absolute
-
-  +vertical(true)
-    flex-direction: column
-
-    +timeline-line-align(var(--v-timeline-line-position), left, right)
-
-    &:before
-      height: calc(100% - var(--v-timeline-line-start, 0px) - var(--v-timeline-line-end, 0px))
-      width: var(--v-timeline-line-width)
-      top: var(--v-timeline-line-start)
+  display: grid
 
   +horizontal(true)
-    flex-direction: row
+    width: 100%
+    grid-template-rows: 1fr auto 1fr
 
-    &:before
-      height: var(--v-timeline-line-width)
-      width: calc(100% - var(--v-timeline-line-start, 0px) - var(--v-timeline-line-end, 0px))
-      top: calc(var(--v-timeline-line-position) - #{var(--v-timeline-line-width) / 2})
+  +vertical(true)
+    height: 100%
+    grid-template-columns: 1fr auto 1fr
 
-      +ltr()
-        left: var(--v-timeline-line-start)
-      +rtl()
-        right: var(--v-timeline-line-start)
+.v-timeline-item
+  display: contents
 
 .v-timeline-item__wrapper
   display: flex
@@ -55,7 +36,6 @@
 
 .v-timeline-item__line
   z-index: 0
-  // position: absolute
 
   +horizontal
     width: 100%
@@ -72,9 +52,6 @@
 .v-timeline-item__body
   position: relative
   height: 100%
-  // flex: 1 1 auto
-  // align-self: center
-  // display: flex
 
 .v-timeline-item__divider
   position: relative
@@ -86,12 +63,6 @@
 
   +vertical
     flex-direction: column
-
-  // +vertical
-  //   min-width: $timeline-divider-width
-
-  // +horizontal
-  //   min-height: $timeline-divider-width
 
 .v-timeline-item__dot
   position: relative
@@ -123,26 +94,44 @@
   // flex: 1 1 auto
   // align-self: center
 
-  // +vertical
-  //   max-width: calc(var(--v-timeline-line-position) - #{$timeline-divider-width / 2})
-
-  // +horizontal
-  //   max-height: calc(var(--v-timeline-line-position) - #{$timeline-divider-width / 2})
-
 // Modifiers
-.v-timeline-item--after
-  +vertical
-    +timeline-item-align(left)
-
-  +horizontal
-    +timeline-item-align(top)
 
 .v-timeline-item--before
-  +vertical
-    +timeline-item-align(right)
-
   +horizontal
-    +timeline-item-align(bottom)
+    padding-bottom: $timeline-item-padding
+
+    +rtltr(padding-left, padding-right, calc(#{var(--v-timeline-dot-size) / 4}))
+
+  +vertical
+    padding-bottom: $timeline-item-padding
+    padding-top: calc(#{var(--v-timeline-dot-size) / 4})
+
+    +rtltr(padding-right, padding-left, $timeline-item-padding)
+
+.v-timeline-item--after
+  +horizontal
+    padding-top: $timeline-item-padding
+    padding-left: calc(#{var(--v-timeline-dot-size) / 4})
+
+  +vertical
+    padding-bottom: $timeline-item-padding
+    padding-top: calc(#{var(--v-timeline-dot-size) / 4})
+
+    +rtltr(padding-left, padding-right, $timeline-item-padding)
+
+// .v-timeline-item--after
+//   +vertical
+//     +timeline-item-align(left)
+
+//   +horizontal
+//     +timeline-item-align(top)
+
+// .v-timeline-item--before
+//   +vertical
+//     +timeline-item-align(right)
+
+//   +horizontal
+//     +timeline-item-align(bottom)
 
 .v-timeline--single-side
   +vertical(true)

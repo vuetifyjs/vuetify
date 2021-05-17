@@ -11,7 +11,7 @@ export default defineComponent({
     return () => (
       <div
         class={[
-          `v-timeline-item__${props.side}`,
+          `v-timeline-item--${props.side}`,
         ]}
       >
         { ctx.slots.default?.() }

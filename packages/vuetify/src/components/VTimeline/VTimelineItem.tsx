@@ -11,7 +11,7 @@ import { makeSizeProps } from '@/composables/size'
 import { makeElevationProps } from '@/composables/elevation'
 
 // Helpers
-import { computed, defineComponent, Fragment, inject, onBeforeUnmount, ref, Teleport, watch } from 'vue'
+import { computed, defineComponent, inject, onBeforeUnmount, ref, watch } from 'vue'
 import { convertToUnit, getUid, makeProps } from '@/util'
 import VTimelineSide from './VTimelineSide'
 import VTimelineDivider from './VTimelineDivider'
@@ -53,7 +53,7 @@ export default defineComponent({
 
     const id = getUid()
 
-    const { isEven, beforeRef, dividerRef, afterRef } = timeline.register(id, props.index)
+    const { isEven } = timeline.register(id, props.index)
 
     onBeforeUnmount(() => timeline.unregister(id))
 
@@ -68,6 +68,7 @@ export default defineComponent({
     const hideOpposite = computed(() => props.hideOpposite ?? !!timeline.singleSide.value)
 
     const body = computed(() => ({
+      key: `body-${side.value}`,
       props: {
         class: 'v-timeline-item__body',
         side: side.value,
@@ -78,6 +79,7 @@ export default defineComponent({
     }))
 
     const opposite = computed(() => ({
+      key: `opposite-${side.value}`,
       props: {
         class: 'v-timeline-item__opposite',
         side: side.value === 'before' ? 'after' : 'before',
@@ -101,39 +103,40 @@ export default defineComponent({
 
     return () => {
       return (
-        <Fragment>
-          <Teleport to={beforeRef.value} disabled={!beforeRef.value}>
-            <VTimelineSide
-              {...before.value.props}
-              style={{
-                '--v-timeline-dot-size': convertToUnit(dotSize.value),
-              }}
-              v-slots={before.value.slots}
-            />
-          </Teleport>
-          <Teleport to={dividerRef.value} disabled={!dividerRef.value}>
-            <VTimelineDivider
-              ref={dotRef}
-              hideDot={props.hideDot}
-              icon={props.icon}
-              iconColor={props.iconColor}
-              alignDot={props.alignDot}
-              size={props.size}
-              elevation={props.elevation}
-              color={props.color}
-              v-slots={{ default: ctx.slots.icon }}
-            />
-          </Teleport>
-          <Teleport to={afterRef.value} disabled={!afterRef.value}>
-            <VTimelineSide
-              {...after.value.props}
-              style={{
-                '--v-timeline-dot-size': convertToUnit(dotSize.value),
-              }}
-              v-slots={after.value.slots}
-            />
-          </Teleport>
-        </Fragment>
+        <div class="v-timeline-item">
+          <VTimelineSide
+            key={before.value.key}
+            {...before.value.props}
+            style={{
+              gridArea: 'b' + id,
+              '--v-timeline-dot-size': convertToUnit(dotSize.value),
+            }}
+            v-slots={before.value.slots}
+          />
+          <VTimelineDivider
+            ref={dotRef}
+            hideDot={props.hideDot}
+            icon={props.icon}
+            iconColor={props.iconColor}
+            alignDot={props.alignDot}
+            size={props.size}
+            elevation={props.elevation}
+            color={props.color}
+            style={{
+              gridArea: 'd' + id,
+            }}
+            v-slots={{ default: ctx.slots.icon }}
+          />
+          <VTimelineSide
+            key={after.value.key}
+            {...after.value.props}
+            style={{
+              gridArea: 'a' + id,
+              '--v-timeline-dot-size': convertToUnit(dotSize.value),
+            }}
+            v-slots={after.value.slots}
+          />
+        </div>
       )
     }
   },
