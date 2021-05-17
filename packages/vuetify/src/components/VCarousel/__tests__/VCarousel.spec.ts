@@ -8,7 +8,8 @@ import VProgressLinear from '../../VProgressLinear/VProgressLinear'
 // Utilities
 import {
   mount,
-  MountOptions, shallowMount,
+  MountOptions,
+  shallowMount,
   Wrapper,
 } from '@vue/test-utils'
 import { waitAnimationFrame } from '../../../../test'
