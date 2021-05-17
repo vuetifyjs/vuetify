@@ -1,5 +1,4 @@
 // Libraries
-import Vue from 'vue'
 
 // Components
 import VCarousel from '../VCarousel'
@@ -9,18 +8,18 @@ import VProgressLinear from '../../VProgressLinear/VProgressLinear'
 // Utilities
 import {
   mount,
-  MountOptions,
+  MountOptions, shallowMount,
   Wrapper,
 } from '@vue/test-utils'
 import { waitAnimationFrame } from '../../../../test'
 
 describe('VCarousel.ts', () => {
   type Instance = InstanceType<typeof VCarousel>
-  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+  let mountFunction: (options?: MountOptions<Instance>, shallow?: Boolean) => Wrapper<Instance>
 
   beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VCarousel, {
+    mountFunction = (options = {}, shallow= false) => {
+      return (shallow ? shallowMount : mount)(VCarousel, {
         sync: false,
         mocks: {
           $vuetify: {
@@ -124,5 +123,58 @@ describe('VCarousel.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.internalHeight).toBe(300)
+  })
+
+  it('should have the correct theme', async () => {
+    let wrapper = mountFunction({}, true)
+
+    expect(wrapper.vm.isDark).toBeFalsy()
+    expect(wrapper.html()).toMatchSnapshot();
+
+    wrapper = mountFunction({provide: {theme: {isDark: true}}}, true)
+
+    expect(wrapper.vm.isDark).toBeTruthy()
+
+    expect(wrapper.html()).toMatchSnapshot();
+
+    wrapper = mountFunction({propsData: {dark: true}}, true)
+
+    expect(wrapper.vm.isDark).toBeTruthy()
+  })
+
+  it('should not throw an error in a v-if', async () => {
+    const wrapper = mount({
+        props: {
+          show: Boolean,
+        },
+        render(createElement) {
+          return createElement('div', this.show ? [
+            createElement(VCarousel, [createElement(VCarouselItem, 'test')])
+          ] : [])
+        }
+      }, {
+      sync: false,
+      mocks: {
+        $vuetify: {
+          rtl: false,
+          lang: {
+            t: str => str,
+          },
+        },
+      },
+      propsData: {
+        show: false
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.find(VCarousel).exists()).toBeFalsy()
+
+    wrapper.setProps({show: true})
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.find(VCarousel).exists()).toBeTruthy()
   })
 })

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VCarousel.ts should generate vertical delimiters 1`] = `
-<div class="v-window v-item-group theme--dark v-carousel v-carousel--vertical-delimiters"
+<div class="v-window v-item-group theme--light v-carousel v-carousel--vertical-delimiters"
      style="height: 500px;"
 >
   <div class="v-window__container">
@@ -9,14 +9,14 @@ exports[`VCarousel.ts should generate vertical delimiters 1`] = `
   <div class="v-carousel__controls"
        style="left: 0px;"
   >
-    <div class="v-item-group theme--dark">
+    <div class="v-item-group theme--light">
     </div>
   </div>
 </div>
 `;
 
 exports[`VCarousel.ts should generate vertical delimiters 2`] = `
-<div class="v-window v-item-group theme--dark v-carousel v-carousel--vertical-delimiters"
+<div class="v-window v-item-group theme--light v-carousel v-carousel--vertical-delimiters"
      style="height: 500px;"
 >
   <div class="v-window__container">
@@ -24,8 +24,88 @@ exports[`VCarousel.ts should generate vertical delimiters 2`] = `
   <div class="v-carousel__controls"
        style="left: 0px;"
   >
-    <div class="v-item-group theme--dark">
+    <div class="v-item-group theme--light">
     </div>
+  </div>
+</div>
+`;
+
+exports[`VCarousel.ts should have the correct theme 1`] = `
+<div class="v-window v-item-group theme--light v-carousel"
+     style="height: 500px;"
+>
+  <div class="v-window__container">
+    <div class="v-window__prev">
+      <vuecomponent-stub tag="button"
+                         activeclass
+                         icon="true"
+                         type="button"
+                         aria-label="$vuetify.carousel.prev"
+      >
+        <vuecomponent-stub large="true">
+          $prev
+        </vuecomponent-stub>
+      </vuecomponent-stub>
+    </div>
+    <div class="v-window__next">
+      <vuecomponent-stub tag="button"
+                         activeclass
+                         icon="true"
+                         type="button"
+                         aria-label="$vuetify.carousel.next"
+      >
+        <vuecomponent-stub large="true">
+          $next
+        </vuecomponent-stub>
+      </vuecomponent-stub>
+    </div>
+  </div>
+  <div class="v-carousel__controls">
+    <vuecomponent-stub activeclass="v-item--active"
+                       mandatory="true"
+                       tag="div"
+    >
+    </vuecomponent-stub>
+  </div>
+</div>
+`;
+
+exports[`VCarousel.ts should have the correct theme 2`] = `
+<div class="v-window v-item-group theme--dark v-carousel"
+     style="height: 500px;"
+>
+  <div class="v-window__container">
+    <div class="v-window__prev">
+      <vuecomponent-stub tag="button"
+                         activeclass
+                         icon="true"
+                         type="button"
+                         aria-label="$vuetify.carousel.prev"
+      >
+        <vuecomponent-stub large="true">
+          $prev
+        </vuecomponent-stub>
+      </vuecomponent-stub>
+    </div>
+    <div class="v-window__next">
+      <vuecomponent-stub tag="button"
+                         activeclass
+                         icon="true"
+                         type="button"
+                         aria-label="$vuetify.carousel.next"
+      >
+        <vuecomponent-stub large="true">
+          $next
+        </vuecomponent-stub>
+      </vuecomponent-stub>
+    </div>
+  </div>
+  <div class="v-carousel__controls">
+    <vuecomponent-stub activeclass="v-item--active"
+                       mandatory="true"
+                       tag="div"
+    >
+    </vuecomponent-stub>
   </div>
 </div>
 `;
