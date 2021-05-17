@@ -19,7 +19,7 @@ describe('VCarousel.ts', () => {
   let mountFunction: (options?: MountOptions<Instance>, shallow?: Boolean) => Wrapper<Instance>
 
   beforeEach(() => {
-    mountFunction = (options = {}, shallow= false) => {
+    mountFunction = (options = {}, shallow = false) => {
       return (shallow ? shallowMount : mount)(VCarousel, {
         sync: false,
         mocks: {
@@ -130,17 +130,18 @@ describe('VCarousel.ts', () => {
     let wrapper = mountFunction({}, true)
 
     expect(wrapper.vm.isDark).toBeFalsy()
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(wrapper.classes()).toContain('theme--light')
 
     wrapper = mountFunction({provide: {theme: {isDark: true}}}, true)
 
     expect(wrapper.vm.isDark).toBeTruthy()
 
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(wrapper.classes()).toContain('theme--dark')
 
     wrapper = mountFunction({propsData: {dark: true}}, true)
 
     expect(wrapper.vm.isDark).toBeTruthy()
+    expect(wrapper.classes()).toContain('theme--dark')
   })
 
   it('should not throw an error in a v-if', async () => {
