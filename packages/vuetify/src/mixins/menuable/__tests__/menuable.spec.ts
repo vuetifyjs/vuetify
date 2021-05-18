@@ -1,9 +1,6 @@
 import Menuable from '../'
-import {
-  mount,
-  MountOptions,
-  Wrapper,
-} from '@vue/test-utils'
+import {mount, MountOptions, Wrapper,} from '@vue/test-utils'
+import VApp from "../../../components/VApp";
 
 describe('menuable.ts', () => {
   const Mock = Menuable.extend({
@@ -58,13 +55,85 @@ describe('menuable.ts', () => {
 
     wrapper.setData({
       dimensions: {
-        activator: { width: 300 },
-        content: { width: 138 },
+        activator: {width: 300},
+        content: {width: 138},
       },
     })
 
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.computedLeft).toBe(-200)
+  })
+
+  it('should have the correct position in non embeded app', async () => {
+    const wrapper = mount({
+      render(h) {
+        return h(VApp, [h(Mock)])
+      }
+    }, {
+      mocks: {
+        sync: false,
+        $vuetify: {
+          theme: {},
+          rtl: false,
+        },
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    const vm = wrapper.find(Mock).vm
+
+    Object.assign(vm.dimensions.activator, {top: 100, left: 80})
+    Object.assign(vm.dimensions.content, {width: 300, height: 50})
+
+    await wrapper.vm.$nextTick()
+
+    expect(vm.computedTop).toBe(100)
+    expect(vm.computedLeft).toBe(80)
+  })
+
+  it('should have the correct position in embeded app', async () => {
+    const wrapper = mount({
+      props: { attach: Boolean },
+      render(h) {
+        return h(VApp, [
+          h(Mock)
+        ])
+      }
+    }, {
+      mocks: {
+        sync: false,
+        $vuetify: {
+          theme: {},
+          rtl: false,
+        },
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    const app = wrapper.find(VApp);
+    app.element.getBoundingClientRect = jest.fn(() => ({ top: 100, left: 200 }))
+
+    const appRect = app.element.getBoundingClientRect()
+
+    expect(appRect.top).toBe(100);
+    expect(appRect.left).toBe(200);
+
+    const vm = wrapper.find(Mock).vm
+
+    vm.onResize()
+
+    await wrapper.vm.$nextTick()
+
+    Object.assign(vm.dimensions.activator, {offsetTop: 100, offsetLeft: 80})
+    Object.assign(vm.dimensions.content, {width: 300, height: 50})
+
+    expect(vm.computedTop).toBe(-100)
+    expect(vm.computedLeft).toBe(-200)
+
+    expect(vm.computedRelativeOffset).toMatchObject({ left: 200, top: 100 })
+
   })
 })

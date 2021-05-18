@@ -14,15 +14,73 @@ const baseMixins = mixins(
   Activatable
 )
 
+interface dimensions {
+  top: number,
+  left: number,
+  bottom: number,
+  right: number,
+  width: number,
+  height: number,
+  offsetTop: number,
+  scrollHeight: number,
+  offsetLeft: number,
+}
+
 interface options extends ExtractVue<typeof baseMixins> {
+  hasActivator: boolean
   attach: boolean | string | Element
   offsetY: boolean
   offsetX: boolean
+  computedRelativeOffset: { top: number, left: number }
+  computedLeft: number,
+  computedTop: number,
   $refs: {
     content: HTMLElement
     activator: HTMLElement
+  },
+
+  onResize(): void,
+
+  callActivate(): void
+
+  activate(): void
+
+  callDeactivate(): void
+
+  deactivate(): void
+
+  sneakPeek(callback: Function): void
+
+  checkActivatorFixed(): void
+
+  checkForPageYOffset(): void
+
+  deactivate(): void
+
+  getOffsetLeft(): number
+
+  getOffsetTop(): number
+
+  getInnerHeight(): number
+
+  calcYOverflow(top: number): number
+
+  calcXOverflow(left: number, width: number): number
+
+  getRoundedBoundedClientRect(el: HTMLElement): {
+    height: number
+    width: number
+    top: number
+    left: number
+    bottom: number
+    right: number
   }
+
+  measure(el: HTMLElement): dimensions
+
+  absolutePosition(): dimensions
 }
+
 
 /* @vue/component */
 export default baseMixins.extend<options>().extend({
@@ -74,6 +132,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   data: () => ({
+    resized: 0,
     absoluteX: 0,
     absoluteY: 0,
     activatedBy: null as EventTarget | null,
@@ -112,10 +171,20 @@ export default baseMixins.extend<options>().extend({
   }),
 
   computed: {
+    computedRelativeOffset () {
+      if (!this.attach && this.resized !== null && this.$el) {
+        const p = this.$el.closest('.v-application')
+        if (p) {
+          const rect = p.getBoundingClientRect()
+          return { left: Math.round(rect.left), top: Math.round(rect.top) }
+        }
+      }
+      return { left: 0, top: 0 }
+    },
     computedLeft () {
       const a = this.dimensions.activator
       const c = this.dimensions.content
-      const activatorLeft = (this.attach !== false ? a.offsetLeft : a.left) || 0
+      const activatorLeft = (this.attach ? a.offsetLeft : a.left) || 0
       const minWidth = Math.max(a.width, c.width)
       let left = 0
       left += this.left ? activatorLeft - (minWidth - a.width) : activatorLeft
@@ -129,6 +198,8 @@ export default baseMixins.extend<options>().extend({
       if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
       if (this.nudgeRight) left += parseInt(this.nudgeRight)
 
+      left -= this.computedRelativeOffset.left
+
       return left
     },
     computedTop () {
@@ -137,11 +208,13 @@ export default baseMixins.extend<options>().extend({
       let top = 0
 
       if (this.top) top += a.height - c.height
-      if (this.attach !== false) top += a.offsetTop
+      if (this.attach) top += a.offsetTop
       else top += a.top + this.pageYOffset
       if (this.offsetY) top += this.top ? -a.height : a.height
       if (this.nudgeTop) top -= parseInt(this.nudgeTop)
       if (this.nudgeBottom) top += parseInt(this.nudgeBottom)
+
+      top -= this.computedRelativeOffset.top
 
       return top
     },
@@ -165,9 +238,26 @@ export default baseMixins.extend<options>().extend({
 
   beforeMount () {
     this.hasWindow = typeof window !== 'undefined'
+
+    if (this.hasWindow) {
+      window.addEventListener('resize', this.onResize, false)
+    }
+  },
+
+  mounted() {
+    this.onResize()
+  },
+
+  beforeDestroy () {
+    if (this.hasWindow) {
+      window.removeEventListener('resize', this.onResize, false)
+    }
   },
 
   methods: {
+    onResize () {
+      this.resized++
+    },
     absolutePosition () {
       return {
         offsetTop: 0,
@@ -183,12 +273,12 @@ export default baseMixins.extend<options>().extend({
     },
     activate () {},
     calcLeft (menuWidth: number) {
-      return convertToUnit(this.attach !== false
+      return convertToUnit(this.attach
         ? this.computedLeft
         : this.calcXOverflow(this.computedLeft, menuWidth))
     },
     calcTop () {
-      return convertToUnit(this.attach !== false
+      return convertToUnit(this.attach
         ? this.computedTop
         : this.calcYOverflow(this.computedTop))
     },
@@ -220,10 +310,10 @@ export default baseMixins.extend<options>().extend({
         activator.top > contentHeight
       ) {
         top = this.pageYOffset + (activator.top - contentHeight)
-      // If overflowing bottom
+        // If overflowing bottom
       } else if (isOverflowing && !this.allowOverflow) {
         top = toTop - contentHeight - 12
-      // If overflowing top
+        // If overflowing top
       } else if (top < this.pageYOffset && !this.allowOverflow) {
         top = this.pageYOffset + 12
       }
@@ -246,7 +336,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     checkActivatorFixed () {
-      if (this.attach !== false) return
+      if (this.attach) return
       let el = this.getActivator()
       while (el) {
         if (window.getComputedStyle(el).position === 'fixed') {
