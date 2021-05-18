@@ -132,13 +132,13 @@ describe('VCarousel.ts', () => {
     expect(wrapper.vm.isDark).toBeFalsy()
     expect(wrapper.classes()).toContain('theme--light')
 
-    wrapper = mountFunction({provide: {theme: {isDark: true}}}, true)
+    wrapper = mountFunction({ provide: { theme: { isDark: true } } }, true)
 
     expect(wrapper.vm.isDark).toBeTruthy()
 
     expect(wrapper.classes()).toContain('theme--dark')
 
-    wrapper = mountFunction({propsData: {dark: true}}, true)
+    wrapper = mountFunction({ propsData: { dark: true } }, true)
 
     expect(wrapper.vm.isDark).toBeTruthy()
     expect(wrapper.classes()).toContain('theme--dark')
@@ -146,15 +146,15 @@ describe('VCarousel.ts', () => {
 
   it('should not throw an error in a v-if', async () => {
     const wrapper = mount({
-        props: {
-          show: Boolean,
-        },
-        render(createElement) {
-          return createElement('div', this.show ? [
-            createElement(VCarousel, [createElement(VCarouselItem, 'test')])
-          ] : [])
-        }
-      }, {
+      props: {
+        show: Boolean,
+      },
+      render (createElement) {
+        return createElement('div', this.show ? [
+          createElement(VCarousel, [createElement(VCarouselItem, 'test')]),
+        ] : [])
+      },
+    }, {
       sync: false,
       mocks: {
         $vuetify: {
@@ -165,15 +165,15 @@ describe('VCarousel.ts', () => {
         },
       },
       propsData: {
-        show: false
-      }
+        show: false,
+      },
     })
 
     await wrapper.vm.$nextTick()
 
     expect(wrapper.find(VCarousel).exists()).toBeFalsy()
 
-    wrapper.setProps({show: true})
+    wrapper.setProps({ show: true })
 
     await wrapper.vm.$nextTick()
 
