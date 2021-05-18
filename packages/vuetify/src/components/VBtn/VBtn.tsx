@@ -19,13 +19,15 @@ import { useColor } from '@/composables/color'
 import { Ripple, RippleDirectiveBinding } from '@/directives/ripple'
 
 // Utilities
-import { computed, defineComponent, withDirectives } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { makeProps, useDirective } from '@/util'
 
 import { makeSizeProps, useSize } from '@/composables/size'
 
 export default defineComponent({
   name: 'VBtn',
+
+  directives: { Ripple },
 
   props: makeProps({
     text: Boolean,
@@ -72,7 +74,7 @@ export default defineComponent({
       [isContained.value ? 'background' : 'text']: props.color,
     })))
 
-    return () => withDirectives(
+    return () => (
       <props.tag
         type="button"
         class={[
@@ -101,6 +103,10 @@ export default defineComponent({
           positionStyles.value,
         ]}
         disabled={ props.disabled }
+        v-ripple={useDirective<RippleDirectiveBinding>({
+          value: !props.disabled,
+          modifiers: { center: !!props.icon },
+        })}
       >
         <span class="v-btn__overlay" />
 
@@ -130,11 +136,7 @@ export default defineComponent({
             right={ !props.stacked }
           />
         )}
-      </props.tag>,
-      [useDirective<RippleDirectiveBinding>(Ripple, {
-        value: !props.disabled,
-        modifiers: { center: !!props.icon },
-      })]
+      </props.tag>
     )
   },
 })

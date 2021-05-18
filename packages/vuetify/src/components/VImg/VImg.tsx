@@ -44,6 +44,8 @@ export interface srcObject {
 export default defineComponent({
   name: 'VImg',
 
+  directives: { intersect },
+
   props: makeProps({
     aspectRatio: [String, Number],
     alt: String,
@@ -231,24 +233,24 @@ export default defineComponent({
       return maybeTransition(props, { appear: true }, error)
     })
 
-    useRender(() => withDirectives(
+    useRender(() => (
       <VResponsive
         class="v-img"
         aspectRatio={ aspectRatio.value }
         aria-label={ props.alt }
         role={ props.alt ? 'img' : undefined }
+        v-intersect={useDirective<ObserveDirectiveBinding>({
+          value: {
+            handler: init,
+            options: props.options,
+          },
+          modifiers: { once: true },
+        })}
         v-slots={{
           additional: () => [__image.value, __preloadImage.value, __placeholder.value, __error.value],
           default: slots.default,
         }}
-      />,
-      [useDirective<ObserveDirectiveBinding>(intersect, {
-        value: {
-          handler: init,
-          options: props.options,
-        },
-        modifiers: { once: true },
-      })]
+      />
     ))
 
     return {
