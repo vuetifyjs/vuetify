@@ -2,14 +2,15 @@
   <div class="text-center">
     <v-rating
       v-model="rating"
-      background-color="orange-lighten-1"
-      color="blue"
+      readonly
     ></v-rating>
   </div>
 </template>
 
 <script>
   export default {
-    data: () => ({ rating: 3 }),
+    data: () => ({
+      rating: 3,
+    }),
   }
 </script>

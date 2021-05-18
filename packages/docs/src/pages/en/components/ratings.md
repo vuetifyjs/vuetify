@@ -37,6 +37,43 @@ The `v-rating` component can be colored as you want, you can set both selected a
 
 <example file="v-rating/prop-color" />
 
+#### Density
+
+Control the space occupied by `v-rating` items using the **density** prop.
+
+<example file="v-rating/prop-density" />
+
+#### Clearable
+
+Clicking on a current rating value can reset the rating by using **clearable** prop.
+
+<example file="v-rating/prop-clearable" />
+
+#### Readonly
+
+For ratings that are not meant to be changed you can use **readonly** prop.
+
+<example file="v-rating/prop-readonly" />
+
+#### Hover effect
+
+TODO
+
+<example file="v-rating/prop-hover" />
+
+#### Labels
+
+The `v-rating` component can display labels above or below each item.
+
+<example file="v-rating/prop-item-labels" />
+
+#### Icons
+
+You can use custom icons.
+
+<example file="v-rating/prop-icons" />
+
+
 #### Length
 
 Change the number of items by modifying the the **length** prop.
@@ -68,6 +105,13 @@ Provide a label to assistive technologies for each item.
 Slots enable advanced customization possibilities and provide you with more freedom in how you display the rating.
 
 <example file="v-rating/slot-item" />
+
+#### Custom labels slot
+
+Any arbitrary content could be displayed for labels in **item-label** slot.
+
+<example file="v-rating/slot-item-label" />
+
 
 ### Misc
 

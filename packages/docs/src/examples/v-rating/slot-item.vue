@@ -3,7 +3,7 @@
     <v-rating v-model="rating">
       <template v-slot:item="props">
         <v-icon
-          :color="props.isFilled ? genColor(props.index) : 'grey-lighten-1'"
+          :color="props.isFilled ? colors[props.index] : 'grey-lighten-1'"
           large
           @click="props.onClick"
         >
@@ -20,11 +20,5 @@
       colors: ['green', 'purple', 'orange', 'indigo', 'red'],
       rating: 4.5,
     }),
-
-    methods: {
-      genColor (i) {
-        return this.colors[i]
-      },
-    },
   }
 </script>

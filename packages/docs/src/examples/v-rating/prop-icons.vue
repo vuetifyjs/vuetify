@@ -2,14 +2,18 @@
   <div class="text-center">
     <v-rating
       v-model="rating"
-      background-color="orange-lighten-1"
-      color="blue"
+      empty-icon="circle-outline"
+      full-icon="circle"
+      half-icon="circle-half"
+      half-increments
     ></v-rating>
   </div>
 </template>
 
 <script>
   export default {
-    data: () => ({ rating: 3 }),
+    data: () => ({
+      rating: 3.5,
+    }),
   }
 </script>
