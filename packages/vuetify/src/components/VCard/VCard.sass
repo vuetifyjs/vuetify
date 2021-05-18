@@ -23,6 +23,51 @@
     &:hover, &:focus
       @include elevation($card-hover-elevation)
 
+  > .v-card-title:first-child
+    padding-top: 16px
+
+.v-card-title
+  font-size: 1.25rem
+  font-weight: 500
+  line-height: 2rem
+  letter-spacing: .0125em
+  text-transform: inherit
+  padding-left: 16px
+  padding-right: 16px
+
+.v-card-subtitle
+  font-size: .875rem
+  font-weight: 400
+  line-height: 1.25rem
+  letter-spacing: .0178571429em
+  text-transform: inherit
+  opacity: 0.6
+  padding-left: 16px
+  padding-right: 16px
+
+.v-card-text
+  font-size: .875rem
+  font-weight: 400
+  line-height: 1.25rem
+  letter-spacing: .0178571429em
+  text-transform: inherit
+  opacity: 0.6
+  padding: 16px
+
+  &:last-child
+    padding-bottom: 16px
+
+.v-card-actions
+  display: flex
+  flex: 1 1 auto
+  padding: 8px
+  align-items: center
+  min-height: 52px
+
+  .v-btn
+    margin-right: 8px
+    padding-left: 8px
+    padding-right: 8px
 
 // Theme
 // +theme(v-card) using ($material)

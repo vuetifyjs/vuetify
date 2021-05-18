@@ -24,6 +24,9 @@ export default defineComponent({
     hover: Boolean,
     image: String,
     raised: Boolean,
+    subtitle: String,
+    text: String,
+    title: String,
     ...makeBorderProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -78,7 +81,23 @@ export default defineComponent({
             </div>
           ) }
 
+          { props.title && (
+            <div class="v-card-title">{props.title}</div>
+          ) }
+
+          { props.subtitle && (
+            <div class="v-card-subtitle">{props.subtitle}</div>
+          ) }
+
+          { props.text && (
+            <div class="v-card-text">{props.text}</div>
+          ) }
+
           { slots.default?.() }
+
+          { slots.actions && (
+            <div class="v-card-actions">{slots.actions()}</div>
+          ) }
         </props.tag>
       )
     }
