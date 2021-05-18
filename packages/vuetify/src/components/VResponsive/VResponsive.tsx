@@ -37,7 +37,9 @@ export default defineComponent({
       <div class="v-responsive" style={ dimensionStyles.value }>
         <div class="v-responsive__sizer" style={ aspectStyles.value } />
         { slots.additional?.() }
-        <div class={['v-responsive__content', props.contentClass]}>{ slots.default?.() }</div>
+        { slots.default && (
+          <div class={['v-responsive__content', props.contentClass]}>{ slots.default() }</div>
+        )}
       </div>
     )
   },
