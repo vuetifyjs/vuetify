@@ -29,13 +29,11 @@ export default defineComponent({
       type: String,
       default: '$vuetify.rating.ariaLabel.icon',
     },
-    backgroundColor: {
+    bgColor: {
       type: String,
-      default: 'accent',
     },
     color: {
       type: String,
-      default: 'primary',
     },
     clearable: Boolean,
     disabled: Boolean,
@@ -78,7 +76,7 @@ export default defineComponent({
   }),
 
   emits: {
-    'update:modelValue': (value: number) => {},
+    'update:modelValue': (value: number) => true,
   },
 
   setup (props, { slots }) {
@@ -119,7 +117,7 @@ export default defineComponent({
         : isHalfIcon ? props.halfIcon
         : props.emptyIcon
 
-      const color = isFilled || isHalfFilled || isHovered ? props.color : props.backgroundColor
+      const color = isFilled || isHalfFilled || isHovered ? props.color : props.bgColor
 
       return { isFilled, isHovered, isHalfFilled, isHalfHovered, icon, color }
     }))
@@ -165,7 +163,7 @@ export default defineComponent({
       }
     }))
 
-    const icons = computed(() => range.value.map(index => ({
+    const items = computed(() => range.value.map(index => ({
       ariaLabel: t(props.ariaLabel, index + 1, range.value.length),
       density: props.density,
       disabled: props.disabled,
@@ -176,6 +174,7 @@ export default defineComponent({
       ripple: props.ripple,
       size: props.size,
       tabindex: props.readonly ? -1 : undefined,
+      text: true,
       value: rating.value,
       ...itemState.value[index],
       ...eventState.value[index],
@@ -210,9 +209,9 @@ export default defineComponent({
         ]}
         onKeydown={onKeydown}
       >
-        { icons.value.map(iconProps => (
+        { items.value.map(itemProps => (
           <div
-            key={iconProps.index}
+            key={itemProps.index}
             class={[
               'v-rating__item',
               {
@@ -221,26 +220,27 @@ export default defineComponent({
             ]}
           >
             {
-              !iconProps.hasLabels ? undefined
-              : slots['item-label'] ? slots['item-label'](iconProps)
-              : iconProps.label ? <span>{iconProps.label}</span>
+              !itemProps.hasLabels ? undefined
+              : slots['item-label'] ? slots['item-label'](itemProps)
+              : itemProps.label ? <span>{itemProps.label}</span>
               : <span>&nbsp;</span>
             }
-            { slots.item ? slots.item(iconProps) : (
+            { slots.item ? slots.item(itemProps) : (
               <VBtn
-                ref={iconProps.ref}
-                color={iconProps.color}
-                ripple={iconProps.ripple}
-                size={iconProps.size}
-                icon={iconProps.icon}
-                onClick={iconProps.onClick}
-                onMouseenter={iconProps.onMouseenter}
-                onMouseleave={iconProps.onMouseleave}
-                onMousemove={iconProps.onMousemove}
-                aria-label={iconProps.ariaLabel}
-                disabled={iconProps.disabled}
-                density={iconProps.density}
-                tabindex={iconProps.tabindex}
+                ref={itemProps.ref}
+                text={itemProps.text}
+                color={itemProps.color}
+                ripple={itemProps.ripple}
+                size={itemProps.size}
+                icon={itemProps.icon}
+                onClick={itemProps.onClick}
+                onMouseenter={itemProps.onMouseenter}
+                onMouseleave={itemProps.onMouseleave}
+                onMousemove={itemProps.onMousemove}
+                aria-label={itemProps.ariaLabel}
+                disabled={itemProps.disabled}
+                density={itemProps.density}
+                tabindex={itemProps.tabindex}
               />
             ) }
           </div>
