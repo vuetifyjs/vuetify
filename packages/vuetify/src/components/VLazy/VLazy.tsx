@@ -9,7 +9,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import intersect from '@/directives/intersect'
 
 // Utilities
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
   name: 'VLazy',
@@ -19,7 +19,7 @@ export default defineComponent({
   props: makeProps({
     modelValue: Boolean,
     options: {
-      type: Object,
+      type: Object as PropType<IntersectionObserverInit>,
       // For more information on types, navigate to:
       // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
       default: () => ({
