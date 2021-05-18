@@ -15,15 +15,15 @@ const baseMixins = mixins(
 )
 
 interface dimensions {
-  top: number,
-  left: number,
-  bottom: number,
-  right: number,
-  width: number,
-  height: number,
-  offsetTop: number,
-  scrollHeight: number,
-  offsetLeft: number,
+  top: number
+  left: number
+  bottom: number
+  right: number
+  width: number
+  height: number
+  offsetTop: number
+  scrollHeight: number
+  offsetLeft: number
 }
 
 interface options extends ExtractVue<typeof baseMixins> {
@@ -32,14 +32,14 @@ interface options extends ExtractVue<typeof baseMixins> {
   offsetY: boolean
   offsetX: boolean
   computedRelativeOffset: { top: number, left: number }
-  computedLeft: number,
-  computedTop: number,
+  computedLeft: number
+  computedTop: number
   $refs: {
     content: HTMLElement
     activator: HTMLElement
-  },
+  }
 
-  onResize(): void,
+  onResize(): void
 
   callActivate(): void
 
@@ -55,13 +55,15 @@ interface options extends ExtractVue<typeof baseMixins> {
 
   checkForPageYOffset(): void
 
-  deactivate(): void
-
   getOffsetLeft(): number
 
   getOffsetTop(): number
 
   getInnerHeight(): number
+
+  calcTop(): string
+
+  calcLeft(width: number): string
 
   calcYOverflow(top: number): number
 
@@ -79,8 +81,11 @@ interface options extends ExtractVue<typeof baseMixins> {
   measure(el: HTMLElement): dimensions
 
   absolutePosition(): dimensions
-}
 
+  updateDimensions(): void
+
+  startTransition(): Promise<void>
+}
 
 /* @vue/component */
 export default baseMixins.extend<options>().extend({
@@ -244,7 +249,7 @@ export default baseMixins.extend<options>().extend({
     }
   },
 
-  mounted() {
+  mounted () {
     this.onResize()
   },
 
@@ -310,10 +315,10 @@ export default baseMixins.extend<options>().extend({
         activator.top > contentHeight
       ) {
         top = this.pageYOffset + (activator.top - contentHeight)
-        // If overflowing bottom
+      // If overflowing bottom
       } else if (isOverflowing && !this.allowOverflow) {
         top = toTop - contentHeight - 12
-        // If overflowing top
+      // If overflowing top
       } else if (top < this.pageYOffset && !this.allowOverflow) {
         top = this.pageYOffset + 12
       }
