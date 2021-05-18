@@ -4,6 +4,7 @@ import type { TimelineDotAlignment, TimelineSide } from './VTimeline'
 
 // Components
 import { VTimelineSymbol } from './VTimeline'
+import VTimelineDivider from './VTimelineDivider'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
@@ -13,8 +14,6 @@ import { makeElevationProps } from '@/composables/elevation'
 // Helpers
 import { computed, defineComponent, inject, onBeforeUnmount, ref, watch } from 'vue'
 import { convertToUnit, getUid, makeProps } from '@/util'
-import VTimelineSide from './VTimelineSide'
-import VTimelineDivider from './VTimelineDivider'
 
 export default defineComponent({
   name: 'VTimelineItem',
@@ -57,40 +56,50 @@ export default defineComponent({
 
     onBeforeUnmount(() => timeline.unregister(id))
 
-    const side = computed(() => {
-      let side = timeline.singleSide.value ?? props.side ?? (isEven.value ? 'before' : 'after')
+    const bodySide = computed(() => {
+      let side: string
+
+      if (timeline.density.value !== 'default') {
+        side = timeline.side.value ?? 'after'
+      } else {
+        side = timeline.side.value ?? props.side ?? (isEven.value ? 'after' : 'before')
+      }
 
       if (side && timeline.mirror.value) side = side === 'before' ? 'after' : 'before'
 
       return side
     })
 
-    const hideOpposite = computed(() => props.hideOpposite ?? !!timeline.singleSide.value)
+    const oppositeSide = computed(() => bodySide.value === 'after' ? 'before' : 'after')
 
-    const body = computed(() => ({
-      key: `body-${side.value}`,
-      props: {
-        class: 'v-timeline-item__body',
-        side: side.value,
-      },
-      slots: {
-        default: ctx.slots.default,
-      },
-    }))
+    const hideOpposite = computed(() => props.hideOpposite ?? timeline.density.value === 'compact')
 
-    const opposite = computed(() => ({
-      key: `opposite-${side.value}`,
-      props: {
-        class: 'v-timeline-item__opposite',
-        side: side.value === 'before' ? 'after' : 'before',
-      },
-      slots: {
-        default: !hideOpposite.value && ctx.slots.opposite,
-      },
-    }))
+    const body = computed(() => (
+      <div
+        key={`body-${bodySide.value}`}
+        class={[
+          'v-timeline-item__body',
+          `v-timeline-item--${bodySide.value}`
+        ]}
+      >
+        { ctx.slots.default?.() }
+      </div>
+    ))
 
-    const before = computed(() => side.value === 'before' ? body.value : opposite.value)
-    const after = computed(() => side.value === 'before' ? opposite.value : body.value)
+    const opposite = computed(() => !hideOpposite.value && (
+      <div
+        key={`opposite-${oppositeSide.value}`}
+        class={[
+          'v-timeline-item__opposite',
+          `v-timeline-item--${oppositeSide.value}`
+        ]}
+      >
+        { ctx.slots.opposite?.() }
+      </div>
+    ))
+
+    const before = computed(() => bodySide.value === 'before' ? body.value : opposite.value)
+    const after = computed(() => bodySide.value === 'before' ? opposite.value : body.value)
 
     const dotSize = ref(0)
     const dotRef = ref<ComponentPublicInstance>()
@@ -103,15 +112,20 @@ export default defineComponent({
 
     return () => {
       return (
-        <>
-          <VTimelineSide
-            key={before.value.key}
-            {...before.value.props}
-            style={{
-              '--v-timeline-dot-size': convertToUnit(dotSize.value),
-            }}
-            v-slots={before.value.slots}
-          />
+        <div
+          class={[
+            'v-timeline-item',
+            {
+              'v-timeline-item--fill-dot': props.fillDot,
+            }
+          ]}
+          style={{
+            // @ts-ignore
+            '--v-timeline-dot-size': convertToUnit(dotSize.value),
+          }}
+        >
+          { before.value }
+
           <VTimelineDivider
             ref={dotRef}
             hideDot={props.hideDot}
@@ -123,15 +137,9 @@ export default defineComponent({
             color={props.color}
             v-slots={{ default: ctx.slots.icon }}
           />
-          <VTimelineSide
-            key={after.value.key}
-            {...after.value.props}
-            style={{
-              '--v-timeline-dot-size': convertToUnit(dotSize.value),
-            }}
-            v-slots={after.value.slots}
-          />
-        </>
+
+          { after.value }
+        </div>
       )
     }
   },

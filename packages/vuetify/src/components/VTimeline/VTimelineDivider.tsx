@@ -21,6 +21,7 @@ export default defineComponent({
       type: String,
       default: 'secondary',
     },
+    fillDot: Boolean,
     ...makeSizeProps(),
     ...makeElevationProps(),
   },
@@ -61,15 +62,17 @@ export default defineComponent({
             </div>
           </div>
         ) }
-        <div
-          class={[
-            'v-timeline-item__line',
-            lineColorClasses.value,
-          ]}
-          style={{
-            ...lineColorStyles.value,
-          }}
-        />
+        <div class="v-timeline-item__line-wrapper">
+          <div
+            class={[
+              'v-timeline-item__line',
+              lineColorClasses.value,
+            ]}
+            style={{
+              ...lineColorStyles.value,
+            }}
+          />
+        </div>
       </div>
     )
   },

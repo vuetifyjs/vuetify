@@ -3,13 +3,16 @@ import './VTimeline.sass'
 
 // Types
 import type { InjectionKey, Prop, Ref } from 'vue'
+import { Density, useDensity } from '@/composables/density'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
 
 // Helpers
-import { computed, defineComponent, provide, ref } from 'vue'
+import { computed, defineComponent, provide, ref, toRef } from 'vue'
 import { convertToUnit, makeProps } from '@/util'
+import { makeDensityProps } from '../../composables/density'
+import { useTheme } from '@/composables/theme'
 
 export type TimelineDirection = 'vertical' | 'horizontal'
 export type TimelineSide = 'before' | 'after' | undefined
@@ -18,7 +21,8 @@ export type TimelineTruncateLine = 'start' | 'end' | 'both' | undefined
 
 interface TimelineInstance {
   mirror: Ref<boolean>
-  singleSide: Ref<TimelineSide>
+  side: Ref<TimelineSide>
+  density: Ref<Density>
   register: (id: number, index?: number) => {
     isEven: Ref<boolean>,
   }
@@ -38,19 +42,15 @@ export default defineComponent({
       validator: (v: any) => ['vertical', 'horizontal'].includes(v),
     } as Prop<TimelineDirection>,
     mirror: Boolean,
-    singleSide: {
+    side: {
       type: String,
       validator: (v: any) => v == null || ['after', 'before'].includes(v),
     } as Prop<TimelineSide>,
-    truncateLine: {
-      type: String,
-      validator: (v: any) => v == null || ['start', 'end', 'both'].includes(v),
-    } as Prop<TimelineDotAlignment>,
-    linePosition: {
-      type: String,
-      default: '50%',
+    lineInset: {
+      type: [String, Number],
+      default: 0,
     },
-    lineWidth: {
+    lineThickness: {
       type: [String, Number],
       default: 2,
     },
@@ -58,11 +58,14 @@ export default defineComponent({
       type: String,
       default: 'secondary',
     },
+    ...makeDensityProps(),
     ...makeTagProps(),
   }),
 
   setup (props, ctx) {
     const items = ref<number[]>([])
+    const { themeClasses } = useTheme()
+    const { densityClasses } = useDensity(props, 'v-timeline')
 
     function register (id: number, index?: number) {
       if (index) {
@@ -82,7 +85,8 @@ export default defineComponent({
 
     provide(VTimelineSymbol, {
       mirror: computed(() => props.mirror),
-      singleSide: computed(() => props.singleSide),
+      side: computed(() => props.side),
+      density: toRef(props, 'density'),
       register,
       unregister,
       items,
@@ -94,10 +98,16 @@ export default defineComponent({
           class={[
             'v-timeline',
             `v-timeline--${props.direction}`,
+            {
+              [`v-timeline--${props.side ?? 'after'}`]: props.density !== 'default',
+            },
+            themeClasses.value,
+            densityClasses.value,
           ]}
           style={{
             // @ts-expect-error
-            '--v-timeline-line-width': convertToUnit(props.lineWidth),
+            '--v-timeline-line-thickness': convertToUnit(props.lineThickness),
+            '--v-timeline-line-inset': convertToUnit(props.lineInset),
           }}
         >
           { ctx.slots.default?.() }
