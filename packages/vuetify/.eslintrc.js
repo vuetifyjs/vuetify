@@ -8,13 +8,17 @@ module.exports = {
   },
   env: {
     'jest/globals': true,
+    'cypress/globals': true,
   },
   plugins: [
     'jest',
     'eslint-plugin-local-rules',
+    'cypress'
   ],
   extends: [
     'plugin:jest/recommended',
+    'plugin:cypress/recommended',
+
     // 'plugin:import/typescript', // slow, only enable if needed
   ],
   rules: {
@@ -27,6 +31,11 @@ module.exports = {
 
     // 'import/no-cycle': 'warn',
     // 'import/no-self-import': 'warn',
+    'cypress/no-assigning-return-values': 'error',
+    'cypress/no-unnecessary-waiting': 'warn',
+    'cypress/assertion-before-screenshot': 'warn',
+    'cypress/no-force': 'warn',
+    'cypress/no-async-tests': 'error',
 
     'jest/no-disabled-tests': 'off',
     'jest/no-large-snapshots': 'warn',
@@ -50,6 +59,7 @@ module.exports = {
       rules: {
         'jest/expect-expect': 'off',
         'jest/valid-expect': 'off',
+        'jest/valid-expect-in-promise': 'off',
         'no-unused-expressions': 'off',
       },
     },

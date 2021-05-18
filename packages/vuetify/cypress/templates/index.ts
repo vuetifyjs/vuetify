@@ -1,1 +1,1 @@
-export * from './Grid'
+export * from './CenteredGrid'

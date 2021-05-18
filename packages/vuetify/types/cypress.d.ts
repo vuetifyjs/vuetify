@@ -1,5 +1,3 @@
-/// <reference type="cypress" />
-
 import type { mount as cyMount } from '@cypress/vue'
 
 declare global {
