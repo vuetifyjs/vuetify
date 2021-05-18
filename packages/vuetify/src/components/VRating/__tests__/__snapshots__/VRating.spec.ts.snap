@@ -5,7 +5,7 @@ exports[`VRating should change icon on hover 1`] = `
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 1 of 5"
+            arialabel="Rating 1 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -18,7 +18,7 @@ exports[`VRating should change icon on hover 1`] = `
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 2 of 5"
+            arialabel="Rating 2 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -31,7 +31,7 @@ exports[`VRating should change icon on hover 1`] = `
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 3 of 5"
+            arialabel="Rating 3 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -44,7 +44,7 @@ exports[`VRating should change icon on hover 1`] = `
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 4 of 5"
+            arialabel="Rating 4 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -57,7 +57,7 @@ exports[`VRating should change icon on hover 1`] = `
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 5 of 5"
+            arialabel="Rating 5 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -108,7 +108,7 @@ exports[`VRating should render a scoped item-label slot 1`] = `
     </span>
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 1 of 5"
+            arialabel="Rating 1 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -124,7 +124,7 @@ exports[`VRating should render a scoped item-label slot 1`] = `
     </span>
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 2 of 5"
+            arialabel="Rating 2 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -140,7 +140,7 @@ exports[`VRating should render a scoped item-label slot 1`] = `
     </span>
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 3 of 5"
+            arialabel="Rating 3 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -156,7 +156,7 @@ exports[`VRating should render a scoped item-label slot 1`] = `
     </span>
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 4 of 5"
+            arialabel="Rating 4 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -172,7 +172,7 @@ exports[`VRating should render a scoped item-label slot 1`] = `
     </span>
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 5 of 5"
+            arialabel="Rating 5 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -190,7 +190,7 @@ exports[`VRating should respond to prop value changes 1`] = `
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 1 of 5"
+            arialabel="Rating 1 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -203,7 +203,7 @@ exports[`VRating should respond to prop value changes 1`] = `
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 2 of 5"
+            arialabel="Rating 2 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -216,7 +216,7 @@ exports[`VRating should respond to prop value changes 1`] = `
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 3 of 5"
+            arialabel="Rating 3 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -229,7 +229,7 @@ exports[`VRating should respond to prop value changes 1`] = `
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 4 of 5"
+            arialabel="Rating 4 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -242,7 +242,7 @@ exports[`VRating should respond to prop value changes 1`] = `
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 5 of 5"
+            arialabel="Rating 5 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -260,7 +260,7 @@ exports[`VRating should respond to prop value changes 2`] = `
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 1 of 5"
+            arialabel="Rating 1 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -273,7 +273,7 @@ exports[`VRating should respond to prop value changes 2`] = `
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 2 of 5"
+            arialabel="Rating 2 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -286,7 +286,7 @@ exports[`VRating should respond to prop value changes 2`] = `
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 3 of 5"
+            arialabel="Rating 3 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -299,7 +299,7 @@ exports[`VRating should respond to prop value changes 2`] = `
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 4 of 5"
+            arialabel="Rating 4 of 5"
     >
       <span class="v-btn__overlay">
       </span>
@@ -312,7 +312,7 @@ exports[`VRating should respond to prop value changes 2`] = `
   <div class="v-rating__item">
     <button type="button"
             class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-default"
-            aria-label="Rating 5 of 5"
+            arialabel="Rating 5 of 5"
     >
       <span class="v-btn__overlay">
       </span>

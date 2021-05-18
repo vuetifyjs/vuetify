@@ -25,9 +25,9 @@ export default defineComponent({
   name: 'VRating',
 
   props: makeProps({
-    ariaLabel: {
+    itemAriaLabel: {
       type: String,
-      default: '$vuetify.rating.ariaLabel.icon',
+      default: '$vuetify.rating.ariaLabel.item',
     },
     bgColor: {
       type: String,
@@ -164,7 +164,7 @@ export default defineComponent({
     }))
 
     const items = computed(() => range.value.map(index => ({
-      ariaLabel: t(props.ariaLabel, index + 1, range.value.length),
+      ariaLabel: t(props.itemAriaLabel, index + 1, range.value.length),
       density: props.density,
       disabled: props.disabled,
       hasLabels: !!props.itemLabels?.length || !!slots['item-label'],
