@@ -237,7 +237,7 @@ export default defineComponent({
                 onMouseenter={itemProps.onMouseenter}
                 onMouseleave={itemProps.onMouseleave}
                 onMousemove={itemProps.onMousemove}
-                aria-label={itemProps.ariaLabel}
+                ariaLabel={itemProps.ariaLabel}
                 disabled={itemProps.disabled}
                 density={itemProps.density}
                 tabindex={itemProps.tabindex}
