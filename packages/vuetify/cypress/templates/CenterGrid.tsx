@@ -4,7 +4,7 @@ export const CenteredGrid = (_, { slots, attrs }) => {
   const width = attrs.width || 'auto'
   return (<div
     class="d-flex flex-column mx-auto"
-    style={{ width, 'grid-gap': '1.2rem' }}
+    style={{ width, gridGap: '1.2rem' }}
   >
     { slots.default() }
   </div>)

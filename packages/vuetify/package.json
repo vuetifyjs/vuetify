@@ -85,6 +85,7 @@
     "concurrently": "^4.1.1",
     "cssnano": "^4.1.10",
     "cypress": "^7.2.0",
+    "eslint-plugin-cypress": "^2.11.3",
     "deepmerge": "^4.2.2",
     "dotenv": "^8.0.0",
     "eslint-plugin-jest": "^24.1.0",
