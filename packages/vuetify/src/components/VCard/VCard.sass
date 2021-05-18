@@ -16,7 +16,11 @@
     @include rounded($card-tile-border-radius)
 
   &--hover
-    @include elevation($card-hover-elevation)
+    cursor: pointer
+    transition: box-shadow .4s cubic-bezier(.25, .8, .25, 1)
+
+    &:hover, &:focus
+      @include elevation($card-hover-elevation)
 
 
 // Theme
