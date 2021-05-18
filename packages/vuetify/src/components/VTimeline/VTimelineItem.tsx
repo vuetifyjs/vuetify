@@ -103,12 +103,11 @@ export default defineComponent({
 
     return () => {
       return (
-        <div class="v-timeline-item">
+        <>
           <VTimelineSide
             key={before.value.key}
             {...before.value.props}
             style={{
-              gridArea: 'b' + id,
               '--v-timeline-dot-size': convertToUnit(dotSize.value),
             }}
             v-slots={before.value.slots}
@@ -122,21 +121,17 @@ export default defineComponent({
             size={props.size}
             elevation={props.elevation}
             color={props.color}
-            style={{
-              gridArea: 'd' + id,
-            }}
             v-slots={{ default: ctx.slots.icon }}
           />
           <VTimelineSide
             key={after.value.key}
             {...after.value.props}
             style={{
-              gridArea: 'a' + id,
               '--v-timeline-dot-size': convertToUnit(dotSize.value),
             }}
             v-slots={after.value.slots}
           />
-        </div>
+        </>
       )
     }
   },

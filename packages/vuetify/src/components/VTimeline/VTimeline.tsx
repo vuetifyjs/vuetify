@@ -88,14 +88,6 @@ export default defineComponent({
       items,
     })
 
-    const gridStyles = computed(() => {
-      return {
-        gridTemplateAreas: props.direction === 'horizontal'
-          ? ['b', 'd', 'a'].map(c => `"${items.value.map(id => `${c}${id}`).join(' ')}"`).join(' ')
-          : items.value.map(id => `"b${id} d${id} a${id}"`).join(' '),
-      }
-    })
-
     return () => {
       return (
         <div
@@ -104,8 +96,7 @@ export default defineComponent({
             `v-timeline--${props.direction}`,
           ]}
           style={{
-            ...gridStyles.value,
-            // @ts-ignore
+            // @ts-expect-error
             '--v-timeline-line-width': convertToUnit(props.lineWidth),
           }}
         >

@@ -15,13 +15,12 @@
   +horizontal(true)
     width: 100%
     grid-template-rows: 1fr auto 1fr
+    grid-auto-columns: 1fr
 
   +vertical(true)
     height: 100%
     grid-template-columns: 1fr auto 1fr
-
-.v-timeline-item
-  display: contents
+    grid-auto-rows: 1fr
 
 .v-timeline-item__wrapper
   display: flex
@@ -60,9 +59,11 @@
 
   +horizontal
     flex-direction: row
+    grid-row: 2
 
   +vertical
     flex-direction: column
+    grid-column: 2
 
 .v-timeline-item__dot
   position: relative
@@ -99,12 +100,14 @@
 .v-timeline-item--before
   +horizontal
     padding-bottom: $timeline-item-padding
+    grid-row: 1
 
     +rtltr(padding-left, padding-right, calc(#{var(--v-timeline-dot-size) / 4}))
 
   +vertical
     padding-bottom: $timeline-item-padding
     padding-top: calc(#{var(--v-timeline-dot-size) / 4})
+    grid-column: 1
 
     +rtltr(padding-right, padding-left, $timeline-item-padding)
 
@@ -112,10 +115,12 @@
   +horizontal
     padding-top: $timeline-item-padding
     padding-left: calc(#{var(--v-timeline-dot-size) / 4})
+    grid-row: 3
 
   +vertical
     padding-bottom: $timeline-item-padding
     padding-top: calc(#{var(--v-timeline-dot-size) / 4})
+    grid-column: 3
 
     +rtltr(padding-left, padding-right, $timeline-item-padding)
 
