@@ -78,6 +78,8 @@ interface options extends ExtractVue<typeof baseMixins> {
     right: number
   }
 
+  cumulativeOffset(el: HTMLElement): {top: number, left: number}
+
   measure(el: HTMLElement): dimensions
 
   absolutePosition(): dimensions
@@ -178,11 +180,9 @@ export default baseMixins.extend<options>().extend({
   computed: {
     computedRelativeOffset () {
       if (!this.attach && this.resized !== null && this.$el) {
-        const p = this.$el.closest('.v-application')
-        if (p) {
-          const rect = p.getBoundingClientRect()
-          return { left: Math.round(rect.left), top: Math.round(rect.top) }
-        }
+        const p = this.$el.closest('.v-application') as HTMLElement
+
+        return this.cumulativeOffset(p)
       }
       return { left: 0, top: 0 }
     },
@@ -260,6 +260,21 @@ export default baseMixins.extend<options>().extend({
   },
 
   methods: {
+    cumulativeOffset (element: HTMLElement) {
+      let top = 0
+      let left = 0
+
+      while (element) {
+        top += element.offsetTop || 0
+        left += element.offsetLeft || 0
+        element = element.offsetParent as HTMLElement
+      }
+
+      return {
+        top: Math.round(top),
+        left: Math.round(left),
+      }
+    },
     onResize () {
       this.resized++
     },

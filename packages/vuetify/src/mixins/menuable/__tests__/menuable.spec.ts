@@ -91,6 +91,8 @@ describe('menuable.ts', () => {
 
     expect(vm.computedTop).toBe(100)
     expect(vm.computedLeft).toBe(80)
+
+    expect(vm.computedRelativeOffset).toMatchObject({ left: 0, top: 0 })
   })
 
   it('should have the correct position in embeded app', async () => {
@@ -113,14 +115,9 @@ describe('menuable.ts', () => {
 
     await wrapper.vm.$nextTick()
 
-    const app = wrapper.find(VApp)
-    // eslint-disable-next-line
-    app.element.getBoundingClientRect = jest.fn(() => ({ top: 100, left: 200 }))
+    const app = wrapper.find(VApp).element
 
-    const appRect = app.element.getBoundingClientRect()
-
-    expect(appRect.top).toBe(100)
-    expect(appRect.left).toBe(200)
+    Object.defineProperties(app, { offsetTop: { get: () => 100 }, offsetLeft: { get: () => 200 } })
 
     const vm = wrapper.find(Mock).vm
 
