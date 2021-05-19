@@ -334,7 +334,7 @@ export default baseMixins.extend<options>().extend({
       } else if (isOverflowing && !this.allowOverflow) {
         top = toTop - contentHeight - 12
       // If overflowing top
-      } else if (top < this.pageYOffset && !this.allowOverflow) {
+      } else if (totalHeight < this.pageYOffset && !this.allowOverflow) {
         top = this.pageYOffset + 12
       }
 
