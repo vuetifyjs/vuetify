@@ -99,6 +99,7 @@ export default defineComponent({
         disabled={ props.disabled }
       >
         <span class="v-btn__overlay" />
+
         { typeof props.icon === 'boolean'
           ? slots.default?.()
           : <VIcon icon={ props.icon } size={ props.size } />
