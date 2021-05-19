@@ -41,7 +41,8 @@
     grid-template-columns: auto min-content auto
 
     .v-timeline-item__body, .v-timeline-item__opposite
-      padding-top: calc((var(--v-timeline-dot-size) / 2) - 10px)
+      // TODO: replace with css var?
+      padding-top: calc((var(--v-timeline-dot-size) - 1.5em) / 2)
 
     .v-timeline-item:nth-child(2n)
       .v-timeline-item__body

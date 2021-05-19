@@ -74,7 +74,7 @@ export default defineComponent({
           'v-timeline',
           `v-timeline--${props.direction}`,
           {
-            'v-timeline--inset-line': props.lineInset,
+            'v-timeline--inset-line': !!props.lineInset,
           },
           sideClass.value,
           themeClasses.value,
@@ -82,7 +82,7 @@ export default defineComponent({
         ]}
         style={{
           '--v-timeline-line-thickness': convertToUnit(props.lineThickness),
-          '--v-timeline-line-inset': convertToUnit(props.lineInset ? props.lineInset : -5),
+          '--v-timeline-line-inset': convertToUnit(props.lineInset ?? 0),
         }}
       >
         { ctx.slots.default?.() }
