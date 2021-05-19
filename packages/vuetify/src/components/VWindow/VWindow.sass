@@ -1,4 +1,5 @@
-@import './_variables.scss'
+// Imports
+@import './index'
 
 .v-window
   overflow: hidden
@@ -42,9 +43,6 @@
   &--show-arrows-on-hover
     overflow: hidden
 
-    .v-window__next,
-    .v-window__prev
-      transition: .2s transform map-get($transition, 'swing')
 
     .v-window__prev
       +ltr()
