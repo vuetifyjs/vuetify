@@ -64,7 +64,7 @@ export default defineComponent({
           '--v-timeline-dot-size': convertToUnit(dotSize.value),
         }}
       >
-        <div class='v-timeline-item__body'>
+        <div class="v-timeline-item__body">
           { ctx.slots.default?.() }
         </div>
 
