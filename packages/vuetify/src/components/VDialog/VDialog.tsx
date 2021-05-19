@@ -1,7 +1,7 @@
 // Styles
 import './VDialog.sass'
 
-import { defineComponent, getCurrentInstance, mergeProps, reactive, ref, watch } from 'vue'
+import { defineComponent, mergeProps, ref, watch } from 'vue'
 import { VOverlay } from '@/components/VOverlay'
 
 // Helpers
@@ -19,7 +19,6 @@ export default defineComponent({
   name: 'VDialog',
 
   props: makeProps({
-    disabled: Boolean,
     fullscreen: Boolean,
     origin: {
       type: String,
@@ -39,24 +38,44 @@ export default defineComponent({
     const isActive = useProxiedModel(props, 'modelValue')
     const { dimensionStyles } = useDimension(props)
 
+    const overlay = ref<InstanceType<typeof VOverlay>>()
+    function onFocusin (e: FocusEvent) {
+      const before = e.relatedTarget as HTMLElement | null
+      const after = e.target as HTMLElement | null
+
+      if (
+        before !== after &&
+        overlay.value?.content &&
+        // It isn't the document or the dialog body
+        ![document, overlay.value.content].includes(after!) &&
+        // It isn't inside the dialog body
+        !overlay.value.content.contains(after)
+        // We're the topmost dialog
+        // TODO: this.activeZIndex >= this.getMaxZIndex() &&
+        // It isn't inside a dependent element (like a menu)
+        // TODO: !this.getOpenDependentElements().some(el => el.contains(target))
+        // So we must have focused something outside the dialog and its children
+      ) {
+        const focusable = [...overlay.value.content.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
+        const firstElement = focusable[0]
+        const lastElement = focusable[focusable.length - 1]
+
+        if (before === firstElement) {
+          lastElement.focus()
+        } else {
+          firstElement.focus()
+        }
+      }
+    }
+    watch(() => isActive.value && props.retainFocus, val => {
+      val
+        ? document.addEventListener('focusin', onFocusin)
+        : document.removeEventListener('focusin', onFocusin)
+    })
+
     const activatorElement = ref()
-
-    watch(activatorElement, () => {
-      // console.log(activatorElement.value.getBoundingClientRect())
-    })
-
-    // slots.activator?.({
-    //   isActive,
-    //   props: {
-    //     value: isActive.value,
-    //   },
-    // })
-
-    const vm = getCurrentInstance() as any
-    vm.setupState = reactive({
-      activatorElement,
-    })
-
     const activator = ({ props, ...data }: any) => {
       return slots.activator?.({
         ...data,
@@ -82,9 +101,17 @@ export default defineComponent({
       return (
         <VOverlay
           v-model={ isActive.value }
-          class='v-dialog'
+          class={[
+            'v-dialog',
+            {
+              'v-dialog--fullscreen': props.fullscreen,
+            },
+          ]}
           style={ dimensionStyles.value }
           transition={ transition }
+          ref={ overlay }
+          aria-role="dialog"
+          aria-modal="true"
           { ...attrs }
           v-slots={{
             default: slots.default,

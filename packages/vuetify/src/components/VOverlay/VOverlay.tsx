@@ -4,6 +4,7 @@ import './VOverlay.sass'
 import {
   computed,
   defineComponent,
+  nextTick,
   ref,
   Teleport,
   toRef,
@@ -11,7 +12,8 @@ import {
   watch,
   watchEffect,
 } from 'vue'
-import { BackgroundColorData, useBackgroundColor } from '@/composables/color'
+import type { BackgroundColorData } from '@/composables/color'
+import { useBackgroundColor } from '@/composables/color'
 import { makeProps } from '@/util/makeProps'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { provideTheme } from '@/composables/theme'
@@ -19,11 +21,8 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTeleport } from '@/composables/teleport'
 import { ClickOutside } from '@/directives/click-outside'
 
-import type {
-  Prop,
-  PropType,
-  Ref,
-} from 'vue'
+import type { Prop, PropType, Ref } from 'vue'
+import { convertToUnit, standardEasing, useRender } from '@/util'
 
 function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
   const isBooted = ref(eager.value)
@@ -36,54 +35,6 @@ function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
 
   return { isBooted }
 }
-
-// interface Overlay {
-//   vm: ComponentInternalInstance
-//   isActive: Ref<boolean>
-// }
-//
-// class OverlayManager {
-//   private static _instance?: OverlayManager
-//
-//   public static get Instance () {
-//     return this._instance || (this._instance = new this())
-//   }
-//
-//   components: ComponentInternalInstance[] = shallowReactive([])
-//   containerElement?: Element
-//
-//   private constructor () {
-//     window.addEventListener('fullscreenchange', this._updateContainerParent)
-//     this._createContainer()
-//
-//     watch(() => this.components.length, val => {
-//       if (!val) {
-//         this.containerElement?.remove()
-//         window.removeEventListener('fullscreenchange', this._updateContainerParent)
-//         OverlayManager._instance = undefined
-//       }
-//     })
-//   }
-//
-//   private _updateContainerParent () {
-//     if (this.containerElement) {
-//       (document.fullscreenElement || document.body).appendChild(this.containerElement)
-//     }
-//   }
-//
-//   private _createContainer () {
-//     const el = document.createElement('div')
-//     el.className = 'v-overlay-container'
-//     this.containerElement = el
-//     this._updateContainerParent()
-//   }
-//
-//   static use () {
-//     const vm = getCurrentInstance()!
-//
-//     this.Instance.components.push(vm)
-//   }
-// }
 
 const positionStrategies = [
   'global', // specific viewport position, usually centered
@@ -98,9 +49,9 @@ const scrollStrategies = [
 ] as const
 
 interface ScrimProps {
+  [key: string]: unknown
   modelValue: boolean
   color: BackgroundColorData
-  [ley: string]: unknown
 }
 function Scrim (props: ScrimProps) {
   const { modelValue, color, ...rest } = props
@@ -120,19 +71,46 @@ function Scrim (props: ScrimProps) {
   )
 }
 
-function getScrollParent (el?: HTMLElement) {
-  do {
-    if (hasScrollbar(el)) return el
-  } while (el = el?.parentElement!) // eslint-disable-line no-cond-assign
-
-  return document.scrollingElement as HTMLElement
+interface ScrollStrategy {
+  enable (): void
+  disable (): void
 }
 
-function hasScrollbar (el?: HTMLElement) {
-  if (!el || el.nodeType !== Node.ELEMENT_NODE) return false
+class CloseScrollStrategy implements ScrollStrategy {
+  constructor (
+    private isActive: Ref<boolean>
+  ) {}
 
-  const style = window.getComputedStyle(el)
-  return ['auto', 'scroll'].includes(style.overflowY!) && el.scrollHeight > el.clientHeight
+  enable () {
+    document.addEventListener('scroll', this.onScroll.bind(this), { passive: true })
+  }
+
+  disable () {
+    document.removeEventListener('scroll', this.onScroll.bind(this))
+  }
+
+  private onScroll () {
+    this.isActive.value = false
+  }
+}
+
+class BlockScrollStrategy implements ScrollStrategy {
+  private initialOverflow = ''
+
+  enable () {
+    const el = document.documentElement
+    this.initialOverflow = el.style.overflowY
+
+    el.style.paddingRight = convertToUnit(window.innerWidth - el.offsetWidth)
+
+    el.style.overflowY = 'hidden'
+  }
+
+  disable () {
+    document.documentElement.style.overflowY = this.initialOverflow
+
+    document.documentElement.style.paddingRight = ''
+  }
 }
 
 export default defineComponent({
@@ -179,41 +157,78 @@ export default defineComponent({
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
 
-    const contentEl = ref<HTMLElement>()
     function onClickOutside () {
       if (!props.persistent) isActive.value = false
-      else if (!props.noClickAnimation) {
-        contentEl.value?.animate([
-          { transformOrigin: 'center' },
-          { transform: 'scale(1.03)' },
-          { transformOrigin: 'center' },
-        ], {
-          duration: 150,
-          easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
-        })
+      else animateClick()
+    }
+    function closeConditional () {
+      return isActive.value
+    }
+
+    const activatorElement = ref<HTMLElement>()
+    function onActivatorClick (e: MouseEvent) {
+      activatorElement.value = (e.currentTarget || e.target) as HTMLElement
+      isActive.value = !isActive.value
+    }
+
+    function onKeydown (e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        if (!props.persistent) {
+          isActive.value = false
+        } else animateClick()
       }
+    }
+
+    const content = ref<HTMLElement>()
+    watch(isActive, val => {
+      nextTick(() => {
+        if (val) {
+          content.value?.focus()
+        } else {
+          activatorElement.value?.focus()
+        }
+      })
+    })
+
+    // Add a quick "bounce" animation to the content
+    function animateClick () {
+      if (props.noClickAnimation) return
+
+      content.value?.animate([
+        { transformOrigin: 'center' },
+        { transform: 'scale(1.03)' },
+        { transformOrigin: 'center' },
+      ], {
+        duration: 150,
+        easing: standardEasing,
+      })
     }
 
     function onAfterLeave () {
       if (!props.eager) isBooted.value = false
     }
 
-    const overlayRoot = ref<HTMLElement>()
-    const scrollParent = ref<HTMLElement>()
-    watch(isActive, val => {
-      if (val) scrollParent.value = getScrollParent(overlayRoot.value)
-      if (!scrollParent.value) return
-      scrollParent.value.style.overflow = val ? 'hidden' : ''
-    })
+    const scrollStrategy =
+      props.scrollStrategy === 'close' ? new CloseScrollStrategy(isActive)
+      : props.scrollStrategy === 'block' ? new BlockScrollStrategy()
+      : null
 
-    return () => (
+    if (scrollStrategy) {
+      watch(isActive, val => {
+        nextTick(() => {
+          val ? scrollStrategy.enable() : scrollStrategy.disable()
+        })
+      })
+    }
+
+    useRender(() => (
       <>
         { slots.activator?.({
           isActive: isActive.value,
           props: {
             modelValue: isActive.value,
             'onUpdate:modelValue': (val: boolean) => isActive.value = val,
-            onClick: () => isActive.value = !isActive.value,
+            onClick: onActivatorClick,
           },
         }) }
         <Teleport to={ teleportTarget.value } disabled={ !teleportTarget.value }>
@@ -227,7 +242,6 @@ export default defineComponent({
                 },
                 themeClasses.value,
               ]}
-              ref={ overlayRoot }
               {...attrs}
             >
               <Scrim
@@ -235,14 +249,26 @@ export default defineComponent({
                 color={ scrimColor }
               />
               <MaybeTransition transition={ props.transition } appear persisted onAfterLeave={ onAfterLeave }>
-                <div class="v-overlay__content" v-show={ isActive.value } v-click-outside={ onClickOutside } ref={ contentEl }>
-                  { slots.default?.({ isActive: isActive.value }) }
+                <div
+                  class="v-overlay__content"
+                  tabindex={ -1 }
+                  v-show={ isActive.value }
+                  v-click-outside={{ handler: onClickOutside, closeConditional }}
+                  ref={ content }
+                  onKeydown={ onKeydown }
+                >
+                  { slots.default?.({ isActive }) }
                 </div>
               </MaybeTransition>
             </div>
           )}
         </Teleport>
       </>
-    )
+    ))
+
+    return {
+      content,
+      animateClick,
+    }
   },
 })
