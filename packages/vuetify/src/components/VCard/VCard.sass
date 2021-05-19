@@ -2,6 +2,8 @@
 @import './index'
 
 .v-card
+  position: relative
+
   @include border($card-border...)
   @include elevation($card-elevation)
   @include position($card-positions)
@@ -68,6 +70,22 @@
     margin-right: 8px
     padding-left: 8px
     padding-right: 8px
+
+.v-card-image
+  border-radius: inherit
+  display: flex
+  height: 100%
+  left: 0
+  position: absolute
+  top: 0
+  width: 100%
+  z-index: -1
+
+  img
+    border-radius: inherit
+    height: inherit
+    object-fit: cover
+    width: inherit
 
 // Theme
 // +theme(v-card) using ($material)

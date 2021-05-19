@@ -1,6 +1,9 @@
 // Styles
 import './VCard.sass'
 
+// Components
+import { VImg } from '@/components'
+
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
@@ -73,10 +76,10 @@ export default defineComponent({
           ]}
         >
           { hasImage && (
-            <div class="v-card__img">
+            <div class="v-card-image">
               { slots.image
-                ? slots.image?.({ image: props.image })
-                : (<img src={ props.image } alt="" />)
+                ? slots.image?.({ src: props.image })
+                : (<img src={ props.image } />)
               }
             </div>
           ) }
