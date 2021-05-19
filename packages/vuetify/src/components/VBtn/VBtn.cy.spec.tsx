@@ -163,7 +163,7 @@ describe('VBtn', () => {
     })
   })
 
-  describe('loading', () => {
+  describe.skip('loading', () => {
     it('when using the loader slot, do not show the progress indicator', () => {
       cy.mount(() => (
         <VBtn loading v-slots={ { loader: () => <span>{ loadingText }</span> } } />
@@ -175,7 +175,7 @@ describe('VBtn', () => {
     })
 
     // custom loaders are not yet implemented
-    it.skip('when loading is true, show the progress indicator', () => {
+    it('when loading is true, show the progress indicator', () => {
       cy.mount(<VBtn loading>{ loadingText }</VBtn>)
         .get('button')
         .should('contain.text', loadingText)
@@ -276,8 +276,9 @@ describe('VBtn', () => {
   })
 })
 
-describe.skip('Showcase', () => {
+describe('Showcase', () => {
   describe('Examples', () => {
+    // throw new Error()
     byExample(stories)
   })
 
