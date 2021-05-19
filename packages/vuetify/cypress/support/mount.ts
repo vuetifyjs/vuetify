@@ -9,5 +9,13 @@ Cypress.Commands.add('mount', (component, options, vuetifyOptions) => {
     },
   }
 
-  return cyMount(component, { ...defaultOptions, ...options })
+  return cyMount(component, { ...defaultOptions, ...options }).as('wrapper')
+})
+
+Cypress.Commands.add('setProps', (wrapper, props = {}) => {
+  return cy.get('@wrapper').then(async (wrapper) => {
+    wrapper = wrapper || Cypress.vueWrapper
+    await wrapper.setProps(props)
+    return wrapper
+  })
 })

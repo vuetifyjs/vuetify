@@ -60,6 +60,7 @@ module.exports = {
         'jest/expect-expect': 'off',
         'jest/valid-expect': 'off',
         'jest/valid-expect-in-promise': 'off',
+        'jest/no-commented-out-tests': 'off',
         'no-unused-expressions': 'off',
       },
     },
