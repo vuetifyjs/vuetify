@@ -1,6 +1,5 @@
 // Types
-import type { ComponentPublicInstance, Prop } from 'vue'
-import type { TimelineDotAlignment, TimelineSide } from './VTimeline'
+import type { ComponentPublicInstance } from 'vue'
 
 // Components
 import { VTimelineSymbol } from './VTimeline'
@@ -10,20 +9,17 @@ import VTimelineDivider from './VTimelineDivider'
 import { makeTagProps } from '@/composables/tag'
 import { makeSizeProps } from '@/composables/size'
 import { makeElevationProps } from '@/composables/elevation'
+import { makeRoundedProps } from '@/composables/rounded'
 
 // Helpers
-import { computed, defineComponent, inject, onBeforeUnmount, ref, watch } from 'vue'
-import { convertToUnit, getUid, makeProps } from '@/util'
+import { defineComponent, inject, ref, watch } from 'vue'
+import { convertToUnit, makeProps } from '@/util'
 
 export default defineComponent({
   name: 'VTimelineItem',
 
   props: makeProps({
-    alignDot: {
-      type: String,
-      validator: (v: any) => v == null || ['start', 'end'].includes(v),
-    } as Prop<TimelineDotAlignment>,
-    color: {
+    dotColor: {
       type: String,
       default: 'primary',
     },
@@ -35,11 +31,7 @@ export default defineComponent({
     },
     icon: String,
     iconColor: String,
-    index: Number,
-    side: {
-      type: String,
-      validator: (v: any) => v == null || ['before', 'after'].includes(v),
-    } as Prop<TimelineSide>,
+    ...makeRoundedProps(),
     ...makeElevationProps(),
     ...makeSizeProps(),
     ...makeTagProps(),
@@ -50,97 +42,53 @@ export default defineComponent({
 
     if (!timeline) throw new Error('[Vuetify] Could not find v-timeline provider')
 
-    const id = getUid()
-
-    const { isEven } = timeline.register(id, props.index)
-
-    onBeforeUnmount(() => timeline.unregister(id))
-
-    const bodySide = computed(() => {
-      let side: string
-
-      if (timeline.density.value !== 'default') {
-        side = timeline.side.value ?? 'after'
-      } else {
-        side = timeline.side.value ?? props.side ?? (isEven.value ? 'after' : 'before')
-      }
-
-      if (side && timeline.mirror.value) side = side === 'before' ? 'after' : 'before'
-
-      return side
-    })
-
-    const oppositeSide = computed(() => bodySide.value === 'after' ? 'before' : 'after')
-
-    const hideOpposite = computed(() => props.hideOpposite ?? timeline.density.value === 'compact')
-
-    const body = computed(() => (
-      <div
-        key={`body-${bodySide.value}`}
-        class={[
-          'v-timeline-item__body',
-          `v-timeline-item--${bodySide.value}`
-        ]}
-      >
-        { ctx.slots.default?.() }
-      </div>
-    ))
-
-    const opposite = computed(() => !hideOpposite.value && (
-      <div
-        key={`opposite-${oppositeSide.value}`}
-        class={[
-          'v-timeline-item__opposite',
-          `v-timeline-item--${oppositeSide.value}`
-        ]}
-      >
-        { ctx.slots.opposite?.() }
-      </div>
-    ))
-
-    const before = computed(() => bodySide.value === 'before' ? body.value : opposite.value)
-    const after = computed(() => bodySide.value === 'before' ? opposite.value : body.value)
-
     const dotSize = ref(0)
     const dotRef = ref<ComponentPublicInstance>()
     watch(dotRef, newValue => {
       if (!newValue) return
-      dotSize.value = newValue.$el.querySelector('.v-timeline-item__dot')?.getBoundingClientRect().width
+      dotSize.value = newValue.$el.querySelector('.v-timeline-divider__dot')?.getBoundingClientRect().width
     }, {
       flush: 'post',
     })
 
-    return () => {
-      return (
-        <div
-          class={[
-            'v-timeline-item',
-            {
-              'v-timeline-item--fill-dot': props.fillDot,
-            }
-          ]}
-          style={{
-            // @ts-ignore
-            '--v-timeline-dot-size': convertToUnit(dotSize.value),
-          }}
-        >
-          { before.value }
-
-          <VTimelineDivider
-            ref={dotRef}
-            hideDot={props.hideDot}
-            icon={props.icon}
-            iconColor={props.iconColor}
-            alignDot={props.alignDot}
-            size={props.size}
-            elevation={props.elevation}
-            color={props.color}
-            v-slots={{ default: ctx.slots.icon }}
-          />
-
-          { after.value }
+    return () => (
+      <div
+        class={[
+          'v-timeline-item',
+          {
+            'v-timeline-item--fill-dot': props.fillDot,
+          },
+        ]}
+        style={{
+          // @ts-ignore
+          '--v-timeline-dot-size': convertToUnit(dotSize.value),
+        }}
+      >
+        <div class='v-timeline-item__body'>
+          { ctx.slots.default?.() }
         </div>
-      )
-    }
+
+        <VTimelineDivider
+          ref={dotRef}
+          hideDot={props.hideDot}
+          icon={props.icon}
+          iconColor={props.iconColor}
+          size={props.size}
+          elevation={props.elevation}
+          dotColor={props.dotColor}
+          fillDot={props.fillDot}
+          rounded={props.rounded}
+          v-slots={{ default: ctx.slots.icon }}
+        />
+
+        { timeline.density.value !== 'compact' && (
+          <div
+            class="v-timeline-item__opposite"
+          >
+            { !props.hideOpposite && ctx.slots.opposite?.() }
+          </div>
+        ) }
+      </div>
+    )
   },
 })

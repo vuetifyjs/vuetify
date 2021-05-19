@@ -4,36 +4,68 @@
 
 // Theme
 .v-timeline
-  .v-timeline-item__dot
+  .v-timeline-divider__dot
     background: rgb(var(--v-theme-surface))
 
 // Elements
 .v-timeline
   position: relative
   display: grid
+  grid-auto-flow: dense
 
   +horizontal(true)
     width: 100%
-    grid-template-rows: 1fr auto 1fr
-    grid-auto-columns: 1fr
+    grid-template-rows: auto min-content auto
+
+    .v-timeline-item__body, .v-timeline-item__opposite
+      +rtltr(padding-left, padding-right, calc((var(--v-timeline-dot-size) / 2) - 5px))
+
+    .v-timeline-item:nth-child(2n)
+      .v-timeline-item__body
+        grid-row: 3
+        padding-top: $timeline-item-padding
+      .v-timeline-item__opposite
+        grid-row: 1
+        padding-bottom: $timeline-item-padding
+
+    .v-timeline-item:nth-child(2n+1)
+      .v-timeline-item__body
+        grid-row: 1
+        padding-bottom: $timeline-item-padding
+      .v-timeline-item__opposite
+        grid-row: 3
+        padding-top: $timeline-item-padding
 
   +vertical(true)
     height: 100%
-    grid-template-columns: 1fr auto 1fr
-    grid-auto-rows: 1fr
+    grid-template-columns: auto min-content auto
+
+    .v-timeline-item__body, .v-timeline-item__opposite
+      padding-top: calc((var(--v-timeline-dot-size) / 2) - 10px)
+
+    .v-timeline-item:nth-child(2n)
+      .v-timeline-item__body
+        grid-column: 1
+        text-align: end
+        +rtltr(padding-right, padding-left, $timeline-item-padding)
+      .v-timeline-item__opposite
+        grid-column: 3
+        +rtltr(padding-left, padding-right, $timeline-item-padding)
+
+    .v-timeline-item:nth-child(2n+1)
+      .v-timeline-item__body
+        grid-column: 3
+        +rtltr(padding-left, padding-right, $timeline-item-padding)
+      .v-timeline-item__opposite
+        grid-column: 1
+        text-align: end
+        +rtltr(padding-right, padding-left, $timeline-item-padding)
 
 .v-timeline-item
   display: contents
 
-.v-timeline-item__line-wrapper
-  display: flex
-  justify-content: center
-  align-items: center
-  width: 100%
-  height: 100%
-
-.v-timeline-item__line
-  z-index: 0
+.v-timeline-divider__line
+  position: absolute
 
   +horizontal
     height: var(--v-timeline-line-thickness)
@@ -41,9 +73,30 @@
 
   +vertical
     width: var(--v-timeline-line-thickness)
-    height: calc(100% - var(--v-timeline-line-inset))
+    height: 100%
 
-.v-timeline-item__divider
+.v-timeline--inset-line
+  .v-timeline-divider__line
+    +vertical(true)
+      height: calc(100% - var(--v-timeline-dot-size) - var(--v-timeline-line-inset))
+      bottom: calc(var(--v-timeline-line-inset) / 2)
+
+    +horizontal(true)
+      width: calc(100% - var(--v-timeline-dot-size) - var(--v-timeline-line-inset))
+      +rtltr(right, left, calc(var(--v-timeline-line-inset) / 2))
+
+.v-timeline:not(.v-timeline--inset-line)
+  .v-timeline-item:first-child
+    .v-timeline-divider__line
+      +vertical(true)
+        height: calc(100% - (var(--v-timeline-dot-size) / 2))
+        bottom: 0
+
+      +horizontal(true)
+        width: calc(100% - (var(--v-timeline-dot-size) / 2))
+        +rtltr(right, left, 0)
+
+.v-timeline-divider
   position: relative
   display: flex
   align-items: center
@@ -56,9 +109,8 @@
     flex-direction: column
     grid-column: 2
 
-.v-timeline-item__dot
-  position: relative
-  z-index: 2
+.v-timeline-divider__dot
+  z-index: 1
   flex-shrink: 0
   border-radius: $timeline-dot-border-radius
   display: flex
@@ -71,11 +123,11 @@
       height: map-get($timeline-dot-sizes, $name)
       width: map-get($timeline-dot-sizes, $name)
 
-      .v-timeline-item__inner-dot
+      .v-timeline-divider__inner-dot
         height: calc(100% - #{map-get($timeline-dot-border-sizes, $name)})
         width: calc(100% - #{map-get($timeline-dot-border-sizes, $name)})
 
-.v-timeline-item__inner-dot
+.v-timeline-divider__inner-dot
   border-radius: $timeline-dot-border-radius
   display: flex
   justify-content: center
@@ -88,89 +140,85 @@
   +horizontal(true)
     height: 100%
 
-    &.v-timeline--after
-      grid-template-rows: min-content auto 1fr
+    &.v-timeline--side-after
+      grid-template-rows: min-content min-content auto
 
-    &.v-timeline--before
-      grid-template-rows: 1fr auto min-content
+    &.v-timeline--side-before
+      grid-template-rows: auto min-content min-content
 
   +vertical(true)
     width: 100%
 
-    &.v-timeline--after
-      grid-template-columns: min-content auto 1fr
+    &.v-timeline--side-after
+      grid-template-columns: min-content min-content auto
 
-    &.v-timeline--before
-      grid-template-columns: 1fr auto min-content
+    &.v-timeline--side-before
+      grid-template-columns: auto min-content min-content
 
 .v-timeline--density-compact
   +horizontal(true)
-    &.v-timeline--after
-      grid-template-rows: auto 1fr
-    &.v-timeline--before
-      grid-template-rows: 1fr auto
+    &.v-timeline--side-after
+      grid-template-rows: min-content auto
+    &.v-timeline--side-before
+      grid-template-rows: auto min-content
+
+    .v-timeline-item__body
+      grid-row: 1
 
   +vertical(true)
-    &.v-timeline--after
-      grid-template-columns: auto 1fr
-    &.v-timeline--before
-      grid-template-columns: 1fr auto
+    &.v-timeline--side-after
+      grid-template-columns: min-content auto
+    &.v-timeline--side-before
+      grid-template-columns: auto min-content
 
-// Side alignment
-.v-timeline-item--before
-  +horizontal
-    padding-bottom: $timeline-item-padding
-    grid-row: 1
+    .v-timeline-item__body
+      grid-column: 3
 
-    +rtltr(padding-left, padding-right, calc(#{var(--v-timeline-dot-size) / 4}))
+// Side
+.v-timeline.v-timeline--side-after
+  .v-timeline-item
+    +horizontal(true)
+      .v-timeline-item__body
+        grid-row: 3
+        padding-top: $timeline-item-padding
+        padding-bottom: initial
+      .v-timeline-item__opposite
+        padding-bottom: $timeline-item-padding
+        padding-top: initial
+        grid-row: 1
 
-  +vertical
-    padding-bottom: $timeline-item-padding
-    padding-top: calc(#{var(--v-timeline-dot-size) / 4})
-    grid-column: 1
+    +vertical(true)
+      .v-timeline-item__body
+        grid-column: 3
+        text-align: initial
+        +rtltr(padding-left, padding-right, $timeline-item-padding)
+      .v-timeline-item__opposite
+        grid-column: 1
+        +rtltr(padding-right, padding-left, $timeline-item-padding)
 
-    +rtltr(padding-right, padding-left, $timeline-item-padding)
+.v-timeline.v-timeline--side-before
+  .v-timeline-item
+    +horizontal(true)
+      .v-timeline-item__body
+        grid-row: 1
+        padding-bottom: $timeline-item-padding
+        padding-top: initial
+      .v-timeline-item__opposite
+        grid-row: 3
+        padding-top: $timeline-item-padding
+        padding-bottom: initial
 
-.v-timeline-item--after
-  +horizontal
-    padding-top: $timeline-item-padding
-    // padding-left: calc(#{var(--v-timeline-dot-size) / 4})
-    grid-row: 3
+    +vertical(true)
+      .v-timeline-item__body
+        grid-column: 1
+        text-align: end
+        +rtltr(padding-right, padding-left, $timeline-item-padding)
+      .v-timeline-item__opposite
+        grid-column: 3
+        +rtltr(padding-left, padding-right, $timeline-item-padding)
 
-    +rtltr(padding-left, padding-right, calc(#{var(--v-timeline-dot-size) / 4}))
-
-  +vertical
-    padding-bottom: $timeline-item-padding
-    padding-top: calc(#{var(--v-timeline-dot-size) / 4})
-    grid-column: 3
-
-    +rtltr(padding-left, padding-right, $timeline-item-padding)
-
-.v-timeline-item--align-dot-start
-  .v-timeline-item__opposite
-    align-self: flex-start
-
-  +vertical
-    .v-timeline-item__divider
-      align-items: flex-start
-
-  +horizontal
-    .v-timeline-item__divider
-      justify-content: flex-start
-
-.v-timeline-item--align-dot-end
-  .v-timeline-item__opposite
-    align-self: flex-end
-
-  +vertical
-    .v-timeline-item__divider
-      align-items: flex-end
-
-  +horizontal
-    .v-timeline-item__divider
-      justify-content: flex-end
-
-.v-timeline-item--fill-dot
-  .v-timeline-item__inner-dot
+// Fill dot
+.v-timeline-divider--fill-dot
+  .v-timeline-divider__inner-dot
     height: inherit
     width: inherit
