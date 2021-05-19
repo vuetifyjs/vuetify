@@ -2,7 +2,7 @@
 import './VCard.sass'
 
 // Components
-import { VCardActions, VCardImg, VCardSubtitle, VCardText, VCardTitle } from '..'
+import { VCardActions, VCardImg, VCardSubtitle, VCardText, VCardTitle } from './'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
