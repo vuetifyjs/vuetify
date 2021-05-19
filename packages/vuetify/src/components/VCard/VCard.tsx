@@ -2,7 +2,7 @@
 import './VCard.sass'
 
 // Components
-import { VImg } from '@/components'
+import { VCardActions, VCardImg, VCardSubtitle, VCardText, VCardTitle } from '..'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -76,30 +76,30 @@ export default defineComponent({
           ]}
         >
           { hasImage && (
-            <div class="v-card-image">
+            <VCardImg>
               { slots.image
                 ? slots.image?.({ src: props.image })
                 : (<img src={ props.image } />)
               }
-            </div>
+            </VCardImg>
           ) }
 
           { props.title && (
-            <div class="v-card-title">{props.title}</div>
+            <VCardTitle>{props.title}</VCardTitle>
           ) }
 
           { props.subtitle && (
-            <div class="v-card-subtitle">{props.subtitle}</div>
+            <VCardSubtitle>{props.subtitle}</VCardSubtitle>
           ) }
 
           { props.text && (
-            <div class="v-card-text">{props.text}</div>
+            <VCardText>{props.text}</VCardText>
           ) }
 
           { slots.default?.() }
 
           { slots.actions && (
-            <div class="v-card-actions">{slots.actions()}</div>
+            <VCardActions>{slots.actions()}</VCardActions>
           ) }
         </props.tag>
       )

@@ -1,1 +1,6 @@
 export { default as VCard } from './VCard'
+export { default as VCardActions } from './VCardActions'
+export { default as VCardImg } from './VCardImg'
+export { default as VCardSubtitle } from './VCardSubtitle'
+export { default as VCardText } from './VCardText'
+export { default as VCardTitle } from './VCardTitle'
