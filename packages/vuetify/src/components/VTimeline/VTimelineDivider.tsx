@@ -49,7 +49,7 @@ export default defineComponent({
           'v-timeline-divider',
           {
             'v-timeline-divider--fill-dot': props.fillDot,
-          }
+          },
         ]}
       >
         { !props.hideDot && (

@@ -1,120 +1,132 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VTimeline should match snapshot 1`] = `
-<div class="v-timeline v-timeline--vertical">
-  <div class="v-timeline-item v-timeline-item--before">
-    <div class="v-timeline-item__wrapper">
-      <div class="v-timeline-item__body">
-        item content
-      </div>
-      <div class="v-timeline-item__divider">
-        <div class="v-timeline-item__dot v-timeline-item__dot--size-default">
-          <div class="v-timeline-item__inner-dot bg-primary">
-          </div>
+<div class="v-timeline v-timeline--vertical v-theme--light v-timeline--density-default">
+  <div class="v-timeline-item">
+    <div class="v-timeline-item__body">
+      item content
+    </div>
+    <div class="v-timeline-divider">
+      <div class="v-timeline-divider__dot v-timeline-divider__dot--size-default">
+        <div class="v-timeline-divider__inner-dot bg-primary">
         </div>
       </div>
+      <div class="v-timeline-divider__line bg-secondary">
+      </div>
+    </div>
+    <div class="v-timeline-item__opposite">
     </div>
   </div>
 </div>
 `;
 
 exports[`VTimeline should render icon slot 1`] = `
-<div class="v-timeline v-timeline--vertical">
-  <div class="v-timeline-item v-timeline-item--before">
-    <div class="v-timeline-item__wrapper">
-      <div class="v-timeline-item__body">
-        item content
-      </div>
-      <div class="v-timeline-item__divider">
-        <div class="v-timeline-item__dot v-timeline-item__dot--size-default">
-          <div class="v-timeline-item__inner-dot bg-primary">
-            icon
-          </div>
+<div class="v-timeline v-timeline--vertical v-theme--light v-timeline--density-default">
+  <div class="v-timeline-item">
+    <div class="v-timeline-item__body">
+      item content
+    </div>
+    <div class="v-timeline-divider">
+      <div class="v-timeline-divider__dot v-timeline-divider__dot--size-default">
+        <div class="v-timeline-divider__inner-dot bg-primary">
+          icon
         </div>
       </div>
+      <div class="v-timeline-divider__line bg-secondary">
+      </div>
+    </div>
+    <div class="v-timeline-item__opposite">
     </div>
   </div>
 </div>
 `;
 
 exports[`VTimeline should render in horizontal direction 1`] = `
-<div class="v-timeline v-timeline--horizontal">
-  <div class="v-timeline-item v-timeline-item--before">
-    <div class="v-timeline-item__wrapper">
-      <div class="v-timeline-item__body">
-        item content
-      </div>
-      <div class="v-timeline-item__divider">
-        <div class="v-timeline-item__dot v-timeline-item__dot--size-default">
-          <div class="v-timeline-item__inner-dot bg-primary">
-          </div>
+<div class="v-timeline v-timeline--horizontal v-theme--light v-timeline--density-default">
+  <div class="v-timeline-item">
+    <div class="v-timeline-item__body">
+      item content
+    </div>
+    <div class="v-timeline-divider">
+      <div class="v-timeline-divider__dot v-timeline-divider__dot--size-default">
+        <div class="v-timeline-divider__inner-dot bg-primary">
         </div>
       </div>
+      <div class="v-timeline-divider__line bg-secondary">
+      </div>
+    </div>
+    <div class="v-timeline-item__opposite">
     </div>
   </div>
 </div>
 `;
 
 exports[`VTimeline should render opposite slot 1`] = `
-<div class="v-timeline v-timeline--vertical">
-  <div class="v-timeline-item v-timeline-item--before">
-    <div class="v-timeline-item__wrapper">
-      <div class="v-timeline-item__body">
-        item content
-      </div>
-      <div class="v-timeline-item__divider">
-        <div class="v-timeline-item__dot v-timeline-item__dot--size-default">
-          <div class="v-timeline-item__inner-dot bg-primary">
-          </div>
+<div class="v-timeline v-timeline--vertical v-theme--light v-timeline--density-default">
+  <div class="v-timeline-item">
+    <div class="v-timeline-item__body">
+      item content
+    </div>
+    <div class="v-timeline-divider">
+      <div class="v-timeline-divider__dot v-timeline-divider__dot--size-default">
+        <div class="v-timeline-divider__inner-dot bg-primary">
         </div>
       </div>
-      <div class="v-timeline-item__opposite">
-        opposite
+      <div class="v-timeline-divider__line bg-secondary">
       </div>
+    </div>
+    <div class="v-timeline-item__opposite">
+      opposite
     </div>
   </div>
 </div>
 `;
 
 exports[`VTimeline should show all items on single side 1`] = `
-<div class="v-timeline v-timeline--vertical v-timeline--single-side">
-  <div class="v-timeline-item v-timeline-item--after">
-    <div class="v-timeline-item__wrapper">
-      <div class="v-timeline-item__body">
-        item content
-      </div>
-      <div class="v-timeline-item__divider">
-        <div class="v-timeline-item__dot v-timeline-item__dot--size-default">
-          <div class="v-timeline-item__inner-dot bg-primary">
-          </div>
+<div class="v-timeline v-timeline--vertical v-timeline--side-after v-theme--light v-timeline--density-default">
+  <div class="v-timeline-item">
+    <div class="v-timeline-item__body">
+      item content
+    </div>
+    <div class="v-timeline-divider">
+      <div class="v-timeline-divider__dot v-timeline-divider__dot--size-default">
+        <div class="v-timeline-divider__inner-dot bg-primary">
         </div>
+      </div>
+      <div class="v-timeline-divider__line bg-secondary">
       </div>
     </div>
-  </div>
-  <div class="v-timeline-item v-timeline-item--after">
-    <div class="v-timeline-item__wrapper">
-      <div class="v-timeline-item__body">
-        item content
-      </div>
-      <div class="v-timeline-item__divider">
-        <div class="v-timeline-item__dot v-timeline-item__dot--size-default">
-          <div class="v-timeline-item__inner-dot bg-primary">
-          </div>
-        </div>
-      </div>
+    <div class="v-timeline-item__opposite">
     </div>
   </div>
-  <div class="v-timeline-item v-timeline-item--after">
-    <div class="v-timeline-item__wrapper">
-      <div class="v-timeline-item__body">
-        item content
-      </div>
-      <div class="v-timeline-item__divider">
-        <div class="v-timeline-item__dot v-timeline-item__dot--size-default">
-          <div class="v-timeline-item__inner-dot bg-primary">
-          </div>
+  <div class="v-timeline-item">
+    <div class="v-timeline-item__body">
+      item content
+    </div>
+    <div class="v-timeline-divider">
+      <div class="v-timeline-divider__dot v-timeline-divider__dot--size-default">
+        <div class="v-timeline-divider__inner-dot bg-primary">
         </div>
       </div>
+      <div class="v-timeline-divider__line bg-secondary">
+      </div>
+    </div>
+    <div class="v-timeline-item__opposite">
+    </div>
+  </div>
+  <div class="v-timeline-item">
+    <div class="v-timeline-item__body">
+      item content
+    </div>
+    <div class="v-timeline-divider">
+      <div class="v-timeline-divider__dot v-timeline-divider__dot--size-default">
+        <div class="v-timeline-divider__inner-dot bg-primary">
+        </div>
+      </div>
+      <div class="v-timeline-divider__line bg-secondary">
+      </div>
+    </div>
+    <div class="v-timeline-item__opposite">
     </div>
   </div>
 </div>
