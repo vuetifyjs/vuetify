@@ -26,7 +26,7 @@ const stories = {
   'Small success button': <VBtn color="success" size="small">Completed!</VBtn>,
   'Large, plain button w/ error': <VBtn color="error" plain size="large">Whoops</VBtn>,
   'Loading button': <VBtn loading v-slot={ { loader: <span>Loading...</span> } }></VBtn>,
-  'Icon': <VBtn icon color="pink"></VBtn>
+  Icon: <VBtn icon color="pink"></VBtn>,
 }
 
 describe('VBtn', () => {
@@ -85,13 +85,12 @@ describe('VBtn', () => {
   })
 
   describe('elevation', () => {
-    it('should have the correct elevation', async () => {
+    it('should have the correct elevation', () => {
       cy.mount(<VBtn elevation={ 24 } />)
         .get('button')
         .should('have.class', 'elevation-24')
     })
   })
-
 
   describe('events', () => {
     it('emits native click events', () => {
@@ -292,7 +291,6 @@ describe.skip('Showcase', () => {
   * They need to be reimplemented.
   * Some of this functionality may currently be broken
   */
-
 
 describe.skip('router', () => {
   // it('should toggle on route change if provided a to prop', async () => {
