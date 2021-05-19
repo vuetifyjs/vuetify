@@ -18,6 +18,7 @@ const props = {
   disabled: false,
   plain: false,
   loading: false,
+  icon: true,
 }
 
 const stories = {
@@ -25,6 +26,7 @@ const stories = {
   'Small success button': <VBtn color="success" size="small">Completed!</VBtn>,
   'Large, plain button w/ error': <VBtn color="error" plain size="large">Whoops</VBtn>,
   'Loading button': <VBtn loading v-slot={ { loader: <span>Loading...</span> } }></VBtn>,
+  'Icon': <VBtn icon color="pink"></VBtn>
 }
 
 describe('VBtn', () => {
@@ -49,6 +51,21 @@ describe('VBtn', () => {
     })
   })
 
+  describe('icons', () => {
+    it('adds the icon class when true', () => {
+      cy.mount(<VBtn icon></VBtn>)
+        .get('button')
+        .should('have.class', 'v-btn--icon')
+    })
+
+    it('renders an icon inside', () => {
+      // TODO: Render VIcon instead of emoji
+      cy.mount(<VBtn icon><span style="font-size: 1.5rem;">🐻</span></VBtn>)
+        .get('button')
+        .should('have.text', '🐻')
+    })
+  })
+
   describe('plain', () => {
     it('should have the plain class when plain prop is set to true', () => {
       cy.mount(<VBtn plain>Plain</VBtn>)
@@ -67,6 +84,15 @@ describe('VBtn', () => {
     })
   })
 
+  describe('elevation', () => {
+    it('should have the correct elevation', async () => {
+      cy.mount(<VBtn elevation={ 24 } />)
+        .get('button')
+        .should('have.class', 'elevation-24')
+    })
+  })
+
+
   describe('events', () => {
     it('emits native click events', () => {
       const click = cy.stub().as('click')
@@ -80,7 +106,7 @@ describe('VBtn', () => {
         .should('have.been.called', 2)
     })
 
-    // Pending test
+    // Pending test, is "toggle" even going to be emitted anymore?
     it.skip('emits toggle when used within a button group', () => {
       // const register = jest.fn()
       // const unregister = jest.fn()
@@ -187,6 +213,21 @@ describe('VBtn', () => {
     })
   })
 
+  describe.skip('value', () => {
+    // none of the "value" props are implemented yet
+    it('should stringify non string|number values', () => {
+      const objectValue = { value: { hello: 'world' } }
+      const numberValue = { value: 2 }
+
+      cy.mount(<VBtn value={ objectValue }></VBtn>)
+        .get('button')
+        .should('contain.text', JSON.stringify(objectValue, null, 0))
+        .mount(<VBtn value={ numberValue } />)
+        .get('button')
+        .should('contain.text', numberValue.value)
+    })
+  })
+
   // I think there's an issue with setProps,
   // _or_ the prod code isn't working
   describe.skip('Reactivity', () => {
@@ -252,82 +293,34 @@ describe.skip('Showcase', () => {
   * Some of this functionality may currently be broken
   */
 
-// describe.skip('elevation', () => {
-// it('should have the correct elevation', async () => {
-//   const wrapper = mountFunction()
 
-//   wrapper.setProps({ disabled: true })
-//   expect(wrapper.classes('elevation-2')).toBe(false)
-//   expect(wrapper.classes('v-btn--disabled')).toBe(true)
+describe.skip('router', () => {
+  // it('should toggle on route change if provided a to prop', async () => {
+  //   const toggle = jest.fn()
+  //   const register = jest.fn()
+  //   const unregister = jest.fn()
+  //   const wrapper = mountFunction({
+  //     provide: {
+  //       btnToggle: {
+  //         activeClass: 'foobar',
+  //         register,
+  //         unregister,
+  //       },
+  //     },
+  //     methods: { toggle },
+  //     ref: 'link',
+  //   })
 
-//   wrapper.setProps({ disabled: false, elevation: 24 })
-//   expect(wrapper.classes('elevation-24')).toBe(true)
+  //   router.push('/foobar')
 
-//   wrapper.setProps({ elevation: 2 })
-//   expect(wrapper.classes('elevation-2')).toBe(true)
-// })
-// })
+  //   await wrapper.vm.$nextTick()
+  //   expect(toggle).not.toHaveBeenCalled()
 
-// describe.skip('router', () => {
-// it('should toggle on route change if provided a to prop', async () => {
-//   const toggle = jest.fn()
-//   const register = jest.fn()
-//   const unregister = jest.fn()
-//   const wrapper = mountFunction({
-//     provide: {
-//       btnToggle: {
-//         activeClass: 'foobar',
-//         register,
-//         unregister,
-//       },
-//     },
-//     methods: { toggle },
-//     ref: 'link',
-//   })
+  //   wrapper.setProps({ to: 'fizzbuzz' })
 
-//   router.push('/foobar')
+  //   router.push('/fizzbuzz')
 
-//   await wrapper.vm.$nextTick()
-//   expect(toggle).not.toHaveBeenCalled()
-
-//   wrapper.setProps({ to: 'fizzbuzz' })
-
-//   router.push('/fizzbuzz')
-
-//   await wrapper.vm.$nextTick()
-//   expect(toggle).toHaveBeenCalled()
-// })
-// })
-
-// describe.skip('value', () => {
-// it('should stringify non string|number values', () => {
-//   const wrapper = mountFunction({
-//     propsData: {
-//       value: 'foo',
-//     },
-//   })
-
-//   expect(wrapper.attributes('value')).toBe('foo')
-
-//   wrapper.setProps({ value: 2 })
-//   expect(wrapper.attributes('value')).toBe('2')
-
-//   wrapper.setProps({ value: { foo: 'bar' } })
-//   expect(wrapper.attributes('value')).toBe('{"foo":"bar"}')
-// })
-// })
-
-// describe.skip('icons', () => {
-// it('should have the correct icon classes', () => {
-//   const wrapper = mountFunction({
-//     propsData: {
-//       icon: true,
-//     },
-//   })
-//   expect(wrapper.classes('v-btn--icon')).toBe(true)
-
-//   wrapper.setProps({ icon: false })
-
-//   expect(wrapper.classes('v-btn--icon')).toBe(false)
-// })
-// })
+  //   await wrapper.vm.$nextTick()
+  //   expect(toggle).toHaveBeenCalled()
+  // })
+})
