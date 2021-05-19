@@ -1,12 +1,13 @@
 // Styles
 import './VResponsive.sass'
 
+// Composables
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+
 // Utilities
 import { computed, defineComponent } from 'vue'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeProps } from '@/util'
 
-// Composables
 export function useAspectStyles (props: { aspectRatio?: string | number }) {
   return {
     aspectStyles: computed(() => {
@@ -36,7 +37,9 @@ export default defineComponent({
       <div class="v-responsive" style={ dimensionStyles.value }>
         <div class="v-responsive__sizer" style={ aspectStyles.value } />
         { slots.additional?.() }
-        <div class={['v-responsive__content', props.contentClass]}>{ slots.default?.() }</div>
+        { slots.default && (
+          <div class={['v-responsive__content', props.contentClass]}>{ slots.default() }</div>
+        )}
       </div>
     )
   },

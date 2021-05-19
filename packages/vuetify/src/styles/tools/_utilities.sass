@@ -28,14 +28,13 @@
           @error 'Only RTL and LTR are supported'
     @else
       @if $forceDir == 'ltr'
-        .v-application--is-ltr
+        .v-locale--is-ltr
           +generate-utility-body($utility, $properties, $value, $infix)
       @else if $forceDir == 'rtl'
-        .v-application--is-rtl
+        .v-locale--is-rtl
           +generate-utility-body($utility, $properties, $value, $infix)
       @else
-        .v-application
-          +generate-utility-body($utility, $properties, $value, $infix)
+        +generate-utility-body($utility, $properties, $value, $infix)
 
 =generate-utility-body($utility, $properties, $value, $infix)
   // Use custom class if present

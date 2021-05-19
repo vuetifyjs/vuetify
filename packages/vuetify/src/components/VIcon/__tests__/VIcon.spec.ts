@@ -1,5 +1,5 @@
 // Components
-import { VIcon } from '../'
+import { VIcon } from '..'
 
 // Utilities
 import { mount } from '@vue/test-utils'
@@ -62,12 +62,6 @@ describe('VIcon', () => {
   //   expect(wrapper.element.classList).toContain('green--text')
   //   expect(wrapper.element.classList).toContain('text--lighten-1')
   // })
-
-  it('should render a disabled component', () => {
-    const wrapper = mount(VIcon, { props: { icon: 'mdi-add', disabled: true }, global: globalOptions })
-
-    expect(wrapper.element.classList).toContain('v-icon--disabled')
-  })
 
   it('should use default size if none provided', () => {
     const wrapper = mount(VIcon, { props: { icon: 'mdi-add' }, global: globalOptions })

@@ -1,5 +1,5 @@
 // Components
-import VResponsive from '../VResponsive'
+import { VResponsive } from '..'
 
 // Utilities
 import { h } from 'vue'

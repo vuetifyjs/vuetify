@@ -33,7 +33,7 @@ export default defineComponent({
       type: [Number, String],
       default: 72,
     },
-    src: String,
+    image: String,
     temporary: Boolean,
     width: {
       type: [Number, String],
@@ -86,7 +86,7 @@ export default defineComponent({
     })
 
     return () => {
-      const hasImg = (slots.img || props.src)
+      const hasImage = (slots.image || props.image)
       const translate = (
         (!props.permanent && !isActive.value ? 105 : 0) *
         (!props.right && !props.bottom ? -1 : 1)
@@ -122,11 +122,11 @@ export default defineComponent({
             },
           ]}
         >
-          { hasImg && (
+          { hasImage && (
             <div class="v-navigation-drawer__img">
-              { slots.img
-                ? slots.img?.({ src: props.src })
-                : (<img src={ props.src } alt="" />)
+              { slots.image
+                ? slots.image?.({ image: props.image })
+                : (<img src={ props.image } alt="" />)
               }
             </div>
           )}

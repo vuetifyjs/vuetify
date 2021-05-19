@@ -17,12 +17,7 @@
 
     computed: {
       ads () {
-        return this.all.filter(({ metadata }) => {
-          return (
-            metadata.free &&
-            (!metadata.sponsored || metadata.discoverable)
-          )
-        })
+        return this.all.filter(ad => ad.metadata.discoverable)
       },
     },
   }

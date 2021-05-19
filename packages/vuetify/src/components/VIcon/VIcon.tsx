@@ -20,7 +20,6 @@ export default defineComponent({
 
   props: makeProps({
     color: String,
-    disabled: Boolean,
     left: Boolean,
     right: Boolean,
     icon: {
@@ -58,7 +57,6 @@ export default defineComponent({
             sizeClasses.value,
             textColorClasses.value,
             {
-              'v-icon--disabled': props.disabled,
               'v-icon--left': props.left,
               'v-icon--right': props.right,
             },

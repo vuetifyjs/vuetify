@@ -1,5 +1,5 @@
 // Components
-import VDivider from '../VDivider'
+import { VDivider } from '..'
 
 // Utilities
 import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'

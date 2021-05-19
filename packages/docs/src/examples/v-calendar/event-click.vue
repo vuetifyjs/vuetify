@@ -174,14 +174,12 @@
         const open = () => {
           this.selectedEvent = event
           this.selectedElement = nativeEvent.target
-          setTimeout(() => {
-            this.selectedOpen = true
-          }, 10)
+          requestAnimationFrame(() => requestAnimationFrame(() => this.selectedOpen = true))
         }
 
         if (this.selectedOpen) {
           this.selectedOpen = false
-          setTimeout(open, 10)
+          requestAnimationFrame(() => requestAnimationFrame(() => open()))
         } else {
           open()
         }

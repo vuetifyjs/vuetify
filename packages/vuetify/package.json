@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.0.0-alpha.3",
+  "version": "3.0.0-alpha.4",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -60,16 +60,21 @@
     "test:coverage": "yarn test --coverage",
     "test:types": "tsc -p ./types/test/tsconfig.json",
     "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
-    "lint:fix": "concurrently -n \"tsc,eslint\" \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\""
+    "lint:fix": "concurrently -n \"tsc,eslint\" \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\"",
+    "cy:open": "cypress open-ct",
+    "cy:run": "cypress run-ct"
   },
   "devDependencies": {
+    "@cypress/vue": "^3.0.1",
+    "@cypress/webpack-dev-server": "1.1.5",
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/vue-fontawesome": "^3.0.0-3",
     "@mdi/font": "^5.9.55",
     "@types/jest": "^26.0.14",
     "@types/node": "^14.11.10",
-    "@vue/babel-plugin-jsx": "^1.0.3",
+    "@types/resize-observer-browser": "^0.1.5",
+    "@vue/babel-plugin-jsx": "^1.0.6",
     "@vue/test-utils": "2.0.0-beta.13",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",
@@ -79,12 +84,14 @@
     "babel-polyfill": "^6.26.0",
     "concurrently": "^4.1.1",
     "cssnano": "^4.1.10",
+    "cypress": "7.2.0",
     "deepmerge": "^4.2.2",
     "dotenv": "^8.0.0",
     "eslint-plugin-jest": "^24.1.0",
     "file-loader": "^6.1.1",
     "fork-ts-checker-webpack-plugin": "^5.2.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
+    "html-webpack-plugin": "5.3.1",
     "identity-obj-proxy": "^3.0.0",
     "jest-canvas-mock": "^2.3.0",
     "mini-css-extract-plugin": "^1.1.2",

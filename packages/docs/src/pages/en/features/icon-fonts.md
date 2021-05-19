@@ -362,6 +362,8 @@ app.mount('#app')
 </template>
 ```
 
+<vuetify-ad slug="enterprise-support-through-tidelift" />
+
 ## Creating a custom icon set
 
 An icon set consists of an object with one property `component` which should be a functional component that receives props of type `IconsProps`.

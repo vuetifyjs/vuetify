@@ -18,8 +18,6 @@ exports[`VImg should display error slot 1`] = `
       </div>
     </div>
   </transition-stub>
-  <div class="v-responsive__content">
-  </div>
 </div>
 `;
 
@@ -44,8 +42,6 @@ exports[`VImg should display placeholders 1`] = `
       </div>
     </div>
   </transition-stub>
-  <div class="v-responsive__content">
-  </div>
 </div>
 `;
 
@@ -62,8 +58,6 @@ exports[`VImg should display placeholders 2`] = `
   </transition-stub>
   <transition-stub>
   </transition-stub>
-  <div class="v-responsive__content">
-  </div>
 </div>
 `;
 
@@ -81,8 +75,6 @@ exports[`VImg should have aria attributes 1`] = `
   </transition-stub>
   <transition-stub>
   </transition-stub>
-  <div class="v-responsive__content">
-  </div>
 </div>
 `;
 
@@ -97,8 +89,6 @@ exports[`VImg should load 1`] = `
   </transition-stub>
   <transition-stub>
   </transition-stub>
-  <div class="v-responsive__content">
-  </div>
 </div>
 `;
 
@@ -113,8 +103,6 @@ exports[`VImg should load 2`] = `
   </transition-stub>
   <transition-stub>
   </transition-stub>
-  <div class="v-responsive__content">
-  </div>
 </div>
 `;
 
@@ -134,8 +122,6 @@ exports[`VImg should override vuetify-loader values 1`] = `
          alt
     >
   </transition-stub>
-  <div class="v-responsive__content">
-  </div>
 </div>
 `;
 
@@ -153,8 +139,6 @@ exports[`VImg should render a <picture> 1`] = `
   </transition-stub>
   <transition-stub>
   </transition-stub>
-  <div class="v-responsive__content">
-  </div>
 </div>
 `;
 
@@ -169,8 +153,6 @@ exports[`VImg should update src 1`] = `
   </transition-stub>
   <transition-stub>
   </transition-stub>
-  <div class="v-responsive__content">
-  </div>
 </div>
 `;
 
@@ -185,8 +167,6 @@ exports[`VImg should update src 2`] = `
   </transition-stub>
   <transition-stub>
   </transition-stub>
-  <div class="v-responsive__content">
-  </div>
 </div>
 `;
 
@@ -201,8 +181,6 @@ exports[`VImg should update src while still loading 1`] = `
   </transition-stub>
   <transition-stub>
   </transition-stub>
-  <div class="v-responsive__content">
-  </div>
 </div>
 `;
 
@@ -217,8 +195,6 @@ exports[`VImg should update src while still loading 2`] = `
   </transition-stub>
   <transition-stub>
   </transition-stub>
-  <div class="v-responsive__content">
-  </div>
 </div>
 `;
 
@@ -238,7 +214,5 @@ exports[`VImg should use vuetify-loader data 1`] = `
          alt
     >
   </transition-stub>
-  <div class="v-responsive__content">
-  </div>
 </div>
 `;

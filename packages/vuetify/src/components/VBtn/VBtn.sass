@@ -15,10 +15,12 @@
   text-decoration: none
   text-indent: $button-text-letter-spacing
   text-transform: $button-text-transform
-  transition-property: box-shadow, transform, opacity
-  transition: 0.28s $standard-easing
+  transition-property: box-shadow, transform, opacity, color
+  transition-duration: 0.28s
+  transition-timing-function: $standard-easing
   user-select: none
   vertical-align: $button-vertical-align
+  flex-shrink: 0
 
   @at-root
     +button-sizes()
@@ -79,6 +81,14 @@
         // so we need to divide it to get the desired value
         opacity: ($button-disabled-overlay / $button-disabled-opacity)
 
+  &--stacked
+    flex-direction: column
+    line-height: $button-stacked-line-height
+
+    @at-root
+      @include button-sizes($button-stacked-sizes, true)
+      @include density('v-btn', 'height', $button-stacked-density)
+
 .v-btn__overlay
   background-color: currentColor
   border-radius: inherit
@@ -90,3 +100,55 @@
   pointer-events: none
   opacity: 0
   transition: opacity 0.2s ease-in-out
+
+.v-btn
+  .v-app-bar &
+    @include elevation($button-app-bar-elevation)
+
+.v-btn
+  .v-bottom-navigation &
+    filter: $button-bottom-navigation-filter
+    flex-direction: column
+    font-size: $button-bottom-navigation-font-size
+    height: auto
+    max-width: $button-bottom-navigation-max-width
+    min-width: $button-bottom-navigation-min-width
+    opacity: $button-bottom-navigation-opacity
+    text-transform: $button-bottom-navigation-text-transform
+    transition-duration: $button-bottom-navigation-transition-duration
+    transition-property: transform, opacity, filter
+    width: auto
+
+    @include elevation($button-bottom-navigation-elevation)
+    @include rounded($button-bottom-navigation-border-radius)
+
+  .v-bottom-navigation--grow &
+    width: 100%
+
+  .v-bottom-navigation--horizontal &
+    flex-direction: row
+
+  .v-bottom-navigation--shift &
+    > .v-icon
+      transform: $button-bottom-navigation-shift-icon-transform
+      transition: inherit
+
+    > *:not([class*='v-'])
+      opacity: $button-bottom-navigation-shift-opacity
+      position: absolute
+      top: $button-bottom-navigation-shift-top
+      transform: $button-bottom-navigation-shift-transform
+      transition: inherit
+
+  &--is-active
+    .v-bottom-navigation &
+      filter: $button-bottom-navigation-active-filter
+      opacity: $button-bottom-navigation-active-opacity
+
+    .v-bottom-navigation--shift &
+      > .v-icon
+        transform: $button-bottom-navigation-shift-active-icon-transform
+
+      > *:not([class*='v-'])
+        opacity: $button-bottom-navigation-active-opacity
+        transform: $button-bottom-navigation-shift-active-transform

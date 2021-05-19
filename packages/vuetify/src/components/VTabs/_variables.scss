@@ -1,8 +1,8 @@
 @import '../../styles/styles.sass';
 
 $tab-disabled-opacity: .5 !default;
-$tab-font-size: map-deep-get($headings, 'subtitle-2', 'size') !default;
-$tab-font-weight: map-deep-get($headings, 'subtitle-2', 'weight') !default;
+$tab-font-size: map-deep-get($typography, 'subtitle-2', 'size') !default;
+$tab-font-weight: map-deep-get($typography, 'subtitle-2', 'weight') !default;
 $tab-line-height: normal !default;
 $tabs-bar-background-color: 'cards' !default;
 $tabs-bar-height: 48px !default;

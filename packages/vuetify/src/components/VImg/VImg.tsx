@@ -1,6 +1,15 @@
 import './VImg.sass'
 
-// Vue
+// Components
+import { VResponsive } from '@/components'
+
+// Directives
+import intersect from '@/directives/intersect'
+
+// Composables
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
+
+// Utilities
 import {
   computed,
   defineComponent,
@@ -12,22 +21,9 @@ import {
   watch,
   withDirectives,
 } from 'vue'
-
-// Components
-import { VResponsive } from '../VResponsive'
-
-// Directives
-import intersect from '@/directives/intersect'
-import type { ObserveDirectiveBinding } from '@/directives/intersect'
-
-// Composables
-import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-
-// Utils
 import {
   makeProps,
   SUPPORTS_INTERSECTION,
-  useDirective,
   useRender,
 } from '@/util'
 
@@ -44,6 +40,8 @@ export interface srcObject {
 
 export default defineComponent({
   name: 'VImg',
+
+  directives: { intersect },
 
   props: makeProps({
     aspectRatio: [String, Number],
@@ -236,24 +234,21 @@ export default defineComponent({
       )
     })
 
-    useRender(() => withDirectives(
+    useRender(() => (
       <VResponsive
         class="v-img"
         aspectRatio={ aspectRatio.value }
         aria-label={ props.alt }
         role={ props.alt ? 'img' : undefined }
+        v-intersect={[{
+          handler: init,
+          options: props.options,
+        }, null, ['once']]}
         v-slots={{
           additional: () => [__image.value, __preloadImage.value, __placeholder.value, __error.value],
           default: slots.default,
         }}
-      />,
-      [useDirective<ObserveDirectiveBinding>(intersect, {
-        value: {
-          handler: init,
-          options: props.options,
-        },
-        modifiers: { once: true },
-      })]
+      />
     ))
 
     return {

@@ -2,7 +2,7 @@
 import './VBadge.sass'
 
 // Components
-import { VIcon } from '@/components/VIcon'
+import { VIcon } from '@/components'
 
 // Composables
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
