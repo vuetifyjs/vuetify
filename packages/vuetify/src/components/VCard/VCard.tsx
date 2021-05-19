@@ -3,6 +3,7 @@ import './VCard.sass'
 
 // Components
 import { VCardActions, VCardImg, VCardSubtitle, VCardText, VCardTitle } from './'
+import { VImg } from '@/components/VImg'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -23,10 +24,10 @@ export default defineComponent({
 
   props: makeProps({
     color: String,
+    disabled: Boolean,
     flat: Boolean,
     hover: Boolean,
     image: String,
-    raised: Boolean,
     subtitle: String,
     text: String,
     title: String,
@@ -56,11 +57,10 @@ export default defineComponent({
             'v-card',
             {
               'v-card--flat': props.flat,
-              'v-card--hover': props.hover,
+              'v-card--hover': props.hover && !(props.disabled || props.flat),
+              'v-card--disabled': props.disabled,
               // 'v-card--link': props.isClickable,
               // 'v-card--loading': props.loading,
-              // 'v-card--disabled': props.disabled,
-              'v-card--raised': props.raised,
             },
             themeClasses.value,
             backgroundColorClasses.value,
@@ -79,7 +79,7 @@ export default defineComponent({
             <VCardImg>
               { slots.image
                 ? slots.image?.({ src: props.image })
-                : (<img src={ props.image } />)
+                : (<VImg src={ props.image } cover />)
               }
             </VCardImg>
           ) }

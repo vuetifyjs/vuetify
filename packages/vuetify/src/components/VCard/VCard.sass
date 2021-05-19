@@ -4,26 +4,59 @@
 .v-card
   position: relative
 
+  &::before,
+  &::after
+    content: ''
+    display: block
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    border-radius: inherit
+    transition-property: box-shadow, opacity
+    transition: 0.28s $standard-easing
+    pointer-events: none
+
+  &::before
+    @include elevation($card-elevation)
+
   @include border($card-border...)
-  @include elevation($card-elevation)
   @include position($card-positions)
   @include rounded($card-border-radius)
 
   &--border
     border-width: $card-border-thin-width
 
-    @include elevation($card-border-elevation)
+  &--disabled
+    pointer-events: none
+    user-select: none
 
-  &--tile
-    @include rounded($card-tile-border-radius)
+    > [class*='v-card-']
+      opacity: $card-disabled-opacity
+
 
   &--hover
     cursor: pointer
-    transition: box-shadow .2s $standard-easing
-    will-change: box-shadow
 
-    &:hover, &:focus
+    &::before
+      opacity: 1
+      z-index: -1
+
+    &::after
+      z-index: 1
+      opacity: 0
+
       @include elevation($card-hover-elevation)
+
+    &:hover::after
+      opacity: 1
+
+    &:hover::before
+      opacity: 0
+
+  &--tile
+    @include rounded($card-tile-border-radius)
 
   > .v-card-title:first-child
     padding-top: 16px
@@ -77,16 +110,32 @@
   display: flex
   height: 100%
   left: 0
+  overflow: hidden
   position: absolute
   top: 0
   width: 100%
   z-index: -1
 
-  img
-    border-radius: inherit
-    height: inherit
-    object-fit: cover
-    width: inherit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // img
+  //   border-radius: inherit
+  //   height: inherit
+  //   object-fit: cover
+  //   width: inherit
 
 // Theme
 // +theme(v-card) using ($material)
