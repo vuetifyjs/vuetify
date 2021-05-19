@@ -16,11 +16,11 @@ import { useTheme } from '@/composables/theme'
 import { useColor } from '@/composables/color'
 
 // Directives
-import { Ripple, RippleDirectiveBinding } from '@/directives/ripple'
+import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed, defineComponent } from 'vue'
-import { makeProps, useDirective } from '@/util'
+import { makeProps } from '@/util'
 
 import { makeSizeProps, useSize } from '@/composables/size'
 
@@ -103,10 +103,11 @@ export default defineComponent({
           positionStyles.value,
         ]}
         disabled={ props.disabled }
-        v-ripple={useDirective<RippleDirectiveBinding>({
-          value: !props.disabled,
-          modifiers: { center: !!props.icon },
-        })}
+        v-ripple={[
+          !props.disabled,
+          null,
+          props.icon ? ['center'] : null,
+        ]}
       >
         <span class="v-btn__overlay" />
 

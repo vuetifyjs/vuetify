@@ -25,12 +25,10 @@ import {
   makeProps,
   maybeTransition,
   SUPPORTS_INTERSECTION,
-  useDirective,
   useRender,
 } from '@/util'
 
 // Types
-import type { ObserveDirectiveBinding } from '@/directives/intersect'
 import type { PropType } from 'vue'
 
 // not intended for public use, this is passed in by vuetify-loader
@@ -239,13 +237,10 @@ export default defineComponent({
         aspectRatio={ aspectRatio.value }
         aria-label={ props.alt }
         role={ props.alt ? 'img' : undefined }
-        v-intersect={useDirective<ObserveDirectiveBinding>({
-          value: {
-            handler: init,
-            options: props.options,
-          },
-          modifiers: { once: true },
-        })}
+        v-intersect={[{
+          handler: init,
+          options: props.options,
+        }, null, ['once']]}
         v-slots={{
           additional: () => [__image.value, __preloadImage.value, __placeholder.value, __error.value],
           default: slots.default,
