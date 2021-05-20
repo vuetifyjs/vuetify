@@ -148,7 +148,9 @@ export default defineComponent({
     ...makeTransitionProps(),
   }),
 
-  setup (props, { slots, attrs }) {
+  emits: ['click:outside'],
+
+  setup (props, { slots, attrs, emit }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { teleportTarget } = useTeleport(toRef(props, 'attach'))
     const { themeClasses } = provideTheme()
@@ -157,7 +159,9 @@ export default defineComponent({
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
 
-    function onClickOutside () {
+    function onClickOutside (e: MouseEvent) {
+      emit('click:outside', e)
+
       if (!props.persistent) isActive.value = false
       else animateClick()
     }
