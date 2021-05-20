@@ -1,6 +1,10 @@
 // Styles
 import './VAvatar.sass'
 
+// Components
+import { VIcon } from '@/components/VIcon'
+import { VImg } from '@/components/VImg'
+
 // Composables
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeSizeProps, useSize } from '@/composables/size'
@@ -18,6 +22,8 @@ export default defineComponent({
     color: String,
     left: Boolean,
     right: Boolean,
+    icon: String,
+    image: String,
     ...makeRoundedProps(),
     ...makeSizeProps(),
     ...makeTagProps(),
@@ -44,8 +50,11 @@ export default defineComponent({
           backgroundColorStyles.value,
           sizeStyles.value,
         ]}
-        v-slots={ slots }
-      />
+      >
+        { props.image && <VImg src={ props.image } alt="" /> }
+
+        { props.icon && <VIcon icon={ props.icon } /> }
+      </props.tag>
     )
   },
 })
