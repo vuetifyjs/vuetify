@@ -6,6 +6,7 @@ $navigation-drawer-border-radius: map-get($rounded, '0') !default;
 $navigation-drawer-border-style: $border-style-root !default;
 $navigation-drawer-border-thin-width: thin !default;
 $navigation-drawer-border-width: 0 !default;
+$navigation-drawer-color: rgb(var(--v-theme-on-surface)) !default;
 $navigation-drawer-content-height: 100% !default;
 $navigation-drawer-content-overflow-x: hidden !default;
 $navigation-drawer-content-overflow-y: auto !default;
@@ -29,3 +30,9 @@ $navigation-drawer-border: (
   $navigation-drawer-border-style,
   $navigation-drawer-border-width
 ) !default;
+
+$navigation-drawer-theme: () !default;
+$navigation-drawer-theme: (
+  $navigation-drawer-background,
+  $navigation-drawer-color
+);

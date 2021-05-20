@@ -6,6 +6,7 @@ $app-bar-border-thin-width: thin !default;
 $app-bar-border-width: 0 !default;
 $app-bar-collapsed-border-radius: 24px !default;
 $app-bar-collapsed-max-width: 112px !default;
+$app-bar-color: var(--v-theme-on-surface) !default;
 $app-bar-density-comfortable-padding: 4px !default;
 $app-bar-density-compact-padding: 0 !default;
 $app-bar-density-default-padding: 8px !default;
@@ -30,3 +31,9 @@ $app-bar-border: (
   $app-bar-border-style,
   $app-bar-border-width
 ) !default;
+
+$app-bar-theme: () !default;
+$app-bar-theme: (
+  $app-bar-background,
+  $app-bar-color
+);

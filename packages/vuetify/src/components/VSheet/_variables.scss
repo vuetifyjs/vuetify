@@ -1,4 +1,6 @@
 // Defaults
+$sheet-background: var(--v-theme-surface) !default;
+$sheet-color: var(--v-theme-on-surface) !default;
 $sheet-border-color: $border-color-root !default;
 $sheet-border-radius: 0 !default;
 $sheet-border-style: $border-style-root !default;
@@ -8,8 +10,15 @@ $sheet-elevation: 0 !default;
 $sheet-positions: absolute fixed !default;
 $sheet-rounded-border-radius: $border-radius-root !default;
 
+$sheet-border: () !default;
 $sheet-border: (
   $sheet-border-color,
   $sheet-border-style,
   $sheet-border-width
-) !default;
+);
+
+$sheet-theme: () !default;
+$sheet-theme: (
+  $sheet-background,
+  $sheet-color
+);

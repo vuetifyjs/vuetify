@@ -2,7 +2,6 @@
 @import './index'
 
 .v-banner
-  background-color: $banner-background-color
   font-size: $banner-font-size
   padding-bottom: $banner-padding-bottom
   padding-top: $banner-padding-top
@@ -13,6 +12,7 @@
   @include elevation($banner-elevation)
   @include position($banner-positions)
   @include rounded($banner-border-radius)
+  @include theme($banner-theme...)
 
   @include ltr()
     padding-left: $banner-padding-start
