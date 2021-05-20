@@ -75,7 +75,7 @@ export default defineComponent({
       val
         ? document.addEventListener('focusin', onFocusin)
         : document.removeEventListener('focusin', onFocusin)
-    })
+    }, { immediate: true })
 
     const activatorElement = ref()
     const activator = ({ props, ...data }: any) => {
