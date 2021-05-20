@@ -67,7 +67,7 @@
   letter-spacing: $card-title-letter-spacing
   text-transform: $card-title-text-transform
 
-  @include card-densities($card-title-densities)
+  @include card-line-height-densities($card-title-densities)
 
 .v-card-subtitle
   align-items: center
@@ -76,29 +76,19 @@
   font-size: $card-subtitle-font-size
   font-weight: $card-subtitle-font-weight
   letter-spacing: $card-subtitle-letter-spacing
-  line-height: $card-subtitle-line-height
   text-transform: $card-subtitle-text-transform
 
-  .v-card--density-comfortable &
-    line-height: 1.125rem
-
-  .v-card--density-compact &
-    line-height: 1rem
+  @include card-line-height-densities($card-subtitle-densities)
 
 .v-card-text
   color: $card-text-color
   font-size: $card-text-font-size
   font-weight: $card-text-font-weight
   letter-spacing: $card-text-letter-spacing
-  line-height: $card-text-line-height
   padding: $card-text-padding
   text-transform: $card-text-text-transform
 
-  .v-card--density-comfortable &
-    line-height: 1.2rem
-
-  .v-card--density-compact &
-    line-height: 1.15rem
+  @include card-line-height-densities($card-text-densities)
 
 .v-card-actions
   align-items: center
@@ -145,10 +135,10 @@
   align-items: center
   display: flex
   padding: $card-item-padding
-  height: 72px
+  height: $card-item-height
 
   .v-card--density-comfortable &
-    height: 64px
+    height: $card-item-comfortable-height
 
   .v-card--density-compact &
-    height: 56px
+    height: $card-item-compact-height

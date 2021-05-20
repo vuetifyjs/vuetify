@@ -14,9 +14,14 @@ $card-color: var(--v-theme-on-surface) !default;
 $card-disabled-opacity: 0.6 !default;
 $card-elevation: 1 !default;
 $card-hover-elevation: 8 !default;
+$card-item-comfortable-height: 64px !default;
+$card-item-compact-height: 56px !default;
+$card-item-height: 72px !default;
 $card-item-padding: .5rem 1rem !default;
 $card-positions: absolute fixed !default;
 $card-subtitle-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+$card-subtitle-comfortable-line-height: 1.125rem !default;
+$card-subtitle-compact-line-height: 1rem !default;
 $card-subtitle-font-size: map-deep-get($typography, 'body-2', 'size') !default;
 $card-subtitle-font-weight: map-deep-get($typography, 'body-2', 'weight') !default;
 $card-subtitle-letter-spacing: map-deep-get($typography, 'body-2', 'letter-spacing') !default;
@@ -24,6 +29,8 @@ $card-subtitle-line-height: map-deep-get($typography, 'body-2', 'line-height') !
 $card-subtitle-padding: 0 16px !default;
 $card-subtitle-text-transform: none !default;
 $card-text-color: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity)) !default;
+$card-text-comfortable-line-height: 1.2rem !default;
+$card-text-compact-line-height: 1.15rem !default;
 $card-text-font-size: map-deep-get($typography, 'body-2', 'size') !default;
 $card-text-font-weight: map-deep-get($typography, 'body-2', 'weight') !default;
 $card-text-letter-spacing: map-deep-get($typography, 'body-2', 'letter-spacing') !default;
@@ -32,13 +39,14 @@ $card-text-padding-bottom: 16px !default;
 $card-text-padding: 1rem !default;
 $card-text-text-transform: map-deep-get($typography, 'body-2', 'text-transform') !default;
 $card-tile-border-radius: 0 !default;
+$card-title-comfortable-line-height: 1.75rem !default;
+$card-title-compact-line-height: 1.55rem !default;
 $card-title-font-size: map-deep-get($typography, 'h6', 'size') !default;
 $card-title-font-weight: map-deep-get($typography, 'h6', 'weight') !default;
 $card-title-letter-spacing: map-deep-get($typography, 'h6', 'letter-spacing') !default;
 $card-title-line-height: map-deep-get($typography, 'h6', 'line-height') !default;
 $card-title-padding-top: 16px !default;
 $card-title-padding: 1rem 1rem 0 !default;
-$card-title-comfortable-line-height: 1.75rem !default;
 $card-title-text-transform: none !default;
 
 $card-border: () !default;
@@ -52,7 +60,21 @@ $card-title-densities: () !default;
 $card-title-densities: (
   null: $card-title-line-height,
   'comfortable': $card-title-comfortable-line-height,
-  'compact': 1.55rem
+  'compact': $card-title-compact-line-height
+);
+
+$card-subtitle-densities: () !default;
+$card-subtitle-densities: (
+  null: $card-subtitle-line-height,
+  'comfortable': $card-subtitle-comfortable-line-height,
+  'compact': $card-subtitle-compact-line-height
+);
+
+$card-text-densities: () !default;
+$card-text-densities: (
+  null: $card-text-line-height,
+  'comfortable': $card-text-comfortable-line-height,
+  'compact': $card-text-compact-line-height
 );
 
 $card-theme: () !default;
