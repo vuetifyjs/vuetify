@@ -3,18 +3,20 @@ $card-actions-min-height: 52px !default;
 $card-actions-padding: 8px !default;
 $card-avatar-margin-end: 1rem !default;
 $card-avatar-margin-start: 1rem !default;
+$card-background: var(--v-theme-surface) !default;
 $card-border-color: $border-color-root !default;
 $card-border-elevation: 0 !default;
 $card-border-radius: $border-radius-root !default;
 $card-border-style: $border-style-root !default;
 $card-border-thin-width: thin !default;
 $card-border-width: 0 !default;
+$card-color: var(--v-theme-on-surface) !default;
 $card-disabled-opacity: 0.6 !default;
 $card-elevation: 1 !default;
 $card-hover-elevation: 8 !default;
 $card-item-padding: .5rem 1rem !default;
 $card-positions: absolute fixed !default;
-$card-subtitle-color: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity)) !default;
+$card-subtitle-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $card-subtitle-font-size: map-deep-get($typography, 'body-2', 'size') !default;
 $card-subtitle-font-weight: map-deep-get($typography, 'body-2', 'weight') !default;
 $card-subtitle-letter-spacing: map-deep-get($typography, 'body-2', 'letter-spacing') !default;
@@ -51,4 +53,10 @@ $card-title-densities: (
   null: $card-title-line-height,
   'comfortable': $card-title-comfortable-line-height,
   'compact': 1.55rem
+);
+
+$card-theme: () !default;
+$card-theme: (
+  $card-background,
+  $card-color
 );
