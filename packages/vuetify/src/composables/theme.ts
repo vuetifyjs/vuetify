@@ -1,6 +1,6 @@
 // Utilities
 import { computed, getCurrentInstance, inject, provide, ref, watch } from 'vue'
-import { colorToInt, colorToRGB, createRange, intToHex, lighten, darken, getLuma } from '@/util'
+import { colorToInt, colorToRGB, createRange, darken, getLuma, intToHex, lighten } from '@/util'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
