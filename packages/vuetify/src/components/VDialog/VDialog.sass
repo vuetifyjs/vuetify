@@ -1,28 +1,31 @@
 @import './_variables.scss'
 
 // Block
-.v-dialog .v-overlay__content
-  > .v-sheet
-    border-radius: $dialog-border-radius
-    overflow: hidden
+.v-dialog
+  z-index: 2400
 
-    @include elevation($dialog-elevation)
+  .v-overlay__content
+    > .v-sheet
+      border-radius: $dialog-border-radius
+      overflow: hidden
 
-  > .v-card
-    > .v-card__title
-      font-size: $dialog-card-title-font-size
-      font-weight: $dialog-card-title-font-weight
-      letter-spacing: $dialog-card-title-letter-spacing
-      padding: $dialog-card-title-padding
+      @include elevation($dialog-elevation)
 
-    > .v-card__text
-      padding: $dialog-card-text-padding
+    > .v-card
+      > .v-card__title
+        font-size: $dialog-card-title-font-size
+        font-weight: $dialog-card-title-font-weight
+        letter-spacing: $dialog-card-title-letter-spacing
+        padding: $dialog-card-title-padding
 
-    > .v-card__subtitle
-      padding: $dialog-card-subtitle-padding
+      > .v-card__text
+        padding: $dialog-card-text-padding
 
-    > .v-card__actions
-      padding: $dialog-card-actions-padding
+      > .v-card__subtitle
+        padding: $dialog-card-subtitle-padding
+
+      > .v-card__actions
+        padding: $dialog-card-actions-padding
 
 .v-dialog--fullscreen .v-overlay__content
   border-radius: 0
