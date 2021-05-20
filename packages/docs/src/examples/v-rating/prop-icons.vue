@@ -2,11 +2,11 @@
   <div class="text-center">
     <v-rating
       v-model="rating"
-      empty-icon="circle-outline"
-      full-icon="circle"
-      half-icon="circle-half"
+      empty-icon="mdi-circle-outline"
+      full-icon="mdi-circle"
+      half-icon="mdi-circle-half"
       half-increments
-    ></v-rating>
+    />
   </div>
 </template>
 

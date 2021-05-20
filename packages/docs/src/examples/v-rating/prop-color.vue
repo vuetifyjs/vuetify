@@ -2,7 +2,7 @@
   <div class="text-center">
     <v-rating
       v-model="rating"
-      background-color="orange-lighten-1"
+      bg-color="orange-lighten-1"
       color="blue"
     ></v-rating>
   </div>

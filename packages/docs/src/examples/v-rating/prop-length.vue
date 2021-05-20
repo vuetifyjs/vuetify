@@ -10,7 +10,6 @@
 <script>
   export default {
     data: () => ({
-      length: 5,
       rating: 2,
     }),
   }

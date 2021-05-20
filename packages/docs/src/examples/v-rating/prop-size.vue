@@ -26,7 +26,7 @@
 
     <v-rating
       value="3"
-      size="64"
+      size="72"
     ></v-rating>
   </div>
 </template>
