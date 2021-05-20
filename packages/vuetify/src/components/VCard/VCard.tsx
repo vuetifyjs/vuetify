@@ -8,6 +8,7 @@ import {
   VCardHeader,
   VCardImg,
   VCardItem,
+  VCardMedia,
   VCardSubtitle,
   VCardText,
   VCardTitle,
@@ -66,11 +67,14 @@ export default defineComponent({
     const { densityClasses } = useDensity(props, 'v-card')
 
     return () => {
+      const hasTitle = (slots.title || props.title)
+      const hasSubtitle = (slots.subtitle || props.subtitle)
+      const hasHeader = (hasTitle || hasSubtitle)
+      const hasAppend = (slots.append || props.appendAvatar || props.appendIcon)
+      const hasPrepend = (slots.prepend || props.prependAvatar || props.prependIcon)
       const hasImage = (slots.image || props.image)
-      const hasHeader = props.title || props.subtitle
-      const hasPrepend = props.prependAvatar || props.prependIcon
-      const hasAppend = props.appendAvatar || props.appendIcon
       const hasItem = hasHeader || hasPrepend || hasAppend
+      const hasText = (slots.text || props.text)
 
       return (
         <props.tag
@@ -104,50 +108,74 @@ export default defineComponent({
             </VCardImg>
           ) }
 
+          { slots.media && (
+            <VCardMedia>{ slots.media() }</VCardMedia>
+          ) }
+
           { hasItem && (
             <VCardItem>
               { hasPrepend && (
                 <VCardAvatar>
-                  <VAvatar
-                    density={ props.density }
-                    icon={ props.prependIcon }
-                    image={ props.prependAvatar }
-                  />
+                  { slots.prepend
+                    ? slots.prepend()
+                    : (
+                      <VAvatar
+                        density={ props.density }
+                        icon={ props.prependIcon }
+                        image={ props.prependAvatar }
+                      />
+                    )
+                  }
                 </VCardAvatar>
               ) }
 
               { hasHeader && (
                 <VCardHeader>
-                  { props.title && (
-                    <VCardTitle>{ props.title }</VCardTitle>
+                  { hasTitle && (
+                    <VCardTitle>
+                      { slots.title
+                        ? slots.title()
+                        : props.title
+                      }
+                    </VCardTitle>
                   ) }
 
-                  { props.subtitle && (
-                    <VCardSubtitle>{ props.subtitle }</VCardSubtitle>
-                  ) }
+                  <VCardSubtitle>
+                    { slots.subtitle
+                      ? slots.subtitle()
+                      : props.subtitle
+                    }
+                  </VCardSubtitle>
                 </VCardHeader>
               ) }
 
               { hasAppend && (
                 <VCardAvatar>
-                  <VAvatar
-                    density={ props.density }
-                    icon={ props.appendIcon }
-                    image={ props.appendAvatar }
-                  />
+                  { slots.append
+                    ? slots.append()
+                    : (
+                      <VAvatar
+                        density={ props.density }
+                        icon={ props.appendIcon }
+                        image={ props.appendAvatar }
+                      />
+                    )
+                  }
                 </VCardAvatar>
               ) }
             </VCardItem>
           ) }
 
-          { props.text && (
-            <VCardText>{props.text}</VCardText>
+          { hasText && (
+            <VCardText>
+              { slots.text ? slots.text() : props.text }
+            </VCardText>
           ) }
 
           { slots.default?.() }
 
           { slots.actions && (
-            <VCardActions>{slots.actions()}</VCardActions>
+            <VCardActions>{ slots.actions() }</VCardActions>
           ) }
         </props.tag>
       )
