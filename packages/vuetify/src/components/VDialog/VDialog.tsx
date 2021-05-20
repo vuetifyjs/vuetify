@@ -31,7 +31,9 @@ export default defineComponent({
     scrollable: Boolean,
     modelValue: Boolean,
     ...makeDimensionProps({ width: 'auto' }),
-    ...makeTransitionProps({ transition: 'dialog-transition' }),
+    ...makeTransitionProps({
+      transition: { component: VDialogTransition },
+    }),
   }),
 
   setup (props, { attrs, slots, emit }) {
@@ -90,10 +92,7 @@ export default defineComponent({
 
     return () => {
       const transition = mergeProps(
-        {
-          component: VDialogTransition,
-          target: activatorElement.value,
-        },
+        { target: activatorElement.value },
         typeof props.transition === 'string'
           ? { name: props.transition }
           : props.transition as any

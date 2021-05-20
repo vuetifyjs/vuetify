@@ -6,43 +6,42 @@ export default defineComponent({
   name: 'VDialogTransition',
 
   props: makeProps({
-    target: {
-      type: Element as PropType<HTMLElement>,
-      required: true,
-    },
+    target: Element as PropType<HTMLElement>,
   }),
 
   setup (props, { slots }) {
     const functions = {
       onEnter (el: Element, done: () => void) {
-        const { x, y } = getDimensions(props.target, el as HTMLElement)
+        const { x, y } = getDimensions(props.target!, el as HTMLElement)
 
         const animation = el.animate([
           { transform: `translate(${x}px, ${y}px) scale(0.1)`, opacity: 0 },
           { transform: '' },
         ], {
-          duration: 280,
+          duration: 225,
           easing: deceleratedEasing,
         })
-        animation.finished.then(done)
+        animation.finished.then(() => done())
       },
       onLeave (el: Element, done: () => void) {
-        const { x, y } = getDimensions(props.target, el as HTMLElement)
+        const { x, y } = getDimensions(props.target!, el as HTMLElement)
 
         const animation = el.animate([
           { transform: '' },
           { transform: `translate(${x}px, ${y}px) scale(0.1)`, opacity: 0 },
         ], {
-          duration: 150,
+          duration: 125,
           easing: acceleratedEasing,
         })
-        animation.finished.then(done)
+        animation.finished.then(() => done())
       },
     }
 
-    return () => (
-      <Transition name="dialog-transition" { ...functions } v-slots={ slots } css={false} />
-    )
+    return () => {
+      return props.target
+        ? <Transition name="dialog-transition" { ...functions } css={ false } v-slots={ slots } />
+        : <Transition name="dialog-transition" v-slots={ slots } />
+    }
   },
 })
 
