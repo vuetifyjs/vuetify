@@ -109,6 +109,7 @@ export default defineComponent({
               'v-app-bar--floating': props.floating,
               'v-app-bar--is-active': isActive.value,
               'v-app-bar--prominent': props.prominent,
+              'v-app-bar--absolute': props.absolute,
             },
             backgroundColorClasses.value,
             borderClasses.value,

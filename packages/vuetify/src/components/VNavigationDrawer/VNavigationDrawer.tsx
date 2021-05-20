@@ -71,7 +71,7 @@ export default defineComponent({
       props.name,
       toRef(props, 'priority'),
       toRef(props, 'position'),
-      computed(() => isTemporary.value ? 0 : width.value),
+      computed(() => isTemporary.value ? 0 : props.rail && props.expandOnHover ? Number(props.railWidth) : width.value),
       width,
       isActive,
     )
@@ -107,6 +107,7 @@ export default defineComponent({
               'v-navigation-drawer--rail': props.rail,
               'v-navigation-drawer--start': props.position === 'left',
               'v-navigation-drawer--temporary': isTemporary.value,
+              'v-navigation-drawer--absolute': props.absolute,
             },
             themeClasses.value,
             borderClasses.value,

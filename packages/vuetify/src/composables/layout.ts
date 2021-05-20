@@ -50,6 +50,7 @@ export const makeLayoutItemProps = propsFactory({
     type: Number,
     default: 0,
   },
+  absolute: Boolean,
 }, 'layout-item')
 
 export function useMain () {
@@ -152,11 +153,11 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
     const layer = layers.value[layers.value.length - 1].layer
 
     return {
-      position: 'absolute',
-      left: convertToUnit(layer.left),
-      right: convertToUnit(layer.right),
-      top: convertToUnit(layer.top),
-      bottom: convertToUnit(layer.bottom),
+      position: 'relative',
+      paddingLeft: convertToUnit(layer.left),
+      paddingRight: convertToUnit(layer.right),
+      paddingTop: convertToUnit(layer.top),
+      paddingBottom: convertToUnit(layer.bottom),
     }
   })
 
@@ -217,7 +218,6 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
           marginRight: isOppositeHorizontal ? `${item.right}px` : undefined,
           marginTop: position.value !== 'bottom' ? `${item.top}px` : undefined,
           marginBottom: position.value !== 'top' ? `${item.bottom}px` : undefined,
-          position: 'absolute',
           width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : `${elementSize.value}px`,
           zIndex: layers.value.length - index,
           transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -110) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}%)`,
@@ -236,5 +236,9 @@ export function createLayout (props: { layout?: string[], overlaps?: string[] })
     items,
   })
 
-  return { layoutClasses: ref('v-layout'), getLayoutItem, items }
+  return {
+    layoutClasses: ref('v-layout'),
+    getLayoutItem,
+    items,
+  }
 }
