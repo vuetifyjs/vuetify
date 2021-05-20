@@ -17,6 +17,7 @@ import { VImg } from '@/components/VImg'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
@@ -46,6 +47,7 @@ export default defineComponent({
     text: String,
     title: String,
     ...makeBorderProps(),
+    ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makePositionProps(),
@@ -61,6 +63,7 @@ export default defineComponent({
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-card')
     const { roundedClasses } = useRounded(props, 'v-card')
+    const { densityClasses } = useDensity(props, 'v-card')
 
     return () => {
       const hasImage = (slots.image || props.image)
@@ -81,6 +84,7 @@ export default defineComponent({
             themeClasses.value,
             backgroundColorClasses.value,
             borderClasses.value,
+            densityClasses.value,
             elevationClasses.value,
             positionClasses.value,
             roundedClasses.value,
@@ -104,7 +108,11 @@ export default defineComponent({
             <VCardItem>
               { hasPrepend && (
                 <VCardAvatar>
-                  <VAvatar image={ props.prependAvatar } icon={ props.prependIcon } />
+                  <VAvatar
+                    density={ props.density }
+                    icon={ props.prependIcon }
+                    image={ props.prependAvatar }
+                  />
                 </VCardAvatar>
               ) }
 
@@ -122,7 +130,11 @@ export default defineComponent({
 
               { hasAppend && (
                 <VCardAvatar>
-                  <VAvatar image={ props.appendAvatar } icon={ props.appendIcon } />
+                  <VAvatar
+                    density={ props.density }
+                    icon={ props.appendIcon }
+                    image={ props.appendAvatar }
+                  />
                 </VCardAvatar>
               ) }
             </VCardItem>
