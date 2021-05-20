@@ -101,10 +101,12 @@
   opacity: 0
   transition: opacity 0.2s ease-in-out
 
+// VAppBar
 .v-btn
   .v-app-bar &
     @include elevation($button-app-bar-elevation)
 
+// VBottomNavigation
 .v-btn
   .v-bottom-navigation &
     filter: $button-bottom-navigation-filter
@@ -152,3 +154,14 @@
       > *:not([class*='v-'])
         opacity: $button-bottom-navigation-active-opacity
         transform: $button-bottom-navigation-shift-active-transform
+
+// VCard
+.v-btn
+  .v-card-actions &
+    padding: $button-card-actions-padding
+
+    @include ltr()
+      margin-right: $button-card-actions-margin-end
+
+    @include rtl()
+      margin-left: $button-card-actions-margin-start

@@ -1,4 +1,8 @@
 // Defaults
+$card-actions-min-height: 52px !default;
+$card-actions-padding: 8px !default;
+$card-avatar-margin-end: 1rem !default;
+$card-avatar-margin-start: 1rem !default;
 $card-border-color: $border-color-root !default;
 $card-border-elevation: 0 !default;
 $card-border-radius: $border-radius-root !default;
@@ -7,39 +11,35 @@ $card-border-thin-width: thin !default;
 $card-border-width: 0 !default;
 $card-disabled-opacity: 0.6 !default;
 $card-elevation: 1 !default;
-$card-hover-elevation: 12 !default;
+$card-hover-elevation: 8 !default;
+$card-item-padding: .5rem 1rem !default;
 $card-positions: absolute fixed !default;
+$card-subtitle-font-size: map-deep-get($typography, 'subtitle-2', 'size') !default;
+$card-subtitle-font-weight: map-deep-get($typography, 'subtitle-2', 'weight') !default;
+$card-subtitle-letter-spacing: map-deep-get($typography, 'subtitle-2', 'letter-spacing') !default;
+$card-subtitle-line-height: map-deep-get($typography, 'subtitle-2', 'line-height') !default;
+$card-subtitle-opacity: 0.6 !default;
+$card-subtitle-padding: 0 16px !default;
+$card-subtitle-text-transform: map-deep-get($typography, 'body-2', 'text-transform') !default;
+$card-text-font-size: map-deep-get($typography, 'body-2', 'size') !default;
+$card-text-font-weight: map-deep-get($typography, 'body-2', 'weight') !default;
+$card-text-letter-spacing: map-deep-get($typography, 'body-2', 'letter-spacing') !default;
+$card-text-line-height: map-deep-get($typography, 'body-2', 'line-height') !default;
+$card-text-opacity: 0.6 !default;
+$card-text-padding-bottom: 16px !default;
+$card-text-padding: 1rem !default;
+$card-text-text-transform: map-deep-get($typography, 'body-2', 'text-transform') !default;
 $card-tile-border-radius: 0 !default;
+$card-title-font-size: map-deep-get($typography, 'h6', 'size') !default;
+$card-title-font-weight: map-deep-get($typography, 'h6', 'weight') !default;
+$card-title-letter-spacing: map-deep-get($typography, 'h6', 'letter-spacing') !default;
+$card-title-line-height: map-deep-get($typography, 'h6', 'line-height') !default;
+$card-title-padding-top: 16px !default;
+$card-title-padding: 1rem 1rem 0 !default;
+$card-title-text-transform: none !default;
 
 $card-border: (
   $card-border-color,
   $card-border-style,
   $card-border-width
 ) !default;
-
-// $card-actions-padding: 8px !default;
-// $card-adjacent-sibling-text-padding-top: 0 !default;
-// $card-border-radius: $border-radius-root !default;
-// $card-btn-margin-x: 8px !default;
-// $card-btn-padding: 0 8px !default;
-// $card-btn-small-margin-x: 4px !default;
-// $card-elevation: 2 !default;
-// $card-hover-elevation: 8 !default;
-// $card-link-focus-opacity: 0.08 !default;
-// $card-outlined-border-width: thin !default;
-// $card-overflow-wrap: break-word !default;
-// $card-raised-elevation: 8 !default;
-// $card-shaped-border-radius: map-get($rounded, 'xl') $card-border-radius !default;
-// $card-subtitle-padding: 16px !default;
-// $card-text-font-size: map-deep-get($typography, 'subtitle-2', 'size') !default;
-// $card-text-font-weight: 400 !default;
-// $card-text-letter-spacing: map-deep-get($typography, 'subtitle-2', 'letter-spacing') !default;
-// $card-text-line-height: map-deep-get($typography, 'subtitle-2', 'line-height') !default;
-// $card-title-adjacent-sibling-subtitle-margin-top: -16px !default;
-// $card-title-adjacent-sibling-subtitle-text-padding-top: 0 !default;
-// $card-title-font-size: map-deep-get($typography, 'h6', 'size') !default;
-// $card-title-font-weight: map-deep-get($typography, 'h6', 'weight') !default;
-// $card-title-letter-spacing: map-deep-get($typography, 'h6', 'letter-spacing') !default;
-// $card-title-line-height: map-deep-get($typography, 'h6', 'line-height') !default;
-// $card-title-word-break: break-all !default;
-// $card-white-space: normal !default;

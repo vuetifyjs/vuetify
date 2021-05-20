@@ -2,7 +2,17 @@
 import './VCard.sass'
 
 // Components
-import { VCardActions, VCardImg, VCardSubtitle, VCardText, VCardTitle } from './'
+import {
+  VCardActions,
+  VCardAvatar,
+  VCardHeader,
+  VCardImg,
+  VCardItem,
+  VCardSubtitle,
+  VCardText,
+  VCardTitle,
+} from './'
+import { VAvatar } from '@/components/VAvatar'
 import { VImg } from '@/components/VImg'
 
 // Composables
@@ -23,11 +33,15 @@ export default defineComponent({
   name: 'VCard',
 
   props: makeProps({
+    appendAvatar: String,
+    appendIcon: String,
     color: String,
     disabled: Boolean,
     flat: Boolean,
     hover: Boolean,
     image: String,
+    prependAvatar: String,
+    prependIcon: String,
     subtitle: String,
     text: String,
     title: String,
@@ -50,6 +64,10 @@ export default defineComponent({
 
     return () => {
       const hasImage = (slots.image || props.image)
+      const hasHeader = props.title || props.subtitle
+      const hasPrepend = props.prependAvatar || props.prependIcon
+      const hasAppend = props.appendAvatar || props.appendIcon
+      const hasItem = hasHeader || hasPrepend || hasAppend
 
       return (
         <props.tag
@@ -59,8 +77,6 @@ export default defineComponent({
               'v-card--flat': props.flat,
               'v-card--hover': props.hover && !(props.disabled || props.flat),
               'v-card--disabled': props.disabled,
-              // 'v-card--link': props.isClickable,
-              // 'v-card--loading': props.loading,
             },
             themeClasses.value,
             backgroundColorClasses.value,
@@ -79,17 +95,37 @@ export default defineComponent({
             <VCardImg>
               { slots.image
                 ? slots.image?.({ src: props.image })
-                : (<VImg src={ props.image } cover />)
+                : (<VImg src={ props.image } alt="" />)
               }
             </VCardImg>
           ) }
 
-          { props.title && (
-            <VCardTitle>{props.title}</VCardTitle>
-          ) }
+          { hasItem && (
+            <VCardItem>
+              { hasPrepend && (
+                <VCardAvatar>
+                  <VAvatar image={ props.prependAvatar } icon={ props.prependIcon } />
+                </VCardAvatar>
+              ) }
 
-          { props.subtitle && (
-            <VCardSubtitle>{props.subtitle}</VCardSubtitle>
+              { hasHeader && (
+                <VCardHeader>
+                  { props.title && (
+                    <VCardTitle>{ props.title }</VCardTitle>
+                  ) }
+
+                  { props.subtitle && (
+                    <VCardSubtitle>{ props.subtitle }</VCardSubtitle>
+                  ) }
+                </VCardHeader>
+              ) }
+
+              { hasAppend && (
+                <VCardAvatar>
+                  <VAvatar image={ props.appendAvatar } icon={ props.appendIcon } />
+                </VCardAvatar>
+              ) }
+            </VCardItem>
           ) }
 
           { props.text && (
