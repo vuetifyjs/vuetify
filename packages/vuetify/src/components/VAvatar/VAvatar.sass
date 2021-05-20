@@ -11,7 +11,9 @@
   text-align: center
   vertical-align: $avatar-vertical-align
 
-  +rounded($avatar-border-radius)
+  @include avatar-sizes($avatar-sizes)
+  @include density('v-avatar', ('height', 'width'), $avatar-density)
+  @include rounded($avatar-border-radius)
 
   > *
     border-radius: inherit
@@ -19,14 +21,3 @@
 
   &--rounded
     +rounded($avatar-rounded-border-radius)
-
-  @each $name in $sizes
-    &--size-#{$name}
-      height: map-get($avatar-sizes, $name)
-      width: map-get($avatar-sizes, $name)
-
-// VCard
-.v-avatar
-  .v-card-avatar &
-    height: $avatar-card-avatar-size
-    width: $avatar-card-avatar-size

@@ -6,6 +6,7 @@ import { VIcon } from '@/components/VIcon'
 import { VImg } from '@/components/VImg'
 
 // Composables
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
@@ -24,6 +25,7 @@ export default defineComponent({
     right: Boolean,
     icon: String,
     image: String,
+    ...makeDensityProps(),
     ...makeRoundedProps(),
     ...makeSizeProps(),
     ...makeTagProps(),
@@ -31,6 +33,7 @@ export default defineComponent({
 
   setup (props, { slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { densityClasses } = useDensity(props, 'v-avatar')
     const { roundedClasses } = useRounded(props, 'v-avatar')
     const { sizeClasses, sizeStyles } = useSize(props, 'v-avatar')
 
@@ -43,6 +46,7 @@ export default defineComponent({
             'v-avatar--right': props.right,
           },
           backgroundColorClasses.value,
+          densityClasses.value,
           roundedClasses.value,
           sizeClasses.value,
         ]}
@@ -53,7 +57,9 @@ export default defineComponent({
       >
         { props.image && <VImg src={ props.image } alt="" /> }
 
-        { props.icon && <VIcon icon={ props.icon } /> }
+        { props.icon && !props.image && <VIcon icon={ props.icon } /> }
+
+        { slots.default?.() }
       </props.tag>
     )
   },

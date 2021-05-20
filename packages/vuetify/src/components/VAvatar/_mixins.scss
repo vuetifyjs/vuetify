@@ -1,0 +1,9 @@
+@mixin avatar-sizes ($map: $avatar-sizes) {
+  @each $sizeName, $multiplier in $size-scales {
+    $size: map-get($map, 'height') + (8 * $multiplier);
+
+    &.v-avatar--size-#{$sizeName} {
+      --v-avatar-height: #{$size};
+    }
+  }
+}

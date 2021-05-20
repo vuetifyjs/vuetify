@@ -1,18 +1,17 @@
 // Defaults
 $avatar-border-radius: map-get($rounded, 'circle') !default;
-$avatar-card-avatar-size: 40px !default;
+$avatar-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 $avatar-line-height: normal !default;
 $avatar-rounded-border-radius: $border-radius-root !default;
+$avatar-height: 40px !default;
+$avatar-width: 40px !default;
 $avatar-vertical-align: middle !default;
 
 $avatar-sizes: () !default;
 $avatar-sizes: map-deep-merge(
   (
-    'x-small': 32px,
-    'small': 40px,
-    'default': 48px,
-    'large': 56px,
-    'x-large': 64px,
+    'height': $avatar-height,
+    'width': $avatar-width
   ),
   $avatar-sizes
 );
