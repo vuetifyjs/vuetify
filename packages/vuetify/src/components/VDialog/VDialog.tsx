@@ -80,6 +80,7 @@ export default defineComponent({
       return slots.activator?.({
         ...data,
         props: mergeProps(props, {
+          'aria-haspopup': 'dialog',
           onClick: (e: MouseEvent) => {
             activatorElement.value = e.currentTarget
           },
