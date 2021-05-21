@@ -2,6 +2,7 @@
 
 .v-rating
   max-width: 100%
+  display: inline-flex
   white-space: $rating-white-space
 
   .v-icon
@@ -14,7 +15,7 @@
   &--readonly
     pointer-events: none
 
-.v-rating__item
+.v-rating__wrapper
   align-items: $rating-item-align-items
   display: inline-flex
   flex-direction: column
@@ -22,5 +23,34 @@
   &--bottom
     flex-direction: column-reverse
 
-  .v-icon
+.v-rating__item
+  position: relative
+
+  .v-btn
     transition: none
+    opacity: 1
+
+.v-rating__item--focused:before
+  content: " "
+  position: absolute
+  left: 0px
+  right: 0px
+  top: 0px
+  bottom: 0px
+  border: 1px solid black
+  pointer-events: none
+
+.v-rating--hidden
+  position: absolute
+  width: 0px
+  height: 0px
+  opacity: 0
+
+.v-rating__item--half
+  width: 50%
+  overflow: hidden
+  position: absolute
+  z-index: 1
+
+.v-rating__item--full
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%)

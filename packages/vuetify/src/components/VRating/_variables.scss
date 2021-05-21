@@ -1,2 +1,15 @@
 $rating-white-space: nowrap !default;
 $rating-item-align-items: center !default;
+
+
+$rating-sizes: () !default;
+$rating-sizes: map-deep-merge(
+  (
+    'x-small': 16px,
+    'small': 20px,
+    'default': 24px,
+    'large': 28px,
+    'x-large': 32px,
+  ),
+  $rating-sizes
+);
