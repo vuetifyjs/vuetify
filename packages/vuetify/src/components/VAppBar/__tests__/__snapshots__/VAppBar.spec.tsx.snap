@@ -19,8 +19,6 @@ exports[`VAppBar should render image 1`] = `
       </div>
       <transition-stub>
       </transition-stub>
-      <div class="v-responsive__content">
-      </div>
     </div>
   </div>
   <div class="v-app-bar__content">
