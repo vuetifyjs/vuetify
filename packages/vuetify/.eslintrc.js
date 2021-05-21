@@ -62,7 +62,11 @@ module.exports = {
         'jest/valid-expect-in-promise': 'off',
         'jest/no-commented-out-tests': 'off',
         'no-unused-expressions': 'off',
+        'jest/valid-describe': 'off'
       },
+      globals: {
+        JSX: true
+      }
     },
   ],
 }

@@ -1,7 +1,7 @@
 /// <reference types="../../../types/cypress" />
 
 import VBtn from './VBtn'
-import { byExample, byProps } from '@/../cypress/templates'
+import { generate } from '@/../cypress/templates'
 
 const loadingText = 'Loading'
 const anchor = {
@@ -29,6 +29,7 @@ const stories = {
   Icon: <VBtn icon color="pink"></VBtn>,
 }
 
+// Actual tests
 describe('VBtn', () => {
   describe('color', () => {
     it('supports default color props', () => {
@@ -276,50 +277,7 @@ describe('VBtn', () => {
   })
 })
 
-describe('Showcase', () => {
-  describe('Examples', () => {
-    // throw new Error()
-    byExample(stories)
-  })
-
-  describe('Props', () => {
-    byProps(props, VBtn)
-  })
-})
-
-/**
-  * These are pending tests copied over from the original Jest suite.
-  * They need to be reimplemented.
-  * Some of this functionality may currently be broken
-  */
-
-describe.skip('router', () => {
-  // it('should toggle on route change if provided a to prop', async () => {
-  //   const toggle = jest.fn()
-  //   const register = jest.fn()
-  //   const unregister = jest.fn()
-  //   const wrapper = mountFunction({
-  //     provide: {
-  //       btnToggle: {
-  //         activeClass: 'foobar',
-  //         register,
-  //         unregister,
-  //       },
-  //     },
-  //     methods: { toggle },
-  //     ref: 'link',
-  //   })
-
-  //   router.push('/foobar')
-
-  //   await wrapper.vm.$nextTick()
-  //   expect(toggle).not.toHaveBeenCalled()
-
-  //   wrapper.setProps({ to: 'fizzbuzz' })
-
-  //   router.push('/fizzbuzz')
-
-  //   await wrapper.vm.$nextTick()
-  //   expect(toggle).toHaveBeenCalled()
-  // })
+// Useful to preview all of the variants and pre-made examples
+describe.skip('Showcase', { viewportHeight: 1000, viewportWidth: 1000 }, () => {
+  generate({ stories, props, component: VBtn as unknown })
 })
