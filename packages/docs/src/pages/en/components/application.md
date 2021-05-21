@@ -20,6 +20,8 @@ In Vuetify, the `v-app` component and the **app** prop on components like `v-nav
 - [v-app](/api/v-app)
 - [v-main](/api/v-main)
 
+<api-section page="components/application" />
+
 <alert type="error">
 
   In order for your application to work properly, you **must** wrap it in a `v-app` component. This component is required for ensuring proper **cross-browser compatibility**. Vuetify doesn't support multiple isolated Vuetify instances on a page. `v-app` can exist **anywhere** inside the body of your app, however, there should only be one and it must be the parent of **ALL** Vuetify components.

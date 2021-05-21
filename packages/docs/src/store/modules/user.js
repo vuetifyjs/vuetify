@@ -19,6 +19,7 @@ const state = () => {
   }
 
   return merge({
+    api: false,
     drawer: {
       alphabetical: false,
       mini: false,

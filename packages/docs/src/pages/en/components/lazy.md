@@ -25,6 +25,8 @@ The `v-lazy` component by default will not render its contents until it has been
 
 - [v-lazy](/api/v-lazy)
 
+<api-section page="components/lazy" />
+
 ## Caveats
 
 <alert type="info">

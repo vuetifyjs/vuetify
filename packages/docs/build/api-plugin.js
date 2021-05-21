@@ -64,12 +64,7 @@ function createMdFile (component, data, locale) {
   str += genHeader(component)
   str += genApiLinks(component, headerLocale.links)
 
-  for (const [header, value] of Object.entries(data)) {
-    if (['mixins', 'name'].includes(header) || !value.length) continue
-
-    str += `## ${headerLocale[header]}\n\n`
-    str += `<api-table name="${sanitize(component)}" field="${header}" />\n\n`
-  }
+  str += `<api-section name="${sanitize(component)}" />\n\n`
 
   str += genFooter()
 

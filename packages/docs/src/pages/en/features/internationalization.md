@@ -100,6 +100,8 @@ export default new Vuetify({
 
 - [internationalization](/api/internationalization)
 
+<api-section page="features/internationalization" />
+
 ## Caveats
 
 <alert type="info">
