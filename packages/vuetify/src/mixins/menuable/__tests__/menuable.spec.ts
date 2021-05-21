@@ -1,5 +1,9 @@
 import Menuable from '../'
-import { mount, MountOptions, Wrapper } from '@vue/test-utils'
+import {
+  mount,
+  MountOptions,
+  Wrapper,
+} from '@vue/test-utils'
 import VApp from '../../../components/VApp'
 
 describe('menuable.ts', () => {
@@ -82,7 +86,7 @@ describe('menuable.ts', () => {
 
     await wrapper.vm.$nextTick()
 
-    const vm = wrapper.find(Mock).vm
+    const { vm } = wrapper.find(Mock) as Wrapper<Instance>
 
     Object.assign(vm.dimensions.activator, { top: 100, left: 80 })
     Object.assign(vm.dimensions.content, { width: 300, height: 50 })
@@ -99,9 +103,12 @@ describe('menuable.ts', () => {
     const wrapper = mount({
       props: { attach: Boolean },
       render (h) {
-        return h(VApp, [
-          h(Mock),
-        ])
+        return h('div', [
+          h(VApp, [
+            h(Mock),
+          ]),
+        ]
+        )
       },
     }, {
       mocks: {
@@ -115,22 +122,29 @@ describe('menuable.ts', () => {
 
     await wrapper.vm.$nextTick()
 
+    Object.defineProperties(wrapper.vm.$el, { offsetTop: { get: () => 100 }, offsetLeft: { get: () => 200 } })
+
+    // The app margins shouldn't change the position, only all the parents of the app
     const app = wrapper.find(VApp).element
 
-    Object.defineProperties(app, { offsetTop: { get: () => 100 }, offsetLeft: { get: () => 200 } })
+    Object.defineProperties(app, {
+      offsetParent: { get: () => wrapper.vm.$el },
+      offsetTop: { get: () => 20 },
+      offsetLeft: { get: () => 10 },
+    })
 
-    const vm = wrapper.find(Mock).vm
+    const { vm } = wrapper.find(Mock) as Wrapper<Instance>
 
     vm.onResize()
 
     await wrapper.vm.$nextTick()
 
-    Object.assign(vm.dimensions.activator, { offsetTop: 100, offsetLeft: 80 })
+    Object.assign(vm.dimensions.activator, { top: 70, left: 80 })
     Object.assign(vm.dimensions.content, { width: 300, height: 50 })
 
-    expect(vm.computedTop).toBe(-100)
-    expect(vm.computedLeft).toBe(-200)
-
     expect(vm.computedRelativeOffset).toMatchObject({ left: 200, top: 100 })
+
+    expect(vm.computedTop).toBe(-30)
+    expect(vm.computedLeft).toBe(-120)
   })
 })

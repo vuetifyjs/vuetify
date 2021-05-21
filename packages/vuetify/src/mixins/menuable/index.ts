@@ -34,6 +34,10 @@ interface options extends ExtractVue<typeof baseMixins> {
   computedRelativeOffset: { top: number, left: number }
   computedLeft: number
   computedTop: number
+  dimensions: {
+    activator: dimensions
+    content: dimensions
+  }
   $refs: {
     content: HTMLElement
     activator: HTMLElement
@@ -181,7 +185,6 @@ export default baseMixins.extend<options>().extend({
     computedRelativeOffset () {
       if (!this.attach && this.resized !== null && this.$el) {
         const p = this.$el.closest('.v-application') as HTMLElement
-
         return this.cumulativeOffset(p)
       }
       return { left: 0, top: 0 }
@@ -260,14 +263,17 @@ export default baseMixins.extend<options>().extend({
   },
 
   methods: {
-    cumulativeOffset (element: HTMLElement) {
+    cumulativeOffset (element: HTMLElement | null) {
       let top = 0
       let left = 0
 
-      while (element) {
-        top += element.offsetTop || 0
-        left += element.offsetLeft || 0
-        element = element.offsetParent as HTMLElement
+      if (element) {
+        element = element.offsetParent as HTMLElement | null
+        while (element) {
+          top += element.offsetTop || 0
+          left += element.offsetLeft || 0
+          element = element.offsetParent as HTMLElement | null
+        }
       }
 
       return {
