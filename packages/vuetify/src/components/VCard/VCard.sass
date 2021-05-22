@@ -59,15 +59,58 @@
   &--tile
     @include rounded($card-tile-border-radius)
 
-.v-card-title
+.v-card-actions
   align-items: center
   display: flex
-  font-size: $card-title-font-size
-  font-weight: $card-title-font-weight
-  letter-spacing: $card-title-letter-spacing
-  text-transform: $card-title-text-transform
+  flex: 1 1 auto
+  min-height: $card-actions-min-height
+  padding: $card-actions-padding
 
-  @include card-line-height-densities($card-title-densities)
+.v-card-avatar
+  @include ltr()
+    margin-right: $card-avatar-margin-start
+
+  @include rtl()
+    margin-left: $card-avatar-margin-end
+
+.v-card-header
+  flex: 1 1 auto
+
+.v-card-img
+  border-radius: inherit
+  display: flex
+  height: 100%
+  left: 0
+  overflow: hidden
+  position: absolute
+  top: 0
+  width: 100%
+  z-index: -1
+
+.v-card-item
+  align-items: center
+  display: flex
+  padding: $card-item-padding
+  height: $card-item-height
+
+  .v-card--density-comfortable &
+    height: $card-item-comfortable-height
+
+  .v-card--density-compact &
+    height: $card-item-compact-height
+
+.v-card-media
+  overflow: hidden
+
+  &:first-child
+    .v-card &
+      border-top-left-radius: inherit
+      border-top-right-radius: inherit
+
+  &:last-child
+    .v-card &
+      border-bottom-left-radius: inherit
+      border-bottom-right-radius: inherit
 
 .v-card-subtitle
   align-items: center
@@ -90,55 +133,12 @@
 
   @include card-line-height-densities($card-text-densities)
 
-.v-card-actions
+.v-card-title
   align-items: center
   display: flex
-  flex: 1 1 auto
-  min-height: $card-actions-min-height
-  padding: $card-actions-padding
+  font-size: $card-title-font-size
+  font-weight: $card-title-font-weight
+  letter-spacing: $card-title-letter-spacing
+  text-transform: $card-title-text-transform
 
-.v-card-media
-  overflow: hidden
-
-  &:first-child
-    .v-card &
-      border-top-left-radius: inherit
-      border-top-right-radius: inherit
-
-  &:last-child
-    .v-card &
-      border-bottom-left-radius: inherit
-      border-bottom-right-radius: inherit
-
-.v-card-img
-  border-radius: inherit
-  display: flex
-  height: 100%
-  left: 0
-  overflow: hidden
-  position: absolute
-  top: 0
-  width: 100%
-  z-index: -1
-
-.v-card-avatar
-  @include ltr()
-    margin-right: $card-avatar-margin-start
-
-  @include rtl()
-    margin-left: $card-avatar-margin-end
-
-.v-card-header
-  flex: 1 1 auto
-
-.v-card-item
-  align-items: center
-  display: flex
-  padding: $card-item-padding
-  height: $card-item-height
-
-  .v-card--density-comfortable &
-    height: $card-item-comfortable-height
-
-  .v-card--density-compact &
-    height: $card-item-compact-height
+  @include card-line-height-densities($card-title-densities)
