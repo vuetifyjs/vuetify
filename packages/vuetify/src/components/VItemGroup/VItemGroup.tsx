@@ -23,7 +23,7 @@ export default defineComponent({
   }),
 
   emits: {
-    'update:modelValue': (value: any) => {},
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { slots }) {
