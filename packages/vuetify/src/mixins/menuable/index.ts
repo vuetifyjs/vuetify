@@ -272,7 +272,7 @@ export default baseMixins.extend<options>().extend({
         // the overflow, don't offset
         activator.top > contentHeight
       ) {
-        top = this.absoluteYOffset + (activator.top - contentHeight)
+        top = this.pageYOffset + (activator.top - contentHeight)
       // If overflowing bottom
       } else if (isOverflowing && !this.allowOverflow) {
         top = toTop - contentHeight - 12
