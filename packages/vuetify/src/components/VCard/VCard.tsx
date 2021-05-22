@@ -109,7 +109,7 @@ export default defineComponent({
           ) }
 
           { slots.media && (
-            <VCardMedia>{ slots.media() }</VCardMedia>
+            <VCardMedia v-slots={{ default: slots.media }} />
           ) }
 
           { hasItem && (
@@ -175,7 +175,7 @@ export default defineComponent({
           { slots.default?.() }
 
           { slots.actions && (
-            <VCardActions>{ slots.actions() }</VCardActions>
+            <VCardActions v-slots={{ default: slots.actions }} />
           ) }
         </props.tag>
       )
