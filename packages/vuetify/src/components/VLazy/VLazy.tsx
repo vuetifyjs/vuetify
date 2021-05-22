@@ -53,7 +53,7 @@ export default defineComponent({
         v-intersect={[
           onIntersect,
           props.options,
-          ['once'],
+          isActive.value ? [] : ['once'],
         ]}
         style={ dimensionStyles.value }
       >
