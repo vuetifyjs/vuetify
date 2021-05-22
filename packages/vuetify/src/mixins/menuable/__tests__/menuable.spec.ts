@@ -69,7 +69,7 @@ describe('menuable.ts', () => {
     expect(wrapper.vm.computedLeft).toBe(-200)
   })
 
-  it('should have the correct position in non embeded app', async () => {
+  it('should have the correct position non attached', async () => {
     const wrapper = mount({
       render (h) {
         return h(VApp, [h(Mock)])
@@ -95,56 +95,5 @@ describe('menuable.ts', () => {
 
     expect(vm.computedTop).toBe(100)
     expect(vm.computedLeft).toBe(80)
-
-    expect(vm.computedRelativeOffset).toMatchObject({ left: 0, top: 0 })
-  })
-
-  it('should have the correct position in embeded app', async () => {
-    const wrapper = mount({
-      props: { attach: Boolean },
-      render (h) {
-        return h('div', [
-          h(VApp, [
-            h(Mock),
-          ]),
-        ]
-        )
-      },
-    }, {
-      mocks: {
-        sync: false,
-        $vuetify: {
-          theme: {},
-          rtl: false,
-        },
-      },
-    })
-
-    await wrapper.vm.$nextTick()
-
-    Object.defineProperties(wrapper.vm.$el, { offsetTop: { get: () => 100 }, offsetLeft: { get: () => 200 } })
-
-    // The app margins shouldn't change the position, only all the parents of the app
-    const app = wrapper.find(VApp).element
-
-    Object.defineProperties(app, {
-      offsetParent: { get: () => wrapper.vm.$el },
-      offsetTop: { get: () => 20 },
-      offsetLeft: { get: () => 10 },
-    })
-
-    const { vm } = wrapper.find(Mock) as Wrapper<Instance>
-
-    vm.onResize()
-
-    await wrapper.vm.$nextTick()
-
-    Object.assign(vm.dimensions.activator, { top: 70, left: 80 })
-    Object.assign(vm.dimensions.content, { width: 300, height: 50 })
-
-    expect(vm.computedRelativeOffset).toMatchObject({ left: 200, top: 100 })
-
-    expect(vm.computedTop).toBe(-30)
-    expect(vm.computedLeft).toBe(-120)
   })
 })

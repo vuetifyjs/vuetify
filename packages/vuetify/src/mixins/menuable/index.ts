@@ -2,16 +2,19 @@
 import Positionable from '../positionable'
 import Stackable from '../stackable'
 import Activatable from '../activatable'
+import Detachable from '../detachable'
 
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
 import { convertToUnit } from '../../util/helpers'
+import { VNode } from 'vue'
 
 // Types
 const baseMixins = mixins(
   Stackable,
   Positionable,
-  Activatable
+  Activatable,
+  Detachable,
 )
 
 interface dimensions {
@@ -31,9 +34,6 @@ interface options extends ExtractVue<typeof baseMixins> {
   attach: boolean | string | Element
   offsetY: boolean
   offsetX: boolean
-  computedRelativeOffset: { top: number, left: number }
-  computedLeft: number
-  computedTop: number
   dimensions: {
     activator: dimensions
     content: dimensions
@@ -42,55 +42,6 @@ interface options extends ExtractVue<typeof baseMixins> {
     content: HTMLElement
     activator: HTMLElement
   }
-
-  onResize(): void
-
-  callActivate(): void
-
-  activate(): void
-
-  callDeactivate(): void
-
-  deactivate(): void
-
-  sneakPeek(callback: Function): void
-
-  checkActivatorFixed(): void
-
-  checkForPageYOffset(): void
-
-  getOffsetLeft(): number
-
-  getOffsetTop(): number
-
-  getInnerHeight(): number
-
-  calcTop(): string
-
-  calcLeft(width: number): string
-
-  calcYOverflow(top: number): number
-
-  calcXOverflow(left: number, width: number): number
-
-  getRoundedBoundedClientRect(el: HTMLElement): {
-    height: number
-    width: number
-    top: number
-    left: number
-    bottom: number
-    right: number
-  }
-
-  cumulativeOffset(el: HTMLElement): {top: number, left: number}
-
-  measure(el: HTMLElement): dimensions
-
-  absolutePosition(): dimensions
-
-  updateDimensions(): void
-
-  startTransition(): Promise<void>
 }
 
 /* @vue/component */
@@ -143,7 +94,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   data: () => ({
-    resized: 0,
+    activatorNode: [] as VNode[],
     absoluteX: 0,
     absoluteY: 0,
     activatedBy: null as EventTarget | null,
@@ -182,17 +133,10 @@ export default baseMixins.extend<options>().extend({
   }),
 
   computed: {
-    computedRelativeOffset () {
-      if (!this.attach && this.resized !== null && this.$el) {
-        const p = this.$el.closest('.v-application') as HTMLElement
-        return this.cumulativeOffset(p)
-      }
-      return { left: 0, top: 0 }
-    },
     computedLeft () {
       const a = this.dimensions.activator
       const c = this.dimensions.content
-      const activatorLeft = (this.attach ? a.offsetLeft : a.left) || 0
+      const activatorLeft = (this.attach !== false ? a.offsetLeft : a.left) || 0
       const minWidth = Math.max(a.width, c.width)
       let left = 0
       left += this.left ? activatorLeft - (minWidth - a.width) : activatorLeft
@@ -206,8 +150,6 @@ export default baseMixins.extend<options>().extend({
       if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
       if (this.nudgeRight) left += parseInt(this.nudgeRight)
 
-      left -= this.computedRelativeOffset.left
-
       return left
     },
     computedTop () {
@@ -216,13 +158,11 @@ export default baseMixins.extend<options>().extend({
       let top = 0
 
       if (this.top) top += a.height - c.height
-      if (this.attach) top += a.offsetTop
+      if (this.attach !== false) top += a.offsetTop
       else top += a.top + this.pageYOffset
       if (this.offsetY) top += this.top ? -a.height : a.height
       if (this.nudgeTop) top -= parseInt(this.nudgeTop)
       if (this.nudgeBottom) top += parseInt(this.nudgeBottom)
-
-      top -= this.computedRelativeOffset.top
 
       return top
     },
@@ -248,32 +188,30 @@ export default baseMixins.extend<options>().extend({
     this.hasWindow = typeof window !== 'undefined'
 
     if (this.hasWindow) {
-      window.addEventListener('resize', this.onResize, false)
+      window.addEventListener('resize', this.updateDimensions, false)
     }
-  },
-
-  mounted () {
-    this.onResize()
   },
 
   beforeDestroy () {
     if (this.hasWindow) {
-      window.removeEventListener('resize', this.onResize, false)
+      window.removeEventListener('resize', this.updateDimensions, false)
     }
   },
 
   methods: {
-    cumulativeOffset (element: HTMLElement | null) {
+    cumulativeOffset (element: HTMLElement | null, until?: string) {
       let top = 0
       let left = 0
 
       if (element) {
         element = element.offsetParent as HTMLElement | null
-        while (element) {
+        /* eslint-disable no-unmodified-loop-condition */
+        while (element && (!until || !element.matches(until))) {
           top += element.offsetTop || 0
           left += element.offsetLeft || 0
           element = element.offsetParent as HTMLElement | null
         }
+        /* eslint-enable */
       }
 
       return {
@@ -281,30 +219,27 @@ export default baseMixins.extend<options>().extend({
         left: Math.round(left),
       }
     },
-    onResize () {
-      this.resized++
-    },
     absolutePosition () {
       return {
         offsetTop: 0,
         offsetLeft: 0,
         scrollHeight: 0,
-        top: this.positionY || this.absoluteY,
-        bottom: this.positionY || this.absoluteY,
-        left: this.positionX || this.absoluteX,
-        right: this.positionX || this.absoluteX,
+        top: (this.positionY || this.absoluteY),
+        bottom: (this.positionY || this.absoluteY),
+        left: (this.positionX || this.absoluteX),
+        right: (this.positionX || this.absoluteX),
         height: 0,
         width: 0,
       }
     },
     activate () {},
     calcLeft (menuWidth: number) {
-      return convertToUnit(this.attach
+      return convertToUnit(this.attach !== false
         ? this.computedLeft
         : this.calcXOverflow(this.computedLeft, menuWidth))
     },
     calcTop () {
-      return convertToUnit(this.attach
+      return convertToUnit(this.attach !== false
         ? this.computedTop
         : this.calcYOverflow(this.computedTop))
     },
@@ -362,7 +297,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     checkActivatorFixed () {
-      if (this.attach) return
+      if (this.attach !== false) return
       let el = this.getActivator()
       while (el) {
         if (window.getComputedStyle(el).position === 'fixed') {
@@ -419,6 +354,13 @@ export default baseMixins.extend<options>().extend({
         height: Math.round(rect.height),
       }
     },
+    measureAbsolute (selector = '[data-app]') {
+      if (this.attach === false && this.$el) {
+        const p = this.$el.closest(selector) as HTMLElement
+        return this.cumulativeOffset(p)
+      }
+      return { left: 0, top: 0 }
+    },
     measure (el: HTMLElement) {
       if (!el || !this.hasWindow) return null
 
@@ -472,7 +414,10 @@ export default baseMixins.extend<options>().extend({
         const activator = this.getActivator()
         if (!activator) return
 
+        const relative = this.measureAbsolute()
         dimensions.activator = this.measure(activator)
+        dimensions.activator.top -= relative.top
+        dimensions.activator.left -= relative.left
         dimensions.activator.offsetLeft = activator.offsetLeft
         if (this.attach !== false) {
           // account for css padding causing things to not line up
