@@ -7,9 +7,10 @@ import Detachable from '../detachable'
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
 import { convertToUnit } from '../../util/helpers'
-import { VNode } from 'vue'
 
 // Types
+import { VNode } from 'vue'
+
 const baseMixins = mixins(
   Stackable,
   Positionable,
@@ -30,7 +31,6 @@ interface dimensions {
 }
 
 interface options extends ExtractVue<typeof baseMixins> {
-  hasActivator: boolean
   attach: boolean | string | Element
   offsetY: boolean
   offsetX: boolean
@@ -199,19 +199,17 @@ export default baseMixins.extend<options>().extend({
   },
 
   methods: {
-    cumulativeOffset (element: HTMLElement | null, until?: string) {
+    cumulativeOffset (element: HTMLElement | null) {
       let top = 0
       let left = 0
 
       if (element) {
         element = element.offsetParent as HTMLElement | null
-        /* eslint-disable no-unmodified-loop-condition */
-        while (element && (!until || !element.matches(until))) {
+        while (element) {
           top += element.offsetTop || 0
           left += element.offsetLeft || 0
           element = element.offsetParent as HTMLElement | null
         }
-        /* eslint-enable */
       }
 
       return {
@@ -224,10 +222,10 @@ export default baseMixins.extend<options>().extend({
         offsetTop: 0,
         offsetLeft: 0,
         scrollHeight: 0,
-        top: (this.positionY || this.absoluteY),
-        bottom: (this.positionY || this.absoluteY),
-        left: (this.positionX || this.absoluteX),
-        right: (this.positionX || this.absoluteX),
+        top: this.positionY || this.absoluteY,
+        bottom: this.positionY || this.absoluteY,
+        left: this.positionX || this.absoluteX,
+        right: this.positionX || this.absoluteX,
         height: 0,
         width: 0,
       }
