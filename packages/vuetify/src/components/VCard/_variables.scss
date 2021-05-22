@@ -43,11 +43,15 @@ $card-title-comfortable-line-height: 1.75rem !default;
 $card-title-compact-line-height: 1.55rem !default;
 $card-title-font-size: map-deep-get($typography, 'h6', 'size') !default;
 $card-title-font-weight: map-deep-get($typography, 'h6', 'weight') !default;
+$card-title-hyphens: auto !default;
 $card-title-letter-spacing: map-deep-get($typography, 'h6', 'letter-spacing') !default;
 $card-title-line-height: map-deep-get($typography, 'h6', 'line-height') !default;
+$card-title-overflow-wrap: anywhere !default;
 $card-title-padding-top: 16px !default;
 $card-title-padding: 1rem 1rem 0 !default;
 $card-title-text-transform: none !default;
+$card-title-word-break: normal !default;
+$card-title-word-wrap: break-word !default;
 
 $card-border: () !default;
 $card-border: (
