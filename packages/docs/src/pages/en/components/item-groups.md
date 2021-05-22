@@ -38,7 +38,7 @@ v-item description -->
 
 #### Selected class
 
-The **selected-class** prop allows you to designate a CSS class that will be available for selected items.
+The **selected-class** prop allows you to designate a CSS class applied to _selected_ items.
 
 <example file="v-item-group/prop-selected-class" />
 
