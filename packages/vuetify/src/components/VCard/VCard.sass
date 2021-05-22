@@ -91,13 +91,6 @@
   align-items: center
   display: flex
   padding: $card-item-padding
-  height: $card-item-height
-
-  .v-card--density-comfortable &
-    height: $card-item-comfortable-height
-
-  .v-card--density-compact &
-    height: $card-item-compact-height
 
 .v-card-media
   overflow: hidden
@@ -138,7 +131,11 @@
   display: flex
   font-size: $card-title-font-size
   font-weight: $card-title-font-weight
+  hyphens: $card-title-hyphens
   letter-spacing: $card-title-letter-spacing
+  overflow-wrap: $card-title-overflow-wrap
   text-transform: $card-title-text-transform
+  word-break: $card-title-word-break
+  word-wrap: $card-title-word-wrap
 
   @include card-line-height-densities($card-title-densities)
