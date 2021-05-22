@@ -122,6 +122,7 @@ export default baseMixins.extend<options>().extend({
         scrollHeight: 0,
       },
     },
+    relativeYOffset: 0,
     hasJustFocused: false,
     hasWindow: false,
     inputActivator: false,
@@ -168,6 +169,9 @@ export default baseMixins.extend<options>().extend({
     },
     hasActivator (): boolean {
       return !!this.$slots.activator || !!this.$scopedSlots.activator || !!this.activator || !!this.inputActivator
+    },
+    absoluteYOffset (): number {
+      return this.pageYOffset - this.relativeYOffset
     },
   },
 
@@ -254,7 +258,7 @@ export default baseMixins.extend<options>().extend({
     },
     calcYOverflow (top: number) {
       const documentHeight = this.getInnerHeight()
-      const toTop = this.pageYOffset + documentHeight
+      const toTop = this.absoluteYOffset + documentHeight
       const activator = this.dimensions.activator
       const contentHeight = this.dimensions.content.height
       const totalHeight = top + contentHeight
@@ -268,13 +272,13 @@ export default baseMixins.extend<options>().extend({
         // the overflow, don't offset
         activator.top > contentHeight
       ) {
-        top = this.pageYOffset + (activator.top - contentHeight)
+        top = this.absoluteYOffset + (activator.top - contentHeight)
       // If overflowing bottom
       } else if (isOverflowing && !this.allowOverflow) {
         top = toTop - contentHeight - 12
       // If overflowing top
-      } else if (totalHeight < this.pageYOffset && !this.allowOverflow) {
-        top = this.pageYOffset + 12
+      } else if (top < this.absoluteYOffset && !this.allowOverflow) {
+        top = this.absoluteYOffset + 12
       }
 
       return top < 12 ? 12 : top
@@ -413,6 +417,7 @@ export default baseMixins.extend<options>().extend({
         if (!activator) return
 
         const relative = this.measureAbsolute()
+        this.relativeYOffset = relative.top
         dimensions.activator = this.measure(activator)
         dimensions.activator.top -= relative.top
         dimensions.activator.left -= relative.left
