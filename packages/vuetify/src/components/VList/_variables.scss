@@ -1,67 +1,68 @@
-@import '../../styles/styles.sass';
+// Defaults
+$list-actions-min-height: 52px !default;
+$list-actions-padding: 8px !default;
+$list-avatar-margin-end: 1rem !default;
+$list-avatar-margin-start: 1rem !default;
+$list-background: var(--v-theme-surface) !default;
+$list-border-color: $border-color-root !default;
+$list-border-elevation: 0 !default;
+$list-border-radius: $border-radius-root !default;
+$list-border-style: $border-style-root !default;
+$list-border-thin-width: thin !default;
+$list-border-width: 0 !default;
+$list-color: var(--v-theme-on-surface) !default;
+$list-disabled-opacity: 0.6 !default;
+$list-elevation: 1 !default;
+$list-hover-elevation: 8 !default;
+$list-item-padding: .5rem 1rem !default;
+$list-positions: absolute fixed !default;
+$list-subtitle-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+$list-subtitle-comfortable-line-height: 1.125rem !default;
+$list-subtitle-compact-line-height: 1rem !default;
+$list-subtitle-font-size: map-deep-get($typography, 'body-2', 'size') !default;
+$list-subtitle-font-weight: map-deep-get($typography, 'body-2', 'weight') !default;
+$list-subtitle-letter-spacing: map-deep-get($typography, 'body-2', 'letter-spacing') !default;
+$list-subtitle-line-height: map-deep-get($typography, 'body-2', 'line-height') !default;
+$list-subtitle-padding: 0 16px !default;
+$list-subtitle-text-transform: none !default;
+$list-tile-border-radius: 0 !default;
+$list-title-comfortable-line-height: 1.75rem !default;
+$list-title-compact-line-height: 1.55rem !default;
+$list-title-font-size: map-deep-get($typography, 'subtitle-1', 'size') !default;
+$list-title-font-weight: map-deep-get($typography, 'subtitle-1', 'weight') !default;
+$list-title-hyphens: auto !default;
+$list-title-letter-spacing: map-deep-get($typography, 'subtitle-1', 'letter-spacing') !default;
+$list-title-line-height: map-deep-get($typography, 'subtitle-1', 'line-height') !default;
+$list-title-overflow-wrap: anywhere !default;
+$list-title-padding-top: 16px !default;
+$list-title-padding: 1rem 1rem 0 !default;
+$list-title-text-transform: none !default;
+$list-title-word-break: normal !default;
+$list-title-word-wrap: break-word !default;
 
-$avatar-margin-x: 16px !default;
-$list-border-radius: 0 !default;
-$list-elevation: 0 !default;
-$list-dense-subheader-font-size: 0.75rem !default;
-$list-dense-subheader-height: 40px !default;
-// TODO: Resolve naming conflicts for
-// shaped style propagation to items
-$list-shaped-border-radius: 0 !default;
+$list-border: () !default;
+$list-border: (
+  $list-border-color,
+  $list-border-style,
+  $list-border-width
+);
 
-$list-item-avatar-margin-y: 8px !default;
-$list-item-avatar-horizontal-margin-x: -16px !default;
+$list-title-densities: () !default;
+$list-title-densities: (
+  null: $list-title-line-height,
+  'comfortable': $list-title-comfortable-line-height,
+  'compact': $list-title-compact-line-height
+);
 
-$list-item-icon-margin-y: 16px !default;
+$list-subtitle-densities: () !default;
+$list-subtitle-densities: (
+  null: $list-subtitle-line-height,
+  'comfortable': $list-subtitle-comfortable-line-height,
+  'compact': $list-subtitle-compact-line-height
+);
 
-$list-item-min-height: 48px !default;
-$list-item-two-line-min-height: 64px !default;
-$list-item-three-line-min-height: 88px !default;
-
-$list-item-title-font-size: map-deep-get($typography, 'subtitle-1', 'size') !default;
-$list-item-subtitle-font-size: map-deep-get($typography, 'subtitle-2', 'size') !default;
-
-$list-item-dense-title-font-size: 0.8125rem !default;
-$list-item-dense-title-font-weight: 500 !default;
-$list-padding: 8px 0 !default;
-$list-dense-subheading-padding: 0 8px !default;
-$list-nav-border-radius: $border-radius-root !default;
-$list-nav-rounded-item-margin-bottom: 8px !default;
-$list-nav-rounded-item-dense-margin-bottom: 4px !default;
-$list-nav-padding-left: 8px !default;
-$list-nav-padding-right: 8px !default;
-$list-nav-item-padding: 0 8px !default;
-$list-shaped-padding: 8px !default;
-$list-subheader-padding-top: 0 !default;
-$list-group-header-icon-min-width: 48px !default;
-$list-group-sub-group-child-margin: 16px !default;
-$list-group-sub-group-header-margin: 32px !default;
-$list-group-items-item-padding: 40px !default;
-$list-group-no-action-item-padding: 72px !default;
-$list-dense-subheader-padding: 0 8px !default;
-$list-nav-rounded-dense-item-margin-bottom: 4px !default;
-$list-group-no-action-sub-group-item-padding: 88px !default;
-$list-group-dense-sub-group-header-padding: 24px !default;
-$list-group-nav-no-action-item-padding: 64px !default;
-$list-group-sub-group-item-padding: 80px !default;
-$list-item-padding: 0 16px !default;
-$list-item-action-margin: 12px 0 !default;
-$list-item-action-text-font-size: map-deep-get($typography, 'caption', 'size') !default;
-$list-item-avatar-horizontal-margin: 8px !default;
-$list-item-content-padding: 12px 0 !default;
-$list-item-content-children-margin-bottom: 2px !default;
-$list-item-icon-margin: 16px 0 !default;
-$list-item-child-last-type-margin: 16px !default;
-$list-item-child-min-width: 24px !default;
-$list-item-title-subtitle-line-height: 1.2 !default;
-$list-item-avatar-first-child-margin: 16px !default;
-$list-item-action-icon-margin: 32px !default;
-$list-dense-icon-height: 24px !default;
-$list-dense-icon-margin: 8px !default;
-$list-dense-min-height: 40px !default;
-$list-item-dense-title-line-height: 1rem !default;
-$list-item-dense-two-line-min-height: 60px !default;
-$list-item-dense-three-line-min-height: 76px !default;
-$list-dense-content-padding: 8px 0 !default;
-$list-item-two-line-icon-margin-bottom: 32px !default;
-$list-item-three-line-avatar-action-margin: 16px !default;
+$list-theme: () !default;
+$list-theme: (
+  $list-background,
+  $list-color
+);

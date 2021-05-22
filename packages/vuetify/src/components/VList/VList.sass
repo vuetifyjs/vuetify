@@ -1,98 +1,131 @@
-@import './_variables.scss'
-@import './_mixins.sass'
+// Imports
+@import './index'
 
-// Theme
-.v-list
-  &.primary,
-  &.secondary,
-  &.accent,
-  &.success,
-  &.error,
-  &.warning,
-  &.info
-    > .v-list-item
-      color: map-deep-get($material-dark, 'text', 'primary')
+.v-list-item
+  background: $list-background
+  color: $list-color
+  position: relative
 
-+theme(v-list) using ($material)
-  background: map-get($material, 'cards')
-  color: map-deep-get($material, 'text','primary')
+  &::before,
+  &::after
+    border-radius: inherit
+    bottom: 0
+    content: ''
+    display: block
+    left: 0
+    pointer-events: none
+    position: absolute
+    right: 0
+    top: 0
+    transition-property: box-shadow, opacity
+    transition: 0.28s $standard-easing
 
-  .v-list--disabled
-    color: map-deep-get($material, 'text', 'disabled')
+  &::before
+    @include elevation($list-elevation)
 
-  .v-list-group--active:before,
-  .v-list-group--active:after
-    background: map-get($material, 'dividers')
+  @include border($list-border...)
+  @include position($list-positions)
+  @include rounded($list-border-radius)
 
-// Sheet
-+sheet(v-list, $list-elevation, $list-border-radius, $list-shaped-border-radius)
+  &--border
+    border-width: $list-border-thin-width
 
-// Block
-.v-list
-  display: block
-  padding: $list-padding
-  position: static
-  +elevationTransition()
+  &--disabled
+    pointer-events: none
+    user-select: none
 
-// Modifier
-.v-list--disabled
-  pointer-events: none
+    > [class*='v-list-']
+      opacity: $list-disabled-opacity
 
-.v-list--flat
-  .v-list-item:before
-    display: none
+  &--hover
+    cursor: pointer
 
-.v-list--dense
-  .v-subheader
-    font-size: $list-dense-subheader-font-size
-    height: $list-dense-subheader-height
-    padding: $list-dense-subheader-padding
+    &::before
+      opacity: 1
+      z-index: -1
 
-.v-list--nav,
-.v-list--rounded
-  .v-list-item:not(:last-child):not(:only-child)
-    margin-bottom: $list-nav-rounded-item-margin-bottom
+    &::after
+      z-index: 1
+      opacity: 0
 
-  &.v-list--dense .v-list-item,
-  .v-list-item--dense
-    &:not(:last-child):not(:only-child)
-      margin-bottom: $list-nav-rounded-dense-item-margin-bottom
+      @include elevation($list-hover-elevation)
 
-.v-list--nav
-  padding-left: $list-nav-padding-left
-  padding-right: $list-nav-padding-right
+    &:hover::after
+      opacity: 1
 
-  .v-list-item
-    padding: $list-nav-item-padding
+    &:hover::before
+      opacity: 0
 
-  .v-list-item,
-  .v-list-item:before
-    border-radius: $list-nav-border-radius
+  &--tile
+    @include rounded($list-tile-border-radius)
 
-.v-list.v-sheet--shaped
-  +list-shaped($list-item-min-height)
+.v-list-actions
+  align-items: center
+  display: flex
+  flex: 1 1 auto
+  min-height: $list-actions-min-height
+  padding: $list-actions-padding
 
-  &.v-list--two-line
-    +list-shaped($list-item-two-line-min-height)
+.v-list-avatar
+  @include ltr()
+    margin-right: $list-avatar-margin-start
 
-  &.v-list--three-line
-    +list-shaped($list-item-three-line-min-height)
+  @include rtl()
+    margin-left: $list-avatar-margin-end
 
-  +ltr()
-    padding-right: $list-shaped-padding
+.v-list-header
+  flex: 1 1 auto
 
-  +rtl()
-    padding-left: $list-shaped-padding
+.v-list-img
+  border-radius: inherit
+  display: flex
+  height: 100%
+  left: 0
+  overflow: hidden
+  position: absolute
+  top: 0
+  width: 100%
+  z-index: -1
 
-.v-list--rounded
-  padding: 8px
-  +list-rounded($list-item-min-height)
+.v-list-item
+  align-items: center
+  display: flex
+  padding: $list-item-padding
 
-  &.v-list--two-line
-    +list-rounded($list-item-two-line-min-height)
+.v-list-media
+  overflow: hidden
 
-  &.v-list--three-line
-    +list-rounded($list-item-three-line-min-height)
+  &:first-child
+    .v-list &
+      border-top-left-radius: inherit
+      border-top-right-radius: inherit
 
-.v-list--subheader
-  padding-top: $list-subheader-padding-top
+  &:last-child
+    .v-list &
+      border-bottom-left-radius: inherit
+      border-bottom-right-radius: inherit
+
+.v-list-subtitle
+  align-items: center
+  color: $list-subtitle-color
+  display: flex
+  font-size: $list-subtitle-font-size
+  font-weight: $list-subtitle-font-weight
+  letter-spacing: $list-subtitle-letter-spacing
+  text-transform: $list-subtitle-text-transform
+
+  @include list-line-height-densities($list-subtitle-densities)
+
+.v-list-title
+  align-items: center
+  display: flex
+  font-size: $list-title-font-size
+  font-weight: $list-title-font-weight
+  hyphens: $list-title-hyphens
+  letter-spacing: $list-title-letter-spacing
+  overflow-wrap: $list-title-overflow-wrap
+  text-transform: $list-title-text-transform
+  word-break: $list-title-word-break
+  word-wrap: $list-title-word-wrap
+
+  @include list-line-height-densities($list-title-densities)

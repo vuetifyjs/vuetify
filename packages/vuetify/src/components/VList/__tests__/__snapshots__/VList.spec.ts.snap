@@ -1,36 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VList.ts should render a dense component and match snapshot 1`] = `
-<div role="list"
-     class="v-list v-sheet theme--light v-list--dense"
+exports[`VList.vue should render a list with custom height 1`] = `
+<div class="v-list v-sheet theme--light"
+     style="height: 400px;"
 >
 </div>
 `;
 
-exports[`VList.ts should render a subheader component and match snapshot 1`] = `
-<div role="list"
-     class="v-list v-sheet theme--light v-list--subheader"
+exports[`VList.vue should render a flat list 1`] = `
+<div class="v-list v-list--flat v-sheet theme--light">
+</div>
+`;
+
+exports[`VList.vue should render a raised list 1`] = `
+<div class="v-list v-list--raised v-sheet theme--light">
+</div>
+`;
+
+exports[`VList.vue should render list with img 1`] = `
+<div class="v-list v-sheet theme--light">
+</div>
+`;
+
+exports[`VList.vue should render list, which is link 1`] = `
+<div tabindex="0"
+     class="v-list v-list--link v-sheet theme--light"
 >
 </div>
 `;
 
-exports[`VList.ts should render a threeLine component and match snapshot 1`] = `
-<div role="list"
-     class="v-list v-sheet theme--light v-list--three-line"
->
+exports[`VList.vue should render component and match snapshot 1`] = `
+<div class="v-list v-sheet theme--light">
 </div>
 `;
 
-exports[`VList.ts should render a twoLine component and match snapshot 1`] = `
-<div role="list"
-     class="v-list v-sheet theme--light v-list--two-line"
->
-</div>
-`;
-
-exports[`VList.ts should render component and match snapshot 1`] = `
-<div role="list"
-     class="v-list v-sheet theme--light"
->
+exports[`VList.vue should render loading list 1`] = `
+<div class="v-list v-list--loading v-sheet theme--light">
+  <div class="v-list__progress">
+    <div role="progressbar"
+         aria-valuemin="0"
+         aria-valuemax="100"
+         class="v-progress-linear v-progress-linear--absolute v-progress-linear--visible theme--light"
+         style="height: 4px;"
+    >
+      <div class="v-progress-linear__background primary"
+           style="opacity: 0.3; left: 0%; width: 100%;"
+      >
+      </div>
+      <div class="v-progress-linear__buffer">
+      </div>
+      <div class="v-progress-linear__indeterminate v-progress-linear__indeterminate--active">
+        <div class="v-progress-linear__indeterminate long primary">
+        </div>
+        <div class="v-progress-linear__indeterminate short primary">
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 `;

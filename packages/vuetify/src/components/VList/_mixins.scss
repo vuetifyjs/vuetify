@@ -1,0 +1,13 @@
+@mixin list-line-height-densities ($map) {
+  @each $density, $lineHeight in $map {
+    @if $density == null {
+      .v-list & {
+        line-height: $lineHeight;
+      }
+    } @else {
+      .v-list--density-#{$density} & {
+        line-height: $lineHeight;
+      }
+    }
+  }
+}

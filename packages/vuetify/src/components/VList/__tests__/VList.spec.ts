@@ -1,22 +1,22 @@
 // @ts-nocheck
 /* eslint-disable */
 
-// Components
-// import VList from '../VList'
-
-// Utilities
 import {
   mount,
   Wrapper,
+  MountOptions,
 } from '@vue/test-utils'
+// import VList from '../VList'
+// import { ExtractVue } from '../../../util/mixins'
 
-describe.skip('VList.ts', () => {
-  type Instance = InstanceType<typeof VList>
-  let mountFunction: (options?: object) => Wrapper<Instance>
-
+describe.skip('VList.vue', () => {
+  type Instance = ExtractVue<typeof VList>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {
-    mountFunction = (options = {}) => {
+    mountFunction = (options?: MountOptions<Instance>) => {
       return mount(VList, {
+        // https://github.com/vuejs/vue-test-utils/issues/1130
+        sync: false,
         ...options,
       })
     }
@@ -28,61 +28,80 @@ describe.skip('VList.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render a dense component and match snapshot', () => {
+  it('should render loading list', () => {
     const wrapper = mountFunction({
       propsData: {
-        dense: true,
+        loading: true,
+      },
+      mocks: {
+        $vuetify: {
+          rtl: false,
+        },
       },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render a subheader component and match snapshot', () => {
+  it('should render list, which is link', () => {
     const wrapper = mountFunction({
-      propsData: {
-        subheader: true,
+      // https://github.com/vuejs/vue-test-utils/issues/1130
+      sync: false,
+      listeners: {
+        click: () => {},
       },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render a threeLine component and match snapshot', () => {
+  it('should render list with img', () => {
     const wrapper = mountFunction({
       propsData: {
-        threeLine: true,
+        img: 'image.jpg',
       },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render a twoLine component and match snapshot', () => {
+  it('should render a flat list', () => {
     const wrapper = mountFunction({
       propsData: {
-        twoLine: true,
+        flat: true,
       },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should have an inferred role from injections', () => {
+  it('should render a raised list', () => {
     const wrapper = mountFunction({
-      provide: { isInMenu: true },
+      propsData: {
+        raised: true,
+      },
     })
 
-    expect(wrapper.element.getAttribute('role')).toBeNull()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 
-    const wrapper2 = mountFunction({
-      provide: { isInNav: true },
+  it('should render a list with custom height', async () => {
+    const heightpx = '400px'
+    const wrapper = mountFunction({
+      // https://github.com/vuejs/vue-test-utils/issues/1130
+      sync: false,
+      propsData: {
+        height: heightpx,
+      },
     })
 
-    expect(wrapper2.element.getAttribute('role')).toBeNull()
+    expect(wrapper.element.style.height).toBe(heightpx)
+    expect(wrapper.html()).toMatchSnapshot()
 
-    const wrapper3 = mountFunction()
-
-    expect(wrapper3.element.getAttribute('role')).toBe('list')
+    wrapper.setProps({
+      height: 401,
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.element.style.height).toBe('401px')
   })
 })
