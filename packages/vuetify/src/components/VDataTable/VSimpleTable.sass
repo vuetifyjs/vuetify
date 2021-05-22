@@ -44,6 +44,13 @@
           &:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper)
             background: map-deep-get($material, 'table', 'hover')
 
+      > tfoot
+        > tr
+          > td,
+          > th
+            &:not(.v-data-table__mobile-row)
+              border-top: thin solid map-get($material, 'dividers')
+
 // Block
 .v-data-table
   // Do not inherit line-height

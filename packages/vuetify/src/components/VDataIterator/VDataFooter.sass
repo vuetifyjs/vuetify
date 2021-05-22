@@ -4,7 +4,6 @@
 .v-data-footer
   display: flex
   flex-wrap: wrap
-  justify-content: flex-end
   align-items: center
   font-size: $data-footer-font-size
   padding: $data-footer-padding
@@ -47,10 +46,12 @@
   white-space: nowrap
 
   +ltr()
+    margin-left: auto
     margin-right: $data-footer-select-margin-end
 
   +rtl()
     margin-left: $data-footer-select-margin-end
+    margin-right: auto
 
   .v-select
     flex: 0 1 0

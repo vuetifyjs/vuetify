@@ -6,6 +6,9 @@ import {
   VSlideXTransition,
 } from '../transitions'
 
+// Directives
+import intersect from '../../directives/intersect'
+
 // Mixins
 import Colorable from '../../mixins/colorable'
 import { factory as PositionableFactory } from '../../mixins/positionable'
@@ -30,6 +33,8 @@ const baseMixins = mixins(
 /* @vue/component */
 export default baseMixins.extend({
   name: 'v-progress-linear',
+
+  directives: { intersect },
 
   props: {
     active: {
@@ -71,6 +76,7 @@ export default baseMixins.extend({
   data () {
     return {
       internalLazyValue: this.value || 0,
+      isVisible: true,
     }
   },
 
@@ -130,7 +136,7 @@ export default baseMixins.extend({
       return {
         opacity: backgroundOpacity,
         [this.isReversed ? 'right' : 'left']: convertToUnit(this.normalizedValue, '%'),
-        width: convertToUnit(this.normalizedBuffer - this.normalizedValue, '%'),
+        width: convertToUnit(Math.max(0, this.normalizedBuffer - this.normalizedValue), '%'),
       }
     },
     classes (): object {
@@ -142,6 +148,7 @@ export default baseMixins.extend({
         'v-progress-linear--reverse': this.isReversed,
         'v-progress-linear--rounded': this.rounded,
         'v-progress-linear--striped': this.striped,
+        'v-progress-linear--visible': this.isVisible,
         ...this.themeClasses,
       }
     },
@@ -209,6 +216,9 @@ export default baseMixins.extend({
 
       this.internalValue = e.offsetX / width * 100
     },
+    onObserve (entries: IntersectionObserverEntry[], observer: IntersectionObserver, isIntersecting: boolean) {
+      this.isVisible = isIntersecting
+    },
     normalize (value: string | number) {
       if (value < 0) return 0
       if (value > 100) return 100
@@ -226,6 +236,10 @@ export default baseMixins.extend({
         'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue,
       },
       class: this.classes,
+      directives: [{
+        name: 'intersect',
+        value: this.onObserve,
+      }],
       style: {
         bottom: this.bottom ? 0 : undefined,
         height: this.active ? convertToUnit(this.height) : 0,
