@@ -1,6 +1,5 @@
 // Composables
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import { makeProps, maybeTransition } from '@/util'
 import { makeTagProps } from '@/composables/tag'
 import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -10,6 +9,7 @@ import intersect from '@/directives/intersect'
 
 // Utilities
 import { defineComponent, PropType } from 'vue'
+import { makeProps, maybeTransition } from '@/util'
 
 export default defineComponent({
   name: 'VLazy',
@@ -55,7 +55,7 @@ export default defineComponent({
           props.options,
           ['once'],
         ]}
-        style={dimensionStyles.value}
+        style={ dimensionStyles.value }
       >
         { isActive.value && (
           maybeTransition(
