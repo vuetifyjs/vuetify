@@ -562,4 +562,38 @@ describe('VData.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/11905
+  it('should group items when sort is disabled', async () => {
+    const render = jest.fn()
+    const items = [
+      { id: 1, text: 'foo', baz: 'one' },
+      { id: 2, text: 'bar', baz: 'two' },
+      { id: 3, text: 'baz', baz: 'one' },
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        items,
+        groupBy: ['baz'],
+        disableSort: true,
+      },
+      scopedSlots: {
+        default: render,
+      },
+    })
+
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      groupedItems: [
+        {
+          name: 'one',
+          items: [items[0], items[2]],
+        },
+        {
+          name: 'two',
+          items: [items[1]],
+        },
+      ],
+    }))
+  })
 })
