@@ -21,8 +21,7 @@ $button-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !defa
 $button-border-radius: $border-radius-root !default;
 $button-border-style: $border-style-root !default;
 $button-border-width: thin !default;
-$button-card-actions-margin-end: 8px !default;
-$button-card-actions-margin-start: 8px !default;
+$button-card-actions-margin: .5rem !default;
 $button-card-actions-padding: 0 8px !default;
 $button-disabled-opacity: 0.26 !default;
 $button-disabled-overlay: 0.12 !default;

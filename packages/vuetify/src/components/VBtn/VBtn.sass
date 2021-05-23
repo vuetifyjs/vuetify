@@ -160,10 +160,12 @@
   .v-card-actions &
     padding: $button-card-actions-padding
 
-    @include ltr()
-      margin-right: $button-card-actions-margin-end
-
-    @include rtl()
-      margin-left: $button-card-actions-margin-start
-
     @include elevation(0)
+
+  ~ .v-btn
+    .v-card-actions &
+      @include ltr()
+        margin-left: $button-card-actions-margin
+
+      @linclude rtl()
+        margin-right: $button-card-actions-margin

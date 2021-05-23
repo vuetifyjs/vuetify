@@ -67,11 +67,24 @@
   padding: $card-actions-padding
 
 .v-card-avatar
-  @include ltr()
-    margin-right: $card-avatar-margin-start
+  align-self: start
+  padding: $card-avatar-padding
 
-  @include rtl()
-    margin-left: $card-avatar-margin-end
+  &:last-child
+    .v-card-item &
+      @include ltr()
+        padding-right: 0
+
+      @include rtl()
+        padding-left: 0
+
+  &:first-child
+    .v-card-item &
+      @include ltr()
+        padding-left: 0
+
+      @include rtl()
+        padding-right: 0
 
 .v-card-header
   flex: 1 1 auto
@@ -112,9 +125,13 @@
   font-size: $card-subtitle-font-size
   font-weight: $card-subtitle-font-weight
   letter-spacing: $card-subtitle-letter-spacing
+  padding: $card-subtitle-padding
   text-transform: $card-subtitle-text-transform
 
   @include card-line-height-densities($card-subtitle-densities)
+
+  .v-card-item &
+    padding: 0
 
 .v-card-text
   color: $card-text-color
@@ -134,8 +151,12 @@
   hyphens: $card-title-hyphens
   letter-spacing: $card-title-letter-spacing
   overflow-wrap: $card-title-overflow-wrap
+  padding: $card-title-padding
   text-transform: $card-title-text-transform
   word-break: $card-title-word-break
   word-wrap: $card-title-word-wrap
 
   @include card-line-height-densities($card-title-densities)
+
+  .v-card-item &
+    padding: 0
