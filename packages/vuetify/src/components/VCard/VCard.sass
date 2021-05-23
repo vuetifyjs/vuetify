@@ -5,6 +5,7 @@
   background: $card-background
   color: $card-color
   position: relative
+  padding: $card-padding
 
   &::before,
   &::after
@@ -67,7 +68,7 @@
   padding: $card-actions-padding
 
 .v-card-avatar
-  align-self: start
+  align-self: $card-avatar-align-self
   padding: $card-avatar-padding
 
   &:last-child
@@ -101,7 +102,7 @@
   z-index: -1
 
 .v-card-item
-  align-items: center
+  align-items: $card-item-align-items
   display: flex
   padding: $card-item-padding
 

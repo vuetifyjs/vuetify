@@ -1,6 +1,7 @@
 // Defaults
 $card-actions-min-height: 52px !default;
 $card-actions-padding: .5rem !default;
+$card-avatar-align-self: flex-start !default;
 $card-avatar-margin-end: 1rem !default;
 $card-avatar-margin-start: 1rem !default;
 $card-avatar-padding: .5rem 1rem !default;
@@ -15,7 +16,9 @@ $card-color: var(--v-theme-on-surface) !default;
 $card-disabled-opacity: 0.6 !default;
 $card-elevation: 1 !default;
 $card-hover-elevation: 8 !default;
+$card-item-align-items: center !default;
 $card-item-padding: .5rem 1rem !default;
+$card-padding: 0 !default;
 $card-positions: absolute fixed !default;
 $card-subtitle-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $card-subtitle-comfortable-line-height: 1.125rem !default;
