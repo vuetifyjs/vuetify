@@ -1,5 +1,4 @@
 // Defaults
-$navigation-drawer-absolute-z-index: 1 !default;
 $navigation-drawer-background: rgb(var(--v-theme-surface)) !default;
 $navigation-drawer-border-color: $border-color-root !default;
 $navigation-drawer-border-radius: map-get($rounded, '0') !default;
@@ -10,13 +9,11 @@ $navigation-drawer-content-height: 100% !default;
 $navigation-drawer-content-overflow-x: hidden !default;
 $navigation-drawer-content-overflow-y: auto !default;
 $navigation-drawer-elevation: 0 !default;
-$navigation-drawer-fixed-z-index: 6 !default;
 $navigation-drawer-height: 100% !default;
 $navigation-drawer-img-height: inherit !default;
 $navigation-drawer-img-object-fit: cover !default;
 $navigation-drawer-img-width: inherit !default;
 $navigation-drawer-overflow-scrolling: touch !default;
-$navigation-drawer-positions: absolute fixed !default;
 $navigation-drawer-rounded-border-radius: $border-radius-root !default;
 $navigation-drawer-temporary-elevation: 16 !default;
 $navigation-drawer-transition-duration: 0.2s !default;

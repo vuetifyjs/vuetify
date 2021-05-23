@@ -14,17 +14,14 @@
   transition-property: $navigation-drawer-transition-property
   transition-timing-function: $navigation-drawer-transition-timing-function
   will-change: $navigation-drawer-will-change
+  position: fixed
 
   @include border($navigation-drawer-border...)
   @include elevation($navigation-drawer-elevation)
-  @include position($navigation-drawer-positions)
   @include rounded($navigation-drawer-border-radius)
 
   &--absolute
-    z-index: $navigation-drawer-absolute-z-index
-
-  &--fixed
-    z-index: $navigation-drawer-fixed-z-index
+    position: absolute
 
   &--rounded
     @include rounded($navigation-drawer-rounded-border-radius)

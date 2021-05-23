@@ -5,7 +5,6 @@ import './VNavigationDrawer.sass'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
-import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useDisplay } from '@/composables/display'
@@ -14,8 +13,10 @@ import { useTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, defineComponent, onBeforeMount, ref, toRef, watch } from 'vue'
-import { convertToUnit } from '@/util/helpers'
 import { makeProps } from '@/util/makeProps'
+
+// Types
+import type { PropType } from 'vue'
 
 export default defineComponent({
   name: 'VNavigationDrawer',
@@ -39,10 +40,14 @@ export default defineComponent({
       type: [Number, String],
       default: 256,
     },
+    position: {
+      type: String as PropType<'left' | 'right' | 'bottom'>,
+      default: 'left',
+      validator: (value: any) => ['left', 'right', 'bottom'].includes(value),
+    },
     ...makeBorderProps(),
     ...makeElevationProps(),
     ...makeLayoutItemProps(),
-    ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps({ tag: 'nav' }),
   }),
@@ -52,23 +57,23 @@ export default defineComponent({
     const { borderClasses } = useBorder(props, 'v-navigation-drawer')
     const { elevationClasses } = useElevation(props)
     const { mobile } = useDisplay()
-    const { positionClasses, positionStyles } = usePosition(props, 'v-navigation-drawer')
     const { roundedClasses } = useRounded(props, 'v-navigation-drawer')
 
     const isActive = useProxiedModel(props, 'modelValue')
     const isHovering = ref(false)
-    const size = computed(() => Number(props.rail ? props.railWidth : props.width))
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)
         ? props.width
-        : size.value
+        : Number(props.rail ? props.railWidth : props.width)
     })
     const isTemporary = computed(() => !props.permanent && (mobile.value || props.temporary))
     const layoutStyles = useLayoutItem(
       props.name,
       toRef(props, 'priority'),
-      computed(() => props.right ? 'right' : 'left'),
-      computed(() => !isTemporary.value && isActive.value ? size.value : 0),
+      toRef(props, 'position'),
+      computed(() => isTemporary.value ? 0 : props.rail && props.expandOnHover ? Number(props.railWidth) : width.value),
+      width,
+      isActive,
     )
 
     if (!props.disableResizeWatcher) {
@@ -87,10 +92,6 @@ export default defineComponent({
 
     return () => {
       const hasImage = (slots.image || props.image)
-      const translate = (
-        (!props.permanent && !isActive.value ? 105 : 0) *
-        (!props.right && !props.bottom ? -1 : 1)
-      )
 
       return (
         <props.tag
@@ -99,27 +100,22 @@ export default defineComponent({
           class={[
             'v-navigation-drawer',
             {
-              'v-navigation-drawer--bottom': props.bottom,
-              'v-navigation-drawer--end': props.right,
+              'v-navigation-drawer--bottom': props.position === 'bottom',
+              'v-navigation-drawer--end': props.position === 'right',
               'v-navigation-drawer--expand-on-hover': props.expandOnHover,
               'v-navigation-drawer--is-hovering': isHovering.value,
               'v-navigation-drawer--rail': props.rail,
-              'v-navigation-drawer--start': props.left || !props.right,
+              'v-navigation-drawer--start': props.position === 'left',
               'v-navigation-drawer--temporary': isTemporary.value,
+              'v-navigation-drawer--absolute': props.absolute,
             },
             themeClasses.value,
             borderClasses.value,
             elevationClasses.value,
-            positionClasses.value,
             roundedClasses.value,
           ]}
           style={[
             layoutStyles.value,
-            positionStyles.value,
-            {
-              transform: `translate${props.bottom ? 'Y' : 'X'}(${convertToUnit(translate, '%')})`,
-              width: convertToUnit(width.value),
-            },
           ]}
         >
           { hasImage && (
