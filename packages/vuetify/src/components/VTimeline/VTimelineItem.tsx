@@ -14,6 +14,7 @@ import { makeRoundedProps } from '@/composables/rounded'
 // Helpers
 import { defineComponent, inject, ref, watch } from 'vue'
 import { convertToUnit, makeProps } from '@/util'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
 export default defineComponent({
   name: 'VTimelineItem',
@@ -35,12 +36,15 @@ export default defineComponent({
     ...makeElevationProps(),
     ...makeSizeProps(),
     ...makeTagProps(),
+    ...makeDimensionProps(),
   }),
 
   setup (props, ctx) {
     const timeline = inject(VTimelineSymbol)
 
     if (!timeline) throw new Error('[Vuetify] Could not find v-timeline provider')
+
+    const { dimensionStyles } = useDimension(props)
 
     const dotSize = ref(0)
     const dotRef = ref<ComponentPublicInstance>()
@@ -64,7 +68,10 @@ export default defineComponent({
           '--v-timeline-dot-size': convertToUnit(dotSize.value),
         }}
       >
-        <div class="v-timeline-item__body">
+        <div
+          class="v-timeline-item__body"
+          style={ dimensionStyles.value }
+        >
           { ctx.slots.default?.() }
         </div>
 

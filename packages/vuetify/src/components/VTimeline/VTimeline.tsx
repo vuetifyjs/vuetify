@@ -13,6 +13,7 @@ import { useTheme } from '@/composables/theme'
 // Helpers
 import { computed, defineComponent, provide, toRef } from 'vue'
 import { convertToUnit, makeProps } from '@/util'
+import { useBackgroundColor } from '@/composables/color'
 
 export type TimelineDirection = 'vertical' | 'horizontal'
 export type TimelineSide = 'before' | 'after' | undefined
@@ -49,6 +50,11 @@ export default defineComponent({
       type: String,
       default: 'secondary',
     },
+    truncateLine: {
+      type: String,
+      default: 'start',
+      validator: (v: any) => ['none', 'start', 'end', 'both'].includes(v),
+    },
     ...makeDensityProps(),
     ...makeTagProps(),
   }),
@@ -68,6 +74,8 @@ export default defineComponent({
       return side && `v-timeline--side-${side}`
     })
 
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'lineColor'))
+
     return () => (
       <props.tag
         class={[
@@ -75,6 +83,7 @@ export default defineComponent({
           `v-timeline--${props.direction}`,
           {
             'v-timeline--inset-line': !!props.lineInset,
+            'v-timeline--truncate-line-end': props.truncateLine === 'end' || props.truncateLine === 'both',
           },
           sideClass.value,
           themeClasses.value,
@@ -85,6 +94,21 @@ export default defineComponent({
           '--v-timeline-line-inset': convertToUnit(props.lineInset ?? 0),
         }}
       >
+        { props.truncateLine === 'none' || props.truncateLine === 'end' ? (
+          <>
+            <div style="grid-column: 1" />
+            <div style="grid-column: 2; display: flex; justify-content: center; position: relative">
+              <div
+                class={[
+                  'v-timeline-divider__line',
+                  backgroundColorClasses.value,
+                ]}
+                style={backgroundColorStyles.value}
+              />
+            </div>
+            <div style="grid-column: 3" />
+          </>
+        ) : undefined }
         { ctx.slots.default?.() }
       </props.tag>
     )

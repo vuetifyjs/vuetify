@@ -223,3 +223,11 @@
   .v-timeline-divider__inner-dot
     height: inherit
     width: inherit
+
+.v-timeline--truncate-line-end
+  .v-timeline-item:last-child
+    .v-timeline-divider__line
+      +horizontal(true)
+        width: calc(var(--v-timeline-dot-size) / 2)
+      +vertical(true)
+        height: calc(var(--v-timeline-dot-size) / 2)
