@@ -50,7 +50,7 @@ export default defineComponent({
     const dotRef = ref<ComponentPublicInstance>()
     watch(dotRef, newValue => {
       if (!newValue) return
-      dotSize.value = newValue.$el.querySelector('.v-timeline-divider__dot')?.getBoundingClientRect().width
+      dotSize.value = newValue.$el.querySelector('.v-timeline-divider__dot')?.getBoundingClientRect().width ?? 0
     }, {
       flush: 'post',
     })
@@ -76,22 +76,20 @@ export default defineComponent({
         </div>
 
         <VTimelineDivider
-          ref={dotRef}
-          hideDot={props.hideDot}
-          icon={props.icon}
-          iconColor={props.iconColor}
-          size={props.size}
-          elevation={props.elevation}
-          dotColor={props.dotColor}
-          fillDot={props.fillDot}
-          rounded={props.rounded}
+          ref={ dotRef }
+          hideDot={ props.hideDot }
+          icon={ props.icon }
+          iconColor={ props.iconColor }
+          size={ props.size }
+          elevation={ props.elevation }
+          dotColor={ props.dotColor }
+          fillDot={ props.fillDot }
+          rounded={ props.rounded }
           v-slots={{ default: ctx.slots.icon }}
         />
 
         { timeline.density.value !== 'compact' && (
-          <div
-            class="v-timeline-item__opposite"
-          >
+          <div class="v-timeline-item__opposite">
             { !props.hideOpposite && ctx.slots.opposite?.() }
           </div>
         ) }

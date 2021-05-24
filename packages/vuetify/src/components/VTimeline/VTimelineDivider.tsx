@@ -60,7 +60,7 @@ export default defineComponent({
               sizeClasses.value,
               elevationClasses.value,
             ]}
-            style={sizeStyles.value as any} // TODO: Fix this!
+            style={ sizeStyles.value as any } // TODO: Fix this!
           >
             <div
               class={[
@@ -68,11 +68,11 @@ export default defineComponent({
                 roundedClasses.value,
                 backgroundColorClasses.value,
               ]}
-              style={backgroundColorStyles.value}
+              style={ backgroundColorStyles.value }
             >
               {
                 ctx.slots.default ? ctx.slots.default({ icon: props.icon, iconColor: props.iconColor, size: props.size })
-                : props.icon ? <VIcon icon={props.icon} color={props.iconColor} size={props.size} />
+                : props.icon ? <VIcon icon={ props.icon } color={ props.iconColor } size={ props.size } />
                 : undefined
               }
             </div>
@@ -83,7 +83,7 @@ export default defineComponent({
             'v-timeline-divider__line',
             lineColorClasses.value,
           ]}
-          style={lineColorStyles.value}
+          style={ lineColorStyles.value }
         />
       </div>
     )

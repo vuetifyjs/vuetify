@@ -1,9 +1,8 @@
 // Styles
 import './VTimeline.sass'
 
-// Types
-import type { InjectionKey, Prop, Ref } from 'vue'
-import type { Density } from '@/composables/density'
+// Components
+import { VTimelineItem } from '.'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
@@ -13,7 +12,10 @@ import { useTheme } from '@/composables/theme'
 // Helpers
 import { computed, defineComponent, provide, toRef } from 'vue'
 import { convertToUnit, makeProps } from '@/util'
-import { useBackgroundColor } from '@/composables/color'
+
+// Types
+import type { InjectionKey, Prop, Ref } from 'vue'
+import type { Density } from '@/composables/density'
 
 export type TimelineDirection = 'vertical' | 'horizontal'
 export type TimelineSide = 'before' | 'after' | undefined
@@ -74,8 +76,6 @@ export default defineComponent({
       return side && `v-timeline--side-${side}`
     })
 
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'lineColor'))
-
     return () => (
       <props.tag
         class={[
@@ -91,23 +91,11 @@ export default defineComponent({
         ]}
         style={{
           '--v-timeline-line-thickness': convertToUnit(props.lineThickness),
-          '--v-timeline-line-inset': convertToUnit(props.lineInset ?? 0),
+          '--v-timeline-line-inset': convertToUnit(props.lineInset || undefined),
         }}
       >
         { props.truncateLine === 'none' || props.truncateLine === 'end' ? (
-          <>
-            <div style="grid-column: 1" />
-            <div style="grid-column: 2; display: flex; justify-content: center; position: relative">
-              <div
-                class={[
-                  'v-timeline-divider__line',
-                  backgroundColorClasses.value,
-                ]}
-                style={backgroundColorStyles.value}
-              />
-            </div>
-            <div style="grid-column: 3" />
-          </>
+          <VTimelineItem hideDot />
         ) : undefined }
         { ctx.slots.default?.() }
       </props.tag>
