@@ -39,7 +39,7 @@ export default defineComponent({
     ...makeDimensionProps(),
   }),
 
-  setup (props, ctx) {
+  setup (props, { slots }) {
     const timeline = inject(VTimelineSymbol)
 
     if (!timeline) throw new Error('[Vuetify] Could not find v-timeline provider')
@@ -72,7 +72,7 @@ export default defineComponent({
           class="v-timeline-item__body"
           style={ dimensionStyles.value }
         >
-          { ctx.slots.default?.() }
+          { slots.default?.() }
         </div>
 
         <VTimelineDivider
@@ -85,12 +85,12 @@ export default defineComponent({
           dotColor={ props.dotColor }
           fillDot={ props.fillDot }
           rounded={ props.rounded }
-          v-slots={{ default: ctx.slots.icon }}
+          v-slots={{ default: slots.icon }}
         />
 
         { timeline.density.value !== 'compact' && (
           <div class="v-timeline-item__opposite">
-            { !props.hideOpposite && ctx.slots.opposite?.() }
+            { !props.hideOpposite && slots.opposite?.() }
           </div>
         ) }
       </div>

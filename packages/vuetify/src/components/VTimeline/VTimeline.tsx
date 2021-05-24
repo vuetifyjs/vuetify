@@ -61,7 +61,7 @@ export default defineComponent({
     ...makeTagProps(),
   }),
 
-  setup (props, ctx) {
+  setup (props, { slots }) {
     const { themeClasses } = useTheme()
     const { densityClasses } = useDensity(props, 'v-timeline')
 
@@ -97,7 +97,8 @@ export default defineComponent({
         { props.truncateLine === 'none' || props.truncateLine === 'end' ? (
           <VTimelineItem hideDot />
         ) : undefined }
-        { ctx.slots.default?.() }
+
+        { slots.default?.() }
       </props.tag>
     )
   },

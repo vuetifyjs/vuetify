@@ -32,7 +32,7 @@ export default defineComponent({
     ...makeElevationProps(),
   },
 
-  setup (props, ctx) {
+  setup (props, { slots }) {
     const timeline = inject(VTimelineSymbol)
 
     if (!timeline) throw new Error('[Vuetify] Could not find v-timeline provider')
@@ -71,7 +71,7 @@ export default defineComponent({
               style={ backgroundColorStyles.value }
             >
               {
-                ctx.slots.default ? ctx.slots.default({ icon: props.icon, iconColor: props.iconColor, size: props.size })
+                slots.default ? slots.default({ icon: props.icon, iconColor: props.iconColor, size: props.size })
                 : props.icon ? <VIcon icon={ props.icon } color={ props.iconColor } size={ props.size } />
                 : undefined
               }
