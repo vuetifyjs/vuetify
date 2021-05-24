@@ -10,7 +10,8 @@ type Props = Record<string, Boolean | any[]>
 type GenerateConfiguration = {
   // If you pass `props`, then component is required
   props?: Props,
-  component?: JSX.Element
+  // Something that can be rendered. <VBtn>...</VBtn>, `mount(VBtn)`, etc
+  component?: unknown
   stories?: Stories,
 }
 
@@ -53,7 +54,7 @@ export const makeExamplesFromStories = (stories: Stories): Example[] => {
  * Generate a list of Examples by iterating over all passed in Props.
  * @param props A configuration object of props to call
  * @param component The component to be mounted with those specific props.
- * @returns 
+ * @returns
  * @example makeExamplesFromProps({
     color: ['success', 'error' ],
     icon: true
@@ -89,7 +90,7 @@ export const makeExamplesFromProps = (props: Props, component: JSX.Element): Exa
 /**
  * Generate a single `it` block with all of the stories and examples passed in
  * @param configuration
- * @returns 
+ * @returns
  */
 export const generate = ({ props, stories, component }: GenerateConfiguration) => {
   let exampleStories: Example[]
@@ -116,7 +117,7 @@ export const generate = ({ props, stories, component }: GenerateConfiguration) =
 /**
  * Generate one `it` block per example passed in
  * @param stories
- * @returns 
+ * @returns
  */
 export const generateByExample = (stories: Stories) => {
   return makeExamplesFromStories(stories).map(({ name, mount }) => {
@@ -126,9 +127,9 @@ export const generateByExample = (stories: Stories) => {
 
 /**
  * Generate one `it` block per prop passed in and render all applicable variants for those props
- * @param props 
- * @param component 
- * @returns 
+ * @param props
+ * @param component
+ * @returns
  */
 export const generateByProps = (props: Props, component: JSX.Element) => {
   return makeExamplesFromProps(props, component).map(({ mount, name }) => {

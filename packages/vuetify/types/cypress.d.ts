@@ -4,7 +4,7 @@ declare global {
   namespace Cypress {
     export interface Chainable {
       mount: typeof cyMount
-      setProps: Record<string, any>
+      setProps: (props: Record<string, unknown>) => Cypress.Chainable
     }
   }
 }
