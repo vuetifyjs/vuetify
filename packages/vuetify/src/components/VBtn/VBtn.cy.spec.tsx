@@ -200,6 +200,7 @@ describe('VBtn', () => {
     })
   })
 
+  // `href` prop is not implemented yet.
   describe.skip('href', () => {
     it('should render an <a> tag when using href prop', () => {
       cy.mount(<VBtn href={ anchor.href }>Click me</VBtn>)
@@ -230,8 +231,9 @@ describe('VBtn', () => {
 
   // I think there's an issue with setProps,
   // _or_ the prod code isn't working
-  describe.skip('Reactivity', () => {
-    it('tile', () => {
+  describe('Reactivity', () => {
+    // tile is not implemented.
+    it.skip('tile', () => {
       cy.mount(<VBtn tile>My button</VBtn>)
         .get('button')
         .should('contain.class', 'v-btn--tile')
@@ -241,6 +243,8 @@ describe('VBtn', () => {
 
     it('disabled', () => {
       cy.mount(<VBtn color="success" disabled></VBtn>)
+        .get('button')
+        .should('have.class', 'v-btn--disabled')
         .setProps({ disabled: false })
         .get('button')
         .should('not.have.class', 'v-btn--disabled')
@@ -262,7 +266,8 @@ describe('VBtn', () => {
         .should('not.have.class', 'v-btn--plain')
     })
 
-    it('retainFocusOnClick', () => {
+    // retainFocusOnClick is not implemented.
+    it.skip('retainFocusOnClick', () => {
       cy.mount(<VBtn retainFocusOnClick>My button</VBtn>)
         .get('button')
         .click()
@@ -279,5 +284,5 @@ describe('VBtn', () => {
 
 // Useful to preview all of the variants and pre-made examples
 describe.skip('Showcase', { viewportHeight: 1000, viewportWidth: 1000 }, () => {
-  generate({ stories, props, component: VBtn as unknown })
+  generate({ stories, props, component: VBtn })
 })
