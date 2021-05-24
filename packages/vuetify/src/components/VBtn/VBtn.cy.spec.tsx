@@ -229,8 +229,6 @@ describe('VBtn', () => {
     })
   })
 
-  // I think there's an issue with setProps,
-  // _or_ the prod code isn't working
   describe('Reactivity', () => {
     // tile is not implemented.
     it.skip('tile', () => {

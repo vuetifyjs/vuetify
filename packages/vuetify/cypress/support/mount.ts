@@ -30,7 +30,7 @@ Cypress.Commands.add('mount', (component, options, vuetifyOptions) => {
  *   .should('have.class', 'v-btn--disabled')
  */
 
-Cypress.Commands.add('setProps', (props = {}) => {
+Cypress.Commands.add('setProps', (props: Record<string, unknown> = {}) => {
   return cy.get('@wrapper').then(async (wrapper) => {
     // `wrapper` in inferred as JQuery<HTMLElement> since custom commands
     // generally receive a Cypress.Chainable as the first arg (the "subject").
