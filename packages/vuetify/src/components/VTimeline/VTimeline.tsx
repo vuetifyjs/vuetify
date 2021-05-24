@@ -85,9 +85,9 @@ export default defineComponent({
             'v-timeline--inset-line': !!props.lineInset,
             'v-timeline--truncate-line-end': props.truncateLine === 'end' || props.truncateLine === 'both',
           },
-          sideClass.value,
           themeClasses.value,
           densityClasses.value,
+          sideClass.value,
         ]}
         style={{
           '--v-timeline-line-thickness': convertToUnit(props.lineThickness),
