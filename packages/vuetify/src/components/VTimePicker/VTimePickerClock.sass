@@ -146,3 +146,15 @@
 
     &__ampm
       flex-direction: column
+      
+  .v-picker__title--landscape
+    padding: $time-picker-clock-padding
+  .v-picker__body 
+    align-self: flex-end
+
+    &:not(.v-picker__body--no-title)
+      +ltr()
+        margin-left: $time-picker-landscape-title-width
+
+      +rtl()
+        margin-right: $time-picker-landscape-title-width

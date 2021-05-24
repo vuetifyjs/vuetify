@@ -3,6 +3,7 @@
 $time-picker-title-color: map-get($shades, 'white') !default;
 $time-picker-title-btn-height: 70px !default;
 $time-picker-landscape-title-btn-height: 55px !default;
+$time-picker-landscape-title-width: 230px !default;
 $time-picker-ampm-title-margin-start: 8px !default;
 $time-picker-ampm-title-margin-bottom: 6px !default;
 $time-picker-ampm-title-margin: 0 0 $time-picker-ampm-title-margin-bottom $time-picker-ampm-title-margin-start !default;  // TODO: remove in 3.0
