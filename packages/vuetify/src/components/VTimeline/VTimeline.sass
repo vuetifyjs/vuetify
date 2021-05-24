@@ -13,12 +13,12 @@
   display: grid
   grid-auto-flow: dense
 
-  +horizontal(true)
+  @include horizontal(true)
     width: 100%
     grid-template-rows: auto min-content auto
 
     .v-timeline-item__body, .v-timeline-item__opposite
-      +rtltr(padding-left, padding-right, calc((var(--v-timeline-dot-size) / 2) - 5px))
+      @include rtltr(padding-left, padding-right, calc((var(--v-timeline-dot-size) / 2) - 5px))
 
     .v-timeline-item:nth-child(2n)
       .v-timeline-item__body
@@ -36,7 +36,7 @@
         grid-row: 3
         padding-top: $timeline-item-padding
 
-  +vertical(true)
+  @include vertical(true)
     height: 100%
     grid-template-columns: auto min-content auto
 
@@ -48,19 +48,19 @@
       .v-timeline-item__body
         grid-column: 1
         text-align: end
-        +rtltr(padding-right, padding-left, $timeline-item-padding)
+        @include rtltr(padding-right, padding-left, $timeline-item-padding)
       .v-timeline-item__opposite
         grid-column: 3
-        +rtltr(padding-left, padding-right, $timeline-item-padding)
+        @include rtltr(padding-left, padding-right, $timeline-item-padding)
 
     .v-timeline-item:nth-child(2n+1)
       .v-timeline-item__body
         grid-column: 3
-        +rtltr(padding-left, padding-right, $timeline-item-padding)
+        @include rtltr(padding-left, padding-right, $timeline-item-padding)
       .v-timeline-item__opposite
         grid-column: 1
         text-align: end
-        +rtltr(padding-right, padding-left, $timeline-item-padding)
+        @include rtltr(padding-right, padding-left, $timeline-item-padding)
 
 .v-timeline-item
   display: contents
@@ -68,45 +68,45 @@
 .v-timeline-divider__line
   position: absolute
 
-  +horizontal
+  @include horizontal
     height: var(--v-timeline-line-thickness)
     width: calc(100% - var(--v-timeline-line-inset, 0px))
 
-  +vertical
+  @include vertical
     width: var(--v-timeline-line-thickness)
     height: 100%
 
 .v-timeline--inset-line
   .v-timeline-divider__line
-    +vertical(true)
+    @include vertical(true)
       height: calc(100% - var(--v-timeline-dot-size) - var(--v-timeline-line-inset))
       bottom: calc(var(--v-timeline-line-inset) / 2)
 
-    +horizontal(true)
+    @include horizontal(true)
       width: calc(100% - var(--v-timeline-dot-size) - var(--v-timeline-line-inset))
-      +rtltr(right, left, calc(var(--v-timeline-line-inset) / 2))
+      @include rtltr(right, left, calc(var(--v-timeline-line-inset) / 2))
 
 .v-timeline:not(.v-timeline--inset-line)
   .v-timeline-item:first-child
     .v-timeline-divider__line
-      +vertical(true)
+      @include vertical(true)
         height: calc(100% - (var(--v-timeline-dot-size) / 2))
         bottom: 0
 
-      +horizontal(true)
+      @include horizontal(true)
         width: calc(100% - (var(--v-timeline-dot-size) / 2))
-        +rtltr(right, left, 0)
+        @include rtltr(right, left, 0)
 
 .v-timeline-divider
   position: relative
   display: flex
   align-items: center
 
-  +horizontal
+  @include horizontal
     flex-direction: row
     grid-row: 2
 
-  +vertical
+  @include vertical
     flex-direction: column
     grid-column: 2
 
@@ -117,7 +117,7 @@
   display: flex
   justify-content: center
   align-items: center
-  +elevation(1)
+  @include elevation(1)
 
   @each $name in $sizes
     &--size-#{$name}
@@ -138,7 +138,7 @@
 
 // Density
 .v-timeline--density-comfortable
-  +horizontal(true)
+  @include horizontal(true)
     height: 100%
 
     &.v-timeline--side-after
@@ -147,7 +147,7 @@
     &.v-timeline--side-before
       grid-template-rows: auto min-content min-content
 
-  +vertical(true)
+  @include vertical(true)
     width: 100%
 
     &.v-timeline--side-after
@@ -157,7 +157,7 @@
       grid-template-columns: auto min-content min-content
 
 .v-timeline--density-compact
-  +horizontal(true)
+  @include horizontal(true)
     &.v-timeline--side-after
       grid-template-rows: min-content auto
     &.v-timeline--side-before
@@ -166,7 +166,7 @@
     .v-timeline-item__body
       grid-row: 1
 
-  +vertical(true)
+  @include vertical(true)
     &.v-timeline--side-after
       grid-template-columns: min-content auto
     &.v-timeline--side-before
@@ -178,7 +178,7 @@
 // Side
 .v-timeline.v-timeline--side-after
   .v-timeline-item
-    +horizontal(true)
+    @include horizontal(true)
       .v-timeline-item__body
         grid-row: 3
         padding-top: $timeline-item-padding
@@ -188,18 +188,18 @@
         padding-top: initial
         grid-row: 1
 
-    +vertical(true)
+    @include vertical(true)
       .v-timeline-item__body
         grid-column: 3
         text-align: initial
-        +rtltr(padding-left, padding-right, $timeline-item-padding)
+        @include rtltr(padding-left, padding-right, $timeline-item-padding)
       .v-timeline-item__opposite
         grid-column: 1
-        +rtltr(padding-right, padding-left, $timeline-item-padding)
+        @include rtltr(padding-right, padding-left, $timeline-item-padding)
 
 .v-timeline.v-timeline--side-before
   .v-timeline-item
-    +horizontal(true)
+    @include horizontal(true)
       .v-timeline-item__body
         grid-row: 1
         padding-bottom: $timeline-item-padding
@@ -209,14 +209,14 @@
         padding-top: $timeline-item-padding
         padding-bottom: initial
 
-    +vertical(true)
+    @include vertical(true)
       .v-timeline-item__body
         grid-column: 1
         text-align: end
-        +rtltr(padding-right, padding-left, $timeline-item-padding)
+        @include rtltr(padding-right, padding-left, $timeline-item-padding)
       .v-timeline-item__opposite
         grid-column: 3
-        +rtltr(padding-left, padding-right, $timeline-item-padding)
+        @include rtltr(padding-left, padding-right, $timeline-item-padding)
 
 // Fill dot
 .v-timeline-divider--fill-dot
@@ -227,7 +227,7 @@
 .v-timeline--truncate-line-end
   .v-timeline-item:last-child
     .v-timeline-divider__line
-      +horizontal(true)
+      @include horizontal(true)
         width: calc(var(--v-timeline-dot-size) / 2)
-      +vertical(true)
+      @include vertical(true)
         height: calc(var(--v-timeline-dot-size) / 2)
