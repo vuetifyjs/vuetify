@@ -11,7 +11,7 @@ import { makeSizeProps } from '@/composables/size'
 import { makeElevationProps } from '@/composables/elevation'
 import { makeRoundedProps } from '@/composables/rounded'
 
-// Helpers
+// Utilities
 import { defineComponent, inject, ref, watch } from 'vue'
 import { convertToUnit, makeProps } from '@/util'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
@@ -20,10 +20,7 @@ export default defineComponent({
   name: 'VTimelineItem',
 
   props: makeProps({
-    dotColor: {
-      type: String,
-      default: 'primary',
-    },
+    dotColor: String,
     fillDot: Boolean,
     hideDot: Boolean,
     hideOpposite: {

@@ -4,10 +4,11 @@ $timeline-density-comfortable-grid-template-start: auto min-content min-content 
 $timeline-density-compact-grid-template-end: min-content auto !default;
 $timeline-density-compact-grid-template-start: auto min-content !default;
 $timeline-divider-dot-elevation: 0 !default;
+$timeline-divider-line-background: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $timeline-divider-line-horizontal-width: var(--v-timeline-line-inset, 0px) !default;
 $timeline-divider-line-thickness: var(--v-timeline-line-thickness) !default;
 $timeline-dot-border-radius: 50% !default;
-$timeline-dot-divider-background: rgb(var(--v-theme-surface)) !default;
+$timeline-dot-divider-background: rgb(var(--v-theme-on-surface)) !default;
 $timeline-inset-divider-line: var(--v-timeline-line-inset) !default;
 $timeline-inset-line-size: 4px !default;
 $timeline-item-grid-template: auto min-content auto !default;

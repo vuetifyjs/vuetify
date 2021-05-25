@@ -48,10 +48,7 @@ export default defineComponent({
       type: [String, Number],
       default: 2,
     },
-    lineColor: {
-      type: String,
-      default: 'secondary',
-    },
+    lineColor: String,
     truncateLine: {
       type: String,
       default: 'start',

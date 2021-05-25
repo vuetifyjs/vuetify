@@ -9,24 +9,18 @@ import { makeSizeProps, useSize } from '@/composables/size'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 
 // Utilities
-import { defineComponent, inject } from 'vue'
+import { defineComponent, inject, toRef } from 'vue'
 
 export default defineComponent({
   name: 'VTimelineDivider',
 
   props: {
     hideDot: Boolean,
-    lineColor: {
-      type: String,
-      default: 'secondary',
-    },
+    lineColor: String,
     icon: String,
     iconColor: String,
     fillDot: Boolean,
-    dotColor: {
-      type: String,
-      default: 'secondary',
-    },
+    dotColor: String,
     ...makeRoundedProps(),
     ...makeSizeProps(),
     ...makeElevationProps(),
@@ -38,7 +32,7 @@ export default defineComponent({
     if (!timeline) throw new Error('[Vuetify] Could not find v-timeline provider')
 
     const { sizeClasses, sizeStyles } = useSize(props, 'v-timeline-divider__dot')
-    const { backgroundColorStyles, backgroundColorClasses } = useBackgroundColor(props, 'dotColor')
+    const { backgroundColorStyles, backgroundColorClasses } = useBackgroundColor(toRef(props, 'dotColor'))
     const { backgroundColorStyles: lineColorStyles, backgroundColorClasses: lineColorClasses } = useBackgroundColor(timeline.lineColor)
     const { roundedClasses } = useRounded(props, 'v-timeline-divider__dot')
     const { elevationClasses } = useElevation(props)
