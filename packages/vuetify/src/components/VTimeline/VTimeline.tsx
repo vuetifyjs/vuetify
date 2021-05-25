@@ -91,9 +91,9 @@ export default defineComponent({
           '--v-timeline-line-inset': convertToUnit(props.lineInset || undefined),
         }}
       >
-        { props.truncateLine === 'none' || props.truncateLine === 'end' ? (
+        { (props.truncateLine === 'none' || props.truncateLine === 'end') && (
           <VTimelineItem hideDot />
-        ) : undefined }
+        ) }
 
         { slots.default?.() }
       </props.tag>
