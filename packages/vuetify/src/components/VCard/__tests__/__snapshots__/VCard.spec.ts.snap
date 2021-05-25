@@ -1,60 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VCard.vue should render a card with custom height 1`] = `
-<div class="v-card v-sheet theme--light"
-     style="height: 400px;"
->
+exports[`VCard should match a snapshot 1`] = `
+<div class="v-card v-theme--light v-card--density-default">
 </div>
 `;
 
-exports[`VCard.vue should render a flat card 1`] = `
-<div class="v-card v-card--flat v-sheet theme--light">
-</div>
-`;
-
-exports[`VCard.vue should render a raised card 1`] = `
-<div class="v-card v-card--raised v-sheet theme--light">
-</div>
-`;
-
-exports[`VCard.vue should render card with img 1`] = `
-<div class="v-card v-sheet theme--light">
-</div>
-`;
-
-exports[`VCard.vue should render card, which is link 1`] = `
-<div tabindex="0"
-     class="v-card v-card--link v-sheet theme--light"
->
-</div>
-`;
-
-exports[`VCard.vue should render component and match snapshot 1`] = `
-<div class="v-card v-sheet theme--light">
-</div>
-`;
-
-exports[`VCard.vue should render loading card 1`] = `
-<div class="v-card v-card--loading v-sheet theme--light">
-  <div class="v-card__progress">
-    <div role="progressbar"
-         aria-valuemin="0"
-         aria-valuemax="100"
-         class="v-progress-linear v-progress-linear--absolute v-progress-linear--visible theme--light"
-         style="height: 4px;"
-    >
-      <div class="v-progress-linear__background primary"
-           style="opacity: 0.3; left: 0%; width: 100%;"
-      >
+exports[`VCard should render slots and match a snapshot 1`] = `
+<div class="v-card v-theme--light v-card--density-default">
+  <div class="v-card-img">
+    <v-img src="foo.png">
+    </v-img>
+  </div>
+  <div class="v-card-media">
+    <div>
+      bar
+    </div>
+  </div>
+  <div class="v-card-header">
+    <div class="v-card-avatar">
+      <div>
+        foobar
       </div>
-      <div class="v-progress-linear__buffer">
-      </div>
-      <div class="v-progress-linear__indeterminate v-progress-linear__indeterminate--active">
-        <div class="v-progress-linear__indeterminate long primary">
-        </div>
-        <div class="v-progress-linear__indeterminate short primary">
+    </div>
+    <div class="v-card-header-text">
+      <div class="v-card-title">
+        <div>
+          fizzbuzz
         </div>
       </div>
+      <div class="v-card-subtitle">
+        <div>
+          fizz
+        </div>
+      </div>
+    </div>
+    <div class="v-card-avatar">
+      <div>
+        foo
+      </div>
+    </div>
+  </div>
+  <div class="v-card-text">
+    <div>
+      buzz
+    </div>
+  </div>
+  <div class="v-card-actions">
+    <div>
+      actions
     </div>
   </div>
 </div>
