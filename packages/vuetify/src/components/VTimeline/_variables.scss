@@ -1,7 +1,17 @@
 // Defaults
-$timeline-item-padding: 24px !default;
+$timeline-density-comfortable-grid-template-end: min-content min-content auto !default;
+$timeline-density-comfortable-grid-template-start: auto min-content min-content !default;
+$timeline-density-compact-grid-template-end: min-content auto !default;
+$timeline-density-compact-grid-template-start: auto min-content !default;
+$timeline-divider-dot-elevation: 0 !default;
+$timeline-divider-line-horizontal-width: var(--v-timeline-line-inset, 0px) !default;
+$timeline-divider-line-thickness: var(--v-timeline-line-thickness) !default;
 $timeline-dot-border-radius: 50% !default;
+$timeline-dot-divider-background: rgb(var(--v-theme-surface)) !default;
+$timeline-inset-divider-line: var(--v-timeline-line-inset) !default;
 $timeline-inset-line-size: 4px !default;
+$timeline-item-grid-template: auto min-content auto !default;
+$timeline-item-padding: 24px !default;
 
 $timeline-dot-sizes: () !default;
 $timeline-dot-sizes: map-deep-merge(

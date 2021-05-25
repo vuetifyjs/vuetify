@@ -83,7 +83,7 @@ exports[`VTimeline should render opposite slot 1`] = `
 `;
 
 exports[`VTimeline should show all items on single side 1`] = `
-<div class="v-timeline v-timeline--vertical v-timeline--side-after v-theme--light v-timeline--density-default">
+<div class="v-timeline v-timeline--vertical v-timeline--side-end v-theme--light v-timeline--density-default">
   <div class="v-timeline-item">
     <div class="v-timeline-item__body">
       item content
