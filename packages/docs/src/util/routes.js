@@ -95,3 +95,7 @@ export function route (name, path = '', strict = true) {
     pathToRegexpOptions: { strict },
   }
 }
+
+export function trailingSlash (str) {
+  return str.endsWith('/') ? str : str + '/'
+}

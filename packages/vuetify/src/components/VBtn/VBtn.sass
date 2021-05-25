@@ -1,4 +1,3 @@
-// Imports
 @import './_variables.scss'
 
 // Theme
@@ -75,15 +74,12 @@
     top: 0
     transition: $btn-transition
 
-  &:not(.v-btn--disabled)
-    will-change: box-shadow
-
   &:not(.v-btn--round)
     @each $name, $size in $btn-sizes
       &.v-size--#{$name}
         height: #{$size}px
         min-width: #{round($size * 1.777777777777778)}px // default ratio
-        padding: 0 #{$size / 2.25}px
+        padding: 0 #{div($size, 2.25)}px
 
   > .v-btn__content .v-icon
     color: inherit
@@ -219,10 +215,10 @@
 
       &.v-btn--absolute
         &.v-btn--bottom
-          bottom: -#{$size / 2}px
+          bottom: -#{div($size, 2)}px
 
         &.v-btn--top
-          top: -#{$size / 2}px
+          top: -#{div($size, 2)}px
 
 .v-btn--loading
   pointer-events: none
