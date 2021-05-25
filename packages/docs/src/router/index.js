@@ -11,11 +11,11 @@ import { IS_SERVER } from '@/util/globals'
 
 import {
   abort,
-  locale,
   layout,
-  route,
-  rpath,
+  locale,
   redirect,
+  route,
+  trailingSlash,
 } from '@/util/routes'
 
 // Setup
@@ -69,8 +69,8 @@ export function createRouter (vuetify, store, i18n) {
     })
   }
 
-  router.beforeEach(({ path }, from, next) => {
-    return path.endsWith('/') ? next() : next(rpath(path))
+  router.beforeEach(({ path, hash }, from, next) => {
+    return path.endsWith('/') ? next() : next(trailingSlash(path) + hash)
   })
 
   router.beforeEach((to, _, next) => {

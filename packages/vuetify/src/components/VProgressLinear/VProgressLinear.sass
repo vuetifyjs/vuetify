@@ -1,3 +1,5 @@
+@use "sass:math"
+
 @import './_variables.scss'
 
 +theme(v-progress-linear) using ($material)
@@ -110,7 +112,7 @@
   opacity: $progress-linear-stream-opacity
   pointer-events: none
   position: absolute
-  top: calc(50% - #{$progress-linear-stream-border-width / 2})
+  top: calc(50% - #{math.div($progress-linear-stream-border-width, 2)})
   transition: inherit
 
 .v-progress-linear--reverse
