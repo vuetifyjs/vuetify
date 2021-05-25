@@ -6,8 +6,8 @@ import {
   VCardActions,
   VCardAvatar,
   VCardHeader,
+  VCardHeaderText,
   VCardImg,
-  VCardItem,
   VCardMedia,
   VCardSubtitle,
   VCardText,
@@ -69,11 +69,11 @@ export default defineComponent({
     return () => {
       const hasTitle = (slots.title || props.title)
       const hasSubtitle = (slots.subtitle || props.subtitle)
-      const hasHeader = (hasTitle || hasSubtitle)
+      const hasHeaderText = (hasTitle || hasSubtitle)
       const hasAppend = (slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = (slots.prepend || props.prependAvatar || props.prependIcon)
       const hasImage = (slots.image || props.image)
-      const hasItem = hasHeader || hasPrepend || hasAppend
+      const hasHeader = hasHeaderText || hasPrepend || hasAppend
       const hasText = (slots.text || props.text)
 
       return (
@@ -112,8 +112,8 @@ export default defineComponent({
             <VCardMedia v-slots={{ default: slots.media }} />
           ) }
 
-          { hasItem && (
-            <VCardItem>
+          { hasHeader && (
+            <VCardHeader>
               { hasPrepend && (
                 <VCardAvatar>
                   { slots.prepend
@@ -129,8 +129,8 @@ export default defineComponent({
                 </VCardAvatar>
               ) }
 
-              { hasHeader && (
-                <VCardHeader>
+              { hasHeaderText && (
+                <VCardHeaderText>
                   { hasTitle && (
                     <VCardTitle>
                       { slots.title
@@ -146,7 +146,7 @@ export default defineComponent({
                       : props.subtitle
                     }
                   </VCardSubtitle>
-                </VCardHeader>
+                </VCardHeaderText>
               ) }
 
               { hasAppend && (
@@ -163,7 +163,7 @@ export default defineComponent({
                   }
                 </VCardAvatar>
               ) }
-            </VCardItem>
+            </VCardHeader>
           ) }
 
           { hasText && (

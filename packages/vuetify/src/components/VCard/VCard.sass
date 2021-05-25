@@ -72,7 +72,7 @@
   padding: $card-avatar-padding
 
   &:last-child
-    .v-card-item &
+    .v-card-header &
       @include ltr()
         padding-right: 0
 
@@ -80,14 +80,14 @@
         padding-left: 0
 
   &:first-child
-    .v-card-item &
+    .v-card-header &
       @include ltr()
         padding-left: 0
 
       @include rtl()
         padding-right: 0
 
-.v-card-header
+.v-card-header-text
   flex: 1 1 auto
 
 .v-card-img
@@ -101,7 +101,7 @@
   width: 100%
   z-index: -1
 
-.v-card-item
+.v-card-header
   align-items: $card-item-align-items
   display: flex
   padding: $card-item-padding
@@ -131,7 +131,7 @@
 
   @include card-line-height-densities($card-subtitle-densities)
 
-  .v-card-item &
+  .v-card-header &
     padding: 0
 
 .v-card-text
@@ -159,5 +159,5 @@
 
   @include card-line-height-densities($card-title-densities)
 
-  .v-card-item &
+  .v-card-header &
     padding: 0
