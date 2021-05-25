@@ -51,7 +51,7 @@ function checkIsActive (e: PointerEvent, binding: ClickOutsideDirective): boolea
 function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirective) {
   const handler = typeof binding.value === 'function' ? binding.value : binding.value!.handler
 
-  el._clickOutside!.lastMousedownWasOutside && checkEvent(e, el, binding) && setTimeout(() => {
+  checkEvent(e, el, binding) && el._clickOutside!.lastMousedownWasOutside && setTimeout(() => {
     checkIsActive(e, binding) && handler && handler(e)
   }, 0)
 }
@@ -75,7 +75,9 @@ export const ClickOutside = {
   inserted (el: HTMLElement, binding: ClickOutsideDirective) {
     const onClick = (e: Event) => directive(e as PointerEvent, el, binding)
     const onMousedown = (e: Event) => {
-      el._clickOutside!.lastMousedownWasOutside = checkEvent(e as PointerEvent, el, binding)
+      if (el._clickOutside) {
+        el._clickOutside!.lastMousedownWasOutside = checkEvent(e as PointerEvent, el, binding)
+      }
     }
 
     handleShadow(el, (app: HTMLElement) => {
