@@ -878,9 +878,13 @@ export default baseMixins.extend<options>().extend({
       this.selectedItems = selectedItems
     },
     setValue (value: any) {
-      const oldValue = this.internalValue
-      this.internalValue = value
-      value !== oldValue && this.$emit('change', value)
+      const newValue = this.returnObject ? value : this.getValue(value)
+      const oldValue = this.returnObject ? this.internalValue : this.getValue(this.internalValue)
+
+      if (!this.valueComparator(newValue, oldValue)) {
+        this.internalValue = value
+        this.$emit('change', value)
+      }
     },
     isAppendInner (target: any) {
       // return true if append inner is present
