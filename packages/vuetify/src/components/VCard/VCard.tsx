@@ -67,14 +67,14 @@ export default defineComponent({
     const { densityClasses } = useDensity(props, 'v-card')
 
     return () => {
-      const hasTitle = (slots.title || props.title)
-      const hasSubtitle = (slots.subtitle || props.subtitle)
-      const hasHeaderText = (hasTitle || hasSubtitle)
-      const hasAppend = (slots.append || props.appendAvatar || props.appendIcon)
-      const hasPrepend = (slots.prepend || props.prependAvatar || props.prependIcon)
-      const hasImage = (slots.image || props.image)
+      const hasTitle = !!(slots.title || props.title)
+      const hasSubtitle = !!(slots.subtitle || props.subtitle)
+      const hasHeaderText = !!(hasTitle || hasSubtitle)
+      const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
+      const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
+      const hasImage = !!(slots.image || props.image)
       const hasHeader = hasHeaderText || hasPrepend || hasAppend
-      const hasText = (slots.text || props.text)
+      const hasText = !!(slots.text || props.text)
 
       return (
         <props.tag

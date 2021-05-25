@@ -18,8 +18,8 @@
     position: absolute
     right: 0
     top: 0
-    transition-property: box-shadow, opacity
-    transition: 0.28s $standard-easing
+    transition-property: $card-pseudo-transition-property
+    transition: $card-pseudo-transition
 
   &::before
     @include elevation($card-elevation)
@@ -74,18 +74,18 @@
   &:last-child
     .v-card-header &
       @include ltr()
-        padding-right: 0
+        padding-right: $card-avatar-header-padding
 
       @include rtl()
-        padding-left: 0
+        padding-left: $card-avatar-header-padding
 
   &:first-child
     .v-card-header &
       @include ltr()
-        padding-left: 0
+        padding-left: $card-avatar-header-padding
 
       @include rtl()
-        padding-right: 0
+        padding-right: $card-avatar-header-padding
 
 .v-card-header-text
   flex: 1 1 auto
@@ -132,7 +132,7 @@
   @include card-line-height-densities($card-subtitle-densities)
 
   .v-card-header &
-    padding: 0
+    padding: $card-subtitle-header-padding
 
 .v-card-text
   color: $card-text-color
@@ -160,4 +160,4 @@
   @include card-line-height-densities($card-title-densities)
 
   .v-card-header &
-    padding: 0
+    padding: $card-title-header-padding
