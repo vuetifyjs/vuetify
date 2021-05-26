@@ -1,6 +1,19 @@
 // Styles
 import './VOverlay.sass'
 
+// Directives
+import { ClickOutside } from '@/directives/click-outside'
+
+// Composables
+import { useBackgroundColor } from '@/composables/color'
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
+import { useTheme } from '@/composables/theme'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { useTeleport } from '@/composables/teleport'
+
+// Utilities
+import { convertToUnit, getScrollParent, standardEasing, useRender } from '@/util'
+import { makeProps } from '@/util/makeProps'
 import {
   computed,
   defineComponent,
@@ -12,17 +25,10 @@ import {
   watch,
   watchEffect,
 } from 'vue'
-import type { BackgroundColorData } from '@/composables/color'
-import { useBackgroundColor } from '@/composables/color'
-import { makeProps } from '@/util/makeProps'
-import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { useTheme } from '@/composables/theme'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTeleport } from '@/composables/teleport'
-import { ClickOutside } from '@/directives/click-outside'
 
+// Types
+import type { BackgroundColorData } from '@/composables/color'
 import type { Prop, PropType, Ref } from 'vue'
-import { convertToUnit, getScrollParent, standardEasing, useRender } from '@/util'
 
 function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
   const isBooted = ref(eager.value)
@@ -142,29 +148,29 @@ export default defineComponent({
     },
     eager: Boolean,
     noClickAnimation: Boolean,
-    persistent: Boolean,
     modelValue: Boolean,
+    origin: [String, Object] as Prop<string | Element>,
+    persistent: Boolean,
     positionStrategy: {
       type: String as PropType<typeof positionStrategies[number]>,
       default: 'global',
       validator: (val: any) => positionStrategies.includes(val),
+    },
+    scrim: {
+      type: [String, Boolean],
+      default: true,
     },
     scrollStrategy: {
       type: String as PropType<typeof scrollStrategies[number]>,
       default: 'block',
       validator: (val: any) => scrollStrategies.includes(val),
     },
-    origin: [String, Object] as Prop<string | Element>,
-    scrim: {
-      type: [String, Boolean],
-      default: true,
-    },
     ...makeTransitionProps(),
   }),
 
   emits: {
-    'update:modelValue': (value: boolean) => true,
     'click:outside': (e: MouseEvent) => true,
+    'update:modelValue': (value: boolean) => true,
   },
 
   setup (props, { slots, attrs, emit }) {
@@ -182,6 +188,7 @@ export default defineComponent({
       if (!props.persistent) isActive.value = false
       else animateClick()
     }
+
     function closeConditional () {
       return isActive.value
     }
@@ -246,6 +253,7 @@ export default defineComponent({
       : props.scrollStrategy === 'block' ? new BlockScrollStrategy({ content })
       : null
 
+    // TODO: reactive
     if (scrollStrategy) {
       watch(isActive, val => {
         nextTick(() => {
@@ -264,7 +272,11 @@ export default defineComponent({
             onClick: onActivatorClick,
           },
         }) }
-        <Teleport to={ teleportTarget.value } disabled={ !teleportTarget.value } ref={ root }>
+        <Teleport
+          disabled={ !teleportTarget.value }
+          ref={ root }
+          to={ teleportTarget.value }
+        >
           { isBooted.value && (
             <div
               class={[
@@ -279,16 +291,21 @@ export default defineComponent({
               {...attrs}
             >
               <Scrim
-                modelValue={ isActive.value && !!props.scrim }
                 color={ scrimColor }
+                modelValue={ isActive.value && !!props.scrim }
               />
-              <MaybeTransition transition={ props.transition } appear persisted onAfterLeave={ onAfterLeave }>
+              <MaybeTransition
+                appear
+                onAfterLeave={ onAfterLeave }
+                persisted
+                transition={ props.transition }
+              >
                 <div
-                  class="v-overlay__content"
-                  tabindex={ -1 }
+                  ref={ content }
                   v-show={ isActive.value }
                   v-click-outside={{ handler: onClickOutside, closeConditional }}
-                  ref={ content }
+                  class="v-overlay__content"
+                  tabindex={ -1 }
                   onKeydown={ onKeydown }
                 >
                   { slots.default?.({ isActive }) }
@@ -301,8 +318,8 @@ export default defineComponent({
     ))
 
     return {
-      content,
       animateClick,
+      content,
     }
   },
 })
