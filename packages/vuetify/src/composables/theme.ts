@@ -1,9 +1,10 @@
 // Utilities
+import { computed, getCurrentInstance, inject, provide, ref, watch } from 'vue'
 import { colorToInt, colorToRGB, createRange, darken, getLuma, intToHex, lighten } from '@/util'
-import { computed, inject, provide, ref, watch } from 'vue'
 
 // Types
-import type { InjectionKey, Ref, SetupContext } from 'vue'
+import type { InjectionKey, Ref } from 'vue'
+import { consoleError } from '@/util/console'
 
 interface BaseColors {
   background: string
@@ -287,9 +288,11 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
  * A new theme instance will be created if either `theme` prop is provided,
  * or if `newContext` prop is true
  */
-export function provideTheme (props: { theme?: string, newContext?: boolean } = {}, context: SetupContext) {
+export function provideTheme (props: { theme?: string, newContext?: boolean } = {}) {
+  const vm = getCurrentInstance()
   const theme = inject(VuetifyThemeSymbol, null)
 
+  if (!vm) consoleError('provideTheme must be called from inside a setup function')
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
   const internal = ref<string | null>(null)
@@ -302,7 +305,7 @@ export function provideTheme (props: { theme?: string, newContext?: boolean } = 
         theme.current.value = value
       } else {
         internal.value = value
-        context.emit('update:theme', value)
+        vm?.emit('update:theme', value)
       }
     },
   })

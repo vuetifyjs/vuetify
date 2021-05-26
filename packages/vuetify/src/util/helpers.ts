@@ -1,6 +1,6 @@
 import type { DataTableCompareFunction, ItemGroup, SelectItemKey } from 'vuetify/types'
-import type { Ref, Slots, TransitionProps, VNode } from 'vue'
-import { camelize, Fragment, h, isRef, mergeProps, ref, Transition } from 'vue'
+import type { Ref, Slots, VNode } from 'vue'
+import { camelize, Fragment, isRef, ref } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
@@ -111,6 +111,8 @@ export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { 
   return filtered
 }
 
+export function convertToUnit (str: number, unit?: string): string
+export function convertToUnit (str: string | number | null | undefined, unit?: string): string | undefined
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
   if (str == null || str === '') {
     return undefined
@@ -382,20 +384,6 @@ export function flattenFragments (nodes: VNode[]): VNode[] {
       return node
     }
   }).flat()
-}
-
-export function maybeTransition <T extends VNode | VNode[] | undefined> (
-  props: { transition?: string | boolean | TransitionProps },
-  data: TransitionProps,
-  vNodes: T
-): VNode | T {
-  if (!props.transition || typeof props.transition === 'boolean') return vNodes
-
-  return h(
-    Transition,
-    mergeProps(typeof props.transition === 'string' ? { name: props.transition } : props.transition as any, data as any),
-    () => vNodes
-  )
 }
 
 export const randomHexColor = () => {

@@ -2,20 +2,20 @@ import { attachedRoot } from '@/util'
 import type { DirectiveBinding } from 'vue'
 
 interface ClickOutsideBindingArgs {
-  handler: (e: Event) => void
+  handler: (e: MouseEvent) => void
   closeConditional?: (e: Event) => boolean
   include?: () => HTMLElement[]
 }
 
 interface ClickOutsideDirectiveBinding extends DirectiveBinding {
-  value: ((e: Event) => void) | ClickOutsideBindingArgs
+  value: ((e: MouseEvent) => void) | ClickOutsideBindingArgs
 }
 
 function defaultConditional () {
   return true
 }
 
-function checkEvent (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirectiveBinding): boolean {
+function checkEvent (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirectiveBinding): boolean {
   // The include element callbacks below can be expensive
   // so we should avoid calling them when we're not active.
   // Explicitly check for false to allow fallback compatibility
@@ -42,13 +42,13 @@ function checkEvent (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDire
   return !elements.some(el => el.contains(e.target as Node))
 }
 
-function checkIsActive (e: PointerEvent, binding: ClickOutsideDirectiveBinding): boolean | void {
+function checkIsActive (e: MouseEvent, binding: ClickOutsideDirectiveBinding): boolean | void {
   const isActive = (typeof binding.value === 'object' && binding.value.closeConditional) || defaultConditional
 
   return isActive(e)
 }
 
-function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
+function directive (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
   const handler = typeof binding.value === 'function' ? binding.value : binding.value.handler
 
   el._clickOutside!.lastMousedownWasOutside && checkEvent(e, el, binding) && setTimeout(() => {
@@ -73,9 +73,9 @@ export const ClickOutside = {
   // available, iOS does not support
   // clicks on body
   mounted (el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
-    const onClick = (e: Event) => directive(e as PointerEvent, el, binding)
+    const onClick = (e: Event) => directive(e as MouseEvent, el, binding)
     const onMousedown = (e: Event) => {
-      el._clickOutside!.lastMousedownWasOutside = checkEvent(e as PointerEvent, el, binding)
+      el._clickOutside!.lastMousedownWasOutside = checkEvent(e as MouseEvent, el, binding)
     }
 
     handleShadow(el, (app: HTMLElement) => {

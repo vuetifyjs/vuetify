@@ -1,3 +1,5 @@
-@import '../../styles/styles.sass';
-
-$overlay-transition: $primary-transition, z-index 1ms !default;
+// Defaults
+$overlay-opacity: 32%;
+$overlay-padding-x: var(--v-scrollbar-offset) !default;
+$overlay-scrim-background: rgb(var(--v-theme-on-surface)) !default;
+$overlay-z-index: 800 !default;

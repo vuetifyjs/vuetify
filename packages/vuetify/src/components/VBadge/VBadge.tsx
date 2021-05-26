@@ -7,12 +7,12 @@ import { VIcon } from '@/components'
 // Composables
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { makeTransitionProps } from '@/composables/transition'
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, defineComponent, toRef } from 'vue'
-import { convertToUnit, extract, makeProps, maybeTransition } from '@/util'
+import { convertToUnit, extract, makeProps } from '@/util'
 
 export default defineComponent({
   name: 'VBadge',
@@ -124,38 +124,34 @@ export default defineComponent({
           <div class="v-badge__wrapper">
             { ctx.slots.default?.() }
 
-            {
-              maybeTransition(
-                props,
-                {},
-                <span
-                  v-show={ props.modelValue }
-                  class={[
-                    'v-badge__badge',
-                    backgroundColorClasses.value,
-                    roundedClasses.value,
-                    textColorClasses.value,
-                  ]}
-                  style={[
-                    backgroundColorStyles.value,
-                    locationStyles.value,
-                    textColorStyles.value,
-                  ] as any} // TODO: Fix this :(
-                  aria-atomic="true"
-                  aria-label="locale string here" // TODO: locale string here
-                  aria-live="polite"
-                  role="status"
-                  { ...badgeAttrs }
-                >
-                  {
-                    props.dot ? undefined
-                    : ctx.slots.badge ? ctx.slots.badge?.()
-                    : props.icon ? <VIcon icon={props.icon} />
-                    : <span class="v-badge__content">{content}</span>
-                  }
-                </span>,
-              )
-            }
+            <MaybeTransition transition={ props.transition }>
+              <span
+                v-show={ props.modelValue }
+                class={[
+                  'v-badge__badge',
+                  backgroundColorClasses.value,
+                  roundedClasses.value,
+                  textColorClasses.value,
+                ]}
+                style={[
+                  backgroundColorStyles.value,
+                  locationStyles.value,
+                  textColorStyles.value,
+                ] as any} // TODO: Fix this :(
+                aria-atomic="true"
+                aria-label="locale string here" // TODO: locale string here
+                aria-live="polite"
+                role="status"
+                { ...badgeAttrs }
+              >
+                {
+                  props.dot ? undefined
+                  : ctx.slots.badge ? ctx.slots.badge?.()
+                  : props.icon ? <VIcon icon={props.icon} />
+                  : <span class="v-badge__content">{content}</span>
+                }
+              </span>
+            </MaybeTransition>
           </div>
         </props.tag>
       )

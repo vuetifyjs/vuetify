@@ -1,38 +1,50 @@
-@import './_variables.scss'
-
-// Theme
-+theme(v-overlay) using ($material)
-  color: map-deep-get($material, 'text', 'primary')
+@import './index'
 
 // Block
+.v-overlay-container
+  bottom: 0
+  contain: strict
+  left: 0
+  pointer-events: none
+  position: fixed
+  right: 0
+  top: 0
+
 .v-overlay
   align-items: center
   border-radius: inherit
   display: flex
+  height: 100%
   justify-content: center
-  position: fixed
-  top: 0
   left: 0
-  right: 0
-  bottom: 0
   pointer-events: none
-  transition: $overlay-transition
+  position: fixed
+  right: 0
+  top: 0
+  z-index: $overlay-z-index
+
+  @include ltr()
+    padding-right: $overlay-padding-x
+
+  @include rtl()
+    padding-left: $overlay-padding-x
 
 // Element
 .v-overlay__content
+  outline: none
   position: relative
 
 .v-overlay__scrim
+  background: $overlay-scrim-background
   border-radius: inherit
   bottom: 0
   height: 100%
   left: 0
+  opacity: $overlay-opacity
   position: absolute
   right: 0
   top: 0
-  transition: inherit
   width: 100%
-  will-change: opacity
 
 // Modifier
 .v-overlay--absolute
