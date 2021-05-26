@@ -22,7 +22,7 @@ import { useTeleport } from '@/composables/teleport'
 import { ClickOutside } from '@/directives/click-outside'
 
 import type { Prop, PropType, Ref } from 'vue'
-import { convertToUnit, standardEasing, useRender } from '@/util'
+import { convertToUnit, getScrollParent, standardEasing, useRender } from '@/util'
 
 function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
   const isBooted = ref(eager.value)
@@ -95,21 +95,35 @@ class CloseScrollStrategy implements ScrollStrategy {
 }
 
 class BlockScrollStrategy implements ScrollStrategy {
-  private initialOverflow = ''
+  private initialOverflow: string[] = []
+  private scrollElements: HTMLElement[] = []
+  private content: Ref<HTMLElement | undefined>
+
+  constructor ({ content }: { content: Ref<HTMLElement | undefined> }) {
+    this.content = content
+  }
 
   enable () {
-    const el = document.documentElement
-    this.initialOverflow = el.style.overflowY
+    this.scrollElements = [document.documentElement]
+    const scrollParent = getScrollParent(this.content.value)
+    if (scrollParent !== document.scrollingElement) this.scrollElements.push(scrollParent)
 
-    el.style.paddingRight = convertToUnit(window.innerWidth - el.offsetWidth)
+    document.documentElement.style.setProperty(
+      '--v-scrollbar-offset',
+      convertToUnit(window.innerWidth - document.documentElement.offsetWidth)
+    )
 
-    el.style.overflowY = 'hidden'
+    this.scrollElements.forEach((el, i) => {
+      this.initialOverflow[i] = el.style.overflowY
+      el.style.overflowY = 'hidden'
+    })
   }
 
   disable () {
-    document.documentElement.style.overflowY = this.initialOverflow
-
-    document.documentElement.style.paddingRight = ''
+    this.scrollElements.forEach((el, i) => {
+      el.style.overflowY = this.initialOverflow[i]
+    })
+    document.documentElement.style.setProperty('--v-scrollbar-offset', '')
   }
 }
 
@@ -187,6 +201,7 @@ export default defineComponent({
     }
 
     const content = ref<HTMLElement>()
+
     watch(isActive, val => {
       nextTick(() => {
         if (val) {
@@ -195,6 +210,17 @@ export default defineComponent({
           activatorElement.value?.focus()
         }
       })
+    })
+
+    const root = ref()
+    const top = ref<number>()
+    watch(() => isActive.value && props.absolute && teleportTarget.value == null, val => {
+      if (val) {
+        const scrollParent = getScrollParent(root.value)
+        if (scrollParent && scrollParent !== document.scrollingElement) {
+          top.value = scrollParent.scrollTop
+        }
+      }
     })
 
     // Add a quick "bounce" animation to the content
@@ -217,7 +243,7 @@ export default defineComponent({
 
     const scrollStrategy =
       props.scrollStrategy === 'close' ? new CloseScrollStrategy(isActive)
-      : props.scrollStrategy === 'block' ? new BlockScrollStrategy()
+      : props.scrollStrategy === 'block' ? new BlockScrollStrategy({ content })
       : null
 
     if (scrollStrategy) {
@@ -238,7 +264,7 @@ export default defineComponent({
             onClick: onActivatorClick,
           },
         }) }
-        <Teleport to={ teleportTarget.value } disabled={ !teleportTarget.value }>
+        <Teleport to={ teleportTarget.value } disabled={ !teleportTarget.value } ref={ root }>
           { isBooted.value && (
             <div
               class={[
@@ -249,6 +275,7 @@ export default defineComponent({
                 },
                 themeClasses.value,
               ]}
+              style={ top.value != null ? `top: ${convertToUnit(top.value)}` : undefined }
               {...attrs}
             >
               <Scrim
