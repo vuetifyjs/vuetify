@@ -12,7 +12,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTeleport } from '@/composables/teleport'
 
 // Utilities
-import { convertToUnit, getScrollParent, standardEasing, useRender } from '@/util'
+import { convertToUnit, getScrollParent, getScrollParents, standardEasing, useRender } from '@/util'
 import { makeProps } from '@/util/makeProps'
 import {
   computed,
@@ -83,16 +83,27 @@ interface ScrollStrategy {
 }
 
 class CloseScrollStrategy implements ScrollStrategy {
-  constructor (
-    private isActive: Ref<boolean>
-  ) {}
+  private content: Ref<HTMLElement | undefined>
+  private scrollElements: EventTarget[] = []
+  private isActive: Ref<boolean>
+
+  constructor ({ content, isActive }: { content: Ref<HTMLElement | undefined>, isActive: Ref<boolean> }) {
+    this.content = content
+    this.isActive = isActive
+  }
 
   enable () {
-    document.addEventListener('scroll', this.onScroll.bind(this), { passive: true })
+    this.scrollElements = [document, ...getScrollParents(this.content.value)]
+
+    this.scrollElements.forEach(el => {
+      el.addEventListener('scroll', this.onScroll.bind(this), { passive: true })
+    })
   }
 
   disable () {
-    document.removeEventListener('scroll', this.onScroll.bind(this))
+    this.scrollElements.forEach(el => {
+      el.removeEventListener('scroll', this.onScroll.bind(this))
+    })
   }
 
   private onScroll () {
@@ -110,9 +121,7 @@ class BlockScrollStrategy implements ScrollStrategy {
   }
 
   enable () {
-    this.scrollElements = [document.documentElement]
-    const scrollParent = getScrollParent(this.content.value)
-    if (scrollParent !== document.scrollingElement) this.scrollElements.push(scrollParent)
+    this.scrollElements = getScrollParents(this.content.value)
 
     document.documentElement.style.setProperty(
       '--v-scrollbar-offset',
@@ -249,7 +258,7 @@ export default defineComponent({
     }
 
     const scrollStrategy =
-      props.scrollStrategy === 'close' ? new CloseScrollStrategy(isActive)
+      props.scrollStrategy === 'close' ? new CloseScrollStrategy({ content, isActive })
       : props.scrollStrategy === 'block' ? new BlockScrollStrategy({ content })
       : null
 

@@ -7,6 +7,16 @@ export function getScrollParent (el?: HTMLElement) {
   return document.scrollingElement as HTMLElement
 }
 
+export function getScrollParents (el?: HTMLElement) {
+  const elements: HTMLElement[] = []
+  while (el) {
+    if (hasScrollbar(el)) elements.push(el)
+    el = el.parentElement!
+  }
+
+  return elements
+}
+
 function hasScrollbar (el?: HTMLElement) {
   if (!el || el.nodeType !== Node.ELEMENT_NODE) return false
 
