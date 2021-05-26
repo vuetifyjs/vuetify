@@ -27,12 +27,17 @@ import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
 import { useTheme } from '@/composables/theme'
 
+// Directives
+import { Ripple } from '@/directives/ripple'
+
 // Utilities
 import { defineComponent, toRef } from 'vue'
 import { makeProps } from '@/util'
 
 export default defineComponent({
   name: 'VCard',
+
+  directives: { Ripple },
 
   props: makeProps({
     appendAvatar: String,
@@ -42,8 +47,10 @@ export default defineComponent({
     flat: Boolean,
     hover: Boolean,
     image: String,
+    link: Boolean,
     prependAvatar: String,
     prependIcon: String,
+    ripple: Boolean,
     subtitle: String,
     text: String,
     title: String,
@@ -75,15 +82,17 @@ export default defineComponent({
       const hasImage = !!(slots.image || props.image)
       const hasHeader = hasHeaderText || hasPrepend || hasAppend
       const hasText = !!(slots.text || props.text)
+      const hasOverlay = props.link || !props.disabled
 
       return (
         <props.tag
           class={[
             'v-card',
             {
+              'v-card--disabled': props.disabled,
               'v-card--flat': props.flat,
               'v-card--hover': props.hover && !(props.disabled || props.flat),
-              'v-card--disabled': props.disabled,
+              'v-card--link': props.link,
             },
             themeClasses.value,
             backgroundColorClasses.value,
@@ -98,7 +107,10 @@ export default defineComponent({
             dimensionStyles.value,
             positionStyles.value,
           ]}
+          v-ripple={ hasOverlay }
         >
+          { hasOverlay && (<div class="v-card__overlay" />) }
+
           { hasImage && (
             <VCardImg>
               { slots.image
