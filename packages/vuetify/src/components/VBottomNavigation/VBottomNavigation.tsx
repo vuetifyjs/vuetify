@@ -32,13 +32,16 @@ export default defineComponent({
       type: String,
       validator: (v: any) => !v || ['horizontal', 'shift'].includes(v),
     },
+    height: {
+      type: [Number, String],
+      default: 56,
+    },
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
     ...makeRoundedProps(),
     ...makeLayoutItemProps({
       name: 'bottom-navigation',
-      size: 56,
     }),
     ...makeTagProps({ tag: 'header' }),
   }),
@@ -56,7 +59,7 @@ export default defineComponent({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props, 'v-bottom-navigation')
     const height = computed(() => (
-      Number(props.size) -
+      Number(props.height) -
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ))
@@ -66,6 +69,8 @@ export default defineComponent({
       computed(() => props.priority),
       computed(() => 'bottom'),
       computed(() => isActive.value ? height.value : 0),
+      height,
+      isActive
     )
 
     return () => {
@@ -78,6 +83,7 @@ export default defineComponent({
               'v-bottom-navigation--horizontal': props.mode === 'horizontal',
               'v-bottom-navigation--is-active': isActive.value,
               'v-bottom-navigation--shift': props.mode === 'shift',
+              'v-bottom-navigation--absolute': props.absolute,
             },
             themeClasses.value,
             backgroundColorClasses.value,

@@ -1,5 +1,5 @@
 <template>
-  <v-item-group active-class="primary">
+  <v-item-group selected-class="primary">
     <v-container>
       <v-row>
         <v-col
@@ -8,19 +8,19 @@
           cols="12"
           md="4"
         >
-          <v-item v-slot="{ active, toggle }">
+          <v-item v-slot="{ selected, selectedClass, toggle }">
             <v-card
-              class="d-flex align-center"
+              :class="['d-flex align-center', selectedClass]"
               dark
               height="200"
               @click="toggle"
             >
               <v-scroll-y-transition>
                 <div
-                  v-if="active"
+                  v-if="selected"
                   class="display-3 flex-grow-1 text-center"
                 >
-                  Active
+                  Selected
                 </div>
               </v-scroll-y-transition>
             </v-card>

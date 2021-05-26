@@ -1,14 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VLazy.ts should conditionally render content 1`] = `
+exports[`VLazy should match a snapshot 1`] = `
 <div class="v-lazy">
 </div>
 `;
 
-exports[`VLazy.ts should conditionally render content 2`] = `
+exports[`VLazy should match a snapshot 2`] = `
 <div class="v-lazy">
-  <div>
-    foobar
-  </div>
+  <transition-stub>
+    <div>
+      foobar
+    </div>
+  </transition-stub>
+</div>
+`;
+
+exports[`VLazy should match a snapshot 3`] = `
+<div class="v-lazy">
 </div>
 `;

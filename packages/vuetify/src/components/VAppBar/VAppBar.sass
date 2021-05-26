@@ -10,12 +10,14 @@
   overflow: hidden
   padding-left: $app-bar-padding-start
   padding-right: $app-bar-padding-end
-  position: relative
+  position: fixed
   transition: $app-bar-transition
 
   @include border($app-bar-border...)
-  @include position($app-bar-positions)
   @include rounded($app-bar-border-radius)
+
+  &--absolute
+    position: absolute
 
   &--is-active
     @include elevation($app-bar-elevation)

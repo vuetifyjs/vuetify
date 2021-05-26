@@ -1,6 +1,8 @@
-import { mount } from '@vue/test-utils'
+import { makeGroupProps, useGroup, useGroupItem } from '../group'
+
+// Utilities
 import { defineComponent, h, nextTick, reactive } from 'vue'
-import { useGroup, useGroupItem } from '../group'
+import { mount } from '@vue/test-utils'
 
 describe('group', () => {
   describe('with complex values', () => {
@@ -77,10 +79,7 @@ describe('group', () => {
 
     const GroupComponent = defineComponent({
       props: {
-        modelValue: [Array, String],
-        multiple: Boolean,
-        mandatory: Boolean,
-        max: Number,
+        ...makeGroupProps(),
         disabled: Array,
       },
       setup (props) {
@@ -163,10 +162,10 @@ describe('group', () => {
       ])
     })
 
-    it('should set first non-disabled item as value when mandatory', async () => {
+    it('should set first non-disabled item as value when forced mandatory', async () => {
       const wrapper = mount(GroupComponent, {
         props: {
-          mandatory: true,
+          mandatory: 'force',
           multiple: false,
           disabled: [true, false],
         },
@@ -260,9 +259,7 @@ describe('group', () => {
 
     const GroupComponent = defineComponent({
       props: {
-        multiple: Boolean,
-        mandatory: Boolean,
-        max: Number,
+        ...makeGroupProps(),
         disabled: Array,
       },
       setup (props) {
@@ -323,10 +320,10 @@ describe('group', () => {
       expect(events[1][0][0]).not.toEqual(events[1][0][1])
     })
 
-    it('should set first non-disabled item as value when mandatory', async () => {
+    it('should set first non-disabled item as value when forced mandatory', async () => {
       const wrapper = mount(GroupComponent, {
         props: {
-          mandatory: true,
+          mandatory: 'force',
           multiple: false,
           disabled: [true, false],
         },
