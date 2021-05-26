@@ -36,7 +36,11 @@ export default defineComponent({
     }),
   }),
 
-  setup (props, { attrs, slots, emit }) {
+  emits: {
+    'update:modelValue': (value: boolean) => true,
+  },
+
+  setup (props, { attrs, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { dimensionStyles } = useDimension(props)
 

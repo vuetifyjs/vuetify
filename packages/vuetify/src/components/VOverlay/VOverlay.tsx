@@ -148,7 +148,10 @@ export default defineComponent({
     ...makeTransitionProps(),
   }),
 
-  emits: ['click:outside'],
+  emits: {
+    'update:modelValue': (value: boolean) => true,
+    'click:outside': (e: MouseEvent) => true,
+  },
 
   setup (props, { slots, attrs, emit }) {
     const isActive = useProxiedModel(props, 'modelValue')
