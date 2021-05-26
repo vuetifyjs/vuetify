@@ -62,7 +62,7 @@ describe('VBottomNavigation', () => {
     [{}, 56],
     [{ density: 'comfortable' }, 48],
     [{ density: 'compact' }, 40],
-    [{ size: 72 }, 72],
+    [{ height: 72 }, 72],
   ])('should have the correct height', async (props: any, expected: number) => {
     const wrapper = mountFunction(props)
 
