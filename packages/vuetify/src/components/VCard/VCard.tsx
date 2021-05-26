@@ -82,7 +82,7 @@ export default defineComponent({
       const hasImage = !!(slots.image || props.image)
       const hasHeader = hasHeaderText || hasPrepend || hasAppend
       const hasText = !!(slots.text || props.text)
-      const hasOverlay = props.link || !props.disabled
+      const hasOverlay = props.link && !props.disabled
 
       return (
         <props.tag
