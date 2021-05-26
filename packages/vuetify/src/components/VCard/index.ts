@@ -1,25 +1,11 @@
-import VCard from './VCard'
-import { createSimpleFunctional } from '@/util'
-
-const VCardActions = createSimpleFunctional('v-card__actions')
-const VCardSubtitle = createSimpleFunctional('v-card__subtitle')
-const VCardText = createSimpleFunctional('v-card__text')
-const VCardTitle = createSimpleFunctional('v-card__title')
-
-export {
-  VCard,
-  VCardActions,
-  VCardSubtitle,
-  VCardText,
-  VCardTitle,
-}
-
-export default {
-  $_vuetify_subcomponents: {
-    VCard,
-    VCardActions,
-    VCardSubtitle,
-    VCardText,
-    VCardTitle,
-  },
-}
+export { default as VCard } from './VCard'
+export { default as VCardActions } from './VCardActions'
+export { default as VCardAvatar } from './VCardAvatar'
+export { default as VCardHeader } from './VCardHeader'
+export { default as VCardHeaderText } from './VCardHeaderText'
+export { default as VCardImg } from './VCardImg'
+export { default as VCardItem } from './VCardHeaderText'
+export { default as VCardMedia } from './VCardMedia'
+export { default as VCardSubtitle } from './VCardSubtitle'
+export { default as VCardText } from './VCardText'
+export { default as VCardTitle } from './VCardTitle'

@@ -1,29 +1,95 @@
-@import '../../styles/styles.sass';
-
-$card-actions-padding: 8px !default;
-$card-adjacent-sibling-text-padding-top: 0 !default;
+// Defaults
+$card-actions-min-height: 52px !default;
+$card-actions-padding: .5rem !default;
+$card-avatar-align-self: flex-start !default;
+$card-avatar-header-padding: 0 !default;
+$card-avatar-margin-end: 1rem !default;
+$card-avatar-margin-start: 1rem !default;
+$card-avatar-padding: .5rem 1rem !default;
+$card-background: var(--v-theme-surface) !default;
+$card-border-before-elevation: 0 !default;
+$card-border-color: $border-color-root !default;
+$card-border-elevation: 0 !default;
 $card-border-radius: $border-radius-root !default;
-$card-btn-margin-x: 8px !default;
-$card-btn-padding: 0 8px !default;
-$card-btn-small-margin-x: 4px !default;
+$card-border-style: $border-style-root !default;
+$card-border-thin-width: thin !default;
+$card-border-width: 0 !default;
+$card-color: var(--v-theme-on-surface) !default;
 $card-disabled-opacity: 0.6 !default;
-$card-elevation: 2 !default;
+$card-elevation: 1 !default;
 $card-hover-elevation: 8 !default;
-$card-link-focus-opacity: 0.08 !default;
-$card-outlined-border-width: thin !default;
-$card-overflow-wrap: break-word !default;
-$card-raised-elevation: 8 !default;
-$card-shaped-border-radius: map-get($rounded, 'xl') $card-border-radius !default;
-$card-subtitle-padding: 16px !default;
-$card-text-font-size: map-deep-get($typography, 'subtitle-2', 'size') !default;
-$card-text-font-weight: 400 !default;
-$card-text-letter-spacing: map-deep-get($typography, 'subtitle-2', 'letter-spacing') !default;
-$card-text-line-height: map-deep-get($typography, 'subtitle-2', 'line-height') !default;
-$card-title-adjacent-sibling-subtitle-margin-top: -16px !default;
-$card-title-adjacent-sibling-subtitle-text-padding-top: 0 !default;
+$card-item-align-items: center !default;
+$card-item-padding: .5rem 1rem !default;
+$card-padding: 0 !default;
+$card-positions: absolute fixed !default;
+$card-pseudo-transition-property: box-shadow, opacity !default;
+$card-pseudo-transition: 0.28s $standard-easing !default;
+$card-subtitle-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+$card-subtitle-comfortable-line-height: 1.125rem !default;
+$card-subtitle-compact-line-height: 1rem !default;
+$card-subtitle-font-size: map-deep-get($typography, 'body-2', 'size') !default;
+$card-subtitle-font-weight: map-deep-get($typography, 'body-2', 'weight') !default;
+$card-subtitle-header-padding: 0 !default;
+$card-subtitle-letter-spacing: map-deep-get($typography, 'body-2', 'letter-spacing') !default;
+$card-subtitle-line-height: map-deep-get($typography, 'body-2', 'line-height') !default;
+$card-subtitle-padding: 0 1rem !default;
+$card-subtitle-text-transform: none !default;
+$card-text-color: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity)) !default;
+$card-text-comfortable-line-height: 1.2rem !default;
+$card-text-compact-line-height: 1.15rem !default;
+$card-text-font-size: map-deep-get($typography, 'body-2', 'size') !default;
+$card-text-font-weight: map-deep-get($typography, 'body-2', 'weight') !default;
+$card-text-letter-spacing: map-deep-get($typography, 'body-2', 'letter-spacing') !default;
+$card-text-line-height: map-deep-get($typography, 'body-2', 'line-height') !default;
+$card-text-padding-bottom: 1rem !default;
+$card-text-padding: 1rem !default;
+$card-text-text-transform: map-deep-get($typography, 'body-2', 'text-transform') !default;
+$card-tile-border-radius: 0 !default;
+$card-title-comfortable-line-height: 1.75rem !default;
+$card-title-compact-line-height: 1.55rem !default;
 $card-title-font-size: map-deep-get($typography, 'h6', 'size') !default;
 $card-title-font-weight: map-deep-get($typography, 'h6', 'weight') !default;
+$card-title-header-padding: 0 !default;
+$card-title-hyphens: auto !default;
 $card-title-letter-spacing: map-deep-get($typography, 'h6', 'letter-spacing') !default;
 $card-title-line-height: map-deep-get($typography, 'h6', 'line-height') !default;
-$card-title-word-break: break-all !default;
-$card-white-space: normal !default;
+$card-title-overflow-wrap: anywhere !default;
+$card-title-padding-top: 1rem !default;
+$card-title-padding: .5rem 1rem !default;
+$card-title-text-transform: none !default;
+$card-title-word-break: normal !default;
+$card-title-word-wrap: break-word !default;
+
+$card-border: () !default;
+$card-border: (
+  $card-border-color,
+  $card-border-style,
+  $card-border-width
+);
+
+$card-title-densities: () !default;
+$card-title-densities: (
+  null: $card-title-line-height,
+  'comfortable': $card-title-comfortable-line-height,
+  'compact': $card-title-compact-line-height
+);
+
+$card-subtitle-densities: () !default;
+$card-subtitle-densities: (
+  null: $card-subtitle-line-height,
+  'comfortable': $card-subtitle-comfortable-line-height,
+  'compact': $card-subtitle-compact-line-height
+);
+
+$card-text-densities: () !default;
+$card-text-densities: (
+  null: $card-text-line-height,
+  'comfortable': $card-text-comfortable-line-height,
+  'compact': $card-text-compact-line-height
+);
+
+$card-theme: () !default;
+$card-theme: (
+  $card-background,
+  $card-color
+);

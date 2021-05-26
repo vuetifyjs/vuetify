@@ -1,155 +1,188 @@
-@import './_variables.scss'
+// Imports
+@import './index'
 
-// Theme
-+theme(v-card) using ($material)
-  background-color: map-get($material, 'cards')
-  color: map-deep-get($material, 'text', 'primary')
-
-  > .v-card__text,
-  .v-card__subtitle
-    color: map-deep-get($material, 'text', 'secondary')
-
-// Sheet
-+sheet(v-card, $card-elevation, $card-border-radius, $card-shaped-border-radius)
-
-// Block
 .v-card
-  border-width: $card-outlined-border-width
-  display: block
-  max-width: 100%
-  outline: none
-  text-decoration: none
-  transition-property: box-shadow, opacity
-  overflow-wrap: $card-overflow-wrap
+  background: $card-background
+  color: $card-color
   position: relative
-  white-space: $card-white-space
+  padding: $card-padding
 
-  > *:first-child:not(.v-btn):not(.v-chip),
-  > .v-card__progress + *:not(.v-btn):not(.v-chip)
-    border-top-left-radius: inherit
-    border-top-right-radius: inherit
+  @include border($card-border...)
+  @include elevation($card-elevation)
+  @include position($card-positions)
+  @include rounded($card-border-radius)
+  @include states('.v-card__overlay')
 
-  > *:last-child:not(.v-btn):not(.v-chip)
-    border-bottom-left-radius: inherit
-    border-bottom-right-radius: inherit
+  &--border
+    border-width: $card-border-thin-width
 
-// Element
-.v-card__progress
-  top: 0
-  left: 0
-  right: 0
-  overflow: hidden
+    &::before
+      @include elevation($card-border-before-elevation)
 
-.v-card__subtitle
-  + .v-card__text
-    padding-top: $card-adjacent-sibling-text-padding-top
+  &--disabled
+    pointer-events: none
+    user-select: none
 
-.v-card__subtitle,
-.v-card__text
-  font-size: $card-text-font-size
-  font-weight: $card-text-font-weight
-  line-height: $card-text-line-height
-  letter-spacing: $card-text-letter-spacing
+    > [class*='v-card-']
+      opacity: $card-disabled-opacity
 
-.v-card__subtitle,
-.v-card__text,
-.v-card__title
-  padding: $card-subtitle-padding
-
-.v-card__title
-  align-items: center
-  display: flex
-  flex-wrap: wrap
-  font-size: $card-title-font-size
-  font-weight: $card-title-font-weight
-  letter-spacing: $card-title-letter-spacing
-  line-height: $card-title-line-height
-  word-break: $card-title-word-break
-
-  + .v-card__subtitle,
-  + .v-card__text
-    padding-top: $card-adjacent-sibling-text-padding-top
-
-  + .v-card__subtitle
-    margin-top: $card-title-adjacent-sibling-subtitle-margin-top
-
-.v-card__text
-  width: 100%
-
-.v-card__actions
-  align-items: center
-  display: flex
-  padding: $card-actions-padding
-
-  > .v-btn.v-btn
-    padding: $card-btn-padding
-
-    // Buttons have reduced padding in card actions per spec
-    // and need to compensate the icon margins accordingly
-    +ltr()
-      + .v-btn
-        margin-left: $card-btn-margin-x
-
-      .v-icon--left
-        margin-left: $card-btn-small-margin-x
-
-      .v-icon--right
-        margin-right: $card-btn-small-margin-x
-
-    +rtl()
-      + .v-btn
-        margin-right: $card-btn-margin-x
-
-      .v-icon--left
-        margin-right: $card-btn-small-margin-x
-
-      .v-icon--right
-        margin-left: $card-btn-small-margin-x
-
-// @deprecated
-// TODO: Remove in v3
-.v-card--flat
-  +elevation(0, true)
-
-.v-sheet.v-card--hover
-  cursor: pointer
-  transition: box-shadow .4s cubic-bezier(.25, .8, .25, 1)
-
-  &:hover, &:focus
-    +elevation($card-hover-elevation)
-
-.v-card--link
-  cursor: pointer
-
-  // https://github.com/vuetifyjs/vuetify/issues/3925
-  .v-chip
+  &--hover
     cursor: pointer
 
-  &:focus:before
-    opacity: $card-link-focus-opacity
+    &::before,
+    &::after
+      border-radius: inherit
+      bottom: 0
+      content: ''
+      display: block
+      left: 0
+      pointer-events: none
+      position: absolute
+      right: 0
+      top: 0
+      transition-property: $card-pseudo-transition-property
+      transition: $card-pseudo-transition
 
-  &:before
-    background: currentColor
-    bottom: 0
-    content: ''
-    left: 0
-    opacity: 0
-    pointer-events: none
-    position: absolute
-    right: 0
-    top: 0
-    transition: .2s opacity map-get($transition, 'fast-in-slow-out')
+    &::before
+      opacity: 1
+      z-index: -1
 
-.v-card--disabled
-  pointer-events: none
-  user-select: none
+      @include elevation($card-elevation)
 
-  > *:not(.v-card__progress)
-    opacity: $card-disabled-opacity
-    transition: inherit
+    &::after
+      z-index: 1
+      opacity: 0
 
-.v-card--loading
+      @include elevation($card-hover-elevation)
+
+    &:hover::after
+      opacity: 1
+
+    &:hover::before
+      opacity: 0
+
+    @include elevation(0)
+
+  &--link
+    cursor: pointer
+
+  &--tile
+    @include rounded($card-tile-border-radius)
+
+.v-card-actions
+  align-items: center
+  display: flex
+  flex: 1 1 auto
+  min-height: $card-actions-min-height
+  padding: $card-actions-padding
+
+.v-card-avatar
+  align-self: $card-avatar-align-self
+  padding: $card-avatar-padding
+
+  &:last-child
+    .v-card-header &
+      @include ltr()
+        padding-right: $card-avatar-header-padding
+
+      @include rtl()
+        padding-left: $card-avatar-header-padding
+
+  &:first-child
+    .v-card-header &
+      @include ltr()
+        padding-left: $card-avatar-header-padding
+
+      @include rtl()
+        padding-right: $card-avatar-header-padding
+
+.v-card-header-text
+  flex: 1 1 auto
+
+.v-card-img
+  border-radius: inherit
+  display: flex
+  height: 100%
+  left: 0
+  overflow: hidden
+  position: absolute
+  top: 0
+  width: 100%
+  z-index: -1
+
+.v-card-header
+  align-items: $card-item-align-items
+  display: flex
+  padding: $card-item-padding
+
+.v-card-media
   overflow: hidden
 
-.v-card--raised
-  +elevation($card-raised-elevation)
+  &:first-child
+    .v-card &
+      border-top-left-radius: inherit
+      border-top-right-radius: inherit
+
+  &:last-child
+    .v-card &
+      border-bottom-left-radius: inherit
+      border-bottom-right-radius: inherit
+
+.v-card-subtitle
+  align-items: center
+  color: $card-subtitle-color
+  display: flex
+  font-size: $card-subtitle-font-size
+  font-weight: $card-subtitle-font-weight
+  letter-spacing: $card-subtitle-letter-spacing
+  padding: $card-subtitle-padding
+  text-transform: $card-subtitle-text-transform
+
+  @include card-line-height-densities($card-subtitle-densities)
+
+  .v-card-header &
+    padding: $card-subtitle-header-padding
+
+.v-card-text
+  color: $card-text-color
+  font-size: $card-text-font-size
+  font-weight: $card-text-font-weight
+  letter-spacing: $card-text-letter-spacing
+  padding: $card-text-padding
+  text-transform: $card-text-text-transform
+
+  @include card-line-height-densities($card-text-densities)
+
+.v-card-title
+  align-items: center
+  display: flex
+  font-size: $card-title-font-size
+  font-weight: $card-title-font-weight
+  hyphens: $card-title-hyphens
+  letter-spacing: $card-title-letter-spacing
+  overflow-wrap: $card-title-overflow-wrap
+  padding: $card-title-padding
+  text-transform: $card-title-text-transform
+  word-break: $card-title-word-break
+  word-wrap: $card-title-word-wrap
+
+  @include card-line-height-densities($card-title-densities)
+
+  .v-card-header &
+    padding: $card-title-header-padding
+
+.v-card__overlay
+  background-color: currentColor
+  border-radius: inherit
+  bottom: 0
+  left: 0
+  opacity: 0
+  pointer-events: none
+  position: absolute
+  right: 0
+  top: 0
+  transition: opacity 0.2s ease-in-out
+
+  + .v-card-media
+    border-top-left-radius: inherit
+    border-top-right-radius: inherit

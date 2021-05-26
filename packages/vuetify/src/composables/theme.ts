@@ -100,6 +100,9 @@ const defaultThemeOptions: ThemeOptions = {
       variables: {
         'border-color': '0, 0, 0',
         'border-opacity': 0.12,
+        'high-emphasis-opacity': 0.87,
+        'medium-emphasis-opacity': 0.60,
+        'disabled-opacity': 0.38,
         'kbd-background-color': '#212529',
         'kbd-color': '#FFFFFF',
         'code-background-color': '#C2C2C2',
@@ -122,6 +125,9 @@ const defaultThemeOptions: ThemeOptions = {
       variables: {
         'border-color': '255, 255, 255',
         'border-opacity': 0.12,
+        'high-emphasis-opacity': 0.87,
+        'medium-emphasis-opacity': 0.60,
+        'disabled-opacity': 0.38,
         'kbd-background-color': '#212529',
         'kbd-color': '#FFFFFF',
         'code-background-color': '#B7B7B7',

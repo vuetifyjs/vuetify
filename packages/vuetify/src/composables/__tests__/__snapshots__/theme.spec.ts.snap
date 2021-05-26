@@ -39,6 +39,9 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-on-warning: 0,0,0;
       --v-border-color: 0, 0, 0;
       --v-border-opacity: 0.12;
+      --v-high-emphasis-opacity: 0.87;
+      --v-medium-emphasis-opacity: 0.6;
+      --v-disabled-opacity: 0.38;
       --v-kbd-background-color: 33, 37, 41;
       --v-kbd-color: 255, 255, 255;
       --v-code-background-color: 194, 194, 194;
@@ -76,6 +79,9 @@ exports[`createTheme should create style element 1`] = `
       --v-theme-on-warning: 0,0,0;
       --v-border-color: 255, 255, 255;
       --v-border-opacity: 0.12;
+      --v-high-emphasis-opacity: 0.87;
+      --v-medium-emphasis-opacity: 0.6;
+      --v-disabled-opacity: 0.38;
       --v-kbd-background-color: 33, 37, 41;
       --v-kbd-color: 255, 255, 255;
       --v-code-background-color: 183, 183, 183;

@@ -1,107 +1,88 @@
-// @ts-nocheck
-/* eslint-disable */
+// Components
+import { VCard, VCardAvatar, VCardImg, VCardSubtitle, VCardText, VCardTitle } from '..'
 
-import {
-  mount,
-  Wrapper,
-  MountOptions,
-} from '@vue/test-utils'
-// import VCard from '../VCard'
-// import { ExtractVue } from '../../../util/mixins'
+// Utilities
+import { h, nextTick } from 'vue'
+import { createVuetify } from '@/framework'
+import { mount } from '@vue/test-utils'
 
-describe.skip('VCard.vue', () => {
-  type Instance = ExtractVue<typeof VCard>
-  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
-  beforeEach(() => {
-    mountFunction = (options?: MountOptions<Instance>) => {
-      return mount(VCard, {
-        // https://github.com/vuejs/vue-test-utils/issues/1130
-        sync: false,
-        ...options,
-      })
-    }
-  })
+// Types
+import type { FunctionalComponent } from 'vue'
 
-  it('should render component and match snapshot', () => {
+describe('VCard', () => {
+  const vuetify = createVuetify()
+
+  function mountFunction (options = {}) {
+    return mount(VCard, {
+      global: {
+        plugins: [vuetify],
+      },
+      ...options,
+    })
+  }
+
+  it('should match a snapshot', () => {
     const wrapper = mountFunction()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render loading card', () => {
+  it.each([
+    [{ appendAvatar: 'bar' }, VCardAvatar],
+    [{ appendIcon: 'bar' }, VCardAvatar],
+    [{ image: 'foo.png' }, VCardImg],
+    [{ prependAvatar: 'foo' }, VCardAvatar],
+    [{ prependIcon: 'foo' }, VCardAvatar],
+    [{ subtitle: 'bar' }, VCardSubtitle],
+    [{ text: 'foobar' }, VCardText],
+    [{ title: 'foo' }, VCardTitle],
+  ])('should render functional components when using props %s', (props: any, component: FunctionalComponent) => {
+    const wrapper = mountFunction({ props })
+
+    expect(wrapper.findComponent(component).exists()).toBe(true)
+  })
+
+  it('should render slots and match a snapshot', () => {
     const wrapper = mountFunction({
-      propsData: {
-        loading: true,
-      },
-      mocks: {
-        $vuetify: {
-          rtl: false,
-        },
+      props: { image: 'foo.png' },
+      slots: {
+        actions: '<div>actions</div>',
+        append: '<div>foo</div>',
+        image: (props: any) => h('v-img', props),
+        media: '<div>bar</div>',
+        prepend: '<div>foobar</div>',
+        subtitle: '<div>fizz</div>',
+        text: '<div>buzz</div>',
+        title: '<div>fizzbuzz</div>',
       },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render card, which is link', () => {
+  it('should conditionally have the hover class', async () => {
     const wrapper = mountFunction({
-      // https://github.com/vuejs/vue-test-utils/issues/1130
-      sync: false,
-      listeners: {
-        click: () => {},
-      },
+      props: { hover: true },
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+    expect(wrapper.classes()).toContain('v-card--hover')
 
-  it('should render card with img', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        img: 'image.jpg',
-      },
-    })
+    wrapper.setProps({ disabled: true })
 
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+    await nextTick()
 
-  it('should render a flat card', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        flat: true,
-      },
-    })
+    expect(wrapper.classes()).not.toContain('v-card--hover')
 
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+    wrapper.setProps({ disabled: false, flat: true })
 
-  it('should render a raised card', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        raised: true,
-      },
-    })
+    await nextTick()
 
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+    expect(wrapper.classes()).not.toContain('v-card--hover')
 
-  it('should render a card with custom height', async () => {
-    const heightpx = '400px'
-    const wrapper = mountFunction({
-      // https://github.com/vuejs/vue-test-utils/issues/1130
-      sync: false,
-      propsData: {
-        height: heightpx,
-      },
-    })
+    wrapper.setProps({ flat: false })
 
-    expect(wrapper.element.style.height).toBe(heightpx)
-    expect(wrapper.html()).toMatchSnapshot()
+    await nextTick()
 
-    wrapper.setProps({
-      height: 401,
-    })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.element.style.height).toBe('401px')
+    expect(wrapper.classes()).toContain('v-card--hover')
   })
 })
