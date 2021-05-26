@@ -2,11 +2,15 @@
 
 exports[`VCard should match a snapshot 1`] = `
 <div class="v-card v-theme--light v-card--density-default">
+  <div class="v-card__overlay">
+  </div>
 </div>
 `;
 
 exports[`VCard should render slots and match a snapshot 1`] = `
 <div class="v-card v-theme--light v-card--density-default">
+  <div class="v-card__overlay">
+  </div>
   <div class="v-card-img">
     <v-img src="foo.png">
     </v-img>
