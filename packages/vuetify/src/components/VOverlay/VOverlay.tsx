@@ -16,7 +16,7 @@ import type { BackgroundColorData } from '@/composables/color'
 import { useBackgroundColor } from '@/composables/color'
 import { makeProps } from '@/util/makeProps'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { provideTheme } from '@/composables/theme'
+import { useTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTeleport } from '@/composables/teleport'
 import { ClickOutside } from '@/directives/click-outside'
@@ -153,7 +153,7 @@ export default defineComponent({
   setup (props, { slots, attrs, emit }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { teleportTarget } = useTeleport(toRef(props, 'attach'))
-    const { themeClasses } = provideTheme()
+    const { themeClasses } = useTheme()
     const { isBooted } = useBooted(isActive, toRef(props, 'eager'))
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
