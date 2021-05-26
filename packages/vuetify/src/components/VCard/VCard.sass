@@ -7,24 +7,8 @@
   position: relative
   padding: $card-padding
 
-  &::before,
-  &::after
-    border-radius: inherit
-    bottom: 0
-    content: ''
-    display: block
-    left: 0
-    pointer-events: none
-    position: absolute
-    right: 0
-    top: 0
-    transition-property: $card-pseudo-transition-property
-    transition: $card-pseudo-transition
-
-  &::before
-    @include elevation($card-elevation)
-
   @include border($card-border...)
+  @include elevation($card-elevation)
   @include position($card-positions)
   @include rounded($card-border-radius)
   @include states('.v-card__overlay')
@@ -45,9 +29,25 @@
   &--hover
     cursor: pointer
 
+    &::before,
+    &::after
+      border-radius: inherit
+      bottom: 0
+      content: ''
+      display: block
+      left: 0
+      pointer-events: none
+      position: absolute
+      right: 0
+      top: 0
+      transition-property: $card-pseudo-transition-property
+      transition: $card-pseudo-transition
+
     &::before
       opacity: 1
       z-index: -1
+
+      @include elevation($card-elevation)
 
     &::after
       z-index: 1
@@ -60,6 +60,8 @@
 
     &:hover::before
       opacity: 0
+
+    @include elevation(0)
 
   &--link
     cursor: pointer
