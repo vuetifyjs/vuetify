@@ -65,6 +65,9 @@ export default defineComponent({
         const focusable = [...overlay.value.content.querySelectorAll(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
         )].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
+
+        if (!focusable.length) return
+
         const firstElement = focusable[0]
         const lastElement = focusable[focusable.length - 1]
 
