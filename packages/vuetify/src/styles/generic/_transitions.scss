@@ -38,8 +38,21 @@
 }
 
 .dialog-transition {
+  &-enter-active {
+    transition: 225ms $decelerated-easing
+  }
+
+  &-leave-active {
+    transition: 125ms $accelerated-easing
+  }
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: transform, opacity;
+  }
+
   &-enter-from, &-leave-to {
-    transform: scale(0.5);
+    transform: scale(0.9);
     opacity: 0;
   }
 

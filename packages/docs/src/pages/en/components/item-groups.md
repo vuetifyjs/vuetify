@@ -36,11 +36,11 @@ v-item description -->
 
 ### Props
 
-#### Active class
+#### Selected class
 
-The **active-class** property allows you to set custom CSS class on active items.
+The **selected-class** prop allows you to designate a CSS class applied to _selected_ items.
 
-<example file="v-item-group/prop-active-class" />
+<example file="v-item-group/prop-selected-class" />
 
 #### Mandatory
 

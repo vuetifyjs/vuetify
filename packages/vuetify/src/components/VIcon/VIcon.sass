@@ -38,10 +38,16 @@
 
 .v-icon
   &--size-default
-    .v-btn:not(.v-btn--icon) &
+    .v-btn:not(.v-btn--icon):not(.v-btn--stacked) &
       font-size: $icon-btn-font-size
       height: $icon-btn-height
       width: $icon-btn-width
+
+      .v-bottom-navigation &
+        font-size: $icon-btn-bottom-navigation-font-size
+
+      .v-bottom-navigation:not(.v-bottom-navigation--horizontal) &
+        margin: 0
 
   &--left
     .v-btn:not(.v-btn--icon) &

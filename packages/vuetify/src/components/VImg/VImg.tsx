@@ -7,7 +7,7 @@ import { VResponsive } from '@/components'
 import intersect from '@/directives/intersect'
 
 // Composables
-import { makeTransitionProps } from '@/composables/transition'
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import {
@@ -23,14 +23,11 @@ import {
 } from 'vue'
 import {
   makeProps,
-  maybeTransition,
   SUPPORTS_INTERSECTION,
-  useDirective,
   useRender,
 } from '@/util'
 
 // Types
-import type { ObserveDirectiveBinding } from '@/directives/intersect'
 import type { PropType } from 'vue'
 
 // not intended for public use, this is passed in by vuetify-loader
@@ -43,6 +40,8 @@ export interface srcObject {
 
 export default defineComponent({
   name: 'VImg',
+
+  directives: { intersect },
 
   props: makeProps({
     aspectRatio: [String, Number],
@@ -185,70 +184,71 @@ export default defineComponent({
 
       const sources = slots.sources?.()
 
-      return maybeTransition(
-        props,
-        { appear: true },
-        withDirectives(
-          sources
-            ? <picture class="v-img__picture">{sources}{img}</picture>
-            : img,
-          [[vShow, state.value === 'loaded']]
-        )
+      return (
+        <MaybeTransition transition={ props.transition } appear>
+          {
+            withDirectives(
+              sources
+                ? <picture class="v-img__picture">{ sources }{ img }</picture>
+                : img,
+              [[vShow, state.value === 'loaded']]
+            )
+          }
+        </MaybeTransition>
       )
     })
 
-    const __preloadImage = computed(() => {
-      return maybeTransition(
-        props,
-        {},
-        normalisedSrc.value.lazySrc && state.value !== 'loaded' ? (
+    const __preloadImage = computed(() => (
+      <MaybeTransition transition={ props.transition }>
+        { normalisedSrc.value.lazySrc && state.value !== 'loaded' && (
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
             src={ normalisedSrc.value.lazySrc }
             alt=""
           />
-        ) : undefined
-      )
-    })
+        )}
+      </MaybeTransition>
+    ))
 
     const __placeholder = computed(() => {
       if (!slots.placeholder) return
 
-      const placeholder = state.value === 'loading' || (state.value === 'error' && !slots.error)
-        ? <div class="v-img__placeholder">{ slots.placeholder() }</div>
-        : undefined
-
-      return maybeTransition(props, { appear: true }, placeholder)
+      return (
+        <MaybeTransition transition={ props.transition } appear>
+          { (state.value === 'loading' || (state.value === 'error' && !slots.error)) &&
+          <div class="v-img__placeholder">{ slots.placeholder() }</div>
+          }
+        </MaybeTransition>
+      )
     })
 
     const __error = computed(() => {
       if (!slots.error) return
 
-      const error = state.value === 'error'
-        ? <div class="v-img__error">{ slots.error() }</div>
-        : undefined
-
-      return maybeTransition(props, { appear: true }, error)
+      return (
+        <MaybeTransition transition={ props.transition } appear>
+          { state.value === 'error' &&
+            <div class="v-img__error">{ slots.error() }</div>
+          }
+        </MaybeTransition>
+      )
     })
 
-    useRender(() => withDirectives(
+    useRender(() => (
       <VResponsive
         class="v-img"
         aspectRatio={ aspectRatio.value }
         aria-label={ props.alt }
         role={ props.alt ? 'img' : undefined }
+        v-intersect={[{
+          handler: init,
+          options: props.options,
+        }, null, ['once']]}
         v-slots={{
           additional: () => [__image.value, __preloadImage.value, __placeholder.value, __error.value],
           default: slots.default,
         }}
-      />,
-      [useDirective<ObserveDirectiveBinding>(intersect, {
-        value: {
-          handler: init,
-          options: props.options,
-        },
-        modifiers: { once: true },
-      })]
+      />
     ))
 
     return {

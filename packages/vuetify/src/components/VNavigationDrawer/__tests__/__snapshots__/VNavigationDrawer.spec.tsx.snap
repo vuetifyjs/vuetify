@@ -2,7 +2,7 @@
 
 exports[`VNavigationDrawer should match a snapshot 1`] = `
 <nav class="v-navigation-drawer v-navigation-drawer--start v-navigation-drawer--temporary v-theme--light"
-     style="left: 0px; margin-left: 0px; margin-top: 0px; margin-bottom: 0px; position: absolute; width: 256px; z-index: 2; transform: translateX(-105%);"
+     style="left: 0px; margin-left: 0px; margin-top: 0px; margin-bottom: 0px; position: absolute; width: 256px; z-index: 2; transform: translateX(-110%);"
 >
   <div class="v-navigation-drawer__content">
   </div>

@@ -9,43 +9,35 @@
   position: relative
   width: $banner-width
 
-  &::after
-    +border($banner-border-color, $banner-border-style, $banner-border-width)
+  @include border($banner-border...)
+  @include elevation($banner-elevation)
+  @include position($banner-positions)
+  @include rounded($banner-border-radius)
 
-    bottom: 0
-    content: ''
-    left: 0
-    position: absolute
-    right: 0
-    top: auto
-
-  +elevation($banner-elevation)
-  +position($banner-positions)
-  +rounded($banner-border-radius)
-
-  +ltr()
+  @include ltr()
     padding-left: $banner-padding-start
     padding-right: $banner-padding-end
 
-  +rtl()
+  @include rtl()
     padding-right: $banner-padding-start
     padding-left: $banner-padding-end
 
+  &--border
+    border-width: $banner-border-thin-width
 
   &--has-thumbnail
-    +ltr()
+    @include ltr()
       padding-left: $banner-thumbnail-padding-start
 
 
-    +rtl()
+    @include rtl()
       padding-right: $banner-thumbnail-padding-start
-
 
     &.v-banner--is-mobile
       padding-top: $banner-mobile-padding-top
 
   &--rounded
-    +rounded($banner-rounded-border-radius)
+    @include rounded($banner-rounded-border-radius)
 
   &--single-line
     padding-top: $banner-single-line-padding-top
@@ -62,19 +54,19 @@
   flex: 1 1 auto
   justify-content: flex-end
 
-  +ltr()
+  @include ltr()
     margin-left: $banner-actions-margin-start
 
-  +rtl()
+  @include rtl()
     margin-right: $banner-actions-margin-start
 
   .v-banner--is-mobile &
     flex-grow: 1
 
-    +ltr()
+    @include ltr()
       margin-left: $banner-mobile-single-line-actions-margin-start
 
-    +rtl()
+    @include rtl()
       margin-right: $banner-mobile-single-line-actions-margin-start
 
 .v-banner__avatar
@@ -134,17 +126,17 @@
   height: $banner-thumbnail-height
   width: $banner-thumbnail-width
 
-  +ltr ()
+  @include ltr ()
     margin-left: $banner-thumbnail-margin-start
     margin-right: $banner-thumbnail-margin-end
 
-  +rtl ()
+  @include rtl ()
     margin-right: $banner-thumbnail-margin-start
     margin-left: $banner-thumbnail-margin-end
 
   .v-banner--is-mobile &
-    +ltr()
+    @include ltr()
       margin-right: $banner-mobile-thumbnail-padding-start
 
-    +rtl()
+    @include rtl()
       margin-left: $banner-mobile-thumbnail-padding-start

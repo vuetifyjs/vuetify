@@ -16,24 +16,29 @@ import { useTheme } from '@/composables/theme'
 import { useColor } from '@/composables/color'
 
 // Directives
-import { Ripple, RippleDirectiveBinding } from '@/directives/ripple'
+import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, defineComponent, withDirectives } from 'vue'
-import { makeProps, useDirective } from '@/util'
+import { computed, defineComponent } from 'vue'
+import { makeProps } from '@/util'
 
 import { makeSizeProps, useSize } from '@/composables/size'
 
 export default defineComponent({
   name: 'VBtn',
 
+  directives: { Ripple },
+
   props: makeProps({
     text: Boolean,
     flat: Boolean,
     plain: Boolean,
     icon: [Boolean, String],
+    prependIcon: String,
+    appendIcon: String,
 
     block: Boolean,
+    stacked: Boolean,
 
     color: String,
     disabled: Boolean,
@@ -69,7 +74,7 @@ export default defineComponent({
       [isContained.value ? 'background' : 'text']: props.color,
     })))
 
-    return () => withDirectives(
+    return () => (
       <props.tag
         type="button"
         class={[
@@ -81,6 +86,7 @@ export default defineComponent({
             'v-btn--plain': props.plain,
             'v-btn--block': props.block,
             'v-btn--disabled': props.disabled,
+            'v-btn--stacked': props.stacked,
           },
           themeClasses.value,
           borderClasses.value,
@@ -97,18 +103,41 @@ export default defineComponent({
           positionStyles.value,
         ]}
         disabled={ props.disabled }
+        v-ripple={[
+          !props.disabled,
+          null,
+          props.icon ? ['center'] : null,
+        ]}
       >
         <span class="v-btn__overlay" />
 
+        { !props.icon && props.prependIcon && (
+          <VIcon
+            class="v-btn__icon"
+            icon={ props.prependIcon }
+            left={ !props.stacked }
+          />
+        )}
+
         { typeof props.icon === 'boolean'
           ? slots.default?.()
-          : <VIcon icon={ props.icon } size={ props.size } />
+          : (
+            <VIcon
+              class="v-btn__icon"
+              icon={ props.icon }
+              size={ props.size }
+            />
+          )
         }
-      </props.tag>,
-      [useDirective<RippleDirectiveBinding>(Ripple, {
-        value: !props.disabled,
-        modifiers: { center: !!props.icon },
-      })]
+
+        { !props.icon && props.appendIcon && (
+          <VIcon
+            class="v-btn__icon"
+            icon={ props.appendIcon }
+            right={ !props.stacked }
+          />
+        )}
+      </props.tag>
     )
   },
 })

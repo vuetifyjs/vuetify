@@ -4,8 +4,12 @@ module.exports = {
       {
         name: 'default',
         props: {
-          active: 'boolean',
-          toggle: 'Function',
+          selected: 'boolean',
+          selectedClass: 'string',
+          toggle: '() => void',
+          select: '(selected: boolean) => void',
+          value: 'any',
+          disabled: 'boolean',
         },
       },
     ],

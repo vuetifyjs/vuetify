@@ -1,82 +1,50 @@
-@import './_variables.scss'
+@import './index'
 
 // Block
 .v-dialog
-  border-radius: $dialog-border-radius
-  margin: $dialog-margin
-  overflow-y: auto
-  pointer-events: auto
-  transition: .3s map-get($transition, 'fast-in-fast-out')
-  width: 100%
-  z-index: inherit
-  +elevation($dialog-elevation)
+  z-index: $dialog-z-index
 
-  &:not(.v-dialog--fullscreen)
-    max-height: $dialog-max-height
+  .v-overlay__content
+    > .v-sheet
+      border-radius: $dialog-border-radius
+      overflow: hidden
 
-  > *
-    width: 100%
+      @include elevation($dialog-elevation)
 
-  > .v-card
-    > .v-card__title
-      font-size: $dialog-card-title-font-size
-      font-weight: $dialog-card-title-font-weight
-      letter-spacing: $dialog-card-title-letter-spacing
-      padding: $dialog-card-title-padding
+    > .v-card
+      > .v-card__title
+        font-size: $dialog-card-title-font-size
+        font-weight: $dialog-card-title-font-weight
+        letter-spacing: $dialog-card-title-letter-spacing
+        padding: $dialog-card-title-padding
 
-    > .v-card__text
-      padding: $dialog-card-text-padding
+      > .v-card__text
+        padding: $dialog-card-text-padding
 
-    > .v-card__subtitle
-      padding: $dialog-card-subtitle-padding
+      > .v-card__subtitle
+        padding: $dialog-card-subtitle-padding
 
-    > .v-card__actions
-      padding: $dialog-card-actions-padding
+      > .v-card__actions
+        padding: $dialog-card-actions-padding
 
-// Element
-.v-dialog__content
-  align-items: center
-  display: flex
-  height: 100%
-  justify-content: center
-  left: 0
-  pointer-events: none
-  position: fixed
-  top: 0
-  transition: .2s map-get($transition, 'fast-in-fast-out'), z-index 1ms
-  width: 100%
-  z-index: 6
-  outline: none
-
-.v-dialog__container
-  display: none
-
-  &--attached
-    display: inline
-
-// Modifier
-.v-dialog--animated
-  animation-duration: .15s
-  animation-name: animate-dialog
-  animation-timing-function: map-get($transition, 'fast-in-fast-out')
-
-.v-dialog--fullscreen
+.v-dialog--fullscreen .v-overlay__content
   border-radius: 0
   margin: 0
+  width: 100%
   height: 100%
-  position: fixed
   overflow-y: auto
   top: 0
   left: 0
 
-  > .v-card
+  > .v-sheet
     min-height: 100%
     min-width: 100%
     margin: 0 !important
     padding: 0 !important
+    border-radius: 0 !important
 
-.v-dialog--scrollable,
-.v-dialog--scrollable > form
+.v-dialog--scrollable .v-overlay__content,
+.v-dialog--scrollable .v-overlay__content > form
   display: flex
 
   > .v-card
@@ -94,13 +62,3 @@
       backface-visibility: hidden
       flex: 1 1 auto
       overflow-y: auto
-
-@keyframes animate-dialog
-  0%
-    transform: scale(1)
-
-  50%
-    transform: scale(1.03)
-
-  100%
-    transform: scale(1)

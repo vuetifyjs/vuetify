@@ -22,7 +22,7 @@ export default defineComponent({
   }),
 
   setup (props, context) {
-    const { themeClasses } = provideTheme(props, context)
+    const { themeClasses } = provideTheme(props)
 
     return () => {
       return (

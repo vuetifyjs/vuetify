@@ -1,58 +1,100 @@
-@import './_variables.scss'
+@import './index'
 
-+theme('v-app-bar.v-toolbar.v-sheet') using ($material)
-  background-color: map-get($material, 'app-bar')
-
-+sheet('v-app-bar.v-toolbar', $app-bar-elevation, $app-bar-border-radius, $app-bar-shaped-border-radius)
-
-// Block
 .v-app-bar
-  +bootable()
-
-// Modifier
-.v-app-bar.v-app-bar--fixed
+  align-items: flex-start
+  background: rgb($app-bar-background)
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  max-width: 100%
+  overflow: hidden
+  padding-left: $app-bar-padding-start
+  padding-right: $app-bar-padding-end
   position: fixed
-  top: 0
-  z-index: 5
+  transition: $app-bar-transition
 
-.v-app-bar.v-app-bar--hide-shadow
-  // Workaround for cascaded elevation styles
-  // that persist when the bar is inactive.
-  +elevation(0, true)
+  @include border($app-bar-border...)
+  @include rounded($app-bar-border-radius)
 
-.v-app-bar--fade-img-on-scroll
-  .v-toolbar__image .v-image__image
-    transition: $app-bar-transition
-
-.v-app-bar.v-toolbar--prominent.v-app-bar--shrink-on-scroll
-  .v-toolbar__content
-    will-change: height
-
-  .v-toolbar__image
-    will-change: opacity
-
-  &.v-app-bar--collapse-on-scroll
-    .v-toolbar__extension
-      display: none
-
-  &.v-app-bar--is-scrolled
-    .v-toolbar__title
-      padding-top: $app-bar-scrolled-title-padding-bottom
-
-    &:not(.v-app-bar--bottom)
-      .v-toolbar__title
-        padding-bottom: $app-bar-scrolled-title-padding-bottom
-
-.v-app-bar.v-app-bar--shrink-on-scroll
-  .v-toolbar__title
-    font-size: inherit
-
-.v-app-bar-title
-  &__placeholder,
-  &__content
-    overflow: hidden
-    text-overflow: ellipsis
-    white-space: nowrap
-
-  &__content
+  &--absolute
     position: absolute
+
+  &--is-active
+    @include elevation($app-bar-elevation)
+
+  &--border
+    border-bottom-width: $app-bar-border-thin-width
+
+    @include elevation($app-bar-flat-elevation)
+
+    &.v-app-bar--bottom
+      border-bottom-width: $app-bar-border-width
+      border-top-width: $app-bar-border-thin-width
+
+  &--collapsed
+    max-width: $app-bar-collapsed-max-width
+    overflow: hidden
+
+    @include ltr()
+      border-bottom-right-radius: $app-bar-collapsed-border-radius
+
+    @include rtl()
+      border-bottom-left-radius: $app-bar-collapsed-border-radius
+
+  &--flat
+    @include elevation($app-bar-flat-elevation)
+
+  &--floating
+    display: inline-flex
+
+  &--rounded
+    @include rounded($app-bar-rounded-border-radius)
+
+.v-app-bar__content
+  align-items: center
+  display: flex
+  flex: 0 0 auto
+  transition: inherit
+  width: 100%
+
+  .v-app-bar--density-default &
+    padding-bottom: $app-bar-density-default-padding
+    padding-top: $app-bar-density-default-padding
+
+  .v-app-bar--density-comfortable &
+    padding-bottom: $app-bar-density-comfortable-padding
+    padding-top: $app-bar-density-comfortable-padding
+
+  .v-app-bar--density-compact &
+    padding-bottom: $app-bar-density-compact-padding
+    padding-top: $app-bar-density-compact-padding
+
+.v-app-bar__extension
+  align-items: center
+  display: flex
+  flex: 0 0 auto
+  transition: inherit
+  width: 100%
+
+.v-app-bar__image
+  height: 100%
+  left: 0
+  position: absolute
+  top: 0
+  width: 100%
+  z-index: -1
+  display: flex
+
+.v-app-bar__append
+  display: flex
+  flex: 0 1 auto
+
+  @include ltr()
+    margin-left: auto
+
+  @include rtl()
+    margin-right: auto
+
+.v-app-bar__prepend
+  display: flex
+  flex: 0 1 auto

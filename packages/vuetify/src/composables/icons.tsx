@@ -110,10 +110,10 @@ export const VSvgIcon = defineComponent({
       return (
         <props.tag { ...attrs } style={ null }>
           <svg
-            class='v-icon__svg'
-            xmlns='http://www.w3.org/2000/svg'
-            viewBox='0 0 24 24'
-            role='img'
+            class="v-icon__svg"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            role="img"
             aria-hidden="true"
           >
             <path d={ props.icon as string }></path>

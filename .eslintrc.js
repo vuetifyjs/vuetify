@@ -124,7 +124,7 @@ module.exports = {
       },
     },
     {
-      files: '**/*.ts',
+      files: ['**/*.ts', '**/*.tsx'],
       rules: {
         // Can't overload function exports with this enabled
         'import/export': 'off',
@@ -143,6 +143,9 @@ module.exports = {
 
         'no-use-before-define': 'off',
         '@typescript-eslint/no-use-before-define': ['error', 'nofunc'],
+
+        'no-useless-constructor': 'off',
+        '@typescript-eslint/no-useless-constructor': ['error'],
 
         // Enabled in tsconfig
         'no-unused-vars': 'off',
@@ -178,6 +181,7 @@ module.exports = {
     {
       files: '**/*.tsx',
       rules: {
+        'jsx-quotes': 'error',
         'react/jsx-boolean-value': 'error',
         'react/jsx-closing-bracket-location': ['error', 'line-aligned'],
         'react/jsx-curly-brace-presence': 'error',

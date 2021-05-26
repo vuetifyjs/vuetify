@@ -1,6 +1,9 @@
 const vuetifyPackage = require('./package.json')
 
 module.exports = {
+  assumptions: {
+    noDocumentAll: true
+  },
   presets: [
     ['@babel/preset-env', {
       modules: false,
@@ -13,8 +16,6 @@ module.exports = {
       __VUETIFY_VERSION__: vuetifyPackage.version,
       __REQUIRED_VUE__: vuetifyPackage.peerDependencies.vue,
     }],
-    ['@babel/plugin-proposal-nullish-coalescing-operator', { loose: true }],
-    ['@babel/plugin-proposal-optional-chaining', { loose: true }],
     ['module-resolver', {
       root: ['.'],
       alias: {

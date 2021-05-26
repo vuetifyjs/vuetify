@@ -1,14 +1,2 @@
-import VItem from './VItem'
-import VItemGroup from './VItemGroup'
-
-export {
-  VItem,
-  VItemGroup,
-}
-
-export default {
-  $_vuetify_subcomponents: {
-    VItem,
-    VItemGroup,
-  },
-}
+export { default as VItemGroup } from './VItemGroup'
+export { default as VItem } from './VItem'

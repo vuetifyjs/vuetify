@@ -4,6 +4,7 @@ $banner-background-color: rgb(var(--v-theme-background)) !default;
 $banner-border-color: $border-color-root !default;
 $banner-border-radius: map-get($rounded, 0) !default;
 $banner-border-style: $border-style-root !default;
+$banner-border-thin-width: thin !default;
 $banner-border-width: 0 0 thin 0 !default;
 $banner-content-line-height: 1.25rem !default;
 $banner-content-padding-bottom: 8px !default;
@@ -39,16 +40,8 @@ $banner-mobile-single-line-padding-top: 10px !default;
 $banner-mobile-sizer-max-width: 360px !default;
 $banner-mobile-thumbnail-padding-start: 16px !default;
 
-$banner-query: () !default;
-$banner-query: map-deep-merge(
-  (
-    'border-color': $banner-border-color,
-    'border-radius': $banner-border-radius,
-    'border-style': $banner-border-style,
-    'border-width': $banner-border-width,
-    'font-size': $banner-font-size,
-    'elevation': $banner-elevation,
-    'position': $banner-positions
-  ),
-  $banner-query
-);
+$banner-border: (
+  $banner-border-color,
+  $banner-border-style,
+  $banner-border-width
+) !default;
