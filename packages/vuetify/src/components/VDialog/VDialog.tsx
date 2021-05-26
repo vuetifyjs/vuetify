@@ -1,19 +1,21 @@
 // Styles
 import './VDialog.sass'
 
-import { defineComponent, mergeProps, ref, watch } from 'vue'
+// Components
+import { VDialogTransition } from '@/components/transitions'
 import { VOverlay } from '@/components/VOverlay'
 
-// Helpers
-// import {
-//   convertToUnit,
-//   keyCodes,
-// } from '../../util/helpers'
-import { makeProps } from '@/util/makeProps'
+// Composables
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { VDialogTransition } from '@/components/transitions'
+
+// Utilities
+import { defineComponent, mergeProps, ref, watch } from 'vue'
+import { makeProps } from '@/util/makeProps'
+
+// Globals
+import { IN_BROWSER } from '@/util'
 
 export default defineComponent({
   name: 'VDialog',
@@ -78,11 +80,14 @@ export default defineComponent({
         }
       }
     }
-    watch(() => isActive.value && props.retainFocus, val => {
-      val
-        ? document.addEventListener('focusin', onFocusin)
-        : document.removeEventListener('focusin', onFocusin)
-    }, { immediate: true })
+
+    if (IN_BROWSER) {
+      watch(() => isActive.value && props.retainFocus, val => {
+        val
+          ? document.addEventListener('focusin', onFocusin)
+          : document.removeEventListener('focusin', onFocusin)
+      }, { immediate: true })
+    }
 
     const activatorElement = ref()
     const activator = ({ props, ...data }: any) => {
