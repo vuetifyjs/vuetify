@@ -123,13 +123,19 @@ You can prevent wrapping text with the `.text-no-wrap` utility class.
 
 <example file="text-and-typography/text-no-wrap" />
 
-Longer content can be truncated with a text ellipsis. **Requires** `display: inline-block` **or** `display: block`.
+Longer content can be truncated with a text ellipsis using the `.text-truncate` utility class.
+
+<alert type="info">
+
+  **Requires** `display: inline-block` **or** `display: block`.
+
+</alert>
 
 <example file="text-and-typography/text-truncate" />
 
 ## RTL Alignment
 
-When using [RTL](/features/rtl), you may want to keep the alignment regardless of the **rtl** designation. This can be achieved using text alignment helper classes in the following format: `text-<breakpoint>-<direction>`, where breakpoint can be `sm`, `md`, `lg`, or `xl` and direction can be `left` or `right`. You may also want alignment to respond to rtl which can be done using directions `start` and `end`.
+When using [RTL](/features/bidirectionality), you may want to keep the alignment regardless of the **rtl** designation. This can be achieved using text alignment helper classes in the following format: `text-<breakpoint>-<direction>`, where breakpoint can be `sm`, `md`, `lg`, or `xl` and direction can be `left` or `right`. You may also want alignment to respond to rtl which can be done using directions `start` and `end`.
 
 <example file="text-and-typography/text-rtl" />
 

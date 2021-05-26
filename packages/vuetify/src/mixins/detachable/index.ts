@@ -104,7 +104,7 @@ export default mixins<options &
             node.elm.parentNode.removeChild(node.elm)
         })
       }
-    } catch (e) { console.log(e) }
+    } catch (e) { console.log(e) } /* eslint-disable-line no-console */
   },
 
   methods: {

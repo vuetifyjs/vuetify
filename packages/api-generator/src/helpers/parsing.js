@@ -144,13 +144,16 @@ const parseSassVariables = componentName => {
 
 function parseGlobalSassVariables () {
   return [
-    './../vuetify/src/styles/settings/_variables.scss',
-    './../vuetify/src/styles/settings/_light.scss',
+    './../vuetify/src/styles/settings/_colors.scss',
     './../vuetify/src/styles/settings/_dark.scss',
+    './../vuetify/src/styles/settings/_elevations.scss',
+    './../vuetify/src/styles/settings/_light.scss',
+    './../vuetify/src/styles/settings/_theme.scss',
+    './../vuetify/src/styles/settings/_variables.scss',
   ].reduce((acc, path) => {
     acc.push(...processVariableFile(path))
     return acc
-  }, [])
+  }, []).sort((a, b) => a.name.localeCompare(b.name))
 }
 
 function parseComponent (component) {

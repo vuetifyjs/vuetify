@@ -57,7 +57,7 @@ try {
     window.addEventListener('testListener', testListenerOpts, testListenerOpts)
     window.removeEventListener('testListener', testListenerOpts, testListenerOpts)
   }
-} catch (e) { console.warn(e) }
+} catch (e) { console.warn(e) } /* eslint-disable-line no-console */
 export { passiveSupported }
 
 export function addPassiveEventListener (
@@ -214,6 +214,7 @@ export const keyCodes = Object.freeze({
   insert: 45,
   pageup: 33,
   pagedown: 34,
+  shift: 16,
 })
 
 /**

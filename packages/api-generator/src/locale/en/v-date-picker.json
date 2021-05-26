@@ -1,5 +1,6 @@
 {
   "props": {
+    "activePicker": "Determines which picker in the date or month picker is being displayed. Allowed values: `'DATE'`, `'MONTH'`, `'YEAR'`",
     "allowedDates": "Restricts which dates can be selected",
     "disabled": "Disables interaction with the picker",
     "dayFormat": "Allows you to customize the format of the day string that appears in the date table. Called with date (ISO 8601 **date** string) arguments.",
@@ -37,6 +38,7 @@
     "default": "Displayed below the calendar, can be used for example for adding action button (`OK` and `Cancel`)"
   },
   "events": {
+    "update:active-picker": "The `.sync` event for `active-picker` prop",
     "update:picker-date": "The `.sync` event for `picker-date` prop",
     "<domevent>:date": "Emitted when the specified DOM event occurs on the date button",
     "<domevent>:month": "Emitted when the specified DOM event occurs on the month button",

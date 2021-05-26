@@ -19,6 +19,10 @@ module.exports = {
         name: 'load',
         value: 'object | string',
       },
+      {
+        name: 'loadstart',
+        value: 'string',
+      },
     ],
   },
 }

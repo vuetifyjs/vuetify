@@ -23,17 +23,18 @@ The following releases are currently under development:
 ### v3.0 (Titan)
 
 - **Target Release:** Q3 2021
-- **Alpha:** Q4 2020
+- **Alpha:** Q1 2021
 - **Overview:**
-  The entire framework will be converted to the new [composition api](https://vue-composition-api-rfc.netlify.com/) coming in Vue 3. Details of this conversion process are outlined in our [v3 Notion Board](https://notion.vuetifyjs.com) along with information about release schedules, proposed new functionality and more. Progress related to individual components and phases can be tracked via [v3 GitHub Project](https://github.com/orgs/vuetifyjs/projects/7).
+  The next version of Vuetify is being built from the ground up to support Vue 3 using the [composition api](https://v3.vuejs.org/guide/composition-api-introduction.html).
 - **Objectives:**
-  - Create a set of guidelines for how Vuetify 3 will be developed, iterated on and released—[v3 Notion Board](https://notion.vuetifyjs.com)
   - Rebuild the framework using Vue 3 and the [composition api](https://vue-composition-api-rfc.netlify.com/)
   - Improve framework performance
   - Enhance Typescript support with Vue 3; updated typings
   - Make it easier to unit test, no global setup required
   - Restructure the framework core to support custom services
   - Update the Documentation with improved examples and more information
+
+Track our progress in the [v3 GitHub Project](https://titan.vuetifyjs.com/).
 
 ## Long-term support (LTS)
 
@@ -60,6 +61,17 @@ The following versions have continued maintenance for backwards compatible fixes
 ## Released
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
+
+### v2.5 (Avalon)
+
+- **Released:** May 2021
+- **Notes:**: [v2.5 Release](https://github.com/vuetifyjs/vuetify/releases/tag/v2.5.0)
+- **Overview:**
+  The v2.5 release adds a multitude of new functionality to [v-data-table](/components/data-tables/) and [v-text-field](/components/text-fields/), as well as bug fixes for the [click-outside](/directives/click-outside/) directive, [v-carousel](/components/carousels/) component, and more.
+- **Objectives:**
+  - Expand functionality of `v-data-table`
+  - Quality of life improvements
+  - General bug fixes
 
 ### v2.4 (Endurance)
 

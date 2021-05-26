@@ -14,6 +14,12 @@
 .row
   +make-row
 
+  & + .row
+    margin-top: $grid-gutter / 2
+
+    &--dense
+      margin-top: $form-grid-gutter / 2
+
   &--dense
     margin: -$form-grid-gutter / 2
 
@@ -21,13 +27,13 @@
     > [class*="col-"]
       padding: $form-grid-gutter / 2
 
-// Remove the negative margin from default .row, then the horizontal padding
-// from all immediate children columns (to prevent runaway style inheritance).
-.no-gutters
-  margin: 0
-  > .col,
-  > [class*="col-"]
-    padding: 0
+  // Remove the negative margin from default .row, then the horizontal padding
+  // from all immediate children columns (to prevent runaway style inheritance).
+  &.no-gutters
+    margin: 0
+    > .col,
+    > [class*="col-"]
+      padding: 0
 
 // Columns
 //

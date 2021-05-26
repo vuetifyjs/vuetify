@@ -8,7 +8,7 @@ import Themeable from '../../mixins/themeable'
 
 // Helpers
 import mixins from '../../util/mixins'
-import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camelizeObjectKeys } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camelizeObjectKeys, keyCodes } from '../../util/helpers'
 import { breaking, removed } from '../../util/console'
 
 // Types
@@ -68,6 +68,8 @@ export default mixins(
     selection: {} as Record<string, any>,
     expansion: {} as Record<string, boolean>,
     internalCurrentItems: [] as any[],
+    shiftKeyDown: false,
+    lastEntry: -1,
   }),
 
   computed: {
@@ -148,7 +150,24 @@ export default mixins(
     })
   },
 
+  mounted () {
+    window.addEventListener('keydown', this.onKeyDown)
+    window.addEventListener('keyup', this.onKeyUp)
+  },
+  beforeDestroy () {
+    window.removeEventListener('keydown', this.onKeyDown)
+    window.removeEventListener('keyup', this.onKeyUp)
+  },
+
   methods: {
+    onKeyDown (e: KeyboardEvent): void {
+      if (e.keyCode !== keyCodes.shift) return
+      this.shiftKeyDown = true
+    },
+    onKeyUp (e: KeyboardEvent): void {
+      if (e.keyCode !== keyCodes.shift) return
+      this.shiftKeyDown = false
+    },
     toggleSelectAll (value: boolean): void {
       const selection = Object.assign({}, this.selection)
 
@@ -180,6 +199,11 @@ export default mixins(
       if (value) selection[key] = item
       else delete selection[key]
 
+      const index = this.selectableItems.findIndex(x => x.name === item.name)
+      if (this.lastEntry === -1) this.lastEntry = index
+      else if (this.shiftKeyDown && !this.singleSelect && emit) this.multipleSelect(value, emit, selection, index)
+      this.lastEntry = index
+
       if (this.singleSelect && emit) {
         const keys = Object.keys(this.selection)
         const old = keys.length && getObjectValueByPath(this.selection[keys[0]], this.itemKey)
@@ -187,6 +211,17 @@ export default mixins(
       }
       this.selection = selection
       emit && this.$emit('item-selected', { item, value })
+    },
+    multipleSelect (value = true, emit = true, selection: any, index: number): void {
+      const start = index < this.lastEntry ? index : this.lastEntry
+      const end = index < this.lastEntry ? this.lastEntry : index
+      for (let i = start; i <= end; i++) {
+        const currentItem = this.selectableItems[i]
+        const key = getObjectValueByPath(currentItem, this.itemKey)
+        if (value) selection[key] = currentItem
+        else delete selection[key]
+        emit && this.$emit('item-selected', { currentItem, value })
+      }
     },
     isExpanded (item: any): boolean {
       return this.expansion[getObjectValueByPath(item, this.itemKey)] || false

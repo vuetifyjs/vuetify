@@ -16,13 +16,13 @@ module.exports = merge(baseWebpackConfig, {
     filename: '[name].js',
     path: resolve('../dev'),
     publicPath: '/dev/',
-    library: 'Vuetify'
+    library: 'Vuetify',
   },
   resolve: {
     alias: {
       vuetify: resolve('../src'),
-      vue$: 'vue/dist/vue.esm.js'
-    }
+      vue$: 'vue/dist/vue.esm.js',
+    },
   },
   module: {
     rules: [
@@ -31,26 +31,26 @@ module.exports = merge(baseWebpackConfig, {
         loader: 'vue-loader',
         options: {
           compilerOptions: {
-            modules: [VuetifyProgressiveModule]
-          }
-        }
+            modules: [VuetifyProgressiveModule],
+          },
+        },
       },
       {
         test: /\.ts$/,
         use: 'happypack/loader?id=ts',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.js$/,
         use: 'happypack/loader?id=js',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
         use: [
           'style-loader',
-          'css-loader'
-        ]
+          'css-loader',
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/,
@@ -62,33 +62,33 @@ module.exports = merge(baseWebpackConfig, {
               'vuetify-loader/progressive-loader',
               {
                 loader: 'url-loader',
-                options: { limit: 8000 }
-              }
-            ]
+                options: { limit: 8000 },
+              },
+            ],
           },
           {
             loader: 'url-loader',
             options: {
               limit: 10000,
-              name: 'img/[name].[hash:7].[ext]'
-            }
-          }
-        ]
-      }
-    ]
+              name: 'img/[name].[hash:7].[ext]',
+            },
+          },
+        ],
+      },
+    ],
   },
   devServer: {
     contentBase: resolve('../dev'),
     publicPath: '/dev/',
     host: process.env.HOST || 'localhost',
     port: process.env.PORT || '8080',
-    disableHostCheck: true
+    disableHostCheck: true,
   },
   plugins: [
     new VueLoaderPlugin(),
     new ForkTsCheckerWebpackPlugin({
       checkSyntacticErrors: true,
-      tsconfig: resolve('../tsconfig.json')
+      tsconfig: resolve('../tsconfig.json'),
     }),
     new HappyPack({
       id: 'ts',
@@ -99,16 +99,16 @@ module.exports = merge(baseWebpackConfig, {
           loader: 'ts-loader',
           options: {
             appendTsSuffixTo: [/\.vue$/],
-            happyPackMode: true
-          }
+            happyPackMode: true,
+          },
         },
-        'eslint-loader?cache=true?emitWarning=true'
-      ]
+        'eslint-loader?cache=true?emitWarning=true',
+      ],
     }),
     new HappyPack({
       id: 'js',
       threadPool: happyThreadPool,
-      loaders: ['babel-loader', 'eslint-loader?cache=true?emitWarning=true']
-    })
-  ]
+      loaders: ['babel-loader', 'eslint-loader?cache=true?emitWarning=true'],
+    }),
+  ],
 })

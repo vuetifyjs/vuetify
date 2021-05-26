@@ -41,11 +41,11 @@ You can make the dialog appear from the top or the bottom.
 
 <example file="v-dialog/prop-transitions" />
 
-#### Modal
+#### Persistent
 
-Similar to a Simple Dialog, except that it's not dismissed when touching outside.
+Similar to a Simple Dialog, except that it's not dismissed when touching outside or pressing **esc** key.
 
-<example file="v-dialog/prop-modal" />
+<example file="v-dialog/prop-persistent" />
 
 #### Scrollable
 

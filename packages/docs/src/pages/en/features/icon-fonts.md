@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Icons
+  title: Icon Fonts
   description: Vuetify supports Material Design Icons, Font awesome and other icon sets through prefixes and global options.
   keywords: vue icon component, iconfont, icon libraries, vuetify icons
 related:
@@ -9,7 +9,7 @@ related:
   - /components/avatars/
 ---
 
-# Icons
+# Icon Fonts
 
 Vuetify comes bootstrapped with support for Material Design Icons, Material Icons, Font Awesome 4 and Font Awesome 5. By default, applications will default to use [Material Design Icons](https://materialdesignicons.com/).
 
@@ -36,7 +36,7 @@ export default new Vuetify({
 
 Using a predefined option will pre-fill defaults based upon the selected preset. This will overwrite the defaults of components that have default **icon** values. For more information, view the default [icon preset values](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/icons/presets).
 
-## Installing iconfonts
+## Installing icon fonts
 
 You are required to include the specified icon library (even if using default). This can be done by including a CDN link or importing the icon library into your application.
 
@@ -264,6 +264,8 @@ export default new Vuetify({
 })
 ```
 
+<vuetify-ad slug="enterprise-support-through-tidelift" />
+
 ## Using custom icons
 
 Let's say your application calls for a custom icon in a Vuetify component. Instead of creating a wrapper component or manually defining the specific icon each time a component appears, you can configure it at a global level.
@@ -282,6 +284,28 @@ export default new Vuetify({
     values: {
       cancel: 'fas fa-ban',
       menu: 'fas fa-ellipsis-v',
+    },
+  },
+})
+```
+
+You can import and assign an svg to an icon value. The imported svg should contain only the path without the `<svg>` wrapper. For importing a more elaborate svg, use a [component icon](#component-icons).
+
+```js
+// src/plugins/vuetify.js
+
+import Vue from 'vue'
+import Vuetify from 'vuetify/lib'
+import myIconSvg from 'myIcon.svg'
+
+Vue.use(Vuetify)
+
+export default new Vuetify({
+  icons: {
+    iconfont: 'fa',
+    values: {
+      customIconSvg: myIconSvg,
+      customIconSvgPath: 'M14.989,9.491L6.071,0.537C5.78,0.246,5.308,0.244,5.017,0.535c-0.294,0.29-0.294,0.763-0.003,1.054l8.394,8.428L5.014,18.41c-0.291,0.291-0.291,0.763,0,1.054c0.146,0.146,0.335,0.218,0.527,0.218c0.19,0,0.382-0.073,0.527-0.218l8.918-8.919C15.277,10.254,15.277,9.784,14.989,9.491z',
     },
   },
 })

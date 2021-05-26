@@ -162,6 +162,7 @@
     &--active
       max-width: 133%
       transform: $text-field-label-active-transform
+      pointer-events: auto // Show title attr on label hover
 
   & > .v-input__control > .v-input__slot
     cursor: text
@@ -433,10 +434,10 @@
 
     &.v-text-field--reverse legend
       +ltr()
-        text-align: right
+        margin-left: auto
 
       +rtl()
-        text-align: left
+        margin-right: auto
 
     &.v-text-field--rounded
       legend

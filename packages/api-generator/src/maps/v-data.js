@@ -30,6 +30,7 @@ const DataProps = [
   { name: 'itemsPerPage', source: 'v-data' },
   { name: 'groupBy', source: 'v-data' },
   { name: 'groupDesc', source: 'v-data' },
+  { name: 'checkboxColor', source: 'v-data', type: 'string' },
   { name: 'customGroup', source: 'v-data', default: 'gh:groupItems', example: '(items: any[], groupBy: string[], groupDesc: boolean[]) => Record<string, any[]>' },
   { name: 'locale', source: 'v-data' },
   { name: 'disableSort', source: 'v-data' },
@@ -42,11 +43,13 @@ const DataProps = [
 
 const DataDefaultScopedSlotProps = {
   items: 'any[]',
+  originalItemsLength: 'number',
   pagination: DataPagination,
   options: DataOptions,
-  groupedItems: 'Record<string, any[]>',
+  groupedItems: 'Array<{ name: string, items: any[] }>',
   updateOptions: '(obj: any) => void',
   sort: '(value: string) => void',
+  sortArray: '(sortBy: string[]) => void',
   group: '(value: string) => void',
 }
 

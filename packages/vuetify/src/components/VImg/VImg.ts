@@ -217,9 +217,10 @@ export default mixins(
       image.onerror = this.onError
 
       this.hasError = false
-      image.src = this.normalisedSrc.src
       this.sizes && (image.sizes = this.sizes)
       this.normalisedSrc.srcset && (image.srcset = this.normalisedSrc.srcset)
+      image.src = this.normalisedSrc.src
+      this.$emit('loadstart', this.normalisedSrc.src)
 
       this.aspectRatio || this.pollForSize(image)
       this.getSrc()

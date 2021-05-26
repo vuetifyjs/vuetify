@@ -13,6 +13,7 @@ $stepper-header-height: 72px !default;
 $stepper-label-line-height: 1 !default;
 $stepper-label-small-font-size: map-deep-get($headings, 'caption', 'size') !default;
 $stepper-label-small-font-weight: 300 !default;
+$stepper-shaped-border-radius: map-get($rounded, 'xl') $stepper-border-radius !default;
 $stepper-step-error-icon-font-size: map-deep-get($headings, 'h5', 'size')  !default;
 $stepper-step-padding: 24px !default;
 $stepper-step-step-font-size: map-deep-get($headings, 'caption', 'size') !default;
