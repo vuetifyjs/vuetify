@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.0.0-alpha.4",
+  "version": "3.0.0-alpha.5",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -85,9 +85,9 @@
     "concurrently": "^4.1.1",
     "cssnano": "^4.1.10",
     "cypress": "^7.2.0",
-    "eslint-plugin-cypress": "^2.11.3",
     "deepmerge": "^4.2.2",
     "dotenv": "^8.0.0",
+    "eslint-plugin-cypress": "^2.11.3",
     "eslint-plugin-jest": "^24.1.0",
     "file-loader": "^6.1.1",
     "fork-ts-checker-webpack-plugin": "^5.2.0",
