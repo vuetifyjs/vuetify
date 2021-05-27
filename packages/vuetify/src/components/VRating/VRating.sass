@@ -5,13 +5,6 @@
   display: inline-flex
   white-space: $rating-white-space
 
-  .v-icon
-    +ltr()
-      transform: scaleX(1)
-
-    +rtl()
-      transform: scaleX(-1)
-
   &--readonly
     pointer-events: none
 
@@ -30,27 +23,25 @@
     transition: none
     opacity: 1
 
-.v-rating__item--focused:before
-  content: " "
-  position: absolute
-  left: 0px
-  right: 0px
-  top: 0px
-  bottom: 0px
-  border: 1px solid black
-  pointer-events: none
+  &--focused:before
+    content: " "
+    position: absolute
+    left: 0px
+    right: 0px
+    top: 0px
+    bottom: 0px
+    border: 1px solid rgba(var(--v-border-color), var(--v-border-opacity))
+    border-radius: 50%
+    pointer-events: none
 
-.v-rating--hidden
+  &--half
+    width: 50%
+    overflow: hidden
+    position: absolute
+    z-index: 1
+
+.v-rating__hidden
   position: absolute
   width: 0px
   height: 0px
   opacity: 0
-
-.v-rating__item--half
-  width: 50%
-  overflow: hidden
-  position: absolute
-  z-index: 1
-
-.v-rating__item--full
-  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%)

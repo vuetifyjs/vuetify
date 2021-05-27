@@ -9,10 +9,8 @@ import { makeDensityProps } from '@/composables/density'
 import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { useProxiedModel } from '@/composables/proxiedModel'
-// import { useRefs } from '@/composables/refs'
-// import { useRtl } from '@/composables/rtl'
-// import { useLocale } from '@/composables/locale'
 import { useTheme } from '@/composables/theme'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, defineComponent, ref } from 'vue'
@@ -49,10 +47,6 @@ export default defineComponent({
       type: String,
       default: '$ratingFull',
     },
-    halfIcon: {
-      type: String,
-      default: '$ratingHalf',
-    },
     halfIncrements: Boolean,
     hover: Boolean,
     length: {
@@ -84,40 +78,24 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
-    // const { t } = useLocale()
-    // const { isRtl } = useRtl()
+    const { t } = useLocale()
     const { themeClasses } = useTheme()
-    // const { refs, updateRef } = useRefs<ComponentPublicInstance>()
     const rating = useProxiedModel(props, 'modelValue')
 
     const range = computed(() => createRange(Number(props.length), 1))
     const increments = computed(() => range.value.flatMap(v => props.halfIncrements ? [v - 0.5, v] : [v]))
     const hoverIndex = ref(-1)
     const focusIndex = ref(-1)
-
-    // function isHalfEvent (e: MouseEvent): boolean {
-    //   const rect = (e?.target as HTMLElement).getBoundingClientRect()
-    //   const isHalf = !!rect && (e.pageX - rect.left) < rect.width / 2
-
-    //   return isRtl.value ? !isHalf : isHalf
-    // }
-
-    // function genHoverIndex (e: MouseEvent, i: number) {
-    //   const isHalf = props.halfIncrements && isHalfEvent(e)
-
-    //   return i + (isHalf ? 0.5 : 1)
-    // }
+    const firstRef = ref<HTMLElement>()
+    let isClicking = false
 
     const itemState = computed(() => increments.value.map(value => {
       const isHovering = props.hover && hoverIndex.value > -1
-
       const isFilled = rating.value >= value
       const isHovered = hoverIndex.value >= value
-
       const isFullIcon = isHovering ? isHovered : isFilled
 
       const icon = isFullIcon ? props.fullIcon : props.emptyIcon
-
       const color = isFilled || isHovered ? props.color : props.bgColor
 
       return { isFilled, isHovered, icon, color }
@@ -141,11 +119,11 @@ export default defineComponent({
       }
 
       function onBlur () {
-        focusIndex.value = -1
+        if (!isClicking) focusIndex.value = -1
       }
 
-      function onChange (e: Event) {
-        rating.value = value
+      function onClick () {
+        rating.value = rating.value === value && props.clearable ? 0 : value
       }
 
       return {
@@ -153,90 +131,64 @@ export default defineComponent({
         onMouseleave: props.hover ? onMouseleave : undefined,
         onFocus,
         onBlur,
-        onChange,
+        onClick,
       }
     }))
 
-    // const items = computed(() => range.value.map(index => ({
-    //   ariaLabel: t(props.itemAriaLabel, index + 1, range.value.length),
-    //   density: props.density,
-    //   disabled: props.disabled,
-    //   hasLabels: !!props.itemLabels?.length || !!slots['item-label'],
-    //   index,
-    //   label: props.itemLabels && props.itemLabels[index],
-    //   readonly: props.readonly,
-    //   ripple: props.ripple,
-    //   size: props.size,
-    //   tabindex: props.readonly ? -1 : undefined,
-    //   text: true,
-    //   value: rating.value,
-    //   ...itemState.value[index],
-    //   ...eventState.value[index],
-    // })))
+    function onMousedown () {
+      isClicking = true
+    }
 
-    // function updateFocus () {
-    //   const index = Math.floor(rating.value - 0.5)
-    //   const el = refs.value[index]?.$el ?? refs.value[index]
-    //   el?.focus()
-    // }
-
-    // function onKeydown (e: KeyboardEvent) {
-    //   if (![keyCodes.left, keyCodes.right].includes(e.keyCode)) return
-
-    //   let increment = props.halfIncrements ? 0.5 : 1
-
-    //   increment = e.keyCode === keyCodes.left ? -increment : increment
-    //   increment = isRtl.value ? -increment : increment
-
-    //   rating.value = clamp(rating.value + increment, 0, range.value.length)
-    //   nextTick(updateFocus)
-    // }
+    function onMouseup () {
+      isClicking = false
+    }
 
     function VRatingItem ({ value, index, showStar = true }: { value: number, index: number, showStar?: boolean }) {
-      const { onMouseenter, onMouseleave, onChange, onFocus, onBlur } = eventState.value[index + 1]
+      const { onMouseenter, onMouseleave, onFocus, onBlur, onClick } = eventState.value[index + 1]
+      const id = `${props.name}-${String(value).replace('.', '-')}`
 
       return (
         <>
           <label
-            for={`${props.name}-${String(value).replace('.', '-')}`}
+            for={ id }
             class={{
               'v-rating__item--half': props.halfIncrements && value % 1 > 0,
               'v-rating__item--full': props.halfIncrements && value % 1 === 0,
             }}
+            onMousedown={ onMousedown }
+            onMouseup={ onMouseup }
           >
-            <span class="v-rating--hidden">{value} Stars</span>
+            <span class="v-rating__hidden">{ t(props.itemAriaLabel, value, props.length) }</span>
             { showStar && (
               <VBtn
                 tag="span"
                 tabindex="-1"
-                icon={itemState.value[index].icon}
-                color={itemState.value[index].color}
+                icon={ itemState.value[index].icon }
+                color={ itemState.value[index].color }
                 plain
-                size={props.size}
-                onMouseenter={onMouseenter}
-                onMouseleave={onMouseleave}
-                ripple={false}
-                density={props.density}
+                size={ props.size }
+                ripple={ props.ripple }
+                density={ props.density }
+                onMouseenter={ onMouseenter }
+                onMouseleave={ onMouseleave }
               />
             ) }
           </label>
           <input
-            class="v-rating--hidden"
-            name={props.name}
-            id={`${props.name}-${String(value).replace('.', '-')}`}
+            class="v-rating__hidden"
+            name={ props.name }
+            id={ id }
             type="radio"
-            value={value}
-            checked={rating.value === value}
-            onChange={onChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            ref={index === 0 ? firstRef : undefined}
+            value={ value }
+            checked={ rating.value === value }
+            onClick={ onClick }
+            onFocus={ onFocus }
+            onBlur={ onBlur }
+            ref={ index === 0 ? firstRef : undefined }
           />
         </>
       )
     }
-
-    const firstRef = ref<HTMLElement>()
 
     return () => {
       const hasLabels = !!props.itemLabels?.length
@@ -251,13 +203,14 @@ export default defineComponent({
             themeClasses.value,
           ]}
         >
-          <VRatingItem value={0} index={-1} showStar={false} />
+          <VRatingItem value={ 0 } index={ -1 } showStar={ false } />
           { range.value.map((value, i) => (
             <div class="v-rating__wrapper">
-              { !hasLabels ? undefined
-              : slots['item-label'] ? slots['item-label']()
-              : props.itemLabels?.[i] ? <span>{props.itemLabels?.[i]}</span>
-              : <span>&nbsp;</span>
+              {
+                !hasLabels ? undefined
+                  : slots['item-label'] ? slots['item-label']()
+                  : props.itemLabels?.[i] ? <span>{ props.itemLabels?.[i] }</span>
+                  : <span>&nbsp;</span>
               }
               <div
                 class={[
@@ -269,15 +222,15 @@ export default defineComponent({
               >
                 { props.halfIncrements ? (
                   <>
-                    <VRatingItem value={value - 0.5} index={i * 2} />
-                    <VRatingItem value={value} index={(i * 2) + 1} />
+                    <VRatingItem value={ value - 0.5 } index={ i * 2 } />
+                    <VRatingItem value={ value } index={ (i * 2) + 1 } />
                   </>
                 ) : (
-                  <VRatingItem value={value} index={i} />
+                  <VRatingItem value={ value } index={ i } />
                 ) }
               </div>
             </div>
-          ))}
+          )) }
         </props.tag>
       )
     }
