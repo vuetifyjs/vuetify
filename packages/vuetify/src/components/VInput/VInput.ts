@@ -272,26 +272,22 @@ export default baseMixins.extend<options>().extend({
       }, slot)
     },
     genPrependSlot () {
-      const slot = []
+      const slot = getSlot(this, 'prepend') || []
 
-      if (this.$scopedSlots.prepend) {
-        slot.push(this.$scopedSlots.prepend({}) || [])
-      } else if (this.prependIcon) {
+      if (this.prependIcon) {
         slot.push(this.genIcon('prepend'))
       }
 
       return this.genSlot('prepend', 'outer', slot)
     },
     genAppendSlot () {
-      const slot = []
+      const slot = getSlot(this, 'append') || []
 
       // Append icon for text field was really
       // an appended inner icon, v-text-field
       // will overwrite this method in order to obtain
       // backwards compat
-      if (this.$scopedSlots.append) {
-        slot.push(...(this.$scopedSlots.append({}) || []))
-      } else if (this.appendIcon) {
+      if (this.appendIcon) {
         slot.push(this.genIcon('append'))
       }
 
