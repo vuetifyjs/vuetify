@@ -2,7 +2,7 @@
 import './VThemeProvider.sass'
 
 // Composables
-import { useTheme, makeThemeProps } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
 import { defineComponent } from 'vue'
