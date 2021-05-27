@@ -11,15 +11,20 @@ import { makeProps } from '@/util'
 export default defineComponent({
   name: 'VThemeProvider',
 
-  props: makeProps(makeThemeProps()),
+  props: makeProps({
+    withBackground: Boolean,
+    ...makeThemeProps(),
+  }),
 
-  setup (props, context) {
+  setup (props, { slots }) {
     const { themeClasses } = useTheme(props)
 
     return () => {
+      if (!props.withBackground) return slots.default?.()
+
       return (
         <div class={['v-theme-provider', themeClasses.value]}>
-          <div>{ context.slots.default?.() }</div>
+          { slots.default?.() }
         </div>
       )
     }

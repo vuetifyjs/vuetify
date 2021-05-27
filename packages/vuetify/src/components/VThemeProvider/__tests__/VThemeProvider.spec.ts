@@ -1,20 +1,18 @@
 // Components
 import { VThemeProvider } from '..'
+import { VBtn } from '@/components'
 
 // Utilities
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
-import { VuetifySymbol } from '@/framework'
+import { createVuetify } from '@/framework'
 
 describe('VThemeProvider.ts', () => {
-  function mountFunction (options = {}) {
+  function mountFunction (options = {}, vuetifyOptions = {}) {
+    const vuetify = createVuetify(vuetifyOptions)
     return mount(VThemeProvider, {
       global: {
-        provide: {
-          [VuetifySymbol as symbol]: { defaults: { global: {} } },
-          [VuetifyThemeSymbol as symbol]: createTheme(),
-        },
+        plugins: [vuetify],
       },
       ...options,
     })
@@ -23,35 +21,32 @@ describe('VThemeProvider.ts', () => {
   it('should use theme defined in prop', async () => {
     const wrapper = mountFunction({
       props: { theme: 'dark' },
+      slots: {
+        default: () => h(VBtn, () => 'foo')
+      }
     })
 
-    expect(wrapper.classes('v-theme--dark')).toBeTruthy()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should use default theme from options', async () => {
-    const wrapper = mountFunction()
-
-    expect(wrapper.classes('v-theme--light')).toBeTruthy()
-  })
-
-  it('should not use parent value if nested', async () => {
-    const Test = defineComponent({
-      setup () {
-        return () => h(VThemeProvider, () =>
-          h(VThemeProvider, { theme: 'dark' })
-        )
-      },
+    const wrapper = mountFunction({
+      slots: {
+        default: () => h(VBtn, () => 'foo')
+      }
     })
 
-    const wrapper = mount(Test, {
-      global: {
-        provide: {
-          [VuetifySymbol as symbol]: { defaults: { global: {} } },
-          [VuetifyThemeSymbol as symbol]: createTheme({
-            defaultTheme: 'contrast',
-          }),
-        },
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render div when using with-background prop', () => {
+    const wrapper = mountFunction({
+      props: {
+        withBackground: true,
       },
+      slots: {
+        default: () => h(VBtn, () => 'foo')
+      }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
