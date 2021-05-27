@@ -49,7 +49,7 @@ exports[`createTheme should create style element 1`] = `
     .v-theme--dark {
       --v-theme-background: 18,18,18;
       --v-theme-background-overlay-multiplier: 1;
-      --v-theme-surface: 18,18,18;
+      --v-theme-surface: 33,33,33;
       --v-theme-surface-overlay-multiplier: 1;
       --v-theme-primary: 187,134,252;
       --v-theme-primary-overlay-multiplier: 2;

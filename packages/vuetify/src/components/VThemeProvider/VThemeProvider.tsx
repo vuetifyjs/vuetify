@@ -2,7 +2,7 @@
 import './VThemeProvider.sass'
 
 // Composables
-import { provideTheme } from '@/composables/theme'
+import { useTheme, makeThemeProps } from '@/composables/theme'
 
 // Utilities
 import { defineComponent } from 'vue'
@@ -11,18 +11,10 @@ import { makeProps } from '@/util'
 export default defineComponent({
   name: 'VThemeProvider',
 
-  props: makeProps({
-    theme: {
-      type: String,
-    },
-    // TODO: Better name
-    newContext: {
-      type: Boolean,
-    },
-  }),
+  props: makeProps(makeThemeProps()),
 
   setup (props, context) {
-    const { themeClasses } = provideTheme(props)
+    const { themeClasses } = useTheme(props)
 
     return () => {
       return (
