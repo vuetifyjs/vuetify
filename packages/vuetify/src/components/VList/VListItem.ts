@@ -35,6 +35,8 @@ interface options extends ExtractVue<typeof baseMixins> {
   isInList: boolean
   isInMenu: boolean
   isInNav: boolean
+  genAttrs (): object
+  click (e: MouseEvent | KeyboardEvent): void
 }
 
 /* @vue/component */
@@ -73,6 +75,7 @@ export default baseMixins.extend<options>().extend({
     } as any as PropValidator<string>,
     dense: Boolean,
     inactive: Boolean,
+    baseColor: String,
     link: Boolean,
     selectable: {
       type: Boolean,
@@ -182,6 +185,6 @@ export default baseMixins.extend<options>().extend({
       })
       : this.$slots.default
 
-    return h(tag, this.setTextColor(this.color, data), children)
+    return h(tag, this.setTextColor(this.isActive ? this.color || this.baseColor : this.baseColor, data), children)
   },
 })
