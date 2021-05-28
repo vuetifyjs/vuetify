@@ -130,7 +130,11 @@ describe('VCarousel.ts', () => {
     const localMountFunction = (options?: MountOptions<Instance>, props?: object) => {
       return mount({
         render (createElement) {
-          return createElement(VCarousel, { props }, [createElement(VThemeProvider, 'test')])
+          return createElement(VCarousel, { props }, [
+            createElement(VCarouselItem, [
+              createElement(VThemeProvider, 'test'),
+            ]),
+          ])
         },
       }, {
         sync: false,

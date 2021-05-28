@@ -63,7 +63,7 @@ export default VWindow.extend({
   // pass down the parent's theme
   provide (): object {
     return {
-      theme: this.theme,
+      parentTheme: this.theme,
     }
   },
 
