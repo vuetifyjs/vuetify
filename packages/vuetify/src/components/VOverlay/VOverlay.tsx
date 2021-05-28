@@ -29,6 +29,7 @@ import {
 // Types
 import type { BackgroundColorData } from '@/composables/color'
 import type { Prop, PropType, Ref } from 'vue'
+import { useRtl } from '@/composables/rtl'
 
 function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
   const isBooted = ref(eager.value)
@@ -186,6 +187,7 @@ export default defineComponent({
     const isActive = useProxiedModel(props, 'modelValue')
     const { teleportTarget } = useTeleport(toRef(props, 'attach'))
     const { themeClasses } = useTheme()
+    const { rtlClasses } = useRtl()
     const { isBooted } = useBooted(isActive, toRef(props, 'eager'))
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
@@ -295,6 +297,7 @@ export default defineComponent({
                   'v-overlay--active': isActive.value,
                 },
                 themeClasses.value,
+                rtlClasses.value,
               ]}
               style={ top.value != null ? `top: ${convertToUnit(top.value)}` : undefined }
               {...attrs}
