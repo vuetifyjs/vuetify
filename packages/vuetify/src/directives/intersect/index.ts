@@ -15,6 +15,8 @@ interface ObserveVNodeDirective extends Omit<VNodeDirective, 'modifiers'> {
 }
 
 function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
+  if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return
+
   const modifiers = binding.modifiers || {}
   const value = binding.value
   const { handler, options } = typeof value === 'object'
@@ -27,24 +29,25 @@ function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
     /* istanbul ignore if */
     if (!el._observe) return // Just in case, should never fire
 
+    const isIntersecting = entries.some(entry => entry.isIntersecting)
+
     // If is not quiet or has already been
     // initted, invoke the user callback
     if (
       handler && (
         !modifiers.quiet ||
         el._observe.init
+      ) && (
+        !modifiers.once ||
+        isIntersecting ||
+        !el._observe.init
       )
     ) {
-      const isIntersecting = Boolean(entries.find(entry => entry.isIntersecting))
-
       handler(entries, observer, isIntersecting)
     }
 
-    // If has already been initted and
-    // has the once modifier, unbind
-    if (el._observe.init && modifiers.once) unbind(el)
-    // Otherwise, mark the observer as initted
-    else (el._observe.init = true)
+    if (isIntersecting && modifiers.once) unbind(el)
+    else el._observe.init = true
   }, options)
 
   el._observe = { init: false, observer }

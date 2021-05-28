@@ -18,6 +18,7 @@
   },
   "events": {
     "error": "Emitted when there is an error",
-    "load": "Emitted when image is loaded"
+    "load": "Emitted when image is loaded",
+    "loadstart": "Emitted when the image starts to load"
   }
 }

@@ -16,3 +16,8 @@ html.overflow-y-hidden
   ::-ms-clear,
   ::-ms-reveal
     display: none
+
+// iOS Safari hack to allow click events on body
+@supports (-webkit-touch-callout: none)
+  body
+    cursor: pointer

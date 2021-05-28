@@ -40,7 +40,7 @@ exports[`VCard.vue should render loading card 1`] = `
     <div role="progressbar"
          aria-valuemin="0"
          aria-valuemax="100"
-         class="v-progress-linear v-progress-linear--absolute theme--light"
+         class="v-progress-linear v-progress-linear--absolute v-progress-linear--visible theme--light"
          style="height: 4px;"
     >
       <div class="v-progress-linear__background primary"
