@@ -123,23 +123,23 @@ class BlockScrollStrategy implements ScrollStrategy {
 
   enable () {
     this.scrollElements = getScrollParents(this.content.value)
+    const scrollbarWidth = window.innerWidth - document.documentElement.offsetWidth
 
-    document.documentElement.style.setProperty(
-      '--v-scrollbar-offset',
-      convertToUnit(window.innerWidth - document.documentElement.offsetWidth)
-    )
+    document.documentElement.style.setProperty('--v-scrollbar-offset', convertToUnit(scrollbarWidth))
 
     this.scrollElements.forEach((el, i) => {
       this.initialOverflow[i] = el.style.overflowY
       el.style.overflowY = 'hidden'
+      el.style.setProperty('--v-scrollbar-offset', convertToUnit(scrollbarWidth))
     })
   }
 
   disable () {
     this.scrollElements.forEach((el, i) => {
       el.style.overflowY = this.initialOverflow[i]
+      el.style.removeProperty('--v-scrollbar-offset')
     })
-    document.documentElement.style.setProperty('--v-scrollbar-offset', '')
+    document.documentElement.style.removeProperty('--v-scrollbar-offset')
   }
 }
 
