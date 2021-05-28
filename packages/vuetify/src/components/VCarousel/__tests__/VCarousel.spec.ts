@@ -16,7 +16,7 @@ import { VThemeProvider } from '../../VThemeProvider'
 
 describe('VCarousel.ts', () => {
   type Instance = InstanceType<typeof VCarousel>
-  let mountFunction: (options?: MountOptions<Instance>, shallow?: Boolean) => Wrapper<Instance>
+  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
   beforeEach(() => {
     mountFunction = (options = {}) => {
