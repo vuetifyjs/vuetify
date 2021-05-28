@@ -1,7 +1,7 @@
 ---
 meta:
   title: Card component
-  description: The v-card component is a versatile component that can be used for anything from a panel to a static image.
+  description: The v-card component is a versatile and enhanced sheet of paper that provides a simple interface for headings, text, images, and actions.
   keywords: cards, vuetify card component, vue card component, v-card
 related:
   - /components/buttons/
@@ -11,29 +11,87 @@ related:
 
 # Cards
 
-The `v-card` component is a versatile component that can be used for anything from a panel to a static image. The **card** component has numerous helper components to make markup as easy as possible. Components that have no listed options use Vue's functional component option for faster rendering and serve as markup sugar to make building easier. <inline-ad slug="scrimba-cards" />
+ The `v-card` component is a versatile and enhanced sheet of paper that provides a simple interface for headings, text, images, icons, and more. Card components that have no listed options, such as `v-card-header`, are functional components that serve as _markup sugar_ that help make your code more readable. <inline-ad slug="scrimba-cards" />
 
 <entry-ad />
 
 ## Usage
 
-A card has 4 basic components, `v-card-title`, `v-card-subtitle`, `v-card-text` and `v-card-actions`.
-
 <usage name="v-card" />
 
 ## API
 
-- [v-card](/api/v-card)
-- [v-card-actions](/api/v-card-actions)
-- [v-card-subtitle](/api/v-card-subtitle)
-- [v-card-text](/api/v-card-text)
-- [v-card-title](/api/v-card-title)
+* [v-card-actions](/api/v-card-actions/)
+* [v-card-avatar](/api/v-card-avatar/)
+* [v-card-header](/api/v-card-header/)
+* [v-card-header-text](/api/v-card-header-text/)
+* [v-card-img](/api/v-card-img/)
+* [v-card-media](/api/v-card-media/)
+* [v-card-subtitle](/api/v-card-subtitle/)
+* [v-card-text](/api/v-card-text/)
+* [v-card-title](/api/v-card-title/)
 
 ## Functional Components
+
+The `v-card` component has multiple special elements called **functional** components; very fast and stateless. Visit the official Vue documentation for more information on [functional components](https://v3.vuejs.org/guide/render-function.html#functional-components).
+
+The following snippet shows the default structure of a card:
+
+```html
+<v-card>
+  <v-card-img>
+    <v-img src="..." />
+  </v-card-img>
+
+  <v-card-media>
+    <v-img src="..." />
+  </v-card-media>
+
+  <v-card-header>
+    <v-card-avatar>
+      <v-avatar image="...">
+    </v-card-avatar>
+
+    <v-card-header-text>
+      <v-card-title>...</v-card-title>
+
+      <v-card-subtitle>...</v-card-subtitle>
+    </v-card-header-text>
+
+    <v-card-avatar>
+      <v-avatar icon="...">
+    </v-card-avatar>
+  </v-card-header>
+
+  <v-card-text>...</v-card-text>
+
+  <v-card-actions>
+    <v-btn>Action 1</v-btn>
+
+    <v-btn>Action 2</v-btn>
+  </v-card-actions>
+</v-card>
+```
 
 ### v-card-actions
 
 The container used for placing **actions** for a card, such as [v-btn](/components/buttons) or [v-menu](/components/menus). Also applies *special margin* to buttons so that they properly line up with other card content areas.
+
+### v-card-avatar
+
+TODO
+
+### v-card-header
+
+TODO
+
+### v-card-header-text
+
+TODO
+
+### v-card-img
+
+TODO
 
 ### v-card-subtitle
 
