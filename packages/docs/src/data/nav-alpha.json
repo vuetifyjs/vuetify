@@ -58,7 +58,8 @@
       "item-groups",
       "lazy",
       "overlays",
-      "sheets"
+      "sheets",
+      "theme-providers"
     ]
   },
   {
