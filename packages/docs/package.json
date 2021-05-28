@@ -46,12 +46,12 @@
     "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~5.0.0-beta.0",
-    "@vue/cli-plugin-eslint": "~5.0.0-beta.0",
-    "@vue/cli-plugin-pwa": "~5.0.0-beta.0",
-    "@vue/cli-plugin-router": "~5.0.0-beta.0",
-    "@vue/cli-plugin-vuex": "~5.0.0-beta.0",
-    "@vue/cli-service": "~5.0.0-beta.0",
+    "@vue/cli-plugin-babel": "~5.0.0-beta.1",
+    "@vue/cli-plugin-eslint": "~5.0.0-beta.1",
+    "@vue/cli-plugin-pwa": "~5.0.0-beta.1",
+    "@vue/cli-plugin-router": "~5.0.0-beta.1",
+    "@vue/cli-plugin-vuex": "~5.0.0-beta.1",
+    "@vue/cli-service": "~5.0.0-beta.1",
     "@vuetify/api-generator": "^3.0.0-alpha.4",
     "@vuetify/vue-cli-plugin-base": "~0.3.5",
     "cosmicjs": "^3.2.43",
