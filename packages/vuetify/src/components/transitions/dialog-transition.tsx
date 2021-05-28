@@ -6,7 +6,7 @@ export default defineComponent({
   name: 'VDialogTransition',
 
   props: makeProps({
-    target: Element as PropType<HTMLElement>,
+    target: Object as PropType<HTMLElement>,
   }),
 
   setup (props, { slots }) {

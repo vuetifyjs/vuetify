@@ -152,7 +152,7 @@ export default defineComponent({
   props: makeProps({
     absolute: Boolean,
     attach: {
-      type: [Boolean, String, Element] as PropType<boolean | string | Element>,
+      type: [Boolean, String, Object] as PropType<boolean | string | Element>,
       default: 'body',
     },
     eager: Boolean,
