@@ -20,7 +20,7 @@
     ]
   },
   "scripts": {
-    "build": "yarn build:client && yarn build:server && yarn prerender",
+    "build": "yarn build:client",
     "dev": "yarn serve",
     "serve": "vue-cli-service serve",
     "lint": "yarn lint:md && vue-cli-service lint --no-fix",
