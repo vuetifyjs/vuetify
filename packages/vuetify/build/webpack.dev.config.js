@@ -66,9 +66,6 @@ module.exports = merge(baseWebpackConfig, {
     host: process.env.HOST || 'localhost',
     port: process.env.PORT || '8080',
     firewall: false,
-    // dev: {
-    //   publicPath: '/',
-    // },
   },
   plugins: [
     new VueLoader.VueLoaderPlugin(),
