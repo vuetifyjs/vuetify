@@ -4,6 +4,7 @@ declare global {
   namespace Cypress {
     export interface Chainable {
       mount: typeof cyMount
+      getBySel(dataTestAttribute: string, args?: any): Chainable<Element>
     }
   }
 }

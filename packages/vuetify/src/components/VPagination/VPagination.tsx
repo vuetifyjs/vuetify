@@ -1,14 +1,15 @@
 import './VPagination.sass'
 
 // Types
+import type { ComponentPublicInstance } from 'vue'
 import type { Density } from '@/composables/density'
 
 // Components
 import { VBtn } from '../VBtn'
 
 // Utilities
-import { ComponentPublicInstance, computed, defineComponent, nextTick, ref } from 'vue'
-import { createRange, keyCodes, makeProps } from '@/util'
+import { computed, defineComponent, nextTick, ref } from 'vue'
+import { createRange, keyValues, makeProps } from '@/util'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
@@ -28,17 +29,17 @@ export default defineComponent({
   name: 'VPagination',
 
   props: makeProps({
+    start: {
+      type: [Number, String],
+      default: 1,
+    },
     modelValue: {
       type: Number,
-      default: 1,
+      default: (props: any) => props.start,
     },
     disabled: Boolean,
-    start: {
-      type: Number,
-      default: 1,
-    },
     length: {
-      type: Number,
+      type: [Number, String],
       default: 0,
       validator: (val: number) => val % 1 === 0,
     },
@@ -105,19 +106,21 @@ export default defineComponent({
   }),
 
   emits: {
-    'update:modelValue': (value: number) => {},
-    first: (value: number) => {},
-    prev: (value: number) => {},
-    next: (value: number) => {},
-    last: (value: number) => {},
+    'update:modelValue': (value: number) => true,
+    first: (value: number) => true,
+    prev: (value: number) => true,
+    next: (value: number) => true,
+    last: (value: number) => true,
   },
 
-  setup (props, ctx) {
+  setup (props, { slots, emit }) {
     const page = useProxiedModel(props, 'modelValue')
     const { t, n } = useLocale()
     const { isRtl } = useRtl()
     const { themeClasses } = useTheme()
-    const { resizeRef } = useResizeObserver(entries => {
+    const maxButtons = ref(-1)
+
+    const { resizeRef } = useResizeObserver((entries: ResizeObserverEntry[]) => {
       if (!entries.length) return
 
       const { target, contentRect } = entries[0]
@@ -132,48 +135,48 @@ export default defineComponent({
       maxButtons.value = Math.max(0, Math.floor((totalWidth - 96) / itemWidth))
     })
 
-    const maxButtons = ref(-1)
+    const length = computed(() => parseInt(props.length, 10))
+    const start = computed(() => parseInt(props.start, 10))
 
     const totalVisible = computed(() => {
-      if (props.totalVisible) return Math.min(parseInt(props.totalVisible ?? '', 10), props.length)
+      if (props.totalVisible) return Math.min(parseInt(props.totalVisible ?? '', 10), length.value)
       else if (maxButtons.value >= 0) return maxButtons.value
-      return props.length
+      return length.value
     })
 
     const range = computed(() => {
-      if (props.length <= 0) return []
+      if (length.value <= 0) return []
 
       if (totalVisible.value <= 3) {
-        return [Math.min(Math.max(props.start, page.value), props.start + props.length)]
+        return [Math.min(Math.max(start.value, page.value), start.value + length.value)]
       }
 
       if (props.length <= totalVisible.value) {
-        return createRange(props.length, props.start)
+        return createRange(length.value, start.value)
       }
 
-      const even = totalVisible.value % 2 === 0 ? 1 : 0
       const middle = Math.ceil(totalVisible.value / 2)
-      const left = middle + even
-      const right = props.length - middle + even
+      const left = middle
+      const right = length.value - middle
 
       if (page.value < left) {
-        return [...createRange(Math.max(1, totalVisible.value - 2), props.start), props.ellipsis, props.length]
+        return [...createRange(Math.max(1, totalVisible.value - 2), start.value), props.ellipsis, length.value]
       } else if (page.value > right) {
-        const length = totalVisible.value - 2
-        const start = props.length - length + props.start
-        return [props.start, props.ellipsis, ...createRange(length, start)]
+        const rangeLength = totalVisible.value - 2
+        const rangeStart = length.value - rangeLength + start.value
+        return [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart)]
       } else {
-        const length = Math.max(1, totalVisible.value - 4)
-        const start = page.value - Math.floor(length / 2) + props.start
-        return [props.start, props.ellipsis, ...createRange(length, start), props.ellipsis, props.length]
+        const rangeLength = Math.max(1, totalVisible.value - 4)
+        const rangeStart = rangeLength === 1 ? page.value : page.value - Math.floor(rangeLength / 2) + start.value
+        return [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart), props.ellipsis, length.value]
       }
     })
 
     // TODO: 'first' | 'prev' | 'next' | 'last' does not work here?
-    function emit (e: Event, value: number, event?: any) {
+    function setValue (e: Event, value: number, event?: any) {
       e.preventDefault()
       page.value = value
-      event && ctx.emit(event, value)
+      event && emit(event, value)
     }
 
     const { refs, updateRef } = useRefs<ComponentPublicInstance>()
@@ -186,37 +189,43 @@ export default defineComponent({
       }
 
       return range.value.map((item, index) => {
+        const ref = (e: any) => updateRef(e, index)
+
         if (typeof item === 'string') {
           return {
-            ...sharedProps,
             isSelected: false,
-            ref: (e: any) => updateRef(e, index),
             page: item,
-            ellipsis: true,
-            icon: true,
-            disabled: true,
-            text: true,
-            outlined: props.outlined,
-            border: props.border,
+            props: {
+              ...sharedProps,
+              ref,
+              ellipsis: true,
+              icon: true,
+              disabled: true,
+              text: true,
+              outlined: props.outlined,
+              border: props.border,
+            },
           }
         } else {
           const isSelected = item === page.value
           return {
-            ...sharedProps,
             isSelected,
-            ref: (e: any) => updateRef(e, index),
             page: n(item),
-            ellipsis: false,
-            icon: true,
-            disabled: !!props.disabled,
-            elevation: props.elevation,
-            outlined: props.outlined,
-            border: props.border,
-            text: !isSelected,
-            color: isSelected ? props.color : false,
-            ariaCurrent: isSelected,
-            ariaLabel: t(isSelected ? props.currentPageAriaLabel : props.pageAriaLabel, index + 1),
-            onClick: (e: Event) => emit(e, item),
+            props: {
+              ...sharedProps,
+              ref,
+              ellipsis: false,
+              icon: true,
+              disabled: !!props.disabled,
+              elevation: props.elevation,
+              outlined: props.outlined,
+              border: props.border,
+              text: !isSelected,
+              color: isSelected ? props.color : false,
+              ariaCurrent: isSelected,
+              ariaLabel: t(isSelected ? props.currentPageAriaLabel : props.pageAriaLabel, index + 1),
+              onClick: (e: Event) => setValue(e, item),
+            },
           }
         }
       })
@@ -233,48 +242,55 @@ export default defineComponent({
         border: props.border,
       }
 
+      const prevDisabled = !!props.disabled || page.value <= start.value
+      const nextDisabled = !!props.disabled || page.value >= start.value + length.value - 1
+
       return {
         first: props.showFirstLastPage ? {
           ...sharedProps,
           icon: isRtl.value ? props.lastIcon : props.firstIcon,
-          onClick: (e: Event) => emit(e, props.start, 'first'),
-          disabled: !!props.disabled || page.value <= props.start,
+          onClick: (e: Event) => setValue(e, start.value, 'first'),
+          disabled: prevDisabled,
           ariaLabel: t(props.firstAriaLabel),
+          ariaDisabled: prevDisabled,
         } : undefined,
         prev: {
           ...sharedProps,
           icon: isRtl.value ? props.nextIcon : props.prevIcon,
-          onClick: (e: Event) => emit(e, page.value - 1, 'prev'),
-          disabled: !!props.disabled || page.value <= props.start,
+          onClick: (e: Event) => setValue(e, page.value - 1, 'prev'),
+          disabled: prevDisabled,
           ariaLabel: t(props.previousAriaLabel),
+          ariaDisabled: prevDisabled,
         },
         next: {
           ...sharedProps,
           icon: isRtl.value ? props.prevIcon : props.nextIcon,
-          onClick: (e: Event) => emit(e, page.value + 1, 'next'),
-          disabled: !!props.disabled || page.value >= props.start + props.length - 1,
+          onClick: (e: Event) => setValue(e, page.value + 1, 'next'),
+          disabled: nextDisabled,
           ariaLabel: t(props.nextAriaLabel),
+          ariaDisabled: nextDisabled,
         },
         last: props.showFirstLastPage ? {
           ...sharedProps,
           icon: isRtl.value ? props.firstIcon : props.lastIcon,
-          onClick: (e: Event) => emit(e, props.start + props.length - 1, 'last'),
-          disabled: !!props.disabled || page.value >= props.start + props.length - 1,
+          onClick: (e: Event) => setValue(e, start.value + length.value - 1, 'last'),
+          disabled: nextDisabled,
           ariaLabel: t(props.lastAriaLabel),
+          ariaDisabled: nextDisabled,
         } : undefined,
       }
     })
 
     function updateFocus () {
-      const currentIndex = page.value - props.start
+      const currentIndex = page.value - start.value
       refs.value[currentIndex]?.$el.focus()
     }
 
     function onKeydown (e: KeyboardEvent) {
-      if (e.keyCode === keyCodes.left && !props.disabled && page.value > props.start) {
+      if (e.key === keyValues.left && !props.disabled && page.value > props.start) {
         page.value = page.value - 1
         nextTick(updateFocus)
-      } else if (e.keyCode === keyCodes.right && !props.disabled && page.value < props.start + props.length - 1) {
+      } else if (e.key === keyValues.right && !props.disabled && page.value < start.value + length.value - 1) {
         page.value = page.value + 1
         nextTick(updateFocus)
       }
@@ -282,57 +298,57 @@ export default defineComponent({
 
     return () => (
       <props.tag
-        ref={resizeRef}
+        ref={ resizeRef }
         class={[
           'v-pagination',
           themeClasses.value,
         ]}
-        role='navigation'
-        aria-label={t(props.ariaLabel)}
-        onKeydown={onKeydown}
-        data-test='root'
+        role="navigation"
+        aria-label={ t(props.ariaLabel) }
+        onKeydown={ onKeydown }
+        data-test="v-pagination-root"
       >
-        <ul class='v-pagination__list'>
+        <ul class="v-pagination__list">
           { props.showFirstLastPage && (
-            <li class='v-pagination__first' data-test='first'>
-              { ctx.slots.first ? ctx.slots.first(controls.value.first) : (
+            <li class="v-pagination__first" data-test="v-pagination-first">
+              { slots.first ? slots.first(controls.value.first) : (
                 <VBtn {...controls.value.first} />
               ) }
             </li>
           ) }
 
-          <li class='v-pagination__prev' data-test='prev'>
-            { ctx.slots.prev ? ctx.slots.prev(controls.value.prev) : (
+          <li class="v-pagination__prev" data-test="v-pagination-prev">
+            { slots.prev ? slots.prev(controls.value.prev) : (
               <VBtn {...controls.value.prev} />
             ) }
           </li>
 
-          { items.value.map(({ page, ellipsis, isSelected, ...item }, index) => (
+          { items.value.map((item, index) => (
             <li
-              key={`${index}_${page}`}
+              key={ `${index}_${item.page}` }
               class={[
                 'v-pagination__item',
                 {
-                  'v-pagination__item--selected': isSelected,
-                }
+                  'v-pagination__item--selected': item.isSelected,
+                },
               ]}
-              data-test='item'
+              data-test="v-pagination-item"
             >
-              { ctx.slots.item ? ctx.slots.item({ page, ellipsis, isSelected, ...item }) : (
-                <VBtn {...item}>{page}</VBtn>
+              { slots.item ? slots.item(item) : (
+                <VBtn {...item.props}>{ item.page }</VBtn>
               ) }
             </li>
           )) }
 
-          <li class='v-pagination__next' data-test='next'>
-            { ctx.slots.next ? ctx.slots.next(controls.value.next) : (
+          <li class="v-pagination__next" data-test="v-pagination-next">
+            { slots.next ? slots.next(controls.value.next) : (
               <VBtn {...controls.value.next} />
             ) }
           </li>
 
           { props.showFirstLastPage && (
-            <li class='v-pagination__last' data-test='last'>
-              { ctx.slots.last ? ctx.slots.last(controls.value.last) : (
+            <li class="v-pagination__last" data-test="v-pagination-last">
+              { slots.last ? slots.last(controls.value.last) : (
                 <VBtn {...controls.value.last} />
               ) }
             </li>
