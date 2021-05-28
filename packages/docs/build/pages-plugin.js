@@ -72,7 +72,7 @@ class Plugin {
     })
 
     compiler.hooks.watchRun.tapPromise('PagesPlugin', async compiler => {
-      shouldWrite = !!Object.keys(compiler.watchFileSystem.watcher.mtimes)
+      shouldWrite = !!Object.keys(compiler.watchFileSystem.watcher.getTimeInfoEntries())
         .find(path => path.indexOf('src/pages'))
     })
   }

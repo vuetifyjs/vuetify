@@ -9,7 +9,6 @@ const baseWebpackConfig = require('./webpack.base.config')
 const resolve = file => path.resolve(__dirname, file)
 
 module.exports = merge(baseWebpackConfig, {
-  target: 'web',
   entry: ['./dev/index.js'],
   output: {
     filename: '[name].js',
@@ -63,11 +62,10 @@ module.exports = merge(baseWebpackConfig, {
     ]
   },
   devServer: {
-    contentBase: resolve('../dev'),
-    publicPath: '/',
+    static: resolve('../dev'),
     host: process.env.HOST || 'localhost',
     port: process.env.PORT || '8080',
-    disableHostCheck: true,
+    firewall: false,
   },
   plugins: [
     new VueLoader.VueLoaderPlugin(),
