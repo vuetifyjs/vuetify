@@ -1,8 +1,13 @@
 @import './index'
 
 .v-layout
+  --v-scrollbar-offset: 0px
   position: relative
   display: flex
   flex: 1 1 auto
   overflow: auto
   z-index: 0
+
+  &--full-height
+    --v-scrollbar-offset: inherit
+    height: 100%

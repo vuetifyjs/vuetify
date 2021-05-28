@@ -15,7 +15,7 @@ export default defineComponent({
 
   props: makeProps({
     theme: String,
-    ...makeLayoutProps(),
+    ...makeLayoutProps({ fullHeight: true }),
   }),
 
   setup (props, { slots }) {
