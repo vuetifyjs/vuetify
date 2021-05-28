@@ -60,6 +60,13 @@ export default VWindow.extend({
     },
   },
 
+  // pass down the parent's theme
+  provide (): object {
+    return {
+      theme: this.theme,
+    }
+  },
+
   data () {
     return {
       internalHeight: this.height,
@@ -75,6 +82,9 @@ export default VWindow.extend({
         'v-carousel--hide-delimiter-background': this.hideDelimiterBackground,
         'v-carousel--vertical-delimiters': this.isVertical,
       }
+    },
+    isDark (): boolean {
+      return this.dark || !this.light
     },
     isVertical (): boolean {
       return this.verticalDelimiters != null

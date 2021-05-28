@@ -9,18 +9,18 @@ import VProgressLinear from '../../VProgressLinear/VProgressLinear'
 import {
   mount,
   MountOptions,
-  shallowMount,
   Wrapper,
 } from '@vue/test-utils'
 import { waitAnimationFrame } from '../../../../test'
+import { VThemeProvider } from '../../VThemeProvider'
 
 describe('VCarousel.ts', () => {
   type Instance = InstanceType<typeof VCarousel>
   let mountFunction: (options?: MountOptions<Instance>, shallow?: Boolean) => Wrapper<Instance>
 
   beforeEach(() => {
-    mountFunction = (options = {}, shallow = false) => {
-      return (shallow ? shallowMount : mount)(VCarousel, {
+    mountFunction = (options = {}) => {
+      return mount(VCarousel, {
         sync: false,
         mocks: {
           $vuetify: {
@@ -127,21 +127,42 @@ describe('VCarousel.ts', () => {
   })
 
   it('should have the correct theme', async () => {
-    let wrapper = mountFunction({}, true)
+    const localMountFunction = (options?: MountOptions<Instance>, props?: object) => {
+      return mount({
+        render (createElement) {
+          return createElement(VCarousel, { props }, [createElement(VThemeProvider, 'test')])
+        },
+      }, {
+        sync: false,
+        mocks: {
+          $vuetify: {
+            rtl: false,
+            lang: {
+              t: str => str,
+            },
+          },
+        },
+        ...options,
+      }).find(VCarousel) as Wrapper<Instance>
+    }
+
+    let wrapper = localMountFunction()
+
+    expect(wrapper.vm.isDark).toBeTruthy()
+
+    expect(wrapper.find(VThemeProvider).vm.isDark).toBeFalsy()
+
+    wrapper = localMountFunction({ provide: { theme: { isDark: true } } })
+
+    expect(wrapper.vm.isDark).toBeTruthy()
+
+    expect(wrapper.find(VThemeProvider).vm.isDark).toBeTruthy()
+
+    wrapper = localMountFunction(undefined, { light: true })
 
     expect(wrapper.vm.isDark).toBeFalsy()
-    expect(wrapper.classes()).toContain('theme--light')
 
-    wrapper = mountFunction({ provide: { theme: { isDark: true } } }, true)
-
-    expect(wrapper.vm.isDark).toBeTruthy()
-
-    expect(wrapper.classes()).toContain('theme--dark')
-
-    wrapper = mountFunction({ propsData: { dark: true } }, true)
-
-    expect(wrapper.vm.isDark).toBeTruthy()
-    expect(wrapper.classes()).toContain('theme--dark')
+    expect(wrapper.find(VThemeProvider).vm.isDark).toBeFalsy()
   })
 
   it('should not throw an error in a v-if', async () => {
@@ -167,7 +188,7 @@ describe('VCarousel.ts', () => {
       propsData: {
         show: false,
       },
-    })
+    }) as Wrapper<Instance>
 
     await wrapper.vm.$nextTick()
 
