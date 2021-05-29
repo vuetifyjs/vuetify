@@ -21,14 +21,8 @@ export default defineComponent({
       type: [Number, String],
       default: 0,
     },
-    bgColor: {
-      type: String,
-      default: 'surface',
-    },
-    color: {
-      type: String,
-      default: 'primary',
-    },
+    bgColor: String,
+    color: String,
     width: {
       type: [Number, String],
       default: 4,
@@ -98,8 +92,8 @@ export default defineComponent({
             ]}
             style={ underlayColorStyles.value }
             fill="transparent"
-            cx='50%'
-            cy='50%'
+            cx="50%"
+            cy="50%"
             r={ MAGIC_RADIUS_CONSTANT }
             stroke-width={ strokeWidth.value }
             stroke-dasharray={ CIRCUMFERENCE }
@@ -108,8 +102,8 @@ export default defineComponent({
           <circle
             class="v-progress-circular__overlay"
             fill="transparent"
-            cx='50%'
-            cy='50%'
+            cx="50%"
+            cy="50%"
             r={ MAGIC_RADIUS_CONSTANT }
             stroke-width={ strokeWidth.value }
             stroke-dasharray={ CIRCUMFERENCE }
