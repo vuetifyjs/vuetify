@@ -1,41 +1,20 @@
 @import './_variables.scss'
 
-+theme(v-progress-linear) using ($material)
-  color: map-deep-get($material, 'text', 'primary')
-
 // Block
 .v-progress-linear
   background: transparent
   overflow: hidden
   position: relative
-  transition: .2s map-get($transition, 'ease-in-out')
+  transition: .2s $standard-easing
   width: 100%
 
-// Element
-.v-progress-linear__buffer
-  height: inherit
-  left: 0
-  position: absolute
-  top: 0
-  transition: inherit
-  width: 100%
-
-.v-progress-linear--reverse
-  .v-progress-linear__buffer
-    left: auto
-    right: 0
-
+// Elements
 .v-progress-linear__background
   bottom: 0
   left: 0
   position: absolute
   top: 0
   transition: inherit
-
-.v-progress-linear--reverse
-  .v-progress-linear__background
-    left: auto
-    right: 0
 
 .v-progress-linear__content
   align-items: center
@@ -46,11 +25,7 @@
   position: absolute
   top: 0
   width: 100%
-
-.v-progress-linear--reverse
-  .v-progress-linear__content
-    left: auto
-    right: 0
+  pointer-events: none
 
 .v-progress-linear__determinate
   height: inherit
@@ -58,73 +33,59 @@
   position: absolute
   transition: inherit
 
+.v-progress-linear__indeterminate
+  .long, .short
+    animation-play-state: paused
+    animation-duration: 2.2s
+    animation-iteration-count: infinite
+    background-color: inherit
+    bottom: 0
+    height: inherit
+    left: 0
+    position: absolute
+    right: auto
+    top: 0
+    width: auto
+    will-change: left, right
+
+  .long
+    animation-name: indeterminate-ltr
+
+  .short
+    animation-name: indeterminate-short-ltr
+
+.v-progress-linear__stream
+  animation: stream .25s infinite linear
+  animation-play-state: paused
+  bottom: 0
+  left: auto
+  opacity: $progress-linear-stream-opacity
+  pointer-events: none
+  position: absolute
+  transition: inherit
+
+// Modifiers
 .v-progress-linear--reverse
-  .v-progress-linear__determinate
+  .v-progress-linear__background,
+  .v-progress-linear__determinate,
+  .v-progress-linear__content
     left: auto
     right: 0
 
-.v-progress-linear
-  .v-progress-linear__indeterminate
-    .long, .short
-      animation-play-state: paused
-      background-color: inherit
-      bottom: 0
-      height: inherit
-      left: 0
-      position: absolute
-      right: auto
-      top: 0
-      width: auto
-      will-change: left, right
-
-    &--active .long
-      animation-name: indeterminate-ltr
-      animation-duration: 2.2s
-      animation-iteration-count: infinite
-
-    &--active .short
-      animation-name: indeterminate-short-ltr
-      animation-duration: 2.2s
-      animation-iteration-count: infinite
-
-.v-progress-linear--reverse
   .v-progress-linear__indeterminate
     .long, .short
       left: auto
       right: 0
 
-    &--active .long
+    .long
       animation-name: indeterminate-rtl
 
-    &--active .short
+    .short
       animation-name: indeterminate-short-rtl
 
-.v-progress-linear__stream
-  animation: stream-ltr .25s infinite linear
-  animation-play-state: paused
-  border-color: currentColor
-  border-top: $progress-linear-stream-border-width dotted
-  bottom: 0
-  left: auto
-  right: -8px
-  opacity: $progress-linear-stream-opacity
-  pointer-events: none
-  position: absolute
-  top: calc(50% - #{$progress-linear-stream-border-width / 2})
-  transition: inherit
-
-.v-progress-linear--reverse
   .v-progress-linear__stream
-    animation: stream-rtl .25s infinite linear
-    left: -8px
     right: auto
 
-.v-progress-linear__wrapper
-  overflow: hidden
-  position: relative
-  transition: inherit
-
-// Modifier
 .v-progress-linear--absolute,
 .v-progress-linear--fixed
   left: 0
@@ -136,12 +97,8 @@
 .v-progress-linear--fixed
   position: fixed
 
-.v-progress-linear--reactive
-  .v-progress-linear__content
-    pointer-events: none
-
 .v-progress-linear--rounded
-  border-radius: $progress-linear-border-radius
+  +rounded($progress-linear-border-radius)
 
 .v-progress-linear--striped
   .v-progress-linear__determinate
@@ -150,27 +107,26 @@
     background-repeat: repeat
 
 .v-progress-linear--query
-  .v-progress-linear__indeterminate--active
+  .v-progress-linear__indeterminate
+    animation-duration: 2s
+    animation-iteration-count: infinite
+
     .long
       animation-name: query-ltr
-      animation-duration: 2s
-      animation-iteration-count: infinite
 
     .short
       animation-name: query-short-ltr
-      animation-duration: 2s
-      animation-iteration-count: infinite
 
   &.v-progress-linear--reverse
-    .v-progress-linear__indeterminate--active
+    .v-progress-linear__indeterminate
       .long
         animation-name: query-rtl
 
       .short
         animation-name: query-short-rtl
 
-.v-progress-linear--visible
-  .v-progress-linear__indeterminate--active
+.v-progress-linear--active
+  .v-progress-linear__indeterminate
     .long, .short
       animation-play-state: running
   .v-progress-linear__stream
@@ -264,10 +220,6 @@
     right: -8%
     left: 107%
 
-@keyframes stream-ltr
+@keyframes stream
   to
-    transform: translateX(-8px)
-
-@keyframes stream-rtl
-  to
-    transform: translateX(8px)
+    transform: translateX(var(--v-progress-linear-stream-to))
