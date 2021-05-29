@@ -2,16 +2,24 @@ module.exports = {
   'v-pagination': {
     events: [
       {
-        name: 'input',
+        name: 'update:modelValue',
         value: 'number',
       },
       {
         name: 'next',
-        value: 'void',
+        value: 'number',
       },
       {
         name: 'previous',
-        value: 'void',
+        value: 'number',
+      },
+      {
+        name: 'first',
+        value: 'number',
+      },
+      {
+        name: 'last',
+        value: 'number',
       },
     ],
   },
