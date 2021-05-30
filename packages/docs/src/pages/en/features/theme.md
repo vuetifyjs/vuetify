@@ -95,7 +95,7 @@ export default {
 </script>
 ```
 
-Most components support the **theme** prop. When used, a new context will be created for the specific component and all of its children. In the example below the button will be using the **dark** theme since it is placed inside the card.
+Most components support the **theme** prop. When used, a new context is created for _that_ specific component and **all** of its children. In the following example, the [v-btn](/components/buttons/) uses the **dark** theme applied by its parent [v-card](/components/cards/).
 
 ```html
 <template>
