@@ -12,7 +12,7 @@
         class="grey--text text--lighten-3"
         href="https://github.com/toddmotto/public-apis"
         target="_blank"
-      >the Github repository</a>.
+      >the GitHub repository</a>.
     </v-card-text>
     <v-card-text>
       <v-autocomplete

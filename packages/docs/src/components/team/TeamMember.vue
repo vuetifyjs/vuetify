@@ -186,7 +186,7 @@
             color: '#24292E',
             href: `https://github.com/${this.member.github}`,
             icon: '$mdiGithub',
-            tooltip: 'Github',
+            tooltip: 'GitHub',
           })
         }
 
