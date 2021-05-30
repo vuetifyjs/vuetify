@@ -1,0 +1,67 @@
+@import './index'
+
+.v-list-item
+  align-items: center
+  background: $list-background
+  display: flex
+
+  &--link
+    cursor: pointer
+
+.v-list-item-avatar
+  align-self: $list-item-avatar-align-self
+  color: $list-item-avatar-color
+
+  &:first-child:not(:only-child)
+    margin-right: 1rem
+
+  &:last-child:not(:only-child)
+    margin-left: auto
+
+  .v-list--two-line &
+    padding: 4px 0
+
+.v-list-item-media
+  .v-list--one-line &
+    margin-left: -8px
+
+  .v-list--two-line &
+    margin-top: -8px
+    margin-bottom: -8px
+
+.v-list-item-header-text
+  flex: 1 1 auto
+  padding: $list-item-header-text-padding
+
+.v-list-item-subtitle
+  align-items: center
+  color: $list-item-subtitle-color
+  display: flex
+  padding: $list-item-subtitle-padding
+
+  @include list-line-height-densities($list-item-subtitle-densities)
+  @include typography($list-item-subtitle-typography...)
+
+.v-list-item-title
+  align-items: center
+  display: flex
+  hyphens: $list-item-title-hyphens
+  overflow-wrap: $list-item-title-overflow-wrap
+  padding: $list-item-title-padding
+  word-break: $list-item-title-word-break
+  word-wrap: $list-item-title-word-wrap
+
+  @include list-line-height-densities($list-item-title-densities)
+  @include typography($list-item-title-typography...)
+
+.v-list-item
+  min-height: $list-item-min-height
+  padding: $list-item-padding
+
+  .v-list--two-line &
+    min-height: $list-item-two-line-min-height
+    padding: $list-item-two-line-padding
+
+  .v-list--three-line &
+    min-height: $list-item-three-line-min-height
+    padding: $list-item-three-line-padding

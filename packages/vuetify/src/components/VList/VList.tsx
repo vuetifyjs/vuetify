@@ -24,6 +24,10 @@ export default defineComponent({
   props: makeProps({
     color: String,
     disabled: Boolean,
+    lines: {
+      type: String,
+      default: 'one',
+    },
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
@@ -48,6 +52,7 @@ export default defineComponent({
             'v-list',
             {
               'v-list--disabled': props.disabled,
+              [`v-list--${props.lines}-line`]: true,
             },
             themeClasses.value,
             backgroundColorClasses.value,

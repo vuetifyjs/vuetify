@@ -1,13 +1,13 @@
 // Styles
-import './VList.sass'
+import './VListItem.sass'
 
 // Components
 import {
-  VListActions,
-  VListAvatar,
-  VListHeader,
-  VListSubtitle,
-  VListTitle,
+  VListItemAvatar,
+  // VListItemHeader,
+  VListItemHeaderText,
+  VListItemSubtitle,
+  VListItemTitle,
 } from './'
 import { VAvatar } from '@/components/VAvatar'
 
@@ -63,9 +63,10 @@ export default defineComponent({
     return () => {
       const hasTitle = (slots.title || props.title)
       const hasSubtitle = (slots.subtitle || props.subtitle)
-      const hasHeader = (hasTitle || hasSubtitle)
+      const hasHeaderText = !!(hasTitle || hasSubtitle)
       const hasAppend = (slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = (slots.prepend || props.prependAvatar || props.prependIcon)
+      // const hasHeader = hasHeaderText || hasPrepend || hasAppend
 
       return (
         <props.tag
@@ -89,7 +90,7 @@ export default defineComponent({
           ]}
         >
           { hasPrepend && (
-            <VListAvatar>
+            <VListItemAvatar>
               { slots.prepend
                 ? slots.prepend()
                 : (
@@ -100,31 +101,33 @@ export default defineComponent({
                   />
                 )
               }
-            </VListAvatar>
+            </VListItemAvatar>
           ) }
 
-          { hasHeader && (
-            <VListHeader>
+          { hasHeaderText && (
+            <VListItemHeaderText>
               { hasTitle && (
-                <VListTitle>
+                <VListItemTitle>
                   { slots.title
                     ? slots.title()
                     : props.title
                   }
-                </VListTitle>
+                </VListItemTitle>
               ) }
 
-              <VListSubtitle>
-                { slots.subtitle
-                  ? slots.subtitle()
-                  : props.subtitle
-                }
-              </VListSubtitle>
-            </VListHeader>
+              { hasSubtitle && (
+                <VListItemSubtitle>
+                  { slots.subtitle
+                    ? slots.subtitle()
+                    : props.subtitle
+                  }
+                </VListItemSubtitle>
+              ) }
+            </VListItemHeaderText>
           ) }
 
           { hasAppend && (
-            <VListAvatar>
+            <VListItemAvatar>
               { slots.append
                 ? slots.append()
                 : (
@@ -135,14 +138,10 @@ export default defineComponent({
                   />
                 )
               }
-            </VListAvatar>
+            </VListItemAvatar>
           ) }
 
           { slots.default?.() }
-
-          { slots.actions && (
-            <VListActions v-slots={{ default: slots.actions }} />
-          ) }
         </props.tag>
       )
     }

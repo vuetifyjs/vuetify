@@ -1,34 +1,17 @@
 // Imports
 @import './index'
 
-.v-list-item
+.v-list
   background: $list-background
   color: $list-color
   position: relative
-
-  &::before,
-  &::after
-    border-radius: inherit
-    bottom: 0
-    content: ''
-    display: block
-    left: 0
-    pointer-events: none
-    position: absolute
-    right: 0
-    top: 0
-    transition-property: box-shadow, opacity
-    transition: 0.28s $standard-easing
-
-  &::before
-    @include elevation($list-elevation)
+  padding: $list-padding
 
   @include border($list-border...)
+  @include elevation($list-elevation)
   @include position($list-positions)
   @include rounded($list-border-radius)
-
-  &--border
-    border-width: $list-border-thin-width
+  @include states('.v-list__overlay')
 
   &--disabled
     pointer-events: none
@@ -36,45 +19,6 @@
 
     > [class*='v-list-']
       opacity: $list-disabled-opacity
-
-  &--hover
-    cursor: pointer
-
-    &::before
-      opacity: 1
-      z-index: -1
-
-    &::after
-      z-index: 1
-      opacity: 0
-
-      @include elevation($list-hover-elevation)
-
-    &:hover::after
-      opacity: 1
-
-    &:hover::before
-      opacity: 0
-
-  &--tile
-    @include rounded($list-tile-border-radius)
-
-.v-list-actions
-  align-items: center
-  display: flex
-  flex: 1 1 auto
-  min-height: $list-actions-min-height
-  padding: $list-actions-padding
-
-.v-list-avatar
-  @include ltr()
-    margin-right: $list-avatar-margin-start
-
-  @include rtl()
-    margin-left: $list-avatar-margin-end
-
-.v-list-header
-  flex: 1 1 auto
 
 .v-list-img
   border-radius: inherit
@@ -87,45 +31,14 @@
   width: 100%
   z-index: -1
 
-.v-list-item
-  align-items: center
-  display: flex
-  padding: $list-item-padding
-
-.v-list-media
-  overflow: hidden
-
-  &:first-child
-    .v-list &
-      border-top-left-radius: inherit
-      border-top-right-radius: inherit
-
-  &:last-child
-    .v-list &
-      border-bottom-left-radius: inherit
-      border-bottom-right-radius: inherit
-
-.v-list-subtitle
-  align-items: center
-  color: $list-subtitle-color
-  display: flex
-  font-size: $list-subtitle-font-size
-  font-weight: $list-subtitle-font-weight
-  letter-spacing: $list-subtitle-letter-spacing
-  text-transform: $list-subtitle-text-transform
-
-  @include list-line-height-densities($list-subtitle-densities)
-
-.v-list-title
-  align-items: center
-  display: flex
-  font-size: $list-title-font-size
-  font-weight: $list-title-font-weight
-  hyphens: $list-title-hyphens
-  letter-spacing: $list-title-letter-spacing
-  overflow-wrap: $list-title-overflow-wrap
-  text-transform: $list-title-text-transform
-  word-break: $list-title-word-break
-  word-wrap: $list-title-word-wrap
-
-  @include list-line-height-densities($list-title-densities)
+.v-list__overlay
+  background-color: currentColor
+  border-radius: inherit
+  bottom: 0
+  left: 0
+  opacity: 0
+  pointer-events: none
+  position: absolute
+  right: 0
+  top: 0
+  transition: opacity 0.2s ease-in-out
