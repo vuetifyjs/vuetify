@@ -6,7 +6,7 @@
 
 // Imports
 import { icons } from './icons'
-import Vuetify from 'vuetify/lib/framework'
+import Vuetify from 'vuetify'
 
 // Globals
 import { IS_SERVER } from '@/util/globals'

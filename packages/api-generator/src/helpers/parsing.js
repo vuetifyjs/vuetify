@@ -1,4 +1,4 @@
-const Vue = require('vue')
+const Vue = require('@vue/compat')
 const fs = require('fs')
 const { props: excludes } = require('./excludes')
 const { kebabCase, pascalize } = require('./text')

@@ -90,12 +90,12 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
         if (!this.overlay) return
 
         if (this.activeZIndex !== undefined) {
-          this.overlay.zIndex = String(this.activeZIndex - 1)
+          this.overlay.$.props.zIndex = String(this.activeZIndex - 1)
         } else if (this.$el) {
-          this.overlay.zIndex = getZIndex(this.$el)
+          this.overlay.$.props.zIndex = getZIndex(this.$el)
         }
 
-        this.overlay.value = true
+        this.overlay.$.props.value = true
       })
 
       return true
@@ -121,7 +121,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
         // has finished its animation
         cancelAnimationFrame(this.animationFrame)
 
-        this.overlay.value = false
+        this.overlay.$.props.value = false
       }
 
       showScroll && this.showScroll()

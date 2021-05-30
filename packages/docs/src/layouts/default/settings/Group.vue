@@ -16,12 +16,12 @@
         :key="text"
         cols="6"
       >
-        <v-item :value="text">
+<!--        <v-item :value="text">
           <template #default="{ active, toggle }">
             <v-card
               :color="active ? 'primary' : `grey ${dark ? 'darken' : 'lighten'}-3`"
               :dark="!dark && active"
-              class="v-card--group py-3 px-4 text-center position-relative cursor-pointer d-flex align-center justify-space-between"
+              class="v-card&#45;&#45;group py-3 px-4 text-center position-relative cursor-pointer d-flex align-center justify-space-between"
               rounded
               flat
               @click="toggle"
@@ -31,7 +31,7 @@
               <v-icon v-text="icon" />
             </v-card>
           </template>
-        </v-item>
+        </v-item>-->
       </v-col>
     </v-item-group>
   </div>

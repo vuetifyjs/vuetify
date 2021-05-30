@@ -2,8 +2,8 @@ const path = require('path')
 const merge = require('webpack-merge')
 const HappyPack = require('happypack')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const { VuetifyProgressiveModule } = require('vuetify-loader')
+const { VueLoaderPlugin } = require('vue-loader')
+// const { VuetifyProgressiveModule } = require('vuetify-loader')
 const { config: baseWebpackConfig, happyThreadPool } = require('./webpack.base.config')
 
 // Helpers
@@ -21,7 +21,6 @@ module.exports = merge(baseWebpackConfig, {
   resolve: {
     alias: {
       vuetify: resolve('../src'),
-      vue$: 'vue/dist/vue.esm.js',
     },
   },
   module: {
@@ -31,7 +30,10 @@ module.exports = merge(baseWebpackConfig, {
         loader: 'vue-loader',
         options: {
           compilerOptions: {
-            modules: [VuetifyProgressiveModule],
+            // modules: [VuetifyProgressiveModule],
+            compatConfig: {
+              MODE: 2
+            }
           },
         },
       },
@@ -55,17 +57,17 @@ module.exports = merge(baseWebpackConfig, {
       {
         test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/,
         oneOf: [
-          {
-            test: /\.(png|jpe?g|gif)$/,
-            resourceQuery: /vuetify-preload/,
-            use: [
-              'vuetify-loader/progressive-loader',
-              {
-                loader: 'url-loader',
-                options: { limit: 8000 },
-              },
-            ],
-          },
+          // {
+          //   test: /\.(png|jpe?g|gif)$/,
+          //   resourceQuery: /vuetify-preload/,
+          //   use: [
+          //     'vuetify-loader/progressive-loader',
+          //     {
+          //       loader: 'url-loader',
+          //       options: { limit: 8000 },
+          //     },
+          //   ],
+          // },
           {
             loader: 'url-loader',
             options: {

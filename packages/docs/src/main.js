@@ -1,7 +1,8 @@
 // Packages
 import Vue from 'vue'
-import Vuetify from 'vuetify/lib/framework'
-import InstantSearch from 'vue-instantsearch'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.css'
+// import InstantSearch from 'vue-instantsearch'
 
 // Bootstrap
 import { registerPlugins } from './plugins'
@@ -20,9 +21,10 @@ import App from './App.vue'
 // Globals
 import { IS_PROD } from '@/util/globals'
 
+console.log(Vue)
 Vue.config.productionTip = false
 
-Vue.use(InstantSearch)
+// Vue.use(InstantSearch)
 registerPlugins(Vue)
 
 Vue.config.performance = !IS_PROD

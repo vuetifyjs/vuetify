@@ -28,7 +28,7 @@
 <script>
   // Utilities
   import { get } from 'vuex-pathify'
-  import sassApi from '@/api/sass'
+  // import sassApi from '@/api/sass'
 
   export default {
     name: 'SassApi',

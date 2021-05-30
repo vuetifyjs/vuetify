@@ -9,9 +9,9 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 const IS_PROD = process.env.NODE_ENV === 'production'
 
 module.exports = config => {
-  config
-    .plugin('api-plugin')
-    .use(path.resolve('./build/api-plugin.js'))
+  // config
+  //   .plugin('api-plugin')
+  //   .use(path.resolve('./build/api-plugin.js'))
 
   config
     .plugin('pages-plugin')

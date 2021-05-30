@@ -1,7 +1,7 @@
 // Imports
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const metadata = require('../../../src/data/metadata')
-const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
+// const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 
 // Globals
 const IS_PROD = process.env.NODE_ENV === 'production'
@@ -24,8 +24,8 @@ module.exports = config => {
     .add('./src/entry-client.js')
     .end()
 
-  config.plugin('VueSSRClientPlugin')
-    .use(VueSSRClientPlugin)
+  // config.plugin('VueSSRClientPlugin')
+  //   .use(VueSSRClientPlugin)
 
   config.plugin('html-spa')
     .use(HtmlWebpackPlugin, useMetadata('spa', '_fallback'))

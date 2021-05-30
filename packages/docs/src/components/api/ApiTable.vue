@@ -21,9 +21,8 @@
       </thead>
 
       <tbody>
-        <template v-for="item in items">
+        <template v-for="item in items" :key="item.name">
           <tr
-            :key="item.name"
             :class="['regular-row', hasExtraRow(item) && 'has-extra-row']"
           >
             <td
@@ -101,11 +100,11 @@
   import { get } from 'vuex-pathify'
 
   const getApi = name => {
-    return import(
-      /* webpackChunkName: "api-data" */
-      /* webpackMode: "eager" */
+    return /*import(
+      /!* webpackChunkName: "api-data" *!/
+      /!* webpackMode: "eager" *!/
       `@/api/data/${name}.js`
-    )
+    )*/
   }
 
   const HEADERS = {

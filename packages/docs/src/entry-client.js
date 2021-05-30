@@ -1,5 +1,6 @@
 // Utilties
 import 'intersection-observer'
+import Vue from 'vue'
 import { createApp } from './main'
 
 // Globals
@@ -29,7 +30,7 @@ createApp({
 
       Promise.all(
         activated.map(c => {
-          const asyncData = c._Ctor[0].options.asyncData
+          const asyncData = Vue.extend(c).options.asyncData
           return asyncData
             ? asyncData({
               store,

@@ -56,6 +56,9 @@ exports.config = {
   mode: isProd ? 'production' : 'development',
   resolve: {
     extensions: ['*', '.js', '.json', '.vue', '.ts'],
+    alias: {
+      vue$: '@vue/compat',
+    }
   },
   node: {
     fs: 'empty',

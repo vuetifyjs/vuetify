@@ -35,7 +35,7 @@
       </v-text-field>
     </template>
 
-    <v-card>
+<!--    <v-card>
       <ais-instant-search
         :search-client="searchClient"
         :search-function="searchFunction"
@@ -53,7 +53,7 @@
       </ais-instant-search>
 
       <ais-powered-by />
-    </v-card>
+    </v-card>-->
   </v-menu>
 </template>
 
@@ -61,8 +61,8 @@
   // Utilities
   import { get } from 'vuex-pathify'
   import { groupItems, sortItems } from 'vuetify/lib/util/helpers'
-  import algoliasearch from 'algoliasearch'
-  import SearchResults from './SearchResults'
+  // import algoliasearch from 'algoliasearch'
+  // import SearchResults from './SearchResults'
 
   // Globals
   import { IN_BROWSER } from '@/util/globals'
@@ -72,7 +72,7 @@
   export default {
     name: 'DefaultSearch',
 
-    components: { SearchResults },
+    // components: { SearchResults },
 
     inject: ['theme'],
 

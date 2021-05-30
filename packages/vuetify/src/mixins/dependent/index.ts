@@ -20,6 +20,7 @@ function searchChildren (children: Vue[]): DependentInstance[] {
   const results = []
   for (let index = 0; index < children.length; index++) {
     const child = children[index] as DependentInstance
+    if (!child) continue
     if (child.isActive && child.isDependent) {
       results.push(child)
     } else {

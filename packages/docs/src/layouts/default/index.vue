@@ -78,22 +78,22 @@
     methods: {
       async init () {
         this.getPages()
-        this.$load(['https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css'])
+        // this.$load(['https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css'])
       },
       async getPages () {
         const locale = localeLookup(this.locale)
-        const [{ default: api }, { default: pages }] = await Promise.all([
-          import(
-            /* webpackChunkName: "api-pages-[request]" */
-            `@/api/${locale}/pages.json`
-          ),
+        const [/*{ default: api }*/, { default: pages }] = await Promise.all([
+          // import(
+          //   /* webpackChunkName: "api-pages-[request]" */
+          //   `@/api/${locale}/pages.json`
+          // ),
           import(
             /* webpackChunkName: "locale-pages-[request]" */
             `@docs/${locale}/pages`
           ),
         ])
 
-        this.pages = { ...pages, ...api }
+        this.pages = { ...pages, /*...api*/ }
         this.genNav()
       },
       findItems (group) {

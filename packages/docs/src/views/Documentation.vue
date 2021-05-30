@@ -29,10 +29,10 @@
     const locale = localeLookup(route.params.locale)
 
     const context = isApi
-      ? await import(
-        /* webpackChunkName: "api-[request]" */
+      ? await undefined /*import(
+        /!* webpackChunkName: "api-[request]" *!/
         `@/api/${locale}.js`
-      )
+      )*/
       : await import(
         /* webpackChunkName: "documentation-[request]" */
         `@/pages/${locale}.js`
@@ -111,7 +111,7 @@
 
       const { assets, actions = [] } = this.frontmatter
 
-      this.$load(assets)
+      // this.$load(assets)
 
       for (const action of actions) {
         this.$store.dispatch(action)
@@ -124,7 +124,7 @@
           attributes = {},
           toc = [],
           vue = {},
-        } = md
+        } = md.default
 
         vue.component.name = this.page
         this.frontmatter = attributes
