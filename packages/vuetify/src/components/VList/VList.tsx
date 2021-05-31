@@ -40,10 +40,10 @@ export default defineComponent({
     const { themeClasses } = useTheme()
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { borderClasses } = useBorder(props, 'v-list')
+    const { densityClasses } = useDensity(props, 'v-list')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props, 'v-list')
-    const { densityClasses } = useDensity(props, 'v-list')
 
     return () => {
       return (

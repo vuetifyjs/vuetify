@@ -4,6 +4,9 @@
   align-items: center
   background: $list-background
   display: flex
+  position: relative
+
+  @include states('.v-list-item__overlay')
 
   &--link
     cursor: pointer
@@ -79,3 +82,15 @@
   .v-list--three-line &
     min-height: $list-item-three-line-min-height
     padding: $list-item-three-line-padding
+
+.v-list-item__overlay
+  background-color: currentColor
+  border-radius: inherit
+  bottom: 0
+  left: 0
+  opacity: 0
+  pointer-events: none
+  position: absolute
+  right: 0
+  top: 0
+  transition: opacity 0.2s ease-in-out
