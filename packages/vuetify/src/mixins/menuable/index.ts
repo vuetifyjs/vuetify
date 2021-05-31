@@ -11,6 +11,25 @@ import { convertToUnit } from '../../util/helpers'
 // Types
 import { VNode } from 'vue'
 
+function cumulativeOffset (element: HTMLElement | null) {
+  let top = 0
+  let left = 0
+
+  if (element) {
+    element = element.offsetParent as HTMLElement | null
+    while (element) {
+      top += element.offsetTop || 0
+      left += element.offsetLeft || 0
+      element = element.offsetParent as HTMLElement | null
+    }
+  }
+
+  return {
+    top: Math.round(top),
+    left: Math.round(left),
+  }
+}
+
 const baseMixins = mixins(
   Stackable,
   Positionable,
@@ -203,24 +222,6 @@ export default baseMixins.extend<options>().extend({
   },
 
   methods: {
-    cumulativeOffset (element: HTMLElement | null) {
-      let top = 0
-      let left = 0
-
-      if (element) {
-        element = element.offsetParent as HTMLElement | null
-        while (element) {
-          top += element.offsetTop || 0
-          left += element.offsetLeft || 0
-          element = element.offsetParent as HTMLElement | null
-        }
-      }
-
-      return {
-        top: Math.round(top),
-        left: Math.round(left),
-      }
-    },
     absolutePosition () {
       return {
         offsetTop: 0,
@@ -356,10 +357,9 @@ export default baseMixins.extend<options>().extend({
         height: Math.round(rect.height),
       }
     },
-    measureAbsolute (selector = '[data-app]') {
-      if (this.attach === false && this.$el) {
-        const p = this.$el.closest(selector) as HTMLElement
-        return this.cumulativeOffset(p)
+    measureAbsolute () {
+      if (this.attach === false && this.$refs.content) {
+        return cumulativeOffset(this.$refs.content)
       }
       return { left: 0, top: 0 }
     },
@@ -416,11 +416,7 @@ export default baseMixins.extend<options>().extend({
         const activator = this.getActivator()
         if (!activator) return
 
-        const relative = this.measureAbsolute()
-        this.relativeYOffset = relative.top
         dimensions.activator = this.measure(activator)
-        dimensions.activator.top -= relative.top
-        dimensions.activator.left -= relative.left
         dimensions.activator.offsetLeft = activator.offsetLeft
         if (this.attach !== false) {
           // account for css padding causing things to not line up
@@ -433,7 +429,14 @@ export default baseMixins.extend<options>().extend({
 
       // Display and hide to get dimensions
       this.sneakPeek(() => {
-        this.$refs.content && (dimensions.content = this.measure(this.$refs.content))
+        if (this.$refs.content) {
+          const relative = this.measureAbsolute()
+          dimensions.activator.top -= relative.top
+          dimensions.activator.left -= relative.left
+          this.relativeYOffset = relative.top
+
+          dimensions.content = this.measure(this.$refs.content)
+        }
 
         this.dimensions = dimensions
       })
