@@ -65,7 +65,10 @@ export default defineComponent({
     ...makeTagProps({ tag: 'button' }),
   }),
 
-  emits: ['click:close', 'update:active'],
+  emits: {
+    'click:close': (e: Event) => e,
+    'update:active': (value: Boolean) => value
+  },
   setup (props, { slots, emit }) {
     const { themeClasses } = useTheme()
     const { borderClasses } = useBorder(props, 'v-chip')
@@ -91,7 +94,7 @@ export default defineComponent({
     const close = (e: Event) => {
       e.stopPropagation()
       e.preventDefault()
-      emit('click:close')
+      emit('click:close', e)
       emit('update:active', false)
     }
 
