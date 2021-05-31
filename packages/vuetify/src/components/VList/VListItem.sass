@@ -11,27 +11,41 @@
 .v-list-item-avatar
   align-self: $list-item-avatar-align-self
   color: $list-item-avatar-color
+  padding: $list-item-avatar-padding
 
   &:first-child:not(:only-child)
-    margin-right: 1rem
+    margin-right: $list-item-avatar-margin-start
 
   &:last-child:not(:only-child)
-    margin-left: auto
+    margin-left: $list-item-avatar-margin-start
 
   .v-list--two-line &
-    padding: 4px 0
+    padding: $list-item-avatar-two-line-padding
+
+  .v-list--three-line &
+    padding: $list-item-avatar-three-line-padding
 
 .v-list-item-media
   .v-list--one-line &
-    margin-left: -8px
+    @include ltr()
+      margin-left: $list-item-media-margin-start
+
+    @include rtl()
+      margin-right: $list-item-media-margin-start
 
   .v-list--two-line &
-    margin-top: -8px
-    margin-bottom: -8px
+    margin-top:$list-item-media-two-line-margin-top
+    margin-bottom:$list-item-media-two-line-margin-bottom
 
-.v-list-item-header-text
+  .v-list:not(.v-list--one-line) &
+    @include ltr()
+      margin-left: $list-item-media-not-one-line-margin-start
+
+    @include rtl()
+      margin-right: $list-item-media-not-one-line-margin-start
+
+.v-list-item-header
   flex: 1 1 auto
-  padding: $list-item-header-text-padding
 
 .v-list-item-subtitle
   align-items: center

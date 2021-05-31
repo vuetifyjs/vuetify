@@ -21,7 +21,6 @@ export default defineComponent({
 
   props: makeProps({
     color: String,
-    cover: Boolean,
     left: Boolean,
     right: Boolean,
     icon: String,
@@ -56,7 +55,7 @@ export default defineComponent({
           sizeStyles.value,
         ]}
       >
-        { props.image && <VImg src={ props.image } alt="" cover /> }
+        { props.image && <VImg src={ props.image } alt="" /> }
 
         { props.icon && !props.image && <VIcon icon={ props.icon } /> }
 

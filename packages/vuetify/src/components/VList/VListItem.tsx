@@ -4,8 +4,7 @@ import './VListItem.sass'
 // Components
 import {
   VListItemAvatar,
-  // VListItemHeader,
-  VListItemHeaderText,
+  VListItemHeader,
   VListItemSubtitle,
   VListItemTitle,
 } from './'
@@ -32,13 +31,10 @@ export default defineComponent({
   props: makeProps({
     appendAvatar: String,
     appendIcon: String,
-    appendImage: String,
     color: String,
     disabled: Boolean,
-    image: String,
     prependAvatar: String,
     prependIcon: String,
-    prependImage: String,
     subtitle: String,
     title: String,
     ...makeBorderProps(),
@@ -63,10 +59,9 @@ export default defineComponent({
     return () => {
       const hasTitle = (slots.title || props.title)
       const hasSubtitle = (slots.subtitle || props.subtitle)
-      const hasHeaderText = !!(hasTitle || hasSubtitle)
+      const hasHeader = !!(hasTitle || hasSubtitle)
       const hasAppend = (slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = (slots.prepend || props.prependAvatar || props.prependIcon)
-      // const hasHeader = hasHeaderText || hasPrepend || hasAppend
 
       return (
         <props.tag
@@ -104,8 +99,8 @@ export default defineComponent({
             </VListItemAvatar>
           ) }
 
-          { hasHeaderText && (
-            <VListItemHeaderText>
+          { hasHeader && (
+            <VListItemHeader>
               { hasTitle && (
                 <VListItemTitle>
                   { slots.title
@@ -123,7 +118,7 @@ export default defineComponent({
                   }
                 </VListItemSubtitle>
               ) }
-            </VListItemHeaderText>
+            </VListItemHeader>
           ) }
 
           { hasAppend && (
