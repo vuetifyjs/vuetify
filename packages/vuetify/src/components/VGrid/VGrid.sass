@@ -17,17 +17,17 @@
   +make-row
 
   & + .row
-    margin-top: math.div($grid-gutter, 2)
+    margin-top: div($grid-gutter, 2)
 
     &--dense
-      margin-top: math.div($form-grid-gutter, 2)
+      margin-top: div($form-grid-gutter, 2)
 
   &--dense
-    margin: math.div(-$form-grid-gutter, 2)
+    margin: div(-$form-grid-gutter, 2)
 
     > .col,
     > [class*="col-"]
-      padding: math.div($form-grid-gutter, 2)
+      padding: div($form-grid-gutter, 2)
 
   // Remove the negative margin from default .row, then the horizontal padding
   // from all immediate children columns (to prevent runaway style inheritance).

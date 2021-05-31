@@ -227,11 +227,20 @@ export default mixins(
       }
     },
     defaultTitleDateFormatter (): DatePickerFormatter {
-      const titleFormats = {
-        year: { year: 'numeric', timeZone: 'UTC' },
-        month: { month: 'long', timeZone: 'UTC' },
-        date: { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' },
+      type DateOptions<T> = {
+        year: { year: T, timeZone: 'UTC' },
+        month: { month: T, timeZone: 'UTC' },
+        date: { weekday: T, month: T, day: T, timeZone: 'UTC' },
       }
+      
+      const titleFormats = {} as DateOptions<any>
+      /*
+      const titleFormats: ThisType<T extends number> = {
+        year: { year: T, timeZone: 'UTC' },
+        month: { month: T, timeZone: 'UTC' },
+        date: { weekday: T, month: T, day: T, timeZone: 'UTC' },
+      }
+      */
 
       const titleDateFormatter = createNativeLocaleFormatter(this.currentLocale, titleFormats[this.type], {
         start: 0,

@@ -302,10 +302,16 @@ export default baseMixins.extend<options>().extend({
     genClearIcon () {
       if (!this.clearable) return null
 
-      const data = this.isDirty ? undefined : { attrs: { disabled: true } }
+      // if the text field has no content then don't display the clear icon.
+      // We add an empty div because other controls depend on a ref to append inner
+      if (!this.isDirty) {
+        return this.genSlot('append', 'inner', [
+          this.$createElement('div'),
+        ])
+      }
 
       return this.genSlot('append', 'inner', [
-        this.genIcon('clear', this.clearableCallback, data),
+        this.genIcon('clear', this.clearableCallback),
       ])
     },
     genCounter () {
