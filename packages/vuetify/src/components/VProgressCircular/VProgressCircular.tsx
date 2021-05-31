@@ -2,34 +2,34 @@
 import './VProgressCircular.sass'
 
 // Composables
+import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
+import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useTextColor } from '@/composables/color'
+import { useTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, defineComponent, toRef } from 'vue'
 import { convertToUnit, makeProps } from '@/util'
-import { useTheme } from '@/composables/theme'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
-import { makeSizeProps, useSize } from '@/composables/size'
 
 export default defineComponent({
   name: 'VProgressCircular',
 
   props: makeProps({
+    bgColor: String,
+    color: String,
     indeterminate: Boolean,
+    modelValue: {
+      type: [Number, String],
+      default: 0,
+    },
     rotate: {
       type: [Number, String],
       default: 0,
     },
-    bgColor: String,
-    color: String,
     width: {
       type: [Number, String],
       default: 4,
-    },
-    modelValue: {
-      type: [Number, String],
-      default: 0,
     },
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'div' }),
