@@ -104,6 +104,7 @@ export default baseMixins.extend<options>().extend({
         'v-list-item--selectable': this.selectable,
         'v-list-item--three-line': this.threeLine,
         'v-list-item--two-line': this.twoLine,
+        'v-list-item--has-base-color': !!this.baseColor,
         ...this.themeClasses,
       }
     },
