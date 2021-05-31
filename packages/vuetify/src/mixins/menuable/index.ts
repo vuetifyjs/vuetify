@@ -11,25 +11,6 @@ import { convertToUnit } from '../../util/helpers'
 // Types
 import { VNode } from 'vue'
 
-function cumulativeOffset (element: HTMLElement | null) {
-  let top = 0
-  let left = 0
-
-  if (element) {
-    element = element.offsetParent as HTMLElement | null
-    while (element) {
-      top += element.offsetTop || 0
-      left += element.offsetLeft || 0
-      element = element.offsetParent as HTMLElement | null
-    }
-  }
-
-  return {
-    top: Math.round(top),
-    left: Math.round(left),
-  }
-}
-
 const baseMixins = mixins(
   Stackable,
   Positionable,
@@ -357,12 +338,6 @@ export default baseMixins.extend<options>().extend({
         height: Math.round(rect.height),
       }
     },
-    measureAbsolute () {
-      if (this.attach === false && this.$refs.content) {
-        return cumulativeOffset(this.$refs.content)
-      }
-      return { left: 0, top: 0 }
-    },
     measure (el: HTMLElement) {
       if (!el || !this.hasWindow) return null
 
@@ -430,10 +405,11 @@ export default baseMixins.extend<options>().extend({
       // Display and hide to get dimensions
       this.sneakPeek(() => {
         if (this.$refs.content) {
-          const relative = this.measureAbsolute()
-          dimensions.activator.top -= relative.top
-          dimensions.activator.left -= relative.left
-          this.relativeYOffset = relative.top
+          const offsetRect = this.getRoundedBoundedClientRect(this.$refs.content.offsetParent!)
+
+          this.relativeYOffset = window.pageYOffset + offsetRect.top
+          dimensions.activator.top -= this.relativeYOffset
+          dimensions.activator.left -= window.pageXOffset + offsetRect.left
 
           dimensions.content = this.measure(this.$refs.content)
         }
