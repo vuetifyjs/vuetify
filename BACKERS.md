@@ -1,6 +1,6 @@
 # Backers
 
-You can join them in supporting Vuetify by [sponsoring through Github](https://github.com/sponsors/johnleider)
+You can join them in supporting Vuetify by [sponsoring through GitHub](https://github.com/sponsors/johnleider)
 
 ### Diamond
 - [QOMPLX](https://www.qomplx.com/)

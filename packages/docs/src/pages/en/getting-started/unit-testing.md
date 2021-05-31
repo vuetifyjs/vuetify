@@ -17,7 +17,7 @@ Unit tests are an important (and sometimes ignored) part of developing applicati
 
 <alert type="warning">
 
-  Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning "$attrs is readonly" or "$listeners is readonly". There is currently an ongoing [Github discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases. If you have additional questions please join us in our [online community](https://community.vuetifyjs.com)
+  Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning "$attrs is readonly" or "$listeners is readonly". There is currently an ongoing [GitHub discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases. If you have additional questions please join us in our [online community](https://community.vuetifyjs.com)
 
 </alert>
 
@@ -231,6 +231,8 @@ describe('CustomCard.vue', () => {
 })
 ```
 
+<vuetify-ad slug="material-dashboard-pro" />
+
 ### Mocking Vuetify
 
 Many of Vuetify's components utilize the global `$vuetify` object to derive settings such as default text or breakpoint information. When testing these components, you will need to provide `vue-test-utils` with a mock object.
@@ -349,5 +351,7 @@ describe('Test With Attribute', () => {
   })
 })
 ```
+
+<promoted-ad type="theme" />
 
 <backmatter />

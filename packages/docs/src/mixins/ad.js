@@ -1,26 +1,30 @@
 // Utilities
+import kebabCase from 'lodash.kebabcase'
 import { get } from 'vuex-pathify'
 
 export default {
   name: 'ad',
 
   props: {
-    discover: Boolean,
     medium: {
       type: String,
       default: 'docs',
     },
-    slug: {
-      type: String,
-      required: true,
-    },
+    slug: String,
+    type: String,
   },
 
   computed: {
     all: get('ads/all'),
     locale: get('route/params@locale'),
     ads () {
-      return this.all
+      return this.all.filter(ad => (
+        this.slug === ad.slug ||
+        (
+          ad.metadata.discoverable &&
+          this.type === kebabCase(ad.metadata.type)
+        )
+      ))
     },
     adAttrs () {
       if (!this.current) return undefined
@@ -33,16 +37,10 @@ export default {
       }
     },
     current () {
-      const index = !this.slug
-        ? this.getRandomIndex()
-        : this.getSlugIndex()
-
-      return this.ads[index]
+      return this.ads[this.slug ? 0 : this.getRandomIndex()]
     },
     description () {
-      return this.current
-        ? this.current.metadata.description
-        : ''
+      return this.current?.metadata.description
     },
     href () {
       if (!this.current) return undefined
@@ -60,21 +58,14 @@ export default {
       return `${url}?utm_source=vuetifyads&utm_medium=${this.medium}${query ? `&${query}` : ''}`
     },
     isSponsored () {
-      if (!this.current) return undefined
-
-      return this.current.metadata.sponsored
+      return this.current?.metadata?.sponsored
     },
     src () {
-      if (!this.current || this.compact) return undefined
-
-      return this.current.metadata.src
+      return this.compact || this.current?.metadata?.src
     },
   },
 
   methods: {
-    getSlugIndex () {
-      return this.ads.findIndex(ad => ad.slug === this.slug)
-    },
     getRandomIndex () {
       return Math.floor(Math.random() * this.ads.length)
     },

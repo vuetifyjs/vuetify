@@ -1,5 +1,4 @@
 <template>
-
   <v-row>
     <template v-if="!products">
       <v-col
@@ -17,7 +16,7 @@
 
     <template v-else-if="products.length === 0">
       <v-col>
-        <v-alert type="error">Problem fetching themes</v-alert>
+        <v-alert type="error">Problem fetching UI Kits</v-alert>
       </v-col>
     </template>
 
@@ -29,7 +28,7 @@
         md="6"
       >
         <a
-          :href="`https://store.vuetifyjs.com/products/${product.handle}?utm_source=vuetifyjs.com&utm_medium=themes`"
+          :href="`https://store.vuetifyjs.com/products/${product.handle}`"
           class="text--primary text-decoration-none"
           rel="noopener"
           target="_blank"
@@ -45,17 +44,6 @@
           >
             <figcaption class="d-flex text-subtitle-2 align-center text-capitalize mt-3">
               <span v-text="product.title" />
-
-              <v-chip
-                v-if="product.isOnSale"
-                class="text-uppercase px-1 ml-2"
-                color="red lighten-2"
-                dark
-                label
-                x-small
-              >
-                On Sale
-              </v-chip>
 
               <v-chip
                 v-if="product.isFree"
@@ -85,7 +73,7 @@
   import { call, get } from 'vuex-pathify'
 
   export default {
-    name: 'PremiumThemes',
+    name: 'VuetifyUiKits',
 
     data: () => ({ products: null }),
 
@@ -98,7 +86,7 @@
       const products = []
 
       for (const product of this.all) {
-        if (product.productType !== 'Themes') continue
+        if (product.productType !== 'UI Kits') continue
 
         const variant = product.variants[0]
 

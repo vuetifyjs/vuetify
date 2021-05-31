@@ -33,7 +33,7 @@
           size="14"
         ></v-rating>
 
-        <div class="grey--text ml-4">
+        <div class="grey--text ms-4">
           4.5 (413)
         </div>
       </v-row>
