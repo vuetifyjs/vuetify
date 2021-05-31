@@ -24,7 +24,7 @@ enum SIZE_MAP {
 }
 
 function isFontAwesome5 (iconType: string): boolean {
-  return ['fas', 'far', 'fal', 'fab', 'fad'].some(val => iconType.includes(val))
+  return ['fas', 'far', 'fal', 'fab', 'fad', 'fak'].some(val => iconType.includes(val))
 }
 
 function isSvgPath (icon: string): boolean {

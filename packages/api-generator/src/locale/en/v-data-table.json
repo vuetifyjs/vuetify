@@ -1,6 +1,7 @@
 {
   "props": {
     "calculateWidths": "Enables calculation of column widths. `widths` property will be available in select scoped slots",
+    "checkboxColor": "Set the color of the checkboxes (showSelect must be used)",
     "customFilter": "Function to filter items",
     "customGroup": "Function used to group items",
     "customSort": "Function used to sort items",
@@ -38,8 +39,10 @@
     "body": "Slot to replace the default table `<tbody>`",
     "body.append": "Appends elements to the end of the default table `<tbody>`",
     "body.prepend": "Prepends elements to the start of the default table `<tbody>`",
+    "foot": "Slot to add a `<tfoot>` element after the `<tbody>`. Not to be confused with the `footer` slot",
     "expanded-item": "Slot to customize expanded rows",
     "footer": "Slot to add a custom footer",
+    "footer.prepend": "Adds content to the empty space in the footer",
     "footer.page-text": "Slot to customize footer page text",
     "group": "Slot to replace the default rendering of grouped rows",
     "group.header": "Slot to customize the default rendering of group headers",

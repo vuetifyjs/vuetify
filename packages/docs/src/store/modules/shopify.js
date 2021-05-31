@@ -18,8 +18,11 @@ const state = {
 const mutations = make.mutations(state)
 
 const actions = {
-  fetch: async ({ commit }) => {
-    if (!(slug && read_key)) return
+  fetch: async ({ commit, state }) => {
+    if (
+      !(slug && read_key) ||
+      state.all.length > 0
+    ) return Promise.resolve()
 
     const { objects } = await bucket.getObjects({
       limit: 1,
@@ -30,8 +33,6 @@ const actions = {
     const products = objects && objects.length ? JSON.parse(objects[0].metadata.products) : []
 
     commit('all', products)
-
-    return products
   },
 }
 

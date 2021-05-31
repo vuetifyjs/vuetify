@@ -1,6 +1,9 @@
 // Styles
 import './VStepper.sass'
 
+// Extensions
+import VSheet from '../VSheet'
+
 // Components
 import VStepperStep from './VStepperStep'
 import VStepperContent from './VStepperContent'
@@ -8,7 +11,6 @@ import VStepperContent from './VStepperContent'
 // Mixins
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 import Proxyable from '../../mixins/proxyable'
-import Themeable from '../../mixins/themeable'
 
 // Utilities
 import mixins from '../../util/mixins'
@@ -18,9 +20,9 @@ import { breaking } from '../../util/console'
 import { VNode } from 'vue'
 
 const baseMixins = mixins(
+  VSheet,
   RegistrableProvide('stepper'),
   Proxyable,
-  Themeable
 )
 
 type VStepperStepInstance = InstanceType<typeof VStepperStep>
@@ -40,6 +42,7 @@ export default baseMixins.extend({
   props: {
     altLabels: Boolean,
     nonLinear: Boolean,
+    flat: Boolean,
     vertical: Boolean,
   },
 
@@ -61,11 +64,17 @@ export default baseMixins.extend({
   computed: {
     classes (): object {
       return {
+        'v-stepper--flat': this.flat,
         'v-stepper--is-booted': this.isBooted,
         'v-stepper--vertical': this.vertical,
         'v-stepper--alt-labels': this.altLabels,
         'v-stepper--non-linear': this.nonLinear,
-        ...this.themeClasses,
+        ...VSheet.options.computed.classes.call(this),
+      }
+    },
+    styles (): object {
+      return {
+        ...VSheet.options.computed.styles.call(this),
       }
     },
   },
@@ -122,9 +131,10 @@ export default baseMixins.extend({
   },
 
   render (h): VNode {
-    return h('div', {
+    return h(this.tag, {
       staticClass: 'v-stepper',
       class: this.classes,
+      style: this.styles,
     }, this.$slots.default)
   },
 })

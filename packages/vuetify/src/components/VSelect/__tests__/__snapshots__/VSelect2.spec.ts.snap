@@ -6,7 +6,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = 
     <div role="button"
          aria-haspopup="listbox"
          aria-expanded="false"
-         aria-owns="list-106"
+         aria-owns="list-112"
          class="v-input__slot"
     >
       <div class="v-select__slot">
@@ -14,7 +14,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = 
           <div class="v-select__selection v-select__selection--comma">
             1
           </div>
-          <input id="input-106"
+          <input id="input-112"
                  readonly="readonly"
                  type="text"
                  aria-readonly="false"
@@ -66,7 +66,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] =
     <div role="button"
          aria-haspopup="listbox"
          aria-expanded="false"
-         aria-owns="list-99"
+         aria-owns="list-105"
          class="v-input__slot"
     >
       <div class="v-select__slot">
@@ -74,7 +74,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] =
           <div class="v-select__selection v-select__selection--comma">
             1
           </div>
-          <input id="input-99"
+          <input id="input-105"
                  readonly="readonly"
                  type="text"
                  aria-readonly="false"
