@@ -23,7 +23,7 @@ export default {
     nextPage: 'Næste side',
     prevPage: 'Forrige side',
     firstPage: 'Første side',
-    lastPage: 'Side side',
+    lastPage: 'Sidste side',
     pageText: '{0}-{1} af {2}',
   },
   datePicker: {
