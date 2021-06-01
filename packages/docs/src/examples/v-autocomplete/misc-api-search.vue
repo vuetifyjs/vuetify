@@ -3,7 +3,7 @@
     color="red lighten-2"
     dark
   >
-    <v-card-title class="headline red lighten-3">
+    <v-card-title class="text-h5 red lighten-3">
       Search for Public APIs
     </v-card-title>
     <v-card-text>

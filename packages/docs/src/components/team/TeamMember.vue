@@ -56,7 +56,7 @@
           class="d-flex align-center flex-wrap"
         >
           <i18n
-            class="text-uppercase caption font-weight-regular"
+            class="text-uppercase text-caption font-weight-regular"
             path="focus"
             tag="h3"
           />
@@ -86,7 +86,7 @@
           class="d-flex align-center flex-wrap mt-1"
         >
           <i18n
-            class="text-uppercase caption font-weight-regular"
+            class="text-uppercase text-caption font-weight-regular"
             path="funding"
             tag="h3"
           />

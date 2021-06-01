@@ -5,7 +5,7 @@
   >
     <v-list-item two-line>
       <v-list-item-content>
-        <v-list-item-title class="headline">
+        <v-list-item-title class="text-h5">
           San Francisco
         </v-list-item-title>
         <v-list-item-subtitle>Mon, 12:30 PM, Mostly sunny</v-list-item-subtitle>
@@ -15,7 +15,7 @@
     <v-card-text>
       <v-row align="center">
         <v-col
-          class="display-3"
+          class="text-h2"
           cols="6"
         >
           23&deg;C
