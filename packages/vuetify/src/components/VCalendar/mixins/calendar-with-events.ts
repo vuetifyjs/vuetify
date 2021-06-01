@@ -406,6 +406,7 @@ export default CalendarBase.extend({
       return !this.categoryMode ||
         (typeof category === 'object' && category.categoryName &&
         category.categoryName === event.category) ||
+        (typeof event.category === 'string' && category === event.category) ||
         (typeof event.category !== 'string' && category === null)
     },
     getEventsForDay (day: CalendarDaySlotScope): CalendarEventParsed[] {

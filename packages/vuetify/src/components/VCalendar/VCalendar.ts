@@ -295,7 +295,7 @@ export default CalendarWithEvents.extend({
       if (!this.noEvents) {
         const categoryMap: any = categories.reduce((map: any, category, index) => {
           if (typeof category === 'object' && category.categoryName) map[category.categoryName] = { index, count: 0 }
-
+          else if (typeof category === 'string') map[category] = { index, count: 0 }
           return map
         }, {})
 
@@ -335,6 +335,8 @@ export default CalendarWithEvents.extend({
         categories = categories.filter((category: CalendarCategory) => {
           if (typeof category === 'object' && category.categoryName) {
             return categoryMap.hasOwnProperty(category.categoryName)
+          } else if (typeof category === 'string') {
+            return categoryMap.hasOwnProperty(category)
           }
           return false
         })

@@ -55,13 +55,14 @@ export default VCalendarDaily.extend({
       }
     },
     genDayHeaderCategory (day: CalendarTimestamp, scope: any): VNode {
+      const headerTitle = typeof scope.category === 'object' ? scope.category.categoryName : scope.category
       return this.$createElement('div', {
         staticClass: 'v-calendar-category__column-header',
         on: this.getDefaultMouseEventHandlers(':day-category', e => {
           return this.getCategoryScope(this.getSlotScope(day), scope.category)
         }),
       }, [
-        getSlot(this, 'category', scope) || this.genDayHeaderCategoryTitle(scope.category && scope.category.categoryName),
+        getSlot(this, 'category', scope) || this.genDayHeaderCategoryTitle(headerTitle),
         getSlot(this, 'day-header', scope),
       ])
     },
