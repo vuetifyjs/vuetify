@@ -26,6 +26,7 @@ import {
   isEventStart,
   isEventOn,
   isEventOverlapping,
+  isEventHiddenOn,
 } from '../util/events'
 import {
   CalendarTimestamp,
@@ -267,7 +268,7 @@ export default CalendarBase.extend({
       })
     },
     genTimedEvent ({ event, left, width }: CalendarEventVisual, day: CalendarDayBodySlotScope): VNode | false {
-      if (day.timeDelta(event.end) <= 0 || day.timeDelta(event.start) >= 1) {
+      if (day.timeDelta(event.end) < 0 || day.timeDelta(event.start) >= 1 || isEventHiddenOn(event, day)) {
         return false
       }
 
@@ -427,7 +428,6 @@ export default CalendarBase.extend({
     },
     getEventsForDayTimed (day: CalendarDaySlotScope): CalendarEventParsed[] {
       const identifier = getDayIdentifier(day)
-
       return this.parsedEvents.filter(
         event => !event.allDay &&
           isEventOn(event, identifier) &&
