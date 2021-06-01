@@ -12,7 +12,7 @@ $list-padding: .5rem 0 !default;
 $list-positions: absolute fixed !default;
 
 $list-item-min-height: 48px !default;
-$list-item-padding: 12px 16px !default;
+$list-item-padding: 8px 16px !default;
 $list-item-two-line-min-height: 64px !default;
 $list-item-two-line-padding: 12px 16px !default;
 $list-item-three-line-min-height: 88px !default;
@@ -23,7 +23,7 @@ $list-item-avatar-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis
 $list-item-avatar-margin-start: 1rem !default;
 $list-item-avatar-size: 40px !default;
 $list-item-avatar-size-multiplier: 1.5 !default;
-$list-item-avatar-three-line-margin-top: 4px !default;
+$list-item-avatar-margin-y: 4px !default;
 
 $list-item-media-margin-start: -.5rem !default;
 $list-item-media-two-line-margin-bottom: -.5rem !default;

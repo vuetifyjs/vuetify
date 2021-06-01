@@ -31,7 +31,11 @@
         width: $list-item-avatar-size + ($modifier * $list-item-avatar-size-multiplier)
 
       &.v-list--three-line #{$root}
-        margin-top: $list-item-avatar-three-line-margin-top - $modifier
+        margin-top: $list-item-avatar-margin-y - $modifier
+
+  .v-list--two-line &
+    margin-top: $list-item-avatar-margin-y
+    margin-bottom: $list-item-avatar-margin-y
 
   .v-list--three-line &
     align-self: flex-start
