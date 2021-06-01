@@ -17,6 +17,7 @@ declare module 'vuetify/lib' {
   const VApp: VueConstructor
   const VAppBar: VueConstructor
   const VAppBarNavIcon: VueConstructor
+  const VAppBarTitle: VueConstructor
   const VAlert: VueConstructor
   const VAutocomplete: VueConstructor
   const VAvatar: VueConstructor
@@ -141,6 +142,7 @@ declare module 'vuetify/lib' {
   const VTabsSlider: VueConstructor
   const VTextarea: VueConstructor
   const VTextField: VueConstructor
+  const VThemeProvider: VueConstructor
   const VTimeline: VueConstructor
   const VTimelineItem: VueConstructor
   const VTimePicker: VueConstructor
@@ -188,6 +190,7 @@ declare module 'vuetify/lib' {
     VApp,
     VAppBar,
     VAppBarNavIcon,
+    VAppBarTitle,
     VAlert,
     VAutocomplete,
     VAvatar,
@@ -312,6 +315,7 @@ declare module 'vuetify/lib' {
     VTabsSlider,
     VTextarea,
     VTextField,
+    VThemeProvider,
     VTimeline,
     VTimelineItem,
     VTimePicker,

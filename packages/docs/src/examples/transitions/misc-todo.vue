@@ -18,7 +18,7 @@
       </template>
     </v-text-field>
 
-    <h2 class="display-1 success--text pl-4">
+    <h2 class="text-h4 success--text pl-4">
       Tasks:&nbsp;
       <v-fade-transition leave-absolute>
         <span :key="`tasks-${tasks.length}`">

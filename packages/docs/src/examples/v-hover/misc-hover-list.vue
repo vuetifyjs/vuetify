@@ -20,7 +20,7 @@
                 :src="item.img"
                 height="225px"
               >
-                <v-card-title class="title white--text">
+                <v-card-title class="text-h6 white--text">
                   <v-row
                     class="fill-height flex-column"
                     justify="space-between"
@@ -30,10 +30,10 @@
                     </p>
 
                     <div>
-                      <p class="ma-0 body-1 font-weight-bold font-italic text-left">
+                      <p class="ma-0 text-body-1 font-weight-bold font-italic text-left">
                         {{ item.text }}
                       </p>
-                      <p class="caption font-weight-medium font-italic text-left">
+                      <p class="text-caption font-weight-medium font-italic text-left">
                         {{ item.subtext }}
                       </p>
                     </div>
@@ -74,7 +74,7 @@
           title: 'New Releases',
           text: `It's New Release Friday`,
           subtext: 'Newly released songs. Updated daily.',
-          img: 'https://lorempixel.com/output/nightlife-q-c-640-480-5.jpg',
+          img: 'https://images.unsplash.com/photo-1429514513361-8fa32282fd5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3264&q=80',
         },
         {
           title: 'Rock',
@@ -86,7 +86,7 @@
           title: 'Mellow Moods',
           text: 'Ambient Bass',
           subtext: 'Chill beats to mellow you out.',
-          img: 'https://lorempixel.com/output/abstract-q-c-640-480-6.jpg',
+          img: 'https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80',
         },
       ],
       transparent: 'rgba(255, 255, 255, 0)',

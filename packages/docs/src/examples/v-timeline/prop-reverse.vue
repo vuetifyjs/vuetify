@@ -14,7 +14,7 @@
       >
         <span slot="opposite">Tus eu perfecto</span>
         <v-card class="elevation-2">
-          <v-card-title class="headline">
+          <v-card-title class="text-h5">
             Lorem ipsum
           </v-card-title>
           <v-card-text>
@@ -33,7 +33,7 @@
       >
         <span slot="opposite">Tus eu perfecto</span>
         <v-card class="elevation-2">
-          <v-card-title class="headline">
+          <v-card-title class="text-h5">
             Lorem ipsum
           </v-card-title>
           <v-card-text>

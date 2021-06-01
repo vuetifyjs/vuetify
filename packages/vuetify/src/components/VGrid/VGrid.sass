@@ -1,3 +1,4 @@
+@use 'sass:math'
 @import '../../styles/styles.sass'
 @import './_mixins'
 
@@ -15,17 +16,17 @@
   +make-row
 
   & + .row
-    margin-top: $grid-gutter / 2
+    margin-top: math.div($grid-gutter, 2)
 
     &--dense
-      margin-top: $form-grid-gutter / 2
+      margin-top: math.div($form-grid-gutter, 2)
 
   &--dense
-    margin: -$form-grid-gutter / 2
+    margin: math.div(-$form-grid-gutter, 2)
 
     > .col,
     > [class*="col-"]
-      padding: $form-grid-gutter / 2
+      padding: math.div($form-grid-gutter, 2)
 
   // Remove the negative margin from default .row, then the horizontal padding
   // from all immediate children columns (to prevent runaway style inheritance).

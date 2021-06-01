@@ -9,6 +9,7 @@ import VBtn from '../VBtn'
 import Vue, { VNode, VNodeChildrenArrayContents, PropType } from 'vue'
 import { DataPagination, DataOptions, DataItemsPerPageOption } from 'vuetify/types'
 import { PropValidator } from 'vue/types/options'
+import { getSlot } from '../../util/helpers'
 
 export default Vue.extend({
   name: 'v-data-footer',
@@ -219,6 +220,7 @@ export default Vue.extend({
     return this.$createElement('div', {
       staticClass: 'v-data-footer',
     }, [
+      getSlot(this, 'prepend'),
       this.genItemsPerPageSelect(),
       this.genPaginationInfo(),
       this.genIcons(),

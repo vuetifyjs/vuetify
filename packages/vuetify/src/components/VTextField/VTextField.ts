@@ -77,6 +77,7 @@ export default baseMixins.extend<options>().extend({
     placeholder: String,
     prefix: String,
     prependInnerIcon: String,
+    persistentPlaceholder: Boolean,
     reverse: Boolean,
     rounded: Boolean,
     shaped: Boolean,
@@ -191,7 +192,7 @@ export default baseMixins.extend<options>().extend({
       return this.hasLabel && !(this.isSingle && this.labelValue)
     },
     labelValue (): boolean {
-      return this.isFocused || this.isLabelActive
+      return this.isFocused || this.isLabelActive || this.persistentPlaceholder
     },
   },
 
@@ -301,10 +302,16 @@ export default baseMixins.extend<options>().extend({
     genClearIcon () {
       if (!this.clearable) return null
 
-      const data = this.isDirty ? undefined : { attrs: { disabled: true } }
+      // if the text field has no content then don't display the clear icon.
+      // We add an empty div because other controls depend on a ref to append inner
+      if (!this.isDirty) {
+        return this.genSlot('append', 'inner', [
+          this.$createElement('div'),
+        ])
+      }
 
       return this.genSlot('append', 'inner', [
-        this.genIcon('clear', this.clearableCallback, data),
+        this.genIcon('clear', this.clearableCallback),
       ])
     },
     genCounter () {
@@ -377,6 +384,7 @@ export default baseMixins.extend<options>().extend({
     genInput () {
       const listeners = Object.assign({}, this.listeners$)
       delete listeners.change // Change should not be bound externally
+      const { title, ...inputAttrs } = this.attrs$
 
       return this.$createElement('input', {
         style: {},
@@ -384,11 +392,11 @@ export default baseMixins.extend<options>().extend({
           value: (this.type === 'number' && Object.is(this.lazyValue, -0)) ? '-0' : this.lazyValue,
         },
         attrs: {
-          ...this.attrs$,
+          ...inputAttrs,
           autofocus: this.autofocus,
           disabled: this.isDisabled,
           id: this.computedId,
-          placeholder: this.isFocused || !this.hasLabel ? this.placeholder : undefined,
+          placeholder: this.persistentPlaceholder || this.isFocused || !this.hasLabel ? this.placeholder : undefined,
           readonly: this.isReadonly,
           type: this.type,
         },

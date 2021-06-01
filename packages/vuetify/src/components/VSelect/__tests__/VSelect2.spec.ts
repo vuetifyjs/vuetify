@@ -233,6 +233,28 @@ describe('VSelect.ts', () => {
     expect(change.mock.calls).toHaveLength(1)
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/13658
+  it('should not emit when clicked on the selected item - object values', async () => {
+    const onInput = jest.fn()
+    const itemA = { text: 'A', value: { foo: null } }
+    const itemB = { text: 'B', value: { foo: '' } }
+    const wrapper = mountFunction({
+      propsData: {
+        items: [itemA, itemB],
+        value: { foo: null },
+      },
+    })
+    wrapper.vm.$on('input', onInput)
+
+    wrapper.vm.selectItem(itemA)
+    await wrapper.vm.$nextTick()
+    expect(onInput).toHaveBeenCalledTimes(0)
+
+    wrapper.vm.selectItem(itemB)
+    await wrapper.vm.$nextTick()
+    expect(onInput).toHaveBeenCalledTimes(1)
+  })
+
   // Inspired by https://github.com/vuetifyjs/vuetify/pull/1425 - Thanks @kevmo314
   it('should open the select when focused and enter, space are pressed', async () => {
     const wrapper = mountFunction({

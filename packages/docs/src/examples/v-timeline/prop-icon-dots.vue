@@ -14,7 +14,7 @@
         :color="item.color"
         dark
       >
-        <v-card-title class="title">
+        <v-card-title class="text-h6">
           Lorem Ipsum Dolor
         </v-card-title>
         <v-card-text class="white text--primary">

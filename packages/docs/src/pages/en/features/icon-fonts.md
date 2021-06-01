@@ -264,6 +264,8 @@ export default new Vuetify({
 })
 ```
 
+<vuetify-ad slug="enterprise-support-through-tidelift" />
+
 ## Using custom icons
 
 Let's say your application calls for a custom icon in a Vuetify component. Instead of creating a wrapper component or manually defining the specific icon each time a component appears, you can configure it at a global level.

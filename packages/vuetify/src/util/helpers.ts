@@ -214,6 +214,7 @@ export const keyCodes = Object.freeze({
   insert: 45,
   pageup: 33,
   pagedown: 34,
+  shift: 16,
 })
 
 /**

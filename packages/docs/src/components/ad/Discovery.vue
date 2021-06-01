@@ -12,13 +12,9 @@
         type: String,
         default: 'discovery-ad',
       },
-    },
-
-    computed: {
-      ads () {
-        return this.all.filter(({ metadata }) => {
-          return metadata.discoverable
-        })
+      type: {
+        type: String,
+        default: 'discovery',
       },
     },
   }
