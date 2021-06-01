@@ -1,11 +1,13 @@
+@use 'sass:math'
+
 @mixin timeline-dots($dot-size, $inner-dot-size)
   height: $dot-size
-  left: calc(50% - #{$dot-size / 2})
+  left: calc(50% - #{$dot-size} / 2)
   width: $dot-size
 
   .v-timeline-item__inner-dot
     height: $inner-dot-size
-    margin: #{($dot-size - $inner-dot-size) / 2}
+    margin: math.div($dot-size - $inner-dot-size, 2)
     width: $inner-dot-size
 
 @mixin timeline-wedge-align($direction)
@@ -34,9 +36,9 @@
 @mixin timeline-line-align($center, $first, $second)
   &:before
     +ltr()
-      #{$first}: calc(#{$center} - #{$timeline-line-width / 2})
+      #{$first}: calc(#{$center} - #{$timeline-line-width} / 2)
       #{$second}: initial
 
     +rtl()
       #{$first}: initial
-      #{$second}: calc(#{$center} - #{$timeline-line-width / 2})
+      #{$second}: calc(#{$center} - #{$timeline-line-width} / 2)

@@ -64,7 +64,7 @@
     "minify-css-string": "^1.0.0",
     "mkdirp": "^1.0.4",
     "raw-loader": "^4.0.1",
-    "sass-loader": "^9.0.2",
+    "sass-loader": "^10.2.0",
     "sitemap-webpack-plugin": "^0.8.1",
     "vee-validate": "^3.3.7",
     "vue-cli-plugin-vuetify": "~2.0.7",

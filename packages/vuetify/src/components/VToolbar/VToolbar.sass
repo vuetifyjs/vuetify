@@ -1,3 +1,4 @@
+@use 'sass:math'
 @import './_variables.scss'
 
 +theme('v-toolbar.v-sheet') using ($material)
@@ -34,10 +35,10 @@
   > .v-btn.v-btn--icon
     &:first-child
       +ltr()
-        margin-left: -#{$toolbar-btn-icon-size / 4}
+        margin-left: math.div(-$toolbar-btn-icon-size, 4)
 
       +rtl()
-        margin-right: -#{$toolbar-btn-icon-size / 4}
+        margin-right: math.div(-$toolbar-btn-icon-size, 4)
 
       + .v-toolbar__title
         +ltr()
@@ -48,10 +49,10 @@
 
     &:last-child
       +ltr()
-        margin-right: -#{$toolbar-btn-icon-size / 4}
+        margin-right: math.div(-$toolbar-btn-icon-size, 4)
 
       +rtl()
-        margin-left: -#{$toolbar-btn-icon-size / 4}
+        margin-left: math.div(-$toolbar-btn-icon-size, 4)
 
   > .v-tabs
     height: inherit

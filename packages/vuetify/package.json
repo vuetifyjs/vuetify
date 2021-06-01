@@ -92,7 +92,7 @@
     "postcss-loader": "^3.0.0",
     "pug": "^2.0.4",
     "pug-loader": "^2.4.0",
-    "sass-loader": "^10.0.2",
+    "sass-loader": "^10.2.0",
     "style-loader": "^0.23.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",

@@ -1,4 +1,5 @@
 // Imports
+@use 'sass:math'
 @import './_variables.scss'
 
 // Theme
@@ -199,6 +200,6 @@
 .v-chip
   @each $name, $size in $icon-sizes
     &.v-size--#{$name}
-      border-radius: #{map-get($size, 'height') / 2}px
+      border-radius: #{math.div(map-get($size, 'height'), 2)}px
       font-size: #{map-get($size, 'font-size')}px
       height: #{map-get($size, 'height')}px
