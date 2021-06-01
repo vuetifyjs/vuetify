@@ -404,8 +404,8 @@ export default baseMixins.extend<options>().extend({
 
       // Display and hide to get dimensions
       this.sneakPeek(() => {
-        if (this.$refs.content) {
-          const offsetRect = this.getRoundedBoundedClientRect(this.$refs.content.offsetParent!)
+        if (this.$refs.content && this.$refs.content.offsetParent) {
+          const offsetRect = this.getRoundedBoundedClientRect(this.$refs.content.offsetParent)
 
           this.relativeYOffset = window.pageYOffset + offsetRect.top
           dimensions.activator.top -= this.relativeYOffset
