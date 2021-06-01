@@ -5,12 +5,12 @@ import { propsFactory } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-const allowedDensities = ['default', 'comfortable', 'compact'] as const
+const allowedDensities = [null, 'default', 'comfortable', 'compact'] as const
 
 type Density = typeof allowedDensities[number]
 
 export interface DensityProps {
-  density: Density
+  density?: Density
 }
 
 // Composables

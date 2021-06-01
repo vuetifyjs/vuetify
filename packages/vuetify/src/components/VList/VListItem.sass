@@ -12,9 +12,11 @@
     cursor: pointer
 
 .v-list-item-avatar
-  align-self: $list-item-avatar-align-self
+  align-self: center
   color: $list-item-avatar-color
-  padding: $list-item-avatar-padding
+  // margin: $list-item-avatar-padding
+  height: 40px
+  width: 40px
 
   &:first-child:not(:only-child)
     margin-right: $list-item-avatar-margin-start
@@ -22,11 +24,23 @@
   &:last-child:not(:only-child)
     margin-left: $list-item-avatar-margin-start
 
-  .v-list--two-line &
-    padding: $list-item-avatar-two-line-padding
+  .v-list--density-comfortable &
+    height: 34px
+    width: 34px
+
+  .v-list--density-compact &
+    height: 28px
+    width: 28px
 
   .v-list--three-line &
-    padding: $list-item-avatar-three-line-padding
+    align-self: flex-start
+
+  .v-list--three-line &
+    margin-top: 4px
+
+  .v-list--three-line.v-list--density-comfortable &,
+  .v-list--three-line.v-list--density-compact &
+      margin-top: 16px
 
 .v-list-item-media
   .v-list--one-line &
@@ -49,26 +63,24 @@
 
 .v-list-item-header
   flex: 1 1 auto
+  min-width: 0
 
 .v-list-item-subtitle
-  align-items: center
   color: $list-item-subtitle-color
-  display: flex
   padding: $list-item-subtitle-padding
 
-  @include list-line-height-densities($list-item-subtitle-densities)
   @include typography($list-item-subtitle-typography...)
 
 .v-list-item-title
-  align-items: center
-  display: flex
   hyphens: $list-item-title-hyphens
   overflow-wrap: $list-item-title-overflow-wrap
+  overflow: hidden
   padding: $list-item-title-padding
+  white-space: nowrap
+  text-overflow: ellipsis
   word-break: $list-item-title-word-break
   word-wrap: $list-item-title-word-wrap
 
-  @include list-line-height-densities($list-item-title-densities)
   @include typography($list-item-title-typography...)
 
 .v-list-item
@@ -82,6 +94,26 @@
   .v-list--three-line &
     min-height: $list-item-three-line-min-height
     padding: $list-item-three-line-padding
+
+  .v-list--density-comfortable &
+    min-height: 44px
+    padding: .25rem 1rem
+
+  .v-list--density-compact &
+    min-height: 40px
+    padding: 0 1rem
+
+  .v-list--density-comfortable.v-list--two-line &
+    min-height: 60px
+
+  .v-list--density-compact.v-list--two-line &
+    min-height: 56px
+
+  .v-list--density-comfortable.v-list--three-line &
+    min-height: 84px
+
+  .v-list--density-compact.v-list--three-line &
+    min-height: 80px
 
 .v-list-item__overlay
   background-color: currentColor
