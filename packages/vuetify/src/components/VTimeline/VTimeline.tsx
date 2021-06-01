@@ -2,12 +2,12 @@
 import './VTimeline.sass'
 
 // Components
-import { VTimelineItem } from '.'
+import VTimelineItem from './VTimelineItem'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
 import { makeDensityProps, useDensity } from '@/composables/density'
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Helpers
 import { computed, defineComponent, provide, toRef } from 'vue'
@@ -38,7 +38,7 @@ export default defineComponent({
     } as Prop<TimelineDirection>,
     side: {
       type: String,
-      validator: (v: any) => v == null || ['after', 'before'].includes(v),
+      validator: (v: any) => v == null || ['start', 'end'].includes(v),
     } as Prop<TimelineSide>,
     lineInset: {
       type: [String, Number],
@@ -56,10 +56,11 @@ export default defineComponent({
     },
     ...makeDensityProps(),
     ...makeTagProps(),
+    ...makeThemeProps(),
   }),
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const { densityClasses } = useDensity(props, 'v-timeline')
 
     provide(VTimelineSymbol, {
@@ -68,7 +69,7 @@ export default defineComponent({
     })
 
     const sideClass = computed(() => {
-      const side = props.side ? props.side : props.density !== 'default' ? 'after' : null
+      const side = props.side ? props.side : props.density !== 'default' ? 'end' : null
 
       return side && `v-timeline--side-${side}`
     })
