@@ -1,13 +1,15 @@
+@use 'sass:math';
+
 // Defaults
 $icon-btn-bottom-navigation-font-size: 24px !default;
 $icon-btn-size: 1em !default;
-$icon-btn-font-size: (18 / 14) * $icon-btn-size !default;
+$icon-btn-font-size: math.div(18, 14) * $icon-btn-size !default;
 $icon-btn-height: $icon-btn-size !default;
 $icon-btn-width: $icon-btn-size !default;
 $icon-btn-margin-start-multiplier: -9 !default;
 $icon-btn-margin-end-multiplier: 4.5 !default;
-$icon-btn-margin-start: var(--v-btn-height) / $icon-btn-margin-start-multiplier !default;
-$icon-btn-margin-end: var(--v-btn-height) / $icon-btn-margin-end-multiplier !default;
+$icon-btn-margin-start: calc(var(--v-btn-height) / #{$icon-btn-margin-start-multiplier}) !default;
+$icon-btn-margin-end: calc(var(--v-btn-height) / #{$icon-btn-margin-end-multiplier}) !default;
 $icon-left-margin-left: map-get($grid-gutters, 'md') !default;
 $icon-letter-spacing: normal !default;
 $icon-line-height: 1 !default;

@@ -43,6 +43,13 @@ declare global {
     _touchHandlers?: {
       [_uid: number]: TouchStoredHandlers
     }
+    _transitionInitialStyles?: {
+      position: string
+      top: string
+      left: string
+      width: string
+      height: string
+    }
 
     getElementsByClassName(classNames: string): NodeListOf<HTMLElement>
   }

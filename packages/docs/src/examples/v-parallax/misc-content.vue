@@ -11,7 +11,7 @@
         class="text-center"
         cols="12"
       >
-        <h1 class="display-1 font-weight-thin mb-4">
+        <h1 class="text-h4 font-weight-thin mb-4">
           Vuetify
         </h1>
         <h4 class="subheading">

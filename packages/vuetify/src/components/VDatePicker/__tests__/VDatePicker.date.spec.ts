@@ -267,7 +267,7 @@ describe.skip('VDatePicker.ts', () => { // eslint-disable-line max-statements
       },
     })
 
-    wrapper.findAll('.v-date-picker-table--date').at(0).trigger('wheel')
+    wrapper.findAll('.v-date-picker-table--date').at(0).trigger('wheel', { deltaY: 1 })
     expect(wrapper.vm.tableDate).toBe('2013-06')
   })
 

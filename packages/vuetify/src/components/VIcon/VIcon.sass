@@ -52,19 +52,19 @@
   &--left
     .v-btn:not(.v-btn--icon) &
       @include ltr()
-        margin-left: calc(#{$icon-btn-margin-start})
-        margin-right: calc(#{$icon-btn-margin-end})
+        margin-left: $icon-btn-margin-start
+        margin-right: $icon-btn-margin-end
 
       @include rtl()
-        margin-left: calc(#{$icon-btn-margin-end})
-        margin-right: calc(#{$icon-btn-margin-start})
+        margin-left: $icon-btn-margin-end
+        margin-right: $icon-btn-margin-start
 
   &--right
     .v-btn:not(.v-btn--icon) &
       @include ltr()
-        margin-left: calc(#{$icon-btn-margin-end})
-        margin-right: calc(#{$icon-btn-margin-start})
+        margin-left: $icon-btn-margin-end
+        margin-right: $icon-btn-margin-start
 
       @include rtl()
-        margin-left: calc(#{$icon-btn-margin-start})
-        margin-right: calc(#{$icon-btn-margin-end})
+        margin-left: $icon-btn-margin-start
+        margin-right: $icon-btn-margin-end

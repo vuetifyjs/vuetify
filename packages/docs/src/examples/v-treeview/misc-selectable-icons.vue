@@ -39,7 +39,7 @@
           <div
             v-if="tree.length === 0"
             key="title"
-            class="title font-weight-light grey--text pa-4 text-center"
+            class="text-h6 font-weight-light grey--text pa-4 text-center"
           >
             Select your favorite breweries
           </div>

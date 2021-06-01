@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row justify="space-around">
       <v-col cols="5">
-        <div class="title mb-1">
+        <div class="text-h6 mb-1">
           Default (cover)
         </div>
         <div class="subheading">
@@ -29,7 +29,7 @@
       </v-col>
 
       <v-col cols="5">
-        <div class="title mb-1">
+        <div class="text-h6 mb-1">
           Contain
         </div>
         <div class="subheading">

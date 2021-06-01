@@ -151,7 +151,7 @@ Using grids, you can create beautiful layouts.
 
 #### Horizontal cards
 
-Using `v-flex`, you can create customized horizontal cards. Use the `contain` property to shrink the `v-img` to fit inside the container, instead of covering.
+Using `v-col`, you can create customized horizontal cards. Use the `contain` property to shrink the `v-img` to fit inside the container, instead of covering.
 
 <example file="v-card/misc-horizontal-cards" />
 
