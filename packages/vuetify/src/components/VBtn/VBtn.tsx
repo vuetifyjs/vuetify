@@ -12,7 +12,7 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeTagProps } from '@/composables/tag'
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useColor } from '@/composables/color'
 
 // Directives
@@ -50,10 +50,11 @@ export default defineComponent({
     ...makePositionProps(),
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'button' }),
+    ...makeThemeProps(),
   }),
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-btn')
     const { roundedClasses } = useRounded(props, 'v-btn')
     const { densityClasses } = useDensity(props, 'v-btn')

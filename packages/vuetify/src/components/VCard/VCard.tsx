@@ -25,7 +25,7 @@ import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -54,6 +54,7 @@ export default defineComponent({
     subtitle: String,
     text: String,
     title: String,
+    ...makeThemeProps(),
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
@@ -64,7 +65,7 @@ export default defineComponent({
   }),
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { borderClasses } = useBorder(props, 'v-card')
     const { dimensionStyles } = useDimension(props)
