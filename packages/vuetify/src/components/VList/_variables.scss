@@ -3,7 +3,8 @@ $list-background: rgba(var(--v-theme-surface)) !default;
 $list-border-color: $border-color-root !default;
 $list-border-radius: 0 !default;
 $list-border-style: $border-style-root !default;
-$list-border-width: thin !default;
+$list-border-thin-width: thin !default;
+$list-border-width: 0 !default;
 $list-color: rgba(var(--v-theme-on-surface)) !default;
 $list-disabled-opacity: 0.6 !default;
 $list-elevation: 0 !default;
@@ -11,18 +12,18 @@ $list-padding: .5rem 0 !default;
 $list-positions: absolute fixed !default;
 
 $list-item-min-height: 48px !default;
-$list-item-padding: 8px 16px !default;
+$list-item-padding: 12px 16px !default;
 $list-item-two-line-min-height: 64px !default;
 $list-item-two-line-padding: 12px 16px !default;
 $list-item-three-line-min-height: 88px !default;
-$list-item-three-line-padding: 16px !default;
+$list-item-three-line-padding: 16px 16px !default;
 
 $list-item-avatar-align-self: flex-start !default;
 $list-item-avatar-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $list-item-avatar-margin-start: 1rem !default;
-$list-item-avatar-padding: 0 !default;
-$list-item-avatar-two-line-padding: .25rem 0 !default;
-$list-item-avatar-three-line-padding: .125rem 0 !default;
+$list-item-avatar-size: 40px !default;
+$list-item-avatar-size-multiplier: 1.5 !default;
+$list-item-avatar-three-line-margin-top: 4px !default;
 
 $list-item-media-margin-start: -.5rem !default;
 $list-item-media-two-line-margin-bottom: -.5rem !default;

@@ -4,6 +4,7 @@
   align-items: center
   background: $list-background
   display: flex
+  padding: $list-item-padding
   position: relative
 
   @include states('.v-list-item__overlay')
@@ -12,11 +13,10 @@
     cursor: pointer
 
 .v-list-item-avatar
+  $root: &
+
   align-self: center
   color: $list-item-avatar-color
-  // margin: $list-item-avatar-padding
-  height: 40px
-  width: 40px
 
   &:first-child:not(:only-child)
     margin-right: $list-item-avatar-margin-start
@@ -24,23 +24,17 @@
   &:last-child:not(:only-child)
     margin-left: $list-item-avatar-margin-start
 
-  .v-list--density-comfortable &
-    height: 34px
-    width: 34px
+  @at-root
+    @include density('v-list', $list-density) using ($modifier)
+      #{$root}
+        height: $list-item-avatar-size + ($modifier * $list-item-avatar-size-multiplier)
+        width: $list-item-avatar-size + ($modifier * $list-item-avatar-size-multiplier)
 
-  .v-list--density-compact &
-    height: 28px
-    width: 28px
+      &.v-list--three-line #{$root}
+        margin-top: $list-item-avatar-three-line-margin-top - $modifier
 
   .v-list--three-line &
     align-self: flex-start
-
-  .v-list--three-line &
-    margin-top: 4px
-
-  .v-list--three-line.v-list--density-comfortable &,
-  .v-list--three-line.v-list--density-compact &
-      margin-top: 16px
 
 .v-list-item-media
   .v-list--one-line &
@@ -85,25 +79,20 @@
 
 .v-list-item
   $root: &
-  padding: $list-item-padding
 
   @at-root
     @include density('v-list', $list-density) using ($modifier)
-      #{$root}
+      &.v-list--one-line #{$root}
         min-height: $list-item-min-height + $modifier
-        padding: (nth($list-item-padding, 1) + $modifier) (nth($list-item-padding, 2) + $modifier)
+        padding: (nth($list-item-padding, 1) + $modifier) nth($list-item-padding, 2)
 
       &.v-list--two-line #{$root}
         min-height: $list-item-two-line-min-height + $modifier
+        padding: (nth($list-item-two-line-padding, 1) + $modifier) nth($list-item-two-line-padding, 2)
 
       &.v-list--three-line #{$root}
         min-height: $list-item-three-line-min-height + $modifier
-
-  .v-list--two-line &
-    padding: $list-item-two-line-padding
-
-  .v-list--three-line &
-    padding: $list-item-three-line-padding
+        padding: (nth($list-item-three-line-padding, 1) + $modifier) nth($list-item-three-line-padding, 2)
 
 .v-list-item__overlay
   background-color: currentColor

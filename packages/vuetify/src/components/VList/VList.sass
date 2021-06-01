@@ -11,7 +11,9 @@
   @include elevation($list-elevation)
   @include position($list-positions)
   @include rounded($list-border-radius)
-  @include states('.v-list__overlay')
+
+  &--border
+    border-width: $list-border-thin-width
 
   &--disabled
     pointer-events: none
