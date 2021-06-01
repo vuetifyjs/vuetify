@@ -74,6 +74,8 @@ $card-title-densities: (
   'compact': $card-title-compact-line-height
 );
 
+$card-subtitle-densities: ('default': 0, 'comfortable': -1, 'compact': -2);
+
 $card-subtitle-densities: () !default;
 $card-subtitle-densities: (
   null: $card-subtitle-line-height,

@@ -51,8 +51,8 @@
       margin-right: $list-item-media-margin-start
 
   .v-list--two-line &
-    margin-top:$list-item-media-two-line-margin-top
-    margin-bottom:$list-item-media-two-line-margin-bottom
+    margin-top: $list-item-media-two-line-margin-top
+    margin-bottom: $list-item-media-two-line-margin-bottom
 
   .v-list:not(.v-list--one-line) &
     @include ltr()
@@ -84,36 +84,26 @@
   @include typography($list-item-title-typography...)
 
 .v-list-item
-  min-height: $list-item-min-height
+  $root: &
   padding: $list-item-padding
 
+  @at-root
+    @include density('v-list', $list-density) using ($modifier)
+      #{$root}
+        min-height: $list-item-min-height + $modifier
+        padding: (nth($list-item-padding, 1) + $modifier) (nth($list-item-padding, 2) + $modifier)
+
+      &.v-list--two-line #{$root}
+        min-height: $list-item-two-line-min-height + $modifier
+
+      &.v-list--three-line #{$root}
+        min-height: $list-item-three-line-min-height + $modifier
+
   .v-list--two-line &
-    min-height: $list-item-two-line-min-height
     padding: $list-item-two-line-padding
 
   .v-list--three-line &
-    min-height: $list-item-three-line-min-height
     padding: $list-item-three-line-padding
-
-  .v-list--density-comfortable &
-    min-height: 44px
-    padding: .25rem 1rem
-
-  .v-list--density-compact &
-    min-height: 40px
-    padding: 0 1rem
-
-  .v-list--density-comfortable.v-list--two-line &
-    min-height: 60px
-
-  .v-list--density-compact.v-list--two-line &
-    min-height: 56px
-
-  .v-list--density-comfortable.v-list--three-line &
-    min-height: 84px
-
-  .v-list--density-compact.v-list--three-line &
-    min-height: 80px
 
 .v-list-item__overlay
   background-color: currentColor
