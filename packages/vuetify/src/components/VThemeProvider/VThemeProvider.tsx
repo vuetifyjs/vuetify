@@ -3,6 +3,7 @@ import './VThemeProvider.sass'
 
 // Composables
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { defineComponent } from 'vue'
@@ -14,6 +15,7 @@ export default defineComponent({
   props: makeProps({
     withBackground: Boolean,
     ...makeThemeProps(),
+    ...makeTagProps(),
   }),
 
   setup (props, { slots }) {
@@ -23,9 +25,9 @@ export default defineComponent({
       if (!props.withBackground) return slots.default?.()
 
       return (
-        <div class={['v-theme-provider', themeClasses.value]}>
+        <props.tag class={['v-theme-provider', themeClasses.value]}>
           { slots.default?.() }
-        </div>
+        </props.tag>
       )
     }
   },

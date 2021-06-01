@@ -19,6 +19,6 @@ The theme provider allows you to style a section of your application in a differ
 
 ### Background
 
-By default `v-theme-provider` will act as a renderless component, and simply provide a new theme context to all of its children. However if you use the **with-background** prop, it will render a `div` and apply the correct background color to it according to the theme used.
+By default, `v-theme-provider` is a renderless component that allows you to change the applied theme for all of its children. When using the **with-background** prop, the `v-theme-provider` will wrap its children in an element and apply the correct background color to it according to the theme used.
 
 <example file="v-theme-provider/prop-with-background">
