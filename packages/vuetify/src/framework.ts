@@ -1,11 +1,15 @@
-import { inject } from 'vue'
-import { createDisplay, VuetifyDisplaySymbol } from './composables/display'
-import { createTheme, VuetifyThemeSymbol } from './composables/theme'
+// Composables
+import { createDisplay, VuetifyDisplaySymbol } from '@/composables/display'
+import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
 import { defaultSets, VuetifyIconSymbol } from '@/composables/icons'
+import { createDefaults, VuetifyDefaultsSymbol } from '@/composables/defaults'
 import { createLocaleAdapter, VuetifyLocaleAdapterSymbol } from '@/composables/locale'
 import { createRtl, VuetifyRtlSymbol } from '@/composables/rtl'
-import { mergeDeep } from '@/util'
 import { aliases, mdi } from '@/iconsets/mdi'
+
+// Utilities
+import { inject } from 'vue'
+import { mergeDeep } from '@/util'
 
 // Types
 import type { App, InjectionKey } from 'vue'
@@ -14,20 +18,14 @@ import type { ThemeOptions } from '@/composables/theme'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleAdapter, LocaleOptions } from '@/composables/locale'
 import type { RtlOptions } from '@/composables/rtl'
+import type { DefaultsOptions } from '@/composables/defaults'
 
-export interface VuetifyComponentDefaults {
-  [key: string]: undefined | Record<string, unknown>
-  global: Record<string, unknown>
-}
-
-export interface VuetifyInstance {
-  defaults: VuetifyComponentDefaults
-}
+export interface VuetifyInstance {}
 
 export interface VuetifyOptions {
   components?: Record<string, any>
   directives?: Record<string, any>
-  defaults?: Partial<VuetifyComponentDefaults>
+  defaults?: DefaultsOptions
   display?: DisplayOptions
   theme?: ThemeOptions
   icons?: IconOptions
@@ -51,7 +49,6 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
     const {
       components = {},
       directives = {},
-      defaults = {},
       icons = {},
     } = options
 
@@ -67,14 +64,10 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
       app.component(key, component)
     }
 
-    const vuetify: VuetifyInstance = {
-      defaults: {
-        global: {},
-        ...defaults,
-      },
-    }
+    const vuetify = {}
 
     app.provide(VuetifySymbol, vuetify)
+    app.provide(VuetifyDefaultsSymbol, createDefaults(options.defaults))
     app.provide(VuetifyDisplaySymbol, createDisplay(options.display))
     app.provide(VuetifyThemeSymbol, createTheme(options.theme))
     app.provide(VuetifyIconSymbol, mergeDeep({
