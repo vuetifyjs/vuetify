@@ -5,12 +5,14 @@ import './VBtn.sass'
 import { VIcon } from '@/components'
 
 // Composables
-import { makeDensityProps, useDensity } from '@/composables/density'
+import { makeRouterProps, RouterLink } from '@/composables/router'
 import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useColor } from '@/composables/color'
@@ -21,8 +23,6 @@ import { Ripple } from '@/directives/ripple'
 // Utilities
 import { computed, defineComponent } from 'vue'
 import { makeProps } from '@/util'
-
-import { makeSizeProps, useSize } from '@/composables/size'
 
 export default defineComponent({
   name: 'VBtn',
@@ -51,6 +51,7 @@ export default defineComponent({
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'button' }),
     ...makeThemeProps(),
+    ...makeRouterProps(),
   }),
 
   setup (props, { slots }) {
@@ -76,69 +77,79 @@ export default defineComponent({
     })))
 
     return () => (
-      <props.tag
-        type="button"
-        class={[
-          'v-btn',
-          {
-            'v-btn--contained': isContained.value,
-            'v-btn--elevated': isElevated.value,
-            'v-btn--icon': !!props.icon,
-            'v-btn--plain': props.plain,
-            'v-btn--block': props.block,
-            'v-btn--disabled': props.disabled,
-            'v-btn--stacked': props.stacked,
-          },
-          themeClasses.value,
-          borderClasses.value,
-          colorClasses.value,
-          densityClasses.value,
-          elevationClasses.value,
-          positionClasses.value,
-          roundedClasses.value,
-          sizeClasses.value,
-        ]}
-        style={[
-          colorStyles.value,
-          dimensionStyles.value,
-          positionStyles.value,
-        ]}
-        disabled={ props.disabled }
-        v-ripple={[
-          !props.disabled,
-          null,
-          props.icon ? ['center'] : null,
-        ]}
-      >
-        <span class="v-btn__overlay" />
+      <RouterLink
+        to={ props.to }
+        replace={ props.replace }
+        v-slots={{
+          default: (slotProps: any) => (
+            <props.tag
+              type="button"
+              className={[
+                'v-btn',
+                {
+                  'v-btn--contained': isContained.value,
+                  'v-btn--elevated': isElevated.value,
+                  'v-btn--icon': !!props.icon,
+                  'v-btn--plain': props.plain,
+                  'v-btn--block': props.block,
+                  'v-btn--disabled': props.disabled,
+                  'v-btn--stacked': props.stacked,
+                },
+                themeClasses.value,
+                borderClasses.value,
+                colorClasses.value,
+                densityClasses.value,
+                elevationClasses.value,
+                positionClasses.value,
+                roundedClasses.value,
+                sizeClasses.value,
+              ]}
+              style={[
+                colorStyles.value,
+                dimensionStyles.value,
+                positionStyles.value,
+              ]}
+              disabled={props.disabled}
+              v-ripple={[
+                !props.disabled,
+                null,
+                props.icon ? ['center'] : null,
+              ]}
+            >
+              { console.log(slotProps) }
 
-        { !props.icon && props.prependIcon && (
-          <VIcon
-            class="v-btn__icon"
-            icon={ props.prependIcon }
-            left={ !props.stacked }
-          />
-        )}
+              <span class="v-btn__overlay" />
 
-        { typeof props.icon === 'boolean'
-          ? slots.default?.()
-          : (
-            <VIcon
-              class="v-btn__icon"
-              icon={ props.icon }
-              size={ props.size }
-            />
-          )
-        }
+              {!props.icon && props.prependIcon && (
+                <VIcon
+                  class="v-btn__icon"
+                  icon={props.prependIcon}
+                  left={!props.stacked}
+                />
+              )}
 
-        { !props.icon && props.appendIcon && (
-          <VIcon
-            class="v-btn__icon"
-            icon={ props.appendIcon }
-            right={ !props.stacked }
-          />
-        )}
-      </props.tag>
+              {typeof props.icon === 'boolean'
+                ? slots.default?.()
+                : (
+                  <VIcon
+                    class="v-btn__icon"
+                    icon={props.icon}
+                    size={props.size}
+                  />
+                )
+              }
+
+              {!props.icon && props.appendIcon && (
+                <VIcon
+                  class="v-btn__icon"
+                  icon={props.appendIcon}
+                  right={!props.stacked}
+                />
+              )}
+            </props.tag>
+          ),
+        }}
+      />
     )
   },
 })
