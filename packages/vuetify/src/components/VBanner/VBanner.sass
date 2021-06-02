@@ -1,5 +1,4 @@
 // Imports
-@use 'sass:math'
 @import './_variables.scss'
 
 // Theme
@@ -24,7 +23,7 @@
   display: flex
   flex: 1 0 auto
   justify-content: flex-end
-  margin-bottom: math.div(-$banner-y-padding, 2)
+  margin-bottom: -$banner-y-padding / 2
 
   +ltr()
     margin-left: $banner-actions-start-margin
@@ -83,8 +82,8 @@
     text-overflow: ellipsis
 
   .v-banner__wrapper
-    padding-top: math.div($banner-y-padding, 2)
-    padding-bottom: math.div($banner-y-padding, 2)
+    padding-top: $banner-y-padding / 2
+    padding-bottom: $banner-y-padding / 2
 
 .v-banner--has-icon
   .v-banner__wrapper

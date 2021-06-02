@@ -1,4 +1,3 @@
-@use 'sass:math';
 @import '../tools/_functions.sass';
 
 $color-pack: true !default;
@@ -12,7 +11,7 @@ $rounded: () !default;
 $rounded: map-deep-merge(
   (
     0: 0,
-    'sm': math.div($border-radius-root, 2),
+    'sm': $border-radius-root / 2,
     null: $border-radius-root,
     'lg': $border-radius-root * 2,
     'xl': $border-radius-root * 6,
@@ -54,15 +53,15 @@ $grid-gutter: $spacer * 6 !default;
 $form-grid-gutter: $spacer * 2 !default;
 $grid-columns: 12 !default;
 
-$container-padding-x: math.div($grid-gutter, 2) !default;
+$container-padding-x: $grid-gutter / 2 !default;
 
 $grid-gutters: () !default;
 $grid-gutters: map-deep-merge(
   (
-    'xs': math.div($grid-gutter, 12),
-    'sm': math.div($grid-gutter, 6),
-    'md': math.div($grid-gutter, 3),
-    'lg': math.div($grid-gutter * 2, 3),
+    'xs': $grid-gutter / 12,
+    'sm': $grid-gutter / 6,
+    'md': $grid-gutter / 3,
+    'lg': $grid-gutter * 2/3,
     'xl': $grid-gutter
   ),
   $grid-gutters
