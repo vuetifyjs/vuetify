@@ -14,7 +14,7 @@
           >
             mdi-magnify
           </v-icon>
-          <h2 class="display-1 white--text font-weight-light">
+          <h2 class="text-h4 white--text font-weight-light">
             Title 1
           </h2>
         </v-card-title>
@@ -47,7 +47,7 @@
     >
       <v-card>
         <v-card-title class="amber lighten-1 justify-end">
-          <h2 class="display-1 mr-4 white--text font-weight-light">
+          <h2 class="text-h4 mr-4 white--text font-weight-light">
             Title 2
           </h2>
           <v-icon
@@ -90,7 +90,7 @@
           >
             mdi-email-outline
           </v-icon>
-          <h2 class="display-1 white--text font-weight-light">
+          <h2 class="text-h4 white--text font-weight-light">
             Title 3
           </h2>
         </v-card-title>
@@ -117,7 +117,7 @@
     >
       <v-card>
         <v-card-title class="red lighten-1 justify-end">
-          <h2 class="display-1 mr-4 white--text font-weight-light">
+          <h2 class="text-h4 mr-4 white--text font-weight-light">
             Title 4
           </h2>
           <v-icon
@@ -162,7 +162,7 @@
           >
             mdi-phone-in-talk
           </v-icon>
-          <h2 class="display-1 white--text font-weight-light">
+          <h2 class="text-h4 white--text font-weight-light">
             Title 5
           </h2>
         </v-card-title>

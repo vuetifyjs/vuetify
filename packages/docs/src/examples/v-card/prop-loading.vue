@@ -33,12 +33,12 @@
           size="14"
         ></v-rating>
 
-        <div class="grey--text ml-4">
+        <div class="grey--text ms-4">
           4.5 (413)
         </div>
       </v-row>
 
-      <div class="my-4 subtitle-1">
+      <div class="my-4 text-subtitle-1">
         $ • Italian, Cafe
       </div>
 

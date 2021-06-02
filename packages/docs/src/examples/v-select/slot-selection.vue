@@ -12,7 +12,7 @@
         </v-chip>
         <span
           v-if="index === 1"
-          class="grey--text caption"
+          class="grey--text text-caption"
         >
           (+{{ value.length - 1 }} others)
         </span>

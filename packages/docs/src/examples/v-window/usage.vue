@@ -43,7 +43,7 @@
                   color="grey"
                   class="mr-4"
                 ></v-avatar>
-                <strong class="title">Title {{ n }}</strong>
+                <strong class="text-h6">Title {{ n }}</strong>
                 <v-spacer></v-spacer>
                 <v-btn icon>
                   <v-icon>mdi-account</v-icon>
