@@ -62,16 +62,16 @@ export default defineComponent({
         class={[
           'v-progress-circular',
           {
-            'v-progress-circular--visible': isIntersecting.value,
             'v-progress-circular--indeterminate': props.indeterminate,
+            'v-progress-circular--visible': isIntersecting.value,
           },
-          textColorClasses.value,
-          sizeClasses.value,
           themeClasses.value,
+          sizeClasses.value,
+          textColorClasses.value,
         ]}
         style={[
-          textColorStyles.value,
           sizeStyles.value,
+          textColorStyles.value,
         ]}
         role="progressbar"
         aria-valuemin="0"
@@ -99,6 +99,7 @@ export default defineComponent({
             stroke-dasharray={ CIRCUMFERENCE }
             stroke-dashoffset={ 0 }
           />
+
           <circle
             class="v-progress-circular__overlay"
             fill="transparent"
@@ -110,11 +111,11 @@ export default defineComponent({
             stroke-dashoffset={ strokeDashOffset.value }
           />
         </svg>
-        { slots.default ? (
+        { slots.default && (
           <div class="v-progress-circular__content">
             { slots.default() }
           </div>
-        ) : undefined }
+        ) }
       </props.tag>
     )
   },
