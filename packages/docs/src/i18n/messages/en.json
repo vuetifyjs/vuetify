@@ -4,6 +4,15 @@
   "ads-via-vuetify": "ads via Vuetify",
   "alpha": "Alpha",
   "api": "API",
+  "api-headers": {
+    "argument": "Argument",
+    "events": "Events",
+    "functions": "Functions",
+    "modifiers": "Modifiers",
+    "props": "Props",
+    "sass": "SASS Variables",
+    "slots": "Slots"
+  },
   "application": "Application",
   "apply": "Apply",
   "bars": "Bars",

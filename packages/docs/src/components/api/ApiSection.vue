@@ -43,7 +43,7 @@
         <app-heading
           :id="`api-${field}`"
           class="text-capitalize"
-          :content="field"
+          :content="$t(`api-headers.${field}`)"
           :href="`#api-${field}`"
           :level="name ? '2' : '3'"
         />
@@ -60,7 +60,6 @@
 </template>
 
 <script>
-  import { capitalize } from 'lodash'
   import { get, sync } from 'vuex-pathify'
   import pageToApi from '@/data/page-to-api'
 
@@ -120,7 +119,7 @@
         const headers = Object.keys(this.apiComponent).reduce((acc, header) => {
           acc.push({
             level: 2,
-            text: capitalize(header),
+            text: this.$t(`api-headers.${header}`),
             to: `#api-${header}`,
           })
           return acc
