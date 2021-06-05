@@ -94,8 +94,6 @@ export default defineComponent({
               'v-btn--block': props.block,
               'v-btn--disabled': props.disabled,
               'v-btn--stacked': props.stacked,
-              'v-btn--active': link?.isActive.value,
-              'v-btn--exact-active': link?.isExactActive.value,
             },
             themeClasses.value,
             borderClasses.value,
@@ -111,7 +109,7 @@ export default defineComponent({
             dimensionStyles.value,
             positionStyles.value,
           ]}
-          disabled={ props.disabled }
+          disabled={ props.disabled || undefined }
           href={ link?.href.value ?? props.href }
           v-ripple={[
             !props.disabled,
