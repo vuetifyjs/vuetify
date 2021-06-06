@@ -25,11 +25,12 @@ import {
   watch,
   watchEffect,
 } from 'vue'
+import { useRtl } from '@/composables/rtl'
+import { useBackButton } from '@/composables/router'
 
 // Types
 import type { BackgroundColorData } from '@/composables/color'
 import type { Prop, PropType, Ref } from 'vue'
-import { useRtl } from '@/composables/rtl'
 
 function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
   const isBooted = ref(eager.value)
@@ -219,8 +220,17 @@ export default defineComponent({
       }
     }
 
-    const content = ref<HTMLElement>()
+    useBackButton(next => {
+      if (isActive.value) {
+        next(false)
+        if (!props.persistent) isActive.value = false
+        else animateClick()
+      } else {
+        next()
+      }
+    })
 
+    const content = ref<HTMLElement>()
     watch(isActive, val => {
       nextTick(() => {
         if (val) {

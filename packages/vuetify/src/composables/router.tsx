@@ -1,12 +1,13 @@
 // Utilities
-import { computed, getCurrentInstance, resolveDynamicComponent } from 'vue'
-import { propsFactory } from '@/util'
+import { computed, getCurrentInstance, onBeforeUnmount, onMounted, resolveDynamicComponent, watchEffect } from 'vue'
+import { IN_BROWSER, IS_PROD, propsFactory } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
 import type {
   RouterLink as _RouterLink,
   useLink as _useLink,
+  NavigationGuardNext,
   RouteLocationNormalizedLoaded,
   RouteLocationRaw,
   Router,
@@ -24,14 +25,62 @@ export function useRouter (): Router | undefined {
 }
 
 export function useLink (props: Partial<UseLinkOptions>): ReturnType<typeof _useLink> | undefined {
-  const Link = resolveDynamicComponent('RouterLink') as typeof _RouterLink | string
+  const RouterLink = resolveDynamicComponent('RouterLink') as typeof _RouterLink | string
 
-  return typeof Link === 'string'
-    ? undefined
-    : Link.useLink(props as UseLinkOptions)
+  if (typeof RouterLink === 'string') return
+
+  const link = RouterLink.useLink(props as UseLinkOptions)
+
+  if (!IS_PROD && IN_BROWSER) {
+    const instance = getCurrentInstance()
+    watchEffect(() => {
+      if (instance) (instance as any).__vrl_route = link.route
+    }, { flush: 'post' })
+
+    watchEffect(() => {
+      if (instance) {
+        (instance as any).__vrl_active = link.isActive
+        ;(instance as any).__vrl_exactActive = link.isExactActive
+      }
+    }, { flush: 'post' })
+  }
+
+  return props.to
+    ? link
+    : undefined
 }
 
 export const makeRouterProps = propsFactory({
   to: [String, Object] as PropType<RouteLocationRaw>,
   replace: Boolean,
 }, 'router')
+
+export function useBackButton (cb: (next: NavigationGuardNext) => void) {
+  const router = useRouter()
+  let popped = false
+  let removeGuard: (() => void) | undefined
+
+  onMounted(() => {
+    window.addEventListener('popstate', onPopstate)
+    removeGuard = router?.beforeEach((to, from, next) => {
+      setTimeout(() => {
+        if (popped) {
+          cb(next)
+        } else {
+          next()
+        }
+      })
+    })
+  })
+  onBeforeUnmount(() => {
+    window.removeEventListener('popstate', onPopstate)
+    removeGuard?.()
+  })
+
+  function onPopstate (e: PopStateEvent) {
+    if (!e.state.replaced) {
+      popped = true
+      setTimeout(() => popped = false)
+    }
+  }
+}
