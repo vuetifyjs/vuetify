@@ -26,7 +26,7 @@
     +button-sizes()
     +button-density('height', $button-density)
 
-  +states('.v-btn__overlay')
+  +states('.v-btn__overlay', false)
 
   &--icon
     border-radius: $button-icon-border-radius
@@ -53,8 +53,7 @@
     opacity: .62
 
     &:focus,
-    &:hover,
-    &.v-btn--active
+    &:hover
       opacity: 1
 
     .v-btn__overlay
@@ -142,8 +141,10 @@
       transform: $button-bottom-navigation-shift-transform
       transition: inherit
 
-  &--is-active
+  &--active
     .v-bottom-navigation &
+      +active-states('.v-btn__overlay')
+
       filter: $button-bottom-navigation-active-filter
       opacity: $button-bottom-navigation-active-opacity
 

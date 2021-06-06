@@ -94,6 +94,7 @@ export default defineComponent({
               'v-btn--block': props.block,
               'v-btn--disabled': props.disabled,
               'v-btn--stacked': props.stacked,
+              'v-btn--active': link?.isExactActive.value,
             },
             themeClasses.value,
             borderClasses.value,
