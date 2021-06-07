@@ -28,9 +28,25 @@ interface options extends ExtractVue<typeof baseMixins> {
 export default baseMixins.extend<options>().extend({
   name: 'v-expansion-panel-content',
 
+  data: () => ({
+    isActive: false,
+  }),
+
   computed: {
-    isActive (): boolean {
+    parentIsActive (): boolean {
       return this.expansionPanel.isActive
+    },
+  },
+
+  watch: {
+    parentIsActive: {
+      immediate: true,
+      handler (val, oldVal) {
+        if (val) this.isBooted = true
+
+        if (oldVal == null) this.isActive = val
+        else this.$nextTick(() => this.isActive = val)
+      },
     },
   },
 

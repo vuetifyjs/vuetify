@@ -9,10 +9,10 @@
     >
     </v-img>
     <v-card-title>
-      <div class="display-1 mb-2">
+      <div class="text-h4 mb-2">
         Welcome Home...
       </div>
-      <div class="title font-weight-regular grey--text">
+      <div class="text-h6 font-weight-regular grey--text">
         Monday, 12:30 PM, Mostly Sunny
       </div>
     </v-card-title>

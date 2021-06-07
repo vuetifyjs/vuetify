@@ -59,7 +59,7 @@
                   <v-card-text class="pa-6">
                     <v-btn
                       large
-                      flat
+                      text
                       color="primary"
                       @click="clickMe"
                     >

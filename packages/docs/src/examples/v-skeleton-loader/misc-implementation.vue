@@ -22,7 +22,7 @@
         class="text-center"
         cols="12"
       >
-        <div class="headline">
+        <div class="text-h5">
           Default Slot
         </div>
       </v-col>
@@ -49,7 +49,7 @@
         class="text-center"
         cols="12"
       >
-        <div class="headline">
+        <div class="text-h5">
           If conditional<br>w/Transition Element
         </div>
       </v-col>
