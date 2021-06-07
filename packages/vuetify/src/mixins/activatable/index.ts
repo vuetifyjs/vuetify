@@ -171,9 +171,7 @@ export default baseMixins.extend({
       }
 
       // The activator should only be a valid element (Ignore comments and text nodes)
-      if (activator.nodeType === 1) {
-        this.activatorElement = activator
-      }
+      this.activatorElement = activator && activator.nodeType === 1 ? activator : null
 
       return this.activatorElement
     },
