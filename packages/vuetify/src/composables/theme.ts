@@ -1,6 +1,6 @@
 // Utilities
 import { computed, getCurrentInstance, inject, provide, ref, watch } from 'vue'
-import { colorToInt, colorToRGB, createRange, darken, getLuma, intToHex, lighten } from '@/util'
+import { colorToInt, colorToRGB, createRange, darken, getLuma, intToHex, lighten, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
@@ -71,13 +71,16 @@ export interface ThemeInstance {
   isDisabled: boolean
   themes: Ref<Record<string, InternalThemeDefinition>>
   current: Ref<string>
-  themeClasses: Ref<string>
+  themeClasses: Ref<string | undefined>
   setTheme: (key: string, theme: ThemeDefinition) => void
   getTheme: (key: string) => InternalThemeDefinition
-  hasColor: (color: string) => boolean
 }
 
 export const VuetifyThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme')
+
+export const makeThemeProps = propsFactory({
+  theme: String,
+}, 'theme')
 
 const defaultThemeOptions: ThemeOptions = {
   defaultTheme: 'light',
@@ -98,7 +101,7 @@ const defaultThemeOptions: ThemeOptions = {
         warning: '#FB8C00',
       },
       variables: {
-        'border-color': '0, 0, 0',
+        'border-color': '#000000',
         'border-opacity': 0.12,
         'high-emphasis-opacity': 0.87,
         'medium-emphasis-opacity': 0.60,
@@ -112,7 +115,7 @@ const defaultThemeOptions: ThemeOptions = {
       dark: true,
       colors: {
         background: '#121212',
-        surface: '#121212',
+        surface: '#212121',
         primary: '#BB86FC',
         'primary-darken-1': '#3700B3',
         secondary: '#03DAC5',
@@ -123,7 +126,7 @@ const defaultThemeOptions: ThemeOptions = {
         warning: '#FB8C00',
       },
       variables: {
-        'border-color': '255, 255, 255',
+        'border-color': '#FFFFFF',
         'border-opacity': 0.12,
         'high-emphasis-opacity': 0.87,
         'medium-emphasis-opacity': 0.60,
@@ -282,41 +285,27 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
     setTheme: (key: string, theme: ThemeDefinition) => themes.value[key] = theme,
     getTheme: (key: string) => computedThemes.value[key],
     current,
-    themeClasses: computed(() => parsedOptions.isDisabled ? '' : `v-theme--${current.value}`),
-    hasColor: (color: string) => !!computedThemes.value[current.value].colors[color],
+    themeClasses: computed(() => parsedOptions.isDisabled ? undefined : `v-theme--${current.value}`),
   }
 }
 
 /**
  * Used to either set up and provide a new theme instance, or to pass
  * along the closest available already provided instance.
- *
- * A new theme instance will be created if either `theme` prop is provided,
- * or if `newContext` prop is true
  */
-export function provideTheme (props: { theme?: string, newContext?: boolean } = {}) {
+export function useTheme (props: { theme?: string }) {
   const vm = getCurrentInstance()
   const theme = inject(VuetifyThemeSymbol, null)
 
   if (!vm) consoleError('provideTheme must be called from inside a setup function')
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
-  const internal = ref<string | null>(null)
-  const current = computed<string>({
-    get: () => {
-      return internal.value ?? props.theme ?? theme?.current.value
-    },
-    set (value: string) {
-      if (theme && !props.theme && !props.newContext) {
-        theme.current.value = value
-      } else {
-        internal.value = value
-        vm?.emit('update:theme', value)
-      }
-    },
+  const current = computed<string>(() => {
+    return props.theme ?? theme?.current.value
   })
 
-  const themeClasses = computed(() => theme.isDisabled ? '' : `v-theme--${current.value}`)
+  const themeClasses = computed(() => theme.isDisabled ? undefined : `v-theme--${current.value}`)
+
   const newTheme: ThemeInstance = {
     ...theme,
     current,
@@ -326,15 +315,4 @@ export function provideTheme (props: { theme?: string, newContext?: boolean } = 
   provide(VuetifyThemeSymbol, newTheme)
 
   return newTheme
-}
-
-/**
- * Injects and returns closest available provided theme instance.
- */
-export function useTheme () {
-  const theme = inject(VuetifyThemeSymbol)
-
-  if (!theme) throw new Error('Could not find Vuetify theme injection')
-
-  return theme
 }

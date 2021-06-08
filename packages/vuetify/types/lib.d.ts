@@ -148,6 +148,7 @@ declare module 'vuetify/lib' {
   const VTabsSlider: VueConstructor
   const VTextarea: VueConstructor
   const VTextField: VueConstructor
+  const VThemeProvider: VueConstructor
   const VTimeline: VueConstructor
   const VTimelineItem: VueConstructor
   const VTimePicker: VueConstructor
@@ -321,6 +322,7 @@ declare module 'vuetify/lib' {
     VTabsSlider,
     VTextarea,
     VTextField,
+    VThemeProvider,
     VTimeline,
     VTimelineItem,
     VTimePicker,

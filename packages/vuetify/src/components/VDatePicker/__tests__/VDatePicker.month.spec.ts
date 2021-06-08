@@ -130,7 +130,7 @@ describe.skip('VDatePicker.ts', () => {
       },
     })
 
-    wrapper.findAll('.v-date-picker-table--month').at(0).trigger('wheel')
+    wrapper.findAll('.v-date-picker-table--month').at(0).trigger('wheel', { deltaY: 1 })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.tableDate).toBe('2014')
   })

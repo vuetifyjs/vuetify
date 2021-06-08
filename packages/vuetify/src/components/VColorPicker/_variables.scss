@@ -1,3 +1,4 @@
+@use 'sass:math';
 @import '../../styles/styles.sass';
 
 $color-picker-border-radius: $border-radius-root !default;
@@ -18,7 +19,7 @@ $color-picker-input-font-size: 0.75rem !default;
 $color-picker-input-margin: 8px !default;
 $color-picker-input-margin-bottom: 8px !default;
 $color-picker-slider-height: 10px !default;
-$color-picker-slider-border-radius: $color-picker-slider-height / 2 !default;
+$color-picker-slider-border-radius: math.div($color-picker-slider-height, 2) !default;
 $color-picker-preview-dot-size: 30px !default;
 $color-picker-preview-dot-margin: 24px !default;
 $color-picker-hue-margin-bottom: 24px !default;

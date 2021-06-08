@@ -7,7 +7,7 @@ import { ClickOutside } from '@/directives/click-outside'
 // Composables
 import { useBackgroundColor } from '@/composables/color'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTeleport } from '@/composables/teleport'
 
@@ -175,6 +175,7 @@ export default defineComponent({
       default: 'block',
       validator: (val: any) => scrollStrategies.includes(val),
     },
+    ...makeThemeProps(),
     ...makeTransitionProps(),
   }),
 
@@ -186,7 +187,7 @@ export default defineComponent({
   setup (props, { slots, attrs, emit }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { teleportTarget } = useTeleport(toRef(props, 'attach'))
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const { rtlClasses } = useRtl()
     const { isBooted } = useBooted(isActive, toRef(props, 'eager'))
     const scrimColor = useBackgroundColor(computed(() => {

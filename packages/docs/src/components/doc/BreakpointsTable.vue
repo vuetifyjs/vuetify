@@ -46,7 +46,7 @@
       <tfoot>
         <tr>
           <td
-            class="caption text-center grey--text"
+            class="text-caption text-center grey--text"
             colspan="4"
           >
             <i18n

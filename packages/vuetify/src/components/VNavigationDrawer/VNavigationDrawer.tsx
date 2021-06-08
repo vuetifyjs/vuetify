@@ -9,7 +9,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useDisplay } from '@/composables/display'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, defineComponent, onBeforeMount, ref, toRef, watch } from 'vue'
@@ -50,10 +50,11 @@ export default defineComponent({
     ...makeLayoutItemProps(),
     ...makeRoundedProps(),
     ...makeTagProps({ tag: 'nav' }),
+    ...makeThemeProps(),
   }),
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-navigation-drawer')
     const { elevationClasses } = useElevation(props)
     const { mobile } = useDisplay()

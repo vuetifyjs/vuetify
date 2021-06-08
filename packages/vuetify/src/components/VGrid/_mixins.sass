@@ -1,3 +1,5 @@
+@use 'sass:math'
+
 =make-container($padding-x: $container-padding-x)
   width: 100%
   padding: $padding-x
@@ -14,24 +16,24 @@
   display: flex
   flex-wrap: wrap
   flex: 1 1 auto
-  margin: -$gutter / 2
+  margin: math.div(-$gutter, 2)
 
 =make-col-ready($gutter: $grid-gutter)
   // Prevent columns from becoming too narrow when at smaller grid tiers by
   // always setting `width: 100%;`. This works because we use `flex` values
   // later on to override this initial width.
   width: 100%
-  padding: $gutter / 2
+  padding: math.div($gutter, 2)
 
 =make-col($size, $columns: $grid-columns)
-  flex: 0 0 percentage($size / $columns)
+  flex: 0 0 percentage(math.div($size, $columns))
   // Add a `max-width` to ensure content within each column does not blow out
   // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
   // do not appear to require this.
-  max-width: percentage($size / $columns)
+  max-width: percentage(math.div($size, $columns))
 
 =make-col-offset($size, $columns: $grid-columns)
-  $num: $size / $columns
+  $num: math.div($size, $columns)
   +ltr()
     margin-left: if($num == 0, 0, percentage($num))
   +rtl()
@@ -41,7 +43,7 @@
   // Common properties for all breakpoints
   %grid-column
     width: 100%
-    padding: $gutter / 2
+    padding: math.div($gutter, 2)
   @each $breakpoint in map-keys($breakpoints)
     $infix: breakpoint-infix($breakpoint, $breakpoints)
     // Allow columns to stretch full width below their breakpoints

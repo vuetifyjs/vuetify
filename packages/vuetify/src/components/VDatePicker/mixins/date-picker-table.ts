@@ -184,8 +184,7 @@ export default mixins(
       const tableDate = calculateTableDate(value)
       // tableDate is 'YYYY-MM' for DateTable and 'YYYY' for MonthTable
       const sanitizeType = tableDate.split('-').length === 1 ? 'year' : 'month'
-      return (value === 0) ||
-        (value < 0 && (this.min ? tableDate >= sanitizeDateString(this.min, sanitizeType) : true)) ||
+      return (value < 0 && (this.min ? tableDate >= sanitizeDateString(this.min, sanitizeType) : true)) ||
         (value > 0 && (this.max ? tableDate <= sanitizeDateString(this.max, sanitizeType) : true))
     },
     wheel (e: WheelEvent, calculateTableDate: CalculateTableDateFunction) {

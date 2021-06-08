@@ -13,7 +13,7 @@
       max-width="290"
     >
       <v-card>
-        <v-card-title class="headline">
+        <v-card-title class="text-h5">
           Use Google's location service?
         </v-card-title>
 
