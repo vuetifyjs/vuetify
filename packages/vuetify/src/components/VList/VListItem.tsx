@@ -88,7 +88,7 @@ export default defineComponent({
             backgroundColorStyles.value,
             dimensionStyles.value,
           ]}
-          tabindex={ isClickable ? 0 : -1 }
+          tabindex={ isClickable ? 0 : undefined }
           v-ripple={ isClickable }
         >
           { isClickable && (<div class="v-list-item__overlay" />) }

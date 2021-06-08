@@ -62,8 +62,18 @@
   min-width: 0
 
 .v-list-item-subtitle
+  -webkit-box-orient: vertical
   color: $list-item-subtitle-color
+  display: -webkit-box
+  overflow: hidden
   padding: $list-item-subtitle-padding
+  text-overflow: ellipsis
+
+  .v-list--two-line &
+    -webkit-line-clamp: 1
+
+  .v-list--three-line &
+    -webkit-line-clamp: 2
 
   @include typography($list-item-subtitle-typography...)
 
