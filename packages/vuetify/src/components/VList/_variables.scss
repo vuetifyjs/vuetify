@@ -20,12 +20,14 @@ $list-item-three-line-padding: 16px 16px !default;
 
 $list-item-avatar-align-self: flex-start !default;
 $list-item-avatar-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+$list-item-avatar-margin-end: 1rem !default;
 $list-item-avatar-margin-start: 1rem !default;
 $list-item-avatar-size: 40px !default;
 $list-item-avatar-size-multiplier: 1.5 !default;
 $list-item-avatar-margin-y: 4px !default;
 
-$list-item-media-margin-start: -.5rem !default;
+$list-item-media-margin-end: 1rem !default;
+$list-item-media-margin-start: 1rem !default;
 $list-item-media-two-line-margin-bottom: -.5rem !default;
 $list-item-media-two-line-margin-top: -.5rem !default;
 $list-item-media-not-one-line-margin-start: -1rem !default;

@@ -2,12 +2,17 @@
 
 .v-list-item
   align-items: center
-  background: $list-background
   display: flex
   padding: $list-item-padding
   position: relative
+  transition: .2s $standard-easing
 
   @include states('.v-list-item__overlay')
+
+  &--disabled
+    pointer-events: none
+    user-select: none
+    opacity: $list-disabled-opacity
 
   &--link
     cursor: pointer
@@ -17,12 +22,13 @@
 
   align-self: center
   color: $list-item-avatar-color
+  transition: inherit
 
-  &:first-child:not(:only-child)
-    margin-right: $list-item-avatar-margin-start
+  &--left
+    margin-inline-end: $list-item-avatar-margin-end
 
-  &:last-child:not(:only-child)
-    margin-left: $list-item-avatar-margin-start
+  &--right
+    margin-inline-start: $list-item-avatar-margin-start
 
   @at-root
     @include density('v-list', $list-density) using ($modifier)
@@ -41,23 +47,15 @@
     align-self: flex-start
 
 .v-list-item-media
-  .v-list--one-line &
-    @include ltr()
-      margin-left: $list-item-media-margin-start
+  &--left
+    margin-inline-end: $list-item-media-margin-end
 
-    @include rtl()
-      margin-right: $list-item-media-margin-start
+  &--right
+    margin-inline-start: $list-item-media-margin-start
 
   .v-list--two-line &
     margin-top: $list-item-media-two-line-margin-top
     margin-bottom: $list-item-media-two-line-margin-bottom
-
-  .v-list:not(.v-list--one-line) &
-    @include ltr()
-      margin-left: $list-item-media-not-one-line-margin-start
-
-    @include rtl()
-      margin-right: $list-item-media-not-one-line-margin-start
 
 .v-list-item-header
   flex: 1 1 auto

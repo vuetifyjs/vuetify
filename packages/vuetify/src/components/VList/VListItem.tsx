@@ -18,7 +18,7 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -48,10 +48,11 @@ export default defineComponent({
     ...makeElevationProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
+    ...makeThemeProps(),
   }),
 
-  setup (props, { slots }) {
-    const { themeClasses } = useTheme()
+  setup (props, { attrs, slots }) {
+    const { themeClasses } = useTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { borderClasses } = useBorder(props, 'v-list-item')
     const { densityClasses } = useDensity(props, 'v-list-item')
@@ -65,7 +66,8 @@ export default defineComponent({
       const hasHeader = !!(hasTitle || hasSubtitle)
       const hasAppend = (slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = (slots.prepend || props.prependAvatar || props.prependIcon)
-      const hasOverlay = props.link && !props.disabled
+      const isLink = !!(props.link || attrs.onClick || attrs.onClickOnce)
+      const isClickable = isLink && !props.disabled
 
       return (
         <props.tag
@@ -73,7 +75,7 @@ export default defineComponent({
             'v-list-item',
             {
               'v-list-item--disabled': props.disabled,
-              'v-list-item--link': props.link,
+              'v-list-item--link': isLink,
             },
             themeClasses.value,
             backgroundColorClasses.value,
@@ -86,23 +88,23 @@ export default defineComponent({
             backgroundColorStyles.value,
             dimensionStyles.value,
           ]}
-          v-ripple={ hasOverlay }
+          tabindex={ isClickable ? 0 : -1 }
+          v-ripple={ isClickable }
         >
-          { hasOverlay && (<div class="v-list-item__overlay" />) }
+          { isClickable && (<div class="v-list-item__overlay" />) }
 
           { hasPrepend && (
-            <VListItemAvatar>
-              { slots.prepend
-                ? slots.prepend()
-                : (
+            slots.prepend
+              ? slots.prepend()
+              : (
+                <VListItemAvatar left>
                   <VAvatar
                     density={ props.density }
                     icon={ props.prependIcon }
                     image={ props.prependAvatar }
                   />
-                )
-              }
-            </VListItemAvatar>
+                </VListItemAvatar>
+              )
           ) }
 
           { hasHeader && (
@@ -127,22 +129,21 @@ export default defineComponent({
             </VListItemHeader>
           ) }
 
+          { slots.default?.() }
+
           { hasAppend && (
-            <VListItemAvatar>
-              { slots.append
-                ? slots.append()
-                : (
+            slots.append
+              ? slots.append()
+              : (
+                <VListItemAvatar right>
                   <VAvatar
                     density={ props.density }
                     icon={ props.appendIcon }
                     image={ props.appendAvatar }
                   />
-                )
-              }
-            </VListItemAvatar>
+                </VListItemAvatar>
+              )
           ) }
-
-          { slots.default?.() }
         </props.tag>
       )
     }
