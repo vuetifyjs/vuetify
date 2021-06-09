@@ -47,6 +47,9 @@
     align-self: flex-start
 
 .v-list-item-media
+  margin-top: $list-item-media-margin-top
+  margin-bottom: $list-item-media-margin-bottom
+
   &--left
     margin-inline-end: $list-item-media-margin-end
 
@@ -56,6 +59,10 @@
   .v-list--two-line &
     margin-top: $list-item-media-two-line-margin-top
     margin-bottom: $list-item-media-two-line-margin-bottom
+
+  .v-list--three-line &
+    margin-top: $list-item-media-three-line-margin-top
+    margin-bottom: $list-item-media-three-line-margin-bottom
 
 .v-list-item-header
   flex: 1 1 auto
