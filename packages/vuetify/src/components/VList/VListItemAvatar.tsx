@@ -21,8 +21,8 @@ export default defineComponent({
           class={[
             'v-list-item-avatar',
             {
-              'v-list-item-avatar--left': props.left,
-              'v-list-item-avatar--right': props.right,
+              'v-list-item-avatar--start': props.left,
+              'v-list-item-avatar--end': props.right,
             },
           ]}
           v-slots={ slots }

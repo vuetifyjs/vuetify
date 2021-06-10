@@ -5,7 +5,8 @@
   display: flex
   padding: $list-item-padding
   position: relative
-  transition: .2s $standard-easing
+  outline: none
+  transition: $list-item-transition
 
   @include states('.v-list-item__overlay')
 
@@ -24,10 +25,10 @@
   transition: inherit
   transition-property: height, width
 
-  &--left
+  &--start
     margin-inline-end: $list-item-avatar-margin-end
 
-  &--right
+  &--end
     margin-inline-start: $list-item-avatar-margin-start
 
   @at-root
@@ -50,10 +51,10 @@
   margin-top: $list-item-media-margin-top
   margin-bottom: $list-item-media-margin-bottom
 
-  &--left
+  &--start
     margin-inline-end: $list-item-media-margin-end
 
-  &--right
+  &--end
     margin-inline-start: $list-item-media-margin-start
 
   .v-list--two-line &

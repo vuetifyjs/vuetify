@@ -21,8 +21,8 @@ export default defineComponent({
           class={[
             'v-list-item-media',
             {
-              'v-list-item-media--left': props.left,
-              'v-list-item-media--right': props.right,
+              'v-list-item-media--start': props.left,
+              'v-list-item-media--end': props.right,
             },
           ]}
           v-slots={ slots }
