@@ -1,11 +1,11 @@
 // Defaults
-$list-background: var(--v-theme-surface) !default;
+$list-background: rgba(var(--v-theme-surface)) !default;
 $list-border-color: $border-color-root !default;
 $list-border-radius: 0 !default;
 $list-border-style: $border-style-root !default;
 $list-border-thin-width: thin !default;
 $list-border-width: 0 !default;
-$list-color: var(--v-theme-on-surface) !default;
+$list-color: rgba(var(--v-theme-on-surface)) !default;
 $list-disabled-opacity: 0.6 !default;
 $list-elevation: 0 !default;
 $list-padding: 8px 0 !default;
@@ -35,7 +35,7 @@ $list-item-media-two-line-margin-top: -4px !default;
 $list-item-media-three-line-margin-bottom: 0 !default;
 $list-item-media-three-line-margin-top: 0 !default;
 
-$list-item-subtitle-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+$list-item-subtitle-opacity: var(--v-medium-emphasis-opacity) !default;
 $list-item-subtitle-font-size: map-deep-get($typography, 'body-2', 'size') !default;
 $list-item-subtitle-font-weight: map-deep-get($typography, 'body-2', 'weight') !default;
 $list-item-subtitle-letter-spacing: map-deep-get($typography, 'body-2', 'letter-spacing') !default;

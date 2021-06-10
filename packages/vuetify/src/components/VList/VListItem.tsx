@@ -17,14 +17,14 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useBackgroundColor } from '@/composables/color'
+import { useColor } from '@/composables/color'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { defineComponent, toRef } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { makeProps } from '@/util'
 
 export default defineComponent({
@@ -33,6 +33,9 @@ export default defineComponent({
   directives: { Ripple },
 
   props: makeProps({
+    active: Boolean,
+    activeColor: String,
+    activeClass: String,
     appendAvatar: String,
     appendIcon: String,
     color: String,
@@ -41,6 +44,7 @@ export default defineComponent({
     prependAvatar: String,
     prependIcon: String,
     subtitle: String,
+    text: String,
     title: String,
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -53,7 +57,12 @@ export default defineComponent({
 
   setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { colorClasses, colorStyles } = useColor(computed(() => {
+      const key = props.text || !props.active ? 'text' : 'background'
+      const color = (props.active && props.activeColor) || props.color
+
+      return { [`${key}`]: color }
+    }))
     const { borderClasses } = useBorder(props, 'v-list-item')
     const { densityClasses } = useDensity(props, 'v-list-item')
     const { dimensionStyles } = useDimension(props)
@@ -74,24 +83,27 @@ export default defineComponent({
           class={[
             'v-list-item',
             {
+              'v-list-item--active': props.active,
               'v-list-item--disabled': props.disabled,
               'v-list-item--link': isLink,
+              'v-list-item--text': props.text,
+              [`${props.activeClass}`]: props.active && props.activeClass,
             },
             themeClasses.value,
-            backgroundColorClasses.value,
+            colorClasses.value,
             borderClasses.value,
             densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,
           ]}
           style={[
-            backgroundColorStyles.value,
+            colorStyles.value,
             dimensionStyles.value,
           ]}
           tabindex={ isClickable ? 0 : undefined }
           v-ripple={ isClickable }
         >
-          { isClickable && (<div class="v-list-item__overlay" />) }
+          { (isClickable || props.active) && (<div class="v-list-item__overlay" />) }
 
           { hasPrepend && (
             slots.prepend

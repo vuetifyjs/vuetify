@@ -21,8 +21,8 @@
   $root: &
 
   align-self: center
-  color: $list-item-avatar-color
   transition: inherit
+  transition-property: height, width
 
   &--left
     margin-inline-end: $list-item-avatar-margin-end
@@ -70,8 +70,8 @@
 
 .v-list-item-subtitle
   -webkit-box-orient: vertical
-  color: $list-item-subtitle-color
   display: -webkit-box
+  opacity: $list-item-subtitle-opacity
   overflow: hidden
   padding: $list-item-subtitle-padding
   text-overflow: ellipsis
