@@ -44,7 +44,7 @@ export default defineComponent({
     prependAvatar: String,
     prependIcon: String,
     subtitle: String,
-    text: String,
+    contained: String,
     title: String,
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -58,7 +58,7 @@ export default defineComponent({
   setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
     const { colorClasses, colorStyles } = useColor(computed(() => {
-      const key = props.text || !props.active ? 'text' : 'background'
+      const key = props.contained && props.active ? 'background' : 'text'
       const color = (props.active && props.activeColor) || props.color
 
       return { [`${key}`]: color }
@@ -86,7 +86,7 @@ export default defineComponent({
               'v-list-item--active': props.active,
               'v-list-item--disabled': props.disabled,
               'v-list-item--link': isLink,
-              'v-list-item--text': props.text,
+              'v-list-item--contained': props.contained,
               [`${props.activeClass}`]: props.active && props.activeClass,
             },
             themeClasses.value,
