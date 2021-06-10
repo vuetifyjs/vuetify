@@ -97,7 +97,7 @@
 
               <v-spacer />
 
-              <div class="text-right caption text--secondary">
+              <div class="text-right text-caption text--secondary">
                 via {{ job.via }}
               </div>
             </div>

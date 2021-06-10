@@ -4,11 +4,11 @@
     max-width="400"
   >
     <v-card-title>
-      <h2 class="display-1">
+      <h2 class="text-h4">
         Shirt Blouse
       </h2>
       <v-spacer></v-spacer>
-      <span class="title">$44.50</span>
+      <span class="text-h6">$44.50</span>
     </v-card-title>
 
     <v-card-text>

@@ -38,7 +38,7 @@
         </div>
       </v-row>
 
-      <div class="my-4 subtitle-1">
+      <div class="my-4 text-subtitle-1">
         $ • Italian, Cafe
       </div>
 

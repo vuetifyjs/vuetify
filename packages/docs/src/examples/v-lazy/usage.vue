@@ -12,7 +12,7 @@
       class="text-center pa-2"
     >
       <v-responsive min-height="50vh"></v-responsive>
-      <div class="text-center body-2 mb-12">
+      <div class="text-center text-body-2 mb-12">
         The card will appear below:
       </div>
 

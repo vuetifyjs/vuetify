@@ -12,7 +12,7 @@
           >
             <v-app-bar-nav-icon color="white"></v-app-bar-nav-icon>
 
-            <v-toolbar-title class="title white--text pl-0">
+            <v-toolbar-title class="text-h6 white--text pl-0">
               Messages
             </v-toolbar-title>
 

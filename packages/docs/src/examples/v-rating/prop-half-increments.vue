@@ -3,7 +3,7 @@
     class="elevation-16 mx-auto"
     width="300"
   >
-    <v-card-title class="headline">
+    <v-card-title class="text-h5">
       Rate Our Framework
     </v-card-title>
     <v-card-text>
