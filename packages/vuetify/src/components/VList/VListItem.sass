@@ -85,6 +85,9 @@
 
   @include typography($list-item-subtitle-typography...)
 
+  .v-list--nav &
+    @include typography($list-item-nav-subtitle-typography...)
+
 .v-list-item-title
   hyphens: $list-item-title-hyphens
   overflow-wrap: $list-item-title-overflow-wrap
@@ -96,6 +99,9 @@
   word-wrap: $list-item-title-word-wrap
 
   @include typography($list-item-title-typography...)
+
+  .v-list--nav &
+    @include typography($list-item-nav-title-typography...)
 
 .v-list-item
   $root: &

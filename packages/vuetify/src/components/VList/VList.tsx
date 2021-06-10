@@ -28,6 +28,7 @@ export default defineComponent({
       type: String,
       default: 'one',
     },
+    nav: Boolean,
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
@@ -53,6 +54,7 @@ export default defineComponent({
             'v-list',
             {
               'v-list--disabled': props.disabled,
+              'v-list--nav': props.nav,
               [`v-list--${props.lines}-line`]: true,
             },
             themeClasses.value,
