@@ -29,6 +29,10 @@ export default defineComponent({
       default: 'one',
     },
     nav: Boolean,
+    subheader: {
+      type: [Boolean, String],
+      default: false,
+    },
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
@@ -55,6 +59,8 @@ export default defineComponent({
             {
               'v-list--disabled': props.disabled,
               'v-list--nav': props.nav,
+              'v-list--subheader': props.subheader,
+              'v-list--subheader-sticky': props.subheader === 'sticky',
               [`v-list--${props.lines}-line`]: true,
             },
             themeClasses.value,

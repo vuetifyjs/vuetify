@@ -4,8 +4,9 @@
 .v-list
   background: $list-background
   color: $list-color
-  position: relative
+  overflow: auto
   padding: $list-padding
+  position: relative
 
   @include border($list-border...)
   @include elevation($list-elevation)
@@ -22,6 +23,9 @@
     > [class*='v-list-']
       opacity: $list-disabled-opacity
 
+  &--subheader
+    padding-top: $list-subheader-padding-top
+
 .v-list-img
   border-radius: inherit
   display: flex
@@ -32,6 +36,38 @@
   top: 0
   width: 100%
   z-index: -1
+
+.v-list-subheader
+  $root: &
+
+  align-items: center
+  display: flex
+  font-size: $list-subheader-font-size
+  font-weight: $list-subheader-font-weight
+  line-height: $list-subheader-line-height
+  opacity: $list-subheader-opacity
+  padding-inline-end: $list-subheader-padding-end
+  padding-inline-start: $list-subheader-padding-start
+  min-height: $list-subheader-min-height
+  transition: $list-subheader-transition
+
+  @at-root
+    @include density('v-list', $list-density) using ($modifier)
+      #{$root}
+        min-height: $list-subheader-min-height + ($modifier * $list-subheader-min-height-multiplier)
+
+  &--inset
+    padding-inline-start: $list-subheader-inset-padding-start
+
+  .v-list--nav &
+    font-size: $list-nav-subheader-font-size
+
+  .v-list--subheader-sticky &
+    background: inherit
+    left: 0
+    position: sticky
+    top: 0
+    z-index: 1
 
 .v-list__overlay
   background-color: currentColor

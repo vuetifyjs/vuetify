@@ -1,4 +1,5 @@
 export { default as VList } from './VList'
+export { default as VListSubheader } from './VListSubheader'
 export { default as VListImg } from './VListImg'
 export { default as VListItem } from './VListItem'
 export { default as VListItemAvatar } from './VListItemAvatar'

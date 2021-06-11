@@ -11,6 +11,21 @@ $list-elevation: 0 !default;
 $list-padding: 8px 0 !default;
 $list-positions: absolute fixed !default;
 
+$list-nav-subheader-font-size: .75rem !default;
+
+$list-subheader-font-size: .875rem !default;
+$list-subheader-font-weight: 500 !default;
+$list-subheader-inset-margin: 56px !default;
+$list-subheader-inset-padding-start: 72px !default;
+$list-subheader-line-height: 1.375rem !default;
+$list-subheader-min-height: 48px !default;
+$list-subheader-opacity: var(--v-medium-emphasis-opacity) !default;
+$list-subheader-padding-end: 16px !default;
+$list-subheader-padding-start: 16px !default;
+$list-subheader-padding-top: 0 !default;
+$list-subheader-min-height-multiplier: 1 !default;
+$list-subheader-transition: 0.2s min-height $standard-easing !default;
+
 $list-item-min-height: 48px !default;
 $list-item-padding: 8px 16px !default;
 $list-item-transition: .2s $standard-easing !default;
