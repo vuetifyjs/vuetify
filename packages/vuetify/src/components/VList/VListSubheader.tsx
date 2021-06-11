@@ -28,8 +28,13 @@ export default defineComponent({
           textColorClasses.value,
         ]}
         style={{ textColorStyles }}
-        v-slots={ slots }
-      />
+      >
+        { slots.default && (
+          <div class="v-list-subheader__text">
+            { slots.default() }
+          </div>
+        ) }
+      </props.tag>
     )
   },
 })

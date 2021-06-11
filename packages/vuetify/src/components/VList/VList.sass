@@ -41,15 +41,18 @@
   $root: &
 
   align-items: center
+  background: inherit
   display: flex
   font-size: $list-subheader-font-size
   font-weight: $list-subheader-font-weight
   line-height: $list-subheader-line-height
-  opacity: $list-subheader-opacity
   padding-inline-end: $list-subheader-padding-end
   padding-inline-start: $list-subheader-padding-start
   min-height: $list-subheader-min-height
   transition: $list-subheader-transition
+
+  &__text
+    opacity: $list-subheader-text-opacity
 
   @at-root
     @include density('v-list', $list-density) using ($modifier)
