@@ -75,7 +75,6 @@ export default baseMixins.extend<options>().extend({
     } as any as PropValidator<string>,
     dense: Boolean,
     inactive: Boolean,
-    baseColor: String,
     link: Boolean,
     selectable: {
       type: Boolean,
@@ -104,7 +103,6 @@ export default baseMixins.extend<options>().extend({
         'v-list-item--selectable': this.selectable,
         'v-list-item--three-line': this.threeLine,
         'v-list-item--two-line': this.twoLine,
-        'v-list-item--has-base-color': !!this.baseColor,
         ...this.themeClasses,
       }
     },
@@ -186,6 +184,6 @@ export default baseMixins.extend<options>().extend({
       })
       : this.$slots.default
 
-    return h(tag, this.setTextColor(this.isActive ? this.color || this.baseColor : this.baseColor, data), children)
+    return h(tag, this.isActive ? this.setTextColor(this.color, data) : data, children)
   },
 })

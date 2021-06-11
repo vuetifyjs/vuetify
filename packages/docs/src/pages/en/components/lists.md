@@ -97,12 +97,6 @@ Items don't change when selected in `v-list` with **flat** property.
 
 <example file="v-list/prop-flat" />
 
-#### Color and Base Color
-
-You can change the default color using the **base-color** property and change the color when active using the **color** property.
-
-<example file="v-list/base-color" />
-
 #### Nav
 
 Lists can receive an alternative **nav** styling that reduces the width `v-list-item` takes up as well as adding a border radius.

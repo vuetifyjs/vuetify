@@ -1,6 +1,5 @@
 {
   "props": {
-    "baseColor": "Applies specified color to the control in **any** state",
     "color": "Applies specified color to the control when in an **active** state or **input-value** is **true** - it can be the name of material color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`)",
     "dense": "Lowers max height of list tiles",
     "disabled": "Disables the component",
