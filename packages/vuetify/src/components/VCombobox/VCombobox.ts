@@ -260,10 +260,5 @@ export default VAutocomplete.extend({
         VSelect.options.methods.selectItem.call(this, pastedItemText as any)
       }
     },
-    clearableCallback () {
-      this.editingIndex = -1
-
-      VAutocomplete.options.methods.clearableCallback.call(this)
-    },
   },
 })
