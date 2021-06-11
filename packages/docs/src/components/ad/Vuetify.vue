@@ -30,14 +30,14 @@
 
       <v-list-item-content class="py-1">
         <v-list-item-title
-          class="font-weight-medium subtitle-1 hidden-xs-only"
+          class="font-weight-medium text-subtitle-1 hidden-xs-only"
           v-text="current.title"
         />
 
         <div>
           <app-md
             v-if="description"
-            class="caption text--secondary"
+            class="text-caption text--secondary"
             v-text="description"
           />
         </div>
@@ -68,7 +68,6 @@
 
     props: {
       color: String,
-      slug: String,
     },
   }
 </script>

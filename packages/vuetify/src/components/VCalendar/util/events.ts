@@ -2,7 +2,6 @@ import {
   parseTimestamp,
   getDayIdentifier,
   getTimestampIdentifier,
-  OFFSET_TIME,
   isTimedless,
   updateHasTime,
 } from './timestamp'
@@ -37,9 +36,11 @@ export function parseEvent (
 }
 
 export function isEventOn (event: CalendarEventParsed, dayIdentifier: number): boolean {
-  return dayIdentifier >= event.startIdentifier &&
-    dayIdentifier <= event.endIdentifier &&
-    dayIdentifier * OFFSET_TIME !== event.endTimestampIdentifier
+  return dayIdentifier >= event.startIdentifier && dayIdentifier <= event.endIdentifier
+}
+
+export function isEventHiddenOn (event: CalendarEventParsed, day: CalendarTimestamp): boolean {
+  return event.end.time === '00:00' && event.end.date === day.date && event.start.date !== day.date
 }
 
 export function isEventStart (event: CalendarEventParsed, day: CalendarTimestamp, dayIdentifier: number, firstWeekday: number): boolean {

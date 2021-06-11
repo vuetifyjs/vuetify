@@ -41,7 +41,7 @@
       </v-tab-item>
       <v-tab-item>
         <v-card flat>
-          <v-card-title class="headline">
+          <v-card-title class="text-h5">
             An awesome title
           </v-card-title>
           <v-card-text>
@@ -61,7 +61,7 @@
       </v-tab-item>
       <v-tab-item>
         <v-card flat>
-          <v-card-title class="headline">
+          <v-card-title class="text-h5">
             An even better title
           </v-card-title>
           <v-card-text>

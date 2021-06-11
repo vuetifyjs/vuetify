@@ -1,6 +1,7 @@
 {
   "props": {
     "altLabels": "Places the labels beneath the step",
+    "flat": "Removes the stepper's elevation.",
     "nonLinear": "Allow user to jump to any step",
     "vertical": "Display steps vertically"
   },

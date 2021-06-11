@@ -128,7 +128,7 @@
       width="70%"
     >
       <v-card>
-        <v-card-title class="title">
+        <v-card-title class="text-h6">
           Terms
         </v-card-title>
         <v-card-text
@@ -154,7 +154,7 @@
       width="70%"
     >
       <v-card>
-        <v-card-title class="title">
+        <v-card-title class="text-h6">
           Conditions
         </v-card-title>
         <v-card-text

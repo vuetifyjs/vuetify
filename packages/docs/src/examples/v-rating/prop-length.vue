@@ -15,7 +15,7 @@
       large
     ></v-rating>
     <div>
-      <span class="caption text-uppercase">model:</span>
+      <span class="text-caption text-uppercase">model:</span>
       <span class="font-weight-bold">
         {{ rating }}
       </span>
