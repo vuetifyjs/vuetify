@@ -17,7 +17,7 @@
     width: 100%
 
     .v-timeline-item__body, .v-timeline-item__opposite
-      @include rtltr(padding-left, padding-right, calc((var(--v-timeline-dot-size) / 2) - 5px))
+      padding-inline-start: calc((var(--v-timeline-dot-size) / 2) - 5px)
 
     .v-timeline-item:nth-child(2n)
       .v-timeline-item__body
@@ -49,25 +49,21 @@
       .v-timeline-item__body
         grid-column: 1
         text-align: end
-
-        @include rtltr(padding-right, padding-left, $timeline-item-padding)
+        padding-inline-end: $timeline-item-padding
 
       .v-timeline-item__opposite
         grid-column: 3
-
-        @include rtltr(padding-left, padding-right, $timeline-item-padding)
+        padding-inline-start: $timeline-item-padding
 
     .v-timeline-item:nth-child(2n+1)
       .v-timeline-item__body
         grid-column: 3
-
-        @include rtltr(padding-left, padding-right, $timeline-item-padding)
+        padding-inline-start: $timeline-item-padding
 
       .v-timeline-item__opposite
         grid-column: 1
         text-align: end
-
-        @include rtltr(padding-right, padding-left, $timeline-item-padding)
+        padding-inline-end: $timeline-item-padding
 
 .v-timeline-item
   display: contents
@@ -87,12 +83,12 @@
 .v-timeline--inset-line
   .v-timeline-divider__line
     @include vertical(true)
-      height: calc(100% - var(--v-timeline-dot-size) - $timeline-inset-divider-line)
-      bottom: calc($timeline-inset-divider-line / 2)
+      height: calc(100% - var(--v-timeline-dot-size) - #{$timeline-inset-divider-line})
+      bottom: calc(#{$timeline-inset-divider-line / 2})
 
     @include horizontal(true)
-      width: calc(100% - var(--v-timeline-dot-size) - $timeline-inset-divider-line)
-      @include rtltr(right, left, calc($timeline-inset-divider-line / 2))
+      width: calc(100% - var(--v-timeline-dot-size) - #{$timeline-inset-divider-line})
+      inset-inline-end: calc(#{$timeline-inset-divider-line} / 2)
 
 .v-timeline:not(.v-timeline--inset-line)
   .v-timeline-item:first-child
@@ -103,8 +99,7 @@
 
       @include horizontal(true)
         width: calc(100% - (var(--v-timeline-dot-size) / 2))
-
-        @include rtltr(right, left, 0)
+        inset-inline-end: 0
 
 .v-timeline-divider
   position: relative
@@ -205,13 +200,11 @@
       .v-timeline-item__body
         grid-column: 3
         text-align: initial
-
-        @include rtltr(padding-left, padding-right, $timeline-item-padding)
+        padding-inline-start: $timeline-item-padding
 
       .v-timeline-item__opposite
         grid-column: 1
-
-        @include rtltr(padding-right, padding-left, $timeline-item-padding)
+        padding-inline-end: $timeline-item-padding
 
 .v-timeline.v-timeline--side-start
   .v-timeline-item
@@ -230,13 +223,11 @@
       .v-timeline-item__body
         grid-column: 1
         text-align: end
-
-        @include rtltr(padding-right, padding-left, $timeline-item-padding)
+        padding-inline-end: $timeline-item-padding
 
       .v-timeline-item__opposite
         grid-column: 3
-
-        @include rtltr(padding-left, padding-right, $timeline-item-padding)
+        padding-inline-start: $timeline-item-padding
 
 // Fill dot
 .v-timeline-divider--fill-dot
@@ -247,8 +238,4 @@
 .v-timeline--truncate-line-end
   .v-timeline-item:last-child
     .v-timeline-divider__line
-      @include horizontal(true)
-        width: calc(var(--v-timeline-dot-size) / 2)
-
-      @include vertical(true)
-        height: calc(var(--v-timeline-dot-size) / 2)
+      display: none
