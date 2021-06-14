@@ -59,7 +59,7 @@ export default Vue.extend({
             if (eventOptions.stop) {
               e.stopPropagation()
             }
-            this.$emit(event, getEvent(e))
+            this.$emit(event, getEvent(e), e)
           }
 
           return eventOptions.result
