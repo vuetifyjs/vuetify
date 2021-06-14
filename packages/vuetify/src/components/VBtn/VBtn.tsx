@@ -40,10 +40,7 @@ export default defineComponent({
     block: Boolean,
     stacked: Boolean,
 
-    color: {
-      type: [String, Boolean],
-      default: 'primary',
-    },
+    color: [String, Boolean],
     disabled: Boolean,
     ...makeBorderProps(),
     ...makeRoundedProps(),

@@ -2,7 +2,6 @@ import './VPagination.sass'
 
 // Types
 import type { ComponentPublicInstance } from 'vue'
-import type { Density } from '@/composables/density'
 
 // Components
 import { VBtn } from '../VBtn'
@@ -88,19 +87,16 @@ export default defineComponent({
       type: String,
       default: '$vuetify.pagination.ariaLabel.last',
     },
-    color: {
-      type: [String, Boolean],
-      default: 'primary',
-    },
+    color: [String, Boolean],
     ellipsis: {
       type: String,
       default: '...',
     },
     showFirstLastPage: Boolean,
     ...makeTagProps({ tag: 'nav' }),
-    ...makeElevationProps({ elevation: 1 }),
-    ...makeDensityProps({ density: 'comfortable' as Density }),
-    ...makeRoundedProps({ rounded: 'sm' }),
+    ...makeElevationProps(),
+    ...makeDensityProps(),
+    ...makeRoundedProps(),
     ...makeSizeProps(),
     ...makeBorderProps(),
   }),
@@ -193,7 +189,7 @@ export default defineComponent({
 
         if (typeof item === 'string') {
           return {
-            isSelected: false,
+            isActive: false,
             page: item,
             props: {
               ...sharedProps,
@@ -207,9 +203,9 @@ export default defineComponent({
             },
           }
         } else {
-          const isSelected = item === page.value
+          const isActive = item === page.value
           return {
-            isSelected,
+            isActive,
             page: n(item),
             props: {
               ...sharedProps,
@@ -220,10 +216,10 @@ export default defineComponent({
               elevation: props.elevation,
               outlined: props.outlined,
               border: props.border,
-              text: !isSelected,
-              color: isSelected ? props.color : false,
-              ariaCurrent: isSelected,
-              ariaLabel: t(isSelected ? props.currentPageAriaLabel : props.pageAriaLabel, index + 1),
+              text: !isActive,
+              color: isActive ? props.color : false,
+              ariaCurrent: isActive,
+              ariaLabel: t(isActive ? props.currentPageAriaLabel : props.pageAriaLabel, index + 1),
               onClick: (e: Event) => setValue(e, item),
             },
           }
@@ -329,7 +325,7 @@ export default defineComponent({
               class={[
                 'v-pagination__item',
                 {
-                  'v-pagination__item--selected': item.isSelected,
+                  'v-pagination__item--is-active': item.isActive,
                 },
               ]}
               data-test="v-pagination-item"

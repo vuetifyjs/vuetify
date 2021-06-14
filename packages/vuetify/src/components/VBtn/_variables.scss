@@ -17,6 +17,9 @@ $button-bottom-navigation-shift-top: 50% !default;
 $button-bottom-navigation-shift-transform: scale(.8) translateY(10px) !default;
 $button-bottom-navigation-text-transform: none !default;
 $button-bottom-navigation-transition-duration: .2s !default;
+$button-pagination-active-overlay-opacity: var(--v-border-opacity) !default;
+$button-pagination-border-radius: 0 !default;
+$button-pagination-elevation: 0 !default;
 $button-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $button-border-radius: $border-radius-root !default;
 $button-border-style: $border-style-root !default;
@@ -48,6 +51,7 @@ $button-stacked-width-ratio: 1 !default;
 $button-density: ('default': 0, 'comfortable': -2, 'compact': -3) !default;
 $button-stacked-density: ('default': 0, 'comfortable': -4, 'compact': -6) !default;
 $button-icon-density: ('default': 3, 'comfortable': 0, 'compact': -2) !default;
+$button-pagination-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 
 $button-border: () !default;
 $button-border: map-merge(
