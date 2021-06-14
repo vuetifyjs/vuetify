@@ -25,7 +25,7 @@
 
   @at-root
     +button-sizes()
-    +density('v-btn', 'height', $button-density)
+    +button-density('height', $button-density)
 
   +states('.v-btn__overlay')
 
@@ -35,7 +35,7 @@
     padding: 0
 
     @at-root &
-      +density('v-btn', ('width', 'height'), $button-icon-density)
+      +button-density(('width', 'height'), $button-icon-density)
 
   &--border
     +border($button-border-color, $button-border-style, $button-border-width)
@@ -88,7 +88,7 @@
 
     @at-root
       @include button-sizes($button-stacked-sizes, true)
-      @include density('v-btn', 'height', $button-stacked-density)
+      @include button-density('height', $button-stacked-density)
 
 .v-btn__overlay
   background-color: currentColor

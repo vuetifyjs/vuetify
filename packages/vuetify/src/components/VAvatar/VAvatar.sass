@@ -12,7 +12,7 @@
   vertical-align: $avatar-vertical-align
 
   @include avatar-sizes($avatar-sizes)
-  @include density('v-avatar', ('height', 'width'), $avatar-density)
+  @include avatar-density(('height', 'width'), $avatar-density)
   @include rounded($avatar-border-radius)
 
   > *
@@ -21,3 +21,13 @@
 
   &--rounded
     +rounded($avatar-rounded-border-radius)
+
+// VList
+.v-avatar
+  .v-list-item-avatar &
+    overflow: visible
+    height: inherit
+    width: inherit
+
+    > *
+      width: auto

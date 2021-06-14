@@ -58,6 +58,7 @@
       "images",
       "item-groups",
       "lazy",
+      "lists",
       "overlays",
       "sheets",
       "theme-providers"

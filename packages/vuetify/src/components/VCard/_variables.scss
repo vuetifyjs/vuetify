@@ -53,7 +53,7 @@ $card-title-header-padding: 0 !default;
 $card-title-hyphens: auto !default;
 $card-title-letter-spacing: map-deep-get($typography, 'h6', 'letter-spacing') !default;
 $card-title-line-height: map-deep-get($typography, 'h6', 'line-height') !default;
-$card-title-overflow-wrap: anywhere !default;
+$card-title-overflow-wrap: normal !default;
 $card-title-padding-top: 1rem !default;
 $card-title-padding: .5rem 1rem !default;
 $card-title-text-transform: none !default;
@@ -73,6 +73,8 @@ $card-title-densities: (
   'comfortable': $card-title-comfortable-line-height,
   'compact': $card-title-compact-line-height
 );
+
+$card-subtitle-densities: ('default': 0, 'comfortable': -1, 'compact': -2);
 
 $card-subtitle-densities: () !default;
 $card-subtitle-densities: (

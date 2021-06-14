@@ -18,3 +18,20 @@
     }
   }
 }
+
+@mixin button-density ($properties, $densities) {
+  @each $density, $multiplier in $densities {
+    $value: calc(var(--v-btn-height) + #{$multiplier * $spacer});
+
+    &.v-btn--density-#{$density} {
+      @if type-of($properties) == "list" {
+        @each $property in $properties {
+          #{$property}: $value;
+        }
+      }
+      @else {
+        #{$properties}: $value;
+      }
+    }
+  }
+}

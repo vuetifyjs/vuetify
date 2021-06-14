@@ -1,5 +1,5 @@
 // Components
-import { VListItemAvatar } from '..'
+import { VListItemMedia } from '..'
 
 // Composables
 import { createDefaults, VuetifyDefaultsSymbol } from '@/composables/defaults'
@@ -8,9 +8,9 @@ import { createDefaults, VuetifyDefaultsSymbol } from '@/composables/defaults'
 import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
 import { mount } from '@vue/test-utils'
 
-describe('VListItemAvatar', () => {
+describe('VListItemMedia', () => {
   function mountFunction (options = {}) {
-    return mount(VListItemAvatar, {
+    return mount(VListItemMedia, {
       global: {
         provide: {
           [VuetifyDefaultsSymbol as symbol]: createDefaults(),
