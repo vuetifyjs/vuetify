@@ -12,6 +12,7 @@
     outlined
     v-bind="$attrs"
     v-on="$listeners"
+    @click="onClick"
   >
     <span
       class="text-capitalize font-weight-regular"
@@ -21,5 +22,24 @@
 </template>
 
 <script>
-  export default { name: 'SponsorLink' }
+  // Utilities
+  import { get } from 'vuex-pathify'
+
+  export default {
+    name: 'SponsorLink',
+
+    computed: {
+      name: get('route/name'),
+    },
+
+    methods: {
+      onClick () {
+        this.$gtag.event('click', {
+          event_category: 'toolbar',
+          event_label: 'sponsors',
+          value: this.name,
+        })
+      },
+    },
+  }
 </script>

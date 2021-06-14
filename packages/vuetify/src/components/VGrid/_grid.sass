@@ -1,3 +1,4 @@
+@use 'sass:math'
 @import '../../styles/styles.sass'
 
 .container
@@ -27,20 +28,20 @@
       &-#{$size}
         .layout
           .flex
-            padding: $gutter / 2
+            padding: math.div($gutter, 2)
 
         .layout:only-child
-          margin: -$gutter / 2
+          margin: math.div(-$gutter, 2)
 
         .layout:not(:only-child)
-          margin: auto (-$gutter / 2)
+          margin: auto math.div(-$gutter, 2)
 
         *:not(:only-child)
           .layout:first-child
-            margin-top: -$gutter / 2
+            margin-top: math.div(-$gutter, 2)
 
           .layout:last-child
-            margin-bottom: -$gutter / 2
+            margin-bottom: math.div(-$gutter, 2)
 
 .layout
   display: flex
@@ -73,9 +74,9 @@
     $n: $grid-columns
     @while $n > 0
       .flex.#{$size}#{$n}
-        flex-basis: $n / $grid-columns * 100%
+        flex-basis: math.div($n, $grid-columns) * 100%
         flex-grow: 0
-        max-width: $n / $grid-columns * 100%
+        max-width: math.div($n, $grid-columns) * 100%
 
       .flex.order-#{$size}#{$n}
         order: $n
@@ -87,9 +88,9 @@
       .flex.offset-#{$size}#{$m}
         // Offsets can only ever work in row layouts
         +ltr()
-          margin-left: $m / $grid-columns * 100%
+          margin-left: math.div($m, $grid-columns) * 100%
         +rtl()
-          margin-right: $m / $grid-columns * 100%
+          margin-right: math.div($m, $grid-columns) * 100%
 
       $m: $m - 1
 

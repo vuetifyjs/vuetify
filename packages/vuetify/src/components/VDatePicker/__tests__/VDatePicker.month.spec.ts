@@ -47,7 +47,7 @@ describe('VDatePicker.ts', () => {
     })
 
     wrapper.setData({
-      activePicker: 'YEAR',
+      internalActivePicker: 'YEAR',
     })
 
     const input = jest.fn()
@@ -96,7 +96,7 @@ describe('VDatePicker.ts', () => {
     })
 
     wrapper.setData({
-      activePicker: 'YEAR',
+      internalActivePicker: 'YEAR',
     })
 
     wrapper.vm.$on('input', cb)
@@ -127,7 +127,7 @@ describe('VDatePicker.ts', () => {
       },
     })
 
-    wrapper.findAll('.v-date-picker-table--month').at(0).trigger('wheel')
+    wrapper.findAll('.v-date-picker-table--month').at(0).trigger('wheel', { deltaY: 1 })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.tableDate).toBe('2014')
   })
@@ -220,7 +220,7 @@ describe('VDatePicker.ts', () => {
     const button = wrapper.findAll('.v-date-picker-header__value button').at(0)
 
     button.trigger('click')
-    expect(wrapper.vm.activePicker).toBe('YEAR')
+    expect(wrapper.vm.internalActivePicker).toBe('YEAR')
   })
 
   it('should select year', async () => {
@@ -232,11 +232,11 @@ describe('VDatePicker.ts', () => {
     })
 
     wrapper.setData({
-      activePicker: 'YEAR',
+      internalActivePicker: 'YEAR',
     })
 
     wrapper.findAll('.v-date-picker-years li.active + li').at(0).trigger('click')
-    expect(wrapper.vm.activePicker).toBe('MONTH')
+    expect(wrapper.vm.internalActivePicker).toBe('MONTH')
     expect(wrapper.vm.tableDate).toBe('2004')
   })
 

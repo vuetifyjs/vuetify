@@ -20,7 +20,7 @@
         <v-btn icon>
           <v-icon>mdi-menu</v-icon>
         </v-btn>
-        <h3 class="title font-weight-light text-center grow">
+        <h3 class="text-h6 font-weight-light text-center grow">
           Timeline
         </h3>
         <v-avatar>
@@ -33,9 +33,9 @@
       >
         <v-container class="fill-height">
           <v-row align="center">
-            <strong class="display-4 font-weight-regular mr-6">8</strong>
+            <strong class="text-h1 font-weight-regular mr-6">8</strong>
             <v-row justify="end">
-              <div class="headline font-weight-light">
+              <div class="text-h5 font-weight-light">
                 Monday
               </div>
               <div class="text-uppercase font-weight-light">
@@ -61,7 +61,7 @@
             </v-col>
             <v-col>
               <strong>New Icon</strong>
-              <div class="caption">
+              <div class="text-caption">
                 Mobile App
               </div>
             </v-col>
@@ -78,7 +78,7 @@
             </v-col>
             <v-col>
               <strong>Design Stand Up</strong>
-              <div class="caption mb-2">
+              <div class="text-caption mb-2">
                 Hangouts
               </div>
               <v-avatar>
@@ -124,7 +124,7 @@
             </v-col>
             <v-col>
               <strong>Finish Home Screen</strong>
-              <div class="caption">
+              <div class="text-caption">
                 Web App
               </div>
             </v-col>

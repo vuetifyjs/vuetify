@@ -23,7 +23,7 @@
       >
         <v-col class="text-left">
           <span
-            class="display-3 font-weight-light"
+            class="text-h2 font-weight-light"
             v-text="bpm"
           ></span>
           <span class="subheading font-weight-light mr-1">BPM</span>

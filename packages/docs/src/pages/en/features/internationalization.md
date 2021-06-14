@@ -28,6 +28,7 @@ Currently Vuetify provides translations in the following languages:
 - **ca** - Catalan (català)
 - **ckb** - Central Kurdish (کوردی)
 - **cs** - Czech (čeština)
+- **da** - Danish (Dansk)
 - **de** - German (Deutsch)
 - **el** - Greek (Ελληνικά)
 - **en** - English
@@ -61,7 +62,7 @@ Currently Vuetify provides translations in the following languages:
 - **uk** - Ukrainian (Українська)
 - **vi** - Vietnamese (Tiếng Việt)
 - **zhHans** - Chinese (中文)
-- **zhHant** - Chinese (中文)
+- **zhHant** - Chinese (正體中文)
 
 ```js
 // src/plugins/vuetify.js
