@@ -99,7 +99,7 @@ export default mixins(
       isSelected: boolean,
       isCurrent: boolean,
       isFirst: boolean,
-      isLast: boolean
+      isLast: boolean,
     ) {
       return {
         'v-size--default': !isFloating,
