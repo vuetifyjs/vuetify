@@ -35,8 +35,6 @@ interface options extends ExtractVue<typeof baseMixins> {
   isInList: boolean
   isInMenu: boolean
   isInNav: boolean
-  genAttrs (): object
-  click (e: MouseEvent | KeyboardEvent): void
 }
 
 /* @vue/component */
