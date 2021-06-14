@@ -136,7 +136,7 @@ export default baseMixins.extend({
       return {
         opacity: backgroundOpacity,
         [this.isReversed ? 'right' : 'left']: convertToUnit(this.normalizedValue, '%'),
-        width: convertToUnit(this.normalizedBuffer - this.normalizedValue, '%'),
+        width: convertToUnit(Math.max(0, this.normalizedBuffer - this.normalizedValue), '%'),
       }
     },
     classes (): object {

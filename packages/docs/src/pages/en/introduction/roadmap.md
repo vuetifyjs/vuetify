@@ -26,7 +26,6 @@ The following releases are currently under development:
 - **Alpha:** Q1 2021
 - **Overview:**
   The next version of Vuetify is being built from the ground up to support Vue 3 using the [composition api](https://v3.vuejs.org/guide/composition-api-introduction.html).
-
 - **Objectives:**
   - Rebuild the framework using Vue 3 and the [composition api](https://vue-composition-api-rfc.netlify.com/)
   - Improve framework performance
@@ -62,6 +61,17 @@ The following versions have continued maintenance for backwards compatible fixes
 ## Released
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
+
+### v2.5 (Avalon)
+
+- **Released:** May 2021
+- **Notes:**: [v2.5 Release](https://github.com/vuetifyjs/vuetify/releases/tag/v2.5.0)
+- **Overview:**
+  The v2.5 release adds a multitude of new functionality to [v-data-table](/components/data-tables/) and [v-text-field](/components/text-fields/), as well as bug fixes for the [click-outside](/directives/click-outside/) directive, [v-carousel](/components/carousels/) component, and more.
+- **Objectives:**
+  - Expand functionality of `v-data-table`
+  - Quality of life improvements
+  - General bug fixes
 
 ### v2.4 (Endurance)
 

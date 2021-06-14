@@ -36,7 +36,7 @@
                 v-if="active"
                 max-width="350"
               >
-                <div class="d-flex justify-space-between caption">
+                <div class="d-flex justify-space-between text-caption">
                   <div>
                     <div class="grey--text mb-2">
                       Font

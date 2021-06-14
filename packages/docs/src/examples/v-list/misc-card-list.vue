@@ -38,7 +38,7 @@
         <v-spacer></v-spacer>
 
         <v-card-title class="white--text pl-12 pt-12">
-          <div class="display-1 pl-12 pt-12">
+          <div class="text-h4 pl-12 pt-12">
             Ali Conners
           </div>
         </v-card-title>

@@ -199,7 +199,7 @@ export default mixins(
       if (value) selection[key] = item
       else delete selection[key]
 
-      const index = this.selectableItems.findIndex(x => x.name === item.name)
+      const index = this.selectableItems.findIndex(x => getObjectValueByPath(x, this.itemKey) === key)
       if (this.lastEntry === -1) this.lastEntry = index
       else if (this.shiftKeyDown && !this.singleSelect && emit) this.multipleSelect(value, emit, selection, index)
       this.lastEntry = index

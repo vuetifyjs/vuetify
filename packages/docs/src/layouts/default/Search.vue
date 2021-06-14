@@ -154,6 +154,11 @@
           group.items = groupItems(group.items, ['hierarchy.lvl1'])
         })
 
+        const uiIndex = groups.findIndex(val => val.name === 'UI Components')
+        if (uiIndex > 0) {
+          groups.unshift(groups.splice(uiIndex, 1)[0])
+        }
+
         return groups
       },
       resetSearch () {

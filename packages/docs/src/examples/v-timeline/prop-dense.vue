@@ -6,7 +6,7 @@
     <v-card-title
       class="blue-grey white--text"
     >
-      <span class="title">Logs</span>
+      <span class="text-h6">Logs</span>
       <v-spacer></v-spacer>
       <v-btn
         :outlined="interval == null"

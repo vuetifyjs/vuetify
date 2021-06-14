@@ -25,7 +25,7 @@
               ></v-icon>
 
               <div
-                class="caption"
+                class="text-caption"
                 v-text="bp"
               ></div>
             </div>
