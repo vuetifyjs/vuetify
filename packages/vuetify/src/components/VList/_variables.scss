@@ -73,7 +73,7 @@ $list-item-title-header-padding: 0 !default;
 $list-item-title-hyphens: auto !default;
 $list-item-title-letter-spacing: map-deep-get($typography, 'subtitle-1', 'letter-spacing') !default;
 $list-item-title-line-height: map-deep-get($typography, 'body-1', 'line-height') !default;
-$list-item-title-overflow-wrap: anywhere !default;
+$list-item-title-overflow-wrap: normal !default;
 $list-item-title-padding: 0 !default;
 $list-item-title-text-overflow: ellipsis;
 $list-item-title-text-transform: none !default;
