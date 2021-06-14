@@ -145,7 +145,7 @@ export default mixins(
           isSelected,
           isCurrent,
           isFirst,
-          isLast
+          isLast,
         ),
         attrs: {
           type: 'button',
