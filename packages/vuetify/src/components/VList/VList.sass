@@ -53,6 +53,9 @@
 
   &__text
     opacity: $list-subheader-text-opacity
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
 
   @at-root
     @include density('v-list', $list-density) using ($modifier)
