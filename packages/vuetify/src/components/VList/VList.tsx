@@ -3,6 +3,7 @@ import './VList.sass'
 
 // Components
 // import { VListItem } from '.'
+import { VListSubheader } from './'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -52,6 +53,8 @@ export default defineComponent({
     const { roundedClasses } = useRounded(props, 'v-list')
 
     return () => {
+      const hasHeader = typeof props.subheader === 'string' || slots.subheader
+
       return (
         <props.tag
           class={[
@@ -75,6 +78,12 @@ export default defineComponent({
             dimensionStyles.value,
           ]}
         >
+          { hasHeader && (
+            slots.subheader
+              ? slots.subheader()
+              : <VListSubheader>{ props.subheader }</VListSubheader>
+          ) }
+
           { slots.default?.() }
         </props.tag>
       )
