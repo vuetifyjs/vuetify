@@ -2,9 +2,15 @@
 @import './index'
 
 .v-banner
+  $root: &
+
+  background: $banner-background
+  display: flex
+  flex-wrap: wrap
   font-size: $banner-font-size
   padding-bottom: $banner-padding-bottom
-  padding-top: $banner-padding-top
+  padding-inline-end: $banner-padding-end
+  padding-inline-start: $banner-padding-start
   position: relative
   width: $banner-width
 
@@ -14,126 +20,90 @@
   @include rounded($banner-border-radius)
   @include theme($banner-theme...)
 
-  @include ltr()
-    padding-left: $banner-padding-start
-    padding-right: $banner-padding-end
+  &--border
+    border-width: $banner-border-thin-width
 
-  @include rtl()
-    padding-right: $banner-padding-start
-    padding-left: $banner-padding-end
-
-  &--has-thumbnail
-    @include ltr()
-      padding-left: $banner-thumbnail-padding-start
-
-
-    @include rtl()
-      padding-right: $banner-thumbnail-padding-start
-
-    &.v-banner--is-mobile
-      padding-top: $banner-mobile-padding-top
+  &--is-mobile
+    align-items: center
+    padding-inline-end: $banner-mobile-padding-end
+    padding-inline-start: $banner-mobile-padding-start
+    max-width: $banner-mobile-max-width
 
   &--rounded
     @include rounded($banner-rounded-border-radius)
 
-  &--single-line
-    padding-top: $banner-single-line-padding-top
+  @at-root
+    @include density('v-banner', $banner-density) using ($modifier)
+      &.v-banner--one-line
+        padding-top: $banner-padding-top + $modifier
 
-    &.v-banner--is-mobile
-      padding-top: $banner-mobile-single-line-padding-top
+      &.v-banner--two-line
+        padding-top: $banner-two-line-padding-top + $modifier
+
+      &.v-banner--three-line
+        padding-top: $banner-three-line-padding-top + $modifier
 
   &--sticky
     top: $banner-sticky-top
 
-.v-banner__actions
+.v-banner-actions
   align-items: flex-end
   display: flex
-  flex: 1 1 auto
+  flex: 0 1
   justify-content: flex-end
 
-  @include ltr()
-    margin-left: $banner-actions-margin-start
-
-  @include rtl()
-    margin-right: $banner-actions-margin-start
-
   .v-banner--is-mobile &
-    flex-grow: 1
+    flex: 1 0
 
-    @include ltr()
-      margin-left: $banner-mobile-single-line-actions-margin-start
-
-    @include rtl()
-      margin-right: $banner-mobile-single-line-actions-margin-start
-
-.v-banner__avatar
-  border-radius: inherit
-  height: inherit
-  width: inherit
-
-.v-banner__content
-  align-items: center
+.v-banner-content
   display: flex
-  flex: 1 1 auto
-  line-height: $banner-content-line-height
+  flex: 1 1
   min-width: 0
-  overflow: visible
-  padding-bottom: $banner-content-padding-bottom
+  padding-inline-end: $banner-content-padding-end
 
   .v-banner--is-mobile &
-    padding-bottom: $banner-mobile-content-padding-bottom
+    flex: 1 1 auto
+    padding-inline-end: $banner-mobile-content-padding-end
 
-  .v-banner--single-line &
-    padding-bottom: $banner-single-line-content-padding-bottom
-
-.v-banner__icon
-  align-items: center
-  background-color: $banner-thumbnail-icon-background-color
-  border-radius: inherit
-  color: $banner-thumbnail-icon-color
-  display: inline-flex
-  font-size: $banner-thumbnail-icon-font-size
-  height: inherit
-  justify-content: center
-  width: inherit
-
-.v-banner__sizer
-  display: flex
-  flex: 1 1 auto
-  margin: 0 auto
-  max-width: $banner-sizer-max-width
-
-  .v-banner--is-mobile &
-    flex-wrap: wrap
-    max-width: $banner-mobile-sizer-max-width
-
-  .v-banner--single-line &
-    flex-wrap: nowrap
-
-.v-banner__text
-  .v-banner--single-line &
-    overflow: hidden
-    text-overflow: ellipsis
-    white-space: nowrap
-
-.v-banner__thumbnail
+.v-banner-avatar
   align-self: flex-start
-  border-radius: $banner-thumbnail-border-radius
-  flex: 0 0 auto
-  height: $banner-thumbnail-height
-  width: $banner-thumbnail-width
+  border-radius: $banner-avatar-border-radius
+  margin-bottom: $banner-avatar-margin-bottom
+  margin-inline-end: $banner-avatar-margin-end
+  margin-inline-start: $banner-avatar-margin-start
+  position: relative
 
-  @include ltr ()
-    margin-left: $banner-thumbnail-margin-start
-    margin-right: $banner-thumbnail-margin-end
-
-  @include rtl ()
-    margin-right: $banner-thumbnail-margin-start
-    margin-left: $banner-thumbnail-margin-end
+  &::after
+    background: currentColor
+    border-radius: inherit
+    bottom: 0
+    content: ''
+    left: 0
+    opacity: $banner-avatar-after-opacity
+    position: absolute
+    right: 0
+    top: 0
 
   .v-banner--is-mobile &
-    @include ltr()
-      margin-right: $banner-mobile-thumbnail-padding-start
+    margin-inline-end: $banner-mobile-avatar-margin-end
 
-    @include rtl()
-      margin-left: $banner-mobile-thumbnail-padding-start
+  .v-banner--one-line &
+    align-self: center
+    margin-bottom: $banner-avatar-one-line-margin-bottom
+
+.v-banner-text
+  -webkit-box-orient: vertical
+  align-self: flex-start
+  color: $banner-text-color
+  display: -webkit-box
+  line-height: $banner-text-line-height
+  overflow: hidden
+
+  .v-banner--one-line &
+    align-self: center
+
+  .v-banner--two-line &
+    -webkit-line-clamp: 2
+
+  .v-banner--three-line &
+    -webkit-line-clamp: 3

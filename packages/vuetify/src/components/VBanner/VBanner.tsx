@@ -1,6 +1,10 @@
 // Styles
 import './VBanner.sass'
 
+// Components
+import { VAvatar } from '@/components/VAvatar'
+import { VBannerActions, VBannerAvatar, VBannerContent, VBannerText } from './'
+
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
@@ -9,9 +13,11 @@ import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeDensityProps, useDensity } from '@/composables/density'
+import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { defineComponent } from 'vue'
+import { defineComponent, toRef } from 'vue'
 import { makeProps } from '@/util'
 
 export default defineComponent({
@@ -19,11 +25,17 @@ export default defineComponent({
 
   props: makeProps({
     avatar: String,
+    color: String,
     icon: String,
     mobile: Boolean,
-    singleLine: Boolean,
+    lines: {
+      type: String,
+      default: 'one',
+    },
     sticky: Boolean,
+    text: String,
     ...makeBorderProps(),
+    ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makePositionProps(),
@@ -35,53 +47,68 @@ export default defineComponent({
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-banner')
+    const { densityClasses } = useDensity(props, 'v-banner')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-banner')
     const { roundedClasses } = useRounded(props, 'v-banner')
+    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
 
     return () => {
-      const hasThumbnail = (!!props.avatar || !!props.icon || !!slots.thumbnail)
+      const hasAvatar = !!(props.avatar || props.icon || slots.avatar || slots.icon)
+      const hasText = !!(props.text || slots.text)
+      const hasContent = hasAvatar || hasText || slots.default
 
       return (
         <props.tag
           class={[
             'v-banner',
             {
-              'v-banner--has-thumbnail': hasThumbnail,
+              // 'v-banner--has-thumbnail': hasContent,
               'v-banner--is-mobile': props.mobile,
-              'v-banner--single-line': props.singleLine,
               'v-banner--sticky': props.sticky,
+              [`v-banner--${props.lines}-line`]: true,
             },
-            themeClasses.value,
             borderClasses.value,
-            roundedClasses.value,
+            densityClasses.value,
             elevationClasses.value,
             positionClasses.value,
+            roundedClasses.value,
+            textColorClasses.value,
+            themeClasses.value,
           ]}
           style={[
             dimensionStyles.value,
             positionStyles.value,
+            textColorStyles.value,
           ]}
           role="banner"
         >
-          <div class="v-banner__sizer">
-            <div class="v-banner__content">
-              { hasThumbnail && (
-                <div class="v-banner__thumbnail">
-                  { slots.thumbnail?.() }
-                  { props.avatar && (
-                    <img class="v-banner__avatar" src={ props.avatar } alt=""></img>
-                  )}
-                  { props.icon && <i class="v-banner__icon">{ props.icon }</i> }
-                </div>
-              )}
-              <div class="v-banner__text">{ slots.default?.() }</div>
-            </div>
-            { slots.actions && (
-              <div class="v-banner__actions">{ slots.actions?.() }</div>
-            )}
-          </div>
+          { hasContent && (
+            <VBannerContent>
+              { hasAvatar && (
+                <VBannerAvatar>
+                  <VAvatar
+                    density={ props.density }
+                    icon={ props.icon }
+                    image={ props.avatar }
+                  />
+                </VBannerAvatar>
+              ) }
+
+              { hasText && (
+                <VBannerText>
+                  { slots.text ? slots.text() : props.text }
+                </VBannerText>
+              ) }
+
+              { slots.default?.() }
+            </VBannerContent>
+          ) }
+
+          { slots.actions && (
+            <VBannerActions v-slots={{ default: slots.actions }} />
+          ) }
         </props.tag>
       )
     }

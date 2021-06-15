@@ -1,45 +1,41 @@
 // Defaults
-$banner-actions-margin-start: 90px !default;
-$banner-background: rgb(var(--v-theme-surface)) !default;
+$banner-avatar-after-opacity: var(--v-border-opacity) !default;
+$banner-avatar-after-opacity: var(--v-border-opacity) !default;
+$banner-avatar-border-radius: map-get($rounded, 'circle') !default;
+$banner-avatar-margin-bottom: 12px !default;
+$banner-avatar-margin-end: 24px !default;
+$banner-avatar-margin-start: 0 !default;
+$banner-avatar-one-line-margin-bottom: 0 !default;
+$banner-background: rgb(var(--v-theme-background)) !default;
 $banner-color: rgb(var(--v-theme-on-surface)) !default;
 $banner-border-color: $border-color-root !default;
 $banner-border-radius: map-get($rounded, 0) !default;
 $banner-border-style: $border-style-root !default;
 $banner-border-thin-width: thin !default;
 $banner-border-width: 0 0 thin 0 !default;
-$banner-content-line-height: 1.25rem !default;
-$banner-content-padding-bottom: 8px !default;
+$banner-content-padding-end: 90px !default;
+$banner-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 $banner-elevation: 0 !default;
 $banner-font-size: map-deep-get($typography, 'body-2', 'size') !default;
-$banner-line-height: 20px !default;
 $banner-padding-bottom: 8px !default;
 $banner-padding-end: 8px !default;
 $banner-padding-start: 24px !default;
-$banner-padding-top: 16px !default;
+$banner-padding-top: 10px !default;
 $banner-positions: absolute fixed sticky !default;
 $banner-rounded-border-radius: $border-radius-root !default;
-$banner-single-line-content-padding-bottom: 0 !default;
-$banner-single-line-padding-top: 8px !default;
-$banner-sizer-max-width: 720px !default;
 $banner-sticky-top: 0 !default;
-$banner-thumbnail-border-radius: map-get($rounded, 'circle') !default;
-$banner-thumbnail-height: 40px !default;
-$banner-thumbnail-icon-background-color: rgb(var(--v-theme-primary)) !default;
-$banner-thumbnail-icon-color: rgb(var(--v-theme-on-primary)) !default;
-$banner-thumbnail-icon-font-size: 28px !default;
-$banner-thumbnail-margin-end: 24px !default;
-$banner-thumbnail-margin-start: 0 !default;
-$banner-thumbnail-padding-start: 16px !default;
-$banner-thumbnail-width: $banner-thumbnail-height !default;
+$banner-text-color: rgb(var(--v-theme-on-surface)) !default;
+$banner-text-line-height: map-deep-get($typography, 'subtitle-2', 'line-height') !default;
+$banner-two-line-padding-top: 24px !default;
+$banner-three-line-padding-top: 24px !default;
 $banner-width: 100% !default;
 
 // Mobile
-$banner-mobile-content-padding-bottom: 12px !default;
-$banner-mobile-padding-top: 24px !default;
-$banner-mobile-single-line-actions-margin-start: 36px !default;
-$banner-mobile-single-line-padding-top: 10px !default;
-$banner-mobile-sizer-max-width: 360px !default;
-$banner-mobile-thumbnail-padding-start: 16px !default;
+$banner-mobile-avatar-margin-end: 16px !default;
+$banner-mobile-content-padding-end: 8px !default;
+$banner-mobile-max-width: 360px !default;
+$banner-mobile-padding-end: 8px !default;
+$banner-mobile-padding-start: 16px !default;
 
 $banner-border: (
   $banner-border-color,
