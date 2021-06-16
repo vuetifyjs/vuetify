@@ -13,6 +13,7 @@ const DataTableHeader = {
   'divider?': 'boolean',
   'class?': 'string | string[]',
   'cellClass?': 'string | string[]',
+  'headerCell?': 'boolean',
   'width?': 'string | number',
   'filter?': '(value: any, search: string, item: any) => boolean',
   'sort?': '(a: any, b: any) => number',
