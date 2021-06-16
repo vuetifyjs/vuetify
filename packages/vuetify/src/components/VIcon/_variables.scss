@@ -1,9 +1,7 @@
-@use 'sass:math';
-
 // Defaults
 $icon-btn-bottom-navigation-font-size: 24px !default;
 $icon-btn-size: 1em !default;
-$icon-btn-font-size: math.div(18, 14) * $icon-btn-size !default;
+$icon-btn-font-size: 18/4 * $icon-btn-size !default;
 $icon-btn-height: $icon-btn-size !default;
 $icon-btn-width: $icon-btn-size !default;
 $icon-btn-margin-start-multiplier: -9 !default;

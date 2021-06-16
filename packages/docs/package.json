@@ -42,7 +42,7 @@
     "vue-i18n": "^8.17.7",
     "vue-instantsearch": "^3.4.3",
     "vue-router": "^3.1.6",
-    "vuetify": "npm:vuetify@^2.4.0",
+    "vuetify": "npm:vuetify@^2.5.0",
     "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {

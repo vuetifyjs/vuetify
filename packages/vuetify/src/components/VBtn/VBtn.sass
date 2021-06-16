@@ -1,5 +1,4 @@
 // Imports
-@use 'sass:math'
 @import ./index
 
 .v-btn
@@ -80,7 +79,7 @@
       .v-btn__overlay
         // This is multiplied by the text opacity,
         // so we need to divide it to get the desired value
-        opacity: math.div($button-disabled-overlay, $button-disabled-opacity)
+        opacity: $button-disabled-overlay / $button-disabled-opacity
 
   &--stacked
     flex-direction: column
@@ -168,5 +167,5 @@
       @include ltr()
         margin-left: $button-card-actions-margin
 
-      @linclude rtl()
+      @include rtl()
         margin-right: $button-card-actions-margin

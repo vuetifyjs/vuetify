@@ -62,7 +62,7 @@
     "jest-serializer-html": "^7.0.0",
     "lerna": "^3.16.2",
     "moment": "^2.27.0",
-    "sass": "^1.34.0",
+    "sass": "~1.32.13",
     "sass-loader": "^11.1.0",
     "semver": "^6.2.0",
     "shelljs": "^0.8.4",
