@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-toolbar
-      color="cyan"
+      color="white"
       dark
       flat
     >
@@ -23,7 +23,7 @@
         <v-tabs
           v-model="model"
           centered
-          slider-color="yellow"
+          slider-color="blue"
         >
           <v-tab
             v-for="i in 3"
