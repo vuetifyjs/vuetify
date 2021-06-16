@@ -2,19 +2,15 @@
 import { VFooter } from '..'
 
 // Utilities
-import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
+import { createVuetify } from '@/framework'
 import { mount } from '@vue/test-utils'
-import { VuetifySymbol } from '@/framework'
 
 describe('VFooter', () => {
+  const vuetify = createVuetify()
+
   function mountFunction (options = {}) {
     return mount(VFooter, {
-      global: {
-        provide: {
-          [VuetifySymbol as symbol]: { defaults: { global: {} } },
-          [VuetifyThemeSymbol as symbol]: createTheme(),
-        },
-      },
+      global: { plugins: [vuetify] },
       ...options,
     })
   }

@@ -1,8 +1,8 @@
-/// <reference types="../../../../types/cypress" />
+/// <reference types="../../../types/cypress" />
 
 import { CenteredGrid } from '@/../cypress/templates'
 import { VBtn } from '@/components'
-import { VThemeProvider } from '../'
+import { VThemeProvider } from '.'
 
 describe('VThemeProvider', () => {
   it('should use provided theme', () => {

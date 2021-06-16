@@ -1,23 +1,17 @@
 // Components
 import { VListItem } from '..'
 
-// Composables
-import { createDefaults, VuetifyDefaultsSymbol } from '@/composables/defaults'
-
 // Utilities
-import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
+import { createVuetify } from '@/framework'
 import { mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
 
 describe('VListItem', () => {
+  const vuetify = createVuetify()
+
   function mountFunction (options = {}) {
     return mount(VListItem, {
-      global: {
-        provide: {
-          [VuetifyDefaultsSymbol as symbol]: createDefaults(),
-          [VuetifyThemeSymbol as symbol]: createTheme(),
-        },
-      },
+      global: { plugins: [vuetify] },
       ...options,
     })
   }

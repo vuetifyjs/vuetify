@@ -2,20 +2,16 @@
 import { VLazy } from '..'
 
 // Utilities
-import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
+import { createVuetify } from '@/framework'
 import { mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
-import { VuetifySymbol } from '@/framework'
 
 describe('VLazy', () => {
+  const vuetify = createVuetify()
+
   function mountFunction (options = {}) {
     return mount(VLazy, {
-      global: {
-        provide: {
-          [VuetifySymbol as symbol]: { defaults: { global: {} } },
-          [VuetifyThemeSymbol as symbol]: createTheme(),
-        },
-      },
+      global: { plugins: [vuetify] },
       ...options,
     })
   }

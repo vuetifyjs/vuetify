@@ -2,28 +2,20 @@
 import VContainer from '../VContainer'
 
 // Utilities
+import { createVuetify } from '@/framework'
 import { mount } from '@vue/test-utils'
-import * as framework from '@/framework'
-
-function mountFunction (template: string) {
-  return mount({
-    components: { VContainer },
-    template,
-  })
-}
 
 describe('VContainer', () => {
-  beforeEach(() => {
-    jest.spyOn(framework, 'useVuetify').mockReturnValue({
-      defaults: { global: {} },
+  const vuetify = createVuetify()
+
+  function mountFunction (template: string) {
+    return mount(VContainer, {
+      global: { plugins: [vuetify] },
     })
-  })
-  afterEach(() => {
-    jest.spyOn(framework, 'useVuetify').mockRestore()
-  })
+  }
 
   it('should work', () => {
-    const wrapper = mountFunction(`<VContainer />`)
+    const wrapper = mountFunction()
 
     expect(wrapper.html()).toBe('<div class="v-container"></div>')
   })

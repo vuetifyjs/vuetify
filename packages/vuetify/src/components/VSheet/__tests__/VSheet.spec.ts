@@ -2,19 +2,15 @@
 import { VSheet } from '..'
 
 // Utilities
-import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
+import { createVuetify } from '@/framework'
 import { mount } from '@vue/test-utils'
-import { VuetifySymbol } from '@/framework'
 
 describe('VSheet', () => {
+  const vuetify = createVuetify()
+
   function mountFunction (options = {}) {
     return mount(VSheet, {
-      global: {
-        provide: {
-          [VuetifySymbol as symbol]: { defaults: { global: {} } },
-          [VuetifyThemeSymbol as symbol]: createTheme(),
-        },
-      },
+      global: { plugins: [vuetify] },
       ...options,
     })
   }
