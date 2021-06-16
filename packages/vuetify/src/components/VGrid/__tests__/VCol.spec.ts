@@ -1,108 +1,74 @@
-// Components
-import VCol from '../VCol'
-
-// Utilities
-import { createVuetify } from '@/framework'
 import { mount } from '@vue/test-utils'
 
+import VCol from '../VCol'
+import * as framework from '@/framework'
+import { createVuetify } from '@/framework'
+
 describe('VCol', () => {
+  beforeEach(() => {
+    jest.spyOn(framework, 'useVuetify').mockReturnValue({
+      defaults: { global: {} },
+    })
+  })
+  afterEach(() => {
+    jest.spyOn(framework, 'useVuetify').mockRestore()
+  })
+
   const vuetify = createVuetify()
 
-  function mountFunction (options = {}) {
-    return mount(VCol, {
+  function mountFunction (template: string) {
+    return mount({
+      components: { VCol },
+      template,
+    }, {
       global: { plugins: [vuetify] },
-      ...options,
     })
   }
 
   it('should have default expected structure', async () => {
-    const wrapper = mountFunction()
+    const wrapper = mountFunction(`<VCol />`)
 
     expect(wrapper.html()).toBe('<div class="v-col"></div>')
   })
 
   it('renders custom root element when tag prop set', async () => {
-    const wrapper = mountFunction({
-      propsData: { tag: 'span' },
-    })
+    const wrapper = mountFunction(`<VCol tag="span" />`)
 
     expect(wrapper.html()).toBe('<span class="v-col"></span>')
   })
 
   it('should apply breakpoint specific col-{bp}-{#} classes', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        cols: 6,
-        sm: 5,
-        md: 4,
-        lg: 3,
-        xl: 2,
-      },
-    })
+    const wrapper = mountFunction(`<VCol cols="6" sm="5" md="4" lg="3" xl="2" />`)
 
     expect(wrapper.html()).toBe('<div class="v-col-sm-5 v-col-md-4 v-col-lg-3 v-col-xl-2 v-col-6"></div>')
   })
 
   it('should apply ".offset-*" classes with "offset-{bp}-{#}" props', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        offset: 6,
-        offsetSm: 5,
-        offsetMd: 4,
-        offsetLg: 3,
-        offsetXl: 2,
-      },
-    })
+    const wrapper = mountFunction(`<VCol offset="6" offset-sm="5" offset-md="4" offset-lg="3" offset-xl="2" />`)
 
     expect(wrapper.html()).toBe('<div class="offset-sm-5 offset-md-4 offset-lg-3 offset-xl-2 v-col offset-6"></div>')
   })
 
   it('should apply ".order-*" classes with "order-{bp}-{#}" props', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        order: 6,
-        orderSm: 5,
-        orderMd: 4,
-        orderLg: 3,
-        orderXl: 2,
-      },
-    })
+    const wrapper = mountFunction(`<VCol order="6" order-sm="5" order-md="4" order-lg="3" order-xl="2" />`)
 
     expect(wrapper.html()).toBe('<div class="order-sm-5 order-md-4 order-lg-3 order-xl-2 v-col order-6"></div>')
   })
 
   it(`should apply boolean breakpoint classes for 'sm', 'md', 'lg', 'xl' prop`, async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        sm: true,
-        md: true,
-        lg: true,
-        xl: true,
-      },
-    })
+    const wrapper = mountFunction(`<VCol sm md lg xl />`)
 
     expect(wrapper.html()).toBe('<div class="v-col-sm v-col-md v-col-lg v-col-xl v-col"></div>')
   })
 
   it(`should apply boolean breakpoint classes for 'sm', 'md', 'lg', 'xl' prop set to empty string`, async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        sm: '',
-        md: '',
-        lg: '',
-        xl: '',
-      },
-    })
+    const wrapper = mountFunction(`<VCol sm="" md="" lg="" xl="" />`)
 
     expect(wrapper.html()).toBe('<div class="v-col-sm v-col-md v-col-lg v-col-xl v-col"></div>')
   })
 
   it('should apply ".align-self-*" class with "align-self" prop', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        alignSelf: 'center',
-      },
-    })
+    const wrapper = mountFunction(`<VCol align-self="center" />`)
 
     expect(wrapper.html()).toBe('<div class="v-col align-self-center"></div>')
   })

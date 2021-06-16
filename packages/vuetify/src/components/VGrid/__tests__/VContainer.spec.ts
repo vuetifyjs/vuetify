@@ -2,20 +2,23 @@
 import VContainer from '../VContainer'
 
 // Utilities
-import { createVuetify } from '@/framework'
 import { mount } from '@vue/test-utils'
+import { createVuetify } from '@/framework'
 
 describe('VContainer', () => {
   const vuetify = createVuetify()
 
   function mountFunction (template: string) {
-    return mount(VContainer, {
+    return mount({
+      components: { VContainer },
+      template,
+    }, {
       global: { plugins: [vuetify] },
     })
   }
 
   it('should work', () => {
-    const wrapper = mountFunction()
+    const wrapper = mountFunction(`<VContainer />`)
 
     expect(wrapper.html()).toBe('<div class="v-container"></div>')
   })
