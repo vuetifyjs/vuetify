@@ -21,7 +21,7 @@ describe('VBtn', () => {
       .should('have.length', colors.length)
       .then(subjects => {
         Array.from(subjects).forEach((subject, idx) => {
-          expect(subject).to.contain(colors[idx])
+          expect(subject).to.have.class('bg-' + colors[idx])
         })
       })
   })

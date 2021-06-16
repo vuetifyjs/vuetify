@@ -1,194 +1,165 @@
 // Utilities
-import * as vue from 'vue'
 import { mount } from '@vue/test-utils'
-import * as framework from '@/framework'
+import { createVuetify } from '@/framework'
 import { makeProps } from '../makeProps'
 
 describe('makeProps', () => {
-  it('should use global default if defined', () => {
-    // @ts-expect-error
-    jest.spyOn(vue, 'getCurrentInstance').mockReturnValueOnce({ type: { name: 'Foo' } })
+  function mountFunction (vuetify, options = {}) {
+    return mount({
+      name: 'Foo',
+      props: makeProps({
+        bar: {
+          default: 'from self',
+        },
+      }),
+      render: () => {},
+    }, {
+      global: { plugins: [vuetify] },
+      ...options,
+    })
+  }
 
-    jest.spyOn(framework, 'useVuetify').mockReturnValueOnce({
+  it('should use global default if defined', () => {
+    const vuetify = createVuetify({
       defaults: {
         global: {
-          bar: 'hello world',
+          bar: 'from global',
         },
       },
     })
 
-    const props = makeProps({
-      bar: {
-        type: String,
-        default: 'goodbye world',
-      },
-    })
+    const vm = mountFunction(vuetify)
 
-    // @ts-expect-error
-    expect(props.bar.default()).toBe('hello world')
+    expect(vm.props().bar).toBe('from global')
   })
 
   it('should use component default if defined', () => {
-    // @ts-expect-error
-    jest.spyOn(vue, 'getCurrentInstance').mockReturnValueOnce({ type: { name: 'Foo' } })
-
-    jest.spyOn(framework, 'useVuetify').mockReturnValueOnce({
+    const vuetify = createVuetify({
       defaults: {
         global: {
-          bar: 'hello world',
+          bar: 'from global',
         },
         Foo: {
-          bar: 'something else',
+          bar: 'from component',
         },
       },
     })
 
-    const props = makeProps({
-      bar: {
-        type: String,
-        default: 'goodbye world',
-      },
-    })
+    const vm = mountFunction(vuetify)
 
-    // @ts-expect-error
-    expect(props.bar.default()).toBe('something else')
+    expect(vm.props().bar).toBe('from component')
   })
 
   it('should use local default if global or component not defined', () => {
-    // @ts-expect-error
-    jest.spyOn(vue, 'getCurrentInstance').mockReturnValueOnce({ type: { name: 'Foo' } })
-
-    jest.spyOn(framework, 'useVuetify').mockReturnValueOnce({
+    const vuetify = createVuetify({
       defaults: {
         global: {},
       },
     })
 
-    const props = makeProps({
-      bar: {
-        type: String,
-        default: 'goodbye world',
-      },
-    })
+    const vm = mountFunction(vuetify)
 
-    // @ts-expect-error
-    expect(props.bar.default()).toBe('goodbye world')
+    expect(vm.props().bar).toBe('from self')
   })
 
   it('should handle prop with default factory function', () => {
-    const vuetify = framework.createVuetify({
+    const vuetify = createVuetify({
       defaults: {
-        TestComponent: {
-          foo: () => ({ bar: 'baz' }),
+        Foo: {
+          bar: () => ({ baz: 'from component' }),
         },
       },
     })
 
-    const TestComponent = vue.defineComponent({
-      name: 'TestComponent',
+    const wrapper = mount({
+      name: 'Foo',
       props: makeProps({
-        foo: {
+        bar: {
           type: Object,
-          default: () => ({}),
+          default: () => ({ baz: 'from self' }),
         },
       }),
-      setup (props) {
-        return () => vue.h('div', {}, JSON.stringify(props.foo))
-      },
-    })
-
-    const wrapper = mount(TestComponent, {
+      render: () => {},
+    }, {
       global: {
         plugins: [vuetify],
       },
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.props().bar).toEqual({
+      baz: 'from component',
+    })
   })
 
   it('should handle prop with Boolean type', () => {
-    const vuetify = framework.createVuetify({
+    const vuetify = createVuetify({
       defaults: {
-        TestComponent: {
-          foo: true,
+        Foo: {
+          bar: true,
         },
       },
     })
 
-    const TestComponent = vue.defineComponent({
-      name: 'TestComponent',
+    const wrapper = mount({
+      name: 'Foo',
       props: makeProps({
-        foo: Boolean,
+        bar: Boolean,
       }),
-      setup (props) {
-        return () => vue.h('div', {}, JSON.stringify(props.foo))
-      },
-    })
-
-    const wrapper = mount(TestComponent, {
+      render: () => {},
+    }, {
       global: {
         plugins: [vuetify],
       },
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.props().bar).toBe(true)
   })
 
   it('should handle prop with [Boolean] type', () => {
-    const vuetify = framework.createVuetify({
+    const vuetify = createVuetify({
       defaults: {
-        TestComponent: {
-          foo: true,
+        Foo: {
+          bar: true,
         },
       },
     })
 
-    const TestComponent = vue.defineComponent({
-      name: 'TestComponent',
+    const wrapper = mount({
+      name: 'Foo',
       props: makeProps({
-        foo: [Boolean],
+        bar: [Boolean],
       }),
-      setup (props) {
-        return () => vue.h('div', {}, JSON.stringify(props.foo))
-      },
-    })
-
-    const wrapper = mount(TestComponent, {
+      render: () => {},
+    }, {
       global: {
         plugins: [vuetify],
       },
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.props().bar).toBe(true)
   })
 
   it('should handle function prop correctly', () => {
-    const vuetify = framework.createVuetify({
+    const vuetify = createVuetify({
       defaults: {
-        TestComponent: {
-          foo: () => 'this should be visible',
+        Foo: {
+          bar: () => 'from component',
         },
       },
     })
 
-    const TestComponent = vue.defineComponent({
-      name: 'TestComponent',
+    const wrapper = mount({
+      name: 'Foo',
       props: makeProps({
-        foo: {
-          type: [Function], // Function must be wrapper in array
-        },
+        bar: [Function], // Function must be wrapped in array
       }),
-      setup (props) {
-        return () => vue.h('div', [props.foo?.()])
-      },
-    })
-
-    const wrapper = mount(TestComponent, {
+      render: () => {},
+    }, {
       global: {
         plugins: [vuetify],
       },
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.props().bar()).toBe('from component')
   })
 })

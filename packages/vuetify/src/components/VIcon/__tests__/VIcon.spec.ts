@@ -1,9 +1,9 @@
+import { VuetifyDefaultsSymbol } from '@/composables/defaults'
 // Components
 import { VIcon } from '..'
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { VuetifySymbol } from '@/framework'
 import { defaultSets, VuetifyIconSymbol } from '@/composables/icons'
 import { mdi } from '@/iconsets/mdi'
 import { md } from '@/iconsets/md'
@@ -12,10 +12,8 @@ import { h, Text } from 'vue'
 
 const globalOptions = {
   provide: {
-    [VuetifySymbol as symbol]: {
-      defaults: {
-        global: {},
-      },
+    [VuetifyDefaultsSymbol as symbol]: {
+      value: { global: {} },
     },
     [VuetifyIconSymbol as symbol]: {
       defaultSet: 'mdi',

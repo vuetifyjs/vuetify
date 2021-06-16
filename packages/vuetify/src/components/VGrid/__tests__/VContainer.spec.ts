@@ -3,24 +3,19 @@ import VContainer from '../VContainer'
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import * as framework from '@/framework'
-
-function mountFunction (template: string) {
-  return mount({
-    components: { VContainer },
-    template,
-  })
-}
+import { createVuetify } from '@/framework'
 
 describe('VContainer', () => {
-  beforeEach(() => {
-    jest.spyOn(framework, 'useVuetify').mockReturnValue({
-      defaults: { global: {} },
+  const vuetify = createVuetify()
+
+  function mountFunction (template: string) {
+    return mount({
+      components: { VContainer },
+      template,
+    }, {
+      global: { plugins: [vuetify] },
     })
-  })
-  afterEach(() => {
-    jest.spyOn(framework, 'useVuetify').mockRestore()
-  })
+  }
 
   it('should work', () => {
     const wrapper = mountFunction(`<VContainer />`)

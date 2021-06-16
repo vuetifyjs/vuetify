@@ -1,10 +1,13 @@
-/// <reference types="../../../../types/cypress" />
+/// <reference types="../../../types/cypress" />
 
 import { CenteredGrid } from '@/../cypress/templates'
+import { createVuetify } from '@/framework'
 import { VBtn } from '@/components'
-import { VThemeProvider } from '../'
+import { VThemeProvider } from '.'
 
 describe('VThemeProvider', () => {
+  const vuetify = createVuetify()
+
   it('should use provided theme', () => {
     cy.mount(() => (
       <VThemeProvider>
@@ -12,7 +15,9 @@ describe('VThemeProvider', () => {
           <VBtn color="primary">button</VBtn>
         </CenteredGrid>
       </VThemeProvider>
-    )).get('.v-btn').should('have.class', 'v-theme--light')
+    ), {
+      global: { plugins: [vuetify] },
+    }).get('.v-btn').should('have.class', 'v-theme--light')
   })
 
   it('should use theme defined in prop', () => {
@@ -22,7 +27,9 @@ describe('VThemeProvider', () => {
           <VBtn color="primary">button</VBtn>
         </CenteredGrid>
       </VThemeProvider>
-    )).get('.v-btn').should('have.class', 'v-theme--dark')
+    ), {
+      global: { plugins: [vuetify] },
+    }).get('.v-btn').should('have.class', 'v-theme--dark')
   })
 
   it('should render element when using with-background prop', () => {
@@ -32,6 +39,8 @@ describe('VThemeProvider', () => {
           <VBtn color="primary">button</VBtn>
         </CenteredGrid>
       </VThemeProvider>
-    )).get('.v-theme-provider').should('exist')
+    ), {
+      global: { plugins: [vuetify] },
+    }).get('.v-theme-provider').should('exist')
   })
 })
