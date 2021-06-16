@@ -1,19 +1,21 @@
 declare module 'vuetify/lib' {
-  // eslint-disable-next-line import/no-duplicates
-  import { VueConstructor, DirectiveOptions } from 'vue'
   import Vuetify from 'vuetify'
   import { Colors } from 'vuetify/lib/util/colors'
 
   export default Vuetify
 
   const colors: Colors
-  const ClickOutside: DirectiveOptions
-  const Intersect: DirectiveOptions
-  const Mutate: DirectiveOptions
-  const Resize: DirectiveOptions
-  const Ripple: DirectiveOptions
-  const Scroll: DirectiveOptions
-  const Touch: DirectiveOptions
+
+  export {
+    colors,
+  }
+  export * from 'vuetify/lib/components'
+  export * from 'vuetify/lib/directives'
+}
+
+declare module 'vuetify/lib/components' {
+  import { VueConstructor } from 'vue'
+
   const VApp: VueConstructor
   const VAppBar: VueConstructor
   const VAppBarNavIcon: VueConstructor
@@ -179,14 +181,6 @@ declare module 'vuetify/lib' {
   const VExpandXTransition: VueConstructor
 
   export {
-    colors,
-    ClickOutside,
-    Intersect,
-    Mutate,
-    Ripple,
-    Resize,
-    Scroll,
-    Touch,
     VApp,
     VAppBar,
     VAppBarNavIcon,
@@ -354,7 +348,6 @@ declare module 'vuetify/lib' {
 }
 
 declare module 'vuetify/lib/directives' {
-  // eslint-disable-next-line import/no-duplicates
   import { DirectiveOptions } from 'vue'
 
   const ClickOutside: DirectiveOptions

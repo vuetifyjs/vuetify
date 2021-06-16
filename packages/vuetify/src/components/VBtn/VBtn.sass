@@ -1,5 +1,4 @@
 // Imports
-@use 'sass:math'
 @import './_variables.scss'
 
 // Theme
@@ -84,7 +83,7 @@
       &.v-size--#{$name}
         height: #{$size}px
         min-width: #{round($size * 1.777777777777778)}px // default ratio
-        padding: 0 #{math.div($size, 2.25)}px
+        padding: 0 #{$size / 2.25}px
 
   > .v-btn__content .v-icon
     color: inherit
@@ -220,10 +219,10 @@
 
       &.v-btn--absolute
         &.v-btn--bottom
-          bottom: -#{math.div($size, 2)}px
+          bottom: -#{$size / 2}px
 
         &.v-btn--top
-          top: -#{math.div($size, 2)}px
+          top: -#{$size / 2}px
 
 .v-btn--loading
   pointer-events: none

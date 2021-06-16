@@ -1,5 +1,4 @@
 // Imports
-@use 'sass:math'
 @import './_variables.scss'
 
 // Theme
@@ -139,8 +138,8 @@
         margin-right: $alert-border-icon-margin
 
 .v-alert--dense
-  padding-top: math.div($alert-padding, 2)
-  padding-bottom: math.div($alert-padding, 2)
+  padding-top: $alert-padding / 2
+  padding-bottom: $alert-padding / 2
 
   .v-alert__border
     border-width: $alert-dense-border-width
