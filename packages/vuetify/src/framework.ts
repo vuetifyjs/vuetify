@@ -1,6 +1,5 @@
-// Composables
-import { createDisplay, VuetifyDisplaySymbol } from '@/composables/display'
-import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
+import { createDisplay, VuetifyDisplaySymbol } from './composables/display'
+import { createTheme, VuetifyThemeSymbol } from './composables/theme'
 import { defaultSets, VuetifyIconSymbol } from '@/composables/icons'
 import { createDefaults, VuetifyDefaultsSymbol } from '@/composables/defaults'
 import { createLocaleAdapter, VuetifyLocaleAdapterSymbol } from '@/composables/locale'
@@ -8,17 +7,17 @@ import { createRtl, VuetifyRtlSymbol } from '@/composables/rtl'
 import { aliases, mdi } from '@/iconsets/mdi'
 
 // Utilities
-import { inject } from 'vue'
 import { mergeDeep } from '@/util'
 
 // Types
-import type { App, InjectionKey } from 'vue'
+import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
 import type { DisplayOptions } from '@/composables/display'
 import type { ThemeOptions } from '@/composables/theme'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleAdapter, LocaleOptions } from '@/composables/locale'
 import type { RtlOptions } from '@/composables/rtl'
 import type { DefaultsOptions } from '@/composables/defaults'
+import { reactive } from 'vue'
 
 export interface VuetifyInstance {}
 
@@ -81,7 +80,31 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
     const { adapter, rootInstance } = createLocaleAdapter(app, options?.locale)
     app.provide(VuetifyLocaleAdapterSymbol, adapter)
     app.provide(VuetifyRtlSymbol, createRtl(rootInstance, options?.locale))
-    app.config.globalProperties.$vuetify = vuetify
+
+    function inject (this: ComponentPublicInstance, key: InjectionKey<any> | string) {
+      const vm = this.$
+
+      const provides = vm.parent?.provides ?? vm.vnode.appContext?.provides
+
+      if (provides && (key as any) in provides) {
+        return provides[(key as string)]
+      }
+    }
+
+    app.mixin({
+      computed: {
+        $vuetify () {
+          return reactive({
+            defaults: inject.call(this, VuetifyDefaultsSymbol),
+            display: inject.call(this, VuetifyDisplaySymbol),
+            theme: inject.call(this, VuetifyThemeSymbol),
+            icons: inject.call(this, VuetifyIconSymbol),
+            locale: inject.call(this, VuetifyLocaleAdapterSymbol),
+            rtl: inject.call(this, VuetifyRtlSymbol),
+          })
+        },
+      },
+    })
   }
 
   return { install }
