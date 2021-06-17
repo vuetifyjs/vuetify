@@ -33,7 +33,7 @@
   "module": "lib/entry.mjs",
   "jsdelivr": "dist/vuetify.js",
   "unpkg": "dist/vuetify.js",
-  "types": "types/index.d.ts",
+  "types": "lib/entry.d.ts",
   "sideEffects": [
     "*.sass",
     "*.scss",
@@ -42,15 +42,15 @@
   ],
   "files": [
     "dist/",
-    "lib/",
-    "types/"
+    "lib/"
   ],
   "scripts": {
     "watch": "cross-env TARGET=development webpack --config build/config.js --progress --watch",
     "dev": "cross-env NODE_ENV=development webpack serve --config build/webpack.dev.config.js --hot",
-    "build": "concurrently \"yarn build:dist\" \"yarn build:lib\" -n \"dist,lib\" --kill-others-on-fail -r",
+    "build": "concurrently \"yarn build:dist\" \"yarn build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && yarn build:types",
     "build:dist": "rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress",
     "build:json": "node build/build-json.js",
+    "build:types": "rimraf types-temp && tsc --pretty --emitDeclarationOnly -p tsconfig.dist.json && rollup --config build/rollup.config.js && rimraf types-temp",
     "tsc": "tsc",
     "build:lib": "node build/build-lib.js",
     "debug:test": "cross-env NODE_ENV=test node --inspect --inspect-brk ../../node_modules/jest/bin/jest.js --no-cache -i --verbose",
@@ -58,7 +58,6 @@
     "test:unix": "cross-env NODE_ENV=test jest",
     "test:win32": "cross-env NODE_ENV=test jest -i",
     "test:coverage": "yarn test --coverage",
-    "test:types": "tsc -p ./types/test/tsconfig.json",
     "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\"",
     "cy:open": "cypress open-ct",
@@ -76,6 +75,7 @@
     "@types/resize-observer-browser": "^0.1.5",
     "@vue/babel-plugin-jsx": "^1.0.6",
     "@vue/test-utils": "2.0.0-beta.13",
+    "@rollup/plugin-alias": "^3.1.2",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",
     "babel-plugin-add-import-extension": "^1.5.1",
@@ -97,6 +97,8 @@
     "jest-canvas-mock": "^2.3.0",
     "mini-css-extract-plugin": "^1.6.0",
     "postcss-loader": "^5.2.0",
+    "rollup": "^2.52.1",
+    "rollup-plugin-dts": "^3.0.2",
     "style-loader": "^2.0.0",
     "url-loader": "^4.1.1",
     "vue-meta": "^2.4.0",

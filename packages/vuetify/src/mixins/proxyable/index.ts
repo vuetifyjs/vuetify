@@ -3,7 +3,7 @@
 
 import Vue, { VueConstructor } from 'vue'
 
-export type Proxyable<T extends string = 'value'> = VueConstructor<Vue & {
+export type Proxyable<T extends string = 'value'> = VueConstructor</*Vue*/any & {
   internalLazyValue: unknown
   internalValue: unknown
 } & Record<T, any>>

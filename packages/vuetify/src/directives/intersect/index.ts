@@ -13,8 +13,8 @@ type ObserveHandler = (
   observer: IntersectionObserver,
 ) => void
 
-export interface ObserveDirectiveBinding extends Omit<DirectiveBinding, 'modifiers'> {
-  value: ObserveHandler | { handler: ObserveHandler, options?: IntersectionObserverInit }
+export interface ObserveDirectiveBinding extends Omit<DirectiveBinding, 'modifiers' | 'value'> {
+  value?: ObserveHandler | { handler: ObserveHandler, options?: IntersectionObserverInit }
   modifiers: {
     once?: boolean
     quiet?: boolean
