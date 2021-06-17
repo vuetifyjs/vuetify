@@ -76,7 +76,7 @@ export interface ThemeInstance {
   getTheme: (key: string) => InternalThemeDefinition
 }
 
-export const VuetifyThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme')
+export const ThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme')
 
 export const makeThemeProps = propsFactory({
   theme: String,
@@ -295,7 +295,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
  */
 export function useTheme (props: { theme?: string }) {
   const vm = getCurrentInstance()
-  const theme = inject(VuetifyThemeSymbol, null)
+  const theme = inject(ThemeSymbol, null)
 
   if (!vm) consoleError('provideTheme must be called from inside a setup function')
   if (!theme) throw new Error('Could not find Vuetify theme injection')
@@ -312,7 +312,7 @@ export function useTheme (props: { theme?: string }) {
     themeClasses,
   }
 
-  provide(VuetifyThemeSymbol, newTheme)
+  provide(ThemeSymbol, newTheme)
 
   return newTheme
 }

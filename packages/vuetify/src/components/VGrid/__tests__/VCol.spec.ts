@@ -1,19 +1,9 @@
 import { mount } from '@vue/test-utils'
 
 import VCol from '../VCol'
-import * as framework from '@/framework'
 import { createVuetify } from '@/framework'
 
 describe('VCol', () => {
-  beforeEach(() => {
-    jest.spyOn(framework, 'useVuetify').mockReturnValue({
-      defaults: { global: {} },
-    })
-  })
-  afterEach(() => {
-    jest.spyOn(framework, 'useVuetify').mockRestore()
-  })
-
   const vuetify = createVuetify()
 
   function mountFunction (template: string) {

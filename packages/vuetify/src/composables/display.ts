@@ -69,7 +69,7 @@ export interface DisplayInstance {
   thresholds: DisplayThresholds
 }
 
-export const VuetifyDisplaySymbol: InjectionKey<ToRefs<DisplayInstance>> = Symbol.for('vuetify:display')
+export const DisplaySymbol: InjectionKey<ToRefs<DisplayInstance>> = Symbol.for('vuetify:display')
 
 const defaultDisplayOptions: DisplayOptions = {
   mobileBreakpoint: 'lg',
@@ -204,7 +204,7 @@ export function createDisplay (options?: DisplayOptions): ToRefs<DisplayInstance
 }
 
 export function useDisplay () {
-  const display = inject(VuetifyDisplaySymbol)
+  const display = inject(DisplaySymbol)
 
   if (!display) throw new Error('Could not find Vuetify display injection')
 
