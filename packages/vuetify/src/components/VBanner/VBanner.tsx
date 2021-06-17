@@ -7,13 +7,13 @@ import { VBannerActions, VBannerAvatar, VBannerContent, VBannerText } from './'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
-import { makeDensityProps, useDensity } from '@/composables/density'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
@@ -64,7 +64,6 @@ export default defineComponent({
           class={[
             'v-banner',
             {
-              // 'v-banner--has-thumbnail': hasContent,
               'v-banner--is-mobile': props.mobile,
               'v-banner--sticky': props.sticky,
               [`v-banner--${props.lines}-line`]: true,
