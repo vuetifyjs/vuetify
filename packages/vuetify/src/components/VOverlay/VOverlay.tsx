@@ -26,7 +26,7 @@ import {
   watchEffect,
 } from 'vue'
 import { useRtl } from '@/composables/rtl'
-import { makeRouterProps, useBackButton, useLink, useRoute } from '@/composables/router'
+import { useBackButton } from '@/composables/router'
 
 // Types
 import type { BackgroundColorData } from '@/composables/color'
@@ -144,21 +144,6 @@ class BlockScrollStrategy implements ScrollStrategy {
   }
 }
 
-function useLinkModel (props) {
-  const _isActive = useProxiedModel(props, 'modelValue')
-  const link = useLink(props)
-  const isActive = computed({
-    get: () => {
-      return !!(_isActive.value || link?.isActive.value)
-    },
-    set: val => {
-      _isActive.value = val
-    },
-  })
-
-  return { link, isActive }
-}
-
 export default defineComponent({
   name: 'VOverlay',
 
@@ -193,7 +178,6 @@ export default defineComponent({
     },
     ...makeThemeProps(),
     ...makeTransitionProps(),
-    ...makeRouterProps(),
   }),
 
   emits: {
@@ -202,16 +186,7 @@ export default defineComponent({
   },
 
   setup (props, { slots, attrs, emit }) {
-    const _isActive = useProxiedModel(props, 'modelValue')
-    const link = useLink(props)
-    const isActive = computed({
-      get: () => {
-        return !!(_isActive.value || link?.isActive.value)
-      },
-      set: val => {
-        _isActive.value = val
-      },
-    })
+    const isActive = useProxiedModel(props, 'modelValue')
 
     const { teleportTarget } = useTeleport(toRef(props, 'attach'))
     const { themeClasses } = useTheme(props)
