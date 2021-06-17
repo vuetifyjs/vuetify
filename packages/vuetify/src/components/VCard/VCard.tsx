@@ -61,7 +61,7 @@ export default defineComponent({
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
-    ...makeVariantProps(),
+    ...makeVariantProps({ variant: 'contained' }),
   }),
 
   setup (props, { slots }) {
