@@ -36,9 +36,11 @@ $button-icon-font-size: 24px !default;
 $button-icon-size: 48px !default;
 $button-line-height: normal !default;
 $button-stacked-line-height: 1.7 !default;
+$button-outlined-border-opacity: 1 !default;
 $button-padding-ratio: 2.25 !default;
 $button-stacked-padding-ratio: 4.5 !default;
 $button-positions: absolute fixed !default;
+$button-text-background-opacity: var(--v-activated-opacity) !default;
 $button-text-letter-spacing: map-deep-get($typography, 'button', 'letter-spacing') !default;
 $button-text-transform: map-deep-get($typography, 'button', 'text-transform') !default;
 $button-vertical-align: middle !default;
@@ -88,4 +90,10 @@ $button-icon-sizes: map-merge(
     'size': $button-icon-size
   ),
   $button-icon-sizes
+);
+
+$button-variants: (
+  $button-elevation,
+  $button-outlined-border-opacity,
+  $button-text-background-opacity
 );
