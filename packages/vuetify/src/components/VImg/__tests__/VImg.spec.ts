@@ -24,15 +24,6 @@ describe('VImg', () => {
   const LOAD_FAILURE_SRC = 'LOAD_FAILURE_SRC'
   const LOAD_SUCCESS_SRC = 'LOAD_SUCCESS_SRC'
 
-  beforeEach(() => {
-    jest.spyOn(framework, 'useVuetify').mockReturnValue({
-      defaults: { global: {} },
-    })
-  })
-  afterEach(() => {
-    jest.spyOn(framework, 'useVuetify').mockRestore()
-  })
-
   beforeAll(() => {
     jest.useFakeTimers()
     Object.defineProperty((global as any).Image.prototype, 'src', {

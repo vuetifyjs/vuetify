@@ -95,6 +95,7 @@ declare module 'vue' {
 declare module '@vue/runtime-core' {
   export interface ComponentInternalInstance {
     ctx: Record<string, unknown>
+    provides: Record<string, unknown>
   }
 }
 
