@@ -14,6 +14,7 @@ import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import { useDisplay } from '@/composables/display'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
@@ -27,7 +28,6 @@ export default defineComponent({
     avatar: String,
     color: String,
     icon: String,
-    mobile: Boolean,
     lines: {
       type: String,
       default: 'one',
@@ -49,6 +49,7 @@ export default defineComponent({
     const { borderClasses } = useBorder(props, 'v-banner')
     const { densityClasses } = useDensity(props, 'v-banner')
     const { dimensionStyles } = useDimension(props)
+    const { mobile } = useDisplay()
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-banner')
     const { roundedClasses } = useRounded(props, 'v-banner')
@@ -64,7 +65,7 @@ export default defineComponent({
           class={[
             'v-banner',
             {
-              'v-banner--is-mobile': props.mobile,
+              'v-banner--is-mobile': mobile.value,
               'v-banner--sticky': props.sticky,
               [`v-banner--${props.lines}-line`]: true,
             },

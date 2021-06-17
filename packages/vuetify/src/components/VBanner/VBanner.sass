@@ -1,5 +1,5 @@
 // Imports
-@import './index'
+@import ./index
 
 .v-banner
   $root: &
@@ -27,7 +27,6 @@
     align-items: center
     padding-inline-end: $banner-mobile-padding-end
     padding-inline-start: $banner-mobile-padding-start
-    max-width: $banner-mobile-max-width
 
   &--rounded
     @include rounded($banner-rounded-border-radius)
@@ -64,11 +63,11 @@
   .v-banner--is-mobile &
     flex: 1 1 auto
     padding-inline-end: $banner-mobile-content-padding-end
+    margin-bottom: $banner-mobile-content-margin-bottom
 
 .v-banner-avatar
   align-self: flex-start
   border-radius: $banner-avatar-border-radius
-  margin-bottom: $banner-avatar-margin-bottom
   margin-inline-end: $banner-avatar-margin-end
   margin-inline-start: $banner-avatar-margin-start
   position: relative
@@ -89,7 +88,6 @@
 
   .v-banner--one-line &
     align-self: center
-    margin-bottom: $banner-avatar-one-line-margin-bottom
 
 .v-banner-text
   -webkit-box-orient: vertical

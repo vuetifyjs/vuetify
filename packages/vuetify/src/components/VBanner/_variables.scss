@@ -2,10 +2,8 @@
 $banner-avatar-after-opacity: var(--v-border-opacity) !default;
 $banner-avatar-after-opacity: var(--v-border-opacity) !default;
 $banner-avatar-border-radius: map-get($rounded, 'circle') !default;
-$banner-avatar-margin-bottom: 12px !default;
 $banner-avatar-margin-end: 24px !default;
 $banner-avatar-margin-start: 0 !default;
-$banner-avatar-one-line-margin-bottom: 0 !default;
 $banner-background: rgb(var(--v-theme-background)) !default;
 $banner-color: rgb(var(--v-theme-on-surface)) !default;
 $banner-border-color: $border-color-root !default;
@@ -33,6 +31,7 @@ $banner-width: 100% !default;
 // Mobile
 $banner-mobile-avatar-margin-end: 16px !default;
 $banner-mobile-content-padding-end: 8px !default;
+$banner-mobile-content-margin-bottom: 4px !default;
 $banner-mobile-max-width: 360px !default;
 $banner-mobile-padding-end: 8px !default;
 $banner-mobile-padding-start: 16px !default;
