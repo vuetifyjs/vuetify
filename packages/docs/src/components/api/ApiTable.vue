@@ -46,7 +46,7 @@
 
               <template v-else-if="header === 'type' || header === 'signature'">
                 <div
-                  class="text-mono"
+                  class="text-mono text-pre"
                   v-html="getType(item[header])"
                 />
               </template>
