@@ -8,18 +8,10 @@
   padding: $card-padding
 
   @include border($card-border...)
-  @include elevation($card-elevation)
   @include position($card-positions)
   @include rounded($card-border-radius)
   @include states('.v-card__overlay')
-
-  &--border
-    border-width: $card-border-thin-width
-
-    @include elevation(0)
-
-    &::before
-      @include elevation($card-border-before-elevation)
+  @include variant($card-variants...)
 
   &--disabled
     pointer-events: none
@@ -132,11 +124,11 @@
 
 .v-card-subtitle
   align-items: center
-  color: $card-subtitle-color
   display: flex
   font-size: $card-subtitle-font-size
   font-weight: $card-subtitle-font-weight
   letter-spacing: $card-subtitle-letter-spacing
+  opacity: $card-subtitle-opacity
   padding: $card-subtitle-padding
   text-transform: $card-subtitle-text-transform
 
@@ -146,10 +138,10 @@
     padding: $card-subtitle-header-padding
 
 .v-card-text
-  color: $card-text-color
   font-size: $card-text-font-size
   font-weight: $card-text-font-weight
   letter-spacing: $card-text-letter-spacing
+  opacity: $card-text-opacity
   padding: $card-text-padding
   text-transform: $card-text-text-transform
 

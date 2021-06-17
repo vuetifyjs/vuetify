@@ -1,0 +1,28 @@
+@mixin variant($contained-elevation, $outlined-opacity, $text-opacity)
+  &::before
+    position: absolute
+    border-radius: inherit
+    content: ''
+    left: 0
+    right: 0
+    border: thin solid transparent
+    top: 0
+    bottom: 0
+    opacity: 0
+
+  &--variant-contained
+    @include elevation($contained-elevation)
+
+  &--variant-outlined
+    &::before
+      border-color: currentColor
+      opacity: $outlined-opacity
+
+    @include elevation(0)
+
+  &--variant-text
+    &::before
+      background: currentColor
+      opacity: $text-opacity
+
+    @include elevation(0)

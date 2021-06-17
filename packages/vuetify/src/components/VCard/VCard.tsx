@@ -24,14 +24,14 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useBackgroundColor } from '@/composables/color'
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { defineComponent, toRef } from 'vue'
+import { defineComponent } from 'vue'
 import { makeProps } from '@/util'
 
 export default defineComponent({
@@ -42,7 +42,6 @@ export default defineComponent({
   props: makeProps({
     appendAvatar: String,
     appendIcon: String,
-    color: String,
     disabled: Boolean,
     flat: Boolean,
     hover: Boolean,
@@ -62,17 +61,18 @@ export default defineComponent({
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
+    ...makeVariantProps(),
   }),
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { borderClasses } = useBorder(props, 'v-card')
+    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-card')
+    const { densityClasses } = useDensity(props, 'v-card')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-card')
     const { roundedClasses } = useRounded(props, 'v-card')
-    const { densityClasses } = useDensity(props, 'v-card')
 
     return () => {
       const hasTitle = !!(slots.title || props.title)
@@ -96,15 +96,16 @@ export default defineComponent({
               'v-card--link': props.link,
             },
             themeClasses.value,
-            backgroundColorClasses.value,
             borderClasses.value,
+            colorClasses.value,
             densityClasses.value,
             elevationClasses.value,
             positionClasses.value,
             roundedClasses.value,
+            variantClasses.value,
           ]}
           style={[
-            backgroundColorStyles.value,
+            colorStyles.value,
             dimensionStyles.value,
             positionStyles.value,
           ]}
