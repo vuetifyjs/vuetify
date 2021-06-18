@@ -34,6 +34,9 @@ import { Ripple } from '@/directives/ripple'
 import { defineComponent } from 'vue'
 import { makeProps } from '@/util'
 
+// Types
+import type { Variant } from '@/composables/variant'
+
 export default defineComponent({
   name: 'VCard',
 
@@ -61,7 +64,7 @@ export default defineComponent({
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
-    ...makeVariantProps({ variant: 'contained' }),
+    ...makeVariantProps({ variant: 'contained' as Variant }),
   }),
 
   setup (props, { slots }) {

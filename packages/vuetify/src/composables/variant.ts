@@ -9,7 +9,7 @@ import { propsFactory } from '@/util'
 import type { PropType } from 'vue'
 const allowedVariants = [null, 'default', 'contained', 'outlined', 'text'] as const
 
-type Variant = typeof allowedVariants[number]
+export type Variant = typeof allowedVariants[number]
 
 export interface VariantProps {
   color?: String

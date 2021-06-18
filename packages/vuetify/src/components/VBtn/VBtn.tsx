@@ -13,6 +13,7 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import type { Variant } from '@/composables/variant'
 import { makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
@@ -50,7 +51,7 @@ export default defineComponent({
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'button' }),
     ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'contained' }),
+    ...makeVariantProps({ variant: 'contained' as Variant }),
   }),
 
   setup (props, { slots }) {
