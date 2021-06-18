@@ -23,9 +23,7 @@ describe('border.ts', () => {
     [{}, []],
     [{ border: null }, []],
     [{ border: 1 }, []],
-    [{ outlined: false }, []],
     // Border only
-    [{ outlined: true }, ['foo--border']],
     [{ border: true }, ['foo--border']],
     [{ border: '' }, ['foo--border']],
     // Border with 0 or false

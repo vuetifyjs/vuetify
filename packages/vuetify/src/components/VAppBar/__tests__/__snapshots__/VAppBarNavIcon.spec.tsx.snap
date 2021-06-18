@@ -2,7 +2,7 @@
 
 exports[`VAppBarNavIcon should match a snapshot 1`] = `
 <button type="button"
-        class="v-btn v-btn--contained v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-app-bar-nav-icon"
+        class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained v-app-bar-nav-icon"
 >
   <span class="v-btn__overlay">
   </span>

@@ -14,7 +14,7 @@ describe('size', () => {
 
   it('should only allow values from allowedVariants', () => {
     const { variant: { validator } } = makeVariantProps()
-    const invalidValues = [-1, '25', false, true]
+    const invalidValues = [-1, '25', false, true, null]
 
     for (const value of allowedVariants) {
       expect(validator(value)).toBe(true)
