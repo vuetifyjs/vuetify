@@ -14,7 +14,7 @@ export type Variant = typeof allowedVariants[number]
 
 export interface VariantProps {
   color?: String
-  variant?: Variant
+  variant: Variant
 }
 
 export const makeVariantProps = propsFactory({
