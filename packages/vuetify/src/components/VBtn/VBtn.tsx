@@ -23,9 +23,6 @@ import { Ripple } from '@/directives/ripple'
 import { computed, defineComponent } from 'vue'
 import { makeProps } from '@/util'
 
-// Types
-import type { Variant } from '@/composables/variant'
-
 export default defineComponent({
   name: 'VBtn',
 
@@ -52,7 +49,7 @@ export default defineComponent({
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'button' }),
     ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'contained' as Variant }),
+    ...makeVariantProps({ variant: 'contained' } as const),
   }),
 
   setup (props, { slots }) {
