@@ -5,14 +5,18 @@ import './VSkeletonLoader.sass'
 import Elevatable from '../../mixins/elevatable'
 import Measurable from '../../mixins/measurable'
 import Themeable from '../../mixins/themeable'
+import Detachable from '../../mixins/detachable'
+import Activatable from '../../mixins/activatable'
 
 // Utilities
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode } from 'vue'
+import { VNode, VNodeData } from 'vue'
 import { getSlot } from '../../util/helpers'
 import { PropValidator } from 'vue/types/options'
+
+import { VThemeProvider } from '../VThemeProvider'
 
 export interface HTMLSkeletonLoaderElement extends HTMLElement {
   _initialStyle?: {
@@ -22,23 +26,35 @@ export interface HTMLSkeletonLoaderElement extends HTMLElement {
 }
 
 /* @vue/component */
-export default mixins(
+const baseMixins = mixins(
   Elevatable,
   Measurable,
   Themeable,
-).extend({
+  Detachable,
+  Activatable,
+)
+
+export default baseMixins.extend({
   name: 'VSkeletonLoader',
 
   props: {
     boilerplate: Boolean,
+    eager: Boolean,
     loading: Boolean,
     tile: Boolean,
     transition: String,
     type: String,
+
     types: {
       type: Object,
       default: () => ({}),
     } as PropValidator<Record<string, string>>,
+  },
+
+  data () {
+    return {
+      isActive: !!this.value,
+    }
   },
 
   computed: {
@@ -59,6 +75,12 @@ export default mixins(
         'v-skeleton-loader--tile': this.tile,
         ...this.themeClasses,
         ...this.elevationClasses,
+      }
+    },
+    contentClasses (): object {
+      return {
+        'v-skeleton-loader__content': true,
+        'v-skeleton-loader__content--active': this.isActive,
       }
     },
     isLoading (): boolean {
@@ -99,6 +121,13 @@ export default mixins(
         ...this.types,
       }
     },
+  },
+
+  beforeMount () {
+    this.$nextTick(() => {
+      this.isBooted = this.isActive
+      this.isActive && this.show()
+    })
   },
 
   methods: {
@@ -163,6 +192,54 @@ export default mixins(
         },
       }, children)
     },
+    genContent () {
+      return this.showLazyContent(() => [
+        this.$createElement(VThemeProvider, {
+          props: {
+            root: true,
+            light: this.light,
+            dark: this.dark,
+          },
+        }, [
+          this.$createElement('div', {
+            class: this.contentClasses,
+            attrs: {
+              role: 'document',
+              tabindex: this.isActive ? 0 : undefined,
+              ...this.getScopeIdAttrs(),
+            },
+            ref: 'content',
+          }, [this.genTransition()]),
+        ]),
+      ])
+    },
+    genTransition () {
+      const content = this.genInnerContent()
+
+      if (!this.transition) return content
+
+      return this.$createElement('transition', {
+        props: {
+          name: this.transition,
+          appear: true,
+        },
+      }, [content])
+    },
+
+    genInnerContent () {
+      const data: VNodeData = {
+        class: this.classes,
+        ref: 'skeleton',
+      }
+
+      data.style = {
+        ...data.style as object,
+
+      }
+
+      return this.$createElement('div', data, this.getContentSlot())
+    },
+
     mapBones (bones: string) {
       // Remove spaces and return array of structures
       return bones.replace(/\s/g, '').split(',').map(this.genStructure)
@@ -190,6 +267,16 @@ export default mixins(
 
       delete el._initialStyle
     },
+    show () {
+      this.genSkeleton()
+      // Double nextTick to wait for lazy content to be generated
+      this.$nextTick(() => {
+        this.$nextTick(() => {
+          this.$refs.content.focus()
+          // this.bind()
+        })
+      })
+    },
   },
 
   render (h): VNode {
@@ -197,8 +284,14 @@ export default mixins(
       staticClass: 'v-skeleton-loader',
       attrs: this.attrs,
       on: this.$listeners,
+      props: {
+        eager: this.eager,
+      },
       class: this.classes,
       style: this.isLoading ? this.measurableStyles : undefined,
-    }, [this.genSkeleton()])
+    }, [
+      this.genSkeleton(),
+      this.genContent(),
+    ])
   },
 })
