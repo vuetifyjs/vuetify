@@ -1,28 +1,28 @@
-@mixin variant($contained-elevation, $outlined-opacity, $text-opacity)
+@mixin variant($default-before-opacity, $contained-elevation, $outlined-before-opacity, $text-before-opacity)
   &::before
-    position: absolute
     border-radius: inherit
+    bottom: 0
     content: ''
     left: 0
-    right: 0
-    border: thin solid transparent
-    top: 0
-    bottom: 0
     opacity: 0
+    position: absolute
+    right: 0
+    top: 0
+
+  &--variant-default
+    &::before
+      background: currentColor
+      opacity: $default-before-opacity
 
   &--variant-contained
     @include elevation($contained-elevation)
 
   &--variant-outlined
     &::before
-      border-color: currentColor
-      opacity: $outlined-opacity
-
-    @include elevation(0)
+      border: thin solid currentColor
+      opacity: $outlined-before-opacity
 
   &--variant-text
     &::before
       background: currentColor
-      opacity: $text-opacity
-
-    @include elevation(0)
+      opacity: $text-before-opacity
