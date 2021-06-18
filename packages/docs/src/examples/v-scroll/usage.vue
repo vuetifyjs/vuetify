@@ -4,7 +4,7 @@
       <v-col cols="12">
         <h3
           ref="radio"
-          class="headline"
+          class="text-h5"
         >
           Target
         </h3>
@@ -51,7 +51,7 @@
       </v-col>
 
       <v-col cols="12">
-        <h3 class="headline">
+        <h3 class="text-h5">
           Options
         </h3>
 

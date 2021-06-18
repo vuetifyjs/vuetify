@@ -27,7 +27,7 @@
             align="center"
             justify="center"
           >
-            <div class="display-3">
+            <div class="text-h2">
               {{ slide }} Slide
             </div>
           </v-row>

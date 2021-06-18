@@ -8,7 +8,6 @@ import VWindow from '../VWindow/VWindow'
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 import VProgressLinear from '../VProgressLinear'
-import { VThemeProvider } from '../VThemeProvider'
 
 // Mixins
 // TODO: Move this into core components v2.0
@@ -59,6 +58,13 @@ export default VWindow.extend({
       type: String as PropType<'' | 'left' | 'right'>,
       default: undefined,
     },
+  },
+
+  // pass down the parent's theme
+  provide (): object {
+    return {
+      parentTheme: this.theme,
+    }
   },
 
   data () {
@@ -114,16 +120,6 @@ export default VWindow.extend({
   },
 
   methods: {
-    genDefaultSlot () {
-      return this.$slots.default?.map(item => {
-        return this.$createElement(VThemeProvider, {
-          props: {
-            light: !this.theme.isDark,
-            dark: this.theme.isDark,
-          },
-        }, [item])
-      })
-    },
     genControlIcons () {
       if (this.isVertical) return null
 

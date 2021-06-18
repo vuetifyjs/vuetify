@@ -9,7 +9,7 @@
       <v-col cols="8">
         <v-card-title>
           <div>
-            <div class="headline">
+            <div class="text-h5">
               Halycon Days
             </div>
             <div>Ellie Goulding</div>
@@ -29,7 +29,7 @@
     <v-card-actions class="pa-4">
       Rate this album
       <v-spacer></v-spacer>
-      <span class="grey--text text--lighten-2 caption mr-2">
+      <span class="grey--text text--lighten-2 text-caption mr-2">
         ({{ rating }})
       </span>
       <v-rating

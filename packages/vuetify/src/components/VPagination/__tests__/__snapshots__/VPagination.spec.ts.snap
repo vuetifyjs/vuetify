@@ -103,17 +103,17 @@ exports[`VPagination.ts should only render end of range if value is equals "righ
     </li>
     <li>
       <button type="button"
-              aria-label="$vuetify.pagination.ariaLabel.page"
-              class="v-pagination__item"
+              aria-current="true"
+              aria-label="$vuetify.pagination.ariaLabel.currentPage"
+              class="v-pagination__item v-pagination__item--active primary"
       >
         98
       </button>
     </li>
     <li>
       <button type="button"
-              aria-label="$vuetify.pagination.ariaLabel.currentPage"
-              class="v-pagination__item v-pagination__item--active primary"
-              aria-current="true"
+              aria-label="$vuetify.pagination.ariaLabel.page"
+              class="v-pagination__item"
       >
         99
       </button>
@@ -574,17 +574,17 @@ exports[`VPagination.ts should only render start of range if value is equals "le
     </li>
     <li>
       <button type="button"
-              aria-label="$vuetify.pagination.ariaLabel.currentPage"
-              class="v-pagination__item v-pagination__item--active primary"
-              aria-current="true"
+              aria-label="$vuetify.pagination.ariaLabel.page"
+              class="v-pagination__item"
       >
         2
       </button>
     </li>
     <li>
       <button type="button"
-              aria-label="$vuetify.pagination.ariaLabel.page"
-              class="v-pagination__item"
+              aria-current="true"
+              aria-label="$vuetify.pagination.ariaLabel.currentPage"
+              class="v-pagination__item v-pagination__item--active primary"
       >
         3
       </button>

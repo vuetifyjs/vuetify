@@ -50,7 +50,7 @@
           align="center"
           justify="center"
         >
-          <h3 class="title">
+          <h3 class="text-h6">
             Selected {{ model }}
           </h3>
         </v-row>

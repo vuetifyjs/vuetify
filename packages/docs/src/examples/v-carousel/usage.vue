@@ -14,7 +14,7 @@
           align="center"
           justify="center"
         >
-          <div class="display-3">
+          <div class="text-h2">
             Slide {{ i + 1 }}
           </div>
         </v-row>
