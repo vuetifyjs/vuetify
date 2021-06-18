@@ -5,15 +5,15 @@ import './VBtn.sass'
 import { VIcon } from '@/components'
 
 // Composables
-import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
-import type { Variant } from '@/composables/variant'
 import { makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
@@ -23,7 +23,8 @@ import { Ripple } from '@/directives/ripple'
 import { computed, defineComponent } from 'vue'
 import { makeProps } from '@/util'
 
-import { makeSizeProps, useSize } from '@/composables/size'
+// Types
+import type { Variant } from '@/composables/variant'
 
 export default defineComponent({
   name: 'VBtn',
@@ -75,7 +76,6 @@ export default defineComponent({
         class={[
           'v-btn',
           {
-            // 'v-btn--contained': isContained.value,
             'v-btn--elevated': isElevated.value,
             'v-btn--icon': !!props.icon,
             'v-btn--plain': props.plain,

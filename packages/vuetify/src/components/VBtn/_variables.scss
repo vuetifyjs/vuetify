@@ -36,7 +36,7 @@ $button-icon-font-size: 24px !default;
 $button-icon-size: 48px !default;
 $button-line-height: normal !default;
 $button-stacked-line-height: 1.7 !default;
-$button-opacity: 0 !default;
+$button-before-opacity: 0 !default;
 $button-outlined-before-opacity: 1 !default;
 $button-padding-ratio: 2.25 !default;
 $button-stacked-padding-ratio: 4.5 !default;
@@ -94,7 +94,7 @@ $button-icon-sizes: map-merge(
 );
 
 $button-variants: (
-  $button-opacity,
+  $button-before-opacity,
   $button-elevation,
   $button-outlined-before-opacity,
   $button-text-before-opacity
