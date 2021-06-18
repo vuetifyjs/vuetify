@@ -7,7 +7,7 @@ import { propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-const allowedVariants = [null, 'default', 'contained', 'outlined', 'text'] as const
+export const allowedVariants = [null, 'default', 'contained', 'outlined', 'text'] as const
 
 export type Variant = typeof allowedVariants[number]
 
