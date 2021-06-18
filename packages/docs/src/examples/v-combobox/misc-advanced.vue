@@ -40,7 +40,7 @@
             small
             @click="parent.selectItem(item)"
           >
-            close
+            mdi-close
           </v-icon>
         </v-chip>
       </template>
