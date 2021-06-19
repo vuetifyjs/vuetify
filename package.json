@@ -74,7 +74,7 @@
     "vue-analytics": "^5.16.1",
     "vue-loader": "^15.7.1",
     "vue-meta": "^2.4.0",
-    "vue-router": "^3.0.1",
+    "vue-router": "^3.5.1",
     "vue-template-compiler": "^2.6.11",
     "vuex": "^3.0.1",
     "webpack": "^4.39.1",
