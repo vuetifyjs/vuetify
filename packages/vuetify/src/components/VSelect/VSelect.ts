@@ -658,12 +658,6 @@ export default baseMixins.extend<options>().extend({
       const keyCode = e.keyCode
       const menu = this.$refs.menu
 
-      // If enter, space, open menu
-      if ([
-        keyCodes.enter,
-        keyCodes.space,
-      ].includes(keyCode)) this.activateMenu()
-
       this.$emit('keydown', e)
 
       if (!menu) return
@@ -676,6 +670,12 @@ export default baseMixins.extend<options>().extend({
           this.$emit('update:list-index', menu.listIndex)
         })
       }
+
+      // If enter, space, open menu
+      if ([
+        keyCodes.enter,
+        keyCodes.space,
+      ].includes(keyCode)) this.activateMenu()
 
       // If menu is not active, up/down/home/end can do
       // one of 2 things. If multiple, opens the
@@ -696,11 +696,13 @@ export default baseMixins.extend<options>().extend({
       if (keyCode === keyCodes.space) return this.onSpaceDown(e)
     },
     onMenuActiveChange (val: boolean) {
-      if (!val) {
-        this.setMenuIndex(-1)
-        return
-      }
-      if (this.getMenuIndex() > -1) return
+      // If menu is closing and mulitple
+      // or menuIndex is already set
+      // skip menu index recalculation
+      if (
+        (this.multiple && !val) ||
+        this.getMenuIndex() > -1
+      ) return
 
       const menu = this.$refs.menu
 
