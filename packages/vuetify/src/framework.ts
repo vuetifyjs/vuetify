@@ -1,5 +1,5 @@
-import { createDisplay, DisplaySymbol } from './composables/display'
-import { createTheme, ThemeSymbol } from './composables/theme'
+import { createDisplay, DisplaySymbol } from '@/composables/display'
+import { createTheme, ThemeSymbol } from '@/composables/theme'
 import { defaultSets, IconSymbol } from '@/composables/icons'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createLocaleAdapter, LocaleAdapterSymbol } from '@/composables/locale'

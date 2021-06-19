@@ -3,7 +3,7 @@ import { mergeDeep } from '@/util'
 
 import type { InjectionKey, Ref } from 'vue'
 
-interface DefaultsInstance {
+export interface DefaultsInstance {
   [key: string]: undefined | Record<string, unknown>
   global?: Record<string, unknown>
 }

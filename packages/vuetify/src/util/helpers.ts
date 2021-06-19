@@ -1,4 +1,3 @@
-import type { DataTableCompareFunction, ItemGroup, SelectItemKey } from 'vuetify/types'
 import type { Ref, Slots, VNode } from 'vue'
 import { camelize, Fragment, isRef, ref } from 'vue'
 
@@ -54,6 +53,8 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
   path = path.replace(/^\./, '') // strip a leading dot
   return getNestedValue(obj, path.split('.'), fallback)
 }
+
+type SelectItemKey = string | (string | number)[] | ((item: Dictionary<any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: object,
@@ -178,6 +179,11 @@ export function arrayDiff (a: any[], b: any[]): any[] {
   return diff
 }
 
+interface ItemGroup<T> {
+  name: string
+  items: T[]
+}
+
 export function groupItems<T extends any = any> (
   items: T[],
   groupBy: string[],
@@ -208,6 +214,7 @@ export function wrapInArray<T> (v: T | T[] | null | undefined): T[] {
       ? v : [v]
 }
 
+type DataTableCompareFunction<T = any> = (a: T, b: T) => number
 export function sortItems<T extends any = any> (
   items: T[],
   sortBy: string[],
