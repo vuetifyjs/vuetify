@@ -35,4 +35,5 @@ export default [
   createConfig('framework.d.ts', 'lib/framework.d.ts'),
   createConfig('entry-bundler.d.ts', 'dist/vuetify.d.ts'),
   createConfig('components/index.d.ts', 'lib/components/index.d.ts'),
+  createConfig('directives/index.d.ts', 'lib/directives/index.d.ts'),
 ]
