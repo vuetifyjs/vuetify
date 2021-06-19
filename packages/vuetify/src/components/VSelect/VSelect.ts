@@ -696,19 +696,18 @@ export default baseMixins.extend<options>().extend({
       if (keyCode === keyCodes.space) return this.onSpaceDown(e)
     },
     onMenuActiveChange (val: boolean) {
-      // If menu is closing and mulitple
-      // or menuIndex is already set
-      // skip menu index recalculation
-      if (
-        (this.multiple && !val) ||
-        this.getMenuIndex() > -1
-      ) return
+      if (!val) {
+        this.setMenuIndex(-1)
+        return
+      }
+      if (this.getMenuIndex() > -1) return
 
       const menu = this.$refs.menu
 
       if (!menu || !this.isDirty) return
 
       // When menu opens, set index of first active item
+      this.$refs.menu.getTiles()
       for (let i = 0; i < menu.tiles.length; i++) {
         if (menu.tiles[i].getAttribute('aria-selected') === 'true') {
           this.setMenuIndex(i)
@@ -838,11 +837,6 @@ export default baseMixins.extend<options>().extend({
           this.$refs.menu &&
             (this.$refs.menu as { [key: string]: any }).updateDimensions()
         })
-
-        // We only need to reset list index for multiple
-        // to keep highlight when an item is toggled
-        // on and off
-        if (!this.multiple) return
 
         const listIndex = this.getMenuIndex()
 
