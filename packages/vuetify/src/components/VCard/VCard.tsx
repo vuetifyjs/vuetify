@@ -87,7 +87,7 @@ export default defineComponent({
       const hasImage = !!(slots.image || props.image)
       const hasHeader = hasHeaderText || hasPrepend || hasAppend
       const hasText = !!(slots.text || props.text)
-      const isLink = !!(props.link || link.isLink || attrs.onClick || attrs.onClickOnce)
+      const isLink = !!(props.link || link.isLink.value || attrs.onClick || attrs.onClickOnce)
       const isClickable = isLink && !props.disabled
 
       return (
@@ -114,6 +114,7 @@ export default defineComponent({
             positionStyles.value,
           ]}
           href={ link.href?.value }
+          onClick={ isClickable && link?.navigate }
           v-ripple={ isClickable }
         >
           { isClickable && (<div class="v-card__overlay" />) }

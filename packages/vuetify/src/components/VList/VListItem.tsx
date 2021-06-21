@@ -79,7 +79,7 @@ export default defineComponent({
       const hasHeader = !!(hasTitle || hasSubtitle)
       const hasAppend = (slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = (slots.prepend || props.prependAvatar || props.prependIcon)
-      const isLink = !!(props.link || link.isLink || attrs.onClick || attrs.onClickOnce)
+      const isLink = !!(props.link || link.isLink.value || attrs.onClick || attrs.onClickOnce)
       const isClickable = isLink && !props.disabled
       const isActive = props.active || link.isExactActive?.value
 
@@ -107,6 +107,7 @@ export default defineComponent({
           ]}
           href={ link.href?.value }
           tabindex={ isClickable ? 0 : undefined }
+          onClick={ isClickable && link?.navigate }
           v-ripple={ isClickable }
         >
           { (isClickable || props.active) && (<div class="v-list-item__overlay" />) }

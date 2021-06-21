@@ -78,7 +78,7 @@ export default defineComponent({
     })))
 
     return () => {
-      const Tag = (props.to || props.href) ? 'a' : props.tag
+      const Tag = (link.isLink.value) ? 'a' : props.tag
 
       return (
         <Tag
