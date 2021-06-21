@@ -16,7 +16,7 @@ export function useBorder (props: BorderProps, name: string) {
   const borderClasses = computed(() => {
     const classes: string[] = []
 
-    if (props.border === true || props.border === '') {
+    if (props.border != null && props.border !== false) {
       classes.push(`${name}--border`)
     }
 
