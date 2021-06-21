@@ -8,7 +8,7 @@ import { propsFactory } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-export const allowedVariants = ['default', 'contained', 'outlined', 'text'] as const
+export const allowedVariants = ['contained', 'outlined', 'plain', 'text'] as const
 
 export type Variant = typeof allowedVariants[number]
 
@@ -21,7 +21,7 @@ export const makeVariantProps = propsFactory({
   color: String,
   variant: {
     type: String as PropType<Variant>,
-    default: 'default',
+    required: true,
     validator: (v: any) => allowedVariants.includes(v),
   },
 }, 'variant')

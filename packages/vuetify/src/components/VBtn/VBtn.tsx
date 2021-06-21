@@ -29,9 +29,7 @@ export default defineComponent({
   directives: { Ripple },
 
   props: makeProps({
-    text: Boolean,
     flat: Boolean,
-    plain: Boolean,
     icon: [Boolean, String],
     prependIcon: String,
     appendIcon: String,
@@ -64,7 +62,7 @@ export default defineComponent({
     const { sizeClasses } = useSize(props, 'v-btn')
 
     const isElevated = computed(() => {
-      return props.variant === 'contained' && !(props.disabled || props.flat || props.plain)
+      return props.variant === 'contained' && !(props.disabled || props.flat)
     })
 
     return () => (
@@ -74,8 +72,8 @@ export default defineComponent({
           'v-btn',
           {
             'v-btn--elevated': isElevated.value,
+            'v-btn--flat': props.flat,
             'v-btn--icon': !!props.icon,
-            'v-btn--plain': props.plain,
             'v-btn--block': props.block,
             'v-btn--disabled': props.disabled,
             'v-btn--stacked': props.stacked,

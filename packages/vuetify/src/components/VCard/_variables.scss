@@ -7,10 +7,8 @@ $card-avatar-margin-end: 1rem !default;
 $card-avatar-margin-start: 1rem !default;
 $card-avatar-padding: .5rem 1rem !default;
 $card-background: rgb(var(--v-theme-surface)) !default;
-$card-before-opacity: 0 !default;
-$card-border-before-elevation: 0 !default;
+$card-plain-opacity: .62 !default;
 $card-border-color: $border-color-root !default;
-$card-border-elevation: 0 !default;
 $card-border-radius: $border-radius-root !default;
 $card-border-style: $border-style-root !default;
 $card-border-thin-width: thin !default;
@@ -21,7 +19,7 @@ $card-elevation: 1 !default;
 $card-hover-elevation: 8 !default;
 $card-item-align-items: center !default;
 $card-item-padding: .5rem 1rem !default;
-$card-outlined-before-opacity: var(--v-border-opacity) !default;
+$card-outlined-opacity: var(--v-border-opacity) !default;
 $card-padding: 0 !default;
 $card-positions: absolute fixed !default;
 $card-pseudo-transition-property: box-shadow, opacity !default;
@@ -37,7 +35,7 @@ $card-subtitle-line-height: map-deep-get($typography, 'body-2', 'line-height') !
 $card-subtitle-opacity: var(--v-medium-emphasis-opacity) !default;
 $card-subtitle-padding: 0 1rem !default;
 $card-subtitle-text-transform: none !default;
-$card-text-before-opacity: var(--v-activated-opacity) !default;
+$card-text-variant-opacity: var(--v-activated-opacity) !default;
 $card-text-comfortable-line-height: 1.2rem !default;
 $card-text-compact-line-height: 1.15rem !default;
 $card-text-font-size: map-deep-get($typography, 'body-2', 'size') !default;
@@ -101,8 +99,10 @@ $card-theme: (
 );
 
 $card-variants: (
-  $card-before-opacity,
+  $card-background,
   $card-elevation,
-  $card-outlined-before-opacity,
-  $card-text-before-opacity
+  $card-plain-opacity,
+  $card-outlined-opacity,
+  $card-text-variant-opacity,
+  'v-card'
 );

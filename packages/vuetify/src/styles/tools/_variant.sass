@@ -1,28 +1,22 @@
-@mixin variant($default-before-opacity, $contained-elevation, $outlined-before-opacity, $text-before-opacity)
-  &::before
-    border-radius: inherit
-    bottom: 0
-    content: ''
-    left: 0
-    opacity: 0
-    position: absolute
-    right: 0
-    top: 0
+@mixin variant($contained-background, $contained-elevation, $plain-opacity, $outlined-opacity, $text-opacity, $name)
+  &--variant-plain
+    opacity: $plain-opacity
 
-  &--variant-default
-    &::before
-      background: currentColor
-      opacity: $default-before-opacity
+    &:focus,
+    &:hover
+      opacity: 1
+
+  &--variant-plain .#{$name}__overlay
+    display: none
 
   &--variant-contained
+    background: $contained-background
+
     @include elevation($contained-elevation)
 
   &--variant-outlined
-    &::before
-      border: thin solid currentColor
-      opacity: $outlined-before-opacity
+    border: thin solid currentColor
 
-  &--variant-text
-    &::before
-      background: currentColor
-      opacity: $text-before-opacity
+  &--variant-text .#{$name}__overlay
+    background: currentColor
+    opacity: $text-opacity

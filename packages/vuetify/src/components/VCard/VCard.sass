@@ -2,10 +2,12 @@
 @import './index'
 
 .v-card
-  background: $card-background
   color: $card-color
   position: relative
   padding: $card-padding
+  transition-property: box-shadow, opacity, color
+  transition-duration: 0.28s
+  transition-timing-function: $standard-easing
 
   @include border($card-border...)
   @include position($card-positions)
@@ -19,6 +21,9 @@
 
     > [class*='v-card-']
       opacity: $card-disabled-opacity
+
+  &--flat
+    box-shadow: none
 
   &--hover
     cursor: pointer
@@ -144,6 +149,8 @@
   opacity: $card-text-opacity
   padding: $card-text-padding
   text-transform: $card-text-text-transform
+  transition: inherit
+  transition-property: color, opacity
 
   @include card-line-height-densities($card-text-densities)
 
@@ -180,3 +187,8 @@
   + .v-card-media
     border-top-left-radius: inherit
     border-top-right-radius: inherit
+
+  .v-card:not(.v-card--link) &
+    &:focus,
+    &:hover
+      opacity: initial
