@@ -40,7 +40,6 @@ export default defineComponent({
     block: Boolean,
     stacked: Boolean,
 
-    href: String,
     color: String,
     disabled: Boolean,
     ...makeBorderProps(),
@@ -94,7 +93,7 @@ export default defineComponent({
               'v-btn--block': props.block,
               'v-btn--disabled': props.disabled,
               'v-btn--stacked': props.stacked,
-              'v-btn--active': link?.isExactActive.value,
+              'v-btn--active': link.isExactActive?.value,
             },
             themeClasses.value,
             borderClasses.value,
@@ -111,7 +110,7 @@ export default defineComponent({
             positionStyles.value,
           ]}
           disabled={ props.disabled || undefined }
-          href={ link?.href.value ?? props.href }
+          href={ link.href?.value }
           v-ripple={[
             !props.disabled,
             null,

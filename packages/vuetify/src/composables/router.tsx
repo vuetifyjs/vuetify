@@ -1,9 +1,19 @@
 // Utilities
-import { computed, getCurrentInstance, onBeforeUnmount, onMounted, resolveDynamicComponent, watchEffect } from 'vue'
+import {
+  computed,
+  getCurrentInstance,
+  onBeforeUnmount,
+  onMounted,
+  resolveDynamicComponent,
+  watchEffect,
+} from 'vue'
 import { IN_BROWSER, IS_PROD, propsFactory } from '@/util'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type {
+  ComputedRef, PropType,
+  Ref,
+} from 'vue'
 import type {
   RouterLink as _RouterLink,
   useLink as _useLink,
@@ -24,33 +34,34 @@ export function useRouter (): Router | undefined {
   return getCurrentInstance()?.proxy?.$router
 }
 
-export function useLink (props: Partial<UseLinkOptions>): ReturnType<typeof _useLink> | undefined {
+interface LinkProps extends Partial<UseLinkOptions> {
+ href?: string
+}
+interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'> {
+  isLink: ComputedRef<boolean>
+  href?: ComputedRef<string | undefined>
+}
+
+export function useLink (props: LinkProps): UseLink {
   const RouterLink = resolveDynamicComponent('RouterLink') as typeof _RouterLink | string
 
-  if (typeof RouterLink === 'string') return
+  const isLink = { isLink: computed(() => !!props.href) }
 
-  const link = RouterLink.useLink(props as UseLinkOptions)
+  if (typeof RouterLink === 'string') return isLink
 
-  if (!IS_PROD && IN_BROWSER) {
-    const instance = getCurrentInstance()
-    watchEffect(() => {
-      if (instance) (instance as any).__vrl_route = link.route
-    }, { flush: 'post' })
+  const link = props.to ? RouterLink.useLink(props as UseLinkOptions) : undefined
 
-    watchEffect(() => {
-      if (instance) {
-        (instance as any).__vrl_active = link.isActive
-        ;(instance as any).__vrl_exactActive = link.isExactActive
-      }
-    }, { flush: 'post' })
-  }
+  const href = computed(() => {
+    return props.to ? link?.route.value.href : props.href
+  })
 
   return props.to
-    ? link
-    : undefined
+    ? { ...link, isLink: computed(() => true), href }
+    : isLink
 }
 
 export const makeRouterProps = propsFactory({
+  href: String,
   to: [String, Object] as PropType<RouteLocationRaw>,
   replace: Boolean,
 }, 'router')

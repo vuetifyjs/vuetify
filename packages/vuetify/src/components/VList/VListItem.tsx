@@ -19,6 +19,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useColor } from '@/composables/color'
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeRouterProps, useLink } from '@/composables/router'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -46,6 +47,7 @@ export default defineComponent({
     subtitle: String,
     contained: String,
     title: String,
+
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
@@ -53,6 +55,7 @@ export default defineComponent({
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
+    ...makeRouterProps(),
   }),
 
   setup (props, { attrs, slots }) {
@@ -68,6 +71,7 @@ export default defineComponent({
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props, 'v-list-item')
+    const link = useLink(props)
 
     return () => {
       const hasTitle = (slots.title || props.title)
@@ -75,19 +79,20 @@ export default defineComponent({
       const hasHeader = !!(hasTitle || hasSubtitle)
       const hasAppend = (slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = (slots.prepend || props.prependAvatar || props.prependIcon)
-      const isLink = !!(props.link || attrs.onClick || attrs.onClickOnce)
+      const isLink = !!(props.link || link.isLink || attrs.onClick || attrs.onClickOnce)
       const isClickable = isLink && !props.disabled
+      const isActive = props.active || link.isExactActive?.value
 
       return (
         <props.tag
           class={[
             'v-list-item',
             {
-              'v-list-item--active': props.active,
+              'v-list-item--active': isActive,
               'v-list-item--disabled': props.disabled,
               'v-list-item--link': isLink,
               'v-list-item--contained': props.contained,
-              [`${props.activeClass}`]: props.active && props.activeClass,
+              [`${props.activeClass}`]: isActive && props.activeClass,
             },
             themeClasses.value,
             colorClasses.value,
@@ -100,6 +105,7 @@ export default defineComponent({
             colorStyles.value,
             dimensionStyles.value,
           ]}
+          href={ link.href?.value }
           tabindex={ isClickable ? 0 : undefined }
           v-ripple={ isClickable }
         >

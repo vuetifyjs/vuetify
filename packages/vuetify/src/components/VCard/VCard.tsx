@@ -33,6 +33,7 @@ import { Ripple } from '@/directives/ripple'
 // Utilities
 import { defineComponent, toRef } from 'vue'
 import { makeProps } from '@/util'
+import { makeRouterProps, useLink } from '@/composables/router'
 
 export default defineComponent({
   name: 'VCard',
@@ -54,6 +55,7 @@ export default defineComponent({
     subtitle: String,
     text: String,
     title: String,
+
     ...makeThemeProps(),
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -62,9 +64,10 @@ export default defineComponent({
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
+    ...makeRouterProps(),
   }),
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { borderClasses } = useBorder(props, 'v-card')
@@ -73,6 +76,7 @@ export default defineComponent({
     const { positionClasses, positionStyles } = usePosition(props, 'v-card')
     const { roundedClasses } = useRounded(props, 'v-card')
     const { densityClasses } = useDensity(props, 'v-card')
+    const link = useLink(props)
 
     return () => {
       const hasTitle = !!(slots.title || props.title)
@@ -83,7 +87,8 @@ export default defineComponent({
       const hasImage = !!(slots.image || props.image)
       const hasHeader = hasHeaderText || hasPrepend || hasAppend
       const hasText = !!(slots.text || props.text)
-      const hasOverlay = props.link && !props.disabled
+      const isLink = !!(props.link || link.isLink || attrs.onClick || attrs.onClickOnce)
+      const isClickable = isLink && !props.disabled
 
       return (
         <props.tag
@@ -108,9 +113,10 @@ export default defineComponent({
             dimensionStyles.value,
             positionStyles.value,
           ]}
-          v-ripple={ hasOverlay }
+          href={ link.href?.value }
+          v-ripple={ isClickable }
         >
-          { hasOverlay && (<div class="v-card__overlay" />) }
+          { isClickable && (<div class="v-card__overlay" />) }
 
           { hasImage && (
             <VCardImg>
