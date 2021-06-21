@@ -59,10 +59,14 @@ export default defineComponent({
   }),
 
   setup (props, { attrs, slots }) {
+    const link = useLink(props)
+    const isActive = computed(() => {
+      return props.active || link.isExactActive?.value
+    })
     const { themeClasses } = useTheme(props)
     const { colorClasses, colorStyles } = useColor(computed(() => {
       const key = props.contained && props.active ? 'background' : 'text'
-      const color = (props.active && props.activeColor) || props.color
+      const color = (isActive.value && props.activeColor) || props.color
 
       return { [`${key}`]: color }
     }))
@@ -71,7 +75,6 @@ export default defineComponent({
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props, 'v-list-item')
-    const link = useLink(props)
 
     return () => {
       const hasTitle = (slots.title || props.title)
@@ -81,18 +84,17 @@ export default defineComponent({
       const hasPrepend = (slots.prepend || props.prependAvatar || props.prependIcon)
       const isLink = !!(props.link || link.isLink.value || attrs.onClick || attrs.onClickOnce)
       const isClickable = isLink && !props.disabled
-      const isActive = props.active || link.isExactActive?.value
 
       return (
         <props.tag
           class={[
             'v-list-item',
             {
-              'v-list-item--active': isActive,
+              'v-list-item--active': isActive.value,
               'v-list-item--disabled': props.disabled,
               'v-list-item--link': isLink,
               'v-list-item--contained': props.contained,
-              [`${props.activeClass}`]: isActive && props.activeClass,
+              [`${props.activeClass}`]: isActive.value && props.activeClass,
             },
             themeClasses.value,
             colorClasses.value,
@@ -110,7 +112,7 @@ export default defineComponent({
           onClick={ isClickable && link?.navigate }
           v-ripple={ isClickable }
         >
-          { (isClickable || props.active) && (<div class="v-list-item__overlay" />) }
+          { (isClickable || isActive.value) && (<div class="v-list-item__overlay" />) }
 
           { hasPrepend && (
             slots.prepend
