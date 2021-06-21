@@ -5,9 +5,8 @@ import {
   onBeforeUnmount,
   onMounted,
   resolveDynamicComponent,
-  watchEffect,
 } from 'vue'
-import { IN_BROWSER, IS_PROD, propsFactory } from '@/util'
+import { propsFactory } from '@/util'
 
 // Types
 import type {
