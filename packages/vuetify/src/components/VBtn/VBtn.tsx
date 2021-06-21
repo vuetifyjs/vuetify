@@ -62,7 +62,7 @@ export default defineComponent({
     const { sizeClasses } = useSize(props, 'v-btn')
 
     const isElevated = computed(() => {
-      return props.variant === 'contained' && !(props.disabled || props.flat)
+      return props.variant === 'contained' && !(props.disabled || props.flat || props.border)
     })
 
     return () => (

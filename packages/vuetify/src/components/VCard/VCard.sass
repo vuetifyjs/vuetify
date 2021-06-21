@@ -15,6 +15,10 @@
   @include states('.v-card__overlay')
   @include variant($card-variants...)
 
+  &--border
+    border-width: $card-border-thin-width
+    box-shadow: none
+
   &--disabled
     pointer-events: none
     user-select: none
@@ -188,7 +192,5 @@
     border-top-left-radius: inherit
     border-top-right-radius: inherit
 
-  .v-card:not(.v-card--link) &
-    &:focus,
-    &:hover
-      opacity: initial
+  .v-card--variant-text:not(.v-card--link):hover &
+    opacity: $card-text-variant-opacity
