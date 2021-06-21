@@ -31,7 +31,7 @@ import { makeVariantProps, useVariant } from '@/composables/variant'
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { makeProps } from '@/util'
 
 export default defineComponent({
@@ -64,7 +64,7 @@ export default defineComponent({
     ...makeVariantProps({ variant: 'contained' } as const),
   }),
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-card')
     const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-card')
@@ -73,10 +73,6 @@ export default defineComponent({
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-card')
     const { roundedClasses } = useRounded(props, 'v-card')
-
-    const isElevated = computed(() => {
-      return props.variant === 'contained' && !(props.disabled || props.flat)
-    })
 
     return () => {
       const hasTitle = !!(slots.title || props.title)
@@ -88,6 +84,8 @@ export default defineComponent({
       const hasHeader = hasHeaderText || hasPrepend || hasAppend
       const hasText = !!(slots.text || props.text)
       const hasOverlay = (props.variant === 'text' || props.link) && !props.disabled
+      const isLink = !!(props.link || attrs.onClick || attrs.onClickOnce)
+      const isClickable = isLink && !props.disabled
 
       return (
         <props.tag
@@ -95,10 +93,9 @@ export default defineComponent({
             'v-card',
             {
               'v-card--disabled': props.disabled,
-              'v-card--elevated': isElevated.value,
               'v-card--flat': props.flat,
               'v-card--hover': props.hover && !(props.disabled || props.flat),
-              'v-card--link': props.link,
+              'v-card--link': isLink,
             },
             themeClasses.value,
             borderClasses.value,
@@ -114,7 +111,7 @@ export default defineComponent({
             dimensionStyles.value,
             positionStyles.value,
           ]}
-          v-ripple={ hasOverlay }
+          v-ripple={ isClickable }
         >
           { hasOverlay && (<div class="v-card__overlay" />) }
 
