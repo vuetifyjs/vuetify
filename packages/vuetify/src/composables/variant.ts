@@ -21,7 +21,7 @@ export const makeVariantProps = propsFactory({
   color: String,
   variant: {
     type: String as PropType<Variant>,
-    required: true,
+    default: 'contained',
     validator: (v: any) => allowedVariants.includes(v),
   },
 }, 'variant')
