@@ -1,6 +1,6 @@
 // Defaults
-$divider-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
-$divider-border-style: solid !default;
+$divider-border-color: $border-color-root !default;
+$divider-border-style: $border-style-root !default;
 $divider-border-width: thin 0 0 0 !default;
 $divider-flex: 1 1 100% !default;
 $divider-inset-margin: 72px !default;

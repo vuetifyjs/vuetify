@@ -18,7 +18,7 @@ $button-bottom-navigation-shift-top: 50% !default;
 $button-bottom-navigation-shift-transform: scale(.8) translateY(10px) !default;
 $button-bottom-navigation-text-transform: none !default;
 $button-bottom-navigation-transition-duration: .2s !default;
-$button-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
+$button-border-color: $border-color-root !default;
 $button-border-radius: $border-radius-root !default;
 $button-border-style: $border-style-root !default;
 $button-border-thin-width: thin !default;
