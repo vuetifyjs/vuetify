@@ -5,9 +5,9 @@
   color: $card-color
   position: relative
   padding: $card-padding
-  transition-property: box-shadow, opacity, color
-  transition-duration: 0.28s
-  transition-timing-function: $standard-easing
+  transition-duration: $card-transition-duration
+  transition-property: $card-transition-property
+  transition-timing-function: $card-transition-timing-function
 
   @include border($card-border...)
   @include position($card-positions)
@@ -43,8 +43,7 @@
       position: absolute
       right: 0
       top: 0
-      transition-property: $card-pseudo-transition-property
-      transition: $card-pseudo-transition
+      transition: inherit
 
     &::before
       opacity: 1

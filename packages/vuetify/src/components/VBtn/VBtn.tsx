@@ -54,11 +54,11 @@ export default defineComponent({
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-btn')
     const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-btn')
-    const { roundedClasses } = useRounded(props, 'v-btn')
     const { densityClasses } = useDensity(props, 'v-btn')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-btn')
+    const { roundedClasses } = useRounded(props, 'v-btn')
     const { sizeClasses } = useSize(props, 'v-btn')
 
     const isElevated = computed(() => {
@@ -71,11 +71,11 @@ export default defineComponent({
         class={[
           'v-btn',
           {
+            'v-btn--block': props.block,
+            'v-btn--disabled': props.disabled,
             'v-btn--elevated': isElevated.value,
             'v-btn--flat': props.flat,
             'v-btn--icon': !!props.icon,
-            'v-btn--block': props.block,
-            'v-btn--disabled': props.disabled,
             'v-btn--stacked': props.stacked,
           },
           themeClasses.value,

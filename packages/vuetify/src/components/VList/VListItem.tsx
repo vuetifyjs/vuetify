@@ -18,6 +18,7 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -25,7 +26,6 @@ import { Ripple } from '@/directives/ripple'
 // Utilities
 import { defineComponent } from 'vue'
 import { makeProps } from '@/util'
-import { makeVariantProps, useVariant } from '@/composables/variant'
 
 export default defineComponent({
   name: 'VListItem',
@@ -44,7 +44,6 @@ export default defineComponent({
     prependIcon: String,
     subtitle: String,
     title: String,
-
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
@@ -57,8 +56,8 @@ export default defineComponent({
 
   setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
-    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-list-item')
     const { borderClasses } = useBorder(props, 'v-list-item')
+    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-list-item')
     const { densityClasses } = useDensity(props, 'v-list-item')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
@@ -84,8 +83,8 @@ export default defineComponent({
               [`${props.activeClass}`]: props.active && props.activeClass,
             },
             themeClasses.value,
-            colorClasses.value,
             borderClasses.value,
+            colorClasses.value,
             densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,

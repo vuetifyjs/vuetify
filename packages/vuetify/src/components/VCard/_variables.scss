@@ -22,8 +22,6 @@ $card-item-padding: .5rem 1rem !default;
 $card-outlined-opacity: var(--v-border-opacity) !default;
 $card-padding: 0 !default;
 $card-positions: absolute fixed !default;
-$card-pseudo-transition-property: box-shadow, opacity !default;
-$card-pseudo-transition: 0.28s $standard-easing !default;
 $card-subtitle-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $card-subtitle-comfortable-line-height: 1.125rem !default;
 $card-subtitle-compact-line-height: 1rem !default;
@@ -61,6 +59,9 @@ $card-title-padding: .5rem 1rem !default;
 $card-title-text-transform: none !default;
 $card-title-word-break: normal !default;
 $card-title-word-wrap: break-word !default;
+$card-transition-property: box-shadow, opacity, color !default;
+$card-transition-duration: 0.28s !default;
+$card-transition-timing-function: $standard-easing !default;
 
 $card-border: () !default;
 $card-border: (

@@ -8,8 +8,13 @@
   outline: none
   transition: $list-item-transition
 
+  @include border($list-item-border...)
   @include states('.v-list-item__overlay')
   @include variant($list-item-variants...)
+
+  &--border
+    border-width: $list-item-border-thin-width
+    box-shadow: none
 
   &--disabled
     pointer-events: none
