@@ -44,12 +44,15 @@ describe('v-intersect', () => {
       modifiers: { once: true },
     } as any, vnode, null)
 
-    expect(callback).toHaveBeenCalled()
+    expect(callback).toHaveBeenCalledTimes(1)
     expect((el as any)._observe).toBeTruthy()
 
-    if ((el as any)._observe) {
-      (el as any)._observe.observer.callback()
-    }
+    ;(el as any)._observe.observer.callback([{ isIntersecting: false }])
+
+    expect(callback).toHaveBeenCalledTimes(1)
+    expect((el as any)._observe).toBeTruthy()
+
+    ;(el as any)._observe.observer.callback([{ isIntersecting: true }])
 
     expect(callback).toHaveBeenCalledTimes(2)
     expect((el as any)._observe).toBeUndefined()

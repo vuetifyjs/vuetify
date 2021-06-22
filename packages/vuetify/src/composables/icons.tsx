@@ -68,7 +68,7 @@ type IconInstance = {
   icon: IconValue
 }
 
-export const VuetifyIconSymbol: InjectionKey<IconOptions> = Symbol.for('vuetify:icons')
+export const IconSymbol: InjectionKey<IconOptions> = Symbol.for('vuetify:icons')
 
 export const makeIconProps = propsFactory({
   icon: {
@@ -159,7 +159,7 @@ export const defaultSets: Record<string, IconSet> = {
 
 // Composables
 export const useIcon = (props: Ref<string | undefined> | { icon?: IconValue }) => {
-  const icons = inject(VuetifyIconSymbol)
+  const icons = inject(IconSymbol)
 
   if (!icons) throw new Error('Missing Vuetify Icons provide!')
 

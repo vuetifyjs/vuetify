@@ -7,18 +7,10 @@ import Intersect from '../../directives/intersect'
 // Utilities
 import { consoleWarn } from '../../util/console'
 
-// Globals
-import { SUPPORTS_INTERSECTION } from '@/util'
-
 // Types
 import Vue from 'vue'
 
 export default function intersectable (options: { onVisible: string[] }) {
-  if (!SUPPORTS_INTERSECTION) {
-    // do nothing because intersection observer is not available
-    return Vue.extend({ name: 'intersectable' })
-  }
-
   return Vue.extend({
     name: 'intersectable',
 

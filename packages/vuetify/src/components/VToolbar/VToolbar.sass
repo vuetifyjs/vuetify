@@ -34,10 +34,10 @@
   > .v-btn.v-btn--icon
     &:first-child
       +ltr()
-        margin-left: -#{$toolbar-btn-icon-size / 4}
+        margin-left: -$toolbar-btn-icon-size / 4
 
       +rtl()
-        margin-right: -#{$toolbar-btn-icon-size / 4}
+        margin-right: -$toolbar-btn-icon-size / 4
 
       + .v-toolbar__title
         +ltr()
@@ -48,25 +48,25 @@
 
     &:last-child
       +ltr()
-        margin-right: -#{$toolbar-btn-icon-size / 4}
+        margin-right: -$toolbar-btn-icon-size / 4
 
       +rtl()
-        margin-left: -#{$toolbar-btn-icon-size / 4}
+        margin-left: -$toolbar-btn-icon-size / 4
 
   > .v-tabs
     height: inherit
-    margin-top: -#{$toolbar-content-padding-y}
-    margin-bottom: -#{$toolbar-content-padding-y}
+    margin-top: -$toolbar-content-padding-y
+    margin-bottom: -$toolbar-content-padding-y
 
     > .v-slide-group.v-tabs-bar
       background-color: inherit
       height: inherit
 
     &:first-child
-      margin-left: -#{$toolbar-content-padding-x}
+      margin-left: -$toolbar-content-padding-x
 
     &:last-child
-      margin-right: -#{$toolbar-content-padding-x}
+      margin-right: -$toolbar-content-padding-x
 
 .v-toolbar__content,
 .v-toolbar__extension

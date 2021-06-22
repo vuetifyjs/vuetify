@@ -1,5 +1,3 @@
 {
-  "props": {
-    "theme": "Theme to be applied to the component."
-  }
+  "props": {}
 }

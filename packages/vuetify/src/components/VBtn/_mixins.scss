@@ -4,7 +4,7 @@
 
 @mixin button-sizes ($map: $button-sizes, $immediate: false) {
   @each $sizeName, $multiplier in $size-scales {
-    $size: map-get($map, 'font-size') + (2 * $multiplier) / 16;
+    $size: map-get($map, 'font-size') + 2 * $multiplier / 16;
     $height: map-get($map, 'height') + (8 * $multiplier);
 
     #{if($immediate, &, '')}.v-btn--size-#{$sizeName} {
@@ -13,6 +13,23 @@
       font-size: $size;
       min-width: roundEven($height * map-get($map, 'width-ratio'));
       padding: 0 roundEven($height / map-get($map, 'padding-ratio'));
+    }
+  }
+}
+
+@mixin button-density ($properties, $densities) {
+  @each $density, $multiplier in $densities {
+    $value: calc(var(--v-btn-height) + #{$multiplier * $spacer});
+
+    &.v-btn--density-#{$density} {
+      @if type-of($properties) == "list" {
+        @each $property in $properties {
+          #{$property}: $value;
+        }
+      }
+      @else {
+        #{$properties}: $value;
+      }
     }
   }
 }

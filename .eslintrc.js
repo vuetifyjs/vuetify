@@ -11,6 +11,7 @@ module.exports = {
   extends: [
     'standard',
     'plugin:vue/vue3-recommended',
+    // 'plugin:vuetify/base',
     'plugin:sonarjs/recommended',
   ],
   env: {
@@ -22,7 +23,6 @@ module.exports = {
     '@typescript-eslint',
     'sonarjs',
     'react',
-    // 'vuetify',
   ],
   rules: {
     // allow paren-less arrow functions
@@ -117,10 +117,6 @@ module.exports = {
         'vue/singleline-html-element-content-newline': 'off',
         'vue/multiline-html-element-content-newline': 'off',
         'vue/valid-v-slot': ['error', { allowModifiers: true }],
-
-        // 'vuetify/grid-unknown-attributes': 'error',
-        // 'vuetify/no-legacy-grid': 'error',
-        // 'vuetify/no-deprecated-classes': 'error',
       },
     },
     {

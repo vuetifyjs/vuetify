@@ -24,7 +24,7 @@
 
   @at-root
     +button-sizes()
-    +density('v-btn', 'height', $button-density)
+    +button-density('height', $button-density)
 
   +states('.v-btn__overlay')
 
@@ -34,7 +34,7 @@
     padding: 0
 
     @at-root &
-      +density('v-btn', ('width', 'height'), $button-icon-density)
+      +button-density(('width', 'height'), $button-icon-density)
 
   &--border
     +border($button-border-color, $button-border-style, $button-border-width)
@@ -79,7 +79,7 @@
       .v-btn__overlay
         // This is multiplied by the text opacity,
         // so we need to divide it to get the desired value
-        opacity: ($button-disabled-overlay / $button-disabled-opacity)
+        opacity: $button-disabled-overlay / $button-disabled-opacity
 
   &--stacked
     flex-direction: column
@@ -87,7 +87,7 @@
 
     @at-root
       @include button-sizes($button-stacked-sizes, true)
-      @include density('v-btn', 'height', $button-stacked-density)
+      @include button-density('height', $button-stacked-density)
 
 .v-btn__overlay
   background-color: currentColor
@@ -167,5 +167,5 @@
       @include ltr()
         margin-left: $button-card-actions-margin
 
-      @linclude rtl()
+      @include rtl()
         margin-right: $button-card-actions-margin

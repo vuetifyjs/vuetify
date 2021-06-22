@@ -11,7 +11,6 @@ import { VThemeProvider } from '../VThemeProvider'
 import Activatable from '../../mixins/activatable'
 import Delayable from '../../mixins/delayable'
 import Dependent from '../../mixins/dependent'
-import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable'
 import Returnable from '../../mixins/returnable'
 import Roundable from '../../mixins/roundable'
@@ -36,7 +35,6 @@ import { VNode, VNodeDirective, VNodeData } from 'vue'
 const baseMixins = mixins(
   Dependent,
   Delayable,
-  Detachable,
   Menuable,
   Returnable,
   Roundable,

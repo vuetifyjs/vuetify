@@ -6,7 +6,7 @@ import { computed, defineComponent } from 'vue'
 import { convertToUnit, makeProps } from '@/util'
 
 // Composables
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Types
 type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'maxHeight' | 'maxWidth'
@@ -20,10 +20,11 @@ export default defineComponent({
     length: [Number, String],
     thickness: [Number, String],
     vertical: Boolean,
+    ...makeThemeProps(),
   }),
 
   setup (props, { attrs }) {
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const dividerStyles = computed(() => {
       const styles: DividerStyles = {}
 

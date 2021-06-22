@@ -1,31 +1,21 @@
-// @ts-nocheck
-/* eslint-disable */
-
 // Components
-// import VListItemAvatar from '../VListItemAvatar'
+import { VListItemAvatar } from '..'
 
 // Utilities
-import {
-  mount,
-  Wrapper,
-} from '@vue/test-utils'
+import { createVuetify } from '@/framework'
+import { mount } from '@vue/test-utils'
 
-// Types
-// import { ExtractVue } from '../../../util/mixins'
+describe('VListItemAvatar', () => {
+  const vuetify = createVuetify()
 
-describe.skip('VListItemAvatar.ts', () => {
-  type Instance = ExtractVue<typeof VListItemAvatar>
-  let mountFunction: (options?: object) => Wrapper<Instance>
+  function mountFunction (options = {}) {
+    return mount(VListItemAvatar, {
+      global: { plugins: [vuetify] },
+      ...options,
+    })
+  }
 
-  beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VListItemAvatar, {
-        ...options,
-      })
-    }
-  })
-
-  it('should render component and match snapshot', () => {
+  it('should match a snapshot', () => {
     const wrapper = mountFunction()
 
     expect(wrapper.html()).toMatchSnapshot()

@@ -5,7 +5,7 @@
     max-height="400"
   >
     <v-banner
-      class="justify-center headline font-weight-light"
+      class="justify-center text-h5 font-weight-light"
       sticky
     >
       Scroll Me - Method invoked

@@ -48,6 +48,7 @@
       "banners",
       "buttons",
       "cards",
+      "defaults-providers",
       "dialogs",
       "dividers",
       "floating-action-buttons",
@@ -57,8 +58,10 @@
       "images",
       "item-groups",
       "lazy",
+      "lists",
       "overlays",
-      "sheets"
+      "sheets",
+      "theme-providers"
     ]
   },
   {

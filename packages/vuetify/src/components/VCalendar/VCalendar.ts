@@ -298,7 +298,7 @@ export default CalendarWithEvents.extend({
       if (!this.noEvents) {
         const categoryMap: any = categories.reduce((map: any, category, index) => {
           if (typeof category === 'object' && category.categoryName) map[category.categoryName] = { index, count: 0 }
-
+          else if (typeof category === 'string') map[category] = { index, count: 0 }
           return map
         }, {})
 
@@ -338,6 +338,8 @@ export default CalendarWithEvents.extend({
         categories = categories.filter((category: CalendarCategory) => {
           if (typeof category === 'object' && category.categoryName) {
             return categoryMap.hasOwnProperty(category.categoryName)
+          } else if (typeof category === 'string') {
+            return categoryMap.hasOwnProperty(category)
           }
           return false
         })
@@ -369,12 +371,12 @@ export default CalendarWithEvents.extend({
       }],
       on: {
         ...this.$listeners,
-        'click:date': (day: CalendarTimestamp) => {
+        'click:date': (day: CalendarTimestamp, e?: MouseEvent) => {
           if (this.$listeners.input) {
             this.$emit('input', day.date)
           }
           if (this.$listeners['click:date']) {
-            this.$emit('click:date', day)
+            this.$emit('click:date', day, e)
           }
         },
       },

@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-card-title class="indigo white--text headline">
+    <v-card-title class="indigo white--text text-h5">
       User Directory
     </v-card-title>
     <v-row
@@ -34,7 +34,7 @@
         <v-scroll-y-transition mode="out-in">
           <div
             v-if="!selected"
-            class="title grey--text text--lighten-1 font-weight-light"
+            class="text-h6 grey--text text--lighten-1 font-weight-light"
             style="align-self: center;"
           >
             Select a User
@@ -56,7 +56,7 @@
                   class="mb-6"
                 ></v-img>
               </v-avatar>
-              <h3 class="headline mb-2">
+              <h3 class="text-h5 mb-2">
                 {{ selected.name }}
               </h3>
               <div class="blue--text mb-2">

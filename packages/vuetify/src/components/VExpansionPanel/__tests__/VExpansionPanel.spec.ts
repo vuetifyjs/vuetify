@@ -136,7 +136,8 @@ describe.skip('VExpansionPanel', () => {
     expect(wrapper.vm.content).toBeNull()
   })
 
-  it('should toggle, boot content and emit a change', async () => {
+  // TODO: actual behaviour relies on VExpansionPanels, this was faking it with vm.toggle()
+  it.skip('should toggle, boot content and emit a change', async () => {
     const change = jest.fn()
     const wrapper = mountFunction({
       slots: {
