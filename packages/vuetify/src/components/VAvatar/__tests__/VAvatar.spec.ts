@@ -4,6 +4,7 @@ import { VAvatar } from '..'
 // Utilities
 import { createVuetify } from '@/framework'
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 
 describe('VAvatar', () => {
   const vuetify = createVuetify()

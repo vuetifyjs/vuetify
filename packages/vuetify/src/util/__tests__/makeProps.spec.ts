@@ -1,10 +1,11 @@
 // Utilities
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 import { createVuetify } from '@/framework'
 import { makeProps } from '../makeProps'
 
 describe('makeProps', () => {
-  function mountFunction (vuetify, options = {}) {
+  function mountFunction (vuetify: any, options = {}) {
     return mount({
       name: 'Foo',
       props: makeProps({

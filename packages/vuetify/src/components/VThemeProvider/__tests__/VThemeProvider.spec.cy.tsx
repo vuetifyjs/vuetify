@@ -1,9 +1,9 @@
-/// <reference types="../../../types/cypress" />
+/// <reference types="../../../../types/cypress" />
 
 import { CenteredGrid } from '@/../cypress/templates'
 import { createVuetify } from '@/framework'
 import { VBtn } from '@/components'
-import { VThemeProvider } from '.'
+import { VThemeProvider } from '..'
 
 describe('VThemeProvider', () => {
   const vuetify = createVuetify()
