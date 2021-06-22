@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals'
 import { consoleError, consoleWarn } from '../console'
 
 describe('console', () => {

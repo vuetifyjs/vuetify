@@ -1,7 +1,7 @@
-/// <reference types="../../../types/cypress" />
+/// <reference types="../../../../types/cypress" />
 
 import { CenteredGrid } from '@/../cypress/templates'
-import { VListItem } from '..'
+import { VListItem } from '../..'
 
 describe('VListItem', () => {
   function mountFunction (content: JSX.Element) {

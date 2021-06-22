@@ -5,6 +5,7 @@ import { VCard, VCardAvatar, VCardImg, VCardSubtitle, VCardText, VCardTitle } fr
 import { h, nextTick } from 'vue'
 import { createVuetify } from '@/framework'
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 
 // Types
 import type { FunctionalComponent } from 'vue'

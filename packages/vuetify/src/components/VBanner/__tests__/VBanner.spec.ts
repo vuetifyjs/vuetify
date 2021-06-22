@@ -4,6 +4,7 @@ import { VBanner } from '..'
 // Utilities
 import { createVuetify } from '@/framework'
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 
 describe('VBanner', () => {
   const vuetify = createVuetify()

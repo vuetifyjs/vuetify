@@ -1,5 +1,6 @@
 // Utilities
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 import { defineComponent, h } from 'vue'
 
 // Composables
