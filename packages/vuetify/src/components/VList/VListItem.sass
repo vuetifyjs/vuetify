@@ -9,6 +9,7 @@
   transition: $list-item-transition
 
   @include states('.v-list-item__overlay')
+  @include variant($list-item-variants...)
 
   &--disabled
     pointer-events: none

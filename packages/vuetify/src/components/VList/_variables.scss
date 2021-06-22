@@ -124,3 +124,12 @@ $list-item-nav-subtitle-typography: (
   $list-item-nav-subtitle-line-height,
   null
 );
+
+$list-item-variants: (
+  $list-background,
+  0,
+  .62,
+  var(--v-border-opacity),
+  0,
+  'v-list-item'
+);

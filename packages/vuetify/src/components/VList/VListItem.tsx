@@ -17,15 +17,15 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useColor } from '@/composables/color'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { makeProps } from '@/util'
+import { makeVariantProps, useVariant } from '@/composables/variant'
 
 export default defineComponent({
   name: 'VListItem',
@@ -38,14 +38,13 @@ export default defineComponent({
     activeClass: String,
     appendAvatar: String,
     appendIcon: String,
-    color: String,
     disabled: Boolean,
     link: Boolean,
     prependAvatar: String,
     prependIcon: String,
     subtitle: String,
-    contained: String,
     title: String,
+
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
@@ -53,16 +52,12 @@ export default defineComponent({
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
+    ...makeVariantProps({ variant: 'text' } as const),
   }),
 
   setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
-    const { colorClasses, colorStyles } = useColor(computed(() => {
-      const key = props.contained && props.active ? 'background' : 'text'
-      const color = (props.active && props.activeColor) || props.color
-
-      return { [`${key}`]: color }
-    }))
+    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-list-item')
     const { borderClasses } = useBorder(props, 'v-list-item')
     const { densityClasses } = useDensity(props, 'v-list-item')
     const { dimensionStyles } = useDimension(props)
@@ -86,7 +81,6 @@ export default defineComponent({
               'v-list-item--active': props.active,
               'v-list-item--disabled': props.disabled,
               'v-list-item--link': isLink,
-              'v-list-item--contained': props.contained,
               [`${props.activeClass}`]: props.active && props.activeClass,
             },
             themeClasses.value,
@@ -95,6 +89,7 @@ export default defineComponent({
             densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,
+            variantClasses.value,
           ]}
           style={[
             colorStyles.value,
