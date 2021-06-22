@@ -63,7 +63,7 @@ export default {
   },
   rating: {
     ariaLabel: {
-      icon: 'Bedømmelse {0} af {1}',
+      item: 'Bedømmelse {0} af {1}',
     },
   },
 }

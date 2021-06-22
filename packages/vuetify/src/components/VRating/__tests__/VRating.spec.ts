@@ -30,7 +30,7 @@ describe('VRating', () => {
   it('should respond to user interaction', async () => {
     const wrapper = mountFunction()
 
-    const items = wrapper.findAll('.v-rating__item > button')
+    const items = wrapper.findAll('.v-rating__item .v-btn')
 
     await items[0].trigger('click')
 
@@ -47,7 +47,7 @@ describe('VRating', () => {
       },
     })
 
-    const items = wrapper.findAll('.v-rating__item button')
+    const items = wrapper.findAll('.v-rating__item .v-btn')
 
     await items[0].trigger('click')
 
@@ -72,7 +72,7 @@ describe('VRating', () => {
       },
     })
 
-    const items = wrapper.findAll('.v-rating__item button')
+    const items = wrapper.findAll('.v-rating__item .v-btn')
 
     await items[0].trigger('click')
 
@@ -86,7 +86,7 @@ describe('VRating', () => {
       },
     })
 
-    const items = wrapper.findAll('.v-rating__item > button')
+    const items = wrapper.findAll('.v-rating__item .v-btn')
 
     await items[2].trigger('mouseenter')
 

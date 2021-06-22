@@ -9,12 +9,12 @@ import { makeDensityProps } from '@/composables/density'
 import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, defineComponent, ref } from 'vue'
-import { createRange, makeProps } from '@/util'
+import { createRange, getUid, makeProps } from '@/util'
 
 // Types
 import type { Prop } from 'vue'
@@ -25,7 +25,6 @@ export default defineComponent({
   props: makeProps({
     name: {
       type: String,
-      required: true,
     },
     itemAriaLabel: {
       type: String,
@@ -71,6 +70,7 @@ export default defineComponent({
     ...makeDensityProps(),
     ...makeSizeProps(),
     ...makeTagProps(),
+    ...makeThemeProps(),
   }),
 
   emits: {
@@ -79,7 +79,7 @@ export default defineComponent({
 
   setup (props, { slots }) {
     const { t } = useLocale()
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const rating = useProxiedModel(props, 'modelValue')
 
     const range = computed(() => createRange(Number(props.length), 1))
@@ -123,6 +123,7 @@ export default defineComponent({
       }
 
       function onClick () {
+        if (props.disabled || props.readonly) return
         rating.value = rating.value === value && props.clearable ? 0 : value
       }
 
@@ -143,9 +144,11 @@ export default defineComponent({
       isClicking = false
     }
 
+    const name = computed(() => props.name ?? `v-rating-${getUid()}`)
+
     function VRatingItem ({ value, index, showStar = true }: { value: number, index: number, showStar?: boolean }) {
       const { onMouseenter, onMouseleave, onFocus, onBlur, onClick } = eventState.value[index + 1]
-      const id = `${props.name}-${String(value).replace('.', '-')}`
+      const id = `${name.value}-${String(value).replace('.', '-')}`
 
       return (
         <>
@@ -159,24 +162,37 @@ export default defineComponent({
             onMouseup={ onMouseup }
           >
             <span class="v-rating__hidden">{ t(props.itemAriaLabel, value, props.length) }</span>
-            { showStar && (
-              <VBtn
-                tag="span"
-                tabindex="-1"
-                icon={ itemState.value[index].icon }
-                color={ itemState.value[index].color }
-                plain
-                size={ props.size }
-                ripple={ props.ripple }
-                density={ props.density }
-                onMouseenter={ onMouseenter }
-                onMouseleave={ onMouseleave }
-              />
-            ) }
+            {
+              !showStar ? undefined
+              : slots.item ? slots.item({
+                ...itemState.value,
+                value,
+                index,
+                size: props.size,
+                ripple: props.ripple,
+                density: props.density,
+                onMouseenter,
+                onMouseleave,
+              })
+              : (
+                <VBtn
+                  tag="span"
+                  tabindex="-1"
+                  icon={ itemState.value[index].icon }
+                  color={ itemState.value[index].color }
+                  plain
+                  size={ props.size }
+                  ripple={ props.ripple }
+                  density={ props.density }
+                  onMouseenter={ onMouseenter }
+                  onMouseleave={ onMouseleave }
+                />
+              )
+            }
           </label>
           <input
             class="v-rating__hidden"
-            name={ props.name }
+            name={ name.value }
             id={ id }
             type="radio"
             value={ value }
@@ -185,6 +201,8 @@ export default defineComponent({
             onFocus={ onFocus }
             onBlur={ onBlur }
             ref={ index === 0 ? firstRef : undefined }
+            readonly={ props.readonly }
+            disabled={ props.disabled }
           />
         </>
       )
@@ -208,9 +226,9 @@ export default defineComponent({
             <div class="v-rating__wrapper">
               {
                 !hasLabels ? undefined
-                  : slots['item-label'] ? slots['item-label']()
-                  : props.itemLabels?.[i] ? <span>{ props.itemLabels?.[i] }</span>
-                  : <span>&nbsp;</span>
+                : slots['item-label'] ? slots['item-label']()
+                : props.itemLabels?.[i] ? <span>{ props.itemLabels?.[i] }</span>
+                : <span>&nbsp;</span>
               }
               <div
                 class={[
