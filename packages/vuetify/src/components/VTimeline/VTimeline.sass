@@ -124,10 +124,12 @@
 
   @include elevation($timeline-divider-dot-elevation)
 
-  @each $name in $sizes
+  @each $name, $multiplier in $size-scales
+    $size: $timeline-dot-size + (8 * $multiplier)
+
     &--size-#{$name}
-      height: map-get($timeline-dot-sizes, $name)
-      width: map-get($timeline-dot-sizes, $name)
+      height: $size
+      width: $size
 
       .v-timeline-divider__inner-dot
         height: calc(100% - #{map-get($timeline-dot-border-sizes, $name)})

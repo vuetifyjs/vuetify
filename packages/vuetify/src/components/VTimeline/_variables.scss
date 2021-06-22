@@ -13,18 +13,7 @@ $timeline-inset-divider-line: var(--v-timeline-line-inset) !default;
 $timeline-inset-line-size: 4px !default;
 $timeline-item-grid-template: auto min-content auto !default;
 $timeline-item-padding: 24px !default;
-
-$timeline-dot-sizes: () !default;
-$timeline-dot-sizes: map-deep-merge(
-  (
-    'x-small': 22px,
-    'small': 30px,
-    'default': 38px,
-    'large': 46px,
-    'x-large': 54px,
-  ),
-  $timeline-dot-sizes
-);
+$timeline-dot-size: 38px !default;
 
 $timeline-dot-border-sizes: () !default;
 $timeline-dot-border-sizes: map-deep-merge(
