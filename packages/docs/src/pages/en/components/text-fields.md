@@ -61,7 +61,7 @@ Text fields can be **disabled** or **readonly**.
 
 #### Filled
 
-Text fields can be used with an alternative box design. **append-icon** and **prepend-icon** props are _**not**_ supported in this mode.
+Text fields can be used with an alternative box design.
 
 <example file="v-text-field/prop-filled" />
 
