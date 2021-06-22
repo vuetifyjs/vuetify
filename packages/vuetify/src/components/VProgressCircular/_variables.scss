@@ -3,15 +3,12 @@ $progress-circular-rotate-dash: progress-circular-dash 1.4s ease-in-out infinite
 $progress-circular-intermediate-svg-transition: all 0.2s ease-in-out !default;
 $progress-circular-overlay-transition: all 0.6s ease-in-out, stroke-width 0s !default;
 $progress-circular-underlay-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
+$progress-circular-size: 32px !default;
 
-$progress-circular-sizes: () !default;
-$progress-circular-sizes: map-deep-merge(
-  (
-    'x-small': 16px,
-    'small': 24px,
-    'default': 32px,
-    'large': 48px,
-    'x-large': 64px,
-  ),
-  $progress-circular-sizes
-);
+$progress-circular-sizes: (
+  'x-small': -2,
+  'small': -1,
+  'default': 0,
+  'large': 2,
+  'x-large': 4
+) !default;

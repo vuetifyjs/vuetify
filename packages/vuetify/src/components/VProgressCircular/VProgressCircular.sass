@@ -37,10 +37,12 @@
 
 // Modifiers
 .v-progress-circular
-  @each $name in $sizes
+  @each $name, $multiplier in $progress-circular-sizes
+    $size: $progress-circular-size + ($size-scale * $multiplier)
+
     &--size-#{$name}
-      height: map-get($progress-circular-sizes, $name)
-      width: map-get($progress-circular-sizes, $name)
+      height: $size
+      width: $size
 
 .v-progress-circular--indeterminate
   > svg
