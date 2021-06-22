@@ -6,7 +6,7 @@ import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useTextColor } from '@/composables/color'
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, defineComponent, toRef } from 'vue'
@@ -33,13 +33,14 @@ export default defineComponent({
     },
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'div' }),
+    ...makeThemeProps(),
   }),
 
   setup (props, { slots }) {
     const MAGIC_RADIUS_CONSTANT = 20
     const CIRCUMFERENCE = 2 * Math.PI * MAGIC_RADIUS_CONSTANT
 
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const { sizeClasses, sizeStyles } = useSize(props, 'v-progress-circular')
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
     const { textColorClasses: underlayColorClasses, textColorStyles: underlayColorStyles } = useTextColor(toRef(props, 'bgColor'))
