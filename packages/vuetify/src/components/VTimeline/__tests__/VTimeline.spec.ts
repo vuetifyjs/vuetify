@@ -69,7 +69,7 @@ describe('VTimeline', () => {
   it('should show all items on single side', () => {
     const wrapper = mountFunction({
       props: {
-        side: 'after',
+        side: 'end',
       },
       slots: {
         default: () => createRange(3).map(() => h(VTimelineItem, {}, () => 'item content')),
