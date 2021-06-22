@@ -63,12 +63,12 @@ $card-transition-property: box-shadow, opacity, color !default;
 $card-transition-duration: 0.28s !default;
 $card-transition-timing-function: $standard-easing !default;
 
-$card-border: () !default;
 $card-border: (
   $card-border-color,
   $card-border-style,
-  $card-border-width
-);
+  $card-border-width,
+  $card-border-thin-width
+) !default;
 
 $card-title-densities: () !default;
 $card-title-densities: (

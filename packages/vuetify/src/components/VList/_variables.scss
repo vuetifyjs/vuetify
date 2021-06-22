@@ -94,8 +94,9 @@ $list-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 $list-border: (
   $list-border-color,
   $list-border-style,
-  $list-border-width
-);
+  $list-border-width,
+  $list-border-thin-width
+) !default;
 
 $list-theme: (
   $list-background,
@@ -105,8 +106,9 @@ $list-theme: (
 $list-item-border: (
   $list-item-border-color,
   $list-item-border-style,
-  $list-item-border-width
-);
+  $list-item-border-width,
+  $list-item-border-thin-width
+) !default;
 
 $list-item-title-typography: (
   $list-item-title-font-size,

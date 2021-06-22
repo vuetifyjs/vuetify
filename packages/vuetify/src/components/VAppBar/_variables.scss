@@ -2,7 +2,7 @@ $app-bar-background: var(--v-theme-surface) !default;
 $app-bar-border-color: $border-color-root !default;
 $app-bar-border-radius: map-get($rounded, '0') !default;
 $app-bar-border-style: $border-style-root !default;
-$app-bar-border-thin-width: thin !default;
+$app-bar-border-thin-width: 0 0 thin !default;
 $app-bar-border-width: 0 !default;
 $app-bar-collapsed-border-radius: 24px !default;
 $app-bar-collapsed-max-width: 112px !default;
@@ -27,5 +27,6 @@ $app-bar-transition: .2s $standard-easing !default;
 $app-bar-border: (
   $app-bar-border-color,
   $app-bar-border-style,
-  $app-bar-border-width
+  $app-bar-border-width,
+  $app-bar-border-thin-width
 ) !default;

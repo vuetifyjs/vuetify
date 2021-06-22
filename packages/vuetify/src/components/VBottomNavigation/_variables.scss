@@ -12,5 +12,6 @@ $bottom-navigation-transition: .2s $standard-easing !default;
 $bottom-navigation-border: (
   $bottom-navigation-border-color,
   $bottom-navigation-border-style,
-  $bottom-navigation-border-width
+  $bottom-navigation-border-width,
+  $bottom-navigation-border-thin-width
 ) !default;
