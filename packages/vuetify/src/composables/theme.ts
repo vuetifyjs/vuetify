@@ -1,6 +1,6 @@
+import { colorToInt, colorToRGB, createRange, darken, getLuma, intToHex, lighten, mergeDeep, propsFactory } from '@/util'
 // Utilities
 import { computed, getCurrentInstance, inject, provide, ref, watch } from 'vue'
-import { colorToInt, colorToRGB, createRange, darken, getLuma, intToHex, lighten, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
@@ -142,11 +142,10 @@ const defaultThemeOptions: ThemeOptions = {
 const parseThemeOptions = (options: ThemeOptions = defaultThemeOptions): InternalThemeOptions => {
   if (!options) return { ...defaultThemeOptions, isDisabled: true } as InternalThemeOptions
 
-  return {
-    ...defaultThemeOptions,
-    ...options,
-    variations: options?.variations == null || options?.variations === false ? defaultThemeOptions.variations : options.variations,
-  } as InternalThemeOptions
+  return mergeDeep(
+    defaultThemeOptions,
+    options,
+  ) as InternalThemeOptions
 }
 
 // Composables
