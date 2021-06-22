@@ -61,7 +61,7 @@ export default defineComponent({
           },
         ]}
         style={{
-          // @ts-ignore
+          // @ts-expect-error: broken vue types
           '--v-timeline-dot-size': convertToUnit(dotSize.value),
         }}
       >
