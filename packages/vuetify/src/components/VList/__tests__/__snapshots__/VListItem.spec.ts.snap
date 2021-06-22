@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VListItem should match a snapshot 1`] = `
-<div class="v-list-item v-theme--light v-list-item--density-default">
+<div class="v-list-item v-theme--light v-list-item--density-default v-list-item--variant-text">
 </div>
 `;
