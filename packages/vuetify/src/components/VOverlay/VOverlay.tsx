@@ -1,15 +1,17 @@
 // Styles
 import './VOverlay.sass'
 
+// Composables
+import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
+import { useBackButton } from '@/composables/router'
+import { useBackgroundColor } from '@/composables/color'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { useRtl } from '@/composables/rtl'
+import { useTeleport } from '@/composables/teleport'
+
 // Directives
 import { ClickOutside } from '@/directives/click-outside'
-
-// Composables
-import { useBackgroundColor } from '@/composables/color'
-import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { makeThemeProps, useTheme } from '@/composables/theme'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTeleport } from '@/composables/teleport'
 
 // Utilities
 import { convertToUnit, getScrollParent, getScrollParents, standardEasing, useRender } from '@/util'
@@ -25,8 +27,6 @@ import {
   watch,
   watchEffect,
 } from 'vue'
-import { useRtl } from '@/composables/rtl'
-import { useBackButton } from '@/composables/router'
 
 // Types
 import type { BackgroundColorData } from '@/composables/color'
@@ -222,13 +222,10 @@ export default defineComponent({
     }
 
     useBackButton(next => {
-      if (isActive.value) {
-        next(false)
-        if (!props.persistent) isActive.value = false
-        else animateClick()
-      } else {
-        next()
-      }
+      next(!isActive.value)
+
+      if (!props.persistent) isActive.value = false
+      else animateClick()
     })
 
     const content = ref<HTMLElement>()

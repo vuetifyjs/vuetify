@@ -9,7 +9,7 @@
 
   @if ($active)
     &--active
-      +active-states($selector)
+      @include active-states($selector)
 
 @mixin active-states ($selector: '::before')
   &:hover#{$selector},

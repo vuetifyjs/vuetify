@@ -23,9 +23,10 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
-import { useBackgroundColor } from '@/composables/color'
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import { useBackgroundColor } from '@/composables/color'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -33,7 +34,6 @@ import { Ripple } from '@/directives/ripple'
 // Utilities
 import { defineComponent, toRef } from 'vue'
 import { makeProps } from '@/util'
-import { makeRouterProps, useLink } from '@/composables/router'
 
 export default defineComponent({
   name: 'VCard',

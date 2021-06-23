@@ -16,10 +16,10 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { makeTagProps } from '@/composables/tag'
-import { useColor } from '@/composables/color'
-import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeRouterProps, useLink } from '@/composables/router'
+import { makeTagProps } from '@/composables/tag'
+import { makeThemeProps, useTheme } from '@/composables/theme'
+import { useColor } from '@/composables/color'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -53,9 +53,9 @@ export default defineComponent({
     ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makeRoundedProps(),
+    ...makeRouterProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
-    ...makeRouterProps(),
   }),
 
   setup (props, { attrs, slots }) {

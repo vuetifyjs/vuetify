@@ -1,4 +1,5 @@
 // Utilities
+import { propsFactory } from '@/util'
 import {
   computed,
   getCurrentInstance,
@@ -6,13 +7,9 @@ import {
   onMounted,
   resolveDynamicComponent,
 } from 'vue'
-import { propsFactory } from '@/util'
 
 // Types
-import type {
-  ComputedRef, PropType,
-  Ref,
-} from 'vue'
+import type { ComputedRef, PropType, Ref } from 'vue'
 import type {
   RouterLink as _RouterLink,
   useLink as _useLink,
@@ -34,11 +31,11 @@ export function useRouter (): Router | undefined {
 }
 
 interface LinkProps extends Partial<UseLinkOptions> {
- href?: string
+  href?: string
 }
 interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'> {
-  isLink: ComputedRef<boolean>
   href?: ComputedRef<string | undefined>
+  isLink: ComputedRef<boolean>
 }
 
 export function useLink (props: LinkProps): UseLink {
@@ -61,8 +58,8 @@ export function useLink (props: LinkProps): UseLink {
 
 export const makeRouterProps = propsFactory({
   href: String,
-  to: [String, Object] as PropType<RouteLocationRaw>,
   replace: Boolean,
+  to: [String, Object] as PropType<RouteLocationRaw>,
 }, 'router')
 
 export function useBackButton (cb: (next: NavigationGuardNext) => void) {
@@ -73,13 +70,7 @@ export function useBackButton (cb: (next: NavigationGuardNext) => void) {
   onMounted(() => {
     window.addEventListener('popstate', onPopstate)
     removeGuard = router?.beforeEach((to, from, next) => {
-      setTimeout(() => {
-        if (popped) {
-          cb(next)
-        } else {
-          next()
-        }
-      })
+      setTimeout(() => popped ? cb(next) : next())
     })
   })
   onBeforeUnmount(() => {
@@ -88,9 +79,9 @@ export function useBackButton (cb: (next: NavigationGuardNext) => void) {
   })
 
   function onPopstate (e: PopStateEvent) {
-    if (!e.state.replaced) {
-      popped = true
-      setTimeout(() => popped = false)
-    }
+    if (e.state.replaced) return
+
+    popped = true
+    setTimeout(() => (popped = false))
   }
 }

@@ -5,13 +5,13 @@ import './VBtn.sass'
 import { VIcon } from '@/components'
 
 // Composables
-import { makeRouterProps, useLink } from '@/composables/router'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeRouterProps, useLink } from '@/composables/router'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
@@ -48,10 +48,10 @@ export default defineComponent({
     ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makePositionProps(),
+    ...makeRouterProps(),
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'button' }),
     ...makeThemeProps(),
-    ...makeRouterProps(),
   }),
 
   setup (props, { slots }) {
@@ -86,14 +86,14 @@ export default defineComponent({
           class={[
             'v-btn',
             {
+              'v-btn--active': link.isExactActive?.value,
+              'v-btn--block': props.block,
               'v-btn--contained': isContained.value,
+              'v-btn--disabled': props.disabled,
               'v-btn--elevated': isElevated.value,
               'v-btn--icon': !!props.icon,
               'v-btn--plain': props.plain,
-              'v-btn--block': props.block,
-              'v-btn--disabled': props.disabled,
               'v-btn--stacked': props.stacked,
-              'v-btn--active': link.isExactActive?.value,
             },
             themeClasses.value,
             borderClasses.value,
@@ -126,7 +126,7 @@ export default defineComponent({
               icon={ props.prependIcon }
               left={ !props.stacked }
             />
-          )}
+          ) }
 
           { typeof props.icon === 'boolean'
             ? slots.default?.()
@@ -145,7 +145,7 @@ export default defineComponent({
               icon={ props.appendIcon }
               right={ !props.stacked }
             />
-          )}
+          ) }
         </Tag>
       )
     }

@@ -26,7 +26,7 @@
     +button-sizes()
     +button-density('height', $button-density)
 
-  +states('.v-btn__overlay', false)
+  @include states('.v-btn__overlay', false)
 
   &--icon
     border-radius: $button-icon-border-radius
@@ -143,7 +143,7 @@
 
   &--active
     .v-bottom-navigation &
-      +active-states('.v-btn__overlay')
+      @include active-states('.v-btn__overlay')
 
       filter: $button-bottom-navigation-active-filter
       opacity: $button-bottom-navigation-active-opacity
