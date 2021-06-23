@@ -72,7 +72,7 @@ import Vuetify from 'vuetify/lib'
 Vue.use(Vuetify)
 
 // Translation provided by Vuetify (javascript)
-import zhHans from 'vuetify/es5/locale/zh-Hans'
+import zhHans from 'vuetify/lib/locale/zh-Hans'
 
 // Translation provided by Vuetify (typescript)
 import pl from 'vuetify/src/locale/pl'

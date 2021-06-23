@@ -109,9 +109,6 @@ You can use Vuetify's transition helper function to easily create your own custo
 ```js
 import { createSimpleTransition } from 'vuetify/lib/components/transitions/createTransition'
 
-// ES5
-// import { createSimpleTransition } from 'vuetify/es5/components/transitions/createTransition'
-
 const myTransition = createSimpleTransition('my-transition')
 
 Vue.component('my-transition', myTransition)
