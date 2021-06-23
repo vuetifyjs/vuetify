@@ -12,13 +12,16 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { computed, defineComponent, toRef } from 'vue'
 import { convertToUnit, makeProps } from '@/util'
 
+// Types
+import type { PropType } from 'vue'
+
 export default defineComponent({
   name: 'VProgressCircular',
 
   props: makeProps({
     bgColor: String,
     color: String,
-    indeterminate: Boolean,
+    indeterminate: [Boolean, String] as PropType<boolean | 'disable-shrink'>,
     modelValue: {
       type: [Number, String],
       default: 0,
@@ -63,8 +66,9 @@ export default defineComponent({
         class={[
           'v-progress-circular',
           {
-            'v-progress-circular--indeterminate': props.indeterminate,
+            'v-progress-circular--indeterminate': !!props.indeterminate,
             'v-progress-circular--visible': isIntersecting.value,
+            'v-progress-circular--disable-shrink': props.indeterminate === 'disable-shrink',
           },
           themeClasses.value,
           sizeClasses.value,

@@ -53,8 +53,15 @@
   .v-progress-circular__overlay
     animation: $progress-circular-rotate-dash
     stroke-linecap: round
-    stroke-dasharray: 80, 200
-    stroke-dashoffset: 0px
+    stroke-dasharray: 25, 200
+    stroke-dashoffset: 0
+
+.v-progress-circular--disable-shrink
+  > svg
+    animation-duration: nth($progress-circular-rotate-animation, 2) / 2
+
+  .v-progress-circular__overlay
+    animation: none
 
 .v-progress-circular--indeterminate:not(.v-progress-circular--visible)
   > svg,
