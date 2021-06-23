@@ -76,7 +76,7 @@ export default defineComponent({
     const { positionClasses, positionStyles } = usePosition(props, 'v-card')
     const { roundedClasses } = useRounded(props, 'v-card')
     const { densityClasses } = useDensity(props, 'v-card')
-    const link = useLink(props)
+    const link = useLink(props, attrs)
 
     return () => {
       const hasTitle = !!(slots.title || props.title)
@@ -87,8 +87,7 @@ export default defineComponent({
       const hasImage = !!(slots.image || props.image)
       const hasHeader = hasHeaderText || hasPrepend || hasAppend
       const hasText = !!(slots.text || props.text)
-      const isLink = !!(props.link || link.isLink.value || attrs.onClick || attrs.onClickOnce)
-      const isClickable = isLink && !props.disabled
+      const isClickable = !props.disabled && (link.isLink.value || props.link)
 
       return (
         <props.tag
@@ -98,7 +97,7 @@ export default defineComponent({
               'v-card--disabled': props.disabled,
               'v-card--flat': props.flat,
               'v-card--hover': props.hover && !(props.disabled || props.flat),
-              'v-card--link': props.link,
+              'v-card--link': link.isLink.value,
             },
             themeClasses.value,
             backgroundColorClasses.value,

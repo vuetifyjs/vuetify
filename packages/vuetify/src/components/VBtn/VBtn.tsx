@@ -54,7 +54,7 @@ export default defineComponent({
     ...makeThemeProps(),
   }),
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-btn')
     const { roundedClasses } = useRounded(props, 'v-btn')
@@ -63,7 +63,7 @@ export default defineComponent({
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-btn')
     const { sizeClasses } = useSize(props, 'v-btn')
-    const link = useLink(props)
+    const link = useLink(props, attrs)
 
     const isContained = computed(() => {
       return !(props.text || props.plain || props.outlined || props.border !== false)

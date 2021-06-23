@@ -59,7 +59,7 @@ export default defineComponent({
   }),
 
   setup (props, { attrs, slots }) {
-    const link = useLink(props)
+    const link = useLink(props, attrs)
     const isActive = computed(() => {
       return props.active || link.isExactActive?.value
     })
@@ -82,8 +82,7 @@ export default defineComponent({
       const hasHeader = !!(hasTitle || hasSubtitle)
       const hasAppend = (slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = (slots.prepend || props.prependAvatar || props.prependIcon)
-      const isLink = !!(props.link || link.isLink.value || attrs.onClick || attrs.onClickOnce)
-      const isClickable = isLink && !props.disabled
+      const isClickable = !props.disabled && (link.isLink.value || props.link)
 
       return (
         <props.tag
@@ -92,7 +91,7 @@ export default defineComponent({
             {
               'v-list-item--active': isActive.value,
               'v-list-item--disabled': props.disabled,
-              'v-list-item--link': isLink,
+              'v-list-item--link': link.isLink.value,
               'v-list-item--contained': props.contained,
               [`${props.activeClass}`]: isActive.value && props.activeClass,
             },

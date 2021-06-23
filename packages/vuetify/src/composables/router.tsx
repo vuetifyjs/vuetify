@@ -9,7 +9,7 @@ import {
 } from 'vue'
 
 // Types
-import type { ComputedRef, PropType, Ref } from 'vue'
+import type { ComputedRef, PropType, Ref, SetupContext } from 'vue'
 import type {
   RouterLink as _RouterLink,
   useLink as _useLink,
@@ -33,27 +33,31 @@ export function useRouter (): Router | undefined {
 interface LinkProps extends Partial<UseLinkOptions> {
   href?: string
 }
+
 interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'> {
   href?: ComputedRef<string | undefined>
+  isClickable: ComputedRef<boolean>
   isLink: ComputedRef<boolean>
 }
 
-export function useLink (props: LinkProps): UseLink {
+export function useLink (props: LinkProps, attrs: SetupContext['attrs']): UseLink {
   const RouterLink = resolveDynamicComponent('RouterLink') as typeof _RouterLink | string
 
-  const isLink = { isLink: computed(() => !!props.href) }
-
-  if (typeof RouterLink === 'string') return isLink
-
-  const link = props.to ? RouterLink.useLink(props as UseLinkOptions) : undefined
-
-  const href = computed(() => {
-    return props.to ? link?.route.value.href : props.href
+  const isLink = computed(() => !!(props.href || props.to))
+  const hasListeners = computed(() => attrs.onClick || attrs.onClickOnce)
+  const isClickable = computed(() => {
+    return !!(isLink?.value || hasListeners.value)
   })
+  const link = { isLink, isClickable }
 
-  return props.to
-    ? { ...link, isLink: computed(() => true), href }
-    : isLink
+  if (typeof RouterLink === 'string') return link
+
+  const route = props.to ? RouterLink.useLink(props as UseLinkOptions) : undefined
+
+  return {
+    ...link,
+    href: computed(() => props.to ? route?.route.value.href : props.href),
+  }
 }
 
 export const makeRouterProps = propsFactory({
