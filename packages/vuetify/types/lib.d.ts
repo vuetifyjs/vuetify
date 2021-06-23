@@ -14,7 +14,7 @@ declare module 'vuetify/lib' {
 }
 
 declare module 'vuetify/lib/components' {
-  import { VueConstructor, DirectiveOptions } from 'vue'
+  import { VueConstructor } from 'vue'
 
   const VApp: VueConstructor
   const VAppBar: VueConstructor
@@ -348,6 +348,7 @@ declare module 'vuetify/lib/components' {
 }
 
 declare module 'vuetify/lib/directives' {
+  import { DirectiveOptions } from 'vue'
 
   const ClickOutside: DirectiveOptions
   const Intersect: DirectiveOptions
