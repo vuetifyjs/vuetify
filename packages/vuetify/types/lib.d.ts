@@ -14,7 +14,7 @@ declare module 'vuetify/lib' {
 }
 
 declare module 'vuetify/lib/components' {
-  import { VueConstructor } from 'vue'
+  import { VueConstructor, DirectiveOptions } from 'vue'
 
   const VApp: VueConstructor
   const VAppBar: VueConstructor
@@ -348,7 +348,6 @@ declare module 'vuetify/lib/components' {
 }
 
 declare module 'vuetify/lib/directives' {
-  import { DirectiveOptions } from 'vue'
 
   const ClickOutside: DirectiveOptions
   const Intersect: DirectiveOptions
@@ -367,4 +366,10 @@ declare module 'vuetify/lib/directives' {
     Scroll,
     Touch,
   }
+}
+
+declare module 'vuetify/lib/services/goto' {
+  import { GoToOptions, VuetifyGoToTarget } from 'vuetify/types/services/goto'
+
+  export default function goTo(target: VuetifyGoToTarget, options?: Partial<GoToOptions>): Promise<number>
 }
