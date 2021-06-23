@@ -339,6 +339,11 @@ export function sortItems<T extends any = any> (
         continue
       }
 
+      // Dates should be compared numerically
+      if (sortA instanceof Date && sortB instanceof Date) {
+        return sortA.getTime() - sortB.getTime()
+      }
+
       [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
 
       if (sortA !== sortB) {
