@@ -118,7 +118,7 @@ export default defineComponent({
         </svg>
         { slots.default && (
           <div class="v-progress-circular__content">
-            { slots.default() }
+            { slots.default({ value: normalizedValue.value }) }
           </div>
         ) }
       </props.tag>
