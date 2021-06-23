@@ -55,7 +55,7 @@ You can use `dense` prop to reduce overflow button height and lower max height o
 
 #### Filled
 
-Text fields can be used with an alternative box design. Append and prepend icon props are **not** supported in this mode.
+Text fields can be used with an alternative box design.
 
 <example file="v-overflow-btn/prop-filled" />
 
