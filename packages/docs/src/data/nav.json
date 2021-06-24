@@ -104,6 +104,7 @@
           "file-inputs",
           "forms",
           "inputs",
+          "otp-input",
           "overflow-btns",
           "radio-buttons",
           "range-sliders",
