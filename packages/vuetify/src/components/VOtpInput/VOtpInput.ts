@@ -4,6 +4,7 @@ import './VOtpInput.sass'
 
 // Extensions
 import VInput from '../VInput'
+import VTextField from '../VTextField/VTextField'
 
 // Directives
 import ripple from '../../directives/ripple'
@@ -19,6 +20,7 @@ import { VNode } from 'vue'
 const baseMixins = mixins(
   VInput,
 )
+
 interface options extends InstanceType<typeof baseMixins> {
   $refs: {
     input: HTMLInputElement[]
@@ -44,6 +46,10 @@ export default baseMixins.extend<options>().extend({
       type: String,
       default: 'text',
     },
+    plain: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data: () => ({
@@ -54,26 +60,18 @@ export default baseMixins.extend<options>().extend({
   }),
 
   computed: {
+    outlined (): Boolean {
+      return !this.plain
+    },
     classes (): object {
       return {
         ...VInput.options.computed.classes.call(this),
-        'v-input--hide-details': true,
-        'v-text-field': true,
-        'v-text-field--enclosed': true,
-        'v-text-field--outlined': true,
+        ...VTextField.options.computed.classes.call(this),
+        'v-otp-input--plain': this.plain,
       }
     },
-    internalValue: {
-      get (): any {
-        return this.lazyValue
-      },
-      set (val: any) {
-        this.lazyValue = val
-        this.$emit('input', this.lazyValue)
-      },
-    },
     isDirty (): boolean {
-      return this.lazyValue?.toString().length > 0 || this.badInput
+      return VInput.options.computed.isDirty.call(this) || this.badInput
     },
   },
 

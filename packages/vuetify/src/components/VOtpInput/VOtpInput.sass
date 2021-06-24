@@ -1,15 +1,24 @@
+// Imports
+@import './_variables.scss'
+
 .v-otp-input
   input
     text-align: center
-  .v-input__control
-    .v-input__slot
-      background: #ffffff
-  input[type=number]::-webkit-outer-spin-button,
-  input[type=number]::-webkit-inner-spin-button
-    -webkit-appearance: none
+  .v-input
     margin: 0
-  input[type=number]
-    -moz-appearance: textfield
+    padding: 0
+    .v-input__control
+      .v-input__slot
+        background: #ffffff
+    &.v-otp-input--plain
+      fieldset
+        display: none
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button
+      -webkit-appearance: none
+      margin: 0
+    input[type=number]
+      -moz-appearance: textfield
   .theme--dark
     .v-input__control
       .v-input__slot
@@ -18,11 +27,11 @@
     display: flex
     flex-wrap: wrap
     flex: 1 1 auto
-    margin-right: -4px
-    margin-left: -4px
+    margin-right: $otp-row-container-margin-x
+    margin-left: $otp-row-container-margin-x
     >.col-input
       flex-basis: 0
-      flex-grow: 1
-      max-width: 100%
-      width: 100%
-      padding: 4px
+      flex-grow: $otp-col-flex-grow
+      max-width: $otp-col-width
+      width: $otp-col-width
+      padding: $otp-col-padding

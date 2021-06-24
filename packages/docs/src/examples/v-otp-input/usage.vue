@@ -32,10 +32,11 @@
       defaults: {
         disabled: false,
         length: 6,
+        plain: false,
       },
       otp: '',
       options: {
-        booleans: ['disabled', 'dark'],
+        booleans: ['disabled', 'dark', 'plain'],
         selects: {
           type: ['text', 'password', 'number'],
         },
