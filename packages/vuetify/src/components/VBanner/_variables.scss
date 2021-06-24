@@ -44,7 +44,8 @@ $banner-mobile-thumbnail-padding-start: 16px !default;
 $banner-border: (
   $banner-border-color,
   $banner-border-style,
-  $banner-border-width
+  $banner-border-width,
+  $banner-border-thin-width
 ) !default;
 
 $banner-theme: () !default;

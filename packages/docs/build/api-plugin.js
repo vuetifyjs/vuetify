@@ -135,7 +135,7 @@ class ApiPlugin {
     })
 
     compiler.hooks.watchRun.tap('ApiPlugin', async comp => {
-      const changedTimes = comp.watchFileSystem.watcher.mtimes
+      const changedTimes = comp.watchFileSystem.watcher.getTimeInfoEntries()
 
       changedFiles = Object.keys(changedTimes).filter(filePath => {
         return sourcePaths.some(path => filePath.startsWith(path))

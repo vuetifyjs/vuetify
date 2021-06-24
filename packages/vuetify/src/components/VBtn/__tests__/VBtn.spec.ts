@@ -1,3 +1,5 @@
+declare const expect: jest.Expect
+
 // @ts-nocheck
 /* eslint-disable */
 
@@ -11,14 +13,11 @@
 // import VBtn from '../VBtn'
 
 // Utilities
-import {
-  createLocalVue,
-  mount,
-  Wrapper,
-} from '@vue/test-utils'
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils'
 // import { compileToFunctions } from 'vue-template-compiler'
 
-describe.skip('VBtn.ts', () => { // eslint-disable-line max-statements
+describe.skip('VBtn.ts', () => {
+  // eslint-disable-line max-statements
   let mountFunction: (options?: object) => Wrapper<Vue>
   let router: Router
   let localVue: typeof Vue
@@ -42,18 +41,22 @@ describe.skip('VBtn.ts', () => { // eslint-disable-line max-statements
   })
 
   it('should render component with color prop and match snapshot', () => {
-    expect(mountFunction({
-      propsData: {
-        color: 'green darken-1',
-      },
-    }).html()).toMatchSnapshot()
+    expect(
+      mountFunction({
+        propsData: {
+          color: 'green darken-1',
+        },
+      }).html()
+    ).toMatchSnapshot()
 
-    expect(mountFunction({
-      propsData: {
-        color: 'green darken-1',
-        text: true,
-      },
-    }).html()).toMatchSnapshot()
+    expect(
+      mountFunction({
+        propsData: {
+          color: 'green darken-1',
+          text: true,
+        },
+      }).html()
+    ).toMatchSnapshot()
   })
 
   it('should render component with loader slot and match snapshot', () => {
@@ -178,7 +181,8 @@ describe.skip('VBtn.ts', () => { // eslint-disable-line max-statements
     expect(wrapper.classes('v-btn--icon')).toBe(false)
   })
 
-  it('should have the correct elevation', async () => { // eslint-disable-line max-statements
+  it('should have the correct elevation', async () => {
+    // eslint-disable-line max-statements
     const wrapper = mountFunction()
 
     wrapper.setProps({ disabled: true })

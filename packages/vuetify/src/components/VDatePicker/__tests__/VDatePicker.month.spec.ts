@@ -130,7 +130,7 @@ describe.skip('VDatePicker.ts', () => {
       },
     })
 
-    wrapper.findAll('.v-date-picker-table--month').at(0).trigger('wheel')
+    wrapper.findAll('.v-date-picker-table--month').at(0).trigger('wheel', { deltaY: 1 })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.tableDate).toBe('2014')
   })
@@ -334,5 +334,21 @@ describe.skip('VDatePicker.ts', () => {
     wrapper.find('.v-date-picker-table--month tbody tr:first-child+tr+tr td:nth-child(2) button').trigger('click')
     expect(cb.mock.calls[0][0][0]).toBe(fromDate)
     expect(cb.mock.calls[1][0][0]).toBe(toDate)
+  })
+
+  it('should add class for the first and last days in range', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        range: true,
+        showCurrent: '2019',
+        type: 'month',
+        value: ['2019-01', '2019-02'],
+      },
+    })
+
+    expect(wrapper.findAll('.v-date-picker-table--month tbody button.v-date-picker--first-in-range')
+      .exists()).toBe(true)
+    expect(wrapper.findAll('.v-date-picker-table--month tbody button.v-date-picker--last-in-range')
+      .exists()).toBe(true)
   })
 })

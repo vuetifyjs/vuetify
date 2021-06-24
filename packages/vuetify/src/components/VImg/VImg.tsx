@@ -7,7 +7,7 @@ import { VResponsive } from '@/components'
 import intersect from '@/directives/intersect'
 
 // Composables
-import { makeTransitionProps } from '@/composables/transition'
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import {
@@ -23,7 +23,6 @@ import {
 } from 'vue'
 import {
   makeProps,
-  maybeTransition,
   SUPPORTS_INTERSECTION,
   useRender,
 } from '@/util'
@@ -185,50 +184,54 @@ export default defineComponent({
 
       const sources = slots.sources?.()
 
-      return maybeTransition(
-        props,
-        { appear: true },
-        withDirectives(
-          sources
-            ? <picture class="v-img__picture">{sources}{img}</picture>
-            : img,
-          [[vShow, state.value === 'loaded']]
-        )
+      return (
+        <MaybeTransition transition={ props.transition } appear>
+          {
+            withDirectives(
+              sources
+                ? <picture class="v-img__picture">{ sources }{ img }</picture>
+                : img,
+              [[vShow, state.value === 'loaded']]
+            )
+          }
+        </MaybeTransition>
       )
     })
 
-    const __preloadImage = computed(() => {
-      return maybeTransition(
-        props,
-        {},
-        normalisedSrc.value.lazySrc && state.value !== 'loaded' ? (
+    const __preloadImage = computed(() => (
+      <MaybeTransition transition={ props.transition }>
+        { normalisedSrc.value.lazySrc && state.value !== 'loaded' && (
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
             src={ normalisedSrc.value.lazySrc }
             alt=""
           />
-        ) : undefined
-      )
-    })
+        )}
+      </MaybeTransition>
+    ))
 
     const __placeholder = computed(() => {
       if (!slots.placeholder) return
 
-      const placeholder = state.value === 'loading' || (state.value === 'error' && !slots.error)
-        ? <div class="v-img__placeholder">{ slots.placeholder() }</div>
-        : undefined
-
-      return maybeTransition(props, { appear: true }, placeholder)
+      return (
+        <MaybeTransition transition={ props.transition } appear>
+          { (state.value === 'loading' || (state.value === 'error' && !slots.error)) &&
+          <div class="v-img__placeholder">{ slots.placeholder() }</div>
+          }
+        </MaybeTransition>
+      )
     })
 
     const __error = computed(() => {
       if (!slots.error) return
 
-      const error = state.value === 'error'
-        ? <div class="v-img__error">{ slots.error() }</div>
-        : undefined
-
-      return maybeTransition(props, { appear: true }, error)
+      return (
+        <MaybeTransition transition={ props.transition } appear>
+          { state.value === 'error' &&
+            <div class="v-img__error">{ slots.error() }</div>
+          }
+        </MaybeTransition>
+      )
     })
 
     useRender(() => (

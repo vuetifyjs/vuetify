@@ -17,12 +17,9 @@ export default defineComponent({
     const { layoutClasses, getLayoutItem, items } = createLayout(props)
 
     useRender(() => (
-      <div
-        class={layoutClasses.value}
-        style={{
-          height: props.fullHeight ? '100vh' : undefined,
-        }}
-      >{ slots.default?.() }</div>
+      <div class={ layoutClasses.value }>
+        { slots.default?.() }
+      </div>
     ))
 
     return {

@@ -125,3 +125,11 @@
   &--has-state
     &.error--text .v-label
       animation: v-shake .6s map-get($transition, 'swing')
+
+  &--hide-spin-buttons
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button 
+      -webkit-appearance: none
+      margin: 0
+    input[type=number] 
+      -moz-appearance: textfield

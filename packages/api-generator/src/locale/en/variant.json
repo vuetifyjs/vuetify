@@ -1,0 +1,5 @@
+{
+  "props": {
+    "variant": "Applies one of 4 styles, default, contained, outlined, and text."
+  }
+}

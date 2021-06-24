@@ -8,7 +8,7 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
 import { defineComponent } from 'vue'
@@ -26,10 +26,11 @@ export default defineComponent({
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
+    ...makeThemeProps(),
   }),
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-system-bar')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)

@@ -1,6 +1,5 @@
-import type { DataTableCompareFunction, ItemGroup, SelectItemKey } from 'vuetify/types'
-import type { Ref, Slots, TransitionProps, VNode } from 'vue'
-import { camelize, Fragment, h, isRef, mergeProps, ref, Transition } from 'vue'
+import type { Ref, Slots, VNode } from 'vue'
+import { camelize, Fragment, isRef, ref } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
@@ -54,6 +53,8 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
   path = path.replace(/^\./, '') // strip a leading dot
   return getNestedValue(obj, path.split('.'), fallback)
 }
+
+type SelectItemKey = string | (string | number)[] | ((item: Dictionary<any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: object,
@@ -111,6 +112,8 @@ export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { 
   return filtered
 }
 
+export function convertToUnit (str: number, unit?: string): string
+export function convertToUnit (str: string | number | null | undefined, unit?: string): string | undefined
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
   if (str == null || str === '') {
     return undefined
@@ -176,6 +179,11 @@ export function arrayDiff (a: any[], b: any[]): any[] {
   return diff
 }
 
+interface ItemGroup<T> {
+  name: string
+  items: T[]
+}
+
 export function groupItems<T extends any = any> (
   items: T[],
   groupBy: string[],
@@ -206,12 +214,13 @@ export function wrapInArray<T> (v: T | T[] | null | undefined): T[] {
       ? v : [v]
 }
 
-export function sortItems<T extends any = any> (
+type DataTableCompareFunction<T = any> = (a: T, b: T) => number
+export function sortItems<T extends any, K extends keyof T> (
   items: T[],
   sortBy: string[],
   sortDesc: boolean[],
   locale: string,
-  customSorters?: Record<string, DataTableCompareFunction<T>>
+  customSorters?: Record<K, DataTableCompareFunction<T[K]>>
 ): T[] {
   if (sortBy === null || !sortBy.length) return items
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
@@ -227,8 +236,8 @@ export function sortItems<T extends any = any> (
         [sortA, sortB] = [sortB, sortA]
       }
 
-      if (customSorters?.[sortKey]) {
-        const customResult = customSorters[sortKey](sortA, sortB)
+      if (customSorters?.[sortKey as K]) {
+        const customResult = customSorters[sortKey as K](sortA, sortB)
 
         if (!customResult) continue
 
@@ -382,20 +391,6 @@ export function flattenFragments (nodes: VNode[]): VNode[] {
       return node
     }
   }).flat()
-}
-
-export function maybeTransition <T extends VNode | VNode[] | undefined> (
-  props: { transition?: string | boolean | TransitionProps },
-  data: TransitionProps,
-  vNodes: T
-): VNode | T {
-  if (!props.transition || typeof props.transition === 'boolean') return vNodes
-
-  return h(
-    Transition,
-    mergeProps(typeof props.transition === 'string' ? { name: props.transition } : props.transition as any, data as any),
-    () => vNodes
-  )
 }
 
 export const randomHexColor = () => {

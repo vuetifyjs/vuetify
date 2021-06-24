@@ -110,16 +110,15 @@ describe('VNavigationDrawer', () => {
   })
 
   it.each([
-    [{}, `translateX(-105%)`],
+    [{}, `translateX(-110%)`],
     [{ modelValue: true }, `translateX(0%)`],
-    [{ modelValue: false }, `translateX(-105%)`],
-    [{ modelValue: false, permanent: true }, `translateX(0%)`],
-    [{ modelValue: true, right: true }, `translateX(0%)`],
-    [{ modelValue: false, right: true }, `translateX(105%)`],
-    [{ bottom: true }, `translateY(105%)`],
-    [{ modelValue: true, bottom: true }, `translateY(0%)`],
-    [{ modelValue: false, bottom: true }, `translateY(105%)`],
-    [{ temporary: true }, `translateX(-105%)`],
+    [{ modelValue: false }, `translateX(-110%)`],
+    [{ modelValue: true, position: 'right' }, `translateX(0%)`],
+    [{ modelValue: false, position: 'right' }, `translateX(110%)`],
+    [{ position: 'bottom' }, `translateY(110%)`],
+    [{ modelValue: true, position: 'bottom' }, `translateY(0%)`],
+    [{ modelValue: false, position: 'bottom' }, `translateY(110%)`],
+    [{ temporary: true }, `translateX(-110%)`],
   ])('should have the correct translate using %s props', (props, translate) => {
     const wrapper = mountFunction(props)
     const element = wrapper.element as HTMLElement

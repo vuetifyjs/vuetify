@@ -16,7 +16,7 @@
       </template>
 
       <v-card>
-        <v-card-title class="headline grey lighten-2">
+        <v-card-title class="text-h5 grey lighten-2">
           Privacy Policy
         </v-card-title>
 

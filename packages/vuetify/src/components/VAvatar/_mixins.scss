@@ -1,0 +1,26 @@
+@mixin avatar-sizes ($map: $avatar-sizes) {
+  @each $sizeName, $multiplier in $size-scales {
+    $size: map-get($map, 'height') + (8 * $multiplier);
+
+    &.v-avatar--size-#{$sizeName} {
+      --v-avatar-height: #{$size};
+    }
+  }
+}
+
+@mixin avatar-density ($properties, $densities) {
+  @each $density, $multiplier in $densities {
+    $value: calc(var(--v-avatar-height) + #{$multiplier * $spacer});
+
+    &.v-avatar--density-#{$density} {
+      @if type-of($properties) == "list" {
+        @each $property in $properties {
+          #{$property}: $value;
+        }
+      }
+      @else {
+        #{$properties}: $value;
+      }
+    }
+  }
+}

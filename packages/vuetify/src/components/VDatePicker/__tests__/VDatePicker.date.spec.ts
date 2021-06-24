@@ -267,7 +267,7 @@ describe.skip('VDatePicker.ts', () => { // eslint-disable-line max-statements
       },
     })
 
-    wrapper.findAll('.v-date-picker-table--date').at(0).trigger('wheel')
+    wrapper.findAll('.v-date-picker-table--date').at(0).trigger('wheel', { deltaY: 1 })
     expect(wrapper.vm.tableDate).toBe('2013-06')
   })
 
@@ -696,6 +696,22 @@ describe.skip('VDatePicker.ts', () => { // eslint-disable-line max-statements
     // Lead to [from,], only 'input' should be called
     expect(input.mock.calls[1][0]).toEqual(expect.arrayContaining(['2019-01-06']))
     expect(change.mock.calls).toHaveLength(1)
+  })
+
+  it('should add class for the first and last days in range', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        range: true,
+        showCurrent: '2019-01',
+        type: 'date',
+        value: ['2019-01-06', '2019-01-16'],
+      },
+    })
+
+    expect(wrapper.findAll('.v-date-picker-table--date tbody button.v-date-picker--first-in-range')
+      .exists()).toBe(true)
+    expect(wrapper.findAll('.v-date-picker-table--date tbody button.v-date-picker--last-in-range')
+      .exists()).toBe(true)
   })
 
   it('should set proper tableDate', async () => {

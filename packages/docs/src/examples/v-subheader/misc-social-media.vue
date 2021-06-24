@@ -41,7 +41,7 @@
               height="300px"
             >
               <span
-                class="headline white--text pl-4 pt-4 d-inline-block"
+                class="text-h5 white--text pl-4 pt-4 d-inline-block"
                 v-text="card"
               ></span>
             </v-img>

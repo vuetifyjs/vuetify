@@ -1,14 +1,14 @@
 <template>
   <v-system-bar
     v-if="hasPromotion"
-    :style="{ background: `linear-gradient(to right, #04091D 45%, ${hasAltPromotion ? '#1D408C' : '#7A3FAB'})` }"
+    color="#1A265A"
     app
     dark
     height="76"
   >
     <a
-      :class="[`cm-banner${hasAltPromotion ? '-alt' : ''}`]"
-      href="https://vueschool.io/free-weekend/?friend=vuetify"
+      class="cm-banner"
+      href="https://vueschool.io/sales/summer-vue?friend=vuetify"
       rel="noopener"
       target="_blank"
       @click="onClick"
@@ -28,7 +28,7 @@
 
 <script>
   // Utilities
-  // import { differenceInHours, isBefore } from 'date-fns'
+  import { differenceInHours } from 'date-fns'
   import { get, sync } from 'vuex-pathify'
 
   export default {
@@ -37,17 +37,12 @@
     computed: {
       last: sync('user/last@promotion'),
       name: get('route/name'),
-      hasAltPromotion () {
-        return true
-      },
       hasPromotion () {
-        return false
-        // const now = Date.now()
+        const now = Date.now()
 
-        // return (
-        //   isBefore(now, new Date(2021, 3, 29)) &&
-        //   differenceInHours(now, Number(this.last)) > 1
-        // )
+        return (
+          differenceInHours(now, Number(this.last)) > 1
+        )
       },
     },
 
@@ -55,7 +50,7 @@
       onClick () {
         this.$gtag.event('click', {
           event_category: 'vuetify-banner',
-          event_label: 'vue-masterschool-free',
+          event_label: 'vue-school-summer-vue',
           value: this.name.toLowerCase(),
         })
       },
@@ -67,8 +62,7 @@
 </script>
 
 <style lang="sass">
-  .cm-banner,
-  .cm-banner-alt
+  .cm-banner
     background-position: center
     background-repeat: no-repeat
     background-size: contain
@@ -84,20 +78,11 @@
     white-space: nowrap
 
   .cm-banner
-    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vueschool-mobile.png)
+    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-summer-sale-2021/vs-summer-mobile.png)
 
     @media (min-width: 660px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vueschool-tablet.png)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-summer-sale-2021/vs-summer-tablet.png)
 
     @media (min-width: 992px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vueschool-desktop.png)
-
-  .cm-banner-alt
-    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vs-2-mobile.png)
-
-    @media (min-width: 660px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vs-2-tablet.png)
-
-    @media (min-width: 992px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/free-vue-masterclass/vs-2-desktop.png)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-summer-sale-2021/vs-summer-desktop.png)
 </style>

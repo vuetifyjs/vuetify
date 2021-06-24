@@ -24,9 +24,14 @@
 
   @at-root
     +button-sizes()
-    +density('v-btn', 'height', $button-density)
+    +button-density('height', $button-density)
 
-  +states('.v-btn__overlay')
+  @include border($button-border...)
+  @include states('.v-btn__overlay', false)
+  @include variant($button-variants...)
+
+  &--flat
+    box-shadow: none
 
   &--icon
     border-radius: $button-icon-border-radius
@@ -34,31 +39,15 @@
     padding: 0
 
     @at-root &
-      +density('v-btn', ('width', 'height'), $button-icon-density)
-
-  &--border
-    +border($button-border-color, $button-border-style, $button-border-width)
+      +button-density(('width', 'height'), $button-icon-density)
 
   &--elevated
-    +elevation(map-get($button-elevation, 'default'))
-
     &:hover,
     &:focus
       +elevation(map-get($button-elevation, 'hover'))
 
     &:active
       +elevation(map-get($button-elevation, 'active'))
-
-  &--plain
-    opacity: .62
-
-    &:focus,
-    &:hover,
-    &.v-btn--active
-      opacity: 1
-
-    .v-btn__overlay
-      display: none
 
   &--block
     display: flex
@@ -72,14 +61,14 @@
       color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
       opacity: 1
 
-    &.v-btn--contained
+    &.v-btn--variant-contained
       background: rgb(var(--v-theme-surface))
       box-shadow: none
 
       .v-btn__overlay
         // This is multiplied by the text opacity,
         // so we need to divide it to get the desired value
-        opacity: ($button-disabled-overlay / $button-disabled-opacity)
+        opacity: $button-disabled-overlay / $button-disabled-opacity
 
   &--stacked
     flex-direction: column
@@ -87,7 +76,7 @@
 
     @at-root
       @include button-sizes($button-stacked-sizes, true)
-      @include density('v-btn', 'height', $button-stacked-density)
+      @include button-density('height', $button-stacked-density)
 
 .v-btn__overlay
   background-color: currentColor
@@ -101,10 +90,12 @@
   opacity: 0
   transition: opacity 0.2s ease-in-out
 
+// VAppBar
 .v-btn
   .v-app-bar &
     @include elevation($button-app-bar-elevation)
 
+// VBottomNavigation
 .v-btn
   .v-bottom-navigation &
     filter: $button-bottom-navigation-filter
@@ -140,8 +131,10 @@
       transform: $button-bottom-navigation-shift-transform
       transition: inherit
 
-  &--is-active
+  &--active
     .v-bottom-navigation &
+      @include active-states('.v-btn__overlay')
+
       filter: $button-bottom-navigation-active-filter
       opacity: $button-bottom-navigation-active-opacity
 
@@ -152,3 +145,18 @@
       > *:not([class*='v-'])
         opacity: $button-bottom-navigation-active-opacity
         transform: $button-bottom-navigation-shift-active-transform
+
+// VCard
+.v-btn
+  .v-card-actions &
+    padding: $button-card-actions-padding
+
+    @include elevation($button-card-actions-elevation)
+
+  ~ .v-btn
+    .v-card-actions &
+      @include ltr()
+        margin-left: $button-card-actions-margin
+
+      @include rtl()
+        margin-right: $button-card-actions-margin

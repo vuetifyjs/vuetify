@@ -95,7 +95,20 @@ export default {
 </script>
 ```
 
-Use the `<v-theme-provider>` component to dynamically apply different themes to *specific* sections of your application. In the following example, we apply a custom theme named `high-contrast`:
+Most components support the **theme** prop. When used, a new context is created for _that_ specific component and **all** of its children. In the following example, the [v-btn](/components/buttons/) uses the **dark** theme applied by its parent [v-card](/components/cards/).
+
+```html
+<template>
+  <v-app>
+    <v-card theme="dark">
+      <!-- button uses dark theme -->
+      <v-btn>foo</v-btn>
+    </v-card>
+  </v-app>
+</template>
+```
+
+You can use the `<v-theme-provider>` component to dynamically apply different themes to larger sections of your application, without having to set the **theme** prop on each individual component. In the following example, we apply a custom theme named `high-contrast`.
 
 ```html
 <template>
@@ -105,9 +118,8 @@ Use the `<v-theme-provider>` component to dynamically apply different themes to 
 
     <v-theme-provider theme="high-contrast">
       <!-- uses the high-contrast theme -->
-      <v-card>
-         ...
-      </v-card>
+      <v-card>...</v-card>
+      <v-btn>...</v-btn>
     </v-theme-provider>
   </v-app>
 </template>

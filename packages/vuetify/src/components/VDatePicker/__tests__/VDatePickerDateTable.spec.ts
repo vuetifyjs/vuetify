@@ -237,7 +237,7 @@ describe.skip('VDatePickerDateTable.ts', () => {
     const tableDate = jest.fn()
     wrapper.vm.$on('update:table-date', tableDate)
 
-    wrapper.trigger('wheel')
+    wrapper.trigger('wheel', { deltaY: 1 })
     expect(tableDate).toHaveBeenCalledWith('2005-06')
   })
 
@@ -251,7 +251,7 @@ describe.skip('VDatePickerDateTable.ts', () => {
     const tableDate = jest.fn()
     wrapper.vm.$on('update:table-date', tableDate)
 
-    wrapper.trigger('wheel')
+    wrapper.trigger('wheel', { deltaY: 1 })
     expect(tableDate).not.toHaveBeenCalled()
   })
 

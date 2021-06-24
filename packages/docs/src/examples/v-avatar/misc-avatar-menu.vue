@@ -20,7 +20,7 @@
               color="brown"
               size="48"
             >
-              <span class="white--text headline">{{ user.initials }}</span>
+              <span class="white--text text-h5">{{ user.initials }}</span>
             </v-avatar>
           </v-btn>
         </template>
@@ -30,10 +30,10 @@
               <v-avatar
                 color="brown"
               >
-                <span class="white--text headline">{{ user.initials }}</span>
+                <span class="white--text text-h5">{{ user.initials }}</span>
               </v-avatar>
               <h3>{{ user.fullName }}</h3>
-              <p class="caption mt-1">
+              <p class="text-caption mt-1">
                 {{ user.email }}
               </p>
               <v-divider class="my-3"></v-divider>

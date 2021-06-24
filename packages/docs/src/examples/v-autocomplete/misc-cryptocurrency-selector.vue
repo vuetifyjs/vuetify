@@ -1,7 +1,7 @@
 <template>
   <v-toolbar color="orange accent-1">
     <v-app-bar-nav-icon class="hidden-sm-and-down"></v-app-bar-nav-icon>
-    <v-toolbar-title class="title mr-6 hidden-sm-and-down">
+    <v-toolbar-title class="text-h6 mr-6 hidden-sm-and-down">
       Cryptocurrency
     </v-toolbar-title>
     <v-autocomplete
@@ -43,7 +43,7 @@
       <template v-slot:item="{ item }">
         <v-list-item-avatar
           color="indigo"
-          class="headline font-weight-light white--text"
+          class="text-h5 font-weight-light white--text"
         >
           {{ item.name.charAt(0) }}
         </v-list-item-avatar>

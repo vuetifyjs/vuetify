@@ -7,9 +7,9 @@ import type { Ref } from 'vue'
 
 // Composables
 export function useProxiedModel<
-  Inner,
   Props extends object,
   Prop extends Extract<keyof Props, string>,
+  Inner = Props[Prop],
 > (
   props: Props,
   prop: Prop,

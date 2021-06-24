@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VSheet should match a snapshot 1`] = `
-<div class="v-sheet v-theme--light">
+<div class="v-sheet v-theme--light bg-surface">
 </div>
 `;

@@ -1,7 +1,8 @@
+import { describe, expect, it } from '@jest/globals'
 import { weekNumber } from '../dateTimeUtils'
 
 describe('/util/dateTimeUtils.ts', () => {
-  test.each([
+  it.each([
     [2010, 0, 1, 1, 4, 53],
     [2016, 0, 1, 0, 4, 53],
     [2006, 0, 1, 1, 4, 52],

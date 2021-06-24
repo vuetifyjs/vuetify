@@ -7,12 +7,18 @@ html
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+  padding-right: var(--v-scrollbar-offset)
 
 html.overflow-y-hidden
   overflow-y: hidden !important
 
 :root
+  --v-theme-background: #fff
+  --v-theme-on-background: #000
+  --v-theme-surface: #fff
+  --v-theme-on-surface: #000
   --v-theme-overlay-multiplier: 1
+  --v-scrollbar-offset: 0px
 
 // iOS Safari hack to allow click events on body
 @supports (-webkit-touch-callout: none)

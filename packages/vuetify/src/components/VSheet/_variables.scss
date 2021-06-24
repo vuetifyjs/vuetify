@@ -10,15 +10,14 @@ $sheet-elevation: 0 !default;
 $sheet-positions: absolute fixed !default;
 $sheet-rounded-border-radius: $border-radius-root !default;
 
-$sheet-border: () !default;
 $sheet-border: (
   $sheet-border-color,
   $sheet-border-style,
-  $sheet-border-width
-);
+  $sheet-border-width,
+  $sheet-border-thin-width
+) !default;
 
-$sheet-theme: () !default;
 $sheet-theme: (
   $sheet-background,
   $sheet-color
-);
+) !default;

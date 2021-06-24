@@ -1,29 +1,23 @@
-// @ts-nocheck
-/* eslint-disable */
-
 // Components
-// import VLazy from '../VLazy'
+import { VLazy } from '..'
 
 // Utilities
-import {
-  mount,
-  MountOptions,
-  Wrapper,
-} from '@vue/test-utils'
+import { createVuetify } from '@/framework'
+import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
+import { nextTick } from 'vue'
 
-describe.skip('VLazy.ts', () => {
-  type Instance = InstanceType<typeof VLazy>
-  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+describe('VLazy', () => {
+  const vuetify = createVuetify()
 
-  beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VLazy, {
-        ...options,
-      })
-    }
-  })
+  function mountFunction (options = {}) {
+    return mount(VLazy, {
+      global: { plugins: [vuetify] },
+      ...options,
+    })
+  }
 
-  it('should conditionally render content', async () => {
+  it('should match a snapshot', async () => {
     const wrapper = mountFunction({
       slots: {
         default: '<div>foobar</div>',
@@ -32,41 +26,16 @@ describe.skip('VLazy.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.setProps({ value: true })
+    wrapper.setProps({ modelValue: true })
 
-    await wrapper.vm.$nextTick()
+    await nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-  })
 
-  it('should set a minimum height', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        minHeight: 200,
-      },
-    })
+    wrapper.setProps({ modelValue: false })
 
-    expect(wrapper.element.style.minHeight).toBe('200px')
-  })
+    await nextTick()
 
-  it('should activate the slot when element is intersected', () => {
-    const wrapper = mountFunction()
-
-    expect(wrapper.vm.isActive).toBeFalsy()
-
-    const entries = [] as IntersectionObserverEntry[]
-    const observer = {} as IntersectionObserver
-
-    wrapper.vm.onObserve(entries, observer, false)
-
-    expect(wrapper.vm.isActive).toBeFalsy()
-
-    wrapper.vm.onObserve(entries, observer, true)
-
-    expect(wrapper.vm.isActive).toBeTruthy()
-
-    wrapper.vm.onObserve(entries, observer, false)
-
-    expect(wrapper.vm.isActive).toBeTruthy()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

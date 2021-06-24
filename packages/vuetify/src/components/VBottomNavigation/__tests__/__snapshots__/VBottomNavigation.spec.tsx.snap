@@ -2,7 +2,7 @@
 
 exports[`VBottomNavigation should match a snapshot 1`] = `
 <header class="v-bottom-navigation v-bottom-navigation--is-active v-theme--light v-bottom-navigation--density-default"
-        style="bottom: 0px; height: 56px; margin-left: 0px; margin-bottom: 0px; position: absolute; z-index: 2; transform: translateY(0%);"
+        style="bottom: 0px; height: 56px; margin-left: 0px; margin-bottom: 0px; z-index: 2; transform: translateY(0%);"
 >
   <div class="v-bottom-navigation__content">
     <div>
@@ -14,7 +14,7 @@ exports[`VBottomNavigation should match a snapshot 1`] = `
 
 exports[`VBottomNavigation should not render content with no default slot and match a snapshot 1`] = `
 <header class="v-bottom-navigation v-bottom-navigation--is-active v-theme--light v-bottom-navigation--density-default"
-        style="bottom: 0px; height: 56px; margin-left: 0px; margin-bottom: 0px; position: absolute; z-index: 2; transform: translateY(0%);"
+        style="bottom: 0px; height: 56px; margin-left: 0px; margin-bottom: 0px; z-index: 2; transform: translateY(0%);"
 >
 </header>
 `;

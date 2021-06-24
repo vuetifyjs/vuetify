@@ -10,7 +10,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, defineComponent } from 'vue'
@@ -32,15 +32,19 @@ export default defineComponent({
       type: String,
       validator: (v: any) => !v || ['horizontal', 'shift'].includes(v),
     },
+    height: {
+      type: [Number, String],
+      default: 56,
+    },
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
     ...makeRoundedProps(),
     ...makeLayoutItemProps({
       name: 'bottom-navigation',
-      size: 56,
     }),
     ...makeTagProps({ tag: 'header' }),
+    ...makeThemeProps(),
   }),
 
   emits: {
@@ -48,7 +52,7 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-bottom-navigation')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => props.bgColor))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => props.color))
@@ -56,7 +60,7 @@ export default defineComponent({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props, 'v-bottom-navigation')
     const height = computed(() => (
-      Number(props.size) -
+      Number(props.height) -
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ))
@@ -66,6 +70,8 @@ export default defineComponent({
       computed(() => props.priority),
       computed(() => 'bottom'),
       computed(() => isActive.value ? height.value : 0),
+      height,
+      isActive
     )
 
     return () => {
@@ -78,6 +84,7 @@ export default defineComponent({
               'v-bottom-navigation--horizontal': props.mode === 'horizontal',
               'v-bottom-navigation--is-active': isActive.value,
               'v-bottom-navigation--shift': props.mode === 'shift',
+              'v-bottom-navigation--absolute': props.absolute,
             },
             themeClasses.value,
             backgroundColorClasses.value,

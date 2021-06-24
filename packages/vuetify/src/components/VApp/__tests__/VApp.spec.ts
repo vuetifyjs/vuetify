@@ -3,6 +3,7 @@ import VApp from '../VApp'
 
 // Utilities
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 import { createVuetify } from '@/framework'
 
 describe('VApp', () => {
