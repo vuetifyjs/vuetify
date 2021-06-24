@@ -110,13 +110,13 @@ export default defineComponent({
             positionStyles.value,
           ]}
           disabled={ props.disabled || undefined }
-          href={ link.href?.value }
+          href={ link.href.value }
           v-ripple={[
             !props.disabled,
             null,
             props.icon ? ['center'] : null,
           ]}
-          onClick={ props.disabled || link?.navigate }
+          onClick={ props.disabled || link.navigate }
         >
           <span class="v-btn__overlay" />
 

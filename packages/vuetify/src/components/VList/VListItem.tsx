@@ -77,15 +77,16 @@ export default defineComponent({
     const { roundedClasses } = useRounded(props, 'v-list-item')
 
     return () => {
+      const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasTitle = (slots.title || props.title)
       const hasSubtitle = (slots.subtitle || props.subtitle)
       const hasHeader = !!(hasTitle || hasSubtitle)
       const hasAppend = (slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = (slots.prepend || props.prependAvatar || props.prependIcon)
-      const isClickable = !props.disabled && (link.isLink.value || props.link)
+      const isClickable = !props.disabled && (link.isClickable.value || props.link)
 
       return (
-        <props.tag
+        <Tag
           class={[
             'v-list-item',
             {
@@ -106,9 +107,9 @@ export default defineComponent({
             colorStyles.value,
             dimensionStyles.value,
           ]}
-          href={ link.href?.value }
+          href={ link.href.value }
           tabindex={ isClickable ? 0 : undefined }
-          onClick={ isClickable && link?.navigate }
+          onClick={ isClickable && link.navigate }
           v-ripple={ isClickable }
         >
           { (isClickable || isActive.value) && (<div class="v-list-item__overlay" />) }
@@ -164,7 +165,7 @@ export default defineComponent({
                 </VListItemAvatar>
               )
           ) }
-        </props.tag>
+        </Tag>
       )
     }
   },

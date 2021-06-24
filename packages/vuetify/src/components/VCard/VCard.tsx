@@ -79,18 +79,19 @@ export default defineComponent({
     const link = useLink(props, attrs)
 
     return () => {
+      const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasTitle = !!(slots.title || props.title)
       const hasSubtitle = !!(slots.subtitle || props.subtitle)
-      const hasHeaderText = !!(hasTitle || hasSubtitle)
+      const hasHeaderText = hasTitle || hasSubtitle
       const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
       const hasImage = !!(slots.image || props.image)
       const hasHeader = hasHeaderText || hasPrepend || hasAppend
       const hasText = !!(slots.text || props.text)
-      const isClickable = !props.disabled && (link.isLink.value || props.link)
+      const isClickable = !props.disabled && (link.isClickable.value || props.link)
 
       return (
-        <props.tag
+        <Tag
           class={[
             'v-card',
             {
@@ -112,8 +113,8 @@ export default defineComponent({
             dimensionStyles.value,
             positionStyles.value,
           ]}
-          href={ link.href?.value }
-          onClick={ isClickable && link?.navigate }
+          href={ link.href.value }
+          onClick={ isClickable && link.navigate }
           v-ripple={ isClickable }
         >
           { isClickable && (<div class="v-card__overlay" />) }
@@ -196,7 +197,7 @@ export default defineComponent({
           { slots.actions && (
             <VCardActions v-slots={{ default: slots.actions }} />
           ) }
-        </props.tag>
+        </Tag>
       )
     }
   },
