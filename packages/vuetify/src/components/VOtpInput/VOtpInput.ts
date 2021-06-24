@@ -73,7 +73,7 @@ export default baseMixins.extend<options>().extend({
       },
     },
     isDirty (): boolean {
-      return this.lazyValue?.toString().length > 0 || this.badInput
+      return VInput.options.computed.isDirty.call(this) || this.badInput
     },
   },
 
