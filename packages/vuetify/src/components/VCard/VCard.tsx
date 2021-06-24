@@ -23,6 +23,7 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeVariantProps, useVariant } from '@/composables/variant'
@@ -53,6 +54,7 @@ export default defineComponent({
     subtitle: String,
     text: String,
     title: String,
+
     ...makeThemeProps(),
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -60,6 +62,7 @@ export default defineComponent({
     ...makeElevationProps(),
     ...makePositionProps(),
     ...makeRoundedProps(),
+    ...makeRouterProps(),
     ...makeTagProps(),
     ...makeVariantProps({ variant: 'contained' } as const),
   }),
@@ -73,29 +76,29 @@ export default defineComponent({
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-card')
     const { roundedClasses } = useRounded(props, 'v-card')
+    const link = useLink(props, attrs)
 
     return () => {
+      const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasTitle = !!(slots.title || props.title)
       const hasSubtitle = !!(slots.subtitle || props.subtitle)
-      const hasHeaderText = !!(hasTitle || hasSubtitle)
+      const hasHeaderText = hasTitle || hasSubtitle
       const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
       const hasImage = !!(slots.image || props.image)
       const hasHeader = hasHeaderText || hasPrepend || hasAppend
       const hasText = !!(slots.text || props.text)
-      const hasOverlay = (props.variant === 'text' || props.link) && !props.disabled
-      const isLink = !!(props.link || attrs.onClick || attrs.onClickOnce)
-      const isClickable = isLink && !props.disabled
+      const isClickable = !props.disabled && (link.isClickable.value || props.link)
 
       return (
-        <props.tag
+        <Tag
           class={[
             'v-card',
             {
               'v-card--disabled': props.disabled,
               'v-card--flat': props.flat,
               'v-card--hover': props.hover && !(props.disabled || props.flat),
-              'v-card--link': isLink,
+              'v-card--link': isClickable,
             },
             themeClasses.value,
             borderClasses.value,
@@ -111,9 +114,11 @@ export default defineComponent({
             dimensionStyles.value,
             positionStyles.value,
           ]}
+          href={ link.href.value }
+          onClick={ isClickable && link.navigate }
           v-ripple={ isClickable }
         >
-          { hasOverlay && (<div class="v-card__overlay" />) }
+          { isClickable && (<div class="v-card__overlay" />) }
 
           { hasImage && (
             <VCardImg>
@@ -193,7 +198,7 @@ export default defineComponent({
           { slots.actions && (
             <VCardActions v-slots={{ default: slots.actions }} />
           ) }
-        </props.tag>
+        </Tag>
       )
     }
   },
