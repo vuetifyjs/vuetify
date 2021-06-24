@@ -56,6 +56,7 @@ export function useLink (props: LinkProps, attrs: SetupContext['attrs']): UseLin
 
   return {
     ...link,
+    ...route,
     href: computed(() => props.to ? route?.route.value.href : props.href),
   }
 }
