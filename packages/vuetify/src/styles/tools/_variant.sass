@@ -12,7 +12,8 @@
   &--variant-contained
     background: $contained-background
 
-    @include elevation($contained-elevation)
+    @if ($contained-elevation > 0)
+      @include elevation($contained-elevation)
 
   &--variant-outlined
     border: thin solid currentColor
