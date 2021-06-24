@@ -26,8 +26,17 @@ $list-subheader-min-height-multiplier: 1 !default;
 $list-subheader-text-opacity: var(--v-medium-emphasis-opacity) !default;
 $list-subheader-transition: 0.2s min-height $standard-easing !default;
 
+$list-item-border-color: $border-color-root !default;
+$list-item-border-radius: $border-radius-root !default;
+$list-item-border-style: $border-style-root !default;
+$list-item-border-width: 0 !default;
+$list-item-border-thin-width: thin !default;
+$list-item-elevation: 0 !default;
 $list-item-min-height: 48px !default;
+$list-item-outlined-opacity: var(--v-border-opacity) !default;
 $list-item-padding: 8px 16px !default;
+$list-item-plain-opacity: .62 !default;
+$list-item-text-opacity: 0 !default;
 $list-item-transition: .2s $standard-easing !default;
 $list-item-two-line-min-height: 64px !default;
 $list-item-two-line-padding: 12px 16px !default;
@@ -85,13 +94,21 @@ $list-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 $list-border: (
   $list-border-color,
   $list-border-style,
-  $list-border-width
-);
+  $list-border-width,
+  $list-border-thin-width
+) !default;
 
 $list-theme: (
   $list-background,
   $list-color
 );
+
+$list-item-border: (
+  $list-item-border-color,
+  $list-item-border-style,
+  $list-item-border-width,
+  $list-item-border-thin-width
+) !default;
 
 $list-item-title-typography: (
   $list-item-title-font-size,
@@ -123,4 +140,13 @@ $list-item-nav-subtitle-typography: (
   $list-item-nav-subtitle-letter-spacing,
   $list-item-nav-subtitle-line-height,
   null
+);
+
+$list-item-variants: (
+  $list-background,
+  $list-item-elevation,
+  $list-item-plain-opacity,
+  $list-item-outlined-opacity,
+  $list-item-text-opacity,
+  'v-list-item'
 );

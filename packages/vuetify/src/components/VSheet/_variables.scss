@@ -11,5 +11,6 @@ $sheet-rounded-border-radius: $border-radius-root !default;
 $sheet-border: (
   $sheet-border-color,
   $sheet-border-style,
-  $sheet-border-width
+  $sheet-border-width,
+  $sheet-border-thin-width
 ) !default;

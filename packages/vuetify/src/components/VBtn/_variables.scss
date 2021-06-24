@@ -1,5 +1,6 @@
 // Defaults
 $button-app-bar-elevation: 0 !default;
+$button-background: rgb(var(--v-theme-surface)) !default;
 $button-bottom-navigation-elevation: 0 !default;
 $button-bottom-navigation-border-radius: 0 !default;
 $button-bottom-navigation-active-filter: grayscale(0) !default;
@@ -17,10 +18,11 @@ $button-bottom-navigation-shift-top: 50% !default;
 $button-bottom-navigation-shift-transform: scale(.8) translateY(10px) !default;
 $button-bottom-navigation-text-transform: none !default;
 $button-bottom-navigation-transition-duration: .2s !default;
-$button-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
+$button-border-color: $border-color-root !default;
 $button-border-radius: $border-radius-root !default;
 $button-border-style: $border-style-root !default;
-$button-border-width: thin !default;
+$button-border-thin-width: thin !default;
+$button-border-width: 0 !default;
 $button-card-actions-elevation: 0 !default;
 $button-card-actions-margin: .5rem !default;
 $button-card-actions-padding: 0 8px !default;
@@ -36,9 +38,12 @@ $button-icon-font-size: 24px !default;
 $button-icon-size: 48px !default;
 $button-line-height: normal !default;
 $button-stacked-line-height: 1.7 !default;
+$button-plain-opacity: .62 !default;
+$button-outlined-opacity: 1 !default;
 $button-padding-ratio: 2.25 !default;
 $button-stacked-padding-ratio: 4.5 !default;
 $button-positions: absolute fixed !default;
+$button-text-opacity: 0 !default;
 $button-text-letter-spacing: map-deep-get($typography, 'button', 'letter-spacing') !default;
 $button-text-transform: map-deep-get($typography, 'button', 'text-transform') !default;
 $button-vertical-align: middle !default;
@@ -49,15 +54,12 @@ $button-density: ('default': 0, 'comfortable': -2, 'compact': -3) !default;
 $button-stacked-density: ('default': 0, 'comfortable': -4, 'compact': -6) !default;
 $button-icon-density: ('default': 3, 'comfortable': 0, 'compact': -2) !default;
 
-$button-border: () !default;
-$button-border: map-merge(
-  (
-    'border-color': $button-border-color,
-    'border-style': $button-border-style,
-    'border-width': $button-border-width,
-  ),
-  $button-border
-);
+$button-border: (
+  $button-border-color,
+  $button-border-style,
+  $button-border-width,
+  $button-border-thin-width
+) !default;
 
 $button-sizes: () !default;
 $button-sizes: map-merge(
@@ -88,4 +90,13 @@ $button-icon-sizes: map-merge(
     'size': $button-icon-size
   ),
   $button-icon-sizes
+);
+
+$button-variants: (
+  $button-background,
+  map-get($button-elevation, 'default'),
+  $button-plain-opacity,
+  $button-outlined-opacity,
+  $button-text-opacity,
+  'v-btn'
 );

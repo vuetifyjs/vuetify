@@ -24,5 +24,6 @@ $navigation-drawer-will-change: transform !default;
 $navigation-drawer-border: (
   $navigation-drawer-border-color,
   $navigation-drawer-border-style,
-  $navigation-drawer-border-width
+  $navigation-drawer-border-width,
+  $navigation-drawer-border-thin-width
 ) !default;

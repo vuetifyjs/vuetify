@@ -19,7 +19,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
-import { useColor } from '@/composables/color'
+import { makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -39,13 +39,11 @@ export default defineComponent({
     activeClass: String,
     appendAvatar: String,
     appendIcon: String,
-    color: String,
     disabled: Boolean,
     link: Boolean,
     prependAvatar: String,
     prependIcon: String,
     subtitle: String,
-    contained: String,
     title: String,
 
     ...makeBorderProps(),
@@ -56,6 +54,7 @@ export default defineComponent({
     ...makeRouterProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
+    ...makeVariantProps({ variant: 'text' } as const),
   }),
 
   setup (props, { attrs, slots }) {
@@ -64,13 +63,8 @@ export default defineComponent({
       return props.active || link.isExactActive?.value
     })
     const { themeClasses } = useTheme(props)
-    const { colorClasses, colorStyles } = useColor(computed(() => {
-      const key = props.contained && props.active ? 'background' : 'text'
-      const color = (isActive.value && props.activeColor) || props.color
-
-      return { [`${key}`]: color }
-    }))
     const { borderClasses } = useBorder(props, 'v-list-item')
+    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-list-item')
     const { densityClasses } = useDensity(props, 'v-list-item')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
@@ -93,15 +87,15 @@ export default defineComponent({
               'v-list-item--active': isActive.value,
               'v-list-item--disabled': props.disabled,
               'v-list-item--link': isClickable,
-              'v-list-item--contained': props.contained,
               [`${props.activeClass}`]: isActive.value && props.activeClass,
             },
             themeClasses.value,
-            colorClasses.value,
             borderClasses.value,
+            colorClasses.value,
             densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,
+            variantClasses.value,
           ]}
           style={[
             colorStyles.value,

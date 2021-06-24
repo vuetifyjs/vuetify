@@ -22,20 +22,18 @@ describe('border.ts', () => {
     // Invalid or empty
     [{}, []],
     [{ border: null }, []],
-    [{ border: 1 }, []],
-    [{ outlined: false }, []],
+    [{ border: 1 }, ['foo--border']],
     // Border only
-    [{ outlined: true }, ['foo--border']],
     [{ border: true }, ['foo--border']],
     [{ border: '' }, ['foo--border']],
     // Border with 0 or false
-    [{ border: '0' }, ['border-0']],
-    [{ border: 0 }, ['border-0']],
+    [{ border: '0' }, ['foo--border', 'border-0']],
+    [{ border: 0 }, ['foo--border', 'border-0']],
     // Border with a word
-    [{ border: 'tl' }, ['border-tl']],
-    [{ border: 'tr opacity-50' }, ['border-tr', 'border-opacity-50']],
-    [{ border: 'r-xl primary' }, ['border-r-xl', 'border-primary']],
-  ] as const)('should have the correct class', (props, expected) => {
+    [{ border: 'tl' }, ['foo--border', 'border-tl']],
+    [{ border: 'tr opacity-50' }, ['foo--border', 'border-tr', 'border-opacity-50']],
+    [{ border: 'r-xl primary' }, ['foo--border', 'border-r-xl', 'border-primary']],
+  ] as const)('should have the correct class using %s', (props, expected) => {
     const { borderClasses } = useBorder(props as BorderProps, 'foo')
 
     expect(borderClasses.value).toEqual(expected)

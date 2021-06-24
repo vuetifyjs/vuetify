@@ -26,7 +26,12 @@
     +button-sizes()
     +button-density('height', $button-density)
 
+  @include border($button-border...)
   @include states('.v-btn__overlay', false)
+  @include variant($button-variants...)
+
+  &--flat
+    box-shadow: none
 
   &--icon
     border-radius: $button-icon-border-radius
@@ -36,28 +41,13 @@
     @at-root &
       +button-density(('width', 'height'), $button-icon-density)
 
-  &--border
-    +border($button-border-color, $button-border-style, $button-border-width)
-
   &--elevated
-    +elevation(map-get($button-elevation, 'default'))
-
     &:hover,
     &:focus
       +elevation(map-get($button-elevation, 'hover'))
 
     &:active
       +elevation(map-get($button-elevation, 'active'))
-
-  &--plain
-    opacity: .62
-
-    &:focus,
-    &:hover
-      opacity: 1
-
-    .v-btn__overlay
-      display: none
 
   &--block
     display: flex
@@ -71,7 +61,7 @@
       color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
       opacity: 1
 
-    &.v-btn--contained
+    &.v-btn--variant-contained
       background: rgb(var(--v-theme-surface))
       box-shadow: none
 

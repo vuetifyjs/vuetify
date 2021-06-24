@@ -15,7 +15,7 @@ import { makeRouterProps, useLink } from '@/composables/router'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
-import { useColor } from '@/composables/color'
+import { makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -30,9 +30,7 @@ export default defineComponent({
   directives: { Ripple },
 
   props: makeProps({
-    text: Boolean,
     flat: Boolean,
-    plain: Boolean,
     icon: [Boolean, String],
     prependIcon: String,
     appendIcon: String,
@@ -40,7 +38,6 @@ export default defineComponent({
     block: Boolean,
     stacked: Boolean,
 
-    color: String,
     disabled: Boolean,
     ...makeBorderProps(),
     ...makeRoundedProps(),
@@ -52,30 +49,24 @@ export default defineComponent({
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'button' }),
     ...makeThemeProps(),
+    ...makeVariantProps({ variant: 'contained' } as const),
   }),
 
   setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-btn')
-    const { roundedClasses } = useRounded(props, 'v-btn')
+    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-btn')
     const { densityClasses } = useDensity(props, 'v-btn')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-btn')
+    const { roundedClasses } = useRounded(props, 'v-btn')
     const { sizeClasses } = useSize(props, 'v-btn')
     const link = useLink(props, attrs)
 
-    const isContained = computed(() => {
-      return !(props.text || props.plain || props.outlined || props.border !== false)
-    })
-
     const isElevated = computed(() => {
-      return isContained.value && !(props.disabled || props.flat)
+      return props.variant === 'contained' && !(props.disabled || props.flat || props.border)
     })
-
-    const { colorClasses, colorStyles } = useColor(computed(() => ({
-      [isContained.value ? 'background' : 'text']: props.color,
-    })))
 
     return () => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
@@ -88,11 +79,9 @@ export default defineComponent({
             {
               'v-btn--active': link.isExactActive?.value,
               'v-btn--block': props.block,
-              'v-btn--contained': isContained.value,
               'v-btn--disabled': props.disabled,
               'v-btn--elevated': isElevated.value,
               'v-btn--icon': !!props.icon,
-              'v-btn--plain': props.plain,
               'v-btn--stacked': props.stacked,
             },
             themeClasses.value,
@@ -103,6 +92,7 @@ export default defineComponent({
             positionClasses.value,
             roundedClasses.value,
             sizeClasses.value,
+            variantClasses.value,
           ]}
           style={[
             colorStyles.value,
