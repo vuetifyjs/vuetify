@@ -5,7 +5,6 @@ import './VOtpInput.sass'
 // Extensions
 import VInput from '../VInput'
 import VTextField from '../VTextField/VTextField'
-
 // Directives
 import ripple from '../../directives/ripple'
 
@@ -332,7 +331,8 @@ export default baseMixins.extend<options>().extend({
   },
   render (h): VNode {
     return h('div', {
-      class: 'v-otp-input',
+      staticClass: 'v-otp-input',
+      class: this.themeClasses,
     }, this.genContent())
   },
 })

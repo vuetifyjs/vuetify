@@ -1,6 +1,13 @@
 // Imports
 @import './_variables.scss'
 
+// Theme
++theme(v-otp-input) using ($material)
+  .v-input
+    .v-input__control
+      .v-input__slot
+        background: map-get($material, 'bg-color')
+
 .v-otp-input
   input
     text-align: center
@@ -19,10 +26,6 @@
       margin: 0
     input[type=number]
       -moz-appearance: textfield
-  .theme--dark
-    .v-input__control
-      .v-input__slot
-        background: #303030
   .row-container
     display: flex
     flex-wrap: wrap
