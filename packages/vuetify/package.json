@@ -102,6 +102,7 @@
     "style-loader": "^2.0.0",
     "url-loader": "^4.1.1",
     "vue-meta": "^2.4.0",
+    "vue-router": "^4.0.10",
     "vuetify-loader": "^1.7.2"
   },
   "peerDependencies": {

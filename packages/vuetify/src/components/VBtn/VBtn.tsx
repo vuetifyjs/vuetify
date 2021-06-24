@@ -5,12 +5,14 @@ import './VBtn.sass'
 import { VIcon } from '@/components'
 
 // Composables
-import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeRouterProps, useLink } from '@/composables/router'
+import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useColor } from '@/composables/color'
@@ -21,8 +23,6 @@ import { Ripple } from '@/directives/ripple'
 // Utilities
 import { computed, defineComponent } from 'vue'
 import { makeProps } from '@/util'
-
-import { makeSizeProps, useSize } from '@/composables/size'
 
 export default defineComponent({
   name: 'VBtn',
@@ -48,12 +48,13 @@ export default defineComponent({
     ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makePositionProps(),
+    ...makeRouterProps(),
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'button' }),
     ...makeThemeProps(),
   }),
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-btn')
     const { roundedClasses } = useRounded(props, 'v-btn')
@@ -62,6 +63,7 @@ export default defineComponent({
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-btn')
     const { sizeClasses } = useSize(props, 'v-btn')
+    const link = useLink(props, attrs)
 
     const isContained = computed(() => {
       return !(props.text || props.plain || props.outlined || props.border !== false)
@@ -75,70 +77,77 @@ export default defineComponent({
       [isContained.value ? 'background' : 'text']: props.color,
     })))
 
-    return () => (
-      <props.tag
-        type="button"
-        class={[
-          'v-btn',
-          {
-            'v-btn--contained': isContained.value,
-            'v-btn--elevated': isElevated.value,
-            'v-btn--icon': !!props.icon,
-            'v-btn--plain': props.plain,
-            'v-btn--block': props.block,
-            'v-btn--disabled': props.disabled,
-            'v-btn--stacked': props.stacked,
-          },
-          themeClasses.value,
-          borderClasses.value,
-          colorClasses.value,
-          densityClasses.value,
-          elevationClasses.value,
-          positionClasses.value,
-          roundedClasses.value,
-          sizeClasses.value,
-        ]}
-        style={[
-          colorStyles.value,
-          dimensionStyles.value,
-          positionStyles.value,
-        ]}
-        disabled={ props.disabled }
-        v-ripple={[
-          !props.disabled,
-          null,
-          props.icon ? ['center'] : null,
-        ]}
-      >
-        <span class="v-btn__overlay" />
+    return () => {
+      const Tag = (link.isLink.value) ? 'a' : props.tag
 
-        { !props.icon && props.prependIcon && (
-          <VIcon
-            class="v-btn__icon"
-            icon={ props.prependIcon }
-            left={ !props.stacked }
-          />
-        )}
+      return (
+        <Tag
+          type={ Tag === 'a' ? undefined : 'button' }
+          class={[
+            'v-btn',
+            {
+              'v-btn--active': link.isExactActive?.value,
+              'v-btn--block': props.block,
+              'v-btn--contained': isContained.value,
+              'v-btn--disabled': props.disabled,
+              'v-btn--elevated': isElevated.value,
+              'v-btn--icon': !!props.icon,
+              'v-btn--plain': props.plain,
+              'v-btn--stacked': props.stacked,
+            },
+            themeClasses.value,
+            borderClasses.value,
+            colorClasses.value,
+            densityClasses.value,
+            elevationClasses.value,
+            positionClasses.value,
+            roundedClasses.value,
+            sizeClasses.value,
+          ]}
+          style={[
+            colorStyles.value,
+            dimensionStyles.value,
+            positionStyles.value,
+          ]}
+          disabled={ props.disabled || undefined }
+          href={ link.href.value }
+          v-ripple={[
+            !props.disabled,
+            null,
+            props.icon ? ['center'] : null,
+          ]}
+          onClick={ props.disabled || link.navigate }
+        >
+          <span class="v-btn__overlay" />
 
-        { typeof props.icon === 'boolean'
-          ? slots.default?.()
-          : (
+          { !props.icon && props.prependIcon && (
             <VIcon
               class="v-btn__icon"
-              icon={ props.icon }
-              size={ props.size }
+              icon={ props.prependIcon }
+              left={ !props.stacked }
             />
-          )
-        }
+          ) }
 
-        { !props.icon && props.appendIcon && (
-          <VIcon
-            class="v-btn__icon"
-            icon={ props.appendIcon }
-            right={ !props.stacked }
-          />
-        )}
-      </props.tag>
-    )
+          { typeof props.icon === 'boolean'
+            ? slots.default?.()
+            : (
+              <VIcon
+                class="v-btn__icon"
+                icon={ props.icon }
+                size={ props.size }
+              />
+            )
+          }
+
+          { !props.icon && props.appendIcon && (
+            <VIcon
+              class="v-btn__icon"
+              icon={ props.appendIcon }
+              right={ !props.stacked }
+            />
+          ) }
+        </Tag>
+      )
+    }
   },
 })

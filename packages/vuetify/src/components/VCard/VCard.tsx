@@ -23,9 +23,10 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
-import { useBackgroundColor } from '@/composables/color'
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import { useBackgroundColor } from '@/composables/color'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -54,6 +55,7 @@ export default defineComponent({
     subtitle: String,
     text: String,
     title: String,
+
     ...makeThemeProps(),
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -62,9 +64,10 @@ export default defineComponent({
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
+    ...makeRouterProps(),
   }),
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { borderClasses } = useBorder(props, 'v-card')
@@ -73,27 +76,29 @@ export default defineComponent({
     const { positionClasses, positionStyles } = usePosition(props, 'v-card')
     const { roundedClasses } = useRounded(props, 'v-card')
     const { densityClasses } = useDensity(props, 'v-card')
+    const link = useLink(props, attrs)
 
     return () => {
+      const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasTitle = !!(slots.title || props.title)
       const hasSubtitle = !!(slots.subtitle || props.subtitle)
-      const hasHeaderText = !!(hasTitle || hasSubtitle)
+      const hasHeaderText = hasTitle || hasSubtitle
       const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
       const hasImage = !!(slots.image || props.image)
       const hasHeader = hasHeaderText || hasPrepend || hasAppend
       const hasText = !!(slots.text || props.text)
-      const hasOverlay = props.link && !props.disabled
+      const isClickable = !props.disabled && (link.isClickable.value || props.link)
 
       return (
-        <props.tag
+        <Tag
           class={[
             'v-card',
             {
               'v-card--disabled': props.disabled,
               'v-card--flat': props.flat,
               'v-card--hover': props.hover && !(props.disabled || props.flat),
-              'v-card--link': props.link,
+              'v-card--link': isClickable,
             },
             themeClasses.value,
             backgroundColorClasses.value,
@@ -108,9 +113,11 @@ export default defineComponent({
             dimensionStyles.value,
             positionStyles.value,
           ]}
-          v-ripple={ hasOverlay }
+          href={ link.href.value }
+          onClick={ isClickable && link.navigate }
+          v-ripple={ isClickable }
         >
-          { hasOverlay && (<div class="v-card__overlay" />) }
+          { isClickable && (<div class="v-card__overlay" />) }
 
           { hasImage && (
             <VCardImg>
@@ -190,7 +197,7 @@ export default defineComponent({
           { slots.actions && (
             <VCardActions v-slots={{ default: slots.actions }} />
           ) }
-        </props.tag>
+        </Tag>
       )
     }
   },
