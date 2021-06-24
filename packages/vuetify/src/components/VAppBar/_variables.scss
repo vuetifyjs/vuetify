@@ -32,8 +32,7 @@ $app-bar-border: (
   $app-bar-border-thin-width
 ) !default;
 
-$app-bar-theme: () !default;
 $app-bar-theme: (
   $app-bar-background,
   $app-bar-color
-);
+) !default;
