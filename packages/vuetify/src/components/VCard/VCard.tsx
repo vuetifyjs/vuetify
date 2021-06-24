@@ -2,17 +2,15 @@
 import './VCard.sass'
 
 // Components
-import {
-  VCardActions,
-  VCardAvatar,
-  VCardHeader,
-  VCardHeaderText,
-  VCardImg,
-  VCardMedia,
-  VCardSubtitle,
-  VCardText,
-  VCardTitle,
-} from './'
+import VCardActions from './VCardActions'
+import VCardAvatar from './VCardAvatar'
+import VCardHeader from './VCardHeader'
+import VCardHeaderText from './VCardHeaderText'
+import VCardImg from './VCardImg'
+import VCardMedia from './VCardMedia'
+import VCardSubtitle from './VCardSubtitle'
+import VCardText from './VCardText'
+import VCardTitle from './VCardTitle'
 import { VAvatar } from '@/components/VAvatar'
 import { VImg } from '@/components/VImg'
 

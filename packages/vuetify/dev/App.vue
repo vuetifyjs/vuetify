@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import Playground from './Playground'
+  import Playground from './Playground.vue'
 
   export default {
     name: 'App',

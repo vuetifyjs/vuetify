@@ -2,7 +2,7 @@
 import './VBtn.sass'
 
 // Components
-import { VIcon } from '@/components'
+import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'

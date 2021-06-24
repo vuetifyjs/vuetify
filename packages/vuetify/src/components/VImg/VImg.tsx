@@ -1,7 +1,7 @@
 import './VImg.sass'
 
 // Components
-import { VResponsive } from '@/components'
+import { VResponsive } from '@/components/VResponsive'
 
 // Directives
 import intersect from '@/directives/intersect'
