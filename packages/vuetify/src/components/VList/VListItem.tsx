@@ -92,7 +92,7 @@ export default defineComponent({
             {
               'v-list-item--active': isActive.value,
               'v-list-item--disabled': props.disabled,
-              'v-list-item--link': link.isLink.value,
+              'v-list-item--link': isClickable,
               'v-list-item--contained': props.contained,
               [`${props.activeClass}`]: isActive.value && props.activeClass,
             },

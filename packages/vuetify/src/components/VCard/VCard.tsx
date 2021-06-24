@@ -98,7 +98,7 @@ export default defineComponent({
               'v-card--disabled': props.disabled,
               'v-card--flat': props.flat,
               'v-card--hover': props.hover && !(props.disabled || props.flat),
-              'v-card--link': link.isLink.value,
+              'v-card--link': isClickable,
             },
             themeClasses.value,
             backgroundColorClasses.value,
