@@ -1,4 +1,10 @@
-@mixin variant($contained-background, $contained-elevation, $plain-opacity, $outlined-opacity, $text-opacity, $name)
+@mixin variant($contained-background, $contained-color, $contained-elevation, $plain-opacity, $name)
+  &--variant-plain,
+  &--variant-outlined,
+  &--variant-text,
+  &--variant-contained-text
+    color: inherit
+
   &--variant-plain
     opacity: $plain-opacity
 
@@ -6,11 +12,13 @@
     &:hover
       opacity: 1
 
-  &--variant-plain .#{$name}__overlay
-    display: none
+  &--variant-plain
+    .#{$name}__overlay
+      display: none
 
   &--variant-contained
     background: $contained-background
+    color: $contained-color
 
     @if ($contained-elevation > 0)
       @include elevation($contained-elevation)
@@ -18,6 +26,19 @@
   &--variant-outlined
     border: thin solid currentColor
 
-  &--variant-text .#{$name}__overlay
-    background: currentColor
-    opacity: $text-opacity
+  &--variant-text
+    .#{$name}__overlay
+      background: currentColor
+
+  &--variant-contained-text
+    .#{$name}__underlay
+      background: currentColor
+      opacity: var(--v-activated-opacity)
+      border-radius: inherit
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      pointer-events: none
+      transition: opacity 0.2s ease-in-out

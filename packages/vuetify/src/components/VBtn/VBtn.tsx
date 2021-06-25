@@ -109,6 +109,7 @@ export default defineComponent({
           onClick={ props.disabled || link.navigate }
         >
           <span class="v-btn__overlay" />
+          <div class="v-btn__underlay" />
 
           { !props.icon && props.prependIcon && (
             <VIcon

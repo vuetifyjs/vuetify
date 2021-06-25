@@ -119,6 +119,7 @@ export default defineComponent({
           v-ripple={ isClickable }
         >
           { isClickable && (<div class="v-card__overlay" />) }
+          <div class="v-card__underlay" />
 
           { hasImage && (
             <VCardImg>

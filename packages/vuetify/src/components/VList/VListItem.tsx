@@ -107,6 +107,7 @@ export default defineComponent({
           v-ripple={ isClickable }
         >
           { (isClickable || isActive.value) && (<div class="v-list-item__overlay" />) }
+          <div class="v-list-item__underlay" />
 
           { hasPrepend && (
             slots.prepend
