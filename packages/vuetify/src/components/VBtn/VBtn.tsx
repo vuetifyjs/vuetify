@@ -15,7 +15,7 @@ import { makeRouterProps, useLink } from '@/composables/router'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
-import { makeVariantProps, useVariant } from '@/composables/variant'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -108,7 +108,7 @@ export default defineComponent({
           ]}
           onClick={ props.disabled || link.navigate }
         >
-          <span class="v-btn__overlay" />
+          { genOverlays(true, 'v-btn') }
 
           { !props.icon && props.prependIcon && (
             <VIcon

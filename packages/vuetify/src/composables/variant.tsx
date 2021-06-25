@@ -8,13 +8,23 @@ import { propsFactory } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-export const allowedVariants = ['contained', 'outlined', 'plain', 'text'] as const
+export const allowedVariants = ['contained', 'outlined', 'plain', 'text', 'contained-text'] as const
 
 export type Variant = typeof allowedVariants[number]
 
 export interface VariantProps {
   color?: String
   variant: Variant
+}
+
+export function genOverlays (isClickable: boolean, name: string) {
+  return (
+    <>
+      { isClickable && <div class={`${name}__overlay`} /> }
+
+      <div class={`${name}__underlay`} />
+    </>
+  )
 }
 
 export const makeVariantProps = propsFactory({

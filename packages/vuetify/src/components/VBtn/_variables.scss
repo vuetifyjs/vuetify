@@ -1,6 +1,7 @@
 // Defaults
 $button-app-bar-elevation: 0 !default;
 $button-background: rgb(var(--v-theme-surface)) !default;
+$button-color: rgb(var(--v-theme-on-surface)) !default;
 $button-bottom-navigation-elevation: 0 !default;
 $button-bottom-navigation-border-radius: 0 !default;
 $button-bottom-navigation-active-filter: grayscale(0) !default;
@@ -39,11 +40,9 @@ $button-icon-size: 48px !default;
 $button-line-height: normal !default;
 $button-stacked-line-height: 1.7 !default;
 $button-plain-opacity: .62 !default;
-$button-outlined-opacity: 1 !default;
 $button-padding-ratio: 2.25 !default;
 $button-stacked-padding-ratio: 4.5 !default;
 $button-positions: absolute fixed !default;
-$button-text-opacity: 0 !default;
 $button-text-letter-spacing: map-deep-get($typography, 'button', 'letter-spacing') !default;
 $button-text-transform: map-deep-get($typography, 'button', 'text-transform') !default;
 $button-vertical-align: middle !default;
@@ -94,9 +93,8 @@ $button-icon-sizes: map-merge(
 
 $button-variants: (
   $button-background,
+  $button-color,
   map-get($button-elevation, 'default'),
   $button-plain-opacity,
-  $button-outlined-opacity,
-  $button-text-opacity,
   'v-btn'
 );
