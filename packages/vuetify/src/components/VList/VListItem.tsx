@@ -19,7 +19,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
-import { makeVariantProps, useVariant } from '@/composables/variant'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -106,7 +106,7 @@ export default defineComponent({
           onClick={ isClickable && link.navigate }
           v-ripple={ isClickable }
         >
-          { (isClickable || isActive.value) && (<div class="v-list-item__overlay" />) }
+          { genOverlays(!!(isClickable || isActive.value), 'v-list-item') }
 
           { hasPrepend && (
             slots.prepend

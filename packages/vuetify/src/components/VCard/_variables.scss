@@ -19,7 +19,6 @@ $card-elevation: 1 !default;
 $card-hover-elevation: 8 !default;
 $card-item-align-items: center !default;
 $card-item-padding: .5rem 1rem !default;
-$card-outlined-opacity: var(--v-border-opacity) !default;
 $card-padding: 0 !default;
 $card-positions: absolute fixed !default;
 $card-subtitle-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
@@ -33,7 +32,6 @@ $card-subtitle-line-height: map-deep-get($typography, 'body-2', 'line-height') !
 $card-subtitle-opacity: var(--v-medium-emphasis-opacity) !default;
 $card-subtitle-padding: 0 1rem !default;
 $card-subtitle-text-transform: none !default;
-$card-text-variant-opacity: var(--v-activated-opacity) !default;
 $card-text-comfortable-line-height: 1.2rem !default;
 $card-text-compact-line-height: 1.15rem !default;
 $card-text-font-size: map-deep-get($typography, 'body-2', 'size') !default;
@@ -93,17 +91,10 @@ $card-text-densities: (
   'compact': $card-text-compact-line-height
 );
 
-$card-theme: () !default;
-$card-theme: (
-  $card-background,
-  $card-color
-);
-
 $card-variants: (
   $card-background,
+  $card-color,
   $card-elevation,
   $card-plain-opacity,
-  $card-outlined-opacity,
-  $card-text-variant-opacity,
   'v-card'
 );

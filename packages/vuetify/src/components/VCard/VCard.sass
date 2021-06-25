@@ -175,18 +175,15 @@
 .v-card__overlay
   background-color: currentColor
   border-radius: inherit
+  position: absolute
+  top: 0
+  right: 0
   bottom: 0
   left: 0
-  opacity: 0
   pointer-events: none
-  position: absolute
-  right: 0
-  top: 0
+  opacity: 0
   transition: opacity 0.2s ease-in-out
 
   + .v-card-media
     border-top-left-radius: inherit
     border-top-right-radius: inherit
-
-  .v-card--variant-text:not(.v-card--link):hover &
-    opacity: $card-text-variant-opacity
