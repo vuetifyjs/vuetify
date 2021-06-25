@@ -17,8 +17,7 @@ $bottom-navigation-border: (
   $bottom-navigation-border-thin-width
 ) !default;
 
-$bottom-navigation-theme: () !default;
 $bottom-navigation-theme: (
   $bottom-navigation-background,
   $bottom-navigation-color
-);
+) !default;

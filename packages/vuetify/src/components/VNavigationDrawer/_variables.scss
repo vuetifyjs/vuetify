@@ -29,8 +29,7 @@ $navigation-drawer-border: (
   $navigation-drawer-border-thin-width
 ) !default;
 
-$navigation-drawer-theme: () !default;
 $navigation-drawer-theme: (
   $navigation-drawer-background,
   $navigation-drawer-color
-);
+) !default;

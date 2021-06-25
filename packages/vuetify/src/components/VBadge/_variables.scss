@@ -26,8 +26,7 @@ $badge-padding: 4px !default;
 $badge-transition: .225s $standard-easing !default;
 $badge-wrapper-margin: 0 4px !default;
 
-$badge-theme: () !default;
 $badge-theme: (
   $badge-background,
   $badge-color
-);
+) !default;
