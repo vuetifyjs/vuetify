@@ -1,7 +1,7 @@
 // Defaults
 $banner-actions-margin-start: 90px !default;
-$banner-background: var(--v-theme-surface) !default;
-$banner-color: var(--v-theme-on-surface) !default;
+$banner-background: rgb(var(--v-theme-surface)) !default;
+$banner-color: rgb(var(--v-theme-on-surface)) !default;
 $banner-border-color: $border-color-root !default;
 $banner-border-radius: map-get($rounded, 0) !default;
 $banner-border-style: $border-style-root !default;
