@@ -26,7 +26,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
-import { makeVariantProps, useVariant } from '@/composables/variant'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -70,7 +70,7 @@ export default defineComponent({
   setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-card')
-    const { colorClasses, colorStyles, genOverlays, variantClasses } = useVariant(props, 'v-card')
+    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-card')
     const { densityClasses } = useDensity(props, 'v-card')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
