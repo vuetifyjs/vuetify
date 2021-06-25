@@ -17,6 +17,16 @@ export interface VariantProps {
   variant: Variant
 }
 
+function genOverlays (isClickable: boolean, name: string) {
+  return (
+    <>
+      { isClickable && <div class={`${name}__overlay`} /> }
+
+      <div class={`${name}__underlay`} />
+    </>
+  )
+}
+
 export const makeVariantProps = propsFactory({
   color: String,
   variant: {
@@ -35,5 +45,5 @@ export function useVariant (props: VariantProps, name: string) {
     [props.variant === 'contained' ? 'background' : 'text']: props.color,
   })))
 
-  return { colorClasses, colorStyles, variantClasses }
+  return { colorClasses, colorStyles, genOverlays, variantClasses }
 }

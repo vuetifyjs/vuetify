@@ -55,7 +55,7 @@ export default defineComponent({
   setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-btn')
-    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-btn')
+    const { colorClasses, colorStyles, genOverlays, variantClasses } = useVariant(props, 'v-btn')
     const { densityClasses } = useDensity(props, 'v-btn')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
@@ -108,8 +108,7 @@ export default defineComponent({
           ]}
           onClick={ props.disabled || link.navigate }
         >
-          <span class="v-btn__overlay" />
-          <div class="v-btn__underlay" />
+          { genOverlays(true, 'v-btn') }
 
           { !props.icon && props.prependIcon && (
             <VIcon

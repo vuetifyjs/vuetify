@@ -64,7 +64,7 @@ export default defineComponent({
     })
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-list-item')
-    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-list-item')
+    const { colorClasses, colorStyles, genOverlays, variantClasses } = useVariant(props, 'v-list-item')
     const { densityClasses } = useDensity(props, 'v-list-item')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
@@ -106,8 +106,7 @@ export default defineComponent({
           onClick={ isClickable && link.navigate }
           v-ripple={ isClickable }
         >
-          { (isClickable || isActive.value) && (<div class="v-list-item__overlay" />) }
-          <div class="v-list-item__underlay" />
+          { genOverlays(!!(isClickable || isActive.value), 'v-list-item') }
 
           { hasPrepend && (
             slots.prepend

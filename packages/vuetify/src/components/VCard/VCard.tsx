@@ -70,7 +70,7 @@ export default defineComponent({
   setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-card')
-    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-card')
+    const { colorClasses, colorStyles, genOverlays, variantClasses } = useVariant(props, 'v-card')
     const { densityClasses } = useDensity(props, 'v-card')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
@@ -118,8 +118,7 @@ export default defineComponent({
           onClick={ isClickable && link.navigate }
           v-ripple={ isClickable }
         >
-          { isClickable && (<div class="v-card__overlay" />) }
-          <div class="v-card__underlay" />
+          { genOverlays(isClickable, 'v-card') }
 
           { hasImage && (
             <VCardImg>
