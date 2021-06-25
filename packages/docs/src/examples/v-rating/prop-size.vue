@@ -13,12 +13,6 @@
     ></v-rating>
     <v-rating
       v-model="rating"
-      background-color="orange lighten-3"
-      color="orange"
-      medium
-    ></v-rating>
-    <v-rating
-      v-model="rating"
       background-color="green lighten-3"
       color="green"
       large
