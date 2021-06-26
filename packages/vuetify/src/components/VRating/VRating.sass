@@ -19,6 +19,10 @@
 .v-rating__item
   position: relative
 
+  &:hover
+    .v-btn__overlay
+      opacity: 0
+
   &--focused
     .v-btn__overlay
       opacity: $rating-item-focused-button-overlay-opacity
