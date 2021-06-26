@@ -3,10 +3,11 @@ import Touch from '../'
 
 // Types
 import { nextTick } from 'vue'
-import type { TouchValue } from '@/../types'
+import type { TouchValue } from '../'
 
 // Utilities
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 import { touch } from '@/../test'
 
 describe('v-touch', () => {

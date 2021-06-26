@@ -1,5 +1,6 @@
 // Defaults
-$bottom-navigation-background: var(--v-theme-surface) !default;
+$bottom-navigation-background: rgb(var(--v-theme-surface)) !default;
+$bottom-navigation-color: rgb(var(--v-theme-on-surface)) !default;
 $bottom-navigation-border-color: $border-color-root !default;
 $bottom-navigation-border-radius: map-get($rounded, '0') !default;
 $bottom-navigation-border-style: $border-style-root !default;
@@ -12,5 +13,11 @@ $bottom-navigation-transition: .2s $standard-easing !default;
 $bottom-navigation-border: (
   $bottom-navigation-border-color,
   $bottom-navigation-border-style,
-  $bottom-navigation-border-width
+  $bottom-navigation-border-width,
+  $bottom-navigation-border-thin-width
+) !default;
+
+$bottom-navigation-theme: (
+  $bottom-navigation-background,
+  $bottom-navigation-color
 ) !default;

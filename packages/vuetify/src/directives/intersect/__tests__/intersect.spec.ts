@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals'
+
 // Libraries
 import { h } from 'vue'
 

@@ -1,15 +1,17 @@
 // Styles
 import './VOverlay.sass'
 
+// Composables
+import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
+import { useBackButton } from '@/composables/router'
+import { useBackgroundColor } from '@/composables/color'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { useRtl } from '@/composables/rtl'
+import { useTeleport } from '@/composables/teleport'
+
 // Directives
 import { ClickOutside } from '@/directives/click-outside'
-
-// Composables
-import { useBackgroundColor } from '@/composables/color'
-import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { makeThemeProps, useTheme } from '@/composables/theme'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTeleport } from '@/composables/teleport'
 
 // Utilities
 import { convertToUnit, getScrollParent, getScrollParents, standardEasing, useRender } from '@/util'
@@ -29,7 +31,6 @@ import {
 // Types
 import type { BackgroundColorData } from '@/composables/color'
 import type { Prop, PropType, Ref } from 'vue'
-import { useRtl } from '@/composables/rtl'
 
 function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
   const isBooted = ref(eager.value)
@@ -186,6 +187,7 @@ export default defineComponent({
 
   setup (props, { slots, attrs, emit }) {
     const isActive = useProxiedModel(props, 'modelValue')
+
     const { teleportTarget } = useTeleport(toRef(props, 'attach'))
     const { themeClasses } = useTheme(props)
     const { rtlClasses } = useRtl()
@@ -219,8 +221,14 @@ export default defineComponent({
       }
     }
 
-    const content = ref<HTMLElement>()
+    useBackButton(next => {
+      next(!isActive.value)
 
+      if (!props.persistent) isActive.value = false
+      else animateClick()
+    })
+
+    const content = ref<HTMLElement>()
     watch(isActive, val => {
       nextTick(() => {
         if (val) {

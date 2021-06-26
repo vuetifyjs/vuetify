@@ -2,12 +2,10 @@
 import './VListItem.sass'
 
 // Components
-import {
-  VListItemAvatar,
-  VListItemHeader,
-  VListItemSubtitle,
-  VListItemTitle,
-} from './'
+import VListItemAvatar from './VListItemAvatar'
+import VListItemHeader from './VListItemHeader'
+import VListItemSubtitle from './VListItemSubtitle'
+import VListItemTitle from './VListItemTitle'
 import { VAvatar } from '@/components/VAvatar'
 
 // Composables
@@ -16,9 +14,10 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
-import { useColor } from '@/composables/color'
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -38,72 +37,74 @@ export default defineComponent({
     activeClass: String,
     appendAvatar: String,
     appendIcon: String,
-    color: String,
     disabled: Boolean,
     link: Boolean,
     prependAvatar: String,
     prependIcon: String,
     subtitle: String,
-    contained: String,
     title: String,
+
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makeRoundedProps(),
+    ...makeRouterProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
+    ...makeVariantProps({ variant: 'text' } as const),
   }),
 
   setup (props, { attrs, slots }) {
+    const link = useLink(props, attrs)
+    const isActive = computed(() => {
+      return props.active || link.isExactActive?.value
+    })
     const { themeClasses } = useTheme(props)
-    const { colorClasses, colorStyles } = useColor(computed(() => {
-      const key = props.contained && props.active ? 'background' : 'text'
-      const color = (props.active && props.activeColor) || props.color
-
-      return { [`${key}`]: color }
-    }))
     const { borderClasses } = useBorder(props, 'v-list-item')
+    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-list-item')
     const { densityClasses } = useDensity(props, 'v-list-item')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props, 'v-list-item')
 
     return () => {
+      const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasTitle = (slots.title || props.title)
       const hasSubtitle = (slots.subtitle || props.subtitle)
       const hasHeader = !!(hasTitle || hasSubtitle)
       const hasAppend = (slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = (slots.prepend || props.prependAvatar || props.prependIcon)
-      const isLink = !!(props.link || attrs.onClick || attrs.onClickOnce)
-      const isClickable = isLink && !props.disabled
+      const isClickable = !props.disabled && (link.isClickable.value || props.link)
 
       return (
-        <props.tag
+        <Tag
           class={[
             'v-list-item',
             {
-              'v-list-item--active': props.active,
+              'v-list-item--active': isActive.value,
               'v-list-item--disabled': props.disabled,
-              'v-list-item--link': isLink,
-              'v-list-item--contained': props.contained,
-              [`${props.activeClass}`]: props.active && props.activeClass,
+              'v-list-item--link': isClickable,
+              [`${props.activeClass}`]: isActive.value && props.activeClass,
             },
             themeClasses.value,
-            colorClasses.value,
             borderClasses.value,
+            colorClasses.value,
             densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,
+            variantClasses.value,
           ]}
           style={[
             colorStyles.value,
             dimensionStyles.value,
           ]}
+          href={ link.href.value }
           tabindex={ isClickable ? 0 : undefined }
+          onClick={ isClickable && link.navigate }
           v-ripple={ isClickable }
         >
-          { (isClickable || props.active) && (<div class="v-list-item__overlay" />) }
+          { genOverlays(!!(isClickable || isActive.value), 'v-list-item') }
 
           { hasPrepend && (
             slots.prepend
@@ -156,7 +157,7 @@ export default defineComponent({
                 </VListItemAvatar>
               )
           ) }
-        </props.tag>
+        </Tag>
       )
     }
   },

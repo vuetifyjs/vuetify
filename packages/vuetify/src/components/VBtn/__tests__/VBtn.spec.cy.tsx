@@ -1,7 +1,7 @@
-/// <reference types="../../../types/cypress" />
+/// <reference types="../../../../types/cypress" />
 
 import { CenteredGrid } from '@/../cypress/templates'
-import VBtn from './VBtn'
+import VBtn from '../VBtn'
 
 describe('VBtn', () => {
   it('supports the color property', () => {
