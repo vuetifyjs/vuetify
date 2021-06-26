@@ -2,12 +2,10 @@
 import './VListItem.sass'
 
 // Components
-import {
-  VListItemAvatar,
-  VListItemHeader,
-  VListItemSubtitle,
-  VListItemTitle,
-} from './'
+import VListItemAvatar from './VListItemAvatar'
+import VListItemHeader from './VListItemHeader'
+import VListItemSubtitle from './VListItemSubtitle'
+import VListItemTitle from './VListItemTitle'
 import { VAvatar } from '@/components/VAvatar'
 
 // Composables

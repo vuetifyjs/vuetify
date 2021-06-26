@@ -19,6 +19,7 @@
     "version": "node scripts/confirm-npm-tag.js",
     "prepare": "node scripts/post-install.js",
     "postversion": "node scripts/post-release-merge.js",
+    "postinstall": "patch-package",
     "clean": "lerna clean"
   },
   "engines": {
@@ -62,6 +63,7 @@
     "jest-serializer-html": "^7.0.0",
     "lerna": "^3.16.2",
     "moment": "^2.27.0",
+    "patch-package": "^6.4.7",
     "sass": "~1.32.13",
     "sass-loader": "^11.1.0",
     "semver": "^6.2.0",

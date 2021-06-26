@@ -1,5 +1,5 @@
 import { computed, inject, provide, ref } from 'vue'
-import { mergeDeep } from '@/util'
+import { mergeDeep } from '@/util/helpers'
 
 import type { InjectionKey, Ref } from 'vue'
 
