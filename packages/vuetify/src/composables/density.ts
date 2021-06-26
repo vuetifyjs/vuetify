@@ -7,7 +7,7 @@ import type { PropType } from 'vue'
 
 const allowedDensities = [null, 'default', 'comfortable', 'compact'] as const
 
-type Density = typeof allowedDensities[number]
+export type Density = typeof allowedDensities[number]
 
 export interface DensityProps {
   density?: Density

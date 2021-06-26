@@ -1,9 +1,7 @@
 <template>
   <v-timeline>
     <v-timeline-item
-      v-for="n in 4"
-      :key="n"
-      large
+      size="large"
     >
       <template v-slot:icon>
         <v-avatar>
