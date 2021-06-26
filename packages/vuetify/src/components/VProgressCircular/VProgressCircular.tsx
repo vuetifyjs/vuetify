@@ -34,6 +34,7 @@ export default defineComponent({
       type: [Number, String],
       default: 4,
     },
+
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'div' }),
     ...makeThemeProps(),
