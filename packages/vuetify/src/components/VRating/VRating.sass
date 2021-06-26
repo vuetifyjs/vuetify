@@ -17,7 +17,7 @@
     flex-direction: column-reverse
 
 .v-rating__item
-  display: flex
+  display: inline-flex
   position: relative
 
   label
@@ -47,6 +47,10 @@
     position: absolute
     width: 50%
     z-index: 1
+
+    .v-btn__overlay,
+    &:hover .v-btn__overlay
+      opacity: 0
 
 .v-rating__hidden
   height: 0

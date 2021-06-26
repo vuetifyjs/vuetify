@@ -142,7 +142,10 @@ export default defineComponent({
       const { onMouseenter, onMouseleave, onFocus, onBlur, onClick } = eventState.value[index + 1]
       const id = `${name.value}-${String(value).replace('.', '-')}`
       const btnProps = {
+        color: itemState.value[index]?.color,
         density: props.density,
+        disabled: props.disabled,
+        icon: itemState.value[index]?.icon,
         ripple: props.ripple,
         size: props.size,
         tag: 'span',
@@ -172,11 +175,7 @@ export default defineComponent({
                 index,
               })
               : (
-                <VBtn
-                  color={ itemState.value[index].color }
-                  icon={ itemState.value[index].icon }
-                  { ...btnProps }
-                />
+                <VBtn { ...btnProps } />
               )
             }
           </label>
