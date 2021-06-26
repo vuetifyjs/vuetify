@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.0.0-alpha.6",
+  "version": "3.0.0-alpha.7",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -70,12 +70,12 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/vue-fontawesome": "^3.0.0-3",
     "@mdi/font": "^5.9.55",
+    "@rollup/plugin-alias": "^3.1.2",
     "@types/jest": "^26.0.14",
     "@types/node": "^14.11.10",
     "@types/resize-observer-browser": "^0.1.5",
     "@vue/babel-plugin-jsx": "^1.0.6",
     "@vue/test-utils": "2.0.0-beta.13",
-    "@rollup/plugin-alias": "^3.1.2",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",
     "babel-plugin-add-import-extension": "^1.5.1",
