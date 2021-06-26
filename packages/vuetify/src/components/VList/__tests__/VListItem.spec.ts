@@ -4,6 +4,7 @@ import { VListItem } from '..'
 // Utilities
 import { createVuetify } from '@/framework'
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 import { nextTick } from 'vue'
 
 describe('VListItem', () => {

@@ -24,12 +24,14 @@ exports[`VRating should change icon on hover 1`] = `
           Rating 1 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -53,12 +55,14 @@ exports[`VRating should change icon on hover 1`] = `
           Rating 2 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -82,12 +86,14 @@ exports[`VRating should change icon on hover 1`] = `
           Rating 3 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -111,12 +117,14 @@ exports[`VRating should change icon on hover 1`] = `
           Rating 4 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -140,12 +148,14 @@ exports[`VRating should change icon on hover 1`] = `
           Rating 5 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -305,12 +315,14 @@ exports[`VRating should render a scoped item-label slot 1`] = `
           Rating 1 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -334,12 +346,14 @@ exports[`VRating should render a scoped item-label slot 1`] = `
           Rating 2 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -363,12 +377,14 @@ exports[`VRating should render a scoped item-label slot 1`] = `
           Rating 3 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -392,12 +408,14 @@ exports[`VRating should render a scoped item-label slot 1`] = `
           Rating 4 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -421,12 +439,14 @@ exports[`VRating should render a scoped item-label slot 1`] = `
           Rating 5 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -468,12 +488,14 @@ exports[`VRating should respond to prop value changes 1`] = `
           Rating 1 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -497,12 +519,14 @@ exports[`VRating should respond to prop value changes 1`] = `
           Rating 2 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -526,12 +550,14 @@ exports[`VRating should respond to prop value changes 1`] = `
           Rating 3 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -555,12 +581,14 @@ exports[`VRating should respond to prop value changes 1`] = `
           Rating 4 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -584,12 +612,14 @@ exports[`VRating should respond to prop value changes 1`] = `
           Rating 5 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -631,12 +661,14 @@ exports[`VRating should respond to prop value changes 2`] = `
           Rating 1 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -660,12 +692,14 @@ exports[`VRating should respond to prop value changes 2`] = `
           Rating 2 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -689,12 +723,14 @@ exports[`VRating should respond to prop value changes 2`] = `
           Rating 3 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -718,12 +754,14 @@ exports[`VRating should respond to prop value changes 2`] = `
           Rating 4 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >
@@ -747,12 +785,14 @@ exports[`VRating should respond to prop value changes 2`] = `
           Rating 5 of 5
         </span>
         <span type="button"
-              class="v-btn v-btn--icon v-btn--plain v-theme--light v-btn--density-default v-btn--size-default"
-              disabled="false"
+              class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-contained"
               tabindex="-1"
+              plain="true"
         >
-          <span class="v-btn__overlay">
-          </span>
+          <div class="v-btn__overlay">
+          </div>
+          <div class="v-btn__underlay">
+          </div>
           <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
              aria-hidden="true"
           >

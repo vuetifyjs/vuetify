@@ -215,12 +215,12 @@ export function wrapInArray<T> (v: T | T[] | null | undefined): T[] {
 }
 
 type DataTableCompareFunction<T = any> = (a: T, b: T) => number
-export function sortItems<T extends any = any> (
+export function sortItems<T extends any, K extends keyof T> (
   items: T[],
   sortBy: string[],
   sortDesc: boolean[],
   locale: string,
-  customSorters?: Record<string, DataTableCompareFunction<T>>
+  customSorters?: Record<K, DataTableCompareFunction<T[K]>>
 ): T[] {
   if (sortBy === null || !sortBy.length) return items
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
@@ -236,8 +236,8 @@ export function sortItems<T extends any = any> (
         [sortA, sortB] = [sortB, sortA]
       }
 
-      if (customSorters?.[sortKey]) {
-        const customResult = customSorters[sortKey](sortA, sortB)
+      if (customSorters?.[sortKey as K]) {
+        const customResult = customSorters[sortKey as K](sortA, sortB)
 
         if (!customResult) continue
 

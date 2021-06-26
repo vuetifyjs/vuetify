@@ -5,6 +5,7 @@ import { VResponsive } from '..'
 import { createVuetify } from '@/framework'
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 
 describe('VResponsive', () => {
   const vuetify = createVuetify()

@@ -1,6 +1,6 @@
+import { colorToInt, colorToRGB, createRange, darken, getLuma, intToHex, lighten, mergeDeep, propsFactory } from '@/util'
 // Utilities
 import { computed, getCurrentInstance, inject, provide, ref, watch } from 'vue'
-import { colorToInt, colorToRGB, createRange, darken, getLuma, intToHex, lighten, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
@@ -106,6 +106,12 @@ const defaultThemeOptions: ThemeOptions = {
         'high-emphasis-opacity': 0.87,
         'medium-emphasis-opacity': 0.60,
         'disabled-opacity': 0.38,
+        'activated-opacity': 0.12,
+        'hover-opacity': 0.04,
+        'focus-opacity': 0.12,
+        'selected-opacity': 0.08,
+        'dragged-opacity': 0.08,
+        'pressed-opacity': 0.16,
         'kbd-background-color': '#212529',
         'kbd-color': '#FFFFFF',
         'code-background-color': '#C2C2C2',
@@ -131,6 +137,12 @@ const defaultThemeOptions: ThemeOptions = {
         'high-emphasis-opacity': 0.87,
         'medium-emphasis-opacity': 0.60,
         'disabled-opacity': 0.38,
+        'activated-opacity': 0.12,
+        'hover-opacity': 0.04,
+        'focus-opacity': 0.12,
+        'selected-opacity': 0.08,
+        'dragged-opacity': 0.08,
+        'pressed-opacity': 0.16,
         'kbd-background-color': '#212529',
         'kbd-color': '#FFFFFF',
         'code-background-color': '#B7B7B7',
@@ -142,11 +154,10 @@ const defaultThemeOptions: ThemeOptions = {
 const parseThemeOptions = (options: ThemeOptions = defaultThemeOptions): InternalThemeOptions => {
   if (!options) return { ...defaultThemeOptions, isDisabled: true } as InternalThemeOptions
 
-  return {
-    ...defaultThemeOptions,
-    ...options,
-    variations: options?.variations == null || options?.variations === false ? defaultThemeOptions.variations : options.variations,
-  } as InternalThemeOptions
+  return mergeDeep(
+    defaultThemeOptions,
+    options,
+  ) as InternalThemeOptions
 }
 
 // Composables

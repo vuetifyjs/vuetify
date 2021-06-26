@@ -1,9 +1,11 @@
 import { DefaultsSymbol } from '@/composables/defaults'
+
 // Components
 import { VIcon } from '..'
 
 // Utilities
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 import { defaultSets, IconSymbol } from '@/composables/icons'
 import { mdi } from '@/iconsets/mdi'
 import { md } from '@/iconsets/md'

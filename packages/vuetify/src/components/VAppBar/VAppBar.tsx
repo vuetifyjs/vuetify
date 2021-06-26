@@ -2,7 +2,7 @@
 import './VAppBar.sass'
 
 // Components
-import { VImg } from '@/components'
+import { VImg } from '@/components/VImg'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'

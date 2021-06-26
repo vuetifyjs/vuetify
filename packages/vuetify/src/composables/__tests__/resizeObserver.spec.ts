@@ -3,6 +3,7 @@ import { useResizeObserver } from '../resizeObserver'
 
 // Utilities
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 import { h, nextTick } from '@vue/runtime-core'
 
 describe('resizeObserver', () => {

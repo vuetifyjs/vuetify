@@ -4,6 +4,7 @@
 // import VTimePickerClock from '../VTimePickerClock'
 // import { touch } from '../../../../test'
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 
 const CLOCK_SIZE = 300
 const INNER_SIZE = 246

@@ -1,4 +1,6 @@
 // Defaults
+$sheet-background: rgb(var(--v-theme-surface)) !default;
+$sheet-color: rgb(var(--v-theme-on-surface)) !default;
 $sheet-border-color: $border-color-root !default;
 $sheet-border-radius: 0 !default;
 $sheet-border-style: $border-style-root !default;
@@ -11,5 +13,11 @@ $sheet-rounded-border-radius: $border-radius-root !default;
 $sheet-border: (
   $sheet-border-color,
   $sheet-border-style,
-  $sheet-border-width
+  $sheet-border-width,
+  $sheet-border-thin-width
+) !default;
+
+$sheet-theme: (
+  $sheet-background,
+  $sheet-color
 ) !default;

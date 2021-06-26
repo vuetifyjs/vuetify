@@ -1,6 +1,6 @@
 // Defaults
-$divider-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
-$divider-border-style: solid !default;
+$divider-border-color: $border-color-root !default;
+$divider-border-style: $border-style-root !default;
 $divider-border-width: thin 0 0 0 !default;
 $divider-flex: 1 1 100% !default;
 $divider-inset-margin: 72px !default;
@@ -12,12 +12,8 @@ $divider-vertical-inset-margin-top: $divider-margin !default;
 $divider-vertical-inset-max-height: calc(100% - #{$divider-margin * 2}) !default;
 $divider-vertical-margin-left: -1px !default;
 
-$divider-query: () !default;
-$divider-query: map-deep-merge(
-  (
-    'border-color': $divider-border-color,
-    'border-style': $divider-border-style,
-    'border-width': $divider-border-width
-  ),
-  $divider-query
-);
+$divider-border: (
+  $divider-border-color,
+  $divider-border-style,
+  $divider-border-width
+) !default;

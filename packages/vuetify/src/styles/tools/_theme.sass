@@ -1,5 +1,3 @@
-@mixin theme ($component)
-  .v-theme--light.#{$component}
-    @content($material-light)
-  .v-theme--dark.#{$component}
-    @content($material-dark)
+@mixin theme ($background, $color)
+  background: $background
+  color: $color
