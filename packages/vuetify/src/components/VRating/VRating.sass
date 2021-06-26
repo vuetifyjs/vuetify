@@ -23,12 +23,19 @@
   label
     cursor: pointer
 
-  &:hover
-    .v-btn__overlay
-      opacity: 0
+  .v-btn--variant-plain
+    opacity: $rating-item-button-opacity
+
+  .v-icon
+    transition: $rating-item-icon-transition
+
+  &:hover:not(.v-rating__item--focused)
+    .v-icon
+      transform: $rating-item-icon-transform
 
   &--focused
     .v-btn__overlay
+      display: block
       opacity: $rating-item-focused-button-overlay-opacity
 
   &--half

@@ -146,7 +146,7 @@ export default defineComponent({
         ripple: props.ripple,
         size: props.size,
         tag: 'span',
-        variant: 'text' as Variant,
+        variant: 'plain' as Variant,
       }
 
       return (

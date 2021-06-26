@@ -1,4 +1,7 @@
 // Defaults
-$rating-item-focused-button-overlay-opacity: var(--v-activated-opacity) !default;
+$rating-item-focused-button-overlay-opacity: var(--v-hover-opacity) !default;
 $rating-item-align-items: center !default;
+$rating-item-button-opacity: 1 !default;
+$rating-item-icon-transform: scale(1.25) !default;
+$rating-item-icon-transition: .2s $decelerated-easing !default;
 $rating-white-space: nowrap !default;
