@@ -1,4 +1,4 @@
-@import './index'
+@import ./index
 
 .v-rating
   max-width: 100%
@@ -19,29 +19,18 @@
 .v-rating__item
   position: relative
 
-  .v-btn
-    transition: none
-    opacity: 1
-
-  &--focused:before
-    content: " "
-    position: absolute
-    left: 0px
-    right: 0px
-    top: 0px
-    bottom: 0px
-    border: 1px solid rgba(var(--v-border-color), var(--v-border-opacity))
-    border-radius: 50%
-    pointer-events: none
+  &--focused
+    .v-btn__overlay
+      opacity: $rating-item-focused-button-overlay-opacity
 
   &--half
-    width: 50%
     overflow: hidden
     position: absolute
+    width: 50%
     z-index: 1
 
 .v-rating__hidden
-  position: absolute
-  width: 0px
-  height: 0px
+  height: 0
   opacity: 0
+  position: absolute
+  width: 0

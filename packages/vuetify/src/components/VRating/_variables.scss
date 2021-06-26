@@ -1,15 +1,4 @@
-$rating-white-space: nowrap !default;
+// Defaults
+$rating-item-focused-button-overlay-opacity: var(--v-activated-opacity) !default;
 $rating-item-align-items: center !default;
-
-
-$rating-sizes: () !default;
-$rating-sizes: map-deep-merge(
-  (
-    'x-small': 16px,
-    'small': 20px,
-    'default': 24px,
-    'large': 28px,
-    'x-large': 32px,
-  ),
-  $rating-sizes
-);
+$rating-white-space: nowrap !default;

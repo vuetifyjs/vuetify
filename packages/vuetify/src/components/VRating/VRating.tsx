@@ -23,19 +23,13 @@ export default defineComponent({
   name: 'VRating',
 
   props: makeProps({
-    name: {
-      type: String,
-    },
+    name: String,
     itemAriaLabel: {
       type: String,
       default: '$vuetify.rating.ariaLabel.item',
     },
-    bgColor: {
-      type: String,
-    },
-    color: {
-      type: String,
-    },
+    bgColor: String,
+    color: String,
     clearable: Boolean,
     disabled: Boolean,
     emptyIcon: {
@@ -63,10 +57,8 @@ export default defineComponent({
       default: 'top',
       validator: (v: any) => ['top', 'bottom'].includes(v),
     },
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
+    ripple: Boolean,
+
     ...makeDensityProps(),
     ...makeSizeProps(),
     ...makeTagProps(),
@@ -94,7 +86,6 @@ export default defineComponent({
       const isFilled = rating.value >= value
       const isHovered = hoverIndex.value >= value
       const isFullIcon = isHovering ? isHovered : isFilled
-
       const icon = isFullIcon ? props.fullIcon : props.emptyIcon
       const color = isFilled || isHovered ? props.color : props.bgColor
 
@@ -177,13 +168,11 @@ export default defineComponent({
               : (
                 <VBtn
                   tag="span"
-                  tabindex="-1"
-                  icon={ itemState.value[index].icon }
                   color={ itemState.value[index].color }
-                  plain
-                  size={ props.size }
-                  ripple={ props.ripple }
                   density={ props.density }
+                  icon={ itemState.value[index].icon }
+                  size={ props.size }
+                  variant="text"
                   onMouseenter={ onMouseenter }
                   onMouseleave={ onMouseleave }
                 />
@@ -222,6 +211,7 @@ export default defineComponent({
           ]}
         >
           <VRatingItem value={ 0 } index={ -1 } showStar={ false } />
+
           { range.value.map((value, i) => (
             <div class="v-rating__wrapper">
               {

@@ -39,10 +39,6 @@ export default defineComponent({
     stacked: Boolean,
 
     disabled: Boolean,
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
     ...makeBorderProps(),
     ...makeRoundedProps(),
     ...makeDensityProps(),
