@@ -6,6 +6,8 @@ $badge-border-radius: 10px !default;
 $badge-border-style: solid !default;
 $badge-border-transform: scale(1.20) !default;
 $badge-border-width: 2px !default;
+$badge-background: rgb(var(--v-theme-surface)) !default;
+$badge-color: rgb(var(--v-theme-on-surface)) !default;
 $badge-content-padding: 0 2px !default;
 $badge-dot-border-radius: 4.5px;
 $badge-dot-border-width: 1.5px !default;
@@ -23,3 +25,8 @@ $badge-min-width: 20px !default;
 $badge-padding: 4px !default;
 $badge-transition: .225s $standard-easing !default;
 $badge-wrapper-margin: 0 4px !default;
+
+$badge-theme: (
+  $badge-background,
+  $badge-color
+) !default;
