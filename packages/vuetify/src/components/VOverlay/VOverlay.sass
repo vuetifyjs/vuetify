@@ -52,3 +52,25 @@
 
 .v-overlay--active
   pointer-events: auto
+
+// VDialog
+.v-overlay__content
+  .v-dialog > &
+    max-height: $overlay-dialog-max-height
+    min-width: $overlay-dialog-min-width
+    max-width: $overlay-dialog-max-width
+
+    @include rounded($overlay-dialog-border-radius)
+
+    @media #{$overlay-dialog-mobile-breakpoint}
+      max-width: $overlay-dialog-mobile-max-width
+
+.v-overlay__content
+  .v-dialog--fullscreen > &
+    border-radius: 0
+    height: 100%
+    margin: 0
+    overflow-y: auto
+    top: 0
+    left: 0
+    width: 100%

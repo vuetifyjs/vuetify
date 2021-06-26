@@ -98,3 +98,10 @@ $card-variants: (
   $card-plain-opacity,
   'v-card'
 );
+
+// VDialog
+$card-avatar-dialog-padding: 0 !default;
+$card-dialog-elevation: 24 !default;
+$card-header-dialog-padding: 14px 24px 10px !default;
+$card-text-dialog-padding: 0 24px 20px !default;
+$card-text-dialog-letter-spacing: map-deep-get($typography, 'body-1', 'letter-spacing') !default;
