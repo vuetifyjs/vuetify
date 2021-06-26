@@ -26,8 +26,12 @@
   .v-btn--variant-plain
     opacity: $rating-item-button-opacity
 
-  .v-icon
-    transition: $rating-item-icon-transition
+  .v-btn
+    transition-property: $rating-item-button-transition-property
+
+    .v-icon
+      transition: inherit
+      transition-timing-function: $rating-item-transition-timing-function
 
   &:hover:not(.v-rating__item--focused)
     .v-icon
