@@ -1,12 +1,11 @@
 <template>
   <div>
     <v-switch
-      v-model="reverse"
-      label="Toggle reverse"
+      v-model="mirror"
+      label="Toggle mirror"
     ></v-switch>
     <v-timeline
-      :reverse="reverse"
-      :dense="$vuetify.breakpoint.smAndDown"
+      :mirror="mirror"
     >
       <v-timeline-item
         v-for="n in 2"
@@ -24,8 +23,8 @@
       </v-timeline-item>
     </v-timeline>
     <v-timeline
-      :reverse="reverse"
-      dense
+      :mirror="mirror"
+      single-side="before"
     >
       <v-timeline-item
         v-for="n in 2"
@@ -48,7 +47,7 @@
 <script>
   export default {
     data: () => ({
-      reverse: true,
+      mirror: true,
     }),
   }
 </script>
