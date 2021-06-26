@@ -1,3 +1,4 @@
+// Utilities
 import { onBeforeUnmount, ref, watch } from 'vue'
 
 export function useIntersectionObserver (callback?: IntersectionObserverCallback) {
@@ -20,9 +21,9 @@ export function useIntersectionObserver (callback?: IntersectionObserverCallback
       isIntersecting.value = false
     }
 
-    if (newValue) {
-      observer.observe(newValue)
-    }
+    if (newValue) observer.observe(newValue)
+  }, {
+    flush: 'post',
   })
 
   return { intersectionRef, isIntersecting }

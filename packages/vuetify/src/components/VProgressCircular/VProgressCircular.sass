@@ -3,11 +3,11 @@
 
 // Elements
 .v-progress-circular
-  position: relative
-  display: inline-flex
-  vertical-align: middle
-  justify-content: center
   align-items: center
+  display: inline-flex
+  justify-content: center
+  position: relative
+  vertical-align: middle
 
   > svg
     width: 100%
@@ -32,8 +32,8 @@
 
 .v-progress-circular__overlay
   stroke: currentColor
-  z-index: 2
   transition: $progress-circular-overlay-transition
+  z-index: 2
 
 // Modifiers
 .v-progress-circular
@@ -52,9 +52,9 @@
 
   .v-progress-circular__overlay
     animation: $progress-circular-rotate-dash
-    stroke-linecap: round
     stroke-dasharray: 25, 200
     stroke-dashoffset: 0
+    stroke-linecap: round
 
 .v-progress-circular--disable-shrink
   > svg

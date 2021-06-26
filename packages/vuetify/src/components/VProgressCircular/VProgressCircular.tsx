@@ -4,9 +4,9 @@ import './VProgressCircular.sass'
 // Composables
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useTextColor } from '@/composables/color'
-import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, defineComponent, toRef } from 'vue'
