@@ -3,7 +3,7 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john@vuetifyjs.com>",
-  "version": "3.0.0-alpha.6",
+  "version": "3.0.0-alpha.7",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuetifyjs/vuetify.git",
@@ -52,7 +52,7 @@
     "@vue/cli-plugin-router": "~5.0.0-beta.1",
     "@vue/cli-plugin-vuex": "~5.0.0-beta.1",
     "@vue/cli-service": "~5.0.0-beta.1",
-    "@vuetify/api-generator": "^3.0.0-alpha.6",
+    "@vuetify/api-generator": "^3.0.0-alpha.7",
     "@vuetify/vue-cli-plugin-base": "~0.3.5",
     "cosmicjs": "^3.2.43",
     "date-fns": "^2.14.0",

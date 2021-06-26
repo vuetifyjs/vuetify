@@ -1,6 +1,7 @@
 // Utilities
 import { makeDelayProps, useDelay } from '../delay'
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 import { wait } from '../../../test'
 
 describe('delayProps', () => {

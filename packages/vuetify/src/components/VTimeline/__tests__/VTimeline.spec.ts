@@ -7,6 +7,7 @@ import { h } from 'vue'
 import { mount } from '@vue/test-utils'
 import { createVuetify } from '@/framework'
 import { createRange } from '@/util'
+import { describe, expect, it } from '@jest/globals'
 
 describe('VTimeline', () => {
   const vuetify = createVuetify()

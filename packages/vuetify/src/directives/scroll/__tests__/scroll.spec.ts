@@ -1,8 +1,8 @@
+import { describe, expect, it } from '@jest/globals'
 import {
   createApp,
   defineComponent,
   h,
-  reactive,
   withDirectives,
 } from 'vue'
 
@@ -27,14 +27,14 @@ describe('v-scroll', () => {
       selector => selector === '.selector' ? targetElement : undefined
     )
 
-    Scroll.mounted(el, { value, arg: '.selector' } as any, null, null)
+    Scroll.mounted(el, { value, arg: '.selector' } as any)
     expect(targetElement.addEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
-    Scroll.unmounted(el, null, null, null)
+    Scroll.unmounted(el)
     expect(targetElement.removeEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
 
-    Scroll.mounted(el, { value, arg: '.selector' } as any, null, null)
+    Scroll.mounted(el, { value, arg: '.selector' } as any)
     expect(targetElement.addEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
-    Scroll.unmounted(el, null, null, null)
+    Scroll.unmounted(el)
     expect(targetElement.removeEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
 
     querySelector.mockRestore()
@@ -46,9 +46,9 @@ describe('v-scroll', () => {
     const removeListener = jest.spyOn(window, 'removeEventListener')
     const el = {}
 
-    Scroll.mounted(el as HTMLElement, { value } as any, null, null)
+    Scroll.mounted(el as HTMLElement, { value } as any)
     expect(addListener).toHaveBeenCalledWith('scroll', value, { passive: true })
-    Scroll.unmounted(el as HTMLElement, null, null, null)
+    Scroll.unmounted(el as HTMLElement)
     expect(removeListener).toHaveBeenCalledWith('scroll', value, { passive: true })
 
     addListener.mockRestore()
@@ -62,11 +62,11 @@ describe('v-scroll', () => {
     const removeListener = jest.spyOn(window, 'removeEventListener')
     const el = {}
 
-    Scroll.mounted(el as HTMLElement, { value: value1 } as any, null, null)
+    Scroll.mounted(el as HTMLElement, { value: value1 } as any)
     expect(addListener).toHaveBeenCalledTimes(1)
     expect(addListener).toHaveBeenCalledWith('scroll', value1, { passive: true })
 
-    Scroll.updated(el as HTMLElement, { value: value2, oldValue: value1 } as any, null, null)
+    Scroll.updated(el as HTMLElement, { value: value2, oldValue: value1 } as any)
     expect(removeListener).toHaveBeenCalledTimes(1)
     expect(removeListener).toHaveBeenCalledWith('scroll', value1, { passive: true })
     expect(addListener).toHaveBeenCalledTimes(2)
@@ -78,7 +78,7 @@ describe('v-scroll', () => {
 
   it('should not fail when unbinding element without _onScroll', () => {
     expect(() => {
-      Scroll.unmounted({} as HTMLElement, null, null, null)
+      Scroll.unmounted({} as HTMLElement)
     }).not.toThrow()
   })
 

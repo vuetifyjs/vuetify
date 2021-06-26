@@ -16,7 +16,12 @@ module.exports = merge(baseWebpackConfig, {
     library: 'Vuetify'
   },
   resolve: {
-    alias: { vuetify$: resolve('../src/entry-bundler.ts') }
+    alias: {
+      vuetify$: resolve('../src/entry-bundler.ts'),
+      'vuetify/src': resolve('../src/'),
+      vue$: require.resolve('vue/dist/vue.esm-bundler.js')
+    },
+    symlinks: false,
   },
   module: {
     rules: [

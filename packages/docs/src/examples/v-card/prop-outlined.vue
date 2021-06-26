@@ -2,7 +2,7 @@
   <v-card
     class="mx-auto"
     max-width="344"
-    outlined
+    variant="outlined"
   >
     <v-list-item three-line>
       <v-list-item-content>
@@ -24,7 +24,7 @@
 
     <v-card-actions>
       <v-btn
-        outlined
+        variant="outlined"
         rounded
         text
       >
