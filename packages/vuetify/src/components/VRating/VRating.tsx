@@ -17,6 +17,7 @@ import { computed, defineComponent, ref } from 'vue'
 import { createRange, getUid, makeProps } from '@/util'
 
 // Types
+import type { Variant } from '@/composables/variant'
 import type { Prop } from 'vue'
 
 export default defineComponent({
@@ -140,6 +141,13 @@ export default defineComponent({
     function VRatingItem ({ value, index, showStar = true }: { value: number, index: number, showStar?: boolean }) {
       const { onMouseenter, onMouseleave, onFocus, onBlur, onClick } = eventState.value[index + 1]
       const id = `${name.value}-${String(value).replace('.', '-')}`
+      const btnProps = {
+        density: props.density,
+        ripple: props.ripple,
+        size: props.size,
+        tag: 'span',
+        variant: 'text' as Variant,
+      }
 
       return (
         <>
@@ -151,30 +159,23 @@ export default defineComponent({
             }}
             onMousedown={ onMousedown }
             onMouseup={ onMouseup }
+            onMouseenter={ onMouseenter }
+            onMouseleave={ onMouseleave }
           >
             <span class="v-rating__hidden">{ t(props.itemAriaLabel, value, props.length) }</span>
             {
               !showStar ? undefined
               : slots.item ? slots.item({
                 ...itemState.value,
+                props: btnProps,
                 value,
                 index,
-                size: props.size,
-                ripple: props.ripple,
-                density: props.density,
-                onMouseenter,
-                onMouseleave,
               })
               : (
                 <VBtn
-                  tag="span"
                   color={ itemState.value[index].color }
-                  density={ props.density }
                   icon={ itemState.value[index].icon }
-                  size={ props.size }
-                  variant="text"
-                  onMouseenter={ onMouseenter }
-                  onMouseleave={ onMouseleave }
+                  { ...btnProps }
                 />
               )
             }
