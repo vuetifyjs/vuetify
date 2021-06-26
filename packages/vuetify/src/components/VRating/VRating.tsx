@@ -29,7 +29,7 @@ export default defineComponent({
       type: String,
       default: '$vuetify.rating.ariaLabel.item',
     },
-    bgColor: String,
+    activeColor: String,
     color: String,
     clearable: Boolean,
     disabled: Boolean,
@@ -88,7 +88,8 @@ export default defineComponent({
       const isHovered = hoverIndex.value >= value
       const isFullIcon = isHovering ? isHovered : isFilled
       const icon = isFullIcon ? props.fullIcon : props.emptyIcon
-      const color = isFilled || isHovered ? props.color : props.bgColor
+      const activeColor = props.activeColor ?? props.color
+      const color = (isFilled || isHovered) ? activeColor : props.color
 
       return { isFilled, isHovered, icon, color }
     }))
