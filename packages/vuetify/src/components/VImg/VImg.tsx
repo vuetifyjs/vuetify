@@ -77,7 +77,7 @@ export default defineComponent({
   setup (props, { emit, slots }) {
     const currentSrc = ref('') // Set from srcset
     const image = ref<HTMLImageElement>()
-    const state = ref<'idle' | 'loading' | 'loaded' | 'error'>('idle')
+    const state = ref<'idle' | 'loading' | 'loaded' | 'error'>(props.eager ? 'loading' : 'idle')
     const naturalWidth = ref<number>()
     const naturalHeight = ref<number>()
 
@@ -107,9 +107,7 @@ export default defineComponent({
     onBeforeMount(() => init())
 
     function init (isIntersecting?: boolean) {
-      // If the current browser supports the intersection
-      // observer api, the image is not observable, and
-      // the eager prop isn't being used, do not load
+      if (props.eager && isIntersecting) return
       if (
         SUPPORTS_INTERSECTION &&
         !isIntersecting &&
@@ -119,8 +117,20 @@ export default defineComponent({
       state.value = 'loading'
       nextTick(() => {
         emit('loadstart', image.value?.currentSrc || normalisedSrc.value.src)
-        if (!aspectRatio.value) pollForSize(image.value!)
-        getSrc()
+
+        if (image.value?.complete) {
+          if (!image.value.naturalWidth) {
+            onError()
+          }
+
+          if (state.value === 'error') return
+
+          if (!aspectRatio.value) pollForSize(image.value, null)
+          onLoad()
+        } else {
+          if (!aspectRatio.value) pollForSize(image.value!)
+          getSrc()
+        }
       })
 
       if (normalisedSrc.value.lazySrc) {
