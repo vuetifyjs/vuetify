@@ -4,22 +4,67 @@
 .v-alert
   position: relative
 
-  @include border($alert-border...)
   @include elevation($alert-elevation)
   @include position($alert-positions)
   @include rounded($alert-border-radius)
   @include theme($alert-theme...)
   @include variant($alert-variants...)
 
+  &--variant-plain
+    transition: .2s $standard-easing
+    transition-property: opacity
+
+.v-alert__avatar
+  .v-alert--border &
+    margin: 10px 8px 8px 16px
+
+.v-alert__border
+  border-radius: inherit
+  bottom: 0
+  left: 0
+  opacity: $alert-border-opacity
+  position: absolute
+  right: 0
+  top: 0
+  width: 100%
+
+  @include border($alert-border...)
+
+  .v-alert--border-start &
+    border-inline-start-width: $alert-border-thin-width
+    border-inline-end-width: 0
+
+  .v-alert--border-top &
+    border-top-width: $alert-border-thin-width
+    border-bottom-width: 0
+
+  .v-alert--border-bottom &
+    border-bottom-width: $alert-border-thin-width
+    border-top-width: 0
+
+  .v-alert--border-end &
+    border-inline-end-width: $alert-border-thin-width
+    border-inline-start-width: 0
+
 .v-alert__content
   display: flex
 
   > .v-alert__avatar
     flex: 1 0 auto
-    margin: 8px
+    margin: 10px 8px 8px
 
     + .v-alert-text
       padding-inline-start: 0
 
+  .v-alert--border &
+    > .v-alert__avatar
+      margin-left: 16px
+
 .v-alert-text
   padding: $alert-text-padding
+
+  .v-alert--border-start &
+    padding-inline-end: #{$alert-text-padding + $alert-border-thin-width}
+
+  .v-alert--border-end &
+    padding-inline-start: #{$alert-text-padding + $alert-border-thin-width}

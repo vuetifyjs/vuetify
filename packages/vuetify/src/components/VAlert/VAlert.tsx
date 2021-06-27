@@ -25,6 +25,17 @@ export default defineComponent({
   name: 'VAlert',
 
   props: makeProps({
+    border: {
+      type: [Boolean, String],
+      validator (val: boolean | string) {
+        return typeof val === 'boolean' || [
+          'top',
+          'end',
+          'bottom',
+          'start',
+        ].includes(val)
+      },
+    },
     closeLabel: {
       type: String,
       default: '$vuetify.close',
@@ -47,7 +58,6 @@ export default defineComponent({
       },
     },
 
-    ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
     ...makePositionProps(),
@@ -80,11 +90,15 @@ export default defineComponent({
     return () => {
       const hasText = !!(slots.text || props.text)
       const hasPrepend = !!(slots.prepend || props.icon || props.type)
+      const border = props.border === true ? 'start' : props.border
 
       return (
         <props.tag
           class={[
             'v-alert',
+            {
+              [`v-alert--border-${border}`]: !!props.border,
+            },
             themeClasses.value,
             borderClasses.value,
             colorClasses.value,
@@ -100,7 +114,8 @@ export default defineComponent({
           ]}
           role="alert"
         >
-          {/* v-alert does not support active states */}
+          <div class="v-alert__border"></div>
+
           <div class="v-alert__underlay"></div>
 
           <div class="v-alert__content">
