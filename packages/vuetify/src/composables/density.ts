@@ -17,7 +17,7 @@ export interface DensityProps {
 export const makeDensityProps = propsFactory({
   density: {
     type: String as PropType<Density>,
-    default: 'default' as Density,
+    default: 'default',
     validator: (v: any) => allowedDensities.includes(v),
   },
 }, 'density')
