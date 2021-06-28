@@ -1,7 +1,15 @@
 // Utilities
 import { onBeforeUnmount, readonly, ref, watch } from 'vue'
+import type { DeepReadonly, Ref } from 'vue'
 
-export function useResizeObserver (callback?: ResizeObserverCallback) {
+interface ResizeState {
+  resizeRef: Ref<Element | undefined>
+  contentRect: DeepReadonly<Ref<DOMRectReadOnly | undefined>>
+  borderBoxSize: DeepReadonly<Ref<ResizeObserverSize | undefined>>
+  contentBoxSize: DeepReadonly<Ref<ResizeObserverSize | undefined>>
+}
+
+export function useResizeObserver (callback?: ResizeObserverCallback): ResizeState {
   const resizeRef = ref<Element>()
   const contentRect = ref<DOMRectReadOnly>()
   const contentBoxSize = ref<ResizeObserverSize>()

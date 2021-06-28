@@ -10,7 +10,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, defineComponent } from 'vue'
@@ -44,6 +44,7 @@ export default defineComponent({
       name: 'bottom-navigation',
     }),
     ...makeTagProps({ tag: 'header' }),
+    ...makeThemeProps(),
   }),
 
   emits: {
@@ -51,7 +52,7 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-bottom-navigation')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => props.bgColor))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => props.color))

@@ -7,6 +7,7 @@ import {
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
+import VApp from '../../../components/VApp'
 
 describe.skip('menuable.ts', () => {
   const Mock = Menuable.extend({
@@ -69,5 +70,33 @@ describe.skip('menuable.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.computedLeft).toBe(-200)
+  })
+
+  it('should have the correct position non attached', async () => {
+    const wrapper = mount({
+      render (h) {
+        return h(VApp, [h(Mock)])
+      },
+    }, {
+      mocks: {
+        sync: false,
+        $vuetify: {
+          theme: {},
+          rtl: false,
+        },
+      },
+    })
+
+    await wrapper.vm.$nextTick()
+
+    const { vm } = wrapper.find(Mock) as Wrapper<Instance>
+
+    Object.assign(vm.dimensions.activator, { top: 100, left: 80 })
+    Object.assign(vm.dimensions.content, { width: 300, height: 50 })
+
+    await wrapper.vm.$nextTick()
+
+    expect(vm.computedTop).toBe(100)
+    expect(vm.computedLeft).toBe(80)
   })
 })

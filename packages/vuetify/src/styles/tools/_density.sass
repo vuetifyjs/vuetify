@@ -1,10 +1,4 @@
-@mixin density($name, $properties, $densities)
+@mixin density($name, $densities)
   @each $density, $multiplier in $densities
-    $value: calc(var(--#{$name}-height) + #{$multiplier * $spacer})
-
-    &.#{$name}--density-#{$density}
-      @if type-of($properties) == 'list'
-        @each $property in $properties
-          #{$property}: $value
-      @else
-        #{$properties}: $value
+    .#{$name}--density-#{$density}
+      @content($multiplier * $spacer)

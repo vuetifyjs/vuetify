@@ -65,7 +65,7 @@ export default {
   },
   rating: {
     ariaLabel: {
-      icon: 'Đánh giá {0} trên {1}',
+      item: 'Đánh giá {0} trên {1}',
     },
   },
 }

@@ -65,7 +65,7 @@ export default {
   },
   rating: {
     ariaLabel: {
-      icon: '評価 {1} のうち {0}',
+      item: '評価 {1} のうち {0}',
     },
   },
 }

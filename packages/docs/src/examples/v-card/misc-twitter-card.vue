@@ -12,10 +12,10 @@
       >
         mdi-twitter
       </v-icon>
-      <span class="title font-weight-light">Twitter</span>
+      <span class="text-h6 font-weight-light">Twitter</span>
     </v-card-title>
 
-    <v-card-text class="headline font-weight-bold">
+    <v-card-text class="text-h5 font-weight-bold">
       "Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well."
     </v-card-text>
 

@@ -37,11 +37,11 @@ export interface LocaleAdapter {
   createScope: (options?: LocaleProps) => LocaleInstance
 }
 
-export const VuetifyLocaleAdapterSymbol: InjectionKey<LocaleAdapter> = Symbol.for('vuetify:locale-adapter')
+export const LocaleAdapterSymbol: InjectionKey<LocaleAdapter> = Symbol.for('vuetify:locale-adapter')
 export const VuetifyLocaleSymbol: InjectionKey<LocaleInstance> = Symbol.for('vuetify:locale')
 
 export function provideLocale (props?: LocaleProps) {
-  const adapter = inject(VuetifyLocaleAdapterSymbol)
+  const adapter = inject(LocaleAdapterSymbol)
 
   if (!adapter) throw new Error('[Vuetify] Could not find injected locale adapter')
 
@@ -49,7 +49,7 @@ export function provideLocale (props?: LocaleProps) {
 }
 
 export function useLocale () {
-  const adapter = inject(VuetifyLocaleAdapterSymbol)
+  const adapter = inject(LocaleAdapterSymbol)
 
   if (!adapter) throw new Error('[Vuetify] Could not find injected locale adapter')
 

@@ -3,14 +3,35 @@ import type {
   DirectiveBinding,
   ObjectDirective,
 } from 'vue'
-import type {
-  TouchHandlers,
-  TouchValue,
-  TouchWrapper,
-} from 'vuetify/types'
 
 // Utilities
 import { keys } from '@/util'
+
+export interface TouchHandlers {
+  start?: (wrapperEvent: TouchEvent & TouchWrapper) => void
+  end?: (wrapperEvent: TouchEvent & TouchWrapper) => void
+  move?: (wrapperEvent: TouchEvent & TouchWrapper) => void
+  left?: (wrapper: TouchWrapper) => void
+  right?: (wrapper: TouchWrapper) => void
+  up?: (wrapper: TouchWrapper) => void
+  down?: (wrapper: TouchWrapper) => void
+}
+
+export interface TouchWrapper extends TouchHandlers {
+  touchstartX: number
+  touchstartY: number
+  touchmoveX: number
+  touchmoveY: number
+  touchendX: number
+  touchendY: number
+  offsetX: number
+  offsetY: number
+}
+
+export interface TouchValue extends TouchHandlers {
+  parent?: boolean
+  options?: AddEventListenerOptions
+}
 
 export interface TouchStoredHandlers {
   touchstart: (e: TouchEvent) => void

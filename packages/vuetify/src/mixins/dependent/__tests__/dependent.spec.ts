@@ -4,6 +4,7 @@
 // import dependent from '../'
 // import toggleable from '../../toggleable'
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 
 function genDependentMixin () {
   return {

@@ -9,7 +9,7 @@ import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
 import { defineComponent, toRef } from 'vue'
@@ -29,10 +29,11 @@ export default defineComponent({
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
+    ...makeThemeProps(),
   }),
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { borderClasses } = useBorder(props, 'v-sheet')
     const { dimensionStyles } = useDimension(props)

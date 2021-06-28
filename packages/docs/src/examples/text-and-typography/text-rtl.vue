@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="subtitle-2 text-center">
+    <p class="text-subtitle-2 text-center">
       Agnostic RTL Alignment
     </p>
 
@@ -17,7 +17,7 @@
       Left aligned text on viewports sized XL (extra-large) or wider for rtl or ltr.
     </p>
 
-    <p class="subtitle-2 text-center">
+    <p class="text-subtitle-2 text-center">
       Responsive RTL Alignment
     </p>
 

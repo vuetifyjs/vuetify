@@ -47,7 +47,7 @@
 
         <v-list-item-content>
           <span
-            class="text-uppercase font-weight-regular caption"
+            class="text-uppercase font-weight-regular text-caption"
             v-text="item.category"
           ></span>
 

@@ -3,7 +3,7 @@
 
 import Vue, { VueConstructor } from 'vue'
 
-export type Toggleable<T extends string = 'value'> = VueConstructor<Vue & { isActive: boolean } & Record<T, any>>
+export type Toggleable<T extends string = 'value'> = VueConstructor</*Vue*/any & { isActive: boolean } & Record<T, any>>
 
 export function factory<T extends string = 'value'> (prop?: T, event?: string): Toggleable<T>
 export function factory (prop = 'value', event = 'input') {

@@ -1,8 +1,7 @@
 {
   "component": {
     "componentFolder": "./src",
-    "supportFile": "cypress/support/index.ts",
-    "testFiles": "**/*cy.spec.{js,jsx,ts,tsx}",
+    "testFiles": "**/*.spec.cy.{js,jsx,ts,tsx}",
     "video": false,
     "supportFile": "./cypress/support/index.ts"
   }

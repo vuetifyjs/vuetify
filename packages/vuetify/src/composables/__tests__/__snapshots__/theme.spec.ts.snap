@@ -42,6 +42,12 @@ exports[`createTheme should create style element 1`] = `
       --v-high-emphasis-opacity: 0.87;
       --v-medium-emphasis-opacity: 0.6;
       --v-disabled-opacity: 0.38;
+      --v-activated-opacity: 0.12;
+      --v-hover-opacity: 0.04;
+      --v-focus-opacity: 0.12;
+      --v-selected-opacity: 0.08;
+      --v-dragged-opacity: 0.08;
+      --v-pressed-opacity: 0.16;
       --v-kbd-background-color: 33, 37, 41;
       --v-kbd-color: 255, 255, 255;
       --v-code-background-color: 194, 194, 194;
@@ -49,7 +55,7 @@ exports[`createTheme should create style element 1`] = `
     .v-theme--dark {
       --v-theme-background: 18,18,18;
       --v-theme-background-overlay-multiplier: 1;
-      --v-theme-surface: 18,18,18;
+      --v-theme-surface: 33,33,33;
       --v-theme-surface-overlay-multiplier: 1;
       --v-theme-primary: 187,134,252;
       --v-theme-primary-overlay-multiplier: 2;
@@ -82,6 +88,12 @@ exports[`createTheme should create style element 1`] = `
       --v-high-emphasis-opacity: 0.87;
       --v-medium-emphasis-opacity: 0.6;
       --v-disabled-opacity: 0.38;
+      --v-activated-opacity: 0.12;
+      --v-hover-opacity: 0.04;
+      --v-focus-opacity: 0.12;
+      --v-selected-opacity: 0.08;
+      --v-dragged-opacity: 0.08;
+      --v-pressed-opacity: 0.16;
       --v-kbd-background-color: 33, 37, 41;
       --v-kbd-color: 255, 255, 255;
       --v-code-background-color: 183, 183, 183;

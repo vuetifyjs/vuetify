@@ -5,6 +5,7 @@ import VItemGroup from '../VItemGroup'
 // Utilities
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 import { createVuetify } from '@/framework'
 
 describe('VItemGroup', () => {

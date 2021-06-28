@@ -1,6 +1,7 @@
 // Utilities
 import { makeRoundedProps, useRounded } from '../rounded'
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 
 // Types
 import type { RoundedProps } from '../rounded'

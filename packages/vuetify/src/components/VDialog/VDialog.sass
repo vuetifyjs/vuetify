@@ -5,27 +5,30 @@
   z-index: $dialog-z-index
 
   .v-overlay__content
-    > .v-sheet
-      border-radius: $dialog-border-radius
-      overflow: hidden
+    max-height: $dialog-overlay-content-max-height
+    min-width: $dialog-overlay-content-min-width
+    max-width: $dialog-overlay-content-max-width
 
-      @include elevation($dialog-elevation)
+    @include rounded($dialog-overlay-content-border-radius)
+
+    @media #{$dialog-overlay-content-mobile-breakpoint}
+      max-width: $dialog-overlay-content-mobile-max-width
 
     > .v-card
-      > .v-card__title
-        font-size: $dialog-card-title-font-size
-        font-weight: $dialog-card-title-font-weight
-        letter-spacing: $dialog-card-title-letter-spacing
-        padding: $dialog-card-title-padding
+      > .v-card-avatar
+        padding: $dialog-card-avatar-padding
 
-      > .v-card__text
+      > .v-card-header
+        padding: $dialog-card-header-padding
+
+        + .v-card-text
+          padding-top: $dialog-card-header-text-padding-top
+
+      > .v-card-text
+        font-size: inherit
+        letter-spacing: $dialog-card-text-letter-spacing
+        line-height: inherit
         padding: $dialog-card-text-padding
-
-      > .v-card__subtitle
-        padding: $dialog-card-subtitle-padding
-
-      > .v-card__actions
-        padding: $dialog-card-actions-padding
 
 .v-dialog--fullscreen
   --v-scrollbar-offset: 0px
@@ -38,30 +41,3 @@
     overflow-y: auto
     top: 0
     left: 0
-
-    > .v-sheet
-      min-height: 100%
-      min-width: 100%
-      margin: 0 !important
-      padding: 0 !important
-      border-radius: 0 !important
-
-.v-dialog--scrollable .v-overlay__content,
-.v-dialog--scrollable .v-overlay__content > form
-  display: flex
-
-  > .v-card
-    display: flex
-    flex: 1 1 100%
-    flex-direction: column
-    max-height: 100%
-    max-width: 100%
-
-    > .v-card__title,
-    > .v-card__actions
-      flex: 0 0 auto
-
-    > .v-card__text
-      backface-visibility: hidden
-      flex: 1 1 auto
-      overflow-y: auto

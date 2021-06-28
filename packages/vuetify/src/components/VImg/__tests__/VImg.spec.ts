@@ -2,32 +2,28 @@
 import { VImg } from '..'
 
 // Utilities
+import { createVuetify } from '@/framework'
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 import * as framework from '@/framework'
 
-function mountFunction (options: any = {}) {
-  return mount(VImg, {
-    ...options,
-    propsData: {
-      eager: true,
-      ...options.propsData,
-    },
-  })
-}
-
 describe('VImg', () => {
+  const vuetify = createVuetify()
+
+  function mountFunction (options: any = {}) {
+    return mount(VImg, {
+      global: { plugins: [vuetify] },
+      ...options,
+      propsData: {
+        eager: true,
+        ...options.propsData,
+      },
+    })
+  }
+
   const LOAD_FAILURE_SRC = 'LOAD_FAILURE_SRC'
   const LOAD_SUCCESS_SRC = 'LOAD_SUCCESS_SRC'
-
-  beforeEach(() => {
-    jest.spyOn(framework, 'useVuetify').mockReturnValue({
-      defaults: { global: {} },
-    })
-  })
-  afterEach(() => {
-    jest.spyOn(framework, 'useVuetify').mockRestore()
-  })
 
   beforeAll(() => {
     jest.useFakeTimers()

@@ -28,7 +28,7 @@
           >
             <v-card-text>
               <span
-                class="title"
+                class="text-h6"
                 v-text="key"
               />
             </v-card-text>
@@ -45,7 +45,7 @@
               <v-row>
                 <v-col
                   cols="8"
-                  class="caption"
+                  class="text-caption"
                 >
                   <span>{{ getColorName(key, key2) }}</span>
                 </v-col>

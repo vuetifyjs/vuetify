@@ -9,7 +9,8 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useDisplay } from '@/composables/display'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, defineComponent, onBeforeMount, ref, toRef, watch } from 'vue'
@@ -22,6 +23,7 @@ export default defineComponent({
   name: 'VNavigationDrawer',
 
   props: makeProps({
+    color: String,
     disableResizeWatcher: Boolean,
     expandOnHover: Boolean,
     modelValue: {
@@ -50,11 +52,13 @@ export default defineComponent({
     ...makeLayoutItemProps(),
     ...makeRoundedProps(),
     ...makeTagProps({ tag: 'nav' }),
+    ...makeThemeProps(),
   }),
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-navigation-drawer')
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { elevationClasses } = useElevation(props)
     const { mobile } = useDisplay()
     const { roundedClasses } = useRounded(props, 'v-navigation-drawer')
@@ -110,11 +114,13 @@ export default defineComponent({
               'v-navigation-drawer--absolute': props.absolute,
             },
             themeClasses.value,
+            backgroundColorClasses.value,
             borderClasses.value,
             elevationClasses.value,
             roundedClasses.value,
           ]}
           style={[
+            backgroundColorStyles.value,
             layoutStyles.value,
           ]}
         >

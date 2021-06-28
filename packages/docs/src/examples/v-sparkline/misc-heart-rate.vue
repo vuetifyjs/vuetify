@@ -14,12 +14,12 @@
         mdi-heart-pulse
       </v-icon>
       <v-row align="start">
-        <div class="caption grey--text text-uppercase">
+        <div class="text-caption grey--text text-uppercase">
           Heart rate
         </div>
         <div>
           <span
-            class="display-2 font-weight-black"
+            class="text-h3 font-weight-black"
             v-text="avg || '—'"
           ></span>
           <strong v-if="avg">BPM</strong>

@@ -2,15 +2,13 @@
   <div class="text-center">
     <v-rating
       v-model="rating"
-      icon-label="custom icon label text {0} of {1}"
+      item-aria-label="custom icon label text {0} of {1}"
     ></v-rating>
   </div>
 </template>
 
 <script>
   export default {
-    data: () => ({
-      rating: 4,
-    }),
+    data: () => ({ rating: 4 }),
   }
 </script>

@@ -11,15 +11,17 @@ related:
 
 # Ratings
 
-The rating component is a specialized but crucial piece in building user widgets. Collecting user feedback via ratings is a simple analytic that can provide a lot of feedback to your product or application.
+The `v-rating` component is a specialized but important piece in building user widgets. Collecting user feedback via ratings is a simple analytic that can provide a lot of feedback to your product or application.
 
 <entry-ad />
 
+<!--
 ## Usage
 
 The `v-rating` component provides a simple interface for gathering user feedback.
 
 <usage name="v-rating" />
+-->
 
 ## API
 
@@ -35,15 +37,52 @@ The `v-rating` component can be colored as you want, you can set both selected a
 
 <example file="v-rating/prop-color" />
 
+#### Density
+
+Control the space occupied by `v-rating` items using the **density** prop.
+
+<example file="v-rating/prop-density" />
+
+#### Clearable
+
+Clicking on a current rating value can reset the rating by using **clearable** prop.
+
+<example file="v-rating/prop-clearable" />
+
+#### Readonly
+
+For ratings that are not meant to be changed you can use **readonly** prop.
+
+<example file="v-rating/prop-readonly" />
+
+#### Hover effect
+
+TODO
+
+<example file="v-rating/prop-hover" />
+
+#### Labels
+
+The `v-rating` component can display labels above or below each item.
+
+<example file="v-rating/prop-item-labels" />
+
+#### Icons
+
+You can use custom icons.
+
+<example file="v-rating/prop-icons" />
+
+
 #### Length
 
-Sometimes an application will call for a customized implementation. Easily change length or displayed icons.
+Change the number of items by modifying the the **length** prop.
 
 <example file="v-rating/prop-length" />
 
 #### Incremented
 
-A rating can have 3 defined icons, **full-icon**, **half-icon** (with the **half-increments** prop) and **empty-icon**.
+A `v-rating` component has 3 types of icons, **full-icon**, **half-icon** (with the **half-increments** prop) and **empty-icon**.
 
 <example file="v-rating/prop-half-increments" />
 
@@ -53,9 +92,9 @@ Utilize the same sizing classes available in `v-icon` or provide your own with t
 
 <example file="v-rating/prop-size" />
 
-#### Icon Label
+#### Aria Label
 
-Provide a label to assistive technologies for icons.
+Provide a label to assistive technologies for each item.
 
 <example file="v-rating/prop-icon-label" />
 
@@ -63,9 +102,16 @@ Provide a label to assistive technologies for icons.
 
 #### Item slot
 
-Slots are provided to give you even more freedom in how you display the rating.
+Slots enable advanced customization possibilities and provide you with more freedom in how you display the rating.
 
 <example file="v-rating/slot-item" />
+
+#### Custom labels slot
+
+Any arbitrary content could be displayed for labels in **item-label** slot.
+
+<example file="v-rating/slot-item-label" />
+
 
 ### Misc
 

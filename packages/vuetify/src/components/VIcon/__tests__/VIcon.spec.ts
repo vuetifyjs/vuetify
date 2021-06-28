@@ -1,10 +1,12 @@
+import { DefaultsSymbol } from '@/composables/defaults'
+
 // Components
 import { VIcon } from '..'
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { VuetifySymbol } from '@/framework'
-import { defaultSets, VuetifyIconSymbol } from '@/composables/icons'
+import { describe, expect, it } from '@jest/globals'
+import { defaultSets, IconSymbol } from '@/composables/icons'
 import { mdi } from '@/iconsets/mdi'
 import { md } from '@/iconsets/md'
 import { fa } from '@/iconsets/fa'
@@ -12,12 +14,10 @@ import { h, Text } from 'vue'
 
 const globalOptions = {
   provide: {
-    [VuetifySymbol as symbol]: {
-      defaults: {
-        global: {},
-      },
+    [DefaultsSymbol as symbol]: {
+      value: { global: {} },
     },
-    [VuetifyIconSymbol as symbol]: {
+    [IconSymbol as symbol]: {
       defaultSet: 'mdi',
       aliases: {
         checkboxOn: 'mdi-check',

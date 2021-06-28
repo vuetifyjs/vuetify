@@ -68,7 +68,7 @@
             </v-form>
           </v-responsive>
 
-          <div class="text-center caption">
+          <div class="text-center text-caption">
             <i18n path="subscribe-to-our">
               <strong>{{ $t('newsletter') }}</strong>
             </i18n>

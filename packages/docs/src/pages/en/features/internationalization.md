@@ -182,6 +182,7 @@ Currently Vuetify provides translations in the following languages:
 - **ca** - Catalan (català)
 - **ckb** - Central Kurdish (کوردی)
 - **cs** - Czech (čeština)
+- **da** - Danish (Dansk)
 - **de** - German (Deutsch)
 - **el** - Greek (Ελληνικά)
 - **en** - English

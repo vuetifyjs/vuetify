@@ -1,7 +1,7 @@
-import type { DirectiveBinding, ObjectDirective } from 'vue'
+import type { DirectiveBinding } from 'vue'
 
 interface ResizeDirectiveBinding extends Omit<DirectiveBinding, 'modifiers'> {
-  value: (() => void)
+  value: () => void
   modifiers?: {
     active?: boolean
     quiet?: boolean
@@ -33,7 +33,7 @@ function unmounted (el: HTMLElement) {
   delete el._onResize
 }
 
-export const Resize: ObjectDirective = {
+export const Resize = {
   mounted,
   unmounted,
 }

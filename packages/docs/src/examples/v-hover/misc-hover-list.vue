@@ -20,7 +20,7 @@
                 :src="item.img"
                 height="225px"
               >
-                <v-card-title class="title white--text">
+                <v-card-title class="text-h6 white--text">
                   <v-row
                     class="fill-height flex-column"
                     justify="space-between"
@@ -30,10 +30,10 @@
                     </p>
 
                     <div>
-                      <p class="ma-0 body-1 font-weight-bold font-italic text-left">
+                      <p class="ma-0 text-body-1 font-weight-bold font-italic text-left">
                         {{ item.text }}
                       </p>
-                      <p class="caption font-weight-medium font-italic text-left">
+                      <p class="text-caption font-weight-medium font-italic text-left">
                         {{ item.subtext }}
                       </p>
                     </div>

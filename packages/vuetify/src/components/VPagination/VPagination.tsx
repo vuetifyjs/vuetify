@@ -18,11 +18,12 @@ import { makeElevationProps } from '@/composables/elevation'
 import { makeDensityProps } from '@/composables/density'
 import { makeRoundedProps } from '@/composables/rounded'
 import { makeSizeProps } from '@/composables/size'
+import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeVariantProps } from '@/composables/variant'
 import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeBorderProps } from '@/composables/border'
 import { useRefs } from '@/composables/refs'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTheme } from '@/composables/theme'
 
 export default defineComponent({
   name: 'VPagination',
@@ -87,18 +88,20 @@ export default defineComponent({
       type: String,
       default: '$vuetify.pagination.ariaLabel.last',
     },
-    color: [String, Boolean],
     ellipsis: {
       type: String,
       default: '...',
     },
     showFirstLastPage: Boolean,
+
     ...makeTagProps({ tag: 'nav' }),
     ...makeElevationProps(),
     ...makeDensityProps(),
     ...makeRoundedProps(),
     ...makeSizeProps(),
     ...makeBorderProps(),
+    ...makeThemeProps(),
+    ...makeVariantProps({ variant: 'text' } as const),
   }),
 
   emits: {
@@ -113,7 +116,7 @@ export default defineComponent({
     const page = useProxiedModel(props, 'modelValue')
     const { t, n } = useLocale()
     const { isRtl } = useRtl()
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const maxButtons = ref(-1)
 
     const { resizeRef } = useResizeObserver((entries: ResizeObserverEntry[]) => {
@@ -197,8 +200,7 @@ export default defineComponent({
               ellipsis: true,
               icon: true,
               disabled: true,
-              text: true,
-              outlined: props.outlined,
+              variant: props.variant,
               border: props.border,
             },
           }
@@ -214,10 +216,9 @@ export default defineComponent({
               icon: true,
               disabled: !!props.disabled,
               elevation: props.elevation,
-              outlined: props.outlined,
+              variant: props.variant,
               border: props.border,
-              text: !isActive,
-              color: isActive ? props.color : false,
+              color: isActive ? props.color : undefined,
               ariaCurrent: isActive,
               ariaLabel: t(isActive ? props.currentPageAriaLabel : props.pageAriaLabel, index + 1),
               onClick: (e: Event) => setValue(e, item),
@@ -229,12 +230,11 @@ export default defineComponent({
 
     const controls = computed(() => {
       const sharedProps = {
-        color: false,
+        color: undefined,
         density: props.density,
         rounded: props.rounded,
         size: props.size,
-        text: true,
-        outlined: props.outlined,
+        variant: props.variant,
         border: props.border,
       }
 

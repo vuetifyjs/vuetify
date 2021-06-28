@@ -1,4 +1,3 @@
-import type { DataTableCompareFunction, ItemGroup, SelectItemKey } from 'vuetify/types'
 import type { Ref, Slots, VNode } from 'vue'
 import { camelize, Fragment, isRef, ref } from 'vue'
 
@@ -54,6 +53,8 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
   path = path.replace(/^\./, '') // strip a leading dot
   return getNestedValue(obj, path.split('.'), fallback)
 }
+
+type SelectItemKey = string | (string | number)[] | ((item: Dictionary<any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: object,
@@ -198,6 +199,11 @@ export function arrayDiff (a: any[], b: any[]): any[] {
   return diff
 }
 
+interface ItemGroup<T> {
+  name: string
+  items: T[]
+}
+
 export function groupItems<T extends any = any> (
   items: T[],
   groupBy: string[],
@@ -228,12 +234,13 @@ export function wrapInArray<T> (v: T | T[] | null | undefined): T[] {
       ? v : [v]
 }
 
-export function sortItems<T extends any = any> (
+type DataTableCompareFunction<T = any> = (a: T, b: T) => number
+export function sortItems<T extends any, K extends keyof T> (
   items: T[],
   sortBy: string[],
   sortDesc: boolean[],
   locale: string,
-  customSorters?: Record<string, DataTableCompareFunction<T>>
+  customSorters?: Record<K, DataTableCompareFunction<T[K]>>
 ): T[] {
   if (sortBy === null || !sortBy.length) return items
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
@@ -249,8 +256,8 @@ export function sortItems<T extends any = any> (
         [sortA, sortB] = [sortB, sortA]
       }
 
-      if (customSorters?.[sortKey]) {
-        const customResult = customSorters[sortKey](sortA, sortB)
+      if (customSorters?.[sortKey as K]) {
+        const customResult = customSorters[sortKey as K](sortA, sortB)
 
         if (!customResult) continue
 
