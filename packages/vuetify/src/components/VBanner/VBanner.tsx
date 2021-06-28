@@ -3,7 +3,10 @@ import './VBanner.sass'
 
 // Components
 import { VAvatar } from '@/components/VAvatar'
-import { VBannerActions, VBannerAvatar, VBannerContent, VBannerText } from './'
+import VBannerActions from './VBannerActions'
+import VBannerAvatar from './VBannerAvatar'
+import VBannerContent from './VBannerContent'
+import VBannerText from './VBannerText'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -34,6 +37,7 @@ export default defineComponent({
     },
     sticky: Boolean,
     text: String,
+
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
@@ -65,7 +69,7 @@ export default defineComponent({
           class={[
             'v-banner',
             {
-              'v-banner--is-mobile': mobile.value,
+              'v-banner--mobile': mobile.value,
               'v-banner--sticky': props.sticky,
               [`v-banner--${props.lines}-line`]: true,
             },

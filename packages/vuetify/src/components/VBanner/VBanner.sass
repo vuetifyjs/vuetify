@@ -23,7 +23,7 @@
   &--border
     border-width: $banner-border-thin-width
 
-  &--is-mobile
+  &--mobile
     align-items: center
     padding-inline-end: $banner-mobile-padding-end
     padding-inline-start: $banner-mobile-padding-start
@@ -51,7 +51,7 @@
   flex: 0 1
   justify-content: flex-end
 
-  .v-banner--is-mobile &
+  .v-banner--mobile &
     flex: 1 0
 
 .v-banner-content
@@ -60,10 +60,15 @@
   min-width: 0
   padding-inline-end: $banner-content-padding-end
 
-  .v-banner--is-mobile &
+  .v-banner--mobile &
     flex: 1 1 auto
     padding-inline-end: $banner-mobile-content-padding-end
-    margin-bottom: $banner-mobile-content-margin-bottom
+
+  .v-banner--two-line &
+    margin-bottom: $banner-two-line-content-margin-bottom
+
+  .v-banner--three-line &
+    margin-bottom: $banner-three-line-content-margin-bottom
 
 .v-banner-avatar
   align-self: flex-start
@@ -83,7 +88,7 @@
     right: 0
     top: 0
 
-  .v-banner--is-mobile &
+  .v-banner--mobile &
     margin-inline-end: $banner-mobile-avatar-margin-end
 
   .v-banner--one-line &

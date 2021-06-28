@@ -24,15 +24,16 @@ $banner-rounded-border-radius: $border-radius-root !default;
 $banner-sticky-top: 0 !default;
 $banner-text-color: rgb(var(--v-theme-on-surface)) !default;
 $banner-text-line-height: map-deep-get($typography, 'subtitle-2', 'line-height') !default;
+$banner-two-line-content-margin-bottom: 4px !default;
 $banner-two-line-padding-top: 24px !default;
+$banner-three-line-content-margin-bottom: 8px !default;
+$banner-three-line-margin-bottom: 24px !default;
 $banner-three-line-padding-top: 24px !default;
 $banner-width: 100% !default;
 
 // Mobile
 $banner-mobile-avatar-margin-end: 16px !default;
 $banner-mobile-content-padding-end: 8px !default;
-$banner-mobile-content-margin-bottom: 4px !default;
-$banner-mobile-max-width: 360px !default;
 $banner-mobile-padding-end: 8px !default;
 $banner-mobile-padding-start: 16px !default;
 
@@ -43,8 +44,7 @@ $banner-border: (
   $banner-border-thin-width
 ) !default;
 
-$banner-theme: () !default;
 $banner-theme: (
   $banner-background,
   $banner-color
-);
+) !default;
