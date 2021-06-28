@@ -1,4 +1,1 @@
-import VRating from './VRating'
-
-export { VRating }
-export default VRating
+export { default as VRating } from './VRating'

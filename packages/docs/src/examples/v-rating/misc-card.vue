@@ -1,9 +1,9 @@
 <template>
   <v-card
-    class="mx-auto elevation-20"
+    class="mx-auto"
     color="purple"
-    dark
-    style="max-width: 400px;"
+    elevation="20"
+    max-width="400"
   >
     <v-row justify="space-between">
       <v-col cols="8">
@@ -13,10 +13,12 @@
               Halycon Days
             </div>
             <div>Ellie Goulding</div>
+
             <div>(2013)</div>
           </div>
         </v-card-title>
       </v-col>
+
       <v-img
         class="shrink ma-2"
         contain
@@ -25,18 +27,23 @@
         style="flex-basis: 125px"
       ></v-img>
     </v-row>
-    <v-divider dark></v-divider>
+
+    <v-divider></v-divider>
+
     <v-card-actions class="pa-4">
       Rate this album
+
       <v-spacer></v-spacer>
-      <span class="grey--text text--lighten-2 text-caption mr-2">
+
+      <span class="text-grey-lighten-2 text-caption mr-2">
         ({{ rating }})
       </span>
+
       <v-rating
         v-model="rating"
         background-color="white"
-        color="yellow accent-4"
-        dense
+        color="yellow-accent-4"
+        density="compact"
         half-increments
         hover
         size="18"
@@ -47,8 +54,6 @@
 
 <script>
   export default {
-    data: () => ({
-      rating: 4.3,
-    }),
+    data: () => ({ rating: 4.3 }),
   }
 </script>

@@ -39,6 +39,11 @@ export default defineComponent({
     stacked: Boolean,
 
     disabled: Boolean,
+    ripple: {
+      type: Boolean,
+      default: true,
+    },
+
     ...makeBorderProps(),
     ...makeRoundedProps(),
     ...makeDensityProps(),
@@ -102,7 +107,7 @@ export default defineComponent({
           disabled={ props.disabled || undefined }
           href={ link.href.value }
           v-ripple={[
-            !props.disabled,
+            !props.disabled && props.ripple,
             null,
             props.icon ? ['center'] : null,
           ]}
