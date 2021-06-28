@@ -40,7 +40,7 @@ export default defineComponent({
     disabled: Boolean,
     length: {
       type: [Number, String],
-      default: 0,
+      default: 1,
       validator: (val: number) => val % 1 === 0,
     },
     totalVisible: [Number, String],

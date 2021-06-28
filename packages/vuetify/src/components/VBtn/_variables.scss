@@ -20,7 +20,7 @@ $button-bottom-navigation-shift-transform: scale(.8) translateY(10px) !default;
 $button-bottom-navigation-text-transform: none !default;
 $button-bottom-navigation-transition-duration: .2s !default;
 $button-pagination-active-overlay-opacity: var(--v-border-opacity) !default;
-$button-pagination-border-radius: 0 !default;
+$button-pagination-border-radius: $border-radius-root !default;
 $button-pagination-elevation: 0 !default;
 $button-border-color: $border-color-root !default;
 $button-border-radius: $border-radius-root !default;
