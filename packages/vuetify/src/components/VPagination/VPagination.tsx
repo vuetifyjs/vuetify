@@ -214,7 +214,7 @@ export default defineComponent({
               ref,
               ellipsis: false,
               icon: true,
-              disabled: !!props.disabled,
+              disabled: !!props.disabled || props.length < 2,
               elevation: props.elevation,
               variant: props.variant,
               border: props.border,
