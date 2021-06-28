@@ -1,0 +1,26 @@
+@mixin breadcrumbs-sizes ($map: $breadcrumbs-sizes) {
+  @each $sizeName, $multiplier in $size-scales {
+    $size: map-get($map, 'height') + (8 * $multiplier);
+
+    &.v-breadcrumbs--size-#{$sizeName} {
+      --v-breadcrumbs-height: #{$size};
+    }
+  }
+}
+
+@mixin breadcrumbs-density ($properties, $densities) {
+  @each $density, $multiplier in $densities {
+    $value: calc(var(--v-breadcrumbs-height) + #{$multiplier * $spacer});
+
+    &.v-breadcrumbs--density-#{$density} {
+      @if type-of($properties) == "list" {
+        @each $property in $properties {
+          #{$property}: $value;
+        }
+      }
+      @else {
+        #{$properties}: $value;
+      }
+    }
+  }
+}
