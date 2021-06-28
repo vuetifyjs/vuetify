@@ -171,7 +171,7 @@ Same as above. Installing FontAwesome through cdn is the easiest way to check it
 <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.x/css/font-awesome.min.css" rel="stylesheet">
 ```
 
-Installing FontAwesome**4** is the same as its newer version, just from a different repository. You will be targeting the `font-awesome` repo as opposed to `@fortawesome` one.
+Installing FontAwesome**4** is the same as its newer version, just from a different repository. You will be targeting the `font-awesome` repo as opposed to `@fontawesome` one.
 
 ```bash
 $ yarn add font-awesome@4.7.0 -D
