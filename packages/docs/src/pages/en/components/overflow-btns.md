@@ -25,6 +25,8 @@ related:
 
 - [v-overflow-btn](/api/v-overflow-btn)
 
+<api-section page="components/overflow-btns" />
+
 ## Examples
 
 ### Props

@@ -24,6 +24,8 @@ Scroll the window and watch the colored dot. Notice as the [v-card](/components/
 
 - [v-intersect](/api/v-intersect)
 
+<api-section page="directives/intersect" />
+
 ## Caveats
 
 <alert type="info">

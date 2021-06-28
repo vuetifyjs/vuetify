@@ -99,14 +99,7 @@
 
   // Utilities
   import { get } from 'vuex-pathify'
-
-  const getApi = name => {
-    return import(
-      /* webpackChunkName: "api-data" */
-      /* webpackMode: "eager" */
-      `@/api/data/${name}.js`
-    )
-  }
+  import { searchItems } from 'vuetify/lib/util/helpers'
 
   const HEADERS = {
     options: ['name', 'type', 'default', 'description'],
@@ -125,6 +118,8 @@
     props: {
       name: String,
       field: String,
+      filter: String,
+      apiData: Array,
     },
 
     data: () => ({ api: null }),
@@ -134,13 +129,9 @@
         return HEADERS[this.field]
       },
       items () {
-        return this.api ? this.api[this.field] : []
+        return this.filter ? searchItems(this.apiData, this.filter) : this.apiData || []
       },
       locale: get('route/params@locale'),
-    },
-
-    async created () {
-      this.api = (await getApi(this.name)).default
     },
 
     methods: {
