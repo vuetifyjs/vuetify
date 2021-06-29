@@ -2,7 +2,6 @@
 import './VAlert.sass'
 
 // Components
-import VAlertText from './VAlertText'
 import { VAvatar } from '@/components/VAvatar'
 import { VBtn } from '@/components/VBtn'
 
@@ -19,10 +18,11 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import type { PropType } from 'vue'
 import { computed, defineComponent, toRef } from 'vue'
-
 import { makeProps } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
 
 export default defineComponent({
   name: 'VAlert',
