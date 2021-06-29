@@ -4,9 +4,12 @@ import './VAlert.sass'
 // Components
 import VAlertText from './VAlertText'
 import { VAvatar } from '@/components/VAvatar'
+import { VBtn } from '@/components/VBtn'
 
 // Composables
-import { makeBorderProps, useBorder } from '@/composables/border'
+import { useBorder } from '@/composables/border'
+import { useTextColor } from '@/composables/color'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
@@ -17,7 +20,7 @@ import { makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
 import type { PropType } from 'vue'
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, toRef } from 'vue'
 
 import { makeProps } from '@/util'
 
@@ -36,6 +39,12 @@ export default defineComponent({
         ].includes(val)
       },
     },
+    borderColor: String,
+    closable: Boolean,
+    closeIcon: {
+      type: String,
+      default: '$close',
+    },
     closeLabel: {
       type: String,
       default: '$vuetify.close',
@@ -43,6 +52,10 @@ export default defineComponent({
     icon: {
       type: [Boolean, String] as PropType<false | string>,
       default: null,
+    },
+    modelValue: {
+      type: Boolean,
+      default: true,
     },
     prominent: Boolean,
     sticky: Boolean,
@@ -68,7 +81,12 @@ export default defineComponent({
     ...makeVariantProps(),
   }),
 
+  emits: {
+    'update:modelValue': (value: boolean) => true,
+  },
+
   setup (props, { slots }) {
+    const isActive = useProxiedModel(props, 'modelValue')
     const icon = computed(() => {
       if (props.icon === false) return undefined
       if (!props.type) return props.icon
@@ -87,13 +105,19 @@ export default defineComponent({
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-alert')
     const { roundedClasses } = useRounded(props, 'v-alert')
+    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'borderColor'))
+
+    function onCloseClick (e: MouseEvent) {
+      isActive.value = false
+    }
 
     return () => {
       const hasText = !!(slots.text || props.text)
       const hasPrepend = !!(slots.prepend || props.icon || props.type)
+      const hasClose = !!(slots.close || props.closable)
       const border = props.border === true ? 'start' : props.border
 
-      return (
+      return isActive.value && (
         <props.tag
           class={[
             'v-alert',
@@ -116,7 +140,15 @@ export default defineComponent({
           ]}
           role="alert"
         >
-          <div class="v-alert__border"></div>
+          { props.border && (
+            <div
+              class={[
+                'v-alert__border',
+                textColorClasses.value,
+              ]}
+              style={ textColorStyles.value }
+            ></div>
+          ) }
 
           <div class="v-alert__underlay"></div>
 
@@ -135,14 +167,26 @@ export default defineComponent({
               </div>
             ) }
 
-            { hasText && (
-              <VAlertText>
-                { slots.text ? slots.text() : props.text }
-              </VAlertText>
-            ) }
+            { hasText && props.text }
 
             { slots.default?.() }
 
+            { hasClose && (
+              <div class="v-alert__close">
+                { slots.close
+                  ? slots.close({ props: { onClick: onCloseClick } })
+                  : (
+                    <VBtn
+                      density={ props.density }
+                      icon={ props.closeIcon }
+                      size="x-small"
+                      variant="text"
+                      onClick={ onCloseClick }
+                    />
+                  )
+                }
+              </div>
+            ) }
           </div>
         </props.tag>
       )

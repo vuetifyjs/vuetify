@@ -11,17 +11,14 @@
   @include theme($alert-theme...)
   @include variant($alert-variants...)
 
+  // has specificity issues without this selector
+  &.v-alert--border
+    --v-border-opacity: #{$alert-border-opacity}
+
   &--border
     padding-inline-start: $alert-border-padding-inline-start
 
   &--prominent
-    .v-alert__avatar
-      align-items: center
-      flex: 1 0 auto
-      width: $alert-prominent-icon-size
-
-    .v-icon
-      font-size: $alert-prominent-icon-font-size
 
   &--variant-plain
     transition: .2s $standard-easing
@@ -37,6 +34,9 @@
           margin-inline-start: $alert-prominent-avatar-margin-inline-start
           margin-inline-end: $alert-prominent-avatar-margin-inline-end + $modifier
 
+      .v-alert__close
+        margin-top: -6 - $modifier / 2
+
       &:not(.v-alert--prominent)
         .v-alert__avatar
           margin-top: -6 - $modifier / 2
@@ -46,11 +46,19 @@
   margin-inline-start: $alert-avatar-margin-inline-start
   margin-inline-end: $alert-avatar-margin-inline-end
 
+  .v-alert--prominent &
+    align-items: center
+    flex: 1 0 auto
+    max-width: $alert-prominent-icon-size
+
+    .v-icon
+      font-size: $alert-prominent-icon-font-size
+
 .v-alert__border
   border-radius: inherit
   bottom: 0
   left: 0
-  opacity: $alert-border-opacity
+  opacity: var(--v-border-opacity)
   position: absolute
   right: 0
   top: 0
@@ -74,8 +82,15 @@
     border-inline-end-width: $alert-border-thin-width
     border-inline-start-width: 0
 
+.v-alert__close
+  align-self: flex-start
+  margin-inline-start: $alert-close-margin-inline-start
+
 .v-alert__content
   display: flex
+
+  .v-alert--prominent &
+    align-items: center
 
 .v-alert-text
   padding: $alert-text-padding
