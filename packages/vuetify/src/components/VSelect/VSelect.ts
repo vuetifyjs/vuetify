@@ -284,7 +284,6 @@ export default baseMixins.extend<options>().extend({
     if (this.multiple) return
     const index = this.allItems.findIndex(item => item === this.selectedItems[0])
     this.setMenuIndex(index)
-    // this.selectedIndex = index
   },
 
   methods: {
