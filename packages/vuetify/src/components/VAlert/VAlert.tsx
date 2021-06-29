@@ -44,6 +44,7 @@ export default defineComponent({
       type: [Boolean, String] as PropType<false | string>,
       default: null,
     },
+    prominent: Boolean,
     sticky: Boolean,
     text: String,
     type: {
@@ -98,6 +99,7 @@ export default defineComponent({
             'v-alert',
             {
               [`v-alert--border-${border}`]: !!props.border,
+              'v-alert--prominent': props.prominent,
             },
             themeClasses.value,
             borderClasses.value,

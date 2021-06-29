@@ -2,6 +2,7 @@
 @import ./index
 
 .v-alert
+  padding: $alert-padding
   position: relative
 
   @include elevation($alert-elevation)
@@ -10,13 +11,40 @@
   @include theme($alert-theme...)
   @include variant($alert-variants...)
 
+  &--border
+    padding-inline-start: $alert-border-padding-inline-start
+
+  &--prominent
+    .v-alert__avatar
+      align-items: center
+      flex: 1 0 auto
+      width: $alert-prominent-icon-size
+
+    .v-icon
+      font-size: $alert-prominent-icon-font-size
+
   &--variant-plain
     transition: .2s $standard-easing
     transition-property: opacity
 
+  @at-root
+    @include density('v-alert', $alert-density) using ($modifier)
+      padding-top: $alert-padding + $modifier
+      padding-bottom: $alert-padding + $modifier
+
+      &.v-alert--prominent
+        .v-alert__avatar
+          margin-inline-start: $alert-prominent-avatar-margin-inline-start
+          margin-inline-end: $alert-prominent-avatar-margin-inline-end + $modifier
+
+      &:not(.v-alert--prominent)
+        .v-alert__avatar
+          margin-top: -6 - $modifier / 2
+
 .v-alert__avatar
-  .v-alert--border &
-    margin: 10px 8px 8px 16px
+  display: flex
+  margin-inline-start: $alert-avatar-margin-inline-start
+  margin-inline-end: $alert-avatar-margin-inline-end
 
 .v-alert__border
   border-radius: inherit
@@ -48,17 +76,6 @@
 
 .v-alert__content
   display: flex
-
-  > .v-alert__avatar
-    flex: 1 0 auto
-    margin: 10px 8px 8px
-
-    + .v-alert-text
-      padding-inline-start: 0
-
-  .v-alert--border &
-    > .v-alert__avatar
-      margin-left: 16px
 
 .v-alert-text
   padding: $alert-text-padding
