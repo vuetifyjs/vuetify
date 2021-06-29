@@ -278,6 +278,15 @@ export default baseMixins.extend<options>().extend({
     },
   },
 
+  mounted () {
+    // no need for initialization for multiple select
+    // as no single item can be selected
+    if (this.multiple) return
+    const index = this.allItems.findIndex(item => item === this.selectedItems[0])
+    this.setMenuIndex(index)
+    // this.selectedIndex = index
+  },
+
   methods: {
     /** @public */
     blur (e?: Event) {

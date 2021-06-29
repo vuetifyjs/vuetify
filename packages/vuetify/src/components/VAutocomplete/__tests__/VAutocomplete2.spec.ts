@@ -39,7 +39,7 @@ describe('VAutocomplete.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         items: ['foo', 'bar'],
-        value: 'foo',
+        value: 'bar',
       },
     })
 
@@ -49,7 +49,7 @@ describe('VAutocomplete.ts', () => {
 
     expect(wrapper.vm.isMenuActive).toBe(true)
 
-    expect(wrapper.vm.getMenuIndex()).toBe(-1)
+    expect(wrapper.vm.getMenuIndex()).toBe(1)
   })
 
   it('should not remove a disabled item', () => {
