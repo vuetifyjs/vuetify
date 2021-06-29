@@ -1,5 +1,5 @@
 // Defaults
-$alert-background: rgba(var(--v-theme-on-surface), var(--v-overlay-opacity)) !default;
+$alert-background: rgba(var(--v-theme-on-surface), var(--v-border-opacity)) !default;
 $alert-border-color: currentColor !default;
 $alert-border-icon-margin: 8px !default;
 $alert-border-opacity: 0.26 !default;
