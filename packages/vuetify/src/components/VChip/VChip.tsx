@@ -76,7 +76,7 @@ export default defineComponent({
 
   emits: {
     'click:close': (e: Event) => e,
-    'update:active': (value: Boolean) => value
+    'update:active': (value: Boolean) => value,
   },
   setup (props, { attrs, emit, slots }) {
     const { themeClasses } = useTheme(props)
@@ -93,7 +93,7 @@ export default defineComponent({
     // })
 
     const isElevated = computed(() => {
-      return props.variant === 'contained' && !(props.disabled || props.flat || props.border)
+      return props.variant === 'contained' && !(props.disabled || props.border)
     })
 
     const hasClose = computed(() => {
@@ -146,7 +146,7 @@ export default defineComponent({
           href={ link.href.value }
           v-ripple={[
             !props.disabled && props.ripple,
-            null
+            null,
           ]}
           onClick={ props.disabled || link.navigate }
         >

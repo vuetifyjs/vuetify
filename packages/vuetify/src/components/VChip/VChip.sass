@@ -8,6 +8,10 @@
   height: 32px
   padding: 0 12px
 
+  @at-root
+    +chip-sizes()
+    +chip-density('height', $chip-density)
+
   @include border($chip-border...)
   @include elevation($chip-elevation)
   @include rounded($chip-border-radius)
@@ -37,6 +41,9 @@
       &--right
         margin-left: $chip-icon-margin-before
         margin-right: $chip-icon-margin-after
+    
+    @at-root &
+      +chip-density(('width', 'height'), $chip-icon-density)
 
   &:not(.v-chip--no-color)
     .v-icon

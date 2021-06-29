@@ -43,3 +43,35 @@ $chip-icon-sizes: map-merge(
   ),
   $chip-icon-sizes
 );
+
+$chip-density: (
+  "default": 0,
+  "comfortable": -2,
+  "compact": -3,
+) !default;
+$chip-stacked-density: (
+  "default": 0,
+  "comfortable": -4,
+  "compact": -6,
+) !default;
+$chip-icon-density: (
+  "default": 3,
+  "comfortable": 0,
+  "compact": -2,
+) !default;
+
+$chip-height: 36px !default;
+$chip-font-size: map-deep-get($typography, "button", "size") !default;
+$chip-width-ratio: 16/9 !default;
+$chip-padding-ratio: 2.25 !default;
+
+$chip-sizes: () !default;
+$chip-sizes: map-merge(
+  (
+    "height": $chip-height,
+    "font-size": $chip-font-size,
+    "width-ratio": $chip-width-ratio,
+    "padding-ratio": $chip-padding-ratio,
+  ),
+  $chip-sizes
+);
