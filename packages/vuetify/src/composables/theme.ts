@@ -96,9 +96,9 @@ const defaultThemeOptions: ThemeOptions = {
         secondary: '#03DAC6',
         'secondary-darken-1': '#018786',
         error: '#B00020',
-        info: '#006AFF',
-        success: '#008A00',
-        warning: '#AF6400',
+        info: '#2196F3',
+        success: '#4CAF50',
+        warning: '#FB8C00',
       },
       variables: {
         'border-color': '#000000',
@@ -106,12 +106,6 @@ const defaultThemeOptions: ThemeOptions = {
         'high-emphasis-opacity': 0.87,
         'medium-emphasis-opacity': 0.60,
         'disabled-opacity': 0.38,
-        'activated-opacity': 0.12,
-        'hover-opacity': 0.04,
-        'focus-opacity': 0.12,
-        'selected-opacity': 0.08,
-        'dragged-opacity': 0.08,
-        'pressed-opacity': 0.16,
         'kbd-background-color': '#212529',
         'kbd-color': '#FFFFFF',
         'code-background-color': '#C2C2C2',
@@ -137,12 +131,6 @@ const defaultThemeOptions: ThemeOptions = {
         'high-emphasis-opacity': 0.87,
         'medium-emphasis-opacity': 0.60,
         'disabled-opacity': 0.38,
-        'activated-opacity': 0.12,
-        'hover-opacity': 0.04,
-        'focus-opacity': 0.12,
-        'selected-opacity': 0.08,
-        'dragged-opacity': 0.08,
-        'pressed-opacity': 0.16,
         'kbd-background-color': '#212529',
         'kbd-color': '#FFFFFF',
         'code-background-color': '#B7B7B7',
@@ -184,7 +172,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
         if (/on-[a-z]/.test(color) || theme.colors[`on-${color}`]) continue
 
         const onColor = `on-${color}` as keyof OnColors
-        theme.colors[onColor] = intToHex(getLuma(theme.colors[color]!) > 0.20 ? 0x0 : 0xffffff)
+        theme.colors[onColor] = intToHex(getLuma(theme.colors[color]!) > 0.18 ? 0x0 : 0xffffff)
       }
 
       obj[key] = theme as InternalThemeDefinition
