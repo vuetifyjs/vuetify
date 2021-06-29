@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.0.0-alpha.3",
+  "version": "3.0.0-alpha.7",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -33,7 +33,7 @@
   "module": "lib/entry.mjs",
   "jsdelivr": "dist/vuetify.js",
   "unpkg": "dist/vuetify.js",
-  "types": "types/index.d.ts",
+  "types": "lib/entry.d.ts",
   "sideEffects": [
     "*.sass",
     "*.scss",
@@ -42,15 +42,16 @@
   ],
   "files": [
     "dist/",
-    "lib/",
-    "types/"
+    "lib/"
   ],
   "scripts": {
     "watch": "cross-env TARGET=development webpack --config build/config.js --progress --watch",
-    "dev": "cross-env NODE_ENV=development webpack serve --config build/webpack.dev.config.js --hot",
-    "build": "concurrently \"yarn build:dist\" \"yarn build:lib\" -n \"dist,lib\" --kill-others-on-fail -r",
+    "dev": "cross-env NODE_ENV=development vite",
+    "dev:ssr": "cross-env NODE_ENV=development vite-ssr",
+    "build": "concurrently \"yarn build:dist\" \"yarn build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && yarn build:types",
     "build:dist": "rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress",
     "build:json": "node build/build-json.js",
+    "build:types": "rimraf types-temp && tsc --pretty --emitDeclarationOnly -p tsconfig.dist.json && rollup --config build/rollup.config.js && rimraf types-temp",
     "tsc": "tsc",
     "build:lib": "node build/build-lib.js",
     "debug:test": "cross-env NODE_ENV=test node --inspect --inspect-brk ../../node_modules/jest/bin/jest.js --no-cache -i --verbose",
@@ -58,7 +59,6 @@
     "test:unix": "cross-env NODE_ENV=test jest",
     "test:win32": "cross-env NODE_ENV=test jest -i",
     "test:coverage": "yarn test --coverage",
-    "test:types": "tsc -p ./types/test/tsconfig.json",
     "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\"",
     "cy:open": "cypress open-ct",
@@ -66,16 +66,20 @@
   },
   "devDependencies": {
     "@cypress/vue": "^3.0.1",
-    "@cypress/webpack-dev-server": "1.1.5",
+    "@cypress/webpack-dev-server": "^1.3.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/vue-fontawesome": "^3.0.0-3",
     "@mdi/font": "^5.9.55",
+    "@rollup/plugin-alias": "^3.1.2",
     "@types/jest": "^26.0.14",
     "@types/node": "^14.11.10",
     "@types/resize-observer-browser": "^0.1.5",
-    "@vue/babel-plugin-jsx": "^1.0.3",
+    "@vitejs/plugin-vue": "^1.2.3",
+    "@vitejs/plugin-vue-jsx": "^1.1.5",
+    "@vue/babel-plugin-jsx": "^1.0.6",
     "@vue/test-utils": "2.0.0-beta.13",
+    "@vueuse/head": "^0.6.0",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",
     "babel-plugin-add-import-extension": "^1.5.1",
@@ -84,27 +88,31 @@
     "babel-polyfill": "^6.26.0",
     "concurrently": "^4.1.1",
     "cssnano": "^4.1.10",
-    "cypress": "7.2.0",
+    "cypress": "^7.4.0",
     "deepmerge": "^4.2.2",
     "dotenv": "^8.0.0",
+    "eslint-plugin-cypress": "^2.11.3",
     "eslint-plugin-jest": "^24.1.0",
-    "file-loader": "^6.1.1",
+    "file-loader": "^6.2.0",
     "fork-ts-checker-webpack-plugin": "^5.2.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "5.3.1",
     "identity-obj-proxy": "^3.0.0",
     "jest-canvas-mock": "^2.3.0",
-    "mini-css-extract-plugin": "^1.1.2",
-    "optimize-css-assets-webpack-plugin": "^5.0.4",
-    "postcss-loader": "^4.0.4",
+    "mini-css-extract-plugin": "^1.6.0",
+    "postcss-loader": "^5.2.0",
+    "rollup": "^2.52.1",
+    "rollup-plugin-dts": "^3.0.2",
     "style-loader": "^2.0.0",
-    "stylus": "^0.54.8",
-    "url-loader": "^2.1.0",
+    "url-loader": "^4.1.1",
+    "vite": "^2.3.8",
+    "vite-ssr": "^0.10.5",
     "vue-meta": "^2.4.0",
-    "vuetify-loader": "^1.3.0"
+    "vue-router": "^4.0.10",
+    "vuetify-loader": "^1.7.2"
   },
   "peerDependencies": {
-    "vue": "^3.0.7"
+    "vue": "^3.1.1"
   },
   "publishConfig": {
     "access": "public"

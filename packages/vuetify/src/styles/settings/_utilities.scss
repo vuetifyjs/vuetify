@@ -437,6 +437,15 @@ $utilities: map-deep-merge(
       class: text,
       values: (break: break-word)
     ),
+    "text-opacity": (
+      property: opacity,
+      class: text,
+      values: (
+        high-emphasis: var(--v-high-emphasis-opacity),
+        medium-emphasis: var(--v-medium-emphasis-opacity),
+        disabled: var(--v-disabled-opacity)
+      )
+    ),
     "text-overflow": (
       property: white-space overflow text-overflow,
       class: text,

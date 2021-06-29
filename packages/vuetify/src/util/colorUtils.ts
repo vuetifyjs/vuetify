@@ -5,7 +5,7 @@ import * as sRGB from '@/util/color/transformSRGB'
 import * as CIELAB from '@/util/color/transformCIELAB'
 
 // Types
-import type { VuetifyThemeVariant } from 'types/services/theme'
+import type { ThemeDefinition } from '@/composables/theme'
 
 export type ColorInt = number
 export type XYZ = [number, number, number]
@@ -56,7 +56,7 @@ export function colorToInt (color: Color): ColorInt {
 export function classToHex (
   color: string,
   colors: Record<string, Record<string, string>>,
-  currentTheme: Partial<VuetifyThemeVariant>,
+  currentTheme: Partial<ThemeDefinition['colors']>,
 ): string {
   const [colorName, colorModifier] = color
     .toString().trim().replace('-', '').split(' ', 2) as (string | undefined)[]
@@ -223,7 +223,7 @@ export function parseHex (hex: string): Hex {
 export function parseGradient (
   gradient: string,
   colors: Record<string, Record<string, string>>,
-  currentTheme: Partial<VuetifyThemeVariant>,
+  currentTheme: Partial<ThemeDefinition['colors']>,
 ) {
   return gradient.replace(/([a-z]+(\s[a-z]+-[1-5])?)(?=$|,)/gi, x => {
     return classToHex(x, colors, currentTheme) || x

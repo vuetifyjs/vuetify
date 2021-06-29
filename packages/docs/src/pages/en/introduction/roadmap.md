@@ -62,6 +62,17 @@ The following versions have continued maintenance for backwards compatible fixes
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
 
+### v2.5 (Avalon)
+
+- **Released:** May 2021
+- **Notes:**: [v2.5 Release](https://github.com/vuetifyjs/vuetify/releases/tag/v2.5.0)
+- **Overview:**
+  The v2.5 release adds a multitude of new functionality to [v-data-table](/components/data-tables/) and [v-text-field](/components/text-fields/), as well as bug fixes for the [click-outside](/directives/click-outside/) directive, [v-carousel](/components/carousels/) component, and more.
+- **Objectives:**
+  - Expand functionality of `v-data-table`
+  - Quality of life improvements
+  - General bug fixes
+
 ### v2.4 (Endurance)
 
 - **Released:** December 2020

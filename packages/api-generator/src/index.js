@@ -39,7 +39,7 @@ const loadMap = (componentName, group, fallback = {}) => {
 const getSources = api => {
   return ['props', 'events', 'slots'].reduce((arr, category) => {
     for (const item of api[category]) {
-      if (!arr.includes(item.source)) arr.push(item.source)
+      if (item.source && !arr.includes(item.source)) arr.push(item.source)
     }
     return arr
   }, [])
@@ -167,7 +167,7 @@ const getComponentApi = (componentName, locales) => {
     componentMap[category] = sortBy(componentMap[category], 'name')
   }
 
-  return addComponentApiDescriptions(componentName, api, locales)
+  return addComponentApiDescriptions(kebabName, api, locales)
 }
 
 const getComposableApi = (composableName, locales) => {

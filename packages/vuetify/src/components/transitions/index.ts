@@ -14,7 +14,6 @@ export const VMenuTransition = createCssTransition('menu-transition')
 export const VFabTransition = createCssTransition('fab-transition', 'center center', 'out-in')
 
 // Generic transitions
-export const VDialogTransition = createCssTransition('dialog-transition')
 export const VDialogBottomTransition = createCssTransition('dialog-bottom-transition')
 export const VDialogTopTransition = createCssTransition('dialog-top-transition')
 export const VFadeTransition = createCssTransition('fade-transition')
@@ -31,3 +30,5 @@ export const VSlideYReverseTransition = createCssTransition('slide-y-reverse-tra
 // Javascript transitions
 export const VExpandTransition = createJavascriptTransition('expand-transition', ExpandTransitionGenerator())
 export const VExpandXTransition = createJavascriptTransition('expand-x-transition', ExpandTransitionGenerator('', true))
+
+export { default as VDialogTransition } from './dialog-transition'

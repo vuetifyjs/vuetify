@@ -20,7 +20,7 @@ exports[`useProxiedModel should always use prop value if defined 3`] = `
 
 exports[`useProxiedModel should switch to using prop when it is defined 1`] = `
 <div>
-  ,syncDefaultValue
+  ,
 </div>
 `;
 
@@ -38,7 +38,7 @@ exports[`useProxiedModel should switch to using prop when it is defined 3`] = `
 
 exports[`useProxiedModel should use default prop value as first value if defined 1`] = `
 <div>
-  propDefaultValue,syncDefaultValue
+  propDefaultValue,propDefaultValue
 </div>
 `;
 
@@ -50,7 +50,7 @@ exports[`useProxiedModel should use default prop value as first value if defined
 
 exports[`useProxiedModel should use internal value if prop not defined 1`] = `
 <div>
-  ,syncDefaultValue
+  ,
 </div>
 `;
 

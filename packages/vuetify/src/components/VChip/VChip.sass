@@ -17,3 +17,139 @@
 
   &--rounded
     @include rounded($chip-rounded-border-radius)
+
+  .v-avatar,
+  .v-icon
+    +ltr()
+      &--left
+        margin-left: $chip-icon-margin-before
+        margin-right: $chip-icon-margin-after
+
+      &--right
+        margin-left: $chip-icon-margin-after
+        margin-right: $chip-icon-margin-before
+
+    +rtl()
+      &--left
+        margin-left: $chip-icon-margin-after
+        margin-right: $chip-icon-margin-before
+
+      &--right
+        margin-left: $chip-icon-margin-before
+        margin-right: $chip-icon-margin-after
+
+  &:not(.v-chip--no-color)
+    .v-icon
+      color: inherit
+
+// Elements
+.v-chip
+  .v-chip__close.v-icon
+    font-size: $chip-close-size
+    max-height: $chip-close-size
+    max-width: $chip-close-size
+    user-select: none
+
+    &.v-icon--right
+      +ltr()
+        margin-right: $chip-icon-right-margin-after
+
+      +rtl()
+        margin-left: $chip-icon-right-margin-after
+
+    &:hover,
+    &:focus,
+    &:active
+      opacity: .72
+
+  .v-chip__content
+    align-items: center
+    display: inline-flex
+    height: 100%
+    max-width: 100%
+
+// Modifiers
+.v-chip--active
+  .v-icon
+    color: inherit
+
+.v-chip--link
+  &::before
+    transition: opacity $primary-transition
+
+  &:focus::before
+    opacity: $chip-link-focus-opacity
+
+.v-chip--clickable
+  cursor: pointer
+  user-select: none
+
+  &:active
+    +elevation(2)
+
+.v-chip--disabled
+  opacity: $chip-disabled-opacity
+  pointer-events: none
+  user-select: none
+
+.v-chip__filter
+  // TODO: Figure out why the absence
+  // of this breaks the transition
+  max-width: $chip-filter-max-width
+
+  // Increase specificity to
+  // overwrite theme style
+  &.v-icon
+    color: inherit
+
+  &.expand-x-transition-leave-active,
+  &.expand-x-transition-enter
+    margin: 0
+
+.v-chip--pill
+  .v-chip__filter
+    margin-right: $chip-pill-filter-margin
+
+  .v-avatar
+    height: $chip-pill-avatar-size !important
+    width: $chip-pill-avatar-size !important
+
+  .v-avatar
+    +ltr()
+      &--left
+        margin-left: $chip-pill-avatar-margin-before
+
+      &--right
+        margin-right: $chip-pill-avatar-margin-before
+
+    +rtl()
+      &--left
+        margin-right: $chip-pill-avatar-margin-before
+
+      &--right
+        margin-left: $chip-pill-avatar-margin-before
+
+.v-chip--label
+  border-radius: $chip-label-border-radius !important
+
+.v-chip.v-chip--outlined
+  border-width: $icon-outlined-border-width
+  border-style: solid
+
+  &.v-chip--active:before
+    opacity: $chip-outlined-active-opacity
+
+  .v-icon
+    color: inherit
+
+  // Needs increased specificity
+  &.v-chip.v-chip
+    background-color: transparent !important
+
+// Needs increased specificity
+// to overwrite theme color
+.v-chip.v-chip--selected
+  background: transparent
+
+  &:after
+    opacity: $chip-selected-opacity

@@ -1,8 +1,10 @@
+// Composables
+import { useDefaults } from '@/composables/defaults'
+
 // Utilities
 import { getCurrentInstance } from 'vue'
 import { wrapInArray } from './helpers'
 import { consoleWarn } from './console'
-import { useVuetify } from '@/framework'
 
 // Types
 import type { Prop } from 'vue'
@@ -46,9 +48,9 @@ function generateDefault (propName: string, localDefault: any, type: any) {
       return localDefault
     }
 
-    const vuetify = useVuetify()
-    const globalDefault = vuetify.defaults.global[propName]
-    const componentDefault = vuetify.defaults[vm.type.name]?.[propName]
+    const defaults = useDefaults()
+    const globalDefault = defaults.value.global?.[propName]
+    const componentDefault = defaults.value[vm.type.name]?.[propName]
     const actualDefault = typeof componentDefault !== 'undefined'
       ? componentDefault
       : typeof globalDefault !== 'undefined'

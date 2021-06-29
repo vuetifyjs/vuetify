@@ -41,19 +41,28 @@
     "icon": "$mdiViewDashboardOutline:$mdiViewDashboard",
     "group": "components",
     "items": [
-      "application",
       "app-bars",
+      "application",
       "aspect-ratios",
       "badges",
       "banners",
       "buttons",
-      "floating-action-buttons",
+      "cards",
+      "defaults-providers",
+      "dialogs",
       "dividers",
+      "floating-action-buttons",
       "footer",
       "grids",
       "icons",
       "images",
-      "sheets"
+      "item-groups",
+      "lazy",
+      "lists",
+      "overlays",
+      "ratings",
+      "sheets",
+      "theme-providers"
     ]
   },
   {

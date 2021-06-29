@@ -1,3 +1,5 @@
+import { expect } from '@jest/globals'
+
 // From Vue, slightly modified
 function noop () { }
 

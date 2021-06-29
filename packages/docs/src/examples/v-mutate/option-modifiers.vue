@@ -16,7 +16,7 @@
             <v-card>
               <v-card-title>Card 1</v-card-title>
 
-              <div class="title text-center pb-3">
+              <div class="text-h6 text-center pb-3">
                 Times Mutated: {{ card1 }}
               </div>
 
@@ -39,7 +39,7 @@
             <v-card>
               <v-card-title>Card 2 (w/ once modifier)</v-card-title>
 
-              <div class="title text-center pb-3">
+              <div class="text-h6 text-center pb-3">
                 Times Mutated: {{ card2 }}
               </div>
 

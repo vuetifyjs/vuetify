@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 import { defineComponent } from 'vue'
 
 // Directives
@@ -57,7 +58,7 @@ describe('v-ripple', () => {
     expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
   })
 
-  it.each(['enter', 'space'] as const)('should trigger ripple on %s key press', key => {
+  it.each(['enter', 'space'])('should trigger ripple on %s key press', (key: 'enter' | 'space') => {
     jest.useFakeTimers()
     const wrapper = mount(testComponent)
 

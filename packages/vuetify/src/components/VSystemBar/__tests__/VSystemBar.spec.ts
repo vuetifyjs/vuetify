@@ -2,19 +2,16 @@
 import { VSystemBar } from '..'
 
 // Utilities
-import { createTheme, VuetifyThemeSymbol } from '@/composables/theme'
+import { createVuetify } from '@/framework'
 import { mount } from '@vue/test-utils'
-import { VuetifySymbol } from '@/framework'
+import { describe, expect, it } from '@jest/globals'
 
 describe('VSystemBar', () => {
+  const vuetify = createVuetify()
+
   function mountFunction (options = {}) {
     return mount(VSystemBar, {
-      global: {
-        provide: {
-          [VuetifySymbol as symbol]: { defaults: { global: {} } },
-          [VuetifyThemeSymbol as symbol]: createTheme(),
-        },
-      },
+      global: { plugins: [vuetify] },
       ...options,
     })
   }

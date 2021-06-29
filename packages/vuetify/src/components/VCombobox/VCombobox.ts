@@ -226,7 +226,15 @@ export default VAutocomplete.extend({
         return this.updateEditing()
       }
 
-      const index = this.selectedItems.indexOf(this.internalSearch)
+      const index = this.selectedItems.findIndex(item =>
+        this.internalSearch === this.getText(item))
+
+      // If the duplicate item is an object,
+      // copy it, so that it can be added again later
+      const itemToSelect = index > -1 && typeof this.selectedItems[index] === 'object'
+        ? Object.assign({}, this.selectedItems[index])
+        : this.internalSearch
+
       // If it already exists, do nothing
       // this might need to change to bring
       // the duplicated item to the last entered
@@ -242,7 +250,8 @@ export default VAutocomplete.extend({
       // TODO: find out where
       if (menuIndex > -1) return (this.internalSearch = null)
 
-      this.selectItem(this.internalSearch)
+      this.selectItem(itemToSelect)
+
       this.internalSearch = null
     },
     onPaste (event: ClipboardEvent) {

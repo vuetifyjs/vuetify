@@ -8,12 +8,12 @@ import { useIcon } from '@/composables/icons'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, ComputedRef, defineComponent, toRef } from 'vue'
+import { computed, defineComponent, toRef } from 'vue'
 import { convertToUnit, flattenFragments, makeProps } from '@/util'
 
 // Types
 import type { IconValue } from '@/composables/icons'
-import type { PropType } from 'vue'
+import type { ComputedRef, PropType } from 'vue'
 
 export default defineComponent({
   name: 'VIcon',

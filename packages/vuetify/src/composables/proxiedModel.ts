@@ -7,9 +7,9 @@ import type { Ref } from 'vue'
 
 // Composables
 export function useProxiedModel<
-  Inner,
   Props extends object,
   Prop extends Extract<keyof Props, string>,
+  Inner = Props[Prop],
 > (
   props: Props,
   prop: Prop,
@@ -28,7 +28,7 @@ export function useProxiedModel<
     )
   })
 
-  const internal = ref(transformIn(propIsDefined.value ? props[prop] : defaultValue)) as Ref<Inner>
+  const internal = ref(transformIn(props[prop])) as Ref<Inner>
 
   return computed<Inner>({
     get () {

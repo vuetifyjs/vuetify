@@ -2,28 +2,21 @@
 import { VResponsive } from '..'
 
 // Utilities
+import { createVuetify } from '@/framework'
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { VuetifySymbol } from '@/framework'
-
-const globalOptions = {
-  provide: {
-    [VuetifySymbol as symbol]: {
-      defaults: {
-        global: {},
-      },
-    },
-  },
-}
-
-function mountFunction (options = {}) {
-  return mount(VResponsive, {
-    ...options,
-    global: globalOptions,
-  })
-}
+import { describe, expect, it } from '@jest/globals'
 
 describe('VResponsive', () => {
+  const vuetify = createVuetify()
+
+  function mountFunction (options = {}) {
+    return mount(VResponsive, {
+      global: { plugins: [vuetify] },
+      ...options,
+    })
+  }
+
   it('should force aspect ratio', () => {
     const wrapper = mountFunction({
       propsData: { aspectRatio: 16 / 9 },

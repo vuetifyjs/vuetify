@@ -1,0 +1,12 @@
+{
+  "props": {
+    "modelValue": "Represents the selected item(s). Will be an array if **multiple** prop is used.",
+    "mandatory": "Forces at least one item to always be selected (if available).",
+    "max": "Sets a maximum number of selections that can be made.",
+    "multiple": "Allows one to select mulitple items.",
+    "selectedClass": "Configure the selected CSS class."
+  },
+  "events": {
+    "update:modelValue": "Emitted when selection changes"
+  }
+}

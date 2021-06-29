@@ -14,7 +14,7 @@
 
 <script>
   // Imports
-  import 'markdown-it-prism'
+  import 'prismjs'
   import 'prismjs/themes/prism.css'
   import 'prismjs/components/prism-bash'
   import 'prismjs/components/prism-css'

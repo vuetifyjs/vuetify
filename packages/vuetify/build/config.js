@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 const base = require('./webpack.prod.config')
 
@@ -34,15 +34,12 @@ const builds = {
     },
     optimization: {
       minimizer: [
-        new OptimizeCssAssetsPlugin({
-          assetNameRegExp: /\.css$/g,
-          cssProcessor: require('cssnano'),
-          cssProcessorOptions: {
+        new CssMinimizerPlugin({
+          minimizerOptions: {
             discardComments: { removeAll: true },
             postcssZindex: false,
             reduceIdents: false
           },
-          canPrint: false
         })
       ],
     },

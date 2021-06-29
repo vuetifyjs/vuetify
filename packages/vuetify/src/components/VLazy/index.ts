@@ -1,4 +1,1 @@
-import VLazy from './VLazy'
-
-export { VLazy }
-export default VLazy
+export { default as VLazy } from './VLazy'

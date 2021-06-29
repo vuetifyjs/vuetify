@@ -1,30 +1,33 @@
 // Styles
 import './VChip.sass'
 
+// Components
+import { VIcon } from '@/components/VIcon'
+
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeRouterProps, useLink } from '@/composables/router'
+import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
-import { useColor } from '@/composables/color'
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
-import { Ripple, RippleDirectiveBinding } from '@/directives/ripple'
+import { Ripple } from '@/directives/ripple'
 
-// Components
-import VIcon from '@/components/VIcon/VIcon'
 // import { VExpandXTransition } from '../transitions'
 
 // Utilities
-import { computed, defineComponent, withDirectives } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { makeProps } from '@/util/makeProps'
-import { useDirective } from '@/util/useDirective'
-import { makeSizeProps, useSize } from '@/composables/size'
 
 export default defineComponent({
   name: 'VChip',
+
+  directives: { Ripple },
 
   props: makeProps({
     active: {
@@ -44,7 +47,6 @@ export default defineComponent({
       type: String,
       default: '$vuetify.close',
     },
-    color: String,
     disabled: Boolean,
     draggable: Boolean,
     filter: Boolean,
@@ -54,35 +56,44 @@ export default defineComponent({
     },
     label: Boolean,
     link: Boolean,
-    ripple: Boolean,
+    outlined: Boolean,
+    ripple: {
+      type: Boolean,
+      default: true,
+    },
     textColor: String,
     value: null as any,
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
     ...makeRoundedProps(),
+    ...makeRouterProps(),
     ...makeSizeProps(),
-    ...makeTagProps({ tag: 'button' }),
+    ...makeTagProps({ tag: 'span' }),
+    ...makeThemeProps(),
+    ...makeVariantProps({ variant: 'contained' } as const),
   }),
 
   emits: {
     'click:close': (e: Event) => e,
     'update:active': (value: Boolean) => value
   },
-  setup (props, { slots, emit }) {
-    const { themeClasses } = useTheme()
+  setup (props, { attrs, emit, slots }) {
+    const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-chip')
+    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-chip')
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props, 'v-chip')
     const { sizeClasses } = useSize(props, 'v-chip')
     const { densityClasses } = useDensity(props, 'v-chip')
+    const link = useLink(props, attrs)
 
-    const isContained = computed(() => {
-      return !(props.outlined)
-    })
+    // const isContained = computed(() => {
+    //   return !(props.outlined)
+    // })
 
     const isElevated = computed(() => {
-      return isContained.value && !(props.disabled)
+      return props.variant === 'contained' && !(props.disabled || props.flat || props.border)
     })
 
     const hasClose = computed(() => {
@@ -98,74 +109,79 @@ export default defineComponent({
       emit('update:active', false)
     }
 
-    const { colorClasses, colorStyles } = useColor(computed(() => ({
-      [isContained.value ? 'background' : 'text']: props.color,
-    })))
+    return () => {
+      const Tag = (link.isLink.value) ? 'a' : props.tag
 
-    return () => withDirectives(
-      <props.tag
-        class={[
-          'v-chip',
+      return (
+        <Tag
+          type={Tag === 'a' ? undefined : 'button' }
+          class={[
+            'v-chip',
+            {
+              'v-chip--clickable': isClickable.value,
+              'v-chip--disabled': props.disabled,
+              'v-chip--elevated': isElevated.value,
+              'v-chip--draggable': props.draggable,
+              'v-chip--label': props.label,
+              // 'v-chip--link': props.isLink,
+              'v-chip--no-color': !props.color,
+              'v-chip--outlined': props.outlined,
+              // 'v-chip--pill': props.pill,
+              'v-chip--removable': hasClose.value,
+            },
+            themeClasses.value,
+            borderClasses.value,
+            colorClasses.value,
+            densityClasses.value,
+            elevationClasses.value,
+            roundedClasses.value,
+            sizeClasses.value,
+            variantClasses.value,
+          ]}
+          style={[
+            colorStyles.value,
+          ]}
+          disabled={ props.disabled || undefined }
+          draggable={ props.draggable }
+          href={ link.href.value }
+          v-ripple={[
+            !props.disabled && props.ripple,
+            null
+          ]}
+          onClick={ props.disabled || link.navigate }
+        >
           {
-            'v-chip--clickable': isClickable.value,
-            'v-chip--contained': isContained.value,
-            'v-chip--disabled': props.disabled,
-            'v-chip--elevated': isElevated.value,
-            'v-chip--draggable': props.draggable,
-            'v-chip--label': props.label,
-            // 'v-chip--link': props.isLink,
-            'v-chip--no-color': !props.color,
-            'v-chip--outlined': props.outlined,
-            // 'v-chip--pill': props.pill,
-            'v-chip--removable': hasClose.value,
-          },
-          themeClasses.value,
-          borderClasses.value,
-          colorClasses.value,
-          densityClasses.value,
-          elevationClasses.value,
-          roundedClasses.value,
-          sizeClasses.value,
-        ]}
-        style={[
-          colorStyles.value,
-        ]}
-        disabled={ props.disabled }
-        draggable={ props.draggable }
-      >
-        {
-          props.filter && (
-            <VIcon
-              icon={props.filterIcon}
-              class="v-chip__filter"
-              props={{
-                left: true,
-              }}
-            />
-          )
-        }
+            props.filter && (
+              <VIcon
+                icon={props.filterIcon}
+                class="v-chip__filter"
+                props={{
+                  left: true,
+                }}
+              />
+            )
+          }
+          { genOverlays(true, 'v-chip') }
 
-        { slots.default?.() }
+          { slots.default?.() }
 
-        {
-          props.close && (
-            <VIcon
-              onClick={close}
-              icon={props.closeIcon}
-              class="v-chip__close"
-              aria-label={props.closeLabel}
-              props={{
-                right: true,
-                size: 18,
-              }}
-            />
-          )
-        }
-      </props.tag>,
-      [useDirective<RippleDirectiveBinding>(Ripple, {
-        value: props.ripple && !props.disabled,
-      })]
-    )
+          {
+            props.close && (
+              <VIcon
+                onClick={close}
+                icon={props.closeIcon}
+                class="v-chip__close"
+                aria-label={props.closeLabel}
+                props={{
+                  right: true,
+                  size: 18,
+                }}
+              />
+            )
+          }
+        </Tag>
+      )
+    }
   },
 })
 

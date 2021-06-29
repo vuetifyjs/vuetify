@@ -7,7 +7,10 @@ module.exports = {
       },
       {
         name: 'icon',
-        props: undefined,
+        props: {
+          icon: 'string',
+          iconColor: 'string',
+        },
       },
       {
         name: 'opposite',

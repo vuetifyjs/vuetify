@@ -1,7 +1,9 @@
 @mixin rtl()
+  &.v-locale--is-rtl,
   .v-locale--is-rtl &
     @content
 
 @mixin ltr()
+  &.v-locale--is-ltr,
   .v-locale--is-ltr &
     @content

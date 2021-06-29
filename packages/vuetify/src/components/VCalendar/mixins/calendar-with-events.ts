@@ -29,6 +29,7 @@ import {
   isEventStart,
   isEventOn,
   isEventOverlapping,
+  isEventHiddenOn,
 } from '../util/events'
 import {
   CalendarTimestamp,
@@ -174,23 +175,25 @@ export default CalendarBase.extend({
 
         const parentBounds = parent.getBoundingClientRect()
         const last = events.length - 1
-        let hide = false
+        const eventsSorted = events.map(event => ({
+          event,
+          bottom: event.getBoundingClientRect().bottom,
+        })).sort((a, b) => a.bottom - b.bottom)
         let hidden = 0
 
         for (let i = 0; i <= last; i++) {
-          if (!hide) {
-            const eventBounds = events[i].getBoundingClientRect()
-            hide = i === last
-              ? (eventBounds.bottom > parentBounds.bottom)
-              : (eventBounds.bottom + eventHeight > parentBounds.bottom)
-          }
+          const bottom = eventsSorted[i].bottom
+          const hide = i === last
+            ? (bottom > parentBounds.bottom)
+            : (bottom + eventHeight > parentBounds.bottom)
+
           if (hide) {
-            events[i].style.display = 'none'
+            eventsSorted[i].event.style.display = 'none'
             hidden++
           }
         }
 
-        if (hide) {
+        if (hidden) {
           more.style.display = ''
           more.innerHTML = this.$vuetify.lang.t(this.eventMoreText, hidden)
         } else {
@@ -270,7 +273,7 @@ export default CalendarBase.extend({
       })
     },
     genTimedEvent ({ event, left, width }: CalendarEventVisual, day: CalendarDayBodySlotScope): VNode | false {
-      if (day.timeDelta(event.end) <= 0 || day.timeDelta(event.start) >= 1) {
+      if (day.timeDelta(event.end) < 0 || day.timeDelta(event.start) >= 1 || isEventHiddenOn(event, day)) {
         return false
       }
 
@@ -385,7 +388,7 @@ export default CalendarBase.extend({
           value: this.eventRipple ?? true,
         }],
         on: {
-          click: () => this.$emit('click:more', day),
+          click: (e: MouseEvent) => this.$emit('click:more', day, e),
         },
         style: {
           display: 'none',
@@ -408,6 +411,7 @@ export default CalendarBase.extend({
       return !this.categoryMode ||
         (typeof category === 'object' && category.categoryName &&
         category.categoryName === event.category) ||
+        (typeof event.category === 'string' && category === event.category) ||
         (typeof event.category !== 'string' && category === null)
     },
     getEventsForDay (day: CalendarDaySlotScope): CalendarEventParsed[] {
@@ -430,7 +434,6 @@ export default CalendarBase.extend({
     },
     getEventsForDayTimed (day: CalendarDaySlotScope): CalendarEventParsed[] {
       const identifier = getDayIdentifier(day)
-
       return this.parsedEvents.filter(
         event => !event.allDay &&
           isEventOn(event, identifier) &&

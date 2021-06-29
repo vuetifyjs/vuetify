@@ -1,22 +1,24 @@
 {
   "props": {
-    "backgroundColor": "The color used empty icons",
-    "clearable": "Allows for the component to be cleared. Triggers when the icon containing the current value is clicked.",
-    "dense": "Icons have a smaller size",
+    "backgroundColor": "The color used for empty items",
+    "clearable": "Allows for the component to be cleared by clicking on the current value",
     "emptyIcon": "The icon displayed when empty",
     "fullIcon": "The icon displayed when full",
     "halfIcon": "The icon displayed when half (requires **half-increments** prop)",
     "halfIncrements": "Allows the selection of half increments",
     "hover": "Provides visual feedback when hovering over icons",
-    "iconLabel": "The **aria-label** used for icons",
-    "length": "The amount of ratings to show",
+    "ariaLabel": "The **aria-label** used for each item",
+    "length": "The amount of items to show",
     "readonly": "Removes all hover effects and pointer events",
-    "value": "The rating value"
+    "modelValue": "The rating value",
+    "itemLabels": "Array of labels to display next to each item.",
+    "itemLabelPosition": "Position of item labels. Accepts 'top' and 'bottom'."
   },
   "slots": {
-    "item": "The slot for rendered items"
+    "item": "The slot for each item",
+    "item-label": "The slot for each item label"
   },
   "events": {
-    "input": "Emits the rating number when this value changes"
+    "update:modelValue": "Emits the rating number when this value changes"
   }
 }

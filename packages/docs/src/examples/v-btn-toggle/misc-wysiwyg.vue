@@ -77,7 +77,7 @@
         <v-col
           v-for="n in numbers"
           :key="n"
-          class="caption grey--text text--darken-1"
+          class="text-caption grey--text text--darken-1"
           v-text="n"
         ></v-col>
       </v-row>
@@ -86,7 +86,7 @@
         <v-col
           v-for="l in letters"
           :key="l"
-          class="title grey--text font-weight-regular text--darken-2"
+          class="text-h6 grey--text font-weight-regular text--darken-2"
           v-text="l"
         ></v-col>
       </v-row>
