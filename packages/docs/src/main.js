@@ -11,7 +11,7 @@ import { createI18n } from '@/i18n'
 import { sync } from 'vuex-router-sync'
 
 // Service Worker
-import './registerServiceWorker'
+// import './registerServiceWorker'
 
 // Application
 import App from './App.vue'
