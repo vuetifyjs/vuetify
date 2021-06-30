@@ -18,9 +18,10 @@ describe('VBreadcrumbs', () => {
 
   it.each([
     ['item'],
+    ['divider'],
   ])('should generate slot content', slot => {
     const wrapper = mountFunction({
-      props: { items: ['fizzbuzz'] },
+      props: { items: ['fizz', 'buzz'] },
       slots: { [slot]: '<div>foobar</div>' },
     })
 

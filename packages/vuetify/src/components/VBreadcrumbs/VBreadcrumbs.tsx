@@ -96,7 +96,9 @@ export default defineComponent({
             </VBreadcrumbsItem>
 
             { index < props.items.length - 1 && (
-              <VBreadcrumbsDivider>{ props.divider }</VBreadcrumbsDivider>
+              <VBreadcrumbsDivider>
+                { slots.divider ? slots.divider({ item, index }) : props.divider }
+              </VBreadcrumbsDivider>
             ) }
           </>
         )) }
