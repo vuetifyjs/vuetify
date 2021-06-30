@@ -3,37 +3,36 @@ $chip-background-color: rgba(
   var(--v-border-color),
   var(--v-border-opacity)
 ) !default;
-$chip-border-color: $border-color-root !default;
-$chip-border-radius: map-get($rounded, "pill") !default;
-$chip-border-style: $border-style-root !default;
-$chip-border-thin-width: thin !default;
-$chip-border-width: 0 !default;
-$chip-elevation: 0 !default;
-$chip-rounded-border-radius: $border-radius-root !default;
-
 $chip-border: (
   $chip-border-color,
   $chip-border-style,
   $chip-border-width
 ) !default;
-
+$chip-border-color: $border-color-root !default;
+$chip-border-radius: map-get($rounded, "pill") !default;
+$chip-border-style: $border-style-root !default;
+$chip-border-thin-width: thin !default;
+$chip-border-width: 0 !default;
+$chip-close-size: 18px !default;
+$chip-density: (
+  "default": 0,
+  "comfortable": -2,
+  "compact": -3,
+) !default;
+$chip-disabled-opacity: 0.3 !default;
+$chip-elevation: 0 !default;
+$chip-filter-max-width: 72px !default;
+$chip-font-size: map-deep-get($typography, "button", "size") !default;
+$chip-height: 36px !default;
+$chip-icon-density: (
+  "default": 3,
+  "comfortable": 0,
+  "compact": -2,
+) !default;
+$chip-icon-font-size: 24px !default;
 $chip-icon-margin-before: 4px !default;
 $chip-icon-margin-after: 4px !default;
-$chip-close-size: 18px !default;
 $chip-icon-right-margin-after: 4px !default;
-$primary-transition: 1s !default;
-$chip-link-focus-opacity: 0.3 !default;
-$chip-disabled-opacity: 0.3 !default;
-$chip-filter-max-width: 72px !default;
-$chip-pill-filter-margin: 4px !default;
-$chip-pill-avatar-size: 18px !default;
-$chip-pill-avatar-margin-before: 4px !default;
-$chip-label-border-radius: 47% !default;
-$icon-outlined-border-width: 2px !default;
-$icon-outlined-active-opacity: 0.6 !default;
-$chip-outlined-active-opacity: 0.6 !default;
-$chip-selected-opacity: 0.8 !default;
-$chip-icon-font-size: 24px !default;
 $chip-icon-size: 48px !default;
 $chip-icon-sizes: () !default;
 $chip-icon-sizes: map-merge(
@@ -43,28 +42,16 @@ $chip-icon-sizes: map-merge(
   ),
   $chip-icon-sizes
 );
-
-$chip-density: (
-  "default": 0,
-  "comfortable": -2,
-  "compact": -3,
-) !default;
-$chip-stacked-density: (
-  "default": 0,
-  "comfortable": -4,
-  "compact": -6,
-) !default;
-$chip-icon-density: (
-  "default": 3,
-  "comfortable": 0,
-  "compact": -2,
-) !default;
-
-$chip-height: 36px !default;
-$chip-font-size: map-deep-get($typography, "button", "size") !default;
-$chip-width-ratio: 16/9 !default;
+$chip-label-border-radius: 47% !default;
+$chip-link-focus-opacity: 0.3 !default;
+$icon-outlined-border-width: 2px !default;
+$icon-outlined-active-opacity: 0.6 !default;
 $chip-padding-ratio: 2.25 !default;
-
+$chip-pill-filter-margin: 4px !default;
+$chip-pill-avatar-size: 18px !default;
+$chip-pill-avatar-margin-before: 4px !default;
+$chip-rounded-border-radius: $border-radius-root !default;
+$chip-selected-opacity: 0.8 !default;
 $chip-sizes: () !default;
 $chip-sizes: map-merge(
   (
@@ -75,3 +62,10 @@ $chip-sizes: map-merge(
   ),
   $chip-sizes
 );
+$chip-stacked-density: (
+  "default": 0,
+  "comfortable": -4,
+  "compact": -6,
+) !default;
+$chip-width-ratio: 16/9 !default;
+$primary-transition: 1s !default;

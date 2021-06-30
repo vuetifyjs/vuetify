@@ -18,8 +18,6 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 // Directives
 import { Ripple } from '@/directives/ripple'
 
-// import { VExpandXTransition } from '../transitions'
-
 // Utilities
 import { computed, defineComponent } from 'vue'
 import { makeProps } from '@/util/makeProps'
@@ -87,10 +85,6 @@ export default defineComponent({
     const { sizeClasses } = useSize(props, 'v-chip')
     const { densityClasses } = useDensity(props, 'v-chip')
     const link = useLink(props, attrs)
-
-    // const isContained = computed(() => {
-    //   return !(props.outlined)
-    // })
 
     const isElevated = computed(() => {
       return props.variant === 'contained' && !(props.disabled || props.border)
@@ -184,52 +178,3 @@ export default defineComponent({
     }
   },
 })
-
-/*
-  data: () => ({
-    proxyClass: 'v-chip--active',
-  }),
-
-  methods: {
-    click (e: MouseEvent): void {
-      this.$emit('click', e)
-
-      this.chipGroup && this.toggle()
-    },
-    genFilter (): VNode {
-      const children = []
-
-      if (this.isActive) {
-        children.push(
-          this.$createElement(VIcon, {
-            staticClass: 'v-chip__filter',
-            props: { left: true },
-          }, this.filterIcon)
-        )
-      }
-
-      return this.$createElement(VExpandXTransition, children)
-    },
-  },
-
-  render (h): VNode {
-    const children = [this.genContent()]
-    let { tag, data } = this.generateRouteLink()
-
-    data.attrs = {
-      ...data.attrs,
-      draggable: this.draggable ? 'true' : undefined,
-      tabindex: this.chipGroup && !this.disabled ? 0 : data.attrs!.tabindex,
-    }
-    data.directives!.push({
-      name: 'show',
-      value: this.active,
-    })
-    data = this.setBackgroundColor(this.color, data)
-
-    const color = this.textColor || (this.outlined && this.color)
-
-    return h(tag, this.setTextColor(color, data), children)
-  },
-})
-*/
