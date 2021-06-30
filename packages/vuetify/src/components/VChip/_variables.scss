@@ -23,16 +23,15 @@ $chip-disabled-opacity: 0.3 !default;
 $chip-elevation: 0 !default;
 $chip-filter-max-width: 72px !default;
 $chip-font-size: map-deep-get($typography, "button", "size") !default;
-$chip-height: 36px !default;
+$chip-height: 36px !default; // Spec 32px?
 $chip-icon-density: (
   "default": 3,
   "comfortable": 0,
   "compact": -2,
 ) !default;
 $chip-icon-font-size: 24px !default;
-$chip-icon-margin-before: 4px !default;
-$chip-icon-margin-after: 4px !default;
-$chip-icon-right-margin-after: 4px !default;
+$chip-icon-margin-before: -10px !default; // neg margin?
+$chip-icon-margin-after: 10px !default;
 $chip-icon-size: 48px !default;
 $chip-icon-sizes: () !default;
 $chip-icon-sizes: map-merge(
@@ -42,14 +41,13 @@ $chip-icon-sizes: map-merge(
   ),
   $chip-icon-sizes
 );
-$chip-label-border-radius: 47% !default;
+$chip-label-border-radius: 8px !default;
 $chip-link-focus-opacity: 0.3 !default;
-$icon-outlined-border-width: 2px !default;
 $chip-outlined-active-opacity: 0.6 !default;
 $chip-padding-ratio: 2.25 !default;
 $chip-pill-filter-margin: 4px !default;
 $chip-pill-avatar-size: 18px !default;
-$chip-pill-avatar-margin-before: 4px !default;
+$chip-pill-avatar-margin-before: -10px !default;
 $chip-rounded-border-radius: $border-radius-root !default;
 $chip-selected-opacity: 0.8 !default;
 $chip-width-ratio: 16/9 !default;
@@ -68,4 +66,5 @@ $chip-stacked-density: (
   "comfortable": -4,
   "compact": -6,
 ) !default;
+$icon-outlined-border-width: 2px !default;
 $primary-transition: 1s !default;
