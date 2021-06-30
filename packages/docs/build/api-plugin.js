@@ -112,7 +112,7 @@ function generateFiles () {
   }
 
   fs.writeFileSync(resolve(`src/api/sass.json`), JSON.stringify([
-    ...api.filter(item => item.component || item.name === '$vuetify').map(item => item.name),
+    ...api.filter(item => item?.sass?.length > 0).map(item => item.name),
   ]))
 }
 

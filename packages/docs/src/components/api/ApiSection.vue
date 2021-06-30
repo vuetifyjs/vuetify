@@ -41,6 +41,7 @@
     >
       <v-col>
         <app-heading
+          v-if="!hideHeader"
           :id="`api-${field}`"
           class="text-capitalize"
           :content="$t(`api-headers.${field}`)"
@@ -75,8 +76,10 @@
     name: 'ApiSection',
 
     props: {
-      page: String,
+      hideHeader: Boolean,
       name: String,
+      page: String,
+      section: String,
     },
 
     data: () => ({
@@ -90,7 +93,7 @@
       toc: sync('pages/toc'),
       apiComponent () {
         return Object.keys(this.selectedComponent)
-          .filter(key => !['component', 'mixins', 'name'].includes(key))
+          .filter(key => this.section ? this.section === key : !['component', 'mixins', 'name'].includes(key))
           .reduce((obj, key) => {
             if (this.selectedComponent[key].length) {
               obj[key] = this.selectedComponent[key]
@@ -109,7 +112,7 @@
         })
       }
       this.selectedComponent = this.apiComponents[0].value
-      if (this.name) {
+      if (this.name && !this.section) {
         this.updateToc()
       }
     },
