@@ -18,14 +18,19 @@ import { computed, defineComponent, provide, toRef } from 'vue'
 import { makeProps } from '@/util'
 
 // Types
-import type { InjectionKey, Prop, Ref } from 'vue'
+import type { InjectionKey, PropType, Ref } from 'vue'
+import type { LinkProps } from '@/composables/router'
 
-interface BreadcrumbsInstance {
+interface BreadcrumbsContext {
   color: Ref<string | undefined>
   disabled: Ref<boolean>
 }
 
-export const VBreadcrumbsSymbol: InjectionKey<BreadcrumbsInstance> = Symbol.for('vuetify:timeline')
+export const VBreadcrumbsSymbol: InjectionKey<BreadcrumbsContext> = Symbol.for('vuetify:breadcrumbs')
+
+export type BreadcrumbItem = string | (LinkProps & {
+  text: string
+})
 
 export default defineComponent({
   name: 'VBreadcrumbs',
@@ -39,16 +44,8 @@ export default defineComponent({
     },
     icon: String,
     items: {
-      type: Array,
+      type: Array as PropType<BreadcrumbItem[]>,
       default: () => ([]),
-    } as Prop<any[]> as any,
-    itemText: {
-      type: String,
-      default: 'text',
-    },
-    itemHref: {
-      type: String,
-      default: 'href',
     },
 
     ...makeDensityProps(),
@@ -63,15 +60,12 @@ export default defineComponent({
     const { sizeClasses, sizeStyles } = useSize(props, 'v-breadcrumbs')
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
     const items = computed(() => {
-      return props.items.map((item: any, index: number, array: any[]) => {
-        return {
-          props: {
-            disabled: index >= array.length - 1,
-            href: typeof item === 'string' ? item : item[props.itemHref],
-            text: typeof item === 'string' ? item : item[props.itemText],
-          },
-        }
-      })
+      return props.items.map((item, index, array) => ({
+        props: {
+          disabled: index >= array.length - 1,
+          ...(typeof item === 'string' ? { text: item } : item),
+        },
+      }))
     })
 
     provide(VBreadcrumbsSymbol, {
@@ -94,10 +88,10 @@ export default defineComponent({
         ]}
       >
         { props.icon && (
-          <VIcon icon={ props.icon } left></VIcon>
+          <VIcon icon={ props.icon } left />
         ) }
 
-        { items.value.map((item: any, index: number) => (
+        { items.value.map((item, index) => (
           <>
             <VBreadcrumbsItem
               key={ index }

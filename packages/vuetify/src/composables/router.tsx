@@ -18,7 +18,7 @@ import type {
   RouteLocationNormalizedLoaded,
   RouteLocationRaw,
   Router,
-  UseLinkOptions,
+  RouterLinkOptions,
 } from 'vue-router'
 
 export function useRoute (): Ref<RouteLocationNormalizedLoaded | undefined> {
@@ -31,7 +31,7 @@ export function useRouter (): Router | undefined {
   return getCurrentInstance()?.proxy?.$router
 }
 
-interface LinkProps extends Partial<UseLinkOptions> {
+export interface LinkProps extends Partial<RouterLinkOptions> {
   href?: string
 }
 
@@ -57,7 +57,7 @@ export function useLink (props: LinkProps, attrs: SetupContext['attrs']): UseLin
     }
   }
 
-  const link = props.to ? RouterLink.useLink(props as UseLinkOptions) : undefined
+  const link = props.to ? RouterLink.useLink(props as RouterLinkOptions) : undefined
 
   return {
     ...link,

@@ -4,7 +4,7 @@ import { makeTagProps } from '@/composables/tag'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, defineComponent, inject, toRef } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 import { makeProps } from '@/util'
 
 // Types
@@ -49,6 +49,7 @@ export default defineComponent({
             {
               'v-breadcrumbs-item--active': link.isExactActive?.value,
               'v-breadcrumbs-item--disabled': props.disabled || breadcrumbs.disabled.value,
+              'v-breadcrumbs-item--link': link.isLink.value,
               [`${props.activeClass}`]: props.active && props.activeClass,
             },
             textColorClasses.value,
