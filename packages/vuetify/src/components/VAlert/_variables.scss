@@ -1,6 +1,8 @@
 // Defaults
-$alert-avatar-margin-inline-end: 4px !default;
-$alert-avatar-margin-inline-start: -10px !default;
+$alert-avatar-height: 24px !default;
+$alert-avatar-icon-font-size: 24px !default;
+$alert-avatar-margin-inline-end: 16px !default;
+$alert-avatar-margin-inline-start: 0 !default;
 $alert-avatar-margin-top: -6px !default;
 $alert-background: rgba(var(--v-theme-on-surface), var(--v-activated-opacity)) !default;
 $alert-border-color: currentColor !default;
@@ -11,20 +13,22 @@ $alert-border-radius: $border-radius-root !default;
 $alert-border-style: $border-style-root !default;
 $alert-border-thin-width: 8px !default;
 $alert-border-width: 0 !default;
-$alert-close-margin-inline-start: 4px !default;
+$alert-close-icon-font-size: 20px !default;
+$alert-close-margin-inline-start: auto !default;
+$alert-close-padding-inline-start: 8px !default;
 $alert-color: rgb(var(--v-theme-on-surface)) !default;
 $alert-dense-border-width: medium !default;
 $alert-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 $alert-elevation: 0 !default;
 $alert-font-size: 16px !default;
-$alert-icon-size: 24px !default;
+$alert-icon-font-size-multiplier: 1.5 !default;
 $alert-padding: 16px !default;
 $alert-plain-opacity: .62 !default;
 $alert-positions: absolute fixed !default;
-$alert-prominent-avatar-margin-inline-end: 10px !default;
+$alert-prominent-avatar-margin-inline-end: 16px !default;
 $alert-prominent-avatar-margin-inline-start: 0 !default;
 $alert-prominent-icon-font-size: 40px !default;
-$alert-prominent-icon-size: 44px !default;
+$alert-prominent-icon-size: 40px !default;
 $alert-text-padding: 16px !default;
 
 $alert-border: (

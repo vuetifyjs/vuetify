@@ -179,7 +179,6 @@ export default defineComponent({
                     <VBtn
                       density={ props.density }
                       icon={ props.closeIcon }
-                      size="x-small"
                       variant="text"
                       onClick={ onCloseClick }
                     />

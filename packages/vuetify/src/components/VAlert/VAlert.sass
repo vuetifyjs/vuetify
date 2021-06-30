@@ -18,7 +18,9 @@
   &--border
     padding-inline-start: $alert-border-padding-inline-start
 
-  &--prominent
+  &:not(.v-alert--prominent)
+    .v-avatar
+      --v-avatar-height: $alert-avatar-height
 
   &--variant-plain
     transition: .2s $standard-easing
@@ -31,28 +33,25 @@
 
       &.v-alert--prominent
         .v-alert__avatar
-          margin-inline-start: $alert-prominent-avatar-margin-inline-start
-          margin-inline-end: $alert-prominent-avatar-margin-inline-end + $modifier
+          margin-inline-start: $alert-prominent-avatar-margin-inline-start + $modifier / 2
+          margin-inline-end: $alert-prominent-avatar-margin-inline-end + $modifier / 2
 
-      .v-alert__close
-        margin-top: -6 - $modifier / 2
-
-      &:not(.v-alert--prominent)
-        .v-alert__avatar
-          margin-top: -6 - $modifier / 2
+          .v-icon
+            font-size: $alert-prominent-icon-font-size + ($modifier * $alert-icon-font-size-multiplier)
 
 .v-alert__avatar
+  align-self: flex-start
   display: flex
   margin-inline-start: $alert-avatar-margin-inline-start
   margin-inline-end: $alert-avatar-margin-inline-end
 
+  .v-icon
+    font-size: $alert-avatar-icon-font-size
+
   .v-alert--prominent &
-    align-items: center
+    align-self: center
     flex: 1 0 auto
     max-width: $alert-prominent-icon-size
-
-    .v-icon
-      font-size: $alert-prominent-icon-font-size
 
 .v-alert__border
   border-radius: inherit
@@ -84,7 +83,17 @@
 
 .v-alert__close
   align-self: flex-start
+  display: flex
+  flex: 0 1 auto
   margin-inline-start: $alert-close-margin-inline-start
+  padding-inline-start: $alert-close-padding-inline-start
+
+  .v-btn
+    height: inherit
+    width: inherit
+
+  .v-icon
+    font-size: $alert-close-icon-font-size
 
 .v-alert__content
   display: flex
