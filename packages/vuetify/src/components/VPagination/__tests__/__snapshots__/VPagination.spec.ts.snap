@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VPagination should match a snapshot 1`] = `
+<nav class="v-pagination v-theme--light"
+     role="navigation"
+     aria-label="Pagination Navigation"
+     data-test="v-pagination-root"
+>
+  <ul class="v-pagination__list">
+    <li class="v-pagination__prev"
+        data-test="v-pagination-prev"
+    >
+      <button type="button"
+              class="v-btn v-btn--disabled v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-text"
+              disabled
+              arialabel="Previous page"
+              ariadisabled="true"
+      >
+        <div class="v-btn__overlay">
+        </div>
+        <div class="v-btn__underlay">
+        </div>
+        <i class="mdi-chevron-left mdi v-icon notranslate v-icon--size-default v-btn__icon"
+           aria-hidden="true"
+        >
+        </i>
+      </button>
+    </li>
+    <li class="v-pagination__item v-pagination__item--is-active"
+        data-test="v-pagination-item"
+    >
+      <button type="button"
+              class="v-btn v-btn--disabled v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-text"
+              disabled
+              ellipsis="false"
+              ariacurrent="true"
+              arialabel="Page 1, Current Page"
+      >
+        <div class="v-btn__overlay">
+        </div>
+        <div class="v-btn__underlay">
+        </div>
+        1
+      </button>
+    </li>
+    <li class="v-pagination__next"
+        data-test="v-pagination-next"
+    >
+      <button type="button"
+              class="v-btn v-btn--disabled v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-text"
+              disabled
+              arialabel="Next page"
+              ariadisabled="true"
+      >
+        <div class="v-btn__overlay">
+        </div>
+        <div class="v-btn__underlay">
+        </div>
+        <i class="mdi-chevron-right mdi v-icon notranslate v-icon--size-default v-btn__icon"
+           aria-hidden="true"
+        >
+        </i>
+      </button>
+    </li>
+  </ul>
+</nav>
+`;
