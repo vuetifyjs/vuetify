@@ -9,7 +9,6 @@ import { VIcon } from '@/components/VIcon'
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { useTextColor } from '@/composables/color'
 
@@ -50,14 +49,12 @@ export default defineComponent({
 
     ...makeDensityProps(),
     ...makeRoundedProps(),
-    ...makeSizeProps(),
     ...makeTagProps({ tag: 'ul' }),
   }),
 
   setup (props, { slots }) {
     const { densityClasses } = useDensity(props, 'v-breadcrumbs')
     const { roundedClasses } = useRounded(props, 'v-breadcrumbs')
-    const { sizeClasses, sizeStyles } = useSize(props, 'v-breadcrumbs')
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
     const items = computed(() => {
       return props.items.map((item, index, array) => ({
@@ -79,12 +76,10 @@ export default defineComponent({
           'v-breadcrumbs',
           densityClasses.value,
           roundedClasses.value,
-          sizeClasses.value,
           textColorClasses.value,
         ]}
         style={[
           textColorStyles.value,
-          sizeStyles.value,
         ]}
       >
         { props.icon && (

@@ -1,16 +1,11 @@
 // Defaults
 $breadcrumbs-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
-$breadcrumbs-line-height: normal !default;
+$breadcrumbs-divider-padding: 0 8px !default;
 $breadcrumbs-height: 40px !default;
-$breadcrumbs-padding: 8px 16px !default;
+$breadcrumbs-item-disabled-opacity: var(--v-disabled-opacity) !default;
+$breadcrumbs-item-link-text-decoration: underline !default;
+$breadcrumbs-line-height: map-deep-get($typography, 'subtitle-2', 'line-height') !default;
+$breadcrumbs-padding: 16px !default;
+$breadcrumbs-rounded-border-radius: $border-radius-root !default;
 $breadcrumbs-vertical-align: middle !default;
-
-$breadcrumbs-sizes: (
-  'height': $breadcrumbs-height
-) !default;
-
-// $breadcrumbs-flex: 0 1 auto !default;
-// $breadcrumbs-even-child-padding: 0 12px !default;
-// $breadcrumbs-item-font-size: 14px !default;
-// $breadcrumbs-item-large-font-size: 16px !default;
-// $breadcrumbs-margin: 0 !default;
+$breadcrumbs-item-padding: 0 4px !default;
