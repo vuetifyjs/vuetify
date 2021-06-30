@@ -23,16 +23,16 @@ describe('VPagination', () => {
 
     cy.getBySel('v-pagination-item').eq(1).find('.v-btn').trigger('click')
 
-    cy.getBySel('v-pagination-item').eq(1).should('have.class', 'v-pagination__item--selected')
+    cy.getBySel('v-pagination-item').eq(1).should('have.class', 'v-pagination__item--is-active')
 
     cy.getBySel('v-pagination-next').find('.v-btn').trigger('click')
 
-    cy.getBySel('v-pagination-item').eq(2).should('have.class', 'v-pagination__item--selected')
+    cy.getBySel('v-pagination-item').eq(2).should('have.class', 'v-pagination__item--is-active')
 
     cy.getBySel('v-pagination-prev').find('.v-btn').trigger('click')
     cy.getBySel('v-pagination-prev').find('.v-btn').trigger('click')
 
-    cy.getBySel('v-pagination-item').eq(0).should('have.class', 'v-pagination__item--selected')
+    cy.getBySel('v-pagination-item').eq(0).should('have.class', 'v-pagination__item--is-active')
   })
 
   it('should react to keyboard navigation', () => {
@@ -44,12 +44,12 @@ describe('VPagination', () => {
 
     cy.getBySel('v-pagination-root').trigger('keydown', { key: keyValues.left })
 
-    cy.getBySel('v-pagination-item').first().should('have.class', 'v-pagination__item--selected')
+    cy.getBySel('v-pagination-item').first().should('have.class', 'v-pagination__item--is-active')
 
     cy.getBySel('v-pagination-root').trigger('keydown', { key: keyValues.right })
     cy.getBySel('v-pagination-root').trigger('keydown', { key: keyValues.right })
 
-    cy.getBySel('v-pagination-item').last().should('have.class', 'v-pagination__item--selected')
+    cy.getBySel('v-pagination-item').last().should('have.class', 'v-pagination__item--is-active')
   })
 
   it('should render offset pages when using start prop', () => {
