@@ -1,24 +1,5 @@
 @import './_variables.scss'
 
-/* Theme */
-+theme(v-input) using ($material)
-  color: map-deep-get($material, 'text', 'primary')
-
-  input,
-  textarea
-    color: map-deep-get($material, 'text', 'primary')
-
-  input::placeholder,
-  textarea::placeholder
-    color: map-deep-get($material, 'text', 'disabled')
-
-  &--is-disabled
-    color: map-deep-get($material, 'text', 'disabled')
-
-    input,
-    textarea
-      color: map-deep-get($material, 'text', 'disabled')
-
 .v-input
   align-items: flex-start
   display: flex
@@ -105,7 +86,7 @@
     margin-bottom: $input-slot-margin-bottom
     min-height: inherit
     position: relative
-    transition: $primary-transition
+    transition: 0.2s $standard-easing
     width: 100%
 
   &--dense > .v-input__control > .v-input__slot
@@ -124,12 +105,12 @@
 
   &--has-state
     &.error--text .v-label
-      animation: v-shake .6s map-get($transition, 'swing')
+      animation: v-shake .6s $standard-easing
 
   &--hide-spin-buttons
     input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button 
+    input::-webkit-inner-spin-button
       -webkit-appearance: none
       margin: 0
-    input[type=number] 
+    input[type=number]
       -moz-appearance: textfield

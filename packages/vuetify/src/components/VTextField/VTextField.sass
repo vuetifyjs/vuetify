@@ -1,59 +1,6 @@
 @import './_mixins.sass'
 @import './_variables.scss'
 
-+theme(v-text-field) using ($material)
-  > .v-input__control > .v-input__slot:before
-    border-color: map-get($material, 'input-bottom-line')
-
-  &:not(.v-input--has-state):hover > .v-input__control > .v-input__slot:before
-    border-color: map-deep-get($material, 'text', 'primary')
-
-  &.v-input--is-disabled .v-input__slot::before
-    border-image: repeating-linear-gradient(to right, #{map-deep-get($material, 'text', 'disabled')} 0px, #{map-deep-get($material, 'text', 'disabled')} 2px, transparent 2px, transparent 4px) 1 repeat
-
-  &--filled
-    > .v-input__control > .v-input__slot
-      background: map-deep-get($material, 'text-fields', 'filled')
-
-    &:not(.v-input--is-focused):not(.v-input--has-state)
-      > .v-input__control > .v-input__slot:hover
-        background: map-deep-get($material, 'text-fields', 'filled-hover')
-
-  &--solo
-    > .v-input__control > .v-input__slot
-      background: map-get($material, 'cards')
-
-  &--solo-inverted
-    > .v-input__control > .v-input__slot
-      background: map-deep-get($material, 'inputs', 'solo-inverted')
-
-    &.v-input--is-focused
-      > .v-input__control > .v-input__slot
-        background: map-deep-get($material, 'inputs', 'solo-inverted-focused')
-
-        input
-          color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
-
-        input::placeholder
-          color: map-deep-get($material, 'inputs', 'solo-inverted-focused-placeholder')
-
-        .v-label
-          color: map-deep-get($material, 'inputs', 'solo-inverted-focused-label')
-
-  &--outlined
-    &:not(.v-input--is-focused)
-      &:not(.v-input--has-state)
-        > .v-input__control > .v-input__slot fieldset
-          color: map-deep-get($material, 'text-fields', 'outlined')
-
-        &:not(.v-input--is-disabled)
-          > .v-input__control > .v-input__slot:hover fieldset
-            color: map-deep-get($material, 'text-fields', 'outlined-hover')
-
-      &.v-input--is-disabled
-        > .v-input__control > .v-input__slot fieldset
-          color: map-deep-get($material, 'text-fields', 'outlined-disabled')
-
 .v-text-field
   padding-top: $text-field-active-label-height
   margin-top: $input-top-spacing - $text-field-active-label-height
@@ -173,7 +120,7 @@
       content: ''
       left: 0
       position: absolute
-      transition: $primary-transition
+      transition: 0.2s $standard-easing
       width: 100%
 
     &:before
@@ -199,7 +146,7 @@
   &__suffix
     align-self: center
     cursor: default
-    transition: color $primary-transition
+    transition: color 0.2s $standard-easing
     white-space: nowrap
 
   &__prefix
@@ -385,7 +332,7 @@
 
   &--outlined
     margin-bottom: $text-field-outlined-margin-bottom
-    transition: border $primary-transition
+    transition: border 0.2s $standard-easing
 
     +label-position($text-field-outlined-label-position-x, $text-field-outlined-label-position-y)
 
@@ -405,7 +352,7 @@
       top: $text-field-outlined-fieldset-top
       transition-duration: 0.3s
       transition-property: color, border-width
-      transition-timing-function: map-get($transition, 'fast-in-fast-out')
+      transition-timing-function: $accelerated-easing
 
       +ltr()
         padding-left: $text-field-outlined-fieldset-padding
@@ -424,7 +371,7 @@
     legend
       line-height: $text-field-outlined-legend-line-height
       padding: 0
-      transition: width $primary-transition
+      transition: width 0.2s $standard-easing
 
       +ltr()
         text-align: left
