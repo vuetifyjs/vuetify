@@ -3,16 +3,16 @@ $chip-background-color: rgba(
   var(--v-border-color),
   var(--v-border-opacity)
 ) !default;
-$chip-border: (
-  $chip-border-color,
-  $chip-border-style,
-  $chip-border-width
-) !default;
 $chip-border-color: $border-color-root !default;
 $chip-border-radius: map-get($rounded, "pill") !default;
 $chip-border-style: $border-style-root !default;
 $chip-border-thin-width: thin !default;
 $chip-border-width: 0 !default;
+$chip-border: (
+  $chip-border-color,
+  $chip-border-style,
+  $chip-border-width
+) !default;
 $chip-close-size: 18px !default;
 $chip-density: (
   "default": 0,
@@ -45,13 +45,14 @@ $chip-icon-sizes: map-merge(
 $chip-label-border-radius: 47% !default;
 $chip-link-focus-opacity: 0.3 !default;
 $icon-outlined-border-width: 2px !default;
-$icon-outlined-active-opacity: 0.6 !default;
+$chip-outlined-active-opacity: 0.6 !default;
 $chip-padding-ratio: 2.25 !default;
 $chip-pill-filter-margin: 4px !default;
 $chip-pill-avatar-size: 18px !default;
 $chip-pill-avatar-margin-before: 4px !default;
 $chip-rounded-border-radius: $border-radius-root !default;
 $chip-selected-opacity: 0.8 !default;
+$chip-width-ratio: 16/9 !default;
 $chip-sizes: () !default;
 $chip-sizes: map-merge(
   (
@@ -67,5 +68,4 @@ $chip-stacked-density: (
   "comfortable": -4,
   "compact": -6,
 ) !default;
-$chip-width-ratio: 16/9 !default;
 $primary-transition: 1s !default;
