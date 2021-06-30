@@ -18,7 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, defineComponent, toRef } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { makeProps } from '@/util'
 
 // Types
@@ -60,6 +60,7 @@ export default defineComponent({
     prominent: Boolean,
     sticky: Boolean,
     text: String,
+    tip: Boolean,
     type: {
       type: String,
       validator (val: string) {
@@ -86,6 +87,9 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
+    const bprops = computed(() => ({
+      border: props.border === true || props.tip ? 'start' : props.border,
+    }))
     const isActive = useProxiedModel(props, 'modelValue')
     const icon = computed(() => {
       if (props.icon === false) return undefined
@@ -99,13 +103,15 @@ export default defineComponent({
     }))
 
     const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(props, 'v-alert')
+    const { borderClasses } = useBorder(bprops.value, 'v-alert')
     const { colorClasses, colorStyles, variantClasses } = useVariant(vprops.value, 'v-alert')
     const { densityClasses } = useDensity(props, 'v-alert')
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-alert')
     const { roundedClasses } = useRounded(props, 'v-alert')
-    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'borderColor'))
+    const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
+      return props.borderColor ?? (props.tip ? vprops.value.color : undefined)
+    }))
 
     function onCloseClick (e: MouseEvent) {
       isActive.value = false
@@ -115,19 +121,20 @@ export default defineComponent({
       const hasClose = !!(slots.close || props.closable)
       const hasPrepend = !!(slots.prepend || props.icon || props.type)
       const hasText = !!(slots.text || props.text)
-      const border = props.border === true ? 'start' : props.border
+      const hasBorder = !!bprops.value.border
 
       return isActive.value && (
         <props.tag
           class={[
             'v-alert',
             {
-              [`v-alert--border-${border}`]: !!props.border,
+              [`v-alert--border-${bprops.value.border}`]: hasBorder,
               'v-alert--prominent': props.prominent,
+              'v-alert--tip': props.tip,
             },
             themeClasses.value,
             borderClasses.value,
-            colorClasses.value,
+            !props.tip && colorClasses.value,
             densityClasses.value,
             elevationClasses.value,
             positionClasses.value,
@@ -135,12 +142,12 @@ export default defineComponent({
             variantClasses.value,
           ]}
           style={[
-            colorStyles.value,
+            !props.tip && colorStyles.value,
             positionStyles.value,
           ]}
           role="alert"
         >
-          { props.border && (
+          { hasBorder && (
             <div
               class={[
                 'v-alert__border',
@@ -159,6 +166,8 @@ export default defineComponent({
                   ? slots.prepend()
                   : (
                     <VAvatar
+                      class={ props.tip && textColorClasses.value }
+                      style={ props.tip && textColorStyles.value }
                       density={ props.density }
                       icon={ icon.value }
                     />

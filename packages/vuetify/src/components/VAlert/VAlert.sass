@@ -20,7 +20,7 @@
 
   &:not(.v-alert--prominent)
     .v-avatar
-      --v-avatar-height: $alert-avatar-height
+      --v-avatar-height: #{$alert-avatar-height}
 
   &--variant-plain
     transition: $alert-plain-transition
@@ -41,6 +41,7 @@
 .v-alert__avatar
   align-self: flex-start
   display: flex
+  position: relative
   margin-inline-start: $alert-avatar-margin-inline-start
   margin-inline-end: $alert-avatar-margin-inline-end
 
@@ -51,6 +52,26 @@
     align-self: center
     flex: 1 0 auto
     max-width: $alert-prominent-icon-size
+
+  .v-alert--tip &
+    margin-inline-start: $alert-tip-margin-inline-start
+    max-height: $alert-tip-max-height
+    max-width: $alert-tip-max-width
+
+    &::before
+      content: ''
+      top: 4px
+      left: 4px
+      position: absolute
+      width: 16px
+      height: 16px
+      background: white
+      border-radius: inherit
+
+    .v-avatar
+      height: auto
+      max-width: inherit
+      max-height: inherit
 
 .v-alert__border
   border-radius: inherit
@@ -79,6 +100,10 @@
   .v-alert--border-end &
     border-inline-end-width: $alert-border-thin-width
     border-inline-start-width: 0
+
+  .v-alert--border.v-alert--tip &
+    --v-border-opacity: 1
+    border-inline-start-width: $alert-tip-border-inline-start-width
 
 .v-alert__close
   align-self: flex-start
