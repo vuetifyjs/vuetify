@@ -1,8 +1,15 @@
 // Defaults
-$chip-background-color: rgba(
-  var(--v-border-color),
-  var(--v-border-opacity)
-) !default;
+// $chip-background-color: rgba(
+//   var(--v-border-color),
+//   var(--v-border-opacity)
+// ) !default;
+
+
+$chip-background: rgba(var(--v-theme-on-surface), var(--v-activated-opacity)) !default;
+$chip-color: currentColor !default;
+$chip-elevation: 0 !default;
+$chip-plain-opacity: 0.26 !default;
+
 $chip-border-color: $border-color-root !default;
 $chip-border-radius: map-get($rounded, "pill") !default;
 $chip-border-style: $border-style-root !default;
@@ -23,7 +30,7 @@ $chip-disabled-opacity: 0.3 !default;
 $chip-elevation: 0 !default;
 $chip-filter-max-width: 72px !default;
 $chip-font-size: map-deep-get($typography, "button", "size") !default;
-$chip-height: 36px !default; // Spec 32px?
+$chip-height: 32px !default; // Spec 32px?
 $chip-icon-density: (
   "default": 3,
   "comfortable": 0,
@@ -68,3 +75,11 @@ $chip-stacked-density: (
 ) !default;
 $icon-outlined-border-width: 2px !default;
 $primary-transition: 1s !default;
+
+$chip-variants: (
+  $chip-background,
+  $chip-color,
+  $chip-elevation,
+  $chip-plain-opacity,
+  'v-chip'
+) !default;

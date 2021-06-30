@@ -5,6 +5,7 @@ import './VChip.sass'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -13,13 +14,13 @@ import { makeRouterProps, useLink } from '@/composables/router'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { makeProps } from '@/util/makeProps'
 
 export default defineComponent({
@@ -28,15 +29,8 @@ export default defineComponent({
   directives: { Ripple },
 
   props: makeProps({
-    active: {
-      type: Boolean,
-      default: true,
-    },
-    activeClass: {
-      type: String,
-      default: '',
-    },
-    close: Boolean,
+    activeClass: String,
+    closable: Boolean,
     closeIcon: {
       type: String,
       default: '$delete',
@@ -54,13 +48,15 @@ export default defineComponent({
     },
     label: Boolean,
     link: Boolean,
-    outlined: Boolean,
     ripple: {
       type: Boolean,
       default: true,
     },
-    textColor: String,
-    value: null as any,
+    modelValue: {
+      type: Boolean,
+      default: true,
+    },
+
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
@@ -76,7 +72,10 @@ export default defineComponent({
     'click:close': (e: Event) => e,
     'update:active': (value: Boolean) => value,
   },
+
   setup (props, { attrs, emit, slots }) {
+    const isActive = useProxiedModel(props, 'modelValue')
+
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-chip')
     const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-chip')
@@ -86,42 +85,23 @@ export default defineComponent({
     const { densityClasses } = useDensity(props, 'v-chip')
     const link = useLink(props, attrs)
 
-    const isElevated = computed(() => {
-      return props.variant === 'contained' && !(props.disabled || props.border)
-    })
-
-    const hasClose = computed(() => {
-      return Boolean(props.close)
-    })
-
-    const isClickable = computed(() => {})
-
-    const close = (e: Event) => {
-      e.stopPropagation()
-      e.preventDefault()
-      emit('click:close', e)
-      emit('update:active', false)
+    function onCloseClick () {
+      isActive.value = false
     }
 
     return () => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
+      const hasClose = !!(slots.close || props.closable)
+      const isClickable = !props.disabled && (link.isClickable.value || props.link)
 
-      return (
+      return isActive.value && (
         <Tag
           type={Tag === 'a' ? undefined : 'button' }
           class={[
             'v-chip',
             {
-              'v-chip--clickable': isClickable.value,
               'v-chip--disabled': props.disabled,
-              'v-chip--elevated': isElevated.value,
-              'v-chip--draggable': props.draggable,
-              'v-chip--label': props.label,
-              // 'v-chip--link': props.isLink,
-              'v-chip--no-color': !props.color,
-              'v-chip--outlined': props.outlined,
-              // 'v-chip--pill': props.pill,
-              'v-chip--removable': hasClose.value,
+              'v-card--link': isClickable,
             },
             themeClasses.value,
             borderClasses.value,
@@ -132,9 +112,7 @@ export default defineComponent({
             sizeClasses.value,
             variantClasses.value,
           ]}
-          style={[
-            colorStyles.value,
-          ]}
+          style={{ colorStyles }}
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }
           href={ link.href.value }
@@ -142,37 +120,27 @@ export default defineComponent({
             !props.disabled && props.ripple,
             null,
           ]}
-          onClick={ props.disabled || link.navigate }
+          onClick={ isClickable && link.navigate }
         >
-          {
-            props.filter && (
-              <VIcon
-                icon={props.filterIcon}
-                class="v-chip__filter"
-                props={{
-                  left: true,
-                }}
-              />
-            )
-          }
-          { genOverlays(true, 'v-chip') }
+          { genOverlays(isClickable, 'v-chip') }
 
           { slots.default?.() }
 
-          {
-            props.close && (
-              <VIcon
-                onClick={close}
-                icon={props.closeIcon}
-                class="v-chip__close"
-                aria-label={props.closeLabel}
-                props={{
-                  right: true,
-                  size: 18,
-                }}
-              />
-            )
-          }
+          { hasClose && (
+            <div class="v-chip__close">
+              { slots.close
+                ? slots.close({ props: { onClick: onCloseClick } })
+                : (
+                  <VIcon
+                    icon={ props.closeIcon }
+                    size="x-small"
+                    variant="text"
+                    onClick={ onCloseClick }
+                  />
+                )
+              }
+            </div>
+          ) }
         </Tag>
       )
     }
