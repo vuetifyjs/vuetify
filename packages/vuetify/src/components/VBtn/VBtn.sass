@@ -167,3 +167,19 @@
     padding: $button-banner-actions-padding
 
     @include elevation($button-banner-actions-elevation)
+
+// VPagination
+.v-btn
+  @include elevation($button-pagination-elevation)
+  @include rounded($button-pagination-border-radius)
+
+  .v-pagination &
+    @include button-density('height' 'width', $button-pagination-density)
+
+  &--elevated
+    .v-pagination__list &
+      @include elevation($button-pagination-elevation)
+
+  &__overlay
+    .v-pagination__item--is-active &
+      opacity: $button-pagination-active-overlay-opacity

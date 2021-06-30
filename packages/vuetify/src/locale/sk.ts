@@ -54,11 +54,13 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Navigácia stránkovania',
+      root: 'Navigácia stránkovania',
       next: 'Ďalšia stránka',
       previous: 'Predchádzajúca stránka',
       page: 'Ísť na stránku {0}',
       currentPage: 'Aktuálna stránka, stránka {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {

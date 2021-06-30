@@ -54,11 +54,13 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Oldal navigáció',
+      root: 'Oldal navigáció',
       next: 'Következő oldal',
       previous: 'Előző oldal',
       page: 'Menj a(z) {0}. oldalra',
       currentPage: 'Aktuális oldal: {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {

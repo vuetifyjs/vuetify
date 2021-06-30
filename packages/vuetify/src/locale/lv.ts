@@ -54,11 +54,13 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Navigācija paginationā',
+      root: 'Navigācija paginationā',
       next: 'Nākamā lapa',
       previous: 'Iepriekšējā lapa',
       page: 'Iet uz lapu {0}',
       currentPage: 'Pašreizējā lapa, lapa {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {

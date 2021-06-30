@@ -3,7 +3,7 @@
     <v-pagination
       v-model="page"
       :length="4"
-      circle
+      rounded="circle"
     ></v-pagination>
   </div>
 </template>

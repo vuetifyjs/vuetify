@@ -54,11 +54,13 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'جهت یابی صفحه',
+      root: 'جهت یابی صفحه',
       next: 'صفحه بعد',
       previous: 'صفحه قبلی',
       page: 'برو صفحه {0}',
       currentPage: '{0} صفحه فعلی ، صفحه',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
