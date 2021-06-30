@@ -54,11 +54,13 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Seitennavigation',
+      root: 'Seitennavigation',
       next: 'Nächste Seite',
       previous: 'Vorherige Seite',
       page: 'Gehe zu Seite {0}',
       currentPage: 'Aktuelle Seite, Seite {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {

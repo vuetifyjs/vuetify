@@ -149,6 +149,26 @@ export const keyCodes = Object.freeze({
   shift: 16,
 })
 
+export const keyValues = Object.freeze({
+  enter: 'Enter',
+  tab: 'Tab',
+  delete: 'Delete',
+  esc: 'Escape',
+  space: 'Space',
+  up: 'ArrowUp',
+  down: 'ArrowDown',
+  left: 'ArrowLeft',
+  right: 'ArrowRight',
+  end: 'End',
+  home: 'Home',
+  del: 'Delete',
+  backspace: 'Backspace',
+  insert: 'Insert',
+  pageup: 'PageUp',
+  pagedown: 'PageDown',
+  shift: 'Shift',
+})
+
 export function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }

@@ -54,11 +54,13 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: '分頁導航',
+      root: '分頁導航',
       next: '下一頁',
       previous: '上一頁',
       page: '轉到頁面 {0}',
       currentPage: '當前頁 {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
