@@ -16,15 +16,9 @@ describe('VAlert', () => {
     })
   }
 
-  it('should match a snapshot', () => {
-    const wrapper = mountFunction()
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
   it.each([
-    ['actions'],
-    ['thumbnail'],
+    ['prepend'],
+    ['close'],
   ])('should generate slot content', slot => {
     const wrapper = mountFunction({
       slots: { [slot]: '<div>foobar</div>' },
@@ -35,12 +29,11 @@ describe('VAlert', () => {
 
   it.each([
     [{}, false],
-    [{ avatar: 'foobar' }, true],
     [{ icon: 'foobar' }, true],
   ])('should generate actions slot', (props, expected) => {
     const wrapper = mountFunction({ props })
-    const thumbnail = wrapper.find('.v-banner__thumbnail')
+    const avatar = wrapper.find('.v-alert__avatar')
 
-    expect(thumbnail.exists()).toBe(expected)
+    expect(avatar.exists()).toBe(expected)
   })
 })

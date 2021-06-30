@@ -6,9 +6,6 @@ import { VAvatar } from '@/components/VAvatar'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
-import { useBorder } from '@/composables/border'
-import { useTextColor } from '@/composables/color'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
@@ -16,6 +13,9 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeVariantProps, useVariant } from '@/composables/variant'
+import { useBorder } from '@/composables/border'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, defineComponent, toRef } from 'vue'
@@ -112,9 +112,9 @@ export default defineComponent({
     }
 
     return () => {
-      const hasText = !!(slots.text || props.text)
-      const hasPrepend = !!(slots.prepend || props.icon || props.type)
       const hasClose = !!(slots.close || props.closable)
+      const hasPrepend = !!(slots.prepend || props.icon || props.type)
+      const hasText = !!(slots.text || props.text)
       const border = props.border === true ? 'start' : props.border
 
       return isActive.value && (
@@ -147,10 +147,10 @@ export default defineComponent({
                 textColorClasses.value,
               ]}
               style={ textColorStyles.value }
-            ></div>
+            />
           ) }
 
-          <div class="v-alert__underlay"></div>
+          <div class="v-alert__underlay" />
 
           <div class="v-alert__content">
             { hasPrepend && (

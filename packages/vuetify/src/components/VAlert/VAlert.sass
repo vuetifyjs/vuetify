@@ -23,8 +23,7 @@
       --v-avatar-height: $alert-avatar-height
 
   &--variant-plain
-    transition: .2s $standard-easing
-    transition-property: opacity
+    transition: $alert-plain-transition
 
   @at-root
     @include density('v-alert', $alert-density) using ($modifier)

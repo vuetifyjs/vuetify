@@ -24,6 +24,7 @@ $alert-font-size: 16px !default;
 $alert-icon-font-size-multiplier: 1.5 !default;
 $alert-padding: 16px !default;
 $alert-plain-opacity: .62 !default;
+$alert-plain-transition: .2s opacity $standard-easing !default;
 $alert-positions: absolute fixed !default;
 $alert-prominent-avatar-margin-inline-end: 16px !default;
 $alert-prominent-avatar-margin-inline-start: 0 !default;
