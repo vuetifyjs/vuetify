@@ -30,6 +30,7 @@ export default defineComponent({
 
   props: makeProps({
     activeClass: String,
+    appendIcon: String,
     closable: Boolean,
     closeIcon: {
       type: String,
@@ -48,6 +49,7 @@ export default defineComponent({
     },
     label: Boolean,
     link: Boolean,
+    prependIcon: String,
     ripple: {
       type: Boolean,
       default: true,
@@ -91,7 +93,9 @@ export default defineComponent({
 
     return () => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
+      const hasAppend = !!(slots.append || props.appendIcon)
       const hasClose = !!(slots.close || props.closable)
+      const hasPrepend = !!(slots.prepend || props.prependIcon)
       const isClickable = !props.disabled && (link.isClickable.value || props.link)
 
       return isActive.value && (
@@ -124,7 +128,33 @@ export default defineComponent({
         >
           { genOverlays(isClickable, 'v-chip') }
 
+          { hasPrepend && (
+            <div class="v-chip__prepend">
+              { slots.prepend
+                ? slots.prepend()
+                : (
+                  <VIcon
+                    icon={ props.prependIcon }
+                  />
+                )
+              }
+            </div>
+          ) }
+
           { slots.default?.() }
+
+          { hasAppend && (
+            <div class="v-chip__append">
+              { slots.append
+                ? slots.append()
+                : (
+                  <VIcon
+                    icon={ props.appendIcon }
+                  />
+                )
+              }
+            </div>
+          ) }
 
           { hasClose && (
             <div class="v-chip__close">
