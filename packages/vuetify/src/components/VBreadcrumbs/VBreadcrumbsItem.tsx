@@ -1,6 +1,3 @@
-// Components
-import { VIcon } from '@/components/VIcon'
-
 // Composables
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
@@ -22,7 +19,7 @@ export default defineComponent({
     activeColor: String,
     color: String,
     disabled: Boolean,
-    icon: String,
+    text: String,
 
     ...makeRouterProps(),
     ...makeTagProps({ tag: 'li' }),
@@ -62,11 +59,10 @@ export default defineComponent({
           style={[
             textColorStyles.value,
           ]}
-          href={ link.href.value }
           aria-current={ isActive.value ? 'page' : undefined }
           onClick={ isActive.value && link.navigate }
         >
-          { props.icon && (<VIcon icon={ props.icon } />) }
+          { props.text }
 
           { slots.default?.() }
         </Tag>
