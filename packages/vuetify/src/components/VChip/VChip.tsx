@@ -51,6 +51,7 @@ export default defineComponent({
     },
     label: Boolean,
     link: Boolean,
+    pill: Boolean,
     prependAvatar: String,
     prependIcon: String,
     ripple: {
@@ -111,6 +112,7 @@ export default defineComponent({
             {
               'v-chip--disabled': props.disabled,
               'v-chip--link': isClickable,
+              'v-chip--pill': props.pill,
             },
             themeClasses.value,
             borderClasses.value,

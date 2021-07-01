@@ -11,19 +11,31 @@
       padding: 0 $padding;
 
       .v-avatar {
-        --v-avatar-height: #{$height - 8}
+        --v-avatar-height: #{$height - 8};
+
+        @at-root #{selector-append('.v-chip--pill', &)} {
+          --v-avatar-height: #{$height};
+        }
       }
 
       .v-avatar--left,
       .v-icon--left {
         margin-inline-start: -$padding / 2;
         margin-inline-end: $padding / 2;
+
+        @at-root #{selector-append('.v-chip--pill', &)} {
+          margin-inline-start: -$padding;
+        }
       }
 
       .v-avatar--right,
       .v-icon--right {
         margin-inline-end: -$padding / 2;
         margin-inline-start: $padding / 2;
+
+        @at-root #{selector-append('.v-chip--pill', &)} {
+          margin-inline-end: -$padding;
+        }
       }
     }
   }
