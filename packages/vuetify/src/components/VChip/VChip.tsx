@@ -102,7 +102,6 @@ export default defineComponent({
       const hasAppend = !!(slots.append || props.appendIcon || props.appendAvatar)
       const hasClose = !!(slots.close || props.closable)
       const hasPrepend = !!(slots.prepend || props.prependIcon || props.prependAvatar)
-
       const isClickable = !props.disabled && (link.isClickable.value || props.link)
 
       return isActive.value && (
@@ -124,14 +123,11 @@ export default defineComponent({
             sizeClasses.value,
             variantClasses.value,
           ]}
-          style={[colorStyles.value]}
+          style={ [colorStyles.value] }
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }
           href={ link.href.value }
-          v-ripple={[
-            isClickable && props.ripple,
-            null,
-          ]}
+          v-ripple={ [isClickable && props.ripple, null] }
           onClick={ isClickable && link.navigate }
         >
           { genOverlays(isClickable, 'v-chip') }
@@ -142,8 +138,8 @@ export default defineComponent({
                 ? slots.prepend()
                 : (
                   <VAvatar
-                    image={ props.prependAvatar }
                     icon={ props.prependIcon }
+                    image={ props.prependAvatar }
                     size={ props.size }
                   />
                 )
@@ -159,8 +155,8 @@ export default defineComponent({
                 ? slots.append()
                 : (
                   <VAvatar
-                    image={ props.appendAvatar }
                     icon={ props.appendIcon }
+                    image={ props.appendAvatar }
                     size={ props.size }
                   />
                 )
