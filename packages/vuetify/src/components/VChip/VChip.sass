@@ -3,9 +3,10 @@
 
 .v-chip
   align-items: center
-  display: inline-flex
-  text-decoration: none
   cursor: default
+  display: inline-flex
+  position: relative
+  text-decoration: none
 
   @at-root
     @include chip-sizes()
@@ -58,4 +59,4 @@
   user-select: none
 
 .v-chip--label
-  border-radius: $chip-label-border-radius !important
+  border-radius: $chip-label-border-radius
