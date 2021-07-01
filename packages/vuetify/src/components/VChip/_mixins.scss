@@ -18,8 +18,7 @@
         }
       }
 
-      .v-avatar--left,
-      .v-icon--left {
+      .v-chip__prepend {
         margin-inline-start: -$padding / 2;
         margin-inline-end: $padding / 2;
 
@@ -28,8 +27,7 @@
         }
       }
 
-      .v-avatar--right,
-      .v-icon--right {
+      .v-chip__append {
         margin-inline-end: -$padding / 2;
         margin-inline-start: $padding / 2;
 
