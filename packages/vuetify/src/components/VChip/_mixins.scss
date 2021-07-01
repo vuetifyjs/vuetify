@@ -8,7 +8,10 @@
       --v-chip-height: #{$height};
       font-size: $size;
       min-width: round($height * $chip-width-ratio);
-      padding: 0 ($height / $chip-padding-ratio);
+
+      .v-avatar {
+        --v-avatar-height: #{$height - $multiplier}
+      }
     }
   }
 }

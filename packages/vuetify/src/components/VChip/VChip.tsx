@@ -2,6 +2,7 @@
 import './VChip.sass'
 
 // Components
+import { VAvatar } from '@/components/VAvatar'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
@@ -30,6 +31,7 @@ export default defineComponent({
 
   props: makeProps({
     activeClass: String,
+    appendAvatar: String,
     appendIcon: String,
     closable: Boolean,
     closeIcon: {
@@ -49,6 +51,7 @@ export default defineComponent({
     },
     label: Boolean,
     link: Boolean,
+    prependAvatar: String,
     prependIcon: String,
     ripple: {
       type: Boolean,
@@ -87,15 +90,18 @@ export default defineComponent({
     const { densityClasses } = useDensity(props, 'v-chip')
     const link = useLink(props, attrs)
 
-    function onCloseClick () {
+    function onCloseClick (e: Event) {
       isActive.value = false
+
+      emit('click:close', e)
     }
 
     return () => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
-      const hasAppend = !!(slots.append || props.appendIcon)
+      const hasAppend = !!(slots.append || props.appendIcon || props.appendAvatar)
       const hasClose = !!(slots.close || props.closable)
-      const hasPrepend = !!(slots.prepend || props.prependIcon)
+      const hasPrepend = !!(slots.prepend || props.prependIcon || props.prependAvatar)
+
       const isClickable = !props.disabled && (link.isClickable.value || props.link)
 
       return isActive.value && (
@@ -116,7 +122,7 @@ export default defineComponent({
             sizeClasses.value,
             variantClasses.value,
           ]}
-          style={{ colorStyles }}
+          style={[colorStyles.value]}
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }
           href={ link.href.value }
@@ -133,8 +139,10 @@ export default defineComponent({
               { slots.prepend
                 ? slots.prepend()
                 : (
-                  <VIcon
+                  <VAvatar
+                    image={ props.prependAvatar }
                     icon={ props.prependIcon }
+                    size={ props.size }
                   />
                 )
               }
@@ -148,8 +156,10 @@ export default defineComponent({
               { slots.append
                 ? slots.append()
                 : (
-                  <VIcon
+                  <VAvatar
+                    image={ props.appendAvatar }
                     icon={ props.appendIcon }
+                    size={ props.size }
                   />
                 )
               }
@@ -157,15 +167,16 @@ export default defineComponent({
           ) }
 
           { hasClose && (
-            <div class="v-chip__close">
+            <div
+              class="v-chip__close"
+              onClick={ onCloseClick }
+            >
               { slots.close
                 ? slots.close({ props: { onClick: onCloseClick } })
                 : (
                   <VIcon
                     icon={ props.closeIcon }
                     size="x-small"
-                    variant="text"
-                    onClick={ onCloseClick }
                   />
                 )
               }
