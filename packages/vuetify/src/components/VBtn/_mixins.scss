@@ -1,7 +1,3 @@
-@function roundEven ($val) {
-  @return 2 * round($val / 2)
-}
-
 @mixin button-sizes ($map: $button-sizes, $immediate: false) {
   @each $sizeName, $multiplier in $size-scales {
     $size: map-get($map, 'font-size') + 2 * $multiplier / 16;

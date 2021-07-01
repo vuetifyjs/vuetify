@@ -2,14 +2,28 @@
   @each $sizeName, $multiplier in $size-scales {
     $size: map-get($chip-sizes, "font-size") + (2 * $multiplier) / 16;
     $height: map-get($chip-sizes, "height") + (8 * $multiplier);
+    $padding: round($height / $chip-padding-ratio);
 
     .v-chip--size-#{$sizeName} {
       --v-chip-size: #{$size};
       --v-chip-height: #{$height};
       font-size: $size;
+      padding: 0 $padding;
 
       .v-avatar {
-        --v-avatar-height: #{$height - $multiplier}
+        --v-avatar-height: #{$height - 8}
+      }
+
+      .v-avatar--left,
+      .v-icon--left {
+        margin-inline-start: -$padding / 2;
+        margin-inline-end: $padding / 2;
+      }
+
+      .v-avatar--right,
+      .v-icon--right {
+        margin-inline-end: -$padding / 2;
+        margin-inline-start: $padding / 2;
       }
     }
   }
