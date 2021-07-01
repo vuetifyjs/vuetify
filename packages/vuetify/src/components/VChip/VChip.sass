@@ -1,209 +1,62 @@
 // Imports
-@import './_variables.scss'
+@import ./index
 
-// Theme
-.v-chip:not(.v-chip--outlined)
-  &.primary,
-  &.secondary,
-  &.accent,
-  &.success,
-  &.error,
-  &.warning,
-  &.info
-    color: map-deep-get($material-dark, 'text', 'primary')
-
-+theme(v-chip) using ($material)
-  border-color: map-get($material, 'dividers')
-  color: map-deep-get($material, 'text', 'primary')
-
-  &:not(.v-chip--active)
-    background: map-get($material, 'chips')
-
-  +states($material)
-
-// Block
 .v-chip
   align-items: center
   cursor: default
   display: inline-flex
-  line-height: $chip-line-height
-  max-width: 100%
-  outline: none
-  overflow: hidden
-  padding: $chip-padding
   position: relative
   text-decoration: none
-  transition-duration: $chip-transition-duration
-  transition-property: box-shadow, opacity
-  transition-timing-function: $chip-transition-fn
-  vertical-align: middle
-  white-space: $chip-white-space
 
-  &:before
-    background-color: currentColor
-    bottom: 0
-    border-radius: inherit
-    content: ''
-    left: 0
-    opacity: 0
-    position: absolute
-    pointer-events: none
-    right: 0
-    top: 0
+  @at-root
+    @include chip-sizes()
+    @include chip-density('height', $chip-density)
 
-  // Important is needed to account for new avatar structure
-  .v-avatar
-    height: $chip-avatar-size !important
-    min-width: $chip-avatar-size !important
-    width: $chip-avatar-size !important
+  @include border($chip-border...)
+  @include elevation($chip-elevation)
+  @include rounded($chip-border-radius)
+  @include variant($chip-variants...)
 
-  .v-icon
-    font-size: $chip-icon-size
+  &--border
+    border-width: $chip-border-thin-width
 
-  .v-avatar,
-  .v-icon
-    +ltr()
-      &--left
-        margin-left: $chip-icon-margin-before
-        margin-right: $chip-icon-margin-after
+  &--link
+    cursor: pointer
 
-      &--right
-        margin-left: $chip-icon-margin-after
-        margin-right: $chip-icon-margin-before
-
-    +rtl()
-      &--left
-        margin-left: $chip-icon-margin-after
-        margin-right: $chip-icon-margin-before
-
-      &--right
-        margin-left: $chip-icon-margin-before
-        margin-right: $chip-icon-margin-after
-
-  &:not(.v-chip--no-color)
-    .v-icon
-      color: inherit
+  &--label
+    @include rounded($chip-label-border-radius)
 
 // Elements
-.v-chip
-  .v-chip__close.v-icon
-    font-size: $chip-close-size
-    max-height: $chip-close-size
-    max-width: $chip-close-size
-    user-select: none
+.v-chip__append
+  margin-inline-start: $chip-append-margin-inline-start
+  margin-inline-end: $chip-append-margin-inline-end
 
-    &.v-icon--right
-      +ltr()
-        margin-right: $chip-icon-right-margin-after
+  + .v-chip__close
+    margin-inline-start: 0
 
-      +rtl()
-        margin-left: $chip-icon-right-margin-after
+.v-chip__prepend
+  margin-inline-start: $chip-prepend-margin-inline-start
+  margin-inline-end: $chip-prepend-margin-inline-end
 
-    &:hover,
-    &:focus,
-    &:active
-      opacity: .72
-
-  .v-chip__content
-    align-items: center
-    display: inline-flex
-    height: 100%
-    max-width: 100%
-
-// Modifiers
-.v-chip--active
-  .v-icon
-    color: inherit
-
-.v-chip--link
-  &::before
-    transition: opacity $primary-transition
-
-  &:focus::before
-    opacity: $chip-link-focus-opacity
-
-.v-chip--clickable
+.v-chip__close
+  align-self: center
   cursor: pointer
+  display: inline-flex
+  flex: 0 1 auto
+  font-size: $chip-close-size
+  max-height: $chip-close-size
+  max-width: $chip-close-size
   user-select: none
+  margin-inline-start: $chip-close-margin-inline-start
+  margin-inline-end: $chip-close-margin-inline-end
 
-  &:active
-    +elevation(2)
+  .v-icon
+    font-size: inherit
 
 .v-chip--disabled
   opacity: $chip-disabled-opacity
   pointer-events: none
   user-select: none
 
-.v-chip__filter
-  // TODO: Figure out why the absence
-  // of this breaks the transition
-  max-width: $chip-filter-max-width
-
-  // Increase specificity to
-  // overwrite theme style
-  &.v-icon
-    color: inherit
-
-  &.expand-x-transition-leave-active,
-  &.expand-x-transition-enter
-    margin: 0
-
-.v-chip--pill
-  .v-chip__filter
-    margin-right: $chip-pill-filter-margin
-
-  .v-avatar
-    height: $chip-pill-avatar-size !important
-    width: $chip-pill-avatar-size !important
-
-  .v-avatar
-    +ltr()
-      &--left
-        margin-left: $chip-pill-avatar-margin-before
-
-      &--right
-        margin-right: $chip-pill-avatar-margin-before
-
-    +rtl()
-      &--left
-        margin-right: $chip-pill-avatar-margin-before
-
-      &--right
-        margin-left: $chip-pill-avatar-margin-before
-
 .v-chip--label
-  border-radius: $chip-label-border-radius !important
-
-.v-chip.v-chip--outlined
-  border-width: $icon-outlined-border-width
-  border-style: solid
-
-  &.v-chip--active:before
-    opacity: $chip-outlined-active-opacity
-
-  .v-icon
-    color: inherit
-
-  // Needs increased specificity
-  &.v-chip.v-chip
-    background-color: transparent !important
-
-// Needs increased specificity
-// to overwrite theme color
-.v-chip.v-chip--selected
-  background: transparent
-
-  &:after
-    opacity: $chip-selected-opacity
-
-.v-chip
-  @each $name, $size in $icon-sizes
-    &.v-size--#{$name}
-      border-radius: #{map-get($size, 'height') / 2}px
-      font-size: #{map-get($size, 'font-size')}px
-      height: #{map-get($size, 'height')}px
-
-      .v-icon
-        font-size: #{map-get($size, 'font-size')}px
-        height: #{map-get($size, 'font-size')}px
-        width: #{map-get($size, 'font-size')}px
+  border-radius: $chip-label-border-radius

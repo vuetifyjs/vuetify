@@ -1,52 +1,52 @@
-@import '../../styles/styles.sass';
-@import '../../styles/tools/_functions.sass';
-
-$chip-avatar-size: 24px !default;
+// Defaults
+$chip-append-margin-inline-end: 0 !default;
+$chip-append-margin-inline-start: 8px !default;
+$chip-background: rgba(var(--v-theme-on-surface), var(--v-activated-opacity)) !default;
+$chip-border-color: $border-color-root !default;
+$chip-border-radius: map-get($rounded, "pill") !default;
+$chip-border-style: $border-style-root !default;
+$chip-border-thin-width: thin !default;
+$chip-border-width: 0 !default;
+$chip-close-margin-inline-end: -4px !default;
+$chip-close-margin-inline-start: 8px !default;
 $chip-close-size: 18px !default;
-$chip-icon-margin-after: 6px !default;
-$chip-icon-margin-before: -6px !default;
-$chip-icon-right-margin-after: -4px !default;
-$chip-icon-right-margin-before: 8px !default;
-$chip-icon-size: 24px !default;
-$chip-label-border-radius: $border-radius-root !default;
-$chip-link-focus-opacity: 0.32 !default;
-$chip-pill-avatar-margin-after: 8px !default;
-$chip-pill-avatar-margin-before: -12px !default;
-$chip-pill-avatar-size: 32px !default;
-$chip-pill-filter-margin: 0 16px 0 0 !default;
-$chip-transition-duration: 0.28s !default;
-$chip-transition-fn: map-get($transition, 'fast-out-slow-in') !default;
-$icon-outlined-border-width: thin !default;
-$chip-line-height: 20px !default;
-$chip-padding: 0 12px !default;
-$chip-white-space: nowrap !default;
-$chip-disabled-opacity: 0.4 !default;
-$chip-filter-max-width: 24px !default;
-$chip-outlined-active-opacity: 0.08 !default;
-$chip-selected-opacity: 0.28 !default;
-$icon-sizes: () !default;
-$icon-sizes: map-deep-merge(
-  (
-    'x-small': (
-      'font-size': 10,
-      'height': 16
-    ),
-    'small': (
-      'font-size': 12,
-      'height': 24
-    ),
-    'default': (
-      'font-size': 14,
-      'height': 32
-    ),
-    'large': (
-      'font-size': 16,
-      'height': 54
-    ),
-    'x-large': (
-      'font-size': 18,
-      'height': 66
-    )
-  ),
-  $icon-sizes
-);
+$chip-color: currentColor !default;
+$chip-density: ("default": 0, "comfortable": -2, "compact": -3) !default;
+$chip-disabled-opacity: 0.3 !default;
+$chip-elevation: 0 !default;
+$chip-font-size: map-deep-get($typography, "button", "size") !default;
+$chip-height: 32px !default;
+$chip-icon-density: ("default": 3, "comfortable": 0, "compact": -2) !default;
+$chip-icon-font-size: 24px !default;
+$chip-icon-size: 48px !default;
+$chip-label-border-radius: 8px !default;
+$chip-link-focus-opacity: 0.3 !default;
+$chip-padding-ratio: 2 + 2/3 !default;
+$chip-plain-opacity: 0.26 !default;
+$chip-prepend-margin-inline-end: 8px !default;
+$chip-prepend-margin-inline-start: -12px !default;
+$chip-rounded-border-radius: $border-radius-root !default;
+
+$chip-sizes: (
+  "height": $chip-height,
+  "font-size": $chip-font-size,
+) !default;
+
+$chip-icon-sizes: (
+  "font-size": $chip-icon-font-size,
+  "size": $chip-icon-size,
+) !default;
+
+$chip-border: (
+  $chip-border-color,
+  $chip-border-style,
+  $chip-border-width
+) !default;
+
+$chip-variants: (
+  $chip-background,
+  $chip-color,
+  $chip-elevation,
+  $chip-plain-opacity,
+  'v-chip'
+) !default;
