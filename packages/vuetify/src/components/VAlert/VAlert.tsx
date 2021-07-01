@@ -26,7 +26,7 @@ import type { PropType } from 'vue'
 
 export const allowedTypes = ['success', 'info', 'warning', 'error'] as const
 
-export type Type = typeof allowedTypes[number]
+export type ContextualType = typeof allowedTypes[number]
 
 export default defineComponent({
   name: 'VAlert',
@@ -66,8 +66,8 @@ export default defineComponent({
     text: String,
     tip: Boolean,
     type: {
-      type: String as PropType<Type>,
-      validator: (val: Type) => allowedTypes.includes(val),
+      type: String as PropType<ContextualType>,
+      validator: (val: ContextualType) => allowedTypes.includes(val),
     },
 
     ...makeDensityProps(),
@@ -115,10 +115,10 @@ export default defineComponent({
     }
 
     return () => {
+      const hasBorder = !!borderProps.value.border
       const hasClose = !!(slots.close || props.closable)
       const hasPrepend = !!(slots.prepend || props.icon || props.type)
-      const hasText = !!(slots.text || props.text)
-      const hasBorder = !!borderProps.value.border
+      const hasText = !!(slots.default || props.text || hasClose)
 
       return isActive.value && (
         <props.tag
@@ -173,23 +173,28 @@ export default defineComponent({
               </div>
             ) }
 
-            { hasText && props.text }
-
-            { slots.default?.() }
-
-            { hasClose && (
-              <div class="v-alert__close">
-                { slots.close
-                  ? slots.close({ props: { onClick: onCloseClick } })
-                  : (
-                    <VBtn
-                      density={ props.density }
-                      icon={ props.closeIcon }
-                      variant="text"
-                      onClick={ onCloseClick }
-                    />
-                  )
+            { hasText && (
+              <div class="v-alert__text">
+                { slots.default
+                  ? slots.default()
+                  : props.text
                 }
+
+                { hasClose && (
+                  <div class="v-alert__close">
+                    { slots.close
+                      ? slots.close({ props: { onClick: onCloseClick } })
+                      : (
+                        <VBtn
+                          density={ props.density }
+                          icon={ props.closeIcon }
+                          variant="text"
+                          onClick={ onCloseClick }
+                        />
+                      )
+                    }
+                  </div>
+                ) }
               </div>
             ) }
           </div>

@@ -47,6 +47,8 @@
 
   .v-icon
     font-size: $alert-avatar-icon-font-size
+    height: $alert-avatar-icon-font-size
+    width: $alert-avatar-icon-font-size
 
   .v-alert--prominent &
     align-self: center
@@ -133,3 +135,7 @@
 
   .v-alert--border-end &
     padding-inline-start: #{$alert-text-padding + $alert-border-thin-width}
+
+.v-alert__text
+  display: flex
+  flex: 1 1
