@@ -32,13 +32,11 @@ $chip-prepend-margin-inline-start: -12px !default;
 $chip-prepend-margin-inline-end: 8px !default;
 $chip-rounded-border-radius: $border-radius-root !default;
 $chip-selected-opacity: 0.8 !default;
-$chip-width-ratio: 16 / 9 !default;
 $icon-outlined-border-width: 2px !default;
 
 $chip-sizes: (
   "height": $chip-height,
   "font-size": $chip-font-size,
-  "width-ratio": $chip-width-ratio,
 );
 
 $chip-icon-sizes: (

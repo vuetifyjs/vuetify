@@ -7,7 +7,6 @@
       --v-chip-size: #{$size};
       --v-chip-height: #{$height};
       font-size: $size;
-      min-width: round($height * $chip-width-ratio);
 
       .v-avatar {
         --v-avatar-height: #{$height - $multiplier}
