@@ -111,6 +111,7 @@ export default defineComponent({
             'v-chip',
             {
               'v-chip--disabled': props.disabled,
+              'v-chip--label': props.label,
               'v-chip--link': isClickable,
               'v-chip--pill': props.pill,
             },
