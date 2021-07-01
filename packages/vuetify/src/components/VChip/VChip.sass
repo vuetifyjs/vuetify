@@ -5,6 +5,8 @@
   align-items: center
   display: inline-flex
   padding: $chip-padding
+  text-decoration: none
+  cursor: default
 
   @at-root
     @include chip-sizes()
@@ -17,6 +19,9 @@
 
   &--border
     border-width: $chip-border-thin-width
+
+  &--link
+    cursor: pointer
 
 // Elements
 .v-chip__append

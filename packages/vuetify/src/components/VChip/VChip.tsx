@@ -106,12 +106,11 @@ export default defineComponent({
 
       return isActive.value && (
         <Tag
-          type={Tag === 'a' ? undefined : 'button' }
           class={[
             'v-chip',
             {
               'v-chip--disabled': props.disabled,
-              'v-card--link': isClickable,
+              'v-chip--link': isClickable,
             },
             themeClasses.value,
             borderClasses.value,
@@ -127,7 +126,7 @@ export default defineComponent({
           draggable={ props.draggable }
           href={ link.href.value }
           v-ripple={[
-            !props.disabled && props.ripple,
+            isClickable && props.ripple,
             null,
           ]}
           onClick={ isClickable && link.navigate }
