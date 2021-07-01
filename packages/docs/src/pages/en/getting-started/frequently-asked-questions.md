@@ -11,7 +11,7 @@ related:
 
 # Frequently asked questions
 
-Stuck on a particular problem? Check some of these common gotchas before creating a ticket. If you still cannot find what you are looking for, you can submit an [issue](https://issues.vuetifyjs.com/) on Github or ask the in our [community](https://community.vuetifyjs.com/).
+Stuck on a particular problem? Check some of these common gotchas before creating a ticket. If you still cannot find what you are looking for, you can submit an [issue](https://issues.vuetifyjs.com/) on GitHub or ask the in our [community](https://community.vuetifyjs.com/).
 
 <promoted-ad slug="vuetify-discord" />
 
@@ -102,7 +102,7 @@ Have a question that belongs here? Tell us in our [Discord Community](https://co
 
 - **I'm seeing `$attrs is readonly` and/or `$listeners is readonly` in the console**{ #attrs-is-readonly }
 
-  Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning messages. There is currently an ongoing [Github discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases.
+  Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning messages. There is currently an ongoing [GitHub discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases.
 
 <br>
 
@@ -308,5 +308,7 @@ If you need help with an issue, please use one of our help channels:
 <br>
 
 For additional inquiries, please reach out to [John Leider](mailto:john@vuetifyjs.com) or [Heather Leider](mailto:heather@vuetifyjs.com).
+
+<promoted-ad type="theme" />
 
 <backmatter />

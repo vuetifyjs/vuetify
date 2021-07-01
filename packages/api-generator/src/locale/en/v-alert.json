@@ -6,7 +6,7 @@
     "color": "Applies specified color to the control - it can be the name of material color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). You can find list of built in classes on the [colors page](/styles/colors#material-colors).",
     "coloredBorder": "Applies the defined **color** to the alert's border.",
     "dark": "Applies the dark theme variant to the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
-    "dense": "Hides the alert icon and decreases component's height.",
+    "dense": "Decreases component's height.",
     "dismissible": "Adds a close icon that can hide the alert.",
     "elevation": "Designates an elevation applied to the component between 0 and 24. You can find more information on the [elevation page](/styles/elevation).",
     "height": "Sets the height for the component.",

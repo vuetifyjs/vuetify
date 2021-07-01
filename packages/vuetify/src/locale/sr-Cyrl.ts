@@ -1,21 +1,21 @@
 export default {
   badge: 'Значка',
-  close: 'Close',
+  close: 'Затвори',
   dataIterator: {
     noResultsText: 'Ни један запис није пронађен',
-    loadingText: 'Loading item...',
+    loadingText: 'Учитавање ставке...',
   },
   dataTable: {
     itemsPerPageText: 'Редова по страници:',
     ariaLabel: {
-      sortDescending: 'Sorted descending.',
-      sortAscending: 'Sorted ascending.',
-      sortNone: 'Not sorted.',
-      activateNone: 'Activate to remove sorting.',
-      activateDescending: 'Activate to sort descending.',
-      activateAscending: 'Activate to sort ascending.',
+      sortDescending: 'Сортирано опадајуће.',
+      sortAscending: 'Сортирано растуће.',
+      sortNone: 'Није сортирано.',
+      activateNone: 'Кликни да уклониш сортирање.',
+      activateDescending: 'Кликни да сортираш опадајуће.',
+      activateAscending: 'Кликни да сортираш растуће.',
     },
-    sortBy: 'Sort by',
+    sortBy: 'Сортирај по',
   },
   dataFooter: {
     itemsPerPageText: 'Ставки по страници:',
@@ -30,23 +30,23 @@ export default {
     itemsSelected: '{0} одабрано',
     nextMonthAriaLabel: 'Следећег месеца',
     nextYearAriaLabel: 'Следеће године',
-    prevMonthAriaLabel: 'Претходни мјесец',
+    prevMonthAriaLabel: 'Претходни месец',
     prevYearAriaLabel: 'Претходна година',
   },
   noDataText: 'Нема доступних података',
   carousel: {
-    prev: 'Превиоус висуал',
-    next: 'Нект висуал',
+    prev: 'Претходна слика',
+    next: 'Следећа слика',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Слика {0} од {1}',
     },
   },
   calendar: {
-    moreEvents: '{0} море',
+    moreEvents: '{0} више',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in total)',
+    counter: '{0} фајлова',
+    counterSize: '{0} фајлова ({1} укупно)',
   },
   timePicker: {
     am: 'AM',
@@ -63,7 +63,7 @@ export default {
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      icon: 'Оцена {0} од {1}',
     },
   },
 }

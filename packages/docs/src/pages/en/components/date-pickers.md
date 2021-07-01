@@ -25,6 +25,8 @@ Date pickers come in two orientation variations, portrait **(default)** and land
 
 - [v-date-picker](/api/v-date-picker)
 
+<api-section page="components/date-pickers" />
+
 ## Caveats
 
 <alert type="warning">
@@ -119,9 +121,9 @@ You can specify events using arrays, objects or functions. To change the default
 
 ### Misc
 
-#### Birthday picker
+#### Active picker
 
-Starting with year picker by default, restricting dates range and closing the picker menu after selecting the day make the perfect birthday picker.
+You can create a birthday picker - starting with year picker by default, restricting dates range and closing the picker menu after selecting the day make the perfect birthday picker.
 
 <example file="v-date-picker/misc-birthday" />
 

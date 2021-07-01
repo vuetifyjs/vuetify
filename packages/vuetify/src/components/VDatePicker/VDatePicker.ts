@@ -43,6 +43,8 @@ interface Formatters {
   titleDate: DatePickerFormatter | DatePickerMultipleFormatter
 }
 
+type ActivePicker = 'DATE' | 'MONTH' | 'YEAR';
+
 export default mixins(
   Localable,
   Picker,
@@ -51,6 +53,7 @@ export default mixins(
   name: 'v-date-picker',
 
   props: {
+    activePicker: String as PropType<ActivePicker>,
     allowedDates: Function as PropType<DatePickerAllowedDatesFunction | undefined>,
     // Function formatting the day in date picker table
     dayFormat: Function as PropType<DatePickerAllowedDatesFunction | undefined>,
@@ -134,7 +137,7 @@ export default mixins(
   data () {
     const now = new Date()
     return {
-      activePicker: this.type.toUpperCase(),
+      internalActivePicker: this.type.toUpperCase(),
       inputDay: null as number | null,
       inputMonth: null as number | null,
       inputYear: null as number | null,
@@ -244,6 +247,15 @@ export default mixins(
   },
 
   watch: {
+    internalActivePicker: {
+      immediate: true,
+      handler (val: ActivePicker) {
+        this.$emit('update:active-picker', val)
+      },
+    },
+    activePicker (val: ActivePicker) {
+      this.internalActivePicker = val
+    },
     tableDate (val: string, prev: string) {
       // Make a ISO 8601 strings from val and prev for comparision, otherwise it will incorrectly
       // compare for example '2000-9' and '2000-10'
@@ -272,7 +284,7 @@ export default mixins(
       }
     },
     type (type: DatePickerType) {
-      this.activePicker = type.toUpperCase()
+      this.internalActivePicker = type.toUpperCase()
 
       if (this.value && this.value.length) {
         const output = this.multipleValue
@@ -334,7 +346,7 @@ export default mixins(
       } else {
         this.tableDate = `${value}-${pad((this.tableMonth || 0) + 1)}`
       }
-      this.activePicker = 'MONTH'
+      this.internalActivePicker = 'MONTH'
       if (this.reactive && !this.readonly && !this.isMultiple && this.isDateAllowed(this.inputDate)) {
         this.$emit('input', this.inputDate)
       }
@@ -348,7 +360,7 @@ export default mixins(
         }
 
         this.tableDate = value
-        this.activePicker = 'DATE'
+        this.internalActivePicker = 'DATE'
         if (this.reactive && !this.readonly && !this.isMultiple && this.isDateAllowed(this.inputDate)) {
           this.$emit('input', this.inputDate)
         }
@@ -368,14 +380,14 @@ export default mixins(
           date: this.value ? (this.formatters.titleDate as (value: any) => string)(this.isMultiple ? this.multipleValue : this.value) : '',
           disabled: this.disabled,
           readonly: this.readonly,
-          selectingYear: this.activePicker === 'YEAR',
+          selectingYear: this.internalActivePicker === 'YEAR',
           year: this.formatters.year(this.multipleValue.length ? `${this.inputYear}` : this.tableDate),
           yearIcon: this.yearIcon,
           value: this.multipleValue[0],
         },
         slot: 'title',
         on: {
-          'update:selecting-year': (value: boolean) => this.activePicker = value ? 'YEAR' : this.type.toUpperCase(),
+          'update:selecting-year': (value: boolean) => this.internalActivePicker = value ? 'YEAR' : this.type.toUpperCase(),
         },
       })
     },
@@ -389,16 +401,16 @@ export default mixins(
           format: this.headerDateFormat,
           light: this.light,
           locale: this.locale,
-          min: this.activePicker === 'DATE' ? this.minMonth : this.minYear,
-          max: this.activePicker === 'DATE' ? this.maxMonth : this.maxYear,
-          nextAriaLabel: this.activePicker === 'DATE' ? this.nextMonthAriaLabel : this.nextYearAriaLabel,
-          prevAriaLabel: this.activePicker === 'DATE' ? this.prevMonthAriaLabel : this.prevYearAriaLabel,
+          min: this.internalActivePicker === 'DATE' ? this.minMonth : this.minYear,
+          max: this.internalActivePicker === 'DATE' ? this.maxMonth : this.maxYear,
+          nextAriaLabel: this.internalActivePicker === 'DATE' ? this.nextMonthAriaLabel : this.nextYearAriaLabel,
+          prevAriaLabel: this.internalActivePicker === 'DATE' ? this.prevMonthAriaLabel : this.prevYearAriaLabel,
           prevIcon: this.prevIcon,
           readonly: this.readonly,
-          value: this.activePicker === 'DATE' ? `${pad(this.tableYear, 4)}-${pad(this.tableMonth + 1)}` : `${pad(this.tableYear, 4)}`,
+          value: this.internalActivePicker === 'DATE' ? `${pad(this.tableYear, 4)}-${pad(this.tableMonth + 1)}` : `${pad(this.tableYear, 4)}`,
         },
         on: {
-          toggle: () => this.activePicker = (this.activePicker === 'DATE' ? 'MONTH' : 'YEAR'),
+          toggle: () => this.internalActivePicker = (this.internalActivePicker === 'DATE' ? 'MONTH' : 'YEAR'),
           input: (value: string) => this.tableDate = value,
         },
       })
@@ -483,15 +495,15 @@ export default mixins(
       })
     },
     genPickerBody (): VNode {
-      const children = this.activePicker === 'YEAR' ? [
+      const children = this.internalActivePicker === 'YEAR' ? [
         this.genYears(),
       ] : [
         this.genTableHeader(),
-        this.activePicker === 'DATE' ? this.genDateTable() : this.genMonthTable(),
+        this.internalActivePicker === 'DATE' ? this.genDateTable() : this.genMonthTable(),
       ]
 
       return this.$createElement('div', {
-        key: this.activePicker,
+        key: this.internalActivePicker,
       }, children)
     },
     setInputDate () {

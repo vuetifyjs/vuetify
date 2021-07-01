@@ -88,6 +88,7 @@ export default mixins(
       default: () => [],
     } as PropValidator<DataTableHeader[]>,
     showSelect: Boolean,
+    checkboxColor: String,
     showExpand: Boolean,
     showGroupBy: Boolean,
     // TODO: Fix
@@ -262,6 +263,7 @@ export default mixins(
           options: props.options,
           mobile: this.isMobile,
           showGroupBy: this.showGroupBy,
+          checkboxColor: this.checkboxColor,
           someItems: this.someItems,
           everyItem: this.everyItem,
           singleSelect: this.singleSelect,
@@ -274,6 +276,7 @@ export default mixins(
         },
       }
 
+      // TODO: rename to 'head'? (thead, tbody, tfoot)
       const children: VNodeChildrenArrayContents = [getSlot(this, 'header', {
         ...data,
         isMobile: this.isMobile,
@@ -466,6 +469,7 @@ export default mixins(
           props: {
             value: data.isSelected,
             disabled: !this.isSelectable(item),
+            color: this.checkboxColor ?? '',
           },
           on: {
             input: (val: boolean) => data.select(val),
@@ -533,6 +537,9 @@ export default mixins(
         getSlot(this, 'body.append', data, true),
       ])
     },
+    genFoot (props: DataScopeProps): VNode[] | undefined {
+      return this.$scopedSlots.foot?.(props)
+    },
     genFooters (props: DataScopeProps) {
       const data = {
         props: {
@@ -588,6 +595,9 @@ export default mixins(
 
       return this.$createElement(VSimpleTable, {
         props: simpleProps,
+        class: {
+          'v-data-table--mobile': this.isMobile,
+        },
       }, [
         this.proxySlot('top', getSlot(this, 'top', {
           ...props,
@@ -597,6 +607,7 @@ export default mixins(
         this.genColgroup(props),
         this.genHeaders(props),
         this.genBody(props),
+        this.genFoot(props),
         this.proxySlot('bottom', this.genFooters(props)),
       ])
     },

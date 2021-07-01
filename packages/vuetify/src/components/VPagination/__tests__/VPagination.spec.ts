@@ -164,8 +164,8 @@ describe('VPagination.ts', () => {
         totalVisible: 5,
       },
     })
-    const maxLength = wrapper.vm.totalVisible
-    const left = Math.floor(maxLength / 2)
+    const maxLength = Number(wrapper.vm.totalVisible)
+    const left = Math.ceil(maxLength / 2)
     wrapper.setProps({ value: left })
     jest.runAllTimers()
 
@@ -182,9 +182,9 @@ describe('VPagination.ts', () => {
         totalVisible: 5,
       },
     })
-    const maxLength = wrapper.vm.totalVisible
+    const maxLength = Number(wrapper.vm.totalVisible)
     const even = maxLength % 2 === 0 ? 1 : 0
-    const left = Math.floor(maxLength / 2)
+    const left = Math.ceil(maxLength / 2)
     const right = wrapper.vm.length - left + 1 + even
     wrapper.setProps({ value: right })
     jest.runAllTimers()

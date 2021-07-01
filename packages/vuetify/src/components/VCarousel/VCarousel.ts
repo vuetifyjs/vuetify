@@ -60,6 +60,13 @@ export default VWindow.extend({
     },
   },
 
+  // pass down the parent's theme
+  provide (): object {
+    return {
+      parentTheme: this.theme,
+    }
+  },
+
   data () {
     return {
       internalHeight: this.height,

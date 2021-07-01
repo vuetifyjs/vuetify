@@ -13,7 +13,7 @@ related:
 
 The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, content-editing, and row selection.
 
-<promoted-ad slug="vuetify-lux-admin-pro" />
+<promoted-ad type="theme" />
 
 ## Usage
 
@@ -28,6 +28,8 @@ The standard data-table will by default render your data as simple rows.
 - [v-data-footer](/api/v-data-footer)
 - [v-edit-dialog](/api/v-edit-dialog)
 - [v-simple-checkbox](/api/v-simple-checkbox)
+
+<api-section page="components/data-tables" />
 
 <!-- ## Sub-components
 
@@ -115,6 +117,12 @@ The data table exposes a **search** prop that allows you to filter your data.
 
 The `v-data-table` provides a large number of slots for customizing the table. This example showcases some of these slots and what you can do with each. It is important to note some slot (eg: `item`/`body`/`header`) will completely takes over the internal rendering of the component which will require you to re-implement functionalities such as selection and expansion. Some slots will override each other such as: `body` > `item` > `item.<name>` and `header`/`header.<name>`.
 
+<alert type="info">
+
+  Some slots such as `item.<name>` and `header.<name>` use modifiers to target more scoped slots. Eslint by default will throw errors when slots use modifiers. To disable these errors, add the following rule to your eslint configuration: `"vue/valid-v-slot": ["error", { "allowModifiers": true }]`.
+
+</alert>
+
 <example file="v-data-table/slot-main" />
 
 #### Header
@@ -151,7 +159,7 @@ The `v-edit-dialog` component can be used for editing data directly within a `v-
 
 #### Expandable rows
 
-The **show-expand** prop will render an expand icon on each default row. You can customize this with the `item.data-table-expand` slot. The position of this slot can be customized by adding a column with `value: 'data-table-expand'` to the headers array. You can also switch between allowing multiple expanded rows at the same time or just one with the **single-expand** prop. The expanded rows are available on the synced prop `expanded.sync`
+The **show-expand** prop will render an expand icon on each default row. You can customize this with the `item.data-table-expand` slot. The position of this slot can be customized by adding a column with `value: 'data-table-expand'` to the headers array. You can also switch between allowing multiple expanded rows at the same time or just one with the **single-expand** prop. The expanded rows are available on the synced prop `expanded.sync`. Row items require a unique key property for expansion to work. The default is `id`, but you can use the **item-key** prop to specify a different item property.
 
 <example file="v-data-table/misc-expand" />
 

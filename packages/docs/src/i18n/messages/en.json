@@ -4,6 +4,15 @@
   "ads-via-vuetify": "ads via Vuetify",
   "alpha": "Alpha",
   "api": "API",
+  "api-headers": {
+    "argument": "Argument",
+    "events": "Events",
+    "functions": "Functions",
+    "modifiers": "Modifiers",
+    "props": "Props",
+    "sass": "SASS Variables",
+    "slots": "Slots"
+  },
   "application": "Application",
   "apply": "Apply",
   "bars": "Bars",
@@ -89,7 +98,8 @@
     "get-started": "Get Started",
     "why-vuetify": "Why Vuetify?"
   },
-  "homepage": "Vuetify Home Ppage",
+  "homepage": "Vuetify Home Page",
+  "inline": "Inline",
   "install": "Install",
   "install-vuetify": "Install Vuetify Documentation",
   "introduction": "Introduction",
@@ -102,6 +112,7 @@
   "layout-link": "Link to layout for {name}",
   "learn": "Learn",
   "light": "Light",
+  "link-only": "Link Only",
   "logo": "Vuetify Logo",
   "ltr": "LTR",
   "marked-read": "Mark all read",

@@ -29,6 +29,8 @@ A card has 4 basic components, `v-card-title`, `v-card-subtitle`, `v-card-text` 
 - [v-card-text](/api/v-card-text)
 - [v-card-title](/api/v-card-title)
 
+<api-section page="components/cards" />
+
 ## Functional Components
 
 ### v-card-actions
@@ -93,7 +95,7 @@ Using grids, you can create beautiful layouts.
 
 #### Horizontal cards
 
-Using `v-flex`, you can create customized horizontal cards. Use the `contain` property to shrink the `v-img` to fit inside the container, instead of covering.
+Using `v-col`, you can create customized horizontal cards. Use the `contain` property to shrink the `v-img` to fit inside the container, instead of covering.
 
 <example file="v-card/misc-horizontal-cards" />
 

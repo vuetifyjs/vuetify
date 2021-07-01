@@ -34,12 +34,20 @@
       </div>
 
       <default-settings-rtl />
+
+      <div class="mt-4 mb-3 mx-n3">
+        <v-divider />
+      </div>
+
+      <default-settings-api />
+
     </v-container>
   </v-navigation-drawer>
 </template>
 
 <script>
   // Components
+  import DefaultSettingsApi from './Api'
   import DefaultSettingsDrawerGrouping from './DrawerGrouping'
   import DefaultSettingsDrawerPrepend from './DrawerPrepend'
   import DefaultSettingsPwa from './Pwa'
@@ -53,6 +61,7 @@
     name: 'DefaultSettings',
 
     components: {
+      DefaultSettingsApi,
       DefaultSettingsDrawerGrouping,
       DefaultSettingsDrawerPrepend,
       DefaultSettingsPwa,

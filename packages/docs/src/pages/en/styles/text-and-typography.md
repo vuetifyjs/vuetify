@@ -123,7 +123,13 @@ You can prevent wrapping text with the `.text-no-wrap` utility class.
 
 <example file="text-and-typography/text-no-wrap" />
 
-Longer content can be truncated with a text ellipsis. **Requires** `display: inline-block` **or** `display: block`.
+Longer content can be truncated with a text ellipsis using the `.text-truncate` utility class.
+
+<alert type="info">
+
+  **Requires** `display: inline-block` **or** `display: block`.
+
+</alert>
 
 <example file="text-and-typography/text-truncate" />
 

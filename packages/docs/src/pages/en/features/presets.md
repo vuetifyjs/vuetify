@@ -189,6 +189,8 @@ import Vuetify, { VRow } from 'vuetify/lib/framework'
 export default new Vuetify()
 ```
 
+<vuetify-ad slug="flairo-theme-pro" />
+
 ## Plugin development guide
 
 A Vuetify preset is a npm package that provides framework wide options and custom styling using Vue CLI. It consists of a SASS variables file, a CSS overrides file and the Vue CLI [Generator](https://cli.vuejs.org/dev-guide/generator-api.html) and [Plugin Service](https://cli.vuejs.org/dev-guide/plugin-api.html). Some of the features offered by presets are:
@@ -339,5 +341,7 @@ This is a catch all for style modifications that do not have corresponding varia
     padding: $shrine-chip-padding
     +elevation(0)
 ```
+
+<vuetify-ad slug="consulting-support" />
 
 <backmatter />

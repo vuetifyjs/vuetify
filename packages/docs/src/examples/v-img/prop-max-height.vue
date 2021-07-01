@@ -13,7 +13,7 @@
               height="125"
               class="grey darken-4"
             ></v-img>
-            <v-card-title class="title">
+            <v-card-title class="text-h6">
               height
             </v-card-title>
           </v-card>
@@ -27,7 +27,7 @@
               contain
               class="grey darken-4"
             ></v-img>
-            <v-card-title class="title">
+            <v-card-title class="text-h6">
               height with contain
             </v-card-title>
           </v-card>
@@ -40,7 +40,7 @@
               max-height="125"
               class="grey darken-4"
             ></v-img>
-            <v-card-title class="title">
+            <v-card-title class="text-h6">
               max-height
             </v-card-title>
           </v-card>
@@ -54,7 +54,7 @@
               contain
               class="grey darken-4"
             ></v-img>
-            <v-card-title class="title">
+            <v-card-title class="text-h6">
               max-height with contain
             </v-card-title>
           </v-card>

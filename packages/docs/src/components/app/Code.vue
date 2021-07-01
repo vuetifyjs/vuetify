@@ -123,6 +123,9 @@
       pre[class*=language]
         color: #ccc !important
 
+        &::selection, ::selection
+          background-color: #113663
+
       pre[class*=language]
         &::after
           color: hsla(0, 0%, 50%, 1)

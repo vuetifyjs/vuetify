@@ -6,7 +6,7 @@
     <router-link
       v-if="prev"
       :to="prev.to"
-      class="text-decoration-none body-1"
+      class="text-decoration-none text-body-1"
     >
       <span class="text-h6 text--primary" v-html="arrows.prev" />
       <span v-text="prev.title" />
@@ -17,7 +17,7 @@
     <router-link
       v-if="next"
       :to="next.to"
-      class="text-decoration-none body-1"
+      class="text-decoration-none text-body-1"
     >
       <span v-text="next.title" />
       <span class="text-h6 text--primary" v-html="arrows.next" />

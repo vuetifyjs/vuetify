@@ -54,10 +54,12 @@ Currently Vuetify provides translations in the following languages:
 - **sk** - Slovak (slovenčina)
 - **sl** - Slovene (slovenski jezik)
 - **srCyrl** - Serbian (српски језик)
+- **srLatn** - Serbian (srpski jezik)
 - **sv** - Swedish (svenska)
 - **th** - Thai (ไทย)
 - **tr** - Turkish (Türkçe)
 - **uk** - Ukrainian (Українська)
+- **vi** - Vietnamese (Tiếng Việt)
 - **zhHans** - Chinese (中文)
 - **zhHant** - Chinese (正體中文)
 
@@ -70,7 +72,7 @@ import Vuetify from 'vuetify/lib'
 Vue.use(Vuetify)
 
 // Translation provided by Vuetify (javascript)
-import zhHans from 'vuetify/es5/locale/zh-Hans'
+import zhHans from 'vuetify/lib/locale/zh-Hans'
 
 // Translation provided by Vuetify (typescript)
 import pl from 'vuetify/src/locale/pl'
@@ -97,6 +99,8 @@ export default new Vuetify({
 ## API
 
 - [internationalization](/api/internationalization)
+
+<api-section page="features/internationalization" />
 
 ## Caveats
 

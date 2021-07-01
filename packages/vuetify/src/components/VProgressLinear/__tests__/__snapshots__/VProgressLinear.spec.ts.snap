@@ -74,7 +74,7 @@ exports[`VProgressLinear.ts should render component with buffer value and match 
      style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="opacity: 0.3; left: 33%; width: -33%;"
+       style="opacity: 0.3; left: 33%; width: 0%;"
   >
   </div>
   <div class="v-progress-linear__buffer"
@@ -97,7 +97,7 @@ exports[`VProgressLinear.ts should render component with buffer value and value 
      style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="opacity: 0.3; left: 90%; width: -10%;"
+       style="opacity: 0.3; left: 90%; width: 0%;"
   >
   </div>
   <div class="v-progress-linear__buffer"
@@ -225,7 +225,7 @@ exports[`VProgressLinear.ts should render default slot content 1`] = `
      style="height: 4px;"
 >
   <div class="v-progress-linear__background primary"
-       style="opacity: 0.3; left: 90%; width: -10%;"
+       style="opacity: 0.3; left: 90%; width: 0%;"
   >
   </div>
   <div class="v-progress-linear__buffer"
