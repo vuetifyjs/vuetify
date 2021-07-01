@@ -33,14 +33,16 @@ export default defineComponent({
 
     if (!breadcrumbs) throw new Error('[Vuetify] Could not find v-breadcrumbs provider')
 
+    const link = useLink(props, attrs)
+    const isActive = computed(() => {
+      return props.active || link.isExactActive?.value
+    })
     const color = computed(() => {
-      if (props.active) return props.activeColor ?? breadcrumbs.color.value
+      if (isActive.value) return props.activeColor ?? breadcrumbs.color.value
 
       return props.color
     })
-
     const { textColorClasses, textColorStyles } = useTextColor(color)
-    const link = useLink(props, attrs)
 
     return () => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
@@ -50,10 +52,10 @@ export default defineComponent({
           class={[
             'v-breadcrumbs-item',
             {
-              'v-breadcrumbs-item--active': link.isExactActive?.value,
+              'v-breadcrumbs-item--active': isActive.value,
               'v-breadcrumbs-item--disabled': props.disabled || breadcrumbs.disabled.value,
               'v-breadcrumbs-item--link': link.isLink.value,
-              [`${props.activeClass}`]: props.active && props.activeClass,
+              [`${props.activeClass}`]: isActive.value && props.activeClass,
             },
             textColorClasses.value,
           ]}
@@ -61,8 +63,8 @@ export default defineComponent({
             textColorStyles.value,
           ]}
           href={ link.href.value }
-          aria-current={ props.active ? 'page' : undefined }
-          onClick={ !props.active || link.navigate }
+          aria-current={ isActive.value ? 'page' : undefined }
+          onClick={ isActive.value && link.navigate }
         >
           { props.icon && (<VIcon icon={ props.icon } />) }
 
