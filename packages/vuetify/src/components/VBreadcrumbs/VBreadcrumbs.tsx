@@ -93,7 +93,7 @@ export default defineComponent({
               key={ index }
               { ...item.props }
             >
-              { slots.item?.({ ...item, index }) }
+              { slots.item?.({ ...item, index }) || item.props.text }
             </VBreadcrumbsItem>
 
             { index < props.items.length - 1 && (

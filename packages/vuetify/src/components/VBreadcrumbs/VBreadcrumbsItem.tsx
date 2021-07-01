@@ -23,7 +23,6 @@ export default defineComponent({
     color: String,
     disabled: Boolean,
     icon: String,
-    text: String,
 
     ...makeRouterProps(),
     ...makeTagProps({ tag: 'li' }),
@@ -66,8 +65,6 @@ export default defineComponent({
           onClick={ !props.active || link.navigate }
         >
           { props.icon && (<VIcon icon={ props.icon } />) }
-
-          { props.text }
 
           { slots.default?.() }
         </Tag>
