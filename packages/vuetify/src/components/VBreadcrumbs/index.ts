@@ -1,13 +1,3 @@
-import VBreadcrumbs from './VBreadcrumbs'
-import VBreadcrumbsItem from './VBreadcrumbsItem'
-import VBreadcrumbsDivider from './VBreadcrumbsDivider'
-
-export { VBreadcrumbs, VBreadcrumbsItem, VBreadcrumbsDivider }
-
-export default {
-  $_vuetify_subcomponents: {
-    VBreadcrumbs,
-    VBreadcrumbsItem,
-    VBreadcrumbsDivider,
-  },
-}
+export { default as VBreadcrumbs } from './VBreadcrumbs'
+export { default as VBreadcrumbsItem } from './VBreadcrumbsItem'
+export { default as VBreadcrumbsDivider } from './VBreadcrumbsDivider'

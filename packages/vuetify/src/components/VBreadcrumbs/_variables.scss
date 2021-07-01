@@ -1,8 +1,13 @@
-@import '../../styles/styles.sass';
-
-$breadcrumbs-flex: 0 1 auto !default;
-$breadcrumbs-padding: 18px 12px !default;
-$breadcrumbs-even-child-padding: 0 12px !default;
-$breadcrumbs-item-font-size: 14px !default;
-$breadcrumbs-item-large-font-size: 16px !default;
-$breadcrumbs-margin: 0 !default;
+// Defaults
+$breadcrumbs-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
+$breadcrumbs-divider-padding: 0 8px !default;
+$breadcrumbs-item-disabled-opacity: var(--v-disabled-opacity) !default;
+$breadcrumbs-item-icon-font-size: map-deep-get($typography, 'body-1', 'size') !default;
+$breadcrumbs-item-icon-margin-inline-end: 2px !default;
+$breadcrumbs-item-icon-margin-inline-start: -4px !default;
+$breadcrumbs-item-link-text-decoration: underline !default;
+$breadcrumbs-item-padding: 0 4px !default;
+$breadcrumbs-line-height: map-deep-get($typography, 'subtitle-2', 'line-height') !default;
+$breadcrumbs-padding: 16px !default;
+$breadcrumbs-rounded-border-radius: $border-radius-root !default;
+$breadcrumbs-vertical-align: middle !default;

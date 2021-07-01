@@ -1,101 +1,30 @@
-// @ts-nocheck
-/* eslint-disable */
-
 // Components
-// import VBreadcrumbs from '../VBreadcrumbs'
-// import VBreadcrumbsItem from '../VBreadcrumbsItem'
+import { VBreadcrumbs } from '..'
 
 // Utilities
-import { compileToFunctions } from 'vue-template-compiler'
-import {
-  mount,
-  Wrapper,
-} from '@vue/test-utils'
+import { createVuetify } from '@/framework'
+import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 
-describe.skip('VBreadcrumbs.ts', () => {
-  type Instance = InstanceType<typeof VBreadcrumbs>
-  let mountFunction: (options?: object) => Wrapper<Instance>
+describe('VBreadcrumbs', () => {
+  const vuetify = createVuetify()
 
-  beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VBreadcrumbs, {
-        ...options,
-      })
-    }
-  })
+  function mountFunction (options = {}) {
+    return mount(VBreadcrumbs, {
+      global: { plugins: [vuetify] },
+      ...options,
+    })
+  }
 
-  it('should have breadcrumbs classes', () => {
-    const wrapper = mount(VBreadcrumbs)
-
-    expect(wrapper.classes('v-breadcrumbs')).toBe(true)
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render items without slot', () => {
+  it.each([
+    ['item'],
+    ['divider'],
+  ])('should generate slot content', slot => {
     const wrapper = mountFunction({
-      propsData: {
-        items: [
-          { text: 'a' },
-          { text: 'b' },
-          { text: 'c' },
-          { text: 'd' },
-        ],
-      },
+      props: { items: ['fizz', 'buzz'] },
+      slots: { [slot]: '<div>foobar</div>' },
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should not complain about identical keys', () => {
-    mountFunction({
-      propsData: {
-        items: [
-          { text: 'a' },
-          { text: 'a' },
-        ],
-      },
-    })
-
-    expect(`Duplicate keys detected: 'a'`).not.toHaveBeenWarned()
-  })
-
-  it('should use slot to render items if present', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        items: [
-          { text: 'a' },
-          { text: 'b' },
-          { text: 'c' },
-          { text: 'd' },
-        ],
-      },
-      scopedSlots: {
-        item (props) {
-          return this.$createElement(VBreadcrumbsItem, {
-            key: props.item.text,
-          }, props.item.text.toUpperCase())
-        },
-      },
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should use a custom divider slot', () => {
-    const wrapper = mountFunction({
-      propsData: {
-        items: [
-          { text: 'a' },
-          { text: 'b' },
-          { text: 'c' },
-          { text: 'd' },
-        ],
-      },
-      slots: {
-        divider: '/divider/',
-      },
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.html()).toContain('<div>foobar</div>')
   })
 })

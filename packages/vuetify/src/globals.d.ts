@@ -2,6 +2,7 @@ import type { TouchStoredHandlers } from './directives/touch'
 import type { ComponentPublicInstance, FunctionalComponent, VNode } from 'vue'
 
 import { IconProps } from '@/composables/icons'
+import type { RouteLocationRaw } from 'vue-router'
 
 declare global {
   interface HTMLCollection {
@@ -102,5 +103,12 @@ declare module '@vue/runtime-core' {
 declare module '@vue/runtime-dom' {
   export interface HTMLAttributes {
     style: any
+  }
+}
+
+declare module 'vue-router' {
+  export interface RouterLinkOptions {
+    to: RouteLocationRaw
+    replace?: boolean
   }
 }
