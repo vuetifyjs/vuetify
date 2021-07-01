@@ -28,6 +28,7 @@ interface BreadcrumbsContext {
 export const VBreadcrumbsSymbol: InjectionKey<BreadcrumbsContext> = Symbol.for('vuetify:breadcrumbs')
 
 export type BreadcrumbItem = string | (LinkProps & {
+  icon: string
   text: string
 })
 
@@ -97,7 +98,7 @@ export default defineComponent({
 
             { index < props.items.length - 1 && (
               <VBreadcrumbsDivider>
-                { slots.divider ? slots.divider({ item, index }) : props.divider }
+                { slots.divider ? slots.divider({ ...item, index }) : props.divider }
               </VBreadcrumbsDivider>
             ) }
           </>
