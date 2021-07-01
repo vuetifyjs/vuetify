@@ -24,7 +24,7 @@ function getPropType (type) {
 
 function getPropDefault (def, type) {
   if (typeof def === 'function' && type !== 'function') {
-    return def.call({})
+    return def.call({}, {})
   }
 
   if (typeof def === 'string') {
