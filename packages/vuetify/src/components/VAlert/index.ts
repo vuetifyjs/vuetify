@@ -1,4 +1,1 @@
-import VAlert from './VAlert'
-
-export { VAlert }
-export default VAlert
+export { default as VAlert } from './VAlert'

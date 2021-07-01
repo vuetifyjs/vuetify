@@ -1,16 +1,56 @@
-@import '../../styles/styles.sass';
-
-$alert-elevation: 0 !default;
-$alert-border-opacity: 0.26 !default;
-$alert-border-radius: $border-radius-root !default;
-$alert-shaped-border-radius: map-get($rounded, 'xl') $alert-border-radius !default;
-$alert-border-width: 4px !default;
-$alert-dense-border-width: medium !default;
-$alert-font-size: 16px !default;
-$alert-icon-size: 24px !default;
-$alert-margin: 16px !default;
-$alert-outline: thin solid currentColor !default;
-$alert-padding: 16px !default;
-$alert-prominent-icon-font-size: 32px !default;
-$alert-prominent-icon-size: 48px !default;
+// Defaults
+$alert-avatar-height: 24px !default;
+$alert-avatar-icon-font-size: 24px !default;
+$alert-avatar-margin-inline-end: 16px !default;
+$alert-avatar-margin-inline-start: 0 !default;
+$alert-avatar-margin-top: -6px !default;
+$alert-background: rgba(var(--v-theme-on-surface), var(--v-hover-opacity)) !default;
+$alert-border-color: currentColor !default;
 $alert-border-icon-margin: 8px !default;
+$alert-border-opacity: 0.26 !default;
+$alert-border-padding-inline-start: 24px !default;
+$alert-border-radius: $border-radius-root !default;
+$alert-border-style: $border-style-root !default;
+$alert-border-thin-width: 8px !default;
+$alert-border-width: 0 !default;
+$alert-close-icon-font-size: 20px !default;
+$alert-close-margin-inline-start: auto !default;
+$alert-close-padding-inline-start: 8px !default;
+$alert-color: rgb(var(--v-theme-on-surface)) !default;
+$alert-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
+$alert-elevation: 0 !default;
+$alert-font-size: 16px !default;
+$alert-icon-font-size-multiplier: 1.5 !default;
+$alert-padding: 16px !default;
+$alert-plain-opacity: .62 !default;
+$alert-plain-transition: .2s opacity $standard-easing !default;
+$alert-positions: absolute fixed !default;
+$alert-prominent-avatar-margin-inline-end: 16px !default;
+$alert-prominent-avatar-margin-inline-start: 0 !default;
+$alert-prominent-icon-font-size: 40px !default;
+$alert-prominent-icon-size: 40px !default;
+$alert-text-padding: 16px !default;
+$alert-tip-border-inline-start-width: 6px !default;
+$alert-tip-margin-inline-start: -33px !default;
+$alert-tip-max-height: 24px !default;
+$alert-tip-max-width: 24px !default;
+
+$alert-border: (
+  $alert-border-color,
+  $alert-border-style,
+  $alert-border-width,
+  $alert-border-thin-width
+) !default;
+
+$alert-theme: (
+  $alert-background,
+  $alert-color
+) !default;
+
+$alert-variants: (
+  $alert-background,
+  $alert-color,
+  $alert-elevation,
+  $alert-plain-opacity,
+  'v-alert'
+) !default;
