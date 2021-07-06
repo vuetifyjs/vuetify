@@ -170,10 +170,9 @@
 
 // VPagination
 .v-btn
-  @include elevation($button-pagination-elevation)
-  @include rounded($button-pagination-border-radius)
-
   .v-pagination &
+    @include elevation($button-pagination-elevation)
+    @include rounded($button-pagination-border-radius)
     @include button-density('height' 'width', $button-pagination-density)
 
   &--elevated
