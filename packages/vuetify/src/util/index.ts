@@ -1,6 +1,7 @@
 export * from './colorUtils'
 export * from './console'
 export * from './createSimpleFunctional'
+export * from './defineComponent'
 export * from './dom'
 export * from './easing'
 export * from './getScrollParent'

@@ -142,17 +142,12 @@ const getComponentApi = (componentName, locales) => {
   const props = Object.keys(component.props).reduce((arr, key) => {
     const prop = component.props[key]
 
-    if (!prop.default || typeof prop.default !== 'function') {
-      console.warn(`Prop ${key} of component ${componentName} does not have default function. Make sure the component uses makeProps function.`)
-      return arr
-    }
-
     const type = getPropType(prop.type)
 
     return [...arr, {
       name: kebabCase(key),
       source: prop.source || kebabName,
-      default: getPropDefault(prop.default(), type),
+      default: getPropDefault(prop.default, type),
       type,
     }]
   }, [])
