@@ -1,5 +1,5 @@
 // Utils
-import { getCurrentInstance, reactive, toRaw, watchEffect } from 'vue'
+import { getCurrentInstance, shallowReactive, toRaw, watchEffect } from 'vue'
 import { consoleWarn } from '@/util/console'
 import { toKebabCase } from '@/util/helpers'
 import { useDefaults } from '@/composables/defaults'
@@ -26,16 +26,20 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
       const vm = getCurrentInstance()!
       const defaults = useDefaults()
 
-      const _props = reactive({ ...toRaw(props) })
+      const _props = shallowReactive({ ...toRaw(props) })
       watchEffect(() => {
         const globalDefaults = defaults.value.global
         const componentDefaults = defaults.value[options.name!]
 
         for (const prop of Object.keys(props)) {
+          let newVal
           if (propIsDefined(vm.vnode, prop)) {
-            _props[prop] = props[prop]
+            newVal = props[prop]
           } else {
-            _props[prop] = componentDefaults?.[prop] ?? globalDefaults?.[prop] ?? props[prop]
+            newVal = componentDefaults?.[prop] ?? globalDefaults?.[prop] ?? props[prop]
+          }
+          if (_props[prop] !== newVal) {
+            _props[prop] = newVal
           }
         }
       })
