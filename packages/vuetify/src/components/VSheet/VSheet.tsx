@@ -12,17 +12,18 @@ import { useBackgroundColor } from '@/composables/color'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
-import { defineComponent, toRef } from 'vue'
-import { makeProps } from '@/util'
+import { toRef } from 'vue'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VSheet',
 
-  props: makeProps({
+  props: {
     color: {
       type: String,
       default: 'surface',
     },
+
     ...makeBorderProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -30,7 +31,7 @@ export default defineComponent({
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
-  }),
+  },
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)

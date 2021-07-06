@@ -21,6 +21,7 @@ export default defineComponent({
     iconColor: String,
     fillDot: Boolean,
     dotColor: String,
+
     ...makeRoundedProps(),
     ...makeSizeProps(),
     ...makeElevationProps(),

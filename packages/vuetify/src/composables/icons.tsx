@@ -1,7 +1,6 @@
 // Utilities
-import { computed, defineComponent, inject, isRef } from 'vue'
-import { makeProps } from '@/util/makeProps'
-import { propsFactory } from '@/util/propsFactory'
+import { computed, inject, isRef } from 'vue'
+import { defineComponent, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, JSXComponent, PropType, Ref } from 'vue'
@@ -85,7 +84,7 @@ export const makeIconProps = propsFactory({
 export const VComponentIcon = defineComponent({
   name: 'VComponentIcon',
 
-  props: makeProps(makeIconProps()),
+  props: makeIconProps(),
 
   setup (props) {
     return () => {
@@ -103,7 +102,7 @@ export const VSvgIcon = defineComponent({
 
   inheritAttrs: false,
 
-  props: makeProps(makeIconProps()),
+  props: makeIconProps(),
 
   setup (props, { attrs }) {
     return () => {
@@ -127,7 +126,7 @@ export const VSvgIcon = defineComponent({
 export const VLigatureIcon = defineComponent({
   name: 'VLigatureIcon',
 
-  props: makeProps(makeIconProps()),
+  props: makeIconProps(),
 
   setup (props) {
     return () => {
@@ -139,7 +138,7 @@ export const VLigatureIcon = defineComponent({
 export const VClassIcon = defineComponent({
   name: 'VClassIcon',
 
-  props: makeProps(makeIconProps()),
+  props: makeIconProps(),
 
   setup (props) {
     return () => {

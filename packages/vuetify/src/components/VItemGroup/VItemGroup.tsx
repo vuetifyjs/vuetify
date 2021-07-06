@@ -7,21 +7,20 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { defineComponent } from '@/util'
 
 export const VItemGroupSymbol = Symbol.for('vuetify:v-item-group')
 
 export default defineComponent({
   name: 'VItemGroup',
 
-  props: makeProps({
+  props: {
     ...makeGroupProps({
       selectedClass: 'v-item--selected',
     }),
     ...makeTagProps(),
     ...makeThemeProps(),
-  }),
+  },
 
   emits: {
     'update:modelValue': (value: any) => true,

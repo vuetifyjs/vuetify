@@ -5,8 +5,8 @@ import './VResponsive.sass'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
 // Utilities
-import { computed, defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { computed } from 'vue'
+import { defineComponent } from '@/util'
 
 export function useAspectStyles (props: { aspectRatio?: string | number }) {
   return {
@@ -23,11 +23,12 @@ export function useAspectStyles (props: { aspectRatio?: string | number }) {
 export default defineComponent({
   name: 'VResponsive',
 
-  props: makeProps({
+  props: {
     aspectRatio: [String, Number],
     contentClass: String,
+
     ...makeDimensionProps(),
-  }),
+  },
 
   setup (props, { slots }) {
     const { dimensionStyles } = useDimension(props)

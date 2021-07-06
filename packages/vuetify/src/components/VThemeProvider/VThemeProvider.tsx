@@ -6,17 +6,17 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VThemeProvider',
 
-  props: makeProps({
+  props: {
     withBackground: Boolean,
+
     ...makeThemeProps(),
     ...makeTagProps(),
-  }),
+  },
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)

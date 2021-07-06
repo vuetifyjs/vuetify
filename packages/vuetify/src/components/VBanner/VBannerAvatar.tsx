@@ -2,17 +2,16 @@
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VBannerAvatar',
 
-  props: makeProps({
+  props: {
     left: Boolean,
     right: Boolean,
     ...makeTagProps(),
-  }),
+  },
 
   setup (props, { slots }) {
     return () => {

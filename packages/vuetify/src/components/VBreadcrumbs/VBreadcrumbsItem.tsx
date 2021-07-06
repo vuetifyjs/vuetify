@@ -4,8 +4,8 @@ import { makeTagProps } from '@/composables/tag'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, defineComponent, inject } from 'vue'
-import { makeProps } from '@/util'
+import { computed, inject } from 'vue'
+import { defineComponent } from '@/util'
 
 // Types
 import { VBreadcrumbsSymbol } from './VBreadcrumbs'
@@ -13,7 +13,7 @@ import { VBreadcrumbsSymbol } from './VBreadcrumbs'
 export default defineComponent({
   name: 'VBreadcrumbsItem',
 
-  props: makeProps({
+  props: {
     active: Boolean,
     activeClass: String,
     activeColor: String,
@@ -23,7 +23,7 @@ export default defineComponent({
 
     ...makeRouterProps(),
     ...makeTagProps({ tag: 'li' }),
-  }),
+  },
 
   setup (props, { slots, attrs }) {
     const breadcrumbs = inject(VBreadcrumbsSymbol)

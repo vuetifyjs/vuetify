@@ -21,13 +21,13 @@ import { useDisplay } from '@/composables/display'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { defineComponent, toRef } from 'vue'
-import { makeProps } from '@/util'
+import { toRef } from 'vue'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VBanner',
 
-  props: makeProps({
+  props: {
     avatar: String,
     color: String,
     icon: String,
@@ -46,7 +46,7 @@ export default defineComponent({
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
-  }),
+  },
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)

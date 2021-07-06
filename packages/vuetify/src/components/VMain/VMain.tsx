@@ -7,13 +7,12 @@ import { useMain } from '@/composables/layout'
 import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VMain',
 
-  props: makeProps(makeTagProps({ tag: 'main' })),
+  props: makeTagProps({ tag: 'main' }),
 
   setup (props, { slots }) {
     const { mainStyles } = useMain()

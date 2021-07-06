@@ -9,8 +9,8 @@ import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, defineComponent, toRef } from 'vue'
-import { convertToUnit, makeProps } from '@/util'
+import { computed, toRef } from 'vue'
+import { convertToUnit, defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -18,7 +18,7 @@ import type { PropType } from 'vue'
 export default defineComponent({
   name: 'VProgressCircular',
 
-  props: makeProps({
+  props: {
     bgColor: String,
     color: String,
     indeterminate: [Boolean, String] as PropType<boolean | 'disable-shrink'>,
@@ -38,7 +38,7 @@ export default defineComponent({
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'div' }),
     ...makeThemeProps(),
-  }),
+  },
 
   setup (props, { slots }) {
     const MAGIC_RADIUS_CONSTANT = 20

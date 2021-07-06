@@ -13,8 +13,8 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { computed, defineComponent, onBeforeMount, ref, toRef, watch } from 'vue'
-import { makeProps } from '@/util/makeProps'
+import { computed, onBeforeMount, ref, toRef, watch } from 'vue'
+import { defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -22,7 +22,7 @@ import type { PropType } from 'vue'
 export default defineComponent({
   name: 'VNavigationDrawer',
 
-  props: makeProps({
+  props: {
     color: String,
     disableResizeWatcher: Boolean,
     expandOnHover: Boolean,
@@ -47,13 +47,14 @@ export default defineComponent({
       default: 'left',
       validator: (value: any) => ['left', 'right', 'bottom'].includes(value),
     },
+
     ...makeBorderProps(),
     ...makeElevationProps(),
     ...makeLayoutItemProps(),
     ...makeRoundedProps(),
     ...makeTagProps({ tag: 'nav' }),
     ...makeThemeProps(),
-  }),
+  },
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)

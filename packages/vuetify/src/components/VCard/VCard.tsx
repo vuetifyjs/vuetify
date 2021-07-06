@@ -30,15 +30,14 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VCard',
 
   directives: { Ripple },
 
-  props: makeProps({
+  props: {
     appendAvatar: String,
     appendIcon: String,
     disabled: Boolean,
@@ -63,7 +62,7 @@ export default defineComponent({
     ...makeRouterProps(),
     ...makeTagProps(),
     ...makeVariantProps({ variant: 'contained' } as const),
-  }),
+  },
 
   setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)

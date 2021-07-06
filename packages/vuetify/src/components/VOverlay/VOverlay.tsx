@@ -14,11 +14,9 @@ import { useTeleport } from '@/composables/teleport'
 import { ClickOutside } from '@/directives/click-outside'
 
 // Utilities
-import { convertToUnit, getScrollParent, getScrollParents, standardEasing, useRender } from '@/util'
-import { makeProps } from '@/util/makeProps'
+import { convertToUnit, defineComponent, getScrollParent, getScrollParents, standardEasing, useRender } from '@/util'
 import {
   computed,
-  defineComponent,
   nextTick,
   ref,
   Teleport,
@@ -151,7 +149,7 @@ export default defineComponent({
 
   inheritAttrs: false,
 
-  props: makeProps({
+  props: {
     absolute: Boolean,
     attach: {
       type: [Boolean, String, Object] as PropType<boolean | string | Element>,
@@ -178,7 +176,7 @@ export default defineComponent({
     },
     ...makeThemeProps(),
     ...makeTransitionProps(),
-  }),
+  },
 
   emits: {
     'click:outside': (e: MouseEvent) => true,

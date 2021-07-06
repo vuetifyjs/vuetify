@@ -7,8 +7,8 @@ import type { ComponentPublicInstance } from 'vue'
 import { VBtn } from '../VBtn'
 
 // Utilities
-import { computed, defineComponent, nextTick, ref } from 'vue'
-import { createRange, keyValues, makeProps } from '@/util'
+import { computed, nextTick, ref } from 'vue'
+import { createRange, defineComponent, keyValues } from '@/util'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
@@ -28,7 +28,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 export default defineComponent({
   name: 'VPagination',
 
-  props: makeProps({
+  props: {
     start: {
       type: [Number, String],
       default: 1,
@@ -102,7 +102,7 @@ export default defineComponent({
     ...makeBorderProps(),
     ...makeThemeProps(),
     ...makeVariantProps({ variant: 'text' } as const),
-  }),
+  },
 
   emits: {
     'update:modelValue': (value: number) => true,

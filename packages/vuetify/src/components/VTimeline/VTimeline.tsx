@@ -10,8 +10,8 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Helpers
-import { computed, defineComponent, provide, toRef } from 'vue'
-import { convertToUnit, makeProps } from '@/util'
+import { computed, provide, toRef } from 'vue'
+import { convertToUnit, defineComponent } from '@/util'
 
 // Types
 import type { InjectionKey, Prop, Ref } from 'vue'
@@ -30,7 +30,7 @@ export const VTimelineSymbol: InjectionKey<TimelineInstance> = Symbol.for('vueti
 export default defineComponent({
   name: 'VTimeline',
 
-  props: makeProps({
+  props: {
     direction: {
       type: String,
       default: 'vertical',
@@ -54,10 +54,11 @@ export default defineComponent({
       default: 'start',
       validator: (v: any) => ['none', 'start', 'end', 'both'].includes(v),
     },
+
     ...makeDensityProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
-  }),
+  },
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)

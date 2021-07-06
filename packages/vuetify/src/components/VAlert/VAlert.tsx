@@ -18,8 +18,8 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { computed } from 'vue'
+import { defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -31,10 +31,10 @@ export type ContextualType = typeof allowedTypes[number]
 export default defineComponent({
   name: 'VAlert',
 
-  props: makeProps({
+  props: {
     border: {
       type: [Boolean, String],
-      validator (val: boolean | string) {
+      validator: (val: boolean | string) => {
         return typeof val === 'boolean' || [
           'top',
           'end',
@@ -77,7 +77,7 @@ export default defineComponent({
     ...makeTagProps(),
     ...makeThemeProps(),
     ...makeVariantProps(),
-  }),
+  },
 
   emits: {
     'update:modelValue': (value: boolean) => true,

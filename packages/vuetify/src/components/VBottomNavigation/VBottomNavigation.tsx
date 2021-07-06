@@ -13,14 +13,13 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, defineComponent } from 'vue'
-import { convertToUnit } from '@/util'
-import { makeProps } from '@/util/makeProps'
+import { computed } from 'vue'
+import { convertToUnit, defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VBottomNavigation',
 
-  props: makeProps({
+  props: {
     bgColor: String,
     color: String,
     grow: Boolean,
@@ -45,7 +44,7 @@ export default defineComponent({
     }),
     ...makeTagProps({ tag: 'header' }),
     ...makeThemeProps(),
-  }),
+  },
 
   emits: {
     'update:modelValue': (value: boolean) => true,
