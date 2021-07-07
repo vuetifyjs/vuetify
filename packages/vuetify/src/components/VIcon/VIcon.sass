@@ -14,18 +14,10 @@
   vertical-align: $icon-vertical-align
 
   &--left
-    @include ltr()
-      margin-right: $icon-margin-start
-
-    @include rtl()
-      margin-left: $icon-margin-end
+    margin-inline-end: $icon-margin-start
 
   &--right
-    @include ltr()
-      margin-left: $icon-margin-start
-
-    @include rtl()
-      margin-right: $icon-margin-end
+    margin-inline-start: $icon-margin-end
 
   @each $name in $sizes
     &--size-#{$name}
@@ -47,20 +39,10 @@
 
   &--left
     .v-btn:not(.v-btn--icon) &
-      @include ltr()
-        margin-left: $icon-btn-margin-start
-        margin-right: $icon-btn-margin-end
-
-      @include rtl()
-        margin-left: $icon-btn-margin-end
-        margin-right: $icon-btn-margin-start
+      margin-inline-start: $icon-btn-margin-start
+      margin-inline-end: $icon-btn-margin-end
 
   &--right
     .v-btn:not(.v-btn--icon) &
-      @include ltr()
-        margin-left: $icon-btn-margin-end
-        margin-right: $icon-btn-margin-start
-
-      @include rtl()
-        margin-left: $icon-btn-margin-start
-        margin-right: $icon-btn-margin-end
+      margin-inline-start: $icon-btn-margin-end
+      margin-inline-end: $icon-btn-margin-start

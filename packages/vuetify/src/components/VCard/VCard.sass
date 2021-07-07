@@ -81,19 +81,11 @@
 
   &:last-child
     .v-card-header &
-      @include ltr()
-        padding-right: $card-avatar-header-padding
-
-      @include rtl()
-        padding-left: $card-avatar-header-padding
+      padding-inline-end: $card-avatar-header-padding
 
   &:first-child
     .v-card-header &
-      @include ltr()
-        padding-left: $card-avatar-header-padding
-
-      @include rtl()
-        padding-right: $card-avatar-header-padding
+      padding-inline-start: $card-avatar-header-padding
 
 .v-card-header-text
   flex: 1 1 auto

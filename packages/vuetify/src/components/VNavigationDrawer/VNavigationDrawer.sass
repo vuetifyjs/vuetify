@@ -28,24 +28,24 @@
     @include rounded($navigation-drawer-rounded-border-radius)
 
   &--start
+    border-inline-end-width: $navigation-drawer-border-thin-width
+
     @include ltr()
-      border-right-width: $navigation-drawer-border-thin-width
       left: 0
       right: auto
 
     @include rtl()
-      border-left-width: $navigation-drawer-border-thin-width
       left: auto
       right: 0
 
   &--end
+    border-inline-start-width: $navigation-drawer-border-thin-width
+
     @include ltr()
-      border-left-width: $navigation-drawer-border-thin-width
       left: auto
       right: 0
 
     @include rtl()
-      border-right-width: $navigation-drawer-border-thin-width
       left: 0
       right: auto
 
