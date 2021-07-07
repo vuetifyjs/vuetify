@@ -373,6 +373,7 @@ export default baseMixins.extend<options>().extend({
       const width = !this.singleLine && (this.labelValue || this.isDirty) ? this.labelWidth : 0
       const span = this.$createElement('span', {
         domProps: { innerHTML: '&#8203;' },
+        staticClass: 'notranslate',
       })
 
       return this.$createElement('legend', {
