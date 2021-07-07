@@ -1,9 +1,5 @@
 // Defaults
 $icon-btn-bottom-navigation-font-size: 24px !default;
-$icon-btn-size: 1em !default;
-$icon-btn-font-size: 18/4 * $icon-btn-size !default;
-$icon-btn-height: $icon-btn-size !default;
-$icon-btn-width: $icon-btn-size !default;
 $icon-btn-margin-start-multiplier: -9 !default;
 $icon-btn-margin-end-multiplier: 4.5 !default;
 $icon-btn-margin-start: calc(var(--v-btn-height) / #{$icon-btn-margin-start-multiplier}) !default;
