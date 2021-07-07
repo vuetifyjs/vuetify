@@ -3,14 +3,14 @@ import './VTextField.sass'
 
 // Components
 import { VInput } from '@/components/VInput'
+import { VIcon } from '@/components/VIcon'
 
 // Directives
 import { Resize } from '@/directives/resize'
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -27,8 +27,7 @@ export default defineComponent({
 
   inheritAttrs: false,
 
-  props: makeProps({
-    appendOuterIcon: String,
+  props: {
     autofocus: Boolean,
     clearable: Boolean,
     clearIcon: {
@@ -45,6 +44,7 @@ export default defineComponent({
     placeholder: String,
     prefix: String,
     prependInnerIcon: String,
+    appendInnerIcon: String,
     persistentPlaceholder: Boolean,
     reverse: Boolean,
     rounded: Boolean,
@@ -57,15 +57,26 @@ export default defineComponent({
       type: String,
       default: 'text',
     },
-  }),
+  },
 
   setup (props, { attrs, slots }) {
     return () => {
       return (
         <VInput
+          { ...attrs }
           v-slots={{
-            default: () => {
-              return (<input type="text" />)
+            default: ({ props: slotProps }) => {
+              return (
+                <>
+                  { props.prependInnerIcon && (
+                    <VIcon icon={ props.prependInnerIcon } />
+                  )}
+                  <input type="text" { ...slotProps } />
+                  { props.appendInnerIcon && (
+                    <VIcon icon={ props.appendInnerIcon } />
+                  )}
+                </>
+              )
             },
           }}
         />

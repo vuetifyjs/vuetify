@@ -56,6 +56,7 @@
       margin-left: $input-prepend-append-outer-margin
 
   &__control
+    position: relative
     display: flex
     flex-direction: column
     height: auto
@@ -114,3 +115,40 @@
       margin: 0
     input[type=number]
       -moz-appearance: textfield
+
+.v-input__outline
+  position: absolute
+  display: flex
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  pointer-events: none
+
+  &__start,
+  &__notch,
+  &__end
+    border-top: 1px solid
+    border-bottom: 1px solid
+
+  &__start
+    width: 12px
+
+    @include ltr()
+      border-left: 1px solid
+      border-radius: 4px 0 0 4px
+    @include rtl()
+      border-right: 1px solid
+
+  &__notch
+    border-top: none
+    width: 35px // TODO
+
+  &__end
+    flex: 1
+
+    @include ltr()
+      border-right: 1px solid
+      border-radius: 0 4px 4px 0
+    @include rtl()
+      border-left: 1px solid
