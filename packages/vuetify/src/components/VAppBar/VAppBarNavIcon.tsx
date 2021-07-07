@@ -2,18 +2,17 @@
 import { VBtn } from '@/components/VBtn'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VAppBarNavIcon',
 
-  props: makeProps({
+  props: {
     icon: {
       type: String,
       default: '$menu',
     },
-  }),
+  },
 
   setup (props, { slots }) {
     return () => (

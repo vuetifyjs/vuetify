@@ -21,15 +21,14 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util/makeProps'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VChip',
 
   directives: { Ripple },
 
-  props: makeProps({
+  props: {
     activeClass: String,
     appendAvatar: String,
     appendIcon: String,
@@ -72,7 +71,7 @@ export default defineComponent({
     ...makeTagProps({ tag: 'span' }),
     ...makeThemeProps(),
     ...makeVariantProps({ variant: 'contained' } as const),
-  }),
+  },
 
   emits: {
     'click:close': (e: Event) => e,

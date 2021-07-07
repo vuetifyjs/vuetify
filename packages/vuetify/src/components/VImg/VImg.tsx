@@ -12,7 +12,6 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 // Utilities
 import {
   computed,
-  defineComponent,
   h,
   nextTick,
   onBeforeMount,
@@ -22,7 +21,7 @@ import {
   withDirectives,
 } from 'vue'
 import {
-  makeProps,
+  defineComponent,
   SUPPORTS_INTERSECTION,
   useRender,
 } from '@/util'
@@ -43,7 +42,7 @@ export default defineComponent({
 
   directives: { intersect },
 
-  props: makeProps({
+  props: {
     aspectRatio: [String, Number],
     alt: String,
     cover: Boolean,
@@ -69,8 +68,9 @@ export default defineComponent({
       default: '',
     },
     srcset: String,
+
     ...makeTransitionProps(),
-  }),
+  },
 
   emits: ['loadstart', 'load', 'error'],
 

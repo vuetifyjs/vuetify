@@ -1,6 +1,6 @@
 // Utilities
-import { defineComponent, h, Transition, TransitionGroup } from 'vue'
-import { makeProps } from '@/util'
+import { h, Transition, TransitionGroup } from 'vue'
+import { defineComponent } from '@/util'
 
 // Types
 import type { FunctionalComponent, Prop } from 'vue'
@@ -13,7 +13,7 @@ export function createCssTransition (
   return defineComponent({
     name,
 
-    props: makeProps({
+    props: {
       group: Boolean,
       hideOnLeave: Boolean,
       leaveAbsolute: Boolean,
@@ -25,7 +25,7 @@ export function createCssTransition (
         type: String,
         default: origin,
       },
-    }),
+    },
 
     setup (props, { slots }) {
       return () => {
@@ -88,12 +88,12 @@ export function createJavascriptTransition (
   return defineComponent({
     name,
 
-    props: makeProps({
+    props: {
       mode: {
         type: String,
         default: mode,
       } as Prop<'in-out' | 'out-in' | 'default'>,
-    }),
+    },
 
     setup (props, { slots }) {
       return () => {

@@ -11,16 +11,13 @@ import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { defineComponent, mergeProps, ref, watch } from 'vue'
-import { makeProps } from '@/util/makeProps'
-
-// Globals
-import { IN_BROWSER } from '@/util'
+import { mergeProps, ref, watch } from 'vue'
+import { defineComponent, IN_BROWSER } from '@/util'
 
 export default defineComponent({
   name: 'VDialog',
 
-  props: makeProps({
+  props: {
     fullscreen: Boolean,
     origin: {
       type: String,
@@ -32,11 +29,12 @@ export default defineComponent({
     },
     scrollable: Boolean,
     modelValue: Boolean,
+
     ...makeDimensionProps({ width: 'auto' }),
     ...makeTransitionProps({
       transition: { component: VDialogTransition },
     }),
-  }),
+  },
 
   emits: {
     'update:modelValue': (value: boolean) => true,

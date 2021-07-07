@@ -3,17 +3,18 @@ import { makeTagProps } from '@/composables/tag'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { defineComponent, toRef } from 'vue'
-import { makeProps } from '@/util'
+import { toRef } from 'vue'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VListSubheader',
 
-  props: makeProps({
+  props: {
     color: String,
     inset: Boolean,
+
     ...makeTagProps(),
-  }),
+  },
 
   setup (props, { slots }) {
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))

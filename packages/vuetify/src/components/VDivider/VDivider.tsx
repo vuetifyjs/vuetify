@@ -2,8 +2,8 @@
 import './VDivider.sass'
 
 // Utilities
-import { computed, defineComponent } from 'vue'
-import { convertToUnit, makeProps } from '@/util'
+import { computed } from 'vue'
+import { convertToUnit, defineComponent } from '@/util'
 
 // Composables
 import { makeThemeProps, useTheme } from '@/composables/theme'
@@ -15,13 +15,13 @@ type DividerStyles = Partial<Record<DividerKey, string>>
 export default defineComponent({
   name: 'VDivider',
 
-  props: makeProps({
+  props: {
     inset: Boolean,
     length: [Number, String],
     thickness: [Number, String],
     vertical: Boolean,
     ...makeThemeProps(),
-  }),
+  },
 
   setup (props, { attrs }) {
     const { themeClasses } = useTheme(props)

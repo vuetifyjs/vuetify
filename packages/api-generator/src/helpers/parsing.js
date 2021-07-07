@@ -35,6 +35,13 @@ function getPropDefault (def, type) {
     return parseFunctionParams(def)
   }
 
+  if (def == null && (
+    type === 'boolean' ||
+    (Array.isArray(type) && type.includes('boolean'))
+  )) {
+    return false
+  }
+
   return def
 }
 

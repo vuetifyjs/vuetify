@@ -12,14 +12,14 @@ import { makeElevationProps } from '@/composables/elevation'
 import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
-import { defineComponent, inject, ref, watch } from 'vue'
-import { convertToUnit, makeProps } from '@/util'
+import { inject, ref, watch } from 'vue'
+import { convertToUnit, defineComponent } from '@/util'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
 export default defineComponent({
   name: 'VTimelineItem',
 
-  props: makeProps({
+  props: {
     dotColor: String,
     fillDot: Boolean,
     hideDot: Boolean,
@@ -29,12 +29,13 @@ export default defineComponent({
     },
     icon: String,
     iconColor: String,
+
     ...makeRoundedProps(),
     ...makeElevationProps(),
     ...makeSizeProps(),
     ...makeTagProps(),
     ...makeDimensionProps(),
-  }),
+  },
 
   setup (props, { slots }) {
     const timeline = inject(VTimelineSymbol)

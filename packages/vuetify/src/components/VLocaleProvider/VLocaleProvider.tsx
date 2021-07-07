@@ -5,13 +5,12 @@ import { provideLocale } from '@/composables/locale'
 import { provideRtl } from '@/composables/rtl'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VLocaleProvider',
 
-  props: makeProps({
+  props: {
     locale: String,
     fallbackLocale: String,
     messages: Object,
@@ -19,7 +18,7 @@ export default defineComponent({
       type: Boolean,
       default: undefined,
     },
-  }),
+  },
 
   setup (props, { slots }) {
     const localeInstance = provideLocale(props)

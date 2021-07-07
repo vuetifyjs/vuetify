@@ -11,15 +11,15 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VSystemBar',
 
-  props: makeProps({
+  props: {
     lightsOut: Boolean,
     window: Boolean,
+
     ...makeBorderProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -27,7 +27,7 @@ export default defineComponent({
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
-  }),
+  },
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)

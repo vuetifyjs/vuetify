@@ -23,15 +23,15 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { computed } from 'vue'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VListItem',
 
   directives: { Ripple },
 
-  props: makeProps({
+  props: {
     active: Boolean,
     activeColor: String,
     activeClass: String,
@@ -53,7 +53,7 @@ export default defineComponent({
     ...makeTagProps(),
     ...makeThemeProps(),
     ...makeVariantProps({ variant: 'text' } as const),
-  }),
+  },
 
   setup (props, { attrs, slots }) {
     const link = useLink(props, attrs)

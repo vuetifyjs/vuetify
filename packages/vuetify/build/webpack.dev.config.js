@@ -19,7 +19,8 @@ module.exports = merge(baseWebpackConfig, {
     alias: {
       vuetify$: resolve('../src/entry-bundler.ts'),
       'vuetify/src': resolve('../src/'),
-      vue$: require.resolve('vue/dist/vue.esm-bundler.js')
+      vue$: require.resolve('vue/dist/vue.esm-bundler.js'),
+      'vite-ssr$': require.resolve('vite-ssr/vue/entry-client.js'),
     },
     symlinks: false,
   },

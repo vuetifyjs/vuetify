@@ -15,9 +15,8 @@ import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, defineComponent, ref, toRef } from 'vue'
-import { convertToUnit } from '@/util'
-import { makeProps } from '@/util/makeProps'
+import { computed, ref, toRef } from 'vue'
+import { convertToUnit, defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -25,7 +24,7 @@ import type { PropType } from 'vue'
 export default defineComponent({
   name: 'VAppBar',
 
-  props: makeProps({
+  props: {
     // TODO: Implement scrolling techniques
     // hideOnScroll: Boolean
     // invertedScroll: Boolean
@@ -66,7 +65,7 @@ export default defineComponent({
     ...makeRoundedProps(),
     ...makeLayoutItemProps({ name: 'app-bar' }),
     ...makeTagProps({ tag: 'header' }),
-  }),
+  },
 
   emits: {
     'update:modelValue': (value: boolean) => true,

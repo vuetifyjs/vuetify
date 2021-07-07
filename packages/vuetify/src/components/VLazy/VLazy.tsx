@@ -9,15 +9,14 @@ import intersect from '@/directives/intersect'
 
 // Utilities
 import type { PropType } from 'vue'
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VLazy',
 
   directives: { intersect },
 
-  props: makeProps({
+  props: {
     modelValue: Boolean,
     options: {
       type: Object as PropType<IntersectionObserverInit>,
@@ -29,10 +28,11 @@ export default defineComponent({
         threshold: undefined,
       }),
     },
+
     ...makeDimensionProps(),
     ...makeTagProps(),
     ...makeTransitionProps({ transition: 'fade-transition' }),
-  }),
+  },
 
   emits: {
     'update:modelValue': (value: boolean) => true,

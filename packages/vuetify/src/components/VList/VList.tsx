@@ -16,13 +16,13 @@ import { useBackgroundColor } from '@/composables/color'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
-import { defineComponent, toRef } from 'vue'
-import { makeProps } from '@/util'
+import { toRef } from 'vue'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VList',
 
-  props: makeProps({
+  props: {
     color: String,
     disabled: Boolean,
     lines: {
@@ -34,6 +34,7 @@ export default defineComponent({
       type: [Boolean, String],
       default: false,
     },
+
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
@@ -41,7 +42,7 @@ export default defineComponent({
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
-  }),
+  },
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)

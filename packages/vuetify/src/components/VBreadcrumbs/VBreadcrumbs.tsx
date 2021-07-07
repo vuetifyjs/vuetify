@@ -13,8 +13,8 @@ import { makeTagProps } from '@/composables/tag'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, defineComponent, provide, toRef } from 'vue'
-import { makeProps } from '@/util'
+import { computed, provide, toRef } from 'vue'
+import { defineComponent } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -34,7 +34,7 @@ export type BreadcrumbItem = string | (LinkProps & {
 export default defineComponent({
   name: 'VBreadcrumbs',
 
-  props: makeProps({
+  props: {
     color: String,
     disabled: Boolean,
     divider: {
@@ -50,7 +50,7 @@ export default defineComponent({
     ...makeDensityProps(),
     ...makeRoundedProps(),
     ...makeTagProps({ tag: 'ul' }),
-  }),
+  },
 
   setup (props, { slots }) {
     const { densityClasses } = useDensity(props, 'v-breadcrumbs')

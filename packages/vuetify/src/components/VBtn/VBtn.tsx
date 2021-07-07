@@ -21,15 +21,15 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { computed } from 'vue'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VBtn',
 
   directives: { Ripple },
 
-  props: makeProps({
+  props: {
     flat: Boolean,
     icon: [Boolean, String],
     prependIcon: String,
@@ -55,7 +55,7 @@ export default defineComponent({
     ...makeTagProps({ tag: 'button' }),
     ...makeThemeProps(),
     ...makeVariantProps({ variant: 'contained' } as const),
-  }),
+  },
 
   setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)

@@ -1,13 +1,13 @@
 import type { PropType } from 'vue'
-import { defineComponent, Transition } from 'vue'
-import { acceleratedEasing, deceleratedEasing, makeProps } from '@/util'
+import { Transition } from 'vue'
+import { acceleratedEasing, deceleratedEasing, defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VDialogTransition',
 
-  props: makeProps({
+  props: {
     target: Object as PropType<HTMLElement>,
-  }),
+  },
 
   setup (props, { slots }) {
     const functions = {

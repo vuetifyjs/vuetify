@@ -5,19 +5,18 @@ import './VGrid.sass'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VContainer',
 
-  props: makeProps({
+  props: {
     fluid: {
       type: Boolean,
       default: false,
     },
     ...makeTagProps(),
-  }),
+  },
 
   setup (props, { slots }) {
     return () => (

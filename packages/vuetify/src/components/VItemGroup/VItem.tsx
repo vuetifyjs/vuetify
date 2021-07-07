@@ -3,13 +3,12 @@ import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { VItemGroupSymbol } from './VItemGroup'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VItem',
 
-  props: makeProps(makeGroupItemProps()),
+  props: makeGroupItemProps(),
 
   setup (props, { slots }) {
     const { isSelected, select, toggle, selectedClass, value, disabled } = useGroupItem(props, VItemGroupSymbol)

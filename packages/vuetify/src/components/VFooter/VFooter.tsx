@@ -11,13 +11,12 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VFooter',
 
-  props: makeProps({
+  props: {
     ...makeBorderProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -26,7 +25,7 @@ export default defineComponent({
     ...makeTagProps(),
     ...makeTagProps({ tag: 'footer' }),
     ...makeThemeProps(),
-  }),
+  },
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)

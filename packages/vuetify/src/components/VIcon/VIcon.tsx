@@ -8,8 +8,8 @@ import { useIcon } from '@/composables/icons'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, defineComponent, toRef } from 'vue'
-import { convertToUnit, flattenFragments, makeProps } from '@/util'
+import { computed, toRef } from 'vue'
+import { convertToUnit, defineComponent, flattenFragments } from '@/util'
 
 // Types
 import type { IconValue } from '@/composables/icons'
@@ -18,7 +18,7 @@ import type { ComputedRef, PropType } from 'vue'
 export default defineComponent({
   name: 'VIcon',
 
-  props: makeProps({
+  props: {
     color: String,
     left: Boolean,
     right: Boolean,
@@ -27,7 +27,7 @@ export default defineComponent({
     },
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'i' }),
-  }),
+  },
 
   setup (props, { slots }) {
     let slotIcon: ComputedRef<string | undefined> | undefined

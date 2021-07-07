@@ -48,6 +48,7 @@
     "watch": "cross-env TARGET=development webpack --config build/config.js --progress --watch",
     "dev": "cross-env NODE_ENV=development vite",
     "dev:ssr": "cross-env NODE_ENV=development vite-ssr",
+    "dev:webpack": "cross-env NODE_ENV=development webpack serve --config build/webpack.dev.config.js --hot",
     "build": "concurrently \"yarn build:dist\" \"yarn build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && yarn build:types",
     "build:dist": "rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress",
     "build:json": "node build/build-json.js",
@@ -112,7 +113,7 @@
     "vuetify-loader": "^1.7.2"
   },
   "peerDependencies": {
-    "vue": "^3.1.1"
+    "vue": "^3.1.4"
   },
   "publishConfig": {
     "access": "public"

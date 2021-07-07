@@ -5,8 +5,8 @@ import './VGrid.sass'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { capitalize, computed, defineComponent, h } from 'vue'
-import { makeProps } from '@/util'
+import { capitalize, computed, h } from 'vue'
+import { defineComponent } from '@/util'
 
 // Types
 import type { Prop } from 'vue'
@@ -73,7 +73,7 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: string)
 export default defineComponent({
   name: 'VRow',
 
-  props: makeProps({
+  props: {
     dense: Boolean,
     noGutters: Boolean,
     align: {
@@ -95,7 +95,7 @@ export default defineComponent({
     },
     ...alignContentProps,
     ...makeTagProps(),
-  }),
+  },
 
   setup (props, { slots }) {
     const classes = computed(() => {

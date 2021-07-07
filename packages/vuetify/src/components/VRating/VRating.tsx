@@ -13,8 +13,8 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { computed, defineComponent, ref } from 'vue'
-import { createRange, getUid, makeProps } from '@/util'
+import { computed, ref } from 'vue'
+import { createRange, defineComponent, getUid } from '@/util'
 
 // Types
 import type { Variant } from '@/composables/variant'
@@ -23,7 +23,7 @@ import type { Prop } from 'vue'
 export default defineComponent({
   name: 'VRating',
 
-  props: makeProps({
+  props: {
     name: String,
     itemAriaLabel: {
       type: String,
@@ -64,7 +64,7 @@ export default defineComponent({
     ...makeSizeProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
-  }),
+  },
 
   emits: {
     'update:modelValue': (value: number) => true,
