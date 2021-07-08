@@ -1,6 +1,9 @@
 // Styles
 import './VInput.sass'
 
+// Components
+import { VIcon } from '@/components/VIcon'
+
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeThemeProps, useTheme } from '@/composables/theme'
@@ -37,7 +40,7 @@ export default defineComponent({
     ...makeVariantProps({ variant: 'contained' } as const),
   },
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-input')
     const { densityClasses } = useDensity(props, 'v-input')
@@ -47,10 +50,17 @@ export default defineComponent({
     const value = useProxiedModel(props, 'modelValue')
 
     return () => {
+      const hasPrepend = (slots.prepend || props.prependIcon)
+      const hasAppend = (slots.append || props.appendIcon)
+
       return (
         <div
           class={[
             'v-input',
+            {
+              'v-input--prepended': hasPrepend,
+              'v-input--appended': hasAppend,
+            },
             themeClasses.value,
             colorClasses.value,
             densityClasses.value,
@@ -59,30 +69,56 @@ export default defineComponent({
           style={[
             colorStyles.value,
           ]}
+          { ...attrs }
         >
-          { slots.prepend?.() }
-
           <div class="v-input__control">
-            { slots.label
-              ? slots.label()
-              : (
-                <label
-                  for={ id.value }
-                  class="v-label"
-                >
-                  { props.label }
-                </label>
-              )
-            }
+            { hasPrepend && (
+              <div class="v-input__prepend">
+                { slots.prepend
+                  ? slots.prepend()
+                  : (<VIcon icon={ props.prependIcon } />)
+                }
+              </div>
+            ) }
 
-            { slots.default?.({
-              uid,
-              props: {
-                id: id.value,
-                value: value.value,
-                on: (val: any) => value.value = val,
-              },
-            }) }
+            <div class="v-input__field">
+              { slots.label
+                ? slots.label({
+                  label: props.label,
+                  props: { for: id.value },
+                })
+                : (
+                  <label
+                    for={ id.value }
+                    class="v-label"
+                  >
+                    { props.label }
+                  </label>
+                )
+              }
+
+              { slots.default?.({
+                uid,
+                props: {
+                  id: id.value,
+                  value: value.value,
+                  onInput: (e: Event) => {
+                    const el = e.target as HTMLInputElement
+
+                    value.value = el.value
+                  },
+                },
+              }) }
+            </div>
+
+            { hasAppend && (
+              <div class="v-input__append">
+                { slots.append
+                  ? slots.append()
+                  : (<VIcon icon={ props.appendIcon } />)
+                }
+              </div>
+            ) }
 
             { props.variant === 'outlined' && (
               <div class="v-input__outline">
@@ -94,8 +130,6 @@ export default defineComponent({
               </div>
             )}
           </div>
-
-          { slots.append?.() }
 
           { props.hint && (
             <div class="v-input__details">
