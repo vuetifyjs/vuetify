@@ -11,7 +11,11 @@
 
   @include border($list-item-border...)
   @include states('.v-list-item__overlay')
+  @include rounded($list-item-border-radius)
   @include variant($list-item-variants...)
+
+  &--rounded
+    @include rounded($list-item-rounded-border-radius)
 
   &--disabled
     pointer-events: none

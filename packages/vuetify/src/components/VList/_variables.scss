@@ -10,6 +10,7 @@ $list-disabled-opacity: 0.6 !default;
 $list-elevation: 0 !default;
 $list-padding: 8px 0 !default;
 $list-positions: absolute fixed !default;
+$list-rounded-border-radius: map-get($rounded, null) !default;
 
 $list-nav-subheader-font-size: .75rem !default;
 
@@ -35,6 +36,7 @@ $list-item-elevation: 0 !default;
 $list-item-min-height: 48px !default;
 $list-item-padding: 8px 16px !default;
 $list-item-plain-opacity: .62 !default;
+$list-item-rounded-border-radius: map-get($rounded, null) !default;
 $list-item-transition: .2s $standard-easing !default;
 $list-item-two-line-min-height: 64px !default;
 $list-item-two-line-padding: 12px 16px !default;
