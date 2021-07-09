@@ -26,6 +26,7 @@ export default defineComponent({
     color: String,
     disableResizeWatcher: Boolean,
     expandOnHover: Boolean,
+    floating: Boolean,
     modelValue: {
       type: Boolean,
       default: null,
@@ -108,6 +109,7 @@ export default defineComponent({
               'v-navigation-drawer--bottom': props.position === 'bottom',
               'v-navigation-drawer--end': props.position === 'right',
               'v-navigation-drawer--expand-on-hover': props.expandOnHover,
+              'v-navigation-drawer--floating': props.floating,
               'v-navigation-drawer--is-hovering': isHovering.value,
               'v-navigation-drawer--rail': props.rail,
               'v-navigation-drawer--start': props.position === 'left',
