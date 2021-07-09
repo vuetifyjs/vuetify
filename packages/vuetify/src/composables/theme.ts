@@ -1,10 +1,21 @@
-import { colorToInt, colorToRGB, createRange, darken, getLuma, intToHex, lighten, mergeDeep, propsFactory } from '@/util'
+import {
+  colorToInt,
+  colorToRGB,
+  createRange,
+  darken,
+  getLuma,
+  intToHex,
+  lighten,
+  mergeDeep,
+  propsFactory,
+} from '@/util'
 // Utilities
 import { computed, getCurrentInstance, inject, provide, ref, watch } from 'vue'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
 import { consoleError } from '@/util/console'
+import { APCAcontrast } from '@/util/color/APCA'
 
 interface BaseColors {
   background: string
@@ -184,7 +195,22 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
         if (/on-[a-z]/.test(color) || theme.colors[`on-${color}`]) continue
 
         const onColor = `on-${color}` as keyof OnColors
-        theme.colors[onColor] = intToHex(getLuma(theme.colors[color]!) > 0.18 ? 0x0 : 0xffffff)
+        const colorVal = colorToInt(theme.colors[color]!)
+
+        const blackContrast = Math.abs(APCAcontrast(0, colorVal))
+        const whiteContrast = Math.abs(APCAcontrast(0xffffff, colorVal))
+
+        // TODO: warn about poor color selections
+        // const contrastAsText = Math.abs(APCAcontrast(colorVal, colorToInt(theme.colors.background)))
+        // const minContrast = Math.max(blackContrast, whiteContrast)
+        // if (minContrast < 60) {
+        //   consoleInfo(`${key} theme color ${color} has poor contrast (${minContrast.toFixed()}%)`)
+        // } else if (contrastAsText < 60 && !['background', 'surface'].includes(color)) {
+        //   consoleInfo(`${key} theme color ${color} has poor contrast as text (${contrastAsText.toFixed()}%)`)
+        // }
+
+        // Prefer white text if both have an acceptable contrast ratio
+        theme.colors[onColor] = whiteContrast > Math.min(blackContrast, 50) ? '#fff' : '#000'
       }
 
       obj[key] = theme as InternalThemeDefinition

@@ -10,6 +10,7 @@ import {
 } from '../colorUtils'
 import * as transformSRGB from '../color/transformSRGB'
 import * as transformCIELAB from '../color/transformCIELAB'
+import { APCAcontrast } from '../color/APCA'
 
 const colors = {
   red: {
@@ -163,6 +164,17 @@ describe('getLuma', () => {
     expect(getLuma('#cd6600')).toBeCloseTo(0.224819, 6)
     expect(getLuma(0)).toBe(0)
     expect(getLuma(0xffffff)).toBe(1)
+  })
+})
+
+describe('APCAcontrast', () => {
+  it.each([
+    ['#888', '#fff', 66.89346308821438],
+    ['#aaa', '#000', -60.438571788907524],
+    ['#def', '#123', -98.44863435731264],
+    ['#123', '#234', 1.276075977788573],
+  ])('%s on %s', (text, bg, expected) => {
+    expect(APCAcontrast(colorToInt(text), colorToInt(bg))).toBe(expected)
   })
 })
 
