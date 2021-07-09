@@ -93,7 +93,7 @@ export default defineComponent({
     onBeforeMount(() => {
       if (props.modelValue != null) return
 
-      isActive.value = !mobile.value
+      isActive.value = props.permanent || !mobile.value
     })
 
     return () => {
