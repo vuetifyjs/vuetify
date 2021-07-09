@@ -18,7 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, reactive, toRef } from 'vue'
 import { defineComponent } from '@/util'
 
 // Types
@@ -94,20 +94,21 @@ export default defineComponent({
 
       return props.icon ?? `$${props.type}`
     })
-    const variantProps = computed(() => ({
-      color: props.color ?? props.type,
-      variant: props.variant,
-    }))
+    const variantProps = reactive({
+      color: computed(() => (props.color ?? props.type)),
+      textColor: toRef(props, 'textColor'),
+      variant: toRef(props, 'variant'),
+    })
 
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(borderProps.value, 'v-alert')
-    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps.value, 'v-alert')
+    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps, 'v-alert')
     const { densityClasses } = useDensity(props, 'v-alert')
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props, 'v-alert')
     const { roundedClasses } = useRounded(props, 'v-alert')
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
-      return props.borderColor ?? (props.tip ? variantProps.value.color : undefined)
+      return props.borderColor ?? (props.tip ? variantProps.color : undefined)
     }))
 
     function onCloseClick (e: MouseEvent) {
