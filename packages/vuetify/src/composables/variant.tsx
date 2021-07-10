@@ -6,7 +6,8 @@ import { computed, unref } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type { PropType } from 'vue'
+import type { MaybeRef } from '@/util'
 
 export const allowedVariants = ['contained', 'outlined', 'plain', 'text', 'contained-text'] as const
 
@@ -38,7 +39,7 @@ export const makeVariantProps = propsFactory({
   },
 }, 'variant')
 
-export function useVariant (props: Ref<VariantProps> | VariantProps, name: string) {
+export function useVariant (props: MaybeRef<VariantProps>, name: string) {
   const variantClasses = computed(() => {
     const { variant } = unref(props)
     return `${name}--variant-${variant}`
