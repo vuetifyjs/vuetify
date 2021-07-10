@@ -2,11 +2,12 @@
 import { useColor } from '@/composables/color'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, unref } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { MaybeRef } from '@/util'
 
 export const allowedVariants = ['contained', 'outlined', 'plain', 'text', 'contained-text'] as const
 
@@ -38,15 +39,19 @@ export const makeVariantProps = propsFactory({
   },
 }, 'variant')
 
-export function useVariant (props: VariantProps, name: string) {
+export function useVariant (props: MaybeRef<VariantProps>, name: string) {
   const variantClasses = computed(() => {
-    return `${name}--variant-${props.variant}`
+    const { variant } = unref(props)
+    return `${name}--variant-${variant}`
   })
 
-  const { colorClasses, colorStyles } = useColor(computed(() => ({
-    text: props.textColor,
-    [props.variant === 'contained' ? 'background' : 'text']: props.color,
-  })))
+  const { colorClasses, colorStyles } = useColor(computed(() => {
+    const { textColor, variant, color } = unref(props)
+    return {
+      text: textColor,
+      [variant === 'contained' ? 'background' : 'text']: color,
+    }
+  }))
 
   return { colorClasses, colorStyles, variantClasses }
 }

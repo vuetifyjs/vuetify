@@ -23,7 +23,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, reactive, toRef } from 'vue'
+import { computed } from 'vue'
 import { defineComponent } from '@/util'
 
 export default defineComponent({
@@ -61,11 +61,11 @@ export default defineComponent({
       return props.active || link.isExactActive?.value
     })
     const activeColor = props.activeColor ?? props.color
-    const variantProps = reactive({
-      color: computed(() => (isActive.value ? activeColor : props.color)),
-      textColor: toRef(props, 'textColor'),
-      variant: toRef(props, 'variant'),
-    })
+    const variantProps = computed(() => ({
+      color: isActive.value ? activeColor : props.color,
+      textColor: props.textColor,
+      variant: props.variant,
+    }))
 
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-list-item')
