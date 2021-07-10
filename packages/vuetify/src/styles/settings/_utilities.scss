@@ -478,6 +478,27 @@ $utilities: map-deep-merge(
       property: position,
       class: position,
       values: static relative fixed absolute sticky
+    ),
+    // Sizing
+    "height": (
+      property: height,
+      class: h,
+      values: (
+        25: 25%,
+        50: 50%,
+        75: 75%,
+        100: 100%
+      )
+    ),
+    "width": (
+      property: width,
+      class: w,
+      values: (
+        25: 25%,
+        50: 50%,
+        75: 75%,
+        100: 100%
+      )
     )
   ),
   $utilities
