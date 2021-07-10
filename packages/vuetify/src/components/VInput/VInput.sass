@@ -19,6 +19,10 @@
     &:active
       outline: none
 
+    // Remove Firefox red outline
+    &:invalid
+      box-shadow: none
+
 .v-input__control
   align-items: center
   border-bottom: thin solid transparent
@@ -45,6 +49,11 @@
   color: rgba(0, 0, 0, .6)
   font-size: 1rem
   line-height: 1.25rem
+  max-width: 90%
+  overflow: hidden
+  pointer-events: none
+  text-overflow: ellipsis
+  white-space: nowrap
 
 // Text Field
 .v-input__control
@@ -76,148 +85,6 @@
 
   .v-text-field--focused &,
   .v-text-field--dirty &
+    max-width: 133%
+    pointer-events: auto // Show title attr on label hover
     transform: translateY(-10px) scale(.75)
-
-//   .v-progress-linear
-//     top: calc(100% - 1px)
-//     left: 0
-
-//   input
-//     max-height: $input-max-height
-
-//   input,
-//   textarea
-//     // Remove Firefox red outline
-//     &:invalid
-//       box-shadow: none
-
-//     &:focus,
-//     &:active
-//       outline: none
-
-//   .v-label
-//     height: $input-label-height
-//     line-height: $input-label-height
-//     letter-spacing: $input-label-letter-spacing
-
-//   &__append-outer,
-//   &__prepend-outer
-//     display: inline-flex
-//     margin-bottom: 4px
-//     margin-top: 4px
-//     line-height: 1
-
-//     .v-icon
-//       user-select: none
-
-//   &__append-outer
-//     +ltr()
-//       margin-left: $input-prepend-append-outer-margin
-
-//     +rtl()
-//       margin-right: $input-prepend-append-outer-margin
-
-//   &__prepend-outer
-//     +ltr()
-//       margin-right: $input-prepend-append-outer-margin
-
-//     +rtl()
-//       margin-left: $input-prepend-append-outer-margin
-
-//   &__control
-//     position: relative
-//     display: flex
-//     flex-direction: column
-//     height: auto
-//     flex-grow: 1
-//     flex-wrap: wrap
-//     min-width: 0
-//     width: 100% // For IE11
-
-//   &__icon
-//     align-items: center
-//     display: inline-flex
-//     height: $input-icon-height
-//     flex: 1 0 auto
-//     justify-content: center
-//     min-width: $input-icon-min-width
-//     width: $input-icon-width
-
-//     &--clear
-//       border-radius: 50%
-
-//       .v-icon--disabled
-//         visibility: hidden
-
-//   &__slot
-//     align-items: center
-//     color: inherit
-//     display: flex
-//     margin-bottom: $input-slot-margin-bottom
-//     min-height: inherit
-//     position: relative
-//     transition: 0.2s $standard-easing
-//     width: 100%
-
-//   &--dense > .v-input__control > .v-input__slot
-//     margin-bottom: $input-dense-slot-margin-bottom
-
-//   &--is-disabled:not(.v-input--is-readonly)
-//     pointer-events: none
-
-//   &--is-loading > .v-input__control > .v-input__slot
-//     &:before,
-//     &:after
-//       display: none
-
-//   &--hide-details > .v-input__control > .v-input__slot
-//     margin-bottom: 0
-
-//   &--has-state
-//     &.error--text .v-label
-//       animation: v-shake .6s $standard-easing
-
-//   &--hide-spin-buttons
-//     input::-webkit-outer-spin-button,
-//     input::-webkit-inner-spin-button
-//       -webkit-appearance: none
-//       margin: 0
-//     input[type=number]
-//       -moz-appearance: textfield
-
-// .v-input__outline
-//   position: absolute
-//   display: flex
-//   top: 0
-//   bottom: 0
-//   left: 0
-//   right: 0
-//   pointer-events: none
-
-//   &__start,
-//   &__notch,
-//   &__end
-//     border-top: 1px solid
-//     border-bottom: 1px solid
-
-//   &__start
-//     width: 12px
-
-//     @include ltr()
-//       border-left: 1px solid
-//       border-radius: 4px 0 0 4px
-//     @include rtl()
-//       border-right: 1px solid
-
-//   &__notch
-//     border-top: none
-//     width: 35px // TODO
-
-//   &__end
-//     flex: 1
-
-//     @include ltr()
-//       border-right: 1px solid
-//       border-radius: 0 4px 4px 0
-//     @include rtl()
-//       border-left: 1px solid
