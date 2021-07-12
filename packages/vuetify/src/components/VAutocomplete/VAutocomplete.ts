@@ -217,7 +217,7 @@ export default VSelect.extend({
       // for duplicate items? no idea
       if (val === oldVal) return
 
-      this.setMenuIndex(-1)
+      this.initializeSelectItemIndex()
 
       this.$nextTick(() => {
         if (
