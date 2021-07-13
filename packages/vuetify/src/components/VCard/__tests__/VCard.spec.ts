@@ -50,7 +50,6 @@ describe('VCard', () => {
         actions: '<div>actions</div>',
         append: '<div>foo</div>',
         image: (props: any) => h('v-img', props),
-        media: '<div>bar</div>',
         prepend: '<div>foobar</div>',
         subtitle: '<div>fizz</div>',
         text: '<div>buzz</div>',

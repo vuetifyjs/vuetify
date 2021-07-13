@@ -15,11 +15,6 @@ exports[`VCard should render slots and match a snapshot 1`] = `
     <v-img src="foo.png">
     </v-img>
   </div>
-  <div class="v-card-media">
-    <div>
-      bar
-    </div>
-  </div>
   <div class="v-card-header">
     <div class="v-card-avatar">
       <div>

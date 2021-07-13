@@ -3,6 +3,7 @@
 
 .v-card
   color: $card-color
+  overflow: hidden
   position: relative
   padding: $card-padding
   text-decoration: none
@@ -99,7 +100,6 @@
   position: absolute
   top: 0
   width: 100%
-  z-index: -1
 
 .v-card-header
   align-items: $card-item-align-items
@@ -108,16 +108,6 @@
 
 .v-card-media
   overflow: hidden
-
-  &:first-child
-    .v-card &
-      border-top-left-radius: inherit
-      border-top-right-radius: inherit
-
-  &:last-child
-    .v-card &
-      border-bottom-left-radius: inherit
-      border-bottom-right-radius: inherit
 
 .v-card-subtitle
   align-items: center
@@ -175,10 +165,6 @@
   pointer-events: none
   opacity: 0
   transition: opacity 0.2s ease-in-out
-
-  + .v-card-media
-    border-top-left-radius: inherit
-    border-top-right-radius: inherit
 
 // VDialog
 .v-card

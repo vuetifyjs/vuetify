@@ -7,7 +7,6 @@ import VCardAvatar from './VCardAvatar'
 import VCardHeader from './VCardHeader'
 import VCardHeaderText from './VCardHeaderText'
 import VCardImg from './VCardImg'
-import VCardMedia from './VCardMedia'
 import VCardSubtitle from './VCardSubtitle'
 import VCardText from './VCardText'
 import VCardTitle from './VCardTitle'
@@ -121,14 +120,12 @@ export default defineComponent({
             <VCardImg>
               { slots.image
                 ? slots.image?.({ src: props.image })
-                : (<VImg src={ props.image } alt="" />)
+                : (<VImg src={ props.image } cover alt="" />)
               }
             </VCardImg>
           ) }
 
-          { slots.media && (
-            <VCardMedia v-slots={{ default: slots.media }} />
-          ) }
+          { slots.media?.() }
 
           { hasHeader && (
             <VCardHeader>
