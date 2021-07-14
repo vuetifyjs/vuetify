@@ -474,7 +474,13 @@ export default baseMixins.extend<options>().extend({
       this.badInput = target.validity && target.validity.badInput
     },
     onKeyDown (e: KeyboardEvent) {
-      if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
+      if (
+        e.keyCode === keyCodes.enter &&
+        this.lazyValue !== this.initialValue
+      ) {
+        this.initialValue = this.lazyValue
+        this.$emit('change', this.initialValue)
+      }
 
       this.$emit('keydown', e)
     },
