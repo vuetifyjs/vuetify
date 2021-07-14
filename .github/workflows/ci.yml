@@ -96,7 +96,7 @@ jobs:
       - run: yarn global add now
 
       - name: Download eo-UY
-        uses: crowdin/github-action@1.0.19
+        uses: crowdin/github-action@1.1.2
         with:
           config: crowdin.yml
           upload_sources: false
@@ -109,7 +109,7 @@ jobs:
           debug_mode: true
 
       - name: Download ja
-        uses: crowdin/github-action@1.0.19
+        uses: crowdin/github-action@1.1.2
         with:
           config: crowdin.yml
           upload_sources: false
@@ -122,7 +122,7 @@ jobs:
           debug_mode: true
 
       - name: Download zh-CN
-        uses: crowdin/github-action@1.0.19
+        uses: crowdin/github-action@1.1.2
         with:
           config: crowdin.yml
           upload_sources: false
