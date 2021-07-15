@@ -35,11 +35,11 @@ describe('VAutocomplete.ts', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/3793
-  it('should reset menu index after selection', async () => {
+  it('should reset menu index to selected item after selection', async () => {
     const wrapper = mountFunction({
       propsData: {
         items: ['foo', 'bar'],
-        value: 'foo',
+        value: 'bar',
       },
     })
 
@@ -49,7 +49,7 @@ describe('VAutocomplete.ts', () => {
 
     expect(wrapper.vm.isMenuActive).toBe(true)
 
-    expect(wrapper.vm.getMenuIndex()).toBe(-1)
+    expect(wrapper.vm.getMenuIndex()).toBe(1)
   })
 
   it('should not remove a disabled item', () => {

@@ -129,6 +129,7 @@ export default baseMixins.extend<options>().extend({
       selectedItems: [] as any[],
       keyboardLookupPrefix: '',
       keyboardLookupLastTime: 0,
+      customIndex: -1,
     }
   },
 
@@ -276,6 +277,10 @@ export default baseMixins.extend<options>().extend({
         this.setSelectedItems()
       },
     },
+  },
+
+  mounted () {
+    this.initializeSelectItemIndex()
   },
 
   methods: {
@@ -885,6 +890,14 @@ export default baseMixins.extend<options>().extend({
       const appendInner = this.$refs['append-inner']
 
       return appendInner && (appendInner === target || appendInner.contains(target))
+    },
+    initializeSelectItemIndex () {
+      if (this.multiple) return
+      if (this.customIndex === -1) {
+        const index = this.allItems.findIndex(item => item === this.selectedItems[0])
+        this.setMenuIndex(index)
+        this.customIndex = index
+      }
     },
   },
 })
