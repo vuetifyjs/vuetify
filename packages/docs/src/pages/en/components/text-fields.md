@@ -51,7 +51,7 @@ You can optionally change a text field into any color in the Material design pal
 
 #### Dense
 
-You can reduces the text field height with **dense** prop.
+You can reduce the text field height with **dense** prop.
 
 <example file="v-text-field/prop-dense" />
 
