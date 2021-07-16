@@ -1,135 +1,163 @@
-@import './_variables.scss'
-
-/* Theme */
-+theme(v-input) using ($material)
-  color: map-deep-get($material, 'text', 'primary')
-
-  input,
-  textarea
-    color: map-deep-get($material, 'text', 'primary')
-
-  input::placeholder,
-  textarea::placeholder
-    color: map-deep-get($material, 'text', 'disabled')
-
-  &--is-disabled
-    color: map-deep-get($material, 'text', 'disabled')
-
-    input,
-    textarea
-      color: map-deep-get($material, 'text', 'disabled')
+@import ./index
 
 .v-input
   align-items: flex-start
   display: flex
   flex: 1 1 auto
+  flex-wrap: wrap
   font-size: $input-font-size
   letter-spacing: $input-letter-spacing
   max-width: 100%
+  height: 56px
   text-align: $input-text-align
 
-  .v-progress-linear
-    top: calc(100% - 1px)
-    left: 0
-
   input
-    max-height: $input-max-height
-
-  input,
-  textarea
-    // Remove Firefox red outline
-    &:invalid
-      box-shadow: none
+    width: 100%
+    color: rgba(0, 0, 0, .87)
 
     &:focus,
     &:active
       outline: none
 
-  .v-label
-    height: $input-label-height
-    line-height: $input-label-height
-    letter-spacing: $input-label-letter-spacing
+    // Remove Firefox red outline
+    &:invalid
+      box-shadow: none
 
-  &__append-outer,
-  &__prepend-outer
-    display: inline-flex
-    margin-bottom: 4px
-    margin-top: 4px
-    line-height: 1
+.v-input__control
+  align-items: center
+  border-bottom: thin solid transparent
+  border-bottom-color: rgba(0, 0, 0, .42)
+  border-radius: 4px 4px 0 0
+  display: flex
+  flex: 1 0
+  height: 56px
+  position: relative
 
-    .v-icon
-      user-select: none
+  .v-input--variant-outlined &
+    border-width: 0
 
-  &__append-outer
-    +ltr()
-      margin-left: $input-prepend-append-outer-margin
+  .v-input--variant-filled &
+    background: #f5f5f5
 
-    +rtl()
-      margin-right: $input-prepend-append-outer-margin
+.v-input__field
+  position: relative
+  flex: 1 0
+  height: 100%
 
-  &__prepend-outer
-    +ltr()
-      margin-right: $input-prepend-append-outer-margin
+  input
+    height: 100%
+    padding: 20px 16px 6px
 
-    +rtl()
-      margin-left: $input-prepend-append-outer-margin
+  .v-input--variant-outlined &
+    input
+      padding: 12px 16px 14px
 
-  &__control
-    display: flex
-    flex-direction: column
-    height: auto
-    flex-grow: 1
-    flex-wrap: wrap
-    min-width: 0
-    width: 100% // For IE11
+  .v-input--prepended &
+    input
+      padding-inline-start: 0
 
-  &__icon
-    align-items: center
-    display: inline-flex
-    height: $input-icon-height
-    flex: 1 0 auto
-    justify-content: center
-    min-width: $input-icon-min-width
-    width: $input-icon-width
+.v-input__prepend
+  padding-inline-start: 16px
+  padding-inline-end: 8px
+  display: flex
+  align-items: center
 
-    &--clear
-      border-radius: 50%
+.v-input__append
+  padding-inline-start: 8px
+  padding-inline-end: 16px
 
-      .v-icon--disabled
-        visibility: hidden
+.v-label
+  color: rgba(0, 0, 0, .6)
+  font-size: 1rem
+  letter-spacing: .009375em
+  max-width: calc(100% * .75)
+  pointer-events: none
+  position: absolute
+  text-overflow: clip
+  top: 50%
+  transform-origin: top left
+  transform: translateY(-50%)
+  transition-property: color, transform, left
+  transition: .15s $standard-easing
+  white-space: nowrap
 
-  &__slot
-    align-items: center
-    color: inherit
-    display: flex
-    margin-bottom: $input-slot-margin-bottom
-    min-height: inherit
+  .v-input--variant-outlined &
+    display: inline-block
     position: relative
-    transition: $primary-transition
+
+  .v-input--variant-outlined.v-input--dirty &,
+  .v-input--variant-outlined.v-input--focused &
+    transform: translateY(-36px) scale(.75)
+
+  .v-input--variant-filled.v-input--dirty &,
+  .v-input--variant-filled.v-input--focused &
+    transform: translateY(-20px) scale(.75)
+
+.v-input__outline
+  display: flex
+  position: absolute
+  align-items: stretch
+  left: 0
+  right: 0
+  width: 100%
+  height: 100%
+  pointer-events: none
+
+  &__start,
+  &__notch,
+  &__end
+    border: 0 solid rgba(0, 0, 0, .38)
+
+  &__start
+    border-top-left-radius: 4px
+    border-bottom-left-radius: 4px
+    max-width: 12px
+    flex: 1 1 12px
+
+  &__notch
+    flex: 0 1
+
+    .v-input--dirty &,
+    .v-input--focused &
+      border-top: none
+
+  &__end
+    border-top-right-radius: 4px
+    border-bottom-right-radius: 4px
     width: 100%
+    flex: 1 0
 
-  &--dense > .v-input__control > .v-input__slot
-    margin-bottom: $input-dense-slot-margin-bottom
+  .v-input--variant-outlined &
+    .v-input__outline__start
+      border-width: thin 0 thin thin
 
-  &--is-disabled:not(.v-input--is-readonly)
-    pointer-events: none
+    .v-input__outline__notch
+      border-width: thin 0
 
-  &--is-loading > .v-input__control > .v-input__slot
-    &:before,
-    &:after
-      display: none
+    .v-input__outline__end
+      border-width: thin thin thin 0
 
-  &--hide-details > .v-input__control > .v-input__slot
-    margin-bottom: 0
+// Text Field
+.v-input__control
+  .v-text-field.v-input--prepended &
+    input
+      padding-inline-start: 0
 
-  &--has-state
-    &.error--text .v-label
-      animation: v-shake .6s map-get($transition, 'swing')
+  .v-text-field.v-input--appended &
+    input
+      padding-inline-end: 0
 
-  &--hide-spin-buttons
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button 
-      -webkit-appearance: none
-      margin: 0
-    input[type=number] 
-      -moz-appearance: textfield
+// .v-label
+
+//   .v-text-field &
+//     left: 0
+//     margin-inline-start: 16px
+//     pointer-events: none
+//     position: absolute
+//     top: 18px
+
+  // .v-text-field--focused &,
+  // .v-text-field.v-input--dirty &
+  //   max-width: 133%
+  //   pointer-events: auto // Show title attr on label hover
+  //   transform: translateY(-10px) scale(.75)

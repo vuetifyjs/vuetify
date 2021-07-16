@@ -1,4 +1,1 @@
-import VInput from './VInput'
-
-export { VInput }
-export default VInput
+export { default as VInput } from './VInput'
