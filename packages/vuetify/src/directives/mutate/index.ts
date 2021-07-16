@@ -1,68 +1,84 @@
-// @ts-nocheck
-/* eslint-disable */
+// Types
+import type {
+  DirectiveBinding,
+  ObjectDirective,
+} from 'vue'
 
-import { VNodeDirective } from 'vue'
-
-type MutateHandler = (
-  mutationsList: MutationRecord[],
+type MutationHandler = (
+  entries: MutationRecord[],
   observer: MutationObserver,
 ) => void
 
-interface MutateVNodeDirective extends Omit<VNodeDirective, 'modifiers'> {
-  value?: MutateHandler | { handler: MutateHandler, options?: MutationObserverInit }
-  modifiers?: {
-    once?: boolean
+export interface MutationDirectiveBinding extends Omit<DirectiveBinding, 'modifiers' | 'value'> {
+  value?: MutationHandler | { handler: MutationHandler, options?: MutationObserverInit }
+  modifiers: {
     attr?: boolean
-    child?: boolean
-    sub?: boolean
     char?: boolean
+    child?: boolean
+    once?: boolean
+    quiet?: boolean
+    sub?: boolean
   }
 }
 
-function inserted (el: HTMLElement, binding: MutateVNodeDirective) {
+function mounted (el: HTMLElement, binding: MutationDirectiveBinding) {
   const modifiers = binding.modifiers || {}
   const value = binding.value
-  const callback = typeof value === 'object' ? value.handler : value!
   const { once, ...modifierKeys } = modifiers
   const hasModifiers = Object.keys(modifierKeys).length > 0
 
-  // Options take top priority
-  const options = typeof value === 'object' && value.options
-    ? value.options
-    : hasModifiers
-      // If we have modifiers, use only those provided
-      ? {
-        attributes: modifierKeys.attr,
-        childList: modifierKeys.child,
-        subtree: modifierKeys.sub,
-        characterData: modifierKeys.char,
-      }
-      // Defaults to everything on
-      : {
-        attributes: true,
-        childList: true,
-        subtree: true,
-        characterData: true,
-      }
+  const { handler, options } = typeof value === 'object'
+    ? value
+    : {
+      handler: value,
+      options: hasModifiers
+        // If we have modifiers, use only those provided
+        ? {
+          attributes: modifierKeys.attr,
+          characterData: modifierKeys.char,
+          childList: modifierKeys.child,
+          subtree: modifierKeys.sub,
+        }
+        // Defaults to everything on
+        : {
+          attributes: true,
+          characterData: true,
+          childList: true,
+          subtree: true,
+        },
+    }
 
   const observer = new MutationObserver((
-    mutationsList: MutationRecord[],
+    mutations: MutationRecord[] = [],
     observer: MutationObserver
   ) => {
     /* istanbul ignore if */
     if (!el._mutate) return // Just in case, should never fire
 
-    callback(mutationsList, observer)
+    // If is not quiet or has already been
+    // initted, invoke the user callback
+    if (
+      handler && (
+        !modifiers.quiet ||
+        el._mutate.init
+      ) && (
+        !modifiers.once ||
+        !el._mutate.init
+      )
+    ) {
+      handler(mutations, observer)
+    }
 
-    // If has the once modifier, unbind
-    once && unbind(el)
+    if (once) unmounted(el)
+    else el._mutate.init = true
   })
 
+  el._mutate = { init: false, observer }
+
   observer.observe(el, options)
-  el._mutate = { observer }
 }
 
-function unbind (el: HTMLElement) {
+function unmounted (el: HTMLElement) {
   /* istanbul ignore if */
   if (!el._mutate) return
 
@@ -70,9 +86,9 @@ function unbind (el: HTMLElement) {
   delete el._mutate
 }
 
-export const Mutate = {
-  inserted,
-  unbind,
+export const Mutate: ObjectDirective<HTMLElement> = {
+  mounted,
+  unmounted,
 }
 
 export default Mutate
