@@ -37,9 +37,11 @@ export default createVuetify({
 ```
 
 ```html
+
 <template>
   <v-icon icon="mdi-home" />
 </template>
+
 ```
 
 In the above examples we import the default `mdi` icon set and its corresponding aliases. These aliases reference commonly used types of icons that are utilized by Vuetify components.
@@ -124,6 +126,7 @@ export default createVuetify({
   },
 })
 ```
+
 <alert type="error">
 
   **DO NOT** use a CDN link without specifying a package *version*. Failure to do so can result in unexpected changes to your application with new releases.
@@ -371,7 +374,6 @@ An icon set consists of an object with one property `component` which should be 
 In order to use a custom icon set as the framework default, you **must** add the necessary *aliases* that correspond to values used by Vuetify components.
 
 The following snippet is a complete list of all supported icon types:
-
 
 ```ts
 // src/iconsets/custom.ts

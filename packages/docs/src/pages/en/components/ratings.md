@@ -73,7 +73,6 @@ You can use custom icons.
 
 <example file="v-rating/prop-icons" />
 
-
 #### Length
 
 Change the number of items by modifying the the **length** prop.
@@ -111,7 +110,6 @@ Slots enable advanced customization possibilities and provide you with more free
 Any arbitrary content could be displayed for labels in **item-label** slot.
 
 <example file="v-rating/slot-item-label" />
-
 
 ### Misc
 

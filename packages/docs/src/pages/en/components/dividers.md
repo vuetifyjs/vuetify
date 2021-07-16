@@ -43,7 +43,7 @@ Vertical dividers give you more tools for unique layouts.
 
 #### Thickness
 
-By using the **thickness** prop, the thickness of the divider can be adjusted to the desired value. 
+By using the **thickness** prop, the thickness of the divider can be adjusted to the desired value.
 
 ### Misc
 

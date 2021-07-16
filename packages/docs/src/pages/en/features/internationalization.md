@@ -117,7 +117,6 @@ If you are building custom Vuetify components that need to hook into the locale 
 
 </alert>
 
-
 ## vue-i18n
 
 If you are using the vue-i18n library, you can very easily integrate it with Vuetify. This allows you to keep all of your translations in one place. Simply create an entry for $vuetify within your messages and add the corresponding language changes. Then hook up vue-i18n to Vuetify by using the provided wrapper function (as seen in the example below).

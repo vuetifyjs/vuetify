@@ -65,7 +65,7 @@ The icon slot allows you to to explicitly control the content and functionality 
 
 #### Two line
 
-One to two lines of text is preferable. The use of two lines is recommended for mobile screens. On desktop however, three lines of text should be considered the maximum length in order to keep the message short and concise. 
+One to two lines of text is preferable. The use of two lines is recommended for mobile screens. On desktop however, three lines of text should be considered the maximum length in order to keep the message short and concise.
 
 <example file="v-banner/misc-two-line" />
 
