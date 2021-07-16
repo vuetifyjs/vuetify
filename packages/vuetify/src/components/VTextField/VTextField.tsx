@@ -54,24 +54,11 @@ export default defineComponent({
   },
 
   setup (props, { attrs, slots }) {
-    const isFocused = ref(false)
-    const isDirty = ref(false)
-
-    function onInput (e: Event) {
-      const el = e.target as HTMLInputElement
-
-      isDirty.value = el.value != null && el.value !== ''
-    }
-
     return () => {
       return (
         <VInput
           class={[
             'v-text-field',
-            {
-              'v-text-field--focused': isFocused.value,
-              'v-text-field--dirty': isDirty.value,
-            },
           ]}
           { ...attrs }
           v-slots={{
@@ -84,9 +71,6 @@ export default defineComponent({
 
                   <input
                     type={ props.type }
-                    onFocus={ () => (isFocused.value = true) }
-                    onBlur={ () => (isFocused.value = false) }
-                    onInput={ onInput }
                     { ...slotProps }
                   />
 
@@ -96,16 +80,16 @@ export default defineComponent({
                 </>
               )
             },
-            label: ({ label, props }) => {
-              return (
-                <label
-                  class="v-label"
-                  { ...props }
-                >
-                  { label }
-                </label>
-              )
-            },
+            // label: ({ label, props }) => {
+            //   return (
+            //     <label
+            //       class="v-label"
+            //       { ...props }
+            //     >
+            //       { label }
+            //     </label>
+            //   )
+            // },
           }}
         />
       )

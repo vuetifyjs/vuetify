@@ -26,20 +26,41 @@
 .v-input__control
   align-items: center
   border-bottom: thin solid transparent
+  border-bottom-color: rgba(0, 0, 0, .42)
   border-radius: 4px 4px 0 0
   display: flex
   flex: 1 0
   height: 56px
   position: relative
 
+  .v-input--variant-outlined &
+    border-width: 0
+
+  .v-input--variant-filled &
+    background: #f5f5f5
+
 .v-input__field
   position: relative
   flex: 1 0
   height: 100%
 
+  input
+    height: 100%
+    padding: 20px 16px 6px
+
+  .v-input--variant-outlined &
+    input
+      padding: 12px 16px 14px
+
+  .v-input--prepended &
+    input
+      padding-inline-start: 0
+
 .v-input__prepend
   padding-inline-start: 16px
   padding-inline-end: 8px
+  display: flex
+  align-items: center
 
 .v-input__append
   padding-inline-start: 8px
@@ -48,23 +69,76 @@
 .v-label
   color: rgba(0, 0, 0, .6)
   font-size: 1rem
-  line-height: 1.25rem
-  max-width: 90%
-  overflow: hidden
+  letter-spacing: .009375em
+  max-width: calc(100% * .75)
   pointer-events: none
-  text-overflow: ellipsis
+  position: absolute
+  text-overflow: clip
+  top: 50%
+  transform-origin: top left
+  transform: translateY(-50%)
+  transition-property: color, transform, left
+  transition: .15s $standard-easing
   white-space: nowrap
+
+  .v-input--variant-outlined &
+    display: inline-block
+    position: relative
+
+  .v-input--variant-outlined.v-input--dirty &,
+  .v-input--variant-outlined.v-input--focused &
+    transform: translateY(-36px) scale(.75)
+
+  .v-input--variant-filled.v-input--dirty &,
+  .v-input--variant-filled.v-input--focused &
+    transform: translateY(-20px) scale(.75)
+
+.v-input__outline
+  display: flex
+  position: absolute
+  align-items: stretch
+  left: 0
+  right: 0
+  width: 100%
+  height: 100%
+  pointer-events: none
+
+  &__start,
+  &__notch,
+  &__end
+    border: 0 solid rgba(0, 0, 0, .38)
+
+  &__start
+    border-top-left-radius: 4px
+    border-bottom-left-radius: 4px
+    max-width: 12px
+    flex: 1 1 12px
+
+  &__notch
+    flex: 0 1
+
+    .v-input--dirty &,
+    .v-input--focused &
+      border-top: none
+
+  &__end
+    border-top-right-radius: 4px
+    border-bottom-right-radius: 4px
+    width: 100%
+    flex: 1 0
+
+  .v-input--variant-outlined &
+    .v-input__outline__start
+      border-width: thin 0 thin thin
+
+    .v-input__outline__notch
+      border-width: thin 0
+
+    .v-input__outline__end
+      border-width: thin thin thin 0
 
 // Text Field
 .v-input__control
-  .v-text-field &
-    background: #f5f5f5
-    border-bottom-color: rgba(0, 0, 0, .42)
-
-    input
-      height: 100%
-      padding: 20px 16px 6px
-
   .v-text-field.v-input--prepended &
     input
       padding-inline-start: 0
@@ -73,19 +147,17 @@
     input
       padding-inline-end: 0
 
-.v-label
-  transition: .2s $standard-easing
-  transform-origin: top left
+// .v-label
 
-  .v-text-field &
-    left: 0
-    margin-inline-start: 16px
-    pointer-events: none
-    position: absolute
-    top: 18px
+//   .v-text-field &
+//     left: 0
+//     margin-inline-start: 16px
+//     pointer-events: none
+//     position: absolute
+//     top: 18px
 
-  .v-text-field--focused &,
-  .v-text-field--dirty &
-    max-width: 133%
-    pointer-events: auto // Show title attr on label hover
-    transform: translateY(-10px) scale(.75)
+  // .v-text-field--focused &,
+  // .v-text-field.v-input--dirty &
+  //   max-width: 133%
+  //   pointer-events: auto // Show title attr on label hover
+  //   transform: translateY(-10px) scale(.75)

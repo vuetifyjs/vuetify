@@ -7,12 +7,11 @@ import { VIcon } from '@/components/VIcon'
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeThemeProps, useTheme } from '@/composables/theme'
-import { makeVariantProps, useVariant } from '@/composables/variant'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed } from 'vue'
-import { defineComponent, getUid } from '@/util'
+import { computed, ref } from 'vue'
+import { convertToUnit, defineComponent, getUid } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -34,24 +33,38 @@ export default defineComponent({
     modelValue: null as any as PropType<any>,
     persistentHint: Boolean,
     prependIcon: String,
+    variant: {
+      type: String,
+      default: 'filled',
+      // required: true,
+    },
 
     ...makeThemeProps(),
     ...makeDensityProps(),
-    ...makeVariantProps({ variant: 'contained' } as const),
   },
 
   setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
-    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-input')
     const { densityClasses } = useDensity(props, 'v-input')
 
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
     const value = useProxiedModel(props, 'modelValue')
+    const prependRef = ref<HTMLElement>()
+    const labelRef = ref<HTMLElement>()
+    const isFocused = ref(false)
+    const left = ref(16)
+    const isDirty = computed(() => (value.value != null && value.value !== ''))
 
     return () => {
       const hasPrepend = (slots.prepend || props.prependIcon)
       const hasAppend = (slots.append || props.appendIcon)
+      const labelWidth = labelRef.value ? labelRef.value?.scrollWidth - 5 : undefined
+      const isFloating = isFocused.value || isDirty.value
+
+      if (props.variant === 'outlined') {
+        left.value = isFloating ? 4 : (prependRef.value?.scrollWidth ?? 16) - 12
+      }
 
       return (
         <div
@@ -60,20 +73,21 @@ export default defineComponent({
             {
               'v-input--prepended': hasPrepend,
               'v-input--appended': hasAppend,
+              'v-input--dirty': isDirty.value,
+              'v-input--focused': isFocused.value,
+              [`v-input--variant-${props.variant}`]: true,
             },
             themeClasses.value,
-            colorClasses.value,
             densityClasses.value,
-            variantClasses.value,
-          ]}
-          style={[
-            colorStyles.value,
           ]}
           { ...attrs }
         >
           <div class="v-input__control">
             { hasPrepend && (
-              <div class="v-input__prepend">
+              <div
+                class="v-input__prepend"
+                ref={ prependRef }
+              >
                 { slots.prepend
                   ? slots.prepend()
                   : (<VIcon icon={ props.prependIcon } />)
@@ -82,28 +96,22 @@ export default defineComponent({
             ) }
 
             <div class="v-input__field">
-              { slots.label
-                ? slots.label({
-                  label: props.label,
-                  props: { for: id.value },
-                })
-                : (
-                  <label
-                    for={ id.value }
-                    class="v-label"
-                  >
-                    { props.label }
-                  </label>
-                )
-              }
-
               { slots.default?.({
                 uid,
                 props: {
                   id: id.value,
                   value: value.value,
+                  onFocus: () => (isFocused.value = true),
+                  onBlur: () => (isFocused.value = false),
                   onInput: (e: Event) => {
                     const el = e.target as HTMLInputElement
+
+                    value.value = el.value
+                  },
+                  onChange: (e: Event) => {
+                    const el = e.target as HTMLInputElement
+
+                    if (value.value === el.value) return
 
                     value.value = el.value
                   },
@@ -120,15 +128,35 @@ export default defineComponent({
               </div>
             ) }
 
-            { props.variant === 'outlined' && (
-              <div class="v-input__outline">
-                <div class="v-input__outline__start" />
+            <div class="v-input__outline">
+              <div class="v-input__outline__start" />
 
-                <div class="v-input__outline__notch" />
-
-                <div class="v-input__outline__end" />
+              <div
+                class="v-input__outline__notch"
+                style={{ width: convertToUnit(labelWidth) }}
+              >
+                { slots.label
+                  ? slots.label({
+                    label: props.label,
+                    props: { for: id.value },
+                  })
+                  : (
+                    <label
+                      ref={ labelRef }
+                      for={ id.value }
+                      class="v-label"
+                      style={{
+                        left: convertToUnit(left.value),
+                      }}
+                    >
+                      { props.label }
+                    </label>
+                  )
+                }
               </div>
-            )}
+
+              <div class="v-input__outline__end" />
+            </div>
           </div>
 
           { props.hint && (
