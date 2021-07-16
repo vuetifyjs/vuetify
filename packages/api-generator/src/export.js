@@ -102,8 +102,8 @@ const createWebTypesApi = () => {
       events: component.events.map(createTagEvent),
       slots: component.slots.map(createTagSlot),
       'vue-model': { // TODO: we should expose this in api data if we can
-        prop: 'value',
-        event: 'input',
+        prop: 'modelValue',
+        event: 'update:modelValue',
       },
     }
   }

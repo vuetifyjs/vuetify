@@ -152,9 +152,15 @@ const getComponentApi = (componentName, locales) => {
     }]
   }, [])
 
+  const events = Object.keys(component.emits || []).reduce((arr, key) => {
+    return [...arr, {
+      name: key,
+    }]
+  }, [])
+
   const sassVariables = parseSassVariables(componentName)
 
-  const api = deepmerge(componentMap, { name: kebabName, props, sass: sassVariables, component: true })
+  const api = deepmerge(componentMap, { name: kebabName, props, events, sass: sassVariables, component: true })
 
   // Make sure things are sorted
   const categories = ['props', 'slots', 'events', 'functions']
