@@ -49,7 +49,7 @@
     "dev": "cross-env NODE_ENV=development vite",
     "dev:ssr": "cross-env NODE_ENV=development vite-ssr",
     "dev:webpack": "cross-env NODE_ENV=development webpack serve --config build/webpack.dev.config.js --hot",
-    "build": "concurrently \"yarn build:dist\" \"yarn build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && yarn build:types",
+    "build": "concurrently \"yarn build:dist\" \"yarn build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && yarn build:types && yarn build:json",
     "build:dist": "rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress",
     "build:json": "node build/build-json.js",
     "build:types": "rimraf types-temp && tsc --pretty --emitDeclarationOnly -p tsconfig.dist.json && rollup --config build/rollup.config.js && rimraf types-temp",
