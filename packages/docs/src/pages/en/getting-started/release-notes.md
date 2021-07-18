@@ -11,7 +11,7 @@ related:
 
 # Release notes
 
-The Vuetify team performs releases on a weekly basis. All release notes can be found through the Github and can be viewed below for your convenience. Furthermore between major releases there can be many breaking changes in which you can follow the latest migration guide below to help easy your transition.
+The Vuetify team performs releases on a weekly basis. All release notes can be found through the GitHub and can be viewed below for your convenience. Furthermore between major releases there can be many breaking changes in which you can follow the latest migration guide below to help easy your transition.
 
 <releases />
 

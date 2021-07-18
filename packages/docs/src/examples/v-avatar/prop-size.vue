@@ -4,21 +4,21 @@
       color="indigo"
       size="36"
     >
-      <span class="white--text headline">36</span>
+      <span class="white--text text-h5">36</span>
     </v-avatar>
 
     <v-avatar
       color="teal"
       size="48"
     >
-      <span class="white--text headline">48</span>
+      <span class="white--text text-h5">48</span>
     </v-avatar>
 
     <v-avatar
       color="orange"
       size="62"
     >
-      <span class="white--text headline">62</span>
+      <span class="white--text text-h5">62</span>
     </v-avatar>
   </v-row>
 </template>

@@ -628,17 +628,24 @@ describe('VTextField.ts', () => { // eslint-disable-line max-statements
     expect(input.element.id).toBe('foo')
   })
 
-  it('should fire change event when pressing enter', () => {
+  it('should fire change event when pressing enter and value has changed', () => {
     const wrapper = mountFunction()
     const input = wrapper.find('input')
     const change = jest.fn()
+    const el = input.element as HTMLInputElement
 
     wrapper.vm.$on('change', change)
 
     input.trigger('focus')
-    input.element.value = 'foo'
+    el.value = 'foo'
     input.trigger('input')
     input.trigger('keydown.enter')
+    input.trigger('keydown.enter')
+
+    expect(change).toHaveBeenCalledTimes(1)
+
+    el.value = 'foobar'
+    input.trigger('input')
     input.trigger('keydown.enter')
 
     expect(change).toHaveBeenCalledTimes(2)

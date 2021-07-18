@@ -53,7 +53,7 @@
           justify="center"
         >
           <v-col class="text-center">
-            <h3 class="headline">
+            <h3 class="text-h5">
               {{ name }}
             </h3>
             <span class="grey--text text--lighten-1">{{ title }}</span>

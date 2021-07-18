@@ -30,6 +30,8 @@ The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstra
 - [v-col](/api/v-col)
 - [v-spacer](/api/v-spacer)
 
+<api-section page="components/grids" />
+
 ## Sub-components
 
 ### v-container

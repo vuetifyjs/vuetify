@@ -25,6 +25,8 @@ A simple text field with placeholder and/or label.
 
 - [v-text-field](/api/v-text-field)
 
+<api-section page="components/text-fields" />
+
 ## Examples
 
 ### Props
@@ -61,7 +63,7 @@ Text fields can be **disabled** or **readonly**.
 
 #### Filled
 
-Text fields can be used with an alternative box design. **append-icon** and **prepend-icon** props are _**not**_ supported in this mode.
+Text fields can be used with an alternative box design.
 
 <example file="v-text-field/prop-filled" />
 
