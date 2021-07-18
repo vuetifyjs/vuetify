@@ -65,11 +65,7 @@
 .v-timeline-item__opposite
   flex: 1 1 auto
   align-self: center
-<<<<<<< Updated upstream
   max-width: -div($timeline-divider-width, 2) + $timeline-divider-center
-=======
-  max-width: $timeline-divider-center - div($timeline-divider-width, 2)
->>>>>>> Stashed changes
 
 // Before/after directions
 .v-timeline:not(.v-timeline--dense):not(.v-timeline--reverse)
@@ -78,21 +74,13 @@
       +timeline-item-align(left)
       +timeline-wedge-align(left)
       .v-timeline-item__body
-<<<<<<< Updated upstream
         max-width: -div($timeline-divider-width, 2) + 100% - $timeline-divider-center
-=======
-        max-width: 100% - $timeline-divider-center - div($timeline-divider-width, 2)
->>>>>>> Stashed changes
 
     &:nth-child(even):not(.v-timeline-item--after), &--before
       +timeline-item-align(right)
       +timeline-wedge-align(right)
       .v-timeline-item__body
-<<<<<<< Updated upstream
         max-width: -div($timeline-divider-width, 2) - $timeline-divider-center
-=======
-        max-width: $timeline-divider-center - $timeline-divider-width, 2)
->>>>>>> Stashed changes
 
 // Wedge
 .v-timeline-item__body
@@ -135,21 +123,13 @@
       +timeline-item-align(right)
       +timeline-wedge-align(right)
       .v-timeline-item__body
-<<<<<<< Updated upstream
         max-width: -div($timeline-divider-width, 2) + 100% - $timeline-divider-center
-=======
-        max-width: 100% - $timeline-divider-center - div($timeline-divider-width, 2)
->>>>>>> Stashed changes
 
     &:nth-child(even):not(.v-timeline-item--before), &--after
       +timeline-item-align(left)
       +timeline-wedge-align(left)
       .v-timeline-item__body
-<<<<<<< Updated upstream
         max-width: -div($timeline-divider-width, 2) - $timeline-divider-center
-=======
-        max-width: $timeline-divider-center - div($timeline-divider-width, 2)
->>>>>>> Stashed changes
 
 .v-timeline--reverse.v-timeline--dense
   +timeline-line-align(div($timeline-divider-width, 2), right, left)
