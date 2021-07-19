@@ -188,11 +188,25 @@ export default VAutocomplete.extend({
     },
     updateEditing () {
       const value = this.internalValue.slice()
-      value[this.editingIndex] = this.internalSearch
+      const index = this.selectedItems.findIndex(item =>
+        this.getText(item) === this.internalSearch)
+
+      // If user enters a duplicate text on chip edit,
+      // don't add it, move it to the end of the list
+      if (index > -1) {
+        const item = typeof value[index] === 'object'
+          ? Object.assign({}, value[index])
+          : value[index]
+
+        value.splice(index, 1)
+        value.push(item)
+      } else {
+        value[this.editingIndex] = this.internalSearch
+      }
 
       this.setValue(value)
-
       this.editingIndex = -1
+      this.internalSearch = null
     },
     updateCombobox () {
       // If search is not dirty, do nothing
