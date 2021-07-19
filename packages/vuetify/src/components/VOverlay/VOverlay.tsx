@@ -224,6 +224,7 @@ export default defineComponent({
                 {
                   'v-overlay--absolute': props.absolute,
                   'v-overlay--active': isActive.value,
+                  'v-overlay--positioned': props.positionStrategy !== 'static',
                 },
                 themeClasses.value,
                 rtlClasses.value,

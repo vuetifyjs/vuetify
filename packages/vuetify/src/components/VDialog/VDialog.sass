@@ -14,6 +14,13 @@
     @media #{$dialog-overlay-content-mobile-breakpoint}
       max-width: $dialog-overlay-content-mobile-max-width
 
+    > .v-card,
+    > .v-sheet
+      border-radius: inherit
+      overflow: hidden
+
+      @include elevation($dialog-elevation)
+
     > .v-card
       > .v-card-avatar
         padding: $dialog-card-avatar-padding
