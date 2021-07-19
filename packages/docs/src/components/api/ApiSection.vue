@@ -105,6 +105,11 @@
 
     async created () {
       const components = this.name ? [this.name] : pageToApi[this.page] || []
+
+      if (!components.length) {
+        throw new Error(`API for ${this.name || this.page} does not exist`)
+      }
+
       for (const component of components) {
         this.apiComponents.push({
           text: component,
