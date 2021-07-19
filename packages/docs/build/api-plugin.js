@@ -64,12 +64,7 @@ function createMdFile (component, data, locale) {
   str += genHeader(component)
   str += genApiLinks(component, headerLocale.links)
 
-  for (const [header, value] of Object.entries(data)) {
-    if (['mixins', 'name'].includes(header) || !value.length) continue
-
-    str += `## ${headerLocale[header]}\n\n`
-    str += `<api-table name="${sanitize(component)}" field="${header}" />\n\n`
-  }
+  str += `<api-section name="${component}" />\n\n`
 
   str += genFooter()
 
@@ -93,7 +88,7 @@ function writeData (componentName, componentApi) {
     fs.mkdirSync(resolve(folder), { recursive: true })
   }
 
-  fs.writeFileSync(resolve(`${folder}/${sanitize(componentName)}.js`), `module.exports = ${JSON.stringify(componentApi, null, 2)}`)
+  fs.writeFileSync(resolve(`${folder}/${componentName}.js`), `module.exports = ${JSON.stringify(componentApi, null, 2)}`)
 }
 
 function generateFiles () {
@@ -117,7 +112,7 @@ function generateFiles () {
   }
 
   fs.writeFileSync(resolve(`src/api/sass.json`), JSON.stringify([
-    ...api.filter(item => item.component || item.name === '$vuetify').map(item => item.name),
+    ...api.filter(item => item?.sass?.length > 0).map(item => item.name),
   ]))
 }
 

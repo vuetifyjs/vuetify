@@ -22,8 +22,8 @@
     "clean": "lerna clean"
   },
   "engines": {
-    "node": "^12 || ^14",
-    "yarn": "^1.12"
+    "node": ">=12",
+    "yarn": "^1.19"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -74,7 +74,7 @@
     "vue-analytics": "^5.16.1",
     "vue-loader": "^15.7.1",
     "vue-meta": "^2.4.0",
-    "vue-router": "^3.0.1",
+    "vue-router": "^3.5.1",
     "vue-template-compiler": "^2.6.11",
     "vuex": "^3.0.1",
     "webpack": "^4.39.1",

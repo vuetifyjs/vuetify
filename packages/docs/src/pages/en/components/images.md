@@ -25,6 +25,8 @@ The `v-img` component is packed with features to support rich media. Combined wi
 
 - [v-img](/api/v-img)
 
+<api-section page="components/images" />
+
 ## Caveats
 
 <alert type="info">
