@@ -15,17 +15,11 @@ import { useTextColor } from '@/composables/color'
 // Utilities
 import { computed, provide, toRef } from 'vue'
 import { defineComponent } from '@/util'
+import { VBreadcrumbsSymbol } from './shared'
 
 // Types
-import type { InjectionKey, PropType, Ref } from 'vue'
+import type { PropType } from 'vue'
 import type { LinkProps } from '@/composables/router'
-
-interface BreadcrumbsContext {
-  color: Ref<string | undefined>
-  disabled: Ref<boolean>
-}
-
-export const VBreadcrumbsSymbol: InjectionKey<BreadcrumbsContext> = Symbol.for('vuetify:breadcrumbs')
 
 export type BreadcrumbItem = string | (LinkProps & {
   text: string

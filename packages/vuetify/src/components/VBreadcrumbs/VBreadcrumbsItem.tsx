@@ -6,9 +6,7 @@ import { useTextColor } from '@/composables/color'
 // Utilities
 import { computed, inject } from 'vue'
 import { defineComponent } from '@/util'
-
-// Types
-import { VBreadcrumbsSymbol } from './VBreadcrumbs'
+import { VBreadcrumbsSymbol } from './shared'
 
 export default defineComponent({
   name: 'VBreadcrumbsItem',

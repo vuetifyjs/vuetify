@@ -1,6 +1,6 @@
 // Components
-import { VIcon } from '@/components'
-import { VTimelineSymbol } from './VTimeline'
+import { VIcon } from '@/components/VIcon'
+import { VTimelineSymbol } from './shared'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'

@@ -2,7 +2,7 @@
 import type { ComponentPublicInstance } from 'vue'
 
 // Components
-import { VTimelineSymbol } from './VTimeline'
+import { VTimelineSymbol } from './shared'
 import VTimelineDivider from './VTimelineDivider'
 
 // Composables
