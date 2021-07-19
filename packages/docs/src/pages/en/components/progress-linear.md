@@ -25,6 +25,8 @@ In its simplest form, `v-progress-linear` displays a horizontal progress bar. Us
 
 - [v-progress-linear](/api/v-progress-linear)
 
+<api-section page="components/progress-linear" />
+
 ## Examples
 
 ### Props

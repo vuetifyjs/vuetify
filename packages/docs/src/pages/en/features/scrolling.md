@@ -25,6 +25,8 @@ The **goTo** method takes two parameters **target** and **options**. **target** 
 
 - [$vuetify](/api/vuetify)
 
+<api-section page="features/scrolling" />
+
 ## Use with router
 
 The **goTo** function can be individually imported and invoked anywhere. This is particularly useful when hooking up to [vue-router](https://router.vuejs.org/).
@@ -33,7 +35,7 @@ The **goTo** function can be individually imported and invoked anywhere. This is
 // src/router.js
 
 import Router from 'vue-router'
-import goTo from 'vuetify/es5/services/goto'
+import goTo from 'vuetify/lib/services/goto'
 
 export default new Router({
   scrollBehavior: (to, from, savedPosition) => {

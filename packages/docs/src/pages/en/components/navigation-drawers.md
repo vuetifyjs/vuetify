@@ -25,6 +25,8 @@ The navigation drawer is primarily used to house links to the pages in your appl
 
 - [v-navigation-drawer](/api/v-navigation-drawer)
 
+<api-section page="components/navigation-drawers" />
+
 ## Caveats
 
 <alert type="error">
@@ -75,7 +77,7 @@ By default, a navigation drawer has a 1px right border that separates it from co
 
 #### Right
 
-Navigation drawers can also be positioned on the right side of your application (or an element). This is also useful for creating a side-sheet with auxilliary information that may not have any navigation links. When using **RTL** you must explicitly define **right** for your drawer.
+Navigation drawers can also be positioned on the right side of your application (or an element). This is also useful for creating a side-sheet with auxiliary information that may not have any navigation links. When using **RTL** you must explicitly define **right** for your drawer.
 
 <example file="v-navigation-drawer/prop-right" />
 

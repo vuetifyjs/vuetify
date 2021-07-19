@@ -17,7 +17,7 @@ exports[`VFileInput.ts should be unclearable 1`] = `
       <div class="v-text-field__slot">
         <div class="v-file-input__text">
         </div>
-        <input id="input-24"
+        <input id="input-29"
                type="file"
         >
       </div>
@@ -53,7 +53,7 @@ exports[`VFileInput.ts should display file size 1`] = `
         <div class="v-file-input__text">
           test (2.1 MB)
         </div>
-        <input id="input-12"
+        <input id="input-17"
                type="file"
         >
       </div>
@@ -99,7 +99,7 @@ exports[`VFileInput.ts should display file size 2`] = `
         <div class="v-file-input__text">
           test (2.1 MB)
         </div>
-        <input id="input-12"
+        <input id="input-17"
                type="file"
         >
       </div>
@@ -145,7 +145,7 @@ exports[`VFileInput.ts should display total size in counter 1`] = `
         <div class="v-file-input__text">
           2 files
         </div>
-        <input id="input-18"
+        <input id="input-23"
                type="file"
         >
       </div>
@@ -194,7 +194,7 @@ exports[`VFileInput.ts should display total size in counter 2`] = `
         <div class="v-file-input__text">
           2 files
         </div>
-        <input id="input-18"
+        <input id="input-23"
                type="file"
         >
       </div>
@@ -286,7 +286,7 @@ exports[`VFileInput.ts should render chips 1`] = `
             </span>
           </span>
         </div>
-        <input id="input-62"
+        <input id="input-67"
                type="file"
         >
       </div>
@@ -332,7 +332,7 @@ exports[`VFileInput.ts should render counter 1`] = `
         <div class="v-file-input__text">
           test
         </div>
-        <input id="input-6"
+        <input id="input-11"
                type="file"
         >
       </div>
@@ -363,6 +363,46 @@ exports[`VFileInput.ts should render counter 1`] = `
 </div>
 `;
 
+exports[`VFileInput.ts should render multiple 1`] = `
+<div class="v-input theme--light v-text-field v-file-input">
+  <div class="v-input__prepend-outer">
+    <div class="v-input__icon v-input__icon--prepend">
+      <button type="button"
+              aria-label="prepend icon"
+              class="v-icon notranslate v-icon--link material-icons theme--light"
+      >
+        $file
+      </button>
+    </div>
+  </div>
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-text-field__slot">
+        <div class="v-file-input__text">
+        </div>
+        <input id="input-6"
+               type="file"
+               multiple="multiple"
+        >
+      </div>
+      <div class="v-input__append-inner">
+        <div>
+        </div>
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <span name="message-transition"
+              tag="div"
+              class="v-messages__wrapper"
+        >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`VFileInput.ts should render small chips 1`] = `
 <div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field v-file-input">
   <div class="v-input__prepend-outer">
@@ -385,7 +425,7 @@ exports[`VFileInput.ts should render small chips 1`] = `
             </span>
           </span>
         </div>
-        <input id="input-69"
+        <input id="input-74"
                type="file"
         >
       </div>
@@ -420,7 +460,7 @@ exports[`VFileInput.ts should render without icon 1`] = `
       <div class="v-text-field__slot">
         <div class="v-file-input__text">
         </div>
-        <input id="input-76"
+        <input id="input-81"
                type="file"
         >
       </div>
@@ -461,7 +501,7 @@ exports[`VFileInput.ts should set display none if hide-input prop is set 1`] = `
       <div class="v-text-field__slot">
         <div class="v-file-input__text">
         </div>
-        <input id="input-102"
+        <input id="input-107"
                type="file"
         >
       </div>

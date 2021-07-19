@@ -33,6 +33,8 @@ By default, the `v-list-item-group` operates similarly to `v-item-group`. If a *
 - [v-list-item-subtitle](/api/v-list-item-subtitle)
 - [v-list-item-title](/api/v-list-item-title)
 
+<api-section page="components/list-item-groups" />
+
 ## Examples
 
 ### Props

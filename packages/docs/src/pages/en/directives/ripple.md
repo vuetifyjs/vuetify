@@ -25,6 +25,8 @@ Basic ripple functionality can be enabled just by using `v-ripple` directive on 
 
 - [v-ripple](/api/v-ripple)
 
+<api-section page="directives/ripple" />
+
 ## Examples
 
 ### Options

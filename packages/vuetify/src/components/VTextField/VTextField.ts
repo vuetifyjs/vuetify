@@ -373,6 +373,7 @@ export default baseMixins.extend<options>().extend({
       const width = !this.singleLine && (this.labelValue || this.isDirty) ? this.labelWidth : 0
       const span = this.$createElement('span', {
         domProps: { innerHTML: '&#8203;' },
+        staticClass: 'notranslate',
       })
 
       return this.$createElement('legend', {
@@ -473,7 +474,13 @@ export default baseMixins.extend<options>().extend({
       this.badInput = target.validity && target.validity.badInput
     },
     onKeyDown (e: KeyboardEvent) {
-      if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
+      if (
+        e.keyCode === keyCodes.enter &&
+        this.lazyValue !== this.initialValue
+      ) {
+        this.initialValue = this.lazyValue
+        this.$emit('change', this.initialValue)
+      }
 
       this.$emit('keydown', e)
     },
