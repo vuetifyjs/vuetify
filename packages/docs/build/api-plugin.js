@@ -64,7 +64,7 @@ function createMdFile (component, data, locale) {
   str += genHeader(component)
   str += genApiLinks(component, headerLocale.links)
 
-  str += `<api-section name="${sanitize(component)}" />\n\n`
+  str += `<api-section name="${component}" />\n\n`
 
   str += genFooter()
 
@@ -88,7 +88,7 @@ function writeData (componentName, componentApi) {
     fs.mkdirSync(resolve(folder), { recursive: true })
   }
 
-  fs.writeFileSync(resolve(`${folder}/${sanitize(componentName)}.js`), `module.exports = ${JSON.stringify(componentApi, null, 2)}`)
+  fs.writeFileSync(resolve(`${folder}/${componentName}.js`), `module.exports = ${JSON.stringify(componentApi, null, 2)}`)
 }
 
 function generateFiles () {

@@ -22,8 +22,8 @@
     "clean": "lerna clean"
   },
   "engines": {
-    "node": "^12 || ^14",
-    "yarn": "^1.12"
+    "node": ">=12",
+    "yarn": "^1.19"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
