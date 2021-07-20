@@ -97,7 +97,7 @@ module.exports = {
         },
         snippet: `
 // Composables
-import { useDisplay } from 'vuetify/lib/composables/display'
+import { useDisplay } from 'vuetify'
 
 export default {
   mounted () {
