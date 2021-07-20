@@ -11,6 +11,7 @@ import { computed, nextTick, ref } from 'vue'
 import { createRange, defineComponent, keyValues } from '@/util'
 
 // Composables
+import { provideDefaults } from '@/composables/defaults'
 import { makeTagProps } from '@/composables/tag'
 import { useLocale } from '@/composables/locale'
 import { useRtl } from '@/composables/rtl'
@@ -291,6 +292,12 @@ export default defineComponent({
         nextTick(updateFocus)
       }
     }
+
+    provideDefaults({
+      defaults: {
+        global: { merge: false },
+      },
+    })
 
     return () => (
       <props.tag
