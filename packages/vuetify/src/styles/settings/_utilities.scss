@@ -30,6 +30,26 @@ $utilities: map-deep-merge(
       class: float,
       values: none left right
     ),
+    "float:rtl": (
+      responsive: true,
+      print: true,
+      property: float,
+      class: float,
+      values: (
+        end: left,
+        start: right,
+      )
+    ),
+    "float:ltr": (
+      responsive: true,
+      print: true,
+      property: float,
+      class: float,
+      values: (
+        end: right,
+        start: left,
+      )
+    ),
 
     // Flex utilities
     "flex": (
