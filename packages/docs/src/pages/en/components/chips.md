@@ -25,6 +25,8 @@ Chips come in the following variations: closeable, filter, outlined, pill. The d
 
 - [v-chip](/api/v-chip)
 
+<api-section page="components/chips" />
+
 ## Examples
 
 ### Props

@@ -28,6 +28,8 @@ Icons come in two themes (light and dark), and five different sizes (x-small, sm
 
 - [v-icon](/api/v-icon)
 
+<api-section page="components/icons" />
+
 ## Examples
 
 ### Props
