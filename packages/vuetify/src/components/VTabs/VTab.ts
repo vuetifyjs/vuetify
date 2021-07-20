@@ -69,6 +69,10 @@ export default baseMixins.extend<options>().extend(
 
   mounted () {
     this.onRouteChange()
+
+    this.saveDefaultTabindex()
+    this.disableTabElements()
+    this.disableTabWithLink()
   },
 
   methods: {
@@ -86,6 +90,41 @@ export default baseMixins.extend<options>().extend(
 
       this.to || this.toggle()
     },
+    saveDefaultTabindex () {
+      for (const el of this.$el.querySelectorAll('*')) {
+        if (el.getAttribute('tabindex') !== null) {
+          el.setAttribute('data-tabindex', el.getAttribute('tabindex') as string)
+        }
+      }
+    },
+    disableTabWithLink () {
+      if (this.href) {
+        this.disabled
+          ? this.$el.setAttribute('tabindex', '-1')
+          : this.$el.setAttribute('tabindex', this.$attrs.tabindex || '0')
+      }
+    },
+    disableTabElements () {
+      for (const el of this.$el.querySelectorAll('*')) {
+        if (this.disabled) {
+          if (el.getAttribute('tabindex') !== null) {
+            el.setAttribute('data-tabindex', el.getAttribute('tabindex') as string)
+          }
+
+          el.setAttribute('tabindex', '-1')
+          el.classList.add('v-tab-children--disabled')
+        } else {
+          el.removeAttribute('tabindex')
+
+          if (el.getAttribute('data-tabindex') !== null) {
+            el.setAttribute('tabindex', el.getAttribute('data-tabindex') as string)
+            el.removeAttribute('data-tabindex')
+          }
+
+          el.classList.remove('v-tab-children--disabled')
+        }
+      }
+    },
   },
 
   render (h): VNode {
@@ -95,10 +134,9 @@ export default baseMixins.extend<options>().extend(
       ...data.attrs,
       'aria-selected': String(this.isActive),
       role: 'tab',
-    }
-
-    if (!this.disabled) {
-      data.attrs.tabindex = 0
+      tabindex: this.disabled
+        ? -1
+        : data.attrs!.tabindex || 0,
     }
 
     data.on = {
@@ -108,6 +146,11 @@ export default baseMixins.extend<options>().extend(
 
         this.$emit('keydown', e)
       },
+    }
+
+    if (this.$el) {
+      this.disableTabElements()
+      this.disableTabWithLink()
     }
 
     return h(tag, data, this.$slots.default)
