@@ -3,12 +3,12 @@
 .v-input
   align-items: flex-start
   display: flex
-  flex: 1 1 auto
   flex-wrap: wrap
+  flex: 1 1 auto
   font-size: $input-font-size
+  height: 56px
   letter-spacing: $input-letter-spacing
   max-width: 100%
-  height: 56px
   text-align: $input-text-align
 
   input
@@ -23,18 +23,40 @@
     &:invalid
       box-shadow: none
 
+  &--dirty,
+  &--focused
+    &.v-input--variant-filled
+      .v-label
+        transform: translateY(-20px) scale(.75)
+
+    &.v-input--variant-outlined
+      .v-label
+        transform: translateY(-37px) scale(.75)
+
+      .v-input__outline__notch
+        border-top-color: transparent
+
+    &.v-input--variant-single-line
+      .v-label
+        transform: translateY(-24px) scale(.75)
+
 .v-input__control
   align-items: center
-  border-bottom: thin solid transparent
-  border-bottom-color: rgba(0, 0, 0, .42)
-  border-radius: 4px 4px 0 0
   display: flex
   flex: 1 0
   height: 56px
   position: relative
+  background: rgba(red, .26)
+
+  .v-input--variant-contained &
+    background: #ffffff
+    border-color: transparent
+    border-radius: 4px
+
+    @include elevation(2)
 
   .v-input--variant-outlined &
-    border-width: 0
+    border-radius: 4px
 
   .v-input--variant-filled &
     background: #f5f5f5
@@ -46,21 +68,28 @@
 
   input
     height: 100%
-    padding: 20px 16px 6px
+    letter-spacing: .009375em
 
-  .v-input--variant-outlined &
-    input
-      padding: 12px 16px 14px
+    .v-input--variant-contained &
+      padding: 16px
 
-  .v-input--prepended &
-    input
+    .v-input--variant-filled &
+      padding: 20px 16px 6px
+
+    .v-input--variant-outlined &
+      padding: 14px 16px
+
+    .v-input--variant-single-line &
+      padding: 16px
+
+    .v-input--prepended &
       padding-inline-start: 0
 
 .v-input__prepend
+  align-items: center
+  display: flex
   padding-inline-start: 16px
   padding-inline-end: 8px
-  display: flex
-  align-items: center
 
 .v-input__append
   padding-inline-start: 8px
@@ -68,11 +97,12 @@
 
 .v-label
   color: rgba(0, 0, 0, .6)
+  display: inline-block
   font-size: 1rem
   letter-spacing: .009375em
-  max-width: calc(100% * .75)
   pointer-events: none
   position: absolute
+  position: relative
   text-overflow: clip
   top: 50%
   transform-origin: top left
@@ -81,27 +111,18 @@
   transition: .15s $standard-easing
   white-space: nowrap
 
-  .v-input--variant-outlined &
-    display: inline-block
-    position: relative
-
-  .v-input--variant-outlined.v-input--dirty &,
-  .v-input--variant-outlined.v-input--focused &
-    transform: translateY(-36px) scale(.75)
-
-  .v-input--variant-filled.v-input--dirty &,
-  .v-input--variant-filled.v-input--focused &
-    transform: translateY(-20px) scale(.75)
+  // .v-input--variant-single-line &
+  //   top: calc(50% + 8px)
 
 .v-input__outline
-  display: flex
-  position: absolute
   align-items: stretch
+  display: flex
+  height: 100%
   left: 0
+  pointer-events: none
+  position: absolute
   right: 0
   width: 100%
-  height: 100%
-  pointer-events: none
 
   &__start,
   &__notch,
@@ -109,55 +130,43 @@
     border: 0 solid rgba(0, 0, 0, .38)
 
   &__start
-    border-top-left-radius: 4px
-    border-bottom-left-radius: 4px
     max-width: 12px
     flex: 1 1 12px
 
-  &__notch
-    flex: 0 1
+    .v-input--variant-filled &
+      border-radius: 4px 0 0 0
+      border-width: 0 0 thin
 
-    .v-input--dirty &,
-    .v-input--focused &
-      border-top: none
-
-  &__end
-    border-top-right-radius: 4px
-    border-bottom-right-radius: 4px
-    width: 100%
-    flex: 1 0
-
-  .v-input--variant-outlined &
-    .v-input__outline__start
+    .v-input--variant-outlined &
+      border-radius: 4px 0 0 4px
       border-width: thin 0 thin thin
 
-    .v-input__outline__notch
+    .v-input--variant-single-line &
+      border-width: 0 0 thin
+
+  &__notch
+    .v-input--variant-contained &
+      padding-top: 1px
+
+    .v-input--variant-filled &
+      border-width: 0 0 thin
+
+    .v-input--variant-single-line &
+      border-width: 0 0 thin
+
+    .v-input--variant-outlined &
       border-width: thin 0
 
-    .v-input__outline__end
+  &__end
+    flex: 1 0
+
+    .v-input--variant-outlined &
+      border-radius: 0 4px 4px 0
       border-width: thin thin thin 0
 
-// Text Field
-.v-input__control
-  .v-text-field.v-input--prepended &
-    input
-      padding-inline-start: 0
+    .v-input--variant-filled &
+      border-radius: 0 4px 0 0
+      border-width: 0 0 thin
 
-  .v-text-field.v-input--appended &
-    input
-      padding-inline-end: 0
-
-// .v-label
-
-//   .v-text-field &
-//     left: 0
-//     margin-inline-start: 16px
-//     pointer-events: none
-//     position: absolute
-//     top: 18px
-
-  // .v-text-field--focused &,
-  // .v-text-field.v-input--dirty &
-  //   max-width: 133%
-  //   pointer-events: auto // Show title attr on label hover
-  //   transform: translateY(-10px) scale(.75)
+    .v-input--variant-single-line &
+      border-width: 0 0 thin

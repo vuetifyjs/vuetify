@@ -53,17 +53,26 @@ export default defineComponent({
     const prependRef = ref<HTMLElement>()
     const labelRef = ref<HTMLElement>()
     const isFocused = ref(false)
-    const left = ref(16)
+    const left = ref(4)
     const isDirty = computed(() => (value.value != null && value.value !== ''))
 
     return () => {
       const hasPrepend = (slots.prepend || props.prependIcon)
       const hasAppend = (slots.append || props.appendIcon)
-      const labelWidth = labelRef.value ? labelRef.value?.scrollWidth - 5 : undefined
+      const labelWidth = labelRef.value ? labelRef.value?.scrollWidth * 0.75 + 8 : undefined
       const isFloating = isFocused.value || isDirty.value
+      const labelLeft = (prependRef.value?.scrollWidth ?? 0) - 12
+
+      if (props.variant === 'single-line') {
+        left.value = labelLeft
+      }
+
+      if (props.variant === 'contained') {
+        left.value = labelLeft + 16
+      }
 
       if (props.variant === 'outlined') {
-        left.value = isFloating ? 4 : (prependRef.value?.scrollWidth ?? 16) - 12
+        left.value = isFloating ? 4 : labelLeft
       }
 
       return (
