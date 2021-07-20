@@ -22,8 +22,8 @@
     "clean": "lerna clean"
   },
   "engines": {
-    "node": "^12 || ^14",
-    "yarn": "^1.12"
+    "node": ">=12",
+    "yarn": "^1.19"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -64,9 +64,13 @@
     "jest-serializer-html": "^7.0.0",
     "lerna": "^3.16.2",
     "moment": "^2.27.0",
-    "sass": "~1.32.13",
+    "postcss": "^8.3.6",
+    "sass": "^1.36.0",
+    "sass-loader": "^10.2.0",
     "semver": "^6.2.0",
     "shelljs": "^0.8.4",
+    "source-map-js": "^0.6.2",
+    "source-map-resolve": "^0.6.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "typescript": "^4.0.3",

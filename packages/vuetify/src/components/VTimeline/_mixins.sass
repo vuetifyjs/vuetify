@@ -1,11 +1,11 @@
 @mixin timeline-dots($dot-size, $inner-dot-size)
   height: $dot-size
-  left: -div($dot-size, 2) + 50% 
+  left: - calc(math.div($dot-size, 2)) + 50% 
   width: $dot-size
 
   .v-timeline-item__inner-dot
     height: $inner-dot-size
-    margin: div($dot-size - $inner-dot-size, 2)
+    margin: calc(math.div($dot-size - $inner-dot-size, 2))
     width: $inner-dot-size
 
 @mixin timeline-wedge-align($direction)
@@ -34,9 +34,9 @@
 @mixin timeline-line-align($center, $first, $second)
   &:before
     +ltr()
-      #{$first}: -div($timeline-line-width, 2) + $center
+      #{$first}: - calc(math.div($timeline-line-width, 2)) + $center
       #{$second}: initial
 
     +rtl()
       #{$first}: initial
-      #{$second}: -div($timeline-line-width, 2) + $center
+      #{$second}: - calc(math.div($timeline-line-width, 2)) + $center

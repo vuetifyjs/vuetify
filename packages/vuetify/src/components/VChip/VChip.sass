@@ -198,7 +198,7 @@
 .v-chip
   @each $name, $size in $icon-sizes
     &.v-size--#{$name}
-      border-radius: #{div(map-get($size, 'height'), 2)}px
+      border-radius: #{calc(math.div(map-get($size, 'height'), 2))}px
       font-size: #{map-get($size, 'font-size')}px
       height: #{map-get($size, 'height')}px
 

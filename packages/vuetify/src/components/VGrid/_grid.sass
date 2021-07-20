@@ -27,20 +27,20 @@
       &-#{$size}
         .layout
           .flex
-            padding: div($gutter, 2)
+            padding: calc(math.div($gutter, 2))
 
         .layout:only-child
-          margin: div(-$gutter, 2)
+          margin: calc(math.div(-$gutter, 2))
 
         .layout:not(:only-child)
-          margin: auto div(-$gutter, 2)
+          margin: auto calc(math.div(-$gutter, 2))
 
         *:not(:only-child)
           .layout:first-child
-            margin-top: div(-$gutter, 2)
+            margin-top: calc(math.div(-$gutter, 2))
 
           .layout:last-child
-            margin-bottom: div(-$gutter, 2)
+            margin-bottom: calc(math.div(-$gutter, 2))
 
 .layout
   display: flex
@@ -73,9 +73,9 @@
     $n: $grid-columns
     @while $n > 0
       .flex.#{$size}#{$n}
-        flex-basis: div($n * 100%, $grid-columns)
+        flex-basis: calc(math.div($n * 100%, $grid-columns))
         flex-grow: 0
-        max-width: div($n * 100%, $grid-columns)
+        max-width: calc(math.div($n * 100%, $grid-columns))
 
       .flex.order-#{$size}#{$n}
         order: $n
@@ -87,9 +87,9 @@
       .flex.offset-#{$size}#{$m}
         // Offsets can only ever work in row layouts
         +ltr()
-          margin-left: div($m * 100%, $grid-columns)
+          margin-left: calc(math.div($m * 100%, $grid-columns))
         +rtl()
-          margin-right: div($m * 100%, $grid-columns)
+          margin-right: calc(math.div($m * 100%, $grid-columns))
 
       $m: $m - 1
 
