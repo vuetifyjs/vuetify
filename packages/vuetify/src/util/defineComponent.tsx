@@ -12,7 +12,13 @@ function propIsDefined (vnode: VNode, prop: string) {
   vnode.props?.hasOwnProperty(toKebabCase(prop))
 }
 
-export const defineComponent = (function defineComponent (options: ComponentOptions) {
+export const defineComponent = (function defineComponent ({ name, setup, ...rest }: ComponentOptions) {
+  const options: ComponentOptions = {
+    name,
+    setup,
+    ...rest,
+  }
+
   const _setup = options.setup
 
   if (!options.name) {

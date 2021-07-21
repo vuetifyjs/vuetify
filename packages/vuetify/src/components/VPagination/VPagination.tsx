@@ -3,9 +3,6 @@ import './VPagination.sass'
 // Types
 import type { ComponentPublicInstance } from 'vue'
 
-// Components
-import { VBtn } from '../VBtn'
-
 // Utilities
 import { computed, nextTick, ref } from 'vue'
 import { createRange, defineComponent, keyValues } from '@/util'
@@ -24,6 +21,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeBorderProps } from '@/composables/border'
 import { useRefs } from '@/composables/refs'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import VPaginationBtn from './VPaginationBtn'
 
 export default defineComponent({
   name: 'VPagination',
@@ -308,14 +306,14 @@ export default defineComponent({
           { props.showFirstLastPage && (
             <li class="v-pagination__first" data-test="v-pagination-first">
               { slots.first ? slots.first(controls.value.first) : (
-                <VBtn {...controls.value.first} />
+                <VPaginationBtn {...controls.value.first} />
               ) }
             </li>
           ) }
 
           <li class="v-pagination__prev" data-test="v-pagination-prev">
             { slots.prev ? slots.prev(controls.value.prev) : (
-              <VBtn {...controls.value.prev} />
+              <VPaginationBtn {...controls.value.prev} />
             ) }
           </li>
 
@@ -331,21 +329,21 @@ export default defineComponent({
               data-test="v-pagination-item"
             >
               { slots.item ? slots.item(item) : (
-                <VBtn {...item.props}>{ item.page }</VBtn>
+                <VPaginationBtn {...item.props}>{ item.page }</VPaginationBtn>
               ) }
             </li>
           )) }
 
           <li class="v-pagination__next" data-test="v-pagination-next">
             { slots.next ? slots.next(controls.value.next) : (
-              <VBtn {...controls.value.next} />
+              <VPaginationBtn {...controls.value.next} />
             ) }
           </li>
 
           { props.showFirstLastPage && (
             <li class="v-pagination__last" data-test="v-pagination-last">
               { slots.last ? slots.last(controls.value.last) : (
-                <VBtn {...controls.value.last} />
+                <VPaginationBtn {...controls.value.last} />
               ) }
             </li>
           ) }
