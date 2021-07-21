@@ -25,27 +25,17 @@ function mounted (el: HTMLElement, binding: MutationDirectiveBinding) {
   const modifiers = binding.modifiers || {}
   const value = binding.value
   const { once, ...modifierKeys } = modifiers
-  const hasModifiers = Object.keys(modifierKeys).length > 0
 
   const { handler, options } = typeof value === 'object'
     ? value
     : {
       handler: value,
-      options: hasModifiers
-        // If we have modifiers, use only those provided
-        ? {
-          attributes: modifierKeys.attr,
-          characterData: modifierKeys.char,
-          childList: modifierKeys.child,
-          subtree: modifierKeys.sub,
-        }
-        // Defaults to everything on
-        : {
-          attributes: true,
-          characterData: true,
-          childList: true,
-          subtree: true,
-        },
+      options: {
+        attributes: modifierKeys?.attr ?? true,
+        characterData: modifierKeys?.char ?? true,
+        childList: modifierKeys?.child ?? true,
+        subtree: modifierKeys?.sub ?? true,
+      },
     }
 
   const observer = new MutationObserver((

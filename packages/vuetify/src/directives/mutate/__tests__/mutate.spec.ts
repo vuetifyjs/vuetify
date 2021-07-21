@@ -4,20 +4,20 @@ import { describe, expect, it } from '@jest/globals'
 import { h } from 'vue'
 
 // Directives
-import Mutate from '../'
+import Mutate from '..'
 
 (global as any).MutationObserver = class { // Mock MutationObserver
   _callback: Function
 
   _observe = jest.fn()
 
-  constructor (callback) {
+  constructor (callback: () => {}) {
     this._callback = callback
   }
 
   disconnect () {}
 
-  observe (_, options) {
+  observe (_: any, options = {}) {
     this._observe(options)
   }
 
