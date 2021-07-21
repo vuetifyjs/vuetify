@@ -148,11 +148,15 @@ export default defineComponent({
             <div class="v-input__outline">
               { props.variant === 'outlined' && (
                 <>
-                  <div class="v-input__outline__start" ref={ outlineStartRef } />
+                  <div
+                    class="v-input__outline__start"
+                    style={{ width: convertToUnit((hasState ? 0 : labelWidth / 2) + 12) }}
+                    ref={ outlineStartRef }
+                  />
 
                   <div
                     class="v-input__outline__notch"
-                    style={{ width: convertToUnit(labelWidth) }}
+                    style={{ width: convertToUnit(hasState ? labelWidth : 0) }}
                   >
 
                   </div>

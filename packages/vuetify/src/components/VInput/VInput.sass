@@ -115,11 +115,13 @@
     &__start
       border-radius: 4px 0 0 4px
       border-width: thin 0 thin thin
-      flex: 1 1 12px
-      max-width: 12px
+      flex: none
+      transition: width .15s $standard-easing
 
     &__notch
-      border-width: thin 0
+      flex: none
+      border-width: 0 0 thin
+      transition: width .15s $standard-easing
 
     &__end
       flex: 1 0
