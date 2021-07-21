@@ -3,6 +3,7 @@ import './VInput.sass'
 
 // Components
 import { VIcon } from '@/components/VIcon'
+import VInputLabel from './VInputLabel'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
@@ -14,7 +15,7 @@ import { computed, ref } from 'vue'
 import { convertToUnit, defineComponent, getUid } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { ComponentPublicInstance, PropType } from 'vue'
 
 export default defineComponent({
   name: 'VInput',
@@ -46,34 +47,24 @@ export default defineComponent({
   setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
     const { densityClasses } = useDensity(props, 'v-input')
-
-    const uid = getUid()
-    const id = computed(() => props.id || `input-${uid}`)
     const value = useProxiedModel(props, 'modelValue')
+    const uid = getUid()
+
+    const labelRef = ref<ComponentPublicInstance>()
     const prependRef = ref<HTMLElement>()
-    const labelRef = ref<HTMLElement>()
+    const outlineStartRef = ref<HTMLElement>()
     const isFocused = ref(false)
-    const left = ref(4)
     const isDirty = computed(() => (value.value != null && value.value !== ''))
+    const id = computed(() => props.id || `input-${uid}`)
 
     return () => {
       const hasPrepend = (slots.prepend || props.prependIcon)
       const hasAppend = (slots.append || props.appendIcon)
-      const labelWidth = labelRef.value ? labelRef.value?.scrollWidth * 0.75 + 8 : undefined
-      const isFloating = isFocused.value || isDirty.value
-      const labelLeft = (prependRef.value?.scrollWidth ?? 0) - 12
-
-      if (props.variant === 'single-line') {
-        left.value = labelLeft
-      }
-
-      if (props.variant === 'contained') {
-        left.value = labelLeft + 16
-      }
-
-      if (props.variant === 'outlined') {
-        left.value = isFloating ? 4 : labelLeft
-      }
+      const hasState = isFocused.value || isDirty.value
+      const labelWidth = labelRef.value?.$el?.scrollWidth * (hasState ? 0.75 : 1) + 8
+      const prependWidth = hasPrepend ? (prependRef.value?.scrollWidth ?? 0) + 1 : 0
+      const outlineStartOffset = (outlineStartRef.value?.offsetLeft ?? 0)
+      const labelLeft = computed(() => (hasState ? outlineStartOffset : prependWidth) + 16)
 
       return (
         <div
@@ -103,6 +94,23 @@ export default defineComponent({
                 }
               </div>
             ) }
+
+            { slots.label
+              ? slots.label({
+                label: props.label,
+                props: { for: id.value },
+              })
+              : (
+                <VInputLabel
+                  ref={ labelRef }
+                  for={ id.value }
+                  active={ hasState }
+                  left={ labelLeft.value }
+                  text={ props.label }
+                  translateY={ -25 }
+                />
+              )
+            }
 
             <div class="v-input__field">
               { slots.default?.({
@@ -138,33 +146,20 @@ export default defineComponent({
             ) }
 
             <div class="v-input__outline">
-              <div class="v-input__outline__start" />
+              { props.variant === 'outlined' && (
+                <>
+                  <div class="v-input__outline__start" ref={ outlineStartRef } />
 
-              <div
-                class="v-input__outline__notch"
-                style={{ width: convertToUnit(labelWidth) }}
-              >
-                { slots.label
-                  ? slots.label({
-                    label: props.label,
-                    props: { for: id.value },
-                  })
-                  : (
-                    <label
-                      ref={ labelRef }
-                      for={ id.value }
-                      class="v-label"
-                      style={{
-                        left: convertToUnit(left.value),
-                      }}
-                    >
-                      { props.label }
-                    </label>
-                  )
-                }
-              </div>
+                  <div
+                    class="v-input__outline__notch"
+                    style={{ width: convertToUnit(labelWidth) }}
+                  >
 
-              <div class="v-input__outline__end" />
+                  </div>
+
+                  <div class="v-input__outline__end" />
+                </>
+              ) }
             </div>
           </div>
 
