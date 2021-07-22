@@ -1,9 +1,8 @@
 // Utilities
-import { computed } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
+import { convertToUnit, defineComponent, roundEven } from '@/util'
 
 // Composables
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps } from '@/composables/theme'
 
 export default defineComponent({
   name: 'VInputLabel',
@@ -35,7 +34,10 @@ export default defineComponent({
     return () => {
       const translate = !props.translateX && !props.translateY
         ? undefined
-        : `translate(${convertToUnit(props.translateX)}, ${convertToUnit(props.translateY)}) scale(${props.activeScale})`
+        : `translate(
+            ${convertToUnit(roundEven(props.translateX))},
+            ${convertToUnit(roundEven(props.translateY))}
+          ) scale(${props.activeScale})`
 
       return (
         <label
