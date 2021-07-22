@@ -54,6 +54,7 @@ export default defineComponent({
     const prependRef = ref<HTMLElement>()
     const outlineStartRef = ref<HTMLElement>()
     const controlRef = ref<HTMLElement>()
+    const fieldRef = ref<HTMLElement>()
     const isDirty = computed(() => (value.value != null && value.value !== ''))
     const isFocused = ref(false)
     const id = computed(() => props.id || `input-${uid}`)
@@ -66,7 +67,7 @@ export default defineComponent({
       const hasAppend = (slots.append || props.appendIcon)
       const hasState = isFocused.value || isDirty.value
       const labelWidth = labelRef.value?.$el?.scrollWidth * (hasState ? 0.75 : 1) + 8
-      const prependWidth = hasPrepend ? (prependRef.value?.scrollWidth ?? 0) + 22 : 16
+      const prependWidth = (fieldRef.value?.offsetLeft || 16) + (hasPrepend ? 6 : 0)
       const controlRefHeight = controlRef.value?.clientHeight ?? 0
 
       translateX.value = 0
@@ -74,8 +75,8 @@ export default defineComponent({
 
       if (props.variant === 'outlined') {
         translateX.value = (outlineStartRef.value?.offsetLeft ?? 0) - prependWidth + 16
-        translateY.value = controlRefHeight / -2.15
-      } else if (props.variant === 'filled') {
+        translateY.value = controlRefHeight / -2 + 4
+      } else if (props.variant !== 'contained') {
         translateY.value = controlRefHeight / -6
       }
 
@@ -129,7 +130,7 @@ export default defineComponent({
               )
             }
 
-            <div class="v-input__field">
+            <div class="v-input__field" ref={ fieldRef }>
               { slots.default?.({
                 uid,
                 props: {
