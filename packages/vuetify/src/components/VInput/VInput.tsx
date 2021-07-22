@@ -53,18 +53,28 @@ export default defineComponent({
     const labelRef = ref<ComponentPublicInstance>()
     const prependRef = ref<HTMLElement>()
     const outlineStartRef = ref<HTMLElement>()
-    const isFocused = ref(false)
+    const controlRef = ref<HTMLElement>()
     const isDirty = computed(() => (value.value != null && value.value !== ''))
+    const isFocused = ref(false)
     const id = computed(() => props.id || `input-${uid}`)
+    const translateX = ref(0)
+    const translateY = ref(0)
 
     return () => {
+      const isOutlined = props.variant === 'outlined'
       const hasPrepend = (slots.prepend || props.prependIcon)
       const hasAppend = (slots.append || props.appendIcon)
       const hasState = isFocused.value || isDirty.value
       const labelWidth = labelRef.value?.$el?.scrollWidth * (hasState ? 0.75 : 1) + 8
-      const prependWidth = hasPrepend ? (prependRef.value?.scrollWidth ?? 0) + 1 : 0
-      const outlineStartOffset = (outlineStartRef.value?.offsetLeft ?? 0)
-      const labelLeft = computed(() => (hasState ? outlineStartOffset : prependWidth) + 16)
+      const prependWidth = hasPrepend ? (prependRef.value?.scrollWidth ?? 0) + 20 : 17
+
+      if (props.variant === 'contained') {
+        translateX.value = 0
+        translateY.value = 0
+      } else {
+        translateX.value = (outlineStartRef.value?.offsetLeft ?? 0) - prependWidth + 16
+        translateY.value = (controlRef.value?.clientHeight ?? 0) / (isOutlined ? -2 : -4) + 3
+      }
 
       return (
         <div
@@ -82,7 +92,10 @@ export default defineComponent({
           ]}
           { ...attrs }
         >
-          <div class="v-input__control">
+          <div
+            ref={ controlRef }
+            class="v-input__control"
+          >
             { hasPrepend && (
               <div
                 class="v-input__prepend"
@@ -105,9 +118,10 @@ export default defineComponent({
                   ref={ labelRef }
                   for={ id.value }
                   active={ hasState }
-                  left={ labelLeft.value }
+                  left={ prependWidth }
                   text={ props.label }
-                  translateY={ -25 }
+                  translateX={ translateX.value }
+                  translateY={ translateY.value }
                 />
               )
             }
@@ -146,20 +160,20 @@ export default defineComponent({
             ) }
 
             <div class="v-input__outline">
-              { props.variant === 'outlined' && (
+              { isOutlined && (
                 <>
                   <div
                     class="v-input__outline__start"
-                    style={{ width: convertToUnit((hasState ? 0 : labelWidth / 2) + 12) }}
+                    style={{
+                      width: convertToUnit((hasState ? 0 : labelWidth / 2) + 12),
+                    }}
                     ref={ outlineStartRef }
                   />
 
                   <div
                     class="v-input__outline__notch"
                     style={{ width: convertToUnit(hasState ? labelWidth : 0) }}
-                  >
-
-                  </div>
+                  />
 
                   <div class="v-input__outline__end" />
                 </>

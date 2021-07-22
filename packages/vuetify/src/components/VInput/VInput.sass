@@ -46,10 +46,11 @@
 
   .v-input--variant-outlined &
     border-radius: 4px
-    padding: 0 14px 0 13px
+    padding: 0 14px
 
   .v-input--variant-filled &
     background: #f5f5f5
+    border-radius: 4px 4px 0 0
 
 .v-input__field
   position: relative
@@ -59,18 +60,10 @@
   input
     height: 100%
     letter-spacing: .009375em
-
-    .v-input--variant-contained &
-      padding: 16px 0
+    padding: 16px 0
 
     .v-input--variant-filled &
       padding: 20px 0 6px
-
-    .v-input--variant-outlined &
-      padding: 14px 0 15px
-
-    .v-input--variant-single-line &
-      padding: 16px 0
 
     .v-input--prepended &
       padding-inline-start: 6px
@@ -92,7 +85,7 @@
   position: absolute
   text-overflow: clip
   transform-origin: top left
-  transition-property: color, transform, left
+  transition-property: color, transform
   transition: .15s $standard-easing
   white-space: nowrap
 
@@ -105,6 +98,11 @@
   position: absolute
   right: 0
   width: 100%
+
+  .v-input--variant-filled &
+    border-color: rgba(0, 0, 0, .38)
+    border-style: solid
+    border-width: 0 0 thin
 
   .v-input--variant-outlined &
     &__start,
@@ -127,8 +125,3 @@
       flex: 1 0
       border-radius: 0 4px 4px 0
       border-width: thin thin thin 0
-
-  .v-input--variant-outlined.v-input--dirty &,
-  .v-input--variant-outlined.v-input--focused &
-    &__notch
-      border-top-color: transparent

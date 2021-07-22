@@ -9,25 +9,34 @@ export default defineComponent({
   name: 'VInputLabel',
 
   props: {
-    text: String,
     active: Boolean,
-    left: {
-      type: [Number, String],
-      default: 0,
-    },
     activeScale: {
       type: [Number, String],
       default: 0.75,
     },
+    left: {
+      type: [Number, String],
+      default: 0,
+    },
+    text: String,
     translateY: {
       type: [Number, String],
       default: 0,
     },
+    translateX: {
+      type: [Number, String],
+      default: 0,
+    },
+
     ...makeThemeProps(),
   },
 
   setup (props, { slots }) {
     return () => {
+      const translate = !props.translateX && !props.translateY
+        ? undefined
+        : `translate(${convertToUnit(props.translateX)}, ${convertToUnit(props.translateY)}) scale(${props.activeScale})`
+
       return (
         <label
           class={[
@@ -39,7 +48,7 @@ export default defineComponent({
           style={{
             left: convertToUnit(props.left),
             transform: props.active
-              ? `translateY(${convertToUnit(props.translateY)}) scale(${props.activeScale})`
+              ? translate
               : undefined,
           }}
         >
