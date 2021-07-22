@@ -66,14 +66,14 @@ export default defineComponent({
       const hasAppend = (slots.append || props.appendIcon)
       const hasState = isFocused.value || isDirty.value
       const labelWidth = labelRef.value?.$el?.scrollWidth * (hasState ? 0.75 : 1) + 8
-      const prependWidth = hasPrepend ? (prependRef.value?.scrollWidth ?? 0) + 20 : 17
+      const prependWidth = hasPrepend ? (prependRef.value?.scrollWidth ?? 0) + 22 : 16
 
       if (props.variant === 'contained') {
         translateX.value = 0
         translateY.value = 0
       } else {
         translateX.value = (outlineStartRef.value?.offsetLeft ?? 0) - prependWidth + 16
-        translateY.value = (controlRef.value?.clientHeight ?? 0) / (isOutlined ? -2 : -4) + 3
+        translateY.value = (controlRef.value?.clientHeight ?? 0) / (isOutlined ? -2.15 : -6)
       }
 
       return (
