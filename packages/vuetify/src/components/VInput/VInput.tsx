@@ -16,6 +16,7 @@ import { convertToUnit, defineComponent, getUid } from '@/util'
 
 // Types
 import type { ComponentPublicInstance, PropType } from 'vue'
+import { useSsrBoot } from '@/composables/ssrBoot'
 
 export default defineComponent({
   name: 'VInput',
@@ -49,9 +50,9 @@ export default defineComponent({
     const { densityClasses } = useDensity(props, 'v-input')
     const value = useProxiedModel(props, 'modelValue')
     const uid = getUid()
+    const { ssrBootStyles } = useSsrBoot()
 
     const labelRef = ref<ComponentPublicInstance>()
-    const prependRef = ref<HTMLElement>()
     const outlineStartRef = ref<HTMLElement>()
     const controlRef = ref<HTMLElement>()
     const fieldRef = ref<HTMLElement>()
@@ -103,7 +104,6 @@ export default defineComponent({
             { hasPrepend && (
               <div
                 class="v-input__prepend"
-                ref={ prependRef }
               >
                 { slots.prepend
                   ? slots.prepend()
@@ -112,25 +112,25 @@ export default defineComponent({
               </div>
             ) }
 
-            { slots.label
-              ? slots.label({
-                label: props.label,
-                props: { for: id.value },
-              })
-              : (
-                <VInputLabel
-                  ref={ labelRef }
-                  for={ id.value }
-                  active={ hasState }
-                  left={ prependWidth }
-                  text={ props.label }
-                  translateX={ translateX.value }
-                  translateY={ translateY.value }
-                />
-              )
-            }
-
             <div class="v-input__field" ref={ fieldRef }>
+              { slots.label
+                ? slots.label({
+                  label: props.label,
+                  props: { for: id.value },
+                })
+                : (
+                  <VInputLabel
+                    ref={ labelRef }
+                    for={ id.value }
+                    active={ hasState }
+                    left={ hasPrepend ? 6 : 0 }
+                    text={ props.label }
+                    translateX={ translateX.value }
+                    translateY={ translateY.value }
+                    style={ ssrBootStyles.value }
+                  />
+                )
+              }
               { slots.default?.({
                 uid,
                 props: {
