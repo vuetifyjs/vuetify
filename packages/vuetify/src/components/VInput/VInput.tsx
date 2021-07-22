@@ -55,7 +55,6 @@ export default defineComponent({
     const { ssrBootStyles } = useSsrBoot()
 
     const labelRef = ref<ComponentPublicInstance>()
-    const outlineStartRef = ref<HTMLElement>()
     const controlRef = ref<HTMLElement>()
     const fieldRef = ref<HTMLElement>()
     const isDirty = computed(() => (value.value != null && value.value !== ''))
@@ -77,14 +76,14 @@ export default defineComponent({
       let translateY = 0
 
       if (props.variant === 'outlined') {
-        translateX = (outlineStartRef.value?.offsetLeft ?? 0) - prependWidth + 16
+        translateX = -prependWidth + 16
         translateY = controlRefHeight / -2 + 4
       } else if (props.variant !== 'contained') {
         translateY = controlRefHeight / -6
       }
 
       if (props.variant === 'single-line') {
-        translateX -= prependWidth - 16
+        translateX = -prependWidth + 16
         translateY -= 8
       }
 
@@ -188,7 +187,6 @@ export default defineComponent({
                     style={{
                       width: convertToUnit((hasState ? 0 : labelWidth / 2) + 12),
                     }}
-                    ref={ outlineStartRef }
                   />
 
                   <div
