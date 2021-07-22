@@ -11,3 +11,5 @@ $input-icon-min-width: 24px !default;
 $input-icon-width: 24px !default;
 $input-slot-margin-bottom: 8px !default;
 $input-dense-slot-margin-bottom: 4px !default;
+
+$input-density: ('default': 0, 'comfortable': -2, 'compact': -4) !default;

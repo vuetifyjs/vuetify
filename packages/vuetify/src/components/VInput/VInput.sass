@@ -26,12 +26,12 @@
       box-shadow: none
 
 .v-input__control
+  $root: &
   align-items: center
   background: rgba(red, .26)
   border-radius: 4px
   display: flex
   flex: 1 0
-  height: 56px
   padding: 0 16px
   position: relative
   grid-area: control
@@ -47,6 +47,11 @@
 
   .v-input--variant-single-line &
     border-radius: 0
+
+  @at-root
+    @include density('v-input', $input-density) using ($modifier)
+      #{$root}
+        height: 56px + $modifier
 
 .v-input__field
   position: relative
@@ -64,7 +69,13 @@
       padding: 20px 0 6px
 
     .v-input--variant-single-line &
-      padding: 30px 0 8px
+      $root: &
+      padding: 8px 0
+
+      @at-root
+        @include density('v-input', $input-density) using ($modifier)
+          @at-root #{selector-append(&, $root)}
+            padding-top: 30px + $modifier * 0.75
 
     .v-input--prepended &
       padding-inline-start: 6px
@@ -76,7 +87,13 @@
   padding-top: 1px
 
   .v-input--variant-single-line &
-    padding-top: 24px
+    $root: &
+    align-self: flex-end
+
+    @at-root
+      @include density('v-input', $input-density) using ($modifier)
+        @at-root #{selector-append(&, $root)}
+          margin-bottom: 4px + $modifier/8
 
 .v-input__prepend-outer,
 .v-input__append-outer
