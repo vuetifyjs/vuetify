@@ -59,26 +59,30 @@
     .v-input--variant-filled &
       padding: 20px 0 6px
 
+    .v-input--variant-single-line &
+      padding: 30px 0 8px
+
     .v-input--prepended &
       padding-inline-start: 6px
 
-.v-input__prepend
-  align-items: center
-  display: flex
-  padding-top: 1px
-
-.v-input__prepend-outer
-  align-self: center
-  margin-inline-end: 16px
-
-.v-input__append-outer
-  align-self: center
-  margin-inline-start: 16px
-
+.v-input__prepend,
 .v-input__append
   align-items: center
   display: flex
   padding-top: 1px
+
+  .v-input--variant-single-line &
+    padding-top: 24px
+
+.v-input__prepend-outer,
+.v-input__append-outer
+  align-self: center
+
+.v-input__prepend-outer
+  margin-inline-end: 16px
+
+.v-input__append-outer
+  margin-inline-start: 16px
 
 .v-label
   color: rgba(0, 0, 0, .6)
@@ -92,6 +96,12 @@
   transition-property: color, transform
   transition: .15s $standard-easing
   white-space: nowrap
+
+  .v-input--prepended &
+    left: 6px
+
+  .v-input--variant-single-line &
+    bottom: 4px
 
 .v-input__outline
   align-items: stretch

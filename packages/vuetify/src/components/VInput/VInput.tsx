@@ -61,8 +61,6 @@ export default defineComponent({
     const isDirty = computed(() => (value.value != null && value.value !== ''))
     const isFocused = ref(false)
     const id = computed(() => props.id || `input-${uid}`)
-    const translateX = ref(0)
-    const translateY = ref(0)
 
     return () => {
       const isOutlined = props.variant === 'outlined'
@@ -75,14 +73,19 @@ export default defineComponent({
       const prependWidth = (fieldRef.value?.offsetLeft || 16) + (hasPrepend ? 6 : 0)
       const controlRefHeight = controlRef.value?.clientHeight ?? 0
 
-      translateX.value = 0
-      translateY.value = 0
+      let translateX = 0
+      let translateY = 0
 
       if (props.variant === 'outlined') {
-        translateX.value = (outlineStartRef.value?.offsetLeft ?? 0) - prependWidth + 16
-        translateY.value = controlRefHeight / -2 + 4
+        translateX = (outlineStartRef.value?.offsetLeft ?? 0) - prependWidth + 16
+        translateY = controlRefHeight / -2 + 4
       } else if (props.variant !== 'contained') {
-        translateY.value = controlRefHeight / -6
+        translateY = controlRefHeight / -6
+      }
+
+      if (props.variant === 'single-line') {
+        translateX -= prependWidth - 16
+        translateY -= 8
       }
 
       return (
@@ -138,10 +141,9 @@ export default defineComponent({
                     ref={ labelRef }
                     for={ id.value }
                     active={ hasState }
-                    left={ hasPrepend ? 6 : 0 }
                     text={ props.label }
-                    translateX={ translateX.value }
-                    translateY={ translateY.value }
+                    translateX={ translateX }
+                    translateY={ translateY }
                     style={ ssrBootStyles.value }
                   />
                 )

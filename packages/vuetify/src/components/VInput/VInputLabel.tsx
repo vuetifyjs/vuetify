@@ -13,10 +13,6 @@ export default defineComponent({
       type: [Number, String],
       default: 0.75,
     },
-    left: {
-      type: [Number, String],
-      default: 0,
-    },
     text: String,
     translateY: {
       type: [Number, String],
@@ -48,7 +44,6 @@ export default defineComponent({
             },
           ]}
           style={{
-            left: convertToUnit(props.left),
             transform: props.active
               ? translate
               : undefined,
