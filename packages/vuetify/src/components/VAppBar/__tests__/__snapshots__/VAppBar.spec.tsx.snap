@@ -4,7 +4,9 @@ exports[`VAppBar should match a snapshot 1`] = `
 <header class="v-app-bar v-app-bar--is-active v-app-bar--density-default"
         style="top: 0px; height: 64px; margin-left: 0px; margin-top: 0px; z-index: 2; transform: translateY(0%);"
 >
-  <div class="v-app-bar__content">
+  <div class="v-app-bar__content"
+       style="height: 64px;"
+  >
   </div>
 </header>
 `;
@@ -21,7 +23,9 @@ exports[`VAppBar should render image 1`] = `
       </transition-stub>
     </div>
   </div>
-  <div class="v-app-bar__content">
+  <div class="v-app-bar__content"
+       style="height: 64px;"
+  >
   </div>
 </header>
 `;
