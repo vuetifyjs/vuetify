@@ -46,7 +46,9 @@
 
   .v-input--variant-filled &
     background: #f5f5f5
-    border-radius: 4px 4px 0 0
+
+  .v-input--variant-single-line &
+    border-radius: 0
 
 .v-input__field
   position: relative
@@ -87,6 +89,7 @@
 
 .v-input__outline
   align-items: stretch
+  border-color: rgba(0, 0, 0, .38)
   display: flex
   height: 100%
   left: 0
@@ -96,7 +99,10 @@
   width: 100%
 
   .v-input--variant-filled &
-    border-color: rgba(0, 0, 0, .38)
+    border-style: solid
+    border-width: 0 0 thin
+
+  .v-input--variant-single-line &
     border-style: solid
     border-width: 0 0 thin
 

@@ -67,13 +67,16 @@ export default defineComponent({
       const hasState = isFocused.value || isDirty.value
       const labelWidth = labelRef.value?.$el?.scrollWidth * (hasState ? 0.75 : 1) + 8
       const prependWidth = hasPrepend ? (prependRef.value?.scrollWidth ?? 0) + 22 : 16
+      const controlRefHeight = controlRef.value?.clientHeight ?? 0
 
-      if (props.variant === 'contained') {
-        translateX.value = 0
-        translateY.value = 0
-      } else {
+      translateX.value = 0
+      translateY.value = 0
+
+      if (props.variant === 'outlined') {
         translateX.value = (outlineStartRef.value?.offsetLeft ?? 0) - prependWidth + 16
-        translateY.value = (controlRef.value?.clientHeight ?? 0) / (isOutlined ? -2.15 : -6)
+        translateY.value = controlRefHeight / -2.15
+      } else if (props.variant === 'filled') {
+        translateY.value = controlRefHeight / -6
       }
 
       return (
