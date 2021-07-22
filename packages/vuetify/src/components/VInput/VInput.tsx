@@ -25,6 +25,7 @@ export default defineComponent({
 
   props: {
     appendIcon: String,
+    appendOuterIcon: String,
     backgroundColor: String,
     hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
     hideSpinButtons: Boolean,
@@ -35,6 +36,7 @@ export default defineComponent({
     modelValue: null as any as PropType<any>,
     persistentHint: Boolean,
     prependIcon: String,
+    prependOuterIcon: String,
     variant: {
       type: String,
       default: 'filled',
@@ -65,7 +67,9 @@ export default defineComponent({
     return () => {
       const isOutlined = props.variant === 'outlined'
       const hasPrepend = (slots.prepend || props.prependIcon)
+      const hasPrependOuter = (slots.prependOuter || props.prependOuterIcon)
       const hasAppend = (slots.append || props.appendIcon)
+      const hasAppendOuter = (slots.appendOuter || props.appendOuterIcon)
       const hasState = isFocused.value || isDirty.value
       const labelWidth = labelRef.value?.$el?.scrollWidth * (hasState ? 0.75 : 1) + 8
       const prependWidth = (fieldRef.value?.offsetLeft || 16) + (hasPrepend ? 6 : 0)
@@ -97,6 +101,17 @@ export default defineComponent({
           ]}
           { ...attrs }
         >
+          { hasPrependOuter && (
+            <div
+              class="v-input__prepend-outer"
+            >
+              { slots.prependOuter
+                ? slots.prependOuter()
+                : (<VIcon icon={ props.prependOuterIcon } />)
+              }
+            </div>
+          ) }
+
           <div
             ref={ controlRef }
             class="v-input__control"
@@ -184,6 +199,17 @@ export default defineComponent({
               ) }
             </div>
           </div>
+
+          { hasAppendOuter && (
+            <div
+              class="v-input__append-outer"
+            >
+              { slots.appendOuter
+                ? slots.appendOuter()
+                : (<VIcon icon={ props.appendOuterIcon } />)
+              }
+            </div>
+          ) }
 
           { props.hint && (
             <div class="v-input__details">
