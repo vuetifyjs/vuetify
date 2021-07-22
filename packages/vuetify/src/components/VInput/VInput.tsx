@@ -211,9 +211,9 @@ export default defineComponent({
             </div>
           ) }
 
-          { props.hint && (
+          { slots.messages && (
             <div class="v-input__details">
-              { props.hint }
+              { slots.messages() }
             </div>
           ) }
         </div>

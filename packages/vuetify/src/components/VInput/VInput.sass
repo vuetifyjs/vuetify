@@ -2,13 +2,16 @@
 
 .v-input
   align-items: flex-start
-  display: flex
+  display: grid
   flex-wrap: wrap
   flex: 1 1 auto
   font-size: $input-font-size
   letter-spacing: $input-letter-spacing
   max-width: 100%
   text-align: $input-text-align
+  grid-template-areas: "prepend control append" "a messages b"
+  grid-template-rows: auto auto
+  grid-template-columns: min-content auto min-content
 
   input
     width: 100%
@@ -31,6 +34,7 @@
   height: 56px
   padding: 0 16px
   position: relative
+  grid-area: control
 
   .v-input--variant-contained &
     background: #ffffff
@@ -80,9 +84,11 @@
 
 .v-input__prepend-outer
   margin-inline-end: 16px
+  grid-area: prepend
 
 .v-input__append-outer
   margin-inline-start: 16px
+  grid-area: append
 
 .v-label
   color: rgba(0, 0, 0, .6)
@@ -143,3 +149,6 @@
       flex: 1 0
       border-radius: 0 4px 4px 0
       border-width: thin thin thin 0
+
+.v-input__details
+  grid-area: messages
