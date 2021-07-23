@@ -1,6 +1,9 @@
 @import ./index
 
 .v-input
+  --label-offset: 0
+  --label-translate: 0
+  --label-scale: 1
   align-items: flex-start
   display: grid
   flex-wrap: wrap
@@ -12,6 +15,12 @@
   grid-template-areas: "prepend control append" "a messages b"
   grid-template-rows: auto auto
   grid-template-columns: min-content auto min-content
+
+  &--dirty
+    --label-scale: .75
+
+    &.v-input--variant-outlined
+      --label-translate: -100%
 
   input
     width: 100%
@@ -119,10 +128,11 @@
   pointer-events: none
   position: absolute
   text-overflow: clip
-  transform-origin: top left
+  transform-origin: top center
   transition-property: color, transform
-  transition: .15s $standard-easing
+  transition: transform .15s $standard-easing
   white-space: nowrap
+  transform: translate(var(--label-offset), var(--label-translate)) scale(var(--label-scale))
 
   .v-input--prepended &
     left: 6px
@@ -136,45 +146,74 @@
           bottom: 4px + $modifier / 8
 
 .v-input__outline
+  --border-width: 1px
   align-items: stretch
   border-color: rgba(0, 0, 0, .38)
   display: flex
-  height: 100%
+  height: calc(100% - 1px)
   left: 0
   pointer-events: none
   position: absolute
   right: 0
   width: 100%
 
-  .v-input--variant-filled &
-    border-style: solid
-    border-width: 0 0 thin
+  .v-input--variant-outlined.v-input--focused &
+    --border-width: 2px
 
-  .v-input--variant-single-line &
+  .v-input--variant-filled &,
+  .v-input--variant-single-line &,
+  .v-input--variant-outlined &
     border-style: solid
-    border-width: 0 0 thin
+    border-width: 0 0 var(--border-width)
+
+  .v-input--variant-filled &,
+  .v-input--variant-single-line &
+    &::before
+      content: ''
+      position: absolute
+      width: 100%
+      bottom: calc(0px - var(--border-width))
+      border-color: inherit
+      border-style: solid
+      border-width: 0 0 2px
+      transition: transform .15s $standard-easing
+      transform: scaleX(0)
+
+      @at-root #{selector-append('.v-input--focused', &)}
+        transform: scaleX(1)
 
   .v-input--variant-outlined &
+    border-radius: inherit
+
     &__start,
     &__notch,
     &__end
       border: 0 solid rgba(0, 0, 0, .38)
+      height: calc(100% + 1px)
 
     &__start
       border-radius: 4px 0 0 4px
-      border-width: thin 0 thin thin
-      flex: none
-      transition: width .15s $standard-easing
+      border-width: var(--border-width) 0 0 var(--border-width)
+      flex: 0 0 12px
 
     &__notch
       flex: none
-      border-width: 0 0 thin
-      transition: width .15s $standard-easing
+      border-width: var(--border-width) 0 0
+      opacity: 1
+      transition: opacity .15s $standard-easing
+
+      @at-root #{selector-append('.v-input--dirty', &)}
+        flex-basis: auto
+        opacity: 0
+
+      .v-label
+        visibility: hidden
+        position: static
 
     &__end
-      flex: 1 0
+      flex: 1
       border-radius: 0 4px 4px 0
-      border-width: thin thin thin 0
+      border-width: var(--border-width) var(--border-width) 0 0
 
 .v-input__details
   grid-area: messages

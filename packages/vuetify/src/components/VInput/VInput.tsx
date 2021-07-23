@@ -11,8 +11,8 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref } from 'vue'
-import { convertToUnit, defineComponent, getUid } from '@/util'
+import { cloneVNode, computed, ref, watch } from 'vue'
+import { convertToUnit, defineComponent, getUid, roundEven } from '@/util'
 
 // Types
 import type { ComponentPublicInstance, PropType } from 'vue'
@@ -52,7 +52,7 @@ export default defineComponent({
     const { densityClasses } = useDensity(props, 'v-input')
     const value = useProxiedModel(props, 'modelValue')
     const uid = getUid()
-    const { ssrBootStyles } = useSsrBoot()
+    const { ssrBootStyles, isBooted } = useSsrBoot()
 
     const labelRef = ref<ComponentPublicInstance>()
     const controlRef = ref<HTMLElement>()
@@ -60,6 +60,26 @@ export default defineComponent({
     const isDirty = computed(() => (value.value != null && value.value !== ''))
     const isFocused = ref(false)
     const id = computed(() => props.id || `input-${uid}`)
+    const hasState = computed(() => isFocused.value || isDirty.value)
+
+    // const labelWidth = ref(0)
+    // watch(() => [hasState.value, props.density, isBooted.value, props.variant], () => {
+    //   if (hasState.value && props.variant === 'outlined') {
+    //     console.log(labelRef.value?.$el?.scrollWidth)
+    //     labelWidth.value = labelRef.value?.$el?.scrollWidth * 0.75 + 8
+    //   }
+    // }, { flush: 'post', immediate: true })
+
+    // const hasPrepend = computed(() => slots.prepend || props.prependIcon)
+    // const labelOffset = ref(0)
+    // watch(() => [hasState.value, props.density, isBooted.value, props.variant], () => {
+    //   if (hasState.value && ['outlined', 'single-line'].includes(props.variant)) {
+    //     const fieldBox = fieldRef.value!.getBoundingClientRect()
+    //     const controlBox = controlRef.value!.getBoundingClientRect()
+    //
+    //     labelOffset.value = roundEven(controlBox.left - fieldBox.left + 12)
+    //   }
+    // }, { flush: 'post', immediate: true })
 
     return () => {
       const isOutlined = props.variant === 'outlined'
@@ -67,25 +87,22 @@ export default defineComponent({
       const hasPrependOuter = (slots.prependOuter || props.prependOuterIcon)
       const hasAppend = (slots.append || props.appendIcon)
       const hasAppendOuter = (slots.appendOuter || props.appendOuterIcon)
-      const hasState = isFocused.value || isDirty.value
-      const labelWidth = labelRef.value?.$el?.scrollWidth * (hasState ? 0.75 : 1) + 8
-      const prependWidth = (fieldRef.value?.offsetLeft || 16) + (hasPrepend ? 6 : 0)
-      const controlRefHeight = controlRef.value?.clientHeight ?? 0
 
-      let translateX = 0
-      let translateY = 0
-
-      if (props.variant === 'outlined') {
-        translateX = -prependWidth + 16
-        translateY = controlRefHeight / -2 + 4
-      } else if (props.variant !== 'contained') {
-        translateY = controlRefHeight / -6
-      }
-
-      if (props.variant === 'single-line') {
-        translateX = -prependWidth
-        translateY -= 8
-      }
+      const label = (
+        <VInputLabel
+          ref={ labelRef }
+          for={ id.value }
+          style={ ssrBootStyles.value }
+        >
+          { slots.label
+            ? slots.label({
+              label: props.label,
+              props: { for: id.value },
+            })
+            : props.label
+          }
+        </VInputLabel>
+      )
 
       return (
         <div
@@ -94,7 +111,7 @@ export default defineComponent({
             {
               'v-input--prepended': hasPrepend,
               'v-input--appended': hasAppend,
-              'v-input--dirty': isDirty.value,
+              'v-input--dirty': hasState.value,
               'v-input--focused': isFocused.value,
               [`v-input--variant-${props.variant}`]: true,
             },
@@ -130,23 +147,7 @@ export default defineComponent({
             ) }
 
             <div class="v-input__field" ref={ fieldRef }>
-              { slots.label
-                ? slots.label({
-                  label: props.label,
-                  props: { for: id.value },
-                })
-                : (
-                  <VInputLabel
-                    ref={ labelRef }
-                    for={ id.value }
-                    active={ hasState }
-                    text={ props.label }
-                    translateX={ translateX }
-                    translateY={ translateY }
-                    style={ ssrBootStyles.value }
-                  />
-                )
-              }
+              { label }
               { slots.default?.({
                 uid,
                 props: {
@@ -182,17 +183,17 @@ export default defineComponent({
             <div class="v-input__outline">
               { isOutlined && (
                 <>
-                  <div
-                    class="v-input__outline__start"
-                    style={{
-                      width: convertToUnit((hasState ? 0 : labelWidth / 2) + 12),
-                    }}
-                  />
+                  <div class="v-input__outline__start" />
 
-                  <div
-                    class="v-input__outline__notch"
-                    style={{ width: convertToUnit(hasState ? labelWidth : 0) }}
-                  />
+                  <div class="v-input__outline__notch">
+                    {
+                      cloneVNode(label, {
+                        ariaHidden: true,
+                        active: false,
+                        for: null,
+                      })
+                    }
+                  </div>
 
                   <div class="v-input__outline__end" />
                 </>

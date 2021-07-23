@@ -15,5 +15,5 @@ export function useSsrBoot () {
     transition: 'none !important',
   }) : undefined)
 
-  return { ssrBootStyles }
+  return { ssrBootStyles, isBooted }
 }
