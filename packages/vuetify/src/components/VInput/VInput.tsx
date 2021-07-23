@@ -62,7 +62,7 @@ export default defineComponent({
     const hasState = computed(() => isFocused.value || isDirty.value)
 
     watch(hasState, val => {
-      if (props.variant === 'outlined') {
+      if (['outlined', 'single-line'].includes(props.variant)) {
         const el: HTMLElement = labelRef.value!.$el
         const targetEl: HTMLElement = labelSizerRef.value!.$el
         const rect = nullifyTransforms(el)
@@ -133,6 +133,12 @@ export default defineComponent({
             ref={ controlRef }
             class="v-input__control"
           >
+            { props.variant === 'single-line' && (
+              <VInputLabel ref={ labelSizerRef } sizer>
+                { label }
+              </VInputLabel>
+            )}
+
             { hasPrepend && (
               <div
                 class="v-input__prepend"
@@ -190,7 +196,7 @@ export default defineComponent({
                   <div class="v-input__outline__start" />
 
                   <div class="v-input__outline__notch">
-                    <VInputLabel ref={ labelSizerRef } aria-hidden="true">
+                    <VInputLabel ref={ labelSizerRef } sizer>
                       { label }
                     </VInputLabel>
                   </div>

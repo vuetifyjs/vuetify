@@ -134,7 +134,8 @@
     left: 6px
 
   .v-input--variant-contained &,
-  .v-input--variant-outlined &
+  .v-input--variant-outlined &,
+  .v-input--variant-single-line &
     @at-root #{selector-append('.v-input--dirty', &)}
       visibility: hidden
 
@@ -145,6 +146,20 @@
       @include density('v-input', $input-density) using ($modifier)
         @at-root #{selector-append(&, $root)}
           bottom: 4px + $modifier / 8
+
+  &--sizer
+    visibility: hidden
+    .v-input.v-input--dirty &
+      visibility: visible
+
+    .v-input--variant-single-line &
+      left: 0
+      transform: translateY(-50%) scale(.75)
+
+    .v-input--variant-outlined &
+      transform: translateY(-50%) scale(.75)
+      transform-origin: center
+      position: static
 
 .v-input__outline
   --border-width: 1px
@@ -214,20 +229,11 @@
         opacity: 1
         transition: opacity .15s $standard-easing
 
-      .v-label
-        position: static
-        transform-origin: center
-        transform: translateY(-50%) scale(.75)
-        visibility: hidden
-
       @at-root #{selector-append('.v-input--dirty', &)}
         flex-basis: auto
 
         &::before
           opacity: 0
-
-        .v-label
-          visibility: visible
 
     &__end
       flex: 1
