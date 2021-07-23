@@ -12,6 +12,8 @@
   text-indent: $icon-text-indent
   user-select: none
   vertical-align: $icon-vertical-align
+  width: 1em
+  height: 1em
 
   &--left
     margin-inline-end: $icon-margin-start
@@ -22,8 +24,6 @@
   @each $name in $sizes
     &--size-#{$name}
       font-size: map-get($icon-sizes, $name)
-      height: map-get($icon-sizes, $name)
-      width: map-get($icon-sizes, $name)
 
 .v-icon__svg
   fill: currentColor
