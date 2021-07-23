@@ -12,11 +12,48 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { cloneVNode, computed, ref, watch } from 'vue'
-import { convertToUnit, defineComponent, getUid, roundEven } from '@/util'
+import { convertToUnit, defineComponent, getUid, roundEven, standardEasing } from '@/util'
 
 // Types
 import type { ComponentPublicInstance, PropType } from 'vue'
 import { useSsrBoot } from '@/composables/ssrBoot'
+
+function nullifyTransforms (el: HTMLElement) {
+  const rect = el.getBoundingClientRect()
+  const style = getComputedStyle(el)
+  const tx = style.transform
+
+  if (tx) {
+    let ta, sx, sy, dx, dy
+    if (tx.startsWith('matrix3d(')) {
+      ta = tx.slice(9, -1).split(/, /)
+      sx = +ta[0]
+      sy = +ta[5]
+      dx = +ta[12]
+      dy = +ta[13]
+    } else if (tx.startsWith('matrix(')) {
+      ta = tx.slice(7, -1).split(/, /)
+      sx = +ta[0]
+      sy = +ta[3]
+      dx = +ta[4]
+      dy = +ta[5]
+    } else {
+      return rect
+    }
+
+    const to = style.transformOrigin
+    const x = rect.x - dx - (1 - sx) * parseFloat(to)
+    const y = rect.y - dy - (1 - sy) * parseFloat(to.slice(to.indexOf(' ') + 1))
+    const w = sx ? rect.width / sx : el.offsetWidth
+    const h = sy ? rect.height / sy : el.offsetHeight
+
+    return {
+      x, y, width: w, height: h, top: y, right: x + w, bottom: y + h, left: x,
+    }
+  } else {
+    return rect
+  }
+}
 
 export default defineComponent({
   name: 'VInput',
@@ -52,9 +89,9 @@ export default defineComponent({
     const { densityClasses } = useDensity(props, 'v-input')
     const value = useProxiedModel(props, 'modelValue')
     const uid = getUid()
-    const { ssrBootStyles, isBooted } = useSsrBoot()
 
-    const labelRef = ref<ComponentPublicInstance>()
+    const labelRef = ref<InstanceType<typeof VInputLabel>>()
+    const labelSizerRef = ref<InstanceType<typeof VInputLabel>>()
     const controlRef = ref<HTMLElement>()
     const fieldRef = ref<HTMLElement>()
     const isDirty = computed(() => (value.value != null && value.value !== ''))
@@ -62,24 +99,32 @@ export default defineComponent({
     const id = computed(() => props.id || `input-${uid}`)
     const hasState = computed(() => isFocused.value || isDirty.value)
 
-    // const labelWidth = ref(0)
-    // watch(() => [hasState.value, props.density, isBooted.value, props.variant], () => {
-    //   if (hasState.value && props.variant === 'outlined') {
-    //     console.log(labelRef.value?.$el?.scrollWidth)
-    //     labelWidth.value = labelRef.value?.$el?.scrollWidth * 0.75 + 8
-    //   }
-    // }, { flush: 'post', immediate: true })
+    watch(hasState, val => {
+      if (props.variant === 'outlined') {
+        const el: HTMLElement = labelRef.value!.$el
+        const targetEl: HTMLElement = labelSizerRef.value!.$el
+        const rect = nullifyTransforms(el)
+        const targetRect = targetEl.getBoundingClientRect()
 
-    // const hasPrepend = computed(() => slots.prepend || props.prependIcon)
-    // const labelOffset = ref(0)
-    // watch(() => [hasState.value, props.density, isBooted.value, props.variant], () => {
-    //   if (hasState.value && ['outlined', 'single-line'].includes(props.variant)) {
-    //     const fieldBox = fieldRef.value!.getBoundingClientRect()
-    //     const controlBox = controlRef.value!.getBoundingClientRect()
-    //
-    //     labelOffset.value = roundEven(controlBox.left - fieldBox.left + 12)
-    //   }
-    // }, { flush: 'post', immediate: true })
+        const x = targetRect.x - rect.x
+        const y = targetRect.y - rect.y - (rect.height / 2 - targetRect.height / 2)
+
+        el.style.visibility = 'visible'
+        targetEl.style.visibility = 'hidden'
+
+        el.animate([
+          { transform: 'translate(0)' },
+          { transform: `translate(${x}px, ${y}px) scale(.75)` },
+        ], {
+          duration: 150,
+          easing: standardEasing,
+          direction: val ? 'normal' : 'reverse',
+        }).finished.then(() => {
+          el.style.removeProperty('visibility')
+          targetEl.style.removeProperty('visibility')
+        })
+      }
+    }, { flush: 'post' })
 
     return () => {
       const isOutlined = props.variant === 'outlined'
@@ -88,21 +133,12 @@ export default defineComponent({
       const hasAppend = (slots.append || props.appendIcon)
       const hasAppendOuter = (slots.appendOuter || props.appendOuterIcon)
 
-      const label = (
-        <VInputLabel
-          ref={ labelRef }
-          for={ id.value }
-          style={ ssrBootStyles.value }
-        >
-          { slots.label
-            ? slots.label({
-              label: props.label,
-              props: { for: id.value },
-            })
-            : props.label
-          }
-        </VInputLabel>
-      )
+      const label = slots.label
+        ? slots.label({
+          label: props.label,
+          props: { for: id.value },
+        })
+        : props.label
 
       return (
         <div
@@ -147,7 +183,13 @@ export default defineComponent({
             ) }
 
             <div class="v-input__field" ref={ fieldRef }>
-              { label }
+              <VInputLabel
+                ref={ labelRef }
+                for={ id.value }
+              >
+                { label }
+              </VInputLabel>
+
               { slots.default?.({
                 uid,
                 props: {
@@ -186,13 +228,9 @@ export default defineComponent({
                   <div class="v-input__outline__start" />
 
                   <div class="v-input__outline__notch">
-                    {
-                      cloneVNode(label, {
-                        ariaHidden: true,
-                        active: false,
-                        for: null,
-                      })
-                    }
+                    <VInputLabel ref={ labelSizerRef } aria-hidden="true">
+                      { label }
+                    </VInputLabel>
                   </div>
 
                   <div class="v-input__outline__end" />

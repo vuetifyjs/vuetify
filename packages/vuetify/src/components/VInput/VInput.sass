@@ -1,7 +1,6 @@
 @import ./index
 
 .v-input
-  --label-offset: 0
   --label-translate: 0
   --label-scale: 1
   align-items: flex-start
@@ -18,9 +17,7 @@
 
   &--dirty
     --label-scale: .75
-
-    &.v-input--variant-outlined
-      --label-translate: -100%
+    --label-translate: calc(var(--v-input-height) / 56 * -14)
 
   input
     width: 100%
@@ -34,8 +31,11 @@
     &:invalid
       box-shadow: none
 
+  @at-root
+    @include density('v-input', $input-density) using ($modifier)
+      --v-input-height: #{56px + $modifier}
+
 .v-input__control
-  $root: &
   align-items: center
   border-radius: 4px
   display: flex
@@ -43,6 +43,7 @@
   padding: 0 16px
   position: relative
   grid-area: control
+  height: var(--v-input-height)
 
   .v-input--variant-contained &
     background: #ffffff
@@ -56,11 +57,6 @@
   .v-input--variant-single-line &
     border-radius: 0
     padding: 0
-
-  @at-root
-    @include density('v-input', $input-density) using ($modifier)
-      #{$root}
-        height: 56px + $modifier
 
 .v-input__field
   position: relative
@@ -128,14 +124,19 @@
   pointer-events: none
   position: absolute
   text-overflow: clip
-  transform-origin: top center
+  transform-origin: left center
   transition-property: color, transform
   transition: transform .15s $standard-easing
   white-space: nowrap
-  transform: translate(var(--label-offset), var(--label-translate)) scale(var(--label-scale))
+  transform: translateY(var(--label-translate)) scale(var(--label-scale))
 
   .v-input--prepended &
     left: 6px
+
+  .v-input--variant-contained &,
+  .v-input--variant-outlined &
+    @at-root #{selector-append('.v-input--dirty', &)}
+      visibility: hidden
 
   .v-input--variant-single-line &
     $root: &
@@ -188,8 +189,12 @@
     &__start,
     &__notch,
     &__end
-      border: 0 solid rgba(0, 0, 0, .38)
       height: calc(100% + 1px)
+
+    &__start,
+    &__notch::before,
+    &__end
+      border: 0 solid rgba(0, 0, 0, .38)
 
     &__start
       border-radius: 4px 0 0 4px
@@ -198,17 +203,31 @@
 
     &__notch
       flex: none
-      border-width: var(--border-width) 0 0
-      opacity: 1
-      transition: opacity .15s $standard-easing
+      position: relative
+
+      &::before
+        content: ''
+        position: absolute
+        top: 0
+        width: 100%
+        border-width: var(--border-width) 0 0
+        opacity: 1
+        transition: opacity .15s $standard-easing
+
+      .v-label
+        position: static
+        transform-origin: center
+        transform: translateY(-50%) scale(.75)
+        visibility: hidden
 
       @at-root #{selector-append('.v-input--dirty', &)}
         flex-basis: auto
-        opacity: 0
 
-      .v-label
-        visibility: hidden
-        position: static
+        &::before
+          opacity: 0
+
+        .v-label
+          visibility: visible
 
     &__end
       flex: 1
