@@ -83,7 +83,7 @@ export default defineComponent({
       }
 
       if (props.variant === 'single-line') {
-        translateX = 0
+        translateX = -prependWidth
         translateY -= 8
       }
 
