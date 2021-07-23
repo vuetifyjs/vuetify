@@ -28,7 +28,6 @@
 .v-input__control
   $root: &
   align-items: center
-  background: rgba(red, .26)
   border-radius: 4px
   display: flex
   flex: 1 0
@@ -63,28 +62,28 @@
   input
     height: 100%
     letter-spacing: .009375em
-    padding: 16px 0
+    padding: 16px 0 18px
 
     .v-input--variant-filled &
       padding: 20px 0 6px
 
     .v-input--variant-single-line &
       $root: &
-      padding: 8px 0
 
       @at-root
         @include density('v-input', $input-density) using ($modifier)
           @at-root #{selector-append(&, $root)}
-            padding-top: 30px + $modifier * 0.75
+            padding-top: 32px + $modifier * .75
 
     .v-input--prepended &
       padding-inline-start: 6px
 
+.v-input__prepend-outer,
 .v-input__prepend,
-.v-input__append
+.v-input__append,
+.v-input__append-outer
   align-items: center
   display: flex
-  padding-top: 1px
 
   .v-input--variant-single-line &
     $root: &
@@ -93,11 +92,14 @@
     @at-root
       @include density('v-input', $input-density) using ($modifier)
         @at-root #{selector-append(&, $root)}
-          margin-bottom: 4px + $modifier/8
+          margin-bottom: 8px + $modifier / 8
 
 .v-input__prepend-outer,
 .v-input__append-outer
   align-self: center
+
+  .v-input--variant-single-line &
+    align-self: flex-end
 
 .v-input__prepend-outer
   margin-inline-end: 16px
@@ -124,7 +126,12 @@
     left: 6px
 
   .v-input--variant-single-line &
-    bottom: 4px
+    $root: &
+
+    @at-root
+      @include density('v-input', $input-density) using ($modifier)
+        @at-root #{selector-append(&, $root)}
+          bottom: 8px + $modifier / 8
 
 .v-input__outline
   align-items: stretch
