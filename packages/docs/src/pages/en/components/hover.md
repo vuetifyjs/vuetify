@@ -11,13 +11,13 @@ related:
 
 # Hover
 
-The `v-hover` component provides a clean interface for handling hover states for any component.
+The `v-hover` component provides a simple interface for handling hover states for any component.
 
 <entry-ad />
 
 ## Usage
 
-The `v-hover` component is a wrapper that should contain only one child element, and can trigger an event when hovered over. In order for `v-hover` to work properly, either the **value** prop should be set to `true` or the wrapped element should contain `v-slot="{ wrapper }"`.
+The `v-hover` component is a wapper that should contain a default scoped slot. In order for `v-hover` to work properly, either control the **model-value** prop manually, or bind the **props** object from the scoped slot to the component inside the slot.
 
 <usage name="v-hover" />
 
