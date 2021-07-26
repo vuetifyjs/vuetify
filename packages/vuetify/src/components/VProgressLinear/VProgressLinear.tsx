@@ -3,20 +3,19 @@ import './VProgressLinear.sass'
 // Composables
 import { makeTagProps } from '@/composables/tag'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { makePositionProps, usePosition } from '@/composables/position'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useRtl } from '@/composables/rtl'
 
 // Utilities
-import { computed, defineComponent, Transition } from 'vue'
-import { clamp, convertToUnit, makeProps } from '@/util'
+import { computed, Transition } from 'vue'
+import { clamp, convertToUnit, defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VProgressLinear',
 
-  props: makeProps({
+  props: {
     active: {
       type: Boolean,
       default: true,
@@ -41,6 +40,7 @@ export default defineComponent({
       type: [Number, String],
       default: 4,
     },
+    clickable: Boolean,
     indeterminate: Boolean,
     query: Boolean,
     reverse: Boolean,
@@ -50,10 +50,10 @@ export default defineComponent({
       type: [Number, String],
       default: 0,
     },
-    ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
-  }),
+    ...makeThemeProps(),
+  },
 
   emits: {
     'update:modelValue': (value: number) => true,
@@ -61,12 +61,11 @@ export default defineComponent({
 
   setup (props, ctx) {
     const { isRtl } = useRtl()
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const { textColorClasses, textColorStyles } = useTextColor(props, 'color')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => props.bgColor || props.color))
     const { backgroundColorClasses: barColorClasses, backgroundColorStyles: barColorStyles } = useBackgroundColor(props, 'color')
     const { roundedClasses } = useRounded(props, 'v-progress-linear')
-    const { positionClasses, positionStyles } = usePosition(props, 'v-progress-linear')
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
 
     const height = computed(() => parseInt(props.height, 10))
@@ -77,11 +76,10 @@ export default defineComponent({
 
     function handleClick (e: MouseEvent) {
       if (!intersectionRef.value) return
-      const target = e.target as HTMLElement
-      const { left } = target.getBoundingClientRect()
-      const { width } = intersectionRef.value.getBoundingClientRect()
+      const { left, right, width } = intersectionRef.value.getBoundingClientRect()
+      const value = isReversed.value ? (width - e.clientX) + (right - width) : e.clientX - left
 
-      ctx.emit('update:modelValue', (left + e.offsetX) / width * 100)
+      ctx.emit('update:modelValue', value / width * 100)
     }
 
     return () => (
@@ -95,19 +93,17 @@ export default defineComponent({
             'v-progress-linear--striped': props.striped,
             'v-progress-linear--active': props.active && isIntersecting.value,
           },
-          positionClasses.value,
           roundedClasses.value,
           themeClasses.value,
         ]}
         style={{
           height: props.active ? convertToUnit(height.value) : 0,
-          ...positionStyles.value,
         }}
         role="progressbar"
         aria-valuemin="0"
         aria-valuemax="100"
         aria-valuenow={ props.indeterminate ? undefined : normalizedValue.value }
-        onClick={ handleClick }
+        onClick={ props.clickable && handleClick }
       >
         { props.stream && (
           <div
@@ -122,7 +118,7 @@ export default defineComponent({
               top: `calc(50% - ${convertToUnit(height.value / 2)}px)`,
               [isReversed.value ? 'left' : 'right']: convertToUnit(-height.value * 2),
               // TODO: Fix typing
-              // @ts-ignore
+              // @ts-expect-error
               '--v-progress-linear-stream-to': convertToUnit(height.value * 2 * (isReversed.value ? 1 : -1)),
             }}
           />
@@ -136,7 +132,7 @@ export default defineComponent({
             ...backgroundColorStyles.value,
             opacity: parseFloat(props.bgOpacity),
             [isReversed.value ? 'right' : 'left']: convertToUnit(props.indeterminate ? 0 : normalizedValue.value, '%'),
-            width: convertToUnit(props.indeterminate ? 100 : normalizedBuffer.value - normalizedValue.value, '%'),
+            width: convertToUnit(props.indeterminate ? 100 : Math.max(0, normalizedBuffer.value - normalizedValue.value), '%'),
           }}
         />
         <Transition name={ transition.value }>
