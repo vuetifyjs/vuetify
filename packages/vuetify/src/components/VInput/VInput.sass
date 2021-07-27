@@ -12,6 +12,7 @@
   grid-template-areas: "prepend control append" "a messages b"
   grid-template-rows: auto auto
   grid-template-columns: min-content auto min-content
+  transition: color .2s $standard-easing
 
   input
     width: 100%
@@ -114,7 +115,7 @@
   grid-area: append
 
 .v-label
-  color: rgba(0, 0, 0, .6)
+  opacity: .6
   display: inline-block
   font-size: 1rem
   letter-spacing: .009375em
@@ -156,12 +157,14 @@
       transform: translateY(calc(var(--v-input-height) / 56 * -12))
 
     .v-input--variant-single-line &
+      opacity: 1
       left: 0
       transform: translateY(-24px)
       transform-origin: top left
       margin: 0
 
     .v-input--variant-outlined &
+      opacity: 1
       transform: translateY(-0.75em)
       transform-origin: center
       position: static
@@ -170,7 +173,7 @@
 .v-input__outline
   --border-width: 1px
   align-items: stretch
-  border-color: rgba(0, 0, 0, .38)
+  opacity: .38
   display: flex
   height: 100%
   left: 0
@@ -179,6 +182,10 @@
   right: 0
   width: 100%
   contain: layout
+  transition: opacity .2s $standard-easing
+
+  .v-input--focused &
+    opacity: .6
 
   .v-input--variant-outlined.v-input--focused &
     --border-width: 2px
@@ -216,7 +223,7 @@
     &__start,
     &__notch::before,
     &__end
-      border: 0 solid rgba(0, 0, 0, .38)
+      border: 0 solid currentColor
 
     &__start
       flex: 0 0 12px

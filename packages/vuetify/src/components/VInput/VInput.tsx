@@ -11,11 +11,12 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, watch, watchEffect } from 'vue'
-import { convertToUnit, defineComponent, getUid, nullifyTransforms, standardEasing } from '@/util'
+import { computed, ref, toRef, watch, watchEffect } from 'vue'
+import { convertToUnit, defineComponent, getUid, nullifyTransforms, standardEasing, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 
 export default defineComponent({
   name: 'VInput',
@@ -26,7 +27,11 @@ export default defineComponent({
     active: Boolean,
     appendIcon: String,
     appendOuterIcon: String,
-    backgroundColor: String,
+    bgColor: String,
+    color: {
+      type: String,
+      default: 'primary',
+    },
     hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
     hideSpinButtons: Boolean,
     hint: String,
@@ -74,6 +79,11 @@ export default defineComponent({
 
     watchEffect(() => isActive.value = isFocused.value || isDirty.value)
 
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
+      return isFocused.value ? props.color : undefined
+    }))
+
     watch(isActive, val => {
       if (props.variant !== 'contained') {
         const el: HTMLElement = labelRef.value!.$el
@@ -106,7 +116,7 @@ export default defineComponent({
       }
     }, { flush: 'post' })
 
-    return () => {
+    useRender(() => {
       const isOutlined = props.variant === 'outlined'
       const hasPrepend = (slots.prepend || props.prependIcon)
       const hasPrependOuter = (slots.prependOuter || props.prependOuterIcon)
@@ -134,6 +144,10 @@ export default defineComponent({
             },
             themeClasses.value,
             densityClasses.value,
+            textColorClasses.value,
+          ]}
+          style={[
+            textColorStyles.value,
           ]}
           { ...attrs }
         >
@@ -151,7 +165,11 @@ export default defineComponent({
 
           <div
             ref={ controlRef }
-            class="v-input__control"
+            class={[
+              'v-input__control',
+              backgroundColorClasses.value,
+            ]}
+            style={ backgroundColorStyles.value }
           >
             { hasPrepend && (
               <div
@@ -253,6 +271,13 @@ export default defineComponent({
           ) }
         </div>
       )
+    })
+
+    return {
+      value,
+      isActive,
+      isDirty,
+      isFocused,
     }
   },
 })
