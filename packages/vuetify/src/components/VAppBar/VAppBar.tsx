@@ -15,7 +15,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, toRef } from 'vue'
+import { computed, toRef } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 
 // Types
@@ -59,6 +59,7 @@ export default defineComponent({
       default: 'top',
       validator: (value: any) => ['top', 'bottom'].includes(value),
     },
+
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
@@ -77,12 +78,15 @@ export default defineComponent({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props, 'v-app-bar')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const extension = ref<HTMLElement | boolean>(!!slots.extension)
-    const height = computed(() => (
-      Number(props.prominent ? props.prominentHeight : props.height) +
-      Number(extension.value ? props.extensionHeight : 0) -
+    const isExtended = !!slots.extension
+    const contentHeight = computed(() => (
+      Number(props.prominent ? props.prominentHeight : props.height) -
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
+    ))
+    const height = computed(() => (
+      contentHeight.value +
+      Number(isExtended ? props.extensionHeight : 0)
     ))
     const isActive = useProxiedModel(props, 'modelValue', props.modelValue)
     const layoutStyles = useLayoutItem(
@@ -130,7 +134,10 @@ export default defineComponent({
             </div>
           ) }
 
-          <div class="v-app-bar__content">
+          <div
+            class="v-app-bar__content"
+            style={{ height: convertToUnit(contentHeight.value) }}
+          >
             { slots.prepend && (
               <div class="v-app-bar__prepend">
                 { slots.prepend() }
@@ -146,11 +153,10 @@ export default defineComponent({
             ) }
           </div>
 
-          { slots.extension && (
+          { isExtended && (
             <div
               class="v-app-bar__extension"
               style={{ height: convertToUnit(props.extensionHeight) }}
-              ref={ extension }
             >
               { slots.extension?.() }
             </div>
