@@ -40,7 +40,7 @@ $button-font-weight: map-deep-get($typography, 'button', 'weight') !default;
 $button-height: 36px !default;
 $button-stacked-height: 72px !default;
 $button-icon-border-radius: map-get($rounded, 'circle') !default;
-$button-icon-font-size: 24px !default;
+$button-icon-font-size: 1rem !default;
 $button-icon-size: 48px !default;
 $button-line-height: normal !default;
 $button-stacked-line-height: 1.7 !default;
@@ -86,15 +86,6 @@ $button-stacked-sizes: map-merge(
       'padding-ratio': $button-stacked-padding-ratio
     ),
     $button-stacked-sizes
-);
-
-$button-icon-sizes: () !default;
-$button-icon-sizes: map-merge(
-  (
-    'font-size': $button-icon-font-size,
-    'size': $button-icon-size
-  ),
-  $button-icon-sizes
 );
 
 $button-variants: (
