@@ -5,6 +5,7 @@
   align-items: center
   display: inline-flex
   font-feature-settings: 'liga'
+  height: $icon-size
   justify-content: center
   letter-spacing: $icon-letter-spacing
   line-height: $icon-line-height
@@ -12,6 +13,7 @@
   text-indent: $icon-text-indent
   user-select: none
   vertical-align: $icon-vertical-align
+  width: $icon-size
 
   &--left
     margin-inline-end: $icon-margin-start
@@ -22,8 +24,6 @@
   @each $name in $sizes
     &--size-#{$name}
       font-size: map-get($icon-sizes, $name)
-      height: map-get($icon-sizes, $name)
-      width: map-get($icon-sizes, $name)
 
 .v-icon__svg
   fill: currentColor
