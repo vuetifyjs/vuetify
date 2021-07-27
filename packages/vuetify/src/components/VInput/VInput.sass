@@ -2,7 +2,6 @@
 
 .v-input
   --label-translate: 0
-  --label-scale: 1
   align-items: flex-start
   display: grid
   flex-wrap: wrap
@@ -14,10 +13,6 @@
   grid-template-areas: "prepend control append" "a messages b"
   grid-template-rows: auto auto
   grid-template-columns: min-content auto min-content
-
-  &--dirty
-    --label-scale: .75
-    --label-translate: calc(var(--v-input-height) / 56 * -14)
 
   input
     width: 100%
@@ -44,6 +39,7 @@
   position: relative
   grid-area: control
   height: var(--v-input-height)
+  contain: layout
 
   .v-input--variant-contained &
     background: #ffffff
@@ -125,21 +121,21 @@
   letter-spacing: .009375em
   pointer-events: none
   position: absolute
-  text-overflow: clip
   transform-origin: left center
   transition-property: color, transform
   transition: transform .15s $standard-easing
   white-space: nowrap
-  transform: translateY(var(--label-translate)) scale(var(--label-scale))
+  overflow: hidden
+  text-overflow: ellipsis
+  max-width: calc(100% - 12px)
+  min-width: 0
+  contain: layout paint
 
   .v-input--prepended &
     left: 6px
 
-  .v-input--variant-contained &,
-  .v-input--variant-outlined &,
-  .v-input--variant-single-line &
-    @at-root #{selector-append('.v-input--dirty', &)}
-      visibility: hidden
+  .v-input--dirty &
+    visibility: hidden
 
   .v-input--variant-single-line &
     $root: &
@@ -150,17 +146,23 @@
           bottom: 4px + $modifier / 8
 
   &--sizer
+    font-size: .75em
     visibility: hidden
+    max-width: 100%
+
     .v-input.v-input--dirty &
       visibility: visible
 
+    .v-input--variant-filled &
+      transform: translateY(calc(var(--v-input-height) / 56 * -14))
+
     .v-input--variant-single-line &
       left: 0
-      transform: translateY(-50%) scale(.75)
+      transform: translateY(-24px)
+      transform-origin: top left
 
     .v-input--variant-outlined &
-      font-size: .75em
-      transform: translateY(-1em)
+      transform: translateY(-0.75em)
       transform-origin: center
       position: static
       margin: 0 4px
@@ -170,7 +172,7 @@
   align-items: stretch
   border-color: rgba(0, 0, 0, .38)
   display: flex
-  height: calc(100% - 1px)
+  height: 100%
   left: 0
   pointer-events: none
   position: absolute
@@ -194,7 +196,7 @@
       position: absolute
       width: 100%
       bottom: calc(0px - var(--border-width))
-      border-color: inherit
+      border-color: currentColor
       border-style: solid
       border-width: 0 0 2px
       transition: transform .15s $standard-easing

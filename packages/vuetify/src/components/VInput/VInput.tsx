@@ -12,7 +12,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, watch } from 'vue'
-import { defineComponent, getUid, nullifyTransforms, standardEasing } from '@/util'
+import { convertToUnit, defineComponent, getUid, nullifyTransforms, standardEasing } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -62,7 +62,7 @@ export default defineComponent({
     const hasState = computed(() => isFocused.value || isDirty.value)
 
     watch(hasState, val => {
-      if (['outlined', 'single-line'].includes(props.variant)) {
+      if (props.variant !== 'contained') {
         const el: HTMLElement = labelRef.value!.$el
         const targetEl: HTMLElement = labelSizerRef.value!.$el
         const rect = nullifyTransforms(el)
@@ -71,12 +71,17 @@ export default defineComponent({
         const x = targetRect.x - rect.x
         const y = targetRect.y - rect.y - (rect.height / 2 - targetRect.height / 2)
 
+        const targetWidth = targetRect.width / 0.75
+        const width = Math.abs(targetWidth - rect.width) > 1
+          ? { maxWidth: convertToUnit(targetWidth) }
+          : undefined
+
         el.style.visibility = 'visible'
         targetEl.style.visibility = 'hidden'
 
         el.animate([
           { transform: 'translate(0)' },
-          { transform: `translate(${x}px, ${y}px) scale(.75)` },
+          { transform: `translate(${x}px, ${y}px) scale(.75)`, ...width },
         ], {
           duration: 150,
           easing: standardEasing,
@@ -133,12 +138,6 @@ export default defineComponent({
             ref={ controlRef }
             class="v-input__control"
           >
-            { props.variant === 'single-line' && (
-              <VInputLabel ref={ labelSizerRef } sizer>
-                { label }
-              </VInputLabel>
-            )}
-
             { hasPrepend && (
               <div
                 class="v-input__prepend"
@@ -151,15 +150,19 @@ export default defineComponent({
             ) }
 
             <div class="v-input__field" ref={ fieldRef }>
-              <VInputLabel
-                ref={ labelRef }
-                for={ id.value }
-              >
+              { props.variant === 'filled' && (
+                <VInputLabel ref={ labelSizerRef } sizer>
+                  { label }
+                </VInputLabel>
+              )}
+
+              <VInputLabel ref={ labelRef } for={ id.value }>
                 { label }
               </VInputLabel>
 
               { slots.default?.({
                 uid,
+                hasState: hasState.value,
                 props: {
                   id: id.value,
                   value: value.value,
@@ -203,7 +206,12 @@ export default defineComponent({
 
                   <div class="v-input__outline__end" />
                 </>
-              ) }
+              )}
+              { props.variant === 'single-line' && (
+                <VInputLabel ref={ labelSizerRef } sizer>
+                  { label }
+                </VInputLabel>
+              )}
             </div>
           </div>
 
