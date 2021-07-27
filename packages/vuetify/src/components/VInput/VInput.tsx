@@ -11,7 +11,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, watchEffect } from 'vue'
 import { convertToUnit, defineComponent, getUid, nullifyTransforms, standardEasing } from '@/util'
 
 // Types
@@ -23,6 +23,7 @@ export default defineComponent({
   inheritAttrs: false,
 
   props: {
+    active: Boolean,
     appendIcon: String,
     appendOuterIcon: String,
     backgroundColor: String,
@@ -46,10 +47,16 @@ export default defineComponent({
     ...makeDensityProps(),
   },
 
+  emits: {
+    'update:modelValue': (value: boolean) => true,
+    'update:active': (value: boolean) => true,
+  },
+
   setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
     const { densityClasses } = useDensity(props, 'v-input')
     const value = useProxiedModel(props, 'modelValue')
+    const isActive = useProxiedModel(props, 'active')
     const uid = getUid()
 
     const labelRef = ref<InstanceType<typeof VInputLabel>>()
@@ -59,9 +66,10 @@ export default defineComponent({
     const isDirty = computed(() => (value.value != null && value.value !== ''))
     const isFocused = ref(false)
     const id = computed(() => props.id || `input-${uid}`)
-    const hasState = computed(() => isFocused.value || isDirty.value)
 
-    watch(hasState, val => {
+    watchEffect(() => isActive.value = isFocused.value || isDirty.value)
+
+    watch(isActive, val => {
       if (props.variant !== 'contained') {
         const el: HTMLElement = labelRef.value!.$el
         const targetEl: HTMLElement = labelSizerRef.value!.$el
@@ -114,7 +122,7 @@ export default defineComponent({
             {
               'v-input--prepended': hasPrepend,
               'v-input--appended': hasAppend,
-              'v-input--dirty': hasState.value,
+              'v-input--dirty': isActive.value,
               'v-input--focused': isFocused.value,
               [`v-input--variant-${props.variant}`]: true,
             },
@@ -162,7 +170,7 @@ export default defineComponent({
 
               { slots.default?.({
                 uid,
-                hasState: hasState.value,
+                isActive: isActive.value,
                 props: {
                   id: id.value,
                   value: value.value,
