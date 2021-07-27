@@ -50,9 +50,13 @@ export default defineComponent({
   emits: {
     'update:modelValue': (value: boolean) => true,
     'update:active': (value: boolean) => true,
+    'click:prepend-outer': (e: Event) => e,
+    'click:prepend': (e: Event) => e,
+    'click:append': (e: Event) => e,
+    'click:append-outer': (e: Event) => e,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const { themeClasses } = useTheme(props)
     const { densityClasses } = useDensity(props, 'v-input')
     const value = useProxiedModel(props, 'modelValue')
@@ -134,6 +138,7 @@ export default defineComponent({
           { hasPrependOuter && (
             <div
               class="v-input__prepend-outer"
+              onClick={ (e: Event) => emit('click:prepend-outer', e) }
             >
               { slots.prependOuter
                 ? slots.prependOuter()
@@ -149,6 +154,7 @@ export default defineComponent({
             { hasPrepend && (
               <div
                 class="v-input__prepend"
+                onClick={ (e: Event) => emit('click:prepend', e) }
               >
                 { slots.prepend
                   ? slots.prepend()
@@ -193,7 +199,10 @@ export default defineComponent({
             </div>
 
             { hasAppend && (
-              <div class="v-input__append">
+              <div
+                class="v-input__append"
+                onClick={ (e: Event) => emit('click:append', e) }
+              >
                 { slots.append
                   ? slots.append()
                   : (<VIcon icon={ props.appendIcon } />)
@@ -226,6 +235,7 @@ export default defineComponent({
           { hasAppendOuter && (
             <div
               class="v-input__append-outer"
+              onClick={ (e: Event) => emit('click:append-outer', e) }
             >
               { slots.appendOuter
                 ? slots.appendOuter()
