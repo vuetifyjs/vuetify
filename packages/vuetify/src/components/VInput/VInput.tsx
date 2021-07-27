@@ -37,6 +37,7 @@ export default defineComponent({
     persistentHint: Boolean,
     prependIcon: String,
     prependOuterIcon: String,
+    reverse: Boolean,
     variant: {
       type: String,
       default: 'filled',
@@ -128,6 +129,7 @@ export default defineComponent({
               'v-input--appended': hasAppend,
               'v-input--dirty': isActive.value,
               'v-input--focused': isFocused.value,
+              'v-input--reverse': props.reverse,
               [`v-input--variant-${props.variant}`]: true,
             },
             themeClasses.value,

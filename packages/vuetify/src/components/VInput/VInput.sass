@@ -9,7 +9,6 @@
   font-size: $input-font-size
   letter-spacing: $input-letter-spacing
   max-width: 100%
-  text-align: $input-text-align
   grid-template-areas: "prepend control append" "a messages b"
   grid-template-rows: auto auto
   grid-template-columns: min-content auto min-content
@@ -127,12 +126,12 @@
   white-space: nowrap
   overflow: hidden
   text-overflow: ellipsis
-  max-width: calc(100% - 12px)
   min-width: 0
   contain: layout paint
 
   .v-input--prepended &
-    left: 6px
+    margin-inline-start: 6px
+    margin-inline-end: auto
 
   .v-input--dirty &
     visibility: hidden
@@ -160,6 +159,7 @@
       left: 0
       transform: translateY(-24px)
       transform-origin: top left
+      margin: 0
 
     .v-input--variant-outlined &
       transform: translateY(-0.75em)
@@ -219,9 +219,14 @@
       border: 0 solid rgba(0, 0, 0, .38)
 
     &__start
-      border-radius: 4px 0 0 4px
-      border-width: var(--border-width) 0 0 var(--border-width)
       flex: 0 0 12px
+      border-top-width: var(--border-width)
+      border-inline-start-width: var(--border-width)
+
+      @include ltr()
+        border-radius: 4px 0 0 4px
+      @include rtl()
+        border-radius: 0 4px 4px 0
 
     &__notch
       flex: none
@@ -244,8 +249,13 @@
 
     &__end
       flex: 1
-      border-radius: 0 4px 4px 0
-      border-width: var(--border-width) var(--border-width) 0 0
+      border-top-width: var(--border-width)
+      border-inline-end-width: var(--border-width)
+
+      @include ltr()
+        border-radius: 0 4px 4px 0
+      @include rtl()
+        border-radius: 4px 0 0 4px
 
 .v-input__details
   align-items: flex-end
@@ -258,3 +268,44 @@
   line-height: normal
   min-height: 16px
   padding: 0 16px
+
+.v-input--reverse
+  .v-label
+    @include ltr()
+      right: 6px
+      left: auto
+
+    @include rtl()
+      left: 6px
+      right: auto
+
+  input
+    @at-root #{selector-append('.v-input--prepended', &)}
+      padding-inline-start: 0
+      padding-inline-end: 6px
+
+    @include ltr()
+      text-align: right
+    @include rtl()
+      text-align: left
+
+  &.v-input--variant-outlined
+    .v-input__outline
+      flex-direction: row-reverse
+
+      &__start
+        border-inline-start-width: 0
+        border-inline-end-width: var(--border-width)
+        @include ltr()
+          border-radius: 0 4px 4px 0
+        @include rtl()
+          border-radius: 4px 0 0 4px
+
+      &__end
+        border-inline-start-width: var(--border-width)
+        border-inline-end-width: 0
+
+        @include ltr()
+          border-radius: 4px 0 0 4px
+        @include rtl()
+          border-radius: 0 4px 4px 0
