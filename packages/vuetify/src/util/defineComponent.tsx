@@ -12,14 +12,8 @@ function propIsDefined (vnode: VNode, prop: string) {
   vnode.props?.hasOwnProperty(toKebabCase(prop))
 }
 
-export const defineComponent = (function defineComponent ({ name, setup, ...rest }: ComponentOptions) {
-  const options: ComponentOptions = {
-    name,
-    setup,
-    ...rest,
-  }
-
-  const _setup = options.setup
+export const defineComponent = (function defineComponent (options: ComponentOptions) {
+  options._setup = options._setup ?? options.setup
 
   if (!options.name) {
     consoleWarn('The component is missing an explicit name, unable to generate default prop value')
@@ -27,7 +21,7 @@ export const defineComponent = (function defineComponent ({ name, setup, ...rest
     return options
   }
 
-  if (_setup) {
+  if (options._setup) {
     options.setup = function setup (props: Dictionary<any>, ctx) {
       const vm = getCurrentInstance()!
       const defaults = useDefaults()
@@ -50,7 +44,7 @@ export const defineComponent = (function defineComponent ({ name, setup, ...rest
         }
       })
 
-      return _setup(_props, ctx)
+      return options._setup(_props, ctx)
     }
   }
 

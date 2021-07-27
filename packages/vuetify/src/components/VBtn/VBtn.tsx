@@ -21,10 +21,10 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, defineComponent as vueDefineComponent } from 'vue'
+import { computed } from 'vue'
 import { defineComponent } from '@/util'
 
-export const RawBtn = vueDefineComponent({
+export default defineComponent({
   name: 'VBtn',
 
   directives: { Ripple },
@@ -146,5 +146,3 @@ export const RawBtn = vueDefineComponent({
     }
   },
 })
-
-export default defineComponent(RawBtn)
