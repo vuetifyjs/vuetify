@@ -1,11 +1,7 @@
 import './VPagination.sass'
 
-// Types
-import type { ComponentPublicInstance } from 'vue'
-
-// Utilities
-import { computed, nextTick, ref } from 'vue'
-import { createRange, defineComponent, keyValues } from '@/util'
+// Components
+import VPaginationBtn from './VPaginationBtn'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
@@ -21,7 +17,13 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeBorderProps } from '@/composables/border'
 import { useRefs } from '@/composables/refs'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import VPaginationBtn from './VPaginationBtn'
+
+// Utilities
+import { computed, nextTick, ref } from 'vue'
+import { createRange, defineComponent, keyValues } from '@/util'
+
+// Types
+import type { ComponentPublicInstance } from 'vue'
 
 export default defineComponent({
   name: 'VPagination',
