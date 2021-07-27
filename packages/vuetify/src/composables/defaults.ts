@@ -1,4 +1,4 @@
-import { computed, inject, provide, ref, toRaw } from 'vue'
+import { computed, inject, provide, ref } from 'vue'
 import { mergeDeep } from '@/util/helpers'
 
 import type { InjectionKey, Ref } from 'vue'
@@ -27,7 +27,7 @@ export function useDefaults () {
 export function provideDefaults (props?: { defaults?: DefaultsInstance }) {
   const defaults = useDefaults()
 
-  const newDefaults = computed(() => mergeDeep(toRaw(defaults.value), props?.defaults) as any as DefaultsInstance)
+  const newDefaults = computed(() => mergeDeep(defaults.value, props?.defaults) as any as DefaultsInstance)
 
   provide(DefaultsSymbol, newDefaults)
 
