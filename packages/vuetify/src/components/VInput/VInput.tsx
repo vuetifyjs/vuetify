@@ -218,9 +218,9 @@ export default defineComponent({
             </div>
           ) }
 
-          { slots.messages && (
+          { slots.details && (
             <div class="v-input__details">
-              { slots.messages() }
+              { slots.details() }
             </div>
           ) }
         </div>
