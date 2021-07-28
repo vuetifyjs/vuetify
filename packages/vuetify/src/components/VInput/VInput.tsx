@@ -8,6 +8,7 @@ import VInputLabel from './VInputLabel'
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -16,7 +17,6 @@ import { convertToUnit, defineComponent, getUid, nullifyTransforms, standardEasi
 
 // Types
 import type { PropType } from 'vue'
-import { useBackgroundColor, useTextColor } from '@/composables/color'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
 type Variant = typeof allowedVariants[number]
@@ -31,10 +31,7 @@ export default defineComponent({
     appendIcon: String,
     appendOuterIcon: String,
     bgColor: String,
-    color: {
-      type: String,
-      default: 'primary',
-    },
+    color: String,
     hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
     hideSpinButtons: Boolean,
     hint: String,
@@ -272,7 +269,8 @@ export default defineComponent({
 
                   <div class="v-input__outline__end" />
                 </>
-              )}
+              ) }
+
               { ['plain', 'underlined'].includes(props.variant) && !props.singleLine && (
                 <VInputLabel ref={ floatingLabelRef } floating>
                   { label }
@@ -303,8 +301,8 @@ export default defineComponent({
     })
 
     return {
-      focus,
       blur,
+      focus,
       value,
       isActive,
       isDirty,

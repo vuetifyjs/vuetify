@@ -18,8 +18,8 @@ export default defineComponent({
       return (
         <label
           class={[
-            'v-label',
-            { 'v-label--floating': props.floating },
+            'v-input-label',
+            { 'v-input-label--floating': props.floating },
           ]}
           aria-hidden={ props.floating || undefined }
         >
