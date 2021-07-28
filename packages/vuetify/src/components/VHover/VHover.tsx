@@ -14,6 +14,7 @@ export default defineComponent({
       type: Boolean,
       default: undefined,
     },
+
     ...makeDelayProps(),
   },
 
