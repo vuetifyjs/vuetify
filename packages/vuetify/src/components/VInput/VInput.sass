@@ -13,14 +13,14 @@
   letter-spacing: $input-letter-spacing
   max-width: $input-max-width
   transition: color $input-transition-timing
-  --input-padding-before: #{$input-control-padding}
-  --input-padding-after: #{$input-control-padding}
+  --v-input-padding-before: #{$input-control-padding}
+  --v-input-padding-after: #{$input-control-padding}
 
   input
     opacity: $input-input-opacity
     width: 100%
-    padding-inline-start: var(--input-padding-before)
-    padding-inline-end: var(--input-padding-after)
+    padding-inline-start: var(--v-input-padding-before)
+    padding-inline-end: var(--v-input-padding-after)
 
     &:focus,
     &:active
@@ -31,13 +31,13 @@
       box-shadow: none
 
   &--variant-single-line
-    --input-padding-before: 0
-    --input-padding-after: 0
+    --v-input-padding-before: 0
+    --v-input-padding-after: 0
 
   &--prepended
-    --input-padding-before: #{$input-control-affixed-inner-padding}
+    --v-input-padding-before: #{$input-control-affixed-inner-padding}
   &--appended
-    --input-padding-after: #{$input-control-affixed-inner-padding}
+    --v-input-padding-after: #{$input-control-affixed-inner-padding}
 
   @at-root
     @include density('v-input', $input-density) using ($modifier)
@@ -144,7 +144,7 @@
   font-size: $input-label-font-size
   letter-spacing: $input-letter-spacing
   min-width: 0
-  max-width: calc(100% - var(--input-padding-before) - var(--input-padding-after))
+  max-width: calc(100% - var(--v-input-padding-before) - var(--v-input-padding-after))
   opacity: .6
   overflow: hidden
   pointer-events: none
@@ -155,8 +155,8 @@
   transition: transform $input-transition-timing
   white-space: nowrap
 
-  margin-inline-start: var(--input-padding-before)
-  margin-inline-end: var(--input-padding-after)
+  margin-inline-start: var(--v-input-padding-before)
+  margin-inline-end: var(--v-input-padding-after)
 
   .v-input--dirty &
     visibility: hidden
@@ -170,8 +170,8 @@
           bottom: 4px + $modifier / 8
 
   &--sizer
-    --label-scale: #{$input-label-floating-scale}em
-    font-size: var(--label-scale)
+    --v-input-label-scale: #{$input-label-floating-scale}em
+    font-size: var(--v-input-label-scale)
     visibility: hidden
     max-width: 100%
 
@@ -196,8 +196,8 @@
 /* endregion */
 /* region OUTLINE */
 .v-input__outline
-  --border-width: #{$input-border-width}
-  --border-opacity: #{$input-outline-opacity}
+  --v-input-border-width: #{$input-border-width}
+  --v-input-border-opacity: #{$input-outline-opacity}
   align-items: stretch
   contain: layout
   display: flex
@@ -209,20 +209,20 @@
   width: 100%
 
   .v-input__control:hover &
-    --border-opacity: var(--v-high-emphasis-opacity)
+    --v-input-border-opacity: var(--v-high-emphasis-opacity)
 
   .v-input.v-input--focused &
-    --border-opacity: 1
+    --v-input-border-opacity: 1
 
   .v-input--variant-outlined.v-input--focused &
-    --border-width: #{$input-focused-border-width}
+    --v-input-border-width: #{$input-focused-border-width}
 
   .v-input--variant-filled &,
   .v-input--variant-single-line &
     &::before
       border-style: solid
-      border-width: 0 0 var(--border-width)
-      opacity: var(--border-opacity)
+      border-width: 0 0 var(--v-input-border-width)
+      opacity: var(--v-input-border-opacity)
       transition: opacity $input-subtle-transition-timing
       @include absolute()
 
@@ -231,7 +231,7 @@
     &::after
       border-color: currentColor
       border-style: solid
-      border-width: 0 0 $input-border-width
+      border-width: 0 0 $input-focused-border-width
       transition: transform $input-transition-timing
       transform: scaleX(0)
       @include absolute()
@@ -247,14 +247,14 @@
     &__notch::after,
     &__end
       border: 0 solid currentColor
-      opacity: var(--border-opacity)
+      opacity: var(--v-input-border-opacity)
       transition: opacity $input-subtle-transition-timing
 
     &__start
       flex: 0 0 $input-control-affixed-padding
-      border-top-width: var(--border-width)
-      border-bottom-width: var(--border-width)
-      border-inline-start-width: var(--border-width)
+      border-top-width: var(--v-input-border-width)
+      border-bottom-width: var(--v-input-border-width)
+      border-inline-start-width: var(--v-input-border-width)
 
       @include ltr()
         border-radius: $input-border-radius 0 0 $input-border-radius
@@ -265,20 +265,20 @@
     &__notch
       flex: none
       position: relative
-      border-width: 0 0 var(--border-width)
+      border-width: 0 0 var(--v-input-border-width)
 
       &::before,
       &::after
-        opacity: var(--border-opacity)
+        opacity: var(--v-input-border-opacity)
         transition: opacity $input-subtle-transition-timing
         @include absolute()
 
       &::before
-        border-width: var(--border-width) 0 0
+        border-width: var(--v-input-border-width) 0 0
 
       &::after
         bottom: 0
-        border-width: 0 0 var(--border-width)
+        border-width: 0 0 var(--v-input-border-width)
 
       @at-root #{selector-append('.v-input--dirty', &)}
         &::before
@@ -286,9 +286,9 @@
 
     &__end
       flex: 1
-      border-top-width: var(--border-width)
-      border-bottom-width: var(--border-width)
-      border-inline-end-width: var(--border-width)
+      border-top-width: var(--v-input-border-width)
+      border-bottom-width: var(--v-input-border-width)
+      border-inline-end-width: var(--v-input-border-width)
 
       @include ltr()
         border-radius: 0 $input-border-radius $input-border-radius 0

@@ -101,7 +101,7 @@ export default defineComponent({
           : undefined
 
         const duration = parseFloat(getComputedStyle(el).transitionDuration) * 1000
-        const scale = parseFloat(getComputedStyle(targetEl).getPropertyValue('--label-scale'))
+        const scale = parseFloat(getComputedStyle(targetEl).getPropertyValue('--v-input-label-scale'))
 
         el.style.visibility = 'visible'
         targetEl.style.visibility = 'hidden'
