@@ -17,7 +17,7 @@ The `v-hover` component provides a simple interface for handling hover states fo
 
 ## Usage
 
-The `v-hover` component is a wapper that should contain a default scoped slot. In order for `v-hover` to work properly, either control the **model-value** prop manually, or bind the **props** object from the scoped slot to the component inside the slot.
+ `v-hover` is a renderless component that uses the default slot to provide scoped access to its internal model; as well as mouse event listeners to modify it. To expliclty control the internal state, use the **model-value** property.
 
 <usage name="v-hover" />
 
