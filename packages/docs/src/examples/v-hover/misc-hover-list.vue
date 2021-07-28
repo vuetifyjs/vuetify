@@ -11,10 +11,11 @@
           cols="12"
           md="4"
         >
-          <v-hover v-slot="{ hover }">
+          <v-hover v-slot="{ hover, props }">
             <v-card
               :elevation="hover ? 12 : 2"
               :class="{ 'on-hover': hover }"
+              v-bind="props"
             >
               <v-img
                 :src="item.img"
