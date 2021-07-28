@@ -125,7 +125,7 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
 }
 
 export function isObject (obj: any): obj is object {
-  return obj !== null && typeof obj === 'object'
+  return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
 }
 
 // KeyboardEvent.keyCode aliases
@@ -370,9 +370,14 @@ export function camelizeObjectKeys (obj: Record<string, any> | null | undefined)
 }
 
 export function mergeDeep (
-  source: Dictionary<any> = {},
-  target: Dictionary<any> = {}
+  source: Record<string, any> = {},
+  target: Record<string, any> = {},
+  out: Record<string, any> = {},
 ) {
+  for (const key in source) {
+    out[key] = source[key]
+  }
+
   for (const key in target) {
     const sourceProperty = source[key]
     const targetProperty = target[key]
@@ -383,15 +388,15 @@ export function mergeDeep (
       isObject(sourceProperty) &&
       isObject(targetProperty)
     ) {
-      source[key] = mergeDeep(sourceProperty, targetProperty)
+      out[key] = mergeDeep(sourceProperty, targetProperty)
 
       continue
     }
 
-    source[key] = targetProperty
+    out[key] = targetProperty
   }
 
-  return source
+  return out
 }
 
 export function fillArray<T> (length: number, obj: T) {
