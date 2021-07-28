@@ -9,10 +9,7 @@ export default defineComponent({
   name: 'VHover',
 
   props: {
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
+    disabled: Boolean,
     modelValue: {
       type: Boolean,
       default: undefined,
