@@ -151,8 +151,7 @@
   position: absolute
   text-overflow: ellipsis
   transform-origin: left center
-  transition-property: color, transform
-  transition: transform $input-transition-timing
+  transition: opacity $input-transition-timing, transform $input-transition-timing
   white-space: nowrap
 
   margin-inline-start: var(--v-input-padding-before)
@@ -160,6 +159,9 @@
 
   .v-input--dirty &
     visibility: hidden
+
+  .v-input--focused &
+    opacity: 1
 
   .v-input--variant-single-line &
     $root: &
