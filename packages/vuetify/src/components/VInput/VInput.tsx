@@ -124,6 +124,12 @@ export default defineComponent({
       }
     }, { flush: 'post' })
 
+    function onMousedown (e: MouseEvent) {
+      if (e.target !== document.activeElement) {
+        e.preventDefault()
+      }
+      focus()
+    }
     function focus () {
       inputRef.value?.focus()
     }
@@ -187,7 +193,7 @@ export default defineComponent({
               backgroundColorClasses.value,
             ]}
             style={ backgroundColorStyles.value }
-            onClick={ focus }
+            onMousedown={ onMousedown }
           >
             <div class="v-input__overlay" />
 
