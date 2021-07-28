@@ -120,6 +120,11 @@
 .v-input__append-outer
   align-items: center
   display: flex
+  opacity: .6
+  transition: opacity $input-transition-timing
+
+  .v-input--focused &
+    opacity: 1
 
   .v-input--variant-plain &,
   .v-input--variant-underlined &
