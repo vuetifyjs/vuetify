@@ -204,7 +204,7 @@ export default defineComponent({
             ) }
 
             <div class="v-input__field" ref={ fieldRef }>
-              { ['contained', 'filled'].includes(props.variant) && (
+              { ['contained', 'filled'].includes(props.variant) && !props.singleLine && (
                 <VInputLabel ref={ floatingLabelRef } floating>
                   { label }
                 </VInputLabel>
@@ -257,15 +257,17 @@ export default defineComponent({
                   <div class="v-input__outline__start" />
 
                   <div class="v-input__outline__notch">
-                    <VInputLabel ref={ floatingLabelRef } floating>
-                      { label }
-                    </VInputLabel>
+                    { !props.singleLine && (
+                      <VInputLabel ref={ floatingLabelRef } floating>
+                        { label }
+                      </VInputLabel>
+                    )}
                   </div>
 
                   <div class="v-input__outline__end" />
                 </>
               )}
-              { ['plain', 'underlined'].includes(props.variant) && (
+              { ['plain', 'underlined'].includes(props.variant) && !props.singleLine && (
                 <VInputLabel ref={ floatingLabelRef } floating>
                   { label }
                 </VInputLabel>

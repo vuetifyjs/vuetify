@@ -96,6 +96,10 @@
       padding-top: 20px
       padding-bottom: 6px
 
+      @at-root #{selector-append('.v-input--single-line', &)}
+        padding-top: 0
+        padding-bottom: 0
+
     .v-input--variant-plain &,
     .v-input--variant-underlined &
       $root: &
