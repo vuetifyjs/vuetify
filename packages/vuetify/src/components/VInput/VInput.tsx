@@ -151,6 +151,7 @@ export default defineComponent({
               'v-input--dirty': isActive.value,
               'v-input--focused': isFocused.value,
               'v-input--reverse': props.reverse,
+              'v-input--has-background': !!props.bgColor,
               [`v-input--variant-${props.variant}`]: true,
             },
             themeClasses.value,

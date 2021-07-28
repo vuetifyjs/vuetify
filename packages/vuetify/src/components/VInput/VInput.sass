@@ -317,22 +317,23 @@
 
 /* endregion */
 /* region OVERLAY */
-.v-input__overlay
-  background-color: rgb(var(--v-theme-on-surface))
-  border-radius: inherit
-  opacity: 0
-  pointer-events: none
-  transition: opacity $input-subtle-transition-timing
-  @include absolute()
+.v-input--variant-filled
+  .v-input__overlay
+    background-color: rgb(var(--v-theme-on-surface))
+    border-radius: inherit
+    opacity: $input-overlay-filled-opacity
+    pointer-events: none
+    transition: opacity $input-subtle-transition-timing
+    @include absolute()
 
-  .v-input--variant-filled &
-    opacity: calc(#{$input-overlay-filled-opacity} * #{var(--v-theme-overlay-multiplier)})
+  &.v-input--has-background .v-input__overlay
+    opacity: 0
 
-  .v-input__control:hover &
-    --v-theme-overlay-multiplier: 2
+  .v-input__control:hover .v-input__overlay
+    opacity: calc(#{$input-overlay-filled-opacity + map-get($states, 'hover')} * var(--v-theme-overlay-multiplier))
 
-  .v-input.v-input--focused &
-    --v-theme-overlay-multiplier: 3
+  &.v-input--focused .v-input__overlay
+    opacity: calc(#{$input-overlay-filled-opacity + map-get($states, 'focus')} * var(--v-theme-overlay-multiplier))
 
 /* endregion */
 /* region MODIFIERS */
