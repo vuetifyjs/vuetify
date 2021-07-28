@@ -1,5 +1,4 @@
 // INPUT
-$input-affixed-input-padding: 6px !default;
 $input-border-radius: $border-radius-root !default;
 $input-density: ('default': 0, 'comfortable': -2, 'compact': -4) !default;
 $input-font-size: 16px !default;
@@ -14,12 +13,9 @@ $input-single-line-margin-bottom: 4px !default;
 $input-control-contained-background: rgb(var(--v-theme-surface)) !default;
 $input-control-contained-elevation: 2 !default;
 $input-control-filled-background: rgba(var(--v-theme-on-surface), var(--v-idle-opacity)) !default;
-$input-control-filled-border-bottom-left-radius: 0 !default;
-$input-control-filled-border-bottom-right-radius: 0 !default;
 $input-control-padding: 16px !default;
 $input-control-affixed-padding: 12px !default;
 $input-control-affixed-inner-padding: 6px !default;
-$input-control-single-line-border-radius: 0 !default;
 
 // DETAILS
 $input-details-font-size: .75rem !default;
@@ -31,16 +27,11 @@ $input-details-padding: 6px 16px 0 !default;
 
 // FIELD
 $input-field-input-padding-top: 30px !default;
-$input-field-input-prepended-padding-inline-start: 6px !default;
 $input-input-opacity: var(--v-high-emphasis-opacity) !default;
 
 // LABEL
 $input-label-font-size: 1rem !default;
 $input-label-floating-scale: .75 !default;
-$input-label-reverse-end: 6px !default;
-$input-label-reverse-prepended-padding-inline-end: 6px !default;
-$input-label-reverse-prepended-padding-inline-start: 0 !default;
-$input-label-reverse-start: auto !default;
 
 // OUTLINE
 $input-outline-opacity: .38 !default;
