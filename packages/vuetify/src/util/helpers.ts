@@ -124,10 +124,6 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
   }
 }
 
-export function roundEven (val: number | string): number {
-  return 2 * Math.round(+val / 2)
-}
-
 export function isObject (obj: any): obj is object {
   return obj !== null && typeof obj === 'object'
 }
