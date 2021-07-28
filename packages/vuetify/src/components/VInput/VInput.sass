@@ -1,22 +1,21 @@
 @import ./index
 
 .v-input
-  --label-translate: 0
   align-items: flex-start
   display: grid
   flex-wrap: wrap
   flex: 1 1 auto
   font-size: $input-font-size
-  letter-spacing: $input-letter-spacing
-  max-width: 100%
   grid-template-areas: "prepend control append" "a messages b"
-  grid-template-rows: auto auto
   grid-template-columns: min-content auto min-content
-  transition: color .2s $standard-easing
+  grid-template-rows: auto auto
+  letter-spacing: $input-letter-spacing
+  max-width: $input-max-width
+  transition: $input-transition
 
   input
+    opacity: $input-input-opacity
     width: 100%
-    color: rgba(0, 0, 0, .87)
 
     &:focus,
     &:active
@@ -28,60 +27,63 @@
 
   @at-root
     @include density('v-input', $input-density) using ($modifier)
-      --v-input-height: #{56px + $modifier}
+      --v-input-height: #{$input-height + $modifier}
 
 .v-input__control
   align-items: center
-  border-radius: 4px
+  border-radius: $input-border-radius
+  contain: layout
   display: flex
   flex: 1 0
-  padding: 0 16px
-  position: relative
   grid-area: control
   height: var(--v-input-height)
-  contain: layout
+  padding: $input-control-padding
+  position: relative
 
   .v-input--variant-contained &
-    background: #ffffff
+    background: $input-control-contained-background
     border-color: transparent
 
-    @include elevation(2)
+    @include elevation($input-control-contained-elevation)
 
   .v-input--variant-filled &
-    background: #f5f5f5
-    border-bottom-left-radius: 0
-    border-bottom-right-radius: 0
+    border-bottom-left-radius: $input-control-filled-border-bottom-left-radius
+    border-bottom-right-radius: $input-control-filled-border-bottom-right-radius
 
   .v-input--variant-single-line &
-    border-radius: 0
+    border-radius: $input-control-single-line-border-radius
     padding: 0
 
 .v-input__field
-  position: relative
+  align-items: center
+  display: flex
   flex: 1 0
   height: 100%
-  display: flex
-  align-items: center
+  position: relative
 
   input
     height: 100%
-    letter-spacing: .009375em
-    padding: 16px 0
+    letter-spacing: $input-letter-spacing
 
     .v-input--variant-filled &
       padding: 20px 0 6px
 
+    .v-input--variant-outlined &
+      padding: 16px 0
+
     .v-input--variant-single-line &
       $root: &
+
+      padding-top: 16px
       padding-bottom: 8px
 
       @at-root
         @include density('v-input', $input-density) using ($modifier)
           @at-root #{selector-append(&, $root)}
-            padding-top: 30px + $modifier * .75
+            padding-top: $input-field-input-padding-top + $modifier * .75
 
     .v-input--prepended &
-      padding-inline-start: 6px
+      padding-inline-start: $input-field-input-prepended-padding-inline-start
 
 .v-input__prepend-outer,
 .v-input__prepend,
@@ -97,38 +99,37 @@
     @at-root
       @include density('v-input', $input-density) using ($modifier)
         @at-root #{selector-append(&, $root)}
-          margin-bottom: 4px + $modifier / 8
+          margin-bottom: $input-single-line-margin-bottom + $modifier / 8
 
 .v-input__prepend-outer,
 .v-input__append-outer
   align-self: center
+  grid-area: prepend
 
   .v-input--variant-single-line &
     align-self: flex-end
 
 .v-input__prepend-outer
-  margin-inline-end: 16px
-  grid-area: prepend
+  margin-inline-end: $input-prepend-outer-margin-inline-end
 
 .v-input__append-outer
-  margin-inline-start: 16px
-  grid-area: append
+  margin-inline-start: $input-prepend-outer-margin-inline-start
 
 .v-label
-  opacity: .6
+  contain: layout paint
   display: inline-block
-  font-size: 1rem
-  letter-spacing: .009375em
+  font-size: $input-label-font-size
+  letter-spacing: $input-letter-spacing
+  min-width: 0
+  opacity: .6
+  overflow: hidden
   pointer-events: none
   position: absolute
+  text-overflow: ellipsis
   transform-origin: left center
   transition-property: color, transform
   transition: transform .15s $standard-easing
   white-space: nowrap
-  overflow: hidden
-  text-overflow: ellipsis
-  min-width: 0
-  contain: layout paint
 
   .v-input--prepended &
     margin-inline-start: 6px
@@ -173,22 +174,22 @@
 .v-input__outline
   --border-width: 1px
   align-items: stretch
-  opacity: .38
+  contain: layout
   display: flex
   height: 100%
   left: 0
+  opacity: $input-outline-opacity
   pointer-events: none
   position: absolute
   right: 0
+  transition: $input-outline-transition
   width: 100%
-  contain: layout
-  transition: opacity .2s $standard-easing
 
   .v-input--focused &
-    opacity: .6
+    opacity: 1
 
   .v-input--variant-outlined.v-input--focused &
-    --border-width: 2px
+    --border-width: #{$input-outline-outlined-focused-border-width}
 
   .v-input--variant-filled &,
   .v-input--variant-single-line &,
@@ -205,8 +206,8 @@
       bottom: calc(0px - var(--border-width))
       border-color: currentColor
       border-style: solid
-      border-width: 0 0 2px
-      transition: transform .15s $standard-easing
+      border-width: 0 0 $input-border-width
+      transition-property: transform
       transform: scaleX(0)
 
       @at-root #{selector-append('.v-input--focused', &)}
@@ -231,9 +232,10 @@
       border-inline-start-width: var(--border-width)
 
       @include ltr()
-        border-radius: 4px 0 0 4px
+        border-radius: $input-border-radius 0 0 $input-border-radius
+
       @include rtl()
-        border-radius: 0 4px 4px 0
+        border-radius: 0 $input-border-radius $input-border-radius 0
 
     &__notch
       flex: none
@@ -246,7 +248,7 @@
         width: 100%
         border-width: var(--border-width) 0 0
         opacity: 1
-        transition: opacity .15s $standard-easing
+        transition: $input-outline-notched-transition
 
       @at-root #{selector-append('.v-input--dirty', &)}
         flex-basis: auto
@@ -260,39 +262,46 @@
       border-inline-end-width: var(--border-width)
 
       @include ltr()
-        border-radius: 0 4px 4px 0
+        border-radius: 0 $input-border-radius $input-border-radius 0
+
       @include rtl()
-        border-radius: 4px 0 0 4px
+        border-radius: $input-border-radius 0 0 $input-border-radius
 
 .v-input__details
   align-items: flex-end
+  // TODO: fix this when text-fields are implemented
   color: rgba(0, 0, 0, .6)
   display: flex
-  font-size: .75rem
-  font-weight: 400
+  font-size: $input-details-font-size
+  font-weight: $input-details-font-weight
   grid-area: messages
-  letter-spacing: .0333333333em
-  line-height: normal
-  min-height: 16px
-  padding: 6px 16px 0
+  letter-spacing: $input-details-letter-spacing
+  line-height: $input-details-line-height
+  min-height: $input-details-min-height
+  padding: $input-details-padding
+
+  .v-input--variant-single-line &
+    padding-inline-start: 0
+    padding-inline-end: 0
 
 .v-input--reverse
   .v-label
     @include ltr()
-      right: 6px
-      left: auto
+      left: $input-label-reverse-end
+      right: $input-label-reverse-start
 
     @include rtl()
-      left: 6px
-      right: auto
+      left: $input-label-reverse-start
+      right: $input-label-reverse-end
 
   input
     @at-root #{selector-append('.v-input--prepended', &)}
-      padding-inline-start: 0
-      padding-inline-end: 6px
+      padding-inline-start: $input-label-reverse-prepended-padding-inline-start
+      padding-inline-end: $input-label-reverse-prepended-padding-inline-end
 
     @include ltr()
       text-align: right
+
     @include rtl()
       text-align: left
 
@@ -304,15 +313,38 @@
         border-inline-start-width: 0
         border-inline-end-width: var(--border-width)
         @include ltr()
-          border-radius: 0 4px 4px 0
+          border-radius: 0 $input-border-radius $input-border-radius 0
+
         @include rtl()
-          border-radius: 4px 0 0 4px
+          border-radius: $input-border-radius 0 0 $input-border-radius
 
       &__end
         border-inline-start-width: var(--border-width)
         border-inline-end-width: 0
 
         @include ltr()
-          border-radius: 4px 0 0 4px
+          border-radius: $input-border-radius 0 0 $input-border-radius
+
         @include rtl()
-          border-radius: 0 4px 4px 0
+          border-radius: 0 $input-border-radius $input-border-radius 0
+
+.v-input__overlay
+  background-color: rgb(var(--v-theme-on-surface))
+  border-radius: inherit
+  bottom: 0
+  left: 0
+  opacity: 0
+  pointer-events: none
+  position: absolute
+  right: 0
+  top: 0
+  transition: $input-overlay-transition
+
+  .v-input--variant-filled &
+    opacity: calc(#{$input-overlay-filled-opacity} * #{var(--v-theme-overlay-multiplier)})
+
+  .v-input:not(.v-input--focused):hover &
+    --v-theme-overlay-multiplier: 2
+
+  .v-input--focused &
+    --v-theme-overlay-multiplier: 3

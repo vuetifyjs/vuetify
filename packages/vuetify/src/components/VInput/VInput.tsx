@@ -171,6 +171,8 @@ export default defineComponent({
             ]}
             style={ backgroundColorStyles.value }
           >
+            <div class="v-input__overlay" />
+
             { hasPrepend && (
               <div
                 class="v-input__prepend"
