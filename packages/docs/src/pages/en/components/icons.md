@@ -114,7 +114,7 @@ If your icons are purely decorative, you’ll need to manually add an attribute 
 
 ### Semantic SVG Icons
 
-Apply accessibility attributes to the [v-icon](/components/icons/), such as `role="img"`, to the component to give it a semantic meaning.
+Apply accessibility attributes to the [v-icon](/components/icons/) component, such as `role="img"`, to give it a semantic meaning.
 
 ```html
 <v-icon aria-label="My Account" role="img" aria-hidden="false">
