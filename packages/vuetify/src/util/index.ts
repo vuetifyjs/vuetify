@@ -1,3 +1,4 @@
+export * from './animation'
 export * from './colorUtils'
 export * from './console'
 export * from './createSimpleFunctional'
