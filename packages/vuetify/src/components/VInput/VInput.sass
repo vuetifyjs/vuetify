@@ -30,7 +30,8 @@
     &:invalid
       box-shadow: none
 
-  &--variant-single-line
+  &--variant-plain,
+  &--variant-underlined
     --v-input-padding-before: 0
     --v-input-padding-after: 0
 
@@ -67,11 +68,13 @@
 
     @include elevation($input-control-contained-elevation)
 
+  .v-input--variant-contained &,
   .v-input--variant-filled &
     border-bottom-left-radius: 0
     border-bottom-right-radius: 0
 
-  .v-input--variant-single-line &
+  .v-input--variant-plain &,
+  .v-input--variant-underlined &
     border-radius: 0
     padding: 0
 
@@ -88,11 +91,13 @@
     height: 100%
     letter-spacing: $input-letter-spacing
 
+    .v-input--variant-contained &,
     .v-input--variant-filled &
       padding-top: 20px
       padding-bottom: 6px
 
-    .v-input--variant-single-line &
+    .v-input--variant-plain &,
+    .v-input--variant-underlined &
       $root: &
 
       padding-top: 16px
@@ -112,20 +117,22 @@
   align-items: center
   display: flex
 
-  .v-input--variant-single-line &
+  .v-input--variant-plain &,
+  .v-input--variant-underlined &
     $root: &
     align-self: flex-end
 
     @at-root
       @include density('v-input', $input-density) using ($modifier)
         @at-root #{selector-append(&, $root)}
-          margin-bottom: $input-single-line-margin-bottom + $modifier / 8
+          margin-bottom: $input-underlined-margin-bottom + $modifier / 8
 
 .v-input__prepend-outer,
 .v-input__append-outer
   align-self: center
 
-  .v-input--variant-single-line &
+  .v-input--variant-plain &,
+  .v-input--variant-underlined &
     align-self: flex-end
 
 .v-input__prepend-outer
@@ -163,7 +170,8 @@
   .v-input--focused &
     opacity: 1
 
-  .v-input--variant-single-line &
+  .v-input--variant-plain &,
+  .v-input--variant-underlined &
     $root: &
 
     @at-root
@@ -171,7 +179,7 @@
         @at-root #{selector-append(&, $root)}
           bottom: 4px + $modifier / 8
 
-  &--sizer
+  &--floating
     --v-input-label-scale: #{$input-label-floating-scale}em
     font-size: var(--v-input-label-scale)
     visibility: hidden
@@ -180,10 +188,12 @@
     .v-input.v-input--dirty &
       visibility: visible
 
+    .v-input--variant-contained &,
     .v-input--variant-filled &
       transform: translateY(calc(var(--v-input-height) / 56 * -12))
 
-    .v-input--variant-single-line &
+    .v-input--variant-plain &,
+    .v-input--variant-underlined &
       transform: translateY(-24px)
       margin: 0
 
@@ -218,7 +228,7 @@
     --v-input-border-width: #{$input-focused-border-width}
 
   .v-input--variant-filled &,
-  .v-input--variant-single-line &
+  .v-input--variant-underlined &
     &::before
       border-style: solid
       border-width: 0 0 var(--v-input-border-width)
@@ -227,7 +237,7 @@
       @include absolute()
 
   .v-input--variant-filled &,
-  .v-input--variant-single-line &
+  .v-input--variant-underlined &
     &::after
       border-color: currentColor
       border-style: solid
@@ -311,7 +321,8 @@
   min-height: $input-details-min-height
   padding: $input-details-padding
 
-  .v-input--variant-single-line &
+  .v-input--variant-plain &,
+  .v-input--variant-underlined &
     padding-inline-start: 0
     padding-inline-end: 0
 

@@ -18,6 +18,9 @@ import { convertToUnit, defineComponent, getUid, nullifyTransforms, standardEasi
 import type { PropType } from 'vue'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 
+const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
+type Variant = typeof allowedVariants[number]
+
 export default defineComponent({
   name: 'VInput',
 
@@ -43,10 +46,11 @@ export default defineComponent({
     prependIcon: String,
     prependOuterIcon: String,
     reverse: Boolean,
+    singleLine: Boolean,
     variant: {
-      type: String,
+      type: String as PropType<Variant>,
       default: 'filled',
-      // required: true,
+      validator: (v: any) => allowedVariants.includes(v),
     },
 
     ...makeThemeProps(),
@@ -70,7 +74,7 @@ export default defineComponent({
     const uid = getUid()
 
     const labelRef = ref<InstanceType<typeof VInputLabel>>()
-    const labelSizerRef = ref<InstanceType<typeof VInputLabel>>()
+    const floatingLabelRef = ref<InstanceType<typeof VInputLabel>>()
     const controlRef = ref<HTMLElement>()
     const fieldRef = ref<HTMLElement>()
     const inputRef = ref<HTMLInputElement>()
@@ -86,9 +90,9 @@ export default defineComponent({
     }))
 
     watch(isActive, val => {
-      if (props.variant !== 'contained') {
+      if (!props.singleLine) {
         const el: HTMLElement = labelRef.value!.$el
-        const targetEl: HTMLElement = labelSizerRef.value!.$el
+        const targetEl: HTMLElement = floatingLabelRef.value!.$el
         const rect = nullifyTransforms(el)
         const targetRect = targetEl.getBoundingClientRect()
 
@@ -152,6 +156,7 @@ export default defineComponent({
               'v-input--focused': isFocused.value,
               'v-input--reverse': props.reverse,
               'v-input--has-background': !!props.bgColor,
+              'v-input--single-line': props.singleLine,
               [`v-input--variant-${props.variant}`]: true,
             },
             themeClasses.value,
@@ -199,8 +204,8 @@ export default defineComponent({
             ) }
 
             <div class="v-input__field" ref={ fieldRef }>
-              { props.variant === 'filled' && (
-                <VInputLabel ref={ labelSizerRef } sizer>
+              { ['contained', 'filled'].includes(props.variant) && (
+                <VInputLabel ref={ floatingLabelRef } floating>
                   { label }
                 </VInputLabel>
               )}
@@ -252,7 +257,7 @@ export default defineComponent({
                   <div class="v-input__outline__start" />
 
                   <div class="v-input__outline__notch">
-                    <VInputLabel ref={ labelSizerRef } sizer>
+                    <VInputLabel ref={ floatingLabelRef } floating>
                       { label }
                     </VInputLabel>
                   </div>
@@ -260,8 +265,8 @@ export default defineComponent({
                   <div class="v-input__outline__end" />
                 </>
               )}
-              { props.variant === 'single-line' && (
-                <VInputLabel ref={ labelSizerRef } sizer>
+              { ['plain', 'underlined'].includes(props.variant) && (
+                <VInputLabel ref={ floatingLabelRef } floating>
                   { label }
                 </VInputLabel>
               )}

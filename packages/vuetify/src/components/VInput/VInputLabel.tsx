@@ -8,7 +8,7 @@ export default defineComponent({
   name: 'VInputLabel',
 
   props: {
-    sizer: Boolean,
+    floating: Boolean,
 
     ...makeThemeProps(),
   },
@@ -19,9 +19,9 @@ export default defineComponent({
         <label
           class={[
             'v-label',
-            { 'v-label--sizer': props.sizer },
+            { 'v-label--floating': props.floating },
           ]}
-          aria-hidden={ props.sizer || undefined }
+          aria-hidden={ props.floating || undefined }
         >
           { slots.default?.() }
         </label>
