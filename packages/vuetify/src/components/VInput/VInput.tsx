@@ -73,6 +73,7 @@ export default defineComponent({
     const labelSizerRef = ref<InstanceType<typeof VInputLabel>>()
     const controlRef = ref<HTMLElement>()
     const fieldRef = ref<HTMLElement>()
+    const inputRef = ref<HTMLInputElement>()
     const isDirty = computed(() => (value.value != null && value.value !== ''))
     const isFocused = ref(false)
     const id = computed(() => props.id || `input-${uid}`)
@@ -99,14 +100,17 @@ export default defineComponent({
           ? { maxWidth: convertToUnit(targetWidth) }
           : undefined
 
+        const duration = parseFloat(getComputedStyle(el).transitionDuration) * 1000
+        const scale = parseFloat(getComputedStyle(targetEl).getPropertyValue('--label-scale'))
+
         el.style.visibility = 'visible'
         targetEl.style.visibility = 'hidden'
 
         el.animate([
           { transform: 'translate(0)' },
-          { transform: `translate(${x}px, ${y}px) scale(.75)`, ...width },
+          { transform: `translate(${x}px, ${y}px) scale(${scale})`, ...width },
         ], {
-          duration: 150,
+          duration,
           easing: standardEasing,
           direction: val ? 'normal' : 'reverse',
         }).finished.then(() => {
@@ -115,6 +119,13 @@ export default defineComponent({
         })
       }
     }, { flush: 'post' })
+
+    function focus () {
+      inputRef.value?.focus()
+    }
+    function blur () {
+      inputRef.value?.blur()
+    }
 
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
@@ -170,6 +181,7 @@ export default defineComponent({
               backgroundColorClasses.value,
             ]}
             style={ backgroundColorStyles.value }
+            onClick={ focus }
           >
             <div class="v-input__overlay" />
 
@@ -202,6 +214,7 @@ export default defineComponent({
                 props: {
                   id: id.value,
                   value: value.value,
+                  ref: inputRef,
                   onFocus: () => (isFocused.value = true),
                   onBlur: () => (isFocused.value = false),
                   onInput: (e: Event) => {
@@ -276,6 +289,8 @@ export default defineComponent({
     })
 
     return {
+      focus,
+      blur,
       value,
       isActive,
       isDirty,

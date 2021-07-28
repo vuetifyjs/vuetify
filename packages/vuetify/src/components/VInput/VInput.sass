@@ -1,5 +1,6 @@
 @import ./index
 
+/* region INPUT */
 .v-input
   align-items: flex-start
   display: grid
@@ -11,11 +12,15 @@
   grid-template-rows: auto auto
   letter-spacing: $input-letter-spacing
   max-width: $input-max-width
-  transition: $input-transition
+  transition: color $input-transition-timing
+  --input-padding-before: #{$input-control-padding}
+  --input-padding-after: #{$input-control-padding}
 
   input
     opacity: $input-input-opacity
     width: 100%
+    padding-inline-start: var(--input-padding-before)
+    padding-inline-end: var(--input-padding-after)
 
     &:focus,
     &:active
@@ -25,10 +30,21 @@
     &:invalid
       box-shadow: none
 
+  &--variant-single-line
+    --input-padding-before: 0
+    --input-padding-after: 0
+
+  &--prepended
+    --input-padding-before: #{$input-control-affixed-inner-padding}
+  &--appended
+    --input-padding-after: #{$input-control-affixed-inner-padding}
+
   @at-root
     @include density('v-input', $input-density) using ($modifier)
       --v-input-height: #{$input-height + $modifier}
 
+/* endregion */
+/* region CONTROL */
 .v-input__control
   align-items: center
   border-radius: $input-border-radius
@@ -37,8 +53,13 @@
   flex: 1 0
   grid-area: control
   height: var(--v-input-height)
-  padding: $input-control-padding
   position: relative
+
+  .v-input--prepended &
+    padding-inline-start: $input-control-affixed-padding
+
+  .v-input--appended &
+    padding-inline-end: $input-control-affixed-padding
 
   .v-input--variant-contained &
     background: $input-control-contained-background
@@ -54,6 +75,8 @@
     border-radius: $input-control-single-line-border-radius
     padding: 0
 
+/* endregion */
+/* region FIELD */
 .v-input__field
   align-items: center
   display: flex
@@ -66,10 +89,8 @@
     letter-spacing: $input-letter-spacing
 
     .v-input--variant-filled &
-      padding: 20px 0 6px
-
-    .v-input--variant-outlined &
-      padding: 16px 0
+      padding-top: 20px
+      padding-bottom: 6px
 
     .v-input--variant-single-line &
       $root: &
@@ -80,11 +101,10 @@
       @at-root
         @include density('v-input', $input-density) using ($modifier)
           @at-root #{selector-append(&, $root)}
-            padding-top: $input-field-input-padding-top + $modifier * .75
+            padding-top: $input-field-input-padding-top + $modifier * $input-label-floating-scale
 
-    .v-input--prepended &
-      padding-inline-start: $input-field-input-prepended-padding-inline-start
-
+/* endregion */
+/* region AFFIXES */
 .v-input__prepend-outer,
 .v-input__prepend,
 .v-input__append,
@@ -104,23 +124,27 @@
 .v-input__prepend-outer,
 .v-input__append-outer
   align-self: center
-  grid-area: prepend
 
   .v-input--variant-single-line &
     align-self: flex-end
 
 .v-input__prepend-outer
   margin-inline-end: $input-prepend-outer-margin-inline-end
+  grid-area: prepend
 
 .v-input__append-outer
   margin-inline-start: $input-prepend-outer-margin-inline-start
+  grid-area: append
 
+/* endregion */
+/* region LABEL */
 .v-label
   contain: layout paint
   display: inline-block
   font-size: $input-label-font-size
   letter-spacing: $input-letter-spacing
   min-width: 0
+  max-width: calc(100% - var(--input-padding-before) - var(--input-padding-after))
   opacity: .6
   overflow: hidden
   pointer-events: none
@@ -128,12 +152,11 @@
   text-overflow: ellipsis
   transform-origin: left center
   transition-property: color, transform
-  transition: transform .15s $standard-easing
+  transition: transform $input-transition-timing
   white-space: nowrap
 
-  .v-input--prepended &
-    margin-inline-start: 6px
-    margin-inline-end: auto
+  margin-inline-start: var(--input-padding-before)
+  margin-inline-end: var(--input-padding-after)
 
   .v-input--dirty &
     visibility: hidden
@@ -147,7 +170,8 @@
           bottom: 4px + $modifier / 8
 
   &--sizer
-    font-size: .75em
+    --label-scale: #{$input-label-floating-scale}em
+    font-size: var(--label-scale)
     visibility: hidden
     max-width: 100%
 
@@ -159,56 +183,58 @@
 
     .v-input--variant-single-line &
       opacity: 1
-      left: 0
       transform: translateY(-24px)
-      transform-origin: top left
       margin: 0
 
     .v-input--variant-outlined &
       opacity: 1
-      transform: translateY(-0.75em)
+      transform: translateY(-50%)
       transform-origin: center
       position: static
       margin: 0 4px
 
+/* endregion */
+/* region OUTLINE */
 .v-input__outline
-  --border-width: 1px
+  --border-width: #{$input-border-width}
+  --border-opacity: #{$input-outline-opacity}
   align-items: stretch
   contain: layout
   display: flex
   height: 100%
   left: 0
-  opacity: $input-outline-opacity
   pointer-events: none
   position: absolute
   right: 0
-  transition: $input-outline-transition
   width: 100%
 
-  .v-input--focused &
-    opacity: 1
+  .v-input__control:hover &
+    --border-opacity: var(--v-high-emphasis-opacity)
+
+  .v-input.v-input--focused &
+    --border-opacity: 1
 
   .v-input--variant-outlined.v-input--focused &
-    --border-width: #{$input-outline-outlined-focused-border-width}
-
-  .v-input--variant-filled &,
-  .v-input--variant-single-line &,
-  .v-input--variant-outlined &
-    border-style: solid
-    border-width: 0 0 var(--border-width)
+    --border-width: #{$input-focused-border-width}
 
   .v-input--variant-filled &,
   .v-input--variant-single-line &
     &::before
-      content: ''
-      position: absolute
-      width: 100%
-      bottom: calc(0px - var(--border-width))
+      border-style: solid
+      border-width: 0 0 var(--border-width)
+      opacity: var(--border-opacity)
+      transition: opacity $input-subtle-transition-timing
+      @include absolute()
+
+  .v-input--variant-filled &,
+  .v-input--variant-single-line &
+    &::after
       border-color: currentColor
       border-style: solid
       border-width: 0 0 $input-border-width
-      transition-property: transform
+      transition: transform $input-transition-timing
       transform: scaleX(0)
+      @include absolute()
 
       @at-root #{selector-append('.v-input--focused', &)}
         transform: scaleX(1)
@@ -217,18 +243,17 @@
     border-radius: inherit
 
     &__start,
-    &__notch,
-    &__end
-      height: calc(100% + 1px)
-
-    &__start,
     &__notch::before,
+    &__notch::after,
     &__end
       border: 0 solid currentColor
+      opacity: var(--border-opacity)
+      transition: opacity $input-subtle-transition-timing
 
     &__start
-      flex: 0 0 12px
+      flex: 0 0 $input-control-affixed-padding
       border-top-width: var(--border-width)
+      border-bottom-width: var(--border-width)
       border-inline-start-width: var(--border-width)
 
       @include ltr()
@@ -240,25 +265,29 @@
     &__notch
       flex: none
       position: relative
+      border-width: 0 0 var(--border-width)
+
+      &::before,
+      &::after
+        opacity: var(--border-opacity)
+        transition: opacity $input-subtle-transition-timing
+        @include absolute()
 
       &::before
-        content: ''
-        position: absolute
-        top: 0
-        width: 100%
         border-width: var(--border-width) 0 0
-        opacity: 1
-        transition: $input-outline-notched-transition
+
+      &::after
+        bottom: 0
+        border-width: 0 0 var(--border-width)
 
       @at-root #{selector-append('.v-input--dirty', &)}
-        flex-basis: auto
-
         &::before
           opacity: 0
 
     &__end
       flex: 1
       border-top-width: var(--border-width)
+      border-bottom-width: var(--border-width)
       border-inline-end-width: var(--border-width)
 
       @include ltr()
@@ -267,6 +296,8 @@
       @include rtl()
         border-radius: $input-border-radius 0 0 $input-border-radius
 
+/* endregion */
+/* region DETAILS */
 .v-input__details
   align-items: flex-end
   // TODO: fix this when text-fields are implemented
@@ -284,67 +315,50 @@
     padding-inline-start: 0
     padding-inline-end: 0
 
+/* endregion */
+/* region OVERLAY */
+.v-input__overlay
+  background-color: rgb(var(--v-theme-on-surface))
+  border-radius: inherit
+  opacity: 0
+  pointer-events: none
+  transition: opacity $input-subtle-transition-timing
+  @include absolute()
+
+  .v-input--variant-filled &
+    opacity: calc(#{$input-overlay-filled-opacity} * #{var(--v-theme-overlay-multiplier)})
+
+  .v-input__control:hover &
+    --v-theme-overlay-multiplier: 2
+
+  .v-input.v-input--focused &
+    --v-theme-overlay-multiplier: 3
+
+/* endregion */
+/* region MODIFIERS */
 .v-input--reverse
-  .v-label
-    @include ltr()
-      left: $input-label-reverse-end
-      right: $input-label-reverse-start
-
-    @include rtl()
-      left: $input-label-reverse-start
-      right: $input-label-reverse-end
-
   input
-    @at-root #{selector-append('.v-input--prepended', &)}
-      padding-inline-start: $input-label-reverse-prepended-padding-inline-start
-      padding-inline-end: $input-label-reverse-prepended-padding-inline-end
-
     @include ltr()
       text-align: right
 
     @include rtl()
       text-align: left
 
+  .v-label
+    @include ltr()
+      left: auto
+      right: 0
+
+    @include rtl()
+      left: 0
+      right: auto
+
   &.v-input--variant-outlined
     .v-input__outline
-      flex-direction: row-reverse
-
       &__start
-        border-inline-start-width: 0
-        border-inline-end-width: var(--border-width)
-        @include ltr()
-          border-radius: 0 $input-border-radius $input-border-radius 0
-
-        @include rtl()
-          border-radius: $input-border-radius 0 0 $input-border-radius
+        flex: 1
 
       &__end
-        border-inline-start-width: var(--border-width)
-        border-inline-end-width: 0
+        flex: 0 0 $input-control-affixed-padding
 
-        @include ltr()
-          border-radius: $input-border-radius 0 0 $input-border-radius
-
-        @include rtl()
-          border-radius: 0 $input-border-radius $input-border-radius 0
-
-.v-input__overlay
-  background-color: rgb(var(--v-theme-on-surface))
-  border-radius: inherit
-  bottom: 0
-  left: 0
-  opacity: 0
-  pointer-events: none
-  position: absolute
-  right: 0
-  top: 0
-  transition: $input-overlay-transition
-
-  .v-input--variant-filled &
-    opacity: calc(#{$input-overlay-filled-opacity} * #{var(--v-theme-overlay-multiplier)})
-
-  .v-input:not(.v-input--focused):hover &
-    --v-theme-overlay-multiplier: 2
-
-  .v-input--focused &
-    --v-theme-overlay-multiplier: 3
+/* endregion */
