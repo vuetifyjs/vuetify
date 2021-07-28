@@ -1,4 +1,4 @@
-import type { Ref, Slots, VNode } from 'vue'
+import type { ComponentInternalInstance, Ref, Slots, VNode, VNodeChild } from 'vue'
 import { camelize, Fragment, isRef, ref } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
@@ -431,4 +431,28 @@ export type ExtractMaybeRef<P> = P extends MaybeRef<infer T> ? T : P;
 
 export function wrapInRef <T> (x: T) {
   return (isRef(x) ? x : ref(x)) as Ref<ExtractMaybeRef<T>>
+}
+
+export function findChildren (vnode?: VNodeChild): ComponentInternalInstance[] {
+  if (!vnode || typeof vnode !== 'object') {
+    return []
+  }
+
+  if (Array.isArray(vnode)) {
+    return vnode
+      .map(child => findChildren(child))
+      .filter(v => v)
+      .flat(1)
+  } else if (Array.isArray(vnode.children)) {
+    return vnode.children
+      .map(child => findChildren(child))
+      .filter(v => v)
+      .flat(1)
+  } else if (vnode.component) {
+    return [vnode.component, ...findChildren(vnode.component?.subTree)]
+      .filter(v => v)
+      .flat(1)
+  }
+
+  return []
 }
