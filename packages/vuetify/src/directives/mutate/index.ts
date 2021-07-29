@@ -1,30 +1,16 @@
 // Types
-import type {
-  DirectiveBinding,
-  ObjectDirective,
-} from 'vue'
-
-type MutationHandler = (
-  entries: MutationRecord[],
-  observer: MutationObserver,
-) => void
+import type { DirectiveBinding, ObjectDirective } from 'vue'
+import type { MutationOptions } from './../../composables/mutationObserver'
 
 export interface MutationDirectiveBinding extends Omit<DirectiveBinding, 'modifiers' | 'value'> {
-  value?: MutationHandler | { handler: MutationHandler, options?: MutationObserverInit }
-  modifiers: {
-    attr?: boolean
-    char?: boolean
-    child?: boolean
-    once?: boolean
-    quiet?: boolean
-    sub?: boolean
-  }
+  value: MutationCallback | { handler: MutationCallback, options?: MutationObserverInit }
+  modifiers: MutationOptions
 }
 
 function mounted (el: HTMLElement, binding: MutationDirectiveBinding) {
   const modifiers = binding.modifiers || {}
   const value = binding.value
-  const { once, ...modifierKeys } = modifiers
+  const { once, immediate, ...modifierKeys } = modifiers
 
   const { handler, options } = typeof value === 'object'
     ? value
@@ -42,37 +28,20 @@ function mounted (el: HTMLElement, binding: MutationDirectiveBinding) {
     mutations: MutationRecord[] = [],
     observer: MutationObserver
   ) => {
-    /* istanbul ignore if */
-    if (!el._mutate) return // Just in case, should never fire
-
-    // If is not quiet or has already been
-    // initted, invoke the user callback
-    if (
-      handler && (
-        !modifiers.quiet ||
-        el._mutate.init
-      ) && (
-        !modifiers.once ||
-        !el._mutate.init
-      )
-    ) {
-      handler(mutations, observer)
-    }
+    handler?.(mutations, observer)
 
     if (once) unmounted(el)
-    else el._mutate.init = true
   })
 
-  el._mutate = { init: false, observer }
+  if (immediate) handler?.([], observer)
+
+  el._mutate = { observer }
 
   observer.observe(el, options)
 }
 
 function unmounted (el: HTMLElement) {
-  /* istanbul ignore if */
-  if (!el._mutate) return
-
-  el._mutate.observer.disconnect()
+  el?._mutate?.observer?.disconnect()
   delete el._mutate
 }
 

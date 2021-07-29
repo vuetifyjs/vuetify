@@ -1,26 +1,37 @@
 // Utilities
-import { onBeforeUnmount, ref, watch } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
-export interface MutationComposableBinding {
+// Types
+import type { ComponentPublicInstance } from 'vue'
+
+export interface MutationOptions {
   attr?: boolean
   char?: boolean
   child?: boolean
-  once?: boolean
-  quiet?: boolean
   sub?: boolean
+  once?: boolean
+  immediate?: boolean
 }
 
 export function useMutationObserver (
-  options?: MutationComposableBinding,
-  callback?: MutationCallback
+  handler?: MutationCallback,
+  options?: MutationOptions,
 ) {
-  const mutationRef = ref<HTMLElement>()
+  const mutationRef = ref<ComponentPublicInstance>()
 
   const observer = new MutationObserver((
     mutations: MutationRecord[],
     observer: MutationObserver
   ) => {
-    callback?.(mutations, observer)
+    handler?.(mutations, observer)
+
+    if (options?.once) observer.disconnect()
+  })
+
+  onMounted(() => {
+    if (!options?.immediate) return
+
+    handler?.([], observer)
   })
 
   onBeforeUnmount(() => {
@@ -28,22 +39,17 @@ export function useMutationObserver (
   })
 
   watch(mutationRef, (newValue, oldValue) => {
-    console.log(newValue, oldValue)
-    if (oldValue) {
-      observer.disconnect()
-    }
+    if (oldValue) observer.disconnect()
+    if (!newValue?.$el) return
 
-    if (newValue) {
-      observer.observe(newValue, {
-        attributes: options?.attr ?? true,
-        characterData: options?.char ?? true,
-        childList: options?.child ?? true,
-        subtree: options?.sub ?? true,
-      })
-    }
+    observer.observe(newValue?.$el, {
+      attributes: options?.attr ?? true,
+      characterData: options?.char ?? true,
+      childList: options?.child ?? true,
+      subtree: options?.sub ?? true,
+    })
   }, {
-    // flush: 'post',
-    deep: true,
+    flush: 'post',
   })
 
   return { mutationRef }
