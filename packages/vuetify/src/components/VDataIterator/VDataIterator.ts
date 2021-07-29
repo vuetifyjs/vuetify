@@ -201,10 +201,10 @@ export default mixins(
 
       const index = this.selectableItems.findIndex(x => getObjectValueByPath(x, this.itemKey) === key)
       if (this.lastEntry === -1) this.lastEntry = index
-      else {
+      else if (this.shiftKeyDown && !this.singleSelect && emit) {
         const lastEntryKey = getObjectValueByPath(this.selectableItems[this.lastEntry], this.itemKey)
-        const lastEntryKeySelected = Object.keys(this.selection).includes(lastEntryKey.toString())
-        if (this.shiftKeyDown && !this.singleSelect && emit) this.multipleSelect(lastEntryKeySelected, emit, selection, index)
+        const lastEntryKeySelected = Object.keys(this.selection).includes(String(lastEntryKey))
+        this.multipleSelect(lastEntryKeySelected, emit, selection, index)
       }
       this.lastEntry = index
 
