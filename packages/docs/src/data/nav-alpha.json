@@ -75,6 +75,7 @@
     "icon": "$mdiFunction",
     "items": [
       "intersect",
+      "mutate",
       "resize",
       "ripple",
       "scroll",
