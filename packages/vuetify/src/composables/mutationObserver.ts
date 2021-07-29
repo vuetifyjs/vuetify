@@ -18,6 +18,8 @@ export function useMutationObserver (
   options?: MutationOptions,
 ) {
   const mutationRef = ref<ComponentPublicInstance>()
+  const { once, immediate, ...optionKeys } = options || {}
+  const defaultValue = !Object.keys(optionKeys).length
 
   const observer = new MutationObserver((
     mutations: MutationRecord[],
@@ -43,10 +45,10 @@ export function useMutationObserver (
     if (!newValue?.$el) return
 
     observer.observe(newValue?.$el, {
-      attributes: options?.attr ?? true,
-      characterData: options?.char ?? true,
-      childList: options?.child ?? true,
-      subtree: options?.sub ?? true,
+      attributes: options?.attr ?? defaultValue,
+      characterData: options?.char ?? defaultValue,
+      childList: options?.child ?? defaultValue,
+      subtree: options?.sub ?? defaultValue,
     })
   }, {
     flush: 'post',

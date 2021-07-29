@@ -11,16 +11,17 @@ function mounted (el: HTMLElement, binding: MutationDirectiveBinding) {
   const modifiers = binding.modifiers || {}
   const value = binding.value
   const { once, immediate, ...modifierKeys } = modifiers
+  const defaultValue = !Object.keys(modifierKeys).length
 
   const { handler, options } = typeof value === 'object'
     ? value
     : {
       handler: value,
       options: {
-        attributes: modifierKeys?.attr ?? true,
-        characterData: modifierKeys?.char ?? true,
-        childList: modifierKeys?.child ?? true,
-        subtree: modifierKeys?.sub ?? true,
+        attributes: modifierKeys?.attr ?? defaultValue,
+        characterData: modifierKeys?.char ?? defaultValue,
+        childList: modifierKeys?.child ?? defaultValue,
+        subtree: modifierKeys?.sub ?? defaultValue,
       },
     }
 
