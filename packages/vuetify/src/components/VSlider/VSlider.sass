@@ -69,6 +69,15 @@
     transform: scale(0.1)
     pointer-events: none
 
+  &::after
+    content: ''
+    width: $slider-thumb-touch-size
+    height: $slider-thumb-touch-size
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+
 .v-slider__ticks-container
   position: absolute
 

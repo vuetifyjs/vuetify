@@ -40,5 +40,6 @@
 <script>
   export default {
     name: 'ApiSearch',
+    inheritAttrs: false,
   }
 </script>

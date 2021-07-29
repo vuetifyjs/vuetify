@@ -2,9 +2,9 @@
   <v-row>
     <v-col cols="12">
       <api-search
+        v-model="apiItem"
         :items="items"
         :label="$t('search-sass-api')"
-        @input="setApiItem"
       />
     </v-col>
     <v-col
@@ -54,12 +54,6 @@
           })
         }
         return items
-      },
-    },
-
-    methods: {
-      setApiItem (item) {
-        this.apiItem = item?.replace('$', '') || null
       },
     },
   }
