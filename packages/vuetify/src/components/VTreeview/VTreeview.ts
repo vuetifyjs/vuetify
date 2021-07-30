@@ -201,7 +201,7 @@ export default mixins(
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
         const key = getObjectValueByPath(item, this.itemKey)
-        const children = getObjectValueByPath(item, this.itemChildren, [])
+        const children = getObjectValueByPath(item, this.itemChildren) ?? []
         const oldNode = this.nodes.hasOwnProperty(key) ? this.nodes[key] : {
           isSelected: false, isIndeterminate: false, isActive: false, isOpen: false, vnode: null,
         } as NodeState
