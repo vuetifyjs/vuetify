@@ -1,4 +1,5 @@
 // Utilities
+import { isComponentInstance } from '@/util'
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 // Types
@@ -17,7 +18,7 @@ export function useMutationObserver (
   handler?: MutationCallback,
   options?: MutationOptions,
 ) {
-  const mutationRef = ref<ComponentPublicInstance>()
+  const mutationRef = ref<ComponentPublicInstance | HTMLElement>()
   const { once, immediate, ...optionKeys } = options || {}
   const defaultValue = !Object.keys(optionKeys).length
 
@@ -42,9 +43,12 @@ export function useMutationObserver (
 
   watch(mutationRef, (newValue, oldValue) => {
     if (oldValue) observer.disconnect()
-    if (!newValue?.$el) return
 
-    observer.observe(newValue?.$el, {
+    const el = isComponentInstance(newValue) ? newValue.$el : newValue
+
+    if (!el) return
+
+    observer.observe(el, {
       attributes: options?.attr ?? defaultValue,
       characterData: options?.char ?? defaultValue,
       childList: options?.child ?? defaultValue,
