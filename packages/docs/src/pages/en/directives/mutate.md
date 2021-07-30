@@ -124,7 +124,7 @@ When the value of content changes, both cards immediately call _onMutate_ and it
 
 ### Immediate
 
-Unlike the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver), the Mutation Observer does **not** invoke its callback when instantiating a new instance. Vuetify normalizes this behavior with the **immediate** option. In the following example, the `v-mutate` directive invokes the _onMutate_ method when element is initially mounted in the DOM **and** with every mutation; based upon the provided options.
+Unlike the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver), the provided callback is **not** immediately invoked when a Mutation Observer is created. Vuetify normalizes this behavior with the **immediate** option. In the following example, the `v-mutate` directive invokes the _onMutate_ method when the element is initially mounted in the DOM **and** with every mutation; based upon the provided options.
 
 ```html
 <template>
