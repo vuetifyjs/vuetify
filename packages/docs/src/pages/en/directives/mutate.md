@@ -22,7 +22,7 @@ The `v-mutate` directive utilizes the [Mutation Observer API](https://developer.
 | Modifier     | Default      | Description |
 | ------------ | -----------  | ----------- |
 | `.attr`      | `true`       | The [attr](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/attributes) modifier monitors target node's attribute changes                                                       |
-| `.char`      | `true`       | The [char](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/characterData) modifier monitors changes to target node's children (and, its descendants if `.sub` is `true`)       |
+| `.char`      | `true`       | The [char](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/characterData) modifier monitors changes to target node's character data (and, its descendants if `.sub` is `true`)       |
 | `.child`     | `true`       | The [child](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/childList) modifier monitors for the addition or removal of child nodes (and, its descendants if `.sub` is `true`) |
 | `.sub`       | `true`       | The [sub](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/subtree) modifier extends all monitoring to the entire subtree of target node                                        |
 | `.once`      | `undefined`  | The [once](#once) modifier invokes the user provided callback one time and disconnects the observer                                                                                                  |
