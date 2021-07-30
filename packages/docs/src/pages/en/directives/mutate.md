@@ -73,7 +73,7 @@ In addition to the _modifier_ syntax, the `v-mutate` directive is configurable v
 
 <alert type="warning">
 
-  When using custom options, it's recommended to use the `.sub` modifier. This extends mutation monitoring all target element's descendents.
+  When using custom options, it's recommended to use the `.sub` modifier. This extends mutation monitoring to all descendants of the target element.
 
 </alert>
 
