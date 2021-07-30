@@ -15,7 +15,7 @@
   top: 0
   z-index: 5
 
-.v-app-bar.v-app-bar--hide-shadow
+.v-app-bar.v-app-bar.v-app-bar--hide-shadow
   // Workaround for cascaded elevation styles
   // that persist when the bar is inactive.
   +elevation(0, true)
@@ -25,9 +25,6 @@
     transition: $app-bar-transition
 
 .v-app-bar.v-toolbar--prominent.v-app-bar--shrink-on-scroll
-  .v-toolbar__content
-    will-change: height
-
   .v-toolbar__image
     will-change: opacity
 

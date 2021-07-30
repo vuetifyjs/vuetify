@@ -29,6 +29,8 @@ The standard data-table will by default render your data as simple rows.
 - [v-edit-dialog](/api/v-edit-dialog)
 - [v-simple-checkbox](/api/v-simple-checkbox)
 
+<api-section page="components/data-tables" />
+
 <!-- ## Sub-components
 
 ### v-data-table-header
@@ -157,7 +159,7 @@ The `v-edit-dialog` component can be used for editing data directly within a `v-
 
 #### Expandable rows
 
-The **show-expand** prop will render an expand icon on each default row. You can customize this with the `item.data-table-expand` slot. The position of this slot can be customized by adding a column with `value: 'data-table-expand'` to the headers array. You can also switch between allowing multiple expanded rows at the same time or just one with the **single-expand** prop. The expanded rows are available on the synced prop `expanded.sync`
+The **show-expand** prop will render an expand icon on each default row. You can customize this with the `item.data-table-expand` slot. The position of this slot can be customized by adding a column with `value: 'data-table-expand'` to the headers array. You can also switch between allowing multiple expanded rows at the same time or just one with the **single-expand** prop. The expanded rows are available on the synced prop `expanded.sync`. Row items require a unique key property for expansion to work. The default is `id`, but you can use the **item-key** prop to specify a different item property.
 
 <example file="v-data-table/misc-expand" />
 

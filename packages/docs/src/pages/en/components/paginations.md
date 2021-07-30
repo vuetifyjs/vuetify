@@ -25,6 +25,8 @@ Pagination by default displays the number of pages based on the set **length** p
 
 - [v-pagination](/api/v-pagination)
 
+<api-section page="components/paginations" />
+
 ## Examples
 
 ### Props

@@ -15,7 +15,7 @@ import { VuetifyServiceContract } from 'vuetify/types/services'
 
 export default function goTo (
   _target: VuetifyGoToTarget,
-  _settings: Partial<GoToOptions> = {}
+  _settings: GoToOptions = {}
 ): Promise<number> {
   const settings: GoToOptions = {
     container: (document.scrollingElement as HTMLElement | null) || document.body || document.documentElement,

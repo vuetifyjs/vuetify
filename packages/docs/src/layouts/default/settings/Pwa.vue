@@ -8,7 +8,7 @@
       @click="install"
     >
       <span class="white--text">
-        {{ $t('install-vuetify') }}
+        {{ $t('pwa.install') }}
 
         <v-icon
           right
@@ -27,8 +27,6 @@
 
   export default {
     name: 'DefaultSettingsPwa',
-
-    data: () => ({ path: 'install-vuetify' }),
 
     methods: { install: call('pwa/install') },
   }

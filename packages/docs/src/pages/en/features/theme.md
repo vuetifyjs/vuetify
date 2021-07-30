@@ -365,6 +365,8 @@ The Vuetify theme system is propagated through the [provide](https://vuejs.org/v
 
 - [v-theme-provider](/api/v-theme-provider)
 
+<api-section page="features/theme" />
+
 ### Example
 
 Use the `v-theme-provider` to manually overwrite all children component's current theme **(light/dark)**. In the following example, the root `v-card` is explicitly set to `dark` with 2 children lists. The first one inherits from the parent `v-card` while the second is explicitly set to match the **root** Vuetify theme.
