@@ -150,7 +150,7 @@ Unlike the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/
 
 <alert type="info">
 
-  The **immediate** option for the Mutation Observer is not counted as a mutation and does not trigger the observer to disconnect when using **once**.
+  The **immediate** callback is not counted as a mutation and does not trigger the observer to disconnect when using **once**.
 
 </alert>
 
