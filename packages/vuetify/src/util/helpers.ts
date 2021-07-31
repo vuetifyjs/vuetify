@@ -1,5 +1,8 @@
-import type { ComponentInternalInstance, Ref, Slots, VNode, VNodeChild } from 'vue'
+// Utilities
 import { camelize, Fragment, isRef, ref } from 'vue'
+
+// Types
+import type { ComponentInternalInstance, ComponentPublicInstance, Ref, Slots, VNode, VNodeChild } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
@@ -126,6 +129,10 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
 
 export function isObject (obj: any): obj is object {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
+}
+
+export function isComponentInstance (obj: any): obj is ComponentPublicInstance {
+  return obj?.$el
 }
 
 // KeyboardEvent.keyCode aliases
