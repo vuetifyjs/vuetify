@@ -44,7 +44,7 @@ describe('VTimePicker.ts', () => {
     })
 
     it('should render landscape component' + useSecondsDesc, async () => {
-      var wrapper = mountFunction({
+      const wrapper = mountFunction({
         propsData: {
           value: '09:12:34',
           landscape: true,
@@ -57,7 +57,7 @@ describe('VTimePicker.ts', () => {
     })
 
     it('should render disabled component' + useSecondsDesc, async () => {
-      var wrapper = mountFunction({
+      const wrapper = mountFunction({
         propsData: {
           disabled: true,
           value: '09:12:34',
@@ -70,7 +70,7 @@ describe('VTimePicker.ts', () => {
     })
 
     it('should render flat component' + useSecondsDesc, async () => {
-      var wrapper = mountFunction({
+      const wrapper = mountFunction({
         propsData: {
           flat: true,
           value: '09:12:34',
@@ -83,7 +83,7 @@ describe('VTimePicker.ts', () => {
     })
 
     it('should render component with elevation' + useSecondsDesc, async () => {
-      var wrapper = mountFunction({
+      const wrapper = mountFunction({
         propsData: {
           elevation: 15,
           value: '09:12:34',

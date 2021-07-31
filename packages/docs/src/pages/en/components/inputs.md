@@ -25,6 +25,8 @@ The `v-input` component gives you a baseline to create your own custom inputs. I
 
 - [v-input](/api/v-input)
 
+<api-section page="components/inputs" />
+
 ## Caveats
 
 <alert type="warning">

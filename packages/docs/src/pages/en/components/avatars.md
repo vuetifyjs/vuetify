@@ -25,6 +25,8 @@ Avatars in their simplest form display content within a circular container.
 
 - [v-avatar](/api/v-avatar)
 
+<api-section page="components/avatars" />
+
 ### Props
 
 #### Size

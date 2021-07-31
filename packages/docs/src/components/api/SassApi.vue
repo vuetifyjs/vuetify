@@ -2,25 +2,21 @@
   <v-row>
     <v-col cols="12">
       <api-search
+        v-model="apiItem"
         :items="items"
         :label="$t('search-sass-api')"
-        @input="genApi"
       />
     </v-col>
     <v-col
-      v-for="api in apiItems"
-      :key="api.text"
+      v-if="apiItem"
       cols="12"
     >
-      <h2>{{ api.text }}</h2>
-      <div
-        :class="[
-          'v-data-table',
-          `theme--${$vuetify.theme.isDark ? 'dark' : 'light'}`
-        ]"
-      >
-        <api-table :name="api.text.replace('$', '')" field="sass" />
-      </div>
+      <api-section
+        :key="`sass-${apiItem}`"
+        hide-header
+        :name="apiItem"
+        section="sass"
+      />
     </v-col>
   </v-row>
 </template>
@@ -34,7 +30,7 @@
     name: 'SassApi',
 
     data: () => ({
-      apiItems: [],
+      apiItem: '',
       icons: {
         component: '$mdiViewDashboardOutline',
         functional: '$mdiViewStream',
@@ -58,12 +54,6 @@
           })
         }
         return items
-      },
-    },
-
-    methods: {
-      async genApi (items) {
-        this.apiItems = items
       },
     },
   }

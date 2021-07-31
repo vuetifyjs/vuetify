@@ -172,7 +172,7 @@ export default VSlider.extend({
       const thumbRef = this.$refs[refName] as HTMLElement
       thumbRef.focus()
     },
-    onSliderMouseDown (e: MouseEvent) {
+    onSliderMouseDown (e: MouseEvent | TouchEvent) {
       const value = this.parseMouseMove(e)
 
       this.reevaluateSelected(value)
@@ -182,7 +182,13 @@ export default VSlider.extend({
 
       if ((e.target as Element)?.matches('.v-slider__thumb-container, .v-slider__thumb-container *')) {
         this.thumbPressed = true
+        const domRect = (e.target as Element).getBoundingClientRect()
+        const touch = 'touches' in e ? e.touches[0] : e
+        this.startOffset = this.vertical
+          ? touch.clientY - (domRect.top + domRect.height / 2)
+          : touch.clientX - (domRect.left + domRect.width / 2)
       } else {
+        this.startOffset = 0
         window.clearTimeout(this.mouseTimeout)
         this.mouseTimeout = window.setTimeout(() => {
           this.thumbPressed = true
@@ -216,7 +222,7 @@ export default VSlider.extend({
         this.$emit('change', this.internalValue)
       }
     },
-    onMouseMove (e: MouseEvent) {
+    onMouseMove (e: MouseEvent | TouchEvent) {
       const value = this.parseMouseMove(e)
 
       if (e.type === 'mousemove') {

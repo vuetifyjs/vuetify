@@ -36,6 +36,8 @@ Vuetify comes with over 10 custom css animations that can be applied to numerous
 - [v-slide-y-transition](/api/v-slide-y-transition)
 - [v-slide-y-reverse-transition](/api/v-slide-y-reverse-transition)
 
+<api-section page="styles/transitions" />
+
 ## Examples
 
 ### Props
@@ -108,9 +110,6 @@ You can use Vuetify's transition helper function to easily create your own custo
 
 ```js
 import { createSimpleTransition } from 'vuetify/lib/components/transitions/createTransition'
-
-// ES5
-// import { createSimpleTransition } from 'vuetify/es5/components/transitions/createTransition'
 
 const myTransition = createSimpleTransition('my-transition')
 

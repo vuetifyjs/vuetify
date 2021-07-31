@@ -75,9 +75,6 @@
     top: 0
     transition: $btn-transition
 
-  &:not(.v-btn--disabled)
-    will-change: box-shadow
-
   &:not(.v-btn--round)
     @each $name, $size in $btn-sizes
       &.v-size--#{$name}
