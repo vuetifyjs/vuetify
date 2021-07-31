@@ -1,9 +1,10 @@
 <template>
-  <v-hover v-slot="{ hover }">
+  <v-hover v-slot="{ hover, props }">
     <v-card
       class="mx-auto"
       color="grey lighten-4"
       max-width="600"
+      v-bind="props"
     >
       <v-img
         :aspect-ratio="16/9"

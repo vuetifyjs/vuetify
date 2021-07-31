@@ -64,7 +64,6 @@ describe('group', () => {
     const GroupItemComponent = defineComponent({
       props: {
         value: [String, Number],
-        index: Number,
         disabled: Boolean,
       },
       setup (props) {
@@ -226,7 +225,7 @@ describe('group', () => {
         },
         slots: {
           default () {
-            return values.map((value, index) => h(GroupItemComponent, { value, index, key: value }))
+            return values.map(value => h(GroupItemComponent, { value, key: value }))
           },
         },
       })

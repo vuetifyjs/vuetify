@@ -8,6 +8,7 @@ import {
   getObjectValueByPath,
   getPropertyFromItem,
   humanReadableFileSize,
+  mergeDeep,
   sortItems,
 } from '../helpers'
 
@@ -409,5 +410,32 @@ describe('helpers', () => {
         { string: 'baz', number: 1 },
         { string: 'foo', number: 1 },
       ])
+  })
+
+  describe('mergeDeep', () => {
+    it('should include all properties from both source and target', () => {
+      expect(mergeDeep({ a: 'foo' }, { b: 'bar' })).toEqual({ a: 'foo', b: 'bar' })
+    })
+
+    it('should not mutate source object', () => {
+      const source = { a: 'foo' }
+      const target = { b: 'bar' }
+      const result = mergeDeep(source, target)
+
+      expect(result).not.toBe(source)
+      expect(source).not.toHaveProperty('b')
+    })
+
+    it('should overwrite source properties', () => {
+      expect(mergeDeep({ a: 'foo' }, { a: 'bar' })).toEqual({ a: 'bar' })
+    })
+
+    it('should recursively merge', () => {
+      expect(mergeDeep({ a: { b: 'foo' } }, { c: { d: 'bar' } })).toEqual({ a: { b: 'foo' }, c: { d: 'bar' } })
+    })
+
+    it('should not recursively merge arrays', () => {
+      expect(mergeDeep({ a: ['foo'] }, { a: ['bar'] })).toEqual({ a: ['bar'] })
+    })
   })
 })

@@ -1,10 +1,10 @@
 // Utilities
-import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef } from 'vue'
+import { computed, getCurrentInstance, inject, onBeforeUnmount, onMounted, provide, reactive, toRef } from 'vue'
 import { useProxiedModel } from './proxiedModel'
-import { consoleWarn, deepEqual, getUid, propsFactory, wrapInArray } from '@/util'
+import { consoleWarn, deepEqual, findChildren, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
-import type { InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
+import type { ComponentInternalInstance, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
 
 interface GroupItem {
   id: number
@@ -21,7 +21,7 @@ interface GroupProps {
 }
 
 interface GroupProvide {
-  register: (item: GroupItem, index?: number) => void
+  register: (item: GroupItem, cmp: ComponentInternalInstance) => void
   unregister: (id: number) => void
   select: (id: number, value: boolean) => void
   selected: Ref<any[]>
@@ -47,16 +47,23 @@ export const makeGroupItemProps = propsFactory({
     type: [Number, Boolean, String, Object],
     default: undefined,
   },
-  index: Number,
   disabled: Boolean,
   selectedClass: String,
 }, 'group-item')
 
 // Composables
 export function useGroupItem (
-  props: { value?: unknown, index?: number, disabled?: boolean, selectedClass?: string },
+  props: { value?: unknown, disabled?: boolean, selectedClass?: string },
   injectKey: InjectionKey<GroupProvide>,
 ) {
+  const vm = getCurrentInstance()
+
+  if (!vm) {
+    throw new Error(
+      '[Vuetify] useGroupItem composable must be used inside a component setup function'
+    )
+  }
+
   const group = inject(injectKey, null)
 
   if (!group) {
@@ -71,7 +78,7 @@ export function useGroupItem (
     id,
     value,
     disabled,
-  }, props.index)
+  }, vm)
 
   onBeforeUnmount(() => {
     group.unregister(id)
@@ -115,10 +122,19 @@ export function useGroup (
     }
   )
 
-  function register (item: GroupItem, index?: number) {
+  const groupVm = getCurrentInstance()
+
+  function register (item: GroupItem, vm: ComponentInternalInstance) {
     // Is there a better way to fix this typing?
     const unwrapped = item as unknown as UnwrapRef<GroupItem>
-    if (index != null) items.splice(index, 0, unwrapped)
+
+    const children = findChildren(groupVm?.vnode)
+    const instances = children
+      .slice(1) // First one is group component itself
+      .filter(cmp => !!cmp.provides[injectKey as any]) // TODO: Fix in TS 4.4
+    const index = instances.indexOf(vm)
+
+    if (index > -1) items.splice(index, 0, unwrapped)
     else items.push(unwrapped)
   }
 

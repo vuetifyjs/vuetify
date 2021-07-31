@@ -2,7 +2,7 @@
 import { camelize, Fragment, isRef, ref } from 'vue'
 
 // Types
-import type { ComponentPublicInstance, Ref, Slots, VNode } from 'vue'
+import type { ComponentInternalInstance, ComponentPublicInstance, Ref, Slots, VNode, VNodeChild } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
@@ -128,7 +128,7 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
 }
 
 export function isObject (obj: any): obj is object {
-  return obj !== null && typeof obj === 'object'
+  return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
 }
 
 export function isComponentInstance (obj: any): obj is ComponentPublicInstance {
@@ -377,9 +377,14 @@ export function camelizeObjectKeys (obj: Record<string, any> | null | undefined)
 }
 
 export function mergeDeep (
-  source: Dictionary<any> = {},
-  target: Dictionary<any> = {}
+  source: Record<string, any> = {},
+  target: Record<string, any> = {},
+  out: Record<string, any> = {},
 ) {
+  for (const key in source) {
+    out[key] = source[key]
+  }
+
   for (const key in target) {
     const sourceProperty = source[key]
     const targetProperty = target[key]
@@ -390,15 +395,15 @@ export function mergeDeep (
       isObject(sourceProperty) &&
       isObject(targetProperty)
     ) {
-      source[key] = mergeDeep(sourceProperty, targetProperty)
+      out[key] = mergeDeep(sourceProperty, targetProperty)
 
       continue
     }
 
-    source[key] = targetProperty
+    out[key] = targetProperty
   }
 
-  return source
+  return out
 }
 
 export function fillArray<T> (length: number, obj: T) {
@@ -433,4 +438,28 @@ export type ExtractMaybeRef<P> = P extends MaybeRef<infer T> ? T : P;
 
 export function wrapInRef <T> (x: T) {
   return (isRef(x) ? x : ref(x)) as Ref<ExtractMaybeRef<T>>
+}
+
+export function findChildren (vnode?: VNodeChild): ComponentInternalInstance[] {
+  if (!vnode || typeof vnode !== 'object') {
+    return []
+  }
+
+  if (Array.isArray(vnode)) {
+    return vnode
+      .map(child => findChildren(child))
+      .filter(v => v)
+      .flat(1)
+  } else if (Array.isArray(vnode.children)) {
+    return vnode.children
+      .map(child => findChildren(child))
+      .filter(v => v)
+      .flat(1)
+  } else if (vnode.component) {
+    return [vnode.component, ...findChildren(vnode.component?.subTree)]
+      .filter(v => v)
+      .flat(1)
+  }
+
+  return []
 }
