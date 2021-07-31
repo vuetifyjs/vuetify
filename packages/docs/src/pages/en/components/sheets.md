@@ -25,6 +25,8 @@ The `v-sheet` component is a transformable piece of _paper_ that provides a basi
 
 - [v-sheet](/api/v-sheet)
 
+<api-section page="components/sheets" />
+
 ## Examples
 
 ### Props

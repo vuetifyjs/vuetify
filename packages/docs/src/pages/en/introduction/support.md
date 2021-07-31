@@ -12,8 +12,12 @@ nav: Direct support
 
 # Direct support from Vuetify
 
-John Leider, the creator of Vuetify, and other **Core Team** members are now offering Support Services for your Vuetify based application. Utilize our in-demand services for guidance and advice on advanced implementations, best practices, and procedures.
+<alert type="warning">
 
-<acuity-calendar />
+  To ensure that the team has adequate resources for Vuetify 3, we are currently not accepting any new support requests. If you have any questions, please reach out in ourd [Discord community](https://community.vuetifyjs.com/).
+
+  More information on the status of version 3 on our [roadmap](/introduction/roadmap/).
+
+</alert>
 
 <backmatter />

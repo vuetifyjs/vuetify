@@ -37,11 +37,9 @@
       ],
       defaults: {
         large: false,
-        customDivider: false,
         divider: undefined,
       },
       options: {
-        booleans: ['customDivider'],
         selects: {
           divider: ['/', '\\', '.', ';', '>', '-'],
         },

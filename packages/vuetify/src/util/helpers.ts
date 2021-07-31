@@ -219,7 +219,7 @@ export function groupItems<T extends any = any> (
   const key = groupBy[0]
   const groups: ItemGroup<T>[] = []
   let current
-  for (var i = 0; i < items.length; i++) {
+  for (let i = 0; i < items.length; i++) {
     const item = items[i]
     const val = getObjectValueByPath(item, key, null)
     if (current !== val) {
@@ -274,6 +274,11 @@ export function sortItems<T extends any, K extends keyof T> (
       // Check if both cannot be evaluated
       if (sortA === null && sortB === null) {
         continue
+      }
+
+      // Dates should be compared numerically
+      if (sortA instanceof Date && sortB instanceof Date) {
+        return sortA.getTime() - sortB.getTime()
       }
 
       [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())

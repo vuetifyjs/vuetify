@@ -64,11 +64,13 @@
       &:not(:last-child)
         border-left-width: 0
 
+  .v-btn.v-btn.v-size--default
+    min-width: $btn-toggle-btn-width
+    min-height: 0
+
   &:not(.v-btn-toggle--dense)
     .v-btn.v-btn.v-size--default
       height: $btn-toggle-btn-height
-      min-height: 0
-      min-width: $btn-toggle-btn-width
 
 .v-btn-toggle--borderless
   > .v-btn.v-btn

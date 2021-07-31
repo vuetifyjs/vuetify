@@ -13,7 +13,7 @@
         outlined
         tile
       >
-        Flex item
+        Flex item {{ n }}
       </v-card>
     </v-card>
   </div>

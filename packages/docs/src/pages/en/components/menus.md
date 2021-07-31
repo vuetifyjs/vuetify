@@ -25,6 +25,8 @@ Remember to put the element that activates the menu in the `activator` slot.
 
 - [v-menu](/api/v-menu)
 
+<api-section page="components/menus" />
+
 ## Examples
 
 ### Props

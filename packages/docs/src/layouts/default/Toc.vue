@@ -26,6 +26,7 @@
         :key="text"
         v-slot="{ href, isActive }"
         :to="to"
+        custom
       >
         <li
           :class="{

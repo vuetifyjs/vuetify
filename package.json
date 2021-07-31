@@ -74,6 +74,11 @@
     "webpack": "^5.37.0",
     "webpack-cli": "^4.7.0",
     "webpack-dev-server": "4.0.0-beta.3",
-    "webpack-merge": "^5.7.3"
+    "webpack-merge": "^5.7.3",
+    "vue-router": "^3.5.1",
+    "vuex": "^3.0.1"
+  },
+  "resolutions": {
+    "workbox-webpack-plugin": "^5.1.3"
   }
 }

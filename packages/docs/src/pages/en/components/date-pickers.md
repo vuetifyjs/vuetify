@@ -25,6 +25,8 @@ Date pickers come in two orientation variations, portrait **(default)** and land
 
 - [v-date-picker](/api/v-date-picker)
 
+<api-section page="components/date-pickers" />
+
 ## Caveats
 
 <alert type="warning">

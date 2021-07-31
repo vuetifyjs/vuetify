@@ -158,6 +158,8 @@ Unlike the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/
 
 - [v-mutate](/api/v-mutate)
 
+<api-section page="directives/mutate" />
+
 ## Examples
 
 <example file="v-mutate/usage" />

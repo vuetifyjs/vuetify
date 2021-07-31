@@ -458,7 +458,7 @@ export default baseMixins.extend<options>().extend({
           'aria-readonly': String(this.isReadonly),
           'aria-activedescendant': getObjectValueByPath(this.$refs.menu, 'activeTile.id'),
           autocomplete: getObjectValueByPath(input.data!, 'attrs.autocomplete', 'off'),
-          placeholder: (!this.isDirty && (this.isFocused || !this.hasLabel)) ? this.placeholder : undefined,
+          placeholder: (!this.isDirty && (this.persistentPlaceholder || this.isFocused || !this.hasLabel)) ? this.placeholder : undefined,
         },
         on: { keypress: this.onKeyPress },
       })
@@ -661,12 +661,6 @@ export default baseMixins.extend<options>().extend({
       const keyCode = e.keyCode
       const menu = this.$refs.menu
 
-      // If enter, space, open menu
-      if ([
-        keyCodes.enter,
-        keyCodes.space,
-      ].includes(keyCode)) this.activateMenu()
-
       this.$emit('keydown', e)
 
       if (!menu) return
@@ -679,6 +673,12 @@ export default baseMixins.extend<options>().extend({
           this.$emit('update:list-index', menu.listIndex)
         })
       }
+
+      // If enter, space, open menu
+      if ([
+        keyCodes.enter,
+        keyCodes.space,
+      ].includes(keyCode)) this.activateMenu()
 
       // If menu is not active, up/down/home/end can do
       // one of 2 things. If multiple, opens the
@@ -712,6 +712,7 @@ export default baseMixins.extend<options>().extend({
       if (!menu || !this.isDirty) return
 
       // When menu opens, set index of first active item
+      this.$refs.menu.getTiles()
       for (let i = 0; i < menu.tiles.length; i++) {
         if (menu.tiles[i].getAttribute('aria-selected') === 'true') {
           this.setMenuIndex(i)
@@ -841,11 +842,6 @@ export default baseMixins.extend<options>().extend({
           this.$refs.menu &&
             (this.$refs.menu as { [key: string]: any }).updateDimensions()
         })
-
-        // We only need to reset list index for multiple
-        // to keep highlight when an item is toggled
-        // on and off
-        if (!this.multiple) return
 
         const listIndex = this.getMenuIndex()
 
