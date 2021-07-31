@@ -1,23 +1,23 @@
 @import './_variables'
 @import '../../styles/styles.sass'
 
-+theme(v-file-input) using ($material)
-  .v-file-input__text
-    color: map-deep-get($material, 'text', 'primary')
+// +theme(v-file-input) using ($material)
+//   .v-file-input__text
+//     color: map-deep-get($material, 'text', 'primary')
 
-    &--placeholder
-      color: map-deep-get($material, 'text', 'secondary')
+//     &--placeholder
+//       color: map-deep-get($material, 'text', 'secondary')
 
-  &.v-input--is-disabled
-    .v-file-input__text
-      color: map-deep-get($material, 'text', 'disabled')
+//   &.v-input--is-disabled
+//     .v-file-input__text
+//       color: map-deep-get($material, 'text', 'disabled')
 
-      .v-file-input__text--placeholder
-        color: map-deep-get($material, 'text', 'disabled')
+//       .v-file-input__text--placeholder
+//         color: map-deep-get($material, 'text', 'disabled')
 
 // Block
 .v-file-input
-  input[type="file"]
+  input
     left: 0
     opacity: 0
     pointer-events: none
@@ -26,35 +26,28 @@
     width: 0
 
 // Element
-.v-file-input .v-file-input__text
-  align-items: center
-  align-self: stretch
-  display: flex
-  flex-wrap: wrap
-  width: 100%
-
-  &.v-file-input__text--chips
-    flex-wrap: wrap
-
-  .v-chip
-    margin: $file-input-chip-margin
-
-.v-file-input .v-text-field__slot
-  min-height: $file-input-slot-min-height
-
 .v-file-input
-  &.v-input--dense
-    .v-text-field__slot
-      min-height: $file-input-slot-dense-min-height
+  .v-input__control, .v-input__field
+    overflow: hidden
 
-.v-file-input.v-text-field--filled:not(.v-text-field--single-line)
-  .v-file-input__text
+  .v-input__input
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
+
+    &.v-file-input--chips
+      flex-wrap: wrap
+
+    .v-chip
+      margin-inline-end: $file-input-chip-margin
+
+.v-file-input.v-input--variant-filled
+  .v-input__input
     padding-top: $file-input-filled-padding-top
 
-.v-file-input.v-text-field--outlined
-  .v-text-field__slot
+.v-file-input.v-input--variant-outlined
+  .v-input__input
     padding: $file-input-outlined-padding
 
-  &.v-input--dense
-    .v-text-field__slot
-      padding: $file-input-outlined-dense-padding
+.v-file-input.v-input--disabled
+  pointer-events: none

@@ -357,13 +357,12 @@ export function chunk (str: string, size = 1) {
   return chunked
 }
 
-export function humanReadableFileSize (bytes: number, binary = false): string {
-  const base = binary ? 1024 : 1000
+export function humanReadableFileSize (bytes: number, base: 1000 | 1024 = 1000): string {
   if (bytes < base) {
     return `${bytes} B`
   }
 
-  const prefix = binary ? ['Ki', 'Mi', 'Gi'] : ['k', 'M', 'G']
+  const prefix = base === 1024 ? ['Ki', 'Mi', 'Gi'] : ['k', 'M', 'G']
   let unit = -1
   while (Math.abs(bytes) >= base && unit < prefix.length - 1) {
     bytes /= base
@@ -467,4 +466,22 @@ export function findChildren (vnode?: VNodeChild): ComponentInternalInstance[] {
   }
 
   return []
+}
+
+export function pick<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, paths: U[]): [Pick<T, U>, Omit<T, U>] {
+  const found = Object.create(null)
+  const rest = Object.create(null)
+
+  for (const key in obj) {
+    if (paths.includes(key as U)) {
+      found[key] = obj[key]
+    } else {
+      rest[key] = obj[key]
+    }
+  }
+
+  return [found, rest]
 }

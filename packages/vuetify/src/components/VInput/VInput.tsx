@@ -9,17 +9,43 @@ import VInputLabel from './VInputLabel'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, toRef, watch, watchEffect } from 'vue'
-import { convertToUnit, defineComponent, getUid, nullifyTransforms, standardEasing, useRender } from '@/util'
+import { computed, ref, toRef, watch } from 'vue'
+import { convertToUnit, defineComponent, getUid, nullifyTransforms, propsFactory, standardEasing } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
 type Variant = typeof allowedVariants[number]
+
+export const makeVInputProps = propsFactory({
+  disabled: Boolean,
+  appendIcon: String,
+  appendOuterIcon: String,
+  bgColor: String,
+  color: String,
+  hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
+  hideSpinButtons: Boolean,
+  hint: String,
+  id: String,
+  label: String,
+  loading: Boolean,
+  persistentHint: Boolean,
+  prependIcon: String,
+  prependOuterIcon: String,
+  reverse: Boolean,
+  singleLine: Boolean,
+  variant: {
+    type: String as PropType<Variant>,
+    default: 'filled',
+    validator: (v: any) => allowedVariants.includes(v),
+  },
+
+  ...makeThemeProps(),
+  ...makeDensityProps(),
+}, 'v-input')
 
 export default defineComponent({
   name: 'VInput',
@@ -28,65 +54,35 @@ export default defineComponent({
 
   props: {
     active: Boolean,
-    appendIcon: String,
-    appendOuterIcon: String,
-    bgColor: String,
-    color: String,
-    hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
-    hideSpinButtons: Boolean,
-    hint: String,
-    id: String,
-    label: String,
-    loading: Boolean,
-    modelValue: null as any as PropType<any>,
-    persistentHint: Boolean,
-    prependIcon: String,
-    prependOuterIcon: String,
-    reverse: Boolean,
-    singleLine: Boolean,
-    variant: {
-      type: String as PropType<Variant>,
-      default: 'filled',
-      validator: (v: any) => allowedVariants.includes(v),
-    },
+    focused: Boolean,
+    dirty: Boolean,
 
-    ...makeThemeProps(),
-    ...makeDensityProps(),
+    ...makeVInputProps(),
   },
 
   emits: {
-    'update:modelValue': (value: boolean) => true,
-    'update:active': (value: boolean) => true,
     'click:prepend-outer': (e: Event) => e,
     'click:prepend': (e: Event) => e,
     'click:append': (e: Event) => e,
     'click:append-outer': (e: Event) => e,
+    focus: (e: Event) => e,
   },
 
   setup (props, { attrs, emit, slots }) {
     const { themeClasses } = useTheme(props)
     const { densityClasses } = useDensity(props, 'v-input')
-    const value = useProxiedModel(props, 'modelValue')
-    const isActive = useProxiedModel(props, 'active')
     const uid = getUid()
 
     const labelRef = ref<InstanceType<typeof VInputLabel>>()
     const floatingLabelRef = ref<InstanceType<typeof VInputLabel>>()
-    const controlRef = ref<HTMLElement>()
-    const fieldRef = ref<HTMLElement>()
-    const inputRef = ref<HTMLInputElement>()
-    const isDirty = computed(() => (value.value != null && value.value !== ''))
-    const isFocused = ref(false)
     const id = computed(() => props.id || `input-${uid}`)
-
-    watchEffect(() => isActive.value = isFocused.value || isDirty.value)
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
-      return isFocused.value ? props.color : undefined
+      return props.focused ? props.color : undefined
     }))
 
-    watch(isActive, val => {
+    watch(() => props.active, val => {
       if (!props.singleLine) {
         const el: HTMLElement = labelRef.value!.$el
         const targetEl: HTMLElement = floatingLabelRef.value!.$el
@@ -121,20 +117,15 @@ export default defineComponent({
       }
     }, { flush: 'post' })
 
-    function onMousedown (e: MouseEvent) {
+    function onClick (e: MouseEvent) {
       if (e.target !== document.activeElement) {
         e.preventDefault()
       }
-      focus()
-    }
-    function focus () {
-      inputRef.value?.focus()
-    }
-    function blur () {
-      inputRef.value?.blur()
+
+      emit('focus', e)
     }
 
-    useRender(() => {
+    return () => {
       const isOutlined = props.variant === 'outlined'
       const hasPrepend = (slots.prepend || props.prependIcon)
       const hasPrependOuter = (slots.prependOuter || props.prependOuterIcon)
@@ -151,12 +142,14 @@ export default defineComponent({
       return (
         <div
           class={[
+            attrs.class,
             'v-input',
             {
               'v-input--prepended': hasPrepend,
               'v-input--appended': hasAppend,
-              'v-input--dirty': isActive.value,
-              'v-input--focused': isFocused.value,
+              'v-input--dirty': props.active,
+              'v-input--disabled': props.disabled,
+              'v-input--focused': props.focused,
               'v-input--reverse': props.reverse,
               'v-input--has-background': !!props.bgColor,
               'v-input--single-line': props.singleLine,
@@ -169,7 +162,6 @@ export default defineComponent({
           style={[
             textColorStyles.value,
           ]}
-          { ...attrs }
         >
           { hasPrependOuter && (
             <div
@@ -184,13 +176,12 @@ export default defineComponent({
           ) }
 
           <div
-            ref={ controlRef }
             class={[
               'v-input__control',
               backgroundColorClasses.value,
             ]}
             style={ backgroundColorStyles.value }
-            onMousedown={ onMousedown }
+            onClick={ onClick }
           >
             <div class="v-input__overlay" />
 
@@ -206,7 +197,7 @@ export default defineComponent({
               </div>
             ) }
 
-            <div class="v-input__field" ref={ fieldRef }>
+            <div class="v-input__field">
               { ['contained', 'filled'].includes(props.variant) && !props.singleLine && (
                 <VInputLabel ref={ floatingLabelRef } floating>
                   { label }
@@ -219,25 +210,12 @@ export default defineComponent({
 
               { slots.default?.({
                 uid,
-                isActive: isActive.value,
+                active: props.active,
+                dirty: props.dirty,
+                focused: props.focused,
                 props: {
                   id: id.value,
-                  value: value.value,
-                  ref: inputRef,
-                  onFocus: () => (isFocused.value = true),
-                  onBlur: () => (isFocused.value = false),
-                  onInput: (e: Event) => {
-                    const el = e.target as HTMLInputElement
-
-                    value.value = el.value
-                  },
-                  onChange: (e: Event) => {
-                    const el = e.target as HTMLInputElement
-
-                    if (value.value === el.value) return
-
-                    value.value = el.value
-                  },
+                  class: 'v-input__input',
                 },
               }) }
             </div>
@@ -298,15 +276,6 @@ export default defineComponent({
           ) }
         </div>
       )
-    })
-
-    return {
-      blur,
-      focus,
-      value,
-      isActive,
-      isDirty,
-      isFocused,
     }
   },
 })

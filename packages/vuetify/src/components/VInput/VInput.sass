@@ -16,7 +16,7 @@
   --v-input-padding-before: #{$input-control-padding}
   --v-input-padding-after: #{$input-control-padding}
 
-  input
+  .v-input__input
     opacity: $input-input-opacity
     width: 100%
     padding-inline-start: var(--v-input-padding-before)
@@ -87,7 +87,7 @@
   height: 100%
   position: relative
 
-  input
+  .v-input__input
     height: 100%
     letter-spacing: $input-letter-spacing
 
@@ -329,6 +329,7 @@
   line-height: $input-details-line-height
   min-height: $input-details-min-height
   padding: $input-details-padding
+  justify-content: space-between
 
   .v-input--variant-plain &,
   .v-input--variant-underlined &
@@ -358,7 +359,7 @@
 /* endregion */
 /* region MODIFIERS */
 .v-input--reverse
-  input
+  .v-input__input
     @include ltr()
       text-align: right
 
