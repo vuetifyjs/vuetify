@@ -58,7 +58,7 @@ export default defineComponent({
     'update:modelValue': (value: number) => true,
   },
 
-  setup (props, ctx) {
+  setup (props, { attrs, emit, slots }) {
     const { isRtl } = useRtl()
     const { themeClasses } = useTheme(props)
     const { textColorClasses, textColorStyles } = useTextColor(props, 'color')
@@ -78,7 +78,7 @@ export default defineComponent({
       const { left, right, width } = intersectionRef.value.getBoundingClientRect()
       const value = isReversed.value ? (width - e.clientX) + (right - width) : e.clientX - left
 
-      ctx.emit('update:modelValue', value / width * 100)
+      emit('update:modelValue', value / width * 100)
     }
 
     return () => (
@@ -165,9 +165,9 @@ export default defineComponent({
             </div>
           ) }
         </Transition>
-        { ctx.slots.default && (
+        { slots.default && (
           <div class="v-progress-linear__content">
-            { ctx.slots.default({ modelValue: normalizedValue.value, bufferValue: normalizedBuffer.value }) }
+            { slots.default({ value: normalizedValue.value, buffer: normalizedBuffer.value }) }
           </div>
         ) }
       </props.tag>
