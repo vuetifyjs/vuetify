@@ -28,6 +28,7 @@
   "devDependencies": {
     "@babel/cli": "^7.13.16",
     "@babel/core": "^7.14.2",
+    "@babel/helper-regex": "7.10.5",
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-typescript": "^7.13.0",
     "@mdi/js": "^5.2.45",
