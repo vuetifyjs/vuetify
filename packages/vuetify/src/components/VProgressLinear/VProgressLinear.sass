@@ -109,25 +109,6 @@
     background-size: $progress-linear-stripe-background-size
     background-repeat: repeat
 
-.v-progress-linear--query
-  .v-progress-linear__indeterminate
-    animation-duration: 2s
-    animation-iteration-count: infinite
-
-    .long
-      animation-name: query-ltr
-
-    .short
-      animation-name: query-short-ltr
-
-  &.v-progress-linear--reverse
-    .v-progress-linear__indeterminate
-      .long
-        animation-name: query-rtl
-
-      .short
-        animation-name: query-short-rtl
-
 .v-progress-linear--active
   .v-progress-linear__indeterminate
     .long, .short
@@ -178,50 +159,6 @@
   100%
     left: -8%
     right: 107%
-
-@keyframes query-ltr
-  0%
-    right: -90%
-    left: 100%
-  60%
-    right: -90%
-    left: 100%
-  100%
-    right: 100%
-    left: -35%
-
-@keyframes query-rtl
-  0%
-    right: 100%
-    left: -90%
-  60%
-    right: 100%
-    left: -90%
-  100%
-    right: -35%
-    left: 100%
-
-@keyframes query-short-ltr
-  0%
-    right: -200%
-    left: 100%
-  60%
-    right: 107%
-    left: -8%
-  100%
-    right: 107%
-    left: -8%
-
-@keyframes query-short-rtl
-  0%
-    right: 100%
-    left: -200%
-  60%
-    right: -8%
-    left: 107%
-  100%
-    right: -8%
-    left: 107%
 
 @keyframes stream
   to

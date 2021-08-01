@@ -42,7 +42,6 @@ export default defineComponent({
     },
     clickable: Boolean,
     indeterminate: Boolean,
-    query: Boolean,
     reverse: Boolean,
     stream: Boolean,
     striped: Boolean,
@@ -88,7 +87,6 @@ export default defineComponent({
         class={[
           'v-progress-linear',
           {
-            'v-progress-linear--query': props.query,
             'v-progress-linear--reverse': isReversed.value,
             'v-progress-linear--striped': props.striped,
             'v-progress-linear--active': props.active && isIntersecting.value,
