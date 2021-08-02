@@ -7,6 +7,7 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useRtl } from '@/composables/rtl'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, Transition } from 'vue'
@@ -59,7 +60,8 @@ export default defineComponent({
     'update:modelValue': (value: number) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { slots }) {
+    const progress = useProxiedModel(props, 'modelValue')
     const { isRtl } = useRtl()
     const { themeClasses } = useTheme(props)
     const { textColorClasses, textColorStyles } = useTextColor(props, 'color')
@@ -70,7 +72,7 @@ export default defineComponent({
 
     const height = computed(() => parseInt(props.height, 10))
     const normalizedBuffer = computed(() => clamp(parseFloat(props.bufferValue), 0, 100))
-    const normalizedValue = computed(() => clamp(parseFloat(props.modelValue), 0, 100))
+    const normalizedValue = computed(() => clamp(parseFloat(progress.value), 0, 100))
     const isReversed = computed(() => isRtl.value !== props.reverse)
     const transition = computed(() => props.indeterminate ? 'fade-transition' : 'slide-x-transition')
 
@@ -79,7 +81,7 @@ export default defineComponent({
       const { left, right, width } = intersectionRef.value.getBoundingClientRect()
       const value = isReversed.value ? (width - e.clientX) + (right - width) : e.clientX - left
 
-      emit('update:modelValue', value / width * 100)
+      progress.value = value / width * 100
     }
 
     return () => (
