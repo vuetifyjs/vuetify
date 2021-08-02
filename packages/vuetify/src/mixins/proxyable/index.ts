@@ -3,6 +3,7 @@ import Vue, { VueConstructor } from 'vue'
 export type Proxyable<T extends string = 'value'> = VueConstructor<Vue & {
   internalLazyValue: unknown
   internalValue: unknown
+  focusedValue: unknown
 } & Record<T, any>>
 
 export function factory<T extends string = 'value'> (prop?: T, event?: string): Proxyable<T>
@@ -27,6 +28,7 @@ export function factory (
     data () {
       return {
         internalLazyValue: this[prop] as unknown,
+        focusedValue: null,
       }
     },
 

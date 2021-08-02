@@ -44,6 +44,14 @@
   flex: 1 1 auto
   overflow: hidden
 
+@supports (overflow: clip)
+  .v-slide-group__wrapper
+    contain: content
+    display: flex
+    flex: 1 1 auto
+    overflow: clip
+    width: 100%
+
 // Modifiers
 .v-slide-group__next,
 .v-slide-group__prev

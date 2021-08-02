@@ -127,6 +127,8 @@ export const BaseItemGroup = mixins(
       const index = this.items.push(item) - 1
 
       item.$on('change', () => this.onClick(item))
+      item.$on('focus', () => this.focusedValue = this.items.indexOf(item))
+      item.$on('blur', () => this.focusedValue = null)
 
       // If no value provided and mandatory,
       // assign first registered item

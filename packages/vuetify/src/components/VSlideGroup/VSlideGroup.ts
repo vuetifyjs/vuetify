@@ -6,7 +6,7 @@ import VIcon from '../VIcon'
 import { VFadeTransition } from '../transitions'
 
 // Extensions
-import { BaseItemGroup } from '../VItemGroup/VItemGroup'
+import { BaseItemGroup, GroupableInstance } from '../VItemGroup/VItemGroup'
 
 // Mixins
 import Mobile from '../../mixins/mobile'
@@ -156,9 +156,15 @@ export const BaseSlideGroup = mixins<options &
     hasPrev (): boolean {
       return this.hasAffixes && this.scrollOffset !== 0
     },
+    focusedItem (): GroupableInstance | undefined {
+      if (this.focusedValue === null) return undefined
+
+      return this.items[this.focusedValue as number]
+    },
   },
 
   watch: {
+    focusedValue: 'setWidths',
     internalValue: 'setWidths',
     // When overflow changes, the arrows alter
     // the widths of the content and wrapper
@@ -358,9 +364,13 @@ export const BaseSlideGroup = mixins<options &
         }
       }
 
-      if (!this.selectedItem) {
+      if (!this.selectedItem && !this.focusedItem) {
         return
       }
+
+      const slideReferenceItem = this.focusedItem
+        ? (this.focusedItem.$el as HTMLElement || this.selectedItem!.$el as HTMLElement)
+        : this.selectedItem!.$el as HTMLElement
 
       if (
         this.selectedIndex === 0 ||
@@ -369,13 +379,13 @@ export const BaseSlideGroup = mixins<options &
         this.scrollOffset = 0
       } else if (this.centerActive) {
         this.scrollOffset = this.calculateCenteredOffset(
-          this.selectedItem.$el as HTMLElement,
+          slideReferenceItem,
           this.widths,
           this.$vuetify.rtl
         )
       } else if (this.isOverflowing) {
         this.scrollOffset = this.calculateUpdatedOffset(
-          this.selectedItem.$el as HTMLElement,
+          slideReferenceItem,
           this.widths,
           this.$vuetify.rtl,
           this.scrollOffset

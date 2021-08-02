@@ -59,6 +59,21 @@ export const BaseItem = Vue.extend({
       class: { [this.activeClass]: this.isActive },
     })
 
+    const focusHandler = element.data.on?.focus as Function
+    const blurHandler = element.data.on?.blur as Function
+
+    element.data.on = {
+      ...element.data.on,
+      focus: focusHandler ? () => {
+        focusHandler()
+        this.$emit('focus')
+      } : () => this.$emit('focus'),
+      blur: blurHandler ? () => {
+        blurHandler()
+        this.$emit('blur')
+      } : () => this.$emit('blur'),
+    }
+
     return element
   },
 })
