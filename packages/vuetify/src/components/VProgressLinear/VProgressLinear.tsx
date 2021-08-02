@@ -30,7 +30,7 @@ export default defineComponent({
     },
     bufferValue: {
       type: [Number, String],
-      default: 100,
+      default: 0,
     },
     color: {
       type: String,
@@ -49,6 +49,7 @@ export default defineComponent({
       type: [Number, String],
       default: 0,
     },
+    roundedBar: Boolean,
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
@@ -90,6 +91,7 @@ export default defineComponent({
             'v-progress-linear--reverse': isReversed.value,
             'v-progress-linear--striped': props.striped,
             'v-progress-linear--active': props.active && isIntersecting.value,
+            'v-progress-linear--rounded-bar': props.roundedBar,
           },
           roundedClasses.value,
           themeClasses.value,
@@ -111,6 +113,7 @@ export default defineComponent({
             ]}
             style={{
               ...textColorStyles.value,
+              opacity: parseFloat(props.bgOpacity),
               width: convertToUnit(100 - normalizedBuffer.value, '%'),
               borderTop: `${convertToUnit(height.value)} dotted`,
               top: `calc(50% - ${convertToUnit(height.value / 2)}px)`,
@@ -129,8 +132,7 @@ export default defineComponent({
           style={{
             ...backgroundColorStyles.value,
             opacity: parseFloat(props.bgOpacity),
-            [isReversed.value ? 'right' : 'left']: convertToUnit(props.indeterminate ? 0 : normalizedValue.value, '%'),
-            width: convertToUnit(props.indeterminate ? 100 : Math.max(0, normalizedBuffer.value - normalizedValue.value), '%'),
+            width: convertToUnit(props.stream ? normalizedBuffer.value : 100, '%'),
           }}
         />
         <Transition name={ transition.value }>

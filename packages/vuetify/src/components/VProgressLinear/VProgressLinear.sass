@@ -117,6 +117,14 @@
   .v-progress-linear__stream
     animation-play-state: running
 
+.v-progress-linear--rounded-bar
+  .v-progress-linear__indeterminate, .v-progress-linear__determinate
+    border-radius: inherit
+
+  .v-progress-linear__stream + .v-progress-linear__background
+    border-radius: inherit
+
+// Keyframes
 @keyframes indeterminate-ltr
   0%
     left: -90%
