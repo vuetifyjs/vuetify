@@ -58,7 +58,7 @@ export default defineComponent({
     'update:modelValue': (value: number) => true,
   },
 
-  setup (props, { attrs, emit, slots }) {
+  setup (props, { emit, slots }) {
     const { isRtl } = useRtl()
     const { themeClasses } = useTheme(props)
     const { textColorClasses, textColorStyles } = useTextColor(props, 'color')
@@ -83,7 +83,7 @@ export default defineComponent({
 
     return () => (
       <props.tag
-        ref={intersectionRef}
+        ref={ intersectionRef }
         class={[
           'v-progress-linear',
           {
@@ -146,11 +146,7 @@ export default defineComponent({
               }}
             />
           ) : (
-            <div
-              class={[
-                'v-progress-linear__indeterminate',
-              ]}
-            >
+            <div class="v-progress-linear__indeterminate">
               { ['long', 'short'].map(bar => (
                 <div
                   key={ bar }
