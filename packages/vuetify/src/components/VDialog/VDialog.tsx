@@ -11,7 +11,7 @@ import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { mergeProps, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { defineComponent, IN_BROWSER } from '@/util'
 
 export default defineComponent({
@@ -87,27 +87,7 @@ export default defineComponent({
       }, { immediate: true })
     }
 
-    const activatorElement = ref()
-    const activator = ({ props, ...data }: any) => {
-      return slots.activator?.({
-        ...data,
-        props: mergeProps(props, {
-          'aria-haspopup': 'dialog',
-          onClick: (e: MouseEvent) => {
-            activatorElement.value = e.currentTarget
-          },
-        }),
-      })
-    }
-
     return () => {
-      const transition = mergeProps(
-        { target: activatorElement.value },
-        typeof props.transition === 'string'
-          ? { name: props.transition }
-          : props.transition as any
-      ) as any
-
       return (
         <VOverlay
           v-model={ isActive.value }
@@ -118,14 +98,18 @@ export default defineComponent({
             },
           ]}
           style={ dimensionStyles.value }
-          transition={ transition }
+          transition={ props.transition }
           ref={ overlay }
           aria-role="dialog"
           aria-modal="true"
+          activatorProps={{
+            'aria-haspopup': 'dialog',
+            'aria-expanded': String(isActive.value),
+          }}
           { ...attrs }
           v-slots={{
             default: slots.default,
-            activator,
+            activator: slots.activator,
           }}
         />
       )
