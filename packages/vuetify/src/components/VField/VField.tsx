@@ -76,10 +76,10 @@ export const VField = defineComponent({
   },
 
   emits: {
-    'click:prepend-inner': (e: MouseEvent) => true,
-    'click:append-inner': (e: MouseEvent) => true,
+    'click:prepend-inner': (e: MouseEvent) => true as any,
+    'click:append-inner': (e: MouseEvent) => true as any,
     'click:control': (props: DefaultInputSlot) => true as any,
-    'update:active': (active: boolean) => true,
+    'update:active': (active: boolean) => true as any,
   },
 
   setup (props, { attrs, emit, slots }) {
