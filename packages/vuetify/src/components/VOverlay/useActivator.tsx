@@ -62,7 +62,6 @@ function _useActivator (props: ActivatorProps, { activatorElement, onActivatorCl
   })
 
   function bindActivatorProps (el = getActivator(), _props = props.activatorProps) {
-    console.log(el)
     if (!el) return
 
     el.addEventListener('click', onActivatorClick)
@@ -88,9 +87,6 @@ function _useActivator (props: ActivatorProps, { activatorElement, onActivatorCl
 
   const vm = getCurrentInstance()
   function getActivator (selector = props.activator): HTMLElement | undefined {
-    // If we've already fetched the activator, re-use
-    if (activatorElement.value) return activatorElement.value
-
     let activator
     if (selector) {
       if (selector === 'parent') {
