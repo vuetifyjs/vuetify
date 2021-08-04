@@ -51,11 +51,11 @@ function _useActivator (props: ActivatorProps, { activatorElement, onActivatorCl
     if (val) {
       nextTick(() => bindActivatorProps())
     }
-  }, { flush: 'post', immediate: true })
+  }, { immediate: true })
 
   watch(() => props.activatorProps, () => {
     bindActivatorProps()
-  }, { flush: 'post' })
+  })
 
   onScopeDispose(() => {
     unbindActivatorProps()
