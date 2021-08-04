@@ -251,6 +251,12 @@ export function wrapInArray<T> (v: T | T[] | null | undefined): T[] {
       ? v : [v]
 }
 
+export function wrapInPromise<T> (v: any): Promise<T> {
+  if (v instanceof Promise) return v
+  if (typeof v === 'function') return new Promise(v)
+  return Promise.resolve(v)
+}
+
 type DataTableCompareFunction<T = any> = (a: T, b: T) => number
 export function sortItems<T extends any, K extends keyof T> (
   items: T[],

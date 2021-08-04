@@ -1,3 +1,4 @@
+import { wrapInPromise } from '@/util'
 import { describe, expect, it } from '@jest/globals'
 
 import {
@@ -436,6 +437,17 @@ describe('helpers', () => {
 
     it('should not recursively merge arrays', () => {
       expect(mergeDeep({ a: ['foo'] }, { a: ['bar'] })).toEqual({ a: ['bar'] })
+    })
+  })
+
+  describe('wrapInPromise', () => {
+    it.each([
+      ['foo'],
+      [() => 'bar'],
+      [Promise.resolve('fizz')],
+      [new Promise(resolve => resolve('fizzbuzz'))],
+    ])('should wrap value %s in a Promise', (value: any) => {
+      expect(wrapInPromise(value) instanceof Promise).toBe(true)
     })
   })
 })
