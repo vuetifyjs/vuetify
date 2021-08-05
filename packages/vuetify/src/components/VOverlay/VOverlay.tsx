@@ -3,6 +3,7 @@ import './VOverlay.sass'
 
 // Composables
 import { makeActivatorProps, useActivator } from './useActivator'
+import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackButton } from '@/composables/router'
@@ -19,7 +20,6 @@ import {
   convertToUnit,
   defineComponent,
   getScrollParent,
-  getScrollParents,
   standardEasing,
   useRender,
 } from '@/util'
@@ -36,12 +36,8 @@ import {
 } from 'vue'
 
 // Types
+import type { Prop, PropType, Ref } from 'vue'
 import type { BackgroundColorData } from '@/composables/color'
-import type {
-  Prop,
-  PropType,
-  Ref,
-} from 'vue'
 
 function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
   const isBooted = ref(eager.value)
@@ -56,15 +52,9 @@ function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
 }
 
 const positionStrategies = [
-  'global', // specific viewport position, usually centered
+  'static', // specific viewport position, usually centered
   'connected', // connected to a certain element
   'flexible', // connected to an element with the ability to overflow or shift if it doesn't fit in the screen
-] as const
-
-const scrollStrategies = [
-  'close',
-  'block',
-  'reposition',
 ] as const
 
 interface ScrimProps {
@@ -90,71 +80,6 @@ function Scrim (props: ScrimProps) {
   )
 }
 
-interface ScrollStrategy {
-  enable (): void
-  disable (): void
-}
-
-class CloseScrollStrategy implements ScrollStrategy {
-  private content: Ref<HTMLElement | undefined>
-  private scrollElements: EventTarget[] = []
-  private isActive: Ref<boolean>
-
-  constructor ({ content, isActive }: { content: Ref<HTMLElement | undefined>, isActive: Ref<boolean> }) {
-    this.content = content
-    this.isActive = isActive
-  }
-
-  enable () {
-    this.scrollElements = [document, ...getScrollParents(this.content.value)]
-
-    this.scrollElements.forEach(el => {
-      el.addEventListener('scroll', this.onScroll.bind(this), { passive: true })
-    })
-  }
-
-  disable () {
-    this.scrollElements.forEach(el => {
-      el.removeEventListener('scroll', this.onScroll.bind(this))
-    })
-  }
-
-  private onScroll () {
-    this.isActive.value = false
-  }
-}
-
-class BlockScrollStrategy implements ScrollStrategy {
-  private initialOverflow: string[] = []
-  private scrollElements: HTMLElement[] = []
-  private content: Ref<HTMLElement | undefined>
-
-  constructor ({ content }: { content: Ref<HTMLElement | undefined> }) {
-    this.content = content
-  }
-
-  enable () {
-    this.scrollElements = getScrollParents(this.content.value)
-    const scrollbarWidth = window.innerWidth - document.documentElement.offsetWidth
-
-    document.documentElement.style.setProperty('--v-scrollbar-offset', convertToUnit(scrollbarWidth))
-
-    this.scrollElements.forEach((el, i) => {
-      this.initialOverflow[i] = el.style.overflowY
-      el.style.overflowY = 'hidden'
-      el.style.setProperty('--v-scrollbar-offset', convertToUnit(scrollbarWidth))
-    })
-  }
-
-  disable () {
-    this.scrollElements.forEach((el, i) => {
-      el.style.overflowY = this.initialOverflow[i]
-      el.style.removeProperty('--v-scrollbar-offset')
-    })
-    document.documentElement.style.removeProperty('--v-scrollbar-offset')
-  }
-}
-
 export default defineComponent({
   name: 'VOverlay',
 
@@ -175,20 +100,16 @@ export default defineComponent({
     persistent: Boolean,
     positionStrategy: {
       type: String as PropType<typeof positionStrategies[number]>,
-      default: 'global',
+      default: 'static',
       validator: (val: any) => positionStrategies.includes(val),
     },
     scrim: {
       type: [String, Boolean],
       default: true,
     },
-    scrollStrategy: {
-      type: String as PropType<typeof scrollStrategies[number]>,
-      default: 'block',
-      validator: (val: any) => scrollStrategies.includes(val),
-    },
 
     ...makeActivatorProps(),
+    ...makeScrollStrategyProps(),
     ...makeThemeProps(),
     ...makeTransitionProps(),
   },
@@ -207,7 +128,24 @@ export default defineComponent({
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
-    const { activatorElement, onActivatorClick } = useActivator(props, isActive)
+    const { activatorEl, onActivatorClick } = useActivator(props, isActive)
+
+    const contentEl = ref<HTMLElement>()
+    useScrollStrategies(props, {
+      contentEl,
+      activatorEl,
+      isActive,
+    })
+
+    watch(isActive, val => {
+      nextTick(() => {
+        if (val) {
+          contentEl.value?.focus()
+        } else {
+          activatorEl.value?.focus()
+        }
+      })
+    })
 
     function onClickOutside (e: MouseEvent) {
       emit('click:outside', e)
@@ -235,17 +173,6 @@ export default defineComponent({
       else animateClick()
     })
 
-    const content = ref<HTMLElement>()
-    watch(isActive, val => {
-      nextTick(() => {
-        if (val) {
-          content.value?.focus()
-        } else {
-          activatorElement.value?.focus()
-        }
-      })
-    })
-
     const root = ref()
     const top = ref<number>()
     watch(() => isActive.value && props.absolute && teleportTarget.value == null, val => {
@@ -261,7 +188,7 @@ export default defineComponent({
     function animateClick () {
       if (props.noClickAnimation) return
 
-      content.value?.animate([
+      contentEl.value?.animate([
         { transformOrigin: 'center' },
         { transform: 'scale(1.03)' },
         { transformOrigin: 'center' },
@@ -273,20 +200,6 @@ export default defineComponent({
 
     function onAfterLeave () {
       if (!props.eager) isBooted.value = false
-    }
-
-    const scrollStrategy =
-      props.scrollStrategy === 'close' ? new CloseScrollStrategy({ content, isActive })
-      : props.scrollStrategy === 'block' ? new BlockScrollStrategy({ content })
-      : null
-
-    // TODO: reactive
-    if (scrollStrategy) {
-      watch(isActive, val => {
-        nextTick(() => {
-          val ? scrollStrategy.enable() : scrollStrategy.disable()
-        })
-      })
     }
 
     useRender(() => (
@@ -327,10 +240,10 @@ export default defineComponent({
                 onAfterLeave={ onAfterLeave }
                 persisted
                 transition={ props.transition }
-                target={ activatorElement.value }
+                target={ activatorEl.value }
               >
                 <div
-                  ref={ content }
+                  ref={ contentEl }
                   v-show={ isActive.value }
                   v-click-outside={{ handler: onClickOutside, closeConditional }}
                   class="v-overlay__content"
@@ -348,7 +261,7 @@ export default defineComponent({
 
     return {
       animateClick,
-      content,
+      contentEl,
     }
   },
 })

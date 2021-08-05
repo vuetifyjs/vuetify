@@ -34,10 +34,10 @@ export function useActivator (
   props: ActivatorProps,
   isActive: Ref<boolean>
 ) {
-  const activatorElement = ref<HTMLElement>()
+  const activatorEl = ref<HTMLElement>()
   function onActivatorClick (e: MouseEvent) {
     e.stopPropagation()
-    activatorElement.value = (e.currentTarget || e.target) as HTMLElement
+    activatorEl.value = (e.currentTarget || e.target) as HTMLElement
     isActive.value = !isActive.value
   }
 
@@ -46,17 +46,17 @@ export function useActivator (
     if (val) {
       scope = effectScope()
       scope.run(() => {
-        _useActivator(props, { activatorElement, onActivatorClick })
+        _useActivator(props, { activatorEl, onActivatorClick })
       })
     } else if (scope) {
       scope.stop()
     }
   }, { flush: 'post', immediate: true })
 
-  return { activatorElement, onActivatorClick }
+  return { activatorEl, onActivatorClick }
 }
 
-function _useActivator (props: ActivatorProps, { activatorElement, onActivatorClick }: ReturnType<typeof useActivator>) {
+function _useActivator (props: ActivatorProps, { activatorEl, onActivatorClick }: ReturnType<typeof useActivator>) {
   watch(() => props.activator, (val, oldVal) => {
     if (oldVal && val !== oldVal) {
       const activator = getActivator(oldVal)
@@ -118,8 +118,8 @@ function _useActivator (props: ActivatorProps, { activatorElement, onActivatorCl
     }
 
     // The activator should only be a valid element (Ignore comments and text nodes)
-    activatorElement.value = activator?.nodeType === Node.ELEMENT_NODE ? activator : null
+    activatorEl.value = activator?.nodeType === Node.ELEMENT_NODE ? activator : null
 
-    return activatorElement.value
+    return activatorEl.value
   }
 }
