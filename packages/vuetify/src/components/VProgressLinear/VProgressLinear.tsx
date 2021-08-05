@@ -1,17 +1,18 @@
+// Styles
 import './VProgressLinear.sass'
 
 // Composables
-import { makeTagProps } from '@/composables/tag'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeTagProps } from '@/composables/tag'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
-import { makeThemeProps, useTheme } from '@/composables/theme'
-import { useRtl } from '@/composables/rtl'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useRtl } from '@/composables/rtl'
 
 // Utilities
-import { computed, Transition } from 'vue'
 import { clamp, convertToUnit, defineComponent } from '@/util'
+import { computed, Transition } from 'vue'
 
 export default defineComponent({
   name: 'VProgressLinear',
@@ -25,32 +26,27 @@ export default defineComponent({
       type: String,
       default: null,
     },
-    bgOpacity: {
-      type: [Number, String],
-      default: 0.3,
-    },
+    bgOpacity: [Number, String],
     bufferValue: {
       type: [Number, String],
       default: 0,
     },
-    color: {
-      type: String,
-      default: 'primary',
-    },
+    clickable: Boolean,
+    color: String,
     height: {
       type: [Number, String],
       default: 4,
     },
-    clickable: Boolean,
     indeterminate: Boolean,
-    reverse: Boolean,
-    stream: Boolean,
-    striped: Boolean,
     modelValue: {
       type: [Number, String],
       default: 0,
     },
+    reverse: Boolean,
+    stream: Boolean,
+    striped: Boolean,
     roundedBar: Boolean,
+
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
@@ -75,9 +71,15 @@ export default defineComponent({
     const normalizedValue = computed(() => clamp(parseFloat(progress.value), 0, 100))
     const isReversed = computed(() => isRtl.value !== props.reverse)
     const transition = computed(() => props.indeterminate ? 'fade-transition' : 'slide-x-transition')
+    const opacity = computed(() => {
+      return props.bgOpacity == null
+        ? props.bgOpacity
+        : parseFloat(props.bgOpacity)
+    })
 
     function handleClick (e: MouseEvent) {
       if (!intersectionRef.value) return
+
       const { left, right, width } = intersectionRef.value.getBoundingClientRect()
       const value = isReversed.value ? (width - e.clientX) + (right - width) : e.clientX - left
 
@@ -90,10 +92,10 @@ export default defineComponent({
         class={[
           'v-progress-linear',
           {
-            'v-progress-linear--reverse': isReversed.value,
-            'v-progress-linear--striped': props.striped,
             'v-progress-linear--active': props.active && isIntersecting.value,
+            'v-progress-linear--reverse': isReversed.value,
             'v-progress-linear--rounded-bar': props.roundedBar,
+            'v-progress-linear--striped': props.striped,
           },
           roundedClasses.value,
           themeClasses.value,
@@ -115,28 +117,32 @@ export default defineComponent({
             ]}
             style={{
               ...textColorStyles.value,
-              opacity: parseFloat(props.bgOpacity),
-              width: convertToUnit(100 - normalizedBuffer.value, '%'),
-              borderTop: `${convertToUnit(height.value)} dotted`,
-              top: `calc(50% - ${convertToUnit(height.value / 2)}px)`,
               [isReversed.value ? 'left' : 'right']: convertToUnit(-height.value * 2),
+              borderTop: `${convertToUnit(height.value)} dotted`,
+              opacity: opacity.value,
+              top: `calc(50% - ${convertToUnit(height.value / 2)}px)`,
+              width: convertToUnit(100 - normalizedBuffer.value, '%'),
               // TODO: Fix typing
               // @ts-expect-error
               '--v-progress-linear-stream-to': convertToUnit(height.value * 2 * (isReversed.value ? 1 : -1)),
             }}
           />
         ) }
+
         <div
           class={[
             'v-progress-linear__background',
             backgroundColorClasses.value,
           ]}
-          style={{
-            ...backgroundColorStyles.value,
-            opacity: parseFloat(props.bgOpacity),
-            width: convertToUnit(props.stream ? normalizedBuffer.value : 100, '%'),
-          }}
+          style={[
+            backgroundColorStyles.value,
+            {
+              opacity: opacity.value,
+              width: convertToUnit(props.stream ? normalizedBuffer.value : 100, '%'),
+            },
+          ]}
         />
+
         <Transition name={ transition.value }>
           { !props.indeterminate ? (
             <div
@@ -144,10 +150,10 @@ export default defineComponent({
                 'v-progress-linear__determinate',
                 barColorClasses.value,
               ]}
-              style={{
-                ...barColorStyles.value,
-                width: convertToUnit(normalizedValue.value, '%'),
-              }}
+              style={[
+                barColorStyles.value,
+                { width: convertToUnit(normalizedValue.value, '%') },
+              ]}
             />
           ) : (
             <div class="v-progress-linear__indeterminate">
@@ -165,6 +171,7 @@ export default defineComponent({
             </div>
           ) }
         </Transition>
+
         { slots.default && (
           <div class="v-progress-linear__content">
             { slots.default({ value: normalizedValue.value, buffer: normalizedBuffer.value }) }

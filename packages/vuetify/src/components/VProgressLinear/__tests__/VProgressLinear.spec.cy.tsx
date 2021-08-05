@@ -123,7 +123,7 @@ describe('VProgressLinear', () => {
       <CenteredGrid width="100px">
         <VProgressLinear modelValue={25} height={20}>
           {{
-            default: props => <div>{ props.modelValue}%</div>,
+            default: (props: any) => <div>{ props.modelValue}%</div>,
           }}
         </VProgressLinear>
       </CenteredGrid>
