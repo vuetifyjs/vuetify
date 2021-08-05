@@ -7,12 +7,11 @@ import type { MaybeRef } from '@/util/helpers'
 import type { PropType } from 'vue'
 
 export type ValidationRule = string | ((value: any) => string | boolean)
-export type ValidationRules = ValidationRule[]
 export type ValidationResult = string | boolean | Promise<string | boolean>
 
 export interface ValidationProps {
   errorCount: string | number
-  rules: ValidationRules
+  rules: ValidationRule[]
 }
 
 export const makeValidationProps = propsFactory({
@@ -21,7 +20,7 @@ export const makeValidationProps = propsFactory({
     default: 1,
   },
   rules: {
-    type: Array as PropType<ValidationRules>,
+    type: Array as PropType<ValidationRule[]>,
     default: () => ([]),
   },
 })
@@ -37,7 +36,7 @@ export function useValidation (props: ValidationProps, value: MaybeRef<any>) {
   watch(isValid, () => isPristine.value = false)
 
   async function validate () {
-    await reset()
+    reset()
 
     isValidating.value = true
     for (const rule of props.rules) {
@@ -62,7 +61,7 @@ export function useValidation (props: ValidationProps, value: MaybeRef<any>) {
     isValid.value = errorMessages.value.length === 0
   }
 
-  async function reset () {
+  function reset () {
     errorCount.value = 0
     errorMessages.value = []
     isValid.value = null
