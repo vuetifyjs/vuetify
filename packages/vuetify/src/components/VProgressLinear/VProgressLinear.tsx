@@ -22,10 +22,7 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
-    bgColor: {
-      type: String,
-      default: null,
-    },
+    bgColor: String,
     bgOpacity: [Number, String],
     bufferValue: {
       type: [Number, String],
@@ -38,6 +35,14 @@ export default defineComponent({
       default: 4,
     },
     indeterminate: Boolean,
+    min: {
+      type: [Number, String],
+      default: 0,
+    },
+    max: {
+      type: [Number, String],
+      default: 100,
+    },
     modelValue: {
       type: [Number, String],
       default: 0,
@@ -66,9 +71,11 @@ export default defineComponent({
     const { roundedClasses } = useRounded(props, 'v-progress-linear')
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
 
+    const min = computed(() => parseInt(props.min, 10))
+    const max = computed(() => parseInt(props.max, 10))
     const height = computed(() => parseInt(props.height, 10))
-    const normalizedBuffer = computed(() => clamp(parseFloat(props.bufferValue), 0, 100))
-    const normalizedValue = computed(() => clamp(parseFloat(progress.value), 0, 100))
+    const normalizedBuffer = computed(() => clamp(parseFloat(props.bufferValue), min.value, max.value))
+    const normalizedValue = computed(() => clamp(parseFloat(progress.value), min.value, max.value))
     const isReversed = computed(() => isRtl.value !== props.reverse)
     const transition = computed(() => props.indeterminate ? 'fade-transition' : 'slide-x-transition')
     const opacity = computed(() => {
@@ -83,7 +90,7 @@ export default defineComponent({
       const { left, right, width } = intersectionRef.value.getBoundingClientRect()
       const value = isReversed.value ? (width - e.clientX) + (right - width) : e.clientX - left
 
-      progress.value = value / width * 100
+      progress.value = clamp(Math.round(value / width * 100), min.value, max.value)
     }
 
     return () => (
@@ -104,8 +111,8 @@ export default defineComponent({
           height: props.active ? convertToUnit(height.value) : 0,
         }}
         role="progressbar"
-        aria-valuemin="0"
-        aria-valuemax="100"
+        aria-valuemin={ min.value }
+        aria-valuemax={ max.value }
         aria-valuenow={ props.indeterminate ? undefined : normalizedValue.value }
         onClick={ props.clickable && handleClick }
       >
