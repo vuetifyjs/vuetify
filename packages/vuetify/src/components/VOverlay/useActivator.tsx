@@ -36,6 +36,7 @@ export function useActivator (
 ) {
   const activatorElement = ref<HTMLElement>()
   function onActivatorClick (e: MouseEvent) {
+    e.stopPropagation()
     activatorElement.value = (e.currentTarget || e.target) as HTMLElement
     isActive.value = !isActive.value
   }
