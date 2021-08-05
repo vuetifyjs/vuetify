@@ -57,9 +57,15 @@ Displays reversed progress. The component also has RTL support, such that a prog
 
 #### Rounded
 
-The **rounded** prop can be used to apply a border radius to the `v-progress-linear` component.
+The **rounded** prop is used to apply a border radius to the `v-progress-linear` component.
 
 <example file="v-progress-linear/prop-rounded" />
+
+<alert type="info">
+
+  Use the **rounded-bar** property to add a border-radius to the inner edges of value bar. By default, the value bar's border-radius is equal to the default _border-radius_ of your application unless a different value is provided by the **rounded** prop or SASS variable.
+
+</alert>
 
 #### Stream
 
