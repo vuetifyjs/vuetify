@@ -11,7 +11,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRtl } from '@/composables/rtl'
 
 // Utilities
-import { clamp, convertToUnit, defineComponent } from '@/util'
+import { convertToUnit, defineComponent } from '@/util'
 import { computed, Transition } from 'vue'
 
 export default defineComponent({
@@ -35,10 +35,6 @@ export default defineComponent({
       default: 4,
     },
     indeterminate: Boolean,
-    min: {
-      type: [Number, String],
-      default: 0,
-    },
     max: {
       type: [Number, String],
       default: 100,
@@ -71,11 +67,10 @@ export default defineComponent({
     const { roundedClasses } = useRounded(props, 'v-progress-linear')
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
 
-    const min = computed(() => parseInt(props.min, 10))
     const max = computed(() => parseInt(props.max, 10))
     const height = computed(() => parseInt(props.height, 10))
-    const normalizedBuffer = computed(() => clamp(parseFloat(props.bufferValue), min.value, max.value))
-    const normalizedValue = computed(() => clamp(parseFloat(progress.value), min.value, max.value))
+    const normalizedBuffer = computed(() => Math.round(parseFloat(props.bufferValue) / max.value * 100))
+    const normalizedValue = computed(() => Math.round(parseFloat(progress.value) / max.value * 100))
     const isReversed = computed(() => isRtl.value !== props.reverse)
     const transition = computed(() => props.indeterminate ? 'fade-transition' : 'slide-x-transition')
     const opacity = computed(() => {
@@ -90,7 +85,7 @@ export default defineComponent({
       const { left, right, width } = intersectionRef.value.getBoundingClientRect()
       const value = isReversed.value ? (width - e.clientX) + (right - width) : e.clientX - left
 
-      progress.value = clamp(Math.round(value / width * 100), min.value, max.value)
+      progress.value = Math.round(value / width * max.value)
     }
 
     return () => (
@@ -112,8 +107,8 @@ export default defineComponent({
           height: props.active ? convertToUnit(height.value) : 0,
         }}
         role="progressbar"
-        aria-valuemin={ min.value }
-        aria-valuemax={ max.value }
+        aria-valuemin="0"
+        aria-valuemax={ props.max }
         aria-valuenow={ props.indeterminate ? undefined : normalizedValue.value }
         onClick={ props.clickable && handleClick }
       >
@@ -125,14 +120,14 @@ export default defineComponent({
             ]}
             style={{
               ...textColorStyles.value,
-              [isReversed.value ? 'left' : 'right']: convertToUnit(-height.value * 2),
-              borderTop: `${convertToUnit(height.value)} dotted`,
+              [isReversed.value ? 'left' : 'right']: convertToUnit(-height.value),
+              borderTop: `${convertToUnit(height.value / 2)} dotted`,
               opacity: opacity.value,
-              top: `calc(50% - ${convertToUnit(height.value / 2)}px)`,
+              top: `calc(50% - ${convertToUnit(height.value / 4)})`,
               width: convertToUnit(100 - normalizedBuffer.value, '%'),
               // TODO: Fix typing
               // @ts-expect-error
-              '--v-progress-linear-stream-to': convertToUnit(height.value * 2 * (isReversed.value ? 1 : -1)),
+              '--v-progress-linear-stream-to': convertToUnit(height.value * (isReversed.value ? 1 : -1)),
             }}
           />
         ) }
@@ -146,7 +141,7 @@ export default defineComponent({
             backgroundColorStyles.value,
             {
               opacity: opacity.value,
-              width: convertToUnit(props.stream ? normalizedBuffer.value : 100, '%'),
+              width: convertToUnit((!props.stream ? 100 : normalizedBuffer.value), '%'),
             },
           ]}
         />
