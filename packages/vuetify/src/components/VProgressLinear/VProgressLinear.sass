@@ -108,7 +108,12 @@
   position: fixed
 
 .v-progress-linear--rounded
-  +rounded($progress-linear-border-radius)
+  @include rounded($progress-linear-border-radius)
+
+  &.v-progress-linear--rounded-bar
+    .v-progress-linear__determinate,
+    .v-progress-linear__indeterminate
+      border-radius: inherit
 
 .v-progress-linear--striped
   .v-progress-linear__determinate
@@ -125,11 +130,19 @@
     animation-play-state: running
 
 .v-progress-linear--rounded-bar
-  .v-progress-linear__indeterminate, .v-progress-linear__determinate
-    border-radius: inherit
-
+  .v-progress-linear__determinate,
+  .v-progress-linear__indeterminate,
   .v-progress-linear__stream + .v-progress-linear__background
-    border-radius: inherit
+    @include rounded($progress-linear-border-radius)
+
+  .v-progress-linear__determinate
+    @include ltr()
+      border-top-left-radius: 0
+      border-bottom-left-radius: 0
+
+    @include rtl()
+      border-top-right-radius: 0
+      border-bottom-right-radius: 0
 
 // Keyframes
 @keyframes indeterminate-ltr

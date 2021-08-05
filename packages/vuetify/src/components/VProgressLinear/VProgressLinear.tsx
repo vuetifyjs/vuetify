@@ -101,6 +101,7 @@ export default defineComponent({
           {
             'v-progress-linear--active': props.active && isIntersecting.value,
             'v-progress-linear--reverse': isReversed.value,
+            'v-progress-linear--rounded': props.rounded,
             'v-progress-linear--rounded-bar': props.roundedBar,
             'v-progress-linear--striped': props.striped,
           },
