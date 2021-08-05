@@ -2,6 +2,7 @@
 import './VOverlay.sass'
 
 // Composables
+import { makeActivatorProps, useActivator } from './useActivator'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackButton } from '@/composables/router'
@@ -14,9 +15,17 @@ import { useTeleport } from '@/composables/teleport'
 import { ClickOutside } from '@/directives/click-outside'
 
 // Utilities
-import { convertToUnit, defineComponent, getScrollParent, getScrollParents, standardEasing, useRender } from '@/util'
+import {
+  convertToUnit,
+  defineComponent,
+  getScrollParent,
+  getScrollParents,
+  standardEasing,
+  useRender,
+} from '@/util'
 import {
   computed,
+  mergeProps,
   nextTick,
   ref,
   Teleport,
@@ -28,7 +37,11 @@ import {
 
 // Types
 import type { BackgroundColorData } from '@/composables/color'
-import type { Prop, PropType, Ref } from 'vue'
+import type {
+  Prop,
+  PropType,
+  Ref,
+} from 'vue'
 
 function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
   const isBooted = ref(eager.value)
@@ -174,6 +187,8 @@ export default defineComponent({
       default: 'block',
       validator: (val: any) => scrollStrategies.includes(val),
     },
+
+    ...makeActivatorProps(),
     ...makeThemeProps(),
     ...makeTransitionProps(),
   },
@@ -185,7 +200,6 @@ export default defineComponent({
 
   setup (props, { slots, attrs, emit }) {
     const isActive = useProxiedModel(props, 'modelValue')
-
     const { teleportTarget } = useTeleport(toRef(props, 'attach'))
     const { themeClasses } = useTheme(props)
     const { rtlClasses } = useRtl()
@@ -193,6 +207,7 @@ export default defineComponent({
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
+    const { activatorElement, onActivatorClick } = useActivator(props, isActive)
 
     function onClickOutside (e: MouseEvent) {
       emit('click:outside', e)
@@ -203,12 +218,6 @@ export default defineComponent({
 
     function closeConditional () {
       return isActive.value
-    }
-
-    const activatorElement = ref<HTMLElement>()
-    function onActivatorClick (e: MouseEvent) {
-      activatorElement.value = (e.currentTarget || e.target) as HTMLElement
-      isActive.value = !isActive.value
     }
 
     function onKeydown (e: KeyboardEvent) {
@@ -284,11 +293,11 @@ export default defineComponent({
       <>
         { slots.activator?.({
           isActive: isActive.value,
-          props: {
+          props: mergeProps({
             modelValue: isActive.value,
             'onUpdate:modelValue': (val: boolean) => isActive.value = val,
             onClick: onActivatorClick,
-          },
+          }, props.activatorProps),
         }) }
         <Teleport
           disabled={ !teleportTarget.value }
@@ -318,6 +327,7 @@ export default defineComponent({
                 onAfterLeave={ onAfterLeave }
                 persisted
                 transition={ props.transition }
+                target={ activatorElement.value }
               >
                 <div
                   ref={ content }

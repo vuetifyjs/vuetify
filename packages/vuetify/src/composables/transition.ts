@@ -3,11 +3,11 @@ import { h, mergeProps, Transition } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
-import type { FunctionalComponent, PropType, TransitionProps } from 'vue'
+import type { Component, FunctionalComponent, PropType, TransitionProps } from 'vue'
 
 export const makeTransitionProps = propsFactory({
   transition: {
-    type: [Boolean, String, Object] as PropType<string | false | TransitionProps>,
+    type: [Boolean, String, Object] as PropType<string | false | TransitionProps & { component?: Component }>,
     default: 'fade-transition',
     validator: val => val !== true,
   },
