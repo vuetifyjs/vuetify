@@ -8,7 +8,12 @@
 
     > .v-card,
     > .v-sheet
+      background: rgb(var(--v-theme-surface))
       border-radius: inherit
       overflow: hidden
 
-      @include elevation($menu-elevation)
+      &::before
+        border-radius: inherit
+        z-index: -1
+        @include absolute
+        @include elevation($menu-elevation)

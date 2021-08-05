@@ -69,7 +69,8 @@ export default defineComponent({
           ]}
           style={ dimensionStyles.value }
           transition={ props.transition }
-          positionStrategy="flexible"
+          absolute
+          positionStrategy="connected"
           scrollStrategy="reposition"
           scrim={ false }
           aria-role="dialog"

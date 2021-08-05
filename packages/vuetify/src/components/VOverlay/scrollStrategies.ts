@@ -9,6 +9,7 @@ export interface ScrollStrategyData {
   contentEl: Ref<HTMLElement | undefined>
   activatorEl: Ref<HTMLElement | undefined>
   isActive: Ref<boolean>
+  onScroll: Ref<((e: Event) => void) | undefined>
 }
 
 const scrollStrategies = [
@@ -50,7 +51,7 @@ export function useScrollStrategies (
           } else if (props.scrollStrategy === 'block') {
             blockScrollStrategy(data)
           } else if (props.scrollStrategy === 'reposition') {
-            // TODO
+            repositionScrollStrategy(data)
           }
         })
       })
@@ -64,7 +65,8 @@ function closeScrollStrategy (data: ScrollStrategyData) {
     el.addEventListener('scroll', onScroll, { passive: true })
   })
 
-  function onScroll () {
+  function onScroll (e: Event) {
+    data.onScroll.value?.(e)
     data.isActive.value = false
   }
 
@@ -94,5 +96,22 @@ function blockScrollStrategy (data: ScrollStrategyData) {
       el.style.removeProperty('--v-scrollbar-offset')
     })
     document.documentElement.style.removeProperty('--v-scrollbar-offset')
+  })
+}
+
+function repositionScrollStrategy (data: ScrollStrategyData) {
+  const scrollElements = [document, ...getScrollParents(data.contentEl.value)]
+  scrollElements.forEach(el => {
+    el.addEventListener('scroll', onScroll, { passive: true })
+  })
+
+  function onScroll (e: Event) {
+    data.onScroll.value?.(e)
+  }
+
+  onScopeDispose(() => {
+    scrollElements.forEach(el => {
+      el.removeEventListener('scroll', onScroll)
+    })
   })
 }

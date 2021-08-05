@@ -3,6 +3,7 @@ import './VOverlay.sass'
 
 // Composables
 import { makeActivatorProps, useActivator } from './useActivator'
+import { makePositionStrategyProps, usePositionStrategies } from './positionStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
@@ -51,12 +52,6 @@ function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
   return { isBooted }
 }
 
-const positionStrategies = [
-  'static', // specific viewport position, usually centered
-  'connected', // connected to a certain element
-  'flexible', // connected to an element with the ability to overflow or shift if it doesn't fit in the screen
-] as const
-
 interface ScrimProps {
   [key: string]: unknown
   modelValue: boolean
@@ -98,17 +93,13 @@ export default defineComponent({
     modelValue: Boolean,
     origin: [String, Object] as Prop<string | Element>,
     persistent: Boolean,
-    positionStrategy: {
-      type: String as PropType<typeof positionStrategies[number]>,
-      default: 'static',
-      validator: (val: any) => positionStrategies.includes(val),
-    },
     scrim: {
       type: [String, Boolean],
       default: true,
     },
 
     ...makeActivatorProps(),
+    ...makePositionStrategyProps(),
     ...makeScrollStrategyProps(),
     ...makeThemeProps(),
     ...makeTransitionProps(),
@@ -131,10 +122,16 @@ export default defineComponent({
     const { activatorEl, onActivatorClick } = useActivator(props, isActive)
 
     const contentEl = ref<HTMLElement>()
+    const { contentTransformStyles, onScroll } = usePositionStrategies(props, {
+      contentEl,
+      activatorEl,
+      isActive,
+    })
     useScrollStrategies(props, {
       contentEl,
       activatorEl,
       isActive,
+      onScroll,
     })
 
     watch(isActive, val => {
@@ -248,6 +245,7 @@ export default defineComponent({
                   v-show={ isActive.value }
                   v-click-outside={{ handler: onClickOutside, closeConditional }}
                   class="v-overlay__content"
+                  style={ contentTransformStyles.value }
                   tabindex={ -1 }
                   onKeydown={ onKeydown }
                 >

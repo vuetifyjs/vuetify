@@ -2,27 +2,26 @@
 
 // Block
 .v-overlay-container
-  bottom: 0
-  contain: strict
+  contain: layout
   left: 0
   pointer-events: none
-  position: fixed
-  right: 0
+  position: absolute
   top: 0
+  display: contents
 
 .v-overlay
   align-items: center
   border-radius: inherit
   display: flex
-  height: 100%
   justify-content: center
   left: 0
   pointer-events: none
   position: fixed
-  right: 0
   top: 0
   z-index: $overlay-z-index
   padding-inline-end: $overlay-padding-x
+  bottom: 0
+  right: 0
 
 // Element
 .v-overlay__content
@@ -33,13 +32,11 @@
   background: $overlay-scrim-background
   border-radius: inherit
   bottom: 0
-  height: 100%
   left: 0
   opacity: $overlay-opacity
-  position: absolute
+  position: fixed
   right: 0
   top: 0
-  width: 100%
 
 // Modifier
 .v-overlay--absolute
