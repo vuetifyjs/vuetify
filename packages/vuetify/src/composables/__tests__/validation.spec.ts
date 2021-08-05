@@ -43,13 +43,10 @@ describe('validation.ts', () => {
     errorCount: number | null,
     expected: number,
   ) => {
-    const model = ref('')
-    const props = {
+    const { errorMessages, validate } = useValidation({
       errorCount,
       rules: ['foo', 'bar', 'fizz', 'buzz'],
-    } as ValidationProps
-
-    const { errorMessages, validate } = useValidation(props, model)
+    }, ref(''))
 
     await validate()
 
