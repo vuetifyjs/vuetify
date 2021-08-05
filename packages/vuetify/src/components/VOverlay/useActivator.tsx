@@ -1,3 +1,5 @@
+// Utilities
+import { propsFactory } from '@/util'
 import {
   effectScope,
   getCurrentInstance,
@@ -6,9 +8,12 @@ import {
   ref,
   watch,
 } from 'vue'
+
+// Types
 import type {
   ComponentPublicInstance,
   EffectScope,
+  PropType,
   Ref,
 } from 'vue'
 
@@ -16,6 +21,14 @@ interface ActivatorProps {
   activator?: 'parent' | string | Element | ComponentPublicInstance
   activatorProps: Dictionary<any>
 }
+
+export const makeActivatorProps = propsFactory({
+  activator: [String, Object] as PropType<ActivatorProps['activator']>,
+  activatorProps: {
+    type: Object as PropType<ActivatorProps['activatorProps']>,
+    default: () => ({}),
+  },
+})
 
 export function useActivator (
   props: ActivatorProps,

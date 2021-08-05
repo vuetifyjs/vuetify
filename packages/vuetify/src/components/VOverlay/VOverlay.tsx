@@ -2,7 +2,7 @@
 import './VOverlay.sass'
 
 // Composables
-import { useActivator } from './useActivator'
+import { makeActivatorProps, useActivator } from './useActivator'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackButton } from '@/composables/router'
@@ -38,7 +38,6 @@ import {
 // Types
 import type { BackgroundColorData } from '@/composables/color'
 import type {
-  ComponentPublicInstance,
   Prop,
   PropType,
   Ref,
@@ -165,11 +164,6 @@ export default defineComponent({
 
   props: {
     absolute: Boolean,
-    activator: [String, Object] as PropType<'parent' | string | Element | ComponentPublicInstance>,
-    activatorProps: {
-      type: Object as PropType<Dictionary<any>>,
-      default: () => ({}),
-    },
     attach: {
       type: [Boolean, String, Object] as PropType<boolean | string | Element>,
       default: 'body',
@@ -193,6 +187,8 @@ export default defineComponent({
       default: 'block',
       validator: (val: any) => scrollStrategies.includes(val),
     },
+
+    ...makeActivatorProps(),
     ...makeThemeProps(),
     ...makeTransitionProps(),
   },
