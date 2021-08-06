@@ -65,4 +65,38 @@ describe('validation.ts', () => {
 
     expect(`${1234} is not a valid value. Rule functions should return boolean true or a string.`).toHaveBeenTipped()
   })
+
+  it('should update isPristine when using the validate and reset methods', async () => {
+    const model = ref('')
+    const { isPristine, isValid, validate, reset } = useValidation({
+      rules: [(v: any) => v === 'foo' || 'bar'],
+    }, model)
+
+    expect(isPristine.value).toBe(true)
+    expect(isValid.value).toBeNull()
+
+    await validate()
+
+    expect(isPristine.value).toBe(false)
+    expect(isValid.value).toBe(false)
+
+    model.value = 'fizz'
+
+    await validate()
+
+    expect(isPristine.value).toBe(false)
+    expect(isValid.value).toBe(false)
+
+    model.value = 'foo'
+
+    await validate()
+
+    expect(isPristine.value).toBe(false)
+    expect(isValid.value).toBe(true)
+
+    reset()
+
+    expect(isPristine.value).toBe(true)
+    expect(isValid.value).toBeNull()
+  })
 })

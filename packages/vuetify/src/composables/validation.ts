@@ -1,6 +1,6 @@
 // Utilities
 import { consoleWarn, propsFactory, wrapInPromise } from '@/util'
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -27,14 +27,11 @@ export const makeValidationProps = propsFactory({
 export function useValidation (props: ValidationProps, value: Ref<any>) {
   const errorMessages = ref<string[]>([])
   const isPristine = ref(true)
-  const isValid = computed(() => errorMessages.value.length === 0)
+  const isValid = computed(() => isPristine.value ? null : errorMessages.value.length === 0)
   const isValidating = ref(false)
 
-  watch(isValid, () => isPristine.value = false)
-
   async function validate () {
-    reset()
-
+    errorMessages.value = []
     isValidating.value = true
     for (const rule of props.rules) {
       const handler = typeof rule === 'function' ? rule : () => rule
@@ -52,9 +49,11 @@ export function useValidation (props: ValidationProps, value: Ref<any>) {
       }
     }
     isValidating.value = false
+    isPristine.value = false
   }
 
   function reset () {
+    isPristine.value = true
     errorMessages.value = []
   }
 
