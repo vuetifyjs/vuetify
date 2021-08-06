@@ -2,8 +2,8 @@
 import { useValidation } from '../validation'
 
 // Utilites
-import { ref } from 'vue'
 import { describe, expect, it } from '@jest/globals'
+import { ref } from 'vue'
 
 // Types
 import type { ValidationProps, ValidationRule } from './../validation'

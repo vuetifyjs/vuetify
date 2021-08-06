@@ -1,6 +1,6 @@
 // Utilities
-import { consoleWarn, propsFactory, wrapInPromise } from '@/util'
 import { computed, ref } from 'vue'
+import { consoleWarn, propsFactory, wrapInPromise } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
