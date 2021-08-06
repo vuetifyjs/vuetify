@@ -5,8 +5,8 @@ import { computed, ref } from 'vue'
 // Types
 import type { PropType, Ref } from 'vue'
 
-export type ValidationRule = string | ((value: any) => true | string)
 export type ValidationResult = string | true | Promise<string | true>
+export type ValidationRule = string | ((value: any) => ValidationResult)
 
 export interface ValidationProps {
   maxErrors?: string | number
