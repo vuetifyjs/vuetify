@@ -1,21 +1,20 @@
 // Utilities
-import { propsFactory, wrapInPromise } from '@/util'
-import { ref, unref, watch } from 'vue'
+import { consoleWarn, propsFactory, wrapInPromise } from '@/util'
+import { computed, ref, watch } from 'vue'
 
 // Types
-import type { MaybeRef } from '@/util/helpers'
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
 
-export type ValidationRule = string | ((value: any) => string | boolean)
-export type ValidationResult = string | boolean | Promise<string | boolean>
+export type ValidationRule = string | ((value: any) => true | string)
+export type ValidationResult = string | true | Promise<string | true>
 
 export interface ValidationProps {
-  errorCount: string | number
+  maxErrors?: string | number
   rules: ValidationRule[]
 }
 
 export const makeValidationProps = propsFactory({
-  errorCount: {
+  maxErrors: {
     type: [Number, String],
     default: 1,
   },
@@ -25,13 +24,11 @@ export const makeValidationProps = propsFactory({
   },
 })
 
-export function useValidation (props: ValidationProps, value: MaybeRef<any>) {
+export function useValidation (props: ValidationProps, value: Ref<any>) {
   const errorMessages = ref<string[]>([])
   const isPristine = ref(true)
-  const isValid = ref<null | boolean>(null)
+  const isValid = computed(() => errorMessages.value.length === 0)
   const isValidating = ref(false)
-  const errorCount = ref(0)
-  const unwrefed = unref(value)
 
   watch(isValid, () => isPristine.value = false)
 
@@ -41,34 +38,28 @@ export function useValidation (props: ValidationProps, value: MaybeRef<any>) {
     isValidating.value = true
     for (const rule of props.rules) {
       const handler = typeof rule === 'function' ? rule : () => rule
-      const valid = await wrapInPromise<ValidationResult>(handler(unwrefed.value))
+      const valid = await wrapInPromise<ValidationResult>(handler(value.value))
 
       if (valid === true) continue
 
-      errorCount.value += 1
-
-      if (typeof valid === 'string') {
-        errorMessages.value.push(valid)
+      /* istanbul ignore if */
+      if (typeof valid !== 'string') {
+        consoleWarn(`${valid} is not a valid value. Rule functions should return boolean true or a string.`)
       }
 
-      if (errorCount.value >= (props.errorCount || 1)) {
+      if (errorMessages.value.push(valid) >= (props.maxErrors || 1)) {
         break
       }
     }
-    isValid.value = errorCount.value > 0
     isValidating.value = false
-
-    isValid.value = errorMessages.value.length === 0
   }
 
   function reset () {
-    errorCount.value = 0
     errorMessages.value = []
-    isValid.value = null
   }
 
   return {
-    errorCount,
+    errorCount: errorMessages.value.length,
     errorMessages,
     isPristine,
     isValid,
