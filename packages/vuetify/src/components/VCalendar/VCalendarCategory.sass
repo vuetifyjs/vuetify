@@ -30,6 +30,7 @@
   .v-calendar-daily__head
     flex-direction: row
     width: min-content
+    min-width: 100%
     position: sticky
     top: 0
     background: white
@@ -67,6 +68,10 @@
     background: white
     z-index: 1
 
+  .v-calendar-daily__interval
+    &:last-of-type::after
+      display: none
+
   .v-calendar-daily__body
     overflow: unset
     .v-calendar-daily__scroll-area
@@ -78,6 +83,7 @@
   .v-calendar-category__columns
     display: flex
     width: min-content
+    min-width: 100%
 
     .v-calendar-category__column,
     .v-calendar-category__column-header
