@@ -68,10 +68,10 @@ module.exports = merge(baseWebpackConfig, {
     ]
   },
   devServer: {
-    static: resolve('../dev'),
+    // static: resolve('../dev'),
     host: process.env.HOST || 'localhost',
     port: process.env.PORT || '8080',
-    firewall: false,
+    // firewall: false,
   },
   plugins: [
     new VueLoader.VueLoaderPlugin(),
