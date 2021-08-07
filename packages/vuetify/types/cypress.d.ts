@@ -1,4 +1,5 @@
 import type { mount as cyMount } from '@cypress/vue'
+import 'cypress-file-upload'
 
 declare global {
   namespace Cypress {
