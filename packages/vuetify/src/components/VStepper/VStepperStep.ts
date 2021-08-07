@@ -90,7 +90,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   methods: {
-    click (e: MouseEvent) {
+    click (e: MouseEvent | KeyboardEvent) {
       e.stopPropagation()
 
       this.$emit('click', e)
@@ -131,6 +131,11 @@ export default baseMixins.extend<options>().extend({
 
       return children
     },
+    keyboardClick (e: KeyboardEvent) {
+      if (e.keyCode === 32) {
+        this.click(e)
+      }
+    },
     toggle (step: number | string) {
       this.isActive = step.toString() === this.step.toString()
       this.isInactive = Number(step) < Number(this.step)
@@ -139,13 +144,19 @@ export default baseMixins.extend<options>().extend({
 
   render (h): VNode {
     return h('div', {
+      attrs: {
+        tabindex: this.editable ? 0 : -1,
+      },
       staticClass: 'v-stepper__step',
       class: this.classes,
       directives: [{
         name: 'ripple',
         value: this.editable,
       }],
-      on: { click: this.click },
+      on: {
+        click: this.click,
+        keydown: this.keyboardClick,
+      },
     }, [
       this.genStep(),
       this.genLabel(),

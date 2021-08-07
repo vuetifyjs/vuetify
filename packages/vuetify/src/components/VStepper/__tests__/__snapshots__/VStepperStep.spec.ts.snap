@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VStepperStep.ts should accept a custom color 1`] = `
-<div class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete">
+<div tabindex="-1"
+     class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete"
+>
   <span class="v-stepper__step__step pink">
     <i aria-hidden="true"
        class="v-icon notranslate mdi mdi-check theme--light"
@@ -14,7 +16,9 @@ exports[`VStepperStep.ts should accept a custom color 1`] = `
 `;
 
 exports[`VStepperStep.ts should accept a custom css color 1`] = `
-<div class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete">
+<div tabindex="-1"
+     class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete"
+>
   <span class="v-stepper__step__step"
         style="background-color: rgb(170, 187, 204); border-color: #aabbcc;"
   >
@@ -29,7 +33,9 @@ exports[`VStepperStep.ts should accept a custom css color 1`] = `
 `;
 
 exports[`VStepperStep.ts should render 1`] = `
-<div class="v-stepper__step v-stepper__step--inactive">
+<div tabindex="-1"
+     class="v-stepper__step v-stepper__step--inactive"
+>
   <span class="v-stepper__step__step">
     1
   </span>
@@ -39,7 +45,9 @@ exports[`VStepperStep.ts should render 1`] = `
 `;
 
 exports[`VStepperStep.ts should render complete step 1`] = `
-<div class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete">
+<div tabindex="-1"
+     class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete"
+>
   <span class="v-stepper__step__step primary">
     <i aria-hidden="true"
        class="v-icon notranslate mdi mdi-check theme--light"
@@ -52,7 +60,9 @@ exports[`VStepperStep.ts should render complete step 1`] = `
 `;
 
 exports[`VStepperStep.ts should render editable step 1`] = `
-<div class="v-stepper__step v-stepper__step--editable v-stepper__step--inactive v-stepper__step--complete">
+<div tabindex="0"
+     class="v-stepper__step v-stepper__step--editable v-stepper__step--inactive v-stepper__step--complete"
+>
   <span class="v-stepper__step__step primary">
     <i aria-hidden="true"
        class="v-icon notranslate material-icons theme--light"
@@ -66,7 +76,9 @@ exports[`VStepperStep.ts should render editable step 1`] = `
 `;
 
 exports[`VStepperStep.ts should render step with error 1`] = `
-<div class="v-stepper__step v-stepper__step--inactive v-stepper__step--error error--text">
+<div tabindex="-1"
+     class="v-stepper__step v-stepper__step--inactive v-stepper__step--error error--text"
+>
   <span class="v-stepper__step__step">
     <i aria-hidden="true"
        class="v-icon notranslate material-icons theme--light"
