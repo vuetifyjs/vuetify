@@ -182,23 +182,16 @@ export const useIcon = (props: Ref<string | undefined> | { icon?: IconValue }) =
       }
     }
 
-    let iconSet: IconSet | undefined
-    let iconName: string | undefined
+    const iconSetName = Object.keys(icons.sets).find(
+      setName => typeof icon === 'string' && icon.startsWith(`${setName}:`)
+    )
 
-    for (const iconSetName of Object.keys(icons.sets)) {
-      const iconSetPrefix = `${iconSetName}:`
-
-      if (icon.startsWith(iconSetPrefix)) {
-        iconSet = icons.sets[iconSetName]
-        iconName = icon.slice(iconSetPrefix.length)
-
-        break
-      }
-    }
+    const iconName = iconSetName ? icon.slice(iconSetName.length + 1) : icon
+    const iconSet = icons.sets[iconSetName ?? icons.defaultSet]
 
     return {
-      component: (iconSet ?? icons.sets[icons.defaultSet]).component,
-      icon: iconName ?? icon,
+      component: iconSet.component,
+      icon: iconName,
     }
   })
 
