@@ -182,18 +182,23 @@ export const useIcon = (props: Ref<string | undefined> | { icon?: IconValue }) =
       }
     }
 
-    const hasSet = icon.includes(':')
-    const setName = hasSet ? icon.split(':')[0] : icons.defaultSet
-    const iconName = hasSet ? icon.split(':')[1] : icon
-    const set = icons.sets[setName ?? icons.defaultSet]
+    let iconSet: IconSet | undefined
+    let iconName: string | undefined
 
-    if (!set) {
-      throw new Error(`Could not find icon set "${setName}"`)
+    for (const iconSetName of Object.keys(icons.sets)) {
+      const iconSetPrefix = `${iconSetName}:`
+
+      if (icon.startsWith(iconSetPrefix)) {
+        iconSet = icons.sets[iconSetName]
+        iconName = icon.slice(iconSetPrefix.length)
+
+        break
+      }
     }
 
     return {
-      component: set.component,
-      icon: iconName,
+      component: (iconSet ?? icons.sets[icons.defaultSet]).component,
+      icon: iconName ?? icon,
     }
   })
 
