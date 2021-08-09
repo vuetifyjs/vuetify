@@ -128,6 +128,7 @@ export default defineComponent({
                 disabled={ props.disabled }
               />
             ) : undefined,
+
             default: ({ props: slotProps }) => (
               <>
                 <input
@@ -148,6 +149,7 @@ export default defineComponent({
                   { ...inputProps }
                   { ...rest }
                 />
+
                 { isDirty.value && (
                   <div class={ slotProps.class }>
                     { slots.selection ? slots.selection({
@@ -167,6 +169,7 @@ export default defineComponent({
                 ) }
               </>
             ),
+
             append: props.clearable ? () => (
               <VBtn
                 icon={ props.appendIcon }
@@ -174,14 +177,17 @@ export default defineComponent({
                 size="small"
                 color={ props.color }
                 disabled={ props.disabled || !fileValue.value?.length }
-                onClick={ (e: Event) => {
-                  e.stopPropagation()
+                onClick={
+                  (e: Event) => {
+                    e.stopPropagation()
 
-                  fileValue.value = []
-                  inputRef.value.value = ''
-                } }
+                    fileValue.value = []
+                    inputRef.value.value = ''
+                  }
+                }
               />
             ) : undefined,
+
             details: props.counter ? () => (
               <>
                 <span />
