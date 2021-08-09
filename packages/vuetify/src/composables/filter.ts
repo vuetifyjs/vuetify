@@ -1,6 +1,6 @@
+import { propsFactory } from '@/util'
 // Utilities
 import { computed } from 'vue'
-import { consoleWarn, propsFactory } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -23,7 +23,7 @@ export const makeFilterProps = propsFactory({
 
 export function useFilter (
   props: FilterProps,
-  items: Ref<unknown[]>,
+  items: Ref<any[]>,
   query?: Ref<string | number>
 ) {
   const strQuery = computed(() => (
@@ -37,24 +37,60 @@ export function useFilter (
     const array: (typeof items.value) = []
 
     for (const item of items.value) {
-      if (props.filterFn) {
-        if (props.filterFn(item, strQuery.value)) {
-          array.push(item)
-        }
-      } else if (
-        typeof item === 'string' ||
-        typeof item === 'number'
-      ) {
-        if (defaultFilter(String(item), strQuery.value)) {
-          array.push(item)
-        }
-      } else {
-        consoleWarn(`The default filter function expects a string | number, received ${item}. Update the item value or use a custom filter.`)
+      if (props?.filterFn?.(item, strQuery.value)) {
+        array.push(item)
+
+        continue
       }
+
+      const text = String(item?.text ?? item ?? '')
+
+      if (
+        !text ||
+        !defaultFilter(text, strQuery.value)
+      ) continue
+
+      array.push(item)
     }
 
     return array
   })
 
   return { filtered }
+}
+
+// WIP
+export function transformItems (
+  items: Record<string, any>[],
+  map: Record<string, any>,
+) {
+  const transformed = []
+
+  for (const item of items) {
+    const newItem: Record<string, any> = {}
+    const itemKeys = Object.keys(item)
+
+    for (const itemKey of itemKeys) {
+      const value = item[itemKey]
+      const mapKey = map[itemKey]
+
+      if (!mapKey) {
+        newItem[itemKey] = value
+
+        continue
+      }
+
+      const type = typeof mapKey
+
+      if (type === 'function') {
+        newItem[mapKey(item)] = value
+      } else {
+        newItem[mapKey] = value
+      }
+    }
+
+    transformed.push(newItem)
+  }
+
+  return transformed
 }
