@@ -1,6 +1,6 @@
 // Utilities
 import { computed, effectScope, nextTick, onScopeDispose, ref, watch, watchEffect } from 'vue'
-import { nullifyTransforms, propsFactory } from '@/util'
+import { convertToUnit, nullifyTransforms, propsFactory } from '@/util'
 import { oppositeAnchor, parseAnchor, physicalAnchor } from './util/anchor'
 import { anchorToPoint, getOffset } from './util/point'
 
@@ -55,6 +55,7 @@ export function usePositionStrategies (
   let scope: EffectScope | undefined
   watchEffect(async () => {
     scope?.stop()
+    updatePosition.value = undefined
 
     if (!(data.isActive.value && props.positionStrategy)) return
 
@@ -69,7 +70,16 @@ export function usePositionStrategies (
     })
   })
 
-  onScopeDispose(() => scope?.stop())
+  window.addEventListener('resize', onResize, { passive: true })
+
+  onScopeDispose(() => {
+    window.removeEventListener('resize', onResize)
+    scope?.stop()
+  })
+
+  function onResize (e: Event) {
+    updatePosition.value?.(e)
+  }
 
   return {
     contentStyles,
@@ -88,6 +98,9 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
     : props.origin === 'auto' ? oppositeAnchor(anchor.value)
     : parseAnchor(props.origin)
   )
+  const doesOverlap = computed(() => {
+    return anchor.value.side === origin.value.side
+  })
 
   watch(
     () => [anchor.value, origin.value],
@@ -98,24 +111,34 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
   function updatePosition () {
     const targetBox = data.activatorEl.value!.getBoundingClientRect()
     const contentBox = nullifyTransforms(data.contentEl.value!)
+    const overlayBox = data.contentEl.value!.parentElement!.getBoundingClientRect()
 
-    // TODO
-    // const viewportMargin = 12
-    // const freeSpace = {
-    //   top: targetBox.top - viewportMargin,
-    //   bottom: window.innerHeight - targetBox.bottom - viewportMargin,
-    //   left: targetBox.left - viewportMargin,
-    //   right: window.innerWidth - targetBox.right - viewportMargin,
-    // }
+    const viewportMargin = 12
+    const freeSpace = {
+      top: targetBox.top - viewportMargin,
+      bottom: overlayBox.height - targetBox.bottom - viewportMargin,
+      left: targetBox.left - viewportMargin,
+      right: overlayBox.width - targetBox.right - viewportMargin,
+    }
 
     const targetPoint = anchorToPoint(anchor.value, targetBox)
     const contentPoint = anchorToPoint(origin.value, contentBox)
 
     const { x, y } = getOffset(targetPoint, contentPoint)
 
+    const canFill = doesOverlap.value || ['center', 'top', 'bottom'].includes(anchor.value.side)
+
+    const max = canFill ? overlayBox.width - viewportMargin * 2
+      : anchor.value.side === 'end' ? freeSpace.right
+      : anchor.value.side === 'start' ? freeSpace.left
+      : null
+    const min = Math.min(max!, targetBox.width)
+
     Object.assign(contentStyles.value, {
       transform: `translate(${Math.round(x)}px, ${Math.round(y)}px)`,
       transformOrigin: physicalAnchor(origin.value, data.activatorEl.value!),
+      minWidth: convertToUnit(min),
+      maxWidth: convertToUnit(max),
     })
   }
 
