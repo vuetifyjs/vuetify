@@ -1,5 +1,5 @@
 /** @see https://stackoverflow.com/a/57876601/2074736 */
-export function nullifyTransforms (el: HTMLElement) {
+export function nullifyTransforms (el: HTMLElement): DOMRect {
   const rect = el.getBoundingClientRect()
   const style = getComputedStyle(el)
   const tx = style.transform
@@ -30,7 +30,7 @@ export function nullifyTransforms (el: HTMLElement) {
 
     return {
       x, y, width: w, height: h, top: y, right: x + w, bottom: y + h, left: x,
-    }
+    } as DOMRect
   } else {
     return rect
   }

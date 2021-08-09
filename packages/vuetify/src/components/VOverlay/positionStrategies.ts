@@ -1,9 +1,12 @@
 // Utilities
-import { effectScope, nextTick, ref, watch } from 'vue'
+import { computed, effectScope, nextTick, onScopeDispose, ref, watch, watchEffect } from 'vue'
 import { nullifyTransforms, propsFactory } from '@/util'
+import { oppositeAnchor, parseAnchor, physicalAnchor } from './util/anchor'
+import { anchorToPoint, getOffset } from './util/point'
 
 // Types
 import type { EffectScope, PropType, Ref } from 'vue'
+import type { Anchor } from './util/anchor'
 
 export interface PositionStrategyData {
   contentEl: Ref<HTMLElement | undefined>
@@ -11,90 +14,110 @@ export interface PositionStrategyData {
   isActive: Ref<boolean>
 }
 
-const positionStrategies = [
-  'static', // specific viewport position, usually centered
-  'connected', // connected to a certain element
-  'flexible', // connected to an element with the ability to overflow or shift if it doesn't fit in the screen
-] as const
+const positionStrategies = {
+  static: staticPositionStrategy, // specific viewport position, usually centered
+  connected: connectedPositionStrategy, // connected to a certain element
+}
 
-interface StrategyProps {
-  positionStrategy: typeof positionStrategies[number] | (
-    (data: PositionStrategyData, transformStyles: Ref<any>) => undefined | { onScroll: (e: Event) => void }
+export interface StrategyProps {
+  positionStrategy: keyof typeof positionStrategies | (
+    (data: PositionStrategyData, props: StrategyProps, contentStyles: Ref<{}>) => undefined | { updatePosition: (e: Event) => void }
   )
+  anchor: Anchor
+  origin: Anchor | 'auto' | 'overlap'
+  offset?: string
 }
 
 export const makePositionStrategyProps = propsFactory({
   positionStrategy: {
-    type: String as PropType<StrategyProps['positionStrategy']>,
+    type: [String, Function] as PropType<StrategyProps['positionStrategy']>,
     default: 'static',
-    validator: (val: any) => positionStrategies.includes(val),
+    validator: (val: any) => typeof val === 'function' || val in positionStrategies,
   },
+  anchor: {
+    type: String as PropType<StrategyProps['anchor']>,
+    default: 'bottom',
+  },
+  origin: {
+    type: String as PropType<StrategyProps['origin']>,
+    default: 'auto',
+  },
+  offset: String,
 })
 
 export function usePositionStrategies (
   props: StrategyProps,
   data: PositionStrategyData
 ) {
-  const transformStyles = ref()
-  const onScroll = ref<(e: Event) => void>()
+  const contentStyles = ref({})
+  const updatePosition = ref<(e: Event) => void>()
 
   let scope: EffectScope | undefined
-  watch(() => data.isActive.value && props.positionStrategy, (val, oldVal) => {
-    if (!val || val !== oldVal) {
-      scope?.stop()
-      // transformStyles.value = undefined
-    }
+  watchEffect(async () => {
+    scope?.stop()
 
-    if (val) {
-      scope = effectScope()
-      nextTick(() => {
-        scope!.run(() => {
-          if (typeof props.positionStrategy === 'function') {
-            onScroll.value = props.positionStrategy(data, transformStyles)?.onScroll
-          } else if (props.positionStrategy === 'static') {
-            // TODO: positionX/positionY
-          } else if (props.positionStrategy === 'connected') {
-            onScroll.value = connectedPositionStrategy(data, transformStyles).onScroll
-          } else if (props.positionStrategy === 'flexible') {
-            onScroll.value = flexiblePositionStrategy(data, transformStyles).onScroll
-          }
-        })
-      })
-    }
+    if (!(data.isActive.value && props.positionStrategy)) return
+
+    scope = effectScope()
+    await nextTick()
+    scope.run(() => {
+      if (typeof props.positionStrategy === 'function') {
+        updatePosition.value = props.positionStrategy(data, props, contentStyles)?.updatePosition
+      } else {
+        updatePosition.value = positionStrategies[props.positionStrategy](data, props, contentStyles)?.updatePosition
+      }
+    })
   })
 
+  onScopeDispose(() => scope?.stop())
+
   return {
-    contentTransformStyles: transformStyles,
-    onScroll,
+    contentStyles,
+    updatePosition,
   }
 }
 
-function connectedPositionStrategy (data: PositionStrategyData, transformStyles: Ref<any>) {
+function staticPositionStrategy () {
+  // TODO
+}
+
+function connectedPositionStrategy (data: PositionStrategyData, props: StrategyProps, contentStyles: Ref<{}>) {
+  const anchor = computed(() => parseAnchor(props.anchor))
+  const origin = computed(() =>
+    props.origin === 'overlap' ? anchor.value
+    : props.origin === 'auto' ? oppositeAnchor(anchor.value)
+    : parseAnchor(props.origin)
+  )
+
+  watch(
+    () => [anchor.value, origin.value],
+    () => updatePosition(),
+    { immediate: true }
+  )
+
   function updatePosition () {
     const targetBox = data.activatorEl.value!.getBoundingClientRect()
     const contentBox = nullifyTransforms(data.contentEl.value!)
 
-    transformStyles.value = {
-      transform: `translate(
-        ${targetBox.left + targetBox.width / 2 - contentBox.width / 2 - contentBox.left}px,
-        ${targetBox.top + targetBox.height - contentBox.top}px
-      )`,
-    }
-  }
-
-  updatePosition()
-
-  function onScroll () {
-    // updatePosition()
-  }
-
-  return { onScroll }
-}
-
-function flexiblePositionStrategy (data: PositionStrategyData, transformStyles: Ref<any>) {
-  function onScroll () {
     // TODO
+    // const viewportMargin = 12
+    // const freeSpace = {
+    //   top: targetBox.top - viewportMargin,
+    //   bottom: window.innerHeight - targetBox.bottom - viewportMargin,
+    //   left: targetBox.left - viewportMargin,
+    //   right: window.innerWidth - targetBox.right - viewportMargin,
+    // }
+
+    const targetPoint = anchorToPoint(anchor.value, targetBox)
+    const contentPoint = anchorToPoint(origin.value, contentBox)
+
+    const { x, y } = getOffset(targetPoint, contentPoint)
+
+    Object.assign(contentStyles.value, {
+      transform: `translate(${Math.round(x)}px, ${Math.round(y)}px)`,
+      transformOrigin: physicalAnchor(origin.value, data.activatorEl.value!),
+    })
   }
 
-  return { onScroll }
+  return { updatePosition }
 }

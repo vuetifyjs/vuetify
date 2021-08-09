@@ -1,6 +1,6 @@
 import type { PropType } from 'vue'
 import { Transition } from 'vue'
-import { acceleratedEasing, deceleratedEasing, defineComponent } from '@/util'
+import { acceleratedEasing, deceleratedEasing, defineComponent, nullifyTransforms } from '@/util'
 
 export default defineComponent({
   name: 'VDialogTransition',
@@ -46,19 +46,11 @@ export default defineComponent({
 })
 
 function getDimensions (target: HTMLElement, el: HTMLElement) {
-  const initialDisplay = el.style.display
-  const initialTransform = el.style.transform
-
-  el.style.transition = 'none'
-  el.style.display = ''
-  el.style.transform = 'none'
-
   const targetBox = target.getBoundingClientRect()
-  const elBox = el.getBoundingClientRect()
-  const x = (targetBox.width / 2 + targetBox.left) - (elBox.width / 2 + elBox.left)
-  const y = (targetBox.height / 2 + targetBox.top) - (elBox.height / 2 + elBox.top)
-  el.style.display = initialDisplay
-  el.style.transform = initialTransform
+  const elBox = nullifyTransforms(el)
 
-  return { x, y }
+  return {
+    x: (targetBox.width / 2 + targetBox.left) - (elBox.width / 2 + elBox.left),
+    y: (targetBox.height / 2 + targetBox.top) - (elBox.height / 2 + elBox.top),
+  }
 }

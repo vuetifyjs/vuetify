@@ -10,23 +10,21 @@
   display: contents
 
 .v-overlay
-  align-items: center
   border-radius: inherit
   display: flex
-  justify-content: center
   left: 0
   pointer-events: none
   position: fixed
   top: 0
   z-index: $overlay-z-index
-  padding-inline-end: $overlay-padding-x
+  padding-inline-end: var(--v-scrollbar-offset)
   bottom: 0
   right: 0
 
 // Element
 .v-overlay__content
   outline: none
-  position: relative
+  position: absolute
 
 .v-overlay__scrim
   background: $overlay-scrim-background
@@ -44,7 +42,3 @@
 
 .v-overlay--active
   pointer-events: auto
-
-.v-overlay--positioned
-  align-items: flex-start
-  justify-content: flex-start

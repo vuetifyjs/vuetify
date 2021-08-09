@@ -23,7 +23,6 @@ export default defineComponent({
   },
 
   props: {
-    auto: Boolean,
     closeOnClick: {
       type: Boolean,
       default: true,
@@ -34,17 +33,11 @@ export default defineComponent({
     },
     disableKeys: Boolean,
     modelValue: Boolean,
-    offsetX: Boolean,
-    offsetY: Boolean,
     openOnClick: {
       type: Boolean,
       default: true,
     },
     openOnHover: Boolean,
-    origin: {
-      type: String,
-      default: 'center center',
-    },
 
     ...makeDimensionProps({ width: 'auto' }),
     ...makeTransitionProps({

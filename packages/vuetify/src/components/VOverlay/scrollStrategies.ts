@@ -1,6 +1,6 @@
 // Utilities
 import { convertToUnit, getScrollParents, propsFactory } from '@/util'
-import { effectScope, nextTick, onScopeDispose, watch } from 'vue'
+import { effectScope, nextTick, onScopeDispose, watchEffect } from 'vue'
 
 // Types
 import type { EffectScope, PropType, Ref } from 'vue'
@@ -9,24 +9,24 @@ export interface ScrollStrategyData {
   contentEl: Ref<HTMLElement | undefined>
   activatorEl: Ref<HTMLElement | undefined>
   isActive: Ref<boolean>
-  onScroll: Ref<((e: Event) => void) | undefined>
+  updatePosition: Ref<((e: Event) => void) | undefined>
 }
 
-const scrollStrategies = [
-  'close',
-  'block',
-  'reposition',
-] as const
+const scrollStrategies = {
+  close: closeScrollStrategy,
+  block: blockScrollStrategy,
+  reposition: repositionScrollStrategy,
+}
 
 interface StrategyProps {
-  scrollStrategy: typeof scrollStrategies[number] | ((data: ScrollStrategyData) => void)
+  scrollStrategy: keyof typeof scrollStrategies | ((data: ScrollStrategyData) => void)
 }
 
 export const makeScrollStrategyProps = propsFactory({
   scrollStrategy: {
     type: [String, Function] as PropType<StrategyProps['scrollStrategy']>,
     default: 'block',
-    validator: (val: any) => scrollStrategies.includes(val),
+    validator: (val: any) => typeof val === 'function' || val in scrollStrategies,
   },
 })
 
@@ -35,46 +35,29 @@ export function useScrollStrategies (
   data: ScrollStrategyData
 ) {
   let scope: EffectScope | undefined
-  watch(() => data.isActive.value && props.scrollStrategy, (val, oldVal) => {
-    if (!val || val !== oldVal) {
-      scope?.stop()
-    }
+  watchEffect(async () => {
+    scope?.stop()
 
-    if (val) {
-      scope = effectScope()
-      nextTick(() => {
-        scope!.run(() => {
-          if (typeof props.scrollStrategy === 'function') {
-            props.scrollStrategy(data)
-          } else if (props.scrollStrategy === 'close') {
-            closeScrollStrategy(data)
-          } else if (props.scrollStrategy === 'block') {
-            blockScrollStrategy(data)
-          } else if (props.scrollStrategy === 'reposition') {
-            repositionScrollStrategy(data)
-          }
-        })
-      })
-    }
-  }, { immediate: true })
+    if (!(data.isActive.value && props.scrollStrategy)) return
+
+    scope = effectScope()
+    await nextTick()
+    scope.run(() => {
+      if (typeof props.scrollStrategy === 'function') {
+        props.scrollStrategy(data)
+      } else {
+        scrollStrategies[props.scrollStrategy](data)
+      }
+    })
+  })
 }
 
 function closeScrollStrategy (data: ScrollStrategyData) {
-  const scrollElements = [document, ...getScrollParents(data.contentEl.value)]
-  scrollElements.forEach(el => {
-    el.addEventListener('scroll', onScroll, { passive: true })
-  })
-
   function onScroll (e: Event) {
-    data.onScroll.value?.(e)
     data.isActive.value = false
   }
 
-  onScopeDispose(() => {
-    scrollElements.forEach(el => {
-      el.removeEventListener('scroll', onScroll)
-    })
-  })
+  bindScroll(data.contentEl.value, onScroll)
 }
 
 function blockScrollStrategy (data: ScrollStrategyData) {
@@ -100,14 +83,17 @@ function blockScrollStrategy (data: ScrollStrategyData) {
 }
 
 function repositionScrollStrategy (data: ScrollStrategyData) {
-  const scrollElements = [document, ...getScrollParents(data.contentEl.value)]
+  bindScroll(data.contentEl.value, e => {
+    data.updatePosition.value?.(e)
+  })
+}
+
+/** @private */
+function bindScroll (el: HTMLElement | undefined, onScroll: (e: Event) => void) {
+  const scrollElements = [document, ...getScrollParents(el)]
   scrollElements.forEach(el => {
     el.addEventListener('scroll', onScroll, { passive: true })
   })
-
-  function onScroll (e: Event) {
-    data.onScroll.value?.(e)
-  }
 
   onScopeDispose(() => {
     scrollElements.forEach(el => {

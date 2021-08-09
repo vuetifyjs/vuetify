@@ -37,7 +37,7 @@ import {
 } from 'vue'
 
 // Types
-import type { Prop, PropType, Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { BackgroundColorData } from '@/composables/color'
 
 function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
@@ -91,7 +91,6 @@ export default defineComponent({
     eager: Boolean,
     noClickAnimation: Boolean,
     modelValue: Boolean,
-    origin: [String, Object] as Prop<string | Element>,
     persistent: Boolean,
     scrim: {
       type: [String, Boolean],
@@ -122,7 +121,7 @@ export default defineComponent({
     const { activatorEl, onActivatorClick } = useActivator(props, isActive)
 
     const contentEl = ref<HTMLElement>()
-    const { contentTransformStyles, onScroll } = usePositionStrategies(props, {
+    const { contentStyles, updatePosition } = usePositionStrategies(props, {
       contentEl,
       activatorEl,
       isActive,
@@ -131,7 +130,7 @@ export default defineComponent({
       contentEl,
       activatorEl,
       isActive,
-      onScroll,
+      updatePosition,
     })
 
     watch(isActive, val => {
@@ -221,7 +220,6 @@ export default defineComponent({
                 {
                   'v-overlay--absolute': props.absolute,
                   'v-overlay--active': isActive.value,
-                  'v-overlay--positioned': props.positionStrategy !== 'static',
                 },
                 themeClasses.value,
                 rtlClasses.value,
@@ -245,7 +243,7 @@ export default defineComponent({
                   v-show={ isActive.value }
                   v-click-outside={{ handler: onClickOutside, closeConditional }}
                   class="v-overlay__content"
-                  style={ contentTransformStyles.value }
+                  style={ contentStyles.value }
                   tabindex={ -1 }
                   onKeydown={ onKeydown }
                 >
