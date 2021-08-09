@@ -1,12 +1,13 @@
+/* eslint-disable no-labels */
 // Utilities
 import { computed, ref } from 'vue'
-import { consoleWarn, propsFactory, wrapInPromise } from '@/util'
+import { propsFactory, wrapInPromise } from '@/util'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type { PropType } from 'vue'
 
-export type ValidationResult = string | true | Promise<string | true>
-export type ValidationRule = string | ((value: any) => ValidationResult)
+export type ValidationResult = string | true
+export type ValidationRule = string | ((value: any) => ValidationResult) | Promise<ValidationResult>
 
 export interface ValidationProps {
   maxErrors?: string | number
@@ -24,30 +25,31 @@ export const makeValidationProps = propsFactory({
   },
 })
 
-export function useValidation (props: ValidationProps, value: Ref<any>) {
+export function useValidation (props: ValidationProps) {
   const errorMessages = ref<string[]>([])
   const isPristine = ref(true)
   const isValid = computed(() => isPristine.value ? null : errorMessages.value.length === 0)
   const isValidating = ref(false)
 
-  async function validate () {
+  function validate (value: any) {
     errorMessages.value = []
     isValidating.value = true
+
     for (const rule of props.rules) {
       const handler = typeof rule === 'function' ? rule : () => rule
-      const valid = await wrapInPromise<ValidationResult>(handler(value.value))
+      const valid = wrapInPromise<ValidationResult>(handler(value?.value || value))
 
-      if (valid === true) continue
-
-      /* istanbul ignore if */
-      if (typeof valid !== 'string') {
-        consoleWarn(`${valid} is not a valid value. Rule functions should return boolean true or a string.`)
-      }
-
-      if (errorMessages.value.push(valid) >= (props.maxErrors || 1)) {
+      if (errorMessages.value.length >= (props.maxErrors || 1)) {
         break
       }
+
+      valid.then(result => {
+        if (result === true) return
+
+        errorMessages.value.push(result)
+      })
     }
+
     isValidating.value = false
     isPristine.value = false
   }
