@@ -2,20 +2,25 @@
 @import './_variables.scss'
 
 // Theme
-+theme(v-slider) using ($material)
-  .v-slider__track-background,
-  .v-slider__track-fill,
-  .v-slider__thumb
-    background: map-deep-get($material, 'slider', 'inactive')
+// +theme(v-slider) using ($material)
+//   .v-slider__track-background,
+//   .v-slider__track-fill,
+//   .v-slider__thumb
+//     background: map-deep-get($material, 'slider', 'inactive')
+.v-slider__track-background
+  background-color: lightgrey
+
+.v-slider__track-fill
+  background-color: darkgrey
 
 // Block
 .v-slider
-  cursor: default
-  display: flex
-  align-items: center
-  position: relative
-  flex: 1
-  user-select: none
+  // cursor: default
+  // display: flex
+  // align-items: center
+  // position: relative
+  // flex: 1
+  // user-select: none
 
   input
     cursor: default
@@ -45,9 +50,9 @@
 
 .v-slider__thumb
   position: absolute
-  width: $slider-thumb-size
-  height: $slider-thumb-size
-  left: -$slider-thumb-size * .5
+  width: var(--v-slider-thumb-size, $slider-thumb-size)
+  height: var(--v-slider-thumb-size, $slider-thumb-size)
+  left: calc(var(--v-slider-thumb-size, $slider-thumb-size) / 2)
   top: 50%
   border-radius: $slider-thumb-border-radius
   transition: $slider-transition
@@ -55,7 +60,7 @@
   user-select: none
 
   &:before
-    transition: $primary-transition
+    transition: 0.3s $standard-easing
     content: ''
     color: inherit
     width: #{$slider-thumb-size + $slider-thumb-focused-size-increase}
@@ -64,9 +69,9 @@
     background: currentColor
     opacity: $slider-thumb-before-opacity
     position: absolute
-    left: -$slider-thumb-focused-size-increase * .5
-    top: -$slider-thumb-focused-size-increase * .5
-    transform: scale(0.1)
+    left: -$slider-thumb-focused-size-increase / 2
+    top: -$slider-thumb-focused-size-increase / 2
+    // transform: scale(0.1)
     pointer-events: none
 
   &::after
@@ -140,7 +145,7 @@
   .v-slider__track
     &-container
       width: 100%
-      height: $slider-track-width
+      height: var(--v-slider-track-size, $slider-track-width)
       left: 0
       top: 50%
       transform: translateY(-50%)
@@ -261,45 +266,45 @@
     opacity: 1
 
 // Input
-.v-input__slider
-  &.v-input--is-readonly > .v-input__control
-    pointer-events: none
+// .v-input__slider
+//   &.v-input--is-readonly > .v-input__control
+//     pointer-events: none
 
-  .v-input__slot .v-label
-    +ltr()
-      margin-left: 0
-      margin-right: $slider-label-margin-end
+//   .v-input__slot .v-label
+//     +ltr()
+//       margin-left: 0
+//       margin-right: $slider-label-margin-end
 
-    +rtl()
-      margin-right: 0
-      margin-left: $slider-label-margin-end
+//     +rtl()
+//       margin-right: 0
+//       margin-left: $slider-label-margin-end
 
-.v-input__slider--inverse-label
-  .v-input__slot .v-label
-    +ltr()
-      margin-right: 0
-      margin-left: $slider-label-margin-start
+// .v-input__slider--inverse-label
+//   .v-input__slot .v-label
+//     +ltr()
+//       margin-right: 0
+//       margin-left: $slider-label-margin-start
 
-    +rtl()
-      margin-left: 0
-      margin-right: $slider-label-margin-start
+//     +rtl()
+//       margin-left: 0
+//       margin-right: $slider-label-margin-start
 
-.v-input__slider--vertical
-  align-items: center
+// .v-input__slider--vertical
+//   align-items: center
 
-  +ltr()
-    flex-direction: column-reverse
+//   +ltr()
+//     flex-direction: column-reverse
 
-  +rtl()
-    flex-direction: column
+//   +rtl()
+//     flex-direction: column
 
-  .v-input
-    &__slot, &__prepend-outer, &__append-outer
-      margin: 0
+//   .v-input
+//     &__slot, &__prepend-outer, &__append-outer
+//       margin: 0
 
-  .v-messages
-    display: none
+//   .v-messages
+//     display: none
 
-.v-input--has-state
-  .v-slider__track-background
-    opacity: $slider-state-track-background-opacity
+// .v-input--has-state
+//   .v-slider__track-background
+//     opacity: $slider-state-track-background-opacity

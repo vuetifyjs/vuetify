@@ -1,4 +1,1 @@
-import VSlider from './VSlider'
-
-export { VSlider }
-export default VSlider
+export { default as VSlider } from './VSlider'
