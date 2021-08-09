@@ -1,3 +1,4 @@
-export { DisplayBreakpoint, useDisplay } from './display'
-export { IconAliases, IconProps, IconSet } from './icons'
-export { ThemeDefinition } from './theme'
+export { useDisplay } from './display'
+export type { DisplayBreakpoint } from './display'
+export type { IconAliases, IconProps, IconSet } from './icons'
+export type { ThemeDefinition } from './theme'
