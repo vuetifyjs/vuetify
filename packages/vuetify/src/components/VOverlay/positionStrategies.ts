@@ -74,6 +74,7 @@ export function usePositionStrategies (
 
   onScopeDispose(() => {
     window.removeEventListener('resize', onResize)
+    updatePosition.value = undefined
     scope?.stop()
   })
 
