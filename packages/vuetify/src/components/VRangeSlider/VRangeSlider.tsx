@@ -13,7 +13,7 @@ import { computed, defineComponent, ref } from 'vue'
 // Types
 import type { PropType } from 'vue'
 
-export default defineComponent({
+export const VRangeSlider = defineComponent({
   name: 'VRangeSlider',
 
   props: {

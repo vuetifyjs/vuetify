@@ -89,7 +89,7 @@ export const VSlider = defineComponent({
               >
                 <input
                   id={ id }
-                  name={ attrs.name }
+                  name={ attrs.name ?? id }
                   disabled={ props.disabled }
                   readonly={ props.readonly }
                   tabindex="-1"

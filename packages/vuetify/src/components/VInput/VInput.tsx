@@ -11,12 +11,30 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, watchEffect } from 'vue'
-import { defineComponent, getUid } from '@/util'
+import { genericComponent, getUid } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { MakeSlots } from '@/util'
 
-export const VInput = defineComponent({
+export interface DefaultInputSlot {
+  id: string
+  isActive: boolean
+  isDirty: boolean
+  isFocused: boolean
+  focus: () => void
+  blur: () => void
+}
+
+export const VInput = genericComponent<new () => {
+  $slots: MakeSlots<{
+    default: [DefaultInputSlot]
+    prepend: []
+    append: []
+    messages: []
+    details: []
+  }>
+}>()({
   name: 'VInput',
 
   props: {

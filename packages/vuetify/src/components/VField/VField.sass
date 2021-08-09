@@ -114,16 +114,12 @@
 /* region AFFIXES */
 .v-field__prepend-inner,
 .v-field__append-inner,
-.v-field__clearable,
-.v-input .v-input__prepend,
-.v-input .v-input__append
+.v-field__clearable
   align-items: center
   display: flex
 
 .v-field__prepend-inner,
-.v-field__append-inner,
-.v-input__prepend,
-.v-input__append
+.v-field__append-inner
   .v-input--focused &
     opacity: 1
 
@@ -392,6 +388,7 @@
 
     @include tools.rtl()
       text-align: left
+
 .v-field.v-input--disabled
   pointer-events: none
 
