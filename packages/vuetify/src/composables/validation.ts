@@ -1,4 +1,3 @@
-/* eslint-disable no-labels */
 // Utilities
 import { computed, ref } from 'vue'
 import { propsFactory, wrapInPromise } from '@/util'
