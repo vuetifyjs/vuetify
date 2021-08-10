@@ -17,7 +17,7 @@
 
 // Block
 .v-file-input
-  input
+  input[type="file"]
     left: 0
     opacity: 0
     pointer-events: none
@@ -27,8 +27,12 @@
 
 // Element
 .v-file-input
-  .v-input__control, .v-input__field
-    overflow: hidden
+  .v-input__control
+    min-width: 0
+
+  .v-input__field
+    max-width: 100%
+    min-width: 0
 
   .v-input__input
     text-overflow: ellipsis
@@ -41,13 +45,13 @@
     .v-chip
       margin-inline-end: $file-input-chip-margin
 
-.v-file-input.v-input--variant-filled
-  .v-input__input
-    padding-top: $file-input-filled-padding-top
+// .v-file-input.v-input--variant-filled
+//   .v-input__input
+//     padding-top: $file-input-filled-padding-top
 
-.v-file-input.v-input--variant-outlined
-  .v-input__input
-    padding: $file-input-outlined-padding
+// .v-file-input.v-input--variant-outlined
+//   .v-input__input
+//     padding: $file-input-outlined-padding
 
 .v-file-input.v-input--disabled
   pointer-events: none

@@ -11,11 +11,12 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, ref, toRef, watch } from 'vue'
-import { convertToUnit, defineComponent, getUid, nullifyTransforms, propsFactory, standardEasing } from '@/util'
+import { computed, ref, toRef, watch, watchEffect } from 'vue'
+import { convertToUnit, defineComponent, getUid, nullifyTransforms, propsFactory, standardEasing, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
 type Variant = typeof allowedVariants[number]
@@ -54,35 +55,43 @@ export default defineComponent({
 
   props: {
     active: Boolean,
-    focused: Boolean,
     dirty: Boolean,
 
     ...makeVInputProps(),
   },
 
   emits: {
-    'click:prepend-outer': (e: Event) => e,
-    'click:prepend': (e: Event) => e,
-    'click:append': (e: Event) => e,
-    'click:append-outer': (e: Event) => e,
-    focus: (e: Event) => e,
+    'click:prepend-outer': (e: Event) => true,
+    'click:prepend': (e: Event) => true,
+    'click:append': (e: Event) => true,
+    'click:append-outer': (e: Event) => true,
+    'click:control': (props: any) => true,
+    'update:active': (active: boolean) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
     const { themeClasses } = useTheme(props)
     const { densityClasses } = useDensity(props, 'v-input')
+    const isActive = useProxiedModel(props, 'active')
     const uid = getUid()
 
     const labelRef = ref<InstanceType<typeof VInputLabel>>()
     const floatingLabelRef = ref<InstanceType<typeof VInputLabel>>()
+    const controlRef = ref<HTMLElement>()
+    const fieldRef = ref<HTMLElement>()
+    const inputRef = ref<HTMLInputElement>()
+    const isDirty = computed(() => props.dirty ?? false)
+    const isFocused = ref(false)
     const id = computed(() => props.id || `input-${uid}`)
+
+    watchEffect(() => isActive.value = isFocused.value || isDirty.value)
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
-      return props.focused ? props.color : undefined
+      return isFocused.value ? props.color : undefined
     }))
 
-    watch(() => props.active, val => {
+    watch(isActive, val => {
       if (!props.singleLine) {
         const el: HTMLElement = labelRef.value!.$el
         const targetEl: HTMLElement = floatingLabelRef.value!.$el
@@ -117,15 +126,24 @@ export default defineComponent({
       }
     }, { flush: 'post' })
 
+    const slotProps = computed(() => ({
+      isActive: isActive.value,
+      isDirty: isDirty.value,
+      isFocused: isFocused.value,
+      inputRef,
+      controlRef,
+      fieldRef,
+    }))
+
     function onClick (e: MouseEvent) {
       if (e.target !== document.activeElement) {
         e.preventDefault()
       }
 
-      emit('focus', e)
+      emit('click:control', slotProps.value)
     }
 
-    return () => {
+    useRender(() => {
       const isOutlined = props.variant === 'outlined'
       const hasPrepend = (slots.prepend || props.prependIcon)
       const hasPrependOuter = (slots.prependOuter || props.prependOuterIcon)
@@ -147,9 +165,9 @@ export default defineComponent({
             {
               'v-input--prepended': hasPrepend,
               'v-input--appended': hasAppend,
-              'v-input--dirty': props.active,
+              'v-input--active': isActive.value,
               'v-input--disabled': props.disabled,
-              'v-input--focused': props.focused,
+              'v-input--focused': isFocused.value,
               'v-input--reverse': props.reverse,
               'v-input--has-background': !!props.bgColor,
               'v-input--single-line': props.singleLine,
@@ -169,7 +187,7 @@ export default defineComponent({
               onClick={ (e: Event) => emit('click:prepend-outer', e) }
             >
               { slots.prependOuter
-                ? slots.prependOuter()
+                ? slots.prependOuter(slotProps.value)
                 : (<VIcon icon={ props.prependOuterIcon } />)
               }
             </div>
@@ -191,7 +209,7 @@ export default defineComponent({
                 onClick={ (e: Event) => emit('click:prepend', e) }
               >
                 { slots.prepend
-                  ? slots.prepend()
+                  ? slots.prepend(slotProps.value)
                   : (<VIcon icon={ props.prependIcon } />)
                 }
               </div>
@@ -202,22 +220,20 @@ export default defineComponent({
                 <VInputLabel ref={ floatingLabelRef } floating>
                   { label }
                 </VInputLabel>
-              )}
+              ) }
 
               <VInputLabel ref={ labelRef } for={ id.value }>
                 { label }
               </VInputLabel>
 
               { slots.default?.({
-                uid,
-                active: props.active,
-                dirty: props.dirty,
-                focused: props.focused,
+                ...slotProps.value,
                 props: {
                   id: id.value,
                   class: 'v-input__input',
-                },
-              }) }
+                  onFocus: () => (isFocused.value = true),
+                  onBlur: () => (isFocused.value = false),
+                }}) }
             </div>
 
             { hasAppend && (
@@ -226,7 +242,7 @@ export default defineComponent({
                 onClick={ (e: Event) => emit('click:append', e) }
               >
                 { slots.append
-                  ? slots.append()
+                  ? slots.append(slotProps.value)
                   : (<VIcon icon={ props.appendIcon } />)
                 }
               </div>
@@ -253,7 +269,7 @@ export default defineComponent({
                 <VInputLabel ref={ floatingLabelRef } floating>
                   { label }
                 </VInputLabel>
-              )}
+              ) }
             </div>
           </div>
 
@@ -263,7 +279,7 @@ export default defineComponent({
               onClick={ (e: Event) => emit('click:append-outer', e) }
             >
               { slots.appendOuter
-                ? slots.appendOuter()
+                ? slots.appendOuter(slotProps.value)
                 : (<VIcon icon={ props.appendOuterIcon } />)
               }
             </div>
@@ -276,6 +292,15 @@ export default defineComponent({
           ) }
         </div>
       )
+    })
+
+    return {
+      isActive,
+      isDirty,
+      isFocused,
+      inputRef,
+      controlRef,
+      fieldRef,
     }
   },
 })

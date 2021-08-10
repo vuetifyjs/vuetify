@@ -8,10 +8,9 @@ import { makeVInputProps } from '@/components/VInput/VInput'
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useLocale } from '@/composables/locale'
-import { useInput } from '@/composables/input'
 
 // Utilities
-import { computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { defineComponent, humanReadableFileSize, pick } from '@/util'
 
 // Types
@@ -70,19 +69,12 @@ export default defineComponent({
   setup (props, { attrs, slots }) {
     const { t } = useLocale()
     const fileValue = useProxiedModel(props, 'modelValue')
-
-    const {
-      isFocused,
-      isDirty,
-      isActive,
-      props: inputProps,
-      focus,
-      inputRef,
-    } = useInput(computed(() => !!fileValue.value && fileValue.value.length !== 0))
+    const rootRef = ref()
 
     watch(() => props.modelValue, value => {
-      if (inputRef.value && (value == null || value?.length === 0)) {
-        inputRef.value.value = ''
+      if (rootRef.value?.inputRef.value && (value == null || value?.length === 0)) {
+        // hmm, inputRef gets unwrapped?
+        rootRef.value.inputRef.value = ''
       }
     })
 
@@ -105,21 +97,20 @@ export default defineComponent({
     })
 
     return () => {
-      const [_, rest] = pick(attrs, ['class'])
+      const [_, restAttrs] = pick(attrs, ['class'])
 
       return (
         <VInput
+          ref={rootRef}
           class={[
             'v-file-input',
             attrs.class,
           ]}
-          active={ isActive.value }
-          focused={ isFocused.value }
-          dirty={ isDirty.value }
           { ...props }
-          onFocus={ () => inputRef.value?.click?.() }
+          dirty={fileValue.value && !!fileValue.value.length}
+          onClick:control={ ({ inputRef }) => inputRef.value?.click?.() }
           v-slots={{
-            prependOuter: props.prependOuterIcon ? () => (
+            prependOuter: props.prependOuterIcon ? ({ inputRef }) => (
               <VBtn
                 icon={ props.prependOuterIcon }
                 variant="text"
@@ -129,13 +120,14 @@ export default defineComponent({
               />
             ) : undefined,
 
-            default: ({ props: slotProps }) => (
+            default: ({ isDirty, isFocused, inputRef, props: slotProps }) => (
               <>
                 <input
+                  ref={ inputRef }
                   type="file"
                   id={ slotProps.id }
-                  multiple={ props.multiple }
                   disabled={ props.disabled }
+                  multiple={ props.multiple }
                   onClick={ e => e.stopPropagation() }
                   onChange={ e => {
                     if (!e.target) return
@@ -144,13 +136,14 @@ export default defineComponent({
                     const files = [...target.files ?? []]
                     fileValue.value = files
 
-                    if (!isFocused.value) focus()
+                    if (!isFocused) inputRef.value?.focus()
                   } }
-                  { ...inputProps }
-                  { ...rest }
+                  onBlur={slotProps.onBlur}
+                  onFocus={slotProps.onFocus}
+                  { ...restAttrs }
                 />
 
-                { isDirty.value && (
+                { isDirty && (
                   <div class={ slotProps.class }>
                     { slots.selection ? slots.selection({
                       fileNames: fileNames.value,
@@ -170,7 +163,7 @@ export default defineComponent({
               </>
             ),
 
-            append: props.clearable ? () => (
+            append: props.clearable ? ({ inputRef }) => (
               <VBtn
                 icon={ props.appendIcon }
                 variant="text"

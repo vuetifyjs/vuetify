@@ -88,7 +88,6 @@
   position: relative
 
   .v-input__input
-    height: 100%
     letter-spacing: $input-letter-spacing
 
     .v-input--variant-contained &,
@@ -173,7 +172,7 @@
   margin-inline-start: var(--v-input-padding-before)
   margin-inline-end: var(--v-input-padding-after)
 
-  .v-input--dirty &
+  .v-input--active &
     visibility: hidden
 
   .v-input--focused &
@@ -194,7 +193,7 @@
     visibility: hidden
     max-width: 100%
 
-    .v-input.v-input--dirty &
+    .v-input.v-input--active &
       visibility: visible
 
     .v-input--variant-contained &,
@@ -299,7 +298,7 @@
         bottom: 0
         border-width: 0 0 var(--v-input-border-width)
 
-      @at-root #{selector-append('.v-input--dirty', &)}
+      @at-root #{selector-append('.v-input--active', &)}
         &::before
           opacity: 0
 
