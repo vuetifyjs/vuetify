@@ -6,26 +6,29 @@ import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
 import { defineComponent } from '@/util'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 export default defineComponent({
   name: 'VValidate',
 
   props: {
-    modelValue: { required: false },
-
     ...makeValidationProps(),
   },
 
   setup (props, { slots }) {
-    const modelValue = useProxiedModel(props, 'modelValue')
-    const { errorMessages, validate, reset } = useValidation(props)
+    const {
+      errorMessages,
+      isValid,
+      isValidating,
+      reset,
+      validate,
+    } = useValidation(props)
 
     return () => slots.default?.({
       errorMessages,
-      validate,
+      isValid,
+      isValidating,
       reset,
-      modelValue,
+      validate,
     })
   },
 })
