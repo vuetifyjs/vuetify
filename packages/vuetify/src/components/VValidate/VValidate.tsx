@@ -1,6 +1,3 @@
-// Styles
-import './VValidate.sass'
-
 // Composables
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
