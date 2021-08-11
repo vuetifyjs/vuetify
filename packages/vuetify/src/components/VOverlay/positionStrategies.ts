@@ -1,6 +1,6 @@
 // Utilities
 import { computed, effectScope, nextTick, onScopeDispose, ref, watch, watchEffect } from 'vue'
-import { convertToUnit, nullifyTransforms, propsFactory } from '@/util'
+import { convertToUnit, getScrollParent, nullifyTransforms, propsFactory } from '@/util'
 import { oppositeAnchor, parseAnchor, physicalAnchor } from './util/anchor'
 import { anchorToPoint, getOffset } from './util/point'
 
@@ -120,15 +120,15 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
 
   function updatePosition () {
     const targetBox = data.activatorEl.value!.getBoundingClientRect()
-    const overlayBox = data.contentEl.value!.parentElement!.getBoundingClientRect()
     const contentBox = nullifyTransforms(data.contentEl.value!)
     const contentHeight = Math.min(
       configuredMaxHeight.value,
       [...data.contentEl.value!.children].reduce((acc, el) => acc + el.scrollHeight, 0)
     )
 
-    const viewportWidth = overlayBox.width
-    const viewportHeight = Math.min(overlayBox.height, window.innerHeight)
+    const scrollParent = getScrollParent(data.contentEl.value)
+    const viewportWidth = scrollParent.clientWidth
+    const viewportHeight = Math.min(scrollParent.clientHeight, window.innerHeight)
 
     const viewportMargin = 12
     const freeSpace = {
