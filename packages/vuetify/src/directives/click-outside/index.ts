@@ -59,7 +59,7 @@ function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirec
 function handleShadow (el: HTMLElement, callback: Function): void {
   const root = attachedRoot(el)
 
-  callback(document.body)
+  callback(document)
 
   if (root instanceof ShadowRoot) {
     callback(root)
