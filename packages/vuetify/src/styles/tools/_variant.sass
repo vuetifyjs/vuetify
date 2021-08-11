@@ -20,9 +20,14 @@
   &--variant-contained
     background: $contained-background
     color: $contained-color
+    z-index: 1
 
     @if ($contained-elevation > 0)
-      @include elevation($contained-elevation)
+      &::before
+        border-radius: inherit
+        z-index: -1
+        @include absolute
+        @include elevation($contained-elevation)
 
   &--variant-outlined
     border: thin solid currentColor

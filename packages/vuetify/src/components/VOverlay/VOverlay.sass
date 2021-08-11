@@ -2,48 +2,46 @@
 
 // Block
 .v-overlay-container
-  bottom: 0
-  contain: strict
+  contain: layout
   left: 0
   pointer-events: none
-  position: fixed
-  right: 0
+  position: absolute
   top: 0
+  display: contents
+
+.v-overlay-scroll-blocked
+  padding-inline-end: var(--v-scrollbar-offset)
+  overflow-y: hidden !important
 
 .v-overlay
-  align-items: center
   border-radius: inherit
   display: flex
-  height: 100%
-  justify-content: center
   left: 0
   pointer-events: none
   position: fixed
-  right: 0
   top: 0
   z-index: $overlay-z-index
-  padding-inline-end: $overlay-padding-x
+  padding-inline-end: var(--v-scrollbar-offset)
+  bottom: 0
+  right: 0
 
 // Element
 .v-overlay__content
   outline: none
-  position: relative
+  position: absolute
+  pointer-events: auto
 
 .v-overlay__scrim
+  pointer-events: auto
   background: $overlay-scrim-background
   border-radius: inherit
   bottom: 0
-  height: 100%
   left: 0
   opacity: $overlay-opacity
-  position: absolute
+  position: fixed
   right: 0
   top: 0
-  width: 100%
 
 // Modifier
 .v-overlay--absolute
   position: absolute
-
-.v-overlay--active
-  pointer-events: auto

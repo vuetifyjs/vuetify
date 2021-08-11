@@ -3,6 +3,8 @@
 // Block
 .v-dialog
   z-index: $dialog-z-index
+  align-items: center
+  justify-content: center
 
   .v-overlay__content
     max-height: $dialog-overlay-content-max-height
@@ -13,6 +15,13 @@
 
     @media #{$dialog-overlay-content-mobile-breakpoint}
       max-width: $dialog-overlay-content-mobile-max-width
+
+    > .v-card,
+    > .v-sheet
+      border-radius: inherit
+      overflow: hidden
+
+      @include elevation($dialog-elevation)
 
     > .v-card
       > .v-card-avatar

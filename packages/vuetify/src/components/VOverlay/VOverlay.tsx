@@ -3,6 +3,7 @@ import './VOverlay.sass'
 
 // Composables
 import { makeActivatorProps, useActivator } from './useActivator'
+import { makePositionStrategyProps, usePositionStrategies } from './positionStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
@@ -36,8 +37,9 @@ import {
 } from 'vue'
 
 // Types
-import type { Prop, PropType, Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { BackgroundColorData } from '@/composables/color'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
 function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
   const isBooted = ref(eager.value)
@@ -50,12 +52,6 @@ function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
 
   return { isBooted }
 }
-
-const positionStrategies = [
-  'static', // specific viewport position, usually centered
-  'connected', // connected to a certain element
-  'flexible', // connected to an element with the ability to overflow or shift if it doesn't fit in the screen
-] as const
 
 interface ScrimProps {
   [key: string]: unknown
@@ -93,22 +89,19 @@ export default defineComponent({
       type: [Boolean, String, Object] as PropType<boolean | string | Element>,
       default: 'body',
     },
+    contentClass: null,
     eager: Boolean,
     noClickAnimation: Boolean,
     modelValue: Boolean,
-    origin: [String, Object] as Prop<string | Element>,
     persistent: Boolean,
-    positionStrategy: {
-      type: String as PropType<typeof positionStrategies[number]>,
-      default: 'static',
-      validator: (val: any) => positionStrategies.includes(val),
-    },
     scrim: {
       type: [String, Boolean],
       default: true,
     },
 
     ...makeActivatorProps(),
+    ...makeDimensionProps(),
+    ...makePositionStrategyProps(),
     ...makeScrollStrategyProps(),
     ...makeThemeProps(),
     ...makeTransitionProps(),
@@ -129,22 +122,28 @@ export default defineComponent({
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
     const { activatorEl, onActivatorClick } = useActivator(props, isActive)
+    const { dimensionStyles } = useDimension(props)
 
     const contentEl = ref<HTMLElement>()
-    useScrollStrategies(props, {
+    const { contentStyles, updatePosition } = usePositionStrategies(props, {
       contentEl,
       activatorEl,
       isActive,
     })
+    useScrollStrategies(props, {
+      contentEl,
+      activatorEl,
+      isActive,
+      updatePosition,
+    })
 
-    watch(isActive, val => {
-      nextTick(() => {
-        if (val) {
-          contentEl.value?.focus()
-        } else {
-          activatorEl.value?.focus()
-        }
-      })
+    watch(isActive, async val => {
+      await nextTick()
+      if (val) {
+        contentEl.value?.focus({ preventScroll: true })
+      } else {
+        activatorEl.value?.focus({ preventScroll: true })
+      }
     })
 
     function onClickOutside (e: MouseEvent) {
@@ -246,7 +245,14 @@ export default defineComponent({
                   ref={ contentEl }
                   v-show={ isActive.value }
                   v-click-outside={{ handler: onClickOutside, closeConditional }}
-                  class="v-overlay__content"
+                  class={[
+                    'v-overlay__content',
+                    props.contentClass,
+                  ]}
+                  style={[
+                    dimensionStyles.value,
+                    contentStyles.value,
+                  ]}
                   tabindex={ -1 }
                   onKeydown={ onKeydown }
                 >
