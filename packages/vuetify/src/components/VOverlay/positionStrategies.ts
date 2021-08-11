@@ -1,6 +1,6 @@
 // Utilities
 import { computed, effectScope, nextTick, onScopeDispose, ref, watch, watchEffect } from 'vue'
-import { convertToUnit, getScrollParent, nullifyTransforms, propsFactory } from '@/util'
+import { convertToUnit, getScrollParent, isFixedPosition, nullifyTransforms, propsFactory } from '@/util'
 import { oppositeAnchor, parseAnchor, physicalAnchor } from './util/anchor'
 import { anchorToPoint, getOffset } from './util/point'
 
@@ -97,6 +97,13 @@ function staticPositionStrategy () {
 }
 
 function connectedPositionStrategy (data: PositionStrategyData, props: StrategyProps, contentStyles: Ref<{}>) {
+  const activatorFixed = isFixedPosition(data.activatorEl.value)
+  if (activatorFixed) {
+    Object.assign(contentStyles.value, {
+      position: 'fixed',
+    })
+  }
+
   const preferredAnchor = computed(() => parseAnchor(props.anchor))
   const preferredOrigin = computed(() =>
     props.origin === 'overlap' ? preferredAnchor.value
@@ -115,8 +122,10 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
   watch(
     () => [preferredAnchor.value, preferredOrigin.value],
     () => updatePosition(),
-    { immediate: true }
+    { immediate: !activatorFixed }
   )
+
+  if (activatorFixed) nextTick(() => updatePosition())
 
   function updatePosition () {
     const targetBox = data.activatorEl.value!.getBoundingClientRect()
