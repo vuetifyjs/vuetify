@@ -13,6 +13,7 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeTransitionProps } from '@/composables/transition'
 import { VDialogTransition, VOverlay } from '@/components'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { withDirectives } from 'vue'
 
 export default defineComponent({
   name: 'VMenu',
@@ -39,9 +40,8 @@ export default defineComponent({
     },
     openOnHover: Boolean,
 
-    ...makeDimensionProps({ width: 'auto' }),
     ...makeTransitionProps({
-      transition: { component: VDialogTransition },
+      transition: false,
     }),
   },
 
@@ -51,7 +51,6 @@ export default defineComponent({
 
   setup (props, { attrs, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
-    const { dimensionStyles } = useDimension(props)
 
     return () => {
       return (
@@ -60,7 +59,6 @@ export default defineComponent({
           class={[
             'v-menu',
           ]}
-          style={ dimensionStyles.value }
           transition={ props.transition }
           absolute
           positionStrategy="connected"

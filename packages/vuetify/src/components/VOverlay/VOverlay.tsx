@@ -39,6 +39,7 @@ import {
 // Types
 import type { PropType, Ref } from 'vue'
 import type { BackgroundColorData } from '@/composables/color'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
 function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
   const isBooted = ref(eager.value)
@@ -88,6 +89,7 @@ export default defineComponent({
       type: [Boolean, String, Object] as PropType<boolean | string | Element>,
       default: 'body',
     },
+    contentClass: null,
     eager: Boolean,
     noClickAnimation: Boolean,
     modelValue: Boolean,
@@ -98,6 +100,7 @@ export default defineComponent({
     },
 
     ...makeActivatorProps(),
+    ...makeDimensionProps(),
     ...makePositionStrategyProps(),
     ...makeScrollStrategyProps(),
     ...makeThemeProps(),
@@ -119,6 +122,7 @@ export default defineComponent({
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
     const { activatorEl, onActivatorClick } = useActivator(props, isActive)
+    const { dimensionStyles } = useDimension(props)
 
     const contentEl = ref<HTMLElement>()
     const { contentStyles, updatePosition } = usePositionStrategies(props, {
@@ -133,14 +137,13 @@ export default defineComponent({
       updatePosition,
     })
 
-    watch(isActive, val => {
-      nextTick(() => {
-        if (val) {
-          contentEl.value?.focus()
-        } else {
-          activatorEl.value?.focus()
-        }
-      })
+    watch(isActive, async val => {
+      await nextTick()
+      if (val) {
+        contentEl.value?.focus({ preventScroll: true })
+      } else {
+        activatorEl.value?.focus({ preventScroll: true })
+      }
     })
 
     function onClickOutside (e: MouseEvent) {
@@ -242,8 +245,14 @@ export default defineComponent({
                   ref={ contentEl }
                   v-show={ isActive.value }
                   v-click-outside={{ handler: onClickOutside, closeConditional }}
-                  class="v-overlay__content"
-                  style={ contentStyles.value }
+                  class={[
+                    'v-overlay__content',
+                    props.contentClass,
+                  ]}
+                  style={[
+                    dimensionStyles.value,
+                    contentStyles.value,
+                  ]}
                   tabindex={ -1 }
                   onKeydown={ onKeydown }
                 >

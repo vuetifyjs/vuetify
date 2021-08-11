@@ -4,13 +4,16 @@
   z-index: $menu-z-index
 
   .v-overlay__content
+    display: flex
+    flex-direction: column
     @include rounded($menu-content-border-radius)
 
     > .v-card,
     > .v-sheet
       background: rgb(var(--v-theme-surface))
       border-radius: inherit
-      overflow: hidden
+      overflow: auto
+      height: 100%
 
       &::before
         border-radius: inherit

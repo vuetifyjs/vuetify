@@ -19,7 +19,7 @@ export function nullifyTransforms (el: HTMLElement): DOMRect {
       dx = +ta[4]
       dy = +ta[5]
     } else {
-      return rect
+      return rect.toJSON()
     }
 
     const to = style.transformOrigin
@@ -32,6 +32,6 @@ export function nullifyTransforms (el: HTMLElement): DOMRect {
       x, y, width: w, height: h, top: y, right: x + w, bottom: y + h, left: x,
     } as DOMRect
   } else {
-    return rect
+    return rect.toJSON()
   }
 }

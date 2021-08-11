@@ -32,7 +32,6 @@ export function parseAnchor (anchor: Anchor) {
 /** Get an anchor directly opposite, with the same alignment */
 export function oppositeAnchor (anchor: ParsedAnchor) {
   return {
-    align: anchor.align,
     side: {
       center: 'center',
       top: 'bottom',
@@ -40,6 +39,7 @@ export function oppositeAnchor (anchor: ParsedAnchor) {
       start: 'end',
       end: 'start',
     }[anchor.side],
+    align: anchor.align,
   } as ParsedAnchor
 }
 

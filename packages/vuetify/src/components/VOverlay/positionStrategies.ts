@@ -26,6 +26,10 @@ export interface StrategyProps {
   anchor: Anchor
   origin: Anchor | 'auto' | 'overlap'
   offset?: string
+  maxHeight?: number | string
+  maxWidth?: number | string
+  minHeight?: number | string
+  minWidth?: number | string
 }
 
 export const makePositionStrategyProps = propsFactory({
@@ -93,53 +97,83 @@ function staticPositionStrategy () {
 }
 
 function connectedPositionStrategy (data: PositionStrategyData, props: StrategyProps, contentStyles: Ref<{}>) {
-  const anchor = computed(() => parseAnchor(props.anchor))
-  const origin = computed(() =>
-    props.origin === 'overlap' ? anchor.value
-    : props.origin === 'auto' ? oppositeAnchor(anchor.value)
+  const preferredAnchor = computed(() => parseAnchor(props.anchor))
+  const preferredOrigin = computed(() =>
+    props.origin === 'overlap' ? preferredAnchor.value
+    : props.origin === 'auto' ? oppositeAnchor(preferredAnchor.value)
     : parseAnchor(props.origin)
   )
   const doesOverlap = computed(() => {
-    return anchor.value.side === origin.value.side
+    return preferredAnchor.value.side === preferredOrigin.value.side
+  })
+
+  const configuredMaxHeight = computed(() => {
+    const val = parseFloat(props.maxHeight!)
+    return isNaN(val) ? Infinity : val
   })
 
   watch(
-    () => [anchor.value, origin.value],
+    () => [preferredAnchor.value, preferredOrigin.value],
     () => updatePosition(),
     { immediate: true }
   )
 
   function updatePosition () {
     const targetBox = data.activatorEl.value!.getBoundingClientRect()
-    const contentBox = nullifyTransforms(data.contentEl.value!)
     const overlayBox = data.contentEl.value!.parentElement!.getBoundingClientRect()
+    const contentBox = nullifyTransforms(data.contentEl.value!)
+    const contentHeight = Math.min(
+      configuredMaxHeight.value,
+      [...data.contentEl.value!.children].reduce((acc, el) => acc + el.scrollHeight, 0)
+    )
+
+    const viewportWidth = overlayBox.width
+    const viewportHeight = Math.min(overlayBox.height, window.innerHeight)
 
     const viewportMargin = 12
     const freeSpace = {
       top: targetBox.top - viewportMargin,
-      bottom: overlayBox.height - targetBox.bottom - viewportMargin,
+      bottom: viewportHeight - targetBox.bottom - viewportMargin,
       left: targetBox.left - viewportMargin,
-      right: overlayBox.width - targetBox.right - viewportMargin,
+      right: viewportWidth - targetBox.right - viewportMargin,
     }
 
-    const targetPoint = anchorToPoint(anchor.value, targetBox)
-    const contentPoint = anchorToPoint(origin.value, contentBox)
+    const fits = (preferredAnchor.value.side === 'bottom' && contentHeight <= freeSpace.bottom) ||
+      (preferredAnchor.value.side === 'top' && contentHeight <= freeSpace.top)
+
+    const anchor = fits ? preferredAnchor.value
+      : (preferredAnchor.value.side === 'bottom' && freeSpace.top > freeSpace.bottom) ||
+      (preferredAnchor.value.side === 'top' && freeSpace.bottom > freeSpace.top) ? oppositeAnchor(preferredAnchor.value)
+      : preferredAnchor.value
+    const origin = fits ? preferredOrigin.value : oppositeAnchor(anchor)
+
+    const canFill = doesOverlap.value || ['center', 'top', 'bottom'].includes(anchor.side)
+
+    const maxWidth = canFill ? Math.min(viewportWidth, Math.max(targetBox.width, viewportWidth - viewportMargin * 2))
+      : anchor.side === 'end' ? freeSpace.right
+      : anchor.side === 'start' ? freeSpace.left
+      : null
+    const minWidth = Math.min(maxWidth!, targetBox.width)
+    const maxHeight = fits ? configuredMaxHeight.value : Math.min(
+      configuredMaxHeight.value,
+      viewportHeight - viewportMargin * 2,
+      Math.floor(anchor.side === 'top' ? freeSpace.top : freeSpace.bottom)
+    )
+
+    const targetPoint = anchorToPoint(anchor, targetBox)
+    const contentPoint = anchorToPoint(origin, {
+      ...contentBox,
+      height: Math.min(contentHeight, maxHeight),
+    })
 
     const { x, y } = getOffset(targetPoint, contentPoint)
 
-    const canFill = doesOverlap.value || ['center', 'top', 'bottom'].includes(anchor.value.side)
-
-    const max = canFill ? overlayBox.width - viewportMargin * 2
-      : anchor.value.side === 'end' ? freeSpace.right
-      : anchor.value.side === 'start' ? freeSpace.left
-      : null
-    const min = Math.min(max!, targetBox.width)
-
     Object.assign(contentStyles.value, {
       transform: `translate(${Math.round(x)}px, ${Math.round(y)}px)`,
-      transformOrigin: physicalAnchor(origin.value, data.activatorEl.value!),
-      minWidth: convertToUnit(min),
-      maxWidth: convertToUnit(max),
+      transformOrigin: physicalAnchor(origin, data.activatorEl.value!),
+      minWidth: convertToUnit(minWidth),
+      maxWidth: convertToUnit(maxWidth),
+      maxHeight: convertToUnit(maxHeight),
     })
   }
 

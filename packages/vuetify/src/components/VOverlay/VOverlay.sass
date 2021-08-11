@@ -9,6 +9,10 @@
   top: 0
   display: contents
 
+.v-overlay-scroll-blocked
+  padding-inline-end: var(--v-scrollbar-offset)
+  overflow-y: hidden !important
+
 .v-overlay
   border-radius: inherit
   display: flex
@@ -25,8 +29,10 @@
 .v-overlay__content
   outline: none
   position: absolute
+  pointer-events: auto
 
 .v-overlay__scrim
+  pointer-events: auto
   background: $overlay-scrim-background
   border-radius: inherit
   bottom: 0
@@ -39,6 +45,3 @@
 // Modifier
 .v-overlay--absolute
   position: absolute
-
-.v-overlay--active
-  pointer-events: auto

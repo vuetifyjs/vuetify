@@ -57,33 +57,31 @@ function closeScrollStrategy (data: ScrollStrategyData) {
     data.isActive.value = false
   }
 
-  bindScroll(data.contentEl.value, onScroll)
+  bindScroll(data.activatorEl.value ?? data.contentEl.value, onScroll)
 }
 
 function blockScrollStrategy (data: ScrollStrategyData) {
-  const initialOverflow: string[] = []
-  const scrollElements = getScrollParents(data.contentEl.value)
+  const scrollElements = [...new Set([
+    ...getScrollParents(data.activatorEl.value),
+    ...getScrollParents(data.contentEl.value),
+  ])].filter(el => !el.classList.contains('v-overlay-scroll-blocked'))
   const scrollbarWidth = window.innerWidth - document.documentElement.offsetWidth
 
-  document.documentElement.style.setProperty('--v-scrollbar-offset', convertToUnit(scrollbarWidth))
-
   scrollElements.forEach((el, i) => {
-    initialOverflow[i] = el.style.overflowY
-    el.style.overflowY = 'hidden'
     el.style.setProperty('--v-scrollbar-offset', convertToUnit(scrollbarWidth))
+    el.classList.add('v-overlay-scroll-blocked')
   })
 
   onScopeDispose(() => {
     scrollElements.forEach((el, i) => {
-      el.style.overflowY = initialOverflow[i]
       el.style.removeProperty('--v-scrollbar-offset')
+      el.classList.remove('v-overlay-scroll-blocked')
     })
-    document.documentElement.style.removeProperty('--v-scrollbar-offset')
   })
 }
 
 function repositionScrollStrategy (data: ScrollStrategyData) {
-  bindScroll(data.contentEl.value, e => {
+  bindScroll(data.activatorEl.value ?? data.contentEl.value, e => {
     data.updatePosition.value?.(e)
   })
 }

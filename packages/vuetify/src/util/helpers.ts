@@ -118,7 +118,7 @@ export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { 
 export function convertToUnit (str: number, unit?: string): string
 export function convertToUnit (str: string | number | null | undefined, unit?: string): string | undefined
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
-  if (str == null || str === '') {
+  if (str == null || str === '' || !isFinite(+str!)) {
     return undefined
   } else if (isNaN(+str!)) {
     return String(str)
