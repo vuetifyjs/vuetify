@@ -117,9 +117,10 @@
 
 .v-progress-linear--striped
   .v-progress-linear__determinate
+    animation: $progress-linear-striped-animation
     background-image: $progress-linear-stripe-gradient
-    background-size: $progress-linear-stripe-background-size
     background-repeat: repeat
+    background-size: $progress-linear-striped-size
 
 .v-progress-linear--active
   .v-progress-linear__indeterminate
@@ -192,3 +193,7 @@
 @keyframes stream
   to
     transform: translateX(var(--v-progress-linear-stream-to))
+
+@keyframes progress-linear-stripes
+  0%
+    background-position-x: $progress-linear-striped-size

@@ -105,6 +105,7 @@ export default defineComponent({
         ]}
         style={{
           height: props.active ? convertToUnit(height.value) : 0,
+          '--v-progress-linear-height': convertToUnit(height.value),
         }}
         role="progressbar"
         aria-valuemin="0"
