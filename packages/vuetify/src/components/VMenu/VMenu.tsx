@@ -9,11 +9,9 @@ import Resize from '@/directives/resize'
 import {
   defineComponent,
 } from '@/util'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeTransitionProps } from '@/composables/transition'
-import { VDialogTransition, VOverlay } from '@/components'
+import { VOverlay } from '@/components'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { withDirectives } from 'vue'
 
 export default defineComponent({
   name: 'VMenu',
@@ -42,7 +40,7 @@ export default defineComponent({
 
     ...makeTransitionProps({
       transition: false,
-    }),
+    } as const),
   },
 
   emits: {

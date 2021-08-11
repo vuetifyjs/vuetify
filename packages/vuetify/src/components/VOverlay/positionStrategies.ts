@@ -21,7 +21,11 @@ const positionStrategies = {
 
 export interface StrategyProps {
   positionStrategy: keyof typeof positionStrategies | (
-    (data: PositionStrategyData, props: StrategyProps, contentStyles: Ref<{}>) => undefined | { updatePosition: (e: Event) => void }
+    (
+      data: PositionStrategyData,
+      props: StrategyProps,
+      contentStyles: Ref<Dictionary<string>>
+    ) => undefined | { updatePosition: (e: Event) => void }
   )
   anchor: Anchor
   origin: Anchor | 'auto' | 'overlap'
@@ -96,7 +100,7 @@ function staticPositionStrategy () {
   // TODO
 }
 
-function connectedPositionStrategy (data: PositionStrategyData, props: StrategyProps, contentStyles: Ref<{}>) {
+function connectedPositionStrategy (data: PositionStrategyData, props: StrategyProps, contentStyles: Ref<Dictionary<string>>) {
   const activatorFixed = isFixedPosition(data.activatorEl.value)
   if (activatorFixed) {
     Object.assign(contentStyles.value, {
@@ -119,6 +123,8 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
     return isNaN(val) ? Infinity : val
   })
 
+  const hasMaxWidth = false
+
   watch(
     () => [preferredAnchor.value, preferredOrigin.value],
     () => updatePosition(),
@@ -126,10 +132,22 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
   )
 
   if (activatorFixed) nextTick(() => updatePosition())
+  requestAnimationFrame(() => {
+    if (contentStyles.value.maxHeight) updatePosition()
+  })
 
+  // eslint-disable-next-line max-statements
   function updatePosition () {
+    let contentBox
+    if (hasMaxWidth) {
+      const initialMaxWidth = data.activatorEl.value!.style.maxWidth
+      data.activatorEl.value!.style.removeProperty('maxWidth')
+      contentBox = nullifyTransforms(data.contentEl.value!)
+      data.activatorEl.value!.style.maxWidth = initialMaxWidth
+    } else {
+      contentBox = nullifyTransforms(data.contentEl.value!)
+    }
     const targetBox = data.activatorEl.value!.getBoundingClientRect()
-    const contentBox = nullifyTransforms(data.contentEl.value!)
     const contentHeight = Math.min(
       configuredMaxHeight.value,
       [...data.contentEl.value!.children].reduce((acc, el) => acc + el.scrollHeight, 0)
@@ -147,14 +165,14 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
       right: viewportWidth - targetBox.right - viewportMargin,
     }
 
-    const fits = (preferredAnchor.value.side === 'bottom' && contentHeight <= freeSpace.bottom) ||
+    const fitsY = (preferredAnchor.value.side === 'bottom' && contentHeight <= freeSpace.bottom) ||
       (preferredAnchor.value.side === 'top' && contentHeight <= freeSpace.top)
 
-    const anchor = fits ? preferredAnchor.value
+    const anchor = fitsY ? preferredAnchor.value
       : (preferredAnchor.value.side === 'bottom' && freeSpace.top > freeSpace.bottom) ||
       (preferredAnchor.value.side === 'top' && freeSpace.bottom > freeSpace.top) ? oppositeAnchor(preferredAnchor.value)
       : preferredAnchor.value
-    const origin = fits ? preferredOrigin.value : oppositeAnchor(anchor)
+    const origin = fitsY ? preferredOrigin.value : oppositeAnchor(anchor)
 
     const canFill = doesOverlap.value || ['center', 'top', 'bottom'].includes(anchor.side)
 
@@ -163,11 +181,14 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
       : anchor.side === 'start' ? freeSpace.left
       : null
     const minWidth = Math.min(maxWidth!, targetBox.width)
-    const maxHeight = fits ? configuredMaxHeight.value : Math.min(
+    const maxHeight = fitsY ? configuredMaxHeight.value : Math.min(
       configuredMaxHeight.value,
       viewportHeight - viewportMargin * 2,
       Math.floor(anchor.side === 'top' ? freeSpace.top : freeSpace.bottom)
     )
+
+    // TODO
+    // if (maxWidth) hasMaxWidth = true
 
     const targetPoint = anchorToPoint(anchor, targetBox)
     const contentPoint = anchorToPoint(origin, {
