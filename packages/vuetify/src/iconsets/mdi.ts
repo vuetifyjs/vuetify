@@ -12,7 +12,7 @@ const aliases: IconAliases = {
   cancel: 'mdi-close-circle',
   close: 'mdi-close',
   delete: 'mdi-close-circle', // delete (e.g. v-chip close)
-  clear: 'mdi-close',
+  clear: 'mdi-close-circle',
   success: 'mdi-check-circle',
   info: 'mdi-information',
   warning: 'mdi-alert-circle',

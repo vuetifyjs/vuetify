@@ -57,7 +57,7 @@ export default defineComponent({
     },
 
     ...makeVInputProps({
-      appendIcon: '$close',
+      appendIcon: '$clear',
       prependOuterIcon: '$file',
     }),
   },
@@ -163,13 +163,15 @@ export default defineComponent({
               </>
             ),
 
-            append: props.clearable ? ({ inputRef }) => (
+            append: ({ inputRef, focus, blur }) => props.clearable ? (
               <VBtn
+                class="v-file-input__clearable"
                 icon={ props.appendIcon }
                 variant="text"
-                size="small"
                 color={ props.color }
                 disabled={ props.disabled || !fileValue.value?.length }
+                onFocus={focus}
+                onBlur={blur}
                 onClick={
                   (e: Event) => {
                     e.stopPropagation()

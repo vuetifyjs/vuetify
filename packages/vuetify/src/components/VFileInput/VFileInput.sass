@@ -45,13 +45,19 @@
     .v-chip
       margin-inline-end: $file-input-chip-margin
 
-// .v-file-input.v-input--variant-filled
-//   .v-input__input
-//     padding-top: $file-input-filled-padding-top
+.v-file-input
+  .v-file-input__clearable
+    opacity: 0
 
-// .v-file-input.v-input--variant-outlined
-//   .v-input__input
-//     padding: $file-input-outlined-padding
+  &.v-input--dirty
+    .v-input__control:hover
+      .v-file-input__clearable
+        opacity: 1
+
+  &.v-input--focused.v-input--dirty
+    .v-file-input__clearable
+      opacity: 1
+
 
 .v-file-input.v-input--disabled
   pointer-events: none

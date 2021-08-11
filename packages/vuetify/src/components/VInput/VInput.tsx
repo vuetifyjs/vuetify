@@ -80,11 +80,10 @@ export default defineComponent({
     const controlRef = ref<HTMLElement>()
     const fieldRef = ref<HTMLElement>()
     const inputRef = ref<HTMLInputElement>()
-    const isDirty = computed(() => props.dirty ?? false)
     const isFocused = ref(false)
     const id = computed(() => props.id || `input-${uid}`)
 
-    watchEffect(() => isActive.value = isFocused.value || isDirty.value)
+    watchEffect(() => isActive.value = isFocused.value || props.dirty)
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
@@ -126,13 +125,23 @@ export default defineComponent({
       }
     }, { flush: 'post' })
 
+    function focus () {
+      isFocused.value = true
+    }
+
+    function blur () {
+      isFocused.value = false
+    }
+
     const slotProps = computed(() => ({
       isActive: isActive.value,
-      isDirty: isDirty.value,
+      isDirty: props.dirty,
       isFocused: isFocused.value,
       inputRef,
       controlRef,
       fieldRef,
+      focus,
+      blur,
     }))
 
     function onClick (e: MouseEvent) {
@@ -166,6 +175,7 @@ export default defineComponent({
               'v-input--prepended': hasPrepend,
               'v-input--appended': hasAppend,
               'v-input--active': isActive.value,
+              'v-input--dirty': props.dirty,
               'v-input--disabled': props.disabled,
               'v-input--focused': isFocused.value,
               'v-input--reverse': props.reverse,
@@ -295,9 +305,6 @@ export default defineComponent({
     })
 
     return {
-      isActive,
-      isDirty,
-      isFocused,
       inputRef,
       controlRef,
       fieldRef,
