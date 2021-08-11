@@ -109,12 +109,12 @@
     "vite": "^2.4.2",
     "vite-ssr": "^0.11.1",
     "vue-meta": "^2.4.0",
-    "vue-router": "^4.0.10",
+    "vue-router": "^4.0.11",
     "vuetify-loader": "^1.7.2",
     "webpack-dev-server": "^3.7.2"
   },
   "peerDependencies": {
-    "vue": "^3.2.0-beta.7"
+    "vue": "^3.2.1"
   },
   "publishConfig": {
     "access": "public"
