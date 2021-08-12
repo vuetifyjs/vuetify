@@ -3,13 +3,9 @@
 /* region INPUT */
 .v-input
   align-items: flex-start
-  display: grid
   flex-wrap: wrap
   flex: 1 1 auto
   font-size: $input-font-size
-  grid-template-areas: "prepend control append" "a messages b"
-  grid-template-columns: min-content auto min-content
-  grid-template-rows: auto auto
   letter-spacing: $input-letter-spacing
   max-width: $input-max-width
   transition: color $input-transition-timing
@@ -143,14 +139,6 @@
   .v-input--variant-plain &,
   .v-input--variant-underlined &
     align-self: flex-end
-
-.v-input__prepend-outer
-  margin-inline-end: $input-prepend-outer-margin-inline-end
-  grid-area: prepend
-
-.v-input__append-outer
-  margin-inline-start: $input-prepend-outer-margin-inline-start
-  grid-area: append
 
 /* endregion */
 /* region LABEL */
@@ -324,7 +312,6 @@
   display: flex
   font-size: $input-details-font-size
   font-weight: $input-details-font-weight
-  grid-area: messages
   letter-spacing: $input-details-letter-spacing
   line-height: $input-details-line-height
   min-height: $input-details-min-height

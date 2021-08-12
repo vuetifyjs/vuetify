@@ -4,6 +4,7 @@ import './VInput.sass'
 // Components
 import { VIcon } from '@/components/VIcon'
 import VInputLabel from './VInputLabel'
+import { VField } from '@/components/VField'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
@@ -149,7 +150,7 @@ export default defineComponent({
         : props.label
 
       return (
-        <div
+        <VField
           class={[
             'v-input',
             {
@@ -170,19 +171,45 @@ export default defineComponent({
             textColorStyles.value,
           ]}
           { ...attrs }
-        >
-          { hasPrependOuter && (
-            <div
-              class="v-input__prepend-outer"
-              onClick={ (e: Event) => emit('click:prepend-outer', e) }
-            >
-              { slots.prependOuter
-                ? slots.prependOuter()
-                : (<VIcon icon={ props.prependOuterIcon } />)
-              }
-            </div>
-          ) }
+          v-slots={{
+            prepend: hasPrependOuter ? () => (
 
+              <div
+                class="v-input__prepend-outer"
+                onClick={ (e: Event) => {
+                  e.stopPropagation()
+                  emit('click:prepend-outer', e)
+                }}
+              >
+                { slots.prependOuter
+                  ? slots.prependOuter()
+                  : (<VIcon icon={ props.prependOuterIcon } />)
+                }
+              </div>
+            ) : undefined,
+
+            append: hasAppendOuter ? () => (
+              <div
+                class="v-input__append-outer"
+                onClick={ (e: Event) => {
+                  e.stopPropagation()
+                  emit('click:append-outer', e)
+                }}
+              >
+                { slots.appendOuter
+                  ? slots.appendOuter()
+                  : (<VIcon icon={ props.appendOuterIcon } />)
+                }
+              </div>
+            ) : undefined,
+
+            details: slots.details ? () => (
+              <div class="v-input__details">
+                { slots.details?.() }
+              </div>
+            ) : undefined,
+          }}
+        >
           <div
             ref={ controlRef }
             class={[
@@ -278,25 +305,7 @@ export default defineComponent({
               )}
             </div>
           </div>
-
-          { hasAppendOuter && (
-            <div
-              class="v-input__append-outer"
-              onClick={ (e: Event) => emit('click:append-outer', e) }
-            >
-              { slots.appendOuter
-                ? slots.appendOuter()
-                : (<VIcon icon={ props.appendOuterIcon } />)
-              }
-            </div>
-          ) }
-
-          { slots.details && (
-            <div class="v-input__details">
-              { slots.details() }
-            </div>
-          ) }
-        </div>
+        </VField>
       )
     })
 

@@ -1,0 +1,32 @@
+@import ./index
+
+.v-field
+  display: grid
+  grid-template-areas: "prepend control append" "a details b"
+  grid-template-columns: min-content auto min-content
+  grid-template-rows: auto auto
+
+.v-field__prepend,
+.v-field__append
+  align-items: center
+  align-self: center
+  display: flex
+
+.v-field__prepend
+  grid-area: prepend
+  margin-inline-end: $field-prepend-margin-inline-end
+
+.v-field__append
+  grid-area: append
+  margin-inline-start: $field-append-margin-inline-start
+
+.v-field__control
+  align-items: center
+  contain: layout
+  display: flex
+  flex: 1 0
+  grid-area: control
+  position: relative
+
+.v-field__details
+  grid-area: details
