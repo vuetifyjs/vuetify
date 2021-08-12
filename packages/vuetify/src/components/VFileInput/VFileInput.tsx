@@ -3,11 +3,11 @@ import './VFileInput.sass'
 
 // Components
 import { VBtn, VChip, VInput } from '@/components'
-import { makeVInputProps } from '@/components/VInput/VInput'
 
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeVInputProps } from '@/components/VInput/VInput'
 import { useLocale } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, watch } from 'vue'
@@ -106,8 +106,8 @@ export default defineComponent({
             'v-file-input',
             attrs.class,
           ]}
+          dirty={ fileValue.value && !!fileValue.value.length }
           { ...props }
-          dirty={fileValue.value && !!fileValue.value.length}
           onClick:control={ ({ inputRef }) => inputRef.value?.click?.() }
           v-slots={{
             prependOuter: props.prependOuterIcon ? ({ inputRef }) => (
@@ -138,8 +138,8 @@ export default defineComponent({
 
                     if (!isFocused) inputRef.value?.focus()
                   } }
-                  onBlur={slotProps.onBlur}
-                  onFocus={slotProps.onFocus}
+                  onBlur={ slotProps.onBlur }
+                  onFocus={ slotProps.onFocus }
                   { ...restAttrs }
                 />
 
@@ -170,8 +170,8 @@ export default defineComponent({
                 variant="text"
                 color={ props.color }
                 disabled={ props.disabled || !fileValue.value?.length }
-                onFocus={focus}
-                onBlur={blur}
+                onFocus={ focus }
+                onBlur={ blur }
                 onClick={
                   (e: Event) => {
                     e.stopPropagation()

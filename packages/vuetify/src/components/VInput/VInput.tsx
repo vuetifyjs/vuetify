@@ -243,7 +243,8 @@ export default defineComponent({
                   class: 'v-input__input',
                   onFocus: () => (isFocused.value = true),
                   onBlur: () => (isFocused.value = false),
-                }}) }
+                },
+              }) }
             </div>
 
             { hasAppend && (
