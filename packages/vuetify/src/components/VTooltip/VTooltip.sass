@@ -1,12 +1,7 @@
 @import './_variables.scss'
 
 .v-tooltip
-  display: none
-
-  &--attached
-    display: inline
-
-  &__content
+  .v-overlay__content
     background: $tooltip-background-color
     color: $tooltip-text-color
     border-radius: $tooltip-border-radius
@@ -14,20 +9,16 @@
     line-height: round($tooltip-font-size * 1.6)
     display: inline-block
     padding: $tooltip-padding
-    position: absolute
     text-transform: initial
     width: auto
     opacity: 1
     pointer-events: none
 
-    &--fixed
-      position: fixed
-
-    &[class*="-active"]
-      transition-timing-function: $tooltip-transition-timing-function
-
-    &[class*="enter-active"]
-      transition-duration: $tooltip-transition-enter-duration
-
-    &[class*="leave-active"]
-      transition-duration: $tooltip-transition-leave-duration
+    //&[class*="-active"]
+    //  transition-timing-function: $tooltip-transition-timing-function
+    //
+    //&[class*="enter-active"]
+    //  transition-duration: $tooltip-transition-enter-duration
+    //
+    //&[class*="leave-active"]
+    //  transition-duration: $tooltip-transition-leave-duration

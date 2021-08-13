@@ -123,6 +123,11 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
     return isNaN(val) ? Infinity : val
   })
 
+  const configuredMinWidth = computed(() => {
+    const val = parseFloat(props.minWidth!)
+    return isNaN(val) ? Infinity : val
+  })
+
   const hasMaxWidth = false
 
   watch(
@@ -180,7 +185,7 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
       : anchor.side === 'end' ? freeSpace.right
       : anchor.side === 'start' ? freeSpace.left
       : null
-    const minWidth = Math.min(maxWidth!, targetBox.width)
+    const minWidth = Math.min(configuredMinWidth.value, maxWidth!, targetBox.width)
     const maxHeight = fitsY ? configuredMaxHeight.value : Math.min(
       configuredMaxHeight.value,
       viewportHeight - viewportMargin * 2,

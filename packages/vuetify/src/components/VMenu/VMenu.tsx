@@ -1,10 +1,6 @@
 // Styles
 import './VMenu.sass'
 
-// Directives
-import ClickOutside from '@/directives/click-outside'
-import Resize from '@/directives/resize'
-
 // Utilities
 import {
   defineComponent,
@@ -15,11 +11,6 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 export default defineComponent({
   name: 'VMenu',
-
-  directives: {
-    ClickOutside,
-    Resize,
-  },
 
   props: {
     closeOnClick: {
