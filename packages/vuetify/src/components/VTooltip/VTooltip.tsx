@@ -61,6 +61,11 @@ export default defineComponent({
         : props.origin + ' center' as StrategyProps['origin']
     })
 
+    const transition = computed(() => {
+      if (props.transition) return props.transition
+      return isActive.value ? 'scale-transition' : 'fade-transition'
+    })
+
     return () => {
       return (
         <VOverlay
@@ -69,7 +74,7 @@ export default defineComponent({
             'v-tooltip',
           ]}
           id={ id.value }
-          transition={ props.transition }
+          transition={ transition.value }
           absolute
           positionStrategy="connected"
           scrollStrategy="reposition"

@@ -129,7 +129,7 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
   })
 
   watch(
-    () => [preferredAnchor.value, preferredOrigin.value],
+    () => [preferredAnchor.value, preferredOrigin.value, props.offset],
     () => updatePosition(),
     { immediate: !activatorFixed }
   )
@@ -171,6 +171,8 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
       data.contentEl.value!.style.removeProperty('max-height')
 
       contentBox = nullifyTransforms(data.contentEl.value!)
+      contentBox.x -= parseFloat(data.contentEl.value!.style.left) || 0
+      contentBox.y -= parseFloat(data.contentEl.value!.style.top) || 0
 
       data.contentEl.value!.style.maxWidth = initialMaxWidth
       data.contentEl.value!.style.maxHeight = initialMaxHeight
@@ -219,7 +221,8 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
     const { x, y } = getOffset(targetPoint, contentPoint)
 
     Object.assign(contentStyles.value, {
-      transform: `translate(${Math.round(x)}px, ${Math.round(y)}px)`,
+      top: convertToUnit(Math.round(y)),
+      left: convertToUnit(Math.round(x)), // TODO: right for origin="end", rtl
       transformOrigin: physicalAnchor(origin, data.activatorEl.value!),
       minWidth: convertToUnit(minWidth),
       maxWidth: convertToUnit(maxWidth),

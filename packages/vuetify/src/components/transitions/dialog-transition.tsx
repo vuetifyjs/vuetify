@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import { Transition } from 'vue'
+import { nextTick, Transition } from 'vue'
 import { acceleratedEasing, deceleratedEasing, defineComponent, nullifyTransforms } from '@/util'
 
 export default defineComponent({
@@ -11,7 +11,9 @@ export default defineComponent({
 
   setup (props, { slots }) {
     const functions = {
-      onEnter (el: Element, done: () => void) {
+      async onEnter (el: Element, done: () => void) {
+        await new Promise(resolve => requestAnimationFrame(resolve))
+
         const { x, y } = getDimensions(props.target!, el as HTMLElement)
 
         const animation = el.animate([
@@ -23,7 +25,9 @@ export default defineComponent({
         })
         animation.finished.then(() => done())
       },
-      onLeave (el: Element, done: () => void) {
+      async onLeave (el: Element, done: () => void) {
+        await new Promise(resolve => requestAnimationFrame(resolve))
+
         const { x, y } = getDimensions(props.target!, el as HTMLElement)
 
         const animation = el.animate([

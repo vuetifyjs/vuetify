@@ -6,7 +6,7 @@ import {
   defineComponent,
 } from '@/util'
 import { makeTransitionProps } from '@/composables/transition'
-import { VOverlay } from '@/components'
+import { VDialogTransition, VOverlay } from '@/components'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 export default defineComponent({
@@ -30,7 +30,7 @@ export default defineComponent({
     openOnHover: Boolean,
 
     ...makeTransitionProps({
-      transition: false,
+      transition: { component: VDialogTransition },
     } as const),
   },
 
