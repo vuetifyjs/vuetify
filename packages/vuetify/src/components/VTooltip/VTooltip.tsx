@@ -76,6 +76,7 @@ export default defineComponent({
           anchor={ anchor.value }
           origin={ origin.value }
           min-width={ 0 }
+          offset={ 10 }
           scrim={ false }
           aria-role="dialog"
           aria-modal="true"

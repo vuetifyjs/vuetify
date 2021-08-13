@@ -29,7 +29,7 @@ export interface StrategyProps {
   )
   anchor: Anchor
   origin: Anchor | 'auto' | 'overlap'
-  offset?: string
+  offset?: number | string
   maxHeight?: number | string
   maxWidth?: number | string
   minHeight?: number | string
@@ -50,7 +50,7 @@ export const makePositionStrategyProps = propsFactory({
     type: String as PropType<StrategyProps['origin']>,
     default: 'auto',
   },
-  offset: String,
+  offset: [Number, String],
 })
 
 export function usePositionStrategies (
@@ -142,6 +142,13 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
   // eslint-disable-next-line max-statements
   function updatePosition () {
     const targetBox = data.activatorEl.value!.getBoundingClientRect()
+    // TODO: offset shouldn't affect width
+    if (props.offset) {
+      targetBox.x -= +props.offset
+      targetBox.y -= +props.offset
+      targetBox.width += +props.offset * 2
+      targetBox.height += +props.offset * 2
+    }
 
     const scrollParent = getScrollParent(data.contentEl.value)
     const viewportWidth = scrollParent.clientWidth
