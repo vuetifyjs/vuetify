@@ -11,7 +11,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, watch } from 'vue'
-import { defineComponent, humanReadableFileSize, pick } from '@/util'
+import { defineComponent, humanReadableFileSize, pick, wrapInArray } from '@/util'
 
 // Types
 import type { DefaultInputSlot, VInputSlot } from '@/components/VInput/VInput'
@@ -51,10 +51,9 @@ export default defineComponent({
     },
     modelValue: {
       type: Array as PropType<File[] | undefined>,
-      // TODO: This breaks types??
-      // validator: val => {
-      //   return wrapInArray(val).every(v => v != null && typeof v === 'object')
-      // },
+      validator: (val: any) => {
+        return wrapInArray(val).every(v => v != null && typeof v === 'object')
+      },
     },
 
     ...makeVInputProps({
@@ -70,11 +69,10 @@ export default defineComponent({
   setup (props, { attrs, slots }) {
     const { t } = useLocale()
     const fileValue = useProxiedModel(props, 'modelValue')
-    const rootRef = ref()
+    const rootRef = ref<VInput>()
 
     watch(() => props.modelValue, value => {
-      if (rootRef.value?.inputRef.value && (value == null || value?.length === 0)) {
-        // hmm, inputRef gets unwrapped?
+      if (rootRef.value?.inputRef?.value && (value == null || value?.length === 0)) {
         rootRef.value.inputRef.value = ''
       }
     })

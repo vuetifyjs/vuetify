@@ -1,2 +1,2 @@
-export { default as VInput } from './VInput'
+export * from './VInput'
 export { default as VInputLabel } from './VInputLabel'

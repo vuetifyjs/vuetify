@@ -68,7 +68,7 @@ export const makeVInputProps = propsFactory({
   ...makeDensityProps(),
 }, 'v-input')
 
-export default defineComponent({
+export const VInput = defineComponent({
   name: 'VInput',
 
   inheritAttrs: false,
@@ -332,3 +332,6 @@ export default defineComponent({
     }
   },
 })
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export type VInput = InstanceType<typeof VInput>
