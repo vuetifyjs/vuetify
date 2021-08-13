@@ -6,7 +6,6 @@ const frames = [] as any[]
  * This is useful for heavy tasks that may cause jank if all ran together
  */
 export function requestNewFrame (cb: () => void) {
-  console.log(clean, frames.length)
   if (!clean || frames.length) {
     frames.push(cb)
     run()

@@ -83,6 +83,9 @@ export default defineComponent({
           min-width={ 0 }
           offset={ 10 }
           scrim={ false }
+          persistent
+          open-on-click={ false }
+          open-on-hover
           aria-role="dialog"
           aria-modal="true"
           activatorProps={{
