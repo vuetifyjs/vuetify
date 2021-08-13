@@ -128,8 +128,6 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
     return isNaN(val) ? Infinity : val
   })
 
-  const hasMaxWidth = false
-
   watch(
     () => [preferredAnchor.value, preferredOrigin.value],
     () => updatePosition(),
@@ -143,24 +141,38 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
 
   // eslint-disable-next-line max-statements
   function updatePosition () {
-    let contentBox
-    if (hasMaxWidth) {
-      const initialMaxWidth = data.activatorEl.value!.style.maxWidth
-      data.activatorEl.value!.style.removeProperty('maxWidth')
-      contentBox = nullifyTransforms(data.contentEl.value!)
-      data.activatorEl.value!.style.maxWidth = initialMaxWidth
-    } else {
-      contentBox = nullifyTransforms(data.contentEl.value!)
-    }
     const targetBox = data.activatorEl.value!.getBoundingClientRect()
-    const contentHeight = Math.min(
-      configuredMaxHeight.value,
-      [...data.contentEl.value!.children].reduce((acc, el) => acc + el.scrollHeight, 0)
-    )
 
     const scrollParent = getScrollParent(data.contentEl.value)
     const viewportWidth = scrollParent.clientWidth
     const viewportHeight = Math.min(scrollParent.clientHeight, window.innerHeight)
+
+    let contentBox
+    {
+      const scrollables = new Map<Element, [number, number]>()
+      data.contentEl.value!.querySelectorAll('*').forEach(el => {
+        const x = el.scrollLeft
+        const y = el.scrollTop
+        if (x || y) {
+          scrollables.set(el, [x, y])
+        }
+      })
+
+      const initialMaxWidth = data.contentEl.value!.style.maxWidth
+      const initialMaxHeight = data.contentEl.value!.style.maxHeight
+      data.contentEl.value!.style.removeProperty('max-width')
+      data.contentEl.value!.style.removeProperty('max-height')
+
+      contentBox = nullifyTransforms(data.contentEl.value!)
+
+      data.contentEl.value!.style.maxWidth = initialMaxWidth
+      data.contentEl.value!.style.maxHeight = initialMaxHeight
+      scrollables.forEach((position, el) => {
+        el.scrollTo(...position)
+      })
+    }
+
+    const contentHeight = Math.min(configuredMaxHeight.value, contentBox.height)
 
     const viewportMargin = 12
     const freeSpace = {
@@ -188,12 +200,8 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
     const minWidth = Math.min(configuredMinWidth.value, maxWidth!, targetBox.width)
     const maxHeight = fitsY ? configuredMaxHeight.value : Math.min(
       configuredMaxHeight.value,
-      viewportHeight - viewportMargin * 2,
       Math.floor(anchor.side === 'top' ? freeSpace.top : freeSpace.bottom)
     )
-
-    // TODO
-    // if (maxWidth) hasMaxWidth = true
 
     const targetPoint = anchorToPoint(anchor, targetBox)
     const contentPoint = anchorToPoint(origin, {
