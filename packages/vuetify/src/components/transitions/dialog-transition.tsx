@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import { nextTick, Transition } from 'vue'
+import { Transition } from 'vue'
 import { acceleratedEasing, deceleratedEasing, defineComponent, nullifyTransforms } from '@/util'
 
 export default defineComponent({
