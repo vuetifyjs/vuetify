@@ -15,11 +15,31 @@ import { computed, ref, toRef, watch, watchEffect } from 'vue'
 import { convertToUnit, defineComponent, getUid, nullifyTransforms, propsFactory, standardEasing, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
 type Variant = typeof allowedVariants[number]
+
+export interface VInputSlot {
+  isActive: boolean
+  isDirty: boolean
+  isFocused: boolean
+  controlRef: Ref<HTMLElement | undefined>
+  inputRef: Ref<HTMLInputElement | undefined>
+  fieldRef: Ref<HTMLElement | undefined>
+}
+
+export interface DefaultInputSlot extends VInputSlot {
+  focus: () => void
+  blur: () => void
+  props: {
+    id: string
+    class: string
+    onFocus: () => void
+    onBlur: () => void
+  }
+}
 
 export const makeVInputProps = propsFactory({
   disabled: Boolean,
@@ -244,7 +264,7 @@ export default defineComponent({
                   onFocus: () => (isFocused.value = true),
                   onBlur: () => (isFocused.value = false),
                 },
-              }) }
+              } as DefaultInputSlot) }
             </div>
 
             { hasAppend && (

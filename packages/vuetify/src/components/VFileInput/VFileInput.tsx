@@ -14,6 +14,7 @@ import { computed, ref, watch } from 'vue'
 import { defineComponent, humanReadableFileSize, pick } from '@/util'
 
 // Types
+import type { DefaultInputSlot, VInputSlot } from '@/components/VInput/VInput'
 import type { PropType } from 'vue'
 
 export default defineComponent({
@@ -110,7 +111,7 @@ export default defineComponent({
           { ...props }
           onClick:control={ ({ inputRef }) => inputRef.value?.click?.() }
           v-slots={{
-            prependOuter: props.prependOuterIcon ? ({ inputRef }) => (
+            prependOuter: props.prependOuterIcon ? ({ inputRef }: VInputSlot) => (
               <VBtn
                 icon={ props.prependOuterIcon }
                 variant="text"
@@ -120,7 +121,7 @@ export default defineComponent({
               />
             ) : undefined,
 
-            default: ({ isDirty, isFocused, inputRef, props: slotProps }) => (
+            default: ({ isDirty, isFocused, inputRef, props: slotProps }: DefaultInputSlot) => (
               <>
                 <input
                   ref={ inputRef }
@@ -150,7 +151,7 @@ export default defineComponent({
                       totalBytes: totalBytes.value,
                       totalBytesReadable: totalBytesReadable.value,
                     })
-                    : props.chips ? fileNames.value.map((text, index) => (
+                    : props.chips ? fileNames.value.map(text => (
                       <VChip
                         key={ text }
                         size="small"
@@ -163,7 +164,7 @@ export default defineComponent({
               </>
             ),
 
-            append: ({ inputRef, focus, blur }) => props.clearable ? (
+            append: ({ inputRef, focus, blur }: DefaultInputSlot) => props.clearable ? (
               <VBtn
                 class="v-file-input__clearable"
                 icon={ props.appendIcon }
@@ -177,7 +178,8 @@ export default defineComponent({
                     e.stopPropagation()
 
                     fileValue.value = []
-                    inputRef.value.value = ''
+                    // they said I could do it
+                    inputRef.value!.value = ''
                   }
                 }
               />
