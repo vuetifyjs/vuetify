@@ -74,8 +74,9 @@ export default defineComponent({
   },
 
   emits: {
-    'click:close': (e: Event) => e,
-    'update:active': (value: Boolean) => value,
+    'click:close': (e: Event) => true,
+    'update:active': (value: Boolean) => true,
+    'update:modelValue': (value: Boolean) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
