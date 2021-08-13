@@ -21,18 +21,18 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
 type Variant = typeof allowedVariants[number]
 
-export interface VInputSlot {
+export interface DefaultInputSlot {
   isActive: boolean
   isDirty: boolean
   isFocused: boolean
   controlRef: Ref<HTMLElement | undefined>
   inputRef: Ref<HTMLInputElement | undefined>
   fieldRef: Ref<HTMLElement | undefined>
-}
-
-export interface DefaultInputSlot extends VInputSlot {
   focus: () => void
   blur: () => void
+}
+
+export interface VInputSlot extends DefaultInputSlot {
   props: {
     id: string
     class: string
@@ -85,7 +85,7 @@ export const VInput = defineComponent({
     'click:prepend': (e: Event) => true,
     'click:append': (e: Event) => true,
     'click:append-outer': (e: Event) => true,
-    'click:control': (props: any) => true,
+    'click:control': (props: DefaultInputSlot) => true as any,
     'update:active': (active: boolean) => true,
   },
 
@@ -153,7 +153,7 @@ export const VInput = defineComponent({
       isFocused.value = false
     }
 
-    const slotProps = computed(() => ({
+    const slotProps = computed<DefaultInputSlot>(() => ({
       isActive: isActive.value,
       isDirty: props.dirty,
       isFocused: isFocused.value,
@@ -264,7 +264,7 @@ export const VInput = defineComponent({
                   onFocus: () => (isFocused.value = true),
                   onBlur: () => (isFocused.value = false),
                 },
-              } as DefaultInputSlot) }
+              } as VInputSlot) }
             </div>
 
             { hasAppend && (

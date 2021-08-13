@@ -38,7 +38,6 @@ export default defineComponent({
     },
     counter: Boolean,
     multiple: Boolean,
-    // placeholder: String,
     showSize: {
       type: [Boolean, Number] as PropType<boolean | 1000 | 1024>,
       default: false,
@@ -100,26 +99,26 @@ export default defineComponent({
 
       return (
         <VInput
-          ref={rootRef}
+          ref={ rootRef }
           class={[
             'v-file-input',
             attrs.class,
           ]}
           dirty={ fileValue.value && !!fileValue.value.length }
           { ...props }
-          onClick:control={ ({ inputRef }) => inputRef.value?.click?.() }
+          onClick:control={ ({ inputRef }) => inputRef.value?.click() }
           v-slots={{
             prependOuter: props.prependOuterIcon ? ({ inputRef }: VInputSlot) => (
               <VBtn
-                icon={ props.prependOuterIcon }
-                variant="text"
-                tabindex="-1"
-                onClick={ () => inputRef.value?.click() }
                 disabled={ props.disabled }
+                icon={ props.prependOuterIcon }
+                tabindex="-1"
+                variant="text"
+                onClick={ () => inputRef.value?.click() }
               />
             ) : undefined,
 
-            default: ({ isDirty, isFocused, inputRef, props: slotProps }: DefaultInputSlot) => (
+            default: ({ isDirty, isFocused, inputRef, props: slotProps }: VInputSlot) => (
               <>
                 <input
                   ref={ inputRef }
@@ -127,6 +126,8 @@ export default defineComponent({
                   id={ slotProps.id }
                   disabled={ props.disabled }
                   multiple={ props.multiple }
+                  onFocus={ slotProps.onFocus }
+                  onBlur={ slotProps.onBlur }
                   onClick={ e => e.stopPropagation() }
                   onChange={ e => {
                     if (!e.target) return
@@ -137,8 +138,6 @@ export default defineComponent({
 
                     if (!isFocused) inputRef.value?.focus()
                   } }
-                  onBlur={ slotProps.onBlur }
-                  onFocus={ slotProps.onFocus }
                   { ...restAttrs }
                 />
 
@@ -165,10 +164,10 @@ export default defineComponent({
             append: ({ inputRef, focus, blur }: DefaultInputSlot) => props.clearable ? (
               <VBtn
                 class="v-file-input__clearable"
-                icon={ props.appendIcon }
-                variant="text"
                 color={ props.color }
                 disabled={ props.disabled || !fileValue.value?.length }
+                icon={ props.appendIcon }
+                variant="text"
                 onFocus={ focus }
                 onBlur={ blur }
                 onClick={
@@ -176,7 +175,6 @@ export default defineComponent({
                     e.stopPropagation()
 
                     fileValue.value = []
-                    // they said I could do it
                     inputRef.value!.value = ''
                   }
                 }
