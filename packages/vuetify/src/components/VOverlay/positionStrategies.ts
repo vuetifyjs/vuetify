@@ -128,19 +128,22 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
     return isNaN(val) ? Infinity : val
   })
 
-  watch(
-    () => [preferredAnchor.value, preferredOrigin.value, props.offset],
-    () => updatePosition(),
-    { immediate: !activatorFixed }
-  )
+  let observe = false
+  const observer = new ResizeObserver(() => {
+    if (observe) updatePosition()
+  })
+  observer.observe(data.activatorEl.value!)
+  observer.observe(data.contentEl.value!)
 
-  if (activatorFixed) nextTick(() => updatePosition())
-  requestAnimationFrame(() => {
-    if (contentStyles.value.maxHeight) updatePosition()
+  onScopeDispose(() => {
+    observer.disconnect()
   })
 
   // eslint-disable-next-line max-statements
   function updatePosition () {
+    observe = false
+    requestAnimationFrame(() => observe = true)
+
     const targetBox = data.activatorEl.value!.getBoundingClientRect()
     // TODO: offset shouldn't affect width
     if (props.offset) {
@@ -229,6 +232,17 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
       maxHeight: convertToUnit(maxHeight),
     })
   }
+
+  watch(
+    () => [preferredAnchor.value, preferredOrigin.value, props.offset],
+    () => updatePosition(),
+    { immediate: !activatorFixed }
+  )
+
+  if (activatorFixed) nextTick(() => updatePosition())
+  requestAnimationFrame(() => {
+    if (contentStyles.value.maxHeight) updatePosition()
+  })
 
   return { updatePosition }
 }
