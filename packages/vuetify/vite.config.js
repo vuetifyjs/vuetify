@@ -14,6 +14,9 @@ export default defineConfig(({ mode }) => {
     server: {
       port: process.env.PORT,
       strictPort: !!process.env.PORT,
+      hmr: {
+        port: 443
+      }
     },
     resolve: {
       alias: [

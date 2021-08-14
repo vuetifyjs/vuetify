@@ -7,11 +7,13 @@
   justify-content: space-between
   max-width: 100%
   overflow: hidden
-  padding-left: $app-bar-padding-start
-  padding-right: calc(#{$app-bar-padding-end} + var(--v-scrollbar-offset))
+  padding-left: max(#{$app-bar-padding-start}, var(--v-safe-area-left))
+  padding-right: max(#{$app-bar-padding-end}, var(--v-scrollbar-offset))
   position: fixed
   transition: $app-bar-transition
   transition-property: height, transform
+  padding-top: var(--v-safe-area-top)
+  height: calc(var(--v-layout-item-height) + var(--v-safe-area-top))
 
   // must be above border mixin for cascade
   &--is-active

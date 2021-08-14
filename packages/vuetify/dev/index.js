@@ -14,3 +14,5 @@ export default viteSSR(App, { routes }, ({ app }) => {
   app.use(vuetify)
   app.component('FontAwesomeIcon', FontAwesomeIcon)
 })
+
+navigator.serviceWorker.register('/sw.js')

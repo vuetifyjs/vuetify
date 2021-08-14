@@ -1,0 +1,15 @@
+{
+  "background_color": "blue",
+  "description": "Vuetify",
+  "display": "fullscreen",
+  "name": "Vuetify",
+  "short_name": "Vuetify",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/vuetify-logo-dark.png",
+      "sizes": "500x500",
+      "type": "image/png"
+    }
+  ]
+}

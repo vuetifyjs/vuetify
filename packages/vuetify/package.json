@@ -106,7 +106,7 @@
     "rollup-plugin-dts": "^3.0.2",
     "style-loader": "^2.0.0",
     "url-loader": "^4.1.1",
-    "vite": "^2.4.2",
+    "vite": "^2.4.4",
     "vite-ssr": "^0.11.1",
     "vue-meta": "^2.4.0",
     "vue-router": "^4.0.10",

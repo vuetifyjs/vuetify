@@ -213,7 +213,7 @@ export function createLayout (props: { layout?: string[], overlaps?: string[], f
 
         return {
           [position.value]: 0,
-          height: isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)` : `${elementSize.value}px`,
+          '--v-layout-item-height': isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)` : `${elementSize.value}px`,
           marginLeft: isOppositeHorizontal ? undefined : `${item.left}px`,
           marginRight: isOppositeHorizontal ? `${item.right}px` : undefined,
           marginTop: position.value !== 'bottom' ? `${item.top}px` : undefined,
