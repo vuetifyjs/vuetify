@@ -1,15 +1,19 @@
 // Styles
 import './VTooltip.sass'
 
-// Utilities
-import {
-  defineComponent, getUid,
-} from '@/util'
-import { makeTransitionProps } from '@/composables/transition'
-import { VOverlay } from '@/components'
+// Components
+import { VOverlay } from '@/components/VOverlay'
+
+// Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
-import type { PropType } from 'vue'
+import { makeTransitionProps } from '@/composables/transition'
+
+// Utilities
 import { computed } from 'vue'
+import { defineComponent, getUid } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
 import type { StrategyProps } from '@/components/VOverlay/positionStrategies'
 
 export default defineComponent({

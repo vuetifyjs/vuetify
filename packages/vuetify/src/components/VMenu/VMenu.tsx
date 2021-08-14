@@ -1,13 +1,16 @@
 // Styles
 import './VMenu.sass'
 
-// Utilities
-import {
-  defineComponent,
-} from '@/util'
+// Components
+import { VOverlay } from '@/components/VOverlay'
+import { VDialogTransition } from '@/components/transitions'
+
+// Composables
 import { makeTransitionProps } from '@/composables/transition'
-import { VDialogTransition, VOverlay } from '@/components'
 import { useProxiedModel } from '@/composables/proxiedModel'
+
+// Utilities
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VMenu',
