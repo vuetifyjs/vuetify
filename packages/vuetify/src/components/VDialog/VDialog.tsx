@@ -17,6 +17,8 @@ import { defineComponent, IN_BROWSER } from '@/util'
 export default defineComponent({
   name: 'VDialog',
 
+  inheritAttrs: false,
+
   props: {
     fullscreen: Boolean,
     origin: {

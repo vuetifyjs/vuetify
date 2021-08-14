@@ -243,7 +243,6 @@ export default defineComponent({
                     dimensionStyles.value,
                     contentStyles.value,
                   ]}
-                  tabindex={ -1 }
                   onKeydown={ onKeydown }
                 >
                   { slots.default?.({ isActive }) }

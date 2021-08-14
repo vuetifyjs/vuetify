@@ -19,6 +19,8 @@ import type { StrategyProps } from '@/components/VOverlay/positionStrategies'
 export default defineComponent({
   name: 'VTooltip',
 
+  inheritAttrs: false,
+
   props: {
     id: String,
     modelValue: Boolean,
@@ -46,7 +48,6 @@ export default defineComponent({
     const isActive = useProxiedModel(props, 'modelValue')
 
     const uid = getUid()
-
     const id = computed(() => props.id || `v-tooltip-${uid}`)
 
     const anchor = computed(() => {
@@ -90,10 +91,10 @@ export default defineComponent({
           persistent
           open-on-click={ false }
           open-on-hover
-          aria-role="dialog"
-          aria-modal="true"
+          role="tooltip"
+          eager
           activatorProps={{
-            'aria-describedby': id,
+            'aria-describedby': id.value,
           }}
           { ...attrs }
           v-slots={{

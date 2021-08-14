@@ -10,10 +10,13 @@ import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, getUid } from '@/util'
+import { computed } from 'vue'
 
 export default defineComponent({
   name: 'VMenu',
+
+  inheritAttrs: false,
 
   props: {
     // TODO
@@ -27,6 +30,7 @@ export default defineComponent({
     // },
     disableKeys: Boolean,
     modelValue: Boolean,
+    id: String,
 
     ...makeTransitionProps({
       transition: { component: VDialogTransition },
@@ -40,6 +44,9 @@ export default defineComponent({
   setup (props, { attrs, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
 
+    const uid = getUid()
+    const id = computed(() => props.id || `v-menu-${uid}`)
+
     return () => {
       return (
         <VOverlay
@@ -52,11 +59,10 @@ export default defineComponent({
           positionStrategy="connected"
           scrollStrategy="reposition"
           scrim={ false }
-          aria-role="dialog"
-          aria-modal="true"
           activatorProps={{
             'aria-haspopup': 'menu',
             'aria-expanded': String(isActive.value),
+            'aria-owns': id.value,
           }}
           { ...attrs }
           v-slots={{
