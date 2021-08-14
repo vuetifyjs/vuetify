@@ -13,6 +13,7 @@ interface GroupItem {
 }
 
 interface GroupProps {
+  disabled?: boolean
   modelValue?: unknown
   multiple?: boolean
   mandatory?: boolean | 'force'
@@ -30,6 +31,7 @@ interface GroupProvide {
   next: () => void
   selectedClass: Ref<string | undefined>
   items: Ref<number[]>
+  disabled: Ref<boolean | undefined>
 }
 
 export interface GroupItemProvide {
@@ -52,6 +54,7 @@ export const makeGroupProps = propsFactory({
   mandatory: [Boolean, String] as PropType<boolean | 'force'>,
   max: Number,
   selectedClass: String,
+  disabled: Boolean,
 }, 'group')
 
 export const makeGroupItemProps = propsFactory({
@@ -84,7 +87,7 @@ export function useGroupItem (
 
   const id = getUid()
   const value = toRef(props, 'value')
-  const disabled = toRef(props, 'disabled')
+  const disabled = computed(() => group.disabled.value || props.disabled)
 
   group.register({
     id,
@@ -245,6 +248,7 @@ export function useGroup (
     unregister,
     selected,
     select,
+    disabled: toRef(props, 'disabled'),
     prev: () => step(items.length - 1),
     next: () => step(1),
     isSelected: (id: number) => selected.value.includes(id),

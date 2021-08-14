@@ -20,11 +20,10 @@ export default defineComponent({
   name: 'VExpansionPanels',
 
   props: {
-    disabled: Boolean,
-    readonly: Boolean,
     variant: {
       type: String,
-      validator: (v: any) => ['accordion', 'inset', 'popout'].includes(v),
+      default: 'default',
+      validator: (v: any) => ['default', 'accordion', 'inset', 'popout'].includes(v),
     },
     ...makeTagProps(),
     ...makeGroupProps(),
@@ -35,7 +34,7 @@ export default defineComponent({
     useGroup(props, VExpansionPanelSymbol)
     const { themeClasses } = useTheme(props)
 
-    const variantClass = computed(() => props.variant && `v-expansion-panels--${props.variant}`)
+    const variantClass = computed(() => props.variant && `v-expansion-panels--variant-${props.variant}`)
 
     return () => (
       <props.tag

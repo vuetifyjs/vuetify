@@ -20,7 +20,6 @@
 
 // Block
 .v-expansion-panels
-  border-radius: $expansion-panel-border-radius
   display: flex
   flex-wrap: wrap
   justify-content: center
@@ -28,7 +27,7 @@
   padding: 0
   width: 100%
 
-  &:not(&--accordion)
+  &:not(&--variant-accordion)
     > :not(:first-child):not(:last-child):not(.v-expansion-panel--active):not(.v-expansion-panel--before-active)
       border-bottom-left-radius: 0 !important
       border-bottom-right-radius: 0 !important
@@ -45,7 +44,7 @@
       border-top-left-radius: 0 !important
       border-top-right-radius: 0 !important
 
-  &--accordion
+  &--variant-accordion
     > :first-child
       border-bottom-left-radius: 0 !important
       border-bottom-right-radius: 0 !important
@@ -54,8 +53,15 @@
       border-top-left-radius: 0 !important
       border-top-right-radius: 0 !important
 
+      .v-expansion-panel-header--active
+        border-bottom-left-radius: initial
+        border-bottom-right-radius: initial
+
     > :not(:first-child):not(:last-child)
       border-radius: 0 !important
+
+    .v-expansion-panel-header__overlay
+      transition: 0.3s border-radius $standard-easing
 
 // Element
 .v-expansion-panel
@@ -63,7 +69,7 @@
   max-width: 100%
   position: relative
   transition: .3s all $standard-easing
-  transition-property: margin-top, border-radius, border
+  transition-property: margin-top, border-radius, border, max-width
   border-radius: $expansion-panel-border-radius
 
   &:not(:first-child)::after
@@ -74,6 +80,7 @@
     position: absolute
     right: 0
     top: 0
+    transition: 0.3s opacity $standard-easing
 
   &--disabled
     .v-expansion-panel-header
@@ -100,17 +107,9 @@
   z-index: -1
   @include elevation(2)
 
-.v-expansion-panel-header__icon
-  display: inline-flex
-  margin-bottom: -4px
-  margin-top: -4px
-  user-select: none
-  margin-inline-start: auto
-
 .v-expansion-panel-header
   align-items: center
-  border-top-left-radius: inherit
-  border-top-right-radius: inherit
+  border-radius: inherit
   display: flex
   font-size: $expansion-panel-header-font-size
   line-height: 1
@@ -127,14 +126,6 @@
   &--active::before
     opacity: 0.12
 
-  &:not(.v-expansion-panel-header--active)
-    border-bottom-left-radius: inherit
-    border-bottom-right-radius: inherit
-
-  &.v-expansion-panel-header--active
-    border-bottom-left-radius: 0 !important
-    border-bottom-right-radius: 0 !important
-
 .v-expansion-panel-header__overlay
   content: ''
   position: absolute
@@ -146,6 +137,13 @@
   border-radius: inherit
   opacity: 0
 
+.v-expansion-panel-header__icon
+  display: inline-flex
+  margin-bottom: -4px
+  margin-top: -4px
+  user-select: none
+  margin-inline-start: auto
+
 .v-expansion-panel-content
   display: flex
 
@@ -154,22 +152,22 @@
     flex: 1 1 auto
     max-width: 100%
 
-// Modifiers
-.v-expansion-panels--accordion
+// Variants
+.v-expansion-panels--variant-accordion
   > .v-expansion-panel
     margin-top: 0
 
     &::after
       opacity: 1
 
-.v-expansion-panels--popout
+.v-expansion-panels--variant-popout
   > .v-expansion-panel
     max-width: $expansion-panel-popout-max-width
 
     &--active
       max-width: $expansion-panel-popout-active-max-width
 
-.v-expansion-panels--inset
+.v-expansion-panels--variant-inset
   > .v-expansion-panel
     max-width: $expansion-panel-inset-max-width
 
