@@ -234,7 +234,7 @@ export default defineComponent({
                 <div
                   ref={ contentEl }
                   v-show={ isActive.value }
-                  v-click-outside={{ handler: onClickOutside, closeConditional }}
+                  v-click-outside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
                   class={[
                     'v-overlay__content',
                     props.contentClass,
