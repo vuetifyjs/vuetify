@@ -16,21 +16,17 @@ export default defineComponent({
   name: 'VMenu',
 
   props: {
-    closeOnClick: {
-      type: Boolean,
-      default: true,
-    },
-    closeOnContentClick: {
-      type: Boolean,
-      default: true,
-    },
+    // TODO
+    // closeOnClick: {
+    //   type: Boolean,
+    //   default: true,
+    // },
+    // closeOnContentClick: {
+    //   type: Boolean,
+    //   default: true,
+    // },
     disableKeys: Boolean,
     modelValue: Boolean,
-    openOnClick: {
-      type: Boolean,
-      default: true,
-    },
-    openOnHover: Boolean,
 
     ...makeTransitionProps({
       transition: { component: VDialogTransition },
