@@ -1,5 +1,5 @@
 // Utilities
-import { convertToUnit, getScrollParents, propsFactory } from '@/util'
+import { convertToUnit, getScrollParents, IN_BROWSER, propsFactory } from '@/util'
 import { effectScope, nextTick, onScopeDispose, watchEffect } from 'vue'
 import { requestNewFrame } from './requestNewFrame'
 
@@ -35,6 +35,8 @@ export function useScrollStrategies (
   props: StrategyProps,
   data: ScrollStrategyData
 ) {
+  if (!IN_BROWSER) return
+
   let scope: EffectScope | undefined
   watchEffect(async () => {
     scope?.stop()

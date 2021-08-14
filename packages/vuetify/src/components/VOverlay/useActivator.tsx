@@ -1,5 +1,5 @@
 // Utilities
-import { propsFactory } from '@/util'
+import { IN_BROWSER, propsFactory } from '@/util'
 import { makeDelayProps, useDelay } from '@/composables/delay'
 import {
   computed,
@@ -125,7 +125,7 @@ export function useActivator (
 
   let scope: EffectScope
   watch(() => !!props.activator, val => {
-    if (val) {
+    if (val && IN_BROWSER) {
       scope = effectScope()
       scope.run(() => {
         _useActivator(props, { activatorEl, activatorEvents })

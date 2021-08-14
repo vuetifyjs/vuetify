@@ -1,6 +1,6 @@
 // Utilities
 import { computed, effectScope, nextTick, onScopeDispose, ref, watch, watchEffect } from 'vue'
-import { convertToUnit, getScrollParent, isFixedPosition, nullifyTransforms, propsFactory } from '@/util'
+import { convertToUnit, getScrollParent, IN_BROWSER, isFixedPosition, nullifyTransforms, propsFactory } from '@/util'
 import { oppositeAnchor, parseAnchor, physicalAnchor } from './util/anchor'
 import { anchorToPoint, getOffset } from './util/point'
 
@@ -65,7 +65,7 @@ export function usePositionStrategies (
     scope?.stop()
     updatePosition.value = undefined
 
-    if (!(data.isActive.value && props.positionStrategy)) return
+    if (!(IN_BROWSER && data.isActive.value && props.positionStrategy)) return
 
     scope = effectScope()
     await nextTick()
@@ -78,10 +78,10 @@ export function usePositionStrategies (
     })
   })
 
-  window.addEventListener('resize', onResize, { passive: true })
+  IN_BROWSER && window.addEventListener('resize', onResize, { passive: true })
 
   onScopeDispose(() => {
-    window.removeEventListener('resize', onResize)
+    IN_BROWSER && window.removeEventListener('resize', onResize)
     updatePosition.value = undefined
     scope?.stop()
   })
