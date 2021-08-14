@@ -24,7 +24,7 @@ interface ActivatorProps extends DelayProps {
   activator?: 'parent' | string | Element | ComponentPublicInstance
   activatorProps: Dictionary<any>
 
-  openOnClick: boolean
+  openOnClick: boolean | undefined
   openOnHover: boolean
   openOnFocus: boolean | undefined
 }
@@ -38,7 +38,7 @@ export const makeActivatorProps = propsFactory({
 
   openOnClick: {
     type: Boolean,
-    default: true,
+    default: undefined,
   },
   openOnHover: Boolean,
   openOnFocus: {
@@ -59,6 +59,7 @@ export function useActivator (
   let isFocused = false
 
   const openOnFocus = computed(() => props.openOnFocus || (props.openOnFocus == null && props.openOnHover))
+  const openOnClick = computed(() => props.openOnClick || (props.openOnClick == null && !props.openOnHover && !openOnFocus.value))
 
   const { runOpenDelay, runCloseDelay } = useDelay(props, value => {
     if (value === (
@@ -108,7 +109,7 @@ export function useActivator (
       keydown: availableEvents.keydown,
     }
 
-    if (props.openOnClick) {
+    if (openOnClick.value) {
       events.click = availableEvents.click
     }
     if (props.openOnHover) {
