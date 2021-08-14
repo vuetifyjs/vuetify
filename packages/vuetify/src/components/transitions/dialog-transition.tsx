@@ -11,6 +11,9 @@ export default defineComponent({
 
   setup (props, { slots }) {
     const functions = {
+      onBeforeEnter (el: Element) {
+        (el as HTMLElement).style.pointerEvents = 'none'
+      },
       async onEnter (el: Element, done: () => void) {
         await new Promise(resolve => requestAnimationFrame(resolve))
 
@@ -24,6 +27,12 @@ export default defineComponent({
           easing: deceleratedEasing,
         })
         animation.finished.then(() => done())
+      },
+      onAfterEnter (el: Element) {
+        (el as HTMLElement).style.removeProperty('pointer-events')
+      },
+      onBeforeLeave (el: Element) {
+        (el as HTMLElement).style.pointerEvents = 'none'
       },
       async onLeave (el: Element, done: () => void) {
         await new Promise(resolve => requestAnimationFrame(resolve))
@@ -39,11 +48,21 @@ export default defineComponent({
         })
         animation.finished.then(() => done())
       },
+      onAfterLeave (el: Element) {
+        (el as HTMLElement).style.removeProperty('pointer-events')
+      },
     }
 
     return () => {
       return props.target
-        ? <Transition name="dialog-transition" { ...functions } css={ false } v-slots={ slots } />
+        ? (
+          <Transition
+            name="dialog-transition"
+            { ...functions }
+            css={ false }
+            v-slots={ slots }
+          />
+        )
         : <Transition name="dialog-transition" v-slots={ slots } />
     }
   },
