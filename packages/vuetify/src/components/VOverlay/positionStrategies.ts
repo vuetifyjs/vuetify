@@ -224,6 +224,7 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
     const { x, y } = getOffset(targetPoint, contentPoint)
 
     Object.assign(contentStyles.value, {
+      '--v-overlay-anchor-origin': physicalAnchor(anchor, data.activatorEl.value!),
       top: convertToUnit(Math.round(y)),
       left: convertToUnit(Math.round(x)), // TODO: right for origin="end", rtl
       transformOrigin: physicalAnchor(origin, data.activatorEl.value!),

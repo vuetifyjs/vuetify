@@ -71,9 +71,26 @@ export default defineComponent({
 function getDimensions (target: HTMLElement, el: HTMLElement) {
   const targetBox = target.getBoundingClientRect()
   const elBox = nullifyTransforms(el)
+  const [originX, originY] = getComputedStyle(el).transformOrigin.split(' ').map(v => parseFloat(v))
+
+  const [anchorSide, anchorOffset] = getComputedStyle(el).getPropertyValue('--v-overlay-anchor-origin').split(' ')
+
+  let offsetX = targetBox.left + targetBox.width / 2
+  if (anchorSide === 'left' || anchorOffset === 'left') {
+    offsetX -= targetBox.width / 2
+  } else if (anchorSide === 'right' || anchorOffset === 'right') {
+    offsetX += targetBox.width / 2
+  }
+
+  let offsetY = targetBox.top + targetBox.height / 2
+  if (anchorSide === 'top' || anchorOffset === 'top') {
+    offsetY -= targetBox.height / 2
+  } else if (anchorSide === 'bottom' || anchorOffset === 'bottom') {
+    offsetY += targetBox.height / 2
+  }
 
   return {
-    x: (targetBox.width / 2 + targetBox.left) - (elBox.width / 2 + elBox.left),
-    y: (targetBox.height / 2 + targetBox.top) - (elBox.height / 2 + elBox.top),
+    x: offsetX - (originX + elBox.left),
+    y: offsetY - (originY + elBox.top),
   }
 }
