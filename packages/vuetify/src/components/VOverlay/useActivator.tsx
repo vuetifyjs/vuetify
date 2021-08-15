@@ -90,6 +90,11 @@ export function useActivator (
       runCloseDelay()
     },
     focus: (e: FocusEvent) => {
+      if (
+        CSS.supports('selector(:focus-visible)') &&
+        !(e.target as HTMLElement).matches(':focus-visible')
+      ) return
+
       // TODO: :focus-visible
       isFocused = true
       e.stopPropagation()
