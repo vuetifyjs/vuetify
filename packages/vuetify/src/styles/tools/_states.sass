@@ -3,9 +3,14 @@
     #{$selector}
       opacity: calc(#{map-get($states, 'hover')} * var(--v-theme-overlay-multiplier))
 
-  &:focus
+  &:focus-visible
     #{$selector}
       opacity: calc(#{map-get($states, 'focus')} * var(--v-theme-overlay-multiplier))
+
+  @supports not selector(:focus-visible)
+    &:focus
+      #{$selector}
+        opacity: calc(#{map-get($states, 'focus')} * var(--v-theme-overlay-multiplier))
 
   @if ($active)
     &--active
