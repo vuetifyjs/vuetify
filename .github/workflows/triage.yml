@@ -19,3 +19,9 @@ jobs:
             T: enhancement
             T: feature
             T: question
+            Epic
+            duplicate
+            layer 8 issue
+            invalid
+            wontfix
+            working as intended
