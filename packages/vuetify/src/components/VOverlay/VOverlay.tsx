@@ -12,6 +12,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRtl } from '@/composables/rtl'
 import { useTeleport } from '@/composables/teleport'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
 // Directives
 import { ClickOutside } from '@/directives/click-outside'
@@ -27,9 +28,9 @@ import {
 import {
   computed,
   mergeProps,
-  nextTick,
   ref,
   Teleport,
+  toHandlers,
   toRef,
   Transition,
   watch,
@@ -39,7 +40,6 @@ import {
 // Types
 import type { PropType, Ref } from 'vue'
 import type { BackgroundColorData } from '@/composables/color'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
 function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
   const isBooted = ref(eager.value)
@@ -121,7 +121,7 @@ export default defineComponent({
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
-    const { activatorEl, onActivatorClick } = useActivator(props, isActive)
+    const { activatorEl, activatorEvents } = useActivator(props, isActive)
     const { dimensionStyles } = useDimension(props)
 
     const contentEl = ref<HTMLElement>()
@@ -135,15 +135,6 @@ export default defineComponent({
       activatorEl,
       isActive,
       updatePosition,
-    })
-
-    watch(isActive, async val => {
-      await nextTick()
-      if (val) {
-        contentEl.value?.focus({ preventScroll: true })
-      } else {
-        activatorEl.value?.focus({ preventScroll: true })
-      }
     })
 
     function onClickOutside (e: MouseEvent) {
@@ -208,8 +199,7 @@ export default defineComponent({
           props: mergeProps({
             modelValue: isActive.value,
             'onUpdate:modelValue': (val: boolean) => isActive.value = val,
-            onClick: onActivatorClick,
-          }, props.activatorProps),
+          }, toHandlers(activatorEvents), props.activatorProps),
         }) }
         <Teleport
           disabled={ !teleportTarget.value }
@@ -244,7 +234,7 @@ export default defineComponent({
                 <div
                   ref={ contentEl }
                   v-show={ isActive.value }
-                  v-click-outside={{ handler: onClickOutside, closeConditional }}
+                  v-click-outside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
                   class={[
                     'v-overlay__content',
                     props.contentClass,
@@ -253,7 +243,6 @@ export default defineComponent({
                     dimensionStyles.value,
                     contentStyles.value,
                   ]}
-                  tabindex={ -1 }
                   onKeydown={ onKeydown }
                 >
                   { slots.default?.({ isActive }) }
@@ -268,6 +257,7 @@ export default defineComponent({
     return {
       animateClick,
       contentEl,
+      activatorEl,
     }
   },
 })

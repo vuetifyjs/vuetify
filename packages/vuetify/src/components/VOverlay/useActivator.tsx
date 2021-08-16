@@ -1,6 +1,8 @@
 // Utilities
-import { propsFactory } from '@/util'
+import { IN_BROWSER, propsFactory } from '@/util'
+import { makeDelayProps, useDelay } from '@/composables/delay'
 import {
+  computed,
   effectScope,
   getCurrentInstance,
   nextTick,
@@ -10,6 +12,7 @@ import {
 } from 'vue'
 
 // Types
+import type { DelayProps } from '@/composables/delay'
 import type {
   ComponentPublicInstance,
   EffectScope,
@@ -17,9 +20,13 @@ import type {
   Ref,
 } from 'vue'
 
-interface ActivatorProps {
+interface ActivatorProps extends DelayProps {
   activator?: 'parent' | string | Element | ComponentPublicInstance
   activatorProps: Dictionary<any>
+
+  openOnClick: boolean | undefined
+  openOnHover: boolean
+  openOnFocus: boolean | undefined
 }
 
 export const makeActivatorProps = propsFactory({
@@ -28,6 +35,18 @@ export const makeActivatorProps = propsFactory({
     type: Object as PropType<ActivatorProps['activatorProps']>,
     default: () => ({}),
   },
+
+  openOnClick: {
+    type: Boolean,
+    default: undefined,
+  },
+  openOnHover: Boolean,
+  openOnFocus: {
+    type: Boolean,
+    default: undefined,
+  },
+
+  ...makeDelayProps(),
 })
 
 export function useActivator (
@@ -35,28 +54,97 @@ export function useActivator (
   isActive: Ref<boolean>
 ) {
   const activatorEl = ref<HTMLElement>()
-  function onActivatorClick (e: MouseEvent) {
-    e.stopPropagation()
-    activatorEl.value = (e.currentTarget || e.target) as HTMLElement
-    isActive.value = !isActive.value
+
+  let isHovered = false
+  let isFocused = false
+
+  const openOnFocus = computed(() => props.openOnFocus || (props.openOnFocus == null && props.openOnHover))
+  const openOnClick = computed(() => props.openOnClick || (props.openOnClick == null && !props.openOnHover && !openOnFocus.value))
+
+  const { runOpenDelay, runCloseDelay } = useDelay(props, value => {
+    if (value === (
+      (props.openOnHover && isHovered) ||
+      (openOnFocus.value && isFocused)
+    )) {
+      isActive.value = value
+    }
+  })
+
+  const availableEvents = {
+    keydown: (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        isActive.value = false
+      }
+    },
+    click: (e: MouseEvent) => {
+      e.stopPropagation()
+      activatorEl.value = (e.currentTarget || e.target) as HTMLElement
+      isActive.value = !isActive.value
+    },
+    mouseenter: (e: MouseEvent) => {
+      isHovered = true
+      runOpenDelay()
+    },
+    mouseleave: (e: MouseEvent) => {
+      isHovered = false
+      runCloseDelay()
+    },
+    focus: (e: FocusEvent) => {
+      if (
+        CSS.supports('selector(:focus-visible)') &&
+        !(e.target as HTMLElement).matches(':focus-visible')
+      ) return
+
+      // TODO: :focus-visible
+      isFocused = true
+      e.stopPropagation()
+
+      runOpenDelay()
+    },
+    blur: (e: FocusEvent) => {
+      isFocused = false
+      e.stopPropagation()
+
+      runCloseDelay()
+    },
   }
+
+  const activatorEvents = computed(() => {
+    const events: Partial<typeof availableEvents> = {
+      keydown: availableEvents.keydown,
+    }
+
+    if (openOnClick.value) {
+      events.click = availableEvents.click
+    }
+    if (props.openOnHover) {
+      events.mouseenter = availableEvents.mouseenter
+      events.mouseleave = availableEvents.mouseleave
+    }
+    if (openOnFocus.value) {
+      events.focus = availableEvents.focus
+      events.blur = availableEvents.blur
+    }
+
+    return events
+  })
 
   let scope: EffectScope
   watch(() => !!props.activator, val => {
-    if (val) {
+    if (val && IN_BROWSER) {
       scope = effectScope()
       scope.run(() => {
-        _useActivator(props, { activatorEl, onActivatorClick })
+        _useActivator(props, { activatorEl, activatorEvents })
       })
     } else if (scope) {
       scope.stop()
     }
   }, { flush: 'post', immediate: true })
 
-  return { activatorEl, onActivatorClick }
+  return { activatorEl, activatorEvents }
 }
 
-function _useActivator (props: ActivatorProps, { activatorEl, onActivatorClick }: ReturnType<typeof useActivator>) {
+function _useActivator (props: ActivatorProps, { activatorEl, activatorEvents }: ReturnType<typeof useActivator>) {
   watch(() => props.activator, (val, oldVal) => {
     if (oldVal && val !== oldVal) {
       const activator = getActivator(oldVal)
@@ -78,7 +166,9 @@ function _useActivator (props: ActivatorProps, { activatorEl, onActivatorClick }
   function bindActivatorProps (el = getActivator(), _props = props.activatorProps) {
     if (!el) return
 
-    el.addEventListener('click', onActivatorClick)
+    Object.entries(activatorEvents.value).forEach(([name, cb]) => {
+      el.addEventListener(name, cb as (e: Event) => void)
+    })
 
     Object.keys(_props).forEach(k => {
       if (_props[k] == null) {
@@ -92,7 +182,9 @@ function _useActivator (props: ActivatorProps, { activatorEl, onActivatorClick }
   function unbindActivatorProps (el = getActivator(), _props = props.activatorProps) {
     if (!el) return
 
-    el.removeEventListener('click', onActivatorClick)
+    Object.entries(activatorEvents.value).forEach(([name, cb]) => {
+      el.removeEventListener(name, cb as (e: Event) => void)
+    })
 
     Object.keys(_props).forEach(k => {
       el.removeAttribute(k)

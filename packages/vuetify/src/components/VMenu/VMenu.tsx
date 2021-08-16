@@ -1,45 +1,39 @@
 // Styles
 import './VMenu.sass'
 
-// Directives
-import ClickOutside from '@/directives/click-outside'
-import Resize from '@/directives/resize'
+// Components
+import { VOverlay } from '@/components/VOverlay'
+import { VDialogTransition } from '@/components/transitions'
+
+// Composables
+import { makeTransitionProps } from '@/composables/transition'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import {
-  defineComponent,
-} from '@/util'
-import { makeTransitionProps } from '@/composables/transition'
-import { VOverlay } from '@/components'
-import { useProxiedModel } from '@/composables/proxiedModel'
+import { defineComponent, getUid } from '@/util'
+import { computed } from 'vue'
 
 export default defineComponent({
   name: 'VMenu',
 
-  directives: {
-    ClickOutside,
-    Resize,
-  },
+  inheritAttrs: false,
 
   props: {
-    closeOnClick: {
-      type: Boolean,
-      default: true,
-    },
-    closeOnContentClick: {
-      type: Boolean,
-      default: true,
-    },
+    // TODO
+    // closeOnClick: {
+    //   type: Boolean,
+    //   default: true,
+    // },
+    // closeOnContentClick: {
+    //   type: Boolean,
+    //   default: true,
+    // },
     disableKeys: Boolean,
     modelValue: Boolean,
-    openOnClick: {
-      type: Boolean,
-      default: true,
-    },
-    openOnHover: Boolean,
+    id: String,
 
     ...makeTransitionProps({
-      transition: false,
+      transition: { component: VDialogTransition },
     } as const),
   },
 
@@ -49,6 +43,9 @@ export default defineComponent({
 
   setup (props, { attrs, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
+
+    const uid = getUid()
+    const id = computed(() => props.id || `v-menu-${uid}`)
 
     return () => {
       return (
@@ -62,11 +59,10 @@ export default defineComponent({
           positionStrategy="connected"
           scrollStrategy="reposition"
           scrim={ false }
-          aria-role="dialog"
-          aria-modal="true"
           activatorProps={{
             'aria-haspopup': 'menu',
             'aria-expanded': String(isActive.value),
+            'aria-owns': id.value,
           }}
           { ...attrs }
           v-slots={{

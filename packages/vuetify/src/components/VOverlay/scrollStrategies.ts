@@ -1,6 +1,7 @@
 // Utilities
-import { convertToUnit, getScrollParents, propsFactory } from '@/util'
+import { convertToUnit, getScrollParents, IN_BROWSER, propsFactory } from '@/util'
 import { effectScope, nextTick, onScopeDispose, watchEffect } from 'vue'
+import { requestNewFrame } from './requestNewFrame'
 
 // Types
 import type { EffectScope, PropType, Ref } from 'vue'
@@ -34,6 +35,8 @@ export function useScrollStrategies (
   props: StrategyProps,
   data: ScrollStrategyData
 ) {
+  if (!IN_BROWSER) return
+
   let scope: EffectScope | undefined
   watchEffect(async () => {
     scope?.stop()
@@ -46,7 +49,7 @@ export function useScrollStrategies (
       if (typeof props.scrollStrategy === 'function') {
         props.scrollStrategy(data)
       } else {
-        scrollStrategies[props.scrollStrategy](data)
+        scrollStrategies[props.scrollStrategy]?.(data)
       }
     })
   })
@@ -81,8 +84,33 @@ function blockScrollStrategy (data: ScrollStrategyData) {
 }
 
 function repositionScrollStrategy (data: ScrollStrategyData) {
+  let slow = false
+  let raf = -1
+
+  function update (e: Event) {
+    requestNewFrame(() => {
+      const start = performance.now()
+      data.updatePosition.value?.(e)
+      const time = performance.now() - start
+      slow = time / (1000 / 60) > 2
+    })
+  }
+
   bindScroll(data.activatorEl.value ?? data.contentEl.value, e => {
-    data.updatePosition.value?.(e)
+    if (slow) {
+      // If the position calculation is slow,
+      // defer updates until scrolling is finished.
+      // Browsers usually fire one scroll event per frame so
+      // we just wait until we've got two frames without an event
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() => {
+        raf = requestAnimationFrame(() => {
+          update(e)
+        })
+      })
+    } else {
+      update(e)
+    }
   })
 }
 

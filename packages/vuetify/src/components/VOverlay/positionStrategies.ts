@@ -1,6 +1,6 @@
 // Utilities
 import { computed, effectScope, nextTick, onScopeDispose, ref, watch, watchEffect } from 'vue'
-import { convertToUnit, getScrollParent, isFixedPosition, nullifyTransforms, propsFactory } from '@/util'
+import { convertToUnit, getScrollParent, IN_BROWSER, isFixedPosition, nullifyTransforms, propsFactory } from '@/util'
 import { oppositeAnchor, parseAnchor, physicalAnchor } from './util/anchor'
 import { anchorToPoint, getOffset } from './util/point'
 
@@ -29,7 +29,7 @@ export interface StrategyProps {
   )
   anchor: Anchor
   origin: Anchor | 'auto' | 'overlap'
-  offset?: string
+  offset?: number | string
   maxHeight?: number | string
   maxWidth?: number | string
   minHeight?: number | string
@@ -50,7 +50,7 @@ export const makePositionStrategyProps = propsFactory({
     type: String as PropType<StrategyProps['origin']>,
     default: 'auto',
   },
-  offset: String,
+  offset: [Number, String],
 })
 
 export function usePositionStrategies (
@@ -65,7 +65,7 @@ export function usePositionStrategies (
     scope?.stop()
     updatePosition.value = undefined
 
-    if (!(data.isActive.value && props.positionStrategy)) return
+    if (!(IN_BROWSER && data.isActive.value && props.positionStrategy)) return
 
     scope = effectScope()
     await nextTick()
@@ -78,10 +78,10 @@ export function usePositionStrategies (
     })
   })
 
-  window.addEventListener('resize', onResize, { passive: true })
+  IN_BROWSER && window.addEventListener('resize', onResize, { passive: true })
 
   onScopeDispose(() => {
-    window.removeEventListener('resize', onResize)
+    IN_BROWSER && window.removeEventListener('resize', onResize)
     updatePosition.value = undefined
     scope?.stop()
   })
@@ -123,39 +123,68 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
     return isNaN(val) ? Infinity : val
   })
 
-  const hasMaxWidth = false
+  const configuredMinWidth = computed(() => {
+    const val = parseFloat(props.minWidth!)
+    return isNaN(val) ? Infinity : val
+  })
 
-  watch(
-    () => [preferredAnchor.value, preferredOrigin.value],
-    () => updatePosition(),
-    { immediate: !activatorFixed }
-  )
+  let observe = false
+  const observer = new ResizeObserver(() => {
+    if (observe) updatePosition()
+  })
+  observer.observe(data.activatorEl.value!)
+  observer.observe(data.contentEl.value!)
 
-  if (activatorFixed) nextTick(() => updatePosition())
-  requestAnimationFrame(() => {
-    if (contentStyles.value.maxHeight) updatePosition()
+  onScopeDispose(() => {
+    observer.disconnect()
   })
 
   // eslint-disable-next-line max-statements
   function updatePosition () {
-    let contentBox
-    if (hasMaxWidth) {
-      const initialMaxWidth = data.activatorEl.value!.style.maxWidth
-      data.activatorEl.value!.style.removeProperty('maxWidth')
-      contentBox = nullifyTransforms(data.contentEl.value!)
-      data.activatorEl.value!.style.maxWidth = initialMaxWidth
-    } else {
-      contentBox = nullifyTransforms(data.contentEl.value!)
-    }
+    observe = false
+    requestAnimationFrame(() => observe = true)
+
     const targetBox = data.activatorEl.value!.getBoundingClientRect()
-    const contentHeight = Math.min(
-      configuredMaxHeight.value,
-      [...data.contentEl.value!.children].reduce((acc, el) => acc + el.scrollHeight, 0)
-    )
+    // TODO: offset shouldn't affect width
+    if (props.offset) {
+      targetBox.x -= +props.offset
+      targetBox.y -= +props.offset
+      targetBox.width += +props.offset * 2
+      targetBox.height += +props.offset * 2
+    }
 
     const scrollParent = getScrollParent(data.contentEl.value)
     const viewportWidth = scrollParent.clientWidth
     const viewportHeight = Math.min(scrollParent.clientHeight, window.innerHeight)
+
+    let contentBox
+    {
+      const scrollables = new Map<Element, [number, number]>()
+      data.contentEl.value!.querySelectorAll('*').forEach(el => {
+        const x = el.scrollLeft
+        const y = el.scrollTop
+        if (x || y) {
+          scrollables.set(el, [x, y])
+        }
+      })
+
+      const initialMaxWidth = data.contentEl.value!.style.maxWidth
+      const initialMaxHeight = data.contentEl.value!.style.maxHeight
+      data.contentEl.value!.style.removeProperty('max-width')
+      data.contentEl.value!.style.removeProperty('max-height')
+
+      contentBox = nullifyTransforms(data.contentEl.value!)
+      contentBox.x -= parseFloat(data.contentEl.value!.style.left) || 0
+      contentBox.y -= parseFloat(data.contentEl.value!.style.top) || 0
+
+      data.contentEl.value!.style.maxWidth = initialMaxWidth
+      data.contentEl.value!.style.maxHeight = initialMaxHeight
+      scrollables.forEach((position, el) => {
+        el.scrollTo(...position)
+      })
+    }
+
+    const contentHeight = Math.min(configuredMaxHeight.value, contentBox.height)
 
     const viewportMargin = 12
     const freeSpace = {
@@ -180,15 +209,11 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
       : anchor.side === 'end' ? freeSpace.right
       : anchor.side === 'start' ? freeSpace.left
       : null
-    const minWidth = Math.min(maxWidth!, targetBox.width)
+    const minWidth = Math.min(configuredMinWidth.value, maxWidth!, targetBox.width)
     const maxHeight = fitsY ? configuredMaxHeight.value : Math.min(
       configuredMaxHeight.value,
-      viewportHeight - viewportMargin * 2,
       Math.floor(anchor.side === 'top' ? freeSpace.top : freeSpace.bottom)
     )
-
-    // TODO
-    // if (maxWidth) hasMaxWidth = true
 
     const targetPoint = anchorToPoint(anchor, targetBox)
     const contentPoint = anchorToPoint(origin, {
@@ -199,13 +224,26 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
     const { x, y } = getOffset(targetPoint, contentPoint)
 
     Object.assign(contentStyles.value, {
-      transform: `translate(${Math.round(x)}px, ${Math.round(y)}px)`,
+      '--v-overlay-anchor-origin': physicalAnchor(anchor, data.activatorEl.value!),
+      top: convertToUnit(Math.round(y)),
+      left: convertToUnit(Math.round(x)), // TODO: right for origin="end", rtl
       transformOrigin: physicalAnchor(origin, data.activatorEl.value!),
       minWidth: convertToUnit(minWidth),
       maxWidth: convertToUnit(maxWidth),
       maxHeight: convertToUnit(maxHeight),
     })
   }
+
+  watch(
+    () => [preferredAnchor.value, preferredOrigin.value, props.offset],
+    () => updatePosition(),
+    { immediate: !activatorFixed }
+  )
+
+  if (activatorFixed) nextTick(() => updatePosition())
+  requestAnimationFrame(() => {
+    if (contentStyles.value.maxHeight) updatePosition()
+  })
 
   return { updatePosition }
 }
