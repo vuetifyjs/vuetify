@@ -1,8 +1,6 @@
 // INPUT
 $field-border-radius: $border-radius-root !default;
-$field-density: ('default': 0, 'comfortable': -2, 'compact': -4) !default;
 $field-font-size: 16px !default;
-$field-height: 56px !default;
 $field-letter-spacing: .009375em !default;
 $field-max-width: 100% !default;
 $field-transition-timing: 150ms $standard-easing !default;
@@ -17,16 +15,8 @@ $field-control-padding: 16px !default;
 $field-control-affixed-padding: 12px !default;
 $field-control-affixed-inner-padding: 6px !default;
 
-// DETAILS
-$field-details-font-size: .75rem !default;
-$field-details-font-weight: 400 !default;
-$field-details-letter-spacing: .0333333333em !default;
-$field-details-line-height: normal !default;
-$field-details-min-height: 16px !default;
-$field-details-padding: 6px 16px 0 !default;
-
-// FIELD
-$field-field-input-padding-top: 30px !default;
+// INPUT
+$field-input-padding-top: 30px !default;
 $field-input-opacity: var(--v-high-emphasis-opacity) !default;
 
 // LABEL
@@ -40,7 +30,3 @@ $field-focused-border-width: 2px !default;
 
 // OVERLAY
 $field-overlay-filled-opacity: 0.04 !default;
-
-// AFFIXES
-$field-prepend-outer-margin-inline-end: 16px !default;
-$field-prepend-outer-margin-inline-start: 16px !default;

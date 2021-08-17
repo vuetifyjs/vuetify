@@ -2,14 +2,7 @@
 
 /* region INPUT */
 .v-field
-  align-items: flex-start
-  display: grid
-  flex-wrap: wrap
-  flex: 1 1 auto
   font-size: $field-font-size
-  grid-template-areas: "prepend control append" "a messages b"
-  grid-template-columns: min-content auto min-content
-  grid-template-rows: auto auto
   letter-spacing: $field-letter-spacing
   max-width: $field-max-width
   transition: color $field-transition-timing
@@ -19,8 +12,11 @@
   .v-field__input
     opacity: $field-input-opacity
     width: 100%
+    height: 100%
     padding-inline-start: var(--v-field-padding-before)
     padding-inline-end: var(--v-field-padding-after)
+    display: flex
+    align-items: center
 
     &:focus,
     &:active
@@ -40,10 +36,6 @@
   &--appended
     --v-field-padding-after: #{$field-control-affixed-inner-padding}
 
-  @at-root
-    @include density('v-field', $field-density) using ($modifier)
-      --v-field-height: #{$field-height + $modifier}
-
 /* endregion */
 /* region CONTROL */
 .v-field__control
@@ -53,7 +45,7 @@
   display: flex
   flex: 1 0
   grid-area: control
-  height: var(--v-field-height)
+  height: var(--v-input-control-height)
   position: relative
 
   .v-field--prepended &
@@ -92,7 +84,7 @@
 
     .v-field--variant-contained &,
     .v-field--variant-filled &
-      padding-top: 20px
+      padding-top: 21px
       padding-bottom: 6px
 
       @at-root #{selector-append('.v-field--single-line', &)}
@@ -107,21 +99,25 @@
       padding-bottom: 8px
 
       @at-root
-        @include density('v-field', $field-density) using ($modifier)
+        @include density('v-input', $input-density) using ($modifier)
           @at-root #{selector-append(&, $root)}
-            padding-top: $field-field-input-padding-top + $modifier * $field-label-floating-scale
+            padding-top: $field-input-padding-top + $modifier * $field-label-floating-scale
 
 /* endregion */
 /* region AFFIXES */
-.v-field__prepend-outer,
-.v-field__prepend,
-.v-field__append,
-.v-field__append-outer
+.v-field__prepend-inner,
+.v-field__append-inner,
+.v-field .v-input__prepend,
+.v-field .v-input__append
   align-items: center
   display: flex
   opacity: .6
   transition: opacity $field-transition-timing
 
+.v-field__prepend-inner,
+.v-field__append-inner,
+.v-input__prepend,
+.v-input__append
   .v-field--focused &
     opacity: 1
 
@@ -131,25 +127,15 @@
     align-self: flex-end
 
     @at-root
-      @include density('v-field', $field-density) using ($modifier)
+      @include density('v-input', $input-density) using ($modifier)
         @at-root #{selector-append(&, $root)}
           margin-bottom: $field-underlined-margin-bottom + $modifier / 8
 
-.v-field__prepend-outer,
-.v-field__append-outer
-  align-self: center
-
+.v-field .v-input__prepend,
+.v-field .v-input__append
   .v-field--variant-plain &,
   .v-field--variant-underlined &
     align-self: flex-end
-
-.v-field__prepend-outer
-  margin-inline-end: $field-prepend-outer-margin-inline-end
-  grid-area: prepend
-
-.v-field__append-outer
-  margin-inline-start: $field-prepend-outer-margin-inline-start
-  grid-area: append
 
 /* endregion */
 /* region LABEL */
@@ -183,7 +169,7 @@
     $root: &
 
     @at-root
-      @include density('v-field', $field-density) using ($modifier)
+      @include density('v-input', $input-density) using ($modifier)
         @at-root #{selector-append(&, $root)}
           bottom: 4px + $modifier / 8
 
@@ -198,7 +184,7 @@
 
     .v-field--variant-contained &,
     .v-field--variant-filled &
-      transform: translateY(calc(var(--v-field-height) / 56 * -12))
+      transform: translateY(calc(var(--v-input-control-height) / 56 * -12))
 
     .v-field--variant-plain &,
     .v-field--variant-underlined &
@@ -316,20 +302,7 @@
 
 /* endregion */
 /* region DETAILS */
-.v-field__details
-  align-items: flex-end
-  // TODO: fix this when text-fields are implemented
-  color: rgba(0, 0, 0, .6)
-  display: flex
-  font-size: $field-details-font-size
-  font-weight: $field-details-font-weight
-  grid-area: messages
-  letter-spacing: $field-details-letter-spacing
-  line-height: $field-details-line-height
-  min-height: $field-details-min-height
-  padding: $field-details-padding
-  justify-content: space-between
-
+.v-input__details
   .v-field--variant-plain &,
   .v-field--variant-underlined &
     padding-inline-start: 0

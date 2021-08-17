@@ -2,10 +2,12 @@
 import './VFileInput.sass'
 
 // Components
-import { VBtn, VChip, VInput } from '@/components'
+import { VBtn } from '@/components/VBtn'
+import { VChip } from '@/components/VChip'
+import { VField } from '@/components/VField'
 
 // Composables
-import { makeVInputProps } from '@/components/VInput/VInput'
+import { makeVFieldProps } from '@/components/VField/VField'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -14,7 +16,7 @@ import { computed, ref, watch } from 'vue'
 import { defineComponent, humanReadableFileSize, pick, wrapInArray } from '@/util'
 
 // Types
-import type { DefaultInputSlot, VInputSlot } from '@/components/VInput/VInput'
+import type { DefaultInputSlot, VFieldSlot } from '@/components/VField/VField'
 import type { PropType } from 'vue'
 
 export default defineComponent({
@@ -23,6 +25,8 @@ export default defineComponent({
   inheritAttrs: false,
 
   props: {
+    appendIcon: String,
+    prependIcon: String,
     chips: Boolean,
     clearable: {
       type: Boolean,
@@ -55,9 +59,9 @@ export default defineComponent({
       },
     },
 
-    ...makeVInputProps({
-      appendIcon: '$clear',
-      prependOuterIcon: '$file',
+    ...makeVFieldProps({
+      appendInnerIcon: '$clear',
+      prependIcon: '$file',
     }),
   },
 
@@ -68,7 +72,7 @@ export default defineComponent({
   setup (props, { attrs, slots }) {
     const { t } = useLocale()
     const fileValue = useProxiedModel(props, 'modelValue')
-    const rootRef = ref<VInput>()
+    const rootRef = ref<VField>()
 
     watch(() => props.modelValue, value => {
       if (rootRef.value?.inputRef?.value && (value == null || value?.length === 0)) {
@@ -98,7 +102,7 @@ export default defineComponent({
       const [_, restAttrs] = pick(attrs, ['class'])
 
       return (
-        <VInput
+        <VField
           ref={ rootRef }
           class={[
             'v-file-input',
@@ -108,17 +112,17 @@ export default defineComponent({
           { ...props }
           onClick:control={ ({ inputRef }) => inputRef.value?.click() }
           v-slots={{
-            prependOuter: props.prependOuterIcon ? ({ inputRef }: VInputSlot) => (
+            prepend: props.prependIcon ? ({ inputRef }: VFieldSlot) => (
               <VBtn
                 disabled={ props.disabled }
-                icon={ props.prependOuterIcon }
+                icon={ props.prependIcon }
                 tabindex="-1"
                 variant="text"
                 onClick={ () => inputRef.value?.click() }
               />
             ) : undefined,
 
-            default: ({ isDirty, isFocused, inputRef, props: slotProps }: VInputSlot) => (
+            default: ({ isDirty, isFocused, inputRef, props: slotProps }: VFieldSlot) => (
               <>
                 <input
                   ref={ inputRef }
@@ -161,12 +165,12 @@ export default defineComponent({
               </>
             ),
 
-            append: ({ inputRef, focus, blur }: DefaultInputSlot) => props.clearable ? (
+            appendInner: ({ inputRef, focus, blur }: DefaultInputSlot) => props.clearable ? (
               <VBtn
                 class="v-file-input__clearable"
                 color={ props.color }
                 disabled={ props.disabled || !fileValue.value?.length }
-                icon={ props.appendIcon }
+                icon={ props.appendInnerIcon }
                 variant="text"
                 onFocus={ focus }
                 onBlur={ blur }

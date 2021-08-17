@@ -2,11 +2,11 @@
 import './VField.sass'
 
 // Components
+import { VInput } from '@/components/VInput'
 import { VIcon } from '@/components/VIcon'
 import VFieldLabel from './VFieldLabel'
 
 // Composables
-import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 
@@ -43,19 +43,15 @@ export interface VFieldSlot extends DefaultInputSlot {
 
 export const makeVFieldProps = propsFactory({
   disabled: Boolean,
-  appendIcon: String,
-  appendOuterIcon: String,
+  appendInnerIcon: String,
   bgColor: String,
   color: String,
-  hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
-  hideSpinButtons: Boolean,
   hint: String,
   id: String,
   label: String,
   loading: Boolean,
   persistentHint: Boolean,
-  prependIcon: String,
-  prependOuterIcon: String,
+  prependInnerIcon: String,
   reverse: Boolean,
   singleLine: Boolean,
   variant: {
@@ -65,7 +61,6 @@ export const makeVFieldProps = propsFactory({
   },
 
   ...makeThemeProps(),
-  ...makeDensityProps(),
 }, 'v-field')
 
 export const VField = defineComponent({
@@ -81,17 +76,14 @@ export const VField = defineComponent({
   },
 
   emits: {
-    'click:prepend-outer': (e: Event) => true,
-    'click:prepend': (e: Event) => true,
-    'click:append': (e: Event) => true,
-    'click:append-outer': (e: Event) => true,
+    'click:prepend-inner': (e: MouseEvent) => true,
+    'click:append-inner': (e: MouseEvent) => true,
     'click:control': (props: DefaultInputSlot) => true as any,
     'update:active': (active: boolean) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
     const { themeClasses } = useTheme(props)
-    const { densityClasses } = useDensity(props, 'v-field')
     const isActive = useProxiedModel(props, 'active')
     const uid = getUid()
 
@@ -174,10 +166,8 @@ export const VField = defineComponent({
 
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
-      const hasPrepend = (slots.prepend || props.prependIcon)
-      const hasPrependOuter = (slots.prependOuter || props.prependOuterIcon)
-      const hasAppend = (slots.append || props.appendIcon)
-      const hasAppendOuter = (slots.appendOuter || props.appendOuterIcon)
+      const hasPrepend = (slots.prependInner || props.prependInnerIcon)
+      const hasAppend = (slots.appendInner || props.appendInnerIcon)
 
       const label = slots.label
         ? slots.label({
@@ -187,9 +177,8 @@ export const VField = defineComponent({
         : props.label
 
       return (
-        <div
+        <VInput
           class={[
-            attrs.class,
             'v-field',
             {
               'v-field--prepended': hasPrepend,
@@ -204,25 +193,18 @@ export const VField = defineComponent({
               [`v-field--variant-${props.variant}`]: true,
             },
             themeClasses.value,
-            densityClasses.value,
             textColorClasses.value,
           ]}
           style={[
             textColorStyles.value,
           ]}
+          { ...attrs }
+          v-slots={{
+            prepend: slots.prepend && (() => slots.prepend?.(slotProps.value)),
+            append: slots.append && (() => slots.append?.(slotProps.value)),
+            details: slots.details && (() => slots.details?.(slotProps.value)),
+          }}
         >
-          { hasPrependOuter && (
-            <div
-              class="v-field__prepend-outer"
-              onClick={ (e: Event) => emit('click:prepend-outer', e) }
-            >
-              { slots.prependOuter
-                ? slots.prependOuter(slotProps.value)
-                : (<VIcon icon={ props.prependOuterIcon } />)
-              }
-            </div>
-          ) }
-
           <div
             class={[
               'v-field__control',
@@ -235,12 +217,12 @@ export const VField = defineComponent({
 
             { hasPrepend && (
               <div
-                class="v-field__prepend"
-                onClick={ (e: Event) => emit('click:prepend', e) }
+                class="v-field__prepend-inner"
+                onClick={ e => emit('click:prepend-inner', e) }
               >
-                { slots.prepend
-                  ? slots.prepend(slotProps.value)
-                  : (<VIcon icon={ props.prependIcon } />)
+                { slots.prependInner
+                  ? slots.prependInner(slotProps.value)
+                  : (<VIcon icon={ props.prependInnerIcon } />)
                 }
               </div>
             ) }
@@ -269,12 +251,12 @@ export const VField = defineComponent({
 
             { hasAppend && (
               <div
-                class="v-field__append"
-                onClick={ (e: Event) => emit('click:append', e) }
+                class="v-field__append-inner"
+                onClick={ e => emit('click:append-inner', e) }
               >
-                { slots.append
-                  ? slots.append(slotProps.value)
-                  : (<VIcon icon={ props.appendIcon } />)
+                { slots.appendInner
+                  ? slots.appendInner(slotProps.value)
+                  : (<VIcon icon={ props.appendInnerIcon } />)
                 }
               </div>
             ) }
@@ -303,25 +285,7 @@ export const VField = defineComponent({
               ) }
             </div>
           </div>
-
-          { hasAppendOuter && (
-            <div
-              class="v-field__append-outer"
-              onClick={ (e: Event) => emit('click:append-outer', e) }
-            >
-              { slots.appendOuter
-                ? slots.appendOuter(slotProps.value)
-                : (<VIcon icon={ props.appendOuterIcon } />)
-              }
-            </div>
-          ) }
-
-          { slots.details && (
-            <div class="v-field__details">
-              { slots.details() }
-            </div>
-          ) }
-        </div>
+        </VInput>
       )
     })
 
