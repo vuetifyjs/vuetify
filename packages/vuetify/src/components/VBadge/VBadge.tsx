@@ -12,7 +12,7 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent, extract } from '@/util'
+import { convertToUnit, defineComponent, pick } from '@/util'
 
 export default defineComponent({
   name: 'VBadge',
@@ -100,7 +100,7 @@ export default defineComponent({
         : value <= props.max ? value
         : `${props.max}+`
 
-      const [badgeAttrs, attrs] = extract(ctx.attrs, [
+      const [badgeAttrs, attrs] = pick(ctx.attrs as Record<string, any>, [
         'aria-atomic',
         'aria-label',
         'aria-live',

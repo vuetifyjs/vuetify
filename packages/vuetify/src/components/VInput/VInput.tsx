@@ -9,64 +9,89 @@ import VInputLabel from './VInputLabel'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, toRef, watch, watchEffect } from 'vue'
-import { convertToUnit, defineComponent, getUid, nullifyTransforms, standardEasing, useRender } from '@/util'
+import { convertToUnit, defineComponent, getUid, nullifyTransforms, propsFactory, standardEasing, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
 type Variant = typeof allowedVariants[number]
 
-export default defineComponent({
+export interface DefaultInputSlot {
+  isActive: boolean
+  isDirty: boolean
+  isFocused: boolean
+  controlRef: Ref<HTMLElement | undefined>
+  inputRef: Ref<HTMLInputElement | undefined>
+  fieldRef: Ref<HTMLElement | undefined>
+  focus: () => void
+  blur: () => void
+}
+
+export interface VInputSlot extends DefaultInputSlot {
+  props: {
+    id: string
+    class: string
+    onFocus: () => void
+    onBlur: () => void
+  }
+}
+
+export const makeVInputProps = propsFactory({
+  disabled: Boolean,
+  appendIcon: String,
+  appendOuterIcon: String,
+  bgColor: String,
+  color: String,
+  hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
+  hideSpinButtons: Boolean,
+  hint: String,
+  id: String,
+  label: String,
+  loading: Boolean,
+  persistentHint: Boolean,
+  prependIcon: String,
+  prependOuterIcon: String,
+  reverse: Boolean,
+  singleLine: Boolean,
+  variant: {
+    type: String as PropType<Variant>,
+    default: 'filled',
+    validator: (v: any) => allowedVariants.includes(v),
+  },
+
+  ...makeThemeProps(),
+  ...makeDensityProps(),
+}, 'v-input')
+
+export const VInput = defineComponent({
   name: 'VInput',
 
   inheritAttrs: false,
 
   props: {
     active: Boolean,
-    appendIcon: String,
-    appendOuterIcon: String,
-    bgColor: String,
-    color: String,
-    hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
-    hideSpinButtons: Boolean,
-    hint: String,
-    id: String,
-    label: String,
-    loading: Boolean,
-    modelValue: null as any as PropType<any>,
-    persistentHint: Boolean,
-    prependIcon: String,
-    prependOuterIcon: String,
-    reverse: Boolean,
-    singleLine: Boolean,
-    variant: {
-      type: String as PropType<Variant>,
-      default: 'filled',
-      validator: (v: any) => allowedVariants.includes(v),
-    },
+    dirty: Boolean,
 
-    ...makeThemeProps(),
-    ...makeDensityProps(),
+    ...makeVInputProps(),
   },
 
   emits: {
-    'update:modelValue': (value: boolean) => true,
-    'update:active': (value: boolean) => true,
-    'click:prepend-outer': (e: Event) => e,
-    'click:prepend': (e: Event) => e,
-    'click:append': (e: Event) => e,
-    'click:append-outer': (e: Event) => e,
+    'click:prepend-outer': (e: Event) => true,
+    'click:prepend': (e: Event) => true,
+    'click:append': (e: Event) => true,
+    'click:append-outer': (e: Event) => true,
+    'click:control': (props: DefaultInputSlot) => true as any,
+    'update:active': (active: boolean) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
     const { themeClasses } = useTheme(props)
     const { densityClasses } = useDensity(props, 'v-input')
-    const value = useProxiedModel(props, 'modelValue')
     const isActive = useProxiedModel(props, 'active')
     const uid = getUid()
 
@@ -75,11 +100,10 @@ export default defineComponent({
     const controlRef = ref<HTMLElement>()
     const fieldRef = ref<HTMLElement>()
     const inputRef = ref<HTMLInputElement>()
-    const isDirty = computed(() => (value.value != null && value.value !== ''))
     const isFocused = ref(false)
     const id = computed(() => props.id || `input-${uid}`)
 
-    watchEffect(() => isActive.value = isFocused.value || isDirty.value)
+    watchEffect(() => isActive.value = isFocused.value || props.dirty)
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
@@ -121,17 +145,31 @@ export default defineComponent({
       }
     }, { flush: 'post' })
 
-    function onMousedown (e: MouseEvent) {
+    function focus () {
+      isFocused.value = true
+    }
+
+    function blur () {
+      isFocused.value = false
+    }
+
+    const slotProps = computed<DefaultInputSlot>(() => ({
+      isActive: isActive.value,
+      isDirty: props.dirty,
+      isFocused: isFocused.value,
+      inputRef,
+      controlRef,
+      fieldRef,
+      focus,
+      blur,
+    }))
+
+    function onClick (e: MouseEvent) {
       if (e.target !== document.activeElement) {
         e.preventDefault()
       }
-      focus()
-    }
-    function focus () {
-      inputRef.value?.focus()
-    }
-    function blur () {
-      inputRef.value?.blur()
+
+      emit('click:control', slotProps.value)
     }
 
     useRender(() => {
@@ -151,11 +189,14 @@ export default defineComponent({
       return (
         <div
           class={[
+            attrs.class,
             'v-input',
             {
               'v-input--prepended': hasPrepend,
               'v-input--appended': hasAppend,
-              'v-input--dirty': isActive.value,
+              'v-input--active': isActive.value,
+              'v-input--dirty': props.dirty,
+              'v-input--disabled': props.disabled,
               'v-input--focused': isFocused.value,
               'v-input--reverse': props.reverse,
               'v-input--has-background': !!props.bgColor,
@@ -169,7 +210,6 @@ export default defineComponent({
           style={[
             textColorStyles.value,
           ]}
-          { ...attrs }
         >
           { hasPrependOuter && (
             <div
@@ -177,20 +217,19 @@ export default defineComponent({
               onClick={ (e: Event) => emit('click:prepend-outer', e) }
             >
               { slots.prependOuter
-                ? slots.prependOuter()
+                ? slots.prependOuter(slotProps.value)
                 : (<VIcon icon={ props.prependOuterIcon } />)
               }
             </div>
           ) }
 
           <div
-            ref={ controlRef }
             class={[
               'v-input__control',
               backgroundColorClasses.value,
             ]}
             style={ backgroundColorStyles.value }
-            onMousedown={ onMousedown }
+            onClick={ onClick }
           >
             <div class="v-input__overlay" />
 
@@ -200,46 +239,32 @@ export default defineComponent({
                 onClick={ (e: Event) => emit('click:prepend', e) }
               >
                 { slots.prepend
-                  ? slots.prepend()
+                  ? slots.prepend(slotProps.value)
                   : (<VIcon icon={ props.prependIcon } />)
                 }
               </div>
             ) }
 
-            <div class="v-input__field" ref={ fieldRef }>
+            <div class="v-input__field">
               { ['contained', 'filled'].includes(props.variant) && !props.singleLine && (
                 <VInputLabel ref={ floatingLabelRef } floating>
                   { label }
                 </VInputLabel>
-              )}
+              ) }
 
               <VInputLabel ref={ labelRef } for={ id.value }>
                 { label }
               </VInputLabel>
 
               { slots.default?.({
-                uid,
-                isActive: isActive.value,
+                ...slotProps.value,
                 props: {
                   id: id.value,
-                  value: value.value,
-                  ref: inputRef,
+                  class: 'v-input__input',
                   onFocus: () => (isFocused.value = true),
                   onBlur: () => (isFocused.value = false),
-                  onInput: (e: Event) => {
-                    const el = e.target as HTMLInputElement
-
-                    value.value = el.value
-                  },
-                  onChange: (e: Event) => {
-                    const el = e.target as HTMLInputElement
-
-                    if (value.value === el.value) return
-
-                    value.value = el.value
-                  },
                 },
-              }) }
+              } as VInputSlot) }
             </div>
 
             { hasAppend && (
@@ -248,7 +273,7 @@ export default defineComponent({
                 onClick={ (e: Event) => emit('click:append', e) }
               >
                 { slots.append
-                  ? slots.append()
+                  ? slots.append(slotProps.value)
                   : (<VIcon icon={ props.appendIcon } />)
                 }
               </div>
@@ -275,7 +300,7 @@ export default defineComponent({
                 <VInputLabel ref={ floatingLabelRef } floating>
                   { label }
                 </VInputLabel>
-              )}
+              ) }
             </div>
           </div>
 
@@ -285,7 +310,7 @@ export default defineComponent({
               onClick={ (e: Event) => emit('click:append-outer', e) }
             >
               { slots.appendOuter
-                ? slots.appendOuter()
+                ? slots.appendOuter(slotProps.value)
                 : (<VIcon icon={ props.appendOuterIcon } />)
               }
             </div>
@@ -301,12 +326,12 @@ export default defineComponent({
     })
 
     return {
-      blur,
-      focus,
-      value,
-      isActive,
-      isDirty,
-      isFocused,
+      inputRef,
+      controlRef,
+      fieldRef,
     }
   },
 })
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export type VInput = InstanceType<typeof VInput>

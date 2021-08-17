@@ -16,7 +16,7 @@
   --v-input-padding-before: #{$input-control-padding}
   --v-input-padding-after: #{$input-control-padding}
 
-  input
+  .v-input__input
     opacity: $input-input-opacity
     width: 100%
     padding-inline-start: var(--v-input-padding-before)
@@ -87,8 +87,7 @@
   height: 100%
   position: relative
 
-  input
-    height: 100%
+  .v-input__input
     letter-spacing: $input-letter-spacing
 
     .v-input--variant-contained &,
@@ -173,7 +172,7 @@
   margin-inline-start: var(--v-input-padding-before)
   margin-inline-end: var(--v-input-padding-after)
 
-  .v-input--dirty &
+  .v-input--active &
     visibility: hidden
 
   .v-input--focused &
@@ -194,7 +193,7 @@
     visibility: hidden
     max-width: 100%
 
-    .v-input.v-input--dirty &
+    .v-input.v-input--active &
       visibility: visible
 
     .v-input--variant-contained &,
@@ -299,7 +298,7 @@
         bottom: 0
         border-width: 0 0 var(--v-input-border-width)
 
-      @at-root #{selector-append('.v-input--dirty', &)}
+      @at-root #{selector-append('.v-input--active', &)}
         &::before
           opacity: 0
 
@@ -329,6 +328,7 @@
   line-height: $input-details-line-height
   min-height: $input-details-min-height
   padding: $input-details-padding
+  justify-content: space-between
 
   .v-input--variant-plain &,
   .v-input--variant-underlined &
@@ -358,7 +358,7 @@
 /* endregion */
 /* region MODIFIERS */
 .v-input--reverse
-  input
+  .v-input__input
     @include ltr()
       text-align: right
 

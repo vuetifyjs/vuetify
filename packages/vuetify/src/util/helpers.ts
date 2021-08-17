@@ -182,19 +182,27 @@ export function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }
 
-export function extract (obj: Dictionary<unknown>, properties: string[]) {
-  const extracted: Dictionary<unknown> = {}
-  const rest: Dictionary<unknown> = {}
+type MaybePick<
+  T extends object,
+  U extends Extract<keyof T, string>
+> = Record<string, unknown> extends T ? Partial<Pick<T, U>> : Pick<T, U>
 
-  Object.entries(obj).forEach(([key, value]) => {
-    if (properties.includes(key)) {
-      extracted[key] = value
+export function pick<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, paths: U[]): [MaybePick<T, U>, Omit<T, U>] {
+  const found = Object.create(null)
+  const rest = Object.create(null)
+
+  for (const key in obj) {
+    if (paths.includes(key as U)) {
+      found[key] = obj[key]
     } else {
-      rest[key] = value
+      rest[key] = obj[key]
     }
-  })
+  }
 
-  return [extracted, rest]
+  return [found, rest]
 }
 
 /**
@@ -359,13 +367,12 @@ export function chunk (str: string, size = 1) {
   return chunked
 }
 
-export function humanReadableFileSize (bytes: number, binary = false): string {
-  const base = binary ? 1024 : 1000
+export function humanReadableFileSize (bytes: number, base: 1000 | 1024 = 1000): string {
   if (bytes < base) {
     return `${bytes} B`
   }
 
-  const prefix = binary ? ['Ki', 'Mi', 'Gi'] : ['k', 'M', 'G']
+  const prefix = base === 1024 ? ['Ki', 'Mi', 'Gi'] : ['k', 'M', 'G']
   let unit = -1
   while (Math.abs(bytes) >= base && unit < prefix.length - 1) {
     bytes /= base

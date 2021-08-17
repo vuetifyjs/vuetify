@@ -12,7 +12,7 @@ const aliases: IconAliases = {
   cancel: 'fa-times-circle',
   close: 'fa-times',
   delete: 'fa-times-circle', // delete (e.g. v-chip close)
-  clear: 'fa-times-circle', // delete (e.g. v-chip close)
+  clear: 'fa-check-circle', // delete (e.g. v-chip close)
   success: 'fa-check-circle',
   info: 'fa-info-circle',
   warning: 'fa-exclamation',
