@@ -40,12 +40,14 @@ export default defineComponent({
 
     const isBeforeSelected = computed(() => {
       const index = groupItem.group.items.value.indexOf(groupItem.id)
-      return groupItem.group.selected.value.some(id => groupItem.group.items.value.indexOf(id) - index === 1)
+      return !groupItem.isSelected.value &&
+        groupItem.group.selected.value.some(id => groupItem.group.items.value.indexOf(id) - index === 1)
     })
 
     const isAfterSelected = computed(() => {
       const index = groupItem.group.items.value.indexOf(groupItem.id)
-      return groupItem.group.selected.value.some(id => groupItem.group.items.value.indexOf(id) - index === -1)
+      return !groupItem.isSelected.value &&
+        groupItem.group.selected.value.some(id => groupItem.group.items.value.indexOf(id) - index === -1)
     })
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'bgColor')
@@ -56,8 +58,8 @@ export default defineComponent({
           'v-expansion-panel',
           {
             'v-expansion-panel--active': groupItem.isSelected.value,
-            'v-expansion-panel--before-active': !groupItem.isSelected.value && isBeforeSelected.value,
-            'v-expansion-panel--after-active': !groupItem.isSelected.value && isAfterSelected.value,
+            'v-expansion-panel--before-active': isBeforeSelected.value,
+            'v-expansion-panel--after-active': isAfterSelected.value,
             'v-expansion-panel--disabled': groupItem.disabled.value,
           },
           roundedClasses.value,
