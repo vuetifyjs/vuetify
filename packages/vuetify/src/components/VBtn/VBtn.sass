@@ -30,6 +30,21 @@
   @include states('.v-btn__overlay', false)
   @include variant($button-variants...)
 
+  @supports selector(:focus-visible)
+    &::after
+      @include absolute()
+      pointer-events: none
+      border: 2px solid currentColor
+      border-radius: inherit
+      opacity: 0
+      transform: scale(1.25)
+      transition: opacity .2s ease-in-out, transform .2s step-end
+
+    &:focus-visible::after
+      opacity: calc(.25 * var(--v-theme-overlay-multiplier))
+      transform: scale(1)
+      transition: opacity .2s ease-in-out, transform .2s $decelerated-easing
+
   &--flat
     box-shadow: none
 
@@ -80,16 +95,12 @@
       @include button-density('height', $button-stacked-density)
 
 .v-btn__overlay
+  @include absolute()
   background-color: currentColor
   border-radius: inherit
-  position: absolute
-  top: 0
-  right: 0
-  bottom: 0
-  left: 0
   pointer-events: none
   opacity: 0
-  transition: opacity 0.2s ease-in-out
+  transition: opacity .2s ease-in-out
 
 // VAppBar
 .v-btn
