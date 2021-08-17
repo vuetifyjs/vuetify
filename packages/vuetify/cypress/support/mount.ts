@@ -11,10 +11,6 @@ Cypress.Commands.add('mount', (component, options, vuetifyOptions) => {
         'transition-group': false,
       },
       plugins: [vuetify],
-      stubs: {
-        transition: false,
-        'transition-group': false,
-      },
     },
   }
 

@@ -31,11 +31,11 @@ export default defineComponent({
             'v-expansion-panel-content',
           ]}
         >
-          {hasContent.value && (
+          { slots.default && hasContent.value && (
             <div class="v-expansion-panel-content__wrapper">
               { slots.default?.() }
             </div>
-          )}
+          ) }
         </div>
       </VExpandTransition>
     )

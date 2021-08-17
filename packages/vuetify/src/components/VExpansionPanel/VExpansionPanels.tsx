@@ -11,20 +11,24 @@ import { computed } from 'vue'
 import { defineComponent } from '@/util'
 
 // Types
-import type { InjectionKey } from 'vue'
+import type { InjectionKey, PropType } from 'vue'
 import type { GroupItemProvide } from '@/composables/group'
 
 export const VExpansionPanelSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-expansion-panel')
+
+const allowedVariants = ['default', 'accordion', 'inset', 'popout'] as const
+type Variant = typeof allowedVariants[number]
 
 export default defineComponent({
   name: 'VExpansionPanels',
 
   props: {
     variant: {
-      type: String,
+      type: String as PropType<Variant>,
       default: 'default',
-      validator: (v: any) => ['default', 'accordion', 'inset', 'popout'].includes(v),
+      validator: (v: any) => allowedVariants.includes(v),
     },
+
     ...makeTagProps(),
     ...makeGroupProps(),
     ...makeThemeProps(),

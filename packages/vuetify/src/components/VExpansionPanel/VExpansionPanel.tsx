@@ -22,6 +22,7 @@ export default defineComponent({
     header: String,
     content: String,
     bgColor: String,
+
     ...makeLazyProps(),
     ...makeGroupItemProps(),
     ...makeRoundedProps(),
@@ -71,7 +72,7 @@ export default defineComponent({
             ...elevationClasses.value,
           ]}
         />
-        { slots.default ? slots.default() : (
+        { slots.default?.() || (
           <>
             <VExpansionPanelHeader
               expandIcon={ props.expandIcon }
