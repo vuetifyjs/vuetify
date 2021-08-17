@@ -36,15 +36,6 @@ describe('filter.ts', () => {
       expect(filtered.value).toHaveLength(expected)
     })
 
-    it('should warn of inproper value', () => {
-      const { filtered } = useFilter({}, ref([{}]), ref('foo'))
-
-      expect(filtered.value).toHaveLength(0)
-
-      // eslint-disable-next-line max-len
-      expect('[Vuetify] The default filter function expects a string | number, received [object Object]. Update the item value or use a custom filter.').toHaveBeenTipped()
-    })
-
     it('should accept a custom filter function', () => {
       function filterFn (item: Dictionary<string>, query?: string) {
         if (typeof query !== 'string') return true

@@ -1,6 +1,7 @@
-import { propsFactory } from '@/util'
+import { propsFactory, wrapInRef } from '@/util'
+
 // Utilities
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -59,34 +60,28 @@ export function useFilter (
   return { filtered }
 }
 
-// WIP
 export function transformItems (
-  items: Record<string, any>[],
-  map: Record<string, any>,
+  items: any[],
+  map: Record<string, string>,
 ) {
   const transformed = []
 
-  for (const item of items) {
-    const newItem: Record<string, any> = {}
-    const itemKeys = Object.keys(item)
+  for (const item of wrapInRef(items).value) {
+    const refItem = wrapInRef(item)
+    const newItem = ref({} as Record<string, any>)
+    const itemKeys = Object.keys(refItem.value)
 
     for (const itemKey of itemKeys) {
-      const value = item[itemKey]
-      const mapKey = map[itemKey]
+      const value = refItem.value[itemKey]
+      const mapValue = map[itemKey]
 
-      if (!mapKey) {
-        newItem[itemKey] = value
+      if (!mapValue) {
+        newItem.value[itemKey] = value
 
         continue
       }
 
-      const type = typeof mapKey
-
-      if (type === 'function') {
-        newItem[mapKey(item)] = value
-      } else {
-        newItem[mapKey] = value
-      }
+      newItem.value[mapValue] = value
     }
 
     transformed.push(newItem)
