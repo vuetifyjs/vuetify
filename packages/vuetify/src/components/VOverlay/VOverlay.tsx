@@ -3,6 +3,7 @@ import './VOverlay.sass'
 
 // Composables
 import { makeActivatorProps, useActivator } from './useActivator'
+import { makePositionStrategyProps, usePositionStrategies } from './positionStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
@@ -11,6 +12,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRtl } from '@/composables/rtl'
 import { useTeleport } from '@/composables/teleport'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
 // Directives
 import { ClickOutside } from '@/directives/click-outside'
@@ -26,9 +28,9 @@ import {
 import {
   computed,
   mergeProps,
-  nextTick,
   ref,
   Teleport,
+  toHandlers,
   toRef,
   Transition,
   watch,
@@ -36,7 +38,7 @@ import {
 } from 'vue'
 
 // Types
-import type { Prop, PropType, Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { BackgroundColorData } from '@/composables/color'
 
 function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
@@ -50,12 +52,6 @@ function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
 
   return { isBooted }
 }
-
-const positionStrategies = [
-  'static', // specific viewport position, usually centered
-  'connected', // connected to a certain element
-  'flexible', // connected to an element with the ability to overflow or shift if it doesn't fit in the screen
-] as const
 
 interface ScrimProps {
   [key: string]: unknown
@@ -93,22 +89,19 @@ export default defineComponent({
       type: [Boolean, String, Object] as PropType<boolean | string | Element>,
       default: 'body',
     },
+    contentClass: null,
     eager: Boolean,
     noClickAnimation: Boolean,
     modelValue: Boolean,
-    origin: [String, Object] as Prop<string | Element>,
     persistent: Boolean,
-    positionStrategy: {
-      type: String as PropType<typeof positionStrategies[number]>,
-      default: 'static',
-      validator: (val: any) => positionStrategies.includes(val),
-    },
     scrim: {
       type: [String, Boolean],
       default: true,
     },
 
     ...makeActivatorProps(),
+    ...makeDimensionProps(),
+    ...makePositionStrategyProps(),
     ...makeScrollStrategyProps(),
     ...makeThemeProps(),
     ...makeTransitionProps(),
@@ -128,23 +121,20 @@ export default defineComponent({
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
-    const { activatorEl, onActivatorClick } = useActivator(props, isActive)
+    const { activatorEl, activatorEvents } = useActivator(props, isActive)
+    const { dimensionStyles } = useDimension(props)
 
     const contentEl = ref<HTMLElement>()
-    useScrollStrategies(props, {
+    const { contentStyles, updatePosition } = usePositionStrategies(props, {
       contentEl,
       activatorEl,
       isActive,
     })
-
-    watch(isActive, val => {
-      nextTick(() => {
-        if (val) {
-          contentEl.value?.focus()
-        } else {
-          activatorEl.value?.focus()
-        }
-      })
+    useScrollStrategies(props, {
+      contentEl,
+      activatorEl,
+      isActive,
+      updatePosition,
     })
 
     function onClickOutside (e: MouseEvent) {
@@ -209,8 +199,7 @@ export default defineComponent({
           props: mergeProps({
             modelValue: isActive.value,
             'onUpdate:modelValue': (val: boolean) => isActive.value = val,
-            onClick: onActivatorClick,
-          }, props.activatorProps),
+          }, toHandlers(activatorEvents), props.activatorProps),
         }) }
         <Teleport
           disabled={ !teleportTarget.value }
@@ -245,9 +234,15 @@ export default defineComponent({
                 <div
                   ref={ contentEl }
                   v-show={ isActive.value }
-                  v-click-outside={{ handler: onClickOutside, closeConditional }}
-                  class="v-overlay__content"
-                  tabindex={ -1 }
+                  v-click-outside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
+                  class={[
+                    'v-overlay__content',
+                    props.contentClass,
+                  ]}
+                  style={[
+                    dimensionStyles.value,
+                    contentStyles.value,
+                  ]}
                   onKeydown={ onKeydown }
                 >
                   { slots.default?.({ isActive }) }
@@ -262,6 +257,7 @@ export default defineComponent({
     return {
       animateClick,
       contentEl,
+      activatorEl,
     }
   },
 })

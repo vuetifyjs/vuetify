@@ -166,10 +166,6 @@
   opacity: 0
   transition: opacity 0.2s ease-in-out
 
-// VDialog
-.v-card
-  .v-dialog .v-overlay__content > &
-    border-radius: inherit
-    overflow: hidden
-
-    @include elevation($card-dialog-elevation)
+  + .v-card-media
+    border-top-left-radius: inherit
+    border-top-right-radius: inherit

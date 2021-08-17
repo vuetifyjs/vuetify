@@ -11,11 +11,13 @@ import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { ref, watch } from 'vue'
+import { nextTick, ref, watch } from 'vue'
 import { defineComponent, IN_BROWSER } from '@/util'
 
 export default defineComponent({
   name: 'VDialog',
+
+  inheritAttrs: false,
 
   props: {
     fullscreen: Boolean,
@@ -86,6 +88,15 @@ export default defineComponent({
           : document.removeEventListener('focusin', onFocusin)
       }, { immediate: true })
     }
+
+    watch(isActive, async val => {
+      await nextTick()
+      if (val) {
+        overlay.value!.contentEl?.focus({ preventScroll: true })
+      } else {
+        overlay.value!.activatorEl?.focus({ preventScroll: true })
+      }
+    })
 
     return () => {
       return (

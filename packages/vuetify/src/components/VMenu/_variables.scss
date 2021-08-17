@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass';
-
+$menu-elevation: 8 !default;
+$menu-z-index: $menu-elevation * 100;
 $menu-content-border-radius: $border-radius-root !default;
 $menu-content-elevation: 8 !default;
