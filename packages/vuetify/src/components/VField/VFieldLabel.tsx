@@ -5,7 +5,7 @@ import { defineComponent } from '@/util'
 import { makeThemeProps } from '@/composables/theme'
 
 export default defineComponent({
-  name: 'VInputLabel',
+  name: 'VFieldLabel',
 
   props: {
     floating: Boolean,
@@ -18,8 +18,8 @@ export default defineComponent({
       return (
         <label
           class={[
-            'v-input-label',
-            { 'v-input-label--floating': props.floating },
+            'v-field-label',
+            { 'v-field-label--floating': props.floating },
           ]}
           aria-hidden={ props.floating || undefined }
         >

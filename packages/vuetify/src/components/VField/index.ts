@@ -1,2 +1,2 @@
-export * from './VInput'
-export { default as VInputLabel } from './VInputLabel'
+export { VField } from './VField'
+export { default as VFieldLabel } from './VFieldLabel'

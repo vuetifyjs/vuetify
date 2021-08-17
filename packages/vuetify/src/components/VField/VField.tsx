@@ -1,9 +1,9 @@
 // Styles
-import './VInput.sass'
+import './VField.sass'
 
 // Components
 import { VIcon } from '@/components/VIcon'
-import VInputLabel from './VInputLabel'
+import VFieldLabel from './VFieldLabel'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
@@ -32,7 +32,7 @@ export interface DefaultInputSlot {
   blur: () => void
 }
 
-export interface VInputSlot extends DefaultInputSlot {
+export interface VFieldSlot extends DefaultInputSlot {
   props: {
     id: string
     class: string
@@ -41,7 +41,7 @@ export interface VInputSlot extends DefaultInputSlot {
   }
 }
 
-export const makeVInputProps = propsFactory({
+export const makeVFieldProps = propsFactory({
   disabled: Boolean,
   appendIcon: String,
   appendOuterIcon: String,
@@ -66,10 +66,10 @@ export const makeVInputProps = propsFactory({
 
   ...makeThemeProps(),
   ...makeDensityProps(),
-}, 'v-input')
+}, 'v-field')
 
-export const VInput = defineComponent({
-  name: 'VInput',
+export const VField = defineComponent({
+  name: 'VField',
 
   inheritAttrs: false,
 
@@ -77,7 +77,7 @@ export const VInput = defineComponent({
     active: Boolean,
     dirty: Boolean,
 
-    ...makeVInputProps(),
+    ...makeVFieldProps(),
   },
 
   emits: {
@@ -91,12 +91,12 @@ export const VInput = defineComponent({
 
   setup (props, { attrs, emit, slots }) {
     const { themeClasses } = useTheme(props)
-    const { densityClasses } = useDensity(props, 'v-input')
+    const { densityClasses } = useDensity(props, 'v-field')
     const isActive = useProxiedModel(props, 'active')
     const uid = getUid()
 
-    const labelRef = ref<InstanceType<typeof VInputLabel>>()
-    const floatingLabelRef = ref<InstanceType<typeof VInputLabel>>()
+    const labelRef = ref<InstanceType<typeof VFieldLabel>>()
+    const floatingLabelRef = ref<InstanceType<typeof VFieldLabel>>()
     const controlRef = ref<HTMLElement>()
     const fieldRef = ref<HTMLElement>()
     const inputRef = ref<HTMLInputElement>()
@@ -126,7 +126,7 @@ export const VInput = defineComponent({
           : undefined
 
         const duration = parseFloat(getComputedStyle(el).transitionDuration) * 1000
-        const scale = parseFloat(getComputedStyle(targetEl).getPropertyValue('--v-input-label-scale'))
+        const scale = parseFloat(getComputedStyle(targetEl).getPropertyValue('--v-field-label-scale'))
 
         el.style.visibility = 'visible'
         targetEl.style.visibility = 'hidden'
@@ -190,18 +190,18 @@ export const VInput = defineComponent({
         <div
           class={[
             attrs.class,
-            'v-input',
+            'v-field',
             {
-              'v-input--prepended': hasPrepend,
-              'v-input--appended': hasAppend,
-              'v-input--active': isActive.value,
-              'v-input--dirty': props.dirty,
-              'v-input--disabled': props.disabled,
-              'v-input--focused': isFocused.value,
-              'v-input--reverse': props.reverse,
-              'v-input--has-background': !!props.bgColor,
-              'v-input--single-line': props.singleLine,
-              [`v-input--variant-${props.variant}`]: true,
+              'v-field--prepended': hasPrepend,
+              'v-field--appended': hasAppend,
+              'v-field--active': isActive.value,
+              'v-field--dirty': props.dirty,
+              'v-field--disabled': props.disabled,
+              'v-field--focused': isFocused.value,
+              'v-field--reverse': props.reverse,
+              'v-field--has-background': !!props.bgColor,
+              'v-field--single-line': props.singleLine,
+              [`v-field--variant-${props.variant}`]: true,
             },
             themeClasses.value,
             densityClasses.value,
@@ -213,7 +213,7 @@ export const VInput = defineComponent({
         >
           { hasPrependOuter && (
             <div
-              class="v-input__prepend-outer"
+              class="v-field__prepend-outer"
               onClick={ (e: Event) => emit('click:prepend-outer', e) }
             >
               { slots.prependOuter
@@ -225,17 +225,17 @@ export const VInput = defineComponent({
 
           <div
             class={[
-              'v-input__control',
+              'v-field__control',
               backgroundColorClasses.value,
             ]}
             style={ backgroundColorStyles.value }
             onClick={ onClick }
           >
-            <div class="v-input__overlay" />
+            <div class="v-field__overlay" />
 
             { hasPrepend && (
               <div
-                class="v-input__prepend"
+                class="v-field__prepend"
                 onClick={ (e: Event) => emit('click:prepend', e) }
               >
                 { slots.prepend
@@ -245,31 +245,31 @@ export const VInput = defineComponent({
               </div>
             ) }
 
-            <div class="v-input__field">
+            <div class="v-field__field">
               { ['contained', 'filled'].includes(props.variant) && !props.singleLine && (
-                <VInputLabel ref={ floatingLabelRef } floating>
+                <VFieldLabel ref={ floatingLabelRef } floating>
                   { label }
-                </VInputLabel>
+                </VFieldLabel>
               ) }
 
-              <VInputLabel ref={ labelRef } for={ id.value }>
+              <VFieldLabel ref={ labelRef } for={ id.value }>
                 { label }
-              </VInputLabel>
+              </VFieldLabel>
 
               { slots.default?.({
                 ...slotProps.value,
                 props: {
                   id: id.value,
-                  class: 'v-input__input',
+                  class: 'v-field__input',
                   onFocus: () => (isFocused.value = true),
                   onBlur: () => (isFocused.value = false),
                 },
-              } as VInputSlot) }
+              } as VFieldSlot) }
             </div>
 
             { hasAppend && (
               <div
-                class="v-input__append"
+                class="v-field__append"
                 onClick={ (e: Event) => emit('click:append', e) }
               >
                 { slots.append
@@ -279,34 +279,34 @@ export const VInput = defineComponent({
               </div>
             ) }
 
-            <div class="v-input__outline">
+            <div class="v-field__outline">
               { isOutlined && (
                 <>
-                  <div class="v-input__outline__start" />
+                  <div class="v-field__outline__start" />
 
-                  <div class="v-input__outline__notch">
+                  <div class="v-field__outline__notch">
                     { !props.singleLine && (
-                      <VInputLabel ref={ floatingLabelRef } floating>
+                      <VFieldLabel ref={ floatingLabelRef } floating>
                         { label }
-                      </VInputLabel>
+                      </VFieldLabel>
                     )}
                   </div>
 
-                  <div class="v-input__outline__end" />
+                  <div class="v-field__outline__end" />
                 </>
               ) }
 
               { ['plain', 'underlined'].includes(props.variant) && !props.singleLine && (
-                <VInputLabel ref={ floatingLabelRef } floating>
+                <VFieldLabel ref={ floatingLabelRef } floating>
                   { label }
-                </VInputLabel>
+                </VFieldLabel>
               ) }
             </div>
           </div>
 
           { hasAppendOuter && (
             <div
-              class="v-input__append-outer"
+              class="v-field__append-outer"
               onClick={ (e: Event) => emit('click:append-outer', e) }
             >
               { slots.appendOuter
@@ -317,7 +317,7 @@ export const VInput = defineComponent({
           ) }
 
           { slots.details && (
-            <div class="v-input__details">
+            <div class="v-field__details">
               { slots.details() }
             </div>
           ) }
@@ -334,4 +334,4 @@ export const VInput = defineComponent({
 })
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export type VInput = InstanceType<typeof VInput>
+export type VField = InstanceType<typeof VField>
