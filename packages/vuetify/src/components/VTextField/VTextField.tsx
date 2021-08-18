@@ -2,17 +2,16 @@
 import './VTextField.sass'
 
 // Components
-import type { VFieldSlot } from '@/components/VField/VField'
-import { makeVFieldProps, VField } from '@/components/VField/VField'
+import { VField } from '@/components/VField/VField'
 import { VIcon } from '@/components/VIcon'
 
 // Utilities
-import { defineComponent, pick } from '@/util'
+import { defineComponent } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
 import { computed, ref } from 'vue'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import type { VFieldSlot } from '@/components/VField/VField'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
@@ -53,10 +52,11 @@ export default defineComponent({
           ]}
           active={ isDirty.value }
           onUpdate:active={ val => internalDirty.value = val }
+          role="textbox"
           { ...attrs }
           v-slots={{
             ...slots,
-            default: ({ isDirty, isFocused, inputRef, props: slotProps }: VFieldSlot) => (
+            default: ({ inputRef, props: slotProps }: VFieldSlot) => (
               <input
                 v-model={ value.value }
                 ref={ inputRef }
