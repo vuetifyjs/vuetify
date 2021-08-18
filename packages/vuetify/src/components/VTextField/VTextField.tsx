@@ -3,17 +3,28 @@ import './VTextField.sass'
 
 // Components
 import { VField } from '@/components/VField/VField'
-import { VIcon } from '@/components/VIcon'
+
+// Composables
+import { useIntersectionObserver } from '@/composables/intersectionObserver'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, IN_BROWSER, isComponentInstance } from '@/util'
+import { computed, ref } from 'vue'
 
 // Types
-import { computed, ref } from 'vue'
-import { useProxiedModel } from '@/composables/proxiedModel'
+import type { ComponentPublicInstance, Ref } from 'vue'
 import type { VFieldSlot } from '@/components/VField/VField'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
+
+export function tryAutofocus (element: Ref<ComponentPublicInstance | HTMLElement | undefined>) {
+  if (!IN_BROWSER) return
+
+  const el = isComponentInstance(element) ? element.$el : element
+
+  el?.focus?.()
+}
 
 export default defineComponent({
   name: 'VTextField',
@@ -44,9 +55,16 @@ export default defineComponent({
       return internalDirty.value || !!value.value || dirtyTypes.includes(props.type)
     })
 
+    const { intersectionRef, isIntersecting } = useIntersectionObserver(() => {
+      if (props.autofocus && isIntersecting) {
+        tryAutofocus(intersectionRef)
+      }
+    })
+
     return () => {
       return (
         <VField
+          ref={ intersectionRef }
           class={[
             'v-text-field',
           ]}
@@ -56,15 +74,20 @@ export default defineComponent({
           { ...attrs }
           v-slots={{
             ...slots,
-            default: ({ inputRef, props: slotProps }: VFieldSlot) => (
-              <input
-                v-model={ value.value }
-                ref={ inputRef }
-                type={ props.type }
-                size={ 1 }
-                { ...slotProps }
-              />
-            ),
+            default: ({ inputRef, props: slotProps }: VFieldSlot) => {
+              intersectionRef.value = inputRef.value
+
+              return (
+                <input
+                  v-model={ value.value }
+                  ref={ inputRef }
+                  type={ props.type }
+                  size={ 1 }
+                  { ...slotProps }
+                  autofocus={ props.autofocus }
+                />
+              )
+            },
           }}
         />
       )
