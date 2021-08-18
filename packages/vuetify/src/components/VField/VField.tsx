@@ -8,6 +8,7 @@ import VFieldLabel from './VFieldLabel'
 
 // Composables
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 
 // Utilities
@@ -61,6 +62,7 @@ export const makeVFieldProps = propsFactory({
   },
 
   ...makeThemeProps(),
+  ...makeTransitionProps({ transition: 'slide-y-transition' }),
 }, 'v-field')
 
 export const VField = defineComponent({
@@ -166,6 +168,7 @@ export const VField = defineComponent({
 
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
+      const hasDetails = (slots.details || props.hint)
       const hasPrepend = (slots.prependInner || props.prependInnerIcon)
       const hasAppend = (slots.appendInner || props.appendInnerIcon)
 
@@ -202,7 +205,20 @@ export const VField = defineComponent({
           v-slots={{
             prepend: slots.prepend && (() => slots.prepend?.(slotProps.value)),
             append: slots.append && (() => slots.append?.(slotProps.value)),
-            details: slots.details && (() => slots.details?.(slotProps.value)),
+            details: hasDetails && (() => (
+              <MaybeTransition transition={ props.transition }>
+                <span
+                  v-show={ props.hint && (props.persistentHint || slotProps.value.isFocused) }
+                  class="v-field__details"
+                >
+                  {
+                    slots.details
+                      ? slots.details(slotProps.value)
+                      : props.hint
+                  }
+                </span>
+              </MaybeTransition>
+            )),
           }}
         >
           <div
