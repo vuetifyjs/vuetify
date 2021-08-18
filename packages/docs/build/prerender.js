@@ -14,6 +14,7 @@ const {
 const ProgressBar = require('progress')
 const { createBundleRenderer } = require('vue-server-renderer')
 
+const { generateRoutes } = require('./generate-routes')
 const languages = require('../src/i18n/locales.js')
 const availableLanguages = languages.map(lang => lang.alternate || lang.locale)
 
@@ -122,7 +123,7 @@ function render ({ routes, template, bundle, clientManifest }) {
 }
 
 if (isMainThread) {
-  const routes = require('./generate-routes')
+  const routes = generateRoutes()
   const template = readFile('../src/ssr.template.html')
   const bundle = JSON.parse(readFile('../dist/vue-ssr-server-bundle.json'))
   const clientManifest = JSON.parse(readFile('../dist/vue-ssr-client-manifest.json'))
