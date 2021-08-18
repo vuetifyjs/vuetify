@@ -154,6 +154,8 @@ export default mixins(
           (typeof this.showCurrent === 'string' ? this.showCurrent : `${now.getFullYear()}-${now.getMonth() + 1}`)
         return sanitizeDateString(date as string, this.type === 'date' ? 'month' : 'year')
       })(),
+      focusedMonthIndex: 0,
+      focusedDateIndex: 0,
     }
   },
 
@@ -440,11 +442,13 @@ export default mixins(
           tableDate: `${pad(this.tableYear, 4)}-${pad(this.tableMonth + 1)}`,
           value: this.value,
           weekdayFormat: this.weekdayFormat,
+          focusedDateIndex: this.focusedDateIndex,
         },
         ref: 'table',
         on: {
           input: this.dateClick,
           'update:table-date': (value: string) => this.tableDate = value,
+          'update:focused-date-index': (value: number) => this.focusedDateIndex = value,
           ...createItemTypeListeners(this, ':date'),
         },
       })
@@ -469,11 +473,13 @@ export default mixins(
           scrollable: this.scrollable,
           value: this.selectedMonths,
           tableDate: `${pad(this.tableYear, 4)}`,
+          focusedMonthIndex: this.focusedMonthIndex,
         },
         ref: 'table',
         on: {
           input: this.monthClick,
           'update:table-date': (value: string) => this.tableDate = value,
+          'update:focused-month-index': (value: number) => this.focusedMonthIndex = value,
           ...createItemTypeListeners(this, ':month'),
         },
       })

@@ -30,6 +30,7 @@ describe('VDatePickerDateTable.ts', () => {
         tableDate: '2005-05',
         current: '2005-07',
         value: '2005-11-03',
+        focusedDateIndex: 0,
       },
     })
 
@@ -43,6 +44,7 @@ describe('VDatePickerDateTable.ts', () => {
         current: '2005-07',
         value: '2005-11-03',
         readonly: true,
+        focusedDateIndex: 0,
       },
     })
 
@@ -56,6 +58,7 @@ describe('VDatePickerDateTable.ts', () => {
         current: '2005-07',
         value: '2005-11-03',
         disabled: true,
+        focusedDateIndex: 0,
       },
     })
 
@@ -70,6 +73,7 @@ describe('VDatePickerDateTable.ts', () => {
         value: null,
         firstDayOfWeek: 2,
         showWeek: true,
+        focusedDateIndex: 0,
       },
     })
     expect(wrapper.html()).toMatchSnapshot()
@@ -83,6 +87,7 @@ describe('VDatePickerDateTable.ts', () => {
         multiple: true,
         selectedDates: ['2005-11-03', '2005-11-05', '2005-11-08'],
         value: '2005-11-03',
+        focusedDateIndex: 0,
       },
     })
 
@@ -97,6 +102,7 @@ describe('VDatePickerDateTable.ts', () => {
         value: '2005-11-03',
         events: ['2005-05-03'],
         eventColor: 'red',
+        focusedDateIndex: 0,
       },
     })
 
@@ -111,6 +117,7 @@ describe('VDatePickerDateTable.ts', () => {
         value: '2005-11-03',
         events: date => date === '2005-05-03',
         eventColor: 'red',
+        focusedDateIndex: 0,
       },
     })
 
@@ -125,6 +132,7 @@ describe('VDatePickerDateTable.ts', () => {
         value: '2005-11-03',
         events: ['2005-05-03', '2005-05-04'],
         eventColor: { '2005-05-03': 'red', '2005-05-04': 'blue lighten-1' },
+        focusedDateIndex: 0,
       },
     })
 
@@ -139,6 +147,7 @@ describe('VDatePickerDateTable.ts', () => {
         value: '2005-11-03',
         events: ['2005-05-03', '2005-05-04'],
         eventColor: date => ({ '2005-05-03': 'red' }[date]),
+        focusedDateIndex: 0,
       },
     })
 
@@ -152,6 +161,7 @@ describe('VDatePickerDateTable.ts', () => {
         current: '2005-07',
         value: '2005-11-03',
         firstDayOfWeek: 2,
+        focusedDateIndex: 0,
       },
     })
 
@@ -196,6 +206,7 @@ describe('VDatePickerDateTable.ts', () => {
         tableDate: '2005-05',
         current: '2005-07',
         value: '2005-11-03',
+        focusedDateIndex: 0,
       },
     })
 
@@ -206,13 +217,15 @@ describe('VDatePickerDateTable.ts', () => {
     expect(input).toHaveBeenCalledWith('2005-05-01')
   })
 
-  it('should not emit event when disabled month button is clicked', () => {
+  it('should not emit event when disabled date button is clicked', () => {
     const wrapper = mountFunction({
       propsData: {
         tableDate: '2005-05',
         current: '2005-07',
         value: '2005-11-03',
         allowedDates: () => false,
+        focusedDateIndex: 0,
+        disabled: true,
       },
     })
 
@@ -228,6 +241,7 @@ describe('VDatePickerDateTable.ts', () => {
       propsData: {
         tableDate: '2005-05',
         scrollable: true,
+        focusedDateIndex: 0,
       },
     })
 
@@ -242,6 +256,7 @@ describe('VDatePickerDateTable.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         tableDate: '2005-05',
+        focusedDateIndex: 0,
       },
     })
 
@@ -258,6 +273,7 @@ describe('VDatePickerDateTable.ts', () => {
         tableDate: '2005-05',
         scrollable: true,
         min: '2005-05',
+        focusedDateIndex: 0,
       },
     })
 
@@ -274,6 +290,7 @@ describe('VDatePickerDateTable.ts', () => {
         tableDate: '2005-05',
         scrollable: true,
         min: '2005-03',
+        focusedDateIndex: 0,
       },
     })
 
@@ -304,6 +321,7 @@ describe('VDatePickerDateTable.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         tableDate: '2005-05',
+        focusedDateIndex: 0,
       },
     })
 

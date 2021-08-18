@@ -30,6 +30,7 @@ describe('VDatePickerMonthTable.ts', () => {
         tableDate: '2005',
         current: '2005-05',
         value: '2005-11',
+        focusedMonthIndex: 0,
       },
     })
 
@@ -42,6 +43,7 @@ describe('VDatePickerMonthTable.ts', () => {
         tableDate: '2005',
         current: '2005-05',
         value: ['2005-11', '2005-10'],
+        focusedMonthIndex: 0,
       },
     })
 
@@ -86,6 +88,7 @@ describe('VDatePickerMonthTable.ts', () => {
         tableDate: '2005',
         current: '2005-05',
         value: '2005-11',
+        focusedMonthIndex: 0,
       },
     })
 
@@ -103,6 +106,7 @@ describe('VDatePickerMonthTable.ts', () => {
         current: '2005-05',
         value: '2005-11',
         allowedDates: () => false,
+        focusedMonthIndex: 0,
       },
     })
 
@@ -118,6 +122,7 @@ describe('VDatePickerMonthTable.ts', () => {
       propsData: {
         tableDate: '2005',
         scrollable: true,
+        focusedMonthIndex: 0,
       },
     })
 
@@ -132,6 +137,7 @@ describe('VDatePickerMonthTable.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         tableDate: '2005',
+        focusedMonthIndex: 0,
       },
     })
 
@@ -148,6 +154,7 @@ describe('VDatePickerMonthTable.ts', () => {
         tableDate: '2005',
         scrollable: true,
         min: '2005',
+        focusedMonthIndex: 0,
       },
     })
 
@@ -164,6 +171,7 @@ describe('VDatePickerMonthTable.ts', () => {
         tableDate: '2005',
         scrollable: true,
         min: '2003',
+        focusedMonthIndex: 0,
       },
     })
 
@@ -194,6 +202,7 @@ describe('VDatePickerMonthTable.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         tableDate: '2005',
+        focusedMonthIndex: 0,
       },
     })
 
@@ -212,6 +221,7 @@ describe('VDatePickerMonthTable.ts', () => {
         tableDate: '2005',
         events: ['2005-07', '2005-11'],
         eventColor: 'red',
+        focusedMonthIndex: 0,
       },
     })
 
@@ -224,6 +234,7 @@ describe('VDatePickerMonthTable.ts', () => {
         tableDate: '2005',
         events: date => date === '2005-07' || date === '2005-11',
         eventColor: 'red',
+        focusedMonthIndex: 0,
       },
     })
 
@@ -236,6 +247,7 @@ describe('VDatePickerMonthTable.ts', () => {
         tableDate: '2005',
         events: ['2005-07', '2005-11'],
         eventColor: { '2005-07': 'red', '2005-11': 'blue lighten-1' },
+        focusedMonthIndex: 0,
       },
     })
 
@@ -248,6 +260,7 @@ describe('VDatePickerMonthTable.ts', () => {
         tableDate: '2005',
         events: ['2005-07', '2005-11'],
         eventColor: date => ({ '2005-07': 'red', '2005-11': 'blue lighten-1' }[date]),
+        focusedMonthIndex: 0,
       },
     })
 

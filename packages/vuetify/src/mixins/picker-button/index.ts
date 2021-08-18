@@ -25,14 +25,24 @@ export default mixins(
         event.stopPropagation()
         this.$emit(`update:${kebabCase(prop)}`, value)
       }
+      const keydown = (event: KeyboardEvent) => {
+        if (event.code === 'Space') {
+          event.stopPropagation()
+          event.preventDefault()
+          this.$emit(`update:${kebabCase(prop)}`, value)
+        }
+      }
 
       return this.$createElement('div', {
+        attrs: {
+          tabindex: (active || readonly || (this as any).disabled) ? -1 : 0,
+        },
         staticClass: `v-picker__title__btn ${staticClass}`.trim(),
         class: {
           'v-picker__title__btn--active': active,
           'v-picker__title__btn--readonly': readonly,
         },
-        on: (active || readonly) ? undefined : { click },
+        on: (active || readonly) ? undefined : { click, keydown },
       }, Array.isArray(content) ? content : [content])
     },
   },

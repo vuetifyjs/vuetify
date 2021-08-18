@@ -45,6 +45,8 @@ export default mixins<options &
   data () {
     return {
       defaultColor: 'primary',
+      focusedItemIndex: 0,
+      yearsList: [] as HTMLElement[],
     }
   },
 
@@ -55,6 +57,9 @@ export default mixins<options &
   },
 
   mounted () {
+    this.yearsList = (this as any).$refs.years.children
+    this.yearsList[this.focusedItemIndex].focus()
+
     setTimeout(() => {
       const activeItem = this.$el.getElementsByClassName('active')[0]
       if (activeItem) {
@@ -70,16 +75,42 @@ export default mixins<options &
   },
 
   methods: {
+    handleKeydown (e: KeyboardEvent) {
+      if (e.code === 'ArrowDown') {
+        this.moveFocus('next')
+      }
+
+      if (e.code === 'ArrowUp') {
+        this.moveFocus('previous')
+      }
+    },
+    moveFocus (direction: 'next' | 'previous') {
+      this.focusedItemIndex = direction === 'next' ? this.focusedItemIndex + 1 : this.focusedItemIndex - 1
+
+      if (this.focusedItemIndex > this.yearsList.length - 1) {
+        this.focusedItemIndex = 0
+      }
+
+      if (this.focusedItemIndex < 0) {
+        this.focusedItemIndex = this.yearsList.length - 1
+      }
+
+      this.yearsList[this.focusedItemIndex].focus()
+    },
     genYearItem (year: number): VNode {
       const formatted = this.formatter(`${year}`)
       const active = parseInt(this.value, 10) === year
       const color = active && (this.color || 'primary')
 
       return this.$createElement('li', this.setTextColor(color, {
+        attrs: {
+          tabindex: -1,
+        },
         key: year,
         class: { active },
         on: mergeListeners({
           click: () => this.$emit('input', year),
+          keydown: (e: KeyboardEvent) => e.code === 'Space' && this.$emit('input', year),
         }, createItemTypeNativeListeners(this, ':year', year)),
       }), formatted)
     },
@@ -92,6 +123,10 @@ export default mixins<options &
 
       for (let year = maxYear; year >= minYear; year--) {
         children.push(this.genYearItem(year))
+
+        if (year === selectedYear) {
+          this.focusedItemIndex = children.length - 1
+        }
       }
 
       return children
@@ -100,8 +135,14 @@ export default mixins<options &
 
   render (): VNode {
     return this.$createElement('ul', {
+      attrs: {
+        tabindex: 0,
+      },
       staticClass: 'v-date-picker-years',
       ref: 'years',
+      on: {
+        keydown: (e: KeyboardEvent) => this.handleKeydown(e),
+      },
     }, this.genYearItems())
   },
 })

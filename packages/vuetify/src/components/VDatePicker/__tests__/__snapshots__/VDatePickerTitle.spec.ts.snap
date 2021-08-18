@@ -2,10 +2,14 @@
 
 exports[`VDatePickerTitle.ts should render component and match snapshot 1`] = `
 <div class="v-date-picker-title">
-  <div class="v-picker__title__btn v-date-picker-title__year">
+  <div tabindex="0"
+       class="v-picker__title__btn v-date-picker-title__year"
+  >
     1234
   </div>
-  <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
+  <div tabindex="-1"
+       class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active"
+  >
     <div>
       2005-11-01
     </div>
@@ -15,10 +19,14 @@ exports[`VDatePickerTitle.ts should render component and match snapshot 1`] = `
 
 exports[`VDatePickerTitle.ts should render component when selecting year and match snapshot 1`] = `
 <div class="v-date-picker-title">
-  <div class="v-picker__title__btn v-date-picker-title__year v-picker__title__btn--active">
+  <div tabindex="-1"
+       class="v-picker__title__btn v-date-picker-title__year v-picker__title__btn--active"
+  >
     1234
   </div>
-  <div class="v-picker__title__btn v-date-picker-title__date">
+  <div tabindex="0"
+       class="v-picker__title__btn v-date-picker-title__date"
+  >
     <div>
       2005-11-01
     </div>
@@ -28,10 +36,14 @@ exports[`VDatePickerTitle.ts should render component when selecting year and mat
 
 exports[`VDatePickerTitle.ts should render disabled component and match snapshot 1`] = `
 <div class="v-date-picker-title v-date-picker-title--disabled">
-  <div class="v-picker__title__btn v-date-picker-title__year">
+  <div tabindex="-1"
+       class="v-picker__title__btn v-date-picker-title__year"
+  >
     1234
   </div>
-  <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
+  <div tabindex="-1"
+       class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active"
+  >
     <div>
       2005-11-01
     </div>
@@ -41,10 +53,14 @@ exports[`VDatePickerTitle.ts should render disabled component and match snapshot
 
 exports[`VDatePickerTitle.ts should render readonly component and match snapshot 1`] = `
 <div class="v-date-picker-title">
-  <div class="v-picker__title__btn v-date-picker-title__year">
+  <div tabindex="0"
+       class="v-picker__title__btn v-date-picker-title__year"
+  >
     1234
   </div>
-  <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
+  <div tabindex="-1"
+       class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active"
+  >
     <div>
       2005-11-01
     </div>
@@ -53,7 +69,9 @@ exports[`VDatePickerTitle.ts should render readonly component and match snapshot
 `;
 
 exports[`VDatePickerTitle.ts should render year icon 1`] = `
-<div class="v-picker__title__btn v-date-picker-title__year">
+<div tabindex="0"
+     class="v-picker__title__btn v-date-picker-title__year"
+>
   1234
   <i aria-hidden="true"
      class="v-icon notranslate material-icons theme--dark"

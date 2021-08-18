@@ -490,3 +490,11 @@ export function mergeDeep (
 export function fillArray<T> (length: number, obj: T) {
   return Array(length).fill(obj)
 }
+
+export function findLastIndex<T> (array: Array<T>, predicate: (value: T, index: number, obj: T[]) => boolean): number {
+  let l = array.length
+  while (l--) {
+    if (predicate(array[l], l, array)) return l
+  }
+  return -1
+}

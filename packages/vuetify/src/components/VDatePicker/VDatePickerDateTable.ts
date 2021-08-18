@@ -4,7 +4,7 @@ import DatePickerTable from './mixins/date-picker-table'
 // Utils
 import { weekNumber } from '../../util/dateTimeUtils'
 import { pad, createNativeLocaleFormatter, monthChange } from './util'
-import { createRange } from '../../util/helpers'
+import { createRange, findLastIndex } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
@@ -31,6 +31,13 @@ export default mixins(
     weekdayFormat: Function as PropType<DatePickerFormatter | undefined>,
   },
 
+  data () {
+    return {
+      dateButtons: [] as HTMLTableCellElement[],
+      isTransition: false,
+    }
+  },
+
   computed: {
     formatter (): DatePickerFormatter {
       return this.format || createNativeLocaleFormatter(this.currentLocale, { day: 'numeric', timeZone: 'UTC' }, { start: 8, length: 2 })
@@ -47,7 +54,142 @@ export default mixins(
     },
   },
 
+  watch: {
+    tableDate () {
+      setTimeout(() => {
+        this.dateButtons = Array.from(this.$el.querySelectorAll('td'))
+        if (this.focusedDateIndex > this.dateButtons.length - 1 || this.checkIfElemEmpty(this.focusedDateIndex)) {
+          this.setStartIndex()
+        }
+      }, 500)
+    },
+  },
+
+  mounted () {
+    this.$on('keydown:left', () => this.moveHorizontal('left'))
+    this.$on('keydown:right', () => this.moveHorizontal('right'))
+    this.$on('keydown:up', () => this.moveVertical('up'))
+    this.$on('keydown:down', () => this.moveVertical('down'))
+    this.$on('update-focused-cell', (index: number) => this.$emit('update:focused-date-index', index))
+    if (!this.disabled) {
+      this.setStartIndex()
+    }
+  },
+
   methods: {
+    async setStartIndex () {
+      this.dateButtons = Array.from(this.$el.querySelectorAll('td'))
+      this.$emit('update:focused-date-index', 0)
+      await this.$nextTick()
+      if (this.checkIfElemEmpty(this.focusedDateIndex)) {
+        const startIndex = this.setNextIndex(this.focusedDateIndex, 'right')
+        startIndex !== -1 && this.$emit('update:focused-date-index', startIndex)
+        await this.$nextTick()
+      }
+    },
+    async moveHorizontal (direction: 'left' | 'right') {
+      if (this.isTransition) {
+        return
+      }
+
+      const rowElemsAmount = this.showWeek ? 8 : 7
+      const addition = direction === 'left' ? -1 : 1
+      const nextPageItem = direction === 'left' ? rowElemsAmount - 1 : -(rowElemsAmount - 1)
+
+      if (this.focusedDateIndex !== 0 && this.checkIfElemEmpty(this.focusedDateIndex + addition)) {
+        const isFirstRow = this.focusedDateIndex < rowElemsAmount
+        const isLastRow = this.focusedDateIndex > this.dateButtons!.length - 1 - rowElemsAmount
+
+        if (direction === 'left') {
+          isFirstRow
+            ? this.$emit('update:focused-date-index', 0)
+            : this.$emit('update:focused-date-index', this.focusedDateIndex + addition)
+        }
+
+        if (direction === 'right') {
+          isLastRow
+            ? this.$emit('update:focused-date-index', this.dateButtons!.length - 1)
+            : this.$emit('update:focused-date-index', this.focusedDateIndex)
+        }
+
+        await this.$nextTick()
+      }
+
+      const cantMove = {
+        left: this.focusedDateIndex % rowElemsAmount === 0,
+        right: (this.focusedDateIndex + 1) % rowElemsAmount === 0,
+      }
+
+      if (cantMove[direction]) {
+        this.isTransition = true
+        this.$emit('update:table-date', monthChange(this.tableDate, addition))
+        this.$emit('update:focused-date-index', this.focusedDateIndex + nextPageItem)
+        setTimeout(async () => {
+          this.dateButtons = Array.from(this.$el.querySelectorAll('td'))
+
+          if (this.focusedDateIndex > this.dateButtons!.length - 1) {
+            this.$emit('update:focused-date-index', findLastIndex<HTMLElement>(this.dateButtons, (item, index) => !this.checkIfElemEmpty(index)))
+            await this.$nextTick()
+          }
+
+          if (this.checkIfElemEmpty(this.focusedDateIndex)) {
+            const nextIndex = this.setNextIndex(this.focusedDateIndex, direction)
+            this.$emit('update:focused-date-index', nextIndex)
+            await this.$nextTick()
+          }
+
+          const element = this.dateButtons[this.focusedDateIndex].firstChild as HTMLButtonElement
+          element.focus()
+          this.isTransition = false
+        }, 500)
+      } else {
+        this.$emit('update:focused-date-index', this.focusedDateIndex + addition)
+        await this.$nextTick()
+        const element = this.dateButtons[this.focusedDateIndex].firstChild as HTMLButtonElement
+        element.focus()
+      }
+    },
+    async moveVertical (direction: 'up' | 'down') {
+      if (this.isTransition) {
+        return
+      }
+
+      const nextIndex = this.setNextIndex(this.focusedDateIndex, direction)
+
+      this.$emit('update:focused-date-index', nextIndex)
+
+      await this.$nextTick()
+      const element = this.dateButtons[this.focusedDateIndex].firstChild as HTMLButtonElement
+      element.focus()
+    },
+    setNextIndex (startIndex: number, direction: 'left' | 'right' | 'up' | 'down'): number {
+      const rowElemsAmount = this.showWeek ? 8 : 7
+
+      const nextIndex = {
+        up: startIndex - rowElemsAmount < 0
+          ? startIndex - rowElemsAmount + this.dateButtons!.length
+          : startIndex - rowElemsAmount,
+        down: startIndex + rowElemsAmount > (this.dateButtons!.length - 1) ? startIndex % rowElemsAmount : startIndex + rowElemsAmount,
+        right: startIndex + 1,
+        left: startIndex - 1,
+      }
+
+      let index = nextIndex[direction]
+
+      if (index > this.dateButtons.length - 1) {
+        return -1
+      }
+
+      if (this.checkIfElemEmpty(index)) {
+        index = this.setNextIndex(index, direction)
+      }
+
+      return index
+    },
+    checkIfElemEmpty (index: number): boolean {
+      const element = this.dateButtons[index].firstChild as HTMLButtonElement
+      return element === null || element.disabled === true || element.tagName !== 'BUTTON'
+    },
     calculateTableDate (delta: number) {
       return monthChange(this.tableDate, Math.sign(delta || 1))
     },
@@ -88,9 +230,11 @@ export default mixins(
       const daysInMonth = new Date(this.displayedYear, this.displayedMonth + 1, 0).getDate()
       let rows = []
       let day = this.weekDaysBeforeFirstDayOfTheMonth()
+      let cellIndex = 0
 
       if (this.showWeek) {
         rows.push(this.genWeekNumber(this.getWeekNumber(1)))
+        cellIndex++
       }
 
       const prevMonthYear = this.displayedMonth ? this.displayedYear : this.displayedYear - 1
@@ -104,20 +248,23 @@ export default mixins(
         rows.push(this.$createElement('td', this.showAdjacentMonths ? [
           this.genButton(date, true, 'date', this.formatter, true),
         ] : []))
+        cellIndex++
       }
 
       for (day = 1; day <= daysInMonth; day++) {
         const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
 
         rows.push(this.$createElement('td', [
-          this.genButton(date, true, 'date', this.formatter),
+          this.genButton(date, true, 'date', this.formatter, false, cellIndex),
         ]))
+        cellIndex++
 
         if (rows.length % cellsInRow === 0) {
           children.push(this.genTR(rows))
           rows = []
           if (this.showWeek && (day < daysInMonth || this.showAdjacentMonths)) {
             rows.push(this.genWeekNumber(this.getWeekNumber(day + 7)))
+            cellIndex++
           }
         }
       }
