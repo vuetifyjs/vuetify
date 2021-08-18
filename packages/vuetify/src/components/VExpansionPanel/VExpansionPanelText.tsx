@@ -21,10 +21,10 @@ export default defineComponent({
 
     if (!expansionPanel) throw new Error('[Vuetify] v-expansion-panel-text needs to be placed inside v-expansion-panel')
 
-    const { hasContent } = useLazy(props, expansionPanel.isSelected)
+    const { hasContent, onAfterLeave } = useLazy(props, expansionPanel.isSelected)
 
     return () => (
-      <VExpandTransition>
+      <VExpandTransition onAfterLeave={ onAfterLeave }>
         <div
           v-show={ expansionPanel.isSelected.value }
           class={[

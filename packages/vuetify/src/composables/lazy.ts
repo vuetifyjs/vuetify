@@ -15,5 +15,9 @@ export function useLazy (props: { eager: boolean }, active: Ref<boolean>) {
 
   watch(active, () => isBooted.value = true)
 
-  return { isBooted, hasContent }
+  function onAfterLeave () {
+    if (!props.eager) isBooted.value = false
+  }
+
+  return { isBooted, hasContent, onAfterLeave }
 }
