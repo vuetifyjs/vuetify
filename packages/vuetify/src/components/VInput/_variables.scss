@@ -1,21 +1,6 @@
-// INPUT
-$input-border-radius: $border-radius-root !default;
-$input-density: ('default': 0, 'comfortable': -2, 'compact': -4) !default;
-$input-font-size: 16px !default;
-$input-height: 56px !default;
-$input-letter-spacing: .009375em !default;
-$input-max-width: 100% !default;
-$input-transition-timing: 150ms $standard-easing !default;
-$input-subtle-transition-timing: 250ms $standard-easing !default;
-$input-underlined-margin-bottom: 4px !default;
-
 // CONTROL
-$input-control-contained-background: rgb(var(--v-theme-surface)) !default;
-$input-control-contained-elevation: 2 !default;
-$input-control-filled-background: rgba(var(--v-theme-on-surface), var(--v-idle-opacity)) !default;
-$input-control-padding: 16px !default;
-$input-control-affixed-padding: 12px !default;
-$input-control-affixed-inner-padding: 6px !default;
+$input-density: ('default': 0, 'comfortable': -2, 'compact': -4) !default;
+$input-control-height: 56px !default;
 
 // DETAILS
 $input-details-font-size: .75rem !default;
@@ -23,24 +8,8 @@ $input-details-font-weight: 400 !default;
 $input-details-letter-spacing: .0333333333em !default;
 $input-details-line-height: normal !default;
 $input-details-min-height: 16px !default;
-$input-details-padding: 6px 16px 0 !default;
-
-// FIELD
-$input-field-input-padding-top: 30px !default;
-$input-input-opacity: var(--v-high-emphasis-opacity) !default;
-
-// LABEL
-$input-label-font-size: 1rem !default;
-$input-label-floating-scale: .75 !default;
-
-// OUTLINE
-$input-outline-opacity: .38 !default;
-$input-border-width: 1px !default;
-$input-focused-border-width: 2px !default;
-
-// OVERLAY
-$input-overlay-filled-opacity: 0.04 !default;
+$input-details-padding-above: 6px !default;
+$input-details-padding-inline: 16px !default;
 
 // AFFIXES
-$input-prepend-outer-margin-inline-end: 16px !default;
-$input-prepend-outer-margin-inline-start: 16px !default;
+$input-affix-margin-inside: 16px !default;
