@@ -12,7 +12,7 @@ import ripple from '@/directives/ripple'
 import { computed, inject } from 'vue'
 import { defineComponent, propsFactory } from '@/util'
 
-export const makeVExpansionPanelHeaderProps = propsFactory({
+export const makeVExpansionPanelTitleProps = propsFactory({
   expandIcon: {
     type: String,
     default: '$expand',
@@ -30,18 +30,18 @@ export const makeVExpansionPanelHeaderProps = propsFactory({
 })
 
 export default defineComponent({
-  name: 'VExpansionPanelHeader',
+  name: 'VExpansionPanelTitle',
 
   directives: { ripple },
 
   props: {
-    ...makeVExpansionPanelHeaderProps(),
+    ...makeVExpansionPanelTitleProps(),
   },
 
   setup (props, { slots }) {
     const expansionPanel = inject(VExpansionPanelSymbol)
 
-    if (!expansionPanel) throw new Error('[Vuetify] v-expansion-panel-header needs to be placed inside v-expansion-panel')
+    if (!expansionPanel) throw new Error('[Vuetify] v-expansion-panel-title needs to be placed inside v-expansion-panel')
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
@@ -55,9 +55,9 @@ export default defineComponent({
     return () => (
       <button
         class={[
-          'v-expansion-panel-header',
+          'v-expansion-panel-title',
           {
-            'v-expansion-panel-header--active': expansionPanel.isSelected.value,
+            'v-expansion-panel-title--active': expansionPanel.isSelected.value,
           },
           backgroundColorClasses.value,
         ]}
@@ -69,10 +69,10 @@ export default defineComponent({
         onClick={ expansionPanel.toggle }
         v-ripple={ props.ripple }
       >
-        <div class="v-expansion-panel-header__overlay" />
+        <div class="v-expansion-panel-title__overlay" />
         { slots.default?.(slotProps.value) }
         { !props.hideActions && (
-          <div class="v-expansion-panel-header__icon">
+          <div class="v-expansion-panel-title__icon">
             {
               slots.actions ? slots.actions(slotProps.value)
               : <VIcon icon={ expansionPanel.isSelected.value ? props.collapseIcon : props.expandIcon } />

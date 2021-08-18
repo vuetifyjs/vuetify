@@ -10,7 +10,7 @@ import { inject } from 'vue'
 import { defineComponent } from '@/util'
 
 export default defineComponent({
-  name: 'VExpansionPanelContent',
+  name: 'VExpansionPanelText',
 
   props: {
     ...makeLazyProps(),
@@ -19,7 +19,7 @@ export default defineComponent({
   setup (props, { slots }) {
     const expansionPanel = inject(VExpansionPanelSymbol)
 
-    if (!expansionPanel) throw new Error('[Vuetify] v-expansion-panel-content needs to be placed inside v-expansion-panel')
+    if (!expansionPanel) throw new Error('[Vuetify] v-expansion-panel-text needs to be placed inside v-expansion-panel')
 
     const { hasContent } = useLazy(props, expansionPanel.isSelected)
 
@@ -28,11 +28,11 @@ export default defineComponent({
         <div
           v-show={ expansionPanel.isSelected.value }
           class={[
-            'v-expansion-panel-content',
+            'v-expansion-panel-text',
           ]}
         >
           { slots.default && hasContent.value && (
-            <div class="v-expansion-panel-content__wrapper">
+            <div class="v-expansion-panel-text__wrapper">
               { slots.default?.() }
             </div>
           ) }

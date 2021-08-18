@@ -9,10 +9,10 @@
     border-color: $expansion-panel-border-color
 
   &--disabled
-    .v-expansion-panel-header
+    .v-expansion-panel-title
       color: $expansion-panel-disabled-color
 
-      .v-expansion-panel-header__overlay
+      .v-expansion-panel-title__overlay
         // This is multiplied by the text opacity,
         // so we need to divide it to get the desired value
         // TODO: Should disabled be part of states mixin?
@@ -53,14 +53,14 @@
       border-top-left-radius: 0 !important
       border-top-right-radius: 0 !important
 
-      .v-expansion-panel-header--active
+      .v-expansion-panel-title--active
         border-bottom-left-radius: initial
         border-bottom-right-radius: initial
 
     > :not(:first-child):not(:last-child)
       border-radius: 0 !important
 
-    .v-expansion-panel-header__overlay
+    .v-expansion-panel-title__overlay
       transition: 0.3s border-radius $standard-easing
 
 // Element
@@ -83,7 +83,7 @@
     transition: 0.3s opacity $standard-easing
 
   &--disabled
-    .v-expansion-panel-header
+    .v-expansion-panel-title
       pointer-events: none
 
   &--active
@@ -94,8 +94,8 @@
       &::after
         opacity: 0
 
-    > .v-expansion-panel-header
-         min-height: $expansion-panel-active-header-min-height
+    > .v-expansion-panel-title
+         min-height: $expansion-panel-active-title-min-height
 
 .v-expansion-panel__shadow
   @include absolute()
@@ -103,42 +103,42 @@
   border-radius: inherit
   z-index: -1
 
-.v-expansion-panel-header
+.v-expansion-panel-title
   align-items: center
   border-radius: inherit
   display: flex
-  font-size: $expansion-panel-header-font-size
+  font-size: $expansion-panel-title-font-size
   line-height: 1
-  min-height: $expansion-panel-header-min-height
+  min-height: $expansion-panel-title-min-height
   outline: none
-  padding: $expansion-panel-header-padding
+  padding: $expansion-panel-title-padding
   position: relative
   transition: .3s min-height $standard-easing
   width: 100%
   justify-content: space-between
-  @include states('.v-expansion-panel-header__overlay', true)
+  @include states('.v-expansion-panel-title__overlay', true)
 
   &--active::before
     opacity: 0.12
 
-.v-expansion-panel-header__overlay
+.v-expansion-panel-title__overlay
   @include absolute()
   background-color: currentColor
   border-radius: inherit
   opacity: 0
 
-.v-expansion-panel-header__icon
+.v-expansion-panel-title__icon
   display: inline-flex
   margin-bottom: -4px
   margin-top: -4px
   user-select: none
   margin-inline-start: auto
 
-.v-expansion-panel-content
+.v-expansion-panel-text
   display: flex
 
   &__wrapper
-    padding: $expansion-panel-content-padding
+    padding: $expansion-panel-text-padding
     flex: 1 1 auto
     max-width: 100%
 

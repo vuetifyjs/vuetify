@@ -1,4 +1,4 @@
 export { default as VExpansionPanels } from './VExpansionPanels'
 export { default as VExpansionPanel } from './VExpansionPanel'
-export { default as VExpansionPanelContent } from './VExpansionPanelContent'
-export { default as VExpansionPanelHeader } from './VExpansionPanelHeader'
+export { default as VExpansionPanelText } from './VExpansionPanelText'
+export { default as VExpansionPanelTitle } from './VExpansionPanelTitle'

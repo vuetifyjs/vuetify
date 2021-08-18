@@ -1,6 +1,6 @@
 // Components
-import VExpansionPanelHeader, { makeVExpansionPanelHeaderProps } from './VExpansionPanelHeader'
-import VExpansionPanelContent from './VExpansionPanelContent'
+import VExpansionPanelTitle, { makeVExpansionPanelTitleProps } from './VExpansionPanelTitle'
+import VExpansionPanelText from './VExpansionPanelText'
 import { VExpansionPanelSymbol } from './VExpansionPanels'
 
 // Composables
@@ -19,8 +19,8 @@ export default defineComponent({
   name: 'VExpansionPanel',
 
   props: {
-    header: String,
-    content: String,
+    title: String,
+    text: String,
     bgColor: String,
 
     ...makeLazyProps(),
@@ -28,7 +28,7 @@ export default defineComponent({
     ...makeRoundedProps(),
     ...makeElevationProps(),
     ...makeTagProps(),
-    ...makeVExpansionPanelHeaderProps(),
+    ...makeVExpansionPanelTitleProps(),
   },
 
   setup (props, { slots }) {
@@ -76,18 +76,18 @@ export default defineComponent({
         />
         { slots.default?.() || (
           <>
-            <VExpansionPanelHeader
+            <VExpansionPanelTitle
               expandIcon={ props.expandIcon }
               collapseIcon={ props.collapseIcon }
               color={ props.color }
               hideActions={ props.hideActions }
               ripple={ props.ripple }
             >
-              { slots.header ? slots.header() : props.header }
-            </VExpansionPanelHeader>
-            <VExpansionPanelContent eager={ props.eager }>
-              { slots.content ? slots.content() : props.content }
-            </VExpansionPanelContent>
+              { slots.title ? slots.title() : props.title }
+            </VExpansionPanelTitle>
+            <VExpansionPanelText eager={ props.eager }>
+              { slots.text ? slots.text() : props.text }
+            </VExpansionPanelText>
           </>
         ) }
       </props.tag>

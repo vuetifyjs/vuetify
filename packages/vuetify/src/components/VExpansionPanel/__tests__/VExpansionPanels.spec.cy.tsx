@@ -2,94 +2,94 @@
 
 import { CenteredGrid } from '@/../cypress/templates'
 import { ref } from 'vue'
-import { VExpansionPanel, VExpansionPanelContent, VExpansionPanelHeader, VExpansionPanels } from '../'
+import { VExpansionPanel, VExpansionPanels, VExpansionPanelText, VExpansionPanelTitle } from '../'
 
 describe('VExpansionPanels', () => {
   it('renders using props', () => {
-    const headers = ['Header 1', 'Header 2']
+    const titles = ['Header 1', 'Header 2']
 
     cy.mount(() => (
       <CenteredGrid width="200px">
         <VExpansionPanels>
-          { headers.map(header => (
-            <VExpansionPanel header={header} content="Content" />
+          { titles.map(title => (
+            <VExpansionPanel title={title} text="Content" />
           )) }
         </VExpansionPanels>
       </CenteredGrid>
     ))
-      .get('.v-expansion-panel-header')
+      .get('.v-expansion-panel-title')
       .each((item, index) => {
-        expect(item.text()).to.equal(headers[index])
+        expect(item.text()).to.equal(titles[index])
       })
   })
 
   it('renders using slots', () => {
-    const headers = ['Header 1', 'Header 2']
+    const titles = ['Header 1', 'Header 2']
 
     cy.mount(() => (
       <CenteredGrid width="200px">
         <VExpansionPanels>
-          { headers.map(header => (
+          { titles.map(title => (
             <VExpansionPanel
               v-slots={{
-                header: () => header,
-                content: () => 'Content',
+                title: () => title,
+                text: () => 'Content',
               }}
             />
           )) }
         </VExpansionPanels>
       </CenteredGrid>
     ))
-      .get('.v-expansion-panel-header')
+      .get('.v-expansion-panel-title')
       .each((item, index) => {
-        expect(item.text()).to.equal(headers[index])
+        expect(item.text()).to.equal(titles[index])
       })
   })
 
   it('renders default slot', () => {
-    const headers = ['Header 1', 'Header 2']
+    const titles = ['Header 1', 'Header 2']
 
     cy.mount(() => (
       <CenteredGrid width="200px">
         <VExpansionPanels>
-          { headers.map(header => (
+          { titles.map(title => (
             <VExpansionPanel>
-              <VExpansionPanelHeader>{ header }</VExpansionPanelHeader>
-              <VExpansionPanelContent>Content</VExpansionPanelContent>
+              <VExpansionPanelTitle>{ title }</VExpansionPanelTitle>
+              <VExpansionPanelText>Content</VExpansionPanelText>
             </VExpansionPanel>
           )) }
         </VExpansionPanels>
       </CenteredGrid>
     ))
-      .get('.v-expansion-panel-header')
+      .get('.v-expansion-panel-title')
       .each((item, index) => {
-        expect(item.text()).to.equal(headers[index])
+        expect(item.text()).to.equal(titles[index])
       })
   })
 
-  it('responds to clicking header', () => {
+  it('responds to clicking title', () => {
     cy.mount(() => (
       <CenteredGrid width="200px">
         <VExpansionPanels>
-          <VExpansionPanel header="Header" content="Content" />
+          <VExpansionPanel title="Header" text="Content" />
         </VExpansionPanels>
       </CenteredGrid>
     ))
-      .get('.v-expansion-panel-header')
+      .get('.v-expansion-panel-title')
       .eq(0)
       .click()
-      .should('have.class', 'v-expansion-panel-header')
+      .should('have.class', 'v-expansion-panel-title')
   })
 
   it('supports hide-actions prop', () => {
     cy.mount(() => (
       <CenteredGrid width="200px">
         <VExpansionPanels>
-          <VExpansionPanel hideActions header="Header" content="Content" />
+          <VExpansionPanel hideActions title="Header" text="Content" />
         </VExpansionPanels>
       </CenteredGrid>
     ))
-      .get('.v-expansion-panel-header__icon')
+      .get('.v-expansion-panel-title__icon')
       .should('not.exist')
   })
 
@@ -97,11 +97,11 @@ describe('VExpansionPanels', () => {
     cy.mount(() => (
       <CenteredGrid width="200px">
         <VExpansionPanels>
-          <VExpansionPanel value="foo" header="Header" content="Content" color="primary" bgColor="secondary" />
+          <VExpansionPanel value="foo" title="Header" text="Content" color="primary" bgColor="secondary" />
         </VExpansionPanels>
       </CenteredGrid>
     ))
-      .get('.v-expansion-panel-header')
+      .get('.v-expansion-panel-title')
       .should('have.class', 'bg-primary')
       .get('.v-expansion-panel')
       .should('have.class', 'bg-secondary')
@@ -111,7 +111,7 @@ describe('VExpansionPanels', () => {
     cy.mount(() => (
       <CenteredGrid width="200px">
         <VExpansionPanels>
-          <VExpansionPanel value="foo" header="Header" content="Content" rounded="xl" />
+          <VExpansionPanel value="foo" title="Header" text="Content" rounded="xl" />
         </VExpansionPanels>
       </CenteredGrid>
     ))
@@ -123,13 +123,13 @@ describe('VExpansionPanels', () => {
     cy.mount(() => (
       <CenteredGrid width="200px">
         <VExpansionPanels modelValue="foo">
-          <VExpansionPanel value="bar" header="Header" content="Content" />
-          <VExpansionPanel value="foo" header="Header" content="Content" />
+          <VExpansionPanel value="bar" title="Header" text="Content" />
+          <VExpansionPanel value="foo" title="Header" text="Content" />
         </VExpansionPanels>
       </CenteredGrid>
     ))
-      .get('.v-expansion-panel-header')
-      .should('have.class', 'v-expansion-panel-header--active')
+      .get('.v-expansion-panel-title')
+      .should('have.class', 'v-expansion-panel-title--active')
   })
 
   it('supports v-model', () => {
@@ -137,16 +137,16 @@ describe('VExpansionPanels', () => {
     cy.mount(() => (
       <CenteredGrid width="200px">
         <VExpansionPanels modelValue={foo.value} onUpdate:modelValue={v => foo.value = v}>
-          <VExpansionPanel value="bar" header="Header" content="Content" />
-          <VExpansionPanel value="foo" header="Header" content="Content" />
+          <VExpansionPanel value="bar" title="Header" text="Content" />
+          <VExpansionPanel value="foo" title="Header" text="Content" />
         </VExpansionPanels>
         <div class="value">{foo.value}</div>
       </CenteredGrid>
     ))
-      .get('.v-expansion-panel-header')
+      .get('.v-expansion-panel-title')
       .eq(1)
       .click()
-      .should('have.class', 'v-expansion-panel-header--active')
+      .should('have.class', 'v-expansion-panel-title--active')
       .get('.value')
       .should('have.text', 'foo')
   })
