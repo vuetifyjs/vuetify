@@ -210,16 +210,18 @@ export const VField = defineComponent({
             prepend: slots.prepend && (() => slots.prepend?.(slotProps.value)),
             append: slots.append && (() => slots.append?.(slotProps.value)),
             details: hasDetails && (() => (
-              <MaybeTransition transition={ props.transition }>
-                <div
-                  v-show={ props.hint && (props.persistentHint || slotProps.value.isFocused) }
-                  class="v-field__details"
-                >
-                  { props.hint }
+              <>
+                <MaybeTransition transition={ props.transition }>
+                  <div
+                    v-show={ props.hint && (props.persistentHint || slotProps.value.isFocused) }
+                    class="v-field__details"
+                  >
+                    { props.hint }
+                  </div>
+                </MaybeTransition>
 
-                  { slots?.details?.(slotProps.value) }
-                </div>
-              </MaybeTransition>
+                { slots?.details?.(slotProps.value) }
+              </>
             )),
           }}
         >

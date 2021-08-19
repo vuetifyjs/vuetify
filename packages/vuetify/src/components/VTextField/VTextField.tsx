@@ -105,7 +105,11 @@ export const VTextField = defineComponent({
               </div>
             ),
             details: props.counter ? () => (
-              <span>{ props.counter && '40/50' }</span>
+              <>
+                <span />
+
+                <span>{ props.counter && '40/50' }</span>
+              </>
             ) : undefined,
           }}
         />
