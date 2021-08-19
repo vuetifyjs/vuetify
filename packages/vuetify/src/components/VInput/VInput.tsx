@@ -2,7 +2,6 @@ import './VInput.sass'
 
 // Utilities
 import { defineComponent } from '@/util'
-import type { PropType } from 'vue'
 import { VIcon } from '@/components'
 import { makeDensityProps, useDensity } from '@/composables/density'
 
@@ -12,8 +11,6 @@ export const VInput = defineComponent({
   props: {
     appendIcon: String,
     prependIcon: String,
-    // TODO: implement auto
-    hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
 
     ...makeDensityProps(),
   },
@@ -29,15 +26,10 @@ export const VInput = defineComponent({
     return () => {
       const hasPrepend = (slots.prepend || props.prependIcon)
       const hasAppend = (slots.append || props.appendIcon)
-      const hasDetails = (slots.details && !props.hideDetails)
 
       return (
         <div class={[
           'v-input',
-          {
-            'v-input--has-details': hasDetails,
-            'v-input--hide-details': props.hideDetails,
-          },
           densityClasses.value,
         ]}
         >
@@ -67,7 +59,7 @@ export const VInput = defineComponent({
             </div>
           ) }
 
-          { hasDetails && (
+          { slots.details && (
             <div class="v-input__details">
               { slots.details?.() }
             </div>

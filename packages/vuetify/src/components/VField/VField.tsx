@@ -47,6 +47,8 @@ export const makeVFieldProps = propsFactory({
   appendInnerIcon: String,
   bgColor: String,
   color: String,
+  // TODO: implement auto
+  hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hint: String,
   id: String,
   label: String,
@@ -191,7 +193,9 @@ export const VField = defineComponent({
               'v-field--disabled': props.disabled,
               'v-field--focused': isFocused.value,
               'v-field--reverse': props.reverse,
+              'v-field--has-details': hasDetails,
               'v-field--has-background': !!props.bgColor,
+              'v-field--hide-details': props.hideDetails,
               'v-field--single-line': props.singleLine,
               [`v-field--variant-${props.variant}`]: true,
             },
@@ -207,16 +211,14 @@ export const VField = defineComponent({
             append: slots.append && (() => slots.append?.(slotProps.value)),
             details: hasDetails && (() => (
               <MaybeTransition transition={ props.transition }>
-                <span
+                <div
                   v-show={ props.hint && (props.persistentHint || slotProps.value.isFocused) }
                   class="v-field__details"
                 >
-                  {
-                    slots.details
-                      ? slots.details(slotProps.value)
-                      : props.hint
-                  }
-                </span>
+                  { props.hint }
+
+                  { slots?.details?.(slotProps.value) }
+                </div>
               </MaybeTransition>
             )),
           }}

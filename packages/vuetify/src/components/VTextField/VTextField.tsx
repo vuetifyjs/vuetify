@@ -28,6 +28,7 @@ export const VTextField = defineComponent({
 
   props: {
     autofocus: Boolean,
+    counter: Boolean,
     prefix: String,
     persistentPlaceholder: Boolean,
     suffix: String,
@@ -103,6 +104,9 @@ export const VTextField = defineComponent({
                 ) }
               </div>
             ),
+            details: props.counter ? () => (
+              <span>{ props.counter && '40/50' }</span>
+            ) : undefined,
           }}
         />
       )
