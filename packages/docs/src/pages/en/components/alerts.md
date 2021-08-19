@@ -25,7 +25,7 @@ Alerts in their simplest form are a flat [sheets of paper](/components/sheets) t
 
 - [v-alert](/api/v-alert)
 
-<api-section page="components/alerts" />
+<inline-api page="components/alerts" />
 
 ## Examples
 
