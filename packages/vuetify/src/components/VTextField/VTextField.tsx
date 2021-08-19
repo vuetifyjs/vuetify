@@ -2,6 +2,7 @@
 import './VTextField.sass'
 
 // Components
+import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
 
 // Composables
@@ -15,6 +16,7 @@ import { computed, ref } from 'vue'
 import { defineComponent } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import type { VFieldSlot } from '@/components/VField/VField'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
@@ -29,6 +31,7 @@ export const VTextField = defineComponent({
   props: {
     autofocus: Boolean,
     counter: Boolean,
+    counterValue: Function as PropType<(value: any) => number>,
     prefix: String,
     persistentPlaceholder: Boolean,
     suffix: String,
@@ -47,6 +50,11 @@ export const VTextField = defineComponent({
     const value = useProxiedModel(props, 'modelValue')
 
     const internalDirty = ref(false)
+    const counterValue = computed(() => {
+      return typeof props.counterValue === 'function'
+        ? props.counterValue(value.value)
+        : value.value?.toString().length
+    })
     const isDirty = computed(() => {
       return internalDirty.value || !!value.value || dirtyTypes.includes(props.type)
     })
@@ -61,6 +69,8 @@ export const VTextField = defineComponent({
     }
 
     return () => {
+      const hasCounter = (slots.counter || props.counter)
+
       return (
         <VField
           class={[
@@ -72,12 +82,11 @@ export const VTextField = defineComponent({
           { ...attrs }
           v-slots={{
             ...slots,
-            default: (
-              {
-                isActive,
-                inputRef,
-                props: { class: fieldClass, ...slotProps },
-              }: VFieldSlot) => (
+            default: ({
+              isActive,
+              inputRef,
+              props: { class: fieldClass, ...slotProps },
+            }: VFieldSlot) => (
               <div class={ fieldClass }>
                 { props.prefix && isActive && (
                   <span class="v-text-field__prefix">
@@ -104,11 +113,15 @@ export const VTextField = defineComponent({
                 ) }
               </div>
             ),
-            details: props.counter ? () => (
+            details: hasCounter ? () => (
               <>
                 <span />
 
-                <span>{ props.counter && '40/50' }</span>
+                <VCounter
+                  value={ counterValue.value }
+                  max={ attrs.maxlength as undefined }
+                  v-slots={ slots.counter }
+                />
               </>
             ) : undefined,
           }}
