@@ -236,10 +236,11 @@ export const VField = defineComponent({
                 class="v-field__prepend-inner"
                 onClick={ e => emit('click:prepend-inner', e) }
               >
-                { slots.prependInner
-                  ? slots.prependInner(slotProps.value)
-                  : (<VIcon icon={ props.prependInnerIcon } />)
-                }
+                { props.prependInnerIcon && (
+                  <VIcon icon={ props.prependInnerIcon } />
+                ) }
+
+                { slots?.prependInner?.(slotProps.value) }
               </div>
             ) }
 
@@ -270,10 +271,11 @@ export const VField = defineComponent({
                 class="v-field__append-inner"
                 onClick={ e => emit('click:append-inner', e) }
               >
-                { slots.appendInner
-                  ? slots.appendInner(slotProps.value)
-                  : (<VIcon icon={ props.appendInnerIcon } />)
-                }
+                { slots?.appendInner?.(slotProps.value) }
+
+                { props.appendInnerIcon && (
+                  <VIcon icon={ props.appendInnerIcon } />
+                ) }
               </div>
             ) }
 
@@ -287,7 +289,7 @@ export const VField = defineComponent({
                       <VFieldLabel ref={ floatingLabelRef } floating>
                         { label }
                       </VFieldLabel>
-                    )}
+                    ) }
                   </div>
 
                   <div class="v-field__outline__end" />

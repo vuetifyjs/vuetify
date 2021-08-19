@@ -1,112 +1,42 @@
 @import ./index
 
+// TODO: abstract variables
+
 .v-text-field
+  // TODO: make this based off of density
+  margin-bottom: 36px
+
   &[type=text]::-ms-clear
     display: none
 
-  // &__prefix,
-  // &__suffix
-  //   align-self: center
-  //   cursor: default
-  //   transition: color 0.2s $standard-easing
-  //   white-space: nowrap
+  &__prefix,
+  &__suffix
+    align-self: center
+    cursor: default
+    opacity: .6
+    transition: 150ms $standard-easing
+    white-space: nowrap
 
-  // &__prefix
-  //   +ltr()
-  //     text-align: right
-  //     padding-right: $text-field-append-prepend-margin
+  &.v-input--has-details
+    margin-bottom: 14px
 
-  //   +rtl()
-  //     text-align: left
-  //     padding-left: $text-field-append-prepend-margin
+  &.v-input--hide-details
+    margin-bottom: 0
 
-  // &__suffix
-  //   white-space: nowrap
+.v-field__input
+  input
+    opacity: inherit
+    width: 100%
+    height: 100%
+    padding-inline-start: var(--v-field-padding-before)
+    padding-inline-end: var(--v-field-padding-after)
+    display: flex
+    align-items: center
 
-  //   +ltr()
-  //     padding-left: $text-field-append-prepend-margin
+    &:focus,
+    &:active
+      outline: none
 
-  //   +rtl()
-  //     padding-right: $text-field-append-prepend-margin
-
-  // &--reverse
-  //   .v-text-field__prefix
-
-  //     +ltr()
-  //       text-align: left
-  //       padding-right: 0
-  //       padding-left: $text-field-append-prepend-margin
-
-  //     +rtl()
-  //       text-align: right
-  //       padding-right: $text-field-append-prepend-margin
-  //       padding-left: 0
-
-  //   .v-text-field__suffix
-  //     +ltr()
-  //       padding-left: 0
-  //       padding-right: $text-field-append-prepend-margin
-
-  //     +rtl()
-  //       padding-left: $text-field-append-prepend-margin
-  //       padding-right: 0
-
-  // &--filled,
-  // &--full-width
-  //   .v-label
-  //     top: $text-field-filled-full-width-label-top
-
-  //     &--active
-  //       transform: $text-field-filled-full-width-label-active-transform
-
-  //   &.v-input--dense
-  //     .v-label
-  //       top: $text-field-dense-label-top
-
-  //       &--active
-  //         transform: $text-field-dense-label-active-transform
-
-  //     &.v-text-field--single-line
-  //       .v-label
-  //         top: $text-field-single-line-label-top
-
-  // &--full-width
-  //   border-radius: 0
-
-  // &--outlined,
-  // &--single-line
-  //   .v-text-field__slot
-  //     align-items: center
-
-  // &--reverse
-  //   input
-  //     +ltr()
-  //       text-align: right
-
-  //     +rtl()
-  //       text-align: left
-
-  //   .v-label
-  //     +ltr()
-  //       transform-origin: top right
-
-  //     +rtl()
-  //       transform-origin: top left
-
-  //   & > .v-input__control > .v-input__slot,
-  //   .v-text-field__slot
-  //     flex-direction: row-reverse
-
-  // &--rounded
-  // &--solo
-  //   border-radius: $text-field-border-radius
-
-  // &.v-text-field--solo
-
-  //     input
-  //       caret-color: auto
-
-  //   .v-input__append-inner,
-  //   .v-input__prepend-inner
-  //     align-self: center
-  //     margin-top: 0
+    // Remove Firefox red outline
+    &:invalid
+      box-shadow: none

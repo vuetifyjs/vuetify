@@ -54,7 +54,7 @@ export const VTextField = defineComponent({
       isIntersecting: boolean,
       entries: IntersectionObserverEntry[]
     ) {
-      if (!isIntersecting) return
+      if (!props.autofocus || !isIntersecting) return
 
       (entries[0].target as HTMLInputElement)?.focus?.()
     }
@@ -71,18 +71,37 @@ export const VTextField = defineComponent({
           { ...attrs }
           v-slots={{
             ...slots,
-            default: ({ inputRef, props: slotProps }: VFieldSlot) => (
-              <input
-                v-model={ value.value }
-                v-intersect={[{
-                  handler: onIntersect,
-                }, null, ['once']]}
-                ref={ inputRef }
-                type={ props.type }
-                size={ 1 }
-                { ...slotProps }
-                autofocus={ props.autofocus }
-              />
+            default: (
+              {
+                isActive,
+                inputRef,
+                props: { class: fieldClass, ...slotProps },
+              }: VFieldSlot) => (
+              <div class={ fieldClass }>
+                { props.prefix && isActive && (
+                  <span class="v-text-field__prefix">
+                    { props.prefix }
+                  </span>
+                ) }
+
+                <input
+                  v-model={ value.value }
+                  v-intersect={[{
+                    handler: onIntersect,
+                  }, null, ['once']]}
+                  ref={ inputRef }
+                  type={ props.type }
+                  size={ 1 }
+                  { ...slotProps }
+                  autofocus={ props.autofocus }
+                />
+
+                { props.suffix && (
+                  <span class="v-text-field__suffix">
+                    { props.suffix }
+                  </span>
+                ) }
+              </div>
             ),
           }}
         />
