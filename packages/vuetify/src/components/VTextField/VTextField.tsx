@@ -2,15 +2,17 @@
 import './VTextField.sass'
 
 // Components
-import { VField } from '@/components/VField/VField'
+import { VField } from '@/components/VField'
 
 // Composables
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
+// Directives
+import VIntersect from '@/directives/intersect'
+
 // Utilities
-import { defineComponent, isComponentInstance } from '@/util'
 import { computed, ref } from 'vue'
+import { defineComponent } from '@/util'
 
 // Types
 import type { VFieldSlot } from '@/components/VField/VField'
@@ -19,6 +21,8 @@ const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', '
 
 export const VTextField = defineComponent({
   name: 'VTextField',
+
+  directives: { VIntersect },
 
   inheritAttrs: false,
 
@@ -46,17 +50,14 @@ export const VTextField = defineComponent({
       return internalDirty.value || !!value.value || dirtyTypes.includes(props.type)
     })
 
-    const { intersectionRef, isIntersecting } = useIntersectionObserver((_, observer) => {
-      if (props.autofocus && isIntersecting) {
-        const el = isComponentInstance(intersectionRef) ? intersectionRef.$el : intersectionRef
+    function onIntersect (
+      isIntersecting: boolean,
+      entries: IntersectionObserverEntry[]
+    ) {
+      if (!isIntersecting) return
 
-        if (!el.value) return
-
-        el.value.focus()
-
-        observer.unobserve(el.value)
-      }
-    })
+      (entries[0].target as HTMLInputElement)?.focus?.()
+    }
 
     return () => {
       return (
@@ -73,8 +74,10 @@ export const VTextField = defineComponent({
             default: ({ inputRef, props: slotProps }: VFieldSlot) => (
               <input
                 v-model={ value.value }
-                ref={ el => inputRef.value = intersectionRef.value = el as HTMLInputElement
-                }
+                v-intersect={[{
+                  handler: onIntersect,
+                }, null, ['once']]}
+                ref={ inputRef }
                 type={ props.type }
                 size={ 1 }
                 { ...slotProps }
