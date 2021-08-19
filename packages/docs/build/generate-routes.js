@@ -48,12 +48,15 @@ function genDemos () {
   return paths
 }
 
-function generateRoutes () {
+function generateRoutes (options = {}) {
+  const { excludeDemos } = options
   const paths = [
     ...genRoutes(DATA_PATH_DOC_FILES, ''),
     ...genRoutes(DATA_PATH_API_FILES, 'api/'),
-    ...genDemos(),
   ]
+  if (!excludeDemos) {
+    paths.push(...genDemos())
+  }
 
   const routes = [{ locale: '', path: '', fullPath: '/' }]
 

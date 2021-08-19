@@ -123,7 +123,7 @@ function render ({ routes, template, bundle, clientManifest }) {
 }
 
 if (isMainThread) {
-  const routes = generateRoutes()
+  const routes = generateRoutes({ excludeDemos: true })
   const template = readFile('../src/ssr.template.html')
   const bundle = JSON.parse(readFile('../dist/vue-ssr-server-bundle.json'))
   const clientManifest = JSON.parse(readFile('../dist/vue-ssr-client-manifest.json'))
