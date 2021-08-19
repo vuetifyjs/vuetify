@@ -842,8 +842,6 @@ export default baseMixins.extend<options>().extend({
 
         const listIndex = this.getMenuIndex()
 
-        this.setMenuIndex(-1)
-
         // There is no item to re-highlight
         // when selections are hidden
         if (this.hideSelected) return
