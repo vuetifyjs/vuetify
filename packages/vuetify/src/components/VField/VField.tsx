@@ -28,7 +28,6 @@ export interface DefaultInputSlot {
   isFocused: boolean
   controlRef: Ref<HTMLElement | undefined>
   inputRef: Ref<HTMLInputElement | undefined>
-  fieldRef: Ref<HTMLElement | undefined>
   focus: () => void
   blur: () => void
 }
@@ -94,7 +93,6 @@ export const VField = defineComponent({
     const labelRef = ref<InstanceType<typeof VFieldLabel>>()
     const floatingLabelRef = ref<InstanceType<typeof VFieldLabel>>()
     const controlRef = ref<HTMLElement>()
-    const fieldRef = ref<HTMLElement>()
     const inputRef = ref<HTMLInputElement>()
     const isFocused = ref(false)
     const id = computed(() => props.id || `input-${uid}`)
@@ -155,7 +153,6 @@ export const VField = defineComponent({
       isFocused: isFocused.value,
       inputRef,
       controlRef,
-      fieldRef,
       focus,
       blur,
     }))
@@ -314,7 +311,6 @@ export const VField = defineComponent({
     return {
       inputRef,
       controlRef,
-      fieldRef,
     }
   },
 })

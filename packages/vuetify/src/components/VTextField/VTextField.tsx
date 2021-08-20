@@ -4,7 +4,6 @@ import './VTextField.sass'
 // Components
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
-import { VFadeTransition } from '@/components/transitions'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -14,7 +13,7 @@ import VIntersect from '@/directives/intersect'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -75,8 +74,11 @@ export const VTextField = defineComponent({
     function focus () {
       fieldRef.value?.inputRef?.focus()
     }
+    function blur () {
+      fieldRef.value?.inputRef?.blur()
+    }
 
-    return () => {
+    useRender(() => {
       const hasCounter = (slots.counter || props.counter)
 
       return (
@@ -147,6 +149,12 @@ export const VTextField = defineComponent({
           }}
         />
       )
+    })
+
+    return {
+      fieldRef,
+      focus,
+      blur,
     }
   },
 })
