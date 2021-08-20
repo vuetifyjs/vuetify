@@ -4,10 +4,9 @@ import './VFileInput.sass'
 // Components
 import { VBtn } from '@/components/VBtn'
 import { VChip } from '@/components/VChip'
-import { VField } from '@/components/VField'
+import { makeVFieldProps, VField } from '@/components/VField/VField'
 
 // Composables
-import { makeVFieldProps } from '@/components/VField/VField'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 

@@ -2,7 +2,7 @@ import './VInput.sass'
 
 // Utilities
 import { defineComponent } from '@/util'
-import { VIcon } from '@/components'
+import { VIcon } from '@/components/VIcon'
 import { makeDensityProps, useDensity } from '@/composables/density'
 
 export const VInput = defineComponent({
