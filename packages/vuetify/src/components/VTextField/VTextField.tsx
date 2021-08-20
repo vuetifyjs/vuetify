@@ -4,6 +4,7 @@ import './VTextField.sass'
 // Components
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
+import { VFadeTransition } from '@/components/transitions'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -33,6 +34,7 @@ export const VTextField = defineComponent({
     counter: Boolean,
     counterValue: Function as PropType<(value: any) => number>,
     prefix: String,
+    placeholder: String,
     persistentPlaceholder: Boolean,
     suffix: String,
     type: {
@@ -50,13 +52,14 @@ export const VTextField = defineComponent({
     const value = useProxiedModel(props, 'modelValue')
 
     const internalDirty = ref(false)
+    const isDirty = computed(() => {
+      return internalDirty.value || !!value.value || dirtyTypes.includes(props.type)
+    })
+
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function'
         ? props.counterValue(value.value)
         : value.value?.toString().length
-    })
-    const isDirty = computed(() => {
-      return internalDirty.value || !!value.value || dirtyTypes.includes(props.type)
     })
 
     function onIntersect (
@@ -68,16 +71,27 @@ export const VTextField = defineComponent({
       (entries[0].target as HTMLInputElement)?.focus?.()
     }
 
+    const fieldRef = ref<VField>()
+    function focus () {
+      fieldRef.value?.inputRef?.focus()
+    }
+
     return () => {
       const hasCounter = (slots.counter || props.counter)
 
       return (
         <VField
+          ref={ fieldRef }
           class={[
             'v-text-field',
+            {
+              'v-text-field--prefixed': props.prefix,
+              'v-text-field--suffixed': props.suffix,
+            },
           ]}
           active={ isDirty.value }
           onUpdate:active={ val => internalDirty.value = val }
+          onClick:control={ focus }
           role="textbox"
           { ...attrs }
           v-slots={{
@@ -86,33 +100,39 @@ export const VTextField = defineComponent({
               isActive,
               inputRef,
               props: { class: fieldClass, ...slotProps },
-            }: VFieldSlot) => (
-              <div class={ fieldClass }>
-                { props.prefix && isActive && (
-                  <span class="v-text-field__prefix">
-                    { props.prefix }
-                  </span>
-                ) }
+            }: VFieldSlot) => {
+              const showPlaceholder = isActive || props.persistentPlaceholder
+              return (
+                <>
+                  { props.prefix && (
+                    <span class="v-text-field__prefix" style={{ opacity: showPlaceholder ? undefined : '0' }}>
+                      { props.prefix }
+                    </span>
+                  ) }
 
-                <input
-                  v-model={ value.value }
-                  v-intersect={[{
-                    handler: onIntersect,
-                  }, null, ['once']]}
-                  ref={ inputRef }
-                  type={ props.type }
-                  size={ 1 }
-                  { ...slotProps }
-                  autofocus={ props.autofocus }
-                />
+                  <input
+                    class={ fieldClass }
+                    style={{ opacity: showPlaceholder ? undefined : '0' }}
+                    v-model={ value.value }
+                    v-intersect={[{
+                      handler: onIntersect,
+                    }, null, ['once']]}
+                    ref={ inputRef }
+                    type={ props.type }
+                    size={ 1 }
+                    placeholder={ props.placeholder }
+                    { ...slotProps }
+                    autofocus={ props.autofocus }
+                  />
 
-                { props.suffix && (
-                  <span class="v-text-field__suffix">
-                    { props.suffix }
-                  </span>
-                ) }
-              </div>
-            ),
+                  { props.suffix && (
+                    <span class="v-text-field__suffix" style={{ opacity: showPlaceholder ? undefined : '0' }}>
+                      { props.suffix }
+                    </span>
+                  ) }
+                </>
+              )
+            },
             details: hasCounter ? () => (
               <>
                 <span />

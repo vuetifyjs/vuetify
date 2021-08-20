@@ -3,19 +3,26 @@
 // TODO: abstract variables
 
 .v-text-field
-  // TODO: make this based off of density
+  // TODO: make this based on density
   margin-bottom: 36px
-
-  &[type=text]::-ms-clear
-    display: none
 
   &__prefix,
   &__suffix
-    align-self: center
+    height: 100%
+    display: flex
+    align-items: center
     cursor: default
     opacity: .6
-    transition: 150ms $standard-easing
+    transition: .15s opacity $standard-easing
     white-space: nowrap
+    padding-top: calc(var(--v-field-padding-top, 0) + 1px)
+    padding-bottom: var(--v-field-padding-bottom, 0)
+
+  &__prefix
+    padding-inline-start: var(--v-field-padding-before)
+
+  &__suffix
+    padding-inline-end: var(--v-field-padding-after)
 
   &.v-field--has-details
     margin-bottom: 14px
@@ -23,12 +30,16 @@
   &.v-field--hide-details
     margin-bottom: 0
 
-.v-field__input
+  .v-field__input
+    @at-root #{selector-append('.v-text-field--prefixed', &)}
+      --v-field-padding-before: 6px
+    @at-root #{selector-append('.v-text-field--suffixed', &)}
+      --v-field-padding-after: 0
+
   input
-    flex: 1 1
-    opacity: inherit
-    padding-inline-end: var(--v-field-padding-after)
-    padding-inline-start: var(--v-field-padding-before)
+    flex: 1
+    opacity: 1
+    transition: .15s opacity $standard-easing
 
     &:focus,
     &:active
