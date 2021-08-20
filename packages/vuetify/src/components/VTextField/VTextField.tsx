@@ -4,6 +4,7 @@ import './VTextField.sass'
 // Components
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
+import { VExpandXTransition } from '@/components/transitions'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -17,7 +18,9 @@ import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { VFieldSlot } from '@/components/VField/VField'
+import type { DefaultInputSlot, VFieldSlot } from '@/components/VField/VField'
+import { VIcon } from '../VIcon'
+import { VBtn } from '../VBtn'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
@@ -30,6 +33,7 @@ export const VTextField = defineComponent({
 
   props: {
     autofocus: Boolean,
+    clearable: Boolean,
     counter: Boolean,
     counterValue: Function as PropType<(value: any) => number>,
     prefix: String,
@@ -79,6 +83,7 @@ export const VTextField = defineComponent({
     }
 
     useRender(() => {
+      const hasAppendInner = (slots.appendInner || props.clearable)
       const hasCounter = (slots.counter || props.counter)
 
       return (
@@ -98,6 +103,32 @@ export const VTextField = defineComponent({
           { ...attrs }
           v-slots={{
             ...slots,
+            appendInner: hasAppendInner ? (slotScope: DefaultInputSlot) => {
+              return (
+                <>
+                  { slots?.appendInner?.(slotScope) }
+
+                  <VExpandXTransition>
+                    { props.clearable && value.value && (
+                      <div class="v-text-field__clearable">
+                        <VBtn
+                          density="compact"
+                          icon="mdi-close"
+                          variant="text"
+                          onClick={
+                            (e: Event) => {
+                              e.stopPropagation()
+
+                              value.value = ''
+                            }
+                          }
+                        />
+                      </div>
+                    ) }
+                  </VExpandXTransition>
+                </>
+              )
+            } : undefined,
             default: ({
               isActive,
               inputRef,

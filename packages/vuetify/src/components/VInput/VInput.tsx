@@ -38,10 +38,11 @@ export const VInput = defineComponent({
               class="v-input__prepend"
               onClick={ e => emit('click:prepend', e) }
             >
-              { slots.prepend
-                ? slots.prepend()
-                : (<VIcon icon={ props.prependIcon } />)
-              }
+              { slots?.prepend?.() }
+
+              { slots.prependIcon && (
+                <VIcon icon={ props.prependIcon } />
+              ) }
             </div>
           ) }
 
@@ -52,10 +53,11 @@ export const VInput = defineComponent({
               class="v-input__append"
               onClick={ e => emit('click:append', e) }
             >
-              { slots.append
-                ? slots.append()
-                : (<VIcon icon={ props.appendIcon } />)
-              }
+              { slots?.append?.() }
+
+              { slots.appendIcon && (
+                <VIcon icon={ props.appendIcon } />
+              ) }
             </div>
           ) }
 
