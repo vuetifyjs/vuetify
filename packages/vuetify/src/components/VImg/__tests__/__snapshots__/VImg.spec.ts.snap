@@ -5,9 +5,11 @@ exports[`VImg should display error slot 1`] = `
   <div class="v-responsive__sizer">
   </div>
   <transition-stub>
-    <img class="v-img__img v-img__img--contain"
+    <div class="v-img__wrapper"
          style="display: none;"
     >
+      <img class="v-img__img v-img__img--contain">
+    </div>
   </transition-stub>
   <transition-stub>
   </transition-stub>
@@ -26,9 +28,11 @@ exports[`VImg should display placeholders 1`] = `
   <div class="v-responsive__sizer">
   </div>
   <transition-stub>
-    <img class="v-img__img v-img__img--contain"
+    <div class="v-img__wrapper"
          style="display: none;"
     >
+      <img class="v-img__img v-img__img--contain">
+    </div>
   </transition-stub>
   <transition-stub>
     <img class="v-img__img v-img__img--preload v-img__img--contain"
@@ -52,7 +56,9 @@ exports[`VImg should display placeholders 2`] = `
   >
   </div>
   <transition-stub>
-    <img class="v-img__img v-img__img--contain">
+    <div class="v-img__wrapper">
+      <img class="v-img__img v-img__img--contain">
+    </div>
   </transition-stub>
   <transition-stub>
   </transition-stub>
@@ -71,7 +77,9 @@ exports[`VImg should have aria attributes 1`] = `
   >
   </div>
   <transition-stub>
-    <img class="v-img__img v-img__img--contain">
+    <div class="v-img__wrapper">
+      <img class="v-img__img v-img__img--contain">
+    </div>
   </transition-stub>
   <transition-stub>
   </transition-stub>
@@ -83,9 +91,11 @@ exports[`VImg should load 1`] = `
   <div class="v-responsive__sizer">
   </div>
   <transition-stub>
-    <img class="v-img__img v-img__img--contain"
+    <div class="v-img__wrapper"
          style="display: none;"
     >
+      <img class="v-img__img v-img__img--contain">
+    </div>
   </transition-stub>
   <transition-stub>
   </transition-stub>
@@ -99,7 +109,9 @@ exports[`VImg should load 2`] = `
   >
   </div>
   <transition-stub>
-    <img class="v-img__img v-img__img--contain">
+    <div class="v-img__wrapper">
+      <img class="v-img__img v-img__img--contain">
+    </div>
   </transition-stub>
   <transition-stub>
   </transition-stub>
@@ -113,9 +125,11 @@ exports[`VImg should override vuetify-loader values 1`] = `
   >
   </div>
   <transition-stub>
-    <img class="v-img__img v-img__img--contain"
+    <div class="v-img__wrapper"
          style="display: none;"
     >
+      <img class="v-img__img v-img__img--contain">
+    </div>
   </transition-stub>
   <transition-stub>
     <img class="v-img__img v-img__img--preload v-img__img--contain"
@@ -132,10 +146,12 @@ exports[`VImg should render a <picture> 1`] = `
   >
   </div>
   <transition-stub>
-    <picture class="v-img__picture">
-      <source srcset="LOAD_SUCCESS_SRC.webp">
-      <img class="v-img__img v-img__img--contain">
-    </picture>
+    <div class="v-img__wrapper">
+      <picture class="v-img__picture">
+        <source srcset="LOAD_SUCCESS_SRC.webp">
+        <img class="v-img__img v-img__img--contain">
+      </picture>
+    </div>
   </transition-stub>
   <transition-stub>
   </transition-stub>
@@ -149,7 +165,9 @@ exports[`VImg should update src 1`] = `
   >
   </div>
   <transition-stub>
-    <img class="v-img__img v-img__img--contain">
+    <div class="v-img__wrapper">
+      <img class="v-img__img v-img__img--contain">
+    </div>
   </transition-stub>
   <transition-stub>
   </transition-stub>
@@ -163,7 +181,9 @@ exports[`VImg should update src 2`] = `
   >
   </div>
   <transition-stub>
-    <img class="v-img__img v-img__img--contain">
+    <div class="v-img__wrapper">
+      <img class="v-img__img v-img__img--contain">
+    </div>
   </transition-stub>
   <transition-stub>
   </transition-stub>
@@ -175,9 +195,11 @@ exports[`VImg should update src while still loading 1`] = `
   <div class="v-responsive__sizer">
   </div>
   <transition-stub>
-    <img class="v-img__img v-img__img--contain"
+    <div class="v-img__wrapper"
          style="display: none;"
     >
+      <img class="v-img__img v-img__img--contain">
+    </div>
   </transition-stub>
   <transition-stub>
   </transition-stub>
@@ -191,7 +213,9 @@ exports[`VImg should update src while still loading 2`] = `
   >
   </div>
   <transition-stub>
-    <img class="v-img__img v-img__img--contain">
+    <div class="v-img__wrapper">
+      <img class="v-img__img v-img__img--contain">
+    </div>
   </transition-stub>
   <transition-stub>
   </transition-stub>
@@ -205,9 +229,11 @@ exports[`VImg should use vuetify-loader data 1`] = `
   >
   </div>
   <transition-stub>
-    <img class="v-img__img v-img__img--contain"
+    <div class="v-img__wrapper"
          style="display: none;"
     >
+      <img class="v-img__img v-img__img--contain">
+    </div>
   </transition-stub>
   <transition-stub>
     <img class="v-img__img v-img__img--preload v-img__img--contain"

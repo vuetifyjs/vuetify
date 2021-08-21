@@ -47,6 +47,7 @@ export default defineComponent({
     alt: String,
     cover: Boolean,
     eager: Boolean,
+    gradient: String,
     lazySrc: String,
     options: {
       type: Object as PropType<IntersectionObserverInit>,
@@ -192,15 +193,29 @@ export default defineComponent({
         onError,
       })
 
+      const imagWrapperStyle: any = {}
+
+      if (props.gradient) {
+        imagWrapperStyle.backgroundImage = `linear-gradient(${props.gradient})`
+        imagWrapperStyle.backgroundPosition = props.position
+      }
+
       const sources = slots.sources?.()
+
+      const imgContent = sources
+        ? <picture class="v-img__picture">{ sources }{ img }</picture>
+        : img
+
+      const imgWrapper = h('div', {
+        class: ['v-img__wrapper'],
+        style: imagWrapperStyle,
+      }, [imgContent])
 
       return (
         <MaybeTransition transition={ props.transition } appear>
           {
             withDirectives(
-              sources
-                ? <picture class="v-img__picture">{ sources }{ img }</picture>
-                : img,
+              imgWrapper,
               [[vShow, state.value === 'loaded']]
             )
           }
