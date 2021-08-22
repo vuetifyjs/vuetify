@@ -40,13 +40,17 @@
     }),
 
     async created () {
-      const api = (await getApi(this.name)).default
+      try {
+        const api = (await getApi(this.name)).default
 
-      if (!api) {
-        throw new Error(`API for ${this.name} does not exist`)
+        if (!api[this.section]) {
+          throw new Error(`API section "${this.section}" for "${this.name}" does not exist`)
+        }
+
+        this.apiData = api[this.section] || []
+      } catch (err) {
+        console.error(err)
       }
-
-      this.apiData = api[this.section] || []
     },
   }
 </script>
