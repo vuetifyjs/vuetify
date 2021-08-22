@@ -1,8 +1,9 @@
+/* eslint-disable max-statements */
 // Styles
 import './VSlider.sass'
 
 // Components
-import { VInput } from '@/components'
+import { VField } from '@/components'
 import { VScaleTransition } from '../transitions'
 
 // Mixins
@@ -13,16 +14,22 @@ import { VScaleTransition } from '../transitions'
 // import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { addOnceEventListener, convertToUnit, createRange, deepEqual, keyCodes, passiveSupported } from '../../util/helpers'
+import { addOnceEventListener, clamp, convertToUnit, createRange, deepEqual, keyCodes, passiveSupported } from '../../util/helpers'
 import { consoleWarn } from '../../util/console'
 import { defineComponent } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import { PropType, ref } from 'vue'
 import { computed } from 'vue'
 import { useRtl } from '@/composables/rtl'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { props } from 'cypress/types/bluebird'
+import { VFieldSlot } from '../VField/VField'
+import { min } from 'cypress/types/lodash'
+import { useBackgroundColor, useTextColor } from '@/composables/color'
+import VSliderThumb from './VSliderThumb'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import VSliderTrack from './VSliderTrack'
 // import Vue, { VNode } from 'vue'
 // import { ScopedSlotChildren } from 'vue/types/vnode'
 // import { PropValidator } from 'vue/types/options'
@@ -66,9 +73,9 @@ export default defineComponent({
       type: [Number, String],
       default: 0,
     },
-    step: {
+    stepSize: {
       type: [Number, String],
-      default: 1,
+      default: 0,
     },
     thumbColor: String,
     thumbLabel: {
@@ -78,7 +85,7 @@ export default defineComponent({
     },
     thumbSize: {
       type: [Number, String],
-      default: 32,
+      default: 24,
     },
     tickLabels: {
       type: Array as PropType<string[]>,
@@ -91,20 +98,26 @@ export default defineComponent({
     },
     tickSize: {
       type: [Number, String],
-      default: 2,
+      default: 4,
     },
     trackColor: String,
     trackFillColor: String,
     trackSize: {
       type: [Number, String],
-      default: 10,
+      default: 4,
     },
     modelValue: {
       type: [Number, String],
       default: 0,
     },
-    vertical: Boolean,
+    direction: {
+      type: String,
+      default: 'horizontal',
+      validator: (v: any) => ['vertical', 'horizontal'].includes(v),
+    },
     reverse: Boolean,
+
+    ...makeRoundedProps(),
   },
 
   // data: () => ({
@@ -621,139 +634,259 @@ export default defineComponent({
   setup (props, { attrs, emit, slots }) {
     const { isRtl } = useRtl()
     const isReversed = computed(() => isRtl.value !== props.reverse)
-    const sliderValue = useProxiedModel(props, 'modelValue', undefined, v => parseFloat(v ?? 0), v => v)
     const minValue = computed(() => parseFloat(props.min))
     const maxValue = computed(() => parseFloat(props.max))
-    const stepSize = computed(() => props.stepSize > 0 ? parseFloat(props.stepSize) : 0)
-
-    function roundValue (value: number) {
-      if (stepSize.value === 0) return value
-      // Format input value using the same number
-      // of decimals places as in the step prop
+    const stepSize = computed(() => props.stepSize > 0 ? parseFloat(props.stepSize) : 1)
+    const decimals = computed(() => {
       const trimmedStep = stepSize.value.toString().trim()
-      const decimals = trimmedStep.includes('.')
+      return trimmedStep.includes('.')
         ? (trimmedStep.length - trimmedStep.indexOf('.') - 1)
         : 0
+    })
+
+    const model = useProxiedModel(
+      props,
+      'modelValue',
+      undefined,
+      v => {
+        const value = typeof v === 'string' ? parseFloat(v) : v == null ? minValue.value : v
+
+        return roundValue(value)
+      },
+      v => roundValue(v)
+    )
+
+    const isDirty = computed(() => model.value > minValue.value)
+
+    function roundValue (value: number) {
+      const clamped = clamp(value, minValue.value, maxValue.value)
+
       const offset = minValue.value % stepSize.value
 
-      const newValue = Math.round((value - offset) / stepSize.value) * stepSize.value + offset
+      const newValue = Math.round((clamped - offset) / stepSize.value) * stepSize.value + offset
 
-      return parseFloat(Math.min(newValue, maxValue.value).toFixed(decimals))
+      return parseFloat(Math.min(newValue, maxValue.value).toFixed(decimals.value))
     }
 
-    const trackFillWidth = computed(() => (roundValue(sliderValue.value) - minValue.value) / (maxValue.value - minValue.value) * 100)
+    const trackFillWidth = computed(() => (roundValue(model.value) - minValue.value) / (maxValue.value - minValue.value) * 100)
 
-    const thumbPressed = false
+    const disableThumbTransition = ref(false)
+    const thumbPressed = ref(false)
 
     const showTicks = computed(() => props.tickLabels?.length > 0 || !!(!props.disabled && stepSize.value && props.ticks))
 
     const trackTransition = computed(() =>
-      thumbPressed
+      disableThumbTransition.value
         ? showTicks.value || stepSize.value
           ? '0.1s cubic-bezier(0.25, 0.8, 0.5, 1)'
           : 'none'
         : ''
     )
 
-    const trackBackgroundStyles = computed(() => {
-      const startDir = props.vertical ? isReversed.value ? 'bottom' : 'top' : isReversed.value ? 'left' : 'right'
-      const endDir = props.vertical ? 'height' : 'width'
+    const trackContainerRef = ref<HTMLElement>()
+    const thumbContainerRef = ref<HTMLElement>()
+    const fieldRef = ref<VField>()
 
-      const start = '0px'
-      const end = props.disabled ? `calc(${100 - trackFillWidth.value}% - 10px)` : `calc(${100 - trackFillWidth.value}%)`
+    const startOffset = 0
 
-      return {
-        transition: trackTransition.value,
-        [startDir]: start,
-        [endDir]: end,
-      }
+    const thumbColor = computed(() => {
+      return props.disabled ? undefined : props.thumbColor
     })
 
-    const trackFillStyles = computed(() => {
-      const startDir = props.vertical ? 'bottom' : 'left'
-      const endDir = props.vertical ? 'top' : 'right'
-      const valueDir = props.vertical ? 'height' : 'width'
+    function parseMouseMove (e: MouseEvent | TouchEvent) {
+      if (!trackContainerRef.value) return model.value
 
-      const start = isReversed.value ? 'auto' : '0'
-      const end = isReversed.value ? '0' : 'auto'
-      const value = props.disabled ? `calc(${trackFillWidth.value}% - 10px)` : `${trackFillWidth.value}%`
+      const vertical = props.direction === 'vertical'
+      const start = vertical ? 'top' : 'left'
+      const length = vertical ? 'height' : 'width'
+      const click = vertical ? 'clientY' : 'clientX'
 
+      const {
+        [start]: trackStart,
+        [length]: trackLength,
+      } = trackContainerRef.value.$el.getBoundingClientRect()
+      const clickOffset = 'touches' in e ? e.touches[0][click] : e[click]
+
+      // It is possible for left to be NaN, force to number
+      let clickPos = Math.min(Math.max((clickOffset - trackStart - startOffset) / trackLength, 0), 1) || 0
+
+      if (vertical || isRtl.value) clickPos = 1 - clickPos
+
+      return minValue.value + clickPos * (maxValue.value - minValue.value)
+    }
+
+    function onMouseMove (e: MouseEvent | TouchEvent) {
+      const newValue = parseMouseMove(e)
+      // console.log('mousemove', newValue)
+
+      model.value = newValue
+    }
+
+    function onSliderClick (e: MouseEvent) {
+      // const thumb = this.$refs.thumb as HTMLElement
+      // thumb.focus()
+
+      if (!thumbContainerRef.value) return
+      thumbContainerRef.value.$el.focus()
+      // if (!fieldRef.value) return
+      // fieldRef.value.focus()
+
+      onMouseMove(e)
+      // this.$emit('change', this.internalValue)
+    }
+
+    let transitionTimeout = 0
+
+    function onSliderMouseUp (e: Event) {
+      e.stopPropagation()
+
+      disableThumbTransition.value = false
+      thumbPressed.value = false
+      window.clearTimeout(transitionTimeout)
+      // this.thumbPressed = false
+      // const mouseMoveOptions = passiveSupported ? { passive: true } : false
+      // this.app.removeEventListener('touchmove', this.onMouseMove, mouseMoveOptions)
+      // this.app.removeEventListener('mousemove', this.onMouseMove, mouseMoveOptions)
+      window.removeEventListener('mousemove', onMouseMove, { passive: true, capture: true })
+      window.removeEventListener('mouseup', onSliderMouseUp, { passive: true })
+
+      // this.$emit('mouseup', e)
+      // this.$emit('end', this.internalValue)
+      // if (!deepEqual(this.oldValue, this.internalValue)) {
+      //   this.$emit('change', this.internalValue)
+      //   this.noClick = true
+      // }
+
+      // this.isActive = false
+    }
+
+    function isTouchEvent (e: any): e is TouchEvent {
+      return 'touches' in e
+    }
+
+    function getCoords (e: MouseEvent | TouchEvent) {
       return {
-        transition: trackTransition.value,
-        [startDir]: start,
-        [endDir]: end,
-        [valueDir]: value,
+        clientX: isTouchEvent(e) ? e.touches[0].clientX : e.clientX,
+        clientY: isTouchEvent(e) ? e.touches[0].clientY : e.clientY,
       }
-    })
+    }
+
+    function onSliderMousedown (e: MouseEvent | TouchEvent) {
+      e.preventDefault()
+
+      // this.oldValue = this.internalValue
+      // this.isActive = true
+      if (thumbPressed.value) {
+        disableThumbTransition.value = true
+      } else {
+        window.clearTimeout(transitionTimeout)
+        transitionTimeout = window.setTimeout(() => {
+          disableThumbTransition.value = true
+        }, 300)
+      }
+
+      // if ((e.target as Element)?.matches('.v-slider__thumb-container, .v-slider__thumb-container *')) {
+      //   this.thumbPressed = true
+      //   const domRect = (e.target as Element).getBoundingClientRect()
+      //   const touch = 'touches' in e ? e.touches[0] : e
+      //   this.startOffset = this.vertical
+      //     ? touch.clientY - (domRect.top + domRect.height / 2)
+      //     : touch.clientX - (domRect.left + domRect.width / 2)
+      // } else {
+      //   this.startOffset = 0
+      //   window.clearTimeout(this.mouseTimeout)
+      //   this.mouseTimeout = window.setTimeout(() => {
+      //     this.thumbPressed = true
+      //   }, 300)
+      // }
+
+      // const isTouchEvent = 'touches' in e
+
+      onMouseMove(e)
+
+      window.addEventListener('mousemove', onMouseMove, { passive: true, capture: true })
+      window.addEventListener('mouseup', onSliderMouseUp, { passive: true })
+
+      // this.$emit('start', this.internalValue)
+    }
 
     return () => {
       return (
-        <VInput
+        <VField
           class={[
             'v-slider',
+            `v-slider--${props.direction}`,
             {
-              // 'v-slider--horizontal': !this.vertical,
-              // 'v-slider--vertical': this.vertical,
-              // 'v-slider--focused': this.isFocused,
-              // 'v-slider--active': this.isActive,
-              // 'v-slider--disabled': this.isDisabled,
-              // 'v-slider--readonly': this.isReadonly,
+              'v-slider--disabled': props.disabled,
             },
-            `v-slider--${props.vertical ? 'vertical' : 'horizontal'}`,
           ]}
           style={{
             '--v-slider-track-size': props.trackSize ? convertToUnit(props.trackSize) : undefined,
           }}
+          ref={fieldRef}
           variant="plain"
+          dirty={isDirty.value}
           v-slots={{
             ...slots,
-            default: ({ props: slotProps }: any) => (
-              <>
+            default: ({ props: slotProps, isActive, isDirty, isFocused }: VFieldSlot) => (
+              <div
+                class="v-slider__container"
+                onClick={onSliderClick}
+                onMousedown={onSliderMousedown}
+              >
                 <input
                   id={slotProps.id}
+                  name={attrs.name}
                   disabled={props.disabled}
                   readonly={props.readonly}
                   tabindex="-1"
+                  value={model.value}
                 />
-                <div class="v-slider__track-container">
-                  <div
-                    class={[
-                      'v-slider__track-background',
-                    ]}
-                    style={trackBackgroundStyles.value}
-                  />
-                  <div
-                    class={[
-                      'v-slider__track-fill',
-                    ]}
-                    style={trackFillStyles.value}
-                  />
-                </div>
-                <div
-                  class={[
-                    'v-slider__thumb-container',
-                  ]}
-                  style={{
-                    transition: trackTransition.value,
-                    [props.vertical ? 'top' : 'left']: `${isReversed.value ? 100 - trackFillWidth.value : trackFillWidth.value}%`,
-                    '--v-slider-thumb-size': convertToUnit(props.thumbSize),
+
+                <VSliderTrack
+                  ref={trackContainerRef}
+                  trackColor={props.trackColor}
+                  trackFillColor={props.trackFillColor}
+                  disabled={props.disabled}
+                  direction={props.direction}
+                  showTicks={showTicks.value}
+                  tickSize={props.tickSize}
+                  stepSize={stepSize.value}
+                  min={minValue.value}
+                  max={maxValue.value}
+                  start={0}
+                  stop={trackFillWidth.value}
+                  trackTransition={trackTransition.value}
+                  ticks={props.ticks}
+                  thumbSize={props.thumbSize}
+                />
+
+                <VSliderThumb
+                  ref={ thumbContainerRef }
+                  disabled={props.disabled}
+                  active={isActive}
+                  dirty={isDirty}
+                  transition={trackTransition.value}
+                  focused={isFocused}
+                  color={thumbColor.value}
+                  direction={props.direction}
+                  min={minValue.value}
+                  max={maxValue.value}
+                  modelValue={model.value}
+                  onUpdate:modelValue={v => model.value = v}
+                  position={trackFillWidth.value}
+                  size={props.thumbSize}
+                  onFocus={slotProps.onFocus}
+                  onBlur={slotProps.onBlur}
+                  onUpdate:thumbPressed={v => thumbPressed.value = v}
+                  onUpdate:keyPressed={v => disableThumbTransition.value = v}
+                  stepSize={stepSize.value}
+                  showLabel={!!props.thumbLabel}
+                  v-slots={{
+                    label: slots['thumb-label'],
                   }}
-                  role="slider"
-                  tabindex={props.disabled ? -1 : attrs.tabindex ?? 0}
-                  aria-label={props.label}
-                  aria-valuemin={minValue.value}
-                  aria-valuemax={maxValue.value}
-                  aria-valuenow={sliderValue.value}
-                  aria-readonly={props.readonly}
-                  aria-orientation={props.vertical ? 'vertical' : 'horizontal'}
-                >
-                  <div
-                    class={[
-                      'v-slider__thumb',
-                    ]}
-                  />
-                </div>
-              </>
+                />
+              </div>
             ),
           }}
         />
