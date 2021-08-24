@@ -196,7 +196,6 @@ describe('VBtn', () => {
     })
   })
 
-  // `href` prop is not implemented yet.
   describe('href', () => {
     it('should render an <a> tag when using href prop', () => {
       cy.mount(<VBtn href={ anchor.href }>Click me</VBtn>)
