@@ -68,10 +68,10 @@ describe('VBtn', () => {
   })
 
   describe('plain', () => {
-    it('should have the plain class when plain prop is set to true', () => {
-      cy.mount(<VBtn plain>Plain</VBtn>)
+    it('should have the plain class when variant is plain', () => {
+      cy.mount(<VBtn variant="plain">Plain</VBtn>)
         .get('button')
-        .should('have.class', 'v-btn--plain')
+        .should('have.class', 'v-btn--variant-plain')
     })
   })
 
@@ -256,12 +256,12 @@ describe('VBtn', () => {
     })
 
     it('plain', () => {
-      cy.mount(<VBtn plain>Plain</VBtn>)
+      cy.mount(<VBtn variant="plain">Plain</VBtn>)
         .get('button')
-        .should('have.class', 'v-btn--plain')
-        .setProps({ plain: false })
+        .should('have.class', 'v-btn--variant-plain')
+        .setProps({ variant: 'default' })
         .get('button')
-        .should('not.have.class', 'v-btn--plain')
+        .should('not.have.class', 'v-btn--variant-plain')
     })
 
     // retainFocusOnClick is not implemented.
