@@ -53,4 +53,9 @@
       box-shadow: none
 
 .v-text-field__clearable
+  opacity: 0
   transition: .15s $standard-easing
+
+  .v-field--focused &,
+  .v-text-field:hover &
+    opacity: 1

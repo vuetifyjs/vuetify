@@ -47,10 +47,11 @@ export const VTextField = defineComponent({
   },
 
   emits: {
+    'click:clear': (e: Event) => true as any,
     'update:modelValue': (val: string) => true as any,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
 
     const internalDirty = ref(false)
@@ -112,13 +113,16 @@ export const VTextField = defineComponent({
                       <div class="v-text-field__clearable">
                         <VBtn
                           density="compact"
-                          icon="mdi-close"
+                          icon="$clear"
+                          tabindex="-1"
                           variant="text"
                           onClick={
                             (e: Event) => {
                               e.stopPropagation()
 
                               model.value = ''
+
+                              emit('click:clear', e)
                             }
                           }
                         />
