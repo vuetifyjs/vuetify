@@ -40,7 +40,7 @@ export const VInput = defineComponent({
             >
               { slots?.prepend?.() }
 
-              { slots.prependIcon && (
+              { props.prependIcon && (
                 <VIcon icon={ props.prependIcon } />
               ) }
             </div>
@@ -55,7 +55,7 @@ export const VInput = defineComponent({
             >
               { slots?.append?.() }
 
-              { slots.appendIcon && (
+              { props.appendIcon && (
                 <VIcon icon={ props.appendIcon } />
               ) }
             </div>
