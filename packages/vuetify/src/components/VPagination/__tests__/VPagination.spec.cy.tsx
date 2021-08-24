@@ -6,6 +6,7 @@ import { VLocaleProvider } from '@/components/VLocaleProvider'
 
 // Utilities
 import { keyValues } from '@/util'
+import { defineComponent, ref } from 'vue'
 
 describe('VPagination', () => {
   it('should render set length', () => {
@@ -36,9 +37,10 @@ describe('VPagination', () => {
   })
 
   it('should react to keyboard navigation', () => {
-    cy.mount(() => (
-      <VPagination length={3} model-value={2} />
-    ))
+    cy.mount(defineComponent(() => {
+      const model = ref(2)
+      return () => <VPagination v-model={ model.value } length={3} />
+    }))
 
     cy.get('.v-pagination__item').first().find('.v-btn').focus()
 
