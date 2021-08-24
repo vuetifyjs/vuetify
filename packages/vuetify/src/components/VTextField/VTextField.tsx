@@ -19,7 +19,6 @@ import { defineComponent, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { DefaultInputSlot, VFieldSlot } from '@/components/VField/VField'
-import { VIcon } from '../VIcon'
 import { VBtn } from '../VBtn'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
@@ -34,7 +33,7 @@ export const VTextField = defineComponent({
   props: {
     autofocus: Boolean,
     clearable: Boolean,
-    counter: Boolean,
+    counter: [Boolean, Number, String] as PropType<true | number | string>,
     counterValue: Function as PropType<(value: any) => number>,
     prefix: String,
     placeholder: String,
@@ -52,17 +51,17 @@ export const VTextField = defineComponent({
   },
 
   setup (props, { attrs, slots }) {
-    const value = useProxiedModel(props, 'modelValue')
+    const model = useProxiedModel(props, 'modelValue')
 
     const internalDirty = ref(false)
     const isDirty = computed(() => {
-      return internalDirty.value || !!value.value || dirtyTypes.includes(props.type)
+      return internalDirty.value || !!model.value || dirtyTypes.includes(props.type)
     })
 
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function'
-        ? props.counterValue(value.value)
-        : value.value?.toString().length
+        ? props.counterValue(model.value)
+        : model.value?.toString().length
     })
 
     function onIntersect (
@@ -84,7 +83,7 @@ export const VTextField = defineComponent({
 
     useRender(() => {
       const hasAppendInner = (slots.appendInner || props.clearable)
-      const hasCounter = (slots.counter || props.counter)
+      const hasCounter = (slots.counter || props.counter || props.counterValue)
 
       return (
         <VField
@@ -109,7 +108,7 @@ export const VTextField = defineComponent({
                   { slots?.appendInner?.(slotScope) }
 
                   <VExpandXTransition>
-                    { props.clearable && value.value && (
+                    { props.clearable && model.value && (
                       <div class="v-text-field__clearable">
                         <VBtn
                           density="compact"
@@ -119,7 +118,7 @@ export const VTextField = defineComponent({
                             (e: Event) => {
                               e.stopPropagation()
 
-                              value.value = ''
+                              model.value = ''
                             }
                           }
                         />
@@ -146,7 +145,7 @@ export const VTextField = defineComponent({
                   <input
                     class={ fieldClass }
                     style={{ opacity: showPlaceholder ? undefined : '0' }}
-                    v-model={ value.value }
+                    v-model={ model.value }
                     v-intersect={[{
                       handler: onIntersect,
                     }, null, ['once']]}
