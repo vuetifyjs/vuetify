@@ -2,7 +2,7 @@
 import { VBtn } from '@/components/VBtn'
 
 // Utilities
-import { defineComponent } from 'vue'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VAppBarNavIcon',

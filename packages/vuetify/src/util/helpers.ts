@@ -1,6 +1,8 @@
-import type { DataTableCompareFunction, ItemGroup, SelectItemKey } from 'vuetify/types'
-import type { Ref, Slots, TransitionProps, VNode } from 'vue'
-import { camelize, Fragment, h, isRef, mergeProps, ref, Transition } from 'vue'
+// Utilities
+import { camelize, Fragment, isRef, ref } from 'vue'
+
+// Types
+import type { ComponentInternalInstance, ComponentPublicInstance, Ref, Slots, VNode, VNodeChild } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
@@ -54,6 +56,8 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
   path = path.replace(/^\./, '') // strip a leading dot
   return getNestedValue(obj, path.split('.'), fallback)
 }
+
+type SelectItemKey = string | (string | number)[] | ((item: Dictionary<any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: object,
@@ -111,18 +115,26 @@ export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { 
   return filtered
 }
 
+export function convertToUnit (str: number, unit?: string): string
+export function convertToUnit (str: string | number | null | undefined, unit?: string): string | undefined
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
   if (str == null || str === '') {
     return undefined
   } else if (isNaN(+str!)) {
     return String(str)
+  } else if (!isFinite(+str!)) {
+    return undefined
   } else {
     return `${Number(str)}${unit}`
   }
 }
 
 export function isObject (obj: any): obj is object {
-  return obj !== null && typeof obj === 'object'
+  return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
+}
+
+export function isComponentInstance (obj: any): obj is ComponentPublicInstance {
+  return obj?.$el
 }
 
 // KeyboardEvent.keyCode aliases
@@ -146,23 +158,51 @@ export const keyCodes = Object.freeze({
   shift: 16,
 })
 
+export const keyValues = Object.freeze({
+  enter: 'Enter',
+  tab: 'Tab',
+  delete: 'Delete',
+  esc: 'Escape',
+  space: 'Space',
+  up: 'ArrowUp',
+  down: 'ArrowDown',
+  left: 'ArrowLeft',
+  right: 'ArrowRight',
+  end: 'End',
+  home: 'Home',
+  del: 'Delete',
+  backspace: 'Backspace',
+  insert: 'Insert',
+  pageup: 'PageUp',
+  pagedown: 'PageDown',
+  shift: 'Shift',
+})
+
 export function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }
 
-export function extract (obj: Dictionary<unknown>, properties: string[]) {
-  const extracted: Dictionary<unknown> = {}
-  const rest: Dictionary<unknown> = {}
+type MaybePick<
+  T extends object,
+  U extends Extract<keyof T, string>
+> = Record<string, unknown> extends T ? Partial<Pick<T, U>> : Pick<T, U>
 
-  Object.entries(obj).forEach(([key, value]) => {
-    if (properties.includes(key)) {
-      extracted[key] = value
+export function pick<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, paths: U[]): [MaybePick<T, U>, Omit<T, U>] {
+  const found = Object.create(null)
+  const rest = Object.create(null)
+
+  for (const key in obj) {
+    if (paths.includes(key as U)) {
+      found[key] = obj[key]
     } else {
-      rest[key] = value
+      rest[key] = obj[key]
     }
-  })
+  }
 
-  return [extracted, rest]
+  return [found, rest]
 }
 
 /**
@@ -176,6 +216,11 @@ export function arrayDiff (a: any[], b: any[]): any[] {
   return diff
 }
 
+interface ItemGroup<T> {
+  name: string
+  items: T[]
+}
+
 export function groupItems<T extends any = any> (
   items: T[],
   groupBy: string[],
@@ -184,7 +229,7 @@ export function groupItems<T extends any = any> (
   const key = groupBy[0]
   const groups: ItemGroup<T>[] = []
   let current
-  for (var i = 0; i < items.length; i++) {
+  for (let i = 0; i < items.length; i++) {
     const item = items[i]
     const val = getObjectValueByPath(item, key, null)
     if (current !== val) {
@@ -206,12 +251,13 @@ export function wrapInArray<T> (v: T | T[] | null | undefined): T[] {
       ? v : [v]
 }
 
-export function sortItems<T extends any = any> (
+type DataTableCompareFunction<T = any> = (a: T, b: T) => number
+export function sortItems<T extends any, K extends keyof T> (
   items: T[],
   sortBy: string[],
   sortDesc: boolean[],
   locale: string,
-  customSorters?: Record<string, DataTableCompareFunction<T>>
+  customSorters?: Record<K, DataTableCompareFunction<T[K]>>
 ): T[] {
   if (sortBy === null || !sortBy.length) return items
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
@@ -227,8 +273,8 @@ export function sortItems<T extends any = any> (
         [sortA, sortB] = [sortB, sortA]
       }
 
-      if (customSorters?.[sortKey]) {
-        const customResult = customSorters[sortKey](sortA, sortB)
+      if (customSorters?.[sortKey as K]) {
+        const customResult = customSorters[sortKey as K](sortA, sortB)
 
         if (!customResult) continue
 
@@ -238,6 +284,11 @@ export function sortItems<T extends any = any> (
       // Check if both cannot be evaluated
       if (sortA === null && sortB === null) {
         continue
+      }
+
+      // Dates should be compared numerically
+      if (sortA instanceof Date && sortB instanceof Date) {
+        return sortA.getTime() - sortB.getTime()
       }
 
       [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
@@ -316,13 +367,12 @@ export function chunk (str: string, size = 1) {
   return chunked
 }
 
-export function humanReadableFileSize (bytes: number, binary = false): string {
-  const base = binary ? 1024 : 1000
+export function humanReadableFileSize (bytes: number, base: 1000 | 1024 = 1000): string {
   if (bytes < base) {
     return `${bytes} B`
   }
 
-  const prefix = binary ? ['Ki', 'Mi', 'Gi'] : ['k', 'M', 'G']
+  const prefix = base === 1024 ? ['Ki', 'Mi', 'Gi'] : ['k', 'M', 'G']
   let unit = -1
   while (Math.abs(bytes) >= base && unit < prefix.length - 1) {
     bytes /= base
@@ -341,9 +391,14 @@ export function camelizeObjectKeys (obj: Record<string, any> | null | undefined)
 }
 
 export function mergeDeep (
-  source: Dictionary<any> = {},
-  target: Dictionary<any> = {}
+  source: Record<string, any> = {},
+  target: Record<string, any> = {},
+  out: Record<string, any> = {},
 ) {
+  for (const key in source) {
+    out[key] = source[key]
+  }
+
   for (const key in target) {
     const sourceProperty = source[key]
     const targetProperty = target[key]
@@ -354,15 +409,15 @@ export function mergeDeep (
       isObject(sourceProperty) &&
       isObject(targetProperty)
     ) {
-      source[key] = mergeDeep(sourceProperty, targetProperty)
+      out[key] = mergeDeep(sourceProperty, targetProperty)
 
       continue
     }
 
-    source[key] = targetProperty
+    out[key] = targetProperty
   }
 
-  return source
+  return out
 }
 
 export function fillArray<T> (length: number, obj: T) {
@@ -384,20 +439,6 @@ export function flattenFragments (nodes: VNode[]): VNode[] {
   }).flat()
 }
 
-export function maybeTransition <T extends VNode | VNode[] | undefined> (
-  props: { transition?: string | boolean | TransitionProps },
-  data: TransitionProps,
-  vNodes: T
-): VNode | T {
-  if (!props.transition || typeof props.transition === 'boolean') return vNodes
-
-  return h(
-    Transition,
-    mergeProps(typeof props.transition === 'string' ? { name: props.transition } : props.transition as any, data as any),
-    () => vNodes
-  )
-}
-
 export const randomHexColor = () => {
   const n = (Math.random() * 0xfffff * 1000000).toString(16)
   return '#' + n.slice(0, 6)
@@ -411,4 +452,28 @@ export type ExtractMaybeRef<P> = P extends MaybeRef<infer T> ? T : P;
 
 export function wrapInRef <T> (x: T) {
   return (isRef(x) ? x : ref(x)) as Ref<ExtractMaybeRef<T>>
+}
+
+export function findChildren (vnode?: VNodeChild): ComponentInternalInstance[] {
+  if (!vnode || typeof vnode !== 'object') {
+    return []
+  }
+
+  if (Array.isArray(vnode)) {
+    return vnode
+      .map(child => findChildren(child))
+      .filter(v => v)
+      .flat(1)
+  } else if (Array.isArray(vnode.children)) {
+    return vnode.children
+      .map(child => findChildren(child))
+      .filter(v => v)
+      .flat(1)
+  } else if (vnode.component) {
+    return [vnode.component, ...findChildren(vnode.component?.subTree)]
+      .filter(v => v)
+      .flat(1)
+  }
+
+  return []
 }

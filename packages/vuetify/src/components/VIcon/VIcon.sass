@@ -5,6 +5,7 @@
   align-items: center
   display: inline-flex
   font-feature-settings: 'liga'
+  height: $icon-size
   justify-content: center
   letter-spacing: $icon-letter-spacing
   line-height: $icon-line-height
@@ -12,26 +13,17 @@
   text-indent: $icon-text-indent
   user-select: none
   vertical-align: $icon-vertical-align
+  width: $icon-size
 
   &--left
-    @include ltr()
-      margin-right: $icon-margin-start
-
-    @include rtl()
-      margin-left: $icon-margin-end
+    margin-inline-end: $icon-margin-start
 
   &--right
-    @include ltr()
-      margin-left: $icon-margin-start
-
-    @include rtl()
-      margin-right: $icon-margin-end
+    margin-inline-start: $icon-margin-end
 
   @each $name in $sizes
     &--size-#{$name}
       font-size: map-get($icon-sizes, $name)
-      height: map-get($icon-sizes, $name)
-      width: map-get($icon-sizes, $name)
 
 .v-icon__svg
   fill: currentColor
@@ -39,10 +31,6 @@
 .v-icon
   &--size-default
     .v-btn:not(.v-btn--icon):not(.v-btn--stacked) &
-      font-size: $icon-btn-font-size
-      height: $icon-btn-height
-      width: $icon-btn-width
-
       .v-bottom-navigation &
         font-size: $icon-btn-bottom-navigation-font-size
 
@@ -51,20 +39,10 @@
 
   &--left
     .v-btn:not(.v-btn--icon) &
-      @include ltr()
-        margin-left: calc(#{$icon-btn-margin-start})
-        margin-right: calc(#{$icon-btn-margin-end})
-
-      @include rtl()
-        margin-left: calc(#{$icon-btn-margin-end})
-        margin-right: calc(#{$icon-btn-margin-start})
+      margin-inline-start: $icon-btn-margin-start
+      margin-inline-end: $icon-btn-margin-end
 
   &--right
     .v-btn:not(.v-btn--icon) &
-      @include ltr()
-        margin-left: calc(#{$icon-btn-margin-end})
-        margin-right: calc(#{$icon-btn-margin-start})
-
-      @include rtl()
-        margin-left: calc(#{$icon-btn-margin-start})
-        margin-right: calc(#{$icon-btn-margin-end})
+      margin-inline-start: $icon-btn-margin-end
+      margin-inline-end: $icon-btn-margin-start

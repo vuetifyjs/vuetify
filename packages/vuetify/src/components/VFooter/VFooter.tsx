@@ -8,16 +8,15 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VFooter',
 
-  props: makeProps({
+  props: {
     ...makeBorderProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -25,10 +24,11 @@ export default defineComponent({
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeTagProps({ tag: 'footer' }),
-  }),
+    ...makeThemeProps(),
+  },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-footer')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)

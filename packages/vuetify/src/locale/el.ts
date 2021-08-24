@@ -54,16 +54,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Πλοήγηση με προορισμούς',
+      root: 'Πλοήγηση με προορισμούς',
       next: 'Επόμενη σελίδα',
       previous: 'Προηγούμενη σελίδα',
       page: 'Πήγαινε στην σελίδα {0}',
       currentPage: 'Τρέχουσα σελίδα, σελίδα {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      item: 'Rating {0} of {1}',
     },
   },
 }

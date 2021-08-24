@@ -1,5 +1,9 @@
 // Defaults
 $button-app-bar-elevation: 0 !default;
+$button-background: rgb(var(--v-theme-surface)) !default;
+$button-color: rgb(var(--v-theme-on-surface)) !default;
+$button-banner-actions-elevation: 0 !default;
+$button-banner-actions-padding: 0 8px !default;
 $button-bottom-navigation-elevation: 0 !default;
 $button-bottom-navigation-border-radius: 0 !default;
 $button-bottom-navigation-active-filter: grayscale(0) !default;
@@ -17,10 +21,17 @@ $button-bottom-navigation-shift-top: 50% !default;
 $button-bottom-navigation-shift-transform: scale(.8) translateY(10px) !default;
 $button-bottom-navigation-text-transform: none !default;
 $button-bottom-navigation-transition-duration: .2s !default;
-$button-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
+$button-pagination-active-overlay-opacity: var(--v-border-opacity) !default;
+$button-pagination-border-radius: $border-radius-root !default;
+$button-pagination-elevation: 0 !default;
+$button-border-color: $border-color-root !default;
 $button-border-radius: $border-radius-root !default;
 $button-border-style: $border-style-root !default;
-$button-border-width: thin !default;
+$button-border-thin-width: thin !default;
+$button-border-width: 0 !default;
+$button-card-actions-elevation: 0 !default;
+$button-card-actions-margin: .5rem !default;
+$button-card-actions-padding: 0 8px !default;
 $button-disabled-opacity: 0.26 !default;
 $button-disabled-overlay: 0.12 !default;
 $button-elevation: ('default': 2, 'hover': 4, 'active': 8) !default;
@@ -29,10 +40,11 @@ $button-font-weight: map-deep-get($typography, 'button', 'weight') !default;
 $button-height: 36px !default;
 $button-stacked-height: 72px !default;
 $button-icon-border-radius: map-get($rounded, 'circle') !default;
-$button-icon-font-size: 24px !default;
+$button-icon-font-size: 1rem !default;
 $button-icon-size: 48px !default;
 $button-line-height: normal !default;
 $button-stacked-line-height: 1.7 !default;
+$button-plain-opacity: .62 !default;
 $button-padding-ratio: 2.25 !default;
 $button-stacked-padding-ratio: 4.5 !default;
 $button-positions: absolute fixed !default;
@@ -45,16 +57,14 @@ $button-stacked-width-ratio: 1 !default;
 $button-density: ('default': 0, 'comfortable': -2, 'compact': -3) !default;
 $button-stacked-density: ('default': 0, 'comfortable': -4, 'compact': -6) !default;
 $button-icon-density: ('default': 3, 'comfortable': 0, 'compact': -2) !default;
+$button-pagination-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 
-$button-border: () !default;
-$button-border: map-merge(
-  (
-    'border-color': $button-border-color,
-    'border-style': $button-border-style,
-    'border-width': $button-border-width,
-  ),
-  $button-border
-);
+$button-border: (
+  $button-border-color,
+  $button-border-style,
+  $button-border-width,
+  $button-border-thin-width
+) !default;
 
 $button-sizes: () !default;
 $button-sizes: map-merge(
@@ -78,11 +88,10 @@ $button-stacked-sizes: map-merge(
     $button-stacked-sizes
 );
 
-$button-icon-sizes: () !default;
-$button-icon-sizes: map-merge(
-  (
-    'font-size': $button-icon-font-size,
-    'size': $button-icon-size
-  ),
-  $button-icon-sizes
+$button-variants: (
+  $button-background,
+  $button-color,
+  map-get($button-elevation, 'default'),
+  $button-plain-opacity,
+  'v-btn'
 );

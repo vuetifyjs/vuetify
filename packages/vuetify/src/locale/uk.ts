@@ -54,16 +54,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Навігація по сторінках',
+      root: 'Навігація по сторінках',
       next: 'Наступна сторінка',
       previous: 'Попередня сторінка',
       page: 'Перейти на сторінку {0}',
       currentPage: 'Поточна сторінка, Сторінка {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      item: 'Rating {0} of {1}',
     },
   },
 }

@@ -1,9 +1,21 @@
+import {
+  colorToInt,
+  colorToRGB,
+  createRange,
+  darken,
+  getLuma,
+  intToHex,
+  lighten,
+  mergeDeep,
+  propsFactory,
+} from '@/util'
 // Utilities
-import { colorToInt, colorToRGB, createRange, darken, getLuma, intToHex, lighten } from '@/util'
-import { computed, inject, provide, ref, watch } from 'vue'
+import { computed, getCurrentInstance, inject, provide, ref, watch } from 'vue'
 
 // Types
-import type { InjectionKey, Ref, SetupContext } from 'vue'
+import type { InjectionKey, Ref } from 'vue'
+import { consoleError } from '@/util/console'
+import { APCAcontrast } from '@/util/color/APCA'
 
 interface BaseColors {
   background: string
@@ -70,13 +82,16 @@ export interface ThemeInstance {
   isDisabled: boolean
   themes: Ref<Record<string, InternalThemeDefinition>>
   current: Ref<string>
-  themeClasses: Ref<string>
+  themeClasses: Ref<string | undefined>
   setTheme: (key: string, theme: ThemeDefinition) => void
   getTheme: (key: string) => InternalThemeDefinition
-  hasColor: (color: string) => boolean
 }
 
-export const VuetifyThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme')
+export const ThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme')
+
+export const makeThemeProps = propsFactory({
+  theme: String,
+}, 'theme')
 
 const defaultThemeOptions: ThemeOptions = {
   defaultTheme: 'light',
@@ -97,8 +112,18 @@ const defaultThemeOptions: ThemeOptions = {
         warning: '#FB8C00',
       },
       variables: {
-        'border-color': '0, 0, 0',
+        'border-color': '#000000',
         'border-opacity': 0.12,
+        'high-emphasis-opacity': 0.87,
+        'medium-emphasis-opacity': 0.60,
+        'disabled-opacity': 0.38,
+        'activated-opacity': 0.12,
+        'idle-opacity': 0.04,
+        'hover-opacity': 0.12,
+        'focus-opacity': 0.12,
+        'selected-opacity': 0.08,
+        'dragged-opacity': 0.08,
+        'pressed-opacity': 0.16,
         'kbd-background-color': '#212529',
         'kbd-color': '#FFFFFF',
         'code-background-color': '#C2C2C2',
@@ -108,7 +133,7 @@ const defaultThemeOptions: ThemeOptions = {
       dark: true,
       colors: {
         background: '#121212',
-        surface: '#121212',
+        surface: '#212121',
         primary: '#BB86FC',
         'primary-darken-1': '#3700B3',
         secondary: '#03DAC5',
@@ -119,8 +144,18 @@ const defaultThemeOptions: ThemeOptions = {
         warning: '#FB8C00',
       },
       variables: {
-        'border-color': '255, 255, 255',
+        'border-color': '#FFFFFF',
         'border-opacity': 0.12,
+        'high-emphasis-opacity': 0.87,
+        'medium-emphasis-opacity': 0.60,
+        'disabled-opacity': 0.38,
+        'activated-opacity': 0.12,
+        'idle-opacity': 0.10,
+        'hover-opacity': 0.04,
+        'focus-opacity': 0.12,
+        'selected-opacity': 0.08,
+        'dragged-opacity': 0.08,
+        'pressed-opacity': 0.16,
         'kbd-background-color': '#212529',
         'kbd-color': '#FFFFFF',
         'code-background-color': '#B7B7B7',
@@ -132,11 +167,10 @@ const defaultThemeOptions: ThemeOptions = {
 const parseThemeOptions = (options: ThemeOptions = defaultThemeOptions): InternalThemeOptions => {
   if (!options) return { ...defaultThemeOptions, isDisabled: true } as InternalThemeOptions
 
-  return {
-    ...defaultThemeOptions,
-    ...options,
-    variations: options?.variations == null || options?.variations === false ? defaultThemeOptions.variations : options.variations,
-  } as InternalThemeOptions
+  return mergeDeep(
+    defaultThemeOptions,
+    options,
+  ) as InternalThemeOptions
 }
 
 // Composables
@@ -163,7 +197,22 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
         if (/on-[a-z]/.test(color) || theme.colors[`on-${color}`]) continue
 
         const onColor = `on-${color}` as keyof OnColors
-        theme.colors[onColor] = intToHex(getLuma(theme.colors[color]!) > 0.18 ? 0x0 : 0xffffff)
+        const colorVal = colorToInt(theme.colors[color]!)
+
+        const blackContrast = Math.abs(APCAcontrast(0, colorVal))
+        const whiteContrast = Math.abs(APCAcontrast(0xffffff, colorVal))
+
+        // TODO: warn about poor color selections
+        // const contrastAsText = Math.abs(APCAcontrast(colorVal, colorToInt(theme.colors.background)))
+        // const minContrast = Math.max(blackContrast, whiteContrast)
+        // if (minContrast < 60) {
+        //   consoleInfo(`${key} theme color ${color} has poor contrast (${minContrast.toFixed()}%)`)
+        // } else if (contrastAsText < 60 && !['background', 'surface'].includes(color)) {
+        //   consoleInfo(`${key} theme color ${color} has poor contrast as text (${contrastAsText.toFixed()}%)`)
+        // }
+
+        // Prefer white text if both have an acceptable contrast ratio
+        theme.colors[onColor] = whiteContrast > Math.min(blackContrast, 50) ? '#fff' : '#000'
       }
 
       obj[key] = theme as InternalThemeDefinition
@@ -275,57 +324,34 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
     setTheme: (key: string, theme: ThemeDefinition) => themes.value[key] = theme,
     getTheme: (key: string) => computedThemes.value[key],
     current,
-    themeClasses: computed(() => parsedOptions.isDisabled ? '' : `v-theme--${current.value}`),
-    hasColor: (color: string) => !!computedThemes.value[current.value].colors[color],
+    themeClasses: computed(() => parsedOptions.isDisabled ? undefined : `v-theme--${current.value}`),
   }
 }
 
 /**
  * Used to either set up and provide a new theme instance, or to pass
  * along the closest available already provided instance.
- *
- * A new theme instance will be created if either `theme` prop is provided,
- * or if `newContext` prop is true
  */
-export function provideTheme (props: { theme?: string, newContext?: boolean } = {}, context: SetupContext) {
-  const theme = inject(VuetifyThemeSymbol, null)
+export function useTheme (props: { theme?: string }) {
+  const vm = getCurrentInstance()
+  const theme = inject(ThemeSymbol, null)
 
+  if (!vm) consoleError('provideTheme must be called from inside a setup function')
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
-  const internal = ref<string | null>(null)
-  const current = computed<string>({
-    get: () => {
-      return internal.value ?? props.theme ?? theme?.current.value
-    },
-    set (value: string) {
-      if (theme && !props.theme && !props.newContext) {
-        theme.current.value = value
-      } else {
-        internal.value = value
-        context.emit('update:theme', value)
-      }
-    },
+  const current = computed<string>(() => {
+    return props.theme ?? theme?.current.value
   })
 
-  const themeClasses = computed(() => theme.isDisabled ? '' : `v-theme--${current.value}`)
+  const themeClasses = computed(() => theme.isDisabled ? undefined : `v-theme--${current.value}`)
+
   const newTheme: ThemeInstance = {
     ...theme,
     current,
     themeClasses,
   }
 
-  provide(VuetifyThemeSymbol, newTheme)
+  provide(ThemeSymbol, newTheme)
 
   return newTheme
-}
-
-/**
- * Injects and returns closest available provided theme instance.
- */
-export function useTheme () {
-  const theme = inject(VuetifyThemeSymbol)
-
-  if (!theme) throw new Error('Could not find Vuetify theme injection')
-
-  return theme
 }

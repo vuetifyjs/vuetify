@@ -1,6 +1,133 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VTimeline.ts should match snapshot 1`] = `
-<div class="v-timeline theme--light">
+exports[`VTimeline should match snapshot 1`] = `
+<div class="v-timeline v-timeline--vertical v-theme--light v-timeline--density-default">
+  <div class="v-timeline-item">
+    <div class="v-timeline-item__body">
+      item content
+    </div>
+    <div class="v-timeline-divider">
+      <div class="v-timeline-divider__dot v-timeline-divider__dot--size-default">
+        <div class="v-timeline-divider__inner-dot">
+        </div>
+      </div>
+      <div class="v-timeline-divider__line">
+      </div>
+    </div>
+    <div class="v-timeline-item__opposite">
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTimeline should render icon slot 1`] = `
+<div class="v-timeline v-timeline--vertical v-theme--light v-timeline--density-default">
+  <div class="v-timeline-item">
+    <div class="v-timeline-item__body">
+      item content
+    </div>
+    <div class="v-timeline-divider">
+      <div class="v-timeline-divider__dot v-timeline-divider__dot--size-default">
+        <div class="v-timeline-divider__inner-dot">
+          icon
+        </div>
+      </div>
+      <div class="v-timeline-divider__line">
+      </div>
+    </div>
+    <div class="v-timeline-item__opposite">
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTimeline should render in horizontal direction 1`] = `
+<div class="v-timeline v-timeline--horizontal v-theme--light v-timeline--density-default">
+  <div class="v-timeline-item">
+    <div class="v-timeline-item__body">
+      item content
+    </div>
+    <div class="v-timeline-divider">
+      <div class="v-timeline-divider__dot v-timeline-divider__dot--size-default">
+        <div class="v-timeline-divider__inner-dot">
+        </div>
+      </div>
+      <div class="v-timeline-divider__line">
+      </div>
+    </div>
+    <div class="v-timeline-item__opposite">
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTimeline should render opposite slot 1`] = `
+<div class="v-timeline v-timeline--vertical v-theme--light v-timeline--density-default">
+  <div class="v-timeline-item">
+    <div class="v-timeline-item__body">
+      item content
+    </div>
+    <div class="v-timeline-divider">
+      <div class="v-timeline-divider__dot v-timeline-divider__dot--size-default">
+        <div class="v-timeline-divider__inner-dot">
+        </div>
+      </div>
+      <div class="v-timeline-divider__line">
+      </div>
+    </div>
+    <div class="v-timeline-item__opposite">
+      opposite
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VTimeline should show all items on single side 1`] = `
+<div class="v-timeline v-timeline--vertical v-theme--light v-timeline--density-default v-timeline--side-end">
+  <div class="v-timeline-item">
+    <div class="v-timeline-item__body">
+      item content
+    </div>
+    <div class="v-timeline-divider">
+      <div class="v-timeline-divider__dot v-timeline-divider__dot--size-default">
+        <div class="v-timeline-divider__inner-dot">
+        </div>
+      </div>
+      <div class="v-timeline-divider__line">
+      </div>
+    </div>
+    <div class="v-timeline-item__opposite">
+    </div>
+  </div>
+  <div class="v-timeline-item">
+    <div class="v-timeline-item__body">
+      item content
+    </div>
+    <div class="v-timeline-divider">
+      <div class="v-timeline-divider__dot v-timeline-divider__dot--size-default">
+        <div class="v-timeline-divider__inner-dot">
+        </div>
+      </div>
+      <div class="v-timeline-divider__line">
+      </div>
+    </div>
+    <div class="v-timeline-item__opposite">
+    </div>
+  </div>
+  <div class="v-timeline-item">
+    <div class="v-timeline-item__body">
+      item content
+    </div>
+    <div class="v-timeline-divider">
+      <div class="v-timeline-divider__dot v-timeline-divider__dot--size-default">
+        <div class="v-timeline-divider__inner-dot">
+        </div>
+      </div>
+      <div class="v-timeline-divider__line">
+      </div>
+    </div>
+    <div class="v-timeline-item__opposite">
+    </div>
+  </div>
 </div>
 `;

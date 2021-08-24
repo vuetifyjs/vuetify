@@ -54,16 +54,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'ڕێنیشاندەری پەڕەگۆڕکێ',
+      root: 'ڕێنیشاندەری پەڕەگۆڕکێ',
       next: 'پەڕەی دواتر',
       previous: 'پەڕەی پێشوو',
       page: 'بڕۆ بۆ پەڕەی {0}',
       currentPage: 'پەڕەی ئێستا، پەڕە{0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      item: 'Rating {0} of {1}',
     },
   },
 }

@@ -5,7 +5,7 @@
       sm="6"
     >
       <v-hover
-        v-slot="{ hover }"
+        v-slot="{ hover, props }"
         open-delay="200"
       >
         <v-card
@@ -14,8 +14,9 @@
           class="mx-auto"
           height="350"
           max-width="350"
+          v-bind="props"
         >
-          <v-card-text class="font-weight-medium mt-12 text-center subtitle-1">
+          <v-card-text class="font-weight-medium mt-12 text-center text-subtitle-1">
             Open Delay (Mouse enter)
           </v-card-text>
         </v-card>
@@ -37,7 +38,7 @@
           height="350"
           max-width="350"
         >
-          <v-card-text class="font-weight-medium mt-12 text-center subtitle-1">
+          <v-card-text class="font-weight-medium mt-12 text-center text-subtitle-1">
             Close Delay (Mouse leave)
           </v-card-text>
         </v-card>

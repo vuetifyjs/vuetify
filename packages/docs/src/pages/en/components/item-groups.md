@@ -26,6 +26,8 @@ The core usage of the `v-item-group` is to create groups of anything that should
 - [v-item](/api/v-item)
 - [v-item-group](/api/v-item-group)
 
+<api-section page="components/item-groups" />
+
 <!-- ## Sub-components
 
 ### v-item
@@ -36,11 +38,11 @@ v-item description -->
 
 ### Props
 
-#### Active class
+#### Selected class
 
-The **active-class** property allows you to set custom CSS class on active items.
+The **selected-class** prop allows you to designate a CSS class applied to _selected_ items.
 
-<example file="v-item-group/prop-active-class" />
+<example file="v-item-group/prop-selected-class" />
 
 #### Mandatory
 

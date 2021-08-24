@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals'
+
 // Directives
 import ClickOutside from '../'
 import { wait } from '../../../../test'

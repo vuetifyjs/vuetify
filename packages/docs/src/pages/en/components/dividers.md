@@ -25,6 +25,8 @@ Dividers in their simplest form display a horizontal line.
 
 - [v-divider](/api/v-divider)
 
+<api-section page="components/dividers" />
+
 ## Examples
 
 ### Props
@@ -43,7 +45,7 @@ Vertical dividers give you more tools for unique layouts.
 
 #### Thickness
 
-By using the **thickness** prop, the thickness of the divider can be adjusted to the desired value. 
+By using the **thickness** prop, the thickness of the divider can be adjusted to the desired value.
 
 ### Misc
 

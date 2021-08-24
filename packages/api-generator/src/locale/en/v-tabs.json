@@ -27,6 +27,6 @@
     "vertical": "Stacks tabs on top of each other vertically."
   },
   "events": {
-    "change": "Emitted when tab is changed by user interaction"
+    "change": "Emitted when tab is changed by user interaction. Returns a string if **href** attribute is set and number if it is not."
   }
 }

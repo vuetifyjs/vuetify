@@ -2,28 +2,29 @@
 import './VAppBar.sass'
 
 // Components
-import { VImg } from '@/components'
+import { VImg } from '@/components/VImg'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
-import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, defineComponent, ref, toRef } from 'vue'
-import { convertToUnit } from '@/util'
-import { makeProps } from '@/util/makeProps'
+import { computed, toRef } from 'vue'
+import { convertToUnit, defineComponent } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
 
 export default defineComponent({
   name: 'VAppBar',
 
-  props: makeProps({
+  props: {
     // TODO: Implement scrolling techniques
     // hideOnScroll: Boolean
     // invertedScroll: Boolean
@@ -53,14 +54,19 @@ export default defineComponent({
       type: [Number, String],
       default: 128,
     },
+    position: {
+      type: String as PropType<'top' | 'bottom'>,
+      default: 'top',
+      validator: (value: any) => ['top', 'bottom'].includes(value),
+    },
+
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
-    ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeLayoutItemProps({ name: 'app-bar' }),
     ...makeTagProps({ tag: 'header' }),
-  }),
+  },
 
   emits: {
     'update:modelValue': (value: boolean) => true,
@@ -70,55 +76,53 @@ export default defineComponent({
     const { borderClasses } = useBorder(props, 'v-app-bar')
     const { densityClasses } = useDensity(props, 'v-app-bar')
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props, 'v-app-bar')
     const { roundedClasses } = useRounded(props, 'v-app-bar')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const extension = ref<HTMLElement | boolean>(!!slots.extension)
-    const height = computed(() => (
-      Number(props.prominent ? props.prominentHeight : props.height) +
-      Number(extension.value ? props.extensionHeight : 0) -
+    const isExtended = !!slots.extension
+    const contentHeight = computed(() => (
+      Number(props.prominent ? props.prominentHeight : props.height) -
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
+    ))
+    const height = computed(() => (
+      contentHeight.value +
+      Number(isExtended ? props.extensionHeight : 0)
     ))
     const isActive = useProxiedModel(props, 'modelValue', props.modelValue)
     const layoutStyles = useLayoutItem(
       props.name,
       toRef(props, 'priority'),
-      computed(() => props.bottom ? 'bottom' : 'top'),
-      computed(() => isActive.value ? height.value : 0),
+      toRef(props, 'position'),
+      height,
+      height,
+      isActive,
     )
 
     return () => {
       const hasImage = !!(slots.image || props.image)
-      const translate = (!isActive.value ? -100 : 0) * (props.bottom ? -1 : 1)
 
       return (
         <props.tag
           class={[
             'v-app-bar',
             {
-              'v-app-bar--bottom': props.bottom,
+              'v-app-bar--bottom': props.position === 'bottom',
               'v-app-bar--collapsed': props.collapse,
               'v-app-bar--flat': props.flat,
               'v-app-bar--floating': props.floating,
               'v-app-bar--is-active': isActive.value,
               'v-app-bar--prominent': props.prominent,
+              'v-app-bar--absolute': props.absolute,
             },
             backgroundColorClasses.value,
             borderClasses.value,
             densityClasses.value,
             elevationClasses.value,
-            positionClasses.value,
             roundedClasses.value,
           ]}
           style={[
             backgroundColorStyles.value,
             layoutStyles.value,
-            positionStyles.value,
-            {
-              height: convertToUnit(height.value),
-              transform: `translateY(${convertToUnit(translate, '%')})`,
-            },
           ]}
         >
           { hasImage && (
@@ -130,7 +134,10 @@ export default defineComponent({
             </div>
           ) }
 
-          <div class="v-app-bar__content">
+          <div
+            class="v-app-bar__content"
+            style={{ height: convertToUnit(contentHeight.value) }}
+          >
             { slots.prepend && (
               <div class="v-app-bar__prepend">
                 { slots.prepend() }
@@ -146,11 +153,10 @@ export default defineComponent({
             ) }
           </div>
 
-          { slots.extension && (
+          { isExtended && (
             <div
               class="v-app-bar__extension"
               style={{ height: convertToUnit(props.extensionHeight) }}
-              ref={ extension }
             >
               { slots.extension?.() }
             </div>

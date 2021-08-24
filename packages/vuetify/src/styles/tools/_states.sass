@@ -1,14 +1,20 @@
-@mixin states ($selector: '&::before')
+@mixin states ($selector: '&::before', $active: true)
   &:hover
     #{$selector}
       opacity: calc(#{map-get($states, 'hover')} * var(--v-theme-overlay-multiplier))
 
-  &:focus
+  &:focus-visible
     #{$selector}
       opacity: calc(#{map-get($states, 'focus')} * var(--v-theme-overlay-multiplier))
 
-  &--active
-    +active-states($selector)
+  @supports not selector(:focus-visible)
+    &:focus
+      #{$selector}
+        opacity: calc(#{map-get($states, 'focus')} * var(--v-theme-overlay-multiplier))
+
+  @if ($active)
+    &--active
+      @include active-states($selector)
 
 @mixin active-states ($selector: '::before')
   &:hover#{$selector},

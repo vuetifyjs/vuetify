@@ -54,16 +54,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Navigasi Pagination',
+      root: 'Navigasi Pagination',
       next: 'Halaman selanjutnya',
       previous: 'Halaman sebelumnya',
       page: 'Buka halaman {0}',
       currentPage: 'Halaman Saat Ini, Halaman {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      item: 'Rating {0} of {1}',
     },
   },
 }

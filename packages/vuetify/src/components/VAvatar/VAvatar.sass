@@ -11,16 +11,24 @@
   text-align: center
   vertical-align: $avatar-vertical-align
 
-  +rounded($avatar-border-radius)
+  @include avatar-sizes($avatar-sizes)
+  @include avatar-density(('height', 'width'), $avatar-density)
+  @include rounded($avatar-border-radius)
 
   > *
     border-radius: inherit
     width: inherit
+    height: inherit
+
+  > .v-icon
+    font-size: var(--v-avatar-height)
 
   &--rounded
     +rounded($avatar-rounded-border-radius)
 
-  @each $name in $sizes
-    &--size-#{$name}
-      height: map-get($avatar-sizes, $name)
-      width: map-get($avatar-sizes, $name)
+// VList
+.v-avatar
+  .v-list-item-avatar &
+    overflow: visible
+    height: inherit
+    width: inherit

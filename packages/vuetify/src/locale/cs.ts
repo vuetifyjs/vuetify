@@ -54,16 +54,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Navigace stránkování',
+      root: 'Navigace stránkování',
       next: 'Další strana',
       previous: 'Předchozí strana',
       page: 'Přejít na stránku {0}',
       currentPage: 'Aktuální stránka, stránka {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      item: 'Rating {0} of {1}',
     },
   },
 }

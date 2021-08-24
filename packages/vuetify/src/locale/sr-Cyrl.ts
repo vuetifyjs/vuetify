@@ -54,16 +54,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Навигација страницама',
+      root: 'Навигација страницама',
       next: 'Следећа страница',
       previous: 'Претходна страница',
       page: 'Иди на страну {0}',
       currentPage: 'Тренутна страница, страница {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Оцена {0} од {1}',
+      item: 'Оцена {0} од {1}',
     },
   },
 }

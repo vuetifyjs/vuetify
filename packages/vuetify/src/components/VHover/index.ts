@@ -1,4 +1,1 @@
-import VHover from './VHover'
-
-export { VHover }
-export default VHover
+export { default as VHover } from './VHover'

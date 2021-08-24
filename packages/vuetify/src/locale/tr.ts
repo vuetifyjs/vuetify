@@ -54,16 +54,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Sayfalandırma Navigasyonu',
+      root: 'Sayfalandırma Navigasyonu',
       next: 'Sonraki sayfa',
       previous: 'Önceki sayfa',
       page: 'Sayfaya git {0}',
       currentPage: 'Geçerli Sayfa, Sayfa {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      item: 'Rating {0} of {1}',
     },
   },
 }

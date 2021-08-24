@@ -5,7 +5,7 @@
   >
     <v-col cols="12">
       <v-hover
-        v-slot="{ hover }"
+        v-slot="{ hover, props }"
         disabled
       >
         <v-card
@@ -13,8 +13,9 @@
           class="mx-auto"
           height="350"
           max-width="350"
+          v-bind="props"
         >
-          <v-card-text class="my-4 text-center title">
+          <v-card-text class="my-4 text-center text-h6">
             Hover over me!
           </v-card-text>
         </v-card>

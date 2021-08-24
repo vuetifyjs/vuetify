@@ -54,16 +54,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Navigazione impaginazione',
+      root: 'Navigazione impaginazione',
       next: 'Pagina seguente',
       previous: 'Pagina precedente',
       page: 'Vai alla pagina {0}',
       currentPage: 'Pagina corrente, pagina {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      item: 'Rating {0} of {1}',
     },
   },
 }

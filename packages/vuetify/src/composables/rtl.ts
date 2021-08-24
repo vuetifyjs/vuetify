@@ -20,7 +20,7 @@ export interface RtlInstance {
   rtlClasses: Ref<string>
 }
 
-export const VuetifyRtlSymbol: InjectionKey<RtlInstance> = Symbol.for('vuetify:rtl')
+export const RtlSymbol: InjectionKey<RtlInstance> = Symbol.for('vuetify:rtl')
 
 export function createRtl (localeScope: LocaleInstance, options?: RtlOptions) {
   return createRtlScope({
@@ -51,19 +51,19 @@ export function createRtlScope (currentScope: RtlInstance, localeScope: LocaleIn
 }
 
 export function provideRtl (props: RtlProps, localeScope: LocaleInstance) {
-  const currentScope = inject(VuetifyRtlSymbol)
+  const currentScope = inject(RtlSymbol)
 
   if (!currentScope) throw new Error('[Vuetify] Could not find injected rtl instance')
 
   const newScope = createRtlScope(currentScope, localeScope, props)
 
-  provide(VuetifyRtlSymbol, newScope)
+  provide(RtlSymbol, newScope)
 
   return newScope
 }
 
 export function useRtl () {
-  const currentScope = inject(VuetifyRtlSymbol)
+  const currentScope = inject(RtlSymbol)
 
   if (!currentScope) throw new Error('[Vuetify] Could not find injected rtl instance')
 

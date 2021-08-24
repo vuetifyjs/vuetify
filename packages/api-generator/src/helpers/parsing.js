@@ -24,7 +24,7 @@ function getPropType (type) {
 
 function getPropDefault (def, type) {
   if (typeof def === 'function' && type !== 'function') {
-    return def.call({})
+    return def.call({}, {})
   }
 
   if (typeof def === 'string') {
@@ -33,6 +33,13 @@ function getPropDefault (def, type) {
 
   if (type === 'function') {
     return parseFunctionParams(def)
+  }
+
+  if (def == null && (
+    type === 'boolean' ||
+    (Array.isArray(type) && type.includes('boolean'))
+  )) {
+    return false
   }
 
   return def

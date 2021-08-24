@@ -1,12 +1,16 @@
-import { defineComponent } from 'vue'
+import './VLocaleProvider.sass'
+
+// Composables
 import { provideLocale } from '@/composables/locale'
 import { provideRtl } from '@/composables/rtl'
-import { makeProps } from '@/util'
+
+// Utilities
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VLocaleProvider',
 
-  props: makeProps({
+  props: {
     locale: String,
     fallbackLocale: String,
     messages: Object,
@@ -14,12 +18,21 @@ export default defineComponent({
       type: Boolean,
       default: undefined,
     },
-  }),
+  },
 
-  setup (props, ctx) {
+  setup (props, { slots }) {
     const localeInstance = provideLocale(props)
     const { rtlClasses } = provideRtl(props, localeInstance)
 
-    return () => <div class={rtlClasses.value}>{ctx.slots.default?.()}</div>
+    return () => (
+      <div
+        class={[
+          'v-locale-provider',
+          rtlClasses.value,
+        ]}
+      >
+        { slots.default?.() }
+      </div>
+    )
   },
 })

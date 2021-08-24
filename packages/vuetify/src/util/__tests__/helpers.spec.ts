@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals'
+
 import {
   arrayDiff,
   convertToUnit,
@@ -6,6 +8,7 @@ import {
   getObjectValueByPath,
   getPropertyFromItem,
   humanReadableFileSize,
+  mergeDeep,
   sortItems,
 } from '../helpers'
 
@@ -104,7 +107,9 @@ describe('helpers', () => {
     expect(deepEqual(currentDate, futureDate)).toEqual(false)
     expect(deepEqual({ date: currentDate }, { date: futureDate })).toEqual(false)
 
-    const circular = {} // eslint-disable-line sonarjs/prefer-object-literal
+    const circular = {
+      me: null as any,
+    }
     circular.me = circular
 
     expect(deepEqual({ r: circular }, { r: circular })).toEqual(true)
@@ -211,17 +216,17 @@ describe('helpers', () => {
   })
 
   it('humanReadableFileSize should format file sizes with base 1024', () => {
-    expect(humanReadableFileSize(0, true)).toBe('0 B')
-    expect(humanReadableFileSize(512, true)).toBe('512 B')
+    expect(humanReadableFileSize(0, 1024)).toBe('0 B')
+    expect(humanReadableFileSize(512, 1024)).toBe('512 B')
 
-    expect(humanReadableFileSize(1024, true)).toBe('1.0 KiB')
-    expect(humanReadableFileSize(4096, true)).toBe('4.0 KiB')
+    expect(humanReadableFileSize(1024, 1024)).toBe('1.0 KiB')
+    expect(humanReadableFileSize(4096, 1024)).toBe('4.0 KiB')
 
-    expect(humanReadableFileSize(1048576, true)).toBe('1.0 MiB')
-    expect(humanReadableFileSize(2097152, true)).toBe('2.0 MiB')
+    expect(humanReadableFileSize(1048576, 1024)).toBe('1.0 MiB')
+    expect(humanReadableFileSize(2097152, 1024)).toBe('2.0 MiB')
 
-    expect(humanReadableFileSize(1073741824, true)).toBe('1.0 GiB')
-    expect(humanReadableFileSize(2147483648, true)).toBe('2.0 GiB')
+    expect(humanReadableFileSize(1073741824, 1024)).toBe('1.0 GiB')
+    expect(humanReadableFileSize(2147483648, 1024)).toBe('2.0 GiB')
   })
 
   it('humanReadableFileSize should format file sizes with base 1000', () => {
@@ -405,5 +410,32 @@ describe('helpers', () => {
         { string: 'baz', number: 1 },
         { string: 'foo', number: 1 },
       ])
+  })
+
+  describe('mergeDeep', () => {
+    it('should include all properties from both source and target', () => {
+      expect(mergeDeep({ a: 'foo' }, { b: 'bar' })).toEqual({ a: 'foo', b: 'bar' })
+    })
+
+    it('should not mutate source object', () => {
+      const source = { a: 'foo' }
+      const target = { b: 'bar' }
+      const result = mergeDeep(source, target)
+
+      expect(result).not.toBe(source)
+      expect(source).not.toHaveProperty('b')
+    })
+
+    it('should overwrite source properties', () => {
+      expect(mergeDeep({ a: 'foo' }, { a: 'bar' })).toEqual({ a: 'bar' })
+    })
+
+    it('should recursively merge', () => {
+      expect(mergeDeep({ a: { b: 'foo' } }, { c: { d: 'bar' } })).toEqual({ a: { b: 'foo' }, c: { d: 'bar' } })
+    })
+
+    it('should not recursively merge arrays', () => {
+      expect(mergeDeep({ a: ['foo'] }, { a: ['bar'] })).toEqual({ a: ['bar'] })
+    })
   })
 })

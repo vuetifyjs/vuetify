@@ -5,8 +5,8 @@ import './VGrid.sass'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { capitalize, computed, defineComponent, h } from 'vue'
-import { makeProps } from '@/util'
+import { capitalize, computed, h } from 'vue'
+import { defineComponent } from '@/util'
 
 // Types
 import type { Prop } from 'vue'
@@ -76,7 +76,7 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean
 export default defineComponent({
   name: 'VCol',
 
-  props: makeProps({
+  props: {
     cols: {
       type: [Boolean, String, Number],
       default: false,
@@ -98,7 +98,7 @@ export default defineComponent({
       validator: (str: any) => ['auto', 'start', 'end', 'center', 'baseline', 'stretch'].includes(str),
     },
     ...makeTagProps(),
-  }),
+  },
 
   setup (props, { slots }) {
     const classes = computed(() => {

@@ -1,15 +1,30 @@
 {
   "props": {
-    "circle": "Shape pagination elements as circles",
     "disabled": "Disables component",
-    "length": "The length of the pagination component",
-    "nextIcon": "Specify the icon to use for the next icon",
-    "prevIcon": "Specify the icon to use for the prev icon",
-    "totalVisible": "Specify the max total visible pagination numbers",
-    "value": "Current selected page"
+    "start": "Specify the starting page",
+    "length": "The number of pages",
+    "totalVisible": "Specify the total visible pagination numbers",
+    "firstIcon": "The icon to use for the first button",
+    "prevIcon": "The icon to use for the prev button",
+    "nextIcon": "The icon to use for the next button",
+    "lastIcon": "The icon to use for the last button",
+    "ariaLabel": "Label for the root element",
+    "pageAriaLabel": "Label for each page button",
+    "currentPageAriaLabel": "Label for the currently selected page",
+    "firstAriaLabel": "Label for the go to first button",
+    "previousAriaLabel": "Label for the previous button",
+    "nextAriaLabel": "Label for the next button",
+    "lastAriaLabel": "Label for the go to last button",
+    "color": "Color of the selected page button",
+    "ellipsis": "Text to show between page buttons when truncating the list",
+    "showFirstLastPage": "Show buttons for going to first and last page",
+    "modelValue": "Current selected page"
   },
   "events": {
-    "previous": "Emitted when going to previous item",
-    "next": "Emitted when going to next item"
+    "first": "Emitted when clicking on go to first button",
+    "previous": "Emitted when clicking on go to previous button",
+    "next": "Emitted when clicking on go to next button",
+    "last": "Emitted when clicking on go to last button",
+    "update:modelValue": "Emitted when current selected page is updated"
   }
 }

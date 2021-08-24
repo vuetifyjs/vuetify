@@ -2,24 +2,23 @@
 import './VApp.sass'
 
 // Composables
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 import { createLayout, makeLayoutProps } from '@/composables/layout'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { defineComponent } from '@/util'
 import { useRtl } from '@/composables/rtl'
 
 export default defineComponent({
   name: 'VApp',
 
-  props: makeProps({
-    theme: String,
-    ...makeLayoutProps(),
-  }),
+  props: {
+    ...makeLayoutProps({ fullHeight: true }),
+    ...makeThemeProps(),
+  },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const { layoutClasses } = createLayout(props)
     const { rtlClasses } = useRtl()
 

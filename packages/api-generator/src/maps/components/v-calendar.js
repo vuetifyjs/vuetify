@@ -1,4 +1,16 @@
-const { VTimestamp, VTimestampWithTime, VTimestampWithTimeCategory, VTimestampWithCategory, VCalendarDay, VCalendarEventSlot } = require('../helpers/variables')
+const {
+  VCalendarDay,
+  VCalendarEventEvent,
+  VCalendarEventSlot,
+  VTimestamp,
+  VTimestampWithCategory,
+  VTimestampWithTime,
+  VTimestampWithTimeCategory,
+} = require('../helpers/variables')
+
+function createMouseEventDesc (ob, eventType) {
+  return `${JSON.stringify(VTimestampWithTime, null, 2).replace(/"/g, '')}, ${eventType}`
+}
 
 module.exports = {
   'v-calendar': {
@@ -109,255 +121,255 @@ module.exports = {
       },
       {
         name: 'click:date',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'MouseEvent'),
       },
       {
         name: 'contextmenu:date',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'MouseEvent'),
       },
       {
         name: 'click:more',
-        value: VTimestamp,
+        value: createMouseEventDesc(VTimestamp, 'MouseEvent'),
       },
       {
         name: 'click:day',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'MouseEvent'),
       },
       {
         name: 'contextmenu:day',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'MouseEvent'),
       },
       {
         name: 'mousedown:day',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'MouseEvent'),
       },
       {
         name: 'mousemove:day',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'MouseEvent'),
       },
       {
         name: 'mouseup:day',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'MouseEvent'),
       },
       {
         name: 'mouseenter:day',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'MouseEvent'),
       },
       {
         name: 'mouseleave:day',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'MouseEvent'),
       },
       {
         name: 'touchstart:day',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'TouchEvent'),
       },
       {
         name: 'touchmove:day',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'TouchEvent'),
       },
       {
         name: 'touchend:day',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'TouchEvent'),
       },
       {
         name: 'click:event',
-        value: VCalendarEventSlot,
+        value: VCalendarEventEvent,
       },
       {
         name: 'contextmenu:event',
-        value: VCalendarEventSlot,
+        value: VCalendarEventEvent,
       },
       {
         name: 'mousedown:event',
-        value: VCalendarEventSlot,
+        value: VCalendarEventEvent,
       },
       {
         name: 'mousemove:event',
-        value: VCalendarEventSlot,
+        value: VCalendarEventEvent,
       },
       {
         name: 'mouseup:event',
-        value: VCalendarEventSlot,
+        value: VCalendarEventEvent,
       },
       {
         name: 'mouseenter:event',
-        value: VCalendarEventSlot,
+        value: VCalendarEventEvent,
       },
       {
         name: 'mouseleave:event',
-        value: VCalendarEventSlot,
+        value: VCalendarEventEvent,
       },
       {
         name: 'touchstart:event',
-        value: VCalendarEventSlot,
+        value: VCalendarEventEvent,
       },
       {
         name: 'touchmove:event',
-        value: VCalendarEventSlot,
+        value: VCalendarEventEvent,
       },
       {
         name: 'touchend:event',
-        value: VCalendarEventSlot,
+        value: VCalendarEventEvent,
       },
       {
         name: 'click:day-category',
-        value: VTimestampWithCategory,
+        value: createMouseEventDesc(VTimestampWithCategory, 'MouseEvent'),
       },
       {
         name: 'contextmenu:day-category',
-        value: VTimestampWithCategory,
+        value: createMouseEventDesc(VTimestampWithCategory, 'MouseEvent'),
       },
       {
         name: 'mousedown:day-category',
-        value: VTimestampWithCategory,
+        value: createMouseEventDesc(VTimestampWithCategory, 'MouseEvent'),
       },
       {
         name: 'mousemove:day-category',
-        value: VTimestampWithCategory,
+        value: createMouseEventDesc(VTimestampWithCategory, 'MouseEvent'),
       },
       {
         name: 'mouseup:day-category',
-        value: VTimestampWithCategory,
+        value: createMouseEventDesc(VTimestampWithCategory, 'MouseEvent'),
       },
       {
         name: 'mouseenter:day-category',
-        value: VTimestampWithCategory,
+        value: createMouseEventDesc(VTimestampWithCategory, 'MouseEvent'),
       },
       {
         name: 'mouseleave:day-category',
-        value: VTimestampWithCategory,
+        value: createMouseEventDesc(VTimestampWithCategory, 'MouseEvent'),
       },
       {
         name: 'touchstart:day-category',
-        value: VTimestampWithCategory,
+        value: createMouseEventDesc(VTimestampWithCategory, 'TouchEvent'),
       },
       {
         name: 'touchmove:day-category',
-        value: VTimestampWithCategory,
+        value: createMouseEventDesc(VTimestampWithCategory, 'TouchEvent'),
       },
       {
         name: 'touchend:day-category',
-        value: VTimestampWithCategory,
+        value: createMouseEventDesc(VTimestampWithCategory, 'TouchEvent'),
       },
       {
         name: 'click:time',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'MouseEvent'),
       },
       {
         name: 'contextmenu:time',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'MouseEvent'),
       },
       {
         name: 'mousedown:time',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'MouseEvent'),
       },
       {
         name: 'mousemove:time',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'MouseEvent'),
       },
       {
         name: 'mouseup:time',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'MouseEvent'),
       },
       {
         name: 'mouseenter:time',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'MouseEvent'),
       },
       {
         name: 'mouseleave:time',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'MouseEvent'),
       },
       {
         name: 'touchstart:time',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'TouchEvent'),
       },
       {
         name: 'touchmove:time',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'TouchEvent'),
       },
       {
         name: 'touchend:time',
-        value: VTimestampWithTime,
+        value: createMouseEventDesc(VTimestampWithTime, 'TouchEvent'),
       },
       {
         name: 'click:time-category',
-        value: VTimestampWithTimeCategory,
+        value: createMouseEventDesc(VTimestampWithTimeCategory, 'MouseEvent'),
       },
       {
         name: 'contextmenu:time-category',
-        value: VTimestampWithTimeCategory,
+        value: createMouseEventDesc(VTimestampWithTimeCategory, 'MouseEvent'),
       },
       {
         name: 'mousedown:time-category',
-        value: VTimestampWithTimeCategory,
+        value: createMouseEventDesc(VTimestampWithTimeCategory, 'MouseEvent'),
       },
       {
         name: 'mousemove:time-category',
-        value: VTimestampWithTimeCategory,
+        value: createMouseEventDesc(VTimestampWithTimeCategory, 'MouseEvent'),
       },
       {
         name: 'mouseup:time-category',
-        value: VTimestampWithTimeCategory,
+        value: createMouseEventDesc(VTimestampWithTimeCategory, 'MouseEvent'),
       },
       {
         name: 'mouseenter:time-category',
-        value: VTimestampWithTimeCategory,
+        value: createMouseEventDesc(VTimestampWithTimeCategory, 'MouseEvent'),
       },
       {
         name: 'mouseleave:time-category',
-        value: VTimestampWithTimeCategory,
+        value: createMouseEventDesc(VTimestampWithTimeCategory, 'MouseEvent'),
       },
       {
         name: 'touchstart:time-category',
-        value: VTimestampWithTimeCategory,
+        value: createMouseEventDesc(VTimestampWithTimeCategory, 'TouchEvent'),
       },
       {
         name: 'touchmove:time-category',
-        value: VTimestampWithTimeCategory,
+        value: createMouseEventDesc(VTimestampWithTimeCategory, 'TouchEvent'),
       },
       {
         name: 'touchend:time-category',
-        value: VTimestampWithTimeCategory,
+        value: createMouseEventDesc(VTimestampWithTimeCategory, 'TouchEvent'),
       },
       {
         name: 'click:interval',
-        value: VTimestamp,
+        value: createMouseEventDesc(VTimestamp, 'MouseEvent'),
       },
       {
         name: 'contextmenu:interval',
-        value: VTimestamp,
+        value: createMouseEventDesc(VTimestamp, 'MouseEvent'),
       },
       {
         name: 'mousedown:interval',
-        value: VTimestamp,
+        value: createMouseEventDesc(VTimestamp, 'MouseEvent'),
       },
       {
         name: 'mousemove:interval',
-        value: VTimestamp,
+        value: createMouseEventDesc(VTimestamp, 'MouseEvent'),
       },
       {
         name: 'mouseup:interval',
-        value: VTimestamp,
+        value: createMouseEventDesc(VTimestamp, 'MouseEvent'),
       },
       {
         name: 'mouseenter:interval',
-        value: VTimestamp,
+        value: createMouseEventDesc(VTimestamp, 'MouseEvent'),
       },
       {
         name: 'mouseleave:interval',
-        value: VTimestamp,
+        value: createMouseEventDesc(VTimestamp, 'MouseEvent'),
       },
       {
         name: 'touchstart:interval',
-        value: VTimestamp,
+        value: createMouseEventDesc(VTimestamp, 'TouchEvent'),
       },
       {
         name: 'touchmove:interval',
-        value: VTimestamp,
+        value: createMouseEventDesc(VTimestamp, 'TouchEvent'),
       },
       {
         name: 'touchend:interval',
-        value: VTimestamp,
+        value: createMouseEventDesc(VTimestamp, 'TouchEvent'),
       },
     ],
   },

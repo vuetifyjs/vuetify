@@ -54,16 +54,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'ページネーションナビゲーション',
+      root: 'ページネーションナビゲーション',
       next: '次のページ',
       previous: '前のページ',
       page: '{0}ページ目に移動',
       currentPage: '現在のページ、ページ {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: '評価 {1} のうち {0}',
+      item: '評価 {1} のうち {0}',
     },
   },
 }

@@ -15,7 +15,7 @@
   export default {
     data () {
       return {
-        date1: new Date().toISOString().substr(0, 10),
+        date1: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
         date2: '2013-07-29',
       }
     },

@@ -10,6 +10,10 @@ Cypress.Commands.add('mount', (component, options, vuetifyOptions) => {
   const vuetify = createVuetify(vuetifyOptions)
   const defaultOptions = {
     global: {
+      stubs: {
+        transition: false,
+        'transition-group': false,
+      },
       plugins: [vuetify],
     },
   }

@@ -5,15 +5,14 @@ import './VAppBarTitle.sass'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util/makeProps'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VAppBarTitle',
 
-  props: makeProps({
+  props: {
     ...makeTagProps({ tag: 'header' }),
-  }),
+  },
 
   setup (props, { slots }) {
     return () => (

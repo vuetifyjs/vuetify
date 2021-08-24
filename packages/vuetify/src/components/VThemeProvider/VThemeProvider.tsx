@@ -2,33 +2,32 @@
 import './VThemeProvider.sass'
 
 // Composables
-import { provideTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VThemeProvider',
 
-  props: makeProps({
-    theme: {
-      type: String,
-    },
-    // TODO: Better name
-    newContext: {
-      type: Boolean,
-    },
-  }),
+  props: {
+    withBackground: Boolean,
 
-  setup (props, context) {
-    const { themeClasses } = provideTheme(props, context)
+    ...makeThemeProps(),
+    ...makeTagProps(),
+  },
+
+  setup (props, { slots }) {
+    const { themeClasses } = useTheme(props)
 
     return () => {
+      if (!props.withBackground) return slots.default?.()
+
       return (
-        <div class={['v-theme-provider', themeClasses.value]}>
-          <div>{ context.slots.default?.() }</div>
-        </div>
+        <props.tag class={['v-theme-provider', themeClasses.value]}>
+          { slots.default?.() }
+        </props.tag>
       )
     }
   },

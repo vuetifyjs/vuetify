@@ -54,16 +54,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Paginasie-navigasie',
+      root: 'Paginasie-navigasie',
       next: 'Volgende bladsy',
       previous: 'Vorige bladsy',
       page: 'Gaan na bladsy {0}',
       currentPage: 'Huidige bladsy, Bladsy {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      item: 'Rating {0} of {1}',
     },
   },
 }

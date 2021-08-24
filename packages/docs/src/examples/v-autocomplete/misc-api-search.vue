@@ -3,7 +3,7 @@
     color="red lighten-2"
     dark
   >
-    <v-card-title class="headline red lighten-3">
+    <v-card-title class="text-h5 red lighten-3">
       Search for Public APIs
     </v-card-title>
     <v-card-text>
@@ -12,7 +12,7 @@
         class="grey--text text--lighten-3"
         href="https://github.com/toddmotto/public-apis"
         target="_blank"
-      >the Github repository</a>.
+      >the GitHub repository</a>.
     </v-card-text>
     <v-card-text>
       <v-autocomplete

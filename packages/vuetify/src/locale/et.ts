@@ -54,16 +54,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Pagination Navigation',
+      root: 'Pagination Navigation',
       next: 'Järgmine lehekülg',
       previous: 'Eelmine lehekülg',
       page: 'Mine lehele {0}',
       currentPage: 'Praegune leht, leht {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      item: 'Rating {0} of {1}',
     },
   },
 }

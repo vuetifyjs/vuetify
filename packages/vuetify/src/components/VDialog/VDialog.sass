@@ -1,106 +1,52 @@
-@import './_variables.scss'
+@import './index'
 
 // Block
 .v-dialog
-  border-radius: $dialog-border-radius
-  margin: $dialog-margin
-  overflow-y: auto
-  pointer-events: auto
-  transition: .3s map-get($transition, 'fast-in-fast-out')
-  width: 100%
-  z-index: inherit
-  +elevation($dialog-elevation)
-
-  &:not(.v-dialog--fullscreen)
-    max-height: $dialog-max-height
-
-  > *
-    width: 100%
-
-  > .v-card
-    > .v-card__title
-      font-size: $dialog-card-title-font-size
-      font-weight: $dialog-card-title-font-weight
-      letter-spacing: $dialog-card-title-letter-spacing
-      padding: $dialog-card-title-padding
-
-    > .v-card__text
-      padding: $dialog-card-text-padding
-
-    > .v-card__subtitle
-      padding: $dialog-card-subtitle-padding
-
-    > .v-card__actions
-      padding: $dialog-card-actions-padding
-
-// Element
-.v-dialog__content
+  z-index: $dialog-z-index
   align-items: center
-  display: flex
-  height: 100%
   justify-content: center
-  left: 0
-  pointer-events: none
-  position: fixed
-  top: 0
-  transition: .2s map-get($transition, 'fast-in-fast-out'), z-index 1ms
-  width: 100%
-  z-index: 6
-  outline: none
 
-.v-dialog__container
-  display: none
+  .v-overlay__content
+    max-height: $dialog-overlay-content-max-height
+    min-width: $dialog-overlay-content-min-width
+    max-width: $dialog-overlay-content-max-width
 
-  &--attached
-    display: inline
+    @include rounded($dialog-overlay-content-border-radius)
 
-// Modifier
-.v-dialog--animated
-  animation-duration: .15s
-  animation-name: animate-dialog
-  animation-timing-function: map-get($transition, 'fast-in-fast-out')
+    @media #{$dialog-overlay-content-mobile-breakpoint}
+      max-width: $dialog-overlay-content-mobile-max-width
+
+    > .v-card,
+    > .v-sheet
+      border-radius: inherit
+      overflow: hidden
+
+      @include elevation($dialog-elevation)
+
+    > .v-card
+      > .v-card-avatar
+        padding: $dialog-card-avatar-padding
+
+      > .v-card-header
+        padding: $dialog-card-header-padding
+
+        + .v-card-text
+          padding-top: $dialog-card-header-text-padding-top
+
+      > .v-card-text
+        font-size: inherit
+        letter-spacing: $dialog-card-text-letter-spacing
+        line-height: inherit
+        padding: $dialog-card-text-padding
 
 .v-dialog--fullscreen
-  border-radius: 0
-  margin: 0
-  height: 100%
-  position: fixed
-  overflow-y: auto
-  top: 0
-  left: 0
+  --v-scrollbar-offset: 0px
 
-  > .v-card
-    min-height: 100%
-    min-width: 100%
-    margin: 0 !important
-    padding: 0 !important
-
-.v-dialog--scrollable,
-.v-dialog--scrollable > form
-  display: flex
-
-  > .v-card
-    display: flex
-    flex: 1 1 100%
-    flex-direction: column
-    max-height: 100%
-    max-width: 100%
-
-    > .v-card__title,
-    > .v-card__actions
-      flex: 0 0 auto
-
-    > .v-card__text
-      backface-visibility: hidden
-      flex: 1 1 auto
-      overflow-y: auto
-
-@keyframes animate-dialog
-  0%
-    transform: scale(1)
-
-  50%
-    transform: scale(1.03)
-
-  100%
-    transform: scale(1)
+  .v-overlay__content
+    border-radius: 0
+    margin: 0
+    width: 100%
+    height: 100%
+    overflow-y: auto
+    top: 0
+    left: 0

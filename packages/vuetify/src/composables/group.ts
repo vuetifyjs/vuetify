@@ -1,10 +1,10 @@
 // Utilities
-import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef } from 'vue'
+import { computed, getCurrentInstance, inject, onBeforeUnmount, onMounted, provide, reactive, toRef } from 'vue'
 import { useProxiedModel } from './proxiedModel'
-import { consoleWarn, deepEqual, getUid, wrapInArray } from '@/util'
+import { consoleWarn, deepEqual, findChildren, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
-import type { InjectionKey, Ref, UnwrapRef } from 'vue'
+import type { ComponentInternalInstance, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
 
 interface GroupItem {
   id: number
@@ -15,25 +15,55 @@ interface GroupItem {
 interface GroupProps {
   modelValue?: unknown
   multiple?: boolean
-  mandatory?: boolean
+  mandatory?: boolean | 'force'
   max?: number
+  selectedClass?: string
 }
 
 interface GroupProvide {
-  register: (item: GroupItem, index?: number) => void
+  register: (item: GroupItem, cmp: ComponentInternalInstance) => void
   unregister: (id: number) => void
   select: (id: number, value: boolean) => void
   selected: Ref<any[]>
   isSelected: (id: number) => boolean
   prev: () => void
   next: () => void
+  selectedClass: Ref<string | undefined>
 }
+
+export const makeGroupProps = propsFactory({
+  modelValue: {
+    type: [Number, Boolean, String, Array, Object],
+    default: undefined,
+  },
+  multiple: Boolean,
+  mandatory: [Boolean, String] as PropType<boolean | 'force'>,
+  max: Number,
+  selectedClass: String,
+}, 'group')
+
+export const makeGroupItemProps = propsFactory({
+  value: {
+    type: [Number, Boolean, String, Object],
+    default: undefined,
+  },
+  disabled: Boolean,
+  selectedClass: String,
+}, 'group-item')
 
 // Composables
 export function useGroupItem (
-  props: { value?: unknown, index?: number, disabled?: boolean },
+  props: { value?: unknown, disabled?: boolean, selectedClass?: string },
   injectKey: InjectionKey<GroupProvide>,
 ) {
+  const vm = getCurrentInstance()
+
+  if (!vm) {
+    throw new Error(
+      '[Vuetify] useGroupItem composable must be used inside a component setup function'
+    )
+  }
+
   const group = inject(injectKey, null)
 
   if (!group) {
@@ -41,12 +71,14 @@ export function useGroupItem (
   }
 
   const id = getUid()
+  const value = toRef(props, 'value')
+  const disabled = toRef(props, 'disabled')
 
   group.register({
     id,
-    value: toRef(props, 'value'),
-    disabled: toRef(props, 'disabled'),
-  }, props.index)
+    value,
+    disabled,
+  }, vm)
 
   onBeforeUnmount(() => {
     group.unregister(id)
@@ -56,10 +88,15 @@ export function useGroupItem (
     return group.isSelected(id)
   })
 
+  const selectedClass = computed(() => isSelected.value && (group.selectedClass.value ?? props.selectedClass))
+
   return {
     isSelected,
     toggle: () => group.select(id, !isSelected.value),
     select: (value: boolean) => group.select(id, value),
+    selectedClass,
+    value,
+    disabled,
   }
 }
 
@@ -67,6 +104,7 @@ export function useGroup (
   props: GroupProps,
   injectKey: InjectionKey<GroupProvide>
 ) {
+  let isUnmounted = false
   const items = reactive<GroupItem[]>([])
   const selected = useProxiedModel(
     props,
@@ -84,30 +122,47 @@ export function useGroup (
     }
   )
 
-  function register (item: GroupItem, index?: number) {
+  const groupVm = getCurrentInstance()
+
+  function register (item: GroupItem, vm: ComponentInternalInstance) {
     // Is there a better way to fix this typing?
     const unwrapped = item as unknown as UnwrapRef<GroupItem>
-    if (index != null) items.splice(index, 0, unwrapped)
+
+    const children = findChildren(groupVm?.vnode)
+    const instances = children
+      .slice(1) // First one is group component itself
+      .filter(cmp => !!cmp.provides[injectKey as any]) // TODO: Fix in TS 4.4
+    const index = instances.indexOf(vm)
+
+    if (index > -1) items.splice(index, 0, unwrapped)
     else items.push(unwrapped)
   }
 
   function unregister (id: number) {
+    if (isUnmounted) return
+
     selected.value = selected.value.filter(v => v !== id)
 
-    if (props.mandatory && !selected.value.length) {
-      selected.value = [items[items.length - 1].id]
-    }
+    forceMandatoryValue()
 
     const index = items.findIndex(item => item.id === id)
     items.splice(index, 1)
   }
 
-  onMounted(() => {
-    // If mandatory and nothing is selected, then select first non-disabled item
+  // If mandatory and nothing is selected, then select first non-disabled item
+  function forceMandatoryValue () {
     const item = items.find(item => !item.disabled)
-    if (item && props.mandatory && !selected.value.length) {
+    if (item && props.mandatory === 'force' && !selected.value.length) {
       selected.value = [item.id]
     }
+  }
+
+  onMounted(() => {
+    forceMandatoryValue()
+  })
+
+  onBeforeUnmount(() => {
+    isUnmounted = true
   })
 
   function select (id: number, isSelected: boolean) {
@@ -146,18 +201,29 @@ export function useGroup (
     }
   }
 
-  function getOffsetId (offset: number) {
+  function step (offset: number) {
     // getting an offset from selected value obviously won't work with multiple values
     if (props.multiple) consoleWarn('This method is not supported when using "multiple" prop')
 
-    // If there is nothing selected, then next value is first item
-    if (!selected.value.length) return items[0].id
+    if (!selected.value.length) {
+      const item = items.find(item => !item.disabled)
+      item && (selected.value = [item.id])
+    } else {
+      const currentId = selected.value[0]
+      const currentIndex = items.findIndex(i => i.id === currentId)
 
-    const currentId = selected.value[0]
-    const currentIndex = items.findIndex(i => i.id === currentId)
-    const newIndex = (currentIndex + offset) % items.length
+      let newIndex = (currentIndex + offset) % items.length
+      let newItem = items[newIndex]
 
-    return items[newIndex].id
+      while (newItem.disabled && newIndex !== currentIndex) {
+        newIndex = (newIndex + offset) % items.length
+        newItem = items[newIndex]
+      }
+
+      if (newItem.disabled) return
+
+      selected.value = [items[newIndex].id]
+    }
   }
 
   const state = {
@@ -165,10 +231,10 @@ export function useGroup (
     unregister,
     selected,
     select,
-    prev: () => selected.value = [getOffsetId(items.length - 1)],
-    next: () => selected.value = [getOffsetId(1)],
-    step: (steps: number) => selected.value = [getOffsetId(steps)],
+    prev: () => step(items.length - 1),
+    next: () => step(1),
     isSelected: (id: number) => selected.value.includes(id),
+    selectedClass: computed(() => props.selectedClass),
   }
 
   provide(injectKey, state)
@@ -178,12 +244,12 @@ export function useGroup (
 
 function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
   const ids = []
-
   for (const item of items) {
-    if (
-      (item.value != null && modelValue.find(value => deepEqual(value, item.value))) ||
-      modelValue.includes(item.id)
-    ) {
+    if (item.value != null) {
+      if (modelValue.find(value => deepEqual(value, item.value))) {
+        ids.push(item.id)
+      }
+    } else if (modelValue.includes(item.id)) {
       ids.push(item.id)
     }
   }

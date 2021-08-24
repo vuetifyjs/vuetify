@@ -523,4 +523,62 @@ describe.skip('VCombobox.ts', () => {
 
     expect(change).toHaveBeenLastCalledWith(['foo'])
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/12351
+  it('should correctly handle duplicate items', async () => {
+    const { wrapper, change } = createMultipleCombobox({
+      chips: true,
+      multiple: true,
+      items: [
+        { text: 'foo', value: 'foo' },
+        { text: 'bar', value: 'bar' },
+      ],
+      value: [
+        { text: 'foo', value: 'foo' },
+      ],
+    })
+
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    input.trigger('focus')
+    element.value = 'foo'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toHaveBeenLastCalledWith([{ text: 'foo', value: 'foo' }])
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/6364
+  it('should not add duplicate chip after edit', async () => {
+    const { wrapper, change } = createMultipleCombobox({
+      chips: true,
+      multiple: true,
+      clearable: true,
+      items: ['foo', 'bar'],
+      value: ['foo', 'bar'],
+    })
+
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    // Dbl click chip at index 1
+    const chip = wrapper.findAll('.v-chip').at(1)
+    chip.trigger('dblclick')
+    expect(wrapper.vm.editingIndex).toBe(1)
+    expect(wrapper.vm.internalSearch).toBe('bar')
+
+    // Add a duplicate value - 'foo'
+    input.trigger('focus')
+    element.value = 'foo'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+    input.trigger('keydown.enter')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toHaveBeenLastCalledWith(['bar', 'foo'])
+  })
 })

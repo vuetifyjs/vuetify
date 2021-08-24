@@ -2,8 +2,7 @@
 import './VLayout.sass'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps, useRender } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 // Composables
 import { createLayout, makeLayoutProps } from '@/composables/layout'
@@ -11,18 +10,15 @@ import { createLayout, makeLayoutProps } from '@/composables/layout'
 export default defineComponent({
   name: 'VLayout',
 
-  props: makeProps(makeLayoutProps()),
+  props: makeLayoutProps(),
 
   setup (props, { slots }) {
     const { layoutClasses, getLayoutItem, items } = createLayout(props)
 
     useRender(() => (
-      <div
-        class={layoutClasses.value}
-        style={{
-          height: props.fullHeight ? '100vh' : undefined,
-        }}
-      >{ slots.default?.() }</div>
+      <div class={ layoutClasses.value }>
+        { slots.default?.() }
+      </div>
     ))
 
     return {

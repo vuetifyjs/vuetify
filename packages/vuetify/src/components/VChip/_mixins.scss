@@ -1,0 +1,56 @@
+@mixin chip-sizes {
+  @each $sizeName, $multiplier in $size-scales {
+    $size: map-get($chip-sizes, "font-size") + (2 * $multiplier) / 16;
+    $height: map-get($chip-sizes, "height") + (8 * $multiplier);
+    $padding: round($height / $chip-padding-ratio);
+
+    .v-chip--size-#{$sizeName} {
+      --v-chip-size: #{$size};
+      --v-chip-height: #{$height};
+      font-size: $size;
+      padding: 0 $padding;
+
+      .v-avatar {
+        --v-avatar-height: #{$height - 8};
+
+        @at-root #{selector-append('.v-chip--pill', &)} {
+          --v-avatar-height: #{$height};
+        }
+      }
+
+      .v-chip__prepend {
+        margin-inline-start: -$padding / 2;
+        margin-inline-end: $padding / 2;
+
+        @at-root #{selector-append('.v-chip--pill', &)} {
+          margin-inline-start: -$padding;
+        }
+      }
+
+      .v-chip__append {
+        margin-inline-end: -$padding / 2;
+        margin-inline-start: $padding / 2;
+
+        @at-root #{selector-append('.v-chip--pill', &)} {
+          margin-inline-end: -$padding;
+        }
+      }
+    }
+  }
+}
+
+@mixin chip-density($properties, $densities) {
+  @each $density, $multiplier in $densities {
+    $value: calc(var(--v-chip-height) + #{$multiplier * $spacer});
+
+    &.v-chip--density-#{$density} {
+      @if type-of($properties) == "list" {
+        @each $property in $properties {
+          #{$property}: $value;
+        }
+      } @else {
+        #{$properties}: $value;
+      }
+    }
+  }
+}

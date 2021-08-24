@@ -8,7 +8,7 @@
   max-height: 0px
   transition: inherit
 
-  @include border($divider-border-color, $divider-border-style, $divider-border-width)
+  @include border($divider-border...)
 
   &--vertical
     align-self: stretch
@@ -24,12 +24,7 @@
   &--inset
     &:not(.v-divider--vertical)
       max-width: $divider-inset-max-width
-
-      @include ltr()
-        margin-left: $divider-inset-margin
-
-      @include rtl()
-        margin-right: $divider-inset-margin
+      margin-inline-start: $divider-inset-margin
 
     &.v-divider--vertical
       margin-bottom: $divider-vertical-inset-margin-bottom

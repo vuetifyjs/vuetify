@@ -39,7 +39,7 @@ const loadMap = (componentName, group, fallback = {}) => {
 const getSources = api => {
   return ['props', 'events', 'slots'].reduce((arr, category) => {
     for (const item of api[category]) {
-      if (!arr.includes(item.source)) arr.push(item.source)
+      if (item.source && !arr.includes(item.source)) arr.push(item.source)
     }
     return arr
   }, [])
@@ -142,24 +142,25 @@ const getComponentApi = (componentName, locales) => {
   const props = Object.keys(component.props).reduce((arr, key) => {
     const prop = component.props[key]
 
-    if (!prop.default || typeof prop.default !== 'function') {
-      console.warn(`Prop ${key} of component ${componentName} does not have default function. Make sure the component uses makeProps function.`)
-      return arr
-    }
-
-    const type = getPropType(prop.type)
+    const type = getPropType(prop?.type)
 
     return [...arr, {
       name: kebabCase(key),
-      source: prop.source || kebabName,
-      default: getPropDefault(prop.default(), type),
+      source: prop?.source || kebabName,
+      default: getPropDefault(prop?.default, type),
       type,
+    }]
+  }, [])
+
+  const events = Object.keys(component.emits || []).reduce((arr, key) => {
+    return [...arr, {
+      name: key,
     }]
   }, [])
 
   const sassVariables = parseSassVariables(componentName)
 
-  const api = deepmerge(componentMap, { name: kebabName, props, sass: sassVariables, component: true })
+  const api = deepmerge(componentMap, { name: kebabName, props, events, sass: sassVariables, component: true })
 
   // Make sure things are sorted
   const categories = ['props', 'slots', 'events', 'functions']
@@ -167,7 +168,7 @@ const getComponentApi = (componentName, locales) => {
     componentMap[category] = sortBy(componentMap[category], 'name')
   }
 
-  return addComponentApiDescriptions(componentName, api, locales)
+  return addComponentApiDescriptions(kebabName, api, locales)
 }
 
 const getComposableApi = (composableName, locales) => {

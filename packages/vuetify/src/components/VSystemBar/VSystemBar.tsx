@@ -8,28 +8,29 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useTheme } from '@/composables/theme'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
-import { defineComponent } from 'vue'
-import { makeProps } from '@/util'
+import { defineComponent } from '@/util'
 
 export default defineComponent({
   name: 'VSystemBar',
 
-  props: makeProps({
+  props: {
     lightsOut: Boolean,
     window: Boolean,
+
     ...makeBorderProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
-  }),
+    ...makeThemeProps(),
+  },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme()
+    const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-system-bar')
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)

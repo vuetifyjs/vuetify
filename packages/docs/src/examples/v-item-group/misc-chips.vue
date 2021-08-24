@@ -23,16 +23,16 @@
 
       <v-divider class="my-2"></v-divider>
 
-      <v-item-group multiple>
+      <v-item-group multiple selected-class="purple--text">
         <v-subheader>Tags</v-subheader>
         <v-item
           v-for="n in 8"
           :key="n"
-          v-slot="{ active, toggle }"
+          v-slot="{ selected, selectedClass, toggle }"
         >
           <v-chip
-            active-class="purple--text"
-            :input-value="active"
+            :class="selectedClass"
+            :input-value="selected"
             @click="toggle"
           >
             Tag {{ n }}

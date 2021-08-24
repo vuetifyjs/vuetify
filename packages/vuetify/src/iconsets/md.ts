@@ -12,7 +12,7 @@ const aliases: IconAliases = {
   cancel: 'cancel',
   close: 'close',
   delete: 'cancel', // delete (e.g. v-chip close)
-  clear: 'clear',
+  clear: 'cancel',
   success: 'check_circle',
   info: 'info',
   warning: 'priority_high',

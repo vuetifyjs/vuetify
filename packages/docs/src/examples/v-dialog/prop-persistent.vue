@@ -16,7 +16,7 @@
         </v-btn>
       </template>
       <v-card>
-        <v-card-title class="headline">
+        <v-card-title class="text-h5">
           Use Google's location service?
         </v-card-title>
         <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>

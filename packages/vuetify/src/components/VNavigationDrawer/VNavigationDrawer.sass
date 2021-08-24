@@ -14,40 +14,41 @@
   transition-property: $navigation-drawer-transition-property
   transition-timing-function: $navigation-drawer-transition-timing-function
   will-change: $navigation-drawer-will-change
+  position: fixed
 
   @include border($navigation-drawer-border...)
   @include elevation($navigation-drawer-elevation)
-  @include position($navigation-drawer-positions)
   @include rounded($navigation-drawer-border-radius)
+  @include theme($navigation-drawer-theme...)
 
   &--absolute
-    z-index: $navigation-drawer-absolute-z-index
+    position: absolute
 
-  &--fixed
-    z-index: $navigation-drawer-fixed-z-index
+  &--floating
+    border-color: transparent
 
   &--rounded
     @include rounded($navigation-drawer-rounded-border-radius)
 
   &--start
+    border-inline-end-width: $navigation-drawer-border-thin-width
+
     @include ltr()
-      border-right-width: $navigation-drawer-border-thin-width
       left: 0
       right: auto
 
     @include rtl()
-      border-left-width: $navigation-drawer-border-thin-width
       left: auto
       right: 0
 
   &--end
+    border-inline-start-width: $navigation-drawer-border-thin-width
+
     @include ltr()
-      border-left-width: $navigation-drawer-border-thin-width
       left: auto
       right: 0
 
     @include rtl()
-      border-right-width: $navigation-drawer-border-thin-width
       left: 0
       right: auto
 

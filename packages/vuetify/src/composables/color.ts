@@ -5,14 +5,14 @@ import { isCssColor } from '@/util'
 // Types
 import type { CSSProperties, Ref } from 'vue'
 
-type ColorValue = string | null | undefined
+type ColorValue = string | false | null | undefined
 
-type TextColorData = {
+export interface TextColorData {
   textColorClasses: Ref<string[]>
   textColorStyles: Ref<CSSProperties>
 }
 
-type BackgroundColorData = {
+export interface BackgroundColorData {
   backgroundColorClasses: Ref<string[]>
   backgroundColorStyles: Ref<CSSProperties>
 }

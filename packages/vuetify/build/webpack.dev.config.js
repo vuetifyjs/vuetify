@@ -9,7 +9,6 @@ const baseWebpackConfig = require('./webpack.base.config')
 const resolve = file => path.resolve(__dirname, file)
 
 module.exports = merge(baseWebpackConfig, {
-  target: 'web',
   entry: ['./dev/index.js'],
   output: {
     filename: '[name].js',
@@ -17,7 +16,13 @@ module.exports = merge(baseWebpackConfig, {
     library: 'Vuetify'
   },
   resolve: {
-    alias: { vuetify$: resolve('../src/entry-bundler.ts') }
+    alias: {
+      vuetify$: resolve('../src/entry-bundler.ts'),
+      'vuetify/src': resolve('../src/'),
+      vue$: require.resolve('vue/dist/vue.esm-bundler.js'),
+      'vite-ssr$': require.resolve('vite-ssr/vue/entry-client.js'),
+    },
+    symlinks: false,
   },
   module: {
     rules: [
@@ -63,11 +68,18 @@ module.exports = merge(baseWebpackConfig, {
     ]
   },
   devServer: {
-    contentBase: resolve('../dev'),
-    publicPath: '/',
+    historyApiFallback: {
+      rewrites: [
+        { from: /./, to: '/index.webpack.html' },
+      ],
+    },
+    static: resolve('../dev'),
     host: process.env.HOST || 'localhost',
     port: process.env.PORT || '8080',
-    disableHostCheck: true,
+    allowedHosts: 'all',
+    devMiddleware: {
+      index: 'index.webpack.html',
+    }
   },
   plugins: [
     new VueLoader.VueLoaderPlugin(),

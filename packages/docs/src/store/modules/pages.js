@@ -2,14 +2,14 @@
 import { make } from 'vuex-pathify'
 
 // Data
-import team from '@/data/page-to-api'
+import pageToApi from '@/data/page-to-api'
 
 const state = {
   frontmatter: {},
   pages: {},
   toc: [],
   md: undefined,
-  pageToApi: team,
+  pageToApi,
 }
 
 const mutations = make.mutations(state)

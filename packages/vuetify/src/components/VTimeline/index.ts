@@ -1,11 +1,2 @@
-import VTimeline from './VTimeline'
-import VTimelineItem from './VTimelineItem'
-
-export { VTimeline, VTimelineItem }
-
-export default {
-  $_vuetify_subcomponents: {
-    VTimeline,
-    VTimelineItem,
-  },
-}
+export { default as VTimeline } from './VTimeline'
+export { default as VTimelineItem } from './VTimelineItem'
