@@ -2,6 +2,7 @@
 
 import { CenteredGrid } from '@/../cypress/templates'
 import { VLocaleProvider } from '@/components'
+import { defineComponent, ref } from 'vue'
 import VProgressLinear from '../VProgressLinear'
 
 describe('VProgressLinear', () => {
@@ -78,12 +79,11 @@ describe('VProgressLinear', () => {
   it('supports bufferValue prop', () => {
     cy.mount(() => (
       <CenteredGrid width="100px">
-        <VProgressLinear modelValue={25} bufferValue={50} />
+        <VProgressLinear modelValue={25} stream bufferValue={50} />
       </CenteredGrid>
     ))
       .get('.v-progress-linear__background')
-      .should('have.css', 'width', '25px')
-      .should('have.css', 'left', '25px')
+      .should('have.css', 'width', '50px')
   })
 
   it('supports height prop', () => {
@@ -107,15 +107,18 @@ describe('VProgressLinear', () => {
   })
 
   it('supports clickable prop', () => {
-    cy.mount(() => (
-      <CenteredGrid width="100px">
-        <VProgressLinear modelValue={0} clickable />
-      </CenteredGrid>
-    ))
+    cy.mount(defineComponent(() => {
+      const model = ref(0)
+      return () => (
+        <CenteredGrid width="100px">
+          <VProgressLinear v-model={ model.value } clickable />
+        </CenteredGrid>
+      )
+    }))
       .get('.v-progress-linear')
       .click('center')
       .get('.v-progress-linear__determinate')
-      .should('have.css', 'width', '49.5px')
+      .should('have.css', 'width', '50px')
   })
 
   it('supports default slot', () => {
@@ -123,7 +126,7 @@ describe('VProgressLinear', () => {
       <CenteredGrid width="100px">
         <VProgressLinear modelValue={25} height={20}>
           {{
-            default: (props: any) => <div>{ props.modelValue}%</div>,
+            default: (props: any) => <div>{ props.value }%</div>,
           }}
         </VProgressLinear>
       </CenteredGrid>
