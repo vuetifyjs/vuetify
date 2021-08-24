@@ -2,7 +2,7 @@
 import './VCounter.sass'
 
 // Utilities
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 
 export const VCounter = defineComponent({
   name: 'VCounter',
@@ -13,17 +13,25 @@ export const VCounter = defineComponent({
     max: [Number, String],
     value: {
       type: [Number, String],
-      default: undefined,
+      default: 0,
     },
   },
 
   setup (props, { slots }) {
+    const counter = computed(() => {
+      return props.max ? `${props.value} / ${props.max}` : String(props.value)
+    })
+
     return () => {
       return (
         <div class="v-counter">
           { slots.default
-            ? slots.default()
-            : props.max ? `${props.value} / ${props.max}` : String(props.value)
+            ? slots.default({
+              counter: counter.value,
+              max: props.max,
+              value: props.value,
+            })
+            : counter.value
           }
         </div>
       )
