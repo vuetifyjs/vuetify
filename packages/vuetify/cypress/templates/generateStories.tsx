@@ -110,7 +110,7 @@ export const generate = ({ props, stories, component }: GenerateConfiguration) =
       { exampleStories && exampleStories.map(s => s.mount) }
       <h2 class="mx-4 mt-10 mb-4">Props</h2>
       { exampleProps && exampleProps.map(s => s.mount) }
-    </>)
+    </>).percySnapshot()
   })
 }
 

@@ -11,22 +11,34 @@ const anchor = {
 
 // TODO: generate these from types
 const colors = ['success', 'info', 'warning', 'error', 'invalid']
-const sizes = ['x-small', 'small', 'default', 'large', 'x-large']
+const sizes = ['x-small', 'small', 'default', 'large', 'x-large'] as const
+const densities = ['default', 'comfortable', 'compact'] as const
+const variants = ['contained', 'outlined', 'plain', 'text', 'contained-text']
 const props = {
   color: colors,
-  size: sizes,
+  variant: variants,
   disabled: false,
-  plain: false,
-  loading: false,
-  icon: true,
+  // loading: false,
 }
 
 const stories = {
   'Default button': <VBtn>Basic button</VBtn>,
   'Small success button': <VBtn color="success" size="small">Completed!</VBtn>,
-  'Large, plain button w/ error': <VBtn color="error" plain size="large">Whoops</VBtn>,
-  'Loading button': <VBtn loading v-slot={ { loader: <span>Loading...</span> } }></VBtn>,
-  Icon: <VBtn icon color="pink"></VBtn>,
+  'Large, plain button w/ error': <VBtn color="error" variant="plain" size="large">Whoops</VBtn>,
+  // 'Loading button': <VBtn loading v-slots={ { loader: <span>Loading...</span> } }></VBtn>,
+  Icon: <VBtn icon="mdi-vuetify" color="pink"></VBtn>,
+  'Density + size': (
+    <div class="d-flex flex-column" style="gap: 0.4rem">
+      { densities.map(density => (
+        <>
+          <h5>{ density }</h5>
+          <div class="d-flex" style="gap: 0.8rem">
+            { sizes.map(size => <VBtn size={ size } density={ density }>{ size }</VBtn>) }
+          </div>
+        </>
+      )) }
+    </div>
+  ),
 }
 
 // Actual tests
@@ -148,22 +160,6 @@ describe('VBtn', () => {
     })
   })
 
-  describe('retainFocusOnClick', () => {
-    it('when true, the button has focus', () => {
-      cy.mount(<VBtn retainFocusOnClick>My button</VBtn>)
-        .get('button')
-        .click()
-        .should('have.focus')
-    })
-
-    it.skip('when false, the button does not capture focus', () => {
-      cy.mount(<VBtn retainFocusOnClick={ false }>My button</VBtn>)
-        .get('button')
-        .click()
-        .should('not.have.focus')
-    })
-  })
-
   describe.skip('loading', () => {
     it('when using the loader slot, do not show the progress indicator', () => {
       cy.mount(() => (
@@ -201,10 +197,10 @@ describe('VBtn', () => {
   })
 
   // `href` prop is not implemented yet.
-  describe.skip('href', () => {
+  describe('href', () => {
     it('should render an <a> tag when using href prop', () => {
       cy.mount(<VBtn href={ anchor.href }>Click me</VBtn>)
-        .get('button')
+        .get('.v-btn')
         .click()
         .get('a') // currently not rendering the <a> tag at all
         .should('contain.text', 'Click me')
@@ -263,24 +259,10 @@ describe('VBtn', () => {
         .get('button')
         .should('not.have.class', 'v-btn--variant-plain')
     })
-
-    // retainFocusOnClick is not implemented.
-    it.skip('retainFocusOnClick', () => {
-      cy.mount(<VBtn retainFocusOnClick>My button</VBtn>)
-        .get('button')
-        .click()
-        .should('have.focus')
-        .get('body')
-        .click('bottomRight')
-        .setProps({ retainFocusOnClick: false })
-        .get('button')
-        .click()
-        .should('not.have.focus')
-    })
   })
 })
 
 // Useful to preview all of the variants and pre-made examples
-describe.skip('Showcase', { viewportHeight: 1000, viewportWidth: 1000 }, () => {
+describe('Showcase', { viewportHeight: 1130, viewportWidth: 700 }, () => {
   generate({ stories, props, component: VBtn })
 })
