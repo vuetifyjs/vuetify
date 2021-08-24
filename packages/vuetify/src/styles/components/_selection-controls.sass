@@ -3,9 +3,11 @@
 // Theme
 +theme(v-input--selection-controls) using ($material)
   &.v-input--is-disabled:not(.v-input--indeterminate)
-    .v-icon
+    :not(.v-label--is-disabled) .v-icon
       // needed for helper override
       color: map-deep-get($material, 'selection-controls', 'disabled') !important
+    .v-label--is-disabled .v-icon
+      color: map-deep-get($material, 'selection-controls', 'disabled')
 
 .v-input--selection-controls
   margin-top: $input-top-spacing
