@@ -24,5 +24,40 @@ describe('VBtn', () => {
           expect(subject).to.have.class('bg-' + colors[idx])
         })
       })
+      .percySnapshot()
+  })
+
+  it('supports the rounded property', () => {
+    const values = ['0', true, 'xl']
+
+    cy.mount(() => (
+      <CenteredGrid width="200px">
+        { values.map(value => (
+          <VBtn rounded={value}>rounded {value.toString()}</VBtn>
+        )) }
+      </CenteredGrid>
+    )).percySnapshot()
+  })
+
+  it('should render <a> tag when using href property', () => {
+    cy.mount(() => (
+      <CenteredGrid width="200px">
+        <VBtn href="http://www.google.com">href button</VBtn>
+      </CenteredGrid>
+    ))
+      .get('a.v-btn')
+      .should('have.attr', 'href')
+      .should('not.be.empty')
+      .and('contain', 'http://www.google.com')
+  })
+
+  it('supports tag property', () => {
+    cy.mount(() => (
+      <CenteredGrid width="200px">
+        <VBtn tag="div">href button</VBtn>
+      </CenteredGrid>
+    ))
+      .get('div.v-btn')
+      .should('exist')
   })
 })

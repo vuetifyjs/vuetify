@@ -63,7 +63,7 @@
     "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\"",
     "cy:open": "cypress open-ct",
-    "cy:run": "cypress run-ct"
+    "cy:run": "percy exec -- cypress run-ct"
   },
   "devDependencies": {
     "@cypress/vue": "^3.0.3",
@@ -72,6 +72,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/vue-fontawesome": "^3.0.0-3",
     "@mdi/font": "^5.9.55",
+    "@percy/cli": "^1.0.0-beta.58",
+    "@percy/cypress": "^3.1.0",
     "@rollup/plugin-alias": "^3.1.2",
     "@types/jest": "^26.0.14",
     "@types/node": "^14.11.10",
@@ -79,7 +81,7 @@
     "@vitejs/plugin-vue": "^1.2.3",
     "@vitejs/plugin-vue-jsx": "^1.1.6",
     "@vue/babel-plugin-jsx": "^1.0.6",
-    "@vue/test-utils": "2.0.0-rc.12",
+    "@vue/test-utils": "2.0.0-rc.9",
     "@vueuse/head": "^0.6.0",
     "autoprefixer": "^10.3.1",
     "babel-loader": "^8.0.6",
@@ -89,7 +91,7 @@
     "babel-polyfill": "^6.26.0",
     "concurrently": "^4.1.1",
     "cssnano": "^4.1.10",
-    "cypress": "^7.4.0",
+    "cypress": "^7.7.0",
     "cypress-file-upload": "^5.0.8",
     "deepmerge": "^4.2.2",
     "dotenv": "^8.0.0",
