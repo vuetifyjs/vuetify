@@ -25,6 +25,8 @@ Banners can contain one to two lines of text, to which actions and icons can be 
 
 - [v-banner](/api/v-banner)
 
+<api-section name="v-banner" />
+
 ## Examples
 
 ### Props

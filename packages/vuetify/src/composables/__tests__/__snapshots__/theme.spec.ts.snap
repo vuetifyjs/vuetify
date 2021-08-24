@@ -43,7 +43,8 @@ exports[`createTheme should create style element 1`] = `
       --v-medium-emphasis-opacity: 0.6;
       --v-disabled-opacity: 0.38;
       --v-activated-opacity: 0.12;
-      --v-hover-opacity: 0.04;
+      --v-idle-opacity: 0.04;
+      --v-hover-opacity: 0.12;
       --v-focus-opacity: 0.12;
       --v-selected-opacity: 0.08;
       --v-dragged-opacity: 0.08;
@@ -89,6 +90,7 @@ exports[`createTheme should create style element 1`] = `
       --v-medium-emphasis-opacity: 0.6;
       --v-disabled-opacity: 0.38;
       --v-activated-opacity: 0.12;
+      --v-idle-opacity: 0.1;
       --v-hover-opacity: 0.04;
       --v-focus-opacity: 0.12;
       --v-selected-opacity: 0.08;

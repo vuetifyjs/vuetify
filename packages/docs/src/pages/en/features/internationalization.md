@@ -52,6 +52,12 @@ app.use(vuetify)
 app.mount('#app')
 ```
 
+## API
+
+- [internationalization](/api/internationalization)
+
+<api-section page="features/internationalization" />
+
 ## Scoped languages
 
 Using the `v-locale-provider` component it is possible to scope a portion of your application to a different locale than the default one.

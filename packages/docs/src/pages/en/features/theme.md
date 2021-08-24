@@ -16,6 +16,12 @@ Easily change the colors of your application programmatically. Vuetify supports 
 
 <promoted-ad slug="vuemastery-themes" />
 
+### API
+
+- [v-theme-provider](/api/v-theme-provider)
+
+<api-section page="features/theme" />
+
 ## Setup
 
 Vuetify comes with two themes pre-installed, `light` and `dark`. To set the default theme of your application, use the **defaultTheme** option.

@@ -24,6 +24,7 @@ export default Vue.extend({
       type: Boolean as PropType<boolean | undefined>,
       default: undefined,
     },
+    exactPath: Boolean,
     exactActiveClass: String,
     link: Boolean,
     href: [String, Object],
@@ -123,6 +124,7 @@ export default Vue.extend({
         Object.assign(data.props, {
           to: this.to,
           exact,
+          exactPath: this.exactPath,
           activeClass,
           exactActiveClass,
           append: this.append,

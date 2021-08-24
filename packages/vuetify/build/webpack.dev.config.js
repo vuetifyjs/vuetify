@@ -68,10 +68,18 @@ module.exports = merge(baseWebpackConfig, {
     ]
   },
   devServer: {
+    historyApiFallback: {
+      rewrites: [
+        { from: /./, to: '/index.webpack.html' },
+      ],
+    },
     static: resolve('../dev'),
     host: process.env.HOST || 'localhost',
     port: process.env.PORT || '8080',
-    firewall: false,
+    allowedHosts: 'all',
+    devMiddleware: {
+      index: 'index.webpack.html',
+    }
   },
   plugins: [
     new VueLoader.VueLoaderPlugin(),

@@ -1,5 +1,6 @@
 // Defaults
-$dialog-z-index: 2400 !default;
+$dialog-elevation: 24 !default;
+$dialog-z-index: $dialog-elevation * 100 !default;
 $dialog-card-avatar-padding: 0 !default;
 $dialog-card-header-padding: 14px 24px 0 !default;
 $dialog-card-header-text-padding-top: 10px !default;

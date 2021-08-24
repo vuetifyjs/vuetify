@@ -2,7 +2,7 @@ module.exports = {
   'v-progress-linear': {
     events: [
       {
-        name: 'change',
+        name: 'update:modelValue',
         value: 'number',
       },
     ],
@@ -11,6 +11,7 @@ module.exports = {
         name: 'default',
         props: {
           value: 'number',
+          buffer: 'number',
         },
       },
     ],

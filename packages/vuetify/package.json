@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.0.0-alpha.9",
+  "version": "3.0.0-alpha.10",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -66,7 +66,7 @@
     "cy:run": "percy exec -- cypress run-ct"
   },
   "devDependencies": {
-    "@cypress/vue": "^3.0.1",
+    "@cypress/vue": "^3.0.3",
     "@cypress/webpack-dev-server": "^1.4.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
@@ -81,9 +81,9 @@
     "@vitejs/plugin-vue": "^1.2.3",
     "@vitejs/plugin-vue-jsx": "^1.1.6",
     "@vue/babel-plugin-jsx": "^1.0.6",
-    "@vue/test-utils": "2.0.0-beta.13",
+    "@vue/test-utils": "2.0.0-rc.12",
     "@vueuse/head": "^0.6.0",
-    "autoprefixer": "^9.6.1",
+    "autoprefixer": "^10.3.1",
     "babel-loader": "^8.0.6",
     "babel-plugin-add-import-extension": "^1.5.1",
     "babel-plugin-module-resolver": "^4.0.0",
@@ -92,6 +92,7 @@
     "concurrently": "^4.1.1",
     "cssnano": "^4.1.10",
     "cypress": "^7.7.0",
+    "cypress-file-upload": "^5.0.8",
     "deepmerge": "^4.2.2",
     "dotenv": "^8.0.0",
     "eslint-plugin-cypress": "^2.11.3",
@@ -115,7 +116,7 @@
     "vuetify-loader": "^1.7.2"
   },
   "peerDependencies": {
-    "vue": "^3.1.4"
+    "vue": "^3.2.0-beta.7"
   },
   "publishConfig": {
     "access": "public"

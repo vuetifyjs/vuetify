@@ -1,60 +1,48 @@
-@import './_variables'
-@import '../../styles/styles.sass'
-
-+theme(v-file-input) using ($material)
-  .v-file-input__text
-    color: map-deep-get($material, 'text', 'primary')
-
-    &--placeholder
-      color: map-deep-get($material, 'text', 'secondary')
-
-  &.v-input--is-disabled
-    .v-file-input__text
-      color: map-deep-get($material, 'text', 'disabled')
-
-      .v-file-input__text--placeholder
-        color: map-deep-get($material, 'text', 'disabled')
+@import ./index
 
 // Block
 .v-file-input
   input[type="file"]
     left: 0
+    max-width: 0
     opacity: 0
     pointer-events: none
     position: absolute
-    max-width: 0
     width: 0
 
 // Element
-.v-file-input .v-file-input__text
-  align-items: center
-  align-self: stretch
-  display: flex
-  flex-wrap: wrap
-  width: 100%
+.v-file-input
+  .v-input__control
+    min-width: 0
 
-  &.v-file-input__text--chips
-    flex-wrap: wrap
+  .v-input__field
+    max-width: 100%
+    min-width: 0
 
-  .v-chip
-    margin: $file-input-chip-margin
+  .v-input__input
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
 
-.v-file-input .v-text-field__slot
-  min-height: $file-input-slot-min-height
+    &.v-file-input--chips
+      flex-wrap: wrap
+
+    .v-chip
+      margin-inline-end: $file-input-chip-margin-inline-end
 
 .v-file-input
-  &.v-input--dense
-    .v-text-field__slot
-      min-height: $file-input-slot-dense-min-height
+  .v-file-input__clearable
+    opacity: 0
 
-.v-file-input.v-text-field--filled:not(.v-text-field--single-line)
-  .v-file-input__text
-    padding-top: $file-input-filled-padding-top
+  &.v-input--dirty
+    .v-input__control:hover
+      .v-file-input__clearable
+        opacity: 1
 
-.v-file-input.v-text-field--outlined
-  .v-text-field__slot
-    padding: $file-input-outlined-padding
+  &.v-input--focused.v-input--dirty
+    .v-file-input__clearable
+      opacity: 1
 
-  &.v-input--dense
-    .v-text-field__slot
-      padding: $file-input-outlined-dense-padding
+
+.v-file-input.v-input--disabled
+  pointer-events: none

@@ -1,4 +1,1 @@
-import VFileInput from './VFileInput'
-
-export { VFileInput }
-export default VFileInput
+export { default as VFileInput } from './VFileInput'

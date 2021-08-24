@@ -1,5 +1,8 @@
-import type { ComponentInternalInstance, Ref, Slots, VNode, VNodeChild } from 'vue'
+// Utilities
 import { camelize, Fragment, isRef, ref } from 'vue'
+
+// Types
+import type { ComponentInternalInstance, ComponentPublicInstance, Ref, Slots, VNode, VNodeChild } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
@@ -119,6 +122,8 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
     return undefined
   } else if (isNaN(+str!)) {
     return String(str)
+  } else if (!isFinite(+str!)) {
+    return undefined
   } else {
     return `${Number(str)}${unit}`
   }
@@ -126,6 +131,10 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
 
 export function isObject (obj: any): obj is object {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
+}
+
+export function isComponentInstance (obj: any): obj is ComponentPublicInstance {
+  return obj?.$el
 }
 
 // KeyboardEvent.keyCode aliases
@@ -173,19 +182,27 @@ export function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }
 
-export function extract (obj: Dictionary<unknown>, properties: string[]) {
-  const extracted: Dictionary<unknown> = {}
-  const rest: Dictionary<unknown> = {}
+type MaybePick<
+  T extends object,
+  U extends Extract<keyof T, string>
+> = Record<string, unknown> extends T ? Partial<Pick<T, U>> : Pick<T, U>
 
-  Object.entries(obj).forEach(([key, value]) => {
-    if (properties.includes(key)) {
-      extracted[key] = value
+export function pick<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, paths: U[]): [MaybePick<T, U>, Omit<T, U>] {
+  const found = Object.create(null)
+  const rest = Object.create(null)
+
+  for (const key in obj) {
+    if (paths.includes(key as U)) {
+      found[key] = obj[key]
     } else {
-      rest[key] = value
+      rest[key] = obj[key]
     }
-  })
+  }
 
-  return [extracted, rest]
+  return [found, rest]
 }
 
 /**
@@ -212,7 +229,7 @@ export function groupItems<T extends any = any> (
   const key = groupBy[0]
   const groups: ItemGroup<T>[] = []
   let current
-  for (var i = 0; i < items.length; i++) {
+  for (let i = 0; i < items.length; i++) {
     const item = items[i]
     const val = getObjectValueByPath(item, key, null)
     if (current !== val) {
@@ -267,6 +284,11 @@ export function sortItems<T extends any, K extends keyof T> (
       // Check if both cannot be evaluated
       if (sortA === null && sortB === null) {
         continue
+      }
+
+      // Dates should be compared numerically
+      if (sortA instanceof Date && sortB instanceof Date) {
+        return sortA.getTime() - sortB.getTime()
       }
 
       [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
@@ -345,13 +367,12 @@ export function chunk (str: string, size = 1) {
   return chunked
 }
 
-export function humanReadableFileSize (bytes: number, binary = false): string {
-  const base = binary ? 1024 : 1000
+export function humanReadableFileSize (bytes: number, base: 1000 | 1024 = 1000): string {
   if (bytes < base) {
     return `${bytes} B`
   }
 
-  const prefix = binary ? ['Ki', 'Mi', 'Gi'] : ['k', 'M', 'G']
+  const prefix = base === 1024 ? ['Ki', 'Mi', 'Gi'] : ['k', 'M', 'G']
   let unit = -1
   while (Math.abs(bytes) >= base && unit < prefix.length - 1) {
     bytes /= base

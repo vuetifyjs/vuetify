@@ -142,12 +142,12 @@ const getComponentApi = (componentName, locales) => {
   const props = Object.keys(component.props).reduce((arr, key) => {
     const prop = component.props[key]
 
-    const type = getPropType(prop.type)
+    const type = getPropType(prop?.type)
 
     return [...arr, {
       name: kebabCase(key),
-      source: prop.source || kebabName,
-      default: getPropDefault(prop.default, type),
+      source: prop?.source || kebabName,
+      default: getPropDefault(prop?.default, type),
       type,
     }]
   }, [])

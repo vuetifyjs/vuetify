@@ -25,6 +25,8 @@ The `v-skeleton-loader` component provides a user with a visual indicator that c
 
 - [v-skeleton-loader](/api/v-skeleton-loader)
 
+<api-section page="components/skeleton-loaders" />
+
 ## Examples
 
 ### Misc

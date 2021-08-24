@@ -4,7 +4,7 @@
     justify="center"
   >
     <v-hover
-      v-slot="{ hover }"
+      v-slot="{ hover, props }"
       v-bind="$attrs"
       v-on="$listeners"
     >
@@ -14,6 +14,7 @@
         height="200"
         max-width="350"
         class="mx-auto"
+        v-bind="props"
       >
         <v-card-text class="my-4 text-center text-h6">
           Hover over me!

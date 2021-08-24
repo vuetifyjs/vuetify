@@ -25,6 +25,8 @@ The internal `v-form` component makes it easy to add validation to form inputs. 
 
 - [v-form](/api/v-form)
 
+<api-section page="components/forms" />
+
 ## Examples
 
 ### Props

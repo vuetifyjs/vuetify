@@ -1,3 +1,4 @@
+import 'cypress-file-upload'
 import type { mount as cyMount } from '@cypress/vue'
 import type { SnapshotOptions } from '@percy/core'
 

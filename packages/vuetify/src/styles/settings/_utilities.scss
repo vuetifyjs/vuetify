@@ -202,13 +202,13 @@ $utilities: map-deep-merge(
     ),
     "margin-start": (
       responsive: true,
-      property: (ltr: margin-left, rtl: margin-right),
+      property: margin-inline-start,
       class: ms,
       values: map-merge($spacers, (auto: auto))
     ),
     "margin-end": (
       responsive: true,
-      property: (ltr: margin-right, rtl: margin-left),
+      property: margin-inline-end,
       class: me,
       values: map-merge($spacers, (auto: auto))
     ),
@@ -258,13 +258,13 @@ $utilities: map-deep-merge(
     ),
     "negative-margin-start": (
       responsive: true,
-      property: (ltr: margin-left, rtl: margin-right),
+      property: margin-inline-start,
       class: ms,
       values: $negative-spacers
     ),
     "negative-margin-end": (
       responsive: true,
-      property: (ltr: margin-right, rtl: margin-left),
+      property: margin-inline-end,
       class: me,
       values: $negative-spacers
     ),
@@ -314,13 +314,13 @@ $utilities: map-deep-merge(
     ),
     "padding-start": (
       responsive: true,
-      property: (ltr: padding-left, rtl: padding-right),
+      property: padding-inline-start,
       class: ps,
       values: $spacers
     ),
     "padding-end": (
       responsive: true,
-      property: (ltr: padding-right, rtl: padding-left),
+      property: padding-inline-end,
       class: pe,
       values: $spacers
     ),

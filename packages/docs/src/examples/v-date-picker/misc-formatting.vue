@@ -74,8 +74,8 @@
 <script>
   export default {
     data: vm => ({
-      date: new Date().toISOString().substr(0, 10),
-      dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
+      date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      dateFormatted: vm.formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)),
       menu1: false,
       menu2: false,
     }),

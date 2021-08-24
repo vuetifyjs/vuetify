@@ -49,6 +49,7 @@
   &-enter-active,
   &-leave-active {
     transition-property: transform, opacity;
+    pointer-events: none;
   }
 
   &-enter-from, &-leave-to {

@@ -27,6 +27,8 @@ The `v-rating` component provides a simple interface for gathering user feedback
 
 - [v-rating](/api/v-rating)
 
+<api-section page="components/ratings" />
+
 ## Examples
 
 ### Props

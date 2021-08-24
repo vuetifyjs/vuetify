@@ -31,6 +31,8 @@ related:
 * [v-card-text](/api/v-card-text/)
 * [v-card-title](/api/v-card-title/)
 
+<api-section page="components/cards" />
+
 ## Functional Components
 
 The `v-card` component has multiple special elements called **functional** components; very fast and stateless. Visit the official Vue documentation for more information on [functional components](https://v3.vuejs.org/guide/render-function.html#functional-components).

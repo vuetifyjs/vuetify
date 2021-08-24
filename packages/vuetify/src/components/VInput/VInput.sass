@@ -1,135 +1,42 @@
-@import './_variables.scss'
-
-/* Theme */
-+theme(v-input) using ($material)
-  color: map-deep-get($material, 'text', 'primary')
-
-  input,
-  textarea
-    color: map-deep-get($material, 'text', 'primary')
-
-  input::placeholder,
-  textarea::placeholder
-    color: map-deep-get($material, 'text', 'disabled')
-
-  &--is-disabled
-    color: map-deep-get($material, 'text', 'disabled')
-
-    input,
-    textarea
-      color: map-deep-get($material, 'text', 'disabled')
+@import ./index
 
 .v-input
-  align-items: flex-start
-  display: flex
+  display: grid
   flex: 1 1 auto
-  font-size: $input-font-size
-  letter-spacing: $input-letter-spacing
-  max-width: 100%
-  text-align: $input-text-align
+  grid-template-areas: "prepend control append" "a messages b"
+  grid-template-columns: max-content auto max-content
+  grid-template-rows: auto auto
 
-  .v-progress-linear
-    top: calc(100% - 1px)
-    left: 0
+  @at-root
+    @include density('v-input', $input-density) using ($modifier)
+      --v-input-control-height: #{$input-control-height + $modifier}
 
-  input
-    max-height: $input-max-height
+.v-input__details
+  align-items: flex-end
+  // TODO: fix this when text-fields are implemented
+  color: rgba(0, 0, 0, .6)
+  display: flex
+  font-size: $input-details-font-size
+  font-weight: $input-details-font-weight
+  grid-area: messages
+  letter-spacing: $input-details-letter-spacing
+  line-height: $input-details-line-height
+  min-height: $input-details-min-height
+  padding-top: $input-details-padding-above
+  padding-inline-start: $input-details-padding-inline
+  padding-inline-end: $input-details-padding-inline
+  justify-content: space-between
 
-  input,
-  textarea
-    // Remove Firefox red outline
-    &:invalid
-      box-shadow: none
+.v-input__prepend,
+.v-input__append
+  display: flex
+  align-items: center
+  align-self: center
 
-    &:focus,
-    &:active
-      outline: none
+.v-input__prepend
+  margin-inline-end: $input-affix-margin-inside
+  grid-area: prepend
 
-  .v-label
-    height: $input-label-height
-    line-height: $input-label-height
-    letter-spacing: $input-label-letter-spacing
-
-  &__append-outer,
-  &__prepend-outer
-    display: inline-flex
-    margin-bottom: 4px
-    margin-top: 4px
-    line-height: 1
-
-    .v-icon
-      user-select: none
-
-  &__append-outer
-    +ltr()
-      margin-left: $input-prepend-append-outer-margin
-
-    +rtl()
-      margin-right: $input-prepend-append-outer-margin
-
-  &__prepend-outer
-    +ltr()
-      margin-right: $input-prepend-append-outer-margin
-
-    +rtl()
-      margin-left: $input-prepend-append-outer-margin
-
-  &__control
-    display: flex
-    flex-direction: column
-    height: auto
-    flex-grow: 1
-    flex-wrap: wrap
-    min-width: 0
-    width: 100% // For IE11
-
-  &__icon
-    align-items: center
-    display: inline-flex
-    height: $input-icon-height
-    flex: 1 0 auto
-    justify-content: center
-    min-width: $input-icon-min-width
-    width: $input-icon-width
-
-    &--clear
-      border-radius: 50%
-
-      .v-icon--disabled
-        visibility: hidden
-
-  &__slot
-    align-items: center
-    color: inherit
-    display: flex
-    margin-bottom: $input-slot-margin-bottom
-    min-height: inherit
-    position: relative
-    transition: $primary-transition
-    width: 100%
-
-  &--dense > .v-input__control > .v-input__slot
-    margin-bottom: $input-dense-slot-margin-bottom
-
-  &--is-disabled:not(.v-input--is-readonly)
-    pointer-events: none
-
-  &--is-loading > .v-input__control > .v-input__slot
-    &:before,
-    &:after
-      display: none
-
-  &--hide-details > .v-input__control > .v-input__slot
-    margin-bottom: 0
-
-  &--has-state
-    &.error--text .v-label
-      animation: v-shake .6s map-get($transition, 'swing')
-
-  &--hide-spin-buttons
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button 
-      -webkit-appearance: none
-      margin: 0
-    input[type=number] 
-      -moz-appearance: textfield
+.v-input__append
+  margin-inline-start: $input-affix-margin-inside
+  grid-area: append
