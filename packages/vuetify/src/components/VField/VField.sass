@@ -139,6 +139,14 @@
   .v-field--variant-underlined &
     align-self: flex-end
 
+.v-field__clearable
+  opacity: 0
+  transition: $field-clearable-transition
+
+  .v-field--focused &,
+  .v-field:hover &
+    opacity: 1
+
 /* endregion */
 /* region LABEL */
 .v-field-label

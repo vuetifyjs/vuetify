@@ -4,7 +4,9 @@ import './VField.sass'
 // Components
 import { VInput } from '@/components/VInput'
 import { VIcon } from '@/components/VIcon'
+import { VBtn } from '../VBtn'
 import VFieldLabel from './VFieldLabel'
+import { VExpandXTransition } from '@/components/transitions'
 
 // Composables
 import { makeThemeProps, useTheme } from '@/composables/theme'
@@ -45,6 +47,11 @@ export const makeVFieldProps = propsFactory({
   disabled: Boolean,
   appendInnerIcon: String,
   bgColor: String,
+  clearable: Boolean,
+  clearIcon: {
+    type: String,
+    default: '$clear',
+  },
   color: String,
   // TODO: implement auto
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
@@ -79,6 +86,7 @@ export const VField = defineComponent({
   },
 
   emits: {
+    'click:clear': (e: Event) => true as any,
     'click:prepend-inner': (e: MouseEvent) => true as any,
     'click:append-inner': (e: MouseEvent) => true as any,
     'click:control': (props: DefaultInputSlot) => true as any,
@@ -169,7 +177,8 @@ export const VField = defineComponent({
       const isOutlined = props.variant === 'outlined'
       const hasDetails = (slots.details || props.hint)
       const hasPrepend = (slots.prependInner || props.prependInnerIcon)
-      const hasAppend = (slots.appendInner || props.appendInnerIcon)
+      const hasClear = (props.clearable || slots.clear)
+      const hasAppend = (slots.appendInner || props.appendInnerIcon || hasClear)
 
       const label = slots.label
         ? slots.label({
@@ -272,6 +281,29 @@ export const VField = defineComponent({
                 class="v-field__append-inner"
                 onClick={ e => emit('click:append-inner', e) }
               >
+                <VExpandXTransition>
+                  { hasClear && inputRef.value?.value && (
+                    <div class="v-field__clearable">
+                      <VBtn
+                        density="compact"
+                        icon={ props.clearIcon }
+                        tabindex="-1"
+                        variant="text"
+                        onClick={
+                          (e: Event) => {
+                            e.stopPropagation()
+
+                            inputRef.value!.value = ''
+                            inputRef.value!.dispatchEvent(new Event('input'))
+
+                            emit('click:clear', e)
+                          }
+                        }
+                      />
+                    </div>
+                  ) }
+                </VExpandXTransition>
+
                 { slots?.appendInner?.(slotProps.value) }
 
                 { props.appendInnerIcon && (

@@ -2,9 +2,9 @@
 import './VTextField.sass'
 
 // Components
+import { makeVFieldProps } from '@/components/VField/VField'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
-import { VExpandXTransition } from '@/components/transitions'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -18,8 +18,7 @@ import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { DefaultInputSlot, VFieldSlot } from '@/components/VField/VField'
-import { VBtn } from '../VBtn'
+import type { VFieldSlot } from '@/components/VField/VField'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
@@ -32,7 +31,6 @@ export const VTextField = defineComponent({
 
   props: {
     autofocus: Boolean,
-    clearable: Boolean,
     counter: [Boolean, Number, String] as PropType<true | number | string>,
     counterValue: Function as PropType<(value: any) => number>,
     prefix: String,
@@ -44,10 +42,11 @@ export const VTextField = defineComponent({
       default: 'text',
     },
     modelValue: String,
+
+    ...makeVFieldProps(),
   },
 
   emits: {
-    'click:clear': (e: Event) => true as any,
     'update:modelValue': (val: string) => true as any,
   },
 
@@ -83,7 +82,6 @@ export const VTextField = defineComponent({
     }
 
     useRender(() => {
-      const hasAppendInner = (slots.appendInner || props.clearable)
       const hasCounter = (slots.counter || props.counter || props.counterValue)
 
       return (
@@ -101,37 +99,9 @@ export const VTextField = defineComponent({
           onClick:control={ focus }
           role="textbox"
           { ...attrs }
+          { ...props }
           v-slots={{
             ...slots,
-            appendInner: hasAppendInner ? (slotScope: DefaultInputSlot) => {
-              return (
-                <>
-                  { slots?.appendInner?.(slotScope) }
-
-                  <VExpandXTransition>
-                    { props.clearable && model.value && (
-                      <div class="v-text-field__clearable">
-                        <VBtn
-                          density="compact"
-                          icon="$clear"
-                          tabindex="-1"
-                          variant="text"
-                          onClick={
-                            (e: Event) => {
-                              e.stopPropagation()
-
-                              model.value = ''
-
-                              emit('click:clear', e)
-                            }
-                          }
-                        />
-                      </div>
-                    ) }
-                  </VExpandXTransition>
-                </>
-              )
-            } : undefined,
             default: ({
               isActive,
               inputRef,
