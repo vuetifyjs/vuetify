@@ -279,7 +279,7 @@ export default defineComponent({
   },
 
   setup (props, { slots, emit, attrs }) {
-    const { min, max, stepSize, decimals, disableTransition, thumbPressed } = useSlider(props)
+    const { min, max, disableTransition, thumbPressed, roundValue } = useSlider(props)
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -287,12 +287,9 @@ export default defineComponent({
       arr => {
         if (!arr || !arr.length) return [0, 0]
 
-        return arr.map(value => roundValue(value, min.value, max.value, stepSize.value, decimals.value))
+        return arr.map(value => roundValue(value))
       },
-      v => ([
-        roundValue(v[0], min.value, v[1], stepSize.value, decimals.value),
-        roundValue(v[1], v[0], max.value, stepSize.value, decimals.value),
-      ])
+      v => v.map(roundValue)
     )
 
     const isDirty = computed(() => model.value.some(v => v > min.value))
@@ -309,7 +306,6 @@ export default defineComponent({
     let startOffset = 0
     let thumbMoved = false
     const { isRtl } = useRtl()
-    const activeThumb = ref()
 
     function parseMouseMove (e: MouseEvent | TouchEvent): number {
       const vertical = props.direction === 'vertical'
@@ -333,10 +329,10 @@ export default defineComponent({
 
     function onMouseMove (e: MouseEvent | TouchEvent) {
       const newValue = parseMouseMove(e)
-      // console.log('mousemove', newValue)
+
       thumbMoved = true
 
-      if (activeThumb.value === startThumbRef.value) {
+      if (focusedThumb.value === startThumbRef.value) {
         if (newValue <= model.value[1]) model.value = [newValue, model.value[1]]
       } else {
         if (newValue >= model.value[0]) model.value = [model.value[0], newValue]
@@ -351,7 +347,7 @@ export default defineComponent({
       if (!thumbMoved) {
         startOffset = 0
         const newValue = parseMouseMove(e)
-        model.value = activeThumb.value === startThumbRef.value ? [newValue, model.value[1]] : [model.value[0], newValue]
+        model.value = focusedThumb.value === startThumbRef.value ? [newValue, model.value[1]] : [model.value[0], newValue]
       }
 
       thumbMoved = false
@@ -359,10 +355,7 @@ export default defineComponent({
       disableTransition.value = false
       thumbPressed.value = false
       window.clearTimeout(transitionTimeout)
-      // this.thumbPressed = false
-      // const mouseMoveOptions = passiveSupported ? { passive: true } : false
-      // this.app.removeEventListener('touchmove', this.onMouseMove, mouseMoveOptions)
-      // this.app.removeEventListener('mousemove', this.onMouseMove, mouseMoveOptions)
+
       window.removeEventListener('mousemove', onMouseMove, { passive: true, capture: true })
       window.removeEventListener('mouseup', onSliderMouseUp, { passive: true })
     }
@@ -381,7 +374,6 @@ export default defineComponent({
 
       const a = Math.abs(getOffset(e, thumbs[0]))
       const b = Math.abs(getOffset(e, thumbs[1]))
-      console.log(a, b)
 
       return a < b ? startThumbRef.value : stopThumbRef.value
     }
@@ -389,10 +381,10 @@ export default defineComponent({
     function onSliderMousedown (e: MouseEvent | TouchEvent) {
       e.preventDefault()
 
-      activeThumb.value = getActiveThumb(e)
-      if (!activeThumb.value) return
+      focusedThumb.value = getActiveThumb(e)
+      if (!focusedThumb.value) return
 
-      activeThumb.value.$el.focus()
+      focusedThumb.value.$el.focus()
 
       if (thumbPressed.value) {
         disableTransition.value = true
@@ -403,7 +395,7 @@ export default defineComponent({
         }, 300)
       }
 
-      startOffset = getOffset(e, activeThumb.value?.$el)
+      startOffset = getOffset(e, focusedThumb.value?.$el)
 
       window.addEventListener('mousemove', onMouseMove, { passive: true, capture: true })
       window.addEventListener('mouseup', onSliderMouseUp, { passive: true })
@@ -461,25 +453,28 @@ export default defineComponent({
                   ref={ startThumbRef }
                   active={isActive}
                   dirty={isDirty}
-                  focused={isFocused && focusedThumb.value === 0}
+                  focused={isFocused && focusedThumb.value === startThumbRef.value}
                   modelValue={model.value[0]}
-                  onUpdate:modelValue={v => model.value = [v, model.value[1]]}
-                  onFocus={(e) => {
+                  onUpdate:modelValue={v => {
+                    model.value = [v, model.value[1]]
+                  }}
+                  onFocus={(e: FocusEvent) => {
                     slotProps.onFocus()
-                    focusedThumb.value = 0
+                    focusedThumb.value = startThumbRef.value
 
+                    // Make sure second thumb is focused if
+                    // the thumbs are on top of each other
+                    // and they are both at minimum value
                     if (
                       model.value[0] === model.value[1] &&
                       model.value[0] === min.value &&
                       e.relatedTarget !== stopThumbRef.value?.$el
                     ) stopThumbRef.value?.$el.focus()
                   }}
-                  onBlur={(e) => {
+                  onBlur={() => {
                     slotProps.onBlur()
-                    focusedThumb.value = -1
+                    focusedThumb.value = null
                   }}
-                  onUpdate:thumbPressed={v => thumbPressed.value = v}
-                  onUpdate:keyPressed={v => disableTransition.value = v}
                   v-slots={{
                     label: slots['thumb-label'],
                   }}
@@ -492,19 +487,19 @@ export default defineComponent({
                   ref={ stopThumbRef }
                   active={isActive}
                   dirty={isDirty}
-                  focused={isFocused && focusedThumb.value === 1}
+                  focused={isFocused && focusedThumb.value === stopThumbRef.value}
                   modelValue={model.value[1]}
-                  onUpdate:modelValue={v => model.value = [model.value[0], v]}
+                  onUpdate:modelValue={v => {
+                    model.value = [model.value[0], v]
+                  }}
                   onFocus={() => {
                     slotProps.onFocus()
-                    focusedThumb.value = 1
+                    focusedThumb.value = stopThumbRef.value
                   }}
-                  onBlur={(e) => {
+                  onBlur={() => {
                     slotProps.onBlur()
-                    focusedThumb.value = -1
+                    focusedThumb.value = null
                   }}
-                  onUpdate:thumbPressed={v => thumbPressed.value = v}
-                  onUpdate:keyPressed={v => disableTransition.value = v}
                   v-slots={{
                     label: slots['thumb-label'],
                   }}

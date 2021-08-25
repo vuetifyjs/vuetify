@@ -78,16 +78,6 @@ export const makeVSliderProps = propsFactory({
   ...makeRoundedProps(),
 }, 'v-slider')
 
-export function roundValue (value: number, min: number, max: number, step: number, decimals: number) {
-  const clamped = clamp(value, min, max)
-
-  const offset = min % step
-
-  const newValue = Math.round((clamped - offset) / step) * step + offset
-
-  return parseFloat(Math.min(newValue, max).toFixed(decimals))
-}
-
 export const VSliderSymbol = Symbol.for('vuetify:v-slider')
 
 export const useSlider = (props: any) => {
@@ -142,6 +132,16 @@ export const useSlider = (props: any) => {
     direction: toRef(props, 'direction'),
     showTicks,
     showLabel: computed(() => !!props.thumbLabel),
+    roundValue: (value: number) => {
+      const clamped = clamp(value, min.value, max.value)
+
+      const offset = min.value % stepSize.value
+
+      const newValue = Math.round((clamped - offset) / stepSize.value) * stepSize.value + offset
+
+      return parseFloat(Math.min(newValue, max.value).toFixed(decimals.value))
+    },
+    keyPressed: ref(false),
   }
 
   provide(VSliderSymbol, data)
@@ -154,12 +154,14 @@ export default defineComponent({
 
   props: makeVSliderProps(),
 
-  emits: {},
+  emits: {
+    'update:modelValue': (v: number) => true,
+  },
 
   setup (props, { attrs, emit, slots }) {
     const { isRtl } = useRtl()
     const isReversed = computed(() => isRtl.value !== props.reverse)
-    const { min, max, stepSize, decimals, thumbPressed, disableTransition } = useSlider(props)
+    const { min, max, thumbPressed, disableTransition, roundValue } = useSlider(props)
 
     const model = useProxiedModel(
       props,
@@ -168,9 +170,9 @@ export default defineComponent({
       v => {
         const value = typeof v === 'string' ? parseFloat(v) : v == null ? min.value : v
 
-        return roundValue(value, min.value, max.value, stepSize.value, decimals.value)
+        return roundValue(value)
       },
-      v => roundValue(v, min.value, max.value, stepSize.value, decimals.value)
+      v => roundValue(v)
     )
 
     const isDirty = computed(() => model.value > min.value)
@@ -296,7 +298,7 @@ export default defineComponent({
               <div
                 class="v-slider__container"
                 onMousedown={onSliderMousedown}
-                onTouchstart={onSliderMousedown}
+                onTouchstartPassive={onSliderMousedown}
               >
                 <input
                   id={slotProps.id}
@@ -328,8 +330,6 @@ export default defineComponent({
                   position={trackStop.value}
                   onFocus={slotProps.onFocus}
                   onBlur={slotProps.onBlur}
-                  onUpdate:thumbPressed={v => thumbPressed.value = v}
-                  onUpdate:keyPressed={v => disableTransition.value = v}
                   v-slots={{
                     label: slots['thumb-label'],
                   }}

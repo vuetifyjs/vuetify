@@ -32,8 +32,6 @@ export default defineComponent({
   },
 
   emits: {
-    'update:thumbPressed': (v: boolean) => true,
-    'update:keyPressed': (v: boolean) => true,
     'update:modelValue': (v: number) => true,
   },
 
@@ -43,7 +41,18 @@ export default defineComponent({
 
     if (!slider) throw new Error('[Vuetify] v-slider-thumb must be used inside v-slider or v-range-slider')
 
-    const { thumbColor, stepSize, vertical, disabled, thumbSize, showLabel, transition, direction } = slider
+    const {
+      thumbColor,
+      stepSize,
+      vertical,
+      disabled,
+      thumbSize,
+      showLabel,
+      transition,
+      direction,
+      disableTransition,
+      thumbPressed,
+    } = slider
 
     const { textColorClasses, textColorStyles } = useTextColor(thumbColor)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(thumbColor)
@@ -81,7 +90,7 @@ export default defineComponent({
     function onKeydown (e: KeyboardEvent) {
       keyPresses += 1
 
-      keyPresses > 1 && emit('update:keyPressed', true)
+      keyPresses > 1 && (disableTransition.value = true)
 
       const newValue = parseKeydown(e, props.modelValue)
 
@@ -90,7 +99,7 @@ export default defineComponent({
 
     function onKeyup (e: KeyboardEvent) {
       keyPresses = 0
-      emit('update:keyPressed', false)
+      disableTransition.value = false
     }
 
     return () => {
@@ -132,8 +141,8 @@ export default defineComponent({
           onKeyup={onKeyup}
         >
           <div
-            onMousedown={() => emit('update:thumbPressed', true)}
-            onMouseup={() => emit('update:thumbPressed', false)}
+            onMousedown={() => thumbPressed.value = true}
+            onMouseup={() => thumbPressed.value = false}
             class={[
               'v-slider-thumb__surface',
               textColorClasses.value,
