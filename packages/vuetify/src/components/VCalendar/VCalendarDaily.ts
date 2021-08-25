@@ -154,6 +154,7 @@ export default CalendarWithIntervals.extend({
     genDayContainer (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-calendar-daily__day-container',
+        ref: 'day-container',
       }, [
         this.genBodyIntervals(),
         ...this.genDays(),
