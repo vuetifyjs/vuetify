@@ -1,4 +1,1 @@
-import VRangeSlider from './VRangeSlider'
-
-export { VRangeSlider }
-export default VRangeSlider
+export { default as VRangeSlider } from './VRangeSlider'

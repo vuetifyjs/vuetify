@@ -2,8 +2,9 @@ import './VSliderThumb.sass'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useRtl } from '@/composables/rtl'
 import { convertToUnit, defineComponent, keyCodes } from '@/util'
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
 import { VScaleTransition } from '../transitions'
+import { VSliderSymbol } from './VSlider'
 
 export default defineComponent({
   name: 'VSliderThumb',
@@ -24,17 +25,10 @@ export default defineComponent({
       type: Number,
       required: true,
     },
-    disabled: Boolean,
-    direction: String,
-    size: Number,
-    color: String,
     position: {
       type: Number,
       required: true,
     },
-    transition: String,
-    stepSize: Number,
-    showLabel: Boolean,
   },
 
   emits: {
@@ -45,8 +39,15 @@ export default defineComponent({
 
   setup (props, { slots, attrs, emit }) {
     const { isRtl } = useRtl()
-    const { textColorClasses, textColorStyles } = useTextColor(props, 'color')
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
+    const slider = inject(VSliderSymbol)
+
+    if (!slider) throw new Error('[Vuetify] v-slider-thumb must be used inside v-slider or v-range-slider')
+
+    const { thumbColor, stepSize, vertical, disabled, thumbSize, showLabel, transition, direction } = slider
+
+    const { textColorClasses, textColorStyles } = useTextColor(thumbColor)
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(thumbColor)
+
     let keyPresses = 0
 
     function parseKeydown (e: KeyboardEvent, value: number) {
@@ -57,7 +58,7 @@ export default defineComponent({
 
       if (![pageup, pagedown, end, home, left, right, down, up].includes(e.keyCode)) return
 
-      const step = props.stepSize || 1
+      const step = stepSize.value || 1
       const steps = (props.max - props.min) / step
       if ([left, right, down, up].includes(e.keyCode)) {
         const increase = isRtl.value ? [left, up] : [right, up]
@@ -84,7 +85,6 @@ export default defineComponent({
 
       const newValue = parseKeydown(e, props.modelValue)
 
-      console.log(newValue)
       newValue != null && emit('update:modelValue', newValue)
     }
 
@@ -94,13 +94,11 @@ export default defineComponent({
     }
 
     return () => {
-      const vertical = props.direction === 'vertical'
-      const positionPercentage = convertToUnit(props.direction === 'vertical' ? 100 - props.position : props.position, '%')
-      const inset = vertical ? 'block' : 'inline'
-      const showLabel = !props.disabled && !!(props.showLabel || slots['thumb-label'])
-      const size = convertToUnit(props.size)
-      const transform = vertical
-        ? `translateY(20%) translateY(${(Number(props.size) / 3) - 1}px) translateX(55%) rotate(135deg)`
+      const positionPercentage = convertToUnit(vertical.value ? 100 - props.position : props.position, '%')
+      const inset = vertical.value ? 'block' : 'inline'
+      const size = convertToUnit(thumbSize.value)
+      const transform = vertical.value
+        ? `translateY(20%) translateY(${(thumbSize.value / 3) - 1}px) translateX(55%) rotate(135deg)`
         : `translateY(-20%) translateY(-6px) translateX(0%) rotate(45deg)`
 
       return (
@@ -111,23 +109,23 @@ export default defineComponent({
               'v-slider-thumb--active': props.active,
               'v-slider-thumb--focused': props.focused,
               'v-slider-thumb--dirty': props.dirty,
-              'v-slider-thumb--show-label': showLabel,
+              'v-slider-thumb--show-label': !disabled.value && !!(showLabel.value || slots['thumb-label']),
               // 'v-slider-thumb--pressed': props.pressed,
             },
           ]}
           style={{
-            transition: props.transition,
+            transition: transition.value,
             [`inset-${inset}-start`]: `calc(${positionPercentage} - var(--v-slider-thumb-size) / 2)`,
-            '--v-slider-thumb-size': convertToUnit(props.disabled ? props.size / 2 : props.size),
+            '--v-slider-thumb-size': convertToUnit(disabled.value ? thumbSize.value / 2 : thumbSize.value),
           }}
           role="slider"
-          tabindex={props.disabled ? -1 : 0}
+          tabindex={disabled.value ? -1 : 0}
           aria-label={props.label}
           aria-valuemin={props.min}
           aria-valuemax={props.max}
           aria-valuenow={props.modelValue}
           // aria-readonly={props.readonly}
-          aria-orientation={props.direction}
+          aria-orientation={direction.value}
           // onFocus={slotProps.onFocus}
           // onBlur={slotProps.onBlur}
           onKeydown={onKeydown}
@@ -142,11 +140,11 @@ export default defineComponent({
             ]}
             style={textColorStyles.value}
           />
-          {showLabel && (
+          {showLabel.value && (
             <VScaleTransition origin="bottom center">
               <div
                 class="v-slider-thumb__label-container"
-                v-show={props.focused || props.active || props.showLabel}
+                v-show={props.focused || props.active || showLabel.value}
               >
                 <div
                   class={[
