@@ -62,6 +62,7 @@
     "jest-environment-jsdom-fourteen": "^1.0.1",
     "jest-serializer-html": "^7.0.0",
     "lerna": "^3.16.2",
+    "mkdirp": "^1.0.4",
     "moment": "^2.27.0",
     "sass": "~1.32.13",
     "sass-loader": "^11.1.0",
