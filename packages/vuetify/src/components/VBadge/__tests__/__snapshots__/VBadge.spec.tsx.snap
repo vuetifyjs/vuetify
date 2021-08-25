@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VBadge.tsx should match snapshot with badge slot and { content: '10', max: 9 } props 1`] = `
-<div class="v-badge">
+<div class="v-badge v-theme--light">
   <div class="v-badge__wrapper">
     <span>
       element
@@ -23,7 +23,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { content: '10', m
 `;
 
 exports[`VBadge.tsx should match snapshot with badge slot and { content: '10', max: 11 } props 1`] = `
-<div class="v-badge">
+<div class="v-badge v-theme--light">
   <div class="v-badge__wrapper">
     <span>
       element
@@ -45,7 +45,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { content: '10', m
 `;
 
 exports[`VBadge.tsx should match snapshot with badge slot and { content: 'foo', max: 9 } props 1`] = `
-<div class="v-badge">
+<div class="v-badge v-theme--light">
   <div class="v-badge__wrapper">
     <span>
       element
@@ -67,7 +67,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { content: 'foo', 
 `;
 
 exports[`VBadge.tsx should match snapshot with badge slot and { dot: true } props 1`] = `
-<div class="v-badge v-badge--dot">
+<div class="v-badge v-badge--dot v-theme--light">
   <div class="v-badge__wrapper">
     <span>
       element
@@ -86,7 +86,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { dot: true } prop
 `;
 
 exports[`VBadge.tsx should match snapshot with badge slot and { dot: true, floating: true } props 1`] = `
-<div class="v-badge v-badge--dot v-badge--floating">
+<div class="v-badge v-badge--dot v-badge--floating v-theme--light">
   <div class="v-badge__wrapper">
     <span>
       element
@@ -105,7 +105,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { dot: true, float
 `;
 
 exports[`VBadge.tsx should match snapshot with badge slot and { floating: true } props 1`] = `
-<div class="v-badge v-badge--floating">
+<div class="v-badge v-badge--floating v-theme--light">
   <div class="v-badge__wrapper">
     <span>
       element
@@ -127,7 +127,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { floating: true }
 `;
 
 exports[`VBadge.tsx should match snapshot with badge slot and { floating: true } props 2`] = `
-<div class="v-badge v-badge--floating">
+<div class="v-badge v-badge--floating v-theme--light">
   <div class="v-badge__wrapper">
     <span>
       element
@@ -149,7 +149,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { floating: true }
 `;
 
 exports[`VBadge.tsx should match snapshot with badge slot and { icon: 'foo' } props 1`] = `
-<div class="v-badge">
+<div class="v-badge v-theme--light">
   <div class="v-badge__wrapper">
     <span>
       element
@@ -171,7 +171,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { icon: 'foo' } pr
 `;
 
 exports[`VBadge.tsx should match snapshot with badge slot and { inline: true } props 1`] = `
-<div class="v-badge v-badge--inline">
+<div class="v-badge v-badge--inline v-theme--light">
   <div class="v-badge__wrapper">
     <span>
       element
@@ -193,7 +193,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { inline: true } p
 `;
 
 exports[`VBadge.tsx should match snapshot with badge slot and { location: 'bottom-left' } props 1`] = `
-<div class="v-badge">
+<div class="v-badge v-theme--light">
   <div class="v-badge__wrapper">
     <span>
       element
@@ -215,7 +215,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { location: 'botto
 `;
 
 exports[`VBadge.tsx should match snapshot with badge slot and { location: null } props 1`] = `
-<div class="v-badge">
+<div class="v-badge v-theme--light">
   <div class="v-badge__wrapper">
     <span>
       element
@@ -237,7 +237,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { location: null }
 `;
 
 exports[`VBadge.tsx should match snapshot with badge slot and { location: undefined } props 1`] = `
-<div class="v-badge">
+<div class="v-badge v-theme--light">
   <div class="v-badge__wrapper">
     <span>
       element
@@ -259,7 +259,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { location: undefi
 `;
 
 exports[`VBadge.tsx should match snapshot with badge slot and { modelValue: false } props 1`] = `
-<div class="v-badge">
+<div class="v-badge v-theme--light">
   <div class="v-badge__wrapper">
     <span>
       element
@@ -282,7 +282,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { modelValue: fals
 `;
 
 exports[`VBadge.tsx should match snapshot with badge slot and { modelValue: true } props 1`] = `
-<div class="v-badge">
+<div class="v-badge v-theme--light">
   <div class="v-badge__wrapper">
     <span>
       element
@@ -304,7 +304,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { modelValue: true
 `;
 
 exports[`VBadge.tsx should match snapshot without badge slot and { content: 'foo' } props 1`] = `
-<div class="v-badge">
+<div class="v-badge v-theme--light">
   <div class="v-badge__wrapper">
     <transition-stub>
       <span class="v-badge__badge bg-primary"
@@ -323,7 +323,7 @@ exports[`VBadge.tsx should match snapshot without badge slot and { content: 'foo
 `;
 
 exports[`VBadge.tsx should match snapshot without badge slot and { content: 'foo', icon: 'bar' } props 1`] = `
-<div class="v-badge">
+<div class="v-badge v-theme--light">
   <div class="v-badge__wrapper">
     <transition-stub>
       <span class="v-badge__badge bg-primary"
@@ -343,7 +343,7 @@ exports[`VBadge.tsx should match snapshot without badge slot and { content: 'foo
 `;
 
 exports[`VBadge.tsx should match snapshot without badge slot and { icon: 'foo' } props 1`] = `
-<div class="v-badge">
+<div class="v-badge v-theme--light">
   <div class="v-badge__wrapper">
     <transition-stub>
       <span class="v-badge__badge bg-primary"

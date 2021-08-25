@@ -13,6 +13,7 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 // Utilities
 import { computed, toRef } from 'vue'
 import { convertToUnit, defineComponent, pick } from '@/util'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 
 export default defineComponent({
   name: 'VBadge',
@@ -56,6 +57,7 @@ export default defineComponent({
     textColor: String,
     ...makeRoundedProps(),
     ...makeTagProps(),
+    ...makeThemeProps(),
     ...makeTransitionProps({ transition: 'scale-rotate-transition' }),
   },
 
@@ -63,6 +65,7 @@ export default defineComponent({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { roundedClasses } = useRounded(props, 'v-badge')
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'textColor'))
+    const { themeClasses } = useTheme(props)
 
     const position = computed(() => {
       return props.floating
@@ -118,6 +121,7 @@ export default defineComponent({
               'v-badge--floating': props.floating,
               'v-badge--inline': props.inline,
             },
+            themeClasses.value,
           ]}
           { ...attrs }
         >
