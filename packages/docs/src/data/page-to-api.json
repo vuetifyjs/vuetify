@@ -124,6 +124,7 @@
   ],
   "components/menus": ["v-menu"],
   "components/navigation-drawers": ["v-navigation-drawer"],
+  "components/no-ssr": ["v-no-ssr"],
   "components/overflow-btns": ["v-overflow-btn"],
   "components/overlays": ["v-overlay"],
   "components/paginations": ["v-pagination"],
