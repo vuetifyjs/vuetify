@@ -1,10 +1,9 @@
-
 // Utilities
+import { defineComponent, IN_BROWSER } from '@/util'
 import { onMounted, ref } from 'vue'
-import { defineComponent } from '@/util'
 
 function doesHydrate (fn: () => void) {
-  if (typeof window === 'undefined') return
+  if (!IN_BROWSER) return
   // @ts-expect-error
   return document.querySelector('#app')?.__vue_app__ ? fn() : onMounted(fn)
 }
