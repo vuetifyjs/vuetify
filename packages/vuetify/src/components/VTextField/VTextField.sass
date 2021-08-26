@@ -51,16 +51,3 @@
     // Remove Firefox red outline
     &:invalid
       box-shadow: none
-
-.v-text-field
-  &.v-field--disabled
-    pointer-events: none
-
-    &,
-    input
-      color: $text-field-disabled-color
-
-    &.v-field--variant-filled,
-    &.v-field--variant-underlined
-      .v-field__outline::before
-        border-image: repeating-linear-gradient(to right, $text-field-disabled-color 0px, $text-field-disabled-color 2px, transparent 2px, transparent 4px) 1 repeat
