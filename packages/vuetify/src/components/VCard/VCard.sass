@@ -6,7 +6,7 @@
   color: map-deep-get($material, 'text', 'primary')
 
   > .v-card__text,
-  .v-card__subtitle
+  > .v-card__subtitle
     color: map-deep-get($material, 'text', 'secondary')
 
 // Sheet
@@ -24,12 +24,12 @@
   position: relative
   white-space: $card-white-space
 
-  > *:first-child:not(.v-btn):not(.v-chip),
-  > .v-card__progress + *:not(.v-btn):not(.v-chip)
+  > *:first-child:not(.v-btn):not(.v-chip):not(.v-avatar),
+  > .v-card__progress + *:not(.v-btn):not(.v-chip):not(.v-avatar)
     border-top-left-radius: inherit
     border-top-right-radius: inherit
 
-  > *:last-child:not(.v-btn):not(.v-chip)
+  > *:last-child:not(.v-btn):not(.v-chip):not(.v-avatar)
     border-bottom-left-radius: inherit
     border-bottom-right-radius: inherit
 

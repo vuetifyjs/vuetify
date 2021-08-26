@@ -14,11 +14,11 @@ function bootstrap (args?: object) {
 
   let clickHandler
   let mousedownHandler
-  jest.spyOn(window.document.body, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
+  jest.spyOn(window.document, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
     if (eventName === 'click') clickHandler = eventHandler
     if (eventName === 'mousedown') mousedownHandler = eventHandler
   })
-  jest.spyOn(window.document.body, 'removeEventListener')
+  jest.spyOn(window.document, 'removeEventListener')
 
   ClickOutside.inserted(el as HTMLElement, binding as any)
 
@@ -33,10 +33,10 @@ function bootstrap (args?: object) {
 describe('click-outside', () => {
   it('should register and unregister handler', () => {
     const { clickHandler, el } = bootstrap()
-    expect(window.document.body.addEventListener).toHaveBeenCalledWith('click', clickHandler, true)
+    expect(window.document.addEventListener).toHaveBeenCalledWith('click', clickHandler, true)
 
     ClickOutside.unbind(el)
-    expect(window.document.body.removeEventListener).toHaveBeenCalledWith('click', clickHandler, true)
+    expect(window.document.removeEventListener).toHaveBeenCalledWith('click', clickHandler, true)
   })
 
   it('should call the callback when closeConditional returns true', async () => {

@@ -40,7 +40,7 @@
             small
             @click="parent.selectItem(item)"
           >
-            close
+            $delete
           </v-icon>
         </v-chip>
       </template>

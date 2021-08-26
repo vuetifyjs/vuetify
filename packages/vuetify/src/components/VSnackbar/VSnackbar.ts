@@ -173,8 +173,8 @@ export default mixins(
           value: this.isActive,
         }],
         on: {
-          mouseenter: () => window.clearTimeout(this.activeTimeout),
-          mouseleave: this.setTimeout,
+          pointerenter: () => window.clearTimeout(this.activeTimeout),
+          pointerleave: this.setTimeout,
         },
       })
 

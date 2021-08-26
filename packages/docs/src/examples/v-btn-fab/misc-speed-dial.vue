@@ -171,17 +171,6 @@
       transition: 'slide-y-reverse-transition',
     }),
 
-    computed: {
-      activeFab () {
-        switch (this.tabs) {
-          case 'one': return { class: 'purple', icon: 'account_circle' }
-          case 'two': return { class: 'red', icon: 'edit' }
-          case 'three': return { class: 'green', icon: 'keyboard_arrow_up' }
-          default: return {}
-        }
-      },
-    },
-
     watch: {
       top (val) {
         this.bottom = !val

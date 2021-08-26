@@ -302,10 +302,16 @@ export default baseMixins.extend<options>().extend({
     genClearIcon () {
       if (!this.clearable) return null
 
-      const data = this.isDirty ? undefined : { attrs: { disabled: true } }
+      // if the text field has no content then don't display the clear icon.
+      // We add an empty div because other controls depend on a ref to append inner
+      if (!this.isDirty) {
+        return this.genSlot('append', 'inner', [
+          this.$createElement('div'),
+        ])
+      }
 
       return this.genSlot('append', 'inner', [
-        this.genIcon('clear', this.clearableCallback, data),
+        this.genIcon('clear', this.clearableCallback),
       ])
     },
     genCounter () {
@@ -367,6 +373,7 @@ export default baseMixins.extend<options>().extend({
       const width = !this.singleLine && (this.labelValue || this.isDirty) ? this.labelWidth : 0
       const span = this.$createElement('span', {
         domProps: { innerHTML: '&#8203;' },
+        staticClass: 'notranslate',
       })
 
       return this.$createElement('legend', {
@@ -467,7 +474,13 @@ export default baseMixins.extend<options>().extend({
       this.badInput = target.validity && target.validity.badInput
     },
     onKeyDown (e: KeyboardEvent) {
-      if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
+      if (
+        e.keyCode === keyCodes.enter &&
+        this.lazyValue !== this.initialValue
+      ) {
+        this.initialValue = this.lazyValue
+        this.$emit('change', this.initialValue)
+      }
 
       this.$emit('keydown', e)
     },

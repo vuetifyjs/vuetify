@@ -65,7 +65,7 @@ export default baseMixins.extend<options>().extend({
       default: 'primary',
     },
     disabled: Boolean,
-    group: String,
+    group: [String, RegExp],
     noAction: Boolean,
     prependIcon: String,
     ripple: {

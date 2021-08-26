@@ -1,7 +1,7 @@
 // Types
 import Vue from 'vue'
 
-type VuetifyGoToTarget = number | string | HTMLElement | Vue
+export type VuetifyGoToTarget = number | string | HTMLElement | Vue
 
 export type VuetifyGoToEasing =
   ((t: number) => number) |
@@ -26,3 +26,5 @@ export interface GoToOptions {
   easing?: VuetifyGoToEasing
   appOffset?: boolean
 }
+
+export default function goTo(target: VuetifyGoToTarget, options?: GoToOptions): Promise<number>

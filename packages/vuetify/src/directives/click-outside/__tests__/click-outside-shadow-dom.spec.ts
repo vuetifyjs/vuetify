@@ -24,7 +24,7 @@ function bootstrap (args?: object) {
   document.body.appendChild(shadowHost)
   shadowRoot.appendChild(shadowEl)
 
-  jest.spyOn(window.document.body, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
+  jest.spyOn(window.document, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
     if (eventName === 'click') outsideClickHandler = eventHandler
     if (eventName === 'mousedown') outsideMousedownHandler = eventHandler
   })
@@ -34,7 +34,7 @@ function bootstrap (args?: object) {
     if (eventName === 'mousedown') shadowMousedownHandler = eventHandler
   })
 
-  jest.spyOn(window.document.body, 'removeEventListener')
+  jest.spyOn(window.document, 'removeEventListener')
   jest.spyOn(shadowRoot, 'removeEventListener')
 
   ClickOutside.inserted(shadowEl as HTMLElement, binding as any)
@@ -54,10 +54,10 @@ function bootstrap (args?: object) {
 describe('click-outside.js within the Shadow DOM', () => {
   it('should register and unregister handler outside of the shadow DOM', () => {
     const { outsideClickHandler, shadowEl } = bootstrap()
-    expect(window.document.body.addEventListener).toHaveBeenCalledWith('click', outsideClickHandler, true)
+    expect(window.document.addEventListener).toHaveBeenCalledWith('click', outsideClickHandler, true)
 
     ClickOutside.unbind(shadowEl)
-    expect(window.document.body.removeEventListener).toHaveBeenCalledWith('click', outsideClickHandler, true)
+    expect(window.document.removeEventListener).toHaveBeenCalledWith('click', outsideClickHandler, true)
   })
 
   it('should register and unregister handler within the shadow DOM', () => {

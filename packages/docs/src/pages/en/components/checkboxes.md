@@ -25,6 +25,8 @@ A `v-checkbox` in its simplest form provides a toggle between 2 values.
 - [v-checkbox](/api/v-checkbox)
 - [v-simple-checkbox](/api/v-simple-checkbox)
 
+<api-section page="components/checkboxes" />
+
 ## Examples
 
 ### Props

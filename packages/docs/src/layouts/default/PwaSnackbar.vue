@@ -7,9 +7,20 @@
     timeout="-1"
     vertical
   >
-    <app-md>{{ $t('new-content-available') }}</app-md>
+    <app-md>{{ $t('pwa.new-content-available') }}</app-md>
 
     <template #action="{ attrs }">
+      <v-btn
+        text
+        v-bind="attrs"
+        class="mx-2 text-none font-weight-regular"
+        @click="ignore"
+      >
+        <i18n
+          class="white--text"
+          path="pwa.ignore"
+        />
+      </v-btn>
       <app-btn
         class="primary"
         v-bind="attrs"
@@ -17,7 +28,7 @@
       >
         <i18n
           class="white--text"
-          path="refresh"
+          path="pwa.refresh"
         />
       </app-btn>
     </template>
@@ -33,6 +44,7 @@
     name: 'DefaultPwaSnackbar',
 
     computed: {
+      ...sync('user', ['pwaRefresh']),
       ...sync('pwa', [
         'snackbar',
         'sw',
@@ -62,7 +74,7 @@
       'sw.update': {
         immediate: true,
         async handler (val) {
-          if (!val) return
+          if (!val || !this.pwaRefresh) return
 
           await wait(5000)
 
@@ -77,7 +89,13 @@
       this.$set(this.$vuetify.application.application, 'snackbar', {})
     },
 
-    methods: { update: call('pwa/update') },
+    methods: {
+      update: call('pwa/update'),
+      ignore () {
+        this.pwaRefresh = false
+        this.snackbar = false
+      },
+    },
   }
 </script>
 

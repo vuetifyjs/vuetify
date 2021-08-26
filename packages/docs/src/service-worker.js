@@ -1,15 +1,29 @@
 // Imports
 import { precacheAndRoute, matchPrecache } from 'workbox-precaching'
-import { setDefaultHandler } from 'workbox-routing'
+import { registerRoute, setDefaultHandler, setCatchHandler } from 'workbox-routing'
+import { NetworkOnly, CacheFirst } from 'workbox-strategies'
 
 precacheAndRoute(self.__WB_MANIFEST)
 
-setDefaultHandler(({ url, request }) => {
-  // Render as SPA on subsequent visits
+const cacheFirst = new CacheFirst()
+const networkOnly = new NetworkOnly()
+
+registerRoute(
+  ({ url, request }) => url.origin === self.location.origin && request.destination !== 'document',
+  cacheFirst
+)
+
+setDefaultHandler(networkOnly)
+
+setCatchHandler(async ({ url, request }) => {
   if (
     url.origin === self.location.origin &&
     request.destination === 'document'
-  ) return matchPrecache(url.pathname.startsWith('/eo-UY/') ? '_crowdin.html' : '/_fallback.html')
+  ) {
+    return matchPrecache(url.pathname.startsWith('/eo-UY/') ? '_crowdin.html' : '/_fallback.html')
+  }
+
+  return Response.error()
 })
 
 self.addEventListener('message', event => {

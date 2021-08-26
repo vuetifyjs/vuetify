@@ -25,6 +25,8 @@ At its core, the `v-file-input` component is a basic container that extends [v-t
 
 - [v-file-input](/api/v-file-input)
 
+<api-section page="components/file-inputs" />
+
 ## Examples
 
 ### Props

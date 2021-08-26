@@ -17,7 +17,7 @@
       sm="6"
       class="my-2 px-1"
     >
-      <div class="title">
+      <div class="text-h6">
         Month news ({{ pickerDate || 'change month...' }})
       </div>
       <div class="subheading">
@@ -38,7 +38,7 @@
 <script>
   export default {
     data: () => ({
-      date: new Date().toISOString().substr(0, 10),
+      date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
       pickerDate: null,
       notes: [],
       allNotes: [
