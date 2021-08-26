@@ -25,7 +25,9 @@ export default defineConfig(({ mode }) => {
     plugins: [
       vue(),
       vueJsx({ optimize: true, enableObjectSlots: false }),
-      viteSSR(),
+      viteSSR({
+        input: resolve('./dev/index.vite.html')
+      }),
       {
         name: 'configure-server',
         configureServer(server) {

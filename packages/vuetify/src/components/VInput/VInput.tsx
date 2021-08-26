@@ -2,6 +2,7 @@ import './VInput.sass'
 
 // Utilities
 import { defineComponent } from '@/util'
+import type { PropType } from 'vue'
 import { VIcon } from '@/components/VIcon'
 import { makeDensityProps, useDensity } from '@/composables/density'
 

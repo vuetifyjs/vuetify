@@ -199,7 +199,7 @@ export default defineComponent({
           props: mergeProps({
             modelValue: isActive.value,
             'onUpdate:modelValue': (val: boolean) => isActive.value = val,
-          }, toHandlers(activatorEvents), props.activatorProps),
+          }, toHandlers(activatorEvents.value), props.activatorProps),
         }) }
         <Teleport
           disabled={ !teleportTarget.value }

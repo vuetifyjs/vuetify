@@ -89,7 +89,7 @@
           ),
           import(
             /* webpackChunkName: "locale-pages-[request]" */
-            `@docs/${locale}/pages`
+            `.cache/@docs/${locale}/pages`
           ),
         ])
 

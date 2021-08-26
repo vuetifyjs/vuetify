@@ -6,50 +6,52 @@ import { VLocaleProvider } from '@/components/VLocaleProvider'
 
 // Utilities
 import { keyValues } from '@/util'
+import { defineComponent, ref } from 'vue'
 
 describe('VPagination', () => {
   it('should render set length', () => {
     cy.mount(() => (
-      <VPagination length="3" />
+      <VPagination length={3} />
     ))
 
-    cy.getBySel('v-pagination-item').should('have.length', 3)
+    cy.get('.v-pagination__item').should('have.length', 3)
   })
 
   it('should react to mouse navigation', () => {
     cy.mount(() => (
-      <VPagination length="3" />
+      <VPagination length={3} />
     ))
 
-    cy.getBySel('v-pagination-item').eq(1).find('.v-btn').trigger('click')
+    cy.get('.v-pagination__item').eq(1).find('.v-btn').trigger('click')
 
-    cy.getBySel('v-pagination-item').eq(1).should('have.class', 'v-pagination__item--is-active')
+    cy.get('.v-pagination__item').eq(1).should('have.class', 'v-pagination__item--is-active')
 
-    cy.getBySel('v-pagination-next').find('.v-btn').trigger('click')
+    cy.get('.v-pagination__next').find('.v-btn').trigger('click')
 
-    cy.getBySel('v-pagination-item').eq(2).should('have.class', 'v-pagination__item--is-active')
+    cy.get('.v-pagination__item').eq(2).should('have.class', 'v-pagination__item--is-active')
 
-    cy.getBySel('v-pagination-prev').find('.v-btn').trigger('click')
-    cy.getBySel('v-pagination-prev').find('.v-btn').trigger('click')
+    cy.get('.v-pagination__prev').find('.v-btn').trigger('click')
+    cy.get('.v-pagination__prev').find('.v-btn').trigger('click')
 
-    cy.getBySel('v-pagination-item').eq(0).should('have.class', 'v-pagination__item--is-active')
+    cy.get('.v-pagination__item').eq(0).should('have.class', 'v-pagination__item--is-active')
   })
 
   it('should react to keyboard navigation', () => {
-    cy.mount(() => (
-      <VPagination length="3" model-value={2} />
-    ))
+    cy.mount(defineComponent(() => {
+      const model = ref(2)
+      return () => <VPagination v-model={ model.value } length={3} />
+    }))
 
-    cy.getBySel('v-pagination-item').first().find('.v-btn').focus()
+    cy.get('.v-pagination__item').first().find('.v-btn').focus()
 
-    cy.getBySel('v-pagination-root').trigger('keydown', { key: keyValues.left })
+    cy.get('.v-pagination').trigger('keydown', { key: keyValues.left })
 
-    cy.getBySel('v-pagination-item').first().should('have.class', 'v-pagination__item--is-active')
+    cy.get('.v-pagination__item').first().should('have.class', 'v-pagination__item--is-active')
 
-    cy.getBySel('v-pagination-root').trigger('keydown', { key: keyValues.right })
-    cy.getBySel('v-pagination-root').trigger('keydown', { key: keyValues.right })
+    cy.get('.v-pagination').trigger('keydown', { key: keyValues.right })
+    cy.get('.v-pagination').trigger('keydown', { key: keyValues.right })
 
-    cy.getBySel('v-pagination-item').last().should('have.class', 'v-pagination__item--is-active')
+    cy.get('.v-pagination__item').last().should('have.class', 'v-pagination__item--is-active')
   })
 
   it('should render offset pages when using start prop', () => {
@@ -57,9 +59,9 @@ describe('VPagination', () => {
       <VPagination length="3" start="3" />
     ))
 
-    cy.getBySel('v-pagination-item').eq(0).should('have.text', '3')
-    cy.getBySel('v-pagination-item').eq(1).should('have.text', '4')
-    cy.getBySel('v-pagination-item').eq(2).should('have.text', '5')
+    cy.get('.v-pagination__item').eq(0).should('have.text', '3')
+    cy.get('.v-pagination__item').eq(1).should('have.text', '4')
+    cy.get('.v-pagination__item').eq(2).should('have.text', '5')
   })
 
   it('should render disabled buttons when length is zero', () => {
@@ -67,8 +69,8 @@ describe('VPagination', () => {
       <VPagination length="0" />
     ))
 
-    cy.getBySel('v-pagination-prev').find('.v-btn').should('have.attr', 'disabled')
-    cy.getBySel('v-pagination-next').find('.v-btn').should('have.attr', 'disabled')
+    cy.get('.v-pagination__prev').find('.v-btn').should('have.attr', 'disabled')
+    cy.get('.v-pagination__next').find('.v-btn').should('have.attr', 'disabled')
   })
 
   it('should only render set number of visible items', () => {
@@ -76,7 +78,7 @@ describe('VPagination', () => {
       <VPagination length="100" total-visible="5" />
     ))
 
-    cy.getBySel('v-pagination-item').should('have.length', 5)
+    cy.get('.v-pagination__item').should('have.length', 5)
   })
 
   it('should limit items when not enough space', () => {
@@ -84,7 +86,7 @@ describe('VPagination', () => {
       <VPagination length="100" />
     ))
 
-    cy.getBySel('v-pagination-item').should('have.length', 8)
+    cy.get('.v-pagination__item').should('have.length', 8)
   })
 
   it('should render in RTL mode', () => {
