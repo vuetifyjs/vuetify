@@ -289,16 +289,7 @@ export const VField = defineComponent({
                         icon={ props.clearIcon }
                         tabindex="-1"
                         variant="text"
-                        onClick={
-                          (e: Event) => {
-                            e.stopPropagation()
-
-                            inputRef.value!.value = ''
-                            inputRef.value!.dispatchEvent(new Event('input'))
-
-                            emit('click:clear', e)
-                          }
-                        }
+                        onClick={ (e: Event) => emit('click:clear', e) }
                       />
                     </div>
                   ) }
