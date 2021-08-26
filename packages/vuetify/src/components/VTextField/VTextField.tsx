@@ -14,7 +14,7 @@ import VIntersect from '@/directives/intersect'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { defineComponent, pick, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -83,6 +83,7 @@ export const VTextField = defineComponent({
 
     useRender(() => {
       const hasCounter = (slots.counter || props.counter || props.counterValue)
+      const [_, restAttrs] = pick(attrs, ['class'])
 
       return (
         <VField
@@ -93,10 +94,16 @@ export const VTextField = defineComponent({
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
             },
+            attrs.class,
           ]}
           active={ isDirty.value }
           onUpdate:active={ val => internalDirty.value = val }
           onClick:control={ focus }
+          onClick:clear={ e => {
+            e.stopPropagation()
+
+            model.value = ''
+          }}
           role="textbox"
           { ...attrs }
           { ...props }
@@ -118,17 +125,19 @@ export const VTextField = defineComponent({
 
                   <input
                     class={ fieldClass }
-                    style={{ opacity: showPlaceholder ? undefined : '0' }}
+                    style={{ opacity: showPlaceholder ? undefined : '0' }} // can't this just be a class?
                     v-model={ model.value }
                     v-intersect={[{
                       handler: onIntersect,
                     }, null, ['once']]}
                     ref={ inputRef }
-                    type={ props.type }
-                    size={ 1 }
-                    placeholder={ props.placeholder }
-                    { ...slotProps }
                     autofocus={ props.autofocus }
+                    disabled={ props.disabled }
+                    placeholder={ props.placeholder }
+                    size={ 1 }
+                    type={ props.type }
+                    { ...slotProps }
+                    { ...restAttrs }
                   />
 
                   { props.suffix && (
