@@ -121,7 +121,6 @@ export default defineComponent({
               'v-badge--floating': props.floating,
               'v-badge--inline': props.inline,
             },
-            themeClasses.value,
           ]}
           { ...attrs }
         >
@@ -136,6 +135,7 @@ export default defineComponent({
                   backgroundColorClasses.value,
                   roundedClasses.value,
                   textColorClasses.value,
+                  themeClasses.value,
                 ]}
                 style={[
                   backgroundColorStyles.value,
