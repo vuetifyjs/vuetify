@@ -2,16 +2,17 @@
 import './VField.sass'
 
 // Components
-import { VInput } from '@/components/VInput'
-import { VIcon } from '@/components/VIcon'
-import { VBtn } from '../VBtn'
-import VFieldLabel from './VFieldLabel'
+import { VBtn } from '@/components/VBtn'
 import { VExpandXTransition } from '@/components/transitions'
+import { VIcon } from '@/components/VIcon'
+import { VInput } from '@/components/VInput'
+import VFieldLabel from './VFieldLabel'
 
 // Composables
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, toRef, watch, watchEffect } from 'vue'
@@ -19,7 +20,6 @@ import { convertToUnit, defineComponent, getUid, nullifyTransforms, propsFactory
 
 // Types
 import type { PropType, Ref } from 'vue'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
 type Variant = typeof allowedVariants[number]
@@ -192,16 +192,16 @@ export const VField = defineComponent({
           class={[
             'v-field',
             {
-              'v-field--prepended': hasPrepend,
-              'v-field--appended': hasAppend,
               'v-field--active': isActive.value,
+              'v-field--appended': hasAppend,
               'v-field--dirty': props.dirty,
               'v-field--disabled': props.disabled,
               'v-field--focused': isFocused.value,
-              'v-field--reverse': props.reverse,
-              'v-field--has-details': hasDetails,
               'v-field--has-background': !!props.bgColor,
+              'v-field--has-details': hasDetails,
               'v-field--hide-details': props.hideDetails,
+              'v-field--prepended': hasPrepend,
+              'v-field--reverse': props.reverse,
               'v-field--single-line': props.singleLine,
               [`v-field--variant-${props.variant}`]: true,
             },
