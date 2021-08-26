@@ -27,7 +27,7 @@ Designed to easily cycle through content, `v-window` provides a simple interface
 - [v-window](/api/v-window)
 - [v-window-item](/api/v-window-item)
 
-<api-section page="components/windows" />
+<inline-api page="components/windows" />
 
 <!-- ## Sub-components
 

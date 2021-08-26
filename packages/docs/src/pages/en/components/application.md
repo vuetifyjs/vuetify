@@ -20,7 +20,7 @@ In Vuetify, the `v-app` component and the **app** prop on components like `v-nav
 - [v-app](/api/v-app)
 - [v-main](/api/v-main)
 
-<api-section page="components/application" />
+<inline-api page="components/application" />
 
 <alert type="error">
 

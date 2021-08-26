@@ -23,7 +23,7 @@ The `v-color-picker` allows you to select a color using a variety of input metho
 
 - [v-color-picker](/api/v-color-picker)
 
-<api-section page="components/color-pickers" />
+<inline-api page="components/color-pickers" />
 
 ## Examples
 

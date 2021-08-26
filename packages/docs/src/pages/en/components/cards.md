@@ -29,7 +29,7 @@ A card has 4 basic components, `v-card-title`, `v-card-subtitle`, `v-card-text` 
 - [v-card-text](/api/v-card-text)
 - [v-card-title](/api/v-card-title)
 
-<api-section page="components/cards" />
+<inline-api page="components/cards" />
 
 ## Functional Components
 
