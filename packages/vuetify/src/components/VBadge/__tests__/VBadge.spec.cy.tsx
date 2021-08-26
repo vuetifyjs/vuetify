@@ -109,7 +109,7 @@ describe('VBadge', () => {
       cy.mount(<VBadge color="red" tile>tile</VBadge>)
         .get('.v-badge')
         .should('exist')
-        .should('.v-badge--tile')
+        .get('.v-badge--tile')
         .should('exist')
     })
   })
