@@ -15,6 +15,7 @@ const stories = {
 
 // Tests
 describe('VBadge', () => {
+  // TODO: update tests where the badge is partially out of view
   describe('bordered', () => {
     it('should have the bordered class applied when true', () => {
       cy.mount(<VBadge bordered>bordered</VBadge>)
@@ -48,7 +49,7 @@ describe('VBadge', () => {
 
   describe('content', () => {
     it('renders text within the badge', () => {
-      cy.mount(<VBadge content="badge content"></VBadge>)
+      cy.mount(<VBadge content="badge content" />)
         .get('.v-badge')
         .should('have.text', 'badge content')
     })
@@ -57,7 +58,7 @@ describe('VBadge', () => {
   // TODO: Fix theme colors with dot prop
   describe('dot', () => {
     it('should have the dot class applied when true', () => {
-      cy.mount(<VBadge color="red" dot>dot</VBadge>)
+      cy.mount(<VBadge dot>dot</VBadge>)
         .get('.v-badge')
         .should('have.class', 'v-badge--dot')
     })
@@ -65,7 +66,7 @@ describe('VBadge', () => {
 
   describe('floating', () => {
     it('should have the floating class applied when true', () => {
-      cy.mount(<VBadge color="red" floating>floating</VBadge>) // TODO: badge is slightly off screen
+      cy.mount(<VBadge floating>floating</VBadge>)
         .get('.v-badge')
         .should('have.class', 'v-badge--floating')
     })
@@ -73,11 +74,47 @@ describe('VBadge', () => {
 
   describe('icon', () => {
     it('should render an icon inside', () => {
-      cy.mount(<VBadge color="red" icon="mdi-vuetify">icon</VBadge>) // TODO: badge is slightly off screen
+      cy.mount(<VBadge icon="mdi-vuetify">icon</VBadge>)
         .get('.v-badge')
         .should('contain.html', 'i')
         .get('i')
         .should('have.class', 'mdi-vuetify')
+    })
+  })
+
+  describe('inline', () => {
+    it('should have the inline class applied when true', () => {
+      cy.mount(<VBadge inline>inline</VBadge>)
+        .get('.v-badge')
+        .should('have.class', 'v-badge--inline')
+    })
+  })
+
+  describe('label', () => {
+    it('should have the floating class applied when true', () => {
+      cy.mount(<VBadge label="label-badge">label</VBadge>)
+        .get('.v-badge__badge')
+        .should('have.attr', 'aria-label', 'label-badge')
+    })
+  })
+
+  describe.skip('location', () => {
+
+  })
+
+  describe('max', () => {
+    it('should add a suffix if the content value is greater', () => {
+      cy.mount(<VBadge content="1000" max="999" />)
+        .get('.v-badge')
+        .should('have.text', '999+')
+    })
+  })
+
+  describe('modelValue', () => {
+    it('should hide the component when false', () => {
+      cy.mount(<VBadge modelValue={ false } />)
+        .get('.v-badge')
+        .should('not.be.visible')
     })
   })
 
@@ -106,7 +143,7 @@ describe('VBadge', () => {
   // TODO: Update testing to check for the tile class
   describe('tile', () => {
     it('should have the tile class applied when true', () => {
-      cy.mount(<VBadge color="red" tile>tile</VBadge>)
+      cy.mount(<VBadge tile>tile</VBadge>)
         .get('.v-badge')
         .should('exist')
         .get('.v-badge--tile')
