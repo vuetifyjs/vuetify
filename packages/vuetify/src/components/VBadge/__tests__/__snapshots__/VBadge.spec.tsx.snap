@@ -9,7 +9,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { content: '10', m
     <transition-stub>
       <span class="v-badge__badge bg-primary v-theme--light"
             aria-atomic="true"
-            aria-label="locale string here"
+            aria-label="Badge"
             aria-live="polite"
             role="status"
       >
@@ -31,7 +31,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { content: '10', m
     <transition-stub>
       <span class="v-badge__badge bg-primary v-theme--light"
             aria-atomic="true"
-            aria-label="locale string here"
+            aria-label="Badge"
             aria-live="polite"
             role="status"
       >
@@ -53,7 +53,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { content: 'foo', 
     <transition-stub>
       <span class="v-badge__badge bg-primary v-theme--light"
             aria-atomic="true"
-            aria-label="locale string here"
+            aria-label="Badge"
             aria-live="polite"
             role="status"
       >
@@ -75,7 +75,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { dot: true } prop
     <transition-stub>
       <span class="v-badge__badge bg-primary v-theme--light"
             aria-atomic="true"
-            aria-label="locale string here"
+            aria-label="Badge"
             aria-live="polite"
             role="status"
       >
@@ -94,7 +94,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { dot: true, float
     <transition-stub>
       <span class="v-badge__badge bg-primary v-theme--light"
             aria-atomic="true"
-            aria-label="locale string here"
+            aria-label="Badge"
             aria-live="polite"
             role="status"
       >
@@ -113,7 +113,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { floating: true }
     <transition-stub>
       <span class="v-badge__badge bg-primary v-theme--light"
             aria-atomic="true"
-            aria-label="locale string here"
+            aria-label="Badge"
             aria-live="polite"
             role="status"
       >
@@ -135,7 +135,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { floating: true }
     <transition-stub>
       <span class="v-badge__badge bg-primary v-theme--light"
             aria-atomic="true"
-            aria-label="locale string here"
+            aria-label="Badge"
             aria-live="polite"
             role="status"
       >
@@ -157,7 +157,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { icon: 'foo' } pr
     <transition-stub>
       <span class="v-badge__badge bg-primary v-theme--light"
             aria-atomic="true"
-            aria-label="locale string here"
+            aria-label="Badge"
             aria-live="polite"
             role="status"
       >
@@ -179,7 +179,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { inline: true } p
     <transition-stub>
       <span class="v-badge__badge bg-primary v-theme--light"
             aria-atomic="true"
-            aria-label="locale string here"
+            aria-label="Badge"
             aria-live="polite"
             role="status"
       >
@@ -201,7 +201,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { location: 'botto
     <transition-stub>
       <span class="v-badge__badge bg-primary v-theme--light"
             aria-atomic="true"
-            aria-label="locale string here"
+            aria-label="Badge"
             aria-live="polite"
             role="status"
       >
@@ -223,7 +223,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { location: null }
     <transition-stub>
       <span class="v-badge__badge bg-primary v-theme--light"
             aria-atomic="true"
-            aria-label="locale string here"
+            aria-label="Badge"
             aria-live="polite"
             role="status"
       >
@@ -245,7 +245,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { location: undefi
     <transition-stub>
       <span class="v-badge__badge bg-primary v-theme--light"
             aria-atomic="true"
-            aria-label="locale string here"
+            aria-label="Badge"
             aria-live="polite"
             role="status"
       >
@@ -267,7 +267,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { modelValue: fals
     <transition-stub>
       <span class="v-badge__badge bg-primary v-theme--light"
             aria-atomic="true"
-            aria-label="locale string here"
+            aria-label="Badge"
             aria-live="polite"
             role="status"
             style="display: none;"
@@ -290,7 +290,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { modelValue: true
     <transition-stub>
       <span class="v-badge__badge bg-primary v-theme--light"
             aria-atomic="true"
-            aria-label="locale string here"
+            aria-label="Badge"
             aria-live="polite"
             role="status"
       >
@@ -309,7 +309,7 @@ exports[`VBadge.tsx should match snapshot without badge slot and { content: 'foo
     <transition-stub>
       <span class="v-badge__badge bg-primary v-theme--light"
             aria-atomic="true"
-            aria-label="locale string here"
+            aria-label="Badge"
             aria-live="polite"
             role="status"
       >
@@ -328,7 +328,7 @@ exports[`VBadge.tsx should match snapshot without badge slot and { content: 'foo
     <transition-stub>
       <span class="v-badge__badge bg-primary v-theme--light"
             aria-atomic="true"
-            aria-label="locale string here"
+            aria-label="Badge"
             aria-live="polite"
             role="status"
       >
@@ -348,7 +348,7 @@ exports[`VBadge.tsx should match snapshot without badge slot and { icon: 'foo' }
     <transition-stub>
       <span class="v-badge__badge bg-primary v-theme--light"
             aria-atomic="true"
-            aria-label="locale string here"
+            aria-label="Badge"
             aria-live="polite"
             role="status"
       >

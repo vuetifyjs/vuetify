@@ -9,6 +9,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -64,6 +65,7 @@ export default defineComponent({
   setup (props, ctx) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { roundedClasses } = useRounded(props, 'v-badge')
+    const { t } = useLocale()
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'textColor'))
     const { themeClasses } = useTheme(props)
 
@@ -143,7 +145,7 @@ export default defineComponent({
                   textColorStyles.value,
                 ] as any} // TODO: Fix this :(
                 aria-atomic="true"
-                aria-label="locale string here" // TODO: locale string here
+                aria-label={ t(props.label, value) }
                 aria-live="polite"
                 role="status"
                 { ...badgeAttrs }
