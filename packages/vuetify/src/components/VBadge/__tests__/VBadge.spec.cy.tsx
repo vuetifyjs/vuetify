@@ -4,26 +4,45 @@ import VBadge from '../VBadge'
 import { generate } from '@/../cypress/templates'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
+const location = ['bottom-left', 'bottom-right', 'top-left', 'top-right']
+const rounded = ['circle', 'pill', 'shaped', 'tr-xl', 'br-lg'] // TODO: fix pill
 const props = {
-  colors: defaultColors,
-  textColors: defaultColors,
+  bordered: true,
+  color: defaultColors,
+  dot: true,
+  icon: ['mdi-vuetify'],
+  floating: true,
+  offsetX: [8, -8, '12', '-12'],
+  offsetY: [-6, 6, '10', '-10'],
+  inline: true,
+  location,
+  modelValue: true,
+  rounded,
 }
 
 const stories = {
-  'Default badge': <VBadge>Basic badge</VBadge>,
+  'Default badge': <VBadge />,
+  'Icon badge': <VBadge icon="mdi-vuetify" />,
+  'Text color': ( // TODO: update styling
+    <div class="d-flex" style="gap: 3rem">
+      { defaultColors.map((color, idx) => (
+        <>
+          <div class="d-flex" style="gap: 0.8rem">
+            <VBadge textColor={ color } content={ idx.toString() }>
+              <button class="v-btn v-btn--size-default v-btn--variant-contained">
+                { color }
+              </button>
+            </VBadge>
+          </div>
+        </>
+      )) }
+    </div>
+  ),
 }
 
 // Tests
 describe('VBadge', () => {
-  // TODO: update tests where the badge is partially out of view
-  describe('bordered', () => {
-    it('should have the bordered class applied when true', () => {
-      cy.mount(<VBadge bordered>bordered</VBadge>)
-        .get('.v-badge')
-        .should('have.class', 'v-badge--bordered')
-    })
-  })
-
+  // TODO: Remove remaining skipped tests
   describe('color', () => {
     it('supports default color props', () => {
       cy.mount(() => (
@@ -47,46 +66,11 @@ describe('VBadge', () => {
     })
   })
 
-  describe('content', () => {
+  describe.skip('content', () => {
     it('renders text within the badge', () => {
       cy.mount(<VBadge content="badge content" />)
         .get('.v-badge')
         .should('have.text', 'badge content')
-    })
-  })
-
-  // TODO: Fix theme colors with dot prop
-  describe('dot', () => {
-    it('should have the dot class applied when true', () => {
-      cy.mount(<VBadge dot>dot</VBadge>)
-        .get('.v-badge')
-        .should('have.class', 'v-badge--dot')
-    })
-  })
-
-  describe('floating', () => {
-    it('should have the floating class applied when true', () => {
-      cy.mount(<VBadge floating>floating</VBadge>)
-        .get('.v-badge')
-        .should('have.class', 'v-badge--floating')
-    })
-  })
-
-  describe('icon', () => {
-    it('should render an icon inside', () => {
-      cy.mount(<VBadge icon="mdi-vuetify">icon</VBadge>)
-        .get('.v-badge')
-        .should('contain.html', 'i')
-        .get('i')
-        .should('have.class', 'mdi-vuetify')
-    })
-  })
-
-  describe('inline', () => {
-    it('should have the inline class applied when true', () => {
-      cy.mount(<VBadge inline>inline</VBadge>)
-        .get('.v-badge')
-        .should('have.class', 'v-badge--inline')
     })
   })
 
@@ -98,23 +82,19 @@ describe('VBadge', () => {
     })
   })
 
-  describe.skip('location', () => {
-
-  })
-
   describe('max', () => {
     it('should add a suffix if the content value is greater', () => {
       cy.mount(<VBadge content="1000" max="999" />)
         .get('.v-badge')
-        .should('have.text', '999+')
+        .should('contain.text', '+')
     })
   })
 
-  describe('modelValue', () => {
-    it('should hide the component when false', () => {
-      cy.mount(<VBadge modelValue={ false } />)
-        .get('.v-badge')
-        .should('not.be.visible')
+  describe('tag', () => {
+    it('renders the proper tag instead of a div', () => {
+      cy.mount(<VBadge tag="custom-tag">tag</VBadge>)
+        .get('custom-tag')
+        .should('have.text', 'tag')
     })
   })
 
@@ -133,26 +113,16 @@ describe('VBadge', () => {
         .should('have.length', defaultColors.length)
         .then(subjects => {
           Array.from(subjects).forEach((subject, idx) => {
+            // TODO: refactor
             expect(subject.querySelector(`.text-${defaultColors[idx]}`)).to.be.instanceOf(HTMLSpanElement)
             expect(subject).to.contain(defaultColors[idx])
           })
         })
     })
   })
-
-  // TODO: Update testing to check for the tile class
-  describe('tile', () => {
-    it('should have the tile class applied when true', () => {
-      cy.mount(<VBadge tile>tile</VBadge>)
-        .get('.v-badge')
-        .should('exist')
-        .get('.v-badge--tile')
-        .should('exist')
-    })
-  })
 })
 
 // Useful to preview all of the variants and pre-made examples
-describe.skip('Showcase', { viewportHeight: 1130, viewportWidth: 700 }, () => {
+describe('Showcase', { viewportHeight: 1130, viewportWidth: 700 }, () => {
   generate({ stories, props, component: VBadge })
 })
