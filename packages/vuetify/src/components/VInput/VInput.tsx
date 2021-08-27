@@ -12,7 +12,6 @@ export const VInput = defineComponent({
   props: {
     appendIcon: String,
     prependIcon: String,
-    hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
 
     ...makeDensityProps(),
   },
@@ -40,12 +39,13 @@ export const VInput = defineComponent({
               class="v-input__prepend"
               onClick={ e => emit('click:prepend', e) }
             >
-              { slots.prepend
-                ? slots.prepend()
-                : (<VIcon icon={ props.prependIcon } />)
-              }
+              { slots?.prepend?.() }
+
+              { props.prependIcon && (
+                <VIcon icon={ props.prependIcon } />
+              ) }
             </div>
-          )}
+          ) }
 
           { slots.default?.() }
 
@@ -54,18 +54,19 @@ export const VInput = defineComponent({
               class="v-input__append"
               onClick={ e => emit('click:append', e) }
             >
-              { slots.append
-                ? slots.append()
-                : (<VIcon icon={ props.appendIcon } />)
-              }
+              { slots?.append?.() }
+
+              { props.appendIcon && (
+                <VIcon icon={ props.appendIcon } />
+              ) }
             </div>
-          )}
+          ) }
 
           { slots.details && (
             <div class="v-input__details">
-              { slots.details() }
+              { slots.details?.() }
             </div>
-          )}
+          ) }
         </div>
       )
     }

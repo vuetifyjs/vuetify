@@ -6,6 +6,8 @@ $field-max-width: 100% !default;
 $field-transition-timing: 150ms $standard-easing !default;
 $field-subtle-transition-timing: 250ms $standard-easing !default;
 $field-underlined-margin-bottom: 4px !default;
+$field-clearable-transition: .15s $standard-easing !default;
+$field-disabled-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 
 // CONTROL
 $field-control-contained-background: rgb(var(--v-theme-surface)) !default;

@@ -2,13 +2,17 @@
 import './VField.sass'
 
 // Components
-import { VInput } from '@/components/VInput'
+import { VBtn } from '@/components/VBtn'
+import { VExpandXTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
+import { VInput } from '@/components/VInput'
 import VFieldLabel from './VFieldLabel'
 
 // Composables
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, toRef, watch, watchEffect } from 'vue'
@@ -16,7 +20,6 @@ import { convertToUnit, defineComponent, getUid, nullifyTransforms, propsFactory
 
 // Types
 import type { PropType, Ref } from 'vue'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
 type Variant = typeof allowedVariants[number]
@@ -27,7 +30,6 @@ export interface DefaultInputSlot {
   isFocused: boolean
   controlRef: Ref<HTMLElement | undefined>
   inputRef: Ref<HTMLInputElement | undefined>
-  fieldRef: Ref<HTMLElement | undefined>
   focus: () => void
   blur: () => void
 }
@@ -45,7 +47,14 @@ export const makeVFieldProps = propsFactory({
   disabled: Boolean,
   appendInnerIcon: String,
   bgColor: String,
+  clearable: Boolean,
+  clearIcon: {
+    type: String,
+    default: '$clear',
+  },
   color: String,
+  // TODO: implement auto
+  hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hint: String,
   id: String,
   label: String,
@@ -61,6 +70,7 @@ export const makeVFieldProps = propsFactory({
   },
 
   ...makeThemeProps(),
+  ...makeTransitionProps({ transition: 'slide-y-transition' }),
 }, 'v-field')
 
 export const VField = defineComponent({
@@ -76,10 +86,11 @@ export const VField = defineComponent({
   },
 
   emits: {
-    'click:prepend-inner': (e: MouseEvent) => true,
-    'click:append-inner': (e: MouseEvent) => true,
+    'click:clear': (e: Event) => true as any,
+    'click:prepend-inner': (e: MouseEvent) => true as any,
+    'click:append-inner': (e: MouseEvent) => true as any,
     'click:control': (props: DefaultInputSlot) => true as any,
-    'update:active': (active: boolean) => true,
+    'update:active': (active: boolean) => true as any,
   },
 
   setup (props, { attrs, emit, slots }) {
@@ -90,7 +101,6 @@ export const VField = defineComponent({
     const labelRef = ref<InstanceType<typeof VFieldLabel>>()
     const floatingLabelRef = ref<InstanceType<typeof VFieldLabel>>()
     const controlRef = ref<HTMLElement>()
-    const fieldRef = ref<HTMLElement>()
     const inputRef = ref<HTMLInputElement>()
     const isFocused = ref(false)
     const id = computed(() => props.id || `input-${uid}`)
@@ -151,7 +161,6 @@ export const VField = defineComponent({
       isFocused: isFocused.value,
       inputRef,
       controlRef,
-      fieldRef,
       focus,
       blur,
     }))
@@ -166,8 +175,10 @@ export const VField = defineComponent({
 
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
+      const hasDetails = (slots.details || props.hint)
       const hasPrepend = (slots.prependInner || props.prependInnerIcon)
-      const hasAppend = (slots.appendInner || props.appendInnerIcon)
+      const hasClear = (props.clearable || slots.clear)
+      const hasAppend = (slots.appendInner || props.appendInnerIcon || hasClear)
 
       const label = slots.label
         ? slots.label({
@@ -181,14 +192,16 @@ export const VField = defineComponent({
           class={[
             'v-field',
             {
-              'v-field--prepended': hasPrepend,
-              'v-field--appended': hasAppend,
               'v-field--active': isActive.value,
+              'v-field--appended': hasAppend,
               'v-field--dirty': props.dirty,
               'v-field--disabled': props.disabled,
               'v-field--focused': isFocused.value,
-              'v-field--reverse': props.reverse,
               'v-field--has-background': !!props.bgColor,
+              'v-field--has-details': hasDetails,
+              'v-field--hide-details': props.hideDetails,
+              'v-field--prepended': hasPrepend,
+              'v-field--reverse': props.reverse,
               'v-field--single-line': props.singleLine,
               [`v-field--variant-${props.variant}`]: true,
             },
@@ -202,7 +215,20 @@ export const VField = defineComponent({
           v-slots={{
             prepend: slots.prepend && (() => slots.prepend?.(slotProps.value)),
             append: slots.append && (() => slots.append?.(slotProps.value)),
-            details: slots.details && (() => slots.details?.(slotProps.value)),
+            details: hasDetails && (() => (
+              <>
+                <MaybeTransition transition={ props.transition }>
+                  <div
+                    v-show={ props.hint && (props.persistentHint || slotProps.value.isFocused) }
+                    class="v-field__details"
+                  >
+                    { props.hint }
+                  </div>
+                </MaybeTransition>
+
+                { slots?.details?.(slotProps.value) }
+              </>
+            )),
           }}
         >
           <div
@@ -220,10 +246,11 @@ export const VField = defineComponent({
                 class="v-field__prepend-inner"
                 onClick={ e => emit('click:prepend-inner', e) }
               >
-                { slots.prependInner
-                  ? slots.prependInner(slotProps.value)
-                  : (<VIcon icon={ props.prependInnerIcon } />)
-                }
+                { props.prependInnerIcon && (
+                  <VIcon icon={ props.prependInnerIcon } />
+                ) }
+
+                { slots?.prependInner?.(slotProps.value) }
               </div>
             ) }
 
@@ -254,10 +281,25 @@ export const VField = defineComponent({
                 class="v-field__append-inner"
                 onClick={ e => emit('click:append-inner', e) }
               >
-                { slots.appendInner
-                  ? slots.appendInner(slotProps.value)
-                  : (<VIcon icon={ props.appendInnerIcon } />)
-                }
+                <VExpandXTransition>
+                  { hasClear && inputRef.value?.value && (
+                    <div class="v-field__clearable">
+                      <VBtn
+                        density="compact"
+                        icon={ props.clearIcon }
+                        tabindex="-1"
+                        variant="text"
+                        onClick={ (e: Event) => emit('click:clear', e) }
+                      />
+                    </div>
+                  ) }
+                </VExpandXTransition>
+
+                { slots?.appendInner?.(slotProps.value) }
+
+                { props.appendInnerIcon && (
+                  <VIcon icon={ props.appendInnerIcon } />
+                ) }
               </div>
             ) }
 
@@ -271,7 +313,7 @@ export const VField = defineComponent({
                       <VFieldLabel ref={ floatingLabelRef } floating>
                         { label }
                       </VFieldLabel>
-                    )}
+                    ) }
                   </div>
 
                   <div class="v-field__outline__end" />
@@ -292,7 +334,6 @@ export const VField = defineComponent({
     return {
       inputRef,
       controlRef,
-      fieldRef,
     }
   },
 })

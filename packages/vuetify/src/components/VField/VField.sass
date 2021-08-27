@@ -36,6 +36,27 @@
   &--appended
     --v-field-padding-after: #{$field-control-affixed-inner-padding}
 
+  &.v-field--variant-contained,
+  &.v-field--variant-filled
+    --v-field-padding-top: 21px
+    --v-field-padding-bottom: 6px
+
+    &.v-field--single-line
+      --v-field-padding-top: 0
+      --v-field-padding-bottom: 0
+
+  &.v-field--variant-plain,
+  &.v-field--variant-underlined
+    $root: &
+
+    --v-field-padding-top: 16px
+    --v-field-padding-bottom: 8px
+
+    @at-root
+      @include density('v-input', $input-density) using ($modifier)
+        @at-root #{selector-append(&, $root)}
+          --v-field-padding-top: #{$field-input-padding-top + $modifier * $field-label-floating-scale}
+
 /* endregion */
 /* region CONTROL */
 .v-field__control
@@ -81,27 +102,8 @@
 
   .v-field__input
     letter-spacing: $field-letter-spacing
-
-    .v-field--variant-contained &,
-    .v-field--variant-filled &
-      padding-top: 21px
-      padding-bottom: 6px
-
-      @at-root #{selector-append('.v-field--single-line', &)}
-        padding-top: 0
-        padding-bottom: 0
-
-    .v-field--variant-plain &,
-    .v-field--variant-underlined &
-      $root: &
-
-      padding-top: 16px
-      padding-bottom: 8px
-
-      @at-root
-        @include density('v-input', $input-density) using ($modifier)
-          @at-root #{selector-append(&, $root)}
-            padding-top: $field-input-padding-top + $modifier * $field-label-floating-scale
+    padding-top: var(--v-field-padding-top, 0)
+    padding-bottom: var(--v-field-padding-bottom, 0)
 
 /* endregion */
 /* region AFFIXES */
@@ -136,6 +138,14 @@
   .v-field--variant-plain &,
   .v-field--variant-underlined &
     align-self: flex-end
+
+.v-field__clearable
+  opacity: 0
+  transition: $field-clearable-transition
+
+  .v-field--focused &,
+  .v-field__control:hover &
+    opacity: 1
 
 /* endregion */
 /* region LABEL */
@@ -308,6 +318,9 @@
     padding-inline-start: 0
     padding-inline-end: 0
 
+.v-field__details
+  transition: inherit
+
 /* endregion */
 /* region OVERLAY */
 .v-field--variant-filled
@@ -337,22 +350,15 @@
 
     @include rtl()
       text-align: left
+.v-field--disabled
+  pointer-events: none
 
-  .v-field-label
-    @include ltr()
-      left: auto
-      right: 0
+  &,
+  input
+    color: $field-disabled-color
 
-    @include rtl()
-      left: 0
-      right: auto
-
-  &.v-field--variant-outlined
-    .v-field__outline
-      &__start
-        flex: 1
-
-      &__end
-        flex: 0 0 $field-control-affixed-padding
-
+  &.v-field--variant-filled,
+  &.v-field--variant-underlined
+    .v-field__outline::before
+      border-image: repeating-linear-gradient(to right, $field-disabled-color 0px, $field-disabled-color 2px, transparent 2px, transparent 4px) 1 repeat
 /* endregion */
