@@ -279,7 +279,10 @@ export default defineComponent({
   },
 
   setup (props, { slots, emit, attrs }) {
+    const { isRtl } = useRtl()
+
     const { min, max, disableTransition, thumbPressed, roundValue } = useSlider(props)
+
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -293,19 +296,22 @@ export default defineComponent({
     )
 
     const isDirty = computed(() => model.value.some(v => v > min.value))
+    const trackStart = computed(() => (model.value[0] - min.value) / (max.value - min.value) * 100)
+    const trackStop = computed(() => (model.value[1] - min.value) / (max.value - min.value) * 100)
+    const startThumbRef = ref()
+    const stopThumbRef = ref()
+    const focusedThumb = ref()
 
     const fieldRef = ref()
     const trackContainerRef = ref()
-    const startThumbRef = ref()
-    const stopThumbRef = ref()
-
-    const trackStart = computed(() => (model.value[0] - min.value) / (max.value - min.value) * 100)
-    const trackStop = computed(() => (model.value[1] - min.value) / (max.value - min.value) * 100)
-
-    const focusedThumb = ref()
     let startOffset = 0
     let thumbMoved = false
-    const { isRtl } = useRtl()
+
+    function getPosition (e: MouseEvent | TouchEvent) {
+      if ('touches' in e && e.touches.length) return e.touches[0]
+      else if ('changedTouches' in e && e.changedTouches.length) return e.changedTouches[0]
+      else return e
+    }
 
     function parseMouseMove (e: MouseEvent | TouchEvent): number {
       const vertical = props.direction === 'vertical'
@@ -317,7 +323,7 @@ export default defineComponent({
         [start]: trackStart,
         [length]: trackLength,
       } = trackContainerRef.value.$el.getBoundingClientRect()
-      const clickOffset = 'touches' in e ? e.touches[0][click] : e[click]
+      const clickOffset = getPosition(e)[click]
 
       // It is possible for left to be NaN, force to number
       let clickPos = Math.min(Math.max((clickOffset - trackStart - startOffset) / trackLength, 0), 1) || 0
@@ -357,7 +363,9 @@ export default defineComponent({
       window.clearTimeout(transitionTimeout)
 
       window.removeEventListener('mousemove', onMouseMove, { passive: true, capture: true })
+      window.removeEventListener('touchmove', onMouseMove, { passive: true, capture: true })
       window.removeEventListener('mouseup', onSliderMouseUp, { passive: true })
+      window.removeEventListener('touchend', onSliderMouseUp, { passive: true })
     }
 
     function getOffset (e: MouseEvent | TouchEvent, el: Element) {
@@ -374,6 +382,7 @@ export default defineComponent({
 
       const a = Math.abs(getOffset(e, thumbs[0]))
       const b = Math.abs(getOffset(e, thumbs[1]))
+      console.log(a, b)
 
       return a < b ? startThumbRef.value : stopThumbRef.value
     }
@@ -398,7 +407,9 @@ export default defineComponent({
       startOffset = getOffset(e, focusedThumb.value?.$el)
 
       window.addEventListener('mousemove', onMouseMove, { passive: true, capture: true })
+      window.addEventListener('touchmove', onMouseMove, { passive: true, capture: true })
       window.addEventListener('mouseup', onSliderMouseUp, { passive: true })
+      window.addEventListener('touchend', onSliderMouseUp, { passive: true })
     }
 
     return () => {
@@ -406,8 +417,11 @@ export default defineComponent({
         <VField
           class={[
             'v-slider',
-            'v-range-slider',
             `v-slider--${props.direction}`,
+            {
+              'v-slider--disabled': props.disabled,
+            },
+            'v-range-slider',
           ]}
           style={{
             '--v-slider-track-size': props.trackSize ? convertToUnit(props.trackSize) : undefined,
@@ -421,6 +435,7 @@ export default defineComponent({
               <div
                 class="v-slider__container"
                 onMousedown={onSliderMousedown}
+                onTouchstart={onSliderMousedown}
               >
                 <input
                   id={`${slotProps.id}_start`}

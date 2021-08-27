@@ -160,7 +160,7 @@ export default defineComponent({
 
   setup (props, { attrs, emit, slots }) {
     const { isRtl } = useRtl()
-    const isReversed = computed(() => isRtl.value !== props.reverse)
+
     const { min, max, thumbPressed, disableTransition, roundValue } = useSlider(props)
 
     const model = useProxiedModel(
@@ -176,13 +176,11 @@ export default defineComponent({
     )
 
     const isDirty = computed(() => model.value > min.value)
-
     const trackStop = computed(() => (model.value - min.value) / (max.value - min.value) * 100)
-
-    const trackContainerRef = ref<HTMLElement>()
     const thumbContainerRef = ref<HTMLElement>()
-    const fieldRef = ref<VField>()
 
+    const fieldRef = ref<VField>()
+    const trackContainerRef = ref<HTMLElement>()
     let startOffset = 0
     let thumbMoved = false
 
@@ -192,7 +190,7 @@ export default defineComponent({
       else return e
     }
 
-    function parseMouseMove (e: MouseEvent | TouchEvent) {
+    function parseMouseMove (e: MouseEvent | TouchEvent): number {
       if (!trackContainerRef.value) return model.value
 
       const vertical = props.direction === 'vertical'
@@ -224,9 +222,6 @@ export default defineComponent({
     let transitionTimeout = 0
 
     function onSliderMouseUp (e: MouseEvent | TouchEvent) {
-      console.log('mouseup')
-      // if (e.touches && !e.touches.length) return
-
       e.stopPropagation()
 
       if (!thumbMoved) {
@@ -246,6 +241,15 @@ export default defineComponent({
       window.removeEventListener('touchend', onSliderMouseUp, { passive: true })
     }
 
+    function getOffset (e: MouseEvent | TouchEvent, el: Element) {
+      const vertical = props.direction === 'vertical'
+      const rect = el.getBoundingClientRect()
+      const touch = 'touches' in e ? e.touches[0] : e
+      return vertical
+        ? touch.clientY - (rect.top + rect.height / 2)
+        : touch.clientX - (rect.left + rect.width / 2)
+    }
+
     function onSliderMousedown (e: MouseEvent | TouchEvent) {
       e.preventDefault()
 
@@ -262,13 +266,7 @@ export default defineComponent({
         }, 300)
       }
 
-      const touch = getPosition(e)
-      const thumbRect = thumbContainerRef.value?.$el.getBoundingClientRect()
-      const vertical = props.direction === 'vertical'
-
-      startOffset = vertical
-        ? touch.clientY - (thumbRect.top + thumbRect.height / 2)
-        : touch.clientX - (thumbRect.left + thumbRect.width / 2)
+      startOffset = getOffset(e, thumbContainerRef.value?.$el)
 
       window.addEventListener('mousemove', onMouseMove, { passive: true, capture: true })
       window.addEventListener('touchmove', onMouseMove, { passive: true, capture: true })
@@ -298,7 +296,7 @@ export default defineComponent({
               <div
                 class="v-slider__container"
                 onMousedown={onSliderMousedown}
-                onTouchstartPassive={onSliderMousedown}
+                onTouchstart={onSliderMousedown}
               >
                 <input
                   id={slotProps.id}
@@ -328,7 +326,10 @@ export default defineComponent({
                   modelValue={model.value}
                   onUpdate:modelValue={v => model.value = v}
                   position={trackStop.value}
-                  onFocus={slotProps.onFocus}
+                  onFocus={() => {
+                    slotProps.onFocus()
+                    console.log('focus')
+                  }}
                   onBlur={slotProps.onBlur}
                   v-slots={{
                     label: slots['thumb-label'],
