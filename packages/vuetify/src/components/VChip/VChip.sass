@@ -1,5 +1,7 @@
-// Imports
-@import ./index
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
+@use './mixins' as *
 
 .v-chip
   align-items: center
@@ -12,10 +14,10 @@
     @include chip-sizes()
     @include chip-density('height', $chip-density)
 
-  @include border($chip-border...)
-  @include elevation($chip-elevation)
-  @include rounded($chip-border-radius)
-  @include variant($chip-variants...)
+  @include tools.border($chip-border...)
+  @include tools.elevation($chip-elevation)
+  @include tools.rounded($chip-border-radius)
+  @include tools.variant($chip-variants...)
 
   &--border
     border-width: $chip-border-thin-width
@@ -24,7 +26,7 @@
     cursor: pointer
 
   &--label
-    @include rounded($chip-label-border-radius)
+    @include tools.rounded($chip-label-border-radius)
 
 // Elements
 .v-chip__append

@@ -1,14 +1,17 @@
+@use 'sass:map';
+@use '../../styles/settings';
+
 // Defaults
 $bottom-navigation-background: rgb(var(--v-theme-surface)) !default;
 $bottom-navigation-color: rgb(var(--v-theme-on-surface)) !default;
-$bottom-navigation-border-color: $border-color-root !default;
-$bottom-navigation-border-radius: map-get($rounded, '0') !default;
-$bottom-navigation-border-style: $border-style-root !default;
+$bottom-navigation-border-color: settings.$border-color-root !default;
+$bottom-navigation-border-radius: map.get(settings.$rounded, '0') !default;
+$bottom-navigation-border-style: settings.$border-style-root !default;
 $bottom-navigation-border-thin-width: thin !default;
 $bottom-navigation-border-width: 0 !default;
 $bottom-navigation-elevation: 4 !default;
 $bottom-navigation-flat-elevation: 0 !default;
-$bottom-navigation-transition: .2s $standard-easing !default;
+$bottom-navigation-transition: .2s settings.$standard-easing !default;
 
 $bottom-navigation-border: (
   $bottom-navigation-border-color,

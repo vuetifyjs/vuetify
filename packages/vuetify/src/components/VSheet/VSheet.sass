@@ -1,12 +1,13 @@
-// Imports
-@import './index'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-sheet
-  @include border($sheet-border...)
-  @include elevation($sheet-elevation)
-  @include position($sheet-positions)
-  @include rounded($sheet-border-radius)
-  @include theme($sheet-theme...)
+  @include tools.border($sheet-border...)
+  @include tools.elevation($sheet-elevation)
+  @include tools.position($sheet-positions)
+  @include tools.rounded($sheet-border-radius)
+  @include tools.theme($sheet-theme...)
 
   &--rounded
-    @include rounded($sheet-rounded-border-radius)
+    @include tools.rounded($sheet-rounded-border-radius)

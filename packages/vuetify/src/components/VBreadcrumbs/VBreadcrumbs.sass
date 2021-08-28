@@ -1,14 +1,16 @@
-@import ./index
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-breadcrumbs
   line-height: $breadcrumbs-line-height
   padding: $breadcrumbs-padding
 
   &--rounded
-    @include rounded($breadcrumbs-rounded-border-radius)
+    @include tools.rounded($breadcrumbs-rounded-border-radius)
 
   @at-root
-    @include density('v-breadcrumbs', $breadcrumbs-density) using ($modifier)
+    @include tools.density('v-breadcrumbs', $breadcrumbs-density) using ($modifier)
       padding-top: $breadcrumbs-padding + $modifier
       padding-bottom: $breadcrumbs-padding + $modifier
 

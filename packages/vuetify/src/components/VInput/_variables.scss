@@ -1,3 +1,5 @@
+@use '../../styles/settings';
+
 // CONTROL
 $input-density: ('default': 0, 'comfortable': -2, 'compact': -4) !default;
 $input-control-height: 56px !default;
@@ -10,7 +12,7 @@ $input-details-line-height: normal !default;
 $input-details-min-height: 22px !default;
 $input-details-padding-above: 6px !default;
 $input-details-padding-inline: 16px !default;
-$input-details-transition: 150ms $standard-easing !default;
+$input-details-transition: 150ms settings.$standard-easing !default;
 
 // AFFIXES
 $input-affix-margin-inside: 16px !default;

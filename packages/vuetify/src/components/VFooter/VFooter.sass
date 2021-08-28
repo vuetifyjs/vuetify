@@ -1,5 +1,6 @@
-// Imports
-@import './index'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-footer
   align-items: center
@@ -8,11 +9,12 @@
   padding: $footer-padding
   position: relative
 
-  // missing from variables @include border($footer-query)
-  +elevation($footer-elevation)
-  +position($footer-positions)
-  +rounded($footer-border-radius)
-  @include theme($footer-theme...)
+  // missing from variables
+  // @include tools.border($footer-query)
+  @include tools.elevation($footer-elevation)
+  @include tools.position($footer-positions)
+  @include tools.rounded($footer-border-radius)
+  @include tools.theme($footer-theme...)
 
   &--rounded
-    +rounded($footer-rounded-border-radius)
+    @include tools.rounded($footer-rounded-border-radius)

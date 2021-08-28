@@ -1,3 +1,6 @@
+@use './functions' as *
+@use '../settings' as *
+
 @mixin visually-hidden
   position: absolute !important
   height: 1px
@@ -6,3 +9,11 @@
   clip: rect(1px, 1px, 1px, 1px)
   white-space: nowrap
   display: initial
+
+=media-breakpoint-up($name, $breakpoints: $grid-breakpoints)
+  $min: breakpoint-min($name, $breakpoints)
+  @if $min
+    @media (min-width: $min)
+      @content
+  @else
+    @content

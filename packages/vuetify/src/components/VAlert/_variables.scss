@@ -1,3 +1,5 @@
+@use '../../styles/settings';
+
 // Defaults
 $alert-avatar-height: 24px !default;
 $alert-avatar-margin-inline-end: 16px !default;
@@ -8,8 +10,8 @@ $alert-border-color: currentColor !default;
 $alert-border-icon-margin: 8px !default;
 $alert-border-opacity: 0.26 !default;
 $alert-border-padding-inline-start: 24px !default;
-$alert-border-radius: $border-radius-root !default;
-$alert-border-style: $border-style-root !default;
+$alert-border-radius: settings.$border-radius-root !default;
+$alert-border-style: settings.$border-style-root !default;
 $alert-border-thin-width: 8px !default;
 $alert-border-width: 0 !default;
 $alert-close-icon-font-size: 20px !default;
@@ -22,7 +24,7 @@ $alert-font-size: 16px !default;
 $alert-icon-font-size-multiplier: 1.5 !default;
 $alert-padding: 16px !default;
 $alert-plain-opacity: .62 !default;
-$alert-plain-transition: .2s opacity $standard-easing !default;
+$alert-plain-transition: .2s opacity settings.$standard-easing !default;
 $alert-positions: absolute fixed !default;
 $alert-prominent-avatar-margin-inline-end: 16px !default;
 $alert-prominent-avatar-margin-inline-start: 0 !default;

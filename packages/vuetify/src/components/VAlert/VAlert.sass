@@ -1,15 +1,16 @@
-// Imports
-@import ./index
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-alert
   padding: $alert-padding
   position: relative
 
-  @include elevation($alert-elevation)
-  @include position($alert-positions)
-  @include rounded($alert-border-radius)
-  @include theme($alert-theme...)
-  @include variant($alert-variants...)
+  @include tools.elevation($alert-elevation)
+  @include tools.position($alert-positions)
+  @include tools.rounded($alert-border-radius)
+  @include tools.theme($alert-theme...)
+  @include tools.variant($alert-variants...)
 
   // has specificity issues without this selector
   &.v-alert--border
@@ -26,7 +27,7 @@
     transition: $alert-plain-transition
 
   @at-root
-    @include density('v-alert', $alert-density) using ($modifier)
+    @include tools.density('v-alert', $alert-density) using ($modifier)
       padding-top: $alert-padding + $modifier
       padding-bottom: $alert-padding + $modifier
 
@@ -80,7 +81,7 @@
   top: 0
   width: 100%
 
-  @include border($alert-border...)
+  @include tools.border($alert-border...)
 
   .v-alert--border-start &
     border-inline-start-width: $alert-border-thin-width

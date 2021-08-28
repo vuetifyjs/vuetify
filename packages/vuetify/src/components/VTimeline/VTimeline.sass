@@ -1,5 +1,9 @@
-// Imports
-@import './index'
+@forward './variables'
+@use 'sass:map'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+@use './mixins' as *
 
 // Theme
 .v-timeline
@@ -122,9 +126,9 @@
   justify-content: center
   align-items: center
 
-  @include elevation($timeline-divider-dot-elevation)
+  @include tools.elevation($timeline-divider-dot-elevation)
 
-  @each $name, $multiplier in $size-scales
+  @each $name, $multiplier in settings.$size-scales
     $size: $timeline-dot-size + (8 * $multiplier)
 
     &--size-#{$name}
@@ -132,8 +136,8 @@
       width: $size
 
       .v-timeline-divider__inner-dot
-        height: calc(100% - #{map-get($timeline-dot-border-sizes, $name)})
-        width: calc(100% - #{map-get($timeline-dot-border-sizes, $name)})
+        height: calc(100% - #{map.get($timeline-dot-border-sizes, $name)})
+        width: calc(100% - #{map.get($timeline-dot-border-sizes, $name)})
 
 .v-timeline-divider__inner-dot
   align-items: center

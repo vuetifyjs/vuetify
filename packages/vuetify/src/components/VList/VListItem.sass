@@ -1,4 +1,7 @@
-@import './index'
+@forward './variables'
+@use 'sass:list'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-list-item
   align-items: center
@@ -9,13 +12,13 @@
   text-decoration: none
   transition: $list-item-transition
 
-  @include border($list-item-border...)
-  @include states('.v-list-item__overlay')
-  @include rounded($list-item-border-radius)
-  @include variant($list-item-variants...)
+  @include tools.border($list-item-border...)
+  @include tools.states('.v-list-item__overlay')
+  @include tools.rounded($list-item-border-radius)
+  @include tools.variant($list-item-variants...)
 
   &--rounded
-    @include rounded($list-item-rounded-border-radius)
+    @include tools.rounded($list-item-rounded-border-radius)
 
   &--disabled
     pointer-events: none
@@ -41,7 +44,7 @@
     margin-inline-start: $list-item-avatar-margin-start
 
   @at-root
-    @include density('v-list', $list-density) using ($modifier)
+    @include tools.density('v-list', $list-density) using ($modifier)
       #{$root}
         height: $list-item-avatar-size + ($modifier * $list-item-avatar-size-multiplier)
         width: $list-item-avatar-size + ($modifier * $list-item-avatar-size-multiplier)
@@ -92,10 +95,10 @@
   .v-list--three-line &
     -webkit-line-clamp: 2
 
-  @include typography($list-item-subtitle-typography...)
+  @include tools.typography($list-item-subtitle-typography...)
 
   .v-list--nav &
-    @include typography($list-item-nav-subtitle-typography...)
+    @include tools.typography($list-item-nav-subtitle-typography...)
 
 .v-list-item-title
   hyphens: $list-item-title-hyphens
@@ -107,27 +110,27 @@
   word-break: $list-item-title-word-break
   word-wrap: $list-item-title-word-wrap
 
-  @include typography($list-item-title-typography...)
+  @include tools.typography($list-item-title-typography...)
 
   .v-list--nav &
-    @include typography($list-item-nav-title-typography...)
+    @include tools.typography($list-item-nav-title-typography...)
 
 .v-list-item
   $root: &
 
   @at-root
-    @include density('v-list', $list-density) using ($modifier)
+    @include tools.density('v-list', $list-density) using ($modifier)
       &.v-list--one-line #{$root}
         min-height: $list-item-min-height + $modifier
-        padding: (nth($list-item-padding, 1) + $modifier) nth($list-item-padding, 2)
+        padding: (list.nth($list-item-padding, 1) + $modifier) list.nth($list-item-padding, 2)
 
       &.v-list--two-line #{$root}
         min-height: $list-item-two-line-min-height + $modifier
-        padding: (nth($list-item-two-line-padding, 1) + $modifier) nth($list-item-two-line-padding, 2)
+        padding: (list.nth($list-item-two-line-padding, 1) + $modifier) list.nth($list-item-two-line-padding, 2)
 
       &.v-list--three-line #{$root}
         min-height: $list-item-three-line-min-height + $modifier
-        padding: (nth($list-item-three-line-padding, 1) + $modifier) nth($list-item-three-line-padding, 2)
+        padding: (list.nth($list-item-three-line-padding, 1) + $modifier) list.nth($list-item-three-line-padding, 2)
 
 .v-list-item__overlay
   background-color: currentColor

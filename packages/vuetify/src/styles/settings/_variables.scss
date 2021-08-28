@@ -1,6 +1,9 @@
-@import '../tools/_functions.sass';
+@use 'sass:map';
+@use 'sass:meta';
+@use '../tools/functions' as *;
 
 $color-pack: true !default;
+$reset: true !default;
 
 $body-font-family: 'Roboto', sans-serif !default;
 $font-size-root: 1rem !default;
@@ -73,16 +76,16 @@ $rounded: map-deep-merge(
 $spacer: 4px !default;
 
 $spacers: () !default;
-@if (type-of($spacers) == list) {
+@if (meta.type-of($spacers) == list) {
   @for $i from 0 through 16 {
-    $spacers: map-merge($spacers, ($i: $spacer * $i))
+    $spacers: map.merge($spacers, ($i: $spacer * $i))
   }
 }
 
 $negative-spacers: () !default;
-@if (type-of($negative-spacers) == list) {
+@if (meta.type-of($negative-spacers) == list) {
   @for $i from 1 through 16 {
-    $negative-spacers: map-merge($negative-spacers, ("n" + $i: -$spacer * $i))
+    $negative-spacers: map.merge($negative-spacers, ("n" + $i: -$spacer * $i))
   }
 }
 
@@ -120,10 +123,10 @@ $grid-gutters: map-deep-merge(
 $container-max-widths: () !default;
 $container-max-widths: map-deep-merge(
   (
-    'md': map-get($grid-breakpoints, 'md') * 0.9375,
-    'lg': map-get($grid-breakpoints, 'lg') * 0.9375,
-    'xl': map-get($grid-breakpoints, 'xl') * 0.9375,
-    'xxl': map-get($grid-breakpoints, 'xxl') * 0.9375,
+    'md': map.get($grid-breakpoints, 'md') * 0.9375,
+    'lg': map.get($grid-breakpoints, 'lg') * 0.9375,
+    'xl': map.get($grid-breakpoints, 'xl') * 0.9375,
+    'xxl': map.get($grid-breakpoints, 'xxl') * 0.9375,
   ),
   $container-max-widths
 );
@@ -134,20 +137,20 @@ $display-breakpoints: map-deep-merge(
   (
     'print-only': 'only print',
     'screen-only': 'only screen',
-    'xs': '(max-width: #{map-get($grid-breakpoints, 'sm') - 1})',
-    'sm': '(min-width: #{map-get($grid-breakpoints, 'sm')}) and (max-width: #{map-get($grid-breakpoints, 'md') - 1})',
-    'md': '(min-width: #{map-get($grid-breakpoints, 'md')}) and (max-width: #{map-get($grid-breakpoints, 'lg') - 1})',
-    'lg': '(min-width: #{map-get($grid-breakpoints, 'lg')}) and (max-width: #{map-get($grid-breakpoints, 'xl') - 1})',
-    'xl': '(min-width: #{map-get($grid-breakpoints, 'xl')}) and (max-width: #{map-get($grid-breakpoints, 'xxl') - 1})',
-    'xxl': '(min-width: #{map-get($grid-breakpoints, 'xxl')})',
-    'sm-and-up': '(min-width: #{map-get($grid-breakpoints, 'sm')})',
-    'md-and-up': '(min-width: #{map-get($grid-breakpoints, 'md')})',
-    'lg-and-up': '(min-width: #{map-get($grid-breakpoints, 'lg')})',
-    'xl-and-up': '(min-width: #{map-get($grid-breakpoints, 'xl')})',
-    'sm-and-down': '(max-width: #{map-get($grid-breakpoints, 'md') - 1})',
-    'md-and-down': '(max-width: #{map-get($grid-breakpoints, 'lg') - 1})',
-    'lg-and-down': '(max-width: #{map-get($grid-breakpoints, 'xl') - 1})',
-    'xl-and-down': '(max-width: #{map-get($grid-breakpoints, 'xxl') - 1})',
+    'xs': '(max-width: #{map.get($grid-breakpoints, 'sm') - 1})',
+    'sm': '(min-width: #{map.get($grid-breakpoints, 'sm')}) and (max-width: #{map.get($grid-breakpoints, 'md') - 1})',
+    'md': '(min-width: #{map.get($grid-breakpoints, 'md')}) and (max-width: #{map.get($grid-breakpoints, 'lg') - 1})',
+    'lg': '(min-width: #{map.get($grid-breakpoints, 'lg')}) and (max-width: #{map.get($grid-breakpoints, 'xl') - 1})',
+    'xl': '(min-width: #{map.get($grid-breakpoints, 'xl')}) and (max-width: #{map.get($grid-breakpoints, 'xxl') - 1})',
+    'xxl': '(min-width: #{map.get($grid-breakpoints, 'xxl')})',
+    'sm-and-up': '(min-width: #{map.get($grid-breakpoints, 'sm')})',
+    'md-and-up': '(min-width: #{map.get($grid-breakpoints, 'md')})',
+    'lg-and-up': '(min-width: #{map.get($grid-breakpoints, 'lg')})',
+    'xl-and-up': '(min-width: #{map.get($grid-breakpoints, 'xl')})',
+    'sm-and-down': '(max-width: #{map.get($grid-breakpoints, 'md') - 1})',
+    'md-and-down': '(max-width: #{map.get($grid-breakpoints, 'lg') - 1})',
+    'lg-and-down': '(max-width: #{map.get($grid-breakpoints, 'xl') - 1})',
+    'xl-and-down': '(max-width: #{map.get($grid-breakpoints, 'xxl') - 1})',
   ),
   $display-breakpoints
 );
@@ -282,7 +285,7 @@ $flat-typography: () !default;
 @each $type, $values in $typography {
   $flat-typography: map-deep-merge(
     $flat-typography,
-    (#{$type}: map-values($values))
+    (#{$type}: map.values($values))
   );
 }
 

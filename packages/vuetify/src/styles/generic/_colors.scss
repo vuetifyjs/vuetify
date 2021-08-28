@@ -1,3 +1,6 @@
+@use '../settings';
+@use '../settings/colors';
+
 @mixin background-color($color_value) {
   background-color: $color_value !important;
   border-color: $color_value !important;
@@ -8,7 +11,7 @@
 }
 
 // Put the loop in a function so it can't leak
-@each $color_name, $color_value in $shades {
+@each $color_name, $color_value in colors.$shades {
   .bg-#{$color_name} {
     @include background-color($color_value);
   }
@@ -18,8 +21,8 @@
   }
 }
 
-@if ($color-pack) {
-  @each $color_name, $color_color in $colors {
+@if (settings.$color-pack) {
+  @each $color_name, $color_color in colors.$colors {
     @each $color_type, $color_value in $color_color {
       @if ($color_type == 'base') {
         .bg-#{$color_name} {

@@ -1,5 +1,7 @@
-// Imports
-@import './index'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
+@use './mixins' as *
 
 .v-card
   color: $card-color
@@ -11,11 +13,11 @@
   transition-property: $card-transition-property
   transition-timing-function: $card-transition-timing-function
 
-  @include border($card-border...)
-  @include position($card-positions)
-  @include rounded($card-border-radius)
-  @include states('.v-card__overlay')
-  @include variant($card-variants...)
+  @include tools.border($card-border...)
+  @include tools.position($card-positions)
+  @include tools.rounded($card-border-radius)
+  @include tools.states('.v-card__overlay')
+  @include tools.variant($card-variants...)
 
   &--disabled
     pointer-events: none
@@ -47,13 +49,13 @@
       opacity: 1
       z-index: -1
 
-      @include elevation($card-elevation)
+      @include tools.elevation($card-elevation)
 
     &::after
       z-index: 1
       opacity: 0
 
-      @include elevation($card-hover-elevation)
+      @include tools.elevation($card-hover-elevation)
 
     &:hover::after
       opacity: 1
@@ -61,13 +63,13 @@
     &:hover::before
       opacity: 0
 
-    @include elevation(0)
+    @include tools.elevation(0)
 
   &--link
     cursor: pointer
 
   &--tile
-    @include rounded($card-tile-border-radius)
+    @include tools.rounded($card-tile-border-radius)
 
 .v-card-actions
   align-items: center

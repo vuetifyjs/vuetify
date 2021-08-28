@@ -1,4 +1,7 @@
-@import ./index
+@forward './variables'
+@use 'sass:selector'
+@use '../../styles/settings'
+@use './variables' as *
 
 // TODO: abstract variables
 
@@ -13,7 +16,7 @@
     align-items: center
     cursor: default
     opacity: .6
-    transition: .15s opacity $standard-easing
+    transition: .15s opacity settings.$standard-easing
     white-space: nowrap
     padding-top: calc(var(--v-field-padding-top, 0) + 1px)
     padding-bottom: var(--v-field-padding-bottom, 0)
@@ -31,9 +34,9 @@
     margin-bottom: 0
 
   .v-field__input
-    @at-root #{selector-append('.v-text-field--prefixed', &)}
+    @at-root #{selector.append('.v-text-field--prefixed', &)}
       --v-field-padding-before: 6px
-    @at-root #{selector-append('.v-text-field--suffixed', &)}
+    @at-root #{selector.append('.v-text-field--suffixed', &)}
       --v-field-padding-after: 0
 
   .v-field__control
@@ -42,7 +45,7 @@
   input
     flex: 1
     opacity: 1
-    transition: .15s opacity $standard-easing
+    transition: .15s opacity settings.$standard-easing
 
     &:focus,
     &:active

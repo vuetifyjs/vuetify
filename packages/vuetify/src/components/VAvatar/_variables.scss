@@ -1,14 +1,18 @@
+@use "sass:map";
+@use "../../styles/settings/variables";
+@use "../../styles/tools/functions";
+
 // Defaults
-$avatar-border-radius: map-get($rounded, 'circle') !default;
+$avatar-border-radius: map.get(variables.$rounded, 'circle') !default;
 $avatar-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 $avatar-line-height: normal !default;
-$avatar-rounded-border-radius: $border-radius-root !default;
+$avatar-rounded-border-radius: variables.$border-radius-root !default;
 $avatar-height: 40px !default;
 $avatar-width: 40px !default;
 $avatar-vertical-align: middle !default;
 
 $avatar-sizes: () !default;
-$avatar-sizes: map-deep-merge(
+$avatar-sizes: functions.map-deep-merge(
   (
     'height': $avatar-height,
     'width': $avatar-width

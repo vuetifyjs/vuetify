@@ -1,25 +1,17 @@
-@import './_absolute'
-@import './_functions'
-@import './_bootable'
-@import './_border'
-@import './_density'
-@import './_elevation'
-@import './_position'
-@import './_radius'
-@import './_rounded'
-@import './_rtl'
-@import './_sheet'
-@import './_states'
-@import './_theme'
-@import './_typography'
-@import './_utilities'
-@import './_variant'
-@import './_display'
-
-=media-breakpoint-up($name, $breakpoints: $grid-breakpoints)
-  $min: breakpoint-min($name, $breakpoints)
-  @if $min
-    @media (min-width: $min)
-      @content
-  @else
-    @content
+@forward '_absolute'
+@forward '_functions'
+@forward '_bootable'
+@forward '_border'
+@forward '_density'
+@forward '_elevation'
+@forward '_position'
+@forward '_radius'
+@forward '_rounded'
+@forward '_rtl'
+@forward '_sheet'
+@forward '_states'
+@forward '_theme'
+@forward '_typography'
+@forward '_utilities'
+@forward '_variant'
+@forward '_display'

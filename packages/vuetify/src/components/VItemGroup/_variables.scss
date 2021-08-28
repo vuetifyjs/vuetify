@@ -1,2 +1,4 @@
+@use '../../styles/settings';
+
 // Defaults
-$item-group-transition: 0.2s $standard-easing !default;
+$item-group-transition: 0.2s settings.$standard-easing !default;

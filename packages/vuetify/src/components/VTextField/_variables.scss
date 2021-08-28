@@ -1,5 +1,7 @@
+@use '../../styles/settings';
+
 // Defaults
-$text-field-border-radius: $border-radius-root !default;
+$text-field-border-radius: settings.$border-radius-root !default;
 $text-field-line-height: 20px !default;
 $text-field-padding: 8px 0 8px !default;
 $text-field-dense-padding: 4px 0 2px !default;

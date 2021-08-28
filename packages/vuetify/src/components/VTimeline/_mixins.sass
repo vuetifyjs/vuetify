@@ -1,3 +1,6 @@
+@use '../../styles/tools'
+@use './variables' as *
+
 @mixin timeline-item-align($direction)
   .v-timeline-item__wrapper
     flex-direction: if($direction == left, row-reverse, if($direction == right, row, if($direction == top, column-reverse, column)))
@@ -11,11 +14,11 @@
 
 @mixin timeline-line-align($center, $first, $second)
   &:before
-    +ltr()
+    +tools.ltr()
       #{$first}: calc(#{$center} - #{var(--v-timeline-line-width) / 2})
       #{$second}: initial
 
-    +rtl()
+    +tools.rtl()
       #{$first}: initial
       #{$second}: calc(#{$center} - #{var(--v-timeline-line-width) / 2})
 
