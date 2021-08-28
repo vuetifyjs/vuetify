@@ -1,12 +1,8 @@
 // Utilities
-import { isComponentInstance } from '@/util'
 import { onBeforeUnmount, ref, watch } from 'vue'
 
-// Types
-import type { ComponentPublicInstance } from 'vue'
-
 export function useIntersectionObserver (callback?: IntersectionObserverCallback) {
-  const intersectionRef = ref<ComponentPublicInstance | HTMLElement>()
+  const intersectionRef = ref<HTMLElement>()
   const isIntersecting = ref(false)
 
   const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
@@ -20,16 +16,12 @@ export function useIntersectionObserver (callback?: IntersectionObserverCallback
   })
 
   watch(intersectionRef, (newValue, oldValue) => {
-    const el = isComponentInstance(newValue) ? newValue.$el : newValue
-
-    if (!el) return
-
     if (oldValue) {
-      observer.unobserve(el)
+      observer.unobserve(oldValue)
       isIntersecting.value = false
     }
 
-    if (newValue) observer.observe(el)
+    if (newValue) observer.observe(newValue)
   }, {
     flush: 'post',
   })
