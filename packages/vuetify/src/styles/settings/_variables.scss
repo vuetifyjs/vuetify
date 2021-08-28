@@ -301,17 +301,10 @@ $standard-easing: cubic-bezier(0.4, 0, 0.2, 1);
 $decelerated-easing: cubic-bezier(0.0, 0, 0.2, 1); // Entering
 $accelerated-easing: cubic-bezier(0.4, 0, 1, 1); // Leaving
 
-// Ripples
-$ripple-animation-transition-in: transform 0.25s $decelerated-easing, opacity 0.1s $decelerated-easing !default;
-$ripple-animation-transition-out: opacity 0.3s $accelerated-easing !default;
-$ripple-animation-visible-opacity: 0.15 !default;
-
 // Elements
 $bootable-transition: 0.2s $decelerated-easing !default;
 $blockquote-font-size: 18px !default;
 $blockquote-font-weight: 300 !default;
-$input-top-spacing: 16px !default;
-$text-field-active-label-height: 12px !default;
 
 $sizes: (
   'x-small',
