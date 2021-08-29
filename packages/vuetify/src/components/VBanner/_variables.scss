@@ -1,6 +1,6 @@
 @use 'sass:map';
-@use '../../styles/tools';
 @use '../../styles/settings';
+@use '../../styles/tools';
 
 // Defaults
 $banner-avatar-after-opacity: var(--v-border-opacity) !default;
