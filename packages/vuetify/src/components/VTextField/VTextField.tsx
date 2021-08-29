@@ -10,7 +10,7 @@ import { VField } from '@/components/VField'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
-import VIntersect from '@/directives/intersect'
+import Intersect from '@/directives/intersect'
 
 // Utilities
 import { computed, ref } from 'vue'
@@ -25,7 +25,7 @@ const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', '
 export const VTextField = defineComponent({
   name: 'VTextField',
 
-  directives: { VIntersect },
+  directives: { Intersect },
 
   inheritAttrs: false,
 
