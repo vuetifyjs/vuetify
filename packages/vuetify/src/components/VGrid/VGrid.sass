@@ -15,17 +15,17 @@
   +make-row
 
   & + .row
-    margin-top: settings.$grid-gutter / 2
+    margin-top: settings.$grid-gutter * .5
 
     &--dense
-      margin-top: settings.$form-grid-gutter / 2
+      margin-top: settings.$form-grid-gutter * .5
 
   &--dense
-    margin: -(settings.$form-grid-gutter) / 2
+    margin: -(settings.$form-grid-gutter) * .5
 
     > .v-col,
     > [class*="v-col-"]
-      padding: settings.$form-grid-gutter / 2
+      padding: settings.$form-grid-gutter * .5
 
   // Remove the negative margin from default .v-row, then the horizontal padding
   // from all immediate children columns (to prevent runaway style inheritance).

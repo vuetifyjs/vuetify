@@ -1,3 +1,4 @@
+@use 'sass:math';
 @use 'sass:map';
 @use 'sass:meta';
 @use '../../styles/settings';
@@ -6,7 +7,7 @@
 
 @mixin button-sizes ($map: $button-sizes, $immediate: false) {
   @each $sizeName, $multiplier in settings.$size-scales {
-    $size: map.get($map, 'font-size') + 2 * $multiplier / 16;
+    $size: map.get($map, 'font-size') + math.div(2 * $multiplier, 16);
     $height: map.get($map, 'height') + (8 * $multiplier);
 
     #{if($immediate, &, '')}.v-btn--size-#{$sizeName} {
@@ -14,7 +15,7 @@
       --v-btn-height: #{$height};
       font-size: $size;
       min-width: tools.roundEven($height * map.get($map, 'width-ratio'));
-      padding: 0 tools.roundEven($height / map.get($map, 'padding-ratio'));
+      padding: 0 tools.roundEven(math.div($height, map.get($map, 'padding-ratio')));
     }
   }
 }

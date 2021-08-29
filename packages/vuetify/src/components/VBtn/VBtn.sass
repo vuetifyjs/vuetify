@@ -1,3 +1,4 @@
+@use 'sass:math'
 @forward './variables'
 @use 'sass:map'
 @use '../../styles/settings'
@@ -88,7 +89,7 @@
       .v-btn__overlay
         // This is multiplied by the text opacity,
         // so we need to divide it to get the desired value
-        opacity: $button-disabled-overlay / $button-disabled-opacity
+        opacity: math.div($button-disabled-overlay, $button-disabled-opacity)
 
   &--stacked
     flex-direction: column

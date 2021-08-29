@@ -1,6 +1,7 @@
-@use "sass:map";
-@use "../../styles/settings/variables";
-@use "../../styles/tools/functions";
+@use 'sass:math';
+@use 'sass:map';
+@use '../../styles/settings/variables';
+@use '../../styles/tools/functions';
 
 // Defaults
 $button-app-bar-elevation: 0 !default;
@@ -55,7 +56,7 @@ $button-positions: absolute fixed !default;
 $button-text-letter-spacing: functions.map-deep-get(variables.$typography, 'button', 'letter-spacing') !default;
 $button-text-transform: functions.map-deep-get(variables.$typography, 'button', 'text-transform') !default;
 $button-vertical-align: middle !default;
-$button-width-ratio: 16/9 !default;
+$button-width-ratio: math.div(16, 9) !default;
 $button-stacked-width-ratio: 1 !default;
 
 $button-density: ('default': 0, 'comfortable': -2, 'compact': -3) !default;

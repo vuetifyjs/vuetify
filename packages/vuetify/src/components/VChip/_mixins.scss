@@ -7,9 +7,9 @@
 
 @mixin chip-sizes {
   @each $sizeName, $multiplier in settings.$size-scales {
-    $size: map.get($chip-sizes, "font-size") + (2 * $multiplier) / 16;
+    $size: map.get($chip-sizes, "font-size") + math.div(2 * $multiplier, 16);
     $height: map.get($chip-sizes, "height") + (8 * $multiplier);
-    $padding: math.round($height / $chip-padding-ratio);
+    $padding: math.round(math.div($height, $chip-padding-ratio));
 
     .v-chip--size-#{$sizeName} {
       --v-chip-size: #{$size};
@@ -26,8 +26,8 @@
       }
 
       .v-chip__prepend {
-        margin-inline-start: -$padding / 2;
-        margin-inline-end: $padding / 2;
+        margin-inline-start: -$padding * .5;
+        margin-inline-end: $padding * .5;
 
         @at-root #{selector.append('.v-chip--pill', &)} {
           margin-inline-start: -$padding;
@@ -35,8 +35,8 @@
       }
 
       .v-chip__append {
-        margin-inline-end: -$padding / 2;
-        margin-inline-start: $padding / 2;
+        margin-inline-end: -$padding * .5;
+        margin-inline-start: $padding * .5;
 
         @at-root #{selector.append('.v-chip--pill', &)} {
           margin-inline-end: -$padding;
