@@ -1,4 +1,4 @@
-@import './index'
+@use '../../styles/settings'
 
 .v-responsive
   display: flex
@@ -16,5 +16,5 @@
 
 .v-responsive__sizer
   flex: 1 0 0px
-  transition: padding-bottom 0.2s $standard-easing
+  transition: padding-bottom 0.2s settings.$standard-easing
   pointer-events: none

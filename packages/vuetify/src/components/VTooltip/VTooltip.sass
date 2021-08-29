@@ -1,4 +1,6 @@
-@import './_variables.scss'
+@forward './variables'
+@use '../../styles/settings'
+@use './variables' as *
 
 .v-tooltip
   .v-overlay__content
@@ -15,9 +17,9 @@
     pointer-events: none
 
     &[class*="enter-active"]
-      transition-timing-function: $decelerated-easing
+      transition-timing-function: settings.$decelerated-easing
       transition-duration: $tooltip-transition-enter-duration
 
     &[class*="leave-active"]
-      transition-timing-function: $accelerated-easing
+      transition-timing-function: settings.$accelerated-easing
       transition-duration: $tooltip-transition-leave-duration

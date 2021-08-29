@@ -1,4 +1,10 @@
-@import ./index
+@forward './variables'
+@use 'sass:map'
+@use 'sass:selector'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+@use '../VInput/variables' as *
 
 /* region INPUT */
 .v-field
@@ -53,8 +59,8 @@
     --v-field-padding-bottom: 8px
 
     @at-root
-      @include density('v-input', $input-density) using ($modifier)
-        @at-root #{selector-append(&, $root)}
+      @include tools.density('v-input', $input-density) using ($modifier)
+        @at-root #{selector.append(&, $root)}
           --v-field-padding-top: #{$field-input-padding-top + $modifier * $field-label-floating-scale}
 
 /* endregion */
@@ -79,7 +85,7 @@
     background: $field-control-contained-background
     border-color: transparent
 
-    @include elevation($field-control-contained-elevation)
+    @include tools.elevation($field-control-contained-elevation)
 
   .v-field--variant-contained &,
   .v-field--variant-filled &
@@ -129,9 +135,9 @@
     align-self: flex-end
 
     @at-root
-      @include density('v-input', $input-density) using ($modifier)
-        @at-root #{selector-append(&, $root)}
-          margin-bottom: $field-underlined-margin-bottom + $modifier / 8
+      @include tools.density('v-input', $input-density) using ($modifier)
+        @at-root #{selector.append(&, $root)}
+          margin-bottom: $field-underlined-margin-bottom + $modifier * .125
 
 .v-field .v-input__prepend,
 .v-field .v-input__append
@@ -179,9 +185,9 @@
     $root: &
 
     @at-root
-      @include density('v-input', $input-density) using ($modifier)
-        @at-root #{selector-append(&, $root)}
-          bottom: 4px + $modifier / 8
+      @include tools.density('v-input', $input-density) using ($modifier)
+        @at-root #{selector.append(&, $root)}
+          bottom: 4px + $modifier * .125
 
   &--floating
     --v-field-label-scale: #{$field-label-floating-scale}em
@@ -238,7 +244,7 @@
       border-width: 0 0 var(--v-field-border-width)
       opacity: var(--v-field-border-opacity)
       transition: opacity $field-subtle-transition-timing
-      @include absolute()
+      @include tools.absolute()
 
   .v-field--variant-filled &,
   .v-field--variant-underlined &
@@ -248,9 +254,9 @@
       border-width: 0 0 $field-focused-border-width
       transition: transform $field-transition-timing
       transform: scaleX(0)
-      @include absolute()
+      @include tools.absolute()
 
-      @at-root #{selector-append('.v-field--focused', &)}
+      @at-root #{selector.append('.v-field--focused', &)}
         transform: scaleX(1)
 
   .v-field--variant-outlined &
@@ -270,10 +276,10 @@
       border-bottom-width: var(--v-field-border-width)
       border-inline-start-width: var(--v-field-border-width)
 
-      @include ltr()
+      @include tools.ltr()
         border-radius: $field-border-radius 0 0 $field-border-radius
 
-      @include rtl()
+      @include tools.rtl()
         border-radius: 0 $field-border-radius $field-border-radius 0
 
     &__notch
@@ -285,7 +291,7 @@
       &::after
         opacity: var(--v-field-border-opacity)
         transition: opacity $field-subtle-transition-timing
-        @include absolute()
+        @include tools.absolute()
 
       &::before
         border-width: var(--v-field-border-width) 0 0
@@ -294,7 +300,7 @@
         bottom: 0
         border-width: 0 0 var(--v-field-border-width)
 
-      @at-root #{selector-append('.v-field--active', &)}
+      @at-root #{selector.append('.v-field--active', &)}
         &::before
           opacity: 0
 
@@ -304,10 +310,10 @@
       border-bottom-width: var(--v-field-border-width)
       border-inline-end-width: var(--v-field-border-width)
 
-      @include ltr()
+      @include tools.ltr()
         border-radius: 0 $field-border-radius $field-border-radius 0
 
-      @include rtl()
+      @include tools.rtl()
         border-radius: $field-border-radius 0 0 $field-border-radius
 
 /* endregion */
@@ -330,25 +336,25 @@
     opacity: $field-overlay-filled-opacity
     pointer-events: none
     transition: opacity $field-subtle-transition-timing
-    @include absolute()
+    @include tools.absolute()
 
   &.v-field--has-background .v-field__overlay
     opacity: 0
 
   .v-field__control:hover .v-field__overlay
-    opacity: calc(#{$field-overlay-filled-opacity + map-get($states, 'hover')} * var(--v-theme-overlay-multiplier))
+    opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
 
   &.v-field.v-field--focused .v-field__overlay
-    opacity: calc(#{$field-overlay-filled-opacity + map-get($states, 'focus')} * var(--v-theme-overlay-multiplier))
+    opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
 
 /* endregion */
 /* region MODIFIERS */
 .v-field--reverse
   .v-field__input
-    @include ltr()
+    @include tools.ltr()
       text-align: right
 
-    @include rtl()
+    @include tools.rtl()
       text-align: left
 .v-field--disabled
   pointer-events: none

@@ -1,5 +1,6 @@
-// Imports
-@import ./index
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-banner
   $root: &
@@ -14,11 +15,11 @@
   position: relative
   width: $banner-width
 
-  @include border($banner-border...)
-  @include elevation($banner-elevation)
-  @include position($banner-positions)
-  @include rounded($banner-border-radius)
-  @include theme($banner-theme...)
+  @include tools.border($banner-border...)
+  @include tools.elevation($banner-elevation)
+  @include tools.position($banner-positions)
+  @include tools.rounded($banner-border-radius)
+  @include tools.theme($banner-theme...)
 
   &--border
     border-width: $banner-border-thin-width
@@ -29,10 +30,10 @@
     padding-inline-start: $banner-mobile-padding-start
 
   &--rounded
-    @include rounded($banner-rounded-border-radius)
+    @include tools.rounded($banner-rounded-border-radius)
 
   @at-root
-    @include density('v-banner', $banner-density) using ($modifier)
+    @include tools.density('v-banner', $banner-density) using ($modifier)
       &.v-banner--one-line
         padding-top: $banner-padding-top + $modifier
 

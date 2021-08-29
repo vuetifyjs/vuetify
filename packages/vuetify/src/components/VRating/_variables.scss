@@ -1,8 +1,10 @@
+@use '../../styles/settings';
+
 // Defaults
 $rating-item-focused-button-overlay-opacity: var(--v-hover-opacity) !default;
 $rating-item-align-items: center !default;
 $rating-item-button-opacity: 1 !default;
 $rating-item-button-transition-property: transform !default;
 $rating-item-icon-transform: scale(1.25) !default;
-$rating-item-transition-timing-function: $decelerated-easing !default;
+$rating-item-transition-timing-function: settings.$decelerated-easing !default;
 $rating-white-space: nowrap !default;

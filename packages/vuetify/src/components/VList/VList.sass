@@ -1,15 +1,16 @@
-// Imports
-@import './index'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-list
   overflow: auto
   padding: $list-padding
   position: relative
 
-  @include border($list-border...)
-  @include elevation($list-elevation)
-  @include position($list-positions)
-  @include rounded($list-border-radius)
+  @include tools.border($list-border...)
+  @include tools.elevation($list-elevation)
+  @include tools.position($list-positions)
+  @include tools.rounded($list-border-radius)
 
   &--disabled
     pointer-events: none
@@ -19,7 +20,7 @@
       opacity: $list-disabled-opacity
 
   &--rounded
-    @include rounded($list-rounded-border-radius)
+    @include tools.rounded($list-rounded-border-radius)
 
   &--subheader
     padding-top: $list-subheader-padding-top
@@ -56,7 +57,7 @@
     white-space: nowrap
 
   @at-root
-    @include density('v-list', $list-density) using ($modifier)
+    @include tools.density('v-list', $list-density) using ($modifier)
       #{$root}
         min-height: $list-subheader-min-height + ($modifier * $list-subheader-min-height-multiplier)
 

@@ -1,5 +1,6 @@
-// Imports
-@import './index'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-system-bar
   align-items: center
@@ -18,9 +19,9 @@
     font-size: $system-bar-icon-font-size
 
   // Defaults missing in variables @include border($system-bar-query)
-  +elevation($system-bar-elevation)
-  +position($system-bar-positions)
-  +rounded($system-bar-border-radius)
+  @include tools.elevation($system-bar-elevation)
+  @include tools.position($system-bar-positions)
+  @include tools.rounded($system-bar-border-radius)
 
   text-align: end
 
@@ -28,7 +29,7 @@
     background: $system-bar-lights-out-background
 
   &--rounded
-    +rounded($system-bar-rounded-border-radius)
+    @include tools.rounded($system-bar-rounded-border-radius)
 
   &--window
     height: $system-bar-window-height

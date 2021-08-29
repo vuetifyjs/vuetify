@@ -34,10 +34,10 @@
   > .v-btn.v-btn--icon
     &:first-child
       +ltr()
-        margin-left: -$toolbar-btn-icon-size / 4
+        margin-left: -$toolbar-btn-icon-size * .25
 
       +rtl()
-        margin-right: -$toolbar-btn-icon-size / 4
+        margin-right: -$toolbar-btn-icon-size * .25
 
       + .v-toolbar__title
         +ltr()
@@ -48,10 +48,10 @@
 
     &:last-child
       +ltr()
-        margin-right: -$toolbar-btn-icon-size / 4
+        margin-right: -$toolbar-btn-icon-size * .25
 
       +rtl()
-        margin-left: -$toolbar-btn-icon-size / 4
+        margin-left: -$toolbar-btn-icon-size * .25
 
   > .v-tabs
     height: inherit

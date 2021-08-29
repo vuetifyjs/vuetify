@@ -1,3 +1,5 @@
+@use '../../styles/tools';
+
 // Defaults
 $timeline-density-comfortable-grid-template-end: min-content min-content auto !default;
 $timeline-density-comfortable-grid-template-start: auto min-content min-content !default;
@@ -16,7 +18,7 @@ $timeline-item-padding: 24px !default;
 $timeline-dot-size: 38px !default;
 
 $timeline-dot-border-sizes: () !default;
-$timeline-dot-border-sizes: map-deep-merge(
+$timeline-dot-border-sizes: tools.map-deep-merge(
   (
     'x-small': 6px,
     'small': 8px,

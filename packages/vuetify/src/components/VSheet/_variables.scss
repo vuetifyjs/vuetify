@@ -1,14 +1,16 @@
+@use '../../styles/settings';
+
 // Defaults
 $sheet-background: rgb(var(--v-theme-surface)) !default;
 $sheet-color: rgb(var(--v-theme-on-surface)) !default;
-$sheet-border-color: $border-color-root !default;
+$sheet-border-color: settings.$border-color-root !default;
 $sheet-border-radius: 0 !default;
-$sheet-border-style: $border-style-root !default;
+$sheet-border-style: settings.$border-style-root !default;
 $sheet-border-thin-width: thin !default;
 $sheet-border-width: 0 !default;
 $sheet-elevation: 0 !default;
 $sheet-positions: absolute fixed !default;
-$sheet-rounded-border-radius: $border-radius-root !default;
+$sheet-rounded-border-radius: settings.$border-radius-root !default;
 
 $sheet-border: (
   $sheet-border-color,

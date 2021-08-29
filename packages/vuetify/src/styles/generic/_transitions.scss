@@ -1,14 +1,16 @@
+@use '../settings';
+
 @mixin transition-default() {
   &-enter-active {
-    transition: 0.3s $standard-easing;
+    transition: 0.3s settings.$standard-easing;
   }
 
   &-leave-active {
-    transition: 0.3s $standard-easing;
+    transition: 0.3s settings.$standard-easing;
   }
 
   &-move {
-    transition: transform .5s $standard-easing;
+    transition: transform .5s settings.$standard-easing;
   }
 }
 
@@ -39,11 +41,11 @@
 
 .dialog-transition {
   &-enter-active {
-    transition: 225ms $decelerated-easing
+    transition: 225ms settings.$decelerated-easing
   }
 
   &-leave-active {
-    transition: 125ms $accelerated-easing
+    transition: 125ms settings.$accelerated-easing
   }
 
   &-enter-active,

@@ -1,5 +1,10 @@
-// Imports
-@import ./index
+@use 'sass:math'
+@forward './variables'
+@use 'sass:map'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './mixins' as *
+@use './variables' as *
 
 .v-btn
   align-items: center
@@ -17,22 +22,22 @@
   text-transform: $button-text-transform
   transition-property: box-shadow, transform, opacity, color
   transition-duration: 0.28s
-  transition-timing-function: $standard-easing
+  transition-timing-function: settings.$standard-easing
   user-select: none
   vertical-align: $button-vertical-align
   flex-shrink: 0
 
   @at-root
-    +button-sizes()
-    +button-density('height', $button-density)
+    @include button-sizes()
+    @include button-density('height', $button-density)
 
-  @include border($button-border...)
-  @include states('.v-btn__overlay', false)
-  @include variant($button-variants...)
+  @include tools.border($button-border...)
+  @include tools.states('.v-btn__overlay', false)
+  @include tools.variant($button-variants...)
 
   @supports selector(:focus-visible)
     &::after
-      @include absolute()
+      @include tools.absolute()
       pointer-events: none
       border: 2px solid currentColor
       border-radius: inherit
@@ -43,7 +48,7 @@
     &:focus-visible::after
       opacity: calc(.25 * var(--v-theme-overlay-multiplier))
       transform: scale(1)
-      transition: opacity .2s ease-in-out, transform .2s $decelerated-easing
+      transition: opacity .2s ease-in-out, transform .2s settings.$decelerated-easing
 
   &--flat
     box-shadow: none
@@ -55,15 +60,15 @@
     font-size: $button-icon-font-size
 
     @at-root &
-      +button-density(('width', 'height'), $button-icon-density)
+      @include button-density(('width', 'height'), $button-icon-density)
 
   &--elevated
     &:hover,
     &:focus
-      +elevation(map-get($button-elevation, 'hover'))
+      +tools.elevation(map.get($button-elevation, 'hover'))
 
     &:active
-      +elevation(map-get($button-elevation, 'active'))
+      +tools.elevation(map.get($button-elevation, 'active'))
 
   &--block
     display: flex
@@ -84,7 +89,7 @@
       .v-btn__overlay
         // This is multiplied by the text opacity,
         // so we need to divide it to get the desired value
-        opacity: $button-disabled-overlay / $button-disabled-opacity
+        opacity: math.div($button-disabled-overlay, $button-disabled-opacity)
 
   &--stacked
     flex-direction: column
@@ -95,7 +100,7 @@
       @include button-density('height', $button-stacked-density)
 
 .v-btn__overlay
-  @include absolute()
+  @include tools.absolute()
   background-color: currentColor
   border-radius: inherit
   pointer-events: none
@@ -105,7 +110,7 @@
 // VAppBar
 .v-btn
   .v-app-bar &
-    @include elevation($button-app-bar-elevation)
+    @include tools.elevation($button-app-bar-elevation)
 
 // VBottomNavigation
 .v-btn
@@ -122,8 +127,8 @@
     transition-property: transform, opacity, filter
     width: auto
 
-    @include elevation($button-bottom-navigation-elevation)
-    @include rounded($button-bottom-navigation-border-radius)
+    @include tools.elevation($button-bottom-navigation-elevation)
+    @include tools.rounded($button-bottom-navigation-border-radius)
 
   .v-bottom-navigation--grow &
     width: 100%
@@ -145,7 +150,7 @@
 
   &--active
     .v-bottom-navigation &
-      @include active-states('.v-btn__overlay')
+      @include tools.active-states('.v-btn__overlay')
 
       filter: $button-bottom-navigation-active-filter
       opacity: $button-bottom-navigation-active-opacity
@@ -163,7 +168,7 @@
   .v-card-actions &
     padding: $button-card-actions-padding
 
-    @include elevation($button-card-actions-elevation)
+    @include tools.elevation($button-card-actions-elevation)
 
   ~ .v-btn
     .v-card-actions &
@@ -174,18 +179,18 @@
   .v-banner-actions &
     padding: $button-banner-actions-padding
 
-    @include elevation($button-banner-actions-elevation)
+    @include tools.elevation($button-banner-actions-elevation)
 
 // VPagination
 .v-btn
   .v-pagination &
-    @include elevation($button-pagination-elevation)
-    @include rounded($button-pagination-border-radius)
+    @include tools.elevation($button-pagination-elevation)
+    @include tools.rounded($button-pagination-border-radius)
     @include button-density('height' 'width', $button-pagination-density)
 
   &--elevated
     .v-pagination__list &
-      @include elevation($button-pagination-elevation)
+      @include tools.elevation($button-pagination-elevation)
 
   &__overlay
     .v-pagination__item--is-active &

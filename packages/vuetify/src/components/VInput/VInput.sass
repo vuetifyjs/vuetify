@@ -1,4 +1,6 @@
-@import ./index
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-input
   display: grid
@@ -8,7 +10,7 @@
   grid-template-rows: auto auto
 
   @at-root
-    @include density('v-input', $input-density) using ($modifier)
+    @include tools.density('v-input', $input-density) using ($modifier)
       --v-input-control-height: #{$input-control-height + $modifier}
 
 .v-input__details

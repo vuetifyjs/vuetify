@@ -1,484 +1,490 @@
-@import '../tools/_functions.sass';
+@use 'sass:map';
+@use './variables';
+@use '../tools/functions' as *;
 
 $utilities: () !default;
-$utilities: map-deep-merge(
-  (
-    // Display utilities
-    "overflow": (
-      property: overflow,
-      values: auto hidden visible,
-    ),
-    "overflow-x": (
-      property: overflow-x,
-      values: auto hidden
-    ),
-    "overflow-y": (
-      property: overflow-y,
-      values: auto hidden
-    ),
-    "display": (
-      responsive: true,
-      print: true,
-      property: display,
-      class: d,
-      values: none inline inline-block block table table-row table-cell flex inline-flex
-    ),
-    "float": (
-      responsive: true,
-      print: true,
-      property: float,
-      class: float,
-      values: none left right
-    ),
-    "float:rtl": (
-      responsive: true,
-      print: true,
-      property: float,
-      class: float,
-      values: (
-        end: left,
-        start: right,
-      )
-    ),
-    "float:ltr": (
-      responsive: true,
-      print: true,
-      property: float,
-      class: float,
-      values: (
-        end: right,
-        start: left,
-      )
-    ),
-
-    // Flex utilities
-    "flex": (
-      responsive: true,
-      property: flex,
-      values: (fill: 1 1 auto)
-    ),
-    "flex-direction": (
-      responsive: true,
-      property: flex-direction,
-      class: flex,
-      values: row column row-reverse column-reverse
-    ),
-    "flex-grow": (
-      responsive: true,
-      property: flex-grow,
-      class: flex,
-      values: (
-        grow-0: 0,
-        grow-1: 1,
-      )
-    ),
-    "flex-shrink": (
-      responsive: true,
-      property: flex-shrink,
-      class: flex,
-      values: (
-        shrink-0: 0,
-        shrink-1: 1,
-      )
-    ),
-    "flex-wrap": (
-      responsive: true,
-      property: flex-wrap,
-      class: flex,
-      values: wrap nowrap wrap-reverse
-    ),
-    "justify-content": (
-      responsive: true,
-      property: justify-content,
-      class: justify,
-      values: (
-        start: flex-start,
-        end: flex-end,
-        center: center,
-        space-between: space-between,
-        space-around: space-around,
-      )
-    ),
-    "align-items": (
-      responsive: true,
-      property: align-items,
-      class: align,
-      values: (
-        start: flex-start,
-        end: flex-end,
-        center: center,
-        baseline: baseline,
-        stretch: stretch,
-      )
-    ),
-    "align-content": (
-      responsive: true,
-      property: align-content,
-      values: (
-        start: flex-start,
-        end: flex-end,
-        center: center,
-        space-between: space-between,
-        space-around: space-around,
-        stretch: stretch,
-      )
-    ),
-    "align-self": (
-      responsive: true,
-      property: align-self,
-      values: (
-        auto: auto,
-        start: flex-start,
-        end: flex-end,
-        center: center,
-        baseline: baseline,
-        stretch: stretch,
-      )
-    ),
-    "order": (
-      responsive: true,
-      property: order,
-      values: (
-        first: -1,
-        0: 0,
-        1: 1,
-        2: 2,
-        3: 3,
-        4: 4,
-        5: 5,
-        6: 6,
-        7: 7,
-        8: 8,
-        9: 9,
-        10: 10,
-        11: 11,
-        12: 12,
-        last: 13,
+@if ($utilities != false) {
+  $utilities: map-deep-merge(
+    (
+      // Display utilities
+      "overflow": (
+        property: overflow,
+        values: auto hidden visible,
       ),
-    ),
+      "overflow-x": (
+        property: overflow-x,
+        values: auto hidden
+      ),
+      "overflow-y": (
+        property: overflow-y,
+        values: auto hidden
+      ),
+      "display": (
+        responsive: true,
+        print: true,
+        property: display,
+        class: d,
+        values: none inline inline-block block table table-row table-cell flex inline-flex
+      ),
+      "float": (
+        responsive: true,
+        print: true,
+        property: float,
+        class: float,
+        values: none left right
+      ),
+      "float:rtl": (
+        responsive: true,
+        print: true,
+        property: float,
+        class: float,
+        values: (
+          end: left,
+          start: right,
+        )
+      ),
+      "float:ltr": (
+        responsive: true,
+        print: true,
+        property: float,
+        class: float,
+        values: (
+          end: right,
+          start: left,
+        )
+      ),
 
-    // Margin utilities
-    "margin": (
-      responsive: true,
-      property: margin,
-      class: ma,
-      values: map-merge($spacers, (auto: auto))
-    ),
-    "margin-x": (
-      responsive: true,
-      property: margin-right margin-left,
-      class: mx,
-      values: map-merge($spacers, (auto: auto))
-    ),
-    "margin-y": (
-      responsive: true,
-      property: margin-top margin-bottom,
-      class: my,
-      values: map-merge($spacers, (auto: auto))
-    ),
-    "margin-top": (
-      responsive: true,
-      property: margin-top,
-      class: mt,
-      values: map-merge($spacers, (auto: auto))
-    ),
-    "margin-right": (
-      responsive: true,
-      property: margin-right,
-      class: mr,
-      values: map-merge($spacers, (auto: auto))
-    ),
-    "margin-bottom": (
-      responsive: true,
-      property: margin-bottom,
-      class: mb,
-      values: map-merge($spacers, (auto: auto))
-    ),
-    "margin-left": (
-      responsive: true,
-      property: margin-left,
-      class: ml,
-      values: map-merge($spacers, (auto: auto))
-    ),
-    "margin-start": (
-      responsive: true,
-      property: margin-inline-start,
-      class: ms,
-      values: map-merge($spacers, (auto: auto))
-    ),
-    "margin-end": (
-      responsive: true,
-      property: margin-inline-end,
-      class: me,
-      values: map-merge($spacers, (auto: auto))
-    ),
+      // Flex utilities
+      "flex": (
+        responsive: true,
+        property: flex,
+        values: (fill: 1 1 auto)
+      ),
+      "flex-direction": (
+        responsive: true,
+        property: flex-direction,
+        class: flex,
+        values: row column row-reverse column-reverse
+      ),
+      "flex-grow": (
+        responsive: true,
+        property: flex-grow,
+        class: flex,
+        values: (
+          grow-0: 0,
+          grow-1: 1,
+        )
+      ),
+      "flex-shrink": (
+        responsive: true,
+        property: flex-shrink,
+        class: flex,
+        values: (
+          shrink-0: 0,
+          shrink-1: 1,
+        )
+      ),
+      "flex-wrap": (
+        responsive: true,
+        property: flex-wrap,
+        class: flex,
+        values: wrap nowrap wrap-reverse
+      ),
+      "justify-content": (
+        responsive: true,
+        property: justify-content,
+        class: justify,
+        values: (
+          start: flex-start,
+          end: flex-end,
+          center: center,
+          space-between: space-between,
+          space-around: space-around,
+        )
+      ),
+      "align-items": (
+        responsive: true,
+        property: align-items,
+        class: align,
+        values: (
+          start: flex-start,
+          end: flex-end,
+          center: center,
+          baseline: baseline,
+          stretch: stretch,
+        )
+      ),
+      "align-content": (
+        responsive: true,
+        property: align-content,
+        values: (
+          start: flex-start,
+          end: flex-end,
+          center: center,
+          space-between: space-between,
+          space-around: space-around,
+          stretch: stretch,
+        )
+      ),
+      "align-self": (
+        responsive: true,
+        property: align-self,
+        values: (
+          auto: auto,
+          start: flex-start,
+          end: flex-end,
+          center: center,
+          baseline: baseline,
+          stretch: stretch,
+        )
+      ),
+      "order": (
+        responsive: true,
+        property: order,
+        values: (
+          first: -1,
+          0: 0,
+          1: 1,
+          2: 2,
+          3: 3,
+          4: 4,
+          5: 5,
+          6: 6,
+          7: 7,
+          8: 8,
+          9: 9,
+          10: 10,
+          11: 11,
+          12: 12,
+          last: 13,
+        ),
+      ),
 
-    // Negative margin utilities
-    "negative-margin": (
-      responsive: true,
-      property: margin,
-      class: ma,
-      values: $negative-spacers
-    ),
-    "negative-margin-x": (
-      responsive: true,
-      property: margin-right margin-left,
-      class: mx,
-      values: $negative-spacers
-    ),
-    "negative-margin-y": (
-      responsive: true,
-      property: margin-top margin-bottom,
-      class: my,
-      values: $negative-spacers
-    ),
-    "negative-margin-top": (
-      responsive: true,
-      property: margin-top,
-      class: mt,
-      values: $negative-spacers
-    ),
-    "negative-margin-right": (
-      responsive: true,
-      property: margin-right,
-      class: mr,
-      values: $negative-spacers
-    ),
-    "negative-margin-bottom": (
-      responsive: true,
-      property: margin-bottom,
-      class: mb,
-      values: $negative-spacers
-    ),
-    "negative-margin-left": (
-      responsive: true,
-      property: margin-left,
-      class: ml,
-      values: $negative-spacers
-    ),
-    "negative-margin-start": (
-      responsive: true,
-      property: margin-inline-start,
-      class: ms,
-      values: $negative-spacers
-    ),
-    "negative-margin-end": (
-      responsive: true,
-      property: margin-inline-end,
-      class: me,
-      values: $negative-spacers
-    ),
+      // Margin utilities
+      "margin": (
+        responsive: true,
+        property: margin,
+        class: ma,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+      "margin-x": (
+        responsive: true,
+        property: margin-right margin-left,
+        class: mx,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+      "margin-y": (
+        responsive: true,
+        property: margin-top margin-bottom,
+        class: my,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+      "margin-top": (
+        responsive: true,
+        property: margin-top,
+        class: mt,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+      "margin-right": (
+        responsive: true,
+        property: margin-right,
+        class: mr,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+      "margin-bottom": (
+        responsive: true,
+        property: margin-bottom,
+        class: mb,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+      "margin-left": (
+        responsive: true,
+        property: margin-left,
+        class: ml,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+      "margin-start": (
+        responsive: true,
+        property: margin-inline-start,
+        class: ms,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
+      "margin-end": (
+        responsive: true,
+        property: margin-inline-end,
+        class: me,
+        values: map.merge(variables.$spacers, (auto: auto))
+      ),
 
-    // Padding utilities
-    "padding": (
-      responsive: true,
-      property: padding,
-      class: pa,
-      values: $spacers
-    ),
-    "padding-x": (
-      responsive: true,
-      property: padding-right padding-left,
-      class: px,
-      values: $spacers
-    ),
-    "padding-y": (
-      responsive: true,
-      property: padding-top padding-bottom,
-      class: py,
-      values: $spacers
-    ),
-    "padding-top": (
-      responsive: true,
-      property: padding-top,
-      class: pt,
-      values: $spacers
-    ),
-    "padding-right": (
-      responsive: true,
-      property: padding-right,
-      class: pr,
-      values: $spacers
-    ),
-    "padding-bottom": (
-      responsive: true,
-      property: padding-bottom,
-      class: pb,
-      values: $spacers
-    ),
-    "padding-left": (
-      responsive: true,
-      property: padding-left,
-      class: pl,
-      values: $spacers
-    ),
-    "padding-start": (
-      responsive: true,
-      property: padding-inline-start,
-      class: ps,
-      values: $spacers
-    ),
-    "padding-end": (
-      responsive: true,
-      property: padding-inline-end,
-      class: pe,
-      values: $spacers
-    ),
+      // Negative margin utilities
+      "negative-margin": (
+        responsive: true,
+        property: margin,
+        class: ma,
+        values: variables.$negative-spacers
+      ),
+      "negative-margin-x": (
+        responsive: true,
+        property: margin-right margin-left,
+        class: mx,
+        values: variables.$negative-spacers
+      ),
+      "negative-margin-y": (
+        responsive: true,
+        property: margin-top margin-bottom,
+        class: my,
+        values: variables.$negative-spacers
+      ),
+      "negative-margin-top": (
+        responsive: true,
+        property: margin-top,
+        class: mt,
+        values: variables.$negative-spacers
+      ),
+      "negative-margin-right": (
+        responsive: true,
+        property: margin-right,
+        class: mr,
+        values: variables.$negative-spacers
+      ),
+      "negative-margin-bottom": (
+        responsive: true,
+        property: margin-bottom,
+        class: mb,
+        values: variables.$negative-spacers
+      ),
+      "negative-margin-left": (
+        responsive: true,
+        property: margin-left,
+        class: ml,
+        values: variables.$negative-spacers
+      ),
+      "negative-margin-start": (
+        responsive: true,
+        property: margin-inline-start,
+        class: ms,
+        values: variables.$negative-spacers
+      ),
+      "negative-margin-end": (
+        responsive: true,
+        property: margin-inline-end,
+        class: me,
+        values: variables.$negative-spacers
+      ),
 
-    // Border radius
-    "rounded": (
-      property: border-radius,
-      class: rounded,
-      values: $rounded
-    ),
-    "rounded-top": (
-      property: border-top-left-radius border-top-right-radius,
-      class: rounded-t,
-      values: $rounded
-    ),
-    "rounded-right": (
-      property: border-top-right-radius border-bottom-right-radius,
-      class: rounded-r,
-      values: $rounded
-    ),
-    "rounded-bottom": (
-      property: border-bottom-left-radius border-bottom-right-radius,
-      class: rounded-b,
-      values: $rounded
-    ),
-    "rounded-left": (
-      property: border-top-left-radius border-bottom-left-radius,
-      class: rounded-l,
-      values: $rounded
-    ),
-    "rounded-top-left": (
-      property: border-top-left-radius,
-      class: rounded-tl,
-      values: $rounded
-    ),
-    "rounded-top-right": (
-      property: border-top-right-radius,
-      class: rounded-tr,
-      values: $rounded
-    ),
-    "rounded-bottom-right": (
-      property: border-bottom-right-radius,
-      class: rounded-br,
-      values: $rounded
-    ),
-    "rounded-bottom-left": (
-      property: border-bottom-left-radius,
-      class: rounded-bl,
-      values: $rounded
-    ),
+      // Padding utilities
+      "padding": (
+        responsive: true,
+        property: padding,
+        class: pa,
+        values: variables.$spacers
+      ),
+      "padding-x": (
+        responsive: true,
+        property: padding-right padding-left,
+        class: px,
+        values: variables.$spacers
+      ),
+      "padding-y": (
+        responsive: true,
+        property: padding-top padding-bottom,
+        class: py,
+        values: variables.$spacers
+      ),
+      "padding-top": (
+        responsive: true,
+        property: padding-top,
+        class: pt,
+        values: variables.$spacers
+      ),
+      "padding-right": (
+        responsive: true,
+        property: padding-right,
+        class: pr,
+        values: variables.$spacers
+      ),
+      "padding-bottom": (
+        responsive: true,
+        property: padding-bottom,
+        class: pb,
+        values: variables.$spacers
+      ),
+      "padding-left": (
+        responsive: true,
+        property: padding-left,
+        class: pl,
+        values: variables.$spacers
+      ),
+      "padding-start": (
+        responsive: true,
+        property: padding-inline-start,
+        class: ps,
+        values: variables.$spacers
+      ),
+      "padding-end": (
+        responsive: true,
+        property: padding-inline-end,
+        class: pe,
+        values: variables.$spacers
+      ),
 
-    // Border
-    "border": (
-      property: border-width border-style border-color,
-      class: border,
-      values: $borders
-    ),
-    "border-opacity": (
-      property: --v-border-opacity,
-      class: border-opacity,
-      values: $border-opacities
-    ),
-    "border-top": (
-      property: border-top-width border-top-style border-top-color,
-      class: border-t,
-      values: $borders
-    ),
-    "border-right": (
-      property: border-right-width border-right-style border-right-color,
-      class: border-r,
-      values: $borders
-    ),
-    "border-bottom": (
-      property: border-bottom-width border-bottom-style border-bottom-color,
-      class: border-b,
-      values: $borders
-    ),
-    "border-left": (
-      property: border-left-width border-left-style border-left-color,
-      class: border-l,
-      values: $borders
-    ),
-    "border-style": (
-      property: border-style,
-      class: border,
-      values: solid dashed dotted double none
-    ),
+      // Border radius
+      "rounded": (
+        property: border-radius,
+        class: rounded,
+        values: variables.$rounded
+      ),
+      "rounded-top": (
+        property: border-top-left-radius border-top-right-radius,
+        class: rounded-t,
+        values: variables.$rounded
+      ),
+      "rounded-right": (
+        property: border-top-right-radius border-bottom-right-radius,
+        class: rounded-r,
+        values: variables.$rounded
+      ),
+      "rounded-bottom": (
+        property: border-bottom-left-radius border-bottom-right-radius,
+        class: rounded-b,
+        values: variables.$rounded
+      ),
+      "rounded-left": (
+        property: border-top-left-radius border-bottom-left-radius,
+        class: rounded-l,
+        values: variables.$rounded
+      ),
+      "rounded-top-left": (
+        property: border-top-left-radius,
+        class: rounded-tl,
+        values: variables.$rounded
+      ),
+      "rounded-top-right": (
+        property: border-top-right-radius,
+        class: rounded-tr,
+        values: variables.$rounded
+      ),
+      "rounded-bottom-right": (
+        property: border-bottom-right-radius,
+        class: rounded-br,
+        values: variables.$rounded
+      ),
+      "rounded-bottom-left": (
+        property: border-bottom-left-radius,
+        class: rounded-bl,
+        values: variables.$rounded
+      ),
 
-    // Text
-    "text-align": (
-      responsive: true,
-      property: text-align,
-      class: text,
-      values: left right center justify start end
-    ),
-    "text-decoration": (
-      property: text-decoration,
-      class: text-decoration,
-      values: line-through none overline underline
-    ),
-    "white-space": (
-      property: white-space,
-      class: text,
-      values: (
-        wrap: normal,
-        no-wrap: nowrap,
-        pre: pre,
-        pre-line: pre-line,
-        pre-wrap: pre-wrap,
+      // Border
+      "border": (
+        property: border-width border-style border-color,
+        class: border,
+        values: variables.$borders
+      ),
+      "border-opacity": (
+        property: --v-border-opacity,
+        class: border-opacity,
+        values: variables.$border-opacities
+      ),
+      "border-top": (
+        property: border-top-width border-top-style border-top-color,
+        class: border-t,
+        values: variables.$borders
+      ),
+      "border-right": (
+        property: border-right-width border-right-style border-right-color,
+        class: border-r,
+        values: variables.$borders
+      ),
+      "border-bottom": (
+        property: border-bottom-width border-bottom-style border-bottom-color,
+        class: border-b,
+        values: variables.$borders
+      ),
+      "border-left": (
+        property: border-left-width border-left-style border-left-color,
+        class: border-l,
+        values: variables.$borders
+      ),
+      "border-style": (
+        property: border-style,
+        class: border,
+        values: solid dashed dotted double none
+      ),
+
+      // Text
+      "text-align": (
+        responsive: true,
+        property: text-align,
+        class: text,
+        values: left right center justify start end
+      ),
+      "text-decoration": (
+        property: text-decoration,
+        class: text-decoration,
+        values: line-through none overline underline
+      ),
+      "white-space": (
+        property: white-space,
+        class: text,
+        values: (
+          wrap: normal,
+          no-wrap: nowrap,
+          pre: pre,
+          pre-line: pre-line,
+          pre-wrap: pre-wrap,
+        )
+      ),
+      "overflow-wrap": (
+        property: overflow-wrap word-break, // word-break for IE & < Edge 18
+        class: text,
+        values: (break: break-word)
+      ),
+      "text-opacity": (
+        property: opacity,
+        class: text,
+        values: (
+          high-emphasis: var(--v-high-emphasis-opacity),
+          medium-emphasis: var(--v-medium-emphasis-opacity),
+          disabled: var(--v-disabled-opacity)
+        )
+      ),
+      "text-overflow": (
+        property: white-space overflow text-overflow,
+        class: text,
+        values: (truncate: nowrap hidden ellipsis)
+      ),
+      "text-transform": (
+        property: text-transform,
+        class: text,
+        values: none capitalize lowercase uppercase
+      ),
+      "typography": (
+        responsive: true,
+        property: (
+          font-size,
+          font-weight,
+          line-height,
+          letter-spacing,
+          font-family,
+          text-transform
+        ),
+        class: text,
+        unimportant: (
+          font-weight,
+          line-height
+        ),
+        values: variables.$flat-typography
+      ),
+      // Position
+      "position": (
+        property: position,
+        class: position,
+        values: static relative fixed absolute sticky
       )
     ),
-    "overflow-wrap": (
-      property: overflow-wrap word-break, // word-break for IE & < Edge 18
-      class: text,
-      values: (break: break-word)
-    ),
-    "text-opacity": (
-      property: opacity,
-      class: text,
-      values: (
-        high-emphasis: var(--v-high-emphasis-opacity),
-        medium-emphasis: var(--v-medium-emphasis-opacity),
-        disabled: var(--v-disabled-opacity)
-      )
-    ),
-    "text-overflow": (
-      property: white-space overflow text-overflow,
-      class: text,
-      values: (truncate: nowrap hidden ellipsis)
-    ),
-    "text-transform": (
-      property: text-transform,
-      class: text,
-      values: none capitalize lowercase uppercase
-    ),
-    "typography": (
-      responsive: true,
-      property: (
-        font-size,
-        font-weight,
-        line-height,
-        letter-spacing,
-        font-family,
-        text-transform
-      ),
-      class: text,
-      unimportant: (
-        font-weight,
-        line-height
-      ),
-      values: $flat-typography
-    ),
-    // Position
-    "position": (
-      property: position,
-      class: position,
-      values: static relative fixed absolute sticky
-    )
-  ),
-  $utilities
-);
+    $utilities
+  );
+} @else {
+  $utilities: ();
+}
