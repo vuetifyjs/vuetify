@@ -86,6 +86,7 @@
     "@vue/babel-plugin-jsx": "^1.0.6",
     "@vue/test-utils": "2.0.0-rc.9",
     "@vueuse/head": "^0.6.0",
+    "acorn-walk": "^8.1.1",
     "autoprefixer": "^10.3.2",
     "babel-loader": "^8.2.2",
     "babel-plugin-add-import-extension": "1.5.1",

@@ -13,6 +13,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
 import postcss from 'postcss'
+import { simple as walk } from 'acorn-walk'
 
 const extensions = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs']
 const banner = `/*!
@@ -90,6 +91,58 @@ export default {
       entries: [
         { find: /^@\/(.*)/, replacement: path.resolve(__dirname, '../src/$1') },
       ]
-    })
+    }),
+    {
+      async buildEnd () {
+        console.log('buildEnd')
+        const components = Object.create(null)
+        const directives = []
+
+        { // Components
+          const info = this.getModuleInfo(
+            (await this.resolve('src/components/index.ts')).id
+          )
+          info.importedIds.forEach(id => {
+            const importFrom = path.relative(path.resolve(__dirname, '../src'), id).replace(/\.ts$/, '.mjs')
+            const { ast } = this.getModuleInfo(id)
+            walk(ast, {
+              ExportNamedDeclaration (node) {
+                node.specifiers.forEach(node => {
+                  components[node.exported.name] = importFrom
+                })
+                node.declaration?.declarations.forEach(node => {
+                  components[node.id.name] = importFrom
+                })
+              },
+            })
+          })
+        }
+
+        { // Directives
+          const { ast } = this.getModuleInfo(
+            (await this.resolve('src/directives/index.ts')).id
+          )
+          walk(ast, {
+            ExportNamedDeclaration (node) {
+              node.specifiers.forEach(node => {
+                directives.push(node.exported.name)
+              })
+            },
+          })
+        }
+
+        this.emitFile({
+          type: 'asset',
+          fileName: 'json/importMap.json',
+          source: JSON.stringify({
+            components: Object.fromEntries(Object.entries(components).map(entry => [entry[0], {
+              from: entry[1],
+              styles: [], // TODO
+            }])),
+            directives,
+          }, null, 2),
+        })
+      }
+    }
   ],
 }
