@@ -88,7 +88,7 @@
   .v-timeline-divider__line
     @include vertical(true)
       height: calc(100% - var(--v-timeline-dot-size) - #{$timeline-inset-divider-line})
-      bottom: calc(#{$timeline-inset-divider-line * .5})
+      bottom: calc(#{$timeline-inset-divider-line} / 2)
 
     @include horizontal(true)
       width: calc(100% - var(--v-timeline-dot-size) - #{$timeline-inset-divider-line})
