@@ -6,14 +6,15 @@ import { generate } from '@/../cypress/templates'
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
 const location = ['bottom-left', 'bottom-right', 'top-left', 'top-right']
 const rounded = ['circle', 'pill', 'shaped', 'tr-xl', 'br-lg'] // TODO: fix pill
+const offset = [8, -8, '4', '-4', undefined]
+
 const props = {
   bordered: true,
   color: defaultColors,
+  content: ['content'],
   dot: true,
   icon: ['mdi-vuetify'],
   floating: true,
-  offsetX: [8, -8, '12', '-12'],
-  offsetY: [-6, 6, '10', '-10'],
   inline: true,
   location,
   modelValue: true,
@@ -23,8 +24,26 @@ const props = {
 const stories = {
   'Default badge': <VBadge />,
   'Icon badge': <VBadge icon="mdi-vuetify" />,
-  'Text color': ( // TODO: update styling
-    <div class="d-flex" style="gap: 3rem">
+  'Offset badge': (
+    <div class="d-flex flex-column" style="gap: 0.8rem">
+      { ['offsetX', 'offsetY'].map(key => (
+        <>
+          <h5>{ key }</h5>
+          <div class="d-flex" style="gap: 1.3rem">
+            { offset.map(val => (
+              <VBadge {...{ [key]: val }} content={ `${val}` }>
+                <button class="v-btn v-btn--size-default v-btn--variant-contained">
+                  { key }
+                </button>
+              </VBadge>
+            )) }
+          </div>
+        </>
+      )) }
+    </div>
+  ),
+  'Text color': (
+    <div class="d-flex flex-row" style="gap: 0.8rem">
       { defaultColors.map((color, idx) => (
         <>
           <div class="d-flex" style="gap: 0.8rem">
@@ -66,16 +85,8 @@ describe('VBadge', () => {
     })
   })
 
-  describe.skip('content', () => {
-    it('renders text within the badge', () => {
-      cy.mount(<VBadge content="badge content" />)
-        .get('.v-badge')
-        .should('have.text', 'badge content')
-    })
-  })
-
   describe('label', () => {
-    it('should have the floating class applied when true', () => {
+    it('should have the designated aria label', () => {
       cy.mount(<VBadge label="label-badge">label</VBadge>)
         .get('.v-badge__badge')
         .should('have.attr', 'aria-label', 'label-badge')
