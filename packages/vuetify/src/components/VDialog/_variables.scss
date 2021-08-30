@@ -1,3 +1,7 @@
+@use 'sass:map';
+@use '../../styles/settings';
+@use '../../styles/tools';
+
 // Defaults
 $dialog-elevation: 24 !default;
 $dialog-z-index: $dialog-elevation * 100 !default;
@@ -5,10 +9,10 @@ $dialog-card-avatar-padding: 0 !default;
 $dialog-card-header-padding: 14px 24px 0 !default;
 $dialog-card-header-text-padding-top: 10px !default;
 $dialog-card-text-padding: 16px 24px 10px !default;
-$dialog-card-text-letter-spacing: map-deep-get($typography, 'body-1', 'letter-spacing') !default;
-$dialog-overlay-content-border-radius: $border-radius-root !default;
+$dialog-card-text-letter-spacing: tools.map-deep-get(settings.$typography, 'body-1', 'letter-spacing') !default;
+$dialog-overlay-content-border-radius: settings.$border-radius-root !default;
 $dialog-overlay-content-max-width: 560px !default;
 $dialog-overlay-content-max-height: 360px !default;
 $dialog-overlay-content-min-width: 240px !default;
-$dialog-overlay-content-mobile-breakpoint: map-get($display-breakpoints, 'sm-and-down') !default;
+$dialog-overlay-content-mobile-breakpoint: map.get(settings.$display-breakpoints, 'sm-and-down') !default;
 $dialog-overlay-content-mobile-max-width: 280px !default;

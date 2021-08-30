@@ -1,5 +1,7 @@
-// Imports
-@import './index'
+@forward './variables'
+@use 'sass:map'
+@use '../../styles/settings'
+@use './variables' as *
 
 .v-icon
   align-items: center
@@ -21,9 +23,9 @@
   &--right
     margin-inline-start: $icon-margin-end
 
-  @each $name in $sizes
+  @each $name in settings.$sizes
     &--size-#{$name}
-      font-size: map-get($icon-sizes, $name)
+      font-size: map.get($icon-sizes, $name)
 
 .v-icon__svg
   fill: currentColor

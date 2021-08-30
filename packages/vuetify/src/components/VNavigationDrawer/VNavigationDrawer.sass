@@ -1,5 +1,6 @@
-// Imports
-@import './index'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-navigation-drawer
   -webkit-overflow-scrolling: $navigation-drawer-overflow-scrolling
@@ -16,10 +17,10 @@
   will-change: $navigation-drawer-will-change
   position: fixed
 
-  @include border($navigation-drawer-border...)
-  @include elevation($navigation-drawer-elevation)
-  @include rounded($navigation-drawer-border-radius)
-  @include theme($navigation-drawer-theme...)
+  @include tools.border($navigation-drawer-border...)
+  @include tools.elevation($navigation-drawer-elevation)
+  @include tools.rounded($navigation-drawer-border-radius)
+  @include tools.theme($navigation-drawer-theme...)
 
   &--absolute
     position: absolute
@@ -28,32 +29,32 @@
     border-color: transparent
 
   &--rounded
-    @include rounded($navigation-drawer-rounded-border-radius)
+    @include tools.rounded($navigation-drawer-rounded-border-radius)
 
   &--start
     border-inline-end-width: $navigation-drawer-border-thin-width
 
-    @include ltr()
+    @include tools.ltr()
       left: 0
       right: auto
 
-    @include rtl()
+    @include tools.rtl()
       left: auto
       right: 0
 
   &--end
     border-inline-start-width: $navigation-drawer-border-thin-width
 
-    @include ltr()
+    @include tools.ltr()
       left: auto
       right: 0
 
-    @include rtl()
+    @include tools.rtl()
       left: 0
       right: auto
 
   &--temporary
-    @include elevation($navigation-drawer-temporary-elevation)
+    @include tools.elevation($navigation-drawer-temporary-elevation)
 
 .v-navigation-drawer__content
   flex: 0 1 auto

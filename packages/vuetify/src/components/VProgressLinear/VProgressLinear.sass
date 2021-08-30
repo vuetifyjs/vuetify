@@ -1,5 +1,6 @@
-// Imports
-@import ./index
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 // Block
 .v-progress-linear
@@ -108,7 +109,7 @@
   position: fixed
 
 .v-progress-linear--rounded
-  @include rounded($progress-linear-border-radius)
+  @include tools.rounded($progress-linear-border-radius)
 
   &.v-progress-linear--rounded-bar
     .v-progress-linear__determinate,
@@ -134,14 +135,14 @@
   .v-progress-linear__determinate,
   .v-progress-linear__indeterminate,
   .v-progress-linear__stream + .v-progress-linear__background
-    @include rounded($progress-linear-border-radius)
+    @include tools.rounded($progress-linear-border-radius)
 
   .v-progress-linear__determinate
-    @include ltr()
+    @include tools.ltr()
       border-top-left-radius: 0
       border-bottom-left-radius: 0
 
-    @include rtl()
+    @include tools.rtl()
       border-top-right-radius: 0
       border-bottom-right-radius: 0
 

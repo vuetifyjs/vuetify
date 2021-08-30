@@ -1,4 +1,6 @@
-@import './index'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 // Block
 .v-dialog
@@ -11,7 +13,7 @@
     min-width: $dialog-overlay-content-min-width
     max-width: $dialog-overlay-content-max-width
 
-    @include rounded($dialog-overlay-content-border-radius)
+    @include tools.rounded($dialog-overlay-content-border-radius)
 
     @media #{$dialog-overlay-content-mobile-breakpoint}
       max-width: $dialog-overlay-content-mobile-max-width
@@ -21,7 +23,7 @@
       border-radius: inherit
       overflow: hidden
 
-      @include elevation($dialog-elevation)
+      @include tools.elevation($dialog-elevation)
 
     > .v-card
       > .v-card-avatar

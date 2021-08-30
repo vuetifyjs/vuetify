@@ -47,7 +47,7 @@
   position: absolute
   width: $slider-thumb-size
   height: $slider-thumb-size
-  left: -$slider-thumb-size / 2
+  left: -$slider-thumb-size * .5
   top: 50%
   border-radius: $slider-thumb-border-radius
   transition: $slider-transition
@@ -64,8 +64,8 @@
     background: currentColor
     opacity: $slider-thumb-before-opacity
     position: absolute
-    left: -$slider-thumb-focused-size-increase / 2
-    top: -$slider-thumb-focused-size-increase / 2
+    left: -$slider-thumb-focused-size-increase * .5
+    top: -$slider-thumb-focused-size-increase * .5
     transform: scale(0.1)
     pointer-events: none
 
@@ -251,7 +251,7 @@
   .v-slider__thumb
     width: $slider-thumb-size - 4
     height: $slider-thumb-size - 4
-    left: -($slider-thumb-size - 4) / 2
+    left: -($slider-thumb-size - 4) * .5
 
     &:before
       display: none

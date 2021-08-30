@@ -1,0 +1,36 @@
+@use '../../styles/settings';
+
+// INPUT
+$field-border-radius: settings.$border-radius-root !default;
+$field-font-size: 16px !default;
+$field-letter-spacing: .009375em !default;
+$field-max-width: 100% !default;
+$field-transition-timing: 150ms settings.$standard-easing !default;
+$field-subtle-transition-timing: 250ms settings.$standard-easing !default;
+$field-underlined-margin-bottom: 4px !default;
+$field-clearable-transition: .15s settings.$standard-easing !default;
+$field-disabled-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+
+// CONTROL
+$field-control-contained-background: rgb(var(--v-theme-surface)) !default;
+$field-control-contained-elevation: 2 !default;
+$field-control-filled-background: rgba(var(--v-theme-on-surface), var(--v-idle-opacity)) !default;
+$field-control-padding: 16px !default;
+$field-control-affixed-padding: 12px !default;
+$field-control-affixed-inner-padding: 6px !default;
+
+// INPUT
+$field-input-padding-top: 30px !default;
+$field-input-opacity: var(--v-high-emphasis-opacity) !default;
+
+// LABEL
+$field-label-font-size: 1rem !default;
+$field-label-floating-scale: .75 !default;
+
+// OUTLINE
+$field-outline-opacity: .38 !default;
+$field-border-width: 1px !default;
+$field-focused-border-width: 2px !default;
+
+// OVERLAY
+$field-overlay-filled-opacity: 0.04 !default;

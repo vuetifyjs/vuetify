@@ -1,4 +1,6 @@
-@import './index'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-bottom-navigation
   display: flex
@@ -7,12 +9,12 @@
   position: fixed
   transition: $bottom-navigation-transition
 
-  @include border($bottom-navigation-border...)
-  @include rounded($bottom-navigation-border-radius)
-  @include theme($bottom-navigation-theme...)
+  @include tools.border($bottom-navigation-border...)
+  @include tools.rounded($bottom-navigation-border-radius)
+  @include tools.theme($bottom-navigation-theme...)
 
   &--is-active
-    @include elevation($bottom-navigation-elevation)
+    @include tools.elevation($bottom-navigation-elevation)
 
   &--absolute
     position: absolute

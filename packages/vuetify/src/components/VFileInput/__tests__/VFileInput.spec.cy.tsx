@@ -16,7 +16,7 @@ describe('VFileInput', () => {
     ))
       .get('.v-file-input input')
       .attachFile('text.txt')
-      .get('.v-file-input .v-input__input')
+      .get('.v-file-input .v-field__input')
       .should('have.text', 'text.txt')
   })
 
@@ -36,7 +36,7 @@ describe('VFileInput', () => {
         <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} multiple show-size />
       </CenteredGrid>
     ))
-      .get('.v-file-input .v-input__input')
+      .get('.v-file-input .v-field__input')
       .should('have.text', '1MB file (1.0 MB), 2MB file (2.0 MB)')
   })
 
@@ -57,7 +57,7 @@ describe('VFileInput', () => {
         <VFileInput label="foo" v-model={model.value} />
       </CenteredGrid>
     ))
-      .get('.v-input__append > .v-btn')
+      .get('.v-field__append-inner > .v-btn')
       .click()
       .get('.v-input input')
       .should('have.value', '')
@@ -69,7 +69,7 @@ describe('VFileInput', () => {
         <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} clearable={false} />
       </CenteredGrid>
     ))
-      .get('.v-input__append > .v-btn')
+      .get('.v-field__append-inner > .v-btn')
       .should('not.exist')
   })
 
@@ -80,7 +80,7 @@ describe('VFileInput', () => {
       </CenteredGrid>
     ))
       .get('.v-file-input')
-      .should('have.class', 'v-input--disabled')
+      .should('have.class', 'v-field--disabled')
       .get('.v-file-input input')
       .should('have.attr', 'disabled')
   })
@@ -91,7 +91,7 @@ describe('VFileInput', () => {
         <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} prependOuterIcon="" />
       </CenteredGrid>
     ))
-      .get('.v-file-input .v-input__prepend-outer')
+      .get('.v-file-input .v-input__prepend')
       .should('not.exist')
   })
 

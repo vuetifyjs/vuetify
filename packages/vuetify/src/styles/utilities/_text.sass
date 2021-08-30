@@ -1,4 +1,6 @@
-@each $name, $weight in $font-weights
+@use '../settings'
+
+@each $name, $weight in settings.$font-weights
   .font-weight
     &-#{$name}
       font-weight: $weight !important

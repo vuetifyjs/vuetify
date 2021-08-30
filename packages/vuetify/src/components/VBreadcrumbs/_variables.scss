@@ -1,13 +1,16 @@
+@use '../../styles/settings';
+@use '../../styles/tools';
+
 // Defaults
 $breadcrumbs-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 $breadcrumbs-divider-padding: 0 8px !default;
 $breadcrumbs-item-disabled-opacity: var(--v-disabled-opacity) !default;
-$breadcrumbs-item-icon-font-size: map-deep-get($typography, 'body-1', 'size') !default;
+$breadcrumbs-item-icon-font-size: tools.map-deep-get(settings.$typography, 'body-1', 'size') !default;
 $breadcrumbs-item-icon-margin-inline-end: 2px !default;
 $breadcrumbs-item-icon-margin-inline-start: -4px !default;
 $breadcrumbs-item-link-text-decoration: underline !default;
 $breadcrumbs-item-padding: 0 4px !default;
-$breadcrumbs-line-height: map-deep-get($typography, 'subtitle-2', 'line-height') !default;
+$breadcrumbs-line-height: tools.map-deep-get(settings.$typography, 'subtitle-2', 'line-height') !default;
 $breadcrumbs-padding: 16px !default;
-$breadcrumbs-rounded-border-radius: $border-radius-root !default;
+$breadcrumbs-rounded-border-radius: settings.$border-radius-root !default;
 $breadcrumbs-vertical-align: middle !default;

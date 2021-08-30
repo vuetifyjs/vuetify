@@ -3,7 +3,7 @@ const fm = require('front-matter')
 const fs = require('fs')
 const glob = require('glob')
 const path = require('path')
-const VirtualModulesPlugin = require('webpack-virtual-modules')
+const mkdirp = require('mkdirp')
 
 function readFile (filePath) {
   return fs.readFileSync(filePath, 'utf8')
@@ -42,33 +42,30 @@ function generateFiles (initial = false) {
     const files = glob.sync(`${langDir}/**/*.md`)
     const lang = path.basename(langDir)
 
-    generatedFiles[`node_modules/@docs/${lang}/pages.js`] = pages(files)
+    generatedFiles[`node_modules/.cache/@docs/${lang}/pages.js`] = pages(files)
 
     if (initial) {
       fs.writeFileSync(path.resolve(`src/pages/${lang}.js`), `export default require.context('./${lang}', true, /\\.md$/)\n`)
     }
   }
 
-  return generatedFiles
+  for (const [key, value] of Object.entries(generatedFiles)) {
+    mkdirp(path.dirname(path.resolve(key))).then(() => {
+      fs.writeFileSync(path.resolve(key), value)
+    })
+  }
 }
 
 class Plugin {
   apply (compiler) {
-    const files = generateFiles(true)
+    generateFiles(true)
+
     let shouldWrite = false
-
-    const virtualModules = new VirtualModulesPlugin(files)
-
-    virtualModules.apply(compiler)
-
     compiler.hooks.afterCompile.tapPromise('PagesPlugin', async () => {
-      if (!shouldWrite) return
-
-      for (const [key, value] of Object.entries(generateFiles())) {
-        virtualModules.writeModule(key, value)
+      if (shouldWrite) {
+        generateFiles()
+        shouldWrite = false
       }
-
-      shouldWrite = false
     })
 
     compiler.hooks.watchRun.tapPromise('PagesPlugin', async compiler => {

@@ -1,4 +1,7 @@
-@import './index'
+@forward './variables'
+@use '../../styles/tools'
+@use './mixins' as *
+@use './variables' as *
 
 .v-avatar
   align-items: center
@@ -13,7 +16,7 @@
 
   @include avatar-sizes($avatar-sizes)
   @include avatar-density(('height', 'width'), $avatar-density)
-  @include rounded($avatar-border-radius)
+  @include tools.rounded($avatar-border-radius)
 
   > *
     border-radius: inherit
@@ -24,7 +27,7 @@
     font-size: var(--v-avatar-height)
 
   &--rounded
-    +rounded($avatar-rounded-border-radius)
+    +tools.rounded($avatar-rounded-border-radius)
 
 // VList
 .v-avatar

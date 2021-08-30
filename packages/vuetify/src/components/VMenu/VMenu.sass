@@ -1,4 +1,6 @@
-@import './index'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-menu
   z-index: $menu-z-index
@@ -6,7 +8,7 @@
   .v-overlay__content
     display: flex
     flex-direction: column
-    @include rounded($menu-content-border-radius)
+    @include tools.rounded($menu-content-border-radius)
 
     > .v-card,
     > .v-sheet
@@ -18,5 +20,5 @@
       &::before
         border-radius: inherit
         z-index: -1
-        @include absolute
-        @include elevation($menu-elevation)
+        @include tools.absolute
+        @include tools.elevation($menu-elevation)
