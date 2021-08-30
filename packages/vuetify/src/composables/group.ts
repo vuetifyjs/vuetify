@@ -13,6 +13,7 @@ interface GroupItem {
 }
 
 interface GroupProps {
+  disabled?: boolean
   modelValue?: unknown
   multiple?: boolean
   mandatory?: boolean | 'force'
@@ -29,6 +30,19 @@ interface GroupProvide {
   prev: () => void
   next: () => void
   selectedClass: Ref<string | undefined>
+  items: Ref<number[]>
+  disabled: Ref<boolean | undefined>
+}
+
+export interface GroupItemProvide {
+  id: number
+  isSelected: Ref<boolean>
+  toggle: () => void
+  select: (value: boolean) => void
+  selectedClass: Ref<string | false | undefined>
+  value: Ref<unknown>
+  disabled: Ref<boolean | undefined>
+  group: GroupProvide
 }
 
 export const makeGroupProps = propsFactory({
@@ -40,6 +54,7 @@ export const makeGroupProps = propsFactory({
   mandatory: [Boolean, String] as PropType<boolean | 'force'>,
   max: Number,
   selectedClass: String,
+  disabled: Boolean,
 }, 'group')
 
 export const makeGroupItemProps = propsFactory({
@@ -55,7 +70,7 @@ export const makeGroupItemProps = propsFactory({
 export function useGroupItem (
   props: { value?: unknown, disabled?: boolean, selectedClass?: string },
   injectKey: InjectionKey<GroupProvide>,
-) {
+): GroupItemProvide {
   const vm = getCurrentInstance()
 
   if (!vm) {
@@ -72,7 +87,7 @@ export function useGroupItem (
 
   const id = getUid()
   const value = toRef(props, 'value')
-  const disabled = toRef(props, 'disabled')
+  const disabled = computed(() => group.disabled.value || props.disabled)
 
   group.register({
     id,
@@ -91,12 +106,14 @@ export function useGroupItem (
   const selectedClass = computed(() => isSelected.value && (group.selectedClass.value ?? props.selectedClass))
 
   return {
+    id,
     isSelected,
     toggle: () => group.select(id, !isSelected.value),
     select: (value: boolean) => group.select(id, value),
     selectedClass,
     value,
     disabled,
+    group,
   }
 }
 
@@ -231,10 +248,12 @@ export function useGroup (
     unregister,
     selected,
     select,
+    disabled: toRef(props, 'disabled'),
     prev: () => step(items.length - 1),
     next: () => step(1),
     isSelected: (id: number) => selected.value.includes(id),
     selectedClass: computed(() => props.selectedClass),
+    items: computed(() => items.map(({ id }) => id)),
   }
 
   provide(injectKey, state)

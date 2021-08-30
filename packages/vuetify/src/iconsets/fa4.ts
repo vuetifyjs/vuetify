@@ -8,6 +8,7 @@ import { VClassIcon } from '@/composables/icons'
 import type { IconAliases, IconSet } from '@/composables/icons'
 
 const aliases: IconAliases = {
+  collapse: 'fa-chevron-up',
   complete: 'fa-check',
   cancel: 'fa-times-circle',
   close: 'fa-times',

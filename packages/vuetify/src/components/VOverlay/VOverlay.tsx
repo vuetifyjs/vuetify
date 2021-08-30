@@ -13,6 +13,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRtl } from '@/composables/rtl'
 import { useTeleport } from '@/composables/teleport'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { makeLazyProps, useLazy } from '@/composables/lazy'
 
 // Directives
 import { ClickOutside } from '@/directives/click-outside'
@@ -34,24 +35,11 @@ import {
   toRef,
   Transition,
   watch,
-  watchEffect,
 } from 'vue'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type { PropType } from 'vue'
 import type { BackgroundColorData } from '@/composables/color'
-
-function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
-  const isBooted = ref(eager.value)
-
-  watchEffect(() => {
-    if (eager.value || isActive.value) {
-      isBooted.value = true
-    }
-  })
-
-  return { isBooted }
-}
 
 interface ScrimProps {
   [key: string]: unknown
@@ -90,7 +78,6 @@ export default defineComponent({
       default: 'body',
     },
     contentClass: null,
-    eager: Boolean,
     noClickAnimation: Boolean,
     modelValue: Boolean,
     persistent: Boolean,
@@ -105,6 +92,7 @@ export default defineComponent({
     ...makeScrollStrategyProps(),
     ...makeThemeProps(),
     ...makeTransitionProps(),
+    ...makeLazyProps(),
   },
 
   emits: {
@@ -117,7 +105,7 @@ export default defineComponent({
     const { teleportTarget } = useTeleport(toRef(props, 'attach'))
     const { themeClasses } = useTheme(props)
     const { rtlClasses } = useRtl()
-    const { isBooted } = useBooted(isActive, toRef(props, 'eager'))
+    const { hasContent, onAfterLeave } = useLazy(props, isActive)
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
@@ -188,10 +176,6 @@ export default defineComponent({
       })
     }
 
-    function onAfterLeave () {
-      if (!props.eager) isBooted.value = false
-    }
-
     useRender(() => (
       <>
         { slots.activator?.({
@@ -206,7 +190,7 @@ export default defineComponent({
           ref={ root }
           to={ teleportTarget.value }
         >
-          { isBooted.value && (
+          { hasContent.value && (
             <div
               class={[
                 'v-overlay',

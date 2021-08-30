@@ -1,102 +1,92 @@
-@import './_variables.scss'
+@forward './variables'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
 
 // Theme
-+theme(v-expansion-panels) using ($material)
-  .v-expansion-panel
-    background-color: map-get($material, 'cards')
-    color: map-deep-get($material, 'text', 'primary')
+.v-expansion-panel
+  background-color: $expansion-panel-background-color
+  color: $expansion-panel-color
 
-    &--disabled
-      color: map-deep-get($material, 'text', 'disabled')
+  &:not(:first-child)::after
+    border-color: $expansion-panel-border-color
 
-    &:not(:first-child)::after
-      border-color: map-get($material, 'dividers')
+  &--disabled
+    .v-expansion-panel-title
+      color: $expansion-panel-disabled-color
 
-  .v-expansion-panel-header
-    .v-expansion-panel-header__icon
-      .v-icon
-        color: map-deep-get($material, 'icons', 'active')
-
-  &.v-expansion-panels--focusable
-    .v-expansion-panel-header
-      +states($material)
-
-  &.v-expansion-panels--hover
-    > .v-expansion-panel
-      > .v-expansion-panel-header
-        &:hover
-          +states($material)
+      .v-expansion-panel-title__overlay
+        // This is multiplied by the text opacity,
+        // so we need to divide it to get the desired value
+        // TODO: Should disabled be part of states mixin?
+        opacity: $expansion-panel-disabled-overlay / $expansion-panel-disabled-opacity
 
 // Block
 .v-expansion-panels
-  border-radius: $expansion-panel-border-radius
   display: flex
   flex-wrap: wrap
   justify-content: center
   list-style-type: none
   padding: 0
   width: 100%
-  z-index: 1
 
-  > *
-    cursor: auto
+  &:not(&--variant-accordion)
+    > :not(:first-child):not(:last-child):not(.v-expansion-panel--active):not(.v-expansion-panel--before-active)
+      border-bottom-left-radius: 0 !important
+      border-bottom-right-radius: 0 !important
 
-  > *:first-child
-    border-top-left-radius: inherit
-    border-top-right-radius: inherit
+    > :not(:first-child):not(:last-child):not(.v-expansion-panel--active):not(.v-expansion-panel--after-active)
+      border-top-left-radius: 0 !important
+      border-top-right-radius: 0 !important
 
-  > *:last-child
-    border-bottom-left-radius: inherit
-    border-bottom-right-radius: inherit
+    > :first-child:not(.v-expansion-panel--active):not(.v-expansion-panel--before-active)
+      border-bottom-left-radius: 0 !important
+      border-bottom-right-radius: 0 !important
 
-  // round corners on non-accordion/tile panels
-  &:not(&--accordion):not(&--tile)
-    > .v-expansion-panel
-      &--active
-        border-radius: $expansion-panel-border-radius
+    > :last-child:not(.v-expansion-panel--active):not(.v-expansion-panel--after-active)
+      border-top-left-radius: 0 !important
+      border-top-right-radius: 0 !important
 
-        + .v-expansion-panel
-          border-top-left-radius: $expansion-panel-border-radius
-          border-top-right-radius: $expansion-panel-border-radius
+  &--variant-accordion
+    > :first-child
+      border-bottom-left-radius: 0 !important
+      border-bottom-right-radius: 0 !important
 
-      &--next-active
-        border-bottom-left-radius: $expansion-panel-border-radius
-        border-bottom-right-radius: $expansion-panel-border-radius
+    > :last-child
+      border-top-left-radius: 0 !important
+      border-top-right-radius: 0 !important
 
-        .v-expansion-panel-header
-          border-bottom-left-radius: inherit
-          border-bottom-right-radius: inherit
+      .v-expansion-panel-title--active
+        border-bottom-left-radius: initial
+        border-bottom-right-radius: initial
+
+    > :not(:first-child):not(:last-child)
+      border-radius: 0 !important
+
+    .v-expansion-panel-title__overlay
+      transition: 0.3s border-radius settings.$standard-easing
 
 // Element
 .v-expansion-panel
   flex: 1 0 100%
   max-width: 100%
   position: relative
-  transition: .3s map-get($transition, 'swing')
-
-  &::before
-    border-radius: inherit
-    bottom: 0
-    content: ''
-    left: 0
-    position: absolute
-    right: 0
-    top: 0
-    z-index: -1
-    +elevationTransition()
-    +elevation(2)
+  transition: .3s all settings.$standard-easing
+  transition-property: margin-top, border-radius, border, max-width
+  border-radius: $expansion-panel-border-radius
 
   &:not(:first-child)::after
-    border-top: thin solid
+    border-top-style: solid
+    border-top-width: thin
     content: ''
     left: 0
     position: absolute
     right: 0
     top: 0
-    transition: .2s border-color map-get($transition, 'fast-out-slow-in'), .2s opacity map-get($transition, 'fast-out-slow-in')
+    transition: 0.3s opacity settings.$standard-easing
 
   &--disabled
-    .v-expansion-panel-header
+    .v-expansion-panel-title
       pointer-events: none
 
   &--active
@@ -107,105 +97,72 @@
       &::after
         opacity: 0
 
-    > .v-expansion-panel-header
-         min-height: $expansion-panel-active-header-min-height
+    > .v-expansion-panel-title
+         min-height: $expansion-panel-active-title-min-height
 
-    > .v-expansion-panel-header--active .v-expansion-panel-header__icon
-      &:not(.v-expansion-panel-header__icon--disable-rotate) .v-icon
-        transform: rotate(-180deg)
+.v-expansion-panel__shadow
+  @include tools.absolute()
+  @include tools.elevation(2)
+  border-radius: inherit
+  z-index: -1
 
-.v-expansion-panel-header__icon
+.v-expansion-panel-title
+  align-items: center
+  border-radius: inherit
+  display: flex
+  font-size: $expansion-panel-title-font-size
+  line-height: 1
+  min-height: $expansion-panel-title-min-height
+  outline: none
+  padding: $expansion-panel-title-padding
+  position: relative
+  transition: .3s min-height settings.$standard-easing
+  width: 100%
+  justify-content: space-between
+  @include tools.states('.v-expansion-panel-title__overlay', true)
+
+  &--active::before
+    opacity: 0.12
+
+.v-expansion-panel-title__overlay
+  @include tools.absolute()
+  background-color: currentColor
+  border-radius: inherit
+  opacity: 0
+
+.v-expansion-panel-title__icon
   display: inline-flex
   margin-bottom: -4px
   margin-top: -4px
   user-select: none
+  margin-inline-start: auto
 
-  +ltr()
-    margin-left: auto
-
-  +rtl()
-    margin-right: auto
-
-.v-expansion-panel-header
-  align-items: center
-  border-top-left-radius: inherit
-  border-top-right-radius: inherit
-  display: flex
-  font-size: $expansion-panel-header-font-size
-  line-height: 1
-  min-height: $expansion-panel-header-min-height
-  outline: none
-  padding: $expansion-panel-header-padding
-  position: relative
-  transition: .3s min-height map-get($transition, 'swing')
-  width: 100%
-
-  +ltr()
-    text-align: left
-
-  +rtl()
-    text-align: right
-
-  &:not(.v-expansion-panel-header--mousedown):focus::before
-    opacity: 0.12
-
-  &:before
-    background-color: currentColor
-    border-radius: inherit
-    bottom: 0
-    content: ''
-    left: 0
-    opacity: 0
-    pointer-events: none
-    position: absolute
-    right: 0
-    top: 0
-    transition: .3s opacity map-get($transition, 'swing')
-
-  > *:not(.v-expansion-panel-header__icon)
-    flex: 1 1 auto
-
-.v-expansion-panel-content
+.v-expansion-panel-text
   display: flex
 
-  &__wrap
-    padding: $expansion-panel-content-padding
+  &__wrapper
+    padding: $expansion-panel-text-padding
     flex: 1 1 auto
     max-width: 100%
 
-// Modifier
-.v-expansion-panels--accordion
+// Variants
+.v-expansion-panels--variant-accordion
   > .v-expansion-panel
     margin-top: 0
 
     &::after
       opacity: 1
 
-.v-expansion-panels--popout
+.v-expansion-panels--variant-popout
   > .v-expansion-panel
     max-width: $expansion-panel-popout-max-width
 
     &--active
       max-width: $expansion-panel-popout-active-max-width
 
-.v-expansion-panels--inset
+.v-expansion-panels--variant-inset
   > .v-expansion-panel
     max-width: $expansion-panel-inset-max-width
 
     &--active
       max-width: $expansion-panel-inset-active-max-width
-
-.v-expansion-panels--flat
-  > .v-expansion-panel
-    &::after
-      border-top: none
-
-    &::before
-      +elevation(0)
-
-.v-expansion-panels--tile
-  border-radius: 0
-
-  > .v-expansion-panel
-    &::before
-      border-radius: 0

@@ -1,6 +1,7 @@
 import type { VueWrapper } from '@vue/test-utils'
 import { mount as cyMount } from '@cypress/vue'
 import { createVuetify } from '../../src/entry-bundler'
+import { mergeDeep } from '../../src/util'
 
 /**
  * @example
@@ -18,7 +19,7 @@ Cypress.Commands.add('mount', (component, options, vuetifyOptions) => {
     },
   }
 
-  return cyMount(component, { ...defaultOptions, ...options }).as('wrapper')
+  return cyMount(component, mergeDeep(defaultOptions, options)).as('wrapper')
 })
 
 /**
