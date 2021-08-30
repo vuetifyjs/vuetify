@@ -24,7 +24,7 @@ The following shows how to access the application's display information:
 ```html
 <script>
   // Composables
-  import { useDisplay } from 'vuetify/lib/composables/display'
+  import { useDisplay } from 'vuetify/composables'
 
   export default {
     mounted () {
@@ -87,7 +87,7 @@ In the following example, we use a switch statement and the current breakpoint n
 
 <script>
   // Composables
-  import { useDisplay } from 'vuetify/lib/composables/display'
+  import { useDisplay } from 'vuetify/composables'
 
   export default {
     computed: {
@@ -183,7 +183,7 @@ Use the **display** composable alongside Vue 3's `setup` function to harness the
 
 <script>
   // Composables
-  import { useDisplay } from 'vuetify/lib/compsables/display'
+  import { useDisplay } from 'vuetify/composables'
 
   export default {
     setup () {
@@ -201,7 +201,7 @@ Using JSX with setup can accomplish the same thing as a template. The following 
 
 ```tsx
 // Composables
-import { useDisplay } from 'vuetify/lib/composables/display'
+import { useDisplay } from 'vuetify/composables'
 
 export default {
   setup () {
@@ -236,7 +236,7 @@ Breakpoint and conditional values return a `boolean` that is derived from the cu
 
 <script>
   // Composables
-  import { useDisplay } from 'vuetify/lib/composables/display'
+  import { useDisplay } from 'vuetify/composables'
 
   setup () {
     // Destructure only the keys we want to use
