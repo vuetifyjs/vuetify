@@ -1,4 +1,7 @@
-@import ./index
+@forward './variables'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
 
 // Theme
 .v-expansion-panel
@@ -61,14 +64,14 @@
       border-radius: 0 !important
 
     .v-expansion-panel-title__overlay
-      transition: 0.3s border-radius $standard-easing
+      transition: 0.3s border-radius settings.$standard-easing
 
 // Element
 .v-expansion-panel
   flex: 1 0 100%
   max-width: 100%
   position: relative
-  transition: .3s all $standard-easing
+  transition: .3s all settings.$standard-easing
   transition-property: margin-top, border-radius, border, max-width
   border-radius: $expansion-panel-border-radius
 
@@ -80,7 +83,7 @@
     position: absolute
     right: 0
     top: 0
-    transition: 0.3s opacity $standard-easing
+    transition: 0.3s opacity settings.$standard-easing
 
   &--disabled
     .v-expansion-panel-title
@@ -98,8 +101,8 @@
          min-height: $expansion-panel-active-title-min-height
 
 .v-expansion-panel__shadow
-  @include absolute()
-  @include elevation(2)
+  @include tools.absolute()
+  @include tools.elevation(2)
   border-radius: inherit
   z-index: -1
 
@@ -113,16 +116,16 @@
   outline: none
   padding: $expansion-panel-title-padding
   position: relative
-  transition: .3s min-height $standard-easing
+  transition: .3s min-height settings.$standard-easing
   width: 100%
   justify-content: space-between
-  @include states('.v-expansion-panel-title__overlay', true)
+  @include tools.states('.v-expansion-panel-title__overlay', true)
 
   &--active::before
     opacity: 0.12
 
 .v-expansion-panel-title__overlay
-  @include absolute()
+  @include tools.absolute()
   background-color: currentColor
   border-radius: inherit
   opacity: 0
