@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import viteSSR from 'vite-ssr/plugin'
 import { loadEnv, defineConfig } from 'vite'
+import vuetifyPackage from './package.json'
 
 const resolve = file => path.resolve(__dirname, file)
 
@@ -40,5 +41,8 @@ export default defineConfig(({ mode }) => {
         }
       }
     ],
+    define: {
+      __VUETIFY_VERSION__: JSON.stringify(vuetifyPackage.version)
+    }
   }
 })
