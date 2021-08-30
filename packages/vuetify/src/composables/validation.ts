@@ -30,39 +30,28 @@ export function useValidation (props: ValidationProps) {
   const isValid = computed(() => isPristine.value ? null : errorMessages.value.length === 0)
   const isValidating = ref(false)
 
-  function validate (value: any) {
-    const promises: Promise<ValidationResult>[] = []
-    const resolved: Promise<true> = Promise.resolve(true)
+  async function validate (value: any) {
+    const results = []
 
     errorMessages.value = []
     isValidating.value = true
 
     for (const rule of props.rules) {
-      const handler = typeof rule === 'function' ? rule : () => rule
+      if (results.length >= (props.maxErrors || 1)) {
+        break
+      }
 
-      promises.push(wrapInPromise<ValidationResult>(handler(value?.value || value)))
+      const handler = typeof rule === 'function' ? rule : () => rule
+      const result = await wrapInPromise<ValidationResult>(handler(value?.value || value))
+
+      if (typeof result === 'string') {
+        results.push(result)
+      }
     }
 
-    // Avoid the need to resolve the last
-    // promise for a validation result.
-    promises.push(resolved)
-
-    promises.reduce((p, cur, i) => {
-      return p.then(result => {
-        if (errorMessages.value.length >= (props.maxErrors || 1)) {
-          return Promise.resolve(true)
-        }
-
-        if (typeof result === 'string') {
-          errorMessages.value.push(result)
-        }
-
-        return cur
-      })
-    }, resolved).then(() => {
-      isValidating.value = false
-      isPristine.value = false
-    })
+    errorMessages.value = results
+    isValidating.value = false
+    isPristine.value = false
   }
 
   function reset () {
@@ -71,7 +60,6 @@ export function useValidation (props: ValidationProps) {
   }
 
   return {
-    errorCount: errorMessages.value.length,
     errorMessages,
     isPristine,
     isValid,
