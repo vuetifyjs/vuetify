@@ -44,6 +44,28 @@
     "dist/",
     "lib/"
   ],
+  "exports": {
+    ".": {
+      "import": "./lib/entry.mjs",
+      "require": "./dist/vuetify.js"
+    },
+    "./styles": "./lib/styles/main.css",
+    "./styles/*": "./lib/styles/*",
+    "./framework": "./lib/framework.mjs",
+    "./components": "./lib/components/index.mjs",
+    "./components/*": "./lib/components/*/*.mjs",
+    "./directives": "./lib/directives/index.mjs",
+    "./directives/*": "./lib/directives/*/*.mjs",
+    "./composables": "./lib/composables/index.mjs",
+    "./locale": "./lib/locale/index.mjs",
+    "./iconsets/*": "./lib/iconsets/*.mjs",
+    "./*": "./*"
+  },
+  "typesVersions": {
+    "*": {
+      "*": ["/*", "dist/*", "lib/*", "lib/*/index.d.ts"]
+    }
+  },
   "scripts": {
     "watch": "cross-env TARGET=development webpack --config build/config.js --progress --watch",
     "dev": "cross-env NODE_ENV=development vite",
