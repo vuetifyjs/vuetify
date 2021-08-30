@@ -29,11 +29,11 @@
     "type": "github",
     "url": "https://github.com/sponsors/johnleider"
   },
-  "main": "dist/vuetify.js",
-  "module": "lib/entry.mjs",
+  "main": "lib/framework.mjs",
+  "module": "lib/framework.mjs",
   "jsdelivr": "dist/vuetify.js",
   "unpkg": "dist/vuetify.js",
-  "types": "lib/entry.d.ts",
+  "types": "lib/framework.d.ts",
   "sideEffects": [
     "*.sass",
     "*.scss",
@@ -46,14 +46,14 @@
   ],
   "exports": {
     ".": {
-      "import": "./lib/entry.mjs",
+      "import": "./lib/framework.mjs",
       "require": "./dist/vuetify.js"
     },
     "./styles": "./lib/styles/main.css",
     "./styles/*": "./lib/styles/*",
     "./framework": "./lib/framework.mjs",
     "./components": "./lib/components/index.mjs",
-    "./components/*": "./lib/components/*/*.mjs",
+    "./components/*": "./lib/components/*/index.mjs",
     "./directives": "./lib/directives/index.mjs",
     "./directives/*": "./lib/directives/*/*.mjs",
     "./composables": "./lib/composables/index.mjs",
@@ -63,7 +63,9 @@
   },
   "typesVersions": {
     "*": {
-      "*": ["/*", "dist/*", "lib/*", "lib/*/index.d.ts"]
+      "lib/framework.mjs": ["lib/index.d.ts"],
+      "framework": ["lib/index.d.ts"],
+      "*": ["*", "dist/*", "lib/*", "lib/*.d.ts", "lib/*/index.d.ts"]
     }
   },
   "scripts": {

@@ -32,8 +32,7 @@ function createTypesConfig (input, output) {
 }
 
 export default [
-  createTypesConfig('entry.d.ts', 'lib/entry.d.ts'),
-  createTypesConfig('framework.d.ts', 'lib/framework.d.ts'),
+  createTypesConfig('framework.d.ts', 'lib/index.d.ts'),
   createTypesConfig('entry-bundler.d.ts', 'dist/vuetify.d.ts'),
   createTypesConfig('components/index.d.ts', 'lib/components/index.d.ts'),
   createTypesConfig('directives/index.d.ts', 'lib/directives/index.d.ts'),
