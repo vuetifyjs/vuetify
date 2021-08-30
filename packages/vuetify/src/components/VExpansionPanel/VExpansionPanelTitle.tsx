@@ -1,5 +1,5 @@
 // Components
-import { VIcon } from '@/components'
+import { VIcon } from '@/components/VIcon'
 import { VExpansionPanelSymbol } from './VExpansionPanels'
 
 // Composables

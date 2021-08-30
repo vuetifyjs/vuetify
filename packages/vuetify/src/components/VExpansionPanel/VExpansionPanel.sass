@@ -1,4 +1,5 @@
 @forward './variables'
+@use 'sass:math'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
@@ -19,7 +20,7 @@
         // This is multiplied by the text opacity,
         // so we need to divide it to get the desired value
         // TODO: Should disabled be part of states mixin?
-        opacity: $expansion-panel-disabled-overlay / $expansion-panel-disabled-opacity
+        opacity: math.div($expansion-panel-disabled-overlay, $expansion-panel-disabled-opacity)
 
 // Block
 .v-expansion-panels
