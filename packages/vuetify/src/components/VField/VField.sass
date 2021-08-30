@@ -325,7 +325,17 @@
     padding-inline-end: 0
 
 .v-field__details
-  transition: inherit
+  transition: $field-transition-timing
+  transition-property: transform, opacity
+
+/* endregion */
+/* region LOADER */
+.v-field__loader
+  bottom: 0
+  left: 0
+  position: absolute
+  right: 0
+  width: 100%
 
 /* endregion */
 /* region OVERLAY */
@@ -367,4 +377,24 @@
   &.v-field--variant-underlined
     .v-field__outline::before
       border-image: repeating-linear-gradient(to right, $field-disabled-color 0px, $field-disabled-color 2px, transparent 2px, transparent 4px) 1 repeat
+
+.v-field--error
+  color: $field-error-text-color
+  opacity: 1
+
+  .v-field__prepend,
+  .v-field__prepend-inner,
+  .v-field__append-inner,
+  .v-field__append,
+  .v-input__details
+    opacity: 1
+
+  .v-field__outline::after
+    transform: scaleX(1)
+
+.v-field--loading
+  .v-field__outline::after,
+  .v-field__outline::before
+    opacity: 0
+
 /* endregion */

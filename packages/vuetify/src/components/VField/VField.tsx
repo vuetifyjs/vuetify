@@ -3,9 +3,10 @@ import './VField.sass'
 
 // Components
 import { VBtn } from '@/components/VBtn'
-import { VExpandXTransition } from '@/components/transitions'
+import { VExpandXTransition, VFadeTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 import { VInput } from '@/components/VInput'
+import { VProgressLinear } from '@/components/VProgressLinear'
 import VFieldLabel from './VFieldLabel'
 
 // Composables
@@ -53,6 +54,7 @@ export const makeVFieldProps = propsFactory({
     default: '$clear',
   },
   color: String,
+  error: Boolean,
   // TODO: implement auto
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hint: String,
@@ -179,6 +181,7 @@ export const VField = defineComponent({
       const hasPrepend = (slots.prependInner || props.prependInnerIcon)
       const hasClear = (props.clearable || slots.clear)
       const hasAppend = (slots.appendInner || props.appendInnerIcon || hasClear)
+      const isLoading = (slots.loading || props.loading)
 
       const label = slots.label
         ? slots.label({
@@ -196,7 +199,9 @@ export const VField = defineComponent({
               'v-field--appended': hasAppend,
               'v-field--dirty': props.dirty,
               'v-field--disabled': props.disabled,
+              'v-field--error': props.error,
               'v-field--focused': isFocused.value,
+              'v-field--loading': props.loading,
               'v-field--has-background': !!props.bgColor,
               'v-field--has-details': hasDetails,
               'v-field--hide-details': props.hideDetails,
@@ -219,14 +224,17 @@ export const VField = defineComponent({
               <>
                 <MaybeTransition transition={ props.transition }>
                   <div
-                    v-show={ props.hint && (props.persistentHint || slotProps.value.isFocused) }
+                    v-show={
+                      (props.hint && (props.persistentHint || slotProps.value.isFocused)) ||
+                      props.error
+                    }
                     class="v-field__details"
                   >
-                    { props.hint }
+                    { !slots.details && props.hint }
+
+                    { slots?.details?.(slotProps.value) }
                   </div>
                 </MaybeTransition>
-
-                { slots?.details?.(slotProps.value) }
               </>
             )),
           }}
@@ -240,6 +248,22 @@ export const VField = defineComponent({
             onClick={ onClick }
           >
             <div class="v-field__overlay" />
+
+            <VFadeTransition>
+              <div
+                class="v-field__loader"
+                v-show={ isLoading }
+              >
+                { slots?.loader?.() }
+
+                { !slots.loader && (
+                  <VProgressLinear
+                    height="2"
+                    indeterminate
+                  />
+                ) }
+              </div>
+            </VFadeTransition>
 
             { hasPrepend && (
               <div
