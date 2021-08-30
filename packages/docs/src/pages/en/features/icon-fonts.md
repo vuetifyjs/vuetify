@@ -23,7 +23,7 @@ To change your font library, import one of the pre-defined icon sets or provide 
 // src/plugins/vuetify.js
 
 import { createVuetify } from 'vuetify'
-import { aliases, mdi } from 'vuetify/lib/iconsets/mdi'
+import { aliases, mdi } from 'vuetify/iconsets/mdi'
 
 export default createVuetify({
   icons: {
@@ -60,8 +60,8 @@ Out of the box, Vuetify supports the use of multiple *different* icon sets at th
 // src/plugins/vuetify.js
 
 import { createVuetify } from 'vuetify'
-import { aliases, fa } from 'vuetify/lib/iconsets/fa'
-import { mdi } from 'vuetify/lib/iconsets/mdi'
+import { aliases, fa } from 'vuetify/iconsets/fa'
+import { mdi } from 'vuetify/iconsets/mdi'
 
 export default createVuetify({
   icons: {
@@ -118,7 +118,7 @@ $ npm install @mdi/font -D
 // src/plugins/vuetify.js
 
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
-import { createVuetify } from 'vuetify/lib'
+import { createVuetify } from 'vuetify'
 
 export default createVuetify({
   icons: {
@@ -150,8 +150,8 @@ $ npm install @mdi/js -D
 ```js
 // src/plugins/vuetify.js
 
-import { createVuetify } from 'vuetify/lib'
-import { aliases, mdi } from 'vuetify/lib/iconsets/mdi-svg'
+import { createVuetify } from 'vuetify'
+import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
 
 export default createVuetify({
   icons: {
@@ -202,8 +202,8 @@ $ npm install material-design-icons-iconfont -D
 // src/plugins/vuetify.js
 
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure your project is capable of handling css files
-import { createVuetify } from 'vuetify/lib'
-import { aliases, md } from 'vuetify/lib/iconsets/md'
+import { createVuetify } from 'vuetify'
+import { aliases, md } from 'vuetify/iconsets/md'
 
 export default createVuetify({
   icons: {
@@ -252,7 +252,7 @@ $ npm install @fortawesome/fontawesome-free -D
 
 import '@fortawesome/fontawesome-free/css/all.css' // Ensure your project is capable of handling css files
 import { createVuetify } from 'vuetify'
-import { aliases, fa } from 'vuetify/lib/iconsets/fa'
+import { aliases, fa } from 'vuetify/iconsets/fa'
 
 export default createVuetify({
   icons: {
@@ -298,7 +298,7 @@ $ npm install font-awesome@4.7.0 -D
 
 import 'font-awesome/css/font-awesome.min.css' // Ensure your project is capable of handling css files
 import { createVuetify } from 'vuetify'
-import { aliases, fa } from 'vuetify/lib/iconsets/fa4'
+import { aliases, fa } from 'vuetify/iconsets/fa4'
 
 export default createVuetify({
   icons: {
@@ -334,7 +334,7 @@ Then register the global `font-awesome-icon` component and use the pre-defined `
 
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
-import { aliases, fa } from 'vuetify/lib/iconsets/fa-svg'
+import { aliases, fa } from 'vuetify/iconsets/fa-svg'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -446,8 +446,8 @@ If you are developing custom Vuetify components, you can extend the `aliases` ob
 ```js
 // src/plugins/vuetify.js
 
-import { createVuetify } from 'vuetify/lib'
-import { aliases, mdi } from 'vuetify/lib/iconsets/mdi'
+import { createVuetify } from 'vuetify'
+import { aliases, mdi } from 'vuetify/iconsets/mdi'
 
 export default createVuetify({
   icons: {

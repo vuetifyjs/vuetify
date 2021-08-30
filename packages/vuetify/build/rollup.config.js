@@ -94,7 +94,6 @@ export default {
     }),
     {
       async buildEnd () {
-        console.log('buildEnd')
         const components = Object.create(null)
         const directives = []
 
