@@ -115,8 +115,8 @@
 .v-field__prepend-inner,
 .v-field__append-inner,
 .v-field__clearable,
-.v-field .v-input__prepend,
-.v-field .v-input__append
+.v-input .v-input__prepend,
+.v-input .v-input__append
   align-items: center
   display: flex
 
@@ -124,6 +124,9 @@
 .v-field__append-inner,
 .v-input__prepend,
 .v-input__append
+  .v-input--focused &
+    opacity: 1
+
   .v-field--variant-plain &,
   .v-field--variant-underlined &
     $root: &

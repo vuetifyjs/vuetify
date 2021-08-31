@@ -3,11 +3,15 @@ import './VInput.sass'
 
 // Components
 import { VMessages } from '@/components/VMessages'
+import { VIcon } from '@/components/VIcon'
+
+// Composables
+import { makeDensityProps, useDensity } from '@/composables/density'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { defineComponent } from '@/util'
-import { VIcon } from '@/components/VIcon'
-import { makeDensityProps, useDensity } from '@/composables/density'
+import { computed, watchEffect } from 'vue'
+import { defineComponent, getUid } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -16,9 +20,13 @@ export const VInput = defineComponent({
   name: 'VInput',
 
   props: {
+    id: String,
+    active: Boolean,
+    disabled: Boolean,
+    focused: Boolean,
+    dirty: Boolean,
     appendIcon: String,
     prependIcon: String,
-    focused: Boolean,
     // TODO: implement auto
     hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
     hint: String,
@@ -27,6 +35,11 @@ export const VInput = defineComponent({
       default: () => ([]),
     },
     persistentHint: Boolean,
+    direction: {
+      type: String as PropType<'horizontal' | 'vertical'>,
+      default: 'horizontal',
+      validator: (v: any) => ['horizontal', 'vertical'].includes(v),
+    },
 
     ...makeDensityProps(),
   },
@@ -34,10 +47,19 @@ export const VInput = defineComponent({
   emits: {
     'click:prepend': (e: MouseEvent) => true,
     'click:append': (e: MouseEvent) => true,
+    'update:focused': (v: Boolean) => true,
+    'update:active': (v: Boolean) => true,
   },
 
   setup (props, { slots, emit }) {
+    const isActive = useProxiedModel(props, 'active')
+    const isFocused = useProxiedModel(props, 'focused')
     const { densityClasses } = useDensity(props, 'v-input')
+
+    const uid = getUid()
+    const id = computed(() => props.id || `input-${uid}`)
+
+    watchEffect(() => isActive.value = isFocused.value || props.dirty)
 
     return () => {
       const hasPrepend = (slots.prepend || props.prependIcon)
@@ -55,6 +77,13 @@ export const VInput = defineComponent({
       return (
         <div class={[
           'v-input',
+          {
+            'v-input--active': isActive.value,
+            'v-input--dirty': props.dirty,
+            'v-input--disabled': props.disabled,
+            'v-input--focused': isFocused.value,
+          },
+          `v-input--${props.direction}`,
           densityClasses.value,
         ]}
         >
@@ -71,7 +100,16 @@ export const VInput = defineComponent({
             </div>
           ) }
 
-          { slots.default?.() }
+          <div class="v-input__control">
+            { slots.default?.({
+              id: id.value,
+              isActive: isActive.value,
+              isFocused: isFocused.value,
+              isDirty: props.dirty,
+              focus: () => isFocused.value = true,
+              blur: () => isFocused.value = false,
+            }) }
+          </div>
 
           { hasAppend && (
             <div
