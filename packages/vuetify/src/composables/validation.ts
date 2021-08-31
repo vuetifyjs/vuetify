@@ -11,6 +11,7 @@ export type ValidationRule = string | ((value: any) => ValidationResult) | Promi
 export interface ValidationProps {
   maxErrors?: string | number
   rules: ValidationRule[]
+  modelValue?: any
 }
 
 export const makeValidationProps = propsFactory({
@@ -22,6 +23,10 @@ export const makeValidationProps = propsFactory({
     type: Array as PropType<ValidationRule[]>,
     default: () => ([]),
   },
+  modelValue: {
+    type: [Number, String, Array, Object],
+    default: undefined,
+  },
 })
 
 export function useValidation (props: ValidationProps) {
@@ -30,7 +35,7 @@ export function useValidation (props: ValidationProps) {
   const isValid = computed(() => isPristine.value ? null : errorMessages.value.length === 0)
   const isValidating = ref(false)
 
-  async function validate (value: any) {
+  async function validate () {
     const results = []
     errorMessages.value = []
     isValidating.value = true
@@ -41,7 +46,7 @@ export function useValidation (props: ValidationProps) {
       }
 
       const handler = typeof rule === 'function' ? rule : () => rule
-      const result = await wrapInPromise<ValidationResult>(handler(value?.value ?? value))
+      const result = await wrapInPromise<ValidationResult>(handler(props?.modelValue?.value ?? props.modelValue))
 
       if (result === true) continue
 
