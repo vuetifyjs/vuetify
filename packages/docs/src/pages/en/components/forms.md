@@ -47,7 +47,7 @@ The `v-form` component has **three** functions that can be accessed by setting a
 
 #### Vee-validate
 
-**vee-validate** is a template Based Validation Framework for Vue.js. [Documentation](https://logaretm.github.io/vee-validate/)
+**vee-validate** is a template Based Validation Framework for Vue.js. [Documentation](https://vee-validate.logaretm.com/v3)
 
 <example file="v-form/misc-vee-validate" />
 
