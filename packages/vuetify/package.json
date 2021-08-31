@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.0.0-alpha.10",
+  "version": "3.0.0-alpha.11",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -63,9 +63,19 @@
   },
   "typesVersions": {
     "*": {
-      "lib/framework.mjs": ["lib/index.d.ts"],
-      "framework": ["lib/index.d.ts"],
-      "*": ["*", "dist/*", "lib/*", "lib/*.d.ts", "lib/*/index.d.ts"]
+      "lib/framework.mjs": [
+        "lib/index.d.ts"
+      ],
+      "framework": [
+        "lib/index.d.ts"
+      ],
+      "*": [
+        "*",
+        "dist/*",
+        "lib/*",
+        "lib/*.d.ts",
+        "lib/*/index.d.ts"
+      ]
     }
   },
   "scripts": {
