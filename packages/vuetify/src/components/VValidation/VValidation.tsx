@@ -12,20 +12,8 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
-    const {
-      errorMessages,
-      isValid,
-      isValidating,
-      reset,
-      validate,
-    } = useValidation(props)
-
     return () => slots.default?.({
-      errorMessages,
-      isValid,
-      isValidating,
-      reset,
-      validate,
+      ...useValidation(props),
     })
   },
 })
