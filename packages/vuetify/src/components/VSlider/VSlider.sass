@@ -23,33 +23,33 @@
     width: 100%
     display: none
 
-  .v-input__append, .v-input__prepend
-    align-self: center !important
-    margin-bottom: 0 !important
+  // .v-input__append, .v-input__prepend
+  //   align-self: center !important
+  //   margin-bottom: 0 !important
 
 // Elements
 .v-slider__container
   position: relative
   width: 100%
   height: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+  cursor: pointer
 
 // Modifiers
-.v-slider--horizontal
-  min-height: $slider-horizontal-min-height
+.v-slider.v-input--horizontal
+  .v-input__control
+    min-height: $slider-horizontal-min-height
   margin-left: $slider-horizontal-left
   margin-right: $slider-horizontal-right
 
-.v-slider--vertical
-  .v-field__field
-    justify-content: center
-
-  .v-field__control
+.v-slider.v-input--vertical
+  .v-input__control
     min-height: $slider-vertical-min-height
 
   margin-top: $slider-vertical-margin-top
   margin-bottom: $slider-vertical-margin-bottom
-
-
 
 .v-slider--active
   .v-slider__tick
@@ -59,7 +59,7 @@
 //   .v-slider__thumb:before
 //     transform: scale(1.5) !important
 
-.v-slider--disabled
+.v-slider.v-input--disabled
   pointer-events: none
 
 // Input

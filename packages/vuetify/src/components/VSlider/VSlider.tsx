@@ -3,20 +3,23 @@
 import './VSlider.sass'
 
 // Components
-import { VField } from '@/components'
+import { VInput } from '../VInput'
+import { VSliderThumb } from './VSliderThumb'
+import { VSliderTrack } from './VSliderTrack'
+
+// Composables
+import { useRtl } from '@/composables/rtl'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeRoundedProps } from '@/composables/rounded'
+import { makeElevationProps } from '@/composables/elevation'
 
 // Helpers
-import { clamp, convertToUnit } from '../../util/helpers'
+import { clamp, convertToUnit } from '@/util/helpers'
 import { defineComponent, propsFactory } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { InjectionKey, PropType, Ref } from 'vue'
 import { computed, provide, ref, toRef } from 'vue'
-import { useRtl } from '@/composables/rtl'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import VSliderThumb from './VSliderThumb'
-import { makeRoundedProps } from '@/composables/rounded'
-import VSliderTrack from './VSliderTrack'
 
 export const makeVSliderProps = propsFactory({
   disabled: Boolean,
@@ -42,7 +45,7 @@ export const makeVSliderProps = propsFactory({
   },
   thumbSize: {
     type: [Number, String],
-    default: 24,
+    default: 20,
   },
   tickLabels: {
     type: Array as PropType<string[]>,
@@ -55,7 +58,7 @@ export const makeVSliderProps = propsFactory({
   },
   tickSize: {
     type: [Number, String],
-    default: 4,
+    default: 2,
   },
   color: String,
   trackColor: String,
@@ -69,21 +72,66 @@ export const makeVSliderProps = propsFactory({
     default: 0,
   },
   direction: {
-    type: String,
+    type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal',
     validator: (v: any) => ['vertical', 'horizontal'].includes(v),
   },
   reverse: Boolean,
+  label: String,
 
   ...makeRoundedProps(),
+  ...makeElevationProps(),
 }, 'v-slider')
 
-export const VSliderSymbol = Symbol.for('vuetify:v-slider')
+type SliderProvide = {
+  color: Ref<string>
+  decimals: Ref<number>
+  direction: Ref<'vertical' | 'horizontal'>
+  disabled: Ref<boolean>
+  label: Ref<string>
+  min: Ref<number>
+  max: Ref<number>
+  onSliderMousedown: (e: MouseEvent) => void
+  onSliderTouchstart: (e: TouchEvent) => void
+  parseMouseMove: (e: MouseEvent | TouchEvent) => number
+  readonly: Ref<boolean>
+  roundValue: (value: number) => number
+  showLabel: Ref<boolean>
+  showTicks: Ref<boolean>
+  startOffset: Ref<number>
+  stepSize: Ref<number>
+  transition: Ref<string>
+  thumbSize: Ref<number>
+  thumbColor: Ref<string>
+  trackColor: Ref<string>
+  trackFillColor: Ref<string>
+  ticks: Ref<string | boolean>
+  tickSize: Ref<number>
+  trackContainerRef: Ref<VSliderTrack | undefined>
+  vertical: Ref<boolean>
+}
 
-export const useSlider = (props: any) => {
+export const VSliderSymbol: InjectionKey<SliderProvide> = Symbol.for('vuetify:v-slider')
+
+export function getOffset (e: MouseEvent | TouchEvent, el: HTMLElement, direction: string) {
+  const vertical = direction === 'vertical'
+  const rect = el.getBoundingClientRect()
+  const touch = 'touches' in e ? e.touches[0] : e
+  return vertical
+    ? touch.clientY - (rect.top + rect.height / 2)
+    : touch.clientX - (rect.left + rect.width / 2)
+}
+
+export const useSlider = (
+  props: any,
+  handleSliderMouseUp: (v: number) => void,
+  handleMouseMove: (v: number) => void,
+  getActiveThumb: (e: MouseEvent | TouchEvent) => HTMLElement,
+) => {
+  const { isRtl } = useRtl()
   const min = computed(() => parseFloat(props.min))
   const max = computed(() => parseFloat(props.max))
-  const stepSize = computed(() => props.stepSize > 0 ? parseFloat(props.stepSize) : 1)
+  const stepSize = computed(() => props.stepSize > 0 ? parseFloat(props.stepSize) : 0)
   const decimals = computed(() => {
     const trimmedStep = stepSize.value.toString().trim()
     return trimmedStep.includes('.')
@@ -100,48 +148,143 @@ export const useSlider = (props: any) => {
   const trackColor = computed(() => props.disabled ? undefined : props.trackColor ?? props.color)
   const trackFillColor = computed(() => props.disabled ? undefined : props.trackFillColor ?? props.color)
 
-  const disableTransition = ref(false)
   const showTicks = computed(() => props.tickLabels?.length > 0 || !!(!props.disabled && stepSize.value && props.ticks))
 
-  const transition = computed(() =>
-    disableTransition.value
-      ? showTicks.value || stepSize.value > 1
-        ? '0.1s cubic-bezier(0.25, 0.8, 0.5, 1)'
-        : 'none'
-      : ''
-  )
+  const mousePressed = ref(false)
 
-  const thumbPressed = ref(false)
+  const transition = computed(() => mousePressed.value ? 'none' : '0.3s cubic-bezier(0.25, 0.8, 0.5, 1)')
 
-  const data = {
+  function getPosition (e: MouseEvent | TouchEvent) {
+    if ('touches' in e && e.touches.length) return e.touches[0]
+    else if ('changedTouches' in e && e.changedTouches.length) return e.changedTouches[0]
+    else return e
+  }
+
+  const startOffset = ref(0)
+  const trackContainerRef = ref<VSliderTrack | undefined>()
+
+  function parseMouseMove (e: MouseEvent | TouchEvent): number {
+    const vertical = props.direction === 'vertical'
+    const start = vertical ? 'top' : 'left'
+    const length = vertical ? 'height' : 'width'
+    const click = vertical ? 'clientY' : 'clientX'
+
+    const {
+      [start]: trackStart,
+      [length]: trackLength,
+    } = trackContainerRef.value?.$el.getBoundingClientRect()
+    const clickOffset = getPosition(e)[click]
+
+    // It is possible for left to be NaN, force to number
+    let clickPos = Math.min(Math.max((clickOffset - trackStart - startOffset.value) / trackLength, 0), 1) || 0
+
+    if (vertical || isRtl.value) clickPos = 1 - clickPos
+
+    return min.value + clickPos * (max.value - min.value)
+  }
+
+  let thumbMoved = false
+
+  const handleStop = (e: MouseEvent | TouchEvent) => {
+    if (!thumbMoved) {
+      startOffset.value = 0
+      handleSliderMouseUp(parseMouseMove(e))
+    }
+
+    mousePressed.value = false
+    thumbMoved = false
+    startOffset.value = 0
+  }
+
+  const handleStart = (e: MouseEvent | TouchEvent) => {
+    const activeThumb = getActiveThumb(e)
+
+    if (!activeThumb) return
+
+    activeThumb.focus()
+
+    mousePressed.value = true
+
+    startOffset.value = getOffset(e, activeThumb, props.direction)
+  }
+
+  const moveListenerOptions = { passive: true, capture: true }
+  const stopListenerOptions = { passive: false }
+
+  function onMouseMove (e: MouseEvent | TouchEvent) {
+    thumbMoved = true
+    handleMouseMove(parseMouseMove(e))
+  }
+
+  function onSliderMouseUp (e: MouseEvent) {
+    e.stopPropagation()
+
+    handleStop(e)
+
+    window.removeEventListener('mousemove', onMouseMove, moveListenerOptions)
+    window.removeEventListener('mouseup', onSliderMouseUp, stopListenerOptions)
+  }
+
+  function onSliderTouchend (e: TouchEvent) {
+    e.stopPropagation()
+    e.preventDefault()
+
+    handleStop(e)
+
+    window.removeEventListener('touchmove', onMouseMove, moveListenerOptions)
+    window.removeEventListener('touchend', onSliderTouchend, stopListenerOptions)
+  }
+
+  function onSliderTouchstart (e: TouchEvent) {
+    handleStart(e)
+
+    window.addEventListener('touchmove', onMouseMove, moveListenerOptions)
+    window.addEventListener('touchend', onSliderTouchend, stopListenerOptions)
+  }
+
+  function onSliderMousedown (e: MouseEvent) {
+    e.preventDefault()
+
+    handleStart(e)
+
+    window.addEventListener('mousemove', onMouseMove, moveListenerOptions)
+    window.addEventListener('mouseup', onSliderMouseUp, stopListenerOptions)
+  }
+
+  const data: SliderProvide = {
     min,
     max,
     stepSize,
     decimals,
     transition,
-    disableTransition,
-    thumbPressed,
     thumbSize,
     disabled,
     vertical,
     color: toRef(props, 'color'),
+    label: toRef(props, 'label'),
+    readonly: toRef(props, 'readonly'),
     thumbColor,
     trackColor,
     trackFillColor,
+    ticks: toRef(props, 'ticks'),
     tickSize,
     direction: toRef(props, 'direction'),
     showTicks,
     showLabel: computed(() => !!props.thumbLabel),
     roundValue: (value: number) => {
+      if (stepSize.value <= 0) return value
+
       const clamped = clamp(value, min.value, max.value)
-
       const offset = min.value % stepSize.value
-
       const newValue = Math.round((clamped - offset) / stepSize.value) * stepSize.value + offset
 
       return parseFloat(Math.min(newValue, max.value).toFixed(decimals.value))
     },
-    keyPressed: ref(false),
+    parseMouseMove,
+    startOffset,
+    trackContainerRef,
+    onSliderMousedown,
+    onSliderTouchstart,
   }
 
   provide(VSliderSymbol, data)
@@ -159,9 +302,14 @@ export default defineComponent({
   },
 
   setup (props, { attrs, emit, slots }) {
-    const { isRtl } = useRtl()
-
-    const { min, max, thumbPressed, disableTransition, roundValue } = useSlider(props)
+    const thumbContainerRef = ref()
+    const { min, max, roundValue, onSliderMousedown, onSliderTouchstart, trackContainerRef } = useSlider(props, newValue => {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      model.value = newValue
+    }, newValue => {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      model.value = newValue
+    }, () => thumbContainerRef.value?.$el)
 
     const model = useProxiedModel(
       props,
@@ -177,129 +325,29 @@ export default defineComponent({
 
     const isDirty = computed(() => model.value > min.value)
     const trackStop = computed(() => (model.value - min.value) / (max.value - min.value) * 100)
-    const thumbContainerRef = ref<HTMLElement>()
-
-    const fieldRef = ref<VField>()
-    const trackContainerRef = ref<HTMLElement>()
-    let startOffset = 0
-    let thumbMoved = false
-
-    function getPosition (e: MouseEvent | TouchEvent) {
-      if ('touches' in e && e.touches.length) return e.touches[0]
-      else if ('changedTouches' in e && e.changedTouches.length) return e.changedTouches[0]
-      else return e
-    }
-
-    function parseMouseMove (e: MouseEvent | TouchEvent): number {
-      if (!trackContainerRef.value) return model.value
-
-      const vertical = props.direction === 'vertical'
-      const start = vertical ? 'top' : 'left'
-      const length = vertical ? 'height' : 'width'
-      const click = vertical ? 'clientY' : 'clientX'
-
-      const {
-        [start]: trackStart,
-        [length]: trackLength,
-      } = trackContainerRef.value.$el.getBoundingClientRect()
-      const clickOffset = getPosition(e)[click]
-
-      // It is possible for left to be NaN, force to number
-      let clickPos = Math.min(Math.max((clickOffset - trackStart - startOffset) / trackLength, 0), 1) || 0
-
-      if (vertical || isRtl.value) clickPos = 1 - clickPos
-
-      return min.value + clickPos * (max.value - min.value)
-    }
-
-    function onMouseMove (e: MouseEvent | TouchEvent) {
-      const newValue = parseMouseMove(e)
-      // console.log('mousemove', newValue)
-      thumbMoved = true
-      model.value = newValue
-    }
-
-    let transitionTimeout = 0
-
-    function onSliderMouseUp (e: MouseEvent | TouchEvent) {
-      e.stopPropagation()
-
-      if (!thumbMoved) {
-        startOffset = 0
-        model.value = parseMouseMove(e)
-      }
-
-      thumbMoved = false
-      startOffset = 0
-      disableTransition.value = false
-      thumbPressed.value = false
-      window.clearTimeout(transitionTimeout)
-
-      window.removeEventListener('mousemove', onMouseMove, { passive: true, capture: true })
-      window.removeEventListener('touchmove', onMouseMove, { passive: true, capture: true })
-      window.removeEventListener('mouseup', onSliderMouseUp, { passive: true })
-      window.removeEventListener('touchend', onSliderMouseUp, { passive: true })
-    }
-
-    function getOffset (e: MouseEvent | TouchEvent, el: Element) {
-      const vertical = props.direction === 'vertical'
-      const rect = el.getBoundingClientRect()
-      const touch = 'touches' in e ? e.touches[0] : e
-      return vertical
-        ? touch.clientY - (rect.top + rect.height / 2)
-        : touch.clientX - (rect.left + rect.width / 2)
-    }
-
-    function onSliderMousedown (e: MouseEvent | TouchEvent) {
-      e.preventDefault()
-
-      if (!thumbContainerRef.value) return
-
-      thumbContainerRef.value.$el.focus()
-
-      if (thumbPressed.value) {
-        disableTransition.value = true
-      } else {
-        window.clearTimeout(transitionTimeout)
-        transitionTimeout = window.setTimeout(() => {
-          disableTransition.value = true
-        }, 300)
-      }
-
-      startOffset = getOffset(e, thumbContainerRef.value?.$el)
-
-      window.addEventListener('mousemove', onMouseMove, { passive: true, capture: true })
-      window.addEventListener('touchmove', onMouseMove, { passive: true, capture: true })
-      window.addEventListener('mouseup', onSliderMouseUp, { passive: true })
-      window.addEventListener('touchend', onSliderMouseUp, { passive: true })
-    }
 
     return () => {
       return (
-        <VField
+        <VInput
           class={[
             'v-slider',
-            `v-slider--${props.direction}`,
-            {
-              'v-slider--disabled': props.disabled,
-            },
           ]}
+          disabled={props.disabled}
+          dirty={isDirty.value}
           style={{
             '--v-slider-track-size': props.trackSize ? convertToUnit(props.trackSize) : undefined,
           }}
-          ref={fieldRef}
-          variant="plain"
-          dirty={isDirty.value}
+          direction={props.direction}
           v-slots={{
             ...slots,
-            default: ({ props: slotProps, isActive, isDirty, isFocused }: VFieldSlot) => (
+            default: ({ id, isActive, isDirty, isFocused, focus, blur }: any) => (
               <div
                 class="v-slider__container"
                 onMousedown={onSliderMousedown}
-                onTouchstart={onSliderMousedown}
+                onTouchstartPassive={onSliderTouchstart}
               >
                 <input
-                  id={slotProps.id}
+                  id={id}
                   name={attrs.name}
                   disabled={props.disabled}
                   readonly={props.readonly}
@@ -326,11 +374,9 @@ export default defineComponent({
                   modelValue={model.value}
                   onUpdate:modelValue={v => model.value = v}
                   position={trackStop.value}
-                  onFocus={() => {
-                    slotProps.onFocus()
-                    console.log('focus')
-                  }}
-                  onBlur={slotProps.onBlur}
+                  elevation={props.elevation}
+                  onFocus={focus}
+                  onBlur={blur}
                   v-slots={{
                     label: slots['thumb-label'],
                   }}

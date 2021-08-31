@@ -6,7 +6,7 @@ import { convertToUnit, createRange, defineComponent } from '@/util'
 import { computed, inject } from 'vue'
 import { VSliderSymbol } from './VSlider'
 
-export default defineComponent({
+export const VSliderTrack = defineComponent({
   name: 'VSliderTrack',
 
   props: {
@@ -42,13 +42,12 @@ export default defineComponent({
       transition,
       trackColor,
       trackFillColor,
-      thumbSize,
-      disabled,
       vertical,
       stepSize,
       tickSize,
       showTicks,
       color,
+      ticks,
     } = slider
 
     const { roundedClasses } = useRounded(props, 'v-slider-track')
@@ -63,23 +62,14 @@ export default defineComponent({
       backgroundColorStyles: trackColorStyles,
     } = useBackgroundColor(trackColor)
 
+    const startDir = computed(() => `inset-${vertical.value ? 'block-end' : 'inline-start'}`)
     const endDir = computed(() => vertical.value ? 'height' : 'width')
 
-    const disabledOffset = computed(() => disabled.value ? thumbSize.value / 2 : 0)
-
-    const backgroundBeforeStyles = computed(() => {
+    const backgroundStyles = computed(() => {
       return {
         transition: transition.value,
-        [`inset-${vertical.value ? 'block-end' : 'inline-start'}`]: convertToUnit(0, '%'),
-        [endDir.value]: `calc(${convertToUnit(props.start, '%')} + ${convertToUnit(disabled.value ? -disabledOffset.value : disabled.value)})`,
-      }
-    })
-
-    const backgroundAfterStyles = computed(() => {
-      return {
-        transition: transition.value,
-        [`inset-${vertical.value ? 'block-end' : 'inline-start'}`]: `calc(${convertToUnit(props.stop, '%')} + ${convertToUnit(disabledOffset.value)})`,
-        [endDir.value]: `calc(${convertToUnit(100 - props.stop, '%')} - ${convertToUnit(disabledOffset.value)})`,
+        [startDir.value]: '0%',
+        [endDir.value]: '100%',
       }
     })
 
@@ -88,17 +78,17 @@ export default defineComponent({
     const trackFillStyles = computed(() => {
       return {
         transition: transition.value,
-        [`inset-${vertical.value ? 'block-end' : 'inline-start'}`]: `calc(${convertToUnit(props.start, '%')} + ${props.start > props.min ? convertToUnit(disabledOffset.value) : '0px'})`,
-        [endDir.value]: `calc(${trackFillWidth.value}% - ${convertToUnit(props.start > props.min ? disabledOffset.value * 2 : disabledOffset.value)})`,
+        [startDir.value]: convertToUnit(props.start, '%'),
+        [endDir.value]: convertToUnit(trackFillWidth.value, '%'),
       }
     })
 
-    const ticks = computed(() => {
+    const computedTicks = computed(() => {
       const numTicks = Math.ceil((props.max - props.min) / stepSize.value)
 
       return createRange(numTicks + 1).map(index => {
         const width = (vertical.value ? numTicks - index : index) * (100 / numTicks)
-        const filled = width > props.start && width < props.stop
+        const filled = width >= props.start && width <= props.stop
         const offset = (index - (numTicks / 2)) * (isRtl.value ? -10 : 10)
 
         return (
@@ -113,7 +103,7 @@ export default defineComponent({
             style={{
               width: convertToUnit(tickSize.value),
               height: convertToUnit(tickSize.value),
-              transform: index > 0 && index < numTicks && `translate${vertical ? 'Y' : 'X'}(${offset}%)`,
+              transform: `translate${vertical.value ? 'Y' : 'X'}(${index > 0 && index < numTicks ? offset : offset * -1}%)`,
             }}
           ></div>
         )
@@ -128,21 +118,19 @@ export default defineComponent({
             roundedClasses.value,
           ]}
         >
-          { props.start > props.min && (
-            <div
-              class={[
-                'v-slider-track__background',
-                trackColorClasses.value,
-                {
-                  'v-slider-track__background--opacity': !!color.value,
-                },
-              ]}
-              style={{
-                ...backgroundBeforeStyles.value,
-                ...trackColorStyles.value,
-              }}
-            />
-          )}
+          <div
+            class={[
+              'v-slider-track__background',
+              trackColorClasses.value,
+              {
+                'v-slider-track__background--opacity': !!color.value,
+              },
+            ]}
+            style={{
+              ...backgroundStyles.value,
+              ...trackColorStyles.value,
+            }}
+          />
           <div
             class={[
               'v-slider-track__fill',
@@ -153,30 +141,17 @@ export default defineComponent({
               ...trackFillColorStyles.value,
             }}
           />
-          <div
-            class={[
-              'v-slider-track__background',
-              trackColorClasses.value,
-              {
-                'v-slider-track__background--opacity': !!color.value,
-              },
-            ]}
-            style={{
-              ...backgroundAfterStyles.value,
-              ...trackColorStyles.value,
-            }}
-          />
 
           { showTicks.value && (
             <div
               class={[
                 'v-slider-track__ticks',
                 {
-                  'v-slider-track__ticks--always-show': props.ticks === 'always',
+                  'v-slider-track__ticks--always-show': ticks.value === 'always',
                 },
               ]}
             >
-              { ticks.value }
+              { computedTicks.value }
             </div>
           ) }
         </div>
@@ -184,3 +159,6 @@ export default defineComponent({
     }
   },
 })
+
+/* eslint-disable-next-line @typescript-eslint/no-redeclare */
+export type VSliderTrack = InstanceType<typeof VSliderTrack>

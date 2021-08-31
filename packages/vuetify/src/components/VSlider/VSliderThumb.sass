@@ -24,6 +24,7 @@
 
 .v-slider-thumb__surface
   // position: absolute
+  cursor: pointer
   width: var(--v-slider-thumb-size, $slider-thumb-size)
   height: var(--v-slider-thumb-size, $slider-thumb-size)
   // left: calc(var(--v-slider-thumb-size, $slider-thumb-size) / 2)
@@ -82,7 +83,7 @@
   transition: $slider-thumb-label-transition
 
 // Horizontal
-.v-slider--horizontal
+.v-slider.v-input--horizontal
   .v-slider-thumb
     top: 50%
     transform: translateY(-50%)
@@ -91,25 +92,26 @@
     // Needed for IE11 which does not
     // process translateY(calc(-20% - 12px))
     // or translate(-50%, calc(-20% - 12px))
-    transform: translateY(-20%) translateY(-12px) translateX(-50%) rotate(45deg)
+    transform: translateY(calc(var(--v-slider-thumb-size) / 3 * -1)) translateX(0px) rotate(45deg)
 
     > *
       transform: rotate(-45deg)
 
 // Vertical
-.v-slider--vertical
+.v-slider.v-input--vertical
   .v-slider-thumb
-    +ltr()
-      transform: translateX(-50%)
+    // +ltr()
+    //   transform: translateX(-50%)
 
-    +rtl()
-      transform: translateX(50%)
+    // +rtl()
+    //   transform: translateX(50%)
 
   .v-slider-thumb__label
     // Needed for IE11 which does not
     // process translateY(calc(-20% - 12px))
     // or translate(-50%, calc(-20% - 12px))
     // transform: translateY(20%) translateY(10px) translateX(55%) rotate(135deg)
+    transform: translateY(var(--v-slider-thumb-size)) translateX(calc(var(--v-slider-thumb-size) + var(--v-slider-thumb-size) / 3)) rotate(135deg)
 
     > *
       transform: rotate(-135deg)
