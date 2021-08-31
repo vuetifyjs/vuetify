@@ -1,1 +1,1 @@
-export { default as VValidation } from './VValidation'
+export { VValidation } from './VValidation'

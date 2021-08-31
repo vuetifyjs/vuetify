@@ -4,16 +4,16 @@ import { makeValidationProps, useValidation } from '@/composables/validation'
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
-  name: 'VValidate',
+export const VValidation = defineComponent({
+  name: 'VValidation',
 
   props: {
     ...makeValidationProps(),
   },
 
   setup (props, { slots }) {
-    return () => slots.default?.({
-      ...useValidation(props),
-    })
+    const validation = useValidation(props)
+
+    return () => slots.default?.(validation)
   },
 })
