@@ -32,7 +32,6 @@ export function useValidation (props: ValidationProps) {
 
   async function validate (value: any) {
     const results = []
-
     errorMessages.value = []
     isValidating.value = true
 
@@ -42,11 +41,18 @@ export function useValidation (props: ValidationProps) {
       }
 
       const handler = typeof rule === 'function' ? rule : () => rule
-      const result = await wrapInPromise<ValidationResult>(handler(value?.value || value))
+      const result = await wrapInPromise<ValidationResult>(handler(value?.value ?? value))
 
-      if (typeof result === 'string') {
-        results.push(result)
+      if (result === true) continue
+
+      if (typeof result !== 'string') {
+        // eslint-disable-next-line no-console
+        console.warn(`${result} is not a valid value. Rule functions must return boolean true or a string.`)
+
+        continue
       }
+
+      results.push(result)
     }
 
     errorMessages.value = results

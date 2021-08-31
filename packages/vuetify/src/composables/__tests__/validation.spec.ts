@@ -25,11 +25,11 @@ describe('validation.ts', () => {
   ) => {
     const model = ref(value)
     const props = { rules } as ValidationProps
-    const { errorMessages, validate } = useValidation(props, model)
+    const { errorMessages, validate } = useValidation(props)
 
     expect(errorMessages.value).toEqual([])
 
-    await validate()
+    await validate(model)
 
     expect(errorMessages.value).toEqual(expected)
   })
@@ -48,9 +48,9 @@ describe('validation.ts', () => {
     const { errorMessages, validate } = useValidation({
       maxErrors,
       rules: ['foo', 'bar', 'fizz', 'buzz'],
-    }, ref(''))
+    })
 
-    await validate()
+    await validate('')
 
     expect(errorMessages.value).toHaveLength(expected)
   })
@@ -59,37 +59,37 @@ describe('validation.ts', () => {
     const rule = (v: any) => !!v || 1234
     const { validate } = useValidation({
       rules: [rule as any],
-    }, ref(''))
+    })
 
-    await validate()
+    await validate('')
 
-    expect(`${1234} is not a valid value. Rule functions should return boolean true or a string.`).toHaveBeenTipped()
+    expect(`${1234} is not a valid value. Rule functions must return boolean true or a string.`).toHaveBeenTipped()
   })
 
   it('should update isPristine when using the validate and reset methods', async () => {
     const model = ref('')
     const { isPristine, isValid, validate, reset } = useValidation({
       rules: [(v: any) => v === 'foo' || 'bar'],
-    }, model)
+    })
 
     expect(isPristine.value).toBe(true)
     expect(isValid.value).toBeNull()
 
-    await validate()
+    await validate(model)
 
     expect(isPristine.value).toBe(false)
     expect(isValid.value).toBe(false)
 
     model.value = 'fizz'
 
-    await validate()
+    await validate(model)
 
     expect(isPristine.value).toBe(false)
     expect(isValid.value).toBe(false)
 
     model.value = 'foo'
 
-    await validate()
+    await validate(model)
 
     expect(isPristine.value).toBe(false)
     expect(isValid.value).toBe(true)
