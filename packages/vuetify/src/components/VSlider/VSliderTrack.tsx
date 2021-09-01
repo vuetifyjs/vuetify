@@ -1,10 +1,17 @@
+// Styles
 import './VSliderTrack.sass'
+
+// Components
+import { VSliderSymbol } from './slider'
+
+// Composables
 import { useBackgroundColor } from '@/composables/color'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { useRtl } from '@/composables/rtl'
-import { convertToUnit, createRange, defineComponent } from '@/util'
+
+// Utilities
 import { computed, inject } from 'vue'
-import { VSliderSymbol } from './VSlider'
+import { convertToUnit, createRange, defineComponent } from '@/util'
 
 export const VSliderTrack = defineComponent({
   name: 'VSliderTrack',
@@ -117,6 +124,9 @@ export const VSliderTrack = defineComponent({
             'v-slider-track',
             roundedClasses.value,
           ]}
+          style={{
+            '--v-slider-track-size': convertToUnit(trackSize.value),
+          }}
         >
           <div
             class={[

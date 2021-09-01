@@ -1,11 +1,18 @@
+// Styles
 import './VSliderThumb.sass'
+
+// Components
+import { VScaleTransition } from '../transitions'
+import { VSliderSymbol } from './slider'
+import { makeElevationProps, useElevation } from '@/composables/elevation'
+
+// Composables
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useRtl } from '@/composables/rtl'
-import { convertToUnit, defineComponent, keyValues } from '@/util'
+
+// Utilities
 import { inject } from 'vue'
-import { VScaleTransition } from '../transitions'
-import { VSliderSymbol } from './VSlider'
-import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { convertToUnit, defineComponent, keyValues } from '@/util'
 
 export const VSliderThumb = defineComponent({
   name: 'VSliderThumb',

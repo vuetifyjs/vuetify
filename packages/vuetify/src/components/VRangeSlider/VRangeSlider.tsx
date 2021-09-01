@@ -1,15 +1,21 @@
-/* eslint-disable max-statements */
-
 // Styles
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { convertToUnit } from '@/util'
-import type { PropType } from 'vue'
-import { computed, defineComponent, ref } from 'vue'
+import './VRangeSlider.sass'
+
+// Components
 import { VInput } from '../VInput'
-import { getOffset, makeVSliderProps, useSlider } from '../VSlider/VSlider'
+import { makeVSliderProps } from '../VSlider/VSlider'
 import { VSliderThumb } from '../VSlider/VSliderThumb'
 import { VSliderTrack } from '../VSlider/VSliderTrack'
-import './VRangeSlider.sass'
+
+// Composables
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { getOffset, useSlider } from '../VSlider/slider'
+
+// Utilities
+import { computed, defineComponent, ref } from 'vue'
+
+// Types
+import type { PropType } from 'vue'
 
 export default defineComponent({
   name: 'VRangeSlider',
@@ -77,9 +83,6 @@ export default defineComponent({
             'v-slider',
             'v-range-slider',
           ]}
-          style={{
-            '--v-slider-track-size': props.trackSize ? convertToUnit(props.trackSize) : undefined,
-          }}
           ref={inputRef}
           disabled={props.disabled}
           dirty={isDirty.value}
