@@ -1,9 +1,10 @@
+import { getUid, propsFactory, wrapInPromise } from '@/util'
 // Utilities
-import { computed, ref } from 'vue'
-import { propsFactory, wrapInPromise } from '@/util'
+import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
+import { useForm } from '@/components/VForm/VForm'
 
 export type ValidationResult = string | true
 export type ValidationRule = string | ((value: any) => ValidationResult) | Promise<ValidationResult>
@@ -34,6 +35,18 @@ export function useValidation (props: ValidationProps) {
   const isPristine = ref(true)
   const isValid = computed(() => isPristine.value ? null : errorMessages.value.length === 0)
   const isValidating = ref(false)
+  const form = useForm()
+  const id = getUid()
+
+  if (form) {
+    onBeforeMount(() => {
+      form.register(id, validate, reset, clear)
+    })
+
+    onBeforeUnmount(() => {
+      form.unregister(id)
+    })
+  }
 
   async function validate () {
     const results = []
@@ -63,9 +76,15 @@ export function useValidation (props: ValidationProps) {
     errorMessages.value = results
     isValidating.value = false
     isPristine.value = false
+
+    return isValid.value
   }
 
   function reset () {
+    clear()
+  }
+
+  function clear () {
     isPristine.value = true
     errorMessages.value = []
   }
@@ -75,6 +94,7 @@ export function useValidation (props: ValidationProps) {
     isPristine,
     isValid,
     isValidating,
+    clear,
     reset,
     validate,
   }

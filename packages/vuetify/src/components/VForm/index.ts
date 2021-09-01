@@ -1,4 +1,1 @@
-import VForm from './VForm'
-
-export { VForm }
-export default VForm
+export { VForm } from './VForm'
