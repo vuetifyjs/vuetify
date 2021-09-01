@@ -11,21 +11,22 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useRtl } from '@/composables/rtl'
 
 // Utilities
-import { inject } from 'vue'
+import { inject, ref, watch } from 'vue'
 import { convertToUnit, defineComponent, keyValues } from '@/util'
+import { VTooltip } from '../VTooltip'
 
 export const VSliderThumb = defineComponent({
   name: 'VSliderThumb',
 
   props: {
     active: Boolean,
-    focused: Boolean,
     dirty: Boolean,
-    min: {
+    focused: Boolean,
+    max: {
       type: Number,
       required: true,
     },
-    max: {
+    min: {
       type: Number,
       required: true,
     },
@@ -37,7 +38,6 @@ export const VSliderThumb = defineComponent({
       type: Number,
       required: true,
     },
-    ...makeElevationProps(),
   },
 
   emits: {
@@ -56,11 +56,12 @@ export const VSliderThumb = defineComponent({
       vertical,
       disabled,
       thumbSize,
-      showLabel,
+      thumbLabel,
       transition,
       direction,
       label,
       readonly,
+      elevation,
     } = slider
 
     const { textColorClasses, textColorStyles } = useTextColor(thumbColor)
@@ -103,8 +104,8 @@ export const VSliderThumb = defineComponent({
     return () => {
       const positionPercentage = convertToUnit(vertical.value ? 100 - props.position : props.position, '%')
       const inset = vertical.value ? 'block' : 'inline'
+      const { elevationClasses } = useElevation(elevation)
       const size = convertToUnit(thumbSize.value)
-      const { elevationClasses } = useElevation(props)
 
       return (
         <div
@@ -114,14 +115,13 @@ export const VSliderThumb = defineComponent({
               'v-slider-thumb--active': props.active,
               'v-slider-thumb--focused': props.focused,
               'v-slider-thumb--dirty': props.dirty,
-              'v-slider-thumb--show-label': !disabled.value && !!(showLabel.value || slots['thumb-label']),
-              // 'v-slider-thumb--pressed': props.pressed,
+              // 'v-slider-thumb--show-label': !disabled.value && !!(showLabel.value || slots['thumb-label']),
             },
           ]}
           style={{
             transition: transition.value,
             [`inset-${inset}-start`]: `calc(${positionPercentage} - var(--v-slider-thumb-size) / 2)`,
-            '--v-slider-thumb-size': convertToUnit(thumbSize.value),
+            '--v-slider-thumb-size': size,
           }}
           role="slider"
           tabindex={disabled.value ? -1 : 0}
@@ -141,30 +141,22 @@ export const VSliderThumb = defineComponent({
             ]}
             style={textColorStyles.value}
           />
-          {showLabel.value && (
-            <VScaleTransition origin="bottom center">
+          <VScaleTransition origin="bottom center">
+            <div
+              class="v-slider-thumb__label-container"
+              v-show={props.focused || thumbLabel.value === 'always'}
+            >
               <div
-                class="v-slider-thumb__label-container"
-                v-show={props.focused || props.active || showLabel.value}
+                class={[
+                  'v-slider-thumb__label',
+                ]}
               >
-                <div
-                  class={[
-                    'v-slider-thumb__label',
-                    backgroundColorClasses.value,
-                  ]}
-                  style={{
-                    height: size,
-                    width: size,
-                    ...backgroundColorStyles.value,
-                  }}
-                >
-                  <div>
-                    {slots['thumb-label']?.({ value: props.modelValue }) ?? props.modelValue}
-                  </div>
+                <div>
+                  {slots['thumb-label']?.({ value: props.modelValue }) ?? props.modelValue}
                 </div>
               </div>
-            </VScaleTransition>
-          )}
+            </div>
+          </VScaleTransition>
         </div>
       )
     }

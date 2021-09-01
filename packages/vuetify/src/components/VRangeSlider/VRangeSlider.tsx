@@ -21,11 +21,12 @@ export default defineComponent({
   name: 'VRangeSlider',
 
   props: {
-    ...makeVSliderProps(),
     modelValue: {
       type: Array as PropType<number[]>,
       default: () => ([0, 0]),
     },
+
+    ...makeVSliderProps(),
   },
 
   emits: {
@@ -47,7 +48,7 @@ export default defineComponent({
       return a < b ? startThumbRef.value?.$el : stopThumbRef.value?.$el
     }
 
-    const { min, max, roundValue, onSliderMousedown, trackContainerRef } = useSlider(props, newValue => {
+    const { min, max, roundValue, onSliderMousedown, trackContainerRef, position } = useSlider(props, newValue => {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
       model.value = focusedThumb.value === startThumbRef.value ? [newValue, model.value[1]] : [model.value[0], newValue]
     }, newValue => {
@@ -73,8 +74,8 @@ export default defineComponent({
     )
 
     const isDirty = computed(() => model.value.some(v => v > min.value))
-    const trackStart = computed(() => (model.value[0] - min.value) / (max.value - min.value) * 100)
-    const trackStop = computed(() => (model.value[1] - min.value) / (max.value - min.value) * 100)
+    const trackStart = computed(() => position(model.value[0]))
+    const trackStop = computed(() => position(model.value[1]))
 
     return () => {
       return (

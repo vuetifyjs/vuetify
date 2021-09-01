@@ -23,7 +23,7 @@ type SliderProvide = {
   parseMouseMove: (e: MouseEvent | TouchEvent) => number
   readonly: Ref<boolean | undefined>
   roundValue: (value: number) => number
-  showLabel: Ref<boolean>
+  thumbLabel: Ref<boolean | string | undefined>
   showTicks: Ref<boolean>
   startOffset: Ref<number>
   stepSize: Ref<number>
@@ -37,6 +37,8 @@ type SliderProvide = {
   tickSize: Ref<number>
   trackContainerRef: Ref<VSliderTrack | undefined>
   vertical: Ref<boolean>
+  position: (val: number) => number
+  elevation: Ref<number | string | undefined>
 };
 
 export const VSliderSymbol: InjectionKey<SliderProvide> = Symbol.for('vuetify:v-slider')
@@ -48,6 +50,12 @@ export function getOffset (e: MouseEvent | TouchEvent, el: HTMLElement, directio
   return vertical
     ? touch.clientY - (rect.top + rect.height / 2)
     : touch.clientX - (rect.left + rect.width / 2)
+}
+
+function getPosition (e: MouseEvent | TouchEvent) {
+  if ('touches' in e && e.touches.length) return e.touches[0]
+  else if ('changedTouches' in e && e.changedTouches.length) return e.changedTouches[0]
+  else return e
 }
 
 export const useSlider = (
@@ -69,6 +77,7 @@ export const useSlider = (
     readonly?: boolean
     thumbLabel?: boolean | 'always'
     trackSize: number | string
+    elevation?: number | string
   },
   handleSliderMouseUp: (v: number) => void,
   handleMouseMove: (v: number) => void,
@@ -100,12 +109,6 @@ export const useSlider = (
   const mousePressed = ref(false)
 
   const transition = computed(() => mousePressed.value ? 'none' : '0.3s cubic-bezier(0.25, 0.8, 0.5, 1)')
-
-  function getPosition (e: MouseEvent | TouchEvent) {
-    if ('touches' in e && e.touches.length) return e.touches[0]
-    else if ('changedTouches' in e && e.changedTouches.length) return e.changedTouches[0]
-    else return e
-  }
 
   const startOffset = ref(0)
   const trackContainerRef = ref<VSliderTrack | undefined>()
@@ -165,6 +168,7 @@ export const useSlider = (
 
   function onSliderMouseUp (e: MouseEvent) {
     e.stopPropagation()
+    e.preventDefault()
 
     handleStop(e)
 
@@ -218,7 +222,7 @@ export const useSlider = (
     tickSize,
     direction: toRef(props, 'direction'),
     showTicks,
-    showLabel: computed(() => !!props.thumbLabel),
+    thumbLabel: toRef(props, 'thumbLabel'),
     roundValue: (value: number) => {
       if (stepSize.value <= 0) return value
 
@@ -233,6 +237,8 @@ export const useSlider = (
     trackContainerRef,
     onSliderMousedown,
     onSliderTouchstart,
+    position: (val: number) => (val - min.value) / (max.value - min.value) * 100,
+    elevation: toRef(props, 'elevation'),
   }
 
   provide(VSliderSymbol, data)

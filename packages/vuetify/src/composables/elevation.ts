@@ -1,5 +1,5 @@
 // Utilities
-import { computed } from 'vue'
+import { computed, isRef, Ref } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
@@ -25,13 +25,19 @@ export const makeElevationProps = propsFactory({
   },
 }, 'elevation')
 
-export function useElevation (props: ElevationProps) {
+type ElevationData = {
+  elevationClasses: Ref<string[]>
+}
+
+export function useElevation (elevation: Ref<number | string | undefined>): ElevationData
+export function useElevation (props: ElevationProps | Ref<number | string | undefined>): ElevationData {
   const elevationClasses = computed(() => {
+    const elevation = isRef(props) ? props.value : props.elevation
     const classes: string[] = []
 
-    if (props.elevation == null) return classes
+    if (elevation == null) return classes
 
-    classes.push(`elevation-${props.elevation}`)
+    classes.push(`elevation-${elevation}`)
 
     return classes
   })

@@ -1,1 +1,1 @@
-export { default as VSlider } from './VSlider'
+export { VSlider } from './VSlider'

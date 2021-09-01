@@ -53,6 +53,7 @@ export const VSliderTrack = defineComponent({
       stepSize,
       tickSize,
       showTicks,
+      trackSize,
       color,
       ticks,
     } = slider

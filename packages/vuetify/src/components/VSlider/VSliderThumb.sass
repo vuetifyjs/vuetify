@@ -5,6 +5,9 @@
 .v-slider-thumb
   color: darkgrey
 
+.v-slider-thumb__label
+  background: darkgrey
+
 // Block
 .v-slider-thumb
   outline: none
@@ -31,7 +34,6 @@
   // top: 50%
   border-radius: $slider-thumb-border-radius
   transition: $slider-transition
-  transform: translate2D(-50%, -50%)
   user-select: none
   background-color: currentColor
 
@@ -63,8 +65,6 @@
 
 .v-slider-thumb__label-container
   position: absolute
-  left: 0
-  top: 0
   transition: $slider-thumb-label-transition
 
 .v-slider-thumb__label
@@ -75,12 +75,17 @@
   color: #fff // TODO: move to theme mixin?
   width: $slider-thumb-label-width
   height: $slider-thumb-label-height
-  border-radius: 50% 50% 0
+  border-radius: $slider-thumb-label-border-radius
   position: absolute
-  left: 0
-  bottom: 100%
   user-select: none
   transition: $slider-thumb-label-transition
+
+  &::before
+    content: ''
+    background: inherit
+    position: absolute
+    transform: rotate(45deg)
+
 
 // Horizontal
 .v-slider.v-input--horizontal
@@ -88,33 +93,35 @@
     top: 50%
     transform: translateY(-50%)
 
-  .v-slider-thumb__label
-    // Needed for IE11 which does not
-    // process translateY(calc(-20% - 12px))
-    // or translate(-50%, calc(-20% - 12px))
-    transform: translateY(calc(var(--v-slider-thumb-size) / 3 * -1)) translateX(0px) rotate(45deg)
+  .v-slider-thumb__label-container
+    left: calc(var(--v-slider-thumb-size) / 2)
+    top: 0
 
-    > *
-      transform: rotate(-45deg)
+  .v-slider-thumb__label
+    left: calc(#{$slider-thumb-label-width} / -2)
+    bottom: calc(var(--v-slider-thumb-size) / 2)
+
+    &::before
+      width: 6px
+      height: 6px
+      top: 22px
 
 // Vertical
 .v-slider.v-input--vertical
-  .v-slider-thumb
-    // +ltr()
-    //   transform: translateX(-50%)
+  // .v-slider-thumb
 
-    // +rtl()
-    //   transform: translateX(50%)
+  .v-slider-thumb__label-container
+    top: calc(var(--v-slider-thumb-size) / 2)
+    right: 0
 
   .v-slider-thumb__label
-    // Needed for IE11 which does not
-    // process translateY(calc(-20% - 12px))
-    // or translate(-50%, calc(-20% - 12px))
-    // transform: translateY(20%) translateY(10px) translateX(55%) rotate(135deg)
-    transform: translateY(var(--v-slider-thumb-size)) translateX(calc(var(--v-slider-thumb-size) + var(--v-slider-thumb-size) / 3)) rotate(135deg)
+    top: calc(#{$slider-thumb-label-height} / -2)
+    left: calc(var(--v-slider-thumb-size) / 2)
 
-    > *
-      transform: rotate(-135deg)
+    &::before
+      width: 6px
+      height: 6px
+      left: -3px
 
 // Modifiers
 .v-slider-thumb--focused

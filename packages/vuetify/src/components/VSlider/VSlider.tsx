@@ -65,10 +65,6 @@ export const makeVSliderProps = propsFactory({
     type: [Number, String],
     default: 4,
   },
-  modelValue: {
-    type: [Number, String],
-    default: 0,
-  },
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal',
@@ -84,13 +80,30 @@ export const makeVSliderProps = propsFactory({
 export const VSlider = defineComponent({
   name: 'VSlider',
 
-  props: makeVSliderProps(),
+  props: {
+    modelValue: {
+      type: [Number, String],
+      default: 0,
+    },
+
+    ...makeVSliderProps(),
+  },
 
   emits: {
     'update:modelValue': (v: number) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
+    const thumbContainerRef = ref()
+
+    const { min, max, roundValue, onSliderMousedown, onSliderTouchstart, trackContainerRef, position } = useSlider(props, newValue => {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      model.value = roundValue(newValue)
+    }, newValue => {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      model.value = roundValue(newValue)
+    }, () => thumbContainerRef.value?.$el)
+
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -103,18 +116,8 @@ export const VSlider = defineComponent({
       v => roundValue(v)
     )
 
-    const thumbContainerRef = ref()
-
-    const { min, max, roundValue, onSliderMousedown, onSliderTouchstart, trackContainerRef } = useSlider(props, newValue => {
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      model.value = roundValue(newValue)
-    }, newValue => {
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      model.value = roundValue(newValue)
-    }, () => thumbContainerRef.value?.$el)
-
     const isDirty = computed(() => model.value > min.value)
-    const trackStop = computed(() => (model.value - min.value) / (max.value - min.value) * 100)
+    const trackStop = computed(() => position(model.value))
 
     return () => {
       return (
