@@ -33,7 +33,7 @@ export default defineComponent({
     'update:modelValue': (value: [number, number]) => true,
   },
 
-  setup (props, { slots, emit, attrs }) {
+  setup (props, { slots, attrs }) {
     const startThumbRef = ref<VSliderThumb>()
     const stopThumbRef = ref<VSliderThumb>()
     const focusedThumb = ref<VSliderThumb | null>()
@@ -48,7 +48,7 @@ export default defineComponent({
       return a < b ? startThumbRef.value?.$el : stopThumbRef.value?.$el
     }
 
-    const { min, max, roundValue, onSliderMousedown, trackContainerRef, position } = useSlider(props, newValue => {
+    const { min, max, roundValue, onSliderMousedown, onSliderTouchstart, trackContainerRef, position } = useSlider(props, newValue => {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
       model.value = focusedThumb.value === startThumbRef.value ? [newValue, model.value[1]] : [model.value[0], newValue]
     }, newValue => {
@@ -94,7 +94,7 @@ export default defineComponent({
               <div
                 class="v-slider__container"
                 onMousedown={onSliderMousedown}
-                onTouchstart={onSliderMousedown}
+                onTouchstartPassive={onSliderTouchstart}
               >
                 <input
                   id={`${id}_start`}
@@ -116,11 +116,8 @@ export default defineComponent({
 
                 <VSliderTrack
                   ref={trackContainerRef}
-                  min={min.value}
-                  max={max.value}
                   start={trackStart.value}
                   stop={trackStop.value}
-                  rounded={props.rounded}
                 />
 
                 <VSliderThumb

@@ -14,7 +14,7 @@ import { useTextColor } from '@/composables/color'
 import { useRtl } from '@/composables/rtl'
 
 // Utilities
-import { inject } from 'vue'
+import { computed, inject } from 'vue'
 import { convertToUnit, defineComponent, keyValues } from '@/util'
 
 export const VSliderThumb = defineComponent({
@@ -66,7 +66,6 @@ export const VSliderThumb = defineComponent({
       label,
       readonly,
       elevation,
-      numTicks,
     } = slider
 
     const { textColorClasses, textColorStyles } = useTextColor(thumbColor)
@@ -74,19 +73,24 @@ export const VSliderThumb = defineComponent({
     const { pageup, pagedown, end, home, left, right, down, up } = keyValues
     const relevantKeys = [pageup, pagedown, end, home, left, right, down, up]
 
+    const multipliers = computed(() => {
+      if (stepSize.value) return [1, 2, 3]
+      else return [1, 5, 10]
+    })
+
     function parseKeydown (e: KeyboardEvent, value: number) {
       if (!relevantKeys.includes(e.key)) return
 
       e.preventDefault()
 
-      const step = stepSize.value || 1
+      const step = stepSize.value || 0.1
       const steps = (props.max - props.min) / step
       if ([left, right, down, up].includes(e.key)) {
         const increase = isRtl.value ? [left, up] : [right, up]
         const direction = increase.includes(e.key) ? 1 : -1
-        const multiplier = e.shiftKey ? 3 : (e.ctrlKey ? 2 : 1)
+        const multiplier = e.shiftKey ? 2 : (e.ctrlKey ? 1 : 0)
 
-        value = value + (direction * step * multiplier)
+        value = value + (direction * step * multipliers.value[multiplier])
       } else if (e.key === home) {
         value = props.min
       } else if (e.key === end) {
@@ -160,7 +164,7 @@ export const VSliderThumb = defineComponent({
           <VScaleTransition origin="bottom center">
             <div
               class="v-slider-thumb__label-container"
-              v-show={props.focused || thumbLabel.value === 'always'}
+              v-show={(thumbLabel.value && props.focused) || thumbLabel.value === 'always'}
             >
               <div
                 class={[
@@ -168,7 +172,7 @@ export const VSliderThumb = defineComponent({
                 ]}
               >
                 <div>
-                  {slots['thumb-label']?.({ value: props.modelValue }) ?? props.modelValue}
+                  {slots['thumb-label']?.({ value: props.modelValue }) ?? props.modelValue.toFixed(1)}
                 </div>
               </div>
             </div>

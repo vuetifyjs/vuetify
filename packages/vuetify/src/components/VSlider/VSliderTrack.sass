@@ -91,7 +91,7 @@
         transform: translateX(100%)
 
     .v-slider-track__tick-label
-      top: 8px
+      top: calc(var(--v-slider-track-size) + 20px)
 
       +ltr()
         transform: translateX(-50%)
@@ -114,20 +114,14 @@
       width: inherit
 
   .v-slider-track__ticks
-    width: 100%
     flex-direction: column
+    height: calc(100% - #{$slider-track-border-radius})
+    margin-block-start: calc(#{$slider-track-border-radius / 2})
 
   .v-slider-track__tick
-    .v-slider-track__tick-label,
-    &:first-child .v-slider-track__tick-label,
-    &:last-child .v-slider-track__tick-label
-      +ltr()
-        transform: translateY(-50%)
-        left: 12px
-
-      +rtl()
-        transform: translateY(-50%)
-        right: 12px
+    .v-slider-track__tick-label
+      margin-inline-start: calc(var(--v-slider-track-size) + 20px)
+      transform: translateY(-50%)
 
 // Modifiers
 .v-slider-track__ticks--always-show, .v-input--focused

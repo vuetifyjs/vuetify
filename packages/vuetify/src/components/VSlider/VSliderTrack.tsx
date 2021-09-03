@@ -45,6 +45,7 @@ export const VSliderTrack = defineComponent({
       color,
       ticks,
       rounded,
+      tickLabels,
     } = slider
 
     const { roundedClasses } = useRounded(rounded, 'v-slider-track')
@@ -94,7 +95,11 @@ export const VSliderTrack = defineComponent({
                 'v-slider-track__tick--filled': filled,
               },
             ]}
-          ></div>
+          >
+            {tickLabels.value?.[index] && (
+              <div class="v-slider-track__tick-label">{tickLabels.value[index]}</div>
+            )}
+          </div>
         )
       })
     })
@@ -116,7 +121,7 @@ export const VSliderTrack = defineComponent({
               'v-slider-track__background',
               trackColorClasses.value,
               {
-                'v-slider-track__background--opacity': !!color.value,
+                'v-slider-track__background--opacity': !!color.value || !trackFillColor.value,
               },
             ]}
             style={{

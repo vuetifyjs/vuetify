@@ -41,6 +41,7 @@ type SliderProvide = {
   elevation: Ref<number | string | undefined>
   numTicks: Ref<number>
   rounded: Ref<boolean | number | string | undefined>
+  tickLabels: Ref<string[] | undefined>
 };
 
 export const VSliderSymbol: InjectionKey<SliderProvide> = Symbol.for('vuetify:v-slider')
@@ -74,7 +75,7 @@ export const useSlider = (
     trackFillColor?: string
     color?: string
     ticks?: boolean | 'always'
-    tickLabels: string[]
+    tickLabels?: string[]
     label?: string
     readonly?: boolean
     thumbLabel?: boolean | 'always'
@@ -244,6 +245,7 @@ export const useSlider = (
     position: (val: number) => (val - min.value) / (max.value - min.value) * 100,
     elevation: toRef(props, 'elevation'),
     rounded: toRef(props, 'rounded'),
+    tickLabels: toRef(props, 'tickLabels'),
   }
 
   provide(VSliderSymbol, data)

@@ -7,13 +7,13 @@
 
 .v-slider-thumb__label
   background: darkgrey
+  color: #fff
 
 // Block
 .v-slider-thumb
   outline: none
   position: absolute
   transition: $slider-transition
-  inset-block-start: calc(var(--v-slider-thumb-size) / 2 * -1)
 
 .v-slider-thumb__surface
   cursor: pointer
@@ -53,7 +53,6 @@
   align-items: center
   justify-content: center
   font-size: $slider-thumb-label-font-size
-  color: #fff // TODO: move to theme mixin?
   width: $slider-thumb-label-width
   height: $slider-thumb-label-height
   border-radius: $slider-thumb-label-border-radius
@@ -87,27 +86,30 @@
 
   .v-slider-thumb__label
     left: calc(#{$slider-thumb-label-width} / -2)
-    bottom: calc(var(--v-slider-thumb-size) / 2)
+    bottom: $slider-thumb-label-offset
 
     &::before
-      width: 6px
-      height: 6px
-      top: 22px
+      width: $slider-thumb-label-wedge-size
+      height: $slider-thumb-label-wedge-size
+      bottom: #{$slider-thumb-label-wedge-size / -2}
 
 // Vertical
 .v-slider.v-input--vertical
+  .v-slider-thumb
+    transform: translateY(calc(var(--v-slider-thumb-offset) * -1))
+
   .v-slider-thumb__label-container
     top: calc(var(--v-slider-thumb-size) / 2)
     right: 0
 
   .v-slider-thumb__label
     top: calc(#{$slider-thumb-label-height} / -2)
-    left: calc(var(--v-slider-thumb-size) / 2)
+    left: $slider-thumb-label-offset
 
     &::before
-      width: 6px
-      height: 6px
-      left: -3px
+      width: $slider-thumb-label-wedge-size
+      height: $slider-thumb-label-wedge-size
+      left: #{$slider-thumb-label-wedge-size / -2}
 
 // Modifiers
 .v-slider-thumb--focused, .v-slider-thumb:hover
