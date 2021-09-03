@@ -1,5 +1,10 @@
 // Imports
-@import ./index
+@forward './variables'
+@use 'sass:map'
+@use 'sass:selector'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
 
 // Theme
 .v-slider-thumb
@@ -24,7 +29,7 @@
   background-color: currentColor
 
   &:before
-    transition: 0.3s $standard-easing
+    transition: 0.3s settings.$standard-easing
     content: ''
     color: inherit
     width: 100%

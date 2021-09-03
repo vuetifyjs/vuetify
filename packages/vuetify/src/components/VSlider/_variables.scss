@@ -1,4 +1,5 @@
-@import '../../styles/styles.sass';
+@use '../../styles/settings';
+@use '../../styles/tools';
 
 $slider-horizontal-left: 8px !default;
 $slider-horizontal-min-height: 32px !default;
@@ -10,13 +11,13 @@ $slider-thumb-focus-opacity: 0.3 !default;
 $slider-thumb-hover-opacity: 0.15 !default;
 $slider-thumb-border-radius: 50% !default;
 $slider-thumb-focused-size-increase: 24px !default;
-$slider-thumb-label-font-size: map-deep-get($typography, 'caption', 'size') !default;
+$slider-thumb-label-font-size: tools.map-deep-get(settings.$typography, 'caption', 'size') !default;
 $slider-thumb-label-border-radius: 4px !default;
 $slider-thumb-label-height: 25px !default;
 $slider-thumb-label-width: 35px !default;
 $slider-thumb-label-wedge-size: 6px !default;
 $slider-thumb-label-offset: calc(var(--v-slider-thumb-size) / 2) !default;
-$slider-thumb-label-transition: .2s $accelerated-easing !default;
+$slider-thumb-label-transition: .2s settings.$accelerated-easing !default;
 $slider-thumb-touch-size: 42px !default;
 $slider-tick-border-radius: 2px !default;
 $slider-track-border-radius: 6px !default;

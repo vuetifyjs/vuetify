@@ -203,7 +203,6 @@ export const VField = defineComponent({
           class={[
             'v-field',
             {
-              'v-field--active': isActive.value,
               'v-field--appended': hasAppend,
               'v-field--dirty': props.dirty,
               'v-field--focused': isFocused.value,
@@ -224,6 +223,9 @@ export const VField = defineComponent({
           ]}
           focused={ isFocused.value }
           messages={ props.errorMessages?.length ? props.errorMessages : errorMessages.value }
+          active={ isActive.value }
+          disabled={ props.disabled }
+          dirty={ props.dirty }
           { ...attrs }
           v-slots={{
             prepend: slots.prepend && (() => slots.prepend?.(slotProps.value)),

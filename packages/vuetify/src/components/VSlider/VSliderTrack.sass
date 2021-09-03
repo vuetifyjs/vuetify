@@ -1,5 +1,10 @@
 // Imports
-@import ./index
+@forward './variables'
+@use 'sass:map'
+@use 'sass:selector'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
 
 // Theme
 .v-slider-track__background
@@ -33,23 +38,23 @@
 
 .v-slider-track__tick
   opacity: 0
-  transition: 0.2s $standard-easing
+  transition: 0.2s settings.$standard-easing
   border-radius: $slider-tick-border-radius
   width: var(--v-slider-tick-size)
   height: var(--v-slider-tick-size)
 
   &:first-child .v-slider-track__tick-label
-    +ltr()
+    @include tools.ltr()
       transform: none
 
-    +rtl()
+    @include tools.rtl()
       transform: translateX(100%)
 
   &:last-child .v-slider-track__tick-label
-    +ltr()
+    @include tools.ltr()
       transform: translateX(-100%)
 
-    +rtl()
+    @include tools.rtl()
       transform: none
 
 .v-slider-track__tick-label
@@ -77,26 +82,26 @@
 
   .v-slider-track__tick
     &:first-child .v-slider-track__tick-label
-      +ltr()
+      @include tools.ltr()
         transform: translateX(0%)
 
-      +rtl()
+      @include tools.rtl()
         transform: translateX(0%)
 
     &:last-child .v-slider-track__tick-label
-      +ltr()
+      @include tools.ltr()
         transform: translateX(-100%)
 
-      +rtl()
+      @include tools.rtl()
         transform: translateX(100%)
 
     .v-slider-track__tick-label
       top: calc(var(--v-slider-track-size) + 20px)
 
-      +ltr()
+      @include tools.ltr()
         transform: translateX(-50%)
 
-      +rtl()
+      @include tools.rtl()
         transform: translateX(50%)
 
 // Vertical

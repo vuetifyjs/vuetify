@@ -15,13 +15,17 @@ type SliderProvide = {
   decimals: Ref<number>
   direction: Ref<'vertical' | 'horizontal'>
   disabled: Ref<boolean | undefined>
+  elevation: Ref<number | string | undefined>
   label: Ref<string | undefined>
   min: Ref<number>
   max: Ref<number>
+  numTicks: Ref<number>
   onSliderMousedown: (e: MouseEvent) => void
   onSliderTouchstart: (e: TouchEvent) => void
   parseMouseMove: (e: MouseEvent | TouchEvent) => number
+  position: (val: number) => number
   readonly: Ref<boolean | undefined>
+  rounded: Ref<boolean | number | string | undefined>
   roundValue: (value: number) => number
   thumbLabel: Ref<boolean | string | undefined>
   showTicks: Ref<boolean>
@@ -33,15 +37,11 @@ type SliderProvide = {
   trackColor: Ref<string | undefined>
   trackFillColor: Ref<string | undefined>
   trackSize: Ref<number>
+  tickLabels: Ref<string[] | undefined>
   ticks: Ref<string | boolean | undefined>
   tickSize: Ref<number>
   trackContainerRef: Ref<VSliderTrack | undefined>
   vertical: Ref<boolean>
-  position: (val: number) => number
-  elevation: Ref<number | string | undefined>
-  numTicks: Ref<number>
-  rounded: Ref<boolean | number | string | undefined>
-  tickLabels: Ref<string[] | undefined>
 };
 
 export const VSliderSymbol: InjectionKey<SliderProvide> = Symbol.for('vuetify:v-slider')
@@ -55,33 +55,33 @@ export function getOffset (e: MouseEvent | TouchEvent, el: HTMLElement, directio
     : touch.clientX - (rect.left + rect.width / 2)
 }
 
-function getPosition (e: MouseEvent | TouchEvent) {
-  if ('touches' in e && e.touches.length) return e.touches[0]
-  else if ('changedTouches' in e && e.changedTouches.length) return e.changedTouches[0]
-  else return e
+function getPosition (e: MouseEvent | TouchEvent, position: 'clientX' | 'clientY'): number {
+  if ('touches' in e && e.touches.length) return e.touches[0][position]
+  else if ('changedTouches' in e && e.changedTouches.length) return e.changedTouches[0][position]
+  else return (e as MouseEvent)[position]
 }
 
 export const useSlider = (
   props: {
+    color?: string
+    direction: 'vertical' | 'horizontal'
+    disabled?: boolean
+    elevation?: number | string
+    label?: string
     max: number | string
     min: number | string
+    readonly?: boolean
+    rounded?: boolean | number | string
     stepSize: number | string
     thumbSize: number | string
     tickSize: number | string
-    direction: 'vertical' | 'horizontal'
-    disabled?: boolean
     thumbColor?: string
+    thumbLabel?: boolean | 'always'
     trackColor?: string
     trackFillColor?: string
-    color?: string
+    trackSize: number | string
     ticks?: boolean | 'always'
     tickLabels?: string[]
-    label?: string
-    readonly?: boolean
-    thumbLabel?: boolean | 'always'
-    trackSize: number | string
-    elevation?: number | string
-    rounded?: boolean | number | string
   },
   handleSliderMouseUp: (v: number) => void,
   handleMouseMove: (v: number) => void,
@@ -109,7 +109,7 @@ export const useSlider = (
   const trackColor = computed(() => props.disabled ? undefined : props.trackColor ?? props.color)
   const trackFillColor = computed(() => props.disabled ? undefined : props.trackFillColor ?? props.color)
 
-  const showTicks = computed(() => props.tickLabels?.length > 0 || !!(!props.disabled && stepSize.value && props.ticks))
+  const showTicks = computed(() => !!props.tickLabels?.length || !!(!props.disabled && stepSize.value && props.ticks))
 
   const mousePressed = ref(false)
   const transition = computed(() => mousePressed.value ? 'none' : undefined)
@@ -121,13 +121,13 @@ export const useSlider = (
     const vertical = props.direction === 'vertical'
     const start = vertical ? 'top' : 'left'
     const length = vertical ? 'height' : 'width'
-    const click = vertical ? 'clientY' : 'clientX'
+    const position = vertical ? 'clientY' : 'clientX'
 
     const {
       [start]: trackStart,
       [length]: trackLength,
     } = trackContainerRef.value?.$el.getBoundingClientRect()
-    const clickOffset = getPosition(e)[click]
+    const clickOffset = getPosition(e, position)
 
     // It is possible for left to be NaN, force to number
     let clickPos = Math.min(Math.max((clickOffset - trackStart - startOffset.value) / trackLength, 0), 1) || 0
@@ -207,27 +207,21 @@ export const useSlider = (
   }
 
   const data: SliderProvide = {
+    color: toRef(props, 'color'),
+    decimals,
+    disabled,
+    direction: toRef(props, 'direction'),
+    elevation: toRef(props, 'elevation'),
+    label: toRef(props, 'label'),
     min,
     max,
-    stepSize,
-    decimals,
-    transition,
     numTicks,
-    thumbSize,
-    disabled,
-    vertical,
-    color: toRef(props, 'color'),
-    label: toRef(props, 'label'),
+    onSliderMousedown,
+    onSliderTouchstart,
+    parseMouseMove,
+    position: (val: number) => clamp((val - min.value) / (max.value - min.value) * 100, 0, 100),
     readonly: toRef(props, 'readonly'),
-    thumbColor,
-    trackColor,
-    trackFillColor,
-    trackSize,
-    ticks: toRef(props, 'ticks'),
-    tickSize,
-    direction: toRef(props, 'direction'),
-    showTicks,
-    thumbLabel: toRef(props, 'thumbLabel'),
+    rounded: toRef(props, 'rounded'),
     roundValue: (value: number) => {
       if (stepSize.value <= 0) return value
 
@@ -237,15 +231,21 @@ export const useSlider = (
 
       return parseFloat(Math.min(newValue, max.value).toFixed(decimals.value))
     },
-    parseMouseMove,
+    showTicks,
     startOffset,
-    trackContainerRef,
-    onSliderMousedown,
-    onSliderTouchstart,
-    position: (val: number) => (val - min.value) / (max.value - min.value) * 100,
-    elevation: toRef(props, 'elevation'),
-    rounded: toRef(props, 'rounded'),
+    stepSize,
+    transition,
+    thumbSize,
+    vertical,
+    thumbColor,
+    thumbLabel: toRef(props, 'thumbLabel'),
+    ticks: toRef(props, 'ticks'),
     tickLabels: toRef(props, 'tickLabels'),
+    tickSize,
+    trackColor,
+    trackContainerRef,
+    trackFillColor,
+    trackSize,
   }
 
   provide(VSliderSymbol, data)
