@@ -13,27 +13,13 @@
   outline: none
   position: absolute
   transition: $slider-transition
-  inset-block-start: calc(var(--v-slider-thumb-size, $slider-thumb-size) / 2 * -1)
-  transition: 0.3s $standard-easing
-  // top: 50%
-  // transform: translate(-50%, -50%)
-
-  &:hover:not(.v-slider--disabled)
-    .v-slider-thumb__surface:before
-      transform: scale(2)
-
-  &--pressed
-    transition: 0.1s cubic-bezier(0.25, 0.8, 0.5, 1)
+  inset-block-start: calc(var(--v-slider-thumb-size) / 2 * -1)
 
 .v-slider-thumb__surface
-  // position: absolute
   cursor: pointer
-  width: var(--v-slider-thumb-size, $slider-thumb-size)
-  height: var(--v-slider-thumb-size, $slider-thumb-size)
-  // left: calc(var(--v-slider-thumb-size, $slider-thumb-size) / 2)
-  // top: 50%
+  width: var(--v-slider-thumb-size)
+  height: var(--v-slider-thumb-size)
   border-radius: $slider-thumb-border-radius
-  transition: $slider-transition
   user-select: none
   background-color: currentColor
 
@@ -41,18 +27,13 @@
     transition: 0.3s $standard-easing
     content: ''
     color: inherit
-    // width: #{$slider-thumb-size + $slider-thumb-focused-size-increase}
-    // height: #{$slider-thumb-size + $slider-thumb-focused-size-increase}
     width: 100%
     height: 100%
     border-radius: $slider-thumb-border-radius
     background: currentColor
-    opacity: $slider-thumb-before-opacity
     position: absolute
-    // left: -$slider-thumb-focused-size-increase / 2
-    // top: -$slider-thumb-focused-size-increase / 2
-    // transform: scale(0.1)
     pointer-events: none
+    opacity: 0
 
   &::after
     content: ''
@@ -86,12 +67,19 @@
     position: absolute
     transform: rotate(45deg)
 
+.v-slider-thumb__ripple
+  position: absolute
+  left: calc(var(--v-slider-thumb-size) / -2)
+  top: calc(var(--v-slider-thumb-size) / -2)
+  width: calc(var(--v-slider-thumb-size) * 2)
+  height: calc(var(--v-slider-thumb-size) * 2)
+  background: inherit
 
 // Horizontal
 .v-slider.v-input--horizontal
   .v-slider-thumb
     top: 50%
-    transform: translateY(-50%)
+    transform: translate(var(--v-slider-thumb-offset), -50%)
 
   .v-slider-thumb__label-container
     left: calc(var(--v-slider-thumb-size) / 2)
@@ -108,8 +96,6 @@
 
 // Vertical
 .v-slider.v-input--vertical
-  // .v-slider-thumb
-
   .v-slider-thumb__label-container
     top: calc(var(--v-slider-thumb-size) / 2)
     right: 0
@@ -124,10 +110,14 @@
       left: -3px
 
 // Modifiers
+.v-slider-thumb--focused, .v-slider-thumb:hover
+  .v-slider-thumb__surface:before
+    transform: scale(2)
+
 .v-slider-thumb--focused
   .v-slider-thumb__surface:before
-    transform: scale(1.5)
+      opacity: $slider-thumb-focus-opacity
 
-.v-slider--disabled
-  .v-slider__thumb:before
-    display: none
+.v-slider-thumb:hover:not(.v-slider-thumb--focused)
+  .v-slider-thumb__surface:before
+      opacity: $slider-thumb-hover-opacity

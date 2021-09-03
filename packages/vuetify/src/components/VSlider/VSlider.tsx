@@ -147,11 +147,8 @@ export const VSlider = defineComponent({
 
                 <VSliderTrack
                   ref={trackContainerRef}
-                  min={min.value}
-                  max={max.value}
                   start={0}
                   stop={trackStop.value}
-                  rounded={props.rounded}
                 />
 
                 <VSliderThumb

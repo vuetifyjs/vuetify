@@ -6,8 +6,7 @@ import { VSliderSymbol } from './slider'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { useRtl } from '@/composables/rtl'
+import { useRounded } from '@/composables/rounded'
 
 // Utilities
 import { computed, inject } from 'vue'
@@ -17,14 +16,6 @@ export const VSliderTrack = defineComponent({
   name: 'VSliderTrack',
 
   props: {
-    min: {
-      type: Number,
-      required: true,
-    },
-    max: {
-      type: Number,
-      required: true,
-    },
     start: {
       type: Number,
       required: true,
@@ -33,14 +24,11 @@ export const VSliderTrack = defineComponent({
       type: Number,
       required: true,
     },
-
-    ...makeRoundedProps(),
   },
 
   emits: {},
 
   setup (props, { slots }) {
-    const { isRtl } = useRtl()
     const slider = inject(VSliderSymbol)
 
     if (!slider) throw new Error('[Vuetify] v-slider-track must be inside v-slider or v-range-slider')
@@ -50,15 +38,16 @@ export const VSliderTrack = defineComponent({
       trackColor,
       trackFillColor,
       vertical,
-      stepSize,
+      numTicks,
       tickSize,
       showTicks,
       trackSize,
       color,
       ticks,
+      rounded,
     } = slider
 
-    const { roundedClasses } = useRounded(props, 'v-slider-track')
+    const { roundedClasses } = useRounded(rounded, 'v-slider-track')
 
     const {
       backgroundColorClasses: trackFillColorClasses,
@@ -92,12 +81,9 @@ export const VSliderTrack = defineComponent({
     })
 
     const computedTicks = computed(() => {
-      const numTicks = Math.ceil((props.max - props.min) / stepSize.value)
-
-      return createRange(numTicks + 1).map(index => {
-        const width = (vertical.value ? numTicks - index : index) * (100 / numTicks)
+      return createRange(numTicks.value + 1).map(index => {
+        const width = (vertical.value ? numTicks.value - index : index) * (100 / numTicks.value)
         const filled = width >= props.start && width <= props.stop
-        const offset = (index - (numTicks / 2)) * (isRtl.value ? -10 : 10)
 
         return (
           <div
@@ -108,11 +94,6 @@ export const VSliderTrack = defineComponent({
                 'v-slider-track__tick--filled': filled,
               },
             ]}
-            style={{
-              width: convertToUnit(tickSize.value),
-              height: convertToUnit(tickSize.value),
-              transform: `translate${vertical.value ? 'Y' : 'X'}(${index > 0 && index < numTicks ? offset : offset * -1}%)`,
-            }}
           ></div>
         )
       })
@@ -127,6 +108,7 @@ export const VSliderTrack = defineComponent({
           ]}
           style={{
             '--v-slider-track-size': convertToUnit(trackSize.value),
+            '--v-slider-tick-size': convertToUnit(tickSize.value),
           }}
         >
           <div

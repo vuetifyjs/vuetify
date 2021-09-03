@@ -4,19 +4,23 @@ import './VSliderThumb.sass'
 // Components
 import { VScaleTransition } from '../transitions'
 import { VSliderSymbol } from './slider'
-import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { useElevation } from '@/composables/elevation'
+
+// Directives
+import Ripple from '@/directives/ripple'
 
 // Composables
-import { useBackgroundColor, useTextColor } from '@/composables/color'
+import { useTextColor } from '@/composables/color'
 import { useRtl } from '@/composables/rtl'
 
 // Utilities
-import { inject, ref, watch } from 'vue'
+import { inject } from 'vue'
 import { convertToUnit, defineComponent, keyValues } from '@/util'
-import { VTooltip } from '../VTooltip'
 
 export const VSliderThumb = defineComponent({
   name: 'VSliderThumb',
+
+  directives: { Ripple },
 
   props: {
     active: Boolean,
@@ -44,7 +48,7 @@ export const VSliderThumb = defineComponent({
     'update:modelValue': (v: number) => true,
   },
 
-  setup (props, { slots, attrs, emit }) {
+  setup (props, { slots, emit }) {
     const { isRtl } = useRtl()
     const slider = inject(VSliderSymbol)
 
@@ -62,10 +66,10 @@ export const VSliderThumb = defineComponent({
       label,
       readonly,
       elevation,
+      numTicks,
     } = slider
 
     const { textColorClasses, textColorStyles } = useTextColor(thumbColor)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(thumbColor)
 
     const { pageup, pagedown, end, home, left, right, down, up } = keyValues
     const relevantKeys = [pageup, pagedown, end, home, left, right, down, up]
@@ -122,6 +126,8 @@ export const VSliderThumb = defineComponent({
             transition: transition.value,
             [`inset-${inset}-start`]: `calc(${positionPercentage} - var(--v-slider-thumb-size) / 2)`,
             '--v-slider-thumb-size': size,
+            // 12 is slightly magic constant to account for ticks offset
+            '--v-slider-thumb-offset': convertToUnit((props.position - 50) / -(12)),
           }}
           role="slider"
           tabindex={disabled.value ? -1 : 0}
@@ -139,7 +145,17 @@ export const VSliderThumb = defineComponent({
               textColorClasses.value,
               elevationClasses.value,
             ]}
+            style={{
+              ...textColorStyles.value,
+            }}
+          />
+          <div
+            class={[
+              'v-slider-thumb__ripple',
+              textColorClasses.value,
+            ]}
             style={textColorStyles.value}
+            v-ripple={[true, null, ['circle', 'center']]}
           />
           <VScaleTransition origin="bottom center">
             <div

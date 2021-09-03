@@ -27,7 +27,7 @@ type SliderProvide = {
   showTicks: Ref<boolean>
   startOffset: Ref<number>
   stepSize: Ref<number>
-  transition: Ref<string>
+  transition: Ref<string | undefined>
   thumbSize: Ref<number>
   thumbColor: Ref<string | undefined>
   trackColor: Ref<string | undefined>
@@ -39,6 +39,8 @@ type SliderProvide = {
   vertical: Ref<boolean>
   position: (val: number) => number
   elevation: Ref<number | string | undefined>
+  numTicks: Ref<number>
+  rounded: Ref<boolean | number | string | undefined>
 };
 
 export const VSliderSymbol: InjectionKey<SliderProvide> = Symbol.for('vuetify:v-slider')
@@ -78,6 +80,7 @@ export const useSlider = (
     thumbLabel?: boolean | 'always'
     trackSize: number | string
     elevation?: number | string
+    rounded?: boolean | number | string
   },
   handleSliderMouseUp: (v: number) => void,
   handleMouseMove: (v: number) => void,
@@ -97,6 +100,7 @@ export const useSlider = (
   const thumbSize = computed(() => parseInt(props.thumbSize, 10))
   const tickSize = computed(() => parseInt(props.tickSize, 10))
   const trackSize = computed(() => parseInt(props.trackSize, 10))
+  const numTicks = computed(() => (max.value - min.value) / stepSize.value)
   const disabled = toRef(props, 'disabled')
   const vertical = computed(() => props.direction === 'vertical')
 
@@ -107,8 +111,7 @@ export const useSlider = (
   const showTicks = computed(() => props.tickLabels?.length > 0 || !!(!props.disabled && stepSize.value && props.ticks))
 
   const mousePressed = ref(false)
-
-  const transition = computed(() => mousePressed.value ? 'none' : '0.3s cubic-bezier(0.25, 0.8, 0.5, 1)')
+  const transition = computed(() => mousePressed.value ? 'none' : undefined)
 
   const startOffset = ref(0)
   const trackContainerRef = ref<VSliderTrack | undefined>()
@@ -208,6 +211,7 @@ export const useSlider = (
     stepSize,
     decimals,
     transition,
+    numTicks,
     thumbSize,
     disabled,
     vertical,
@@ -239,6 +243,7 @@ export const useSlider = (
     onSliderTouchstart,
     position: (val: number) => (val - min.value) / (max.value - min.value) * 100,
     elevation: toRef(props, 'elevation'),
+    rounded: toRef(props, 'rounded'),
   }
 
   provide(VSliderSymbol, data)

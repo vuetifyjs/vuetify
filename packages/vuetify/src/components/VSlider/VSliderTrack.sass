@@ -8,9 +8,14 @@
 .v-slider-track__fill
   background-color: darkgrey
 
+.v-slider-track__tick
+  background-color: rgba(0, 0, 0, 0.5)
+
+  &--filled
+    background-color: rgba(255, 255, 255, 0.5)
+
 // Elements
 .v-slider-track
-  // position: absolute
   border-radius: $slider-track-border-radius
 
 .v-slider-track
@@ -20,6 +25,7 @@
     border-radius: inherit
 
 .v-slider-track__ticks
+  position: absolute
   display: flex
   height: 100%
   align-items: center
@@ -27,12 +33,10 @@
 
 .v-slider-track__tick
   opacity: 0
-  background-color: rgba(0, 0, 0, 0.5) // TODO: move to theme mixin?
-  transition: 0.3s background-color $standard-easing
+  transition: 0.2s $standard-easing
   border-radius: $slider-tick-border-radius
-
-  &--filled
-    background-color: rgba(255, 255, 255, 0.5) // TODO: move to theme mixin?
+  width: var(--v-slider-tick-size)
+  height: var(--v-slider-tick-size)
 
   &:first-child .v-slider-track__tick-label
     +ltr()
@@ -68,7 +72,8 @@
       height: inherit
 
   .v-slider-track__ticks
-    width: 100%
+    width: calc(100% - #{$slider-track-border-radius})
+    margin-inline-start: calc(#{$slider-track-border-radius / 2})
 
   .v-slider-track__tick
     &:first-child .v-slider-track__tick-label
@@ -100,11 +105,7 @@
     height: 100%
     display: flex
     justify-content: center
-    // width: $slider-track-width
     width: calc(var(--v-slider-track-size, $slider-track-width) + 2px)
-    // left: 50%
-    // top: 0
-    // transform: translateX(-50%)
 
     &__background
       width: var(--v-slider-track-size)
@@ -114,12 +115,6 @@
 
   .v-slider-track__ticks
     width: 100%
-    // top: 0
-    // left: 0
-    // width: $slider-track-width
-    // height: 100%
-    // left: 50%
-    // transform: translateX(-25%)
     flex-direction: column
 
   .v-slider-track__tick
@@ -135,7 +130,7 @@
         right: 12px
 
 // Modifiers
-.v-slider-track__ticks--always-show
+.v-slider-track__ticks--always-show, .v-input--focused
   .v-slider-track__tick
     opacity: 1
 
