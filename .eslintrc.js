@@ -75,11 +75,13 @@ module.exports = {
     indent: ['error', 2, {
       ...require('eslint-config-standard').rules.indent[2],
       flatTernaryExpressions: true,
+      offsetTernaryExpressions: false,
     }],
     'sort-imports': ['warn', {
       ignoreDeclarationSort: true,
       ignoreCase: true,
     }],
+    'multiline-ternary': 'off',
 
     'sonarjs/cognitive-complexity': 'off',
     'sonarjs/no-duplicate-string': 'off',

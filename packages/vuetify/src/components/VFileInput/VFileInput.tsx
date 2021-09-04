@@ -148,8 +148,7 @@ export default defineComponent({
                     if (!e.target) return
 
                     const target = e.target as HTMLInputElement
-                    const files = [...target.files ?? []]
-                    model.value = files
+                    model.value = [...target.files ?? []]
 
                     if (!isActive) inputRef.value?.focus()
                   } }
