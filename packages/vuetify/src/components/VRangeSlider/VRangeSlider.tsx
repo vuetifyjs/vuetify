@@ -3,13 +3,12 @@ import './VRangeSlider.sass'
 
 // Components
 import { VInput } from '../VInput'
-import { makeVSliderProps } from '../VSlider/VSlider'
 import { VSliderThumb } from '../VSlider/VSliderThumb'
 import { VSliderTrack } from '../VSlider/VSliderTrack'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { getOffset, useSlider } from '../VSlider/slider'
+import { getOffset, makeSliderProps, useSlider } from '../VSlider/slider'
 
 // Utilities
 import { computed, defineComponent, ref } from 'vue'
@@ -26,7 +25,7 @@ export default defineComponent({
       default: () => ([0, 0]),
     },
 
-    ...makeVSliderProps(),
+    ...makeSliderProps(),
   },
 
   emits: {

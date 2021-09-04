@@ -8,74 +8,13 @@ import { VSliderTrack } from './VSliderTrack'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeRoundedProps } from '@/composables/rounded'
-import { makeElevationProps } from '@/composables/elevation'
-import { useSlider } from './slider'
+import { makeSliderProps, useSlider } from './slider'
 
 // Helpers
-import { defineComponent, propsFactory } from '@/util'
+import { defineComponent } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
 import { computed, ref } from 'vue'
-
-export const makeVSliderProps = propsFactory({
-  disabled: Boolean,
-  readonly: Boolean,
-  inverseLabel: Boolean,
-  max: {
-    type: [Number, String],
-    default: 100,
-  },
-  min: {
-    type: [Number, String],
-    default: 0,
-  },
-  stepSize: {
-    type: [Number, String],
-    default: 0,
-  },
-  thumbColor: String,
-  thumbLabel: {
-    type: [Boolean, String] as PropType<boolean | 'always' | undefined>,
-    default: undefined,
-    // validator: v => typeof v === 'boolean' || v === 'always',
-  },
-  thumbSize: {
-    type: [Number, String],
-    default: 20,
-  },
-  tickLabels: {
-    type: Array as PropType<string[]>,
-    default: () => ([]),
-  },
-  ticks: {
-    type: [Boolean, String] as PropType<boolean | 'always'>,
-    default: false,
-    // validator: v => typeof v === 'boolean' || v === 'always',
-  },
-  tickSize: {
-    type: [Number, String],
-    default: 2,
-  },
-  color: String,
-  trackColor: String,
-  trackFillColor: String,
-  trackSize: {
-    type: [Number, String],
-    default: 4,
-  },
-  direction: {
-    type: String as PropType<'horizontal' | 'vertical'>,
-    default: 'horizontal',
-    validator: (v: any) => ['vertical', 'horizontal'].includes(v),
-  },
-  reverse: Boolean,
-  label: String,
-
-  ...makeRoundedProps(),
-  ...makeElevationProps(),
-}, 'v-slider')
 
 export const VSlider = defineComponent({
   name: 'VSlider',
@@ -86,7 +25,7 @@ export const VSlider = defineComponent({
       default: 0,
     },
 
-    ...makeVSliderProps(),
+    ...makeSliderProps(),
   },
 
   emits: {

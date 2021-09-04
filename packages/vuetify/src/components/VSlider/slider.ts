@@ -1,13 +1,15 @@
 /* eslint-disable max-statements */
 // Composables
 import { useRtl } from '@/composables/rtl'
+import { makeRoundedProps } from '@/composables/rounded'
+import { makeElevationProps } from '@/composables/elevation'
 
 // Utilities
 import { computed, provide, ref, toRef } from 'vue'
-import { clamp } from '@/util'
+import { clamp, propsFactory } from '@/util'
 
 // Types
-import type { InjectionKey, Ref } from 'vue'
+import type { ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue'
 import type { VSliderTrack } from './VSliderTrack'
 
 type SliderProvide = {
@@ -42,7 +44,7 @@ type SliderProvide = {
   tickSize: Ref<number>
   trackContainerRef: Ref<VSliderTrack | undefined>
   vertical: Ref<boolean>
-};
+}
 
 export const VSliderSymbol: InjectionKey<SliderProvide> = Symbol.for('vuetify:v-slider')
 
@@ -61,28 +63,68 @@ function getPosition (e: MouseEvent | TouchEvent, position: 'clientX' | 'clientY
   else return (e as MouseEvent)[position]
 }
 
-export const useSlider = (
-  props: {
-    color?: string
-    direction: 'vertical' | 'horizontal'
-    disabled?: boolean
-    elevation?: number | string
-    label?: string
-    max: number | string
-    min: number | string
-    readonly?: boolean
-    rounded?: boolean | number | string
-    stepSize: number | string
-    thumbSize: number | string
-    tickSize: number | string
-    thumbColor?: string
-    thumbLabel?: boolean | 'always'
-    trackColor?: string
-    trackFillColor?: string
-    trackSize: number | string
-    ticks?: boolean | 'always'
-    tickLabels?: string[]
+export const makeSliderProps = propsFactory({
+  disabled: Boolean,
+  readonly: Boolean,
+  inverseLabel: Boolean,
+  max: {
+    type: [Number, String],
+    default: 100,
   },
+  min: {
+    type: [Number, String],
+    default: 0,
+  },
+  stepSize: {
+    type: [Number, String],
+    default: 0,
+  },
+  thumbColor: String,
+  thumbLabel: {
+    type: [Boolean, String] as PropType<boolean | 'always' | undefined>,
+    default: undefined,
+    // validator: v => typeof v === 'boolean' || v === 'always',
+  },
+  thumbSize: {
+    type: [Number, String],
+    default: 20,
+  },
+  tickLabels: {
+    type: Array as PropType<string[]>,
+    default: () => ([]),
+  },
+  ticks: {
+    type: [Boolean, String] as PropType<boolean | 'always'>,
+    default: false,
+    // validator: v => typeof v === 'boolean' || v === 'always',
+  },
+  tickSize: {
+    type: [Number, String],
+    default: 2,
+  },
+  color: String,
+  trackColor: String,
+  trackFillColor: String,
+  trackSize: {
+    type: [Number, String],
+    default: 4,
+  },
+  direction: {
+    type: String as PropType<'horizontal' | 'vertical'>,
+    default: 'horizontal',
+    validator: (v: any) => ['vertical', 'horizontal'].includes(v),
+  },
+  reverse: Boolean,
+  label: String,
+
+  ...makeRoundedProps(),
+  ...makeElevationProps(),
+}, 'slider')
+
+type SliderProps = ExtractPropTypes<ReturnType<typeof makeSliderProps>>
+
+export const useSlider = (
+  props: SliderProps,
   handleSliderMouseUp: (v: number) => void,
   handleMouseMove: (v: number) => void,
   getActiveThumb: (e: MouseEvent | TouchEvent) => HTMLElement,
