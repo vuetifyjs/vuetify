@@ -47,18 +47,31 @@ export default defineComponent({
       return a < b ? startThumbRef.value?.$el : stopThumbRef.value?.$el
     }
 
-    const { min, max, roundValue, onSliderMousedown, onSliderTouchstart, trackContainerRef, position } = useSlider(props, newValue => {
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      model.value = focusedThumb.value === startThumbRef.value ? [newValue, model.value[1]] : [model.value[0], newValue]
-    }, newValue => {
-      if (focusedThumb.value === startThumbRef.value) {
+    const {
+      min,
+      max,
+      roundValue,
+      onSliderMousedown,
+      onSliderTouchstart,
+      trackContainerRef,
+      position,
+    } = useSlider({
+      props,
+      handleSliderMouseUp: newValue => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        if (newValue <= model.value[1]) model.value = [newValue, model.value[1]]
-      } else {
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        if (newValue >= model.value[0]) model.value = [model.value[0], newValue]
-      }
-    }, getActiveThumb)
+        model.value = focusedThumb.value === startThumbRef.value ? [newValue, model.value[1]] : [model.value[0], newValue]
+      },
+      handleMouseMove: newValue => {
+        if (focusedThumb.value === startThumbRef.value) {
+          // eslint-disable-next-line @typescript-eslint/no-use-before-define
+          if (newValue <= model.value[1]) model.value = [newValue, model.value[1]]
+        } else {
+          // eslint-disable-next-line @typescript-eslint/no-use-before-define
+          if (newValue >= model.value[0]) model.value = [model.value[0], newValue]
+        }
+      },
+      getActiveThumb,
+    })
 
     const model = useProxiedModel(
       props,

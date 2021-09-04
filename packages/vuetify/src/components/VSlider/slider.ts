@@ -123,12 +123,17 @@ export const makeSliderProps = propsFactory({
 
 type SliderProps = ExtractPropTypes<ReturnType<typeof makeSliderProps>>
 
-export const useSlider = (
-  props: SliderProps,
-  handleSliderMouseUp: (v: number) => void,
-  handleMouseMove: (v: number) => void,
-  getActiveThumb: (e: MouseEvent | TouchEvent) => HTMLElement,
-) => {
+export const useSlider = ({
+  props,
+  handleSliderMouseUp,
+  handleMouseMove,
+  getActiveThumb,
+}: {
+  props: SliderProps
+  handleSliderMouseUp: (v: number) => void
+  handleMouseMove: (v: number) => void
+  getActiveThumb: (e: MouseEvent | TouchEvent) => HTMLElement
+}) => {
   const { isRtl } = useRtl()
   const min = computed(() => parseFloat(props.min))
   const max = computed(() => parseFloat(props.max))

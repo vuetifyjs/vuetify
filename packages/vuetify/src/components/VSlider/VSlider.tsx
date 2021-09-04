@@ -35,13 +35,22 @@ export const VSlider = defineComponent({
   setup (props, { attrs, emit, slots }) {
     const thumbContainerRef = ref()
 
-    const { min, max, roundValue, onSliderMousedown, onSliderTouchstart, trackContainerRef, position } = useSlider(props, newValue => {
+    const {
+      min,
+      max,
+      roundValue,
+      onSliderMousedown,
+      onSliderTouchstart,
+      trackContainerRef,
+      position,
+    } = useSlider({
+      props,
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      model.value = roundValue(newValue)
-    }, newValue => {
+      handleSliderMouseUp: newValue => model.value = roundValue(newValue),
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      model.value = roundValue(newValue)
-    }, () => thumbContainerRef.value?.$el)
+      handleMouseMove: newValue => model.value = roundValue(newValue),
+      getActiveThumb: () => thumbContainerRef.value?.$el,
+    })
 
     const model = useProxiedModel(
       props,
