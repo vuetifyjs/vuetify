@@ -210,7 +210,6 @@ export const useSlider = ({
   }
 
   const moveListenerOptions = { passive: true, capture: true }
-  const stopListenerOptions = { passive: false }
 
   function onMouseMove (e: MouseEvent | TouchEvent) {
     thumbMoved = true
@@ -224,7 +223,7 @@ export const useSlider = ({
     handleStop(e)
 
     window.removeEventListener('mousemove', onMouseMove, moveListenerOptions)
-    window.removeEventListener('mouseup', onSliderMouseUp, stopListenerOptions)
+    window.removeEventListener('mouseup', onSliderMouseUp)
   }
 
   function onSliderTouchend (e: TouchEvent) {
@@ -234,14 +233,14 @@ export const useSlider = ({
     handleStop(e)
 
     window.removeEventListener('touchmove', onMouseMove, moveListenerOptions)
-    window.removeEventListener('touchend', onSliderTouchend, stopListenerOptions)
+    window.removeEventListener('touchend', onSliderTouchend)
   }
 
   function onSliderTouchstart (e: TouchEvent) {
     handleStart(e)
 
     window.addEventListener('touchmove', onMouseMove, moveListenerOptions)
-    window.addEventListener('touchend', onSliderTouchend, stopListenerOptions)
+    window.addEventListener('touchend', onSliderTouchend, { passive: false })
   }
 
   function onSliderMousedown (e: MouseEvent) {
@@ -250,7 +249,7 @@ export const useSlider = ({
     handleStart(e)
 
     window.addEventListener('mousemove', onMouseMove, moveListenerOptions)
-    window.addEventListener('mouseup', onSliderMouseUp, stopListenerOptions)
+    window.addEventListener('mouseup', onSliderMouseUp, { passive: false })
   }
 
   const data: SliderProvide = {
