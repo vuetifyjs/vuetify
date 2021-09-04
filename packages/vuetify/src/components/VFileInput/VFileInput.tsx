@@ -105,15 +105,13 @@ export const VFileInput = defineComponent({
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || counterValue.value)
-      const [_, restAttrs] = pick(attrs, ['class'])
+      const [_1, rootAttrs] = pick(attrs, [/^on[A-Z]/])
+      const [_2, inputAttrs] = pick(attrs, ['class'])
 
       return (
         <VField
           ref={ fieldRef }
-          class={[
-            'v-file-input',
-            attrs.class,
-          ]}
+          class="v-file-input"
           active={ isDirty.value }
           dirty={ isDirty.value }
           prepend-icon={ props.prependIcon }
@@ -129,7 +127,7 @@ export const VFileInput = defineComponent({
 
             fieldRef.value.inputRef.value = ''
           } }
-          { ...attrs }
+          { ...rootAttrs }
           { ...props }
           v-slots={{
             ...slots,
@@ -154,7 +152,7 @@ export const VFileInput = defineComponent({
                     if (!isActive) inputRef.value?.focus()
                   } }
                   { ...slotProps }
-                  { ...restAttrs }
+                  { ...inputAttrs }
                 />
 
                 { isDirty.value && (
