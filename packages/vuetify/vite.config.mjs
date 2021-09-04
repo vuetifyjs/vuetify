@@ -1,17 +1,21 @@
 import path from 'path'
+import fs from 'fs'
+import { fileURLToPath } from 'url'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import viteSSR from 'vite-ssr/plugin'
+import viteSSR from 'vite-ssr/plugin.js'
 import { loadEnv, defineConfig } from 'vite'
-import vuetifyPackage from './package.json'
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const resolve = file => path.resolve(__dirname, file)
+
+const vuetifyPackage = fs.readFileSync('./package.json', 'utf-8')
 
 export default defineConfig(({ mode }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
 
   return {
-    root: path.resolve(__dirname, 'dev'),
+    root: resolve('dev'),
     server: {
       port: process.env.PORT,
       strictPort: !!process.env.PORT,
@@ -26,23 +30,11 @@ export default defineConfig(({ mode }) => {
     plugins: [
       vue(),
       vueJsx({ optimize: true, enableObjectSlots: false }),
-      viteSSR({
-        input: resolve('./dev/index.vite.html')
-      }),
-      {
-        name: 'configure-server',
-        configureServer(server) {
-          return () => {
-            server.middlewares.use('/', (req, res, next) => {
-              if (req.url === '/index.html') req.url = '/index.vite.html'
-              return next()
-            })
-          }
-        }
-      }
+      viteSSR(),
     ],
     define: {
-      __VUETIFY_VERSION__: JSON.stringify(vuetifyPackage.version)
+      __VUETIFY_VERSION__: JSON.stringify(vuetifyPackage.version),
+      'process.env.BABEL_TYPES_8_BREAKING': 'false',
     }
   }
 })
