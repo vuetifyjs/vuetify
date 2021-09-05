@@ -64,6 +64,7 @@
   position: absolute
   user-select: none
   transition: $slider-thumb-label-transition
+  opacity: 0.7
 
   &::before
     content: ''
@@ -83,7 +84,7 @@
 .v-slider.v-input--horizontal
   .v-slider-thumb
     top: 50%
-    transform: translate(var(--v-slider-thumb-offset), -50%)
+    transform: translateY(-50%)
 
   .v-slider-thumb__label-container
     left: calc(var(--v-slider-thumb-size) / 2)
@@ -100,9 +101,6 @@
 
 // Vertical
 .v-slider.v-input--vertical
-  .v-slider-thumb
-    transform: translateY(calc(var(--v-slider-thumb-offset) * -1))
-
   .v-slider-thumb__label-container
     top: calc(var(--v-slider-thumb-size) / 2)
     right: 0

@@ -43,6 +43,7 @@ export const VSlider = defineComponent({
       onSliderTouchstart,
       trackContainerRef,
       position,
+      hasLabels,
     } = useSlider({
       props,
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -61,7 +62,6 @@ export const VSlider = defineComponent({
 
         return roundValue(value)
       },
-      v => roundValue(v)
     )
 
     const isDirty = computed(() => model.value > min.value)
@@ -72,6 +72,9 @@ export const VSlider = defineComponent({
         <VInput
           class={[
             'v-slider',
+            {
+              'v-slider--has-labels': !!slots['tick-label'] || hasLabels.value,
+            },
           ]}
           disabled={props.disabled}
           dirty={isDirty.value}
@@ -97,6 +100,9 @@ export const VSlider = defineComponent({
                   ref={trackContainerRef}
                   start={0}
                   stop={trackStop.value}
+                  v-slots={{
+                    'tick-label': slots['tick-label'],
+                  }}
                 />
 
                 <VSliderThumb
@@ -113,7 +119,7 @@ export const VSlider = defineComponent({
                   onFocus={focus}
                   onBlur={blur}
                   v-slots={{
-                    label: slots['thumb-label'],
+                    'thumb-label': slots['thumb-label'],
                   }}
                 />
               </div>

@@ -55,6 +55,7 @@ export default defineComponent({
       onSliderTouchstart,
       trackContainerRef,
       position,
+      hasLabels,
     } = useSlider({
       props,
       handleSliderMouseUp: newValue => {
@@ -82,7 +83,6 @@ export default defineComponent({
 
         return arr.map(value => roundValue(value))
       },
-      v => v.map(roundValue)
     )
 
     const isDirty = computed(() => model.value.some(v => v > min.value))
@@ -95,6 +95,9 @@ export default defineComponent({
           class={[
             'v-slider',
             'v-range-slider',
+            {
+              'v-slider--has-labels': !!slots['tick-label'] || hasLabels.value,
+            },
           ]}
           ref={inputRef}
           disabled={props.disabled}
@@ -130,6 +133,9 @@ export default defineComponent({
                   ref={trackContainerRef}
                   start={trackStart.value}
                   stop={trackStop.value}
+                  v-slots={{
+                    'tick-label': slots['tick-label'],
+                  }}
                 />
 
                 <VSliderThumb
@@ -160,7 +166,7 @@ export default defineComponent({
                     focusedThumb.value = null
                   }}
                   v-slots={{
-                    label: slots['thumb-label'],
+                    'thumb-label': slots['thumb-label'],
                   }}
                   min={min.value}
                   max={model.value[1]}
@@ -185,7 +191,7 @@ export default defineComponent({
                     focusedThumb.value = null
                   }}
                   v-slots={{
-                    label: slots['thumb-label'],
+                    'thumb-label': slots['thumb-label'],
                   }}
                   min={model.value[0]}
                   max={max.value}

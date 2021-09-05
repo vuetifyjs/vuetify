@@ -6,11 +6,17 @@ import { makeElevationProps } from '@/composables/elevation'
 
 // Utilities
 import { computed, provide, ref, toRef } from 'vue'
-import { clamp, propsFactory } from '@/util'
+import { clamp, createRange, propsFactory } from '@/util'
 
 // Types
 import type { ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue'
 import type { VSliderTrack } from './VSliderTrack'
+
+type Tick = {
+  value: number
+  position: number
+  label?: string
+}
 
 type SliderProvide = {
   color: Ref<string | undefined>
@@ -30,7 +36,7 @@ type SliderProvide = {
   rounded: Ref<boolean | number | string | undefined>
   roundValue: (value: number) => number
   thumbLabel: Ref<boolean | string | undefined>
-  showTicks: Ref<boolean>
+  showTicks: Ref<boolean | 'always'>
   startOffset: Ref<number>
   stepSize: Ref<number>
   transition: Ref<string | undefined>
@@ -39,11 +45,13 @@ type SliderProvide = {
   trackColor: Ref<string | undefined>
   trackFillColor: Ref<string | undefined>
   trackSize: Ref<number>
-  tickLabels: Ref<string[] | undefined>
-  ticks: Ref<string | boolean | undefined>
+  ticks: Ref<number[] | Record<string, string> | undefined>
   tickSize: Ref<number>
   trackContainerRef: Ref<VSliderTrack | undefined>
   vertical: Ref<boolean>
+  showTickLabels: Ref<boolean | undefined>
+  parsedTicks: Ref<Tick[]>
+  hasLabels: Ref<boolean>
 }
 
 export const VSliderSymbol: InjectionKey<SliderProvide> = Symbol.for('vuetify:v-slider')
@@ -89,14 +97,17 @@ export const makeSliderProps = propsFactory({
     type: [Number, String],
     default: 20,
   },
-  tickLabels: {
-    type: Array as PropType<string[]>,
-    default: () => ([]),
+  showTicks: {
+    type: [Boolean, String] as PropType<boolean | 'always'>,
+    default: true,
+    // validator: v => typeof v === 'boolean' || v === 'always',
+  },
+  showTickLabels: {
+    type: Boolean,
+    default: false,
   },
   ticks: {
-    type: [Boolean, String] as PropType<boolean | 'always'>,
-    default: false,
-    // validator: v => typeof v === 'boolean' || v === 'always',
+    type: [Array, Object] as PropType<number[] | Record<string, string>>,
   },
   tickSize: {
     type: [Number, String],
@@ -156,13 +167,21 @@ export const useSlider = ({
   const trackColor = computed(() => props.disabled ? undefined : props.trackColor ?? props.color)
   const trackFillColor = computed(() => props.disabled ? undefined : props.trackFillColor ?? props.color)
 
-  const showTicks = computed(() => !!props.tickLabels?.length || !!(!props.disabled && stepSize.value && props.ticks))
-
   const mousePressed = ref(false)
   const transition = computed(() => mousePressed.value ? 'none' : undefined)
 
   const startOffset = ref(0)
   const trackContainerRef = ref<VSliderTrack | undefined>()
+
+  function roundValue (value: number) {
+    if (stepSize.value <= 0) return value
+
+    const clamped = clamp(value, min.value, max.value)
+    const offset = min.value % stepSize.value
+    const newValue = Math.round((clamped - offset) / stepSize.value) * stepSize.value + offset
+
+    return parseFloat(Math.min(newValue, max.value).toFixed(decimals.value))
+  }
 
   function parseMouseMove (e: MouseEvent | TouchEvent): number {
     const vertical = props.direction === 'vertical'
@@ -181,7 +200,7 @@ export const useSlider = ({
 
     if (vertical || isRtl.value) clickPos = 1 - clickPos
 
-    return min.value + clickPos * (max.value - min.value)
+    return roundValue(min.value + clickPos * (max.value - min.value))
   }
 
   let thumbMoved = false
@@ -252,6 +271,28 @@ export const useSlider = ({
     window.addEventListener('mouseup', onSliderMouseUp, { passive: false })
   }
 
+  const position = (val: number) => {
+    const percentage = (val - min.value) / (max.value - min.value) * 100
+    return clamp(isNaN(percentage) ? 0 : percentage, 0, 100)
+  }
+
+  const parsedTicks = computed<Tick[]>(() => {
+    if (!props.ticks) {
+      return numTicks.value !== Infinity ? createRange(numTicks.value + 1).map(t => ({
+        value: t,
+        position: (vertical.value ? numTicks.value - t : t) * (100 / numTicks.value),
+      })) : []
+    }
+    if (Array.isArray(props.ticks)) return props.ticks.map(t => ({ value: t, position: position(t), label: t.toString() }))
+    return Object.keys(props.ticks).map(key => ({
+      value: parseInt(key, 10),
+      position: position(parseInt(key, 10)),
+      label: (props.ticks as Record<string, string>)[key],
+    }))
+  })
+
+  const hasLabels = computed(() => parsedTicks.value.some(({ label }) => !!label))
+
   const data: SliderProvide = {
     color: toRef(props, 'color'),
     decimals,
@@ -265,19 +306,11 @@ export const useSlider = ({
     onSliderMousedown,
     onSliderTouchstart,
     parseMouseMove,
-    position: (val: number) => clamp((val - min.value) / (max.value - min.value) * 100, 0, 100),
+    position,
     readonly: toRef(props, 'readonly'),
     rounded: toRef(props, 'rounded'),
-    roundValue: (value: number) => {
-      if (stepSize.value <= 0) return value
-
-      const clamped = clamp(value, min.value, max.value)
-      const offset = min.value % stepSize.value
-      const newValue = Math.round((clamped - offset) / stepSize.value) * stepSize.value + offset
-
-      return parseFloat(Math.min(newValue, max.value).toFixed(decimals.value))
-    },
-    showTicks,
+    roundValue,
+    showTicks: toRef(props, 'showTicks'),
     startOffset,
     stepSize,
     transition,
@@ -286,12 +319,14 @@ export const useSlider = ({
     thumbColor,
     thumbLabel: toRef(props, 'thumbLabel'),
     ticks: toRef(props, 'ticks'),
-    tickLabels: toRef(props, 'tickLabels'),
+    parsedTicks,
+    hasLabels,
     tickSize,
     trackColor,
     trackContainerRef,
     trackFillColor,
     trackSize,
+    showTickLabels: toRef(props, 'showTickLabels'),
   }
 
   provide(VSliderSymbol, data)

@@ -20,6 +20,7 @@ $slider-thumb-label-offset: calc(var(--v-slider-thumb-size) / 2) !default;
 $slider-thumb-label-transition: .2s settings.$accelerated-easing !default;
 $slider-thumb-touch-size: 42px !default;
 $slider-tick-border-radius: 2px !default;
+$slider-tick-label-margin-bottom: 25px !default;
 $slider-track-border-radius: 6px !default;
 $slider-transition: .3s cubic-bezier(0.25, 0.8, 0.5, 1) !default;
 $slider-vertical-margin-bottom: 12px !default;

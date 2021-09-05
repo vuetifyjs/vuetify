@@ -130,8 +130,6 @@ export const VSliderThumb = defineComponent({
             transition: transition.value,
             [`inset-${inset}-start`]: `calc(${positionPercentage} - var(--v-slider-thumb-size) / 2)`,
             '--v-slider-thumb-size': size,
-            // 12 is slightly magic constant to account for ticks offset
-            '--v-slider-thumb-offset': convertToUnit((props.position - 50) / -(12)),
           }}
           role="slider"
           tabindex={disabled.value ? -1 : 0}
@@ -172,7 +170,7 @@ export const VSliderThumb = defineComponent({
                 ]}
               >
                 <div>
-                  {slots['thumb-label']?.({ value: props.modelValue }) ?? props.modelValue.toFixed(1)}
+                  {slots['thumb-label']?.({ modelValue: props.modelValue }) ?? props.modelValue.toFixed(1)}
                 </div>
               </div>
             </div>

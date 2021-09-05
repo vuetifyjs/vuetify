@@ -10,7 +10,7 @@ import { useRounded } from '@/composables/rounded'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { convertToUnit, createRange, defineComponent } from '@/util'
+import { convertToUnit, defineComponent } from '@/util'
 
 export const VSliderTrack = defineComponent({
   name: 'VSliderTrack',
@@ -38,14 +38,12 @@ export const VSliderTrack = defineComponent({
       trackColor,
       trackFillColor,
       vertical,
-      numTicks,
       tickSize,
       showTicks,
       trackSize,
       color,
-      ticks,
       rounded,
-      tickLabels,
+      parsedTicks,
     } = slider
 
     const { roundedClasses } = useRounded(rounded, 'v-slider-track')
@@ -82,22 +80,25 @@ export const VSliderTrack = defineComponent({
     })
 
     const computedTicks = computed(() => {
-      return createRange(numTicks.value + 1).map(index => {
-        const width = (vertical.value ? numTicks.value - index : index) * (100 / numTicks.value)
-        const filled = width >= props.start && width <= props.stop
-
+      return parsedTicks.value.map((tick, index) => {
+        const directionProperty = vertical.value ? 'inset-block-end' : 'margin-inline-start'
         return (
           <div
-            key={index}
+            key={tick.value}
             class={[
               'v-slider-track__tick',
               {
-                'v-slider-track__tick--filled': filled,
+                'v-slider-track__tick--filled': tick.position >= props.start && tick.position <= props.stop,
               },
             ]}
+            style={{
+              [directionProperty]: (tick.position > 0 && tick.position < 100) && convertToUnit(tick.position, '%'),
+            }}
           >
-            {tickLabels.value?.[index] && (
-              <div class="v-slider-track__tick-label">{tickLabels.value[index]}</div>
+            {(tick.label || slots['tick-label']) && (
+              <div class="v-slider-track__tick-label">
+                {slots['tick-label']?.({ index, tick }) ?? tick.label}
+              </div>
             )}
           </div>
         )
@@ -145,7 +146,7 @@ export const VSliderTrack = defineComponent({
               class={[
                 'v-slider-track__ticks',
                 {
-                  'v-slider-track__ticks--always-show': ticks.value === 'always',
+                  'v-slider-track__ticks--always-show': showTicks.value === 'always',
                 },
               ]}
             >

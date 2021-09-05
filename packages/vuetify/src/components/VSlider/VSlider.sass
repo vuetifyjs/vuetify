@@ -6,31 +6,13 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-// Theme
-// +theme(v-slider) using ($material)
-//   .v-slider__track-background,
-//   .v-slider__track-fill,
-//   .v-slider__thumb
-//     background: map-deep-get($material, 'slider', 'inactive')
-
 // Block
 .v-slider
-  // cursor: default
-  // display: flex
-  // align-items: center
-  // position: relative
-  // flex: 1
-  // user-select: none
-
   input
     cursor: default
     padding: 0
     width: 100%
     display: none
-
-  // .v-input__append, .v-input__prepend
-  //   align-self: center !important
-  //   margin-bottom: 0 !important
 
 // Elements
 .v-slider__container
@@ -44,17 +26,21 @@
 
 // Modifiers
 .v-slider.v-input--horizontal
-  .v-input__control
-    min-height: $slider-horizontal-min-height
   margin-left: $slider-horizontal-left
   margin-right: $slider-horizontal-right
 
-.v-slider.v-input--vertical
   .v-input__control
-    min-height: $slider-vertical-min-height
+    min-height: $slider-horizontal-min-height
 
+.v-slider.v-input--vertical
   margin-top: $slider-vertical-margin-top
   margin-bottom: $slider-vertical-margin-bottom
 
+  .v-input__control
+    min-height: $slider-vertical-min-height
+
 .v-slider.v-input--disabled
   pointer-events: none
+
+.v-slider--has-labels .v-input__control
+  margin-bottom: #{$slider-tick-label-margin-bottom / 2}
