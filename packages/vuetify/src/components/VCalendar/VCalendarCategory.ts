@@ -129,17 +129,6 @@ export default VCalendarDaily.extend({
       const data = {
         staticClass: 'v-calendar-category__column',
         on: this.getDefaultMouseEventHandlers(':time-category', e => {
-          if (e instanceof TouchEvent) {
-            const target = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY)
-
-            if (target?.parentElement?.parentElement) {
-              const dayContainerDom: Element = this.$refs['day-container'] as Element
-              const dailyDayArr = dayContainerDom.getElementsByClassName('v-calendar-daily__day')
-              const categoryIndex = Array.from(dailyDayArr).indexOf(target?.parentElement?.parentElement)
-              category = this.parsedCategories[categoryIndex]
-            }
-          }
-
           return this.getCategoryScope(this.getSlotScope(this.getTimestampAtEvent(e, day)), category)
         }),
       }

@@ -59,6 +59,21 @@ export default Vue.extend({
             if (eventOptions.stop) {
               e.stopPropagation()
             }
+
+            if (e instanceof TouchEvent) {
+              const target = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY)
+
+              if (target && !(e.target as HTMLElement)?.isSameNode(target) && (e.target as HTMLElement)?.className === target.className) {
+                target.dispatchEvent(new TouchEvent(e.type, {
+                  ...e,
+                  targetTouches: e.targetTouches as unknown as Touch[],
+                  touches: e.touches as unknown as Touch[],
+                  changedTouches: e.changedTouches as unknown as Touch[],
+                }))
+                return
+              }
+            }
+
             this.$emit(event, getEvent(e))
           }
 
