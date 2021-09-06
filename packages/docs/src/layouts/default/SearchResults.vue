@@ -32,7 +32,10 @@
         </v-list-item>
 
         <template v-else>
-          <v-list-item class="mb-0">
+          <v-list-item
+            :key="`search-${i}-${child.name}`"
+            class="mb-0"
+          >
             <v-list-item-content class="pb-1">
               <v-list-item-title
                 v-html="child.name"
@@ -42,6 +45,7 @@
 
           <v-list-item
             v-for="item in child.items"
+            :key="`search-${i}-children`"
             :to="item.url"
             class="pl-4 mb-0"
           >
