@@ -139,7 +139,7 @@ Lists can contain subheaders, dividers, and can contain 1 or more lines. The sub
 
 #### Expansion Lists
 
-A list can contain a group of items which will display on click utilizing `v-item-group`'s `activator` slot. Expansion lists are also used within the **[v-navigation-drawer](/components/navigation-drawers)** component.
+A list can contain a group of items which will display on click utilizing `v-list-group`'s `activator` slot. Expansion lists are also used within the **[v-navigation-drawer](/components/navigation-drawers)** component.
 
 <example file="v-list/slot-expansion-lists" />
 
