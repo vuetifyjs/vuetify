@@ -145,7 +145,9 @@ export default mixins<options &
       return this.step > 0 ? parseFloat(this.step) : 0
     },
     inputWidth (): number {
-      return (this.roundValue(this.internalValue) - this.minValue) / (this.maxValue - this.minValue) * 100
+      const inputWidth = (this.roundValue(this.internalValue) - this.minValue) / (this.maxValue - this.minValue) * 100
+
+      return isNaN(inputWidth) ? 0 : inputWidth
     },
     trackFillStyles (): Partial<CSSStyleDeclaration> {
       const startDir = this.vertical ? 'bottom' : 'left'
