@@ -3,6 +3,7 @@ import './VField.sass'
 
 // Components
 import { VBtn } from '@/components/VBtn'
+import { VMessages } from '@/components/VMessages'
 import { VExpandXTransition, VFadeTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 import { VInput } from '@/components/VInput'
@@ -11,7 +12,6 @@ import VFieldLabel from './VFieldLabel'
 
 // Composables
 import { makeThemeProps, useTheme } from '@/composables/theme'
-import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -54,7 +54,6 @@ export const makeVFieldProps = propsFactory({
     default: '$clear',
   },
   color: String,
-  error: Boolean,
   // TODO: implement auto
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hint: String,
@@ -72,7 +71,6 @@ export const makeVFieldProps = propsFactory({
   },
 
   ...makeThemeProps(),
-  ...makeTransitionProps({ transition: 'slide-y-transition' }),
 }, 'v-field')
 
 export const VField = defineComponent({
@@ -83,6 +81,12 @@ export const VField = defineComponent({
   props: {
     active: Boolean,
     dirty: Boolean,
+    error: Boolean,
+    messages: {
+      type: Array,
+      default: () => ([]),
+    },
+    success: Boolean,
 
     ...makeVFieldProps(),
   },
@@ -177,12 +181,14 @@ export const VField = defineComponent({
 
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
-      const hasDetails = (slots.details || props.hint)
+      const hasHint = !!(slots.hint || props.hint)
+      const hasMessages = !!(slots.messages || props.messages.length || hasHint)
+      const hasDetails = !props.hideDetails && hasMessages
+      const showMessages = !!(slotProps.value.isFocused || props.persistentHint || props.messages.length)
       const hasPrepend = (slots.prependInner || props.prependInnerIcon)
       const hasClear = (props.clearable || slots.clear)
       const hasAppend = (slots.appendInner || props.appendInnerIcon || hasClear)
       const isLoading = (slots.loading || props.loading)
-
       const label = slots.label
         ? slots.label({
           label: props.label,
@@ -200,6 +206,7 @@ export const VField = defineComponent({
               'v-field--dirty': props.dirty,
               'v-field--disabled': props.disabled,
               'v-field--error': props.error,
+              'v-field--success': props.success,
               'v-field--focused': isFocused.value,
               'v-field--loading': props.loading,
               'v-field--has-background': !!props.bgColor,
@@ -220,21 +227,15 @@ export const VField = defineComponent({
           v-slots={{
             prepend: slots.prepend && (() => slots.prepend?.(slotProps.value)),
             append: slots.append && (() => slots.append?.(slotProps.value)),
-            details: hasDetails && (() => (
+            details: !props.hideDetails && (() => (
               <>
-                <MaybeTransition transition={ props.transition }>
-                  <div
-                    v-show={
-                      (props.hint && (props.persistentHint || slotProps.value.isFocused)) ||
-                      props.error
-                    }
-                    class="v-field__details"
-                  >
-                    { !slots.details && props.hint }
+                <VMessages
+                  active={ showMessages }
+                  model-value={ props.messages.length ? props.messages : [props.hint] }
+                  v-slots={{ default: slots.messages }}
+                />
 
-                    { slots?.details?.(slotProps.value) }
-                  </div>
-                </MaybeTransition>
+                { slots?.details?.(slotProps.value) }
               </>
             )),
           }}
