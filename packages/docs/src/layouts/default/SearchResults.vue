@@ -44,8 +44,8 @@
           </v-list-item>
 
           <v-list-item
-            v-for="item in child.items"
-            :key="`search-${i}-children`"
+            v-for="(item, it) in child.items"
+            :key="`search-${i}-${ci}-${it}-children`"
             :to="item.url"
             class="pl-4 mb-0"
           >
