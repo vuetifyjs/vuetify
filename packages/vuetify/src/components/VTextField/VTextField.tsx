@@ -7,13 +7,14 @@ import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
 
 // Composables
+import { makeValidationProps, useValidation } from '@/composables/validation'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
 import Intersect from '@/directives/intersect'
 
 // Utilities
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { defineComponent, pick, useRender } from '@/util'
 
 // Types
@@ -36,14 +37,17 @@ export const VTextField = defineComponent({
     prefix: String,
     placeholder: String,
     persistentPlaceholder: Boolean,
+    persistentCounter: Boolean,
     suffix: String,
     type: {
       type: String,
       default: 'text',
     },
-    modelValue: String,
 
     ...makeVFieldProps(),
+    ...makeValidationProps({
+      modelValue: '',
+    }),
   },
 
   emits: {
@@ -52,6 +56,7 @@ export const VTextField = defineComponent({
 
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
+    const validation = useValidation(props)
 
     const internalDirty = ref(false)
     const isDirty = computed(() => {
@@ -62,6 +67,24 @@ export const VTextField = defineComponent({
       return typeof props.counterValue === 'function'
         ? props.counterValue(model.value)
         : model.value?.toString().length
+    })
+    const max = computed(() => {
+      if (attrs.maxlength) return attrs.maxlength as undefined
+
+      if (
+        !props.counter ||
+        (typeof props.counter !== 'number' &&
+        typeof props.counter !== 'string')
+      ) return undefined
+
+      return props.counter
+    })
+    const messages = computed(() => {
+      if (validation.errorMessages.value.length) {
+        return validation.errorMessages.value
+      }
+
+      return undefined
     })
 
     function onIntersect (
@@ -97,6 +120,8 @@ export const VTextField = defineComponent({
             attrs.class,
           ]}
           active={ isDirty.value }
+          error={ validation.isValid.value === false }
+          messages={ validation.errorMessages.value }
           onUpdate:active={ val => internalDirty.value = val }
           onClick:control={ focus }
           onClick:clear={ e => {
@@ -148,17 +173,18 @@ export const VTextField = defineComponent({
                 </>
               )
             },
-            details: hasCounter ? () => (
+            details: hasCounter && (({ isFocused }: VFieldSlot) => (
               <>
                 <span />
 
                 <VCounter
+                  active={ props.persistentCounter || isFocused }
                   value={ counterValue.value }
-                  max={ attrs.maxlength as undefined }
+                  max={ max.value }
                   v-slots={ slots.counter }
                 />
               </>
-            ) : undefined,
+            )),
           }}
         />
       )
