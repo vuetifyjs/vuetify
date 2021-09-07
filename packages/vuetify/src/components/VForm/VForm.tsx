@@ -1,48 +1,12 @@
-// Utilities
-import { defineComponent } from '@/util'
-import { inject, provide, ref } from 'vue'
-import type { InjectionKey, PropType, Ref } from 'vue'
+// Composables
+import { createForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
-interface FormProvide {
-  register: (
-    id: number,
-    validate: () => void,
-    reset: () => void,
-    clear: () => void
-  ) => void
-  unregister: (id: number) => void
-  items: Ref<any[]>
-}
+// Utilities
+import { defineComponent } from '@/util'
 
-export const VuetifyFormKey: InjectionKey<FormProvide> = Symbol.for('vuetify:form')
-
-export function createForm (props: any) {
-  const items = ref<any[]>([])
-
-  provide(VuetifyFormKey, {
-    register: (id, validate, reset, clear) => {
-      items.value.push({
-        id,
-        validate,
-        reset,
-        clear,
-      })
-    },
-    unregister: id => {
-      items.value = items.value.filter(field => {
-        return field.id !== id
-      })
-    },
-    items,
-  })
-
-  return { items }
-}
-
-export function useForm () {
-  return inject(VuetifyFormKey, null)
-}
+// Types
+import type { PropType } from 'vue'
 
 export const VForm = defineComponent({
   name: 'VForm',
@@ -66,7 +30,7 @@ export const VForm = defineComponent({
   },
 
   setup (props, { emit, slots }) {
-    const { items } = createForm(props)
+    const { items } = createForm()
     const model = useProxiedModel(props, 'modelValue')
 
     async function onSubmit (e: Event) {

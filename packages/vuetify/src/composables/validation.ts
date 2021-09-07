@@ -1,10 +1,12 @@
-import { getUid, propsFactory, wrapInPromise } from '@/util'
+// Composables
+import { useForm } from '@/composables/form'
+
 // Utilities
-import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
+import { computed, getCurrentInstance, onBeforeMount, onBeforeUnmount, ref } from 'vue'
+import { getUid, propsFactory, wrapInPromise } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { useForm } from '@/components/VForm/VForm'
 
 export type ValidationResult = string | true
 export type ValidationRule = string | ((value: any) => ValidationResult) | Promise<ValidationResult>
@@ -35,21 +37,38 @@ export function useValidation (props: ValidationProps) {
   const isPristine = ref(true)
   const isValid = computed(() => isPristine.value ? null : errorMessages.value.length === 0)
   const isValidating = ref(false)
-  const form = useForm()
-  const id = getUid()
+  const vm = getCurrentInstance()
 
-  if (form) {
-    onBeforeMount(() => {
-      form.register(id, validate, reset, clear)
-    })
+  if (vm) {
+    const form = useForm()
 
-    onBeforeUnmount(() => {
-      form.unregister(id)
-    })
+    if (form) {
+      const id = getUid()
+
+      onBeforeMount(() => {
+        form.register(id, validate, reset, clear)
+      })
+
+      onBeforeUnmount(() => {
+        form.unregister(id)
+      })
+    }
+  }
+
+  function reset () {
+    clear()
+
+    vm?.emit('update:modelValue', null)
+  }
+
+  function clear () {
+    isPristine.value = true
+    errorMessages.value = []
   }
 
   async function validate () {
     const results = []
+
     errorMessages.value = []
     isValidating.value = true
 
@@ -78,15 +97,6 @@ export function useValidation (props: ValidationProps) {
     isPristine.value = false
 
     return isValid.value
-  }
-
-  function reset () {
-    clear()
-  }
-
-  function clear () {
-    isPristine.value = true
-    errorMessages.value = []
   }
 
   return {
