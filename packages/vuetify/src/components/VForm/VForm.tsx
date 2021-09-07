@@ -3,7 +3,7 @@ import { createForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -33,7 +33,7 @@ export const VForm = defineComponent({
     const { items } = createForm()
     const model = useProxiedModel(props, 'modelValue')
 
-    async function onSubmit (e: Event) {
+    async function submit (e: Event) {
       e.preventDefault()
 
       model.value = null
@@ -51,7 +51,7 @@ export const VForm = defineComponent({
       emit('submit', e)
     }
 
-    async function onReset (e: Event) {
+    async function reset (e: Event) {
       e.preventDefault()
 
       items.value.forEach(item => item.reset())
@@ -60,25 +60,37 @@ export const VForm = defineComponent({
       emit('reset', e)
     }
 
-    async function onClear () {
+    async function clear () {
       items.value.forEach(item => item.clear())
       model.value = null
 
       emit('clear')
     }
 
-    return () => (
-      <form
-        class="v-form"
-        novalidate
-        onReset={ onReset }
-        onSubmit={ onSubmit }
-      >
-        { slots.default?.({
-          items,
-          onClear,
-        }) }
-      </form>
-    )
+    useRender(() => {
+      return (
+        <form
+          class="v-form"
+          novalidate
+          onReset={ reset }
+          onSubmit={ submit }
+        >
+          {
+            slots.default?.({
+              clear,
+              items,
+              reset,
+              submit,
+            })
+          }
+        </form>
+      )
+    })
+
+    return {
+      clear,
+      reset,
+      submit,
+    }
   },
 })
