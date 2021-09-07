@@ -1,7 +1,11 @@
 // Styles
 import './VCounter.sass'
 
+// Components
+import { VSlideYTransition } from '@/components/transitions'
+
 // Utilities
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { computed, defineComponent } from 'vue'
 
 export const VCounter = defineComponent({
@@ -10,11 +14,16 @@ export const VCounter = defineComponent({
   functional: true,
 
   props: {
+    active: Boolean,
     max: [Number, String],
     value: {
       type: [Number, String],
       default: 0,
     },
+
+    ...makeTransitionProps({
+      transition: { component: VSlideYTransition },
+    }),
   },
 
   setup (props, { slots }) {
@@ -25,14 +34,18 @@ export const VCounter = defineComponent({
     return () => {
       return (
         <div class="v-counter">
-          { slots.default
-            ? slots.default({
-              counter: counter.value,
-              max: props.max,
-              value: props.value,
-            })
-            : counter.value
-          }
+          <MaybeTransition transition={ props.transition } appear>
+            <div v-show={ props.active }>
+              { slots.default
+                ? slots.default({
+                  counter: counter.value,
+                  max: props.max,
+                  value: props.value,
+                })
+                : counter.value
+              }
+            </div>
+          </MaybeTransition>
         </div>
       )
     }
