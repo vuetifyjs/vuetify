@@ -39,7 +39,7 @@ function checkEvent (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirect
   // Toggleable can return true if it wants to deactivate.
   // Note that, because we're in the capture phase, this callback will occur before
   // the bubbling click event on any outside elements.
-  return !elements.some(el => el.contains(e.target as Node))
+  return !elements.some(el => el?.contains(e.target as Node))
 }
 
 function checkIsActive (e: MouseEvent, binding: ClickOutsideDirectiveBinding): boolean | void {
