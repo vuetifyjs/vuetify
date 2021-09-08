@@ -3,7 +3,6 @@ import './VField.sass'
 
 // Components
 import { VBtn } from '@/components/VBtn'
-import { VMessages } from '@/components/VMessages'
 import { VExpandXTransition, VFadeTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 import { VInput } from '@/components/VInput'
@@ -12,6 +11,7 @@ import VFieldLabel from './VFieldLabel'
 
 // Composables
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeValidationProps, useValidation } from '@/composables/validation'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -54,13 +54,9 @@ export const makeVFieldProps = propsFactory({
     default: '$clear',
   },
   color: String,
-  // TODO: implement auto
-  hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
-  hint: String,
   id: String,
   label: String,
   loading: Boolean,
-  persistentHint: Boolean,
   prependInnerIcon: String,
   reverse: Boolean,
   singleLine: Boolean,
@@ -71,6 +67,7 @@ export const makeVFieldProps = propsFactory({
   },
 
   ...makeThemeProps(),
+  ...makeValidationProps(),
 }, 'v-field')
 
 export const VField = defineComponent({
@@ -81,12 +78,6 @@ export const VField = defineComponent({
   props: {
     active: Boolean,
     dirty: Boolean,
-    error: Boolean,
-    messages: {
-      type: Array,
-      default: () => ([]),
-    },
-    success: Boolean,
 
     ...makeVFieldProps(),
   },
@@ -97,6 +88,7 @@ export const VField = defineComponent({
     'click:append-inner': (e: MouseEvent) => true as any,
     'click:control': (props: DefaultInputSlot) => true as any,
     'update:active': (active: boolean) => true as any,
+    'update:modelValue': (val: string) => true as any,
   },
 
   setup (props, { attrs, emit, slots }) {
@@ -117,6 +109,7 @@ export const VField = defineComponent({
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
       return isFocused.value ? props.color : undefined
     }))
+    const { errorMessages, validationClasses } = useValidation(props, 'v-field')
 
     watch(isActive, val => {
       if (!props.singleLine) {
@@ -181,10 +174,6 @@ export const VField = defineComponent({
 
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
-      const hasHint = !!(slots.hint || props.hint)
-      const hasMessages = !!(slots.messages || props.messages.length || hasHint)
-      const hasDetails = !props.hideDetails && hasMessages
-      const showMessages = !!(slotProps.value.isFocused || props.persistentHint || props.messages.length)
       const hasPrepend = (slots.prependInner || props.prependInnerIcon)
       const hasClear = (props.clearable || slots.clear)
       const hasAppend = (slots.appendInner || props.appendInnerIcon || hasClear)
@@ -205,39 +194,28 @@ export const VField = defineComponent({
               'v-field--appended': hasAppend,
               'v-field--dirty': props.dirty,
               'v-field--disabled': props.disabled,
-              'v-field--error': props.error,
-              'v-field--success': props.success,
               'v-field--focused': isFocused.value,
               'v-field--loading': props.loading,
               'v-field--has-background': !!props.bgColor,
-              'v-field--has-details': hasDetails,
-              'v-field--hide-details': props.hideDetails,
               'v-field--prepended': hasPrepend,
               'v-field--reverse': props.reverse,
               'v-field--single-line': props.singleLine,
               [`v-field--variant-${props.variant}`]: true,
             },
             themeClasses.value,
+            validationClasses.value,
             textColorClasses.value,
           ]}
           style={[
             textColorStyles.value,
           ]}
+          focused={ isFocused.value }
+          messages={ props.errorMessages?.length ? props.errorMessages : errorMessages.value }
           { ...attrs }
           v-slots={{
             prepend: slots.prepend && (() => slots.prepend?.(slotProps.value)),
             append: slots.append && (() => slots.append?.(slotProps.value)),
-            details: !props.hideDetails && (() => (
-              <>
-                <VMessages
-                  active={ showMessages }
-                  model-value={ props.messages.length ? props.messages : [props.hint] }
-                  v-slots={{ default: slots.messages }}
-                />
-
-                { slots?.details?.(slotProps.value) }
-              </>
-            )),
+            details: slots.details && (() => slots?.details?.(slotProps.value)),
           }}
         >
           <div

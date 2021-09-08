@@ -12,12 +12,19 @@ export type ValidationResult = string | true
 export type ValidationRule = string | ((value: any) => ValidationResult) | Promise<ValidationResult>
 
 export interface ValidationProps {
+  error: boolean
+  errorMessages: string | string[]
   maxErrors?: string | number
   rules: ValidationRule[]
   modelValue?: any
 }
 
 export const makeValidationProps = propsFactory({
+  error: Boolean,
+  errorMessages: {
+    type: [Array, String] as PropType<string | string[]>,
+    default: () => ([]),
+  },
   maxErrors: {
     type: [Number, String],
     default: 1,
@@ -28,17 +35,34 @@ export const makeValidationProps = propsFactory({
   },
   modelValue: {
     type: [Number, String, Array, Object],
-    default: undefined,
+    default: '',
   },
 })
 
-export function useValidation (props: ValidationProps) {
+export function useValidation (props: ValidationProps, name: string) {
   const errorMessages = ref<string[]>([])
   const isPristine = ref(true)
-  const isValid = computed(() => isPristine.value ? null : errorMessages.value.length === 0)
-  const isValidating = ref(false)
-  const vm = getCurrentInstance()
+  const isValid = computed(() => {
+    if (
+      props.error ||
+      props.errorMessages?.length ||
+      errorMessages.value.length
+    ) return false
 
+    return isPristine.value ? null : true
+  })
+  const isValidating = ref(false)
+  const validationClasses = computed(() => {
+    const classes: string[] = []
+
+    if (isValid.value !== false) return classes
+
+    classes.push(`${name}--error`)
+
+    return classes
+  })
+
+  const vm = getCurrentInstance()
   if (vm) {
     const form = useForm()
 
@@ -107,5 +131,6 @@ export function useValidation (props: ValidationProps) {
     clear,
     reset,
     validate,
+    validationClasses,
   }
 }

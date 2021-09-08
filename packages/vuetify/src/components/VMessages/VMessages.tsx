@@ -8,15 +8,16 @@ import { VSlideYTransition } from '@/components/transitions'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, wrapInArray } from '@/util'
+import { computed } from 'vue'
 
 export const VMessages = defineComponent({
   name: 'VMessages',
 
   props: {
     active: Boolean,
-    modelValue: {
-      type: Array,
+    value: {
+      type: [Array, String],
       default: () => ([]),
     },
 
@@ -29,14 +30,16 @@ export const VMessages = defineComponent({
   },
 
   setup (props, { slots }) {
+    const messages = computed(() => wrapInArray(props.value))
+
     return () => (
       <MaybeTransition
         transition={ props.transition }
         tag="div"
         class="v-messages"
       >
-        { (props.modelValue.length > 0 && props.active) && (
-          props.modelValue.map((message, i) => (
+        { (messages.value.length > 0 && props.active) && (
+          messages.value.map((message, i) => (
             <div class="v-messages__message" key={ i }>
               { message }
             </div>
