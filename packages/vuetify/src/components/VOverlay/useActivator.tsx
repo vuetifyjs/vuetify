@@ -1,10 +1,9 @@
 // Utilities
-import { IN_BROWSER, propsFactory } from '@/util'
+import { getCurrentInstance, IN_BROWSER, propsFactory } from '@/util'
 import { makeDelayProps, useDelay } from '@/composables/delay'
 import {
   computed,
   effectScope,
-  getCurrentInstance,
   nextTick,
   onScopeDispose,
   ref,
@@ -191,7 +190,7 @@ function _useActivator (props: ActivatorProps, { activatorEl, activatorEvents }:
     })
   }
 
-  const vm = getCurrentInstance()
+  const vm = getCurrentInstance('useActivator')
   function getActivator (selector = props.activator): HTMLElement | undefined {
     let activator
     if (selector) {

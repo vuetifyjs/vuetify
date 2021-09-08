@@ -3,6 +3,7 @@ import {
   colorToRGB,
   createRange,
   darken,
+  getCurrentInstance,
   getLuma,
   intToHex,
   lighten,
@@ -10,7 +11,7 @@ import {
   propsFactory,
 } from '@/util'
 // Utilities
-import { computed, getCurrentInstance, inject, provide, ref, watch } from 'vue'
+import { computed, inject, provide, ref, watch } from 'vue'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
@@ -333,10 +334,10 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
  * along the closest available already provided instance.
  */
 export function useTheme (props: { theme?: string }) {
-  const vm = getCurrentInstance()
+  getCurrentInstance('useTheme')
+
   const theme = inject(ThemeSymbol, null)
 
-  if (!vm) consoleError('provideTheme must be called from inside a setup function')
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
   const current = computed<string>(() => {

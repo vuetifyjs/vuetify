@@ -1,7 +1,9 @@
-// Utilities
-import { computed, getCurrentInstance, inject, onBeforeUnmount, onMounted, provide, reactive, toRef } from 'vue'
+// Composables
 import { useProxiedModel } from './proxiedModel'
-import { consoleWarn, deepEqual, findChildren, getUid, propsFactory, wrapInArray } from '@/util'
+
+// Utilities
+import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef } from 'vue'
+import { consoleWarn, deepEqual, findChildren, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { ComponentInternalInstance, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
@@ -71,7 +73,7 @@ export function useGroupItem (
   props: { value?: unknown, disabled?: boolean, selectedClass?: string },
   injectKey: InjectionKey<GroupProvide>,
 ): GroupItemProvide {
-  const vm = getCurrentInstance()
+  const vm = getCurrentInstance('useGroupItem')
 
   if (!vm) {
     throw new Error(
@@ -139,7 +141,7 @@ export function useGroup (
     }
   )
 
-  const groupVm = getCurrentInstance()
+  const groupVm = getCurrentInstance('useGroup')
 
   function register (item: GroupItem, vm: ComponentInternalInstance) {
     // Is there a better way to fix this typing?

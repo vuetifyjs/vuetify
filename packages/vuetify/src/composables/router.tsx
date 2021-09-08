@@ -1,8 +1,7 @@
 // Utilities
-import { propsFactory } from '@/util'
+import { getCurrentInstance, propsFactory } from '@/util'
 import {
   computed,
-  getCurrentInstance,
   onBeforeUnmount,
   onMounted,
   resolveDynamicComponent,
@@ -22,13 +21,13 @@ import type {
 } from 'vue-router'
 
 export function useRoute (): Ref<RouteLocationNormalizedLoaded | undefined> {
-  const vm = getCurrentInstance()
+  const vm = getCurrentInstance('useRoute')
 
   return computed(() => vm?.proxy?.$route)
 }
 
 export function useRouter (): Router | undefined {
-  return getCurrentInstance()?.proxy?.$router
+  return getCurrentInstance('useRouter')?.proxy?.$router
 }
 
 export interface LinkProps extends Partial<RouterLinkOptions> {
