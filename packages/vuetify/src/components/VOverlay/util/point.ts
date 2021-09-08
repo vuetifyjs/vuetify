@@ -1,4 +1,5 @@
 import type { ParsedAnchor } from './anchor'
+import type { Box } from '@/util/box'
 
 type Point = { x: number, y: number }
 declare class As<T extends string> {
@@ -9,7 +10,7 @@ type ViewportPoint = Point & As<'viewport'>
 type Offset = Point & As<'offset'>
 
 /** Convert a point in local space to viewport space */
-export function elementToViewport (point: ElementPoint, offset: Offset | DOMRect) {
+export function elementToViewport (point: ElementPoint, offset: Offset | Box) {
   return {
     x: point.x + offset.x,
     y: point.y + offset.y,
@@ -17,7 +18,7 @@ export function elementToViewport (point: ElementPoint, offset: Offset | DOMRect
 }
 
 /** Convert a point in viewport space to local space */
-export function viewportToElement (point: ViewportPoint, offset: Offset | DOMRect) {
+export function viewportToElement (point: ViewportPoint, offset: Offset | Box) {
   return {
     x: point.x - offset.x,
     y: point.y - offset.y,
@@ -33,7 +34,7 @@ export function getOffset<T extends Point> (a: T, b: T) {
 }
 
 /** Convert an anchor object to a point in local space */
-export function anchorToPoint (anchor: ParsedAnchor, box: DOMRect): ViewportPoint {
+export function anchorToPoint (anchor: ParsedAnchor, box: Box): ViewportPoint {
   if (anchor.side === 'top' || anchor.side === 'bottom') {
     const { side, align } = anchor
 

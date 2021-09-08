@@ -7,6 +7,7 @@ import { anchorToPoint, getOffset } from './util/point'
 // Types
 import type { EffectScope, PropType, Ref } from 'vue'
 import type { Anchor } from './util/anchor'
+import { Box } from '@/util/box'
 
 export interface PositionStrategyData {
   contentEl: Ref<HTMLElement | undefined>
@@ -142,7 +143,9 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
   // eslint-disable-next-line max-statements
   function updatePosition () {
     observe = false
-    requestAnimationFrame(() => observe = true)
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => observe = true)
+    })
 
     const targetBox = data.activatorEl.value!.getBoundingClientRect()
     // TODO: offset shouldn't affect width
@@ -216,10 +219,10 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
     )
 
     const targetPoint = anchorToPoint(anchor, targetBox)
-    const contentPoint = anchorToPoint(origin, {
+    const contentPoint = anchorToPoint(origin, new Box({
       ...contentBox,
       height: Math.min(contentHeight, maxHeight),
-    })
+    }))
 
     const { x, y } = getOffset(targetPoint, contentPoint)
 
