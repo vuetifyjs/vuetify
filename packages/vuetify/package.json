@@ -58,7 +58,6 @@
     "./components/*": "./lib/components/*/index.mjs",
     "./directives": "./lib/directives/index.mjs",
     "./directives/*": "./lib/directives/*/*.mjs",
-    "./composables": "./lib/composables/index.mjs",
     "./locale": "./lib/locale/index.mjs",
     "./iconsets/*": "./lib/iconsets/*.mjs",
     "./*": "./*"

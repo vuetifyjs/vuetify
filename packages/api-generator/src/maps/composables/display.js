@@ -96,8 +96,7 @@ module.exports = {
           xxl: 2560,
         },
         snippet: `
-// Composables
-import { useDisplay } from 'vuetify/lib/composables/display'
+import { useDisplay } from 'vuetify'
 
 export default {
   mounted () {

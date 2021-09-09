@@ -19,6 +19,8 @@ import type { LocaleAdapter, LocaleOptions } from '@/composables/locale'
 import type { RtlOptions } from '@/composables/rtl'
 import type { DefaultsOptions } from '@/composables/defaults'
 
+export * from './composables'
+
 export interface VuetifyOptions {
   components?: Record<string, any>
   directives?: Record<string, any>
