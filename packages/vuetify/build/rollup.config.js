@@ -1,4 +1,4 @@
-import path from 'path'
+import { posix as path } from 'path'
 import mkdirp from 'mkdirp'
 import { writeFile } from 'fs/promises'
 
