@@ -105,8 +105,7 @@ export const VFileInput = defineComponent({
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || counterValue.value)
-      const [_1, rootAttrs] = pick(attrs, [/^on[A-Z]/])
-      const [_2, inputAttrs] = pick(attrs, ['class'])
+      const [rootAttrs, inputAttrs] = pick(attrs, ['class', 'style', 'id', /^data-/, /^(?!on[A-Z]).*$/])
 
       return (
         <VField
