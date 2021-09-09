@@ -47,6 +47,7 @@ export default defineComponent({
     alt: String,
     cover: Boolean,
     eager: Boolean,
+    gradient: String,
     lazySrc: String,
     options: {
       type: Object as PropType<IntersectionObserverInit>,
@@ -57,10 +58,6 @@ export default defineComponent({
         rootMargin: undefined,
         threshold: undefined,
       }),
-    },
-    position: {
-      type: String,
-      default: 'center center',
     },
     sizes: String,
     src: {
@@ -244,6 +241,12 @@ export default defineComponent({
       )
     })
 
+    const __gradient = computed(() => {
+      if (!props.gradient) return
+
+      return <div class="v-img__gradient" style={{ backgroundImage: `linear-gradient(${props.gradient})` }} />
+    })
+
     useRender(() => (
       <VResponsive
         class="v-img"
@@ -255,7 +258,7 @@ export default defineComponent({
           options: props.options,
         }, null, ['once']]}
         v-slots={{
-          additional: () => [__image.value, __preloadImage.value, __placeholder.value, __error.value],
+          additional: () => [__image.value, __preloadImage.value, __gradient.value, __placeholder.value, __error.value],
           default: slots.default,
         }}
       />
