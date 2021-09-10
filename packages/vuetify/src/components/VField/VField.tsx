@@ -2,7 +2,6 @@
 import './VField.sass'
 
 // Components
-import { VBtn } from '@/components/VBtn'
 import { VExpandXTransition, VFadeTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 import { VInput } from '@/components/VInput'
@@ -281,25 +280,26 @@ export const VField = defineComponent({
               } as VFieldSlot) }
             </div>
 
+            { hasClear && (
+              <VExpandXTransition>
+                <div
+                  class="v-field__clearable"
+                  onClick={ (e: Event) => emit('click:clear', e) }
+                  v-show={ inputRef.value?.value }
+                >
+                  { slots.clear
+                    ? slots.clear()
+                    : <VIcon icon={ props.clearIcon } />
+                  }
+                </div>
+              </VExpandXTransition>
+            ) }
+
             { hasAppend && (
               <div
                 class="v-field__append-inner"
                 onClick={ e => emit('click:append-inner', e) }
               >
-                <VExpandXTransition>
-                  { hasClear && inputRef.value?.value && (
-                    <div class="v-field__clearable">
-                      <VBtn
-                        density="compact"
-                        icon={ props.clearIcon }
-                        tabindex="-1"
-                        variant="text"
-                        onClick={ (e: Event) => emit('click:clear', e) }
-                      />
-                    </div>
-                  ) }
-                </VExpandXTransition>
-
                 { slots?.appendInner?.(slotProps.value) }
 
                 { props.appendInnerIcon && (
