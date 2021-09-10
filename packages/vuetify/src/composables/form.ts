@@ -1,8 +1,10 @@
 // Utilities
-import { inject, provide, ref } from 'vue'
+import { getCurrentInstance, inject, provide, ref } from 'vue'
+import { propsFactory } from '@/util'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Types
-import type { InjectionKey, Ref } from 'vue'
+import type { InjectionKey, PropType, Ref } from 'vue'
 
 interface FormProvide {
   register: (
@@ -24,8 +26,66 @@ interface FormInput {
 
 export const FormKey: InjectionKey<FormProvide> = Symbol.for('vuetify:form')
 
-export function createForm () {
+export interface FormProps {
+  disabled: boolean
+  fastFail: boolean
+  lazyValidation: boolean
+  readonly: boolean
+  modelValue: boolean | null
+}
+
+export const makeFormProps = propsFactory({
+  disabled: Boolean,
+  fastFail: Boolean,
+  lazyValidation: Boolean,
+  readonly: Boolean,
+  modelValue: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
+})
+
+export function createForm (props: FormProps) {
   const items = ref<FormInput[]>([])
+  const model = useProxiedModel(props, 'modelValue')
+  const vm = getCurrentInstance()
+  const isValidating = ref(false)
+
+  async function submit (e: Event) {
+    e.preventDefault()
+
+    let valid = true
+    model.value = null
+    isValidating.value = true
+
+    for (const item of items.value) {
+      const result = await item.validate()
+
+      if (!result && valid) valid = false
+      if (!valid && props.fastFail) break
+    }
+
+    model.value = valid
+    isValidating.value = false
+
+    vm?.emit('submit', e)
+  }
+
+  async function reset (e: Event) {
+    e.preventDefault()
+
+    items.value.forEach(item => item.reset())
+    model.value = null
+
+    vm?.emit('reset', e)
+  }
+
+  async function clear () {
+    items.value.forEach(item => item.clear())
+    model.value = null
+
+    vm?.emit('clear')
+  }
 
   provide(FormKey, {
     register: (id, validate, reset, clear) => {
@@ -37,14 +97,20 @@ export function createForm () {
       })
     },
     unregister: id => {
-      items.value = items.value.filter(field => {
-        return field.id !== id
+      items.value = items.value.filter(item => {
+        return item.id !== id
       })
     },
     items,
   })
 
-  return { items }
+  return {
+    isValidating,
+    items,
+    submit,
+    clear,
+    reset,
+  }
 }
 
 export function useForm () {
