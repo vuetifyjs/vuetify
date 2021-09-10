@@ -33,20 +33,21 @@ export const VCounter = defineComponent({
 
     return () => {
       return (
-        <div class="v-counter">
-          <MaybeTransition transition={ props.transition }>
-            <div v-show={ props.active }>
-              { slots.default
-                ? slots.default({
-                  counter: counter.value,
-                  max: props.max,
-                  value: props.value,
-                })
-                : counter.value
-              }
-            </div>
-          </MaybeTransition>
-        </div>
+        <MaybeTransition transition={ props.transition }>
+          <div
+            v-show={ props.active }
+            class="v-counter"
+          >
+            { slots.default
+              ? slots.default({
+                counter: counter.value,
+                max: props.max,
+                value: props.value,
+              })
+              : counter.value
+            }
+          </div>
+        </MaybeTransition>
       )
     }
   },

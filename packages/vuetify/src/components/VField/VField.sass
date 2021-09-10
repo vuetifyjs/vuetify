@@ -11,7 +11,8 @@
   font-size: $field-font-size
   letter-spacing: $field-letter-spacing
   max-width: $field-max-width
-  transition: color $field-transition-timing
+  transition: $field-transition
+  // transition: color $field-transition-timing
   --v-field-padding-before: #{$field-control-padding}
   --v-field-padding-after: #{$field-control-padding}
 
@@ -119,8 +120,8 @@
 .v-field .v-input__append
   align-items: center
   display: flex
-  opacity: .6
-  transition: opacity $field-transition-timing
+  // opacity: .6
+  // transition: opacity $field-transition-timing
 
 .v-field__prepend-inner,
 .v-field__append-inner,
@@ -148,7 +149,8 @@
 .v-field__clearable
   cursor: pointer
   opacity: 0
-  transition: $field-clearable-transition
+  margin-inline-end: 4px
+  transition-duration: 150ms
 
   .v-field--focused &,
   .v-field__control:hover &,
@@ -170,7 +172,8 @@
   position: absolute
   text-overflow: ellipsis
   transform-origin: left center
-  transition: opacity $field-transition-timing, transform $field-transition-timing
+  transition-duration: 150ms
+  transition-property: opacity, transform
   white-space: nowrap
 
   margin-inline-start: var(--v-field-padding-before)
@@ -257,8 +260,9 @@
       border-color: currentColor
       border-style: solid
       border-width: 0 0 $field-focused-border-width
-      transition: transform $field-transition-timing
       transform: scaleX(0)
+      transition-duration: 150ms
+      transition-property: transform
       @include tools.absolute()
 
       @at-root #{selector.append('.v-field--focused', &)}
@@ -273,7 +277,8 @@
     &__end
       border: 0 solid currentColor
       opacity: var(--v-field-border-opacity)
-      transition: opacity $field-subtle-transition-timing
+      transition-duration: 150ms
+      transition-property: opacity
 
     &__start
       flex: 0 0 $field-control-affixed-padding
@@ -295,7 +300,8 @@
       &::before,
       &::after
         opacity: var(--v-field-border-opacity)
-        transition: opacity $field-subtle-transition-timing
+        transition-duration: 150ms
+        transition-property: opacity
         @include tools.absolute()
 
       &::before
