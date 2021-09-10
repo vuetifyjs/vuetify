@@ -2,7 +2,7 @@
 import './VField.sass'
 
 // Components
-import { VExpandXTransition, VFadeTransition } from '@/components/transitions'
+import { VExpandXTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 import { VInput } from '@/components/VInput'
 import { VProgressLinear } from '@/components/VProgressLinear'
@@ -177,7 +177,6 @@ export const VField = defineComponent({
       const hasPrepend = (slots.prependInner || props.prependInnerIcon)
       const hasClear = (props.clearable || slots.clear)
       const hasAppend = (slots.appendInner || props.appendInnerIcon || hasClear)
-      const isLoading = (slots.loading || props.loading)
       const label = slots.label
         ? slots.label({
           label: props.label,
@@ -229,21 +228,18 @@ export const VField = defineComponent({
           >
             <div class="v-field__overlay" />
 
-            <VFadeTransition>
-              <div
-                class="v-field__loader"
-                v-show={ isLoading }
-              >
-                { slots?.loader?.() }
+            <div class="v-field__loader">
+              { slots?.loader?.() }
 
-                { !slots.loader && (
-                  <VProgressLinear
-                    height="2"
-                    indeterminate
-                  />
-                ) }
-              </div>
-            </VFadeTransition>
+              { !slots.loader && (
+                <VProgressLinear
+                  active={ props.loading }
+                  color={ props.color }
+                  height="2"
+                  indeterminate
+                />
+              ) }
+            </div>
 
             { hasPrepend && (
               <div
