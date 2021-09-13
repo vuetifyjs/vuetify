@@ -44,7 +44,9 @@ export const VInput = defineComponent({
       const hasAppend = (slots.append || props.appendIcon)
       const hasHint = !!(slots.hint || props.hint)
       const hasMessages = !!(slots.messages || props.messages?.length)
-      const hasDetails = !props.hideDetails && (hasMessages || hasHint)
+      const hasDetails = !props.hideDetails || (
+        props.hideDetails === 'auto' && (hasMessages || hasHint)
+      )
       const showMessages = hasMessages || (
         hasHint &&
         (props.persistentHint || props.focused)
