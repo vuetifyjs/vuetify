@@ -12,7 +12,6 @@
   letter-spacing: $field-letter-spacing
   max-width: $field-max-width
   transition: $field-transition
-  // transition: color $field-transition-timing
   --v-field-padding-before: #{$field-control-padding}
   --v-field-padding-after: #{$field-control-padding}
 
@@ -116,20 +115,16 @@
 /* region AFFIXES */
 .v-field__prepend-inner,
 .v-field__append-inner,
+.v-field__clearable,
 .v-field .v-input__prepend,
 .v-field .v-input__append
   align-items: center
   display: flex
-  // opacity: .6
-  // transition: opacity $field-transition-timing
 
 .v-field__prepend-inner,
 .v-field__append-inner,
 .v-input__prepend,
 .v-input__append
-  .v-field--focused &
-    opacity: 1
-
   .v-field--variant-plain &,
   .v-field--variant-underlined &
     $root: &
@@ -151,6 +146,7 @@
   opacity: 0
   margin-inline-end: 4px
   transition-duration: 150ms
+  transition-property: opacity, transform, width
 
   .v-field--focused &,
   .v-field__control:hover &,
@@ -366,6 +362,24 @@
 
 /* endregion */
 /* region MODIFIERS */
+.v-field
+  .v-icon,
+  .v-messages,
+  .v-counter
+    color: $field-color
+
+  &--error
+    .v-icon,
+    .v-messages,
+    .v-counter
+      color: inherit
+
+  &--disabled
+    .v-icon,
+    .v-messages,
+    .v-counter
+      color: $field-disabled-color
+
 .v-field--reverse
   .v-field__input
     @include tools.ltr()
@@ -376,7 +390,6 @@
 .v-field--disabled
   pointer-events: none
 
-  &,
   input
     color: $field-disabled-color
 
@@ -386,15 +399,7 @@
       border-image: repeating-linear-gradient(to right, $field-disabled-color 0px, $field-disabled-color 2px, transparent 2px, transparent 4px) 1 repeat
 
 .v-field--error
-  color: $field-error-text-color
-  opacity: 1
-
-  .v-field__prepend,
-  .v-field__prepend-inner,
-  .v-field__append-inner,
-  .v-field__append,
-  .v-input__details
-    opacity: 1
+  color: $field-error-color
 
   .v-field__outline::after
     transform: scaleX(1)

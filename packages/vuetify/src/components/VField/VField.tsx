@@ -106,10 +106,13 @@ export const VField = defineComponent({
     watchEffect(() => isActive.value = isFocused.value || props.dirty)
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { errorMessages, isValid, validationClasses } = useValidation(props, 'v-field')
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
-      return isFocused.value ? props.color : undefined
+      return (
+        isValid.value !== false &&
+        isFocused.value
+      ) ? props.color : undefined
     }))
-    const { errorMessages, validationClasses } = useValidation(props, 'v-field')
 
     watch(isActive, val => {
       if (!props.singleLine) {
@@ -234,7 +237,7 @@ export const VField = defineComponent({
               { !slots.loader && (
                 <VProgressLinear
                   active={ props.loading }
-                  color={ props.color }
+                  color={ isValid.value !== false ? props.color : undefined }
                   height="2"
                   indeterminate
                 />
