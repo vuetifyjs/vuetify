@@ -8,11 +8,11 @@
 .v-text-field
   &__prefix,
   &__suffix
+    color: $text-field-affix-color
     height: 100%
     display: flex
     align-items: center
     cursor: default
-    opacity: .6
     transition: .15s opacity settings.$standard-easing
     white-space: nowrap
     padding-top: calc(var(--v-field-padding-top, 0) + 1px)
@@ -45,3 +45,8 @@
     // Remove Firefox red outline
     &:invalid
       box-shadow: none
+
+  &.v-field--disabled
+    .v-text-field__prefix,
+    .v-text-field__suffix
+      color: $text-field-disabled-affix-color

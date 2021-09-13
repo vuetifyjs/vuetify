@@ -363,22 +363,29 @@
 /* endregion */
 /* region MODIFIERS */
 .v-field
+  color: $field-color
+
   .v-icon,
   .v-messages,
   .v-counter
     color: $field-color
-
-  &--error
-    .v-icon,
-    .v-messages,
-    .v-counter
-      color: inherit
 
   &--disabled
     .v-icon,
     .v-messages,
     .v-counter
       color: $field-disabled-color
+
+  &--error
+    color: $field-error-color
+
+    .v-icon,
+    .v-messages,
+    .v-counter
+      color: $field-error-color
+
+    .v-field__outline::after
+      transform: scaleX(1)
 
 .v-field--reverse
   .v-field__input
@@ -397,12 +404,6 @@
   &.v-field--variant-underlined
     .v-field__outline::before
       border-image: repeating-linear-gradient(to right, $field-disabled-color 0px, $field-disabled-color 2px, transparent 2px, transparent 4px) 1 repeat
-
-.v-field--error
-  color: $field-error-color
-
-  .v-field__outline::after
-    transform: scaleX(1)
 
 .v-field--loading
   .v-field__outline::after,
