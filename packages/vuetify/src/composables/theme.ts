@@ -15,7 +15,6 @@ import { computed, inject, provide, ref, watch } from 'vue'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
-import { consoleError } from '@/util/console'
 import { APCAcontrast } from '@/util/color/APCA'
 
 interface BaseColors {
