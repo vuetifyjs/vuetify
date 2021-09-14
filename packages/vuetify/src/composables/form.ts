@@ -1,6 +1,6 @@
 // Utilities
-import { getCurrentInstance, inject, provide, ref } from 'vue'
-import { propsFactory } from '@/util'
+import { inject, provide, ref } from 'vue'
+import { getCurrentInstance, propsFactory } from '@/util'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Types
@@ -48,7 +48,7 @@ export const makeFormProps = propsFactory({
 export function createForm (props: FormProps) {
   const items = ref<FormInput[]>([])
   const model = useProxiedModel(props, 'modelValue')
-  const vm = getCurrentInstance()
+  const vm = getCurrentInstance('createForm')
   const isValidating = ref(false)
 
   async function submit (e: Event) {

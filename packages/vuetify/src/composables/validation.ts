@@ -2,8 +2,8 @@
 import { useForm } from '@/composables/form'
 
 // Utilities
-import { computed, getCurrentInstance, onBeforeMount, onBeforeUnmount, ref } from 'vue'
-import { getUid, propsFactory, wrapInPromise } from '@/util'
+import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
+import { getCurrentInstance, getUid, propsFactory, wrapInPromise } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -62,21 +62,19 @@ export function useValidation (props: ValidationProps, name: string) {
     return classes
   })
 
-  const vm = getCurrentInstance()
-  if (vm) {
-    const form = useForm()
+  const vm = getCurrentInstance('useValidation')
+  const form = useForm()
 
-    if (form) {
-      const id = getUid()
+  if (form) {
+    const id = getUid()
 
-      onBeforeMount(() => {
-        form.register(id, validate, reset, clear)
-      })
+    onBeforeMount(() => {
+      form.register(id, validate, reset, clear)
+    })
 
-      onBeforeUnmount(() => {
-        form.unregister(id)
-      })
-    }
+    onBeforeUnmount(() => {
+      form.unregister(id)
+    })
   }
 
   function reset () {
