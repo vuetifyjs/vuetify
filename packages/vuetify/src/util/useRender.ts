@@ -1,5 +1,7 @@
 // Utilities
-import { getCurrentInstance } from '@/util'
+import { getCurrentInstance } from './getCurrentInstance'
+
+// Types
 import type { VNode } from 'vue'
 
 export function useRender (render: () => VNode): void {
