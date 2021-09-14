@@ -1,6 +1,6 @@
 // Utilities
-import { computed, getCurrentInstance, ref } from 'vue'
-import { consoleError, toKebabCase } from '@/util'
+import { computed, ref } from 'vue'
+import { getCurrentInstance, toKebabCase } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -17,9 +17,7 @@ export function useProxiedModel<
   transformIn: (value?: Props[Prop]) => Inner = (v: any) => v,
   transformOut: (value: Inner) => Props[Prop] = (v: any) => v,
 ) {
-  const vm = getCurrentInstance()
-
-  if (!vm) consoleError('useProxiedModel must be called from inside a setup function')
+  const vm = getCurrentInstance('useProxiedModel')
 
   const propIsDefined = computed(() => {
     return !!(
