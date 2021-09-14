@@ -1,12 +1,9 @@
-// Utilities
-import { defineComponent, IN_BROWSER } from '@/util'
-import { onMounted, ref } from 'vue'
+// Composables
+import { useHydration } from '@/composables/hydration'
 
-function doesHydrate (fn: () => void) {
-  if (!IN_BROWSER) return
-  // @ts-expect-error
-  return document.querySelector('#app')?.__vue_app__ ? fn() : onMounted(fn)
-}
+// Utilities
+import { defineComponent } from '@/util'
+import { ref } from 'vue'
 
 export default defineComponent({
   name: 'VNoSsr',
@@ -14,9 +11,7 @@ export default defineComponent({
   setup (_, { slots }) {
     const show = ref(false)
 
-    doesHydrate(() => {
-      show.value = true
-    })
+    useHydration(() => (show.value = true))
 
     return () => show.value && slots.default?.()
   },
