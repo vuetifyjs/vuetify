@@ -129,7 +129,7 @@ export function useValidation (
     isValidating.value = false
     isPristine.value = false
 
-    return isValid.value
+    return errorMessages.value
   }
 
   return {

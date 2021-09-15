@@ -1,6 +1,6 @@
+import { getCurrentInstance, propsFactory } from '@/util'
 // Utilities
 import { computed, inject, provide, ref } from 'vue'
-import { getCurrentInstance, propsFactory } from '@/util'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Types
@@ -9,7 +9,7 @@ import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
 export interface FormProvide {
   register: (
     id: number | string,
-    validate: () => Promise<boolean | null>,
+    validate: () => Promise<string[]>,
     reset: () => void,
     resetValidation: () => void
   ) => void
@@ -22,9 +22,14 @@ export interface FormProvide {
 
 interface FormField {
   id: number | string
-  validate: () => Promise<boolean | null>
+  validate: () => Promise<string[]>
   reset: () => void
   resetValidation: () => void
+}
+
+interface FormValidationResult {
+  id: number | string
+  errorMessages: string[]
 }
 
 export const FormKey: InjectionKey<FormProvide> = Symbol.for('vuetify:form')
@@ -56,21 +61,34 @@ export function createForm (props: FormProps) {
   const isReadonly = computed(() => props.readonly)
   const isValidating = ref(false)
   const items = ref<FormField[]>([])
+  const errorMessages = ref<FormValidationResult[]>([])
 
   async function submit (e: Event) {
     e.preventDefault()
 
+    const results = []
     let valid = true
+
+    errorMessages.value = []
     model.value = null
     isValidating.value = true
 
     for (const item of items.value) {
-      const result = await item.validate()
+      const itemErrorMessages = await item.validate()
 
-      if (!result && valid) valid = false
+      if (itemErrorMessages.length > 0) {
+        valid = false
+
+        results.push({
+          id: item.id,
+          errorMessages: itemErrorMessages,
+        })
+      }
+
       if (!valid && props.fastFail) break
     }
 
+    errorMessages.value = results
     model.value = valid
     isValidating.value = false
 
@@ -88,6 +106,7 @@ export function createForm (props: FormProps) {
 
   async function resetValidation () {
     items.value.forEach(item => item.resetValidation())
+    errorMessages.value = []
     model.value = null
 
     vm?.emit('resetValidation')
@@ -114,6 +133,7 @@ export function createForm (props: FormProps) {
   })
 
   return {
+    errorMessages,
     isDisabled,
     isReadonly,
     isValidating,
