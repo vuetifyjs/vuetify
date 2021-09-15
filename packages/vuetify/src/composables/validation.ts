@@ -35,7 +35,7 @@ export const makeValidationProps = propsFactory({
   },
   modelValue: {
     type: [Number, String, Array, Object],
-    default: '',
+    default: undefined as any,
   },
 })
 

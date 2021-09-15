@@ -97,7 +97,7 @@ export const VField = defineComponent({
     'click:append-inner': (e: MouseEvent) => true as any,
     'click:control': (props: DefaultInputSlot) => true as any,
     'update:active': (active: boolean) => true as any,
-    'update:modelValue': (val: string) => true as any,
+    'update:modelValue': (val: any) => true as any,
   },
 
   setup (props, { attrs, emit, slots }) {

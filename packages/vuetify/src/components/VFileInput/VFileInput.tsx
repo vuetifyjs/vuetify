@@ -50,6 +50,9 @@ export default defineComponent({
         )
       },
     },
+
+    ...makeVFieldProps({ clearable: true }),
+
     modelValue: {
       type: Array as PropType<File[] | undefined>,
       default: () => ([]),
@@ -57,8 +60,6 @@ export default defineComponent({
         return wrapInArray(val).every(v => v != null && typeof v === 'object')
       },
     },
-
-    ...makeVFieldProps({ clearable: true }),
   },
 
   emits: {
