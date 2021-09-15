@@ -7,6 +7,7 @@ import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { makeActiveProps, useActive } from '@/composables/active'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -15,7 +16,6 @@ import { makeRouterProps, useLink } from '@/composables/router'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -29,7 +29,6 @@ export default defineComponent({
   directives: { Ripple },
 
   props: {
-    activeClass: String,
     appendAvatar: String,
     appendIcon: String,
     closable: Boolean,
@@ -57,11 +56,8 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
-    modelValue: {
-      type: Boolean,
-      default: true,
-    },
 
+    ...makeActiveProps({ active: true }),
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
@@ -76,13 +72,11 @@ export default defineComponent({
   emits: {
     'click:close': (e: Event) => true,
     'update:active': (value: Boolean) => true,
-    'update:modelValue': (value: Boolean) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
-    const isActive = useProxiedModel(props, 'modelValue')
-
     const { themeClasses } = useTheme(props)
+    const { isActive, activeClasses } = useActive(props, 'v-chip')
     const { borderClasses } = useBorder(props, 'v-chip')
     const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-chip')
     const { elevationClasses } = useElevation(props)
@@ -115,6 +109,7 @@ export default defineComponent({
               'v-chip--pill': props.pill,
             },
             themeClasses.value,
+            activeClasses.value,
             borderClasses.value,
             colorClasses.value,
             densityClasses.value,

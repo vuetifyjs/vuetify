@@ -2,6 +2,7 @@
 import './VProgressLinear.sass'
 
 // Composables
+import { makeActiveProps, useActive } from '@/composables/active'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
@@ -12,16 +13,12 @@ import { useRtl } from '@/composables/rtl'
 
 // Utilities
 import { convertToUnit, defineComponent } from '@/util'
-import { computed, Transition } from 'vue'
+import { computed, Transition, watchEffect } from 'vue'
 
 export default defineComponent({
   name: 'VProgressLinear',
 
   props: {
-    active: {
-      type: Boolean,
-      default: true,
-    },
     bgColor: String,
     bgOpacity: [Number, String],
     bufferValue: {
@@ -48,6 +45,7 @@ export default defineComponent({
     striped: Boolean,
     roundedBar: Boolean,
 
+    ...makeActiveProps({ active: true }),
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
@@ -58,6 +56,7 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
+    const { isActive, activeClasses } = useActive(props, 'v-progress-linear')
     const progress = useProxiedModel(props, 'modelValue')
     const { isRtl } = useRtl()
     const { themeClasses } = useTheme(props)
@@ -66,6 +65,12 @@ export default defineComponent({
     const { backgroundColorClasses: barColorClasses, backgroundColorStyles: barColorStyles } = useBackgroundColor(props, 'color')
     const { roundedClasses } = useRounded(props, 'v-progress-linear')
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
+
+    watchEffect(() => {
+      if (isActive.value || !isIntersecting.value) return
+
+      isActive.value = isIntersecting.value
+    })
 
     const max = computed(() => parseInt(props.max, 10))
     const height = computed(() => parseInt(props.height, 10))
@@ -100,11 +105,12 @@ export default defineComponent({
             'v-progress-linear--rounded-bar': props.roundedBar,
             'v-progress-linear--striped': props.striped,
           },
+          activeClasses.value,
           roundedClasses.value,
           themeClasses.value,
         ]}
         style={{
-          height: props.active ? convertToUnit(height.value) : 0,
+          height: isActive.value ? convertToUnit(height.value) : 0,
           '--v-progress-linear-height': convertToUnit(height.value),
         }}
         role="progressbar"

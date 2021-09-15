@@ -1,8 +1,8 @@
 // Composables
+import { makeActiveProps, useActive } from '@/composables/active'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeTagProps } from '@/composables/tag'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
 import intersect from '@/directives/intersect'
@@ -17,7 +17,6 @@ export default defineComponent({
   directives: { intersect },
 
   props: {
-    modelValue: Boolean,
     options: {
       type: Object as PropType<IntersectionObserverInit>,
       // For more information on types, navigate to:
@@ -29,18 +28,19 @@ export default defineComponent({
       }),
     },
 
+    ...makeActiveProps(),
     ...makeDimensionProps(),
     ...makeTagProps(),
     ...makeTransitionProps({ transition: 'fade-transition' }),
   },
 
   emits: {
-    'update:modelValue': (value: boolean) => true,
+    'update:active': (value: boolean) => true,
   },
 
   setup (props, { slots }) {
     const { dimensionStyles } = useDimension(props)
-    const isActive = useProxiedModel(props, 'modelValue')
+    const { isActive, activeClasses } = useActive(props, 'v-lazy')
 
     function onIntersect (isIntersecting: boolean) {
       if (isActive.value) return
@@ -49,21 +49,24 @@ export default defineComponent({
     }
 
     return () => (
-      <props.tag
-        class="v-lazy"
-        v-intersect={[
-          onIntersect,
-          props.options,
-          isActive.value ? [] : ['once'],
-        ]}
-        style={ dimensionStyles.value }
-      >
+      <MaybeTransition transition={ props.transition } appear>
         { isActive.value && (
-          <MaybeTransition transition={ props.transition }>
+          <props.tag
+            class={[
+              'v-lazy',
+              activeClasses.value,
+            ]}
+            v-intersect={[
+              onIntersect,
+              props.options,
+              isActive.value ? [] : ['once'],
+            ]}
+            style={ dimensionStyles.value }
+          >
             { slots.default?.() }
-          </MaybeTransition>
+          </props.tag>
         )}
-      </props.tag>
+      </MaybeTransition>
     )
   },
 })

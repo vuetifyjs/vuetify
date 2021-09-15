@@ -5,6 +5,7 @@ import './VAppBar.sass'
 import { VImg } from '@/components/VImg'
 
 // Composables
+import { makeActiveProps, useActive } from '@/composables/active'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -12,7 +13,6 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -45,10 +45,6 @@ export default defineComponent({
     },
     floating: Boolean,
     image: String,
-    modelValue: {
-      type: Boolean,
-      default: true,
-    },
     prominent: Boolean,
     prominentHeight: {
       type: [Number, String],
@@ -60,6 +56,7 @@ export default defineComponent({
       validator: (value: any) => ['top', 'bottom'].includes(value),
     },
 
+    ...makeActiveProps({ active: true }),
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
@@ -69,7 +66,7 @@ export default defineComponent({
   },
 
   emits: {
-    'update:modelValue': (value: boolean) => true,
+    'update:active': (value: boolean) => true,
   },
 
   setup (props, { slots }) {
@@ -88,7 +85,7 @@ export default defineComponent({
       contentHeight.value +
       Number(isExtended ? props.extensionHeight : 0)
     ))
-    const isActive = useProxiedModel(props, 'modelValue', props.modelValue)
+    const { isActive, activeClasses } = useActive(props, 'v-app-bar')
     const layoutStyles = useLayoutItem(
       props.name,
       toRef(props, 'priority'),
@@ -106,14 +103,14 @@ export default defineComponent({
           class={[
             'v-app-bar',
             {
+              'v-app-bar--absolute': props.absolute,
               'v-app-bar--bottom': props.position === 'bottom',
               'v-app-bar--collapsed': props.collapse,
               'v-app-bar--flat': props.flat,
               'v-app-bar--floating': props.floating,
-              'v-app-bar--is-active': isActive.value,
               'v-app-bar--prominent': props.prominent,
-              'v-app-bar--absolute': props.absolute,
             },
+            activeClasses.value,
             backgroundColorClasses.value,
             borderClasses.value,
             densityClasses.value,

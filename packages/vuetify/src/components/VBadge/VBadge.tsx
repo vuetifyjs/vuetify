@@ -5,6 +5,7 @@ import './VBadge.sass'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
+import { makeActiveProps, useActive } from '@/composables/active'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
@@ -47,19 +48,18 @@ export default defineComponent({
       },
     },
     max: [Number, String],
-    modelValue: {
-      type: Boolean,
-      default: true,
-    },
     offsetX: [Number, String],
     offsetY: [Number, String],
     textColor: String,
+
+    ...makeActiveProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeTransitionProps({ transition: 'scale-rotate-transition' }),
   },
 
   setup (props, ctx) {
+    const { isActive, activeClasses } = useActive(props, 'v-badge')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { roundedClasses } = useRounded(props, 'v-badge')
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'textColor'))
@@ -118,6 +118,7 @@ export default defineComponent({
               'v-badge--floating': props.floating,
               'v-badge--inline': props.inline,
             },
+            activeClasses.value,
           ]}
           { ...attrs }
         >
@@ -126,7 +127,7 @@ export default defineComponent({
 
             <MaybeTransition transition={ props.transition }>
               <span
-                v-show={ props.modelValue }
+                v-show={ isActive.value }
                 class={[
                   'v-badge__badge',
                   backgroundColorClasses.value,

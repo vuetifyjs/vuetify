@@ -3,13 +3,13 @@ import './VOverlay.sass'
 
 // Composables
 import { makeActivatorProps, useActivator } from './useActivator'
+import { makeActiveProps, useActive } from '@/composables/active'
 import { makePositionStrategyProps, usePositionStrategies } from './positionStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackButton } from '@/composables/router'
 import { useBackgroundColor } from '@/composables/color'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRtl } from '@/composables/rtl'
 import { useTeleport } from '@/composables/teleport'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
@@ -43,14 +43,14 @@ import type { BackgroundColorData } from '@/composables/color'
 
 interface ScrimProps {
   [key: string]: unknown
-  modelValue: boolean
+  active: boolean
   color: BackgroundColorData
 }
 function Scrim (props: ScrimProps) {
-  const { modelValue, color, ...rest } = props
+  const { active, color, ...rest } = props
   return (
     <Transition name="fade-transition" appear>
-      { props.modelValue && (
+      { props.active && (
         <div
           class={[
             'v-overlay__scrim',
@@ -79,13 +79,13 @@ export default defineComponent({
     },
     contentClass: null,
     noClickAnimation: Boolean,
-    modelValue: Boolean,
     persistent: Boolean,
     scrim: {
       type: [String, Boolean],
       default: true,
     },
 
+    ...makeActiveProps(),
     ...makeActivatorProps(),
     ...makeDimensionProps(),
     ...makePositionStrategyProps(),
@@ -97,11 +97,11 @@ export default defineComponent({
 
   emits: {
     'click:outside': (e: MouseEvent) => true,
-    'update:modelValue': (value: boolean) => true,
+    'update:active': (value: boolean) => true,
   },
 
   setup (props, { slots, attrs, emit }) {
-    const isActive = useProxiedModel(props, 'modelValue')
+    const { isActive, activeClasses } = useActive(props, 'v-overlay')
     const { teleportTarget } = useTeleport(toRef(props, 'attach'))
     const { themeClasses } = useTheme(props)
     const { rtlClasses } = useRtl()
@@ -181,8 +181,8 @@ export default defineComponent({
         { slots.activator?.({
           isActive: isActive.value,
           props: mergeProps({
-            modelValue: isActive.value,
-            'onUpdate:modelValue': (val: boolean) => isActive.value = val,
+            active: isActive.value,
+            'onUpdate:active': (val: boolean) => isActive.value = val,
           }, toHandlers(activatorEvents.value), props.activatorProps),
         }) }
         <Teleport
@@ -196,8 +196,8 @@ export default defineComponent({
                 'v-overlay',
                 {
                   'v-overlay--absolute': props.absolute,
-                  'v-overlay--active': isActive.value,
                 },
+                activeClasses.value,
                 themeClasses.value,
                 rtlClasses.value,
               ]}
@@ -205,8 +205,8 @@ export default defineComponent({
               {...attrs}
             >
               <Scrim
+                active={ isActive.value && !!props.scrim }
                 color={ scrimColor }
-                modelValue={ isActive.value && !!props.scrim }
               />
               <MaybeTransition
                 appear

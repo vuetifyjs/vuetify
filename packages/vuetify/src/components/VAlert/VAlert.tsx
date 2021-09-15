@@ -6,6 +6,7 @@ import { VAvatar } from '@/components/VAvatar'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
+import { makeActiveProps, useActive } from '@/composables/active'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
@@ -14,7 +15,6 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeVariantProps, useVariant } from '@/composables/variant'
 import { useBorder } from '@/composables/border'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
@@ -57,10 +57,6 @@ export default defineComponent({
       type: [Boolean, String] as PropType<false | string>,
       default: null,
     },
-    modelValue: {
-      type: Boolean,
-      default: true,
-    },
     prominent: Boolean,
     sticky: Boolean,
     text: String,
@@ -70,6 +66,7 @@ export default defineComponent({
       validator: (val: ContextualType) => allowedTypes.includes(val),
     },
 
+    ...makeActiveProps({ active: true }),
     ...makeDensityProps(),
     ...makeElevationProps(),
     ...makePositionProps(),
@@ -80,14 +77,14 @@ export default defineComponent({
   },
 
   emits: {
-    'update:modelValue': (value: boolean) => true,
+    'update:active': (value: boolean) => true,
   },
 
   setup (props, { slots }) {
+    const { isActive, activeClasses } = useActive(props, 'v-alert')
     const borderProps = computed(() => ({
       border: props.border === true || props.tip ? 'start' : props.border,
     }))
-    const isActive = useProxiedModel(props, 'modelValue')
     const icon = computed(() => {
       if (props.icon === false) return undefined
       if (!props.type) return props.icon
@@ -121,8 +118,9 @@ export default defineComponent({
       const hasPrepend = !!(slots.prepend || props.icon || props.type)
       const hasText = !!(slots.default || props.text || hasClose)
 
-      return isActive.value && (
+      return (
         <props.tag
+          v-show={ isActive.value }
           class={[
             'v-alert',
             {
@@ -131,6 +129,7 @@ export default defineComponent({
               'v-alert--tip': props.tip,
             },
             themeClasses.value,
+            activeClasses.value,
             borderClasses.value,
             !props.tip && colorClasses.value,
             densityClasses.value,

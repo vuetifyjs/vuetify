@@ -6,9 +6,9 @@ import { VDialogTransition } from '@/components/transitions'
 import { VOverlay } from '@/components/VOverlay'
 
 // Composables
+import { makeActiveProps, useActive } from '@/composables/active'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeTransitionProps } from '@/composables/transition'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { nextTick, ref, watch } from 'vue'
@@ -30,8 +30,8 @@ export default defineComponent({
       default: true,
     },
     scrollable: Boolean,
-    modelValue: Boolean,
 
+    ...makeActiveProps(),
     ...makeDimensionProps({ width: 'auto' }),
     ...makeTransitionProps({
       transition: { component: VDialogTransition },
@@ -39,11 +39,11 @@ export default defineComponent({
   },
 
   emits: {
-    'update:modelValue': (value: boolean) => true,
+    'update:active': (value: boolean) => true,
   },
 
   setup (props, { attrs, slots }) {
-    const isActive = useProxiedModel(props, 'modelValue')
+    const { isActive } = useActive(props, 'v-dialog')
     const { dimensionStyles } = useDimension(props)
 
     const overlay = ref<InstanceType<typeof VOverlay>>()
@@ -101,7 +101,7 @@ export default defineComponent({
     return () => {
       return (
         <VOverlay
-          v-model={ isActive.value }
+          v-model:active={ isActive.value }
           class={[
             'v-dialog',
             {

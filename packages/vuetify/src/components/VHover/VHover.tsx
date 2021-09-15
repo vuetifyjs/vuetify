@@ -1,6 +1,6 @@
 // Composables
+import { makeActiveProps, useActive } from '@/composables/active'
 import { makeDelayProps, useDelay } from '@/composables/delay'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { defineComponent } from '@/util'
@@ -10,25 +10,23 @@ export default defineComponent({
 
   props: {
     disabled: Boolean,
-    modelValue: {
-      type: Boolean,
-      default: undefined,
-    },
 
+    ...makeActiveProps(),
     ...makeDelayProps(),
   },
 
   emits: {
-    'update:modelValue': (value: boolean) => true,
+    'update:active': (value: boolean) => true,
   },
 
   setup (props, { slots }) {
-    const hover = useProxiedModel(props, 'modelValue')
-    const { runOpenDelay, runCloseDelay } = useDelay(props, value => !props.disabled && (hover.value = value))
+    const { isActive, activeClasses } = useActive(props, 'v-hover')
+    const { runOpenDelay, runCloseDelay } = useDelay(props, value => !props.disabled && (isActive.value = value))
 
     return () => slots.default?.({
-      hover: hover.value,
+      isActive,
       props: {
+        class: [activeClasses.value],
         onMouseenter: runOpenDelay,
         onMouseleave: runCloseDelay,
       },

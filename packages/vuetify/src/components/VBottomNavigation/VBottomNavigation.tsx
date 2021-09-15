@@ -2,15 +2,15 @@
 import './VBottomNavigation.sass'
 
 // Composables
+import { makeActiveProps, useActive } from '@/composables/active'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed } from 'vue'
@@ -23,10 +23,6 @@ export default defineComponent({
     bgColor: String,
     color: String,
     grow: Boolean,
-    modelValue: {
-      type: Boolean,
-      default: true,
-    },
     mode: {
       type: String,
       validator: (v: any) => !v || ['horizontal', 'shift'].includes(v),
@@ -35,6 +31,8 @@ export default defineComponent({
       type: [Number, String],
       default: 56,
     },
+
+    ...makeActiveProps({ active: true }),
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
@@ -47,11 +45,12 @@ export default defineComponent({
   },
 
   emits: {
-    'update:modelValue': (value: boolean) => true,
+    'update:active': (value: boolean) => true,
   },
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)
+    const { isActive, activeClasses } = useActive(props, 'v-bottom-navigation')
     const { borderClasses } = useBorder(props, 'v-bottom-navigation')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => props.bgColor))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => props.color))
@@ -63,7 +62,6 @@ export default defineComponent({
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ))
-    const isActive = useProxiedModel(props, 'modelValue', props.modelValue)
     const layoutStyles = useLayoutItem(
       props.name,
       computed(() => props.priority),
@@ -79,13 +77,13 @@ export default defineComponent({
           class={[
             'v-bottom-navigation',
             {
+              'v-bottom-navigation--absolute': props.absolute,
               'v-bottom-navigation--grow': props.grow,
               'v-bottom-navigation--horizontal': props.mode === 'horizontal',
-              'v-bottom-navigation--is-active': isActive.value,
               'v-bottom-navigation--shift': props.mode === 'shift',
-              'v-bottom-navigation--absolute': props.absolute,
             },
             themeClasses.value,
+            activeClasses.value,
             backgroundColorClasses.value,
             borderClasses.value,
             densityClasses.value,

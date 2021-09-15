@@ -23,14 +23,15 @@ export default defineComponent({
   name: 'VNavigationDrawer',
 
   props: {
+    active: {
+      type: Boolean,
+      default: null,
+    },
+    activeClass: String,
     color: String,
     disableResizeWatcher: Boolean,
     expandOnHover: Boolean,
     floating: Boolean,
-    modelValue: {
-      type: Boolean,
-      default: null,
-    },
     permanent: Boolean,
     rail: Boolean,
     railWidth: {
@@ -65,7 +66,7 @@ export default defineComponent({
     const { mobile } = useDisplay()
     const { roundedClasses } = useRounded(props, 'v-navigation-drawer')
 
-    const isActive = useProxiedModel(props, 'modelValue')
+    const isActive = useProxiedModel(props, 'active')
     const isHovering = ref(false)
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)
@@ -91,7 +92,7 @@ export default defineComponent({
     })
 
     onBeforeMount(() => {
-      if (props.modelValue != null) return
+      if (props.active != null) return
 
       isActive.value = props.permanent || !mobile.value
     })
@@ -106,6 +107,7 @@ export default defineComponent({
           class={[
             'v-navigation-drawer',
             {
+              'v-navigation-drawer--active': isActive.value,
               'v-navigation-drawer--bottom': props.position === 'bottom',
               'v-navigation-drawer--end': props.position === 'right',
               'v-navigation-drawer--expand-on-hover': props.expandOnHover,
@@ -115,6 +117,7 @@ export default defineComponent({
               'v-navigation-drawer--start': props.position === 'left',
               'v-navigation-drawer--temporary': isTemporary.value,
               'v-navigation-drawer--absolute': props.absolute,
+              [`${props.activeClass}`]: isActive.value,
             },
             themeClasses.value,
             backgroundColorClasses.value,
@@ -142,9 +145,11 @@ export default defineComponent({
             </div>
           )}
 
-          <div class="v-navigation-drawer__content">
-            { slots.default?.() }
-          </div>
+          { slots.default && (
+            <div class="v-navigation-drawer__content">
+              { slots.default?.() }
+            </div>
+          ) }
 
           { slots.append && (
             <div class="v-navigation-drawer__append">

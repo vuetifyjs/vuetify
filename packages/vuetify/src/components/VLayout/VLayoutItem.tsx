@@ -2,6 +2,7 @@
 import './VLayoutItem.sass'
 
 // Composables
+import { makeActiveProps, useActive } from '@/composables/active'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 
 // Utilities
@@ -23,18 +24,20 @@ export default defineComponent({
       type: [Number, String],
       default: 300,
     },
-    modelValue: Boolean,
+
+    ...makeActiveProps(),
     ...makeLayoutItemProps(),
   },
 
   setup (props, { slots }) {
+    const { activeClasses } = useActive(props, 'v-layout-item')
     const styles = useLayoutItem(
       props.name,
       toRef(props, 'priority'),
       toRef(props, 'position'),
       toRef(props, 'size'),
       toRef(props, 'size'),
-      toRef(props, 'modelValue')
+      toRef(props, 'active')
     )
 
     return () => (
@@ -44,6 +47,7 @@ export default defineComponent({
           {
             'v-layout-item--absolute': props.absolute,
           },
+          activeClasses.value,
         ]}
         style={ styles.value }
       >

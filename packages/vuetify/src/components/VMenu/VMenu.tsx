@@ -6,8 +6,8 @@ import { VOverlay } from '@/components/VOverlay'
 import { VDialogTransition } from '@/components/transitions'
 
 // Composables
+import { makeActiveProps, useActive } from '@/composables/active'
 import { makeTransitionProps } from '@/composables/transition'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { defineComponent, getUid } from '@/util'
@@ -29,20 +29,20 @@ export default defineComponent({
     //   default: true,
     // },
     disableKeys: Boolean,
-    modelValue: Boolean,
     id: String,
 
+    ...makeActiveProps(),
     ...makeTransitionProps({
       transition: { component: VDialogTransition },
     } as const),
   },
 
   emits: {
-    'update:modelValue': (value: boolean) => true,
+    'update:active': (value: boolean) => true,
   },
 
   setup (props, { attrs, slots }) {
-    const isActive = useProxiedModel(props, 'modelValue')
+    const { isActive } = useActive(props, 'v-menu')
 
     const uid = getUid()
     const id = computed(() => props.id || `v-menu-${uid}`)
@@ -50,7 +50,7 @@ export default defineComponent({
     return () => {
       return (
         <VOverlay
-          v-model={ isActive.value }
+          v-model:active={ isActive.value }
           class={[
             'v-menu',
           ]}

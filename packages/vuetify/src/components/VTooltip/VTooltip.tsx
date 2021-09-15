@@ -5,7 +5,7 @@ import './VTooltip.sass'
 import { VOverlay } from '@/components/VOverlay'
 
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeActiveProps, useActive } from '@/composables/active'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
@@ -23,7 +23,6 @@ export default defineComponent({
 
   props: {
     id: String,
-    modelValue: Boolean,
     text: String,
 
     anchor: {
@@ -35,17 +34,18 @@ export default defineComponent({
       default: 'auto',
     },
 
+    ...makeActiveProps(),
     ...makeTransitionProps({
       transition: false,
     } as const),
   },
 
   emits: {
-    'update:modelValue': (value: boolean) => true,
+    'update:active': (value: boolean) => true,
   },
 
   setup (props, { attrs, slots }) {
-    const isActive = useProxiedModel(props, 'modelValue')
+    const { isActive } = useActive(props, 'v-tooltip')
 
     const uid = getUid()
     const id = computed(() => props.id || `v-tooltip-${uid}`)
@@ -74,7 +74,7 @@ export default defineComponent({
     return () => {
       return (
         <VOverlay
-          v-model={ isActive.value }
+          v-model:active={ isActive.value }
           class={[
             'v-tooltip',
           ]}
