@@ -118,6 +118,8 @@ export const VTextField = defineComponent({
             ...slots,
             default: ({
               isActive,
+              isDisabled,
+              isReadonly,
               inputRef,
               props: { class: fieldClass, ...slotProps },
             }: VFieldSlot) => {
@@ -139,7 +141,8 @@ export const VTextField = defineComponent({
                     }, null, ['once']]}
                     ref={ inputRef }
                     autofocus={ props.autofocus }
-                    disabled={ props.disabled }
+                    readonly={ isReadonly }
+                    disabled={ isDisabled }
                     placeholder={ props.placeholder }
                     size={ 1 }
                     type={ props.type }

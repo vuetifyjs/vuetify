@@ -1,4 +1,5 @@
 // Composables
+import type { FormProvide } from '@/composables/form'
 import { useForm } from '@/composables/form'
 
 // Utilities
@@ -12,14 +13,18 @@ export type ValidationResult = string | true
 export type ValidationRule = string | ((value: any) => ValidationResult) | Promise<ValidationResult>
 
 export interface ValidationProps {
+  disabled?: boolean
   error?: boolean
   errorMessages?: string | string[]
   maxErrors?: string | number
+  name?: string
+  readonly?: boolean
   rules: ValidationRule[]
   modelValue?: any
 }
 
 export const makeValidationProps = propsFactory({
+  disabled: Boolean,
   error: Boolean,
   errorMessages: {
     type: [Array, String] as PropType<string | string[]>,
@@ -29,6 +34,8 @@ export const makeValidationProps = propsFactory({
     type: [Number, String],
     default: 1,
   },
+  name: String,
+  readonly: Boolean,
   rules: {
     type: Array as PropType<ValidationRule[]>,
     default: () => ([]),
@@ -45,7 +52,10 @@ export function useValidation (
   vm?: ComponentInternalInstance
 ) {
   const errorMessages = ref<string[]>([])
+  const form = ref<FormProvide | null>()
   const isPristine = ref(true)
+  const isDisabled = computed(() => !!(props.disabled || form.value?.isDisabled))
+  const isReadonly = computed(() => !!(props.readonly || form.value?.isReadonly))
   const isValid = computed(() => {
     if (
       props.error ||
@@ -57,29 +67,25 @@ export function useValidation (
   })
   const isValidating = ref(false)
   const validationClasses = computed(() => {
-    const classes: string[] = []
-
-    if (isValid.value !== false) return classes
-
-    classes.push(`${name}--error`)
-
-    return classes
+    return {
+      [`${name}--error`]: isValid.value === false,
+      [`${name}--disabled`]: isDisabled.value,
+      [`${name}--readonly`]: isReadonly.value,
+    }
   })
 
   if (vm) {
-    const form = useForm()
+    form.value = useForm()
 
-    if (form) {
-      const id = getUid()
+    const name = computed(() => props.name ?? getUid())
 
-      onBeforeMount(() => {
-        form.register(id, validate, reset, resetValidation)
-      })
+    onBeforeMount(() => {
+      form.value?.register(name.value, validate, reset, resetValidation)
+    })
 
-      onBeforeUnmount(() => {
-        form.unregister(id)
-      })
-    }
+    onBeforeUnmount(() => {
+      form.value?.unregister(name.value)
+    })
   }
 
   function reset () {
@@ -128,6 +134,8 @@ export function useValidation (
 
   return {
     errorMessages,
+    isDisabled,
+    isReadonly,
     isPristine,
     isValid,
     isValidating,

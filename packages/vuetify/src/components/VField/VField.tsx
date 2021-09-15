@@ -36,7 +36,9 @@ type Variant = typeof allowedVariants[number]
 export interface DefaultInputSlot {
   isActive: boolean
   isDirty: boolean
+  isDisabled: boolean
   isFocused: boolean
+  isReadonly: boolean
   controlRef: Ref<HTMLElement | undefined>
   inputRef: Ref<HTMLInputElement | undefined>
   focus: () => void
@@ -53,7 +55,6 @@ export interface VFieldSlot extends DefaultInputSlot {
 }
 
 export const makeVFieldProps = propsFactory({
-  disabled: Boolean,
   appendInnerIcon: String,
   bgColor: String,
   clearable: Boolean,
@@ -116,7 +117,7 @@ export const VField = defineComponent({
     watchEffect(() => isActive.value = isFocused.value || props.dirty)
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
-    const { errorMessages, isValid, validationClasses } = useValidation(props, 'v-field', vm)
+    const { errorMessages, isDisabled, isReadonly, isValid, validationClasses } = useValidation(props, 'v-field', vm)
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
       return (
         isValid.value !== false &&
@@ -170,6 +171,8 @@ export const VField = defineComponent({
     const slotProps = computed<DefaultInputSlot>(() => ({
       isActive: isActive.value,
       isDirty: props.dirty,
+      isReadonly: isReadonly.value,
+      isDisabled: isDisabled.value,
       isFocused: isFocused.value,
       inputRef,
       controlRef,
@@ -205,7 +208,6 @@ export const VField = defineComponent({
               'v-field--active': isActive.value,
               'v-field--appended': hasAppend,
               'v-field--dirty': props.dirty,
-              'v-field--disabled': props.disabled,
               'v-field--focused': isFocused.value,
               'v-field--loading': props.loading,
               'v-field--has-background': !!props.bgColor,

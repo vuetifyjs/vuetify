@@ -1,24 +1,27 @@
 // Utilities
-import { inject, provide, ref } from 'vue'
+import { computed, inject, provide, ref } from 'vue'
 import { getCurrentInstance, propsFactory } from '@/util'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Types
-import type { InjectionKey, PropType, Ref } from 'vue'
+import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
 
-interface FormProvide {
+export interface FormProvide {
   register: (
-    id: number,
+    id: number | string,
     validate: () => Promise<boolean | null>,
     reset: () => void,
     resetValidation: () => void
   ) => void
-  unregister: (id: number) => void
-  items: Ref<any[]>
+  unregister: (id: number | string) => void
+  items: Ref<FormField[]>
+  isDisabled: ComputedRef<boolean>
+  isReadonly: ComputedRef<boolean>
+  isValidating: Ref<boolean>
 }
 
-interface FormInput {
-  id: number
+interface FormField {
+  id: number | string
   validate: () => Promise<boolean | null>
   reset: () => void
   resetValidation: () => void
@@ -46,10 +49,13 @@ export const makeFormProps = propsFactory({
 })
 
 export function createForm (props: FormProps) {
-  const items = ref<FormInput[]>([])
-  const model = useProxiedModel(props, 'modelValue')
   const vm = getCurrentInstance('createForm')
+  const model = useProxiedModel(props, 'modelValue')
+
+  const isDisabled = computed(() => props.disabled)
+  const isReadonly = computed(() => props.readonly)
   const isValidating = ref(false)
+  const items = ref<FormField[]>([])
 
   async function submit (e: Event) {
     e.preventDefault()
@@ -101,10 +107,15 @@ export function createForm (props: FormProps) {
         return item.id !== id
       })
     },
+    isDisabled,
+    isReadonly,
+    isValidating,
     items,
   })
 
   return {
+    isDisabled,
+    isReadonly,
     isValidating,
     items,
     submit,
