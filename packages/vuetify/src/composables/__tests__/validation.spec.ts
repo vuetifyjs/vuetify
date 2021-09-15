@@ -25,7 +25,7 @@ describe('validation.ts', () => {
   ) => {
     const modelValue = ref(value)
     const props = { rules, modelValue } as ValidationProps
-    const { errorMessages, validate } = useValidation(props)
+    const { errorMessages, validate } = useValidation(props, 'validation')
 
     expect(errorMessages.value).toEqual([])
 
@@ -48,7 +48,7 @@ describe('validation.ts', () => {
     const { errorMessages, validate } = useValidation({
       maxErrors,
       rules: ['foo', 'bar', 'fizz', 'buzz'],
-    })
+    }, 'validation')
 
     await validate()
 
@@ -59,7 +59,7 @@ describe('validation.ts', () => {
     const rule = (v: any) => !!v || 1234
     const { validate } = useValidation({
       rules: [rule as any],
-    })
+    }, 'validation')
 
     await validate()
 
@@ -71,7 +71,7 @@ describe('validation.ts', () => {
     const { isPristine, isValid, validate, reset } = useValidation({
       rules: [(v: any) => v === 'foo' || 'bar'],
       modelValue,
-    })
+    }, 'validation')
 
     expect(isPristine.value).toBe(true)
     expect(isValid.value).toBeNull()

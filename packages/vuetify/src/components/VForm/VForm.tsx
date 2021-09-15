@@ -13,7 +13,7 @@ export const VForm = defineComponent({
 
   emits: {
     'update:modelValue': (val: boolean) => true as any,
-    clear: () => true as any,
+    resetValidation: () => true as any,
     reset: (e: Event) => true as any,
     submit: (e: Event) => true as any,
   },
@@ -28,9 +28,7 @@ export const VForm = defineComponent({
         onReset={ form.reset }
         onSubmit={ form.submit }
       >
-        {
-          slots.default?.(form)
-        }
+        { slots.default?.(form) }
       </form>
     )))
 

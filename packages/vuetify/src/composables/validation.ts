@@ -3,17 +3,17 @@ import { useForm } from '@/composables/form'
 
 // Utilities
 import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
-import { getCurrentInstance, getUid, propsFactory, wrapInPromise } from '@/util'
+import { getUid, propsFactory, wrapInPromise } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { ComponentInternalInstance, PropType } from 'vue'
 
 export type ValidationResult = string | true
 export type ValidationRule = string | ((value: any) => ValidationResult) | Promise<ValidationResult>
 
 export interface ValidationProps {
-  error: boolean
-  errorMessages: string | string[]
+  error?: boolean
+  errorMessages?: string | string[]
   maxErrors?: string | number
   rules: ValidationRule[]
   modelValue?: any
@@ -39,7 +39,11 @@ export const makeValidationProps = propsFactory({
   },
 })
 
-export function useValidation (props: ValidationProps, name: string) {
+export function useValidation (
+  props: ValidationProps,
+  name: string,
+  vm?: ComponentInternalInstance
+) {
   const errorMessages = ref<string[]>([])
   const isPristine = ref(true)
   const isValid = computed(() => {
@@ -62,28 +66,29 @@ export function useValidation (props: ValidationProps, name: string) {
     return classes
   })
 
-  const vm = getCurrentInstance('useValidation')
-  const form = useForm()
+  if (vm) {
+    const form = useForm()
 
-  if (form) {
-    const id = getUid()
+    if (form) {
+      const id = getUid()
 
-    onBeforeMount(() => {
-      form.register(id, validate, reset, clear)
-    })
+      onBeforeMount(() => {
+        form.register(id, validate, reset, resetValidation)
+      })
 
-    onBeforeUnmount(() => {
-      form.unregister(id)
-    })
+      onBeforeUnmount(() => {
+        form.unregister(id)
+      })
+    }
   }
 
   function reset () {
-    clear()
+    resetValidation()
 
     vm?.emit('update:modelValue', null)
   }
 
-  function clear () {
+  function resetValidation () {
     isPristine.value = true
     errorMessages.value = []
   }
@@ -126,8 +131,8 @@ export function useValidation (props: ValidationProps, name: string) {
     isPristine,
     isValid,
     isValidating,
-    clear,
     reset,
+    resetValidation,
     validate,
     validationClasses,
   }

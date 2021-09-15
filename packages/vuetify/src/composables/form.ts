@@ -11,7 +11,7 @@ interface FormProvide {
     id: number,
     validate: () => Promise<boolean | null>,
     reset: () => void,
-    clear: () => void
+    resetValidation: () => void
   ) => void
   unregister: (id: number) => void
   items: Ref<any[]>
@@ -20,8 +20,8 @@ interface FormProvide {
 interface FormInput {
   id: number
   validate: () => Promise<boolean | null>
-  clear: () => void
   reset: () => void
+  resetValidation: () => void
 }
 
 export const FormKey: InjectionKey<FormProvide> = Symbol.for('vuetify:form')
@@ -80,20 +80,20 @@ export function createForm (props: FormProps) {
     vm?.emit('reset', e)
   }
 
-  async function clear () {
-    items.value.forEach(item => item.clear())
+  async function resetValidation () {
+    items.value.forEach(item => item.resetValidation())
     model.value = null
 
-    vm?.emit('clear')
+    vm?.emit('resetValidation')
   }
 
   provide(FormKey, {
-    register: (id, validate, reset, clear) => {
+    register: (id, validate, reset, resetValidation) => {
       items.value.push({
         id,
         validate,
         reset,
-        clear,
+        resetValidation,
       })
     },
     unregister: id => {
@@ -108,8 +108,8 @@ export function createForm (props: FormProps) {
     isValidating,
     items,
     submit,
-    clear,
     reset,
+    resetValidation,
   }
 }
 
