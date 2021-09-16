@@ -52,8 +52,8 @@ export function useValidation (
   const form = useForm()
   const errorMessages = ref<string[]>([])
   const isPristine = ref(true)
-  const isDisabled = computed(() => !!(props.disabled || form?.isDisabled))
-  const isReadonly = computed(() => !!(props.readonly || form?.isReadonly))
+  const isDisabled = computed(() => !!(props.disabled || form?.isDisabled.value))
+  const isReadonly = computed(() => !!(props.readonly || form?.isReadonly.value))
   const isValid = computed(() => {
     if (
       props.error ||
@@ -73,14 +73,14 @@ export function useValidation (
   })
 
   const vm = getCurrentInstance('useValidation')
-  const id = computed(() => props.name ?? getUid())
+  const uid = computed(() => props.name ?? getUid())
 
   onBeforeMount(() => {
-    form?.register(id.value, validate, reset, resetValidation)
+    form?.register(uid.value, validate, reset, resetValidation)
   })
 
   onBeforeUnmount(() => {
-    form?.unregister(id.value)
+    form?.unregister(uid.value)
   })
 
   function reset () {
