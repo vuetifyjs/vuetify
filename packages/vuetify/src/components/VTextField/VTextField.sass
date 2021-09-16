@@ -6,16 +6,13 @@
 // TODO: abstract variables
 
 .v-text-field
-  // TODO: make this based on density
-  margin-bottom: 36px
-
   &__prefix,
   &__suffix
+    color: $text-field-affix-color
     height: 100%
     display: flex
     align-items: center
     cursor: default
-    opacity: .6
     transition: .15s opacity settings.$standard-easing
     white-space: nowrap
     padding-top: calc(var(--v-field-padding-top, 0) + 1px)
@@ -26,12 +23,6 @@
 
   &__suffix
     padding-inline-end: var(--v-field-padding-after)
-
-  &.v-field--has-details
-    margin-bottom: 14px
-
-  &.v-field--hide-details
-    margin-bottom: 0
 
   .v-field__input
     @at-root #{selector.append('.v-text-field--prefixed', &)}
@@ -54,3 +45,8 @@
     // Remove Firefox red outline
     &:invalid
       box-shadow: none
+
+  &.v-field--disabled
+    .v-text-field__prefix,
+    .v-text-field__suffix
+      color: $text-field-disabled-affix-color

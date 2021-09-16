@@ -36,21 +36,17 @@ export const VTextField = defineComponent({
     prefix: String,
     placeholder: String,
     persistentPlaceholder: Boolean,
+    persistentCounter: Boolean,
     suffix: String,
     type: {
       type: String,
       default: 'text',
     },
-    modelValue: String,
 
     ...makeVFieldProps(),
   },
 
-  emits: {
-    'update:modelValue': (val: string) => true as any,
-  },
-
-  setup (props, { attrs, emit, slots }) {
+  setup (props, { attrs, slots }) {
     const model = useProxiedModel(props, 'modelValue')
 
     const internalDirty = ref(false)
@@ -61,7 +57,18 @@ export const VTextField = defineComponent({
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function'
         ? props.counterValue(model.value)
-        : model.value?.toString().length
+        : (model.value || '').toString().length
+    })
+    const max = computed(() => {
+      if (attrs.maxlength) return attrs.maxlength as undefined
+
+      if (
+        !props.counter ||
+        (typeof props.counter !== 'number' &&
+        typeof props.counter !== 'string')
+      ) return undefined
+
+      return props.counter
     })
 
     function onIntersect (
@@ -111,6 +118,8 @@ export const VTextField = defineComponent({
             ...slots,
             default: ({
               isActive,
+              isDisabled,
+              isReadonly,
               inputRef,
               props: { class: fieldClass, ...slotProps },
             }: VFieldSlot) => {
@@ -132,7 +141,8 @@ export const VTextField = defineComponent({
                     }, null, ['once']]}
                     ref={ inputRef }
                     autofocus={ props.autofocus }
-                    disabled={ props.disabled }
+                    readonly={ isReadonly }
+                    disabled={ isDisabled }
                     placeholder={ props.placeholder }
                     size={ 1 }
                     type={ props.type }
@@ -148,17 +158,18 @@ export const VTextField = defineComponent({
                 </>
               )
             },
-            details: hasCounter ? () => (
+            details: hasCounter && (({ isFocused }: VFieldSlot) => (
               <>
                 <span />
 
                 <VCounter
+                  active={ props.persistentCounter || isFocused }
                   value={ counterValue.value }
-                  max={ attrs.maxlength as undefined }
+                  max={ max.value }
                   v-slots={ slots.counter }
                 />
               </>
-            ) : undefined,
+            )),
           }}
         />
       )

@@ -11,7 +11,6 @@
   font-size: $field-font-size
   letter-spacing: $field-letter-spacing
   max-width: $field-max-width
-  transition: color $field-transition-timing
   --v-field-padding-before: #{$field-control-padding}
   --v-field-padding-after: #{$field-control-padding}
 
@@ -115,20 +114,16 @@
 /* region AFFIXES */
 .v-field__prepend-inner,
 .v-field__append-inner,
+.v-field__clearable,
 .v-field .v-input__prepend,
 .v-field .v-input__append
   align-items: center
   display: flex
-  opacity: .6
-  transition: opacity $field-transition-timing
 
 .v-field__prepend-inner,
 .v-field__append-inner,
 .v-input__prepend,
 .v-input__append
-  .v-field--focused &
-    opacity: 1
-
   .v-field--variant-plain &,
   .v-field--variant-underlined &
     $root: &
@@ -146,11 +141,15 @@
     align-self: flex-end
 
 .v-field__clearable
+  cursor: pointer
   opacity: 0
-  transition: $field-clearable-transition
+  margin-inline-end: $field-clearable-margin-inline-end
+  transition: $field-transition-timing
+  transition-property: opacity, transform, width
 
   .v-field--focused &,
-  .v-field__control:hover &
+  .v-field__control:hover &,
+  .v-field--persistent-clear &
     opacity: 1
 
 /* endregion */
@@ -168,7 +167,8 @@
   position: absolute
   text-overflow: ellipsis
   transform-origin: left center
-  transition: opacity $field-transition-timing, transform $field-transition-timing
+  transition: $field-transition-timing
+  transition-property: opacity, transform
   white-space: nowrap
 
   margin-inline-start: var(--v-field-padding-before)
@@ -176,6 +176,9 @@
 
   .v-field--active &
     visibility: hidden
+
+  .v-field--error &
+    opacity: 1
 
   .v-field--focused &
     opacity: 1
@@ -252,8 +255,8 @@
       border-color: currentColor
       border-style: solid
       border-width: 0 0 $field-focused-border-width
-      transition: transform $field-transition-timing
       transform: scaleX(0)
+      transition: transform $field-transition-timing
       @include tools.absolute()
 
       @at-root #{selector.append('.v-field--focused', &)}
@@ -291,6 +294,7 @@
       &::after
         opacity: var(--v-field-border-opacity)
         transition: opacity $field-subtle-transition-timing
+
         @include tools.absolute()
 
       &::before
@@ -324,8 +328,14 @@
     padding-inline-start: 0
     padding-inline-end: 0
 
-.v-field__details
-  transition: inherit
+/* endregion */
+/* region LOADER */
+.v-field__loader
+  bottom: 0
+  left: 0
+  position: absolute
+  right: 0
+  width: 100%
 
 /* endregion */
 /* region OVERLAY */
@@ -349,6 +359,31 @@
 
 /* endregion */
 /* region MODIFIERS */
+.v-field
+  color: $field-color
+
+  .v-icon,
+  .v-messages,
+  .v-counter
+    color: $field-color
+
+  &--disabled
+    .v-icon,
+    .v-messages,
+    .v-counter
+      color: $field-disabled-color
+
+  &--error
+    color: $field-error-color
+
+    .v-icon,
+    .v-messages,
+    .v-counter
+      color: $field-error-color
+
+    .v-field__outline::after
+      transform: scaleX(1)
+
 .v-field--reverse
   .v-field__input
     @include tools.ltr()
@@ -359,7 +394,6 @@
 .v-field--disabled
   pointer-events: none
 
-  &,
   input
     color: $field-disabled-color
 
@@ -367,4 +401,10 @@
   &.v-field--variant-underlined
     .v-field__outline::before
       border-image: repeating-linear-gradient(to right, $field-disabled-color 0px, $field-disabled-color 2px, transparent 2px, transparent 4px) 1 repeat
+
+.v-field--loading
+  .v-field__outline::after,
+  .v-field__outline::before
+    opacity: 0
+
 /* endregion */
