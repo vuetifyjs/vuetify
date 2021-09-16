@@ -12,8 +12,7 @@ export const VValidation = defineComponent({
   },
 
   setup (props, { slots }) {
-    const vm = getCurrentInstance('v-validation')
-    const validation = useValidation(props, 'validation', vm)
+    const validation = useValidation(props, 'validation')
 
     return () => slots.default?.(validation)
   },

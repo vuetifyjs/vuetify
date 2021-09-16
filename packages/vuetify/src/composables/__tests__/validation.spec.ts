@@ -1,14 +1,26 @@
+import { makeValidationProps } from '@/composables/validation'
+import { defineComponent, nextTick, ref } from 'vue'
 // Composables
 import { useValidation } from '../validation'
 
 // Utilites
 import { describe, expect, it } from '@jest/globals'
-import { ref } from 'vue'
+import { mount } from '@vue/test-utils'
 
 // Types
 import type { ValidationProps, ValidationRule } from './../validation'
 
 describe('validation.ts', () => {
+  function mountFunction (props: Partial<ValidationProps> = {}) {
+    return mount(defineComponent({
+      props: makeValidationProps(),
+      setup (props) {
+        return useValidation(props, 'validation')
+      },
+      render: () => {}, // eslint-disable-line vue/require-render-return
+    }), { props })
+  }
+
   it.each([
     ['', [], []],
     ['', ['foo'], ['foo']],
@@ -24,14 +36,12 @@ describe('validation.ts', () => {
     expected: any
   ) => {
     const modelValue = ref(value)
-    const props = { rules, modelValue } as ValidationProps
-    const { errorMessages, validate } = useValidation(props, 'validation')
+    const props = { rules, modelValue }
+    const wrapper = mountFunction(props)
 
-    expect(errorMessages.value).toEqual([])
-
-    await validate()
-
-    expect(errorMessages.value).toEqual(expected)
+    expect(wrapper.vm.errorMessages).toEqual([])
+    await wrapper.vm.validate()
+    expect(wrapper.vm.errorMessages).toEqual(expected)
   })
 
   it.each([
@@ -45,59 +55,61 @@ describe('validation.ts', () => {
     maxErrors: number | string,
     expected: number,
   ) => {
-    const { errorMessages, validate } = useValidation({
+    const wrapper = mountFunction({
       maxErrors,
       rules: ['foo', 'bar', 'fizz', 'buzz'],
-    }, 'validation')
+    })
 
-    await validate()
+    await wrapper.vm.validate()
 
-    expect(errorMessages.value).toHaveLength(expected)
+    expect(wrapper.vm.errorMessages).toHaveLength(expected)
   })
 
   it('should warn the user when using an improper rule fn', async () => {
     const rule = (v: any) => !!v || 1234
-    const { validate } = useValidation({
+    const wrapper = mountFunction({
       rules: [rule as any],
-    }, 'validation')
+    })
 
-    await validate()
+    await wrapper.vm.validate()
 
     expect(`${1234} is not a valid value. Rule functions must return boolean true or a string.`).toHaveBeenTipped()
   })
 
   it('should update isPristine when using the validate and reset methods', async () => {
     const modelValue = ref('')
-    const { isPristine, isValid, validate, reset } = useValidation({
+    const wrapper = mountFunction({
       rules: [(v: any) => v === 'foo' || 'bar'],
       modelValue,
-    }, 'validation')
+    })
 
-    expect(isPristine.value).toBe(true)
-    expect(isValid.value).toBeNull()
+    expect(wrapper.vm.isPristine).toBe(true)
+    expect(wrapper.vm.isValid).toBeNull()
 
-    await validate()
+    await wrapper.vm.validate()
 
-    expect(isPristine.value).toBe(false)
-    expect(isValid.value).toBe(false)
+    expect(wrapper.vm.isPristine).toBe(false)
+    expect(wrapper.vm.isValid).toBe(false)
 
     modelValue.value = 'fizz'
 
-    await validate()
+    await nextTick()
+    await wrapper.vm.validate()
 
-    expect(isPristine.value).toBe(false)
-    expect(isValid.value).toBe(false)
+    expect(wrapper.vm.isPristine).toBe(false)
+    expect(wrapper.vm.isValid).toBe(false)
 
     modelValue.value = 'foo'
 
-    await validate()
+    await nextTick()
+    await wrapper.vm.validate()
 
-    expect(isPristine.value).toBe(false)
-    expect(isValid.value).toBe(true)
+    expect(wrapper.vm.isPristine).toBe(false)
+    expect(wrapper.vm.isValid).toBe(true)
 
-    reset()
+    wrapper.vm.reset()
 
-    expect(isPristine.value).toBe(true)
-    expect(isValid.value).toBeNull()
+    expect(wrapper.vm.isPristine).toBe(true)
+    expect(wrapper.vm.isValid).toBeNull()
   })
 })

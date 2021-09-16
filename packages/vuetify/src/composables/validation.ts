@@ -1,13 +1,12 @@
 // Composables
-import type { FormProvide } from '@/composables/form'
 import { useForm } from '@/composables/form'
 
 // Utilities
 import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
-import { getUid, propsFactory, wrapInPromise } from '@/util'
+import { getCurrentInstance, getUid, propsFactory, wrapInPromise } from '@/util'
 
 // Types
-import type { ComponentInternalInstance, PropType } from 'vue'
+import type { PropType } from 'vue'
 
 export type ValidationResult = string | true
 export type ValidationRule = string | ((value: any) => ValidationResult) | Promise<ValidationResult>
@@ -49,13 +48,12 @@ export const makeValidationProps = propsFactory({
 export function useValidation (
   props: ValidationProps,
   name: string,
-  vm?: ComponentInternalInstance
 ) {
+  const form = useForm()
   const errorMessages = ref<string[]>([])
-  const form = ref<FormProvide | null>()
   const isPristine = ref(true)
-  const isDisabled = computed(() => !!(props.disabled || form.value?.isDisabled))
-  const isReadonly = computed(() => !!(props.readonly || form.value?.isReadonly))
+  const isDisabled = computed(() => !!(props.disabled || form?.isDisabled))
+  const isReadonly = computed(() => !!(props.readonly || form?.isReadonly))
   const isValid = computed(() => {
     if (
       props.error ||
@@ -74,19 +72,16 @@ export function useValidation (
     }
   })
 
-  if (vm) {
-    form.value = useForm()
+  const vm = getCurrentInstance('useValidation')
+  const id = computed(() => props.name ?? getUid())
 
-    const name = computed(() => props.name ?? getUid())
+  onBeforeMount(() => {
+    form?.register(id.value, validate, reset, resetValidation)
+  })
 
-    onBeforeMount(() => {
-      form.value?.register(name.value, validate, reset, resetValidation)
-    })
-
-    onBeforeUnmount(() => {
-      form.value?.unregister(name.value)
-    })
-  }
+  onBeforeUnmount(() => {
+    form?.unregister(id.value)
+  })
 
   function reset () {
     resetValidation()

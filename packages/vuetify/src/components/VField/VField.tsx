@@ -104,7 +104,6 @@ export const VField = defineComponent({
   setup (props, { attrs, emit, slots }) {
     const { themeClasses } = useTheme(props)
     const isActive = useProxiedModel(props, 'active')
-    const vm = getCurrentInstance('v-field')
     const uid = getUid()
 
     const labelRef = ref<InstanceType<typeof VFieldLabel>>()
@@ -117,7 +116,7 @@ export const VField = defineComponent({
     watchEffect(() => isActive.value = isFocused.value || props.dirty)
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
-    const { errorMessages, isDisabled, isReadonly, isValid, validationClasses } = useValidation(props, 'v-field', vm)
+    const { errorMessages, isDisabled, isReadonly, isValid, validationClasses } = useValidation(props, 'v-field')
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
       return (
         isValid.value !== false &&
