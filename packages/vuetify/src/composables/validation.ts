@@ -3,13 +3,17 @@ import { useForm } from '@/composables/form'
 
 // Utilities
 import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
-import { getCurrentInstance, getUid, propsFactory, wrapInPromise } from '@/util'
+import { getCurrentInstance, getUid, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
 export type ValidationResult = string | true
-export type ValidationRule = string | ((value: any) => ValidationResult) | Promise<ValidationResult>
+export type ValidationRule =
+  | ValidationResult
+  | PromiseLike<ValidationResult>
+  | ((value: any) => ValidationResult)
+  | ((value: any) => PromiseLike<ValidationResult>)
 
 export interface ValidationProps {
   disabled?: boolean
@@ -40,7 +44,7 @@ export const makeValidationProps = propsFactory({
     default: () => ([]),
   },
   modelValue: {
-    type: [Number, String, Array, Object],
+    type: null,
     default: undefined as any,
   },
 })
@@ -106,7 +110,7 @@ export function useValidation (
       }
 
       const handler = typeof rule === 'function' ? rule : () => rule
-      const result = await wrapInPromise<ValidationResult>(handler(props?.modelValue?.value ?? props.modelValue))
+      const result = await handler(props?.modelValue?.value ?? props.modelValue)
 
       if (result === true) continue
 

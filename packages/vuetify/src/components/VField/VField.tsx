@@ -19,7 +19,6 @@ import { computed, ref, toRef, watch, watchEffect } from 'vue'
 import {
   convertToUnit,
   defineComponent,
-  getCurrentInstance,
   getUid,
   nullifyTransforms,
   propsFactory,

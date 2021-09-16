@@ -2,7 +2,7 @@
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
-import { defineComponent, getCurrentInstance } from '@/util'
+import { defineComponent } from '@/util'
 
 export const VValidation = defineComponent({
   name: 'VValidation',
