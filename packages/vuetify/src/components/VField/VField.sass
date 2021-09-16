@@ -11,7 +11,6 @@
   font-size: $field-font-size
   letter-spacing: $field-letter-spacing
   max-width: $field-max-width
-  transition: $field-transition
   --v-field-padding-before: #{$field-control-padding}
   --v-field-padding-after: #{$field-control-padding}
 
@@ -144,8 +143,8 @@
 .v-field__clearable
   cursor: pointer
   opacity: 0
-  margin-inline-end: 4px
-  transition-duration: 150ms
+  margin-inline-end: $field-clearable-margin-inline-end
+  transition: $field-transition-timing
   transition-property: opacity, transform, width
 
   .v-field--focused &,
@@ -168,7 +167,7 @@
   position: absolute
   text-overflow: ellipsis
   transform-origin: left center
-  transition-duration: 150ms
+  transition: $field-transition-timing
   transition-property: opacity, transform
   white-space: nowrap
 
@@ -257,8 +256,7 @@
       border-style: solid
       border-width: 0 0 $field-focused-border-width
       transform: scaleX(0)
-      transition-duration: 150ms
-      transition-property: transform
+      transition: transform $field-transition-timing
       @include tools.absolute()
 
       @at-root #{selector.append('.v-field--focused', &)}
@@ -273,8 +271,7 @@
     &__end
       border: 0 solid currentColor
       opacity: var(--v-field-border-opacity)
-      transition-duration: 150ms
-      transition-property: opacity
+      transition: opacity $field-subtle-transition-timing
 
     &__start
       flex: 0 0 $field-control-affixed-padding
@@ -296,8 +293,8 @@
       &::before,
       &::after
         opacity: var(--v-field-border-opacity)
-        transition-duration: 150ms
-        transition-property: opacity
+        transition: opacity $field-subtle-transition-timing
+
         @include tools.absolute()
 
       &::before
