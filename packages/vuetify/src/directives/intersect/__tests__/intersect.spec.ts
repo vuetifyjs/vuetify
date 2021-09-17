@@ -1,7 +1,7 @@
 // Directives
 import Intersect from '../'
 
-describe('resize.ts', () => {
+describe('intersect', () => {
   it('should bind event on inserted', () => {
     const callback = jest.fn()
     const el = document.createElement('div')
@@ -9,8 +9,8 @@ describe('resize.ts', () => {
 
     Intersect.inserted(el, {
       value: callback,
-      modifiers: { quiet: true } } as any
-    )
+      modifiers: { quiet: true },
+    } as any)
 
     expect((el as any)._observe).toBeTruthy()
     expect(callback).not.toHaveBeenCalled()
@@ -34,12 +34,15 @@ describe('resize.ts', () => {
       modifiers: { once: true },
     } as any)
 
-    expect(callback).toHaveBeenCalled()
+    expect(callback).toHaveBeenCalledTimes(1)
     expect((el as any)._observe).toBeTruthy()
 
-    if ((el as any)._observe) {
-      (el as any)._observe.observer.callback()
-    }
+    ;(el as any)._observe.observer.callback([{ isIntersecting: false }])
+
+    expect(callback).toHaveBeenCalledTimes(1)
+    expect((el as any)._observe).toBeTruthy()
+
+    ;(el as any)._observe.observer.callback([{ isIntersecting: true }])
 
     expect(callback).toHaveBeenCalledTimes(2)
     expect((el as any)._observe).toBeFalsy()

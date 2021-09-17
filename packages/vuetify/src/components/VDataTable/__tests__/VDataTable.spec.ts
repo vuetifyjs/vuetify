@@ -12,6 +12,7 @@ import { preset } from '../../../presets/default'
 import { resizeWindow } from '../../../../test'
 
 Vue.prototype.$vuetify = {
+  icons: {},
   rtl: false,
   lang: new Lang(preset),
 }
@@ -171,6 +172,23 @@ describe('VDataTable.ts', () => {
       scopedSlots: {
         body (props) {
           return this.$createElement('div', [props.items.length])
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render with foot slot', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: testHeaders,
+        items: testItems,
+        itemsPerPage: 5,
+      },
+      scopedSlots: {
+        foot (props) {
+          return this.$createElement('tfoot', [props.items.length])
         },
       },
     })
@@ -394,6 +412,22 @@ describe('VDataTable.ts', () => {
     expect(fn).toHaveBeenCalledWith(expect.objectContaining({
       page: 2,
     }))
+  })
+
+  it('should render footer.prepend slot content', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        headers: [],
+        items: [{}],
+      },
+      scopedSlots: {
+        'footer.prepend' () {
+          return this.$createElement('div', ['footer.prepend slot content'])
+        },
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render footer.page-text slot content', () => {
@@ -965,6 +999,8 @@ describe('VDataTable.ts', () => {
 
     wrapper.find('th').trigger('click')
     await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should hide group button when column is not groupable', async () => {
@@ -1033,5 +1069,39 @@ describe('VDataTable.ts', () => {
     wrapper.setProps({ search: 'EA' })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalCurrentItems).toHaveLength(1)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/14006
+  it('should allow selection on second page when using numbers as item key', async () => {
+    const input = jest.fn()
+    const items = testItems.map((item, index) => ({ ...item, name: index + 1 })).slice(0, 8)
+    const wrapper = mountFunction({
+      propsData: {
+        items,
+        itemKey: 'name',
+        itemsPerPage: 5,
+        showSelect: true,
+        headers: testHeaders,
+        mobileBreakpoint: 0,
+      },
+      listeners: {
+        input,
+      },
+    })
+
+    let checkbox = wrapper.findAll('td > .v-data-table__checkbox').at(4)
+
+    checkbox.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    wrapper.setProps({ page: 2 })
+    await wrapper.vm.$nextTick()
+
+    checkbox = wrapper.findAll('td > .v-data-table__checkbox').at(0)
+
+    checkbox.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenCalledWith([items[4], items[5]])
   })
 })

@@ -104,7 +104,7 @@ describe('activatable.ts', () => {
     expect(runDelay).toHaveBeenLastCalledWith('close')
   })
 
-  it('should warn when activator hasn\'t got a scope', () => {
+  it(`should warn when activator hasn't got a scope`, () => {
     mountFunction({
       slots: {
         activator: '<div></div>',

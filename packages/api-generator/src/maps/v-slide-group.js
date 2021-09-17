@@ -6,11 +6,19 @@ module.exports = {
         value: 'any[] | any',
       },
       {
-        name: 'click:location',
+        name: 'click:prev',
+        value: 'void',
+      },
+      {
+        name: 'click:next',
         value: 'void',
       },
     ],
     slots: [
+      {
+        name: 'default',
+        props: undefined,
+      },
       {
         name: 'next',
         value: undefined,

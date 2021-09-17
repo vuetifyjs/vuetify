@@ -88,6 +88,7 @@ export default mixins(
       default: () => [],
     } as PropValidator<DataTableHeader[]>,
     showSelect: Boolean,
+    checkboxColor: String,
     showExpand: Boolean,
     showGroupBy: Boolean,
     // TODO: Fix
@@ -223,8 +224,8 @@ export default mixins(
     customSortWithHeaders (items: any[], sortBy: string[], sortDesc: boolean[], locale: string) {
       return this.customSort(items, sortBy, sortDesc, locale, this.columnSorters)
     },
-    createItemProps (item: any): DataTableItemProps {
-      const props = VDataIterator.options.methods.createItemProps.call(this, item)
+    createItemProps (item: any, index: number): DataTableItemProps {
+      const props = VDataIterator.options.methods.createItemProps.call(this, item, index)
 
       return Object.assign(props, { headers: this.computedHeaders })
     },
@@ -262,6 +263,7 @@ export default mixins(
           options: props.options,
           mobile: this.isMobile,
           showGroupBy: this.showGroupBy,
+          checkboxColor: this.checkboxColor,
           someItems: this.someItems,
           everyItem: this.everyItem,
           singleSelect: this.singleSelect,
@@ -274,7 +276,11 @@ export default mixins(
         },
       }
 
-      const children: VNodeChildrenArrayContents = [getSlot(this, 'header', data)]
+      // TODO: rename to 'head'? (thead, tbody, tfoot)
+      const children: VNodeChildrenArrayContents = [getSlot(this, 'header', {
+        ...data,
+        isMobile: this.isMobile,
+      })]
 
       if (!this.hideDefaultHeader) {
         const scopedSlots = getPrefixedScopedSlots('header.', this.$scopedSlots)
@@ -313,6 +319,7 @@ export default mixins(
           return this.$scopedSlots.group({
             group: group.name,
             options: props.options,
+            isMobile: this.isMobile,
             items: group.items,
             headers: this.computedHeaders,
           })
@@ -331,7 +338,16 @@ export default mixins(
 
       if (this.$scopedSlots['group.header']) {
         children.unshift(this.$createElement('template', { slot: 'column.header' }, [
-          this.$scopedSlots['group.header']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders, isOpen, toggle: toggleFn, remove: removeFn }),
+          this.$scopedSlots['group.header']!({
+            group,
+            groupBy: props.options.groupBy,
+            isMobile: this.isMobile,
+            items,
+            headers: this.computedHeaders,
+            isOpen,
+            toggle: toggleFn,
+            remove: removeFn,
+          }),
         ]))
       } else {
         const toggle = this.$createElement(VBtn, {
@@ -366,7 +382,15 @@ export default mixins(
 
       if (this.$scopedSlots['group.summary']) {
         children.push(this.$createElement('template', { slot: 'column.summary' }, [
-          this.$scopedSlots['group.summary']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders, isOpen, toggle: toggleFn }),
+          this.$scopedSlots['group.summary']!({
+            group,
+            groupBy: props.options.groupBy,
+            isMobile: this.isMobile,
+            items,
+            headers: this.computedHeaders,
+            isOpen,
+            toggle: toggleFn,
+          }),
         ]))
       }
 
@@ -386,12 +410,17 @@ export default mixins(
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
         rows.push(this.$scopedSlots.item!({
-          ...this.createItemProps(item),
-          index: i,
+          ...this.createItemProps(item, i),
+          isMobile: this.isMobile,
         }))
 
         if (this.isExpanded(item)) {
-          rows.push(this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders }))
+          rows.push(this.$scopedSlots['expanded-item']!({
+            headers: this.computedHeaders,
+            isMobile: this.isMobile,
+            index: i,
+            item,
+          }))
         }
       }
 
@@ -399,18 +428,22 @@ export default mixins(
     },
     genDefaultRows (items: any[], props: DataScopeProps) {
       return this.$scopedSlots['expanded-item']
-        ? items.map(item => this.genDefaultExpandedRow(item))
-        : items.map(item => this.genDefaultSimpleRow(item))
+        ? items.map((item, index) => this.genDefaultExpandedRow(item, index))
+        : items.map((item, index) => this.genDefaultSimpleRow(item, index))
     },
-    genDefaultExpandedRow (item: any): VNode {
+    genDefaultExpandedRow (item: any, index: number): VNode {
       const isExpanded = this.isExpanded(item)
       const classes = {
         'v-data-table__expanded v-data-table__expanded__row': isExpanded,
       }
-      const headerRow = this.genDefaultSimpleRow(item, classes)
+      const headerRow = this.genDefaultSimpleRow(item, index, classes)
       const expandedRow = this.$createElement('tr', {
         staticClass: 'v-data-table__expanded v-data-table__expanded__content',
-      }, [this.$scopedSlots['expanded-item']!({ item, headers: this.computedHeaders })])
+      }, [this.$scopedSlots['expanded-item']!({
+        headers: this.computedHeaders,
+        isMobile: this.isMobile,
+        item,
+      })])
 
       return this.$createElement(RowGroup, {
         props: {
@@ -421,18 +454,22 @@ export default mixins(
         this.$createElement('template', { slot: 'row.content' }, [expandedRow]),
       ])
     },
-    genDefaultSimpleRow (item: any, classes: Record<string, boolean> = {}): VNode {
+    genDefaultSimpleRow (item: any, index: number, classes: Record<string, boolean> = {}): VNode {
       const scopedSlots = getPrefixedScopedSlots('item.', this.$scopedSlots)
 
-      const data = this.createItemProps(item)
+      const data = this.createItemProps(item, index)
 
       if (this.showSelect) {
         const slot = scopedSlots['data-table-select']
-        scopedSlots['data-table-select'] = slot ? () => slot(data) : () => this.$createElement(VSimpleCheckbox, {
+        scopedSlots['data-table-select'] = slot ? () => slot({
+          ...data,
+          isMobile: this.isMobile,
+        }) : () => this.$createElement(VSimpleCheckbox, {
           staticClass: 'v-data-table__checkbox',
           props: {
             value: data.isSelected,
             disabled: !this.isSelectable(item),
+            color: this.checkboxColor ?? '',
           },
           on: {
             input: (val: boolean) => data.select(val),
@@ -465,6 +502,7 @@ export default mixins(
         props: {
           headers: this.computedHeaders,
           hideDefaultHeader: this.hideDefaultHeader,
+          index,
           item,
           rtl: this.$vuetify.rtl,
         },
@@ -498,6 +536,9 @@ export default mixins(
         this.genItems(props.items, props),
         getSlot(this, 'body.append', data, true),
       ])
+    },
+    genFoot (props: DataScopeProps): VNode[] | undefined {
+      return this.$scopedSlots.foot?.(props)
     },
     genFooters (props: DataScopeProps) {
       const data = {
@@ -554,12 +595,19 @@ export default mixins(
 
       return this.$createElement(VSimpleTable, {
         props: simpleProps,
+        class: {
+          'v-data-table--mobile': this.isMobile,
+        },
       }, [
-        this.proxySlot('top', getSlot(this, 'top', props, true)),
+        this.proxySlot('top', getSlot(this, 'top', {
+          ...props,
+          isMobile: this.isMobile,
+        }, true)),
         this.genCaption(props),
         this.genColgroup(props),
         this.genHeaders(props),
         this.genBody(props),
+        this.genFoot(props),
         this.proxySlot('bottom', this.genFooters(props)),
       ])
     },
@@ -595,7 +643,7 @@ export default mixins(
         'page-count': (v: number) => this.$emit('page-count', v),
       },
       scopedSlots: {
-        default: this.genDefaultScopedSlot as any,
+        default: this.genDefaultScopedSlot,
       },
     })
   },

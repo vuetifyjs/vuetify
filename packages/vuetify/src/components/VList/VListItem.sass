@@ -6,15 +6,16 @@
     color: map-deep-get($material, 'text', 'disabled')
 
   &:not(.v-list-item--active):not(.v-list-item--disabled)
-    color: map-deep-get($material, 'text', 'primary') !important
+    color: map-deep-get($material, 'text', 'primary')
 
   .v-list-item__mask
     color: map-deep-get($material, 'text', 'disabled')
     background: map-deep-get($material, 'expansion-panels', 'focus')
 
-  .v-list-item__subtitle,
-  .v-list-item__action-text
-    color: map-deep-get($material, 'text', 'secondary')
+  &:not(.v-list-item--disabled)
+    .v-list-item__subtitle,
+    .v-list-item__action-text
+      color: map-deep-get($material, 'text', 'secondary')
 
   +states($material)
 
@@ -264,3 +265,4 @@
     -webkit-line-clamp: 2
     -webkit-box-orient: vertical
     display: -webkit-box
+

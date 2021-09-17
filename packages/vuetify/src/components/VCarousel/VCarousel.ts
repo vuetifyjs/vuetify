@@ -60,6 +60,13 @@ export default VWindow.extend({
     },
   },
 
+  // pass down the parent's theme
+  provide (): object {
+    return {
+      parentTheme: this.theme,
+    }
+  },
+
   data () {
     return {
       internalHeight: this.height,
@@ -157,7 +164,7 @@ export default VWindow.extend({
           mandatory: this.mandatory,
         },
         on: {
-          change: (val: any) => {
+          change: (val: unknown) => {
             this.internalValue = val
           },
         },

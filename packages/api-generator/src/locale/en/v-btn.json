@@ -1,0 +1,21 @@
+{
+  "props": {
+    "block": "Expands the button to 100% of available space.",
+    "depressed": "Removes the button box shadow.",
+    "fab": "Designates the button as a floating-action-button. Button will become _round_.",
+    "icon": "Designates the button as icon. Button will become _round_ and applies the **text** prop.",
+    "inputValue": "Controls the button's active state.",
+    "left": "Aligns the component towards the left. This should be used with the **absolute** or **fixed** props.",
+    "loading": "Adds a loading icon animation.",
+    "outlined": "Makes the background transparent and applies a thin border.",
+    "plain": "Removes the default background change applied when hovering over the button.",
+    "right": "Aligns the component towards the right. This should be used with the **absolute** or **fixed** props.",
+    "rounded": "Applies a large border radius on the button.",
+    "text": "Makes the background transparent. When using the **color** prop, the color will be applied to the button text instead of the background.",
+    "type": "Set the button's **type** attribute.",
+    "retainFocusOnClick": "Don't blur on click."
+  },
+  "slots": {
+    "loader": "Custom loader."
+  }
+}

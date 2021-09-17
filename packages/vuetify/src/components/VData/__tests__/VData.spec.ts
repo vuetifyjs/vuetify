@@ -102,6 +102,38 @@ describe('VData.ts', () => {
     }))
   })
 
+  it('should group items with null key and missing key as a null group', async () => {
+    const render = jest.fn()
+    const items = [
+      { id: 1, text: 'foo', baz: null },
+      { id: 2, text: 'bar', baz: 'one' },
+      { id: 3, text: 'baz' },
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        items,
+        groupBy: ['baz'],
+      },
+      scopedSlots: {
+        default: render,
+      },
+    })
+
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      groupedItems: [
+        {
+          name: '',
+          items: [items[0], items[2]],
+        },
+        {
+          name: 'one',
+          items: [items[1]],
+        },
+      ],
+    }))
+  })
+
   it('should group items by deep keys', async () => {
     const render = jest.fn()
     const items = [
@@ -529,5 +561,39 @@ describe('VData.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/11905
+  it('should group items when sort is disabled', async () => {
+    const render = jest.fn()
+    const items = [
+      { id: 1, text: 'foo', baz: 'one' },
+      { id: 2, text: 'bar', baz: 'two' },
+      { id: 3, text: 'baz', baz: 'one' },
+    ]
+
+    const wrapper = mountFunction({
+      propsData: {
+        items,
+        groupBy: ['baz'],
+        disableSort: true,
+      },
+      scopedSlots: {
+        default: render,
+      },
+    })
+
+    expect(render).toHaveBeenCalledWith(expect.objectContaining({
+      groupedItems: [
+        {
+          name: 'one',
+          items: [items[0], items[2]],
+        },
+        {
+          name: 'two',
+          items: [items[1]],
+        },
+      ],
+    }))
   })
 })

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VDataTable.ts should apply class from item to rows 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -21,18 +21,18 @@ exports[`VDataTable.ts should apply class from item to rows 1`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-668"
+                       aria-owns="list-699"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-668"
+                      <label for="input-699"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-668"
+                        <input id="input-699"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -321,7 +321,7 @@ exports[`VDataTable.ts should apply class from item to rows 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-672"
+               aria-owns="list-703"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -329,8 +329,8 @@ exports[`VDataTable.ts should apply class from item to rows 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-672"
+                <input aria-label="Rows per page:"
+                       id="input-703"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -362,7 +362,7 @@ exports[`VDataTable.ts should apply class from item to rows 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -376,7 +376,7 @@ exports[`VDataTable.ts should apply class from item to rows 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -393,7 +393,7 @@ exports[`VDataTable.ts should apply class from item to rows 1`] = `
 `;
 
 exports[`VDataTable.ts should apply class function to rows 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -413,18 +413,18 @@ exports[`VDataTable.ts should apply class function to rows 1`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-652"
+                       aria-owns="list-683"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-652"
+                      <label for="input-683"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-652"
+                        <input id="input-683"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -713,7 +713,7 @@ exports[`VDataTable.ts should apply class function to rows 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-656"
+               aria-owns="list-687"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -721,8 +721,8 @@ exports[`VDataTable.ts should apply class function to rows 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-656"
+                <input aria-label="Rows per page:"
+                       id="input-687"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -754,7 +754,7 @@ exports[`VDataTable.ts should apply class function to rows 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -768,7 +768,7 @@ exports[`VDataTable.ts should apply class function to rows 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -785,7 +785,7 @@ exports[`VDataTable.ts should apply class function to rows 1`] = `
 `;
 
 exports[`VDataTable.ts should apply class list to rows 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -805,18 +805,18 @@ exports[`VDataTable.ts should apply class list to rows 1`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-620"
+                       aria-owns="list-651"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-620"
+                      <label for="input-651"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-620"
+                        <input id="input-651"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -1105,7 +1105,7 @@ exports[`VDataTable.ts should apply class list to rows 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-624"
+               aria-owns="list-655"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -1113,8 +1113,8 @@ exports[`VDataTable.ts should apply class list to rows 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-624"
+                <input aria-label="Rows per page:"
+                       id="input-655"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -1146,7 +1146,7 @@ exports[`VDataTable.ts should apply class list to rows 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -1160,7 +1160,7 @@ exports[`VDataTable.ts should apply class list to rows 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -1177,7 +1177,7 @@ exports[`VDataTable.ts should apply class list to rows 1`] = `
 `;
 
 exports[`VDataTable.ts should apply class unique to rows 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -1197,18 +1197,18 @@ exports[`VDataTable.ts should apply class unique to rows 1`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-636"
+                       aria-owns="list-667"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-636"
+                      <label for="input-667"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-636"
+                        <input id="input-667"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -1497,7 +1497,7 @@ exports[`VDataTable.ts should apply class unique to rows 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-640"
+               aria-owns="list-671"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -1505,8 +1505,8 @@ exports[`VDataTable.ts should apply class unique to rows 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-640"
+                <input aria-label="Rows per page:"
+                       id="input-671"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -1538,7 +1538,7 @@ exports[`VDataTable.ts should apply class unique to rows 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -1552,7 +1552,7 @@ exports[`VDataTable.ts should apply class unique to rows 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -1569,7 +1569,7 @@ exports[`VDataTable.ts should apply class unique to rows 1`] = `
 `;
 
 exports[`VDataTable.ts should change page if item count decreases below page start 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -1589,18 +1589,18 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-452"
+                       aria-owns="list-483"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-452"
+                      <label for="input-483"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-452"
+                        <input id="input-483"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -1737,7 +1737,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -1752,7 +1752,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -1769,7 +1769,7 @@ exports[`VDataTable.ts should change page if item count decreases below page sta
 `;
 
 exports[`VDataTable.ts should default to first option in itemsPerPageOptions if it does not include itemsPerPage 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -1789,18 +1789,18 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-404"
+                       aria-owns="list-435"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-404"
+                      <label for="input-435"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-404"
+                        <input id="input-435"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -2139,7 +2139,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-408"
+               aria-owns="list-439"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -2147,8 +2147,8 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
                 <div class="v-select__selection v-select__selection--comma">
                   6
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-408"
+                <input aria-label="Rows per page:"
+                       id="input-439"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -2180,7 +2180,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -2194,7 +2194,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -2211,7 +2211,7 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
 `;
 
 exports[`VDataTable.ts should handle object when checking if it should default to first option in itemsPerPageOptions 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -2231,18 +2231,18 @@ exports[`VDataTable.ts should handle object when checking if it should default t
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-420"
+                       aria-owns="list-451"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-420"
+                      <label for="input-451"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-420"
+                        <input id="input-451"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -2781,7 +2781,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-424"
+               aria-owns="list-455"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -2789,8 +2789,8 @@ exports[`VDataTable.ts should handle object when checking if it should default t
                 <div class="v-select__selection v-select__selection--comma">
                   All
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-424"
+                <input aria-label="Rows per page:"
+                       id="input-455"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -2822,7 +2822,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -2837,7 +2837,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -2854,7 +2854,7 @@ exports[`VDataTable.ts should handle object when checking if it should default t
 `;
 
 exports[`VDataTable.ts should hide group button when column is not groupable 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -2874,18 +2874,18 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-716"
+                       aria-owns="list-747"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-716"
+                      <label for="input-747"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-716"
+                        <input id="input-747"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -3424,7 +3424,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-720"
+               aria-owns="list-751"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3432,8 +3432,8 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-720"
+                <input aria-label="Rows per page:"
+                       id="input-751"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -3465,7 +3465,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -3480,7 +3480,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -3497,7 +3497,7 @@ exports[`VDataTable.ts should hide group button when column is not groupable 1`]
 `;
 
 exports[`VDataTable.ts should limit page to current page count if not using server-items-length 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -3517,18 +3517,18 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-388"
+                       aria-owns="list-419"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-388"
+                      <label for="input-419"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-388"
+                        <input id="input-419"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -3817,7 +3817,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-392"
+               aria-owns="list-423"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3825,8 +3825,8 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-392"
+                <input aria-label="Rows per page:"
+                       id="input-423"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -3857,7 +3857,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -3872,7 +3872,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -3889,7 +3889,7 @@ exports[`VDataTable.ts should limit page to current page count if not using serv
 `;
 
 exports[`VDataTable.ts should not limit page to current item count when using server-items-length 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -3909,18 +3909,18 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-340"
+                       aria-owns="list-371"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-340"
+                      <label for="input-371"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-340"
+                        <input id="input-371"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -3964,7 +3964,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-344"
+               aria-owns="list-375"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -3972,8 +3972,8 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-344"
+                <input aria-label="Rows per page:"
+                       id="input-375"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -4004,7 +4004,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -4019,7 +4019,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -4036,7 +4036,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
 `;
 
 exports[`VDataTable.ts should not limit page to current item count when using server-items-length 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -4056,18 +4056,18 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-340"
+                       aria-owns="list-371"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-340"
+                      <label for="input-371"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-340"
+                        <input id="input-371"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -4356,7 +4356,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-344"
+               aria-owns="list-375"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -4364,8 +4364,8 @@ exports[`VDataTable.ts should not limit page to current item count when using se
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-344"
+                <input aria-label="Rows per page:"
+                       id="input-375"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -4396,7 +4396,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
     </div>
     <div class="v-data-footer__icons-before">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -4410,7 +4410,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -4427,7 +4427,7 @@ exports[`VDataTable.ts should not limit page to current item count when using se
 `;
 
 exports[`VDataTable.ts should not search column with filterable set to false 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -4447,18 +4447,18 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-356"
+                       aria-owns="list-387"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-356"
+                      <label for="input-387"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-356"
+                        <input id="input-387"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -4997,7 +4997,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-360"
+               aria-owns="list-391"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -5005,8 +5005,8 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-360"
+                <input aria-label="Rows per page:"
+                       id="input-391"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -5038,7 +5038,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -5053,7 +5053,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -5070,7 +5070,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 1`]
 `;
 
 exports[`VDataTable.ts should not search column with filterable set to false 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -5090,18 +5090,18 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-356"
+                       aria-owns="list-387"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-356"
+                      <label for="input-387"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-356"
+                        <input id="input-387"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -5145,7 +5145,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-360"
+               aria-owns="list-391"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -5153,8 +5153,8 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-360"
+                <input aria-label="Rows per page:"
+                       id="input-391"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -5186,7 +5186,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -5201,7 +5201,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -5218,7 +5218,7 @@ exports[`VDataTable.ts should not search column with filterable set to false 2`]
 `;
 
 exports[`VDataTable.ts should not search column with filterable set to false and has filter function 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -5238,18 +5238,18 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-372"
+                       aria-owns="list-403"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-372"
+                      <label for="input-403"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-372"
+                        <input id="input-403"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -5438,7 +5438,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-376"
+               aria-owns="list-407"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -5446,8 +5446,8 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-376"
+                <input aria-label="Rows per page:"
+                       id="input-407"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -5479,7 +5479,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -5494,7 +5494,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -5511,7 +5511,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
 `;
 
 exports[`VDataTable.ts should not search column with filterable set to false and has filter function 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -5531,18 +5531,18 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-372"
+                       aria-owns="list-403"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-372"
+                      <label for="input-403"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-372"
+                        <input id="input-403"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -6081,7 +6081,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-376"
+               aria-owns="list-407"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -6089,8 +6089,8 @@ exports[`VDataTable.ts should not search column with filterable set to false and
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-376"
+                <input aria-label="Rows per page:"
+                       id="input-407"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -6122,7 +6122,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6137,7 +6137,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6154,7 +6154,7 @@ exports[`VDataTable.ts should not search column with filterable set to false and
 `;
 
 exports[`VDataTable.ts should not select item that is not selectable 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6174,13 +6174,15 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
                    class="v-data-table-header-mobile__select"
               >
                 <div class="v-data-table__checkbox v-simple-checkbox">
-                  <div class="v-input--selection-controls__ripple">
+                  <div class="v-input--selection-controls__input">
+                    <i aria-hidden="true"
+                       class="v-icon notranslate material-icons theme--light"
+                    >
+                      $checkboxOff
+                    </i>
+                    <div class="v-input--selection-controls__ripple">
+                    </div>
                   </div>
-                  <i aria-hidden="true"
-                     class="v-icon notranslate material-icons theme--light"
-                  >
-                    $checkboxOff
-                  </i>
                 </div>
               </div>
               <div class="v-input v-input--hide-details theme--light v-text-field v-select">
@@ -6188,18 +6190,18 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-484"
+                       aria-owns="list-515"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-484"
+                      <label for="input-515"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-484"
+                        <input id="input-515"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -6233,11 +6235,13 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
             </div>
             <div class="v-data-table__mobile-row__cell">
               <div class="v-data-table__checkbox v-simple-checkbox v-simple-checkbox--disabled">
-                <i aria-hidden="true"
-                   class="v-icon notranslate v-icon--disabled material-icons theme--light"
-                >
-                  $checkboxOff
-                </i>
+                <div class="v-input--selection-controls__input">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate v-icon--disabled material-icons theme--light"
+                  >
+                    $checkboxOff
+                  </i>
+                </div>
               </div>
             </div>
           </td>
@@ -6296,13 +6300,15 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
             </div>
             <div class="v-data-table__mobile-row__cell">
               <div class="v-data-table__checkbox v-simple-checkbox">
-                <div class="v-input--selection-controls__ripple">
+                <div class="v-input--selection-controls__input">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $checkboxOff
+                  </i>
+                  <div class="v-input--selection-controls__ripple">
+                  </div>
                 </div>
-                <i aria-hidden="true"
-                   class="v-icon notranslate material-icons theme--light"
-                >
-                  $checkboxOff
-                </i>
               </div>
             </div>
           </td>
@@ -6366,7 +6372,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-490"
+               aria-owns="list-521"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -6374,8 +6380,8 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-490"
+                <input aria-label="Rows per page:"
+                       id="input-521"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -6407,7 +6413,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6422,7 +6428,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6439,7 +6445,7 @@ exports[`VDataTable.ts should not select item that is not selectable 1`] = `
 `;
 
 exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6469,7 +6475,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-298"
+               aria-owns="list-315"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -6478,7 +6484,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
                   10
                 </div>
                 <input aria-label="Foo:"
-                       id="input-298"
+                       id="input-315"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -6510,7 +6516,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6525,7 +6531,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6542,7 +6548,7 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
 `;
 
 exports[`VDataTable.ts should render 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6580,7 +6586,7 @@ exports[`VDataTable.ts should render 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-6"
                        readonly="readonly"
                        type="text"
@@ -6613,7 +6619,7 @@ exports[`VDataTable.ts should render 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6628,7 +6634,7 @@ exports[`VDataTable.ts should render 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6645,7 +6651,7 @@ exports[`VDataTable.ts should render 1`] = `
 `;
 
 exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6672,7 +6678,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-328"
+               aria-owns="list-359"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -6680,8 +6686,8 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-328"
+                <input aria-label="Rows per page:"
+                       id="input-359"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -6715,7 +6721,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6730,7 +6736,110 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Next page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon notranslate material-icons theme--light"
+          >
+            $next
+          </i>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VDataTable.ts should render footer.prepend slot content 1`] = `
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
+  <div class="v-data-table__wrapper">
+    <table>
+      <colgroup>
+      </colgroup>
+      <thead class="v-data-table-header v-data-table-header-mobile">
+        <tr>
+          <th>
+            <div class="v-data-table-header-mobile__wrapper">
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="v-data-table__mobile-table-row">
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="v-data-footer">
+    <div>
+      footer.prepend slot content
+    </div>
+    <div class="v-data-footer__select">
+      Rows per page:
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
+        <div class="v-input__control">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="list-345"
+               class="v-input__slot"
+          >
+            <div class="v-select__slot">
+              <div class="v-select__selections">
+                <div class="v-select__selection v-select__selection--comma">
+                  10
+                </div>
+                <input aria-label="Rows per page:"
+                       id="input-345"
+                       readonly="readonly"
+                       type="text"
+                       aria-readonly="false"
+                       autocomplete="off"
+                >
+              </div>
+              <div class="v-input__append-inner">
+                <div class="v-input__icon v-input__icon--append">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $dropdown
+                  </i>
+                </div>
+              </div>
+              <input type="hidden"
+                     value="10"
+              >
+            </div>
+            <div class="v-menu">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-data-footer__pagination">
+      1-1 of 1
+    </div>
+    <div class="v-data-footer__icons-before">
+      <button type="button"
+              disabled="disabled"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Previous page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon notranslate material-icons theme--light"
+          >
+            $prev
+          </i>
+        </span>
+      </button>
+    </div>
+    <div class="v-data-footer__icons-after">
+      <button type="button"
+              disabled="disabled"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6747,7 +6856,7 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
 `;
 
 exports[`VDataTable.ts should render item slot when using group-by function 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6766,18 +6875,18 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-546"
+                       aria-owns="list-577"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-546"
+                      <label for="input-577"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-546"
+                        <input id="input-577"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -6808,7 +6917,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -6820,7 +6929,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
             </button>
             name: Frozen Yogurt
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -6838,7 +6947,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -6850,7 +6959,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
             </button>
             name: Ice cream sandwich
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -6876,7 +6985,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-558"
+               aria-owns="list-589"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -6884,8 +6993,8 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-558"
+                <input aria-label="Rows per page:"
+                       id="input-589"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -6917,7 +7026,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -6932,7 +7041,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -6949,7 +7058,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
 `;
 
 exports[`VDataTable.ts should render loading state 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -6968,7 +7077,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
             <div role="progressbar"
                  aria-valuemin="0"
                  aria-valuemax="100"
-                 class="v-progress-linear v-progress-linear--absolute v-progress-linear--reverse theme--light"
+                 class="v-progress-linear v-progress-linear--absolute v-progress-linear--reverse v-progress-linear--visible theme--light"
                  style="height: 4px;"
             >
               <div class="v-progress-linear__background primary"
@@ -7004,7 +7113,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-221"
+               aria-owns="list-238"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -7012,8 +7121,8 @@ exports[`VDataTable.ts should render loading state 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-221"
+                <input aria-label="Rows per page:"
+                       id="input-238"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -7045,7 +7154,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -7060,7 +7169,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -7077,7 +7186,7 @@ exports[`VDataTable.ts should render loading state 1`] = `
 `;
 
 exports[`VDataTable.ts should render loading state 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -7097,18 +7206,18 @@ exports[`VDataTable.ts should render loading state 2`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-233"
+                       aria-owns="list-250"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-233"
+                      <label for="input-250"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-233"
+                        <input id="input-250"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -7161,7 +7270,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-237"
+               aria-owns="list-254"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -7169,8 +7278,8 @@ exports[`VDataTable.ts should render loading state 2`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-237"
+                <input aria-label="Rows per page:"
+                       id="input-254"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -7202,7 +7311,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -7217,7 +7326,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -7234,7 +7343,7 @@ exports[`VDataTable.ts should render loading state 2`] = `
 `;
 
 exports[`VDataTable.ts should render with body slot 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -7313,7 +7422,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-39"
                        readonly="readonly"
                        type="text"
@@ -7346,7 +7455,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -7360,7 +7469,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -7377,7 +7486,7 @@ exports[`VDataTable.ts should render with body slot 1`] = `
 `;
 
 exports[`VDataTable.ts should render with data 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -7705,7 +7814,7 @@ exports[`VDataTable.ts should render with data 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
+                <input aria-label="Rows per page:"
                        id="input-22"
                        readonly="readonly"
                        type="text"
@@ -7738,7 +7847,7 @@ exports[`VDataTable.ts should render with data 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -7752,7 +7861,7 @@ exports[`VDataTable.ts should render with data 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -7768,11 +7877,12 @@ exports[`VDataTable.ts should render with data 1`] = `
 </div>
 `;
 
-exports[`VDataTable.ts should render with group scoped slot 1`] = `
-<div class="v-data-table theme--light">
+exports[`VDataTable.ts should render with foot slot 1`] = `
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
+        <col class>
         <col class>
         <col class>
         <col class>
@@ -7788,18 +7898,18 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-202"
+                       aria-owns="list-52"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-202"
+                      <label for="input-52"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-202"
+                        <input id="input-52"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -7827,19 +7937,260 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
         </tr>
       </thead>
       <tbody>
-        <div>
-          {"group":0,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"items":[{"name":"Jelly bean","calories":375,"fat":0,"carbs":94,"protein":0,"iron":"0%"},{"name":"Lollipop","calories":392,"fat":0.2,"carbs":98,"protein":0,"iron":"2%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
-        </div>
-        <div>
-          {"group":3.9,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"items":[{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
-        </div>
-        <div>
-          {"group":4,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"items":[{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%","class":"test"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
-        </div>
-        <div>
-          {"group":4.3,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"items":[{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%","class":["test","second"]}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
-        </div>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Frozen Yogurt
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Calories
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              159
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Fat (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              6
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Carbs (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              24
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Protein (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              4
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Iron (%)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              1%
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Ice cream sandwich
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Calories
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              237
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Fat (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              9
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Carbs (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              37
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Protein (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              4.3
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Iron (%)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              1%
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Eclair
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Calories
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              262
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Fat (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              16
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Carbs (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              23
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Protein (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              6
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Iron (%)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              7%
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Cupcake
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Calories
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              305
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Fat (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              3.7
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Carbs (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              67
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Protein (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              4.3
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Iron (%)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              8%
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Gingerbread
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Calories
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              356
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Fat (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              16
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Carbs (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              49
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Protein (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              3.9
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Iron (%)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              16%
+            </div>
+          </td>
+        </tr>
       </tbody>
+      <tfoot>
+        5
+      </tfoot>
     </table>
   </div>
   <div class="v-data-footer">
@@ -7850,7 +8201,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-206"
+               aria-owns="list-56"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -7858,8 +8209,8 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-206"
+                <input aria-label="Rows per page:"
+                       id="input-56"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -7891,7 +8242,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -7905,7 +8256,7 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -7921,8 +8272,8 @@ exports[`VDataTable.ts should render with group scoped slot 1`] = `
 </div>
 `;
 
-exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
-<div class="v-data-table theme--light">
+exports[`VDataTable.ts should render with group scoped slot 1`] = `
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -7941,18 +8292,171 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-114"
+                       aria-owns="list-219"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-114"
+                      <label for="input-219"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-114"
+                        <input id="input-219"
+                               readonly="readonly"
+                               type="text"
+                               aria-readonly="false"
+                               autocomplete="off"
+                        >
+                      </div>
+                      <div class="v-input__append-inner">
+                        <div class="v-input__icon v-input__icon--append">
+                          <i aria-hidden="true"
+                             class="v-icon notranslate material-icons theme--light"
+                          >
+                            $dropdown
+                          </i>
+                        </div>
+                      </div>
+                      <input type="hidden">
+                    </div>
+                    <div class="v-menu">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <div>
+          {"group":0,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"isMobile":true,"items":[{"name":"Jelly bean","calories":375,"fat":0,"carbs":94,"protein":0,"iron":"0%"},{"name":"Lollipop","calories":392,"fat":0.2,"carbs":98,"protein":0,"iron":"2%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
+        </div>
+        <div>
+          {"group":3.9,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"isMobile":true,"items":[{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
+        </div>
+        <div>
+          {"group":4,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"isMobile":true,"items":[{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%","class":"test"}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
+        </div>
+        <div>
+          {"group":4.3,"options":{"page":1,"itemsPerPage":5,"sortBy":[],"sortDesc":[],"groupBy":["protein"],"groupDesc":[false],"mustSort":false,"multiSort":false},"isMobile":true,"items":[{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%","class":["test","second"]}],"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Iron (%)","value":"iron"}]}
+        </div>
+      </tbody>
+    </table>
+  </div>
+  <div class="v-data-footer">
+    <div class="v-data-footer__select">
+      Rows per page:
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
+        <div class="v-input__control">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="list-223"
+               class="v-input__slot"
+          >
+            <div class="v-select__slot">
+              <div class="v-select__selections">
+                <div class="v-select__selection v-select__selection--comma">
+                  5
+                </div>
+                <input aria-label="Rows per page:"
+                       id="input-223"
+                       readonly="readonly"
+                       type="text"
+                       aria-readonly="false"
+                       autocomplete="off"
+                >
+              </div>
+              <div class="v-input__append-inner">
+                <div class="v-input__icon v-input__icon--append">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $dropdown
+                  </i>
+                </div>
+              </div>
+              <input type="hidden"
+                     value="5"
+              >
+            </div>
+            <div class="v-menu">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-data-footer__pagination">
+      1-5 of 10
+    </div>
+    <div class="v-data-footer__icons-before">
+      <button type="button"
+              disabled="disabled"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Previous page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon notranslate material-icons theme--light"
+          >
+            $prev
+          </i>
+        </span>
+      </button>
+    </div>
+    <div class="v-data-footer__icons-after">
+      <button type="button"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Next page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon notranslate material-icons theme--light"
+          >
+            $next
+          </i>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
+  <div class="v-data-table__wrapper">
+    <table>
+      <colgroup>
+        <col class>
+        <col class>
+        <col class>
+        <col class>
+        <col class>
+      </colgroup>
+      <thead class="v-data-table-header v-data-table-header-mobile">
+        <tr>
+          <th>
+            <div class="v-data-table-header-mobile__wrapper">
+              <div class="v-input v-input--hide-details theme--light v-text-field v-select">
+                <div class="v-input__control">
+                  <div role="button"
+                       aria-haspopup="listbox"
+                       aria-expanded="false"
+                       aria-owns="list-131"
+                       class="v-input__slot"
+                  >
+                    <div class="v-select__slot">
+                      <label for="input-131"
+                             class="v-label theme--light"
+                             style="left: 0px; position: absolute;"
+                      >
+                        Sort by
+                      </label>
+                      <div class="v-select__selections">
+                        <input id="input-131"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -7983,7 +8487,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -7995,7 +8499,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
             calories: 159
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8057,7 +8561,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8069,7 +8573,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
             calories: 237
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8131,7 +8635,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8143,7 +8647,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
             calories: 262
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8205,7 +8709,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8217,7 +8721,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
             calories: 305
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8279,7 +8783,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8291,7 +8795,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
             </button>
             calories: 356
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8361,7 +8865,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-138"
+               aria-owns="list-155"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -8369,8 +8873,8 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-138"
+                <input aria-label="Rows per page:"
+                       id="input-155"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -8402,7 +8906,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -8416,7 +8920,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -8433,7 +8937,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
 `;
 
 exports[`VDataTable.ts should render with grouped rows 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -8452,18 +8956,18 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-168"
+                       aria-owns="list-185"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-168"
+                      <label for="input-185"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-168"
+                        <input id="input-185"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -8494,7 +8998,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8506,7 +9010,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </button>
             protein: 0
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8605,7 +9109,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8617,7 +9121,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </button>
             protein: 3.9
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8674,7 +9178,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8686,7 +9190,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </button>
             protein: 4
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8743,7 +9247,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8755,7 +9259,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
             </button>
             protein: 4.3
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -8820,7 +9324,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-188"
+               aria-owns="list-205"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -8828,8 +9332,8 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-188"
+                <input aria-label="Rows per page:"
+                       id="input-205"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -8861,7 +9365,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -8875,7 +9379,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -8892,7 +9396,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
 `;
 
 exports[`VDataTable.ts should render with item scoped slot 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -8912,18 +9416,18 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-152"
+                       aria-owns="list-169"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-152"
+                      <label for="input-169"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-152"
+                        <input id="input-169"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -8952,19 +9456,19 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
       </thead>
       <tbody>
         <div>
-          {"item":{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%","class":"test"},"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":0}
+          {"item":{"name":"Frozen Yogurt","calories":159,"fat":6,"carbs":24,"protein":4,"iron":"1%","class":"test"},"index":0,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"item":{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%","class":["test","second"]},"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":1}
+          {"item":{"name":"Ice cream sandwich","calories":237,"fat":9,"carbs":37,"protein":4.3,"iron":"1%","class":["test","second"]},"index":1,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"item":{"name":"Eclair","calories":262,"fat":16,"carbs":23,"protein":6,"iron":"7%","class":{"test":true,"second":false}},"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":2}
+          {"item":{"name":"Eclair","calories":262,"fat":16,"carbs":23,"protein":6,"iron":"7%","class":{"test":true,"second":false}},"index":2,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"item":{"name":"Cupcake","calories":305,"fat":3.7,"carbs":67,"protein":4.3,"iron":"8%"},"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":3}
+          {"item":{"name":"Cupcake","calories":305,"fat":3.7,"carbs":67,"protein":4.3,"iron":"8%"},"index":3,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
         </div>
         <div>
-          {"item":{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"},"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}],"index":4}
+          {"item":{"name":"Gingerbread","calories":356,"fat":16,"carbs":49,"protein":3.9,"iron":"16%"},"index":4,"isSelected":false,"isExpanded":false,"isMobile":true,"headers":[{"text":"Dessert (100g serving)","align":"left","sortable":false,"value":"name"},{"text":"Calories","value":"calories"},{"text":"Fat (g)","value":"fat"},{"text":"Carbs (g)","value":"carbs"},{"text":"Protein (g)","value":"protein"},{"text":"Iron (%)","value":"iron"}]}
         </div>
       </tbody>
     </table>
@@ -8977,7 +9481,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-156"
+               aria-owns="list-173"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -8985,8 +9489,8 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-156"
+                <input aria-label="Rows per page:"
+                       id="input-173"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -9018,7 +9522,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -9032,7 +9536,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -9049,7 +9553,7 @@ exports[`VDataTable.ts should render with item scoped slot 1`] = `
 `;
 
 exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -9069,18 +9573,18 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-96"
+                       aria-owns="list-113"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-96"
+                      <label for="input-113"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-96"
+                        <input id="input-113"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -9394,7 +9898,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-100"
+               aria-owns="list-117"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -9402,8 +9906,8 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-100"
+                <input aria-label="Rows per page:"
+                       id="input-117"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -9435,7 +9939,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -9449,7 +9953,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -9466,7 +9970,7 @@ exports[`VDataTable.ts should render with item.expanded scoped slot 1`] = `
 `;
 
 exports[`VDataTable.ts should render with showExpand 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -9487,18 +9991,18 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-51"
+                       aria-owns="list-68"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-51"
+                      <label for="input-68"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-51"
+                        <input id="input-68"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -9842,7 +10346,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-60"
+               aria-owns="list-77"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -9850,8 +10354,8 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-60"
+                <input aria-label="Rows per page:"
+                       id="input-77"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -9883,7 +10387,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -9897,7 +10401,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -9914,7 +10418,7 @@ exports[`VDataTable.ts should render with showExpand 1`] = `
 `;
 
 exports[`VDataTable.ts should render with showExpand 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -9935,18 +10439,18 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-51"
+                       aria-owns="list-68"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-51"
+                      <label for="input-68"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-51"
+                        <input id="input-68"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -10290,7 +10794,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-60"
+               aria-owns="list-77"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -10298,8 +10802,8 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-60"
+                <input aria-label="Rows per page:"
+                       id="input-77"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -10331,7 +10835,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -10345,7 +10849,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -10362,7 +10866,7 @@ exports[`VDataTable.ts should render with showExpand 2`] = `
 `;
 
 exports[`VDataTable.ts should render with showSelect 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -10382,13 +10886,15 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                    class="v-data-table-header-mobile__select"
               >
                 <div class="v-data-table__checkbox v-simple-checkbox">
-                  <div class="v-input--selection-controls__ripple">
+                  <div class="v-input--selection-controls__input">
+                    <i aria-hidden="true"
+                       class="v-icon notranslate material-icons theme--light"
+                    >
+                      $checkboxOff
+                    </i>
+                    <div class="v-input--selection-controls__ripple">
+                    </div>
                   </div>
-                  <i aria-hidden="true"
-                     class="v-icon notranslate material-icons theme--light"
-                  >
-                    $checkboxOff
-                  </i>
                 </div>
               </div>
               <div class="v-input v-input--hide-details theme--light v-text-field v-select">
@@ -10396,18 +10902,18 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-73"
+                       aria-owns="list-90"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-73"
+                      <label for="input-90"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-73"
+                        <input id="input-90"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -10441,13 +10947,15 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             </div>
             <div class="v-data-table__mobile-row__cell">
               <div class="v-data-table__checkbox v-simple-checkbox">
-                <div class="v-input--selection-controls__ripple">
+                <div class="v-input--selection-controls__input">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $checkboxOff
+                  </i>
+                  <div class="v-input--selection-controls__ripple">
+                  </div>
                 </div>
-                <i aria-hidden="true"
-                   class="v-icon notranslate material-icons theme--light"
-                >
-                  $checkboxOff
-                </i>
               </div>
             </div>
           </td>
@@ -10506,13 +11014,15 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             </div>
             <div class="v-data-table__mobile-row__cell">
               <div class="v-data-table__checkbox v-simple-checkbox">
-                <div class="v-input--selection-controls__ripple">
+                <div class="v-input--selection-controls__input">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $checkboxOff
+                  </i>
+                  <div class="v-input--selection-controls__ripple">
+                  </div>
                 </div>
-                <i aria-hidden="true"
-                   class="v-icon notranslate material-icons theme--light"
-                >
-                  $checkboxOff
-                </i>
               </div>
             </div>
           </td>
@@ -10571,13 +11081,15 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             </div>
             <div class="v-data-table__mobile-row__cell">
               <div class="v-data-table__checkbox v-simple-checkbox">
-                <div class="v-input--selection-controls__ripple">
+                <div class="v-input--selection-controls__input">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $checkboxOff
+                  </i>
+                  <div class="v-input--selection-controls__ripple">
+                  </div>
                 </div>
-                <i aria-hidden="true"
-                   class="v-icon notranslate material-icons theme--light"
-                >
-                  $checkboxOff
-                </i>
               </div>
             </div>
           </td>
@@ -10636,13 +11148,15 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             </div>
             <div class="v-data-table__mobile-row__cell">
               <div class="v-data-table__checkbox v-simple-checkbox">
-                <div class="v-input--selection-controls__ripple">
+                <div class="v-input--selection-controls__input">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $checkboxOff
+                  </i>
+                  <div class="v-input--selection-controls__ripple">
+                  </div>
                 </div>
-                <i aria-hidden="true"
-                   class="v-icon notranslate material-icons theme--light"
-                >
-                  $checkboxOff
-                </i>
               </div>
             </div>
           </td>
@@ -10701,13 +11215,15 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
             </div>
             <div class="v-data-table__mobile-row__cell">
               <div class="v-data-table__checkbox v-simple-checkbox">
-                <div class="v-input--selection-controls__ripple">
+                <div class="v-input--selection-controls__input">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $checkboxOff
+                  </i>
+                  <div class="v-input--selection-controls__ripple">
+                  </div>
                 </div>
-                <i aria-hidden="true"
-                   class="v-icon notranslate material-icons theme--light"
-                >
-                  $checkboxOff
-                </i>
               </div>
             </div>
           </td>
@@ -10771,7 +11287,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-82"
+               aria-owns="list-99"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -10779,8 +11295,8 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   5
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-82"
+                <input aria-label="Rows per page:"
+                       id="input-99"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -10812,7 +11328,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -10826,7 +11342,245 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
     </div>
     <div class="v-data-footer__icons-after">
       <button type="button"
-              class="v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Next page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon notranslate material-icons theme--light"
+          >
+            $next
+          </i>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VDataTable.ts should respect mustSort property on options 1`] = `
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
+  <div class="v-data-table__wrapper">
+    <table>
+      <colgroup>
+        <col class>
+      </colgroup>
+      <thead class="v-data-table-header v-data-table-header-mobile">
+        <tr>
+          <th>
+            <div class="v-data-table-header-mobile__wrapper">
+              <div class="v-input v-input--hide-details theme--light v-text-field v-select">
+                <div class="v-input__control">
+                  <div role="button"
+                       aria-haspopup="listbox"
+                       aria-expanded="false"
+                       aria-owns="list-731"
+                       class="v-input__slot"
+                  >
+                    <div class="v-select__slot">
+                      <label for="input-731"
+                             class="v-label theme--light"
+                             style="left: 0px; position: absolute;"
+                      >
+                        Sort by
+                      </label>
+                      <div class="v-select__selections">
+                        <input id="input-731"
+                               readonly="readonly"
+                               type="text"
+                               aria-readonly="false"
+                               autocomplete="off"
+                        >
+                      </div>
+                      <div class="v-input__append-inner">
+                        <div class="v-input__icon v-input__icon--append">
+                          <i aria-hidden="true"
+                             class="v-icon notranslate material-icons theme--light"
+                          >
+                            $dropdown
+                          </i>
+                        </div>
+                      </div>
+                      <input type="hidden">
+                    </div>
+                    <div class="v-menu">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Frozen Yogurt
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Ice cream sandwich
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Eclair
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Cupcake
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Gingerbread
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Jelly bean
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Lollipop
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Honeycomb
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Donut
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              KitKat
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="v-data-footer">
+    <div class="v-data-footer__select">
+      Rows per page:
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
+        <div class="v-input__control">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="list-735"
+               class="v-input__slot"
+          >
+            <div class="v-select__slot">
+              <div class="v-select__selections">
+                <div class="v-select__selection v-select__selection--comma">
+                  10
+                </div>
+                <input aria-label="Rows per page:"
+                       id="input-735"
+                       readonly="readonly"
+                       type="text"
+                       aria-readonly="false"
+                       autocomplete="off"
+                >
+              </div>
+              <div class="v-input__append-inner">
+                <div class="v-input__icon v-input__icon--append">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $dropdown
+                  </i>
+                </div>
+              </div>
+              <input type="hidden"
+                     value="10"
+              >
+            </div>
+            <div class="v-menu">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-data-footer__pagination">
+      1-10 of 10
+    </div>
+    <div class="v-data-footer__icons-before">
+      <button type="button"
+              disabled="disabled"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Previous page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon notranslate material-icons theme--light"
+          >
+            $prev
+          </i>
+        </span>
+      </button>
+    </div>
+    <div class="v-data-footer__icons-after">
+      <button type="button"
+              disabled="disabled"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -10843,7 +11597,7 @@ exports[`VDataTable.ts should render with showSelect 1`] = `
 `;
 
 exports[`VDataTable.ts should search group-by column 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -10858,18 +11612,18 @@ exports[`VDataTable.ts should search group-by column 1`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-521"
+                       aria-owns="list-552"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-521"
+                      <label for="input-552"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-521"
+                        <input id="input-552"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -10900,7 +11654,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -10912,7 +11666,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
             </button>
             name: Assistance
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -10937,7 +11691,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -10949,7 +11703,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
             </button>
             name: Candidat
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -10982,7 +11736,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-533"
+               aria-owns="list-564"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -10990,8 +11744,8 @@ exports[`VDataTable.ts should search group-by column 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-533"
+                <input aria-label="Rows per page:"
+                       id="input-564"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -11023,7 +11777,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -11038,7 +11792,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -11055,7 +11809,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
 `;
 
 exports[`VDataTable.ts should search group-by column 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -11070,18 +11824,18 @@ exports[`VDataTable.ts should search group-by column 2`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-521"
+                       aria-owns="list-552"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-521"
+                      <label for="input-552"
                              class="v-label theme--light"
                              style="left: 0px; position: absolute;"
                       >
                         Sort by
                       </label>
                       <div class="v-select__selections">
-                        <input id="input-521"
+                        <input id="input-552"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -11112,7 +11866,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
         <tr class="v-row-group__header">
           <td class="text-start">
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -11124,7 +11878,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
             </button>
             name: Candidat
             <button type="button"
-                    class="ma-0 v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--small"
+                    class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
               <span class="v-btn__content">
                 <i aria-hidden="true"
@@ -11157,7 +11911,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-533"
+               aria-owns="list-564"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -11165,8 +11919,8 @@ exports[`VDataTable.ts should search group-by column 2`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-533"
+                <input aria-label="Rows per page:"
+                       id="input-564"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -11198,7 +11952,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -11213,7 +11967,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -11230,7 +11984,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
 `;
 
 exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -11250,11 +12004,11 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-602"
+                       aria-owns="list-633"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-602"
+                      <label for="input-633"
                              class="v-label v-label--active theme--light"
                              style="left: 0px; position: absolute;"
                       >
@@ -11274,7 +12028,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
                             </div>
                           </span>
                         </span>
-                        <input id="input-602"
+                        <input id="input-633"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -11565,7 +12319,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-608"
+               aria-owns="list-639"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -11573,8 +12327,8 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-608"
+                <input aria-label="Rows per page:"
+                       id="input-639"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -11606,7 +12360,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -11621,7 +12375,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">
@@ -11638,7 +12392,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 1`] = `
 `;
 
 exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
-<div class="v-data-table theme--light">
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
     <table>
       <colgroup>
@@ -11658,11 +12412,11 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
                   <div role="button"
                        aria-haspopup="listbox"
                        aria-expanded="false"
-                       aria-owns="list-602"
+                       aria-owns="list-633"
                        class="v-input__slot"
                   >
                     <div class="v-select__slot">
-                      <label for="input-602"
+                      <label for="input-633"
                              class="v-label v-label--active theme--light"
                              style="left: 0px; position: absolute;"
                       >
@@ -11682,7 +12436,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
                             </div>
                           </span>
                         </span>
-                        <input id="input-602"
+                        <input id="input-633"
                                readonly="readonly"
                                type="text"
                                aria-readonly="false"
@@ -11973,7 +12727,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
           <div role="button"
                aria-haspopup="listbox"
                aria-expanded="false"
-               aria-owns="list-608"
+               aria-owns="list-639"
                class="v-input__slot"
           >
             <div class="v-select__slot">
@@ -11981,8 +12735,8 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
                 <div class="v-select__selection v-select__selection--comma">
                   10
                 </div>
-                <input aria-label="$vuetify.dataTable.itemsPerPageText"
-                       id="input-608"
+                <input aria-label="Rows per page:"
+                       id="input-639"
                        readonly="readonly"
                        type="text"
                        aria-readonly="false"
@@ -12014,7 +12768,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
     <div class="v-data-footer__icons-before">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Previous page"
       >
         <span class="v-btn__content">
@@ -12029,7 +12783,7 @@ exports[`VDataTable.ts should show correct aria-labels when sorting 2`] = `
     <div class="v-data-footer__icons-after">
       <button type="button"
               disabled="disabled"
-              class="v-btn v-btn--disabled v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
               aria-label="Next page"
       >
         <span class="v-btn__content">

@@ -2,6 +2,10 @@ module.exports = {
   'v-img': {
     slots: [
       {
+        name: 'default',
+        props: undefined,
+      },
+      {
         name: 'placeholder',
         props: undefined,
       },
@@ -14,6 +18,10 @@ module.exports = {
       {
         name: 'load',
         value: 'object | string',
+      },
+      {
+        name: 'loadstart',
+        value: 'string',
       },
     ],
   },

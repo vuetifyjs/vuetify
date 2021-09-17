@@ -1,0 +1,30 @@
+{
+  "props": {
+    "bottom": "Expands from the bottom of the screen on mobile devices",
+    "clipped": "A clipped drawer rests under the application toolbar. **Note:** requires the **clipped-left** or **clipped-right** prop on `v-app-bar` to work as intended",
+    "disableResizeWatcher": "Will automatically open/close drawer when resized depending if mobile or desktop.",
+    "disableRouteWatcher": "Disables opening of navigation drawer when route changes",
+    "expandOnHover": "Collapses the drawer to a **mini-variant** until hovering with the mouse",
+    "floating": "A floating drawer has no visible container (no border-right)",
+    "height": "Sets the height of the navigation drawer",
+    "mobileBreakpoint": "Sets the designated mobile breakpoint for the component. This will apply alternate styles for mobile devices such as the `temporary` prop, or activate the `bottom` prop when the breakpoint value is met. Setting the value to `0` will disable this functionality.",
+    "miniVariantWidth": "Designates the width assigned when the `mini` prop is turned on",
+    "miniVariant": "Condenses navigation drawer width, also accepts the **.sync** modifier. With this, the drawer will re-open when clicking it",
+    "permanent": "The drawer remains visible regardless of screen size",
+    "right": "Places the navigation drawer on the right",
+    "src": "Specifies a [v-img](/components/images) as the component's background.",
+    "stateless": "Remove all automated state functionality (resize, mobile, route) and manually control the drawer state",
+    "temporary": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background",
+    "touchless": "Disable mobile touch functionality",
+    "value": "Controls whether the component is visible or hidden."
+  },
+  "slots": {
+    "append": "A slot at the bottom of the drawer",
+    "img": "Used to modify `v-img` properties when using the **src** prop",
+    "prepend": "A slot at the top of the drawer"
+  },
+  "events": {
+    "transitionend": "Emits event object when transition is complete.",
+    "update:mini-variant": "The `mini-variant.sync` event"
+  }
+}

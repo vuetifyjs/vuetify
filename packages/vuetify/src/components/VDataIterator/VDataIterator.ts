@@ -8,7 +8,7 @@ import Themeable from '../../mixins/themeable'
 
 // Helpers
 import mixins from '../../util/mixins'
-import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camelizeObjectKeys } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath, getPrefixedScopedSlots, getSlot, camelizeObjectKeys, keyCodes } from '../../util/helpers'
 import { breaking, removed } from '../../util/console'
 
 // Types
@@ -68,6 +68,8 @@ export default mixins(
     selection: {} as Record<string, any>,
     expansion: {} as Record<string, boolean>,
     internalCurrentItems: [] as any[],
+    shiftKeyDown: false,
+    lastEntry: -1,
   }),
 
   computed: {
@@ -148,7 +150,24 @@ export default mixins(
     })
   },
 
+  mounted () {
+    window.addEventListener('keydown', this.onKeyDown)
+    window.addEventListener('keyup', this.onKeyUp)
+  },
+  beforeDestroy () {
+    window.removeEventListener('keydown', this.onKeyDown)
+    window.removeEventListener('keyup', this.onKeyUp)
+  },
+
   methods: {
+    onKeyDown (e: KeyboardEvent): void {
+      if (e.keyCode !== keyCodes.shift) return
+      this.shiftKeyDown = true
+    },
+    onKeyUp (e: KeyboardEvent): void {
+      if (e.keyCode !== keyCodes.shift) return
+      this.shiftKeyDown = false
+    },
     toggleSelectAll (value: boolean): void {
       const selection = Object.assign({}, this.selection)
 
@@ -180,6 +199,15 @@ export default mixins(
       if (value) selection[key] = item
       else delete selection[key]
 
+      const index = this.selectableItems.findIndex(x => getObjectValueByPath(x, this.itemKey) === key)
+      if (this.lastEntry === -1) this.lastEntry = index
+      else if (this.shiftKeyDown && !this.singleSelect && emit) {
+        const lastEntryKey = getObjectValueByPath(this.selectableItems[this.lastEntry], this.itemKey)
+        const lastEntryKeySelected = Object.keys(this.selection).includes(String(lastEntryKey))
+        this.multipleSelect(lastEntryKeySelected, emit, selection, index)
+      }
+      this.lastEntry = index
+
       if (this.singleSelect && emit) {
         const keys = Object.keys(this.selection)
         const old = keys.length && getObjectValueByPath(this.selection[keys[0]], this.itemKey)
@@ -187,6 +215,17 @@ export default mixins(
       }
       this.selection = selection
       emit && this.$emit('item-selected', { item, value })
+    },
+    multipleSelect (value = true, emit = true, selection: any, index: number): void {
+      const start = index < this.lastEntry ? index : this.lastEntry
+      const end = index < this.lastEntry ? this.lastEntry : index
+      for (let i = start; i <= end; i++) {
+        const currentItem = this.selectableItems[i]
+        const key = getObjectValueByPath(currentItem, this.itemKey)
+        if (value) selection[key] = currentItem
+        else delete selection[key]
+        emit && this.$emit('item-selected', { currentItem, value })
+      }
     },
     isExpanded (item: any): boolean {
       return this.expansion[getObjectValueByPath(item, this.itemKey)] || false
@@ -201,9 +240,10 @@ export default mixins(
       this.expansion = expansion
       this.$emit('item-expanded', { item, value })
     },
-    createItemProps (item: any): DataItemProps {
+    createItemProps (item: any, index: number): DataItemProps {
       return {
         item,
+        index,
         select: (v: boolean) => this.select(item, v),
         isSelected: this.isSelected(item),
         expand: (v: boolean) => this.expand(item, v),
@@ -216,7 +256,7 @@ export default mixins(
     },
     genEmpty (originalItemsLength: number, filteredItemsLength: number) {
       if (originalItemsLength === 0 && this.loading) {
-        const loading = this.$slots['loading'] || this.$vuetify.lang.t(this.loadingText)
+        const loading = this.$slots.loading || this.$vuetify.lang.t(this.loadingText)
         return this.genEmptyWrapper(loading)
       } else if (originalItemsLength === 0) {
         const noData = this.$slots['no-data'] || this.$vuetify.lang.t(this.noDataText)
@@ -238,12 +278,16 @@ export default mixins(
           isSelected: this.isSelected,
           select: this.select,
           isExpanded: this.isExpanded,
+          isMobile: this.isMobile,
           expand: this.expand,
         })
       }
 
       if (this.$scopedSlots.item) {
-        return props.items.map((item: any) => this.$scopedSlots.item!(this.createItemProps(item)))
+        return props.items.map((item: any, index) => this.$scopedSlots.item!(this.createItemProps(
+          item,
+          index
+        )))
       }
 
       return []

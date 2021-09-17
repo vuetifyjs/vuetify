@@ -158,7 +158,7 @@ export default Vue.extend({
     computedItems (): any[] {
       let items = this.filteredItems.slice()
 
-      if (!this.disableSort && this.serverItemsLength <= 0) {
+      if ((!this.disableSort || this.internalOptions.groupBy.length) && this.serverItemsLength <= 0) {
         items = this.sortItems(items)
       }
 
@@ -172,7 +172,7 @@ export default Vue.extend({
       return this.isGrouped ? this.groupItems(this.computedItems) : null
     },
     scopedProps (): DataScopeProps {
-      const props = {
+      return {
         sort: this.sort,
         sortArray: this.sortArray,
         group: this.group,
@@ -183,8 +183,6 @@ export default Vue.extend({
         groupedItems: this.groupedItems,
         originalItemsLength: this.items.length,
       }
-
-      return props
     },
     computedOptions (): DataOptions {
       return { ...this.options } as DataOptions
@@ -350,8 +348,13 @@ export default Vue.extend({
       }
     },
     sortItems (items: any[]): any[] {
-      let sortBy = this.internalOptions.sortBy
-      let sortDesc = this.internalOptions.sortDesc
+      let sortBy: string[] = []
+      let sortDesc: boolean[] = []
+
+      if (!this.disableSort) {
+        sortBy = this.internalOptions.sortBy
+        sortDesc = this.internalOptions.sortDesc
+      }
 
       if (this.internalOptions.groupBy.length) {
         sortBy = [...this.internalOptions.groupBy, ...sortBy]
@@ -367,7 +370,7 @@ export default Vue.extend({
       // Make sure we don't try to display non-existant page if items suddenly change
       // TODO: Could possibly move this to pageStart/pageStop?
       if (this.serverItemsLength === -1 && items.length <= this.pageStart) {
-        this.internalOptions.page = Math.max(1, this.internalOptions.page - 1)
+        this.internalOptions.page = Math.max(1, Math.ceil(items.length / this.internalOptions.itemsPerPage)) || 1 // Prevent NaN
       }
 
       return items.slice(this.pageStart, this.pageStop)

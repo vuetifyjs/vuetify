@@ -1,0 +1,6 @@
+{
+  "props": {
+    "inset": "Adds indentation (72px) for **normal** dividers, reduces max height for **vertical**.",
+    "vertical": "Displays dividers vertically"
+  }
+}

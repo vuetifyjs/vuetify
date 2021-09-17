@@ -103,17 +103,17 @@ exports[`VPagination.ts should only render end of range if value is equals "righ
     </li>
     <li>
       <button type="button"
-              aria-label="$vuetify.pagination.ariaLabel.page"
-              class="v-pagination__item"
+              aria-current="true"
+              aria-label="$vuetify.pagination.ariaLabel.currentPage"
+              class="v-pagination__item v-pagination__item--active primary"
       >
         98
       </button>
     </li>
     <li>
       <button type="button"
-              aria-label="$vuetify.pagination.ariaLabel.currentPage"
-              class="v-pagination__item v-pagination__item--active primary"
-              aria-current="true"
+              aria-label="$vuetify.pagination.ariaLabel.page"
+              class="v-pagination__item"
       >
         99
       </button>
@@ -349,7 +349,8 @@ exports[`VPagination.ts should only render start and end of range if length is b
 >
   <ul class="v-pagination theme--light">
     <li>
-      <button type="button"
+      <button disabled="disabled"
+              type="button"
               aria-label="$vuetify.pagination.ariaLabel.previous"
               class="v-pagination__navigation v-pagination__navigation--disabled"
       >
@@ -573,17 +574,17 @@ exports[`VPagination.ts should only render start of range if value is equals "le
     </li>
     <li>
       <button type="button"
-              aria-label="$vuetify.pagination.ariaLabel.currentPage"
-              class="v-pagination__item v-pagination__item--active primary"
-              aria-current="true"
+              aria-label="$vuetify.pagination.ariaLabel.page"
+              class="v-pagination__item"
       >
         2
       </button>
     </li>
     <li>
       <button type="button"
-              aria-label="$vuetify.pagination.ariaLabel.page"
-              class="v-pagination__item"
+              aria-current="true"
+              aria-label="$vuetify.pagination.ariaLabel.currentPage"
+              class="v-pagination__item v-pagination__item--active primary"
       >
         3
       </button>
@@ -694,7 +695,8 @@ exports[`VPagination.ts should render disabled buttons with length equals to 0 1
 >
   <ul class="v-pagination theme--light">
     <li>
-      <button type="button"
+      <button disabled="disabled"
+              type="button"
               aria-label="$vuetify.pagination.ariaLabel.previous"
               class="v-pagination__navigation v-pagination__navigation--disabled"
       >
@@ -705,7 +707,8 @@ exports[`VPagination.ts should render disabled buttons with length equals to 0 1
       </button>
     </li>
     <li>
-      <button type="button"
+      <button disabled="disabled"
+              type="button"
               aria-label="$vuetify.pagination.ariaLabel.next"
               class="v-pagination__navigation v-pagination__navigation--disabled"
       >

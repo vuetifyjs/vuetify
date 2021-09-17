@@ -401,11 +401,13 @@ describe('VAutocomplete.ts', () => {
     wrapper.setData({ isMenuActive: false })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.lazySearch).toBeUndefined()
+    expect(wrapper.vm.lazySearch).toBeNull()
   })
 
   it('should select input text on focus', async () => {
-    const wrapper = mountFunction()
+    const wrapper = mountFunction({
+      attachToDocument: true,
+    })
     const select = jest.fn()
     wrapper.vm.$refs.input.select = select
 

@@ -1,0 +1,128 @@
+{
+  "johnleider": {
+    "discord": "johnleider#0001",
+    "focus": [
+      "[vuetifyjs/*](https://github.com/vuetifyjs)"
+    ],
+    "funding": [
+      "[GitHub Sponsors](https://github.com/sponsors/johnleider)",
+      "[Patreon](https://patreon.com/vuetify)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "linkedin": "john-leider-626183a2",
+    "location": "Fort Worth, TX, USA",
+    "name": "John Leider",
+    "team": "company",
+    "twitter": "zeroskillz",
+    "work": "CEO @ Vuetify"
+  },
+  "heatherleider": {
+    "discord": "heatherleider#7788",
+    "focus": [
+      "[vuetifyjs/*](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "Fort Worth, TX, USA",
+    "name": "Heather Leider",
+    "team": "company",
+    "twitter": "grneyedgrl01",
+    "work": "COO @ Vuetify"
+  },
+  "KaelWD": {
+    "discord": "Kaelwd#6373",
+    "focus": [
+      "[vuetifyjs/*](https://github.com/vuetifyjs)",
+      "[vuetify-loader](https://github.com/vuetifyjs/vuetify-loader)",
+      "[eslint-plugin-vuetify](https://github.com/vuetifyjs/eslint-plugin-vuetify)"
+    ],
+    "funding": [
+      "[GitHub Sponsors](https://github.com/sponsors/kaelwd)",
+      "[Patreon](https://patreon.com/kaelwd)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "Melbourne, Australia",
+    "name": "Kael Watts-Deuchar",
+    "team": "core",
+    "twitter": "kaelwd"
+  },
+  "nekosaur": {
+    "discord": "nekosaur#5406",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "Swedish",
+      "English"
+    ],
+    "location": "Malmö, Sweden",
+    "name": "Albert Kaaman",
+    "team": "core"
+  },
+  "jacekkarczmarczyk": {
+    "discord": "jacek#3542",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "Polish",
+      "English"
+    ],
+    "location": "Warsaw, Poland",
+    "name": "Jacek Karczmarczyk",
+    "team": "core"
+  },
+  "MajesticPotatoe": {
+    "discord": "MajesticPotatoe#4997",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)",
+      "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
+    ],
+    "funding": [
+      "[GitHub Sponsors](https://github.com/sponsors/majesticpotatoe)",
+      "[Open Collective](https://opencollective.com/vuetify)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "linkedin": "andrew-henry-01049830",
+    "location": "Rochester, NY, USA",
+    "name": "Andrew Henry",
+    "team": "core",
+    "twitter": "SeeMWhyK"
+  },
+  "blalan05": {
+    "discord": "blalan05#3967",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "linkedin": "blalan05",
+    "location": "Wisconsin, USA",
+    "name": "Blaine Landowski",
+    "team": "core"
+  },
+  "ElijahKotyluk": {
+    "discord": "edk#4363",
+    "funding": [
+      "[GitHub Sponsors](https://github.com/sponsors/ElijahKotyluk)"
+    ],
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)",
+      "[vuetifyjs/vue-cli-plugins](https://github.com/vuetifyjs/vue-cli-plugins)"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "USA",
+    "name": "Elijah Kotyluk",
+    "team": "core"
+  }
+}

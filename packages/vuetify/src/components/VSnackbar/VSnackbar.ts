@@ -167,10 +167,15 @@ export default mixins(
       const data = setColor(this.color, {
         staticClass: 'v-snack__wrapper',
         class: VSheet.options.computed.classes.call(this),
+        style: VSheet.options.computed.styles.call(this),
         directives: [{
           name: 'show',
           value: this.isActive,
         }],
+        on: {
+          pointerenter: () => window.clearTimeout(this.activeTimeout),
+          pointerleave: this.setTimeout,
+        },
       })
 
       return this.$createElement('div', data, [

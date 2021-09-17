@@ -1,9 +1,0 @@
-{
-  "props": {
-    "maxWidth": "컨텐츠의 최대 너비",
-    "minWidth": "컨텐츠의 최소 너비",
-    "positionX": "activator 슬롯이 사용되지 않을 경우 컨텐츠의 포지션",
-    "positionY": "activator 슬롯이 사용되지 않을 경우 컨텐츠의 포지션",
-    "zIndex": "컴포넌트의 z-index"
-  }
-}

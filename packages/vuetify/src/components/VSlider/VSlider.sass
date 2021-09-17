@@ -47,7 +47,7 @@
   position: absolute
   width: $slider-thumb-size
   height: $slider-thumb-size
-  left: -#{$slider-thumb-size / 2}
+  left: -$slider-thumb-size / 2
   top: 50%
   border-radius: $slider-thumb-border-radius
   transition: $slider-transition
@@ -64,10 +64,19 @@
     background: currentColor
     opacity: $slider-thumb-before-opacity
     position: absolute
-    left: -#{$slider-thumb-focused-size-increase / 2}
-    top: -#{$slider-thumb-focused-size-increase / 2}
+    left: -$slider-thumb-focused-size-increase / 2
+    top: -$slider-thumb-focused-size-increase / 2
     transform: scale(0.1)
     pointer-events: none
+
+  &::after
+    content: ''
+    width: $slider-thumb-touch-size
+    height: $slider-thumb-touch-size
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
 
 .v-slider__ticks-container
   position: absolute
@@ -240,9 +249,9 @@
   pointer-events: none
 
   .v-slider__thumb
-    width: #{$slider-thumb-size - 4}
-    height: #{$slider-thumb-size - 4}
-    left: -#{($slider-thumb-size - 4) / 2}
+    width: $slider-thumb-size - 4
+    height: $slider-thumb-size - 4
+    left: -($slider-thumb-size - 4) / 2
 
     &:before
       display: none

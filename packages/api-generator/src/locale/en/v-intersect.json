@@ -1,0 +1,7 @@
+{
+  "argument": "The function to invoke when the targeted element is intersected.",
+  "modifiers": {
+    "once": "Will only invoke the provided user callback on mount and once intersected. If using the **quiet** modifier will only invoke once.",
+    "quiet": "Will not automatically invoke the provided callback on bind."
+  }
+}

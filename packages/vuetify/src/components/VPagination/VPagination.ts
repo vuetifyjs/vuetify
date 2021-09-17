@@ -89,6 +89,10 @@ export default mixins(
     items (): (string | number)[] {
       const totalVisible = parseInt(this.totalVisible, 10)
 
+      if (totalVisible === 0) {
+        return []
+      }
+
       const maxLength = Math.min(
         Math.max(0, totalVisible) || this.length,
         Math.max(0, this.maxButtons) || this.length,
@@ -104,10 +108,14 @@ export default mixins(
       const right = this.length - left + 1 + even
 
       if (this.value > left && this.value < right) {
+        const firstItem = 1
+        const lastItem = this.length
         const start = this.value - left + 2
         const end = this.value + left - 2 - even
+        const secondItem = start - 1 === firstItem + 1 ? 2 : '...'
+        const beforeLastItem = end + 1 === lastItem - 1 ? end + 1 : '...'
 
-        return [1, '...', ...this.range(start, end), '...', this.length]
+        return [1, secondItem, ...this.range(start, end), beforeLastItem, this.length]
       } else if (this.value === left) {
         const end = this.value + left - 1 - even
         return [...this.range(1, end), '...', this.length]
@@ -178,6 +186,7 @@ export default mixins(
             'v-pagination__navigation--disabled': disabled,
           },
           attrs: {
+            disabled,
             type: 'button',
             'aria-label': label,
           },

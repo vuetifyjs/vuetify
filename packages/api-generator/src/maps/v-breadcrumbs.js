@@ -15,6 +15,10 @@ module.exports = {
     }],
     slots: [
       {
+        name: 'default',
+        props: undefined,
+      },
+      {
         name: 'divider',
         props: undefined,
       },

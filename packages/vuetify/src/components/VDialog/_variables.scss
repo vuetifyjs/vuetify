@@ -2,6 +2,7 @@
 
 $dialog-border-radius: $border-radius-root !default;
 $dialog-card-subtitle-padding: 0 24px 20px !default;
+$dialog-card-actions-padding: 8px 16px !default;
 $dialog-card-text-padding: 0 24px 20px !default;
 $dialog-card-title-font-size: map-deep-get($headings, 'h6', 'size') !default;
 $dialog-card-title-font-weight: map-deep-get($headings, 'h6', 'weight') !default;

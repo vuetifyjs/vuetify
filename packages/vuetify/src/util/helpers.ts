@@ -37,7 +37,7 @@ export function addOnceEventListener (
   cb: (event: Event) => void,
   options: boolean | AddEventListenerOptions = false
 ): void {
-  var once = (event: Event) => {
+  const once = (event: Event) => {
     cb(event)
     el.removeEventListener(eventName, once, options)
   }
@@ -57,7 +57,7 @@ try {
     window.addEventListener('testListener', testListenerOpts, testListenerOpts)
     window.removeEventListener('testListener', testListenerOpts, testListenerOpts)
   }
-} catch (e) { console.warn(e) }
+} catch (e) { console.warn(e) } /* eslint-disable-line no-console */
 export { passiveSupported }
 
 export function addPassiveEventListener (
@@ -89,9 +89,13 @@ export function getNestedValue (obj: any, path: (string | number)[], fallback?: 
 export function deepEqual (a: any, b: any): boolean {
   if (a === b) return true
 
-  if (a instanceof Date && b instanceof Date) {
-    // If the values are Date, they were convert to timestamp with getTime and compare it
-    if (a.getTime() !== b.getTime()) return false
+  if (
+    a instanceof Date &&
+    b instanceof Date &&
+    a.getTime() !== b.getTime()
+  ) {
+    // If the values are Date, compare them as timestamps
+    return false
   }
 
   if (a !== Object(a) || b !== Object(b)) {
@@ -210,21 +214,40 @@ export const keyCodes = Object.freeze({
   insert: 45,
   pageup: 33,
   pagedown: 34,
+  shift: 16,
 })
 
-// This remaps internal names like '$cancel' or '$vuetify.icons.cancel'
-// to the current name or component for that icon.
+/**
+ * This remaps internal names like '$cancel' or '$vuetify.icons.cancel'
+ * to the current name or component for that icon.
+ */
 export function remapInternalIcon (vm: Vue, iconName: string): VuetifyIcon {
-  if (!iconName.startsWith('$')) {
+  // Look for custom component in the configuration
+  const component = vm.$vuetify.icons.component
+
+  // Look for overrides
+  if (iconName.startsWith('$')) {
+    // Get the target icon name
+    const iconPath = `$vuetify.icons.values.${iconName.split('$').pop()!.split('.').pop()}`
+
+    // Now look up icon indirection name,
+    // e.g. '$vuetify.icons.values.cancel'
+    const override = getObjectValueByPath(vm, iconPath, iconName)
+
+    if (typeof override === 'string') iconName = override
+    else return override
+  }
+
+  if (component == null) {
     return iconName
   }
 
-  // Get the target icon name
-  const iconPath = `$vuetify.icons.values.${iconName.split('$').pop()!.split('.').pop()}`
-
-  // Now look up icon indirection name,
-  // e.g. '$vuetify.icons.values.cancel'
-  return getObjectValueByPath(vm, iconPath, iconName)
+  return {
+    component,
+    props: {
+      icon: iconName,
+    },
+  }
 }
 
 export function keys<O> (o: O) {
@@ -264,14 +287,14 @@ export function groupItems<T extends any = any> (
 ): ItemGroup<T>[] {
   const key = groupBy[0]
   const groups: ItemGroup<T>[] = []
-  let current = null
-  for (var i = 0; i < items.length; i++) {
+  let current
+  for (let i = 0; i < items.length; i++) {
     const item = items[i]
-    const val = getObjectValueByPath(item, key)
+    const val = getObjectValueByPath(item, key, null)
     if (current !== val) {
       current = val
       groups.push({
-        name: val,
+        name: val ?? '',
         items: [],
       })
     }
@@ -314,6 +337,11 @@ export function sortItems<T extends any = any> (
       // Check if both cannot be evaluated
       if (sortA === null && sortB === null) {
         continue
+      }
+
+      // Dates should be compared numerically
+      if (sortA instanceof Date && sortB instanceof Date) {
+        return sortA.getTime() - sortB.getTime()
       }
 
       [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())

@@ -52,6 +52,10 @@ export default mixins(
       type: String,
       default: '$delete',
     },
+    closeLabel: {
+      type: String,
+      default: '$vuetify.close',
+    },
     disabled: Boolean,
     draggable: Boolean,
     filter: Boolean,
@@ -145,6 +149,9 @@ export default mixins(
         props: {
           right: true,
           size: 18,
+        },
+        attrs: {
+          'aria-label': this.$vuetify.lang.t(this.closeLabel),
         },
         on: {
           click: (e: Event) => {

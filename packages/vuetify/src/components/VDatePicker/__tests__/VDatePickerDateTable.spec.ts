@@ -234,7 +234,7 @@ describe('VDatePickerDateTable.ts', () => {
     const tableDate = jest.fn()
     wrapper.vm.$on('update:table-date', tableDate)
 
-    wrapper.trigger('wheel')
+    wrapper.trigger('wheel', { deltaY: 1 })
     expect(tableDate).toHaveBeenCalledWith('2005-06')
   })
 
@@ -248,8 +248,40 @@ describe('VDatePickerDateTable.ts', () => {
     const tableDate = jest.fn()
     wrapper.vm.$on('update:table-date', tableDate)
 
-    wrapper.trigger('wheel')
+    wrapper.trigger('wheel', { deltaY: 1 })
     expect(tableDate).not.toHaveBeenCalled()
+  })
+
+  it('should not emit tableDate event when scrollable but tableDate less than min', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        tableDate: '2005-05',
+        scrollable: true,
+        min: '2005-05',
+      },
+    })
+
+    const tableDate = jest.fn()
+    wrapper.vm.$on('update:table-date', tableDate)
+
+    wrapper.trigger('wheel', { deltaY: -50 })
+    expect(tableDate).not.toHaveBeenCalled()
+  })
+
+  it('should emit tableDate event when scrollable and tableDate greater than min', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        tableDate: '2005-05',
+        scrollable: true,
+        min: '2005-03',
+      },
+    })
+
+    const tableDate = jest.fn()
+    wrapper.vm.$on('update:table-date', tableDate)
+
+    wrapper.trigger('wheel', { deltaY: -50 })
+    expect(tableDate).toHaveBeenCalledWith('2005-04')
   })
 
   // TODO

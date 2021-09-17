@@ -19,7 +19,6 @@
   top: 0
   transition: inherit
   width: 100%
-  z-index: 1
 
 .v-progress-linear--reverse
   .v-progress-linear__buffer
@@ -47,7 +46,6 @@
   position: absolute
   top: 0
   width: 100%
-  z-index: 2
 
 .v-progress-linear--reverse
   .v-progress-linear__content
@@ -68,6 +66,7 @@
 .v-progress-linear
   .v-progress-linear__indeterminate
     .long, .short
+      animation-play-state: paused
       background-color: inherit
       bottom: 0
       height: inherit
@@ -102,6 +101,7 @@
 
 .v-progress-linear__stream
   animation: stream-ltr .25s infinite linear
+  animation-play-state: paused
   border-color: currentColor
   border-top: $progress-linear-stream-border-width dotted
   bottom: 0
@@ -168,6 +168,13 @@
 
       .short
         animation-name: query-short-rtl
+
+.v-progress-linear--visible
+  .v-progress-linear__indeterminate--active
+    .long, .short
+      animation-play-state: running
+  .v-progress-linear__stream
+    animation-play-state: running
 
 @keyframes indeterminate-ltr
   0%

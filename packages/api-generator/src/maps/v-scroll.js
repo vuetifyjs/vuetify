@@ -1,20 +1,20 @@
 module.exports = {
   'v-scroll': {
-    options: [
+    argument: [{
+      name: 'argument',
+      type: ['Function'],
+      default: undefined,
+    }],
+    modifiers: [
       {
-        name: 'arg:target',
+        name: '#target',
         default: 'window',
-        type: 'string',
+        type: ['string'],
       },
       {
-        name: 'arg:self',
+        name: 'self',
         default: false,
-        type: 'boolean',
-      },
-      {
-        name: 'value',
-        default: '(): {}',
-        type: 'Function',
+        type: ['boolean'],
       },
     ],
   },

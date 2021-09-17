@@ -8,7 +8,6 @@ import { VThemeProvider } from '../VThemeProvider'
 import Activatable from '../../mixins/activatable'
 import Delayable from '../../mixins/delayable'
 import Dependent from '../../mixins/dependent'
-import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable'
 import Returnable from '../../mixins/returnable'
 import Roundable from '../../mixins/roundable'
@@ -26,6 +25,7 @@ import {
   convertToUnit,
   keyCodes,
 } from '../../util/helpers'
+import goTo from '../../services/goto'
 
 // Types
 import { VNode, VNodeDirective, VNodeData } from 'vue'
@@ -33,7 +33,6 @@ import { VNode, VNodeDirective, VNodeData } from 'vue'
 const baseMixins = mixins(
   Dependent,
   Delayable,
-  Detachable,
   Menuable,
   Returnable,
   Roundable,
@@ -45,17 +44,17 @@ const baseMixins = mixins(
 export default baseMixins.extend({
   name: 'v-menu',
 
+  directives: {
+    ClickOutside,
+    Resize,
+  },
+
   provide (): object {
     return {
       isInMenu: true,
       // Pass theme through to default slot
       theme: this.theme,
     }
-  },
-
-  directives: {
-    ClickOutside,
-    Resize,
   },
 
   props: {
@@ -179,7 +178,22 @@ export default baseMixins.extend({
       if (next in this.tiles) {
         const tile = this.tiles[next]
         tile.classList.add('v-list-item--highlighted')
-        this.$refs.content.scrollTop = tile.offsetTop - tile.clientHeight
+        const scrollTop = this.$refs.content.scrollTop
+        const contentHeight = this.$refs.content.clientHeight
+
+        if (scrollTop > tile.offsetTop - 8) {
+          goTo(tile.offsetTop - tile.clientHeight, {
+            appOffset: false,
+            duration: 300,
+            container: this.$refs.content,
+          })
+        } else if (scrollTop + contentHeight < tile.offsetTop + tile.clientHeight + 8) {
+          goTo(tile.offsetTop - contentHeight + tile.clientHeight * 2, {
+            appOffset: false,
+            duration: 300,
+            container: this.$refs.content,
+          })
+        }
       }
 
       prev in this.tiles &&
@@ -258,6 +272,10 @@ export default baseMixins.extend({
         this.nextTile()
       } else if (e.keyCode === keyCodes.up) {
         this.prevTile()
+      } else if (e.keyCode === keyCodes.end) {
+        this.lastTile()
+      } else if (e.keyCode === keyCodes.home) {
+        this.firstTile()
       } else if (e.keyCode === keyCodes.enter && this.listIndex !== -1) {
         this.tiles[this.listIndex].click()
       } else { return }
@@ -380,7 +398,6 @@ export default baseMixins.extend({
         if (this.hasJustFocused) return
 
         this.hasJustFocused = true
-        this.isActive = true
       })
     },
     mouseLeaveHandler (e: MouseEvent) {
@@ -423,6 +440,24 @@ export default baseMixins.extend({
 
       this.listIndex--
       if (tile.tabIndex === -1) this.prevTile()
+    },
+    lastTile () {
+      const tile = this.tiles[this.tiles.length - 1]
+
+      if (!tile) return
+
+      this.listIndex = this.tiles.length - 1
+
+      if (tile.tabIndex === -1) this.prevTile()
+    },
+    firstTile () {
+      const tile = this.tiles[0]
+
+      if (!tile) return
+
+      this.listIndex = 0
+
+      if (tile.tabIndex === -1) this.nextTile()
     },
     onKeyDown (e: KeyboardEvent) {
       if (e.keyCode === keyCodes.esc) {

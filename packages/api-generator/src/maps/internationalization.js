@@ -1,6 +1,6 @@
 module.exports = {
   internationalization: {
-    api: [
+    props: [
       {
         name: 'locales',
         default: '{ en: VuetifyLocale }',
@@ -11,6 +11,8 @@ module.exports = {
         default: 'en',
         type: 'string',
       },
+    ],
+    functions: [
       {
         name: 't',
         default: '(key: string, ...params: Array<string | number>): string',

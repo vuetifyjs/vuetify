@@ -48,6 +48,9 @@ export default VAutocomplete.extend({
       return this.hasDisplayedItems ||
         (!!this.$slots['no-data'] && !this.hideNoData)
     },
+    searchIsDirty (): boolean {
+      return this.internalSearch != null
+    },
   },
 
   methods: {
@@ -113,7 +116,12 @@ export default VAutocomplete.extend({
     onKeyDown (e: KeyboardEvent) {
       const keyCode = e.keyCode
 
-      VSelect.options.methods.onKeyDown.call(this, e)
+      if (
+        e.ctrlKey ||
+        ![keyCodes.home, keyCodes.end].includes(keyCode)
+      ) {
+        VSelect.options.methods.onKeyDown.call(this, e)
+      }
 
       // If user is at selection index of 0
       // create a new tag
@@ -154,6 +162,16 @@ export default VAutocomplete.extend({
         this.updateEditing()
       } else {
         VAutocomplete.options.methods.selectItem.call(this, item)
+
+        // if selected item contains search value,
+        // remove the search string
+        if (
+          this.internalSearch &&
+          this.multiple &&
+          this.getText(item).toLocaleLowerCase().includes(this.internalSearch.toLocaleLowerCase())
+        ) {
+          this.internalSearch = null
+        }
       }
     },
     setSelectedItems () {
@@ -170,26 +188,37 @@ export default VAutocomplete.extend({
     },
     updateEditing () {
       const value = this.internalValue.slice()
-      value[this.editingIndex] = this.internalSearch
+      const index = this.selectedItems.findIndex(item =>
+        this.getText(item) === this.internalSearch)
+
+      // If user enters a duplicate text on chip edit,
+      // don't add it, move it to the end of the list
+      if (index > -1) {
+        const item = typeof value[index] === 'object'
+          ? Object.assign({}, value[index])
+          : value[index]
+
+        value.splice(index, 1)
+        value.push(item)
+      } else {
+        value[this.editingIndex] = this.internalSearch
+      }
 
       this.setValue(value)
-
       this.editingIndex = -1
+      this.internalSearch = null
     },
     updateCombobox () {
-      const isUsingSlot = Boolean(this.$scopedSlots.selection) || this.hasChips
-
-      // If search is not dirty and is
-      // using slot, do nothing
-      if (isUsingSlot && !this.searchIsDirty) return
+      // If search is not dirty, do nothing
+      if (!this.searchIsDirty) return
 
       // The internal search is not matching
       // the internal value, update the input
       if (this.internalSearch !== this.getText(this.internalValue)) this.setValue()
 
-      // Reset search if using slot
-      // to avoid a double input
-      if (isUsingSlot) this.internalSearch = undefined
+      // Reset search if using slot to avoid a double input
+      const isUsingSlot = Boolean(this.$scopedSlots.selection) || this.hasChips
+      if (isUsingSlot) this.internalSearch = null
     },
     updateSelf () {
       this.multiple ? this.updateTags() : this.updateCombobox()
@@ -199,16 +228,24 @@ export default VAutocomplete.extend({
 
       // If the user is not searching
       // and no menu item is selected
+      // or if the search is empty
       // do nothing
-      if (menuIndex < 0 &&
-        !this.searchIsDirty
-      ) return
+      if ((menuIndex < 0 && !this.searchIsDirty) ||
+          !this.internalSearch) return
 
       if (this.editingIndex > -1) {
         return this.updateEditing()
       }
 
-      const index = this.selectedItems.indexOf(this.internalSearch)
+      const index = this.selectedItems.findIndex(item =>
+        this.internalSearch === this.getText(item))
+
+      // If the duplicate item is an object,
+      // copy it, so that it can be added again later
+      const itemToSelect = index > -1 && typeof this.selectedItems[index] === 'object'
+        ? Object.assign({}, this.selectedItems[index])
+        : this.internalSearch
+
       // If it already exists, do nothing
       // this might need to change to bring
       // the duplicated item to the last entered
@@ -224,17 +261,23 @@ export default VAutocomplete.extend({
       // TODO: find out where
       if (menuIndex > -1) return (this.internalSearch = null)
 
-      this.selectItem(this.internalSearch)
+      this.selectItem(itemToSelect)
+
       this.internalSearch = null
     },
     onPaste (event: ClipboardEvent) {
       if (!this.multiple || this.searchIsDirty) return
 
-      const pastedItemText = event.clipboardData!.getData('text/vnd.vuetify.autocomplete.item+plain')
+      const pastedItemText = event.clipboardData?.getData('text/vnd.vuetify.autocomplete.item+plain')
       if (pastedItemText && this.findExistingIndex(pastedItemText as any) === -1) {
         event.preventDefault()
         VSelect.options.methods.selectItem.call(this, pastedItemText as any)
       }
+    },
+    clearableCallback () {
+      this.editingIndex = -1
+
+      VAutocomplete.options.methods.clearableCallback.call(this)
     },
   },
 })

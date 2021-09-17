@@ -12,6 +12,14 @@ import {
 } from '@vue/test-utils'
 import { ExtractVue } from '../../../util/mixins'
 
+Vue.prototype.$vuetify = {
+  rtl: false,
+  icons: {},
+  lang: {
+    t: str => str,
+  },
+}
+
 describe('VRating.ts', () => {
   type Instance = ExtractVue<typeof VRating>
   let mountFunction: (options?: object) => Wrapper<Instance>
@@ -24,6 +32,9 @@ describe('VRating.ts', () => {
         mocks: {
           $vuetify: {
             rtl: false,
+            lang: {
+              t: str => str,
+            },
           },
         },
         ...options,
@@ -185,6 +196,9 @@ describe('VRating.ts', () => {
       mocks: {
         $vuetify: {
           rtl: true,
+          lang: {
+            t: str => str,
+          },
         },
       },
     })
@@ -229,7 +243,7 @@ describe('VRating.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('it should bind mousemove listener', () => {
+  it('should bind mousemove listener', () => {
     const onMouseEnter = jest.fn()
     const wrapper = mountFunction({
       propsData: {

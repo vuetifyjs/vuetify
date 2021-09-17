@@ -1,0 +1,10 @@
+{
+  "props": {
+    "name": "Sets the component's name attribute",
+    "column": "Displays radio buttons in column",
+    "row": "Displays radio buttons in row"
+  },
+  "events": {
+    "change": "Emitted when the input is changed by user interaction"
+  }
+}

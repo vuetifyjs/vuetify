@@ -42,6 +42,14 @@ describe('VFileInput.ts', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render multiple', () => {
+    const wrapper = mountFunction({
+      propsData: { multiple: true },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render counter', () => {
     const wrapper = mountFunction({
       propsData: {
@@ -140,7 +148,7 @@ describe('VFileInput.ts', () => {
     })
 
     wrapper.vm.clearableCallback()
-    expect(wrapper.vm.internalValue).toBeUndefined()
+    expect(wrapper.vm.internalValue).toBeNull()
 
     const wrapper2 = mountFunction({
       attrs: { multiple: '' },

@@ -15,7 +15,7 @@ import { VuetifyServiceContract } from 'vuetify/types/services'
 
 export default function goTo (
   _target: VuetifyGoToTarget,
-  _settings: Partial<GoToOptions> = {}
+  _settings: GoToOptions = {}
 ): Promise<number> {
   const settings: GoToOptions = {
     container: (document.scrollingElement as HTMLElement | null) || document.body || document.documentElement,
@@ -57,7 +57,6 @@ export default function goTo (
   if (!ease) throw new TypeError(`Easing function "${settings.easing}" not found.`)
 
   // Cannot be tested properly in jsdom
-  // tslint:disable-next-line:promise-must-complete
   /* istanbul ignore next */
   return new Promise(resolve => requestAnimationFrame(function step (currentTime: number) {
     const timeElapsed = currentTime - startTime

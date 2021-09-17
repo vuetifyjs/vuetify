@@ -14,9 +14,11 @@ import Loadable from '../../mixins/loadable'
 import Validatable from '../../mixins/validatable'
 
 // Directives
+import resize from '../../directives/resize'
 import ripple from '../../directives/ripple'
 
 // Utilities
+import { attachedRoot } from '../../util/dom'
 import { convertToUnit, keyCodes } from '../../util/helpers'
 import { breaking, consoleWarn } from '../../util/console'
 
@@ -28,9 +30,7 @@ const baseMixins = mixins(
   VInput,
   Intersectable({
     onVisible: [
-      'setLabelWidth',
-      'setPrefixWidth',
-      'setPrependWidth',
+      'onResize',
       'tryAutofocus',
     ],
   }),
@@ -52,7 +52,10 @@ const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', '
 export default baseMixins.extend<options>().extend({
   name: 'v-text-field',
 
-  directives: { ripple },
+  directives: {
+    resize,
+    ripple,
+  },
 
   inheritAttrs: false,
 
@@ -74,6 +77,7 @@ export default baseMixins.extend<options>().extend({
     placeholder: String,
     prefix: String,
     prependInnerIcon: String,
+    persistentPlaceholder: Boolean,
     reverse: Boolean,
     rounded: Boolean,
     shaped: Boolean,
@@ -129,7 +133,7 @@ export default baseMixins.extend<options>().extend({
       if (typeof this.counterValue === 'function') {
         return this.counterValue(this.internalValue)
       }
-      return (this.internalValue || '').toString().length
+      return [...(this.internalValue || '').toString()].length
     },
     hasCounter (): boolean {
       return this.counter !== false && this.counter != null
@@ -185,16 +189,15 @@ export default baseMixins.extend<options>().extend({
       }
     },
     showLabel (): boolean {
-      return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder))
+      return this.hasLabel && !(this.isSingle && this.labelValue)
     },
     labelValue (): boolean {
-      return !this.isSingle &&
-        Boolean(this.isFocused || this.isLabelActive || this.placeholder)
+      return this.isFocused || this.isLabelActive || this.persistentPlaceholder
     },
   },
 
   watch: {
-    labelValue: 'setLabelWidth',
+    // labelValue: 'setLabelWidth', // moved to mounted, see #11533
     outlined: 'setLabelWidth',
     label () {
       this.$nextTick(this.setLabelWidth)
@@ -226,10 +229,11 @@ export default baseMixins.extend<options>().extend({
   },
 
   mounted () {
+    // #11533
+    this.$watch(() => this.labelValue, this.setLabelWidth)
+
     this.autofocus && this.tryAutofocus()
-    this.setLabelWidth()
-    this.setPrefixWidth()
-    this.setPrependWidth()
+
     requestAnimationFrame(() => (this.isBooted = true))
   },
 
@@ -275,8 +279,8 @@ export default baseMixins.extend<options>().extend({
     genIconSlot () {
       const slot = []
 
-      if (this.$slots['append']) {
-        slot.push(this.$slots['append'] as VNode[])
+      if (this.$slots.append) {
+        slot.push(this.$slots.append as VNode[])
       } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
       }
@@ -298,10 +302,16 @@ export default baseMixins.extend<options>().extend({
     genClearIcon () {
       if (!this.clearable) return null
 
-      const data = this.isDirty ? undefined : { attrs: { disabled: true } }
+      // if the text field has no content then don't display the clear icon.
+      // We add an empty div because other controls depend on a ref to append inner
+      if (!this.isDirty) {
+        return this.genSlot('append', 'inner', [
+          this.$createElement('div'),
+        ])
+      }
 
       return this.genSlot('append', 'inner', [
-        this.genIcon('clear', this.clearableCallback, data),
+        this.genIcon('clear', this.clearableCallback),
       ])
     },
     genCounter () {
@@ -309,14 +319,14 @@ export default baseMixins.extend<options>().extend({
 
       const max = this.counter === true ? this.attrs$.maxlength : this.counter
 
-      return this.$createElement(VCounter, {
-        props: {
-          dark: this.dark,
-          light: this.light,
-          max,
-          value: this.computedCounterValue,
-        },
-      })
+      const props = {
+        dark: this.dark,
+        light: this.light,
+        max,
+        value: this.computedCounterValue,
+      }
+
+      return this.$scopedSlots.counter?.({ props }) ?? this.$createElement(VCounter, { props })
     },
     genControl () {
       return VInput.options.methods.genControl.call(this)
@@ -363,6 +373,7 @@ export default baseMixins.extend<options>().extend({
       const width = !this.singleLine && (this.labelValue || this.isDirty) ? this.labelWidth : 0
       const span = this.$createElement('span', {
         domProps: { innerHTML: '&#8203;' },
+        staticClass: 'notranslate',
       })
 
       return this.$createElement('legend', {
@@ -373,7 +384,8 @@ export default baseMixins.extend<options>().extend({
     },
     genInput () {
       const listeners = Object.assign({}, this.listeners$)
-      delete listeners['change'] // Change should not be bound externally
+      delete listeners.change // Change should not be bound externally
+      const { title, ...inputAttrs } = this.attrs$
 
       return this.$createElement('input', {
         style: {},
@@ -381,11 +393,11 @@ export default baseMixins.extend<options>().extend({
           value: (this.type === 'number' && Object.is(this.lazyValue, -0)) ? '-0' : this.lazyValue,
         },
         attrs: {
-          ...this.attrs$,
+          ...inputAttrs,
           autofocus: this.autofocus,
           disabled: this.isDisabled,
           id: this.computedId,
-          placeholder: this.placeholder,
+          placeholder: this.persistentPlaceholder || this.isFocused || !this.hasLabel ? this.placeholder : undefined,
           readonly: this.isReadonly,
           type: this.type,
         },
@@ -396,6 +408,11 @@ export default baseMixins.extend<options>().extend({
           keydown: this.onKeyDown,
         }),
         ref: 'input',
+        directives: [{
+          name: 'resize',
+          modifiers: { quiet: true },
+          value: this.onResize,
+        }],
       })
     },
     genMessages () {
@@ -439,7 +456,10 @@ export default baseMixins.extend<options>().extend({
     onFocus (e?: Event) {
       if (!this.$refs.input) return
 
-      if (document.activeElement !== this.$refs.input) {
+      const root = attachedRoot(this.$el)
+      if (!root) return
+
+      if (root.activeElement !== this.$refs.input) {
         return this.$refs.input.focus()
       }
 
@@ -454,7 +474,13 @@ export default baseMixins.extend<options>().extend({
       this.badInput = target.validity && target.validity.badInput
     },
     onKeyDown (e: KeyboardEvent) {
-      if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
+      if (
+        e.keyCode === keyCodes.enter &&
+        this.lazyValue !== this.initialValue
+      ) {
+        this.initialValue = this.lazyValue
+        this.$emit('change', this.initialValue)
+      }
 
       this.$emit('keydown', e)
     },
@@ -493,9 +519,10 @@ export default baseMixins.extend<options>().extend({
       if (
         !this.autofocus ||
         typeof document === 'undefined' ||
-        !this.$refs.input ||
-        document.activeElement === this.$refs.input
-      ) return false
+        !this.$refs.input) return false
+
+      const root = attachedRoot(this.$el)
+      if (!root || root.activeElement === this.$refs.input) return false
 
       this.$refs.input.focus()
 
@@ -510,6 +537,11 @@ export default baseMixins.extend<options>().extend({
       } else if (this.initialValue !== this.lazyValue) {
         this.$emit('change', this.lazyValue)
       }
+    },
+    onResize () {
+      this.setLabelWidth()
+      this.setPrefixWidth()
+      this.setPrependWidth()
     },
   },
 })

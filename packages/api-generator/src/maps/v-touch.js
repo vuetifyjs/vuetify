@@ -1,11 +1,18 @@
 module.exports = {
   'v-touch': {
-    options: [
-      {
-        name: 'value',
-        default: '{}',
-        type: 'object',
+    argument: [{
+      name: 'argument',
+      type: ['object'],
+      example: {
+        move: 'Function',
+        start: 'Function',
+        end: 'Function',
+        left: 'Function',
+        right: 'Function',
+        up: 'Function',
+        down: 'Function',
       },
-    ],
+      default: undefined,
+    }],
   },
 }

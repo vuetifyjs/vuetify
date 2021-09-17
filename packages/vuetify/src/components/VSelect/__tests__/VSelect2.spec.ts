@@ -37,6 +37,10 @@ describe('VSelect.ts', () => {
     }
   })
 
+  afterEach(() => {
+    document.body.removeChild(el)
+  })
+
   it('should use slotted prepend-item', () => {
     const wrapper = mountFunction({
       propsData: {
@@ -158,6 +162,32 @@ describe('VSelect.ts', () => {
     expect(wrapper.vm.computedCounterValue).toBe(2)
   })
 
+  it('should return the correct counter value', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo', 'bar'],
+        value: 'foo',
+      },
+    })
+
+    expect(wrapper.vm.computedCounterValue).toBe(3)
+
+    wrapper.setProps({
+      multiple: true,
+      value: ['foo'],
+    })
+
+    expect(wrapper.vm.computedCounterValue).toBe(1)
+
+    wrapper.setProps({
+      counterValue: (value?: string): number => 2,
+      multiple: false,
+      value: undefined,
+    })
+
+    expect(wrapper.vm.computedCounterValue).toBe(2)
+  })
+
   it('should emit a single change event', async () => {
     const wrapper = mountFunction({
       attachToDocument: true,
@@ -201,6 +231,28 @@ describe('VSelect.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(change.mock.calls).toHaveLength(1)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/13658
+  it('should not emit when clicked on the selected item - object values', async () => {
+    const onInput = jest.fn()
+    const itemA = { text: 'A', value: { foo: null } }
+    const itemB = { text: 'B', value: { foo: '' } }
+    const wrapper = mountFunction({
+      propsData: {
+        items: [itemA, itemB],
+        value: { foo: null },
+      },
+    })
+    wrapper.vm.$on('input', onInput)
+
+    wrapper.vm.selectItem(itemA)
+    await wrapper.vm.$nextTick()
+    expect(onInput).toHaveBeenCalledTimes(0)
+
+    wrapper.vm.selectItem(itemB)
+    await wrapper.vm.$nextTick()
+    expect(onInput).toHaveBeenCalledTimes(1)
   })
 
   // Inspired by https://github.com/vuetifyjs/vuetify/pull/1425 - Thanks @kevmo314
@@ -270,8 +322,8 @@ describe('VSelect.ts', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.internalValue).toBeUndefined()
-    expect(input).toHaveBeenCalledWith(undefined)
+    expect(wrapper.vm.internalValue).toBeNull()
+    expect(input).toHaveBeenCalledWith(null)
   })
 
   it('should be clearable with prop, dirty and single select', async () => {
@@ -292,7 +344,7 @@ describe('VSelect.ts', () => {
 
     clear.trigger('click')
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.internalValue).toBeUndefined()
+    expect(wrapper.vm.internalValue).toBeNull()
     expect(wrapper.vm.isMenuActive).toBe(false)
   })
 
@@ -467,6 +519,22 @@ describe('VSelect.ts', () => {
 
     // Up arrow
     event.keyCode = keyCodes.up
+    wrapper.vm.onKeyDown(event)
+
+    await waitAnimationFrame()
+
+    expect(wrapper.vm.internalValue).toBe(1)
+
+    // End key
+    event.keyCode = keyCodes.end
+    wrapper.vm.onKeyDown(event)
+
+    await waitAnimationFrame()
+
+    expect(wrapper.vm.internalValue).toBe(4)
+
+    // Home key
+    event.keyCode = keyCodes.home
     wrapper.vm.onKeyDown(event)
 
     await waitAnimationFrame()

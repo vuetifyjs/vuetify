@@ -58,6 +58,9 @@
   padding-top: $text-field-active-label-height
   margin-top: $input-top-spacing - $text-field-active-label-height
 
+  &__prefix,
+  &__suffix
+    line-height: $text-field-line-height
   input
     flex: 1 1 auto
     line-height: $text-field-line-height
@@ -73,23 +76,32 @@
 
   fieldset,
   .v-input__control
-    color: inherit
+    color: currentColor
 
   &.v-input--has-state
     .v-input__control > .v-text-field__details > .v-counter
-      color: inherit
+      color: currentColor
 
   &.v-input--is-disabled
     .v-input__control > .v-text-field__details > .v-counter,
     .v-input__control > .v-text-field__details > .v-messages
-      color: inherit
+      color: currentColor
 
   &.v-input--dense
     padding-top: 0
 
+    .v-label
+      top: 4px
+
     &:not(.v-text-field--outlined)
+      .v-text-field__prefix,
+      .v-text-field__suffix,
       input
         padding: $text-field-dense-padding
+      .v-text-field__prefix
+        padding-right: $text-field-append-prepend-margin
+      .v-text-field__suffix
+        padding-left: $text-field-append-prepend-margin
 
     &[type=text]::-ms-clear
       display: none
@@ -97,12 +109,6 @@
     .v-input__prepend-inner,
     .v-input__append-inner
       margin-top: $text-field-dense-append-prepend-margin
-
-    &:not(.v-text-field--enclosed):not(.v-text-field--full-width)
-      .v-input__prepend-inner,
-      .v-input__append-inner
-        .v-input__icon > .v-icon
-          margin-top: $text-field-dense-icon-append-prepend-margin-top
 
   .v-input__prepend-inner,
   .v-input__append-inner
@@ -156,10 +162,10 @@
     &--active
       max-width: 133%
       transform: $text-field-label-active-transform
+      pointer-events: auto // Show title attr on label hover
 
   & > .v-input__control > .v-input__slot
     cursor: text
-    transition: background $primary-transition
 
     &:before,
     &:after
@@ -176,6 +182,7 @@
       border-width: thin 0 0 0
 
     &:after
+      background-color: currentColor
       border-color: currentColor
       border-style: solid
       border-width: thin 0 thin 0
@@ -342,6 +349,7 @@
       padding: $text-field-enclosed-details-padding
 
     .v-text-field__details
+      padding-top: $text-field-details-padding-top
       margin-bottom: $text-field-details-margin-bottom
 
   &--reverse
@@ -395,8 +403,8 @@
       position: absolute
       right: 0
       top: $text-field-outlined-fieldset-top
-      transition-duration: 0.3s
-      transition-property: color, border-width
+      transition-duration: 0.15s
+      transition-property: color
       transition-timing-function: map-get($transition, 'fast-in-fast-out')
 
       +ltr()
@@ -426,10 +434,10 @@
 
     &.v-text-field--reverse legend
       +ltr()
-        text-align: right
+        margin-left: auto
 
       +rtl()
-        text-align: left
+        margin-right: auto
 
     &.v-text-field--rounded
       legend

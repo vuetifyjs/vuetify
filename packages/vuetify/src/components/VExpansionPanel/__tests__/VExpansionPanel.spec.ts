@@ -74,12 +74,12 @@ describe('VExpansionPanel', () => {
 
   // Ensures smooth transition when using the lazy prop
   // TODO: move to PanelContent tests
-  /* it('should boot expansion panel item', async () => {
+  it.skip('should boot expansion panel item', async () => {
     const change = jest.fn()
     const wrapper = mountFunction({
       propsData: {
-        lazy: true
-      }
+        lazy: true,
+      },
     })
 
     wrapper.vm.$on('change', change)
@@ -93,7 +93,7 @@ describe('VExpansionPanel', () => {
     await wrapper.vm.$nextTick()
 
     expect(change).toHaveBeenCalled()
-  }) */
+  })
 
   it('should hide actions and match snapshot', async () => {
     const wrapper = mountFunction({
@@ -133,7 +133,8 @@ describe('VExpansionPanel', () => {
     expect(wrapper.vm.content).toBeNull()
   })
 
-  it('should toggle, boot content and emit a change', async () => {
+  // TODO: actual behaviour relies on VExpansionPanels, this was faking it with vm.toggle()
+  it.skip('should toggle, boot content and emit a change', async () => {
     const change = jest.fn()
     const wrapper = mountFunction({
       slots: {

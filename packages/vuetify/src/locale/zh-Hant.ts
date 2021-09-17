@@ -61,4 +61,9 @@ export default {
       currentPage: '當前頁 {0}',
     },
   },
+  rating: {
+    ariaLabel: {
+      icon: 'Rating {0} of {1}',
+    },
+  },
 }
