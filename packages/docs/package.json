@@ -19,8 +19,8 @@
     "fix:md": "markdownlint --config .markdownlintrc src/pages/en --fix"
   },
   "dependencies": {
-    "@mdi/font": "5.9.55",
-    "@vueuse/core": "^5.3.0",
+    "@mdi/font": "6.1.95",
+    "@vueuse/core": "^6.3.3",
     "@vueuse/head": "^0.6.0",
     "prism-theme-vars": "^0.2.2",
     "roboto-fontface": "*",
@@ -31,23 +31,23 @@
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^2.4.0",
-    "@vitejs/plugin-vue": "^1.2.3",
-    "@vue/compiler-sfc": "^3.2.1",
-    "@vue/server-renderer": "^3.2.1",
-    "https-localhost": "^4.6.5",
+    "@vitejs/plugin-vue": "^1.6.2",
+    "@vue/compiler-sfc": "^3.2.11",
+    "@vue/server-renderer": "^3.2.11",
+    "https-localhost": "^4.7.0",
     "markdown-it-link-attributes": "^3.0.0",
-    "markdown-it-prism": "^2.1.8",
-    "vite": "^2.4.4",
-    "vite-plugin-components": "^0.13.2",
-    "vite-plugin-md": "^0.10.0",
-    "vite-plugin-pages": "^0.17.3",
-    "vite-plugin-pwa": "^0.10.0",
-    "vite-plugin-vue-layouts": "^0.3.1",
-    "vite-ssg": "^0.14.5",
+    "markdown-it-prism": "^2.2.1",
+    "unplugin-vue-components": "^0.15.2",
+    "vite": "^2.5.7",
+    "vite-plugin-md": "^0.11.0",
+    "vite-plugin-pages": "^0.18.0",
+    "vite-plugin-pwa": "^0.11.2",
+    "vite-plugin-vue-layouts": "^0.4.1",
+    "vite-ssg": "^0.15.1",
     "vue-cli-plugin-vuetify": "~2.4.2",
     "vuex": "^4.0.2",
     "vuex-pathify": "^1.5.1",
-    "workbox-window": "^6.2.3"
+    "workbox-window": "^6.3.0"
   },
   "publishConfig": {
     "access": "public"

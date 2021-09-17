@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
 import Layouts from 'vite-plugin-vue-layouts'
-import ViteComponents from 'vite-plugin-components'
+import Components from 'unplugin-vue-components/vite'
 import Markdown from 'vite-plugin-md'
 import { VitePWA } from 'vite-plugin-pwa'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
@@ -21,8 +21,36 @@ export default defineConfig({
     },
   },
   plugins: [
-    Vue({
-      include: [/\.vue$/, /\.md$/],
+    // https://github.com/antfu/unplugin-vue-components
+    Components({
+      deep: true,
+      dirs: ['src/components-v3'],
+      directoryAsNamespace: true,
+      dts: true,
+      extensions: ['vue', 'md'],
+      include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+    }),
+
+    // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
+    Layouts({
+      layoutsDir: 'src/layouts-v3',
+    }),
+
+    // https://github.com/antfu/vite-plugin-md
+    Markdown({
+      wrapperClasses: 'prose prose-sm m-auto text-left',
+      headEnabled: true,
+      markdownItSetup (md) {
+        // https://prismjs.com/
+        md.use(Prism)
+        md.use(LinkAttributes, {
+          pattern: /^https?:\/\//,
+          attrs: {
+            target: '_blank',
+            rel: 'noopener',
+          },
+        })
+      },
     }),
 
     // https://github.com/hannoeru/vite-plugin-pages
@@ -49,38 +77,6 @@ export default defineConfig({
       },
     }),
 
-    // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
-    Layouts({
-      layoutsDir: 'src/layouts-v3',
-    }),
-
-    // https://github.com/antfu/vite-plugin-md
-    Markdown({
-      wrapperClasses: 'prose prose-sm m-auto text-left',
-      headEnabled: true,
-      markdownItSetup (md) {
-        // https://prismjs.com/
-        md.use(Prism)
-        md.use(LinkAttributes, {
-          pattern: /^https?:\/\//,
-          attrs: {
-            target: '_blank',
-            rel: 'noopener',
-          },
-        })
-      },
-    }),
-
-    // https://github.com/antfu/vite-plugin-components
-    ViteComponents({
-      dirs: ['src/components-v3'],
-      extensions: ['vue', 'md'],
-      customLoaderMatcher: id => id.endsWith('.md'),
-      deep: true,
-      directoryAsNamespace: true,
-      globalComponentsDeclaration: true,
-    }),
-
     // https://github.com/antfu/vite-plugin-pwa
     VitePWA({
       registerType: 'autoUpdate',
@@ -91,6 +87,10 @@ export default defineConfig({
         theme_color: '#094A7F',
         icons: [],
       },
+    }),
+
+    Vue({
+      include: [/\.vue$/, /\.md$/],
     }),
 
     // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
