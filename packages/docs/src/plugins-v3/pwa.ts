@@ -1,7 +1,7 @@
-import type { pwaPlugin } from '@/types'
+import type { PwaPlugin } from '@/types'
 
 // https://github.com/antfu/vite-plugin-pwa#automatic-reload-when-new-content-available
-export const usePwa: pwaPlugin = ({ isClient, router }) => {
+export const usePwa: PwaPlugin = ({ isClient, router }) => {
   if (!isClient) {
     return
   }
