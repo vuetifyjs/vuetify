@@ -39,7 +39,7 @@
 <script lant="ts">
   // Utilities
   import { computed, defineComponent } from 'vue'
-  import { usePathify } from '@/utils/pathify'
+  import { useSponsorStore } from './../../store-v3/sponsors'
 
   // Mixins
   // import Density from '@/mixins/density'
@@ -50,12 +50,14 @@
     // mixins: [Density],
 
     setup () {
-      const { get } = usePathify()
+      // stores
+      const sponsorStore = useSponsorStore()
 
       // data
-      const byTier = get('sponsors/byTier')
+      const { byTier } = sponsorStore
+
       const sponsors = computed(() => {
-        return Object.values(this.byTier)
+        return Object.values(byTier)
           .reduce((tiers, tier) => tiers.concat(tier), [])
       })
 

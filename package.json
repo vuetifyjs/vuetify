@@ -80,7 +80,6 @@
     "vuex": "^4.0.2"
   },
   "resolutions": {
-    "vue-class-component": "8.0.0-beta.2",
     "workbox-webpack-plugin": "^5.1.3"
   }
 }

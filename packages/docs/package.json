@@ -45,8 +45,7 @@
     "vite-plugin-vue-layouts": "^0.4.1",
     "vite-ssg": "^0.15.1",
     "vue-cli-plugin-vuetify": "~2.4.2",
-    "vuex": "^4.0.2",
-    "vuex-pathify": "^1.5.1",
+    "pinia": "2.0.0-rc.9",
     "workbox-window": "^6.3.0"
   },
   "publishConfig": {

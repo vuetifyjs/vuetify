@@ -6,7 +6,7 @@ import App from './App.vue'
 // plugins
 import { useI18n } from './plugins-v3/i18n'
 import { usePwa } from './plugins-v3/pwa'
-import { useStore } from './plugins-v3/store'
+import { usePinia } from './plugins-v3/pinia'
 import { useVuetify } from './plugins-v3/vuetify'
 
 // styles
@@ -21,7 +21,7 @@ export const createApp = ViteSSG(
   ctx => {
     useI18n(ctx)
     usePwa(ctx)
-    useStore(ctx)
+    usePinia(ctx)
     useVuetify(ctx)
   },
 )

@@ -4675,7 +4675,7 @@
     "@vue/compiler-dom" "3.2.11"
     "@vue/shared" "3.2.11"
 
-"@vue/devtools-api@^6.0.0-beta.11", "@vue/devtools-api@^6.0.0-beta.13":
+"@vue/devtools-api@^6.0.0-beta.11", "@vue/devtools-api@^6.0.0-beta.13", "@vue/devtools-api@^6.0.0-beta.15":
   version "6.0.0-beta.15"
   resolved "https://registry.yarnpkg.com/@vue/devtools-api/-/devtools-api-6.0.0-beta.15.tgz#ad7cb384e062f165bcf9c83732125bffbc2ad83d"
   integrity sha512-quBx4Jjpexo6KDiNUGFr/zF/2A4srKM9S9v2uHgMXSU//hjgq1eGzqkIFql8T9gfX5ZaVOUzYBP3jIdIR3PKIA==
@@ -13544,6 +13544,14 @@ pify@^4.0.1:
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
+pinia@2.0.0-rc.9:
+  version "2.0.0-rc.9"
+  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.0.0-rc.9.tgz#ea0812ea28f8197f14767e9b731ae10d3a523803"
+  integrity sha512-JrFnxKbuyYPEZ6ZS56sBHRzabZj+5xkJj8jxCHGNJ1h2I824QJuLXJVV/3pgkUw0pfXYrRxcO6EiV9+wapSicg==
+  dependencies:
+    "@vue/devtools-api" "^6.0.0-beta.15"
+    vue-demi "*"
+
 pinkie-promise@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/pinkie-promise/-/pinkie-promise-2.0.1.tgz#2135d6dfa7a358c069ac9b178776288228450ffa"
@@ -17138,7 +17146,7 @@ vue-analytics@^5.16.1:
   resolved "https://registry.yarnpkg.com/vue-analytics/-/vue-analytics-5.22.1.tgz#9d6b32da56daee1b9dfb23a267b50349a03f710f"
   integrity sha512-HPKQMN7gfcUqS5SxoO0VxqLRRSPkG1H1FqglsHccz6BatBatNtm/Vyy8brApktZxNCfnAkrSVDpxg3/FNDeOgQ==
 
-vue-class-component@8.0.0-beta.2, vue-class-component@^7.2.6:
+vue-class-component@8.0.0-beta.2:
   version "8.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-8.0.0-beta.2.tgz#6470fb118b1e30dde02540290547b2c24d65e5ca"
   integrity sha512-2KiZBQLrL0qdVOGVOFTGnpECpzt5yj9qgcZHcX2AgguyYH2KcIMJrQY9QaRXG2w1JrX5PvkF7Ko9PreDvqY3pw==
@@ -17228,13 +17236,6 @@ vuetify-loader@^1.7.2:
     decache "^4.6.0"
     file-loader "^6.2.0"
     loader-utils "^2.0.0"
-
-vuex-pathify@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/vuex-pathify/-/vuex-pathify-1.5.1.tgz#e0b4dba699edf64c5d945c9a1048febda3fbebd8"
-  integrity sha512-+0cCPVIeleV8WJyUIQ9ZHqLyz9F5iRm9LzWl6dnCrGbjHFTLfS5H2uS1CtJ0t0BCzAReUrbEsRweAyooe4OqZQ==
-  dependencies:
-    vue-class-component "^7.2.6"
 
 vuex@^4.0.2:
   version "4.0.2"
