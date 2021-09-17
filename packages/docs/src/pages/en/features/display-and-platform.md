@@ -23,7 +23,8 @@ The following shows how to access the application's display information:
 
 ```html
 <script>
-  import { useDisplay } from 'vuetify'
+  // Composables
+  import { useDisplay } from 'vuetify/lib/composables/display'
 
   export default {
     mounted () {
@@ -85,7 +86,8 @@ In the following example, we use a switch statement and the current breakpoint n
 </template>
 
 <script>
-  import { useDisplay } from 'vuetify'
+  // Composables
+  import { useDisplay } from 'vuetify/lib/composables/display'
 
   export default {
     computed: {
@@ -180,7 +182,8 @@ Use the **display** composable alongside Vue 3's `setup` function to harness the
 </template>
 
 <script>
-  import { useDisplay } from 'vuetify'
+  // Composables
+  import { useDisplay } from 'vuetify/lib/compsables/display'
 
   export default {
     setup () {
@@ -197,7 +200,8 @@ Use the **display** composable alongside Vue 3's `setup` function to harness the
 Using JSX with setup can accomplish the same thing as a template. The following example shows how to bind the same **fullscreen** property, but using JSX:
 
 ```tsx
-import { useDisplay } from 'vuetify'
+// Composables
+import { useDisplay } from 'vuetify/lib/composables/display'
 
 export default {
   setup () {
@@ -231,7 +235,8 @@ Breakpoint and conditional values return a `boolean` that is derived from the cu
 </template>
 
 <script>
-  import { useDisplay } from 'vuetify'
+  // Composables
+  import { useDisplay } from 'vuetify/lib/composables/display'
 
   setup () {
     // Destructure only the keys we want to use

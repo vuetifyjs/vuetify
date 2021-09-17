@@ -29,10 +29,10 @@ To set the available locale messages or the default locale, supply the `locale` 
 // src/main.js
 
 import { createApp } from 'vue'
-import { createVuetify } from 'vuetify'
+import { createVuetify } from 'vuetify/lib'
 
 // Translations provided by Vuetify
-import { pl, zhHans } from 'vuetify/locale'
+import { pl, zhHans } from 'vuetify/lib/locale'
 
 // Your own translation file
 import sv from './i18n/vuetify/sv'
@@ -89,7 +89,7 @@ export default {
 
 ```js
 // src/main.js
-import { createVuetify } from 'vuetify'
+import { createVuetify } from 'vuetify/lib'
 import customLocale from './locales/customLocale'
 
 const vuetify = createVuetify({
@@ -131,8 +131,8 @@ If you are using the vue-i18n library, you can very easily integrate it with Vue
 // src/main.js
 
 import { createApp } from 'vue'
-import { createVuetify } from 'vuetify'
-import { createVueI18nAdapter } from 'vuetify/locale/adapters'
+import { createVuetify } from 'vuetify/lib'
+import { createVueI18nAdapter } from 'vuetify/lib/locale/adapters'
 import { createI18n, useI18n } from 'vue-i18n'
 
 const messages = {

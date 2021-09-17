@@ -1,8 +1,8 @@
 ---
+title: Get started with Vuetify 3 Alpha
 meta:
-  title: Get started with Vuetify 3 Alpha
-  description: Details for v3 alpha release - faq, changes, and upgrading.
-  keywords: migration, releases, upgrading vuetify, alpha, v3
+  - description: Details for v3 alpha release - faq, changes, and upgrading.
+    keywords: migration, releases, upgrading vuetify, alpha, v3
 related:
   - /getting-started/contributing/
   - /introduction/roadmap/
@@ -14,11 +14,11 @@ nav: Installation
 
 Vuetify 3 Alpha is here! Below is a collection of information to help you get started and answer some frequently asked questions regarding the alpha.
 
-<alert type="error">
+<!-- <alert type="error"> -->
 
   Before proceeding, it is important to note that this installation is intended primarily for testing purposes, and should not be considered for production applications.
 
-</alert>
+<!-- </alert> -->
 
 ## Installation
 
@@ -96,11 +96,11 @@ Once prompted, choose `Preview (Vuetify 3 + Vite)`:
   Configure (advanced)
 ```
 
-<alert type="warning">
+<!-- <alert type="warning"> -->
 
   During the vuetify cli installation there may be a warning regarding `conflicting versions for project dependency "vite"`. The cli will install the latest version of vite. Currently there is an issue with later versions of Vite. You will need to edit your `package.json` and set the Vite version to `~2.0.5` and rerun `yarn` / `npm i`.
 
-</alert>
+<!-- </alert> -->
 
 ## Usage
 
@@ -152,14 +152,14 @@ For bugs related to the Alpha, please create an issue via our [Issue Generator](
 - Vuetify components and functions available in the Alpha
 - Documentation content
 
-<alert type="info">
+<!-- <alert type="info"> -->
 
   We ask that documentation issues remain related to content only. The `next` documentation is a work in progress and not fully updated to Vue 3. Some features may be missing or not functioning and will be constantly worked on as new components and functionality becomes available. We will begin fielding these bugs closer to Phase 3 as things become stable.
 
-</alert>
+<!-- </alert> -->
 
 ## How to connect with Vuetify team
 
 The Vuetify team can be reached via [Discord Community](https://community.vuetifyjs.com/). If you have questions or would like to discuss Vuetify 3, come visit the #v3-discussion channel.
 
-<backmatter />
+<!-- <backmatter /> -->

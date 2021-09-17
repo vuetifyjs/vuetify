@@ -1,57 +1,35 @@
 <template>
-  <v-fade-transition appear>
-    <router-view />
-  </v-fade-transition>
+  <router-view />
 </template>
 
-<script>
+<script lang="ts">
   // Utilities
-  import { call, get, sync } from 'vuex-pathify'
-  import { genAppMetaInfo } from '@/util/metadata'
-  import { wait, waitForReadystate } from '@/util/helpers'
+  import { defineComponent } from 'vue'
+  import { useHead } from '@vueuse/head'
+  import { useI18n } from 'vue-i18n'
+  import { useRouter } from 'vue-router'
 
-  // Data
-  import metadata from '@/data/metadata'
-
-  export default {
+  export default defineComponent({
     name: 'App',
 
-    metaInfo () {
-      const suffix = this.name !== 'Home' ? ' — Vuetify' : ''
+    beforeCreate () {
+      const router = useRouter()
+      const { locale } = useI18n()
 
-      return {
-        ...genAppMetaInfo(metadata),
-        titleTemplate: chunk => `${chunk}${suffix}`,
+      // https://github.com/vueuse/head
+      useHead({
+        title: 'Vuetify',
+        meta: [
+          { name: 'description', content: 'Vite Docs Test', layout: 'home' },
+        ],
+      })
+
+      // set current route lang if root
+      const currentRoute = router.currentRoute.value
+      if (currentRoute.path === '/') {
+        router.replace(`/${locale.value}`)
       }
     },
 
-    computed: {
-      ...get('route', [
-        'hash',
-        'name',
-      ]),
-      scrolling: sync('app/scrolling'),
-    },
-
-    async mounted () {
-      await waitForReadystate()
-      await this.init()
-
-      if (!this.hash) return
-
-      await wait(500)
-
-      this.scrolling = true
-
-      try {
-        await this.$vuetify.goTo(this.hash)
-      } catch (e) {
-        console.log(e)
-      }
-
-      this.scrolling = false
-    },
-
-    methods: { init: call('app/init') },
-  }
+  })
 </script>
