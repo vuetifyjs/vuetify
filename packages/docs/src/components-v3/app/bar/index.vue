@@ -9,7 +9,10 @@
 
     <v-spacer />
 
-    <default-app-bar-items />
+    <app-bar-learn-menu />
+    <app-bar-support-menu />
+    <app-bar-team-link />
+    <app-bar-language-menu />
   </v-app-bar>
 </template>
 

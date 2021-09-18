@@ -2,11 +2,21 @@
 const fs = require('fs')
 const { resolve } = require('path')
 const { startCase } = require('lodash')
-const { getApi, getCompleteApi, getHeaderLocale } = require('@vuetify/api-generator')
+const { getApi, getCompleteApi } = require('@vuetify/api-generator')
 const rimraf = require('rimraf')
 
-const localeList = require('../src/i18n/locales').map(item => item.alternate || item.locale)
+const localeList = require('../src/i18n/locales.json').map(item => item.alternate || item.locale)
 const pageToApi = require('../src/data/page-to-api')
+
+const getLocaleMessage = (locale, fn) => {
+  const fallback = require(resolve(`./src/i18n/messages/en.json`))
+  try {
+    const data = require(resolve(`./src/i18n/messages/${locale}.json`))
+    return fn(data)
+  } catch (err) {
+    return fn(fallback)
+  }
+}
 
 function genApiLinks (component, header) {
   const links = Object.keys(pageToApi)
@@ -58,19 +68,18 @@ function genFooter () {
 const sanitize = str => str.replace(/\$/g, '')
 
 function createMdFile (component, data, locale) {
-  const headerLocale = getHeaderLocale(locale)
+  const apiHeaders = getLocaleMessage(locale, m => m['api-headers'])
   let str = ''
 
   str += genHeader(component)
-  str += genApiLinks(component, headerLocale.links)
+  str += genApiLinks(component, apiHeaders.links)
 
-  for (const [header, value] of Object.entries(data)) {
-    if (['composables', 'name'].includes(header) || !value.length) continue
-
-    str += `## ${headerLocale[header]}\n\n`
-    str += `<api-table name="${sanitize(component)}" field="${header}" />\n\n`
+  for (const section of ['props', 'functions', 'events', 'slots', 'sass', 'options', 'argument', 'modifiers']) {
+    if (Array.isArray(data[section]) && data[section].length) {
+      str += `## ${apiHeaders[section]} {#${section}}\n\n`
+      str += `<api-section name="${component}" section="${section}" />\n\n`
+    }
   }
-  str += `<api-section name="${component}" />\n\n`
 
   str += genFooter()
 
@@ -118,49 +127,57 @@ function generateFiles () {
   }
 
   fs.writeFileSync(resolve(`src/api/sass.json`), JSON.stringify([
-    ...api.filter(item => item?.sass?.length > 0).map(item => item.name),
+    ...api.filter(item => item && item.sass && item.sass.length > 0).map(item => item.name),
   ]))
 }
 
-class ApiPlugin {
-  apply (compiler) {
-    rimraf.sync(resolve('src/api'))
+// class ApiPlugin {
+//   apply (compiler) {
+//     rimraf.sync(resolve('src/api'))
 
-    generateFiles()
+//     generateFiles()
 
-    let changedFiles = []
-    const sourcePaths = [resolve('../api-generator/src/maps'), (resolve('../api-generator/src/locale/en'))]
+//     let changedFiles = []
+//     const sourcePaths = [resolve('../api-generator/src/maps'), (resolve('../api-generator/src/locale/en'))]
 
-    compiler.hooks.afterCompile.tap('ApiPlugin', compilation => {
-      sourcePaths.forEach(sourcePath => compilation.contextDependencies.add(sourcePath))
-    })
+//     compiler.hooks.afterCompile.tap('ApiPlugin', compilation => {
+//       sourcePaths.forEach(sourcePath => compilation.contextDependencies.add(sourcePath))
+//     })
 
-    compiler.hooks.watchRun.tap('ApiPlugin', async comp => {
-      const changedTimes = comp.watchFileSystem.watcher.getTimeInfoEntries()
+//     compiler.hooks.watchRun.tap('ApiPlugin', async comp => {
+//       const changedTimes = comp.watchFileSystem.watcher.getTimeInfoEntries()
 
-      changedFiles = Object.keys(changedTimes).filter(filePath => {
-        return sourcePaths.some(path => filePath.startsWith(path))
-      })
+//       changedFiles = Object.keys(changedTimes).filter(filePath => {
+//         return sourcePaths.some(path => filePath.startsWith(path))
+//       })
 
-      // Make sure api-gen is using latest files
-      changedFiles.forEach(filePath => {
-        delete require.cache[filePath]
-      })
-    })
+//       // Make sure api-gen is using latest files
+//       changedFiles.forEach(filePath => {
+//         delete require.cache[filePath]
+//       })
+//     })
 
-    compiler.hooks.compilation.tap('ApiPlugin', () => {
-      if (!changedFiles.length) return
+//     compiler.hooks.compilation.tap('ApiPlugin', () => {
+//       if (!changedFiles.length) return
 
-      for (const filePath of changedFiles) {
-        const matches = /[/\\]([-a-z]+|\$vuetify)\.js(?:on)?$/i.exec(filePath)
-        const [_, componentName] = matches
-        const componentApi = getApi(componentName, localeList)
-        writeData(componentName, componentApi)
-      }
+//       for (const filePath of changedFiles) {
+//         const matches = /[/\\]([-a-z]+|\$vuetify)\.js(?:on)?$/i.exec(filePath)
+//         const [_, componentName] = matches
+//         const componentApi = getApi(componentName, localeList)
+//         writeData(componentName, componentApi)
+//       }
 
-      changedFiles = []
-    })
-  }
+//       changedFiles = []
+//     })
+//   }
+// }
+
+// module.exports = ApiPlugin
+
+function run () {
+  rimraf.sync(resolve('src/api'))
+
+  generateFiles()
 }
 
-module.exports = ApiPlugin
+run()

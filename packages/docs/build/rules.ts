@@ -1,14 +1,17 @@
-function addCodeRules (md) {
+import type MarkdownIt from 'markdown-it'
+import type Renderer from 'markdown-it/lib/renderer'
+
+function addCodeRules (md: MarkdownIt) {
   const fence = md.renderer.rules.fence
 
   md.renderer.rules.fence = function (tokens, idx, options, env, self) {
     const handler = fence || self.renderToken
 
-    return `<app-code>${handler(tokens, idx, options)}</app-code>`
+    return `<app-code>${handler(tokens, idx, options, env, self)}</app-code>`
   }
 }
 
-function addImageRules (md) {
+function addImageRules (md: MarkdownIt) {
   md.renderer.rules.image = (tokens, idx, options, env, self) => {
     const token = tokens[idx]
     const alt = token.content
@@ -19,14 +22,14 @@ function addImageRules (md) {
   }
 }
 
-function addHrRules (md) {
+function addHrRules (md: MarkdownIt) {
   md.renderer.rules.hr = function (tokens, idx, options, env, self) {
     return '<app-divider />'
   }
 }
 
-function addUnderlineRules (md) {
-  function renderEm (tokens, idx, opts, env, self) {
+function addUnderlineRules (md: MarkdownIt) {
+  const renderEm: Renderer.RenderRule = (tokens, idx, opts, env, self) => {
     const token = tokens[idx]
     if (token.markup === '_') {
       token.tag = 'span'
@@ -39,18 +42,18 @@ function addUnderlineRules (md) {
   md.renderer.rules.em_close = renderEm
 }
 
-function addHeadingRules (md) {
+function addHeadingRules (md: MarkdownIt) {
   md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
     const level = tokens[idx].markup.length
     const next = tokens[idx + 1]
     const children = next ? next.children : []
-    const [, href] = children[2].attrs[1]
-    const content = children[0].content
+    const [, href] = children?.[0].attrs?.[1] ?? []
+    const content = children?.[1].content
 
     tokens[idx].tag = 'app-heading'
-    tokens[idx].attrSet('content', content)
-    tokens[idx].attrSet('href', href)
-    tokens[idx].attrSet('level', level)
+    tokens[idx].attrSet('content', content ?? '')
+    tokens[idx].attrSet('href', href ?? '')
+    tokens[idx].attrSet('level', level.toString())
 
     return self.renderToken(tokens, idx, options)
   }
@@ -61,7 +64,7 @@ function addHeadingRules (md) {
   }
 }
 
-function addLinkRules (md) {
+function addLinkRules (md: MarkdownIt) {
   md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
     tokens[idx].tag = 'app-link'
 
@@ -74,7 +77,7 @@ function addLinkRules (md) {
   }
 }
 
-function addTableRules (md) {
+function addTableRules (md: MarkdownIt) {
   md.renderer.rules.table_open = (tokens, idx, options, env, self) => {
     tokens[idx].tag = 'app-table'
 
@@ -88,7 +91,7 @@ function addTableRules (md) {
   }
 }
 
-module.exports = {
+export {
   addCodeRules,
   addHeadingRules,
   addHrRules,

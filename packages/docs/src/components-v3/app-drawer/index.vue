@@ -8,7 +8,7 @@
       <b>Components</b>
       <router-link :to="{ name: 'en-components-alerts' }">Alerts</router-link>
       <b>API</b>
-      <!-- <router-link :to="{ name: 'en-api-v-alert' }">v-alert</router-link> -->
+      <router-link :to="{ path: '/en/api/v-alert' }">v-alert</router-link>
     </div>
   </v-navigation-drawer>
 </template>

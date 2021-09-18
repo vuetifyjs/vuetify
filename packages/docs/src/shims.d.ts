@@ -16,9 +16,3 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
-
-declare module 'vuetify/lib/composables/display.mjs'
-
-declare module '@/utils/globals'
-
-declare module '@/utils/helpers'

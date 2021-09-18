@@ -15,6 +15,7 @@
     "preview": "vite preview",
     "preview-https": "serve dist",
     "build:modified": "node build/modified",
+    "build:api": "node build/api-plugin",
     "lint:md": "markdownlint --config .markdownlintrc src/pages/en",
     "fix:md": "markdownlint --config .markdownlintrc src/pages/en --fix"
   },
@@ -29,11 +30,13 @@
     "roboto-fontface": "*",
     "vue": "^3.2.8",
     "vue-i18n": "^9.2.0-beta.2",
+    "vue-prism-component": "^2.0.0",
     "vue-router": "^4.0.11",
     "vuetify": "^3.0.0-alpha.10"
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^2.4.0",
+    "@types/markdown-it": "^12.2.1",
     "@vitejs/plugin-vue": "^1.6.2",
     "@vue/compiler-sfc": "^3.2.8",
     "@vue/server-renderer": "^3.2.8",

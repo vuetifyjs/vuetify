@@ -1,4 +1,5 @@
-const { IS_SERVER } = require('./src/util/globals')
+// const { IS_SERVER } = require('./src/util/globals')
+const IS_SERVER = false
 
 module.exports = {
   css: {

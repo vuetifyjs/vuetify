@@ -3,13 +3,17 @@
     <app-bar />
     <app-drawer />
     <v-main>
-      <div class="px-4 py-10 text-center">
-        <router-view />
-        <div class="mt-5 mx-auto text-center">
-          [Default Layout]
-        </div>
-      </div>
+      <v-container
+        class="pa-4 pa-sm-6 pa-md-8"
+        fluid
+        tag="section"
+      >
+        <v-responsive :max-width="868" class="mx-auto overflow-visible">
+          <router-view />
+        </v-responsive>
+      </v-container>
     </v-main>
+    <app-toc />
   </v-app>
 </template>
 
