@@ -22,6 +22,9 @@
     "@mdi/font": "6.1.95",
     "@vueuse/core": "^6.3.3",
     "@vueuse/head": "^0.6.0",
+    "markdown-it-anchor": "^8.3.1",
+    "markdown-it-attrs": "^4.0.0",
+    "markdown-it-header-sections": "^1.0.0",
     "prism-theme-vars": "^0.2.2",
     "roboto-fontface": "*",
     "vue": "^3.2.8",
@@ -37,6 +40,7 @@
     "https-localhost": "^4.7.0",
     "markdown-it-link-attributes": "^3.0.0",
     "markdown-it-prism": "^2.2.1",
+    "pinia": "2.0.0-rc.9",
     "unplugin-vue-components": "^0.15.2",
     "vite": "^2.5.7",
     "vite-plugin-md": "^0.11.0",
@@ -45,7 +49,6 @@
     "vite-plugin-vue-layouts": "^0.4.1",
     "vite-ssg": "^0.15.1",
     "vue-cli-plugin-vuetify": "~2.4.2",
-    "pinia": "2.0.0-rc.9",
     "workbox-window": "^6.3.0"
   },
   "publishConfig": {

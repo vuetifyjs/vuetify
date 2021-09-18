@@ -2,7 +2,7 @@
   <div>
     <v-alert
       v-model="alert"
-      border="left"
+      border="start"
       close-text="Close Alert"
       color="deep-purple accent-4"
       dark

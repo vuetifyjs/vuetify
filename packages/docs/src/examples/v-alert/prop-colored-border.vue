@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-alert
-      border="left"
+      border="start"
       colored-border
       color="deep-purple accent-4"
       elevation="2"
@@ -27,7 +27,7 @@
       Sed in libero ut nibh placerat accumsan. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.
     </v-alert>
     <v-alert
-      border="right"
+      border="end"
       colored-border
       type="error"
       elevation="2"

@@ -15,7 +15,7 @@
     </v-alert>
     <v-alert
       dense
-      border="left"
+      border="start"
       type="warning"
     >
       I'm a dense alert with the <strong>border</strong> prop and a <strong>type</strong> of warning

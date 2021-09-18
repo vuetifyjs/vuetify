@@ -8,7 +8,7 @@
       I'm an alert with a top border and red color
     </v-alert>
     <v-alert
-      border="right"
+      border="end"
       color="blue-grey"
       dark
     >
@@ -22,7 +22,7 @@
       I'm an alert with a bottom border and pink color
     </v-alert>
     <v-alert
-      border="left"
+      border="start"
       color="indigo"
       dark
     >

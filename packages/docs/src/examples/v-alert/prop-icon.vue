@@ -12,7 +12,7 @@
       color="#C51162"
       dark
       icon="mdi-material-design"
-      border="right"
+      border="end"
     >
       Phasellus blandit leo ut odio. Morbi mattis ullamcorper velit. Donec orci lectus, aliquam ut, faucibus non, euismod id, nulla. In ut quam vitae odio lacinia tincidunt.
     </v-alert>
@@ -20,7 +20,7 @@
       color="primary"
       dark
       icon="mdi-vuetify"
-      border="left"
+      border="start"
       prominent
     >
       Praesent congue erat at massa. Nullam vel sem. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Curabitur at lacus ac velit ornare lobortis.

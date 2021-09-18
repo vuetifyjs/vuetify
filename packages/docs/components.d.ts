@@ -4,7 +4,10 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AppBar: typeof import('./src/components-v3/app-bar/index.vue')['default']
+    AppBarAppBar: typeof import('./src/components-v3/app-bar/app-bar.vue')['default']
     AppBtn: typeof import('./src/components-v3/app/btn.vue')['default']
+    AppDrawer: typeof import('./src/components-v3/app-drawer/index.vue')['default']
     DefaultAppBarItems: typeof import('./src/components-v3/default/app-bar-items.vue')['default']
     DefaultSearch: typeof import('./src/components-v3/default/search.vue')['default']
     DefaultSettings: typeof import('./src/components-v3/default/settings.vue')['default']
@@ -13,6 +16,7 @@ declare module 'vue' {
     DocsLinksStore: typeof import('./src/components-v3/docs/links/store.vue')['default']
     DocsLinksTeam: typeof import('./src/components-v3/docs/links/team.vue')['default']
     DocsVerticalDivider: typeof import('./src/components-v3/docs/vertical-divider.vue')['default']
+    Example: typeof import('./src/components-v3/example/index.vue')['default']
     HomeActionBtns: typeof import('./src/components-v3/home/action-btns.vue')['default']
     HomeAppBar: typeof import('./src/components-v3/home/app-bar.vue')['default']
     HomeAppBarLogo: typeof import('./src/components-v3/home/app-bar-logo.vue')['default']

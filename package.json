@@ -68,7 +68,7 @@
     "vue": "^3.2.8",
     "vue-analytics": "^5.16.1",
     "vue-meta": "^2.4.0",
-    "vue-router": "^3.5.2",
+    "vue-router": "^4.0.11",
     "vuex": "^3.0.1"
   },
   "resolutions": {

@@ -7,9 +7,14 @@ import Components from 'unplugin-vue-components/vite'
 import Markdown from 'vite-plugin-md'
 import { VitePWA } from 'vite-plugin-pwa'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
-import Prism from 'markdown-it-prism'
+import MarkdownItPrism from 'markdown-it-prism'
 // @ts-expect-error missing types
-import LinkAttributes from 'markdown-it-link-attributes'
+import MarkdownItLinkAttributes from 'markdown-it-link-attributes'
+// @ts-expect-error missing types
+import MarkdownItAttrs from 'markdown-it-attrs'
+import MarkdownItAnchor from 'markdown-it-anchor'
+// @ts-expect-error missing types
+import MarkdownItHeaderSections from 'markdown-it-header-sections'
 
 const resolve = (file: string) => path.resolve(__dirname, file)
 
@@ -42,14 +47,34 @@ export default defineConfig({
       headEnabled: true,
       markdownItSetup (md) {
         // https://prismjs.com/
-        md.use(Prism)
-        md.use(LinkAttributes, {
+        md.use(MarkdownItPrism)
+        md.use(MarkdownItLinkAttributes, {
           pattern: /^https?:\/\//,
           attrs: {
             target: '_blank',
             rel: 'noopener',
           },
         })
+        md.use(MarkdownItAttrs)
+        md.use(MarkdownItAnchor, {
+          permalink: MarkdownItAnchor.permalink.headerLink(),
+          slugify: (str: unknown) => {
+            let slug = String(str)
+              .trim()
+              .toLowerCase()
+              .replace(/[\s,.[\]{}()/]+/g, '-')
+              .replace(/[^a-z0-9 -]/g, c => c.charCodeAt(0).toString(16))
+              .replace(/-{2,}/g, '-')
+              .replace(/^-*|-*$/g, '')
+
+            if (slug.charAt(0).match(/[^a-z]/g)) {
+              slug = 'section-' + slug
+            }
+
+            return encodeURIComponent(slug)
+          },
+        })
+        md.use(MarkdownItHeaderSections)
       },
     }),
 
