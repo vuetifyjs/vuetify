@@ -1,25 +1,31 @@
 <template>
   <v-sheet
-    :color="theme.current === 'dark' ? '#1F1F1F' : 'grey lighten-5'"
+    ref="root"
+    class="app-markup overflow-hidden bg-grey-lighten-5"
     rounded
-    class="app-markup overflow-hidden"
-    variant="outlined"
   >
-    <!-- <prism
-      ref="code"
-      :code="code"
-      :inline="inline"
-      :language="language"
-    /> -->
-    <pre v-if="inline" :class="className">
-      <code :class="className" v-html="highlighted" />
-    </pre>
-    <code v-else :class="className" v-html="highlighted" />
+    <slot>
+      <pre v-if="inline" :class="className">
+        <code :class="className" v-html="highlighted" />
+      </pre>
+      <code v-else :class="className" v-html="highlighted" />
+    </slot>
 
-    <!-- <app-copy-btn
-      :target="target"
-      class="mr-n2 mt-n2"
-    /> -->
+    <v-btn
+      size="small"
+      class="v-btn--copy"
+      icon
+      variant="text"
+      @click="copy"
+    >
+      <v-fade-transition hide-on-leave>
+        <v-icon
+          :key="String(clicked)"
+          color="grey"
+          :icon="clicked ? '$complete' : 'mdi-content-copy'"
+        />
+      </v-fade-transition>
+    </v-btn>
   </v-sheet>
 </template>
 
@@ -37,16 +43,13 @@
   import 'prismjs/components/prism-stylus'
   import 'prismjs/components/prism-typescript'
 
-  // Components
-  // import Prism from 'vue-prism-component'
-
   import { useTheme } from 'vuetify'
-import { computed } from 'vue-demi'
+  import { ComponentPublicInstance, computed, ref } from 'vue'
+  import { wait } from '@/util/helpers'
+  import { IN_BROWSER } from '@/util/globals'
 
   export default {
     name: 'Markup',
-
-    // components: { Prism },
 
     props: {
       code: String,
@@ -56,11 +59,36 @@ import { computed } from 'vue-demi'
 
     setup (props) {
       const theme = useTheme(props)
+      const clicked = ref(false)
+      const root = ref<ComponentPublicInstance>()
 
-      const highlighted = computed(() => Prism.highlight(props.code, Prism.languages[props.language]))
+      const highlighted = computed(() => props.code && props.language && Prism.highlight(props.code, Prism.languages[props.language]))
       const className = computed(() => `langauge-${props.language}`)
 
-      return { theme, highlighted, className }
+      async function copy () {
+        if (!IN_BROWSER || !root.value) return
+
+        const el = root.value.$el.querySelector('pre')
+
+        if (!el) return
+
+        el.setAttribute('contenteditable', 'true')
+        el.focus()
+
+        document.execCommand('selectAll', false, undefined)
+        document.execCommand('copy')
+
+        el.removeAttribute('contenteditable')
+
+        clicked.value = true
+
+        await wait(500)
+
+        clicked.value = false
+        window.getSelection()?.removeAllRanges()
+      }
+
+      return { root, theme, highlighted, className, clicked, copy }
     },
   }
 </script>
@@ -74,11 +102,17 @@ import { computed } from 'vue-demi'
     &:not(:hover) .v-btn--copy .v-icon
       opacity: .4
 
+    .v-btn--copy
+      position: absolute
+      top: 4px
+      right: 4px
+
     pre, code
       background: transparent
       font-size: 1rem
       font-weight: 300
       margin: 0 !important
+      min-height: 48px
 
     > pre
       border-radius: inherit

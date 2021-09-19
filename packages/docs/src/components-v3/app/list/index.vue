@@ -18,7 +18,7 @@
         class="mt-3 mb-2 ml-2 mr-n2"
       />
 
-      <app-menu-list-group
+      <app-list-group
         v-else-if="item.items"
         :key="`group-${i}`"
         :item="item"
@@ -31,7 +31,7 @@
         :item="item"
       />
 
-      <app-menu-list-item
+      <app-list-item
         v-else
         :key="`item-${i}`"
         :item="item"
@@ -42,15 +42,15 @@
 
 <script>
   // Components
-  // import AppMenuListGroup from './ListGroup.vue'
-  import AppMenuListItem from './ListItem.vue'
+  import AppListGroup from './ListGroup.vue'
+  import AppListItem from './ListItem.vue'
 
   export default {
-    name: 'AppMenuList',
+    name: 'AppList',
 
     components: {
-      // AppMenuListGroup,
-      AppMenuListItem,
+      AppListGroup,
+      AppListItem,
     },
 
     props: {

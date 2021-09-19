@@ -1,13 +1,13 @@
 // Globals
 import { IN_BROWSER } from '@/util/globals'
 
-export function copyElementContent (el) {
+export function copyElementContent (el: HTMLElement) {
   if (!IN_BROWSER) return
 
   el.setAttribute('contenteditable', 'true')
   el.focus()
 
-  document.execCommand('selectAll', false, null)
+  document.execCommand('selectAll', false, undefined)
   document.execCommand('copy')
 
   el.removeAttribute('contenteditable')
@@ -21,7 +21,7 @@ export function getBranch () {
   return ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
 }
 
-export const wait = timeout => {
+export const wait = (timeout: number) => {
   return new Promise(resolve => setTimeout(resolve, timeout))
 }
 

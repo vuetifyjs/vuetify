@@ -8,12 +8,10 @@
     no-action
   >
     <template #activator>
-      <v-list-item-content>
-        <v-list-item-title
-          v-if="item.title"
-          v-text="item.title"
-        />
-      </v-list-item-content>
+      <v-list-item-title
+        v-if="item.title"
+        v-text="item.title"
+      />
     </template>
 
     <template v-for="(child, i) in item.items">
@@ -32,14 +30,14 @@
         class="mt-3 mb-2 ml-16"
       />
 
-      <app-menu-list-group
+      <app-list-group
         v-else-if="child.items"
         :key="`sub-group-${i}`"
         :item="child"
         sub-group
       />
 
-      <app-menu-list-item
+      <app-list-item
         v-else
         :key="`child-${i}`"
         :item="child"
@@ -50,13 +48,13 @@
 
 <script>
   // Components
-  import AppMenuListItem from './ListItem.vue'
+  import AppListItem from './ListItem.vue'
 
   export default {
-    name: 'AppMenuListGroup',
+    name: 'AppListGroup',
 
     components: {
-      AppMenuListItem,
+      AppListItem,
     },
 
     props: {
@@ -76,6 +74,7 @@
         if (!this.item.icon) return undefined
 
         const [off, on] = this.item.icon.split(':')
+        console.log('this.item.icon', off, on)
 
         return this.model ? (on || off) : off
       },

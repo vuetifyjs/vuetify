@@ -15,44 +15,43 @@ import MarkdownItAttrs from 'markdown-it-attrs'
 import MarkdownItAnchor from 'markdown-it-anchor'
 // @ts-expect-error missing types
 import MarkdownItHeaderSections from 'markdown-it-header-sections'
-import { addHeadingRules } from './build/rules'
+import markdownRules from './build/rules'
 import MarkdownIt from 'markdown-it'
 import fs from 'fs'
 
 const resolve = (file: string) => path.resolve(__dirname, file)
 
 const configureMarkdown = (md: MarkdownIt) => {
-  // https://prismjs.com/
   md.use(MarkdownItPrism)
-  md.use(MarkdownItLinkAttributes, {
-    pattern: /^https?:\/\//,
-    attrs: {
-      target: '_blank',
-      rel: 'noopener',
-    },
-  })
-  md.use(MarkdownItAttrs)
-  md.use(MarkdownItAnchor, {
-    permalink: MarkdownItAnchor.permalink.headerLink(),
-    slugify: (str: unknown) => {
-      let slug = String(str)
-        .trim()
-        .toLowerCase()
-        .replace(/[\s,.[\]{}()/]+/g, '-')
-        .replace(/[^a-z0-9 -]/g, c => c.charCodeAt(0).toString(16))
-        .replace(/-{2,}/g, '-')
-        .replace(/^-*|-*$/g, '')
+    .use(MarkdownItLinkAttributes, {
+      pattern: /^https?:\/\//,
+      attrs: {
+        target: '_blank',
+        rel: 'noopener',
+      },
+    })
+    .use(MarkdownItAttrs)
+    .use(MarkdownItAnchor, {
+      permalink: MarkdownItAnchor.permalink.headerLink(),
+      slugify: (str: unknown) => {
+        let slug = String(str)
+          .trim()
+          .toLowerCase()
+          .replace(/[\s,.[\]{}()/]+/g, '-')
+          .replace(/[^a-z0-9 -]/g, c => c.charCodeAt(0).toString(16))
+          .replace(/-{2,}/g, '-')
+          .replace(/^-*|-*$/g, '')
 
-      if (slug.charAt(0).match(/[^a-z]/g)) {
-        slug = 'section-' + slug
-      }
+        if (slug.charAt(0).match(/[^a-z]/g)) {
+          slug = 'section-' + slug
+        }
 
-      return encodeURIComponent(slug)
-    },
-  })
-  md.use(MarkdownItHeaderSections)
+        return encodeURIComponent(slug)
+      },
+    })
+    .use(MarkdownItHeaderSections)
 
-  addHeadingRules(md)
+  markdownRules.forEach(rule => rule(md))
 
   return md
 }
@@ -129,7 +128,7 @@ export default defineConfig({
         { dir: 'src/api', baseRoute: 'api' },
       ],
       extendRoute (route) {
-        console.log(route)
+        // console.log(route)
         if (['index', 'all'].includes(route.name as string)) {
           return route
         }
@@ -143,8 +142,6 @@ export default defineConfig({
           const parts = path.split('/')
           path = ['', parts[2], parts[1], parts.slice(3)].join('/')
         }
-
-        console.log(path)
 
         return {
           ...route,

@@ -15,7 +15,7 @@
   import { defineComponent } from 'vue'
 
   export default defineComponent({
-    name: 'AppMenuListItem',
+    name: 'AppListItem',
 
     props: {
       item: {

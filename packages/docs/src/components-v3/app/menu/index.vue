@@ -11,7 +11,7 @@
     <app-sheet>
       <slot v-if="$slots.default" />
 
-      <app-menu-list
+      <app-list
         v-else
         :items="items"
       >
@@ -24,7 +24,7 @@
             v-bind="props"
           />
         </template>
-      </app-menu-list>
+      </app-list>
     </app-sheet>
   </v-menu>
 </template>
@@ -33,12 +33,8 @@
   import { defineComponent } from 'vue'
 
   // Components
-  import AppMenuList from './List.vue'
-
   export default defineComponent({
     name: 'AppMenu',
-
-    components: { AppMenuList },
 
     props: {
       items: {

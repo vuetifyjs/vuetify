@@ -68,7 +68,8 @@
   {
     "title": "api",
     "icon": "$mdiFlaskEmptyOutline:$mdiFlaskOutline",
-    "group": "api"
+    "group": "api",
+    "items": []
   },
   {
     "title": "directives",

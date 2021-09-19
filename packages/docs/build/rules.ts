@@ -7,7 +7,7 @@ function addCodeRules (md: MarkdownIt) {
   md.renderer.rules.fence = function (tokens, idx, options, env, self) {
     const handler = fence || self.renderToken
 
-    return `<app-code>${handler(tokens, idx, options, env, self)}</app-code>`
+    return `<app-markup>${handler(tokens, idx, options, env, self)}</app-markup>`
   }
 }
 
@@ -32,8 +32,10 @@ function addUnderlineRules (md: MarkdownIt) {
   const renderEm: Renderer.RenderRule = (tokens, idx, opts, env, self) => {
     const token = tokens[idx]
     if (token.markup === '_') {
+      console.log(token)
       token.tag = 'span'
-      token.attrSet('style', 'text-decoration: underline;')
+
+      token.type === 'em_open' && token.attrSet('style', 'text-decoration: underline;')
     }
     return self.renderToken(tokens, idx, opts)
   }
@@ -91,7 +93,7 @@ function addTableRules (md: MarkdownIt) {
   }
 }
 
-export {
+export default [
   addCodeRules,
   addHeadingRules,
   addHrRules,
@@ -99,4 +101,4 @@ export {
   addImageRules,
   addTableRules,
   addUnderlineRules,
-}
+]

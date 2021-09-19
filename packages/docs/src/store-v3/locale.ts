@@ -9,5 +9,4 @@ export const useLocaleStore = defineStore({
   state: () => ({
     locale: window.localStorage.getItem('currentLocale') ?? 'en',
   } as RootState),
-
 })
