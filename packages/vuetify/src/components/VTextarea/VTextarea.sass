@@ -1,4 +1,6 @@
-@import './_variables.scss'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-textarea
   textarea
@@ -11,59 +13,59 @@
     padding: $textarea-padding
     width: 100%
 
-  .v-text-field__prefix,
-  .v-text-field__suffix
-    padding-top: $textarea-prefix-padding-top
-    align-self: start
+  // .v-text-field__prefix,
+  // .v-text-field__suffix
+  //   padding-top: $textarea-prefix-padding-top
+  //   align-self: start
 
-  &.v-text-field--box,
-  &.v-text-field--enclosed
-    .v-text-field__prefix,
-    textarea
-      margin-top: $textarea-box-enclosed-prefix-margin-top
+  // &.v-text-field--box,
+  // &.v-text-field--enclosed
+  //   .v-text-field__prefix,
+  //   textarea
+  //     margin-top: $textarea-box-enclosed-prefix-margin-top
 
-    &.v-text-field--single-line,
-    &.v-text-field--outlined
-      &:not(.v-input--dense)
-        .v-text-field__prefix,
-        .v-text-field__suffix,
-        textarea
-          margin-top: $textarea-box-enclosed-single-outlined-margin-top
+  //   &.v-text-field--single-line,
+  //   &.v-text-field--outlined
+  //     &:not(.v-input--dense)
+  //       .v-text-field__prefix,
+  //       .v-text-field__suffix,
+  //       textarea
+  //         margin-top: $textarea-box-enclosed-single-outlined-margin-top
 
-        .v-label
-          top: $textarea-box-enclosed-single-outlined-label-top
+  //       .v-label
+  //         top: $textarea-box-enclosed-single-outlined-label-top
 
-      &.v-input--dense
-        .v-text-field__prefix,
-        .v-text-field__suffix,
-        textarea
-          margin-top: $textarea-dense-box-enclosed-single-outlined-margin-top
+  //     &.v-input--dense
+  //       .v-text-field__prefix,
+  //       .v-text-field__suffix,
+  //       textarea
+  //         margin-top: $textarea-dense-box-enclosed-single-outlined-margin-top
 
-        .v-input__prepend-inner,
-        .v-input__prepend-outer,
-        .v-input__append-inner,
-        .v-input__append-outer
-          align-self: flex-start
-          margin-top: $textarea-dense-append-prepend-margin-top
+  //       .v-input__prepend-inner,
+  //       .v-input__prepend-outer,
+  //       .v-input__append-inner,
+  //       .v-input__append-outer
+  //         align-self: flex-start
+  //         margin-top: $textarea-dense-append-prepend-margin-top
 
-  &.v-text-field--solo
-    align-items: flex-start
+  // &.v-text-field--solo
+  //   align-items: flex-start
 
-    // Essentially revert styles
-    // applied by v-text-field
-    .v-input__prepend-inner,
-    .v-input__prepend-outer,
-    .v-input__append-inner,
-    .v-input__append-outer
-      align-self: flex-start
-      margin-top: $textarea-solo-append-prepend-margin-top
+  //   // Essentially revert styles
+  //   // applied by v-text-field
+  //   .v-input__prepend-inner,
+  //   .v-input__prepend-outer,
+  //   .v-input__append-inner,
+  //   .v-input__append-outer
+  //     align-self: flex-start
+  //     margin-top: $textarea-solo-append-prepend-margin-top
 
-    .v-input__append-inner
-      +ltr()
-        padding-left: $textarea-solo-append-padding
+  //   .v-input__append-inner
+  //     +ltr()
+  //       padding-left: $textarea-solo-append-padding
 
-      +rtl()
-        padding-right: $textarea-solo-append-padding
+  //     +rtl()
+  //       padding-right: $textarea-solo-append-padding
 
   &--auto-grow
     textarea
@@ -73,19 +75,19 @@
     textarea
       resize: none
 
-  &.v-text-field--enclosed
-    .v-text-field__slot
-      align-self: stretch
+  // &.v-text-field--enclosed
+  //   .v-text-field__slot
+  //     align-self: stretch
 
-      +ltr()
-        margin-right: $textarea-enclosed-text-slot-margin
+  //     +ltr()
+  //       margin-right: $textarea-enclosed-text-slot-margin
 
-      +rtl()
-        margin-left: $textarea-enclosed-text-slot-margin
+  //     +rtl()
+  //       margin-left: $textarea-enclosed-text-slot-margin
 
-      textarea
-        +ltr()
-          padding-right: $textarea-enclosed-text-slot-padding
+  //     textarea
+  //       +ltr()
+  //         padding-right: $textarea-enclosed-text-slot-padding
 
-        +rtl()
-          padding-left: $textarea-enclosed-text-slot-padding
+  //       +rtl()
+  //         padding-left: $textarea-enclosed-text-slot-padding
