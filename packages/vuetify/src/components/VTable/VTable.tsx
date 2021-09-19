@@ -13,6 +13,7 @@ export default defineComponent({
 
   props: {
     fixedHeader: Boolean,
+    fixedFooter: Boolean,
     height: [Number, String],
 
     ...makeDensityProps(),
@@ -29,8 +30,9 @@ export default defineComponent({
         class={[
           'v-table',
           {
-            'v-table--fixed-height': !!props.height && !props.fixedHeader,
+            'v-table--fixed-height': !!props.height,
             'v-table--fixed-header': props.fixedHeader,
+            'v-table--fixed-footer': props.fixedFooter,
             'v-table--has-top': !!slots.top,
             'v-table--has-bottom': !!slots.bottom,
           },

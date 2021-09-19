@@ -9,6 +9,9 @@
   background-color: rgb(var(--v-theme-surface))
   color: rgb(var(--v-theme-on-surface))
 
+  .v-table-divider
+    border-right: $table-border
+
   .v-table__wrapper
     > table
       > thead
@@ -37,6 +40,13 @@
     thead th
       background: rgb(var(--v-theme-surface))
       box-shadow: inset 0 -1px 0 $table-border-color
+
+  &.v-table--fixed-footer
+    tfoot
+      th,
+      td
+        background: rgb(var(--v-theme-surface))
+        box-shadow: inset 0 1px 0 $table-border-color
 
 // Block
 .v-table
@@ -114,8 +124,6 @@
 
 .v-table--fixed-header
   > .v-table__wrapper
-    overflow-y: auto
-
     > table
       > thead
         > tr
@@ -123,4 +131,14 @@
             border-bottom: 0px !important
             position: sticky
             top: 0
-            z-index: 2
+
+.v-table--fixed-footer
+  > .v-table__wrapper
+    > table
+      > tfoot
+        > tr
+          > td,
+            th
+              border-top: 0px !important
+              position: sticky
+              bottom: 0
