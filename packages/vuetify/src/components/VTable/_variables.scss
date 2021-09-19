@@ -1,0 +1,33 @@
+@use 'sass:math';
+@use 'sass:map';
+@use '../../styles/settings';
+@use '../../styles/tools';
+
+$table-compact-header-height: 32px !default;
+$table-compact-row-height: $table-compact-header-height !default;
+$table-comfortable-header-height: 40px !default;
+$table-comfortable-row-height: $table-comfortable-header-height !default;
+$table-default-header-height: 48px !default;
+$table-default-row-height: $table-default-header-height !default;
+
+$table-header-font-size: tools.map-deep-get(settings.$typography, 'caption', 'size') !default;
+$table-row-font-size: tools.map-deep-get(settings.$typography, 'subtitle-2', 'size') !default;
+$table-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
+$table-border: thin solid $table-border-color !default;
+$table-hover-color: rgba(var(--v-border-color), var(--v-hover-opacity)) !default;
+
+$table-density: () !default;
+$table-density: (
+  'default': (
+    'header': $table-default-header-height,
+    'row': $table-default-row-height,
+  ),
+  'comfortable': (
+    'header': $table-comfortable-header-height,
+    'row': $table-comfortable-row-height,
+  ),
+  'compact': (
+    'header': $table-compact-header-height,
+    'row': $table-compact-row-height,
+  ),
+)
