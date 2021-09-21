@@ -23,8 +23,9 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { defineComponent } from '@/util'
+import { useNestedItem } from '@/composables/nested'
 
 export const VListItem = defineComponent({
   name: 'VListItem',
@@ -43,6 +44,7 @@ export const VListItem = defineComponent({
     prependIcon: String,
     subtitle: String,
     title: String,
+    value: null,
 
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -57,8 +59,10 @@ export const VListItem = defineComponent({
 
   setup (props, { attrs, slots }) {
     const link = useLink(props, attrs)
+    const id = computed(() => props.value ?? link.href.value)
+    const { select, isSelected, root, parent } = useNestedItem(id)
     const isActive = computed(() => {
-      return props.active || link.isExactActive?.value
+      return props.active || link.isExactActive?.value || isSelected.value
     })
     const activeColor = props.activeColor ?? props.color
     const variantProps = computed(() => ({
@@ -66,6 +70,12 @@ export const VListItem = defineComponent({
       textColor: props.textColor,
       variant: props.variant,
     }))
+
+    onMounted(() => {
+      if (link.isExactActive?.value && parent.value != null) {
+        root.open(parent.value, true, null)
+      }
+    })
 
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-list-item')
@@ -82,7 +92,7 @@ export const VListItem = defineComponent({
       const hasHeader = !!(hasTitle || hasSubtitle)
       const hasAppend = (slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = (slots.prepend || props.prependAvatar || props.prependIcon)
-      const isClickable = !props.disabled && (link.isClickable.value || props.link)
+      const isClickable = !props.disabled && (link.isClickable.value || props.link || props.value != null)
 
       return (
         <Tag
@@ -108,7 +118,10 @@ export const VListItem = defineComponent({
           ]}
           href={ link.href.value }
           tabindex={ isClickable ? 0 : undefined }
-          onClick={ isClickable && link.navigate }
+          onClick={ isClickable && ((e: Event) => {
+            link.navigate?.()
+            props.value != null && select(!isSelected.value, e)
+          })}
           v-ripple={ isClickable }
         >
           { genOverlays(!!(isClickable || isActive.value), 'v-list-item') }

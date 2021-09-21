@@ -1,11 +1,19 @@
+import { h } from 'vue'
+
 const home = {
-  template: `<div class="title">Home</div>`,
+  setup: () => () => h('div', 'hello'),
 }
 const page1 = {
-  template: `<div class="title">Page 1</div>`,
+  setup: () => () => h('div', 'hello'),
 }
 const page2 = {
-  template: `<div class="title">Page 2</div>`,
+  setup: () => () => h('div', 'hello'),
+}
+const nested1 = {
+  setup: () => () => h('div', 'hello'),
+}
+const nested2 = {
+  setup: () => () => h('div', 'hello'),
 }
 
 export const routes = [
@@ -23,6 +31,16 @@ export const routes = [
     path: '/page2',
     name: 'Page 2',
     component: page2,
+  },
+  {
+    path: '/nested/page1',
+    name: 'Nested 1',
+    component: nested1,
+  },
+  {
+    path: '/nested/page2',
+    name: 'Nested 2',
+    component: nested2,
   },
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ]

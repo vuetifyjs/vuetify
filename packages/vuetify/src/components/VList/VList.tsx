@@ -18,6 +18,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 // Utilities
 import { toRef } from 'vue'
 import { defineComponent } from '@/util'
+import { useNested } from '@/composables/nested'
 
 export const VList = defineComponent({
   name: 'VList',
@@ -34,6 +35,16 @@ export const VList = defineComponent({
       type: [Boolean, String],
       default: false,
     },
+    selected: Array,
+    selectStrategy: {
+      type: String,
+      default: 'single-leaf',
+    },
+    openStrategy: {
+      type: String,
+      default: 'single',
+    },
+    openOnSelect: Boolean,
 
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -52,6 +63,7 @@ export const VList = defineComponent({
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props, 'v-list')
+    useNested(props)
 
     return () => {
       const hasHeader = typeof props.subheader === 'string' || slots.subheader
