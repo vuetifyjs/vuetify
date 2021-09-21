@@ -2,7 +2,6 @@
 import './VList.sass'
 
 // Components
-// import { VListItem } from '.'
 import { VListSubheader } from './VListSubheader'
 
 // Composables
@@ -14,11 +13,16 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeNestedProps, useNested } from '@/composables/nested'
 
 // Utilities
 import { toRef } from 'vue'
 import { defineComponent } from '@/util'
-import { useNested } from '@/composables/nested'
+import { renderItems } from './utils'
+
+// Types
+import type { Prop } from 'vue'
+import type { ListItem } from './utils'
 
 export const VList = defineComponent({
   name: 'VList',
@@ -35,17 +39,12 @@ export const VList = defineComponent({
       type: [Boolean, String],
       default: false,
     },
-    selected: Array,
-    selectStrategy: {
-      type: String,
-      default: 'single-leaf',
-    },
-    openStrategy: {
-      type: String,
-      default: 'single',
-    },
-    openOnSelect: Boolean,
+    items: Array as Prop<ListItem[]>,
 
+    ...makeNestedProps({
+      selectStrategy: 'single-leaf' as const,
+      openStrategy: 'multiple' as const,
+    }),
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
@@ -97,7 +96,7 @@ export const VList = defineComponent({
               : <VListSubheader>{ props.subheader }</VListSubheader>
           ) }
 
-          { slots.default?.() }
+          { renderItems(props, slots) }
         </props.tag>
       )
     }

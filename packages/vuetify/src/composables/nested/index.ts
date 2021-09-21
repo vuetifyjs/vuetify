@@ -1,13 +1,36 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { getUid } from '@/util'
-import type { ComponentInternalInstance, InjectionKey, Ref } from 'vue'
+import { getUid, propsFactory } from '@/util'
 import { computed, inject, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
 import { multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import { classicSelectStrategy, independentSelectStrategy, leafSelectStrategy } from './selectStrategies'
 
+// Types
+import type { ComponentInternalInstance, InjectionKey, Prop, Ref } from 'vue'
+import type { SelectStrategyFn } from './selectStrategies'
+import type { OpenStrategyFn } from './openStrategies'
+
+export type SelectStrategy = 'single-leaf' | 'leaf' | 'independent' | 'classic' | SelectStrategyFn
+export type OpenStrategy = 'single' | 'multiple' | OpenStrategyFn
+
+export interface NestedProps {
+  selectStrategy?: SelectStrategy
+  openStrategy?: OpenStrategy
+  opened?: string[]
+  selected?: string[]
+  openOnSelect?: boolean
+}
+
 const VNestedSymbol: InjectionKey<any> = Symbol.for('vuetify:nested')
 
-const createNested = (props: any, parent?: any) => {
+export const makeNestedProps = propsFactory({
+  selectStrategy: [String, Function] as Prop<SelectStrategy>,
+  openStrategy: [String, Function] as Prop<OpenStrategy>,
+  opened: Array as Prop<string[]>,
+  selected: Array as Prop<string[]>,
+  openOnSelect: Boolean,
+}, 'nested')
+
+export const useNested = (props: NestedProps) => {
   const children = ref(new Map<string, string[]>())
   const parents = ref(new Map<string, string>())
 
@@ -23,7 +46,7 @@ const createNested = (props: any, parent?: any) => {
     }
   )
 
-  const selectStrategy = (() => {
+  const selectStrategy = computed(() => {
     if (typeof props.selectStrategy === 'object') return props.selectStrategy
 
     switch (props.selectStrategy) {
@@ -33,9 +56,9 @@ const createNested = (props: any, parent?: any) => {
       case 'classic':
       default: return classicSelectStrategy
     }
-  })()
+  })
 
-  const openStrategy = (() => {
+  const openStrategy = computed(() => {
     if (typeof props.openStrategy === 'function') return props.openStrategy
 
     switch (props.openStrategy) {
@@ -43,14 +66,14 @@ const createNested = (props: any, parent?: any) => {
       case 'multiple':
       default: return multipleOpenStrategy
     }
-  })()
+  })
 
   const selected = useProxiedModel(
     props,
     'selected',
     props.selected,
-    v => selectStrategy.in(v, children.value, parents.value),
-    v => selectStrategy.out(v, children.value, parents.value),
+    v => selectStrategy.value.in(v, children.value, parents.value),
+    v => selectStrategy.value.out(v, children.value, parents.value),
   )
 
   function openParents (id: string) {
@@ -79,7 +102,7 @@ const createNested = (props: any, parent?: any) => {
     }
   })
 
-  return {
+  const root = {
     id: ref(null),
     root: {
       opened,
@@ -93,7 +116,7 @@ const createNested = (props: any, parent?: any) => {
 
         return arr
       }),
-      register: (id: string, parentId: string, isGroup: boolean, vm: ComponentInternalInstance) => {
+      register: (id: string, parentId: string, isGroup: boolean) => {
         parents.value.set(id, parentId)
         isGroup && children.value.set(id, [])
 
@@ -106,7 +129,7 @@ const createNested = (props: any, parent?: any) => {
         parents.value.delete(groupId)
       },
       open: (id: string, value: boolean, e: Event) => {
-        const newOpened = openStrategy({
+        const newOpened = openStrategy.value({
           id,
           value,
           opened: opened.value,
@@ -118,7 +141,7 @@ const createNested = (props: any, parent?: any) => {
         newOpened && (opened.value = newOpened)
       },
       select: (id: string, value: boolean, e: Event) => {
-        selected.value = selectStrategy.select({
+        selected.value = selectStrategy.value.select({
           id,
           value,
           selected: new Map(selected.value),
@@ -131,6 +154,10 @@ const createNested = (props: any, parent?: any) => {
       parents,
     },
   }
+
+  provide(VNestedSymbol, root)
+
+  return root
 }
 
 export const useNestedItem = (id: Ref<string>) => {
@@ -155,15 +182,7 @@ export const useNestedItem = (id: Ref<string>) => {
   return item
 }
 
-export const useNested = props => {
-  const root = createNested(props, null)
-
-  provide(VNestedSymbol, root)
-
-  return root
-}
-
-export const useNestedGroup = props => {
+export const useNestedGroup = (props: { value: string }) => {
   const parent = inject(VNestedSymbol)
 
   const id = computed(() => props.value ?? getUid())

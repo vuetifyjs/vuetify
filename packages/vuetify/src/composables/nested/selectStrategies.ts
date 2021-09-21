@@ -8,7 +8,7 @@ export type SelectStrategyFn = (data: {
 }) => Map<string, 'on' | 'off' | 'indeterminate'>
 
 export type SelectStrategyTransformInFn = (
-  v: string[],
+  v: string[] | undefined,
   children: Map<string, string[]>,
   parents: Map<string, string>
 ) => Map<string, 'on' | 'off' | 'indeterminate'>

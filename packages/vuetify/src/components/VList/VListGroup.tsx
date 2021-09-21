@@ -5,6 +5,17 @@ import { makeTagProps } from '@/composables/tag'
 // Utilities
 import { computed } from 'vue'
 import { defineComponent } from '@/util'
+import { renderItems } from './utils'
+
+// Types
+import type { Prop } from 'vue'
+import type { ListItem } from './utils'
+
+export type VListGroupHeaderSlotProps = {
+  onClick: (e: Event) => void
+  appendIcon: string
+  class: string
+}
 
 export default defineComponent({
   name: 'VListGroup',
@@ -19,6 +30,7 @@ export default defineComponent({
       type: String,
       default: '$expand',
     },
+    items: Array as Prop<ListItem[]>,
 
     ...makeTagProps(),
   },
@@ -29,7 +41,12 @@ export default defineComponent({
     const onClick = (e: Event) => {
       open(!isOpen.value, e)
     }
-    const appendIcon = computed(() => isOpen.value ? props.collapseIcon : props.expandIcon)
+
+    const headerProps = computed(() => ({
+      onClick,
+      appendIcon: isOpen.value ? props.collapseIcon : props.expandIcon,
+      class: 'v-list-group__header',
+    }))
 
     return () => (
       <props.tag
@@ -37,9 +54,9 @@ export default defineComponent({
           'v-list-group',
         ]}
       >
-        { slots.header?.({ onClick, appendIcon: appendIcon.value, class: 'v-list-group__header' }) }
+        { slots.header?.(headerProps.value) }
         <div class="v-list-group__items" v-show={isOpen.value}>
-          { slots.default?.() }
+          { renderItems(props, slots) }
         </div>
       </props.tag>
     )
