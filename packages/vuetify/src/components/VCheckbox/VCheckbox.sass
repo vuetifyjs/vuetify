@@ -1,9 +1,34 @@
-@import './_variables.scss'
+@forward './variables'
+@use '../../styles/settings'
+@use './variables' as *
 
-.v-input--checkbox
-  &.v-input--indeterminate
-    &.v-input--is-disabled
-      opacity: $checkbox-disabled-opacity
+.v-checkbox
 
-  &.v-input--dense
-    margin-top: $checkbox-dense-margin-top
+  .v-input__details
+    padding: 0
+
+.v-checkbox__input
+  display: flex
+  align-items: center
+  justify-content: center
+  position: relative
+  margin-inline-end: 12px
+  margin-inline-start: -2px
+
+  input
+    position: absolute
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    opacity: 0
+    cursor: pointer
+
+.v-checkbox__control
+  align-items: center
+  contain: layout
+  display: flex
+  flex: 1 0
+  grid-area: control
+  height: var(--v-input-control-height)
+  position: relative
