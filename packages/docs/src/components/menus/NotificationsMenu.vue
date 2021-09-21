@@ -127,7 +127,7 @@
 
 <script>
   // Utilities
-  import { differenceInDays } from 'date-fns'
+  import { differenceInDays, parseISO } from 'date-fns'
   import { formatDate } from '@/util/date.js'
   import { get, sync } from 'vuex-pathify'
   import { wait } from '@/util/helpers'
@@ -205,7 +205,7 @@
 
       /* eslint-disable-next-line camelcase */
       this.all = (notifications || []).filter(({ created_at }) => {
-        return differenceInDays(Date.now(), Number(created_at)) < 60
+        return differenceInDays(Date.now(), parseISO(created_at)) < 60
       })
 
       if (
