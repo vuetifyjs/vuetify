@@ -1,122 +1,95 @@
 <template>
   <v-app>
-    <div class="pa-10 d-flex justify-space-around">
-      <!-- <v-nested>
-        <v-nested-item value="a">a</v-nested-item>
-        <v-nested-group value="group1">
-          <template v-slot:header>
-            group1
-          </template>
-          <v-nested-item value="b">b</v-nested-item>
-          <v-nested-group value="group3">
-            <template v-slot:header>
-              group3
-            </template>
-            <v-nested-item value="e">e</v-nested-item>
-            <v-nested-item value="f">f</v-nested-item>
-          </v-nested-group>
-        </v-nested-group>
-        <v-nested-group value="group2">
-          <template v-slot:header>
-            group2
-          </template>
-          <v-nested-item value="c">c</v-nested-item>
-          <v-nested-item value="d">d</v-nested-item>
-        </v-nested-group>
-      </v-nested>-->
-
-      <!-- <v-nested v-model:selected="foo" :items="items" select-strategy="independent" /> -->
-
+    <div class="pa-10">
+      <h2>async load of items</h2>
       <v-nested :items="loadedItems" :open-strategy="loadItems" :opened="opened" />
 
-      <v-nested :items="items" :open-strategy="openStrategy" />
-    </div>
-    <div>
-      {{ foo }}
-    </div>
+      <h2>cusotm ctrl + click open strategy</h2>
+      <v-nested :items="items" :open-strategy="openStrategyFn" />
 
-    <v-list v-model:selected="test" v-model:opened="open">
-      <v-list-item active-color="primary" to="/" exact>foo</v-list-item>
-      <v-list-item active-color="primary" to="/page1">bar</v-list-item>
-      <v-list-group>
-        <template #header="props">
-          <v-list-item active-color="primary" prepend-icon="$close" v-bind="props" :active="$route.path.startsWith('/nested')">
-            header
-          </v-list-item>
-        </template>
-        <v-list-item active-color="primary" to="/nested/page1">baz</v-list-item>
-        <v-list-item active-color="primary" to="/nested/page2">bro</v-list-item>
-      </v-list-group>
-    </v-list>
-    <div>
-      {{ test }}
-    </div>
-    <div>
-      {{ open }}
-    </div>
-
-    <v-list v-model:selected="test2" v-model:opened="open2">
-      <v-list-item value="/">foo</v-list-item>
-      <v-list-item value="/page1">bar</v-list-item>
-      <v-list-group>
-        <template #header="props">
-          <v-list-item prepend-icon="$close" v-bind="props">
-            header
-          </v-list-item>
-        </template>
-        <v-list-item value="/nested/page1">baz</v-list-item>
-        <v-list-item value="/nested/page2">bro</v-list-item>
+      <h2>router integration</h2>
+      <v-list v-model:selected="test" v-model:opened="open">
+        <v-list-item active-color="primary" to="/" exact title="foo" />
+        <v-list-item active-color="primary" to="/page1" title="bar" />
         <v-list-group>
           <template #header="props">
-            <v-list-item prepend-icon="$close" v-bind="props">
-              header 2
-            </v-list-item>
+            <v-list-item active-color="primary" prepend-icon="$close" v-bind="props" :active="$route.path.startsWith('/nested')" title="header" />
           </template>
-          <v-list-item value="/nested/foo/page1">baz 2</v-list-item>
-          <v-list-item value="/nested/foo/page2">bro 2</v-list-item>
+          <v-list-item active-color="primary" to="/nested/page1" title="baz" />
+          <v-list-item active-color="primary" to="/nested/page2" title="bro" />
         </v-list-group>
-      </v-list-group>
-    </v-list>
-    <div>
-      {{ test2 }}
-    </div>
-    <div>
-      {{ open2 }}
-    </div>
+      </v-list>
 
-    <v-list open-on-select v-model:selected="openOnSelect" select-strategy="leaf">
-      <v-list-group>
-        <template #header="props">
-          <v-list-item v-bind="props">group 1</v-list-item>
-        </template>
-        <v-list-item value="a">a</v-list-item>
-        <v-list-item value="b">b</v-list-item>
-      </v-list-group>
-      <v-list-group>
-        <template #header="props">
-          <v-list-item v-bind="props">group 2</v-list-item>
-        </template>
-        <v-list-item value="c">c</v-list-item>
-        <v-list-item value="d">d</v-list-item>
-      </v-list-group>
-      <v-list-group>
-        <template #header="props">
-          <v-list-item v-bind="props">group 3</v-list-item>
-        </template>
-        <v-list-item value="e">e</v-list-item>
-        <v-list-item value="f">f</v-list-item>
+      <h2>value prop</h2>
+      <v-list v-model:selected="test2" v-model:opened="open2">
+        <v-list-item value="/" title="foo" />
+        <v-list-item value="/page1" title="bar" />
         <v-list-group>
           <template #header="props">
-            <v-list-item v-bind="props">group 4</v-list-item>
+            <v-list-item v-bind="props" title="header" />
           </template>
-          <v-list-item value="g">g</v-list-item>
-          <v-list-item value="h">h</v-list-item>
+          <v-list-item value="/nested/page1" title="baz" />
+          <v-list-item value="/nested/page2" title="bro" />
+          <v-list-group>
+            <template #header="props">
+              <v-list-item v-bind="props" title="header 2" />
+            </template>
+            <v-list-item value="/nested/foo/page1" title="baz 2" />
+            <v-list-item value="/nested/foo/page2" title="bro 2" />
+          </v-list-group>
         </v-list-group>
-      </v-list-group>
-    </v-list>
-    <v-btn @click="openOnSelect = ['a', 'g']">select</v-btn>
+      </v-list>
 
-    <router-view />
+      <h2>open on programmatic select</h2>
+      <v-list open-on-select v-model:selected="openOnSelect" select-strategy="leaf">
+        <v-list-group>
+          <template #header="props">
+            <v-list-item v-bind="props" title="group 1" />
+          </template>
+          <v-list-item value="a" title="a" />
+          <v-list-item value="b" title="b" />
+        </v-list-group>
+        <v-list-group>
+          <template #header="props">
+            <v-list-item v-bind="props" title="group 2" />
+          </template>
+          <v-list-item value="c" title="c" />
+          <v-list-item value="d" title="d" />
+        </v-list-group>
+        <v-list-group>
+          <template #header="props">
+            <v-list-item v-bind="props" title="group 3" />
+          </template>
+          <v-list-item value="e" title="e" />
+          <v-list-item value="f" title="f" />
+          <v-list-group>
+            <template #header="props">
+              <v-list-item v-bind="props" title="group 4" />
+            </template>
+            <v-list-item value="g" title="g" />
+            <v-list-item value="h" title="h" />
+          </v-list-group>
+        </v-list-group>
+      </v-list>
+      <v-btn @click="openOnSelect = ['a', 'g']">select</v-btn>
+
+      <h2>select strategies</h2>
+      <select v-model="selectStrategy">
+        <option value="single-leaf">single-leaf</option>
+        <option value="leaf">leaf</option>
+      </select>
+      <v-list :items="listItems" :select-strategy="selectStrategy" />
+
+      <h2>open strategies</h2>
+      <select v-model="openStrategy">
+        <option value="single">single</option>
+        <option value="multiple">multiple</option>
+      </select>
+      <v-list :items="listItems" :open-strategy="openStrategy" />
+
+      <h2>router view</h2>
+      <router-view />
+    </div>
   </v-app>
 </template>
 
@@ -124,12 +97,49 @@
   export default {
     name: 'Playground',
     data: () => ({
+      selectStrategy: 'leaf',
+      openStrategy: 'multiple',
       openOnSelect: null,
       foo: null,
       open: null,
       test: null,
       open2: null,
       test2: ['/nested/foo/page2'],
+      listItems: [
+        {
+          title: 'Foo',
+          subtitle: 'Bar',
+          value: 'foo',
+        },
+        {
+          title: 'Group 1',
+          children: [
+            {
+              title: 'Child 1',
+              subtitle: 'Subtitle',
+              value: 'child1',
+            },
+            {
+              title: 'Child 2',
+              prependIcon: '$close',
+              children: [
+                {
+                  title: 'Grandchild 1',
+                  value: 'grandchild1',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Group 2',
+          children: [
+            {
+              title: 'Child 3',
+            },
+          ],
+        },
+      ],
       items: [
         {
           value: 'a',
@@ -188,7 +198,6 @@
     }),
     mounted () {
       window.addEventListener('click', this.ctrlHandler, { passive: true })
-      console.log(this.$route, this.$route.path.startsWith('/nested'))
     },
     beforeUnmount () {
       window.removeEventListener('click', this.ctrlHandler, { passive: true })
@@ -197,7 +206,7 @@
       ctrlHandler (e) {
         this.isCtrl = e.ctrlKey
       },
-      openStrategy ({ id, value, opened, children }) {
+      openStrategyFn ({ id, value, opened, children }) {
         const items = [id]
 
         while (items.length) {
