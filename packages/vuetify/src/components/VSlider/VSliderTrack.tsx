@@ -80,11 +80,13 @@ export const VSliderTrack = defineComponent({
     })
 
     const computedTicks = computed(() => {
-      return parsedTicks.value.map((tick, index) => {
+      const ticks = vertical.value ? parsedTicks.value.slice().reverse() : parsedTicks.value
+
+      return ticks.map((tick, index) => {
         const directionProperty = vertical.value ? 'inset-block-end' : 'margin-inline-start'
         return (
           <div
-            key={tick.value}
+            key={ tick.value }
             class={[
               'v-slider-track__tick',
               {
@@ -95,11 +97,13 @@ export const VSliderTrack = defineComponent({
               [directionProperty]: (tick.position > 0 && tick.position < 100) && convertToUnit(tick.position, '%'),
             }}
           >
-            {(tick.label || slots['tick-label']) && (
-              <div class="v-slider-track__tick-label">
-                {slots['tick-label']?.({ index, tick }) ?? tick.label}
-              </div>
-            )}
+            {
+              (tick.label || slots['tick-label']) && (
+                <div class="v-slider-track__tick-label">
+                  { slots['tick-label']?.({ tick, index }) ?? tick.label }
+                </div>
+              )
+            }
           </div>
         )
       })

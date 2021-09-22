@@ -83,7 +83,7 @@
       transform: translate(calc(var(--v-slider-tick-size) / 2), calc(var(--v-slider-tick-size) / -2))
 
     &:first-child
-      margin-inline-start: 3px
+      margin-inline-start: calc(var(--v-slider-tick-size) + 1px)
 
       .v-slider-track__tick-label
         @include tools.ltr()
@@ -93,7 +93,7 @@
           transform: translateX(0%)
 
     &:last-child
-      margin-inline-start: calc(100% - 3px)
+      margin-inline-start: calc(100% - var(--v-slider-tick-size) - 1px)
 
       .v-slider-track__tick-label
         @include tools.ltr()
@@ -134,6 +134,9 @@
 
     @include tools.rtl()
       transform: translate(calc(var(--v-slider-tick-size) / 2), calc(var(--v-slider-tick-size) / 2))
+
+    &:last-child
+      inset-block-end: calc(0% + var(--v-slider-tick-size) + 1px)
 
     .v-slider-track__tick-label
       margin-inline-start: calc(var(--v-slider-track-size) + 20px)

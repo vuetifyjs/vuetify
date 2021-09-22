@@ -1,6 +1,3 @@
-// Styles
-import './VRangeSlider.sass'
-
 // Components
 import { VInput } from '../VInput'
 import { VSliderThumb } from '../VSlider/VSliderThumb'
@@ -99,40 +96,40 @@ export default defineComponent({
               'v-slider--has-labels': !!slots['tick-label'] || hasLabels.value,
             },
           ]}
-          ref={inputRef}
-          disabled={props.disabled}
-          dirty={isDirty.value}
-          direction={props.direction}
+          ref={ inputRef }
+          disabled={ props.disabled }
+          dirty={ isDirty.value }
+          direction={ props.direction }
           v-slots={{
             ...slots,
             default: ({ id, isActive, isDirty, isFocused, focus, blur }: any) => (
               <div
                 class="v-slider__container"
-                onMousedown={onSliderMousedown}
-                onTouchstartPassive={onSliderTouchstart}
+                onMousedown={ onSliderMousedown }
+                onTouchstartPassive={ onSliderTouchstart }
               >
                 <input
-                  id={`${id}_start`}
-                  name={attrs.name ?? id}
-                  disabled={props.disabled}
-                  readonly={props.readonly}
+                  id={ `${id}_start` }
+                  name={ attrs.name ?? id }
+                  disabled={ props.disabled }
+                  readonly={ props.readonly }
                   tabindex="-1"
-                  value={model.value[0]}
+                  value={ model.value[0] }
                 />
 
                 <input
-                  id={`${id}_stop`}
-                  name={attrs.name ?? id}
-                  disabled={props.disabled}
-                  readonly={props.readonly}
+                  id={ `${id}_stop` }
+                  name={ attrs.name ?? id }
+                  disabled={ props.disabled }
+                  readonly={ props.readonly }
                   tabindex="-1"
-                  value={model.value[1]}
+                  value={ model.value[1] }
                 />
 
                 <VSliderTrack
-                  ref={trackContainerRef}
-                  start={trackStart.value}
-                  stop={trackStop.value}
+                  ref={ trackContainerRef }
+                  start={ trackStart.value }
+                  stop={ trackStop.value }
                   v-slots={{
                     'tick-label': slots['tick-label'],
                   }}
@@ -140,14 +137,12 @@ export default defineComponent({
 
                 <VSliderThumb
                   ref={ startThumbRef }
-                  active={isActive}
-                  dirty={isDirty}
-                  focused={isFocused && focusedThumb.value === startThumbRef.value}
-                  modelValue={model.value[0]}
-                  onUpdate:modelValue={v => {
-                    model.value = [v, model.value[1]]
-                  }}
-                  onFocus={(e: FocusEvent) => {
+                  active={ isActive }
+                  dirty={ isDirty }
+                  focused={ isFocused && focusedThumb.value === startThumbRef.value }
+                  modelValue={ model.value[0] }
+                  onUpdate:modelValue={ v => (model.value = [v, model.value[1]]) }
+                  onFocus={ (e: FocusEvent) => {
                     focus()
                     focusedThumb.value = startThumbRef.value
 
@@ -160,42 +155,40 @@ export default defineComponent({
                       model.value[0] === min.value &&
                       e.relatedTarget !== stopThumbRef.value?.$el
                     ) stopThumbRef.value?.$el.focus()
-                  }}
-                  onBlur={() => {
+                  } }
+                  onBlur={ () => {
                     blur()
                     focusedThumb.value = null
-                  }}
+                  } }
                   v-slots={{
                     'thumb-label': slots['thumb-label'],
                   }}
-                  min={min.value}
-                  max={model.value[1]}
-                  position={trackStart.value}
+                  min={ min.value }
+                  max={ model.value[1] }
+                  position={ trackStart.value }
                 />
 
                 <VSliderThumb
                   ref={ stopThumbRef }
-                  active={isActive}
-                  dirty={isDirty}
-                  focused={isFocused && focusedThumb.value === stopThumbRef.value}
-                  modelValue={model.value[1]}
-                  onUpdate:modelValue={v => {
-                    model.value = [model.value[0], v]
-                  }}
-                  onFocus={() => {
+                  active={ isActive }
+                  dirty={ isDirty }
+                  focused={ isFocused && focusedThumb.value === stopThumbRef.value }
+                  modelValue={ model.value[1] }
+                  onUpdate:modelValue={ v => (model.value = [model.value[0], v]) }
+                  onFocus={ () => {
                     focus()
                     focusedThumb.value = stopThumbRef.value
-                  }}
-                  onBlur={() => {
+                  } }
+                  onBlur={ () => {
                     blur()
                     focusedThumb.value = null
-                  }}
+                  } }
                   v-slots={{
                     'thumb-label': slots['thumb-label'],
                   }}
-                  min={model.value[0]}
-                  max={max.value}
-                  position={trackStop.value}
+                  min={ model.value[0] }
+                  max={ max.value }
+                  position={ trackStop.value }
                 />
               </div>
             ),

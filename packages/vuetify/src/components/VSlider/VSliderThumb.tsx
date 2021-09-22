@@ -112,8 +112,7 @@ export const VSliderThumb = defineComponent({
     return () => {
       const positionPercentage = convertToUnit(vertical.value ? 100 - props.position : props.position, '%')
       const inset = vertical.value ? 'block' : 'inline'
-      const { elevationClasses } = useElevation(elevation)
-      const size = convertToUnit(thumbSize.value)
+      const { elevationClasses } = useElevation(computed(() => !disabled.value ? elevation.value : undefined))
 
       return (
         <div
@@ -129,17 +128,17 @@ export const VSliderThumb = defineComponent({
           style={{
             transition: transition.value,
             [`inset-${inset}-start`]: `calc(${positionPercentage} - var(--v-slider-thumb-size) / 2)`,
-            '--v-slider-thumb-size': size,
+            '--v-slider-thumb-size': convertToUnit(thumbSize.value),
           }}
           role="slider"
-          tabindex={disabled.value ? -1 : 0}
-          aria-label={label.value}
-          aria-valuemin={props.min}
-          aria-valuemax={props.max}
-          aria-valuenow={props.modelValue}
-          aria-readonly={readonly.value}
-          aria-orientation={direction.value}
-          onKeydown={onKeydown}
+          tabindex={ disabled.value ? -1 : 0 }
+          aria-label={ label.value }
+          aria-valuemin={ props.min }
+          aria-valuemax={ props.max }
+          aria-valuenow={ props.modelValue }
+          aria-readonly={ readonly.value }
+          aria-orientation={ direction.value }
+          onKeydown={ onKeydown }
         >
           <div
             class={[
@@ -156,13 +155,13 @@ export const VSliderThumb = defineComponent({
               'v-slider-thumb__ripple',
               textColorClasses.value,
             ]}
-            style={textColorStyles.value}
+            style={ textColorStyles.value }
             v-ripple={[true, null, ['circle', 'center']]}
           />
           <VScaleTransition origin="bottom center">
             <div
               class="v-slider-thumb__label-container"
-              v-show={(thumbLabel.value && props.focused) || thumbLabel.value === 'always'}
+              v-show={ (thumbLabel.value && props.focused) || thumbLabel.value === 'always' }
             >
               <div
                 class={[
@@ -170,7 +169,7 @@ export const VSliderThumb = defineComponent({
                 ]}
               >
                 <div>
-                  {slots['thumb-label']?.({ modelValue: props.modelValue }) ?? props.modelValue.toFixed(1)}
+                  { slots['thumb-label']?.({ modelValue: props.modelValue }) ?? props.modelValue.toFixed(1) }
                 </div>
               </div>
             </div>

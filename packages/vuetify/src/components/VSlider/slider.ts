@@ -91,7 +91,7 @@ export const makeSliderProps = propsFactory({
   thumbLabel: {
     type: [Boolean, String] as PropType<boolean | 'always' | undefined>,
     default: undefined,
-    // validator: v => typeof v === 'boolean' || v === 'always',
+    validator: (v: any) => typeof v === 'boolean' || v === 'always',
   },
   thumbSize: {
     type: [Number, String],
@@ -100,7 +100,7 @@ export const makeSliderProps = propsFactory({
   showTicks: {
     type: [Boolean, String] as PropType<boolean | 'always'>,
     default: true,
-    // validator: v => typeof v === 'boolean' || v === 'always',
+    validator: (v: any) => typeof v === 'boolean' || v === 'always',
   },
   showTickLabels: {
     type: Boolean,
@@ -129,7 +129,9 @@ export const makeSliderProps = propsFactory({
   label: String,
 
   ...makeRoundedProps(),
-  ...makeElevationProps(),
+  ...makeElevationProps({
+    elevation: 2,
+  }),
 }, 'slider')
 
 type SliderProps = ExtractPropTypes<ReturnType<typeof makeSliderProps>>
@@ -278,10 +280,13 @@ export const useSlider = ({
 
   const parsedTicks = computed<Tick[]>(() => {
     if (!props.ticks) {
-      return numTicks.value !== Infinity ? createRange(numTicks.value + 1).map(t => ({
-        value: t,
-        position: (vertical.value ? numTicks.value - t : t) * (100 / numTicks.value),
-      })) : []
+      return numTicks.value !== Infinity ? createRange(numTicks.value + 1).map(t => {
+        const value = min.value + (t * stepSize.value)
+        return {
+          value,
+          position: position(value),
+        }
+      }) : []
     }
     if (Array.isArray(props.ticks)) return props.ticks.map(t => ({ value: t, position: position(t), label: t.toString() }))
     return Object.keys(props.ticks).map(key => ({
@@ -299,34 +304,34 @@ export const useSlider = ({
     disabled,
     direction: toRef(props, 'direction'),
     elevation: toRef(props, 'elevation'),
+    hasLabels,
     label: toRef(props, 'label'),
     min,
     max,
     numTicks,
     onSliderMousedown,
     onSliderTouchstart,
+    parsedTicks,
     parseMouseMove,
     position,
     readonly: toRef(props, 'readonly'),
     rounded: toRef(props, 'rounded'),
     roundValue,
+    showTickLabels: toRef(props, 'showTickLabels'),
     showTicks: toRef(props, 'showTicks'),
     startOffset,
     stepSize,
     transition,
     thumbSize,
-    vertical,
     thumbColor,
     thumbLabel: toRef(props, 'thumbLabel'),
     ticks: toRef(props, 'ticks'),
-    parsedTicks,
-    hasLabels,
     tickSize,
     trackColor,
     trackContainerRef,
     trackFillColor,
     trackSize,
-    showTickLabels: toRef(props, 'showTickLabels'),
+    vertical,
   }
 
   provide(VSliderSymbol, data)

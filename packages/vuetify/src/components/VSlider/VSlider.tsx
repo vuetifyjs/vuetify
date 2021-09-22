@@ -32,7 +32,7 @@ export const VSlider = defineComponent({
     'update:modelValue': (v: number) => true,
   },
 
-  setup (props, { attrs, emit, slots }) {
+  setup (props, { attrs, slots }) {
     const thumbContainerRef = ref()
 
     const {
@@ -76,30 +76,30 @@ export const VSlider = defineComponent({
               'v-slider--has-labels': !!slots['tick-label'] || hasLabels.value,
             },
           ]}
-          disabled={props.disabled}
-          dirty={isDirty.value}
-          direction={props.direction}
+          disabled={ props.disabled }
+          dirty={ isDirty.value }
+          direction={ props.direction }
           v-slots={{
             ...slots,
             default: ({ id, isActive, isDirty, isFocused, focus, blur }: any) => (
               <div
                 class="v-slider__container"
-                onMousedown={onSliderMousedown}
-                onTouchstartPassive={onSliderTouchstart}
+                onMousedown={ onSliderMousedown }
+                onTouchstartPassive={ onSliderTouchstart }
               >
                 <input
-                  id={id}
-                  name={attrs.name}
-                  disabled={props.disabled}
-                  readonly={props.readonly}
+                  id={ id }
+                  name={ attrs.name }
+                  disabled={ props.disabled }
+                  readonly={ props.readonly }
                   tabindex="-1"
-                  value={model.value}
+                  value={ model.value }
                 />
 
                 <VSliderTrack
-                  ref={trackContainerRef}
-                  start={0}
-                  stop={trackStop.value}
+                  ref={ trackContainerRef }
+                  start={ 0 }
+                  stop={ trackStop.value }
                   v-slots={{
                     'tick-label': slots['tick-label'],
                   }}
@@ -107,17 +107,17 @@ export const VSlider = defineComponent({
 
                 <VSliderThumb
                   ref={ thumbContainerRef }
-                  active={isActive}
-                  dirty={isDirty}
-                  focused={isFocused}
-                  min={min.value}
-                  max={max.value}
-                  modelValue={model.value}
-                  onUpdate:modelValue={v => model.value = v}
-                  position={trackStop.value}
-                  elevation={props.elevation}
-                  onFocus={focus}
-                  onBlur={blur}
+                  active={ isActive }
+                  dirty={ isDirty }
+                  focused={ isFocused }
+                  min={ min.value }
+                  max={ max.value }
+                  modelValue={ model.value }
+                  onUpdate:modelValue={ v => (model.value = v) }
+                  position={ trackStop.value }
+                  elevation={ props.elevation }
+                  onFocus={ focus }
+                  onBlur={ blur }
                   v-slots={{
                     'thumb-label': slots['thumb-label'],
                   }}
