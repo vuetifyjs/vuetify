@@ -8,7 +8,7 @@ import { VInput } from '@/components/VInput'
 import VFieldLabel from './VFieldLabel'
 
 // Composables
-import { genLoader, makeLoaderProps, useLoader } from '@/composables/loader'
+import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
@@ -242,12 +242,12 @@ export const VField = defineComponent({
           >
             <div class="v-field__overlay" />
 
-            { genLoader(
-              props.loading,
-              'v-field',
-              isValid.value !== false ? props.color : undefined,
-              slots?.loader
-            ) }
+            <LoaderSlot
+              name="v-field"
+              active={ props.loading }
+              color={ isValid.value === false ? undefined : props.color }
+              v-slots={{ default: slots.loader }}
+            />
 
             { hasPrepend && (
               <div

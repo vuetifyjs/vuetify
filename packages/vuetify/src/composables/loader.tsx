@@ -6,7 +6,7 @@ import { computed } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
-import type { Slot } from 'vue'
+import type { SetupContext } from '@vue/runtime-core'
 
 export interface LoaderProps {
   loading: boolean
@@ -25,28 +25,27 @@ export function useLoader (props: LoaderProps, name: string) {
   return { loaderClasses }
 }
 
-// Generators
-export function genLoader (
-  active: boolean,
-  name: string,
-  color?: string,
-  slot?: Slot,
+export function LoaderSlot (
+  props: {
+    active: boolean
+    name: string
+    color?: string
+  },
+  { slots }: SetupContext,
 ) {
   return (
-    <div class={`${name}__loader`}>
-      { slot?.({
-        color,
-        isActive: active,
-      }) }
-
-      { !slot && (
+    <div class={`${props.name}__loader`}>
+      { slots.default?.({
+        color: props.color,
+        isActive: props.active,
+      }) || (
         <VProgressLinear
-          active={ active }
-          color={ color }
+          active={ props.active }
+          color={ props.color }
           height="2"
           indeterminate
         />
-      ) }
+      )}
     </div>
   )
 }
