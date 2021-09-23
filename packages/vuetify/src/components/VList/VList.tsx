@@ -13,7 +13,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
 import { makeThemeProps, useTheme } from '@/composables/theme'
-import { makeNestedProps, useNested } from '@/composables/nested'
+import { makeNestedProps, useNested } from '@/composables/nested/nested'
 
 // Utilities
 import { toRef } from 'vue'

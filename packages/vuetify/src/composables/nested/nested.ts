@@ -1,11 +1,11 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { getUid, propsFactory } from '@/util'
-import { computed, inject, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, provide, ref } from 'vue'
 import { multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import { classicSelectStrategy, independentSelectStrategy, leafSelectStrategy } from './selectStrategies'
 
 // Types
-import type { ComponentInternalInstance, InjectionKey, Prop, Ref } from 'vue'
+import type { InjectionKey, Prop, Ref } from 'vue'
 import type { SelectStrategyFn } from './selectStrategies'
 import type { OpenStrategyFn } from './openStrategies'
 
@@ -17,17 +17,29 @@ export interface NestedProps {
   openStrategy?: OpenStrategy
   opened?: string[]
   selected?: string[]
-  openOnSelect?: boolean
 }
 
 const VNestedSymbol: InjectionKey<any> = Symbol.for('vuetify:nested')
+
+const emptyNested = {
+  id: ref(null),
+  root: {
+    register: () => null,
+    unregister: () => null,
+    parents: ref(new Map()),
+    children: ref(new Map()),
+    open: () => null,
+    select: () => null,
+    opened: ref(new Set()),
+    selected: ref(new Map()),
+  },
+}
 
 export const makeNestedProps = propsFactory({
   selectStrategy: [String, Function] as Prop<SelectStrategy>,
   openStrategy: [String, Function] as Prop<OpenStrategy>,
   opened: Array as Prop<string[]>,
   selected: Array as Prop<string[]>,
-  openOnSelect: Boolean,
 }, 'nested')
 
 export const useNested = (props: NestedProps) => {
@@ -76,31 +88,20 @@ export const useNested = (props: NestedProps) => {
     v => selectStrategy.value.out(v, children.value, parents.value),
   )
 
-  function openParents (id: string) {
-    let parent = parents.value.get(id)
+  // function openParents (id: string) {
+  //   let parent = parents.value.get(id)
 
-    while (parent) {
-      opened.value.add(parent)
-      parent = parents.value.get(parent)
-    }
-  }
+  //   while (parent) {
+  //     opened.value.add(parent)
+  //     parent = parents.value.get(parent)
+  //   }
+  // }
 
   // onMounted(() => {
   //   for (const key of selected.value.keys()) {
   //     openParents(key)
   //   }
   // })
-
-  watch(selected, () => {
-    if (props.openOnSelect) {
-      for (const [key, value] of selected.value.entries()) {
-        const parent = parents.value.get(key)
-        if (value === 'on' && !children.value.get(key) && parent != null && !opened.value.has(parent)) {
-          openParents(key)
-        }
-      }
-    }
-  })
 
   const root = {
     id: ref(null),
@@ -160,8 +161,8 @@ export const useNested = (props: NestedProps) => {
   return root
 }
 
-export const useNestedItem = (id: Ref<string>) => {
-  const parent = inject(VNestedSymbol)
+export const useNestedItem = (id: Ref<string | undefined>) => {
+  const parent = inject(VNestedSymbol, emptyNested)
 
   const computedId = computed(() => id.value ?? getUid())
 
@@ -183,7 +184,7 @@ export const useNestedItem = (id: Ref<string>) => {
 }
 
 export const useNestedGroup = (props: { value: string }) => {
-  const parent = inject(VNestedSymbol)
+  const parent = inject(VNestedSymbol, emptyNested)
 
   const id = computed(() => props.value ?? getUid())
 

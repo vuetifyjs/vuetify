@@ -1,5 +1,5 @@
 // Composables
-import { useNestedGroup } from '@/composables/nested'
+import { useNestedGroup } from '@/composables/nested/nested'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities

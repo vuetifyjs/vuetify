@@ -25,7 +25,7 @@ import { Ripple } from '@/directives/ripple'
 // Utilities
 import { computed, onMounted } from 'vue'
 import { defineComponent } from '@/util'
-import { useNestedItem } from '@/composables/nested'
+import { useNestedItem } from '@/composables/nested/nested'
 
 export const VListItem = defineComponent({
   name: 'VListItem',
