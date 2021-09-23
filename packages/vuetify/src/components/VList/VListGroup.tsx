@@ -1,3 +1,6 @@
+// Components
+import { VExpandTransition } from '..'
+
 // Composables
 import { useNestedGroup } from '@/composables/nested/nested'
 import { makeTagProps } from '@/composables/tag'
@@ -55,9 +58,11 @@ export default defineComponent({
         ]}
       >
         { slots.header?.(headerProps.value) }
-        <div class="v-list-group__items" v-show={isOpen.value}>
-          { renderItems(props, slots) }
-        </div>
+        <VExpandTransition>
+          <div class="v-list-group__items" v-show={isOpen.value}>
+            { renderItems(props, slots) }
+          </div>
+        </VExpandTransition>
       </props.tag>
     )
   },
