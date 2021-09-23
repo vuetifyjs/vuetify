@@ -82,7 +82,18 @@
             font-size: $table-row-font-size
 
   @at-root
-    @include table-density($table-density)
+    @include tools.density('v-table', $table-density) using ($modifier)
+      > .v-table__wrapper
+        > table
+          > tbody,
+          > thead,
+          > tfoot
+            > tr
+              > th
+                height: $table-header-height + $modifier
+
+              > td
+                height: $table-row-height + $modifier
 
 // Elements
 .v-table__wrapper
