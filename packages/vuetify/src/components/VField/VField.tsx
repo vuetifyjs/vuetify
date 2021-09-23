@@ -5,10 +5,10 @@ import './VField.sass'
 import { VExpandXTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 import { VInput } from '@/components/VInput'
-import { VProgressLinear } from '@/components/VProgressLinear'
 import VFieldLabel from './VFieldLabel'
 
 // Composables
+import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
@@ -64,7 +64,6 @@ export const makeVFieldProps = propsFactory({
   color: String,
   id: String,
   label: String,
-  loading: Boolean,
   persistentClear: Boolean,
   prependInnerIcon: String,
   reverse: Boolean,
@@ -76,6 +75,7 @@ export const makeVFieldProps = propsFactory({
   },
 
   ...makeThemeProps(),
+  ...makeLoaderProps(),
   ...makeValidationProps(),
 }, 'v-field')
 
@@ -102,6 +102,7 @@ export const VField = defineComponent({
 
   setup (props, { attrs, emit, slots }) {
     const { themeClasses } = useTheme(props)
+    const { loaderClasses } = useLoader(props, 'v-field')
     const isActive = useProxiedModel(props, 'active')
     const uid = getUid()
 
@@ -207,7 +208,6 @@ export const VField = defineComponent({
               'v-field--appended': hasAppend,
               'v-field--dirty': props.dirty,
               'v-field--focused': isFocused.value,
-              'v-field--loading': props.loading,
               'v-field--has-background': !!props.bgColor,
               'v-field--persistent-clear': props.persistentClear,
               'v-field--prepended': hasPrepend,
@@ -216,6 +216,7 @@ export const VField = defineComponent({
               [`v-field--variant-${props.variant}`]: true,
             },
             themeClasses.value,
+            loaderClasses.value,
             validationClasses.value,
             textColorClasses.value,
           ]}
@@ -241,18 +242,12 @@ export const VField = defineComponent({
           >
             <div class="v-field__overlay" />
 
-            <div class="v-field__loader">
-              { slots?.loader?.() }
-
-              { !slots.loader && (
-                <VProgressLinear
-                  active={ props.loading }
-                  color={ isValid.value !== false ? props.color : undefined }
-                  height="2"
-                  indeterminate
-                />
-              ) }
-            </div>
+            <LoaderSlot
+              name="v-field"
+              active={ props.loading }
+              color={ isValid.value === false ? undefined : props.color }
+              v-slots={{ default: slots.loader }}
+            />
 
             { hasPrepend && (
               <div
