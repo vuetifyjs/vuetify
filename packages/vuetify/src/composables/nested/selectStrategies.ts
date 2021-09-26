@@ -71,7 +71,7 @@ export const independentSelectStrategy: SelectStrategy = {
 
     return selected
   },
-  in: (v: string[], children: Map<string, string[]>, parents: Map<string, string>) => {
+  in: (v, children, parents) => {
     let map = new Map()
 
     for (const id of (v || [])) {

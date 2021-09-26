@@ -88,14 +88,14 @@ export const useNested = (props: NestedProps) => {
     v => selectStrategy.value.out(v, children.value, parents.value),
   )
 
-  // function openParents (id: string) {
-  //   let parent = parents.value.get(id)
+  function openParents (id: string) {
+    let parent = parents.value.get(id)
 
-  //   while (parent) {
-  //     opened.value.add(parent)
-  //     parent = parents.value.get(parent)
-  //   }
-  // }
+    while (parent) {
+      opened.value.add(parent)
+      parent = parents.value.get(parent)
+    }
+  }
 
   // onMounted(() => {
   //   for (const key of selected.value.keys()) {
@@ -103,9 +103,16 @@ export const useNested = (props: NestedProps) => {
   //   }
   // })
 
+  function showAllSelected () {
+    for (const key of selected.value.keys()) {
+      openParents(key)
+    }
+  }
+
   const root = {
     id: ref(null),
     root: {
+      showAllSelected,
       opened,
       selected,
       selectedValues: computed(() => {
