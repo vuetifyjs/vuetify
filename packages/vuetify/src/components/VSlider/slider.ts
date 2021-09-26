@@ -52,6 +52,8 @@ type SliderProvide = {
   showTickLabels: Ref<boolean | undefined>
   parsedTicks: Ref<Tick[]>
   hasLabels: Ref<boolean>
+  isReversed: Ref<boolean>
+  horizontalDirection: Ref<'ltr' | 'rtl'>
 }
 
 export const VSliderSymbol: InjectionKey<SliderProvide> = Symbol.for('vuetify:v-slider')
@@ -74,7 +76,6 @@ function getPosition (e: MouseEvent | TouchEvent, position: 'clientX' | 'clientY
 export const makeSliderProps = propsFactory({
   disabled: Boolean,
   readonly: Boolean,
-  inverseLabel: Boolean,
   max: {
     type: [Number, String],
     default: 100,
@@ -148,6 +149,16 @@ export const useSlider = ({
   getActiveThumb: (e: MouseEvent | TouchEvent) => HTMLElement
 }) => {
   const { isRtl } = useRtl()
+  const isReversed = computed(() => isRtl.value !== props.reverse)
+  const horizontalDirection = computed(() => {
+    let hd: 'ltr' | 'rtl' = isRtl.value ? 'rtl' : 'ltr'
+
+    if (props.reverse) {
+      hd = hd === 'rtl' ? 'ltr' : 'rtl'
+    }
+
+    return hd
+  })
   const min = computed(() => parseFloat(props.min))
   const max = computed(() => parseFloat(props.max))
   const stepSize = computed(() => props.stepSize > 0 ? parseFloat(props.stepSize) : 0)
@@ -200,7 +211,7 @@ export const useSlider = ({
     // It is possible for left to be NaN, force to number
     let clickPos = Math.min(Math.max((clickOffset - trackStart - startOffset.value) / trackLength, 0), 1) || 0
 
-    if (vertical || isRtl.value) clickPos = 1 - clickPos
+    if (vertical || isReversed.value) clickPos = 1 - clickPos
 
     return roundValue(min.value + clickPos * (max.value - min.value))
   }
@@ -305,6 +316,8 @@ export const useSlider = ({
     direction: toRef(props, 'direction'),
     elevation: toRef(props, 'elevation'),
     hasLabels,
+    horizontalDirection,
+    isReversed,
     label: toRef(props, 'label'),
     min,
     max,

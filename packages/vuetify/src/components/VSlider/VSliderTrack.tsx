@@ -44,6 +44,7 @@ export const VSliderTrack = defineComponent({
       color,
       rounded,
       parsedTicks,
+      horizontalDirection,
     } = slider
 
     const { roundedClasses } = useRounded(rounded, 'v-slider-track')
@@ -119,6 +120,7 @@ export const VSliderTrack = defineComponent({
           style={{
             '--v-slider-track-size': convertToUnit(trackSize.value),
             '--v-slider-tick-size': convertToUnit(tickSize.value),
+            direction: !vertical.value ? horizontalDirection.value : undefined,
           }}
         >
           <div

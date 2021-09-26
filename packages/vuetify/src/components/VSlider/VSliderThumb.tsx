@@ -11,7 +11,6 @@ import Ripple from '@/directives/ripple'
 
 // Composables
 import { useTextColor } from '@/composables/color'
-import { useRtl } from '@/composables/rtl'
 
 // Utilities
 import { computed, inject } from 'vue'
@@ -49,7 +48,6 @@ export const VSliderThumb = defineComponent({
   },
 
   setup (props, { slots, emit }) {
-    const { isRtl } = useRtl()
     const slider = inject(VSliderSymbol)
 
     if (!slider) throw new Error('[Vuetify] v-slider-thumb must be used inside v-slider or v-range-slider')
@@ -66,6 +64,8 @@ export const VSliderThumb = defineComponent({
       label,
       readonly,
       elevation,
+      isReversed,
+      horizontalDirection,
     } = slider
 
     const { textColorClasses, textColorStyles } = useTextColor(thumbColor)
@@ -86,7 +86,7 @@ export const VSliderThumb = defineComponent({
       const step = stepSize.value || 0.1
       const steps = (props.max - props.min) / step
       if ([left, right, down, up].includes(e.key)) {
-        const increase = isRtl.value ? [left, up] : [right, up]
+        const increase = isReversed.value ? [left, up] : [right, up]
         const direction = increase.includes(e.key) ? 1 : -1
         const multiplier = e.shiftKey ? 2 : (e.ctrlKey ? 1 : 0)
 
@@ -129,6 +129,7 @@ export const VSliderThumb = defineComponent({
             transition: transition.value,
             [`inset-${inset}-start`]: `calc(${positionPercentage} - var(--v-slider-thumb-size) / 2)`,
             '--v-slider-thumb-size': convertToUnit(thumbSize.value),
+            direction: !vertical.value ? horizontalDirection.value : undefined,
           }}
           role="slider"
           tabindex={ disabled.value ? -1 : 0 }

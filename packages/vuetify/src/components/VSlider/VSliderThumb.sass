@@ -2,6 +2,7 @@
 @forward './variables'
 @use 'sass:map'
 @use 'sass:selector'
+@use 'sass:math'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
@@ -91,13 +92,13 @@
     top: 0
 
   .v-slider-thumb__label
-    left: calc(#{$slider-thumb-label-width} / -2)
+    left: math.div($slider-thumb-label-width, -2)
     bottom: $slider-thumb-label-offset
 
     &::before
       width: $slider-thumb-label-wedge-size
       height: $slider-thumb-label-wedge-size
-      bottom: #{$slider-thumb-label-wedge-size / -2}
+      bottom: math.div($slider-thumb-label-wedge-size, -2)
 
 // Vertical
 .v-slider.v-input--vertical
@@ -106,13 +107,13 @@
     right: 0
 
   .v-slider-thumb__label
-    top: calc(#{$slider-thumb-label-height} / -2)
+    top: math.div($slider-thumb-label-height, -2)
     left: $slider-thumb-label-offset
 
     &::before
       width: $slider-thumb-label-wedge-size
       height: $slider-thumb-label-wedge-size
-      left: #{$slider-thumb-label-wedge-size / -2}
+      left: math.div($slider-thumb-label-wedge-size, -2)
 
 // Modifiers
 .v-slider-thumb--focused, .v-slider-thumb:hover
