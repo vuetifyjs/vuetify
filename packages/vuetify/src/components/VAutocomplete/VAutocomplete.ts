@@ -227,7 +227,8 @@ export default VSelect.extend({
         ) return
 
         this.$refs.menu.getTiles()
-        this.setMenuIndex(0)
+
+        if (this.autoSelectFirst) this.setMenuIndex(0)
       })
     },
     onInternalSearchChanged () {
