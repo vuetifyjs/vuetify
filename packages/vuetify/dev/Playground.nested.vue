@@ -2,10 +2,10 @@
   <v-app>
     <div class="pa-10">
       <h2>async load of items</h2>
-      <v-nested :items="loadedItems" :open-strategy="loadItems" :opened="opened" />
+      <v-list :items="loadedItems" :open-strategy="loadItems" :opened="opened" />
 
-      <h2>cusotm ctrl + click open strategy</h2>
-      <v-nested :items="items" :open-strategy="openStrategyFn" />
+      <h2>custom ctrl + click open strategy</h2>
+      <v-list :items="listItems" :open-strategy="openStrategyFn" />
 
       <h2>router integration</h2>
       <v-list v-model:selected="test" v-model:opened="open">
@@ -13,7 +13,7 @@
         <v-list-item active-color="primary" to="/page1" title="bar" />
         <v-list-group>
           <template #header="props">
-            <v-list-item active-color="primary" prepend-icon="$close" v-bind="props" :active="$route.path.startsWith('/nested')" title="header" />
+            <v-list-item active-color="primary" prepend-icon="$close" v-bind="props" :active="$route.path.startsWith('/nested')" title="header" variant="plain" />
           </template>
           <v-list-item active-color="primary" to="/nested/page1" title="baz" />
           <v-list-item active-color="primary" to="/nested/page2" title="bro" />
@@ -21,7 +21,7 @@
       </v-list>
 
       <h2>value prop</h2>
-      <v-list v-model:selected="test2" v-model:opened="open2">
+      <v-list v-model:active="test2" v-model:opened="open2">
         <v-list-item value="/" title="foo" />
         <v-list-item value="/page1" title="bar" />
         <v-list-group>
@@ -39,9 +39,22 @@
           </v-list-group>
         </v-list-group>
       </v-list>
+      {{ test2 }}
 
-      <h2>open on programmatic select</h2>
-      <v-list open-on-select v-model:selected="openOnSelect" select-strategy="leaf">
+      <h2>with checkbox and selected</h2>
+      <v-list :items="listItems" v-model:selected="selected">
+        <template #item="props">
+          <v-list-item v-bind="props">
+            <template #prepend="{ select, isSelected }">
+              <input type="checkbox" :checked="isSelected" @click="select(!isSelected)" />
+            </template>
+          </v-list-item>
+        </template>
+      </v-list>
+      {{ selected }}
+
+      <h2>open on programmatic activate</h2>
+      <v-list v-model:active="openOnSelect" v-model:opened="openStuff" active-strategy="multiple" ref="listRef">
         <v-list-group>
           <template #header="props">
             <v-list-item v-bind="props" title="group 1" />
@@ -71,7 +84,7 @@
           </v-list-group>
         </v-list-group>
       </v-list>
-      <v-btn @click="openOnSelect = ['a', 'g']">select</v-btn>
+      <v-btn @click="activateStuff">activate</v-btn>
 
       <h2>select strategies</h2>
       <select v-model="selectStrategy">
@@ -97,8 +110,10 @@
   export default {
     name: 'Playground',
     data: () => ({
+      selected: [],
       selectStrategy: 'leaf',
       openStrategy: 'multiple',
+      openStuff: null,
       openOnSelect: null,
       foo: null,
       open: null,
@@ -187,7 +202,7 @@
       loadedItems: [
         {
           value: 'root',
-          text: 'root',
+          title: 'root',
           loaded: false,
           children: [],
         },
@@ -197,10 +212,10 @@
       count: 1,
     }),
     mounted () {
-      window.addEventListener('click', this.ctrlHandler, { passive: true })
+      window.addEventListener('mousedown', this.ctrlHandler, { passive: true })
     },
     beforeUnmount () {
-      window.removeEventListener('click', this.ctrlHandler, { passive: true })
+      window.removeEventListener('mousedown', this.ctrlHandler, { passive: true })
     },
     methods: {
       ctrlHandler (e) {
@@ -216,7 +231,7 @@
 
           if (value) {
             opened.add(item)
-          } else if (!value) {
+          } else {
             opened.delete(item)
           }
 
@@ -232,6 +247,7 @@
 
         while (queue.length) {
           const item = queue.shift()
+          console.log('check', item, id)
 
           if (item.value === id) return item
 
@@ -250,7 +266,7 @@
             const value = `child #${this.count++}`
             item.children.push({
               value,
-              text: value,
+              title: value,
               loaded: false,
               children: [],
             })
@@ -259,6 +275,16 @@
             this.opened.push(id)
           }, 1000)
         }
+      },
+      activateStuff () {
+        const foo = ['a', 'g']
+        this.openOnSelect = foo
+        // console.log(this.$refs.listRef)
+        for (const k of foo) {
+          this.$refs.listRef.open(k, true)
+        }
+        // this.$refs.listRef.openParents(['a', 'g'])
+        // this.openStuff = ['a', 'g']
       },
     },
   }
@@ -278,8 +304,8 @@
     .items
       margin-left: calc(20px)
 
-  .v-list-group__header.v-list-item--active
-    .v-list-item__overlay
-      display: none
+  // .v-list-group__header.v-list-item--active
+  //   .v-list-item__overlay
+  //     display: none
 
 </style>
