@@ -3,25 +3,47 @@ import { getUid, propsFactory } from '@/util'
 import { computed, inject, onBeforeUnmount, onMounted, provide, ref } from 'vue'
 import { multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import { classicSelectStrategy, independentSelectStrategy, leafSelectStrategy } from './selectStrategies'
+import { classicActiveStrategy } from './activeStrategies'
 
 // Types
 import type { InjectionKey, Prop, Ref } from 'vue'
 import type { SelectStrategyFn } from './selectStrategies'
 import type { OpenStrategyFn } from './openStrategies'
+import type { ActiveStrategyFn } from './activeStrategies'
 
 export type SelectStrategy = 'single-leaf' | 'leaf' | 'independent' | 'classic' | SelectStrategyFn
 export type OpenStrategy = 'single' | 'multiple' | OpenStrategyFn
+export type ActiveStrategy = 'single' | 'multiple' | ActiveStrategyFn
 
 export interface NestedProps {
   selectStrategy?: SelectStrategy
   openStrategy?: OpenStrategy
-  opened?: string[]
+  activeStrategy?: ActiveStrategy
   selected?: string[]
+  opened?: string[]
+  active?: string[]
 }
 
-const VNestedSymbol: InjectionKey<any> = Symbol.for('vuetify:nested')
+type NestedProvide = {
+  id: Ref<string | null>
+  root: {
+    children: Ref<Map<string, string[]>>
+    parents: Ref<Map<string, string>>
+    opened: Ref<Set<string>>
+    active: Ref<Set<string>>
+    selected: Ref<Map<string, 'on' | 'off' | 'indeterminate'>>
+    selectedValues: Ref<string[]>
+    register: (...args: any) => void
+    unregister: (...args: any) => void
+    open: (...args: any) => void
+    select: (...args: any) => void
+    activate: (...args: any) => void
+  }
+}
 
-const emptyNested = {
+const VNestedSymbol: InjectionKey<NestedProvide> = Symbol.for('vuetify:nested')
+
+const emptyNested: NestedProvide = {
   id: ref(null),
   root: {
     register: () => null,
@@ -32,31 +54,38 @@ const emptyNested = {
     select: () => null,
     opened: ref(new Set()),
     selected: ref(new Map()),
+    active: ref(new Set()),
+    activate: () => null,
+    selectedValues: ref([]),
   },
 }
 
 export const makeNestedProps = propsFactory({
   selectStrategy: [String, Function] as Prop<SelectStrategy>,
   openStrategy: [String, Function] as Prop<OpenStrategy>,
+  activeStrategy: [String, Function] as Prop<ActiveStrategy>,
   opened: Array as Prop<string[]>,
   selected: Array as Prop<string[]>,
+  active: Array as Prop<string[]>,
 }, 'nested')
 
 export const useNested = (props: NestedProps) => {
   const children = ref(new Map<string, string[]>())
   const parents = ref(new Map<string, string>())
 
-  const opened = useProxiedModel(
-    props,
-    'opened',
-    props.opened,
-    v => {
-      return new Set(v)
-    },
-    v => {
-      return [...v.values()]
+  const opened = useProxiedModel(props, 'opened', props.opened, v => new Set(v), v => [...v.values()])
+  const active = useProxiedModel(props, 'active', props.active, v => new Set(v), v => [...v.values()])
+
+  const activeStrategy = computed(() => {
+    if (typeof props.activeStrategy === 'object') return props.activeStrategy
+
+    switch (props.activeStrategy) {
+      case 'single': return classicActiveStrategy(true)
+      case 'multiple':
+      default:
+        return classicActiveStrategy()
     }
-  )
+  })
 
   const selectStrategy = computed(() => {
     if (typeof props.selectStrategy === 'object') return props.selectStrategy
@@ -88,33 +117,12 @@ export const useNested = (props: NestedProps) => {
     v => selectStrategy.value.out(v, children.value, parents.value),
   )
 
-  function openParents (id: string) {
-    let parent = parents.value.get(id)
-
-    while (parent) {
-      opened.value.add(parent)
-      parent = parents.value.get(parent)
-    }
-  }
-
-  // onMounted(() => {
-  //   for (const key of selected.value.keys()) {
-  //     openParents(key)
-  //   }
-  // })
-
-  function showAllSelected () {
-    for (const key of selected.value.keys()) {
-      openParents(key)
-    }
-  }
-
   const root = {
     id: ref(null),
     root: {
-      showAllSelected,
       opened,
       selected,
+      active,
       selectedValues: computed(() => {
         const arr = []
 
@@ -136,7 +144,7 @@ export const useNested = (props: NestedProps) => {
         children.value.delete(groupId)
         parents.value.delete(groupId)
       },
-      open: (id: string, value: boolean, e: Event) => {
+      open: (id: string, value: boolean, e?: Event) => {
         const newOpened = openStrategy.value({
           id,
           value,
@@ -148,11 +156,21 @@ export const useNested = (props: NestedProps) => {
 
         newOpened && (opened.value = newOpened)
       },
-      select: (id: string, value: boolean, e: Event) => {
+      select: (id: string, value: boolean, e?: Event) => {
         selected.value = selectStrategy.value.select({
           id,
           value,
           selected: new Map(selected.value),
+          children: children.value,
+          parents: parents.value,
+          event: e,
+        })
+      },
+      activate: (id: string, value: boolean, e?: Event) => {
+        active.value = activeStrategy.value({
+          id,
+          value,
+          active: active.value,
           children: children.value,
           parents: parents.value,
           event: e,
@@ -165,13 +183,13 @@ export const useNested = (props: NestedProps) => {
 
   provide(VNestedSymbol, root)
 
-  return root
+  return root.root
 }
 
 export const useNestedItem = (id: Ref<string | undefined>) => {
   const parent = inject(VNestedSymbol, emptyNested)
 
-  const computedId = computed(() => id.value ?? getUid())
+  const computedId = computed(() => id.value ?? getUid().toString())
 
   const item = {
     ...parent,
@@ -179,6 +197,8 @@ export const useNestedItem = (id: Ref<string | undefined>) => {
     parent: computed(() => parent.root.parents.value.get(computedId.value)),
     select: (selected: boolean, e: Event) => parent.root.select(computedId.value, selected, e),
     isSelected: computed(() => parent.root.selected.value.get(computedId.value) === 'on'),
+    activate: (activated: boolean, e: Event) => parent.root.activate(computedId.value, activated, e),
+    isActive: computed(() => parent.root.active.value.has(computedId.value)),
   }
 
   parent.root.register(computedId.value, parent.id.value, false)
@@ -193,7 +213,7 @@ export const useNestedItem = (id: Ref<string | undefined>) => {
 export const useNestedGroup = (props: { value: string }) => {
   const parent = inject(VNestedSymbol, emptyNested)
 
-  const id = computed(() => props.value ?? getUid())
+  const id = computed(() => props.value ?? getUid().toString())
 
   const group = {
     ...parent,

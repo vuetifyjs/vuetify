@@ -60,9 +60,9 @@ export const VListItem = defineComponent({
   setup (props, { attrs, slots }) {
     const link = useLink(props, attrs)
     const id = computed(() => props.value ?? link.href.value)
-    const { select, isSelected, root, parent } = useNestedItem(id)
+    const { activate, isActive: isNestedActive, select, isSelected, root, parent } = useNestedItem(id)
     const isActive = computed(() => {
-      return props.active || link.isExactActive?.value || isSelected.value
+      return props.active || link.isExactActive?.value || isNestedActive.value
     })
     const activeColor = props.activeColor ?? props.color
     const variantProps = computed(() => ({
@@ -84,6 +84,13 @@ export const VListItem = defineComponent({
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props, 'v-list-item')
+
+    const slotProps = computed(() => ({
+      isActive: isActive.value,
+      activate,
+      select,
+      isSelected: isSelected.value,
+    }))
 
     return () => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
@@ -120,7 +127,7 @@ export const VListItem = defineComponent({
           tabindex={ isClickable ? 0 : undefined }
           onClick={ isClickable && ((e: Event) => {
             link.navigate?.()
-            props.value != null && select(!isSelected.value, e)
+            props.value != null && activate(!isNestedActive.value, e)
           })}
           v-ripple={ isClickable }
         >
@@ -128,7 +135,7 @@ export const VListItem = defineComponent({
 
           { hasPrepend && (
             slots.prepend
-              ? slots.prepend()
+              ? slots.prepend(slotProps.value)
               : (
                 <VListItemAvatar left>
                   <VAvatar
@@ -166,7 +173,7 @@ export const VListItem = defineComponent({
 
           { hasAppend && (
             slots.append
-              ? slots.append()
+              ? slots.append(slotProps.value)
               : (
                 <VListItemAvatar right>
                   <VAvatar

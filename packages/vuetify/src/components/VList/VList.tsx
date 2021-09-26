@@ -17,7 +17,7 @@ import { makeNestedProps, useNested } from '@/composables/nested/nested'
 
 // Utilities
 import { toRef } from 'vue'
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 import { renderItems } from './utils'
 
 // Types
@@ -42,8 +42,9 @@ export const VList = defineComponent({
     items: Array as Prop<ListItem[]>,
 
     ...makeNestedProps({
-      selectStrategy: 'single-leaf' as const,
+      selectStrategy: 'leaf' as const,
       openStrategy: 'multiple' as const,
+      activeStrategy: 'single' as const,
     }),
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -62,9 +63,9 @@ export const VList = defineComponent({
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props, 'v-list')
-    useNested(props)
+    const { open, select, activate } = useNested(props)
 
-    return () => {
+    useRender(() => {
       const hasHeader = typeof props.subheader === 'string' || slots.subheader
 
       return (
@@ -99,6 +100,12 @@ export const VList = defineComponent({
           { renderItems(props, slots) }
         </props.tag>
       )
+    })
+
+    return {
+      open,
+      select,
+      activate,
     }
   },
 })

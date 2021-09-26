@@ -26,7 +26,19 @@ export const singleOpenStrategy: OpenStrategyFn = ({ id, value, opened, parents 
   }
 }
 
-export const multipleOpenStrategy: OpenStrategyFn = ({ id, value, opened }: { id: string, value: boolean, opened: Set<string> }) => {
-  value ? opened.add(id) : opened.delete(id)
+export const multipleOpenStrategy: OpenStrategyFn = ({ id, value, opened, parents }) => {
+  if (value) {
+    let parent = parents.get(id)
+    opened.add(id)
+
+    while (parent != null) {
+      opened.add(parent)
+      parent = parents.get(parent)
+    }
+
+    return opened
+  } else {
+    opened.delete(id)
+  }
   return opened
 }
