@@ -1,7 +1,7 @@
-import { propsFactory, wrapInRef } from '@/util'
 
 // Utilities
-import { computed, ref } from 'vue'
+import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
+import { computed } from 'vue'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -13,79 +13,51 @@ export function defaultFilter (text: string, query?: string) {
   return text.toLocaleLowerCase().includes(query.toLocaleLowerCase())
 }
 
+export type FilterFunction = (item: any, query?: string) => boolean
+
 export interface FilterProps {
-  filterFn?: (item: any, query?: string) => boolean
+  filterFn?: FilterFunction
 }
 
 // Composables
 export const makeFilterProps = propsFactory({
-  filterFn: Function as unknown as PropType<FilterProps['filterFn']>,
+  filterFn: {
+    type: Function as PropType<FilterFunction>,
+    default: defaultFilter,
+  },
 }, 'filter')
 
 export function useFilter (
   props: FilterProps,
   items: Ref<any[]>,
-  query?: Ref<string | number>
+  query?: Ref<string | number>,
+  filterKeys?: (string | string[]) | (FilterFunction | FilterFunction[]),
 ) {
+  const keys = computed(() => wrapInArray(filterKeys))
   const strQuery = computed(() => (
     typeof query?.value !== 'string' &&
     typeof query?.value !== 'number'
   ) ? '' : String(query.value))
 
-  const filtered = computed(() => {
-    if (!strQuery.value) return items.value
+  const filteredItems = computed(() => {
+    if (!strQuery.value || !keys.value.length) return items.value
 
     const array: (typeof items.value) = []
 
     for (const item of items.value) {
-      if (props?.filterFn?.(item, strQuery.value)) {
-        array.push(item)
+      for (const key of keys.value) {
+        const value = getPropertyFromItem(item, key, item)
 
-        continue
+        if (props.filterFn?.(value, strQuery.value)) {
+          array.push(item)
+
+          break
+        }
       }
-
-      const text = String(item?.text ?? item ?? '')
-
-      if (
-        !text ||
-        !defaultFilter(text, strQuery.value)
-      ) continue
-
-      array.push(item)
     }
 
     return array
   })
 
-  return { filtered }
-}
-
-export function transformItems (
-  items: any[],
-  map: Record<string, string>,
-) {
-  const transformed = []
-
-  for (const item of wrapInRef(items).value) {
-    const refItem = wrapInRef(item)
-    const newItem = ref({} as Record<string, any>)
-    const itemKeys = Object.keys(refItem.value)
-
-    for (const itemKey of itemKeys) {
-      const value = refItem.value[itemKey]
-      const mapValue = map[itemKey]
-
-      if (!mapValue) {
-        newItem.value[itemKey] = value
-
-        continue
-      }
-
-      newItem.value[mapValue] = value
-    }
-
-    transformed.push(newItem)
-  }
-
-  return transformed
+  return { filteredItems }
 }
