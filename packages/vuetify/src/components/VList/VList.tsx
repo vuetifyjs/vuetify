@@ -16,13 +16,49 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
 
 // Utilities
-import { toRef } from 'vue'
+import { inject, provide, ref, toRef } from 'vue'
 import { defineComponent, useRender } from '@/util'
 import { renderItems } from './utils'
 
 // Types
-import type { Prop } from 'vue'
+import type { InjectionKey, Prop, Ref } from 'vue'
 import type { ListItem } from './utils'
+
+export const DepthKey: InjectionKey<number> = Symbol.for('vuetify:depth')
+
+export const useDepth = () => {
+  const parent = inject(DepthKey, -1)
+
+  const depth = parent + 1
+
+  provide(DepthKey, depth)
+
+  return depth
+}
+
+export const ListKey: InjectionKey<{
+  hasPrepend: Ref<boolean>
+  updateHasPrepend: (value: boolean) => void
+}> = Symbol.for('vuetify:list')
+
+export const createList = () => {
+  const parent = inject(ListKey, { hasPrepend: ref(false), updateHasPrepend: () => null })
+
+  const data = {
+    hasPrepend: ref(false),
+    updateHasPrepend: (value: boolean) => {
+      if (value) data.hasPrepend.value = value
+    },
+  }
+
+  provide(ListKey, data)
+
+  return parent
+}
+
+export const useList = () => {
+  return inject(ListKey)
+}
 
 export const VList = defineComponent({
   name: 'VList',
@@ -64,6 +100,8 @@ export const VList = defineComponent({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props, 'v-list')
     const { open, select, activate } = useNested(props)
+    createList()
+    const depth = useDepth()
 
     useRender(() => {
       const hasHeader = typeof props.subheader === 'string' || slots.subheader
@@ -89,6 +127,9 @@ export const VList = defineComponent({
           style={[
             backgroundColorStyles.value,
             dimensionStyles.value,
+            {
+              '--v-list-depth': depth,
+            },
           ]}
         >
           { hasHeader && (

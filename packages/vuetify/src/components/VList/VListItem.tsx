@@ -26,6 +26,7 @@ import { Ripple } from '@/directives/ripple'
 import { computed, onMounted } from 'vue'
 import { defineComponent } from '@/util'
 import { useNestedItem } from '@/composables/nested/nested'
+import { useList } from './VList'
 
 export const VListItem = defineComponent({
   name: 'VListItem',
@@ -61,6 +62,7 @@ export const VListItem = defineComponent({
     const link = useLink(props, attrs)
     const id = computed(() => props.value ?? link.href.value)
     const { activate, isActive: isNestedActive, select, isSelected, root, parent } = useNestedItem(id)
+    const list = useList()
     const isActive = computed(() => {
       return props.active || link.isExactActive?.value || isNestedActive.value
     })
@@ -97,9 +99,11 @@ export const VListItem = defineComponent({
       const hasTitle = (slots.title || props.title)
       const hasSubtitle = (slots.subtitle || props.subtitle)
       const hasHeader = !!(hasTitle || hasSubtitle)
-      const hasAppend = (slots.append || props.appendAvatar || props.appendIcon)
-      const hasPrepend = (slots.prepend || props.prependAvatar || props.prependIcon)
+      const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
+      const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
       const isClickable = !props.disabled && (link.isClickable.value || props.link || props.value != null)
+
+      list?.updateHasPrepend(hasPrepend)
 
       return (
         <Tag
@@ -109,6 +113,7 @@ export const VListItem = defineComponent({
               'v-list-item--active': isActive.value,
               'v-list-item--disabled': props.disabled,
               'v-list-item--link': isClickable,
+              'v-list-item--prepend': !hasPrepend && list?.hasPrepend.value,
               [`${props.activeClass}`]: isActive.value && props.activeClass,
             },
             themeClasses.value,
