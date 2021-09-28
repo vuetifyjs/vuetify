@@ -206,6 +206,7 @@ export default defineComponent({
           class={[
             'v-rating',
             {
+              'v-rating--hover': props.hover,
               'v-rating--readonly': props.readonly,
             },
             themeClasses.value,
