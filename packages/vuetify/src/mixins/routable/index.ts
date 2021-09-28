@@ -75,6 +75,10 @@ export default Vue.extend({
     $route: 'onRouteChange',
   },
 
+  mounted () {
+    this.onRouteChange()
+  },
+
   methods: {
     click (e: MouseEvent): void {
       this.$emit('click', e)
@@ -145,11 +149,13 @@ export default Vue.extend({
 
       this.$nextTick(() => {
         /* istanbul ignore else */
-        if (getObjectValueByPath(this.$refs.link, path)) {
+        if (!getObjectValueByPath(this.$refs.link, path) === this.isActive) {
           this.toggle()
         }
       })
     },
-    toggle: () => { /* noop */ },
+    toggle () {
+      this.isActive = !this.isActive
+    },
   },
 })
