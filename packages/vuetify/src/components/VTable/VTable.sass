@@ -6,8 +6,7 @@
 
 // Theme
 .v-table
-  background-color: rgb(var(--v-theme-surface))
-  color: rgb(var(--v-theme-on-surface))
+  @include tools.theme($table-theme...)
 
   .v-table-divider
     border-right: $table-border
@@ -38,20 +37,21 @@
 
   &.v-table--fixed-header
     thead th
-      background: rgb(var(--v-theme-surface))
+      background: $table-background
       box-shadow: inset 0 -1px 0 $table-border-color
 
   &.v-table--fixed-footer
     tfoot
       th,
       td
-        background: rgb(var(--v-theme-surface))
+        background: $table-background
         box-shadow: inset 0 1px 0 $table-border-color
 
 // Block
 .v-table
+  border-radius: inherit
   // Do not inherit line-height
-  line-height: 1.5
+  line-height: $table-line-height
   max-width: 100%
 
   > .v-table__wrapper
@@ -97,6 +97,7 @@
 
 // Elements
 .v-table__wrapper
+  border-radius: inherit
   overflow-x: auto
   overflow-y: hidden
 
