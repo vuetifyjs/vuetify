@@ -10,6 +10,9 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
+// Directives
+import { Ripple } from '@/directives/ripple'
+
 // Utility
 import { computed, defineComponent, ref } from 'vue'
 import { getUid, pick, useRender } from '@/util'
@@ -17,6 +20,8 @@ import { VIcon } from '..'
 
 export const VCheckbox = defineComponent({
   name: 'VCheckbox',
+
+  directives: { Ripple },
 
   inheritAttrs: false,
 
@@ -65,7 +70,7 @@ export const VCheckbox = defineComponent({
           class={[
             'v-checkbox',
             {
-              'v-field--focused': isFocused.value, // todo replace when ripple focus state in
+              'v-checkbox--focused': isFocused.value, // todo replace when ripple focus state in
             },
             themeClasses.value,
             validationClasses.value,
@@ -77,23 +82,30 @@ export const VCheckbox = defineComponent({
             default: () => {
               return (
                 <div class="v-checkbox__control">
-                  <div class="v-checkbox__input">
-                  <VIcon
-                    icon={ icon.value }
-                    onClick={ () => model.value = !model.value }
-                    color={ isValid.value || model.value ? props.color : undefined }
-                  />
+                  <div
+                    class="v-checkbox__input"
+                    v-ripple={[
+                      !isDisabled.value && !isReadonly.value,
+                      null,
+                      ['center', 'circle'],
+                    ]}
+                  >
+                    <VIcon
+                      icon={ icon.value }
+                      onClick={ () => model.value = !model.value }
+                      color={ isValid.value || model.value ? props.color : undefined }
+                    />
 
-                  <input
-                    v-model={ model.value }
-                    readonly={ isReadonly.value }
-                    disabled={ isDisabled.value }
-                    id={ id.value }
-                    onFocus={ () => (isFocused.value = true) }
-                    onBlur={ () => (isFocused.value = false) }
-                    type="checkbox"
-                    { ...restAttrs }
-                  />
+                    <input
+                      v-model={ model.value }
+                      readonly={ isReadonly.value }
+                      disabled={ isDisabled.value }
+                      id={ id.value }
+                      onFocus={ () => (isFocused.value = true) }
+                      onBlur={ () => (isFocused.value = false) }
+                      type="checkbox"
+                      { ...restAttrs }
+                    />
                   </div>
 
                   <VFieldLabel
