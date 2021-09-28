@@ -1,5 +1,7 @@
 @forward './variables'
+@use 'sass:map'
 @use '../../styles/settings'
+@use '../../styles/tools'
 @use './variables' as *
 
 .v-checkbox
@@ -23,6 +25,20 @@
     height: 100%
     opacity: 0
     cursor: pointer
+
+  &::before
+    @include tools.absolute()
+    border-radius: 100%
+    background-color: currentColor
+    opacity: 0
+    transition: opacity .2s ease-in-out
+    pointer-events: none
+
+  &:hover::before
+    opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
+
+  .v-checkbox--focus-visible &::before
+    opacity: calc(#{map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
 
 .v-checkbox__control
   align-items: center

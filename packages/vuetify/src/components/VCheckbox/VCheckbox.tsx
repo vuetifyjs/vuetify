@@ -2,10 +2,12 @@
 import './VCheckbox.sass'
 
 // Components
+import { VIcon } from '@/components/VIcon'
 import { VInput } from '@/components/VInput'
 import VFieldLabel from '@/components/VField/VFieldLabel'
 
 // Composables
+import { useTextColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeValidationProps, useValidation } from '@/composables/validation'
@@ -15,8 +17,7 @@ import { Ripple } from '@/directives/ripple'
 
 // Utility
 import { computed, defineComponent, ref } from 'vue'
-import { getUid, pick, useRender } from '@/util'
-import { VIcon } from '..'
+import { getUid, pick, SUPPORTS_FOCUS_VISIBLE, useRender } from '@/util'
 
 export const VCheckbox = defineComponent({
   name: 'VCheckbox',
@@ -52,6 +53,9 @@ export const VCheckbox = defineComponent({
     const { errorMessages, isDisabled, isReadonly, isValid, validationClasses } = useValidation(props, 'v-field')
     const model = useProxiedModel(props, 'modelValue')
     const uid = getUid()
+    const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
+      return isValid.value || model.value ? props.color : undefined
+    }))
 
     const icon = computed(() => {
       if (props.indeterminate) return props.indeterminateIcon
@@ -60,6 +64,22 @@ export const VCheckbox = defineComponent({
     })
     const id = computed(() => props.id || `input-${uid}`)
     const isFocused = ref(false)
+    const isFocusVisible = ref(false)
+
+    function onFocus (e: FocusEvent) {
+      isFocused.value = true
+      if (
+        !SUPPORTS_FOCUS_VISIBLE ||
+        (SUPPORTS_FOCUS_VISIBLE && (e.target as HTMLElement).matches(':focus-visible'))
+      ) {
+        isFocusVisible.value = true
+      }
+    }
+
+    function onBlur () {
+      isFocused.value = false
+      isFocusVisible.value = false
+    }
 
     useRender(() => {
       const [_, restAttrs] = pick(attrs, ['class'])
@@ -70,7 +90,8 @@ export const VCheckbox = defineComponent({
           class={[
             'v-checkbox',
             {
-              'v-checkbox--focused': isFocused.value, // todo replace when ripple focus state in
+              'v-checkbox--focused': isFocused.value,
+              'v-checkbox--focus-visible': isFocusVisible.value,
             },
             themeClasses.value,
             validationClasses.value,
@@ -83,7 +104,11 @@ export const VCheckbox = defineComponent({
               return (
                 <div class="v-checkbox__control">
                   <div
-                    class="v-checkbox__input"
+                    class={[
+                      'v-checkbox__input',
+                      textColorClasses.value,
+                    ]}
+                    style={ textColorStyles.value }
                     v-ripple={[
                       !isDisabled.value && !isReadonly.value,
                       null,
@@ -93,7 +118,6 @@ export const VCheckbox = defineComponent({
                     <VIcon
                       icon={ icon.value }
                       onClick={ () => model.value = !model.value }
-                      color={ isValid.value || model.value ? props.color : undefined }
                     />
 
                     <input
@@ -101,8 +125,8 @@ export const VCheckbox = defineComponent({
                       readonly={ isReadonly.value }
                       disabled={ isDisabled.value }
                       id={ id.value }
-                      onFocus={ () => (isFocused.value = true) }
-                      onBlur={ () => (isFocused.value = false) }
+                      onFocus={ onFocus }
+                      onBlur={ onBlur }
                       type="checkbox"
                       { ...restAttrs }
                     />
