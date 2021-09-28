@@ -1,3 +1,4 @@
+// Styles
 import './VTable.sass'
 
 // Composables
@@ -41,12 +42,19 @@ export default defineComponent({
         ]}
       >
         { slots.top?.() }
-        <div class="v-table__wrapper" style={{ height: convertToUnit(props.height) }}>
-          <table>
-            { slots.default?.() }
-          </table>
-        </div>
-        { slots.bottom?.()}
+
+        { slots.default && (
+          <div
+            class="v-table__wrapper"
+            style={{ height: convertToUnit(props.height) }}
+          >
+            <table>
+              { slots.default?.() }
+            </table>
+          </div>
+        ) }
+
+        { slots.bottom?.() }
       </props.tag>
     )
   },
