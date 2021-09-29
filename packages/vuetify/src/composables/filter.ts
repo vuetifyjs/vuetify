@@ -10,6 +10,7 @@ export type FilterFunction = typeof defaultFilter
 
 export interface FilterProps {
   filterFn?: FilterFunction
+  filterMode?: 'intersection' | 'union'
 }
 
 // Composables
@@ -22,11 +23,16 @@ export function defaultFilter (text: string, query?: string) {
 
 export const makeFilterProps = propsFactory({
   filterFn: Function as PropType<FilterFunction>,
+  filterMode: {
+    type: String as PropType<'intersection' | 'union'>,
+    default: 'intersection',
+  },
 }, 'filter')
 
 export function filterItems (
   items: any[],
   filterKeys: (string | string[]),
+  filterMode: 'intersection' | 'union' = 'intersection',
   query?: string,
   filter?: FilterFunction,
   filterKeyFns?: Record<string, FilterFunction>
@@ -36,18 +42,17 @@ export function filterItems (
   if (!query || !keys.length) return items
 
   const array: (typeof items) = []
+  const method = filterMode === 'intersection' ? 'some' : 'every'
 
   for (const item of items) {
-    for (const key of keys) {
+    const matched = keys[method](key => {
       const value = getPropertyFromItem(item, key, item)
       const handler = filterKeyFns?.[key] ?? filter ?? defaultFilter
 
-      if (handler(value, query)) {
-        array.push(item)
+      return handler(value, query)
+    })
 
-        break
-      }
-    }
+    if (matched) array.push(item)
   }
 
   return array
@@ -68,6 +73,7 @@ export function useFilter (
   const filteredItems = computed(() => filterItems(
     items.value,
     filterKeys,
+    props.filterMode,
     strQuery.value,
     props.filterFn,
     filterKeyFns,
