@@ -1,69 +1,23 @@
 <template>
-  <div v-if="inlineApi || name">
-    <v-row
-      class="mb-2"
-      justify="space-between"
-      no-gutters
-    >
-      <v-col
-        class="mt-2"
-        cols="12"
-        sm="5"
-        md="4"
-      >
-        <app-select
-          v-if="apiComponents.length > 1"
-          :value="selectedComponent"
-          icon="$mdiViewDashboardOutline"
-          :items="apiComponents"
-          @input="selectedComponent = $event"
-        />
-      </v-col>
-      <v-col
-        class="mt-2"
-        cols="12"
-        sm="5"
-        md="4"
-      >
-        <app-text-field
-          clearable
-          icon="$mdiMagnify"
-          label="Filter"
-          @input="filter = $event"
-        />
-      </v-col>
-    </v-row>
-    <v-row
-      v-for="(apiData, field) in apiComponent"
-      :key="field"
-      cols="12"
-      no-gutters
-    >
-      <v-col>
-        <app-heading
-          v-if="!hideHeader"
-          :id="`api-${field}`"
-          class="text-capitalize"
-          :content="$t(`api-headers.${field}`)"
-          :href="`#api-${field}`"
-          :level="name ? '2' : '3'"
-        />
-        <api-table
-          :api-data="apiData"
-          class="mb-4"
-          :field="field"
-          :filter="filter"
-          :page="name"
-        />
-      </v-col>
-    </v-row>
+  <div>
+    <div class="d-flex mb-2">
+      <app-text-field
+        clearable
+        icon="$mdiMagnify"
+        label="Filter"
+        @input="filter = $event"
+      />
+    </div>
+    <api-table
+      :api-data="apiData"
+      class="mb-4"
+      :field="section"
+      :filter="filter"
+    />
   </div>
 </template>
 
 <script>
-  import { get, sync } from 'vuex-pathify'
-  import pageToApi from '@/data/page-to-api'
-
   const getApi = name => {
     return import(
       /* webpackChunkName: "api-data" */
@@ -76,65 +30,27 @@
     name: 'ApiSection',
 
     props: {
-      hideHeader: Boolean,
       name: String,
-      page: String,
       section: String,
     },
 
     data: () => ({
-      apiComponents: [],
-      selectedComponent: {},
       filter: null,
+      apiData: [],
     }),
 
-    computed: {
-      inlineApi: get('user/api'),
-      toc: sync('pages/toc'),
-      apiComponent () {
-        return Object.keys(this.selectedComponent)
-          .filter(key => this.section ? this.section === key : !['component', 'mixins', 'name'].includes(key))
-          .reduce((obj, key) => {
-            if (this.selectedComponent[key].length) {
-              obj[key] = this.selectedComponent[key]
-            }
-            return obj
-          }, {})
-      },
-    },
-
     async created () {
-      const components = this.name ? [this.name] : pageToApi[this.page] || []
+      try {
+        const api = (await getApi(this.name)).default
 
-      if (!components.length) {
-        throw new Error(`API for ${this.name || this.page} does not exist`)
-      }
+        if (!api[this.section]) {
+          throw new Error(`API section "${this.section}" for "${this.name}" does not exist`)
+        }
 
-      for (const component of components) {
-        this.apiComponents.push({
-          text: component,
-          value: (await getApi(component)).default,
-        })
-      }
-      this.selectedComponent = this.apiComponents[0].value
-      if (this.name && !this.section) {
-        this.updateToc()
+        this.apiData = api[this.section] || []
+      } catch (err) {
+        console.error(err)
       }
     },
-
-    methods: {
-      updateToc () {
-        const headers = Object.keys(this.apiComponent).reduce((acc, header) => {
-          acc.push({
-            level: 2,
-            text: this.$t(`api-headers.${header}`),
-            to: `#api-${header}`,
-          })
-          return acc
-        }, [])
-        this.toc.push(...headers)
-      },
-    },
-
   }
 </script>

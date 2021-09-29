@@ -26,7 +26,11 @@ function checkEvent (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDire
   // level of introspection as to _what_ we're clicking. We want to check to see if
   // our target is the shadowroot parent container, and if it is, ignore.
   const root = attachedRoot(el)
-  if (root instanceof ShadowRoot && root.host === e.target) return false
+  if (
+    typeof ShadowRoot !== 'undefined' &&
+    root instanceof ShadowRoot &&
+    root.host === e.target
+  ) return false
 
   // Check if additional elements were passed to be included in check
   // (click must be outside all included elements, if any)
@@ -59,7 +63,7 @@ function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirec
 function handleShadow (el: HTMLElement, callback: Function): void {
   const root = attachedRoot(el)
 
-  callback(document.body)
+  callback(document)
 
   if (root instanceof ShadowRoot) {
     callback(root)

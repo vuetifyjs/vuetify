@@ -28,7 +28,7 @@ A calendar has a type and a value which determines what type of calendar is show
 - [v-calendar-monthly](/api/v-calendar-monthly)
 - [v-calendar-weekly](/api/v-calendar-weekly)
 
-<api-section page="components/calendars" />
+<inline-api page="components/calendars" />
 
 <!-- ## Sub-components
 

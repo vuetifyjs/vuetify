@@ -25,6 +25,7 @@ import {
   convertToUnit,
   keyCodes,
 } from '../../util/helpers'
+import goTo from '../../services/goto'
 
 // Types
 import { VNode, VNodeDirective, VNodeData } from 'vue'
@@ -177,7 +178,22 @@ export default baseMixins.extend({
       if (next in this.tiles) {
         const tile = this.tiles[next]
         tile.classList.add('v-list-item--highlighted')
-        this.$refs.content.scrollTop = tile.offsetTop - tile.clientHeight
+        const scrollTop = this.$refs.content.scrollTop
+        const contentHeight = this.$refs.content.clientHeight
+
+        if (scrollTop > tile.offsetTop - 8) {
+          goTo(tile.offsetTop - tile.clientHeight, {
+            appOffset: false,
+            duration: 300,
+            container: this.$refs.content,
+          })
+        } else if (scrollTop + contentHeight < tile.offsetTop + tile.clientHeight + 8) {
+          goTo(tile.offsetTop - contentHeight + tile.clientHeight * 2, {
+            appOffset: false,
+            duration: 300,
+            container: this.$refs.content,
+          })
+        }
       }
 
       prev in this.tiles &&

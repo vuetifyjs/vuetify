@@ -118,7 +118,7 @@ export default VTextField.extend({
       return this.isDirty
     },
     text (): string[] {
-      if (!this.isDirty && (this.isFocused || !this.hasLabel)) return [this.placeholder]
+      if (!this.isDirty && (this.persistentPlaceholder || this.isFocused || !this.hasLabel)) return [this.placeholder]
 
       return this.internalArrayValue.map((file: File) => {
         const {

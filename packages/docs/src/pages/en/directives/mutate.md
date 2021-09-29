@@ -24,7 +24,7 @@ By default the `v-mutate` directive will enable all available options in the [Mu
 
 - [v-mutate](/api/v-mutate)
 
-<api-section page="directives/mutate" />
+<inline-api page="directives/mutate" />
 
 ## Examples
 

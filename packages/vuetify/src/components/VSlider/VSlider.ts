@@ -145,7 +145,9 @@ export default mixins<options &
       return this.step > 0 ? parseFloat(this.step) : 0
     },
     inputWidth (): number {
-      return (this.roundValue(this.internalValue) - this.minValue) / (this.maxValue - this.minValue) * 100
+      const inputWidth = (this.roundValue(this.internalValue) - this.minValue) / (this.maxValue - this.minValue) * 100
+
+      return isNaN(inputWidth) ? 0 : inputWidth
     },
     trackFillStyles (): Partial<CSSStyleDeclaration> {
       const startDir = this.vertical ? 'bottom' : 'left'
@@ -386,13 +388,12 @@ export default mixins<options &
         attrs: {
           role: 'slider',
           tabindex: this.isDisabled ? -1 : this.$attrs.tabindex ? this.$attrs.tabindex : 0,
-          'aria-label': this.label,
+          'aria-label': this.$attrs['aria-label'] || this.label,
           'aria-valuemin': this.min,
           'aria-valuemax': this.max,
           'aria-valuenow': this.internalValue,
           'aria-readonly': String(this.isReadonly),
           'aria-orientation': this.vertical ? 'vertical' : 'horizontal',
-          ...this.$attrs,
         },
         on: {
           focus: onFocus,

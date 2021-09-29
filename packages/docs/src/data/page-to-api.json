@@ -2,7 +2,8 @@
   "components/alerts": ["v-alert"],
   "components/app-bars": [
     "v-app-bar",
-    "v-app-bar-nav-icon"
+    "v-app-bar-nav-icon",
+    "v-app-bar-title"
   ],
   "components/application": [
     "v-app",

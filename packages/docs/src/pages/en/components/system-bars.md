@@ -25,7 +25,7 @@ The `v-system-bar` component can be used for displaying statuses to the user. It
 
 - [v-system-bar](/api/v-system-bar)
 
-<api-section page="components/system-bars" />
+<inline-api page="components/system-bars" />
 
 ## Examples
 
