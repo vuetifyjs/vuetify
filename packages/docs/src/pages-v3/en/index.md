@@ -4,13 +4,14 @@ meta:
   - name: Vuetify
 ---
 
-<home-vuetify-logo size="40vw" />
+<home-vuetify-logo size="300px" />
 
 <br>
 
 # Material Design Framework
 
 Vuetify is a Vue UI Library with beautifully handcrafted Material Components. No design skills required — everything you need to create amazing applications is at your fingertips.
+{style="max-width: 568px" .mx-auto}
 
 <br>
 
@@ -28,3 +29,5 @@ The continued development and maintenance of Vuetify
 is made possible by these generous sponsors:
 
 <br>
+
+<home-sponsors />

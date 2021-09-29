@@ -1,6 +1,7 @@
 import path from 'path'
-import { defineConfig, Plugin } from 'vite'
+import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
+import ViteFonts from 'vite-plugin-fonts'
 import Pages from 'vite-plugin-pages'
 import Layouts from 'vite-plugin-vue-layouts'
 import Components from 'unplugin-vue-components/vite'
@@ -97,7 +98,20 @@ export default defineConfig({
       // 'vuetify/lib/': `${resolve('../vuetify/lib')}/`,
     },
   },
+  define: {
+    'process.env': {}, // This is so that 3rd party packages don't crap out
+  },
   plugins: [
+    // https://github.com/stafyniaksacha/vite-plugin-fonts
+    ViteFonts({
+      google: {
+        families: [{
+          name: 'Roboto',
+          styles: 'wght@100;300;400;500;700;900',
+        }],
+      },
+    }),
+
     // https://github.com/antfu/unplugin-vue-components
     Components({
       deep: true,
@@ -115,7 +129,7 @@ export default defineConfig({
 
     // https://github.com/antfu/vite-plugin-md
     Markdown({
-      wrapperClasses: 'prose prose-sm m-auto text-left',
+      wrapperClasses: 'prose prose-sm m-auto',
       headEnabled: true,
       markdownItSetup: configureMarkdown,
     }),

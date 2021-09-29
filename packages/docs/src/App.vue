@@ -34,3 +34,15 @@
     },
   })
 </script>
+
+<style lang="sass">
+  // This should be in vuetify?
+  a
+    text-decoration: none
+
+  p
+    margin-bottom: 1rem
+
+    a, a:visited
+      color: rgb(var(--v-theme-primary))
+</style>

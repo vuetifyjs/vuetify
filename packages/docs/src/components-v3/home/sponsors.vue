@@ -1,4 +1,3 @@
-
 <template>
   <v-sheet
     v-if="sponsors.length"
@@ -22,9 +21,9 @@
           class="d-flex align-center justify-center"
           cols="auto"
         >
-          <sponsor
-            :comfortable="comfortable || Number(sponsor.metadata.tier) === 2"
-            :compact="compact || Number(sponsor.metadata.tier) > 2"
+          <home-sponsor
+            :comfortable="sponsor.metadata.tier === 2"
+            :compact="sponsor.metadata.tier > 2"
             :sponsor="sponsor"
             v-bind="$attrs"
           />
@@ -32,37 +31,29 @@
       </v-row>
     </v-responsive>
 
-    <sponsor-link large />
+    <home-sponsor-link large />
   </v-sheet>
 </template>
 
-<script lant="ts">
+<script lang="ts">
   // Utilities
-  import { computed, defineComponent } from 'vue'
-  import { useSponsorStore } from './../../store-v3/sponsors'
-
-  // Mixins
-  // import Density from '@/mixins/density'
+  import { computed, defineComponent, onBeforeMount } from 'vue'
+  import { useSponsorsStore } from './../../store-v3/sponsors'
 
   export default defineComponent({
     name: 'HomeSponsors',
 
-    // mixins: [Density],
-
     setup () {
-      // stores
-      const sponsorStore = useSponsorStore()
+      const sponsorStore = useSponsorsStore()
 
-      // data
-      const { byTier } = sponsorStore
+      onBeforeMount(async () => sponsorStore.load())
 
       const sponsors = computed(() => {
-        return Object.values(byTier)
-          .reduce((tiers, tier) => tiers.concat(tier), [])
+        return Object.values(sponsorStore.byTier)
+          .reduce((tiers, tier) => tiers.concat(tier), [] as any[])
       })
 
       return {
-        byTier,
         sponsors,
       }
     },

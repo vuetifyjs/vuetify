@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <home-app-bar />
+    <app-bar />
 
     <home-view />
 

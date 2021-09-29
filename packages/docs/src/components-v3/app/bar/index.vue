@@ -4,8 +4,9 @@
     :color="dark ? undefined : 'white'"
     app
     class="v-bar--underline"
+    elevation="1"
   >
-    <home-app-bar-logo :alt="lgAndUp" />
+    <app-bar-logo :alt="lgAndUp" />
 
     <v-spacer />
 
@@ -22,7 +23,7 @@
   import { useDisplay } from 'vuetify/lib/composables/display.mjs'
 
   export default defineComponent({
-    name: 'HomeAppBar',
+    name: 'AppBar',
 
     setup () {
       const { lgAndUp } = useDisplay()

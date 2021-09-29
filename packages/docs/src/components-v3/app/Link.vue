@@ -5,13 +5,19 @@
     v-bind="attrs"
     @click="onClick"
   >
+    <template v-if="iconProps && isSamePage">
+      <VIcon v-bind="iconProps" />
+    </template>
     <slot />
+    <template v-if="iconProps && !isSamePage">
+      <VIcon v-bind="iconProps" />
+    </template>
   </component>
 </template>
 
 <script lang="ts">
   // Components
-  import { VIcon } from 'vuetify/components'
+  // import { VIcon } from 'vuetify/components'
 
   import { computed } from 'vue'
 
@@ -123,12 +129,32 @@
         // this.$vuetify.goTo(this.href)
       }
 
+      const icon = computed(() => {
+        if (isSamePage.value) return 'mdi-pound'
+        if (isExternal.value) return 'mdi-open-in-new'
+        if (props.href) return 'mdi-page-next'
+
+        return null
+      })
+
+      const iconProps = computed(() => {
+        if (!icon.value) return null
+
+        return {
+          icon: icon.value,
+          class: `m${isSamePage.value ? 'r' : 'l'}-1`,
+          color: 'primary',
+          size: '.875rem',
+        }
+      })
+
       return {
         tag: computed(() => isExternal.value ? 'a' : 'router-link'),
         isExternal,
         isSamePage,
         onClick,
         attrs,
+        iconProps,
       }
     },
   }

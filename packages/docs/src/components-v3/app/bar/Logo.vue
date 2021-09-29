@@ -20,7 +20,7 @@
   import { useI18n } from 'vue-i18n'
 
   export default defineComponent({
-    name: 'VuetifyLogoAlt',
+    name: 'AppBarLogo',
 
     props: {
       alt: Boolean,
@@ -32,11 +32,7 @@
       // data
       const theme = 'light'
       const to = {
-        name: `${locale.value}-introduction-why-vuetify`,
-        params: {
-          category: 'introduction',
-          page: 'why-vuetify',
-        },
+        name: locale.value,
       }
 
       // computed

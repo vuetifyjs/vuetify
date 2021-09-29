@@ -10,6 +10,16 @@ export const useVuetify: VuetifyPlugin = ({ app }) => {
   const vuetify = createVuetify({
     components,
     directives,
+    theme: {
+      themes: {
+        light: {
+          colors: {
+            primary: '#1867c0',
+            'on-background': '#333333',
+          },
+        },
+      },
+    },
   })
   app.use(vuetify)
 }
