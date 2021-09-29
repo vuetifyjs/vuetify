@@ -7,10 +7,11 @@ import { computed } from 'vue'
 import type { PropType, Ref } from 'vue'
 
 export type FilterFunction = typeof defaultFilter
+export type FilterMode = 'intersection' | 'union'
 
 export interface FilterProps {
   filterFn?: FilterFunction
-  filterMode?: 'intersection' | 'union'
+  filterMode?: FilterMode
 }
 
 // Composables
@@ -24,30 +25,30 @@ export function defaultFilter (text: string, query?: string) {
 export const makeFilterProps = propsFactory({
   filterFn: Function as PropType<FilterFunction>,
   filterMode: {
-    type: String as PropType<'intersection' | 'union'>,
+    type: String as PropType<FilterMode>,
     default: 'intersection',
   },
 }, 'filter')
 
 export function filterItems (
-  items: any[],
-  filterKeys: (string | string[]),
-  filterMode: 'intersection' | 'union' = 'intersection',
+  items: Record<string, any>[],
+  keys: string[],
   query?: string,
-  filter?: FilterFunction,
-  filterKeyFns?: Record<string, FilterFunction>
+  filter?: {
+    default?: FilterFunction
+    mode?: FilterMode
+    keyFilters?: Record<string, FilterFunction>
+  }
 ) {
-  const keys = wrapInArray(filterKeys)
-
   if (!query || !keys.length) return items
 
   const array: (typeof items) = []
-  const method = filterMode === 'intersection' ? 'some' : 'every'
+  const method = filter?.mode !== 'union' ? 'some' : 'every'
 
   for (const item of items) {
     const matched = keys[method](key => {
       const value = getPropertyFromItem(item, key, item)
-      const handler = filterKeyFns?.[key] ?? filter ?? defaultFilter
+      const handler = filter?.keyFilters?.[key] ?? filter?.default ?? defaultFilter
 
       return handler(value, query)
     })
@@ -61,9 +62,9 @@ export function filterItems (
 export function useFilter (
   props: FilterProps,
   items: Ref<any[]>,
-  filterKeys: (string | string[]),
+  keys: (string | string[]),
   query?: Ref<string>,
-  filterKeyFns?: Record<string, FilterFunction>
+  keyFilters?: Record<string, FilterFunction>
 ) {
   const strQuery = computed(() => (
     typeof query?.value !== 'string' &&
@@ -72,11 +73,13 @@ export function useFilter (
 
   const filteredItems = computed(() => filterItems(
     items.value,
-    filterKeys,
-    props.filterMode,
+    wrapInArray(keys),
     strQuery.value,
-    props.filterFn,
-    filterKeyFns,
+    {
+      default: props.filterFn,
+      mode: props.filterMode,
+      keyFilters,
+    },
   ))
 
   return { filteredItems }
