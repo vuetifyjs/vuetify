@@ -30,13 +30,13 @@ const VListGroupItems = defineComponent({
   },
 
   setup (props, { slots }) {
-    createList()
-    const depth = useDepth()
+    const parent = createList()
+    const depth = useDepth(parent.hasPrepend)
 
     return () => {
       return (
         <VExpandTransition>
-          <div class="v-list-group__items" style={{ '--v-list-depth': depth }} v-show={props.open}>
+          <div class="v-list-group__items" style={{ '--v-list-depth': depth.value }} v-show={props.open}>
             { renderItems(props, slots) }
           </div>
         </VExpandTransition>

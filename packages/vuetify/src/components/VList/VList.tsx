@@ -16,7 +16,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
 
 // Utilities
-import { inject, provide, ref, toRef } from 'vue'
+import { computed, inject, provide, ref, toRef } from 'vue'
 import { defineComponent, useRender } from '@/util'
 import { renderItems } from './utils'
 
@@ -24,12 +24,12 @@ import { renderItems } from './utils'
 import type { InjectionKey, Prop, Ref } from 'vue'
 import type { ListItem } from './utils'
 
-export const DepthKey: InjectionKey<number> = Symbol.for('vuetify:depth')
+export const DepthKey: InjectionKey<Ref<number>> = Symbol.for('vuetify:depth')
 
-export const useDepth = () => {
-  const parent = inject(DepthKey, -1)
+export const useDepth = (hasPrepend?: Ref<boolean>) => {
+  const parent = inject(DepthKey, ref(-1))
 
-  const depth = parent + 1
+  const depth = computed(() => parent.value + 1 + (hasPrepend?.value ? 1 : 0))
 
   provide(DepthKey, depth)
 
@@ -128,7 +128,7 @@ export const VList = defineComponent({
             backgroundColorStyles.value,
             dimensionStyles.value,
             {
-              '--v-list-depth': depth,
+              '--v-list-depth': depth.value,
             },
           ]}
         >
