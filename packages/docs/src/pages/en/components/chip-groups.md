@@ -26,6 +26,8 @@ Chip groups make it easy for users to select filtering options for more complex 
 - [v-chip-group](/api/v-chip-group)
 - [v-chip](/api/v-chip)
 
+<inline-api page="components/chip-groups" />
+
 ## Examples
 
 ### Props

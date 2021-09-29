@@ -25,6 +25,8 @@ By default, progress circular uses the applications secondary color.
 
 - [v-progress-circular](/api/v-progress-circular)
 
+<inline-api page="components/progress-circular" />
+
 ## Examples
 
 ### Props

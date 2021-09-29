@@ -19,6 +19,8 @@ const state = () => {
   }
 
   return merge({
+    api: false,
+    pwaRefresh: true,
     drawer: {
       alphabetical: false,
       mini: false,

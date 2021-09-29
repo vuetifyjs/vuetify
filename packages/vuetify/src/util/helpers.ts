@@ -13,10 +13,17 @@ export function createSimpleFunctional (
 
     functional: true,
 
-    render (h, { data, children }): VNode {
+    props: {
+      tag: {
+        type: String,
+        default: el,
+      },
+    },
+
+    render (h, { data, props, children }): VNode {
       data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
 
-      return h(el, data, children)
+      return h(props.tag, data, children)
     },
   })
 }
@@ -37,7 +44,7 @@ export function addOnceEventListener (
   cb: (event: Event) => void,
   options: boolean | AddEventListenerOptions = false
 ): void {
-  var once = (event: Event) => {
+  const once = (event: Event) => {
     cb(event)
     el.removeEventListener(eventName, once, options)
   }
@@ -288,7 +295,7 @@ export function groupItems<T extends any = any> (
   const key = groupBy[0]
   const groups: ItemGroup<T>[] = []
   let current
-  for (var i = 0; i < items.length; i++) {
+  for (let i = 0; i < items.length; i++) {
     const item = items[i]
     const val = getObjectValueByPath(item, key, null)
     if (current !== val) {
@@ -337,6 +344,11 @@ export function sortItems<T extends any = any> (
       // Check if both cannot be evaluated
       if (sortA === null && sortB === null) {
         continue
+      }
+
+      // Dates should be compared numerically
+      if (sortA instanceof Date && sortB instanceof Date) {
+        return sortA.getTime() - sortB.getTime()
       }
 
       [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())

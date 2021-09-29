@@ -76,16 +76,16 @@
 
   fieldset,
   .v-input__control
-    color: inherit
+    color: currentColor
 
   &.v-input--has-state
     .v-input__control > .v-text-field__details > .v-counter
-      color: inherit
+      color: currentColor
 
   &.v-input--is-disabled
     .v-input__control > .v-text-field__details > .v-counter,
     .v-input__control > .v-text-field__details > .v-messages
-      color: inherit
+      color: currentColor
 
   &.v-input--dense
     padding-top: 0
@@ -403,8 +403,8 @@
       position: absolute
       right: 0
       top: $text-field-outlined-fieldset-top
-      transition-duration: 0.3s
-      transition-property: color, border-width
+      transition-duration: 0.15s
+      transition-property: color
       transition-timing-function: map-get($transition, 'fast-in-fast-out')
 
       +ltr()

@@ -23,6 +23,8 @@ Select fields components are used for collecting user provided information from 
 
 - [v-select](/api/v-select)
 
+<inline-api page="components/selects" />
+
 ## Caveats
 
 <alert type="info">

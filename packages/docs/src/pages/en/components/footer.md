@@ -25,6 +25,8 @@ The `v-footer` component in its simplest form is a container.
 
 - [v-footer](/api/v-footer)
 
+<inline-api page="components/footer" />
+
 ## Examples
 
 ### Props

@@ -23,9 +23,10 @@
     <ul class="mb-6">
       <router-link
         v-for="({ to, level, text }, i) in toc"
-        :key="text"
+        :key="to"
         v-slot="{ href, isActive }"
         :to="to"
+        custom
       >
         <li
           :class="{

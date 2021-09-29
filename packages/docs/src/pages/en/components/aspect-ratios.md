@@ -25,4 +25,6 @@ Specify a custom aspect-ratio
 
 - [v-responsive](/api/v-responsive)
 
+<inline-api page="components/aspect-ratios" />
+
 <backmatter />

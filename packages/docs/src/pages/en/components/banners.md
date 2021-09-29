@@ -25,6 +25,8 @@ Banners can have 1-2 lines of text, actions and icon.
 
 - [v-banner](/api/v-banner)
 
+<inline-api page="components/banners" />
+
 ## Examples
 
 ### Props

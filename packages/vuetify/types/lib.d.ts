@@ -368,3 +368,9 @@ declare module 'vuetify/lib/directives' {
     Touch,
   }
 }
+
+declare module 'vuetify/lib/services/goto' {
+  import { GoToOptions, VuetifyGoToTarget } from 'vuetify/types/services/goto'
+
+  export default function goTo(target: VuetifyGoToTarget, options?: Partial<GoToOptions>): Promise<number>
+}

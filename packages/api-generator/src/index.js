@@ -204,15 +204,9 @@ const getCompleteApi = locales => {
   ].sort((a, b) => a.name.localeCompare(b.name))
 }
 
-const getHeaderLocale = locale => {
-  const { headers } = loadLocale('generic', locale)
-  return headers || {}
-}
-
 module.exports = {
   getApi,
   getCompleteApi,
   getComponentsApi,
   getDirectivesApi,
-  getHeaderLocale,
 }
