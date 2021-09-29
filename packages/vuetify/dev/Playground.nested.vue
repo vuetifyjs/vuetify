@@ -5,7 +5,12 @@
       <v-list :items="loadedItems" :open-strategy="loadItems" :opened="opened" />
 
       <h2>custom ctrl + click open strategy</h2>
-      <v-list :items="listItems" :open-strategy="openStrategyFn" />
+      <v-list :items="listItems" :open-strategy="openStrategyFn" density="compact">
+        <template #prepend v-if="useSlot">
+          foo
+        </template>
+      </v-list>
+      <v-btn @click="doStuff">click me</v-btn>
 
       <h2>router integration</h2>
       <v-list v-model:selected="test" v-model:opened="open">
@@ -13,7 +18,7 @@
         <v-list-item active-color="primary" to="/page1" title="bar" />
         <v-list-group>
           <template #header="props">
-            <v-list-item active-color="primary" prepend-icon="$close" v-bind="props" :active="$route.path.startsWith('/nested')" title="header" variant="plain" />
+            <v-list-item active-color="primary" v-bind="props" :active="$route.path.startsWith('/nested')" title="header" />
           </template>
           <v-list-item active-color="primary" to="/nested/page1" title="baz" />
           <v-list-item active-color="primary" to="/nested/page2" title="bro" />
@@ -110,6 +115,7 @@
   export default {
     name: 'Playground',
     data: () => ({
+      useSlot: false,
       selected: [],
       selectStrategy: 'leaf',
       openStrategy: 'multiple',
@@ -127,12 +133,17 @@
           value: 'foo',
         },
         {
+          title: 'Bar',
+          value: 'bar',
+          prependIcon: '$close',
+        },
+        {
           title: 'Group 1',
           children: [
             {
               title: 'Child 1',
               subtitle: 'Subtitle',
-              value: 'child1',
+              // value: 'child1',
             },
             {
               title: 'Child 2',
@@ -141,19 +152,20 @@
                 {
                   title: 'Grandchild 1',
                   value: 'grandchild1',
+                  // prependIcon: '$collapse',
                 },
               ],
             },
           ],
         },
-        {
-          title: 'Group 2',
-          children: [
-            {
-              title: 'Child 3',
-            },
-          ],
-        },
+        // {
+        //   title: 'Group 2',
+        //   children: [
+        //     {
+        //       title: 'Child 3',
+        //     },
+        //   ],
+        // },
       ],
       items: [
         {
@@ -285,6 +297,13 @@
         }
         // this.$refs.listRef.openParents(['a', 'g'])
         // this.openStuff = ['a', 'g']
+      },
+      doStuff () {
+        // this.listItems = this.listItems.map((item, i) => i === 0 ? ({
+        //   ...item,
+        //   prependIcon: '$expand',
+        // }) : item)
+        this.useSlot = !this.useSlot
       },
     },
   }
