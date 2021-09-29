@@ -40,6 +40,7 @@ import {
 // Types
 import type { PropType } from 'vue'
 import type { BackgroundColorData } from '@/composables/color'
+import { useStack } from '@/composables/stack'
 
 interface ScrimProps {
   [key: string]: unknown
@@ -111,6 +112,7 @@ export default defineComponent({
     }))
     const { activatorEl, activatorEvents } = useActivator(props, isActive)
     const { dimensionStyles } = useDimension(props)
+    const { isTop } = useStack(isActive)
 
     const contentEl = ref<HTMLElement>()
     const { contentStyles, updatePosition } = usePositionStrategies(props, {
@@ -133,11 +135,19 @@ export default defineComponent({
     }
 
     function closeConditional () {
-      return isActive.value
+      return isActive.value && isTop.value
     }
 
+    watch(isActive, val => {
+      if (val) {
+        window.addEventListener('keydown', onKeydown)
+      } else {
+        window.removeEventListener('keydown', onKeydown)
+      }
+    }, { immediate: true })
+
     function onKeydown (e: KeyboardEvent) {
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' && isTop.value) {
         if (!props.persistent) {
           isActive.value = false
         } else animateClick()
@@ -145,10 +155,13 @@ export default defineComponent({
     }
 
     useBackButton(next => {
-      next(!isActive.value)
-
-      if (!props.persistent) isActive.value = false
-      else animateClick()
+      if (isTop.value && isActive.value) {
+        next(false)
+        if (!props.persistent) isActive.value = false
+        else animateClick()
+      } else {
+        next()
+      }
     })
 
     const root = ref()
@@ -227,7 +240,6 @@ export default defineComponent({
                     dimensionStyles.value,
                     contentStyles.value,
                   ]}
-                  onKeydown={ onKeydown }
                 >
                   { slots.default?.({ isActive }) }
                 </div>
