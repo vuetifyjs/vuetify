@@ -18,6 +18,8 @@
 </template>
 
 <script>
+  import { ref } from 'vue'
+
   const getApi = name => {
     return import(`../../api/data/${name}.json`)
   }
@@ -28,19 +30,28 @@
       name: String,
       section: String,
     },
-    data: () => ({
-      filter: null,
-      apiData: [],
-    }),
-    async created () {
-      try {
-        const api = (await getApi(this.name)).default
-        if (!api[this.section]) {
-          throw new Error(`API section "${this.section}" for "${this.name}" does not exist`)
+    setup (props) {
+      const apiData = ref()
+
+      async function fetchApiData () {
+        if (apiData.value) return
+        console.log('fetching data')
+        try {
+          const api = (await getApi(props.name)).default
+          if (!api[props.section]) {
+            throw new Error(`API section "${props.section}" for "${props.name}" does not exist`)
+          }
+          apiData.value = api[props.section] || []
+        } catch (err) {
+          console.error(err)
         }
-        this.apiData = api[this.section] || []
-      } catch (err) {
-        console.error(err)
+      }
+
+      fetchApiData()
+
+      return {
+        filter: ref(),
+        apiData,
       }
     },
   }

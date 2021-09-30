@@ -18,9 +18,16 @@
 <script lang="ts">
   import { markRaw, ref } from 'vue'
 
+  const getExample = (component: string, example: string) => {
+    return import(`../../examples/${component}/${example}.vue`)
+  }
+
   export default {
     props: {
-      file: String,
+      file: {
+        type: String,
+        required: true,
+      },
     },
 
     setup (props) {
@@ -29,10 +36,15 @@
       const ExampleComponent = ref()
 
       const importExample = async () => {
-        console.log('importing', props.file)
-        const template = await import(`../../examples/${props.file}.vue`)
-        ExampleComponent.value = markRaw(template.default)
-        isLoaded.value = true
+        try {
+          console.log('importing', props.file)
+          const [component, example] = props.file.split('/')
+          const template = await getExample(component, example)
+          ExampleComponent.value = markRaw(template.default)
+          isLoaded.value = true
+        } catch (e) {
+          console.error(e)
+        }
       }
 
       const toggleTheme = () => theme.value = theme.value === 'light' ? 'dark' : 'light'
