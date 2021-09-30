@@ -51,7 +51,7 @@ function genHeader (component) {
   const header = [
     genFrontMatter(component),
     `# ${component} API`,
-    '<entry-ad />',
+    // '<entry-ad />', TODO: enable when component exists
   ]
 
   return `${header.join('\n\n')}\n\n`
@@ -59,7 +59,7 @@ function genHeader (component) {
 
 function genFooter () {
   const footer = [
-    '<backmatter />',
+    // '<backmatter />', TODO: enable when component exists
   ]
 
   return `${footer.join('\n\n')}\n`
