@@ -58,9 +58,9 @@ $container-padding-x: $grid-gutter / 2 !default;
 $grid-gutters: () !default;
 $grid-gutters: map-deep-merge(
   (
-    'xs': $grid-gutter / 12,
-    'sm': $grid-gutter / 6,
-    'md': $grid-gutter / 3,
+    'xs': math.div($grid-gutter, 3),
+    'sm': math.div($grid-gutter, 3),
+    'md': math.div($grid-gutter, 3),
     'lg': $grid-gutter * 2/3,
     'xl': $grid-gutter
   ),
