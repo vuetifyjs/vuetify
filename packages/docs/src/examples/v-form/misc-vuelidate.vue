@@ -48,22 +48,22 @@
 </template>
 
 <script>
-  import { validationMixin } from 'vuelidate'
-  import { required, maxLength, email } from 'vuelidate/lib/validators'
+  // import { validationMixin } from 'vuelidate'
+  // import { required, maxLength, email } from 'vuelidate/lib/validators'
 
   export default {
-    mixins: [validationMixin],
+    // mixins: [validationMixin],
 
-    validations: {
-      name: { required, maxLength: maxLength(10) },
-      email: { required, email },
-      select: { required },
-      checkbox: {
-        checked (val) {
-          return val
-        },
-      },
-    },
+    // validations: {
+    //   name: { required, maxLength: maxLength(10) },
+    //   email: { required, email },
+    //   select: { required },
+    //   checkbox: {
+    //     checked (val) {
+    //       return val
+    //     },
+    //   },
+    // },
 
     data: () => ({
       name: '',
@@ -120,20 +120,19 @@
       },
     },
   }
+  // <codepen-resources lang="json">
+  //   {
+  //     "js": [
+  //       "https://cdn.jsdelivr.net/npm/vuelidate/dist/vuelidate.min.js",
+  //       "https://cdn.jsdelivr.net/npm/vuelidate/dist/validators.min.js"
+  //     ]
+  //   }
+  // </codepen-resources>
+
+  // <codepen-additional>
+  //   const { required, maxLength, email } = validators
+  //   const validationMixin = vuelidate.validationMixin
+
+  //   Vue.use(vuelidate.default)
+  // </codepen-additional>
 </script>
-
-<codepen-resources lang="json">
-  {
-    "js": [
-      "https://cdn.jsdelivr.net/npm/vuelidate/dist/vuelidate.min.js",
-      "https://cdn.jsdelivr.net/npm/vuelidate/dist/validators.min.js"
-    ]
-  }
-</codepen-resources>
-
-<codepen-additional>
-  const { required, maxLength, email } = validators
-  const validationMixin = vuelidate.validationMixin
-
-  Vue.use(vuelidate.default)
-</codepen-additional>
