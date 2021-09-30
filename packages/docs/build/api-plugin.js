@@ -103,7 +103,7 @@ function writeData (componentName, componentApi) {
     fs.mkdirSync(resolve(folder), { recursive: true })
   }
 
-  fs.writeFileSync(resolve(`${folder}/${componentName}.js`), `module.exports = ${JSON.stringify(componentApi, null, 2)}`)
+  fs.writeFileSync(resolve(`${folder}/${componentName}.json`), JSON.stringify(componentApi, null, 2))
 }
 
 function generateFiles () {
