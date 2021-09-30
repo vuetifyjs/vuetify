@@ -1,5 +1,5 @@
 // Utilities
-import { defaultFilter, useFilter } from '../filter'
+import { defaultFilter, filterItems, useFilter } from '../filter'
 import { describe, expect, it } from '@jest/globals'
 import { ref } from 'vue'
 
@@ -19,6 +19,38 @@ describe('filter.ts', () => {
     })
   })
 
+  describe('filterItems', () => {
+    const items = Array.from({ length: 5 }, (v, k) => ({
+      title: `Foo-${k}`,
+      value: `fizz-${k}`,
+    }))
+
+    it.each([
+      [['title'], 'foo', 5],
+      [['title', 'value'], 'fizz', 5],
+      [['title', 'value'], 'foo-0', 1],
+    ])('should filter items by intersection with %s keys with query %s', (keys, query, expected) => {
+      expect(filterItems(items, query, keys)).toHaveLength(expected)
+    })
+
+    it.each([
+      [['title'], 'foo', 5],
+      [['title', 'value'], 'fizz', 0],
+      [['title', 'value'], 'foo-0', 0],
+      [['title', 'value'], '0', 1],
+    ])('should filter items by union with %s keys with query %s', (keys, query, expected) => {
+      expect(filterItems(items, query, keys, { mode: 'union' })).toHaveLength(expected)
+    })
+
+    it('should filter an array of strings', () => {
+      const items = Array.from({ length: 50 }, (v, k) => `item-${k}`)
+
+      expect(filterItems(items, 'item-2')).toHaveLength(11)
+      expect(filterItems(items, 'item-29')).toHaveLength(1)
+      expect(filterItems(items, 'item')).toHaveLength(50)
+    })
+  })
+
   describe('useFilter', () => {
     const items = ref(Array.from({ length: 50 }, (v, k) => `item-${k}`))
 
@@ -31,13 +63,13 @@ describe('filter.ts', () => {
       ['14', 1],
       ['foo', 0],
     ])('should return a array of filtered items from value %s', (text: any, expected: number) => {
-      const { filtered } = useFilter({}, items, ref(text))
+      const { filteredItems } = useFilter({}, items, ref(text))
 
-      expect(filtered.value).toHaveLength(expected)
+      expect(filteredItems.value).toHaveLength(expected)
     })
 
     it('should accept a custom filter function', () => {
-      function filterFn (item: Dictionary<string>, query?: string) {
+      function filterFn (text: string, query?: string, item?: any) {
         if (typeof query !== 'string') return true
 
         return item.text.toLocaleLowerCase().includes(query.toLocaleLowerCase())
@@ -49,17 +81,17 @@ describe('filter.ts', () => {
         { text: 'fizz' },
         { text: 'buzz' },
       ])
-      const { filtered } = useFilter({ filterFn }, items, query)
+      const { filteredItems } = useFilter({ filterFn }, items, query, ['text'])
 
-      expect(filtered.value).toHaveLength(2)
+      expect(filteredItems.value).toHaveLength(2)
 
       query.value = 'foo'
 
-      expect(filtered.value).toHaveLength(1)
+      expect(filteredItems.value).toHaveLength(1)
 
       items.value.push({ text: 'foobar' })
 
-      expect(filtered.value).toHaveLength(2)
+      expect(filteredItems.value).toHaveLength(2)
     })
   })
 })

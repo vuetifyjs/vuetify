@@ -31,27 +31,35 @@ export const makeFilterProps = propsFactory({
 }, 'filter')
 
 export function filterItems (
-  items: Record<string, any>[],
-  keys: string[],
+  items: (Record<string, any> | string)[],
   query?: string,
+  keys?: string[],
   filter?: {
     default?: FilterFunction
     mode?: FilterMode
     keyFilters?: Record<string, FilterFunction>
   }
 ) {
-  if (!query || !keys.length) return items
+  if (!query) return items
 
   const array: (typeof items) = []
   const method = filter?.mode !== 'union' ? 'some' : 'every'
+  const filterFn = filter?.default ?? defaultFilter
 
   for (const item of items) {
-    const matched = keys[method](key => {
-      const value = getPropertyFromItem(item, key, item)
-      const handler = filter?.keyFilters?.[key] ?? filter?.default ?? defaultFilter
+    let matched = false
 
-      return handler(value, query, item)
-    })
+    /* istanbul ignore else */
+    if (typeof item === 'object' && keys?.length) {
+      matched = keys[method](key => {
+        const value = getPropertyFromItem(item, key, item)
+        const handler = filter?.keyFilters?.[key] ?? filterFn
+
+        return handler(value, query, item)
+      })
+    } else if (typeof item === 'string') {
+      matched = filterFn(item, query, item)
+    }
 
     if (matched) array.push(item)
   }
@@ -62,8 +70,8 @@ export function filterItems (
 export function useFilter (
   props: FilterProps,
   items: Ref<any[]>,
-  keys: (string | string[]),
   query?: Ref<string>,
+  keys?: (string | string[]),
   keyFilters?: Record<string, FilterFunction>
 ) {
   const strQuery = computed(() => (
@@ -73,8 +81,8 @@ export function useFilter (
 
   const filteredItems = computed(() => filterItems(
     items.value,
-    wrapInArray(keys),
     strQuery.value,
+    wrapInArray(keys),
     {
       default: props.filterFn,
       mode: props.filterMode,
