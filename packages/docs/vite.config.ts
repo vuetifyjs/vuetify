@@ -59,6 +59,13 @@ const configureMarkdown = (md: MarkdownIt) => {
 
 const md = configureMarkdown(new MarkdownIt())
 
+const ssrTransformCustomDirective = () => {
+  return {
+    props: [],
+    needRuntime: true,
+  }
+}
+
 const generateToc = (componentPath: string, md: MarkdownIt) => {
   const str = fs.readFileSync(path.resolve(componentPath.slice(1)), { encoding: 'utf-8' })
   const headings = []
@@ -182,6 +189,15 @@ export default defineConfig({
 
     Vue({
       include: [/\.vue$/, /\.md$/],
+      // https://github.com/vuejs/vue-next/issues/3298
+      template: {
+        ssr: true,
+        compilerOptions: {
+          directiveTransforms: {
+            ripple: ssrTransformCustomDirective,
+          },
+        },
+      },
     }),
 
     // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
