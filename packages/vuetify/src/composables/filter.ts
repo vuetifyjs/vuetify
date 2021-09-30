@@ -15,7 +15,7 @@ export interface FilterProps {
 }
 
 // Composables
-export function defaultFilter (text: string, query?: string) {
+export function defaultFilter (text: string, query?: string, item?: any) {
   if (typeof query !== 'string') return true
   if (typeof text !== 'string') return false
 
@@ -50,7 +50,7 @@ export function filterItems (
       const value = getPropertyFromItem(item, key, item)
       const handler = filter?.keyFilters?.[key] ?? filter?.default ?? defaultFilter
 
-      return handler(value, query)
+      return handler(value, query, item)
     })
 
     if (matched) array.push(item)
