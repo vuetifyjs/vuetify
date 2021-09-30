@@ -4,6 +4,8 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Alert: typeof import('./src/components-v3/Alert.vue')['default']
+    ApiLinks: typeof import('./src/components-v3/api/Links.vue')['default']
     ApiSection: typeof import('./src/components-v3/api/Section.vue')['default']
     ApiTable: typeof import('./src/components-v3/api/Table.vue')['default']
     AppBar: typeof import('./src/components-v3/app/bar/index.vue')['default']

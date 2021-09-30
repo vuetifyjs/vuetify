@@ -23,7 +23,7 @@ Alerts in their simplest form are a flat [sheets of paper](/components/sheets) t
 
 ## API
 
-- [v-alert](/api/v-alert)
+<api-links />
 
 <!-- <api-section page="components/alerts" /> -->
 

@@ -115,7 +115,7 @@ const generateLayers = (
 }
 
 // TODO: Remove undefined from layout and overlaps when vue typing for required: true prop is fixed
-export function createLayout (props: { layout?: string[], overlaps?: string[], fullHeight?: boolean }) {
+export function createLayout (props: { overlaps?: string[], fullHeight?: boolean }) {
   const registered = ref<string[]>([])
   const positions = new Map<string, Ref<Position>>()
   const layoutSizes = new Map<string, Ref<number | string>>()

@@ -40,6 +40,9 @@
   a
     text-decoration: none
 
+  ul
+    list-style-type: none
+
   p
     margin-bottom: 1rem
 
