@@ -11,7 +11,7 @@
   },
   "scripts": {
     "dev": "vite --port 3333 --open",
-    "build": "cross-env NODE_ENV=production vite-ssg build",
+    "build": "cross-env NODE_ENV=production yarn build:api && vite-ssg build",
     "preview": "vite preview",
     "preview-https": "serve dist",
     "build:modified": "node build/modified",
