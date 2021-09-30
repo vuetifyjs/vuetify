@@ -32,7 +32,6 @@ function addUnderlineRules (md: MarkdownIt) {
   const renderEm: Renderer.RenderRule = (tokens, idx, opts, env, self) => {
     const token = tokens[idx]
     if (token.markup === '_') {
-      console.log(token)
       token.tag = 'span'
 
       token.type === 'em_open' && token.attrSet('style', 'text-decoration: underline;')
