@@ -75,7 +75,7 @@ export const VListItem = defineComponent({
 
     onMounted(() => {
       if (link.isExactActive?.value && parent.value != null) {
-        root.open(parent.value, true, null)
+        root.open(parent.value, true)
       }
     })
 

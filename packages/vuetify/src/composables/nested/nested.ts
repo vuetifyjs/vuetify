@@ -1,6 +1,6 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { getUid, propsFactory } from '@/util'
-import { computed, inject, onBeforeUnmount, onMounted, provide, ref } from 'vue'
+import { computed, inject, onBeforeUnmount, provide, ref } from 'vue'
 import { multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import { classicSelectStrategy, independentSelectStrategy, leafSelectStrategy } from './selectStrategies'
 import { classicActiveStrategy } from './activeStrategies'
@@ -33,11 +33,11 @@ type NestedProvide = {
     active: Ref<Set<string>>
     selected: Ref<Map<string, 'on' | 'off' | 'indeterminate'>>
     selectedValues: Ref<string[]>
-    register: (...args: any) => void
-    unregister: (...args: any) => void
-    open: (...args: any) => void
-    select: (...args: any) => void
-    activate: (...args: any) => void
+    register: (id: string, parentId: string | null, isGroup?: boolean) => void
+    unregister: (id: string) => void
+    open: (id: string, value: boolean, event?: Event) => void
+    select: (id: string, value: boolean, event?: Event) => void
+    activate: (id: string, value: boolean, event?: Event) => void
   }
 }
 
@@ -122,7 +122,7 @@ export const useNested = (props: NestedProps) => {
     isUnmounted = true
   })
 
-  const nested = {
+  const nested: NestedProvide = {
     id: ref(null),
     root: {
       opened,
@@ -137,15 +137,16 @@ export const useNested = (props: NestedProps) => {
 
         return arr
       }),
-      register: (id: string, parentId: string, isGroup: boolean) => {
-        parents.value.set(id, parentId)
+      register: (id, parentId, isGroup) => {
+        parentId && parents.value.set(id, parentId)
+
         isGroup && children.value.set(id, [])
 
         if (parentId != null) {
           children.value.set(parentId, [...children.value.get(parentId) || [], id])
         }
       },
-      unregister: (id: string) => {
+      unregister: id => {
         if (isUnmounted) return
 
         children.value.delete(id)
@@ -159,38 +160,38 @@ export const useNested = (props: NestedProps) => {
         active.value.delete(id)
         selected.value.delete(id)
       },
-      open: (id: string, value: boolean, e?: Event) => {
+      open: (id, value, event) => {
         const newOpened = openStrategy.value({
           id,
           value,
           opened: new Set(opened.value),
           children: children.value,
           parents: parents.value,
-          event: e,
+          event,
         })
 
         newOpened && (opened.value = newOpened)
       },
-      select: (id: string, value: boolean, e?: Event) => {
+      select: (id, value, event) => {
         const newSelected = selectStrategy.value.select({
           id,
           value,
           selected: new Map(selected.value),
           children: children.value,
           parents: parents.value,
-          event: e,
+          event,
         })
 
         newSelected && (selected.value = newSelected)
       },
-      activate: (id: string, value: boolean, e?: Event) => {
+      activate: (id, value, event) => {
         const newActive = activeStrategy.value({
           id,
           value,
           active: new Set(active.value),
           children: children.value,
           parents: parents.value,
-          event: e,
+          event,
         })
 
         newActive && (active.value = newActive)
