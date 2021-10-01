@@ -1,11 +1,12 @@
 <template>
   <app-btn variant="text">
     {{ title }}
-    <icons-chevron-down />
+    <chevron-down />
 
     <app-menu
-      :items="items"
       min-width="180"
+      activator="parent"
+      :items="items"
     />
   </app-btn>
 </template>

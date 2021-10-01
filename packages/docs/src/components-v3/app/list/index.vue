@@ -41,17 +41,8 @@
 </template>
 
 <script>
-  // Components
-  import AppListGroup from './ListGroup.vue'
-  import AppListItem from './ListItem.vue'
-
   export default {
     name: 'AppList',
-
-    components: {
-      AppListGroup,
-      AppListItem,
-    },
 
     props: {
       items: {

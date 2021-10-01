@@ -1,5 +1,5 @@
 <template>
-  <v-card class="overflow-hidden">
+  <v-layout>
     <v-app-bar
       absolute
       color="indigo darken-2"
@@ -30,8 +30,9 @@
       id="scrolling-techniques"
       class="overflow-y-auto"
       max-height="600"
+      width="100%"
     >
       <v-container style="height: 1000px;"></v-container>
     </v-sheet>
-  </v-card>
+  </v-layout>
 </template>

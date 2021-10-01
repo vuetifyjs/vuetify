@@ -31,7 +31,7 @@
   }
 
   export default defineComponent({
-    name: 'AppHeading',
+    name: 'Heading',
 
     props: {
       content: String,

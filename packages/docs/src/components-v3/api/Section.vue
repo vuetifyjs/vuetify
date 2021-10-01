@@ -26,6 +26,7 @@
 
   export default {
     name: 'ApiSection',
+
     props: {
       name: String,
       section: String,

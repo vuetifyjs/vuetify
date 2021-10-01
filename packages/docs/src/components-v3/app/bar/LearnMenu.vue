@@ -1,9 +1,9 @@
 <template>
   <app-btn variant="text">
     {{ title }}
-    <icons-chevron-down />
+    <chevron-down />
 
-    <app-menu :items="items" />
+    <app-menu :items="items" activator="parent" />
   </app-btn>
 </template>
 

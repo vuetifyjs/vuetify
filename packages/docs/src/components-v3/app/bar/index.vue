@@ -10,10 +10,26 @@
 
     <v-spacer />
 
-    <app-bar-learn-menu />
-    <app-bar-support-menu />
-    <app-bar-team-link />
-    <app-bar-language-menu />
+    <template v-if="smAndUp">
+      <app-vertical-divider />
+
+      <app-bar-learn-menu />
+      <app-bar-support-menu />
+      <template v-if="mdAndUp">
+        <app-bar-team-link />
+
+        <app-vertical-divider />
+
+        <app-bar-store-link />
+        <app-bar-jobs-link />
+        <app-bar-notifications-menu />
+
+        <app-vertical-divider />
+
+        <app-bar-settings-toggle />
+        <app-bar-language-menu />
+      </template>
+    </template>
   </v-app-bar>
 </template>
 
@@ -26,7 +42,7 @@
     name: 'AppBar',
 
     setup () {
-      const { lgAndUp } = useDisplay()
+      const { lgAndUp, smAndUp, mdAndUp } = useDisplay()
 
       // data
       const dark = false
@@ -34,6 +50,8 @@
       return {
         dark,
         lgAndUp,
+        mdAndUp,
+        smAndUp,
       }
     },
 

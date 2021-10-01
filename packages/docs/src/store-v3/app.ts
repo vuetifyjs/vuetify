@@ -8,5 +8,6 @@ export const useAppStore = defineStore({
   id: 'app',
   state: () => ({
     drawer: true,
+    settings: false,
   } as RootState),
 })

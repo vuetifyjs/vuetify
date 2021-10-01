@@ -24,3 +24,5 @@ is made possible by these generous sponsors:
 <br>
 
 <home-sponsors />
+
+<home-footer />

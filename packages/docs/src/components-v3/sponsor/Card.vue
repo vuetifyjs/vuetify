@@ -29,7 +29,7 @@
   import { useTheme } from 'vuetify/lib/composables/theme.mjs'
 
   export default {
-    name: 'Sponsor',
+    name: 'SponsorCard',
 
     props: {
       slug: String,

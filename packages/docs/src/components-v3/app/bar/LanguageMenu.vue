@@ -5,10 +5,11 @@
     variant="text"
   >
     <v-icon icon="mdi-translate" />
-    <icons-chevron-down />
+    <chevron-down />
 
     <app-menu
       key="language-menu"
+      activator="parent"
       :items="items"
     >
       <template #item="{ item }">

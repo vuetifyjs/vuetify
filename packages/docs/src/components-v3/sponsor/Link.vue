@@ -2,7 +2,7 @@
   <v-btn
     :aria-label="t('become-a-sponsor')"
     color="primary"
-    outlined
+    variant="outlined"
     @click="onClick"
   >
     <span

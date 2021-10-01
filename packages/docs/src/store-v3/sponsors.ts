@@ -1,6 +1,6 @@
-import Cosmic from 'cosmicjs'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
+import { useCosmic } from '@/composables/cosmic'
 
 interface Sponsor {
   metadata: {
@@ -18,12 +18,7 @@ export const useSponsorsStore = defineStore('sponsors', () => {
   const sponsors = ref<Sponsor[]>([])
 
   async function load () {
-    const api = Cosmic()
-    // eslint-disable-next-line camelcase
-    const read_key = import.meta.env.VITE_COSMIC_BUCKET_READ_KEY
-    const slug = import.meta.env.VITE_COSMIC_BUCKET_SLUG
-    const bucket = api.bucket({ slug, read_key })
-
+    const { bucket } = useCosmic()
     const { objects } = await bucket.getObjects({
       query: {
         type: 'sponsors',

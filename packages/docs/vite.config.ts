@@ -124,6 +124,7 @@ export default defineConfig({
       deep: true,
       dirs: ['src/components-v3'],
       directoryAsNamespace: true,
+      globalNamespaces: ['icons'],
       dts: true,
       extensions: ['vue', 'md'],
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],

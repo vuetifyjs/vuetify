@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-model="appState.drawer"
+    v-model="app.drawer"
     width="300"
   >
     <div class="pa-4 d-flex flex-column">
@@ -26,11 +26,13 @@
   import nav from '@/data/nav-alpha'
 
   export default defineComponent({
+    name: 'AppDrawer',
+
     setup () {
       const { locale } = useI18n()
-      const appState = useAppStore()
+      const app = useAppStore()
 
-      return { appState, items: nav, locale }
+      return { app, items: nav, locale }
     },
   })
 </script>

@@ -1,14 +1,12 @@
 <template>
   <v-app>
+    <app-settings-drawer />
+
     <app-bar />
 
     <home-view />
 
-    <home-footer />
-
     <!--<default-snackbar />-->
-
-    <!--<default-settings />-->
   </v-app>
 </template>
 
@@ -18,6 +16,5 @@
 
   export default defineComponent({
     name: 'HomeLayout',
-
   })
 </script>

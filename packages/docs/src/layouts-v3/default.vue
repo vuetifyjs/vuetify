@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <app-settings-drawer />
     <app-bar />
     <app-drawer />
     <v-main>

@@ -21,7 +21,7 @@
           class="d-flex align-center justify-center"
           cols="auto"
         >
-          <home-sponsor
+          <sponsor-card
             :comfortable="sponsor.metadata.tier === 2"
             :compact="sponsor.metadata.tier > 2"
             :sponsor="sponsor"
@@ -31,17 +31,17 @@
       </v-row>
     </v-responsive>
 
-    <home-sponsor-link large />
+    <sponsor-link size="large" />
   </v-sheet>
 </template>
 
 <script lang="ts">
   // Utilities
   import { computed, defineComponent, onBeforeMount } from 'vue'
-  import { useSponsorsStore } from './../../store-v3/sponsors'
+  import { useSponsorsStore } from '../../store-v3/sponsors'
 
   export default defineComponent({
-    name: 'HomeSponsors',
+    name: 'Sponsors',
 
     setup () {
       const sponsorStore = useSponsorsStore()

@@ -13,7 +13,7 @@
   import { defineComponent } from 'vue'
 
   export default defineComponent({
-    name: 'HomeVuetifyLogo',
+    name: 'Logo',
 
     props: {
       size: String,

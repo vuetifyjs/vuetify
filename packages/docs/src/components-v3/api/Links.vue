@@ -13,6 +13,8 @@
   import pageToApi from '@/data/page-to-api.json'
 
   export default defineComponent({
+    name: 'ApiLinks',
+
     setup () {
       const route = useRoute()
       const locale = useI18n()
