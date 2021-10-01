@@ -70,6 +70,7 @@ export const makeNestedProps = propsFactory({
 }, 'nested')
 
 export const useNested = (props: NestedProps) => {
+  let isUnmounted = false
   const children = ref(new Map<string, string[]>())
   const parents = ref(new Map<string, string>())
 
@@ -117,7 +118,11 @@ export const useNested = (props: NestedProps) => {
     v => selectStrategy.value.out(v, children.value, parents.value),
   )
 
-  const root = {
+  onBeforeUnmount(() => {
+    isUnmounted = true
+  })
+
+  const nested = {
     id: ref(null),
     root: {
       opened,
@@ -140,15 +145,25 @@ export const useNested = (props: NestedProps) => {
           children.value.set(parentId, [...children.value.get(parentId) || [], id])
         }
       },
-      unregister: (groupId: string) => {
-        children.value.delete(groupId)
-        parents.value.delete(groupId)
+      unregister: (id: string) => {
+        if (isUnmounted) return
+
+        children.value.delete(id)
+        const parent = parents.value.get(id)
+        if (parent) {
+          const list = children.value.get(parent) ?? []
+          children.value.set(parent, list.filter(child => child !== id))
+        }
+        parents.value.delete(id)
+        opened.value.delete(id)
+        active.value.delete(id)
+        selected.value.delete(id)
       },
       open: (id: string, value: boolean, e?: Event) => {
         const newOpened = openStrategy.value({
           id,
           value,
-          opened: opened.value,
+          opened: new Set(opened.value),
           children: children.value,
           parents: parents.value,
           event: e,
@@ -157,7 +172,7 @@ export const useNested = (props: NestedProps) => {
         newOpened && (opened.value = newOpened)
       },
       select: (id: string, value: boolean, e?: Event) => {
-        selected.value = selectStrategy.value.select({
+        const newSelected = selectStrategy.value.select({
           id,
           value,
           selected: new Map(selected.value),
@@ -165,25 +180,29 @@ export const useNested = (props: NestedProps) => {
           parents: parents.value,
           event: e,
         })
+
+        newSelected && (selected.value = newSelected)
       },
       activate: (id: string, value: boolean, e?: Event) => {
-        active.value = activeStrategy.value({
+        const newActive = activeStrategy.value({
           id,
           value,
-          active: active.value,
+          active: new Set(active.value),
           children: children.value,
           parents: parents.value,
           event: e,
         })
+
+        newActive && (active.value = newActive)
       },
       children,
       parents,
     },
   }
 
-  provide(VNestedSymbol, root)
+  provide(VNestedSymbol, nested)
 
-  return root.root
+  return nested.root
 }
 
 export const useNestedItem = (id: Ref<string | undefined>) => {
