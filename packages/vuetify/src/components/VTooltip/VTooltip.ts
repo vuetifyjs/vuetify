@@ -98,7 +98,7 @@ export default mixins(Colorable, Delayable, Dependent, Menuable, Toggleable).ext
       if (this.nudgeTop) top -= parseInt(this.nudgeTop)
       if (this.nudgeBottom) top += parseInt(this.nudgeBottom)
 
-      return `${this.calcYOverflow(top + this.pageYOffset)}px`
+      return `${this.calcYOverflow(this.attach !== false ? top : top + this.pageYOffset)}px`
     },
     classes (): object {
       return {
