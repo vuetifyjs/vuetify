@@ -75,13 +75,14 @@ describe('filter.ts', () => {
         return item.text.toLocaleLowerCase().includes(query.toLocaleLowerCase())
       }
       const query = ref('zz')
+      const props = { filterFn, filterKeys: ['text'] }
       const items = ref([
         { text: 'foo' },
         { text: 'bar' },
         { text: 'fizz' },
         { text: 'buzz' },
       ])
-      const { filteredItems } = useFilter({ filterFn }, items, query, ['text'])
+      const { filteredItems } = useFilter(props, items, query)
 
       expect(filteredItems.value).toHaveLength(2)
 
