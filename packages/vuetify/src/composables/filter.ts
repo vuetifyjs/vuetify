@@ -38,29 +38,29 @@ export const makeFilterProps = propsFactory({
 
 export function filterItems (
   items: (Record<string, any> | string)[],
-  query?: string,
-  filterKeys?: FilterKeys,
-  filter?: {
+  query: string,
+  options?: {
     default?: FilterFunction
+    filterKeys?: FilterKeys
+    filterKeysFn?: FilterKeysFn
     mode?: FilterMode
-    keysFn?: FilterKeysFn
-  }
+  },
 ) {
   if (!query) return items
 
   const array: (typeof items) = []
-  const method = filter?.mode !== 'union' ? 'some' : 'every'
-  const filterFn = filter?.default ?? defaultFilter
-  const keys = wrapInArray(filterKeys)
+  const method = options?.mode !== 'union' ? 'some' : 'every'
+  const filterFn = options?.default ?? defaultFilter
 
   for (const item of items) {
+    const keys = wrapInArray(options?.filterKeys || Object.keys(item))
     let matched = false
 
     /* istanbul ignore else */
-    if (typeof item === 'object' && keys?.length) {
+    if (typeof item === 'object') {
       matched = keys[method](key => {
         const value = getPropertyFromItem(item, key, item)
-        const handler = filter?.keysFn?.[key] ?? filterFn
+        const handler = options?.filterKeysFn?.[key] ?? filterFn
 
         return handler(value, query, item)
       })
@@ -87,11 +87,11 @@ export function useFilter (
   const filteredItems = computed(() => filterItems(
     items.value,
     strQuery.value,
-    props.filterKeys,
     {
       default: props.filterFn,
+      filterKeys: props.filterKeys,
+      filterKeysFn: props.filterKeysFn,
       mode: props.filterMode,
-      keysFn: props.filterKeysFn,
     },
   ))
 

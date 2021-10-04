@@ -38,8 +38,8 @@ describe('filter.ts', () => {
       [['title', 'value'], 'fizz', 0],
       [['title', 'value'], 'foo-0', 0],
       [['title', 'value'], '0', 1],
-    ])('should filter items by union with %s keys with query %s', (keys, query, expected) => {
-      expect(filterItems(items, query, keys, { mode: 'union' })).toHaveLength(expected)
+    ])('should filter items by union with %s keys with query %s', (filterKeys, query, expected) => {
+      expect(filterItems(items, query, { filterKeys, mode: 'union' })).toHaveLength(expected)
     })
 
     it('should filter an array of strings', () => {
