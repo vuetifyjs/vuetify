@@ -1,9 +1,6 @@
-// Types
-import type { ComponentPublicInstance } from 'vue'
-
 // Components
 import { VTimelineSymbol } from './shared'
-import VTimelineDivider from './VTimelineDivider'
+import { VTimelineDivider } from './VTimelineDivider'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
@@ -45,7 +42,7 @@ export const VTimelineItem = defineComponent({
     const { dimensionStyles } = useDimension(props)
 
     const dotSize = ref(0)
-    const dotRef = ref<ComponentPublicInstance>()
+    const dotRef = ref<VTimelineDivider>()
     watch(dotRef, newValue => {
       if (!newValue) return
       dotSize.value = newValue.$el.querySelector('.v-timeline-divider__dot')?.getBoundingClientRect().width ?? 0

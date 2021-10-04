@@ -1,11 +1,28 @@
 // Utils
-import { getCurrentInstance, shallowReactive, toRaw, watchEffect } from 'vue'
+import {
+  getCurrentInstance,
+  shallowReactive,
+  toRaw,
+  watchEffect,
+} from 'vue'
 import { consoleWarn } from '@/util/console'
 import { toKebabCase } from '@/util/helpers'
 import { useDefaults } from '@/composables/defaults'
 
 // Types
-import type { defineComponent as _defineComponent, ComponentOptions, VNode } from 'vue'
+import type {
+  defineComponent as _defineComponent,
+  ComponentOptions,
+  ComponentOptionsMixin,
+  ComponentOptionsWithObjectProps,
+  ComponentPropsOptions,
+  ComponentPublicInstance,
+  ComputedOptions,
+  DefineComponent,
+  EmitsOptions,
+  MethodOptions,
+  VNode,
+} from 'vue'
 
 function propIsDefined (vnode: VNode, prop: string) {
   return vnode.props?.hasOwnProperty(prop) ||
@@ -50,3 +67,31 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
 
   return options
 }) as unknown as typeof _defineComponent
+
+export function genericComponent<T extends (new () => Partial<ComponentPublicInstance>)> ():
+<
+  PropsOptions extends Readonly<ComponentPropsOptions>,
+  RawBindings,
+  D,
+  C extends ComputedOptions = {},
+  M extends MethodOptions = {},
+  Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
+  Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
+  E extends EmitsOptions = Record<string, any>,
+  EE extends string = string
+>(options: ComponentOptionsWithObjectProps<
+  PropsOptions,
+  RawBindings,
+  D,
+  C,
+  M,
+  Mixin,
+  Extends,
+  E,
+  EE
+>) => (new () => Omit<
+    InstanceType<DefineComponent<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE>>,
+    keyof InstanceType<T>
+  > & InstanceType<T>) {
+  return options => defineComponent(options) as any
+}

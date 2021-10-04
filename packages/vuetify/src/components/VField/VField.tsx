@@ -18,7 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { computed, ref, toRef, watch, watchEffect } from 'vue'
 import {
   convertToUnit,
-  defineComponent,
+  genericComponent,
   getUid,
   nullifyTransforms,
   propsFactory,
@@ -27,7 +27,7 @@ import {
 } from '@/util'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type { PropType, Ref, VNode } from 'vue'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
 type Variant = typeof allowedVariants[number]
@@ -79,7 +79,22 @@ export const makeVFieldProps = propsFactory({
   ...makeValidationProps(),
 }, 'v-field')
 
-export const VField = defineComponent({
+export const VField = genericComponent<new () => {
+  $slots: {
+    prependInner: (arg: DefaultInputSlot) => VNode[]
+    clear: () => VNode[]
+    appendInner: (arg: DefaultInputSlot) => VNode[]
+    label: (arg: DefaultInputSlot) => VNode[]
+    prepend: (arg: DefaultInputSlot) => VNode[]
+    append: (arg: DefaultInputSlot) => VNode[]
+    details: (arg: DefaultInputSlot) => VNode[]
+    loader: (arg: {
+      color: string | undefined
+      isActive: boolean
+    }) => VNode[]
+    default: (arg: DefaultInputSlot & { props: Record<string, unknown> }) => VNode[]
+  }
+}>()({
   name: 'VField',
 
   inheritAttrs: false,
@@ -126,8 +141,8 @@ export const VField = defineComponent({
 
     watch(isActive, val => {
       if (!props.singleLine) {
-        const el: HTMLElement = labelRef.value!.$el
-        const targetEl: HTMLElement = floatingLabelRef.value!.$el
+        const el = labelRef.value!.$el
+        const targetEl = floatingLabelRef.value!.$el
         const rect = nullifyTransforms(el)
         const targetRect = targetEl.getBoundingClientRect()
 
@@ -347,5 +362,4 @@ export const VField = defineComponent({
   },
 })
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export type VField = InstanceType<typeof VField>
