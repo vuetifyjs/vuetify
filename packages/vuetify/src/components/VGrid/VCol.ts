@@ -73,7 +73,7 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean
   return className.toLowerCase()
 }
 
-export default defineComponent({
+export const VCol = defineComponent({
   name: 'VCol',
 
   props: {

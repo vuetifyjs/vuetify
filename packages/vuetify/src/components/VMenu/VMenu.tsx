@@ -13,7 +13,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { defineComponent, getUid } from '@/util'
 import { computed } from 'vue'
 
-export default defineComponent({
+export const VMenu = defineComponent({
   name: 'VMenu',
 
   inheritAttrs: false,
@@ -74,3 +74,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VMenu = InstanceType<typeof VMenu>

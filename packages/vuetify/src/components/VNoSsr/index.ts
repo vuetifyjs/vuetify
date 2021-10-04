@@ -1,1 +1,1 @@
-export { default as VNoSsr } from './VNoSsr'
+export { VNoSsr } from './VNoSsr'

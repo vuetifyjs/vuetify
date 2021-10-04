@@ -16,7 +16,7 @@ import { defineComponent, getUid } from '@/util'
 import type { PropType } from 'vue'
 import type { StrategyProps } from '@/components/VOverlay/positionStrategies'
 
-export default defineComponent({
+export const VTooltip = defineComponent({
   name: 'VTooltip',
 
   inheritAttrs: false,
@@ -107,3 +107,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VTooltip = InstanceType<typeof VTooltip>

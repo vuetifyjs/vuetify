@@ -37,7 +37,7 @@ export interface srcObject {
   aspect: number
 }
 
-export default defineComponent({
+export const VImg = defineComponent({
   name: 'VImg',
 
   directives: { intersect },
@@ -273,3 +273,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VImg = InstanceType<typeof VImg>

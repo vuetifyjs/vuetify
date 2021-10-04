@@ -14,7 +14,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { nextTick, ref, watch } from 'vue'
 import { defineComponent, IN_BROWSER } from '@/util'
 
-export default defineComponent({
+export const VDialog = defineComponent({
   name: 'VDialog',
 
   inheritAttrs: false,
@@ -46,7 +46,7 @@ export default defineComponent({
     const isActive = useProxiedModel(props, 'modelValue')
     const { dimensionStyles } = useDimension(props)
 
-    const overlay = ref<InstanceType<typeof VOverlay>>()
+    const overlay = ref<VOverlay>()
     function onFocusin (e: FocusEvent) {
       const before = e.relatedTarget as HTMLElement | null
       const after = e.target as HTMLElement | null
@@ -127,3 +127,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VDialog = InstanceType<typeof VDialog>

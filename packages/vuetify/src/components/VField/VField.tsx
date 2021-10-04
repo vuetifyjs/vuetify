@@ -5,7 +5,7 @@ import './VField.sass'
 import { VExpandXTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 import { VInput } from '@/components/VInput'
-import VFieldLabel from './VFieldLabel'
+import { VFieldLabel } from './VFieldLabel'
 
 // Composables
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
@@ -106,8 +106,8 @@ export const VField = defineComponent({
     const isActive = useProxiedModel(props, 'active')
     const uid = getUid()
 
-    const labelRef = ref<InstanceType<typeof VFieldLabel>>()
-    const floatingLabelRef = ref<InstanceType<typeof VFieldLabel>>()
+    const labelRef = ref<VFieldLabel>()
+    const floatingLabelRef = ref<VFieldLabel>()
     const controlRef = ref<HTMLElement>()
     const inputRef = ref<HTMLInputElement>()
     const isFocused = ref(false)

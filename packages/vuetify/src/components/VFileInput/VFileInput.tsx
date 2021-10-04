@@ -19,7 +19,7 @@ import { defineComponent, humanReadableFileSize, pick, useRender, wrapInArray } 
 import type { PropType } from 'vue'
 import type { VFieldSlot } from '@/components/VField/VField'
 
-export default defineComponent({
+export const VFileInput = defineComponent({
   name: 'VFileInput',
 
   inheritAttrs: false,
@@ -200,3 +200,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VFileInput = InstanceType<typeof VFileInput>

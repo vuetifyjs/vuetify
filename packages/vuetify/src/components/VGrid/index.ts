@@ -1,4 +1,4 @@
-export { default as VContainer } from './VContainer'
-export { default as VCol } from './VCol'
-export { default as VRow } from './VRow'
-export { default as VSpacer } from './VSpacer'
+export { VContainer } from './VContainer'
+export { VCol } from './VCol'
+export { VRow } from './VRow'
+export { VSpacer } from './VSpacer'

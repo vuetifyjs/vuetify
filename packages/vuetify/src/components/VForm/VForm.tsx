@@ -35,3 +35,5 @@ export const VForm = defineComponent({
     return form
   },
 })
+
+export type VForm = InstanceType<typeof VForm>

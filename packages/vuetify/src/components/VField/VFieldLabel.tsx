@@ -4,7 +4,7 @@ import { defineComponent } from '@/util'
 // Composables
 import { makeThemeProps } from '@/composables/theme'
 
-export default defineComponent({
+export const VFieldLabel = defineComponent({
   name: 'VFieldLabel',
 
   props: {
@@ -29,3 +29,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VFieldLabel = InstanceType<typeof VFieldLabel>

@@ -182,3 +182,5 @@ export const VTextField = defineComponent({
     }
   },
 })
+
+export type VTextField = InstanceType<typeof VTextField>

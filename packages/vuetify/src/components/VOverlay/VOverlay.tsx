@@ -65,7 +65,7 @@ function Scrim (props: ScrimProps) {
   )
 }
 
-export default defineComponent({
+export const VOverlay = defineComponent({
   name: 'VOverlay',
 
   directives: { ClickOutside },
@@ -257,3 +257,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VOverlay = InstanceType<typeof VOverlay>

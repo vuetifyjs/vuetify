@@ -1,3 +1,3 @@
 import { createSimpleFunctional } from '@/util'
 
-export default createSimpleFunctional('v-list-item-title')
+export const VListItemTitle = createSimpleFunctional('v-list-item-title')

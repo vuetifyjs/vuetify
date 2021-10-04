@@ -3,10 +3,10 @@ import './VBanner.sass'
 
 // Components
 import { VAvatar } from '@/components/VAvatar'
-import VBannerActions from './VBannerActions'
-import VBannerAvatar from './VBannerAvatar'
-import VBannerContent from './VBannerContent'
-import VBannerText from './VBannerText'
+import { VBannerActions } from './VBannerActions'
+import { VBannerAvatar } from './VBannerAvatar'
+import { VBannerContent } from './VBannerContent'
+import { VBannerText } from './VBannerText'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -24,7 +24,7 @@ import { useTextColor } from '@/composables/color'
 import { toRef } from 'vue'
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VBanner = defineComponent({
   name: 'VBanner',
 
   props: {
@@ -123,3 +123,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VBanner = InstanceType<typeof VBanner>

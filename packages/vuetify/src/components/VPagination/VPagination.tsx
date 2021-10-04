@@ -1,7 +1,7 @@
 import './VPagination.sass'
 
 // Components
-import VPaginationBtn from './VPaginationBtn'
+import { VPaginationBtn } from './VPaginationBtn'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
@@ -25,7 +25,7 @@ import { createRange, defineComponent, keyValues } from '@/util'
 // Types
 import type { ComponentPublicInstance } from 'vue'
 
-export default defineComponent({
+export const VPagination = defineComponent({
   name: 'VPagination',
 
   props: {
@@ -354,3 +354,5 @@ export default defineComponent({
     )
   },
 })
+
+export type VPagination = InstanceType<typeof VPagination>

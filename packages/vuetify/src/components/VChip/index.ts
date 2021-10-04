@@ -1,1 +1,1 @@
-export { default as VChip } from './VChip'
+export { VChip } from './VChip'

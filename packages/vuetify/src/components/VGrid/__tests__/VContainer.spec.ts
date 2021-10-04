@@ -1,5 +1,5 @@
 // Components
-import VContainer from '../VContainer'
+import { VContainer } from '../VContainer'
 
 // Utilities
 import { mount } from '@vue/test-utils'

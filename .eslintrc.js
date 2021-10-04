@@ -136,8 +136,8 @@ module.exports = {
           allowTemplateLiterals: true,
         }],
 
+        // Handled by tsc
         'no-redeclare': 'off',
-        '@typescript-eslint/no-redeclare': 'error',
 
         'no-use-before-define': 'off',
         '@typescript-eslint/no-use-before-define': ['error', 'nofunc'],

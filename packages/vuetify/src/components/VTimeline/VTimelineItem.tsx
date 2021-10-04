@@ -16,7 +16,7 @@ import { inject, ref, watch } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
-export default defineComponent({
+export const VTimelineItem = defineComponent({
   name: 'VTimelineItem',
 
   props: {

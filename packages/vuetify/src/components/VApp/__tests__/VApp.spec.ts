@@ -1,5 +1,5 @@
 // Components
-import VApp from '../VApp'
+import { VApp } from '../VApp'
 
 // Utilities
 import { mount } from '@vue/test-utils'

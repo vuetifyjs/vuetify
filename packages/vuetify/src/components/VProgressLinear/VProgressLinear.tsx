@@ -14,7 +14,7 @@ import { useRtl } from '@/composables/rtl'
 import { convertToUnit, defineComponent } from '@/util'
 import { computed, Transition } from 'vue'
 
-export default defineComponent({
+export const VProgressLinear = defineComponent({
   name: 'VProgressLinear',
 
   props: {

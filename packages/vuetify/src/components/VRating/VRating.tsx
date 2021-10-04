@@ -20,7 +20,7 @@ import { createRange, defineComponent, getUid } from '@/util'
 import type { Variant } from '@/composables/variant'
 import type { Prop } from 'vue'
 
-export default defineComponent({
+export const VRating = defineComponent({
   name: 'VRating',
 
   props: {
@@ -246,3 +246,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VRating = InstanceType<typeof VRating>

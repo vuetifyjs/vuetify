@@ -4,7 +4,7 @@ import { VBtn } from '../VBtn'
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VPaginationBtn = defineComponent({
   ...VBtn,
   name: 'VPaginationBtn',
 })

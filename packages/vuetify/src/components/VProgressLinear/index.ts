@@ -1,1 +1,1 @@
-export { default as VProgressLinear } from './VProgressLinear'
+export { VProgressLinear } from './VProgressLinear'

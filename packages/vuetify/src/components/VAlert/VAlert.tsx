@@ -24,11 +24,11 @@ import { defineComponent } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-export const allowedTypes = ['success', 'info', 'warning', 'error'] as const
+const allowedTypes = ['success', 'info', 'warning', 'error'] as const
 
-export type ContextualType = typeof allowedTypes[number]
+type ContextualType = typeof allowedTypes[number]
 
-export default defineComponent({
+export const VAlert = defineComponent({
   name: 'VAlert',
 
   props: {
@@ -204,3 +204,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VAlert = InstanceType<typeof VAlert>

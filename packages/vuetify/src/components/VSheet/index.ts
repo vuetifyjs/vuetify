@@ -1,1 +1,1 @@
-export { default as VSheet } from './VSheet'
+export { VSheet } from './VSheet'

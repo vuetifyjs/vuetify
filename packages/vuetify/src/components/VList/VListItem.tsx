@@ -2,11 +2,11 @@
 import './VListItem.sass'
 
 // Components
-import VListItemAvatar from './VListItemAvatar'
-import VListItemHeader from './VListItemHeader'
-import VListItemSubtitle from './VListItemSubtitle'
-import VListItemTitle from './VListItemTitle'
 import { VAvatar } from '@/components/VAvatar'
+import { VListItemAvatar } from './VListItemAvatar'
+import { VListItemHeader } from './VListItemHeader'
+import { VListItemSubtitle } from './VListItemSubtitle'
+import { VListItemTitle } from './VListItemTitle'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -26,7 +26,7 @@ import { Ripple } from '@/directives/ripple'
 import { computed } from 'vue'
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VListItem = defineComponent({
   name: 'VListItem',
 
   directives: { Ripple },

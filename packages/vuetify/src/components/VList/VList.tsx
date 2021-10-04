@@ -3,7 +3,7 @@ import './VList.sass'
 
 // Components
 // import { VListItem } from '.'
-import VListSubheader from './VListSubheader'
+import { VListSubheader } from './VListSubheader'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -19,7 +19,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { toRef } from 'vue'
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VList = defineComponent({
   name: 'VList',
 
   props: {

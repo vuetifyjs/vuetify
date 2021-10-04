@@ -6,7 +6,7 @@ import { useTextColor } from '@/composables/color'
 import { toRef } from 'vue'
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VListSubheader = defineComponent({
   name: 'VListSubheader',
 
   props: {
