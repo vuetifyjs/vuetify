@@ -1,5 +1,6 @@
 // Components
 import { VExpandTransition } from '..'
+import VListChildren from './VListChildren'
 
 // Composables
 import { useNestedGroup } from '@/composables/nested/nested'
@@ -8,12 +9,11 @@ import { makeTagProps } from '@/composables/tag'
 // Utilities
 import { computed } from 'vue'
 import { defineComponent } from '@/util'
-import { renderItems } from './utils'
+import { createList, useDepth, useList } from './VList'
 
 // Types
 import type { Prop } from 'vue'
-import type { ListItem } from './utils'
-import { createList, useDepth, useList } from './VList'
+import type { ListItem } from './VListChildren'
 
 export type VListGroupHeaderSlotProps = {
   onClick: (e: Event) => void
@@ -37,7 +37,7 @@ const VListGroupItems = defineComponent({
       return (
         <VExpandTransition>
           <div class="v-list-group__items" style={{ '--v-list-depth': depth.value }} v-show={props.open}>
-            { renderItems(props, slots) }
+            <VListChildren items={props.items} v-slots={slots} />
           </div>
         </VExpandTransition>
       )

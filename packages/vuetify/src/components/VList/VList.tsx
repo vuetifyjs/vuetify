@@ -3,6 +3,7 @@ import './VList.sass'
 
 // Components
 import { VListSubheader } from './VListSubheader'
+import VListChildren from './VListChildren'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -18,11 +19,10 @@ import { makeNestedProps, useNested } from '@/composables/nested/nested'
 // Utilities
 import { computed, inject, provide, ref, toRef } from 'vue'
 import { defineComponent, useRender } from '@/util'
-import { renderItems } from './utils'
 
 // Types
 import type { InjectionKey, Prop, Ref } from 'vue'
-import type { ListItem } from './utils'
+import type { ListItem } from './VListChildren'
 
 export const DepthKey: InjectionKey<Ref<number>> = Symbol.for('vuetify:depth')
 
@@ -138,7 +138,7 @@ export const VList = defineComponent({
               : <VListSubheader>{ props.subheader }</VListSubheader>
           ) }
 
-          { renderItems(props, slots) }
+          <VListChildren items={props.items} v-slots={slots} />
         </props.tag>
       )
     })
