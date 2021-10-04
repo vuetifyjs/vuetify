@@ -1,5 +1,6 @@
 // Utils
 import {
+  defineComponent as _defineComponent,
   getCurrentInstance,
   shallowReactive,
   toRaw,
@@ -11,7 +12,6 @@ import { useDefaults } from '@/composables/defaults'
 
 // Types
 import type {
-  defineComponent as _defineComponent,
   ComponentOptions,
   ComponentOptionsMixin,
   ComponentOptionsWithObjectProps,
@@ -68,7 +68,7 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
   return options
 }) as unknown as typeof _defineComponent
 
-export function genericComponent<T extends (new () => Partial<ComponentPublicInstance>)> ():
+export function genericComponent<T extends (new () => Partial<ComponentPublicInstance>)> (exposeDefaults = true):
 <
   PropsOptions extends Readonly<ComponentPropsOptions>,
   RawBindings,
@@ -93,5 +93,5 @@ export function genericComponent<T extends (new () => Partial<ComponentPublicIns
     InstanceType<DefineComponent<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE>>,
     keyof InstanceType<T>
   > & InstanceType<T>) {
-  return options => defineComponent(options) as any
+  return options => (exposeDefaults ? defineComponent : _defineComponent)(options) as any
 }

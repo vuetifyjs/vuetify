@@ -33,4 +33,3 @@ export const VFieldLabel = genericComponent<new () => {
 })
 
 export type VFieldLabel = InstanceType<typeof VFieldLabel>
-type T = typeof VFieldLabel

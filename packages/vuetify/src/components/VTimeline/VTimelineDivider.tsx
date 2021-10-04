@@ -12,9 +12,11 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { inject, toRef } from 'vue'
 import { genericComponent } from '@/util'
 
-export const VTimelineDivider = genericComponent<new () => {
+const defineComponent = genericComponent<new () => {
   $el: HTMLElement
-}>()({
+}>(false)
+
+export const VTimelineDivider = defineComponent({
   name: 'VTimelineDivider',
 
   props: {
