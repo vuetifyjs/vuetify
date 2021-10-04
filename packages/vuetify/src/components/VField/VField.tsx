@@ -45,12 +45,7 @@ export interface DefaultInputSlot {
 }
 
 export interface VFieldSlot extends DefaultInputSlot {
-  props: {
-    id: string
-    class: string
-    onFocus: () => void
-    onBlur: () => void
-  }
+  props: Record<string, unknown>
 }
 
 export const makeVFieldProps = propsFactory({
@@ -79,7 +74,11 @@ export const makeVFieldProps = propsFactory({
   ...makeValidationProps(),
 }, 'v-field')
 
-export const VField = genericComponent<new () => {
+export const VField = genericComponent<new <T>() => {
+  $props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (val: T) => any
+  }
   $slots: {
     prependInner: (arg: DefaultInputSlot) => VNode[]
     clear: () => VNode[]
@@ -92,7 +91,7 @@ export const VField = genericComponent<new () => {
       color: string | undefined
       isActive: boolean
     }) => VNode[]
-    default: (arg: DefaultInputSlot & { props: Record<string, unknown> }) => VNode[]
+    default: (arg: VFieldSlot) => VNode[]
   }
 }>()({
   name: 'VField',
@@ -141,8 +140,8 @@ export const VField = genericComponent<new () => {
 
     watch(isActive, val => {
       if (!props.singleLine) {
-        const el = labelRef.value!.$el
-        const targetEl = floatingLabelRef.value!.$el
+        const el: HTMLElement = labelRef.value!.$el
+        const targetEl: HTMLElement = floatingLabelRef.value!.$el
         const rect = nullifyTransforms(el)
         const targetRect = targetEl.getBoundingClientRect()
 

@@ -68,6 +68,8 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
   return options
 }) as unknown as typeof _defineComponent
 
+type ToListeners<T extends string | number | symbol> = { [k in T]: k extends `on${infer U}` ? Uncapitalize<U> : k }[T]
+
 export function genericComponent<T extends (new () => Partial<ComponentPublicInstance>)> (exposeDefaults = true):
 <
   PropsOptions extends Readonly<ComponentPropsOptions>,
@@ -78,20 +80,21 @@ export function genericComponent<T extends (new () => Partial<ComponentPublicIns
   Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
   E extends EmitsOptions = Record<string, any>,
-  EE extends string = string
->(options: ComponentOptionsWithObjectProps<
-  PropsOptions,
-  RawBindings,
-  D,
-  C,
-  M,
-  Mixin,
-  Extends,
-  E,
-  EE
->) => (new () => Omit<
-    InstanceType<DefineComponent<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE>>,
-    keyof InstanceType<T>
-  > & InstanceType<T>) {
+  EE extends string = string,
+  I = InstanceType<T>,
+  Base = DefineComponent<
+    I extends Record<'$props', any> ? Omit<PropsOptions, keyof I['$props']> : PropsOptions,
+    RawBindings,
+    D,
+    C,
+    M,
+    Mixin,
+    Extends,
+    E extends any[] ? E : I extends Record<'$props', any> ? Omit<E, ToListeners<keyof I['$props']>> : E,
+    EE
+  >
+>(
+  options: ComponentOptionsWithObjectProps<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE>
+) => Base & T {
   return options => (exposeDefaults ? defineComponent : _defineComponent)(options) as any
 }

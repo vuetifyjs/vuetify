@@ -1,12 +1,10 @@
 // Utilities
-import { genericComponent } from '@/util'
+import { defineComponent } from '@/util'
 
 // Composables
 import { makeThemeProps } from '@/composables/theme'
 
-export const VFieldLabel = genericComponent<new () => {
-  $el: HTMLElement
-}>()({
+export const VFieldLabel = defineComponent({
   name: 'VFieldLabel',
 
   props: {
