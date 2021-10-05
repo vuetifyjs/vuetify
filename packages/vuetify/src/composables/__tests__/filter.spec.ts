@@ -6,15 +6,15 @@ import { ref } from 'vue'
 describe('filter.ts', () => {
   describe('defaultFilter', () => {
     it.each([
-      [null, null, true],
-      ['foo', null, true],
-      ['foo', 'foo', true],
-      ['foo', 'f', true],
-      [null, 'foo', false],
-      ['foo', 'bar', false],
-      [1, '1', false],
-      ['1', 1, true],
-    ])('should compare %s to %s and return a boolean', (text: any, query: any, expected: boolean) => {
+      [null, null, -1],
+      ['foo', null, -1],
+      ['foo', 'foo', 0],
+      ['foo', 'f', 0],
+      [null, 'foo', -1],
+      ['foo', 'bar', -1],
+      [1, '1', 0],
+      ['1', 1, 0],
+    ])('should compare %s to %s and return a match result', (text: any, query: any, expected: boolean) => {
       expect(defaultFilter(text, query)).toBe(expected)
     })
   })
@@ -29,8 +29,8 @@ describe('filter.ts', () => {
       [['title'], 'foo', 5],
       [['title', 'value'], 'fizz', 5],
       [['title', 'value'], 'foo-0', 1],
-    ])('should filter items by intersection with %s keys with query %s', (keys, query, expected) => {
-      expect(filterItems(items, query, keys)).toHaveLength(expected)
+    ])('should filter items by intersection with %s keys with query %s', (keys: string[], query, expected) => {
+      expect(filterItems(items, query, { keys })).toHaveLength(expected)
     })
 
     it.each([
@@ -38,8 +38,8 @@ describe('filter.ts', () => {
       [['title', 'value'], 'fizz', 0],
       [['title', 'value'], 'foo-0', 0],
       [['title', 'value'], '0', 1],
-    ])('should filter items by union with %s keys with query %s', (filterKeys, query, expected) => {
-      expect(filterItems(items, query, { filterKeys, mode: 'union' })).toHaveLength(expected)
+    ])('should filter items by union with %s keys with query %s', (keys: string[], query, expected) => {
+      expect(filterItems(items, query, { keys, union: true })).toHaveLength(expected)
     })
 
     it('should filter an array of strings', () => {

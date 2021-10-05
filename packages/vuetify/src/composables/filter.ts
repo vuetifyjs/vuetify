@@ -1,4 +1,4 @@
-
+/* eslint-disable no-labels */
 // Utilities
 import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
 import { computed } from 'vue'
@@ -6,30 +6,30 @@ import { computed } from 'vue'
 // Types
 import type { PropType, Ref } from 'vue'
 
-export type FilterFunction = typeof defaultFilter
-export type FilterMode = 'intersection' | 'union'
+export type FilterFunction = (value: string, query: string, item?: any) => FilterMatch
+export type FilterKeyFunctions = Record<string, FilterFunction>
 export type FilterKeys = string | string[]
-export type FilterKeysFn = Record<string, FilterFunction>
+export type FilterMatch = number | [number, number] | [number, number][] | boolean
+export type FilterMode = 'intersection' | 'union'
 
 export interface FilterProps {
-  filterFn?: FilterFunction
+  customFilter?: FilterFunction
+  customFilters?: FilterKeyFunctions
   filterKeys?: FilterKeys
-  filterKeysFn?: FilterKeysFn
   filterMode?: FilterMode
 }
 
 // Composables
-export function defaultFilter (text: string, query?: string, item?: any) {
-  if (typeof query !== 'string') return true
-  if (typeof text !== 'string') return false
+export const defaultFilter: FilterFunction = (value, query, item) => {
+  if (value == null || query == null) return -1
 
-  return text.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+  return value.toString().toLocaleLowerCase().indexOf(query.toString().toLocaleLowerCase())
 }
 
 export const makeFilterProps = propsFactory({
-  filterFn: Function as PropType<FilterFunction>,
+  customFilter: Function as PropType<FilterFunction>,
+  customFilters: Object as PropType<FilterKeyFunctions>,
   filterKeys: [Array, String] as PropType<FilterKeys>,
-  filterKeysFn: Object as PropType<FilterKeysFn>,
   filterMode: {
     type: String as PropType<FilterMode>,
     default: 'intersection',
@@ -40,35 +40,51 @@ export function filterItems (
   items: (Record<string, any> | string)[],
   query: string,
   options?: {
+    customFilters?: FilterKeyFunctions
     default?: FilterFunction
-    filterKeys?: FilterKeys
-    filterKeysFn?: FilterKeysFn
-    mode?: FilterMode
+    keys?: FilterKeys
+    union?: boolean
   },
 ) {
   if (!query) return items
 
   const array: (typeof items) = []
-  const method = options?.mode !== 'union' ? 'some' : 'every'
-  const filterFn = options?.default ?? defaultFilter
+  const filter = options?.default ?? defaultFilter
+  const keys = options?.keys ? wrapInArray(options?.keys) : false
 
+  loop:
   for (const item of items) {
-    const keys = wrapInArray(options?.filterKeys || Object.keys(item))
-    let matched = false
+    let matches: Record<string, FilterMatch> | FilterMatch[] = {}
+    let match: FilterMatch = -1
 
-    /* istanbul ignore else */
     if (typeof item === 'object') {
-      matched = keys[method](key => {
-        const value = getPropertyFromItem(item, key, item)
-        const handler = options?.filterKeysFn?.[key] ?? filterFn
+      const filterKeys = keys || Object.keys(item)
 
-        return handler(value, query, item)
-      })
+      for (const key of filterKeys) {
+        const value = getPropertyFromItem(item, key, item)
+        const keyFilter = options?.customFilters?.[key] ?? filter
+
+        match = keyFilter(value, query, item)
+
+        if (match === -1) {
+          if (options?.union) break loop
+
+          continue
+        }
+
+        matches[key] = match
+      }
+
+      if (!Object.keys(matches).length) continue
     } else if (typeof item === 'string') {
-      matched = filterFn(item, query, item)
+      match = filter(item, query, item)
+
+      if (match === -1) continue
+
+      matches = wrapInArray(match)
     }
 
-    if (matched) array.push(item)
+    array.push({ item, matches })
   }
 
   return array
@@ -84,16 +100,17 @@ export function useFilter (
     typeof query?.value !== 'number'
   ) ? '' : String(query.value))
 
-  const filteredItems = computed(() => filterItems(
-    items.value,
-    strQuery.value,
-    {
-      default: props.filterFn,
-      filterKeys: props.filterKeys,
-      filterKeysFn: props.filterKeysFn,
-      mode: props.filterMode,
-    },
-  ))
+  const filteredItems = computed(() => {
+    return filterItems(
+      items.value,
+      strQuery.value,
+      {
+        default: props.customFilter,
+        customFilters: props.customFilters,
+        union: props.filterMode === 'union',
+      },
+    )
+  })
 
   return { filteredItems }
 }
