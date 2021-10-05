@@ -56,6 +56,13 @@ export default baseMixins.extend({
   },
 
   watch: {
+    autoGrow (val: boolean) {
+      this.$nextTick(() => {
+        val
+          ? this.calculateInputHeight()
+          : this.$refs.input?.style.removeProperty('height')
+      })
+    },
     lazyValue () {
       this.autoGrow && this.$nextTick(this.calculateInputHeight)
     },
