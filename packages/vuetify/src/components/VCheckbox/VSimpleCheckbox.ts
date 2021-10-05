@@ -60,6 +60,7 @@ export default Vue.extend({
       },
     }), icon))
 
+    Vue.directive('ripple', ripple)
     if (props.ripple && !props.disabled) {
       const ripple = h('div', Colorable.options.methods.setTextColor(props.color, {
         staticClass: 'v-input--selection-controls__ripple',
