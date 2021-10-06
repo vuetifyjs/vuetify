@@ -115,6 +115,7 @@ export const VFileInput = defineComponent({
             attrs.class,
           ]}
           active={ isDirty.value }
+          dirty={ isDirty.value }
           prepend-icon={ props.prependIcon }
           onUpdate:active={ val => internalDirty.value = val }
           onClick:control={ click }

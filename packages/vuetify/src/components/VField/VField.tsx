@@ -205,8 +205,8 @@ export const VField = genericComponent<new <T>() => {
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
       const hasPrepend = (slots.prependInner || props.prependInnerIcon)
-      const hasClear = (props.clearable || slots.clear)
-      const hasAppend = (slots.appendInner || props.appendInnerIcon || hasClear)
+      const hasClear = !!(props.clearable || slots.clear)
+      const hasAppend = !!(slots.appendInner || props.appendInnerIcon || hasClear)
       const label = slots.label
         ? slots.label({
           label: props.label,
@@ -304,7 +304,7 @@ export const VField = genericComponent<new <T>() => {
                 <div
                   class="v-field__clearable"
                   onClick={ (e: Event) => emit('click:clear', e) }
-                  v-show={ inputRef.value?.value }
+                  v-show={ props.dirty }
                 >
                   { slots.clear
                     ? slots.clear()
