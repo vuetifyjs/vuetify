@@ -123,8 +123,10 @@ export const VDialog = genericComponent<new () => {
             'aria-expanded': String(isActive.value),
           }}
           { ...attrs }
-          v-slot:default={ slots.default }
-          v-slot:activator={ slots.activator }
+          v-slots={{
+            default: slots.default,
+            activator: slots.activator,
+          }}
         />
       )
     }

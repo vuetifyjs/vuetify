@@ -241,9 +241,11 @@ export const VField = genericComponent<new <T>() => {
           focused={ isFocused.value }
           messages={ props.errorMessages?.length ? props.errorMessages : errorMessages.value }
           { ...attrs }
-          v-slot:prepend={ slots.prepend && (() => slots.prepend?.(slotProps.value)) }
-          v-slot:append={ slots.append && (() => slots.append?.(slotProps.value)) }
-          v-slot:details={ slots.details && (() => slots?.details?.(slotProps.value)) }
+          v-slots={{
+            prepend: slots.prepend && (() => slots.prepend?.(slotProps.value)),
+            append: slots.append && (() => slots.append?.(slotProps.value)),
+            details: slots.details && (() => slots?.details?.(slotProps.value)),
+          }}
         >
           <div
             class={[
@@ -259,7 +261,7 @@ export const VField = genericComponent<new <T>() => {
               name="v-field"
               active={ props.loading }
               color={ isValid.value === false ? undefined : props.color }
-              v-slot:default={ slots.loader }
+              v-slots={{ default: slots.loader }}
             />
 
             { hasPrepend && (

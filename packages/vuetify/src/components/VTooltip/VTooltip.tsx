@@ -100,7 +100,9 @@ export const VTooltip = genericComponent<new () => {
             'aria-describedby': id.value,
           }}
           { ...attrs }
-          v-slot:activator={ slots.activator }
+          v-slots={{
+            activator: slots.activator,
+          }}
         >
           { slots.default?.() ?? props.text }
         </VOverlay>
