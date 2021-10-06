@@ -1,6 +1,6 @@
 /* eslint-disable no-labels */
 // Utilities
-import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
+import { getPropertyFromItem, propsFactory, wrapInArray, wrapInRef } from '@/util'
 import { computed } from 'vue'
 
 // Types
@@ -46,11 +46,11 @@ export function filterItems (
     union?: boolean
   },
 ) {
-  if (!query) return items
-
   const array: (typeof items) = []
   const filter = options?.default ?? defaultFilter
   const keys = options?.keys ? wrapInArray(options?.keys) : false
+
+  if (!items?.length) return array
 
   loop:
   for (const item of items) {
@@ -92,7 +92,7 @@ export function filterItems (
 
 export function useFilter (
   props: FilterProps,
-  items: Ref<any[]>,
+  items: Ref<any[]> | any[],
   query?: Ref<string>,
 ) {
   const strQuery = computed(() => (
@@ -102,7 +102,7 @@ export function useFilter (
 
   const filteredItems = computed(() => {
     return filterItems(
-      items.value,
+      wrapInRef(items).value,
       strQuery.value,
       {
         default: props.customFilter,
