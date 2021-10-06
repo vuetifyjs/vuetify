@@ -257,10 +257,8 @@ export const VImg = defineComponent({
           handler: init,
           options: props.options,
         }, null, ['once']]}
-        v-slots={{
-          additional: () => [__image.value, __preloadImage.value, __gradient.value, __placeholder.value, __error.value],
-          default: slots.default,
-        }}
+        v-slot:additional={ () => [__image.value, __preloadImage.value, __gradient.value, __placeholder.value, __error.value] }
+        v-slot:default={ slots.default }
       />
     ))
 

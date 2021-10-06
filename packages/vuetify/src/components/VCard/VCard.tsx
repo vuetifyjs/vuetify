@@ -190,7 +190,7 @@ export const VCard = defineComponent({
           { slots.default?.() }
 
           { slots.actions && (
-            <VCardActions v-slots={{ default: slots.actions }} />
+            <VCardActions v-slot:default={ slots.actions } />
           ) }
         </Tag>
       )

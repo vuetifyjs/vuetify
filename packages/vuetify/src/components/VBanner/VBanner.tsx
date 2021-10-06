@@ -116,7 +116,7 @@ export const VBanner = defineComponent({
           ) }
 
           { slots.actions && (
-            <VBannerActions v-slots={{ default: slots.actions }} />
+            <VBannerActions v-slot:default={ slots.actions } />
           ) }
         </props.tag>
       )

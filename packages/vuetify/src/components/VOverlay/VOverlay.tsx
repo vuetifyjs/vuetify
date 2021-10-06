@@ -21,7 +21,7 @@ import { ClickOutside } from '@/directives/click-outside'
 // Utilities
 import {
   convertToUnit,
-  defineComponent,
+  genericComponent,
   getScrollParent,
   standardEasing,
   useRender,
@@ -38,7 +38,7 @@ import {
 } from 'vue'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { BackgroundColorData } from '@/composables/color'
 import { useStack } from '@/composables/stack'
 
@@ -65,7 +65,14 @@ function Scrim (props: ScrimProps) {
   )
 }
 
-export const VOverlay = defineComponent({
+export type OverlaySlots = {
+  default: [{ isActive: Ref<boolean> }]
+  activator: [{ isActive: boolean, props: Dictionary<any> }]
+}
+
+export const VOverlay = genericComponent<new () => {
+  $slots: OverlaySlots
+}>()({
   name: 'VOverlay',
 
   directives: { ClickOutside },

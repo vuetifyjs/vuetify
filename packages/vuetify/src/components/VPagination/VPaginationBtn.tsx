@@ -7,4 +7,4 @@ import { defineComponent } from '@/util'
 export const VPaginationBtn = defineComponent({
   ...VBtn,
   name: 'VPaginationBtn',
-})
+}) as typeof VBtn

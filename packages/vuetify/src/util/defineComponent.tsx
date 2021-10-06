@@ -16,7 +16,6 @@ import type {
   ComponentOptionsMixin,
   ComponentOptionsWithObjectProps,
   ComponentPropsOptions,
-  ComponentPublicInstance,
   ComputedOptions,
   DefineComponent,
   EmitsOptions,
@@ -69,9 +68,15 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
 }) as unknown as typeof _defineComponent
 
 type ToListeners<T extends string | number | symbol> = { [k in T]: k extends `on${infer U}` ? Uncapitalize<U> : k }[T]
+type SlotsToProps<T extends Record<string, any[]>> = {
+  'v-slots': new () => { [k in keyof T]?: false | ((...args: T[k]) => VNode | VNode[]) }
+}/* & { // TODO: individual slots are never converted from the constructor type
+  [k in keyof T as `v-slot:${k & string}`]?: new () => (false | ((...args: T[k]) => VNode | VNode[]))
+} */
 
-export function genericComponent<T extends (new () => Partial<ComponentPublicInstance>)> (exposeDefaults = true):
-<
+export function genericComponent<T extends (new () => {
+  $slots?: Record<string, any[]>
+})> (exposeDefaults = true): <
   PropsOptions extends Readonly<ComponentPropsOptions>,
   RawBindings,
   D,
@@ -83,7 +88,11 @@ export function genericComponent<T extends (new () => Partial<ComponentPublicIns
   EE extends string = string,
   I = InstanceType<T>,
   Base = DefineComponent<
-    I extends Record<'$props', any> ? Omit<PropsOptions, keyof I['$props']> : PropsOptions,
+    (I extends Record<'$props', any> ? Omit<PropsOptions, keyof I['$props']> : PropsOptions) & (
+      I extends Record<'$slots', any>
+        ? SlotsToProps<I['$slots']>
+        : {}
+    ),
     RawBindings,
     D,
     C,
@@ -93,8 +102,6 @@ export function genericComponent<T extends (new () => Partial<ComponentPublicIns
     E extends any[] ? E : I extends Record<'$props', any> ? Omit<E, ToListeners<keyof I['$props']>> : E,
     EE
   >
->(
-  options: ComponentOptionsWithObjectProps<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE>
-) => Base & T {
+>(options: ComponentOptionsWithObjectProps<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE>) => Base & T {
   return options => (exposeDefaults ? defineComponent : _defineComponent)(options) as any
 }

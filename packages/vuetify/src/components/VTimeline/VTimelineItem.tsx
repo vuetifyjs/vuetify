@@ -80,7 +80,7 @@ export const VTimelineItem = defineComponent({
           dotColor={ props.dotColor }
           fillDot={ props.fillDot }
           rounded={ props.rounded }
-          v-slots={{ default: slots.icon }}
+          v-slot:default={ slots.icon }
         />
 
         { timeline.density.value !== 'compact' && (

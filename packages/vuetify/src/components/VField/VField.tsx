@@ -27,7 +27,7 @@ import {
 } from '@/util'
 
 // Types
-import type { PropType, Ref, VNode } from 'vue'
+import type { PropType, Ref } from 'vue'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
 type Variant = typeof allowedVariants[number]
@@ -80,18 +80,18 @@ export const VField = genericComponent<new <T>() => {
     'onUpdate:modelValue'?: (val: T) => any
   }
   $slots: {
-    prependInner: (arg: DefaultInputSlot) => VNode[]
-    clear: () => VNode[]
-    appendInner: (arg: DefaultInputSlot) => VNode[]
-    label: (arg: DefaultInputSlot) => VNode[]
-    prepend: (arg: DefaultInputSlot) => VNode[]
-    append: (arg: DefaultInputSlot) => VNode[]
-    details: (arg: DefaultInputSlot) => VNode[]
-    loader: (arg: {
+    prependInner: [DefaultInputSlot]
+    clear: []
+    appendInner: [DefaultInputSlot]
+    label: [DefaultInputSlot]
+    prepend: [DefaultInputSlot]
+    append: [DefaultInputSlot]
+    details: [DefaultInputSlot]
+    loader: [{
       color: string | undefined
       isActive: boolean
-    }) => VNode[]
-    default: (arg: VFieldSlot) => VNode[]
+    }]
+    default: [VFieldSlot]
   }
 }>()({
   name: 'VField',
@@ -240,11 +240,9 @@ export const VField = genericComponent<new <T>() => {
           focused={ isFocused.value }
           messages={ props.errorMessages?.length ? props.errorMessages : errorMessages.value }
           { ...attrs }
-          v-slots={{
-            prepend: slots.prepend && (() => slots.prepend?.(slotProps.value)),
-            append: slots.append && (() => slots.append?.(slotProps.value)),
-            details: slots.details && (() => slots?.details?.(slotProps.value)),
-          }}
+          v-slot:prepend={ slots.prepend && (() => slots.prepend?.(slotProps.value)) }
+          v-slot:append={ slots.append && (() => slots.append?.(slotProps.value)) }
+          v-slot:details={ slots.details && (() => slots?.details?.(slotProps.value)) }
         >
           <div
             class={[
@@ -260,7 +258,7 @@ export const VField = genericComponent<new <T>() => {
               name="v-field"
               active={ props.loading }
               color={ isValid.value === false ? undefined : props.color }
-              v-slots={{ default: slots.loader }}
+              v-slot:default={ slots.loader }
             />
 
             { hasPrepend && (

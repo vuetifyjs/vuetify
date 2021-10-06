@@ -18,7 +18,6 @@ import { defineComponent, pick, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { VFieldSlot } from '@/components/VField/VField'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
@@ -89,7 +88,7 @@ export const VTextField = defineComponent({
     }
 
     useRender(() => {
-      const hasCounter = (slots.counter || props.counter || props.counterValue)
+      const hasCounter = !!(slots.counter || props.counter || props.counterValue)
       const [_, restAttrs] = pick(attrs, ['class'])
 
       return (
@@ -122,7 +121,7 @@ export const VTextField = defineComponent({
               isReadonly,
               inputRef,
               props: { class: fieldClass, ...slotProps },
-            }: VFieldSlot) => {
+            }) => {
               const showPlaceholder = isActive || props.persistentPlaceholder
               return (
                 <>
@@ -158,7 +157,7 @@ export const VTextField = defineComponent({
                 </>
               )
             },
-            details: hasCounter && (({ isFocused }: VFieldSlot) => (
+            details: hasCounter && (({ isFocused }) => (
               <>
                 <span />
 

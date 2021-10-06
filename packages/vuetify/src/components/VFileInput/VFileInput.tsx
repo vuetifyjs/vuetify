@@ -17,7 +17,6 @@ import { defineComponent, humanReadableFileSize, pick, useRender, wrapInArray } 
 
 // Types
 import type { PropType } from 'vue'
-import type { VFieldSlot } from '@/components/VField/VField'
 
 export const VFileInput = defineComponent({
   name: 'VFileInput',
@@ -105,7 +104,7 @@ export const VFileInput = defineComponent({
     }
 
     useRender(() => {
-      const hasCounter = (slots.counter || props.counter || counterValue.value)
+      const hasCounter = !!(slots.counter || props.counter || counterValue.value)
       const [_, restAttrs] = pick(attrs, ['class'])
 
       return (
@@ -137,7 +136,7 @@ export const VFileInput = defineComponent({
               isActive,
               inputRef,
               props: { class: fieldClass, ...slotProps },
-            }: VFieldSlot) => (
+            }) => (
               <>
                 <input
                   ref={ inputRef }
@@ -177,7 +176,7 @@ export const VFileInput = defineComponent({
               </>
             ),
 
-            details: hasCounter ? () => (
+            details: hasCounter && (() => (
               <>
                 <span />
 
@@ -186,7 +185,7 @@ export const VFileInput = defineComponent({
                   v-slots={ slots.counter }
                 />
               </>
-            ) : undefined,
+            )),
           }}
         />
       )

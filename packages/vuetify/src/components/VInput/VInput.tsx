@@ -91,7 +91,7 @@ export const VInput = defineComponent({
               <VMessages
                 active={ showMessages }
                 value={ hasMessages ? props.messages : [props.hint] }
-                v-slots={{ default: slots.messages }}
+                v-slot:default={ slots.messages }
               />
 
               { slots.details?.() }

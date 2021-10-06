@@ -31,10 +31,8 @@ describe('VExpansionPanels', () => {
         <VExpansionPanels>
           { titles.map(title => (
             <VExpansionPanel
-              v-slots={{
-                title: () => title,
-                text: () => 'Content',
-              }}
+              v-slot:title={ () => title }
+              v-slot:text={ () => 'Content' }
             />
           )) }
         </VExpansionPanels>

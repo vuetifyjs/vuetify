@@ -12,9 +12,14 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { nextTick, ref, watch } from 'vue'
-import { defineComponent, IN_BROWSER } from '@/util'
+import { genericComponent, IN_BROWSER } from '@/util'
 
-export const VDialog = defineComponent({
+// Types
+import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
+
+export const VDialog = genericComponent<new () => {
+  $slots: OverlaySlots
+}>()({
   name: 'VDialog',
 
   inheritAttrs: false,
@@ -118,10 +123,8 @@ export const VDialog = defineComponent({
             'aria-expanded': String(isActive.value),
           }}
           { ...attrs }
-          v-slots={{
-            default: slots.default,
-            activator: slots.activator,
-          }}
+          v-slot:default={ slots.default }
+          v-slot:activator={ slots.activator }
         />
       )
     }

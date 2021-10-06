@@ -10,10 +10,15 @@ import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { defineComponent, getUid } from '@/util'
 import { computed } from 'vue'
+import { genericComponent, getUid } from '@/util'
 
-export const VMenu = defineComponent({
+// Types
+import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
+
+export const VMenu = genericComponent<new () => {
+  $slots: OverlaySlots
+}>()({
   name: 'VMenu',
 
   inheritAttrs: false,
@@ -65,10 +70,8 @@ export const VMenu = defineComponent({
             'aria-owns': id.value,
           }}
           { ...attrs }
-          v-slots={{
-            default: slots.default,
-            activator: slots.activator,
-          }}
+          v-slot:default={ slots.default }
+          v-slot:activator={ slots.activator }
         />
       )
     }
