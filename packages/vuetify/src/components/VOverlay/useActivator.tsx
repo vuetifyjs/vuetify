@@ -1,5 +1,5 @@
 // Utilities
-import { getCurrentInstance, IN_BROWSER, propsFactory } from '@/util'
+import { getCurrentInstance, IN_BROWSER, propsFactory, SUPPORTS_FOCUS_VISIBLE } from '@/util'
 import { makeDelayProps, useDelay } from '@/composables/delay'
 import {
   computed,
@@ -85,11 +85,10 @@ export function useActivator (
     },
     focus: (e: FocusEvent) => {
       if (
-        CSS.supports('selector(:focus-visible)') &&
+        SUPPORTS_FOCUS_VISIBLE &&
         !(e.target as HTMLElement).matches(':focus-visible')
       ) return
 
-      // TODO: :focus-visible
       isFocused = true
       e.stopPropagation()
 
