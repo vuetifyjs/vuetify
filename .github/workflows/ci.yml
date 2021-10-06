@@ -18,6 +18,7 @@ jobs:
           path: |
             node_modules
             **/node_modules
+            /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn run build:lib
@@ -33,11 +34,21 @@ jobs:
           path: |
             node_modules
             **/node_modules
+            /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
 
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn lerna run test:coverage -- -- -i
       - uses: codecov/codecov-action@v1
+      - run: yarn cy:run
+        if: github.event_name == 'pull_request'
+        working-directory: ./packages/vuetify
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: ./packages/vuetify/cypress/screenshots/
+          if-no-files-found: ignore
 
   deploy:
     needs: [lint, test]
@@ -50,6 +61,7 @@ jobs:
           path: |
             node_modules
             **/node_modules
+            /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn lerna run build --scope vuetify
@@ -92,6 +104,7 @@ jobs:
           path: |
             node_modules
             **/node_modules
+            /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn global add now
 
