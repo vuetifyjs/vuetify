@@ -12,10 +12,10 @@ export const VForm = defineComponent({
   },
 
   emits: {
-    'update:modelValue': (val: boolean) => true as any,
-    resetValidation: () => true as any,
-    reset: (e: Event) => true as any,
-    submit: (e: Event) => true as any,
+    'update:modelValue': (val: boolean) => true,
+    resetValidation: () => true,
+    reset: (e: Event) => true,
+    submit: (e: Event) => true,
   },
 
   setup (props, { slots }) {

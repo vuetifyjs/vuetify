@@ -107,12 +107,12 @@ export const VField = genericComponent<new <T>() => {
   },
 
   emits: {
-    'click:clear': (e: Event) => true as any,
-    'click:prepend-inner': (e: MouseEvent) => true as any,
-    'click:append-inner': (e: MouseEvent) => true as any,
-    'click:control': (props: DefaultInputSlot) => true as any,
-    'update:active': (active: boolean) => true as any,
-    'update:modelValue': (val: any) => true as any,
+    'click:clear': (e: Event) => true,
+    'click:prepend-inner': (e: MouseEvent) => true,
+    'click:append-inner': (e: MouseEvent) => true,
+    'click:control': (props: DefaultInputSlot) => true,
+    'update:active': (active: boolean) => true,
+    'update:modelValue': (val: any) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
