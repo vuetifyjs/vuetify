@@ -50,7 +50,11 @@ describe('filter.ts', () => {
       expect(filterItems(items, 'item')).toHaveLength(50)
     })
 
-    it('should filter by filterMode', () => {
+    it('should filter by mode using customFilters', () => {
+      const customFilters = {
+        title: (s: string, q: string) => s === q,
+        value: (s: string) => s === '1',
+      }
       const items = [
         {
           title: 'foo',
@@ -81,37 +85,25 @@ describe('filter.ts', () => {
 
       expect(filterItems(items, 'foo', {
         keys,
-        customFilters: {
-          title: (s, q) => s === q,
-          value: s => s === '1',
-        },
+        customFilters,
         mode: 'some',
       })).toHaveLength(3)
 
       expect(filterItems(items, 'fizz', {
         keys,
-        customFilters: {
-          title: (s, q) => s === q,
-          value: s => s === '1',
-        },
+        customFilters,
         mode: 'union',
       })).toHaveLength(2)
 
       expect(filterItems(items, 'fizz', {
         keys,
-        customFilters: {
-          title: (s, q) => s === q,
-          value: s => s === '1',
-        },
+        customFilters,
         mode: 'intersection',
       })).toHaveLength(0)
 
       expect(filterItems(items, 'buzz', {
         keys,
-        customFilters: {
-          title: (s, q) => s === q,
-          value: s => s === '1',
-        },
+        customFilters,
         mode: 'every',
       })).toHaveLength(1)
     })

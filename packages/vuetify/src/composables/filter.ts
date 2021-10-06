@@ -1,5 +1,6 @@
 /* eslint-disable max-statements */
 /* eslint-disable no-labels */
+
 // Utilities
 import { getPropertyFromItem, propsFactory, wrapInArray, wrapInRef } from '@/util'
 import { computed } from 'vue'
@@ -56,7 +57,7 @@ export function filterItems (
 
   loop:
   for (const item of items) {
-    const customMatches: Record<string, FilterMatch> | FilterMatch[] = {}
+    const customMatches: Record<string, FilterMatch> = {}
     let defaultMatches: Record<string, FilterMatch> | FilterMatch[] = {}
     let match: FilterMatch = -1
 
@@ -67,20 +68,16 @@ export function filterItems (
         const value = getPropertyFromItem(item, key, item)
         const keyFilter = options?.customFilters?.[key]
 
-        if (keyFilter) {
-          match = keyFilter(value, query, item)
-        } else {
-          match = filter(value, query, item)
-        }
+        match = keyFilter
+          ? keyFilter(value, query, item)
+          : filter(value, query, item)
 
         if (match !== -1 && match !== false) {
           if (keyFilter) customMatches[key] = match
           else defaultMatches[key] = match
-
-          continue
+        } else if (options?.mode === 'every') {
+          continue loop
         }
-
-        if (options?.mode === 'every') continue loop
       }
 
       const defaultMatchesLength = Object.keys(defaultMatches).length
