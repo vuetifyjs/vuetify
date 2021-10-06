@@ -1,7 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { ref } from 'vue'
-import VOverlay from '../VOverlay'
+import { VOverlay } from '../VOverlay'
 
 describe('VOverlay', () => {
   it('without activator', () => {

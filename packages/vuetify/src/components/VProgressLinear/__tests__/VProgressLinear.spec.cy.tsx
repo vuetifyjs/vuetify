@@ -3,7 +3,7 @@
 import { CenteredGrid } from '@/../cypress/templates'
 import { VLocaleProvider } from '@/components'
 import { defineComponent, ref } from 'vue'
-import VProgressLinear from '../VProgressLinear'
+import { VProgressLinear } from '../VProgressLinear'
 
 describe('VProgressLinear', () => {
   it('supports modelValue prop', () => {
