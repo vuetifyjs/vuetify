@@ -1,6 +1,6 @@
 // Components
 import { VExpandTransition } from '..'
-import VListChildren from './VListChildren'
+import { VListChildren } from './VListChildren'
 
 // Composables
 import { useNestedGroup } from '@/composables/nested/nested'
@@ -45,7 +45,7 @@ const VListGroupItems = defineComponent({
   },
 })
 
-export default defineComponent({
+export const VListGroup = defineComponent({
   name: 'VListGroup',
 
   props: {

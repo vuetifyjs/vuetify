@@ -3,7 +3,7 @@ import './VList.sass'
 
 // Components
 import { VListSubheader } from './VListSubheader'
-import VListChildren from './VListChildren'
+import { VListChildren } from './VListChildren'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
