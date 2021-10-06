@@ -10,13 +10,16 @@ import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, getUid } from '@/util'
+import { genericComponent, getUid } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 import type { StrategyProps } from '@/components/VOverlay/positionStrategies'
 
-export const VTooltip = defineComponent({
+export const VTooltip = genericComponent<new () => {
+  $slots: OverlaySlots
+}>()({
   name: 'VTooltip',
 
   inheritAttrs: false,

@@ -16,7 +16,7 @@
   "dependencies": {
     "deepmerge": "^4.0.0",
     "rimraf": "^3.0.2",
-    "vue": "^3.2.8",
+    "vue": "^3.2.19",
     "vuetify": "^3.0.0-alpha.11"
   },
   "devDependencies": {

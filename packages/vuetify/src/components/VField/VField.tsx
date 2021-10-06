@@ -18,7 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { computed, ref, toRef, watch, watchEffect } from 'vue'
 import {
   convertToUnit,
-  defineComponent,
+  genericComponent,
   getUid,
   nullifyTransforms,
   propsFactory,
@@ -28,6 +28,7 @@ import {
 
 // Types
 import type { PropType, Ref } from 'vue'
+import type { MakeSlots } from '@/util'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
 type Variant = typeof allowedVariants[number]
@@ -45,12 +46,7 @@ export interface DefaultInputSlot {
 }
 
 export interface VFieldSlot extends DefaultInputSlot {
-  props: {
-    id: string
-    class: string
-    onFocus: () => void
-    onBlur: () => void
-  }
+  props: Record<string, unknown>
 }
 
 export const makeVFieldProps = propsFactory({
@@ -79,7 +75,26 @@ export const makeVFieldProps = propsFactory({
   ...makeValidationProps(),
 }, 'v-field')
 
-export const VField = defineComponent({
+export const VField = genericComponent<new <T>() => {
+  $props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (val: T) => any
+  }
+  $slots: MakeSlots<{
+    prependInner: [DefaultInputSlot]
+    clear: []
+    appendInner: [DefaultInputSlot]
+    label: [DefaultInputSlot]
+    prepend: [DefaultInputSlot]
+    append: [DefaultInputSlot]
+    details: [DefaultInputSlot]
+    loader: [{
+      color: string | undefined
+      isActive: boolean
+    }]
+    default: [VFieldSlot]
+  }>
+}>()({
   name: 'VField',
 
   inheritAttrs: false,
@@ -347,5 +362,4 @@ export const VField = defineComponent({
   },
 })
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export type VField = InstanceType<typeof VField>

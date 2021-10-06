@@ -136,6 +136,17 @@ module.exports = {
           allowTemplateLiterals: true,
         }],
 
+        indent: 'off',
+        '@typescript-eslint/indent': ['error', 2, {
+          ...require('eslint-config-standard').rules.indent[2],
+          ignoredNodes: [...require('eslint-config-standard').rules.indent[2].ignoredNodes, 'TSTypeParameterInstantiation'],
+          flatTernaryExpressions: true,
+          offsetTernaryExpressions: false,
+        }],
+
+        'func-call-spacing': 'off',
+        '@typescript-eslint/func-call-spacing': require('eslint-config-standard').rules['func-call-spacing'],
+
         // Handled by tsc
         'no-redeclare': 'off',
 

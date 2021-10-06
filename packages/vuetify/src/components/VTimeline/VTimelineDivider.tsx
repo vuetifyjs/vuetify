@@ -11,7 +11,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 // Utilities
 import { defineComponent, inject, toRef } from 'vue'
 
-export default defineComponent({
+export const VTimelineDivider = defineComponent({
   name: 'VTimelineDivider',
 
   props: {
@@ -84,3 +84,5 @@ export default defineComponent({
     )
   },
 })
+
+export type VTimelineDivider = InstanceType<typeof VTimelineDivider>
