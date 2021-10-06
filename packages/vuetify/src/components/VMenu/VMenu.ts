@@ -155,15 +155,24 @@ export default baseMixins.extend({
       return Boolean(this.tiles.find(tile => tile.tabIndex > -1))
     },
     styles (): object {
-      return {
+      const result = {
         maxHeight: this.calculatedMaxHeight,
         minWidth: this.calculatedMinWidth,
         maxWidth: this.calculatedMaxWidth,
-        top: this.calculatedTop,
+        top: '',
+        bottom: '',
         left: this.calculatedLeft,
         transformOrigin: this.origin,
         zIndex: this.zIndex || this.activeZIndex,
       }
+
+      if (this.top) {
+        result.bottom = this.calculatedTop
+      } else {
+        result.top = this.calculatedTop
+      }
+
+      return result
     },
   },
 
