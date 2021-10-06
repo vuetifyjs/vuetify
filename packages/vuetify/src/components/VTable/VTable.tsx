@@ -9,7 +9,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { convertToUnit, defineComponent } from '@/util'
 import { makeDensityProps, useDensity } from '@/composables/density'
 
-export default defineComponent({
+export const VTable = defineComponent({
   name: 'VTable',
 
   props: {

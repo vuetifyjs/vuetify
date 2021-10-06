@@ -1,1 +1,1 @@
-export { default as VTable } from './VTable'
+export { VTable } from './VTable'
