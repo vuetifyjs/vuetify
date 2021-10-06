@@ -29,7 +29,7 @@ describe('filter.ts', () => {
       [['title'], 'foo', 5],
       [['title', 'value'], 'fizz', 5],
       [['title', 'value'], 'foo-0', 1],
-    ])('should filter items by intersection with %s keys with query %s', (keys: string[], query, expected) => {
+    ])('should filter items by some with %s keys with query %s', (keys: string[], query, expected) => {
       expect(filterItems(items, query, { keys })).toHaveLength(expected)
     })
 
@@ -38,8 +38,8 @@ describe('filter.ts', () => {
       [['title', 'value'], 'fizz', 0],
       [['title', 'value'], 'foo-0', 0],
       [['title', 'value'], '0', 1],
-    ])('should filter items by union with %s keys with query %s', (keys: string[], query, expected) => {
-      expect(filterItems(items, query, { keys, union: true })).toHaveLength(expected)
+    ])('should filter items by every with %s keys with query %s', (keys: string[], query, expected) => {
+      expect(filterItems(items, query, { keys, mode: 'every' })).toHaveLength(expected)
     })
 
     it('should filter an array of strings', () => {
@@ -48,6 +48,72 @@ describe('filter.ts', () => {
       expect(filterItems(items, 'item-2')).toHaveLength(11)
       expect(filterItems(items, 'item-29')).toHaveLength(1)
       expect(filterItems(items, 'item')).toHaveLength(50)
+    })
+
+    it('should filter by filterMode', () => {
+      const items = [
+        {
+          title: 'foo',
+          subtitle: 'bar',
+          value: '1',
+          custom: '1',
+        },
+        {
+          title: 'fizz',
+          subtitle: 'buzz',
+          value: '1',
+          custom: 'bar',
+        },
+        {
+          title: 'foobar',
+          subtitle: 'fizzbuzz',
+          value: '2',
+          custom: 'bar',
+        },
+        {
+          title: 'buzz',
+          subtitle: 'buzz',
+          value: '1',
+          custom: 'buzz',
+        },
+      ]
+      const keys = ['title', 'value', 'subtitle', 'custom']
+
+      expect(filterItems(items, 'foo', {
+        keys,
+        customFilters: {
+          title: (s, q) => s === q,
+          value: s => s === '1',
+        },
+        mode: 'some',
+      })).toHaveLength(3)
+
+      expect(filterItems(items, 'fizz', {
+        keys,
+        customFilters: {
+          title: (s, q) => s === q,
+          value: s => s === '1',
+        },
+        mode: 'union',
+      })).toHaveLength(2)
+
+      expect(filterItems(items, 'fizz', {
+        keys,
+        customFilters: {
+          title: (s, q) => s === q,
+          value: s => s === '1',
+        },
+        mode: 'intersection',
+      })).toHaveLength(0)
+
+      expect(filterItems(items, 'buzz', {
+        keys,
+        customFilters: {
+          title: (s, q) => s === q,
+          value: s => s === '1',
+        },
+        mode: 'every',
+      })).toHaveLength(1)
     })
   })
 

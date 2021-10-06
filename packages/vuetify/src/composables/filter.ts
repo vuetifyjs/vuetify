@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 /* eslint-disable no-labels */
 // Utilities
 import { getPropertyFromItem, propsFactory, wrapInArray, wrapInRef } from '@/util'
@@ -10,7 +11,7 @@ export type FilterFunction = (value: string, query: string, item?: any) => Filte
 export type FilterKeyFunctions = Record<string, FilterFunction>
 export type FilterKeys = string | string[]
 export type FilterMatch = number | [number, number] | [number, number][] | boolean
-export type FilterMode = 'intersection' | 'union'
+export type FilterMode = 'some' | 'every' | 'union' | 'intersection'
 
 export interface FilterProps {
   customFilter?: FilterFunction
@@ -43,18 +44,20 @@ export function filterItems (
     customFilters?: FilterKeyFunctions
     default?: FilterFunction
     keys?: FilterKeys
-    union?: boolean
+    mode?: FilterMode
   },
 ) {
   const array: (typeof items) = []
   const filter = options?.default ?? defaultFilter
   const keys = options?.keys ? wrapInArray(options?.keys) : false
+  const customFiltersLength = Object.keys(options?.customFilters ?? {}).length
 
   if (!items?.length) return array
 
   loop:
   for (const item of items) {
-    let matches: Record<string, FilterMatch> | FilterMatch[] = {}
+    const customMatches: Record<string, FilterMatch> | FilterMatch[] = {}
+    let defaultMatches: Record<string, FilterMatch> | FilterMatch[] = {}
     let match: FilterMatch = -1
 
     if (typeof item === 'object') {
@@ -62,30 +65,51 @@ export function filterItems (
 
       for (const key of filterKeys) {
         const value = getPropertyFromItem(item, key, item)
-        const keyFilter = options?.customFilters?.[key] ?? filter
+        const keyFilter = options?.customFilters?.[key]
 
-        match = keyFilter(value, query, item)
-
-        if (match === -1) {
-          if (options?.union) break loop
-          else continue
+        if (keyFilter) {
+          match = keyFilter(value, query, item)
+        } else {
+          match = filter(value, query, item)
         }
 
-        matches[key] = match
+        if (match !== -1 && match !== false) {
+          if (keyFilter) customMatches[key] = match
+          else defaultMatches[key] = match
+
+          continue
+        }
+
+        if (options?.mode === 'every') continue loop
       }
 
-      const length = Object.keys(matches).length
+      const defaultMatchesLength = Object.keys(defaultMatches).length
+      const customMatchesLength = Object.keys(customMatches).length
 
-      if (!length || (options?.union && length !== filterKeys.length)) continue
+      if (!defaultMatchesLength && !customMatchesLength) continue
+
+      if (
+        options?.mode === 'union' &&
+        customMatchesLength !== customFiltersLength &&
+        !defaultMatchesLength
+      ) continue
+
+      if (
+        options?.mode === 'intersection' &&
+        (
+          customMatchesLength !== customFiltersLength ||
+          !defaultMatchesLength
+        )
+      ) continue
     } else if (typeof item === 'string') {
       match = filter(item, query, item)
 
-      if (match === -1) continue
+      if (match === -1 || match === false) continue
 
-      matches = wrapInArray(match)
+      defaultMatches = wrapInArray(match)
     }
 
-    array.push({ item, matches })
+    array.push({ item, matches: { ...defaultMatches, ...customMatches } })
   }
 
   return array
@@ -108,7 +132,7 @@ export function useFilter (
       {
         default: props.customFilter,
         customFilters: props.customFilters,
-        union: props.filterMode === 'union',
+        mode: props.filterMode,
       },
     )
   })
