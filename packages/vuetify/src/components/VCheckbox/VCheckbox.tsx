@@ -87,6 +87,7 @@ export const VCheckbox = defineComponent({
       return (
         <VInput
           active={ false }
+          focused={ isFocusVisible.value }
           class={[
             'v-checkbox',
             {
