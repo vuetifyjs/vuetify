@@ -14,6 +14,7 @@ import { useRtl } from '@/composables/rtl'
 import { useTeleport } from '@/composables/teleport'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
+import { useStack } from '@/composables/stack'
 
 // Directives
 import { ClickOutside } from '@/directives/click-outside'
@@ -39,8 +40,8 @@ import {
 
 // Types
 import type { PropType, Ref } from 'vue'
+import type { MakeSlots } from '@/util'
 import type { BackgroundColorData } from '@/composables/color'
-import { useStack } from '@/composables/stack'
 
 interface ScrimProps {
   [key: string]: unknown
@@ -65,10 +66,10 @@ function Scrim (props: ScrimProps) {
   )
 }
 
-export type OverlaySlots = {
+export type OverlaySlots = MakeSlots<{
   default: [{ isActive: Ref<boolean> }]
   activator: [{ isActive: boolean, props: Dictionary<any> }]
-}
+}>
 
 export const VOverlay = genericComponent<new () => {
   $slots: OverlaySlots

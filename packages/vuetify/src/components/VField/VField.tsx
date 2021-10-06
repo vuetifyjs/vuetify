@@ -28,6 +28,7 @@ import {
 
 // Types
 import type { PropType, Ref } from 'vue'
+import type { MakeSlots } from '@/util'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
 type Variant = typeof allowedVariants[number]
@@ -79,7 +80,7 @@ export const VField = genericComponent<new <T>() => {
     modelValue?: T
     'onUpdate:modelValue'?: (val: T) => any
   }
-  $slots: {
+  $slots: MakeSlots<{
     prependInner: [DefaultInputSlot]
     clear: []
     appendInner: [DefaultInputSlot]
@@ -92,7 +93,7 @@ export const VField = genericComponent<new <T>() => {
       isActive: boolean
     }]
     default: [VFieldSlot]
-  }
+  }>
 }>()({
   name: 'VField',
 

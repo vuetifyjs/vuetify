@@ -67,15 +67,20 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
   return options
 }) as unknown as typeof _defineComponent
 
-type ToListeners<T extends string | number | symbol> = { [k in T]: k extends `on${infer U}` ? Uncapitalize<U> : k }[T]
-type SlotsToProps<T extends Record<string, any[]>> = {
-  'v-slots': new () => { [k in keyof T]?: false | ((...args: T[k]) => VNode | VNode[]) }
+type ToListeners<T extends string | number | symbol> = { [K in T]: K extends `on${infer U}` ? Uncapitalize<U> : K }[T]
+type SlotsToProps<T extends Record<string, Slot>> = {
+  'v-slots': new () => { [K in keyof T]?: T[K] | false }
 }/* & { // TODO: individual slots are never converted from the constructor type
-  [k in keyof T as `v-slot:${k & string}`]?: new () => (false | ((...args: T[k]) => VNode | VNode[]))
+  [K in keyof T as `v-slot:${K & string}`]?: new () => (T[K] | false)
 } */
 
+type Slot<T extends any[] = any[]> = (...args: T) => VNode | VNode[]
+export type MakeSlots<T extends Record<string, any[]>> = {
+  [K in keyof T]: Slot<T[K]>
+}
+
 export function genericComponent<T extends (new () => {
-  $slots?: Record<string, any[]>
+  $slots?: Record<string, Slot>
 })> (exposeDefaults = true): <
   PropsOptions extends Readonly<ComponentPropsOptions>,
   RawBindings,
