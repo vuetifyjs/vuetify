@@ -5,7 +5,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VHover = defineComponent({
   name: 'VHover',
 
   props: {

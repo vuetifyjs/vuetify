@@ -15,7 +15,7 @@ import { convertToUnit, defineComponent, flattenFragments } from '@/util'
 import type { IconValue } from '@/composables/icons'
 import type { ComputedRef, PropType } from 'vue'
 
-export default defineComponent({
+export const VIcon = defineComponent({
   name: 'VIcon',
 
   props: {

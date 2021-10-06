@@ -1,3 +1,3 @@
 import { createSimpleFunctional } from '@/util'
 
-export default createSimpleFunctional('v-banner-content')
+export const VBannerContent = createSimpleFunctional('v-banner-content')

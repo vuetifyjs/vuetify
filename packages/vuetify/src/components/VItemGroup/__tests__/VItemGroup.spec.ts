@@ -1,6 +1,6 @@
 // Components
-import VItem from '../VItem'
-import VItemGroup from '../VItemGroup'
+import { VItem } from '../VItem'
+import { VItemGroup } from '../VItemGroup'
 
 // Utilities
 import { h } from 'vue'

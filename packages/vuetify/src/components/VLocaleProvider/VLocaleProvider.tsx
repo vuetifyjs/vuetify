@@ -7,7 +7,7 @@ import { provideRtl } from '@/composables/rtl'
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VLocaleProvider = defineComponent({
   name: 'VLocaleProvider',
 
   props: {

@@ -20,7 +20,7 @@ export function useAspectStyles (props: { aspectRatio?: string | number }) {
   }
 }
 
-export default defineComponent({
+export const VResponsive = defineComponent({
   name: 'VResponsive',
 
   props: {

@@ -70,7 +70,7 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: string)
   return className.toLowerCase()
 }
 
-export default defineComponent({
+export const VRow = defineComponent({
   name: 'VRow',
 
   props: {

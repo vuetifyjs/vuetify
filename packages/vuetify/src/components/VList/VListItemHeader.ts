@@ -1,3 +1,3 @@
 import { createSimpleFunctional } from '@/util'
 
-export default createSimpleFunctional('v-list-item-header')
+export const VListItemHeader = createSimpleFunctional('v-list-item-header')

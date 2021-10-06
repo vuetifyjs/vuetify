@@ -103,5 +103,4 @@ export const VInput = defineComponent({
   },
 })
 
-/* eslint-disable-next-line @typescript-eslint/no-redeclare */
 export type VInput = InstanceType<typeof VInput>

@@ -1,3 +1,1 @@
-import VMenu from './VMenu'
-
-export { VMenu }
+export { VMenu } from './VMenu'

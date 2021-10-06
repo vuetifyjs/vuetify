@@ -70,11 +70,6 @@ export function useActivator (
   })
 
   const availableEvents = {
-    keydown: (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        isActive.value = false
-      }
-    },
     click: (e: MouseEvent) => {
       e.stopPropagation()
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
@@ -108,9 +103,7 @@ export function useActivator (
   }
 
   const activatorEvents = computed(() => {
-    const events: Partial<typeof availableEvents> = {
-      keydown: availableEvents.keydown,
-    }
+    const events: Partial<typeof availableEvents> = {}
 
     if (openOnClick.value) {
       events.click = availableEvents.click

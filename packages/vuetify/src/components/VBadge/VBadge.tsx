@@ -14,7 +14,7 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { computed, toRef } from 'vue'
 import { convertToUnit, defineComponent, pick } from '@/util'
 
-export default defineComponent({
+export const VBadge = defineComponent({
   name: 'VBadge',
 
   inheritAttrs: false,
@@ -158,3 +158,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VBadge = InstanceType<typeof VBadge>

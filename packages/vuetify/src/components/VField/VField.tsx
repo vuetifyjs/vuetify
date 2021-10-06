@@ -5,7 +5,7 @@ import './VField.sass'
 import { VExpandXTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 import { VInput } from '@/components/VInput'
-import VFieldLabel from './VFieldLabel'
+import { VFieldLabel } from './VFieldLabel'
 
 // Composables
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
@@ -18,7 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { computed, ref, toRef, watch, watchEffect } from 'vue'
 import {
   convertToUnit,
-  defineComponent,
+  genericComponent,
   getUid,
   nullifyTransforms,
   propsFactory,
@@ -28,6 +28,7 @@ import {
 
 // Types
 import type { PropType, Ref } from 'vue'
+import type { MakeSlots } from '@/util'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
 type Variant = typeof allowedVariants[number]
@@ -45,12 +46,7 @@ export interface DefaultInputSlot {
 }
 
 export interface VFieldSlot extends DefaultInputSlot {
-  props: {
-    id: string
-    class: string
-    onFocus: () => void
-    onBlur: () => void
-  }
+  props: Record<string, unknown>
 }
 
 export const makeVFieldProps = propsFactory({
@@ -79,7 +75,26 @@ export const makeVFieldProps = propsFactory({
   ...makeValidationProps(),
 }, 'v-field')
 
-export const VField = defineComponent({
+export const VField = genericComponent<new <T>() => {
+  $props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (val: T) => any
+  }
+  $slots: MakeSlots<{
+    prependInner: [DefaultInputSlot]
+    clear: []
+    appendInner: [DefaultInputSlot]
+    label: [DefaultInputSlot]
+    prepend: [DefaultInputSlot]
+    append: [DefaultInputSlot]
+    details: [DefaultInputSlot]
+    loader: [{
+      color: string | undefined
+      isActive: boolean
+    }]
+    default: [VFieldSlot]
+  }>
+}>()({
   name: 'VField',
 
   inheritAttrs: false,
@@ -92,12 +107,12 @@ export const VField = defineComponent({
   },
 
   emits: {
-    'click:clear': (e: Event) => true as any,
-    'click:prepend-inner': (e: MouseEvent) => true as any,
-    'click:append-inner': (e: MouseEvent) => true as any,
-    'click:control': (props: DefaultInputSlot) => true as any,
-    'update:active': (active: boolean) => true as any,
-    'update:modelValue': (val: any) => true as any,
+    'click:clear': (e: Event) => true,
+    'click:prepend-inner': (e: MouseEvent) => true,
+    'click:append-inner': (e: MouseEvent) => true,
+    'click:control': (props: DefaultInputSlot) => true,
+    'update:active': (active: boolean) => true,
+    'update:modelValue': (val: any) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
@@ -106,8 +121,8 @@ export const VField = defineComponent({
     const isActive = useProxiedModel(props, 'active')
     const uid = getUid()
 
-    const labelRef = ref<InstanceType<typeof VFieldLabel>>()
-    const floatingLabelRef = ref<InstanceType<typeof VFieldLabel>>()
+    const labelRef = ref<VFieldLabel>()
+    const floatingLabelRef = ref<VFieldLabel>()
     const controlRef = ref<HTMLElement>()
     const inputRef = ref<HTMLInputElement>()
     const isFocused = ref(false)
@@ -347,5 +362,4 @@ export const VField = defineComponent({
   },
 })
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export type VField = InstanceType<typeof VField>

@@ -9,7 +9,7 @@ import { useSsrBoot } from '@/composables/ssrBoot'
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VMain = defineComponent({
   name: 'VMain',
 
   props: makeTagProps({ tag: 'main' }),

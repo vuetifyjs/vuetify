@@ -4,7 +4,7 @@ import { makeTagProps } from '@/composables/tag'
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VListItemAvatar = defineComponent({
   name: 'VListItemAvatar',
 
   props: {

@@ -23,7 +23,7 @@ import { Ripple } from '@/directives/ripple'
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VChip = defineComponent({
   name: 'VChip',
 
   directives: { Ripple },
@@ -185,3 +185,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VChip = InstanceType<typeof VChip>

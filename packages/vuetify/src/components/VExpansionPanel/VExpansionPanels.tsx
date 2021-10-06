@@ -19,7 +19,7 @@ export const VExpansionPanelSymbol: InjectionKey<GroupItemProvide> = Symbol.for(
 const allowedVariants = ['default', 'accordion', 'inset', 'popout'] as const
 type Variant = typeof allowedVariants[number]
 
-export default defineComponent({
+export const VExpansionPanels = defineComponent({
   name: 'VExpansionPanels',
 
   props: {
@@ -53,3 +53,5 @@ export default defineComponent({
     )
   },
 })
+
+export type VExpansionPanels = InstanceType<typeof VExpansionPanels>

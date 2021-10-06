@@ -1,1 +1,1 @@
-export { default as VAlert } from './VAlert'
+export { VAlert } from './VAlert'
