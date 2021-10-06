@@ -4,7 +4,7 @@ import './VCheckbox.sass'
 // Components
 import { VIcon } from '@/components/VIcon'
 import { VInput } from '@/components/VInput'
-import VFieldLabel from '@/components/VField/VFieldLabel'
+import { VFieldLabel } from '@/components/VField/VFieldLabel'
 
 // Composables
 import { useTextColor } from '@/composables/color'
