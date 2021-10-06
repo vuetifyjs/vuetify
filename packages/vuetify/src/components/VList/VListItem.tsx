@@ -24,11 +24,29 @@ import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed, onMounted } from 'vue'
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 import { useNestedItem } from '@/composables/nested/nested'
 import { useList } from './VList'
 
-export const VListItem = defineComponent({
+// Types
+import type { MakeSlots } from '@/util'
+
+type ListItemSlot = {
+  isActive: boolean
+  activate: (value: boolean) => void
+  isSelected: boolean
+  select: (value: boolean) => void
+}
+
+export const VListItem = genericComponent<new () => {
+  $slots: MakeSlots<{
+    prepend: [ListItemSlot]
+    append: [ListItemSlot]
+    default: [ListItemSlot]
+    title: []
+    subtitle: []
+  }>
+}>()({
   name: 'VListItem',
 
   directives: { Ripple },
@@ -174,7 +192,7 @@ export const VListItem = defineComponent({
             </VListItemHeader>
           ) }
 
-          { slots.default?.() }
+          { slots.default?.(slotProps.value) }
 
           { hasAppend && (
             slots.append
@@ -194,3 +212,5 @@ export const VListItem = defineComponent({
     }
   },
 })
+
+export type VListItem = InstanceType<typeof VListItem>

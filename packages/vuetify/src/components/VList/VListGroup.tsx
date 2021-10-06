@@ -8,14 +8,15 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent } from '@/util'
+import { defineComponent, genericComponent } from '@/util'
 import { createList, useDepth, useList } from './VList'
 
 // Types
 import type { Prop } from 'vue'
-import type { ListItem } from './VListChildren'
+import type { MakeSlots } from '@/util'
+import type { ListItem } from './VList'
 
-export type VListGroupHeaderSlotProps = {
+export type ListGroupHeaderSlot = {
   onClick: (e: Event) => void
   appendIcon: string
   class: string
@@ -45,7 +46,15 @@ const VListGroupItems = defineComponent({
   },
 })
 
-export const VListGroup = defineComponent({
+export const VListGroup = genericComponent<new <T extends ListItem>() => {
+  $props: {
+    items?: T[]
+  }
+  $slots: MakeSlots<{
+    header: [ListGroupHeaderSlot]
+    item: [T]
+  }>
+}>()({
   name: 'VListGroup',
 
   props: {
