@@ -50,7 +50,7 @@ export const VCheckbox = defineComponent({
 
   setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
-    const { errorMessages, isDisabled, isReadonly, isValid, validationClasses } = useValidation(props, 'v-field')
+    const { errorMessages, isDisabled, isReadonly, isValid, validationClasses } = useValidation(props, 'v-checkbox')
     const model = useProxiedModel(props, 'modelValue')
     const uid = getUid()
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {

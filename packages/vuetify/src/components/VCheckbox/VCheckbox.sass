@@ -47,3 +47,17 @@
   grid-area: control
   height: var(--v-input-control-height)
   position: relative
+
+// TODO: normalise state classes
+.v-checkbox
+  &--disabled
+    .v-icon,
+    .v-messages
+      color: $checkbox-disabled-color
+
+  &--error
+    color: $checkbox-error-color
+
+    .v-icon,
+    .v-messages
+      color: $checkbox-error-color
