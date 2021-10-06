@@ -1,0 +1,53 @@
+@forward './variables'
+@use 'sass:map'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+.v-selection-control
+  align-items: center
+  contain: layout
+  display: flex
+  flex: 1 0
+  grid-area: control
+  height: var(--v-input-control-height)
+  position: relative
+  user-select: none
+
+  &--disabled
+    color: $selection-control-disabled-color
+
+  &--error
+    color: $selection-control-error-color
+
+.v-selection-control__input
+  cursor: pointer
+  display: flex
+  align-items: center
+  justify-content: center
+  position: relative
+  width: 40px
+  height: 40px
+
+  input
+    position: absolute
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    opacity: 0
+    pointer-events: none
+
+  &::before
+    @include tools.absolute()
+    border-radius: 100%
+    background-color: currentColor
+    opacity: 0
+    transition: opacity .2s ease-in-out
+    pointer-events: none
+
+  &:hover::before
+    opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
+
+  .v-selection-control--focus-visible &::before
+    opacity: calc(#{map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
