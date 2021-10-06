@@ -68,14 +68,15 @@ export function filterItems (
 
         if (match === -1) {
           if (options?.union) break loop
-
-          continue
+          else continue
         }
 
         matches[key] = match
       }
 
-      if (!Object.keys(matches).length) continue
+      const length = Object.keys(matches).length
+
+      if (!length || (options?.union && length !== filterKeys.length)) continue
     } else if (typeof item === 'string') {
       match = filter(item, query, item)
 
