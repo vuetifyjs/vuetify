@@ -198,7 +198,7 @@
   },
   {
     "title": "resources",
-    "icon": "$mdiTeach",
+    "icon": "$mdiHumanMaleBoard",
     "items": [
       "jobs-for-vue",
       "themes",

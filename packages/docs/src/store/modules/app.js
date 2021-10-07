@@ -38,7 +38,7 @@ const state = {
       color: 'primary',
     },
     resources: {
-      icon: '$mdiTeach',
+      icon: '$mdiHumanMaleBoard',
       color: 'pink',
     },
     styles: {
