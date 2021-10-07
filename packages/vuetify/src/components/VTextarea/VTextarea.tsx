@@ -36,15 +36,14 @@ export const VTextarea = defineComponent({
     persistentPlaceholder: Boolean,
     persistentCounter: Boolean,
     noResize: Boolean,
-    rowHeight: {
-      type: [Number, String],
-      default: 24,
-      validator: (v: any) => !isNaN(parseFloat(v)),
-    },
     rows: {
       type: [Number, String],
       default: 5,
-      validator: (v: any) => !isNaN(parseInt(v, 10)),
+      validator: (v: any) => !isNaN(parseFloat(v)),
+    },
+    maxRows: {
+      type: [Number, String],
+      validator: (v: any) => !isNaN(parseFloat(v)),
     },
     suffix: String,
 
@@ -102,14 +101,22 @@ export const VTextarea = defineComponent({
       nextTick(() => {
         if (!fieldRef?.value?.inputRef) return
 
-        const height = fieldRef.value.inputRef.scrollHeight
-        const minHeight = parseInt(props.rows, 10) * parseFloat(getComputedStyle(fieldRef.value.inputRef).lineHeight)
+        const style = getComputedStyle(fieldRef.value.inputRef)
 
-        controlHeight.value = convertToUnit(Math.max(minHeight, height ?? 0))
+        const padding = parseFloat(style.getPropertyValue('--v-field-padding-top')) +
+        parseFloat(style.getPropertyValue('--v-field-padding-bottom'))
+
+        const height = fieldRef.value.inputRef.scrollHeight
+        const lineHeight = parseFloat(style.lineHeight)
+        const minHeight = parseFloat(props.rows) * lineHeight + padding
+        const maxHeight = parseFloat(props.maxRows!) * lineHeight + padding || Infinity
+
+        controlHeight.value = convertToUnit(Math.min(maxHeight, Math.max(minHeight, height ?? 0)))
       })
     }
 
     watch(model, calculateInputHeight)
+    watch(() => props.rows, calculateInputHeight)
 
     onMounted(calculateInputHeight)
 
