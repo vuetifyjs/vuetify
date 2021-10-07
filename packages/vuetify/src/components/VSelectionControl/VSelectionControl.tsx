@@ -60,6 +60,10 @@ export const VSelectionControl = genericComponent<new <T>() => {
       type: String,
       required: true,
     },
+    value: {
+      type: null,
+      default: undefined as any,
+    },
 
     ...makeThemeProps(),
     ...makeValidationProps(),
@@ -77,7 +81,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
       return isValid.value || model.value ? props.color : undefined
     }))
     const icon = computed(() => {
-      return model.value ? props.onIcon : props.offIcon
+      return model.value === props.value ? props.onIcon : props.offIcon
     })
     const id = computed(() => props.id || `input-${uid}`)
     const isFocused = ref(false)
@@ -96,12 +100,6 @@ export const VSelectionControl = genericComponent<new <T>() => {
     function onBlur () {
       isFocused.value = false
       isFocusVisible.value = false
-    }
-
-    function onClick () {
-      if (isDisabled.value || isReadonly.value) return
-
-      model.value = !model.value
     }
 
     useRender(() => {
@@ -134,7 +132,6 @@ export const VSelectionControl = genericComponent<new <T>() => {
               null,
               ['center', 'circle'],
             ]}
-            onClick={ onClick }
           >
             <VIcon icon={ icon.value } />
 
@@ -153,7 +150,6 @@ export const VSelectionControl = genericComponent<new <T>() => {
           <VFieldLabel
             for={ id.value }
             style="position: static; pointer-events: auto; cursor: pointer;"
-            onClick={ !slots.default && onClick }
           >
             { label }
           </VFieldLabel>
