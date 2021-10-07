@@ -36,8 +36,8 @@ export const VCheckbox = defineComponent({
       return (
         <VSelectionControl
           class="v-checkbox"
-          on-icon={ props.onIcon }
-          off-icon={ props.offIcon }
+          onIcon={ props.onIcon }
+          offIcon={ props.offIcon }
           { ...attrs }
           v-slots={{
             ...slots,
@@ -54,6 +54,7 @@ export const VCheckbox = defineComponent({
                   disabled={ isDisabled.value }
                   type="checkbox"
                   { ...restAttrs }
+                  { ...props }
                 />
               )
             },
