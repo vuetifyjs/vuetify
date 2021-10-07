@@ -8,7 +8,7 @@ import { VFieldLabel } from '@/components/VField/VFieldLabel'
 // Composables
 import { useTextColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps } from '@/composables/theme'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Directives
@@ -22,7 +22,7 @@ import { genericComponent, getUid, SUPPORTS_FOCUS_VISIBLE, useRender } from '@/u
 import type { ComputedRef, WritableComputedRef } from 'vue'
 import type { MakeSlots } from '@/util'
 
-export interface VSelectionControlSlot {
+export type SelectionControlSlot = {
   model: WritableComputedRef<any>
   isReadonly: ComputedRef<boolean>
   isDisabled: ComputedRef<boolean>
@@ -39,7 +39,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
     'onUpdate:modelValue'?: (val: T) => any
   }
   $slots: MakeSlots<{
-    default: [VSelectionControlSlot]
+    default: [SelectionControlSlot]
   }>
 }>()({
   name: 'VSelectionControl',
@@ -70,7 +70,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
   },
 
   setup (props, { attrs, slots }) {
-    const { errorMessages, isDisabled, isReadonly, isValid, validationClasses } = useValidation(props, 'v-checkbox')
+    const { isDisabled, isReadonly, isValid } = useValidation(props, 'v-checkbox')
     const model = useProxiedModel(props, 'modelValue')
     const uid = getUid()
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
@@ -149,7 +149,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
                 onBlur,
                 id: id.value,
               },
-            } as VSelectionControlSlot) }
+            } as SelectionControlSlot) }
           </div>
 
           <VFieldLabel
