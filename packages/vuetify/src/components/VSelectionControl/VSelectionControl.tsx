@@ -81,7 +81,14 @@ export const VSelectionControl = genericComponent<new <T>() => {
       return isValid.value || model.value ? props.color : undefined
     }))
     const icon = computed(() => {
-      return model.value === props.value ? props.onIcon : props.offIcon
+      if (
+        model.value && (
+          model.value === props.value ||
+          props.value == null
+        )
+      ) return props.onIcon
+
+      return props.offIcon
     })
     const id = computed(() => props.id || `input-${uid}`)
     const isFocused = ref(false)
