@@ -5,7 +5,7 @@ import './VCheckbox.sass'
 import { VSelectionControl } from '@/components/VSelectionControl'
 
 // Utility
-import { defineComponent } from 'vue'
+import { computed, defineComponent, onMounted, ref, watch, watchEffect } from 'vue'
 import { pick, useRender } from '@/util'
 
 export const VCheckbox = defineComponent({
@@ -27,17 +27,35 @@ export const VCheckbox = defineComponent({
       type: String,
       default: '$checkboxOn',
     },
+    modelValue: {
+      type: null,
+      default: undefined as any,
+    },
   },
 
   setup (props, { attrs, slots }) {
+    const indeterminate = ref(props.indeterminate)
+
     useRender(() => {
       const [_, restAttrs] = pick(attrs, ['class'])
+
+      const offIcon = computed(() => {
+        return indeterminate.value
+          ? props.indeterminateIcon
+          : props.offIcon
+      })
+
+      function onChange () {
+        if (indeterminate.value) {
+          indeterminate.value = false
+        }
+      }
 
       return (
         <VSelectionControl
           class="v-checkbox"
           onIcon={ props.onIcon }
-          offIcon={ props.offIcon }
+          offIcon={ offIcon.value }
           { ...attrs }
           v-slots={{
             ...slots,
@@ -55,6 +73,7 @@ export const VCheckbox = defineComponent({
                   type="checkbox"
                   { ...restAttrs }
                   { ...props }
+                  onChange={ onChange }
                 />
               )
             },
