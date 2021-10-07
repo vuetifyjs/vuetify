@@ -13,7 +13,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import Intersect from '@/directives/intersect'
 
 // Utilities
-import { computed, nextTick, onMounted, ref } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { convertToUnit, defineComponent, pick, useRender } from '@/util'
 
 // Types
@@ -100,12 +100,16 @@ export const VTextarea = defineComponent({
       controlHeight.value = 'auto'
 
       nextTick(() => {
-        const height = fieldRef?.value?.inputRef?.scrollHeight
-        const minHeight = parseInt(props.rows, 10) * parseFloat(props.rowHeight)
+        if (!fieldRef?.value?.inputRef) return
+
+        const height = fieldRef.value.inputRef.scrollHeight
+        const minHeight = parseInt(props.rows, 10) * parseFloat(getComputedStyle(fieldRef.value.inputRef).lineHeight)
 
         controlHeight.value = convertToUnit(Math.max(minHeight, height ?? 0))
       })
     }
+
+    watch(model, calculateInputHeight)
 
     onMounted(calculateInputHeight)
 
@@ -170,7 +174,6 @@ export const VTextarea = defineComponent({
                     readonly={ isReadonly }
                     disabled={ isDisabled }
                     placeholder={ props.placeholder }
-                    onInput={ calculateInputHeight }
                     rows={ props.rows }
                     { ...slotProps }
                     { ...restAttrs }
