@@ -22,7 +22,6 @@
 
 .v-selection-control__input
   align-items: center
-  cursor: pointer
   display: flex
   flex: 0 1
   justify-content: center
@@ -32,13 +31,13 @@
   height: 40px
 
   input
+    cursor: pointer
     position: absolute
     left: 0
     top: 0
     width: 100%
     height: 100%
     opacity: 0
-    pointer-events: none
 
   &::before
     @include tools.absolute()

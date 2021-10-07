@@ -1,5 +1,5 @@
 // Styles
-import './VCheckbox.sass'
+import './VRadio.sass'
 
 // Components
 import { VSelectionControl } from '@/components/VSelectionControl'
@@ -8,34 +8,29 @@ import { VSelectionControl } from '@/components/VSelectionControl'
 import { defineComponent } from 'vue'
 import { pick, useRender } from '@/util'
 
-export const VCheckbox = defineComponent({
-  name: 'VCheckbox',
+export const VRadio = defineComponent({
+  name: 'VRadio',
 
   inheritAttrs: false,
 
   props: {
-    indeterminate: Boolean,
-    indeterminateIcon: {
-      type: String,
-      default: '$checkboxIndeterminate',
-    },
     offIcon: {
       type: String,
-      default: '$checkboxOff',
+      default: '$radioOff',
     },
     onIcon: {
       type: String,
-      default: '$checkboxOn',
+      default: '$radioOn',
     },
   },
 
   setup (props, { attrs, slots }) {
     useRender(() => {
-      const [_, restAttrs] = pick(attrs, ['class'])
+      const [_, restAttrs] = pick(attrs, ['class', 'label'])
 
       return (
         <VSelectionControl
-          class="v-checkbox"
+          class="v-radio"
           onIcon={ props.onIcon }
           offIcon={ props.offIcon }
           { ...attrs }
@@ -52,7 +47,7 @@ export const VCheckbox = defineComponent({
                   v-model={ model.value }
                   readonly={ isReadonly.value }
                   disabled={ isDisabled.value }
-                  type="checkbox"
+                  type="radio"
                   { ...restAttrs }
                   { ...props }
                 />
@@ -67,4 +62,4 @@ export const VCheckbox = defineComponent({
   },
 })
 
-export type VCheckbox = InstanceType<typeof VCheckbox>
+export type VRadio = InstanceType<typeof VRadio>
