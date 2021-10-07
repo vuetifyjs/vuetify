@@ -153,7 +153,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
           <VFieldLabel
             for={ id.value }
             style="position: static; pointer-events: auto; cursor: pointer;"
-            onClick={ onClick }
+            onClick={ !slots.default && onClick }
           >
             { label }
           </VFieldLabel>
