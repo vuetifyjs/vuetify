@@ -134,11 +134,9 @@ export const VSelectionControl = genericComponent<new <T>() => {
               null,
               ['center', 'circle'],
             ]}
+            onClick={ onClick }
           >
-            <VIcon
-              icon={ icon.value }
-              onClick={ onClick }
-            />
+            <VIcon icon={ icon.value } />
 
             { slots.default?.({
               model,
