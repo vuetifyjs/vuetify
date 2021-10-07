@@ -18,7 +18,6 @@ import { convertToUnit, defineComponent, pick, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { VFieldSlot } from '@/components/VField/VField'
 
 export const VTextarea = defineComponent({
   name: 'VTextarea',
@@ -111,7 +110,7 @@ export const VTextarea = defineComponent({
     onMounted(calculateInputHeight)
 
     useRender(() => {
-      const hasCounter = (slots.counter || props.counter || props.counterValue)
+      const hasCounter = !!(slots.counter || props.counter || props.counterValue)
       const [_, restAttrs] = pick(attrs, ['class'])
 
       return (
@@ -149,7 +148,7 @@ export const VTextarea = defineComponent({
               isReadonly,
               inputRef,
               props: { class: fieldClass, ...slotProps },
-            }: VFieldSlot) => {
+            }) => {
               const showPlaceholder = isActive || props.persistentPlaceholder
               return (
                 <>
@@ -185,7 +184,7 @@ export const VTextarea = defineComponent({
                 </>
               )
             },
-            details: hasCounter && (({ isFocused }: VFieldSlot) => (
+            details: hasCounter && (({ isFocused }) => (
               <>
                 <span />
 
@@ -209,3 +208,5 @@ export const VTextarea = defineComponent({
     }
   },
 })
+
+export type VTextarea = InstanceType<typeof VTextarea>
