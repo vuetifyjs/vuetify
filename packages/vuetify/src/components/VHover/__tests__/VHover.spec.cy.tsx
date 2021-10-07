@@ -1,7 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { CenteredGrid } from '@/../cypress/templates'
-import VHover from '../VHover'
+import { VHover } from '../VHover'
 
 describe('VHover', () => {
   it('should react on mouse events', () => {

@@ -1,1 +1,1 @@
-export { default as VFooter } from './VFooter'
+export { VFooter } from './VFooter'

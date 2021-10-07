@@ -59,6 +59,9 @@ export default {
       babelHelpers: 'inline'
     }),
     sass({
+      options: {
+        charset: false,
+      },
       output(styles, styleNodes) {
         // Complete CSS bundle
         mkdirp(path.resolve(__dirname, '../dist')).then(() => {

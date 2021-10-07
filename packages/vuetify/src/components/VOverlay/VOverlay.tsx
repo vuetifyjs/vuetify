@@ -14,6 +14,7 @@ import { useRtl } from '@/composables/rtl'
 import { useTeleport } from '@/composables/teleport'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
+import { useStack } from '@/composables/stack'
 
 // Directives
 import { ClickOutside } from '@/directives/click-outside'
@@ -21,7 +22,7 @@ import { ClickOutside } from '@/directives/click-outside'
 // Utilities
 import {
   convertToUnit,
-  defineComponent,
+  genericComponent,
   getScrollParent,
   standardEasing,
   useRender,
@@ -38,7 +39,8 @@ import {
 } from 'vue'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
+import type { MakeSlots } from '@/util'
 import type { BackgroundColorData } from '@/composables/color'
 
 interface ScrimProps {
@@ -64,7 +66,14 @@ function Scrim (props: ScrimProps) {
   )
 }
 
-export default defineComponent({
+export type OverlaySlots = MakeSlots<{
+  default: [{ isActive: Ref<boolean> }]
+  activator: [{ isActive: boolean, props: Dictionary<any> }]
+}>
+
+export const VOverlay = genericComponent<new () => {
+  $slots: OverlaySlots
+}>()({
   name: 'VOverlay',
 
   directives: { ClickOutside },
@@ -111,6 +120,7 @@ export default defineComponent({
     }))
     const { activatorEl, activatorEvents } = useActivator(props, isActive)
     const { dimensionStyles } = useDimension(props)
+    const { isTop } = useStack(isActive)
 
     const contentEl = ref<HTMLElement>()
     const { contentStyles, updatePosition } = usePositionStrategies(props, {
@@ -133,11 +143,19 @@ export default defineComponent({
     }
 
     function closeConditional () {
-      return isActive.value
+      return isActive.value && isTop.value
     }
 
+    watch(isActive, val => {
+      if (val) {
+        window.addEventListener('keydown', onKeydown)
+      } else {
+        window.removeEventListener('keydown', onKeydown)
+      }
+    }, { immediate: true })
+
     function onKeydown (e: KeyboardEvent) {
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' && isTop.value) {
         if (!props.persistent) {
           isActive.value = false
         } else animateClick()
@@ -145,10 +163,13 @@ export default defineComponent({
     }
 
     useBackButton(next => {
-      next(!isActive.value)
-
-      if (!props.persistent) isActive.value = false
-      else animateClick()
+      if (isTop.value && isActive.value) {
+        next(false)
+        if (!props.persistent) isActive.value = false
+        else animateClick()
+      } else {
+        next()
+      }
     })
 
     const root = ref()
@@ -227,7 +248,6 @@ export default defineComponent({
                     dimensionStyles.value,
                     contentStyles.value,
                   ]}
-                  onKeydown={ onKeydown }
                 >
                   { slots.default?.({ isActive }) }
                 </div>
@@ -245,3 +265,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VOverlay = InstanceType<typeof VOverlay>

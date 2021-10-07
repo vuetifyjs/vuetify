@@ -1,0 +1,156 @@
+@forward './variables'
+@use '../../styles/tools'
+@use '../../styles/settings'
+@use './variables' as *
+@use './mixins' as *
+
+// Theme
+.v-table
+  @include tools.theme($table-theme...)
+
+  .v-table-divider
+    border-right: $table-border
+
+  .v-table__wrapper
+    > table
+      > thead
+        > tr
+          &:last-child
+            th
+              border-bottom: $table-border
+
+      > tbody
+        > tr
+          &:not(:last-child)
+            td,
+            th
+              border-bottom: $table-border
+
+          &:hover
+            background: $table-hover-color
+
+      > tfoot
+        > tr
+            td,
+            th
+              border-top: $table-border
+
+  &.v-table--fixed-header
+    thead th
+      background: $table-background
+      box-shadow: inset 0 -1px 0 $table-border-color
+
+  &.v-table--fixed-footer
+    tfoot
+      th,
+      td
+        background: $table-background
+        box-shadow: inset 0 1px 0 $table-border-color
+
+// Block
+.v-table
+  border-radius: inherit
+  // Do not inherit line-height
+  line-height: $table-line-height
+  max-width: 100%
+
+  > .v-table__wrapper
+    > table
+      width: 100%
+      border-spacing: 0
+
+      > tbody,
+      > thead,
+      > tfoot
+        > tr
+          > td,
+          > th
+            padding: 0 16px
+            transition: height settings.$standard-easing
+
+          > th
+            user-select: none
+            font-size: $table-header-font-size
+
+            @include tools.ltr()
+              text-align: left
+
+            @include tools.rtl()
+              text-align: right
+
+          > td
+            font-size: $table-row-font-size
+
+  @at-root
+    @include tools.density('v-table', $table-density) using ($modifier)
+      > .v-table__wrapper
+        > table
+          > tbody,
+          > thead,
+          > tfoot
+            > tr
+              > th
+                height: $table-header-height + $modifier
+
+              > td
+                height: $table-row-height + $modifier
+
+// Elements
+.v-table__wrapper
+  border-radius: inherit
+  overflow-x: auto
+  overflow-y: hidden
+
+// Modifiers
+.v-table--has-top
+  > .v-table__wrapper
+    > table
+      > tbody
+        > tr
+          &:first-child
+            &:hover
+              > td
+                &:first-child
+                  border-top-left-radius: 0
+
+                &:last-child
+                  border-top-right-radius: 0
+
+.v-table--has-bottom
+  > .v-table__wrapper
+    > table
+      > tbody
+        > tr
+          &:last-child
+            &:hover
+              > td
+                &:first-child
+                  border-bottom-left-radius: 0
+
+                &:last-child
+                  border-bottom-right-radius: 0
+
+.v-table--fixed-height
+  .v-table__wrapper
+    overflow-y: auto
+
+.v-table--fixed-header
+  > .v-table__wrapper
+    > table
+      > thead
+        > tr
+          > th
+            border-bottom: 0px !important
+            position: sticky
+            top: 0
+
+.v-table--fixed-footer
+  > .v-table__wrapper
+    > table
+      > tfoot
+        > tr
+          > td,
+          > th
+              border-top: 0px !important
+              position: sticky
+              bottom: 0

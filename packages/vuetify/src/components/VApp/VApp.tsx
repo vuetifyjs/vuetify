@@ -9,7 +9,7 @@ import { createLayout, makeLayoutProps } from '@/composables/layout'
 import { defineComponent } from '@/util'
 import { useRtl } from '@/composables/rtl'
 
-export default defineComponent({
+export const VApp = defineComponent({
   name: 'VApp',
 
   props: {
@@ -39,3 +39,5 @@ export default defineComponent({
     )
   },
 })
+
+export type VApp = InstanceType<typeof VApp>

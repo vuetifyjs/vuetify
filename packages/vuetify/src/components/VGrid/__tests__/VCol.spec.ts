@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
 
-import VCol from '../VCol'
+import { VCol } from '../VCol'
 import { createVuetify } from '@/framework'
 
 describe('VCol', () => {

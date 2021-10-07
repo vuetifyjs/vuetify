@@ -5,7 +5,7 @@ import { useHydration } from '@/composables/hydration'
 import { defineComponent } from '@/util'
 import { ref } from 'vue'
 
-export default defineComponent({
+export const VNoSsr = defineComponent({
   name: 'VNoSsr',
 
   setup (_, { slots }) {

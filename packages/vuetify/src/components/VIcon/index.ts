@@ -1,4 +1,4 @@
-export { default as VIcon } from './VIcon'
+export { VIcon } from './VIcon'
 export {
   VComponentIcon,
   VSvgIcon,

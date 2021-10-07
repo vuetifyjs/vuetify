@@ -7,7 +7,7 @@ import { defineComponent, useRender } from '@/util'
 // Composables
 import { createLayout, makeLayoutProps } from '@/composables/layout'
 
-export default defineComponent({
+export const VLayout = defineComponent({
   name: 'VLayout',
 
   props: makeLayoutProps(),
@@ -27,3 +27,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VLayout = InstanceType<typeof VLayout>

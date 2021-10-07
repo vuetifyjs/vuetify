@@ -1,5 +1,5 @@
 // Components
-import VRating from '../VRating'
+import { VRating } from '../VRating'
 
 // Utilities
 import { mount } from '@vue/test-utils'

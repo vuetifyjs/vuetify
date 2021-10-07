@@ -1,6 +1,6 @@
 // Components
-import VExpansionPanelTitle, { makeVExpansionPanelTitleProps } from './VExpansionPanelTitle'
-import VExpansionPanelText from './VExpansionPanelText'
+import { makeVExpansionPanelTitleProps, VExpansionPanelTitle } from './VExpansionPanelTitle'
+import { VExpansionPanelText } from './VExpansionPanelText'
 import { VExpansionPanelSymbol } from './VExpansionPanels'
 
 // Composables
@@ -15,7 +15,7 @@ import { makeLazyProps } from '@/composables/lazy'
 import { computed, provide } from 'vue'
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VExpansionPanel = defineComponent({
   name: 'VExpansionPanel',
 
   props: {
@@ -94,3 +94,5 @@ export default defineComponent({
     )
   },
 })
+
+export type VExpansionPanel = InstanceType<typeof VExpansionPanel>

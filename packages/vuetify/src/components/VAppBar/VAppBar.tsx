@@ -21,7 +21,7 @@ import { convertToUnit, defineComponent } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-export default defineComponent({
+export const VAppBar = defineComponent({
   name: 'VAppBar',
 
   props: {
@@ -166,3 +166,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VAppBar = InstanceType<typeof VAppBar>

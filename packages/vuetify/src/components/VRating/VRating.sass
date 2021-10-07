@@ -35,8 +35,9 @@
       transition-timing-function: $rating-item-transition-timing-function
 
   &:hover:not(.v-rating__item--focused)
-    .v-icon
-      transform: $rating-item-icon-transform
+    .v-rating--hover &
+      .v-icon
+        transform: $rating-item-icon-transform
 
   &--focused
     .v-btn__overlay

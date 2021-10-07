@@ -15,7 +15,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { toRef } from 'vue'
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VSheet = defineComponent({
   name: 'VSheet',
 
   props: {

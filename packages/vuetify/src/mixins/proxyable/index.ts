@@ -56,7 +56,6 @@ export function factory (
   })
 }
 
-/* eslint-disable-next-line @typescript-eslint/no-redeclare */
 const Proxyable = factory()
 
 export default Proxyable

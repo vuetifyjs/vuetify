@@ -1,1 +1,1 @@
-export { default as VTooltip } from './VTooltip'
+export { VTooltip } from './VTooltip'

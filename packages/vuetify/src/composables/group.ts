@@ -49,7 +49,7 @@ export interface GroupItemProvide {
 
 export const makeGroupProps = propsFactory({
   modelValue: {
-    type: [Number, Boolean, String, Array, Object],
+    type: null,
     default: undefined,
   },
   multiple: Boolean,

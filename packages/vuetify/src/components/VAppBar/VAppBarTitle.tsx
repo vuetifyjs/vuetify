@@ -7,7 +7,7 @@ import { makeTagProps } from '@/composables/tag'
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VAppBarTitle = defineComponent({
   name: 'VAppBarTitle',
 
   props: {

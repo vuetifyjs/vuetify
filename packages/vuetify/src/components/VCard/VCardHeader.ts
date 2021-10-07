@@ -1,3 +1,3 @@
 import { createSimpleFunctional } from '@/util'
 
-export default createSimpleFunctional('v-card-header')
+export const VCardHeader = createSimpleFunctional('v-card-header')
