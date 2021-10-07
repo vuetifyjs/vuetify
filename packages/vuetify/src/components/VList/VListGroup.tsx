@@ -53,6 +53,7 @@ export const VListGroup = genericComponent<new <T extends ListItem>() => {
   $slots: MakeSlots<{
     header: [ListGroupHeaderSlot]
     item: [T]
+    default: []
   }>
 }>()({
   name: 'VListGroup',
