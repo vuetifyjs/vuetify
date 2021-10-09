@@ -198,6 +198,22 @@ exports[`VImg should update src while still loading 2`] = `
 </div>
 `;
 
+exports[`VImg should use naturalWidth 1`] = `
+<div class="v-responsive v-img"
+     style="width: 1600px;"
+>
+  <div class="v-responsive__sizer"
+       style="padding-bottom: 56.25%;"
+  >
+  </div>
+  <transition-stub>
+    <img class="v-img__img v-img__img--contain">
+  </transition-stub>
+  <transition-stub>
+  </transition-stub>
+</div>
+`;
+
 exports[`VImg should use vuetify-loader data 1`] = `
 <div class="v-responsive v-img">
   <div class="v-responsive__sizer"

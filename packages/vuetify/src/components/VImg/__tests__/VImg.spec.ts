@@ -90,6 +90,19 @@ describe('VImg', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should use naturalWidth', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        src: LOAD_SUCCESS_SRC,
+        width: 'auto',
+      },
+    })
+
+    jest.runOnlyPendingTimers()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should display placeholders', async () => {
     const wrapper = mountFunction({
       propsData: {

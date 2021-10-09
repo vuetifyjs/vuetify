@@ -21,6 +21,7 @@ import {
   withDirectives,
 } from 'vue'
 import {
+  convertToUnit,
   defineComponent,
   SUPPORTS_INTERSECTION,
   useRender,
@@ -65,6 +66,7 @@ export const VImg = defineComponent({
       default: '',
     },
     srcset: String,
+    width: [String, Number],
 
     ...makeTransitionProps(),
   },
@@ -250,6 +252,7 @@ export const VImg = defineComponent({
     useRender(() => (
       <VResponsive
         class="v-img"
+        style={{ width: convertToUnit(props.width === 'auto' ? naturalWidth.value : props.width) }}
         aspectRatio={ aspectRatio.value }
         aria-label={ props.alt }
         role={ props.alt ? 'img' : undefined }
