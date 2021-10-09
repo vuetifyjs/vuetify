@@ -210,7 +210,7 @@ export default VSelect.extend({
     this.setSearch()
   },
 
-  destroyed () {
+  unmounted () {
     document.removeEventListener('copy', this.onCopy)
   },
 
