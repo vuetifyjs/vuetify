@@ -34,7 +34,7 @@ module.exports = {
       ignoreTemplateLiterals: true,
       ignoreTrailingComments: true,
     }],
-    'max-statements': ['error', 24],
+    complexity: ['error', 32],
     quotes: ['error', 'single', {
       avoidEscape: true,
       allowTemplateLiterals: true,

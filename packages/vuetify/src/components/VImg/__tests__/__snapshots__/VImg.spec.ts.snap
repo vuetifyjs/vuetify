@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VImg should display error slot 1`] = `
-<div class="v-responsive v-img">
+<div class="v-responsive v-img v-img--booting">
   <div class="v-responsive__sizer">
   </div>
   <transition-stub>
@@ -22,7 +22,7 @@ exports[`VImg should display error slot 1`] = `
 `;
 
 exports[`VImg should display placeholders 1`] = `
-<div class="v-responsive v-img">
+<div class="v-responsive v-img v-img--booting">
   <div class="v-responsive__sizer">
   </div>
   <transition-stub>
@@ -46,7 +46,7 @@ exports[`VImg should display placeholders 1`] = `
 `;
 
 exports[`VImg should display placeholders 2`] = `
-<div class="v-responsive v-img">
+<div class="v-responsive v-img v-img--booting">
   <div class="v-responsive__sizer"
        style="padding-bottom: 56.25%;"
   >
@@ -62,7 +62,7 @@ exports[`VImg should display placeholders 2`] = `
 `;
 
 exports[`VImg should have aria attributes 1`] = `
-<div class="v-responsive v-img"
+<div class="v-responsive v-img v-img--booting"
      aria-label="this is not a decorative image"
      role="img"
 >
@@ -79,7 +79,7 @@ exports[`VImg should have aria attributes 1`] = `
 `;
 
 exports[`VImg should load 1`] = `
-<div class="v-responsive v-img">
+<div class="v-responsive v-img v-img--booting">
   <div class="v-responsive__sizer">
   </div>
   <transition-stub>
@@ -93,7 +93,7 @@ exports[`VImg should load 1`] = `
 `;
 
 exports[`VImg should load 2`] = `
-<div class="v-responsive v-img">
+<div class="v-responsive v-img v-img--booting">
   <div class="v-responsive__sizer"
        style="padding-bottom: 56.25%;"
   >
@@ -107,7 +107,7 @@ exports[`VImg should load 2`] = `
 `;
 
 exports[`VImg should override vuetify-loader values 1`] = `
-<div class="v-responsive v-img">
+<div class="v-responsive v-img v-img--booting">
   <div class="v-responsive__sizer"
        style="padding-bottom: 50%;"
   >
@@ -126,7 +126,7 @@ exports[`VImg should override vuetify-loader values 1`] = `
 `;
 
 exports[`VImg should render a <picture> 1`] = `
-<div class="v-responsive v-img">
+<div class="v-responsive v-img v-img--booting">
   <div class="v-responsive__sizer"
        style="padding-bottom: 56.25%;"
   >
@@ -143,7 +143,7 @@ exports[`VImg should render a <picture> 1`] = `
 `;
 
 exports[`VImg should update src 1`] = `
-<div class="v-responsive v-img">
+<div class="v-responsive v-img v-img--booting">
   <div class="v-responsive__sizer"
        style="padding-bottom: 56.25%;"
   >
@@ -157,7 +157,7 @@ exports[`VImg should update src 1`] = `
 `;
 
 exports[`VImg should update src 2`] = `
-<div class="v-responsive v-img">
+<div class="v-responsive v-img v-img--booting">
   <div class="v-responsive__sizer"
        style="padding-bottom: 56.25%;"
   >
@@ -171,7 +171,7 @@ exports[`VImg should update src 2`] = `
 `;
 
 exports[`VImg should update src while still loading 1`] = `
-<div class="v-responsive v-img">
+<div class="v-responsive v-img v-img--booting">
   <div class="v-responsive__sizer">
   </div>
   <transition-stub>
@@ -185,7 +185,7 @@ exports[`VImg should update src while still loading 1`] = `
 `;
 
 exports[`VImg should update src while still loading 2`] = `
-<div class="v-responsive v-img">
+<div class="v-responsive v-img v-img--booting">
   <div class="v-responsive__sizer"
        style="padding-bottom: 56.25%;"
   >
@@ -199,7 +199,7 @@ exports[`VImg should update src while still loading 2`] = `
 `;
 
 exports[`VImg should use naturalWidth 1`] = `
-<div class="v-responsive v-img"
+<div class="v-responsive v-img v-img--booting"
      style="width: 1600px;"
 >
   <div class="v-responsive__sizer"
@@ -215,7 +215,7 @@ exports[`VImg should use naturalWidth 1`] = `
 `;
 
 exports[`VImg should use vuetify-loader data 1`] = `
-<div class="v-responsive v-img">
+<div class="v-responsive v-img v-img--booting">
   <div class="v-responsive__sizer"
        style="padding-bottom: 100%;"
   >

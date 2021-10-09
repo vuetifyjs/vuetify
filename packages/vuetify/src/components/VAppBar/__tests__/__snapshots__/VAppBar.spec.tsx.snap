@@ -16,7 +16,7 @@ exports[`VAppBar should render image 1`] = `
         style="top: 0px; height: 64px; margin-left: 0px; margin-top: 0px; z-index: 2; transform: translateY(0%);"
 >
   <div class="v-app-bar__image">
-    <div class="v-responsive v-img">
+    <div class="v-responsive v-img v-img--booting">
       <div class="v-responsive__sizer">
       </div>
       <transition-stub>
