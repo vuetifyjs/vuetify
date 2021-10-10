@@ -88,6 +88,7 @@ export const BaseSlideGroup = mixins<options &
 
   data: () => ({
     internalItemsLength: 0,
+    isInitialDisplay: true,
     isOverflowing: false,
     resizeTimeout: 0,
     startX: 0,
@@ -169,11 +170,20 @@ export const BaseSlideGroup = mixins<options &
     },
   },
 
+  mounted () {
+    this.isInitialDisplay = (this.$refs.base as any).style.display !== 'none'
+  },
+
   beforeUpdate () {
     this.internalItemsLength = (this.$children || []).length
   },
 
   updated () {
+    // should recalculate widths if initial display is none and showArrows
+    if (!this.isInitialDisplay && this.showArrows && (this.$refs.base as any).style.display !== 'none') {
+      this.setWidths()
+      this.isInitialDisplay = true
+    }
     if (this.internalItemsLength === (this.$children || []).length) return
     this.setWidths()
   },
@@ -205,6 +215,7 @@ export const BaseSlideGroup = mixins<options &
     genData (): object {
       return {
         class: this.classes,
+        ref: 'base',
         directives: [{
           name: 'resize',
           value: this.onResize,
@@ -270,10 +281,10 @@ export const BaseSlideGroup = mixins<options &
     },
     calculateNewOffset (direction: 'prev' | 'next', widths: Widths, rtl: boolean, currentScrollOffset: number) {
       const sign = rtl ? -1 : 1
-      const newAbosluteOffset = sign * currentScrollOffset +
+      const newAbsoluteOffset = sign * currentScrollOffset +
         (direction === 'prev' ? -1 : 1) * widths.wrapper
 
-      return sign * Math.max(Math.min(newAbosluteOffset, widths.content - widths.wrapper), 0)
+      return sign * Math.max(Math.min(newAbsoluteOffset, widths.content - widths.wrapper), 0)
     },
     onAffixClick (location: 'prev' | 'next') {
       this.$emit(`click:${location}`)
