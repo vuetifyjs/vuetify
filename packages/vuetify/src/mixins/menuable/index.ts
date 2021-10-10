@@ -1,6 +1,6 @@
 // Mixins
-import Positionable from '../positionable'
 import Stackable from '../stackable'
+import { factory as positionableFactory } from '../positionable'
 import Activatable from '../activatable'
 import Detachable from '../detachable'
 
@@ -13,7 +13,7 @@ import { VNode } from 'vue'
 
 const baseMixins = mixins(
   Stackable,
-  Positionable,
+  positionableFactory(['top', 'right', 'bottom', 'left', 'absolute']),
   Activatable,
   Detachable,
 )
