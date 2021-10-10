@@ -173,7 +173,7 @@ export default VSelect.extend({
         this.$refs.input && this.$refs.input.select()
       } else {
         document.removeEventListener('copy', this.onCopy)
-        this.$refs.input && this.$refs.input.blur()
+        this.blur()
         this.updateSelf()
       }
     },

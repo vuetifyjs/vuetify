@@ -205,8 +205,8 @@ export default baseMixins.extend<options>().extend({
   methods: {
     absolutePosition () {
       return {
-        offsetTop: 0,
-        offsetLeft: 0,
+        offsetTop: this.positionY || this.absoluteY,
+        offsetLeft: this.positionX || this.absoluteX,
         scrollHeight: 0,
         top: this.positionY || this.absoluteY,
         bottom: this.positionY || this.absoluteY,

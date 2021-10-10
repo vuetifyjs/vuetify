@@ -22,19 +22,19 @@ The following releases are currently under development:
 
 ### v3.0 (Titan)
 
-- **Target Release:** Q3 2021
-- **Alpha:** Q1 2021
+- **Target Release:** February 2022
+- **Alpha:** [Live](https://next.vuetifyjs.com/)
+- **Beta:** December 2021
 - **Overview:**
-  The next version of Vuetify is being built from the ground up to support Vue 3 using the [composition api](https://v3.vuejs.org/guide/composition-api-introduction.html).
-- **Objectives:**
-  - Rebuild the framework using Vue 3 and the [composition api](https://vue-composition-api-rfc.netlify.com/)
-  - Improve framework performance
-  - Enhance Typescript support with Vue 3; updated typings
-  - Make it easier to unit test, no global setup required
-  - Restructure the framework core to support custom services
-  - Update the Documentation with improved examples and more information
+  - Rebuilt for Vue 3 using the new [composition api](https://vue-composition-api-rfc.netlify.com/)
+  - Global properties that allow you to make large overarching changes to your app
+  - Improved SASS variable customization and extensibility with [Built-In Modules](https://sass-lang.com/documentation/modules)
+  - New [Vue CLI presets](https://github.com/vuetifyjs/vue-cli-plugins) for generating pre-built starting projects
+  - First party [Vite](https://vitejs.dev/) support for lightning fast development
+  - Greatly improved TypeScript support
+  - Better framework coverage with E2E testing using Cypress
 
-Track our progress in the [v3 GitHub Project](https://titan.vuetifyjs.com/).
+Track our progress in the [Vuetify GitHub Issues](https://github.com/vuetifyjs/vuetify/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3ATask) or connect with the [Team](/about/meet-the-team/) on [Discord](https://community.vuetifyjs.com/).
 
 ## Long-term support (LTS)
 
