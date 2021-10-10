@@ -80,12 +80,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
   },
 
   setup (props, { attrs, slots }) {
-    const group = inject(VSelectionGroupSymbol, {
-      onIcon: props.onIcon,
-      offIcon: props.offIcon,
-      name: props.name,
-      type: props.type,
-    })
+    const group = inject(VSelectionGroupSymbol, {})
     const { densityClasses } = useDensity(props, 'v-selection-control')
     const { isDisabled, isReadonly, isValid } = useValidation(props, 'v-checkbox')
     const model = useProxiedModel(props, 'modelValue')
@@ -99,9 +94,9 @@ export const VSelectionControl = genericComponent<new <T>() => {
           model.value === props.value ||
           props.value == null
         )
-      ) return group.onIcon
+      ) return group?.onIcon ?? props.onIcon
 
-      return group.offIcon
+      return group?.offIcon ?? props.offIcon
     })
 
     const id = computed(() => props.id || `input-${uid}`)
@@ -175,9 +170,9 @@ export const VSelectionControl = genericComponent<new <T>() => {
                   onBlur={ onBlur }
                   onFocus={ onFocus }
                   readonly={ isReadonly.value }
-                  type={ group.type }
+                  type={ group?.type ?? props.type }
                   value={ props.value }
-                  name={ group.name }
+                  name={ group?.name ?? props.name }
                 />
               ) }
           </div>
