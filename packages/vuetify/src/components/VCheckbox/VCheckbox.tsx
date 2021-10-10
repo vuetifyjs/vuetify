@@ -3,9 +3,10 @@ import './VCheckbox.sass'
 
 // Components
 import { VSelectionControl } from '@/components/VSelectionControl'
+import { VInput } from '@/components/VInput'
 
 // Utility
-import { computed, defineComponent, onMounted, ref, watch, watchEffect } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { pick, useRender } from '@/util'
 
 export const VCheckbox = defineComponent({
@@ -52,31 +53,21 @@ export const VCheckbox = defineComponent({
       }
 
       return (
-        <VSelectionControl
+        <VInput
           class="v-checkbox"
-          onIcon={ props.onIcon }
-          offIcon={ offIcon.value }
           { ...attrs }
           v-slots={{
             ...slots,
-            default: ({
-              model,
-              isReadonly,
-              isDisabled,
-              props,
-            }) => {
-              return (
-                <input
-                  v-model={ model.value }
-                  readonly={ isReadonly.value }
-                  disabled={ isDisabled.value }
-                  type="checkbox"
-                  { ...restAttrs }
-                  { ...props }
-                  onChange={ onChange }
-                />
-              )
-            },
+            default: () => (
+              <VSelectionControl
+                type="checkbox"
+                onChange={ onChange }
+                model-value={ props.modelValue }
+                onIcon={ props.onIcon }
+                offIcon={ offIcon.value }
+                { ...restAttrs }
+              />
+            ),
           }}
         />
       )
