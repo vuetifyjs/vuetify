@@ -1,24 +1,42 @@
 @forward './variables'
 @use 'sass:map'
+@use 'sass:list'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
 
 .v-selection-control
+  $root: &
+
   align-items: center
   contain: layout
   display: flex
   flex: 1 0
   grid-area: control
-  height: var(--v-input-control-height)
+  // height: var(--v-input-control-height)
   position: relative
   user-select: none
 
   &--disabled
-    color: $selection-control-disabled-color
+    .v-icon,
+    .v-messages
+      color: $selection-control-disabled-color
 
   &--error
     color: $selection-control-error-color
+
+    .v-icon,
+    .v-messages
+      color: $selection-control-error-color
+
+  + .v-input__details
+    padding: 0 12px
+
+  @at-root
+    @include tools.density('v-selection-control', $selection-control-density) using ($modifier)
+      .v-selection-control__input
+        min-width: $selection-control-size + $modifier
+        height: $selection-control-size + $modifier
 
 .v-selection-control__input
   align-items: center
@@ -26,9 +44,6 @@
   flex: 0 1
   justify-content: center
   position: relative
-
-  min-width: 40px
-  height: 40px
 
   input
     cursor: pointer

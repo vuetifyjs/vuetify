@@ -6,21 +6,31 @@ import { VIcon } from '@/components/VIcon'
 import { VFieldLabel } from '@/components/VField/VFieldLabel'
 
 // Composables
-import { useTextColor } from '@/composables/color'
-import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeThemeProps } from '@/composables/theme'
 import { makeValidationProps, useValidation } from '@/composables/validation'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { useTextColor } from '@/composables/color'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, ref } from 'vue'
+import { computed, inject, ref } from 'vue'
 import { genericComponent, getUid, SUPPORTS_FOCUS_VISIBLE, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, WritableComputedRef } from 'vue'
+import type { ComputedRef, InjectionKey, WritableComputedRef } from 'vue'
 import type { MakeSlots } from '@/util'
+
+interface VSelectionGroupContext {
+  name?: string
+  onIcon?: string
+  offIcon?: string
+  type?: string
+}
+
+export const VSelectionGroupSymbol: InjectionKey<VSelectionGroupContext> = Symbol.for('vuetify:selection-group')
 
 export type SelectionControlSlot = {
   model: WritableComputedRef<any>
@@ -52,20 +62,16 @@ export const VSelectionControl = genericComponent<new <T>() => {
     color: String,
     id: String,
     label: String,
-    offIcon: {
-      type: String,
-      required: true,
-    },
-    onIcon: {
-      type: String,
-      required: true,
-    },
+    offIcon: String,
+    onIcon: String,
+    type: String,
     value: {
       type: null,
       default: undefined as any,
     },
 
     ...makeThemeProps(),
+    ...makeDensityProps(),
     ...makeValidationProps(),
   },
 
@@ -74,6 +80,13 @@ export const VSelectionControl = genericComponent<new <T>() => {
   },
 
   setup (props, { attrs, slots }) {
+    const group = inject(VSelectionGroupSymbol, {
+      onIcon: props.onIcon,
+      offIcon: props.offIcon,
+      name: props.name,
+      type: props.type,
+    })
+    const { densityClasses } = useDensity(props, 'v-selection-control')
     const { isDisabled, isReadonly, isValid } = useValidation(props, 'v-checkbox')
     const model = useProxiedModel(props, 'modelValue')
     const uid = getUid()
@@ -86,10 +99,11 @@ export const VSelectionControl = genericComponent<new <T>() => {
           model.value === props.value ||
           props.value == null
         )
-      ) return props.onIcon
+      ) return group.onIcon
 
-      return props.offIcon
+      return group.offIcon
     })
+
     const id = computed(() => props.id || `input-${uid}`)
     const isFocused = ref(false)
     const isFocusVisible = ref(false)
@@ -125,6 +139,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
               'v-selection-control--focused': isFocused.value,
               'v-selection-control--focus-visible': isFocusVisible.value,
             },
+            densityClasses.value,
           ]}
           { ...attrs }
         >
@@ -142,16 +157,29 @@ export const VSelectionControl = genericComponent<new <T>() => {
           >
             <VIcon icon={ icon.value } />
 
-            { slots.default?.({
-              model,
-              isReadonly,
-              isDisabled,
-              props: {
-                onFocus,
-                onBlur,
-                id: id.value,
-              },
-            } as SelectionControlSlot) }
+            { slots.default
+              ? slots.default?.({
+                model,
+                isReadonly,
+                isDisabled,
+                props: {
+                  onFocus,
+                  onBlur,
+                  id: id.value,
+                },
+              }) : (
+                <input
+                  v-model={ model.value }
+                  disabled={ isDisabled.value }
+                  id={ id.value }
+                  onBlur={ onBlur }
+                  onFocus={ onFocus }
+                  readonly={ isReadonly.value }
+                  type={ group.type }
+                  value={ props.value }
+                  name={ group.name }
+                />
+              ) }
           </div>
 
           <VFieldLabel
