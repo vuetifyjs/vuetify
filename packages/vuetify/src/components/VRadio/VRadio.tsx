@@ -11,8 +11,6 @@ import { pick, useRender } from '@/util'
 export const VRadio = defineComponent({
   name: 'VRadio',
 
-  inheritAttrs: false,
-
   props: {
     offIcon: {
       type: String,
@@ -26,34 +24,11 @@ export const VRadio = defineComponent({
 
   setup (props, { attrs, slots }) {
     useRender(() => {
-      const [_, restAttrs] = pick(attrs, ['class', 'label'])
-
       return (
         <VSelectionControl
-          class="v-radio"
           onIcon={ props.onIcon }
           offIcon={ props.offIcon }
-          { ...attrs }
-          v-slots={{
-            ...slots,
-            default: ({
-              model,
-              isReadonly,
-              isDisabled,
-              props,
-            }) => {
-              return (
-                <input
-                  v-model={ model.value }
-                  readonly={ isReadonly.value }
-                  disabled={ isDisabled.value }
-                  type="radio"
-                  { ...restAttrs }
-                  { ...props }
-                />
-              )
-            },
-          }}
+          type="radio"
         />
       )
     })

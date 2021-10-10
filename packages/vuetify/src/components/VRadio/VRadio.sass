@@ -1,23 +1,7 @@
 @forward './variables'
-@use 'sass:map'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
 
 .v-radio
-  .v-input__details
-    padding: 6px 12px 0
-
-// TODO: normalise state classes
-.v-radio
-  &--disabled
-    .v-icon,
-    .v-messages
-      color: $radio-disabled-color
-
-  &--error
-    color: $radio-error-color
-
-    .v-icon,
-    .v-messages
-      color: $radio-error-color
+  //
