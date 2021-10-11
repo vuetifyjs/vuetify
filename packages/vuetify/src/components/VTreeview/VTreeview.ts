@@ -228,7 +228,7 @@ export default mixins(
 
         this.nodes[key] = node
 
-        if (children.length) {
+        if (children.length && this.selectionType !== 'independent') {
           const { isSelected, isIndeterminate } = this.calculateState(key, this.nodes)
 
           node.isSelected = isSelected

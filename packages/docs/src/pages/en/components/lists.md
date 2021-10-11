@@ -35,7 +35,7 @@ Lists come in three main variations. **single-line** (default), **two-line** and
 - [v-list-item-subtitle](/api/v-list-item-subtitle)
 - [v-list-item-title](/api/v-list-item-title)
 
-<api-section page="components/lists" />
+<inline-api page="components/lists" />
 
 <!-- ## Sub-components
 
@@ -139,7 +139,7 @@ Lists can contain subheaders, dividers, and can contain 1 or more lines. The sub
 
 #### Expansion Lists
 
-A list can contain a group of items which will display on click utilizing `v-item-group`'s `activator` slot. Expansion lists are also used within the **[v-navigation-drawer](/components/navigation-drawers)** component.
+A list can contain a group of items which will display on click utilizing `v-list-group`'s `activator` slot. Expansion lists are also used within the **[v-navigation-drawer](/components/navigation-drawers)** component.
 
 <example file="v-list/slot-expansion-lists" />
 

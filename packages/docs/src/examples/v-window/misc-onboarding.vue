@@ -19,7 +19,7 @@
             align="center"
             justify="center"
           >
-            <v-card-text>
+            <v-card-text class="text-center">
               Transparent themed, for background-imaged slides. Background color black added for demonstration purposes.
             </v-card-text>
           </v-row>

@@ -38,7 +38,7 @@ export default {
     prev: 'Předchozí obrázek',
     next: 'Další obrázek',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Slide {0} z {1}',
     },
   },
   calendar: {
@@ -54,7 +54,7 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Navigace stránkování',
+      wrapper: 'Navigace po stránkách',
       next: 'Další strana',
       previous: 'Předchozí strana',
       page: 'Přejít na stránku {0}',
@@ -63,7 +63,7 @@ export default {
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      icon: 'Hodnocení {0} z {1}',
     },
   },
 }

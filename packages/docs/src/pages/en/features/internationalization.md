@@ -100,7 +100,7 @@ export default new Vuetify({
 
 - [internationalization](/api/internationalization)
 
-<api-section page="features/internationalization" />
+<inline-api page="features/internationalization" />
 
 ## Caveats
 

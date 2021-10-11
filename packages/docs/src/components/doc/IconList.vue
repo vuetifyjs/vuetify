@@ -42,6 +42,7 @@
         <v-virtual-scroll
           :items="filteredIcons"
           :item-height="56"
+          :bench="6"
           :height="Math.min(filteredIcons.length * 56, 336)"
         >
           <template #default="{ item }">

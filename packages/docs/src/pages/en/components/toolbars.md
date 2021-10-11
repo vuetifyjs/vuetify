@@ -28,7 +28,7 @@ A toolbar is a flexible container that can be used in a number of ways. By defau
 - [v-toolbar-items](/api/v-toolbar-items)
 - [v-toolbar-title](/api/v-toolbar-title)
 
-<api-section page="components/toolbars" />
+<inline-api page="components/toolbars" />
 
 <!-- ## Sub-components
 

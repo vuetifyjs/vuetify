@@ -87,11 +87,15 @@ export function createSimpleTransition (
       }
       if (context.props.hideOnLeave) {
         data.on!.leave = mergeTransitions(data.on!.leave, (el: HTMLElement) => {
-          (el as any)._initialDisplay = el.style.display
-          el.style.display = 'none'
+          el._initialDisplay = [el.style.display, el.style.getPropertyPriority('display')]
+          el.style.setProperty('display', 'none', 'important')
         })
         data.on!.afterLeave = mergeTransitions(data.on!.afterLeave, (el?: HTMLElement) => {
-          if (el) el.style.display = (el as any)._initialDisplay || ''
+          if (el) {
+            el._initialDisplay
+              ? el.style.setProperty('display', ...el._initialDisplay)
+              : el.style.removeProperty('display')
+          }
         })
       }
 

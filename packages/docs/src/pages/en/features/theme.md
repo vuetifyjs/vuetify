@@ -365,7 +365,7 @@ The Vuetify theme system is propagated through the [provide](https://vuejs.org/v
 
 - [v-theme-provider](/api/v-theme-provider)
 
-<api-section page="features/theme" />
+<inline-api page="features/theme" />
 
 ### Example
 

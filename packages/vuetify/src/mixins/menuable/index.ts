@@ -1,6 +1,6 @@
 // Mixins
-import Positionable from '../positionable'
 import Stackable from '../stackable'
+import { factory as positionableFactory } from '../positionable'
 import Activatable from '../activatable'
 import Detachable from '../detachable'
 
@@ -13,7 +13,7 @@ import { VNode } from 'vue'
 
 const baseMixins = mixins(
   Stackable,
-  Positionable,
+  positionableFactory(['top', 'right', 'bottom', 'left', 'absolute']),
   Activatable,
   Detachable,
 )
@@ -205,8 +205,8 @@ export default baseMixins.extend<options>().extend({
   methods: {
     absolutePosition () {
       return {
-        offsetTop: 0,
-        offsetLeft: 0,
+        offsetTop: this.positionY || this.absoluteY,
+        offsetLeft: this.positionX || this.absoluteX,
         scrollHeight: 0,
         top: this.positionY || this.absoluteY,
         bottom: this.positionY || this.absoluteY,
