@@ -59,6 +59,27 @@ export default Vue.extend({
             if (eventOptions.stop) {
               e.stopPropagation()
             }
+
+            // Due to TouchEvent target always returns the element that is first placed
+            // Even if touch point has since moved outside the interactive area of that element
+            // Ref: https://developer.mozilla.org/en-US/docs/Web/API/Touch/target
+            // This block of code aims to make sure touchEvent is always dispatched from the element that is being pointed at
+            if (e instanceof TouchEvent) {
+              const currentTarget = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY)
+
+              if (currentTarget &&
+                !(e.target as HTMLElement)?.isSameNode(currentTarget) &&
+                (e.target as HTMLElement)?.className === currentTarget.className
+              ) {
+                currentTarget.dispatchEvent(new TouchEvent(e.type, {
+                  changedTouches: e.changedTouches as unknown as Touch[],
+                  targetTouches: e.targetTouches as unknown as Touch[],
+                  touches: e.touches as unknown as Touch[],
+                }))
+                return
+              }
+            }
+
             this.$emit(event, getEvent(e))
           }
 
