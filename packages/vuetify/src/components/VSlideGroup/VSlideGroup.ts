@@ -41,6 +41,12 @@ interface options extends Vue {
   }
 }
 
+function bias (val: number) {
+  const c = 0.501
+  const x = Math.abs(val)
+  return Math.sign(val) * (x / ((1 / c - 2) * (1 - x) + 1))
+}
+
 export const BaseSlideGroup = mixins<options &
 /* eslint-disable indent */
   ExtractVue<[
@@ -165,7 +171,21 @@ export const BaseSlideGroup = mixins<options &
     // and need to be recalculated
     isOverflowing: 'setWidths',
     scrollOffset (val) {
-      this.$refs.content.style.transform = `translateX(${-val}px)`
+      if (!this.isSwiping && this.$refs.wrapper.scroll) {
+        (this as any).isScrolling = true
+        this.$refs.wrapper.scroll({ left: val, behavior: 'smooth' })
+      } else {
+        this.$refs.wrapper.scrollLeft = val
+      }
+
+      const overscroll = bias(
+        val <= 0
+          ? -val
+          : val > this.widths.content - this.widths.wrapper
+            ? this.widths.content - this.widths.wrapper - val
+            : 0
+      )
+      this.$refs.content.style.transform = `translateX(${overscroll}px)`
     },
   },
 
@@ -179,6 +199,22 @@ export const BaseSlideGroup = mixins<options &
   },
 
   methods: {
+    onScroll (e: Event) {
+      if (this.isSwiping) return
+
+      const scrollLeft = this.$refs.wrapper.scrollLeft
+      requestAnimationFrame(() => {
+        if (scrollLeft === this.scrollOffset) {
+          (this as any).isScrolling = false
+        } else if (
+          !(this as any).isScrolling &&
+          scrollLeft === this.$refs.wrapper.scrollLeft
+        ) {
+          this.$refs.wrapper.scrollLeft = this.scrollOffset
+          this.scrollOffset = scrollLeft
+        }
+      })
+    },
     // Always generate next for scrollable hint
     genNext (): VNode | null {
       const slot = this.$scopedSlots.next
@@ -266,6 +302,9 @@ export const BaseSlideGroup = mixins<options &
           },
         }],
         ref: 'wrapper',
+        on: {
+          scroll: this.onScroll,
+        },
       }, [this.genContent()])
     },
     calculateNewOffset (direction: 'prev' | 'next', widths: Widths, rtl: boolean, currentScrollOffset: number) {

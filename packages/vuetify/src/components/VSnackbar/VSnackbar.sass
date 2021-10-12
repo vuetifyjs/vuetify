@@ -40,6 +40,7 @@
     transition-duration: .15s
     transition-property: opacity, transform
     transition-timing-function: map-get($transition, 'linear-out-slow-in')
+    z-index: 1
 
     &.theme--dark
       background-color: $snackbar-background-color
@@ -117,6 +118,7 @@
     position: absolute
     right: 0
     top: 0
+    z-index: -1
 
   &--top
     align-items: flex-start

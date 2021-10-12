@@ -26,10 +26,6 @@ export default mixins(Colorable, Delayable, Dependent, Menuable, Toggleable).ext
       default: 0,
     },
     disabled: Boolean,
-    fixed: {
-      type: Boolean,
-      default: true,
-    },
     openDelay: {
       type: [Number, String],
       default: 0,
