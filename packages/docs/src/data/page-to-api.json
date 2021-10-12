@@ -125,6 +125,7 @@
   ],
   "components/menus": ["v-menu"],
   "components/navigation-drawers": ["v-navigation-drawer"],
+  "components/otp-input": ["v-otp-input"],
   "components/overflow-btns": ["v-overflow-btn"],
   "components/overlays": ["v-overlay"],
   "components/paginations": ["v-pagination"],
