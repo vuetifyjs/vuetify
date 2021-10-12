@@ -41,6 +41,12 @@ interface options extends Vue {
   }
 }
 
+function bias (val: number) {
+  const c = 0.501
+  const x = Math.abs(val)
+  return Math.sign(val) * (x / ((1 / c - 2) * (1 - x) + 1))
+}
+
 export const BaseSlideGroup = mixins<options &
 /* eslint-disable indent */
   ExtractVue<[
@@ -165,7 +171,14 @@ export const BaseSlideGroup = mixins<options &
     // and need to be recalculated
     isOverflowing: 'setWidths',
     scrollOffset (val) {
-      this.$refs.content.style.transform = `translateX(${-val}px)`
+      const scroll =
+        val <= 0
+          ? bias(-val)
+          : val > this.widths.content - this.widths.wrapper
+            ? -(this.widths.content - this.widths.wrapper) + bias(this.widths.content - this.widths.wrapper - val)
+            : -val
+
+      this.$refs.content.style.transform = `translateX(${scroll}px)`
     },
   },
 
