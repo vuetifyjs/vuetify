@@ -20,6 +20,7 @@ import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
 import Vue, { VNode } from 'vue'
+import { composedPath } from '../../util/helpers'
 
 interface TouchEvent {
   touchstartX: number
@@ -179,6 +180,28 @@ export const BaseSlideGroup = mixins<options &
   },
 
   methods: {
+    onScroll () {
+      this.$refs.wrapper.scrollLeft = 0
+    },
+    onFocusin (e: FocusEvent) {
+      if (!this.isOverflowing) return
+
+      // Focused element is likely to be the root of an item, so a
+      // breadth-first search will probably find it in the first iteration
+      for (const el of composedPath(e)) {
+        for (const vm of this.items) {
+          if (vm.$el === el) {
+            this.scrollOffset = this.calculateUpdatedOffset(
+              vm.$el as HTMLElement,
+              this.widths,
+              this.$vuetify.rtl,
+              this.scrollOffset
+            )
+            return
+          }
+        }
+      }
+    },
     // Always generate next for scrollable hint
     genNext (): VNode | null {
       const slot = this.$scopedSlots.next
@@ -200,6 +223,9 @@ export const BaseSlideGroup = mixins<options &
       return this.$createElement('div', {
         staticClass: 'v-slide-group__content',
         ref: 'content',
+        on: {
+          focusin: this.onFocusin,
+        },
       }, this.$slots.default)
     },
     genData (): object {
@@ -266,6 +292,9 @@ export const BaseSlideGroup = mixins<options &
           },
         }],
         ref: 'wrapper',
+        on: {
+          scroll: this.onScroll,
+        },
       }, [this.genContent()])
     },
     calculateNewOffset (direction: 'prev' | 'next', widths: Widths, rtl: boolean, currentScrollOffset: number) {

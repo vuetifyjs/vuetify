@@ -490,3 +490,25 @@ export function mergeDeep (
 export function fillArray<T> (length: number, obj: T) {
   return Array(length).fill(obj)
 }
+
+/**  Polyfill for Event.prototype.composedPath */
+export function composedPath (e: Event): EventTarget[] {
+  if (e.composedPath) return e.composedPath()
+
+  const path = []
+  let el = e.target as Element
+
+  while (el) {
+    path.push(el)
+
+    if (el.tagName === 'HTML') {
+      path.push(document)
+      path.push(window)
+
+      return path
+    }
+
+    el = el.parentElement!
+  }
+  return path
+}
