@@ -76,8 +76,8 @@ export default mixins(
       let hasOld = false
 
       for (const item of items) {
-        if (item.to === newPath) hasNew = true
-        else if (item.to === oldPath) hasOld = true
+        if (item.to === oldPath) hasOld = true
+        else if (item.to === newPath) hasNew = true
 
         if (hasNew && hasOld) break
       }
