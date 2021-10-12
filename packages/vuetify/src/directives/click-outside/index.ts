@@ -65,7 +65,7 @@ function handleShadow (el: HTMLElement, callback: Function): void {
 
   callback(document)
 
-  if (root instanceof ShadowRoot) {
+  if (typeof ShadowRoot !== 'undefined' && root instanceof ShadowRoot) {
     callback(root)
   }
 }

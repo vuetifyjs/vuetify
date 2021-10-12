@@ -55,7 +55,7 @@ Use this tool to search for any Material Design Icons and copy them to your clip
 This is the default icon font for Vuetify. You can include it through a CDN:
 
 ```html
-<link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
 ```
 
 Or as a local dependency:

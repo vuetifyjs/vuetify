@@ -97,7 +97,7 @@
     data: () => ({
       breakpoints: [
         {
-          icon: '$mdiCellphoneIphone',
+          icon: '$mdiCellphone',
           device: 'extra-small',
           code: 'xs',
           type: 'breakpoints-table.small-to-large-handset',

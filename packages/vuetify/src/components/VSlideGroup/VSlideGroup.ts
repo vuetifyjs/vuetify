@@ -20,6 +20,7 @@ import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
 import Vue, { VNode } from 'vue'
+import { composedPath } from '../../util/helpers'
 
 interface TouchEvent {
   touchstartX: number
@@ -45,6 +46,50 @@ function bias (val: number) {
   const c = 0.501
   const x = Math.abs(val)
   return Math.sign(val) * (x / ((1 / c - 2) * (1 - x) + 1))
+}
+
+export function calculateUpdatedOffset (
+  selectedElement: HTMLElement,
+  widths: Widths,
+  rtl: boolean,
+  currentScrollOffset: number
+): number {
+  const clientWidth = selectedElement.clientWidth
+  const offsetLeft = rtl
+    ? (widths.content - selectedElement.offsetLeft - clientWidth)
+    : selectedElement.offsetLeft
+
+  if (rtl) {
+    currentScrollOffset = -currentScrollOffset
+  }
+
+  const totalWidth = widths.wrapper + currentScrollOffset
+  const itemOffset = clientWidth + offsetLeft
+  const additionalOffset = clientWidth * 0.4
+
+  if (offsetLeft <= currentScrollOffset) {
+    currentScrollOffset = Math.max(offsetLeft - additionalOffset, 0)
+  } else if (totalWidth <= itemOffset) {
+    currentScrollOffset = Math.min(currentScrollOffset - (totalWidth - itemOffset - additionalOffset), widths.content - widths.wrapper)
+  }
+
+  return rtl ? -currentScrollOffset : currentScrollOffset
+}
+
+export function calculateCenteredOffset (
+  selectedElement: HTMLElement,
+  widths: Widths,
+  rtl: boolean
+): number {
+  const { offsetLeft, clientWidth } = selectedElement
+
+  if (rtl) {
+    const offsetCentered = widths.content - offsetLeft - clientWidth / 2 - widths.wrapper / 2
+    return -Math.min(widths.content - widths.wrapper, Math.max(0, offsetCentered))
+  } else {
+    const offsetCentered = offsetLeft + clientWidth / 2 - widths.wrapper / 2
+    return Math.min(widths.content - widths.wrapper, Math.max(0, offsetCentered))
+  }
 }
 
 export const BaseSlideGroup = mixins<options &
@@ -192,6 +237,28 @@ export const BaseSlideGroup = mixins<options &
   },
 
   methods: {
+    onScroll () {
+      this.$refs.wrapper.scrollLeft = 0
+    },
+    onFocusin (e: FocusEvent) {
+      if (!this.isOverflowing) return
+
+      // Focused element is likely to be the root of an item, so a
+      // breadth-first search will probably find it in the first iteration
+      for (const el of composedPath(e)) {
+        for (const vm of this.items) {
+          if (vm.$el === el) {
+            this.scrollOffset = calculateUpdatedOffset(
+              vm.$el as HTMLElement,
+              this.widths,
+              this.$vuetify.rtl,
+              this.scrollOffset
+            )
+            return
+          }
+        }
+      }
+    },
     // Always generate next for scrollable hint
     genNext (): VNode | null {
       const slot = this.$scopedSlots.next
@@ -213,6 +280,9 @@ export const BaseSlideGroup = mixins<options &
       return this.$createElement('div', {
         staticClass: 'v-slide-group__content',
         ref: 'content',
+        on: {
+          focusin: this.onFocusin,
+        },
       }, this.$slots.default)
     },
     genData (): object {
@@ -279,6 +349,9 @@ export const BaseSlideGroup = mixins<options &
           },
         }],
         ref: 'wrapper',
+        on: {
+          scroll: this.onScroll,
+        },
       }, [this.genContent()])
     },
     calculateNewOffset (direction: 'prev' | 'next', widths: Widths, rtl: boolean, currentScrollOffset: number) {
@@ -381,51 +454,18 @@ export const BaseSlideGroup = mixins<options &
       ) {
         this.scrollOffset = 0
       } else if (this.centerActive) {
-        this.scrollOffset = this.calculateCenteredOffset(
+        this.scrollOffset = calculateCenteredOffset(
           this.selectedItem.$el as HTMLElement,
           this.widths,
           this.$vuetify.rtl
         )
       } else if (this.isOverflowing) {
-        this.scrollOffset = this.calculateUpdatedOffset(
+        this.scrollOffset = calculateUpdatedOffset(
           this.selectedItem.$el as HTMLElement,
           this.widths,
           this.$vuetify.rtl,
           this.scrollOffset
         )
-      }
-    },
-    calculateUpdatedOffset (selectedElement: HTMLElement, widths: Widths, rtl: boolean, currentScrollOffset: number): number {
-      const clientWidth = selectedElement.clientWidth
-      const offsetLeft = rtl
-        ? (widths.content - selectedElement.offsetLeft - clientWidth)
-        : selectedElement.offsetLeft
-
-      if (rtl) {
-        currentScrollOffset = -currentScrollOffset
-      }
-
-      const totalWidth = widths.wrapper + currentScrollOffset
-      const itemOffset = clientWidth + offsetLeft
-      const additionalOffset = clientWidth * 0.4
-
-      if (offsetLeft <= currentScrollOffset) {
-        currentScrollOffset = Math.max(offsetLeft - additionalOffset, 0)
-      } else if (totalWidth <= itemOffset) {
-        currentScrollOffset = Math.min(currentScrollOffset - (totalWidth - itemOffset - additionalOffset), widths.content - widths.wrapper)
-      }
-
-      return rtl ? -currentScrollOffset : currentScrollOffset
-    },
-    calculateCenteredOffset (selectedElement: HTMLElement, widths: Widths, rtl: boolean): number {
-      const { offsetLeft, clientWidth } = selectedElement
-
-      if (rtl) {
-        const offsetCentered = widths.content - offsetLeft - clientWidth / 2 - widths.wrapper / 2
-        return -Math.min(widths.content - widths.wrapper, Math.max(0, offsetCentered))
-      } else {
-        const offsetCentered = offsetLeft + clientWidth / 2 - widths.wrapper / 2
-        return Math.min(widths.content - widths.wrapper, Math.max(0, offsetCentered))
       }
     },
     scrollTo /* istanbul ignore next */ (location: 'prev' | 'next') {
