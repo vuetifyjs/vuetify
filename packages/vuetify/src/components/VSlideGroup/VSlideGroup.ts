@@ -172,7 +172,6 @@ export const BaseSlideGroup = mixins<options &
     isOverflowing: 'setWidths',
     scrollOffset (val) {
       if (!this.isSwiping && this.$refs.wrapper.scroll) {
-        (this as any).isScrolling = true
         this.$refs.wrapper.scroll({ left: val, behavior: 'smooth' })
       } else {
         this.$refs.wrapper.scrollLeft = val
@@ -204,15 +203,12 @@ export const BaseSlideGroup = mixins<options &
 
       const scrollLeft = this.$refs.wrapper.scrollLeft
       requestAnimationFrame(() => {
-        if (scrollLeft === this.scrollOffset) {
-          (this as any).isScrolling = false
-        } else if (
-          !(this as any).isScrolling &&
-          scrollLeft === this.$refs.wrapper.scrollLeft
-        ) {
-          this.$refs.wrapper.scrollLeft = this.scrollOffset
-          this.scrollOffset = scrollLeft
-        }
+        requestAnimationFrame(() => {
+          if (scrollLeft === this.$refs.wrapper.scrollLeft) {
+            this.$refs.wrapper.scrollLeft = this.scrollOffset
+            this.scrollOffset = scrollLeft
+          }
+        })
       })
     },
     // Always generate next for scrollable hint
