@@ -151,10 +151,10 @@ export default baseMixins.extend<options>().extend({
       return attrs
     },
     toggle () {
-      if (this.inputValue === undefined) {
+      if (this.to && this.inputValue === undefined) {
         this.isActive = !this.isActive
-        this.$emit('change')
       }
+      this.$emit('change')
     },
   },
 
