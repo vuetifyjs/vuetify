@@ -78,12 +78,17 @@ export const ClickOutside = {
   // clicks on body
   inserted (el: HTMLElement, binding: ClickOutsideDirective) {
     const onClick = (e: Event) => directive(e as PointerEvent, el, binding)
+    const onTouch = (e: Event) => {
+      el._clickOutside!.lastMousedownWasOutside = checkEvent(e as PointerEvent, el, binding)
+      directive(e as PointerEvent, el, binding)
+    }
     const onMousedown = (e: Event) => {
       el._clickOutside!.lastMousedownWasOutside = checkEvent(e as PointerEvent, el, binding)
     }
 
     handleShadow(el, (app: HTMLElement) => {
       app.addEventListener('click', onClick, true)
+      app.addEventListener('touchend', onTouch, true)
       app.addEventListener('mousedown', onMousedown, true)
     })
 
