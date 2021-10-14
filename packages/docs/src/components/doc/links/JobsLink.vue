@@ -13,7 +13,7 @@
   >
     <template #icon>
       <v-badge
-        :value="newJobs.length"
+        :value="showBadge"
         color="#ED561B"
         dot
         left
@@ -31,6 +31,7 @@
 <script>
   // Utilities
   import { call, get } from 'vuex-pathify'
+  import { differenceInDays, parseISO } from 'date-fns'
 
   export default {
     name: 'JobsLink',
@@ -38,11 +39,21 @@
     computed: {
       name: get('route/name'),
       newJobs: get('jobs/newJobs'),
+      notification: get('user/last@jobs'),
       page: get('route/params@page'),
       icon () {
         return this.page === 'jobs-for-vue'
           ? '$mdiBriefcaseVariant'
           : '$mdiBriefcaseVariantOutline'
+      },
+      showBadge () {
+        return (
+          this.newJobs.length &&
+          (
+            !this.notification ||
+            differenceInDays(Date.now(), parseISO(this.notification)) < 3
+          )
+        )
       },
     },
 

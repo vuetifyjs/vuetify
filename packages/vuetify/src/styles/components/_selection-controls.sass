@@ -1,12 +1,5 @@
 @import '../styles.sass'
 
-// Theme
-+theme(v-input--selection-controls) using ($material)
-  &.v-input--is-disabled:not(.v-input--indeterminate)
-    .v-icon
-      // needed for helper override
-      color: map-deep-get($material, 'selection-controls', 'disabled') !important
-
 .v-input--selection-controls
   margin-top: $input-top-spacing
   padding-top: 4px
@@ -111,6 +104,10 @@
     .v-input--selection-controls__ripple:before
       background: currentColor
       transform: scale(1.2)
+
+  &.v-input--is-disabled:not(.v-input--indeterminate)
+    .v-icon
+      color: inherit
 
 .v-input--selection-controls__input:hover
   .v-input--selection-controls__ripple:before

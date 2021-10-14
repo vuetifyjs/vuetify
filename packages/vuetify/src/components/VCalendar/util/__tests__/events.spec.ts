@@ -80,6 +80,6 @@ describe('events.ts', () => {
       end: '2019-02-15',
     }, 0, 'start', 'end')
 
-    expect(fn).toThrow('undefined is not a valid timestamp. It must be a Date, number of seconds since Epoch, or a string in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.')
+    expect(fn).toThrow('undefined is not a valid timestamp. It must be a Date, number of milliseconds since Epoch, or a string in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.')
   })
 })

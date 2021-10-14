@@ -110,7 +110,7 @@
 
 <script>
   // Utilities
-  import { get } from 'vuex-pathify'
+  import { get, sync } from 'vuex-pathify'
 
   export default {
     name: 'VueJobs',
@@ -119,6 +119,7 @@
 
     computed: {
       all: get('jobs/all'),
+      notification: sync('user/last@jobs'),
       jobs () {
         if (!this.filter) return this.all
 
@@ -129,6 +130,12 @@
           return string.indexOf((this.filter || '').toLowerCase()) > -1
         })
       },
+
+    },
+
+    mounted () {
+      // Set last job page visit
+      this.notification = Date.now()
     },
   }
 </script>

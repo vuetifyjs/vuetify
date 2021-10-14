@@ -70,6 +70,7 @@ declare global {
       width: string
       height: string
     }
+    _initialDisplay?: [string, string]
   }
 
   interface WheelEvent {

@@ -6452,10 +6452,6 @@ exports[`VDataTable.ts should pass kebab-case footer props correctly 1`] = `
       </colgroup>
       <thead class="v-data-table-header v-data-table-header-mobile">
         <tr>
-          <th>
-            <div class="v-data-table-header-mobile__wrapper">
-            </div>
-          </th>
         </tr>
       </thead>
       <tbody>
@@ -6555,10 +6551,6 @@ exports[`VDataTable.ts should render 1`] = `
       </colgroup>
       <thead class="v-data-table-header v-data-table-header-mobile">
         <tr>
-          <th>
-            <div class="v-data-table-header-mobile__wrapper">
-            </div>
-          </th>
         </tr>
       </thead>
       <tbody>
@@ -6658,10 +6650,6 @@ exports[`VDataTable.ts should render footer.page-text slot content 1`] = `
       </colgroup>
       <thead class="v-data-table-header v-data-table-header-mobile">
         <tr>
-          <th>
-            <div class="v-data-table-header-mobile__wrapper">
-            </div>
-          </th>
         </tr>
       </thead>
       <tbody>
@@ -6760,10 +6748,6 @@ exports[`VDataTable.ts should render footer.prepend slot content 1`] = `
       </colgroup>
       <thead class="v-data-table-header v-data-table-header-mobile">
         <tr>
-          <th>
-            <div class="v-data-table-header-mobile__wrapper">
-            </div>
-          </th>
         </tr>
       </thead>
       <tbody>
@@ -7065,10 +7049,6 @@ exports[`VDataTable.ts should render loading state 1`] = `
       </colgroup>
       <thead class="v-data-table-header v-data-table-header-mobile">
         <tr>
-          <th>
-            <div class="v-data-table-header-mobile__wrapper">
-            </div>
-          </th>
         </tr>
       </thead>
       <thead>
