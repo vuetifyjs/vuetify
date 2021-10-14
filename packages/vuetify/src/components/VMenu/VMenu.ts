@@ -155,24 +155,15 @@ export default baseMixins.extend({
       return Boolean(this.tiles.find(tile => tile.tabIndex > -1))
     },
     styles (): object {
-      const result = {
+      return {
         maxHeight: this.calculatedMaxHeight,
         minWidth: this.calculatedMinWidth,
         maxWidth: this.calculatedMaxWidth,
-        top: '',
-        bottom: '',
+        top: this.calculatedTop,
         left: this.calculatedLeft,
         transformOrigin: this.origin,
         zIndex: this.zIndex || this.activeZIndex,
       }
-
-      if (this.top) {
-        result.bottom = this.calculatedTop
-      } else {
-        result.top = this.calculatedTop
-      }
-
-      return result
     },
   },
 
@@ -224,15 +215,26 @@ export default baseMixins.extend({
   methods: {
     activate () {
       // Update coordinates and dimensions of menu
-      // and its activator
-      this.updateDimensions()
+      // and its activator on the first activation to prevent
+      // menu from "jumping" around
+      if (this.$refs.content === undefined) {
+        this.updateDimensions()
+      }
       // Start the transition
       requestAnimationFrame(() => {
-        // Once transitioning, calculate scroll and top position
+        const transitionEndPromise = new Promise(resolve => {
+          this.$refs.content.ontransitionend = () => {
+            resolve()
+          }
+        })
         this.startTransition().then(() => {
           if (this.$refs.content) {
-            this.calculatedTopAuto = this.calcTopAuto()
-            this.auto && (this.$refs.content.scrollTop = this.calcScrollPosition())
+            transitionEndPromise.then(() => {
+              // Once transitioning, calculate scroll and top position
+              this.calculatedTopAuto = this.calcTopAuto()
+              this.auto && (this.$refs.content.scrollTop = this.calcScrollPosition())
+              this.updateDimensions()
+            })
           }
         })
       })

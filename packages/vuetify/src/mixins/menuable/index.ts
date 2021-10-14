@@ -155,9 +155,10 @@ export default baseMixins.extend<options>().extend({
     },
     computedTop () {
       const a = this.dimensions.activator
+      const c = this.dimensions.content
       let top = 0
 
-      if (this.top) top += a.top + a.height
+      if (this.top) top += a.height - c.height
       if (this.attach !== false) top += a.offsetTop
       else top += a.top + this.pageYOffset
       if (this.offsetY) top += this.top ? -a.height : a.height
