@@ -185,13 +185,13 @@ export default CalendarWithIntervals.extend({
       const data = {
         key: interval.time,
         staticClass: 'v-calendar-daily__day-interval',
-        on: this.getDefaultMouseEventHandlers(':time', e => {
-          return this.getSlotScope(interval)
-        }),
         style: {
           height,
           ...styler(interval),
         },
+        on: this.getDefaultMouseEventHandlers(':time', e => {
+          return this.getSlotScope(interval)
+        }),
       }
 
       const children = getSlot(this, 'interval', () => this.getSlotScope(interval))
