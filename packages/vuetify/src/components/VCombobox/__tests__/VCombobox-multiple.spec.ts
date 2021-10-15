@@ -593,6 +593,7 @@ describe('VCombobox.ts', () => {
     wrapper.vm.$on('update:list-index', listIndexUpdate)
 
     input.trigger('focus')
+    await wrapper.vm.$nextTick()
     element.value = 'a'
     input.trigger('input')
     await wrapper.vm.$nextTick()
@@ -634,6 +635,7 @@ describe('VCombobox.ts', () => {
     wrapper.vm.$on('update:list-index', listIndexUpdate)
 
     input.trigger('focus')
+    await wrapper.vm.$nextTick()
     element.value = 'a'
     input.trigger('input')
     await wrapper.vm.$nextTick()
@@ -672,6 +674,7 @@ describe('VCombobox.ts', () => {
     wrapper.vm.$on('update:list-index', listIndexUpdate)
 
     input.trigger('focus')
+    await wrapper.vm.$nextTick()
     element.value = 'a'
     input.trigger('input')
     await wrapper.vm.$nextTick()
