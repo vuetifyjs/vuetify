@@ -69,10 +69,10 @@ export default Vue.extend({
               const currentTarget = document.elementFromPoint(touchEvent.changedTouches[0].clientX, touchEvent.changedTouches[0].clientY)
 
               if (currentTarget &&
-                !(e.target as HTMLElement)?.isSameNode(currentTarget) &&
-                (e.target as HTMLElement)?.className === currentTarget.className
+                !(touchEvent.target as HTMLElement)?.isSameNode(currentTarget) &&
+                (touchEvent.target as HTMLElement)?.className === currentTarget.className
               ) {
-                currentTarget.dispatchEvent(new TouchEvent(e.type, {
+                currentTarget.dispatchEvent(new TouchEvent(touchEvent.type, {
                   changedTouches: touchEvent.changedTouches as unknown as Touch[],
                   targetTouches: touchEvent.targetTouches as unknown as Touch[],
                   touches: touchEvent.touches as unknown as Touch[],
