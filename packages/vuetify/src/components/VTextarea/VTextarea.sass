@@ -7,15 +7,10 @@
 @use '../VInput/variables' as *
 
 .v-textarea
-  textarea
+  .v-field__input
     align-self: stretch
     flex: 1 1 auto
-    line-height: $textarea-line-height
-    max-width: 100%
-    min-height: $textarea-min-height
     outline: none
-    padding: $textarea-padding
-    width: 100%
     mask-image: linear-gradient(to bottom, transparent, transparent calc(var(--v-field-padding-top, 0) / 1.25), black var(--v-field-padding-top, 0))
 
     $root: &
@@ -26,9 +21,17 @@
           line-height: $textarea-line-height + math.div($modifier * .125, settings.$spacer) * 1.5
 
   &--auto-grow
-    textarea
+    .v-field__input
       overflow: hidden
 
   &--no-resize
-    textarea
+    .v-field__input
       resize: none
+
+  &__sizer
+    visibility: hidden
+    position: absolute
+    top: 0
+    left: 0
+    height: 0 !important
+    pointer-events: none

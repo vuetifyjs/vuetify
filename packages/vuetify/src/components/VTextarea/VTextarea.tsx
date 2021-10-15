@@ -13,7 +13,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import Intersect from '@/directives/intersect'
 
 // Utilities
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { convertToUnit, defineComponent, pick, useRender } from '@/util'
 
 // Types
@@ -93,20 +93,19 @@ export const VTextarea = defineComponent({
       fieldRef.value?.inputRef?.blur()
     }
 
+    const sizerRef = ref<HTMLTextAreaElement>()
     function calculateInputHeight () {
       if (!props.autoGrow) return
 
-      controlHeight.value = 'auto'
-
       nextTick(() => {
-        if (!fieldRef?.value?.inputRef) return
+        if (!sizerRef.value) return
 
-        const style = getComputedStyle(fieldRef.value.inputRef)
+        const style = getComputedStyle(sizerRef.value)
 
         const padding = parseFloat(style.getPropertyValue('--v-field-padding-top')) +
         parseFloat(style.getPropertyValue('--v-field-padding-bottom'))
 
-        const height = fieldRef.value.inputRef.scrollHeight
+        const height = sizerRef.value.scrollHeight
         const lineHeight = parseFloat(style.lineHeight)
         const minHeight = parseFloat(props.rows) * lineHeight + padding
         const maxHeight = parseFloat(props.maxRows!) * lineHeight + padding || Infinity
@@ -115,10 +114,23 @@ export const VTextarea = defineComponent({
       })
     }
 
+    onMounted(calculateInputHeight)
     watch(model, calculateInputHeight)
     watch(() => props.rows, calculateInputHeight)
+    watch(() => props.maxRows, calculateInputHeight)
 
-    onMounted(calculateInputHeight)
+    let observer: ResizeObserver | undefined
+    watch(sizerRef, val => {
+      if (val) {
+        observer = new ResizeObserver(calculateInputHeight)
+        observer.observe(sizerRef.value!)
+      } else {
+        observer?.disconnect()
+      }
+    })
+    onBeforeUnmount(() => {
+      observer?.disconnect()
+    })
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
@@ -185,6 +197,19 @@ export const VTextarea = defineComponent({
                     { ...slotProps }
                     { ...restAttrs }
                   />
+
+                  { props.autoGrow && (
+                    <textarea
+                      class={[
+                        fieldClass,
+                        'v-textarea__sizer',
+                      ]}
+                      v-model={ model.value }
+                      ref={ sizerRef }
+                      readonly
+                      aria-hidden="true"
+                    />
+                  )}
 
                   { props.suffix && (
                     <span class="v-textarea__suffix" style={{ opacity: showPlaceholder ? undefined : '0' }}>
