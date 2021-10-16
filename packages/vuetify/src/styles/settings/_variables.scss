@@ -195,14 +195,6 @@ $headings: map-deep-merge(
       'font-family': $body-font-family,
       'text-transform': false
     ),
-    'button': (
-      'size': .875rem,
-      'weight': 500,
-      'line-height': 2.25rem,
-      'letter-spacing': .0892857143em,
-      'font-family': $body-font-family,
-      'text-transform': uppercase
-    ),
     'caption': (
       'size': .75rem,
       'weight': 400,
