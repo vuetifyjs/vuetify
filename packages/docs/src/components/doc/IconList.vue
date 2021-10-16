@@ -9,7 +9,6 @@
         <v-text-field
           v-model="search"
           hide-details
-          :loading="!icons"
           clearable
           outlined
           placeholder="Search for icons (e.g. account, close)"
@@ -54,12 +53,11 @@
                 <v-icon
                   color="primary"
                   class="mr-2"
-                  v-text="item"
-                />
+                >mdi-{{ item }}</v-icon>
               </v-list-item-icon>
 
               <v-list-item-content>
-                <v-list-item-title v-text="item.substring(4)" />
+                <v-list-item-title>{{ item }}</v-list-item-title>
               </v-list-item-content>
 
               <v-btn
@@ -79,27 +77,39 @@
 </template>
 
 <script>
-  import * as allIcons from '@mdi/js'
-  import kebabCase from 'lodash/kebabCase'
+  import icons from '@mdi/svg/meta.json'
+  import { distance } from '@/util/helpers'
 
   export default {
     name: 'IconList',
 
     data: () => ({
       copied: false,
-      icons: [],
       menu: false,
       search: '',
     }),
 
     computed: {
+      iconDistance () {
+        return icons.map(icon => ({
+          icon,
+          distance: Math.max(
+            distance(this.search, icon.name),
+            ...icon.aliases.map(v => distance(this.search, v))
+          ),
+        }))
+      },
       filteredIcons () {
-        if (!this.icons.length || !this.search) return []
-        if (!this.search) return this.icons
+        if (!icons.length || !this.search) return []
+        if (!this.search) return icons
 
-        return this.icons.filter(item => {
-          return item.toLowerCase().match(this.search.toLowerCase())
-        })
+        const items = this.iconDistance
+          .filter(v => v.distance > 0.7)
+          .sort((a, b) => {
+            return b.distance - a.distance
+          })
+
+        return items.map(v => v.icon.name)
       },
     },
 
@@ -113,16 +123,10 @@
       },
     },
 
-    mounted () {
-      this.icons = Object.keys(allIcons).map(icon => {
-        return kebabCase(icon)
-      })
-    },
-
     methods: {
       copy (item) {
-        navigator.clipboard.writeText(item).then(() => {
-          this.search = item.substring(4)
+        navigator.clipboard.writeText('mdi-' + item).then(() => {
+          this.search = item
           this.copied = true
         })
       },
