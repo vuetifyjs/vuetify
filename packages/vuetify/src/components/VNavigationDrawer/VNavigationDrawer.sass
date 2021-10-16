@@ -31,7 +31,7 @@
   &--rounded
     @include tools.rounded($navigation-drawer-rounded-border-radius)
 
-  &--start
+  &--start:not(&--floating)
     border-inline-end-width: $navigation-drawer-border-thin-width
 
     @include tools.ltr()
@@ -42,7 +42,7 @@
       left: auto
       right: 0
 
-  &--end
+  &--end:not(&--floating)
     border-inline-start-width: $navigation-drawer-border-thin-width
 
     @include tools.ltr()
