@@ -73,6 +73,14 @@ export default baseMixins.extend<options>().extend(
 
   methods: {
     click (e: KeyboardEvent | MouseEvent): void {
+      // Prevent keyboard actions
+      // from children elements
+      // within disabled tabs
+      if (this.disabled) {
+        e.preventDefault()
+        return
+      }
+
       // If user provides an
       // actual link, do not
       // prevent default
