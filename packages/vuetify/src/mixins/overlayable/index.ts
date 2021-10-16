@@ -7,6 +7,7 @@ import {
   addOnceEventListener,
   addPassiveEventListener,
   getZIndex,
+  composedPath,
 } from '../../util/helpers'
 
 // Types
@@ -183,7 +184,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       }
     },
     checkPath (e: WheelEvent) {
-      const path = e.path || this.composedPath(e)
+      const path = composedPath(e)
       const delta = e.deltaY
 
       if (e.type === 'keydown' && path[0] === document.body) {
@@ -207,29 +208,6 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       }
 
       return true
-    },
-    /**
-     * Polyfill for Event.prototype.composedPath
-     */
-    composedPath (e: WheelEvent): EventTarget[] {
-      if (e.composedPath) return e.composedPath()
-
-      const path = []
-      let el = e.target as Element
-
-      while (el) {
-        path.push(el)
-
-        if (el.tagName === 'HTML') {
-          path.push(document)
-          path.push(window)
-
-          return path
-        }
-
-        el = el.parentElement!
-      }
-      return path
     },
     hideScroll () {
       if (this.$vuetify.breakpoint.smAndDown) {

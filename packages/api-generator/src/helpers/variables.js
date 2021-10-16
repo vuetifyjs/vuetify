@@ -128,7 +128,7 @@ const VTextField = {
     },
   ],
   slots: [
-    ...VInput.slots,
+    ...VInput.slots.filter(v => v.name !== 'default'),
     ...createItems([
       'append-outer',
       'prepend-inner',
