@@ -52,7 +52,7 @@ The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstra
 
 ## Helper Classes
 
-`fill-height` applies height: 100% to an element. When applied to `v-container` it will also `align-items: center`.
+`fill-height` applies `height: 100%` to an element. When applied to `v-container` it will also `align-items: center`.
 
 ## Caveats
 
