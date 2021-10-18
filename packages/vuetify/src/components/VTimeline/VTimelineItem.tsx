@@ -59,7 +59,6 @@ export const VTimelineItem = defineComponent({
           },
         ]}
         style={{
-          // @ts-expect-error: broken vue types
           '--v-timeline-dot-size': convertToUnit(dotSize.value),
         }}
       >

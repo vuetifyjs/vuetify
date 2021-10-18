@@ -57,6 +57,7 @@ export const VChip = defineComponent({
       type: Boolean,
       default: true,
     },
+    text: String,
     modelValue: {
       type: Boolean,
       default: true,
@@ -147,7 +148,7 @@ export const VChip = defineComponent({
             </div>
           ) }
 
-          { slots.default?.() }
+          { slots.default?.() ?? props.text }
 
           { hasAppend && (
             <div class="v-chip__append">

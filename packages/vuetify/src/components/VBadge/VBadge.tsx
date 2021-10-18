@@ -137,7 +137,7 @@ export const VBadge = defineComponent({
                   backgroundColorStyles.value,
                   locationStyles.value,
                   textColorStyles.value,
-                ] as any} // TODO: Fix this :(
+                ]}
                 aria-atomic="true"
                 aria-label="locale string here" // TODO: locale string here
                 aria-live="polite"

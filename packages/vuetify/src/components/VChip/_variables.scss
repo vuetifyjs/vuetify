@@ -20,26 +20,17 @@ $chip-density: ("default": 0, "comfortable": -2, "compact": -3) !default;
 $chip-disabled-opacity: 0.3 !default;
 $chip-elevation: 0 !default;
 $chip-font-size: tools.map-deep-get(settings.$typography, "button", "size") !default;
+$chip-font-weight: 400 !default;
 $chip-height: 32px !default;
-$chip-icon-density: ("default": 3, "comfortable": 0, "compact": -2) !default;
-$chip-icon-font-size: 24px !default;
-$chip-icon-size: 48px !default;
-$chip-label-border-radius: 8px !default;
-$chip-link-focus-opacity: 0.3 !default;
+$chip-icon-font-size: 1.25rem !default;
+$chip-label-border-radius: settings.$border-radius-root !default;
 $chip-padding-ratio: 2 + math.div(2, 3) !default;
 $chip-plain-opacity: 0.26 !default;
-$chip-prepend-margin-inline-end: 8px !default;
-$chip-prepend-margin-inline-start: -12px !default;
 $chip-rounded-border-radius: settings.$border-radius-root !default;
 
 $chip-sizes: (
   "height": $chip-height,
   "font-size": $chip-font-size,
-) !default;
-
-$chip-icon-sizes: (
-  "font-size": $chip-icon-font-size,
-  "size": $chip-icon-size,
 ) !default;
 
 $chip-border: (
