@@ -122,9 +122,13 @@ declare module '@vue/runtime-dom' {
     [K in keyof E]?: E[K] extends Function ? E[K] : (payload: E[K]) => void
   }
 
-  export interface HTMLAttributes extends EventHandlers<ModifiedEvents> {
-    style: any
+  export interface HTMLAttributes extends EventHandlers<ModifiedEvents> {}
+
+  type CustomProperties = {
+    [k in `--${string}`]: any
   }
+
+  export interface CSSProperties extends CustomProperties {}
 }
 
 declare module 'vue-router' {

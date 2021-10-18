@@ -65,7 +65,7 @@ export const createList = () => {
 }
 
 export const useList = () => {
-  return inject(ListKey)
+  return inject(ListKey, null)
 }
 
 export const VList = genericComponent<new <T>() => {

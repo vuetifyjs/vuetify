@@ -25,46 +25,6 @@ export type SelectStrategy = {
   out: SelectStrategyTransformOutFn
 }
 
-export const leafSelectStrategy = (single = false): SelectStrategy => {
-  const strategy: SelectStrategy = {
-    select: ({ id, value, selected, children }) => {
-      if (children.has(id)) return selected
-
-      if (single) return new Map([[id, value ? 'on' : 'off']])
-
-      selected.set(id, value ? 'on' : 'off')
-
-      return selected
-    },
-    in: (v, children, parents) => {
-      let map = new Map()
-
-      for (const id of (v ?? [])) {
-        map = strategy.select({
-          id,
-          value: true,
-          selected: new Map(map),
-          children,
-          parents,
-        })
-      }
-
-      return map
-    },
-    out: v => {
-      const arr = []
-
-      for (const [key, value] of v.entries()) {
-        if (value === 'on') arr.push(key)
-      }
-
-      return arr
-    },
-  }
-
-  return strategy
-}
-
 export const independentSelectStrategy: SelectStrategy = {
   select: ({ id, value, selected }) => {
     selected.set(id, value ? 'on' : 'off')
@@ -95,6 +55,38 @@ export const independentSelectStrategy: SelectStrategy = {
 
     return arr
   },
+}
+
+export const leafSelectStrategy = (single = false): SelectStrategy => {
+  const strategy: SelectStrategy = {
+    select: ({ id, value, selected, children }) => {
+      if (children.has(id)) return selected
+
+      if (single) return new Map([[id, value ? 'on' : 'off']])
+
+      selected.set(id, value ? 'on' : 'off')
+
+      return selected
+    },
+    in: (v, children, parents) => {
+      let map = new Map()
+
+      for (const id of (v ?? [])) {
+        map = strategy.select({
+          id,
+          value: true,
+          selected: new Map(map),
+          children,
+          parents,
+        })
+      }
+
+      return map
+    },
+    out: independentSelectStrategy.out,
+  }
+
+  return strategy
 }
 
 export const classicSelectStrategy: SelectStrategy = {

@@ -55,7 +55,8 @@ export const VTimelineDivider = defineComponent({
               sizeClasses.value,
               elevationClasses.value,
             ]}
-            style={ sizeStyles.value as any } // TODO: Fix this!
+            // @ts-expect-error: null
+            style={ sizeStyles.value }
           >
             <div
               class={[
