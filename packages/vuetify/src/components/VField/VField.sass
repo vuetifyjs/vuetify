@@ -203,7 +203,12 @@
 
     .v-field--variant-contained &,
     .v-field--variant-filled &
-      transform: translateY(calc(var(--v-input-control-height) / 56 * -12))
+      $root: &
+
+      @at-root
+        @include tools.density('v-input', $input-density) using ($modifier)
+          @at-root #{selector.append(&, $root)}
+            top: 7px + $modifier * .25
 
     .v-field--variant-plain &,
     .v-field--variant-underlined &

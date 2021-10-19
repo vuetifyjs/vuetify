@@ -1,91 +1,37 @@
-@import './_variables.scss'
+@forward './variables'
+@use 'sass:math'
+@use 'sass:selector'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+@use '../VInput/variables' as *
 
 .v-textarea
-  textarea
+  .v-field__input
     align-self: stretch
     flex: 1 1 auto
-    line-height: $textarea-line-height
-    max-width: 100%
-    min-height: $textarea-min-height
     outline: none
-    padding: $textarea-padding
-    width: 100%
+    mask-image: linear-gradient(to bottom, transparent, transparent calc(var(--v-field-padding-top, 0) / 1.25), black var(--v-field-padding-top, 0))
 
-  .v-text-field__prefix,
-  .v-text-field__suffix
-    padding-top: $textarea-prefix-padding-top
-    align-self: start
+    $root: &
 
-  &.v-text-field--box,
-  &.v-text-field--enclosed
-    .v-text-field__prefix,
-    textarea
-      margin-top: $textarea-box-enclosed-prefix-margin-top
-
-    &.v-text-field--single-line,
-    &.v-text-field--outlined
-      &:not(.v-input--dense)
-        .v-text-field__prefix,
-        .v-text-field__suffix,
-        textarea
-          margin-top: $textarea-box-enclosed-single-outlined-margin-top
-
-        .v-label
-          top: $textarea-box-enclosed-single-outlined-label-top
-
-      &.v-input--dense
-        .v-text-field__prefix,
-        .v-text-field__suffix,
-        textarea
-          margin-top: $textarea-dense-box-enclosed-single-outlined-margin-top
-
-        .v-input__prepend-inner,
-        .v-input__prepend-outer,
-        .v-input__append-inner,
-        .v-input__append-outer
-          align-self: flex-start
-          margin-top: $textarea-dense-append-prepend-margin-top
-
-  &.v-text-field--solo
-    align-items: flex-start
-
-    // Essentially revert styles
-    // applied by v-text-field
-    .v-input__prepend-inner,
-    .v-input__prepend-outer,
-    .v-input__append-inner,
-    .v-input__append-outer
-      align-self: flex-start
-      margin-top: $textarea-solo-append-prepend-margin-top
-
-    .v-input__append-inner
-      +ltr()
-        padding-left: $textarea-solo-append-padding
-
-      +rtl()
-        padding-right: $textarea-solo-append-padding
+    @at-root
+      @include tools.density('v-input', $input-density) using ($modifier)
+        @at-root #{selector.append(&, $root)}
+          line-height: $textarea-line-height + math.div($modifier * .125, settings.$spacer) * 1.5
 
   &--auto-grow
-    textarea
+    .v-field__input
       overflow: hidden
 
   &--no-resize
-    textarea
+    .v-field__input
       resize: none
 
-  &.v-text-field--enclosed
-    .v-text-field__slot
-      align-self: stretch
-
-      +ltr()
-        margin-right: $textarea-enclosed-text-slot-margin
-
-      +rtl()
-        margin-left: $textarea-enclosed-text-slot-margin
-
-      textarea
-        +ltr()
-          padding-right: $textarea-enclosed-text-slot-padding
-
-        +rtl()
-          padding-left: $textarea-enclosed-text-slot-padding
+  &__sizer
+    visibility: hidden
+    position: absolute
+    top: 0
+    left: 0
+    height: 0 !important
+    pointer-events: none
