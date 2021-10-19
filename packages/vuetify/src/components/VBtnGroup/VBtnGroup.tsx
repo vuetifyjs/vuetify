@@ -6,14 +6,17 @@ export const VBtnGroup = defineComponent({
   name: 'VBtnGroup',
 
   props: {
-    //
+    tag: {
+      type: String,
+      default: 'div',
+    },
   },
 
   setup (props, { slots }) {
     return () => (
-      <div class="v-btn-group">
+      <props.tag class="v-btn-group">
         { slots.default?.() }
-      </div>
+      </props.tag>
     )
   },
 })
