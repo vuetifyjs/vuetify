@@ -1,2 +1,2 @@
-export { default as VTimeline } from './VTimeline'
-export { default as VTimelineItem } from './VTimelineItem'
+export { VTimeline } from './VTimeline'
+export { VTimelineItem } from './VTimelineItem'

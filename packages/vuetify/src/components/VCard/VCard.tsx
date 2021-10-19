@@ -2,16 +2,16 @@
 import './VCard.sass'
 
 // Components
-import VCardActions from './VCardActions'
-import VCardAvatar from './VCardAvatar'
-import VCardHeader from './VCardHeader'
-import VCardHeaderText from './VCardHeaderText'
-import VCardImg from './VCardImg'
-import VCardSubtitle from './VCardSubtitle'
-import VCardText from './VCardText'
-import VCardTitle from './VCardTitle'
 import { VAvatar } from '@/components/VAvatar'
 import { VImg } from '@/components/VImg'
+import { VCardActions } from './VCardActions'
+import { VCardAvatar } from './VCardAvatar'
+import { VCardHeader } from './VCardHeader'
+import { VCardHeaderText } from './VCardHeaderText'
+import { VCardImg } from './VCardImg'
+import { VCardSubtitle } from './VCardSubtitle'
+import { VCardText } from './VCardText'
+import { VCardTitle } from './VCardTitle'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -31,7 +31,7 @@ import { Ripple } from '@/directives/ripple'
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VCard = defineComponent({
   name: 'VCard',
 
   directives: { Ripple },
@@ -197,3 +197,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VCard = InstanceType<typeof VCard>

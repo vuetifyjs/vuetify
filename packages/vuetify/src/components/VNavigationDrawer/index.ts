@@ -1,1 +1,1 @@
-export { default as VNavigationDrawer } from './VNavigationDrawer'
+export { VNavigationDrawer } from './VNavigationDrawer'

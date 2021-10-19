@@ -15,7 +15,7 @@ import { convertToUnit, defineComponent } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-export default defineComponent({
+export const VProgressCircular = defineComponent({
   name: 'VProgressCircular',
 
   props: {

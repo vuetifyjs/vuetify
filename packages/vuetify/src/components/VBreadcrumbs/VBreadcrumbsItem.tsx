@@ -8,7 +8,7 @@ import { computed, inject } from 'vue'
 import { defineComponent } from '@/util'
 import { VBreadcrumbsSymbol } from './shared'
 
-export default defineComponent({
+export const VBreadcrumbsItem = defineComponent({
   name: 'VBreadcrumbsItem',
 
   props: {

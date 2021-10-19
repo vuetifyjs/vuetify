@@ -1,1 +1,1 @@
-export { default as VAvatar } from './VAvatar'
+export { VAvatar } from './VAvatar'

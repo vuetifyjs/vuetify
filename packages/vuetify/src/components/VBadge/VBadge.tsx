@@ -14,7 +14,7 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { computed, toRef } from 'vue'
 import { convertToUnit, defineComponent, pick } from '@/util'
 
-export default defineComponent({
+export const VBadge = defineComponent({
   name: 'VBadge',
 
   inheritAttrs: false,
@@ -137,7 +137,7 @@ export default defineComponent({
                   backgroundColorStyles.value,
                   locationStyles.value,
                   textColorStyles.value,
-                ] as any} // TODO: Fix this :(
+                ]}
                 aria-atomic="true"
                 aria-label="locale string here" // TODO: locale string here
                 aria-live="polite"
@@ -158,3 +158,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VBadge = InstanceType<typeof VBadge>

@@ -9,7 +9,7 @@ import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { inject } from 'vue'
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VExpansionPanelText = defineComponent({
   name: 'VExpansionPanelText',
 
   props: {

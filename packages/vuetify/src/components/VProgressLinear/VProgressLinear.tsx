@@ -14,7 +14,7 @@ import { useRtl } from '@/composables/rtl'
 import { convertToUnit, defineComponent } from '@/util'
 import { computed, Transition } from 'vue'
 
-export default defineComponent({
+export const VProgressLinear = defineComponent({
   name: 'VProgressLinear',
 
   props: {
@@ -126,8 +126,6 @@ export default defineComponent({
               opacity: opacity.value,
               top: `calc(50% - ${convertToUnit(height.value / 4)})`,
               width: convertToUnit(100 - normalizedBuffer.value, '%'),
-              // TODO: Fix typing
-              // @ts-expect-error
               '--v-progress-linear-stream-to': convertToUnit(height.value * (isReversed.value ? 1 : -1)),
             }}
           />

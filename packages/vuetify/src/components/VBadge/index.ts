@@ -1,1 +1,1 @@
-export { default as VBadge } from './VBadge'
+export { VBadge } from './VBadge'

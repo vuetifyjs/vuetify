@@ -1,1 +1,1 @@
-export { default as VDefaultsProvider } from './VDefaultsProvider'
+export { VDefaultsProvider } from './VDefaultsProvider'

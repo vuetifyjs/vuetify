@@ -11,7 +11,7 @@ import { defineComponent } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-export default defineComponent({
+export const VLayoutItem = defineComponent({
   name: 'VLayoutItem',
 
   props: {

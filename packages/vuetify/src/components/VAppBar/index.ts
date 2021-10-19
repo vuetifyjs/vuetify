@@ -1,3 +1,3 @@
-export { default as VAppBar } from './VAppBar'
-export { default as VAppBarNavIcon } from './VAppBarNavIcon'
-export { default as VAppBarTitle } from './VAppBarTitle'
+export { VAppBar } from './VAppBar'
+export { VAppBarNavIcon } from './VAppBarNavIcon'
+export { VAppBarTitle } from './VAppBarTitle'

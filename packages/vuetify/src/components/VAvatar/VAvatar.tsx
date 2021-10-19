@@ -16,7 +16,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { toRef } from 'vue'
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VAvatar = defineComponent({
   name: 'VAvatar',
 
   props: {
@@ -64,3 +64,5 @@ export default defineComponent({
     )
   },
 })
+
+export type VAvatar = InstanceType<typeof VAvatar>

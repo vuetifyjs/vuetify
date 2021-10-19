@@ -1,1 +1,1 @@
-export { default as VBottomNavigation } from './VBottomNavigation'
+export { VBottomNavigation } from './VBottomNavigation'

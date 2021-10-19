@@ -34,7 +34,7 @@ module.exports = {
       ignoreTemplateLiterals: true,
       ignoreTrailingComments: true,
     }],
-    'max-statements': ['error', 24],
+    complexity: ['error', 32],
     quotes: ['error', 'single', {
       avoidEscape: true,
       allowTemplateLiterals: true,
@@ -136,8 +136,19 @@ module.exports = {
           allowTemplateLiterals: true,
         }],
 
+        indent: 'off',
+        '@typescript-eslint/indent': ['error', 2, {
+          ...require('eslint-config-standard').rules.indent[2],
+          ignoredNodes: [...require('eslint-config-standard').rules.indent[2].ignoredNodes, 'TSTypeParameterInstantiation'],
+          flatTernaryExpressions: true,
+          offsetTernaryExpressions: false,
+        }],
+
+        'func-call-spacing': 'off',
+        '@typescript-eslint/func-call-spacing': require('eslint-config-standard').rules['func-call-spacing'],
+
+        // Handled by tsc
         'no-redeclare': 'off',
-        '@typescript-eslint/no-redeclare': 'error',
 
         'no-use-before-define': 'off',
         '@typescript-eslint/no-use-before-define': ['error', 'nofunc'],

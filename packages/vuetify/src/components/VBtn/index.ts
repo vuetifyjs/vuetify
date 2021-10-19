@@ -1,1 +1,1 @@
-export { default as VBtn } from './VBtn'
+export { VBtn } from './VBtn'

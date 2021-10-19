@@ -1,1 +1,1 @@
-export { default as VHover } from './VHover'
+export { VHover } from './VHover'

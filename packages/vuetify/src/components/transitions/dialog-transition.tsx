@@ -2,7 +2,7 @@ import type { PropType } from 'vue'
 import { Transition } from 'vue'
 import { acceleratedEasing, deceleratedEasing, defineComponent, nullifyTransforms } from '@/util'
 
-export default defineComponent({
+export const VDialogTransition = defineComponent({
   name: 'VDialogTransition',
 
   props: {

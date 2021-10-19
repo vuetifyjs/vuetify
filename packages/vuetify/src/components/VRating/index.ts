@@ -1,1 +1,1 @@
-export { default as VRating } from './VRating'
+export { VRating } from './VRating'

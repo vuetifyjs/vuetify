@@ -11,7 +11,7 @@ import intersect from '@/directives/intersect'
 import type { PropType } from 'vue'
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VLazy = defineComponent({
   name: 'VLazy',
 
   directives: { intersect },

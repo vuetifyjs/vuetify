@@ -60,6 +60,7 @@
       "lazy",
       "lists",
       "overlays",
+      "parallax",
       "ratings",
       "sheets",
       "theme-providers"

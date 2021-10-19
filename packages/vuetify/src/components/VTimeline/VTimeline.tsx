@@ -2,7 +2,7 @@
 import './VTimeline.sass'
 
 // Components
-import VTimelineItem from './VTimelineItem'
+import { VTimelineItem } from './VTimelineItem'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
@@ -20,7 +20,7 @@ import type { Prop } from 'vue'
 export type TimelineDirection = 'vertical' | 'horizontal'
 export type TimelineSide = 'before' | 'after' | undefined
 
-export default defineComponent({
+export const VTimeline = defineComponent({
   name: 'VTimeline',
 
   props: {

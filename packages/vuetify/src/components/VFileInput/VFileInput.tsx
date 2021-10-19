@@ -17,9 +17,8 @@ import { defineComponent, humanReadableFileSize, pick, useRender, wrapInArray } 
 
 // Types
 import type { PropType } from 'vue'
-import type { VFieldSlot } from '@/components/VField/VField'
 
-export default defineComponent({
+export const VFileInput = defineComponent({
   name: 'VFileInput',
 
   inheritAttrs: false,
@@ -105,7 +104,7 @@ export default defineComponent({
     }
 
     useRender(() => {
-      const hasCounter = (slots.counter || props.counter || counterValue.value)
+      const hasCounter = !!(slots.counter || props.counter || counterValue.value)
       const [_, restAttrs] = pick(attrs, ['class'])
 
       return (
@@ -116,6 +115,7 @@ export default defineComponent({
             attrs.class,
           ]}
           active={ isDirty.value }
+          dirty={ isDirty.value }
           prepend-icon={ props.prependIcon }
           onUpdate:active={ val => internalDirty.value = val }
           onClick:control={ click }
@@ -137,7 +137,7 @@ export default defineComponent({
               isActive,
               inputRef,
               props: { class: fieldClass, ...slotProps },
-            }: VFieldSlot) => (
+            }) => (
               <>
                 <input
                   ref={ inputRef }
@@ -177,7 +177,7 @@ export default defineComponent({
               </>
             ),
 
-            details: hasCounter ? () => (
+            details: hasCounter && (() => (
               <>
                 <span />
 
@@ -186,7 +186,7 @@ export default defineComponent({
                   v-slots={ slots.counter }
                 />
               </>
-            ) : undefined,
+            )),
           }}
         />
       )
@@ -200,3 +200,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VFileInput = InstanceType<typeof VFileInput>
