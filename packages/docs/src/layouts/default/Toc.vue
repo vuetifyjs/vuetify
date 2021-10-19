@@ -31,7 +31,7 @@
         <li
           :class="{
             'primary--text router-link-active': isActive,
-            'text--disabled': !isActive,
+            'text--secondary': !isActive,
             'pl-6': level === 3,
             'pl-9': level === 4,
             'pl-12': level === 5,
