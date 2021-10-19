@@ -189,8 +189,8 @@ export default CalendarWithIntervals.extend({
           height,
           ...styler(interval),
         },
-        on: this.getDefaultMouseEventHandlers(':time', e => {
-          return this.getSlotScope(this.getTimestampAtEvent(e, day))
+        on: this.getDefaultMouseEventHandlers(':time', nativeEvent => {
+          return { nativeEvent, ...this.getSlotScope(this.getTimestampAtEvent(nativeEvent, day)) }
         }),
       }
 
