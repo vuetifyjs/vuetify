@@ -68,6 +68,7 @@
     "current-items": "Emits the items provided via the **items** prop, every time the internal **computedItems** is changed.",
     "page-count": "Emits when the **pageCount** property of the **pagination** prop is updated",
     "pagination": "Emits when something changed to the `pagination` which can be provided via the `pagination` prop",
+    "toggle-select-all": "Emits when the `select-all` checkbox in table header is clicked. This checkbox is enabled by the **show-select** prop",
     "update:group-by":"Emits when the **group-by** property of the **options** property is updated",
     "update:group-desc": "Emits when the **group-desc** property of the **options** prop is updated",
     "update:items-per-page": "Emits when the **items-per-page** property of the **options** prop is updated",
