@@ -65,17 +65,17 @@
     "click:row": "Emits when a table row is clicked. This event provides 2 arguments: the first is the item data that was clicked and the second is the other related data provided by the `item` slot. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
     "contextmenu:row": "Emits when a table row is right-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
     "dblclick:row": "Emits when a table row is double-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
-    "current-items": "Emits the items provided via the `items` prop, every time the internal `computedItems` is changed.",
-    "page-count": "Emits when the `pageCount` in the `pagination` is updated",
+    "current-items": "Emits the items provided via the **items** prop, every time the internal **computedItems** is changed.",
+    "page-count": "Emits when the **pageCount** property of the **pagination** prop is updated",
     "pagination": "Emits when something changed to the `pagination` which can be provided via the `pagination` prop",
-    "update:group-by":"Emits when `group-b` of `options` is updated",
-    "update:group-desc": "Emits when `group-desc` of `options` is updated",
-    "update:items-per-page": "Emits when `items-per-page` of `options` is updated",
-    "update:multi-sort": "Emits when `multi-sort` of `options` is updated",
-    "update:must-sort": "Emits when `must-sort` of `options` is updated",
-    "update:options": "Emits when one of the options is updated",
-    "update:page": "Emits when `page` of `options` is updated",
-    "update:sort-by": "Emits when `sort-by` of `options` is updated",
-    "update:sort-desc": "Emits when `sort-desc` of `options` is updated"
+    "update:group-by":"Emits when the **group-by** property of the **options** property is updated",
+    "update:group-desc": "Emits when the **group-desc** property of the **options** prop is updated",
+    "update:items-per-page": "Emits when the **items-per-page** property of the **options** prop is updated",
+    "update:multi-sort": "Emits when the **multi-sort** property of the **options** prop is updated",
+    "update:must-sort": "Emits when the **must-sort** property of the **options** prop is updated",
+    "update:options": "Emits when one of the **options** properties is updated",
+    "update:page": "Emits when the **page** property of the **options** prop is updated",
+    "update:sort-by": "Emits when the **sort-by** property of the **options** prop is updated",
+    "update:sort-desc": "Emits when the **sort-desc** property of the **options** prop is updated"
   }
 }
