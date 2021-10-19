@@ -1,11 +1,11 @@
 <template>
   <v-app>
     <template v-if="usePriority">
-      <v-navigation-drawer v-if="showDrawer" color="grey-darken-2" absolute priority="0"></v-navigation-drawer>
+      <v-navigation-drawer v-if="showDrawer" color="grey-darken-2" absolute permanent priority="0"></v-navigation-drawer>
       <v-app-bar color="grey-lighten-2" absolute elevation="0" priority="1">Using priority</v-app-bar>
     </template>
     <template v-else>
-      <v-navigation-drawer v-if="showDrawer" color="grey-darken-2" absolute></v-navigation-drawer>
+      <v-navigation-drawer v-if="showDrawer" color="grey-darken-2" absolute permanent></v-navigation-drawer>
       <v-app-bar color="grey-lighten-2" absolute elevation="0">Not using priority</v-app-bar>
     </template>
     <v-main>
