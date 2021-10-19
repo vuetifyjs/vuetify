@@ -1,10 +1,11 @@
 <template>
   <v-list
-    dense
-    expand
-    nav
-  >
-    <template v-for="(item, i) in items">
+    v-model:active="active"
+    v-model:opened="opened"
+    density="compact"
+    :items="computedItems"
+  />
+    <!-- <template v-for="(item, i) in items">
       <v-list-subheader
         v-if="item.heading"
         :key="`heading-${i}`"
@@ -36,19 +37,71 @@
         :key="`item-${i}`"
         :item="item"
       />
-    </template>
-  </v-list>
+    </template> -->
 </template>
 
-<script>
-  export default {
+<script lang="ts">
+  import { computed, defineComponent, ref } from 'vue'
+  import type { Prop } from 'vue'
+  import { useI18n } from 'vue-i18n'
+  import routes from 'virtual:generated-pages'
+
+  type Item = { title: string, activeIcon: string, inactiveIcon: string, items: string[] }
+
+  function generateApiItems (locale: string) {
+    return routes
+      .filter(route => route.path.includes(`${locale}/api/`))
+      .sort((a, b) => a.path.localeCompare(b.path))
+      .map(route => {
+        return {
+          title: route.path.slice(route.path.lastIndexOf('/') + 1),
+          to: route.path,
+        }
+      })
+  }
+
+  function generateItems (item: Item, locale: string) {
+    if (!item.items) return undefined
+
+    return item.items.map(child => {
+      const route = routes.find((route: { path: string }) => route.path.endsWith(`${locale}/${item.title}/${child}`))
+      return {
+        title: route?.meta?.nav ?? route?.meta?.title ?? child,
+        to: route?.path,
+        disabled: !route,
+      }
+    })
+  }
+
+  export default defineComponent({
     name: 'AppList',
 
     props: {
       items: {
         type: Array,
         default: () => ([]),
-      },
+      } as Prop<Item[]>,
     },
-  }
+
+    setup (props) {
+      const { t, te, locale } = useI18n()
+      const active = ref<string[]>([])
+      const opened = ref<string[]>([])
+
+      const computedItems = computed(() => props.items?.map(item => {
+        return {
+          title: item.title && te(item.title) ? t(item.title) : item.title,
+          prependIcon: opened.value.includes(item.title) ? item.activeIcon : item.inactiveIcon,
+          value: item.title,
+          children: item.title === 'api' ? generateApiItems(locale.value) : generateItems(item, locale.value),
+        }
+      }))
+
+      return {
+        computedItems,
+        active,
+        opened,
+      }
+    },
+  })
 </script>

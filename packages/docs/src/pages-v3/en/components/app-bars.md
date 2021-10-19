@@ -7,6 +7,7 @@ related:
   - /components/buttons/
   - /components/icons/
   - /components/toolbars/
+nav: App bars
 ---
 
 # App bars

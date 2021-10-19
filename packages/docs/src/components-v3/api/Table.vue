@@ -1,6 +1,6 @@
 <template>
   <app-sheet>
-    <table
+    <v-table
       class="api-table"
     >
       <thead>
@@ -84,7 +84,7 @@
           </template>
         </template>
       </tbody>
-    </table>
+    </v-table>
   </app-sheet>
 </template>
 

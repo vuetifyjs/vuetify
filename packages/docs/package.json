@@ -27,12 +27,14 @@
     "markdown-it-anchor": "^8.3.1",
     "markdown-it-attrs": "^4.0.0",
     "markdown-it-header-sections": "^1.0.0",
+    "markdown-it-meta": "^0.0.1",
+    "parse-md": "^2.0.4",
     "prism-theme-vars": "^0.2.2",
     "roboto-fontface": "*",
-    "vue": "^3.2.8",
+    "vue": "^3.2.19",
     "vue-i18n": "^9.2.0-beta.2",
     "vue-prism-component": "^2.0.0",
-    "vue-router": "^4.0.11",
+    "vue-router": "^4.0.12",
     "vuetify": "^3.0.0-alpha.10"
   },
   "devDependencies": {
@@ -52,7 +54,7 @@
     "vite-plugin-pages": "^0.18.0",
     "vite-plugin-pwa": "^0.11.2",
     "vite-plugin-vue-layouts": "^0.4.1",
-    "vite-ssg": "^0.15.1",
+    "vite-ssg": "^0.15.4",
     "vue-cli-plugin-vuetify": "~2.4.2",
     "workbox-window": "^6.3.0"
   },

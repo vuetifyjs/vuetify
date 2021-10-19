@@ -43,12 +43,12 @@
   import 'prismjs/components/prism-stylus'
   import 'prismjs/components/prism-typescript'
 
+  import { ComponentPublicInstance, computed, defineComponent, ref } from 'vue'
   import { useTheme } from 'vuetify'
-  import { ComponentPublicInstance, computed, ref } from 'vue'
   import { wait } from '@/util/helpers'
   import { IN_BROWSER } from '@/util/globals'
 
-  export default {
+  export default defineComponent({
     name: 'Markup',
 
     props: {
@@ -90,12 +90,12 @@
 
       return { root, theme, highlighted, className, clicked, copy }
     },
-  }
+  })
 </script>
 
 <style lang="sass">
   .v-sheet.app-markup
-    margin: 16px 0
+    // margin: 16px 0
     position: relative
     padding: 12px 50px 12px 16px
 
@@ -117,8 +117,8 @@
     > pre
       border-radius: inherit
 
-    code[class*=language],
-    pre[class*=language]
+    code,
+    pre
       background: none
       font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace
       font-size: 1rem
@@ -129,12 +129,12 @@
       tab-size: 4
       text-align: left
       text-shadow: none
-      white-space: pre
+      white-space: pre-wrap
       word-break: normal
       word-spacing: normal
       word-wrap: normal
 
-    pre[class*=language]
+    pre
       &::after
         bottom: 0.75rem
         color: hsla(0, 0%, 19%, 0.5)
@@ -170,14 +170,14 @@
       content: 'vue'
 
     &.v-theme--dark
-      code[class*=language],
-      pre[class*=language]
+      code,
+      pre
         color: #ccc !important
 
         &::selection, ::selection
           background-color: #113663
 
-      pre[class*=language]
+      pre
         &::after
           color: hsla(0, 0%, 50%, 1)
 

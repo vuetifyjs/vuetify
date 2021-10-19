@@ -3,7 +3,7 @@
     v-model="app.drawer"
     width="300"
   >
-    <div class="pa-4 d-flex flex-column">
+    <!-- <div class="pa-4 d-flex flex-column">
       <b>Introduction</b>
       <router-link :to="{ name: `${locale}-introduction-why-vuetify` }">Why Vuetify?</router-link>
       <b>Getting started</b>
@@ -14,8 +14,8 @@
       <b>API</b>
       <router-link :to="{ path: `/${locale}/api/v-alert` }">v-alert</router-link>
       <router-link :to="{ path: `/${locale}/api/v-app-bar` }">v-app-bar</router-link>
-    </div>
-    <!-- <app-list :items="items" /> -->
+    </div> -->
+    <app-list :items="items" />
   </v-navigation-drawer>
 </template>
 

@@ -19,6 +19,7 @@ import MarkdownItHeaderSections from 'markdown-it-header-sections'
 import markdownRules from './build/rules'
 import MarkdownIt from 'markdown-it'
 import fs from 'fs'
+import parseMD from 'parse-md'
 
 const resolve = (file: string) => path.resolve(__dirname, file)
 
@@ -66,10 +67,9 @@ const ssrTransformCustomDirective = () => {
   }
 }
 
-const generateToc = (componentPath: string, md: MarkdownIt) => {
-  const str = fs.readFileSync(path.resolve(componentPath.slice(1)), { encoding: 'utf-8' })
+const generateToc = (content: string) => {
   const headings = []
-  const tokens = md.parse(str, {})
+  const tokens = md.parse(content, {})
   const length = tokens.length
 
   for (let i = 0; i < length; i++) {
@@ -96,6 +96,18 @@ const generateToc = (componentPath: string, md: MarkdownIt) => {
   }
 
   return headings
+}
+
+const parseMarkdown = (componentPath: string) => {
+  const str = fs.readFileSync(path.resolve(componentPath.slice(1)), { encoding: 'utf-8' })
+  const { metadata, content } = parseMD(str)
+  const { meta, ...rest } = metadata
+
+  return {
+    ...rest,
+    ...meta,
+    toc: generateToc(content),
+  }
 }
 
 export default defineConfig({
@@ -157,7 +169,7 @@ export default defineConfig({
 
         const currentPath = route.path.split('/')
         const layout = currentPath.length === 2 ? 'home' : 'default'
-        const toc = generateToc(route.component, md)
+        const meta = parseMarkdown(route.component)
         let path = route.path
 
         if (path.startsWith('/api')) {
@@ -169,8 +181,8 @@ export default defineConfig({
           ...route,
           path,
           meta: {
+            ...meta,
             layout,
-            toc,
           },
         }
       },

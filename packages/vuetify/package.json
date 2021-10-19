@@ -144,7 +144,7 @@
     "vite": "^2.5.3",
     "vite-ssr": "^0.13.1",
     "vue-meta": "^2.4.0",
-    "vue-router": "^4.0.11"
+    "vue-router": "^4.0.12"
   },
   "peerDependencies": {
     "vue": "^3.2.19"

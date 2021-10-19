@@ -24,9 +24,9 @@
       return {
         title: t('support'),
         items: computed(() => ([
-          { heading: t('professional-support') },
+          // { heading: t('professional-support') },
           {
-            title: t('direct-support'),
+            title: 'direct-support',
             // to: {
             //   name: 'Documentation',
             //   params: {
@@ -36,7 +36,7 @@
             // },
           },
           {
-            title: t('enterprise'),
+            title: 'enterprise',
             // to: {
             //   name: 'Documentation',
             //   params: {
@@ -45,36 +45,36 @@
             //   },
             // },
           },
-          { divider: true },
-          { heading: t('community-support') },
+          // { divider: true },
+          // { heading: t('community-support') },
           {
             title: 'Discord',
             href: 'https://community.vuetifyjs.com/',
           },
           {
-            title: t('github-discussions'),
+            title: 'github-discussions',
             href: 'https://discussions.vuetifyjs.com/',
           },
-          { divider: true },
-          { heading: t('resources-and-tools') },
+          // { divider: true },
+          // { heading: t('resources-and-tools') },
           {
-            title: t('file-a-bug-report'),
+            title: 'file-a-bug-report',
             href: 'https://issues.vuetifyjs.com/',
           },
           {
-            title: t('codepen-template'),
+            title: 'codepen-template',
             href: 'https://template.vuetifyjs.com/',
           },
           {
-            title: t('github-issues'),
+            title: 'github-issues',
             href: 'https://github.com/vuetifyjs/vuetify/issues/',
           },
           {
-            title: t('documentation-status'),
+            title: 'documentation-status',
             href: 'https://status.vuetifyjs.com/',
           },
           {
-            title: t('stack-overflow'),
+            title: 'stack-overflow',
             href: 'https://stackoverflow.com/search?q=vuetify',
           },
         ])),

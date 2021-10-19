@@ -4,6 +4,8 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AboutTeamMember: typeof import('./src/components-v3/about/TeamMember.vue')['default']
+    AboutTeamMembers: typeof import('./src/components-v3/about/TeamMembers.vue')['default']
     AdsAd: typeof import('./src/components-v3/ads/Ad.vue')['default']
     AdsBsa: typeof import('./src/components-v3/ads/Bsa.vue')['default']
     AdsCarbon: typeof import('./src/components-v3/ads/Carbon.vue')['default']

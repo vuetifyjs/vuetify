@@ -1,7 +1,8 @@
 [
   {
     "title": "introduction",
-    "icon": "$mdiScriptTextOutline:$mdiScriptText",
+    "inactiveIcon": "mdi-script-text-outline",
+    "activeIcon": "mdi-script-text",
     "items": [
       "why-vuetify",
       "long-term-support",
@@ -10,7 +11,8 @@
   },
   {
     "title": "getting-started",
-    "icon": "$mdiSpeedometerMedium:$mdiSpeedometer",
+    "inactiveIcon": "mdi-speedometer-medium",
+    "activeIcon": "mdi-speedometer",
     "items": [
       "installation",
       "v3-alpha-release-notes",
@@ -19,8 +21,10 @@
   },
   {
     "title": "features",
-    "icon": "$mdiImageEditOutline:$mdiImageEdit",
+    "inactiveIcon": "mdi-image-edit-outline",
+    "activeIcon": "mdi-image-edit",
     "items": [
+      "application-layout",
       "display-and-platform",
       "global-config",
       "icon-fonts",
@@ -30,17 +34,20 @@
   },
   {
     "title": "styles",
-    "icon": "$mdiPaletteOutline:$mdiPalette",
+    "inactiveIcon": "mdi-palette-outline",
+    "activeIcon": "mdi-palette",
     "items": [
       "border-radius",
       "colors"
     ]
   },
   {
-    "title": "ui-components",
-    "icon": "$mdiViewDashboardOutline:$mdiViewDashboard",
+    "title": "components",
+    "inactiveIcon": "mdi-view-dashboard-outline",
+    "activeIcon": "mdi-view-dashboard",
     "group": "components",
     "items": [
+      "alerts",
       "app-bars",
       "application",
       "aspect-ratios",
@@ -68,13 +75,15 @@
   },
   {
     "title": "api",
-    "icon": "$mdiFlaskEmptyOutline:$mdiFlaskOutline",
+    "inactiveIcon": "mdi-flask-empty-outline",
+    "activeIcon": "mdi-flask-outline",
     "group": "api",
     "items": []
   },
   {
     "title": "directives",
-    "icon": "$mdiFunction",
+    "inactiveIcon": "mdi-function",
+    "activeIcon": "mdi-function",
     "items": [
       "intersect",
       "mutate",
@@ -86,7 +95,8 @@
   },
   {
     "title": "about",
-    "icon": "$mdiVuetify",
+    "inactiveIcon": "mdi-vuetify",
+    "activeIcon": "mdi-vuetify",
     "items": [
       "meet-the-team",
       "sponsors-and-backers",

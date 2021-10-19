@@ -7,6 +7,7 @@ related:
   - /components/buttons/
   - /components/icons/
   - /components/snackbars/
+nav: Alerts
 ---
 
 # Alerts

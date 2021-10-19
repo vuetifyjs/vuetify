@@ -1,11 +1,19 @@
 <template>
   <app-sheet class="mb-4">
-    <table>
+    <v-table
+      v-bind="$attrs"
+    >
       <slot />
-    </table>
+    </v-table>
   </app-sheet>
 </template>
 
-<script>
-  export default { name: 'AppTable' }
+<script lang="ts">
+  import { defineComponent } from 'vue'
+
+  export default defineComponent({
+    name: 'AppTable',
+
+    inheritAttrs: false,
+  })
 </script>
