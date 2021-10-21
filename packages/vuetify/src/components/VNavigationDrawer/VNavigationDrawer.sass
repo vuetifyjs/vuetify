@@ -25,13 +25,10 @@
   &--absolute
     position: absolute
 
-  &--floating
-    border-color: transparent
-
   &--rounded
     @include tools.rounded($navigation-drawer-rounded-border-radius)
 
-  &--start:not(&--floating)
+  &--start
     border-inline-end-width: $navigation-drawer-border-thin-width
 
     @include tools.ltr()
@@ -42,7 +39,7 @@
       left: auto
       right: 0
 
-  &--end:not(&--floating)
+  &--end
     border-inline-start-width: $navigation-drawer-border-thin-width
 
     @include tools.ltr()
@@ -52,6 +49,9 @@
     @include tools.rtl()
       left: 0
       right: auto
+
+  &--floating
+    border: none
 
   &--temporary
     @include tools.elevation($navigation-drawer-temporary-elevation)
