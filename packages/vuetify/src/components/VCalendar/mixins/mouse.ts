@@ -65,17 +65,16 @@ export default Vue.extend({
             // Ref: https://developer.mozilla.org/en-US/docs/Web/API/Touch/target
             // This block of code aims to make sure touchEvent is always dispatched from the element that is being pointed at
             if (e && 'touches' in e) {
-              const touchEvent: TouchEvent = e as TouchEvent
-              const currentTarget = document.elementFromPoint(touchEvent.changedTouches[0].clientX, touchEvent.changedTouches[0].clientY)
+              const currentTarget = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY)
 
               if (currentTarget &&
-                !(touchEvent.target as HTMLElement)?.isSameNode(currentTarget) &&
-                (touchEvent.target as HTMLElement)?.className === currentTarget.className
+                !(e.target as HTMLElement)?.isSameNode(currentTarget) &&
+                (e.target as HTMLElement)?.className === currentTarget.className
               ) {
-                currentTarget.dispatchEvent(new TouchEvent(touchEvent.type, {
-                  changedTouches: touchEvent.changedTouches as unknown as Touch[],
-                  targetTouches: touchEvent.targetTouches as unknown as Touch[],
-                  touches: touchEvent.touches as unknown as Touch[],
+                currentTarget.dispatchEvent(new TouchEvent(e.type, {
+                  changedTouches: e.changedTouches as unknown as Touch[],
+                  targetTouches: e.targetTouches as unknown as Touch[],
+                  touches: e.touches as unknown as Touch[],
                 }))
                 return
               }
