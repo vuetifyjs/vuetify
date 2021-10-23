@@ -30,26 +30,28 @@ By default, the order in which layout components will attempt to reserve space i
 
 <alert type="info">something something ignore that we are using **absolute** prop in examples</alert>
 
-As you can see, placing the **v-app-bar** before the **v-navigation-drawer** means that it will use the full width of the screen. When it it placed after the **v-navigation-drawer**, it will only use free space left over.
+As you can see, placing the **v-app-bar** before the **v-navigation-drawer** means that it will use the full width of the screen. When it it placed after the **v-navigation-drawer**, it will only use the free space left over.
 
-<!-- some more educational examples here -->
+Some layout components accept a **position** prop with which you can place the component in the layout. In the example below, we use two **v-navigation-drawer** components, one on each side of the application.
+
+<example file="application-layout/position" />
 
 ## Complex layouts
 
-Let's create a more complex layout to show the flexibility of the system. In the following example we have re-created the general layout of the Discord application.
+Let's create a more complex layout to show the flexibility of the system. In the following example we have re-created the general layout of the Discord application. This example also demonstrates that layout components accept either a **width** or **height** prop, and that multiple components of the same type can be stacked in the same position.
 
 <example file="application-layout/discord" />
 
 ## Dynamic layouts and priority
 
-In most cases, it should be enough to simply place your layout components in the correct order in your markup to achieve the layout you want. There are however a couple of scenarios where this might not be possible. One of those is when your layout is not static, and one or more of your layout components are dynamically rendered.
+In most cases, it should be enough to simply place your layout components in the correct order in your markup to achieve the layout you want. There are however a couple of scenarios where this might not be possible. One of those is when your layout is not static, and some of your layout components are dynamically rendered.
 
 To solve this you can explicitly set the layout order by using the **priority** prop. Explore the example below to see what happens if you have a dynamic layout without using the **priority** prop. Toggling the drawer off and on once when not using **priority** will lead to the drawer being placed after the app-bar when it is toggled on again. When using **priority** the drawer will always be placed first.
 
 <example file="application-layout/dynamic" />
 
-<!-- explain priority prop and why it is needed in some scenarios such as dynamic layouts -->
-
-## Accessing layout programmatically
+## Accessing layout information
 
 <!-- explain name prop and how to access layout data from composable -->
+
+<example file="application-layout/layout-information" />
