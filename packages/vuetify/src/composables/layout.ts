@@ -53,7 +53,7 @@ export const makeLayoutItemProps = propsFactory({
   absolute: Boolean,
 }, 'layout-item')
 
-export function useMain () {
+export function useLayout () {
   const layout = inject(VuetifyLayoutKey)
 
   if (!layout) throw new Error('Could not find injected Vuetify layout')
