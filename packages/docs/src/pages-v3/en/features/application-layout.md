@@ -28,7 +28,11 @@ By default, the order in which layout components will attempt to reserve space i
 
 <example file="application-layout/nav-drawer-first" />
 
-<alert type="info">something something ignore that we are using **absolute** prop in examples</alert>
+<alert type="info">
+
+  something something ignore that we are using **absolute** prop in examples
+
+</alert>
 
 As you can see, placing the **v-app-bar** before the **v-navigation-drawer** means that it will use the full width of the screen. When it it placed after the **v-navigation-drawer**, it will only use the free space left over.
 
@@ -56,6 +60,10 @@ The layout system exposes a function `getLayoutItem` that allows you to get size
 
 <example file="application-layout/layout-information-ref" />
 
-<alert type="warning">Keep in mind that you will not be able to directly use the composable in the same component where you are rendering the **v-app** component. The call to **useLayout** must happen in a child component, so that the layout can be properly injected.</alert>
+<alert type="warning">
+
+  You will not be able to directly use the composable in the same component where you are rendering the **v-app** component. The call to **useLayout** must happen in a child component, so that the layout can be properly injected.
+
+</alert>
 
 <example file="application-layout/layout-information-composable" />

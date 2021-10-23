@@ -25,11 +25,11 @@
     "activeIcon": "mdi-image-edit",
     "items": [
       "application-layout",
+      "theme",
       "display-and-platform",
-      "global-config",
       "icon-fonts",
-      "internationalization",
-      "theme"
+      "global-configuration",
+      "internationalization"
     ]
   },
   {
