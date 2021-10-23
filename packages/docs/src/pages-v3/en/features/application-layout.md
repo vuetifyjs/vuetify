@@ -52,6 +52,10 @@ To solve this you can explicitly set the layout order by using the **priority** 
 
 ## Accessing layout information
 
-<!-- explain name prop and how to access layout data from composable -->
+The layout system exposes a function `getLayoutItem` that allows you to get size and position information about a specific layout component in your markup. To use it, you will need to add a **name** prop to the layout component, and give it a unique value. You can either access the method by using a ref on **v-app**, or by using the **useLayout** composable.
 
-<example file="application-layout/layout-information" />
+<example file="application-layout/layout-information-ref" />
+
+<alert type="warning">Keep in mind that you will not be able to directly use the composable in the same component where you are rendering the **v-app** component. The call to **useLayout** must happen in a child component, so that the layout can be properly injected.</alert>
+
+<example file="application-layout/layout-information-composable" />
