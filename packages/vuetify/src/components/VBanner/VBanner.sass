@@ -5,6 +5,9 @@
 +theme('v-banner.v-sheet') using ($material)
   background-color: transparent
 
+  &.v-sheet--outlined
+    background: white !important
+
   &:not(.v-sheet--outlined):not(.v-sheet--shaped)
     .v-banner__wrapper
       border-bottom: thin solid map-get($material, 'dividers')
