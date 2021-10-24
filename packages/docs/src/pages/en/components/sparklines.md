@@ -19,7 +19,7 @@ Any [SVG attribute](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute) 
 
 ## Usage
 
-A sparkline is a tiny chart that provides a visual representation of data. The sparkline component comes in 2 variations, **trend**(default) and **bar**. Each support a multitude of options for customizing the look and feel of the sparkline.
+A sparkline is a tiny chart that provides a visual representation of data. The sparkline component comes in 2 variations, **trend** (default) and **bar**. Each supports a multitude of options for customizing the look and feel of the sparkline.
 
 <example file="v-sparkline/usage" />
 
@@ -43,7 +43,7 @@ You can create a `v-sparkline` with fill using the `fill` property.
 
 #### Custom labels
 
-By providing a **label** slot, we are able to modify the displayed content adding a dollar sign ($). This slot is **_exclusively_** for text content. For more information on the svg `<text>` element, [navigate here](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text).
+By providing a **label** slot, we are able to modify the displayed content by adding a dollar sign ($). This slot is **_exclusively_** for text content. For more information on the svg `<text>` element, [navigate here](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text).
 
 <example file="v-sparkline/misc-custom-labels" />
 
