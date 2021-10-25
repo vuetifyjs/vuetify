@@ -26,7 +26,6 @@
         rounded: false,
         shaped: false,
         tile: false,
-        dark: false,
       },
       options: {
         selects: {
