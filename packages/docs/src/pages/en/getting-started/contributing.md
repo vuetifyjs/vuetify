@@ -254,7 +254,7 @@ All commit messages are required to follow the [conventional-changelog](https://
   ```bash
   fix(VSelect): don't close when a detachable child is clicked
 
-  fixes #12354
+  fix: #12354
   ```
 
 - Without scope: `<type>: <subject>`
