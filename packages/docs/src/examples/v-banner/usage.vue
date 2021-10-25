@@ -21,7 +21,6 @@
         icon: null,
         color: null,
         'single-line': false,
-        sticky: false,
         outlined: false,
         rounded: false,
         shaped: false,
