@@ -23,14 +23,15 @@
     <ul class="mb-6">
       <router-link
         v-for="({ to, level, text }, i) in toc"
-        :key="text"
+        :key="to"
         v-slot="{ href, isActive }"
         :to="to"
+        custom
       >
         <li
           :class="{
             'primary--text router-link-active': isActive,
-            'text--disabled': !isActive,
+            'text--secondary': !isActive,
             'pl-6': level === 3,
             'pl-9': level === 4,
             'pl-12': level === 5,

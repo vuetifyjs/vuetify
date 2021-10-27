@@ -5,7 +5,7 @@ import VWindowItem from '../VWindow/VWindowItem'
 import { VImg } from '../VImg'
 
 // Utilities
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 import { getSlot } from '../../util/helpers'
 import Routable from '../../mixins/routable'
 
@@ -15,9 +15,30 @@ const baseMixins = mixins(
   Routable
 )
 
+interface options extends ExtractVue<typeof baseMixins> {
+  parentTheme: {
+    isDark: boolean
+  }
+}
+
 /* @vue/component */
-export default baseMixins.extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-carousel-item',
+
+  inject: {
+    parentTheme: {
+      default: {
+        isDark: false,
+      },
+    },
+  },
+
+  // pass down the parent's theme
+  provide (): object {
+    return {
+      theme: this.parentTheme,
+    }
+  },
 
   inheritAttrs: false,
 

@@ -1,9 +1,8 @@
 <template>
   <v-autocomplete
     clearable
-    multiple
+    item-value="text"
     prepend-inner-icon="$mdiDatabaseSearch"
-    return-object
     solo
     v-bind="$attrs"
     v-on="$listeners"
@@ -41,5 +40,6 @@
 <script>
   export default {
     name: 'ApiSearch',
+    inheritAttrs: false,
   }
 </script>

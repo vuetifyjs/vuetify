@@ -32,7 +32,7 @@
                 category: 'introduction',
                 page: 'why-vuetify',
               },
-              hash: '#guide',
+              hash: '#feature-guides',
             },
           },
           { divider: true },

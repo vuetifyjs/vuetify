@@ -20,6 +20,8 @@ In Vuetify, the `v-app` component and the **app** prop on components like `v-nav
 - [v-app](/api/v-app)
 - [v-main](/api/v-main)
 
+<inline-api page="components/application" />
+
 <alert type="error">
 
   In order for your application to work properly, you **must** wrap it in a `v-app` component. This component is required for ensuring proper **cross-browser compatibility**. Vuetify doesn't support multiple isolated Vuetify instances on a page. `v-app` can exist **anywhere** inside the body of your app, however, there should only be one and it must be the parent of **ALL** Vuetify components.
@@ -34,7 +36,7 @@ In Vuetify, the `v-app` component and the **app** prop on components like `v-nav
 
 ## Default application markup
 
-This is an example of the default application markup for Vuetify. You can place your layout elements anywhere, as long as you apply the **app** property. The key component in all of this is `v-main`. This will be dynamically sized depending upon the structure of your designated **app** components. You can use combinations of any or all of the above components including `v-bottom-navigation`.
+This is an example of the default application markup for Vuetify. You can place your layout elements anywhere, as long as you apply the **app** property. The key component to making your page content work together with layout elements is `v-main`. The `v-main` component will be dynamically sized depending upon the structure of your designated **app** components. You can use combinations of any or all of the above components including `v-bottom-navigation`.
 
 When using [vue-router](https://router.vuejs.org/) it is recommended that you place your views inside `v-main`.
 

@@ -14,14 +14,14 @@
     "fixedHeader": "Fixed header to top of table. **NOTE:** Does not work in IE11",
     "groupBy": "Changes which item property should be used for grouping items. Currently only supports a single grouping in the format: `group` or `['group']`. When using an array, only the first element is considered. Can be used with `.sync` modifier",
     "groupDesc": "Changes which direction grouping is done. Can be used with `.sync` modifier",
-    "headerProps": "Pass props to the default header. See 'v-data-table-header' API for more information",
+    "headerProps": "Pass props to the default header. See [`v-data-table-header` API](/api/v-data-table-header) for more information",
     "headers": "An array of objects that each describe a header column. See the example below for a definition of all properties",
     "headersLength": "Can be used in combination with `hide-default-header` to specify the number of columns in the table to allow expansion rows and loading bar to function properly",
     "height": "Set an explicit height of table",
     "hideDefaultHeader": "Hide the default headers",
     "itemClass": "Property on supplied `items` that contains item's row class or function that takes an item as an argument and returns the class of corresponding row",
     "items": "The array of items to display",
-    "itemsPerPage": "Changes how many items per page should be visible. Can be used with `.sync` modifier",
+    "itemsPerPage": "Changes how many items per page should be visible. Can be used with `.sync` modifier. Setting this prop to `-1` will display all items on the page",
     "locale": "Sets the locale used for sorting. This is passed into [`Intl.Collator()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator) in the default `customSort` function",
     "mobileBreakpoint": "Used to set when to toggle between regular table and mobile view",
     "multiSort": "If `true` then one can sort on multiple properties",
@@ -33,7 +33,8 @@
     "showGroupBy": "Shows the group by toggle in the header and enables grouped rows",
     "sortBy": "Changes which item property (or properties) should be used for sort order. Can be used with `.sync` modifier",
     "sortDesc": "Changes which direction sorting is done. Can be used with `.sync` modifier",
-    "virtualRows": "Virtualizes the rendering of rows. Be aware that you can not use the `body`, `body.prepend` or `body.append` slots with this prop."
+    "virtualRows": "Virtualizes the rendering of rows. Be aware that you can not use the `body`, `body.prepend` or `body.append` slots with this prop.",
+    "page": "The current displayed page number (1-indexed)"
   },
   "slots": {
     "body": "Slot to replace the default table `<tbody>`",
@@ -63,6 +64,19 @@
   "events": {
     "click:row": "Emits when a table row is clicked. This event provides 2 arguments: the first is the item data that was clicked and the second is the other related data provided by the `item` slot. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
     "contextmenu:row": "Emits when a table row is right-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
-    "dblclick:row": "Emits when a table row is double-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`."
+    "dblclick:row": "Emits when a table row is double-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
+    "current-items": "Emits the items provided via the **items** prop, every time the internal **computedItems** is changed.",
+    "page-count": "Emits when the **pageCount** property of the **pagination** prop is updated",
+    "pagination": "Emits when something changed to the `pagination` which can be provided via the `pagination` prop",
+    "toggle-select-all": "Emits when the `select-all` checkbox in table header is clicked. This checkbox is enabled by the **show-select** prop",
+    "update:group-by":"Emits when the **group-by** property of the **options** property is updated",
+    "update:group-desc": "Emits when the **group-desc** property of the **options** prop is updated",
+    "update:items-per-page": "Emits when the **items-per-page** property of the **options** prop is updated",
+    "update:multi-sort": "Emits when the **multi-sort** property of the **options** prop is updated",
+    "update:must-sort": "Emits when the **must-sort** property of the **options** prop is updated",
+    "update:options": "Emits when one of the **options** properties is updated",
+    "update:page": "Emits when the **page** property of the **options** prop is updated",
+    "update:sort-by": "Emits when the **sort-by** property of the **options** prop is updated",
+    "update:sort-desc": "Emits when the **sort-desc** property of the **options** prop is updated"
   }
 }

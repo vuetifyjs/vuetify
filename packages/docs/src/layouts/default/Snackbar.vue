@@ -3,7 +3,8 @@
     v-model="value"
     :color="snackbar.color"
     :timeout="-1"
-    top
+    bottom
+    right
   >
     <div class="d-flex">
       <span
@@ -23,7 +24,7 @@
         class="mr-2"
         text
         v-bind="{ ...bind, ...attrs }"
-        @click="value = false"
+        @click="onClick"
       >
         {{ snackbar.action_text }}
       </v-btn>
@@ -79,6 +80,18 @@
 
         this.notifications.push(this.snackbar.slug)
         this.notification = Date.now()
+      },
+    },
+
+    methods: {
+      onClick () {
+        this.value = false
+
+        this.$gtag.event('click', {
+          event_category: 'notification',
+          event_label: 'snackbar',
+          value: this.snackbar.slug,
+        })
       },
     },
   }

@@ -24,6 +24,8 @@ The default behavior is to bind to the window. If no additional configuration op
 
 - [v-scroll](/api/v-scroll)
 
+<inline-api page="directives/scroll" />
+
 ## Examples
 
 ### Options

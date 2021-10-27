@@ -25,7 +25,7 @@
               ></v-icon>
 
               <div
-                class="caption"
+                class="text-caption"
                 v-text="bp"
               ></div>
             </div>
@@ -57,7 +57,7 @@
       model: 'caption',
       sizes: [
         ['mdi-devices', 'all', 'caption'],
-        ['mdi-cellphone-iphone', 'sm', 'body-2'],
+        ['mdi-cellphone', 'sm', 'body-2'],
         ['mdi-laptop', 'md', 'body-1'],
         ['mdi-monitor', 'lg', 'h6'],
         ['mdi-television', 'xl', 'h4'],

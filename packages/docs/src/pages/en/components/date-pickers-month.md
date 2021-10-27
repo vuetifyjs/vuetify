@@ -25,6 +25,8 @@ Month pickers come in two orientation variations, portrait **(default)** and lan
 
 - [v-date-picker](/api/v-date-picker)
 
+<inline-api page="components/date-pickers-month" />
+
 ## Caveats
 
 <alert type="warning">

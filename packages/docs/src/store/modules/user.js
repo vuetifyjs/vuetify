@@ -19,6 +19,8 @@ const state = () => {
   }
 
   return merge({
+    api: false,
+    pwaRefresh: true,
     drawer: {
       alphabetical: false,
       mini: false,
@@ -27,6 +29,7 @@ const state = () => {
       install: null,
       notification: null,
       promotion: null,
+      jobs: null,
     },
     notifications: [],
     rtl: false,

@@ -198,10 +198,9 @@
   },
   {
     "title": "resources",
-    "icon": "$mdiTeach",
+    "icon": "$mdiHumanMaleBoard",
     "items": [
       "jobs-for-vue",
-      "made-with-vuetify",
       "themes",
       "ui-kits"
     ]

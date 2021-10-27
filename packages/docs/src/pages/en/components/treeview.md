@@ -26,6 +26,8 @@ A basic example
 
 - [v-treeview](/api/v-treeview)
 
+<inline-api page="components/treeview" />
+
 ## Examples
 
 ### Props

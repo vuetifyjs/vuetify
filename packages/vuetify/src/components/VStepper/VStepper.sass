@@ -182,7 +182,11 @@
     padding-bottom: $stepper-vertical-padding-bottom
 
     .v-stepper__content
-      padding: $stepper-vertical-content-padding
+      +ltr()
+        padding: $stepper-vertical-content-ltr-padding
+      +rtl()
+        padding: $stepper-vertical-content-rtl-padding
+  
       width: auto
       +ltr()
         margin: $stepper-vertical-content-ltr-margin

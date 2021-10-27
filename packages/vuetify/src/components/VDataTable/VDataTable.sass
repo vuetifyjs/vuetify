@@ -21,6 +21,11 @@
 .v-data-table
   border-radius: $data-table-border-radius
 
+  &--mobile
+    > .v-data-table__wrapper tbody
+      display: flex
+      flex-direction: column
+
   > .v-data-table__wrapper
     tbody
       tr

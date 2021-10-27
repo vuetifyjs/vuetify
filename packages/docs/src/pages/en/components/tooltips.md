@@ -25,6 +25,8 @@ Tooltips can wrap any element.
 
 - [v-tooltip](/api/v-tooltip)
 
+<inline-api page="components/tooltips" />
+
 ## Caveats
 
 <alert type="info">

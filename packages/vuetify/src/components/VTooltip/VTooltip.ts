@@ -5,7 +5,6 @@ import Activatable from '../../mixins/activatable'
 import Colorable from '../../mixins/colorable'
 import Delayable from '../../mixins/delayable'
 import Dependent from '../../mixins/dependent'
-import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable'
 import Toggleable from '../../mixins/toggleable'
 
@@ -18,7 +17,7 @@ import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 
 /* @vue/component */
-export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Toggleable).extend({
+export default mixins(Colorable, Delayable, Dependent, Menuable, Toggleable).extend({
   name: 'v-tooltip',
 
   props: {
@@ -27,10 +26,6 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
       default: 0,
     },
     disabled: Boolean,
-    fixed: {
-      type: Boolean,
-      default: true,
-    },
     openDelay: {
       type: [Number, String],
       default: 0,
@@ -98,8 +93,9 @@ export default mixins(Colorable, Delayable, Dependent, Detachable, Menuable, Tog
 
       if (this.nudgeTop) top -= parseInt(this.nudgeTop)
       if (this.nudgeBottom) top += parseInt(this.nudgeBottom)
+      if (this.attach === false) top += this.pageYOffset
 
-      return `${this.calcYOverflow(top + this.pageYOffset)}px`
+      return `${this.calcYOverflow(top)}px`
     },
     classes (): object {
       return {

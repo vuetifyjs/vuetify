@@ -173,7 +173,7 @@ export default VSelect.extend({
         this.$refs.input && this.$refs.input.select()
       } else {
         document.removeEventListener('copy', this.onCopy)
-        this.$refs.input && this.$refs.input.blur()
+        this.blur()
         this.updateSelf()
       }
     },
@@ -410,14 +410,18 @@ export default VSelect.extend({
       })
     },
     updateSelf () {
-      if (!this.searchIsDirty &&
+      if (
+        !this.searchIsDirty &&
         !this.internalValue
       ) return
 
-      if (!this.valueComparator(
-        this.internalSearch,
-        this.getValue(this.internalValue)
-      )) {
+      if (
+        !this.multiple &&
+        !this.valueComparator(
+          this.internalSearch,
+          this.getValue(this.internalValue)
+        )
+      ) {
         this.setSearch()
       }
     },

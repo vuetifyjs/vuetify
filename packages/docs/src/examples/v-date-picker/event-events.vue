@@ -27,8 +27,8 @@
   export default {
     data: () => ({
       arrayEvents: null,
-      date1: new Date().toISOString().substr(0, 10),
-      date2: new Date().toISOString().substr(0, 10),
+      date1: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      date2: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
     }),
 
     mounted () {

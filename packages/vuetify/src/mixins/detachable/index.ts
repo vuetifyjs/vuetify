@@ -25,6 +25,14 @@ function validateAttachTarget (val: any) {
   return val.nodeType === Node.ELEMENT_NODE
 }
 
+function removeActivator (activator: VNode[]) {
+  activator.forEach(node => {
+    node.elm &&
+    node.elm.parentNode &&
+    node.elm.parentNode.removeChild(node.elm)
+  })
+}
+
 /* @vue/component */
 export default mixins<options &
   /* eslint-disable indent */
@@ -86,7 +94,7 @@ export default mixins<options &
     this.isActive = false
   },
 
-  beforeDestroy () {
+  destroyed () {
     // IE11 Fix
     try {
       if (
@@ -98,11 +106,21 @@ export default mixins<options &
 
       if (this.activatorNode) {
         const activator = Array.isArray(this.activatorNode) ? this.activatorNode : [this.activatorNode]
-        activator.forEach(node => {
-          node.elm &&
-            node.elm.parentNode &&
-            node.elm.parentNode.removeChild(node.elm)
-        })
+        if (this.$el.isConnected) {
+          // Component has been destroyed but the element still exists, we must be in a transition
+          // Wait for the transition to finish before cleaning up the detached activator
+          const observer = new MutationObserver(list => {
+            if (
+              list.some(record => Array.from(record.removedNodes).includes(this.$el))
+            ) {
+              observer.disconnect()
+              removeActivator(activator)
+            }
+          })
+          observer.observe(this.$el.parentNode!, { subtree: false, childList: true })
+        } else {
+          removeActivator(activator)
+        }
       }
     } catch (e) { console.log(e) } /* eslint-disable-line no-console */
   },

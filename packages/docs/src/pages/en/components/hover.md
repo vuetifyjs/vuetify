@@ -25,6 +25,8 @@ The `v-hover` component is a wrapper that should contain only one child element,
 
 - [v-hover](/api/v-hover)
 
+<inline-api page="components/hover" />
+
 ## Examples
 
 ### Props

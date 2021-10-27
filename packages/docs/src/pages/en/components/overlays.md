@@ -25,6 +25,8 @@ In its simplest form, the `v-overlay` component will add a dimmed layer over you
 
 - [v-overlay](/api/v-overlay)
 
+<inline-api page="components/overlays" />
+
 ## Examples
 
 ### Props

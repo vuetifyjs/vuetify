@@ -12,9 +12,10 @@
     color: map-deep-get($material, 'text', 'disabled')
     background: map-deep-get($material, 'expansion-panels', 'focus')
 
-  .v-list-item__subtitle,
-  .v-list-item__action-text
-    color: map-deep-get($material, 'text', 'secondary')
+  &:not(.v-list-item--disabled)
+    .v-list-item__subtitle,
+    .v-list-item__action-text
+      color: map-deep-get($material, 'text', 'secondary')
 
   +states($material)
 

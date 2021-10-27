@@ -25,6 +25,8 @@ Subheaders in their simplest form display a subheading with default theme.
 
 - [v-subheader](/api/v-subheader)
 
+<inline-api page="components/subheaders" />
+
 ## Examples
 
 ### Props

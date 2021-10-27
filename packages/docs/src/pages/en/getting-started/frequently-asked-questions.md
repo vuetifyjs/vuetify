@@ -11,13 +11,12 @@ related:
 
 # Frequently asked questions
 
-Stuck on a particular problem? Check some of these common gotchas before creating a ticket. If you still cannot find what you are looking for, you can submit an [issue](https://issues.vuetifyjs.com/) on Github or ask the in our [community](https://community.vuetifyjs.com/).
+Stuck on a particular problem? Check some of these common gotchas before creating a ticket. If you still cannot find what you are looking for, you can submit an [issue](https://issues.vuetifyjs.com/) on GitHub or ask the in our [community](https://community.vuetifyjs.com/).
 
 <promoted-ad slug="vuetify-discord" />
 
 ## Table of Contents
 
-- [How do I get to the old v2.3 documentation?](#v23-legacy)
 - [When will Vuetify v3 be released?](#version-3)
 - [Why is Search Vuetify not working properly?](#search-broke)
 - [My application won't compile due to sass / scss errors.](#sass-compile-error)
@@ -70,12 +69,6 @@ Have a question that belongs here? Tell us in our [Discord Community](https://co
 
 <br>
 
-- **How do I get to the old v2.3 documentation?**{ #v23-legacy }
-
-  Navigate to [https://v2.vuetifyjs.com/](https://v2.vuetifyjs.com/). It will remain active until the release of [Vuetify 3](/introduction/roadmap/#v30-titan) in 2021.
-
-<br>
-
 - **Are there examples on how the v2 grid compares to v1.5?**{ #v2-v15-grid }
 
   Yes, you can view [grid examples here](https://gist.github.com/johnleider/207f63c9d30fb77042a0bb0258c5ab32).
@@ -102,7 +95,7 @@ Have a question that belongs here? Tell us in our [Discord Community](https://co
 
 - **I'm seeing `$attrs is readonly` and/or `$listeners is readonly` in the console**{ #attrs-is-readonly }
 
-  Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning messages. There is currently an ongoing [Github discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases.
+  Vuetify utilizes Typescript and currently must import and extend the Vue object. This has the potential in some applications to generate a warning messages. There is currently an ongoing [GitHub discussion](https://github.com/vuetifyjs/vuetify/issues/4068) with potential work-arounds in a variety of use-cases.
 
 <br>
 

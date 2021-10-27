@@ -98,6 +98,7 @@ export default mixins<options &
     isFocused: false,
     isActive: false,
     noClick: false, // Prevent click event if dragging took place, hack for #7915
+    startOffset: 0,
   }),
 
   computed: {
@@ -144,7 +145,9 @@ export default mixins<options &
       return this.step > 0 ? parseFloat(this.step) : 0
     },
     inputWidth (): number {
-      return (this.roundValue(this.internalValue) - this.minValue) / (this.maxValue - this.minValue) * 100
+      const inputWidth = (this.roundValue(this.internalValue) - this.minValue) / (this.maxValue - this.minValue) * 100
+
+      return isNaN(inputWidth) ? 0 : inputWidth
     },
     trackFillStyles (): Partial<CSSStyleDeclaration> {
       const startDir = this.vertical ? 'bottom' : 'left'
@@ -385,13 +388,12 @@ export default mixins<options &
         attrs: {
           role: 'slider',
           tabindex: this.isDisabled ? -1 : this.$attrs.tabindex ? this.$attrs.tabindex : 0,
-          'aria-label': this.label,
+          'aria-label': this.$attrs['aria-label'] || this.label,
           'aria-valuemin': this.min,
           'aria-valuemax': this.max,
           'aria-valuenow': this.internalValue,
           'aria-readonly': String(this.isReadonly),
           'aria-orientation': this.vertical ? 'vertical' : 'horizontal',
-          ...this.$attrs,
         },
         on: {
           focus: onFocus,
@@ -448,23 +450,29 @@ export default mixins<options &
         [direction]: `${value}%`,
       }
     },
-    onSliderMouseDown (e: MouseEvent) {
+    onSliderMouseDown (e: MouseEvent | TouchEvent) {
       e.preventDefault()
 
       this.oldValue = this.internalValue
       this.isActive = true
 
-      const mouseUpOptions = passiveSupported ? { passive: true, capture: true } : true
-      const mouseMoveOptions = passiveSupported ? { passive: true } : false
-
       if ((e.target as Element)?.matches('.v-slider__thumb-container, .v-slider__thumb-container *')) {
         this.thumbPressed = true
+        const domRect = (e.target as Element).getBoundingClientRect()
+        const touch = 'touches' in e ? e.touches[0] : e
+        this.startOffset = this.vertical
+          ? touch.clientY - (domRect.top + domRect.height / 2)
+          : touch.clientX - (domRect.left + domRect.width / 2)
       } else {
+        this.startOffset = 0
         window.clearTimeout(this.mouseTimeout)
         this.mouseTimeout = window.setTimeout(() => {
           this.thumbPressed = true
         }, 300)
       }
+
+      const mouseUpOptions = passiveSupported ? { passive: true, capture: true } : true
+      const mouseMoveOptions = passiveSupported ? { passive: true } : false
 
       const isTouchEvent = 'touches' in e
 
@@ -491,7 +499,7 @@ export default mixins<options &
 
       this.isActive = false
     },
-    onMouseMove (e: MouseEvent) {
+    onMouseMove (e: MouseEvent | TouchEvent) {
       if (e.type === 'mousemove') {
         this.thumbPressed = true
       }
@@ -532,7 +540,7 @@ export default mixins<options &
 
       this.$emit('focus', e)
     },
-    parseMouseMove (e: MouseEvent) {
+    parseMouseMove (e: MouseEvent | TouchEvent) {
       const start = this.vertical ? 'top' : 'left'
       const length = this.vertical ? 'height' : 'width'
       const click = this.vertical ? 'clientY' : 'clientX'
@@ -540,11 +548,11 @@ export default mixins<options &
       const {
         [start]: trackStart,
         [length]: trackLength,
-      } = this.$refs.track.getBoundingClientRect() as any
-      const clickOffset = 'touches' in e ? (e as any).touches[0][click] : e[click] // Can we get rid of any here?
+      } = this.$refs.track.getBoundingClientRect()
+      const clickOffset = 'touches' in e ? e.touches[0][click] : e[click]
 
       // It is possible for left to be NaN, force to number
-      let clickPos = Math.min(Math.max((clickOffset - trackStart) / trackLength, 0), 1) || 0
+      let clickPos = Math.min(Math.max((clickOffset - trackStart - this.startOffset) / trackLength, 0), 1) || 0
 
       if (this.vertical) clickPos = 1 - clickPos
       if (this.$vuetify.rtl) clickPos = 1 - clickPos

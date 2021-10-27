@@ -15,7 +15,7 @@
     </v-toolbar>
 
     <v-card-text>
-      <h2 class="title mb-2">
+      <h2 class="text-h6 mb-2">
         Choose amenities
       </h2>
 
@@ -64,7 +64,7 @@
     </v-card-text>
 
     <v-card-text>
-      <h2 class="title mb-2">
+      <h2 class="text-h6 mb-2">
         Choose neighborhoods
       </h2>
 

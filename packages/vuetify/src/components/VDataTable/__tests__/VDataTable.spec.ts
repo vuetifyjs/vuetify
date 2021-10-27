@@ -1070,4 +1070,38 @@ describe('VDataTable.ts', () => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalCurrentItems).toHaveLength(1)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/14006
+  it('should allow selection on second page when using numbers as item key', async () => {
+    const input = jest.fn()
+    const items = testItems.map((item, index) => ({ ...item, name: index + 1 })).slice(0, 8)
+    const wrapper = mountFunction({
+      propsData: {
+        items,
+        itemKey: 'name',
+        itemsPerPage: 5,
+        showSelect: true,
+        headers: testHeaders,
+        mobileBreakpoint: 0,
+      },
+      listeners: {
+        input,
+      },
+    })
+
+    let checkbox = wrapper.findAll('td > .v-data-table__checkbox').at(4)
+
+    checkbox.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    wrapper.setProps({ page: 2 })
+    await wrapper.vm.$nextTick()
+
+    checkbox = wrapper.findAll('td > .v-data-table__checkbox').at(0)
+
+    checkbox.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenCalledWith([items[4], items[5]])
+  })
 })

@@ -128,7 +128,7 @@ export function parseTimestamp (input: VTimestampInput, required = false, now?: 
 
   if (typeof input !== 'string') {
     if (required) {
-      throw new Error(`${input} is not a valid timestamp. It must be a Date, number of seconds since Epoch, or a string in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
+      throw new Error(`${input} is not a valid timestamp. It must be a Date, number of milliseconds since Epoch, or a string in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
     }
     return null
   }
@@ -138,7 +138,7 @@ export function parseTimestamp (input: VTimestampInput, required = false, now?: 
 
   if (!parts) {
     if (required) {
-      throw new Error(`${input} is not a valid timestamp. It must be a Date, number of seconds since Epoch, or a string in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
+      throw new Error(`${input} is not a valid timestamp. It must be a Date, number of milliseconds since Epoch, or a string in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
     }
 
     return null
