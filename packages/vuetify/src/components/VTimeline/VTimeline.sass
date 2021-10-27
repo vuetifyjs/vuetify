@@ -80,7 +80,7 @@
       +timeline-item-align(right)
       +timeline-wedge-align(right)
       .v-timeline-item__body
-        max-width: $timeline-divider-center - $timeline-divider-width, 2)
+        max-width: $timeline-divider-center - math.div($timeline-divider-width, 2)
 
 // Wedge
 .v-timeline-item__body
@@ -132,10 +132,10 @@
         max-width: $timeline-divider-center - math.div($timeline-divider-width, 2)
 
 .v-timeline--reverse.v-timeline--dense
-  +timeline-line-align(div($timeline-divider-width, 2), right, left)
+  +timeline-line-align(math.div($timeline-divider-width, 2), right, left)
 
 .v-timeline--dense:not(.v-timeline--reverse)
-  +timeline-line-align(div($timeline-divider-width, 2), left, right)
+  +timeline-line-align(math.div($timeline-divider-width, 2), left, right)
 
 .v-timeline--dense
   .v-timeline-item
