@@ -167,6 +167,23 @@ describe('VItemGroup', () => {
     expect(wrapper.vm.toggleMethod(0)).toBe(false)
   })
 
+  it('should correctly be active with objects having different references', () => {
+    const wrapper = mountFunction()
+
+    wrapper.setProps({ value: { a: 1 } })
+    expect(wrapper.vm.toggleMethod({ a: 1 })).toBe(true)
+    expect(wrapper.vm.toggleMethod({ a: 2 })).toBe(false)
+  })
+
+  it('should have a customizable comparator function', () => {
+    const wrapper = mountFunction()
+
+    wrapper.setProps({ valueComparator: (a: any, b: any) => a === b + 1, value: 0 })
+
+    expect(wrapper.vm.toggleMethod(0)).toBe(false)
+    expect(wrapper.vm.toggleMethod(-1)).toBe(true)
+  })
+
   it('should select the first item if mandatory and no value', async () => {
     const wrapper = mountFunction({
       propsData: { mandatory: true },
