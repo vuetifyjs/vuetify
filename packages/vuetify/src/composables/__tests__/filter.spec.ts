@@ -29,8 +29,8 @@ describe('filter.ts', () => {
       [['title'], 'foo', 5],
       [['title', 'value'], 'fizz', 5],
       [['title', 'value'], 'foo-0', 1],
-    ])('should filter items by some with %s keys with query %s', (keys: string[], query, expected) => {
-      expect(filterItems(items, query, { keys })).toHaveLength(expected)
+    ])('should filter items by some with %s filterKeys with query %s', (filterKeys: string[], query, expected) => {
+      expect(filterItems(items, query, { filterKeys })).toHaveLength(expected)
     })
 
     it.each([
@@ -38,8 +38,8 @@ describe('filter.ts', () => {
       [['title', 'value'], 'fizz', 0],
       [['title', 'value'], 'foo-0', 0],
       [['title', 'value'], '0', 1],
-    ])('should filter items by every with %s keys with query %s', (keys: string[], query, expected) => {
-      expect(filterItems(items, query, { keys, mode: 'every' })).toHaveLength(expected)
+    ])('should filter items by every with %s filterKeys with query %s', (filterKeys: string[], query, expected) => {
+      expect(filterItems(items, query, { filterKeys, filterMode: 'every' })).toHaveLength(expected)
     })
 
     it('should filter an array of strings', () => {
@@ -50,8 +50,8 @@ describe('filter.ts', () => {
       expect(filterItems(items, 'item')).toHaveLength(50)
     })
 
-    it('should filter by mode using customFilters', () => {
-      const customFilters = {
+    it('should filter by mode using customKeyFilter', () => {
+      const customKeyFilter = {
         title: (s: string, q: string) => s === q,
         value: (s: string) => s === '1',
       }
@@ -81,30 +81,30 @@ describe('filter.ts', () => {
           custom: 'buzz',
         },
       ]
-      const keys = ['title', 'value', 'subtitle', 'custom']
+      const filterKeys = ['title', 'value', 'subtitle', 'custom']
 
       expect(filterItems(items, 'foo', {
-        keys,
-        customFilters,
-        mode: 'some',
+        filterKeys,
+        customKeyFilter,
+        filterMode: 'some',
       })).toHaveLength(3)
 
       expect(filterItems(items, 'fizz', {
-        keys,
-        customFilters,
-        mode: 'union',
+        filterKeys,
+        customKeyFilter,
+        filterMode: 'union',
       })).toHaveLength(2)
 
       expect(filterItems(items, 'fizz', {
-        keys,
-        customFilters,
-        mode: 'intersection',
+        filterKeys,
+        customKeyFilter,
+        filterMode: 'intersection',
       })).toHaveLength(0)
 
       expect(filterItems(items, 'buzz', {
-        keys,
-        customFilters,
-        mode: 'every',
+        filterKeys,
+        customKeyFilter,
+        filterMode: 'every',
       })).toHaveLength(1)
     })
   })
