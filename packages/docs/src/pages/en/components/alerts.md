@@ -77,9 +77,15 @@ The **prominent** prop provides a more pronounced alert by increasing the height
 
 #### Text
 
-The **text** prop is a simple alert variant that applies a reduced opacity background of the provided **color**. Similar to other styled props, **text** can be combined with other props like **dense**, **prominent**, and **outlined** to create a unique and customized component.
+The **text** prop is a simple alert variant that applies a reduced opacity background of the provided **color**. Similar to other styled props, **text** can be combined with other props like **dense**, **prominent**, **outlined**, and **shaped** to create a unique and customized component.
 
 <example file="v-alert/prop-text" />
+
+#### Shaped
+
+The **shaped** prop will add **border-radius**  at the top-left and bottom-right of the alert. Similar to other styled props, **shaped** can be combined with other props like **dense**, **prominent**, **outlined** and **text** to create a unique and customized component
+
+<example file="v-alert/prop-shaped" />
 
 #### Transition
 
