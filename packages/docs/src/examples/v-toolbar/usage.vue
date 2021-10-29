@@ -16,7 +16,7 @@
     data: () => ({
       defaults: {
         color: null,
-        elevation: null,
+        elevation: 4,
         dense: false,
         flat: false,
         outlined: false,
