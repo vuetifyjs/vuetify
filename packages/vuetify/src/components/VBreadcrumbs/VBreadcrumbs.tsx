@@ -52,10 +52,8 @@ export const VBreadcrumbs = defineComponent({
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
     const items = computed(() => {
       return props.items.map((item, index, array) => ({
-        props: {
-          disabled: index >= array.length - 1,
-          ...(typeof item === 'string' ? { text: item } : item),
-        },
+        disabled: index >= array.length - 1,
+        ...(typeof item === 'string' ? { text: item } : item),
       }))
     })
 
@@ -84,14 +82,15 @@ export const VBreadcrumbs = defineComponent({
           <>
             <VBreadcrumbsItem
               key={ index }
-              { ...item.props }
+              { ...item }
+              text={ undefined } // text is a prop on <a> element (alias for textContent), so make sure we don't pass it along
             >
-              { slots.item?.({ ...item, index }) }
+              { slots.text ? slots.text?.({ item, index }) : item.text }
             </VBreadcrumbsItem>
 
             { index < props.items.length - 1 && (
               <VBreadcrumbsDivider>
-                { slots.divider ? slots.divider({ ...item, index }) : props.divider }
+                { slots.divider ? slots.divider({ item, index }) : props.divider }
               </VBreadcrumbsDivider>
             ) }
           </>
