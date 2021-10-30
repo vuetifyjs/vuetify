@@ -4,9 +4,9 @@ meta:
   - description: Vuetify has an extremely active community, provides easy to use Material Design components and is consistently updated.
     keywords: why vuetify, why choose vuetify, best vue framework, best ui framework
 related:
-  - /getting-started/installation/
-  - /introduction/roadmap/
-  - /about/meet-the-team/
+  - /getting-started/installation
+  - /introduction/roadmap
+  - /about/meet-the-team
 nav: Why Vuetify?
 ---
 
@@ -38,11 +38,11 @@ Vuetify is developed exactly according to [Material Design specification](https:
 
 Vuetify has a very active development cycle and is patched weekly, responding to community issues and reports at breakneck speed, allowing you to get your hands on bug fixes and enhancements more often. In addition, every major release is accompanied with 18 months of [Long-term support](/introduction/long-term-support/) for the previous minor version.
 
-Unlike other frameworks, when you develop with Vuetify, you are never alone. Stuck on a problem? Take advantage of our massive [Discord community](https://community.vuetifyjs.com/) and collaborate with other Vuetify developers in one of our public help channels. Need a more personalized support solution? Vuetify offers **elite support** through [GitHub sponsorship](https://github.com/sponsors/johnleider) with options tailored to individuals and businesses. Check out some other ways to [Sponsor Vuetify development](/about/sponsors-and-backers/).
+When you develop with Vuetify, you are never alone. Stuck on a problem? Take advantage of our massive [Discord community](https://community.vuetifyjs.com/) and collaborate with other Vuetify developers in one of our public help channels. Need a more personalized support solution? Vuetify offers **elite support** through [GitHub sponsorship](https://github.com/sponsors/johnleider) with options tailored to individuals and businesses. Check out some other ways to [Sponsor Vuetify development](/about/sponsors-and-backers/).
 
-Below is a list of the top Vue.js frameworks and the features that we feel are important to single developers and businesses when choosing a UI library.
+Below is a list of the top Vue.js frameworks and the features that we feel are important to developers and businesses when choosing a UI library.
 
-<!-- <vuetify-comparison />  -->
+<introduction-comparison />
 
 So what are you waiting for? Head over to the [Installation](/getting-started/installation/) page and start building your next great idea today.
 
@@ -69,4 +69,4 @@ Can't find what you're looking for? Help us improve! Please reach out to [john@v
 
 <!-- <promoted-ad slug="vuetify-discord" /> -->
 
-<!-- <backmatter /> -->
+<backmatter />

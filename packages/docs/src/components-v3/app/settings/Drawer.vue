@@ -51,7 +51,7 @@
         <v-divider />
       </div>
 
-      <!-- <default-settings-api /> -->
+      <app-settings-api />
 
     </v-container>
   </v-navigation-drawer>

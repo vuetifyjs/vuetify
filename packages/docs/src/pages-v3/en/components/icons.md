@@ -17,7 +17,7 @@ nav: Icons
 
 The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. For a list of all available icons, visit the official [Material Design Icons](https://materialdesignicons.com/) page. To use any of these icons simply use the `mdi-` prefix followed by the icon name.
 
-<entry-ad />
+<!-- <entry-ad /> -->
 
 ## Usage
 
@@ -39,7 +39,7 @@ Icons come in two themes (light and dark), and five different sizes (x-small, sm
 
 Using color helpers you can change the color of an icon from the standard dark and light themes.
 
-<!-- <example file="v-icon/prop-color" /> -->
+<example file="v-icon/prop-color" />
 
 ### Events
 
@@ -47,7 +47,7 @@ Using color helpers you can change the color of an icon from the standard dark a
 
 Binding any click event to `v-icon` will automatically change the cursor to a pointer.
 
-<!-- <example file="v-icon/event-click" /> -->
+<example file="v-icon/event-click" />
 
 ### Misc
 
@@ -55,25 +55,25 @@ Binding any click event to `v-icon` will automatically change the cursor to a po
 
 Icons can be used inside of buttons to add emphasis to the action.
 
-<!-- <example file="v-icon/misc-buttons" /> -->
+<example file="v-icon/misc-buttons" />
 
 #### Font Awesome
 
 [Font Awesome](https://fontawesome.com/icons/) is also supported. Simply use the `fa-` prefixed icon name. Please note that you still need to include the Font Awesome icons in your project. For more information on how to install it, please navigate to the [installation page](/features/icon-fonts#install-font-awesome-5-icons)
 
-<!-- <example file="v-icon/misc-font-awesome" /> -->
+<example file="v-icon/misc-font-awesome" />
 
 #### Material Design
 
 [Material Design](https://material.io/tools/icons/?style=baseline) is also supported. For more information on how to install it please [navigate here](/features/icon-fonts#install-material-icons)
 
-<!-- <example file="v-icon/misc-md" /> -->
+<example file="v-icon/misc-md" />
 
 #### MDI SVG
 
 You can manually import only the icons you use when using the [@mdi/js](https://www.npmjs.com/package/@mdi/js) package. If you want to use SVG icons with `VIcon` component, read about using them [here](/features/icon-fonts#install-material-design-icons-js-svg).
 
-<!-- <example file="v-icon/misc-mdi-svg" /> -->
+<example file="v-icon/misc-mdi-svg" />
 
 ## Accessibility
 

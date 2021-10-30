@@ -18,6 +18,8 @@ export const useSponsorsStore = defineStore('sponsors', () => {
   const sponsors = ref<Sponsor[]>([])
 
   async function load () {
+    if (sponsors.value.length) return
+
     const { bucket } = useCosmic()
     const { objects } = await bucket.getObjects({
       query: {

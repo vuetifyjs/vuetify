@@ -53,13 +53,24 @@
       "aspect-ratios",
       "badges",
       "banners",
+      "breadcrumbs",
       "buttons",
       "cards",
+      "chips",
       "defaults-providers",
       "dialogs",
       "dividers",
       "floating-action-buttons",
       "footer",
+      {
+        "title": "form-inputs-and-controls",
+        "group": "components",
+        "activeIcon": "",
+        "inactiveIcon": "",
+        "items": [
+          "checkboxes"
+        ]
+      },
       "grids",
       "icons",
       "images",

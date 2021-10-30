@@ -3,7 +3,6 @@
     id="app-toc"
     v-scroll="onScroll"
     class="py-4 pr-3"
-    clipped
     floating
     width="256"
     position="right"
@@ -12,30 +11,31 @@
       v-if="toc.length"
       #prepend
     >
-      <!-- <headline
+      <app-headline
         class="mb-2"
         path="contents"
-      /> -->
-      Headline
+      />
     </template>
 
-    <ul class="mb-6">
+    <ul class="mb-6 ml-5">
       <router-link
         v-for="({ to, level, text }, i) in toc"
+        v-slot="{ href }"
         :key="text"
-        v-slot="{ href, isActive }"
         :to="to"
         custom
       >
         <li
-          :class="{
-            'primary--text router-link-active': isActive,
-            'text--disabled': !isActive,
-            'pl-6': level === 3,
-            'pl-9': level === 4,
-            'pl-12': level === 5,
-          }"
-          class="pl-3 text-body-2 py-1 font-weight-regular"
+          :class="[
+            'pl-3 text-body-2 py-1 font-weight-regular',
+            {
+              'text-primary router-link-active': route.hash === to,
+              'text-grey': route.hash !== to,
+              'pl-6': level === 3,
+              'pl-9': level === 4,
+              'pl-12': level === 5,
+            }
+          ]"
         >
           <a
             :href="href"
@@ -48,33 +48,35 @@
     </ul>
 
     <div class="ml-5">
-      <!-- <app-caption
+      <app-caption
         v-if="sponsors.length"
         class="ml-2 mb-3"
         path="platinum-sponsors"
       />
 
-      <sponsors
-        class="mb-3"
-        compact
-        no-gutters
-        tier="2"
-      />
+      <template v-for="sponsor of sponsors" :key="sponsor.slug">
+        <sponsor-card compact :sponsor="sponsor" />
+      </template>
 
       <sponsor-link
         class="ml-2"
-        small
-      /> -->
+        size="small"
+      />
     </div>
   </v-navigation-drawer>
 </template>
 
 <script lang="ts">
   // Utilities
-  // import { get, sync } from 'vuex-pathify'
-  // import { wait } from '@/util/helpers'
+  import { computed, onBeforeMount, ref } from 'vue'
   import { RouteLocation, Router, useRoute, useRouter } from 'vue-router'
-  import { computed, ref } from 'vue'
+  import { useSponsorsStore } from '../../store-v3/sponsors'
+
+  type TocItem = {
+    to: string;
+    text: string;
+    level: number;
+  }
 
   function useUpdateHashOnScroll (route: RouteLocation, router: Router) {
     const scrolling = ref(false)
@@ -186,17 +188,23 @@
         scrolling.value = false
       }
 
+      const sponsorStore = useSponsorsStore()
+
+      onBeforeMount(async () => sponsorStore.load())
+
       return {
-        toc: computed(() => route.meta.toc),
+        toc: computed(() => route.meta.toc as TocItem[]),
         onClick,
         onScroll,
+        sponsors: computed(() => sponsorStore.sponsors.filter(sponsor => sponsor.metadata.tier === 2)),
+        route,
       }
     },
   }
 </script>
 
 <style lang="sass">
-  #default-toc
+  #app-toc
     ul
       list-style-type: none
 

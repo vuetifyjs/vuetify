@@ -24,11 +24,11 @@
   </v-card>
 </template>
 
-<script>
-  import { computed } from 'vue'
+<script lang="ts">
+  import { computed, defineComponent } from 'vue'
   import { useTheme } from 'vuetify/lib/composables/theme.mjs'
 
-  export default {
+  export default defineComponent({
     name: 'SponsorCard',
 
     props: {
@@ -47,7 +47,7 @@
           darkLogo = '',
           logolight = { url: '' },
           lightLogo = '',
-        } = props.sponsor.metadata
+        } = props.sponsor?.metadata ?? {}
 
         const current = theme.getTheme(theme.current.value)
         return !current.dark ? logolight.url || lightLogo : logodark.url || darkLogo
@@ -75,5 +75,5 @@
         onClick,
       }
     },
-  }
+  })
 </script>

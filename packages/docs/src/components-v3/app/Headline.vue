@@ -1,23 +1,21 @@
 <template>
   <component
     :is="tag"
-    :class="`text-${size} font-weight-${weight} text--${color}`"
+    :class="`text-${size} font-weight-${weight} text-${color}`"
   >
     {{ t(path) }}
   </component>
 </template>
 
-<script>
+<script lang="ts">
+  import { defineComponent } from 'vue'
   import { useI18n } from 'vue-i18n'
 
-  export default {
+  export default defineComponent({
     name: 'Headline',
 
     props: {
-      color: {
-        type: String,
-        default: 'primary',
-      },
+      color: String,
       size: {
         type: String,
         default: 'h6',
@@ -30,7 +28,10 @@
         type: String,
         default: 'medium',
       },
-      path: String,
+      path: {
+        type: String,
+        required: true,
+      },
     },
 
     setup () {
@@ -38,5 +39,5 @@
 
       return { t }
     },
-  }
+  })
 </script>

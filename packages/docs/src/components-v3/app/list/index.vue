@@ -46,10 +46,15 @@
   import { useI18n } from 'vue-i18n'
   import routes from 'virtual:generated-pages'
 
-  type Item = { title: string, activeIcon: string, inactiveIcon: string, items: string[] }
+  type Item = {
+    title: string,
+    activeIcon: string,
+    inactiveIcon: string,
+    items: string[] | Item[]
+  }
 
   function generateApiItems (locale: string) {
-    return routes
+    return (routes as { path: string}[])
       .filter(route => route.path.includes(`${locale}/api/`))
       .sort((a, b) => a.path.localeCompare(b.path))
       .map(route => {
@@ -60,17 +65,27 @@
       })
   }
 
-  function generateItems (item: Item, locale: string) {
-    if (!item.items) return undefined
+  function generateItems (item: Item, path: string, locale: string, t: (key: string) => string): any {
+    if (item.items) {
+      return item.items.map(child => {
+        if (typeof child === 'string') {
+          const route = routes.find((route: { path: string }) => route.path.endsWith(`${locale}/${path}/${child}`))
 
-    return item.items.map(child => {
-      const route = routes.find((route: { path: string }) => route.path.endsWith(`${locale}/${item.title}/${child}`))
-      return {
-        title: route?.meta?.nav ?? route?.meta?.title ?? child,
-        to: route?.path,
-        disabled: !route,
-      }
-    })
+          return {
+            title: route?.meta?.nav ?? route?.meta?.title ?? child,
+            to: route?.path,
+            disabled: !route,
+          }
+        } else {
+          return {
+            title: t(child.title),
+            children: generateItems(child, path, locale, t),
+          }
+        }
+      })
+    }
+
+    return []
   }
 
   export default defineComponent({
@@ -93,7 +108,7 @@
           title: item.title && te(item.title) ? t(item.title) : item.title,
           prependIcon: opened.value.includes(item.title) ? item.activeIcon : item.inactiveIcon,
           value: item.title,
-          children: item.title === 'api' ? generateApiItems(locale.value) : generateItems(item, locale.value),
+          children: item.title === 'api' ? generateApiItems(locale.value) : generateItems(item, item.title, locale.value, t),
         }
       }))
 

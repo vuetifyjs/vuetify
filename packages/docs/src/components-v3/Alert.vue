@@ -1,6 +1,6 @@
 <template>
   <v-alert
-    border="left"
+    border="start"
     class="v-alert--doc mb-4"
     variant="outlined"
   >

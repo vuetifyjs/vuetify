@@ -2,13 +2,13 @@
   <div>
     <v-breadcrumbs :items="items">
       <template v-slot:divider>
-        <v-icon>mdi-forward</v-icon>
+        <v-icon icon="mdi-forward" />
       </template>
     </v-breadcrumbs>
 
     <v-breadcrumbs :items="items">
       <template v-slot:divider>
-        <v-icon>mdi-chevron-right</v-icon>
+        <v-icon icon="mdi-chevron-right" />
       </template>
     </v-breadcrumbs>
   </div>

@@ -3,6 +3,7 @@
     :aria-label="t('become-a-sponsor')"
     color="primary"
     variant="outlined"
+    :size="size"
     @click="onClick"
   >
     <span
@@ -12,16 +13,20 @@
   </v-btn>
 </template>
 
-<script>
+<script lang="ts">
   import { useI18n } from 'vue-i18n'
-  import { useRoute } from 'vue-router'
+  // import { useRoute } from 'vue-router'
 
   export default {
     name: 'SponsorLink',
 
+    props: {
+      size: String,
+    },
+
     setup () {
       const { t } = useI18n()
-      const route = useRoute()
+      // const route = useRoute()
 
       const onClick = () => {
         // TODO: gtag

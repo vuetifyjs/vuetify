@@ -13,14 +13,21 @@ import { useLocaleStore } from './store-v3/locale'
 
 // styles
 import 'prism-theme-vars/base.css'
+import { useUserStore } from './store-v3/user'
 
 const routes = setupLayouts(generatedRoutes)
 
 const localeStore = useLocaleStore(pinia)
+const userStore = useUserStore(pinia)
 
 localeStore.$subscribe((_, state) => {
   console.log('updating locale storage', state.locale)
   window.localStorage.setItem('currentLocale', state.locale)
+})
+
+userStore.$subscribe((_, state) => {
+  console.log('updating user store', state)
+  window.localStorage.setItem('vuetify@user', JSON.stringify(state))
 })
 
 // https://github.com/antfu/vite-ssg

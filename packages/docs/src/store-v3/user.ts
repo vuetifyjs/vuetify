@@ -8,7 +8,7 @@ import { defineStore } from 'pinia'
 import { reactive, toRefs } from 'vue'
 
 export type RootState = {
-  api: boolean
+  api: 'link-only' | 'inline'
   pwaRefresh: boolean
   theme: string
   direction: 'rtl' | 'ltr'
@@ -19,7 +19,7 @@ export type RootState = {
 
 export const useUserStore = defineStore('user', () => {
   const state = reactive<RootState>({
-    api: false,
+    api: 'link-only',
     pwaRefresh: false,
     theme: 'light',
     direction: 'ltr',
@@ -37,13 +37,7 @@ export const useUserStore = defineStore('user', () => {
     Object.assign(state, merge(state, data))
   }
 
-  function save () {
-    if (!IN_BROWSER) return
-
-    localStorage.setItem('vuetify@user', JSON.stringify(state))
-  }
-
   load()
 
-  return { ...toRefs(state), load, save }
+  return { ...toRefs(state), load }
 })

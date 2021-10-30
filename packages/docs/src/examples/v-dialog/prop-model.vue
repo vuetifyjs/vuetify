@@ -1,17 +1,15 @@
 <template>
   <div class="text-center">
+    <v-btn
+      color="primary"
+      @click="dialog = true"
+    >
+      Open Dialog
+    </v-btn>
+
     <v-dialog
       v-model="dialog"
     >
-      <template v-slot:activator="{ props }">
-        <v-btn
-          color="primary"
-          v-bind="props"
-        >
-          Open Dialog
-        </v-btn>
-      </template>
-
       <v-card>
         <v-card-text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
