@@ -36,7 +36,7 @@
 
   .v-menu__activator
     height: 100%
-  
+
   &.v.tabs--vertical.v-tabs--right
     flex-direction: row-reverse
 
@@ -221,5 +221,8 @@
     color: inherit
 
 .v-tab--disabled
-  pointer-events: none
   opacity: $tab-disabled-opacity
+
+  &,
+  & *
+    pointer-events: none
