@@ -75,6 +75,10 @@ export default Vue.extend({
     $route: 'onRouteChange',
   },
 
+  mounted () {
+    this.onRouteChange()
+  },
+
   methods: {
     click (e: MouseEvent): void {
       this.$emit('click', e)
@@ -140,16 +144,19 @@ export default Vue.extend({
     onRouteChange () {
       if (!this.to || !this.$refs.link || !this.$route) return
       const activeClass = `${this.activeClass} ${this.proxyClass || ''}`.trim()
+      const exactActiveClass = `${this.exactActiveClass} ${this.proxyClass || ''}`.trim() || activeClass
 
-      const path = `_vnode.data.class.${activeClass}`
+      const path = '_vnode.data.class.' + (this.exact ? exactActiveClass : activeClass)
 
       this.$nextTick(() => {
         /* istanbul ignore else */
-        if (getObjectValueByPath(this.$refs.link, path)) {
+        if (!getObjectValueByPath(this.$refs.link, path) === this.isActive) {
           this.toggle()
         }
       })
     },
-    toggle: () => { /* noop */ },
+    toggle () {
+      this.isActive = !this.isActive
+    },
   },
 })
