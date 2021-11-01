@@ -6,7 +6,6 @@
     "lib": [                                  /* Specify library files to be included in the compilation */
       "esnext",
       "dom",
-      "dom.iterable"
     ],
     "allowJs": false,                         /* Allow javascript files to be compiled. */
     // "checkJs": true,                       /* Report errors in .js files. */
