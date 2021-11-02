@@ -218,4 +218,20 @@ describe('VListItem.ts', () => {
     })
     expect(wrapper5.element.getAttribute('role')).toBe('listitem')
   })
+
+  it('should not have an internal state unless its a router-link', async () => {
+    const wrapper = mountFunction({})
+
+    expect(wrapper.vm.isActive).toBeFalsy()
+    wrapper.vm.toggle()
+    expect(wrapper.vm.isActive).toBeFalsy()
+    wrapper.vm.toggle()
+    expect(wrapper.vm.isActive).toBeFalsy()
+
+    const wrapper2 = mountFunction({ propsData: { to: { name: 'test' } }, stubs: ['router-link'] })
+
+    expect(wrapper2.vm.isActive).toBeFalsy()
+    wrapper2.vm.toggle()
+    expect(wrapper2.vm.isActive).toBeTruthy()
+  })
 })

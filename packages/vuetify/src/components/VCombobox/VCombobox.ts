@@ -108,11 +108,6 @@ export default VAutocomplete.extend({
 
       this.$nextTick(this.updateSelf)
     },
-    onFilteredItemsChanged (val: never[], oldVal: never[]) {
-      if (!this.autoSelectFirst) return
-
-      VAutocomplete.options.methods.onFilteredItemsChanged.call(this, val, oldVal)
-    },
     onKeyDown (e: KeyboardEvent) {
       const keyCode = e.keyCode
 
