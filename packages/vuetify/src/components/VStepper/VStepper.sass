@@ -137,9 +137,8 @@
           color: inherit
 
   &__label
-    align-items: flex-start
-    display: flex
-    flex-direction: column
+    display: block
+    flex-grow: 1
     line-height: $stepper-label-line-height
 
     +ltr()
@@ -149,6 +148,7 @@
       text-align: right
 
     small
+      display: block
       font-size: $stepper-label-small-font-size
       font-weight: $stepper-label-small-font-weight
       text-shadow: none
@@ -219,7 +219,7 @@
       flex-basis: $stepper-alt-labels-flex-basis
 
       small
-        align-self: center
+        text-align: center
 
     .v-stepper__step__step
       margin-bottom: $stepper-alt-labels-step-step-margin-bottom
