@@ -34,6 +34,10 @@ export const VExpansionPanels = defineComponent({
     ...makeThemeProps(),
   },
 
+  emits: {
+    'update:modelValue': (val: unknown) => true,
+  },
+
   setup (props, { slots }) {
     useGroup(props, VExpansionPanelSymbol)
     const { themeClasses } = useTheme(props)

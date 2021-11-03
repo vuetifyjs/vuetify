@@ -57,6 +57,10 @@ export const VNavigationDrawer = defineComponent({
     ...makeThemeProps(),
   },
 
+  emits: {
+    'update:modelValue': (val: boolean) => true,
+  },
+
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-navigation-drawer')

@@ -45,6 +45,10 @@ export const VTextField = defineComponent({
     ...makeVFieldProps(),
   },
 
+  emits: {
+    'update:modelValue': (val: string) => true,
+  },
+
   setup (props, { attrs, slots }) {
     const model = useProxiedModel(props, 'modelValue')
 

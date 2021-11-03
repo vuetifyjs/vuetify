@@ -48,6 +48,10 @@ export const VCheckbox = defineComponent({
     ...makeValidationProps(),
   },
 
+  emits: {
+    'update:modelValue': (val: any) => true,
+  },
+
   setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
     const { errorMessages, isDisabled, isReadonly, isValid, validationClasses } = useValidation(props, 'v-checkbox')
