@@ -2,9 +2,10 @@
 import './VTextField.sass'
 
 // Components
-import { makeVFieldProps } from '@/components/VField/VField'
+import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
+import { filterInputAttrs } from '@/components/VInput/VInput'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -14,7 +15,7 @@ import Intersect from '@/directives/intersect'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, pick, useRender } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -93,7 +94,8 @@ export const VTextField = defineComponent({
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
-      const [rootAttrs, inputAttrs] = pick(attrs, ['class', 'style', 'id', /^data-/, /^(?!on[A-Z]).*$/])
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
+      const [fieldProps, _] = filterFieldProps(props)
 
       return (
         <VField
@@ -115,7 +117,7 @@ export const VTextField = defineComponent({
           }}
           role="textbox"
           { ...rootAttrs }
-          { ...props }
+          { ...fieldProps }
           v-slots={{
             ...slots,
             default: ({

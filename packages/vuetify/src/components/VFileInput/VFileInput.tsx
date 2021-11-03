@@ -2,7 +2,7 @@
 import './VFileInput.sass'
 
 // Components
-import { makeVFieldProps } from '@/components/VField/VField'
+import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
 import { VChip } from '@/components/VChip'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
@@ -13,10 +13,11 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, humanReadableFileSize, pick, useRender, wrapInArray } from '@/util'
+import { defineComponent, humanReadableFileSize, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { filterInputAttrs } from '@/components/VInput/VInput'
 
 export const VFileInput = defineComponent({
   name: 'VFileInput',
@@ -105,7 +106,8 @@ export const VFileInput = defineComponent({
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || counterValue.value)
-      const [rootAttrs, inputAttrs] = pick(attrs, ['class', 'style', 'id', /^data-/, /^(?!on[A-Z]).*$/])
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
+      const [fieldProps, _] = filterFieldProps(props)
 
       return (
         <VField
@@ -127,7 +129,7 @@ export const VFileInput = defineComponent({
             fieldRef.value.inputRef.value = ''
           } }
           { ...rootAttrs }
-          { ...props }
+          { ...fieldProps }
           v-slots={{
             ...slots,
             default: ({

@@ -21,6 +21,7 @@ import {
   genericComponent,
   getUid,
   nullifyTransforms,
+  pick,
   propsFactory,
   standardEasing,
   useRender,
@@ -363,3 +364,8 @@ export const VField = genericComponent<new <T>() => {
 })
 
 export type VField = InstanceType<typeof VField>
+
+// TODO: this is kinda slow, might be better to implicitly inherit props instead
+export function filterFieldProps (attrs: Record<string, unknown>) {
+  return pick(attrs, Object.keys(VField.props))
+}
