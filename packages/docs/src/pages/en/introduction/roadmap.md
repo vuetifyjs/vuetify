@@ -22,8 +22,9 @@ The following releases are currently under development:
 
 ### v3.0 (Titan)
 
-- **Target Release:** Q3 2021
-- **Alpha:** Q1 2021
+- **Target Release:** February 2022
+- **Alpha:** March 2021
+- **Beta:** December 2021
 - **Overview:**
   The next version of Vuetify is being built from the ground up to support Vue 3 using the [composition api](https://v3.vuejs.org/guide/composition-api-introduction.html).
 - **Objectives:**

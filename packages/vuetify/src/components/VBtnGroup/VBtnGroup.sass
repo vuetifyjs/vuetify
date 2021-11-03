@@ -1,0 +1,32 @@
+@use '../../styles/settings'
+@use '../VBtn/mixins' as *
+@use '../VBtn/variables' as *
+
+.v-btn-group
+  display: flex
+
+  & > :first-child,
+  & > :first-child > .v-field__control
+    border-top-right-radius: 0
+    border-bottom-right-radius: 0
+
+  & > :last-child,
+  & > :last-child > .v-field__control
+    border-top-left-radius: 0
+    border-bottom-left-radius: 0
+
+  & > :not(:first-child):not(:last-child),
+  & > :not(:first-child):not(:last-child) > .v-field__control
+    border-radius: 0
+
+  & > .v-btn
+    box-shadow: none
+    height: auto
+
+    @include button-density('min-height', $button-density)
+
+    & + .v-btn
+      border-left: thin solid settings.$border-color-root !important
+
+    & + .v-btn.v-btn--variant-outlined
+      border-left: 0 !important

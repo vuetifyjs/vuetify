@@ -51,4 +51,68 @@ describe('VList', () => {
     wrapper.get('.v-list--two-line').should('exist')
     wrapper.get('.v-list--three-line').should('exist')
   })
+
+  it('supports items prop', () => {
+    const items = [
+      {
+        title: 'Foo',
+        subtitle: 'Bar',
+        value: 'foo',
+      },
+      {
+        title: 'Group',
+        value: 'group',
+        children: [
+          {
+            title: 'Child',
+            subtitle: 'Subtitle',
+            value: 'child',
+          },
+        ],
+      },
+    ]
+
+    const wrapper = mountFunction((
+      <CenteredGrid width="200px">
+        <VList items={items} opened={['group']} />
+      </CenteredGrid>
+    ))
+
+    wrapper.get('.v-list-item').should('have.length', 3)
+  })
+
+  it('supports item slot', () => {
+    const items = [
+      {
+        title: 'Foo',
+        subtitle: 'Bar',
+        value: 'foo',
+      },
+      {
+        title: 'Group',
+        value: 'group',
+        children: [
+          {
+            title: 'Child',
+            subtitle: 'Subtitle',
+            value: 'child',
+          },
+        ],
+      },
+    ]
+
+    const wrapper = mountFunction((
+      <CenteredGrid width="400px">
+        <VList
+          items={items}
+          opened={['group']}
+          v-slots={{
+            item: item => <VListItem {...item} prependIcon="mdi-home" />,
+          }}
+        />
+      </CenteredGrid>
+    ))
+
+    wrapper.get('.v-icon.mdi-home').should('have.length', 2)
+  })
 })

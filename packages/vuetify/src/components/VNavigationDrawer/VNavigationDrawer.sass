@@ -25,9 +25,6 @@
   &--absolute
     position: absolute
 
-  &--floating
-    border-color: transparent
-
   &--rounded
     @include tools.rounded($navigation-drawer-rounded-border-radius)
 
@@ -52,6 +49,9 @@
     @include tools.rtl()
       left: 0
       right: auto
+
+  &--floating
+    border: none
 
   &--temporary
     @include tools.elevation($navigation-drawer-temporary-elevation)

@@ -23,10 +23,30 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed } from 'vue'
-import { defineComponent } from '@/util'
+import { computed, onMounted } from 'vue'
+import { genericComponent } from '@/util'
+import { useNestedItem } from '@/composables/nested/nested'
+import { useList } from './VList'
 
-export const VListItem = defineComponent({
+// Types
+import type { MakeSlots } from '@/util'
+
+type ListItemSlot = {
+  isActive: boolean
+  activate: (value: boolean) => void
+  isSelected: boolean
+  select: (value: boolean) => void
+}
+
+export const VListItem = genericComponent<new () => {
+  $slots: MakeSlots<{
+    prepend: [ListItemSlot]
+    append: [ListItemSlot]
+    default: [ListItemSlot]
+    title: []
+    subtitle: []
+  }>
+}>()({
   name: 'VListItem',
 
   directives: { Ripple },
@@ -43,6 +63,7 @@ export const VListItem = defineComponent({
     prependIcon: String,
     subtitle: String,
     title: String,
+    value: null,
 
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -57,8 +78,11 @@ export const VListItem = defineComponent({
 
   setup (props, { attrs, slots }) {
     const link = useLink(props, attrs)
+    const id = computed(() => props.value ?? link.href.value)
+    const { activate, isActive: isNestedActive, select, isSelected, root, parent } = useNestedItem(id)
+    const list = useList()
     const isActive = computed(() => {
-      return props.active || link.isExactActive?.value
+      return props.active || link.isExactActive?.value || isNestedActive.value
     })
     const activeColor = props.activeColor ?? props.color
     const variantProps = computed(() => ({
@@ -66,6 +90,12 @@ export const VListItem = defineComponent({
       textColor: props.textColor,
       variant: props.variant,
     }))
+
+    onMounted(() => {
+      if (link.isExactActive?.value && parent.value != null) {
+        root.open(parent.value, true)
+      }
+    })
 
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-list-item')
@@ -75,14 +105,23 @@ export const VListItem = defineComponent({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props, 'v-list-item')
 
+    const slotProps = computed(() => ({
+      isActive: isActive.value,
+      activate,
+      select,
+      isSelected: isSelected.value,
+    }))
+
     return () => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasTitle = (slots.title || props.title)
       const hasSubtitle = (slots.subtitle || props.subtitle)
       const hasHeader = !!(hasTitle || hasSubtitle)
-      const hasAppend = (slots.append || props.appendAvatar || props.appendIcon)
-      const hasPrepend = (slots.prepend || props.prependAvatar || props.prependIcon)
-      const isClickable = !props.disabled && (link.isClickable.value || props.link)
+      const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
+      const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
+      const isClickable = !props.disabled && (link.isClickable.value || props.link || props.value != null)
+
+      list?.updateHasPrepend(hasPrepend)
 
       return (
         <Tag
@@ -92,6 +131,7 @@ export const VListItem = defineComponent({
               'v-list-item--active': isActive.value,
               'v-list-item--disabled': props.disabled,
               'v-list-item--link': isClickable,
+              'v-list-item--prepend': !hasPrepend && list?.hasPrepend.value,
               [`${props.activeClass}`]: isActive.value && props.activeClass,
             },
             themeClasses.value,
@@ -108,14 +148,17 @@ export const VListItem = defineComponent({
           ]}
           href={ link.href.value }
           tabindex={ isClickable ? 0 : undefined }
-          onClick={ isClickable && link.navigate }
+          onClick={ isClickable && ((e: Event) => {
+            link.navigate?.()
+            props.value != null && activate(!isNestedActive.value, e)
+          })}
           v-ripple={ isClickable }
         >
           { genOverlays(!!(isClickable || isActive.value), 'v-list-item') }
 
           { hasPrepend && (
             slots.prepend
-              ? slots.prepend()
+              ? slots.prepend(slotProps.value)
               : (
                 <VListItemAvatar left>
                   <VAvatar
@@ -149,11 +192,11 @@ export const VListItem = defineComponent({
             </VListItemHeader>
           ) }
 
-          { slots.default?.() }
+          { slots.default?.(slotProps.value) }
 
           { hasAppend && (
             slots.append
-              ? slots.append()
+              ? slots.append(slotProps.value)
               : (
                 <VListItemAvatar right>
                   <VAvatar
@@ -169,3 +212,5 @@ export const VListItem = defineComponent({
     }
   },
 })
+
+export type VListItem = InstanceType<typeof VListItem>

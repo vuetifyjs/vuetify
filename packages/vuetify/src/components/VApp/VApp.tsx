@@ -6,7 +6,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { createLayout, makeLayoutProps } from '@/composables/layout'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 import { useRtl } from '@/composables/rtl'
 
 export const VApp = defineComponent({
@@ -19,10 +19,10 @@ export const VApp = defineComponent({
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)
-    const { layoutClasses } = createLayout(props)
+    const { layoutClasses, getLayoutItem, items } = createLayout(props)
     const { rtlClasses } = useRtl()
 
-    return () => (
+    useRender(() => (
       <div
         class={[
           'v-application',
@@ -36,7 +36,12 @@ export const VApp = defineComponent({
           { slots.default?.() }
         </div>
       </div>
-    )
+    ))
+
+    return {
+      getLayoutItem,
+      items,
+    }
   },
 })
 
