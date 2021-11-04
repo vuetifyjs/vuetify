@@ -384,9 +384,9 @@ export default CalendarBase.extend({
           name: 'ripple',
           value: this.eventRipple ?? true,
         }],
-        on: {
-          click: () => this.$emit('click:more', day),
-        },
+        on: this.getDefaultMouseEventHandlers(':more', nativeEvent => {
+          return { nativeEvent, ...day }
+        }),
         style: {
           display: 'none',
           height: `${eventHeight}px`,
