@@ -36,6 +36,7 @@ export const VTreeviewNodeProps = {
     type: String,
     default: 'primary',
   },
+  disablePerNode: Boolean,
   expandIcon: {
     type: String,
     default: '$subgroup',
@@ -122,7 +123,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
     disabled (): boolean {
       return (
         getObjectValueByPath(this.item, this.itemDisabled) ||
-        (this.parentIsDisabled && this.selectionType === 'leaf')
+        (!this.disablePerNode && (this.parentIsDisabled && this.selectionType === 'leaf'))
       )
     },
     key (): string {
@@ -310,6 +311,7 @@ const VTreeviewNode = baseMixins.extend<options>().extend({
           selectable: this.selectable,
           selectedColor: this.selectedColor,
           color: this.color,
+          disablePerNode: this.disablePerNode,
           expandIcon: this.expandIcon,
           indeterminateIcon: this.indeterminateIcon,
           offIcon: this.offIcon,
