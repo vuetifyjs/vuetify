@@ -2,9 +2,10 @@
 import './VTextField.sass'
 
 // Components
-import { makeVFieldProps } from '@/components/VField/VField'
+import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
+import { filterInputAttrs } from '@/components/VInput/VInput'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -14,7 +15,7 @@ import Intersect from '@/directives/intersect'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, pick, useRender } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -43,6 +44,10 @@ export const VTextField = defineComponent({
     },
 
     ...makeVFieldProps(),
+  },
+
+  emits: {
+    'update:modelValue': (val: string) => true,
   },
 
   setup (props, { attrs, slots }) {
@@ -89,7 +94,8 @@ export const VTextField = defineComponent({
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
-      const [_, restAttrs] = pick(attrs, ['class'])
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
+      const [fieldProps, _] = filterFieldProps(props)
 
       return (
         <VField
@@ -100,7 +106,6 @@ export const VTextField = defineComponent({
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
             },
-            attrs.class,
           ]}
           active={ isDirty.value }
           onUpdate:active={ val => internalDirty.value = val }
@@ -111,8 +116,8 @@ export const VTextField = defineComponent({
             model.value = ''
           }}
           role="textbox"
-          { ...attrs }
-          { ...props }
+          { ...rootAttrs }
+          { ...fieldProps }
           v-slots={{
             ...slots,
             default: ({
@@ -146,7 +151,7 @@ export const VTextField = defineComponent({
                     size={ 1 }
                     type={ props.type }
                     { ...slotProps }
-                    { ...restAttrs }
+                    { ...inputAttrs }
                   />
 
                   { props.suffix && (

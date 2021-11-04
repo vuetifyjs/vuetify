@@ -108,6 +108,12 @@ export const VList = genericComponent<new <T>() => {
     ...makeThemeProps(),
   },
 
+  emits: {
+    'update:selected': (val: string[]) => true,
+    'update:opened': (val: string[]) => true,
+    'update:active': (val: string[]) => true,
+  },
+
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))

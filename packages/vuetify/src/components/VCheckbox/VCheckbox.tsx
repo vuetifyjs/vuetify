@@ -17,7 +17,8 @@ import { Ripple } from '@/directives/ripple'
 
 // Utility
 import { computed, defineComponent, ref } from 'vue'
-import { getUid, pick, SUPPORTS_FOCUS_VISIBLE, useRender } from '@/util'
+import { getUid, SUPPORTS_FOCUS_VISIBLE, useRender } from '@/util'
+import { filterInputAttrs } from '@/components/VInput/VInput'
 
 export const VCheckbox = defineComponent({
   name: 'VCheckbox',
@@ -46,6 +47,10 @@ export const VCheckbox = defineComponent({
 
     ...makeThemeProps(),
     ...makeValidationProps(),
+  },
+
+  emits: {
+    'update:modelValue': (val: any) => true,
   },
 
   setup (props, { attrs, slots }) {
@@ -82,7 +87,7 @@ export const VCheckbox = defineComponent({
     }
 
     useRender(() => {
-      const [_, restAttrs] = pick(attrs, ['class'])
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
 
       return (
         <VInput
@@ -98,7 +103,7 @@ export const VCheckbox = defineComponent({
             validationClasses.value,
           ]}
           messages={ props.errorMessages?.length ? props.errorMessages : errorMessages.value }
-          { ...attrs }
+          { ...rootAttrs }
           v-slots={{
             ...slots,
             default: () => {
@@ -129,7 +134,7 @@ export const VCheckbox = defineComponent({
                       onFocus={ onFocus }
                       onBlur={ onBlur }
                       type="checkbox"
-                      { ...restAttrs }
+                      { ...inputAttrs }
                     />
                   </div>
 
