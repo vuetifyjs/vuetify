@@ -9,305 +9,309 @@
   }
 }
 
-.v-application
-  // Component specific transitions
-  .carousel-transition {
-    &-enter {
-      transform: translate(100%, 0);
-    }
-
-    &-leave, &-leave-to {
-      position: absolute;
-      top: 0;
-      transform: translate(-100%, 0);
-    }
+// Component specific transitions
+.carousel-transition {
+  &-enter {
+    transform: translate(100%, 0);
   }
 
-  .carousel-reverse-transition {
-    &-enter {
-      transform: translate(-100%, 0);
-    }
+  &-leave, &-leave-to {
+    position: absolute;
+    top: 0;
+    transform: translate(-100%, 0);
+  }
+}
 
-    &-leave, &-leave-to {
-      position: absolute;
-      top: 0;
-      transform: translate(100%, 0);
-    }
+.carousel-reverse-transition {
+  &-enter {
+    transform: translate(-100%, 0);
   }
 
-  .dialog-transition {
-    &-enter, &-leave-to {
-      transform: scale(0.5);
-      opacity: 0;
-    }
+  &-leave, &-leave-to {
+    position: absolute;
+    top: 0;
+    transform: translate(100%, 0);
+  }
+}
 
-    &-enter-to, &-leave {
-      opacity: 1;
-    }
+.dialog-transition {
+  &-enter-active,
+  &-leave-active {
+    pointer-events: none !important;
   }
 
-  .dialog-bottom-transition {
-    &-enter, &-leave-to {
-      transform: translateY(100%);
-    }
+  &-enter, &-leave-to {
+    transform: scale(0.5);
+    opacity: 0;
   }
 
-  .dialog-top-transition {
-    &-enter, &-leave-to {
-      transform: translateY(-100%);
-    }
+  &-enter-to, &-leave {
+    opacity: 1;
+  }
+}
+
+.dialog-bottom-transition {
+  &-enter, &-leave-to {
+    transform: translateY(100%);
+  }
+}
+
+.dialog-top-transition {
+  &-enter, &-leave-to {
+    transform: translateY(-100%);
+  }
+}
+
+.picker-transition,
+.picker-reverse-transition {
+  &-enter-active,
+  &-leave-active {
+    transition: .3s map-get($transition, 'linear-out-slow-in');
   }
 
-  .picker-transition,
-  .picker-reverse-transition {
-    &-enter-active,
-    &-leave-active {
-      transition: .3s map-get($transition, 'linear-out-slow-in');
-    }
-
-    &-enter,
-    &-leave-to {
-      opacity: 0;
-    }
-
-    &-leave,
-    &-leave-active,
-    &-leave-to {
-      position: absolute !important;
-    }
+  &-enter,
+  &-leave-to {
+    opacity: 0;
   }
 
-  .picker-transition {
-    &-enter {
-      transform: translate(0, 100%);
-    }
+  &-leave,
+  &-leave-active,
+  &-leave-to {
+    position: absolute !important;
+  }
+}
 
-    &-leave-to {
-      transform: translate(0, -100%);
-    }
+.picker-transition {
+  &-enter {
+    transform: translate(0, 100%);
   }
 
-  .picker-reverse-transition {
-    &-enter {
-      transform: translate(0, -100%);
-    }
+  &-leave-to {
+    transform: translate(0, -100%);
+  }
+}
 
-    &-leave-to {
-      transform: translate(0, 100%);
-    }
+.picker-reverse-transition {
+  &-enter {
+    transform: translate(0, -100%);
   }
 
-  .picker-title-transition {
-    &-enter-to,
-    &-leave {
-      transform: translate(0, 0);
-    }
+  &-leave-to {
+    transform: translate(0, 100%);
+  }
+}
 
-    &-enter {
-      transform: translate(-100%, 0);
-    }
-
-    &-leave-to {
-      opacity: 0;
-      transform: translate(100%, 0);
-    }
-
-    &-leave,
-    &-leave-to,
-    &-leave-active {
-      position: absolute !important;
-    }
+.picker-title-transition {
+  &-enter-to,
+  &-leave {
+    transform: translate(0, 0);
   }
 
-  .tab-transition {
-    &-enter {
-      transform: translate(100%, 0);
-    }
-
-    &-leave, &-leave-active {
-      position: absolute;
-      top: 0;
-    }
-
-    &-leave-to {
-      position: absolute;
-      transform: translate(-100%, 0);
-    }
+  &-enter {
+    transform: translate(-100%, 0);
   }
 
-  .tab-reverse-transition {
-    &-enter {
-      transform: translate(-100%, 0);
-    }
-
-    &-leave, &-leave-to {
-      top: 0;
-      position: absolute;
-      transform: translate(100%, 0);
-    }
+  &-leave-to {
+    opacity: 0;
+    transform: translate(100%, 0);
   }
 
-  // Generic transitions
-  .expand-transition {
-    @include transition-default();
+  &-leave,
+  &-leave-to,
+  &-leave-active {
+    position: absolute !important;
+  }
+}
+
+.tab-transition {
+  &-enter {
+    transform: translate(100%, 0);
   }
 
-  .expand-x-transition {
-    @include transition-default();
+  &-leave, &-leave-active {
+    position: absolute;
+    top: 0;
   }
 
-  .scale-transition {
-    @include transition-default();
+  &-leave-to {
+    position: absolute;
+    transform: translate(-100%, 0);
+  }
+}
 
-    &-enter, &-leave, &-leave-to {
-      opacity: 0;
-      transform: scale(0);
-    }
+.tab-reverse-transition {
+  &-enter {
+    transform: translate(-100%, 0);
   }
 
-  .scale-rotate-transition {
-    @include transition-default();
+  &-leave, &-leave-to {
+    top: 0;
+    position: absolute;
+    transform: translate(100%, 0);
+  }
+}
 
-    &-enter, &-leave, &-leave-to {
-      opacity: 0;
-      transform: scale(0) rotate(-45deg);
-    }
+// Generic transitions
+.expand-transition {
+  @include transition-default();
+}
+
+.expand-x-transition {
+  @include transition-default();
+}
+
+.scale-transition {
+  @include transition-default();
+
+  &-enter, &-leave, &-leave-to {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+.scale-rotate-transition {
+  @include transition-default();
+
+  &-enter, &-leave, &-leave-to {
+    opacity: 0;
+    transform: scale(0) rotate(-45deg);
+  }
+}
+
+.scale-rotate-reverse-transition {
+  @include transition-default();
+
+  &-enter, &-leave, &-leave-to {
+    opacity: 0;
+    transform: scale(0) rotate(45deg);
+  }
+}
+
+.message-transition {
+  @include transition-default();
+
+  &-enter, &-leave-to {
+    opacity: 0;
+    transform: translateY(-15px);
   }
 
-  .scale-rotate-reverse-transition {
-    @include transition-default();
+  &-leave, &-leave-active {
+    position: absolute;
+  }
+}
 
-    &-enter, &-leave, &-leave-to {
-      opacity: 0;
-      transform: scale(0) rotate(45deg);
-    }
+.slide-y-transition {
+  @include transition-default();
+
+  &-enter, &-leave-to {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+}
+
+.slide-y-reverse-transition {
+  @include transition-default();
+
+  &-enter, &-leave-to {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+}
+
+.scroll-y-transition {
+  @include transition-default();
+
+  &-enter, &-leave-to {
+    opacity: 0;
   }
 
-  .message-transition {
-    @include transition-default();
-
-    &-enter, &-leave-to {
-      opacity: 0;
-      transform: translateY(-15px);
-    }
-
-    &-leave, &-leave-active {
-      position: absolute;
-    }
+  &-enter {
+    transform: translateY(-15px);
   }
 
-  .slide-y-transition {
-    @include transition-default();
+  &-leave-to {
+    transform: translateY(15px);
+  }
+}
 
-    &-enter, &-leave-to {
-      opacity: 0;
-      transform: translateY(-15px);
-    }
+.scroll-y-reverse-transition {
+  @include transition-default();
+
+  &-enter, &-leave-to {
+    opacity: 0;
   }
 
-  .slide-y-reverse-transition {
-    @include transition-default();
-
-    &-enter, &-leave-to {
-      opacity: 0;
-      transform: translateY(15px);
-    }
+  &-enter {
+    transform: translateY(15px);
   }
 
-  .scroll-y-transition {
-    @include transition-default();
+  &-leave-to {
+    transform: translateY(-15px);
+  }
+}
 
-    &-enter, &-leave-to {
-      opacity: 0;
-    }
+.scroll-x-transition {
+  @include transition-default();
 
-    &-enter {
-      transform: translateY(-15px);
-    }
-
-    &-leave-to {
-      transform: translateY(15px);
-    }
+  &-enter, &-leave-to {
+    opacity: 0;
   }
 
-  .scroll-y-reverse-transition {
-    @include transition-default();
-
-    &-enter, &-leave-to {
-      opacity: 0;
-    }
-
-    &-enter {
-      transform: translateY(15px);
-    }
-
-    &-leave-to {
-      transform: translateY(-15px);
-    }
+  &-enter {
+    transform: translateX(-15px);
   }
 
-  .scroll-x-transition {
-    @include transition-default();
+  &-leave-to {
+    transform: translateX(15px);
+  }
+}
 
-    &-enter, &-leave-to {
-      opacity: 0;
-    }
+.scroll-x-reverse-transition {
+  @include transition-default();
 
-    &-enter {
-      transform: translateX(-15px);
-    }
-
-    &-leave-to {
-      transform: translateX(15px);
-    }
+  &-enter, &-leave-to {
+    opacity: 0;
   }
 
-  .scroll-x-reverse-transition {
-    @include transition-default();
-
-    &-enter, &-leave-to {
-      opacity: 0;
-    }
-
-    &-enter {
-      transform: translateX(15px);
-    }
-
-    &-leave-to {
-      transform: translateX(-15px);
-    }
+  &-enter {
+    transform: translateX(15px);
   }
 
-  .slide-x-transition {
-    @include transition-default();
-
-    &-enter, &-leave-to {
-      opacity: 0;
-      transform: translateX(-15px);
-    }
+  &-leave-to {
+    transform: translateX(-15px);
   }
+}
 
-  .slide-x-reverse-transition {
-    @include transition-default();
+.slide-x-transition {
+  @include transition-default();
 
-    &-enter, &-leave-to {
-      opacity: 0;
-      transform: translateX(15px);
-    }
+  &-enter, &-leave-to {
+    opacity: 0;
+    transform: translateX(-15px);
   }
+}
 
-  .fade-transition {
-    @include transition-default();
+.slide-x-reverse-transition {
+  @include transition-default();
 
-    &-enter, &-leave-to {
-      opacity: 0 !important;
-    }
+  &-enter, &-leave-to {
+    opacity: 0;
+    transform: translateX(15px);
   }
+}
 
-  .fab-transition {
-    @include transition-default();
+.fade-transition {
+  @include transition-default();
 
-    &-enter, &-leave-to {
-      transform: scale(0) rotate(-45deg);
-    }
+  &-enter, &-leave-to {
+    opacity: 0 !important;
   }
+}
+
+.fab-transition {
+  @include transition-default();
+
+  &-enter, &-leave-to {
+    transform: scale(0) rotate(-45deg);
+  }
+}
