@@ -14,7 +14,7 @@ nav: Sheets
 
 The `v-sheet` component is the baseline for numerous components such as [v-card](/components/cards/), [v-toolbar](/components/toolbars/), and more. The available properties form the foundation of Material Design—the concept of paper and elevation (shadows).
 
-<entry-ad />
+<ads-entry />
 
 <!-- ## Usage
 
@@ -26,7 +26,7 @@ The `v-sheet` component is a transformable piece of _paper_ that provides a basi
 
 <api-links />
 
-<api-section page="components/sheets" />
+<api-inline />
 
 ## Examples
 
