@@ -40,6 +40,7 @@ export interface FormProps {
   lazyValidation: boolean
   readonly: boolean
   modelValue: boolean | null
+  'onUpdate:modelValue': ((val: boolean | null) => void) | undefined
 }
 
 export const makeFormProps = propsFactory({

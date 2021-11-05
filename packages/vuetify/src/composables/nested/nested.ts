@@ -16,12 +16,15 @@ export type OpenStrategy = 'single' | 'multiple' | OpenStrategyFn
 export type ActiveStrategy = 'single' | 'multiple' | ActiveStrategyFn
 
 export interface NestedProps {
-  selectStrategy?: SelectStrategy
-  openStrategy?: OpenStrategy
-  activeStrategy?: ActiveStrategy
-  selected?: string[]
-  opened?: string[]
-  active?: string[]
+  selectStrategy: SelectStrategy | undefined
+  openStrategy: OpenStrategy | undefined
+  activeStrategy: ActiveStrategy | undefined
+  selected: string[] | undefined
+  opened: string[] | undefined
+  active: string[] | undefined
+  'onUpdate:selected': ((val: string[]) => void) | undefined
+  'onUpdate:opened': ((val: string[]) => void) | undefined
+  'onUpdate:active': ((val: string[]) => void) | undefined
 }
 
 type NestedProvide = {

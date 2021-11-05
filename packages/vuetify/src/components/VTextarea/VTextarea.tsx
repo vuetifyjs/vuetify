@@ -2,7 +2,7 @@
 import './VTextarea.sass'
 
 // Components
-import { makeVFieldProps } from '@/components/VField/VField'
+import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
 
@@ -14,10 +14,11 @@ import Intersect from '@/directives/intersect'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { convertToUnit, defineComponent, pick, useRender } from '@/util'
+import { convertToUnit, defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { filterInputAttrs } from '@/components/VInput/VInput'
 
 export const VTextarea = defineComponent({
   name: 'VTextarea',
@@ -48,6 +49,10 @@ export const VTextarea = defineComponent({
     suffix: String,
 
     ...makeVFieldProps(),
+  },
+
+  emits: {
+    'update:modelValue': (val: string) => true,
   },
 
   setup (props, { attrs, slots }) {
@@ -134,7 +139,8 @@ export const VTextarea = defineComponent({
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
-      const [_, restAttrs] = pick(attrs, ['class'])
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
+      const [fieldProps, _] = filterFieldProps(props)
 
       return (
         <VField
@@ -161,8 +167,8 @@ export const VTextarea = defineComponent({
             model.value = ''
           }}
           role="textbox"
-          { ...attrs }
-          { ...props }
+          { ...rootAttrs }
+          { ...fieldProps.value }
           v-slots={{
             ...slots,
             default: ({
@@ -195,7 +201,7 @@ export const VTextarea = defineComponent({
                     placeholder={ props.placeholder }
                     rows={ props.rows }
                     { ...slotProps }
-                    { ...restAttrs }
+                    { ...inputAttrs }
                   />
 
                   { props.autoGrow && (

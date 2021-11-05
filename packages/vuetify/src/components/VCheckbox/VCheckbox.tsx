@@ -34,6 +34,10 @@ export const VCheckbox = defineComponent({
     },
   },
 
+  emits: {
+    'update:modelValue': (val: any) => true,
+  },
+
   setup (props, { attrs, slots }) {
     const indeterminate = ref(props.indeterminate)
 

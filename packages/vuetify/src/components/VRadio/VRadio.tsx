@@ -6,7 +6,7 @@ import { VSelectionControl } from '@/components/VSelectionControl'
 
 // Utility
 import { defineComponent } from 'vue'
-import { pick, useRender } from '@/util'
+import { useRender } from '@/util'
 
 export const VRadio = defineComponent({
   name: 'VRadio',
