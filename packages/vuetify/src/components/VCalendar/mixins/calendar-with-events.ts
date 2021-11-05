@@ -308,11 +308,11 @@ export default CalendarBase.extend({
             const time = timeSummary()
             const delimiter = singline ? ', ' : '<br>'
 
-            return `<strong>${name}</strong>${delimiter}${time}`
+            return `<span class="v-event-summary"><strong>${name}</strong>${delimiter}${time}</span>`
           } else {
             const time = formatTime(event.start, true)
 
-            return `<strong>${time}</strong> ${name}`
+            return `<span class="v-event-summary"><strong>${time}</strong> ${name}</span>`
           }
         }
 
