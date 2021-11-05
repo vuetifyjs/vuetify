@@ -9,7 +9,7 @@
     temporary
     width="300"
   >
-    <v-toolbar
+    <!-- <v-toolbar
       class="v-bar--underline"
       variant="flat"
     >
@@ -22,7 +22,7 @@
         variant="text"
         @click="app.settings = false"
       />
-    </v-toolbar>
+    </v-toolbar> -->
 
     <v-container>
       <template v-if="!!pwa.sw.install">
