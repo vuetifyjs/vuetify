@@ -5,12 +5,16 @@ import './VInput.sass'
 import { VMessages } from '@/components/VMessages'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, pick } from '@/util'
 import { VIcon } from '@/components/VIcon'
 import { makeDensityProps, useDensity } from '@/composables/density'
 
 // Types
 import type { PropType } from 'vue'
+
+export function filterInputAttrs (attrs: Record<string, unknown>) {
+  return pick(attrs, ['class', 'style', 'id', /^data-/])
+}
 
 export const VInput = defineComponent({
   name: 'VInput',

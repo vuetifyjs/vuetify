@@ -21,6 +21,7 @@ import {
   genericComponent,
   getUid,
   nullifyTransforms,
+  pick,
   propsFactory,
   standardEasing,
   useRender,
@@ -242,9 +243,9 @@ export const VField = genericComponent<new <T>() => {
           messages={ props.errorMessages?.length ? props.errorMessages : errorMessages.value }
           { ...attrs }
           v-slots={{
-            prepend: slots.prepend && (() => slots.prepend?.(slotProps.value)),
-            append: slots.append && (() => slots.append?.(slotProps.value)),
-            details: slots.details && (() => slots?.details?.(slotProps.value)),
+            prepend: () => slots.prepend?.(slotProps.value),
+            append: () => slots.append?.(slotProps.value),
+            details: () => slots?.details?.(slotProps.value),
           }}
         >
           <div
@@ -363,3 +364,8 @@ export const VField = genericComponent<new <T>() => {
 })
 
 export type VField = InstanceType<typeof VField>
+
+// TODO: this is kinda slow, might be better to implicitly inherit props instead
+export function filterFieldProps (attrs: Record<string, unknown>) {
+  return pick(attrs, Object.keys(VField.props))
+}

@@ -7,7 +7,7 @@ import type { Ref } from 'vue'
 
 // Composables
 export function useProxiedModel<
-  Props extends object,
+  Props extends object & { [key in Prop as `onUpdate:${Prop}`]: ((val: any) => void) | undefined },
   Prop extends Extract<keyof Props, string>,
   Inner = Props[Prop],
 > (

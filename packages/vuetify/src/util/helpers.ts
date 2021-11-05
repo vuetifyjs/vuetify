@@ -190,12 +190,25 @@ type MaybePick<
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
-> (obj: T, paths: U[]): [MaybePick<T, U>, Omit<T, U>] {
+> (obj: T, paths: U[]): [MaybePick<T, U>, Omit<T, U>]
+export function pick<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[]): [Partial<T>, Partial<T>]
+export function pick<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[]): [Partial<T>, Partial<T>] {
   const found = Object.create(null)
   const rest = Object.create(null)
 
   for (const key in obj) {
-    if (paths.includes(key as U)) {
+    if (
+      paths.some(path => path instanceof RegExp
+        ? path.test(key)
+        : path === key
+      )
+    ) {
       found[key] = obj[key]
     } else {
       rest[key] = obj[key]
