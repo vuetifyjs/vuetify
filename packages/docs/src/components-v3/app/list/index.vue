@@ -85,7 +85,7 @@
       })
     }
 
-    return []
+    return undefined
   }
 
   export default defineComponent({

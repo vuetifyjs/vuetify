@@ -84,12 +84,12 @@ const generateToc = (content: string) => {
 
     const next = tokens[i + 1]
     const link = next.children?.find(child => child.type === 'link_open')
-    const text = next.children?.find(child => child.type === 'text' && child.content.trim())
+    const text = next.children?.filter(child => !!child.content).map(child => child.content).join('')
     const anchor = link?.attrs?.find(([attr]) => attr === 'href')
     const [, to] = anchor ?? []
 
     headings.push({
-      text: text?.content,
+      text,
       to,
       level,
     })
