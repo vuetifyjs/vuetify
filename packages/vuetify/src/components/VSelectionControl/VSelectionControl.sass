@@ -6,6 +6,8 @@
 @use './variables' as *
 
 .v-selection-control
+  border: thin solid red
+
   $root: &
 
   align-items: center
@@ -17,17 +19,9 @@
   position: relative
   user-select: none
 
-  &--disabled
-    .v-icon,
-    .v-messages
-      color: $selection-control-disabled-color
-
-  &--error
-    color: $selection-control-error-color
-
-    .v-icon,
-    .v-messages
-      color: $selection-control-error-color
+  .v-input:not(.v-input--disabled):not(.v-input--error) &
+    .v-icon
+      color: $selection-control-icon-color
 
   + .v-input__details
     padding: 0 12px

@@ -22,7 +22,7 @@ export const VRadio = defineComponent({
     },
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props) {
     useRender(() => {
       return (
         <VSelectionControl

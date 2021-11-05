@@ -23,6 +23,8 @@ export const VInput = defineComponent({
     appendIcon: String,
     prependIcon: String,
     focused: Boolean,
+    error: Boolean,
+    disabled: Boolean,
     // TODO: implement auto
     hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
     hint: String,
@@ -31,6 +33,7 @@ export const VInput = defineComponent({
       default: () => ([]),
     },
     persistentHint: Boolean,
+    readonly: Boolean,
 
     ...makeDensityProps(),
   },
@@ -59,6 +62,11 @@ export const VInput = defineComponent({
       return (
         <div class={[
           'v-input',
+          {
+            'v-input--disabled': props.disabled,
+            'v-input--error': props.error,
+            'v-input--readonly': props.readonly,
+          },
           densityClasses.value,
         ]}
         >

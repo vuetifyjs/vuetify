@@ -155,13 +155,13 @@
 /* endregion */
 /* region LABEL */
 .v-field-label
+  color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
   contain: layout paint
   display: inline-block
   font-size: $field-label-font-size
   letter-spacing: $field-letter-spacing
   min-width: 0
   max-width: calc(100% - var(--v-field-padding-before) - var(--v-field-padding-after))
-  opacity: .6
   overflow: hidden
   pointer-events: none
   position: absolute
@@ -177,11 +177,12 @@
   .v-field--active &
     visibility: hidden
 
-  .v-field--error &
-    opacity: 1
+  // TODO: figure out a better way to propagate error/disabled colors
+  .v-input--disabled &
+    color: $field-disabled-color
 
-  .v-field--focused &
-    opacity: 1
+  .v-input--error &
+    color: rgb(var(--v-theme-error))
 
   .v-field--variant-plain &,
   .v-field--variant-underlined &
@@ -364,30 +365,10 @@
 
 /* endregion */
 /* region MODIFIERS */
-.v-field
-  color: $field-color
-
-  .v-icon,
-  .v-messages,
-  .v-counter
-    color: $field-color
-
-  &--disabled
-    .v-icon,
-    .v-messages,
-    .v-counter
-      color: $field-disabled-color
-
-  &--error
+.v-input--error
+  .v-field__outline::after
     color: $field-error-color
-
-    .v-icon,
-    .v-messages,
-    .v-counter
-      color: $field-error-color
-
-    .v-field__outline::after
-      transform: scaleX(1)
+    transform: scaleX(1)
 
 .v-field--reverse
   .v-field__input
@@ -396,7 +377,8 @@
 
     @include tools.rtl()
       text-align: left
-.v-field--disabled
+
+.v-input--disabled
   pointer-events: none
 
   input

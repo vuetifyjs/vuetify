@@ -82,7 +82,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
   setup (props, { attrs, slots }) {
     const group = inject(VSelectionGroupSymbol, {})
     const { densityClasses } = useDensity(props, 'v-selection-control')
-    const { isDisabled, isReadonly, isValid } = useValidation(props, 'v-checkbox')
+    const { isDisabled, isReadonly, isValid, validationClasses } = useValidation(props, 'v-input')
     const model = useProxiedModel(props, 'modelValue')
     const uid = getUid()
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
@@ -135,6 +135,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
               'v-selection-control--focus-visible': isFocusVisible.value,
             },
             densityClasses.value,
+            validationClasses.value,
           ]}
           { ...attrs }
         >

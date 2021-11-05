@@ -132,7 +132,7 @@ export const VField = genericComponent<new <T>() => {
     watchEffect(() => isActive.value = isFocused.value || props.dirty)
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
-    const { errorMessages, isDisabled, isReadonly, isValid, validationClasses } = useValidation(props, 'v-field')
+    const { errorMessages, isDisabled, isReadonly, isValid, validationClasses } = useValidation(props, 'v-input')
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
       return (
         isValid.value !== false &&
