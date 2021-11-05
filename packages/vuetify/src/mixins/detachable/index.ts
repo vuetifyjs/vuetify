@@ -94,35 +94,34 @@ export default mixins<options &
     this.isActive = false
   },
 
-  destroyed () {
-    // IE11 Fix
-    try {
-      if (
-        this.$refs.content &&
-        this.$refs.content.parentNode
-      ) {
-        this.$refs.content.parentNode.removeChild(this.$refs.content)
-      }
+  beforeDestroy () {
+    if (
+      this.$refs.content &&
+      this.$refs.content.parentNode
+    ) {
+      this.$refs.content.parentNode.removeChild(this.$refs.content)
+    }
+  },
 
-      if (this.activatorNode) {
-        const activator = Array.isArray(this.activatorNode) ? this.activatorNode : [this.activatorNode]
-        if (this.$el.isConnected) {
-          // Component has been destroyed but the element still exists, we must be in a transition
-          // Wait for the transition to finish before cleaning up the detached activator
-          const observer = new MutationObserver(list => {
-            if (
-              list.some(record => Array.from(record.removedNodes).includes(this.$el))
-            ) {
-              observer.disconnect()
-              removeActivator(activator)
-            }
-          })
-          observer.observe(this.$el.parentNode!, { subtree: false, childList: true })
-        } else {
-          removeActivator(activator)
-        }
+  destroyed () {
+    if (this.activatorNode) {
+      const activator = Array.isArray(this.activatorNode) ? this.activatorNode : [this.activatorNode]
+      if (this.$el.isConnected) {
+        // Component has been destroyed but the element still exists, we must be in a transition
+        // Wait for the transition to finish before cleaning up the detached activator
+        const observer = new MutationObserver(list => {
+          if (
+            list.some(record => Array.from(record.removedNodes).includes(this.$el))
+          ) {
+            observer.disconnect()
+            removeActivator(activator)
+          }
+        })
+        observer.observe(this.$el.parentNode!, { subtree: false, childList: true })
+      } else {
+        removeActivator(activator)
       }
-    } catch (e) { console.log(e) } /* eslint-disable-line no-console */
+    }
   },
 
   methods: {
