@@ -156,7 +156,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       if (!el || el.nodeType !== Node.ELEMENT_NODE) return false
 
       const style = window.getComputedStyle(el)
-      return ['auto', 'scroll'].includes(style.overflowY!) && el.scrollHeight > el.clientHeight
+      return (['auto', 'scroll'].includes(style.overflowY!) || el.tagName === 'SELECT') && el.scrollHeight > el.clientHeight
     },
     shouldScroll (el: Element, delta: number): boolean {
       if (el.hasAttribute('data-app')) return false
