@@ -15,11 +15,14 @@ export default function intersectable (options: { onVisible: string[] }) {
       Intersect.inserted(this.$el as HTMLElement, {
         name: 'intersect',
         value: this.onObserve,
-      })
+      }, this.$vnode)
     },
 
     destroyed () {
-      Intersect.unbind(this.$el as HTMLElement)
+      Intersect.unbind(this.$el as HTMLElement, {
+        name: 'intersect',
+        value: this.onObserve,
+      }, this.$vnode)
     },
 
     methods: {

@@ -8,10 +8,10 @@ describe('resize.ts', () => {
     jest.spyOn(window, 'removeEventListener')
     const el = {}
 
-    Resize.inserted(el as HTMLElement, { value: callback } as any)
+    Resize.inserted(el as HTMLElement, { value: callback } as any, { context: { _uid: 1 } } as any)
     expect(callback).toHaveBeenCalled()
     expect(window.addEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
-    Resize.unbind(el as HTMLElement)
+    Resize.unbind(el as HTMLElement, { value: callback } as any, { context: { _uid: 1 } } as any)
     expect(window.removeEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
   })
 
@@ -21,10 +21,10 @@ describe('resize.ts', () => {
     jest.spyOn(window, 'removeEventListener')
     const el = {}
 
-    Resize.inserted(el as HTMLElement, { value: callback, modifiers: { quiet: true } } as any)
+    Resize.inserted(el as HTMLElement, { value: callback, modifiers: { quiet: true } } as any, { context: { _uid: 1 } } as any)
     expect(callback).not.toHaveBeenCalled()
     expect(window.addEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
-    Resize.unbind(el as HTMLElement)
+    Resize.unbind(el as HTMLElement, { value: callback, modifiers: { quiet: true } } as any, { context: { _uid: 1 } } as any)
     expect(window.removeEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
   })
 })
