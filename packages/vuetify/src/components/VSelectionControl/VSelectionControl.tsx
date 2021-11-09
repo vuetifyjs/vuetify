@@ -49,7 +49,8 @@ export const VSelectionControl = genericComponent<new <T>() => {
     'onUpdate:modelValue'?: (val: T) => any
   }
   $slots: MakeSlots<{
-    default: [SelectionControlSlot]
+    default: []
+    input: [SelectionControlSlot]
   }>
 }>()({
   name: 'VSelectionControl',
@@ -64,6 +65,10 @@ export const VSelectionControl = genericComponent<new <T>() => {
     label: String,
     offIcon: String,
     onIcon: String,
+    ripple: {
+      type: Boolean,
+      default: true,
+    },
     type: String,
     value: {
       type: null,
@@ -131,6 +136,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
           class={[
             'v-selection-control',
             {
+              'v-selection-control--dirty': model.value,
               'v-selection-control--focused': isFocused.value,
               'v-selection-control--focus-visible': isFocusVisible.value,
             },
@@ -145,38 +151,39 @@ export const VSelectionControl = genericComponent<new <T>() => {
               textColorClasses.value,
             ]}
             style={ textColorStyles.value }
-            v-ripple={[
+            v-ripple={ props.ripple && [
               !isDisabled.value && !isReadonly.value,
               null,
               ['center', 'circle'],
             ]}
           >
-            <VIcon icon={ icon.value } />
+            { icon.value && <VIcon icon={ icon.value } /> }
 
-            { slots.default
-              ? slots.default?.({
-                model,
-                isReadonly,
-                isDisabled,
-                props: {
-                  onFocus,
-                  onBlur,
-                  id: id.value,
-                },
-              }) : (
-                <input
-                  v-model={ model.value }
-                  disabled={ isDisabled.value }
-                  id={ id.value }
-                  onBlur={ onBlur }
-                  onFocus={ onFocus }
-                  readonly={ isReadonly.value }
-                  type={ group?.type ?? props.type }
-                  value={ props.value }
-                  name={ group?.name ?? props.name }
-                />
-              ) }
+            <input
+              v-model={ model.value }
+              disabled={ isDisabled.value }
+              id={ id.value }
+              onBlur={ onBlur }
+              onFocus={ onFocus }
+              readonly={ isReadonly.value }
+              type={ group?.type ?? props.type }
+              value={ props.value }
+              name={ group?.name ?? props.name }
+            />
+
+            { slots.input?.({
+              model,
+              isReadonly,
+              isDisabled,
+              props: {
+                onFocus,
+                onBlur,
+                id: id.value,
+              },
+            }) }
           </div>
+
+          { slots.default?.() }
 
           <VFieldLabel
             for={ id.value }

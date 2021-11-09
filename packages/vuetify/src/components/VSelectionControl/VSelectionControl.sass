@@ -31,6 +31,7 @@
       .v-selection-control__input
         min-width: $selection-control-size + $modifier
         height: $selection-control-size + $modifier
+        --v-selection-control-size: #{$selection-control-size + $modifier} / 4
 
 .v-selection-control__input
   align-items: center
@@ -38,6 +39,7 @@
   flex: 0 1
   justify-content: center
   position: relative
+  border-radius: 50%
 
   input
     cursor: pointer
@@ -53,7 +55,6 @@
     border-radius: 100%
     background-color: currentColor
     opacity: 0
-    transition: opacity .2s ease-in-out
     pointer-events: none
 
   &:hover::before
