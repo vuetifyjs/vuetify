@@ -4,6 +4,7 @@ import './VCheckbox.sass'
 // Components
 import { VSelectionControl } from '@/components/VSelectionControl'
 import { VInput } from '@/components/VInput'
+import { filterInputAttrs } from '@/components/VInput/VInput'
 
 // Utility
 import { computed, defineComponent, ref } from 'vue'
@@ -42,7 +43,7 @@ export const VCheckbox = defineComponent({
     const indeterminate = ref(props.indeterminate)
 
     useRender(() => {
-      const [_, restAttrs] = pick(attrs, ['class'])
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
 
       const offIcon = computed(() => {
         return indeterminate.value
@@ -59,7 +60,7 @@ export const VCheckbox = defineComponent({
       return (
         <VInput
           class="v-checkbox"
-          { ...attrs }
+          { ...rootAttrs }
           v-slots={{
             ...slots,
             default: () => (
@@ -69,7 +70,7 @@ export const VCheckbox = defineComponent({
                 model-value={ props.modelValue }
                 onIcon={ props.onIcon }
                 offIcon={ offIcon.value }
-                { ...restAttrs }
+                { ...inputAttrs }
               />
             ),
           }}
