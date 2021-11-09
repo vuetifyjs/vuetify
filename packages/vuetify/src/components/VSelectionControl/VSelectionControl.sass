@@ -11,6 +11,7 @@
   $root: &
 
   align-items: center
+  color: $selection-control-color
   contain: layout
   display: flex
   flex: 1 0
@@ -18,10 +19,6 @@
   // height: var(--v-input-control-height)
   position: relative
   user-select: none
-
-  .v-input:not(.v-input--disabled):not(.v-input--error) &
-    .v-icon
-      color: $selection-control-icon-color
 
   + .v-input__details
     padding: 0 12px
