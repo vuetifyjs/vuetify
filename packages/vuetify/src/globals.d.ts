@@ -32,11 +32,11 @@ declare global {
     _clickOutside?: Record<number, {
       onClick: EventListener
       onMousedown: EventListener
-    }> & { lastMousedownWasOutside: boolean }
+    } | undefined> & { lastMousedownWasOutside: boolean }
     _onResize?: Record<number, {
       callback: () => void
       options?: boolean | AddEventListenerOptions
-    }>
+    } | undefined>
     _ripple?: {
       enabled?: boolean
       centered?: boolean
@@ -50,15 +50,15 @@ declare global {
     _observe?: Record<number, {
       init: boolean
       observer: IntersectionObserver
-    }>
+    } | undefined>
     _mutate?: Record<number, {
       observer: MutationObserver
-    }>
+    } | undefined>
     _onScroll?: Record<number, {
       handler: EventListenerOrEventListenerObject
       options: boolean | AddEventListenerOptions
       target?: EventTarget
-    }>
+    } | undefined>
     _touchHandlers?: {
       [_uid: number]: TouchStoredHandlers
     }
