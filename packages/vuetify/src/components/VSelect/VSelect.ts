@@ -664,7 +664,7 @@ export default baseMixins.extend<options>().extend({
 
       // If menu is active, allow default
       // listIndex change from menu
-      if (this.isMenuActive && keyCode !== keyCodes.tab) {
+      if (this.isMenuActive && [keyCodes.up, keyCodes.down, keyCodes.home, keyCodes.end, keyCodes.enter].includes(keyCode)) {
         this.$nextTick(() => {
           menu.changeListIndex(e)
           this.$emit('update:list-index', menu.listIndex)

@@ -12,7 +12,7 @@ describe('scroll.ts', () => {
   let vnode
 
   beforeEach(() => {
-    vnode = null as any
+    vnode = { context: { _uid: 1 } } as any
     options = { passive: true }
     binding = {
       value: jest.fn(),
@@ -32,7 +32,7 @@ describe('scroll.ts', () => {
     inserted(el, binding, vnode, vnode)
 
     expect(spyOnWindowAddListener).toHaveBeenCalledWith('scroll', binding.value, options)
-    expect(el._onScroll).toEqual({
+    expect(el._onScroll[1]).toEqual({
       handler: binding.value,
       options,
       target: window,
@@ -41,7 +41,7 @@ describe('scroll.ts', () => {
     unbind(el, binding, vnode, vnode)
 
     expect(spyOnWindowRemoveListener).toHaveBeenCalledWith('scroll', binding.value, options)
-    expect(el._onScroll).toBeUndefined()
+    expect(el._onScroll[1]).toBeUndefined()
   })
 
   it('should work with a provided valid querySelector string', () => {
@@ -66,7 +66,7 @@ describe('scroll.ts', () => {
     inserted(el, binding, vnode, vnode)
 
     expect(spyOnFooAddListener).toHaveBeenCalledWith('scroll', binding.value, options)
-    expect(el._onScroll).toEqual({
+    expect(el._onScroll[1]).toEqual({
       handler: binding.value,
       options,
       target,
@@ -75,7 +75,7 @@ describe('scroll.ts', () => {
     unbind(el, binding, vnode, vnode)
 
     expect(spyOnFooRemoveListener).toHaveBeenCalledWith('scroll', binding.value, options)
-    expect(el._onScroll).toBeUndefined()
+    expect(el._onScroll[1]).toBeUndefined()
 
     document.body.removeChild(target)
   })
@@ -86,7 +86,7 @@ describe('scroll.ts', () => {
     inserted(el, binding, vnode, vnode)
 
     expect(el.addEventListener).toHaveBeenCalledWith('scroll', binding.value, options)
-    expect(el._onScroll).toEqual({
+    expect(el._onScroll[1]).toEqual({
       handler: binding.value,
       options,
       target: undefined,
@@ -95,7 +95,7 @@ describe('scroll.ts', () => {
     unbind(el, binding, vnode, vnode)
 
     expect(el.removeEventListener).toHaveBeenCalledWith('scroll', binding.value, options)
-    expect(el._onScroll).toBeUndefined()
+    expect(el._onScroll[1]).toBeUndefined()
   })
 
   it('should not remove listeners if no _onScroll property present', () => {
@@ -111,7 +111,7 @@ describe('scroll.ts', () => {
 
     inserted(el, binding, vnode, vnode)
 
-    expect(el._onScroll).toEqual({
+    expect(el._onScroll[1]).toEqual({
       handler,
       target: window,
       options: { passive: true },
@@ -121,7 +121,7 @@ describe('scroll.ts', () => {
 
     inserted(el, binding, vnode, vnode)
 
-    expect(el._onScroll).toEqual({
+    expect(el._onScroll[1]).toEqual({
       handler,
       target: window,
       options: { passive: false },

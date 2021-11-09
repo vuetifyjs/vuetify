@@ -150,6 +150,12 @@ export default baseMixins.extend<options>().extend({
 
       return attrs
     },
+    toggle () {
+      if (this.to && this.inputValue === undefined) {
+        this.isActive = !this.isActive
+      }
+      this.$emit('change')
+    },
   },
 
   render (h): VNode {
@@ -182,6 +188,6 @@ export default baseMixins.extend<options>().extend({
       })
       : this.$slots.default
 
-    return h(tag, this.setTextColor(this.color, data), children)
+    return h(tag, this.isActive ? this.setTextColor(this.color, data) : data, children)
   },
 })

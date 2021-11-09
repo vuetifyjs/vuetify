@@ -1,5 +1,6 @@
 import { attachedRoot } from '../../util/dom'
 import { VNodeDirective } from 'vue/types/vnode'
+import { VNode } from 'vue'
 
 interface ClickOutsideBindingArgs {
   handler: (e: Event) => void
@@ -52,7 +53,7 @@ function checkIsActive (e: PointerEvent, binding: ClickOutsideDirective): boolea
   return isActive(e)
 }
 
-function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirective) {
+function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirective, vnode: VNode) {
   const handler = typeof binding.value === 'function' ? binding.value : binding.value!.handler
 
   el._clickOutside!.lastMousedownWasOutside && checkEvent(e, el, binding) && setTimeout(() => {
@@ -76,8 +77,8 @@ export const ClickOutside = {
   // sure that the root element is
   // available, iOS does not support
   // clicks on body
-  inserted (el: HTMLElement, binding: ClickOutsideDirective) {
-    const onClick = (e: Event) => directive(e as PointerEvent, el, binding)
+  inserted (el: HTMLElement, binding: ClickOutsideDirective, vnode: VNode) {
+    const onClick = (e: Event) => directive(e as PointerEvent, el, binding, vnode)
     const onMousedown = (e: Event) => {
       el._clickOutside!.lastMousedownWasOutside = checkEvent(e as PointerEvent, el, binding)
     }
@@ -87,23 +88,31 @@ export const ClickOutside = {
       app.addEventListener('mousedown', onMousedown, true)
     })
 
-    el._clickOutside = {
-      lastMousedownWasOutside: true,
+    if (!el._clickOutside) {
+      el._clickOutside = {
+        lastMousedownWasOutside: true,
+      }
+    }
+
+    el._clickOutside[vnode.context!._uid] = {
       onClick,
       onMousedown,
     }
   },
 
-  unbind (el: HTMLElement) {
+  unbind (el: HTMLElement, binding: ClickOutsideDirective, vnode: VNode) {
     if (!el._clickOutside) return
 
     handleShadow(el, (app: HTMLElement) => {
-      if (!app || !el._clickOutside) return
-      app.removeEventListener('click', el._clickOutside.onClick, true)
-      app.removeEventListener('mousedown', el._clickOutside.onMousedown, true)
+      if (!app || !el._clickOutside?.[vnode.context!._uid]) return
+
+      const { onClick, onMousedown } = el._clickOutside[vnode.context!._uid]!
+
+      app.removeEventListener('click', onClick, true)
+      app.removeEventListener('mousedown', onMousedown, true)
     })
 
-    delete el._clickOutside
+    delete el._clickOutside[vnode.context!._uid]
   },
 }
 

@@ -67,12 +67,16 @@ export default baseMixins.extend<options>().extend(
     },
   },
 
-  mounted () {
-    this.onRouteChange()
-  },
-
   methods: {
     click (e: KeyboardEvent | MouseEvent): void {
+      // Prevent keyboard actions
+      // from children elements
+      // within disabled tabs
+      if (this.disabled) {
+        e.preventDefault()
+        return
+      }
+
       // If user provides an
       // actual link, do not
       // prevent default
@@ -85,6 +89,12 @@ export default baseMixins.extend<options>().extend(
       this.$emit('click', e)
 
       this.to || this.toggle()
+    },
+    toggle () {
+      // VItemGroup treats a change event as a click
+      if (!this.isActive) {
+        this.$emit('change')
+      }
     },
   },
 

@@ -21,6 +21,7 @@ module.exports = {
     'sonarjs',
   ],
   rules: {
+    'no-var': 'error',
     // allow paren-less arrow functions
     'arrow-parens': ['error', 'as-needed'],
     // set maximum line characters

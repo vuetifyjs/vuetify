@@ -1,4 +1,4 @@
-import { VNodeDirective } from 'vue'
+import { VNode, VNodeDirective } from 'vue'
 
 type MutateHandler = (
   mutationsList: MutationRecord[],
@@ -16,7 +16,7 @@ interface MutateVNodeDirective extends Omit<VNodeDirective, 'modifiers'> {
   }
 }
 
-function inserted (el: HTMLElement, binding: MutateVNodeDirective) {
+function inserted (el: HTMLElement, binding: MutateVNodeDirective, vnode: VNode) {
   const modifiers = binding.modifiers || {}
   const value = binding.value
   const callback = typeof value === 'object' ? value.handler : value!
@@ -52,19 +52,19 @@ function inserted (el: HTMLElement, binding: MutateVNodeDirective) {
     callback(mutationsList, observer)
 
     // If has the once modifier, unbind
-    once && unbind(el)
+    once && unbind(el, binding, vnode)
   })
 
   observer.observe(el, options)
-  el._mutate = { observer }
+  el._mutate = Object(el._mutate)
+  el._mutate![vnode.context!._uid] = { observer }
 }
 
-function unbind (el: HTMLElement) {
-  /* istanbul ignore if */
-  if (!el._mutate) return
+function unbind (el: HTMLElement, binding: MutateVNodeDirective, vnode: VNode) {
+  if (!el._mutate?.[vnode.context!._uid]) return
 
-  el._mutate.observer.disconnect()
-  delete el._mutate
+  el._mutate[vnode.context!._uid]!.observer.disconnect()
+  delete el._mutate[vnode.context!._uid]
 }
 
 export const Mutate = {

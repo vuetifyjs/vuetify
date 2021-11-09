@@ -229,7 +229,9 @@ export default VSlider.extend({
         this.thumbPressed = true
       }
 
-      this.activeThumb = this.getIndexOfClosestValue(this.internalValue, value)
+      if (this.activeThumb === null) {
+        this.activeThumb = this.getIndexOfClosestValue(this.internalValue, value)
+      }
 
       this.setInternalValue(value)
     },

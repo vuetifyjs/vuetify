@@ -29,15 +29,14 @@ declare global {
   }
 
   interface HTMLElement {
-    _clickOutside?: {
-      lastMousedownWasOutside: boolean
+    _clickOutside?: Record<number, {
       onClick: EventListener
       onMousedown: EventListener
-    }
-    _onResize?: {
+    } | undefined> & { lastMousedownWasOutside: boolean }
+    _onResize?: Record<number, {
       callback: () => void
       options?: boolean | AddEventListenerOptions
-    }
+    } | undefined>
     _ripple?: {
       enabled?: boolean
       centered?: boolean
@@ -48,18 +47,18 @@ declare global {
       showTimer?: number
       showTimerCommit?: (() => void) | null
     }
-    _observe?: {
+    _observe?: Record<number, {
       init: boolean
       observer: IntersectionObserver
-    }
-    _mutate?: {
+    } | undefined>
+    _mutate?: Record<number, {
       observer: MutationObserver
-    }
-    _onScroll?: {
+    } | undefined>
+    _onScroll?: Record<number, {
       handler: EventListenerOrEventListenerObject
       options: boolean | AddEventListenerOptions
       target?: EventTarget
-    }
+    } | undefined>
     _touchHandlers?: {
       [_uid: number]: TouchStoredHandlers
     }
@@ -70,7 +69,6 @@ declare global {
       width: string
       height: string
     }
-    _initialDisplay?: [string, string]
   }
 
   interface WheelEvent {

@@ -89,4 +89,12 @@ export default baseMixins.extend({
     },
     onClick: BaseItemGroup.options.methods.onClick,
   },
+
+  render (h) {
+    const vnode = VInput.options.render.call(this, h)
+
+    this._b(vnode.data!, 'div', this.attrs$)
+
+    return vnode
+  },
 })

@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 // Components
 import VCombobox from '../VCombobox'
 
@@ -577,5 +578,117 @@ describe('VCombobox.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(change).toHaveBeenLastCalledWith(['bar', 'foo'])
+  })
+
+  // example 1 in https://github.com/vuetifyjs/vuetify/issues/14194
+  it('should not point to a result that does not exist as in example 1', async () => {
+    const { wrapper } = createMultipleCombobox({
+      items: ['a', 'aa', 'aaa', 'bar'],
+    })
+
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    const listIndexUpdate = jest.fn()
+    wrapper.vm.$on('update:list-index', listIndexUpdate)
+
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+    element.value = 'a'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keydown.down')
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keydown.down')
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keydown.down')
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keydown.down')
+    await wrapper.vm.$nextTick()
+
+    element.value = 'aa'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+    expect(listIndexUpdate.mock.calls.length === 6).toBe(true)
+    expect(listIndexUpdate.mock.calls[0][0]).toBe(-1)
+    expect(listIndexUpdate.mock.calls[1][0]).toBe(0)
+    expect(listIndexUpdate.mock.calls[2][0]).toBe(1)
+    expect(listIndexUpdate.mock.calls[3][0]).toBe(2)
+    expect(listIndexUpdate.mock.calls[4][0]).toBe(3)
+    expect(listIndexUpdate.mock.calls[5][0]).toBe(-1)
+  })
+
+  // example 2 in https://github.com/vuetifyjs/vuetify/issues/14194
+  it('should not change selection on search input as in example 2', async () => {
+    const { wrapper } = createMultipleCombobox({
+      items: ['a', 'aa', 'aaa', 'bar'],
+    })
+
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    const listIndexUpdate = jest.fn()
+    wrapper.vm.$on('update:list-index', listIndexUpdate)
+
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+    element.value = 'a'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keydown.down')
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keydown.down')
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keydown.down')
+    await wrapper.vm.$nextTick()
+
+    element.value = 'aa'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+
+    expect(listIndexUpdate.mock.calls.length === 5).toBe(true)
+    expect(listIndexUpdate.mock.calls[0][0]).toBe(-1)
+    expect(listIndexUpdate.mock.calls[1][0]).toBe(0)
+    expect(listIndexUpdate.mock.calls[2][0]).toBe(1)
+    expect(listIndexUpdate.mock.calls[3][0]).toBe(2)
+    expect(listIndexUpdate.mock.calls[4][0]).toBe(1)
+  })
+
+  // example 3 in https://github.com/vuetifyjs/vuetify/issues/14194
+  it('should not point to a result that does not exist as in example 3', async () => {
+    const { wrapper } = createMultipleCombobox({
+      items: ['a', 'aa', 'aaa', 'bar'],
+    })
+
+    const input = wrapper.find('input')
+    const element = input.element as HTMLInputElement
+
+    const listIndexUpdate = jest.fn()
+    wrapper.vm.$on('update:list-index', listIndexUpdate)
+
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+    element.value = 'a'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keydown.down')
+    await wrapper.vm.$nextTick()
+
+    element.value = 'aaaa'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+
+    expect(listIndexUpdate.mock.calls.length === 3).toBe(true)
+    expect(listIndexUpdate.mock.calls[0][0]).toBe(-1)
+    expect(listIndexUpdate.mock.calls[1][0]).toBe(0)
+    expect(listIndexUpdate.mock.calls[2][0]).toBe(-1)
   })
 })

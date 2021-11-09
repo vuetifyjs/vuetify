@@ -64,7 +64,7 @@ export default Vue.extend({
             // Even if touch point has since moved outside the interactive area of that element
             // Ref: https://developer.mozilla.org/en-US/docs/Web/API/Touch/target
             // This block of code aims to make sure touchEvent is always dispatched from the element that is being pointed at
-            if (e instanceof TouchEvent) {
+            if (e && 'touches' in e) {
               const currentTarget = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY)
 
               if (currentTarget &&
