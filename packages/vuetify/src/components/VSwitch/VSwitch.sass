@@ -1,26 +1,30 @@
-@import './_variables.scss'
+@forward './variables'
+@use 'sass:map'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
 
-// Theme
-+theme(v-input--switch) using ($material)
-  .v-input--switch__thumb
-    color: map-deep-get($material, 'selection-controls', 'thumb', 'inactive')
+// .v-switch
+//   .v-selection-control__input::before,
+//   .v-ripple__container
+//     transform: translateX(-25%)
 
-  .v-input--switch__track
-    color: map-deep-get($material, 'selection-controls', 'track', 'inactive')
+//   &__thumb
+//     transform: translateX(-50%)
 
-  &.v-input--is-disabled:not(.v-input--is-dirty)
-    .v-input--switch__thumb
-      color: map-deep-get($material, 'selection-controls', 'thumb', 'disabled') !important
+//   .v-selection-control--dirty
+//     .v-selection-control__input::before,
+//     .v-ripple__container
+//       transform: translateX(25%)
 
-    .v-input--switch__track
-      color: map-deep-get($material, 'selection-controls', 'track', 'disabled') !important
+//     .v-switch__thumb
+//       transform: translateX(50%)
 
-.v-input--switch
+.v-switch
   &__track,
   &__thumb
     background-color: currentColor
     pointer-events: none
-    transition: inherit
 
   &__track
     border-radius: $switch-track-border-radius
@@ -34,99 +38,109 @@
 
   &__thumb
     border-radius: 50%
-    top: $switch-thumb-top
     height: $switch-thumb-height
     position: relative
     width: $switch-thumb-width
     display: flex
     justify-content: center
     align-items: center
-    transition: $primary-transition
 
-  .v-input--selection-controls__input
-    width: $switch-width
+    +tools.elevation(4)
 
-  .v-input--selection-controls__ripple
-    top: $switch-ripple-top
+.v-switch
+  .v-selection-control__input
+    border-radius: 50%
+    transition: .15s settings.$standard-easing
+    transform: translateX(calc(#{var(--v-selection-control-size)} * -1))
 
-  &.v-input--dense
-    .v-input--switch__thumb
-      width: $switch-thumb-dense-width
-      height: $switch-thumb-dense-height
+  .v-selection-control--dirty
+    .v-selection-control__input
+      transform: translateX(calc(#{var(--v-selection-control-size)}))
 
-    .v-input--switch__track
-      height: $switch-track-dense-height
-      width: $switch-track-dense-width
+//   .v-input--selection-controls__input
+//     width: $switch-width
 
-    &.v-input--switch--inset
-      .v-input--switch__track
-        height: $switch-track-dense-inset-height
-        width: $switch-track-dense-inset-width
-        top: $switch-track-dense-top
-        left: -3px
+//   .v-input--selection-controls__ripple
+//     top: $switch-ripple-top
 
-    .v-input--selection-controls__ripple
-      top: $switch-ripple-dense-top
+//   &.v-input--dense
+//     .v-input--switch__thumb
+//       width: $switch-thumb-dense-width
+//       height: $switch-thumb-dense-height
 
-  &.v-input--is-dirty
-    &.v-input--is-disabled
-      opacity: $switch-disabled-opacity
+//     .v-input--switch__track
+//       height: $switch-track-dense-height
+//       width: $switch-track-dense-width
 
-  +ltr()
-    .v-input--selection-controls__ripple
-      left: $switch-ripple-x
+//     &.v-input--switch--inset
+//       .v-input--switch__track
+//         height: $switch-track-dense-inset-height
+//         width: $switch-track-dense-inset-width
+//         top: $switch-track-dense-top
+//         left: -3px
 
-    &.v-input--dense
-      .v-input--selection-controls__ripple
-        left: $switch-ripple-dense-x
+//     .v-input--selection-controls__ripple
+//       top: $switch-ripple-dense-top
 
-    &.v-input--is-dirty
-      .v-input--selection-controls__ripple,
-      .v-input--switch__thumb
-        transform: translate($switch-dirty-offset-x, 0)
+//   &.v-input--is-dirty
+//     &.v-input--is-disabled
+//       opacity: $switch-disabled-opacity
 
-  +rtl()
-    .v-input--selection-controls__ripple
-      right: $switch-ripple-x
+//   +ltr()
+//     .v-input--selection-controls__ripple
+//       left: $switch-ripple-x
 
-    &.v-input--dense
-      .v-input--selection-controls__ripple
-        right: $switch-ripple-dense-x
+//     &.v-input--dense
+//       .v-input--selection-controls__ripple
+//         left: $switch-ripple-dense-x
 
-    &.v-input--is-dirty
-      .v-input--selection-controls__ripple,
-      .v-input--switch__thumb
-        transform: translate(-$switch-dirty-offset-x, 0)
+//     &.v-input--is-dirty
+//       .v-input--selection-controls__ripple,
+//       .v-input--switch__thumb
+//         transform: translate($switch-dirty-offset-x, 0)
 
-  &:not(&--flat):not(&--inset)
-    .v-input--switch__thumb
-      +elevation($switch-thumb-elevation)
+//   +rtl()
+//     .v-input--selection-controls__ripple
+//       right: $switch-ripple-x
 
-  &--inset
-    .v-input--switch__track,
-    .v-input--selection-controls__input
-      width: $switch-track-inset-width
+//     &.v-input--dense
+//       .v-input--selection-controls__ripple
+//         right: $switch-ripple-dense-x
 
-    .v-input--switch__track
-      border-radius: $switch-track-inset-border-radius
-      height: $switch-track-inset-height
-      left: -4px
-      opacity: $switch-track-inset-opacity
-      top: calc(50% - #{$switch-track-inset-height * .5})
+//     &.v-input--is-dirty
+//       .v-input--selection-controls__ripple,
+//       .v-input--switch__thumb
+//         transform: translate(-$switch-dirty-offset-x, 0)
 
-    .v-input--selection-controls__ripple,
-    .v-input--switch__thumb
-      +ltr()
-        transform: translate(0, 0) !important
+//   &:not(&--flat):not(&--inset)
+//     .v-input--switch__thumb
+//       +elevation($switch-thumb-elevation)
 
-      +rtl()
-        transform: translate(-6px, 0) !important
+//   &--inset
+//     .v-input--switch__track,
+//     .v-input--selection-controls__input
+//       width: $switch-track-inset-width
 
-    &.v-input--is-dirty
-      .v-input--selection-controls__ripple,
-      .v-input--switch__thumb
-        +ltr()
-          transform: translate($switch-dirty-offset-x, 0) !important
+//     .v-input--switch__track
+//       border-radius: $switch-track-inset-border-radius
+//       height: $switch-track-inset-height
+//       left: -4px
+//       opacity: $switch-track-inset-opacity
+//       top: calc(50% - #{$switch-track-inset-height * .5})
 
-        +rtl()
-          transform: translate(-$switch-dirty-offset-x - 6px, 0) !important
+//     .v-input--selection-controls__ripple,
+//     .v-input--switch__thumb
+//       +ltr()
+//         transform: translate(0, 0) !important
+
+//       +rtl()
+//         transform: translate(-6px, 0) !important
+
+//     &.v-input--is-dirty
+//       .v-input--selection-controls__ripple,
+//       .v-input--switch__thumb
+//         +ltr()
+//           transform: translate($switch-dirty-offset-x, 0) !important
+
+//         +rtl()
+//           transform: translate(-$switch-dirty-offset-x - 6px, 0) !important
