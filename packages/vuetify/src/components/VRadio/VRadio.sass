@@ -4,4 +4,10 @@
 @use './variables' as *
 
 .v-radio
-  //
+  &.v-selection-control--disabled
+    opacity: var(--v-disabled-opacity)
+
+  &.v-selection-control--error
+    &,
+    .v-field-label
+      color: rgb(var(--v-theme-error))

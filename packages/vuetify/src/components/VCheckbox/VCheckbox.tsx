@@ -8,7 +8,7 @@ import { filterInputAttrs } from '@/components/VInput/VInput'
 
 // Utility
 import { computed, defineComponent, ref } from 'vue'
-import { pick, useRender } from '@/util'
+import { useRender } from '@/util'
 
 export const VCheckbox = defineComponent({
   name: 'VCheckbox',

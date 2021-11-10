@@ -11,14 +11,25 @@
   $root: &
 
   align-items: center
-  color: $selection-control-color
   contain: layout
   display: flex
   flex: 1 0
   grid-area: control
-  // height: var(--v-input-control-height)
   position: relative
   user-select: none
+
+  &:not(.v-selection-control--dirty):not(.v-selection-control--error)
+    .v-icon
+      color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+
+  &--disabled
+    pointer-events: none
+
+  &--error
+    &,
+    .v-field-label,
+    .v-icon
+      color: rgb(var(--v-theme-error))
 
   + .v-input__details
     padding: 0 12px

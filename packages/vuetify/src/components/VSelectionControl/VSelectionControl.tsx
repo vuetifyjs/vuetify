@@ -20,7 +20,7 @@ import { computed, inject, ref } from 'vue'
 import { genericComponent, getUid, SUPPORTS_FOCUS_VISIBLE, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, InjectionKey, WritableComputedRef } from 'vue'
+import type { ComputedRef, InjectionKey, Ref, WritableComputedRef } from 'vue'
 import type { MakeSlots } from '@/util'
 
 interface VSelectionGroupContext {
@@ -36,6 +36,7 @@ export type SelectionControlSlot = {
   model: WritableComputedRef<any>
   isReadonly: ComputedRef<boolean>
   isDisabled: ComputedRef<boolean>
+  textColorClasses: Ref<string[]>
   props: {
     onBlur: (e: Event) => void
     onFocus: (e: FocusEvent) => void
@@ -87,11 +88,11 @@ export const VSelectionControl = genericComponent<new <T>() => {
   setup (props, { attrs, slots }) {
     const group = inject(VSelectionGroupSymbol, {})
     const { densityClasses } = useDensity(props, 'v-selection-control')
-    const { isDisabled, isReadonly, isValid, validationClasses } = useValidation(props, 'v-input')
+    const { isDisabled, isReadonly, isValid, validationClasses } = useValidation(props, 'v-selection-control')
     const model = useProxiedModel(props, 'modelValue')
     const uid = getUid()
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
-      return isValid.value || model.value ? props.color : undefined
+      return model.value && isValid.value !== false ? props.color : undefined
     }))
     const icon = computed(() => {
       if (
@@ -141,14 +142,16 @@ export const VSelectionControl = genericComponent<new <T>() => {
               'v-selection-control--focus-visible': isFocusVisible.value,
             },
             densityClasses.value,
+            textColorClasses.value,
             validationClasses.value,
           ]}
           { ...attrs }
         >
+          { slots.default?.() }
+
           <div
             class={[
               'v-selection-control__input',
-              textColorClasses.value,
             ]}
             style={ textColorStyles.value }
             v-ripple={ props.ripple && [
@@ -175,6 +178,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
               model,
               isReadonly,
               isDisabled,
+              textColorClasses,
               props: {
                 onFocus,
                 onBlur,
@@ -182,8 +186,6 @@ export const VSelectionControl = genericComponent<new <T>() => {
               },
             }) }
           </div>
-
-          { slots.default?.() }
 
           <VFieldLabel
             for={ id.value }

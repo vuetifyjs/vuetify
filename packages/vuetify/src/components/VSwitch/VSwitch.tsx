@@ -52,7 +52,14 @@ export const VSwitch = defineComponent({
                 { ...inputAttrs }
                 v-slots={{
                   default: () => (<div class="v-switch__track"></div>),
-                  input: () => (<div class="v-switch__thumb"></div>),
+                  input: ({ textColorClasses }) => (
+                    <div
+                      class={[
+                        'v-switch__thumb',
+                        textColorClasses.value,
+                      ]}
+                    />
+                  ),
                 }}
               />
             ),

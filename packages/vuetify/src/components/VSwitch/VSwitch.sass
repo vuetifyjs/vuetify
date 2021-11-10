@@ -4,48 +4,40 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-// .v-switch
-//   .v-selection-control__input::before,
-//   .v-ripple__container
-//     transform: translateX(-25%)
-
-//   &__thumb
-//     transform: translateX(-50%)
-
-//   .v-selection-control--dirty
-//     .v-selection-control__input::before,
-//     .v-ripple__container
-//       transform: translateX(25%)
-
-//     .v-switch__thumb
-//       transform: translateX(50%)
-
 .v-switch
-  &__track,
-  &__thumb
-    background-color: currentColor
-    pointer-events: none
+  .v-field-label
+    margin-inline-start: 10px
 
-  &__track
-    border-radius: $switch-track-border-radius
-    width: $switch-track-width
-    height: $switch-track-height
-    left: $switch-track-x
-    position: absolute
-    opacity: $switch-track-opacity
-    right: $switch-track-x
-    top: $switch-track-top
+.v-switch__track,
+.v-switch__thumb
+  background-color: currentColor
+  transition: none
 
-  &__thumb
-    border-radius: 50%
-    height: $switch-thumb-height
-    position: relative
-    width: $switch-thumb-width
-    display: flex
-    justify-content: center
-    align-items: center
+  .v-selection-control--error &
+    background-color: rgb(var(--v-theme-error))
 
-    +tools.elevation(4)
+.v-switch__track
+  border-radius: $switch-track-border-radius
+  height: $switch-track-height
+  left: $switch-track-x
+  opacity: $switch-track-opacity
+  pointer-events: none
+  position: absolute
+  right: $switch-track-x
+  top: 50%
+  transform: translateY(-50%)
+  width: $switch-track-width
+
+.v-switch__thumb
+  align-items: center
+  border-radius: 50%
+  color: rgb(var(--v-theme-surface))
+  display: flex
+  height: $switch-thumb-height
+  justify-content: center
+  width: $switch-thumb-width
+
+  +tools.elevation(4)
 
 .v-switch
   .v-selection-control__input
