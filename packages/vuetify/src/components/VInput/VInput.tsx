@@ -13,7 +13,7 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import type { PropType } from 'vue'
 
 export function filterInputAttrs (attrs: Record<string, unknown>) {
-  return pick(attrs, ['class', 'style', 'id', 'disabled', /^data-/])
+  return pick(attrs, ['class', 'style', 'id', /^data-/])
 }
 
 export const VInput = defineComponent({
