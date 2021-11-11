@@ -104,9 +104,9 @@ export const ClickOutside = {
     if (!el._clickOutside) return
 
     handleShadow(el, (app: HTMLElement) => {
-      if (!app || !el._clickOutside) return
+      if (!app || !el._clickOutside?.[vnode.context!._uid]) return
 
-      const { onClick, onMousedown } = el._clickOutside[vnode.context!._uid]
+      const { onClick, onMousedown } = el._clickOutside[vnode.context!._uid]!
 
       app.removeEventListener('click', onClick, true)
       app.removeEventListener('mousedown', onMousedown, true)

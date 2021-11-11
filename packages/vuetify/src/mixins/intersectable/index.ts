@@ -11,6 +11,10 @@ export default function intersectable (options: { onVisible: string[] }) {
   return Vue.extend({
     name: 'intersectable',
 
+    data: () => ({
+      isIntersecting: false,
+    }),
+
     mounted () {
       Intersect.inserted(this.$el as HTMLElement, {
         name: 'intersect',
@@ -27,6 +31,8 @@ export default function intersectable (options: { onVisible: string[] }) {
 
     methods: {
       onObserve (entries: IntersectionObserverEntry[], observer: IntersectionObserver, isIntersecting: boolean) {
+        this.isIntersecting = isIntersecting
+
         if (!isIntersecting) return
 
         for (let i = 0, length = options.onVisible.length; i < length; i++) {

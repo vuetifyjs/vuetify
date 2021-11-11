@@ -24,9 +24,9 @@ function inserted (el: HTMLElement, binding: ResizeVNodeDirective, vnode: VNode)
 }
 
 function unbind (el: HTMLElement, binding: ResizeVNodeDirective, vnode: VNode) {
-  if (!el._onResize) return
+  if (!el._onResize?.[vnode.context!._uid]) return
 
-  const { callback, options } = el._onResize[vnode.context!._uid]
+  const { callback, options } = el._onResize[vnode.context!._uid]!
 
   window.removeEventListener('resize', callback, options)
 

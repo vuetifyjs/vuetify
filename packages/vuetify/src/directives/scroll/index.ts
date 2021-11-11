@@ -39,7 +39,7 @@ function inserted (el: HTMLElement, binding: ScrollVNodeDirective, vnode: VNode)
 function unbind (el: HTMLElement, binding: ScrollVNodeDirective, vnode: VNode) {
   if (!el._onScroll?.[vnode.context!._uid]) return
 
-  const { handler, options, target = el } = el._onScroll[vnode.context!._uid]
+  const { handler, options, target = el } = el._onScroll[vnode.context!._uid]!
 
   target.removeEventListener('scroll', handler, options)
   delete el._onScroll[vnode.context!._uid]

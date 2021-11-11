@@ -391,7 +391,7 @@ export default baseMixins.extend({
     getTiles () {
       if (!this.$refs.content) return
 
-      this.tiles = Array.from(this.$refs.content.querySelectorAll('.v-list-item'))
+      this.tiles = Array.from(this.$refs.content.querySelectorAll('.v-list-item, .v-divider, .v-subheader'))
     },
     mouseEnterHandler () {
       this.runDelay('open', () => {
