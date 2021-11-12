@@ -1,12 +1,11 @@
 @forward './variables'
-@use 'sass:map'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
 
 .v-switch
-  .v-field-label
-    margin-inline-start: 10px
+  .v-label
+    margin-inline-start: $switch-label-margin-inline-start
 
 .v-switch__track,
 .v-switch__thumb
@@ -14,7 +13,7 @@
   transition: none
 
   .v-selection-control--error &
-    background-color: rgb(var(--v-theme-error))
+    background-color: $switch-error-background-color
 
 .v-switch__track
   border-radius: $switch-track-border-radius
@@ -37,17 +36,17 @@
   justify-content: center
   width: $switch-thumb-width
 
-  +tools.elevation(4)
+  @include tools.elevation(4)
 
 .v-switch
   .v-selection-control__input
     border-radius: 50%
     transition: .15s settings.$standard-easing
-    transform: translateX(calc(#{var(--v-selection-control-size)} * -1))
+    transform: $switch-control-input-transform
 
   .v-selection-control--dirty
     .v-selection-control__input
-      transform: translateX(calc(#{var(--v-selection-control-size)}))
+      transform: $switch-dirty-control-input-transform
 
 //   .v-input--selection-controls__input
 //     width: $switch-width

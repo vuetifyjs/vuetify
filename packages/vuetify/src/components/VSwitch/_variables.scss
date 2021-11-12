@@ -1,5 +1,9 @@
+$switch-control-input-transform: translateX(calc(#{var(--v-selection-control-size)} * -1)) !default;
+$switch-dirty-control-input-transform: translateX(calc(#{var(--v-selection-control-size)})) !default;
 $switch-dirty-offset-x: 20px !default;
 $switch-disabled-opacity: .6 !default;
+$switch-error-background-color: rgb(var(--v-theme-error)) !default;
+$switch-label-margin-inline-start: 10px !default;
 $switch-ripple-dense-top: calc(50% - 22px) !default;
 $switch-ripple-dense-x: -12px !default;
 $switch-ripple-top: calc(50% - 24px) !default;

@@ -1,14 +1,25 @@
-@import './_variables.scss'
-
-// Theme
-+theme(v-label) using ($material)
-  color: map-deep-get($material, 'text', 'secondary')
-
-  &--is-disabled
-    color: map-deep-get($material, 'text', 'disabled')
+@forward './variables'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-label
+  color: $label-color
+  contain: layout paint
+  cursor: pointer
+  display: $label-display
   font-size: $label-font-size
-  line-height: $label-line-height
-  min-height: $label-min-height
-  transition: .3s map-get($transition, 'swing')
+  letter-spacing: $label-letter-spacing
+  min-width: 0
+  overflow: hidden
+  pointer-events: auto
+  text-overflow: ellipsis
+  transition: $label-transition
+  white-space: nowrap
+
+  &--disabled
+    color: $label-disabled-color
+    pointer-events: none
+
+  &--error
+    color: $label-error-color

@@ -3,7 +3,7 @@ import './VSelectionControl.sass'
 
 // Components
 import { VIcon } from '@/components/VIcon'
-import { VFieldLabel } from '@/components/VField/VFieldLabel'
+import { VLabel } from '@/components/VLabel'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
@@ -187,12 +187,13 @@ export const VSelectionControl = genericComponent<new <T>() => {
             }) }
           </div>
 
-          <VFieldLabel
+          <VLabel
+            disabled={ isDisabled.value }
+            error={ isValid.value === false }
             for={ id.value }
-            style="position: static; pointer-events: auto; cursor: pointer;"
           >
             { label }
-          </VFieldLabel>
+          </VLabel>
         </div>
       )
     })

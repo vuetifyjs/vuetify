@@ -155,24 +155,12 @@
 /* endregion */
 /* region LABEL */
 .v-field-label
-  color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
-  contain: layout paint
-  display: inline-block
-  font-size: $field-label-font-size
-  letter-spacing: $field-letter-spacing
-  min-width: 0
-  max-width: calc(100% - var(--v-field-padding-before) - var(--v-field-padding-after))
-  overflow: hidden
-  pointer-events: none
-  position: absolute
-  text-overflow: ellipsis
-  transform-origin: left center
-  transition: $field-transition-timing
-  transition-property: opacity, transform
-  white-space: nowrap
-
-  margin-inline-start: var(--v-field-padding-before)
   margin-inline-end: var(--v-field-padding-after)
+  margin-inline-start: var(--v-field-padding-before)
+  max-width: calc(100% - var(--v-field-padding-before) - var(--v-field-padding-after))
+  position: absolute
+  transform-origin: left center
+  transition-property: opacity, transform
 
   .v-field--active &
     visibility: hidden
