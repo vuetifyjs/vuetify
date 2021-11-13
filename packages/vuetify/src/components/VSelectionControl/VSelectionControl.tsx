@@ -20,17 +20,9 @@ import { computed, inject, ref } from 'vue'
 import { genericComponent, getUid, SUPPORTS_FOCUS_VISIBLE, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, InjectionKey, Ref, WritableComputedRef } from 'vue'
+import type { ComputedRef, Ref, WritableComputedRef } from 'vue'
 import type { MakeSlots } from '@/util'
-
-interface VSelectionGroupContext {
-  name?: string
-  onIcon?: string
-  offIcon?: string
-  type?: string
-}
-
-export const VSelectionGroupSymbol: InjectionKey<VSelectionGroupContext> = Symbol.for('vuetify:selection-group')
+import { VSelectionControlGroupSymbol } from '../VSelectionControlGroup/VSelectionControlGroup'
 
 export type SelectionControlSlot = {
   model: WritableComputedRef<any>
@@ -86,10 +78,23 @@ export const VSelectionControl = genericComponent<new <T>() => {
   },
 
   setup (props, { attrs, slots }) {
-    const group = inject(VSelectionGroupSymbol, {})
+    const group = inject(VSelectionControlGroupSymbol)
     const { densityClasses } = useDensity(props, 'v-selection-control')
     const { isDisabled, isReadonly, isValid, validationClasses } = useValidation(props, 'v-selection-control')
-    const model = useProxiedModel(props, 'modelValue')
+    const modelValue = useProxiedModel(props, 'modelValue')
+    const model = computed({
+      get () {
+        return group?.modelValue?.value ?? modelValue.value
+      },
+      set (val: any) {
+        if (group?.modelValue) {
+          group.modelValue.value = val
+        } else {
+          modelValue.value = val
+        }
+      },
+    })
+
     const uid = getUid()
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
       return model.value && isValid.value !== false ? props.color : undefined
@@ -100,9 +105,9 @@ export const VSelectionControl = genericComponent<new <T>() => {
           model.value === props.value ||
           props.value == null
         )
-      ) return group?.onIcon ?? props.onIcon
+      ) return group?.onIcon?.value ?? props.onIcon
 
-      return group?.offIcon ?? props.offIcon
+      return group?.offIcon?.value ?? props.offIcon
     })
 
     const id = computed(() => props.id || `input-${uid}`)
@@ -169,9 +174,9 @@ export const VSelectionControl = genericComponent<new <T>() => {
               onBlur={ onBlur }
               onFocus={ onFocus }
               readonly={ isReadonly.value }
-              type={ group?.type ?? props.type }
+              type={ group?.type?.value ?? props.type }
               value={ props.value }
-              name={ group?.name ?? props.name }
+              name={ group?.name?.value ?? props.name }
             />
 
             { slots.input?.({
