@@ -62,6 +62,13 @@
         @at-root #{selector.append(&, $root)}
           --v-field-padding-top: #{$field-input-padding-top + $modifier * $field-label-floating-scale}
 
+  &--variant-filled,
+  &--variant-outlined,
+  &--variant-underlined
+    &.v-field--focused
+      .v-label
+        color: inherit
+
 /* endregion */
 /* region CONTROL */
 .v-field__control
@@ -155,6 +162,7 @@
 /* endregion */
 /* region LABEL */
 .v-field-label
+  contain: layout paint
   margin-inline-end: var(--v-field-padding-after)
   margin-inline-start: var(--v-field-padding-before)
   max-width: calc(100% - var(--v-field-padding-before) - var(--v-field-padding-after))

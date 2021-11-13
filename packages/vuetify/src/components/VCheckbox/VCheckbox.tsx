@@ -2,12 +2,15 @@
 import './VCheckbox.sass'
 
 // Components
-import { VSelectionControl } from '@/components/VSelectionControl'
-import { VInput } from '@/components/VInput'
 import { filterInputAttrs } from '@/components/VInput/VInput'
+import { VInput } from '@/components/VInput'
+import { VSelectionControl } from '@/components/VSelectionControl'
+
+// Composables
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useRender } from '@/util'
 
 export const VCheckbox = defineComponent({
@@ -36,11 +39,13 @@ export const VCheckbox = defineComponent({
   },
 
   emits: {
+    'update:indeterminate': (val: any) => true,
     'update:modelValue': (val: any) => true,
   },
 
   setup (props, { attrs, slots }) {
-    const indeterminate = ref(props.indeterminate)
+    const model = useProxiedModel(props, 'modelValue')
+    const indeterminate = useProxiedModel(props, 'indeterminate')
 
     useRender(() => {
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
@@ -66,10 +71,10 @@ export const VCheckbox = defineComponent({
             default: () => (
               <VSelectionControl
                 type="checkbox"
-                onChange={ onChange }
-                model-value={ props.modelValue }
-                onIcon={ props.onIcon }
+                modelValue={ model.value }
+                onUpdate:modelValue={ onChange }
                 offIcon={ offIcon.value }
+                onIcon={ props.onIcon }
                 { ...inputAttrs }
               />
             ),
