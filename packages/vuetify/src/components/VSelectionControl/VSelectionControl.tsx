@@ -78,7 +78,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
   },
 
   setup (props, { attrs, slots }) {
-    const group = inject(VSelectionControlGroupSymbol)
+    const group = inject(VSelectionControlGroupSymbol, undefined)
     const { densityClasses } = useDensity(props, 'v-selection-control')
     const { isDisabled, isReadonly, isValid, validationClasses } = useValidation(props, 'v-selection-control')
     const modelValue = useProxiedModel(props, 'modelValue')
