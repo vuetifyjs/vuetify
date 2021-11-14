@@ -38,14 +38,14 @@
   @at-root
     @include tools.density('v-selection-control', $selection-control-density) using ($modifier)
       .v-selection-control__input
-        min-width: $selection-control-size + $modifier
+        width: $selection-control-size + $modifier
         height: $selection-control-size + $modifier
         --v-selection-control-size: #{$selection-control-size + $modifier} / 4
 
 .v-selection-control__input
   align-items: center
   display: flex
-  flex: 0 1
+  flex: none
   justify-content: center
   position: relative
   border-radius: 50%
