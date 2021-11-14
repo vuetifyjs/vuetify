@@ -35,6 +35,7 @@
   height: $switch-thumb-height
   justify-content: center
   width: $switch-thumb-width
+  pointer-events: none
 
   @include tools.elevation(4)
 
@@ -42,11 +43,11 @@
   .v-selection-control__input
     border-radius: 50%
     transition: $switch-control-input-transition
-    transform: $switch-control-input-transform
+    transform: translateX($switch-track-width * -.25)
 
   .v-selection-control--dirty
     .v-selection-control__input
-      transform: $switch-dirty-control-input-transform
+      transform: translateX($switch-track-width * .25)
 
 //   .v-input--selection-controls__input
 //     width: $switch-width

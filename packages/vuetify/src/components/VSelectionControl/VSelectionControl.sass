@@ -7,9 +7,6 @@
 
 .v-selection-control
   border: thin solid red
-
-  $root: &
-
   align-items: center
   contain: layout
   display: flex
@@ -18,9 +15,12 @@
   position: relative
   user-select: none
 
-  &:not(.v-selection-control--dirty):not(.v-selection-control--error)
+  .v-icon
+    color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+
+  &--dirty
     .v-icon
-      color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+      color: inherit
 
   &--disabled
     opacity: var(--v-disabled-opacity)
@@ -37,12 +37,11 @@
 
   @at-root
     @include tools.density('v-selection-control', $selection-control-density) using ($modifier)
-      .v-selection-control__input
-        width: $selection-control-size + $modifier
-        height: $selection-control-size + $modifier
-        --v-selection-control-size: #{$selection-control-size + $modifier} / 4
+      --v-selection-control-size: #{$selection-control-size + $modifier}
 
 .v-selection-control__input
+  width: var(--v-selection-control-size)
+  height: var(--v-selection-control-size)
   align-items: center
   display: flex
   flex: none

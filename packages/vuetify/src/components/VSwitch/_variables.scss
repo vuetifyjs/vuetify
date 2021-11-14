@@ -1,8 +1,6 @@
 @use '../../styles/settings';
 
-$switch-control-input-transform: translateX(calc(#{var(--v-selection-control-size)} * -1)) !default;
 $switch-control-input-transition: .15s transform settings.$standard-easing !default;
-$switch-dirty-control-input-transform: translateX(calc(#{var(--v-selection-control-size)})) !default;
 $switch-dirty-offset-x: 20px !default;
 $switch-disabled-opacity: .6 !default;
 $switch-error-background-color: rgb(var(--v-theme-error)) !default;
