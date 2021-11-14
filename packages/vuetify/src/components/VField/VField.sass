@@ -166,8 +166,10 @@
   margin-inline-end: var(--v-field-padding-after)
   margin-inline-start: var(--v-field-padding-before)
   max-width: calc(100% - var(--v-field-padding-before) - var(--v-field-padding-after))
+  pointer-events: none
   position: absolute
   transform-origin: left center
+  transition: $field-transition-timing
   transition-property: opacity, transform
 
   .v-field--active &
