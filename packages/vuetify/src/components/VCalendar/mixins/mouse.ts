@@ -69,10 +69,10 @@ export default Vue.extend({
 
               const eventTargetClasses = (e.currentTarget as HTMLElement)?.className.split(classSeparator)
               const currentTargets = document.elementsFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY)
-              const currentTarget = currentTargets.find(t => {
-                // Check if two html elements have the same class
-                return t.className.split(classSeparator).some(c => eventTargetClasses.includes(c))
-              })
+
+              // Get "the same kind" current hovering target by checking
+              // If element has the same class of initial touch start element (which has touch event listener registered)
+              const currentTarget = currentTargets.find(t => t.className.split(classSeparator).some(c => eventTargetClasses.includes(c)))
 
               if (currentTarget &&
                 !(e.target as HTMLElement)?.isSameNode(currentTarget)
