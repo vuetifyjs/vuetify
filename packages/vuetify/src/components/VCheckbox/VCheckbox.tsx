@@ -71,7 +71,7 @@ export const VCheckbox = defineComponent({
             default: () => (
               <VSelectionControl
                 type="checkbox"
-                modelValue={ model.value }
+                v-model={ model.value }
                 onUpdate:modelValue={ onChange }
                 offIcon={ offIcon.value }
                 onIcon={ props.onIcon }

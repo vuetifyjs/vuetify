@@ -25,14 +25,6 @@ export const VSwitch = defineComponent({
       type: Boolean,
       default: false,
     },
-    modelValue: {
-      type: null,
-      default: undefined as any,
-    },
-  },
-
-  emits: {
-    'update:modelValue': (val: any) => true,
   },
 
   setup (props, { attrs, slots }) {
@@ -48,7 +40,6 @@ export const VSwitch = defineComponent({
             default: () => (
               <VSelectionControl
                 type="checkbox"
-                model-value={ props.modelValue }
                 { ...inputAttrs }
                 v-slots={{
                   default: () => (<div class="v-switch__track"></div>),
