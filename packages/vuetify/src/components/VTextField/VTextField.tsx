@@ -162,7 +162,7 @@ export const VTextField = defineComponent({
                 </>
               )
             },
-            details: hasCounter ? ({ isFocused }) => (
+            details: hasCounter && (({ isFocused }) => (
               <>
                 <span />
 
@@ -173,7 +173,7 @@ export const VTextField = defineComponent({
                   v-slots={ slots.counter }
                 />
               </>
-            ) : undefined,
+            )),
           }}
         />
       )

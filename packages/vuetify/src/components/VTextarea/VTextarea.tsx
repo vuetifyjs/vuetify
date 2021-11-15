@@ -225,7 +225,7 @@ export const VTextarea = defineComponent({
                 </>
               )
             },
-            details: hasCounter ? ({ isFocused }) => (
+            details: hasCounter && (({ isFocused }) => (
               <>
                 <span />
 
@@ -236,7 +236,7 @@ export const VTextarea = defineComponent({
                   v-slots={ slots.counter }
                 />
               </>
-            ) : undefined,
+            )),
           }}
         />
       )
