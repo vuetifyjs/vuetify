@@ -16,10 +16,10 @@
   "dependencies": {
     "deepmerge": "^4.0.0",
     "rimraf": "^3.0.2",
-    "vue": "^3.2.19",
+    "vue": "^3.2.22",
     "vuetify": "^3.0.0-alpha.11"
   },
   "devDependencies": {
-    "@babel/node": "^7.15.4"
+    "@babel/node": "^7.16.0"
   }
 }

@@ -110,10 +110,7 @@ module.exports = {
         'vue/html-closing-bracket-spacing': 'error',
         'vue/max-attributes-per-line': ['error', {
           singleline: 5,
-          multiline: {
-            max: 1,
-            allowFirstLine: false,
-          },
+          multiline: 1,
         }],
         'vue/valid-v-on': 'off', // This rule doesn't allow empty event listeners
         'vue/no-v-html': 'off',
