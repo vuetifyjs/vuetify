@@ -9,32 +9,29 @@
         background: map-get($material, 'bg-color')
 
 .v-otp-input
+  display: flex
+  flex-wrap: wrap
+  flex: 1 1 auto
+  margin-right: -$otp-gutter
+  margin-left: -$otp-gutter
+
   input
     text-align: center
+
   .v-input
     margin: 0
-    padding: 0
-    .v-input__control
-      .v-input__slot
-        background: #ffffff
+    flex: 1 0 $otp-width + $otp-gutter * 2
+    max-width: 100%
+    width: 100%
+    padding: $otp-gutter
+
     &.v-otp-input--plain
       fieldset
         display: none
+
     input[type=number]::-webkit-outer-spin-button,
     input[type=number]::-webkit-inner-spin-button
       -webkit-appearance: none
       margin: 0
     input[type=number]
       -moz-appearance: textfield
-  .row-container
-    display: flex
-    flex-wrap: wrap
-    flex: 1 1 auto
-    margin-right: $otp-row-container-margin-x
-    margin-left: $otp-row-container-margin-x
-    >.col-input
-      flex-basis: 0
-      flex-grow: $otp-col-flex-grow
-      max-width: $otp-col-width
-      width: $otp-col-width
-      padding: $otp-col-padding

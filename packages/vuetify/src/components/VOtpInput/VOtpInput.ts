@@ -120,24 +120,13 @@ export default baseMixins.extend<options>().extend({
         this.genTextFieldSlot(otpIdx),
       ]
     },
-    genCol (otpIdx: number) {
-      const node = this.$createElement('div', this.setTextColor(this.validationState, {
-        staticClass: 'v-input',
-        class: this.classes,
-      }), [this.genControl(otpIdx)])
-
-      return this.$createElement('div', {
-        staticClass: 'col-input',
-      }, [
-        node,
-      ])
-    },
     genContent () {
-      const cols = Array.from({ length: +this.length }, (_, x) => this.genCol(x))
-
-      return [this.$createElement('div', {
-        staticClass: 'row-container',
-      }, cols)]
+      return Array.from({ length: +this.length }, (_, i) => {
+        return this.$createElement('div', this.setTextColor(this.validationState, {
+          staticClass: 'v-input',
+          class: this.classes,
+        }), [this.genControl(i)])
+      })
     },
     genFieldset () {
       return this.$createElement('fieldset', {
