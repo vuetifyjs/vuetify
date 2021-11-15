@@ -148,13 +148,13 @@ export const VListItem = genericComponent<new () => {
           ]}
           href={ link.href.value }
           tabindex={ isClickable ? 0 : undefined }
-          onClick={ isClickable && ((e: Event) => {
-            link.navigate?.()
+          onClick={ isClickable && ((e: MouseEvent) => {
+            link.navigate?.(e)
             props.value != null && activate(!isNestedActive.value, e)
           })}
           v-ripple={ isClickable }
         >
-          { genOverlays(!!(isClickable || isActive.value), 'v-list-item') }
+          { genOverlays(isClickable || isActive.value, 'v-list-item') }
 
           { hasPrepend && (
             slots.prepend
