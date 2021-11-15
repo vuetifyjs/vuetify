@@ -243,9 +243,9 @@ export const VField = genericComponent<new <T>() => {
           messages={ props.errorMessages?.length ? props.errorMessages : errorMessages.value }
           { ...attrs }
           v-slots={{
-            prepend: slots.prepend && (() => slots.prepend?.(slotProps.value)),
-            append: slots.append && (() => slots.append?.(slotProps.value)),
-            details: slots.details && (() => slots?.details?.(slotProps.value)),
+            prepend: slots.prepend ? () => slots.prepend?.(slotProps.value) : undefined,
+            append: slots.append ? () => slots.append?.(slotProps.value) : undefined,
+            details: slots.details ? () => slots.details?.(slotProps.value) : undefined,
           }}
         >
           <div
