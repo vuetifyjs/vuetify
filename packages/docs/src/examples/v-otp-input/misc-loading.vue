@@ -6,15 +6,12 @@
         :disabled="loading"
         @finish="onFinish"
       ></v-otp-input>
-      <div
-        v-if="loading"
-        class="fill-width position-absolute fill-height bg-block text-center pt-4"
-      >
+      <v-overlay absolute :value="loading">
         <v-progress-circular
           indeterminate
           color="primary"
         ></v-progress-circular>
-      </div>
+      </v-overlay>
     </div>
     <div>
       Expected value: <span class="font-weight-bold">{{ expectedOtp }}</span>
@@ -56,17 +53,7 @@
 </script>
 
 <style scoped>
- .fill-width {
-   width: 100%;
- }
  .position-relative {
    position: relative;
- }
- .position-absolute {
-   position: absolute;
-   top: 0;
- }
- .bg-block {
-   background: #eeeeeec2;
  }
 </style>

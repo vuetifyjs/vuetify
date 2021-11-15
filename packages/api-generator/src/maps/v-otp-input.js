@@ -2,8 +2,16 @@ module.exports = {
   'v-otp-input': {
     events: [
       {
+        name: 'input',
+        value: 'string',
+      },
+      {
         name: 'finish',
-        value: 'any',
+        value: 'string',
+      },
+      {
+        name: 'change',
+        value: 'string',
       },
     ],
   },

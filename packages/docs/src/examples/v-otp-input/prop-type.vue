@@ -3,7 +3,7 @@
     <v-otp-input
       v-model="otp"
       type="password"
-      :length="length"
+      length="5"
       dark
     ></v-otp-input>
   </div>
@@ -13,15 +13,6 @@
   export default {
     data: () => ({
       otp: '',
-      length: 5,
     }),
-    computed: {
-      isActive () {
-        return this.otp.length === this.length
-      },
-    },
   }
 </script>
-
-<style scoped>
-</style>

@@ -11,7 +11,7 @@ related:
 
 # OTP Input
 
-The OTP input, is used commonly for MFA procedure of authenticating users by a one-time password.
+The OTP input is used for MFA procedure of authenticating users by a one-time password.
 
 <entry-ad />
 
@@ -35,15 +35,15 @@ Applied dark theme, listen to value fill to affect button component.
 
 <example file="v-otp-input/prop-dark" />
 
-#### Process (@finish event) with progress spinner
+#### Finish event
 
 You can easily compose a loader to process the OTP input when completed insertion.
 
 <example file="v-otp-input/misc-loading" />
 
-#### Hidden input (type: password)
+#### Hidden input
 
-You can easily compose a loader to process the OTP input when completed insertion.
+The entered value can be hidden with `type="password"`
 
 <example file="v-otp-input/prop-type" />
 
