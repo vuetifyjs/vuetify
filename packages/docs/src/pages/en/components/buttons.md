@@ -30,7 +30,7 @@ Buttons in their simplest form contain uppercase text, a slight elevation, hover
 - [v-btn](/api/v-btn)
 - [v-btn-toggle](/api/v-btn-toggle)
 
-<api-section page="components/buttons" />
+<inline-api page="components/buttons" />
 
 ## Caveats
 

@@ -13,7 +13,6 @@ module.exports = {
     // 'plugin:import/typescript', // slow, only enable if needed
   ],
   rules: {
-    'no-var': 'error',
     'no-console': 'error',
     'no-debugger': 'error',
 

@@ -2294,15 +2294,25 @@
     npmlog "^4.1.2"
     write-file-atomic "^2.3.0"
 
+"@mdi/font@6.2.95":
+  version "6.2.95"
+  resolved "https://registry.yarnpkg.com/@mdi/font/-/font-6.2.95.tgz#7084ad939253a3d62e38f77d85f6c0c38508fbb2"
+  integrity sha512-0RKkhabkFZP3ALwKqrjhdKdhydQpoydIjX6cvjIwLyjADCsE0pG68YkGY+S3qnfdErmhS4m8adwvgrAFXp2AYQ==
+
 "@mdi/font@^5.9.55":
   version "5.9.55"
   resolved "https://registry.yarnpkg.com/@mdi/font/-/font-5.9.55.tgz#41acd50b88073ded7095fc3029d8712b6e12f38e"
   integrity sha512-jswRF6q3eq8NWpWiqct6q+6Fg/I7nUhrxYJfiEM8JJpap0wVJLQdbKtyS65GdlK7S7Ytnx3TTi/bmw+tBhkGmg==
 
-"@mdi/js@^5.9.55":
-  version "5.9.55"
-  resolved "https://registry.yarnpkg.com/@mdi/js/-/js-5.9.55.tgz#8f5bc4d924c23f30dab20545ddc768e778bbc882"
-  integrity sha512-BbeHMgeK2/vjdJIRnx12wvQ6s8xAYfvMmEAVsUx9b+7GiQGQ9Za8jpwp17dMKr9CgKRvemlAM4S7S3QOtEbp4A==
+"@mdi/js@6.2.95":
+  version "6.2.95"
+  resolved "https://registry.yarnpkg.com/@mdi/js/-/js-6.2.95.tgz#decf0f86035990248f25b0a4e246a7d152211273"
+  integrity sha512-fbD22sEBathqVSQWcxshEtzhhRNFmMnV64z6T7DClRbQ9N5axorykt3Suv2zPzLDyiqH7UhNRu0VPvPCPDNpnQ==
+
+"@mdi/svg@6.2.95":
+  version "6.2.95"
+  resolved "https://registry.yarnpkg.com/@mdi/svg/-/svg-6.2.95.tgz#a8d4d94bb88d82dd60e370ba4ccebef107022347"
+  integrity sha512-VqIqv/c7BL4hOAjStHpBaVh6k1TAvXVrUCg7dJHdnQbHHudlu0w2h3OMx/pCp0V2LaJ73oW2jRDWUyby1eo+mA==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"

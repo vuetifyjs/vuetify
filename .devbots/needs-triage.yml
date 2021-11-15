@@ -1,4 +1,0 @@
-enabled: true
-label: "S: triage"
-skip_when_has_assignee: true
-skip_when_has_milestone: true

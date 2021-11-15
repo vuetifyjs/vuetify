@@ -55,8 +55,7 @@ export function createCssTransition (
             }
 
             if (props.hideOnLeave) {
-              (el as any)._initialDisplay = el.style.display
-              el.style.display = 'none'
+              el.style.setProperty('display', 'none', 'important')
             }
           },
           onAfterLeave (el: HTMLElement) {
@@ -68,10 +67,6 @@ export function createCssTransition (
               el.style.left = left || ''
               el.style.width = width || ''
               el.style.height = height || ''
-            }
-
-            if (props.hideOnLeave && el) {
-              el.style.display = (el as any)._initialDisplay || ''
             }
           },
         }, slots.default)

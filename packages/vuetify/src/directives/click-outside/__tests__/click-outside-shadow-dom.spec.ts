@@ -15,7 +15,10 @@ function bootstrap (args?: object) {
       handler: jest.fn(),
       ...args,
     },
-  }
+    instance: {
+      $: { uid: 1 },
+    },
+  } as any
 
   let shadowClickHandler: any
   let outsideClickHandler: any
@@ -26,7 +29,7 @@ function bootstrap (args?: object) {
   document.body.appendChild(shadowHost)
   shadowRoot.appendChild(shadowEl)
 
-  jest.spyOn(window.document.body, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
+  jest.spyOn(window.document, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
     if (eventName === 'click') outsideClickHandler = eventHandler
     if (eventName === 'mousedown') outsideMousedownHandler = eventHandler
   })
@@ -36,12 +39,13 @@ function bootstrap (args?: object) {
     if (eventName === 'mousedown') shadowMousedownHandler = eventHandler
   })
 
-  jest.spyOn(window.document.body, 'removeEventListener')
+  jest.spyOn(window.document, 'removeEventListener')
   jest.spyOn(shadowRoot, 'removeEventListener')
 
-  ClickOutside.mounted(shadowEl as HTMLElement, binding as any)
+  ClickOutside.mounted(shadowEl as HTMLElement, binding)
 
   return {
+    binding,
     callback: binding.value.handler,
     shadowEl: shadowEl as HTMLElement,
     outsideEl: outsideEl as HTMLElement,
@@ -55,18 +59,18 @@ function bootstrap (args?: object) {
 
 describe('click-outside.js within the Shadow DOM', () => {
   it('should register and unregister handler outside of the shadow DOM', () => {
-    const { outsideClickHandler, shadowEl } = bootstrap()
-    expect(window.document.body.addEventListener).toHaveBeenCalledWith('click', outsideClickHandler, true)
+    const { outsideClickHandler, shadowEl, binding } = bootstrap()
+    expect(window.document.addEventListener).toHaveBeenCalledWith('click', outsideClickHandler, true)
 
-    ClickOutside.unmounted(shadowEl)
-    expect(window.document.body.removeEventListener).toHaveBeenCalledWith('click', outsideClickHandler, true)
+    ClickOutside.unmounted(shadowEl, binding)
+    expect(window.document.removeEventListener).toHaveBeenCalledWith('click', outsideClickHandler, true)
   })
 
   it('should register and unregister handler within the shadow DOM', () => {
-    const { shadowClickHandler, shadowRoot, shadowEl } = bootstrap()
+    const { shadowClickHandler, shadowRoot, shadowEl, binding } = bootstrap()
     expect(shadowRoot.addEventListener).toHaveBeenCalledWith('click', shadowClickHandler, true)
 
-    ClickOutside.unmounted(shadowEl)
+    ClickOutside.unmounted(shadowEl, binding)
     expect(shadowRoot.removeEventListener).toHaveBeenCalledWith('click', shadowClickHandler, true)
   })
 

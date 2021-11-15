@@ -25,7 +25,7 @@ Here we display an example list of actions that could be present in an applicati
 
 - [v-bottom-sheet](/api/v-bottom-sheet)
 
-<api-section page="components/bottom-sheets" />
+<inline-api page="components/bottom-sheets" />
 
 ## Examples
 

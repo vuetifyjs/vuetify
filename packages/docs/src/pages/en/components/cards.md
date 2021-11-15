@@ -31,7 +31,7 @@ related:
 * [v-card-text](/api/v-card-text/)
 * [v-card-title](/api/v-card-title/)
 
-<api-section page="components/cards" />
+<inline-api page="components/cards" />
 
 ## Functional Components
 

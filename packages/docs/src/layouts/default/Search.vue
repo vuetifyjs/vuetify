@@ -42,7 +42,7 @@
         index-name="vuetifyjs"
       >
         <ais-configure
-          :facetFilters="[`language:${locale}`]"
+          :facetFilters="[`lang:${locale}`]"
           :hitsPerPage="50"
           :query="searchString"
         />

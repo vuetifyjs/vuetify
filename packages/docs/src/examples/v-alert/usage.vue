@@ -31,9 +31,10 @@
         dense: false,
         dismissible: false,
         icon: null,
-        outlined: false,
         prominent: false,
+        outlined: false,
         text: false,
+        shaped: false,
         type: 'success',
       },
       options: {
@@ -46,7 +47,7 @@
         },
         sliders: { elevation: [0, 24] },
       },
-      tabs: ['dense', 'prominent', 'outlined', 'text'],
+      tabs: ['dense', 'prominent', 'outlined', 'text', 'shaped'],
     }),
   }
 </script>

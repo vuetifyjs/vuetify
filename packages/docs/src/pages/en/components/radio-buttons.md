@@ -26,7 +26,7 @@ Although `v-radio` can be used on its own, it is best used in conjunction with `
 - [v-radio](/api/v-radio)
 - [v-radio-group](/api/v-radio-group)
 
-<api-section page="components/radio-buttons" />
+<inline-api page="components/radio-buttons" />
 
 ## Examples
 
