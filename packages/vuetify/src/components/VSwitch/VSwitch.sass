@@ -43,8 +43,28 @@
   .v-selection-control__input
     border-radius: 50%
     transition: $switch-control-input-transition
-    transform: translateX($switch-track-width * -.25)
 
-  .v-selection-control--dirty
+  // TODO: find a better way to do this
+  .v-selection-control--density-default
     .v-selection-control__input
-      transform: translateX($switch-track-width * .25)
+      transform: translateX(-10px)
+
+    &.v-selection-control--dirty
+      .v-selection-control__input
+        transform: translateX(10px)
+
+  .v-selection-control--density-comfortable
+    .v-selection-control__input
+      transform: translateX(-8px)
+
+    &.v-selection-control--dirty
+      .v-selection-control__input
+        transform: translateX(12px)
+
+  .v-selection-control--density-compact
+    .v-selection-control__input
+      transform: translateX(-4px)
+
+    &.v-selection-control--dirty
+      .v-selection-control__input
+        transform: translateX(16px)
