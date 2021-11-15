@@ -29,6 +29,7 @@ const state = () => {
       install: null,
       notification: null,
       promotion: null,
+      jobs: null,
     },
     notifications: [],
     rtl: false,

@@ -1,5 +1,6 @@
 // Imports
 const fs = require('fs')
+const path = require('path')
 const { resolve } = require('path')
 const { startCase } = require('lodash')
 const { getApi, getCompleteApi } = require('@vuetify/api-generator')
@@ -30,7 +31,7 @@ function genApiLinks (component, header) {
   if (!links.length || !header) return ''
 
   const section = [
-    `## ${header}`,
+    `## ${header} {#links}`,
     links.join('\n'),
   ]
 
@@ -67,16 +68,32 @@ function genFooter () {
 
 const sanitize = str => str.replace(/\$/g, '')
 
+function loadMessages (locale) {
+  const prefix = path.resolve('./src/i18n/messages/')
+  const fallback = require(path.join(prefix, 'en.json'))
+
+  try {
+    const messages = require(path.join(prefix, `${locale}.json`))
+
+    return {
+      ...fallback['api-headers'],
+      ...(messages['api-headers'] || {}),
+    }
+  } catch (err) {
+    return fallback['api-headers']
+  }
+}
+
 function createMdFile (component, data, locale) {
-  const apiHeaders = getLocaleMessage(locale, m => m['api-headers'])
+  const messages = loadMessages(locale)
   let str = ''
 
   str += genHeader(component)
-  str += genApiLinks(component, apiHeaders.links)
+  str += genApiLinks(component, messages.links)
 
   for (const section of ['props', 'functions', 'events', 'slots', 'sass', 'options', 'argument', 'modifiers']) {
     if (Array.isArray(data[section]) && data[section].length) {
-      str += `## ${apiHeaders[section]} {#${section}}\n\n`
+      str += `## ${messages[section]} {#${section}}\n\n`
       str += `<api-section name="${component}" section="${section}" />\n\n`
     }
   }

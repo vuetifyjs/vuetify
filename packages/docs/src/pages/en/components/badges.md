@@ -29,7 +29,7 @@ Badges in their simplest form display to the upper right of the content that it 
 
 - [v-badge](/api/v-badge)
 
-<api-section page="components/badges" />
+<inline-api page="components/badges" />
 
 ## Examples
 

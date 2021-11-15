@@ -13,7 +13,6 @@ Vuetify is a Vue UI Library with beautifully handcrafted Material Components. No
 <br>
 <br>
 <br>
-<br>
 
 ## Project Sponsors
 

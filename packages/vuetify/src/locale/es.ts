@@ -38,7 +38,7 @@ export default {
     prev: 'Visual anterior',
     next: 'Visual siguiente',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Visual {0} de {1}',
     },
   },
   calendar: {
@@ -65,7 +65,7 @@ export default {
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Puntuación {0} de {1}',
     },
   },
 }

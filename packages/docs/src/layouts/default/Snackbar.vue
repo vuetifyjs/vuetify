@@ -3,7 +3,8 @@
     v-model="value"
     :color="snackbar.color"
     :timeout="-1"
-    top
+    bottom
+    right
   >
     <div class="d-flex">
       <span

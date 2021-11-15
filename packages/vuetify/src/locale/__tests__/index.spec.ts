@@ -9,7 +9,7 @@ describe('locale.ts', () => {
 
     expect(dir).toHaveLength(imported.length - 1) // Minus one for rtl object.
 
-    dir.forEach(filename => expect(locales[filename.replace(/\.ts$/, '').replace('-', '')]).not.toBeUndefined())
+    dir.forEach(filename => expect(locales[filename.replace(/\.ts$/, '').replace('-', '')]).toBeDefined())
   })
 
   it('should have same structure for all translations', () => {

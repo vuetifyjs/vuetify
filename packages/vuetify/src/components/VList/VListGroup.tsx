@@ -1,5 +1,5 @@
 // Components
-import { VExpandTransition } from '..'
+import { VExpandTransition } from '@/components/transitions'
 import { VListChildren } from './VListChildren'
 
 // Composables

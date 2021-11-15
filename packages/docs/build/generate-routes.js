@@ -48,18 +48,26 @@ function genDemos () {
   return paths
 }
 
-const paths = [
-  ...genRoutes(DATA_PATH_DOC_FILES, ''),
-  ...genRoutes(DATA_PATH_API_FILES, 'api/'),
-  ...genDemos(),
-]
-const routes = [{ locale: '', path: '', fullPath: '/' }]
-
-for (const locale of languages) {
-  routes.push({ locale, path: '', fullPath: `/${locale}/` })
-  for (const path of paths) {
-    routes.push({ locale, path, fullPath: `/${locale}${path}` })
+function generateRoutes (options = {}) {
+  const { excludeDemos } = options
+  const paths = [
+    ...genRoutes(DATA_PATH_DOC_FILES, ''),
+    ...genRoutes(DATA_PATH_API_FILES, 'api/'),
+  ]
+  if (!excludeDemos) {
+    paths.push(...genDemos())
   }
+
+  const routes = [{ locale: '', path: '', fullPath: '/' }]
+
+  for (const locale of languages) {
+    routes.push({ locale, path: '', fullPath: `/${locale}/` })
+    for (const path of paths) {
+      routes.push({ locale, path, fullPath: `/${locale}${path}` })
+    }
+  }
+
+  return routes
 }
 
-module.exports = routes
+module.exports = { generateRoutes }

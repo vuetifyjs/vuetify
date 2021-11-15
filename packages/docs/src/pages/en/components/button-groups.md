@@ -26,7 +26,7 @@ Toggle buttons allow you to create a styled group of buttons that can be selecte
 - [v-btn-toggle](/api/v-btn-toggle)
 - [v-btn](/api/v-btn)
 
-<api-section page="components/button-groups" />
+<inline-api page="components/button-groups" />
 
 ## Examples
 

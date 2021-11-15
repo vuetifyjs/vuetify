@@ -176,7 +176,7 @@ export const VFileInput = defineComponent({
               </>
             ),
 
-            details: hasCounter && (() => (
+            details: hasCounter ? () => (
               <>
                 <span />
 
@@ -185,7 +185,7 @@ export const VFileInput = defineComponent({
                   v-slots={ slots.counter }
                 />
               </>
-            )),
+            ) : undefined,
           }}
         />
       )
