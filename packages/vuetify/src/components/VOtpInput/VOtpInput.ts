@@ -38,17 +38,14 @@ export default baseMixins.extend<options>().extend({
 
   props: {
     length: {
-      type: Number,
+      type: [Number, String],
       default: 6,
     },
     type: {
       type: String,
       default: 'text',
     },
-    plain: {
-      type: Boolean,
-      default: false,
-    },
+    plain: Boolean,
   },
 
   data: () => ({
@@ -136,9 +133,7 @@ export default baseMixins.extend<options>().extend({
       ])
     },
     genContent () {
-      const cols = [...Array(this.length).keys()].map(x => {
-        return this.genCol(x)
-      })
+      const cols = Array.from({ length: +this.length }, (_, x) => this.genCol(x))
 
       return [this.$createElement('div', {
         staticClass: 'row-container',
@@ -237,7 +232,7 @@ export default baseMixins.extend<options>().extend({
 
       const nextIndex = otpIdx + 1
       if (value) {
-        if (nextIndex < this.length) {
+        if (nextIndex < +this.length) {
           this.changeFocus(nextIndex)
         } else {
           this.clearFocus(otpIdx)
@@ -271,7 +266,7 @@ export default baseMixins.extend<options>().extend({
       VInput.options.methods.onMouseUp.call(this, e)
     },
     onPaste (event: ClipboardEvent, index: number) {
-      const maxCursor = this.length - 1
+      const maxCursor = +this.length - 1
       const inputVal = event?.clipboardData?.getData('Text')
       const inputDataArray = inputVal?.split('') || []
       event.preventDefault()
@@ -285,7 +280,7 @@ export default baseMixins.extend<options>().extend({
       const targetFocus = Math.min(index + inputDataArray.length, maxCursor)
       this.changeFocus(targetFocus)
 
-      if (newOtp.length === this.length) { this.onCompleted(); this.clearFocus(targetFocus) }
+      if (newOtp.length === +this.length) { this.onCompleted(); this.clearFocus(targetFocus) }
     },
     applyValue (index: number, inputVal: string, next: Function) {
       const newOtp: string[] = [...this.otp]
@@ -319,12 +314,12 @@ export default baseMixins.extend<options>().extend({
         return index > 0 && this.changeFocus(index - 1)
       }
       if (eventKey === 'ArrowRight') {
-        return index + 1 < this.length && this.changeFocus(index + 1)
+        return index + 1 < +this.length && this.changeFocus(index + 1)
       }
     },
     onCompleted () {
       const rsp = this.otp.join('')
-      if (rsp.length === this.length) {
+      if (rsp.length === +this.length) {
         this.$emit('finish', rsp)
       }
     },
