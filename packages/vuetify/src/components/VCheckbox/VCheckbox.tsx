@@ -75,6 +75,7 @@ export const VCheckbox = defineComponent({
                 onUpdate:modelValue={ onChange }
                 offIcon={ offIcon.value }
                 onIcon={ props.onIcon }
+                aria-checked={ indeterminate.value ? 'mixed' : Boolean(model.value).toString() }
                 { ...inputAttrs }
               />
             ),

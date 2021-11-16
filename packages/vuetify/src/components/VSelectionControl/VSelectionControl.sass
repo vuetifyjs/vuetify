@@ -18,6 +18,10 @@
   .v-icon
     color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
 
+  .v-label
+    height: 100%
+    width: 100%
+
   &--dirty
     .v-icon
       color: inherit
@@ -31,6 +35,10 @@
     .v-field-label,
     .v-icon
       color: rgb(var(--v-theme-error))
+
+  &--inline
+    .v-label
+      width: auto
 
   + .v-input__details
     padding: 0 12px

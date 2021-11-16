@@ -9,8 +9,10 @@ import { getUid, useRender } from '@/util'
 import type { InjectionKey, Ref } from 'vue'
 
 interface VSelectionGroupContext {
+  inline: Ref<boolean>
   name: Ref<string | undefined>
   modelValue: Ref<any>
+  multiple: Ref<boolean>
   onIcon: Ref<string | undefined>
   offIcon: Ref<string | undefined>
   type: Ref<string | undefined>
@@ -23,9 +25,14 @@ export const VSelectionControlGroup = defineComponent({
 
   props: {
     id: String,
+    inline: Boolean,
     name: String,
     offIcon: String,
     onIcon: String,
+    multiple: {
+      type: Boolean,
+      default: null,
+    },
     type: String,
     modelValue: {
       type: null,
@@ -44,7 +51,9 @@ export const VSelectionControlGroup = defineComponent({
     const name = computed(() => props.name || `v-radio-group-name-${uid}`)
 
     provide(VSelectionControlGroupSymbol, {
+      inline: toRef(props, 'inline'),
       modelValue,
+      multiple: toRef(props, 'multiple'),
       name,
       offIcon: toRef(props, 'offIcon'),
       onIcon: toRef(props, 'onIcon'),
