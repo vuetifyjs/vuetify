@@ -69,13 +69,13 @@ Installing Vuetify 3 using vite can be done using vue-cli[#vue-cli]. To start, u
 
 ```bash
 # npm 6.x
-npm init @vitejs/app my-app --template vue
+npm create vite --template vue
 
 # npm 7+, extra double-dash is needed:
-npm init @vitejs/app my-app -- --template vue
+npm create vite -- --template vue
 
 # yarn
-yarn create @vitejs/app my-app --template vue
+yarn create vite --template vue
 ```
 
 Next, navigate to your project directory and add Vuetify to your project:
