@@ -34,12 +34,12 @@ Once installed, generate a project with the following command using the **vue-cl
 vue create my-app
 ```
 
-When prompted, choose `Vue 3 Preview`:
+When prompted, choose `Vue 3`:
 
 ```bash
 ? Please pick a preset:
     Default ([Vue 2] babel, eslint)
-  > Default (Vue 3 Preview) ([Vue 3] babel, eslint)
+  > Default (Vue 3) ([Vue 3] babel, eslint)
     Manually select features
 ```
 
@@ -52,15 +52,15 @@ cd my-app
 vue add vuetify
 ```
 
-Once prompted, choose `v3 (alpha)`:
+Once prompted, choose `Vuetify 3 Preview (Vuetify 3)`:
 
 ```bash
 ? Choose a preset: (Use arrow keys)
-  Default (recommended)
-  Preview (Vuetify 3 + Vite)
-  Prototype (rapid development)
-> V3 (alpha)
   Configure (advanced)
+  Default (recommended)
+  Vite Preview (Vuetify 3 + Vite)
+  Prototype (rapid development)
+> Vuetify 3 Preview (Vuetify 3)
 ```
 
 ### Vite
@@ -69,38 +69,32 @@ Installing Vuetify 3 using vite can be done using vue-cli[#vue-cli]. To start, u
 
 ```bash
 # npm 6.x
-npm init @vitejs/app my-app --template vue
+npm init vite --template vue
 
 # npm 7+, extra double-dash is needed:
-npm init @vitejs/app my-app -- --template vue
+npm init vite -- --template vue
 
 # yarn
-yarn create @vitejs/app my-app --template vue
+yarn create vite --template vue
 ```
 
 Next, navigate to your project directory and add Vuetify to your project:
 
 ```bash
-cd my-app
+cd vite-project
 vue add vuetify
 ```
 
-Once prompted, choose `Preview (Vuetify 3 + Vite)`:
+Once prompted, choose `Vite Preview (Vuetify 3 + Vite)`:
 
 ```bash
 ? Choose a preset: (Use arrow keys)
-  Default (recommended)
-> Preview (Vuetify 3 + Vite)
-  Prototype (rapid development)
-  V3 (alpha)
   Configure (advanced)
+  Default (recommended)
+> Vite Preview (Vuetify 3 + Vite)
+  Prototype (rapid development)
+  Vuetify 3 Preview (Vuetify 3)
 ```
-
-<alert type="warning">
-
-  During the vuetify cli installation there may be a warning regarding `conflicting versions for project dependency "vite"`. The cli will install the latest version of vite. Currently there is an issue with later versions of Vite. You will need to edit your `package.json` and set the Vite version to `~2.0.5` and rerun `yarn` / `npm i`.
-
-</alert>
 
 ## Usage
 
