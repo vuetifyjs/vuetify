@@ -190,43 +190,45 @@ export const VSelectionControl = genericComponent<new <T>() => {
         >
           { slots.default?.() }
 
-          <div
-            class={[
-              'v-selection-control__input',
-            ]}
-            style={ textColorStyles.value }
-            v-ripple={ props.ripple && [
-              !isDisabled.value && !isReadonly.value,
-              null,
-              ['center', 'circle'],
-            ]}
-          >
-            { icon.value && <VIcon icon={ icon.value } /> }
+          <div class="v-selection-control__wrapper">
+            <div
+              class={[
+                'v-selection-control__input',
+              ]}
+              style={ textColorStyles.value }
+              v-ripple={ props.ripple && [
+                !isDisabled.value && !isReadonly.value,
+                null,
+                ['center', 'circle'],
+              ]}
+            >
+              { icon.value && <VIcon icon={ icon.value } /> }
 
-            <input
-              v-model={ model.value }
-              disabled={ isDisabled.value }
-              id={ id.value }
-              onBlur={ onBlur }
-              onFocus={ onFocus }
-              readonly={ isReadonly.value }
-              type={ group?.type?.value ?? props.type }
-              value={ trueValue.value }
-              name={ group?.name?.value ?? props.name }
-              { ...attrs }
-            />
+              <input
+                v-model={ model.value }
+                disabled={ isDisabled.value }
+                id={ id.value }
+                onBlur={ onBlur }
+                onFocus={ onFocus }
+                readonly={ isReadonly.value }
+                type={ group?.type?.value ?? props.type }
+                value={ trueValue.value }
+                name={ group?.name?.value ?? props.name }
+                { ...attrs }
+              />
 
-            { slots.input?.({
-              model,
-              isReadonly,
-              isDisabled,
-              textColorClasses,
-              props: {
-                onFocus,
-                onBlur,
-                id: id.value,
-              },
-            }) }
+              { slots.input?.({
+                model,
+                isReadonly,
+                isDisabled,
+                textColorClasses,
+                props: {
+                  onFocus,
+                  onBlur,
+                  id: id.value,
+                },
+              }) }
+            </div>
           </div>
 
           <VLabel

@@ -39,32 +39,19 @@
 
   @include tools.elevation($switch-thumb-elevation)
 
+.v-selection-control__wrapper
+  height: 100%
+  display: inline-flex
+  align-items: center
+  position: relative
+  justify-content: center
+
 .v-switch
   .v-selection-control__input
     border-radius: 50%
     transition: $switch-control-input-transition
+    transform: translateX(-10px)
 
-  // TODO: find a better way to do this
-  .v-selection-control--density-default
+  .v-selection-control--dirty
     .v-selection-control__input
-      transform: translateX(-10px)
-
-    &.v-selection-control--dirty
-      .v-selection-control__input
-        transform: translateX(10px)
-
-  .v-selection-control--density-comfortable
-    .v-selection-control__input
-      transform: translateX(-8px)
-
-    &.v-selection-control--dirty
-      .v-selection-control__input
-        transform: translateX(12px)
-
-  .v-selection-control--density-compact
-    .v-selection-control__input
-      transform: translateX(-4px)
-
-    &.v-selection-control--dirty
-      .v-selection-control__input
-        transform: translateX(16px)
+      transform: translateX(10px)
