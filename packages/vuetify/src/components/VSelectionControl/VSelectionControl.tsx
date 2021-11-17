@@ -17,10 +17,10 @@ import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed, inject, ref } from 'vue'
-import { genericComponent, getUid, SUPPORTS_FOCUS_VISIBLE, useRender } from '@/util'
+import { deepEqual, genericComponent, getUid, SUPPORTS_FOCUS_VISIBLE, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, Ref, WritableComputedRef } from 'vue'
+import type { ComputedRef, PropType, Ref, WritableComputedRef } from 'vue'
 import type { MakeSlots } from '@/util'
 import { VSelectionControlGroupSymbol } from '../VSelectionControlGroup/VSelectionControlGroup'
 
@@ -80,6 +80,10 @@ export const VSelectionControl = genericComponent<new <T>() => {
       type: null,
       default: undefined as any,
     },
+    valueComparator: {
+      type: Function as PropType<typeof deepEqual>,
+      default: deepEqual,
+    },
 
     ...makeThemeProps(),
     ...makeDensityProps(),
@@ -95,19 +99,24 @@ export const VSelectionControl = genericComponent<new <T>() => {
     const { densityClasses } = useDensity(props, 'v-selection-control')
     const { isDisabled, isReadonly, isValid, validationClasses } = useValidation(props, 'v-selection-control')
     const modelValue = useProxiedModel(props, 'modelValue')
-    const trueValue = computed(() => props.trueValue ?? props.value ?? true)
-    const falseValue = computed(() => props.falseValue ?? false)
+    const trueValue = computed(() => (
+      props.trueValue !== undefined ? props.trueValue
+      : props.value !== undefined ? props.value
+      : true
+    ))
+    const falseValue = computed(() => props.falseValue !== undefined ? props.falseValue : false)
     const isMultiple = computed(() => (
-      (group?.multiple.value || props.multiple) ||
+      group?.multiple.value ||
+      props.multiple ||
       Array.isArray(modelValue.value)
     ))
     const model = computed({
       get () {
-        const val = (group?.modelValue?.value ?? modelValue.value)
+        const val = group ? group.modelValue.value : modelValue.value
 
         return isMultiple.value
-          ? val.includes(trueValue.value)
-          : val === trueValue.value
+          ? val.some((v: any) => props.valueComparator(v, trueValue.value))
+          : props.valueComparator(val, trueValue.value)
       },
       set (val: boolean) {
         const currentValue = val ? trueValue.value : falseValue.value
@@ -117,7 +126,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
         if (isMultiple.value) {
           newVal = val
             ? [currentValue, ...modelValue.value]
-            : modelValue.value.filter((item: any) => item !== trueValue.value)
+            : modelValue.value.filter((item: any) => !props.valueComparator(item, trueValue.value))
         }
 
         if (group?.modelValue) {
