@@ -8,8 +8,6 @@ import { useRender } from '@/util'
 export const VRadioGroup = defineComponent({
   name: 'VRadioGroup',
 
-  inheritAttrs: false,
-
   props: {
     column: {
       type: Boolean,
@@ -32,10 +30,6 @@ export const VRadioGroup = defineComponent({
       type: String,
       default: 'radio',
     },
-  },
-
-  emits: {
-    'update:modelValue': (val: any) => true,
   },
 
   setup (props, { slots }) {
