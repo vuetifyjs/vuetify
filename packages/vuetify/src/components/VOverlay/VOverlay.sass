@@ -22,7 +22,6 @@
   position: fixed
   top: 0
   z-index: $overlay-z-index
-  padding-inline-end: var(--v-scrollbar-offset)
   bottom: 0
   right: 0
 
@@ -50,3 +49,6 @@
 
 .v-overlay--contained .v-overlay__scrim
   position: absolute
+
+.v-overlay--scroll-blocked
+  padding-inline-end: var(--v-scrollbar-offset)

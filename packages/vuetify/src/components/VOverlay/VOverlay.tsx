@@ -119,6 +119,7 @@ export const VOverlay = genericComponent<new () => {
     const { dimensionStyles } = useDimension(props)
     const { isTop } = useStack(isActive)
 
+    const root = ref<HTMLElement>()
     const contentEl = ref<HTMLElement>()
     const { contentStyles, updatePosition } = usePositionStrategies(props, {
       contentEl,
@@ -126,6 +127,7 @@ export const VOverlay = genericComponent<new () => {
       isActive,
     })
     useScrollStrategies(props, {
+      root,
       contentEl,
       activatorEl,
       isActive,
@@ -169,7 +171,6 @@ export const VOverlay = genericComponent<new () => {
       }
     })
 
-    const root = ref()
     const top = ref<number>()
     watch(() => isActive.value && (props.absolute || props.contained) && teleportTarget.value == null, val => {
       if (val) {
@@ -205,7 +206,6 @@ export const VOverlay = genericComponent<new () => {
         }) }
         <Teleport
           disabled={ !teleportTarget.value }
-          ref={ root }
           to={ teleportTarget.value }
         >
           { hasContent.value && (
@@ -221,6 +221,7 @@ export const VOverlay = genericComponent<new () => {
                 rtlClasses.value,
               ]}
               style={ top.value != null ? `top: ${convertToUnit(top.value)}` : undefined }
+              ref={ root }
               {...attrs}
             >
               <Scrim

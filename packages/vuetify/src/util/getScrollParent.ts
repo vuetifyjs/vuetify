@@ -17,7 +17,7 @@ export function getScrollParents (el?: HTMLElement) {
   return elements
 }
 
-function hasScrollbar (el?: HTMLElement) {
+export function hasScrollbar (el?: Element | null) {
   if (!el || el.nodeType !== Node.ELEMENT_NODE) return false
 
   const style = window.getComputedStyle(el)
