@@ -33,7 +33,6 @@ import {
   ref,
   Teleport,
   toHandlers,
-  toRef,
   Transition,
   watch,
 } from 'vue'
@@ -82,10 +81,8 @@ export const VOverlay = genericComponent<new () => {
 
   props: {
     absolute: Boolean,
-    attach: {
-      type: [Boolean, String, Object] as PropType<boolean | string | Element>,
-      default: 'body',
-    },
+    attach: [Boolean, String, Object] as PropType<boolean | string | Element>,
+    contained: Boolean,
     contentClass: null,
     noClickAnimation: Boolean,
     modelValue: Boolean,
@@ -111,7 +108,7 @@ export const VOverlay = genericComponent<new () => {
 
   setup (props, { slots, attrs, emit }) {
     const isActive = useProxiedModel(props, 'modelValue')
-    const { teleportTarget } = useTeleport(toRef(props, 'attach'))
+    const { teleportTarget } = useTeleport(computed(() => props.attach || props.contained))
     const { themeClasses } = useTheme(props)
     const { rtlClasses } = useRtl()
     const { hasContent, onAfterLeave } = useLazy(props, isActive)
@@ -174,7 +171,7 @@ export const VOverlay = genericComponent<new () => {
 
     const root = ref()
     const top = ref<number>()
-    watch(() => isActive.value && props.absolute && teleportTarget.value == null, val => {
+    watch(() => isActive.value && (props.absolute || props.contained) && teleportTarget.value == null, val => {
       if (val) {
         const scrollParent = getScrollParent(root.value)
         if (scrollParent && scrollParent !== document.scrollingElement) {
@@ -216,8 +213,9 @@ export const VOverlay = genericComponent<new () => {
               class={[
                 'v-overlay',
                 {
-                  'v-overlay--absolute': props.absolute,
+                  'v-overlay--absolute': props.absolute || props.contained,
                   'v-overlay--active': isActive.value,
+                  'v-overlay--contained': props.contained,
                 },
                 themeClasses.value,
                 rtlClasses.value,
