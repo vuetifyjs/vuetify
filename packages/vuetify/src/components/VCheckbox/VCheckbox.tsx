@@ -39,28 +39,27 @@ export const VCheckbox = defineComponent({
   },
 
   emits: {
-    'update:indeterminate': (val: any) => true,
+    'update:indeterminate': (val: boolean) => true,
     'update:modelValue': (val: any) => true,
   },
 
   setup (props, { attrs, slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const indeterminate = useProxiedModel(props, 'indeterminate')
+    const offIcon = computed(() => {
+      return indeterminate.value
+        ? props.indeterminateIcon
+        : props.offIcon
+    })
+
+    function onChange () {
+      if (indeterminate.value) {
+        indeterminate.value = false
+      }
+    }
 
     useRender(() => {
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-
-      const offIcon = computed(() => {
-        return indeterminate.value
-          ? props.indeterminateIcon
-          : props.offIcon
-      })
-
-      function onChange () {
-        if (indeterminate.value) {
-          indeterminate.value = false
-        }
-      }
 
       return (
         <VInput

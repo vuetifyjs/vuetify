@@ -1,4 +1,5 @@
 @forward './variables'
+@use 'sass:selector'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
@@ -31,6 +32,7 @@
   justify-content: center
   width: $switch-thumb-width
   pointer-events: none
+  transition: $switch-control-input-transition
 
   @include tools.elevation($switch-thumb-elevation)
 
@@ -53,3 +55,10 @@
   .v-selection-control--dirty
     .v-selection-control__input
       transform: translateX($switch-thumb-transform)
+
+  &.v-switch--indeterminate
+    .v-selection-control__input
+      transform: scale(.8)
+    .v-switch__thumb
+      transform: scale(.75)
+      box-shadow: none

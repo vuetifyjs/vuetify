@@ -9,6 +9,7 @@ import { filterInputAttrs } from '@/components/VInput/VInput'
 // Utility
 import { defineComponent } from 'vue'
 import { useRender } from '@/util'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 export const VSwitch = defineComponent({
   name: 'VSwitch',
@@ -16,6 +17,7 @@ export const VSwitch = defineComponent({
   inheritAttrs: false,
 
   props: {
+    indeterminate: Boolean,
     inset: Boolean,
     loading: {
       type: [Boolean, String],
@@ -26,20 +28,33 @@ export const VSwitch = defineComponent({
       default: false,
     },
   },
+  emits: {
+    'update:indeterminate': (val: boolean) => true,
+  },
 
   setup (props, { attrs, slots }) {
     useRender(() => {
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
+      const indeterminate = useProxiedModel(props, 'indeterminate')
+      function onChange () {
+        if (indeterminate.value) {
+          indeterminate.value = false
+        }
+      }
 
       return (
         <VInput
-          class="v-switch"
+          class={[
+            'v-switch',
+            { 'v-switch--indeterminate': indeterminate.value },
+          ]}
           { ...rootAttrs }
           v-slots={{
             ...slots,
             default: () => (
               <VSelectionControl
                 type="checkbox"
+                onUpdate:modelValue={ onChange }
                 { ...inputAttrs }
                 v-slots={{
                   default: () => (<div class="v-switch__track"></div>),
