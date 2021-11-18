@@ -191,9 +191,9 @@ export const VSelectionControl = genericComponent<new <T>() => {
             validationClasses.value,
           ]}
         >
-          { slots.default?.() }
-
           <div class="v-selection-control__wrapper">
+            { slots.default?.() }
+
             <div
               class={[
                 'v-selection-control__input',
