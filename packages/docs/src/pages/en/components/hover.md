@@ -25,7 +25,7 @@ The `v-hover` component provides a simple interface for handling hover states fo
 
 - [v-hover](/api/v-hover)
 
-<api-section page="components/hover" />
+<inline-api page="components/hover" />
 
 ## Examples
 

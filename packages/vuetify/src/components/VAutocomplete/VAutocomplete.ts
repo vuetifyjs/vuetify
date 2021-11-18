@@ -176,7 +176,7 @@ export default VSelect.extend({
         this.$refs.input && this.$refs.input.select()
       } else {
         document.removeEventListener('copy', this.onCopy)
-        this.$refs.input && this.$refs.input.blur()
+        this.blur()
         this.updateSelf()
       }
     },
@@ -220,7 +220,16 @@ export default VSelect.extend({
       // for duplicate items? no idea
       if (val === oldVal) return
 
-      this.setMenuIndex(-1)
+      if (!this.autoSelectFirst) {
+        const preSelectedItem = oldVal[this.$refs.menu.listIndex]
+
+        if (preSelectedItem) {
+          this.setMenuIndex(val.findIndex(i => i === preSelectedItem))
+        } else {
+          this.setMenuIndex(-1)
+        }
+        this.$emit('update:list-index', this.$refs.menu.listIndex)
+      }
 
       this.$nextTick(() => {
         if (
@@ -230,7 +239,11 @@ export default VSelect.extend({
         ) return
 
         this.$refs.menu.getTiles()
-        this.setMenuIndex(0)
+
+        if (this.autoSelectFirst && val.length) {
+          this.setMenuIndex(0)
+          this.$emit('update:list-index', this.$refs.menu.listIndex)
+        }
       })
     },
     onInternalSearchChanged () {
@@ -348,6 +361,8 @@ export default VSelect.extend({
 
       // If typing and menu is not currently active
       if (target.value) this.activateMenu()
+
+      if (!this.multiple && value === '') this.deleteCurrentItem()
 
       this.internalSearch = value
       this.badInput = target.validity && target.validity.badInput

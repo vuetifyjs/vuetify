@@ -19,18 +19,35 @@
       defaults: {
         elevation: null,
         icon: null,
-        'single-line': null,
-        sticky: null,
+        color: null,
+        'single-line': false,
+        outlined: false,
+        rounded: false,
+        shaped: false,
+        tile: false,
       },
       options: {
         selects: {
           icon: ['$mdiAccount', '$mdiVuetify'],
+          color: [
+            'accent',
+            'primary',
+            'secondary',
+          ],
         },
         sliders: {
           elevation: [0, 24],
         },
       },
-      tabs: ['single-line', 'sticky'],
+      tabs: [
+        'single-line',
+        'sticky',
+        'outlined',
+        'rounded',
+        'shaped',
+        'tile',
+        'dark',
+      ],
     }),
   }
 </script>

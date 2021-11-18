@@ -31,19 +31,22 @@ function mounted (el: HTMLElement, binding: MutationDirectiveBinding) {
   ) => {
     handler?.(mutations, observer)
 
-    if (once) unmounted(el)
+    if (once) unmounted(el, binding)
   })
 
   if (immediate) handler?.([], observer)
 
-  el._mutate = { observer }
+  el._mutate = Object(el._mutate)
+  el._mutate![binding.instance!.$.uid] = { observer }
 
   observer.observe(el, options)
 }
 
-function unmounted (el: HTMLElement) {
-  el?._mutate?.observer?.disconnect()
-  delete el._mutate
+function unmounted (el: HTMLElement, binding: MutationDirectiveBinding) {
+  if (!el._mutate?.[binding.instance!.$.uid]) return
+
+  el._mutate[binding.instance!.$.uid]!.observer.disconnect()
+  delete el._mutate[binding.instance!.$.uid]
 }
 
 export const Mutate: ObjectDirective<HTMLElement> = {

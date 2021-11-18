@@ -5,7 +5,6 @@ module.exports = {
         'src/examples/**/*.vue',
       ],
       rules: {
-        'no-var': 'error',
         'max-len': 'off', // lorem ipsum is long
         'vue/html-self-closing': ['error', {
           html: {

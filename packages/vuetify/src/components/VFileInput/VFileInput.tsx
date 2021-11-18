@@ -36,10 +36,6 @@ export const VFileInput = defineComponent({
       default: '$vuetify.fileInput.counter',
     },
     multiple: Boolean,
-    prependIcon: {
-      type: String,
-      default: '$file',
-    },
     showSize: {
       type: [Boolean, Number] as PropType<boolean | 1000 | 1024>,
       default: false,
@@ -53,6 +49,10 @@ export const VFileInput = defineComponent({
 
     ...makeVFieldProps({ clearable: true }),
 
+    prependIcon: {
+      type: String,
+      default: '$file',
+    },
     modelValue: {
       type: Array as PropType<File[] | undefined>,
       default: () => ([]),
@@ -176,7 +176,7 @@ export const VFileInput = defineComponent({
               </>
             ),
 
-            details: hasCounter && (() => (
+            details: hasCounter ? () => (
               <>
                 <span />
 
@@ -185,7 +185,7 @@ export const VFileInput = defineComponent({
                   v-slots={ slots.counter }
                 />
               </>
-            )),
+            ) : undefined,
           }}
         />
       )

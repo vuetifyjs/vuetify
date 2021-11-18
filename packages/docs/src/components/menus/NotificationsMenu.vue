@@ -127,7 +127,7 @@
 
 <script>
   // Utilities
-  import { differenceInDays } from 'date-fns'
+  import { differenceInDays, parseISO } from 'date-fns'
   import { formatDate } from '@/util/date.js'
   import { get, sync } from 'vuex-pathify'
   import { wait } from '@/util/helpers'
@@ -203,7 +203,10 @@
         sort: '-created_at',
       })
 
-      this.all = notifications || []
+      /* eslint-disable-next-line camelcase */
+      this.all = (notifications || []).filter(({ created_at }) => {
+        return differenceInDays(Date.now(), parseISO(created_at)) < 60
+      })
 
       if (
         this.hasRecentlyViewed ||
@@ -213,9 +216,7 @@
       await wait(3000)
 
       /* eslint-disable-next-line camelcase */
-      const { created_at, slug, metadata } = this.unread[0]
-
-      if (differenceInDays(Date.now(), created_at) > 60) return
+      const { slug, metadata } = this.unread[0]
 
       this.snackbar = {
         slug,

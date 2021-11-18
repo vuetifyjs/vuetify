@@ -15,7 +15,9 @@ function mounted (el: HTMLElement, binding: ResizeDirectiveBinding) {
   }
 
   window.addEventListener('resize', handler, options)
-  el._onResize = {
+
+  el._onResize = Object(el._onResize)
+  el._onResize![binding.instance!.$.uid] = {
     handler,
     options,
   }
@@ -25,12 +27,14 @@ function mounted (el: HTMLElement, binding: ResizeDirectiveBinding) {
   }
 }
 
-function unmounted (el: HTMLElement) {
-  if (!el._onResize) return
+function unmounted (el: HTMLElement, binding: ResizeDirectiveBinding) {
+  if (!el._onResize?.[binding.instance!.$.uid]) return
 
-  const { handler, options } = el._onResize
+  const { handler, options } = el._onResize[binding.instance!.$.uid]!
+
   window.removeEventListener('resize', handler, options)
-  delete el._onResize
+
+  delete el._onResize[binding.instance!.$.uid]
 }
 
 export const Resize = {

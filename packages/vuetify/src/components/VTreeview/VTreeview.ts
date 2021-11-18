@@ -62,6 +62,7 @@ export default mixins(
       default: () => ([]),
     } as PropValidator<NodeArray>,
     dense: Boolean,
+    disabled: Boolean,
     filter: Function as PropType<TreeviewItemFunction>,
     hoverable: Boolean,
     items: {
@@ -231,7 +232,7 @@ export default mixins(
 
         this.nodes[key] = node
 
-        if (children.length) {
+        if (children.length && this.selectionType !== 'independent') {
           const { isSelected, isIndeterminate } = this.calculateState(key, this.nodes)
 
           node.isSelected = isSelected
@@ -418,7 +419,7 @@ export default mixins(
       }).map(item => {
         const genChild = VTreeviewNode.options.methods.genChild.bind(this)
 
-        return genChild(item, getObjectValueByPath(item, this.itemDisabled))
+        return genChild(item, this.disabled || getObjectValueByPath(item, this.itemDisabled))
       })
       /* istanbul ignore next */
       : this.$slots.default! // TODO: remove type annotation with TS 3.2
