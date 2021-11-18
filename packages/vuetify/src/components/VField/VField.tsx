@@ -4,7 +4,7 @@ import './VField.sass'
 // Components
 import { VExpandXTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
-import { VInput } from '@/components/VInput'
+import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VFieldLabel } from './VFieldLabel'
 
 // Composables
@@ -74,6 +74,7 @@ export const makeVFieldProps = propsFactory({
   ...makeThemeProps(),
   ...makeLoaderProps(),
   ...makeValidationProps(),
+  ...makeVInputProps(),
 }, 'v-field')
 
 export const VField = genericComponent<new <T>() => {
@@ -214,6 +215,7 @@ export const VField = genericComponent<new <T>() => {
           props: { for: id.value },
         })
         : props.label
+      const [inputProps, _] = filterInputProps(props)
 
       return (
         <VInput
@@ -241,6 +243,7 @@ export const VField = genericComponent<new <T>() => {
           ]}
           focused={ isFocused.value }
           messages={ props.errorMessages?.length ? props.errorMessages : errorMessages.value }
+          { ...inputProps }
           { ...attrs }
           v-slots={{
             prepend: slots.prepend ? () => slots.prepend?.(slotProps.value) : undefined,

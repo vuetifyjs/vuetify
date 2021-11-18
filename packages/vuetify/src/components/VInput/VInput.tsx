@@ -5,7 +5,7 @@ import './VInput.sass'
 import { VMessages } from '@/components/VMessages'
 
 // Utilities
-import { defineComponent, pick } from '@/util'
+import { defineComponent, pick, propsFactory } from '@/util'
 import { VIcon } from '@/components/VIcon'
 import { makeDensityProps, useDensity } from '@/composables/density'
 
@@ -16,24 +16,25 @@ export function filterInputAttrs (attrs: Record<string, unknown>) {
   return pick(attrs, ['class', 'style', 'id', /^data-/])
 }
 
+export const makeVInputProps = propsFactory({
+  appendIcon: String,
+  prependIcon: String,
+  focused: Boolean,
+  hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
+  hint: String,
+  messages: {
+    type: [Array, String],
+    default: () => ([]),
+  },
+  persistentHint: Boolean,
+
+  ...makeDensityProps(),
+})
+
 export const VInput = defineComponent({
   name: 'VInput',
 
-  props: {
-    appendIcon: String,
-    prependIcon: String,
-    focused: Boolean,
-    // TODO: implement auto
-    hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
-    hint: String,
-    messages: {
-      type: [Array, String],
-      default: () => ([]),
-    },
-    persistentHint: Boolean,
-
-    ...makeDensityProps(),
-  },
+  props: makeVInputProps(),
 
   emits: {
     'click:prepend': (e: MouseEvent) => true,
@@ -108,3 +109,7 @@ export const VInput = defineComponent({
 })
 
 export type VInput = InstanceType<typeof VInput>
+
+export function filterInputProps (attrs: Record<string, unknown>) {
+  return pick(attrs, Object.keys(VInput.props))
+}
