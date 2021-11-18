@@ -6,7 +6,6 @@
 @use './variables' as *
 
 .v-selection-control
-  border: thin solid red
   align-items: center
   contain: layout
   display: flex
@@ -16,7 +15,7 @@
   user-select: none
 
   .v-icon
-    color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+    color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
 
   .v-label
     height: 100%
@@ -37,6 +36,8 @@
       color: rgb(var(--v-theme-error))
 
   &--inline
+    display: inline-flex
+
     .v-label
       width: auto
 

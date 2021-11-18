@@ -97,7 +97,10 @@ export const VSelectionControl = genericComponent<new <T>() => {
   setup (props, { attrs, slots }) {
     const group = inject(VSelectionControlGroupSymbol, undefined)
     const { densityClasses } = useDensity(props, 'v-selection-control')
-    const { isDisabled, isReadonly, isValid, validationClasses } = useValidation(props, 'v-selection-control')
+    const { isDisabled, isReadonly, isValid, validationClasses } = useValidation({
+      ...props,
+      disabled: group?.disabled.value || props.disabled,
+    }, 'v-selection-control')
     const modelValue = useProxiedModel(props, 'modelValue')
     const trueValue = computed(() => (
       props.trueValue !== undefined ? props.trueValue
@@ -181,7 +184,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
               'v-selection-control--dirty': model.value,
               'v-selection-control--focused': isFocused.value,
               'v-selection-control--focus-visible': isFocusVisible.value,
-              'v-selection-control--inline': group?.inline || props.inline,
+              'v-selection-control--inline': group?.inline?.value || props.inline,
             },
             densityClasses.value,
             textColorClasses.value,

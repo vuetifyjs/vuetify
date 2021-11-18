@@ -1,3 +1,6 @@
+// Styles
+import './VSelectionControlGroup.sass'
+
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -9,12 +12,14 @@ import { getUid, useRender } from '@/util'
 import type { InjectionKey, Ref } from 'vue'
 
 interface VSelectionGroupContext {
+  disabled: Ref<boolean>
   inline: Ref<boolean>
   name: Ref<string | undefined>
   modelValue: Ref<any>
   multiple: Ref<boolean>
   onIcon: Ref<string | undefined>
   offIcon: Ref<string | undefined>
+  readonly: Ref<boolean>
   type: Ref<string | undefined>
 }
 
@@ -24,6 +29,7 @@ export const VSelectionControlGroup = defineComponent({
   name: 'VSelectionControlGroup',
 
   props: {
+    disabled: Boolean,
     id: String,
     inline: Boolean,
     name: String,
@@ -33,6 +39,7 @@ export const VSelectionControlGroup = defineComponent({
       type: Boolean,
       default: null,
     },
+    readonly: Boolean,
     type: String,
     modelValue: {
       type: null,
@@ -51,12 +58,14 @@ export const VSelectionControlGroup = defineComponent({
     const name = computed(() => props.name || `v-radio-group-name-${uid}`)
 
     provide(VSelectionControlGroupSymbol, {
+      disabled: toRef(props, 'disabled'),
       inline: toRef(props, 'inline'),
       modelValue,
       multiple: toRef(props, 'multiple'),
       name,
       offIcon: toRef(props, 'offIcon'),
       onIcon: toRef(props, 'onIcon'),
+      readonly: toRef(props, 'readonly'),
       type: toRef(props, 'type'),
     })
 
