@@ -128,7 +128,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
 
         if (isMultiple.value) {
           newVal = val
-            ? [currentValue, ...modelValue.value]
+            ? [...modelValue.value, currentValue]
             : modelValue.value.filter((item: any) => !props.valueComparator(item, trueValue.value))
         }
 
