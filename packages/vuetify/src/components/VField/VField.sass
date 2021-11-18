@@ -175,12 +175,9 @@
   .v-field--active &
     visibility: hidden
 
-  // TODO: figure out a better way to propagate error/disabled colors
-  .v-input--disabled &
-    color: $field-disabled-color
-
+  .v-input--disabled &,
   .v-input--error &
-    color: rgb(var(--v-theme-error))
+    color: inherit
 
   .v-field--variant-plain &,
   .v-field--variant-underlined &
@@ -238,7 +235,8 @@
   .v-field__control:hover &
     --v-field-border-opacity: var(--v-high-emphasis-opacity)
 
-  .v-field.v-field--focused &
+  .v-field.v-field--focused &,
+  .v-field.v-input--error &
     --v-field-border-opacity: 1
 
   .v-field--variant-outlined.v-field--focused &
@@ -371,14 +369,9 @@
     @include tools.rtl()
       text-align: left
 
-.v-input--disabled
-  pointer-events: none
-
-  input
-    color: $field-disabled-color
-
-  &.v-field--variant-filled,
-  &.v-field--variant-underlined
+.v-field--variant-filled,
+.v-field--variant-underlined
+  &.v-input--disabled
     .v-field__outline::before
       border-image: repeating-linear-gradient(to right, $field-disabled-color 0px, $field-disabled-color 2px, transparent 2px, transparent 4px) 1 repeat
 
