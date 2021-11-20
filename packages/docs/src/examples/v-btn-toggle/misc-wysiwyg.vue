@@ -1,9 +1,23 @@
 <template>
-  <v-card max-width="400" class="mx-auto px-4">
-    <v-textarea v-model="value" auto-grow full-width rows="2"></v-textarea>
+  <v-card
+    max-width="400"
+    class="mx-auto px-4"
+  >
+    <v-textarea
+      v-model="value"
+      auto-grow
+      full-width
+      rows="2"
+    ></v-textarea>
 
-    <v-row class="pb-2 ma-0" justify="space-between">
-      <v-btn-toggle v-model="formatting" multiple>
+    <v-row
+      class="pb-2 ma-0"
+      justify="space-between"
+    >
+      <v-btn-toggle
+        v-model="formatting"
+        multiple
+      >
         <v-btn>
           <v-icon>mdi-format-italic</v-icon>
         </v-btn>
@@ -17,12 +31,18 @@
         </v-btn>
 
         <v-btn>
-          <v-row align="center" class="flex-column" justify="center">
-            <v-icon class="cols 12"> mdi-format-color-text </v-icon>
+          <v-row
+            align="center"
+            class="flex-column"
+            justify="center"
+          >
+            <v-icon class="cols 12">
+              mdi-format-color-text
+            </v-icon>
 
             <v-sheet
               tile
-              style="margin-top: -4px"
+              style="margin-top: -4px;"
               height="4"
               width="26"
               color="purple"
@@ -46,8 +66,14 @@
       </v-btn-toggle>
     </v-row>
 
-    <v-sheet class="py-4 text-center" tile>
-      <v-row class="mb-2" dense>
+    <v-sheet
+      class="py-4 text-center"
+      tile
+    >
+      <v-row
+        class="mb-2"
+        dense
+      >
         <v-col
           v-for="n in numbers"
           :key="n"
