@@ -387,6 +387,7 @@ export default CalendarBase.extend({
         on: this.getDefaultMouseEventHandlers(':more', nativeEvent => {
           return { nativeEvent, ...day }
         }),
+
         style: {
           display: 'none',
           height: `${eventHeight}px`,

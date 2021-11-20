@@ -90,9 +90,7 @@ export default mixins(
         : Themeable.options.computed.isDark.call(this)
     },
     styles (): object {
-      // Styles are not needed when
-      // using the absolute prop.
-      if (this.absolute) return {}
+      if (this.absolute || !this.app) return {}
 
       const {
         bar,
@@ -104,12 +102,10 @@ export default mixins(
         top,
       } = this.$vuetify.application
 
-      // Should always move for y-axis
-      // applicationable components.
       return {
         paddingBottom: convertToUnit(bottom + footer + insetFooter),
-        paddingLeft: !this.app ? undefined : convertToUnit(left),
-        paddingRight: !this.app ? undefined : convertToUnit(right),
+        paddingLeft: convertToUnit(left),
+        paddingRight: convertToUnit(right),
         paddingTop: convertToUnit(bar + top),
       }
     },

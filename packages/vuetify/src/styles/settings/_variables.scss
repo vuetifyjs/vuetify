@@ -22,17 +22,18 @@ $rounded: map-deep-merge(
 );
 
 $spacer: 4px !default;
+$spacers-steps: 16 !default; 
 
 $spacers: () !default;
 @if (type-of($spacers) == list) {
-  @for $i from 0 through 16 {
+  @for $i from 0 through $spacers-steps {
     $spacers: map-merge($spacers, ($i: $spacer * $i))
   }
 }
 
 $negative-spacers: () !default;
 @if (type-of($negative-spacers) == list) {
-  @for $i from 1 through 16 {
+  @for $i from 1 through $spacers-steps {
     $negative-spacers: map-merge($negative-spacers, ("n" + $i: -$spacer * $i))
   }
 }

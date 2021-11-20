@@ -13,10 +13,17 @@ export function createSimpleFunctional (
 
     functional: true,
 
-    render (h, { data, children }): VNode {
+    props: {
+      tag: {
+        type: String,
+        default: el,
+      },
+    },
+
+    render (h, { data, props, children }): VNode {
       data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
 
-      return h(el, data, children)
+      return h(props.tag, data, children)
     },
   })
 }

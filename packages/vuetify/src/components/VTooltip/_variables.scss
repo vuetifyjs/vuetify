@@ -2,6 +2,7 @@
 
 $tooltip-background-color: rgba(map-get($grey, 'darken-2'), 0.9) !default;
 $tooltip-text-color: map-get($shades, 'white') !default;
+$tooltip-opacity: .9 !default;
 $tooltip-border-radius: $border-radius-root !default;
 $tooltip-font-size: 14px !default;
 $tooltip-transition-timing-function: map-get($transition, 'linear-out-slow-in') !default;
