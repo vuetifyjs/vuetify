@@ -11,6 +11,9 @@ import { ExtractVue } from './../../util/mixins'
 // Types
 import { VNode } from 'vue/types'
 
+// Components
+import VTabsBar from '../VTabs/VTabsBar'
+
 const baseMixins = mixins(
   Routable,
   // Must be after routable
@@ -19,8 +22,11 @@ const baseMixins = mixins(
   Themeable
 )
 
+type VTabBarInstance = InstanceType<typeof VTabsBar>
+
 interface options extends ExtractVue<typeof baseMixins> {
   $el: HTMLElement
+  tabsBar: VTabBarInstance
 }
 
 export default baseMixins.extend<options>().extend(
@@ -92,7 +98,7 @@ export default baseMixins.extend<options>().extend(
     },
     toggle () {
       // VItemGroup treats a change event as a click
-      if (!this.isActive) {
+      if (!this.isActive || (!this.tabsBar.mandatory && !this.to)) {
         this.$emit('change')
       }
     },
