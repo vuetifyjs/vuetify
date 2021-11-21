@@ -245,7 +245,9 @@ export const VSelectionControl = genericComponent<new <T>() => {
       )
     })
 
-    return {}
+    return {
+      isFocused,
+    }
   },
 })
 

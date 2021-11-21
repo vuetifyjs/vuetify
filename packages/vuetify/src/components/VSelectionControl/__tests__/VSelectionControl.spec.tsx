@@ -10,15 +10,23 @@ describe('VSelectionControl', () => {
   const vuetify = createVuetify()
 
   function mountFunction (options = {}) {
-    return mount(VSelectionControl, {
+    return mount({
+      render: () => (<VSelectionControl ref="control" />),
+    }, {
       global: { plugins: [vuetify] },
       ...options,
     })
   }
 
-  it('should match a snapshot', () => {
+  it('should expose variables when using refs', () => {
     const wrapper = mountFunction()
+    const vm = wrapper.findComponent({ ref: 'control' })
+    const input = wrapper.find('input')
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(vm.componentVM.isFocused).toBe(false)
+
+    input.trigger('focus')
+
+    expect(vm.componentVM.isFocused).toBe(true)
   })
 })
