@@ -98,7 +98,7 @@ export default baseMixins.extend<options>().extend(
     },
     toggle () {
       // VItemGroup treats a change event as a click
-      if (!this.isActive || !this.tabsBar.mandatory) {
+      if (!this.isActive || (!this.tabsBar.mandatory && !this.to)) {
         this.$emit('change')
       }
     },
