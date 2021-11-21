@@ -14,7 +14,7 @@ nav: Dialogs
 
 The `v-dialog` component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.
 
-<ads-entry />
+<entry-ad />
 
 ## Usage
 

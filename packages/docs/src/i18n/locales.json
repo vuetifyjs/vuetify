@@ -1,20 +1,24 @@
 [
   {
     "title": "English",
-    "locale": "en"
+    "locale": "en",
+    "enabled": true
   },
   {
     "title": "日本語",
     "locale": "ja-JP",
-    "alternate": "ja"
+    "alternate": "ja",
+    "enabled": false
   },
   {
     "title": "简体中文",
     "locale": "zh-CN",
-    "alternate": "zh-Hans"
+    "alternate": "zh-Hans",
+    "enabled": false
   },
   {
     "title": "Help translate",
-    "locale": "eo-UY"
+    "locale": "eo-UY",
+    "enabled": false
   }
 ]

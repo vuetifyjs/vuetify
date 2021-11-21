@@ -10,15 +10,21 @@
       >
         {{ $t('learn') }}
 
-        <app-chevron-down />
+        <chevron-down />
       </app-btn>
     </template>
   </app-menu>
 </template>
 
 <script>
+  import ChevronDown from '@/components-v3/icons/ChevronDown.vue'
+
   export default {
     name: 'LearnMenu',
+
+    components: {
+      ChevronDown,
+    },
 
     computed: {
       items () {

@@ -25,8 +25,12 @@
   import { useAppStore } from '@/store-v3/app'
   import nav from '@/data/nav-alpha'
 
+  import AppList from '@/components-v3/app/list/index.vue'
+
   export default defineComponent({
     name: 'AppDrawer',
+
+    components: { AppList },
 
     setup () {
       const { locale } = useI18n()

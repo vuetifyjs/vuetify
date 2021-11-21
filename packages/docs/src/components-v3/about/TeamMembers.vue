@@ -5,7 +5,7 @@
         <v-col
           cols="12"
         >
-          <about-team-member v-bind="{ member }" />
+          <team-member v-bind="{ member }" />
         </v-col>
 
         <v-divider
@@ -23,8 +23,14 @@
   import { computed, defineComponent } from 'vue'
   import { useTeamStore } from '@/store-v3/team'
 
+  import TeamMember from './TeamMember.vue'
+
   export default defineComponent({
     name: 'TeamMembers',
+
+    components: {
+      TeamMember,
+    },
 
     props: { team: String },
 

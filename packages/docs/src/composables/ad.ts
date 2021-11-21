@@ -18,7 +18,9 @@ export const useAd = (props: { medium: string, slug?: string, type?: string, com
   const { locale } = useI18n()
   const store = useAdsStore()
 
-  const ads = computed(() => store.ads.filter(ad => ad.metadata.discoverable && props.type === kebabCase(ad.metadata.type)))
+  const ads = computed(() => {
+    return store.ads.filter(ad => ad.metadata?.discoverable && (props.type ? props.type === kebabCase(ad.metadata.type) : true))
+  })
 
   const ad = computed(() => {
     if (props.slug) return store.ads.find(ad => ad.slug === props.slug)
@@ -29,7 +31,7 @@ export const useAd = (props: { medium: string, slug?: string, type?: string, com
   const href = computed(() => {
     if (!ad.value) return undefined
 
-    const [url, query] = ad.value.metadata.url.split('?')
+    const [url, query] = ad.value.metadata!.url.split('?')
 
     if (!url.startsWith('http')) {
       return `/${locale.value}${url}/`
@@ -58,7 +60,7 @@ export const useAd = (props: { medium: string, slug?: string, type?: string, com
   })
 
   const description = computed(() => {
-    return ad.value?.metadata.description
+    return ad.value?.metadata!.description
   })
 
   const src = computed(() => {

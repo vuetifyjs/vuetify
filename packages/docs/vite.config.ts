@@ -4,9 +4,9 @@ import Vue from '@vitejs/plugin-vue'
 import ViteFonts from 'vite-plugin-fonts'
 import Pages from 'vite-plugin-pages'
 import Layouts from 'vite-plugin-vue-layouts'
-import Components from 'unplugin-vue-components/vite'
+// import Components from 'unplugin-vue-components/vite'
 import Markdown from 'vite-plugin-md'
-import { VitePWA } from 'vite-plugin-pwa'
+// import { VitePWA } from 'vite-plugin-pwa'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import MarkdownItPrism from 'markdown-it-prism'
 // @ts-expect-error missing types
@@ -111,6 +111,7 @@ const parseMarkdown = (componentPath: string) => {
 }
 
 export default defineConfig({
+  logLevel: 'info',
   resolve: {
     alias: {
       '@/': `${resolve('src')}/`,
@@ -132,15 +133,15 @@ export default defineConfig({
     }),
 
     // https://github.com/antfu/unplugin-vue-components
-    Components({
-      deep: true,
-      dirs: ['src/components-v3'],
-      directoryAsNamespace: true,
-      globalNamespaces: ['icons'],
-      dts: true,
-      extensions: ['vue', 'md'],
-      include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-    }),
+    // Components({
+    //   deep: true,
+    //   dirs: ['src/components-v3'],
+    //   directoryAsNamespace: true,
+    //   globalNamespaces: ['icons'],
+    //   dts: true,
+    //   extensions: ['vue', 'md'],
+    //   include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+    // }),
 
     // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
     Layouts({
@@ -162,7 +163,6 @@ export default defineConfig({
         { dir: 'src/api', baseRoute: 'api' },
       ],
       extendRoute (route) {
-        // console.log(route)
         if (['index', 'all'].includes(route.name as string)) {
           return route
         }
@@ -189,16 +189,16 @@ export default defineConfig({
     }),
 
     // https://github.com/antfu/vite-plugin-pwa
-    VitePWA({
-      registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'robots.txt'],
-      manifest: {
-        name: 'Vuetify',
-        short_name: 'Vuetify',
-        theme_color: '#094A7F',
-        icons: [],
-      },
-    }),
+    // VitePWA({
+    //   registerType: 'autoUpdate',
+    //   includeAssets: ['favicon.ico', 'robots.txt'],
+    //   manifest: {
+    //     name: 'Vuetify',
+    //     short_name: 'Vuetify',
+    //     theme_color: '#094A7F',
+    //     icons: [],
+    //   },
+    // }),
 
     Vue({
       include: [/\.vue$/, /\.md$/],
@@ -230,7 +230,6 @@ export default defineConfig({
     include: [
       'vue',
       'vue-router',
-      '@vueuse/core',
     ],
     exclude: [
       'vue-demi',

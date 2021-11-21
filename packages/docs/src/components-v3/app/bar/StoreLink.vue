@@ -13,9 +13,12 @@
   // Utilities
   import { defineComponent } from 'vue'
   // import { useRoute } from 'vue-router'
+  import AppTooltipBtn from '@/components-v3/app/TooltipBtn.vue'
 
   export default defineComponent({
     name: 'TeamLink',
+
+    components: { AppTooltipBtn },
 
     setup () {
       // const route = useRoute()

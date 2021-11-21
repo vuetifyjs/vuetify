@@ -72,6 +72,9 @@
   import { RouteLocation, Router, useRoute, useRouter } from 'vue-router'
   import { useSponsorsStore } from '../../store-v3/sponsors'
 
+  import SponsorCard from '@/components-v3/sponsor/Card.vue'
+  import SponsorLink from '@/components-v3/sponsor/Link.vue'
+
   type TocItem = {
     to: string;
     text: string;
@@ -168,6 +171,11 @@
 
   export default {
     name: 'AppToc',
+
+    components: {
+      SponsorCard,
+      SponsorLink,
+    },
 
     setup () {
       const route = useRoute()

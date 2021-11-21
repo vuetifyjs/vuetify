@@ -58,17 +58,17 @@
 </template>
 
 <script>
-  import { useRtl } from 'vuetify/lib/composables/rtl.mjs'
+  import { useRtl } from 'vuetify'
   import { useAppStore } from '@/store-v3/app'
   import { usePwaStore } from '@/store-v3/pwa'
 
   // Components
-  // import DefaultSettingsApi from './Api'
-  // import DefaultSettingsDrawerGrouping from './DrawerGrouping'
-  // import DefaultSettingsDrawerPrepend from './DrawerPrepend'
-  // import DefaultSettingsPwa from './Pwa'
-  // import DefaultSettingsRtl from './Rtl'
-  // import DefaultSettingsTheme from './Theme'
+  import AppSettingsApi from './Api.vue'
+  // import AppSettingsDrawerGrouping from './DrawerGrouping.vue'
+  // import AppSettingsDrawerPrepend from './DrawerPrepend.vue'
+  import AppSettingsPwa from './Pwa.vue'
+  import AppSettingsRtl from './Rtl.vue'
+  import AppSettingsTheme from './Theme.vue'
 
   // Utilities
   // import { get, sync } from 'vuex-pathify'
@@ -79,12 +79,12 @@
     name: 'AppSettingsDrawer',
 
     components: {
-      // DefaultSettingsApi,
-      // DefaultSettingsDrawerGrouping,
-      // DefaultSettingsDrawerPrepend,
-      // DefaultSettingsPwa,
-      // DefaultSettingsRtl,
-      // DefaultSettingsTheme,
+      AppSettingsApi,
+      // AppSettingsDrawerGrouping,
+      // AppSettingsDrawerPrepend,
+      AppSettingsPwa,
+      AppSettingsRtl,
+      AppSettingsTheme,
     },
 
     // computed: {

@@ -14,7 +14,12 @@
   // Utilities
   import { defineComponent } from 'vue'
 
+  import AppSettingsDrawer from '@/components-v3/app/settings/Drawer.vue'
+  import AppBar from '@/components-v3/app/bar/index.vue'
+  import HomeView from '@/components-v3/home/View.vue'
+
   export default defineComponent({
     name: 'HomeLayout',
+    components: { AppSettingsDrawer, AppBar, HomeView },
   })
 </script>

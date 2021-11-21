@@ -1,8 +1,9 @@
 ---
-title: Meet the team
 meta:
-  - description: Meet the team responsible for building Vuetify. These are the core individuals who drive the vision of the framework.
-    keywords: vuetify dev team, vuetify core team
+  title: Meet the team
+  description: Meet the team responsible for building Vuetify. These are the core individuals who drive the vision of the framework.
+  keywords: vuetify dev team, vuetify core team
+nav: Meet the team
 ---
 
 # Meet the team
@@ -13,22 +14,22 @@ Vuetify is _not_ a one person show. We have a very active and engaged team that 
 
 While Vuetify (the framework) is [MIT Licensed](https://opensource.org/licenses/MIT) and [Open Source](https://opensource.com/resources/what-open-source), Vuetify (the company) is owned and operated by John and Heather Leider as a full-time Open Source business. You can support them by sponsoring Vuetify on **GitHub**.
 
-<!-- <promoted-ad slug="vuetify-github-sponsors" /> -->
+<promoted-ad slug="vuetify-github-sponsors" />
 
-<about-team-members team="company" />
+<page-component path="about/TeamMembers" team="company" />
 
 ## Core Team
 
 The core development team are Open Source developers that help guide the direction of Vuetify and its ecosystem.
 
-<!-- <promoted-ad slug="vuetify-open-collective" /> -->
+<promoted-ad slug="vuetify-open-collective" />
 
-<about-team-members team="core" />
+<page-component path="about/TeamMembers" team="core" />
 
 ## Contributors
 
 From updating docs to fixing bugs to adding new components, contributors actively work towards improving Vuetify.
 
-<about-team-members team="contributors" />
+<page-component path="about/TeamMembers" team="contributors" />
 
 <!-- <backmatter /> -->

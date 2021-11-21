@@ -16,27 +16,20 @@
       <app-list
         v-else
         :items="items"
-      >
-        <template
-          v-if="$slots.item"
-          #item="props"
-        >
-          <slot
-            name="item"
-            v-bind="props"
-          />
-        </template>
-      </app-list>
+      />
     </app-sheet>
   </v-menu>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue'
+  import AppList from '@/components-v3/app/list/index.vue'
 
   // Components
   export default defineComponent({
     name: 'AppMenu',
+
+    components: { AppList },
 
     props: {
       items: {

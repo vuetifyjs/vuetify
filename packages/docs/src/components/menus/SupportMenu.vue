@@ -10,7 +10,7 @@
       >
         {{ $t('support') }}
 
-        <app-chevron-down />
+        <chevron-down />
       </app-btn>
     </template>
   </app-menu>

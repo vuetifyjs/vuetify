@@ -4,40 +4,19 @@
     v-model:opened="opened"
     density="compact"
     :items="computedItems"
-  />
-    <!-- <template v-for="(item, i) in items">
-      <v-list-subheader
-        v-if="item.heading"
-        :key="`heading-${i}`"
-        class="text--primary font-weight-black text-uppercase"
-        v-text="item.heading"
-      />
-
-      <v-divider
-        v-else-if="item.divider"
-        :key="`divider-${i}`"
-        class="mt-3 mb-2 ml-2 mr-n2"
-      />
-
-      <app-list-group
-        v-else-if="item.items"
-        :key="`group-${i}`"
-        :item="item"
-      />
-
-      <slot
-        v-else-if="$slots.item"
-        name="item"
-        :index="i"
-        :item="item"
-      />
-
-      <app-list-item
-        v-else
-        :key="`item-${i}`"
-        :item="item"
-      />
-    </template> -->
+  >
+    <template #item="props">
+      <template v-if="props.heading">
+        <v-list-subheader>{{ props.heading }}</v-list-subheader>
+      </template>
+      <template v-else-if="props.divider">
+        <v-divider />
+      </template>
+      <template v-else>
+        <v-list-item v-bind="props" />
+      </template>
+    </template>
+  </v-list>
 </template>
 
 <script lang="ts">
@@ -51,6 +30,8 @@
     activeIcon: string,
     inactiveIcon: string,
     items: string[] | Item[]
+    heading?: string;
+    divider?: boolean;
   }
 
   function generateApiItems (locale: string) {
@@ -104,6 +85,8 @@
       const opened = ref<string[]>([])
 
       const computedItems = computed(() => props.items?.map(item => {
+        if (item.heading || item.divider) return item
+
         return {
           title: item.title && te(item.title) ? t(item.title) : item.title,
           prependIcon: opened.value.includes(item.title) ? item.activeIcon : item.inactiveIcon,

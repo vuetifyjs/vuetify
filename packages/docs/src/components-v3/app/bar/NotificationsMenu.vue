@@ -93,10 +93,12 @@
 <script lang="ts">
   import { computed, ref } from 'vue'
   import { useI18n } from 'vue-i18n'
-  import { useDisplay } from 'vuetify/lib/composables/display.mjs'
+  import { useDisplay } from 'vuetify'
   import { useUserStore } from '@/store-v3/user'
   import { useCosmic } from '@/composables/cosmic'
   import { formatDate } from '@/util/date.js'
+  import AppTooltipBtn from '@/components-v3/app/TooltipBtn.vue'
+  import AppMenu from '@/components-v3/app/menu/index.vue'
 
   type Notification = {
     metadata: {
@@ -110,6 +112,8 @@
 
   export default {
     name: 'NotificationsMenu',
+
+    components: { AppTooltipBtn, AppMenu },
 
     setup () {
       const { t } = useI18n()

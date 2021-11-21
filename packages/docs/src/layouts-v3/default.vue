@@ -22,8 +22,14 @@
 // Utilities
   import { defineComponent } from 'vue'
 
+  import AppSettingsDrawer from '@/components-v3/app/settings/Drawer.vue'
+  import AppBar from '@/components-v3/app/bar/index.vue'
+  import AppToc from '@/components-v3/app/Toc.vue'
+  import AppDrawer from '@/components-v3/app/drawer/index.vue'
+
   export default defineComponent({
     name: 'DefaultLayout',
 
+    components: { AppSettingsDrawer, AppBar, AppToc, AppDrawer },
   })
 </script>

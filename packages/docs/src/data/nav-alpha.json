@@ -62,7 +62,7 @@
       "dialogs",
       "dividers",
       "floating-action-buttons",
-      "footer",
+      "footers",
       {
         "title": "form-inputs-and-controls",
         "group": "components",

@@ -42,7 +42,7 @@ When you develop with Vuetify, you are never alone. Stuck on a problem? Take adv
 
 Below is a list of the top Vue.js frameworks and the features that we feel are important to developers and businesses when choosing a UI library.
 
-<introduction-comparison />
+<page-component path="introduction/Comparison" />
 
 So what are you waiting for? Head over to the [Installation](/getting-started/installation/) page and start building your next great idea today.
 

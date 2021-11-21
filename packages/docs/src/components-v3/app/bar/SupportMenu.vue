@@ -14,9 +14,13 @@
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
   import { useI18n } from 'vue-i18n'
+  import ChevronDown from '@/components-v3/icons/ChevronDown.vue'
+  import AppMenu from '@/components-v3/app/menu/index.vue'
 
   export default defineComponent({
     name: 'SupportMenu',
+
+    components: { ChevronDown, AppMenu },
 
     setup () {
       const { t } = useI18n()

@@ -6,9 +6,12 @@
   import { computed, ref } from 'vue'
   import { IN_BROWSER } from '@/util/globals'
   import { useUserStore } from '@/store-v3/user'
+  import AppSettingsGroup from './Group.vue'
 
   export default {
     name: 'DefaultSettingsTheme',
+
+    components: { AppSettingsGroup },
 
     setup () {
       const user = useUserStore()

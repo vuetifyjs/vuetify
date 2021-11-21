@@ -5,9 +5,12 @@
 <script>
   import { computed, watch } from 'vue'
   import { useUserStore } from '@/store-v3/user'
+  import AppSettingsGroup from './Group.vue'
 
   export default {
     name: 'SettingsApi',
+
+    components: { AppSettingsGroup },
 
     setup () {
       const user = useUserStore()

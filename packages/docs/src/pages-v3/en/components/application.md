@@ -80,7 +80,7 @@ Each of these application components have a designated location and priority tha
 - [v-navigation-drawer](/components/navigation-drawers): Can be placed on the left or right side of an application and can be configured to sit next to or below `v-app-bar`.
 - [v-system-bar](/components/system-bars): Is always placed at the top of an application with higher priority than `v-app-bar`.
 
-<app-img src="https://cdn.vuetifyjs.com/images/layouts/app.png" alt="Vuetify Application" />
+<image src="https://cdn.vuetifyjs.com/images/layouts/app.png" alt="Vuetify Application" />
 
 ## Application service
 

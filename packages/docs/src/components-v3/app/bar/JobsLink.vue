@@ -23,9 +23,12 @@
 <script lang="ts">
   // Utilities
   // import { call, get } from 'vuex-pathify'
+  import AppTooltipBtn from '@/components-v3/app/TooltipBtn.vue'
 
   export default {
     name: 'JobsLink',
+
+    components: { AppTooltipBtn },
 
     // computed: {
     //   name: get('route/name'),

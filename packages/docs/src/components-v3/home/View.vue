@@ -46,8 +46,20 @@
   import { defineComponent } from 'vue'
   import { useI18n } from 'vue-i18n'
 
+  import HomeActionBtns from './ActionBtns.vue'
+  import HomeFooter from './Footer.vue'
+  import HomeLogo from './Logo.vue'
+  import HomeSponsors from './Sponsors.vue'
+
   export default defineComponent({
     name: 'View',
+
+    components: {
+      HomeActionBtns,
+      HomeFooter,
+      HomeLogo,
+      HomeSponsors,
+    },
 
     setup () {
       const { t } = useI18n()

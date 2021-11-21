@@ -15,7 +15,7 @@ The **useDisplay** composable provides information on multiple aspects of the cu
 
 <entry-ad />
 
-<features-breakpoints-table />
+<page-component path="features/BreakpointsTable" />
 
 ## Usage
 

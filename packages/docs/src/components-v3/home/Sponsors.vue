@@ -40,8 +40,16 @@
   import { computed, defineComponent, onBeforeMount } from 'vue'
   import { useSponsorsStore } from '../../store-v3/sponsors'
 
+  import SponsorCard from '@/components-v3/sponsor/Card.vue'
+  import SponsorLink from '@/components-v3/sponsor/Link.vue'
+
   export default defineComponent({
     name: 'Sponsors',
+
+    components: {
+      SponsorCard,
+      SponsorLink,
+    },
 
     setup () {
       const sponsorStore = useSponsorsStore()

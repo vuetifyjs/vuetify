@@ -6,7 +6,7 @@ import App from './App.vue'
 
 // plugins
 import { useI18n } from './plugins-v3/i18n'
-import { usePwa } from './plugins-v3/pwa'
+// import { usePwa } from './plugins-v3/pwa'
 import { usePinia, pinia } from './plugins-v3/pinia'
 import { useVuetify } from './plugins-v3/vuetify'
 import { useLocaleStore } from './store-v3/locale'
@@ -14,6 +14,7 @@ import { useLocaleStore } from './store-v3/locale'
 // styles
 import 'prism-theme-vars/base.css'
 import { useUserStore } from './store-v3/user'
+import { useGlobalComponents } from './plugins-v3/global-components'
 
 const routes = setupLayouts(generatedRoutes)
 
@@ -45,8 +46,9 @@ export const createApp = ViteSSG(
     ],
   },
   ctx => {
+    useGlobalComponents(ctx)
     useI18n(ctx)
-    usePwa(ctx)
+    // usePwa(ctx)
     usePinia(ctx)
     useVuetify(ctx)
   },

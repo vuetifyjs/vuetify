@@ -3,21 +3,14 @@ const fs = require('fs')
 const path = require('path')
 const { resolve } = require('path')
 const { startCase } = require('lodash')
-const { getApi, getCompleteApi } = require('@vuetify/api-generator')
+const { getCompleteApi } = require('@vuetify/api-generator')
 const rimraf = require('rimraf')
 
-const localeList = require('../src/i18n/locales.json').map(item => item.alternate || item.locale)
-const pageToApi = require('../src/data/page-to-api')
+const localeList = require('../src/i18n/locales.json')
+  .filter(item => item.enabled)
+  .map(item => item.alternate || item.locale)
 
-const getLocaleMessage = (locale, fn) => {
-  const fallback = require(resolve(`./src/i18n/messages/en.json`))
-  try {
-    const data = require(resolve(`./src/i18n/messages/${locale}.json`))
-    return fn(data)
-  } catch (err) {
-    return fn(fallback)
-  }
-}
+const pageToApi = require('../src/data/page-to-api')
 
 function genApiLinks (component, header) {
   const links = Object.keys(pageToApi)

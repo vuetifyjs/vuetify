@@ -55,9 +55,13 @@
   import { useI18n } from 'vue-i18n'
   import { createAdProps, useAd } from '../../composables/ad'
 
+  import AdsBase from './Base.vue'
+
   // Mixins
   export default defineComponent({
     name: 'AdsVuetify',
+
+    components: { AdsBase },
 
     props: {
       color: String,

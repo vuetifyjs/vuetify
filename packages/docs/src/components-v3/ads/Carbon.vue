@@ -17,14 +17,19 @@
     </ads-base>
   </div>
 
-  <ads-vuetify v-else />
+  <vuetify-ad v-else />
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue'
 
+  import AdsBase from './Base.vue'
+  import AdsScript from './Script.vue'
+
   export default defineComponent({
     name: 'CarbonAd',
+
+    components: { AdsBase, AdsScript },
 
     data: () => ({ error: false }),
   })

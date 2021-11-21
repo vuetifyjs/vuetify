@@ -14,7 +14,7 @@ nav: Item groups
 
 The `v-item-group` provides the ability to create a group of selectable items out of any component. This is the baseline functionality for components such as `v-tabs` and `v-carousel`.
 
-<ads-entry />
+<entry-ad />
 
 ## Usage
 

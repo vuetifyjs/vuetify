@@ -36,8 +36,13 @@
   import locales from '@/i18n/locales.json'
   import { useLocaleStore } from '@/store-v3/locale'
 
+  import AppMenu from '@/components-v3/app/menu/index.vue'
+  import ChevronDown from '@/components-v3/icons/ChevronDown.vue'
+
   export default defineComponent({
     name: 'LanguageMenu',
+
+    components: { ChevronDown, AppMenu },
 
     setup () {
       const { t } = useI18n()
@@ -47,11 +52,10 @@
       const route = useRoute()
 
       return {
-        locales,
         smAndDown: display.smAndDown,
         items: computed(() => ([
           { heading: t('translations') },
-          ...locales,
+          ...locales.filter((locale: { enabled: boolean }) => locale.enabled),
         ])),
         changeLocale: (locale: string) => {
           console.log('click', locale)
