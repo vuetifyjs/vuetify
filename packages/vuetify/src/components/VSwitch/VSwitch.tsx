@@ -51,9 +51,14 @@ export const VSwitch = defineComponent({
           { ...rootAttrs }
           v-slots={{
             ...slots,
-            default: () => (
+            default: ({
+              isDisabled,
+              isReadonly,
+            }) => (
               <VSelectionControl
                 type="checkbox"
+                disabled={ isDisabled.value }
+                readonly={ isReadonly.value }
                 onUpdate:modelValue={ onChange }
                 { ...inputAttrs }
                 v-slots={{
