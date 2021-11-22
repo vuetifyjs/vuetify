@@ -4,6 +4,7 @@ import './VSelectionControl.sass'
 // Components
 import { VIcon } from '@/components/VIcon'
 import { VLabel } from '@/components/VLabel'
+import { VSelectionControlGroupSymbol } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
@@ -20,9 +21,8 @@ import { computed, inject, ref } from 'vue'
 import { deepEqual, genericComponent, getUid, SUPPORTS_FOCUS_VISIBLE, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, PropType, Ref, WritableComputedRef } from 'vue'
+import type { ComputedRef, ExtractPropTypes, PropType, Ref, WritableComputedRef } from 'vue'
 import type { MakeSlots } from '@/util'
-import { VSelectionControlGroupSymbol } from '../VSelectionControlGroup/VSelectionControlGroup'
 
 export type SelectionControlSlot = {
   model: WritableComputedRef<any>
@@ -33,6 +33,118 @@ export type SelectionControlSlot = {
     onBlur: (e: Event) => void
     onFocus: (e: FocusEvent) => void
     id: string
+  }
+}
+
+const selectionControlProps = {
+  color: String,
+  id: String,
+  inline: Boolean,
+  label: String,
+  offIcon: String,
+  onIcon: String,
+  ripple: {
+    type: Boolean,
+    default: true,
+  },
+  multiple: {
+    type: Boolean,
+    default: null,
+  },
+  trueValue: {
+    type: null,
+    default: undefined as any,
+  },
+  falseValue: {
+    type: null,
+    default: undefined as any,
+  },
+  type: String,
+  value: {
+    type: null,
+    default: undefined as any,
+  },
+  valueComparator: {
+    type: Function as PropType<typeof deepEqual>,
+    default: deepEqual,
+  },
+
+  ...makeThemeProps(),
+  ...makeDensityProps(),
+  ...makeValidationProps(),
+} as const
+
+export function useSelectionControl (
+  props: ExtractPropTypes<typeof selectionControlProps> & {
+    'onUpdate:modelValue': ((val: any) => void) | undefined
+  }
+) {
+  const group = inject(VSelectionControlGroupSymbol, undefined)
+  const { densityClasses } = useDensity(props, 'v-selection-control')
+  const { isDisabled, isReadonly, isValid, validationClasses } = useValidation({
+    ...props,
+    disabled: group?.disabled.value || props.disabled,
+  }, 'v-selection-control')
+  const modelValue = useProxiedModel(props, 'modelValue')
+  const trueValue = computed(() => (
+    props.trueValue !== undefined ? props.trueValue
+    : props.value !== undefined ? props.value
+    : true
+  ))
+  const falseValue = computed(() => props.falseValue !== undefined ? props.falseValue : false)
+  const isMultiple = computed(() => (
+    group?.multiple.value ||
+    props.multiple ||
+    Array.isArray(modelValue.value)
+  ))
+  const model = computed({
+    get () {
+      const val = group ? group.modelValue.value : modelValue.value
+
+      return isMultiple.value
+        ? val.some((v: any) => props.valueComparator(v, trueValue.value))
+        : props.valueComparator(val, trueValue.value)
+    },
+    set (val: boolean) {
+      const currentValue = val ? trueValue.value : falseValue.value
+
+      let newVal = currentValue
+
+      if (isMultiple.value) {
+        newVal = val
+          ? [...modelValue.value, currentValue]
+          : modelValue.value.filter((item: any) => !props.valueComparator(item, trueValue.value))
+      }
+
+      if (group?.modelValue) {
+        group.modelValue.value = newVal
+      } else {
+        modelValue.value = newVal
+      }
+    },
+  })
+  const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
+    return model.value && isValid.value !== false ? props.color : undefined
+  }))
+  const icon = computed(() => {
+    return model.value
+      ? group?.onIcon?.value ?? props.onIcon
+      : group?.offIcon?.value ?? props.offIcon
+  })
+
+  return {
+    group,
+    densityClasses,
+    isDisabled,
+    isReadonly,
+    isValid,
+    validationClasses,
+    trueValue,
+    falseValue,
+    model,
+    textColorClasses,
+    textColorStyles,
+    icon,
   }
 }
 
@@ -52,102 +164,26 @@ export const VSelectionControl = genericComponent<new <T>() => {
 
   inheritAttrs: false,
 
-  props: {
-    color: String,
-    id: String,
-    inline: Boolean,
-    label: String,
-    offIcon: String,
-    onIcon: String,
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-    multiple: {
-      type: Boolean,
-      default: null,
-    },
-    trueValue: {
-      type: null,
-      default: undefined as any,
-    },
-    falseValue: {
-      type: null,
-      default: undefined as any,
-    },
-    type: String,
-    value: {
-      type: null,
-      default: undefined as any,
-    },
-    valueComparator: {
-      type: Function as PropType<typeof deepEqual>,
-      default: deepEqual,
-    },
-
-    ...makeThemeProps(),
-    ...makeDensityProps(),
-    ...makeValidationProps(),
-  },
+  props: selectionControlProps,
 
   emits: {
     'update:modelValue': (val: any) => true,
   },
 
   setup (props, { attrs, slots }) {
-    const group = inject(VSelectionControlGroupSymbol, undefined)
-    const { densityClasses } = useDensity(props, 'v-selection-control')
-    const { isDisabled, isReadonly, isValid, validationClasses } = useValidation({
-      ...props,
-      disabled: group?.disabled.value || props.disabled,
-    }, 'v-selection-control')
-    const modelValue = useProxiedModel(props, 'modelValue')
-    const trueValue = computed(() => (
-      props.trueValue !== undefined ? props.trueValue
-      : props.value !== undefined ? props.value
-      : true
-    ))
-    const falseValue = computed(() => props.falseValue !== undefined ? props.falseValue : false)
-    const isMultiple = computed(() => (
-      group?.multiple.value ||
-      props.multiple ||
-      Array.isArray(modelValue.value)
-    ))
-    const model = computed({
-      get () {
-        const val = group ? group.modelValue.value : modelValue.value
-
-        return isMultiple.value
-          ? val.some((v: any) => props.valueComparator(v, trueValue.value))
-          : props.valueComparator(val, trueValue.value)
-      },
-      set (val: boolean) {
-        const currentValue = val ? trueValue.value : falseValue.value
-
-        let newVal = currentValue
-
-        if (isMultiple.value) {
-          newVal = val
-            ? [...modelValue.value, currentValue]
-            : modelValue.value.filter((item: any) => !props.valueComparator(item, trueValue.value))
-        }
-
-        if (group?.modelValue) {
-          group.modelValue.value = newVal
-        } else {
-          modelValue.value = newVal
-        }
-      },
-    })
-    const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
-      return model.value && isValid.value !== false ? props.color : undefined
-    }))
-    const icon = computed(() => {
-      return model.value
-        ? group?.onIcon?.value ?? props.onIcon
-        : group?.offIcon?.value ?? props.offIcon
-    })
-
+    const {
+      group,
+      densityClasses,
+      isDisabled,
+      isReadonly,
+      isValid,
+      validationClasses,
+      trueValue,
+      model,
+      textColorClasses,
+      textColorStyles,
+      icon,
+    } = useSelectionControl(props)
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
     const isFocused = ref(false)

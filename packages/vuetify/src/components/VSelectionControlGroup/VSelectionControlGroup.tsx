@@ -11,7 +11,7 @@ import { getUid, useRender } from '@/util'
 // Types
 import type { InjectionKey, Ref } from 'vue'
 
-interface VSelectionGroupContext {
+export interface VSelectionGroupContext {
   disabled: Ref<boolean>
   inline: Ref<boolean>
   name: Ref<string | undefined>
