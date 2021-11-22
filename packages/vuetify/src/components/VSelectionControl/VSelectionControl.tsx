@@ -62,6 +62,10 @@ const selectionControlProps = {
     type: null,
     default: undefined as any,
   },
+  modelValue: {
+    type: null,
+    default: undefined as any,
+  },
   type: String,
   value: {
     type: null,
@@ -122,7 +126,11 @@ export function useSelectionControl (
     },
   })
   const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
-    return model.value && !props.error ? props.color : undefined
+    return (
+      model.value &&
+      !props.error &&
+      !props.disabled
+    ) ? props.color : undefined
   }))
   const icon = computed(() => {
     return model.value
@@ -208,6 +216,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
             'v-selection-control',
             {
               'v-selection-control--dirty': model.value,
+              'v-selection-control--disabled': props.disabled,
               'v-selection-control--error': props.error,
               'v-selection-control--focused': isFocused.value,
               'v-selection-control--focus-visible': isFocusVisible.value,

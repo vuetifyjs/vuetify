@@ -67,10 +67,15 @@ export const VCheckbox = defineComponent({
           { ...rootAttrs }
           v-slots={{
             ...slots,
-            default: () => (
+            default: ({
+              isDisabled,
+              isReadonly,
+            }) => (
               <VSelectionControl
                 type="checkbox"
                 v-model={ model.value }
+                disabled={ isDisabled.value }
+                readonly={ isReadonly.value }
                 onUpdate:modelValue={ onChange }
                 offIcon={ offIcon.value }
                 onIcon={ props.onIcon }
