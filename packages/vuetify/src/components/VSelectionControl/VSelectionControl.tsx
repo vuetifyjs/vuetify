@@ -9,7 +9,6 @@ import { VSelectionControlGroupSymbol } from '@/components/VSelectionControlGrou
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeThemeProps } from '@/composables/theme'
-import { makeValidationProps, useValidation } from '@/composables/validation'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
@@ -18,7 +17,7 @@ import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed, inject, ref } from 'vue'
-import { deepEqual, genericComponent, getUid, SUPPORTS_FOCUS_VISIBLE, useRender } from '@/util'
+import { deepEqual, genericComponent, getUid, SUPPORTS_FOCUS_VISIBLE, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { ComputedRef, ExtractPropTypes, PropType, Ref, WritableComputedRef } from 'vue'
@@ -38,6 +37,8 @@ export type SelectionControlSlot = {
 
 const selectionControlProps = {
   color: String,
+  disabled: Boolean,
+  error: Boolean,
   id: String,
   inline: Boolean,
   label: String,
@@ -51,6 +52,8 @@ const selectionControlProps = {
     type: Boolean,
     default: null,
   },
+  name: String,
+  readonly: Boolean,
   trueValue: {
     type: null,
     default: undefined as any,
@@ -71,7 +74,6 @@ const selectionControlProps = {
 
   ...makeThemeProps(),
   ...makeDensityProps(),
-  ...makeValidationProps(),
 } as const
 
 export function useSelectionControl (
@@ -81,10 +83,6 @@ export function useSelectionControl (
 ) {
   const group = inject(VSelectionControlGroupSymbol, undefined)
   const { densityClasses } = useDensity(props, 'v-selection-control')
-  const { isDisabled, isReadonly, isValid, validationClasses } = useValidation({
-    ...props,
-    disabled: group?.disabled.value || props.disabled,
-  }, 'v-selection-control')
   const modelValue = useProxiedModel(props, 'modelValue')
   const trueValue = computed(() => (
     props.trueValue !== undefined ? props.trueValue
@@ -112,8 +110,8 @@ export function useSelectionControl (
 
       if (isMultiple.value) {
         newVal = val
-          ? [...modelValue.value, currentValue]
-          : modelValue.value.filter((item: any) => !props.valueComparator(item, trueValue.value))
+          ? [...wrapInArray(modelValue.value), currentValue]
+          : wrapInArray(modelValue.value).filter((item: any) => !props.valueComparator(item, trueValue.value))
       }
 
       if (group?.modelValue) {
@@ -124,7 +122,7 @@ export function useSelectionControl (
     },
   })
   const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
-    return model.value && isValid.value !== false ? props.color : undefined
+    return model.value && !props.error ? props.color : undefined
   }))
   const icon = computed(() => {
     return model.value
@@ -135,10 +133,6 @@ export function useSelectionControl (
   return {
     group,
     densityClasses,
-    isDisabled,
-    isReadonly,
-    isValid,
-    validationClasses,
     trueValue,
     falseValue,
     model,
@@ -172,17 +166,13 @@ export const VSelectionControl = genericComponent<new <T>() => {
 
   setup (props, { attrs, slots }) {
     const {
-      group,
       densityClasses,
-      isDisabled,
-      isReadonly,
-      isValid,
-      validationClasses,
-      trueValue,
+      group,
+      icon,
       model,
       textColorClasses,
       textColorStyles,
-      icon,
+      trueValue,
     } = useSelectionControl(props)
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
@@ -218,13 +208,13 @@ export const VSelectionControl = genericComponent<new <T>() => {
             'v-selection-control',
             {
               'v-selection-control--dirty': model.value,
+              'v-selection-control--error': props.error,
               'v-selection-control--focused': isFocused.value,
               'v-selection-control--focus-visible': isFocusVisible.value,
               'v-selection-control--inline': group?.inline?.value || props.inline,
             },
             densityClasses.value,
             textColorClasses.value,
-            validationClasses.value,
           ]}
         >
           <div class="v-selection-control__wrapper">
@@ -236,7 +226,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
               ]}
               style={ textColorStyles.value }
               v-ripple={ props.ripple && [
-                !isDisabled.value && !isReadonly.value,
+                !props.disabled && !props.readonly,
                 null,
                 ['center', 'circle'],
               ]}
@@ -245,11 +235,11 @@ export const VSelectionControl = genericComponent<new <T>() => {
 
               <input
                 v-model={ model.value }
-                disabled={ isDisabled.value }
+                disabled={ props.disabled }
                 id={ id.value }
                 onBlur={ onBlur }
                 onFocus={ onFocus }
-                readonly={ isReadonly.value }
+                readonly={ props.readonly }
                 type={ group?.type?.value ?? props.type }
                 value={ trueValue.value }
                 name={ group?.name?.value ?? props.name }
@@ -258,8 +248,6 @@ export const VSelectionControl = genericComponent<new <T>() => {
 
               { slots.input?.({
                 model,
-                isReadonly,
-                isDisabled,
                 textColorClasses,
                 props: {
                   onFocus,
@@ -271,8 +259,8 @@ export const VSelectionControl = genericComponent<new <T>() => {
           </div>
 
           <VLabel
-            disabled={ isDisabled.value }
-            error={ isValid.value === false }
+            disabled={ props.disabled }
+            error={ props.error }
             for={ id.value }
           >
             { label }
