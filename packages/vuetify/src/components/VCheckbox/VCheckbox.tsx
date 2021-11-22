@@ -2,15 +2,12 @@
 import './VCheckbox.sass'
 
 // Components
-import { filterInputAttrs } from '@/components/VInput/VInput'
 import { VInput } from '@/components/VInput'
 import { VSelectionControl } from '@/components/VSelectionControl'
 
-// Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
-
 // Utility
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
+import { filterInputAttrs } from '@/components/VInput/VInput'
 import { useRender } from '@/util'
 
 export const VCheckbox = defineComponent({
@@ -38,14 +35,8 @@ export const VCheckbox = defineComponent({
     },
   },
 
-  emits: {
-    'update:indeterminate': (val: boolean) => true,
-    'update:modelValue': (val: any) => true,
-  },
-
   setup (props, { attrs, slots }) {
-    const model = useProxiedModel(props, 'modelValue')
-    const indeterminate = useProxiedModel(props, 'indeterminate')
+    const indeterminate = ref(props.indeterminate)
     const offIcon = computed(() => {
       return indeterminate.value
         ? props.indeterminateIcon
@@ -73,13 +64,12 @@ export const VCheckbox = defineComponent({
             }) => (
               <VSelectionControl
                 type="checkbox"
-                v-model={ model.value }
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 onUpdate:modelValue={ onChange }
                 offIcon={ offIcon.value }
                 onIcon={ props.onIcon }
-                aria-checked={ indeterminate.value ? 'mixed' : Boolean(model.value).toString() }
+                aria-checked={ indeterminate.value ? 'mixed' : undefined }
                 { ...inputAttrs }
               />
             ),
