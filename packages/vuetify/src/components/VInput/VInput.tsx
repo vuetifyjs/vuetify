@@ -2,6 +2,7 @@
 import './VInput.sass'
 
 // Components
+import { VIcon } from '@/components/VIcon'
 import { VMessages } from '@/components/VMessages'
 
 // Composables
@@ -9,11 +10,11 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
+import { computed } from 'vue'
 import { genericComponent, pick, propsFactory } from '@/util'
-import { VIcon } from '@/components/VIcon'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type { ComputedRef, PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
 
 export function filterInputAttrs (attrs: Record<string, unknown>) {
@@ -21,10 +22,10 @@ export function filterInputAttrs (attrs: Record<string, unknown>) {
 }
 
 export type VInputSlot = {
-  isDisabled: Ref<boolean>
-  isReadonly: Ref<boolean>
-  isPristine: Ref<boolean>
-  isValid: Ref<boolean>
+  isDisabled: ComputedRef<boolean>
+  isReadonly: ComputedRef<boolean>
+  isPristine: Ref<boolean | null>
+  isValid: ComputedRef<boolean | null>
   isValidating: Ref<boolean>
   reset: () => void
   resetValidation: () => void
@@ -50,6 +51,9 @@ export const makeVInputProps = propsFactory({
 export const VInput = genericComponent<new <T>() => {
   $slots: MakeSlots<{
     default: [VInputSlot]
+    prepend: [VInputSlot]
+    append: [VInputSlot]
+    details: [VInputSlot]
   }>
 }>()({
   name: 'VInput',
@@ -75,6 +79,17 @@ export const VInput = genericComponent<new <T>() => {
       validate,
       validationClasses,
     } = useValidation(props, 'v-input')
+
+    const slotProps = computed<VInputSlot>(() => ({
+      isDisabled,
+      isReadonly,
+      isPristine,
+      isValid,
+      isValidating,
+      reset,
+      resetValidation,
+      validate,
+    }))
 
     return () => {
       const hasPrepend = (slots.prepend || props.prependIcon)
@@ -106,7 +121,7 @@ export const VInput = genericComponent<new <T>() => {
               class="v-input__prepend"
               onClick={ e => emit('click:prepend', e) }
             >
-              { slots?.prepend?.() }
+              { slots?.prepend?.(slotProps.value) }
 
               { props.prependIcon && (
                 <VIcon icon={ props.prependIcon } />
@@ -114,23 +129,14 @@ export const VInput = genericComponent<new <T>() => {
             </div>
           ) }
 
-          { slots.default?.({
-            isDisabled,
-            isReadonly,
-            isPristine,
-            isValid,
-            isValidating,
-            reset,
-            resetValidation,
-            validate,
-          }) }
+          { slots.default?.(slotProps.value) }
 
           { hasAppend && (
             <div
               class="v-input__append"
               onClick={ e => emit('click:append', e) }
             >
-              { slots?.append?.() }
+              { slots?.append?.(slotProps.value) }
 
               { props.appendIcon && (
                 <VIcon icon={ props.appendIcon } />
@@ -146,7 +152,7 @@ export const VInput = genericComponent<new <T>() => {
                 v-slots={{ default: slots.messages }}
               />
 
-              { slots.details?.() }
+              { slots.details?.(slotProps.value) }
             </div>
           ) }
         </div>
