@@ -48,29 +48,14 @@ const selectionControlProps = {
     type: Boolean,
     default: true,
   },
-  multiple: {
-    type: Boolean,
-    default: null,
-  },
+  multiple: Boolean,
   name: String,
   readonly: Boolean,
-  trueValue: {
-    type: null,
-    default: undefined as any,
-  },
-  falseValue: {
-    type: null,
-    default: undefined as any,
-  },
-  modelValue: {
-    type: null,
-    default: undefined as any,
-  },
+  trueValue: null,
+  falseValue: null,
+  modelValue: null,
   type: String,
-  value: {
-    type: null,
-    default: undefined as any,
-  },
+  value: null,
   valueComparator: {
     type: Function as PropType<typeof deepEqual>,
     default: deepEqual,

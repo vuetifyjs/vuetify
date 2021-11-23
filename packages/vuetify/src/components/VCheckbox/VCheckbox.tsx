@@ -32,10 +32,7 @@ export const VCheckbox = defineComponent({
       type: String,
       default: '$checkboxOn',
     },
-    modelValue: {
-      type: null,
-      default: undefined as any,
-    },
+    modelValue: null,
   },
 
   emits: {

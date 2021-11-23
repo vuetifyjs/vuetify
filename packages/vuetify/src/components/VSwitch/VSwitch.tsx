@@ -19,14 +19,8 @@ export const VSwitch = defineComponent({
   props: {
     indeterminate: Boolean,
     inset: Boolean,
-    loading: {
-      type: [Boolean, String],
-      default: false,
-    },
-    flat: {
-      type: Boolean,
-      default: false,
-    },
+    loading: [Boolean, String],
+    flat: Boolean,
   },
   emits: {
     'update:indeterminate': (val: boolean) => true,
