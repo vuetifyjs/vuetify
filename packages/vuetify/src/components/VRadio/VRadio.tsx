@@ -1,6 +1,3 @@
-// Styles
-import './VRadio.sass'
-
 // Components
 import { VSelectionControl } from '@/components/VSelectionControl'
 
