@@ -196,8 +196,8 @@ export const VTextarea = defineComponent({
                     }, null, ['once']]}
                     ref={ inputRef }
                     autofocus={ props.autofocus }
-                    readonly={ isReadonly }
-                    disabled={ isDisabled }
+                    readonly={ isReadonly.value }
+                    disabled={ isDisabled.value }
                     placeholder={ props.placeholder }
                     rows={ props.rows }
                     { ...slotProps }

@@ -145,8 +145,8 @@ export const VTextField = defineComponent({
                     }, null, ['once']]}
                     ref={ inputRef }
                     autofocus={ props.autofocus }
-                    readonly={ isReadonly }
-                    disabled={ isDisabled }
+                    readonly={ isReadonly.value }
+                    disabled={ isDisabled.value }
                     placeholder={ props.placeholder }
                     size={ 1 }
                     type={ props.type }

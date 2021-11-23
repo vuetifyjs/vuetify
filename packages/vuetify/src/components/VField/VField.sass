@@ -62,6 +62,13 @@
         @at-root #{selector.append(&, $root)}
           --v-field-padding-top: #{$field-input-padding-top + $modifier * $field-label-floating-scale}
 
+  &--variant-filled,
+  &--variant-outlined,
+  &--variant-underlined
+    &.v-field--focused
+      .v-label
+        color: inherit
+
 /* endregion */
 /* region CONTROL */
 .v-field__control
@@ -156,32 +163,21 @@
 /* region LABEL */
 .v-field-label
   contain: layout paint
-  display: inline-block
-  font-size: $field-label-font-size
-  letter-spacing: $field-letter-spacing
-  min-width: 0
+  margin-inline-end: var(--v-field-padding-after)
+  margin-inline-start: var(--v-field-padding-before)
   max-width: calc(100% - var(--v-field-padding-before) - var(--v-field-padding-after))
-  opacity: .6
-  overflow: hidden
   pointer-events: none
   position: absolute
-  text-overflow: ellipsis
   transform-origin: left center
   transition: $field-transition-timing
   transition-property: opacity, transform
-  white-space: nowrap
-
-  margin-inline-start: var(--v-field-padding-before)
-  margin-inline-end: var(--v-field-padding-after)
 
   .v-field--active &
     visibility: hidden
 
-  .v-field--error &
-    opacity: 1
-
-  .v-field--focused &
-    opacity: 1
+  .v-input--disabled &,
+  .v-input--error &
+    color: inherit
 
   .v-field--variant-plain &,
   .v-field--variant-underlined &
@@ -239,7 +235,8 @@
   .v-field__control:hover &
     --v-field-border-opacity: var(--v-high-emphasis-opacity)
 
-  .v-field.v-field--focused &
+  .v-field.v-field--focused &,
+  .v-field.v-input--error &
     --v-field-border-opacity: 1
 
   .v-field--variant-outlined.v-field--focused &
@@ -364,31 +361,6 @@
 
 /* endregion */
 /* region MODIFIERS */
-.v-field
-  color: $field-color
-
-  .v-icon,
-  .v-messages,
-  .v-counter
-    color: $field-color
-
-  &--disabled
-    .v-icon,
-    .v-messages,
-    .v-counter
-      color: $field-disabled-color
-
-  &--error
-    color: $field-error-color
-
-    .v-icon,
-    .v-messages,
-    .v-counter
-      color: $field-error-color
-
-    .v-field__outline::after
-      transform: scaleX(1)
-
 .v-field--reverse
   .v-field__input
     @include tools.ltr()
@@ -396,14 +368,10 @@
 
     @include tools.rtl()
       text-align: left
-.v-field--disabled
-  pointer-events: none
 
-  input
-    color: $field-disabled-color
-
-  &.v-field--variant-filled,
-  &.v-field--variant-underlined
+.v-field--variant-filled,
+.v-field--variant-underlined
+  &.v-input--disabled
     .v-field__outline::before
       border-image: repeating-linear-gradient(to right, $field-disabled-color 0px, $field-disabled-color 2px, transparent 2px, transparent 4px) 1 repeat
 

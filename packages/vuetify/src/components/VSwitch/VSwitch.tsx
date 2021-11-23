@@ -1,59 +1,33 @@
 // Styles
-import './VCheckbox.sass'
+import './VSwitch.sass'
 
 // Components
-import { filterInputAttrs, filterInputProps } from '@/components/VInput/VInput'
-import { VInput } from '@/components/VInput'
 import { VSelectionControl } from '@/components/VSelectionControl'
-
-// Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
+import { VInput } from '@/components/VInput'
+import { filterInputAttrs, filterInputProps } from '@/components/VInput/VInput'
 
 // Utility
-import { computed, defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { useRender } from '@/util'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
-export const VCheckbox = defineComponent({
-  name: 'VCheckbox',
+export const VSwitch = defineComponent({
+  name: 'VSwitch',
 
   inheritAttrs: false,
 
   props: {
     indeterminate: Boolean,
-    indeterminateIcon: {
-      type: String,
-      default: '$checkboxIndeterminate',
-    },
-    offIcon: {
-      type: String,
-      default: '$checkboxOff',
-    },
-    onIcon: {
-      type: String,
-      default: '$checkboxOn',
-    },
-    modelValue: null,
+    inset: Boolean,
+    loading: [Boolean, String],
+    flat: Boolean,
   },
-
   emits: {
     'update:indeterminate': (val: boolean) => true,
-    'update:modelValue': (val: any) => true,
   },
 
   setup (props, { attrs, slots }) {
-    const model = useProxiedModel(props, 'modelValue')
     const indeterminate = useProxiedModel(props, 'indeterminate')
-    const offIcon = computed(() => {
-      return indeterminate.value
-        ? props.indeterminateIcon
-        : props.offIcon
-    })
-    const onIcon = computed(() => {
-      return indeterminate.value
-        ? props.indeterminateIcon
-        : props.onIcon
-    })
-
     function onChange () {
       if (indeterminate.value) {
         indeterminate.value = false
@@ -63,10 +37,18 @@ export const VCheckbox = defineComponent({
     useRender(() => {
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const [rootProps, inputProps] = filterInputProps(inputAttrs)
+      const control = ref<VSelectionControl>()
+
+      function onClick () {
+        control.value?.input?.click()
+      }
 
       return (
         <VInput
-          class="v-checkbox"
+          class={[
+            'v-switch',
+            { 'v-switch--indeterminate': indeterminate.value },
+          ]}
           { ...rootAttrs }
           { ...rootProps }
           v-slots={{
@@ -77,14 +59,23 @@ export const VCheckbox = defineComponent({
             }) => (
               <VSelectionControl
                 type="checkbox"
-                v-model={ model.value }
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 onUpdate:modelValue={ onChange }
-                offIcon={ offIcon.value }
-                onIcon={ onIcon.value }
                 aria-checked={ indeterminate.value ? 'mixed' : undefined }
+                ref={ control }
                 { ...inputProps }
+                v-slots={{
+                  default: () => (<div class="v-switch__track" onClick={ onClick }></div>),
+                  input: ({ textColorClasses }) => (
+                    <div
+                      class={[
+                        'v-switch__thumb',
+                        textColorClasses.value,
+                      ]}
+                    />
+                  ),
+                }}
               />
             ),
           }}
@@ -96,4 +87,4 @@ export const VCheckbox = defineComponent({
   },
 })
 
-export type VCheckbox = InstanceType<typeof VCheckbox>
+export type VSwitch = InstanceType<typeof VSwitch>

@@ -9,6 +9,22 @@
   grid-template-columns: max-content auto max-content
   grid-template-rows: auto auto
 
+  input
+    color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+
+  .v-icon
+    color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
+
+  &--error
+    color: rgb(var(--v-theme-error))
+
+  &--disabled
+    pointer-events: none
+
+    &,
+    input
+      color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity))
+
   @at-root
     @include tools.density('v-input', $input-density) using ($modifier)
       --v-input-control-height: #{$input-control-height + $modifier}
