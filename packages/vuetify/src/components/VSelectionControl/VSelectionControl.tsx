@@ -103,7 +103,7 @@ export function useSelectionControl (
           : wrapInArray(modelValue.value).filter((item: any) => !props.valueComparator(item, trueValue.value))
       }
 
-      if (group?.modelValue) {
+      if (group) {
         group.modelValue.value = newVal
       } else {
         modelValue.value = newVal
@@ -119,8 +119,8 @@ export function useSelectionControl (
   }))
   const icon = computed(() => {
     return model.value
-      ? group?.onIcon?.value ?? props.onIcon
-      : group?.offIcon?.value ?? props.offIcon
+      ? group?.onIcon.value ?? props.onIcon
+      : group?.offIcon.value ?? props.offIcon
   })
 
   return {
@@ -194,7 +194,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
           props: { for: id.value },
         })
         : props.label
-      const type = group?.type?.value ?? props.type
+      const type = group?.type.value ?? props.type
 
       return (
         <div
@@ -206,7 +206,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
               'v-selection-control--error': props.error,
               'v-selection-control--focused': isFocused.value,
               'v-selection-control--focus-visible': isFocusVisible.value,
-              'v-selection-control--inline': group?.inline?.value || props.inline,
+              'v-selection-control--inline': group?.inline.value || props.inline,
             },
             densityClasses.value,
             textColorClasses.value,
@@ -237,7 +237,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
                 readonly={ props.readonly }
                 type={ type }
                 value={ trueValue.value }
-                name={ group?.name?.value ?? props.name }
+                name={ group?.name.value ?? props.name }
                 aria-checked={ type === 'checkbox' ? model.value : undefined }
                 { ...attrs }
               />
