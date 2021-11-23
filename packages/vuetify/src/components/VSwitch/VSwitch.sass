@@ -36,15 +36,11 @@
 
   @include tools.elevation($switch-thumb-elevation)
 
-.v-selection-control__wrapper
-  height: 100%
-  display: inline-flex
-  align-items: center
-  position: relative
-  justify-content: center
-
 .v-switch
   $switch-thumb-transform: $switch-track-width * .5 - $switch-thumb-width * .5 + $switch-thumb-offset
+
+  .v-selection-control
+    height: var(--v-input-control-height)
 
   .v-selection-control__input
     border-radius: 50%

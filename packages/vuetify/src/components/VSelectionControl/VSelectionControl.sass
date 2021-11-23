@@ -41,15 +41,18 @@
     .v-label
       width: auto
 
-  + .v-input__details
-    padding: 0 12px
-
   @at-root
     @include tools.density('v-selection-control', $selection-control-density) using ($modifier)
       --v-selection-control-size: #{$selection-control-size + $modifier}
 
 .v-selection-control__wrapper
-  width: $selection-control-size + 4px
+  width: var(--v-selection-control-size)
+  height: var(--v-selection-control-size)
+  display: inline-flex
+  align-items: center
+  position: relative
+  justify-content: center
+  flex: none
 
 .v-selection-control__input
   width: var(--v-selection-control-size)
