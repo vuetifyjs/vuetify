@@ -50,8 +50,7 @@ describe('VFileInput', () => {
       .should('have.text', '2 files (3.0 MB in total)')
   })
 
-  // TODO: The element doesn't exist because VField is checking inputEl.value
-  it.skip('should clear input', () => {
+  it('should clear input', () => {
     const model = ref([oneMBFile, twoMBFile])
     cy.mount(() => (
       <CenteredGrid width="400px">
@@ -81,7 +80,7 @@ describe('VFileInput', () => {
       </CenteredGrid>
     ))
       .get('.v-file-input')
-      .should('have.class', 'v-field--disabled')
+      .should('have.class', 'v-input--disabled')
       .get('.v-file-input input')
       .should('have.attr', 'disabled')
   })
