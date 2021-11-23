@@ -41,10 +41,7 @@ export const VSelectionControlGroup = defineComponent({
     },
     readonly: Boolean,
     type: String,
-    modelValue: {
-      type: null,
-      default: undefined as any,
-    },
+    modelValue: null,
   },
 
   emits: {

@@ -17,10 +17,6 @@ import { genericComponent, pick, propsFactory } from '@/util'
 import type { ComputedRef, PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
 
-export function filterInputAttrs (attrs: Record<string, unknown>) {
-  return pick(attrs, ['class', 'style', 'id', /^data-/])
-}
-
 export type VInputSlot = {
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
@@ -162,6 +158,10 @@ export const VInput = genericComponent<new <T>() => {
 })
 
 export type VInput = InstanceType<typeof VInput>
+
+export function filterInputAttrs (attrs: Record<string, unknown>) {
+  return pick(attrs, ['class', 'style', 'id', /^data-/])
+}
 
 export function filterInputProps (attrs: Record<string, unknown>) {
   return pick(attrs, Object.keys(VInput.props))

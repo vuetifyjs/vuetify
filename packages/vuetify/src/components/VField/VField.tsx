@@ -34,7 +34,7 @@ import type { MakeSlots } from '@/util'
 const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
 type Variant = typeof allowedVariants[number]
 
-export interface DefaultInputSlot extends VInputSlot {
+export interface DefaultInputSlot {
   isActive: boolean
   isDirty: boolean
   isFocused: boolean
@@ -44,7 +44,7 @@ export interface DefaultInputSlot extends VInputSlot {
   blur: () => void
 }
 
-export interface VFieldSlot extends DefaultInputSlot {
+export interface VFieldSlot extends DefaultInputSlot, VInputSlot {
   props: Record<string, unknown>
 }
 
@@ -80,13 +80,13 @@ export const VField = genericComponent<new <T>() => {
     'onUpdate:modelValue'?: (val: T) => any
   }
   $slots: MakeSlots<{
-    prependInner: [DefaultInputSlot]
+    prependInner: [DefaultInputSlot & VInputSlot]
     clear: []
-    appendInner: [DefaultInputSlot]
-    label: [DefaultInputSlot]
-    prepend: [DefaultInputSlot]
-    append: [DefaultInputSlot]
-    details: [DefaultInputSlot]
+    appendInner: [DefaultInputSlot & VInputSlot]
+    label: [DefaultInputSlot & VInputSlot]
+    prepend: [DefaultInputSlot & VInputSlot]
+    append: [DefaultInputSlot & VInputSlot]
+    details: [DefaultInputSlot & VInputSlot]
     loader: [{
       color: string | undefined
       isActive: boolean
@@ -109,8 +109,7 @@ export const VField = genericComponent<new <T>() => {
     'click:clear': (e: Event) => true,
     'click:prepend-inner': (e: MouseEvent) => true,
     'click:append-inner': (e: MouseEvent) => true,
-    // TODO: find a better way to do this
-    'click:control': (props: Partial<DefaultInputSlot>) => true,
+    'click:control': (props: DefaultInputSlot) => true,
     'update:active': (active: boolean) => true,
     'update:modelValue': (val: any) => true,
   },
@@ -183,8 +182,7 @@ export const VField = genericComponent<new <T>() => {
       isFocused.value = false
     }
 
-    // TODO: find a better way to do this
-    const slotProps = computed<Partial<DefaultInputSlot>>(() => ({
+    const slotProps = computed<DefaultInputSlot>(() => ({
       isActive: isActive.value,
       isDirty: props.dirty,
       isFocused: isFocused.value,
