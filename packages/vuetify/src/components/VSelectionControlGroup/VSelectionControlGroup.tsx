@@ -54,8 +54,8 @@ export const VSelectionControlGroup = defineComponent({
   setup (props, { slots }) {
     const modelValue = useProxiedModel(props, 'modelValue')
     const uid = getUid()
-    const id = computed(() => props.id || `v-radio-group-id-${uid}`)
-    const name = computed(() => props.name || `v-radio-group-name-${uid}`)
+    const id = computed(() => props.id || `v-radio-group-${uid}`)
+    const name = computed(() => props.name || `v-radio-group-${uid}`)
 
     provide(VSelectionControlGroupSymbol, {
       disabled: toRef(props, 'disabled'),
