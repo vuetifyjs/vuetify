@@ -2,11 +2,10 @@
 import './VField.sass'
 
 // Components
-import { VExpandXTransition } from '@/components/transitions'
-import { VIcon } from '@/components/VIcon'
-import type { VInputSlot } from '@/components/VInput/VInput'
 import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { VExpandXTransition } from '@/components/transitions'
 import { VFieldLabel } from './VFieldLabel'
+import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
@@ -28,8 +27,9 @@ import {
 } from '@/util'
 
 // Types
-import type { PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
+import type { PropType, Ref } from 'vue'
+import type { VInputSlot } from '@/components/VInput/VInput'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
 type Variant = typeof allowedVariants[number]
