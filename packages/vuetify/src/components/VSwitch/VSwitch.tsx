@@ -33,14 +33,15 @@ export const VSwitch = defineComponent({
   },
 
   setup (props, { attrs, slots }) {
+    const indeterminate = useProxiedModel(props, 'indeterminate')
+    function onChange () {
+      if (indeterminate.value) {
+        indeterminate.value = false
+      }
+    }
+
     useRender(() => {
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const indeterminate = useProxiedModel(props, 'indeterminate')
-      function onChange () {
-        if (indeterminate.value) {
-          indeterminate.value = false
-        }
-      }
 
       return (
         <VInput
@@ -60,6 +61,7 @@ export const VSwitch = defineComponent({
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 onUpdate:modelValue={ onChange }
+                aria-checked={ indeterminate.value ? 'mixed' : undefined }
                 { ...inputAttrs }
                 v-slots={{
                   default: () => (<div class="v-switch__track"></div>),
