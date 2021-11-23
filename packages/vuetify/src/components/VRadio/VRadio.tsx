@@ -22,13 +22,14 @@ export const VRadio = defineComponent({
     },
   },
 
-  setup (props) {
+  setup (props, { slots }) {
     useRender(() => (
       <VSelectionControl
         class="v-radio"
         onIcon={ props.onIcon }
         offIcon={ props.offIcon }
         type="radio"
+        v-slots={ slots }
       />
     ))
 
