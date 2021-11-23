@@ -174,6 +174,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
     const id = computed(() => props.id || `input-${uid}`)
     const isFocused = ref(false)
     const isFocusVisible = ref(false)
+    const input = ref<HTMLInputElement>()
 
     function onFocus (e: FocusEvent) {
       isFocused.value = true
@@ -233,6 +234,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
 
               <input
                 v-model={ model.value }
+                ref={ input }
                 disabled={ props.disabled }
                 id={ id.value }
                 onBlur={ onBlur }
@@ -270,6 +272,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
 
     return {
       isFocused,
+      input,
     }
   },
 })

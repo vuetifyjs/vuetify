@@ -7,7 +7,7 @@ import { VInput } from '@/components/VInput'
 import { filterInputAttrs } from '@/components/VInput/VInput'
 
 // Utility
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { useRender } from '@/util'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -36,6 +36,11 @@ export const VSwitch = defineComponent({
 
     useRender(() => {
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
+      const control = ref<VSelectionControl>()
+
+      function onClick () {
+        control.value?.input?.click()
+      }
 
       return (
         <VInput
@@ -56,9 +61,10 @@ export const VSwitch = defineComponent({
                 readonly={ isReadonly.value }
                 onUpdate:modelValue={ onChange }
                 aria-checked={ indeterminate.value ? 'mixed' : undefined }
+                ref={ control }
                 { ...inputAttrs }
                 v-slots={{
-                  default: () => (<div class="v-switch__track"></div>),
+                  default: () => (<div class="v-switch__track" onClick={ onClick }></div>),
                   input: ({ textColorClasses }) => (
                     <div
                       class={[
