@@ -28,7 +28,7 @@ import {
 } from '@/util'
 
 // Types
-import type { ComputedRef, PropType, Ref, WritableComputedRef } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
@@ -216,7 +216,6 @@ export const VField = genericComponent<new <T>() => {
       const [inputProps, _] = filterInputProps(props)
 
       return (
-        // TODO: fix type issue
         <VInput
           class={[
             'v-field',
