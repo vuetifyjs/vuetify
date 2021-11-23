@@ -252,7 +252,7 @@
       border-width: 0 0 var(--v-field-border-width)
       opacity: var(--v-field-border-opacity)
       transition: opacity $field-subtle-transition-timing
-      @include tools.absolute()
+      @include tools.absolute(true)
 
   .v-field--variant-filled &,
   .v-field--variant-underlined &
@@ -262,7 +262,7 @@
       border-width: 0 0 $field-focused-border-width
       transform: scaleX(0)
       transition: transform $field-transition-timing
-      @include tools.absolute()
+      @include tools.absolute(true)
 
       @at-root #{selector.append('.v-field--focused', &)}
         transform: scaleX(1)
@@ -300,7 +300,7 @@
         opacity: var(--v-field-border-opacity)
         transition: opacity $field-subtle-transition-timing
 
-        @include tools.absolute()
+        @include tools.absolute(true)
 
       &::before
         border-width: var(--v-field-border-width) 0 0
