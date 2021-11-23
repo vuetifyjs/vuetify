@@ -4,7 +4,7 @@ import './VSwitch.sass'
 // Components
 import { VSelectionControl } from '@/components/VSelectionControl'
 import { VInput } from '@/components/VInput'
-import { filterInputAttrs } from '@/components/VInput/VInput'
+import { filterInputAttrs, filterInputProps } from '@/components/VInput/VInput'
 
 // Utility
 import { defineComponent, ref } from 'vue'
@@ -36,6 +36,7 @@ export const VSwitch = defineComponent({
 
     useRender(() => {
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
+      const [rootProps, inputProps] = filterInputProps(inputAttrs)
       const control = ref<VSelectionControl>()
 
       function onClick () {
@@ -49,6 +50,7 @@ export const VSwitch = defineComponent({
             { 'v-switch--indeterminate': indeterminate.value },
           ]}
           { ...rootAttrs }
+          { ...rootProps }
           v-slots={{
             ...slots,
             default: ({
@@ -62,7 +64,7 @@ export const VSwitch = defineComponent({
                 onUpdate:modelValue={ onChange }
                 aria-checked={ indeterminate.value ? 'mixed' : undefined }
                 ref={ control }
-                { ...inputAttrs }
+                { ...inputProps }
                 v-slots={{
                   default: () => (<div class="v-switch__track" onClick={ onClick }></div>),
                   input: ({ textColorClasses }) => (

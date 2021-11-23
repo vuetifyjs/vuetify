@@ -2,7 +2,7 @@
 import './VCheckbox.sass'
 
 // Components
-import { filterInputAttrs } from '@/components/VInput/VInput'
+import { filterInputAttrs, filterInputProps } from '@/components/VInput/VInput'
 import { VInput } from '@/components/VInput'
 import { VSelectionControl } from '@/components/VSelectionControl'
 
@@ -62,11 +62,13 @@ export const VCheckbox = defineComponent({
 
     useRender(() => {
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
+      const [rootProps, inputProps] = filterInputProps(inputAttrs)
 
       return (
         <VInput
           class="v-checkbox"
           { ...rootAttrs }
+          { ...rootProps }
           v-slots={{
             ...slots,
             default: ({
@@ -82,7 +84,7 @@ export const VCheckbox = defineComponent({
                 offIcon={ offIcon.value }
                 onIcon={ onIcon.value }
                 aria-checked={ indeterminate.value ? 'mixed' : undefined }
-                { ...inputAttrs }
+                { ...inputProps }
               />
             ),
           }}

@@ -11,7 +11,7 @@ import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, pick, propsFactory } from '@/util'
+import { genericComponent, pick, propsFactory, toKebabCase } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
@@ -164,5 +164,5 @@ export function filterInputAttrs (attrs: Record<string, unknown>) {
 }
 
 export function filterInputProps (attrs: Record<string, unknown>) {
-  return pick(attrs, Object.keys(VInput.props))
+  return pick(attrs, Object.keys(VInput.props).map(toKebabCase))
 }
