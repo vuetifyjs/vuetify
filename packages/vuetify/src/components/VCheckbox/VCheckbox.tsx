@@ -48,6 +48,11 @@ export const VCheckbox = defineComponent({
         ? props.indeterminateIcon
         : props.offIcon
     })
+    const onIcon = computed(() => {
+      return indeterminate.value
+        ? props.indeterminateIcon
+        : props.onIcon
+    })
 
     function onChange () {
       if (indeterminate.value) {
@@ -75,7 +80,7 @@ export const VCheckbox = defineComponent({
                 readonly={ isReadonly.value }
                 onUpdate:modelValue={ onChange }
                 offIcon={ offIcon.value }
-                onIcon={ props.onIcon }
+                onIcon={ onIcon.value }
                 aria-checked={ indeterminate.value ? 'mixed' : undefined }
                 { ...inputAttrs }
               />
