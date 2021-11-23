@@ -1,5 +1,6 @@
-@mixin absolute()
-  content: ''
+@mixin absolute($pseudo: false)
+  @if ($pseudo)
+    content: ''
   position: absolute
   top: 0
   left: 0

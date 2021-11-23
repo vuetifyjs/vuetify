@@ -125,6 +125,8 @@ $grid-gutters: map-deep-merge(
 $container-max-widths: () !default;
 $container-max-widths: map-deep-merge(
   (
+    'xs': null,
+    'sm': null,
     'md': map.get($grid-breakpoints, 'md') * 0.9375,
     'lg': map.get($grid-breakpoints, 'lg') * 0.9375,
     'xl': map.get($grid-breakpoints, 'xl') * 0.9375,
