@@ -48,7 +48,10 @@ const selectionControlProps = {
     type: Boolean,
     default: true,
   },
-  multiple: Boolean,
+  multiple: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
   name: String,
   readonly: Boolean,
   trueValue: null,
@@ -81,8 +84,8 @@ export function useSelectionControl (
   const falseValue = computed(() => props.falseValue !== undefined ? props.falseValue : false)
   const isMultiple = computed(() => (
     group?.multiple.value ||
-    props.multiple ||
-    Array.isArray(modelValue.value)
+    !!props.multiple ||
+    (props.multiple == null && Array.isArray(modelValue.value))
   ))
   const model = computed({
     get () {

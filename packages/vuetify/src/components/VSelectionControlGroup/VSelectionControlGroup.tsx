@@ -9,7 +9,7 @@ import { computed, defineComponent, provide, toRef } from 'vue'
 import { getUid, useRender } from '@/util'
 
 // Types
-import type { InjectionKey, Ref } from 'vue'
+import type { InjectionKey, PropType, Ref } from 'vue'
 
 export interface VSelectionGroupContext {
   disabled: Ref<boolean>
@@ -36,7 +36,7 @@ export const VSelectionControlGroup = defineComponent({
     offIcon: String,
     onIcon: String,
     multiple: {
-      type: Boolean,
+      type: Boolean as PropType<boolean | null>,
       default: null,
     },
     readonly: Boolean,
@@ -58,7 +58,7 @@ export const VSelectionControlGroup = defineComponent({
       disabled: toRef(props, 'disabled'),
       inline: toRef(props, 'inline'),
       modelValue,
-      multiple: toRef(props, 'multiple'),
+      multiple: computed(() => !!props.multiple || (props.multiple == null && Array.isArray(modelValue.value))),
       name,
       offIcon: toRef(props, 'offIcon'),
       onIcon: toRef(props, 'onIcon'),
