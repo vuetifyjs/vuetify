@@ -54,8 +54,8 @@ export const VSelectionControlGroup = defineComponent({
   setup (props, { slots }) {
     const modelValue = useProxiedModel(props, 'modelValue')
     const uid = getUid()
-    const id = computed(() => props.id || `v-radio-group-${uid}`)
-    const name = computed(() => props.name || `v-radio-group-${uid}`)
+    const id = computed(() => props.id || `v-selection-control-group-${uid}`)
+    const name = computed(() => props.name || id.value)
 
     provide(VSelectionControlGroupSymbol, {
       disabled: toRef(props, 'disabled'),
@@ -73,7 +73,8 @@ export const VSelectionControlGroup = defineComponent({
       return (
         <div
           class="v-selection-control-group"
-          aria-labelled-by={ id.value }
+          aria-labelled-by={ props.type === 'radio' ? id.value : undefined }
+          role={ props.type === 'radio' ? 'radiogroup' : undefined }
         >
           { slots?.default?.() }
         </div>

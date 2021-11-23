@@ -2,9 +2,9 @@
 import './VRadioGroup.sass'
 
 // Components
-import { VInput } from '../VInput'
-import { VLabel } from '../VLabel'
-import { VSelectionControlGroup } from '../VSelectionControlGroup'
+import { filterInputAttrs, VInput } from '@/components/VInput/VInput'
+import { VLabel } from '@/components/VLabel'
+import { VSelectionControlGroup } from '@/components/VSelectionControlGroup'
 
 // Utility
 import { computed, defineComponent } from 'vue'
@@ -42,6 +42,7 @@ export const VRadioGroup = defineComponent({
     const id = computed(() => props.id || `radio-group-${uid}`)
 
     useRender(() => {
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const label = slots.label
         ? slots.label({
           label: props.label,
@@ -52,7 +53,7 @@ export const VRadioGroup = defineComponent({
       return (
         <VInput
           class="v-radio-group"
-          { ...attrs }
+          { ...rootAttrs }
           v-slots={{
             ...slots,
             default: ({
@@ -72,14 +73,15 @@ export const VRadioGroup = defineComponent({
                 ) }
 
                 <VSelectionControlGroup
+                  id={ id.value }
                   disabled={ isDisabled.value }
                   onIcon={ props.onIcon }
                   offIcon={ props.offIcon }
                   type={ props.type }
-                  role="radiogroup"
                   readonly={ isReadonly.value }
                   inline={ props.inline }
                   v-slots={ slots }
+                  { ...inputAttrs }
                 />
               </>
             ),
