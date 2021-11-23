@@ -7,8 +7,9 @@ import { VInput } from '@/components/VInput'
 import { filterInputAttrs } from '@/components/VInput/VInput'
 
 // Utility
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import { useRender } from '@/util'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 export const VSwitch = defineComponent({
   name: 'VSwitch',
@@ -27,18 +28,19 @@ export const VSwitch = defineComponent({
       default: false,
     },
   },
+  emits: {
+    'update:indeterminate': (val: boolean) => true,
+  },
 
   setup (props, { attrs, slots }) {
-    const indeterminate = ref(props.indeterminate)
-
-    function onChange () {
-      if (indeterminate.value) {
-        indeterminate.value = false
-      }
-    }
-
     useRender(() => {
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
+      const indeterminate = useProxiedModel(props, 'indeterminate')
+      function onChange () {
+        if (indeterminate.value) {
+          indeterminate.value = false
+        }
+      }
 
       return (
         <VInput
@@ -58,7 +60,6 @@ export const VSwitch = defineComponent({
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 onUpdate:modelValue={ onChange }
-                aria-checked={ indeterminate.value ? 'mixed' : undefined }
                 { ...inputAttrs }
                 v-slots={{
                   default: () => (<div class="v-switch__track"></div>),

@@ -209,7 +209,6 @@ export const VSelectionControl = genericComponent<new <T>() => {
           props: { for: id.value },
         })
         : props.label
-      const type = group?.type?.value ?? props.type
 
       return (
         <div
@@ -250,10 +249,9 @@ export const VSelectionControl = genericComponent<new <T>() => {
                 onBlur={ onBlur }
                 onFocus={ onFocus }
                 readonly={ props.readonly }
-                type={ type }
-                value={ type === 'radio' ? trueValue.value : undefined }
+                type={ group?.type?.value ?? props.type }
+                value={ trueValue.value }
                 name={ group?.name?.value ?? props.name }
-                aria-checked={ model.value }
                 { ...attrs }
               />
 
