@@ -24,7 +24,6 @@ export const makeRoundedProps = propsFactory({
   },
 }, 'rounded')
 
-export function useRounded(rounded: Ref<RoundedValue>, name: string): RoundedData
 export function useRounded (props: RoundedProps | Ref<RoundedValue>, name: string): RoundedData {
   const roundedClasses = computed(() => {
     const rounded = isRef(props) ? props.value : props.rounded
