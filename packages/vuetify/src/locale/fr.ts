@@ -65,7 +65,7 @@ export default {
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Note de {0} sur {1}',
     },
   },
 }

@@ -25,7 +25,7 @@ While `v-bottom navigation` is meant to be used with [vue-router](https://router
 
 - [v-bottom-navigation](/api/v-bottom-navigation)
 
-<api-section page="components/bottom-navigation" />
+<inline-api page="components/bottom-navigation" />
 
 ## Examples
 

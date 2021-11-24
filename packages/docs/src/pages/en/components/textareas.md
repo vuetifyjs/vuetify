@@ -25,7 +25,7 @@ Textarea components are used for collecting large amounts of textual data.
 
 - [v-textarea](/api/v-textarea)
 
-<api-section page="components/textareas" />
+<inline-api page="components/textareas" />
 
 ## Examples
 

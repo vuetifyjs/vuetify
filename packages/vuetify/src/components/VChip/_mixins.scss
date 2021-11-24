@@ -8,7 +8,7 @@
 @mixin chip-sizes {
   @each $sizeName, $multiplier in settings.$size-scales {
     $size: map.get($chip-sizes, "font-size") + math.div(2 * $multiplier, 16);
-    $height: map.get($chip-sizes, "height") + (8 * $multiplier);
+    $height: map.get($chip-sizes, "height") + (6 * $multiplier);
     $padding: math.round(math.div($height, $chip-padding-ratio));
 
     .v-chip--size-#{$sizeName} {
@@ -34,7 +34,8 @@
         }
       }
 
-      .v-chip__append {
+      .v-chip__append,
+      .v-chip__close {
         margin-inline-end: -$padding * .5;
         margin-inline-start: $padding * .5;
 

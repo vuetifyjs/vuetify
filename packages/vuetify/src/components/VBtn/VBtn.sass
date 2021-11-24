@@ -37,7 +37,7 @@
 
   @supports selector(:focus-visible)
     &::after
-      @include tools.absolute()
+      @include tools.absolute(true)
       pointer-events: none
       border: 2px solid currentColor
       border-radius: inherit
@@ -69,6 +69,9 @@
 
     &:active
       +tools.elevation(map.get($button-elevation, 'active'))
+
+  &--flat
+    box-shadow: none
 
   &--block
     display: flex

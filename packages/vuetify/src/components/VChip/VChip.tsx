@@ -23,7 +23,7 @@ import { Ripple } from '@/directives/ripple'
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VChip = defineComponent({
   name: 'VChip',
 
   directives: { Ripple },
@@ -57,6 +57,7 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    text: String,
     modelValue: {
       type: Boolean,
       default: true,
@@ -147,7 +148,7 @@ export default defineComponent({
             </div>
           ) }
 
-          { slots.default?.() }
+          { slots.default?.() ?? props.text }
 
           { hasAppend && (
             <div class="v-chip__append">
@@ -185,3 +186,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VChip = InstanceType<typeof VChip>

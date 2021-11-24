@@ -25,6 +25,7 @@ module.exports = {
     'react',
   ],
   rules: {
+    'no-var': 'error',
     // allow paren-less arrow functions
     'arrow-parens': ['error', 'as-needed'],
     // set maximum line characters
@@ -34,7 +35,7 @@ module.exports = {
       ignoreTemplateLiterals: true,
       ignoreTrailingComments: true,
     }],
-    'max-statements': ['error', 24],
+    complexity: ['error', 32],
     quotes: ['error', 'single', {
       avoidEscape: true,
       allowTemplateLiterals: true,
@@ -109,16 +110,14 @@ module.exports = {
         'vue/html-closing-bracket-spacing': 'error',
         'vue/max-attributes-per-line': ['error', {
           singleline: 5,
-          multiline: {
-            max: 1,
-            allowFirstLine: false,
-          },
+          multiline: 1,
         }],
         'vue/valid-v-on': 'off', // This rule doesn't allow empty event listeners
         'vue/no-v-html': 'off',
         'vue/singleline-html-element-content-newline': 'off',
         'vue/multiline-html-element-content-newline': 'off',
         'vue/valid-v-slot': ['error', { allowModifiers: true }],
+        'vue/multi-word-component-names': 'off',
       },
     },
     {
@@ -136,8 +135,19 @@ module.exports = {
           allowTemplateLiterals: true,
         }],
 
+        indent: 'off',
+        '@typescript-eslint/indent': ['error', 2, {
+          ...require('eslint-config-standard').rules.indent[2],
+          ignoredNodes: [...require('eslint-config-standard').rules.indent[2].ignoredNodes, 'TSTypeParameterInstantiation'],
+          flatTernaryExpressions: true,
+          offsetTernaryExpressions: false,
+        }],
+
+        'func-call-spacing': 'off',
+        '@typescript-eslint/func-call-spacing': require('eslint-config-standard').rules['func-call-spacing'],
+
+        // Handled by tsc
         'no-redeclare': 'off',
-        '@typescript-eslint/no-redeclare': 'error',
 
         'no-use-before-define': 'off',
         '@typescript-eslint/no-use-before-define': ['error', 'nofunc'],

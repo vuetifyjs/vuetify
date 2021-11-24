@@ -146,3 +146,24 @@
 
   .v-list-item--active.v-list-item--contained &
     --v-theme-overlay-multiplier: 0
+
+.v-list-item--prepend, .v-list-group--prepend > .v-list-group__header
+  $root: &
+
+  @at-root
+    @include tools.density('v-list', $list-density) using ($modifier)
+      #{$root}
+        padding-inline-start: calc(#{$list-item-avatar-size + ($modifier * $list-item-avatar-size-multiplier) + $list-item-avatar-margin-end + $list-subheader-padding-start} + (var(--v-list-depth) * #{$list-item-avatar-size + ($modifier * $list-item-avatar-size-multiplier)})) !important
+
+.v-list-group__items
+  .v-list-item:not(.v-list-item--prepend)
+    $root: &
+
+    @at-root
+      @include tools.density('v-list', $list-density) using ($modifier)
+        #{$root}
+          padding-inline-start: calc(#{$list-subheader-padding-start} + (var(--v-list-depth) * #{$list-item-avatar-size + ($modifier * $list-item-avatar-size-multiplier)})) !important
+
+.v-list-group__header.v-list-item--active
+  .v-list-item__overlay
+    display: none

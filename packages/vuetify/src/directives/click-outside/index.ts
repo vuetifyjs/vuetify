@@ -26,7 +26,11 @@ function checkEvent (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirect
   // level of introspection as to _what_ we're clicking. We want to check to see if
   // our target is the shadowroot parent container, and if it is, ignore.
   const root = attachedRoot(el)
-  if (root instanceof ShadowRoot && root.host === e.target) return false
+  if (
+    typeof ShadowRoot !== 'undefined' &&
+    root instanceof ShadowRoot &&
+    root.host === e.target
+  ) return false
 
   // Check if additional elements were passed to be included in check
   // (click must be outside all included elements, if any)
@@ -59,9 +63,9 @@ function directive (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirecti
 function handleShadow (el: HTMLElement, callback: Function): void {
   const root = attachedRoot(el)
 
-  callback(document.body)
+  callback(document)
 
-  if (root instanceof ShadowRoot) {
+  if (typeof ShadowRoot !== 'undefined' && root instanceof ShadowRoot) {
     callback(root)
   }
 }
@@ -83,23 +87,31 @@ export const ClickOutside = {
       app.addEventListener('mousedown', onMousedown, true)
     })
 
-    el._clickOutside = {
-      lastMousedownWasOutside: true,
+    if (!el._clickOutside) {
+      el._clickOutside = {
+        lastMousedownWasOutside: true,
+      }
+    }
+
+    el._clickOutside[binding.instance!.$.uid] = {
       onClick,
       onMousedown,
     }
   },
 
-  unmounted (el: HTMLElement) {
+  unmounted (el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
     if (!el._clickOutside) return
 
     handleShadow(el, (app: HTMLElement) => {
-      if (!app || !el._clickOutside) return
-      app.removeEventListener('click', el._clickOutside.onClick, true)
-      app.removeEventListener('mousedown', el._clickOutside.onMousedown, true)
+      if (!app || !el._clickOutside?.[binding.instance!.$.uid]) return
+
+      const { onClick, onMousedown } = el._clickOutside[binding.instance!.$.uid]!
+
+      app.removeEventListener('click', onClick, true)
+      app.removeEventListener('mousedown', onMousedown, true)
     })
 
-    delete el._clickOutside
+    delete el._clickOutside[binding.instance!.$.uid]
   },
 }
 

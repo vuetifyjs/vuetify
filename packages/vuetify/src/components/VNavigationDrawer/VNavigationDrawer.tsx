@@ -19,7 +19,7 @@ import { defineComponent } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-export default defineComponent({
+export const VNavigationDrawer = defineComponent({
   name: 'VNavigationDrawer',
 
   props: {
@@ -55,6 +55,10 @@ export default defineComponent({
     ...makeRoundedProps(),
     ...makeTagProps({ tag: 'nav' }),
     ...makeThemeProps(),
+  },
+
+  emits: {
+    'update:modelValue': (val: boolean) => true,
   },
 
   setup (props, { slots }) {
@@ -156,3 +160,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VNavigationDrawer = InstanceType<typeof VNavigationDrawer>

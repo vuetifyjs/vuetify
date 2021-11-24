@@ -24,7 +24,7 @@ The `v-click-outside` directive allows you to provide a handler to be invoked wh
 
 - [v-click-outside](/api/v-click-outside)
 
-<api-section page="directives/click-outside" />
+<inline-api page="directives/click-outside" />
 
 ## Examples
 

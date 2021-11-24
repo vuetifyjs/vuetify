@@ -1,0 +1,27 @@
+name: Issue triage
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: vuetifyjs/triage-action@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          triageLabel: 'S: triage'
+          sponsorsFile: '.github/sponsors.yml'
+          triagedLabels: |-
+            T: documentation
+            T: bug
+            T: enhancement
+            T: feature
+            T: question
+            Epic
+            duplicate
+            layer 8 issue
+            invalid
+            wontfix
+            working as intended

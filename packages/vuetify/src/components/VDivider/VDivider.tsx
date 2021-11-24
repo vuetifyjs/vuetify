@@ -12,7 +12,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'maxHeight' | 'maxWidth'
 type DividerStyles = Partial<Record<DividerKey, string>>
 
-export default defineComponent({
+export const VDivider = defineComponent({
   name: 'VDivider',
 
   props: {

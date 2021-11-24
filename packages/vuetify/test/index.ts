@@ -108,4 +108,6 @@ class ResizeObserver {
 
 (global as any).ResizeObserver = ResizeObserver
 
+;(global as any).CSS = { supports: () => false }
+
 toHaveBeenWarnedInit()

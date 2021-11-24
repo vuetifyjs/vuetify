@@ -5,6 +5,7 @@
   "alpha": "Alpha",
   "api": "API",
   "api-headers": {
+    "links": "Component Pages",
     "argument": "Argument",
     "events": "Events",
     "functions": "Functions",

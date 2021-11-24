@@ -21,6 +21,7 @@ import {
   withDirectives,
 } from 'vue'
 import {
+  convertToUnit,
   defineComponent,
   SUPPORTS_INTERSECTION,
   useRender,
@@ -37,7 +38,7 @@ export interface srcObject {
   aspect: number
 }
 
-export default defineComponent({
+export const VImg = defineComponent({
   name: 'VImg',
 
   directives: { intersect },
@@ -65,6 +66,7 @@ export default defineComponent({
       default: '',
     },
     srcset: String,
+    width: [String, Number],
 
     ...makeTransitionProps(),
   },
@@ -247,9 +249,28 @@ export default defineComponent({
       return <div class="v-img__gradient" style={{ backgroundImage: `linear-gradient(${props.gradient})` }} />
     })
 
+    const isBooted = ref(false)
+    {
+      const stop = watch(aspectRatio, val => {
+        if (val) {
+          // Doesn't work with nextTick, idk why
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              isBooted.value = true
+            })
+          })
+          stop()
+        }
+      })
+    }
+
     useRender(() => (
       <VResponsive
-        class="v-img"
+        class={[
+          'v-img',
+          { 'v-img--booting': !isBooted.value },
+        ]}
+        style={{ width: convertToUnit(props.width === 'auto' ? naturalWidth.value : props.width) }}
         aspectRatio={ aspectRatio.value }
         aria-label={ props.alt }
         role={ props.alt ? 'img' : undefined }
@@ -273,3 +294,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VImg = InstanceType<typeof VImg>

@@ -16,7 +16,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { computed } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 
-export default defineComponent({
+export const VBottomNavigation = defineComponent({
   name: 'VBottomNavigation',
 
   props: {
@@ -113,3 +113,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VBottomNavigation = InstanceType<typeof VBottomNavigation>

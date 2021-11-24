@@ -6,6 +6,7 @@
 export { useDisplay } from './display'
 export { useTheme } from './theme'
 export { provideRtl, useRtl } from './rtl'
+export { useLayout } from './layout'
 
 export type { DisplayBreakpoint, DisplayInstance, DisplayThresholds } from './display'
 export type { IconAliases, IconProps, IconSet } from './icons'

@@ -5,7 +5,7 @@ import { VItemGroupSymbol } from './VItemGroup'
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VItem = defineComponent({
   name: 'VItem',
 
   props: makeGroupItemProps(),

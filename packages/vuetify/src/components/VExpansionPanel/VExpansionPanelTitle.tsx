@@ -29,7 +29,7 @@ export const makeVExpansionPanelTitleProps = propsFactory({
   color: String,
 })
 
-export default defineComponent({
+export const VExpansionPanelTitle = defineComponent({
   name: 'VExpansionPanelTitle',
 
   directives: { ripple },

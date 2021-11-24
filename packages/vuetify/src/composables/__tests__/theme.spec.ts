@@ -63,7 +63,7 @@ describe('createTheme', () => {
       variations: false,
     })
 
-    expect(theme.themes.value.light.colors.background).not.toEqual('#FF0000')
+    expect(theme.themes.value.light.colors.background).not.toBe('#FF0000')
 
     theme.setTheme('light', {
       ...theme.themes.value.light,
@@ -73,7 +73,7 @@ describe('createTheme', () => {
       },
     })
 
-    expect(theme.themes.value.light.colors.background).toEqual('#FF0000')
+    expect(theme.themes.value.light.colors.background).toBe('#FF0000')
   })
 
   // it('should use vue-meta@2.3 functionality', () => {

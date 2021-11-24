@@ -15,12 +15,13 @@ interface GroupItem {
 }
 
 interface GroupProps {
-  disabled?: boolean
-  modelValue?: unknown
-  multiple?: boolean
-  mandatory?: boolean | 'force'
-  max?: number
-  selectedClass?: string
+  disabled: boolean
+  modelValue: unknown
+  multiple: boolean
+  mandatory: boolean | 'force' | undefined
+  max: number | undefined
+  selectedClass: string | undefined
+  'onUpdate:modelValue': ((val: unknown) => void) | undefined
 }
 
 interface GroupProvide {
@@ -49,7 +50,7 @@ export interface GroupItemProvide {
 
 export const makeGroupProps = propsFactory({
   modelValue: {
-    type: [Number, Boolean, String, Array, Object],
+    type: null,
     default: undefined,
   },
   multiple: Boolean,

@@ -3,19 +3,19 @@ import './VMain.sass'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
-import { useMain } from '@/composables/layout'
+import { useLayout } from '@/composables/layout'
 import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VMain = defineComponent({
   name: 'VMain',
 
   props: makeTagProps({ tag: 'main' }),
 
   setup (props, { slots }) {
-    const { mainStyles } = useMain()
+    const { mainStyles } = useLayout()
     const { ssrBootStyles } = useSsrBoot()
 
     return () => (

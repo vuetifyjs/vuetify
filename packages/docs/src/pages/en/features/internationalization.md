@@ -56,7 +56,7 @@ app.mount('#app')
 
 - [internationalization](/api/internationalization)
 
-<api-section page="features/internationalization" />
+<inline-api page="features/internationalization" />
 
 ## Scoped languages
 

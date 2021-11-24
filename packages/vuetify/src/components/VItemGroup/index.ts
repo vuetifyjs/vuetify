@@ -1,2 +1,2 @@
-export { default as VItemGroup } from './VItemGroup'
-export { default as VItem } from './VItem'
+export { VItemGroup } from './VItemGroup'
+export { VItem } from './VItem'

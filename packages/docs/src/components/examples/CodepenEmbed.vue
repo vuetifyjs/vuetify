@@ -7,7 +7,8 @@
 </template>
 
 <script>
-  import { get } from 'vuex-pathify'
+  const version = fetch('https://unpkg.com/@vuetify/nightly@next/', { method: 'HEAD' })
+    .then(r => new URL(r.url).pathname.split(/[/@]/).filter(Boolean).at(-1))
 
   export default {
     name: 'CodepenEmbed',
@@ -17,8 +18,11 @@
       pen: Object,
     },
 
+    data: vm => ({
+      version: `vuetify@${vm.$store.state.app.version}`,
+    }),
+
     computed: {
-      version: get('app/version'),
       attrs () {
         return {
           'data-height': 500,
@@ -63,7 +67,7 @@
           'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900',
           'https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css',
           'https://fonts.googleapis.com/css?family=Material+Icons',
-          `https://cdn.jsdelivr.net/npm/vuetify@${this.version}/dist/vuetify.css`,
+          `https://unpkg.com/${this.version}/dist/vuetify.css`,
         ]
       },
       editors () {
@@ -77,7 +81,7 @@
         return [
           'https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js',
           'https://unpkg.com/vue@next/dist/vue.global.js',
-          `https://unpkg.com/vuetify@${this.version}/dist/vuetify.js`,
+          `https://unpkg.com/${this.version}/dist/vuetify.js`,
         ]
       },
       script () {
@@ -130,7 +134,9 @@
       },
     },
 
-    mounted () {
+    async mounted () {
+      await version.then(v => this.version = `@vuetify/nightly@${v}`)
+      await this.$nextTick()
       window.__CPEmbed(`#${this.file}`)
     },
   }

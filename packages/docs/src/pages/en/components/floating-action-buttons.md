@@ -26,7 +26,7 @@ Floating action buttons can be attached to material to signify a promoted action
 - [v-btn](/api/v-btn)
 - [v-speed-dial](/api/v-speed-dial)
 
-<api-section page="components/floating-action-buttons" />
+<inline-api page="components/floating-action-buttons" />
 
 <!-- ## Sub-components
 

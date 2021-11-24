@@ -24,7 +24,7 @@ import { Ripple } from '@/directives/ripple'
 import { computed } from 'vue'
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VBtn = defineComponent({
   name: 'VBtn',
 
   directives: { Ripple },
@@ -86,6 +86,7 @@ export default defineComponent({
               'v-btn--block': props.block,
               'v-btn--disabled': props.disabled,
               'v-btn--elevated': isElevated.value,
+              'v-btn--flat': props.flat,
               'v-btn--icon': !!props.icon,
               'v-btn--stacked': props.stacked,
             },
@@ -146,3 +147,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VBtn = InstanceType<typeof VBtn>

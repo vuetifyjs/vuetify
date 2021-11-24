@@ -27,10 +27,4 @@ The core development team are Open Source developers that help guide the directi
 
 <team-members team="core" />
 
-## Contributors
-
-From updating docs to fixing bugs to adding new components, contributors actively work towards improving Vuetify.
-
-<team-members team="contributors" />
-
 <backmatter />

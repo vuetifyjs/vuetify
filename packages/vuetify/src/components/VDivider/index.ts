@@ -1,1 +1,1 @@
-export { default as VDivider } from './VDivider'
+export { VDivider } from './VDivider'

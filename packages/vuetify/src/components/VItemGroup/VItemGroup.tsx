@@ -11,7 +11,7 @@ import { defineComponent } from '@/util'
 
 export const VItemGroupSymbol = Symbol.for('vuetify:v-item-group')
 
-export default defineComponent({
+export const VItemGroup = defineComponent({
   name: 'VItemGroup',
 
   props: {
@@ -48,3 +48,5 @@ export default defineComponent({
     )
   },
 })
+
+export type VItemGroup = InstanceType<typeof VItemGroup>

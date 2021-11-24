@@ -326,6 +326,6 @@ Once complete, instead of using <kbd>git commit</kbd> you will run the command <
 
 [commitizen]: https://github.com/commitizen/cz-cli
 [community]: https://community.vuetifyjs.com/
-[Core Team]: /about/team/
+[Core Team]: /about/meet-the-team/
 [pull request]: https://github.com/vuetifyjs/vuetify/pulls
 [Issues]: https://github.com/vuetifyjs/vuetify/issues

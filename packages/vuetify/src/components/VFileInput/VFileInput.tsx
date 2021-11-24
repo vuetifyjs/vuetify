@@ -2,7 +2,7 @@
 import './VFileInput.sass'
 
 // Components
-import { makeVFieldProps } from '@/components/VField/VField'
+import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
 import { VChip } from '@/components/VChip'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
@@ -13,13 +13,12 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, humanReadableFileSize, pick, useRender, wrapInArray } from '@/util'
+import { defineComponent, filterInputAttrs, humanReadableFileSize, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { VFieldSlot } from '@/components/VField/VField'
 
-export default defineComponent({
+export const VFileInput = defineComponent({
   name: 'VFileInput',
 
   inheritAttrs: false,
@@ -36,10 +35,6 @@ export default defineComponent({
       default: '$vuetify.fileInput.counter',
     },
     multiple: Boolean,
-    prependIcon: {
-      type: String,
-      default: '$file',
-    },
     showSize: {
       type: [Boolean, Number] as PropType<boolean | 1000 | 1024>,
       default: false,
@@ -53,6 +48,10 @@ export default defineComponent({
 
     ...makeVFieldProps({ clearable: true }),
 
+    prependIcon: {
+      type: String,
+      default: '$file',
+    },
     modelValue: {
       type: Array as PropType<File[] | undefined>,
       default: () => ([]),
@@ -105,17 +104,16 @@ export default defineComponent({
     }
 
     useRender(() => {
-      const hasCounter = (slots.counter || props.counter || counterValue.value)
-      const [_, restAttrs] = pick(attrs, ['class'])
+      const hasCounter = !!(slots.counter || props.counter || counterValue.value)
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
+      const [fieldProps, _] = filterFieldProps(props)
 
       return (
         <VField
           ref={ fieldRef }
-          class={[
-            'v-file-input',
-            attrs.class,
-          ]}
+          class="v-file-input"
           active={ isDirty.value }
+          dirty={ isDirty.value }
           prepend-icon={ props.prependIcon }
           onUpdate:active={ val => internalDirty.value = val }
           onClick:control={ click }
@@ -129,15 +127,15 @@ export default defineComponent({
 
             fieldRef.value.inputRef.value = ''
           } }
-          { ...attrs }
-          { ...props }
+          { ...rootAttrs }
+          { ...fieldProps }
           v-slots={{
             ...slots,
             default: ({
               isActive,
               inputRef,
               props: { class: fieldClass, ...slotProps },
-            }: VFieldSlot) => (
+            }) => (
               <>
                 <input
                   ref={ inputRef }
@@ -154,7 +152,7 @@ export default defineComponent({
                     if (!isActive) inputRef.value?.focus()
                   } }
                   { ...slotProps }
-                  { ...restAttrs }
+                  { ...inputAttrs }
                 />
 
                 { isDirty.value && (
@@ -200,3 +198,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VFileInput = InstanceType<typeof VFileInput>

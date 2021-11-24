@@ -1,6 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
-import VBtn from '../VBtn'
+import { VBtn } from '../VBtn'
 import { generate } from '@/../cypress/templates'
 
 const loadingText = 'Loading'

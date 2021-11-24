@@ -16,7 +16,7 @@
 
     computed: {
       size () {
-        return this.$vuetify.breakpoint.smAndUp ? 400 : 250
+        return this.$vuetify.breakpoint.smAndUp ? 300 : 200
       },
     },
   }

@@ -1,3 +1,3 @@
 import { createSimpleFunctional } from '@/util'
 
-export default createSimpleFunctional('v-banner-actions')
+export const VBannerActions = createSimpleFunctional('v-banner-actions')

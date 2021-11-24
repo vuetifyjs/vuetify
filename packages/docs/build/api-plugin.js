@@ -1,8 +1,9 @@
 // Imports
 const fs = require('fs')
+const path = require('path')
 const { resolve } = require('path')
 const { startCase } = require('lodash')
-const { getApi, getCompleteApi, getHeaderLocale } = require('@vuetify/api-generator')
+const { getApi, getCompleteApi } = require('@vuetify/api-generator')
 const rimraf = require('rimraf')
 
 const localeList = require('../src/i18n/locales').map(item => item.alternate || item.locale)
@@ -20,7 +21,7 @@ function genApiLinks (component, header) {
   if (!links.length || !header) return ''
 
   const section = [
-    `## ${header}`,
+    `## ${header} {#links}`,
     links.join('\n'),
   ]
 
@@ -57,17 +58,39 @@ function genFooter () {
 
 const sanitize = str => str.replace(/\$/g, '')
 
+function loadMessages (locale) {
+  const prefix = path.resolve('./src/i18n/messages/')
+  const fallback = require(path.join(prefix, 'en.json'))
+
+  try {
+    const messages = require(path.join(prefix, `${locale}.json`))
+
+    return {
+      ...fallback['api-headers'],
+      ...(messages['api-headers'] || {}),
+    }
+  } catch (err) {
+    return fallback['api-headers']
+  }
+}
+
 function createMdFile (component, data, locale) {
-  const headerLocale = getHeaderLocale(locale)
+  const messages = loadMessages(locale)
   let str = ''
 
   str += genHeader(component)
-  str += genApiLinks(component, headerLocale.links)
+  str += genApiLinks(component, messages.links)
 
+  // for (const section of ['props', 'functions', 'events', 'slots', 'sass', 'options', 'argument', 'modifiers']) {
+  //   if (Array.isArray(data[section]) && data[section].length) {
+  //     str += `## ${messages[section]} {#${section}}\n\n`
+  //     str += `<api-section name="${component}" section="${section}" />\n\n`
+  //   }
+  // }
   for (const [header, value] of Object.entries(data)) {
     if (['composables', 'name'].includes(header) || !value.length) continue
 
-    str += `## ${headerLocale[header]}\n\n`
+    str += `## ${messages[header]}\n\n`
     str += `<api-table name="${sanitize(component)}" field="${header}" />\n\n`
   }
   str += `<api-section name="${component}" />\n\n`

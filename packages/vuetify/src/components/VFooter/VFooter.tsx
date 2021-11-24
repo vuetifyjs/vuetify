@@ -13,7 +13,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VFooter = defineComponent({
   name: 'VFooter',
 
   props: {

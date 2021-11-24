@@ -25,7 +25,7 @@ A dialog contains two slots, one for its activator and one for its content (defa
 
 - [v-dialog](/api/v-dialog)
 
-<api-section page="components/dialogs" />
+<inline-api page="components/dialogs" />
 
 ## Examples
 

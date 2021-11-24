@@ -57,7 +57,7 @@
       cssResources () {
         return [
           'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900',
-          'https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css',
+          'https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css',
           'https://fonts.googleapis.com/css?family=Material+Icons',
           `https://cdn.jsdelivr.net/npm/vuetify@${this.version}/dist/vuetify.min.css`,
         ]

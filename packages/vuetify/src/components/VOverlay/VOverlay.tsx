@@ -14,6 +14,7 @@ import { useRtl } from '@/composables/rtl'
 import { useTeleport } from '@/composables/teleport'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
+import { useStack } from '@/composables/stack'
 
 // Directives
 import { ClickOutside } from '@/directives/click-outside'
@@ -21,7 +22,7 @@ import { ClickOutside } from '@/directives/click-outside'
 // Utilities
 import {
   convertToUnit,
-  defineComponent,
+  genericComponent,
   getScrollParent,
   standardEasing,
   useRender,
@@ -32,13 +33,13 @@ import {
   ref,
   Teleport,
   toHandlers,
-  toRef,
   Transition,
   watch,
 } from 'vue'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
+import type { MakeSlots } from '@/util'
 import type { BackgroundColorData } from '@/composables/color'
 
 interface ScrimProps {
@@ -64,7 +65,14 @@ function Scrim (props: ScrimProps) {
   )
 }
 
-export default defineComponent({
+export type OverlaySlots = MakeSlots<{
+  default: [{ isActive: Ref<boolean> }]
+  activator: [{ isActive: boolean, props: Dictionary<any> }]
+}>
+
+export const VOverlay = genericComponent<new () => {
+  $slots: OverlaySlots
+}>()({
   name: 'VOverlay',
 
   directives: { ClickOutside },
@@ -73,10 +81,8 @@ export default defineComponent({
 
   props: {
     absolute: Boolean,
-    attach: {
-      type: [Boolean, String, Object] as PropType<boolean | string | Element>,
-      default: 'body',
-    },
+    attach: [Boolean, String, Object] as PropType<boolean | string | Element>,
+    contained: Boolean,
     contentClass: null,
     noClickAnimation: Boolean,
     modelValue: Boolean,
@@ -102,7 +108,7 @@ export default defineComponent({
 
   setup (props, { slots, attrs, emit }) {
     const isActive = useProxiedModel(props, 'modelValue')
-    const { teleportTarget } = useTeleport(toRef(props, 'attach'))
+    const { teleportTarget } = useTeleport(computed(() => props.attach || props.contained))
     const { themeClasses } = useTheme(props)
     const { rtlClasses } = useRtl()
     const { hasContent, onAfterLeave } = useLazy(props, isActive)
@@ -111,7 +117,9 @@ export default defineComponent({
     }))
     const { activatorEl, activatorEvents } = useActivator(props, isActive)
     const { dimensionStyles } = useDimension(props)
+    const { isTop } = useStack(isActive)
 
+    const root = ref<HTMLElement>()
     const contentEl = ref<HTMLElement>()
     const { contentStyles, updatePosition } = usePositionStrategies(props, {
       contentEl,
@@ -119,6 +127,7 @@ export default defineComponent({
       isActive,
     })
     useScrollStrategies(props, {
+      root,
       contentEl,
       activatorEl,
       isActive,
@@ -133,11 +142,19 @@ export default defineComponent({
     }
 
     function closeConditional () {
-      return isActive.value
+      return isActive.value && isTop.value
     }
 
+    watch(isActive, val => {
+      if (val) {
+        window.addEventListener('keydown', onKeydown)
+      } else {
+        window.removeEventListener('keydown', onKeydown)
+      }
+    }, { immediate: true })
+
     function onKeydown (e: KeyboardEvent) {
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' && isTop.value) {
         if (!props.persistent) {
           isActive.value = false
         } else animateClick()
@@ -145,15 +162,17 @@ export default defineComponent({
     }
 
     useBackButton(next => {
-      next(!isActive.value)
-
-      if (!props.persistent) isActive.value = false
-      else animateClick()
+      if (isTop.value && isActive.value) {
+        next(false)
+        if (!props.persistent) isActive.value = false
+        else animateClick()
+      } else {
+        next()
+      }
     })
 
-    const root = ref()
     const top = ref<number>()
-    watch(() => isActive.value && props.absolute && teleportTarget.value == null, val => {
+    watch(() => isActive.value && (props.absolute || props.contained) && teleportTarget.value == null, val => {
       if (val) {
         const scrollParent = getScrollParent(root.value)
         if (scrollParent && scrollParent !== document.scrollingElement) {
@@ -187,7 +206,6 @@ export default defineComponent({
         }) }
         <Teleport
           disabled={ !teleportTarget.value }
-          ref={ root }
           to={ teleportTarget.value }
         >
           { hasContent.value && (
@@ -195,13 +213,15 @@ export default defineComponent({
               class={[
                 'v-overlay',
                 {
-                  'v-overlay--absolute': props.absolute,
+                  'v-overlay--absolute': props.absolute || props.contained,
                   'v-overlay--active': isActive.value,
+                  'v-overlay--contained': props.contained,
                 },
                 themeClasses.value,
                 rtlClasses.value,
               ]}
               style={ top.value != null ? `top: ${convertToUnit(top.value)}` : undefined }
+              ref={ root }
               {...attrs}
             >
               <Scrim
@@ -227,7 +247,6 @@ export default defineComponent({
                     dimensionStyles.value,
                     contentStyles.value,
                   ]}
-                  onKeydown={ onKeydown }
                 >
                   { slots.default?.({ isActive }) }
                 </div>
@@ -245,3 +264,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VOverlay = InstanceType<typeof VOverlay>

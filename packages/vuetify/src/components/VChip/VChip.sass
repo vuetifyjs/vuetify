@@ -7,6 +7,7 @@
   align-items: center
   cursor: default
   display: inline-flex
+  font-weight: $chip-font-weight
   position: relative
   text-decoration: none
 
@@ -29,16 +30,10 @@
     @include tools.rounded($chip-label-border-radius)
 
 // Elements
+.v-chip__prepend,
 .v-chip__append
-  margin-inline-start: $chip-append-margin-inline-start
-  margin-inline-end: $chip-append-margin-inline-end
-
-  + .v-chip__close
-    margin-inline-start: 0
-
-.v-chip__prepend
-  margin-inline-start: $chip-prepend-margin-inline-start
-  margin-inline-end: $chip-prepend-margin-inline-end
+  align-items: center
+  display: inline-flex
 
 .v-chip__close
   align-self: center
@@ -49,8 +44,6 @@
   max-height: $chip-close-size
   max-width: $chip-close-size
   user-select: none
-  margin-inline-start: $chip-close-margin-inline-start
-  margin-inline-end: $chip-close-margin-inline-end
 
   .v-icon
     font-size: inherit

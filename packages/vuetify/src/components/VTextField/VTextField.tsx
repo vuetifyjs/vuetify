@@ -2,7 +2,7 @@
 import './VTextField.sass'
 
 // Components
-import { makeVFieldProps } from '@/components/VField/VField'
+import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
 
@@ -14,11 +14,10 @@ import Intersect from '@/directives/intersect'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, pick, useRender } from '@/util'
+import { defineComponent, filterInputAttrs, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { VFieldSlot } from '@/components/VField/VField'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
@@ -44,6 +43,10 @@ export const VTextField = defineComponent({
     },
 
     ...makeVFieldProps(),
+  },
+
+  emits: {
+    'update:modelValue': (val: string) => true,
   },
 
   setup (props, { attrs, slots }) {
@@ -89,8 +92,9 @@ export const VTextField = defineComponent({
     }
 
     useRender(() => {
-      const hasCounter = (slots.counter || props.counter || props.counterValue)
-      const [_, restAttrs] = pick(attrs, ['class'])
+      const hasCounter = !!(slots.counter || props.counter || props.counterValue)
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
+      const [fieldProps, _] = filterFieldProps(props)
 
       return (
         <VField
@@ -101,7 +105,6 @@ export const VTextField = defineComponent({
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
             },
-            attrs.class,
           ]}
           active={ isDirty.value }
           onUpdate:active={ val => internalDirty.value = val }
@@ -112,8 +115,8 @@ export const VTextField = defineComponent({
             model.value = ''
           }}
           role="textbox"
-          { ...attrs }
-          { ...props }
+          { ...rootAttrs }
+          { ...fieldProps }
           v-slots={{
             ...slots,
             default: ({
@@ -122,7 +125,7 @@ export const VTextField = defineComponent({
               isReadonly,
               inputRef,
               props: { class: fieldClass, ...slotProps },
-            }: VFieldSlot) => {
+            }) => {
               const showPlaceholder = isActive || props.persistentPlaceholder
               return (
                 <>
@@ -141,13 +144,13 @@ export const VTextField = defineComponent({
                     }, null, ['once']]}
                     ref={ inputRef }
                     autofocus={ props.autofocus }
-                    readonly={ isReadonly }
-                    disabled={ isDisabled }
+                    readonly={ isReadonly.value }
+                    disabled={ isDisabled.value }
                     placeholder={ props.placeholder }
                     size={ 1 }
                     type={ props.type }
                     { ...slotProps }
-                    { ...restAttrs }
+                    { ...inputAttrs }
                   />
 
                   { props.suffix && (
@@ -158,7 +161,7 @@ export const VTextField = defineComponent({
                 </>
               )
             },
-            details: hasCounter && (({ isFocused }: VFieldSlot) => (
+            details: hasCounter ? ({ isFocused }) => (
               <>
                 <span />
 
@@ -169,7 +172,7 @@ export const VTextField = defineComponent({
                   v-slots={ slots.counter }
                 />
               </>
-            )),
+            ) : undefined,
           }}
         />
       )
@@ -182,3 +185,5 @@ export const VTextField = defineComponent({
     }
   },
 })
+
+export type VTextField = InstanceType<typeof VTextField>
