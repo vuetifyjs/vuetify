@@ -51,8 +51,8 @@ export const makeSelectionControlProps = propsFactory({
   id: String,
   inline: Boolean,
   label: String,
-  offIcon: String,
-  onIcon: String,
+  falseIcon: String,
+  trueIcon: String,
   ripple: {
     type: Boolean,
     default: true,
@@ -131,8 +131,8 @@ export function useSelectionControl (
   }))
   const icon = computed(() => {
     return model.value
-      ? group?.onIcon.value ?? props.onIcon
-      : group?.offIcon.value ?? props.offIcon
+      ? group?.trueIcon.value ?? props.trueIcon
+      : group?.falseIcon.value ?? props.falseIcon
   })
 
   return {

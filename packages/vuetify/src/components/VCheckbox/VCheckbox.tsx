@@ -27,11 +27,11 @@ export const VCheckbox = defineComponent({
     ...makeVInputProps(),
     ...makeSelectionControlProps(),
 
-    offIcon: {
+    falseIcon: {
       type: String,
       default: '$checkboxOff',
     },
-    onIcon: {
+    trueIcon: {
       type: String,
       default: '$checkboxOn',
     },
@@ -45,15 +45,15 @@ export const VCheckbox = defineComponent({
   setup (props, { attrs, slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const indeterminate = useProxiedModel(props, 'indeterminate')
-    const offIcon = computed(() => {
+    const falseIcon = computed(() => {
       return indeterminate.value
         ? props.indeterminateIcon
-        : props.offIcon
+        : props.falseIcon
     })
-    const onIcon = computed(() => {
+    const trueIcon = computed(() => {
       return indeterminate.value
         ? props.indeterminateIcon
-        : props.onIcon
+        : props.trueIcon
     })
 
     function onChange () {
@@ -82,8 +82,8 @@ export const VCheckbox = defineComponent({
                 type="checkbox"
                 v-model={ model.value }
                 onUpdate:modelValue={ onChange }
-                offIcon={ offIcon.value }
-                onIcon={ onIcon.value }
+                falseIcon={ falseIcon.value }
+                trueIcon={ trueIcon.value }
                 aria-checked={ indeterminate.value ? 'mixed' : undefined }
                 { ...controlAttrs }
                 { ...controlProps }

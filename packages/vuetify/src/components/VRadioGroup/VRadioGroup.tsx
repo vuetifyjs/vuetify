@@ -25,11 +25,11 @@ export const VRadioGroup = defineComponent({
     ...makeVInputProps(),
     ...makeSelectionControlProps(),
 
-    onIcon: {
+    trueIcon: {
       type: String,
       default: '$radioOn',
     },
-    offIcon: {
+    falseIcon: {
       type: String,
       default: '$radioOff',
     },
@@ -79,8 +79,8 @@ export const VRadioGroup = defineComponent({
 
                 <VSelectionControlGroup
                   id={ id.value }
-                  onIcon={ props.onIcon }
-                  offIcon={ props.offIcon }
+                  trueIcon={ props.trueIcon }
+                  falseIcon={ props.falseIcon }
                   type={ props.type }
                   v-slots={ slots }
                   { ...controlAttrs }

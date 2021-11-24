@@ -10,8 +10,8 @@
     "mandatory": "Forces a selection on a `v-radio` child",
     "multiple": "Changes expected model to an array",
     "name": "Sets the component's name attribute",
-    "offIcon": "The icon used when inactive",
-    "onIcon": "The icon used when active",
+    "falseIcon": "The icon used when inactive",
+    "trueIcon": "The icon used when active",
     "row": "Displays radio buttons in row"
   },
   "events": {

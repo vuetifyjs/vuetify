@@ -17,8 +17,8 @@ export interface VSelectionGroupContext {
   name: Ref<string | undefined>
   modelValue: Ref<any>
   multiple: Ref<boolean>
-  onIcon: Ref<string | undefined>
-  offIcon: Ref<string | undefined>
+  trueIcon: Ref<string | undefined>
+  falseIcon: Ref<string | undefined>
   readonly: Ref<boolean>
   type: Ref<string | undefined>
 }
@@ -33,8 +33,8 @@ export const VSelectionControlGroup = defineComponent({
     id: String,
     inline: Boolean,
     name: String,
-    offIcon: String,
-    onIcon: String,
+    falseIcon: String,
+    trueIcon: String,
     multiple: {
       type: Boolean as PropType<boolean | null>,
       default: null,
@@ -60,8 +60,8 @@ export const VSelectionControlGroup = defineComponent({
       modelValue,
       multiple: computed(() => !!props.multiple || (props.multiple == null && Array.isArray(modelValue.value))),
       name,
-      offIcon: toRef(props, 'offIcon'),
-      onIcon: toRef(props, 'onIcon'),
+      falseIcon: toRef(props, 'falseIcon'),
+      trueIcon: toRef(props, 'trueIcon'),
       readonly: toRef(props, 'readonly'),
       type: toRef(props, 'type'),
     })
