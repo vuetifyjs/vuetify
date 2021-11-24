@@ -39,11 +39,9 @@ export const VCheckbox = defineComponent({
 
   emits: {
     'update:indeterminate': (val: boolean) => true,
-    'update:modelValue': (val: any) => true,
   },
 
   setup (props, { attrs, slots }) {
-    const model = useProxiedModel(props, 'modelValue')
     const indeterminate = useProxiedModel(props, 'indeterminate')
     const falseIcon = computed(() => {
       return indeterminate.value
@@ -79,16 +77,15 @@ export const VCheckbox = defineComponent({
               isReadonly,
             }) => (
               <VSelectionControl
+                { ...controlProps }
                 type="checkbox"
-                v-model={ model.value }
                 onUpdate:modelValue={ onChange }
                 falseIcon={ falseIcon.value }
                 trueIcon={ trueIcon.value }
                 aria-checked={ indeterminate.value ? 'mixed' : undefined }
-                { ...controlAttrs }
-                { ...controlProps }
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
+                { ...controlAttrs }
               />
             ),
           }}

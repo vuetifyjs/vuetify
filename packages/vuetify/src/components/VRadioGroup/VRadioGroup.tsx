@@ -78,15 +78,15 @@ export const VRadioGroup = defineComponent({
                 ) }
 
                 <VSelectionControlGroup
+                  { ...controlProps }
                   id={ id.value }
                   trueIcon={ props.trueIcon }
                   falseIcon={ props.falseIcon }
                   type={ props.type }
-                  v-slots={ slots }
-                  { ...controlAttrs }
-                  { ...controlProps }
                   disabled={ isDisabled.value }
                   readonly={ isReadonly.value }
+                  { ...controlAttrs }
+                  v-slots={ slots }
                 />
               </>
             ),

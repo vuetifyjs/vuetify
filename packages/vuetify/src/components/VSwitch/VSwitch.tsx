@@ -62,14 +62,14 @@ export const VSwitch = defineComponent({
               isReadonly,
             }) => (
               <VSelectionControl
+                ref={ control }
+                { ...controlProps }
                 type="checkbox"
                 onUpdate:modelValue={ onChange }
                 aria-checked={ indeterminate.value ? 'mixed' : undefined }
-                ref={ control }
-                { ...controlAttrs }
-                { ...controlProps }
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
+                { ...controlAttrs }
                 v-slots={{
                   default: () => (<div class="v-switch__track" onClick={ onClick }></div>),
                   input: ({ textColorClasses }) => (
