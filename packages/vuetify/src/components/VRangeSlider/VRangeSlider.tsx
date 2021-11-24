@@ -102,7 +102,7 @@ export const VRangeSlider = defineComponent({
           direction={ props.direction }
           v-slots={{
             ...slots,
-            default: ({ id, isActive, isDirty, isFocused, focus, blur }: any) => (
+            default: ({ id, isActive, isDirty, isFocused, focus, blur }) => (
               <div
                 class="v-slider__container"
                 onMousedown={ onSliderMousedown }
@@ -110,7 +110,7 @@ export const VRangeSlider = defineComponent({
               >
                 <input
                   id={ `${id}_start` }
-                  name={ attrs.name ?? id }
+                  name={ (attrs.name ?? id.value) as string }
                   disabled={ props.disabled }
                   readonly={ props.readonly }
                   tabindex="-1"
@@ -119,7 +119,7 @@ export const VRangeSlider = defineComponent({
 
                 <input
                   id={ `${id}_stop` }
-                  name={ attrs.name ?? id }
+                  name={ (attrs.name ?? id.value) as string }
                   disabled={ props.disabled }
                   readonly={ props.readonly }
                   tabindex="-1"
@@ -137,7 +137,7 @@ export const VRangeSlider = defineComponent({
 
                 <VSliderThumb
                   ref={ startThumbRef }
-                  active={ isActive }
+                  active={ isActive.value }
                   dirty={ isDirty }
                   focused={ isFocused && focusedThumb.value === startThumbRef.value }
                   modelValue={ model.value[0] }
@@ -170,7 +170,7 @@ export const VRangeSlider = defineComponent({
 
                 <VSliderThumb
                   ref={ stopThumbRef }
-                  active={ isActive }
+                  active={ isActive.value }
                   dirty={ isDirty }
                   focused={ isFocused && focusedThumb.value === stopThumbRef.value }
                   modelValue={ model.value[1] }

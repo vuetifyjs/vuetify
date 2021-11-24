@@ -81,15 +81,15 @@ export const VSlider = defineComponent({
           direction={ props.direction }
           v-slots={{
             ...slots,
-            default: ({ id, isActive, isDirty, isFocused, focus, blur }: any) => (
+            default: ({ id, isActive, isDirty, isFocused, focus, blur }) => (
               <div
                 class="v-slider__container"
                 onMousedown={ onSliderMousedown }
                 onTouchstartPassive={ onSliderTouchstart }
               >
                 <input
-                  id={ id }
-                  name={ attrs.name ?? id }
+                  id={ id.value }
+                  name={ (attrs.name ?? id.value) as string }
                   disabled={ props.disabled }
                   readonly={ props.readonly }
                   tabindex="-1"
@@ -107,9 +107,9 @@ export const VSlider = defineComponent({
 
                 <VSliderThumb
                   ref={ thumbContainerRef }
-                  active={ isActive }
+                  active={ isActive.value}
                   dirty={ isDirty }
-                  focused={ isFocused }
+                  focused={ isFocused.value }
                   min={ min.value }
                   max={ max.value }
                   modelValue={ model.value }

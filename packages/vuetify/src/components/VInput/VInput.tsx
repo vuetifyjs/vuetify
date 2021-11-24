@@ -18,15 +18,21 @@ import { genericComponent, getUid, pick, propsFactory } from '@/util'
 import type { ComputedRef, ExtractPropTypes, PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
 
-export type VInputSlot = {
+export interface VInputSlot {
+  id: ComputedRef<string>
+  isActive: Ref<boolean>
+  isFocused: Ref<boolean>
+  isDirty: boolean
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
-  isPristine: Ref<boolean | null>
+  isPristine: Ref<boolean>
   isValid: ComputedRef<boolean | null>
   isValidating: Ref<boolean>
   reset: () => void
   resetValidation: () => void
   validate: () => void
+  focus: () => void
+  blur: () => void
 }
 
 export const makeVInputProps = propsFactory({

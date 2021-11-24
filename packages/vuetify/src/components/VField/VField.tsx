@@ -35,9 +35,7 @@ const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain
 type Variant = typeof allowedVariants[number]
 
 export interface DefaultInputSlot {
-  isActive: boolean
   isDirty: boolean
-  isFocused: boolean
   inputRef: Ref<HTMLInputElement | undefined>
   controlRef: Ref<HTMLElement | undefined>
   focus: () => void
