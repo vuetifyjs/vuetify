@@ -1,0 +1,1 @@
+export { VDataTable } from './VDataTable'
