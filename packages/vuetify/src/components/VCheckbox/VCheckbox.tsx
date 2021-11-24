@@ -2,16 +2,15 @@
 import './VCheckbox.sass'
 
 // Components
-import { filterInputAttrs, filterInputProps } from '@/components/VInput/VInput'
-import { VInput } from '@/components/VInput'
-import { VSelectionControl } from '@/components/VSelectionControl'
+import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { filterControlProps, makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
 import { computed, defineComponent } from 'vue'
-import { useRender } from '@/util'
+import { filterInputAttrs, useRender } from '@/util'
 
 export const VCheckbox = defineComponent({
   name: 'VCheckbox',
@@ -24,6 +23,10 @@ export const VCheckbox = defineComponent({
       type: String,
       default: '$checkboxIndeterminate',
     },
+
+    ...makeVInputProps(),
+    ...makeSelectionControlProps(),
+
     offIcon: {
       type: String,
       default: '$checkboxOff',
@@ -32,7 +35,6 @@ export const VCheckbox = defineComponent({
       type: String,
       default: '$checkboxOn',
     },
-    modelValue: null,
   },
 
   emits: {
@@ -61,14 +63,15 @@ export const VCheckbox = defineComponent({
     }
 
     useRender(() => {
-      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [rootProps, inputProps] = filterInputProps(inputAttrs)
+      const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
+      const [inputProps, _1] = filterInputProps(props)
+      const [controlProps, _2] = filterControlProps(props)
 
       return (
         <VInput
           class="v-checkbox"
-          { ...rootAttrs }
-          { ...rootProps }
+          { ...inputAttrs }
+          { ...inputProps }
           v-slots={{
             ...slots,
             default: ({
@@ -78,13 +81,14 @@ export const VCheckbox = defineComponent({
               <VSelectionControl
                 type="checkbox"
                 v-model={ model.value }
-                disabled={ isDisabled.value }
-                readonly={ isReadonly.value }
                 onUpdate:modelValue={ onChange }
                 offIcon={ offIcon.value }
                 onIcon={ onIcon.value }
                 aria-checked={ indeterminate.value ? 'mixed' : undefined }
-                { ...inputProps }
+                { ...controlAttrs }
+                { ...controlProps }
+                disabled={ isDisabled.value }
+                readonly={ isReadonly.value }
               />
             ),
           }}

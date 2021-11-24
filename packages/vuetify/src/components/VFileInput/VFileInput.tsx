@@ -13,11 +13,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, humanReadableFileSize, useRender, wrapInArray } from '@/util'
+import { defineComponent, filterInputAttrs, humanReadableFileSize, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { filterInputAttrs } from '@/components/VInput/VInput'
 
 export const VFileInput = defineComponent({
   name: 'VFileInput',
