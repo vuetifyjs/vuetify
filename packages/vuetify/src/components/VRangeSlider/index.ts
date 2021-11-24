@@ -1,1 +1,1 @@
-export { default as VRangeSlider } from './VRangeSlider'
+export { VRangeSlider } from './VRangeSlider'
