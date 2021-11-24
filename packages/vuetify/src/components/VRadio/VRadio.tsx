@@ -9,11 +9,11 @@ export const VRadio = defineComponent({
   name: 'VRadio',
 
   props: {
-    offIcon: {
+    falseIcon: {
       type: String,
       default: '$radioOff',
     },
-    onIcon: {
+    trueIcon: {
       type: String,
       default: '$radioOn',
     },
@@ -23,8 +23,8 @@ export const VRadio = defineComponent({
     useRender(() => (
       <VSelectionControl
         class="v-radio"
-        onIcon={ props.onIcon }
-        offIcon={ props.offIcon }
+        trueIcon={ props.trueIcon }
+        falseIcon={ props.falseIcon }
         type="radio"
         v-slots={ slots }
       />

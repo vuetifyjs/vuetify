@@ -14,11 +14,10 @@ import Intersect from '@/directives/intersect'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, defineComponent, filterInputAttrs, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { filterInputAttrs } from '@/components/VInput/VInput'
 
 export const VTextarea = defineComponent({
   name: 'VTextarea',

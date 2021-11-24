@@ -2,13 +2,14 @@
 import './VRadioGroup.sass'
 
 // Components
-import { filterInputAttrs, filterInputProps, VInput } from '@/components/VInput/VInput'
+import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VLabel } from '@/components/VLabel'
 import { VSelectionControlGroup } from '@/components/VSelectionControlGroup'
+import { filterControlProps, makeSelectionControlProps } from '@/components/VSelectionControl/VSelectionControl'
 
 // Utility
 import { computed, defineComponent } from 'vue'
-import { getUid, useRender } from '@/util'
+import { filterInputAttrs, getUid, useRender } from '@/util'
 
 export const VRadioGroup = defineComponent({
   name: 'VRadioGroup',
@@ -20,14 +21,15 @@ export const VRadioGroup = defineComponent({
       type: [Number, String],
       default: 'auto',
     },
-    label: String,
-    id: String,
-    inline: Boolean,
-    onIcon: {
+
+    ...makeVInputProps(),
+    ...makeSelectionControlProps(),
+
+    trueIcon: {
       type: String,
       default: '$radioOn',
     },
-    offIcon: {
+    falseIcon: {
       type: String,
       default: '$radioOff',
     },
@@ -42,8 +44,9 @@ export const VRadioGroup = defineComponent({
     const id = computed(() => props.id || `radio-group-${uid}`)
 
     useRender(() => {
-      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [rootProps, inputProps] = filterInputProps(inputAttrs)
+      const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
+      const [inputProps, _1] = filterInputProps(props)
+      const [controlProps, _2] = filterControlProps(props)
       const label = slots.label
         ? slots.label({
           label: props.label,
@@ -54,8 +57,8 @@ export const VRadioGroup = defineComponent({
       return (
         <VInput
           class="v-radio-group"
-          { ...rootAttrs }
-          { ...rootProps }
+          { ...inputAttrs }
+          { ...inputProps }
           v-slots={{
             ...slots,
             default: ({
@@ -75,15 +78,15 @@ export const VRadioGroup = defineComponent({
                 ) }
 
                 <VSelectionControlGroup
+                  { ...controlProps }
                   id={ id.value }
-                  disabled={ isDisabled.value }
-                  onIcon={ props.onIcon }
-                  offIcon={ props.offIcon }
+                  trueIcon={ props.trueIcon }
+                  falseIcon={ props.falseIcon }
                   type={ props.type }
+                  disabled={ isDisabled.value }
                   readonly={ isReadonly.value }
-                  inline={ props.inline }
+                  { ...controlAttrs }
                   v-slots={ slots }
-                  { ...inputProps }
                 />
               </>
             ),

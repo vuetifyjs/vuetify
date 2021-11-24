@@ -17,7 +17,16 @@ import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed, inject, ref } from 'vue'
-import { deepEqual, genericComponent, getUid, SUPPORTS_FOCUS_VISIBLE, useRender, wrapInArray } from '@/util'
+import {
+  deepEqual,
+  genericComponent,
+  getUid,
+  pick,
+  propsFactory,
+  SUPPORTS_FOCUS_VISIBLE,
+  useRender,
+  wrapInArray,
+} from '@/util'
 
 // Types
 import type { ComputedRef, ExtractPropTypes, PropType, Ref, WritableComputedRef } from 'vue'
@@ -35,15 +44,15 @@ export type SelectionControlSlot = {
   }
 }
 
-const selectionControlProps = {
+export const makeSelectionControlProps = propsFactory({
   color: String,
   disabled: Boolean,
   error: Boolean,
   id: String,
   inline: Boolean,
   label: String,
-  offIcon: String,
-  onIcon: String,
+  falseIcon: String,
+  trueIcon: String,
   ripple: {
     type: Boolean,
     default: true,
@@ -66,10 +75,10 @@ const selectionControlProps = {
 
   ...makeThemeProps(),
   ...makeDensityProps(),
-} as const
+})
 
 export function useSelectionControl (
-  props: ExtractPropTypes<typeof selectionControlProps> & {
+  props: ExtractPropTypes<ReturnType<typeof makeSelectionControlProps>> & {
     'onUpdate:modelValue': ((val: any) => void) | undefined
   }
 ) {
@@ -122,8 +131,8 @@ export function useSelectionControl (
   }))
   const icon = computed(() => {
     return model.value
-      ? group?.onIcon.value ?? props.onIcon
-      : group?.offIcon.value ?? props.offIcon
+      ? group?.trueIcon.value ?? props.trueIcon
+      : group?.falseIcon.value ?? props.falseIcon
   })
 
   return {
@@ -154,7 +163,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
 
   inheritAttrs: false,
 
-  props: selectionControlProps,
+  props: makeSelectionControlProps(),
 
   emits: {
     'update:modelValue': (val: any) => true,
@@ -278,3 +287,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
 })
 
 export type VSelectionControl = InstanceType<typeof VSelectionControl>
+
+export function filterControlProps (props: ExtractPropTypes<ReturnType<typeof makeSelectionControlProps>>) {
+  return pick(props, Object.keys(VSelectionControl.props) as any)
+}

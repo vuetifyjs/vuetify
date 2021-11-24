@@ -190,15 +190,15 @@ type MaybePick<
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
-> (obj: T, paths: U[]): [MaybePick<T, U>, Omit<T, U>]
+> (obj: T, paths: U[]): [yes: MaybePick<T, U>, no: Omit<T, U>]
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
-> (obj: T, paths: (U | RegExp)[]): [Partial<T>, Partial<T>]
+> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>]
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
-> (obj: T, paths: (U | RegExp)[]): [Partial<T>, Partial<T>] {
+> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>] {
   const found = Object.create(null)
   const rest = Object.create(null)
 
@@ -216,6 +216,15 @@ export function pick<
   }
 
   return [found, rest]
+}
+
+/**
+ * Filter attributes that should be applied to
+ * the root element of a an input component. Remaining
+ * attributes should be passed to the <input> element inside.
+ */
+export function filterInputAttrs (attrs: Record<string, unknown>) {
+  return pick(attrs, ['class', 'style', 'id', /^data-/])
 }
 
 /**

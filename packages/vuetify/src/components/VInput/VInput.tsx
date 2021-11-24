@@ -11,10 +11,10 @@ import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, pick, propsFactory, toKebabCase } from '@/util'
+import { genericComponent, pick, propsFactory } from '@/util'
 
 // Types
-import type { ComputedRef, PropType, Ref } from 'vue'
+import type { ComputedRef, ExtractPropTypes, PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
 
 export type VInputSlot = {
@@ -31,7 +31,6 @@ export type VInputSlot = {
 export const makeVInputProps = propsFactory({
   appendIcon: String,
   prependIcon: String,
-  focused: Boolean,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hint: String,
   messages: {
@@ -54,7 +53,11 @@ export const VInput = genericComponent<new <T>() => {
 }>()({
   name: 'VInput',
 
-  props: makeVInputProps(),
+  props: {
+    focused: Boolean,
+
+    ...makeVInputProps(),
+  },
 
   emits: {
     'click:prepend': (e: MouseEvent) => true,
@@ -159,10 +162,6 @@ export const VInput = genericComponent<new <T>() => {
 
 export type VInput = InstanceType<typeof VInput>
 
-export function filterInputAttrs (attrs: Record<string, unknown>) {
-  return pick(attrs, ['class', 'style', 'id', /^data-/])
-}
-
-export function filterInputProps (attrs: Record<string, unknown>) {
-  return pick(attrs, Object.keys(VInput.props).map(toKebabCase))
+export function filterInputProps (props: ExtractPropTypes<ReturnType<typeof makeVInputProps>>) {
+  return pick(props, Object.keys(VInput.props) as any)
 }

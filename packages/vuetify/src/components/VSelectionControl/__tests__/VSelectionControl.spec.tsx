@@ -1,5 +1,5 @@
 // Components
-import { useSelectionControl, VSelectionControl } from '../VSelectionControl'
+import { makeSelectionControlProps, useSelectionControl } from '../VSelectionControl'
 
 // Utilities
 import { createVuetify } from '@/framework'
@@ -12,7 +12,7 @@ describe('VSelectionControl', () => {
 
   function mountFunction (options = {}) {
     return mount({
-      props: VSelectionControl.props,
+      props: makeSelectionControlProps(),
       setup (props) {
         return useSelectionControl(props as any)
       },

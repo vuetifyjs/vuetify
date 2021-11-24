@@ -2,13 +2,12 @@
 import './VSwitch.sass'
 
 // Components
-import { VSelectionControl } from '@/components/VSelectionControl'
-import { VInput } from '@/components/VInput'
-import { filterInputAttrs, filterInputProps } from '@/components/VInput/VInput'
+import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { filterControlProps, makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
 
 // Utility
 import { defineComponent, ref } from 'vue'
-import { useRender } from '@/util'
+import { filterInputAttrs, useRender } from '@/util'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 export const VSwitch = defineComponent({
@@ -21,7 +20,11 @@ export const VSwitch = defineComponent({
     inset: Boolean,
     loading: [Boolean, String],
     flat: Boolean,
+
+    ...makeVInputProps(),
+    ...makeSelectionControlProps(),
   },
+
   emits: {
     'update:indeterminate': (val: boolean) => true,
   },
@@ -35,8 +38,9 @@ export const VSwitch = defineComponent({
     }
 
     useRender(() => {
-      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [rootProps, inputProps] = filterInputProps(inputAttrs)
+      const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
+      const [inputProps, _1] = filterInputProps(props)
+      const [controlProps, _2] = filterControlProps(props)
       const control = ref<VSelectionControl>()
 
       function onClick () {
@@ -49,8 +53,8 @@ export const VSwitch = defineComponent({
             'v-switch',
             { 'v-switch--indeterminate': indeterminate.value },
           ]}
-          { ...rootAttrs }
-          { ...rootProps }
+          { ...inputAttrs }
+          { ...inputProps }
           v-slots={{
             ...slots,
             default: ({
@@ -58,13 +62,14 @@ export const VSwitch = defineComponent({
               isReadonly,
             }) => (
               <VSelectionControl
+                ref={ control }
+                { ...controlProps }
                 type="checkbox"
-                disabled={ isDisabled.value }
-                readonly={ isReadonly.value }
                 onUpdate:modelValue={ onChange }
                 aria-checked={ indeterminate.value ? 'mixed' : undefined }
-                ref={ control }
-                { ...inputProps }
+                disabled={ isDisabled.value }
+                readonly={ isReadonly.value }
+                { ...controlAttrs }
                 v-slots={{
                   default: () => (<div class="v-switch__track" onClick={ onClick }></div>),
                   input: ({ textColorClasses }) => (

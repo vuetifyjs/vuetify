@@ -5,7 +5,6 @@ import './VTextField.sass'
 import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
-import { filterInputAttrs } from '@/components/VInput/VInput'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -15,7 +14,7 @@ import Intersect from '@/directives/intersect'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { defineComponent, filterInputAttrs, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
