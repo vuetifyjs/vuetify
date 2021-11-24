@@ -235,10 +235,15 @@ export const useSlider = ({
     if (!activeThumb) return
 
     activeThumb.focus()
-
     mousePressed.value = true
 
-    startOffset.value = getOffset(e, activeThumb, props.direction)
+    if (activeThumb.contains(e.target as Node)) {
+      thumbMoved = true
+      startOffset.value = getOffset(e, activeThumb, props.direction)
+    } else {
+      startOffset.value = 0
+      handleMouseMove(parseMouseMove(e))
+    }
   }
 
   const moveListenerOptions = { passive: true, capture: true }
