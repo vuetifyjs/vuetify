@@ -75,6 +75,7 @@ export default baseMixins.extend<options>().extend({
     isFocused: 'updateValue',
     value (val) {
       this.lazyValue = val
+      this.otp = val?.split('') || []
     },
   },
 
