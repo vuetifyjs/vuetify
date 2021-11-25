@@ -58,9 +58,9 @@ describe('VItemGroup', () => {
 
     const getValue = wrapper.vm.getValue
 
-    expect(getValue({ value: null }, 0)).toBe(0)
+    expect(getValue({ value: null }, 0)).toBeNull()
     expect(getValue({ value: undefined }, 1)).toBe(1)
-    expect(getValue({ value: '' }, 2)).toBe(2)
+    expect(getValue({ value: '' }, 2)).toBe('')
     expect(getValue({ value: 'foo' }, 'foo')).toBe('foo')
   })
 
