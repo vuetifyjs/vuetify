@@ -2,35 +2,24 @@ import { defineComponent } from '@/util'
 import { computed } from 'vue'
 
 import type { PropType } from 'vue'
-
-type DataTableHeader = {
-  name: string
-  colspan?: number
-  rowspan?: number
-}
-
-function isMultipleHeaders (arr: any): arr is DataTableHeader[][] {
-  return arr.length > 0 && Array.isArray(arr[0])
-}
+import type { Column } from './VDataTable'
 
 export const VDataTableHeaders = defineComponent({
   name: 'VDataTableHeaders',
 
   props: {
-    headers: {
-      type: Array as PropType<DataTableHeader[] | DataTableHeader[][]>,
+    rows: {
+      type: Array as PropType<Column[][]>,
       required: true,
     },
   },
 
   setup (props, { slots }) {
-    const wrappedHeaders = computed<DataTableHeader[][]>(() => isMultipleHeaders(props.headers) ? props.headers : [props.headers])
-
     return () => {
-      return wrappedHeaders.value.map(header => (
-        <tr>
-          {header.map(column => (
-            <th colspan={column.colspan} rowspan={column.rowspan}>
+      return props.rows.map(row => (
+        <tr class="v-data-table__tr" role="row">
+          {row.map(column => (
+            <th class="v-data-table__th" style={column.style} role="columnheader">
               { column.name }
             </th>
           ))}

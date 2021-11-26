@@ -30,10 +30,6 @@
             id: 'two',
             name: 'Two',
           },
-          {
-            id: 'three',
-            name: 'Three',
-          },
         ],
       ],
       items: [
@@ -41,7 +37,11 @@
           one: 'one',
           two: 'two',
           end: 'end',
-          three: 'three',
+        },
+        {
+          one: 'one',
+          two: 'two',
+          end: 'end',
         },
       ],
     }),

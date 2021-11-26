@@ -1,21 +1,14 @@
 import { defineComponent } from '@/util'
-import { computed } from 'vue'
 
 import type { PropType } from 'vue'
-
-type DataTableHeader = {
-  id: string
-  name: string
-  colspan?: number
-  rowspan?: number
-}
+import type { Column } from './VDataTable'
 
 export const VDataTableRows = defineComponent({
   name: 'VDataTableRows',
 
   props: {
-    headers: {
-      type: Array as PropType<DataTableHeader[] | DataTableHeader[][]>,
+    columns: {
+      type: Array as PropType<Column[]>,
       required: true,
     },
     items: {
@@ -25,17 +18,12 @@ export const VDataTableRows = defineComponent({
   },
 
   setup (props, { slots }) {
-    const columns = computed(() => props.headers.flatMap(header => {
-      if (Array.isArray(header)) return header.filter(column => column.id != null)
-      else return header.id ? [header] : []
-    }))
-
     return () => {
       return props.items.map(item => (
-        <tr>
-          { columns.value.map(column => (
-            <td>{ item[column.id] }</td>
-          ))}
+        <tr class="v-data-table__tr" role="row">
+          { props.columns.map(column => (
+            <td class="v-data-table__td" role="cell">{ item[column.id] }</td>
+          )) }
         </tr>
       ))
     }
