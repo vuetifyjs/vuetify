@@ -1,5 +1,5 @@
 import { computed, ref, watch } from 'vue'
-import { defineComponent } from '@/util'
+import { convertToUnit, defineComponent } from '@/util'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import './VDataTable.sass'
 
@@ -11,11 +11,11 @@ type DataTableHeader = {
   name: string
   colspan?: number
   rowspan?: number
+  minWidth?: string
+  maxWidth?: string
 }
 
-export type Column = {
-  name: string
-  id: string
+export type Column = DataTableHeader & {
   style: any
 }
 
@@ -23,7 +23,7 @@ function isMultipleHeaders (arr: any): arr is DataTableHeader[][] {
   return arr.length > 0 && Array.isArray(arr[0])
 }
 
-const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader[][] }) => {
+export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader[][], rowHeight?: number | string }) => {
   const headerRows = ref<Column[][]>([])
   const rowColumns = ref<Column[]>([])
 
@@ -75,7 +75,8 @@ const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader[][] })
   })
 
   const tableGridStyles = computed(() => ({
-    'grid-template-columns': rowColumns.value.map(col => 'minmax(150px, 1fr)').join(' '),
+    'grid-template-columns': rowColumns.value.map(col => `minmax(${col.minWidth ?? '150px'}, ${col.maxWidth ?? '1fr'})`).join(' '),
+    'grid-template-rows': `repeat(auto-fill, ${convertToUnit(props.rowHeight)})`,
   }))
 
   return {
@@ -97,19 +98,36 @@ export const VDataTable = defineComponent({
       type: Array as PropType<any[]>,
       required: true,
     },
+    height: [String, Number],
+    rowHeight: {
+      type: [String, Number],
+      default: 48,
+    },
+    stickyHeader: Boolean,
   },
 
   setup (props, { slots }) {
     const { rowColumns, headerRows, tableGridStyles } = useHeaders(props)
 
     return () => (
-      <div class="v-data-table">
-        <table class="v-data-table__table" style={tableGridStyles.value} role="table">
+      <div
+        class="v-data-table"
+        style={{
+          height: convertToUnit(props.height),
+        }}
+      >
+        <table
+          class="v-data-table__table"
+          style={{
+            ...tableGridStyles.value,
+          }}
+          role="table"
+        >
           <thead class="v-data-table__thead" role="rowgroup">
-            <VDataTableHeaders rows={ headerRows.value } />
+            <VDataTableHeaders rows={ headerRows.value } rowHeight={ parseInt(props.rowHeight, 10) } sticky={ props.stickyHeader } />
           </thead>
           <tbody class="v-data-table__tbody" role="rowgroup">
-            <VDataTableRows columns={ rowColumns.value } items={ props.items } />
+            <VDataTableRows columns={ rowColumns.value } items={ props.items } rowHeight={ parseInt(props.rowHeight, 10) } />
           </tbody>
         </table>
       </div>
