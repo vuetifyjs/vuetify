@@ -165,7 +165,12 @@ export const VDataTable = defineComponent({
             <VDataTableHeaders rows={ headerRows.value } rowHeight={ parseInt(props.rowHeight, 10) } sticky={ props.stickyHeader } />
           </thead>
           <tbody class="v-data-table__tbody" role="rowgroup">
-            <VDataTableRows columns={ rowColumns.value } items={ items.value } rowHeight={ parseInt(props.rowHeight, 10) } />
+            <VDataTableRows
+              columns={ rowColumns.value }
+              items={ items.value }
+              rowHeight={ parseInt(props.rowHeight, 10) }
+              v-slots={ slots }
+            />
           </tbody>
         </table>
       </div>

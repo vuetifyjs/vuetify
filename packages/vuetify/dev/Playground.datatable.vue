@@ -4,13 +4,21 @@
       :headers="headers"
       :items="items"
       height="500px"
-    />
+    >
+      <template #item.end>
+        <v-btn>hello</v-btn>
+      </template>
+    </v-data-table>
     <div>foo</div>
     <v-virtual-data-table
       :headers="headers"
       :items="items"
       height="500px"
-    />
+    >
+      <template #item.end>
+        <v-btn>hello</v-btn>
+      </template>
+    </v-virtual-data-table>
   </v-app>
 </template>
 

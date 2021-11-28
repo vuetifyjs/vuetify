@@ -23,6 +23,10 @@ export const VDataTableRows = defineComponent({
     offsetStart: {
       type: Number,
     },
+    startIndex: {
+      type: Number,
+      default: 0,
+    },
   },
 
   setup (props, { slots }) {
@@ -50,7 +54,7 @@ export const VDataTableRows = defineComponent({
           class="v-data-table__tr"
           role="row"
           onClick={() => {
-            toggleExpand(rowIndex, item)
+            toggleExpand(props.startIndex + rowIndex, item)
           }}
         >
           { props.columns.map((column, colIndex) => (
@@ -64,7 +68,7 @@ export const VDataTableRows = defineComponent({
               }}
               role="cell"
             >
-              { item[column.id] }
+              { slots[`item.${column.id}`]?.() ?? item[column.id] }
             </td>
           )) }
         </tr>

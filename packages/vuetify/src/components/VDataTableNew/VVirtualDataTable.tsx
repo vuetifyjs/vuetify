@@ -52,6 +52,7 @@ const useVirtual = (props: { height?: string | number, rowHeight: string | numbe
     totalHeight,
     tableRef,
     offsetStart,
+    startIndex,
   }
 }
 
@@ -80,7 +81,7 @@ export const VVirtualDataTable = defineComponent({
 
     const { items: expandedItems } = createExpanded(props)
 
-    const { items: virtualItems, totalHeight, tableRef, offsetStart } = useVirtual(props, expandedItems)
+    const { items: virtualItems, totalHeight, tableRef, offsetStart, startIndex } = useVirtual(props, expandedItems)
 
     return () => (
       <div
@@ -108,6 +109,8 @@ export const VVirtualDataTable = defineComponent({
               items={ virtualItems.value }
               rowHeight={ parseInt(props.rowHeight, 10) }
               offsetStart={ offsetStart.value }
+              startIndex={ startIndex.value }
+              v-slots={ slots }
             />
           </tbody>
         </table>
