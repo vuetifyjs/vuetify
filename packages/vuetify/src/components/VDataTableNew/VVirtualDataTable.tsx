@@ -1,11 +1,11 @@
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import './VDataTable.sass'
 
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
 import { VDataTableRows } from './VDataTableRows'
-import { useHeaders } from './VDataTable'
+import { createExpanded, useHeaders } from './VDataTable'
 
 type DataTableHeader = {
   id: string
@@ -20,16 +20,16 @@ export type Column = DataTableHeader & {
   style: any
 }
 
-const useVirtual = (props: { items?: any[], height?: string | number, rowHeight: string | number }) => {
+const useVirtual = (props: { height?: string | number, rowHeight: string | number }, allItems: Ref<any[]>) => {
   const tableRef = ref<HTMLElement>()
-  const allItems = computed(() => props.items ?? [])
-  const totalHeight = computed(() => allItems.value.length * parseInt(props.rowHeight, 10))
+  const itemsLength = computed(() => allItems.value.length)
+  const totalHeight = computed(() => itemsLength.value * parseInt(props.rowHeight, 10))
   const scrollTop = ref(0)
-  const chunkSize = ref(20)
+  const chunkSize = ref(10)
   const scrollIndex = computed(() => Math.floor(scrollTop.value / parseInt(props.rowHeight, 10)))
   const chunkIndex = computed(() => Math.floor(scrollIndex.value / chunkSize.value))
   const startIndex = computed(() => Math.max(0, (chunkIndex.value * chunkSize.value) - chunkSize.value))
-  const stopIndex = computed(() => Math.min(startIndex.value + (chunkSize.value * 3), allItems.value.length))
+  const stopIndex = computed(() => Math.min(startIndex.value + (chunkSize.value * 3), itemsLength.value))
   const offsetStart = computed(() => Math.max(0, startIndex.value * parseInt(props.rowHeight, 10)))
   const items = computed(() => allItems.value.slice(startIndex.value, stopIndex.value))
 
@@ -78,7 +78,9 @@ export const VVirtualDataTable = defineComponent({
   setup (props, { slots }) {
     const { rowColumns, headerRows, tableGridStyles } = useHeaders(props)
 
-    const { items, totalHeight, tableRef, offsetStart } = useVirtual(props)
+    const { items: expandedItems } = createExpanded(props)
+
+    const { items: virtualItems, totalHeight, tableRef, offsetStart } = useVirtual(props, expandedItems)
 
     return () => (
       <div
@@ -92,17 +94,18 @@ export const VVirtualDataTable = defineComponent({
           class="v-data-table__table"
           style={{
             ...tableGridStyles.value,
+            'grid-auto-rows': 'min-content',
             height: convertToUnit(totalHeight.value),
           }}
           role="table"
         >
           <thead class="v-data-table__thead" role="rowgroup">
-            <VDataTableHeaders rows={ headerRows.value } rowHeight={ parseInt(props.rowHeight, 10) } sticky={ props.stickyHeader }/>
+            <VDataTableHeaders rows={ headerRows.value } rowHeight={ parseInt(props.rowHeight, 10) } sticky={ props.stickyHeader } />
           </thead>
           <tbody class="v-data-table__tbody" role="rowgroup">
             <VDataTableRows
               columns={ rowColumns.value }
-              items={ items.value }
+              items={ virtualItems.value }
               rowHeight={ parseInt(props.rowHeight, 10) }
               offsetStart={ offsetStart.value }
             />

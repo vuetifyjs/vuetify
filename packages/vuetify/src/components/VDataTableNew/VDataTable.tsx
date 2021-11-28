@@ -1,9 +1,9 @@
-import { computed, ref, watch } from 'vue'
+import { computed, inject, provide, ref, watch } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import './VDataTable.sass'
 
-import type { PropType } from 'vue'
+import type { InjectionKey, PropType, Ref } from 'vue'
 import { VDataTableRows } from './VDataTableRows'
 
 type DataTableHeader = {
@@ -76,7 +76,6 @@ export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader
 
   const tableGridStyles = computed(() => ({
     'grid-template-columns': rowColumns.value.map(col => `minmax(${col.minWidth ?? '150px'}, ${col.maxWidth ?? '1fr'})`).join(' '),
-    'grid-template-rows': `repeat(auto-fill, ${convertToUnit(props.rowHeight)})`,
   }))
 
   return {
@@ -84,6 +83,43 @@ export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader
     rowColumns,
     headerRows,
   }
+}
+
+export const VDataTableExpandedKey: InjectionKey<{
+  expanded: Ref<Set<string>>
+  toggleExpand: (index: number, item: any) => void
+}> = Symbol.for('vuetify:datatable:expanded')
+
+export const createExpanded = (props: { items: any[] }) => {
+  const items = ref([...props.items])
+  const expanded = ref(new Set<string>())
+
+  function toggleExpand (index: number, item: any) {
+    const isExpanded = expanded.value.has(item.id)
+
+    if (isExpanded) {
+      items.value.splice(index + 1, 1)
+    } else {
+      items.value.splice(index + 1, 0, {
+        [VDataTableExpandedKey as symbol]: true,
+        item,
+      })
+    }
+
+    isExpanded ? expanded.value.delete(item.id) : expanded.value.add(item.id)
+  }
+
+  provide(VDataTableExpandedKey, { expanded, toggleExpand })
+
+  return { items, expanded, toggleExpand }
+}
+
+export const useExpanded = () => {
+  const data = inject(VDataTableExpandedKey)
+
+  if (!data) throw new Error('foo')
+
+  return data
 }
 
 export const VDataTable = defineComponent({
@@ -109,6 +145,8 @@ export const VDataTable = defineComponent({
   setup (props, { slots }) {
     const { rowColumns, headerRows, tableGridStyles } = useHeaders(props)
 
+    const { items } = createExpanded(props)
+
     return () => (
       <div
         class="v-data-table"
@@ -127,7 +165,7 @@ export const VDataTable = defineComponent({
             <VDataTableHeaders rows={ headerRows.value } rowHeight={ parseInt(props.rowHeight, 10) } sticky={ props.stickyHeader } />
           </thead>
           <tbody class="v-data-table__tbody" role="rowgroup">
-            <VDataTableRows columns={ rowColumns.value } items={ props.items } rowHeight={ parseInt(props.rowHeight, 10) } />
+            <VDataTableRows columns={ rowColumns.value } items={ items.value } rowHeight={ parseInt(props.rowHeight, 10) } />
           </tbody>
         </table>
       </div>
