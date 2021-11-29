@@ -76,9 +76,9 @@ const defaultDisplayOptions: DisplayOptions = {
   thresholds: {
     xs: 0,
     sm: 600,
-    md: 960,
-    lg: 1280,
-    xl: 1920,
+    md: 904,
+    lg: 1239,
+    xl: 1439,
     xxl: 2560,
   },
 }
