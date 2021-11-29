@@ -41,11 +41,13 @@
     "icon": "$mdiViewDashboardOutline:$mdiViewDashboard",
     "group": "components",
     "items": [
+      "alerts",
       "app-bars",
       "application",
       "aspect-ratios",
       "badges",
       "banners",
+      "breadcrumbs",
       "buttons",
       "cards",
       "defaults-providers",
@@ -53,7 +55,22 @@
       "dividers",
       "floating-action-buttons",
       "footer",
+      {
+        "title": "form-inputs-and-controls",
+        "group": "components",
+        "items": [
+          "checkboxes",
+          "file-inputs",
+          "forms",
+          "inputs",
+          "radio-buttons",
+          "switches",
+          "textareas",
+          "text-fields"
+        ]
+      },
       "grids",
+      "hover",
       "icons",
       "images",
       "item-groups",
@@ -61,8 +78,18 @@
       "lists",
       "menus",
       "no-ssr",
+      "navigation-drawers",
       "overlays",
+      "paginations",
       "parallax",
+      {
+        "title": "progress",
+        "group": "components",
+        "items": [
+          "progress-circular",
+          "progress-linear"
+        ]
+      },
       "ratings",
       "sheets",
       "theme-providers",
