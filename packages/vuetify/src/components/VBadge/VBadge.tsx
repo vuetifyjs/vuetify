@@ -15,6 +15,7 @@ import { useLocale } from '@/composables/locale'
 import { computed, toRef } from 'vue'
 import { convertToUnit, defineComponent, pick } from '@/util'
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import { useRtl } from '@/composables/rtl'
 
 export default defineComponent({
   name: 'VBadge',
@@ -64,6 +65,7 @@ export default defineComponent({
 
   setup (props, ctx) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { isRtl } = useRtl()
     const { roundedClasses } = useRounded(props, 'v-badge')
     const { t } = useLocale()
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'textColor'))
@@ -82,8 +84,6 @@ export default defineComponent({
     const locationStyles = computed(() => {
       const [vertical, horizontal] = (props.location ?? '').split('-')
 
-      // TODO: RTL support
-
       const styles = {
         bottom: 'auto',
         left: 'auto',
@@ -92,7 +92,9 @@ export default defineComponent({
       }
 
       if (!props.inline) {
-        styles[horizontal === 'left' ? 'right' : 'left'] = calculatePosition(props.offsetX)
+        const isRight = (isRtl.value && horizontal === 'right') || (!isRtl.value && horizontal === 'left')
+
+        styles[isRight ? 'right' : 'left'] = calculatePosition(props.offsetX)
         styles[vertical === 'top' ? 'bottom' : 'top'] = calculatePosition(props.offsetY)
       }
 
@@ -143,7 +145,7 @@ export default defineComponent({
                   backgroundColorStyles.value,
                   locationStyles.value,
                   textColorStyles.value,
-                ] as any} // TODO: Fix this :(
+                ]}
                 aria-atomic="true"
                 aria-label={ t(props.label, value) }
                 aria-live="polite"
