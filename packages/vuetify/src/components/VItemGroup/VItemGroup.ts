@@ -2,6 +2,7 @@
 import './VItemGroup.sass'
 
 // Mixins
+import Comparable from '../../mixins/comparable'
 import Groupable from '../../mixins/groupable'
 import Proxyable from '../../mixins/proxyable'
 import Themeable from '../../mixins/themeable'
@@ -20,8 +21,9 @@ export type GroupableInstance = InstanceType<typeof Groupable> & {
  }
 
 export const BaseItemGroup = mixins(
+  Comparable,
   Proxyable,
-  Themeable
+  Themeable,
 ).extend({
   name: 'base-item-group',
 
@@ -83,12 +85,16 @@ export const BaseItemGroup = mixins(
     },
     toggleMethod (): (v: any) => boolean {
       if (!this.multiple) {
-        return (v: any) => this.internalValue === v
+        return (v: any) => {
+          return this.valueComparator(this.internalValue, v)
+        }
       }
 
       const internalValue = this.internalValue
       if (Array.isArray(internalValue)) {
-        return (v: any) => internalValue.includes(v)
+        return (v: any) => internalValue.find(item => {
+          return this.valueComparator(item, v)
+        }) != null
       }
 
       return () => false

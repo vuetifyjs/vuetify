@@ -6,15 +6,11 @@ import './VRadioGroup.sass'
 import VInput from '../VInput'
 import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
-// Mixins
-import Comparable from '../../mixins/comparable'
-
 // Types
 import mixins from '../../util/mixins'
 import { PropType } from 'vue'
 
 const baseMixins = mixins(
-  Comparable,
   BaseItemGroup,
   VInput
 )
