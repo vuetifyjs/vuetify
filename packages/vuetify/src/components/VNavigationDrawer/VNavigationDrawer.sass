@@ -10,7 +10,6 @@
   height: $navigation-drawer-height
   max-width: 100%
   pointer-events: auto
-  top: 0
   transition-duration: $navigation-drawer-transition-duration
   transition-property: $navigation-drawer-transition-property
   transition-timing-function: $navigation-drawer-transition-timing-function
@@ -27,6 +26,9 @@
 
   &--rounded
     @include tools.rounded($navigation-drawer-rounded-border-radius)
+
+  &--bottom
+    border-top-width: $navigation-drawer-border-thin-width
 
   &--start
     border-inline-end-width: $navigation-drawer-border-thin-width
