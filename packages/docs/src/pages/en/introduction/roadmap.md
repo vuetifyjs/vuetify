@@ -46,6 +46,13 @@ Track our progress in the [Vuetify GitHub Issues](https://github.com/vuetifyjs/v
 
 The following versions have continued maintenance for backwards compatible fixes, major bugs, and security vulnerabilities. More information is located on the [Long-term support](/introduction/long-term-support/) page.
 
+### v2.7
+
+- **Target Release:** TBD (probably March 2022)
+- **Support until:** Approx. September 2023
+- **Overview:**
+  Backports and deprecations from v3.0.0
+
 ### v1.5
 
 - **Released:** February 2019
