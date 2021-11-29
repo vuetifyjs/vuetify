@@ -3,15 +3,14 @@
     <v-dialog
       v-model="dialog"
       fullscreen
-      hide-overlay
+      :scrim="false"
       transition="dialog-bottom-transition"
     >
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-btn
           color="primary"
           dark
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           Open Dialog
         </v-btn>
@@ -109,3 +108,10 @@
     },
   }
 </script>
+
+<style>
+.dialog-bottom-transition-enter-active,
+.dialog-bottom-transition-leave-active {
+  transition: transform .2s ease-in-out;
+}
+</style>

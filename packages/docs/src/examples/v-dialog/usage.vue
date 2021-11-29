@@ -4,12 +4,11 @@
       v-model="dialog"
       width="500"
     >
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-btn
           color="red lighten-2"
           dark
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           Click Me
         </v-btn>
@@ -30,7 +29,7 @@
           <v-spacer></v-spacer>
           <v-btn
             color="primary"
-            text
+            variant="text"
             @click="dialog = false"
           >
             I accept

@@ -5,11 +5,10 @@
         transition="dialog-bottom-transition"
         max-width="600"
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <v-btn
             color="primary"
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           >From the bottom</v-btn>
         </template>
         <template v-slot:default="dialog">
@@ -37,11 +36,10 @@
         transition="dialog-top-transition"
         max-width="600"
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <v-btn
             color="primary"
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           >From the top</v-btn>
         </template>
         <template v-slot:default="dialog">

@@ -16,10 +16,7 @@
           Show Overlay
         </v-btn>
 
-        <v-overlay
-          :absolute="absolute"
-          :value="overlay"
-        >
+        <v-overlay v-model="overlay" contained class="align-center justify-center">
           <v-btn
             color="success"
             @click="overlay = false"
@@ -35,7 +32,6 @@
 <script>
   export default {
     data: () => ({
-      absolute: true,
       overlay: false,
     }),
   }

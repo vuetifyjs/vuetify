@@ -59,12 +59,14 @@
       "item-groups",
       "lazy",
       "lists",
+      "menus",
       "no-ssr",
       "overlays",
       "parallax",
       "ratings",
       "sheets",
-      "theme-providers"
+      "theme-providers",
+      "tooltips"
     ]
   },
   {

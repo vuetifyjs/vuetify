@@ -1,7 +1,7 @@
 ---
 meta:
   title: Overlay component
-  description: The overlay component makes it easy to create a scrim or hovering effect over components or your entire application.
+  description: The overlay component makes it easy to create a scrim over components or your entire application.
   keywords: overlays, vuetify overlay component, vue overlay component
 related:
   - /components/cards/
@@ -11,7 +11,7 @@ related:
 
 # Overlays
 
-The `v-overlay` component is used to provide emphasis on a particular element or parts of it. It signals to the user of a state change within the application and can be used for creating loaders, dialogs and more.
+`v-overlay` is the base for components that float over the rest of the page, such as `v-menu` and `v-dialog`. It can also be used on its own and comes with everything you need to create a custom popover component.
 
 <entry-ad />
 
@@ -31,23 +31,11 @@ In its simplest form, the `v-overlay` component will add a dimmed layer over you
 
 ### Props
 
-#### Absolute
+#### Contained
 
-**absolute** overlays are positioned absolutely and contained inside of their parent element.
+A **contained** overlay is positioned absolutely and contained inside its parent element.
 
-<example file="v-overlay/prop-absolute" />
-
-#### Opacity
-
-**opacity** allows you to customize the transparency of `v-overlay` components.
-
-<example file="v-overlay/prop-opacity" />
-
-#### Z index
-
-**z-index** gives you the ability to easily change the stack order of the `v-overlay` component.
-
-<example file="v-overlay/prop-z-index" />
+<example file="v-overlay/prop-contained" />
 
 ### Misc
 
