@@ -1,6 +1,0 @@
-@import '../../styles/styles.sass';
-
-$ripple-animation-transition-in: transform .25s map-get($transition, 'fast-in-slow-out'),
-                                 opacity .1s map-get($transition, 'fast-in-slow-out') !default;
-$ripple-animation-transition-out: opacity .3s map-get($transition, 'fast-in-slow-out') !default;
-$ripple-animation-visible-opacity: .15 !default;
