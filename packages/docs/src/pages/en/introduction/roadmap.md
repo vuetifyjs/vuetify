@@ -46,6 +46,13 @@ Track our progress in the [Vuetify GitHub Issues](https://github.com/vuetifyjs/v
 
 The following versions have continued maintenance for backwards compatible fixes, major bugs, and security vulnerabilities. More information is located on the [Long-term support](/introduction/long-term-support/) page.
 
+### v2.7
+
+- **Target Release:** TBD (probably March 2022)
+- **Support until:** Approx. September 2023
+- **Overview:**
+  Backports and deprecations from v3.0.0
+
 ### v1.5
 
 - **Released:** February 2019
@@ -61,6 +68,13 @@ The following versions have continued maintenance for backwards compatible fixes
 ## Released
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
+
+### v2.6 (Horizon)
+
+- **Released**: November 2021
+- **Notes**: [v2.6 Release](https://github.com/vuetifyjs/vuetify/releases/tag/v2.6.0)
+- **Overview**:
+  New [v-otp-input](/components/otp-input/) component, calendar event and scrolling improvements, minor features for other components.
 
 ### v2.5 (Avalon)
 

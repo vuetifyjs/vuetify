@@ -61,10 +61,9 @@ function inserted (el: HTMLElement, binding: MutateVNodeDirective, vnode: VNode)
 }
 
 function unbind (el: HTMLElement, binding: MutateVNodeDirective, vnode: VNode) {
-  /* istanbul ignore if */
-  if (!el._mutate) return
+  if (!el._mutate?.[vnode.context!._uid]) return
 
-  el._mutate[vnode.context!._uid].observer.disconnect()
+  el._mutate[vnode.context!._uid]!.observer.disconnect()
   delete el._mutate[vnode.context!._uid]
 }
 

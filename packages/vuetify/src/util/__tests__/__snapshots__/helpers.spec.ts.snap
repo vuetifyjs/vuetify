@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createSimpleFunctional should render with a custom tag 1`] = `
+<pre class="v-test">
+</pre>
+`;
+
+exports[`createSimpleFunctional should render with a user-defined tag 1`] = `
+<h1 class="v-test">
+</h1>
+`;

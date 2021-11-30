@@ -13,10 +13,17 @@ export function createSimpleFunctional (
 
     functional: true,
 
-    render (h, { data, children }): VNode {
+    props: {
+      tag: {
+        type: String,
+        default: el,
+      },
+    },
+
+    render (h, { data, props, children }): VNode {
       data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
 
-      return h(el, data, children)
+      return h(props.tag, data, children)
     },
   })
 }
@@ -378,11 +385,11 @@ export function searchItems<T extends any = any> (items: T[], search: string): T
  *  - 'v-slot' for unbound v-slot (`#default`) - only if the third param is true, otherwise counts as scoped
  */
 export function getSlotType<T extends boolean = false> (vm: Vue, name: string, split?: T): (T extends true ? 'v-slot' : never) | 'normal' | 'scoped' | void {
-  if (vm.$slots[name] && vm.$scopedSlots[name] && (vm.$scopedSlots[name] as any).name) {
+  if (vm.$slots.hasOwnProperty(name) && vm.$scopedSlots.hasOwnProperty(name) && (vm.$scopedSlots[name] as any).name) {
     return split ? 'v-slot' as any : 'scoped'
   }
-  if (vm.$slots[name]) return 'normal'
-  if (vm.$scopedSlots[name]) return 'scoped'
+  if (vm.$slots.hasOwnProperty(name)) return 'normal'
+  if (vm.$scopedSlots.hasOwnProperty(name)) return 'scoped'
 }
 
 export function debounce (fn: Function, delay: number) {
@@ -412,9 +419,9 @@ export function getPrefixedScopedSlots (prefix: string, scopedSlots: any) {
 }
 
 export function getSlot (vm: Vue, name = 'default', data?: object | (() => object), optional = false) {
-  if (vm.$scopedSlots[name]) {
+  if (vm.$scopedSlots.hasOwnProperty(name)) {
     return vm.$scopedSlots[name]!(data instanceof Function ? data() : data)
-  } else if (vm.$slots[name] && (!data || optional)) {
+  } else if (vm.$slots.hasOwnProperty(name) && (!data || optional)) {
     return vm.$slots[name]
   }
   return undefined

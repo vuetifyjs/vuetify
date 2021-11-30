@@ -17,8 +17,11 @@
     position: absolute
     text-transform: initial
     width: auto
-    opacity: 1
+    opacity: 0
     pointer-events: none
+
+    &.menuable__content__active
+      opacity: $tooltip-opacity
 
     &--fixed
       position: fixed

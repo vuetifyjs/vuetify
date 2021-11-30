@@ -63,7 +63,10 @@ describe('VSnackbar.ts', () => {
     [true, false],
   ])('should have app padding on the x-axis using %s', (absolute, expected: boolean) => {
     const wrapper = mountFunction({
-      propsData: { absolute },
+      propsData: {
+        app: true,
+        absolute,
+      },
     })
 
     expect(Object.keys(wrapper.vm.styles).length > 0).toBe(expected)

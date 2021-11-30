@@ -237,4 +237,20 @@ describe('VAutocomplete.ts', () => {
 
     expect(onSearch).toHaveBeenCalledTimes(2)
   })
+
+  it('should reset selected item when text-field is cleared if not multiple', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo', 'bar'],
+        value: 'foo',
+      },
+    })
+
+    const input = wrapper.find('input')
+
+    input.element.value = ''
+    input.trigger('input')
+
+    expect(wrapper.vm.internalValue).toBeNull()
+  })
 })

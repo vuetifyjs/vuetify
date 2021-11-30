@@ -2,6 +2,8 @@
 
 $calendar-line-width: 1px !default;
 
+$calendar-daily-head-day-label-size: 56px !default;
+$calendar-daily-head-weekday-size: 50px !default;
 $calendar-daily-weekday-padding: 3px 0px 0px 0px !default;
 $calendar-daily-weekday-font-size: 11px !default;
 $calendar-daily-day-padding: 0px 0px 3px 0px !default;
@@ -11,6 +13,8 @@ $calendar-daily-interval-gutter-width: 4px !default;
 $calendar-daily-interval-gutter-align: right !default;
 $calendar-daily-interval-gutter-line-width: 8px !default;
 $calendar-daily-interval-gutter-font-size: 10px !default;
+
+$calendar-category-column-min-width: 200px !default;
 
 $calendar-weekly-weekday-padding: 0px 4px 0px 4px !default;
 $calendar-weekly-weekday-font-size: 11px !default;

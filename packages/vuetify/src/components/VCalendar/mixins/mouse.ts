@@ -86,7 +86,7 @@ export default Vue.extend({
               }
             }
 
-            this.$emit(event, getEvent(e))
+            this.$emit(event, getEvent(e), e)
           }
 
           return eventOptions.result

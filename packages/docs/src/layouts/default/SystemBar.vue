@@ -1,14 +1,14 @@
 <template>
   <v-system-bar
-    v-if="false"
-    color="#1A265A"
+    v-if="hasPromotion"
+    color="#000C19"
     app
     dark
     height="76"
   >
     <a
       class="cm-banner"
-      href="https://vueschool.io/sales/summer-vue?friend=vuetify"
+      href="https://vueschool.io/sales/blackfriday?friend=vuetify"
       rel="noopener"
       target="_blank"
       @click="onClick"
@@ -50,7 +50,7 @@
       onClick () {
         this.$gtag.event('click', {
           event_category: 'vuetify-banner',
-          event_label: 'vue-school-summer-vue',
+          event_label: 'vue-school-black-friday-2021',
           value: this.name.toLowerCase(),
         })
       },
@@ -78,11 +78,11 @@
     white-space: nowrap
 
   .cm-banner
-    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-summer-sale-2021/vs-summer-mobile.png)
+    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-black-friday-2021/vs-black-friday-2021-mobile.png)
 
     @media (min-width: 660px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-summer-sale-2021/vs-summer-tablet.png)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-black-friday-2021/vs-black-friday-2021-tablet.png)
 
     @media (min-width: 992px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-summer-sale-2021/vs-summer-desktop.png)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-black-friday-2021/vs-black-friday-2021-desktop.png)
 </style>

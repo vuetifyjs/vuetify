@@ -5,6 +5,8 @@
     "activeClass": "The class applied to the node when active",
     "color": "Sets the color of the active node",
     "dense": "Decreases the height of the items",
+    "disabled": "Disables selection for all nodes",
+    "disablePerNode": "Prevents disabling children nodes",
     "expandIcon": "Icon used to indicate that a node can be expanded",
     "hoverable": "Applies a hover class when mousing over nodes",
     "filter": "Custom item filtering function. By default it will use case-insensitive search in item's label.",

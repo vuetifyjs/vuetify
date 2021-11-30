@@ -695,6 +695,22 @@ describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
     expect(change.mock.calls).toHaveLength(1)
   })
 
+  it('should add class for the first and last days in range', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        range: true,
+        showCurrent: '2019-01',
+        type: 'date',
+        value: ['2019-01-06', '2019-01-16'],
+      },
+    })
+
+    expect(wrapper.findAll('.v-date-picker-table--date tbody button.v-date-picker--first-in-range')
+      .exists()).toBe(true)
+    expect(wrapper.findAll('.v-date-picker-table--date tbody button.v-date-picker--last-in-range')
+      .exists()).toBe(true)
+  })
+
   it('should set proper tableDate', async () => {
     const wrapper = mountFunction({
       propsData: {
