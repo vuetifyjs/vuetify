@@ -91,6 +91,10 @@ export default mixins(
     },
   },
 
+  watch: {
+    canScroll: 'onScroll',
+  },
+
   created () {
     /* istanbul ignore next */
     if (this.$attrs.hasOwnProperty('active')) {
@@ -100,8 +104,16 @@ export default mixins(
 
   methods: {
     thresholdMet () {
-      this.isActive = !this.isScrollingUp
-      this.$emit('update:input-value', this.isActive)
+      if (this.hideOnScroll) {
+        this.isActive = !this.isScrollingUp ||
+          this.currentScroll > this.computedScrollThreshold
+
+        this.$emit('update:input-value', this.isActive)
+      }
+
+      if (this.currentThreshold < this.computedScrollThreshold) return
+
+      this.savedScroll = this.currentScroll
     },
     updateApplication (): number {
       return this.$el
