@@ -186,7 +186,7 @@ export default CalendarBase.extend({
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },
           'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
-        }, nativeEvent => { return { nativeEvent, ...day } }),
+        }, nativeEvent => ({ nativeEvent, ...day })),
       }, hasMonth
         ? this.monthFormatter(day, this.shortMonths) + ' ' + this.dayFormatter(day, false)
         : this.dayFormatter(day, false)
