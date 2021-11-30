@@ -55,7 +55,9 @@ export default baseMixins.extend<options>().extend(
       }
     },
     value (): any {
-      let to = this.to || this.href || ''
+      let to = this.to || this.href
+
+      if (to == null) return to
 
       if (this.$router &&
         this.to === Object(this.to)

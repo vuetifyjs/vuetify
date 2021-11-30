@@ -114,7 +114,7 @@ export const BaseItemGroup = mixins(
       }
     },
     getValue (item: GroupableInstance, i: number): unknown {
-      return item.value == null || item.value === ''
+      return item.value === undefined
         ? i
         : item.value
     },
