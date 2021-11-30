@@ -47,7 +47,7 @@ A tooltip can be aligned to any of the four sides of the activator element.
 
 #### Color
 
-Tooltip contain `color` prop which allows you to select Tooltip color.
+Tooltip color can be set with the `color` prop.
 
 <example file="v-tooltip/prop-color" />
 
