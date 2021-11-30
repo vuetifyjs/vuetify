@@ -5,7 +5,7 @@ import { generate } from '@/../cypress/templates'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
 const location = ['bottom-left', 'bottom-right', 'top-left', 'top-right']
-const rounded = ['circle', 'pill', 'shaped', 'tr-xl', 'br-lg'] // TODO: fix pill
+const rounded = ['circle', 'pill', 'shaped', 'tr-xl', 'br-lg', 0] // TODO: fix pill
 const offset = [8, -8, '4', '-4', undefined]
 
 const props = {
@@ -61,7 +61,6 @@ const stories = {
 
 // Tests
 describe('VBadge', () => {
-  // TODO: Remove remaining skipped tests
   describe('color', () => {
     it('supports default color props', () => {
       cy.mount(() => (
@@ -94,7 +93,7 @@ describe('VBadge', () => {
   })
 
   describe('max', () => {
-    it('should add a suffix if the content value is greater', () => {
+    it('should add a suffix if the content value is greater than the max value', () => {
       cy.mount(<VBadge content="1000" max="999" />)
         .get('.v-badge')
         .should('contain.text', '+')
