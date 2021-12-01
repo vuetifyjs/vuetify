@@ -208,10 +208,15 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
 
     const canFill = doesOverlap.value || ['center', 'top', 'bottom'].includes(anchor.side)
 
+    const maxWidthFromProps: number | undefined = typeof props.maxWidth === 'string' ? parseInt(props.maxWidth, 10) : props.maxWidth
+
+    const getEndStartMaxWidth = (lrSpace: number) => maxWidthFromProps ? Math.min(maxWidthFromProps, lrSpace) : lrSpace
+
     const maxWidth = canFill ? Math.min(viewportWidth, Math.max(targetBox.width, viewportWidth - viewportMargin * 2))
-      : anchor.side === 'end' ? freeSpace.right
-      : anchor.side === 'start' ? freeSpace.left
+      : anchor.side === 'end' ? getEndStartMaxWidth(freeSpace.right)
+      : anchor.side === 'start' ? getEndStartMaxWidth(freeSpace.left)
       : null
+
     const minWidth = Math.min(configuredMinWidth.value, maxWidth!, targetBox.width)
     const maxHeight = fitsY ? configuredMaxHeight.value : Math.min(
       configuredMaxHeight.value,

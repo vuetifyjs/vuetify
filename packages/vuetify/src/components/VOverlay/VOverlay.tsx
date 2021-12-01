@@ -244,8 +244,8 @@ export const VOverlay = genericComponent<new () => {
                     props.contentClass,
                   ]}
                   style={[
-                    contentStyles.value,
                     dimensionStyles.value,
+                    contentStyles.value,
                   ]}
                 >
                   { slots.default?.({ isActive }) }
