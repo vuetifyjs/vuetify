@@ -2,13 +2,20 @@
 import './VSwitch.sass'
 
 // Components
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { filterControlProps, makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
+import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { VProgressCircular } from '@/components/VProgressCircular'
+
+// Composables
+import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { filterInputAttrs, useRender } from '@/util'
-import { useProxiedModel } from '@/composables/proxiedModel'
+
+// Types
+import type { LoaderSlotProps } from '@/composables/loader'
 
 export const VSwitch = defineComponent({
   name: 'VSwitch',
@@ -18,9 +25,9 @@ export const VSwitch = defineComponent({
   props: {
     indeterminate: Boolean,
     inset: Boolean,
-    loading: [Boolean, String],
     flat: Boolean,
 
+    ...makeLoaderProps(),
     ...makeVInputProps(),
     ...makeSelectionControlProps(),
   },
@@ -31,6 +38,14 @@ export const VSwitch = defineComponent({
 
   setup (props, { attrs, slots }) {
     const indeterminate = useProxiedModel(props, 'indeterminate')
+    const { loaderClasses } = useLoader(props, 'v-switch')
+
+    const loaderColor = computed(() => {
+      return typeof props.loading === 'string' && props.loading !== ''
+        ? props.loading
+        : props.color
+    })
+
     function onChange () {
       if (indeterminate.value) {
         indeterminate.value = false
@@ -52,6 +67,7 @@ export const VSwitch = defineComponent({
           class={[
             'v-switch',
             { 'v-switch--indeterminate': indeterminate.value },
+            loaderClasses.value,
           ]}
           { ...inputAttrs }
           { ...inputProps }
@@ -60,6 +76,7 @@ export const VSwitch = defineComponent({
             default: ({
               isDisabled,
               isReadonly,
+              isValid,
             }) => (
               <VSelectionControl
                 ref={ control }
@@ -78,7 +95,30 @@ export const VSwitch = defineComponent({
                         'v-switch__thumb',
                         textColorClasses.value,
                       ]}
-                    />
+                    >
+                      { props.loading && (
+                        <LoaderSlot
+                          name="v-switch"
+                          active
+                          color={ isValid.value === false ? undefined : loaderColor.value }
+                          v-slots={{
+                            default (slotProps: LoaderSlotProps) {
+                              return slots.loader
+                                ? slots.loader(slotProps)
+                                : (
+                                  <VProgressCircular
+                                    active={ slotProps.isActive }
+                                    color={ slotProps.color }
+                                    indeterminate
+                                    size="16"
+                                    width="2"
+                                  />
+                                )
+                            },
+                          }}
+                        />
+                      ) }
+                    </div>
                   ),
                 }}
               />
