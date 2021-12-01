@@ -2,6 +2,9 @@
 
 $switch-control-input-transition: .15s transform settings.$standard-easing !default;
 $switch-error-background-color: rgb(var(--v-theme-error)) !default;
+$switch-inset-track-border-radius: 14px !default;
+$switch-inset-track-height: 28px !default;
+$switch-inset-track-width: 48px !default;
 $switch-label-margin-inline-start: 10px !default;
 $switch-thumb-elevation: 4 !default;
 $switch-thumb-height: 20px !default;

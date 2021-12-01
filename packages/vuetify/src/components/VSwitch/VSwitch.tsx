@@ -66,6 +66,7 @@ export const VSwitch = defineComponent({
         <VInput
           class={[
             'v-switch',
+            { 'v-switch--inset': props.inset },
             { 'v-switch--indeterminate': indeterminate.value },
             loaderClasses.value,
           ]}
