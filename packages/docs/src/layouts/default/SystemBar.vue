@@ -1,6 +1,6 @@
 <template>
   <v-system-bar
-    v-if="false"
+    v-if="hasPromotion"
     color="#000C19"
     app
     dark
@@ -50,7 +50,7 @@
       onClick () {
         this.$gtag.event('click', {
           event_category: 'vuetify-banner',
-          event_label: 'vue-school-black-friday-2021',
+          event_label: 'vue-school-cyber-monday-2021',
           value: this.name.toLowerCase(),
         })
       },
@@ -78,11 +78,11 @@
     white-space: nowrap
 
   .cm-banner
-    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-black-friday-2021/vs-black-friday-2021-mobile.png)
+    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-cyber-monday-2021/vs-cyber-monday-2021-mobile.png)
 
     @media (min-width: 660px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-black-friday-2021/vs-black-friday-2021-tablet.png)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-cyber-monday-2021/vs-cyber-monday-2021-tablet.png)
 
     @media (min-width: 992px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-black-friday-2021/vs-black-friday-2021-desktop.png)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-cyber-monday-2021/vs-cyber-monday-2021-desktop.png)
 </style>
