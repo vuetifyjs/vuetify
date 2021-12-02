@@ -1,4 +1,2 @@
-import VBtnToggle from './VBtnToggle'
-
-export { VBtnToggle }
-export default VBtnToggle
+export { VBtnToggle } from './VBtnToggle'
+export { VBtnToggleItem } from './VBtnToggleItem'

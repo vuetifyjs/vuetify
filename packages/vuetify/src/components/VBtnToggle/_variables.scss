@@ -1,11 +1,24 @@
-@import '../../styles/styles.sass';
+@use '../../styles/settings';
+@use '../../styles/tools';
 
-$btn-toggle-border-radius: $border-radius-root !default;
-$btn-toggle-shaped-border-radius: 24px !default;
-$btn-toggle-btn-height: 48px !default;
-$btn-toggle-btn-padding: 0 12px !default;
-$btn-toggle-btn-width: 48px !default;
-$btn-toggle-btn-opacity: 0.8 !default;
-$btn-toggle-round-border-radius: 24px !default;
-$btn-toggle-dense-btn-padding: 0 8px !default;
-$btn-toggle-group-btn-margin: 4px !default;
+$btn-toggle-background: rgba(var(--v-theme-on-background), var(--v-idle-opacity)) !default;
+$btn-toggle-border-color: settings.$border-color-root !default;
+$btn-toggle-border-radius: settings.$border-radius-root !default;
+$btn-toggle-border-style: settings.$border-style-root !default;
+$btn-toggle-border-thin-width: thin !default;
+$btn-toggle-border-width: 0 !default;
+$btn-toggle-color: rgb(var(--v-theme-on-background)) !default;
+$btn-toggle-elevation: 0 !default;
+$btn-toggle-rounded-border-radius: settings.$border-radius-root !default;
+
+$btn-toggle-border: (
+  $btn-toggle-border-color,
+  $btn-toggle-border-style,
+  $btn-toggle-border-width,
+  $btn-toggle-border-thin-width
+) !default;
+
+$btn-toggle-theme: (
+  $btn-toggle-background,
+  $btn-toggle-color
+) !default;

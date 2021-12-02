@@ -1,99 +1,30 @@
-// Imports
-@import './_variables.scss'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
-// Theme
-+theme(v-btn-toggle) using ($material)
-  &:not(.v-btn-toggle--group)
-    background: map-get($material, 'cards')
-    color: map-deep-get($material, 'text', 'primary')
-
-    .v-btn.v-btn
-      border-color: map-get($material, 'dividers') !important
-
-      &:focus:not(:active)
-        border-color: map-deep-get($material, 'buttons', 'disabled')
-
-      .v-icon
-        color: map-deep-get($material, 'toggle-buttons', 'color')
-
-// Block
 .v-btn-toggle
-  border-radius: $btn-toggle-border-radius
   display: inline-flex
-  max-width: 100%
+  flex-wrap: nowrap
+  overflow: hidden
 
-  > .v-btn.v-btn
+  @include tools.border($btn-toggle-border...)
+  @include tools.elevation($btn-toggle-elevation)
+  @include tools.rounded($btn-toggle-border-radius)
+  @include tools.theme($btn-toggle-theme...)
+
+  &--border
+    .v-btn:not(:last-child)
+      border-right: inherit
+
+  &--rounded
+    @include tools.rounded($btn-toggle-rounded-border-radius)
+
+  .v-btn
+    background: transparent
     border-radius: 0
-    border-style: solid
-    border-width: thin
-    box-shadow: none
-    box-shadow: none
-    opacity: $btn-toggle-btn-opacity
-    padding: $btn-toggle-btn-padding
 
-    &:first-child
-      +ltr()
-        border-top-left-radius: inherit
-        border-bottom-left-radius: inherit
-
-      +rtl()
-        border-top-right-radius: inherit
-        border-bottom-right-radius: inherit
-
-    &:last-child
-      +ltr()
-        border-top-right-radius: inherit
-        border-bottom-right-radius: inherit
-
-      +rtl()
-        border-top-left-radius: inherit
-        border-bottom-left-radius: inherit
-
-    &--active
+    &.v-item--selected
       color: inherit
-      opacity: 1
 
-    &:after
-      display: none
-
-    +ltr()
-      &:not(:first-child)
-        border-left-width: 0
-
-    +rtl()
-      &:not(:last-child)
-        border-left-width: 0
-
-  .v-btn.v-btn.v-size--default
-    min-width: $btn-toggle-btn-width
-    min-height: 0
-
-  &:not(.v-btn-toggle--dense)
-    .v-btn.v-btn.v-size--default
-      height: $btn-toggle-btn-height
-
-.v-btn-toggle--borderless
-  > .v-btn.v-btn
-    border-width: 0
-
-.v-btn-toggle--dense
-  > .v-btn.v-btn
-    padding: $btn-toggle-dense-btn-padding
-
-.v-btn-toggle--group
-  border-radius: 0
-
-  > .v-btn.v-btn
-    background-color: transparent !important
-    border-color: transparent
-    margin: $btn-toggle-group-btn-margin
-    min-width: auto
-
-.v-btn-toggle--rounded
-  border-radius: $btn-toggle-round-border-radius
-
-.v-btn-toggle--shaped
-  border-radius: $btn-toggle-shaped-border-radius $btn-toggle-border-radius
-
-.v-btn-toggle--tile
-  border-radius: 0
+      .v-btn__overlay
+        opacity: var(--v-activated-opacity)

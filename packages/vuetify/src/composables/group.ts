@@ -24,7 +24,7 @@ interface GroupProps {
   'onUpdate:modelValue': ((val: unknown) => void) | undefined
 }
 
-interface GroupProvide {
+export interface GroupProvide {
   register: (item: GroupItem, cmp: ComponentInternalInstance) => void
   unregister: (id: number) => void
   select: (id: number, value: boolean) => void
@@ -161,7 +161,9 @@ export function useGroup (
   function unregister (id: number) {
     if (isUnmounted) return
 
-    selected.value = selected.value.filter(v => v !== id)
+    // TODO: re-evaluate this line's importance in the future
+    // should we only modify the model if mandatory is set.
+    // selected.value = selected.value.filter(v => v !== id)
 
     forceMandatoryValue()
 
