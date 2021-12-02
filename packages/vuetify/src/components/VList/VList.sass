@@ -47,7 +47,6 @@
   font-weight: $list-subheader-font-weight
   line-height: $list-subheader-line-height
   padding-inline-end: $list-subheader-padding-end
-  padding-inline-start: $list-subheader-padding-start
   min-height: $list-subheader-min-height
   transition: $list-subheader-transition
 
@@ -61,6 +60,7 @@
     @include tools.density('v-list', $list-density) using ($modifier)
       #{$root}
         min-height: $list-subheader-min-height + ($modifier * $list-subheader-min-height-multiplier)
+        padding-inline-start: calc(#{$list-subheader-padding-start} + (var(--v-list-depth) * #{$list-item-avatar-size + ($modifier * $list-item-avatar-size-multiplier)}))
 
   &--inset
     padding-inline-start: $list-subheader-inset-padding-start
@@ -68,7 +68,7 @@
   .v-list--nav &
     font-size: $list-nav-subheader-font-size
 
-  .v-list--subheader-sticky &
+  &--sticky
     background: inherit
     left: 0
     position: sticky
