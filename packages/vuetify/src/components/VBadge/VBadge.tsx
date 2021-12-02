@@ -39,13 +39,13 @@ export default defineComponent({
     },
     location: {
       type: String,
-      default: 'top-right',
+      default: 'top-end',
       validator: (value: string) => {
         const [vertical, horizontal] = (value ?? '').split('-')
 
         return (
           ['top', 'bottom'].includes(vertical) &&
-          ['left', 'right'].includes(horizontal)
+          ['start', 'end'].includes(horizontal)
         )
       },
     },
@@ -92,7 +92,7 @@ export default defineComponent({
       }
 
       if (!props.inline) {
-        const isRight = (isRtl.value && horizontal === 'right') || (!isRtl.value && horizontal === 'left')
+        const isRight = (isRtl.value && horizontal === 'end') || (!isRtl.value && horizontal === 'start')
 
         styles[isRight ? 'right' : 'left'] = calculatePosition(props.offsetX)
         styles[vertical === 'top' ? 'bottom' : 'top'] = calculatePosition(props.offsetY)
