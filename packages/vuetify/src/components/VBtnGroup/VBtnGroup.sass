@@ -1,32 +1,44 @@
-@use '../../styles/settings'
+@forward './variables'
+@use '../../styles/tools'
+@use 'sass:math'
+@use 'sass:selector'
+@use './variables' as *
 @use '../VBtn/mixins' as *
 @use '../VBtn/variables' as *
 
 .v-btn-group
-  display: flex
+  $root: &
 
-  & > :first-child,
-  & > :first-child > .v-field__control
-    border-top-right-radius: 0
-    border-bottom-right-radius: 0
+  display: inline-flex
+  flex-wrap: nowrap
+  flex-wrap: nowrap
+  flex: 1 1
+  max-width: 100%
+  min-width: 0
+  overflow: hidden
 
-  & > :last-child,
-  & > :last-child > .v-field__control
-    border-top-left-radius: 0
-    border-bottom-left-radius: 0
 
-  & > :not(:first-child):not(:last-child),
-  & > :not(:first-child):not(:last-child) > .v-field__control
+  @include tools.border($btn-toggle-border...)
+  @include tools.elevation($btn-toggle-elevation)
+  @include tools.rounded($btn-toggle-border-radius)
+  @include tools.theme($btn-toggle-theme...)
+
+  @at-root
+    @include tools.density('v-btn-group', $button-density) using ($modifier)
+      @at-root #{selector.append(&, $root)}
+        height: 48px + $modifier
+
+  &--border
+    .v-btn:not(:last-child)
+      border-right: inherit
+
+  &--tile
+    @include tools.rounded($btn-toggle-tile-border-radius)
+
+  .v-btn
+    background: inherit
     border-radius: 0
-
-  & > .v-btn
     box-shadow: none
+    color: inherit
+    flex: 0 1 auto
     height: auto
-
-    @include button-density('min-height', $button-density)
-
-    & + .v-btn
-      border-left: thin solid settings.$border-color-root !important
-
-    & + .v-btn.v-btn--variant-outlined
-      border-left: 0 !important
