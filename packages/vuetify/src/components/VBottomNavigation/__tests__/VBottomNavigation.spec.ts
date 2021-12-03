@@ -87,29 +87,31 @@ describe('VBottomNavigation.ts', () => {
     expect(spy).toHaveBeenCalledTimes(2)
   })
 
-  it('should fire an event and activate/deactivate when reached threshold', async () => {
+  it('should fire an event and activate/deactivate when reached threshold and using hideOnScroll', async () => {
     const updateInputValue = jest.fn()
-    const wrapper = mountFunction()
+    const wrapper = mountFunction({
+      propsData: { hideOnScroll: true },
+    })
     wrapper.vm.$on('update:input-value', updateInputValue)
 
     expect(updateInputValue).not.toHaveBeenCalled()
 
     // Scrolling down
     wrapper.vm.currentScroll = 1000
-    wrapper.vm.previousScroll = 900
+    wrapper.vm.previousScroll = 0
     wrapper.vm.isScrollingUp = false
 
     wrapper.vm.thresholdMet()
-    expect(updateInputValue).toHaveBeenCalled()
+    expect(updateInputValue).toHaveBeenCalledTimes(1)
     expect(wrapper.vm.isActive).toBeTruthy()
 
-    // Scrolling down
-    wrapper.vm.currentScroll = 900
+    // Scrolling up
+    wrapper.vm.currentScroll = 0
     wrapper.vm.previousScroll = 1000
     wrapper.vm.isScrollingUp = true
 
     wrapper.vm.thresholdMet()
-    expect(updateInputValue).toHaveBeenCalled()
+    expect(updateInputValue).toHaveBeenCalledTimes(2)
     expect(wrapper.vm.isActive).toBeFalsy()
   })
 

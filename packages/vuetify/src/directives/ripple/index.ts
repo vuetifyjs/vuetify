@@ -17,10 +17,6 @@ function transform (el: HTMLElement, value: string) {
   el.style.webkitTransform = value
 }
 
-function opacity (el: HTMLElement, value: number) {
-  el.style.opacity = value.toString()
-}
-
 export interface RippleOptions {
   class?: string
   center?: boolean
@@ -109,14 +105,12 @@ const ripples = {
     animation.classList.add('v-ripple__animation--enter')
     animation.classList.add('v-ripple__animation--visible')
     transform(animation, `translate(${x}, ${y}) scale3d(${scale},${scale},${scale})`)
-    opacity(animation, 0)
     animation.dataset.activated = String(performance.now())
 
     setTimeout(() => {
       animation.classList.remove('v-ripple__animation--enter')
       animation.classList.add('v-ripple__animation--in')
       transform(animation, `translate(${centerX}, ${centerY}) scale3d(1,1,1)`)
-      opacity(animation, 0.25)
     }, 0)
   },
 
@@ -137,7 +131,6 @@ const ripples = {
     setTimeout(() => {
       animation.classList.remove('v-ripple__animation--in')
       animation.classList.add('v-ripple__animation--out')
-      opacity(animation, 0)
 
       setTimeout(() => {
         const ripples = el.getElementsByClassName('v-ripple__animation')

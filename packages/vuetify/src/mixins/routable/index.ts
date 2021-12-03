@@ -80,9 +80,6 @@ export default Vue.extend({
   },
 
   methods: {
-    click (e: MouseEvent): void {
-      this.$emit('click', e)
-    },
     generateRouteLink () {
       let exact = this.exact
       let tag
@@ -100,7 +97,7 @@ export default Vue.extend({
         }],
         [this.to ? 'nativeOn' : 'on']: {
           ...this.$listeners,
-          click: this.click,
+          ...('click' in this ? { click: (this as any).click } : undefined), // #14447
         },
         ref: 'link',
       }
