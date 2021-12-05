@@ -10,6 +10,7 @@ import ripple from '../../directives/ripple'
 
 // Utilities
 import mixins from '../../util/mixins'
+import { keyCodes } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
@@ -132,7 +133,7 @@ export default baseMixins.extend<options>().extend({
       return children
     },
     keyboardClick (e: KeyboardEvent) {
-      if (e.keyCode === 32) {
+      if (e.keyCode === keyCodes.space) {
         this.click(e)
       }
     },
