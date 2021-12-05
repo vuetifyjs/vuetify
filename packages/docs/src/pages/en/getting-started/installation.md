@@ -65,7 +65,7 @@ Once prompted, choose `Vuetify 3 Preview (Vuetify 3)`:
 
 ### Vite
 
-Installing Vuetify 3 using vite can be done using vue-cli[#vue-cli]. To start, use npm/yarn to set up your vite project outlined in the [Vite documentation](https://vitejs.dev/guide/#scaffolding-your-first-vite-project):
+Installing Vuetify 3 using vite can be done using [vue-cli](#vue-cli). To start, use npm/yarn to set up your vite project outlined in the [Vite documentation](https://vitejs.dev/guide/#scaffolding-your-first-vite-project):
 
 ```bash
 # npm 6.x
