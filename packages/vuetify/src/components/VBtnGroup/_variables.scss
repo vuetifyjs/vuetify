@@ -1,24 +1,25 @@
 @use '../../styles/settings';
 @use '../../styles/tools';
 
-$btn-toggle-background: rgba(var(--v-theme-on-background), var(--v-idle-opacity)) !default;
-$btn-toggle-border-color: settings.$border-color-root !default;
-$btn-toggle-border-radius: settings.$border-radius-root !default;
-$btn-toggle-border-style: settings.$border-style-root !default;
-$btn-toggle-border-thin-width: thin !default;
-$btn-toggle-border-width: 0 !default;
-$btn-toggle-color: rgb(var(--v-theme-on-background)) !default;
-$btn-toggle-elevation: 0 !default;
-$btn-toggle-tile-border-radius: 0 !default;
+$btn-group-background: transparent !default;
+$btn-group-border-color: settings.$border-color-root !default;
+$btn-group-border-radius: settings.$border-radius-root !default;
+$btn-group-border-style: settings.$border-style-root !default;
+$btn-group-border-color: $border-color-root !default;
+$btn-group-border-thin-width: thin !default;
+$btn-group-border-width: 0 !default;
+$btn-group-color: rgb(var(--v-theme-on-background)) !default;
+$btn-group-elevation: 0 !default;
+$btn-group-tile-border-radius: 0 !default;
 
-$btn-toggle-border: (
-  $btn-toggle-border-color,
-  $btn-toggle-border-style,
-  $btn-toggle-border-width,
-  $btn-toggle-border-thin-width
+$btn-group-border: (
+  $btn-group-border-color,
+  $btn-group-border-style,
+  $btn-group-border-width,
+  $btn-group-border-thin-width
 ) !default;
 
-$btn-toggle-theme: (
-  $btn-toggle-background,
-  $btn-toggle-color
+$btn-group-theme: (
+  $btn-group-background,
+  $btn-group-color
 ) !default;
