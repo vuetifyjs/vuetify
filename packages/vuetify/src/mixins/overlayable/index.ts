@@ -7,6 +7,7 @@ import {
   addOnceEventListener,
   addPassiveEventListener,
   getZIndex,
+  composedPath,
 } from '../../util/helpers'
 
 // Types
@@ -155,20 +156,32 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       if (!el || el.nodeType !== Node.ELEMENT_NODE) return false
 
       const style = window.getComputedStyle(el)
-      return ['auto', 'scroll'].includes(style.overflowY!) && el.scrollHeight > el.clientHeight
+      return ((['auto', 'scroll'].includes(style.overflowY!) || el.tagName === 'SELECT') && el.scrollHeight > el.clientHeight) ||
+      ((['auto', 'scroll'].includes(style.overflowX!)) && el.scrollWidth > el.clientWidth)
     },
-    shouldScroll (el: Element, delta: number): boolean {
+    shouldScroll (el: Element, e: WheelEvent): boolean {
       if (el.hasAttribute('data-app')) return false
 
-      const alreadyAtTop = el.scrollTop === 0
-      const alreadyAtBottom = el.scrollTop + el.clientHeight === el.scrollHeight
+      const dir = e.shiftKey || e.deltaX ? 'x' : 'y'
+      const delta = dir === 'y' ? e.deltaY : e.deltaX || e.deltaY
+
+      let alreadyAtStart: boolean
+      let alreadyAtEnd: boolean
+      if (dir === 'y') {
+        alreadyAtStart = el.scrollTop === 0
+        alreadyAtEnd = el.scrollTop + el.clientHeight === el.scrollHeight
+      } else {
+        alreadyAtStart = el.scrollLeft === 0
+        alreadyAtEnd = el.scrollLeft + el.clientWidth === el.scrollWidth
+      }
+
       const scrollingUp = delta < 0
       const scrollingDown = delta > 0
 
-      if (!alreadyAtTop && scrollingUp) return true
-      if (!alreadyAtBottom && scrollingDown) return true
-      if ((alreadyAtTop || alreadyAtBottom)) {
-        return this.shouldScroll(el.parentNode as Element, delta)
+      if (!alreadyAtStart && scrollingUp) return true
+      if (!alreadyAtEnd && scrollingDown) return true
+      if ((alreadyAtStart || alreadyAtEnd)) {
+        return this.shouldScroll(el.parentNode as Element, e)
       }
 
       return false
@@ -183,15 +196,14 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       }
     },
     checkPath (e: WheelEvent) {
-      const path = e.path || this.composedPath(e)
-      const delta = e.deltaY
+      const path = composedPath(e)
 
       if (e.type === 'keydown' && path[0] === document.body) {
         const dialog = this.$refs.dialog
         // getSelection returns null in firefox in some edge cases, can be ignored
         const selected = window.getSelection()!.anchorNode as Element
         if (dialog && this.hasScrollbar(dialog) && this.isInside(selected, dialog)) {
-          return !this.shouldScroll(dialog, delta)
+          return !this.shouldScroll(dialog, e)
         }
         return true
       }
@@ -203,33 +215,10 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
         if (el === document.documentElement) return true
         if (el === this.$refs.content) return true
 
-        if (this.hasScrollbar(el as Element)) return !this.shouldScroll(el as Element, delta)
+        if (this.hasScrollbar(el as Element)) return !this.shouldScroll(el as Element, e)
       }
 
       return true
-    },
-    /**
-     * Polyfill for Event.prototype.composedPath
-     */
-    composedPath (e: WheelEvent): EventTarget[] {
-      if (e.composedPath) return e.composedPath()
-
-      const path = []
-      let el = e.target as Element
-
-      while (el) {
-        path.push(el)
-
-        if (el.tagName === 'HTML') {
-          path.push(document)
-          path.push(window)
-
-          return path
-        }
-
-        el = el.parentElement!
-      }
-      return path
     },
     hideScroll () {
       if (this.$vuetify.breakpoint.smAndDown) {

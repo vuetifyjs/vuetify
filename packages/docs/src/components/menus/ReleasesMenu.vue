@@ -30,10 +30,6 @@
             href: 'https://next.vuetifyjs.com',
           },
           {
-            title: '2.3.x',
-            href: 'https://v2.vuetifyjs.com',
-          },
-          {
             title: '1.5.x',
             href: 'https://v15.vuetifyjs.com',
           },

@@ -2,7 +2,7 @@ const { IS_SERVER } = require('./src/util/globals')
 
 module.exports = {
   css: {
-    extract: !IS_SERVER,
+    extract: !IS_SERVER && { ignoreOrder: true },
     sourceMap: !IS_SERVER,
   },
   configureWebpack: {

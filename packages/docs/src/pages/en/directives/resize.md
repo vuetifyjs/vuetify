@@ -25,6 +25,6 @@ Resize your window and observe the values change..
 
 - [v-resize](/api/v-resize)
 
-<api-section page="directives/resize" />
+<inline-api page="directives/resize" />
 
 <backmatter />

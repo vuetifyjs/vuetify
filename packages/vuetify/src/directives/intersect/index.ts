@@ -1,4 +1,5 @@
 import { VNodeDirective } from 'vue/types/vnode'
+import { VNode } from 'vue'
 
 type ObserveHandler = (
   entries: IntersectionObserverEntry[],
@@ -14,7 +15,7 @@ interface ObserveVNodeDirective extends Omit<VNodeDirective, 'modifiers'> {
   }
 }
 
-function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
+function inserted (el: HTMLElement, binding: ObserveVNodeDirective, vnode: VNode) {
   if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return
 
   const modifiers = binding.modifiers || {}
@@ -26,8 +27,8 @@ function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
     entries: IntersectionObserverEntry[] = [],
     observer: IntersectionObserver
   ) => {
-    /* istanbul ignore if */
-    if (!el._observe) return // Just in case, should never fire
+    const _observe = el._observe?.[vnode.context!._uid]
+    if (!_observe) return // Just in case, should never fire
 
     const isIntersecting = entries.some(entry => entry.isIntersecting)
 
@@ -36,31 +37,32 @@ function inserted (el: HTMLElement, binding: ObserveVNodeDirective) {
     if (
       handler && (
         !modifiers.quiet ||
-        el._observe.init
+        _observe.init
       ) && (
         !modifiers.once ||
         isIntersecting ||
-        !el._observe.init
+        _observe.init
       )
     ) {
       handler(entries, observer, isIntersecting)
     }
 
-    if (isIntersecting && modifiers.once) unbind(el)
-    else el._observe.init = true
+    if (isIntersecting && modifiers.once) unbind(el, binding, vnode)
+    else _observe.init = true
   }, options)
 
-  el._observe = { init: false, observer }
+  el._observe = Object(el._observe)
+  el._observe![vnode.context!._uid] = { init: false, observer }
 
   observer.observe(el)
 }
 
-function unbind (el: HTMLElement) {
-  /* istanbul ignore if */
-  if (!el._observe) return
+function unbind (el: HTMLElement, binding: ObserveVNodeDirective, vnode: VNode) {
+  const observe = el._observe?.[vnode.context!._uid]
+  if (!observe) return
 
-  el._observe.observer.unobserve(el)
-  delete el._observe
+  observe.observer.unobserve(el)
+  delete el._observe![vnode.context!._uid]
 }
 
 export const Intersect = {

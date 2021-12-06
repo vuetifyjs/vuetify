@@ -87,11 +87,7 @@ export function createSimpleTransition (
       }
       if (context.props.hideOnLeave) {
         data.on!.leave = mergeTransitions(data.on!.leave, (el: HTMLElement) => {
-          (el as any)._initialDisplay = el.style.display
-          el.style.display = 'none'
-        })
-        data.on!.afterLeave = mergeTransitions(data.on!.afterLeave, (el?: HTMLElement) => {
-          if (el) el.style.display = (el as any)._initialDisplay || ''
+          el.style.setProperty('display', 'none', 'important')
         })
       }
 

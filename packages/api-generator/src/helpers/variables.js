@@ -128,7 +128,7 @@ const VTextField = {
     },
   ],
   slots: [
-    ...VInput.slots,
+    ...VInput.slots.filter(v => v.name !== 'default'),
     ...createItems([
       'append-outer',
       'prepend-inner',
@@ -374,6 +374,11 @@ const VCalendarEventSlot = {
   eventSummary: '(): string',
 }
 
+const VCalendarEventEvent = {
+  ...VCalendarEventSlot,
+  nativeEvent: 'MouseEvent | TouchEvent',
+}
+
 const VTimestampWithTime = {
   date: 'string',
   time: 'string',
@@ -437,6 +442,7 @@ module.exports = {
   createItems,
   VCalendarDay,
   VCalendarEvent,
+  VCalendarEventEvent,
   VCalendarEventSlot,
   VGridProps,
   VInput,

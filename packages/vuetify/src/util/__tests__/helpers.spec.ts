@@ -9,7 +9,24 @@ import {
   getObjectValueByPath,
   humanReadableFileSize,
   sortItems,
+  createSimpleFunctional,
 } from '../helpers'
+import { mount } from '@vue/test-utils'
+
+describe('createSimpleFunctional', () => {
+  it('should render with a custom tag', () => {
+    const component = createSimpleFunctional('v-test', 'pre')
+    const wrapper = mount(component)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+  it('should render with a user-defined tag', () => {
+    const component = createSimpleFunctional('v-test', 'pre')
+    const wrapper = mount(component, {
+      propsData: { tag: 'h1' },
+    })
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+})
 
 describe('helpers', () => {
   it('should return set difference of arrays A and B', () => {

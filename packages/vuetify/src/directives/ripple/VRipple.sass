@@ -1,4 +1,4 @@
-@import './_variables.scss'
+@import '../../styles/styles.sass'
 
 .v-ripple
   &__container
@@ -28,9 +28,12 @@
 
     &--enter
       transition: none
+      opacity: 0
 
     &--in
       transition: $ripple-animation-transition-in
+      opacity: $ripple-animation-visible-opacity
 
     &--out
       transition: $ripple-animation-transition-out
+      opacity: 0

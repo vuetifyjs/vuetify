@@ -25,7 +25,7 @@ Tooltips can wrap any element.
 
 - [v-tooltip](/api/v-tooltip)
 
-<api-section page="components/tooltips" />
+<inline-api page="components/tooltips" />
 
 ## Caveats
 
@@ -44,6 +44,12 @@ Tooltips can wrap any element.
 A tooltip can be aligned to any of the four sides of the activator element.
 
 <example file="v-tooltip/prop-alignment" />
+
+#### Color
+
+Tooltip color can be set with the `color` prop.
+
+<example file="v-tooltip/prop-color" />
 
 #### Visibility
 

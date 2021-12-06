@@ -12,7 +12,6 @@ module.exports = {
   ],
   extends: ['plugin:jest/recommended'],
   rules: {
-    'no-var': 'error',
     'no-console': 'error',
     'no-debugger': 'error',
     'vue/html-self-closing': 'off',

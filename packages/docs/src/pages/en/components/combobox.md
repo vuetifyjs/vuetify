@@ -25,7 +25,7 @@ With Combobox, you can allow a user to create new values that may not be present
 
 - [v-combobox](/api/v-combobox)
 
-<api-section page="components/combobox" />
+<inline-api page="components/combobox" />
 
 ## Caveats
 

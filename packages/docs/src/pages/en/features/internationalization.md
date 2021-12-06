@@ -28,6 +28,7 @@ Currently Vuetify provides translations in the following languages:
 - **ca** - Catalan (català)
 - **ckb** - Central Kurdish (کوردی)
 - **cs** - Czech (čeština)
+- **da** - Danish (Dansk)
 - **de** - German (Deutsch)
 - **el** - Greek (Ελληνικά)
 - **en** - English
@@ -100,7 +101,7 @@ export default new Vuetify({
 
 - [internationalization](/api/internationalization)
 
-<api-section page="features/internationalization" />
+<inline-api page="features/internationalization" />
 
 ## Caveats
 

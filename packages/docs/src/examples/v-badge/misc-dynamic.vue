@@ -38,7 +38,6 @@
     data () {
       return {
         messages: 0,
-        show: false,
       }
     },
   }

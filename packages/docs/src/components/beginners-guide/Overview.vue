@@ -63,7 +63,7 @@
           subtitle: 'Styling Vuetify.',
         },
         {
-          icon: 'mdi-teach',
+          icon: 'mdi-human-male-board',
           title: 'Resources',
           subtitle: 'Available tooling and more.',
         },

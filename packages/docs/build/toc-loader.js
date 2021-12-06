@@ -17,12 +17,12 @@ function getPageHeadings (page) {
 
     const next = tokens[i + 1]
     const link = next.children.find(child => child.type === 'link_open')
-    const text = next.content
+    const text = next.children.find(child => child.type === 'text' && child.content.trim())
     const anchor = !link || link.attrs.find(([attr]) => attr === 'href')
     const [, to] = anchor
 
     headings.push({
-      text,
+      text: text.content,
       to,
       level,
     })

@@ -8,19 +8,13 @@ import { keyCodes } from '../../util/helpers'
 // Types
 import { VNode, VNodeDirective } from 'vue'
 
-const rippleStop = Symbol('rippleStop')
-
-type VuetifyRippleEvent = (MouseEvent | TouchEvent | KeyboardEvent) & { [rippleStop]?: boolean }
+type VuetifyRippleEvent = (MouseEvent | TouchEvent | KeyboardEvent) & { rippleStop?: boolean }
 
 const DELAY_RIPPLE = 80
 
 function transform (el: HTMLElement, value: string) {
   el.style.transform = value
   el.style.webkitTransform = value
-}
-
-function opacity (el: HTMLElement, value: number) {
-  el.style.opacity = value.toString()
 }
 
 export interface RippleOptions {
@@ -111,14 +105,12 @@ const ripples = {
     animation.classList.add('v-ripple__animation--enter')
     animation.classList.add('v-ripple__animation--visible')
     transform(animation, `translate(${x}, ${y}) scale3d(${scale},${scale},${scale})`)
-    opacity(animation, 0)
     animation.dataset.activated = String(performance.now())
 
     setTimeout(() => {
       animation.classList.remove('v-ripple__animation--enter')
       animation.classList.add('v-ripple__animation--in')
       transform(animation, `translate(${centerX}, ${centerY}) scale3d(1,1,1)`)
-      opacity(animation, 0.25)
     }, 0)
   },
 
@@ -139,7 +131,6 @@ const ripples = {
     setTimeout(() => {
       animation.classList.remove('v-ripple__animation--in')
       animation.classList.add('v-ripple__animation--out')
-      opacity(animation, 0)
 
       setTimeout(() => {
         const ripples = el.getElementsByClassName('v-ripple__animation')
@@ -162,10 +153,10 @@ function rippleShow (e: VuetifyRippleEvent) {
   const value: RippleOptions = {}
   const element = e.currentTarget as HTMLElement
 
-  if (!element || !element._ripple || element._ripple.touched || e[rippleStop]) return
+  if (!element || !element._ripple || element._ripple.touched || e.rippleStop) return
 
   // Don't allow the event to trigger ripples on any other elements
-  e[rippleStop] = true
+  e.rippleStop = true
 
   if (isTouchEvent(e)) {
     element._ripple.touched = true

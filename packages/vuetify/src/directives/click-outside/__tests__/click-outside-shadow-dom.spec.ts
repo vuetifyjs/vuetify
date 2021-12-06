@@ -13,7 +13,8 @@ function bootstrap (args?: object) {
       handler: jest.fn(),
       ...args,
     },
-  }
+  } as any
+  const vnode = { context: { _uid: 1 } } as any
 
   let shadowClickHandler
   let outsideClickHandler
@@ -37,9 +38,11 @@ function bootstrap (args?: object) {
   jest.spyOn(window.document, 'removeEventListener')
   jest.spyOn(shadowRoot, 'removeEventListener')
 
-  ClickOutside.inserted(shadowEl as HTMLElement, binding as any)
+  ClickOutside.inserted(shadowEl as HTMLElement, binding, vnode)
 
   return {
+    binding,
+    vnode,
     callback: binding.value.handler,
     shadowEl: shadowEl as HTMLElement,
     outsideEl: outsideEl as HTMLElement,
@@ -53,18 +56,18 @@ function bootstrap (args?: object) {
 
 describe('click-outside.js within the Shadow DOM', () => {
   it('should register and unregister handler outside of the shadow DOM', () => {
-    const { outsideClickHandler, shadowEl } = bootstrap()
+    const { outsideClickHandler, shadowEl, binding, vnode } = bootstrap()
     expect(window.document.addEventListener).toHaveBeenCalledWith('click', outsideClickHandler, true)
 
-    ClickOutside.unbind(shadowEl)
+    ClickOutside.unbind(shadowEl, binding, vnode)
     expect(window.document.removeEventListener).toHaveBeenCalledWith('click', outsideClickHandler, true)
   })
 
   it('should register and unregister handler within the shadow DOM', () => {
-    const { shadowClickHandler, shadowRoot, shadowEl } = bootstrap()
+    const { shadowClickHandler, shadowRoot, shadowEl, binding, vnode } = bootstrap()
     expect(shadowRoot.addEventListener).toHaveBeenCalledWith('click', shadowClickHandler, true)
 
-    ClickOutside.unbind(shadowEl)
+    ClickOutside.unbind(shadowEl, binding, vnode)
     expect(shadowRoot.removeEventListener).toHaveBeenCalledWith('click', shadowClickHandler, true)
   })
 

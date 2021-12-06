@@ -22,17 +22,18 @@ $rounded: map-deep-merge(
 );
 
 $spacer: 4px !default;
+$spacers-steps: 16 !default; 
 
 $spacers: () !default;
 @if (type-of($spacers) == list) {
-  @for $i from 0 through 16 {
+  @for $i from 0 through $spacers-steps {
     $spacers: map-merge($spacers, ($i: $spacer * $i))
   }
 }
 
 $negative-spacers: () !default;
 @if (type-of($negative-spacers) == list) {
-  @for $i from 1 through 16 {
+  @for $i from 1 through $spacers-steps {
     $negative-spacers: map-merge($negative-spacers, ("n" + $i: -$spacer * $i))
   }
 }
@@ -82,15 +83,15 @@ $display-breakpoints: map-deep-merge(
   (
     'print-only': 'only print',
     'screen-only': 'only screen',
-    'xs-only': 'only screen and (max-width: #{map-get($grid-breakpoints, 'sm') - 1})',
-    'sm-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'sm')}) and (max-width: #{map-get($grid-breakpoints, 'md') - 1})',
-    'sm-and-down': 'only screen and (max-width: #{map-get($grid-breakpoints, 'md') - 1})',
+    'xs-only': 'only screen and (max-width: #{map-get($grid-breakpoints, 'sm') - 0.02})',
+    'sm-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'sm')}) and (max-width: #{map-get($grid-breakpoints, 'md') - 0.02})',
+    'sm-and-down': 'only screen and (max-width: #{map-get($grid-breakpoints, 'md') - 0.02})',
     'sm-and-up': 'only screen and (min-width: #{map-get($grid-breakpoints, 'sm')})',
-    'md-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'md')}) and (max-width: #{map-get($grid-breakpoints, 'lg') - 1})',
-    'md-and-down': 'only screen and (max-width: #{map-get($grid-breakpoints, 'lg') - 1})',
+    'md-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'md')}) and (max-width: #{map-get($grid-breakpoints, 'lg') - 0.02})',
+    'md-and-down': 'only screen and (max-width: #{map-get($grid-breakpoints, 'lg') - 0.02})',
     'md-and-up': 'only screen and (min-width: #{map-get($grid-breakpoints, 'md')})',
-    'lg-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'lg')}) and (max-width: #{map-get($grid-breakpoints, 'xl') - 1})',
-    'lg-and-down': 'only screen and (max-width: #{map-get($grid-breakpoints, 'xl') - 1})',
+    'lg-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'lg')}) and (max-width: #{map-get($grid-breakpoints, 'xl') - 0.02})',
+    'lg-and-down': 'only screen and (max-width: #{map-get($grid-breakpoints, 'xl') - 0.02})',
     'lg-and-up': 'only screen and (min-width: #{map-get($grid-breakpoints, 'lg')})',
     'xl-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'xl')})'
   ),
@@ -249,7 +250,7 @@ $secondary-transition: 0.2s map-get($transition, 'ease-in-out') !default;
 // Ripples //;
 $ripple-animation-transition-in: transform 0.25s map-get($transition, 'fast-out-slow-in'), opacity 0.1s map-get($transition, 'fast-out-slow-in') !default;
 $ripple-animation-transition-out: opacity 0.3s map-get($transition, 'fast-out-slow-in') !default;
-$ripple-animation-visible-opacity: 0.15 !default;
+$ripple-animation-visible-opacity: 0.25 !default;
 
 // Elements //;
 $bootable-transition: 0.2s map-get($transition, 'fast-out-slow-in') !default;

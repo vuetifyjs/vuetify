@@ -86,6 +86,7 @@ export default mixins(
 
     return h('div', {
       staticClass: 'v-overlay',
+      on: this.$listeners,
       class: this.classes,
       style: this.styles,
     }, children)
