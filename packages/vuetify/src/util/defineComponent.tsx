@@ -74,9 +74,9 @@ type SlotsToProps<T extends Record<string, Slot>> = {
   [K in keyof T as `v-slot:${K & string}`]?: new () => (T[K] | false)
 } */
 
-type Slot<T extends any[] = any[]> = (...args: T) => VNode | VNode[]
+type Slot<T extends any[] = any[]> = (...args: T) => VNode | VNode[] | undefined
 export type MakeSlots<T extends Record<string, any[]>> = {
-  [K in keyof T]: Slot<T[K]>
+  [K in keyof T]?: Slot<T[K]>
 }
 
 export function genericComponent<T extends (new () => {

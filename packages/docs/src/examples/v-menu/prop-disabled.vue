@@ -5,12 +5,11 @@
       top
       offset-y
     >
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-btn
           color="primary"
           dark
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           Dropdown
         </v-btn>

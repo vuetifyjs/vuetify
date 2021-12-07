@@ -14,11 +14,10 @@ import Intersect from '@/directives/intersect'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, defineComponent, filterInputAttrs, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { filterInputAttrs } from '@/components/VInput/VInput'
 
 export const VTextarea = defineComponent({
   name: 'VTextarea',
@@ -168,7 +167,7 @@ export const VTextarea = defineComponent({
           }}
           role="textbox"
           { ...rootAttrs }
-          { ...fieldProps.value }
+          { ...fieldProps }
           v-slots={{
             ...slots,
             default: ({
@@ -196,8 +195,8 @@ export const VTextarea = defineComponent({
                     }, null, ['once']]}
                     ref={ inputRef }
                     autofocus={ props.autofocus }
-                    readonly={ isReadonly }
-                    disabled={ isDisabled }
+                    readonly={ isReadonly.value }
+                    disabled={ isDisabled.value }
                     placeholder={ props.placeholder }
                     rows={ props.rows }
                     { ...slotProps }

@@ -32,10 +32,8 @@
   $root: &
 
   align-self: center
-  height: $list-item-avatar-size
   transition: inherit
   transition-property: height, width
-  width: $list-item-avatar-size
 
   &--start
     margin-inline-end: $list-item-avatar-margin-end
@@ -45,10 +43,6 @@
 
   @at-root
     @include tools.density('v-list', $list-density) using ($modifier)
-      #{$root}
-        height: $list-item-avatar-size + ($modifier * $list-item-avatar-size-multiplier)
-        width: $list-item-avatar-size + ($modifier * $list-item-avatar-size-multiplier)
-
       &.v-list--three-line #{$root}
         margin-top: $list-item-avatar-margin-y - $modifier
 

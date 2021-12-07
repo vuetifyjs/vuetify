@@ -15,12 +15,11 @@
             bottom
             left
           >
-            <template v-slot:activator="{ on, attrs }">
+            <template v-slot:activator="{ props }">
               <v-btn
                 dark
                 icon
-                v-bind="attrs"
-                v-on="on"
+                v-bind="props"
               >
                 <v-icon>mdi-dots-vertical</v-icon>
               </v-btn>

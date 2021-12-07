@@ -13,11 +13,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, humanReadableFileSize, useRender, wrapInArray } from '@/util'
+import { defineComponent, filterInputAttrs, humanReadableFileSize, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { filterInputAttrs } from '@/components/VInput/VInput'
 
 export const VFileInput = defineComponent({
   name: 'VFileInput',
@@ -36,10 +35,6 @@ export const VFileInput = defineComponent({
       default: '$vuetify.fileInput.counter',
     },
     multiple: Boolean,
-    prependIcon: {
-      type: String,
-      default: '$file',
-    },
     showSize: {
       type: [Boolean, Number] as PropType<boolean | 1000 | 1024>,
       default: false,
@@ -53,6 +48,10 @@ export const VFileInput = defineComponent({
 
     ...makeVFieldProps({ clearable: true }),
 
+    prependIcon: {
+      type: String,
+      default: '$file',
+    },
     modelValue: {
       type: Array as PropType<File[] | undefined>,
       default: () => ([]),

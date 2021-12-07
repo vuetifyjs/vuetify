@@ -6,12 +6,11 @@
       :rounded="rounded"
       offset-y
     >
-      <template v-slot:activator="{ attrs, on }">
+      <template v-slot:activator="{ props }">
         <v-btn
           :color="colors[index]"
           class="white--text ma-5"
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           {{ text }} Radius
         </v-btn>

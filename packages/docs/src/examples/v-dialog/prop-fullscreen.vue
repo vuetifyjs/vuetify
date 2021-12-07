@@ -3,7 +3,7 @@
     <v-dialog
       v-model="dialog"
       fullscreen
-      hide-overlay
+      :scrim="false"
       transition="dialog-bottom-transition"
     >
       <template v-slot:activator="{ props }">
@@ -86,3 +86,10 @@
     },
   }
 </script>
+
+<style>
+.dialog-bottom-transition-enter-active,
+.dialog-bottom-transition-leave-active {
+  transition: transform .2s ease-in-out;
+}
+</style>

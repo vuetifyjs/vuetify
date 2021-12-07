@@ -43,10 +43,7 @@ export const makeValidationProps = propsFactory({
     type: Array as PropType<ValidationRule[]>,
     default: () => ([]),
   },
-  modelValue: {
-    type: null,
-    default: undefined as any,
-  },
+  modelValue: null,
 })
 
 export function useValidation (

@@ -10,7 +10,6 @@
       >
         Open Dialog 1
       </v-btn>
-
       <v-dialog
         v-model="dialog"
       >

@@ -8,6 +8,11 @@ import { propsFactory } from '@/util'
 // Types
 import type { SetupContext } from '@vue/runtime-core'
 
+export interface LoaderSlotProps {
+  color: string
+  isActive: boolean
+}
+
 export interface LoaderProps {
   loading: boolean
 }

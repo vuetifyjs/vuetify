@@ -1,5 +1,5 @@
 // Utilities
-import { convertToUnit, getScrollParents, IN_BROWSER, propsFactory } from '@/util'
+import { convertToUnit, getScrollParents, hasScrollbar, IN_BROWSER, propsFactory } from '@/util'
 import { effectScope, nextTick, onScopeDispose, watchEffect } from 'vue'
 import { requestNewFrame } from './requestNewFrame'
 
@@ -7,6 +7,7 @@ import { requestNewFrame } from './requestNewFrame'
 import type { EffectScope, PropType, Ref } from 'vue'
 
 export interface ScrollStrategyData {
+  root: Ref<HTMLElement | undefined>
   contentEl: Ref<HTMLElement | undefined>
   activatorEl: Ref<HTMLElement | undefined>
   isActive: Ref<boolean>
@@ -70,6 +71,11 @@ function blockScrollStrategy (data: ScrollStrategyData) {
   ])].filter(el => !el.classList.contains('v-overlay-scroll-blocked'))
   const scrollbarWidth = window.innerWidth - document.documentElement.offsetWidth
 
+  const scrollableParent = (el => hasScrollbar(el) && el)(data.root.value?.offsetParent || document.documentElement)
+  if (scrollableParent) {
+    data.root.value!.classList.add('v-overlay--scroll-blocked')
+  }
+
   scrollElements.forEach((el, i) => {
     el.style.setProperty('--v-scrollbar-offset', convertToUnit(scrollbarWidth))
     el.classList.add('v-overlay-scroll-blocked')
@@ -80,6 +86,9 @@ function blockScrollStrategy (data: ScrollStrategyData) {
       el.style.removeProperty('--v-scrollbar-offset')
       el.classList.remove('v-overlay-scroll-blocked')
     })
+    if (scrollableParent) {
+      data.root.value!.classList.remove('v-overlay--scroll-blocked')
+    }
   })
 }
 

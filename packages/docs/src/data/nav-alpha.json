@@ -73,16 +73,27 @@
         ]
       },
       "grids",
+      "hover",
       "icons",
       "images",
       "item-groups",
       "lazy",
       "lists",
       "overlays",
+      "paginations",
       "parallax",
+      {
+        "title": "progress",
+        "group": "components",
+        "items": [
+          "progress-circular",
+          "progress-linear"
+        ]
+      },
       "ratings",
       "sheets",
-      "theme-providers"
+      "theme-providers",
+      "tooltips"
     ]
   },
   {

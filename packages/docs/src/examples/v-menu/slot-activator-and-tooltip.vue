@@ -1,19 +1,18 @@
 <template>
   <div class="text-center">
     <v-menu>
-      <template v-slot:activator="{ on: menu, attrs }">
+      <template v-slot:activator="{ props: menu }">
         <v-tooltip bottom>
-          <template v-slot:activator="{ on: tooltip }">
+          <template v-slot:activator="{ props: tooltip }">
             <v-btn
               color="primary"
               dark
-              v-bind="attrs"
-              v-on="{ ...tooltip, ...menu }"
+              v-bind="mergeProps(menu, tooltip)"
             >
               Dropdown w/ Tooltip
             </v-btn>
           </template>
-          <span>Im A ToolTip</span>
+          <span>I'm A Tooltip</span>
         </v-tooltip>
       </template>
       <v-list>
@@ -29,6 +28,8 @@
 </template>
 
 <script>
+  import { mergeProps } from 'vue'
+
   export default {
     data: () => ({
       items: [
@@ -38,5 +39,12 @@
         { title: 'Click Me4' },
       ],
     }),
+    methods: {
+      mergeProps,
+    },
   }
 </script>
+
+<codepen-additional>
+const { mergeProps } = Vue
+</codepen-additional>

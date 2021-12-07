@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 // Extensions
-import { Service } from '../service'
+// import { Service } from '../service'
 
 // Utilities
 import * as easingPatterns from './easing-patterns'
@@ -81,14 +81,14 @@ function goTo (
   }))
 }
 
-goTo.framework = {} as Record<string, VuetifyServiceContract>
+// goTo.framework = {} as Record<string, VuetifyServiceContract>
 
-export class Goto extends Service {
-  public static property: 'goTo' = 'goTo'
+// export class Goto extends Service {
+//   public static property: 'goTo' = 'goTo'
 
-  constructor () {
-    super()
+//   constructor () {
+//     super()
 
-    return goTo
-  }
-}
+//     return goTo
+//   }
+// }

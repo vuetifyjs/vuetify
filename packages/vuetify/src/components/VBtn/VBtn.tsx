@@ -86,6 +86,7 @@ export const VBtn = defineComponent({
               'v-btn--block': props.block,
               'v-btn--disabled': props.disabled,
               'v-btn--elevated': isElevated.value,
+              'v-btn--flat': props.flat,
               'v-btn--icon': !!props.icon,
               'v-btn--stacked': props.stacked,
             },
