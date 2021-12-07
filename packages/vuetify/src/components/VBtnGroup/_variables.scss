@@ -1,14 +1,14 @@
 @use '../../styles/settings';
 @use '../../styles/tools';
 
-$btn-group-background: transparent !default;
+$btn-group-background: rgb(var(--v-theme-surface)) !default;
 $btn-group-border-color: settings.$border-color-root !default;
 $btn-group-border-radius: settings.$border-radius-root !default;
 $btn-group-border-style: settings.$border-style-root !default;
 $btn-group-border-color: $border-color-root !default;
 $btn-group-border-thin-width: thin !default;
 $btn-group-border-width: 0 !default;
-$btn-group-color: rgb(var(--v-theme-on-background)) !default;
+$btn-group-color: rgb(var(--v-theme-on-surface)) !default;
 $btn-group-elevation: 0 !default;
 $btn-group-tile-border-radius: 0 !default;
 

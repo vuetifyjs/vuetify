@@ -1,8 +1,8 @@
 @forward './variables'
-@use '../../styles/tools'
 @use 'sass:selector'
-@use './variables' as *
+@use '../../styles/tools'
 @use '../VBtn/variables' as *
+@use './variables' as *
 
 .v-btn-group
   $root: &
@@ -14,6 +14,7 @@
   max-width: 100%
   min-width: 0
   overflow: hidden
+  position: relative
 
   @include tools.border($btn-group-border...)
   @include tools.elevation($btn-group-elevation)
@@ -25,22 +26,19 @@
       @at-root #{selector.append(&, $root)}
         height: 48px + $modifier
 
-  .v-btn:not(:last-child)
-    border-right-width: $btn-group-border-thin-width
-    border-right-style: $btn-group-border-style
-    border-right-color: $btn-group-border-color
-
-  &--border
-    .v-btn:not(:last-child)
-      border-right: inherit
-
-  &--tile
-    @include tools.rounded($btn-group-tile-border-radius)
-
   .v-btn
     border-radius: 0
-    background: inherit
+    background: transparent
     box-shadow: none
     color: inherit
     flex: 0 1 auto
     height: auto
+
+  &--divided
+    .v-btn:not(:last-child)
+      border-right-width: $btn-group-border-thin-width
+      border-right-style: $btn-group-border-style
+      border-right-color: $btn-group-border-color
+
+  &--tile
+    @include tools.rounded($btn-group-tile-border-radius)

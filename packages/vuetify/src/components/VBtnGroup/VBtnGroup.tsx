@@ -1,29 +1,37 @@
 import './VBtnGroup.sass'
 
-// Components
-import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
-
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeTagProps } from '@/composables/tag'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utility
 import { computed } from 'vue'
 import { defineComponent, useRender } from '@/util'
-import { makeDensityProps, useDensity } from '@/composables/density'
 
 // Types
+import type { PropType } from 'vue'
+
+const allowedVariants = ['text', 'contained'] as const
+
+type Variant = typeof allowedVariants[number]
 
 export const VBtnGroup = defineComponent({
   name: 'VBtnGroup',
 
   props: {
     color: String,
-    // probably need to use variants
-    text: Boolean,
+    divided: Boolean,
+    textColor: String,
+    variant: {
+      type: String as PropType<Variant>,
+      default: 'contained',
+      validator: (v: any) => allowedVariants.includes(v),
+    },
 
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -46,7 +54,8 @@ export const VBtnGroup = defineComponent({
         class={[
           'v-btn-group',
           {
-            'v-btn-group--text': props.text,
+            [`v-btn-group--variant-${props.variant}`]: true,
+            'v-btn-group--divided': props.divided,
           },
           themeClasses.value,
           backgroundColorClasses.value,
