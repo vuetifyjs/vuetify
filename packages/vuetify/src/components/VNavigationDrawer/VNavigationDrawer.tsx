@@ -14,7 +14,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { computed, onBeforeMount, ref, toRef, watch } from 'vue'
+import { computed, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
 import { defineComponent } from '@/util'
 
 // Types
@@ -62,7 +62,7 @@ export const VNavigationDrawer = defineComponent({
     'update:modelValue': (val: boolean) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-navigation-drawer')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
@@ -118,60 +118,76 @@ export const VNavigationDrawer = defineComponent({
       const hasImage = (slots.image || props.image)
 
       return (
-        <props.tag
-          ref={ rootEl }
-          onMouseenter={ () => (isHovering.value = true) }
-          onMouseleave={ () => (isHovering.value = false) }
-          class={[
-            'v-navigation-drawer',
-            {
-              'v-navigation-drawer--bottom': props.position === 'bottom',
-              'v-navigation-drawer--end': props.position === 'right',
-              'v-navigation-drawer--expand-on-hover': props.expandOnHover,
-              'v-navigation-drawer--floating': props.floating,
-              'v-navigation-drawer--is-hovering': isHovering.value,
-              'v-navigation-drawer--rail': props.rail,
-              'v-navigation-drawer--start': props.position === 'left',
-              'v-navigation-drawer--temporary': isTemporary.value,
-              'v-navigation-drawer--absolute': props.absolute,
-            },
-            themeClasses.value,
-            backgroundColorClasses.value,
-            borderClasses.value,
-            elevationClasses.value,
-            roundedClasses.value,
-          ]}
-          style={[
-            backgroundColorStyles.value,
-            layoutStyles.value,
-            dragStyles.value,
-          ]}
-        >
-          { hasImage && (
-            <div class="v-navigation-drawer__img">
-              { slots.image
-                ? slots.image?.({ image: props.image })
-                : (<img src={ props.image } alt="" />)
-              }
-            </div>
-          )}
+        <>
+          <props.tag
+            ref={ rootEl }
+            onMouseenter={ () => (isHovering.value = true) }
+            onMouseleave={ () => (isHovering.value = false) }
+            class={[
+              'v-navigation-drawer',
+              {
+                'v-navigation-drawer--bottom': props.position === 'bottom',
+                'v-navigation-drawer--end': props.position === 'right',
+                'v-navigation-drawer--expand-on-hover': props.expandOnHover,
+                'v-navigation-drawer--floating': props.floating,
+                'v-navigation-drawer--is-hovering': isHovering.value,
+                'v-navigation-drawer--rail': props.rail,
+                'v-navigation-drawer--start': props.position === 'left',
+                'v-navigation-drawer--temporary': isTemporary.value,
+                'v-navigation-drawer--absolute': props.absolute,
+              },
+              themeClasses.value,
+              backgroundColorClasses.value,
+              borderClasses.value,
+              elevationClasses.value,
+              roundedClasses.value,
+            ]}
+            style={[
+              backgroundColorStyles.value,
+              layoutStyles.value,
+              dragStyles.value,
+            ]}
+            { ...attrs }
+          >
+            { hasImage && (
+              <div class="v-navigation-drawer__img">
+                { slots.image
+                  ? slots.image?.({ image: props.image })
+                  : (<img src={ props.image } alt="" />)
+                }
+              </div>
+            )}
 
-          { slots.prepend && (
-            <div class="v-navigation-drawer__prepend">
-              { slots.prepend?.() }
-            </div>
-          )}
+            { slots.prepend && (
+              <div class="v-navigation-drawer__prepend">
+                { slots.prepend?.() }
+              </div>
+            )}
 
-          <div class="v-navigation-drawer__content">
-            { slots.default?.() }
-          </div>
-
-          { slots.append && (
-            <div class="v-navigation-drawer__append">
-              { slots.append?.() }
+            <div class="v-navigation-drawer__content">
+              { slots.default?.() }
             </div>
-          )}
-        </props.tag>
+
+            { slots.append && (
+              <div class="v-navigation-drawer__append">
+                { slots.append?.() }
+              </div>
+            )}
+          </props.tag>
+
+          <Transition name="fade-transition">
+            { isTemporary.value && (dragging.value || isActive.value) && (
+              <div
+                class="v-navigation-drawer__scrim"
+                style={dragging.value ? {
+                  opacity: dragProgress.value * 0.2,
+                  transition: 'none',
+                } : undefined}
+                onClick={ () => isActive.value = false }
+              />
+            )}
+          </Transition>
+        </>
       )
     }
   },
