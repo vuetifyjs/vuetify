@@ -29,9 +29,11 @@
     border-radius: 0
     background: transparent
     box-shadow: none
-    color: inherit
     flex: 0 1 auto
     height: auto
+
+    &:not(.v-btn--disabled)
+      color: inherit
 
   &--divided
     .v-btn:not(:last-child)
