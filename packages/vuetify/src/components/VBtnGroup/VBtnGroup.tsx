@@ -7,7 +7,7 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
-import { useBackgroundColor } from '@/composables/color'
+import { useColor } from '@/composables/color'
 
 // Utility
 import { computed } from 'vue'
@@ -26,7 +26,6 @@ export const VBtnGroup = defineComponent({
   props: {
     color: String,
     divided: Boolean,
-    textColor: String,
     variant: {
       type: String as PropType<Variant>,
       default: 'contained',
@@ -44,10 +43,15 @@ export const VBtnGroup = defineComponent({
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)
     const { densityClasses } = useDensity(props, 'v-btn-group')
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => props.color))
     const { borderClasses } = useBorder(props, 'v-btn-group')
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props, 'v-btn-group')
+
+    const { colorClasses, colorStyles } = useColor(computed(() => {
+      return {
+        [props.variant === 'contained' ? 'background' : 'text']: props.color,
+      }
+    }))
 
     useRender(() => (
       <props.tag
@@ -58,15 +62,13 @@ export const VBtnGroup = defineComponent({
             'v-btn-group--divided': props.divided,
           },
           themeClasses.value,
-          backgroundColorClasses.value,
           borderClasses.value,
+          colorClasses.value,
           densityClasses.value,
           elevationClasses.value,
           roundedClasses.value,
         ]}
-        style={{
-          ...backgroundColorStyles.value,
-        }}
+        style={ colorStyles.value }
         v-slots={ slots }
       />
     ))

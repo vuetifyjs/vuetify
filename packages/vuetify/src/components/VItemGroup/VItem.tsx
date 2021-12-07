@@ -19,35 +19,39 @@ export const VItem = genericComponent<new () => {
   props: makeGroupItemProps(),
 
   setup (props, { slots }) {
-    const {
-      isSelected,
-      select,
-      toggle,
-      selectedClass,
-      value,
-      disabled,
-      group,
-      id,
-    } = useGroupItem(props, VItemGroupSymbol)
+    const item = useGroupItem(props, VItemGroupSymbol)
 
-    useRender(() => {
-      return (
-        <>
-          {
-            slots.default?.({
-              isSelected,
-              selectedClass,
-              select,
-              toggle,
-              value,
-              disabled,
-              group,
-              id,
-            } as GroupItemProvide)
-          }
-        </>
-      )
-    })
+    if (item) {
+      useRender(() => {
+        const {
+          isSelected,
+          select,
+          toggle,
+          selectedClass,
+          value,
+          disabled,
+          group,
+          id,
+        } = item
+
+        return (
+          <>
+            {
+              slots.default?.({
+                isSelected,
+                selectedClass,
+                select,
+                toggle,
+                value,
+                disabled,
+                group,
+                id,
+              } as GroupItemProvide)
+            }
+          </>
+        )
+      })
+    }
 
     return {}
   },

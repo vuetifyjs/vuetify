@@ -39,15 +39,15 @@ export const VExpansionPanel = defineComponent({
     provide(VExpansionPanelSymbol, groupItem)
 
     const isBeforeSelected = computed(() => {
-      const index = groupItem.group.items.value.indexOf(groupItem.id)
-      return !groupItem.isSelected.value &&
-        groupItem.group.selected.value.some(id => groupItem.group.items.value.indexOf(id) - index === 1)
+      const index = groupItem?.group.items.value.indexOf(groupItem?.id)
+      return !groupItem?.isSelected.value && index &&
+        groupItem?.group.selected.value.some(id => groupItem?.group.items.value.indexOf(id) - index === 1)
     })
 
     const isAfterSelected = computed(() => {
-      const index = groupItem.group.items.value.indexOf(groupItem.id)
-      return !groupItem.isSelected.value &&
-        groupItem.group.selected.value.some(id => groupItem.group.items.value.indexOf(id) - index === -1)
+      const index = groupItem?.group.items.value.indexOf(groupItem?.id)
+      return !groupItem?.isSelected.value && index &&
+        groupItem?.group.selected.value.some(id => groupItem?.group.items.value.indexOf(id) - index === -1)
     })
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'bgColor')
@@ -57,16 +57,16 @@ export const VExpansionPanel = defineComponent({
         class={[
           'v-expansion-panel',
           {
-            'v-expansion-panel--active': groupItem.isSelected.value,
+            'v-expansion-panel--active': groupItem?.isSelected.value,
             'v-expansion-panel--before-active': isBeforeSelected.value,
             'v-expansion-panel--after-active': isAfterSelected.value,
-            'v-expansion-panel--disabled': groupItem.disabled.value,
+            'v-expansion-panel--disabled': groupItem?.disabled.value,
           },
           roundedClasses.value,
           backgroundColorClasses.value,
         ]}
         style={ backgroundColorStyles.value }
-        aria-expanded={ groupItem.isSelected.value }
+        aria-expanded={ groupItem?.isSelected.value }
       >
         <div
           class={[

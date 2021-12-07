@@ -3,29 +3,6 @@
 @use './variables' as *
 
 .v-btn-toggle
-  display: flex
-  flex-wrap: nowrap
-  overflow: hidden
-
-  @include tools.border($btn-toggle-border...)
-  @include tools.elevation($btn-toggle-elevation)
-  @include tools.rounded($btn-toggle-border-radius)
-  @include tools.theme($btn-toggle-theme...)
-
-  &--border
-    .v-btn:not(:last-child)
-      border-right: inherit
-
-  &--rounded
-    @include tools.rounded($btn-toggle-rounded-border-radius)
-
-  .v-btn
-    background: transparent
-    border-radius: 0
-    box-shadow: none
-
-    &.v-item--selected
-      color: inherit
-
-      .v-btn__overlay
-        opacity: var(--v-activated-opacity)
+  .v-btn.v-btn--selected:not(.v-btn--disabled)
+    .v-btn__overlay
+      opacity: var(--v-activated-opacity)

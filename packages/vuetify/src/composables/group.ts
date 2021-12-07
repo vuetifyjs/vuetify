@@ -73,7 +73,8 @@ export const makeGroupItemProps = propsFactory({
 export function useGroupItem (
   props: { value?: unknown, disabled?: boolean, selectedClass?: string },
   injectKey: InjectionKey<GroupProvide>,
-): GroupItemProvide {
+  required = true
+): GroupItemProvide | null {
   const vm = getCurrentInstance('useGroupItem')
 
   if (!vm) {
@@ -85,6 +86,8 @@ export function useGroupItem (
   const group = inject(injectKey, null)
 
   if (!group) {
+    if (!required) return group
+
     throw new Error(`[Vuetify] Could not find useGroup injection with symbol ${injectKey.description}`)
   }
 
