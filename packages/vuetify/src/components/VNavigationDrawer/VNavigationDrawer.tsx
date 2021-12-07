@@ -2,6 +2,7 @@
 import './VNavigationDrawer.sass'
 
 // Composables
+import { useTouch } from './touch'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
@@ -11,10 +12,9 @@ import { useDisplay } from '@/composables/display'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
-import { useVelocity } from '@/composables/touch'
 
 // Utilities
-import { computed, onBeforeMount, onBeforeUnmount, onMounted, ref, toRef, watch } from 'vue'
+import { computed, onBeforeMount, ref, toRef, watch } from 'vue'
 import { defineComponent } from '@/util'
 
 // Types
@@ -94,64 +94,8 @@ export const VNavigationDrawer = defineComponent({
     })
 
     const rootEl = ref<HTMLElement>()
-    onMounted(() => {
-      window.addEventListener('touchstart', onTouchstart, { passive: true })
-      window.addEventListener('touchmove', onTouchmove, { passive: false })
-      window.addEventListener('touchend', onTouchend, { passive: true })
-    })
 
-    onBeforeUnmount(() => {
-      window.removeEventListener('touchstart', onTouchstart)
-      window.removeEventListener('touchmove', onTouchmove)
-      window.removeEventListener('touchend', onTouchend)
-    })
-
-    const { addMovement, endTouch, getVelocity } = useVelocity()
-    const dragging = ref(false)
-    const dragProgress = ref(0)
-    const offset = ref(0)
-    function onTouchstart (e: TouchEvent) {
-      if (
-        e.changedTouches[0].clientX < 100 ||
-        (isActive.value && e.changedTouches[0].clientX < width.value) ||
-        (isActive.value && isTemporary.value)
-      ) {
-        dragging.value = true
-        offset.value = isActive.value ? e.changedTouches[0].clientX - width.value : e.changedTouches[0].clientX
-        dragProgress.value = Math.min(1, (e.changedTouches[0].clientX - offset.value) / width.value)
-        endTouch(e)
-        addMovement(e)
-      }
-    }
-
-    function onTouchmove (e: TouchEvent) {
-      if (!dragging.value) return
-
-      e.preventDefault()
-      addMovement(e)
-
-      const progress = (e.changedTouches[0].clientX - offset.value) / width.value
-      dragProgress.value = Math.max(0, Math.min(1, progress))
-
-      if (progress > 1) {
-        offset.value = e.changedTouches[0].clientX - width.value
-      }
-    }
-
-    function onTouchend (e: TouchEvent) {
-      if (!dragging.value) return
-
-      addMovement(e)
-
-      dragging.value = false
-
-      const velocity = getVelocity(e.changedTouches[0].identifier)
-      if (velocity.polar.radius > 300 && ['left', 'right'].includes(velocity.direction)) {
-        isActive.value = velocity.direction === 'right'
-      } else {
-        isActive.value = dragProgress.value > 0.5
-      }
-    }
+    const { dragging, dragProgress, dragStyles } = useTouch({ isActive, isTemporary, width })
 
     const layoutSize = computed(() => {
       const size = isTemporary.value ? 0
@@ -169,13 +113,6 @@ export const VNavigationDrawer = defineComponent({
       computed(() => isActive.value || dragging.value),
       computed(() => dragging.value)
     )
-
-    const dragStyles = computed(() => {
-      return dragging.value ? {
-        transform: `translateX(calc(-100% + ${dragProgress.value * width.value}px))`,
-        // transition: 'none',
-      } : undefined
-    })
 
     return () => {
       const hasImage = (slots.image || props.image)
