@@ -49,7 +49,7 @@ export default mixins(header).extend({
       return { ariaSort, ariaLabel: ariaLabel.join(' ') }
     },
     genHeader (header: DataTableHeader) {
-      const data: Required<Pick<VNodeData, 'attrs' | 'on' | 'class' | 'style'>> = {
+      const data: Required<Pick<VNodeData, 'attrs' | 'on' | 'class' | 'style'>> | object[] = {
         attrs: {
           role: 'columnheader',
           scope: 'col',
@@ -58,6 +58,7 @@ export default mixins(header).extend({
         style: {
           width: convertToUnit(header.width),
           minWidth: convertToUnit(header.width),
+          borderBottom: !this.$props.headerBorder ? '0' : null,
         },
         class: [
           `text-${header.align || 'start'}`,
@@ -66,6 +67,7 @@ export default mixins(header).extend({
         ],
         on: {},
       }
+
       const children = []
 
       if (header.value === 'data-table-select' && !this.singleSelect) {

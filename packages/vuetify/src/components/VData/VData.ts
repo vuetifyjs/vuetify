@@ -182,6 +182,7 @@ export default Vue.extend({
         pagination: this.pagination,
         groupedItems: this.groupedItems,
         originalItemsLength: this.items.length,
+        footerBorder: true,
       }
     },
     computedOptions (): DataOptions {

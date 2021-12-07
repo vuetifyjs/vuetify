@@ -211,7 +211,8 @@ function rippleHide (e: Event) {
     element._ripple.showTimerCommit = null
 
     // re-queue ripple hiding
-    element._ripple.showTimer = setTimeout(() => {
+    // To revert: element._ripple.showTimer = setTimeout(() => {
+    setTimeout(() => {
       rippleHide(e)
     })
     return

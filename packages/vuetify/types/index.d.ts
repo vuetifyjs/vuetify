@@ -129,6 +129,7 @@ export interface DataScopeProps {
   sortArray: (sortBy: string[]) => void
   group: (value: string) => void
   groupedItems: ItemGroup<any>[] | null
+  footerBorder?: boolean
 }
 
 export type DataTableCompareFunction<T = any> = (a: T, b: T) => number
