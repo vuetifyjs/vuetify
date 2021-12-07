@@ -70,7 +70,7 @@
           title: 'Education',
         },
         {
-          action: 'mdi-run',
+          action: 'mdi-human-male-female-child',
           items: [{ title: 'List Item' }],
           title: 'Family',
         },
@@ -80,7 +80,7 @@
           title: 'Health',
         },
         {
-          action: 'mdi-content-cut',
+          action: 'mdi-briefcase',
           items: [{ title: 'List Item' }],
           title: 'Office',
         },
