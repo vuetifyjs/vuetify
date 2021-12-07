@@ -166,7 +166,7 @@ export const VTextField = defineComponent({
                 <span />
 
                 <VCounter
-                  active={ props.persistentCounter || isFocused.value }
+                  active={ props.persistentCounter || isFocused }
                   value={ counterValue.value }
                   max={ max.value }
                   v-slots={ slots.counter }

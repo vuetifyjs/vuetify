@@ -22,8 +22,6 @@ export const VSliderThumb = defineComponent({
   directives: { Ripple },
 
   props: {
-    active: Boolean,
-    dirty: Boolean,
     focused: Boolean,
     max: {
       type: Number,
@@ -119,10 +117,7 @@ export const VSliderThumb = defineComponent({
           class={[
             'v-slider-thumb',
             {
-              'v-slider-thumb--active': props.active,
               'v-slider-thumb--focused': props.focused,
-              'v-slider-thumb--dirty': props.dirty,
-              // 'v-slider-thumb--show-label': !disabled.value && !!(showLabel.value || slots['thumb-label']),
             },
           ]}
           style={{

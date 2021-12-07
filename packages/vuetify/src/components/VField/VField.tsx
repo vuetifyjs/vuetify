@@ -12,6 +12,7 @@ import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useFocus } from '@/composables/focus'
 
 // Utilities
 import { computed, ref, toRef, watch, watchEffect } from 'vue'
@@ -35,7 +36,8 @@ const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain
 type Variant = typeof allowedVariants[number]
 
 export interface DefaultInputSlot {
-  isDirty: boolean
+  isActive: boolean
+  isFocused: boolean
   inputRef: Ref<HTMLInputElement | undefined>
   controlRef: Ref<HTMLElement | undefined>
   focus: () => void
@@ -96,6 +98,7 @@ export const VField = genericComponent<new <T>() => {
   inheritAttrs: false,
 
   props: {
+    active: Boolean,
     ...makeVFieldProps(),
   },
 
@@ -112,16 +115,17 @@ export const VField = genericComponent<new <T>() => {
     const { themeClasses } = useTheme(props)
     const { loaderClasses } = useLoader(props, 'v-field')
     const isActive = useProxiedModel(props, 'active')
+    const { isFocused, focus, blur } = useFocus()
+
     const uid = getUid()
 
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()
     const controlRef = ref<HTMLElement>()
     const inputRef = ref<HTMLInputElement>()
-    const isFocused = ref(false)
     const id = computed(() => props.id || `input-${uid}`)
 
-    watchEffect(() => isActive.value = isFocused.value || props.dirty)
+    watchEffect(() => isActive.value = isFocused.value)
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
@@ -168,17 +172,8 @@ export const VField = genericComponent<new <T>() => {
       }
     }, { flush: 'post' })
 
-    function focus () {
-      isFocused.value = true
-    }
-
-    function blur () {
-      isFocused.value = false
-    }
-
     const slotProps = computed<DefaultInputSlot>(() => ({
       isActive: isActive.value,
-      isDirty: props.dirty,
       isFocused: isFocused.value,
       inputRef,
       controlRef,
@@ -212,8 +207,8 @@ export const VField = genericComponent<new <T>() => {
           class={[
             'v-field',
             {
+              'v-field--active': isActive.value,
               'v-field--appended': hasAppend,
-              'v-field--dirty': props.dirty,
               'v-field--focused': isFocused.value,
               'v-field--has-background': !!props.bgColor,
               'v-field--persistent-clear': props.persistentClear,
@@ -231,9 +226,6 @@ export const VField = genericComponent<new <T>() => {
           ]}
           { ...inputProps }
           focused={ isFocused.value }
-          active={ isActive.value }
-          disabled={ props.disabled }
-          dirty={ props.dirty }
           { ...attrs }
           v-slots={{
             prepend: slots.prepend ? props => slots.prepend?.({ ...props, ...slotProps.value }) : undefined,
@@ -300,7 +292,7 @@ export const VField = genericComponent<new <T>() => {
                     <div
                       class="v-field__clearable"
                       onClick={ (e: Event) => emit('click:clear', e) }
-                      v-show={ props.dirty }
+                      v-show={ props.active }
                     >
                       { slots.clear
                         ? slots.clear()

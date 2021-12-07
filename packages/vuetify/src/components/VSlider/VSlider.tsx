@@ -8,24 +8,27 @@ import { VSliderTrack } from './VSliderTrack'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useFocus } from '@/composables/focus'
 import { makeSliderProps, useSlider } from './slider'
 
 // Helpers
-import { defineComponent } from '@/util'
+import { defineComponent, getUid } from '@/util'
 
 // Types
 import { computed, ref } from 'vue'
+import { filterInputProps, makeVInputProps } from '../VInput/VInput'
 
 export const VSlider = defineComponent({
   name: 'VSlider',
 
   props: {
+    ...makeSliderProps(),
+    ...makeVInputProps(),
+
     modelValue: {
       type: [Number, String],
       default: 0,
     },
-
-    ...makeSliderProps(),
   },
 
   emits: {
@@ -64,32 +67,37 @@ export const VSlider = defineComponent({
       },
     )
 
-    const isDirty = computed(() => model.value > min.value)
+    const { isFocused, focus, blur } = useFocus()
     const trackStop = computed(() => position(model.value))
 
     return () => {
+      const [inputProps, _] = filterInputProps(props)
+      const id = attrs.id as string ?? `input-${getUid()}`
+      const name = attrs.name as string ?? id
+
       return (
         <VInput
           class={[
             'v-slider',
             {
               'v-slider--has-labels': !!slots['tick-label'] || hasLabels.value,
+              'v-slider--focused': isFocused.value,
+              'v-slider--disabled': props.disabled,
             },
           ]}
-          disabled={ props.disabled }
-          dirty={ isDirty.value }
-          direction={ props.direction }
+          { ...inputProps }
+          focused={ isFocused.value }
           v-slots={{
             ...slots,
-            default: ({ id, isActive, isDirty, isFocused, focus, blur }) => (
+            default: () => (
               <div
                 class="v-slider__container"
                 onMousedown={ onSliderMousedown }
                 onTouchstartPassive={ onSliderTouchstart }
               >
                 <input
-                  id={ id.value }
-                  name={ (attrs.name ?? id.value) as string }
+                  id={ id }
+                  name={ name }
                   disabled={ props.disabled }
                   readonly={ props.readonly }
                   tabindex="-1"
@@ -107,8 +115,6 @@ export const VSlider = defineComponent({
 
                 <VSliderThumb
                   ref={ thumbContainerRef }
-                  active={ isActive.value}
-                  dirty={ isDirty }
                   focused={ isFocused.value }
                   min={ min.value }
                   max={ max.value }

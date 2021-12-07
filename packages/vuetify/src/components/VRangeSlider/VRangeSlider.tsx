@@ -6,23 +6,27 @@ import { VSliderTrack } from '../VSlider/VSliderTrack'
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { getOffset, makeSliderProps, useSlider } from '../VSlider/slider'
+import { useFocus } from '@/composables/focus'
 
 // Utilities
 import { computed, defineComponent, ref } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
+import { getUid } from '@/util'
+import { filterInputProps, makeVInputProps } from '../VInput/VInput'
 
 export const VRangeSlider = defineComponent({
   name: 'VRangeSlider',
 
   props: {
+    ...makeVInputProps(),
+    ...makeSliderProps(),
+
     modelValue: {
       type: Array as PropType<number[]>,
       default: () => ([0, 0]),
     },
-
-    ...makeSliderProps(),
   },
 
   emits: {
@@ -62,10 +66,10 @@ export const VRangeSlider = defineComponent({
       handleMouseMove: newValue => {
         if (focusedThumb.value === startThumbRef.value) {
           // eslint-disable-next-line @typescript-eslint/no-use-before-define
-          if (newValue <= model.value[1]) model.value = [newValue, model.value[1]]
+          model.value = [Math.min(newValue, model.value[1]), model.value[1]]
         } else {
           // eslint-disable-next-line @typescript-eslint/no-use-before-define
-          if (newValue >= model.value[0]) model.value = [model.value[0], newValue]
+          model.value = [model.value[0], Math.max(model.value[0], newValue)]
         }
       },
       getActiveThumb,
@@ -82,11 +86,15 @@ export const VRangeSlider = defineComponent({
       },
     )
 
-    const isDirty = computed(() => model.value.some(v => v > min.value))
+    const { isFocused, focus, blur } = useFocus()
     const trackStart = computed(() => position(model.value[0]))
     const trackStop = computed(() => position(model.value[1]))
 
     return () => {
+      const [inputProps, _] = filterInputProps(props)
+      const id = attrs.id as string ?? `input-${getUid()}`
+      const name = attrs.name as string ?? id
+
       return (
         <VInput
           class={[
@@ -94,15 +102,16 @@ export const VRangeSlider = defineComponent({
             'v-range-slider',
             {
               'v-slider--has-labels': !!slots['tick-label'] || hasLabels.value,
+              'v-slider--focused': isFocused.value,
+              'v-slider--disabled': props.disabled,
             },
           ]}
           ref={ inputRef }
-          disabled={ props.disabled }
-          dirty={ isDirty.value }
-          direction={ props.direction }
+          { ...inputProps }
+          focused={ isFocused.value }
           v-slots={{
             ...slots,
-            default: ({ id, isActive, isDirty, isFocused, focus, blur }) => (
+            default: () => (
               <div
                 class="v-slider__container"
                 onMousedown={ onSliderMousedown }
@@ -110,7 +119,7 @@ export const VRangeSlider = defineComponent({
               >
                 <input
                   id={ `${id}_start` }
-                  name={ (attrs.name ?? id.value) as string }
+                  name={ name }
                   disabled={ props.disabled }
                   readonly={ props.readonly }
                   tabindex="-1"
@@ -119,7 +128,7 @@ export const VRangeSlider = defineComponent({
 
                 <input
                   id={ `${id}_stop` }
-                  name={ (attrs.name ?? id.value) as string }
+                  name={ name }
                   disabled={ props.disabled }
                   readonly={ props.readonly }
                   tabindex="-1"
@@ -137,8 +146,6 @@ export const VRangeSlider = defineComponent({
 
                 <VSliderThumb
                   ref={ startThumbRef }
-                  active={ isActive.value }
-                  dirty={ isDirty }
                   focused={ isFocused && focusedThumb.value === startThumbRef.value }
                   modelValue={ model.value[0] }
                   onUpdate:modelValue={ v => (model.value = [v, model.value[1]]) }
@@ -148,11 +155,9 @@ export const VRangeSlider = defineComponent({
 
                     // Make sure second thumb is focused if
                     // the thumbs are on top of each other
-                    // and they are both at minimum value
                     // but only if focused from outside.
                     if (
                       model.value[0] === model.value[1] &&
-                      model.value[0] === min.value &&
                       e.relatedTarget !== stopThumbRef.value?.$el
                     ) stopThumbRef.value?.$el.focus()
                   } }
@@ -170,8 +175,6 @@ export const VRangeSlider = defineComponent({
 
                 <VSliderThumb
                   ref={ stopThumbRef }
-                  active={ isActive.value }
-                  dirty={ isDirty }
                   focused={ isFocused && focusedThumb.value === stopThumbRef.value }
                   modelValue={ model.value[1] }
                   onUpdate:modelValue={ v => (model.value = [model.value[0], v]) }
