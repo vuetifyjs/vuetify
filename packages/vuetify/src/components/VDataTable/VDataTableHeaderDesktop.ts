@@ -58,7 +58,7 @@ export default mixins(header).extend({
         style: {
           width: convertToUnit(header.width),
           minWidth: convertToUnit(header.width),
-          borderBottom: !this.$props.headerBorder ? '0' : null,
+          borderBottom: !this.$props.showHeaderBorder ? '0' : null,
         },
         class: [
           `text-${header.align || 'start'}`,

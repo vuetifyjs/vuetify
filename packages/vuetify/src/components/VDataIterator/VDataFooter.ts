@@ -59,6 +59,10 @@ export default Vue.extend({
       type: String,
       default: '$vuetify.dataFooter.pageText',
     },
+    showFooterBorder: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   computed: {
@@ -219,6 +223,9 @@ export default Vue.extend({
   render (): VNode {
     return this.$createElement('div', {
       staticClass: 'v-data-footer',
+      style: {
+        borderTop: !this.$props.showFooterBorder ? '0' : null,
+      },
     }, [
       getSlot(this, 'prepend'),
       this.genItemsPerPageSelect(),

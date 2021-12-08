@@ -48,7 +48,7 @@ export default mixins<options>().extend({
     showGroupBy: Boolean,
     singleSelect: Boolean,
     disableSort: Boolean,
-    headerBorder: {
+    showHeaderBorder: {
       type: Boolean,
       default: true,
     },
