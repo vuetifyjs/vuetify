@@ -1,10 +1,9 @@
 <template>
   <v-app-bar
     id="app-bar"
-    :color="dark ? undefined : 'white'"
     app
     class="v-bar--underline"
-    elevation="1"
+    flat
   >
     <app-bar-logo :alt="lgAndUp" />
 
