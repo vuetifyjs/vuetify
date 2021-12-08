@@ -124,7 +124,6 @@ export const VList = genericComponent<new <T>() => {
     const { roundedClasses } = useRounded(props, 'v-list')
     const { open, select, activate } = useNested(props)
     const depth = useDepth()
-    createList()
 
     useRender(() => {
       const hasHeader = typeof props.subheader === 'string' || slots.subheader

@@ -38,8 +38,14 @@
   &--start
     margin-inline-end: $list-item-avatar-margin-end
 
+    .v-icon
+      margin-inline-start: -$list-item-avatar-margin-end
+
   &--end
     margin-inline-start: $list-item-avatar-margin-start
+
+    .v-icon
+      margin-inline-start: -$list-item-avatar-margin-start
 
   @at-root
     @include tools.density('v-list', $list-density) using ($modifier)
