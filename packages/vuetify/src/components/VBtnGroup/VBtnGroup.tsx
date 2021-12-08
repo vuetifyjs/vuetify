@@ -1,3 +1,4 @@
+// Styles
 import './VBtnGroup.sass'
 
 // Composables
@@ -7,30 +8,17 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
-import { useColor } from '@/composables/color'
+import { makeVariantProps } from '@/composables/variant'
+import { provideDefaults } from '@/composables/defaults'
 
 // Utility
-import { computed } from 'vue'
 import { defineComponent, useRender } from '@/util'
-
-// Types
-import type { PropType } from 'vue'
-
-const allowedVariants = ['text', 'contained'] as const
-
-type Variant = typeof allowedVariants[number]
 
 export const VBtnGroup = defineComponent({
   name: 'VBtnGroup',
 
   props: {
-    color: String,
     divided: Boolean,
-    variant: {
-      type: String as PropType<Variant>,
-      default: 'contained',
-      validator: (v: any) => allowedVariants.includes(v),
-    },
 
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -38,6 +26,7 @@ export const VBtnGroup = defineComponent({
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
+    ...makeVariantProps(),
   },
 
   setup (props, { slots }) {
@@ -47,30 +36,34 @@ export const VBtnGroup = defineComponent({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props, 'v-btn-group')
 
-    const { colorClasses, colorStyles } = useColor(computed(() => {
-      return {
-        [props.variant === 'contained' ? 'background' : 'text']: props.color,
-      }
-    }))
+    provideDefaults({
+      defaults: {
+        VBtn: {
+          height: 'auto',
+          color: props.color,
+          flat: true,
+          variant: props.variant,
+        },
+      },
+    })
 
-    useRender(() => (
-      <props.tag
-        class={[
-          'v-btn-group',
-          {
-            [`v-btn-group--variant-${props.variant}`]: true,
-            'v-btn-group--divided': props.divided,
-          },
-          themeClasses.value,
-          borderClasses.value,
-          colorClasses.value,
-          densityClasses.value,
-          elevationClasses.value,
-          roundedClasses.value,
-        ]}
-        style={ colorStyles.value }
-        v-slots={ slots }
-      />
-    ))
+    useRender(() => {
+      return (
+        <props.tag
+          class={[
+            'v-btn-group',
+            {
+              'v-btn-group--divided': props.divided,
+            },
+            themeClasses.value,
+            borderClasses.value,
+            densityClasses.value,
+            elevationClasses.value,
+            roundedClasses.value,
+          ]}
+          v-slots={ slots }
+        />
+      )
+    })
   },
 })

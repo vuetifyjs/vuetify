@@ -12,8 +12,6 @@
   flex: 1 1
   max-width: 100%
   min-width: 0
-  overflow: hidden
-  position: relative
 
   @include tools.border($btn-group-border...)
   @include tools.elevation($btn-group-elevation)
@@ -27,13 +25,20 @@
 
   .v-btn
     border-radius: 0
-    background: transparent
-    box-shadow: none
-    flex: 0 1 auto
-    height: auto
 
-    &:not(.v-btn--disabled)
-      color: inherit
+    &:first-child
+      border-top-left-radius: inherit
+      border-bottom-left-radius: inherit
+
+    &:last-child
+      border-top-right-radius: inherit
+      border-bottom-right-radius: inherit
+
+    &:not(:last-child)
+      border-right: none
+
+    &:not(:first-child)
+      border-left: none
 
   &--divided
     .v-btn:not(:last-child)
@@ -43,6 +48,3 @@
 
   &--tile
     @include tools.rounded($btn-group-tile-border-radius)
-
-  &--variant-text
-    background: transparent

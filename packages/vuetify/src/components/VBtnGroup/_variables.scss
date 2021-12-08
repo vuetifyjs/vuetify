@@ -1,7 +1,7 @@
 @use '../../styles/settings';
 @use '../../styles/tools';
 
-$btn-group-background: rgb(var(--v-theme-surface)) !default;
+$btn-group-background: transparent !default;
 $btn-group-border-color: settings.$border-color-root !default;
 $btn-group-border-radius: settings.$border-radius-root !default;
 $btn-group-border-style: settings.$border-style-root !default;
