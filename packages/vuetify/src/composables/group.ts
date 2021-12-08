@@ -70,11 +70,11 @@ export const makeGroupItemProps = propsFactory({
 }, 'group-item')
 
 // Composables
-export function useGroupItem (
-  props: { value?: unknown, disabled?: boolean, selectedClass?: string },
+export function useGroupItem<R extends boolean> (
+  props: { value?: unknown, disabled?: boolean, selectedClass?: string | false },
   injectKey: InjectionKey<GroupProvide>,
-  required = true
-): GroupItemProvide | null {
+  required = true as R,
+): R extends true ? GroupItemProvide : GroupItemProvide | null {
   const vm = getCurrentInstance('useGroupItem')
 
   if (!vm) {
@@ -86,7 +86,7 @@ export function useGroupItem (
   const group = inject(injectKey, null)
 
   if (!group) {
-    if (!required) return group
+    if (!required) return group as any // TODO: fix this
 
     throw new Error(`[Vuetify] Could not find useGroup injection with symbol ${injectKey.description}`)
   }

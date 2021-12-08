@@ -84,7 +84,7 @@ export const VBtn = defineComponent({
           type={ Tag === 'a' ? undefined : 'button' }
           class={[
             'v-btn',
-            group?.selectedClass?.value,
+            group?.selectedClass.value,
             {
               'v-btn--active': link.isExactActive?.value,
               'v-btn--block': props.block,
