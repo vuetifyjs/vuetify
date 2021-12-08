@@ -1,9 +1,9 @@
 import { computed, inject, provide, ref, watch } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
+import { convertToUnit, createRange, defineComponent } from '@/util'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import './VDataTable.sass'
 
-import type { InjectionKey, PropType, Ref } from 'vue'
+import type { InjectionKey, PropType } from 'vue'
 import { VDataTableRows } from './VDataTableRows'
 
 type DataTableHeader = {
@@ -29,39 +29,42 @@ export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader
 
   watch(() => props.headers, () => {
     const rows = isMultipleHeaders(props.headers) ? props.headers : [props.headers]
-    const width = Math.max(...rows.map(row => row.length))
+
+    const width = rows[rows.length - 1].length + (rows.length > 1 ? rows.slice(0, rows.length - 1).reduce((count, row, index) => {
+      return count + row.filter(col => index + (col.rowspan ?? 0) === rows.length ? 1 : 0).length
+    }, 0) : 0)
 
     rowColumns.value = Array(width)
 
     const rowsWithStyle: Column[][] = []
     let rowStart = 1
+    const colStart = createRange(width).map(() => 1)
     for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
       const columnsWithStyle: Column[] = []
-      let colStart = 1
 
       for (let colIndex = 0; colIndex < rows[rowIndex].length; colIndex++) {
         const column = rows[rowIndex][colIndex]
-        const colEnd = colStart + (column.colspan ?? 1)
+        const colEnd = colStart[rowIndex] + (column.colspan ?? 1)
         const rowEnd = rowStart + (column.rowspan ?? 1)
 
         const newColumn = {
           ...column,
           style: {
-            'grid-area': `${rowStart} / ${colStart} / ${rowEnd} / ${colEnd}`,
+            'grid-area': `${rowStart} / ${colStart[rowIndex]} / ${rowEnd} / ${colEnd}`,
           },
         }
 
         columnsWithStyle.push(newColumn)
 
         if (newColumn.id) {
-          rowColumns.value.splice(colStart - 1, 1, newColumn)
+          rowColumns.value.splice(colStart[rowIndex] - 1, 1, newColumn)
         }
 
-        colStart = colEnd
-      }
+        colStart[rowIndex] = colEnd
 
-      if (columnsWithStyle.length < width) {
-        columnsWithStyle.push(...Array(width - columnsWithStyle.length).fill({}))
+        for (let i = 0; i < (column.rowspan ?? 0); i++) {
+          colStart[rowIndex + i + 1] += 1
+        }
       }
 
       rowsWithStyle.push(columnsWithStyle)
@@ -86,30 +89,35 @@ export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader
 }
 
 export const VDataTableExpandedKey: InjectionKey<{
-  expanded: Ref<Set<string>>
   toggleExpand: (index: number, item: any) => void
 }> = Symbol.for('vuetify:datatable:expanded')
 
 export const createExpanded = (props: { items: any[] }) => {
-  const items = ref([...props.items])
-  const expanded = ref(new Set<string>())
+  const expanded = ref(new Map<string, number>())
 
   function toggleExpand (index: number, item: any) {
     const isExpanded = expanded.value.has(item.id)
 
     if (isExpanded) {
-      items.value.splice(index + 1, 1)
+      expanded.value.delete(item.id)
     } else {
-      items.value.splice(index + 1, 0, {
+      expanded.value.set(item.id, index)
+    }
+  }
+
+  const items = computed(() => {
+    const incoming = [...props.items]
+
+    for (const index of expanded.value.values()) {
+      incoming.splice(index + 1, 0, {
         [VDataTableExpandedKey as symbol]: true,
-        item,
       })
     }
 
-    isExpanded ? expanded.value.delete(item.id) : expanded.value.add(item.id)
-  }
+    return incoming
+  })
 
-  provide(VDataTableExpandedKey, { expanded, toggleExpand })
+  provide(VDataTableExpandedKey, { toggleExpand })
 
   return { items, expanded, toggleExpand }
 }

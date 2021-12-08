@@ -1,5 +1,4 @@
 import { defineComponent } from '@/util'
-import { computed } from 'vue'
 
 import type { PropType } from 'vue'
 import type { Column } from './VDataTable'
@@ -36,6 +35,8 @@ export const VDataTableHeaders = defineComponent({
                 }),
               }}
               role="columnheader"
+              colspan={column.colspan}
+              rowspan={column.rowspan}
             >
               { column.name }
             </th>
