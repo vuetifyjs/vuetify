@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-data-table
+    <!-- <v-data-table
       :headers="headers"
       :items="items"
       height="500px"
@@ -8,14 +8,29 @@
       <template #item.end>
         <v-btn>hello</v-btn>
       </template>
-    </v-data-table>
-    <div>foo</div>
+    </v-data-table> -->
+    <!-- <div>foo</div>
     <v-virtual-data-table
       :headers="headers"
       :items="items"
+      show-loader
       height="500px"
     >
-      <template #item.end>
+      <template #item.four>
+        <v-btn>hello</v-btn>
+      </template>
+    </v-virtual-data-table> -->
+    <div>foo</div>
+    <v-virtual-data-table
+      :headers="headers"
+      :items="remoteItems"
+      :items-length="1000"
+      :loading="loading"
+      show-loader
+      @load="getItems"
+      height="500px"
+    >
+      <template #item.four>
         <v-btn>hello</v-btn>
       </template>
     </v-virtual-data-table>
@@ -25,31 +40,48 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
 
-  const items = Array(1000).fill(0).map((_, i) => ({ id: i, one: i, two: 'foo', end: 'end' }))
+  const items = Array(1000).fill(0).map((_, i) => ({ id: i, name: `Name ${i}`, one: i, two: 'foo', three: 'end', four: 'zxc' }))
 
   export default defineComponent({
     data: () => ({
       headers: [
         [
           {
-            name: 'Group',
-            colspan: 2,
+            name: 'Name',
+            id: 'name',
+            rowspan: 3,
           },
           {
-            id: 'end',
-            name: 'Two rows',
-            rowspan: 2,
-            maxWidth: '2fr',
+            name: 'Header',
+            colspan: 4,
           },
         ],
         [
           {
-            id: 'one',
-            name: 'One',
+            name: 'Section',
+            colspan: 2,
           },
           {
-            id: 'two',
+            name: 'Section',
+            colspan: 2,
+          },
+        ],
+        [
+          {
+            name: 'One',
+            id: 'one',
+          },
+          {
             name: 'Two',
+            id: 'two',
+          },
+          {
+            name: 'Three',
+            id: 'three',
+          },
+          {
+            name: 'Four',
+            id: 'four',
           },
         ],
       ],
@@ -69,6 +101,20 @@
       //   },
       // ],
       items,
+      remoteItems: items.slice(0, 50),
+      timeout: null as any,
+      loading: false,
     }),
+    methods: {
+      getItems ({ startIndex, stopIndex }: any) {
+        this.loading = true
+        clearTimeout(this.timeout)
+        this.timeout = setTimeout(() => {
+          console.log('loading from remote', startIndex, stopIndex)
+          this.remoteItems = items.slice(startIndex, stopIndex)
+          this.loading = false
+        }, 2000)
+      },
+    },
   })
 </script>
