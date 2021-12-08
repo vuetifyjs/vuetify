@@ -13,11 +13,19 @@
   @include tools.rounded($bottom-navigation-border-radius)
   @include tools.theme($bottom-navigation-theme...)
 
-  &--is-active
+  &--active
     @include tools.elevation($bottom-navigation-elevation)
 
   &--absolute
     position: absolute
+
+  .v-btn
+    text-transform: none
+    border-radius: 0
+    text-transform: $bottom-navigation-text-transform
+
+    .v-icon
+      font-size: $bottom-navigation-icon-font-size
 
 .v-bottom-navigation__content
   display: flex

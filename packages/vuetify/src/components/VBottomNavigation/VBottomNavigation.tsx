@@ -8,9 +8,10 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
+import { makeThemeProps, useTheme } from '@/composables/theme'
+import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
 import { computed } from 'vue'
@@ -39,9 +40,7 @@ export const VBottomNavigation = defineComponent({
     ...makeDensityProps(),
     ...makeElevationProps(),
     ...makeRoundedProps(),
-    ...makeLayoutItemProps({
-      name: 'bottom-navigation',
-    }),
+    ...makeLayoutItemProps({ name: 'bottom-navigation' }),
     ...makeTagProps({ tag: 'header' }),
     ...makeThemeProps(),
   },
@@ -73,17 +72,30 @@ export const VBottomNavigation = defineComponent({
       isActive
     )
 
+    provideDefaults({
+      defaults: {
+        VBtn: {
+          color: props.color,
+          density: props.density,
+          height: 'auto',
+          flat: true,
+          minWidth: 80,
+          maxWidth: 168,
+          stacked: props.mode !== 'horizontal',
+          width: props.grow ? '100%' : 'auto',
+        },
+      },
+    })
+
     return () => {
       return (
         <props.tag
           class={[
             'v-bottom-navigation',
             {
-              'v-bottom-navigation--grow': props.grow,
-              'v-bottom-navigation--horizontal': props.mode === 'horizontal',
-              'v-bottom-navigation--is-active': isActive.value,
-              'v-bottom-navigation--shift': props.mode === 'shift',
               'v-bottom-navigation--absolute': props.absolute,
+              'v-bottom-navigation--active': isActive.value,
+              'v-bottom-navigation--shift': props.mode === 'shift',
             },
             themeClasses.value,
             backgroundColorClasses.value,

@@ -2,15 +2,30 @@
 @use '../../styles/settings';
 
 // Defaults
+// $bottom-navigation-active-filter: grayscale(0) !default;
+// $bottom-navigation-active-opacity: 1 !default;
+// $bottom-navigation-filter: grayscale(1) !default;
+// $bottom-navigation-shift-active-icon-transform: translateY(-7px) !default;
+// $bottom-navigation-shift-active-transform: scale(1) translateY(5px) !default;
+// $bottom-navigation-shift-icon-transform: translateY(0) !default;
+// $bottom-navigation-shift-opacity: 0 !default;
+// $bottom-navigation-shift-top: 50% !default;
+// $bottom-navigation-shift-transform: scale(.8) translateY(10px) !default;
+// $bottom-navigation-transition-duration: .2s !default;
 $bottom-navigation-background: rgb(var(--v-theme-surface)) !default;
-$bottom-navigation-color: rgb(var(--v-theme-on-surface)) !default;
 $bottom-navigation-border-color: settings.$border-color-root !default;
+$bottom-navigation-border-radius: 0 !default;
 $bottom-navigation-border-radius: map.get(settings.$rounded, '0') !default;
 $bottom-navigation-border-style: settings.$border-style-root !default;
 $bottom-navigation-border-thin-width: thin !default;
 $bottom-navigation-border-width: 0 !default;
+$bottom-navigation-color: rgb(var(--v-theme-on-surface)) !default;
 $bottom-navigation-elevation: 4 !default;
 $bottom-navigation-flat-elevation: 0 !default;
+$bottom-navigation-icon-font-size: 1.5rem !default;
+$bottom-navigation-max-width: 168px !default;
+$bottom-navigation-min-width: 80px !default;
+$bottom-navigation-text-transform: none !default;
 $bottom-navigation-transition: .2s settings.$standard-easing !default;
 
 $bottom-navigation-border: (
