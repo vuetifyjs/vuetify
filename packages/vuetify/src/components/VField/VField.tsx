@@ -140,7 +140,7 @@ export const VField = genericComponent<new <T>() => {
     }))
 
     watch(isActive, val => {
-      if (!props.singleLine) {
+      if (!props.singleLine && props.label) {
         const el: HTMLElement = labelRef.value!.$el
         const targetEl: HTMLElement = floatingLabelRef.value!.$el
         const rect = nullifyTransforms(el)
@@ -212,7 +212,6 @@ export const VField = genericComponent<new <T>() => {
         })
         : props.label
       const [inputProps, _] = filterInputProps(props)
-
       return (
         <VInput
           class={[
@@ -275,7 +274,7 @@ export const VField = genericComponent<new <T>() => {
                 ) }
 
                 <div class="v-field__field">
-                  { ['contained', 'filled'].includes(props.variant) && !props.singleLine && (
+                  { ['contained', 'filled'].includes(props.variant) && !props.singleLine && label && (
                     <VFieldLabel ref={ floatingLabelRef } floating>
                       { label }
                     </VFieldLabel>
@@ -332,19 +331,19 @@ export const VField = genericComponent<new <T>() => {
                     <>
                       <div class="v-field__outline__start" />
 
-                      <div class="v-field__outline__notch">
-                        { !props.singleLine && (
-                          <VFieldLabel ref={ floatingLabelRef } floating>
-                            { label }
-                          </VFieldLabel>
-                        ) }
-                      </div>
+                      { !props.singleLine && label && (
+                          <div class="v-field__outline__notch">
+                            <VFieldLabel ref={ floatingLabelRef } floating>
+                              { label }
+                            </VFieldLabel>
+                          </div>
+                      ) }
 
                       <div class="v-field__outline__end" />
                     </>
                   ) }
 
-                  { ['plain', 'underlined'].includes(props.variant) && !props.singleLine && (
+                  { ['plain', 'underlined'].includes(props.variant) && !props.singleLine && label && (
                     <VFieldLabel ref={ floatingLabelRef } floating>
                       { label }
                     </VFieldLabel>
