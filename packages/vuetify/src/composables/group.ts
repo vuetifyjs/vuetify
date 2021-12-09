@@ -6,7 +6,7 @@ import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef 
 import { consoleWarn, deepEqual, findChildren, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
-import type { ComponentInternalInstance, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
+import type { ComponentInternalInstance, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
 
 interface GroupItem {
   id: number
@@ -61,20 +61,29 @@ export const makeGroupProps = propsFactory({
 }, 'group')
 
 export const makeGroupItemProps = propsFactory({
-  value: {
-    type: [Number, Boolean, String, Object],
-    default: undefined,
-  },
+  value: null,
   disabled: Boolean,
   selectedClass: String,
 }, 'group-item')
 
+type GroupItemProps = ExtractPropTypes<ReturnType<typeof makeGroupItemProps>>
+
 // Composables
-export function useGroupItem<R extends boolean> (
-  props: { value?: unknown, disabled?: boolean, selectedClass?: string | false },
+export function useGroupItem (
+  props: GroupItemProps,
   injectKey: InjectionKey<GroupProvide>,
-  required = true as R,
-): R extends true ? GroupItemProvide : GroupItemProvide | null {
+  required?: true,
+): GroupItemProvide
+export function useGroupItem (
+  props: GroupItemProps,
+  injectKey: InjectionKey<GroupProvide>,
+  required: false,
+): GroupItemProvide | null
+export function useGroupItem (
+  props: GroupItemProps,
+  injectKey: InjectionKey<GroupProvide>,
+  required = true,
+): GroupItemProvide | null {
   const vm = getCurrentInstance('useGroupItem')
 
   if (!vm) {
@@ -86,7 +95,7 @@ export function useGroupItem<R extends boolean> (
   const group = inject(injectKey, null)
 
   if (!group) {
-    if (!required) return group as any // TODO: fix this
+    if (!required) return group
 
     throw new Error(`[Vuetify] Could not find useGroup injection with symbol ${injectKey.description}`)
   }
