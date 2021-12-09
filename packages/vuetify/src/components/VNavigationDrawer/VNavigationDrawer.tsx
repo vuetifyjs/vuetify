@@ -95,14 +95,14 @@ export const VNavigationDrawer = defineComponent({
 
     const rootEl = ref<HTMLElement>()
 
-    const { dragging, dragProgress, dragStyles } = useTouch({ isActive, isTemporary, width })
+    const { isDragging, dragProgress, dragStyles } = useTouch({ isActive, isTemporary, width })
 
     const layoutSize = computed(() => {
       const size = isTemporary.value ? 0
         : props.rail && props.expandOnHover ? Number(props.railWidth)
         : width.value
 
-      return dragging.value ? size * dragProgress.value : size
+      return isDragging.value ? size * dragProgress.value : size
     })
     const layoutStyles = useLayoutItem(
       props.name,
@@ -110,8 +110,8 @@ export const VNavigationDrawer = defineComponent({
       toRef(props, 'position'),
       layoutSize,
       width,
-      computed(() => isActive.value || dragging.value),
-      computed(() => dragging.value)
+      computed(() => isActive.value || isDragging.value),
+      computed(() => isDragging.value)
     )
 
     return () => {
@@ -176,10 +176,10 @@ export const VNavigationDrawer = defineComponent({
           </props.tag>
 
           <Transition name="fade-transition">
-            { isTemporary.value && (dragging.value || isActive.value) && (
+            { isTemporary.value && (isDragging.value || isActive.value) && (
               <div
                 class="v-navigation-drawer__scrim"
-                style={dragging.value ? {
+                style={isDragging.value ? {
                   opacity: dragProgress.value * 0.2,
                   transition: 'none',
                 } : undefined}

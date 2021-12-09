@@ -87,8 +87,8 @@ export function useVelocity () {
     }
 
     return {
-      get x () { return calculateImpulseVelocity(x) },
-      get y () { return calculateImpulseVelocity(y) },
+      x: calculateImpulseVelocity(x),
+      y: calculateImpulseVelocity(y),
       get polar () {
         const radius = Math.sqrt(this.x ** 2 + this.y ** 2)
         const azimuth = Math.atan2(this.y, this.x)

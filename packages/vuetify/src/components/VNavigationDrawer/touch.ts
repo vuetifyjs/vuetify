@@ -20,16 +20,19 @@ export function useTouch ({ isActive, isTemporary, width }: {
   })
 
   const { addMovement, endTouch, getVelocity } = useVelocity()
-  const dragging = ref(false)
+  let maybeDragging = false
+  const isDragging = ref(false)
   const dragProgress = ref(0)
   const offset = ref(0)
+  let start: [number, number] | undefined
   function onTouchstart (e: TouchEvent) {
     if (
-      e.changedTouches[0].clientX < 100 ||
+      e.changedTouches[0].clientX < 25 ||
       (isActive.value && e.changedTouches[0].clientX < width.value) ||
       (isActive.value && isTemporary.value)
     ) {
-      dragging.value = true
+      maybeDragging = true
+      start = [e.changedTouches[0].clientX, e.changedTouches[0].clientY]
       offset.value = isActive.value ? e.changedTouches[0].clientX - width.value : e.changedTouches[0].clientX
       dragProgress.value = Math.min(1, (e.changedTouches[0].clientX - offset.value) / width.value)
       endTouch(e)
@@ -38,7 +41,24 @@ export function useTouch ({ isActive, isTemporary, width }: {
   }
 
   function onTouchmove (e: TouchEvent) {
-    if (!dragging.value) return
+    if (maybeDragging) {
+      if (!e.cancelable) {
+        maybeDragging = false
+        return
+      }
+
+      const dx = Math.abs(e.changedTouches[0].clientX - start![0])
+      const dy = Math.abs(e.changedTouches[0].clientY - start![1])
+
+      if (dx > dy && dx > 3) {
+        isDragging.value = true
+        maybeDragging = false
+      } else if (dy > 3) {
+        maybeDragging = false
+      }
+    }
+
+    if (!isDragging.value) return
 
     e.preventDefault()
     addMovement(e)
@@ -52,14 +72,16 @@ export function useTouch ({ isActive, isTemporary, width }: {
   }
 
   function onTouchend (e: TouchEvent) {
-    if (!dragging.value) return
+    maybeDragging = false
+
+    if (!isDragging.value) return
 
     addMovement(e)
 
-    dragging.value = false
+    isDragging.value = false
 
     const velocity = getVelocity(e.changedTouches[0].identifier)
-    if (velocity.polar.radius > 300 && ['left', 'right'].includes(velocity.direction)) {
+    if (Math.abs(velocity.x) > 400 && Math.abs(velocity.x) > Math.abs(velocity.y)) {
       isActive.value = velocity.direction === 'right'
     } else {
       isActive.value = dragProgress.value > 0.5
@@ -67,14 +89,14 @@ export function useTouch ({ isActive, isTemporary, width }: {
   }
 
   const dragStyles = computed(() => {
-    return dragging.value ? {
+    return isDragging.value ? {
       transform: `translateX(calc(-100% + ${dragProgress.value * width.value}px))`,
       // transition: 'none',
     } : undefined
   })
 
   return {
-    dragging,
+    isDragging,
     dragProgress,
     dragStyles,
   }
