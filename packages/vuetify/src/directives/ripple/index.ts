@@ -211,7 +211,9 @@ function rippleHide (e: Event) {
     element._ripple.showTimerCommit = null
 
     // re-queue ripple hiding
-    // To revert: element._ripple.showTimer = setTimeout(() => {
+    // Was getting error before starting development.
+    // Type 'Timeout' is not assignable to type 'number'.ts(2322)
+    //  To revert: element._ripple.showTimer = setTimeout(() => {
     setTimeout(() => {
       rippleHide(e)
     })

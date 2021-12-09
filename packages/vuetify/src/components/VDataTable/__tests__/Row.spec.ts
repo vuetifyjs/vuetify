@@ -23,6 +23,7 @@ describe('Table Row', () => {
             { text: 'Petrol', value: 'petrol' },
             { text: 'Diesel', value: 'diesel' },
           ],
+          showRowsBorder: true,
           item: {
             petrol: 0.68,
             diesel: 0.65,
@@ -49,6 +50,7 @@ describe('Table Row', () => {
             { value: 'undefined' },
             { value: 'null' },
           ],
+          showRowsBorder: true,
           item: {
             string: 'string',
             number: 12.34,
@@ -72,6 +74,7 @@ describe('Table Row', () => {
             { text: 'Petrol', value: 'petrol', cellClass: 'a' },
             { text: 'Diesel', value: 'diesel', cellClass: ['b', 'c'] },
           ],
+          showRowsBorder: true,
           item: {
             petrol: 0.68,
             diesel: 0.65,
@@ -95,6 +98,7 @@ describe('Table Row', () => {
             { text: 'Petrol', value: 'petrol' },
             { text: 'Diesel', value: 'diesel' },
           ],
+          showRowsBorder: true,
         },
       },
       slots: {
@@ -118,6 +122,7 @@ describe('Table Row', () => {
             { text: 'Petrol', value: 'petrol' },
             { text: 'Diesel', value: 'diesel' },
           ],
+          showRowsBorder: true,
           item: {
             petrol: 0.68,
             diesel: 0.65,

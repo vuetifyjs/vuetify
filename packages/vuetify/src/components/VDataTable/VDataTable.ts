@@ -100,6 +100,10 @@ export default mixins(
     headerProps: Object,
     calculateWidths: Boolean,
     fixedHeader: Boolean,
+    showRowsBorder: {
+      type: Boolean,
+      default: true,
+    },
     headersLength: Number,
     expandIcon: {
       type: String,
@@ -505,6 +509,7 @@ export default mixins(
           index,
           item,
           rtl: this.$vuetify.rtl,
+          showRowsBorder: this.$props.showRowsBorder,
         },
         scopedSlots,
         on: {

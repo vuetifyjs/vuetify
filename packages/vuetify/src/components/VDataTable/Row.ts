@@ -20,6 +20,7 @@ export default Vue.extend({
     index: Number,
     item: Object,
     rtl: Boolean,
+    showRowsBorder: Boolean,
   },
 
   render (h, { props, slots, data }): VNode {
@@ -48,7 +49,7 @@ export default Vue.extend({
       }
 
       const textAlign = `text-${header.align || 'start'}`
-
+      const style = { borderBottom: !props.showRowsBorder ? '0' : null }
       return needsTd(children)
         ? h('td', {
           class: [
@@ -58,6 +59,7 @@ export default Vue.extend({
               'v-data-table__divider': header.divider,
             },
           ],
+          style,
         }, children)
         : children
     })
