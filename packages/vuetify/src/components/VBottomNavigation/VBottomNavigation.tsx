@@ -14,7 +14,7 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, reactive, toRef } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 
 export const VBottomNavigation = defineComponent({
@@ -72,20 +72,20 @@ export const VBottomNavigation = defineComponent({
       isActive
     )
 
-    provideDefaults({
+    provideDefaults(reactive({
       defaults: {
         VBtn: {
-          color: props.color,
-          density: props.density,
+          color: toRef(props, 'color'),
+          density: toRef(props, 'density'),
           height: 'auto',
           flat: true,
           minWidth: 80,
           maxWidth: 168,
-          stacked: props.mode !== 'horizontal',
-          width: props.grow ? '100%' : 'auto',
+          stacked: computed(() => props.mode !== 'horizontal'),
+          width: computed(() => props.grow ? '100%' : 'auto'),
         },
       },
-    })
+    }))
 
     return () => {
       return (
