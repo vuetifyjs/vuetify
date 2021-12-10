@@ -177,7 +177,6 @@ export default baseMixins.extend({
     listIndex (next, prev) {
       if (next in this.tiles) {
         const tile = this.tiles[next]
-        tile.classList.add('v-list-item--highlighted')
         const scrollTop = this.$refs.content.scrollTop
         const contentHeight = this.$refs.content.clientHeight
 
