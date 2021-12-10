@@ -89,23 +89,15 @@ export function useVelocity () {
     return {
       x: calculateImpulseVelocity(x),
       y: calculateImpulseVelocity(y),
-      get polar () {
-        const radius = Math.sqrt(this.x ** 2 + this.y ** 2)
-        const azimuth = Math.atan2(this.y, this.x)
-
-        return {
-          radius,
-          azimuth,
-        }
-      },
       get direction () {
-        const { azimuth } = this.polar
+        const { x, y } = this
+        const [absX, absY] = [Math.abs(x), Math.abs(y)]
 
-        return Math.abs(azimuth) < Math.PI / 4 ? 'right'
-          : Math.abs(azimuth) > Math.PI / 4 * 3 ? 'left'
-          : Math.sign(azimuth) < 0 ? 'up'
-          : Math.sign(azimuth) > 0 ? 'down'
-          : `??? ${azimuth}`
+        return absX > absY && x >= 0 ? 'right'
+          : absX > absY && x <= 0 ? 'left'
+          : absY > absX && y >= 0 ? 'down'
+          : absY > absX && y <= 0 ? 'up'
+          : undefined as never
       },
     }
   }
