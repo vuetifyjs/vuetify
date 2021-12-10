@@ -103,8 +103,8 @@ export function useVelocity () {
 
         return Math.abs(azimuth) < Math.PI / 4 ? 'right'
           : Math.abs(azimuth) > Math.PI / 4 * 3 ? 'left'
-          : Math.sign(azimuth) > 0 ? 'up'
-          : Math.sign(azimuth) < 0 ? 'down'
+          : Math.sign(azimuth) < 0 ? 'up'
+          : Math.sign(azimuth) > 0 ? 'down'
           : `??? ${azimuth}`
       },
     }

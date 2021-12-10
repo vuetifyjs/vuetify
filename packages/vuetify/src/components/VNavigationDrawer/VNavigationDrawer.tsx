@@ -40,6 +40,7 @@ export const VNavigationDrawer = defineComponent({
     },
     image: String,
     temporary: Boolean,
+    touchless: Boolean,
     width: {
       type: [Number, String],
       default: 256,
@@ -95,7 +96,13 @@ export const VNavigationDrawer = defineComponent({
 
     const rootEl = ref<HTMLElement>()
 
-    const { isDragging, dragProgress, dragStyles } = useTouch({ isActive, isTemporary, width })
+    const { isDragging, dragProgress, dragStyles } = useTouch({
+      isActive,
+      isTemporary,
+      width,
+      touchless: toRef(props, 'touchless'),
+      position: toRef(props, 'position'),
+    })
 
     const layoutSize = computed(() => {
       const size = isTemporary.value ? 0
