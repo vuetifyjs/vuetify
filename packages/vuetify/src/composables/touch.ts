@@ -1,4 +1,4 @@
-import { CircularBuffer, consoleWarn } from '@/util'
+import { CircularBuffer } from '@/util'
 
 const HORIZON = 100 // ms
 const HISTORY = 20 // number of samples to keep
