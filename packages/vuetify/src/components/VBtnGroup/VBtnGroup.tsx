@@ -1,22 +1,70 @@
+// Styles
 import './VBtnGroup.sass'
 
-import { defineComponent } from '@/util'
+// Composables
+import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeDensityProps, useDensity } from '@/composables/density'
+import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeTagProps } from '@/composables/tag'
+import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeVariantProps } from '@/composables/variant'
+import { provideDefaults } from '@/composables/defaults'
+
+// Utility
+import { computed, reactive } from 'vue'
+import { defineComponent, useRender } from '@/util'
 
 export const VBtnGroup = defineComponent({
   name: 'VBtnGroup',
 
   props: {
-    tag: {
-      type: String,
-      default: 'div',
-    },
+    divided: Boolean,
+
+    ...makeBorderProps(),
+    ...makeDensityProps(),
+    ...makeElevationProps(),
+    ...makeRoundedProps(),
+    ...makeTagProps(),
+    ...makeThemeProps(),
+    ...makeVariantProps(),
   },
 
   setup (props, { slots }) {
-    return () => (
-      <props.tag class="v-btn-group">
-        { slots.default?.() }
-      </props.tag>
-    )
+    const { themeClasses } = useTheme(props)
+    const { densityClasses } = useDensity(props, 'v-btn-group')
+    const { borderClasses } = useBorder(props, 'v-btn-group')
+    const { elevationClasses } = useElevation(props)
+    const { roundedClasses } = useRounded(props, 'v-btn-group')
+
+    provideDefaults(reactive({
+      defaults: {
+        VBtn: {
+          height: 'auto',
+          color: computed(() => props.color),
+          flat: true,
+          variant: computed(() => props.variant),
+        },
+      },
+    }))
+
+    useRender(() => {
+      return (
+        <props.tag
+          class={[
+            'v-btn-group',
+            {
+              'v-btn-group--divided': props.divided,
+            },
+            themeClasses.value,
+            borderClasses.value,
+            densityClasses.value,
+            elevationClasses.value,
+            roundedClasses.value,
+          ]}
+          v-slots={ slots }
+        />
+      )
+    })
   },
 })
