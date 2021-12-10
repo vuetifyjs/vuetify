@@ -211,7 +211,6 @@ function rippleHide (e: Event) {
     element._ripple.showTimerCommit = null
 
     // re-queue ripple hiding
-    // Was getting error before starting development.
     element._ripple.showTimer = window.setTimeout(() => {
       rippleHide(e)
     })
