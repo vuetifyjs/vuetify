@@ -3,7 +3,7 @@ import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { VItemGroupSymbol } from './VItemGroup'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent } from '@/util'
 
 // Types
 import type { MakeSlots } from '@/util'
@@ -19,41 +19,15 @@ export const VItem = genericComponent<new () => {
   props: makeGroupItemProps(),
 
   setup (props, { slots }) {
-    const item = useGroupItem(props, VItemGroupSymbol)
-
-    if (item) {
-      useRender(() => {
-        const {
-          isSelected,
-          select,
-          toggle,
-          selectedClass,
-          value,
-          disabled,
-          group,
-          id,
-        } = item
-
-        return (
-          <>
-            {
-              slots.default?.({
-                isSelected,
-                selectedClass,
-                select,
-                toggle,
-                value,
-                disabled,
-                group,
-                id,
-              } as GroupItemProvide)
-            }
-          </>
-        )
-      })
-    }
-
-    return {}
+    const { isSelected, select, toggle, selectedClass, value, disabled } = useGroupItem(props, VItemGroupSymbol)
+    return () => slots.default?.({
+      isSelected: isSelected.value,
+      selectedClass: selectedClass.value,
+      select,
+      toggle,
+      value: value.value,
+      disabled: disabled.value,
+    })
   },
 })
 
