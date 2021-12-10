@@ -35,7 +35,7 @@ export function useTouch ({ isActive, isTemporary, width, touchless, position }:
       position.value === 'left' ? pos
       : position.value === 'right' ? document.documentElement.clientWidth - pos
       : position.value === 'bottom' ? document.documentElement.clientHeight - pos
-      : position.value
+      : oops()
     ) - (active ? width.value : 0)
   }
 
@@ -44,7 +44,7 @@ export function useTouch ({ isActive, isTemporary, width, touchless, position }:
       position.value === 'left' ? (pos - offset.value) / width.value
       : position.value === 'right' ? (document.documentElement.clientWidth - pos - offset.value) / width.value
       : position.value === 'bottom' ? (document.documentElement.clientHeight - pos - offset.value) / width.value
-      : position.value
+      : oops()
     )
     return limit ? Math.max(0, Math.min(1, progress)) : progress
   }
@@ -60,13 +60,13 @@ export function useTouch ({ isActive, isTemporary, width, touchless, position }:
       position.value === 'left' ? touchX < touchZone
       : position.value === 'right' ? touchX > document.documentElement.clientWidth - touchZone
       : position.value === 'bottom' ? touchY > document.documentElement.clientHeight - touchZone
-      : position.value
+      : oops()
 
     const inElement: boolean = isActive.value && (
       position.value === 'left' ? touchX < width.value
       : position.value === 'right' ? touchX > document.documentElement.clientWidth - width.value
       : position.value === 'bottom' ? touchY > document.documentElement.clientHeight - width.value
-      : position.value
+      : oops()
     )
 
     if (
@@ -142,11 +142,11 @@ export function useTouch ({ isActive, isTemporary, width, touchless, position }:
       : vy > vx && vy > 3
 
     if (thresholdMet) {
-      isActive.value = velocity.direction === {
+      isActive.value = velocity.direction === ({
         left: 'right',
         right: 'left',
         bottom: 'up',
-      }[position.value]
+      }[position.value] || oops())
     } else {
       isActive.value = dragProgress.value > 0.5
     }
@@ -158,7 +158,7 @@ export function useTouch ({ isActive, isTemporary, width, touchless, position }:
         position.value === 'left' ? `translateX(calc(-100% + ${dragProgress.value * width.value}px))`
         : position.value === 'right' ? `translateX(calc(100% - ${dragProgress.value * width.value}px))`
         : position.value === 'bottom' ? `translateY(calc(100% - ${dragProgress.value * width.value}px))`
-        : position.value,
+        : oops(),
       transition: 'none',
     } : undefined
   })
@@ -168,4 +168,8 @@ export function useTouch ({ isActive, isTemporary, width, touchless, position }:
     dragProgress,
     dragStyles,
   }
+}
+
+function oops (): never {
+  throw new Error()
 }

@@ -97,10 +97,14 @@ export function useVelocity () {
           : absX > absY && x <= 0 ? 'left'
           : absY > absX && y >= 0 ? 'down'
           : absY > absX && y <= 0 ? 'up'
-          : undefined as never
+          : oops()
       },
     }
   }
 
   return { addMovement, endTouch, getVelocity }
+}
+
+function oops (): never {
+  throw new Error()
 }
