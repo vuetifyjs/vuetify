@@ -16,6 +16,7 @@ export const VListChildren = genericComponent<new <T extends ListItem>() => {
     items?: T[]
   }
   $slots: MakeSlots<{
+    default: []
     externalHeader: [ListGroupHeaderSlot]
     item: [T]
   }>

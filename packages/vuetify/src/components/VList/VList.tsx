@@ -164,6 +164,7 @@ export const VList = genericComponent<new <T>() => {
           <VListChildren
             items={props.items}
             v-slots={{
+              default: slots.default,
               item: slots.item,
               externalHeader: slots.header,
             }}
