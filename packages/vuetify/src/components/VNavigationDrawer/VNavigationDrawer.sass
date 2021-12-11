@@ -28,9 +28,11 @@
     @include tools.rounded($navigation-drawer-rounded-border-radius)
 
   &--bottom
+    left: 0
     border-top-width: $navigation-drawer-border-thin-width
 
   &--start
+    top: 0
     border-inline-end-width: $navigation-drawer-border-thin-width
 
     @include tools.ltr()
@@ -42,6 +44,7 @@
       right: 0
 
   &--end
+    top: 0
     border-inline-start-width: $navigation-drawer-border-thin-width
 
     @include tools.ltr()
@@ -77,3 +80,14 @@
     height: $navigation-drawer-img-height
     object-fit: $navigation-drawer-img-object-fit
     width: $navigation-drawer-img-width
+
+.v-navigation-drawer__scrim
+  position: fixed
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  background: black
+  opacity: .2
+  transition: opacity $navigation-drawer-transition-duration $navigation-drawer-transition-timing-function
+  z-index: 1

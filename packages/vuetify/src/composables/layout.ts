@@ -23,7 +23,8 @@ interface LayoutProvide {
     position: Ref<Position>,
     layoutSize: Ref<number | string>,
     elementSize: Ref<number | string>,
-    active: Ref<boolean>
+    active: Ref<boolean>,
+    disableTransitions?: Ref<boolean>
   ) => Ref<Record<string, unknown>>
   unregister: (id: string) => void
   mainStyles: Ref<Record<string, unknown>>
@@ -68,6 +69,7 @@ export function useLayoutItem (
   layoutSize: Ref<number | string>,
   elementSize: Ref<number | string>,
   active: Ref<boolean>,
+  disableTransitions?: Ref<boolean>,
 ) {
   const layout = inject(VuetifyLayoutKey)
 
@@ -75,7 +77,7 @@ export function useLayoutItem (
 
   const id = name ?? `layout-item-${getUid()}`
 
-  const styles = layout.register(id, priority, position, layoutSize, elementSize, active)
+  const styles = layout.register(id, priority, position, layoutSize, elementSize, active, disableTransitions)
 
   onBeforeUnmount(() => layout.unregister(id))
 
@@ -121,6 +123,7 @@ export function createLayout (props: { layout?: string[], overlaps?: string[], f
   const layoutSizes = new Map<string, Ref<number | string>>()
   const priorities = new Map<string, Ref<number>>()
   const activeItems = new Map<string, Ref<boolean>>()
+  const transitions = new Map<string, Ref<boolean>>()
 
   const computedOverlaps = computed(() => {
     const map = new Map<string, { position: Position, amount: number }>()
@@ -149,6 +152,10 @@ export function createLayout (props: { layout?: string[], overlaps?: string[], f
     return generateLayers(sortedEntries, registered.value, positions, layoutSizes, activeItems)
   })
 
+  const transitionsEnabled = computed(() => {
+    return !Array.from(transitions.values()).some(ref => ref.value)
+  })
+
   const mainStyles = computed(() => {
     const layer = layers.value[layers.value.length - 1].layer
 
@@ -158,6 +165,7 @@ export function createLayout (props: { layout?: string[], overlaps?: string[], f
       paddingRight: convertToUnit(layer.right),
       paddingTop: convertToUnit(layer.top),
       paddingBottom: convertToUnit(layer.bottom),
+      ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
     }
   })
 
@@ -185,12 +193,14 @@ export function createLayout (props: { layout?: string[], overlaps?: string[], f
       position: Ref<Position>,
       layoutSize: Ref<number | string>,
       elementSize: Ref<number | string>,
-      active: Ref<boolean>
+      active: Ref<boolean>,
+      disableTransitions?: Ref<boolean>
     ) => {
       priorities.set(id, priority)
       positions.set(id, position)
       layoutSizes.set(id, layoutSize)
       activeItems.set(id, active)
+      disableTransitions && transitions.set(id, disableTransitions)
       registered.value.push(id)
 
       return computed(() => {
@@ -221,6 +231,7 @@ export function createLayout (props: { layout?: string[], overlaps?: string[], f
           width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : `${elementSize.value}px`,
           zIndex: layers.value.length - index,
           transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -110) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}%)`,
+          ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
         }
       })
     },
@@ -229,6 +240,7 @@ export function createLayout (props: { layout?: string[], overlaps?: string[], f
       positions.delete(id)
       layoutSizes.delete(id)
       activeItems.delete(id)
+      transitions.delete(id)
       registered.value = registered.value.filter(v => v !== id)
     },
     mainStyles,
