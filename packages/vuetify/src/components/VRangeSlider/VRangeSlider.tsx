@@ -13,7 +13,6 @@ import { computed, defineComponent, ref } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
-import { getUid } from '@/util'
 import { filterInputProps, makeVInputProps } from '../VInput/VInput'
 
 export const VRangeSlider = defineComponent({
@@ -96,8 +95,6 @@ export const VRangeSlider = defineComponent({
 
     return () => {
       const [inputProps, _] = filterInputProps(props)
-      const id = attrs.id as string ?? `input-${getUid()}`
-      const name = attrs.name as string ?? id
 
       return (
         <VInput
@@ -116,15 +113,15 @@ export const VRangeSlider = defineComponent({
           focused={ isFocused.value }
           v-slots={{
             ...slots,
-            default: () => (
+            default: ({ id }) => (
               <div
                 class="v-slider__container"
                 onMousedown={ onSliderMousedown }
                 onTouchstartPassive={ onSliderTouchstart }
               >
                 <input
-                  id={ `${id}_start` }
-                  name={ name }
+                  id={ `${id.value}_start` }
+                  name={ props.name || id.value }
                   disabled={ props.disabled }
                   readonly={ props.readonly }
                   tabindex="-1"
@@ -132,8 +129,8 @@ export const VRangeSlider = defineComponent({
                 />
 
                 <input
-                  id={ `${id}_stop` }
-                  name={ name }
+                  id={ `${id.value}_stop` }
+                  name={ props.name || id.value }
                   disabled={ props.disabled }
                   readonly={ props.readonly }
                   tabindex="-1"

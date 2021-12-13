@@ -12,7 +12,7 @@ import { useFocus } from '@/composables/focus'
 import { makeSliderProps, useSlider } from './slider'
 
 // Helpers
-import { defineComponent, getUid } from '@/util'
+import { defineComponent } from '@/util'
 
 // Types
 import { computed, ref } from 'vue'
@@ -73,8 +73,6 @@ export const VSlider = defineComponent({
 
     return () => {
       const [inputProps, _] = filterInputProps(props)
-      const id = attrs.id as string ?? `input-${getUid()}`
-      const name = attrs.name as string ?? id
 
       return (
         <VInput
@@ -91,15 +89,15 @@ export const VSlider = defineComponent({
           focused={ isFocused.value }
           v-slots={{
             ...slots,
-            default: () => (
+            default: ({ id }) => (
               <div
                 class="v-slider__container"
                 onMousedown={ onSliderMousedown }
                 onTouchstartPassive={ onSliderTouchstart }
               >
                 <input
-                  id={ id }
-                  name={ name }
+                  id={ id.value }
+                  name={ props.name || id.value }
                   disabled={ props.disabled }
                   readonly={ props.readonly }
                   tabindex="-1"
