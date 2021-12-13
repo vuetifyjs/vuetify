@@ -41,6 +41,7 @@ export const VSlider = defineComponent({
     const {
       min,
       max,
+      mousePressed,
       roundValue,
       onSliderMousedown,
       onSliderTouchstart,
@@ -82,6 +83,7 @@ export const VSlider = defineComponent({
             {
               'v-slider--has-labels': !!slots['tick-label'] || hasLabels.value,
               'v-slider--focused': isFocused.value,
+              'v-slider--pressed': mousePressed.value,
               'v-slider--disabled': props.disabled,
             },
           ]}

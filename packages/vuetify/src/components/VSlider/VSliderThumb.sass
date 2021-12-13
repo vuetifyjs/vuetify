@@ -117,13 +117,19 @@
 
 // Modifiers
 .v-slider-thumb--focused, .v-slider-thumb:hover
-  .v-slider-thumb__surface:before
+  .v-slider-thumb__surface::before
     transform: scale(2)
 
 .v-slider-thumb--focused
-  .v-slider-thumb__surface:before
+  .v-slider-thumb__surface::before
       opacity: $slider-thumb-focus-opacity
 
+.v-slider-thumb--pressed
+  transition: none
+
+  .v-slider-thumb__surface::before
+    opacity: $slider-thumb-pressed-opacity
+
 .v-slider-thumb:hover:not(.v-slider-thumb--focused)
-  .v-slider-thumb__surface:before
-      opacity: $slider-thumb-hover-opacity
+  .v-slider-thumb__surface::before
+    opacity: $slider-thumb-hover-opacity

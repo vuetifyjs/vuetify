@@ -57,13 +57,13 @@ export const VSliderThumb = defineComponent({
       disabled,
       thumbSize,
       thumbLabel,
-      transition,
       direction,
       label,
       readonly,
       elevation,
       isReversed,
       horizontalDirection,
+      mousePressed,
     } = slider
 
     const { textColorClasses, textColorStyles } = useTextColor(thumbColor)
@@ -118,10 +118,10 @@ export const VSliderThumb = defineComponent({
             'v-slider-thumb',
             {
               'v-slider-thumb--focused': props.focused,
+              'v-slider-thumb--pressed': props.focused && mousePressed.value,
             },
           ]}
           style={{
-            transition: transition.value,
             [`inset-${inset}-start`]: `calc(${positionPercentage} - var(--v-slider-thumb-size) / 2)`,
             '--v-slider-thumb-size': convertToUnit(thumbSize.value),
             direction: !vertical.value ? horizontalDirection.value : undefined,

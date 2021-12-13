@@ -34,7 +34,6 @@ export const VSliderTrack = defineComponent({
     if (!slider) throw new Error('[Vuetify] v-slider-track must be inside v-slider or v-range-slider')
 
     const {
-      transition,
       trackColor,
       trackFillColor,
       vertical,
@@ -64,7 +63,6 @@ export const VSliderTrack = defineComponent({
 
     const backgroundStyles = computed(() => {
       return {
-        transition: transition.value,
         [startDir.value]: '0%',
         [endDir.value]: '100%',
       }
@@ -74,7 +72,6 @@ export const VSliderTrack = defineComponent({
 
     const trackFillStyles = computed(() => {
       return {
-        transition: transition.value,
         [startDir.value]: convertToUnit(props.start, '%'),
         [endDir.value]: convertToUnit(trackFillWidth.value, '%'),
       }

@@ -27,6 +27,7 @@ type SliderProvide = {
   label: Ref<string | undefined>
   min: Ref<number>
   max: Ref<number>
+  mousePressed: Ref<boolean>
   numTicks: Ref<number>
   onSliderMousedown: (e: MouseEvent) => void
   onSliderTouchstart: (e: TouchEvent) => void
@@ -39,7 +40,6 @@ type SliderProvide = {
   showTicks: Ref<boolean | 'always'>
   startOffset: Ref<number>
   stepSize: Ref<number>
-  transition: Ref<string | undefined>
   thumbSize: Ref<number>
   thumbColor: Ref<string | undefined>
   trackColor: Ref<string | undefined>
@@ -181,7 +181,6 @@ export const useSlider = ({
   const trackFillColor = computed(() => props.disabled ? undefined : props.trackFillColor ?? props.color)
 
   const mousePressed = ref(false)
-  const transition = computed(() => mousePressed.value ? 'none' : undefined)
 
   const startOffset = ref(0)
   const trackContainerRef = ref<VSliderTrack | undefined>()
@@ -326,6 +325,7 @@ export const useSlider = ({
     label: toRef(props, 'label'),
     min,
     max,
+    mousePressed,
     numTicks,
     onSliderMousedown,
     onSliderTouchstart,
@@ -339,7 +339,6 @@ export const useSlider = ({
     showTicks: toRef(props, 'showTicks'),
     startOffset,
     stepSize,
-    transition,
     thumbSize,
     thumbColor,
     thumbLabel: toRef(props, 'thumbLabel'),
