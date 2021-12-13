@@ -12,7 +12,7 @@ import { useFocus } from '@/composables/focus'
 import { computed, defineComponent, ref } from 'vue'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, WritableComputedRef } from 'vue'
 import { filterInputProps, makeVInputProps } from '../VInput/VInput'
 
 export const VRangeSlider = defineComponent({
@@ -38,8 +38,11 @@ export const VRangeSlider = defineComponent({
     const focusedThumb = ref<VSliderThumb | null>()
     const inputRef = ref<VInput>()
 
+    let canSwitch = false
     function getActiveThumb (e: MouseEvent | TouchEvent) {
       if (!startThumbRef.value || !stopThumbRef.value) return
+
+      canSwitch = true
 
       const startOffset = getOffset(e, startThumbRef.value.$el, props.direction)
       const stopOffset = getOffset(e, stopThumbRef.value.$el, props.direction)
@@ -61,21 +64,24 @@ export const VRangeSlider = defineComponent({
       position,
       hasLabels,
     } = useSlider({
+      /* eslint-disable @typescript-eslint/no-use-before-define */
       props,
       handleSliderMouseUp: newValue => {
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         model.value = focusedThumb.value === startThumbRef.value ? [newValue, model.value[1]] : [model.value[0], newValue]
       },
       handleMouseMove: newValue => {
         if (focusedThumb.value === startThumbRef.value) {
-          // eslint-disable-next-line @typescript-eslint/no-use-before-define
           model.value = [Math.min(newValue, model.value[1]), model.value[1]]
         } else {
-          // eslint-disable-next-line @typescript-eslint/no-use-before-define
           model.value = [model.value[0], Math.max(model.value[0], newValue)]
         }
+        if (canSwitch && model.value[0] === model.value[1]) {
+          focusedThumb.value = newValue > model.value[0] ? stopThumbRef.value : startThumbRef.value
+        }
+        canSwitch = false
       },
       getActiveThumb,
+      /* eslint-enable @typescript-eslint/no-use-before-define */
     })
 
     const model = useProxiedModel(
@@ -87,7 +93,7 @@ export const VRangeSlider = defineComponent({
 
         return arr.map(value => roundValue(value))
       },
-    )
+    ) as WritableComputedRef<[number, number]>
 
     const { isFocused, focus, blur } = useFocus()
     const trackStart = computed(() => position(model.value[0]))
