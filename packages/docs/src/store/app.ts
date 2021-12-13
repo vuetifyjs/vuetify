@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 
 export type RootState = {
-  drawer: boolean
+  drawer: boolean | null
 }
 
 export const useAppStore = defineStore({
   id: 'app',
   state: () => ({
-    drawer: true,
+    drawer: null,
     settings: false,
   } as RootState),
 })

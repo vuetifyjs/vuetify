@@ -5,7 +5,15 @@
     class="v-bar--underline"
     flat
   >
-    <app-bar-logo :alt="lgAndUp" />
+    <app-bar-logo
+      :alt="lgAndUp"
+      class="ml-4 mr-2"
+    />
+
+    <v-app-bar-nav-icon
+      class="hidden-lg-and-up"
+      @click="app.drawer = !app.drawer"
+    />
 
     <v-spacer />
 
@@ -36,6 +44,7 @@
   // Utilities
   import { defineComponent } from 'vue'
   import { useDisplay } from 'vuetify'
+  import { useAppStore } from '@/store/app'
 
   import AppBarLogo from './Logo.vue'
   import AppBarLearnMenu from './LearnMenu.vue'
@@ -66,11 +75,13 @@
 
     setup () {
       const { lgAndUp, smAndUp, mdAndUp } = useDisplay()
+      const app = useAppStore()
 
       // data
       const dark = false
 
       return {
+        app,
         dark,
         lgAndUp,
         mdAndUp,
