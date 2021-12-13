@@ -223,3 +223,5 @@ export const VRangeSlider = defineComponent({
     }
   },
 })
+
+export type VRangeSlider = InstanceType<typeof VRangeSlider>

@@ -136,3 +136,5 @@ export const VSlider = defineComponent({
     }
   },
 })
+
+export type VSlider = InstanceType<typeof VSlider>

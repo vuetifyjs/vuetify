@@ -162,5 +162,4 @@ export const VSliderTrack = defineComponent({
   },
 })
 
-/* eslint-disable-next-line @typescript-eslint/no-redeclare */
 export type VSliderTrack = InstanceType<typeof VSliderTrack>

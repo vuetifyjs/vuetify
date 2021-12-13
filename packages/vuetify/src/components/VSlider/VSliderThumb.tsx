@@ -176,5 +176,4 @@ export const VSliderThumb = defineComponent({
   },
 })
 
-/* eslint-disable-next-line @typescript-eslint/no-redeclare */
 export type VSliderThumb = InstanceType<typeof VSliderThumb>
