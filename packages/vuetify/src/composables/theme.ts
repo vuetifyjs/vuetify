@@ -102,6 +102,8 @@ const defaultThemeOptions: ThemeOptions = {
       colors: {
         background: '#FFFFFF',
         surface: '#FFFFFF',
+        'surface-variant': '#424242',
+        'on-surface-variant': '#EEEEEE',
         primary: '#6200EE',
         'primary-darken-1': '#3700B3',
         secondary: '#03DAC6',
@@ -134,6 +136,8 @@ const defaultThemeOptions: ThemeOptions = {
       colors: {
         background: '#121212',
         surface: '#212121',
+        'surface-variant': '#BDBDBD',
+        'on-surface-variant': '#424242',
         primary: '#BB86FC',
         'primary-darken-1': '#3700B3',
         secondary: '#03DAC5',

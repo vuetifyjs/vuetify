@@ -9,11 +9,14 @@
 
 // Theme
 .v-slider-thumb
-  color: darkgrey
+  color: rgb(var(--v-theme-surface-variant))
 
 .v-slider-thumb__label
-  background: darkgrey
-  color: #fff
+  background: rgba(var(--v-theme-surface-variant), .7)
+  color: rgb(var(--v-theme-on-surface-variant))
+
+  &::before
+    color: rgba(var(--v-theme-surface-variant), .7)
 
 // Block
 .v-slider-thumb
@@ -29,7 +32,7 @@
   user-select: none
   background-color: currentColor
 
-  &:before
+  &::before
     transition: 0.3s settings.$standard-easing
     content: ''
     color: inherit
@@ -65,13 +68,12 @@
   position: absolute
   user-select: none
   transition: $slider-thumb-label-transition
-  opacity: 0.7
 
   &::before
     content: ''
-    background: inherit
+    width: 0
+    height: 0
     position: absolute
-    transform: rotate(45deg)
 
 .v-slider-thumb__ripple
   position: absolute
@@ -96,9 +98,10 @@
     bottom: $slider-thumb-label-offset
 
     &::before
-      width: $slider-thumb-label-wedge-size
-      height: $slider-thumb-label-wedge-size
-      bottom: math.div($slider-thumb-label-wedge-size, -2)
+      border-left: $slider-thumb-label-wedge-size solid transparent
+      border-right: $slider-thumb-label-wedge-size solid transparent
+      border-top: $slider-thumb-label-wedge-size solid currentColor
+      bottom: -$slider-thumb-label-wedge-size
 
 // Vertical
 .v-slider.v-input--vertical
@@ -111,9 +114,10 @@
     left: $slider-thumb-label-offset
 
     &::before
-      width: $slider-thumb-label-wedge-size
-      height: $slider-thumb-label-wedge-size
-      left: math.div($slider-thumb-label-wedge-size, -2)
+      border-right: $slider-thumb-label-wedge-size solid currentColor
+      border-top: $slider-thumb-label-wedge-size solid transparent
+      border-bottom: $slider-thumb-label-wedge-size solid transparent
+      left: -$slider-thumb-label-wedge-size
 
 // Modifiers
 .v-slider-thumb--focused, .v-slider-thumb:hover
