@@ -126,7 +126,7 @@ export const VField = genericComponent<new <T>() => {
     const inputRef = ref<HTMLInputElement>()
     const isFocused = ref(false)
     const id = computed(() => props.id || `input-${uid}`)
-    const hasLabel = computed(() => !props.singleLine && !!props.label)
+    const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
 
     watchEffect(() => isActive.value = isFocused.value || props.dirty)
 
