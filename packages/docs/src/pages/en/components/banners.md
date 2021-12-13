@@ -4,28 +4,29 @@ meta:
   description: The banner component displays an important and concise message for a user to address. It can also indicate actions that the user can take.
   keywords: banners, vuetify banner component, vue banner component
 related:
-  - /components/alerts/
-  - /components/icons/
-  - /components/snackbars/
+  - /components/alerts
+  - /components/icons
+  - /components/snackbars
+nav: Banners
 ---
 
 # Banners
 
 The `v-banner` component is used as a middle-interrupting message to the user with one to two actions. It comes in two variations **single-line** and **multi-line** (implicit). These can have icons and actions that you can use with your message. Note that only one banner should be shown at a time.
 
-<entry-ad />
+<!-- <entry-ad /> -->
 
 ## Usage
 
 Banners can contain one to two lines of text, to which actions and icons can be added.
 
-<usage name="v-banner" />
+<!-- <usage name="v-banner" /> -->
 
 ## API
 
-- [v-banner](/api/v-banner)
+<api-links />
 
-<inline-api page="components/banners" />
+<!-- <api-section name="v-banner" /> -->
 
 ## Examples
 

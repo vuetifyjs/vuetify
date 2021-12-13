@@ -4,9 +4,10 @@ meta:
   description: The item group components provides the ability to create a group of selectable items out of any component.
   keywords: item groups, vuetify item group component, vue item group component
 related:
-  - /components/button-groups/
-  - /components/carousels/
-  - /components/tabs/
+  - /components/button-groups
+  - /components/carousels
+  - /components/tabs
+nav: Item groups
 ---
 
 # Item groups
@@ -19,14 +20,13 @@ The `v-item-group` provides the ability to create a group of selectable items ou
 
 The core usage of the `v-item-group` is to create groups of anything that should be controlled by a **model**.
 
-<example file="v-item-group/usage" />
+<!-- <example file="v-item-group/usage" /> -->
 
 ## API
 
-- [v-item](/api/v-item)
-- [v-item-group](/api/v-item-group)
+<api-links />
 
-<inline-api page="components/item-groups" />
+<api-inline />
 
 <!-- ## Sub-components
 

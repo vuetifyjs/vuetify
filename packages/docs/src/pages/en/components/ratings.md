@@ -4,9 +4,10 @@ meta:
   description: The star rating component is a specialized widget for collecting user feedback via ratings.
   keywords: star ratings, vuetify star rating component, vue star rating component, rating component
 related:
-  - /components/cards/
-  - /components/icons/
-  - /components/lists/
+  - /components/cards
+  - /components/icons
+  - /components/lists
+nav: Ratings
 ---
 
 # Ratings
@@ -25,9 +26,9 @@ The `v-rating` component provides a simple interface for gathering user feedback
 
 ## API
 
-- [v-rating](/api/v-rating)
+<api-links />
 
-<inline-api page="components/ratings" />
+<api-inline />
 
 ## Examples
 
@@ -115,11 +116,11 @@ Any arbitrary content could be displayed for labels in **item-label** slot.
 
 ### Misc
 
-#### Advanced usage
+<!-- #### Advanced usage
 
 The `v-rating` component fits right in with existing components. Build truly complex examples with rich features and beautiful designs.
 
-<example file="v-rating/misc-advanced" />
+<example file="v-rating/misc-advanced" /> -->
 
 #### Card ratings
 

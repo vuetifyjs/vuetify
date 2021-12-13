@@ -5,16 +5,16 @@ import { setupLayouts } from 'virtual:generated-layouts'
 import App from './App.vue'
 
 // plugins
-import { useI18n } from './plugins-v3/i18n'
-// import { usePwa } from './plugins-v3/pwa'
-import { usePinia, pinia } from './plugins-v3/pinia'
-import { useVuetify } from './plugins-v3/vuetify'
-import { useLocaleStore } from './store-v3/locale'
+import { useI18n } from './plugins/i18n'
+// import { usePwa } from './plugins/pwa'
+import { pinia, usePinia } from './plugins/pinia'
+import { useVuetify } from './plugins/vuetify'
+import { useLocaleStore } from './store/locale'
 
 // styles
 import 'prism-theme-vars/base.css'
-import { useUserStore } from './store-v3/user'
-import { useGlobalComponents } from './plugins-v3/global-components'
+import { useUserStore } from './store/user'
+import { useGlobalComponents } from './plugins/global-components'
 
 const routes = setupLayouts(generatedRoutes)
 

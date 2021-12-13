@@ -1,10 +1,8 @@
 <template>
   <v-alert
-    border="left"
-    class="v-alert--doc"
-    text
-    v-bind="$attrs"
-    v-on="$listeners"
+    border="start"
+    class="v-alert--doc mb-4"
+    variant="outlined"
   >
     <slot />
   </v-alert>

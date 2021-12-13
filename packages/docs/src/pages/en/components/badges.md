@@ -4,16 +4,17 @@ meta:
   description: The badge component is a small status descriptor for elements. This typically contains a small number or short set of characters.
   keywords: badges, vuetify badge component, vue badge component
 related:
-  - /components/avatars/'
-  - /components/icons/'
-  - /components/toolbars/'
+  - /components/avatars
+  - /components/icons
+  - /components/toolbars
+nav: Badges
 ---
 
 # Badges
 
 The `v-badge` component superscripts or subscripts an avatar-like icon or text onto content to highlight information to a user or to just draw attention to a specific element. Content within the badge usually contains numbers or icons.
 
-<entry-ad />
+<!-- <entry-ad /> -->
 
 <!--
 
@@ -27,9 +28,9 @@ Badges in their simplest form display to the upper right of the content that it 
 
 ## API
 
-- [v-badge](/api/v-badge)
+<api-links />
 
-<inline-api page="components/badges" />
+<!-- <api-section page="components/badges" /> -->
 
 ## Examples
 

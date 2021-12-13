@@ -4,9 +4,10 @@ meta:
   description: The responsive component is used as a wrapper component to force custom aspect ratios for its children.
   keywords: ratio, responsive, aspect ratios
 related:
-  - /components/cards/
-  - /components/sheets/
-  - /components/images/
+  - /components/cards
+  - /components/sheets
+  - /components/images
+nav: Aspect ratios
 ---
 
 # Aspect ratios
@@ -23,8 +24,8 @@ Specify a custom aspect-ratio
 
 ## API
 
-- [v-responsive](/api/v-responsive)
+<api-links />
 
-<inline-api page="components/aspect-ratios" />
+<api-inline />
 
 <backmatter />

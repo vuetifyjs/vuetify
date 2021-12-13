@@ -7,13 +7,14 @@ related:
   - /components/buttons/
   - /components/icons/
   - /components/toolbars/
+nav: App bars
 ---
 
 # App bars
 
 The `v-app-bar` component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation. The app-bar component works great in conjunction with a [v-navigation-drawer](/components/navigation-drawers) for providing site navigation in your application.
 
-<entry-ad />
+<!-- <entry-ad /> -->
 
 ## Usage
 
@@ -23,11 +24,9 @@ The `v-app-bar` component is used for application-wide actions and information.
 
 ## API
 
-- [v-app-bar](/api/v-app-bar)
-- [v-app-bar-nav-icon](/api/v-app-bar-nav-icon)
-- [v-app-bar-title](/api/v-app-bar-title)
+<api-links />
 
-<inline-api page="components/app-bars" />
+<!-- <api-section page="components/app-bars" /> -->
 
 ## Sub-components
 
@@ -119,4 +118,4 @@ Using the functional component `v-app-bar-nav-icon` you can toggle the state of 
 
 <example file="v-app-bar/misc-app-bar-nav" />
 
-<backmatter />
+<!-- <backmatter /> -->

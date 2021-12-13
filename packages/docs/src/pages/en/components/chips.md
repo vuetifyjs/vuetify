@@ -4,9 +4,10 @@ meta:
   description: The chip component allows a user to enter information, make selections, filter content or trigger actions.
   keywords: chips, vuetify chip component, vue chip component
 related:
-  - /components/avatars/
-  - /components/icons/
-  - /components/selects/
+  - /components/avatars
+  - /components/icons
+  - /components/selects
+nav: Chips
 ---
 
 # Chips
@@ -19,13 +20,13 @@ The `v-chip` component is used to convey small pieces of information. Using the 
 
 Chips come in the following variations: closeable, filter, outlined, pill. The default slot of `v-chip` will also accept avatars and icons alongside text.
 
-<usage name="v-chip" />
+<!-- <usage name="v-chip" /> -->
 
 ## API
 
-- [v-chip](/api/v-chip)
+<api-links />
 
-<inline-api page="components/chips" />
+<api-inline />
 
 ## Examples
 
@@ -49,11 +50,11 @@ Any color from the Material Design palette can be used to change a chips color.
 
 <example file="v-chip/prop-draggable" />
 
-#### Filter
+<!-- #### Filter
 
 `v-chip` component has `filter` option which shows an additional icon to you if chip is active. It can be customized using `filter-icon`.
 
-<example file="v-chip/prop-filter" />
+<example file="v-chip/prop-filter" /> -->
 
 #### Label
 

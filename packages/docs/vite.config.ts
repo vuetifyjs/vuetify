@@ -145,7 +145,7 @@ export default defineConfig({
 
     // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
     Layouts({
-      layoutsDir: 'src/layouts-v3',
+      layoutsDir: 'src/layouts',
     }),
 
     // https://github.com/antfu/vite-plugin-md
@@ -159,7 +159,7 @@ export default defineConfig({
     Pages({
       extensions: ['vue', 'md'],
       pagesDir: [
-        { dir: 'src/pages-v3', baseRoute: '' },
+        { dir: 'src/pages', baseRoute: '' },
         { dir: 'src/api', baseRoute: 'api' },
       ],
       extendRoute (route) {

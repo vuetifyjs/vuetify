@@ -4,9 +4,10 @@ meta:
   description: The v-card component is a versatile and enhanced sheet of paper that provides a simple interface for headings, text, images, and actions.
   keywords: cards, vuetify card component, vue card component, v-card
 related:
-  - /components/buttons/
-  - /components/images/
-  - /styles/text-and-typography/
+  - /components/buttons
+  - /components/images
+  - /styles/text-and-typography
+nav: Cards
 ---
 
 # Cards
@@ -17,21 +18,13 @@ related:
 
 ## Usage
 
-<usage name="v-card" />
+<!-- <usage name="v-card" /> -->
 
 ## API
 
-* [v-card-actions](/api/v-card-actions/)
-* [v-card-avatar](/api/v-card-avatar/)
-* [v-card-header](/api/v-card-header/)
-* [v-card-header-text](/api/v-card-header-text/)
-* [v-card-img](/api/v-card-img/)
-* [v-card-media](/api/v-card-media/)
-* [v-card-subtitle](/api/v-card-subtitle/)
-* [v-card-text](/api/v-card-text/)
-* [v-card-title](/api/v-card-title/)
+<api-links />
 
-<inline-api page="components/cards" />
+<api-inline />
 
 ## Functional Components
 

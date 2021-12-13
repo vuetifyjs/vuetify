@@ -1,8 +1,8 @@
 ---
+title: Get started with Vuetify 3 Alpha
 meta:
-  title: Get started with Vuetify 3 Alpha
-  description: Details for v3 alpha release - faq, changes, and upgrading.
-  keywords: migration, releases, upgrading vuetify, alpha, v3
+  - description: Details for v3 alpha release - faq, changes, and upgrading.
+    keywords: migration, releases, upgrading vuetify, alpha, v3
 related:
   - /getting-started/contributing/
   - /introduction/roadmap/
@@ -14,11 +14,11 @@ nav: Installation
 
 Vuetify 3 Alpha is here! Below is a collection of information to help you get started and answer some frequently asked questions regarding the alpha.
 
-<alert type="error">
+<!-- <alert type="error"> -->
 
   Before proceeding, it is important to note that this installation is intended primarily for testing purposes, and should not be considered for production applications.
 
-</alert>
+<!-- </alert> -->
 
 ## Installation
 
@@ -34,12 +34,12 @@ Once installed, generate a project with the following command using the **vue-cl
 vue create my-app
 ```
 
-When prompted, choose `Vue 3`:
+When prompted, choose **Vue 3** (possibly **Vue 3 Preview** depending on the exact version of vue-cli):
 
 ```bash
-? Please pick a preset:
+? Please pick a preset: (Use arrow keys)
     Default ([Vue 2] babel, eslint)
-  > Default (Vue 3) ([Vue 3] babel, eslint)
+  ❯ Default (Vue 3) ([Vue 3] babel, eslint)
     Manually select features
 ```
 
@@ -52,15 +52,15 @@ cd my-app
 vue add vuetify
 ```
 
-Once prompted, choose `Vuetify 3 Preview (Vuetify 3)`:
+Once prompted, choose `Vuetify 3 Preview`:
 
 ```bash
-? Choose a preset: (Use arrow keys)
+? Choose a preset:
   Configure (advanced)
   Default (recommended)
   Vite Preview (Vuetify 3 + Vite)
   Prototype (rapid development)
-> Vuetify 3 Preview (Vuetify 3)
+❯ Vuetify 3 Preview (Vuetify 3)
 ```
 
 ### Vite
@@ -69,29 +69,29 @@ Installing Vuetify 3 using vite can be done using [vue-cli](#vue-cli). To start,
 
 ```bash
 # npm 6.x
-npm init vite --template vue
+npm init @vitejs/app my-app --template vue
 
 # npm 7+, extra double-dash is needed:
-npm init vite -- --template vue
+npm init @vitejs/app my-app -- --template vue
 
 # yarn
-yarn create vite --template vue
+yarn create @vitejs/app my-app --template vue
 ```
 
 Next, navigate to your project directory and add Vuetify to your project:
 
 ```bash
-cd vite-project
+cd my-app
 vue add vuetify
 ```
 
-Once prompted, choose `Vite Preview (Vuetify 3 + Vite)`:
+Once prompted, choose **Preview (Vuetify 3 + Vite)**:
 
 ```bash
-? Choose a preset: (Use arrow keys)
+? Choose a preset:
   Configure (advanced)
   Default (recommended)
-> Vite Preview (Vuetify 3 + Vite)
+❯ Vite Preview (Vuetify 3 + Vite)
   Prototype (rapid development)
   Vuetify 3 Preview (Vuetify 3)
 ```
@@ -146,14 +146,14 @@ For bugs related to the Alpha, please create an issue via our [Issue Generator](
 - Vuetify components and functions available in the Alpha
 - Documentation content
 
-<alert type="info">
+<!-- <alert type="info"> -->
 
   We ask that documentation issues remain related to content only. The `next` documentation is a work in progress and not fully updated to Vue 3. Some features may be missing or not functioning and will be constantly worked on as new components and functionality becomes available. We will begin fielding these bugs closer to Phase 3 as things become stable.
 
-</alert>
+<!-- </alert> -->
 
 ## How to connect with Vuetify team
 
 The Vuetify team can be reached via [Discord Community](https://community.vuetifyjs.com/). If you have questions or would like to discuss Vuetify 3, come visit the #v3-discussion channel.
 
-<backmatter />
+<!-- <backmatter /> -->
