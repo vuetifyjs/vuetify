@@ -126,6 +126,7 @@ export const VField = genericComponent<new <T>() => {
     const inputRef = ref<HTMLInputElement>()
     const isFocused = ref(false)
     const id = computed(() => props.id || `input-${uid}`)
+    const hasLabel = computed(() => !props.singleLine && !!props.label)
 
     watchEffect(() => isActive.value = isFocused.value || props.dirty)
 
@@ -140,7 +141,7 @@ export const VField = genericComponent<new <T>() => {
     }))
 
     watch(isActive, val => {
-      if (!props.singleLine && props.label) {
+      if (hasLabel.value) {
         const el: HTMLElement = labelRef.value!.$el
         const targetEl: HTMLElement = floatingLabelRef.value!.$el
         const rect = nullifyTransforms(el)
@@ -274,7 +275,7 @@ export const VField = genericComponent<new <T>() => {
                 ) }
 
                 <div class="v-field__field">
-                  { ['contained', 'filled'].includes(props.variant) && !props.singleLine && label && (
+                  { ['contained', 'filled'].includes(props.variant) && hasLabel.value && (
                     <VFieldLabel ref={ floatingLabelRef } floating>
                       { label }
                     </VFieldLabel>
@@ -331,7 +332,7 @@ export const VField = genericComponent<new <T>() => {
                     <>
                       <div class="v-field__outline__start" />
 
-                      { !props.singleLine && label && (
+                      { hasLabel.value && (
                           <div class="v-field__outline__notch">
                             <VFieldLabel ref={ floatingLabelRef } floating>
                               { label }
@@ -343,7 +344,7 @@ export const VField = genericComponent<new <T>() => {
                     </>
                   ) }
 
-                  { ['plain', 'underlined'].includes(props.variant) && !props.singleLine && label && (
+                  { ['plain', 'underlined'].includes(props.variant) && hasLabel.value && (
                     <VFieldLabel ref={ floatingLabelRef } floating>
                       { label }
                     </VFieldLabel>
