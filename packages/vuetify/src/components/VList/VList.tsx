@@ -14,13 +14,14 @@ import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
+import { createList } from './list'
 
 // Utilities
-import { computed, inject, provide, ref, toRef } from 'vue'
+import { computed, toRef } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { InjectionKey, Prop, Ref } from 'vue'
+import type { Prop } from 'vue'
 import type { MakeSlots } from '@/util'
 import type { ListGroupHeaderSlot } from './VListGroup'
 
@@ -45,34 +46,6 @@ const parseItems = (items?: ListItem[]): InternalListItem[] | undefined => {
 
     return { type: 'item', props, children: parseItems($children) }
   })
-}
-
-// Depth
-export const DepthKey: InjectionKey<Ref<number>> = Symbol.for('vuetify:depth')
-
-// List
-export const ListKey: InjectionKey<{
-  hasPrepend: Ref<boolean>
-  updateHasPrepend: (value: boolean) => void
-}> = Symbol.for('vuetify:list')
-
-export const createList = () => {
-  const parent = inject(ListKey, { hasPrepend: ref(false), updateHasPrepend: () => null })
-
-  const data = {
-    hasPrepend: ref(false),
-    updateHasPrepend: (value: boolean) => {
-      if (value) data.hasPrepend.value = value
-    },
-  }
-
-  provide(ListKey, data)
-
-  return parent
-}
-
-export const useList = () => {
-  return inject(ListKey, null)
 }
 
 export const VList = genericComponent<new <T>() => {

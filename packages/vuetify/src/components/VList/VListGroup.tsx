@@ -5,11 +5,11 @@ import { VListChildren } from './VListChildren'
 // Composables
 import { useNestedGroup } from '@/composables/nested/nested'
 import { makeTagProps } from '@/composables/tag'
+import { createList, useList } from './list'
 
 // Utilities
 import { computed } from 'vue'
 import { defineComponent, genericComponent } from '@/util'
-import { createList, useList } from './VList'
 
 // Types
 import type { Prop } from 'vue'
