@@ -52,7 +52,7 @@ export const VSliderThumb = defineComponent({
 
     const {
       thumbColor,
-      stepSize,
+      step,
       vertical,
       disabled,
       thumbSize,
@@ -72,7 +72,7 @@ export const VSliderThumb = defineComponent({
     const relevantKeys = [pageup, pagedown, end, home, left, right, down, up]
 
     const multipliers = computed(() => {
-      if (stepSize.value) return [1, 2, 3]
+      if (step.value) return [1, 2, 3]
       else return [1, 5, 10]
     })
 
@@ -81,21 +81,21 @@ export const VSliderThumb = defineComponent({
 
       e.preventDefault()
 
-      const step = stepSize.value || 0.1
-      const steps = (props.max - props.min) / step
+      const _step = step.value || 0.1
+      const steps = (props.max - props.min) / _step
       if ([left, right, down, up].includes(e.key)) {
         const increase = isReversed.value ? [left, up] : [right, up]
         const direction = increase.includes(e.key) ? 1 : -1
         const multiplier = e.shiftKey ? 2 : (e.ctrlKey ? 1 : 0)
 
-        value = value + (direction * step * multipliers.value[multiplier])
+        value = value + (direction * _step * multipliers.value[multiplier])
       } else if (e.key === home) {
         value = props.min
       } else if (e.key === end) {
         value = props.max
       } else {
         const direction = e.key === pagedown ? 1 : -1
-        value = value - (direction * step * (steps > 100 ? steps / 10 : 10))
+        value = value - (direction * _step * (steps > 100 ? steps / 10 : 10))
       }
 
       return Math.max(props.min, Math.min(props.max, value))

@@ -39,7 +39,7 @@ type SliderProvide = {
   thumbLabel: Ref<boolean | string | undefined>
   showTicks: Ref<boolean | 'always'>
   startOffset: Ref<number>
-  stepSize: Ref<number>
+  step: Ref<number>
   thumbSize: Ref<number>
   thumbColor: Ref<string | undefined>
   trackColor: Ref<string | undefined>
@@ -84,7 +84,7 @@ export const makeSliderProps = propsFactory({
     type: [Number, String],
     default: 0,
   },
-  stepSize: {
+  step: {
     type: [Number, String],
     default: 0,
   },
@@ -161,9 +161,9 @@ export const useSlider = ({
   })
   const min = computed(() => parseFloat(props.min))
   const max = computed(() => parseFloat(props.max))
-  const stepSize = computed(() => props.stepSize > 0 ? parseFloat(props.stepSize) : 0)
+  const step = computed(() => props.step > 0 ? parseFloat(props.step) : 0)
   const decimals = computed(() => {
-    const trimmedStep = stepSize.value.toString().trim()
+    const trimmedStep = step.value.toString().trim()
     return trimmedStep.includes('.')
       ? (trimmedStep.length - trimmedStep.indexOf('.') - 1)
       : 0
@@ -172,7 +172,7 @@ export const useSlider = ({
   const thumbSize = computed(() => parseInt(props.thumbSize, 10))
   const tickSize = computed(() => parseInt(props.tickSize, 10))
   const trackSize = computed(() => parseInt(props.trackSize, 10))
-  const numTicks = computed(() => (max.value - min.value) / stepSize.value)
+  const numTicks = computed(() => (max.value - min.value) / step.value)
   const disabled = toRef(props, 'disabled')
   const vertical = computed(() => props.direction === 'vertical')
 
@@ -186,11 +186,11 @@ export const useSlider = ({
   const trackContainerRef = ref<VSliderTrack | undefined>()
 
   function roundValue (value: number) {
-    if (stepSize.value <= 0) return value
+    if (step.value <= 0) return value
 
     const clamped = clamp(value, min.value, max.value)
-    const offset = min.value % stepSize.value
-    const newValue = Math.round((clamped - offset) / stepSize.value) * stepSize.value + offset
+    const offset = min.value % step.value
+    const newValue = Math.round((clamped - offset) / step.value) * step.value + offset
 
     return parseFloat(Math.min(newValue, max.value).toFixed(decimals.value))
   }
@@ -296,7 +296,7 @@ export const useSlider = ({
   const parsedTicks = computed<Tick[]>(() => {
     if (!props.ticks) {
       return numTicks.value !== Infinity ? createRange(numTicks.value + 1).map(t => {
-        const value = min.value + (t * stepSize.value)
+        const value = min.value + (t * step.value)
         return {
           value,
           position: position(value),
@@ -338,7 +338,7 @@ export const useSlider = ({
     showTickLabels: toRef(props, 'showTickLabels'),
     showTicks: toRef(props, 'showTicks'),
     startOffset,
-    stepSize,
+    step,
     thumbSize,
     thumbColor,
     thumbLabel: toRef(props, 'thumbLabel'),
