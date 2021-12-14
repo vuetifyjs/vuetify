@@ -11,16 +11,17 @@ import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, pick, propsFactory } from '@/util'
+import { genericComponent, getUid, pick, propsFactory } from '@/util'
 
 // Types
 import type { ComputedRef, ExtractPropTypes, PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
 
-export type VInputSlot = {
+export interface VInputSlot {
+  id: ComputedRef<string>
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
-  isPristine: Ref<boolean | null>
+  isPristine: Ref<boolean>
   isValid: ComputedRef<boolean | null>
   isValidating: Ref<boolean>
   reset: () => void
@@ -29,6 +30,7 @@ export type VInputSlot = {
 }
 
 export const makeVInputProps = propsFactory({
+  id: String,
   appendIcon: String,
   prependIcon: String,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
@@ -38,6 +40,11 @@ export const makeVInputProps = propsFactory({
     default: () => ([]),
   },
   persistentHint: Boolean,
+  direction: {
+    type: String as PropType<'horizontal' | 'vertical'>,
+    default: 'horizontal',
+    validator: (v: any) => ['horizontal', 'vertical'].includes(v),
+  },
 
   ...makeDensityProps(),
   ...makeValidationProps(),
@@ -79,7 +86,11 @@ export const VInput = genericComponent<new <T>() => {
       validationClasses,
     } = useValidation(props, 'v-input')
 
+    const uid = getUid()
+    const id = computed(() => props.id || `input-${uid}`)
+
     const slotProps = computed<VInputSlot>(() => ({
+      id,
       isDisabled,
       isReadonly,
       isPristine,
@@ -111,6 +122,7 @@ export const VInput = genericComponent<new <T>() => {
       return (
         <div class={[
           'v-input',
+          `v-input--${props.direction}`,
           densityClasses.value,
           validationClasses.value,
         ]}
@@ -128,7 +140,9 @@ export const VInput = genericComponent<new <T>() => {
             </div>
           ) }
 
-          { slots.default?.(slotProps.value) }
+          <div class="v-input__control">
+            { slots.default?.(slotProps.value) }
+          </div>
 
           { hasAppend && (
             <div
