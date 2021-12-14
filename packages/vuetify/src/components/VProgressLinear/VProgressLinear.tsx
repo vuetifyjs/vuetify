@@ -64,7 +64,7 @@ export const VProgressLinear = defineComponent({
     const { textColorClasses, textColorStyles } = useTextColor(props, 'color')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => props.bgColor || props.color))
     const { backgroundColorClasses: barColorClasses, backgroundColorStyles: barColorStyles } = useBackgroundColor(props, 'color')
-    const { roundedClasses } = useRounded(props, 'v-progress-linear')
+    const { roundedClasses } = useRounded(props)
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
 
     const max = computed(() => parseInt(props.max, 10))

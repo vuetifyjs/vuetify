@@ -1,6 +1,6 @@
 // Utilities
 import { computed, isRef } from 'vue'
-import { propsFactory } from '@/util'
+import { getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -24,7 +24,10 @@ export const makeRoundedProps = propsFactory({
   },
 }, 'rounded')
 
-export function useRounded (props: RoundedProps | Ref<RoundedValue>, name: string): RoundedData {
+export function useRounded (
+  props: RoundedProps | Ref<RoundedValue>,
+  name = getCurrentInstanceName(),
+): RoundedData {
   const roundedClasses = computed(() => {
     const rounded = isRef(props) ? props.value : props.rounded
     const classes: string[] = []

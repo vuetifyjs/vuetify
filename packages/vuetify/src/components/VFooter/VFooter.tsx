@@ -29,11 +29,11 @@ export const VFooter = defineComponent({
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(props, 'v-footer')
+    const { borderClasses } = useBorder(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props, 'v-footer')
-    const { roundedClasses } = useRounded(props, 'v-footer')
+    const { positionClasses, positionStyles } = usePosition(props)
+    const { roundedClasses } = useRounded(props)
 
     return () => (
       <props.tag

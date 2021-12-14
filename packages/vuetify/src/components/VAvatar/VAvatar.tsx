@@ -33,9 +33,9 @@ export const VAvatar = defineComponent({
 
   setup (props, { slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const { densityClasses } = useDensity(props, 'v-avatar')
-    const { roundedClasses } = useRounded(props, 'v-avatar')
-    const { sizeClasses, sizeStyles } = useSize(props, 'v-avatar')
+    const { densityClasses } = useDensity(props)
+    const { roundedClasses } = useRounded(props)
+    const { sizeClasses, sizeStyles } = useSize(props)
 
     return () => (
       <props.tag

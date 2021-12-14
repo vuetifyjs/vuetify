@@ -3,7 +3,7 @@ import { useForm } from '@/composables/form'
 
 // Utilities
 import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
-import { getCurrentInstance, getUid, propsFactory } from '@/util'
+import { getCurrentInstance, getCurrentInstanceName, getUid, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -48,7 +48,7 @@ export const makeValidationProps = propsFactory({
 
 export function useValidation (
   props: ValidationProps,
-  name: string,
+  name = getCurrentInstanceName(),
 ) {
   const form = useForm()
   const errorMessages = ref<string[]>([])

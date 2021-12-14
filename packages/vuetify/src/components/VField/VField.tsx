@@ -113,7 +113,7 @@ export const VField = genericComponent<new <T>() => {
 
   setup (props, { attrs, emit, slots }) {
     const { themeClasses } = useTheme(props)
-    const { loaderClasses } = useLoader(props, 'v-field')
+    const { loaderClasses } = useLoader(props)
     const isActive = useProxiedModel(props, 'active')
     const { isFocused, focus, blur } = useFocus()
 

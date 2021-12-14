@@ -24,7 +24,7 @@ export const VTable = defineComponent({
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)
-    const { densityClasses } = useDensity(props, 'v-table')
+    const { densityClasses } = useDensity(props)
 
     return () => (
       <props.tag

@@ -33,7 +33,7 @@ export const VExpansionPanel = defineComponent({
 
   setup (props, { slots }) {
     const groupItem = useGroupItem(props, VExpansionPanelSymbol)
-    const { roundedClasses } = useRounded(props, 'v-expansion-panel')
+    const { roundedClasses } = useRounded(props)
     const { elevationClasses } = useElevation(props)
 
     provide(VExpansionPanelSymbol, groupItem)

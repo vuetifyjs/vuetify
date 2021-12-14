@@ -3,7 +3,7 @@ import { VProgressLinear } from '@/components/VProgressLinear'
 
 // Utilities
 import { computed } from 'vue'
-import { propsFactory } from '@/util'
+import { getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
 import type { SetupContext } from '@vue/runtime-core'
@@ -22,7 +22,10 @@ export const makeLoaderProps = propsFactory({
   loading: Boolean,
 }, 'loader')
 
-export function useLoader (props: LoaderProps, name: string) {
+export function useLoader (
+  props: LoaderProps,
+  name = getCurrentInstanceName(),
+) {
   const loaderClasses = computed(() => ({
     [`${name}--loading`]: props.loading,
   }))

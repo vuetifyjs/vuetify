@@ -50,13 +50,13 @@ export const VBanner = defineComponent({
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(props, 'v-banner')
-    const { densityClasses } = useDensity(props, 'v-banner')
+    const { borderClasses } = useBorder(props)
+    const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { mobile } = useDisplay()
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props, 'v-banner')
-    const { roundedClasses } = useRounded(props, 'v-banner')
+    const { positionClasses, positionStyles } = usePosition(props)
+    const { roundedClasses } = useRounded(props)
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
 
     return () => {

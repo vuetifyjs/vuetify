@@ -45,7 +45,7 @@ export const VProgressCircular = defineComponent({
     const CIRCUMFERENCE = 2 * Math.PI * MAGIC_RADIUS_CONSTANT
 
     const { themeClasses } = useTheme(props)
-    const { sizeClasses, sizeStyles } = useSize(props, 'v-progress-circular')
+    const { sizeClasses, sizeStyles } = useSize(props)
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
     const { textColorClasses: underlayColorClasses, textColorStyles: underlayColorStyles } = useTextColor(toRef(props, 'bgColor'))
     const { intersectionRef, isIntersecting } = useIntersectionObserver()

@@ -83,7 +83,7 @@ export function useSelectionControl (
   }
 ) {
   const group = inject(VSelectionControlGroupSymbol, undefined)
-  const { densityClasses } = useDensity(props, 'v-selection-control')
+  const { densityClasses } = useDensity(props)
   const modelValue = useProxiedModel(props, 'modelValue')
   const trueValue = computed(() => (
     props.trueValue !== undefined ? props.trueValue

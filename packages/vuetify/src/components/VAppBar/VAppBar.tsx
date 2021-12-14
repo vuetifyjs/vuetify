@@ -73,10 +73,10 @@ export const VAppBar = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { borderClasses } = useBorder(props, 'v-app-bar')
-    const { densityClasses } = useDensity(props, 'v-app-bar')
+    const { borderClasses } = useBorder(props)
+    const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props, 'v-app-bar')
+    const { roundedClasses } = useRounded(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const isExtended = !!slots.extension
     const contentHeight = computed(() => (
