@@ -2,9 +2,9 @@
 import './VTextField.sass'
 
 // Components
-import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
+import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
 import { VCounter } from '@/components/VCounter'
-import { VField } from '@/components/VField'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -42,6 +42,7 @@ export const VTextField = defineComponent({
       default: 'text',
     },
 
+    ...makeVInputProps(),
     ...makeVFieldProps(),
   },
 
@@ -94,11 +95,11 @@ export const VTextField = defineComponent({
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [fieldProps, _] = filterFieldProps(props)
+      const [inputProps] = filterInputProps(props)
+      const [fieldProps] = filterFieldProps(props)
 
       return (
-        <VField
-          ref={ fieldRef }
+        <VInput
           class={[
             'v-text-field',
             {
@@ -106,73 +107,79 @@ export const VTextField = defineComponent({
               'v-text-field--suffixed': props.suffix,
             },
           ]}
-          active={ isDirty.value }
-          onUpdate:active={ val => internalDirty.value = val }
-          onClick:control={ focus }
-          onClick:clear={ e => {
-            e.stopPropagation()
-
-            model.value = ''
-          }}
-          role="textbox"
           { ...rootAttrs }
-          { ...fieldProps }
+          { ...inputProps }
           v-slots={{
-            ...slots,
-            default: ({
-              isActive,
-              isDisabled,
-              isReadonly,
-              inputRef,
-              props: { class: fieldClass, ...slotProps },
-            }) => {
-              const showPlaceholder = isActive || props.persistentPlaceholder
-              return (
-                <>
-                  { props.prefix && (
-                    <span class="v-text-field__prefix" style={{ opacity: showPlaceholder ? undefined : '0' }}>
-                      { props.prefix }
-                    </span>
-                  ) }
+            default: ({ isDisabled, isReadonly }) => (
+              <VField
+                ref={ fieldRef }
+                active={ isDirty.value }
+                onUpdate:active={ val => internalDirty.value = val }
+                onClick:control={ focus }
+                onClick:clear={ e => {
+                  e.stopPropagation()
 
-                  <input
-                    class={ fieldClass }
-                    style={{ opacity: showPlaceholder ? undefined : '0' }} // can't this just be a class?
-                    v-model={ model.value }
-                    v-intersect={[{
-                      handler: onIntersect,
-                    }, null, ['once']]}
-                    ref={ inputRef }
-                    autofocus={ props.autofocus }
-                    readonly={ isReadonly.value }
-                    disabled={ isDisabled.value }
-                    placeholder={ props.placeholder }
-                    size={ 1 }
-                    type={ props.type }
-                    { ...slotProps }
-                    { ...inputAttrs }
-                  />
+                  model.value = ''
+                }}
+                role="textbox"
+                { ...fieldProps }
+                v-slots={{
+                  ...slots,
+                  default: ({
+                    isActive,
+                    inputRef,
+                    props: { class: fieldClass, ...slotProps },
+                  }) => {
+                    const showPlaceholder = isActive || props.persistentPlaceholder
+                    return (
+                      <>
+                        { props.prefix && (
+                          <span class="v-text-field__prefix" style={{ opacity: showPlaceholder ? undefined : '0' }}>
+                            { props.prefix }
+                          </span>
+                        ) }
 
-                  { props.suffix && (
-                    <span class="v-text-field__suffix" style={{ opacity: showPlaceholder ? undefined : '0' }}>
-                      { props.suffix }
-                    </span>
-                  ) }
-                </>
-              )
-            },
-            details: hasCounter ? ({ isFocused }) => (
-              <>
-                <span />
+                        <input
+                          class={ fieldClass }
+                          style={{ opacity: showPlaceholder ? undefined : '0' }} // can't this just be a class?
+                          v-model={ model.value }
+                          v-intersect={[{
+                            handler: onIntersect,
+                          }, null, ['once']]}
+                          ref={ inputRef }
+                          autofocus={ props.autofocus }
+                          readonly={ isReadonly.value }
+                          disabled={ isDisabled.value }
+                          placeholder={ props.placeholder }
+                          size={ 1 }
+                          type={ props.type }
+                          { ...slotProps }
+                          { ...inputAttrs }
+                        />
 
-                <VCounter
-                  active={ props.persistentCounter || isFocused }
-                  value={ counterValue.value }
-                  max={ max.value }
-                  v-slots={ slots.counter }
-                />
-              </>
-            ) : undefined,
+                        { props.suffix && (
+                          <span class="v-text-field__suffix" style={{ opacity: showPlaceholder ? undefined : '0' }}>
+                            { props.suffix }
+                          </span>
+                        ) }
+                      </>
+                    )
+                  },
+                  details: hasCounter ? ({ isFocused }) => (
+                    <>
+                      <span />
+
+                      <VCounter
+                        active={ props.persistentCounter || isFocused }
+                        value={ counterValue.value }
+                        max={ max.value }
+                        v-slots={ slots.counter }
+                      />
+                    </>
+                  ) : undefined,
+                }}
+              />
+            ),
           }}
         />
       )
