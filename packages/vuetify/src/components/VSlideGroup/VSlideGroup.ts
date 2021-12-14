@@ -475,8 +475,10 @@ export const BaseSlideGroup = mixins<options &
         wrapper: this.$refs.wrapper ? this.$refs.wrapper.clientWidth : 0,
       }, this.$vuetify.rtl, this.scrollOffset)
     },
-    setWidths /* istanbul ignore next */  () {
+    setWidths () {
       window.requestAnimationFrame(() => {
+        if (this._isDestroyed) return
+
         const { content, wrapper } = this.$refs
 
         this.widths = {
