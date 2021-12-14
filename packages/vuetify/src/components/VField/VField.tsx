@@ -213,6 +213,7 @@ export const VField = genericComponent<new <T>() => {
         })
         : props.label
       const [inputProps, _] = filterInputProps(props)
+
       return (
         <VInput
           class={[
