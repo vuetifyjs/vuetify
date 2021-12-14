@@ -259,9 +259,8 @@ describe('VBtn', () => {
         .should('not.have.class', 'v-btn--variant-plain')
     })
   })
-})
 
-// Useful to preview all of the variants and pre-made examples
-describe('Showcase', { viewportHeight: 1130, viewportWidth: 700 }, () => {
-  generate({ stories, props, component: VBtn })
+  describe('Showcase', { viewportHeight: 1130, viewportWidth: 700 }, () => {
+    generate({ stories, props, component: VBtn })
+  })
 })
