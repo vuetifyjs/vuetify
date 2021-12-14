@@ -59,6 +59,7 @@
     "./directives": "./lib/directives/index.mjs",
     "./directives/*": "./lib/directives/*/*.mjs",
     "./locale": "./lib/locale/index.mjs",
+    "./locale/adapters/*": "./lib/locale/adapters/*.mjs",
     "./iconsets/*": "./lib/iconsets/*.mjs",
     "./*": "./*"
   },
@@ -102,6 +103,7 @@
   "devDependencies": {
     "@cypress/vite-dev-server": "^2.2.0",
     "@cypress/vue": "^3.0.5",
+    "@formatjs/intl": "^1.17.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
@@ -142,11 +144,22 @@
     "rollup-plugin-terser": "^7.0.2",
     "vite": "^2.6.14",
     "vite-ssr": "^0.14.3",
+    "vue-i18n": "^9.2.0-beta.23",
     "vue-meta": "^2.4.0",
     "vue-router": "^4.0.12"
   },
   "peerDependencies": {
-    "vue": "^3.2.19"
+    "@formatjs/intl": "^1.0.0",
+    "vue": "^3.2.19",
+    "vue-i18n": "^9.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vue-i18n": {
+      "optional": true
+    },
+    "@formatjs/intl": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "access": "public"

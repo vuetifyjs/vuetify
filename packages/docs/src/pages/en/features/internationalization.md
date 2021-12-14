@@ -132,7 +132,7 @@ If you are using the vue-i18n library, you can very easily integrate it with Vue
 
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
-import { createVueI18nAdapter } from 'vuetify/locale/adapters'
+import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n'
 import { createI18n, useI18n } from 'vue-i18n'
 
 const messages = {
