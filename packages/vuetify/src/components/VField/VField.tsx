@@ -334,11 +334,11 @@ export const VField = genericComponent<new <T>() => {
                       <div class="v-field__outline__start" />
 
                       { hasLabel.value && (
-                          <div class="v-field__outline__notch">
-                            <VFieldLabel ref={ floatingLabelRef } floating>
-                              { label }
-                            </VFieldLabel>
-                          </div>
+                        <div class="v-field__outline__notch">
+                          <VFieldLabel ref={ floatingLabelRef } floating>
+                            { label }
+                          </VFieldLabel>
+                        </div>
                       ) }
 
                       <div class="v-field__outline__end" />
