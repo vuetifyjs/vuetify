@@ -20,7 +20,7 @@
     "fix:md": "markdownlint --config .markdownlintrc src/pages/en --fix"
   },
   "dependencies": {
-    "@vueuse/head": "^0.7.2",
+    "@vueuse/head": "^0.7.4",
     "cosmicjs": "^4.1.2",
     "markdown-it-anchor": "^8.4.1",
     "markdown-it-attrs": "^4.1.0",
@@ -30,30 +30,30 @@
     "prism-theme-vars": "^0.2.2",
     "roboto-fontface": "*",
     "vue": "^3.2.22",
-    "vue-i18n": "^9.2.0-beta.2",
+    "vue-i18n": "^9.2.0-beta.23",
     "vue-prism-component": "^2.0.0",
-    "vuetify": "^3.0.0-alpha.11"
+    "vuetify": "^3.0.0-alpha.12"
   },
   "devDependencies": {
-    "@intlify/vite-plugin-vue-i18n": "^2.4.0",
+    "@intlify/vite-plugin-vue-i18n": "^3.2.1",
     "@types/markdown-it": "^12.2.3",
-    "@vitejs/plugin-vue": "^1.9.4",
-    "@vue/compiler-sfc": "^3.2.22",
-    "@vue/server-renderer": "^3.2.22",
+    "@vitejs/plugin-vue": "^2.0.1",
+    "@vue/compiler-sfc": "^3.2.26",
+    "@vue/server-renderer": "^3.2.26",
     "https-localhost": "^4.7.0",
     "markdown-it-link-attributes": "^3.0.0",
     "markdown-it-prism": "^2.2.1",
-    "pinia": "^2.0.4",
-    "unplugin-vue-components": "^0.17.2",
-    "vite": "^2.6.14",
+    "pinia": "^2.0.6",
+    "unplugin-vue-components": "^0.17.9",
+    "vite": "^2.7.2",
     "vite-plugin-fonts": "^0.2.2",
-    "vite-plugin-md": "^0.11.4",
-    "vite-plugin-pages": "^0.18.2",
-    "vite-plugin-pwa": "^0.11.6",
+    "vite-plugin-md": "^0.11.6",
+    "vite-plugin-pages": "^0.19.3",
+    "vite-plugin-pwa": "^0.11.11",
     "vite-plugin-vue-layouts": "^0.5.0",
     "vite-ssg": "^0.16.2",
-    "vue-cli-plugin-vuetify": "~2.4.2",
-    "workbox-window": "^6.3.0"
+    "vue-cli-plugin-vuetify": "^2.4.5",
+    "workbox-window": "^6.4.2"
   },
   "publishConfig": {
     "access": "public"
