@@ -46,6 +46,13 @@ export const createApp = ViteSSG(
     ],
   },
   ctx => {
+    ctx.app.config.errorHandler = (err, vm, info) => {
+      console.error(err, vm, info)
+    }
+    ctx.app.config.warnHandler = (err, vm, info) => {
+      console.warn(err, vm, info)
+    }
+
     useGlobalComponents(ctx)
     useI18n(ctx)
     // usePwa(ctx)
