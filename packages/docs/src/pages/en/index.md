@@ -1,7 +1,6 @@
 ---
-title: Vuetify
 meta:
-  - name: Vuetify
+  title: Vuetify
 ---
 
 <home-vuetify-logo size="300px" />
