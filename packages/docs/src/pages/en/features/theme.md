@@ -15,7 +15,7 @@ Easily change the colors of your application programmatically. Vuetify supports 
 
 <promoted-ad slug="vuemastery-themes" />
 
-### API
+## API
 
 <!-- - [v-theme-provider](/api/v-theme-provider) -->
 <api-links />

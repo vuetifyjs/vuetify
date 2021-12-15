@@ -65,4 +65,3 @@ app.use(vuetify)
 ### v-app
 
 - **id** prop has been removed
-

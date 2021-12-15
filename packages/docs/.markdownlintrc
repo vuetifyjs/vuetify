@@ -1,18 +1,20 @@
 {
-  "MD013": false,
-  "MD022": true,
-  "MD025": {
+  "line-length": false,
+  "blanks-around-headings": true,
+  "single-title": {
     "front_matter_title": ""
   },
-  "MD026": false,
-  "MD029": false,
-  "MD033": {
+  "no-trailing-punctuation": false,
+  "ol-prefix": false,
+  "no-inline-html": {
     "allowed_elements": [
       "acuity-calendar",
       "alert",
       "app-img",
       "api-section",
       "api-table",
+      "api-links",
+      "api-inline",
       "backmatter",
       "become-sponsor",
       "br",
@@ -28,9 +30,11 @@
       "home-sponsors",
       "home-vuetify-logo",
       "icon-list",
+      "image",
       "inline-ad",
       "inline-api",
       "kbd",
+      "page-component",
       "premium-themes",
       "promoted-ad",
       "random-ad",
@@ -53,5 +57,5 @@
       "wireframe-examples"
     ]
   },
-  "MD036": false
+  "no-emphasis-as-heading": false
 }
