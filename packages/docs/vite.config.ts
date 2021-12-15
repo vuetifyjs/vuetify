@@ -19,6 +19,7 @@ import MarkdownItHeaderSections from 'markdown-it-header-sections'
 import markdownRules from './build/rules'
 import MarkdownIt from 'markdown-it'
 import fs from 'fs'
+// @ts-expect-error missing types
 import parseMD from 'parse-md'
 
 const resolve = (file: string) => path.resolve(__dirname, file)
@@ -115,7 +116,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@/': `${resolve('src')}/`,
-      // 'vuetify/lib/': `${resolve('../vuetify/lib')}/`,
     },
   },
   define: {
