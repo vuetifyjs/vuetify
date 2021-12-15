@@ -1,24 +1,24 @@
 ---
-title: Get started with Vuetify 3 Alpha
+nav: Installation
 meta:
-  - description: Details for v3 alpha release - faq, changes, and upgrading.
-    keywords: migration, releases, upgrading vuetify, alpha, v3
+  title: Get started with Vuetify 3 Alpha
+  description: Details for v3 alpha release - faq, changes, and upgrading.
+  keywords: migration, releases, upgrading vuetify, alpha, v3
 related:
   - /getting-started/contributing/
   - /introduction/roadmap/
-  - /getting-started/v3-alpha-release-notes/
-nav: Installation
+  - /getting-started/release-notes/
 ---
 
 # Vuetify 3 Alpha
 
 Vuetify 3 Alpha is here! Below is a collection of information to help you get started and answer some frequently asked questions regarding the alpha.
 
-<!-- <alert type="error"> -->
+<alert type="error">
 
   Before proceeding, it is important to note that this installation is intended primarily for testing purposes, and should not be considered for production applications.
 
-<!-- </alert> -->
+</alert>
 
 ## Installation
 
@@ -146,14 +146,14 @@ For bugs related to the Alpha, please create an issue via our [Issue Generator](
 - Vuetify components and functions available in the Alpha
 - Documentation content
 
-<!-- <alert type="info"> -->
+<alert type="info">
 
   We ask that documentation issues remain related to content only. The `next` documentation is a work in progress and not fully updated to Vue 3. Some features may be missing or not functioning and will be constantly worked on as new components and functionality becomes available. We will begin fielding these bugs closer to Phase 3 as things become stable.
 
-<!-- </alert> -->
+</alert>
 
 ## How to connect with Vuetify team
 
 The Vuetify team can be reached via [Discord Community](https://community.vuetifyjs.com/). If you have questions or would like to discuss Vuetify 3, come visit the #v3-discussion channel.
 
-<!-- <backmatter /> -->
+<backmatter />

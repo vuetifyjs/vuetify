@@ -1,4 +1,5 @@
 ---
+nav: Checkboxes
 meta:
   title: Checkbox component
   description: The checkbox component permits users to select between two values.
@@ -7,7 +8,6 @@ related:
   - /components/switches
   - /components/forms
   - /components/text-fields
-nav: Checkboxes
 ---
 
 # Checkboxes
@@ -23,8 +23,6 @@ A `v-checkbox` in its simplest form provides a toggle between 2 values.
 <example file="v-checkbox/usage" />
 
 ## API
-
-<api-links />
 
 <api-inline />
 

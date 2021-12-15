@@ -1,4 +1,5 @@
 ---
+nav: Images
 meta:
   title: Image component
   description: The image component provides a flexible interface for displaying different types of images.
@@ -7,26 +8,23 @@ related:
   - /components/grids
   - /components/aspect-ratios
   - /components/parallax
-nav: Images
 ---
 
 # Images
 
 The `v-img` component is packed with features to support rich media. Combined with the [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader), you can add dynamic progressive images to provide a better user experience.
 
-<!-- <entry-ad /> -->
+<entry-ad />
 
 ## Usage
 
 `v-img` component is used to display a responsive image with lazy-load and placeholder.
 
-<!-- <usage name="v-img" /> -->
+<usage name="v-img" />
 
 ## API
 
-<api-links />
-
-<!-- <api-section page="components/images" /> -->
+<api-inline />
 
 ## Examples
 

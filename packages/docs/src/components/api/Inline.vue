@@ -1,4 +1,5 @@
 <template>
+  <api-links :components="components" />
   <div v-if="showInline">
     <div class="d-flex justify-space-between align-center">
       <select v-model="name">
@@ -25,14 +26,21 @@
   export default defineComponent({
     name: 'ApiInline',
 
-    setup () {
+    props: {
+      components: String,
+    },
+
+    setup (props) {
       const route = useRoute()
       const { locale } = useI18n()
       const store = useUserStore()
       const name = ref()
 
       const components = computed(() => {
-        return pageToApi[route.path.replace(`/${locale.value}/`, '')] as string[]
+        if (props.components) return props.components.split(/, ?/)
+
+        const path = route.path.replace(`/${locale.value}/`, '').replace(/\/$/, '')
+        return pageToApi[path] as string[]
       })
 
       const showInline = computed(() => store.api === 'inline')
@@ -44,6 +52,7 @@
       return {
         name,
         sections,
+        // eslint-disable-next-line vue/no-dupe-keys
         components,
         showInline,
       }

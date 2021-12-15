@@ -3,7 +3,6 @@ meta:
   title: Meet the team
   description: Meet the team responsible for building Vuetify. These are the core individuals who drive the vision of the framework.
   keywords: vuetify dev team, vuetify core team
-nav: Meet the team
 ---
 
 # Meet the team
@@ -32,4 +31,4 @@ From updating docs to fixing bugs to adding new components, contributors activel
 
 <page-component path="about/TeamMembers" team="contributors" />
 
-<!-- <backmatter /> -->
+<backmatter />

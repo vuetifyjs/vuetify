@@ -1,13 +1,13 @@
 ---
-title: Why you should be using Vuetify
+nav: Why Vuetify?
 meta:
-  - description: Vuetify has an extremely active community, provides easy to use Material Design components and is consistently updated.
-    keywords: why vuetify, why choose vuetify, best vue framework, best ui framework
+  title: Why you should be using Vuetify
+  description: Vuetify has an extremely active community, provides easy to use Material Design components and is consistently updated.
+  keywords: why vuetify, why choose vuetify, best vue framework, best ui framework
 related:
   - /getting-started/installation
   - /introduction/roadmap
   - /about/meet-the-team
-nav: Why Vuetify?
 ---
 
 # Introduction

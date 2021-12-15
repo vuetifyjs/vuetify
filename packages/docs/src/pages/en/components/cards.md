@@ -1,4 +1,5 @@
 ---
+nav: Cards
 meta:
   title: Card component
   description: The v-card component is a versatile and enhanced sheet of paper that provides a simple interface for headings, text, images, and actions.
@@ -7,7 +8,6 @@ related:
   - /components/buttons
   - /components/images
   - /styles/text-and-typography
-nav: Cards
 ---
 
 # Cards
@@ -18,11 +18,9 @@ nav: Cards
 
 ## Usage
 
-<!-- <usage name="v-card" /> -->
+<usage name="v-card" />
 
 ## API
-
-<api-links />
 
 <api-inline />
 

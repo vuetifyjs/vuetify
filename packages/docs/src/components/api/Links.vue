@@ -15,19 +15,21 @@
   export default defineComponent({
     name: 'ApiLinks',
 
-    setup () {
+    props: {
+      path: String,
+    },
+
+    setup (props) {
       const route = useRoute()
-      const locale = useI18n()
+      const { locale } = useI18n()
 
       const links = computed(() => {
-        const path = route.path.replace(`/${locale.locale.value}/`, '').replace(/\/$/, '')
+        const path = props.path || route.path.replace(`/${locale.value}/`, '').replace(/\/$/, '')
         const apis = pageToApi[path] as string[]
-
-        console.log(path)
 
         return apis.map(name => ({
           name,
-          href: `/${locale.locale.value}/api/${name}`,
+          href: `/${locale.value}/api/${name}`,
         }))
       })
 

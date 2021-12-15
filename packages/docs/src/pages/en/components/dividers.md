@@ -1,4 +1,5 @@
 ---
+nav: Dividers
 meta:
   title: Divider component
   description: The divider component is a thin line commonly used to separate groups of content in lists or layouts.
@@ -7,7 +8,6 @@ related:
   - /components/lists
   - /components/navigation-drawers
   - /components/toolbars
-nav: Dividers
 ---
 
 # Dividers
@@ -20,11 +20,9 @@ The `v-divider` component is used to separate sections of lists or layouts.
 
 Dividers in their simplest form display a horizontal line.
 
-<!-- <usage name="v-divider" /> -->
+<usage name="v-divider" />
 
 ## API
-
-<api-links />
 
 <api-inline />
 

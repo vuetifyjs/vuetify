@@ -1,20 +1,20 @@
 ---
+nav: Buttons
 meta:
   title: Button component
   description: The button component communicates actions that a user can take and are typically placed in dialogs, forms, cards and toolbars.
   keywords: buttons, vuetify button component, vue button component
 related:
-  - /components/button-groups
-  - /components/icons
-  - /components/floating-action-buttons
-nav: Buttons
+  - /components/button-groups/
+  - /components/icons/
+  - /components/floating-action-buttons/
 ---
 
 # Buttons
 
 The `v-btn` component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color. <inline-ad slug="scrimba-buttons" />
 
-<!-- <entry-ad /> -->
+<entry-ad />
 
 <!--
 
@@ -28,9 +28,7 @@ Buttons in their simplest form contain uppercase text, a slight elevation, hover
 
 ## API
 
-<api-links />
-
-<!-- <api-section page="components/buttons" /> -->
+<api-inline />
 
 ## Caveats
 

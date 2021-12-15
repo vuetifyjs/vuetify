@@ -48,9 +48,7 @@ app.mount('#app')
 
 ## API
 
-<api-links />
-
-<!-- <api-section page="features/internationalization" /> -->
+<api-inline />
 
 ## Scoped languages
 

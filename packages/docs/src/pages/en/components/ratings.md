@@ -1,4 +1,5 @@
 ---
+nav: Ratings
 meta:
   title: Rating component
   description: The star rating component is a specialized widget for collecting user feedback via ratings.
@@ -7,7 +8,6 @@ related:
   - /components/cards
   - /components/icons
   - /components/lists
-nav: Ratings
 ---
 
 # Ratings
@@ -25,8 +25,6 @@ The `v-rating` component provides a simple interface for gathering user feedback
 -->
 
 ## API
-
-<api-links />
 
 <api-inline />
 

@@ -1,4 +1,5 @@
 ---
+nav: Icons
 meta:
   title: Icon component
   description: The icon component is compatible with multiple common icon fonts such as Material Design Icons, Font Awesome and more.
@@ -10,26 +11,23 @@ related:
 assets:
   - https://use.fontawesome.com/releases/v5.0.8/css/all.css
   - https://fonts.googleapis.com/css?family=Material+Icons
-nav: Icons
 ---
 
 # Icons
 
 The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. For a list of all available icons, visit the official [Material Design Icons](https://materialdesignicons.com/) page. To use any of these icons simply use the `mdi-` prefix followed by the icon name.
 
-<!-- <entry-ad /> -->
+<entry-ad />
 
 ## Usage
 
 Icons come in two themes (light and dark), and five different sizes (x-small, small, medium (default), large, and x-large).
 
-<!-- <usage name="v-icon" /> -->
+<usage name="v-icon" />
 
 ## API
 
-<api-links />
-
-<!-- <api-section page="components/icons" /> -->
+<api-inline />
 
 ## Examples
 

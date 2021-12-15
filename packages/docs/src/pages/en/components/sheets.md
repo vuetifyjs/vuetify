@@ -1,4 +1,5 @@
 ---
+nav: Sheets
 meta:
   title: Sheet component
   description: The sheet component is the baseline for many Material Design implementations used in Vuetify.
@@ -7,7 +8,6 @@ related:
   - /components/cards
   - /components/grids
   - /styles/elevation
-nav: Sheets
 ---
 
 # Sheets
@@ -23,8 +23,6 @@ The `v-sheet` component is a transformable piece of _paper_ that provides a basi
 <usage name="v-sheet" /> -->
 
 ## API
-
-<api-links />
 
 <api-inline />
 

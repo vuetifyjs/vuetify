@@ -1,4 +1,5 @@
 ---
+nav: Chips
 meta:
   title: Chip component
   description: The chip component allows a user to enter information, make selections, filter content or trigger actions.
@@ -7,7 +8,6 @@ related:
   - /components/avatars
   - /components/icons
   - /components/selects
-nav: Chips
 ---
 
 # Chips
@@ -20,11 +20,9 @@ The `v-chip` component is used to convey small pieces of information. Using the 
 
 Chips come in the following variations: closeable, filter, outlined, pill. The default slot of `v-chip` will also accept avatars and icons alongside text.
 
-<!-- <usage name="v-chip" /> -->
+<usage name="v-chip" />
 
 ## API
-
-<api-links />
 
 <api-inline />
 

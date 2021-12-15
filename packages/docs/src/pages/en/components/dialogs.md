@@ -1,4 +1,5 @@
 ---
+nav: Dialogs
 meta:
   title: Dialog component
   description: The dialog component informs a user about a specific task and may contain critical information or require the user to take a specific action.
@@ -7,7 +8,6 @@ related:
   - /components/buttons
   - /components/cards
   - /components/menus
-nav: Dialogs
 ---
 
 # Dialogs
@@ -23,8 +23,6 @@ In this basic example we use the **activator** slot to render a button that is u
 <example file="v-dialog/usage" />
 
 ## API
-
-<api-links />
 
 <api-inline />
 

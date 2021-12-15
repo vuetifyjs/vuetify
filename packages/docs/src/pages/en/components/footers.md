@@ -1,4 +1,5 @@
 ---
+nav: Footers
 meta:
   title: Footer component
   description: The footer component provides a container for displaying additional navigation information about a site.
@@ -7,7 +8,6 @@ related:
   - /components/grids
   - /components/buttons
   - /components/toolbars
-nav: Footers
 ---
 
 # Footers
@@ -23,8 +23,6 @@ The `v-footer` component in its simplest form is a container.
 <example file="v-footer/usage" />
 
 ## API
-
-<api-links />
 
 <api-inline />
 

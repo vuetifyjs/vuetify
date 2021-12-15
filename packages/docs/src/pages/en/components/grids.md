@@ -1,4 +1,5 @@
 ---
+nav: Grids
 meta:
   title: Grid system
   description: Vuetify supports the 12 point Material Design grid for laying out and controlling breakpoints for your application.
@@ -7,7 +8,6 @@ related:
   - /styles/flex
   - /features/breakpoints
   - /styles/display
-nav: Grids
 ---
 
 # Grid system
@@ -25,8 +25,6 @@ The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstra
 <example file="grid/usage" />
 
 ## API
-
-<api-links />
 
 <api-inline />
 

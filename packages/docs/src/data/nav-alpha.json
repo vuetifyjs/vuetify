@@ -16,7 +16,7 @@
     "items": [
       "installation",
       "upgrade-guide",
-      "v3-alpha-release-notes",
+      "release-notes",
       "contributing"
     ]
   },
@@ -108,6 +108,7 @@
     "inactiveIcon": "mdi-function",
     "activeIcon": "mdi-function",
     "items": [
+      "click-outside",
       "intersect",
       "mutate",
       "resize",

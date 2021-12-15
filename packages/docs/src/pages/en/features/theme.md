@@ -17,10 +17,7 @@ Easily change the colors of your application programmatically. Vuetify supports 
 
 ## API
 
-<!-- - [v-theme-provider](/api/v-theme-provider) -->
-<api-links />
-
-<!-- <api-section page="features/theme" /> -->
+<api-inline />
 
 ## Setup
 

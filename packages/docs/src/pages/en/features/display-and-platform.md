@@ -53,8 +53,7 @@ If you are still using the Options API, you can access the display information o
 
 ## API
 
-<api-links />
-
+<api-inline />
 ## Options
 
 The **useDisplay** composable has a numerous configuration options, such as the ability to define custom values for breakpoints.

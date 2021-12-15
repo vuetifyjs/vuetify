@@ -1,13 +1,13 @@
 ---
+nav: Breadcrumbs
 meta:
   title: Breadcrumbs component
   description: The breadcrumbs component is a navigational helper for pages. It can accept a Material Icons icon or characters as a divider.
   keywords: breadcrumbs, vuetify breadcrumbs component, vue breadcrumbs component, v-breadcrumbs component
 related:
-  - /components/buttons
-  - /components/navigation-drawers
-  - /components/icons
-nav: Breadcrumbs
+  - /components/buttons/
+  - /components/navigation-drawers/
+  - /components/icons/
 ---
 
 # Breadcrumbs
@@ -20,11 +20,9 @@ The `v-breadcrumbs` component is a navigational helper for pages. It can accept 
 
 By default, breadcrumbs use a text divider. This can be any string.
 
-<!-- <usage name="v-breadcrumbs" /> -->
+<usage name="v-breadcrumbs" />
 
 ## API
-
-<api-links />
 
 <api-inline />
 

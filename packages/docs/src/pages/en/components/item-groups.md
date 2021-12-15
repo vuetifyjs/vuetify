@@ -1,4 +1,5 @@
 ---
+nav: Item groups
 meta:
   title: Item group component
   description: The item group components provides the ability to create a group of selectable items out of any component.
@@ -7,7 +8,6 @@ related:
   - /components/button-groups
   - /components/carousels
   - /components/tabs
-nav: Item groups
 ---
 
 # Item groups
@@ -23,8 +23,6 @@ The core usage of the `v-item-group` is to create groups of anything that should
 <!-- <example file="v-item-group/usage" /> -->
 
 ## API
-
-<api-links />
 
 <api-inline />
 
