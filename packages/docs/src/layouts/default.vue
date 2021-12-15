@@ -6,7 +6,7 @@
     <v-main>
       <v-container
         class="pa-4 pa-sm-6 pa-md-8"
-        :style="{ maxWidth: isApi ? '1368px' : '868px' }"
+        :style="{ maxWidth: isApi ? '1368px' : '960px' }"
         fluid
         tag="section"
       >

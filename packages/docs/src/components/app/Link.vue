@@ -16,9 +16,10 @@
 </template>
 
 <script lang="ts">
-  import { computed } from 'vue'
+  import { computed, defineComponent } from 'vue'
+  import { rpath } from '@/util/routes'
 
-  export default {
+  export default defineComponent({
     name: 'AppLink',
 
     inheritAttrs: false,
@@ -37,9 +38,8 @@
         return isExternal.value
           ? { href: props.href, target: '_blank', rel: 'noopener' }
           : {
-            to: {
-              // path: props.isSamePage ? props.href : rpath(props.href),
-              path: props.href,
+            to: isSamePage.value ? props.href : {
+              path: rpath(props.href),
             },
           }
       })
@@ -50,8 +50,7 @@
       function onClick (e: Event) {
         if (!isSamePage.value) return
 
-        e.preventDefault()
-
+        document.querySelector(props.href)?.scrollIntoView({ behavior: 'smooth' })
         // this.$vuetify.goTo(this.href)
       }
 
@@ -83,7 +82,7 @@
         iconProps,
       }
     },
-  }
+  })
 </script>
 
 <style lang="sass">

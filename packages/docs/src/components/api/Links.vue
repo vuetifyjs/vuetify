@@ -20,7 +20,10 @@
       const locale = useI18n()
 
       const links = computed(() => {
-        const apis = pageToApi[route.path.replace(`/${locale.locale.value}/`, '')] as string[]
+        const path = route.path.replace(`/${locale.locale.value}/`, '').replace(/\/$/, '')
+        const apis = pageToApi[path] as string[]
+
+        console.log(path)
 
         return apis.map(name => ({
           name,

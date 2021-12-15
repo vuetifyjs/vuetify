@@ -22,7 +22,6 @@
             <template #default="{ isSelected, toggle }">
               <v-card
                 :color="isSelected ? 'primary' : `grey-${dark ? 'darken' : 'lighten'}-3`"
-
                 class="v-card--group py-3 px-4 text-center position-relative cursor-pointer d-flex align-center justify-space-between"
                 rounded
                 flat
@@ -42,7 +41,9 @@
 
 <script lang="ts">
   import { useI18n } from 'vue-i18n'
-  // :dark="!dark && active"
+  import { computed } from 'vue'
+  import { useTheme } from 'vuetify'
+
   export default {
     name: 'SettingsGroup',
 
@@ -58,8 +59,9 @@
 
     setup () {
       const { t } = useI18n()
+      const theme = useTheme({})
 
-      return { t, dark: false }
+      return { t, dark: computed(() => theme.getTheme(theme.current.value).dark) }
     },
   }
 </script>

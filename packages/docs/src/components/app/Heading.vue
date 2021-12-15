@@ -18,9 +18,8 @@
 
 <script>
   // Utilities
-  // import { get } from 'vuex-pathify'
   import { computed, defineComponent } from 'vue'
-  import { useRouter } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
 
   const HEADING_CLASSES = {
     1: 'text-h3 text-sm-h3 mb-4',
@@ -41,15 +40,17 @@
 
     setup (props) {
       const router = useRouter()
+      const route = useRoute()
 
       function onClick (e) {
         e.preventDefault()
 
         const hash = props.href
 
-        // if (this.hash === hash) return
+        if (route.hash === hash) return
 
         router.push({ hash })
+        document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' })
         // this.$vuetify.goTo(hash)
       }
 

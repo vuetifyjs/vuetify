@@ -1,6 +1,7 @@
 <template>
   <v-navigation-drawer
     id="app-toc"
+    color="background"
     class="py-4 pr-3"
     floating
     width="256"

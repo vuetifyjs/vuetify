@@ -8,7 +8,7 @@
   import AppSettingsGroup from './Group.vue'
 
   export default {
-    name: 'SettingsRtl',
+    name: 'AppSettingsRtl',
 
     components: { AppSettingsGroup },
 

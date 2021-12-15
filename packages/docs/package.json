@@ -26,6 +26,7 @@
     "cosmicjs": "^4.1.2",
     "pinia": "^2.0.6",
     "prism-theme-vars": "^0.2.2",
+    "prismjs": "^1.25.0",
     "roboto-fontface": "^0.10.0",
     "vue": "^3.2.22",
     "vue-i18n": "^9.2.0-beta.23",
@@ -35,6 +36,7 @@
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^3.2.1",
     "@types/markdown-it": "^12.2.3",
+    "@types/prismjs": "^1.16.6",
     "@vitejs/plugin-vue": "^2.0.1",
     "@vue/compiler-sfc": "^3.2.26",
     "@vue/server-renderer": "^3.2.26",

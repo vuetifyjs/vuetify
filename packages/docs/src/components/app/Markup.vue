@@ -1,8 +1,11 @@
 <template>
   <v-sheet
     ref="root"
-    class="app-markup overflow-hidden bg-grey-lighten-5"
+    class="app-markup overflow-hidden"
+    :color="theme.getTheme(theme.current.value).dark ? '#1F1F1F' : 'grey-lighten-5'"
     rounded
+    outlined
+    dir="ltr"
   >
     <slot>
       <pre v-if="inline" :class="className">
@@ -58,11 +61,13 @@
     },
 
     setup (props) {
-      const theme = useTheme(props)
+      const theme = useTheme({})
       const clicked = ref(false)
       const root = ref<ComponentPublicInstance>()
 
-      const highlighted = computed(() => props.code && props.language && Prism.highlight(props.code, Prism.languages[props.language]))
+      const highlighted = computed(() => (
+        props.code && props.language && Prism.highlight(props.code, Prism.languages[props.language], props.language)
+      ))
       const className = computed(() => `langauge-${props.language}`)
 
       async function copy () {

@@ -76,12 +76,12 @@ export function rpath (path = '') {
   const locale = preferredLocale()
   const [url, hash] = path.split('#')
 
-  const route = [
+  return [
+    '',
     locale,
     ...url.split('/').filter(p => !!p && p !== locale),
-  ]
-
-  return `/${route.join('/')}/${hash ? `#${hash}` : ''}`
+    hash ? `#${hash}` : null,
+  ].filter(v => v != null).join('/')
 }
 
 export function route (name, path = '', strict = true) {

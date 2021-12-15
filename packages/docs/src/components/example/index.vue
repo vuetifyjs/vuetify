@@ -13,17 +13,17 @@
         </template>
       </div>
     </v-expand-transition>
-    <v-lazy @update:modelValue="importExample">
+    <v-lazy style="min-height: 200px" @update:modelValue="importExample">
       <v-theme-provider v-if="isLoaded" :theme="theme" with-background class="pa-4">
         <component :is="ExampleComponent" />
       </v-theme-provider>
-      <div v-else class="skeleton" />
     </v-lazy>
   </v-sheet>
 </template>
 
 <script lang="ts">
-  import { defineComponent, markRaw, ref } from 'vue'
+  import { computed, defineComponent, markRaw, ref } from 'vue'
+  import { useTheme } from 'vuetify'
 
   const getExample = (component: string, example: string, raw?: boolean) => {
     return import(`../../examples/${component}/${example}.vue${raw ? '?raw' : ''}`)
@@ -46,7 +46,6 @@
     },
 
     setup (props) {
-      const theme = ref('light')
       const isLoaded = ref(false)
       const ExampleComponent = ref()
       const showCode = ref(false)
@@ -81,6 +80,12 @@
         }
       }
 
+      const parentTheme = useTheme({})
+      const _theme = ref<null | string>(null)
+      const theme = computed({
+        get: () => _theme.value ?? parentTheme.current.value,
+        set: val => _theme.value = val,
+      })
       const toggleTheme = () => theme.value = theme.value === 'light' ? 'dark' : 'light'
 
       return { ExampleComponent, isLoaded, importExample, theme, toggleTheme, sections, showCode }
@@ -91,9 +96,5 @@
 <style>
   .example-header {
     border-bottom: 1px solid lightgrey;
-  }
-
-  .skeleton {
-    min-height: 200px
   }
 </style>

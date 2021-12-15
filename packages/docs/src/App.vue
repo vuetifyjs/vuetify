@@ -1,5 +1,7 @@
 <template>
-  <router-view />
+  <v-theme-provider :theme="user.theme">
+    <router-view />
+  </v-theme-provider>
 </template>
 
 <script lang="ts">
@@ -8,6 +10,7 @@
   import { useHead } from '@vueuse/head'
   import { useI18n } from 'vue-i18n'
   import { useRouter } from 'vue-router'
+  import { useUserStore } from '@/store/user'
 
   export default defineComponent({
     name: 'App',
@@ -31,6 +34,10 @@
           router.replace(`/${locale.value}`)
         }
       })
+
+      return {
+        user: useUserStore(),
+      }
     },
   })
 </script>

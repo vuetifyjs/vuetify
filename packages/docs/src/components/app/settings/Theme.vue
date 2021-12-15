@@ -9,7 +9,7 @@
   import AppSettingsGroup from './Group.vue'
 
   export default {
-    name: 'DefaultSettingsTheme',
+    name: 'AppSettingsTheme',
 
     components: { AppSettingsGroup },
 

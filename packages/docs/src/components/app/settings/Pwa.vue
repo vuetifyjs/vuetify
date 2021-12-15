@@ -22,7 +22,7 @@
   import { useI18n } from 'vue-i18n'
 
   export default {
-    name: 'DefaultSettingsPwa',
+    name: 'AppSettingsPwa',
 
     setup () {
       const { t } = useI18n()
