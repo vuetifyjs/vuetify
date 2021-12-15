@@ -121,16 +121,15 @@
 /* region AFFIXES */
 .v-field__prepend-inner,
 .v-field__append-inner,
-.v-field__clearable,
-.v-field .v-input__prepend,
-.v-field .v-input__append
+.v-field__clearable
   align-items: center
   display: flex
 
 .v-field__prepend-inner,
-.v-field__append-inner,
-.v-input__prepend,
-.v-input__append
+.v-field__append-inner
+  .v-field--focused &
+    opacity: 1
+
   .v-field--variant-plain &,
   .v-field--variant-underlined &
     $root: &
@@ -154,7 +153,7 @@
   transition: $field-transition-timing
   transition-property: opacity, transform, width
 
-  .v-field--focused &,
+  .v-input--focused &,
   .v-field__control:hover &,
   .v-field--persistent-clear &
     opacity: 1

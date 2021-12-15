@@ -2,6 +2,7 @@
 import './VNavigationDrawer.sass'
 
 // Composables
+import { useTouch } from './touch'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
@@ -13,7 +14,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { computed, onBeforeMount, ref, toRef, watch } from 'vue'
+import { computed, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
 import { defineComponent } from '@/util'
 
 // Types
@@ -39,6 +40,7 @@ export const VNavigationDrawer = defineComponent({
     },
     image: String,
     temporary: Boolean,
+    touchless: Boolean,
     width: {
       type: [Number, String],
       default: 256,
@@ -61,7 +63,7 @@ export const VNavigationDrawer = defineComponent({
     'update:modelValue': (val: boolean) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props, 'v-navigation-drawer')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
@@ -73,18 +75,10 @@ export const VNavigationDrawer = defineComponent({
     const isHovering = ref(false)
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)
-        ? props.width
+        ? Number(props.width)
         : Number(props.rail ? props.railWidth : props.width)
     })
     const isTemporary = computed(() => !props.permanent && (mobile.value || props.temporary))
-    const layoutStyles = useLayoutItem(
-      props.name,
-      toRef(props, 'priority'),
-      toRef(props, 'position'),
-      computed(() => isTemporary.value ? 0 : props.rail && props.expandOnHover ? Number(props.railWidth) : width.value),
-      width,
-      isActive,
-    )
 
     if (!props.disableResizeWatcher) {
       watch(mobile, val => !props.permanent && (isActive.value = !val))
@@ -100,62 +94,107 @@ export const VNavigationDrawer = defineComponent({
       isActive.value = props.permanent || !mobile.value
     })
 
+    const rootEl = ref<HTMLElement>()
+
+    const { isDragging, dragProgress, dragStyles } = useTouch({
+      isActive,
+      isTemporary,
+      width,
+      touchless: toRef(props, 'touchless'),
+      position: toRef(props, 'position'),
+    })
+
+    const layoutSize = computed(() => {
+      const size = isTemporary.value ? 0
+        : props.rail && props.expandOnHover ? Number(props.railWidth)
+        : width.value
+
+      return isDragging.value ? size * dragProgress.value : size
+    })
+    const layoutStyles = useLayoutItem(
+      props.name,
+      toRef(props, 'priority'),
+      toRef(props, 'position'),
+      layoutSize,
+      width,
+      computed(() => isActive.value || isDragging.value),
+      computed(() => isDragging.value)
+    )
+
     return () => {
       const hasImage = (slots.image || props.image)
 
       return (
-        <props.tag
-          onMouseenter={ () => (isHovering.value = true) }
-          onMouseleave={ () => (isHovering.value = false) }
-          class={[
-            'v-navigation-drawer',
-            {
-              'v-navigation-drawer--bottom': props.position === 'bottom',
-              'v-navigation-drawer--end': props.position === 'right',
-              'v-navigation-drawer--expand-on-hover': props.expandOnHover,
-              'v-navigation-drawer--floating': props.floating,
-              'v-navigation-drawer--is-hovering': isHovering.value,
-              'v-navigation-drawer--rail': props.rail,
-              'v-navigation-drawer--start': props.position === 'left',
-              'v-navigation-drawer--temporary': isTemporary.value,
-              'v-navigation-drawer--absolute': props.absolute,
-            },
-            themeClasses.value,
-            backgroundColorClasses.value,
-            borderClasses.value,
-            elevationClasses.value,
-            roundedClasses.value,
-          ]}
-          style={[
-            backgroundColorStyles.value,
-            layoutStyles.value,
-          ]}
-        >
-          { hasImage && (
-            <div class="v-navigation-drawer__img">
-              { slots.image
-                ? slots.image?.({ image: props.image })
-                : (<img src={ props.image } alt="" />)
-              }
-            </div>
-          )}
+        <>
+          <props.tag
+            ref={ rootEl }
+            onMouseenter={ () => (isHovering.value = true) }
+            onMouseleave={ () => (isHovering.value = false) }
+            class={[
+              'v-navigation-drawer',
+              {
+                'v-navigation-drawer--bottom': props.position === 'bottom',
+                'v-navigation-drawer--end': props.position === 'right',
+                'v-navigation-drawer--expand-on-hover': props.expandOnHover,
+                'v-navigation-drawer--floating': props.floating,
+                'v-navigation-drawer--is-hovering': isHovering.value,
+                'v-navigation-drawer--rail': props.rail,
+                'v-navigation-drawer--start': props.position === 'left',
+                'v-navigation-drawer--temporary': isTemporary.value,
+                'v-navigation-drawer--absolute': props.absolute,
+              },
+              themeClasses.value,
+              backgroundColorClasses.value,
+              borderClasses.value,
+              elevationClasses.value,
+              roundedClasses.value,
+            ]}
+            style={[
+              backgroundColorStyles.value,
+              layoutStyles.value,
+              dragStyles.value,
+            ]}
+            { ...attrs }
+          >
+            { hasImage && (
+              <div class="v-navigation-drawer__img">
+                { slots.image
+                  ? slots.image?.({ image: props.image })
+                  : (<img src={ props.image } alt="" />)
+                }
+              </div>
+            )}
 
-          { slots.prepend && (
-            <div class="v-navigation-drawer__prepend">
-              { slots.prepend?.() }
-            </div>
-          )}
+            { slots.prepend && (
+              <div class="v-navigation-drawer__prepend">
+                { slots.prepend?.() }
+              </div>
+            )}
 
-          <div class="v-navigation-drawer__content">
-            { slots.default?.() }
-          </div>
-
-          { slots.append && (
-            <div class="v-navigation-drawer__append">
-              { slots.append?.() }
+            <div class="v-navigation-drawer__content">
+              { slots.default?.() }
             </div>
-          )}
-        </props.tag>
+
+            { slots.append && (
+              <div class="v-navigation-drawer__append">
+                { slots.append?.() }
+              </div>
+            )}
+          </props.tag>
+
+          <Transition name="fade-transition">
+            { isTemporary.value && (isDragging.value || isActive.value) && (
+              <div
+                class="v-navigation-drawer__scrim"
+                style={isDragging.value ? {
+                  opacity: dragProgress.value * 0.2,
+                  transition: 'none',
+                } : undefined}
+                onClick={ () => isActive.value = false }
+              />
+            )}
+          </Transition>
+        </>
       )
     }
   },

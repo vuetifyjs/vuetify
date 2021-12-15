@@ -2,6 +2,7 @@
 import './VBtn.sass'
 
 // Components
+import { VBtnToggleSymbol } from '@/components/VBtnToggle/VBtnToggle'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
@@ -9,6 +10,7 @@ import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
@@ -38,7 +40,6 @@ export const VBtn = defineComponent({
     block: Boolean,
     stacked: Boolean,
 
-    disabled: Boolean,
     ripple: {
       type: Boolean,
       default: true,
@@ -49,6 +50,7 @@ export const VBtn = defineComponent({
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
+    ...makeGroupItemProps(),
     ...makePositionProps(),
     ...makeRouterProps(),
     ...makeSizeProps(),
@@ -67,8 +69,9 @@ export const VBtn = defineComponent({
     const { positionClasses, positionStyles } = usePosition(props, 'v-btn')
     const { roundedClasses } = useRounded(props, 'v-btn')
     const { sizeClasses } = useSize(props, 'v-btn')
+    const group = useGroupItem(props, VBtnToggleSymbol, false)
     const link = useLink(props, attrs)
-
+    const isDisabled = computed(() => group?.disabled.value || props.disabled)
     const isElevated = computed(() => {
       return props.variant === 'contained' && !(props.disabled || props.flat || props.border)
     })
@@ -81,10 +84,11 @@ export const VBtn = defineComponent({
           type={ Tag === 'a' ? undefined : 'button' }
           class={[
             'v-btn',
+            group?.selectedClass.value,
             {
               'v-btn--active': link.isExactActive?.value,
               'v-btn--block': props.block,
-              'v-btn--disabled': props.disabled,
+              'v-btn--disabled': isDisabled.value,
               'v-btn--elevated': isElevated.value,
               'v-btn--flat': props.flat,
               'v-btn--icon': !!props.icon,
@@ -105,14 +109,14 @@ export const VBtn = defineComponent({
             dimensionStyles.value,
             positionStyles.value,
           ]}
-          disabled={ props.disabled || undefined }
+          disabled={ isDisabled.value || undefined }
           href={ link.href.value }
           v-ripple={[
-            !props.disabled && props.ripple,
+            !isDisabled.value && props.ripple,
             null,
             props.icon ? ['center'] : null,
           ]}
-          onClick={ props.disabled || link.navigate }
+          onClick={ isDisabled.value || link.navigate || group?.toggle }
         >
           { genOverlays(true, 'v-btn') }
 

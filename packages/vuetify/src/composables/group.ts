@@ -6,7 +6,7 @@ import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef 
 import { consoleWarn, deepEqual, findChildren, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
-import type { ComponentInternalInstance, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
+import type { ComponentInternalInstance, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
 
 interface GroupItem {
   id: number
@@ -24,7 +24,7 @@ interface GroupProps {
   'onUpdate:modelValue': ((val: unknown) => void) | undefined
 }
 
-interface GroupProvide {
+export interface GroupProvide {
   register: (item: GroupItem, cmp: ComponentInternalInstance) => void
   unregister: (id: number) => void
   select: (id: number, value: boolean) => void
@@ -61,19 +61,29 @@ export const makeGroupProps = propsFactory({
 }, 'group')
 
 export const makeGroupItemProps = propsFactory({
-  value: {
-    type: [Number, Boolean, String, Object],
-    default: undefined,
-  },
+  value: null,
   disabled: Boolean,
   selectedClass: String,
 }, 'group-item')
 
+type GroupItemProps = ExtractPropTypes<ReturnType<typeof makeGroupItemProps>>
+
 // Composables
 export function useGroupItem (
-  props: { value?: unknown, disabled?: boolean, selectedClass?: string },
+  props: GroupItemProps,
   injectKey: InjectionKey<GroupProvide>,
-): GroupItemProvide {
+  required?: true,
+): GroupItemProvide
+export function useGroupItem (
+  props: GroupItemProps,
+  injectKey: InjectionKey<GroupProvide>,
+  required: false,
+): GroupItemProvide | null
+export function useGroupItem (
+  props: GroupItemProps,
+  injectKey: InjectionKey<GroupProvide>,
+  required = true,
+): GroupItemProvide | null {
   const vm = getCurrentInstance('useGroupItem')
 
   if (!vm) {
@@ -85,6 +95,8 @@ export function useGroupItem (
   const group = inject(injectKey, null)
 
   if (!group) {
+    if (!required) return group
+
     throw new Error(`[Vuetify] Could not find useGroup injection with symbol ${injectKey.description}`)
   }
 
@@ -161,7 +173,9 @@ export function useGroup (
   function unregister (id: number) {
     if (isUnmounted) return
 
-    selected.value = selected.value.filter(v => v !== id)
+    // TODO: re-evaluate this line's importance in the future
+    // should we only modify the model if mandatory is set.
+    // selected.value = selected.value.filter(v => v !== id)
 
     forceMandatoryValue()
 

@@ -5,9 +5,6 @@
 .v-input
   display: grid
   flex: 1 1 auto
-  grid-template-areas: "prepend control append" "a messages b"
-  grid-template-columns: max-content auto max-content
-  grid-template-rows: auto auto
 
   input
     color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
@@ -28,6 +25,28 @@
   @at-root
     @include tools.density('v-input', $input-density) using ($modifier)
       --v-input-control-height: #{$input-control-height + $modifier}
+
+.v-input--vertical
+  grid-template-areas: "append" "control" "prepend"
+  grid-template-rows: max-content auto max-content
+  grid-template-columns: min-content
+
+  .v-input__prepend
+    margin-block-start: $input-affix-margin-inside
+
+  .v-input__append
+    margin-block-end: $input-affix-margin-inside
+
+.v-input--horizontal
+  grid-template-areas: "prepend control append" "a messages b"
+  grid-template-columns: max-content auto max-content
+  grid-template-rows: auto auto
+
+  .v-input__prepend
+    margin-inline-end: $input-affix-margin-inside
+
+  .v-input__append
+    margin-inline-start: $input-affix-margin-inside
 
 .v-input__details
   align-items: flex-end
@@ -51,10 +70,14 @@
   align-items: center
   align-self: center
 
+  .v-input--focused &
+    opacity: 1
+
 .v-input__prepend
-  margin-inline-end: $input-affix-margin-inside
   grid-area: prepend
 
 .v-input__append
-  margin-inline-start: $input-affix-margin-inside
   grid-area: append
+
+.v-input__control
+  grid-area: control
