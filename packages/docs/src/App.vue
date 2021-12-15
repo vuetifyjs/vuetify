@@ -36,8 +36,7 @@
 </script>
 
 <style lang="sass">
-  // This should be in vuetify?
-  a
+  a:not(:hover)
     text-decoration: none
 
   code
@@ -53,6 +52,11 @@
 
     a, a:visited
       color: rgb(var(--v-theme-primary))
+
+  h1
+    + p
+      font-size: 1.25rem
+      font-weight: 300
 
   .v-theme--light,
   .v-theme--dark

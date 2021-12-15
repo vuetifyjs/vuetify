@@ -48,7 +48,7 @@
 
     props: {
       title: String,
-      modelValue: String,
+      modelValue: null,
       items: Array,
     },
 

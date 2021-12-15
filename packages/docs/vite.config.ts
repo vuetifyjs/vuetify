@@ -12,6 +12,7 @@ import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import Inspect from 'vite-plugin-inspect'
 
 import { configureMarkdown, parseMeta } from './build/markdown-it'
+import Api from './build/api-plugin'
 
 const resolve = (file: string) => path.resolve(__dirname, file)
 
@@ -101,6 +102,8 @@ export default defineConfig(({ mode }) => {
           }
         },
       }),
+
+      Api(),
 
       // https://github.com/antfu/vite-plugin-pwa
       // VitePWA({

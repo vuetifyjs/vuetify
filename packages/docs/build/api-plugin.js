@@ -53,7 +53,7 @@ function genHeader (component) {
 
 function genFooter () {
   const footer = [
-    // '<backmatter />', TODO: enable when component exists
+    '<backmatter />',
   ]
 
   return `${footer.join('\n\n')}\n`
@@ -141,53 +141,13 @@ function generateFiles () {
   ]))
 }
 
-// class ApiPlugin {
-//   apply (compiler) {
-//     rimraf.sync(resolve('src/api'))
+module.exports = function Api () {
+  return {
+    name: 'vuetify:api',
+    buildStart () {
+      rimraf.sync(resolve('src/api'))
 
-//     generateFiles()
-
-//     let changedFiles = []
-//     const sourcePaths = [resolve('../api-generator/src/maps'), (resolve('../api-generator/src/locale/en'))]
-
-//     compiler.hooks.afterCompile.tap('ApiPlugin', compilation => {
-//       sourcePaths.forEach(sourcePath => compilation.contextDependencies.add(sourcePath))
-//     })
-
-//     compiler.hooks.watchRun.tap('ApiPlugin', async comp => {
-//       const changedTimes = comp.watchFileSystem.watcher.getTimeInfoEntries()
-
-//       changedFiles = Object.keys(changedTimes).filter(filePath => {
-//         return sourcePaths.some(path => filePath.startsWith(path))
-//       })
-
-//       // Make sure api-gen is using latest files
-//       changedFiles.forEach(filePath => {
-//         delete require.cache[filePath]
-//       })
-//     })
-
-//     compiler.hooks.compilation.tap('ApiPlugin', () => {
-//       if (!changedFiles.length) return
-
-//       for (const filePath of changedFiles) {
-//         const matches = /[/\\]([-a-z]+|\$vuetify)\.js(?:on)?$/i.exec(filePath)
-//         const [_, componentName] = matches
-//         const componentApi = getApi(componentName, localeList)
-//         writeData(componentName, componentApi)
-//       }
-
-//       changedFiles = []
-//     })
-//   }
-// }
-
-// module.exports = ApiPlugin
-
-function run () {
-  rimraf.sync(resolve('src/api'))
-
-  generateFiles()
+      generateFiles()
+    },
+  }
 }
-
-run()

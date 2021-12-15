@@ -6,12 +6,11 @@
     <v-main>
       <v-container
         class="pa-4 pa-sm-6 pa-md-8"
+        :style="{ maxWidth: isApi ? '1368px' : '868px' }"
         fluid
         tag="section"
       >
-        <v-responsive :max-width="868" class="mx-auto overflow-visible">
-          <router-view />
-        </v-responsive>
+        <router-view />
       </v-container>
     </v-main>
     <app-toc />
@@ -19,8 +18,8 @@
 </template>
 
 <script lang="ts">
-// Utilities
-  import { defineComponent } from 'vue'
+  import { computed, defineComponent } from 'vue'
+  import { useRoute } from 'vue-router'
 
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
   import AppBar from '@/components/app/bar/index.vue'
@@ -31,5 +30,12 @@
     name: 'DefaultLayout',
 
     components: { AppSettingsDrawer, AppBar, AppToc, AppDrawer },
+
+    setup () {
+      const route = useRoute()
+      const isApi = computed(() => route.name?.startsWith('api-'))
+
+      return { isApi }
+    },
   })
 </script>

@@ -103,7 +103,7 @@
 
       const text = computed(() => t('ready', { url: '/about/meet-the-team' }))
 
-      const related = computed(() => (route.meta.related as string[]).flatMap(href => {
+      const related = computed(() => ((route.meta.related as string[]) || []).flatMap(href => {
         const path = `/${locale.value}${href}`
         const route = generatedRoutes.find((route: any) => route.path === path)
 
@@ -112,7 +112,7 @@
         const category = href.split('/')[1]
 
         return {
-          title: route.meta.nav,
+          title: route.meta!.nav,
           subtitle: category,
           ...categoryIcons[category],
           href: path,

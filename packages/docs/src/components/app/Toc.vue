@@ -1,7 +1,6 @@
 <template>
   <v-navigation-drawer
     id="app-toc"
-    v-scroll="onScroll"
     class="py-4 pr-3"
     floating
     width="256"
