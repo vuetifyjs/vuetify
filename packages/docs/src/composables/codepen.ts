@@ -1,8 +1,7 @@
 import { computed, h, onMounted, ref } from 'vue'
 import type { Ref } from 'vue'
 
-const _version = fetch('https://unpkg.com/@vuetify/nightly@next/', { method: 'HEAD' })
-  .then(r => new URL(r.url).pathname.split(/[/@]/).filter(Boolean).at(-1))
+let _version: Promise<string>
 
 export function useCodepen ({ code, sections, component }: {
   code: Readonly<Ref<string | undefined>>
@@ -11,6 +10,11 @@ export function useCodepen ({ code, sections, component }: {
 }) {
   const version = ref()
   onMounted(async () => {
+    if (!_version) {
+      _version = fetch('https://unpkg.com/@vuetify/nightly@next/', { method: 'HEAD' })
+        .then(r => new URL(r.url).pathname.split(/[/@]/).filter(Boolean).at(-1)!)
+    }
+
     await _version.then(v => version.value = `@vuetify/nightly@${v}`)
   })
 

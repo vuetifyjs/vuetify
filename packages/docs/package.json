@@ -16,7 +16,7 @@
     "preview-https": "HTTPS=true vite preview",
     "build:modified": "node build/modified",
     "build:api": "node build/api-plugin",
-    "lint": "yarn lint:md && eslint src -f codeframe --max-warnings 0",
+    "lint": "tsc -p tsconfig.json --noEmit --pretty && yarn lint:md && eslint src -f codeframe --max-warnings 0",
     "lint:fix": "yarn fix:md && eslint --fix src",
     "lint:md": "markdownlint --config .markdownlintrc src/pages/en",
     "fix:md": "markdownlint --config .markdownlintrc src/pages/en --fix"
