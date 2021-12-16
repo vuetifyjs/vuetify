@@ -40,6 +40,7 @@
     "@vitejs/plugin-vue": "^2.0.1",
     "@vue/compiler-sfc": "^3.2.26",
     "@vue/server-renderer": "^3.2.26",
+    "ajv": "^8.8.2",
     "front-matter": "^4.0.2",
     "markdown-it": "^12.3.0",
     "markdown-it-anchor": "^8.4.1",

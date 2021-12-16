@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import Ajv from 'ajv'
 import fm from 'front-matter'
 import MarkdownIt from 'markdown-it'
 import MarkdownItPrism from 'markdown-it-prism'
@@ -77,9 +78,46 @@ const generateToc = (content: string) => {
   return headings
 }
 
+const ajv = new Ajv()
+const validate = ajv.compile({
+  type: 'object',
+  additionalProperties: false,
+  properties: {
+    nav: { type: 'string' },
+    meta: {
+      type: 'object',
+      additionalProperties: false,
+      properties: {
+        title: { type: 'string' },
+        description: { type: 'string' },
+        keywords: { type: 'string' },
+      },
+    },
+    related: {
+      type: 'array',
+      maxItems: 3,
+      uniqueItems: true,
+      items: { type: 'string' },
+    },
+    assets: {
+      type: 'array',
+      uniqueItems: true,
+      items: { type: 'string' },
+    },
+  },
+})
+
 export const parseMeta = (componentPath: string) => {
   const str = fs.readFileSync(path.resolve(componentPath.slice(1)), { encoding: 'utf-8' })
   const { attributes, body } = fm(str)
+
+  const valid = validate(attributes)
+  if (!valid) {
+    throw new Error(`\nInvalid frontmatter: ${componentPath}` + validate.errors!.map(error => (
+      `\n  | Property ${error.instancePath} ${error.message}`
+    )).join())
+  }
+
   const { meta, ...rest } = attributes as any
 
   return {

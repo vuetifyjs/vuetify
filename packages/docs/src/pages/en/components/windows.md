@@ -3,11 +3,10 @@ meta:
   title: Window component
   description: The window component is a wrapper container that allows transitioning between content. It serves as the baseline for tabs and carousels.
   keywords: windows, vuetify window component, vue window component
-  related:
+related:
     - /components/carousels
     - /components/steppers
     - /components/tabs
-
 ---
 
 # Windows
