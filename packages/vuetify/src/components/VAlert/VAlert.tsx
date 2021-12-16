@@ -101,12 +101,12 @@ export const VAlert = defineComponent({
     }))
 
     const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(borderProps.value, 'v-alert')
-    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps, 'v-alert')
-    const { densityClasses } = useDensity(props, 'v-alert')
+    const { borderClasses } = useBorder(borderProps.value)
+    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
+    const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props, 'v-alert')
-    const { roundedClasses } = useRounded(props, 'v-alert')
+    const { positionClasses, positionStyles } = usePosition(props)
+    const { roundedClasses } = useRounded(props)
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
       return props.borderColor ?? (props.tip ? variantProps.value.color : undefined)
     }))

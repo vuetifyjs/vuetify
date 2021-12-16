@@ -98,12 +98,12 @@ export const VListItem = genericComponent<new () => {
     })
 
     const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(props, 'v-list-item')
-    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps, 'v-list-item')
-    const { densityClasses } = useDensity(props, 'v-list-item')
+    const { borderClasses } = useBorder(props)
+    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
+    const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props, 'v-list-item')
+    const { roundedClasses } = useRounded(props)
 
     const slotProps = computed(() => ({
       isActive: isActive.value,

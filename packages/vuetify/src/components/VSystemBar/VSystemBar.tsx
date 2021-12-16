@@ -31,11 +31,11 @@ export const VSystemBar = defineComponent({
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(props, 'v-system-bar')
+    const { borderClasses } = useBorder(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props, 'v-system-bar')
-    const { roundedClasses } = useRounded(props, 'v-system-bar')
+    const { positionClasses, positionStyles } = usePosition(props)
+    const { roundedClasses } = useRounded(props)
 
     return () => (
       <props.tag

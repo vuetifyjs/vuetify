@@ -65,11 +65,11 @@ export const VNavigationDrawer = defineComponent({
 
   setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(props, 'v-navigation-drawer')
+    const { borderClasses } = useBorder(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { elevationClasses } = useElevation(props)
     const { mobile } = useDisplay()
-    const { roundedClasses } = useRounded(props, 'v-navigation-drawer')
+    const { roundedClasses } = useRounded(props)
 
     const isActive = useProxiedModel(props, 'modelValue')
     const isHovering = ref(false)

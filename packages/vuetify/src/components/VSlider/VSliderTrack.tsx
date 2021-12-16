@@ -46,7 +46,7 @@ export const VSliderTrack = defineComponent({
       horizontalDirection,
     } = slider
 
-    const { roundedClasses } = useRounded(rounded, 'v-slider-track')
+    const { roundedClasses } = useRounded(rounded)
 
     const {
       backgroundColorClasses: trackFillColorClasses,

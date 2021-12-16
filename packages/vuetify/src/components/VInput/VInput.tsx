@@ -72,7 +72,7 @@ export const VInput = genericComponent<new <T>() => {
   },
 
   setup (props, { slots, emit }) {
-    const { densityClasses } = useDensity(props, 'v-input')
+    const { densityClasses } = useDensity(props)
     const {
       errorMessages,
       isDisabled,
@@ -84,7 +84,7 @@ export const VInput = genericComponent<new <T>() => {
       resetValidation,
       validate,
       validationClasses,
-    } = useValidation(props, 'v-input')
+    } = useValidation(props)
 
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)

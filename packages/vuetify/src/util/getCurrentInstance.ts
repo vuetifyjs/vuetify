@@ -1,5 +1,6 @@
 // Utilities
 import { getCurrentInstance as _getCurrentInstance } from 'vue'
+import { toKebabCase } from '@/util'
 
 export function getCurrentInstance (name: string, message?: string) {
   const vm = _getCurrentInstance()
@@ -9,4 +10,8 @@ export function getCurrentInstance (name: string, message?: string) {
   }
 
   return vm
+}
+
+export function getCurrentInstanceName (name = 'composables') {
+  return toKebabCase(getCurrentInstance(name).type?.name)
 }

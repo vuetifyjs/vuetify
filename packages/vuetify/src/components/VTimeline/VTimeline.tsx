@@ -55,7 +55,7 @@ export const VTimeline = defineComponent({
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)
-    const { densityClasses } = useDensity(props, 'v-timeline')
+    const { densityClasses } = useDensity(props)
 
     provide(VTimelineSymbol, {
       density: toRef(props, 'density'),

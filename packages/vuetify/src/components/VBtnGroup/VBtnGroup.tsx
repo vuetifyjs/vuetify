@@ -32,10 +32,10 @@ export const VBtnGroup = defineComponent({
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)
-    const { densityClasses } = useDensity(props, 'v-btn-group')
-    const { borderClasses } = useBorder(props, 'v-btn-group')
+    const { densityClasses } = useDensity(props)
+    const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props, 'v-btn-group')
+    const { roundedClasses } = useRounded(props)
 
     provideDefaults(reactive({
       defaults: {

@@ -52,12 +52,12 @@ export const VBottomNavigation = defineComponent({
 
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(props, 'v-bottom-navigation')
+    const { borderClasses } = useBorder(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => props.bgColor))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => props.color))
-    const { densityClasses } = useDensity(props, 'v-bottom-navigation')
+    const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props, 'v-bottom-navigation')
+    const { roundedClasses } = useRounded(props)
     const height = computed(() => (
       Number(props.height) -
       (props.density === 'comfortable' ? 8 : 0) -

@@ -38,7 +38,7 @@ export const VSwitch = defineComponent({
 
   setup (props, { attrs, slots }) {
     const indeterminate = useProxiedModel(props, 'indeterminate')
-    const { loaderClasses } = useLoader(props, 'v-switch')
+    const { loaderClasses } = useLoader(props)
 
     const loaderColor = computed(() => {
       return typeof props.loading === 'string' && props.loading !== ''

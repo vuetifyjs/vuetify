@@ -1,6 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import { convertToUnit, propsFactory } from '@/util'
+import { convertToUnit, getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -33,7 +33,10 @@ export const makePositionProps = propsFactory({
   top: [Boolean, Number, String],
 }, 'position')
 
-export function usePosition (props: PositionProps, name: string) {
+export function usePosition (
+  props: PositionProps,
+  name = getCurrentInstanceName(),
+) {
   const targets = ['top', 'right', 'bottom', 'left'] as const
 
   const positionClasses = computed(() => {
