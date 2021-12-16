@@ -83,10 +83,10 @@ export const VBreadcrumbs = defineComponent({
             <VBreadcrumbsItem
               key={ index }
               { ...item }
-              text={ undefined } // text is a prop on <a> element (alias for textContent), so make sure we don't pass it along
-            >
-              { slots.text ? slots.text?.({ item, index }) : item.text }
-            </VBreadcrumbsItem>
+              v-slots={{
+                default: slots.text ? () => slots.text?.({ item, index }) : undefined,
+              }}
+            />
 
             { index < props.items.length - 1 && (
               <VBreadcrumbsDivider>
