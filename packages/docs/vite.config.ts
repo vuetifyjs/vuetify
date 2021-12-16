@@ -136,6 +136,18 @@ export default defineConfig(({ mode }) => {
         include: [resolve('src/i18n/messages/**')],
       }),
 
+      {
+        name: 'vuetify:codepen-blocks',
+        transform (code, id) {
+          const type = id.includes('vue&type=codepen-additional') ? 'codepenAdditional'
+            : id.includes('vue&type=codepen-resources') ? 'codepenResources'
+            : null
+          if (!type) return
+
+          return `export default Comp => Comp['${type}'] = \`${code.replaceAll('`', '\\`')}\``
+        },
+      },
+
       Inspect(),
     ],
 

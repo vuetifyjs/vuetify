@@ -10,7 +10,6 @@ import AppTable from '@/components/app/Table.vue'
 import AppCaption from '@/components/app/Caption.vue'
 import AppDivider from '@/components/app/Divider.vue'
 import Image from '@/components/Image.vue'
-import Example from '@/components/example/index.vue'
 import Alert from '@/components/Alert.vue'
 import ApiLinks from '@/components/api/Links.vue'
 import ApiSection from '@/components/api/Section.vue'
@@ -24,6 +23,8 @@ import PromotedAd from '@/components/ads/Promoted.vue'
 import VuetifyAd from '@/components/ads/Vuetify.vue'
 import CarbonAd from '@/components/ads/Carbon.vue'
 import PageComponent from '@/components/PageComponent.vue'
+import Example from '@/components/examples/Example.vue'
+import Usage from '@/components/examples/Usage.vue'
 
 import type { GlobalComponentsPlugin } from '@/types'
 
@@ -42,7 +43,6 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
 
   // Used by markdown files
   app.component('Image', Image)
-  app.component('Example', Example)
   app.component('Alert', Alert)
   app.component('ApiLinks', ApiLinks)
   app.component('ApiSection', ApiSection)
@@ -56,4 +56,6 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
   app.component('PromotedAd', PromotedAd)
   app.component('PageComponent', PageComponent)
   app.component('EntryAd', EntryAd)
+  app.component('Example', Example)
+  app.component('Usage', Usage)
 }

@@ -57,7 +57,10 @@
     props: {
       code: String,
       inline: Boolean,
-      language: String,
+      language: {
+        type: String,
+        default: 'markup',
+      },
     },
 
     setup (props) {

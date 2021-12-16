@@ -42,7 +42,7 @@ export const useAdsStore = defineStore('ads', () => {
       status: 'published',
     })
 
-    ads.value = objects
+    if (objects) { ads.value = objects }
   })
 
   return { ads }
