@@ -1,14 +1,13 @@
-import { defineComponent } from '@/util'
+import { convertToUnit, defineComponent } from '@/util'
 
 import type { PropType } from 'vue'
-import type { Column } from './VDataTable'
 
-export const VDataTableHeaders = defineComponent({
-  name: 'VDataTableHeaders',
+export const VDataTableHeadersGrid = defineComponent({
+  name: 'VDataTableHeadersGrid',
 
   props: {
     rows: {
-      type: Array as PropType<Column[][]>,
+      type: Array as PropType<any[][]>,
       required: true,
     },
     rowHeight: {
@@ -19,6 +18,17 @@ export const VDataTableHeaders = defineComponent({
   },
 
   setup (props, { slots }) {
+    const getStickyStyles = (column: any, i: number) => {
+      if (!props.sticky && !column.sticky) return null
+
+      return {
+        position: 'sticky',
+        zIndex: column.sticky ? 4 : props.sticky ? 3 : undefined,
+        left: column.sticky ? convertToUnit(column.stickyWidth) : undefined,
+        top: props.sticky ? `${props.rowHeight * i}px` : undefined,
+      }
+    }
+
     return () => {
       return props.rows.map((row, i) => (
         <tr class="v-data-table__tr" role="row">
@@ -28,11 +38,7 @@ export const VDataTableHeaders = defineComponent({
               style={{
                 ...column.style,
                 height: `${props.rowHeight * (column.rowspan ?? 1)}px`,
-                ...(props.sticky && {
-                  position: 'sticky',
-                  zIndex: 2,
-                  top: `${props.rowHeight * i}px`,
-                }),
+                ...getStickyStyles(column, i),
               }}
               role="columnheader"
               colspan={column.colspan}

@@ -1,12 +1,13 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { convertToUnit, defineComponent, getCurrentInstance } from '@/util'
-import { VDataTableHeaders } from './VDataTableHeaders'
-import './VDataTable.sass'
+import { VDataTableHeadersGrid } from './VDataTableHeadersGrid'
+import './VDataTableGrid.sass'
 
 import type { PropType, Ref } from 'vue'
-import { VDataTableRows } from './VDataTableRows'
-import { createExpanded, useHeaders } from './VDataTable'
+import { VDataTableRowsGrid } from './VDataTableRowsGrid'
+import { useHeaders } from './VDataTableGrid'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { createExpanded } from '../composables'
 
 type DataTableHeader = {
   id: string
@@ -21,22 +22,24 @@ export type Column = DataTableHeader & {
   style: any
 }
 
-const useVirtual = (props: { height?: string | number, itemHeight: string | number }, itemsLength: Ref<number>) => {
+export const useVirtual = (props: { height?: string | number, itemHeight: string | number }, itemsLength: Ref<number>) => {
   const vm = getCurrentInstance('useVirtual')
 
   const containerRef = ref<HTMLElement>()
   const itemHeight = computed(() => parseInt(props.itemHeight, 10))
   const totalHeight = computed(() => itemsLength.value * itemHeight.value)
   const scrollTop = ref(0) // TODO: Scroll threshold should be relative to current position to avoid fixed load positions
-  const chunkSize = ref(30) // TODO: Should reflect height of container
+  const chunkSize = ref(10) // TODO: Should reflect height of container
   const windowSize = computed(() => itemHeight.value * (chunkSize.value * 3))
   // const scrollIndex = computed(() => Math.floor(scrollTop.value / itemHeight.value))
   // const chunkIndex = computed(() => Math.floor(scrollIndex.value / chunkSize.value))
   // const startIndex = computed(() => Math.max(0, (chunkIndex.value * chunkSize.value) - chunkSize.value))
   const startIndex = ref(0)
   const stopIndex = computed(() => Math.min(startIndex.value + (chunkSize.value * 3), itemsLength.value))
+  const topOffset = computed(() => Math.max(0, startIndex.value * itemHeight.value))
+  const bottomOffset = computed(() => Math.min(itemsLength.value, stopIndex.value * itemHeight.value))
   const offsetStart = computed(() => Math.max(0, startIndex.value * itemHeight.value))
-  const isScrolling = ref(false)
+  // const isScrolling = ref(false)
 
   const startOffset = computed(() => itemHeight.value * startIndex.value)
 
@@ -48,37 +51,48 @@ const useVirtual = (props: { height?: string | number, itemHeight: string | numb
     immediate: true,
   })
 
+  let isScrolling = false
+  let startScroll: undefined | number
   function tableScroll () {
-    isScrolling.value = true
+    // if (isScrolling) {
+    //   return
+    // }
+    if (!startScroll) startScroll = containerRef.value?.scrollTop
+    console.log('start scrolling')
 
-    vm.emit('scroll', { startIndex: startIndex.value, stopIndex: stopIndex.value })
+    isScrolling = true
+
+    // vm.emit('scroll', { startIndex: startIndex.value, stopIndex: stopIndex.value })
 
     if (scrollTimeout) clearTimeout(scrollTimeout)
 
     scrollTimeout = setTimeout(() => {
-      isScrolling.value = false
+      console.log('scroll stop', Math.abs((containerRef.value?.scrollTop ?? 0) - (startScroll ?? 0)))
+      isScrolling = false
+      startScroll = undefined
+      // isScrolling.value = false
 
-      const newScrollTop = (containerRef.value?.scrollTop ?? 0)
-      const direction = newScrollTop > scrollTop.value ? 1 : -1
+      // const newScrollTop = (containerRef.value?.scrollTop ?? 0)
+      // const direction = newScrollTop > scrollTop.value ? 1 : -1
 
-      scrollTop.value = newScrollTop
+      // scrollTop.value = newScrollTop
 
-      const diff = Math.abs(newScrollTop - (direction < 0 ? startOffset.value : startOffset.value + windowSize.value))
+      // const diff = Math.abs(newScrollTop - (direction < 0 ? startOffset.value : startOffset.value + windowSize.value))
+      // const delta = windowSize.value / 4
 
-      console.log({
-        direction,
-        newScrollTop,
-        startOffset: startOffset.value,
-        windowSize: windowSize.value,
-        diff,
-      })
+      // console.log({
+      //   direction,
+      //   newScrollTop,
+      //   startOffset: startOffset.value,
+      //   windowSize: windowSize.value,
+      //   diff,
+      //   delta,
+      // })
 
-      const delta = windowSize.value / 4
-
-      if (diff < delta || diff > windowSize.value) {
-        startIndex.value = Math.floor(Math.max(0, (newScrollTop - (windowSize.value / 2))) / itemHeight.value)
-      }
-    }, 100)
+      // if (diff < delta || diff > windowSize.value / 2) {
+      //   startIndex.value = Math.floor(Math.max(0, (newScrollTop - (windowSize.value / 2))) / itemHeight.value)
+      // }
+    }, 200)
   }
 
   onMounted(() => {
@@ -120,6 +134,7 @@ export const VVirtualDataTable = defineComponent({
       type: [String, Number],
       default: 48,
     },
+    width: [String, Number],
     stickyHeader: Boolean,
     loading: Boolean,
     showLoader: Boolean,
@@ -172,10 +187,10 @@ export const VVirtualDataTable = defineComponent({
             role="table"
           >
             <thead class="v-data-table__thead" role="rowgroup">
-              <VDataTableHeaders rows={ headerRows.value } rowHeight={ itemHeight.value } sticky={ props.stickyHeader } />
+              <VDataTableHeadersGrid rows={ headerRows.value } rowHeight={ itemHeight.value } sticky={ props.stickyHeader } />
             </thead>
             <tbody class="v-data-table__tbody" role="rowgroup">
-              <VDataTableRows
+              <VDataTableRowsGrid
                 showLoader={ props.showLoader }
                 loading={ loading.value }
                 columns={ rowColumns.value }

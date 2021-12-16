@@ -1,18 +1,22 @@
 import { computed, inject, provide, ref, watch } from 'vue'
 import { convertToUnit, createRange, defineComponent } from '@/util'
-import { VDataTableHeaders } from './VDataTableHeaders'
-import './VDataTable.sass'
+import { VDataTableHeadersGrid } from './VDataTableHeadersGrid'
+import { VDataTableRowsGrid } from './VDataTableRowsGrid'
+
+import './VDataTableGrid.sass'
 
 import type { InjectionKey, PropType } from 'vue'
-import { VDataTableRows } from './VDataTableRows'
 
 type DataTableHeader = {
   id: string
   name: string
   colspan?: number
   rowspan?: number
+  width?: number
   minWidth?: string
   maxWidth?: string
+  sticky?: boolean
+  stickyWidth?: number
 }
 
 export type Column = DataTableHeader & {
@@ -38,6 +42,7 @@ export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader
 
     const rowsWithStyle: Column[][] = []
     let rowStart = 1
+    let stickyWidth = 0
     const colStart = createRange(width).map(() => 1)
     for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
       const columnsWithStyle: Column[] = []
@@ -49,9 +54,14 @@ export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader
 
         const newColumn = {
           ...column,
+          stickyWidth,
           style: {
             'grid-area': `${rowStart} / ${colStart[rowIndex]} / ${rowEnd} / ${colEnd}`,
           },
+        }
+
+        if (column.sticky) {
+          stickyWidth += column.width ?? 0
         }
 
         columnsWithStyle.push(newColumn)
@@ -78,7 +88,11 @@ export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader
   })
 
   const tableGridStyles = computed(() => ({
-    'grid-template-columns': rowColumns.value.map(col => `minmax(${col.minWidth ?? '150px'}, ${col.maxWidth ?? '1fr'})`).join(' '),
+    'grid-template-columns': rowColumns.value.map(col => {
+      const min = convertToUnit(col.width ?? col.minWidth ?? '150px')
+      const max = convertToUnit(col.width ?? col.maxWidth ?? '1fr')
+      return `minmax(${min}, ${max})`
+    }).join(' '),
   }))
 
   return {
@@ -88,50 +102,8 @@ export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader
   }
 }
 
-export const VDataTableExpandedKey: InjectionKey<{
-  toggleExpand: (index: number, item: any) => void
-}> = Symbol.for('vuetify:datatable:expanded')
-
-export const createExpanded = (props: { items: any[] }) => {
-  const expanded = ref(new Map<string, number>())
-
-  function toggleExpand (index: number, item: any) {
-    const isExpanded = expanded.value.has(item.id)
-
-    if (isExpanded) {
-      expanded.value.delete(item.id)
-    } else {
-      expanded.value.set(item.id, index)
-    }
-  }
-
-  const items = computed(() => {
-    const incoming = [...props.items]
-
-    for (const index of expanded.value.values()) {
-      incoming.splice(index + 1, 0, {
-        [VDataTableExpandedKey as symbol]: true,
-      })
-    }
-
-    return incoming
-  })
-
-  provide(VDataTableExpandedKey, { toggleExpand })
-
-  return { items, expanded, toggleExpand }
-}
-
-export const useExpanded = () => {
-  const data = inject(VDataTableExpandedKey)
-
-  if (!data) throw new Error('foo')
-
-  return data
-}
-
-export const VDataTable = defineComponent({
-  name: 'VDataTable',
+export const VDataTableGrid = defineComponent({
+  name: 'VDataTableGrid',
 
   props: {
     headers: {
@@ -147,6 +119,7 @@ export const VDataTable = defineComponent({
       type: [String, Number],
       default: 48,
     },
+    width: [String, Number],
     stickyHeader: Boolean,
   },
 
@@ -160,20 +133,23 @@ export const VDataTable = defineComponent({
         class="v-data-table"
         style={{
           height: convertToUnit(props.height),
+          width: convertToUnit(props.width),
         }}
       >
         <table
           class="v-data-table__table"
           style={{
             ...tableGridStyles.value,
+            height: convertToUnit(props.height),
+            width: convertToUnit(props.width),
           }}
           role="table"
         >
           <thead class="v-data-table__thead" role="rowgroup">
-            <VDataTableHeaders rows={ headerRows.value } rowHeight={ parseInt(props.rowHeight, 10) } sticky={ props.stickyHeader } />
+            <VDataTableHeadersGrid rows={ headerRows.value } rowHeight={ parseInt(props.rowHeight, 10) } sticky={ props.stickyHeader } />
           </thead>
           <tbody class="v-data-table__tbody" role="rowgroup">
-            <VDataTableRows
+            <VDataTableRowsGrid
               columns={ rowColumns.value }
               items={ items.value }
               rowHeight={ parseInt(props.rowHeight, 10) }

@@ -1,15 +1,14 @@
 import { convertToUnit, createRange, defineComponent } from '@/util'
 
 import type { PropType } from 'vue'
-import type { Column } from './VDataTable'
-import { useExpanded, VDataTableExpandedKey } from './VDataTable'
+import { useExpanded, VDataTableExpandedKey } from '../composables'
 
-export const VDataTableRows = defineComponent({
-  name: 'VDataTableRows',
+export const VDataTableRowsGrid = defineComponent({
+  name: 'VDataTableRowsGrid',
 
   props: {
     columns: {
-      type: Array as PropType<Column[]>,
+      type: Array as PropType<any[]>,
       required: true,
     },
     items: {
@@ -94,10 +93,14 @@ export const VDataTableRows = defineComponent({
             <td
               class={[
                 'v-data-table__td',
+                {
+                  'v-data-table__td--sticky': column.sticky,
+                },
               ]}
               style={{
                 height: `${props.rowHeight}px`,
                 transform: `translateY(${convertToUnit(props.offsetStart)})`,
+                left: column.sticky ? convertToUnit(column.stickyWidth) : undefined,
               }}
               role="cell"
             >
