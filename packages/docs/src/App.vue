@@ -6,28 +6,40 @@
 
 <script lang="ts">
   // Utilities
-  import { defineComponent, onBeforeMount } from 'vue'
+  import { computed, defineComponent, onBeforeMount, toRef, toRefs } from 'vue'
   import { useHead } from '@vueuse/head'
   import { useI18n } from 'vue-i18n'
-  import { useRouter } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
   import { useUserStore } from '@/store/user'
+  import metadata from '@/data/metadata.json'
+  import { genAppMetaInfo } from '@/util/metadata.js'
 
   export default defineComponent({
     name: 'App',
 
     setup () {
-      onBeforeMount(() => {
-        const router = useRouter()
-        const { locale } = useI18n()
+      const user = useUserStore()
+      const router = useRouter()
+      const route = useRoute()
+      const { locale } = useI18n()
 
-        // https://github.com/vueuse/head
-        useHead({
-          title: 'Vuetify',
-          meta: [
-            { name: 'description', content: 'Vite Docs Test', layout: 'home' },
-          ],
+      const path = computed(() => route.path.replace(`/${locale.value}`, ''))
+
+      const meta = computed(() => {
+        return genAppMetaInfo(path.value === '' ? metadata : {
+          title: `${route.meta.title} — Vuetify`,
+          description: route.meta.description,
+          keywords: route.meta.keywords,
         })
+      })
 
+      useHead({
+        title: computed(() => meta.value.title),
+        meta: computed(() => meta.value.meta),
+        link: computed(() => meta.value.link),
+      })
+
+      onBeforeMount(() => {
         // set current route lang if root
         const currentRoute = router.currentRoute.value
         if (currentRoute.path === '/') {
@@ -36,7 +48,7 @@
       })
 
       return {
-        user: useUserStore(),
+        user,
       }
     },
   })

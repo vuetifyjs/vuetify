@@ -7,11 +7,41 @@ export function genAppMetaInfo (defaults) {
   return metadata
 }
 
-export function genFacebookMetaInfo (args) {
+export function genMetaInfo (
+  title,
+  description,
+  keywords,
+) {
+  const length = description.length
+
+  description = length <= 117
+    ? description
+    : `${description.slice(0, 116)}...`
+
+  const options = {
+    description,
+    keywords,
+    title,
+  }
+
+  return {
+    link: [],
+    meta: [
+      { name: 'description', content: description },
+      { name: 'keywords', content: keywords },
+      ...genFacebookMetaInfo(options),
+      ...genOpenGraphMetaInfo(options),
+      ...genTwitterMetaInfo(),
+    ],
+    title,
+  }
+}
+
+function genFacebookMetaInfo (args) {
   return parseMeta('fb', { app_id: '542948969434243' })
 }
 
-export function genLink () {
+function genLink () {
   const rels = ['preconnect', 'dns-prefetch']
   const hrefs = [
     'https://api.cosmicjs.com/',
@@ -39,7 +69,7 @@ export function genLink () {
   return link
 }
 
-export function genOpenGraphMetaInfo (args) {
+function genOpenGraphMetaInfo (args) {
   return parseMeta('og', {
     description: args.description,
     image: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png',
@@ -49,7 +79,7 @@ export function genOpenGraphMetaInfo (args) {
   })
 }
 
-export function parseMeta (
+function parseMeta (
   prefix,
   metadata,
 ) {
@@ -60,7 +90,6 @@ export function parseMeta (
     const property = `${prefix}:${key}`
 
     meta.push({
-      vmid: property,
       property,
       content,
     })
@@ -69,7 +98,7 @@ export function parseMeta (
   return meta
 }
 
-export function genMeta () {
+function genMeta () {
   return [
     { charset: 'utf-8' },
     { name: 'mobile-web-app-capable', content: 'yes' },
@@ -80,37 +109,7 @@ export function genMeta () {
   ]
 }
 
-export function genMetaInfo (
-  title,
-  description,
-  keywords,
-) {
-  const length = description.length
-
-  description = length <= 117
-    ? description
-    : `${description.slice(0, 116)}...`
-
-  const options = {
-    description,
-    keywords,
-    title,
-  }
-
-  return {
-    link: [],
-    meta: [
-      { vmid: 'description', name: 'description', content: description },
-      { vmid: 'keywords', name: 'keywords', content: keywords },
-      ...genFacebookMetaInfo(options),
-      ...genOpenGraphMetaInfo(options),
-      ...genTwitterMetaInfo(),
-    ],
-    title,
-  }
-}
-
-export function genTwitterMetaInfo () {
+function genTwitterMetaInfo () {
   return parseMeta('twitter', {
     card: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png',
     domain: 'https://vuetifyjs.com/',
