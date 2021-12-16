@@ -5,6 +5,7 @@ import './VBottomNavigation.sass'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
@@ -17,6 +18,9 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { computed, reactive, toRef } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 
+// Types
+import { VBtnToggleSymbol } from '../VBtnToggle/VBtnToggle'
+
 export const VBottomNavigation = defineComponent({
   name: 'VBottomNavigation',
 
@@ -24,10 +28,6 @@ export const VBottomNavigation = defineComponent({
     bgColor: String,
     color: String,
     grow: Boolean,
-    modelValue: {
-      type: Boolean,
-      default: true,
-    },
     mode: {
       type: String,
       validator: (v: any) => !v || ['horizontal', 'shift'].includes(v),
@@ -36,17 +36,22 @@ export const VBottomNavigation = defineComponent({
       type: [Number, String],
       default: 56,
     },
+
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
     ...makeRoundedProps(),
     ...makeLayoutItemProps({ name: 'bottom-navigation' }),
     ...makeTagProps({ tag: 'header' }),
+    ...makeGroupProps({
+      modelValue: true,
+      selectedClass: 'v-btn--selected',
+    }),
     ...makeThemeProps(),
   },
 
   emits: {
-    'update:modelValue': (value: boolean) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { slots }) {
@@ -72,16 +77,18 @@ export const VBottomNavigation = defineComponent({
       isActive
     )
 
+    useGroup(props, VBtnToggleSymbol)
+
     provideDefaults(reactive({
       defaults: {
         VBtn: {
           color: toRef(props, 'color'),
           density: toRef(props, 'density'),
           height: 'auto',
-          flat: true,
-          minWidth: 80,
           maxWidth: 168,
+          minWidth: 80,
           stacked: computed(() => props.mode !== 'horizontal'),
+          variant: 'text',
           width: computed(() => props.grow ? '100%' : 'auto'),
         },
       },
