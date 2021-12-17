@@ -155,6 +155,7 @@ export default defineConfig(({ mode }) => {
     ssgOptions: {
       script: 'async',
       formatting: 'minify',
+      crittersOptions: false,
     },
 
     optimizeDeps: {

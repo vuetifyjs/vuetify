@@ -33,8 +33,8 @@ export function genMetaInfo (
   return {
     link: [] as (Record<string, any>[]),
     meta: [
-      { name: 'description', content: description },
-      { name: 'keywords', content: keywords },
+      { key: 'description', name: 'description', content: description },
+      { key: 'keywords', name: 'keywords', content: keywords },
       ...genFacebookMetaInfo(),
       ...genOpenGraphMetaInfo(options),
       ...genTwitterMetaInfo(),
@@ -96,6 +96,7 @@ function parseMeta (
     const property = `${prefix}:${key}`
 
     meta.push({
+      key: property,
       property,
       content,
     })

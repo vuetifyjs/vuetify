@@ -1,6 +1,6 @@
 // Utilities
 import { useAdsStore } from '@/store/ads'
-import kebabCase from 'lodash/kebabCase'
+import { kebabCase } from 'lodash-es'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 

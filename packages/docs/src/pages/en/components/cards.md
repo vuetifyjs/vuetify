@@ -88,7 +88,7 @@ TODO
 
 ### v-card-subtitle
 
-Provides a default **font-size** and **padding** for card subtitles. Font-size can be overwritten with [typography classes](/styles/typography).
+Provides a default **font-size** and **padding** for card subtitles. Font-size can be overwritten with [typography classes](/styles/text-and-typography).
 
 ### v-card-text
 
@@ -96,7 +96,7 @@ Primarily used for **text content** in a card. Applies padding for text, reduces
 
 ### v-card-title
 
-Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with [typography classes](/styles/typography).
+Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with [typography classes](/styles/text-and-typography).
 
 <promoted-ad slug="vuetify-zero-theme-pro" />
 

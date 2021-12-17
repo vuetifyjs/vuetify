@@ -7,7 +7,7 @@
 
 <script>
   export default {
-    name: 'Image',
+    name: 'AppImg',
 
     inheritAttrs: false,
   }

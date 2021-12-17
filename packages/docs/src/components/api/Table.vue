@@ -92,8 +92,8 @@
   // Imports
   import Prism from 'prismjs'
   import 'prismjs/themes/prism.css'
-  import 'prismjs/components/prism-scss'
-  import 'prismjs/components/prism-typescript'
+  import 'prismjs/components/prism-scss.js'
+  import 'prismjs/components/prism-typescript.js'
 
   // Utilities
   import { computed, defineComponent } from 'vue'

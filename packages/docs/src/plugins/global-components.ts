@@ -9,7 +9,7 @@ import AppSheet from '@/components/app/Sheet.vue'
 import AppTable from '@/components/app/Table.vue'
 import AppCaption from '@/components/app/Caption.vue'
 import AppDivider from '@/components/app/Divider.vue'
-import Image from '@/components/Image.vue'
+import AppImg from '@/components/app/Img.vue'
 import Alert from '@/components/Alert.vue'
 import ApiLinks from '@/components/api/Links.vue'
 import ApiSection from '@/components/api/Section.vue'
@@ -17,6 +17,7 @@ import ApiTable from '@/components/api/Table.vue'
 import ApiInline from '@/components/api/Inline.vue'
 import Backmatter from '@/components/Backmatter.vue'
 import InlineAd from '@/components/ads/Inline.vue'
+import DiscoveryAd from '@/components/ads/Discovery.vue'
 import RandomAd from '@/components/ads/Random.vue'
 import EntryAd from '@/components/ads/Entry.vue'
 import PromotedAd from '@/components/ads/Promoted.vue'
@@ -42,7 +43,7 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
   app.component('AppDivider', AppDivider)
 
   // Used by markdown files
-  app.component('Image', Image)
+  app.component('AppImg', AppImg)
   app.component('Alert', Alert)
   app.component('ApiLinks', ApiLinks)
   app.component('ApiSection', ApiSection)
@@ -50,6 +51,7 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
   app.component('ApiInline', ApiInline)
   app.component('Backmatter', Backmatter)
   app.component('InlineAd', InlineAd)
+  app.component('DiscoveryAd', DiscoveryAd)
   app.component('RandomAd', RandomAd)
   app.component('CarbonAd', CarbonAd)
   app.component('VuetifyAd', VuetifyAd)

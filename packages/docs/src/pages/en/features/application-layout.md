@@ -16,7 +16,7 @@ Vuetify features an application layout system that allows you to easily create c
 The following components are compatible with the layout system:
 
 - [v-app-bar](/components/app-bars)
-- [v-navigation-drawer](/components/v-navigation-drawer)
+- [v-navigation-drawer](/components/navigation-drawers)
 
 The final part of the layout system is the **v-main** component. Inside this is where you place your page content. It will use the remaining free space on the page after all layout components have reserved their space.
 

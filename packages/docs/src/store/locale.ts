@@ -8,6 +8,6 @@ export type RootState = {
 export const useLocaleStore = defineStore({
   id: 'locale',
   state: () => ({
-    locale: (IN_BROWSER && window.localStorage.getItem('currentLocale')) ?? 'en',
+    locale: (IN_BROWSER && window.localStorage.getItem('currentLocale')) || 'en',
   } as RootState),
 })
