@@ -6,6 +6,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { createLayout, makeLayoutProps } from '@/composables/layout'
 
 // Utilities
+import { watch } from 'vue'
 import { defineComponent, useRender } from '@/util'
 import { useRtl } from '@/composables/rtl'
 
@@ -18,9 +19,11 @@ export const VApp = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
+    const { themeClasses, current } = useTheme()
     const { layoutClasses, getLayoutItem, items } = createLayout(props)
     const { rtlClasses } = useRtl()
+
+    watch(() => props.theme, value => value && (current.value = value), { immediate: true })
 
     useRender(() => (
       <div

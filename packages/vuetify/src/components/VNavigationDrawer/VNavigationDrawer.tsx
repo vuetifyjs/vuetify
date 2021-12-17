@@ -10,7 +10,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useDisplay } from '@/composables/display'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
@@ -64,7 +64,7 @@ export const VNavigationDrawer = defineComponent({
   },
 
   setup (props, { attrs, slots }) {
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { elevationClasses } = useElevation(props)

@@ -7,7 +7,7 @@ import { VTimelineItem } from './VTimelineItem'
 // Composables
 import { makeTagProps } from '@/composables/tag'
 import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Helpers
 import { computed, provide, toRef } from 'vue'
@@ -54,7 +54,7 @@ export const VTimeline = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
 
     provide(VTimelineSymbol, {

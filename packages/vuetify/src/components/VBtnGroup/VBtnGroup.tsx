@@ -7,7 +7,7 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 import { provideDefaults } from '@/composables/defaults'
 
@@ -31,7 +31,7 @@ export const VBtnGroup = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)

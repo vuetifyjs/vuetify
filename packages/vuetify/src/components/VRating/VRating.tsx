@@ -9,7 +9,7 @@ import { makeDensityProps } from '@/composables/density'
 import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
@@ -72,7 +72,7 @@ export const VRating = defineComponent({
 
   setup (props, { slots }) {
     const { t } = useLocale()
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const rating = useProxiedModel(props, 'modelValue')
 
     const range = computed(() => createRange(Number(props.length), 1))
