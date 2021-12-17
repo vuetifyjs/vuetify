@@ -69,6 +69,8 @@ export const useVirtual = (props: { height?: string | number, itemHeight: string
       // console.log('back', startIndex.value)
     }
 
+    clearTimeout(scrollTimeout)
+
     scrollTimeout = setTimeout(() => {
       if (!containerRef.value) return
 
@@ -135,37 +137,24 @@ export const useVirtual = (props: { height?: string | number, itemHeight: string
 }
 
 export const VDataTableExpandedKey: InjectionKey<{
-  toggleExpand: (index: number, item: any) => void
+  expand: (item: any, value: boolean) => void
+  expanded: Ref<Set<string>>
 }> = Symbol.for('vuetify:datatable:expanded')
 
-export const createExpanded = (props: { items: any[] }) => {
-  const expanded = ref(new Map<string, number>())
+export const createExpanded = () => {
+  const expanded = ref(new Set<string>())
 
-  function toggleExpand (index: number, item: any) {
-    const isExpanded = expanded.value.has(item.id)
-
-    if (isExpanded) {
+  function expand (item: any, value: boolean) {
+    if (!value) {
       expanded.value.delete(item.id)
     } else {
-      expanded.value.set(item.id, index)
+      expanded.value.add(item.id)
     }
   }
 
-  const items = computed(() => {
-    const incoming = [...props.items]
+  provide(VDataTableExpandedKey, { expand, expanded })
 
-    for (const index of expanded.value.values()) {
-      incoming.splice(index + 1, 0, {
-        [VDataTableExpandedKey as symbol]: true,
-      })
-    }
-
-    return incoming
-  })
-
-  provide(VDataTableExpandedKey, { toggleExpand })
-
-  return { items, expanded, toggleExpand }
+  return { expanded }
 }
 
 export const useExpanded = () => {

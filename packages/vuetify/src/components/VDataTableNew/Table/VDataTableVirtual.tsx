@@ -1,7 +1,7 @@
 import { VTable } from '@/components'
 import { convertToUnit, defineComponent } from '@/util'
 import { computed, toRef } from 'vue'
-import { useExpanded, useHeaders, useVirtual } from '../composables'
+import { createExpanded, useExpanded, useHeaders, useVirtual } from '../composables'
 import { makeVDataTableProps } from './VDataTable'
 import { VDataTableVirtualHeaders } from './VDataTableVirtualHeaders'
 import { VDataTableVirtualRows } from './VDataTableVirtualRows'
@@ -18,13 +18,14 @@ export const VDataTableVirtual = defineComponent({
       type: Number,
       required: true,
     },
+    scrollLoader: Boolean,
     ...makeVDataTableProps(),
   },
 
   setup (props, { slots }) {
     const { headers, columns } = useHeaders(props)
 
-    const { expanded } = useExpanded()
+    const { expanded } = createExpanded()
 
     const {
       containerRef,
@@ -37,17 +38,7 @@ export const VDataTableVirtual = defineComponent({
     } = useVirtual(props, computed(() => props.itemsLength + expanded.value.size))
 
     const items = computed(() => {
-      const visibleItems = props.items.slice(startIndex.value, stopIndex.value)
-
-      for (let i = 0; i < visibleItems.length; i++) {
-        if (expanded.has(visibleItems[i].id)) {
-          visibleItems.splice(i, 0, {
-            expanded: true,
-          })
-        }
-      }
-
-      return visibleItems
+      return props.items.slice(startIndex.value, stopIndex.value)
     })
 
     return () => (
@@ -77,6 +68,7 @@ export const VDataTableVirtual = defineComponent({
                     rowHeight={ itemHeight.value }
                     before={ beforeHeight.value }
                     after={ afterHeight.value }
+                    isScrolling={ isScrolling.value && props.scrollLoader }
                     v-slots={ slots }
                   />
                 </tbody>
