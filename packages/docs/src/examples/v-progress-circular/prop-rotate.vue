@@ -50,7 +50,7 @@
         value: 0,
       }
     },
-    beforeDestroy () {
+    beforeUnmount () {
       clearInterval(this.interval)
     },
     mounted () {

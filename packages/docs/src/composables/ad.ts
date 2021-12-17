@@ -41,7 +41,7 @@ export const useAd = (props: { medium: string, slug?: string, type?: string, com
       return `${url}?${query}`
     }
 
-    return `${url}?utm_source=vuetifyads&utm_medium=${props.medium}${query ? `&${query}` : ''}`
+    return `${url}?utm_source=vuetifyads&utm_medium=${props.medium}` + (query ? `&${query}` : '')
   })
 
   const isSponsored = computed(() => {

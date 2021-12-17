@@ -6,13 +6,13 @@
 
 <script lang="ts">
   // Utilities
-  import { computed, defineComponent, onBeforeMount, toRef, toRefs } from 'vue'
+  import { computed, defineComponent, onBeforeMount } from 'vue'
   import { useHead } from '@vueuse/head'
   import { useI18n } from 'vue-i18n'
   import { useRoute, useRouter } from 'vue-router'
   import { useUserStore } from '@/store/user'
   import metadata from '@/data/metadata.json'
-  import { genAppMetaInfo } from '@/util/metadata.js'
+  import { genAppMetaInfo } from '@/util/metadata'
 
   export default defineComponent({
     name: 'App',

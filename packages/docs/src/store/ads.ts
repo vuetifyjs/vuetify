@@ -36,7 +36,7 @@ export const useAdsStore = defineStore('ads', () => {
 
     const { bucket } = useCosmic()
 
-    const { objects } = await bucket.getObjects({
+    const { objects } = await bucket.getObjects<Ad>({
       type: 'ads',
       props: 'metadata,slug,title',
       status: 'published',

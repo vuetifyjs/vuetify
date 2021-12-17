@@ -16,7 +16,7 @@
         </template>
       </div>
     </v-expand-transition>
-    <v-lazy style="min-height: 200px" @update:modelValue="importExample">
+    <v-lazy style="min-height: 200px" @update:model-value="importExample">
       <v-theme-provider v-if="isLoaded" :theme="theme" with-background class="pa-4">
         <component :is="ExampleComponent" />
       </v-theme-provider>

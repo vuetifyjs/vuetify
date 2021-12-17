@@ -24,6 +24,7 @@
   "dependencies": {
     "@vueuse/head": "^0.7.4",
     "cosmicjs": "^4.1.2",
+    "lodash-es": "^4.17.21",
     "pinia": "^2.0.6",
     "prism-theme-vars": "^0.2.2",
     "prismjs": "^1.25.0",
@@ -35,8 +36,10 @@
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^3.2.1",
+    "@types/lodash-es": "^4.17.5",
     "@types/markdown-it": "^12.2.3",
     "@types/prismjs": "^1.16.6",
+    "@types/rimraf": "^3.0.2",
     "@vitejs/plugin-vue": "^2.0.1",
     "@vue/compiler-sfc": "^3.2.26",
     "@vue/server-renderer": "^3.2.26",

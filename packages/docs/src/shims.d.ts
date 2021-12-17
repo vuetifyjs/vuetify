@@ -39,3 +39,22 @@ declare module 'markdown-it-link-attributes' {
   const MarkdownItLinkAttributes: MarkdownIt.PluginWithOptions<Config | Config[]>
   export default MarkdownItLinkAttributes
 }
+
+declare module 'cosmicjs' {
+  interface Cosmic {
+    bucket (params: {
+      slug: string
+      read_key: string
+      write_key?: string
+    }): Bucket
+  }
+  interface Bucket {
+    getObject<T>(params: Record<string, any>): Promise<{ object: T }>
+    getObjects<T>(params: Record<string, any>): Promise<{ objects: T[] }>
+  }
+  export default function Cosmic (): Cosmic
+}
+
+declare module 'virtual:pwa-register' {
+  export function registerSW (params: { immediate?: boolean }): void
+}

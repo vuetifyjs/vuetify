@@ -1,9 +1,9 @@
 <template>
   <v-container class="fill-height">
     <v-data-iterator
+      v-model:items-per-page="itemsPerPage"
       :footer-props="{ itemsPerPageOptions }"
       :items="items"
-      :items-per-page.sync="itemsPerPage"
       :page="page"
       :search="search"
       :sort-by="sortBy.toLowerCase()"

@@ -26,6 +26,8 @@
       },
     },
 
+    emits: ['script:error', 'script:load'],
+
     setup (props, { emit }) {
       const rootEl = ref<HTMLElement>()
       const scriptEl = ref<HTMLScriptElement>()

@@ -15,7 +15,7 @@
       </div>
     </v-navigation-drawer>
     <v-main>
-      <v-card height="200px" />
+      <v-card height="200px"></v-card>
     </v-main>
   </v-app>
 </template>

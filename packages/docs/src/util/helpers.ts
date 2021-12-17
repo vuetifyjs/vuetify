@@ -43,7 +43,7 @@ export async function waitForReadystate () {
 
 /** Jaro-Winkler distance between two strings */
 // eslint-disable-next-line max-statements
-export function distance (s1, s2) {
+export function distance (s1: string, s2: string) {
   // Exit early if either are empty.
   if (s1.length === 0 || s2.length === 0) {
     return 0

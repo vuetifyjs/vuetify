@@ -45,10 +45,10 @@
               :prepend-avatar="item.avatar"
               ripple
             >
-              <template #title>
+              <template v-slot:title>
                 <div v-html="item.title"></div>
               </template>
-              <template #subtitle>
+              <template v-slot:subtitle>
                 <div v-html="item.subtitle"></div>
               </template>
             </v-list-item>

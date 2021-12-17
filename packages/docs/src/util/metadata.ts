@@ -1,5 +1,11 @@
-export function genAppMetaInfo (defaults) {
-  const metadata = genMetaInfo(...Object.values(defaults))
+interface Metadata {
+  title: string
+  description: string
+  keywords: string
+}
+
+export function genAppMetaInfo (defaults: any) {
+  const metadata = (genMetaInfo as any)(...Object.values(defaults))
 
   metadata.link.push(...genLink())
   metadata.meta.push(...genMeta())
@@ -8,9 +14,9 @@ export function genAppMetaInfo (defaults) {
 }
 
 export function genMetaInfo (
-  title,
-  description,
-  keywords,
+  title: string,
+  description: string,
+  keywords: string,
 ) {
   const length = description.length
 
@@ -25,19 +31,19 @@ export function genMetaInfo (
   }
 
   return {
-    link: [],
+    link: [] as (Record<string, any>[]),
     meta: [
       { name: 'description', content: description },
       { name: 'keywords', content: keywords },
-      ...genFacebookMetaInfo(options),
+      ...genFacebookMetaInfo(),
       ...genOpenGraphMetaInfo(options),
       ...genTwitterMetaInfo(),
-    ],
+    ] as (Record<string, any>[]),
     title,
   }
 }
 
-function genFacebookMetaInfo (args) {
+function genFacebookMetaInfo () {
   return parseMeta('fb', { app_id: '542948969434243' })
 }
 
@@ -69,7 +75,7 @@ function genLink () {
   return link
 }
 
-function genOpenGraphMetaInfo (args) {
+function genOpenGraphMetaInfo (args: Metadata) {
   return parseMeta('og', {
     description: args.description,
     image: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png',
@@ -80,8 +86,8 @@ function genOpenGraphMetaInfo (args) {
 }
 
 function parseMeta (
-  prefix,
-  metadata,
+  prefix: string,
+  metadata: Record<string, string>,
 ) {
   const meta = []
 

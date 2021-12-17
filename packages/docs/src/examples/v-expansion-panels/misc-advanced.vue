@@ -143,8 +143,8 @@
           <v-col cols="3">
             <v-menu
               ref="startMenu"
+              v-model:return-value="trip.start"
               :close-on-content-click="false"
-              :return-value.sync="trip.start"
               offset-y
               min-width="290px"
             >
@@ -185,8 +185,8 @@
           <v-col cols="3">
             <v-menu
               ref="endMenu"
+              v-model:return-value="trip.end"
               :close-on-content-click="false"
-              :return-value.sync="trip.end"
               offset-y
               min-width="290px"
             >

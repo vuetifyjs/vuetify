@@ -61,7 +61,7 @@
         width="400"
       >
         <template v-slot:activator="{ props }">
-          <v-icon v-bind="props" icon="mdi-share-variant" />
+          <v-icon v-bind="props" icon="mdi-share-variant"></v-icon>
         </template>
 
         <v-card>
@@ -80,20 +80,20 @@
 
           <v-list>
             <v-list-item title="Facebook">
-              <template #prepend>
-                <v-icon color="indigo" icon="mdi-facebook" />
+              <template v-slot:prepend>
+                <v-icon color="indigo" icon="mdi-facebook"></v-icon>
               </template>
             </v-list-item>
 
             <v-list-item title="Twitter">
-              <template #prepend>
-                <v-icon color="cyan" icon="mdi-twitter" />
+              <template v-slot:prepend>
+                <v-icon color="cyan" icon="mdi-twitter"></v-icon>
               </template>
             </v-list-item>
 
             <v-list-item title="Email">
-              <template #prepend>
-                <v-icon icon="mdi-email" />
+              <template v-slot:prepend>
+                <v-icon icon="mdi-email"></v-icon>
               </template>
             </v-list-item>
           </v-list>

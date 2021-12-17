@@ -13,7 +13,7 @@
             prepend-avatar="https://cdn.vuetifyjs.com/images/lists/1.jpg"
             title="Brunch this weekend?"
           >
-            <template #subtitle>
+            <template v-slot:subtitle>
               <span class="font-weight-bold">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?
             </template>
           </v-list-item>
@@ -23,10 +23,10 @@
           <v-list-item
             prepend-avatar="https://cdn.vuetifyjs.com/images/lists/2.jpg"
           >
-            <template #title>
+            <template v-slot:title>
               Summer BBQ <span class="grey--text text--lighten-1">4</span>
             </template>
-            <template #subtitle>
+            <template v-slot:subtitle>
               <span class="font-weight-bold">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.
             </template>
           </v-list-item>
@@ -37,7 +37,7 @@
             prepend-avatar="https://cdn.vuetifyjs.com/images/lists/3.jpg"
             title="Oui oui"
           >
-            <template #subtitle>
+            <template v-slot:subtitle>
               <span class="font-weight-bold">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?
             </template>
           </v-list-item>

@@ -1,21 +1,20 @@
 // Imports
-const fs = require('fs')
-const path = require('path')
-const { resolve } = require('path')
-const { startCase } = require('lodash')
-const { getCompleteApi } = require('@vuetify/api-generator')
-const rimraf = require('rimraf')
+import fs from 'fs'
+import path, { resolve } from 'path'
+import { startCase } from 'lodash'
+import rimraf from 'rimraf'
+import { getCompleteApi } from '@vuetify/api-generator'
+import locales from '../src/i18n/locales.json'
+import pageToApi from '../src/data/page-to-api.json'
 
-const localeList = require('../src/i18n/locales.json')
+const localeList = locales
   .filter(item => item.enabled)
   .map(item => item.alternate || item.locale)
 
-const pageToApi = require('../src/data/page-to-api')
-
-function genApiLinks (component, header) {
-  const links = Object.keys(pageToApi)
+function genApiLinks (component: string, header: string) {
+  const links = (Object.keys(pageToApi) as (keyof typeof pageToApi)[])
     .filter(page => pageToApi[page].includes(component))
-    .reduce((acc, href) => {
+    .reduce<string[]>((acc, href) => {
       const name = href.split('/')[1]
       acc.push(`- [${startCase(name)}](/${href})`)
       return acc
@@ -31,7 +30,7 @@ function genApiLinks (component, header) {
   return `${section.join('\n\n')}\n\n`
 }
 
-function genFrontMatter (component) {
+function genFrontMatter (component: string) {
   const fm = [
     `title: ${component} API`,
     `description: API for the ${component} component.`,
@@ -41,7 +40,7 @@ function genFrontMatter (component) {
   return `---\nmeta:\n${fm.map(s => '  ' + s).join('\n')}\n---`
 }
 
-function genHeader (component) {
+function genHeader (component: string) {
   const header = [
     genFrontMatter(component),
     `# ${component} API`,
@@ -59,9 +58,9 @@ function genFooter () {
   return `${footer.join('\n\n')}\n`
 }
 
-const sanitize = str => str.replace(/\$/g, '')
+const sanitize = (str: string) => str.replace(/\$/g, '')
 
-function loadMessages (locale) {
+function loadMessages (locale: string) {
   const prefix = path.resolve('./src/i18n/messages/')
   const fallback = require(path.join(prefix, 'en.json'))
 
@@ -77,7 +76,7 @@ function loadMessages (locale) {
   }
 }
 
-function createMdFile (component, data, locale) {
+function createMdFile (component: string, data: Record<string, any>, locale: string) {
   const messages = loadMessages(locale)
   let str = ''
 
@@ -96,7 +95,7 @@ function createMdFile (component, data, locale) {
   return str
 }
 
-function writeFile (componentName, componentApi, locale) {
+function writeFile (componentName: string, componentApi: Record<string, any>, locale: string) {
   const folder = `src/api/${locale}`
 
   if (!fs.existsSync(resolve(folder))) {
@@ -106,7 +105,7 @@ function writeFile (componentName, componentApi, locale) {
   fs.writeFileSync(resolve(`${folder}/${sanitize(componentName)}.md`), createMdFile(componentName, componentApi, locale))
 }
 
-function writeData (componentName, componentApi) {
+function writeData (componentName: string, componentApi: Record<string, any>) {
   const folder = `src/api/data`
 
   if (!fs.existsSync(resolve(folder))) {
@@ -117,10 +116,10 @@ function writeData (componentName, componentApi) {
 }
 
 function generateFiles () {
-  const api = getCompleteApi(localeList)
+  const api: Record<string, any>[] = getCompleteApi(localeList)
 
   for (const locale of localeList) {
-    const pages = {}
+    const pages = {} as Record<string, any>
 
     for (const item of api) {
       writeFile(item.name, item, locale)
@@ -141,7 +140,7 @@ function generateFiles () {
   ]))
 }
 
-module.exports = function Api () {
+export default function Api () {
   return {
     name: 'vuetify:api',
     buildStart () {

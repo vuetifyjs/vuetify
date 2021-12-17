@@ -1,5 +1,5 @@
 // Utilities
-import merge from 'lodash/merge'
+import { merge } from 'lodash-es'
 
 // Globals
 import { IN_BROWSER } from '@/util/globals'

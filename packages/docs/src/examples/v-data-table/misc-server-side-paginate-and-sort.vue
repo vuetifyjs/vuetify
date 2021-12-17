@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-data-table
+      v-model:options="options"
       :headers="headers"
       :items="desserts"
-      :options.sync="options"
       :server-items-length="totalDesserts"
       :loading="loading"
       class="elevation-1"

@@ -21,7 +21,7 @@ export const useSponsorsStore = defineStore('sponsors', () => {
     if (sponsors.value.length) return
 
     const { bucket } = useCosmic()
-    const { objects } = await bucket.getObjects({
+    const { objects } = await bucket.getObjects<Sponsor>({
       query: {
         type: 'sponsors',
       },

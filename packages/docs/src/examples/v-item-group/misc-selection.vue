@@ -22,7 +22,7 @@
                 class="text-right pa-2"
                 @click="toggle"
               >
-                <v-btn :icon="isSelected ? 'mdi-heart' : 'mdi-heart-outline'" />
+                <v-btn :icon="isSelected ? 'mdi-heart' : 'mdi-heart-outline'"></v-btn>
               </v-img>
             </v-item>
           </v-col>

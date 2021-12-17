@@ -5,7 +5,7 @@
       color="indigo"
       text-color="white"
     >
-      <v-avatar left icon="mdi-account-circle" />
+      <v-avatar left icon="mdi-account-circle"></v-avatar>
       Mike
     </v-chip>
 
@@ -15,7 +15,7 @@
       text-color="white"
     >
       Premium
-      <v-icon right icon="mdi-star" />
+      <v-icon right icon="mdi-star"></v-icon>
     </v-chip>
 
     <v-chip
@@ -24,7 +24,7 @@
       text-color="white"
     >
       1 Year
-      <v-icon right icon="mdi-cake-variant" />
+      <v-icon right icon="mdi-cake-variant"></v-icon>
     </v-chip>
 
     <v-chip
@@ -48,7 +48,7 @@
       text-color="white"
       @click:close="close"
     >
-      <v-avatar left icon="mdi-checkbox-marked-circle" />
+      <v-avatar left icon="mdi-checkbox-marked-circle"></v-avatar>
       Confirmed
     </v-chip>
 
@@ -60,7 +60,7 @@
       close-icon="mdi-delete"
       @click:close="close"
     >
-      <v-avatar left icon="mdi-checkbox-marked-circle" />
+      <v-avatar left icon="mdi-checkbox-marked-circle"></v-avatar>
       Confirmed
     </v-chip>
   </div>

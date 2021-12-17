@@ -6,7 +6,6 @@
   >
     <v-icon
       v-bind="$attrs"
-      v-on="$listeners"
     >
       {{ icon || 'mdi-plus' }}
     </v-icon>

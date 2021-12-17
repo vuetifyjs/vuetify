@@ -14,7 +14,7 @@
         icon
         @click="$refs.search.focus()"
       >
-        <v-icon icon="mdi-magnify" />
+        <v-icon icon="mdi-magnify"></v-icon>
       </v-btn>
     </v-toolbar>
 

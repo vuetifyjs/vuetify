@@ -44,8 +44,8 @@
           subheader
         >
           <v-subheader>User Controls</v-subheader>
-          <v-list-item title="Content filtering" subtitle="Set the content filtering level to restrict apps that can be downloaded" />
-          <v-list-item title="Password" subtitle="Require password for purchase or use password to restrict purchase" />
+          <v-list-item title="Content filtering" subtitle="Set the content filtering level to restrict apps that can be downloaded"></v-list-item>
+          <v-list-item title="Password" subtitle="Require password for purchase or use password to restrict purchase"></v-list-item>
         </v-list>
         <v-divider></v-divider>
         <v-list

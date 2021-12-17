@@ -12,7 +12,7 @@
 <script>
   // Mixins
   import { defineComponent } from 'vue'
-  import { useAd, createAdProps } from '@/composables/ad'
+  import { createAdProps, useAd } from '@/composables/ad'
 
   import BaseAd from './Base.vue'
 

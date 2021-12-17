@@ -11,9 +11,7 @@
 </template>
 
 <script lang="ts">
-  // Utilities
   import { defineComponent } from 'vue'
-  import { convertToUnit } from 'vuetify/lib/util/helpers'
 
   export default defineComponent({
     name: 'AdsBase',
@@ -34,7 +32,7 @@
       },
       styles () {
         return {
-          minHeight: convertToUnit(this.minHeight),
+          minHeight: `${this.minHeight}px`,
         }
       },
     },

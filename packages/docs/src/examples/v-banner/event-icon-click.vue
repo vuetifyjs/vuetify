@@ -3,13 +3,12 @@
     single-line
     @click:icon="alert"
   >
-    <v-icon
-      slot="icon"
-      color="warning"
-      size="36"
-    >
-      mdi-wifi-strength-alert-outline
-    </v-icon>
+    <template v-slot:icon>
+      <v-icon color="warning" size="36">
+        mdi-wifi-strength-alert-outline
+      </v-icon>
+    </template>
+
     Unable to verify your Internet connection
 
     <template v-slot:actions>
