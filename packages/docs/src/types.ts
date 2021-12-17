@@ -1,4 +1,4 @@
-import type { ViteSSGContext } from 'vite-ssg'
+import type { ViteSSGContext } from '@vuetify/vite-ssg'
 
 export type I18nPlugin = (ctx: ViteSSGContext) => void
 export type PwaPlugin = (ctx: ViteSSGContext) => void

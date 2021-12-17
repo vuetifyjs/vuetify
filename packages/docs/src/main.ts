@@ -1,4 +1,4 @@
-import { ViteSSG } from 'vite-ssg'
+import { ViteSSG } from '@vuetify/vite-ssg'
 // import 'virtual:api'
 import generatedRoutes from 'virtual:generated-pages'
 import { setupLayouts } from 'virtual:generated-layouts'
