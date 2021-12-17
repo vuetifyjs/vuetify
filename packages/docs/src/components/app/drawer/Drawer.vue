@@ -25,7 +25,7 @@
   import { useAppStore } from '@/store/app'
   import nav from '@/data/nav-alpha'
 
-  import AppList from '@/components/app/list/index.vue'
+  import AppList from '@/components/app/list/List.vue'
 
   export default defineComponent({
     name: 'AppDrawer',

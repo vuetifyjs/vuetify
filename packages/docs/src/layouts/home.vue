@@ -15,7 +15,7 @@
   import { defineComponent } from 'vue'
 
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
-  import AppBar from '@/components/app/bar/index.vue'
+  import AppBar from '@/components/app/bar/Bar.vue'
   import HomeView from '@/components/home/View.vue'
 
   export default defineComponent({

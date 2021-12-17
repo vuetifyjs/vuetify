@@ -36,7 +36,7 @@
   import locales from '@/i18n/locales.json'
   import { useLocaleStore } from '@/store/locale'
 
-  import AppMenu from '@/components/app/menu/index.vue'
+  import AppMenu from '@/components/app/menu/Menu.vue'
   import ChevronDown from '@/components/icons/ChevronDown.vue'
 
   export default defineComponent({

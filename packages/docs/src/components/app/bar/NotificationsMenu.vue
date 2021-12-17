@@ -98,7 +98,7 @@
   import { useCosmic } from '@/composables/cosmic'
   import { formatDate } from '@/util/date.js'
   import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
-  import AppMenu from '@/components/app/menu/index.vue'
+  import AppMenu from '@/components/app/menu/Menu.vue'
 
   type Notification = {
     metadata: {

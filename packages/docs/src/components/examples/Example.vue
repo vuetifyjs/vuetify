@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, defineProps, mergeProps, ref, shallowRef } from 'vue'
+  import { computed, mergeProps, ref, shallowRef } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { useTheme } from 'vuetify'
   import { getBranch } from '@/util/helpers'

@@ -15,7 +15,7 @@
   import { computed, defineComponent } from 'vue'
   import { useI18n } from 'vue-i18n'
   import ChevronDown from '@/components/icons/ChevronDown.vue'
-  import AppMenu from '@/components/app/menu/index.vue'
+  import AppMenu from '@/components/app/menu/Menu.vue'
 
   export default defineComponent({
     name: 'SupportMenu',

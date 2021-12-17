@@ -23,7 +23,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import AppList from '@/components/app/list/index.vue'
+  import AppList from '@/components/app/list/List.vue'
 
   // Components
   export default defineComponent({

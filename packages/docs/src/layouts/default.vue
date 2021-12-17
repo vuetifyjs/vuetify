@@ -22,9 +22,9 @@
   import { useRoute } from 'vue-router'
 
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
-  import AppBar from '@/components/app/bar/index.vue'
+  import AppBar from '@/components/app/bar/Bar.vue'
   import AppToc from '@/components/app/Toc.vue'
-  import AppDrawer from '@/components/app/drawer/index.vue'
+  import AppDrawer from '@/components/app/drawer/Drawer.vue'
 
   export default defineComponent({
     name: 'DefaultLayout',
