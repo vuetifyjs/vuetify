@@ -1,12 +1,11 @@
 <template>
   <div class="text-center d-flex align-center justify-space-around">
     <v-tooltip bottom>
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-btn
           color="primary"
           dark
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           Button
         </v-btn>
@@ -15,12 +14,11 @@
     </v-tooltip>
 
     <v-tooltip bottom>
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-icon
           color="primary"
           dark
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           mdi-home
         </v-icon>
@@ -29,10 +27,9 @@
     </v-tooltip>
 
     <v-tooltip bottom>
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <span
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >This text has a tooltip</span>
       </template>
       <span>Tooltip</span>

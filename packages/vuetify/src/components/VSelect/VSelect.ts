@@ -667,7 +667,7 @@ export default baseMixins.extend<options>().extend({
 
       // If menu is active, allow default
       // listIndex change from menu
-      if (this.isMenuActive && keyCode !== keyCodes.tab) {
+      if (this.isMenuActive && [keyCodes.up, keyCodes.down, keyCodes.home, keyCodes.end, keyCodes.enter].includes(keyCode)) {
         this.$nextTick(() => {
           menu.changeListIndex(e)
           this.$emit('update:list-index', menu.listIndex)
@@ -843,15 +843,17 @@ export default baseMixins.extend<options>().extend({
             (this.$refs.menu as { [key: string]: any }).updateDimensions()
         })
 
-        const listIndex = this.getMenuIndex()
-
-        this.setMenuIndex(-1)
-
         // There is no item to re-highlight
         // when selections are hidden
-        if (this.hideSelected) return
-
-        this.$nextTick(() => this.setMenuIndex(listIndex))
+        if (this.hideSelected) {
+          this.setMenuIndex(-1)
+        } else {
+          const index = this.allItems.indexOf(item)
+          if (~index) {
+            this.$nextTick(() => this.$refs.menu.getTiles())
+            setTimeout(() => this.setMenuIndex(index))
+          }
+        }
       }
     },
     setMenuIndex (index: number) {

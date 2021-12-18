@@ -26,7 +26,7 @@
         return [
           { heading: this.$t('documentation') },
           {
-            title: '2.5.x',
+            title: '2.6.x',
             href: 'https://vuetifyjs.com',
           },
           {

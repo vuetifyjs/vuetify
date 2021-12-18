@@ -25,7 +25,7 @@ The navigation drawer is primarily used to house links to the pages in your appl
 
 - [v-navigation-drawer](/api/v-navigation-drawer)
 
-<api-section page="components/navigation-drawers" />
+<inline-api page="components/navigation-drawers" />
 
 ## Caveats
 

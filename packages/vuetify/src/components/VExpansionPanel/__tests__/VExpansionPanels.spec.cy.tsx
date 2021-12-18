@@ -30,12 +30,12 @@ describe('VExpansionPanels', () => {
       <CenteredGrid width="200px">
         <VExpansionPanels>
           { titles.map(title => (
-            <VExpansionPanel
-              v-slots={{
+            <VExpansionPanel>
+              {{
                 title: () => title,
                 text: () => 'Content',
               }}
-            />
+            </VExpansionPanel>
           )) }
         </VExpansionPanels>
       </CenteredGrid>

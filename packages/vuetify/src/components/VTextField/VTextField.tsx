@@ -5,7 +5,6 @@ import './VTextField.sass'
 import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
-import { filterInputAttrs } from '@/components/VInput/VInput'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -15,7 +14,7 @@ import Intersect from '@/directives/intersect'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { defineComponent, filterInputAttrs, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -118,7 +117,8 @@ export const VTextField = defineComponent({
           role="textbox"
           { ...rootAttrs }
           { ...fieldProps }
-          v-slots={{
+        >
+          {{
             ...slots,
             default: ({
               isActive,
@@ -145,8 +145,8 @@ export const VTextField = defineComponent({
                     }, null, ['once']]}
                     ref={ inputRef }
                     autofocus={ props.autofocus }
-                    readonly={ isReadonly }
-                    disabled={ isDisabled }
+                    readonly={ isReadonly.value }
+                    disabled={ isDisabled.value }
                     placeholder={ props.placeholder }
                     size={ 1 }
                     type={ props.type }
@@ -175,7 +175,7 @@ export const VTextField = defineComponent({
               </>
             ) : undefined,
           }}
-        />
+        </VField>
       )
     })
 

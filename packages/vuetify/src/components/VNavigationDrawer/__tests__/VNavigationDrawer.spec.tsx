@@ -25,7 +25,7 @@ describe('VNavigationDrawer', () => {
   it('should match a snapshot', () => {
     const wrapper = mountFunction()
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.v-navigation-drawer').html()).toMatchSnapshot()
   })
 
   it('should open when changed to permanent', async () => {
@@ -40,7 +40,7 @@ describe('VNavigationDrawer', () => {
     }, {
       global: { plugins: [vuetify] },
     })
-    const element = wrapper.findComponent(VNavigationDrawer).element as HTMLElement
+    const element = wrapper.find('.v-navigation-drawer').element as HTMLElement
 
     expect(element.classList.contains('v-navigation-drawer--temporary')).toBe(true)
 
@@ -51,17 +51,18 @@ describe('VNavigationDrawer', () => {
 
   it('should change width when using rail, expandOnHover, and hovering', async () => {
     const wrapper = mountFunction({ rail: true, expandOnHover: true })
-    const element = wrapper.element as HTMLElement
+    const element = wrapper.find('.v-navigation-drawer')
+    const el = element.element as HTMLElement
 
-    expect(element.style.width).toBe('72px')
+    expect(el.style.width).toBe('72px')
 
-    await wrapper.trigger('mouseenter')
+    await element.trigger('mouseenter')
 
-    expect(element.style.width).toBe('256px')
+    expect(el.style.width).toBe('256px')
 
-    await wrapper.trigger('mouseleave')
+    await element.trigger('mouseleave')
 
-    expect(element.style.width).toBe('72px')
+    expect(el.style.width).toBe('72px')
   })
 
   it.each([
@@ -85,7 +86,7 @@ describe('VNavigationDrawer', () => {
     [{ temporary: true }, [true, true, true]],
   ])('should show/hide temporary class when resizing and using %s props', async (props, [one, two, three]) => {
     const wrapper = mountFunction(props)
-    const element = wrapper.element as HTMLElement
+    const element = wrapper.find('.v-navigation-drawer').element as HTMLElement
 
     expect(element.classList.contains('v-navigation-drawer--temporary')).toBe(one)
 
@@ -104,7 +105,7 @@ describe('VNavigationDrawer', () => {
     [{ width: 300 }, '300px'],
   ])('should have the correct width when using %s props', (props, width) => {
     const wrapper = mountFunction(props)
-    const element = wrapper.element as HTMLElement
+    const element = wrapper.find('.v-navigation-drawer').element as HTMLElement
 
     expect(element.style.width).toBe(width)
   })
@@ -121,7 +122,7 @@ describe('VNavigationDrawer', () => {
     [{ temporary: true }, `translateX(-110%)`],
   ])('should have the correct translate using %s props', (props, translate) => {
     const wrapper = mountFunction(props)
-    const element = wrapper.element as HTMLElement
+    const element = wrapper.find('.v-navigation-drawer').element as HTMLElement
 
     expect(element.style.transform).toBe(translate)
   })

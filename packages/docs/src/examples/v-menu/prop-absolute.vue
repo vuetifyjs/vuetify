@@ -9,14 +9,13 @@
       offset-y
       style="max-width: 600px"
     >
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-card
           class="portrait"
           img="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
           height="300"
           width="600"
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         ></v-card>
       </template>
 

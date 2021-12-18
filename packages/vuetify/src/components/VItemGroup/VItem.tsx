@@ -3,9 +3,17 @@ import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { VItemGroupSymbol } from './VItemGroup'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
-export const VItem = defineComponent({
+// Types
+import type { MakeSlots } from '@/util'
+import type { GroupItemProvide } from '@/composables/group'
+
+export const VItem = genericComponent<new () => {
+  $slots: MakeSlots<{
+    default: [GroupItemProvide]
+  }>
+}>()({
   name: 'VItem',
 
   props: makeGroupItemProps(),
@@ -22,3 +30,5 @@ export const VItem = defineComponent({
     })
   },
 })
+
+export type VItem = InstanceType<typeof VItem>

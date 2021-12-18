@@ -1,39 +1,9 @@
-@import './_variables'
-@import '../../styles/styles.sass'
+.v-radio-group
+  grid-template-areas: "prepend label append" ". control ." "a messages b"
 
-.v-input--radio-group
-  legend.v-label
-    cursor: text
-    font-size: 14px
-    height: auto
+  > .v-label
+    grid-area: label
+    margin-inline-start: 12px
 
-  &__input
-    border: none
-    cursor: default
-    display: flex
-    width: 100%
-
-  &--column .v-input--radio-group__input > .v-label
-    padding-bottom: $radio-group-padding
-
-  &--row .v-input--radio-group__input > .v-label
-    padding-right: $radio-group-padding
-
-  &--row
-    legend
-      align-self: center
-      display: inline-block
-
-    .v-input--radio-group__input
-      flex-direction: row
-      flex-wrap: wrap
-
-  &--column
-    legend
-      padding-bottom: $radio-group-padding
-
-    .v-radio:not(:last-child):not(:only-child)
-      margin-bottom: $radio-group-padding
-
-    .v-input--radio-group__input
-      flex-direction: column
+    + .v-selection-control-group
+      margin-top: 16px

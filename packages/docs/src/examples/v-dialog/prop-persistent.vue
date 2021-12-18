@@ -5,12 +5,11 @@
       persistent
       max-width="290"
     >
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-btn
           color="primary"
           dark
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           Open Dialog
         </v-btn>

@@ -65,13 +65,13 @@ export const VCard = defineComponent({
 
   setup (props, { attrs, slots }) {
     const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(props, 'v-card')
-    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-card')
-    const { densityClasses } = useDensity(props, 'v-card')
+    const { borderClasses } = useBorder(props)
+    const { colorClasses, colorStyles, variantClasses } = useVariant(props)
+    const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props, 'v-card')
-    const { roundedClasses } = useRounded(props, 'v-card')
+    const { positionClasses, positionStyles } = usePosition(props)
+    const { roundedClasses } = useRounded(props)
     const link = useLink(props, attrs)
 
     return () => {

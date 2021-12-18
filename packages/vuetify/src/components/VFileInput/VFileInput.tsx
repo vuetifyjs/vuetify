@@ -13,11 +13,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, humanReadableFileSize, useRender, wrapInArray } from '@/util'
+import { defineComponent, filterInputAttrs, humanReadableFileSize, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { filterInputAttrs } from '@/components/VInput/VInput'
 
 export const VFileInput = defineComponent({
   name: 'VFileInput',
@@ -36,10 +35,6 @@ export const VFileInput = defineComponent({
       default: '$vuetify.fileInput.counter',
     },
     multiple: Boolean,
-    prependIcon: {
-      type: String,
-      default: '$file',
-    },
     showSize: {
       type: [Boolean, Number] as PropType<boolean | 1000 | 1024>,
       default: false,
@@ -53,6 +48,10 @@ export const VFileInput = defineComponent({
 
     ...makeVFieldProps({ clearable: true }),
 
+    prependIcon: {
+      type: String,
+      default: '$file',
+    },
     modelValue: {
       type: Array as PropType<File[] | undefined>,
       default: () => ([]),
@@ -114,7 +113,6 @@ export const VFileInput = defineComponent({
           ref={ fieldRef }
           class="v-file-input"
           active={ isDirty.value }
-          dirty={ isDirty.value }
           prepend-icon={ props.prependIcon }
           onUpdate:active={ val => internalDirty.value = val }
           onClick:control={ click }
@@ -130,7 +128,8 @@ export const VFileInput = defineComponent({
           } }
           { ...rootAttrs }
           { ...fieldProps }
-          v-slots={{
+        >
+          {{
             ...slots,
             default: ({
               isActive,
@@ -176,7 +175,7 @@ export const VFileInput = defineComponent({
               </>
             ),
 
-            details: hasCounter && (() => (
+            details: hasCounter ? () => (
               <>
                 <span />
 
@@ -185,9 +184,9 @@ export const VFileInput = defineComponent({
                   v-slots={ slots.counter }
                 />
               </>
-            )),
+            ) : undefined,
           }}
-        />
+        </VField>
       )
     })
 

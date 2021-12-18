@@ -1,32 +1,50 @@
-@use '../../styles/settings'
-@use '../VBtn/mixins' as *
+@forward './variables'
+@use 'sass:selector'
+@use '../../styles/tools'
 @use '../VBtn/variables' as *
+@use './variables' as *
 
 .v-btn-group
-  display: flex
+  $root: &
 
-  & > :first-child,
-  & > :first-child > .v-field__control
-    border-top-right-radius: 0
-    border-bottom-right-radius: 0
+  display: inline-flex
+  flex-wrap: nowrap
+  flex: 1 1
+  max-width: 100%
+  min-width: 0
 
-  & > :last-child,
-  & > :last-child > .v-field__control
-    border-top-left-radius: 0
-    border-bottom-left-radius: 0
+  @include tools.border($btn-group-border...)
+  @include tools.elevation($btn-group-elevation)
+  @include tools.rounded($btn-group-border-radius)
+  @include tools.theme($btn-group-theme...)
 
-  & > :not(:first-child):not(:last-child),
-  & > :not(:first-child):not(:last-child) > .v-field__control
+  @at-root
+    @include tools.density('v-btn-group', $button-density) using ($modifier)
+      @at-root #{selector.append(&, $root)}
+        height: 48px + $modifier
+
+  .v-btn
     border-radius: 0
 
-  & > .v-btn
-    box-shadow: none
-    height: auto
+    &:first-child
+      border-top-left-radius: inherit
+      border-bottom-left-radius: inherit
 
-    @include button-density('min-height', $button-density)
+    &:last-child
+      border-top-right-radius: inherit
+      border-bottom-right-radius: inherit
 
-    & + .v-btn
-      border-left: thin solid settings.$border-color-root !important
+    &:not(:last-child)
+      border-right: none
 
-    & + .v-btn.v-btn--variant-outlined
-      border-left: 0 !important
+    &:not(:first-child)
+      border-left: none
+
+  &--divided
+    .v-btn:not(:last-child)
+      border-right-width: $btn-group-border-thin-width
+      border-right-style: $btn-group-border-style
+      border-right-color: $btn-group-border-color
+
+  &--tile
+    @include tools.rounded($btn-group-tile-border-radius)

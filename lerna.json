@@ -13,6 +13,6 @@
     }
   },
   "npmClient": "yarn",
-  "version": "3.0.0-alpha.11",
+  "version": "3.0.0-alpha.12",
   "useWorkspaces": true
 }

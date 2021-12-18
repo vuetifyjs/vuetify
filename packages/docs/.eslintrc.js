@@ -5,7 +5,6 @@ module.exports = {
         'src/examples/**/*.vue',
       ],
       rules: {
-        'no-var': 'error',
         'max-len': 'off', // lorem ipsum is long
         'vue/html-self-closing': ['error', {
           html: {
@@ -20,9 +19,9 @@ module.exports = {
           default: 'longform',
           named: 'longform',
         }],
-        'vuetify/no-deprecated-classes': 'error',
-        'vuetify/grid-unknown-attributes': 'error',
-        'vuetify/no-legacy-grid': 'error',
+        // 'vuetify/no-deprecated-classes': 'error',
+        // 'vuetify/grid-unknown-attributes': 'error',
+        // 'vuetify/no-legacy-grid': 'error',
       },
     },
     {

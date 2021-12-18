@@ -36,7 +36,7 @@ Vuetify comes with over 10 custom css animations that can be applied to numerous
 - [v-slide-y-transition](/api/v-slide-y-transition)
 - [v-slide-y-reverse-transition](/api/v-slide-y-reverse-transition)
 
-<api-section page="styles/transitions" />
+<inline-api page="styles/transitions" />
 
 ## Examples
 

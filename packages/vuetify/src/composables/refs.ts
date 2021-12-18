@@ -1,8 +1,9 @@
 // Imports
 import { onBeforeUpdate, ref } from 'vue'
+import type { Ref } from 'vue'
 
 export function useRefs <T extends {}> () {
-  const refs = ref<(T | undefined)[]>([])
+  const refs = ref<(T | undefined)[]>([]) as Ref<(T | undefined)[]>
 
   onBeforeUpdate(() => (refs.value = []))
 

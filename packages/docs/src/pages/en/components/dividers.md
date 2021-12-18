@@ -25,7 +25,7 @@ Dividers in their simplest form display a horizontal line.
 
 - [v-divider](/api/v-divider)
 
-<api-section page="components/dividers" />
+<inline-api page="components/dividers" />
 
 ## Examples
 

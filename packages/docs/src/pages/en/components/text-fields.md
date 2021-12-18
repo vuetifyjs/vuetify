@@ -25,7 +25,7 @@ A simple text field with placeholder and/or label.
 
 - [v-text-field](/api/v-text-field)
 
-<api-section page="components/text-fields" />
+<inline-api page="components/text-fields" />
 
 ## Examples
 

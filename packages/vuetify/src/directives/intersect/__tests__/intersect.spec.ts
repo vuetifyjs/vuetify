@@ -18,6 +18,9 @@ describe('v-intersect', () => {
       {
         value: callback,
         modifiers: { quiet: true },
+        instance: {
+          $: { uid: 1 },
+        },
       } as any,
       vnode,
       null
@@ -28,9 +31,13 @@ describe('v-intersect', () => {
 
     document.body.removeChild(el)
 
-    Intersect.unmounted(el, {}, vnode, vnode)
+    Intersect.unmounted(el, {
+      instance: {
+        $: { uid: 1 },
+      },
+    } as any, vnode, vnode)
 
-    expect((el as any)._observe).toBeUndefined()
+    expect((el as any)._observe[1]).toBeUndefined()
   })
 
   it('should invoke callback once and unmount', () => {
@@ -44,19 +51,22 @@ describe('v-intersect', () => {
     Intersect.mounted(el, {
       value: callback,
       modifiers: { once: true },
+      instance: {
+        $: { uid: 1 },
+      },
     } as any, vnode, null)
 
+    expect(callback).toHaveBeenCalledTimes(0)
+    expect((el as any)._observe[1]).toBeTruthy()
+
+    ;(el as any)._observe[1].observer.callback([{ isIntersecting: false }])
+
     expect(callback).toHaveBeenCalledTimes(1)
-    expect((el as any)._observe).toBeTruthy()
+    expect((el as any)._observe[1]).toBeTruthy()
 
-    ;(el as any)._observe.observer.callback([{ isIntersecting: false }])
-
-    expect(callback).toHaveBeenCalledTimes(1)
-    expect((el as any)._observe).toBeTruthy()
-
-    ;(el as any)._observe.observer.callback([{ isIntersecting: true }])
+    ;(el as any)._observe[1].observer.callback([{ isIntersecting: true }])
 
     expect(callback).toHaveBeenCalledTimes(2)
-    expect((el as any)._observe).toBeUndefined()
+    expect((el as any)._observe[1]).toBeUndefined()
   })
 })

@@ -8,9 +8,10 @@ const _ = Cypress._
 type Stories = Record<string, JSX.Element>
 type Props = Record<string, Boolean | any[]>
 type GenerateConfiguration = {
-  // If you pass `props`, then component is required
-  props?: Props,
-  // Something that can be rendered. <VBtn>...</VBtn>, `mount(VBtn)`, etc
+  props: Props,
+  component: unknown
+  stories?: Stories,
+} | {
   component?: unknown
   stories?: Stories,
 }
@@ -106,10 +107,14 @@ export const generate = ({ props, stories, component }: GenerateConfiguration) =
 
   return it('renders everything', () => {
     cy.mount(() => <>
-      <h2 class="mx-4 mt-10 mb-4">Stories</h2>
-      { exampleStories && exampleStories.map(s => s.mount) }
-      <h2 class="mx-4 mt-10 mb-4">Props</h2>
-      { exampleProps && exampleProps.map(s => s.mount) }
+      { exampleStories && <>
+        <h2 class="mx-4 mt-10 mb-4">Stories</h2>
+        { exampleStories.map(s => s.mount) }
+      </>}
+      { exampleProps && <>
+        <h2 class="mx-4 mt-10 mb-4">Props</h2>
+        { exampleProps.map(s => s.mount) }
+      </>}
     </>).percySnapshot()
   })
 }

@@ -77,6 +77,7 @@ export function useActivator (
     },
     mouseenter: (e: MouseEvent) => {
       isHovered = true
+      activatorEl.value = (e.currentTarget || e.target) as HTMLElement
       runOpenDelay()
     },
     mouseleave: (e: MouseEvent) => {
@@ -91,6 +92,7 @@ export function useActivator (
 
       isFocused = true
       e.stopPropagation()
+      activatorEl.value = (e.currentTarget || e.target) as HTMLElement
 
       runOpenDelay()
     },

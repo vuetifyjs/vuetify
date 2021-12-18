@@ -47,8 +47,8 @@ export const VBreadcrumbs = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { densityClasses } = useDensity(props, 'v-breadcrumbs')
-    const { roundedClasses } = useRounded(props, 'v-breadcrumbs')
+    const { densityClasses } = useDensity(props)
+    const { roundedClasses } = useRounded(props)
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
     const items = computed(() => {
       return props.items.map((item, index, array) => ({

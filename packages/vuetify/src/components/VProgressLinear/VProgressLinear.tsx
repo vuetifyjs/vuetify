@@ -64,13 +64,13 @@ export const VProgressLinear = defineComponent({
     const { textColorClasses, textColorStyles } = useTextColor(props, 'color')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => props.bgColor || props.color))
     const { backgroundColorClasses: barColorClasses, backgroundColorStyles: barColorStyles } = useBackgroundColor(props, 'color')
-    const { roundedClasses } = useRounded(props, 'v-progress-linear')
+    const { roundedClasses } = useRounded(props)
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
 
     const max = computed(() => parseInt(props.max, 10))
     const height = computed(() => parseInt(props.height, 10))
-    const normalizedBuffer = computed(() => Math.round(parseFloat(props.bufferValue) / max.value * 100))
-    const normalizedValue = computed(() => Math.round(parseFloat(progress.value) / max.value * 100))
+    const normalizedBuffer = computed(() => parseFloat(props.bufferValue) / max.value * 100)
+    const normalizedValue = computed(() => parseFloat(progress.value) / max.value * 100)
     const isReversed = computed(() => isRtl.value !== props.reverse)
     const transition = computed(() => props.indeterminate ? 'fade-transition' : 'slide-x-transition')
     const opacity = computed(() => {

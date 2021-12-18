@@ -105,7 +105,7 @@ $list-border: (
 $list-theme: (
   $list-background,
   $list-color
-);
+) !default;
 
 $list-item-border: (
   $list-item-border-color,

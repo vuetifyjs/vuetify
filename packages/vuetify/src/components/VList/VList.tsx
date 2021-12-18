@@ -117,11 +117,11 @@ export const VList = genericComponent<new <T>() => {
   setup (props, { slots }) {
     const { themeClasses } = useTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const { borderClasses } = useBorder(props, 'v-list')
-    const { densityClasses } = useDensity(props, 'v-list')
+    const { borderClasses } = useBorder(props)
+    const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props, 'v-list')
+    const { roundedClasses } = useRounded(props)
     const { open, select, activate } = useNested(props)
     const depth = useDepth()
     createList()
@@ -161,7 +161,13 @@ export const VList = genericComponent<new <T>() => {
               : <VListSubheader>{ props.subheader }</VListSubheader>
           ) }
 
-          <VListChildren items={props.items} v-slots={slots} />
+          <VListChildren items={ props.items }>
+            {{
+              default: slots.default,
+              item: slots.item,
+              externalHeader: slots.header,
+            }}
+          </VListChildren>
         </props.tag>
       )
     })
