@@ -70,7 +70,8 @@ export const VCheckbox = defineComponent({
           class="v-checkbox"
           { ...inputAttrs }
           { ...inputProps }
-          v-slots={{
+        >
+          {{
             ...slots,
             default: ({
               isDisabled,
@@ -89,7 +90,7 @@ export const VCheckbox = defineComponent({
               />
             ),
           }}
-        />
+        </VInput>
       )
     })
 

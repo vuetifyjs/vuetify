@@ -14,9 +14,6 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { computed, defineComponent, ref } from 'vue'
 import { filterInputAttrs, useRender } from '@/util'
 
-// Types
-import type { LoaderSlotProps } from '@/composables/loader'
-
 export const VSwitch = defineComponent({
   name: 'VSwitch',
 
@@ -72,7 +69,8 @@ export const VSwitch = defineComponent({
           ]}
           { ...inputAttrs }
           { ...inputProps }
-          v-slots={{
+        >
+          {{
             ...slots,
             default: ({
               isDisabled,
@@ -88,7 +86,8 @@ export const VSwitch = defineComponent({
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 { ...controlAttrs }
-                v-slots={{
+              >
+                {{
                   default: () => (<div class="v-switch__track" onClick={ onClick }></div>),
                   input: ({ textColorClasses }) => (
                     <div
@@ -102,11 +101,11 @@ export const VSwitch = defineComponent({
                           name="v-switch"
                           active
                           color={ isValid.value === false ? undefined : loaderColor.value }
-                          v-slots={{
-                            default (slotProps: LoaderSlotProps) {
-                              return slots.loader
-                                ? slots.loader(slotProps)
-                                : (
+                        >
+                          { slotProps => (
+                            slots.loader
+                              ? slots.loader(slotProps)
+                              : (
                                   <VProgressCircular
                                     active={ slotProps.isActive }
                                     color={ slotProps.color }
@@ -114,18 +113,17 @@ export const VSwitch = defineComponent({
                                     size="16"
                                     width="2"
                                   />
-                                )
-                            },
-                          }}
-                        />
+                              )
+                          )}
+                        </LoaderSlot>
                       ) }
                     </div>
                   ),
                 }}
-              />
+              </VSelectionControl>
             ),
           }}
-        />
+        </VInput>
       )
     })
 

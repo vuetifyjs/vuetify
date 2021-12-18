@@ -36,7 +36,7 @@ export const makeVInputProps = propsFactory({
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hint: String,
   messages: {
-    type: [Array, String],
+    type: [Array, String] as PropType<string | string[]>,
     default: () => ([]),
   },
   persistentHint: Boolean,
@@ -161,7 +161,7 @@ export const VInput = genericComponent<new <T>() => {
             <div class="v-input__details">
               <VMessages
                 active={ showMessages }
-                value={ hasMessages ? props.messages : [props.hint] }
+                value={ hasMessages ? props.messages : props.hint }
                 v-slots={{ default: slots.messages }}
               />
 

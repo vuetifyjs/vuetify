@@ -16,11 +16,9 @@ describe('VListGroup', () => {
         <h2 class="mt-8">ListGroup</h2>
 
         <VList>
-          <VListGroup
-            v-slots={{
-              header: props => <VListItem {...props} title="Group" />,
-            }}
-          />
+          <VListGroup>
+            {{ header: props => <VListItem {...props} title="Group" /> }}
+          </VListGroup>
         </VList>
       </CenteredGrid>
     ))
@@ -34,9 +32,8 @@ describe('VListGroup', () => {
         <h2 class="mt-8">ListGroup</h2>
 
         <VList opened={['group']}>
-          <VListGroup
-            value="group"
-            v-slots={{
+          <VListGroup value="group">
+            {{
               header: props => <VListItem {...props} title="Group" />,
               default: () => (
                 <>
@@ -45,7 +42,7 @@ describe('VListGroup', () => {
                 </>
               ),
             }}
-          />
+          </VListGroup>
         </VList>
       </CenteredGrid>
     ))
