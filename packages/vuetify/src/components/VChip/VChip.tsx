@@ -4,12 +4,14 @@ import './VChip.sass'
 // Components
 import { VAvatar } from '@/components/VAvatar'
 import { VIcon } from '@/components/VIcon'
+import { VItemGroupSymbol } from '@/components/VItemGroup/VItemGroup'
 
 // Composables
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeSizeProps, useSize } from '@/composables/size'
@@ -41,7 +43,6 @@ export const VChip = defineComponent({
       type: String,
       default: '$vuetify.close',
     },
-    disabled: Boolean,
     draggable: Boolean,
     filter: Boolean,
     filterIcon: {
@@ -66,6 +67,7 @@ export const VChip = defineComponent({
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
+    ...makeGroupItemProps(),
     ...makeRoundedProps(),
     ...makeRouterProps(),
     ...makeSizeProps(),
@@ -87,6 +89,7 @@ export const VChip = defineComponent({
     const { borderClasses } = useBorder(props, 'v-chip')
     const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-chip')
     const { elevationClasses } = useElevation(props)
+    const { isSelected, select, toggle, selectedClass, value } = useGroupItem(props, VItemGroupSymbol)
     const { roundedClasses } = useRounded(props, 'v-chip')
     const { sizeClasses } = useSize(props, 'v-chip')
     const { densityClasses } = useDensity(props, 'v-chip')
@@ -148,7 +151,14 @@ export const VChip = defineComponent({
             </div>
           ) }
 
-          { slots.default?.() ?? props.text }
+          { slots.default?.({
+            isSelected: isSelected.value,
+            selectedClass: selectedClass.value,
+            select,
+            toggle,
+            value: value.value,
+            disabled: props.disabled,
+          }) ?? props.text }
 
           { hasAppend && (
             <div class="v-chip__append">
