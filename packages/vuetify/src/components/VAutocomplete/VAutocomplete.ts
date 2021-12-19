@@ -272,6 +272,7 @@ export default VSelect.extend({
       }
     },
     deleteCurrentItem () {
+      // debugger
       const curIndex = this.selectedIndex
       const curItem = this.selectedItems[curIndex]
 
@@ -301,7 +302,8 @@ export default VSelect.extend({
       const nextItem = this.selectedItems[nextIndex]
 
       if (!nextItem) {
-        this.setValue(this.multiple ? [] : null)
+        // @TODO do some more testing and fix jest test
+        this.setValue(this.multiple ? [] : '')
       } else {
         this.selectItem(curItem)
       }
