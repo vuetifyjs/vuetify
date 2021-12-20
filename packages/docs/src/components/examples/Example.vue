@@ -43,7 +43,9 @@
   })
 
   async function getExample (file: string, raw?: boolean) {
-    return (await import(`../../examples/${file}.vue${raw ? '?raw' : ''}`)).default
+    // TODO: handle raw functionality
+    return (await modules[`../../examples/${file}.vue`]()).default
+    // return (await modules[`../../examples/${file}.vue${raw ? '?raw' : ''}`]()).default
   }
 
   function parseTemplate (target: string, template: string) {
@@ -98,7 +100,7 @@
       isError.value = true
     }
   }
-
+  const modules = import.meta.glob('../../examples/**/*.vue')
   const parentTheme = useTheme({})
   const _theme = ref<null | string>(null)
   const theme = computed({
