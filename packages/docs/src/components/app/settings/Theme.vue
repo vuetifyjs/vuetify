@@ -3,8 +3,8 @@
 </template>
 
 <script lang="ts">
-  import { computed, ref } from 'vue'
-  import { IN_BROWSER } from '@/util/globals'
+  import { computed } from 'vue'
+  import { getMatchMedia } from '@/util/helpers'
   import { useUserStore } from '@/store/user'
   import AppSettingsGroup from './Group.vue'
 
@@ -15,15 +15,8 @@
 
     setup () {
       const user = useUserStore()
-      const theme = ref('light')
-
-      function getMatchMedia () {
-        return (IN_BROWSER && window.matchMedia) ? window.matchMedia('(prefers-color-scheme: dark)') : false
-      }
 
       function setTheme (value: string) {
-        // theme.value = value
-        console.log(user)
         user.theme = value
       }
 
@@ -65,7 +58,6 @@
 
       return {
         items,
-        theme,
         user,
         updateTheme,
       }

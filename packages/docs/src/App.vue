@@ -1,5 +1,5 @@
 <template>
-  <v-theme-provider :theme="user.theme">
+  <v-theme-provider :theme="theme">
     <router-view />
   </v-theme-provider>
 </template>
@@ -13,6 +13,7 @@
   import { useUserStore } from '@/store/user'
   import metadata from '@/data/metadata.json'
   import { genAppMetaInfo } from '@/util/metadata'
+  import { getMatchMedia } from '@/util/helpers'
 
   export default defineComponent({
     name: 'App',
@@ -48,6 +49,17 @@
       })
 
       return {
+        theme: computed(() => {
+          if (user.theme === 'system') {
+            return getMatchMedia() ? 'dark' : 'light'
+          }
+
+          if (user.theme === 'mixed') {
+            return 'light'
+          }
+
+          return user.theme
+        }),
         user,
       }
     },

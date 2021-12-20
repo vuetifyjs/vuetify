@@ -31,7 +31,7 @@ export const useUserStore = defineStore('user', () => {
   function load () {
     if (!IN_BROWSER) return
 
-    const stored = localStorage.getItem('vuetify@user')
+    const stored = localStorage.getItem('vuetify-next@user')
     const data = stored ? JSON.parse(stored) : {}
 
     Object.assign(state, merge(state, data))

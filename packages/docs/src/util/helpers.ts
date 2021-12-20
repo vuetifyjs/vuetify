@@ -110,3 +110,7 @@ export function distance (s1: string, s2: string) {
 
   return weight
 }
+
+export function getMatchMedia () {
+  return (IN_BROWSER && window.matchMedia) ? window.matchMedia('(prefers-color-scheme: dark)') : false
+}
