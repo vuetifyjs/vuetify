@@ -1,6 +1,8 @@
+// Utilities
 import { computed, inject, provide, ref } from 'vue'
 import { mergeDeep } from '@/util/helpers'
 
+// Types
 import type { InjectionKey, Ref } from 'vue'
 
 export interface DefaultsInstance {
@@ -24,10 +26,17 @@ export function useDefaults () {
   return defaults
 }
 
-export function provideDefaults (props?: { defaults?: DefaultsInstance }) {
+export function provideDefaults (props?: {
+  defaults?: DefaultsInstance
+  scoped?: boolean
+}) {
   const defaults = useDefaults()
 
-  const newDefaults = computed(() => mergeDeep(defaults.value, props?.defaults) as any as DefaultsInstance)
+  const newDefaults = computed(() => (
+    !props?.scoped
+      ? mergeDeep(defaults.value, props?.defaults)
+      : props?.defaults
+  ) as any as DefaultsInstance)
 
   provide(DefaultsSymbol, newDefaults)
 

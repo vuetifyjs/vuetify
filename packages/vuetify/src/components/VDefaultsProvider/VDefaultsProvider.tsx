@@ -9,6 +9,7 @@ export const VDefaultsProvider = defineComponent({
 
   props: {
     defaults: Object as PropType<DefaultsOptions>,
+    scoped: Boolean,
   },
 
   setup (props, { slots }) {
