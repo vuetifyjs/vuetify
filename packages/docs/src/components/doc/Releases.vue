@@ -127,7 +127,7 @@
 </template>
 
 <script>
-  // import octokit from '@/plugins/octokit'
+  import octokit from '@/plugins/octokit'
 
   export default {
     name: 'Releases',
