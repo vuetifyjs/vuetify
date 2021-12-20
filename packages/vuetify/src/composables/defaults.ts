@@ -1,7 +1,9 @@
+// Utilities
 import { computed, inject, provide, ref } from 'vue'
-import { mergeDeep } from '@/util/helpers'
+import { mergeDeep } from '@/util'
 
-import type { InjectionKey, Ref } from 'vue'
+// Types
+import type { ComputedRef, InjectionKey, Ref } from 'vue'
 
 export interface DefaultsInstance {
   [key: string]: undefined | Record<string, unknown>
@@ -24,10 +26,33 @@ export function useDefaults () {
   return defaults
 }
 
-export function provideDefaults (props?: { defaults?: DefaultsInstance }) {
+export function provideDefaults (props?: {
+  defaults?: DefaultsInstance
+  reset?: number | string
+  root?: boolean
+  scoped?: boolean
+}) {
   const defaults = useDefaults()
 
-  const newDefaults = computed(() => mergeDeep(defaults.value, props?.defaults) as any as DefaultsInstance)
+  const newDefaults = computed(() => {
+    let properties = mergeDeep(props?.defaults, { prev: defaults.value })
+
+    if (props?.scoped) return properties
+
+    if (props?.reset || props?.root) {
+      const len = Number(props.reset ?? Infinity)
+
+      for (let i = 0; i <= len; i++) {
+        if (!properties.prev) break
+
+        properties = properties.prev
+      }
+
+      return properties
+    }
+
+    return mergeDeep(properties, defaults.value)
+  }) as ComputedRef<DefaultsInstance>
 
   provide(DefaultsSymbol, newDefaults)
 
