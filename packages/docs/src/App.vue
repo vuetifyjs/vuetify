@@ -6,7 +6,7 @@
 
 <script lang="ts">
   // Utilities
-  import { computed, defineComponent, onBeforeMount } from 'vue'
+  import { computed, defineComponent, onBeforeMount, ref, watch } from 'vue'
   import { useHead } from '@vueuse/head'
   import { useI18n } from 'vue-i18n'
   import { useRoute, useRouter } from 'vue-router'
@@ -14,6 +14,7 @@
   import metadata from '@/data/metadata.json'
   import { genAppMetaInfo } from '@/util/metadata'
   import { getMatchMedia } from '@/util/helpers'
+  import { IN_BROWSER } from '@/util/globals'
 
   export default defineComponent({
     name: 'App',
@@ -48,17 +49,26 @@
         }
       })
 
+      const systemTheme = ref('light')
+      if (IN_BROWSER) {
+        let media: MediaQueryList
+        watch(() => user.theme, val => {
+          if (val === 'system') {
+            media = getMatchMedia()!
+            media.addEventListener('change', onThemeChange)
+            onThemeChange()
+          } else if (media) {
+            media.removeEventListener('change', onThemeChange)
+          }
+        }, { immediate: true })
+        function onThemeChange () {
+          systemTheme.value = media!.matches ? 'dark' : 'light'
+        }
+      }
+
       return {
         theme: computed(() => {
-          if (user.theme === 'system') {
-            return getMatchMedia() ? 'dark' : 'light'
-          }
-
-          if (user.theme === 'mixed') {
-            return 'light'
-          }
-
-          return user.theme
+          return user.theme === 'system' ? systemTheme.value : user.theme
         }),
         user,
       }

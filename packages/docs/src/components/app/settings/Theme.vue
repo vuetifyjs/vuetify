@@ -1,10 +1,9 @@
 <template>
-  <app-settings-group title="theme" :items="items" :model-value="user.theme" @update:model-value="updateTheme" />
+  <app-settings-group v-model="model" title="theme" :items="items" multiple />
 </template>
 
 <script lang="ts">
   import { computed } from 'vue'
-  import { getMatchMedia } from '@/util/helpers'
   import { useUserStore } from '@/store/user'
   import AppSettingsGroup from './Group.vue'
 
@@ -16,50 +15,53 @@
     setup () {
       const user = useUserStore()
 
-      function setTheme (value: string) {
-        user.theme = value
-      }
-
       const items = computed(() => ([
         {
           text: 'light',
           icon: 'mdi-white-balance-sunny',
-          cb: () => setTheme('light'),
         },
         {
           text: 'dark',
           icon: 'mdi-weather-night',
-          cb: () => setTheme('dark'),
         },
         {
           text: 'system',
           icon: 'mdi-desktop-tower-monitor',
-          cb: () => {
-            const matchMedia = getMatchMedia()
-            if (!matchMedia) return
-
-            matchMedia.matches && setTheme('system')
-          },
         },
         {
           text: 'mixed',
           icon: 'mdi-theme-light-dark',
-          cb: () => setTheme('mixed'),
         },
       ]))
 
-      function updateTheme (value: string) {
-        const item = items.value.find(({ text }) => text === value)
-
-        if (!item) return
-
-        item.cb()
-      }
+      const model = computed({
+        get () {
+          return [user.theme].concat(user.mixedTheme ? 'mixed' : [])
+        },
+        set (val: string[]) {
+          {
+            const idx = val.indexOf('mixed')
+            user.mixedTheme = !!~idx
+            if (~idx) {
+              val.splice(idx, 1)
+            }
+          }
+          {
+            const idx = val.indexOf(user.theme)
+            if (~idx) {
+              val.splice(idx, 1)
+            }
+            if (val.length) {
+              user.theme = val[0]
+            }
+          }
+        },
+      })
 
       return {
         items,
         user,
-        updateTheme,
+        model,
       }
     },
   }

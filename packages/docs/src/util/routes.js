@@ -13,7 +13,7 @@ const languageRegexp = new RegExp('^(' + languagePattern + ')$')
 export function preferredLocale (locale = 'en') {
   if (!IN_BROWSER) return locale
 
-  const languages = [].concat(window.localStorage.getItem('currentLanguage') || [], navigator.languages || [])
+  const languages = [].concat(window.localStorage.getItem('currentLocale') || [], navigator.languages || [])
 
   return languages.find(l => l.match(languageRegexp)) || locale
 }

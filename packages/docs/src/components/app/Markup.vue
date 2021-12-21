@@ -1,35 +1,38 @@
 <template>
-  <v-sheet
-    ref="root"
-    class="app-markup overflow-hidden"
-    :color="theme.getTheme(theme.current.value).dark ? '#1F1F1F' : 'grey-lighten-5'"
-    rounded
-    outlined
-    dir="ltr"
-  >
-    <slot>
-      <pre v-if="inline" :class="className">
-        <code :class="className" v-html="highlighted" />
-      </pre>
-      <code v-else :class="className" v-html="highlighted" />
-    </slot>
-
-    <v-btn
-      size="small"
-      class="v-btn--copy"
-      icon
-      variant="text"
-      @click="copy"
+  <v-theme-provider :theme="isDark ? 'dark' : 'light'">
+    <v-sheet
+      ref="root"
+      class="app-markup overflow-hidden"
+      :color="isDark ? '#1F1F1F' : 'grey-lighten-5'"
+      rounded
+      outlined
+      dir="ltr"
+      v-bind="$attrs"
     >
-      <v-fade-transition hide-on-leave>
-        <v-icon
-          :key="String(clicked)"
-          color="grey"
-          :icon="clicked ? '$complete' : 'mdi-content-copy'"
-        />
-      </v-fade-transition>
-    </v-btn>
-  </v-sheet>
+      <slot>
+        <pre v-if="inline" :class="className">
+          <code :class="className" v-html="highlighted" />
+        </pre>
+        <code v-else :class="className" v-html="highlighted" />
+      </slot>
+
+      <v-btn
+        size="small"
+        class="v-btn--copy"
+        icon
+        variant="text"
+        @click="copy"
+      >
+        <v-fade-transition hide-on-leave>
+          <v-icon
+            :key="String(clicked)"
+            color="grey"
+            :icon="clicked ? '$complete' : 'mdi-content-copy'"
+          />
+        </v-fade-transition>
+      </v-btn>
+    </v-sheet>
+  </v-theme-provider>
 </template>
 
 <script lang="ts">
@@ -48,9 +51,12 @@
   import { useTheme } from 'vuetify'
   import { wait } from '@/util/helpers'
   import { IN_BROWSER } from '@/util/globals'
+  import { useUserStore } from '@/store/user'
 
   export default defineComponent({
     name: 'Markup',
+
+    inheritAttrs: false,
 
     props: {
       code: String,
@@ -62,6 +68,7 @@
     },
 
     setup (props) {
+      const user = useUserStore()
       const theme = useTheme({})
       const clicked = ref(false)
       const root = ref<ComponentPublicInstance>()
@@ -94,7 +101,11 @@
         window.getSelection()?.removeAllRanges()
       }
 
-      return { root, theme, highlighted, className, clicked, copy }
+      const isDark = computed(() => {
+        return user.mixedTheme || theme.getTheme(theme.current.value).dark
+      })
+
+      return { root, isDark, highlighted, className, clicked, copy }
     },
   })
 </script>

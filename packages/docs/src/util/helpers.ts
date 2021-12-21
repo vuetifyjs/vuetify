@@ -112,5 +112,7 @@ export function distance (s1: string, s2: string) {
 }
 
 export function getMatchMedia () {
-  return (IN_BROWSER && window.matchMedia) ? window.matchMedia('(prefers-color-scheme: dark)') : false
+  if (!IN_BROWSER) return
+
+  return window.matchMedia('(prefers-color-scheme: dark)')
 }

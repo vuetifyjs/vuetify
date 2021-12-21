@@ -9,6 +9,7 @@
     <v-item-group
       class="mx-auto"
       mandatory
+      :multiple="multiple"
       :model-value="modelValue"
       @update:model-value="$emit('update:modelValue', $event)"
     >
@@ -51,6 +52,7 @@
       title: String,
       modelValue: null,
       items: Array,
+      multiple: Boolean,
     },
 
     emits: {

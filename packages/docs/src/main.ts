@@ -28,7 +28,7 @@ localeStore.$subscribe((_, state) => {
 
 userStore.$subscribe((_, state) => {
   console.log('updating user store', state)
-  window.localStorage.setItem('vuetify@user', JSON.stringify(state))
+  userStore.save()
 })
 
 // https://github.com/antfu/vite-ssg
