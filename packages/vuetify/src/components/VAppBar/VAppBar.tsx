@@ -64,7 +64,7 @@ export const VAppBar = defineComponent({
     ...makeDensityProps(),
     ...makeElevationProps(),
     ...makeRoundedProps(),
-    ...makeLayoutItemProps(),
+    ...makeLayoutItemProps({ name: 'app-bar' }),
     ...makeTagProps({ tag: 'header' }),
   },
 
