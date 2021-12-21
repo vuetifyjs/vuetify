@@ -23,7 +23,7 @@
       rounded="pill"
       top
     >
-      snackbar with <strong>rounded: pill</strong> property.
+      rounded="pill"
     </v-snackbar>
 
     <v-snackbar
