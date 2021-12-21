@@ -1,7 +1,7 @@
 <template>
   <component
     :is="tag"
-    class="app-link text-decoration-none primary--text font-weight-medium d-inline-flex align-center"
+    class="app-link text-decoration-none text-primary font-weight-medium d-inline-flex align-center"
     v-bind="attrs"
     @click="onClick"
   >

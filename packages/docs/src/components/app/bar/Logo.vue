@@ -18,6 +18,7 @@
   // Utilities
   import { computed, defineComponent } from 'vue'
   import { useI18n } from 'vue-i18n'
+  import { useTheme } from 'vuetify'
 
   export default defineComponent({
     name: 'Logo',
@@ -28,16 +29,16 @@
 
     setup (props) {
       const { locale, t } = useI18n()
+      const theme = useTheme({})
 
       // data
-      const theme = 'light'
       const to = {
         name: locale.value,
       }
 
       // computed
       const logo = computed(() => {
-        return props.alt ? `vuetify-logo-${theme}-text.svg` : `vuetify-logo-${theme}.svg`
+        return props.alt ? `vuetify-logo-${theme.current.value}-text.svg` : `vuetify-logo-${theme.current.value}.svg`
       })
       const width = computed(() => {
         return props.alt ? 148 : 34
@@ -47,7 +48,6 @@
         logo,
         t,
         to,
-        theme,
         width,
       }
     },
