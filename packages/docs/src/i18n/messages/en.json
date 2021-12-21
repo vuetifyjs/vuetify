@@ -1,9 +1,5 @@
 {
   "home": {
-    "material-design-framework": "Material Design Framework",
-    "what-is-vuetify": "Vuetify is a Vue UI Library with beautifully handcrafted Material Components. No design skills required — everything you need to create amazing applications is at your fingertips",
-    "project-sponsors": "Project Sponsors",
-    "sponsors-description": "The continued development and maintenance of Vuetify is made possible by these generous sponsors:",
     "get-started": "Get Started",
     "why-vuetify": "Why Vuetify?"
   },

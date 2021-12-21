@@ -4,7 +4,13 @@
 
     <app-bar />
 
-    <home-view />
+    <v-main>
+      <v-container class="px-4 text-center font-weight-light">
+        <router-view />
+      </v-container>
+    </v-main>
+
+    <home-footer />
 
     <!--<default-snackbar />-->
   </v-app>
@@ -16,10 +22,17 @@
 
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
   import AppBar from '@/components/app/bar/Bar.vue'
-  import HomeView from '@/components/home/View.vue'
+  import HomeFooter from '@/components/home/Footer.vue'
 
   export default defineComponent({
     name: 'HomeLayout',
-    components: { AppSettingsDrawer, AppBar, HomeView },
+    components: { AppSettingsDrawer, AppBar, HomeFooter },
   })
 </script>
+
+<style lang="sass">
+#material-design-framework
+  h1, h2, h3, h4, h5, h6
+    > a
+      display: none
+</style>

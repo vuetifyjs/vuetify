@@ -2,8 +2,13 @@
 meta:
   title: Vuetify
 ---
+<script setup>
+  import HomeLogo from '@/components/home/Logo.vue'
+  import HomeActionBtns from '@/components/home/ActionBtns.vue'
+  import HomeSponsors from '@/components/home/Sponsors.vue'
+</script>
 
-<home-vuetify-logo size="300px" />
+<home-logo size="300px" />
 
 <br>
 

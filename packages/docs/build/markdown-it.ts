@@ -21,6 +21,7 @@ export const configureMarkdown = (md: MarkdownIt) => {
     })
     .use(MarkdownItAttrs)
     .use(MarkdownItAnchor, {
+      tabIndex: false,
       permalink: MarkdownItAnchor.permalink.headerLink(),
       slugify: (str: unknown) => {
         let slug = String(str)
