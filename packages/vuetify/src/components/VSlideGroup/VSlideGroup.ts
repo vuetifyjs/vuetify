@@ -217,11 +217,9 @@ export const BaseSlideGroup = mixins<options &
     isOverflowing: 'setWidths',
     scrollOffset (val) {
       const scroll =
-        val <= 0
-          ? bias(-val)
-          : val > this.widths.content - this.widths.wrapper
-            ? -(this.widths.content - this.widths.wrapper) + bias(this.widths.content - this.widths.wrapper - val)
-            : -val
+        val > this.widths.content - this.widths.wrapper
+          ? -(this.widths.content - this.widths.wrapper) + bias(this.widths.content - this.widths.wrapper - val)
+          : -val
 
       this.$refs.content.style.transform = `translateX(${scroll}px)`
     },
