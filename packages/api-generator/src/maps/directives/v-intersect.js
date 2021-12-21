@@ -6,7 +6,19 @@ module.exports = {
         'Function',
         '{ handler: Function, options?: IntersectionObserverInit }',
       ],
-      snippet: '\n<template>\n<v-card v-intersect="onIntersect">...</v-card>\n</template>\n\n<script>\nexport default {\n  methods: {\n    // Will be invoked on DOM mount and when the element is intersected\n    onIntersect (entries, observer, isIntersecting) {}\n  }\n}\n</script>',
+      snippet: `
+<template>
+<v-card v-intersect="onIntersect">...</v-card>
+</template>
+
+<script>
+export default {
+  methods: {
+    // Will be invoked on DOM mount and when the element is intersected
+    onIntersect (entries, observer, isIntersecting) {}
+  }
+}
+</script>`,
     },
   ],
   modifiers: [
@@ -16,7 +28,21 @@ module.exports = {
       type: [
         'boolean',
       ],
-      snippet: '\n<template>\n  <v-card v-intersect.once="onIntersect">...</v-card>\n</template>\n\n<script>\n  export default {\n    methods: {\n      // Will be invoked once at mount and once when it intersects\n      // After the intersection the callback unbinds\n      // Can be used with the quiet modifier\n      onIntersect (entries, observer, isIntersecting) {}\n    }\n  }\n</script>',
+      snippet: `
+<template>
+  <v-card v-intersect.once="onIntersect">...</v-card>
+</template>
+
+<script>
+  export default {
+    methods: {
+      // Will be invoked once at mount and once when it intersects
+      // After the intersection the callback unbinds
+      // Can be used with the quiet modifier
+      onIntersect (entries, observer, isIntersecting) {}
+    }
+  }
+</script>`,
     },
     {
       name: 'quiet',
@@ -24,7 +50,19 @@ module.exports = {
       type: [
         'boolean',
       ],
-      snippet: '\n<template>\n  <v-card v-intersect.quiet="onIntersect">...</v-card>\n</template>\n\n<script>\n  export default {\n    methods: {\n      // Will only be called once the element is intersected\n      onIntersect (entries, observer, isIntersecting) {}\n    }\n  }\n</script>',
+      snippet: `
+<template>
+  <v-card v-intersect.quiet="onIntersect">...</v-card>
+</template>
+
+<script>
+  export default {
+    methods: {
+      // Will only be called once the element is intersected
+      onIntersect (entries, observer, isIntersecting) {}
+    }
+  }
+</script>`,
     },
   ],
   props: [],
