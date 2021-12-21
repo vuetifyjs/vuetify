@@ -39,7 +39,7 @@ jobs:
             /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn --frozen-lockfile --non-interactive
-      - run: yarn run build:lib
+      - run: yarn run build
         working-directory: ./packages/vuetify
       - run: yarn run lint
 
