@@ -4,13 +4,17 @@
     class="mt-12"
   >
     <app-heading
-      :content="text"
+      :content="t('ready')"
       level="2"
     />
 
-    <div class="mb-3">
-      {{ t('ready-text') }}
-    </div>
+    <i18n-t class="mb-3" keypath="ready-text" tag="div">
+      <template #team>
+        <app-link :href="rpath('/about/meet-the-team')">
+          {{ t('team') }}
+        </app-link>
+      </template>
+    </i18n-t>
 
     <v-row dense>
       <v-col
@@ -48,6 +52,7 @@
   import { computed } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { useRoute } from 'vue-router'
+  import { rpath } from '@/util/routes'
   import generatedRoutes from 'virtual:generated-pages'
 
   const categoryIcons: Record<string, { icon: string, color: string }> = {
@@ -101,8 +106,6 @@
       const route = useRoute()
       const { t, locale } = useI18n()
 
-      const text = computed(() => t('ready', { url: '/about/meet-the-team' }))
-
       const related = computed(() => ((route.meta.related as string[]) || []).flatMap(href => {
         href = href.replace(/\/$/, '')
         const path = `/${locale.value}${href}`
@@ -121,9 +124,9 @@
       }))
 
       return {
-        text,
         related,
         t,
+        rpath,
       }
     },
   }

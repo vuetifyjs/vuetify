@@ -1,7 +1,7 @@
 <template>
   <app-btn
     variant="text"
-    :to="to"
+    :to="rpath('/about/meet-the-team')"
     text="team"
     @click="onClick"
   />
@@ -10,6 +10,7 @@
 <script lang="ts">
   // Utilities
   import { defineComponent } from 'vue'
+  import { rpath } from '@/util/routes'
   // import { useRoute } from 'vue-router'
 
   export default defineComponent({
@@ -27,14 +28,8 @@
       }
 
       return {
-        to: {
-          // name: 'Documentation',
-          // params: {
-          //   category: 'about',
-          //   page: 'meet-the-team',
-          // },
-        },
         onClick,
+        rpath,
       }
     },
   })
