@@ -1,4 +1,4 @@
-import { computed, onBeforeUnmount, onMounted, ref, toRef, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, provide, ref, toRef, watch } from 'vue'
 import { convertToUnit, defineComponent, getCurrentInstance, propsFactory } from '@/util'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableRows } from './VDataTableRows'
@@ -6,7 +6,10 @@ import './VDataTable.sass'
 
 import type { PropType, Ref } from 'vue'
 import type { DataTableHeader } from '../types'
-import { useHeaders } from '../composables'
+import { useGroupBy, useHeaders, usePagination, useSort } from '../composables'
+import { VDataTableFooter } from './VDataTableFooter'
+import { VTable } from '@/components'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 export const makeVDataTableProps = propsFactory({
   headers: {
@@ -20,6 +23,7 @@ export const makeVDataTableProps = propsFactory({
   height: [String, Number],
   width: [String, Number],
   fixedHeader: Boolean,
+  groupBy: String,
 }, 'v-data-table')
 
 export const VDataTable = defineComponent({
@@ -27,45 +31,85 @@ export const VDataTable = defineComponent({
 
   props: {
     ...makeVDataTableProps(),
+    page: {
+      type: Number,
+      default: 1,
+    },
+    itemsPerPage: {
+      type: Number,
+      default: 10,
+    },
+    sortBy: Array as PropType<any[]>,
+  },
+
+  emits: {
+    'update:page': (value: number) => true,
+    'update:itemsPerPage': (value: number) => true,
+    'update:sortBy': (value: any) => true,
   },
 
   setup (props, { slots }) {
     const { headers, columns } = useHeaders(props)
 
+    const page = useProxiedModel(props, 'page')
+    const itemsPerPage = useProxiedModel(props, 'itemsPerPage')
+    const sortBy = useProxiedModel(props, 'sortBy')
+
+    const { items: sortedItems, toggleSort } = useSort(toRef(props, 'items'), sortBy, ref(true))
+
+    const { items } = usePagination(sortedItems, itemsPerPage, page)
+
+    const { toggleGroup } = useGroupBy(toRef(props, 'items'), toRef(props, 'groupBy'))
+
+    provide('v-data-table', {
+      toggleGroup,
+      toggleSort,
+    })
+
     return () => (
-      <div
+      <VTable
         class="v-data-table-regular"
-        style={{
-          height: convertToUnit(props.height),
-          width: convertToUnit(props.width),
-        }}
+        height={props.height}
       >
-        <table
-          class="v-data-table-regular__table"
-          style={{
-            width: convertToUnit(props.width),
-          }}
-          role="table"
-        >
-          <thead class="v-data-table-regular__thead" role="rowgroup">
-            { slots.headers ? slots.headers() : (
-              <VDataTableHeaders
-                rows={ headers.value }
-                sticky={ props.fixedHeader }
-              />
-            ) }
-          </thead>
-          <tbody class="v-data-table-regular__tbody" role="rowgroup">
-            { slots.body ? slots.body() : (
-              <VDataTableRows
-                columns={ columns.value }
-                items={ props.items }
-                v-slots={ slots }
-              />
-            ) }
-          </tbody>
-        </table>
-      </div>
+        {{
+          default: () => (
+            <>
+              <thead class="v-data-table-regular__thead" role="rowgroup">
+                { slots.headers ? slots.headers() : (
+                  <VDataTableHeaders
+                    rows={ headers.value }
+                    rowHeight={ 48 }
+                    sticky={ props.fixedHeader }
+                    sortBy={ sortBy.value }
+                    onSort={ sorted => {
+                      sortBy.value = sorted
+                    } }
+                  />
+                ) }
+              </thead>
+              <tbody class="v-data-table-regular__tbody" role="rowgroup">
+                { slots.body ? slots.body() : (
+                  <VDataTableRows
+                    columns={ columns.value }
+                    items={ items.value }
+                    v-slots={ slots }
+                  />
+                ) }
+              </tbody>
+            </>
+          ),
+          bottom: () => (
+            <VDataTableFooter
+              onPreviousPage={() => {
+                page.value = Math.max(1, page.value - 1)
+              }}
+              onNextPage={() => {
+                page.value = Math.min(Math.floor(props.items.length / itemsPerPage.value), page.value + 1)
+              }}
+            />
+          ),
+        }}
+      </VTable>
     )
   },
 })

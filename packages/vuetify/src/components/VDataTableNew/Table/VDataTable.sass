@@ -1,6 +1,5 @@
 .v-data-table-regular
   width: 100%
-  overflow: auto
 
 .v-data-table-regular__table
   width: 100%
@@ -12,6 +11,7 @@
 .v-data-table-regular__tbody
 
 .v-data-table-regular__tr
+  height: 48px
 
 .v-data-table-regular__td,
 .v-data-table-regular__th
@@ -27,9 +27,13 @@
 
 .v-data-table-regular__td
   background: lightgrey
+  height: 48px
 
   &--fixed
     position: sticky
     z-index: 2
     left: 0
     border-right: 1px solid black
+
+  &--group-header
+    background: darkgrey

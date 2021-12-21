@@ -1,8 +1,8 @@
-import { getCurrentInstance } from '@/util'
+import { getCurrentInstance, getObjectValueByPath } from '@/util'
 import { computed, inject, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
 
 import type { InjectionKey, Ref } from 'vue'
-import { DataTableHeader } from './types'
+import type { DataTableHeader } from './types'
 
 export const useVirtual = (props: { height?: string | number, itemHeight: string | number }, itemsLength: Ref<number>) => {
   const vm = getCurrentInstance('useVirtual')
@@ -170,4 +170,147 @@ export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader
   const columns = computed(() => headers.value.flatMap(row => row.filter(col => col.id)))
 
   return { headers, columns }
+}
+
+// export const combine = (composables: ) => {
+
+// }
+
+export const useFilter = () => {
+
+}
+
+function sortItems<T extends any, K extends keyof T> (
+  items: T[],
+  sortBy: {
+    key: string
+    order: string
+  }[],
+  locale: string,
+  // customSorters?: Record<K, DataTableCompareFunction<T[K]>>
+): T[] {
+  if (sortBy === null || !sortBy.length) return items
+  const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
+
+  return [...items].sort((a, b) => {
+    for (let i = 0; i < sortBy.length; i++) {
+      const { key, order } = sortBy[i]
+
+      let sortA = getObjectValueByPath(a, key)
+      let sortB = getObjectValueByPath(b, key)
+
+      if (order === 'desc') {
+        [sortA, sortB] = [sortB, sortA]
+      }
+
+      // if (customSorters?.[sortKey as K]) {
+      //   const customResult = customSorters[sortKey as K](sortA, sortB)
+
+      //   if (!customResult) continue
+
+      //   return customResult
+      // }
+
+      // Check if both cannot be evaluated
+      if (sortA === null && sortB === null) {
+        continue
+      }
+
+      // Dates should be compared numerically
+      if (sortA instanceof Date && sortB instanceof Date) {
+        return sortA.getTime() - sortB.getTime()
+      }
+
+      [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
+
+      if (sortA !== sortB) {
+        if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
+        return stringCollator.compare(sortA, sortB)
+      }
+    }
+
+    return 0
+  })
+}
+
+export const useSort = (items: Ref<any[]>, sortBy: Ref<{ key: string, order: string }[] | undefined>, mustSort: Ref<boolean>) => {
+  const sortedItems = computed(() => {
+    if (!sortBy.value?.length) return items.value
+
+    return sortItems(items.value, sortBy.value, 'en')
+  })
+
+  const toggleSort = (key: string) => {
+    let newSortBy = sortBy.value?.map(x => ({ ...x })) ?? []
+    const item = newSortBy.find(x => x.key === key)
+
+    if (!item) {
+      newSortBy = [...newSortBy, { key, order: 'asc' }]
+    } else if (item.order === 'desc') {
+      if (mustSort.value) {
+        item.order = 'asc'
+      } else {
+        newSortBy = newSortBy.filter(x => x.key !== key)
+      }
+    } else {
+      item.order = 'desc'
+    }
+
+    sortBy.value = newSortBy
+  }
+
+  return { items: sortedItems, toggleSort }
+}
+
+export const usePagination = (items: Ref<any[]>, itemsPerPage: Ref<number>, page: Ref<number>) => {
+  const paginatedItems = computed(() => {
+    if (itemsPerPage.value <= 0) return items.value
+
+    const startIndex = itemsPerPage.value * (page.value - 1)
+    const stopIndex = startIndex + itemsPerPage.value
+
+    return items.value.slice(startIndex, stopIndex)
+  })
+
+  return { items: paginatedItems }
+}
+
+export const useGroupBy = (items: Ref<any[]>, groupBy: Ref<string | undefined>) => {
+  const groupByOpen = ref(new Set<string>())
+
+  const groupedItems = computed(() => {
+    const groups = new Map<string, any[]>()
+
+    if (!groupBy.value) return groups
+
+    for (const item of items.value) {
+      const value = item[groupBy.value]
+      const group = groups.get(value) ?? []
+      group.push(item)
+      groups.set(value, group)
+    }
+
+    return groups
+  })
+
+  const flatItems = computed(() => {
+    if (!groupBy.value) return items.value
+
+    const flatItems = []
+
+    for (const [key, value] of groupedItems.value.entries()) {
+      flatItems.push({ $type: 'group-header', groupBy: groupBy.value, groupByValue: key })
+      if (groupByOpen.value.has(key)) flatItems.push(...value)
+    }
+
+    return flatItems
+  })
+
+  const toggleGroup = (group: string, value?: boolean) => {
+    const open = value == null ? !groupByOpen.value.has(group) : value
+    if (open) groupByOpen.value.add(group)
+    else groupByOpen.value.delete(group)
+  }
+
+  return { items: flatItems, groupedItems, toggleGroup }
 }

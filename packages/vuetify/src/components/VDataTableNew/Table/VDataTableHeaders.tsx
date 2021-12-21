@@ -1,7 +1,7 @@
+import { VBtn } from '@/components'
 import { convertToUnit, defineComponent } from '@/util'
 
-import type { PropType } from 'vue'
-import type { Column } from './Grid/VDataTableGrid'
+import { inject, PropType } from 'vue'
 
 export const VDataTableHeaders = defineComponent({
   name: 'VDataTableHeaders',
@@ -16,9 +16,16 @@ export const VDataTableHeaders = defineComponent({
       required: true,
     },
     sticky: Boolean,
+    sortBy: Array as PropType<any[]>,
   },
 
-  setup (props, { slots }) {
+  emits: {
+    sort: (x: any) => true,
+  },
+
+  setup (props, { slots, emit }) {
+    const { toggleSort } = inject('v-data-table', {} as any)
+
     const getStickyStyles = (column: any, i: number) => {
       if (!props.sticky && !column.sticky) return null
 
@@ -46,8 +53,12 @@ export const VDataTableHeaders = defineComponent({
               role="columnheader"
               colspan={column.colspan}
               rowspan={column.rowspan}
+              onClick={() => toggleSort(column.id)}
             >
               { column.name }
+              { props.sortBy?.find(x => x.key === column.id) && (
+                <VBtn icon="mdi-home" variant="plain" />
+              ) }
             </th>
           ))}
         </tr>

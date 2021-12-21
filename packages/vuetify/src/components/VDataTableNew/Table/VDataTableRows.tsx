@@ -1,6 +1,6 @@
 import { convertToUnit, createRange, defineComponent } from '@/util'
 
-import type { PropType } from 'vue'
+import { inject, PropType } from 'vue'
 import type { Column } from './Grid/VDataTableGrid'
 import { useExpanded, VDataTableExpandedKey } from './Grid/VDataTableGrid'
 
@@ -19,10 +19,26 @@ export const VDataTableRows = defineComponent({
   },
 
   setup (props, { slots }) {
+    const { toggleGroup } = inject('v-data-table', {} as any)
+
     return () => {
       return (
         <>
-          {props.items.map(item => (
+          {props.items.map(item => item.$type === 'group-header' ? (
+            <tr
+              class="v-data-table-regular__tr"
+              role="row"
+              key={ `group-header_${item.groupBy}_${item.groupByValue}` }
+            >
+              <td
+                class="v-data-table-regular__td v-data-table-regular__td--group-header"
+                colspan={ props.columns.length }
+                onClick={ () => toggleGroup(item.groupByValue) }
+              >
+                Group { item.groupBy } { item.groupByValue }
+              </td>
+            </tr>
+          ) : (
             <tr
               class="v-data-table-regular__tr"
               role="row"
