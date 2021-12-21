@@ -26,21 +26,23 @@ export function useDefaults () {
   return defaults
 }
 
-export function provideDefaults (props?: {
-  defaults?: DefaultsInstance
-  reset?: number | string
-  root?: boolean
-  scoped?: boolean
-}) {
-  const defaults = useDefaults()
+export function provideDefaults (
+  defaults?: DefaultsInstance,
+  options?: {
+    reset?: number | string
+    root?: boolean
+    scoped?: boolean
+  }
+) {
+  const injectedDefaults = useDefaults()
 
   const newDefaults = computed(() => {
-    let properties = mergeDeep(props?.defaults, { prev: defaults.value })
+    let properties = mergeDeep(defaults, { prev: injectedDefaults.value })
 
-    if (props?.scoped) return properties
+    if (options?.scoped) return properties
 
-    if (props?.reset || props?.root) {
-      const len = Number(props.reset ?? Infinity)
+    if (options?.reset || options?.root) {
+      const len = Number(options.reset ?? Infinity)
 
       for (let i = 0; i <= len; i++) {
         if (!properties.prev) break
@@ -51,7 +53,7 @@ export function provideDefaults (props?: {
       return properties
     }
 
-    return mergeDeep(properties, defaults.value)
+    return mergeDeep(properties, properties.prev)
   }) as ComputedRef<DefaultsInstance>
 
   provide(DefaultsSymbol, newDefaults)

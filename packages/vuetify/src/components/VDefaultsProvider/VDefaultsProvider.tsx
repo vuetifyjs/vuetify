@@ -19,7 +19,11 @@ export const VDefaultsProvider = defineComponent({
   },
 
   setup (props, { slots }) {
-    provideDefaults(props)
+    provideDefaults(props.defaults, {
+      reset: props.reset,
+      root: props.root,
+      scoped: props.scoped,
+    })
 
     return () => slots.default?.()
   },
