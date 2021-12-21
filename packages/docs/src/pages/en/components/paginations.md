@@ -1,4 +1,5 @@
 ---
+nav: Pagination
 meta:
   title: Pagination component
   description: The pagination component is used to separate long sets of data so that it is easier for a user to consume information.
@@ -23,9 +24,7 @@ Pagination by default displays the number of pages based on the set **length** p
 
 ## API
 
-- [v-pagination](/api/v-pagination)
-
-<inline-api page="components/paginations" />
+<api-inline />
 
 ## Examples
 

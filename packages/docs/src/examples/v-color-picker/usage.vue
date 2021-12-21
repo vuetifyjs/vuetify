@@ -6,7 +6,6 @@
     >
       <v-color-picker
         v-bind="$attrs"
-        v-on="$listeners"
       ></v-color-picker>
     </v-row>
   </v-container>

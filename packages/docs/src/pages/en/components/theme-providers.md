@@ -1,4 +1,5 @@
 ---
+nav: Theme providers
 meta:
   title: Theme provider component
   description: The theme provider allows you to style a section of your application in a different theme from the default

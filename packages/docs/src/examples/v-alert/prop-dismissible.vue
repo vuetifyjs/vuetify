@@ -2,11 +2,11 @@
   <div>
     <v-alert
       v-model="alert"
-      border="left"
-      close-text="Close Alert"
+      border="start"
+      close-label="Close Alert"
       color="deep-purple accent-4"
-      dark
-      dismissible
+      theme="dark"
+      closable
     >
       Aenean imperdiet. Quisque id odio. Cras dapibus. Pellentesque ut neque. Cras dapibus.
 
@@ -15,8 +15,6 @@
     <div class="text-center">
       <v-btn
         v-if="!alert"
-        color="deep-purple accent-4"
-        dark
         @click="alert = true"
       >
         Reset

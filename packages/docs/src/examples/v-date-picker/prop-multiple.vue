@@ -16,8 +16,8 @@
       <v-menu
         ref="menu"
         v-model="menu"
+        v-model:return-value="dates"
         :close-on-content-click="false"
-        :return-value.sync="dates"
         transition="scale-transition"
         offset-y
         min-width="auto"

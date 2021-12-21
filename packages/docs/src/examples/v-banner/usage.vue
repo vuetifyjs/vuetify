@@ -2,7 +2,6 @@
   <div style="width: 100%;">
     <v-banner
       v-bind="$attrs"
-      v-on="$listeners"
     >
       A banner for use on desktop / mobile
     </v-banner>

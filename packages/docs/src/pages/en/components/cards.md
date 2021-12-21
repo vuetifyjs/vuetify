@@ -1,12 +1,13 @@
 ---
+nav: Cards
 meta:
   title: Card component
   description: The v-card component is a versatile and enhanced sheet of paper that provides a simple interface for headings, text, images, and actions.
   keywords: cards, vuetify card component, vue card component, v-card
 related:
-  - /components/buttons/
-  - /components/images/
-  - /styles/text-and-typography/
+  - /components/buttons
+  - /components/images
+  - /styles/text-and-typography
 ---
 
 # Cards
@@ -21,17 +22,7 @@ related:
 
 ## API
 
-* [v-card-actions](/api/v-card-actions/)
-* [v-card-avatar](/api/v-card-avatar/)
-* [v-card-header](/api/v-card-header/)
-* [v-card-header-text](/api/v-card-header-text/)
-* [v-card-img](/api/v-card-img/)
-* [v-card-media](/api/v-card-media/)
-* [v-card-subtitle](/api/v-card-subtitle/)
-* [v-card-text](/api/v-card-text/)
-* [v-card-title](/api/v-card-title/)
-
-<inline-api page="components/cards" />
+<api-inline />
 
 ## Functional Components
 
@@ -97,7 +88,7 @@ TODO
 
 ### v-card-subtitle
 
-Provides a default **font-size** and **padding** for card subtitles. Font-size can be overwritten with [typography classes](/styles/typography).
+Provides a default **font-size** and **padding** for card subtitles. Font-size can be overwritten with [typography classes](/styles/text-and-typography).
 
 ### v-card-text
 
@@ -105,7 +96,7 @@ Primarily used for **text content** in a card. Applies padding for text, reduces
 
 ### v-card-title
 
-Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with [typography classes](/styles/typography).
+Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with [typography classes](/styles/text-and-typography).
 
 <promoted-ad slug="vuetify-zero-theme-pro" />
 

@@ -4,7 +4,7 @@
       v-model="alert"
       dismissible
       color="cyan"
-      border="left"
+      border="start"
       elevation="2"
       colored-border
       icon="mdi-twitter"

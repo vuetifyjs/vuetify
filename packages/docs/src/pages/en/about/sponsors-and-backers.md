@@ -1,4 +1,5 @@
 ---
+nav: Sponsors and backers
 meta:
   title: Sponsoring Vuetify
   description: Help support Vuetify by backing the project. This helps with the maintenance of existing features and the development of new ones.
@@ -6,7 +7,6 @@ meta:
 related:
   - /introduction/support/
   - /introduction/enterprise/
-nav: Sponsors and backers
 ---
 
 # Sponsor Vuetify development
@@ -30,36 +30,36 @@ We thank all of our project sponsors for their continued support of Vuetify. If 
 
 ### Special
 
-<sponsors tier="0" />
+<page-component path="home/Sponsors" tier="0" />
 
 ### Diamond
 
-<sponsors tier="1" />
+<page-component path="home/Sponsors" tier="1" />
 
 ### Platinum
 
-<sponsors tier="2" />
+<page-component path="home/Sponsors" tier="2" />
 
 ### Gold
 
-<sponsors tier="3" />
+<page-component path="home/Sponsors" tier="3" />
 
 ### Silver
 
-<sponsors tier="4" />
+<page-component path="home/Sponsors" tier="4" />
 
 ### Affiliate
 
-<sponsors tier="5" />
+<page-component path="home/Sponsors" tier="5" />
 
 ### Service
 
-<sponsors tier="6" />
+<page-component path="home/Sponsors" tier="6" />
 
 ## Cursory
 
 If you run a business and are using Vuetify in a revenue-generating product, it makes business sense to sponsor Vuetify development: *it ensures the project that your product relies on stays healthy and actively maintained*. Vuetify is a **full-time** job for John and Heather; your sponsorship and contributions help support them.
 
-If you have any questions, please reach out to [sponsor@vuetifyjs.com](sponsor@vuetifyjs.com).
+If you have any questions, please reach out to [sponsor@vuetifyjs.com](mailto:sponsor@vuetifyjs.com).
 
 <backmatter />

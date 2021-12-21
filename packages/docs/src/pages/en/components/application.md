@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Application service
+  title: Application
   description: Vuetify comes equipped with a default markup that makes it easy to create layouts (boilerplate) for any Vue application.
   keywords: default layout, vuetify default markup, vuetify default layout
 related:
@@ -17,10 +17,7 @@ In Vuetify, the `v-app` component and the **app** prop on components like `v-nav
 
 ## API
 
-- [v-app](/api/v-app)
-- [v-main](/api/v-main)
-
-<inline-api page="components/application" />
+<api-inline />
 
 <alert type="error">
 

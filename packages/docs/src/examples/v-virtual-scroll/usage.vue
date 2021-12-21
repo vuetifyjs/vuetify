@@ -14,7 +14,6 @@
       <v-virtual-scroll
         :items="items"
         v-bind="$attrs"
-        v-on="$listeners"
       >
         <template v-slot:default="{ item }">
           <div class="px-2">

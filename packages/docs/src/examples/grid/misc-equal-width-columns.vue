@@ -1,8 +1,8 @@
 <template>
   <v-container class="grey lighten-5">
     <v-row no-gutters>
-      <template v-for="n in 4">
-        <v-col :key="n">
+      <template v-for="n in 4" :key="n">
+        <v-col>
           <v-card
             class="pa-2"
             outlined

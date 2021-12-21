@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center">
+  <div class="d-flex flex-column align-center">
     <v-rating
       value="3"
       size="x-small"

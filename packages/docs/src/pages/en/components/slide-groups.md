@@ -23,10 +23,7 @@ Similar to the [v-window](/components/windows) component, `v-slide-group` lets i
 
 ## API
 
-- [v-slide-group](/api/v-slide-group)
-- [v-slide-item](/api/v-slide-item)
-
-<inline-api page="components/slide-groups" />
+<api-inline />
 
 <!-- ## Sub-components
 

@@ -1,4 +1,5 @@
 ---
+nav: Mutation observer
 meta:
   title: Mutation observer directive
   description: The mutation observer directive utilizes the Mutation observer API. It allows you to invoke a callback when targetted elements are updated.
@@ -156,9 +157,7 @@ Unlike the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/
 
 ## API
 
-- [v-mutate](/api/v-mutate)
-
-<inline-api page="directives/mutate" />
+<api-inline />
 
 ## Examples
 

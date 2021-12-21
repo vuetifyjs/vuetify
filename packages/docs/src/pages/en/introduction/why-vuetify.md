@@ -1,20 +1,20 @@
 ---
+nav: Why Vuetify?
 meta:
   title: Why you should be using Vuetify
   description: Vuetify has an extremely active community, provides easy to use Material Design components and is consistently updated.
   keywords: why vuetify, why choose vuetify, best vue framework, best ui framework
 related:
-  - /getting-started/installation/
-  - /introduction/roadmap/
-  - /about/meet-the-team/
-nav: Why Vuetify?
+  - /getting-started/installation
+  - /introduction/roadmap
+  - /about/meet-the-team
 ---
 
 # Introduction
 
 Learn more about what Vuetify is, how to create an application from scratch, browse API references, sample code, tutorials, and more.
 
-<promoted-ad slug="vuemastery-getting-started" />
+<!-- <promoted-ad slug="vuemastery-getting-started" /> -->
 
 ## Getting started
 
@@ -38,11 +38,11 @@ Vuetify is developed exactly according to [Material Design specification](https:
 
 Vuetify has a very active development cycle and is patched weekly, responding to community issues and reports at breakneck speed, allowing you to get your hands on bug fixes and enhancements more often. In addition, every major release is accompanied with 18 months of [Long-term support](/introduction/long-term-support/) for the previous minor version.
 
-Unlike other frameworks, when you develop with Vuetify, you are never alone. Stuck on a problem? Take advantage of our massive [Discord community](https://community.vuetifyjs.com/) and collaborate with other Vuetify developers in one of our public help channels. Need a more personalized support solution? Vuetify offers **elite support** through [GitHub sponsorship](https://github.com/sponsors/johnleider) with options tailored to individuals and businesses. Check out some other ways to [Sponsor Vuetify development](/about/sponsors-and-backers/).
+When you develop with Vuetify, you are never alone. Stuck on a problem? Take advantage of our massive [Discord community](https://community.vuetifyjs.com/) and collaborate with other Vuetify developers in one of our public help channels. Need a more personalized support solution? Vuetify offers **elite support** through [GitHub sponsorship](https://github.com/sponsors/johnleider) with options tailored to individuals and businesses. Check out some other ways to [Sponsor Vuetify development](/about/sponsors-and-backers/).
 
-Below is a list of the top Vue.js frameworks and the features that we feel are important to single developers and businesses when choosing a UI library.
+Below is a list of the top Vue.js frameworks and the features that we feel are important to developers and businesses when choosing a UI library.
 
-<vuetify-comparison />
+<page-component path="introduction/Comparison" />
 
 So what are you waiting for? Head over to the [Installation](/getting-started/installation/) page and start building your next great idea today.
 
@@ -67,6 +67,6 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 
 Can't find what you're looking for? Help us improve! Please reach out to [john@vuetifyjs.com](mailto:john@vuetifyjs.com) with your feedback or join us in the Vuetify [Discord community](https://community.vuetifyjs.com/).
 
-<promoted-ad slug="vuetify-discord" />
+<!-- <promoted-ad slug="vuetify-discord" /> -->
 
 <backmatter />

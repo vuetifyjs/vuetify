@@ -40,30 +40,30 @@
         color="secondary"
         icon="mdi-television"
         size="x-small"
-      />
+      ></v-btn>
 
       <v-btn
         color="primary"
         icon="mdi-pencil"
         size="small"
-      />
+      ></v-btn>
 
       <v-btn
         color="warning"
         icon="mdi-account-circle"
-      />
+      ></v-btn>
 
       <v-btn
         color="error"
         icon="mdi-alarm"
         size="large"
-      />
+      ></v-btn>
 
       <v-btn
         color="success"
         icon="mdi-domain"
         size="x-large"
-      />
+      ></v-btn>
     </div>
   </div>
 </template>

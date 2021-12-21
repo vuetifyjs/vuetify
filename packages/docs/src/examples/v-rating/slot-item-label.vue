@@ -4,7 +4,7 @@
       v-model="rating"
       :item-labels="labels"
     >
-      <template #item-label="props">
+      <template v-slot:item-label="props">
         <span
           class="font-weight-black text-caption"
           :class="`text-${colors[props.index]}`"
