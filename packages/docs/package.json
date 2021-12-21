@@ -14,7 +14,6 @@
     "build": "vite-ssg build",
     "preview": "vite preview",
     "preview-https": "HTTPS=true vite preview",
-    "build:modified": "node build/modified",
     "lint": "tsc -p tsconfig.json --noEmit --pretty && yarn lint:md && jest --no-cache --maxWorkers=50%",
     "lint:fix": "yarn fix:md && JEST_FIX=true jest --no-cache --maxWorkers=50%",
     "lint:md": "markdownlint --config .markdownlintrc src/pages/en",

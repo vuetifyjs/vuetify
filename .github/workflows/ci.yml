@@ -167,8 +167,6 @@ jobs:
           crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
           debug_mode: true
 
-      - run: yarn run build:modified
-        working-directory: ./packages/docs
       - run: node scripts/deploy-and-alias.js ${{ github.ref }}
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
