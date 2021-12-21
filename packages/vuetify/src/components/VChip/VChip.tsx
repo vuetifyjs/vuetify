@@ -4,7 +4,7 @@ import './VChip.sass'
 // Components
 import { VAvatar } from '@/components/VAvatar'
 import { VIcon } from '@/components/VIcon'
-import { VItemGroupSymbol } from '@/components/VItemGroup/VItemGroup'
+import { VChipGroupSymbol } from '@/components/VChipGroup/VChipGroup'
 
 // Composables
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
@@ -89,7 +89,15 @@ export const VChip = defineComponent({
     const { borderClasses } = useBorder(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { elevationClasses } = useElevation(props)
-    const { isSelected, select, toggle, selectedClass, value } = useGroupItem(props, VItemGroupSymbol)
+    let isSelected, select, toggle, selectedClass, value
+    const useGroupItemFunc = useGroupItem(props, VChipGroupSymbol, false)
+    if (!!useGroupItemFunc) {
+      isSelected = useGroupItemFunc.isSelected
+      select = useGroupItemFunc.select
+      toggle = useGroupItemFunc.toggle
+      selectedClass = useGroupItemFunc.selectedClass
+      value = useGroupItemFunc.value
+    }
     const { roundedClasses } = useRounded(props)
     const { sizeClasses } = useSize(props)
     const { densityClasses } = useDensity(props)
@@ -106,7 +114,8 @@ export const VChip = defineComponent({
       const hasAppend = !!(slots.append || props.appendIcon || props.appendAvatar)
       const hasClose = !!(slots.close || props.closable)
       const hasPrepend = !!(slots.prepend || props.prependIcon || props.prependAvatar)
-      const isClickable = !props.disabled && (link.isClickable.value || props.link)
+      const isClickable = !props.disabled && (!!VChipGroupSymbol || link.isClickable.value || props.link)
+      const onClickFunc = !!props.link ? props.link : toggle
 
       return isActive.value && (
         <Tag
@@ -126,13 +135,14 @@ export const VChip = defineComponent({
             roundedClasses.value,
             sizeClasses.value,
             variantClasses.value,
+            !!selectedClass ? selectedClass.value : null,
           ]}
           style={ [colorStyles.value] }
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }
           href={ link.href.value }
           v-ripple={ [isClickable && props.ripple, null] }
-          onClick={ isClickable && link.navigate }
+          onClick={ isClickable && onClickFunc }
         >
           { genOverlays(isClickable, 'v-chip') }
 
@@ -152,11 +162,11 @@ export const VChip = defineComponent({
           ) }
 
           { slots.default?.({
-            isSelected: isSelected.value,
-            selectedClass: selectedClass.value,
+            isSelected: !!isSelected ? isSelected.value : null,
+            selectedClass: !!selectedClass ? selectedClass.value : null,
             select,
             toggle,
-            value: value.value,
+            value: !!value ? value.value : null,
             disabled: props.disabled,
           }) ?? props.text }
 

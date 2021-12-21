@@ -17,7 +17,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { defineComponent } from '@/util'
 
 /* @vue/component */
-export const VChipGroupSymbol = Symbol.for('vuetify:v-item-group')
+export const VChipGroupSymbol = Symbol.for('vuetify:v-chip-group')
 
 export const VChipGroup = defineComponent({
   name: 'VChipGroup',
