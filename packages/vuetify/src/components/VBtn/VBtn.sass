@@ -102,6 +102,9 @@
       @include button-sizes($button-stacked-sizes, true)
       @include button-density('height', $button-stacked-density)
 
+.v-btn__content
+  transition: $button-content-transition
+
 .v-btn__overlay
   @include tools.absolute()
   background-color: currentColor

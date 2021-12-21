@@ -11,7 +11,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
-import { useBackgroundColor, useTextColor } from '@/composables/color'
+import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -58,7 +58,6 @@ export const VBottomNavigation = defineComponent({
     const { themeClasses } = useTheme(props)
     const { borderClasses } = useBorder(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => props.bgColor))
-    const { textColorClasses, textColorStyles } = useTextColor(computed(() => props.color))
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
@@ -84,12 +83,8 @@ export const VBottomNavigation = defineComponent({
         VBtn: {
           color: toRef(props, 'color'),
           density: toRef(props, 'density'),
-          height: 'auto',
-          maxWidth: 168,
-          minWidth: 80,
           stacked: computed(() => props.mode !== 'horizontal'),
           variant: 'text',
-          width: computed(() => props.grow ? '100%' : 'auto'),
         },
       },
     }))
@@ -102,6 +97,7 @@ export const VBottomNavigation = defineComponent({
             {
               'v-bottom-navigation--absolute': props.absolute,
               'v-bottom-navigation--active': isActive.value,
+              'v-bottom-navigation--grow': props.grow,
               'v-bottom-navigation--shift': props.mode === 'shift',
             },
             themeClasses.value,
@@ -110,12 +106,10 @@ export const VBottomNavigation = defineComponent({
             densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,
-            textColorClasses.value,
           ]}
           style={[
             backgroundColorStyles.value,
             layoutStyles.value,
-            textColorStyles.value,
             {
               height: convertToUnit(height.value),
               transform: `translateY(${convertToUnit(!isActive.value ? 100 : 0, '%')})`,
