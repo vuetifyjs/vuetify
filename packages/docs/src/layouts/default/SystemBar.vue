@@ -8,7 +8,7 @@
   >
     <a
       class="cm-banner"
-      href="https://store.vuetifyjs.com/products/ui-lib-bundle/?utm_source=vuetify"
+      href="https://store.vuetifyjs.com/products/ui-lib-bundle?utm_source=vuetify"
       rel="noopener"
       target="_blank"
       @click="onClick"
