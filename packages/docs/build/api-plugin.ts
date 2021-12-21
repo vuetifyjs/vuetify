@@ -6,6 +6,7 @@ import rimraf from 'rimraf'
 import { getCompleteApi } from '@vuetify/api-generator'
 import locales from '../src/i18n/locales.json'
 import pageToApi from '../src/data/page-to-api.json'
+import type { Plugin } from 'vite'
 
 const localeList = locales
   .filter(item => item.enabled)
@@ -140,7 +141,7 @@ function generateFiles () {
   ]))
 }
 
-export default function Api () {
+export default function Api (): Plugin {
   return {
     name: 'vuetify:api',
     buildStart () {

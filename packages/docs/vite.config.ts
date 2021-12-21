@@ -13,6 +13,7 @@ import Inspect from 'vite-plugin-inspect'
 
 import { configureMarkdown, parseMeta } from './build/markdown-it'
 import Api from './build/api-plugin'
+import { Examples } from './build/examples-plugin'
 
 const resolve = (file: string) => path.resolve(__dirname, file)
 
@@ -135,6 +136,8 @@ export default defineConfig(({ mode }) => {
         compositionOnly: true,
         include: [resolve('src/i18n/messages/**')],
       }),
+
+      Examples(),
 
       {
         name: 'vuetify:codepen-blocks',

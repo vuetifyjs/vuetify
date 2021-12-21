@@ -16,20 +16,19 @@
         </template>
       </div>
     </v-expand-transition>
-    <v-lazy style="min-height: 200px" @update:model-value="importExample">
-      <v-theme-provider v-if="isLoaded" :theme="theme" with-background class="pa-4">
-        <component :is="ExampleComponent" />
-      </v-theme-provider>
-    </v-lazy>
+    <v-theme-provider v-if="isLoaded" :theme="theme" with-background class="pa-4">
+      <component :is="ExampleComponent" />
+    </v-theme-provider>
   </v-sheet>
 </template>
 
 <script setup lang="ts">
-  import { computed, mergeProps, ref, shallowRef } from 'vue'
+  import { computed, mergeProps, onMounted, ref, shallowRef } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { useTheme } from 'vuetify'
   import { getBranch } from '@/util/helpers'
 
+  import { getExample } from 'virtual:examples'
   import ExampleMissing from './ExampleMissing.vue'
   import { useCodepen } from '@/composables/codepen'
 
@@ -41,12 +40,6 @@
       required: true,
     },
   })
-
-  async function getExample (file: string, raw?: boolean) {
-    // TODO: handle raw functionality
-    return (await modules[`../../examples/${file}.vue`]()).default
-    // return (await modules[`../../examples/${file}.vue${raw ? '?raw' : ''}`]()).default
-  }
 
   function parseTemplate (target: string, template: string) {
     const string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`
@@ -67,12 +60,14 @@
     return isError.value ? ExampleMissing : isLoaded.value ? component.value : null
   })
 
+  onMounted(importExample)
+
   async function importExample () {
     try {
-      const [_component, _code] = await Promise.all([
-        getExample(props.file),
-        getExample(props.file, true),
-      ])
+      const {
+        component: _component,
+        source: _code,
+      } = await getExample(props.file)
       component.value = _component
       code.value = _code
       sections.value = [
@@ -100,7 +95,6 @@
       isError.value = true
     }
   }
-  const modules = import.meta.glob('../../examples/**/*.vue')
   const parentTheme = useTheme({})
   const _theme = ref<null | string>(null)
   const theme = computed({
