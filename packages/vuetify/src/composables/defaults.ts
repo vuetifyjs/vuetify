@@ -1,6 +1,6 @@
 // Utilities
 import { computed, inject, provide, ref } from 'vue'
-import { mergeDeep } from '@/util'
+import { mergeDeep, wrapInRef } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
@@ -27,17 +27,18 @@ export function useDefaults () {
 }
 
 export function provideDefaults (
-  defaults?: DefaultsInstance,
+  defaults?: Ref<DefaultsInstance | undefined> | DefaultsInstance,
   options?: {
-    reset?: number | string
-    root?: boolean
-    scoped?: boolean
+    reset?: Ref<number | string | undefined>
+    root?: Ref<boolean | undefined>
+    scoped?: Ref<boolean | undefined>
   }
 ) {
   const injectedDefaults = useDefaults()
+  const providedDefaults = wrapInRef(defaults)
 
   const newDefaults = computed(() => {
-    let properties = mergeDeep(defaults, { prev: injectedDefaults.value })
+    let properties = mergeDeep(providedDefaults.value, { prev: injectedDefaults.value })
 
     if (options?.scoped) return properties
 

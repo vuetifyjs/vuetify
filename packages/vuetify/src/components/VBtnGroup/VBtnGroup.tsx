@@ -13,6 +13,7 @@ import { provideDefaults } from '@/composables/defaults'
 
 // Utility
 import { defineComponent, useRender } from '@/util'
+import { toRef } from 'vue'
 
 export const VBtnGroup = defineComponent({
   name: 'VBtnGroup',
@@ -39,9 +40,9 @@ export const VBtnGroup = defineComponent({
     provideDefaults({
       VBtn: {
         height: 'auto',
-        color: props.color,
+        color: toRef(props, 'color'),
         flat: true,
-        variant: props.variant,
+        variant: toRef(props, 'variant'),
       },
     })
 
