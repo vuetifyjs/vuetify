@@ -11,7 +11,9 @@
         v-for="n in 2"
         :key="n"
       >
-        <span slot="opposite">Tus eu perfecto</span>
+        <template v-slot:opposite>
+          <span>Tus eu perfecto</span>
+        </template>
         <v-card class="elevation-2">
           <v-card-title class="text-h5">
             Lorem ipsum
@@ -30,7 +32,9 @@
         v-for="n in 2"
         :key="n"
       >
-        <span slot="opposite">Tus eu perfecto</span>
+        <template v-slot:opposite>
+          <span>Tus eu perfecto</span>
+        </template>
         <v-card class="elevation-2">
           <v-card-title class="text-h5">
             Lorem ipsum

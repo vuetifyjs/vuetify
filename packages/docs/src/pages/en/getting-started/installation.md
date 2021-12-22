@@ -1,4 +1,5 @@
 ---
+nav: Installation
 meta:
   title: Get started with Vuetify 3 Alpha
   description: Details for v3 alpha release - faq, changes, and upgrading.
@@ -6,8 +7,7 @@ meta:
 related:
   - /getting-started/contributing/
   - /introduction/roadmap/
-  - /getting-started/v3-alpha-release-notes/
-nav: Installation
+  - /getting-started/release-notes/
 ---
 
 # Vuetify 3 Alpha
@@ -34,12 +34,12 @@ Once installed, generate a project with the following command using the **vue-cl
 vue create my-app
 ```
 
-When prompted, choose `Vue 3`:
+When prompted, choose **Vue 3** (possibly **Vue 3 Preview** depending on the exact version of vue-cli):
 
 ```bash
-? Please pick a preset:
+? Please pick a preset: (Use arrow keys)
     Default ([Vue 2] babel, eslint)
-  > Default (Vue 3) ([Vue 3] babel, eslint)
+  ❯ Default (Vue 3) ([Vue 3] babel, eslint)
     Manually select features
 ```
 
@@ -52,15 +52,15 @@ cd my-app
 vue add vuetify
 ```
 
-Once prompted, choose `Vuetify 3 Preview (Vuetify 3)`:
+Once prompted, choose `Vuetify 3 Preview`:
 
 ```bash
-? Choose a preset: (Use arrow keys)
+? Choose a preset:
   Configure (advanced)
   Default (recommended)
   Vite Preview (Vuetify 3 + Vite)
   Prototype (rapid development)
-> Vuetify 3 Preview (Vuetify 3)
+❯ Vuetify 3 Preview (Vuetify 3)
 ```
 
 ### Vite
@@ -69,29 +69,29 @@ Installing Vuetify 3 using vite can be done using [vue-cli](#vue-cli). To start,
 
 ```bash
 # npm 6.x
-npm init vite --template vue
+npm init @vitejs/app my-app --template vue
 
 # npm 7+, extra double-dash is needed:
-npm init vite -- --template vue
+npm init @vitejs/app my-app -- --template vue
 
 # yarn
-yarn create vite --template vue
+yarn create @vitejs/app my-app --template vue
 ```
 
 Next, navigate to your project directory and add Vuetify to your project:
 
 ```bash
-cd vite-project
+cd my-app
 vue add vuetify
 ```
 
-Once prompted, choose `Vite Preview (Vuetify 3 + Vite)`:
+Once prompted, choose **Preview (Vuetify 3 + Vite)**:
 
 ```bash
-? Choose a preset: (Use arrow keys)
+? Choose a preset:
   Configure (advanced)
   Default (recommended)
-> Vite Preview (Vuetify 3 + Vite)
+❯ Vite Preview (Vuetify 3 + Vite)
   Prototype (rapid development)
   Vuetify 3 Preview (Vuetify 3)
 ```
@@ -101,7 +101,6 @@ Once prompted, choose `Vite Preview (Vuetify 3 + Vite)`:
 With Vue 3.0, the initialization process for Vue apps (and by extension Vuetify) has changed. With the new `createVuetify` method, the options passed to it have also changed. Please see the pages in the Features section of the documentation for further details.
 
 ```js
-import 'vuetify/styles'
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 import App from './App.vue'

@@ -4,6 +4,7 @@ node_modules
 /src/api
 /src/pages/*
 !/src/pages/en
+.vite-ssg-temp
 
 # local env files
 .env.local

@@ -11,7 +11,7 @@ related:
 
 # Treeshaking
 
-Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small **package size** may be a requirement. The A la carte system enables you to pick and choose which components to import, drastically _lowering_ your build size. New projects created with the [Vue CLI plugin](/getting-started/quick-start#vue-cli-install) have this enabled by default.
+Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small **package size** may be a requirement. The A la carte system enables you to pick and choose which components to import, drastically _lowering_ your build size. New projects created with the [Vue CLI plugin](/getting-started/installation#vue-cli-install) have this enabled by default.
 
 <entry-ad />
 

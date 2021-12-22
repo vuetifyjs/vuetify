@@ -59,13 +59,13 @@
         group
         tag="v-list"
       >
-        <template v-for="(task, i) in tasks">
+        <template v-for="(task, i) in tasks" :key="`${i}-${task.text}`">
           <v-divider
             v-if="i !== 0"
             :key="`${i}-divider`"
           ></v-divider>
 
-          <v-list-item :key="`${i}-${task.text}`">
+          <v-list-item>
             <v-list-item-action>
               <v-checkbox
                 v-model="task.done"

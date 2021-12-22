@@ -46,7 +46,7 @@ const createWebTypesApi = () => {
   const components = getComponentsApi(['en'])
   const directives = getDirectivesApi(['en'])
 
-  const getDocUrl = (cmp, heading = null) => `https://www.vuetifyjs.com/api/${cmp}${heading ? `#${heading}` : ''}`
+  const getDocUrl = (cmp, heading = null) => `https://vuetifyjs.com/api/${cmp}` + (heading ? `#${heading}` : '')
 
   const createTag = component => {
     const createTagSlot = slot => {

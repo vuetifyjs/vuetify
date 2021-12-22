@@ -6,7 +6,6 @@
     <v-chip-group
       active-class="primary--text"
       v-bind="$attrs"
-      v-on="$listeners"
     >
       <v-chip
         v-for="tag in tags"

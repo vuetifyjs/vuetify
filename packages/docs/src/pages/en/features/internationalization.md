@@ -15,15 +15,9 @@ Vuetify supports language Internationalization (i18n) of its components. When bo
 
 <entry-ad />
 
-<!--
-## API
-
-- [internationalization](/api/internationalization)
--->
-
 ## Getting started
 
-To set the available locale messages or the default locale, supply the `locale` option when installing Vuetify. You can change the locale during runtime through the global `$vuetify` property, or by using the `useLocale` composable.
+To set the available locale messages or the default locale, supply the **locale** option when installing Vuetify. You can change the locale during runtime by using the `useLocale` composable. If you are still using the Options API, you can access the locale settings on **$vuetify.locale**.
 
 ```js
 // src/main.js
@@ -32,7 +26,7 @@ import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 
 // Translations provided by Vuetify
-import { pl, zhHans } from 'vuetify/locale'
+  import { pl, zhHans } from 'vuetify/locale'
 
 // Your own translation file
 import sv from './i18n/vuetify/sv'
@@ -54,9 +48,7 @@ app.mount('#app')
 
 ## API
 
-- [internationalization](/api/internationalization)
-
-<inline-api page="features/internationalization" />
+<api-inline />
 
 ## Scoped languages
 
@@ -105,16 +97,28 @@ const vuetify = createVuetify({
 
 ## Custom Vuetify components
 
-If you are building custom Vuetify components that need to hook into the locale service, you can use the `t` function which is part of the `$vuetify.locale` API.
+If you are building custom Vuetify components that need to hook into the locale service, you can use the `t` function from the **useLocale** composable, or the `$vuetify.locale` property when using Options API.
 
 ```html
-<!-- Vue Component -->
+<!-- Custom Vuetify Component -->
 
 <template>
   <div class="my-component">
     {{ $vuetify.locale.t('$vuetify.my-component.text') }}
   </div>
 </template>
+```
+
+```html
+<script>
+  import { useLocale } from 'vuetify'
+
+  export default {
+    setup () {
+      const { t } = useLocale()
+    }
+  }
+</script>
 ```
 
 <alert type="warning">

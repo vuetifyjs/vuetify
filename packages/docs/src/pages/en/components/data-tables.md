@@ -23,13 +23,7 @@ The standard data-table will by default render your data as simple rows.
 
 ## API
 
-- [v-data-table](/api/v-data-table)
-- [v-data-table-header](/api/v-data-table-header)
-- [v-data-footer](/api/v-data-footer)
-- [v-edit-dialog](/api/v-edit-dialog)
-- [v-simple-checkbox](/api/v-simple-checkbox)
-
-<inline-api page="components/data-tables" />
+<api-inline />
 
 <!-- ## Sub-components
 

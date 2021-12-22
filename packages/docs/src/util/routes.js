@@ -1,6 +1,5 @@
 // Imports
 import locales from '@/i18n/locales'
-import kebabCase from 'lodash/kebabCase'
 
 // Globals
 import { IN_BROWSER } from '@/util/globals'
@@ -11,46 +10,10 @@ const fallbackLocale = genericLocaleRegexp.source
 const languagePattern = locales.map(lang => lang.alternate || lang.locale).join('|')
 const languageRegexp = new RegExp('^(' + languagePattern + ')$')
 
-export function abort (code = 404) {
-  return {
-    name: 'FourOhFour',
-    path: '*',
-    component: () => error(code),
-  }
-}
-
-export function error (code = 404) {
-  return import(
-    /* webpackChunkName: "error-[request]" */
-    `@/views/errors/${code}.vue`
-  )
-}
-
-export function layout (name = 'Default', children = [], path = '') {
-  const dir = kebabCase(name)
-
-  return {
-    children,
-    component: () => import(
-      /* webpackChunkName: "layout-[request]" */
-      `@/layouts/${dir}/index.vue`
-    ),
-    path,
-  }
-}
-
-export function locale (children) {
-  return layout(
-    'Locale',
-    children,
-    `/:locale(${languagePattern})`,
-  )
-}
-
 export function preferredLocale (locale = 'en') {
   if (!IN_BROWSER) return locale
 
-  const languages = [].concat(window.localStorage.getItem('currentLanguage') || [], navigator.languages || [])
+  const languages = [].concat(window.localStorage.getItem('currentLocale') || [], navigator.languages || [])
 
   return languages.find(l => l.match(languageRegexp)) || locale
 }
@@ -76,24 +39,12 @@ export function rpath (path = '') {
   const locale = preferredLocale()
   const [url, hash] = path.split('#')
 
-  const route = [
+  return [
+    '',
     locale,
     ...url.split('/').filter(p => !!p && p !== locale),
-  ]
-
-  return `/${route.join('/')}/${hash ? `#${hash}` : ''}`
-}
-
-export function route (name, path = '', strict = true) {
-  return {
-    name,
-    component: () => import(
-      /* webpackChunkName: "views-[request]" */
-      `@/views/${name}`
-    ),
-    path,
-    pathToRegexpOptions: { strict },
-  }
+    hash ? `#${hash}` : null,
+  ].filter(v => v != null).join('/')
 }
 
 export function trailingSlash (str) {

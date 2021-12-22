@@ -1,21 +1,22 @@
 ---
+nav: Grids
 meta:
   title: Grid system
   description: Vuetify supports the 12 point Material Design grid for laying out and controlling breakpoints for your application.
   keywords: grids, vuetify grid component, layout component, flex component
 related:
-  - /styles/flex/
-  - /features/breakpoints/
-  - /styles/display/
+  - /styles/flex
+  - /features/breakpoints
+  - /styles/display
 ---
 
 # Grid system
 
-Vuetify comes with a 12 point grid system built using flexbox. The grid is used to create specific layouts within an application's content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations, **xs**, **sm**, **md**, **lg** and **xl**. These resolutions are defined below in the Viewport Breakpoints table and can be modified by customizing the [Breakpoint service](/features/breakpoints).
+Vuetify comes with a 12 point grid system built using flexbox. The grid is used to create specific layouts within an application's content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations, **xs**, **sm**, **md**, **lg** and **xl**. These resolutions are defined below in the Viewport Breakpoints table and can be modified by customizing the [Breakpoint service](/features/display-and-platform).
 
 <promoted-ad slug="vuemastery-grids" />
 
-<breakpoints-table />
+<page-component path="features/BreakpointsTable" />
 
 ## Usage
 
@@ -25,12 +26,7 @@ The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstra
 
 ## API
 
-- [v-container](/api/v-container)
-- [v-row](/api/v-row)
-- [v-col](/api/v-col)
-- [v-spacer](/api/v-spacer)
-
-<inline-api page="components/grids" />
+<api-inline />
 
 ## Sub-components
 

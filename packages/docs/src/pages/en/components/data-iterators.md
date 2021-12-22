@@ -23,10 +23,7 @@ The `v-data-iterator` allows you to customize exactly how to display your data. 
 
 ## API
 
-- [v-data-iterator](/api/v-data-iterator)
-- [v-data-footer](/api/v-data-footer)
-
-<inline-api page="components/data-iterators" />
+<api-inline />
 
 ## Examples
 

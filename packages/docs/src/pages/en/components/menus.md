@@ -23,9 +23,7 @@ Remember to put the element that activates the menu in the `activator` slot.
 
 ## API
 
-- [v-menu](/api/v-menu)
-
-<inline-api page="components/menus" />
+<api-inline />
 
 ## Examples
 

@@ -1,4 +1,5 @@
 ---
+nav: For Enterprise
 meta:
   title: Vuetify for Enterprise
   description: Get the tools you need to continuously catalog and understand the open source software that your application depends on with the Tidelift subscription.
@@ -7,14 +8,13 @@ related:
   - /introduction/support/
   - /about/security-disclosure/
   - /about/meet-the-team/
-nav: For Enterprise
 ---
 
 # Vuetify for Enterprise
 
 The Tidelift Subscription is a managed open source subscription for application dependencies covering millions of open source projects across JavaScript, Python, Java, PHP, Ruby, .NET, and more.
 
-<tidelift-img />
+<!-- <tidelift-img /> -->
 
 ## Available as part of the Tidelift Subscription
 
@@ -24,7 +24,7 @@ If you want the flexibility of open source and the confidence of commercial-grad
 
 <br>
 
-<tidelift-btns />
+<!-- <tidelift-btns /> -->
 
 ## The Tidelift Subscription manages your dependencies for you
 
@@ -38,6 +38,6 @@ The end result? All of the capabilities you expect from commercial-grade softwar
 
 <br>
 
-<tidelift-btns />
+<!-- <tidelift-btns /> -->
 
 <backmatter />

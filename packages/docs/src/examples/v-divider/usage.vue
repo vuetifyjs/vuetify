@@ -1,7 +1,6 @@
 <template>
   <v-divider
     v-bind="$attrs"
-    v-on="$listeners"
   ></v-divider>
 </template>
 

@@ -2,7 +2,6 @@
   <v-card
     class="grow"
     v-bind="$attrs"
-    v-on="$listeners"
   >
     <v-card-title>Card title</v-card-title>
 

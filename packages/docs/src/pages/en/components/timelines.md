@@ -26,10 +26,7 @@ The `v-timeline` is useful for stylistically displaying chronological informatio
 
 ## API
 
-- [v-timeline](/api/v-timeline)
-- [v-timeline-item](/api/v-timeline-item)
-
-<inline-api page="components/timelines" />
+<api-inline />
 
 <!-- ## Sub-components
 

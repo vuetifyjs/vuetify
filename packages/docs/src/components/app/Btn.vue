@@ -1,25 +1,35 @@
 <template>
   <v-btn
-    class="v-btn--app text--secondary text-capitalize font-weight-regular px-2"
-    v-bind="{
-      text: true,
-      ...$attrs,
-    }"
-    v-on="$listeners"
+    class="text-capitalize px-2"
+    v-bind="$attrs"
   >
     <slot v-if="$slots.default" />
 
-    <i18n
-      v-else-if="path"
-      :path="path"
-    />
+    <template v-else-if="text">
+      {{ t(text) }}
+    </template>
   </v-btn>
 </template>
 
 <script>
-  export default {
+  // Utilities
+  import { defineComponent } from 'vue'
+  import { useI18n } from 'vue-i18n'
+
+  export default defineComponent({
     name: 'AppBtn',
 
-    props: { path: String },
-  }
+    props: {
+      text: String,
+    },
+
+    setup () {
+      const { t } = useI18n()
+
+      return {
+        t,
+      }
+    },
+
+  })
 </script>

@@ -1,4 +1,5 @@
 ---
+nav: Hover
 meta:
   title: Hover component
   description: The hover component makes it easy respond when the user hover events by wrapping selectable content.
@@ -23,9 +24,7 @@ The `v-hover` component provides a simple interface for handling hover states fo
 
 ## API
 
-- [v-hover](/api/v-hover)
-
-<inline-api page="components/hover" />
+<api-inline />
 
 ## Examples
 
