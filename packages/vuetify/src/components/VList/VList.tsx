@@ -17,7 +17,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
 
 // Utilities
-import { computed, inject, provide, ref, toRef } from 'vue'
+import { inject, provide, ref, toRef } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types

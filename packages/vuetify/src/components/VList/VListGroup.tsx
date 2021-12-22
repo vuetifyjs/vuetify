@@ -9,7 +9,7 @@ import { makeTagProps } from '@/composables/tag'
 // Utilities
 import { computed } from 'vue'
 import { defineComponent, genericComponent } from '@/util'
-import { createList, useDepth, useList } from './VList'
+import { createList, useList } from './VList'
 
 // Types
 import type { Prop } from 'vue'
