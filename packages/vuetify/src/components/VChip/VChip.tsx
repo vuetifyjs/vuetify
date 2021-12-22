@@ -89,15 +89,7 @@ export const VChip = defineComponent({
     const { borderClasses } = useBorder(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { elevationClasses } = useElevation(props)
-    let isSelected, select, toggle, selectedClass, value
-    const useGroupItemFunc = useGroupItem(props, VChipGroupSymbol, false)
-    if (!!useGroupItemFunc) {
-      isSelected = useGroupItemFunc.isSelected
-      select = useGroupItemFunc.select
-      toggle = useGroupItemFunc.toggle
-      selectedClass = useGroupItemFunc.selectedClass
-      value = useGroupItemFunc.value
-    }
+    const group = useGroupItem(props, VChipGroupSymbol, false)
     const { roundedClasses } = useRounded(props)
     const { sizeClasses } = useSize(props)
     const { densityClasses } = useDensity(props)
@@ -115,7 +107,7 @@ export const VChip = defineComponent({
       const hasClose = !!(slots.close || props.closable)
       const hasPrepend = !!(slots.prepend || props.prependIcon || props.prependAvatar)
       const isClickable = !props.disabled && (!!VChipGroupSymbol || link.isClickable.value || props.link)
-      const onClickFunc = !!props.link ? props.link : toggle
+      const onClickFunc = !!props.link ? props.link : group?.toggle
 
       return isActive.value && (
         <Tag
@@ -135,7 +127,7 @@ export const VChip = defineComponent({
             roundedClasses.value,
             sizeClasses.value,
             variantClasses.value,
-            !!selectedClass ? selectedClass.value : null,
+            group?.selectedClass.value,
           ]}
           style={ [colorStyles.value] }
           disabled={ props.disabled || undefined }
@@ -162,11 +154,11 @@ export const VChip = defineComponent({
           ) }
 
           { slots.default?.({
-            isSelected: !!isSelected ? isSelected.value : null,
-            selectedClass: !!selectedClass ? selectedClass.value : null,
-            select,
-            toggle,
-            value: !!value ? value.value : null,
+            isSelected: group?.isSelected.value,
+            selectedClass: group?.selectedClass.value,
+            select: group?.select,
+            toggle: group?.toggle,
+            value: group?.value.value,
             disabled: props.disabled,
           }) ?? props.text }
 
