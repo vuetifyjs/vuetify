@@ -147,7 +147,7 @@ export default defineConfig(({ mode }) => {
             : null
           if (!type) return
 
-          return `export default Comp => Comp['${type}'] = \`${code.replaceAll('`', '\\`')}\``
+          return `export default Comp => Comp['${type}'] = \`${code.replace(/`/g, '\\`')}\``
         },
       },
 
