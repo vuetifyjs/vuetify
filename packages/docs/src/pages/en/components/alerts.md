@@ -1,4 +1,5 @@
 ---
+nav: Alerts
 meta:
   title: Alert component
   description: The v-alert component is used to convey information to the user. Designed to stand out, the alerts come in four contextual styles.
@@ -23,9 +24,7 @@ Alerts in their simplest form are flat [sheets of paper](/components/sheets) tha
 
 ## API
 
-- [v-alert](/api/v-alert)
-
-<inline-api page="components/alerts" />
+<api-inline />
 
 ## Examples
 

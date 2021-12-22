@@ -1,12 +1,13 @@
 ---
+nav: Images
 meta:
   title: Image component
   description: The image component provides a flexible interface for displaying different types of images.
   keywords: images, vuetify image component, vue image component
 related:
-  - /components/grids/
-  - /components/aspect-ratios/
-  - /components/parallax/
+  - /components/grids
+  - /components/aspect-ratios
+  - /components/parallax
 ---
 
 # Images
@@ -23,17 +24,7 @@ The `v-img` component is packed with features to support rich media. Combined wi
 
 ## API
 
-- [v-img](/api/v-img)
-
-<inline-api page="components/images" />
-
-## Caveats
-
-<alert type="info">
-
-  The `v-img` component uses the [v-intersect](/directives/intersect) directive which requires a [Polyfill](/directives/intersect#polyfill) for IE11 and Safari. If a browser that does not support this functionality is detected, the image will still load as normal.
-
-</alert>
+<api-inline />
 
 ## Examples
 
@@ -69,7 +60,7 @@ If the provided aspect ratio doesn't match that of the actual image, the default
 
 #### Future image formats
 
-By default `v-img` will render a basic `<img>` element. If you want to use `.webp` images with a fallback for older browsers (*cough* safari), you can pass a list of `<source>` elements to the `sources` slot:
+By default `v-img` will render a basic `<img>` element. If you want to use `.webp` images with a fallback for older browsers, you can pass a list of `<source>` elements to the `sources` slot:
 
 ```html
 <v-img src="image.jpeg">

@@ -15,21 +15,14 @@
             cols="12"
             md="6"
           >
-            <v-item v-slot="{ selected, toggle }">
+            <v-item v-slot="{ isSelected, toggle }">
               <v-img
                 :src="`https://cdn.vuetifyjs.com/images/${item.src}`"
                 height="150"
                 class="text-right pa-2"
                 @click="toggle"
               >
-                <v-btn
-                  icon
-                  dark
-                >
-                  <v-icon>
-                    {{ selected ? 'mdi-heart' : 'mdi-heart-outline' }}
-                  </v-icon>
-                </v-btn>
+                <v-btn :icon="isSelected ? 'mdi-heart' : 'mdi-heart-outline'"></v-btn>
               </v-img>
             </v-item>
           </v-col>

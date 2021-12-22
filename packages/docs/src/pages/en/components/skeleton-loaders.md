@@ -23,9 +23,7 @@ The `v-skeleton-loader` component provides a user with a visual indicator that c
 
 ## API
 
-- [v-skeleton-loader](/api/v-skeleton-loader)
-
-<inline-api page="components/skeleton-loaders" />
+<api-inline />
 
 ## Examples
 

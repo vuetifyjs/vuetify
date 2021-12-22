@@ -1,4 +1,8 @@
 {
+  "home": {
+    "get-started": "Get Started",
+    "why-vuetify": "Why Vuetify?"
+  },
   "about": "About",
   "accessibility": "Accessibility (a11y)",
   "ads-via-vuetify": "ads via Vuetify",
@@ -95,10 +99,6 @@
   "grid": "Grid",
   "groups": "Groups",
   "guide": "Guide",
-  "home": {
-    "get-started": "Get Started",
-    "why-vuetify": "Why Vuetify?"
-  },
   "homepage": "Vuetify Home Page",
   "inline": "Inline",
   "introduction": "Introduction",

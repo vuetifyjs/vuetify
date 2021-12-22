@@ -21,7 +21,7 @@
 
       <v-badge
         :content="messages"
-        :model-value="messages"
+        :model-value="!!messages"
         color="green"
       >
         <v-icon size="large">

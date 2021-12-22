@@ -1,7 +1,7 @@
 <template>
   <component
-    :is="`h${level}`"
-    :class="['v-heading', map[level]]"
+    :is="component"
+    :class="classes"
   >
     <a
       v-if="href"
@@ -18,10 +18,19 @@
 
 <script>
   // Utilities
-  import { get } from 'vuex-pathify'
+  import { computed, defineComponent } from 'vue'
+  import { useRoute, useRouter } from 'vue-router'
 
-  export default {
-    name: 'AppHeading',
+  const HEADING_CLASSES = {
+    1: 'text-h3 text-sm-h3 mb-4',
+    2: 'text-h4 text-sm-h4 mb-3',
+    3: 'text-h5 mb-2',
+    4: 'text-h6 mb-2',
+    5: 'text-subtitle-1 font-weight-medium mb-2',
+  }
+
+  export default defineComponent({
+    name: 'Heading',
 
     props: {
       content: String,
@@ -29,31 +38,28 @@
       level: String,
     },
 
-    data: () => ({
-      map: {
-        1: 'text-h3 text-sm-h3 mb-4',
-        2: 'text-h4 text-sm-h4 mb-3',
-        3: 'text-h5 mb-2',
-        4: 'text-h6 mb-2',
-        5: 'text-subtitle-1 font-weight-medium mb-2',
-      },
-    }),
+    setup (props) {
+      const router = useRouter()
+      const route = useRoute()
 
-    computed: { hash: get('route/hash') },
-
-    methods: {
-      onClick (e) {
+      function onClick (e) {
         e.preventDefault()
 
-        const hash = this.href
+        const hash = props.href
 
-        if (this.hash === hash) return
+        if (route.hash === hash) return
 
-        this.$router.push({ hash })
-        this.$vuetify.goTo(hash)
-      },
+        router.push({ hash })
+        document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' })
+        // this.$vuetify.goTo(hash)
+      }
+
+      const component = computed(() => `h${props.level}`)
+      const classes = computed(() => ['v-heading', HEADING_CLASSES[props.level]])
+
+      return { component, classes, onClick }
     },
-  }
+  })
 </script>
 
 <style lang="sass">

@@ -117,7 +117,8 @@ export const VRangeSlider = defineComponent({
           ref={ inputRef }
           { ...inputProps }
           focused={ isFocused.value }
-          v-slots={{
+        >
+          {{
             ...slots,
             default: ({ id }) => (
               <div
@@ -147,10 +148,9 @@ export const VRangeSlider = defineComponent({
                   ref={ trackContainerRef }
                   start={ trackStart.value }
                   stop={ trackStop.value }
-                  v-slots={{
-                    'tick-label': slots['tick-label'],
-                  }}
-                />
+                >
+                  {{ 'tick-label': slots['tick-label'] }}
+                </VSliderTrack>
 
                 <VSliderThumb
                   ref={ startThumbRef }
@@ -175,13 +175,12 @@ export const VRangeSlider = defineComponent({
                     blur()
                     focusedThumb.value = null
                   } }
-                  v-slots={{
-                    'thumb-label': slots['thumb-label'],
-                  }}
                   min={ min.value }
                   max={ model.value[1] }
                   position={ trackStart.value }
-                />
+                >
+                  {{ 'thumb-label': slots['thumb-label'] }}
+                </VSliderThumb>
 
                 <VSliderThumb
                   ref={ stopThumbRef }
@@ -208,17 +207,16 @@ export const VRangeSlider = defineComponent({
                     blur()
                     focusedThumb.value = null
                   } }
-                  v-slots={{
-                    'thumb-label': slots['thumb-label'],
-                  }}
                   min={ model.value[0] }
                   max={ max.value }
                   position={ trackStop.value }
-                />
+                >
+                  {{ 'thumb-label': slots['thumb-label'] }}
+                </VSliderThumb>
               </div>
             ),
           }}
-        />
+        </VInput>
       )
     }
   },

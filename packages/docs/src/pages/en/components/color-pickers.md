@@ -2,7 +2,7 @@
 meta:
   title: Color picker component
   description: The color picker component allows users to select a from pre-defined or custom colors using a variety of different inputs and formats.
-  keyword: color pickers, vuetify color picker component, vue color picker component
+  keywords: color pickers, vuetify color picker component, vue color picker component
 related:
   - /components/menu/
   - /styles/colors/
@@ -21,9 +21,7 @@ The `v-color-picker` allows you to select a color using a variety of input metho
 
 ## API
 
-- [v-color-picker](/api/v-color-picker)
-
-<inline-api page="components/color-pickers" />
+<api-inline />
 
 ## Examples
 

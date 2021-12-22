@@ -23,9 +23,7 @@ The simple table is a wrapper component around the `<table>` element.
 
 ## API
 
-- [v-simple-table](/api/v-simple-table)
-
-<inline-api page="components/simple-tables" />
+<api-inline />
 
 ## Examples
 

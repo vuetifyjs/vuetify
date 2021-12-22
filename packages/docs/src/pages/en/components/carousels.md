@@ -23,10 +23,7 @@ The `v-carousel` component expands upon `v-window` by providing additional featu
 
 ## API
 
-- [v-carousel](/api/v-carousel)
-- [v-carousel-item](/api/v-carousel-item)
-
-<inline-api page="components/carousels" />
+<api-inline />
 
 <!-- ## Sub-components
 

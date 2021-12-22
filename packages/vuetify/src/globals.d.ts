@@ -85,6 +85,9 @@ declare global {
     interface IntrinsicAttributes {
       [name: string]: any
     }
+    interface ElementChildrenAttribute {
+      $children
+    }
   }
 }
 
@@ -101,6 +104,7 @@ declare module '@vue/runtime-core' {
 
 declare module '@vue/runtime-dom' {
   import type { Events } from '@vue/runtime-dom'
+  import type { VNodeChild } from '@vue/runtime-core'
 
   type UnionToIntersection<U> =
     (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
@@ -121,7 +125,12 @@ declare module '@vue/runtime-dom' {
     [K in keyof E]?: E[K] extends Function ? E[K] : (payload: E[K]) => void
   }
 
-  export interface HTMLAttributes extends EventHandlers<ModifiedEvents> {}
+  export interface HTMLAttributes extends EventHandlers<ModifiedEvents> {
+    $children?: VNodeChild
+  }
+  export interface SVGAttributes {
+    $children?: VNodeChild
+  }
 
   type CustomProperties = {
     [k in `--${string}`]: any

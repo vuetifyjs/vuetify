@@ -23,7 +23,7 @@ Vuetify uses **SASS/SCSS** to craft the style and appearance of all aspects of t
 
 ## Vue CLI install
 
-If you have not installed Vuetify, check out the [quick-start guide](/getting-started/quick-start#vue-cli-3-install). Once installed, create a folder called `sass`, `scss` or `styles` in your src directory with a file named `variables.scss` or `variables.sass`. The **vuetify-loader** will automatically bootstrap your variables into Vue CLI's compilation process, overwriting the framework defaults.
+If you have not installed Vuetify, check out the [quick-start guide](/getting-started/installation#vue-cli-3-install). Once installed, create a folder called `sass`, `scss` or `styles` in your src directory with a file named `variables.scss` or `variables.sass`. The **vuetify-loader** will automatically bootstrap your variables into Vue CLI's compilation process, overwriting the framework defaults.
 
 When you run yarn serve, the vuetify-cli-plugin will automatically hoist the global Vuetify variables to all of your sass/scss files. When making changes to individual component variables, you will still need to manually include its variables file. You can find an example of a [custom variables](#example-variable-file) file below.
 
@@ -54,7 +54,7 @@ $material-light: ( cards: blue );
 
 ## Webpack install
 
-This section assumes you have already followed our Webpack guide on the [Quick start](/getting-started/quick-start#webpack-install) page. The option can vary depending upon the version of [sass-loader](https://github.com/webpack-contrib/sass-loader) you are use using. Ensure that you use the proper syntax when setting up the SASS/SCSS data options as they have different line endings. You can find more information about [additionalData](https://github.com/webpack-contrib/sass-loader#additionaldata) or [prependData](https://github.com/webpack-contrib/sass-loader/tree/v8.0.0#prependdata) on sass-loader's GitHub page.
+This section assumes you have already followed our Webpack guide on the [Quick start](/getting-started/installation#webpack-install) page. The option can vary depending upon the version of [sass-loader](https://github.com/webpack-contrib/sass-loader) you are use using. Ensure that you use the proper syntax when setting up the SASS/SCSS data options as they have different line endings. You can find more information about [additionalData](https://github.com/webpack-contrib/sass-loader#additionaldata) or [prependData](https://github.com/webpack-contrib/sass-loader/tree/v8.0.0#prependdata) on sass-loader's GitHub page.
 
 ```js
 // webpack.config.js
@@ -131,7 +131,7 @@ There are many SASS/SCSS variables that can be customized across the entire Vuet
 
 </alert>
 
-<sass-api />
+<!-- <sass-api /> -->
 
 ## Example variable file
 

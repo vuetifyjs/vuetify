@@ -1,13 +1,12 @@
 ---
 meta:
-  title: Theme configuration
+  title: Theme
   description: Setup your application's theme and supplemental colors in a flash.
-  keywords: themes
+  keywords: theme, themes, theming, color, colors
 related:
   - /styles/colors/
   - /styles/transitions/
   - /getting-started/wireframes/
-nav: Theme
 ---
 
 # Theme configuration
@@ -16,11 +15,9 @@ Easily change the colors of your application programmatically. Vuetify supports 
 
 <promoted-ad slug="vuemastery-themes" />
 
-### API
+## API
 
-- [v-theme-provider](/api/v-theme-provider)
-
-<api-section page="features/theme" />
+<api-inline />
 
 ## Setup
 

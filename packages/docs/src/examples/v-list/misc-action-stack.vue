@@ -28,8 +28,8 @@
         active-class="pink--text"
         multiple
       >
-        <template v-for="(item, index) in items">
-          <v-list-item :key="item.title">
+        <template v-for="(item, index) in items" :key="item.title">
+          <v-list-item>
             <template v-slot:default="{ active }">
               <v-list-item-content>
                 <v-list-item-title v-text="item.title"></v-list-item-title>

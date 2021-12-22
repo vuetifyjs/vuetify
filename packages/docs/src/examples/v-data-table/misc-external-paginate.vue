@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-data-table
+      v-model:page="page"
       :headers="headers"
       :items="desserts"
-      :page.sync="page"
       :items-per-page="itemsPerPage"
       hide-default-footer
       class="elevation-1"

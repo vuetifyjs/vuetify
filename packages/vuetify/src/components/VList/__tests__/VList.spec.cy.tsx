@@ -103,13 +103,9 @@ describe('VList', () => {
 
     const wrapper = mountFunction((
       <CenteredGrid width="400px">
-        <VList
-          items={items}
-          opened={['group']}
-          v-slots={{
-            item: item => <VListItem {...item} prependIcon="mdi-home" />,
-          }}
-        />
+        <VList items={ items } opened={['group']}>
+          {{ item: item => <VListItem {...item} prependIcon="mdi-home" /> }}
+        </VList>
       </CenteredGrid>
     ))
 

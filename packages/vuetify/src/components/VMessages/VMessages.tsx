@@ -10,6 +10,7 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 // Utilities
 import { defineComponent, wrapInArray } from '@/util'
 import { computed } from 'vue'
+import type { PropType } from 'vue'
 
 export const VMessages = defineComponent({
   name: 'VMessages',
@@ -17,7 +18,7 @@ export const VMessages = defineComponent({
   props: {
     active: Boolean,
     value: {
-      type: [Array, String],
+      type: [Array, String] as PropType<string | string[]>,
       default: () => ([]),
     },
 

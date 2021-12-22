@@ -1,4 +1,5 @@
 ---
+nav: Buttons
 meta:
   title: Button component
   description: The button component communicates actions that a user can take and are typically placed in dialogs, forms, cards and toolbars.
@@ -27,10 +28,7 @@ Buttons in their simplest form contain uppercase text, a slight elevation, hover
 
 ## API
 
-- [v-btn](/api/v-btn)
-- [v-btn-toggle](/api/v-btn-toggle)
-
-<inline-api page="components/buttons" />
+<api-inline />
 
 ## Caveats
 

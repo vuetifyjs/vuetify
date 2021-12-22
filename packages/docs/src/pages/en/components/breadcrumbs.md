@@ -1,4 +1,5 @@
 ---
+nav: Breadcrumbs
 meta:
   title: Breadcrumbs component
   description: The breadcrumbs component is a navigational helper for pages. It can accept a Material Icons icon or characters as a divider.
@@ -23,10 +24,7 @@ By default, breadcrumbs use a text divider. This can be any string.
 
 ## API
 
-- [v-breadcrumbs](/api/v-breadcrumbs)
-- [v-breadcrumbs-item](/api/v-breadcrumbs-item)
-
-<inline-api page="components/breadcrumbs" />
+<api-inline />
 
 <!-- ## Sub-components
 

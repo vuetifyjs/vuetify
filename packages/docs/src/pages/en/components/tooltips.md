@@ -1,4 +1,5 @@
 ---
+nav: Tooltips
 meta:
   title: Tooltip component
   description: The tooltip component displays textual information regarding the element it is attached to.
@@ -23,9 +24,7 @@ Tooltips can wrap any element.
 
 ## API
 
-- [v-tooltip](/api/v-tooltip)
-
-<inline-api page="components/tooltips" />
+<api-inline />
 
 ## Caveats
 

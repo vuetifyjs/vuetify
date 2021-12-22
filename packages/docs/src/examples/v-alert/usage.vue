@@ -3,7 +3,6 @@
     v-if="show"
     v-model="show"
     v-bind="$attrs"
-    v-on="$listeners"
   >
     I'm an Alert Usage Example
   </v-alert>

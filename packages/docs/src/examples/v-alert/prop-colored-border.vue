@@ -1,10 +1,10 @@
 <template>
   <div>
     <v-alert
-      border="left"
-      colored-border
-      color="deep-purple accent-4"
+      border="start"
+      border-color="deep-purple accent-4"
       elevation="2"
+      class="ma-2"
     >
       Aliquam eu nunc. Fusce commodo aliquam arcu. In consectetuer turpis ut velit. Nulla facilisi..
 
@@ -12,25 +12,25 @@
     </v-alert>
     <v-alert
       border="top"
-      colored-border
-      type="info"
+      border-color="info"
       elevation="2"
+      class="ma-2"
     >
       Vestibulum ullamcorper mauris at ligula. Nam pretium turpis et arcu. Ut varius tincidunt libero. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Morbi nec metus.
     </v-alert>
     <v-alert
       border="bottom"
-      colored-border
-      type="warning"
+      border-color="warning"
       elevation="2"
+      class="ma-2"
     >
       Sed in libero ut nibh placerat accumsan. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.
     </v-alert>
     <v-alert
-      border="right"
-      colored-border
-      type="error"
+      border="end"
+      border-color="error"
       elevation="2"
+      class="ma-2"
     >
       Fusce commodo aliquam arcu. Pellentesque posuere. Phasellus tempus. Donec posuere vulputate arcu.
     </v-alert>

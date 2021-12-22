@@ -3,11 +3,10 @@ meta:
   title: Toolbar component
   description: The toolbar component sits above the content that it affects and provides an area for labeling and additional actions.
   keywords: toolbars, vuetify toolbar component, vue toolbar component
-  related:
+related:
   - /components/buttons/
   - /components/footer/
   - /components/tabs/
-
 ---
 
 # Toolbars
@@ -24,11 +23,7 @@ A toolbar is a flexible container that can be used in a number of ways. By defau
 
 ## API
 
-- [v-toolbar](/api/v-toolbar)
-- [v-toolbar-items](/api/v-toolbar-items)
-- [v-toolbar-title](/api/v-toolbar-title)
-
-<inline-api page="components/toolbars" />
+<api-inline />
 
 <!-- ## Sub-components
 

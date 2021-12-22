@@ -1,4 +1,5 @@
 ---
+nav: Lists
 meta:
   title: List component
   description: The list component is a continuous group of text, images and icons that may contain primary or supplemental actions.
@@ -23,19 +24,7 @@ Lists come in three main variations. **single-line** (default), **two-line** and
 
 ## API
 
-- [v-list](/api/v-list)
-- [v-list-group](/api/v-list-group)
-- [v-list-item](/api/v-list-item)
-- [v-list-item-action](/api/v-list-item-action)
-- [v-list-item-action-text](/api/v-list-item-action-text)
-- [v-list-item-avatar](/api/v-list-item-avatar)
-- [v-list-item-content](/api/v-list-item-content)
-- [v-list-item-group](/api/v-list-item-group)
-- [v-list-item-icon](/api/v-list-item-icon)
-- [v-list-item-subtitle](/api/v-list-item-subtitle)
-- [v-list-item-title](/api/v-list-item-title)
-
-<inline-api page="components/lists" />
+<api-inline />
 
 <!-- ## Sub-components
 
