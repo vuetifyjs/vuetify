@@ -15,6 +15,7 @@ $list-elevation: 0 !default;
 $list-padding: 8px 0 !default;
 $list-positions: absolute fixed !default;
 $list-rounded-border-radius: map.get(settings.$rounded, null) !default;
+$list-indent-size: 16px !default;
 
 $list-nav-subheader-font-size: .75rem !default;
 
@@ -51,7 +52,6 @@ $list-item-avatar-align-self: flex-start !default;
 $list-item-avatar-margin-end: 16px !default;
 $list-item-avatar-margin-start: 16px !default;
 $list-item-avatar-size: 40px !default;
-$list-item-avatar-size-multiplier: 1.5 !default;
 $list-item-avatar-margin-y: 4px !default;
 
 $list-item-media-margin-bottom: 0 !default;

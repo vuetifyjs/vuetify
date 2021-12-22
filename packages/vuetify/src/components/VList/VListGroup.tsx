@@ -31,13 +31,12 @@ const VListGroupItems = defineComponent({
   },
 
   setup (props, { slots }) {
-    const parent = createList()
-    const depth = useDepth(parent.hasPrepend)
+    createList()
 
     return () => {
       return (
         <VExpandTransition>
-          <div class="v-list-group__items" style={{ '--v-list-depth': depth.value }} v-show={props.open}>
+          <div class="v-list-group__items" v-show={props.open}>
             <VListChildren items={props.items} v-slots={slots} />
           </div>
         </VExpandTransition>
