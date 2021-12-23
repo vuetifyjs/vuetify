@@ -64,7 +64,7 @@ interface InternalThemeOptions {
   themes: Record<string, InternalThemeDefinition>
 }
 
-export type ThemeDefinition = DeepPartial<InternalThemeDefinition> & { dark: boolean }
+export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 
 export type ThemeOptions = false | {
   defaultTheme?: string
@@ -185,13 +185,13 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
   const variations = ref(parsedOptions.variations)
 
   const computedThemes = computed(() => {
-    return Object.keys(themes.value).reduce((obj, key) => {
+    return Object.entries(themes.value).reduce((obj, [name, original]) => {
       const theme: InternalThemeDefinition = {
-        ...themes.value[key],
+        ...original,
         colors: {
-          ...themes.value[key].colors,
+          ...original.colors,
           ...(parsedOptions.variations.colors ?? []).reduce((obj, color) => {
-            return { ...obj, ...genColorVariations(color, themes.value[key].colors[color]!) }
+            return { ...obj, ...genColorVariations(color, original.colors[color]!) }
           }, {}),
         },
       }
@@ -218,7 +218,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
         theme.colors[onColor] = whiteContrast > Math.min(blackContrast, 50) ? '#fff' : '#000'
       }
 
-      obj[key] = theme
+      obj[name] = theme
 
       return obj
     }, {} as Record<string, InternalThemeDefinition>)
