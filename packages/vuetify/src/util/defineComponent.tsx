@@ -39,7 +39,7 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
   }
 
   if (options._setup) {
-    options.setup = function setup (props: Dictionary<any>, ctx) {
+    options.setup = function setup (props: Record<string, any>, ctx) {
       const vm = getCurrentInstance()!
       const defaults = useDefaults()
 

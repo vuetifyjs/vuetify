@@ -57,7 +57,7 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
-type SelectItemKey = string | (string | number)[] | ((item: Dictionary<any>, fallback?: any) => any)
+type SelectItemKey = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: object,
@@ -92,7 +92,7 @@ export function getZIndex (el?: Element | null): number {
   return index
 }
 
-const tagsToReplace: Dictionary<string> = {
+const tagsToReplace: Record<string, string> = {
   '&': '&amp;',
   '<': '&lt;',
   '>': '&gt;',
@@ -357,6 +357,10 @@ export function throttle<T extends (...args: any[]) => any> (fn: T, limit: numbe
       return fn(...args)
     }
   }
+}
+
+type Writable<T> = {
+  -readonly [P in keyof T]: T[P]
 }
 
 /**

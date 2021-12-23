@@ -33,7 +33,7 @@
   "module": "lib/framework.mjs",
   "jsdelivr": "dist/vuetify.js",
   "unpkg": "dist/vuetify.js",
-  "types": "lib/framework.d.ts",
+  "types": "lib/index.d.ts",
   "sass": "lib/styles/main.sass",
   "styles": "lib/styles/main.css",
   "sideEffects": [
@@ -86,7 +86,7 @@
     "dev:ssr": "cross-env NODE_ENV=development vite-ssr",
     "build": "rimraf lib dist && concurrently \"yarn build:dist\" \"yarn build:lib\" \"yarn build:types\" -n \"dist,lib,types\" --kill-others-on-fail -r && yarn build:json",
     "build:dist": "rollup --config build/rollup.config.js",
-    "build:lib": "cross-env NODE_ENV=lib babel src --out-dir lib --ignore \"**/__tests__\" --source-maps --extensions \".ts\",\".tsx\",\".snap\" --copy-files --no-copy-ignored --out-file-extension .mjs",
+    "build:lib": "cross-env NODE_ENV=lib babel src --out-dir lib --source-maps --extensions \".ts\",\".tsx\",\".snap\" --copy-files --no-copy-ignored --out-file-extension .mjs",
     "build:types": "rimraf types-temp && tsc --pretty --emitDeclarationOnly -p tsconfig.dist.json && rollup --config build/rollup.types.config.js && rimraf types-temp",
     "build:json": "node build/build-json.js",
     "tsc": "tsc",

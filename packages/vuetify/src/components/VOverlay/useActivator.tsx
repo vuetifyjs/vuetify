@@ -21,7 +21,7 @@ import type {
 
 interface ActivatorProps extends DelayProps {
   activator?: 'parent' | string | Element | ComponentPublicInstance
-  activatorProps: Dictionary<any>
+  activatorProps: Record<string, any>
 
   openOnClick: boolean | undefined
   openOnHover: boolean

@@ -1,4 +1,5 @@
 import path from 'path'
+import fs from 'fs/promises'
 
 import dts from 'rollup-plugin-dts'
 import alias from '@rollup/plugin-alias'
@@ -26,7 +27,16 @@ function createTypesConfig (input, output) {
         entries: [
           { find: /^@\/(.*)/, replacement: path.resolve(__dirname, '../types-temp/$1') },
         ]
-      })
+      }),
+      {
+        async renderChunk (code) {
+          if (input === 'framework.d.ts') {
+            const shims = await fs.readFile(path.resolve(__dirname, '../src/shims.d.ts'), { encoding: 'utf8' })
+            return code += '\n\n' + shims.replace(/^\s+\/\/ @skip-build\s+.*\n$/gm, '')
+          }
+          return null
+        },
+      },
     ],
   }
 }
