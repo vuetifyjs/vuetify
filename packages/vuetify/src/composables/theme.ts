@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, provide, ref, watch } from 'vue'
+import { computed, inject, provide, ref, watch, watchEffect } from 'vue'
 import {
   colorToInt,
   colorToRGB,
@@ -7,6 +7,7 @@ import {
   darken,
   getCurrentInstance,
   getLuma,
+  IN_BROWSER,
   intToHex,
   lighten,
   mergeDeep,
@@ -15,7 +16,8 @@ import {
 import { APCAcontrast } from '@/util/color/APCA'
 
 // Types
-import type { InjectionKey, Ref } from 'vue'
+import type { App, InjectionKey, Ref } from 'vue'
+import type { HeadClient } from '@vueuse/head'
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
@@ -79,6 +81,7 @@ export interface ThemeInstance {
   themeClasses: Ref<string | undefined>
   setTheme: (key: string, theme: InternalThemeDefinition) => void
   getTheme: (key: string) => InternalThemeDefinition
+  styles: Ref<string>
 }
 
 export const ThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme')
@@ -178,7 +181,8 @@ const parseThemeOptions = (options: ThemeOptions = defaultThemeOptions): Interna
 }
 
 // Composables
-export function createTheme (options?: ThemeOptions): ThemeInstance {
+export function createTheme (app: App, options?: ThemeOptions): ThemeInstance {
+  const head = app._context.provides.usehead as HeadClient | undefined
   const parsedOptions = parseThemeOptions(options)
   const styleEl = ref<HTMLStyleElement>()
   const current = ref(parsedOptions.defaultTheme)
@@ -237,50 +241,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
     return obj
   }
 
-  function genCssVariables (name: string) {
-    const theme = computedThemes.value[name]
-
-    if (!theme) throw new Error(`Could not find theme ${name}`)
-
-    const lightOverlay = theme.dark ? 2 : 1
-    const darkOverlay = theme.dark ? 1 : 2
-
-    const variables: string[] = []
-    for (const [key, value] of Object.entries(theme.colors)) {
-      const rgb = colorToRGB(value!)
-      variables.push(`--v-theme-${key}: ${rgb.r},${rgb.g},${rgb.b}`)
-      if (!key.startsWith('on-')) {
-        variables.push(`--v-theme-${key}-overlay-multiplier: ${getLuma(value) > 0.18 ? lightOverlay : darkOverlay}`)
-      }
-    }
-
-    return variables
-  }
-
-  function genStyleElement () {
-    if (typeof document === 'undefined' || styleEl.value) return
-
-    const el = document.createElement('style')
-    el.type = 'text/css'
-    el.id = 'vuetify-theme-stylesheet'
-
-    styleEl.value = el
-    document.head.appendChild(styleEl.value)
-  }
-
-  function createCssClass (selector: string, content: string[]) {
-    return [
-      `${selector} {\n`,
-      ...content.map(line => `  ${line};\n`),
-      '}\n',
-    ]
-  }
-
-  function updateStyles () {
-    if (parsedOptions.isDisabled) return
-
-    genStyleElement()
-
+  const styles = computed(() => {
     const lines = []
 
     for (const themeName of Object.keys(computedThemes.value)) {
@@ -301,24 +262,85 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
     const colors = new Set(Object.values(computedThemes.value).flatMap(theme => Object.keys(theme.colors)))
     for (const key of colors) {
       if (/on-[a-z]/.test(key)) {
-        lines.push(...createCssClass(`.${key}`, [`color: rgb(var(--v-theme-${key}))`]))
+        lines.push(...createCssClass(`.${key}`, [`color: rgb(var(--v-theme-${key})) !important`]))
       } else {
         lines.push(
           ...createCssClass(`.bg-${key}`, [
             `--v-theme-overlay-multiplier: var(--v-theme-${key}-overlay-multiplier)`,
-            `background: rgb(var(--v-theme-${key}))`,
-            `color: rgb(var(--v-theme-on-${key}))`,
+            `background: rgb(var(--v-theme-${key})) !important`,
+            `color: rgb(var(--v-theme-on-${key})) !important`,
           ]),
-          ...createCssClass(`.text-${key}`, [`color: rgb(var(--v-theme-${key}))`]),
+          ...createCssClass(`.text-${key}`, [`color: rgb(var(--v-theme-${key})) !important`]),
           ...createCssClass(`.border-${key}`, [`--v-border-color: var(--v-theme-${key})`]),
         )
       }
     }
 
-    if (styleEl.value) styleEl.value.innerHTML = lines.map((str, i) => i === 0 ? str : `    ${str}`).join('')
+    return lines.map((str, i) => i === 0 ? str : `    ${str}`).join('')
+  })
+
+  function genCssVariables (name: string) {
+    const theme = computedThemes.value[name]
+
+    if (!theme) throw new Error(`Could not find theme ${name}`)
+
+    const lightOverlay = theme.dark ? 2 : 1
+    const darkOverlay = theme.dark ? 1 : 2
+
+    const variables: string[] = []
+    for (const [key, value] of Object.entries(theme.colors)) {
+      const rgb = colorToRGB(value!)
+      variables.push(`--v-theme-${key}: ${rgb.r},${rgb.g},${rgb.b}`)
+      if (!key.startsWith('on-')) {
+        variables.push(`--v-theme-${key}-overlay-multiplier: ${getLuma(value) > 0.18 ? lightOverlay : darkOverlay}`)
+      }
+    }
+
+    return variables
   }
 
-  watch(themes, updateStyles, { deep: true, immediate: true })
+  function createCssClass (selector: string, content: string[]) {
+    return [
+      `${selector} {\n`,
+      ...content.map(line => `  ${line};\n`),
+      '}\n',
+    ]
+  }
+
+  if (head) {
+    head.addHeadObjs(computed(() => ({
+      style: [{
+        children: styles.value,
+        type: 'text/css',
+        id: 'vuetify-theme-stylesheet',
+      }],
+    })))
+
+    if (IN_BROWSER) {
+      watchEffect(() => head.updateDOM())
+    }
+  } else {
+    watch(themes, updateStyles, { deep: true, immediate: true })
+
+    function updateStyles () {
+      if (parsedOptions.isDisabled) return
+
+      genStyleElement()
+
+      if (styleEl.value) styleEl.value.innerHTML = styles.value
+    }
+
+    function genStyleElement () {
+      if (typeof document === 'undefined' || styleEl.value) return
+
+      const el = document.createElement('style')
+      el.type = 'text/css'
+      el.id = 'vuetify-theme-stylesheet'
+
+      styleEl.value = el
+      document.head.appendChild(styleEl.value)
+    }
+  }
 
   return {
     isDisabled: parsedOptions.isDisabled,
@@ -327,6 +349,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
     getTheme: (key: string) => computedThemes.value[key],
     current,
     themeClasses: computed(() => parsedOptions.isDisabled ? undefined : `v-theme--${current.value}`),
+    styles,
   }
 }
 
