@@ -29,7 +29,7 @@
 
     setup (props) {
       const { locale, t } = useI18n()
-      const theme = useTheme({})
+      const theme = useTheme()
 
       // data
       const to = {
