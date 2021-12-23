@@ -18,6 +18,6 @@
           color: 'secondary',
         },
       },
-    })
+    }),
   }
 </script>

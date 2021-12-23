@@ -2,31 +2,31 @@
   <div>
     <v-alert
       border="top"
-      color="red lighten-2"
-      dark
+      color="primary"
+      class="ma-2"
     >
-      I'm an alert with a top border and red color
+      I'm an alert with a top border and primary color
     </v-alert>
     <v-alert
-      border="right"
-      color="blue-grey"
-      dark
+      border="end"
+      color="secondary"
+      class="ma-2"
     >
-      I'm an alert with a right border and blue-grey color
+      I'm an alert with an end border and secondary color
     </v-alert>
     <v-alert
       border="bottom"
-      color="pink darken-1"
-      dark
+      color="success"
+      class="ma-2"
     >
-      I'm an alert with a bottom border and pink color
+      I'm an alert with a bottom border and success color
     </v-alert>
     <v-alert
-      border="left"
-      color="indigo"
-      dark
+      border="start"
+      color="error"
+      class="ma-2"
     >
-      I'm an alert with a border left type info
+      I'm an alert with a start border and error color
     </v-alert>
   </div>
 </template>

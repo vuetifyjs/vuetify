@@ -23,9 +23,7 @@ related:
 
 ## API
 
-- [v-overflow-btn](/api/v-overflow-btn)
-
-<inline-api page="components/overflow-btns" />
+<api-inline />
 
 ## Examples
 

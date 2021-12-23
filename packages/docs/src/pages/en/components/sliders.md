@@ -23,10 +23,7 @@ Sliders reflect a range of values along a bar, from which users may select a sin
 
 ## API
 
-- [v-slider](/api/v-slider)
-- [v-range-slider](/api/v-range-slider)
-
-<inline-api page="components/sliders" />
+<api-inline />
 
 ## Examples
 

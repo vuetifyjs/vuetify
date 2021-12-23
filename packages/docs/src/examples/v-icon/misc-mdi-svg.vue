@@ -24,9 +24,9 @@
 <script>
   import {
     mdiAccount,
+    mdiDelete,
     mdiPencil,
     mdiShareVariant,
-    mdiDelete,
   } from '@mdi/js'
 
   export default {

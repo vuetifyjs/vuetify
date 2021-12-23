@@ -5,7 +5,6 @@
   >
     <v-badge
       v-bind="$attrs"
-      v-on="$listeners"
     >
       <v-icon large>
         $mdiVuetify

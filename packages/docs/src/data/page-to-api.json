@@ -82,7 +82,7 @@
     "v-btn",
     "v-speed-dial"
   ],
-  "components/footer": ["v-footer"],
+  "components/footers": ["v-footer"],
   "components/forms": ["v-form"],
   "components/grids": [
     "v-col",

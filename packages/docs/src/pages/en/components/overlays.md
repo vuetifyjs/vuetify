@@ -1,4 +1,5 @@
 ---
+nav: Overlays
 meta:
   title: Overlay component
   description: The overlay component makes it easy to create a scrim over components or your entire application.
@@ -23,9 +24,7 @@ In its simplest form, the `v-overlay` component will add a dimmed layer over you
 
 ## API
 
-- [v-overlay](/api/v-overlay)
-
-<inline-api page="components/overlays" />
+<api-inline />
 
 ## Examples
 

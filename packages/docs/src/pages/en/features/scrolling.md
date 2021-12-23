@@ -23,9 +23,7 @@ The **goTo** method takes two parameters **target** and **options**. **target** 
 
 ## API
 
-- [$vuetify](/api/vuetify)
-
-<inline-api page="features/scrolling" />
+<api-inline />
 
 ## Use with router
 

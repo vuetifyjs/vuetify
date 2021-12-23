@@ -9,7 +9,6 @@
         :items="items"
         label="Add some tags"
         v-bind="$attrs"
-        v-on="$listeners"
       >
         <template
           v-if="$attrs.noData"

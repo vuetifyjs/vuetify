@@ -109,8 +109,8 @@ export const VTextField = defineComponent({
           ]}
           { ...rootAttrs }
           { ...inputProps }
-          v-slots={{
-            default: ({ isDisabled, isReadonly }) => (
+        >
+          { ({ isDisabled, isReadonly }) => (
               <VField
                 ref={ fieldRef }
                 active={ isDirty.value }
@@ -123,7 +123,8 @@ export const VTextField = defineComponent({
                 }}
                 role="textbox"
                 { ...fieldProps }
-                v-slots={{
+              >
+                {{
                   ...slots,
                   default: ({
                     isActive,
@@ -178,10 +179,9 @@ export const VTextField = defineComponent({
                     </>
                   ) : undefined,
                 }}
-              />
-            ),
-          }}
-        />
+              </VField>
+          )}
+        </VInput>
       )
     })
 

@@ -53,7 +53,7 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
 
     app.provide(DefaultsSymbol, createDefaults(options.defaults))
     app.provide(DisplaySymbol, createDisplay(options.display))
-    app.provide(ThemeSymbol, createTheme(options.theme))
+    app.provide(ThemeSymbol, createTheme(app, options.theme))
     app.provide(IconSymbol, mergeDeep({
       defaultSet: 'mdi',
       sets: {

@@ -1,4 +1,5 @@
 ---
+nav: Direct support
 meta:
   title: Direct support from Vuetify
   description: Get professional help, support and guidance for your Vue / Vuetify application from the creator from the Vuetify team.
@@ -7,7 +8,6 @@ related:
   - /getting-started/installation/
   - /introduction/enterprise/
   - /resources/jobs-for-vue/
-nav: Direct support
 ---
 
 # Direct support from Vuetify

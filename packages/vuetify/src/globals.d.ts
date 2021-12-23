@@ -1,8 +1,5 @@
 import type { TouchStoredHandlers } from './directives/touch'
-import type { ComponentPublicInstance, FunctionalComponent, VNode } from 'vue'
-
-import { IconProps } from '@/composables/icons'
-import type { RouteLocationRaw } from 'vue-router'
+import type { VNode } from 'vue'
 
 declare global {
   interface HTMLCollection {
@@ -71,12 +68,6 @@ declare global {
   function parseInt(s: string | number, radix?: number): number
   function parseFloat(string: string | number): number
 
-  export type Dictionary<T> = Record<string, T>
-
-  export type Writable<T> = {
-    -readonly [P in keyof T]: T[P];
-  }
-
   export const __VUETIFY_VERSION__: string
   export const __REQUIRED_VUE__: string
 
@@ -86,10 +77,6 @@ declare global {
       [name: string]: any
     }
   }
-}
-
-declare module 'vue' {
-  export type JSXComponent<Props = any> = { new (): ComponentPublicInstance<Props> } | FunctionalComponent<Props>
 }
 
 declare module '@vue/runtime-core' {
@@ -128,11 +115,4 @@ declare module '@vue/runtime-dom' {
   }
 
   export interface CSSProperties extends CustomProperties {}
-}
-
-declare module 'vue-router' {
-  export interface RouterLinkOptions {
-    to: RouteLocationRaw
-    replace?: boolean
-  }
 }

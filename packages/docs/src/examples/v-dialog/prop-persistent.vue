@@ -3,12 +3,10 @@
     <v-dialog
       v-model="dialog"
       persistent
-      max-width="290"
     >
       <template v-slot:activator="{ props }">
         <v-btn
           color="primary"
-          dark
           v-bind="props"
         >
           Open Dialog

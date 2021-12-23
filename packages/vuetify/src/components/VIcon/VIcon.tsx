@@ -43,7 +43,7 @@ export const VIcon = defineComponent({
     }
 
     const { iconData } = useIcon(slotIcon || props)
-    const { sizeClasses } = useSize(props, 'v-icon')
+    const { sizeClasses } = useSize(props)
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
 
     return () => {

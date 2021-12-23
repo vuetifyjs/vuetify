@@ -40,24 +40,18 @@
         class="mr-2"
         @click="lights"
       >
-        <v-icon left>
-          mdi-brightness-5
-        </v-icon>
+        <v-icon left icon="mdi-brightness-5"></v-icon>
         Turn on Lights
       </v-chip>
       <v-chip
         class="mr-2"
         @click="alarm"
       >
-        <v-icon left>
-          mdi-alarm-check
-        </v-icon>
+        <v-icon left icon="mdi-alarm-check"></v-icon>
         Set alarm
       </v-chip>
       <v-chip @click="blinds">
-        <v-icon left>
-          mdi-blinds
-        </v-icon>
+        <v-icon left icon="mdi-blinds"></v-icon>
         Close blinds
       </v-chip>
     </v-card-text>

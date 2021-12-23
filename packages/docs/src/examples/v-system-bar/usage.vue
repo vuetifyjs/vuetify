@@ -12,7 +12,6 @@
         <v-system-bar
           color="orange"
           v-bind="$attrs"
-          v-on="$listeners"
         >
           <v-icon>mdi-gmail</v-icon>
           <span>10 unread emails</span>

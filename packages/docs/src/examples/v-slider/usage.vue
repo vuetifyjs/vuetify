@@ -5,7 +5,6 @@
         v-model="slider"
         label="Slider"
         v-bind="$attrs"
-        v-on="$listeners"
       ></v-slider>
     </v-col>
   </v-row>

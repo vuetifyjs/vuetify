@@ -6,7 +6,6 @@
     <v-breadcrumbs
       :items="items"
       v-bind="$attrs"
-      v-on="$listeners"
     ></v-breadcrumbs>
   </v-row>
 </template>

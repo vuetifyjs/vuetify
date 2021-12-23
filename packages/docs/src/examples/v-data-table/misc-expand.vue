@@ -1,10 +1,10 @@
 <!-- eslint-disable vue/no-unused-vars -->
 <template>
   <v-data-table
+    v-model:expanded="expanded"
     :headers="dessertHeaders"
     :items="desserts"
     :single-expand="singleExpand"
-    :expanded.sync="expanded"
     item-key="name"
     show-expand
     class="elevation-1"

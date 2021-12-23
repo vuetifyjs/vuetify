@@ -9,7 +9,7 @@ import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { toRef } from 'vue'
@@ -34,13 +34,13 @@ export const VSheet = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const { borderClasses } = useBorder(props, 'v-sheet')
+    const { borderClasses } = useBorder(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props, 'v-sheet')
-    const { roundedClasses } = useRounded(props, 'v-sheet')
+    const { positionClasses, positionStyles } = usePosition(props)
+    const { roundedClasses } = useRounded(props)
 
     return () => (
       <props.tag

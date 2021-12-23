@@ -15,7 +15,7 @@
           @mousedown:time="startTime"
           @mousemove:time="mouseMove"
           @mouseup:time="endDrag"
-          @mouseleave.native="cancelDrag"
+          @mouseleave="cancelDrag"
         >
           <template v-slot:event="{ event, timed, eventSummary }">
             <div

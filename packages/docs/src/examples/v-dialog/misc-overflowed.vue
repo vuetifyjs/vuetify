@@ -2,12 +2,10 @@
   <v-row justify="center">
     <v-dialog
       v-model="dialog"
-      width="600px"
     >
       <template v-slot:activator="{ props }">
         <v-btn
           color="primary"
-          dark
           v-bind="props"
         >
           Open Dialog
@@ -33,14 +31,14 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            color="green darken-1"
+            color="green-darken-1"
             text
             @click="dialog = false"
           >
             Disagree
           </v-btn>
           <v-btn
-            color="green darken-1"
+            color="green-darken-1"
             text
             @click="dialog = false"
           >

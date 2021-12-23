@@ -61,7 +61,7 @@ export const VBadge = defineComponent({
 
   setup (props, ctx) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const { roundedClasses } = useRounded(props, 'v-badge')
+    const { roundedClasses } = useRounded(props)
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'textColor'))
 
     const position = computed(() => {

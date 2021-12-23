@@ -16,7 +16,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
@@ -60,15 +60,15 @@ export const VBtn = defineComponent({
   },
 
   setup (props, { attrs, slots }) {
-    const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(props, 'v-btn')
-    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-btn')
-    const { densityClasses } = useDensity(props, 'v-btn')
+    const { themeClasses } = provideTheme(props)
+    const { borderClasses } = useBorder(props)
+    const { colorClasses, colorStyles, variantClasses } = useVariant(props)
+    const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props, 'v-btn')
-    const { roundedClasses } = useRounded(props, 'v-btn')
-    const { sizeClasses } = useSize(props, 'v-btn')
+    const { positionClasses, positionStyles } = usePosition(props)
+    const { roundedClasses } = useRounded(props)
+    const { sizeClasses } = useSize(props)
     const group = useGroupItem(props, VBtnToggleSymbol, false)
     const link = useLink(props, attrs)
     const isDisabled = computed(() => group?.disabled.value || props.disabled)

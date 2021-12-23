@@ -57,7 +57,7 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
-type SelectItemKey = string | (string | number)[] | ((item: Dictionary<any>, fallback?: any) => any)
+type SelectItemKey = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: object,
@@ -92,7 +92,7 @@ export function getZIndex (el?: Element | null): number {
   return index
 }
 
-const tagsToReplace: Dictionary<string> = {
+const tagsToReplace: Record<string, string> = {
   '&': '&amp;',
   '<': '&lt;',
   '>': '&gt;',
@@ -359,6 +359,10 @@ export function throttle<T extends (...args: any[]) => any> (fn: T, limit: numbe
   }
 }
 
+type Writable<T> = {
+  -readonly [P in keyof T]: T[P]
+}
+
 /**
  * Filters slots to only those starting with `prefix`, removing the prefix
  */
@@ -466,7 +470,12 @@ export const randomHexColor = () => {
   return '#' + n.slice(0, 6)
 }
 
-export const toKebabCase = (str: string) => str.replace(/([A-Z])/g, match => `-${match.toLowerCase()}`)
+export function toKebabCase (str = '') {
+  return str
+    .replace(/[^a-z]/gi, '-')
+    .replace(/\B([A-Z])/g, '-$1')
+    .toLowerCase()
+}
 
 export type MaybeRef<T> = T | Ref<T>
 

@@ -9,10 +9,10 @@
     >
       <v-col cols="5">
         <v-treeview
-          :active.sync="active"
+          v-model:active="active"
+          v-model:open="open"
           :items="items"
           :load-children="fetchUsers"
-          :open.sync="open"
           activatable
           color="warning"
           open-on-click

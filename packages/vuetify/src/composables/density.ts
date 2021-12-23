@@ -1,6 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import { propsFactory } from '@/util'
+import { getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -22,7 +22,10 @@ export const makeDensityProps = propsFactory({
   },
 }, 'density')
 
-export function useDensity (props: DensityProps, name: string) {
+export function useDensity (
+  props: DensityProps,
+  name = getCurrentInstanceName(),
+) {
   const densityClasses = computed(() => {
     return `${name}--density-${props.density}`
   })

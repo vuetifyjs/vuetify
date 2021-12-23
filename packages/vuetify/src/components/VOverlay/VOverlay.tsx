@@ -5,7 +5,7 @@ import './VOverlay.sass'
 import { makeActivatorProps, useActivator } from './useActivator'
 import { makePositionStrategyProps, usePositionStrategies } from './positionStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackButton } from '@/composables/router'
 import { useBackgroundColor } from '@/composables/color'
@@ -24,6 +24,7 @@ import {
   convertToUnit,
   genericComponent,
   getScrollParent,
+  IN_BROWSER,
   standardEasing,
   useRender,
 } from '@/util'
@@ -67,7 +68,7 @@ function Scrim (props: ScrimProps) {
 
 export type OverlaySlots = MakeSlots<{
   default: [{ isActive: Ref<boolean> }]
-  activator: [{ isActive: boolean, props: Dictionary<any> }]
+  activator: [{ isActive: boolean, props: Record<string, any> }]
 }>
 
 export const VOverlay = genericComponent<new () => {
@@ -109,7 +110,7 @@ export const VOverlay = genericComponent<new () => {
   setup (props, { slots, attrs, emit }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { teleportTarget } = useTeleport(computed(() => props.attach || props.contained))
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
     const { hasContent, onAfterLeave } = useLazy(props, isActive)
     const scrimColor = useBackgroundColor(computed(() => {
@@ -145,7 +146,7 @@ export const VOverlay = genericComponent<new () => {
       return isActive.value && isTop.value
     }
 
-    watch(isActive, val => {
+    IN_BROWSER && watch(isActive, val => {
       if (val) {
         window.addEventListener('keydown', onKeydown)
       } else {

@@ -13,11 +13,11 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
 
 // Utilities
-import { computed, inject, provide, ref, toRef } from 'vue'
+import { inject, provide, ref, toRef } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
@@ -32,16 +32,6 @@ export type ListItem = {
 
 // Depth
 export const DepthKey: InjectionKey<Ref<number>> = Symbol.for('vuetify:depth')
-
-export const useDepth = (hasPrepend?: Ref<boolean>) => {
-  const parent = inject(DepthKey, ref(-1))
-
-  const depth = computed(() => parent.value + 1 + (hasPrepend?.value ? 1 : 0))
-
-  provide(DepthKey, depth)
-
-  return depth
-}
 
 // List
 export const ListKey: InjectionKey<{
@@ -115,15 +105,14 @@ export const VList = genericComponent<new <T>() => {
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const { borderClasses } = useBorder(props, 'v-list')
-    const { densityClasses } = useDensity(props, 'v-list')
+    const { borderClasses } = useBorder(props)
+    const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props, 'v-list')
+    const { roundedClasses } = useRounded(props)
     const { open, select, activate } = useNested(props)
-    const depth = useDepth()
     createList()
 
     useRender(() => {
@@ -150,9 +139,6 @@ export const VList = genericComponent<new <T>() => {
           style={[
             backgroundColorStyles.value,
             dimensionStyles.value,
-            {
-              '--v-list-depth': depth.value,
-            },
           ]}
         >
           { hasHeader && (
@@ -161,14 +147,13 @@ export const VList = genericComponent<new <T>() => {
               : <VListSubheader>{ props.subheader }</VListSubheader>
           ) }
 
-          <VListChildren
-            items={props.items}
-            v-slots={{
+          <VListChildren items={ props.items }>
+            {{
               default: slots.default,
               item: slots.item,
               externalHeader: slots.header,
             }}
-          />
+          </VListChildren>
         </props.tag>
       )
     })

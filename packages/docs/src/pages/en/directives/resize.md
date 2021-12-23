@@ -23,8 +23,6 @@ Resize your window and observe the values change..
 
 ## API
 
-- [v-resize](/api/v-resize)
-
-<inline-api page="directives/resize" />
+<api-inline />
 
 <backmatter />

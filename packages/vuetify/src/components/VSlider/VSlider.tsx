@@ -87,7 +87,8 @@ export const VSlider = defineComponent({
           ]}
           { ...inputProps }
           focused={ isFocused.value }
-          v-slots={{
+        >
+          {{
             ...slots,
             default: ({ id }) => (
               <div
@@ -108,10 +109,9 @@ export const VSlider = defineComponent({
                   ref={ trackContainerRef }
                   start={ 0 }
                   stop={ trackStop.value }
-                  v-slots={{
-                    'tick-label': slots['tick-label'],
-                  }}
-                />
+                >
+                  {{ 'tick-label': slots['tick-label'] }}
+                </VSliderTrack>
 
                 <VSliderThumb
                   ref={ thumbContainerRef }
@@ -124,14 +124,13 @@ export const VSlider = defineComponent({
                   elevation={ props.elevation }
                   onFocus={ focus }
                   onBlur={ blur }
-                  v-slots={{
-                    'thumb-label': slots['thumb-label'],
-                  }}
-                />
+                >
+                  {{ 'thumb-label': slots['thumb-label'] }}
+                </VSliderThumb>
               </div>
             ),
           }}
-        />
+        </VInput>
       )
     }
   },
