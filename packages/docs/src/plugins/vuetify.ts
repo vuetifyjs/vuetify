@@ -13,7 +13,6 @@ export const useVuetify: VuetifyPlugin = ({ app }) => {
     theme: {
       themes: {
         light: {
-          // @ts-expect-error
           colors: {
             primary: '#1867c0',
             'on-background': '#333333',

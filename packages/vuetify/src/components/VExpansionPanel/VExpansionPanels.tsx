@@ -4,7 +4,7 @@ import './VExpansionPanel.sass'
 // Composables
 import { makeTagProps } from '@/composables/tag'
 import { makeGroupProps, useGroup } from '@/composables/group'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed } from 'vue'
@@ -40,7 +40,7 @@ export const VExpansionPanels = defineComponent({
 
   setup (props, { slots }) {
     useGroup(props, VExpansionPanelSymbol)
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
 
     const variantClass = computed(() => props.variant && `v-expansion-panels--variant-${props.variant}`)
 

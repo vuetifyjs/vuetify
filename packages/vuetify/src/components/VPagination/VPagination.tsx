@@ -11,7 +11,7 @@ import { makeElevationProps } from '@/composables/elevation'
 import { makeDensityProps } from '@/composables/density'
 import { makeRoundedProps } from '@/composables/rounded'
 import { makeSizeProps } from '@/composables/size'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeBorderProps } from '@/composables/border'
@@ -116,7 +116,7 @@ export const VPagination = defineComponent({
     const page = useProxiedModel(props, 'modelValue')
     const { t, n } = useLocale()
     const { isRtl } = useRtl()
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const maxButtons = ref(-1)
 
     const { resizeRef } = useResizeObserver((entries: ResizeObserverEntry[]) => {

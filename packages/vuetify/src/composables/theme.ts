@@ -1,3 +1,5 @@
+// Utilities
+import { computed, inject, provide, ref, watch } from 'vue'
 import {
   colorToInt,
   colorToRGB,
@@ -10,12 +12,12 @@ import {
   mergeDeep,
   propsFactory,
 } from '@/util'
-// Utilities
-import { computed, inject, provide, ref, watch } from 'vue'
+import { APCAcontrast } from '@/util/color/APCA'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
-import { APCAcontrast } from '@/util/color/APCA'
+
+type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
 interface BaseColors {
   background: string
@@ -39,23 +41,13 @@ interface OnColors {
   'on-info': string
 }
 
-interface Colors extends BaseColors, OnColors {
+export interface Colors extends BaseColors, OnColors {
   [key: string]: string
 }
 
 interface InternalThemeDefinition {
   dark: boolean
   colors: Colors
-  variables: Record<string, string | number>
-}
-
-interface ThemeDefinitionColors extends BaseColors, Partial<OnColors> {
-  [key: string]: string | undefined
-}
-
-export interface ThemeDefinition {
-  dark: boolean
-  colors: ThemeDefinitionColors
   variables: Record<string, string | number>
 }
 
@@ -69,8 +61,10 @@ interface InternalThemeOptions {
   isDisabled: boolean
   defaultTheme: string
   variations: VariationsOptions
-  themes: Record<string, ThemeDefinition>
+  themes: Record<string, InternalThemeDefinition>
 }
+
+export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 
 export type ThemeOptions = false | {
   defaultTheme?: string
@@ -83,7 +77,7 @@ export interface ThemeInstance {
   themes: Ref<Record<string, InternalThemeDefinition>>
   current: Ref<string>
   themeClasses: Ref<string | undefined>
-  setTheme: (key: string, theme: ThemeDefinition) => void
+  setTheme: (key: string, theme: InternalThemeDefinition) => void
   getTheme: (key: string) => InternalThemeDefinition
 }
 
@@ -171,9 +165,15 @@ const defaultThemeOptions: ThemeOptions = {
 const parseThemeOptions = (options: ThemeOptions = defaultThemeOptions): InternalThemeOptions => {
   if (!options) return { ...defaultThemeOptions, isDisabled: true } as InternalThemeOptions
 
+  const themes = Object.entries(options.themes ?? {}).reduce((obj, [key, theme]) => {
+    const defaultTheme = theme.dark ? defaultThemeOptions.themes?.dark : defaultThemeOptions.themes?.light
+    obj[key] = mergeDeep(defaultTheme, theme)
+    return obj
+  }, {} as Record<string, ThemeDefinition>)
+
   return mergeDeep(
     defaultThemeOptions,
-    options,
+    { ...options, themes },
   ) as InternalThemeOptions
 }
 
@@ -186,13 +186,13 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
   const variations = ref(parsedOptions.variations)
 
   const computedThemes = computed(() => {
-    return Object.keys(themes.value).reduce((obj, key) => {
-      const theme: ThemeDefinition = {
-        ...themes.value[key],
+    return Object.entries(themes.value).reduce((obj, [name, original]) => {
+      const theme: InternalThemeDefinition = {
+        ...original,
         colors: {
-          ...themes.value[key].colors,
+          ...original.colors,
           ...(parsedOptions.variations.colors ?? []).reduce((obj, color) => {
-            return { ...obj, ...genColorVariations(color, themes.value[key].colors[color]!) }
+            return { ...obj, ...genColorVariations(color, original.colors[color]!) }
           }, {}),
         },
       }
@@ -219,7 +219,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
         theme.colors[onColor] = whiteContrast > Math.min(blackContrast, 50) ? '#fff' : '#000'
       }
 
-      obj[key] = theme as InternalThemeDefinition
+      obj[name] = theme
 
       return obj
     }, {} as Record<string, InternalThemeDefinition>)
@@ -298,10 +298,8 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
       ]))
     }
 
-    // Assumption is that all theme objects have the same keys, so it doesn't matter which one
-    // we use since the values are all css variables.
-    const firstTheme = Object.keys(computedThemes.value)[0]
-    for (const key of Object.keys(computedThemes.value[firstTheme].colors)) {
+    const colors = new Set(Object.values(computedThemes.value).flatMap(theme => Object.keys(theme.colors)))
+    for (const key of colors) {
       if (/on-[a-z]/.test(key)) {
         lines.push(...createCssClass(`.${key}`, [`color: rgb(var(--v-theme-${key}))`]))
       } else {
@@ -325,19 +323,15 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
   return {
     isDisabled: parsedOptions.isDisabled,
     themes: computedThemes,
-    setTheme: (key: string, theme: ThemeDefinition) => themes.value[key] = theme,
+    setTheme: (key: string, theme: InternalThemeDefinition) => themes.value[key] = theme,
     getTheme: (key: string) => computedThemes.value[key],
     current,
     themeClasses: computed(() => parsedOptions.isDisabled ? undefined : `v-theme--${current.value}`),
   }
 }
 
-/**
- * Used to either set up and provide a new theme instance, or to pass
- * along the closest available already provided instance.
- */
-export function useTheme (props: { theme?: string }) {
-  getCurrentInstance('useTheme')
+export function provideTheme (props: { theme?: string }) {
+  getCurrentInstance('provideTheme')
 
   const theme = inject(ThemeSymbol, null)
 
@@ -358,4 +352,14 @@ export function useTheme (props: { theme?: string }) {
   provide(ThemeSymbol, newTheme)
 
   return newTheme
+}
+
+export function useTheme () {
+  getCurrentInstance('useTheme')
+
+  const theme = inject(ThemeSymbol, null)
+
+  if (!theme) throw new Error('Could not find Vuetify theme injection')
+
+  return theme
 }

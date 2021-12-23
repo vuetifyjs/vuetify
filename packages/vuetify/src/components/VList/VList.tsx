@@ -13,7 +13,7 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
 
 // Utilities
@@ -105,7 +105,7 @@ export const VList = genericComponent<new <T>() => {
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)

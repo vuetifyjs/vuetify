@@ -9,7 +9,7 @@ import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useFocus } from '@/composables/focus'
@@ -110,7 +110,7 @@ export const VField = genericComponent<new <T>() => {
   },
 
   setup (props, { attrs, emit, slots }) {
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { loaderClasses } = useLoader(props)
     const isActive = useProxiedModel(props, 'active')
     const { isFocused, focus, blur } = useFocus()

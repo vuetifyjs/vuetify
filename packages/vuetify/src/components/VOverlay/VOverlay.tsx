@@ -5,7 +5,7 @@ import './VOverlay.sass'
 import { makeActivatorProps, useActivator } from './useActivator'
 import { makePositionStrategyProps, usePositionStrategies } from './positionStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackButton } from '@/composables/router'
 import { useBackgroundColor } from '@/composables/color'
@@ -110,7 +110,7 @@ export const VOverlay = genericComponent<new () => {
   setup (props, { slots, attrs, emit }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { teleportTarget } = useTeleport(computed(() => props.attach || props.contained))
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
     const { hasContent, onAfterLeave } = useLazy(props, isActive)
     const scrimColor = useBackgroundColor(computed(() => {
