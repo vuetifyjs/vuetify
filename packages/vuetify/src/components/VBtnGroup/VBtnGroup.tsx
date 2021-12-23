@@ -12,8 +12,8 @@ import { makeVariantProps } from '@/composables/variant'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utility
-import { computed, reactive } from 'vue'
 import { defineComponent, useRender } from '@/util'
+import { toRef } from 'vue'
 
 export const VBtnGroup = defineComponent({
   name: 'VBtnGroup',
@@ -37,16 +37,14 @@ export const VBtnGroup = defineComponent({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
 
-    provideDefaults(reactive({
-      defaults: {
-        VBtn: {
-          height: 'auto',
-          color: computed(() => props.color),
-          flat: true,
-          variant: computed(() => props.variant),
-        },
+    provideDefaults({
+      VBtn: {
+        height: 'auto',
+        color: toRef(props, 'color'),
+        flat: true,
+        variant: toRef(props, 'variant'),
       },
-    }))
+    })
 
     useRender(() => {
       return (
