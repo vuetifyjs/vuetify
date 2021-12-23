@@ -4,6 +4,8 @@ import fs from 'fs/promises'
 import dts from 'rollup-plugin-dts'
 import alias from '@rollup/plugin-alias'
 
+import importMap from '../dist/json/importMap.json'
+
 const externalsPlugin = () => ({
   resolveId (source, importer) {
     if (importer && (source.endsWith('.sass') || source.endsWith('.scss'))) {
@@ -31,8 +33,15 @@ function createTypesConfig (input, output) {
       {
         async renderChunk (code) {
           if (input === 'framework.d.ts') {
-            const shims = await fs.readFile(path.resolve(__dirname, '../src/shims.d.ts'), { encoding: 'utf8' })
-            return code += '\n\n' + shims.replace(/^\s+\/\/ @skip-build\s+.*\n$/gm, '')
+            const components = Object.keys(importMap.components).map(name => (
+              `    ${name}: typeof import('vuetify/components')['${name}']`
+            )).join('\n')
+
+            const shims = (await fs.readFile(path.resolve(__dirname, '../src/shims.d.ts'), { encoding: 'utf8' }))
+              .replace(/^\s+\/\/ @skip-build\s+.*$/gm, '')
+              .replace(/^\s+\/\/ @generate-components$/gm, components)
+
+            return code += '\n\n' + shims
           }
           return null
         },

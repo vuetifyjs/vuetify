@@ -39,4 +39,8 @@ declare module '@vue/runtime-core' {
   export interface ComponentCustomProperties {
     $vuetify: Vuetify
   }
+
+  export interface GlobalComponents {
+    // @generate-components
+  }
 }
