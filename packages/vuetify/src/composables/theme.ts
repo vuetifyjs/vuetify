@@ -167,8 +167,9 @@ const parseThemeOptions = (options: ThemeOptions = defaultThemeOptions): Interna
 
   const themes = Object.entries(options.themes ?? {}).reduce((obj, [key, theme]) => {
     const defaultTheme = theme.dark ? defaultThemeOptions.themes?.dark : defaultThemeOptions.themes?.light
-    return { ...obj, [key]: mergeDeep(defaultTheme, theme) }
-  }, {})
+    obj[key] = mergeDeep(defaultTheme, theme)
+    return obj
+  }, {} as Record<string, ThemeDefinition>)
 
   return mergeDeep(
     defaultThemeOptions,
