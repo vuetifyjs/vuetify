@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, provide, ref } from 'vue'
+import { computed, inject, provide, ref, unref } from 'vue'
 import { mergeDeep } from '@/util'
 
 // Types
@@ -30,21 +30,25 @@ export function useDefaults () {
 export function provideDefaults (
   defaults?: MaybeRef<DefaultsInstance | undefined>,
   options?: {
-    reset?: Ref<number | string | undefined>
-    root?: Ref<boolean | undefined>
-    scoped?: Ref<boolean | undefined>
+    reset?: MaybeRef<number | string | undefined>
+    root?: MaybeRef<boolean | undefined>
+    scoped?: MaybeRef<boolean | undefined>
   }
 ) {
   const injectedDefaults = useDefaults()
   const providedDefaults = ref(defaults)
 
   const newDefaults = computed(() => {
+    const scoped = unref(options?.scoped)
+    const reset = unref(options?.reset)
+    const root = unref(options?.root)
+
     let properties = mergeDeep(providedDefaults.value, { prev: injectedDefaults.value })
 
-    if (options?.scoped) return properties
+    if (scoped) return properties
 
-    if (options?.reset || options?.root) {
-      const len = Number(options.reset ?? Infinity)
+    if (reset || root) {
+      const len = Number(reset || Infinity)
 
       for (let i = 0; i <= len; i++) {
         if (!properties.prev) break
