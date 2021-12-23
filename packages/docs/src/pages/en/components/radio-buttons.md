@@ -23,10 +23,7 @@ Although `v-radio` can be used on its own, it is best used in conjunction with `
 
 ## API
 
-- [v-radio](/api/v-radio)
-- [v-radio-group](/api/v-radio-group)
-
-<inline-api page="components/radio-buttons" />
+<api-inline />
 
 ## Examples
 

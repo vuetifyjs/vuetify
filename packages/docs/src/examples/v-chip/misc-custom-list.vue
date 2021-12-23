@@ -14,7 +14,7 @@
         icon
         @click="$refs.search.focus()"
       >
-        <v-icon>mdi-magnify</v-icon>
+        <v-icon icon="mdi-magnify"></v-icon>
       </v-btn>
     </v-toolbar>
 
@@ -35,7 +35,7 @@
           >
             <v-icon
               left
-              v-text="selection.icon"
+              :icon="selection.icon"
             ></v-icon>
             {{ selection.text }}
           </v-chip>
@@ -70,7 +70,7 @@
           <v-list-item-avatar>
             <v-icon
               :disabled="loading"
-              v-text="item.icon"
+              :icon="item.icon"
             ></v-icon>
           </v-list-item-avatar>
           <v-list-item-title v-text="item.text"></v-list-item-title>

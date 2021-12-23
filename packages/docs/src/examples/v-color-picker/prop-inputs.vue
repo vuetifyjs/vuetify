@@ -12,7 +12,7 @@
       class="ma-2"
       style="flex: 0 0 auto"
     >
-      <v-color-picker :mode.sync="mode"></v-color-picker>
+      <v-color-picker v-model:mode="mode"></v-color-picker>
       <v-select
         v-model="mode"
         :items="modes"

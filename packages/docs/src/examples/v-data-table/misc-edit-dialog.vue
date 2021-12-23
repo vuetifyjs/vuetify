@@ -6,7 +6,7 @@
     >
       <template v-slot:item.name="props">
         <v-edit-dialog
-          :return-value.sync="props.item.name"
+          v-model:return-value="props.item.name"
           @save="save"
           @cancel="cancel"
           @open="open"
@@ -26,7 +26,7 @@
       </template>
       <template v-slot:item.iron="props">
         <v-edit-dialog
-          :return-value.sync="props.item.iron"
+          v-model:return-value="props.item.iron"
           large
           persistent
           @save="save"

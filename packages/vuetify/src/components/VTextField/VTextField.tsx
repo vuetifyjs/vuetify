@@ -117,7 +117,8 @@ export const VTextField = defineComponent({
           role="textbox"
           { ...rootAttrs }
           { ...fieldProps }
-          v-slots={{
+        >
+          {{
             ...slots,
             default: ({
               isActive,
@@ -174,7 +175,7 @@ export const VTextField = defineComponent({
               </>
             ) : undefined,
           }}
-        />
+        </VField>
       )
     })
 

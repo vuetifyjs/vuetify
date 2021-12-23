@@ -1,13 +1,10 @@
 <template>
-  <v-container
-    class="px-0"
-    fluid
-  >
+  <div class="d-flex justify-center align-center">
     <v-checkbox
       v-model="checkbox"
-      :label="`Checkbox 1: ${checkbox.toString()}`"
+      :label="`Checkbox: ${checkbox.toString()}`"
     ></v-checkbox>
-  </v-container>
+  </div>
 </template>
 
 <script>

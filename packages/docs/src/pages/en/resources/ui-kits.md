@@ -13,6 +13,6 @@ related:
 
 Vuetify offers **free** UI kits that contain sets of pre-made components designed to get you started quickly. We currently have a UI kit for Figma and a kit for Adobe Xd. You can find the downloads for free in the Vuetify store.
 
-<vuetify-ui-kits />
+<!-- <vuetify-ui-kits /> -->
 
 <backmatter />

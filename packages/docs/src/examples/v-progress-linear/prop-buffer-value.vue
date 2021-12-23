@@ -49,7 +49,7 @@
       this.startBuffer()
     },
 
-    beforeDestroy () {
+    beforeUnmount () {
       clearInterval(this.interval)
     },
 

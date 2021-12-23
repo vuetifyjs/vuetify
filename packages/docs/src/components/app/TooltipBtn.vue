@@ -1,38 +1,36 @@
 <template>
   <span class="v-app-tooltip-btn d-inline-block">
-    <v-tooltip
-      bottom
-      content-class="v-app-tooltip-btn__content"
-      open-delay="200"
+    <v-btn
+      :aria-label="path"
+      icon
+      variant="text"
+      v-bind="$attrs"
     >
-      <template #activator="{ on }">
-        <v-btn
-          :aria-label="path"
-          icon
-          v-bind="$attrs"
-          v-on="{
-            ...on,
-            ...$listeners
-          }"
-        >
-          <slot
-            v-if="$slots.icon"
-            name="icon"
-          />
+      <slot
+        v-if="$slots.icon"
+        name="icon"
+      />
 
-          <v-icon
-            v-else
-            v-text="icon"
-          />
-        </v-btn>
-      </template>
+      <v-icon
+        v-else
+        :icon="icon"
+      />
 
-      <i18n :path="path" />
-    </v-tooltip>
+      <v-tooltip
+        anchor="bottom"
+        class="v-app-tooltip-btn__content"
+        open-delay="200"
+        activator="parent"
+      >
+        {{ t(path) }}
+      </v-tooltip>
+    </v-btn>
   </span>
 </template>
 
 <script>
+  import { useI18n } from 'vue-i18n'
+
   export default {
     name: 'AppTooltipBtn',
 
@@ -41,6 +39,12 @@
     props: {
       icon: String,
       path: String,
+    },
+
+    setup () {
+      const { t } = useI18n()
+
+      return { t }
     },
   }
 </script>

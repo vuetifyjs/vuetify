@@ -128,7 +128,8 @@ export const VFileInput = defineComponent({
           } }
           { ...rootAttrs }
           { ...fieldProps }
-          v-slots={{
+        >
+          {{
             ...slots,
             default: ({
               isActive,
@@ -185,7 +186,7 @@ export const VFileInput = defineComponent({
               </>
             ) : undefined,
           }}
-        />
+        </VField>
       )
     })
 

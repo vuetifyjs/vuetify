@@ -3,8 +3,6 @@ meta:
   title: Meet the team
   description: Meet the team responsible for building Vuetify. These are the core individuals who drive the vision of the framework.
   keywords: vuetify dev team, vuetify core team
-actions:
-  - team/fetch
 ---
 
 # Meet the team
@@ -17,7 +15,7 @@ While Vuetify (the framework) is [MIT Licensed](https://opensource.org/licenses/
 
 <promoted-ad slug="vuetify-github-sponsors" />
 
-<team-members team="company" />
+<page-component path="about/TeamMembers" team="company" />
 
 ## Core Team
 
@@ -25,6 +23,12 @@ The core development team are Open Source developers that help guide the directi
 
 <promoted-ad slug="vuetify-open-collective" />
 
-<team-members team="core" />
+<page-component path="about/TeamMembers" team="core" />
+
+## Contributors
+
+From updating docs to fixing bugs to adding new components, contributors actively work towards improving Vuetify.
+
+<page-component path="about/TeamMembers" team="contributors" />
 
 <backmatter />

@@ -1,24 +1,18 @@
-<script>
-  import Headline from './Headline'
+<template>
+  <app-headline color="grey" size="caption" weight="regular" :path="path" />
+</template>
 
-  export default {
+<script lang="ts">
+  import { defineComponent } from 'vue'
+
+  export default defineComponent({
     name: 'AppCaption',
 
-    extends: Headline,
-
     props: {
-      color: {
+      path: {
         type: String,
-        default: 'secondary',
-      },
-      size: {
-        type: String,
-        default: 'caption',
-      },
-      weight: {
-        type: String,
-        default: 'regular',
+        required: true,
       },
     },
-  }
+  })
 </script>

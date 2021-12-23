@@ -45,7 +45,7 @@
       dense
       color="teal"
       icon="mdi-clock-fast"
-      border="left"
+      border="start"
     >
       Vestibulum ullamcorper mauris at ligula. Nulla porta dolor. Vestibulum facilisis, purus nec pulvinar iaculis, ligula mi congue nunc, vitae euismod ligula urna in dolor. Curabitur at lacus ac velit ornare lobortis.
     </v-alert>

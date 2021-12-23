@@ -3,11 +3,10 @@ meta:
   title: Window component
   description: The window component is a wrapper container that allows transitioning between content. It serves as the baseline for tabs and carousels.
   keywords: windows, vuetify window component, vue window component
-  related:
+related:
     - /components/carousels
     - /components/steppers
     - /components/tabs
-
 ---
 
 # Windows
@@ -24,10 +23,7 @@ Designed to easily cycle through content, `v-window` provides a simple interface
 
 ## API
 
-- [v-window](/api/v-window)
-- [v-window-item](/api/v-window-item)
-
-<inline-api page="components/windows" />
+<api-inline />
 
 <!-- ## Sub-components
 

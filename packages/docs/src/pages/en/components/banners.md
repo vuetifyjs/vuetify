@@ -1,4 +1,5 @@
 ---
+nav: Banners
 meta:
   title: Banner component
   description: The banner component displays an important and concise message for a user to address. It can also indicate actions that the user can take.
@@ -23,9 +24,7 @@ Banners can contain one to two lines of text, to which actions and icons can be 
 
 ## API
 
-- [v-banner](/api/v-banner)
-
-<inline-api page="components/banners" />
+<api-inline />
 
 ## Examples
 

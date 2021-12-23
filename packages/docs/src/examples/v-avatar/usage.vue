@@ -5,7 +5,6 @@
   >
     <v-avatar
       v-bind="$attrs"
-      v-on="$listeners"
     >
       <span class="white--text">VJ</span>
     </v-avatar>

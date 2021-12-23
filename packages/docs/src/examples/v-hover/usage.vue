@@ -6,7 +6,6 @@
     <v-hover
       v-slot="{ hover, props }"
       v-bind="$attrs"
-      v-on="$listeners"
     >
       <v-card
         :elevation="hover ? 12 : 2"

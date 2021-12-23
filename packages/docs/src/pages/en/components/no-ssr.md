@@ -2,7 +2,7 @@
 meta:
   title: No SSR component
   description: The No SSR component is a simple component that doesn't get rendered on the server, but only on the client.
-  keyworks: nossr, vuetify no ssr component, vue no ssr component
+  keywords: nossr, vuetify no ssr component, vue no ssr component
 ---
 
 # No SSR

@@ -218,8 +218,8 @@ export const VRating = defineComponent({
             <div class="v-rating__wrapper">
               {
                 !hasLabels ? undefined
-                : slots['item-label'] ? slots['item-label']()
-                : props.itemLabels?.[i] ? <span>{ props.itemLabels?.[i] }</span>
+                : slots['item-label'] ? slots['item-label']({ value, index: i, label: props.itemLabels?.[i] })
+                : props.itemLabels?.[i] ? <span>{ props.itemLabels[i] }</span>
                 : <span>&nbsp;</span>
               }
               <div

@@ -6,6 +6,7 @@
       full-icon="mdi-circle"
       half-icon="mdi-circle-half"
       half-increments
+      hover
     ></v-rating>
   </div>
 </template>

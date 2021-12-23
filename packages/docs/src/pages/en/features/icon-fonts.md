@@ -4,9 +4,9 @@ meta:
   description: Vuetify supports Material Design Icons, Font awesome and other icon sets through prefixes and global options.
   keywords: vue icon component, iconfont, icon libraries, vuetify icons
 related:
-  - /components/icons/
-  - /components/buttons/
-  - /components/avatars/
+  - /components/icons
+  - /components/buttons
+  - /components/avatars
 ---
 
 # Icon Fonts
@@ -23,7 +23,7 @@ To change your font library, import one of the pre-defined icon sets or provide 
 // src/plugins/vuetify.js
 
 import { createVuetify } from 'vuetify'
-import { aliases, mdi } from 'vuetify/iconsets/mdi'
+import { aliases, mdi } from 'vuetify/lib/iconsets/mdi'
 
 export default createVuetify({
   icons: {
@@ -60,8 +60,8 @@ Out of the box, Vuetify supports the use of multiple *different* icon sets at th
 // src/plugins/vuetify.js
 
 import { createVuetify } from 'vuetify'
-import { aliases, fa } from 'vuetify/iconsets/fa'
-import { mdi } from 'vuetify/iconsets/mdi'
+import { aliases, fa } from 'vuetify/lib/iconsets/fa'
+import { mdi } from 'vuetify/lib/iconsets/mdi'
 
 export default createVuetify({
   icons: {
@@ -103,7 +103,7 @@ You are required to include the specified icon library (even when using the defa
 This is the default icon set used by Vuetify. It supports local installation with a build process or a CDN link. The following shows how to add the CDN link to your `index.html`:
 
 ```html
-<link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
 ```
 
 Or as a local dependency:
@@ -118,7 +118,7 @@ $ npm install @mdi/font -D
 // src/plugins/vuetify.js
 
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
-import { createVuetify } from 'vuetify'
+import { createVuetify } from 'vuetify/lib'
 
 export default createVuetify({
   icons: {
@@ -135,7 +135,7 @@ export default createVuetify({
 
 Use this tool to search for any Material Design Icons and copy them to your clipboard by clicking the item.
 
-<icon-list />
+<!-- <icon-list /> -->
 
 ### Material Design Icons - JS SVG
 
@@ -150,8 +150,8 @@ $ npm install @mdi/js -D
 ```js
 // src/plugins/vuetify.js
 
-import { createVuetify } from 'vuetify'
-import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
+import { createVuetify } from 'vuetify/lib'
+import { aliases, mdi } from 'vuetify/lib/iconsets/mdi-svg'
 
 export default createVuetify({
   icons: {
@@ -190,7 +190,16 @@ For projects without a build process, it is recommended to import the icons from
 <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
 ```
 
-Alternatively, it is possible to install locally using yarn or npm. Keep in mind that this is not an official google repository and may not receive updates
+Some Material Icons are missing by default. For example, `person` and `person_outline` are available, but `visibility_outline` isn't, while `visibility` is. To use the missing icons, replace the existing `<link>` with the following:
+
+```html
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+/>
+```
+
+Alternatively, it is possible to install locally using yarn or npm. Keep in mind that this is not an official google repository and may not contain all icons.
 
 ```bash
 $ yarn add material-design-icons-iconfont -D
@@ -202,8 +211,8 @@ $ npm install material-design-icons-iconfont -D
 // src/plugins/vuetify.js
 
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure your project is capable of handling css files
-import { createVuetify } from 'vuetify'
-import { aliases, md } from 'vuetify/iconsets/md'
+import { createVuetify } from 'vuetify/lib'
+import { aliases, md } from 'vuetify/lib/iconsets/md'
 
 export default createVuetify({
   icons: {
@@ -222,15 +231,6 @@ export default createVuetify({
 </template>
 ```
 
-Some Material Icons are missing by default. For example, `person` and `person_outline` are available, but `visibility_outline` isn't, while `visibility` is. To use the missing icons, replace the existing `<link>` with the following:
-
-```html
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-/>
-```
-
 ### Font Awesome 5 Icons
 
 The easiest way to get started with **FontAwesome** is to use a CDN.
@@ -239,7 +239,7 @@ The easiest way to get started with **FontAwesome** is to use a CDN.
 <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 ```
 
-To install locally you can pull in the [Free](https://fontawesome.com/) version of **FontAwesome** using your preferred package manager:
+To install locally you can pull in the [free](https://fontawesome.com/) version of **FontAwesome** using your preferred package manager:
 
 ```bash
 $ yarn add @fortawesome/fontawesome-free -D
@@ -252,7 +252,7 @@ $ npm install @fortawesome/fontawesome-free -D
 
 import '@fortawesome/fontawesome-free/css/all.css' // Ensure your project is capable of handling css files
 import { createVuetify } from 'vuetify'
-import { aliases, fa } from 'vuetify/iconsets/fa'
+import { aliases, fa } from 'vuetify/lib/iconsets/fa'
 
 export default createVuetify({
   icons: {
@@ -298,7 +298,7 @@ $ npm install font-awesome@4.7.0 -D
 
 import 'font-awesome/css/font-awesome.min.css' // Ensure your project is capable of handling css files
 import { createVuetify } from 'vuetify'
-import { aliases, fa } from 'vuetify/iconsets/fa4'
+import { aliases, fa } from 'vuetify/lib/iconsets/fa4'
 
 export default createVuetify({
   icons: {
@@ -334,7 +334,7 @@ Then register the global `font-awesome-icon` component and use the pre-defined `
 
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
-import { aliases, fa } from 'vuetify/iconsets/fa-svg'
+import { aliases, fa } from 'vuetify/lib/iconsets/fa-svg'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -369,11 +369,9 @@ app.mount('#app')
 
 ## Creating a custom icon set
 
-An icon set consists of an object with one property `component` which should be a functional component that receives props of type `IconsProps`.
+An icon set consists of an object with one property `component` which should be a functional component that receives props of type `IconsProps`, and renders an icon.
 
-In order to use a custom icon set as the framework default, you **must** add the necessary *aliases* that correspond to values used by Vuetify components.
-
-The following snippet is a complete list of all supported icon types:
+In order to use a custom set as the default icon set, you must also add the necessary *aliases* that correspond to values used by Vuetify components.
 
 ```ts
 // src/iconsets/custom.ts
@@ -446,8 +444,8 @@ If you are developing custom Vuetify components, you can extend the `aliases` ob
 ```js
 // src/plugins/vuetify.js
 
-import { createVuetify } from 'vuetify'
-import { aliases, mdi } from 'vuetify/iconsets/mdi'
+import { createVuetify } from 'vuetify/lib'
+import { aliases, mdi } from 'vuetify/lib/iconsets/mdi'
 
 export default createVuetify({
   icons: {

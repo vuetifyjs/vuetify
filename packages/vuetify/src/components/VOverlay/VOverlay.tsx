@@ -24,6 +24,7 @@ import {
   convertToUnit,
   genericComponent,
   getScrollParent,
+  IN_BROWSER,
   standardEasing,
   useRender,
 } from '@/util'
@@ -145,7 +146,7 @@ export const VOverlay = genericComponent<new () => {
       return isActive.value && isTop.value
     }
 
-    watch(isActive, val => {
+    IN_BROWSER && watch(isActive, val => {
       if (val) {
         window.addEventListener('keydown', onKeydown)
       } else {

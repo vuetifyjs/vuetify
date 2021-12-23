@@ -28,9 +28,10 @@ import {
 } from '@/util'
 
 // Types
-import type { MakeSlots } from '@/util'
-import type { PropType, Ref } from 'vue'
 import type { VInputSlot } from '@/components/VInput/VInput'
+import type { LoaderSlotProps } from '@/composables/loader'
+import type { PropType, Ref } from 'vue'
+import type { MakeSlots } from '@/util'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
 type Variant = typeof allowedVariants[number]
@@ -86,10 +87,7 @@ export const VField = genericComponent<new <T>() => {
     prepend: [DefaultInputSlot & VInputSlot]
     append: [DefaultInputSlot & VInputSlot]
     details: [DefaultInputSlot & VInputSlot]
-    loader: [{
-      color: string | undefined
-      isActive: boolean
-    }]
+    loader: [LoaderSlotProps]
     default: [VFieldSlot]
   }>
 }>()({
@@ -228,7 +226,8 @@ export const VField = genericComponent<new <T>() => {
           { ...inputProps }
           focused={ isFocused.value }
           { ...attrs }
-          v-slots={{
+        >
+          {{
             prepend: slots.prepend ? props => slots.prepend?.({ ...props, ...slotProps.value }) : undefined,
             append: slots.append ? props => slots.append?.({ ...props, ...slotProps.value }) : undefined,
             details: slots.details ? props => slots.details?.({ ...props, ...slotProps.value }) : undefined,
@@ -342,7 +341,7 @@ export const VField = genericComponent<new <T>() => {
               </div>
             ),
           }}
-        />
+        </VInput>
       )
     })
 

@@ -3,8 +3,8 @@
     <v-btn
       :disabled="dialog"
       :loading="dialog"
-      class="white--text"
-      color="purple darken-2"
+      class="text-white"
+      color="purple-darken-2"
       @click="dialog = true"
     >
       Start loading
@@ -13,11 +13,9 @@
       v-model="dialog"
       hide-overlay
       persistent
-      width="300"
     >
       <v-card
         color="primary"
-        dark
       >
         <v-card-text>
           Please stand by

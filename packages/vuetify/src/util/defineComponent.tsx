@@ -21,6 +21,7 @@ import type {
   EmitsOptions,
   MethodOptions,
   VNode,
+  VNodeChild,
 } from 'vue'
 
 function propIsDefined (vnode: VNode, prop: string) {
@@ -68,7 +69,8 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
 }) as unknown as typeof _defineComponent
 
 type ToListeners<T extends string | number | symbol> = { [K in T]: K extends `on${infer U}` ? Uncapitalize<U> : K }[T]
-type SlotsToProps<T extends Record<string, Slot>> = {
+export type SlotsToProps<T extends Record<string, Slot>> = {
+  $children: () => (T['default'] | VNodeChild | { [K in keyof T]?: T[K] | VNodeChild })
   'v-slots': new () => { [K in keyof T]?: T[K] | false }
 }/* & { // TODO: individual slots are never converted from the constructor type
   [K in keyof T as `v-slot:${K & string}`]?: new () => (T[K] | false)

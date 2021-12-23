@@ -2,8 +2,8 @@
   <v-container fluid>
     <v-combobox
       v-model="model"
+      v-model:search-input="search"
       :items="items"
-      :search-input.sync="search"
       hide-selected
       hint="Maximum of 5 tags"
       label="Add some tags"

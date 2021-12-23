@@ -25,9 +25,7 @@ A sparkline is a tiny chart that provides a visual representation of data. The s
 
 ## API
 
-- [v-sparkline](/api/v-sparkline)
-
-<inline-api page="components/sparklines" />
+<api-inline />
 
 ## Examples
 

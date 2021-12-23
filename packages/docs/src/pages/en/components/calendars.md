@@ -3,7 +3,7 @@ meta:
   title: Calendar component
   description: The calendar component is a clean and simple adaptation to the popular Google Calendar application.
   keywords: calendars, vuetify calendar component, vue calendar component
-  related:
+related:
   - /components/date-pickers
   - /components/time-pickers
   - /components/cards
@@ -23,12 +23,7 @@ A calendar has a type and a value which determines what type of calendar is show
 
 ## API
 
-- [v-calendar](/api/v-calendar)
-- [v-calendar-daily](/api/v-calendar-daily)
-- [v-calendar-monthly](/api/v-calendar-monthly)
-- [v-calendar-weekly](/api/v-calendar-weekly)
-
-<inline-api page="components/calendars" />
+<api-inline />
 
 <!-- ## Sub-components
 

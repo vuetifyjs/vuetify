@@ -14,8 +14,8 @@
     "dev": "node scripts/dev.js",
     "build": "node scripts/build.js",
     "start": "lerna run start --scope vuetifyjs.com --stream",
-    "lint": "lerna run lint --parallel --stream --scope vuetify",
-    "lint:fix": "lerna run lint:fix --parallel --scope vuetify",
+    "lint": "lerna run lint --parallel --stream",
+    "lint:fix": "lerna run lint:fix --parallel",
     "version": "node scripts/confirm-npm-tag.js",
     "prepare": "node scripts/post-install.js",
     "postversion": "node scripts/post-release-merge.js",
@@ -68,13 +68,14 @@
     "semver": "^6.2.0",
     "shelljs": "^0.8.4",
     "typescript": "^4.4.4",
+    "vite-plugin-inspect": "^0.3.11",
     "vue": "^3.2.22",
     "vue-analytics": "^5.16.1",
     "vue-meta": "^2.4.0",
+    "vue-router": "^4.0.12",
     "vuex": "^3.0.1"
   },
   "resolutions": {
-    "workbox-webpack-plugin": "^5.1.3",
     "@vue/test-utils": "2.0.0-rc.9"
   }
 }

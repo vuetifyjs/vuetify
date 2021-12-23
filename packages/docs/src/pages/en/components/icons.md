@@ -1,4 +1,5 @@
 ---
+nav: Icons
 meta:
   title: Icon component
   description: The icon component is compatible with multiple common icon fonts such as Material Design Icons, Font Awesome and more.
@@ -26,9 +27,7 @@ Icons come in two themes (light and dark), and five different sizes (x-small, sm
 
 ## API
 
-- [v-icon](/api/v-icon)
-
-<inline-api page="components/icons" />
+<api-inline />
 
 ## Examples
 

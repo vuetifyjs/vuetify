@@ -1,4 +1,5 @@
 ---
+nav: Lazy
 meta:
   title: Lazy component
   description: The lazy component allows you to dynamically render content based upon the user's viewport.
@@ -23,9 +24,7 @@ The `v-lazy` component by default will not render its contents until it has been
 
 ## API
 
-- [v-lazy](/api/v-lazy)
-
-<inline-api page="components/lazy" />
+<api-inline />
 
 ## Caveats
 

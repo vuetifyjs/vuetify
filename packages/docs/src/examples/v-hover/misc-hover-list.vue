@@ -5,9 +5,8 @@
       align="center"
       justify="center"
     >
-      <template v-for="(item, i) in items">
+      <template v-for="(item, i) in items" :key="i">
         <v-col
-          :key="i"
           cols="12"
           md="4"
         >
