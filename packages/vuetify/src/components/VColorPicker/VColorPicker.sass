@@ -1,22 +1,26 @@
-@import './_variables.scss'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
-+theme(v-color-picker) using ($material)
-  .v-color-picker__input input
-    border: thin solid map-get($material, 'dividers')
-    color: map-deep-get($material, 'text', 'primary')
+// +theme(v-color-picker) using ($material)
+//   .v-color-picker__input input
+//     border: thin solid map-get($material, 'dividers')
+//     color: map-deep-get($material, 'text', 'primary')
 
-  span
-    color: map-deep-get($material, 'text', 'secondary')
+//   span
+//     color: map-deep-get($material, 'text', 'secondary')
 
-  .v-color-picker__dot, .v-color-picker__color
-    background-color: map-deep-get($material, 'color-picker', 'checkerboard')
+//   .v-color-picker__dot, .v-color-picker__color
+//     background-color: map-deep-get($material, 'color-picker', 'checkerboard')
 
 // Block
 .v-color-picker
   align-self: flex-start
-  border-radius: $color-picker-border-radius
   contain: content
-  +elevation(2)
+
+  &.v-sheet
+    +tools.elevation($color-picker-elevation)
+    +tools.rounded($color-picker-border-radius)
 
 // Element
 .v-color-picker__controls
@@ -26,7 +30,7 @@
 
 // Modifier
 .v-color-picker--flat
-  +elevation(0)
+  +tools.elevation(0)
 
   .v-color-picker__track:not(.v-input--is-disabled) .v-slider__thumb // High specifity
-    +elevation(0)
+    +tools.elevation(0)

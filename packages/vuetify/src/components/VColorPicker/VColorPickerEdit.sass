@@ -1,10 +1,11 @@
-@import './_variables.scss'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
-.v-color-picker__edit
-  margin-top: $color-picker-edit-margin-top
+.v-color-picker-edit
   display: flex
 
-.v-color-picker__input
+.v-color-picker-edit__input
   width: 100%
   display: flex
   flex-wrap: wrap
@@ -12,10 +13,10 @@
   text-align: center
 
   &:not(:last-child)
-    +ltr()
+    +tools.ltr()
       margin-right: $color-picker-input-margin
 
-    +rtl()
+    +tools.rtl()
       margin-left: $color-picker-input-margin
 
   input
@@ -26,6 +27,8 @@
     text-align: center
     width: 100%
     height: $color-picker-input-height
+    background: rgba(var(--v-theme-surface-variant), .2)
+    color: rgba(var(--v-theme-on-surface))
 
   span
     font-size: $color-picker-input-font-size
