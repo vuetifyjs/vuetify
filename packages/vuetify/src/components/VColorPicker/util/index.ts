@@ -89,6 +89,8 @@ export function hasAlpha (color: any) {
   return false
 }
 
+export const nullColor = { h: 0, s: 0, v: 1, a: 1 }
+
 export type ColorPickerMode = {
   inputProps: Record<string, unknown>
   inputs: {

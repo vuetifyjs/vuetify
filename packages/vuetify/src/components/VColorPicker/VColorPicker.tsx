@@ -17,7 +17,7 @@ import { makeThemeProps } from '@/composables/theme'
 // Utilities
 import { onMounted, ref } from 'vue'
 import { defineComponent, HSVAtoCSS } from '@/util'
-import { extractColor, modes, parseColor } from './util'
+import { extractColor, modes, nullColor, parseColor } from './util'
 
 // Types
 import type { PropType } from 'vue'
@@ -119,7 +119,7 @@ export const VColorPicker = defineComponent({
           'v-color-picker',
         ]}
         style={{
-          '--v-color-picker-color-hsv': HSVAtoCSS({ ...(currentColor.value ?? { h: 0, s: 0, v: 1, a: 1 }), a: 1 }),
+          '--v-color-picker-color-hsv': HSVAtoCSS({ ...(currentColor.value ?? nullColor), a: 1 }),
         }}
         maxWidth={ props.width }
       >
