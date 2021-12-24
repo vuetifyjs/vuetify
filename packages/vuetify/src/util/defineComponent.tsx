@@ -70,13 +70,13 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
 
 type ToListeners<T extends string | number | symbol> = { [K in T]: K extends `on${infer U}` ? Uncapitalize<U> : K }[T]
 export type SlotsToProps<T extends Record<string, Slot>> = {
-  $children: () => (T['default'] | VNodeChild | { [K in keyof T]?: T[K] | VNodeChild })
+  $children: () => (T['default'] | VNodeChild | { [K in keyof T]?: T[K] })
   'v-slots': new () => { [K in keyof T]?: T[K] | false }
 }/* & { // TODO: individual slots are never converted from the constructor type
   [K in keyof T as `v-slot:${K & string}`]?: new () => (T[K] | false)
 } */
 
-type Slot<T extends any[] = any[]> = (...args: T) => VNode | VNode[] | undefined
+type Slot<T extends any[] = any[]> = (...args: T) => VNodeChild
 export type MakeSlots<T extends Record<string, any[]>> = {
   [K in keyof T]?: Slot<T[K]>
 }

@@ -103,7 +103,7 @@ export const VTooltip = genericComponent<new () => {
         >
           {{
             activator: slots.activator,
-            default: slots.default?.() ?? props.text,
+            default: (...args) => slots.default?.(...args) ?? props.text,
           }}
         </VOverlay>
       )
