@@ -117,8 +117,8 @@ export const useVirtual = (props: { height?: string | number, itemHeight: string
   }
 }
 
-export const VVirtualDataTable = defineComponent({
-  name: 'VVirtualDataTable',
+export const VDataTableVirtualGrid = defineComponent({
+  name: 'VDataTableVirtualGrid',
 
   props: {
     headers: {

@@ -1,7 +1,7 @@
 import { VTable } from '@/components'
 import { convertToUnit, defineComponent } from '@/util'
-import { computed, toRef } from 'vue'
-import { createExpanded, useExpanded, useHeaders, useVirtual } from '../composables'
+import { computed, provide, toRef } from 'vue'
+import { createExpanded, useGroupBy, useHeaders, useVirtual } from '../composables'
 import { makeVDataTableProps } from './VDataTable'
 import { VDataTableVirtualHeaders } from './VDataTableVirtualHeaders'
 import { VDataTableVirtualRows } from './VDataTableVirtualRows'
@@ -27,6 +27,8 @@ export const VDataTableVirtual = defineComponent({
 
     const { expanded } = createExpanded()
 
+    const { items, toggleGroup, numGroups, numHiddenItems } = useGroupBy(toRef(props, 'items'), toRef(props, 'groupBy'))
+
     const {
       containerRef,
       startIndex,
@@ -35,10 +37,14 @@ export const VDataTableVirtual = defineComponent({
       itemHeight,
       afterHeight,
       beforeHeight,
-    } = useVirtual(props, computed(() => props.itemsLength + expanded.value.size))
+    } = useVirtual(props, computed(() => props.itemsLength + expanded.value.size + numGroups.value - numHiddenItems.value))
 
-    const items = computed(() => {
-      return props.items.slice(startIndex.value, stopIndex.value)
+    const visibleItems = computed(() => {
+      return items.value.slice(startIndex.value, stopIndex.value)
+    })
+
+    provide('v-data-table', {
+      toggleGroup,
     })
 
     return () => (
@@ -64,7 +70,7 @@ export const VDataTableVirtual = defineComponent({
                 <tbody>
                   <VDataTableVirtualRows
                     columns={ columns.value }
-                    items={ items.value }
+                    items={ visibleItems.value }
                     rowHeight={ itemHeight.value }
                     before={ beforeHeight.value }
                     after={ afterHeight.value }

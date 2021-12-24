@@ -1,8 +1,9 @@
 import { getCurrentInstance, getObjectValueByPath } from '@/util'
-import { computed, inject, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
+import { computed, inject, onBeforeMount, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
 
 import type { InjectionKey, Ref } from 'vue'
 import type { DataTableHeader } from './types'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 export const useVirtual = (props: { height?: string | number, itemHeight: string | number }, itemsLength: Ref<number>) => {
   const vm = getCurrentInstance('useVirtual')
@@ -233,21 +234,18 @@ function sortItems<T extends any, K extends keyof T> (
   })
 }
 
-export const useSort = (items: Ref<any[]>, sortBy: Ref<{ key: string, order: string }[] | undefined>, mustSort: Ref<boolean>) => {
-  const sortedItems = computed(() => {
-    if (!sortBy.value?.length) return items.value
-
-    return sortItems(items.value, sortBy.value, 'en')
-  })
+export const useSort = (props: { sortBy?: { key: string, order: string }[], mustSort?: boolean, multiSort?: boolean }) => {
+  const sortBy = useProxiedModel(props, 'sortBy')
 
   const toggleSort = (key: string) => {
     let newSortBy = sortBy.value?.map(x => ({ ...x })) ?? []
     const item = newSortBy.find(x => x.key === key)
 
     if (!item) {
-      newSortBy = [...newSortBy, { key, order: 'asc' }]
+      if (props.multiSort) newSortBy = [...newSortBy, { key, order: 'asc' }]
+      else newSortBy = [{ key, order: 'asc' }]
     } else if (item.order === 'desc') {
-      if (mustSort.value) {
+      if (props.mustSort) {
         item.order = 'asc'
       } else {
         newSortBy = newSortBy.filter(x => x.key !== key)
@@ -259,7 +257,17 @@ export const useSort = (items: Ref<any[]>, sortBy: Ref<{ key: string, order: str
     sortBy.value = newSortBy
   }
 
-  return { items: sortedItems, toggleSort }
+  return { sortBy, toggleSort }
+}
+
+export const useSortedItems = (items: Ref<any[]>, sortBy: Ref<{ key: string, order: string }[]>) => {
+  const sortedItems = computed(() => {
+    if (!sortBy.value?.length) return items.value
+
+    return sortItems(items.value, sortBy.value, 'en')
+  })
+
+  return { sortedItems }
 }
 
 export const usePagination = (items: Ref<any[]>, itemsPerPage: Ref<number>, page: Ref<number>) => {
@@ -273,6 +281,20 @@ export const usePagination = (items: Ref<any[]>, itemsPerPage: Ref<number>, page
   })
 
   return { items: paginatedItems }
+}
+
+export const useOptions = (page: Ref<number>, itemsPerPage: Ref<number>, sortBy: Ref<any[]>) => {
+  const vm = getCurrentInstance('VDataTable')
+
+  const options = computed(() => ({
+    page: page.value,
+    itemsPerPage: itemsPerPage.value,
+    sortBy: sortBy.value,
+  }))
+
+  watch(options, () => {
+    vm.emit('update:options', options.value)
+  }, { deep: true })
 }
 
 export const useGroupBy = (items: Ref<any[]>, groupBy: Ref<string | undefined>) => {
@@ -312,5 +334,18 @@ export const useGroupBy = (items: Ref<any[]>, groupBy: Ref<string | undefined>) 
     else groupByOpen.value.delete(group)
   }
 
-  return { items: flatItems, groupedItems, toggleGroup }
+  onBeforeMount(() => {
+    for (const key of groupedItems.value.keys()) {
+      groupByOpen.value.add(key)
+    }
+  })
+
+  const numGroups = computed(() => [...groupedItems.value.keys()].length)
+  const numHiddenItems = computed(() => {
+    const hiddenGroups = [...groupedItems.value.keys()].filter(g => !groupByOpen.value.has(g))
+
+    return hiddenGroups.reduce((curr, group) => curr + groupedItems.value.get(group)!.length, 0)
+  })
+
+  return { items: flatItems, groupedItems, toggleGroup, numGroups, numHiddenItems }
 }

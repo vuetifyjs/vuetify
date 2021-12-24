@@ -1,6 +1,7 @@
-import { convertToUnit, defineComponent, isCssColor } from '@/util'
+import { convertToUnit, defineComponent } from '@/util'
 
 import type { PropType } from 'vue'
+import { inject } from 'vue'
 import { useExpanded } from '../composables'
 
 export const VDataTableVirtualRows = defineComponent({
@@ -27,6 +28,7 @@ export const VDataTableVirtualRows = defineComponent({
   },
 
   setup (props, { slots }) {
+    const { toggleGroup } = inject('v-data-table', { toggleGroup: (key: string) => {} })
     const { expanded, expand } = useExpanded()
 
     return () => {
@@ -48,7 +50,37 @@ export const VDataTableVirtualRows = defineComponent({
                 </tr>
               ) : undefined}
             </>
-          )) : props.items.map(item => (
+          )) : props.items.map(item => item.$type === 'group-header' ? (
+            <tr
+              class="v-data-table-regular__tr"
+              role="row"
+              key={ `group-header_${item.groupBy}_${item.groupByValue}` }
+            >
+              <td
+                class={[
+                  'v-data-table-regular__td',
+                  'v-data-table-regular__td--group-header',
+                  {
+                    'v-data-table-regular__td--fixed': props.columns.some(c => c.fixed),
+                  },
+                ]}
+                style={{
+                  left: props.columns.some(c => c.fixed) ? convertToUnit(0) : undefined,
+                }}
+                colspan={ 1 }
+                onClick={ () => toggleGroup(item.groupByValue) }
+              >
+                { item.groupByValue }
+              </td>
+              <td
+                class={[
+                  'v-data-table-regular__td',
+                  'v-data-table-regular__td--group-header',
+                ]}
+                colspan={ props.columns.length - 1 }
+              />
+            </tr>
+          ) : (
             <>
               <tr
                 class="v-data-table-regular__tr"

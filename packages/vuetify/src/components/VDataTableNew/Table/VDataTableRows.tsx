@@ -1,8 +1,7 @@
-import { convertToUnit, createRange, defineComponent } from '@/util'
+import { convertToUnit, defineComponent } from '@/util'
 
-import { inject, PropType } from 'vue'
-import type { Column } from './Grid/VDataTableGrid'
-import { useExpanded, VDataTableExpandedKey } from './Grid/VDataTableGrid'
+import type { PropType } from 'vue'
+import { inject } from 'vue'
 
 export const VDataTableRows = defineComponent({
   name: 'VDataTableRows',
