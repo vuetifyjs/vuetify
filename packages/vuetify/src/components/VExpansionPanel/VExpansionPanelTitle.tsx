@@ -35,47 +35,42 @@ export const VExpansionPanelTitle = defineComponent({
   directives: { ripple },
 
   props: {
+    open: Boolean,
+    disabled: Boolean,
     ...makeVExpansionPanelTitleProps(),
   },
 
-  setup (props, { slots }) {
-    const expansionPanel = inject(VExpansionPanelSymbol)
+  emits: {
+    'update:open': (open: boolean) => true,
+  },
 
-    if (!expansionPanel) throw new Error('[Vuetify] v-expansion-panel-title needs to be placed inside v-expansion-panel')
-
+  setup (props, { slots, emit }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
-
-    const slotProps = computed(() => ({
-      expanded: expansionPanel.isSelected.value,
-      disabled: expansionPanel.disabled.value,
-      expandIcon: props.expandIcon,
-      collapseIcon: props.collapseIcon,
-    }))
 
     return () => (
       <button
         class={[
           'v-expansion-panel-title',
           {
-            'v-expansion-panel-title--active': expansionPanel.isSelected.value,
+            'v-expansion-panel-title--active': props.open,
           },
           backgroundColorClasses.value,
         ]}
         style={ backgroundColorStyles.value }
         type="button"
-        tabindex={ expansionPanel.disabled.value ? -1 : undefined }
-        disabled={ expansionPanel.disabled.value }
-        aria-expanded={ expansionPanel.isSelected.value }
-        onClick={ expansionPanel.toggle }
+        tabindex={ props.disabled ? -1 : undefined }
+        disabled={ props.disabled }
+        aria-expanded={ props.open }
+        onClick={ () => emit('update:open', !props.open) }
         v-ripple={ props.ripple }
       >
         <div class="v-expansion-panel-title__overlay" />
-        { slots.default?.(slotProps.value) }
+        { slots.default?.() }
         { !props.hideActions && (
           <div class="v-expansion-panel-title__icon">
             {
-              slots.actions ? slots.actions(slotProps.value)
-              : <VIcon icon={ expansionPanel.isSelected.value ? props.collapseIcon : props.expandIcon } />
+              slots.actions ? slots.actions()
+              : <VIcon icon={ props.open ? props.collapseIcon : props.expandIcon } />
             }
           </div>
         ) }

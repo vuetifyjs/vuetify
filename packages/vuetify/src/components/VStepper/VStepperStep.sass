@@ -1,0 +1,34 @@
+@forward './variables'
+@use 'sass:math'
+@use 'sass:map'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+.v-stepper-step
+  text-transform: none
+  height: 100%
+
+  &--vertical
+    padding: 24px !important
+    justify-content: flex-start
+
+  &--horizontal
+    padding: 12px !important
+
+  &--stacked-labels
+    .v-stepper-step__content
+      margin-left: 0
+      margin-top: 8px
+      align-items: center
+
+.v-stepper-step__content
+  margin-inline-start: 8px
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+
+.v-stepper-step__subtitle
+  font-size: $stepper-label-small-font-size
+  font-weight: $stepper-label-small-font-weight
+  text-shadow: none

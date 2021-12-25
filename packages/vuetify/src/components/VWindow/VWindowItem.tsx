@@ -20,11 +20,11 @@ export const VWindowItem = defineComponent({
 
   props: {
     reverseTransition: {
-      type: [Boolean, String],
+      type: [Boolean, String, Object],
       default: undefined,
     },
     transition: {
-      type: [Boolean, String],
+      type: [Boolean, String, Object],
       default: undefined,
     },
     ...makeLazyProps(),
@@ -98,8 +98,11 @@ export const VWindowItem = defineComponent({
         ? props.reverseTransition
         : props.transition
 
+      const isComponentTransition = typeof name === 'object'
+
       return !hasTransition.value ? false : {
-        name: typeof name !== 'string' ? window.transition.value : name,
+        name: name && typeof name !== 'boolean' && !isComponentTransition ? name : window.transition.value,
+        component: isComponentTransition ? name : undefined,
         onBeforeEnter: onBeforeTransition,
         onAfterEnter: onAfterTransition,
         onEnterCancelled: onTransitionCancelled,

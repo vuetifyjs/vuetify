@@ -224,7 +224,7 @@ export const VWindow = defineComponent({
             height: transitionHeight.value,
           }}
         >
-          { slots.default?.() }
+          { slots.default?.({ prev, next }) }
 
           { props.showArrows !== false && (
             <div class="v-window__controls">

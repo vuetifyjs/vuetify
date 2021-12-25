@@ -78,6 +78,7 @@ export const VBtn = defineComponent({
 
     return () => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
+      const hasPrepend = !props.icon && (props.prependIcon || slots.prepend)
 
       return (
         <Tag
@@ -120,13 +121,13 @@ export const VBtn = defineComponent({
         >
           { genOverlays(true, 'v-btn') }
 
-          { !props.icon && props.prependIcon && (
+          { hasPrepend && (slots.prepend ? slots.prepend() : (
             <VIcon
               class="v-btn__icon"
               icon={ props.prependIcon }
               left={ !props.stacked }
             />
-          ) }
+          )) }
 
           { typeof props.icon === 'boolean'
             ? slots.default?.()

@@ -1,0 +1,30 @@
+@forward './variables'
+@use 'sass:math'
+@use 'sass:map'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+.v-stepper-line--vertical
+  position: relative
+  width: 36px
+  flex-shrink: 0
+
+  > div
+    height: calc(100% + 24px)
+    border-left: 1px solid rgba(0, 0, 0, var(--v-border-opacity))
+    position: absolute
+    margin-inline-start: 35px
+
+    transform: translateY(calc(-12px - 2px))
+
+.v-stepper-line--horizontal
+  width: 100%
+  position: relative
+
+  div
+    height: calc(100% + 8px)
+    border-bottom: 1px solid rgba(0, 0, 0, var(--v-border-opacity))
+    transform: translateY(-50%)
+    margin-inline-start: -8px
+    margin-inline-end: -8px

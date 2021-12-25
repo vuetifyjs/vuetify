@@ -6,27 +6,24 @@ import { VExpansionPanelSymbol } from './VExpansionPanels'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
 
 // Utilities
-import { inject } from 'vue'
+import { inject, toRef } from 'vue'
 import { defineComponent } from '@/util'
 
 export const VExpansionPanelText = defineComponent({
   name: 'VExpansionPanelText',
 
   props: {
+    open: Boolean,
     ...makeLazyProps(),
   },
 
   setup (props, { slots }) {
-    const expansionPanel = inject(VExpansionPanelSymbol)
-
-    if (!expansionPanel) throw new Error('[Vuetify] v-expansion-panel-text needs to be placed inside v-expansion-panel')
-
-    const { hasContent, onAfterLeave } = useLazy(props, expansionPanel.isSelected)
+    const { hasContent, onAfterLeave } = useLazy(props, toRef(props, 'open'))
 
     return () => (
       <VExpandTransition onAfterLeave={ onAfterLeave }>
         <div
-          v-show={ expansionPanel.isSelected.value }
+          v-show={ props.open }
           class={[
             'v-expansion-panel-text',
           ]}

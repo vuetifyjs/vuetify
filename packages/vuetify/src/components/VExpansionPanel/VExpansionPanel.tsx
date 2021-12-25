@@ -12,7 +12,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeLazyProps } from '@/composables/lazy'
 
 // Utilities
-import { computed, provide } from 'vue'
+import { computed, inject, provide } from 'vue'
 import { defineComponent } from '@/util'
 
 export const VExpansionPanel = defineComponent({
@@ -52,6 +52,16 @@ export const VExpansionPanel = defineComponent({
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'bgColor')
 
+    const slotProps = computed(() => ({
+      open: groupItem.isSelected.value,
+      disabled: groupItem.disabled.value,
+      expandIcon: props.expandIcon,
+      collapseIcon: props.collapseIcon,
+      toggle: groupItem.toggle,
+      eager: props.eager,
+      color: props.color,
+    }))
+
     return () => (
       <props.tag
         class={[
@@ -74,7 +84,7 @@ export const VExpansionPanel = defineComponent({
             ...elevationClasses.value,
           ]}
         />
-        { slots.default?.() || (
+        { slots.default?.(slotProps.value) ?? (
           <>
             <VExpansionPanelTitle
               expandIcon={ props.expandIcon }
@@ -82,6 +92,9 @@ export const VExpansionPanel = defineComponent({
               color={ props.color }
               hideActions={ props.hideActions }
               ripple={ props.ripple }
+              disabled={ groupItem.disabled.value }
+              open={ groupItem.isSelected.value }
+              onUpdate:open={ groupItem.toggle }
             >
               { slots.title ? slots.title() : props.title }
             </VExpansionPanelTitle>
