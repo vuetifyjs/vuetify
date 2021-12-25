@@ -47,11 +47,17 @@
         </template>
 
         <v-list>
-          <v-list-item
-            v-for="(item, i) in items"
-            :key="i"
-          >
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item>
+            <v-list-item-title>Click Me 1</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>Click Me 2</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>Click Me 3</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>Click Me 4</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -73,16 +79,3 @@
     </v-sheet>
   </v-card>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-      items: [
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me 2' },
-      ],
-    }),
-  }
-</script>
