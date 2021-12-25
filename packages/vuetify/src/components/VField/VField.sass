@@ -348,10 +348,10 @@
   &.v-field--has-background .v-field__overlay
     opacity: 0
 
-  .v-field__control:hover .v-field__overlay
+  &:hover .v-field__overlay
     opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
 
-  &.v-field.v-field--focused .v-field__overlay
+  &.v-field--focused .v-field__overlay
     opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
 
 /* endregion */
