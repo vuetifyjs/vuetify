@@ -10,7 +10,7 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 import { genericComponent, getUid, pick, propsFactory } from '@/util'
 
 // Types
@@ -20,6 +20,7 @@ import type { MakeSlots } from '@/util'
 export interface VInputSlot {
   id: ComputedRef<string>
   isDisabled: ComputedRef<boolean>
+  isFocused: Ref<boolean>
   isReadonly: ComputedRef<boolean>
   isPristine: Ref<boolean>
   isValid: ComputedRef<boolean | null>
@@ -88,10 +89,12 @@ export const VInput = genericComponent<new <T>() => {
 
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
+    const isFocused = toRef(props, 'focused')
 
     const slotProps = computed<VInputSlot>(() => ({
       id,
       isDisabled,
+      isFocused,
       isReadonly,
       isPristine,
       isValid,

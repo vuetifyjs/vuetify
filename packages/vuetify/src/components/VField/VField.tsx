@@ -38,7 +38,6 @@ type Variant = typeof allowedVariants[number]
 export interface DefaultInputSlot {
   isActive: boolean
   isFocused: boolean
-  inputRef: Ref<HTMLInputElement | undefined>
   controlRef: Ref<HTMLElement | undefined>
   focus: () => void
   blur: () => void
@@ -78,13 +77,10 @@ export const VField = genericComponent<new <T>() => {
     'onUpdate:modelValue'?: (val: T) => any
   }
   $slots: MakeSlots<{
-    prependInner: [DefaultInputSlot & VInputSlot]
     clear: []
+    prependInner: [DefaultInputSlot & VInputSlot]
     appendInner: [DefaultInputSlot & VInputSlot]
     label: [DefaultInputSlot & VInputSlot]
-    prepend: [DefaultInputSlot & VInputSlot]
-    append: [DefaultInputSlot & VInputSlot]
-    details: [DefaultInputSlot & VInputSlot]
     loader: [LoaderSlotProps]
     default: [VFieldSlot]
   }>
@@ -121,7 +117,6 @@ export const VField = genericComponent<new <T>() => {
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()
     const controlRef = ref<HTMLElement>()
-    const inputRef = ref<HTMLInputElement>()
     const id = computed(() => props.id || `input-${uid}`)
     const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
 
@@ -175,7 +170,6 @@ export const VField = genericComponent<new <T>() => {
     const slotProps = computed<DefaultInputSlot>(() => ({
       isActive: isActive.value,
       isFocused: isFocused.value,
-      inputRef,
       controlRef,
       blur,
       focus,
@@ -233,7 +227,7 @@ export const VField = genericComponent<new <T>() => {
           <LoaderSlot
             name="v-field"
             active={ props.loading }
-            // color={ !defaultProps.isValid.value ? undefined : props.color }
+            // TODO color={ !defaultProps.isValid.value ? undefined : props.color }
             v-slots={{ default: slots.loader }}
           />
 
@@ -246,7 +240,7 @@ export const VField = genericComponent<new <T>() => {
                 <VIcon icon={ props.prependInnerIcon } />
               ) }
 
-              {/* { slots?.prependInner?.(defaultProps) } */}
+              { slots?.prependInner?.(/* TODO */) }
             </div>
           ) }
 
@@ -263,7 +257,7 @@ export const VField = genericComponent<new <T>() => {
 
             { slots.default?.({
               ...slotProps.value,
-              // ...defaultProps,
+              // TODO ...defaultProps,
               props: {
                 id: id.value,
                 class: 'v-field__input',
@@ -295,7 +289,7 @@ export const VField = genericComponent<new <T>() => {
               class="v-field__append-inner"
               onClick={ e => emit('click:append-inner', e) }
             >
-              {/* { slots?.appendInner?.(defaultProps) } */}
+              { slots?.appendInner?.(/* TODO */) }
 
               { props.appendInnerIcon && (
                 <VIcon icon={ props.appendInnerIcon } />
@@ -331,7 +325,6 @@ export const VField = genericComponent<new <T>() => {
     })
 
     return {
-      inputRef,
       controlRef,
     }
   },

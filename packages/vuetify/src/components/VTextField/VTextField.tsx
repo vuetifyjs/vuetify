@@ -84,12 +84,19 @@ export const VTextField = defineComponent({
       (entries[0].target as HTMLInputElement)?.focus?.()
     }
 
-    const fieldRef = ref<VField>()
+    const isFocused = ref(false)
+    const inputRef = ref<HTMLInputElement>()
     function focus () {
-      fieldRef.value?.inputRef?.focus()
+      inputRef.value?.focus()
     }
     function blur () {
-      fieldRef.value?.inputRef?.blur()
+      inputRef.value?.blur()
+    }
+    function onFocus (e: FocusEvent) {
+      isFocused.value = true
+    }
+    function onBlur (e: FocusEvent) {
+      isFocused.value = false
     }
 
     useRender(() => {
@@ -107,12 +114,14 @@ export const VTextField = defineComponent({
               'v-text-field--suffixed': props.suffix,
             },
           ]}
+          focused={ isFocused.value }
           { ...rootAttrs }
           { ...inputProps }
         >
-          { ({ isDisabled, isReadonly }) => (
+          {{
+            ...slots,
+            default: ({ isDisabled, isReadonly }) => (
               <VField
-                ref={ fieldRef }
                 active={ isDirty.value }
                 onUpdate:active={ val => internalDirty.value = val }
                 onClick:control={ focus }
@@ -128,10 +137,10 @@ export const VTextField = defineComponent({
                   ...slots,
                   default: ({
                     isActive,
-                    inputRef,
                     props: { class: fieldClass, ...slotProps },
                   }) => {
                     const showPlaceholder = isActive || props.persistentPlaceholder
+
                     return (
                       <>
                         { props.prefix && (
@@ -141,19 +150,21 @@ export const VTextField = defineComponent({
                         ) }
 
                         <input
+                          ref={ inputRef }
                           class={ fieldClass }
                           style={{ opacity: showPlaceholder ? undefined : '0' }} // can't this just be a class?
                           v-model={ model.value }
                           v-intersect={[{
                             handler: onIntersect,
                           }, null, ['once']]}
-                          ref={ inputRef }
                           autofocus={ props.autofocus }
                           readonly={ isReadonly.value }
                           disabled={ isDisabled.value }
                           placeholder={ props.placeholder }
                           size={ 1 }
                           type={ props.type }
+                          onFocus={ onFocus }
+                          onBlur={ onBlur }
                           { ...slotProps }
                           { ...inputAttrs }
                         />
@@ -166,27 +177,27 @@ export const VTextField = defineComponent({
                       </>
                     )
                   },
-                  details: hasCounter ? ({ isFocused }) => (
-                    <>
-                      <span />
-
-                      <VCounter
-                        active={ props.persistentCounter || isFocused }
-                        value={ counterValue.value }
-                        max={ max.value }
-                        v-slots={ slots.counter }
-                      />
-                    </>
-                  ) : undefined,
                 }}
               </VField>
-          )}
+            ),
+            details: hasCounter ? ({ isFocused }) => (
+              <>
+                <span />
+
+                <VCounter
+                  active={ props.persistentCounter || isFocused.value }
+                  value={ counterValue.value }
+                  max={ max.value }
+                  v-slots={ slots.counter }
+                />
+              </>
+            ) : undefined,
+          }}
         </VInput>
       )
     })
 
     return {
-      fieldRef,
       focus,
       blur,
     }
