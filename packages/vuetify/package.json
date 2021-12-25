@@ -81,7 +81,7 @@
     }
   },
   "scripts": {
-    "watch": "cross-env TARGET=development webpack --config build/config.js --progress --watch",
+    "watch": "yarn build:lib --watch",
     "dev": "cross-env NODE_ENV=development vite",
     "dev:ssr": "cross-env NODE_ENV=development vite-ssr",
     "build": "rimraf lib dist && concurrently \"yarn build:dist\" \"yarn build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && yarn build:json && yarn build:types",
