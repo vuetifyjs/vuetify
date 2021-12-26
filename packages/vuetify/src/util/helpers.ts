@@ -230,6 +230,9 @@ export const keyCodes = Object.freeze({
  */
 export function remapInternalIcon (vm: Vue, iconName: string): VuetifyIcon {
   // Look for custom component in the configuration
+  if (!vm.$vuetify.icons) {
+    return iconName
+  }
   const component = vm.$vuetify.icons.component
 
   // Look for overrides
