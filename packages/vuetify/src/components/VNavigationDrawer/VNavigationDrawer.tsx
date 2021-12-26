@@ -113,7 +113,7 @@ export const VNavigationDrawer = defineComponent({
     })
     const layoutStyles = useLayoutItem(
       props.name,
-      toRef(props, 'priority'),
+      computed(() => parseInt(props.priority, 10)),
       toRef(props, 'position'),
       layoutSize,
       width,

@@ -91,7 +91,7 @@ export const VAppBar = defineComponent({
     const isActive = useProxiedModel(props, 'modelValue', props.modelValue)
     const layoutStyles = useLayoutItem(
       props.name,
-      toRef(props, 'priority'),
+      computed(() => parseInt(props.priority, 10)),
       toRef(props, 'position'),
       height,
       height,
