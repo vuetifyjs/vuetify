@@ -3,8 +3,8 @@ import './VField.sass'
 
 // Components
 import { VExpandXTransition } from '@/components/transitions'
-import { VFieldLabel } from './VFieldLabel'
 import { VIcon } from '@/components/VIcon'
+import { VFieldLabel } from './VFieldLabel'
 
 // Composables
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
@@ -14,7 +14,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useFocus } from '@/composables/focus'
 
 // Utilities
-import { computed, ref, toRef, watch, watchEffect } from 'vue'
+import { computed, inject, ref, toRef, watch, watchEffect } from 'vue'
 import {
   convertToUnit,
   genericComponent,
@@ -27,7 +27,7 @@ import {
 } from '@/util'
 
 // Types
-import type { VInputSlot } from '@/components/VInput/VInput'
+import type { VInputSlot, VInputSymbol } from '@/components/VInput/VInput'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
@@ -183,6 +183,8 @@ export const VField = genericComponent<new <T>() => {
       emit('click:control', slotProps.value)
     }
 
+    const VInput = inject('VInput' as any as typeof VInputSymbol, undefined)
+
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
       const hasPrepend = (slots.prependInner || props.prependInnerIcon)
@@ -227,7 +229,7 @@ export const VField = genericComponent<new <T>() => {
           <LoaderSlot
             name="v-field"
             active={ props.loading }
-            // TODO color={ !defaultProps.isValid.value ? undefined : props.color }
+            color={ VInput ? (!VInput.value.isValid.value ? undefined : props.color) : props.color }
             v-slots={{ default: slots.loader }}
           />
 
@@ -240,7 +242,7 @@ export const VField = genericComponent<new <T>() => {
                 <VIcon icon={ props.prependInnerIcon } />
               ) }
 
-              { slots?.prependInner?.(/* TODO */) }
+              { slots?.prependInner?.(VInput?.value) }
             </div>
           ) }
 
@@ -256,8 +258,8 @@ export const VField = genericComponent<new <T>() => {
             </VFieldLabel>
 
             { slots.default?.({
+              ...VInput?.value,
               ...slotProps.value,
-              // TODO ...defaultProps,
               props: {
                 id: id.value,
                 class: 'v-field__input',
@@ -289,7 +291,7 @@ export const VField = genericComponent<new <T>() => {
               class="v-field__append-inner"
               onClick={ e => emit('click:append-inner', e) }
             >
-              { slots?.appendInner?.(/* TODO */) }
+              { slots?.appendInner?.(VInput?.value) }
 
               { props.appendInnerIcon && (
                 <VIcon icon={ props.appendInnerIcon } />
