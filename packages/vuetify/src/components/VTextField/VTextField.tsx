@@ -18,6 +18,7 @@ import { defineComponent, filterInputAttrs, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { useForwardRef } from '@/composables/forwardRef'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
@@ -99,6 +100,9 @@ export const VTextField = defineComponent({
       isFocused.value = false
     }
 
+    const vInputRef = ref<VInput>()
+    const vFieldRef = ref<VInput>()
+
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
@@ -107,6 +111,7 @@ export const VTextField = defineComponent({
 
       return (
         <VInput
+          ref={ vInputRef }
           class={[
             'v-text-field',
             {
@@ -122,6 +127,7 @@ export const VTextField = defineComponent({
             ...slots,
             default: ({ isDisabled, isReadonly }) => (
               <VField
+                ref={ vFieldRef }
                 active={ isDirty.value }
                 onUpdate:active={ val => internalDirty.value = val }
                 onClick:control={ focus }
@@ -197,10 +203,10 @@ export const VTextField = defineComponent({
       )
     })
 
-    return {
+    return useForwardRef({
       focus,
       blur,
-    }
+    }, vInputRef, vFieldRef)
   },
 })
 
