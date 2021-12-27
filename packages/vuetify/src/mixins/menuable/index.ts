@@ -78,7 +78,6 @@ export default baseMixins.extend<options>().extend({
       default: 0,
     },
     offsetOverflow: Boolean,
-    openOnClick: Boolean,
     positionX: {
       type: Number,
       default: null,

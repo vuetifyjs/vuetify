@@ -75,10 +75,6 @@ export default baseMixins.extend({
     },
     offsetX: Boolean,
     offsetY: Boolean,
-    openOnClick: {
-      type: Boolean,
-      default: true,
-    },
     openOnHover: Boolean,
     origin: {
       type: String,
