@@ -267,6 +267,7 @@ export default baseMixins.extend<options>().extend({
         newOtp[appIdx] = inputDataArray[i].toString()
       }
       this.otp = newOtp
+      this.internalValue = this.otp.join('')
       const targetFocus = Math.min(index + inputDataArray.length, maxCursor)
       this.changeFocus(targetFocus)
 
