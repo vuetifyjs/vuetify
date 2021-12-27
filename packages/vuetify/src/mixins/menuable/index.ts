@@ -297,13 +297,15 @@ export default baseMixins.extend<options>().extend({
 
       const onClick = listeners.click
 
-      listeners.click = (e: MouseEvent & KeyboardEvent & FocusEvent) => {
-        if (this.openOnClick) {
-          onClick && onClick(e)
-        }
+      if (onClick) {
+        listeners.click = (e: MouseEvent & KeyboardEvent & FocusEvent) => {
+          if (this.openOnClick) {
+            onClick && onClick(e)
+          }
 
-        this.absoluteX = e.clientX
-        this.absoluteY = e.clientY
+          this.absoluteX = e.clientX
+          this.absoluteY = e.clientY
+        }
       }
 
       return listeners

@@ -93,7 +93,7 @@ export default baseMixins.extend({
     },
     genActivatorAttributes () {
       return {
-        role: 'button',
+        role: (this.openOnClick && !this.openOnHover) ? 'button' : undefined,
         'aria-haspopup': true,
         'aria-expanded': String(this.isActive),
       }
