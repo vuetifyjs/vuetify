@@ -24,6 +24,10 @@ export const makeVDataTableProps = propsFactory({
   width: [String, Number],
   fixedHeader: Boolean,
   groupBy: String,
+  sortBy: {
+    type: Array as PropType<{ key: string, order: string }[]>,
+    default: () => ([]),
+  },
 }, 'v-data-table')
 
 export const VDataTable = defineComponent({
@@ -39,10 +43,6 @@ export const VDataTable = defineComponent({
       type: Number,
       default: 10,
     },
-    sortBy: {
-      type: Array as PropType<any[]>,
-      default: () => ([]),
-    },
   },
 
   emits: {
@@ -55,20 +55,14 @@ export const VDataTable = defineComponent({
   setup (props, { slots }) {
     const { headers, columns } = useHeaders(props)
 
-    const page = useProxiedModel(props, 'page')
-    const itemsPerPage = useProxiedModel(props, 'itemsPerPage')
-
     const { sortBy, toggleSort } = useSort(props)
     const { sortedItems } = useSortedItems(toRef(props, 'items'), sortBy)
 
-    const { items: paginatedItems } = usePagination(sortedItems, itemsPerPage, page)
+    const { page, itemsPerPage, startIndex, stopIndex } = usePagination(props)
+
+    const paginatedItems = computed(() => itemsPerPage.value > 0 ? sortedItems.value.slice(startIndex.value, stopIndex.value) : sortedItems.value)
 
     const { items, toggleGroup } = useGroupBy(paginatedItems, toRef(props, 'groupBy'))
-
-    // Reset page when sorting changes
-    watch(sortBy, () => {
-      page.value = 1
-    }, { deep: true })
 
     provide('v-data-table', {
       toggleGroup,

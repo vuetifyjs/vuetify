@@ -39,7 +39,9 @@ export const VDataTableRows = defineComponent({
             </tr>
           ) : (
             <tr
-              class="v-data-table-regular__tr"
+              class={[
+                'v-data-table-regular__tr',
+              ]}
               role="row"
               key={ `row_${item.id}` }
             >

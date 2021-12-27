@@ -1,7 +1,8 @@
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 
 import type { PropType } from 'vue'
+import { VBtn } from '@/components'
 
 export const VDataTableVirtualHeaders = defineComponent({
   name: 'VDataTableVirtualHeaders',
@@ -16,9 +17,12 @@ export const VDataTableVirtualHeaders = defineComponent({
       required: true,
     },
     fixed: Boolean,
+    sortBy: Array as PropType<any[]>,
   },
 
   setup (props, { slots }) {
+    const { toggleSort } = inject('v-data-table', {} as any)
+
     const fixedOffsets = computed(() => {
       return props.headers.flat().reduce((offsets, column) => {
         // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
@@ -52,8 +56,12 @@ export const VDataTableVirtualHeaders = defineComponent({
               role="columnheader"
               colspan={column.colspan}
               rowspan={column.rowspan}
+              onClick={() => toggleSort(column.id)}
             >
               { column.name }
+              { props.sortBy?.find(x => x.key === column.id) && (
+                <VBtn icon="mdi-home" variant="plain" />
+              ) }
             </th>
           ))}
         </tr>

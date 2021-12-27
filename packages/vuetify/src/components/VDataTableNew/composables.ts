@@ -234,7 +234,12 @@ function sortItems<T extends any, K extends keyof T> (
   })
 }
 
-export const useSort = (props: { sortBy?: { key: string, order: string }[], mustSort?: boolean, multiSort?: boolean }) => {
+export const useSort = (props: {
+  sortBy: { key: string, order: string }[]
+  'onUpdate:sortBy': ((value: any) => void) | undefined
+  mustSort?: boolean
+  multiSort?: boolean
+}) => {
   const sortBy = useProxiedModel(props, 'sortBy')
 
   const toggleSort = (key: string) => {
@@ -270,18 +275,31 @@ export const useSortedItems = (items: Ref<any[]>, sortBy: Ref<{ key: string, ord
   return { sortedItems }
 }
 
-export const usePagination = (items: Ref<any[]>, itemsPerPage: Ref<number>, page: Ref<number>) => {
-  const paginatedItems = computed(() => {
-    if (itemsPerPage.value <= 0) return items.value
+export const usePagination = (props: {
+  items: any[]
+  page: number
+  'onUpdate:page': ((val: any) => void) | undefined
+  itemsPerPage: number
+  'onUpdate:itemsPerPage': ((val: any) => void) | undefined
+  itemCount?: number
+}) => {
+  const page = useProxiedModel(props, 'page')
+  const itemsPerPage = useProxiedModel(props, 'itemsPerPage')
 
-    const startIndex = itemsPerPage.value * (page.value - 1)
-    const stopIndex = startIndex + itemsPerPage.value
+  const startIndex = computed(() => itemsPerPage.value * (page.value - 1))
+  const stopIndex = computed(() => startIndex.value + itemsPerPage.value)
 
-    return items.value.slice(startIndex, stopIndex)
-  })
+  const itemCount = computed(() => props.itemCount ?? props.items.length)
+  const pageCount = computed(() => Math.floor(itemCount.value / itemsPerPage.value))
 
-  return { items: paginatedItems }
+  return { page, itemsPerPage, startIndex, stopIndex, pageCount, itemCount }
 }
+
+// export const paginateItems = (items: Ref<any[]>, startIndex: Ref<number>, stopIndex: Ref<number>) => {
+//   if (itemsPerPage.value <= 0) return items.value
+
+//   return items.value.slice(startIndex.value, stopIndex.value)
+// }
 
 export const useOptions = (page: Ref<number>, itemsPerPage: Ref<number>, sortBy: Ref<any[]>) => {
   const vm = getCurrentInstance('VDataTable')
@@ -291,6 +309,11 @@ export const useOptions = (page: Ref<number>, itemsPerPage: Ref<number>, sortBy:
     itemsPerPage: itemsPerPage.value,
     sortBy: sortBy.value,
   }))
+
+  // Reset page when sorting changes
+  watch(sortBy, () => {
+    page.value = 1
+  }, { deep: true })
 
   watch(options, () => {
     vm.emit('update:options', options.value)

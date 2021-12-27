@@ -1,7 +1,7 @@
 import { VTable } from '@/components'
 import { convertToUnit, defineComponent } from '@/util'
 import { computed, provide, toRef } from 'vue'
-import { createExpanded, useGroupBy, useHeaders, useVirtual } from '../composables'
+import { createExpanded, useGroupBy, useHeaders, useSort, useSortedItems, useVirtual } from '../composables'
 import { makeVDataTableProps } from './VDataTable'
 import { VDataTableVirtualHeaders } from './VDataTableVirtualHeaders'
 import { VDataTableVirtualRows } from './VDataTableVirtualRows'
@@ -14,7 +14,7 @@ export const VDataTableVirtual = defineComponent({
       type: [String, Number],
       default: 48,
     },
-    itemsLength: {
+    itemCount: {
       type: Number,
       required: true,
     },
@@ -22,12 +22,20 @@ export const VDataTableVirtual = defineComponent({
     ...makeVDataTableProps(),
   },
 
+  emits: {
+    'update:sortBy': (sortBy: any) => true,
+  },
+
   setup (props, { slots }) {
     const { headers, columns } = useHeaders(props)
 
     const { expanded } = createExpanded()
 
-    const { items, toggleGroup, numGroups, numHiddenItems } = useGroupBy(toRef(props, 'items'), toRef(props, 'groupBy'))
+    const { sortBy, toggleSort } = useSort(props)
+
+    const { sortedItems } = useSortedItems(toRef(props, 'items'), sortBy)
+
+    const { items, toggleGroup, numGroups, numHiddenItems } = useGroupBy(sortedItems, toRef(props, 'groupBy'))
 
     const {
       containerRef,
@@ -37,7 +45,7 @@ export const VDataTableVirtual = defineComponent({
       itemHeight,
       afterHeight,
       beforeHeight,
-    } = useVirtual(props, computed(() => props.itemsLength + expanded.value.size + numGroups.value - numHiddenItems.value))
+    } = useVirtual(props, computed(() => props.itemCount + expanded.value.size + numGroups.value - numHiddenItems.value))
 
     const visibleItems = computed(() => {
       return items.value.slice(startIndex.value, stopIndex.value)
@@ -45,6 +53,7 @@ export const VDataTableVirtual = defineComponent({
 
     provide('v-data-table', {
       toggleGroup,
+      toggleSort,
     })
 
     return () => (
@@ -65,6 +74,7 @@ export const VDataTableVirtual = defineComponent({
                     headers={ headers.value }
                     rowHeight={ itemHeight.value }
                     fixed={ props.fixedHeader }
+                    sortBy={ sortBy.value }
                   />
                 </thead>
                 <tbody>

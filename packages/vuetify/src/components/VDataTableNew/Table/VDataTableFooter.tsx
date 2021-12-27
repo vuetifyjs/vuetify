@@ -7,6 +7,10 @@ export const VDataTableFooter = defineComponent({
 
   props: {
     page: Number,
+    itemsPerPage: Number,
+    startIndex: Number,
+    stopIndex: Number,
+    itemCount: Number,
   },
 
   setup (props, { slots, emit }) {
@@ -14,6 +18,7 @@ export const VDataTableFooter = defineComponent({
       <div
         class="v-data-table-footer"
       >
+        <div>{ props.startIndex + 1 } - { props.stopIndex } of { props.itemCount }</div>
         <VBtn icon="mdi-chevron-left" variant="plain" onClick={() => emit('previous-page') } />
         { props.page }
         <VBtn icon="mdi-chevron-right" variant="plain" onClick={() => emit('next-page') } />
