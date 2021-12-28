@@ -48,7 +48,7 @@ export function physicalAnchor (anchor: ParsedAnchor, el: HTMLElement) {
   const { side, align } = anchor
   const { direction } = window.getComputedStyle(el)
 
-  const map: Dictionary<string | undefined> = direction === 'ltr' ? {
+  const map: Record<string, string | undefined> = direction === 'ltr' ? {
     start: 'left',
     end: 'right',
   } : {

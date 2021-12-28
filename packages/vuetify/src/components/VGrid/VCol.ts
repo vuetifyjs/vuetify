@@ -20,7 +20,7 @@ const breakpointProps = (() => {
       default: false,
     }
     return props
-  }, {} as Dictionary<Prop<boolean | string | number, false>>)
+  }, {} as Record<string, Prop<boolean | string | number, false>>)
 })()
 
 const offsetProps = (() => {
@@ -30,7 +30,7 @@ const offsetProps = (() => {
       default: null,
     }
     return props
-  }, {} as Dictionary<Prop<string | number, null>>)
+  }, {} as Record<string, Prop<string | number, null>>)
 })()
 
 const orderProps = (() => {
@@ -40,7 +40,7 @@ const orderProps = (() => {
       default: null,
     }
     return props
-  }, {} as Dictionary<Prop<string | number, null>>)
+  }, {} as Record<string, Prop<string | number, null>>)
 })()
 
 const propMap = {

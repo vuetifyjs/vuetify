@@ -4,7 +4,7 @@ import './VProgressLinear.sass'
 // Composables
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -60,7 +60,7 @@ export const VProgressLinear = defineComponent({
   setup (props, { slots }) {
     const progress = useProxiedModel(props, 'modelValue')
     const { isRtl } = useRtl()
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { textColorClasses, textColorStyles } = useTextColor(props, 'color')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => props.bgColor || props.color))
     const { backgroundColorClasses: barColorClasses, backgroundColorStyles: barColorStyles } = useBackgroundColor(props, 'color')

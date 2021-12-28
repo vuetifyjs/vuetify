@@ -16,7 +16,7 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
@@ -97,7 +97,7 @@ export const VListItem = genericComponent<new () => {
       }
     })
 
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
     const { densityClasses } = useDensity(props)

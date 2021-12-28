@@ -22,7 +22,7 @@ The final part of the layout system is the **v-main** component. Inside this is 
 
 ## Placing components
 
-By default, the order in which layout components will attempt to reserve space is simply the order that they appear in your markup. To illustrate this concept, see the following two examples where a single **v-app-bar** and **v-navigation-drawer** have changed places.
+By default, the order in which layout components will attempt to reserve space is simply the order that they appear in your markup. To illustrate this concept, see the following two examples where a single **v-app-bar** and **v-navigation-drawer** have changed places in the markup.
 
 <example file="application-layout/app-bar-first" />
 
@@ -30,7 +30,7 @@ By default, the order in which layout components will attempt to reserve space i
 
 <alert type="info">
 
-  something something ignore that we are using **absolute** prop in examples
+  Please note that we are using the **absolute** prop in these examples only because we are nesting a layout (the example) inside another (the documentation itself). For most use-cases this is not necessary.
 
 </alert>
 

@@ -10,8 +10,8 @@
     </template>
     <v-main>
       <v-card height="200px" class="d-flex justify-center align-center">
-        <v-btn class="ma-2" @click="usePriority = !usePriority">Toggle priority</v-btn>
         <v-btn class="ma-2" @click="showDrawer = !showDrawer">Toggle drawer</v-btn>
+        <v-btn class="ma-2" @click="usePriority = !usePriority">Toggle priority</v-btn>
       </v-card>
     </v-main>
   </v-app>

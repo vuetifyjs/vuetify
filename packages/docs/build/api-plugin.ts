@@ -144,7 +144,7 @@ function generateFiles () {
 export default function Api (): Plugin {
   return {
     name: 'vuetify:api',
-    buildStart () {
+    configResolved () {
       rimraf.sync(resolve('src/api'))
 
       generateFiles()

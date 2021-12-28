@@ -39,7 +39,7 @@
     },
 
     setup (props) {
-      const theme = useTheme({})
+      const theme = useTheme()
 
       const src = computed(() => {
         const {

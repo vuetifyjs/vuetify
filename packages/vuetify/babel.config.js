@@ -4,6 +4,7 @@ module.exports = {
   assumptions: {
     noDocumentAll: true
   },
+  ignore: [/\.d\.ts$/],
   presets: [
     ['@babel/preset-env', {
       modules: false,
@@ -33,6 +34,7 @@ module.exports = {
       ],
     },
     lib: {
+      ignore: ['**/__tests__'],
       plugins: [
         ['babel-plugin-add-import-extension', { extension: 'mjs' }],
         ['./build/babel-plugin-replace-import-extension', { extMapping: {

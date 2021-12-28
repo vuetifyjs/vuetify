@@ -2,7 +2,7 @@
 import './VApp.sass'
 
 // Composables
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { createLayout, makeLayoutProps } from '@/composables/layout'
 
 // Utilities
@@ -18,7 +18,7 @@ export const VApp = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
+    const theme = provideTheme(props)
     const { layoutClasses, getLayoutItem, items } = createLayout(props)
     const { rtlClasses } = useRtl()
 
@@ -26,7 +26,7 @@ export const VApp = defineComponent({
       <div
         class={[
           'v-application',
-          themeClasses.value,
+          theme.themeClasses.value,
           layoutClasses.value,
           rtlClasses.value,
         ]}
@@ -41,6 +41,7 @@ export const VApp = defineComponent({
     return {
       getLayoutItem,
       items,
+      theme,
     }
   },
 })

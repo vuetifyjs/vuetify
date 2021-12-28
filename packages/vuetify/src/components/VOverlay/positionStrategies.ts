@@ -25,7 +25,7 @@ export interface StrategyProps {
     (
       data: PositionStrategyData,
       props: StrategyProps,
-      contentStyles: Ref<Dictionary<string>>
+      contentStyles: Ref<Record<string, string>>
     ) => undefined | { updatePosition: (e: Event) => void }
   )
   anchor: Anchor
@@ -101,7 +101,7 @@ function staticPositionStrategy () {
   // TODO
 }
 
-function connectedPositionStrategy (data: PositionStrategyData, props: StrategyProps, contentStyles: Ref<Dictionary<string>>) {
+function connectedPositionStrategy (data: PositionStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
   const activatorFixed = isFixedPosition(data.activatorEl.value)
   if (activatorFixed) {
     Object.assign(contentStyles.value, {

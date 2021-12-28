@@ -11,8 +11,38 @@
   font-size: $field-font-size
   letter-spacing: $field-letter-spacing
   max-width: $field-max-width
+  align-items: center
+  border-radius: $field-border-radius
+  contain: layout
+  display: flex
+  flex: 1 0
+  grid-area: control
+  height: var(--v-input-control-height)
+  position: relative
   --v-field-padding-before: #{$field-control-padding}
   --v-field-padding-after: #{$field-control-padding}
+
+  &.v-field--prepended
+    padding-inline-start: $field-control-affixed-padding
+
+  &.v-field--appended
+    padding-inline-end: $field-control-affixed-padding
+
+  &.v-field--variant-contained
+    background: $field-control-contained-background
+    border-color: transparent
+
+    @include tools.elevation($field-control-contained-elevation)
+
+  &.v-field--variant-contained,
+  &.v-field--variant-filled
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0
+
+  &.v-field--variant-plain,
+  &.v-field--variant-underlined
+    border-radius: 0
+    padding: 0
 
   .v-field__input
     opacity: $field-input-opacity
@@ -59,7 +89,7 @@
 
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
-        @at-root #{selector.append(&, $root)}
+        @at-root #{selector.nest(&, $root)}
           --v-field-padding-top: #{$field-input-padding-top + $modifier * $field-label-floating-scale}
 
   &--variant-filled,
@@ -68,40 +98,6 @@
     &.v-field--focused
       .v-label
         color: inherit
-
-/* endregion */
-/* region CONTROL */
-.v-field__control
-  align-items: center
-  border-radius: $field-border-radius
-  contain: layout
-  display: flex
-  flex: 1 0
-  grid-area: control
-  height: var(--v-input-control-height)
-  position: relative
-
-  .v-field--prepended &
-    padding-inline-start: $field-control-affixed-padding
-
-  .v-field--appended &
-    padding-inline-end: $field-control-affixed-padding
-
-  .v-field--variant-contained &
-    background: $field-control-contained-background
-    border-color: transparent
-
-    @include tools.elevation($field-control-contained-elevation)
-
-  .v-field--variant-contained &,
-  .v-field--variant-filled &
-    border-bottom-left-radius: 0
-    border-bottom-right-radius: 0
-
-  .v-field--variant-plain &,
-  .v-field--variant-underlined &
-    border-radius: 0
-    padding: 0
 
 /* endregion */
 /* region FIELD */
@@ -137,7 +133,7 @@
 
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
-        @at-root #{selector.append(&, $root)}
+        @at-root #{selector.nest(&, $root)}
           margin-bottom: $field-underlined-margin-bottom + $modifier * .125
 
 .v-field .v-input__prepend,
@@ -153,8 +149,8 @@
   transition: $field-transition-timing
   transition-property: opacity, transform, width
 
+  .v-field:hover &,
   .v-input--focused &,
-  .v-field__control:hover &,
   .v-field--persistent-clear &
     opacity: 1
 
@@ -184,7 +180,7 @@
 
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
-        @at-root #{selector.append(&, $root)}
+        @at-root #{selector.nest(&, $root)}
           bottom: 4px + $modifier * .125
 
   &--floating
@@ -202,7 +198,7 @@
 
       @at-root
         @include tools.density('v-input', $input-density) using ($modifier)
-          @at-root #{selector.append(&, $root)}
+          @at-root #{selector.nest(&, $root)}
             top: 7px + $modifier * .25
 
     .v-field--variant-plain &,
@@ -231,11 +227,11 @@
   right: 0
   width: 100%
 
-  .v-field__control:hover &
+  .v-field:hover &
     --v-field-border-opacity: var(--v-high-emphasis-opacity)
 
   .v-field.v-field--focused &,
-  .v-field.v-input--error &
+  .v-input.v-input--error &
     --v-field-border-opacity: 1
 
   .v-field--variant-outlined.v-field--focused &
@@ -352,10 +348,10 @@
   &.v-field--has-background .v-field__overlay
     opacity: 0
 
-  .v-field__control:hover .v-field__overlay
+  &:hover .v-field__overlay
     opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
 
-  &.v-field.v-field--focused .v-field__overlay
+  &.v-field--focused .v-field__overlay
     opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
 
 /* endregion */
@@ -370,7 +366,7 @@
 
 .v-field--variant-filled,
 .v-field--variant-underlined
-  &.v-input--disabled
+  .v-input--disabled &
     .v-field__outline::before
       border-image: repeating-linear-gradient(to right, $field-disabled-color 0px, $field-disabled-color 2px, transparent 2px, transparent 4px) 1 repeat
 

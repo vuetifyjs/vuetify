@@ -48,7 +48,7 @@ export const makeLayoutItemProps = propsFactory({
     type: String,
   },
   priority: {
-    type: Number,
+    type: [Number, String],
     default: 0,
   },
   absolute: Boolean,

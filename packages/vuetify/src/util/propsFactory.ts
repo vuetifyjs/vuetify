@@ -57,7 +57,7 @@ export function propsFactory<
 type AppendDefault<T extends ComponentObjectPropsOptions, D extends PartialKeys<T>> = {
   [P in keyof T]-?: unknown extends D[P]
     ? T[P]
-    : T[P] extends Dictionary<unknown>
+    : T[P] extends Record<string, unknown>
       ? Omit<T[P], 'type' | 'default'> & {
         type: PropType<MergeDefault<T[P], D[P]>>
         default: MergeDefault<T[P], D[P]>

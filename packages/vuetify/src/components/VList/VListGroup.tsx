@@ -9,7 +9,7 @@ import { makeTagProps } from '@/composables/tag'
 // Utilities
 import { computed } from 'vue'
 import { defineComponent, genericComponent } from '@/util'
-import { createList, useDepth, useList } from './VList'
+import { createList, useList } from './VList'
 
 // Types
 import type { Prop } from 'vue'
@@ -31,13 +31,12 @@ const VListGroupItems = defineComponent({
   },
 
   setup (props, { slots }) {
-    const parent = createList()
-    const depth = useDepth(parent.hasPrepend)
+    createList()
 
     return () => {
       return (
         <VExpandTransition>
-          <div class="v-list-group__items" style={{ '--v-list-depth': depth.value }} v-show={props.open}>
+          <div class="v-list-group__items" v-show={props.open}>
             <VListChildren items={props.items} v-slots={slots} />
           </div>
         </VExpandTransition>

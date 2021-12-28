@@ -19,7 +19,7 @@ function makeRowProps (prefix: string, def: () => Prop<string, null>) {
   return breakpoints.reduce((props, val) => {
     props[prefix + capitalize(val)] = def()
     return props
-  }, {} as Dictionary<Prop<string, null>>)
+  }, {} as Record<string, Prop<string, null>>)
 }
 
 const alignValidator = (str: any) => [...ALIGNMENT, 'baseline', 'stretch'].includes(str)

@@ -3,6 +3,7 @@
     v-model:active="active"
     v-model:opened="opened"
     density="compact"
+    nav
     :items="computedItems"
   >
     <template #item="props">

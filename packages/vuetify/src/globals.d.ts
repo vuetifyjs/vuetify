@@ -1,8 +1,5 @@
 import type { TouchStoredHandlers } from './directives/touch'
-import type { ComponentPublicInstance, FunctionalComponent, VNode } from 'vue'
-
-import { IconProps } from '@/composables/icons'
-import type { RouteLocationRaw } from 'vue-router'
+import type { VNode } from 'vue'
 
 declare global {
   interface HTMLCollection {
@@ -71,12 +68,6 @@ declare global {
   function parseInt(s: string | number, radix?: number): number
   function parseFloat(string: string | number): number
 
-  export type Dictionary<T> = Record<string, T>
-
-  export type Writable<T> = {
-    -readonly [P in keyof T]: T[P];
-  }
-
   export const __VUETIFY_VERSION__: string
   export const __REQUIRED_VUE__: string
 
@@ -85,14 +76,7 @@ declare global {
     interface IntrinsicAttributes {
       [name: string]: any
     }
-    interface ElementChildrenAttribute {
-      $children
-    }
   }
-}
-
-declare module 'vue' {
-  export type JSXComponent<Props = any> = { new (): ComponentPublicInstance<Props> } | FunctionalComponent<Props>
 }
 
 declare module '@vue/runtime-core' {
@@ -104,7 +88,6 @@ declare module '@vue/runtime-core' {
 
 declare module '@vue/runtime-dom' {
   import type { Events } from '@vue/runtime-dom'
-  import type { VNodeChild } from '@vue/runtime-core'
 
   type UnionToIntersection<U> =
     (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
@@ -125,23 +108,11 @@ declare module '@vue/runtime-dom' {
     [K in keyof E]?: E[K] extends Function ? E[K] : (payload: E[K]) => void
   }
 
-  export interface HTMLAttributes extends EventHandlers<ModifiedEvents> {
-    $children?: VNodeChild
-  }
-  export interface SVGAttributes {
-    $children?: VNodeChild
-  }
+  export interface HTMLAttributes extends EventHandlers<ModifiedEvents> {}
 
   type CustomProperties = {
     [k in `--${string}`]: any
   }
 
   export interface CSSProperties extends CustomProperties {}
-}
-
-declare module 'vue-router' {
-  export interface RouterLinkOptions {
-    to: RouteLocationRaw
-    replace?: boolean
-  }
 }

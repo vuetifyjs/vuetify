@@ -3,7 +3,7 @@ import './VTable.sass'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { convertToUnit, defineComponent } from '@/util'
@@ -23,7 +23,7 @@ export const VTable = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
 
     return () => (

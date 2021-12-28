@@ -8,7 +8,7 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { defineComponent } from '@/util'
@@ -28,7 +28,7 @@ export const VFooter = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
