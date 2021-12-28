@@ -10,16 +10,17 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
-import { computed } from 'vue'
-import { genericComponent, getUid, pick, propsFactory } from '@/util'
+import { computed, provide, toRef } from 'vue'
+import { genericComponent, getUid, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, ExtractPropTypes, PropType, Ref } from 'vue'
+import type { ComputedRef, ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
 
 export interface VInputSlot {
   id: ComputedRef<string>
   isDisabled: ComputedRef<boolean>
+  isFocused: Ref<boolean>
   isReadonly: ComputedRef<boolean>
   isPristine: Ref<boolean>
   isValid: ComputedRef<boolean | null>
@@ -28,6 +29,8 @@ export interface VInputSlot {
   resetValidation: () => void
   validate: () => void
 }
+
+export const VInputSymbol = 'VInput' as any as InjectionKey<ComputedRef<VInputSlot>>
 
 export const makeVInputProps = propsFactory({
   id: String,
@@ -88,10 +91,12 @@ export const VInput = genericComponent<new <T>() => {
 
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
+    const isFocused = toRef(props, 'focused')
 
     const slotProps = computed<VInputSlot>(() => ({
       id,
       isDisabled,
+      isFocused,
       isReadonly,
       isPristine,
       isValid,
@@ -101,7 +106,9 @@ export const VInput = genericComponent<new <T>() => {
       validate,
     }))
 
-    return () => {
+    provide(VInputSymbol, slotProps)
+
+    useRender(() => {
       const hasPrepend = (slots.prepend || props.prependIcon)
       const hasAppend = (slots.append || props.appendIcon)
       const hasHint = !!(slots.hint || props.hint)
@@ -161,7 +168,7 @@ export const VInput = genericComponent<new <T>() => {
             <div class="v-input__details">
               <VMessages
                 active={ showMessages }
-                value={ hasMessages ? props.messages : props.hint }
+                value={ errorMessages.value || (hasMessages ? props.messages : props.hint) }
                 v-slots={{ default: slots.messages }}
               />
 
@@ -170,6 +177,14 @@ export const VInput = genericComponent<new <T>() => {
           ) }
         </div>
       )
+    })
+
+    return {
+      isValid,
+      validate,
+      reset,
+      resetValidation,
+      errorMessages,
     }
   },
 })

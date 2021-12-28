@@ -524,3 +524,6 @@ export class CircularBuffer<T = never> {
     return this.#arr.slice(this.#pointer).concat(this.#arr.slice(0, this.#pointer))
   }
 }
+
+export type UnionToIntersection<U> =
+  (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never

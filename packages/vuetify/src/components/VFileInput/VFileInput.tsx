@@ -17,6 +17,7 @@ import { defineComponent, filterInputAttrs, humanReadableFileSize, useRender, wr
 
 // Types
 import type { PropType } from 'vue'
+import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 export const VFileInput = defineComponent({
   name: 'VFileInput',
@@ -46,7 +47,7 @@ export const VFileInput = defineComponent({
       },
     },
 
-    ...makeVFieldProps({ clearable: true }),
+    ...makeVInputProps(),
 
     prependIcon: {
       type: String,
@@ -59,6 +60,8 @@ export const VFileInput = defineComponent({
         return wrapInArray(val).every(v => v != null && typeof v === 'object')
       },
     },
+
+    ...makeVFieldProps({ clearable: true }),
   },
 
   emits: {
@@ -92,89 +95,97 @@ export const VFileInput = defineComponent({
       else return t(props.counterString, fileCount)
     })
 
-    const fieldRef = ref<VField>()
+    const inputRef = ref<HTMLInputElement>()
     function focus () {
-      fieldRef.value?.inputRef?.focus()
+      inputRef.value?.focus()
     }
     function blur () {
-      fieldRef.value?.inputRef?.blur()
+      inputRef.value?.blur()
     }
     function click () {
-      fieldRef.value?.inputRef?.click()
+      inputRef.value?.click()
+    }
+    function clear (e?: Event) {
+      e?.stopPropagation()
+
+      model.value = []
+
+      if (inputRef?.value) {
+        inputRef.value.value = ''
+      }
     }
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || counterValue.value)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
+      const [inputProps] = filterInputProps(props)
       const [fieldProps, _] = filterFieldProps(props)
 
       return (
-        <VField
-          ref={ fieldRef }
+        <VInput
           class="v-file-input"
-          active={ isDirty.value }
-          prepend-icon={ props.prependIcon }
-          onUpdate:active={ val => internalDirty.value = val }
-          onClick:control={ click }
-          onClick:prepend={ click }
-          onClick:clear={ e => {
-            e.stopPropagation()
-
-            model.value = []
-
-            if (!fieldRef.value?.inputRef?.value) return
-
-            fieldRef.value.inputRef.value = ''
-          } }
           { ...rootAttrs }
-          { ...fieldProps }
+          { ...inputProps }
         >
           {{
             ...slots,
-            default: ({
-              isActive,
-              inputRef,
-              props: { class: fieldClass, ...slotProps },
-            }) => (
-              <>
-                <input
-                  ref={ inputRef }
-                  type="file"
-                  disabled={ props.disabled }
-                  multiple={ props.multiple }
-                  onClick={ e => e.stopPropagation() }
-                  onChange={ e => {
-                    if (!e.target) return
+            default: () => (
+              <VField
+                active={ isDirty.value }
+                prepend-icon={ props.prependIcon }
+                onUpdate:active={ val => internalDirty.value = val }
+                onClick:control={ click }
+                onClick:prepend={ click }
+                onClick:clear={ clear }
+                { ...fieldProps }
+              >
+                {{
+                  ...slots,
+                  default: ({
+                    isActive,
+                    props: { class: fieldClass, ...slotProps },
+                  }) => (
+                    <>
+                      <input
+                        ref={ inputRef }
+                        type="file"
+                        disabled={ props.disabled }
+                        multiple={ props.multiple }
+                        onClick={ e => e.stopPropagation() }
+                        onChange={ e => {
+                          if (!e.target) return
 
-                    const target = e.target as HTMLInputElement
-                    model.value = [...target.files ?? []]
+                          const target = e.target as HTMLInputElement
+                          model.value = [...target.files ?? []]
 
-                    if (!isActive) inputRef.value?.focus()
-                  } }
-                  { ...slotProps }
-                  { ...inputAttrs }
-                />
+                          if (!isActive) inputRef.value?.focus()
+                        } }
+                        { ...slotProps }
+                        { ...inputAttrs }
+                      />
 
-                { isDirty.value && (
-                  <div class={ fieldClass }>
-                    { slots.selection ? slots.selection({
-                      fileNames: fileNames.value,
-                      totalBytes: totalBytes.value,
-                      totalBytesReadable: totalBytesReadable.value,
-                    })
-                    : props.chips ? fileNames.value.map(text => (
-                      <VChip
-                        key={ text }
-                        size="small"
-                        color={ props.color }
-                      >{ text }</VChip>
-                    ))
-                    : fileNames.value.join(', ') }
-                  </div>
-                ) }
-              </>
+                      { isDirty.value && (
+                        <div class={ fieldClass }>
+                          { slots.selection ? slots.selection({
+                            fileNames: fileNames.value,
+                            totalBytes: totalBytes.value,
+                            totalBytesReadable: totalBytesReadable.value,
+                          })
+                          : props.chips ? fileNames.value.map(text => (
+                            <VChip
+                              key={ text }
+                              size="small"
+                              color={ props.color }
+                            >{ text }</VChip>
+                          ))
+                          : fileNames.value.join(', ') }
+                        </div>
+                      ) }
+                    </>
+                  ),
+                }}
+              </VField>
             ),
-
             details: hasCounter ? () => (
               <>
                 <span />
@@ -186,12 +197,11 @@ export const VFileInput = defineComponent({
               </>
             ) : undefined,
           }}
-        </VField>
+        </VInput>
       )
     })
 
     return {
-      fieldRef,
       focus,
       blur,
       click,

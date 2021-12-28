@@ -18,6 +18,7 @@ import { convertToUnit, defineComponent, filterInputAttrs, useRender } from '@/u
 
 // Types
 import type { PropType } from 'vue'
+import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 export const VTextarea = defineComponent({
   name: 'VTextarea',
@@ -47,6 +48,7 @@ export const VTextarea = defineComponent({
     },
     suffix: String,
 
+    ...makeVInputProps(),
     ...makeVFieldProps(),
   },
 
@@ -89,12 +91,24 @@ export const VTextarea = defineComponent({
       (entries[0].target as HTMLInputElement)?.focus?.()
     }
 
-    const fieldRef = ref<VField>()
+    const isFocused = ref(false)
+    const inputRef = ref<HTMLInputElement>()
     function focus () {
-      fieldRef.value?.inputRef?.focus()
+      inputRef.value?.focus()
     }
     function blur () {
-      fieldRef.value?.inputRef?.blur()
+      inputRef.value?.blur()
+    }
+    function onFocus (e: FocusEvent) {
+      isFocused.value = true
+    }
+    function onBlur (e: FocusEvent) {
+      isFocused.value = false
+    }
+    function clear (e?: Event) {
+      e?.stopPropagation()
+
+      model.value = ''
     }
 
     const sizerRef = ref<HTMLTextAreaElement>()
@@ -139,11 +153,11 @@ export const VTextarea = defineComponent({
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [fieldProps, _] = filterFieldProps(props)
+      const [inputProps] = filterInputProps(props)
+      const [fieldProps] = filterFieldProps(props)
 
       return (
-        <VField
-          ref={ fieldRef }
+        <VInput
           class={[
             'v-textarea',
             {
@@ -152,85 +166,88 @@ export const VTextarea = defineComponent({
               'v-textarea--auto-grow': props.autoGrow,
               'v-textarea--no-resize': props.noResize || props.autoGrow,
             },
-            attrs.class,
           ]}
-          style={{
-            '--v-input-control-height': controlHeight.value,
-          }}
-          active={ isDirty.value }
-          onUpdate:active={ val => internalDirty.value = val }
-          onClick:control={ focus }
-          onClick:clear={ e => {
-            e.stopPropagation()
-
-            model.value = ''
-          }}
-          role="textbox"
           { ...rootAttrs }
-          { ...fieldProps }
+          { ...inputProps }
         >
           {{
             ...slots,
-            default: ({
-              isActive,
-              isDisabled,
-              isReadonly,
-              inputRef,
-              props: { class: fieldClass, ...slotProps },
-            }) => {
-              const showPlaceholder = isActive || props.persistentPlaceholder
-              return (
-                <>
-                  { props.prefix && (
-                    <span class="v-textarea__prefix" style={{ opacity: showPlaceholder ? undefined : '0' }}>
-                      { props.prefix }
-                    </span>
-                  ) }
+            default: ({ isDisabled, isReadonly }) => (
+              <VField
+                style={{
+                  '--v-input-control-height': controlHeight.value,
+                }}
+                active={ isDirty.value }
+                onUpdate:active={ val => internalDirty.value = val }
+                onClick:control={ focus }
+                onClick:clear={ clear }
+                role="textbox"
+                { ...fieldProps }
+              >
+                {{
+                  ...slots,
+                  default: ({
+                    isActive,
+                    props: { class: fieldClass, ...slotProps },
+                  }) => {
+                    const showPlaceholder = isActive || props.persistentPlaceholder
+                    return (
+                      <>
+                        { props.prefix && (
+                          <span class="v-textarea__prefix" style={{ opacity: showPlaceholder ? undefined : '0' }}>
+                            { props.prefix }
+                          </span>
+                        ) }
 
-                  <textarea
-                    class={ fieldClass }
-                    style={{ opacity: showPlaceholder ? undefined : '0' }} // can't this just be a class?
-                    v-model={ model.value }
-                    v-intersect={[{
-                      handler: onIntersect,
-                    }, null, ['once']]}
-                    ref={ inputRef }
-                    autofocus={ props.autofocus }
-                    readonly={ isReadonly.value }
-                    disabled={ isDisabled.value }
-                    placeholder={ props.placeholder }
-                    rows={ props.rows }
-                    { ...slotProps }
-                    { ...inputAttrs }
-                  />
+                        <textarea
+                          ref={ inputRef }
+                          class={ fieldClass }
+                          style={{ opacity: showPlaceholder ? undefined : '0' }} // can't this just be a class?
+                          v-model={ model.value }
+                          v-intersect={[{
+                            handler: onIntersect,
+                          }, null, ['once']]}
+                          autofocus={ props.autofocus }
+                          readonly={ isReadonly.value }
+                          disabled={ isDisabled.value }
+                          placeholder={ props.placeholder }
+                          rows={ props.rows }
+                          onFocus={ onFocus }
+                          onBlur={ onBlur }
+                          { ...slotProps }
+                          { ...inputAttrs }
+                        />
 
-                  { props.autoGrow && (
-                    <textarea
-                      class={[
-                        fieldClass,
-                        'v-textarea__sizer',
-                      ]}
-                      v-model={ model.value }
-                      ref={ sizerRef }
-                      readonly
-                      aria-hidden="true"
-                    />
-                  )}
+                        { props.autoGrow && (
+                          <textarea
+                            class={[
+                              fieldClass,
+                              'v-textarea__sizer',
+                            ]}
+                            v-model={ model.value }
+                            ref={ sizerRef }
+                            readonly
+                            aria-hidden="true"
+                          />
+                        )}
 
-                  { props.suffix && (
-                    <span class="v-textarea__suffix" style={{ opacity: showPlaceholder ? undefined : '0' }}>
-                      { props.suffix }
-                    </span>
-                  ) }
-                </>
-              )
-            },
+                        { props.suffix && (
+                          <span class="v-textarea__suffix" style={{ opacity: showPlaceholder ? undefined : '0' }}>
+                            { props.suffix }
+                          </span>
+                        ) }
+                      </>
+                    )
+                  },
+                }}
+              </VField>
+            ),
             details: hasCounter ? ({ isFocused }) => (
               <>
                 <span />
 
                 <VCounter
-                  active={ props.persistentCounter || isFocused }
+                  active={ props.persistentCounter || isFocused.value }
                   value={ counterValue.value }
                   max={ max.value }
                   v-slots={ slots.counter }
@@ -238,12 +255,11 @@ export const VTextarea = defineComponent({
               </>
             ) : undefined,
           }}
-        </VField>
+        </VInput>
       )
     })
 
     return {
-      fieldRef,
       focus,
       blur,
     }

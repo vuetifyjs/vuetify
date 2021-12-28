@@ -30,7 +30,7 @@
     @at-root #{selector.append('.v-text-field--suffixed', &)}
       --v-field-padding-after: 0
 
-  .v-field__control
+  .v-field
     cursor: text
 
   input
@@ -46,7 +46,7 @@
     &:invalid
       box-shadow: none
 
-  &.v-field--disabled
+  .v-field--disabled
     .v-text-field__prefix,
     .v-text-field__suffix
       color: $text-field-disabled-affix-color
