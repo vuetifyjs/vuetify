@@ -180,7 +180,10 @@ export const VInput = genericComponent<new <T>() => {
     })
 
     return {
+      isValid,
       validate,
+      reset,
+      resetValidation,
       errorMessages,
     }
   },
