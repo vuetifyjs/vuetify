@@ -101,7 +101,7 @@ export const VTextField = defineComponent({
     }
 
     const vInputRef = ref<VInput>()
-    const vFieldRef = ref<VInput>()
+    const vFieldRef = ref<VField>()
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
@@ -206,7 +206,7 @@ export const VTextField = defineComponent({
     return useForwardRef({
       focus,
       blur,
-    }, vInputRef, vFieldRef)
+    }, vInputRef, vFieldRef, inputRef)
   },
 })
 

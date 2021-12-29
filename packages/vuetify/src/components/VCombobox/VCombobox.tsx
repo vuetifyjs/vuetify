@@ -93,14 +93,16 @@ export const VCombobox = defineComponent({
       inputRef.value?.blur()
     }
     function onFocus (e: FocusEvent) {
+      pendingClean = false
       isFocused.value = true
     }
     function onBlur (e: FocusEvent) {
+      pendingClean = true
       isFocused.value = false
     }
 
     const vInputRef = ref<VInput>()
-    const vFieldRef = ref<VInput>()
+    const vFieldRef = ref<VField>()
 
     useRender(() => {
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
@@ -109,6 +111,7 @@ export const VCombobox = defineComponent({
 
       return (
         <VInput
+          ref={ vInputRef }
           class="v-combobox"
           focused={ isFocused.value }
           { ...rootAttrs }
@@ -121,6 +124,7 @@ export const VCombobox = defineComponent({
                 {{
                   activator: ({ props: activatorProps }) => (
                     <VField
+                      ref={ vFieldRef }
                       active={ isDirty.value }
                       onUpdate:active={ val => internalDirty.value = val }
                       onClick:control={ focus }
@@ -183,7 +187,7 @@ export const VCombobox = defineComponent({
       focus,
       blur,
       filteredItems,
-    }, vInputRef, vFieldRef)
+    }, vInputRef, vFieldRef, inputRef)
   },
 })
 
