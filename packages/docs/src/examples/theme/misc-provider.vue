@@ -17,9 +17,11 @@
         <v-list-item>
           <v-list-item-title>One</v-list-item-title>
         </v-list-item>
+
         <v-list-item>
           <v-list-item-title>Two</v-list-item-title>
         </v-list-item>
+
         <v-list-item>
           <v-list-item-title>Three</v-list-item-title>
         </v-list-item>
@@ -38,9 +40,11 @@
           <v-list-item>
             <v-list-item-title>One</v-list-item-title>
           </v-list-item>
+
           <v-list-item>
             <v-list-item-title>Two</v-list-item-title>
           </v-list-item>
+
           <v-list-item>
             <v-list-item-title>Three</v-list-item-title>
           </v-list-item>

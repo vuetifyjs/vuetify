@@ -5,9 +5,11 @@
         <v-list-item>
           <v-list-item-title> Item 1 </v-list-item-title>
         </v-list-item>
+
         <v-list-item>
           <v-list-item-title> Item 2 </v-list-item-title>
         </v-list-item>
+
         <v-list-item>
           <v-list-item-title> Item 3 </v-list-item-title>
         </v-list-item>
