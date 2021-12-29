@@ -50,12 +50,15 @@
           <v-list-item>
             <v-list-item-title>Click Me 1</v-list-item-title>
           </v-list-item>
+
           <v-list-item>
             <v-list-item-title>Click Me 2</v-list-item-title>
           </v-list-item>
+
           <v-list-item>
             <v-list-item-title>Click Me 3</v-list-item-title>
           </v-list-item>
+
           <v-list-item>
             <v-list-item-title>Click Me 4</v-list-item-title>
           </v-list-item>
@@ -65,7 +68,9 @@
       <template v-slot:extension>
         <v-tabs align-with-title>
           <v-tab>Tab 1</v-tab>
+
           <v-tab>Tab 2</v-tab>
+
           <v-tab>Tab 3</v-tab>
         </v-tabs>
       </template>
