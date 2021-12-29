@@ -9,8 +9,11 @@ import { VSheet } from '@/components/VSheet'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
-import type { FilterFunction, FilterMatch } from '@/composables/filter'
 import { useFilter } from '@/composables/filter'
+import { useTextField } from '@/components/VTextField/useTextField'
+
+// Directives
+import Intersect from '@/directives/intersect'
 
 // Utilities
 import { computed, ref } from 'vue'
@@ -19,11 +22,17 @@ import { defineComponent, filterInputAttrs, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import { useForwardRef } from '@/composables/forwardRef'
+import type { FilterFunction, FilterMatch } from '@/composables/filter'
 
 export const VCombobox = defineComponent({
   name: 'VCombobox',
 
+  directives: { Intersect },
+
+  inheritAttrs: false,
+
   props: {
+    autofocus: Boolean,
     placeholder: String,
     items: Array as PropType<any[]>,
     multiple: Boolean,
@@ -66,9 +75,21 @@ export const VCombobox = defineComponent({
       return searchDirty.value ? model.value : ''
     }))
 
+    const {
+      isFocused,
+      inputRef,
+      vInputRef,
+      vFieldRef,
+      focus,
+      blur,
+      getInputProps,
+      intersectOptions,
+    } = useTextField(props)
+
     function onInput () {
       searchDirty.value = !!model.value.length
     }
+
     let pendingClean = false
     function select (item: any) {
       if (menu.value) {
@@ -83,26 +104,12 @@ export const VCombobox = defineComponent({
         pendingClean = false
       }
     }
-
-    const isFocused = ref(false)
-    const inputRef = ref<HTMLInputElement>()
-    function focus () {
-      inputRef.value?.focus()
-    }
-    function blur () {
-      inputRef.value?.blur()
-    }
     function onFocus (e: FocusEvent) {
       pendingClean = false
-      isFocused.value = true
     }
     function onBlur (e: FocusEvent) {
       pendingClean = true
-      isFocused.value = false
     }
-
-    const vInputRef = ref<VInput>()
-    const vFieldRef = ref<VField>()
 
     useRender(() => {
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
@@ -135,14 +142,13 @@ export const VCombobox = defineComponent({
                         ...slots,
                         default: ({ props: slotProps }) => (
                           <input
-                            ref={ inputRef }
                             v-model={ model.value }
+                            v-intersect={ intersectOptions }
                             class="v-field__input"
-                            onInput={ onInput }
                             readonly={ isReadonly.value }
                             disabled={ isDisabled.value }
-                            placeholder={ props.placeholder }
-                            size={ 1 }
+                            { ...getInputProps() }
+                            onInput={ onInput }
                             onFocus={ onFocus }
                             onBlur={ onBlur }
                             { ...slotProps }

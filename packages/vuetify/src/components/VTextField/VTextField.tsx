@@ -8,6 +8,7 @@ import { VCounter } from '@/components/VCounter'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useTextField } from './useTextField'
 
 // Directives
 import Intersect from '@/directives/intersect'
@@ -76,32 +77,16 @@ export const VTextField = defineComponent({
       return props.counter
     })
 
-    function onIntersect (
-      isIntersecting: boolean,
-      entries: IntersectionObserverEntry[]
-    ) {
-      if (!props.autofocus || !isIntersecting) return
-
-      (entries[0].target as HTMLInputElement)?.focus?.()
-    }
-
-    const isFocused = ref(false)
-    const inputRef = ref<HTMLInputElement>()
-    function focus () {
-      inputRef.value?.focus()
-    }
-    function blur () {
-      inputRef.value?.blur()
-    }
-    function onFocus (e: FocusEvent) {
-      isFocused.value = true
-    }
-    function onBlur (e: FocusEvent) {
-      isFocused.value = false
-    }
-
-    const vInputRef = ref<VInput>()
-    const vFieldRef = ref<VField>()
+    const {
+      isFocused,
+      inputRef,
+      vInputRef,
+      vFieldRef,
+      focus,
+      blur,
+      getInputProps,
+      intersectOptions,
+    } = useTextField(props)
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
@@ -141,10 +126,7 @@ export const VTextField = defineComponent({
               >
                 {{
                   ...slots,
-                  default: ({
-                    isActive,
-                    props: { class: fieldClass, ...slotProps },
-                  }) => {
+                  default: ({ isActive, props: slotProps }) => {
                     const showPlaceholder = isActive || props.persistentPlaceholder
 
                     return (
@@ -156,21 +138,13 @@ export const VTextField = defineComponent({
                         ) }
 
                         <input
-                          ref={ inputRef }
-                          class={ fieldClass }
                           style={{ opacity: showPlaceholder ? undefined : '0' }} // can't this just be a class?
                           v-model={ model.value }
-                          v-intersect={[{
-                            handler: onIntersect,
-                          }, null, ['once']]}
-                          autofocus={ props.autofocus }
+                          v-intersect={ intersectOptions }
                           readonly={ isReadonly.value }
                           disabled={ isDisabled.value }
-                          placeholder={ props.placeholder }
-                          size={ 1 }
                           type={ props.type }
-                          onFocus={ onFocus }
-                          onBlur={ onBlur }
+                          { ...getInputProps() }
                           { ...slotProps }
                           { ...inputAttrs }
                         />
