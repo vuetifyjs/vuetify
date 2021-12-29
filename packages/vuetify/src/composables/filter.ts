@@ -2,8 +2,9 @@
 /* eslint-disable no-labels */
 
 // Utilities
-import { getPropertyFromItem, propsFactory, wrapInArray, wrapInRef } from '@/util'
-import { computed } from 'vue'
+import type { MaybeRef } from '@/util'
+import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
+import { computed, unref } from 'vue'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -23,7 +24,7 @@ export interface FilterProps {
 
 // Composables
 export const defaultFilter: FilterFunction = (value, query, item) => {
-  if (value == null || query == null) return -1
+  if (value == null || query == null || query === '') return -1
 
   return value.toString().toLocaleLowerCase().indexOf(query.toString().toLocaleLowerCase())
 }
@@ -38,8 +39,8 @@ export const makeFilterProps = propsFactory({
   },
 }, 'filter')
 
-export function filterItems (
-  items: (Record<string, any> | string)[],
+export function filterItems<T = Record<string, any> | string> (
+  items: T[],
   query: string,
   options?: {
     customKeyFilter?: FilterKeyFunctions
@@ -48,7 +49,7 @@ export function filterItems (
     filterMode?: FilterMode
   },
 ) {
-  const array: (typeof items) = []
+  const array: { item: T, matches: Record<string, number> }[] = []
   // always ensure we fallback
   // to a functioning filter
   const filter = options?.default ?? defaultFilter
@@ -63,11 +64,13 @@ export function filterItems (
     let defaultMatches: Record<string, FilterMatch> | FilterMatch[] = {}
     let match: FilterMatch = -1
 
-    if (typeof item === 'object') {
+    if (!query) {
+      // noop
+    } else if (typeof item === 'object') {
       const filterKeys = keys || Object.keys(item)
 
       for (const key of filterKeys) {
-        const value = getPropertyFromItem(item, key, item)
+        const value = getPropertyFromItem(item as any, key, item)
         const keyFilter = options?.customKeyFilter?.[key]
 
         match = keyFilter
@@ -114,10 +117,10 @@ export function filterItems (
   return array
 }
 
-export function useFilter (
+export function useFilter<T> (
   props: FilterProps,
-  items: Ref<any[]> | any[],
-  query?: Ref<string>,
+  items: MaybeRef<T[]>,
+  query?: Ref<string | undefined>,
 ) {
   const strQuery = computed(() => (
     typeof query?.value !== 'string' &&
@@ -126,7 +129,7 @@ export function useFilter (
 
   const filteredItems = computed(() => {
     return filterItems(
-      wrapInRef(items).value,
+      unref(items),
       strQuery.value,
       {
         customKeyFilter: props.customKeyFilter,

@@ -1,0 +1,17 @@
+@use '../../styles/settings'
+
+.v-combobox
+  input
+    flex: 1
+    opacity: 1
+    transition: .15s opacity settings.$standard-easing
+
+    &:focus,
+    &:active
+      outline: none
+
+    &:invalid
+      box-shadow: none
+
+.v-list-item__mask
+  background: rgba(var(--v-theme-surface-variant), var(--v-disabled-opacity))

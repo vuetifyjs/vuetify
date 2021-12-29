@@ -1,26 +1,40 @@
-import { defineComponent, useRender } from '@/util'
-import { computed, ref } from 'vue'
-import { useProxiedModel } from '@/composables/proxiedModel'
+import './VCombobox.sass'
 
 // Components
 import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
-import { filterInputAttrs } from '@/components/VInput/VInput'
+import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VSheet } from '@/components/VSheet'
 
+// Composables
+import { useProxiedModel } from '@/composables/proxiedModel'
+import type { FilterFunction } from '@/composables/filter'
+import { useFilter } from '@/composables/filter'
+
+// Utilities
+import { computed, ref } from 'vue'
+import { defineComponent, filterInputAttrs, useRender } from '@/util'
+
 // Types
 import type { PropType } from 'vue'
+import { useForwardRef } from '@/composables/forwardRef'
 
 export const VCombobox = defineComponent({
   name: 'VCombobox',
 
   props: {
+    placeholder: String,
     items: Array as PropType<any[]>,
     multiple: Boolean,
-    search: String,
     menu: Boolean,
+    customFilter: Function as PropType<FilterFunction>,
+    filterKeys: {
+      type: [String, Array] as PropType<string | string[]>,
+      default: 'text',
+    },
 
+    ...makeVInputProps(),
     ...makeVFieldProps(),
   },
 
@@ -32,12 +46,10 @@ export const VCombobox = defineComponent({
 
   setup (props, { attrs, slots }) {
     const model = useProxiedModel(props, 'modelValue')
-    const search = useProxiedModel(props, 'search')
     const menu = useProxiedModel(props, 'menu')
 
-    const fieldRef = ref<VField>()
-
     const internalDirty = ref(false)
+    const searchDirty = ref(false)
     const isDirty = computed(() => {
       return internalDirty.value || !!model.value
     })
@@ -50,68 +62,139 @@ export const VCombobox = defineComponent({
         } : item
       })
     })
+    const { filteredItems } = useFilter(props, items, computed(() => {
+      return searchDirty.value ? model.value : ''
+    }))
+
+    function onInput () {
+      searchDirty.value = !!model.value.length
+    }
+    let pendingClean = false
+    function select (item: any) {
+      if (menu.value) {
+        pendingClean = true
+      }
+      model.value = item.value
+      menu.value = false
+    }
+    function onAfterLeave () {
+      if (pendingClean) {
+        searchDirty.value = false
+        pendingClean = false
+      }
+    }
+
+    const isFocused = ref(false)
+    const inputRef = ref<HTMLInputElement>()
+    function focus () {
+      inputRef.value?.focus()
+    }
+    function blur () {
+      inputRef.value?.blur()
+    }
+    function onFocus (e: FocusEvent) {
+      isFocused.value = true
+    }
+    function onBlur (e: FocusEvent) {
+      isFocused.value = false
+    }
+
+    const vInputRef = ref<VInput>()
+    const vFieldRef = ref<VInput>()
 
     useRender(() => {
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [fieldProps, _] = filterFieldProps(props)
+      const [inputProps] = filterInputProps(props)
+      const [fieldProps] = filterFieldProps(props)
 
       return (
-        <VField
-          ref={ fieldRef }
+        <VInput
           class="v-combobox"
-          active={ isDirty.value }
-          onUpdate:active={ val => internalDirty.value = val }
+          focused={ isFocused.value }
           { ...rootAttrs }
-          { ...fieldProps }
-          v-slots={{
+          { ...inputProps }
+        >
+          {{
             ...slots,
-            default: ({
-              isActive,
-              isDisabled,
-              isReadonly,
-              inputRef,
-              props: { class: fieldClass, ...slotProps },
-            }) => {
-              const showPlaceholder = isActive
-              return (
-                <>
-                  <input
-                    class={ fieldClass }
-                    style={{ opacity: showPlaceholder ? undefined : '0' }} // can't this just be a class?
-                    v-model={ model.value }
-                    ref={ inputRef }
-                    readonly={ isReadonly }
-                    disabled={ isDisabled }
-                    placeholder={ props.placeholder }
-                    size={ 1 }
-                    { ...slotProps }
-                    { ...inputAttrs }
-                  />
-
-                  <VMenu v-model={ menu.value } activator="parent">
+            default: ({ isDisabled, isReadonly }) => (
+              <VMenu v-model={ menu.value } onAfterLeave={ onAfterLeave }>
+                {{
+                  activator: ({ props: activatorProps }) => (
+                    <VField
+                      active={ isDirty.value }
+                      onUpdate:active={ val => internalDirty.value = val }
+                      onClick:control={ focus }
+                      { ...activatorProps }
+                      { ...fieldProps }
+                    >
+                      {{
+                        ...slots,
+                        default: ({ props: slotProps }) => (
+                          <input
+                            ref={ inputRef }
+                            v-model={ model.value }
+                            class="v-field__input"
+                            onInput={ onInput }
+                            readonly={ isReadonly.value }
+                            disabled={ isDisabled.value }
+                            placeholder={ props.placeholder }
+                            size={ 1 }
+                            onFocus={ onFocus }
+                            onBlur={ onBlur }
+                            { ...slotProps }
+                            { ...inputAttrs }
+                          />
+                        ),
+                      }}
+                    </VField>
+                  ),
+                  default: () => (
                     <VSheet>
                       <VList>
-                        { items.value.map(item => (
+                        { filteredItems.value.map(({ item, matches }) => (
                           <VListItem
-                            title={ item.text }
                             value={ item.value }
-                            onClick={ () => {
-                              model.value = item.value
-                              menu.value = false
-                            } }
-                          />
+                            onClick={ select.bind(undefined, item) }
+                          >
+                            {{
+                              title: () => (
+                                <div>
+                                  { matches.text != null && ~matches.text
+                                    ? highlightResult(item.text, matches.text, model.value.length)
+                                    : item.text
+                                  }
+                                </div>
+                              ),
+                            }}
+                          </VListItem>
                         )) }
                       </VList>
                     </VSheet>
-                  </VMenu>
-                </>
-              )
-            },
+                  ),
+                }}
+              </VMenu>
+            ),
           }}
-        />
+        </VInput>
       )
     })
+
+    return useForwardRef({
+      focus,
+      blur,
+      filteredItems,
+    }, vInputRef, vFieldRef)
   },
 })
 
 export type VCombobox = InstanceType<typeof VCombobox>
+
+function highlightResult (text: string, start: number, length: number) {
+  return (
+    <>
+      <span class="v-list-item__unmask">{ text.substr(0, start) }</span>
+      <span class="v-list-item__mask">{ text.substr(start, length) }</span>
+      <span class="v-list-item__unmask">{ text.substr(start + length) }</span>
+    </>
+  )
+}
