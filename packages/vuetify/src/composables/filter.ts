@@ -24,7 +24,7 @@ export interface FilterProps {
 
 // Composables
 export const defaultFilter: FilterFunction = (value, query, item) => {
-  if (value == null || query == null || query === '') return -1
+  if (value == null || query == null) return -1
 
   return value.toString().toLocaleLowerCase().indexOf(query.toString().toLocaleLowerCase())
 }
@@ -39,7 +39,7 @@ export const makeFilterProps = propsFactory({
   },
 }, 'filter')
 
-export function filterItems<T = Record<string, any> | string> (
+export function filterItems<T = Record<string, any>> (
   items: T[],
   query: string,
   options?: {
@@ -49,9 +49,8 @@ export function filterItems<T = Record<string, any> | string> (
     filterMode?: FilterMode
   },
 ) {
-  const array: { item: T, matches: Record<string, number> }[] = []
-  // always ensure we fallback
-  // to a functioning filter
+  const array: { item: T, matches: Record<string, FilterMatch> }[] = []
+  // always ensure we fall back to a functioning filter
   const filter = options?.default ?? defaultFilter
   const keys = options?.filterKeys ? wrapInArray(options.filterKeys) : false
   const customFiltersLength = Object.keys(options?.customKeyFilter ?? {}).length
@@ -61,12 +60,10 @@ export function filterItems<T = Record<string, any> | string> (
   loop:
   for (const item of items) {
     const customMatches: Record<string, FilterMatch> = {}
-    let defaultMatches: Record<string, FilterMatch> | FilterMatch[] = {}
+    const defaultMatches: Record<string, FilterMatch> = {}
     let match: FilterMatch = -1
 
-    if (!query) {
-      // noop
-    } else if (typeof item === 'object') {
+    if (query && typeof item === 'object') {
       const filterKeys = keys || Object.keys(item)
 
       for (const key of filterKeys) {
@@ -103,12 +100,6 @@ export function filterItems<T = Record<string, any> | string> (
           !defaultMatchesLength
         )
       ) continue
-    } else if (typeof item === 'string') {
-      match = filter(item, query, item)
-
-      if (match === -1 || match === false) continue
-
-      defaultMatches = wrapInArray(match)
     }
 
     array.push({ item, matches: { ...defaultMatches, ...customMatches } })

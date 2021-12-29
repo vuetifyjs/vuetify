@@ -13,7 +13,7 @@ export function useForwardRef<T extends {}, U extends Ref<{} | undefined>[]> (
       for (const ref of refs) {
         if (ref.value && Reflect.has(ref.value, key)) {
           const val = Reflect.get(ref.value, key)
-          return (typeof val === 'function' && Object.prototype.hasOwnProperty.call(val, 'prototype'))
+          return typeof val === 'function'
             ? val.bind(ref.value)
             : val
         }

@@ -9,7 +9,7 @@ import { VSheet } from '@/components/VSheet'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
-import type { FilterFunction } from '@/composables/filter'
+import type { FilterFunction, FilterMatch } from '@/composables/filter'
 import { useFilter } from '@/composables/filter'
 
 // Utilities
@@ -160,16 +160,7 @@ export const VCombobox = defineComponent({
                             value={ item.value }
                             onClick={ select.bind(undefined, item) }
                           >
-                            {{
-                              title: () => (
-                                <div>
-                                  { matches.text != null && ~matches.text
-                                    ? highlightResult(item.text, matches.text, model.value.length)
-                                    : item.text
-                                  }
-                                </div>
-                              ),
-                            }}
+                            {{ title: () => highlightResult(item.text, matches.text, model.value.length) }}
                           </VListItem>
                         )) }
                       </VList>
@@ -193,12 +184,16 @@ export const VCombobox = defineComponent({
 
 export type VCombobox = InstanceType<typeof VCombobox>
 
-function highlightResult (text: string, start: number, length: number) {
-  return (
-    <>
-      <span class="v-list-item__unmask">{ text.substr(0, start) }</span>
-      <span class="v-list-item__mask">{ text.substr(start, length) }</span>
-      <span class="v-list-item__unmask">{ text.substr(start + length) }</span>
-    </>
-  )
+function highlightResult (text: string, matches: FilterMatch, length: number) {
+  if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
+
+  return typeof matches === 'number' && ~matches
+    ? (
+      <>
+        <span class="v-list-item__unmask">{ text.substr(0, matches) }</span>
+        <span class="v-list-item__mask">{ text.substr(matches, length) }</span>
+        <span class="v-list-item__unmask">{ text.substr(matches + length) }</span>
+      </>
+    )
+    : text
 }
