@@ -10,11 +10,14 @@ import './VChipGroup.sass'
 // Composables
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 // import mixins from '../../util/mixins'
-import { defineComponent } from '@/util'
+import { deepEqual, defineComponent } from '@/util'
+import type { PropType } from 'vue'
+import { toRef } from 'vue'
+import { provideDefaults } from '@/composables/defaults'
 
 /* @vue/component */
 export const VChipGroupSymbol = Symbol.for('vuetify:v-chip-group')
@@ -23,7 +26,15 @@ export const VChipGroup = defineComponent({
   name: 'VChipGroup',
 
   props: {
+    color: String,
     column: Boolean,
+    valueComparator: {
+      type: Function as PropType<typeof deepEqual>,
+      default: deepEqual,
+    },
+    // TODO: implement
+    // mobileBreakpoint: [Number, String],
+
     ...makeGroupProps({
       selectedClass: 'v-chip--selected',
     }),
@@ -36,8 +47,16 @@ export const VChipGroup = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { isSelected, select, next, prev, selected } = useGroup(props, VChipGroupSymbol)
+
+    provideDefaults({
+      VChip: {
+        activeColor: toRef(props, 'color'),
+        selectedClass: toRef(props, 'selectedClass'),
+        variant: 'contained-text',
+      },
+    })
 
     return () => (
       <props.tag

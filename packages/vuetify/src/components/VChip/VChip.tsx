@@ -31,6 +31,9 @@ export const VChip = defineComponent({
   directives: { Ripple },
 
   props: {
+    // TODO: Implement
+    // active: Boolean,
+    // activeColor: String,
     activeClass: String,
     appendAvatar: String,
     appendIcon: String,
@@ -107,7 +110,7 @@ export const VChip = defineComponent({
       const hasClose = !!(slots.close || props.closable)
       const hasPrepend = !!(slots.prepend || props.prependIcon || props.prependAvatar)
       const isClickable = !props.disabled && (!!VChipGroupSymbol || link.isClickable.value || props.link)
-      const onClickFunc = !!props.link ? props.link : group?.toggle
+      const onClickFunc = props.link ? props.link : group?.toggle
 
       return isActive.value && (
         <Tag
