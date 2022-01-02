@@ -328,7 +328,12 @@ export default Vue.extend({
         this.internalOptions.mustSort,
         this.internalOptions.multiSort
       )
-      this.updateOptions({ sortBy, sortDesc, page })
+
+      this.updateOptions({
+        sortBy: sortBy.length ? sortBy : [''], // When array is empty, reset to its initial value
+        sortDesc: sortDesc.length ? sortDesc : [false], // When array is empty, reset to its initial value
+        page,
+      })
     },
     sortArray (sortBy: string[]) {
       const sortDesc = sortBy.map(s => {
