@@ -1,97 +1,101 @@
 // Components
-import { VMenu } from '@/components/VMenu'
 import { VList, VListItem } from '@/components/VList'
+import { VMenu } from '@/components/VMenu'
+import { VTextField } from '..'
 
-import { useProxiedModel } from '@/composables/proxiedModel'
 // Utility
-import { filterInputAttrs, genericComponent, useRender } from '@/util'
-import { VField } from '@/components/VField'
-import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
+import { genericComponent, useRender } from '@/util'
+import type { PropType } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 // Types
 import type { MakeSlots } from '@/util'
-import { computed, ref } from 'vue'
+import type { LinkProps } from '@/composables/router'
+import { useProxiedModel } from '@/composables/proxiedModel'
+
+export type SelectItem = string | (LinkProps & {
+  text: string
+})
+
+function filterDuplicates (arr: any[]) {
+  const uniqueValues = new Map()
+  for (let index = 0; index < arr.length; ++index) {
+    const item = arr[index]
+
+    // Do not deduplicate headers or dividers (#12517)
+    if (item.header || item.divider) {
+      uniqueValues.set(item, item)
+      continue
+    }
+
+    const val = this.getValue(item)
+
+    // TODO: comparator
+    !uniqueValues.has(val) && uniqueValues.set(val, item)
+  }
+  return Array.from(uniqueValues.values())
+}
 
 export const VSelect = genericComponent<new <T>() => {
   $slots: MakeSlots<{
     default: []
+    title: []
   }>
 }>()({
   name: 'VSelect',
 
   props: {
-    ...makeVFieldProps({
-      appendInnerIcon: 'mdi-menu-down',
-    }),
+    items: {
+      type: Array as PropType<SelectItem[]>,
+      default: () => ([]),
+    },
+    modelValue: {
+      type: Array,
+      default: () => ([]),
+    },
   },
 
   emits: {
-    'update:modelValue': (val: string) => true,
+    'update:modelValue': (val: any) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { attrs, slots, emit }) {
     const model = useProxiedModel(props, 'modelValue')
-    const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-    const [fieldProps, _] = filterFieldProps(props)
-    const isMenuActive = ref(false)
-    const fieldRef = ref<VField>()
+    const activated = ref<unknown[]>([])
+    const items = computed(() => (
+      props.items.map(item => (
+        Object(item) === item
+          ? item
+          : { title: item, value: item }
+      ))
+    ))
+
+    watch(() => !!activated.value.length, val => {
+      console.log('here')
+    })
 
     useRender(() => {
       return (
-        <VField
-          ref={ fieldRef }
-          class={[
-            'v-select',
-          ]}
-          active={ isMenuActive.value }
-          { ...rootAttrs }
-          { ...fieldProps }
-          v-slots={{
+        <VTextField
+          { ...attrs }
+          { ...props }
+          readonly
+          modelValue={ model.value.join(', ') }
+        >
+          {{
             ...slots,
-            default: ({
-              isActive,
-              isDisabled,
-              isReadonly,
-              inputRef,
-              props: { class: fieldClass, ...slotProps },
-            }) => {
-              return (
-                <>
-                  <VMenu
-                    activator={ fieldRef.value?.$el.firstElementChild || 'parent' }
-                    anchor="top center"
-                    absolute
-                    v-model={ isMenuActive.value }
-                  >
-                    <VList elevation="4" rounded>
-                      <VListItem title="Foobar"></VListItem>
-                      <VListItem title="Foobar"></VListItem>
-                      <VListItem title="Foobar"></VListItem>
-                      <VListItem title="Foobar"></VListItem>
-                    </VList>
-                  </VMenu>
-
-                  <input
-                    class={ fieldClass }
-                    v-model={ model.value }
-                    // v-intersect={[{
-                    //   handler: onIntersect,
-                    // }, null, ['once']]}
-                    ref={ inputRef }
-                    // autofocus={ props.autofocus }
-                    aria-readonly={ isReadonly.value }
-                    readonly
-                    disabled={ isDisabled.value }
-                    // placeholder={ props.placeholder }
-                    type="text"
-                    { ...slotProps }
-                    { ...inputAttrs }
-                  />
-                </>
-              )
-            },
+            control: () => (
+              <VMenu activator="parent" attach>
+                <VList
+                  elevation="4"
+                  rounded
+                  v-model:activated={ activated }
+                  items={ items.value }
+                />
+              </VMenu>
+            ),
           }}
-        />
+        </VTextField>
       )
     })
 

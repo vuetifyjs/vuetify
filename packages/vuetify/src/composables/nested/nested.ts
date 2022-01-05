@@ -196,6 +196,7 @@ export const useNested = (props: NestedProps) => {
           parents: parents.value,
           event,
         })
+        console.log(newActive)
 
         newActive && (active.value = newActive)
       },

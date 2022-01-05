@@ -14,7 +14,8 @@ import Intersect from '@/directives/intersect'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, filterInputAttrs, useRender } from '@/util'
+import type { MakeSlots } from '@/util'
+import { defineComponent, filterInputAttrs, genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -22,7 +23,11 @@ import { useForwardRef } from '@/composables/forwardRef'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
-export const VTextField = defineComponent({
+export const VTextField = genericComponent<new <T>() => {
+  $slots: MakeSlots<{
+    attach: []
+  }>
+}>()({
   name: 'VTextField',
 
   directives: { Intersect },
