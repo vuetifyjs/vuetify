@@ -13,7 +13,7 @@ import type { MakeSlots } from '@/util'
 import type { LinkProps } from '@/composables/router'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
-export type SelectItem = string | (LinkProps & {
+export type SelectItem = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any) | (LinkProps & {
   text: string
 })
 
@@ -61,7 +61,13 @@ export const VSelect = genericComponent<new <T>() => {
   },
 
   setup (props, { attrs, slots, emit }) {
-    const model = useProxiedModel(props, 'modelValue', [], v => wrapInArray(v), v => props.multiple ? v : v[0])
+    const model = useProxiedModel(
+      props,
+      'modelValue',
+      [],
+      v => wrapInArray(v),
+      (v: any) => props.multiple ? v : v[0]
+    )
     const menu = ref(false)
     const items = computed(() => (
       props.items.map(item => (
