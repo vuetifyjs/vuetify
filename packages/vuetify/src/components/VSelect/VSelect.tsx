@@ -4,7 +4,7 @@ import { VMenu } from '@/components/VMenu'
 import { VTextField } from '..'
 
 // Utility
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, useRender, wrapInArray } from '@/util'
 import type { PropType } from 'vue'
 import { computed, ref, watch } from 'vue'
 
@@ -50,9 +50,10 @@ export const VSelect = genericComponent<new <T>() => {
       default: () => ([]),
     },
     modelValue: {
-      type: Array,
+      type: [String, Array],
       default: () => ([]),
     },
+    multiple: Boolean,
   },
 
   emits: {
@@ -60,8 +61,8 @@ export const VSelect = genericComponent<new <T>() => {
   },
 
   setup (props, { attrs, slots, emit }) {
-    const model = useProxiedModel(props, 'modelValue')
-    const activated = ref<unknown[]>([])
+    const model = useProxiedModel(props, 'modelValue', [], v => wrapInArray(v), v => props.multiple ? v : v[0])
+    const menu = ref(false)
     const items = computed(() => (
       props.items.map(item => (
         Object(item) === item
@@ -70,8 +71,12 @@ export const VSelect = genericComponent<new <T>() => {
       ))
     ))
 
-    watch(() => !!activated.value.length, val => {
-      console.log('here')
+    const activated = computed({
+      get: () => model.value,
+      set: val => {
+        model.value = val
+        menu.value = false
+      },
     })
 
     useRender(() => {
@@ -85,12 +90,13 @@ export const VSelect = genericComponent<new <T>() => {
           {{
             ...slots,
             control: () => (
-              <VMenu activator="parent" attach>
+              <VMenu v-model={ menu.value } activator="parent" anchor="bottom center" eager>
                 <VList
                   elevation="4"
                   rounded
-                  v-model:activated={ activated }
+                  v-model:active={ activated.value }
                   items={ items.value }
+                  activeStrategy={ props.multiple ? 'multiple' : 'single' }
                 />
               </VMenu>
             ),

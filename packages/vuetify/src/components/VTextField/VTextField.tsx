@@ -161,6 +161,8 @@ export const VTextField = genericComponent<new <T>() => {
                           </span>
                         ) }
 
+                        { slots.default?.() }
+
                         <input
                           ref={ inputRef }
                           class={ fieldClass }
