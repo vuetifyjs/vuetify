@@ -1,7 +1,7 @@
-import { getCurrentInstance, propsFactory } from '@/util'
 // Utilities
 import { computed, inject, provide, ref } from 'vue'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { propsFactory } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
@@ -55,7 +55,6 @@ export const makeFormProps = propsFactory({
 })
 
 export function createForm (props: FormProps) {
-  const vm = getCurrentInstance('createForm')
   const model = useProxiedModel(props, 'modelValue')
 
   const isDisabled = computed(() => props.disabled)
@@ -64,9 +63,7 @@ export function createForm (props: FormProps) {
   const items = ref<FormField[]>([])
   const errorMessages = ref<FormValidationResult[]>([])
 
-  async function submit (e: Event) {
-    e.preventDefault()
-
+  async function validate () {
     const results = []
     let valid = true
 
@@ -93,24 +90,18 @@ export function createForm (props: FormProps) {
     model.value = valid
     isValidating.value = false
 
-    vm?.emit('submit', e)
+    return { valid, errorMessages: errorMessages.value }
   }
 
-  async function reset (e: Event) {
-    e.preventDefault()
-
+  function reset () {
     items.value.forEach(item => item.reset())
     model.value = null
-
-    vm?.emit('reset', e)
   }
 
-  async function resetValidation () {
+  function resetValidation () {
     items.value.forEach(item => item.resetValidation())
     errorMessages.value = []
     model.value = null
-
-    vm?.emit('resetValidation')
   }
 
   provide(FormKey, {
@@ -139,7 +130,7 @@ export function createForm (props: FormProps) {
     isReadonly,
     isValidating,
     items,
-    submit,
+    validate,
     reset,
     resetValidation,
   }

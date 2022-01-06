@@ -70,6 +70,7 @@ export const VInput = genericComponent<new <T>() => {
   },
 
   emits: {
+    'update:modelValue': (val: any) => true,
     'click:prepend': (e: MouseEvent) => true,
     'click:append': (e: MouseEvent) => true,
   },
