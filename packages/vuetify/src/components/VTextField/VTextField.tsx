@@ -7,6 +7,7 @@ import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/V
 import { VCounter } from '@/components/VCounter'
 
 // Composables
+import { useForwardRef } from '@/composables/forwardRef'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
@@ -14,19 +15,16 @@ import Intersect from '@/directives/intersect'
 
 // Utilities
 import { computed, ref } from 'vue'
-import type { MakeSlots } from '@/util'
-import { defineComponent, filterInputAttrs, genericComponent, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, useRender } from '@/util'
 
 // Types
+import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
-import { useForwardRef } from '@/composables/forwardRef'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
 export const VTextField = genericComponent<new <T>() => {
-  $slots: MakeSlots<{
-    attach: []
-  }>
+  $slots: MakeSlots<{}>
 }>()({
   name: 'VTextField',
 
