@@ -228,7 +228,7 @@ export default baseMixins.extend({
         // It isn't the document or the dialog body
         ![document, this.$refs.content].includes(target) &&
         // It isn't inside the dialog body
-        !this.$refs.content.contains(target) &&
+        (this.$refs.content !== undefined && !this.$refs.content.contains(target)) &&
         // We're the topmost dialog
         this.activeZIndex >= this.getMaxZIndex() &&
         // It isn't inside a dependent element (like a menu)
