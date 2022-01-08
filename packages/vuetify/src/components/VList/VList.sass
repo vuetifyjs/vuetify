@@ -1,4 +1,5 @@
 @forward './variables'
+@use 'sass:list'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -58,9 +59,11 @@
 
   @at-root
     @include tools.density('v-list', $list-density) using ($modifier)
+      $base-padding: list.nth($list-item-padding, 2)
+
       #{$root}
         min-height: $list-subheader-min-height + ($modifier * $list-subheader-min-height-multiplier)
-        padding-inline-start: calc(#{$list-subheader-padding-start} + (var(--v-list-depth) * #{$list-item-avatar-size + ($modifier * $list-item-avatar-size-multiplier)}))
+        padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
 
   &--inset
     padding-inline-start: $list-subheader-inset-padding-start
