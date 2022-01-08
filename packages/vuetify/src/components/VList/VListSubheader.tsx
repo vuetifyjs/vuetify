@@ -12,8 +12,8 @@ export const VListSubheader = defineComponent({
   props: {
     color: String,
     inset: Boolean,
-    title: String,
     sticky: Boolean,
+    title: String,
 
     ...makeTagProps(),
   },

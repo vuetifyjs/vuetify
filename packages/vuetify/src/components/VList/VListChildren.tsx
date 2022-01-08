@@ -37,18 +37,18 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
 
       return children ? (
         <VListGroup
-          value={itemProps?.value}
-          items={children}
+          value={ itemProps?.value }
+          items={ children }
         >
           {{
             ...slots,
             header: headerProps => slots.externalHeader
               ? slots.externalHeader({ ...itemProps, ...headerProps })
-              : <VListItem {...itemProps} {...headerProps} />,
+              : <VListItem { ...itemProps } { ...headerProps } />,
           }}
         </VListGroup>
       ) : (
-        slots.item ? slots.item(itemProps) : <VListItem {...itemProps} v-slots={ slots } />
+        slots.item ? slots.item(itemProps) : <VListItem { ...itemProps } v-slots={ slots } />
       )
     })
   },
