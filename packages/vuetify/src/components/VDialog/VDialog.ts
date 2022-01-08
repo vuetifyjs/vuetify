@@ -181,7 +181,7 @@ export default baseMixins.extend({
       // Double nextTick to wait for lazy content to be generated
       this.$nextTick(() => {
         this.$nextTick(() => {
-          if (!this.$refs.content.contains(document.activeElement)) {
+          if (this.$refs.content !== undefined && !this.$refs.content.contains(document.activeElement)) {
             this.previousActiveElement = document.activeElement as HTMLElement
             this.$refs.content.focus()
           }
