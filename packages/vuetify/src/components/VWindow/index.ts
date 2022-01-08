@@ -1,1 +1,2 @@
-export { default as VWindow } from './VWindow'
+export * from './VWindow'
+export * from './VWindowItem'
