@@ -1,29 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VDialog.ts should only set tabindex if active 1`] = `
-<div role="dialog"
-     aria-modal="true"
-     class="v-dialog__content"
-     style="z-index: 0;"
+<div class="v-dialog"
+     style="transform-origin: center center; display: none;"
 >
-  <div class="v-dialog"
-       style="transform-origin: center center; display: none;"
-  >
-  </div>
 </div>
 `;
 
 exports[`VDialog.ts should only set tabindex if active 2`] = `
-<div role="dialog"
-     aria-modal="true"
-     class="v-dialog__content v-dialog__content--active"
-     style="z-index: 202; z-index: 202;"
+<div class="v-dialog v-dialog--active"
+     style="transform-origin: center center;"
      tabindex="0"
 >
-  <div class="v-dialog v-dialog--active"
-       style="transform-origin: center center;"
-  >
-  </div>
 </div>
 `;
 

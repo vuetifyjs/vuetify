@@ -17,7 +17,7 @@ import Toggleable from '../../mixins/toggleable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 import { removed } from '../../util/console'
 import {
   convertToUnit,
@@ -37,8 +37,15 @@ const baseMixins = mixins(
   Toggleable
 )
 
+interface options extends ExtractVue<typeof baseMixins> {
+  $refs: {
+    dialog: HTMLElement
+    content: HTMLElement
+  }
+}
+
 /* @vue/component */
-export default baseMixins.extend({
+export default baseMixins.extend<options>().extend({
   name: 'v-dialog',
 
   directives: { ClickOutside },
@@ -181,9 +188,9 @@ export default baseMixins.extend({
       // Double nextTick to wait for lazy content to be generated
       this.$nextTick(() => {
         this.$nextTick(() => {
-          if (!this.$refs.content.contains(document.activeElement)) {
+          if (!this.$refs.dialog.contains(document.activeElement)) {
             this.previousActiveElement = document.activeElement as HTMLElement
-            this.$refs.content.focus()
+            this.$refs.dialog.focus()
           }
           this.bind()
         })
@@ -254,7 +261,6 @@ export default baseMixins.extend({
             class: this.contentClasses,
             attrs: {
               role: 'dialog',
-              tabindex: this.isActive ? 0 : undefined,
               'aria-modal': this.hideOverlay ? undefined : 'true',
               ...this.getScopeIdAttrs(),
             },
@@ -281,6 +287,9 @@ export default baseMixins.extend({
     genInnerContent () {
       const data: VNodeData = {
         class: this.classes,
+        attrs: {
+          tabindex: this.isActive ? 0 : undefined,
+        },
         ref: 'dialog',
         directives: [
           {
