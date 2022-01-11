@@ -169,6 +169,7 @@ export const VInput = genericComponent<new <T>() => {
             <div class="v-input__details">
               <VMessages
                 active={ showMessages }
+                color={ isValid.value === false ? 'error' : undefined }
                 value={ errorMessages.value.length > 0
                   ? errorMessages.value
                   : (hasMessages ? props.messages : props.hint)
