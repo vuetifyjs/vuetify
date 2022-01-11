@@ -108,9 +108,9 @@ export const VWindow = defineComponent({
       const itemsLength = group.items.value.length
       const lastIndex = itemsLength - 1
 
-      if (itemsLength <= 2) isReversed.value = newVal < oldVal
-
-      if (newVal === lastIndex && oldVal === 0) {
+      if (itemsLength <= 2) {
+        isReversed.value = newVal < oldVal
+      } else if (newVal === lastIndex && oldVal === 0) {
         isReversed.value = true
       } else if (newVal === 0 && oldVal === lastIndex) {
         isReversed.value = false
@@ -134,7 +134,7 @@ export const VWindow = defineComponent({
       const arrows = []
 
       const prevProps = {
-        icon: isRtlReverse.value ? props.nextIcon : props.prevIcon,
+        icon: isRtl.value ? props.nextIcon : props.prevIcon,
         class: `v-window__${isRtlReverse.value ? 'right' : 'left'}`,
         onClick: group.prev,
         ariaLabel: t('$vuetify.carousel.prev'),
@@ -148,7 +148,7 @@ export const VWindow = defineComponent({
       )
 
       const nextProps = {
-        icon: isRtlReverse.value ? props.prevIcon : props.nextIcon,
+        icon: isRtl.value ? props.prevIcon : props.nextIcon,
         class: `v-window__${isRtlReverse.value ? 'left' : 'right'}`,
         onClick: group.next,
         ariaLabel: t('$vuetify.carousel.next'),
