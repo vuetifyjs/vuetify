@@ -28,7 +28,6 @@ $button-bottom-navigation-text-transform: none !default;
 $button-bottom-navigation-transition-duration: .2s !default;
 $button-pagination-active-overlay-opacity: var(--v-border-opacity) !default;
 $button-pagination-border-radius: settings.$border-radius-root !default;
-$button-pagination-elevation: 0 !default;
 $button-border-color: settings.$border-color-root !default;
 $button-border-radius: settings.$border-radius-root !default;
 $button-border-style: settings.$border-style-root !default;
@@ -62,7 +61,6 @@ $button-stacked-width-ratio: 1 !default;
 $button-density: ('default': 0, 'comfortable': -2, 'compact': -3) !default;
 $button-stacked-density: ('default': 0, 'comfortable': -4, 'compact': -6) !default;
 $button-icon-density: ('default': 3, 'comfortable': 0, 'compact': -2) !default;
-$button-pagination-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 
 $button-border: (
   $button-border-color,
