@@ -3,6 +3,8 @@ import type { mount as cyMount } from '@cypress/vue'
 import type { SnapshotOptions } from '@percy/core'
 import type { MountingOptions, VueWrapper } from '@vue/test-utils'
 
+type Swipe = number[] | string
+
 declare global {
   namespace Cypress {
     export interface Chainable {
@@ -14,6 +16,7 @@ declare global {
         options?: SnapshotOptions
       ): Chainable
       vue (): Cypress.Chainable<VueWrapper<any>>
+      swipe (...path: Swipe[]): Cypress.Chainable<void>
     }
   }
 }

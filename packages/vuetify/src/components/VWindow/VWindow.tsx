@@ -55,7 +55,10 @@ export const VWindow = defineComponent({
       type: [Boolean, String],
       validator: (v: any) => typeof v === 'boolean' || v === 'hover',
     },
-    touch: [Object, Boolean] as PropType<boolean | TouchHandlers>,
+    touch: {
+      type: [Object, Boolean] as PropType<boolean | TouchHandlers>,
+      default: undefined,
+    },
     direction: {
       type: String,
       default: 'horizontal',
@@ -127,10 +130,18 @@ export const VWindow = defineComponent({
       rootRef,
     })
 
-    const arrows = computed(() => {
-      const firstActive = activeIndex.value === 0
-      const lastActive = activeIndex.value === group.items.value.length - 1
+    const canMoveBack = computed(() => props.continuous || activeIndex.value !== 0)
+    const canMoveForward = computed(() => props.continuous || activeIndex.value !== group.items.value.length - 1)
 
+    function prev () {
+      canMoveBack.value && group.prev()
+    }
+
+    function next () {
+      canMoveForward.value && group.next()
+    }
+
+    const arrows = computed(() => {
       const arrows = []
 
       const prevProps = {
@@ -140,7 +151,7 @@ export const VWindow = defineComponent({
         ariaLabel: t('$vuetify.carousel.prev'),
       }
 
-      arrows.push(props.continuous || !firstActive
+      arrows.push(canMoveBack.value
         ? slots.prev
           ? slots.prev(prevProps)
           : <VBtn variant="text" { ...prevProps } />
@@ -154,7 +165,7 @@ export const VWindow = defineComponent({
         ariaLabel: t('$vuetify.carousel.next'),
       }
 
-      arrows.push(props.continuous || !lastActive
+      arrows.push(canMoveForward.value
         ? slots.next
           ? slots.next(nextProps)
           : <VBtn variant="text" { ...nextProps } />
@@ -169,10 +180,10 @@ export const VWindow = defineComponent({
 
       const options: TouchHandlers = {
         left: () => {
-          isRtlReverse.value ? group.prev() : group.next()
+          isRtlReverse.value ? prev() : next()
         },
         right: () => {
-          isRtlReverse.value ? group.next() : group.prev()
+          isRtlReverse.value ? next() : prev()
         },
         end: ({ originalEvent }) => {
           originalEvent.stopPropagation()
@@ -205,9 +216,12 @@ export const VWindow = defineComponent({
       >
         <div class="v-window__container">
           { slots.default?.() }
-          <div class="v-window__controls">
-            { props.showArrows !== false && arrows.value }
-          </div>
+
+          { props.showArrows !== false && (
+            <div class="v-window__controls">
+              { arrows.value }
+            </div>
+          ) }
         </div>
       </props.tag>
     )
