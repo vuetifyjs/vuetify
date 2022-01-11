@@ -53,3 +53,7 @@ Cypress.Commands.add('setProps', (props: Record<string, unknown> = {}) => {
     return vueWrapper
   })
 })
+
+Cypress.Commands.add('vue', () => {
+  return cy.get('@wrapper')
+})
