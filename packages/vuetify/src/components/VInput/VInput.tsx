@@ -169,7 +169,10 @@ export const VInput = genericComponent<new <T>() => {
             <div class="v-input__details">
               <VMessages
                 active={ showMessages }
-                value={ errorMessages.value || (hasMessages ? props.messages : props.hint) }
+                value={ errorMessages.value.length > 0
+                  ? errorMessages.value
+                  : (hasMessages ? props.messages : props.hint)
+                }
                 v-slots={{ default: slots.messages }}
               />
 
