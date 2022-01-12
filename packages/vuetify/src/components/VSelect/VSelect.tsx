@@ -1,40 +1,27 @@
+// Styles
+import './VSelect.sass'
+
 // Components
 import { VList } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
-import { VTextField } from '..'
+import { VTextField } from '@/components/VTextField'
+
+// Composables
+import { makeFilterProps, useFilter } from '@/composables/filter'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { genericComponent, useRender, wrapInArray } from '@/util'
-import type { PropType } from 'vue'
 import { computed, ref } from 'vue'
+import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { MakeSlots } from '@/util'
 import type { LinkProps } from '@/composables/router'
-import { useProxiedModel } from '@/composables/proxiedModel'
+import type { MakeSlots } from '@/util'
+import type { PropType } from 'vue'
 
 export type SelectItem = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any) | (LinkProps & {
   text: string
 })
-
-// function filterDuplicates (arr: any[]) {
-//   const uniqueValues = new Map()
-//   for (let index = 0; index < arr.length; ++index) {
-//     const item = arr[index]
-
-//     // Do not deduplicate headers or dividers (#12517)
-//     if (item.header || item.divider) {
-//       uniqueValues.set(item, item)
-//       continue
-//     }
-
-//     const val = this.getValue(item)
-
-//     // TODO: comparator
-//     !uniqueValues.has(val) && uniqueValues.set(val, item)
-//   }
-//   return Array.from(uniqueValues.values())
-// }
 
 export const VSelect = genericComponent<new <T>() => {
   $slots: MakeSlots<{
@@ -54,13 +41,15 @@ export const VSelect = genericComponent<new <T>() => {
       default: () => ([]),
     },
     multiple: Boolean,
+
+    ...makeFilterProps(),
   },
 
   emits: {
     'update:modelValue': (val: any) => true,
   },
 
-  setup (props, { attrs, slots, emit }) {
+  setup (props, { slots }) {
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -68,9 +57,11 @@ export const VSelect = genericComponent<new <T>() => {
       v => wrapInArray(v),
       (v: any) => props.multiple ? v : v[0]
     )
+    const { filteredItems } = useFilter(props, props.items)
+
     const menu = ref(false)
     const items = computed(() => (
-      props.items.map(item => (
+      filteredItems.value.map(({ item }: any) => (
         Object(item) === item
           ? item
           : { title: item, value: item }
@@ -81,6 +72,9 @@ export const VSelect = genericComponent<new <T>() => {
       get: () => model.value,
       set: val => {
         model.value = val
+
+        if (props.multiple) return
+
         menu.value = false
       },
     })
@@ -88,24 +82,25 @@ export const VSelect = genericComponent<new <T>() => {
     useRender(() => {
       return (
         <VTextField
-          { ...attrs }
-          { ...props }
+          class="v-select"
           readonly
-          modelValue={ model.value.join(', ') }
+          persistentPlaceholder={ menu.value || wrapInArray(model.value).length > 0 }
         >
           {{
             ...slots,
             default: slotProps => (
               <>
-                <VMenu v-model={ menu.value } activator="parent" anchor="bottom center" eager>
+                <VMenu v-model={ menu.value } activator="parent" anchor="bottom center" content-class="v-select__content">
                   <VList
-                    elevation="4"
-                    rounded
                     v-model:active={ activated.value }
                     items={ items.value }
                     activeStrategy={ props.multiple ? 'multiple' : 'single' }
                   />
                 </VMenu>
+
+                <div class="v-select__selections">
+                  { model.value.join(', ') }
+                </div>
 
                 { slots.default?.(slotProps) }
               </>

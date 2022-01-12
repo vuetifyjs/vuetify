@@ -1,0 +1,20 @@
+@forward './variables'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+.v-select
+  &__content
+    overflow: hidden
+
+    @include tools.elevation($select-content-elevation)
+    @include tools.rounded($select-content-border-radius)
+
+  &__selections
+    padding-inline-start: var(--v-field-padding-before)
+    padding-inline-end: var(--v-field-padding-after)
+    padding-top: var(--v-field-padding-top)
+    padding-bottom: var(--v-field-padding-bottom)
+
+  .v-field__input
+    text-overflow: ellipsis

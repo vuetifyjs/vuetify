@@ -132,7 +132,7 @@ export const VTextField = genericComponent<new <T>() => {
             default: ({ isDisabled, isReadonly }) => (
               <VField
                 ref={ vFieldRef }
-                active={ isDirty.value }
+                active={ isDirty.value || props.persistentPlaceholder }
                 onUpdate:active={ val => internalDirty.value = val }
                 onClick:control={ focus }
                 onClick:clear={ e => {
