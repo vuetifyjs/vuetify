@@ -32,13 +32,13 @@ Overlays can be opened with v-model, or by clicking or hovering on an activator 
 
 Related props:
 
- - `activator`
- - `activatorProps`
- - `openOnClick`
- - `openOnHover`
- - `openOnFocus`
- - `closeDelay`
- - `openDelay`
+- `activator`
+- `activatorProps`
+- `openOnClick`
+- `openOnHover`
+- `openOnFocus`
+- `closeDelay`
+- `openDelay`
 
 ### Activator prop
 
@@ -68,11 +68,13 @@ For more manual control, the slot can be used instead. `props` is an object cont
 ## Position Strategies
 
 ### Static (default)
+
 `position-strategy="static"`
 
 Overlay content is absolutely positioned to the center of its container by default.
 
 ### Connected
+
 `position-strategy="connected"`
 
 The connected strategy is used by [v-menu](/components/menus) and [v-tooltip](/components/tooltips) to attach the overlay content to an activator element.
