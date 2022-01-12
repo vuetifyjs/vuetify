@@ -21,6 +21,7 @@ import type { GroupItemProvide } from '@/composables/group'
 import type { TouchHandlers } from '@/directives/touch'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useLocale } from '@/composables/locale'
+import { provideDefaults } from '@/composables/defaults'
 
 type WindowProvide = {
   transition: ComputedRef<undefined | string>
@@ -141,6 +142,12 @@ export const VWindow = defineComponent({
       canMoveForward.value && group.next()
     }
 
+    provideDefaults({
+      VBtn: {
+        variant: 'text',
+      },
+    }, { scoped: true })
+
     const arrows = computed(() => {
       const arrows = []
 
@@ -154,7 +161,7 @@ export const VWindow = defineComponent({
       arrows.push(canMoveBack.value
         ? slots.prev
           ? slots.prev({ props: prevProps })
-          : <VBtn variant="text" { ...prevProps } />
+          : <VBtn { ...prevProps } />
         : <div />
       )
 
@@ -168,7 +175,7 @@ export const VWindow = defineComponent({
       arrows.push(canMoveForward.value
         ? slots.next
           ? slots.next({ props: nextProps })
-          : <VBtn variant="text" { ...nextProps } />
+          : <VBtn { ...nextProps } />
         : <div />
       )
 
