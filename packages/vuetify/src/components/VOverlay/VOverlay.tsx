@@ -200,10 +200,7 @@ export const VOverlay = genericComponent<new () => {
       <>
         { slots.activator?.({
           isActive: isActive.value,
-          props: mergeProps({
-            modelValue: isActive.value,
-            'onUpdate:modelValue': (val: boolean) => isActive.value = val,
-          }, toHandlers(activatorEvents.value), props.activatorProps),
+          props: mergeProps(toHandlers(activatorEvents.value), props.activatorProps),
         }) }
         <Teleport
           disabled={ !teleportTarget.value }
