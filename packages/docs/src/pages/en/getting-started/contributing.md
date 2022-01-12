@@ -217,7 +217,7 @@ Some changes though are _substantial_, and we ask that these be put through a bi
 
 In order to get a major feature added to Vuetify you must get your RFC merged into this repository as a `.md` file. The following is a guide on how to get started:
 
-- Fork the Vuetify RFC repo <https://github.com/vuetifyjs/rfcs>
+- Fork the Vuetify RFC repo https://github.com/vuetifyjs/rfcs
 
 - Copy `0000-template.md` to `active-rfcs/0000-my-feature.md` (where **my-feature** is descriptive. **do not** assign an RFC number yet).
 
@@ -243,13 +243,13 @@ In order to get a major feature added to Vuetify you must get your RFC merged in
 
 Once an RFC is merged and the corresponding functionality implemented within the Vuetify repository, it will be part of the next _major_ or _minor_ release. Once released, the RFC will enter the **Released** stage and be locked.
 
-For more information regarding RFCs, see the official repository: <https://github.com/vuetifyjs/rfcs>
+For more information regarding RFCs, see the official repository: https://github.com/vuetifyjs/rfcs
 
 ### Commit guidelines
 
 All commit messages are required to follow the [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog) standard using the _angular_ preset. This standard format consists of 2 types of commits:
 
-- With scope: `<type>(scope): <subject>`
+- With scope: `\<type\>(scope): \<subject\>`
 
   ```bash
   fix(VSelect): don't close when a detachable child is clicked
@@ -257,7 +257,7 @@ All commit messages are required to follow the [conventional-changelog](https://
   fixes #12354
   ```
 
-- Without scope: `<type>: <subject>`
+- Without scope: `\<type\>: \<subject\>`
 
   ```bash
   docs: restructure nav components
