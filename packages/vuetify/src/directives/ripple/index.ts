@@ -211,7 +211,7 @@ function rippleHide (e: Event) {
     element._ripple.showTimerCommit = null
 
     // re-queue ripple hiding
-    element._ripple.showTimer = window.setTimeout(() => {
+    element._ripple.showTimer = setTimeout(() => {
       rippleHide(e)
     })
     return
