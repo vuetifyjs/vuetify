@@ -153,7 +153,7 @@ export const VWindow = defineComponent({
 
       arrows.push(canMoveBack.value
         ? slots.prev
-          ? slots.prev(prevProps)
+          ? slots.prev({ props: prevProps })
           : <VBtn variant="text" { ...prevProps } />
         : <div />
       )
@@ -167,7 +167,7 @@ export const VWindow = defineComponent({
 
       arrows.push(canMoveForward.value
         ? slots.next
-          ? slots.next(nextProps)
+          ? slots.next({ props: nextProps })
           : <VBtn variant="text" { ...nextProps } />
         : <div />
       )
@@ -209,12 +209,14 @@ export const VWindow = defineComponent({
           },
           themeClasses.value,
         ]}
-        style={{
-          height: transitionHeight.value,
-        }}
         v-touch={ touchOptions.value }
       >
-        <div class="v-window__container">
+        <div
+          class="v-window__container"
+          style={{
+            height: transitionHeight.value,
+          }}
+        >
           { slots.default?.() }
 
           { props.showArrows !== false && (

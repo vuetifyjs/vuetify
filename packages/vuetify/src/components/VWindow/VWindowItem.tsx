@@ -9,7 +9,7 @@ import Touch from '../../directives/touch'
 // Utilities
 import { computed, inject, nextTick, ref } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
-import { VWindowGroupSymbol, VWindowSymbol } from '.'
+import { VWindowGroupSymbol, VWindowSymbol } from './VWindow'
 
 export const VWindowItem = defineComponent({
   name: 'VWindowItem',

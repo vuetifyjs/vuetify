@@ -1,39 +1,35 @@
 <template>
   <v-window show-arrows>
-    <template v-slot:prev="{ on, attrs }">
+    <template v-slot:prev="{ props }">
       <v-btn
         color="success"
-        v-bind="attrs"
-        v-on="on"
-      >Previous slide</v-btn>
+        @click="props.onClick"
+      >
+        Previous slide
+      </v-btn>
     </template>
-    <template v-slot:next="{ on, attrs }">
+    <template v-slot:next="{ props }">
       <v-btn
         color="info"
-        v-bind="attrs"
-        v-on="on"
-      >Next slide</v-btn>
+        @click="props.onClick"
+      >
+        Next slide
+      </v-btn>
     </template>
     <v-window-item
-      v-for="n in 5"
+      v-for="n in 3"
       :key="`card-${n}`"
     >
       <v-card
-        color="grey"
+        elevation="2"
         height="200"
+        class="d-flex align-center justify-center ma-2"
       >
-        <v-row
-          class="fill-height"
-          align="center"
-          justify="center"
+        <h1
+          class="text-h2"
         >
-          <h1
-            style="font-size: 5rem;"
-            class="white--text"
-          >
-            Slide {{ n }}
-          </h1>
-        </v-row>
+          Slide {{ n }}
+        </h1>
       </v-card>
     </v-window-item>
   </v-window>
