@@ -116,7 +116,7 @@ export const VOverlay = genericComponent<new () => {
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
-    const { activatorEl, activatorEvents } = useActivator(props, isActive)
+    const { activatorEl, activatorRef, activatorEvents } = useActivator(props, isActive)
     const { dimensionStyles } = useDimension(props)
     const { isTop } = useStack(isActive)
 
@@ -200,7 +200,9 @@ export const VOverlay = genericComponent<new () => {
       <>
         { slots.activator?.({
           isActive: isActive.value,
-          props: mergeProps(toHandlers(activatorEvents.value), props.activatorProps),
+          props: mergeProps({
+            ref: activatorRef,
+          }, toHandlers(activatorEvents.value), props.activatorProps),
         }) }
         <Teleport
           disabled={ !teleportTarget.value }

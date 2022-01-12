@@ -69,7 +69,6 @@
       "cards",
       "chips",
       "defaults-providers",
-      "dialogs",
       "dividers",
       "expansion-panels",
       "footers",
@@ -105,9 +104,17 @@
       "images",
       "lazy",
       "lists",
-      "menus",
       "navigation-drawers",
-      "overlays",
+      {
+        "title": "overlays",
+        "group": "components",
+        "items": [
+          "overlays",
+          "dialogs",
+          "menus",
+          "tooltips"
+        ]
+      },
       "paginations",
       "parallax",
       {
@@ -121,8 +128,7 @@
       "ratings",
       "sheets",
       "simple-tables",
-      "theme-providers",
-      "tooltips"
+      "theme-providers"
     ]
   },
   {
