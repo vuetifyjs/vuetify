@@ -1,2 +1,2 @@
-export * from './VWindow'
-export * from './VWindowItem'
+export { VWindow } from './VWindow'
+export { VWindowItem } from './VWindowItem'

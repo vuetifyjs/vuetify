@@ -1,5 +1,5 @@
 // Components
-import { VBtn } from '@/components'
+import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
@@ -71,7 +71,7 @@ export const VWindow = defineComponent({
       type: String,
       default: 'v-window-item--active',
     },
-    // TODO: mandatory should not be exposed by do this for now
+    // TODO: mandatory should probably not be exposed but do this for now
     mandatory: {
       default: 'force' as const,
     },
@@ -183,7 +183,7 @@ export const VWindow = defineComponent({
     })
 
     const touchOptions = computed(() => {
-      if (typeof props.touch === 'boolean') return props.touch
+      if (props.touch === false) return props.touch
 
       const options: TouchHandlers = {
         left: () => {
@@ -202,7 +202,7 @@ export const VWindow = defineComponent({
 
       return {
         ...options,
-        ...props.touch,
+        ...(props.touch === true ? {} : props.touch),
       }
     })
 
