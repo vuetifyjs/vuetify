@@ -253,7 +253,7 @@ export default baseMixins.extend({
           this.$createElement('div', {
             class: this.contentClasses,
             attrs: {
-              role: 'document',
+              role: 'dialog',
               tabindex: this.isActive ? 0 : undefined,
               ...this.getScopeIdAttrs(),
             },
