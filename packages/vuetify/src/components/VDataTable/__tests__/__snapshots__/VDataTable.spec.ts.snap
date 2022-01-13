@@ -2210,6 +2210,248 @@ exports[`VDataTable.ts should default to first option in itemsPerPageOptions if 
 </div>
 `;
 
+exports[`VDataTable.ts should go to the correct page when using page and itemsPerPage, pointing to a page previously unavailable 1`] = `
+<div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
+  <div class="v-data-table__wrapper">
+    <table>
+      <colgroup>
+        <col class>
+        <col class>
+        <col class>
+        <col class>
+        <col class>
+        <col class>
+      </colgroup>
+      <thead class="v-data-table-header v-data-table-header-mobile">
+        <tr>
+          <th>
+            <div class="v-data-table-header-mobile__wrapper">
+              <div class="v-input v-input--hide-details theme--light v-text-field v-select">
+                <div class="v-input__control">
+                  <div role="button"
+                       aria-haspopup="listbox"
+                       aria-expanded="false"
+                       aria-owns="list-822"
+                       class="v-input__slot"
+                  >
+                    <div class="v-select__slot">
+                      <label for="input-822"
+                             class="v-label theme--light"
+                             style="left: 0px; position: absolute;"
+                      >
+                        Sort by
+                      </label>
+                      <div class="v-select__selections">
+                        <input id="input-822"
+                               readonly="readonly"
+                               type="text"
+                               aria-readonly="false"
+                               autocomplete="off"
+                        >
+                      </div>
+                      <div class="v-input__append-inner">
+                        <div class="v-input__icon v-input__icon--append">
+                          <i aria-hidden="true"
+                             class="v-icon notranslate material-icons theme--light"
+                          >
+                            $dropdown
+                          </i>
+                        </div>
+                      </div>
+                      <input type="hidden">
+                    </div>
+                    <div class="v-menu">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              Donut
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Calories
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              452
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Fat (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              25
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Carbs (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              51
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Protein (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              4.9
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Iron (%)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              22%
+            </div>
+          </td>
+        </tr>
+        <tr class="v-data-table__mobile-table-row">
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Dessert (100g serving)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              KitKat
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Calories
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              518
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Fat (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              26
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Carbs (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              65
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Protein (g)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              7
+            </div>
+          </td>
+          <td class="v-data-table__mobile-row">
+            <div class="v-data-table__mobile-row__header">
+              Iron (%)
+            </div>
+            <div class="v-data-table__mobile-row__cell">
+              6%
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="v-data-footer">
+    <div class="v-data-footer__select">
+      Rows per page:
+      <div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light v-text-field v-select">
+        <div class="v-input__control">
+          <div role="button"
+               aria-haspopup="listbox"
+               aria-expanded="false"
+               aria-owns="list-826"
+               class="v-input__slot"
+          >
+            <div class="v-select__slot">
+              <div class="v-select__selections">
+                <div class="v-select__selection v-select__selection--comma">
+                  5
+                </div>
+                <input aria-label="Rows per page:"
+                       id="input-826"
+                       readonly="readonly"
+                       type="text"
+                       aria-readonly="false"
+                       autocomplete="off"
+                >
+              </div>
+              <div class="v-input__append-inner">
+                <div class="v-input__icon v-input__icon--append">
+                  <i aria-hidden="true"
+                     class="v-icon notranslate material-icons theme--light"
+                  >
+                    $dropdown
+                  </i>
+                </div>
+              </div>
+              <input type="hidden"
+                     value="[object Object]"
+              >
+            </div>
+            <div class="v-menu">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-data-footer__pagination">
+      9-10 of 10
+    </div>
+    <div class="v-data-footer__icons-before">
+      <button type="button"
+              class="v-btn v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Previous page"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon notranslate material-icons theme--light"
+          >
+            $prev
+          </i>
+        </span>
+      </button>
+    </div>
+    <div class="v-data-footer__icons-after">
+      <button type="button"
+              class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
+              aria-label="Next page"
+              disabled="disabled"
+      >
+        <span class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon notranslate material-icons theme--light"
+          >
+            $next
+          </i>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`VDataTable.ts should handle object when checking if it should default to first option in itemsPerPageOptions 1`] = `
 <div class="v-data-table v-data-table--has-bottom theme--light v-data-table--mobile">
   <div class="v-data-table__wrapper">
