@@ -4,7 +4,7 @@ import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { MaybeTransition } from '@/composables/transition'
 
 // Directives
-import Touch from '../../directives/touch'
+import Touch from '@/directives/touch'
 
 // Utilities
 import { computed, inject, nextTick, ref } from 'vue'
