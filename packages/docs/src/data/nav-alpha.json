@@ -96,7 +96,8 @@
         "group": "components",
         "items": [
           "button-groups",
-          "item-groups"
+          "item-groups",
+          "windows"
         ]
       },
       "hover",

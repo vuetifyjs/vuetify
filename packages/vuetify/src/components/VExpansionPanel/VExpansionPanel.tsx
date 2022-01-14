@@ -39,13 +39,13 @@ export const VExpansionPanel = defineComponent({
     provide(VExpansionPanelSymbol, groupItem)
 
     const isBeforeSelected = computed(() => {
-      const index = groupItem.group.items.value.indexOf(groupItem.id)
+      const index = groupItem.group.items.value.findIndex(item => item.id === groupItem.id)
       return !groupItem.isSelected.value &&
         groupItem.group.selected.value.some(id => groupItem.group.items.value.indexOf(id) - index === 1)
     })
 
     const isAfterSelected = computed(() => {
-      const index = groupItem.group.items.value.indexOf(groupItem.id)
+      const index = groupItem.group.items.value.findIndex(item => item.id === groupItem.id)
       return !groupItem.isSelected.value &&
         groupItem.group.selected.value.some(id => groupItem.group.items.value.indexOf(id) - index === -1)
     })

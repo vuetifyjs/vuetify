@@ -1,7 +1,6 @@
 <template>
   <v-card
-    color="black"
-    dark
+    theme="dark"
     flat
     tile
   >
@@ -9,31 +8,25 @@
       <v-window-item
         v-for="n in length"
         :key="`card-${n}`"
+        :value="n"
       >
         <v-card
-          color="transparent"
           height="200"
+          class="d-flex justify-center align-center"
         >
-          <v-row
-            class="fill-height"
-            align="center"
-            justify="center"
-          >
-            <v-card-text class="text-center">
-              Transparent themed, for background-imaged slides. Background color black added for demonstration purposes.
-            </v-card-text>
-          </v-row>
+          <span class="text-h2">
+            Card {{ n }}
+          </span>
         </v-card>
       </v-window-item>
     </v-window>
 
     <v-card-actions class="justify-space-between">
       <v-btn
-        text
+        variant="plain"
+        icon="mdi-chevron-left"
         @click="prev"
-      >
-        <v-icon>mdi-chevron-left</v-icon>
-      </v-btn>
+      ></v-btn>
       <v-item-group
         v-model="onboarding"
         class="text-center"
@@ -42,23 +35,21 @@
         <v-item
           v-for="n in length"
           :key="`btn-${n}`"
-          v-slot="{ active, toggle }"
+          v-slot="{ isSelected, toggle }"
+          :value="n"
         >
           <v-btn
-            :input-value="active"
-            icon
+            :variant="isSelected ? 'outlined' : 'text'"
+            icon="mdi-record"
             @click="toggle"
-          >
-            <v-icon>mdi-record</v-icon>
-          </v-btn>
+          ></v-btn>
         </v-item>
       </v-item-group>
       <v-btn
-        text
+        variant="plain"
+        icon="mdi-chevron-right"
         @click="next"
-      >
-        <v-icon>mdi-chevron-right</v-icon>
-      </v-btn>
+      ></v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -72,13 +63,13 @@
 
     methods: {
       next () {
-        this.onboarding = this.onboarding + 1 === this.length
-          ? 0
+        this.onboarding = this.onboarding + 1 > this.length
+          ? 1
           : this.onboarding + 1
       },
       prev () {
-        this.onboarding = this.onboarding - 1 < 0
-          ? this.length - 1
+        this.onboarding = this.onboarding - 1 <= 0
+          ? this.length
           : this.onboarding - 1
       },
     },
