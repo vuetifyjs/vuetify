@@ -1,17 +1,17 @@
 // Components
+import { VDivider } from '../VDivider'
 import { VListGroup } from './VListGroup'
 import { VListItem } from './VListItem'
 import { VListSubheader } from './VListSubheader'
-import { VDivider } from '../VDivider'
 
 // Utilities
 import { genericComponent } from '@/util'
 
 // Types
-import type { Prop } from 'vue'
-import type { MakeSlots } from '@/util'
-import type { ListGroupHeaderSlot } from './VListGroup'
 import type { InternalListItem } from './VList'
+import type { ListGroupHeaderSlot } from './VListGroup'
+import type { MakeSlots } from '@/util'
+import type { Prop } from 'vue'
 
 export const VListChildren = genericComponent<new <T extends InternalListItem>() => {
   $props: {

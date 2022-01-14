@@ -125,14 +125,13 @@ export const VList = genericComponent<new <T>() => {
             dimensionStyles.value,
           ]}
         >
-          <VListChildren
-            items={ items.value }
-            v-slots={{
+          <VListChildren items={ items.value }>
+            {{
               default: slots.default,
               item: slots.item,
               externalHeader: slots.header,
             }}
-          />
+          </VListChildren>
         </props.tag>
       )
     })

@@ -3,18 +3,18 @@ import { VExpandTransition } from '@/components/transitions'
 import { VListChildren } from './VListChildren'
 
 // Composables
-import { useNestedGroup } from '@/composables/nested/nested'
-import { makeTagProps } from '@/composables/tag'
 import { createList, useList } from './list'
+import { makeTagProps } from '@/composables/tag'
+import { useNestedGroup } from '@/composables/nested/nested'
 
 // Utilities
 import { computed } from 'vue'
 import { defineComponent, genericComponent } from '@/util'
 
 // Types
-import type { Prop } from 'vue'
-import type { MakeSlots } from '@/util'
 import type { InternalListItem } from './VList'
+import type { MakeSlots } from '@/util'
+import type { Prop } from 'vue'
 
 export type ListGroupHeaderSlot = {
   onClick: (e: Event) => void
