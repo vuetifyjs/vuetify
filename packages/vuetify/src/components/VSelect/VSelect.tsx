@@ -11,7 +11,7 @@ import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, ref } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -41,6 +41,7 @@ export const VSelect = genericComponent<new <T>() => {
       default: () => ([]),
     },
     multiple: Boolean,
+    openOnClear: Boolean,
 
     ...makeFilterProps(),
   },
@@ -50,6 +51,8 @@ export const VSelect = genericComponent<new <T>() => {
   },
 
   setup (props, { slots }) {
+    const vTextFieldRef = ref()
+    const activator = ref()
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -67,7 +70,6 @@ export const VSelect = genericComponent<new <T>() => {
           : { title: item, value: item }
       ))
     ))
-
     const activated = computed({
       get: () => model.value,
       set: val => {
@@ -78,31 +80,62 @@ export const VSelect = genericComponent<new <T>() => {
         menu.value = false
       },
     })
+    const selections = computed({
+      get: () => model.value.join(', '),
+      set: (val: string) => !val && (model.value = []),
+    })
+
+    function onClear (e: Event) {
+      e.preventDefault()
+
+      if (props.openOnClear && !menu.value) {
+        menu.value = true
+      }
+    }
+
+    watch(() => vTextFieldRef.value, val => {
+      activator.value = val.$el.querySelector('.v-input__control')
+    })
 
     useRender(() => {
       return (
         <VTextField
+          ref={ vTextFieldRef }
           class="v-select"
           readonly
-          persistentPlaceholder={ menu.value || wrapInArray(model.value).length > 0 }
+          onClick:clear={ onClear }
+          v-model={ selections.value }
         >
           {{
             ...slots,
-            default: slotProps => (
+            default: () => (
               <>
-                <VMenu v-model={ menu.value } activator="parent" anchor="bottom center" content-class="v-select__content">
-                  <VList
-                    v-model:active={ activated.value }
-                    items={ items.value }
-                    activeStrategy={ props.multiple ? 'multiple' : 'single' }
-                  />
-                </VMenu>
+                { activator.value && (
+                  <VMenu
+                    v-model={ menu.value }
+                    activator={ activator.value }
+                    contentClass="v-select__content"
+                    openOnClick={ false }
+                  >
+                    <VList
+                      v-model:active={ activated.value }
+                      items={ items.value }
+                      activeStrategy={ props.multiple ? 'multiple' : 'single' }
+                    >
+                      {{
+                        item: slots.item,
+                      }}
+                    </VList>
+                  </VMenu>
+                ) }
 
                 <div class="v-select__selections">
-                  { model.value.join(', ') }
+                  { model.value.map(selection => (
+                    <div class="v-select__selection">
+                      { selection as string }
+                    </div>
+                  )) }
                 </div>
-
-                { slots.default?.(slotProps) }
               </>
             ),
           }}
