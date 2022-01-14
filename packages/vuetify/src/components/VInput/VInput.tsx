@@ -19,6 +19,7 @@ import type { MakeSlots } from '@/util'
 
 export interface VInputSlot {
   id: ComputedRef<string>
+  isDirty: ComputedRef<boolean>
   isDisabled: ComputedRef<boolean>
   isFocused: Ref<boolean>
   isReadonly: ComputedRef<boolean>
@@ -79,6 +80,7 @@ export const VInput = genericComponent<new <T>() => {
     const { densityClasses } = useDensity(props)
     const {
       errorMessages,
+      isDirty,
       isDisabled,
       isReadonly,
       isPristine,
@@ -96,6 +98,7 @@ export const VInput = genericComponent<new <T>() => {
 
     const slotProps = computed<VInputSlot>(() => ({
       id,
+      isDirty,
       isDisabled,
       isFocused,
       isReadonly,
@@ -185,6 +188,7 @@ export const VInput = genericComponent<new <T>() => {
     })
 
     return {
+      isDirty,
       isValid,
       validate,
       reset,
