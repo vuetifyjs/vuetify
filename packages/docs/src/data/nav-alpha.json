@@ -68,6 +68,7 @@
       "buttons",
       "cards",
       "chips",
+      "color-pickers",
       "defaults-providers",
       "dividers",
       "expansion-panels",
