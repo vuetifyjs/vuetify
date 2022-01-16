@@ -11,7 +11,7 @@ import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -104,6 +104,7 @@ export const VSelect = genericComponent<new <T>() => {
           class="v-select"
           readonly
           onClick:clear={ onClear }
+          onClick={ () => menu.value = true }
           v-model={ selections.value }
         >
           {{
