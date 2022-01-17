@@ -21,10 +21,76 @@ import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, nextTick, ref } from 'vue'
-import { createRange, defineComponent, keyValues } from '@/util'
+import { clamp, createRange, defineComponent, keyValues } from '@/util'
 
 // Types
 import type { ComponentPublicInstance } from 'vue'
+
+export function getRange (start: number, page: number, length: number, visible: number, ellipsis: string) {
+  if (visible <= 0) return []
+
+  if (length <= visible) {
+    return createRange(length, start)
+  }
+
+  const current = clamp(start, page, start + length)
+  const range = []
+
+  if (visible <= 3) {
+    return [current]
+  }
+
+  const nearStart = current - start <= 2
+  const nearEnd = length - current <= 2
+
+  // Number of skipped sections
+  const breakCount = nearStart || nearEnd
+    ? 1
+    : 2
+
+  // The smallest consecutive number of buttons visible around the current one
+  const minRun = clamp(visible - breakCount, visible, length)
+  const minSide = Math.floor(minRun / 2)
+
+  console.log({ breakCount, minSide })
+
+  const left = start
+  const right = start + length
+
+  const before = page - left
+  const after = right - page
+
+  {
+    const middle = Math.ceil(visible / 2)
+    const left = middle
+    const right = length - middle
+
+    if (page < left) {
+      return [...createRange(Math.max(1, visible - 2), start), ellipsis, length]
+    } else if (page > right) {
+      const rangeLength = visible - 2
+      const rangeStart = length - rangeLength + start
+      return [start, ellipsis, ...createRange(rangeLength, rangeStart)]
+    } else {
+      const rangeLength = Math.max(1, visible - 4)
+      const rangeStart = rangeLength === 1 ? page : page - Math.ceil(rangeLength / 2) + start
+
+      const arr: (string | number)[] = [start]
+
+      if (rangeStart - start === 2) {
+        arr.push(rangeStart - 1)
+      } else if (rangeStart - start > 1) {
+        arr.push(ellipsis)
+      }
+
+      arr.push(...createRange(rangeLength, rangeStart))
+      arr.push(ellipsis)
+      arr.push(length)
+
+      return arr
+    }
+  }
+}
 
 export const VPagination = defineComponent({
   name: 'VPagination',
@@ -44,7 +110,10 @@ export const VPagination = defineComponent({
       default: 1,
       validator: (val: number) => val % 1 === 0,
     },
-    totalVisible: [Number, String],
+    totalVisible: {
+      type: [Number, String],
+      default: Infinity,
+    },
     firstIcon: {
       type: String,
       default: '$first',
@@ -91,7 +160,7 @@ export const VPagination = defineComponent({
     },
     ellipsis: {
       type: String,
-      default: '...',
+      default: '\u2026',
     },
     showFirstLastPage: Boolean,
 
@@ -132,46 +201,23 @@ export const VPagination = defineComponent({
       if (!firstItem) return
 
       const totalWidth = contentRect.width
-      const itemWidth = firstItem.getBoundingClientRect().width + 10
+      const style = getComputedStyle(firstItem)
+      const itemWidth = firstItem.getBoundingClientRect().width + parseFloat(style.marginLeft) + parseFloat(style.marginRight)
 
-      maxButtons.value = Math.max(0, Math.floor((totalWidth - 96) / itemWidth))
+      const arrowCount = props.showFirstLastPage ? 4 : 2
+
+      maxButtons.value = Math.max(0, Math.floor((totalWidth) / itemWidth) - arrowCount)
     })
 
     const length = computed(() => parseInt(props.length, 10))
     const start = computed(() => parseInt(props.start, 10))
 
     const totalVisible = computed(() => {
-      if (props.totalVisible) return Math.min(parseInt(props.totalVisible ?? '', 10), length.value)
-      else if (maxButtons.value >= 0) return maxButtons.value
-      return length.value
+      return Math.min(maxButtons.value, +props.totalVisible, length.value)
     })
 
     const range = computed(() => {
-      if (length.value <= 0) return []
-
-      if (totalVisible.value <= 3) {
-        return [Math.min(Math.max(start.value, page.value), start.value + length.value)]
-      }
-
-      if (props.length <= totalVisible.value) {
-        return createRange(length.value, start.value)
-      }
-
-      const middle = Math.ceil(totalVisible.value / 2)
-      const left = middle
-      const right = length.value - middle
-
-      if (page.value < left) {
-        return [...createRange(Math.max(1, totalVisible.value - 2), start.value), props.ellipsis, length.value]
-      } else if (page.value > right) {
-        const rangeLength = totalVisible.value - 2
-        const rangeStart = length.value - rangeLength + start.value
-        return [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart)]
-      } else {
-        const rangeLength = Math.max(1, totalVisible.value - 4)
-        const rangeStart = rangeLength === 1 ? page.value : page.value - Math.ceil(rangeLength / 2) + start.value
-        return [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart), props.ellipsis, length.value]
-      }
+      return getRange(start.value, page.value, length.value, totalVisible.value, props.ellipsis)
     })
 
     // TODO: 'first' | 'prev' | 'next' | 'last' does not work here?
