@@ -9,7 +9,6 @@ import { useLocale } from '@/composables/locale'
 import { useRtl } from '@/composables/rtl'
 import { makeElevationProps } from '@/composables/elevation'
 import { makeDensityProps } from '@/composables/density'
-import { makeRoundedProps } from '@/composables/rounded'
 import { makeSizeProps } from '@/composables/size'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
@@ -20,7 +19,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
-import { computed, nextTick, ref } from 'vue'
+import { computed, nextTick, ref, toRef } from 'vue'
 import { createRange, defineComponent, keyValues } from '@/util'
 
 // Types
@@ -95,12 +94,11 @@ export const VPagination = defineComponent({
     },
     showFirstLastPage: Boolean,
 
-    ...makeTagProps({ tag: 'nav' }),
-    ...makeElevationProps(),
-    ...makeDensityProps(),
-    ...makeRoundedProps(),
-    ...makeSizeProps(),
     ...makeBorderProps(),
+    ...makeDensityProps(),
+    ...makeElevationProps(),
+    ...makeSizeProps(),
+    ...makeTagProps({ tag: 'nav' }),
     ...makeThemeProps(),
     ...makeVariantProps({ variant: 'text' } as const),
   },
@@ -183,13 +181,16 @@ export const VPagination = defineComponent({
 
     const { refs, updateRef } = useRefs<ComponentPublicInstance>()
 
-    const items = computed(() => {
-      const sharedProps = {
-        density: props.density,
-        rounded: props.rounded,
-        size: props.size,
-      }
+    provideDefaults({
+      VBtn: {
+        border: toRef(props, 'border'),
+        density: toRef(props, 'density'),
+        size: toRef(props, 'size'),
+        variant: toRef(props, 'variant'),
+      },
+    })
 
+    const items = computed(() => {
       return range.value.map((item, index) => {
         const ref = (e: any) => updateRef(e, index)
 
@@ -198,13 +199,10 @@ export const VPagination = defineComponent({
             isActive: false,
             page: item,
             props: {
-              ...sharedProps,
               ref,
               ellipsis: true,
               icon: true,
               disabled: true,
-              variant: props.variant,
-              border: props.border,
             },
           }
         } else {
@@ -213,14 +211,11 @@ export const VPagination = defineComponent({
             isActive,
             page: n(item),
             props: {
-              ...sharedProps,
               ref,
               ellipsis: false,
               icon: true,
               disabled: !!props.disabled || props.length < 2,
               elevation: props.elevation,
-              variant: props.variant,
-              border: props.border,
               color: isActive ? props.color : undefined,
               ariaCurrent: isActive,
               ariaLabel: t(isActive ? props.currentPageAriaLabel : props.pageAriaLabel, index + 1),
@@ -232,21 +227,11 @@ export const VPagination = defineComponent({
     })
 
     const controls = computed(() => {
-      const sharedProps = {
-        color: undefined,
-        density: props.density,
-        rounded: props.rounded,
-        size: props.size,
-        variant: props.variant,
-        border: props.border,
-      }
-
       const prevDisabled = !!props.disabled || page.value <= start.value
       const nextDisabled = !!props.disabled || page.value >= start.value + length.value - 1
 
       return {
         first: props.showFirstLastPage ? {
-          ...sharedProps,
           icon: isRtl.value ? props.lastIcon : props.firstIcon,
           onClick: (e: Event) => setValue(e, start.value, 'first'),
           disabled: prevDisabled,
@@ -254,7 +239,6 @@ export const VPagination = defineComponent({
           ariaDisabled: prevDisabled,
         } : undefined,
         prev: {
-          ...sharedProps,
           icon: isRtl.value ? props.nextIcon : props.prevIcon,
           onClick: (e: Event) => setValue(e, page.value - 1, 'prev'),
           disabled: prevDisabled,
@@ -262,7 +246,6 @@ export const VPagination = defineComponent({
           ariaDisabled: prevDisabled,
         },
         next: {
-          ...sharedProps,
           icon: isRtl.value ? props.prevIcon : props.nextIcon,
           onClick: (e: Event) => setValue(e, page.value + 1, 'next'),
           disabled: nextDisabled,
@@ -270,7 +253,6 @@ export const VPagination = defineComponent({
           ariaDisabled: nextDisabled,
         },
         last: props.showFirstLastPage ? {
-          ...sharedProps,
           icon: isRtl.value ? props.firstIcon : props.lastIcon,
           onClick: (e: Event) => setValue(e, start.value + length.value - 1, 'last'),
           disabled: nextDisabled,

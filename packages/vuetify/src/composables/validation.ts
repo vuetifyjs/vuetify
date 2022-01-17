@@ -3,10 +3,11 @@ import { useForm } from '@/composables/form'
 
 // Utilities
 import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
-import { getCurrentInstance, getCurrentInstanceName, getUid, propsFactory } from '@/util'
+import { getCurrentInstanceName, getUid, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 export type ValidationResult = string | true
 export type ValidationRule =
@@ -16,14 +17,15 @@ export type ValidationRule =
   | ((value: any) => PromiseLike<ValidationResult>)
 
 export interface ValidationProps {
-  disabled?: boolean
-  error?: boolean
-  errorMessages?: string | string[]
-  maxErrors?: string | number
-  name?: string
-  readonly?: boolean
+  disabled: boolean
+  error: boolean
+  errorMessages: string | string[]
+  maxErrors: string | number
+  name: string | undefined
+  readonly: boolean
   rules: ValidationRule[]
-  modelValue?: any
+  modelValue: any
+  'onUpdate:modelValue': ((val: any) => void) | undefined
 }
 
 export const makeValidationProps = propsFactory({
@@ -50,6 +52,7 @@ export function useValidation (
   props: ValidationProps,
   name = getCurrentInstanceName(),
 ) {
+  const model = useProxiedModel(props, 'modelValue')
   const form = useForm()
   const errorMessages = ref<string[]>([])
   const isPristine = ref(true)
@@ -73,7 +76,6 @@ export function useValidation (
     }
   })
 
-  const vm = getCurrentInstance('useValidation')
   const uid = computed(() => props.name ?? getUid())
 
   onBeforeMount(() => {
@@ -86,8 +88,7 @@ export function useValidation (
 
   function reset () {
     resetValidation()
-
-    vm?.emit('update:modelValue', null)
+    model.value = null
   }
 
   function resetValidation () {
@@ -107,7 +108,7 @@ export function useValidation (
       }
 
       const handler = typeof rule === 'function' ? rule : () => rule
-      const result = await handler(props?.modelValue?.value ?? props.modelValue)
+      const result = await handler(model.value)
 
       if (result === true) continue
 

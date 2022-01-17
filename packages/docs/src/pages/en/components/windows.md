@@ -3,6 +3,7 @@ meta:
   title: Window component
   description: The window component is a wrapper container that allows transitioning between content. It serves as the baseline for tabs and carousels.
   keywords: windows, vuetify window component, vue window component
+nav: Windows
 related:
     - /components/carousels
     - /components/steppers
@@ -11,13 +12,13 @@ related:
 
 # Windows
 
-The `v-window` component provides the baseline functionality for transitioning content from 1 pane to another. Other components such as `v-tabs`, `v-carousel` and `v-stepper` utilize this component at their core.
+The `v-window` component provides the baseline functionality for transitioning content from one pane to another. Other components such as `v-tabs`, `v-carousel` and `v-stepper` utilize this component at their core.
 
 <entry-ad />
 
 ## Usage
 
-Designed to easily cycle through content, `v-window` provides a simple interface to create truly custom implementations.
+Designed to easily cycle through content, `v-window` provides a simple interface to create custom implementations.
 
 <example file="v-window/usage" />
 
@@ -25,29 +26,27 @@ Designed to easily cycle through content, `v-window` provides a simple interface
 
 <api-inline />
 
-<!-- ## Sub-components
-
-### v-window-item
-
-v-window-item description -->
-
 ## Examples
-
-Designed to easily cycle through content, `v-window` provides a simple interface to create truly custom implementations.
 
 ### Props
 
+#### Show arrows
+
+By default no arrows are displayed. You can change this by adding the **show-arrows** prop. If you set the prop value to `"hover"`, they will only show when you mouse over the window.
+
+<example file="v-window/prop-show-arrows" />
+
 #### Reverse
 
-Reverse `v-window` always displays reverse transition.
+The **reverse** prop will reverse the transitions
 
 <example file="v-window/prop-reverse" />
 
-#### Vertical
+#### Direction
 
-`v-window` can be vertical. Vertical windows have Y axis transition instead of X axis transition.
+You can change the transition to vertical using the **direction** prop
 
-<example file="v-window/prop-vertical" />
+<example file="v-window/prop-direction" />
 
 #### Customized arrows
 
@@ -59,13 +58,13 @@ Arrows can be customized by using **prev** and **next** slots.
 
 #### Account creation
 
-Create rich forms with smooth animations. `v-window` automatically tracks the current selection index to automatically change the transition direction. This can be manually controlled with the **reverse** prop.
+Create rich forms with smooth animations. `v-window` automatically tracks the current selection index to change the transition direction.
 
 <example file="v-window/misc-account-creation" />
 
 #### Onboarding
 
-`v-window` makes it easy to create custom components such as a different styled stepper.
+`v-window` makes it easy to create custom components such as a differently styled stepper.
 
 <example file="v-window/misc-onboarding" />
 

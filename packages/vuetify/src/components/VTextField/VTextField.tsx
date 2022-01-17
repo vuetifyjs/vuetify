@@ -112,6 +112,7 @@ export const VTextField = defineComponent({
       return (
         <VInput
           ref={ vInputRef }
+          v-model={ model.value }
           class={[
             'v-text-field',
             {

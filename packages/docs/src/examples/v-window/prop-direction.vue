@@ -2,7 +2,7 @@
   <v-window
     v-model="onboarding"
     show-arrows
-    reverse
+    direction="vertical"
   >
     <v-window-item
       v-for="n in length"

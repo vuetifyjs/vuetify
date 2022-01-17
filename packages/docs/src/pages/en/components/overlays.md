@@ -1,13 +1,13 @@
 ---
-nav: Overlays
+nav: Custom Overlays
 meta:
   title: Overlay component
   description: The overlay component makes it easy to create a scrim over components or your entire application.
   keywords: overlays, vuetify overlay component, vue overlay component
 related:
-  - /components/cards/
-  - /components/sheets/
   - /components/dialogs/
+  - /components/menus/
+  - /components/tooltips/
 ---
 
 # Overlays
@@ -25,6 +25,65 @@ In its simplest form, the `v-overlay` component will add a dimmed layer over you
 ## API
 
 <api-inline />
+
+## Activator
+
+Overlays can be opened with v-model, or by clicking or hovering on an activator element. An activator is mandatory for the connected position strategy. The activator element (if present) will also be used by some transitions to slide or scale from the activator's position instead of the middle of the screen.
+
+Related props:
+
+- `activator`
+- `activatorProps`
+- `openOnClick`
+- `openOnHover`
+- `openOnFocus`
+- `closeDelay`
+- `openDelay`
+
+### Activator prop
+
+The simplest way of providing an activator. Can be a CSS selector to pass to `document.querySelector()`, a component instance, or a HTMLElement. The string `"parent"` is also accepted to automatically bind to the parent element.
+
+```html
+<v-overlay activator="#id" />
+<v-overlay activator=".class" />
+<v-overlay :activator="elementRef" />
+<v-btn>
+  <v-overlay activator="parent" />
+</v-btn>
+```
+
+### Activator slot
+
+For more manual control, the slot can be used instead. `props` is an object containing all the relevant ARIA attributes and event handlers, and must be applied to the target element with `v-bind` for the component to work correctly.
+
+```html
+<v-overlay>
+  <template #activator="{ isActive, props }">
+    <v-btn v-bind="props">Overlay is {{ isActive ? 'open' : 'closed' }}</v-btn>
+  </template>
+</v-overlay>
+```
+
+## Position Strategies
+
+### Static (default)
+
+`position-strategy="static"`
+
+Overlay content is absolutely positioned to the center of its container by default.
+
+### Connected
+
+`position-strategy="connected"`
+
+The connected strategy is used by [v-menu](/components/menus) and [v-tooltip](/components/tooltips) to attach the overlay content to an activator element.
+
+`anchor` selects a point on the activator, and `origin` a point on the overlay content. The content element will be positioned so the two points overlap.
+
+<example file="v-overlay/connected-playground" />
+
+## Scroll Strategies
 
 ## Examples
 

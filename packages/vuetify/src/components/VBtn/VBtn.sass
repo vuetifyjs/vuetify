@@ -42,13 +42,10 @@
       border: 2px solid currentColor
       border-radius: inherit
       opacity: 0
-      transform: scale(1.25)
-      transition: opacity .2s ease-in-out, transform .2s step-end
+      transition: opacity .2s ease-in-out
 
     &:focus-visible::after
       opacity: calc(.25 * var(--v-theme-overlay-multiplier))
-      transform: scale(1)
-      transition: opacity .2s ease-in-out, transform .2s settings.$decelerated-easing
 
   &--flat
     box-shadow: none
@@ -187,13 +184,7 @@
 // VPagination
 .v-btn
   .v-pagination &
-    @include tools.elevation($button-pagination-elevation)
     @include tools.rounded($button-pagination-border-radius)
-    @include button-density('height' 'width', $button-pagination-density)
-
-  &--elevated
-    .v-pagination__list &
-      @include tools.elevation($button-pagination-elevation)
 
   &__overlay
     .v-pagination__item--is-active &

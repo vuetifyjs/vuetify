@@ -1,7 +1,9 @@
 import 'cypress-file-upload'
 import type { mount as cyMount } from '@cypress/vue'
 import type { SnapshotOptions } from '@percy/core'
-import type { MountingOptions } from '@vue/test-utils'
+import type { MountingOptions, VueWrapper } from '@vue/test-utils'
+
+type Swipe = number[] | string
 
 declare global {
   namespace Cypress {
@@ -13,6 +15,8 @@ declare global {
         name?: string,
         options?: SnapshotOptions
       ): Chainable
+      vue (): Cypress.Chainable<VueWrapper<any>>
+      swipe (...path: Swipe[]): Cypress.Chainable<void>
     }
   }
 }

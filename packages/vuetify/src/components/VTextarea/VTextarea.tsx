@@ -158,6 +158,7 @@ export const VTextarea = defineComponent({
 
       return (
         <VInput
+          v-model={ model.value }
           class={[
             'v-textarea',
             {

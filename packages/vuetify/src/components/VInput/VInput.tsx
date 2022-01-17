@@ -70,6 +70,7 @@ export const VInput = genericComponent<new <T>() => {
   },
 
   emits: {
+    'update:modelValue': (val: any) => true,
     'click:prepend': (e: MouseEvent) => true,
     'click:append': (e: MouseEvent) => true,
   },
@@ -168,7 +169,11 @@ export const VInput = genericComponent<new <T>() => {
             <div class="v-input__details">
               <VMessages
                 active={ showMessages }
-                value={ errorMessages.value || (hasMessages ? props.messages : props.hint) }
+                color={ isValid.value === false ? 'error' : undefined }
+                value={ errorMessages.value.length > 0
+                  ? errorMessages.value
+                  : (hasMessages ? props.messages : props.hint)
+                }
                 v-slots={{ default: slots.messages }}
               />
 

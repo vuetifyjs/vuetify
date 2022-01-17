@@ -38,8 +38,18 @@
     "inactiveIcon": "mdi-palette-outline",
     "activeIcon": "mdi-palette",
     "items": [
+      "css-reset",
       "border-radius",
-      "colors"
+      "colors",
+      "content",
+      "display",
+      "elevation",
+      "flex",
+      "float",
+      "overflow",
+      "spacing",
+      "text-and-typography",
+      "transitions"
     ]
   },
   {
@@ -59,9 +69,8 @@
       "cards",
       "chips",
       "defaults-providers",
-      "dialogs",
       "dividers",
-      "floating-action-buttons",
+      "expansion-panels",
       "footers",
       {
         "title": "form-inputs-and-controls",
@@ -69,17 +78,44 @@
         "activeIcon": "",
         "inactiveIcon": "",
         "items": [
-          "checkboxes"
+          "checkboxes",
+          "file-inputs",
+          "forms",
+          "inputs",
+          "radio-buttons",
+          "range-sliders",
+          "sliders",
+          "switches",
+          "textareas",
+          "text-fields"
         ]
       },
       "grids",
+      {
+        "title": "groups",
+        "group": "components",
+        "items": [
+          "button-groups",
+          "item-groups",
+          "windows"
+        ]
+      },
       "hover",
       "icons",
       "images",
-      "item-groups",
       "lazy",
       "lists",
-      "overlays",
+      "navigation-drawers",
+      {
+        "title": "overlays",
+        "group": "components",
+        "items": [
+          "overlays",
+          "dialogs",
+          "menus",
+          "tooltips"
+        ]
+      },
       "paginations",
       "parallax",
       {
@@ -92,8 +128,8 @@
       },
       "ratings",
       "sheets",
-      "theme-providers",
-      "tooltips"
+      "tables",
+      "theme-providers"
     ]
   },
   {

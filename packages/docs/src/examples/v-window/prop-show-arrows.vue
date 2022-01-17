@@ -1,8 +1,7 @@
 <template>
   <v-window
     v-model="onboarding"
-    show-arrows
-    reverse
+    show-arrows="hover"
   >
     <v-window-item
       v-for="n in length"

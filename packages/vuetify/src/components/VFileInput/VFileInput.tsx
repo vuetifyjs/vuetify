@@ -123,6 +123,7 @@ export const VFileInput = defineComponent({
 
       return (
         <VInput
+          v-model={ model.value }
           class="v-file-input"
           { ...rootAttrs }
           { ...inputProps }

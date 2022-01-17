@@ -1,5 +1,5 @@
 // Utilities
-import { getCurrentInstance, IN_BROWSER, propsFactory, SUPPORTS_FOCUS_VISIBLE } from '@/util'
+import { getCurrentInstance, IN_BROWSER, isComponentInstance, propsFactory, SUPPORTS_FOCUS_VISIBLE } from '@/util'
 import { makeDelayProps, useDelay } from '@/composables/delay'
 import {
   computed,
@@ -8,6 +8,7 @@ import {
   onScopeDispose,
   ref,
   watch,
+  watchEffect,
 } from 'vue'
 
 // Types
@@ -122,19 +123,29 @@ export function useActivator (
     return events
   })
 
+  const activatorRef = ref()
+  watchEffect(() => {
+    if (!activatorRef.value) return
+
+    nextTick(() => {
+      const activator = activatorRef.value
+      activatorEl.value = isComponentInstance(activator) ? activator.$el : activator
+    })
+  })
+
   let scope: EffectScope
   watch(() => !!props.activator, val => {
     if (val && IN_BROWSER) {
       scope = effectScope()
       scope.run(() => {
-        _useActivator(props, { activatorEl, activatorEvents })
+        _useActivator(props, { activatorEl, activatorRef, activatorEvents })
       })
     } else if (scope) {
       scope.stop()
     }
   }, { flush: 'post', immediate: true })
 
-  return { activatorEl, activatorEvents }
+  return { activatorEl, activatorRef, activatorEvents }
 }
 
 function _useActivator (props: ActivatorProps, { activatorEl, activatorEvents }: ReturnType<typeof useActivator>) {
