@@ -21,7 +21,7 @@ import { filterInputAttrs, genericComponent, useRender } from '@/util'
 import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
 
-const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
+const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
 export const VTextField = genericComponent<new <T>() => {
   $slots: MakeSlots<{}>
@@ -56,12 +56,6 @@ export const VTextField = genericComponent<new <T>() => {
 
   setup (props, { attrs, slots }) {
     const model = useProxiedModel(props, 'modelValue')
-
-    const internalDirty = ref(false)
-    const isDirty = computed(() => {
-      return internalDirty.value || !!model.value || dirtyTypes.includes(props.type)
-    })
-
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function'
         ? props.counterValue(model.value)
@@ -90,14 +84,17 @@ export const VTextField = genericComponent<new <T>() => {
 
     const isFocused = ref(false)
     const inputRef = ref<HTMLInputElement>()
-    function focus () {
-      inputRef.value?.focus()
-    }
-    function blur () {
-      inputRef.value?.blur()
-    }
+    const isActive = computed(() => (
+      isFocused.value ||
+      activeTypes.includes(props.type) ||
+      props.persistentPlaceholder
+    ))
     function onFocus (e: FocusEvent) {
       isFocused.value = true
+
+      if (inputRef.value === document.activeElement) return
+
+      inputRef.value?.focus()
     }
     function onBlur (e: FocusEvent) {
       isFocused.value = false
@@ -129,12 +126,21 @@ export const VTextField = genericComponent<new <T>() => {
         >
           {{
             ...slots,
-            default: ({ isDisabled, isReadonly }) => (
+            default: ({
+              isDisabled,
+              isDirty,
+              isReadonly,
+            }) => (
               <VField
                 ref={ vFieldRef }
-                active={ isDirty.value || props.persistentPlaceholder }
-                onUpdate:active={ val => internalDirty.value = val }
-                onClick:control={ focus }
+                active={ isDirty.value || isActive.value }
+                focused={ isFocused.value }
+                onMousedown={ (e: MouseEvent) => {
+                  if (e.target === inputRef.value) return
+
+                  e.preventDefault()
+                }}
+                onClick:control={ onFocus }
                 onClick:clear={ e => {
                   e.stopPropagation()
 
@@ -146,15 +152,12 @@ export const VTextField = genericComponent<new <T>() => {
                 {{
                   ...slots,
                   default: ({
-                    isActive,
                     props: { class: fieldClass, ...slotProps },
                   }) => {
-                    const showPlaceholder = isActive || props.persistentPlaceholder
-
                     return (
                       <>
                         { props.prefix && (
-                          <span class="v-text-field__prefix" style={{ opacity: showPlaceholder ? undefined : '0' }}>
+                          <span class="v-text-field__prefix">
                             { props.prefix }
                           </span>
                         ) }
@@ -164,7 +167,6 @@ export const VTextField = genericComponent<new <T>() => {
                         <input
                           ref={ inputRef }
                           class={ fieldClass }
-                          style={{ opacity: showPlaceholder ? undefined : '0' }} // can't this just be a class?
                           v-model={ model.value }
                           v-intersect={[{
                             handler: onIntersect,
@@ -182,7 +184,7 @@ export const VTextField = genericComponent<new <T>() => {
                         />
 
                         { props.suffix && (
-                          <span class="v-text-field__suffix" style={{ opacity: showPlaceholder ? undefined : '0' }}>
+                          <span class="v-text-field__suffix">
                             { props.suffix }
                           </span>
                         ) }

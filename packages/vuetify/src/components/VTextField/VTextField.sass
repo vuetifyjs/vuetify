@@ -6,6 +6,13 @@
 // TODO: abstract variables
 
 .v-text-field
+  &.v-input--dirty,
+  &.v-input--focused
+    input,
+    .v-text-field__prefix,
+    .v-text-field__suffix
+      opacity: 1
+
   &__prefix,
   &__suffix
     color: $text-field-affix-color
@@ -13,6 +20,7 @@
     display: flex
     align-items: center
     cursor: default
+    opacity: 0
     transition: .15s opacity settings.$standard-easing
     white-space: nowrap
     padding-top: calc(var(--v-field-padding-top, 0) + 1px)
@@ -35,7 +43,7 @@
 
   input
     flex: 1
-    opacity: 1
+    opacity: 0
     transition: .15s opacity settings.$standard-easing
 
     &:focus,

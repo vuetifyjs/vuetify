@@ -7,25 +7,28 @@ import { VMessages } from '@/components/VMessages'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
-import { computed, provide, toRef } from 'vue'
+import { computed, provide } from 'vue'
 import { genericComponent, getUid, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue'
+import type { ComputedRef, ExtractPropTypes, InjectionKey, PropType, Ref, WritableComputedRef } from 'vue'
 import type { MakeSlots } from '@/util'
 
 export interface VInputSlot {
   id: ComputedRef<string>
   isDirty: ComputedRef<boolean>
   isDisabled: ComputedRef<boolean>
-  isFocused: Ref<boolean>
+  isFocused: WritableComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
   isPristine: Ref<boolean>
   isValid: ComputedRef<boolean | null>
   isValidating: Ref<boolean>
+  focus: () => void
+  blur: () => void
   reset: () => void
   resetValidation: () => void
   validate: () => void
@@ -65,12 +68,12 @@ export const VInput = genericComponent<new <T>() => {
   name: 'VInput',
 
   props: {
-    focused: Boolean,
-
+    ...makeFocusProps(),
     ...makeVInputProps(),
   },
 
   emits: {
+    'update:focused': (val: boolean) => true,
     'update:modelValue': (val: any) => true,
     'click:prepend': (e: MouseEvent) => true,
     'click:append': (e: MouseEvent) => true,
@@ -94,9 +97,11 @@ export const VInput = genericComponent<new <T>() => {
 
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
-    const isFocused = toRef(props, 'focused')
+    const { focusClasses, isFocused, blur, focus } = useFocus(props)
 
     const slotProps = computed<VInputSlot>(() => ({
+      blur,
+      focus,
       id,
       isDirty,
       isDisabled,
@@ -127,7 +132,7 @@ export const VInput = genericComponent<new <T>() => {
       )
       const showMessages = hasMessages || (
         hasHint &&
-        (props.persistentHint || props.focused)
+        (props.persistentHint || isFocused.value)
       )
 
       return (
@@ -135,6 +140,7 @@ export const VInput = genericComponent<new <T>() => {
           'v-input',
           `v-input--${props.direction}`,
           densityClasses.value,
+          focusClasses.value,
           validationClasses.value,
         ]}
         >
