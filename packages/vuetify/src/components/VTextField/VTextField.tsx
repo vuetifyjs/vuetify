@@ -51,10 +51,13 @@ export const VTextField = genericComponent<new <T>() => {
   },
 
   emits: {
+    blur: (e: FocusEvent) => true,
+    focus: (e: FocusEvent) => true,
+    'click:control': (e: MouseEvent) => true,
     'update:modelValue': (val: string) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function'
@@ -92,12 +95,21 @@ export const VTextField = genericComponent<new <T>() => {
     function onFocus (e: FocusEvent) {
       isFocused.value = true
 
+      emit('focus', e)
+
       if (inputRef.value === document.activeElement) return
 
       inputRef.value?.focus()
     }
     function onBlur (e: FocusEvent) {
       isFocused.value = false
+
+      emit('blur', e)
+    }
+    function onControlClick (e: MouseEvent) {
+      emit('click:control', e)
+
+      inputRef.value?.focus()
     }
 
     const vInputRef = ref<VInput>()
@@ -140,7 +152,7 @@ export const VTextField = genericComponent<new <T>() => {
 
                   e.preventDefault()
                 }}
-                onClick:control={ onFocus }
+                onClick:control={ onControlClick }
                 onClick:clear={ e => {
                   e.stopPropagation()
 

@@ -2,7 +2,7 @@
 import './VSelect.sass'
 
 // Components
-import { VList } from '@/components/VList'
+import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
 
@@ -104,7 +104,8 @@ export const VSelect = genericComponent<new <T>() => {
           class="v-select"
           readonly
           onClick:clear={ onClear }
-          onClick={ () => menu.value = true }
+          onClick:control={ () => menu.value = true }
+          onBlur={ () => menu.value = false }
           v-model={ selections.value }
         >
           {{
@@ -124,7 +125,12 @@ export const VSelect = genericComponent<new <T>() => {
                       activeStrategy={ props.multiple ? 'multiple' : 'single' }
                     >
                       {{
-                        item: slots.item,
+                        item: (item: any) => (
+                          <VListItem
+                            onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                            { ...item }
+                          />
+                        ),
                       }}
                     </VList>
                   </VMenu>
