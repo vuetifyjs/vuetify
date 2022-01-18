@@ -4,6 +4,14 @@
 @use './variables' as *
 
 .v-select
+  .v-field__field
+    cursor: pointer
+
+    .v-text-field__prefix,
+    .v-text-field__suffix,
+    .v-field__input
+      cursor: inherit
+
   &__content
     overflow: hidden
 
@@ -17,4 +25,8 @@
     padding-bottom: var(--v-field-padding-bottom)
 
   .v-field__input
-    opacity: 0
+    opacity: 0 !important // TODO: remove this
+
+.v-select__selections
+  .v-text-field--prefixed &
+    --v-field-padding-before: 6px
