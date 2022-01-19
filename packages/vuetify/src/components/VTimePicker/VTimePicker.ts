@@ -210,7 +210,7 @@ export default mixins(
     setPicker (picker: ActivePicker) {
       if (picker === 'HOUR') this.selecting = SelectingTimes.Hour
       else if (picker === 'MINUTE') this.selecting = SelectingTimes.Minute
-      else if (picker === 'SECOND') this.selecting = SelectingTimes.Second
+      else if (picker === 'SECOND' && this.useSeconds) this.selecting = SelectingTimes.Second
     },
     setPeriod (period: Period) {
       this.period = period
