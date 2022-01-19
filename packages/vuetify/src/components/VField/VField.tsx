@@ -24,6 +24,7 @@ import {
   propsFactory,
   standardEasing,
   useRender,
+  wrapInArray,
 } from '@/util'
 
 // Types
@@ -36,8 +37,8 @@ const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain
 type Variant = typeof allowedVariants[number]
 
 export interface DefaultInputSlot {
-  isActive: boolean
-  isFocused: boolean
+  isActive: Ref<boolean>
+  isFocused: Ref<boolean>
   controlRef: Ref<HTMLElement | undefined>
   focus: () => void
   blur: () => void
@@ -90,10 +91,11 @@ export const VField = genericComponent<new <T>() => {
   inheritAttrs: false,
 
   props: {
-    active: Boolean,
     disabled: Boolean,
     error: Boolean,
     id: String,
+    modelValue: null,
+
     ...makeFocusProps(),
     ...makeVFieldProps(),
   },
@@ -103,24 +105,30 @@ export const VField = genericComponent<new <T>() => {
     'click:prepend-inner': (e: MouseEvent) => true,
     'click:append-inner': (e: MouseEvent) => true,
     'click:control': (e: MouseEvent) => true,
-    'update:active': (active: boolean) => true,
-    'update:focused': (active: boolean) => true,
+    'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: any) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
+    const model = useProxiedModel(props, 'modelValue')
+
     const { themeClasses } = provideTheme(props)
     const { loaderClasses } = useLoader(props)
-    const isActive = useProxiedModel(props, 'active')
     const { focusClasses, isFocused, focus, blur } = useFocus(props)
 
+    const isActive = computed(() => (
+      wrapInArray(model.value || []).length > 0 ||
+      isFocused.value
+    ))
+    const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
+
     const uid = getUid()
+    const id = computed(() => props.id || `input-${uid}`)
 
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()
     const controlRef = ref<HTMLElement>()
-    const id = computed(() => props.id || `input-${uid}`)
-    const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
+
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
       return (
@@ -164,11 +172,12 @@ export const VField = genericComponent<new <T>() => {
           targetEl.style.removeProperty('visibility')
         })
       }
-    }, { flush: 'post' })
+    }, { flush: 'sync' })
 
     const slotProps = computed<DefaultInputSlot>(() => ({
-      isActive: isActive.value,
-      isFocused: isFocused.value,
+      model,
+      isActive,
+      isFocused,
       controlRef,
       blur,
       focus,
@@ -209,9 +218,9 @@ export const VField = genericComponent<new <T>() => {
               [`v-field--variant-${props.variant}`]: true,
             },
             themeClasses.value,
+            backgroundColorClasses.value,
             focusClasses.value,
             loaderClasses.value,
-            backgroundColorClasses.value,
             textColorClasses.value,
           ]}
           style={[
@@ -262,7 +271,7 @@ export const VField = genericComponent<new <T>() => {
               },
               focus,
               blur,
-            }) }
+            } as VFieldSlot) }
           </div>
 
           { hasClear && (
@@ -270,7 +279,7 @@ export const VField = genericComponent<new <T>() => {
               <div
                 class="v-field__clearable"
                 onClick={ (e: Event) => emit('click:clear', e) }
-                v-show={ props.active }
+                v-show={ isActive.value }
               >
                 { slots.clear
                   ? slots.clear()

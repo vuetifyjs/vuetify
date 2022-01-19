@@ -27,8 +27,8 @@ export interface VInputSlot {
   isPristine: Ref<boolean>
   isValid: ComputedRef<boolean | null>
   isValidating: Ref<boolean>
-  focus: () => void
   blur: () => void
+  focus: () => void
   reset: () => void
   resetValidation: () => void
   validate: () => void
@@ -81,6 +81,7 @@ export const VInput = genericComponent<new <T>() => {
 
   setup (props, { slots, emit }) {
     const { densityClasses } = useDensity(props)
+    const { focusClasses, isFocused, blur, focus } = useFocus(props)
     const {
       errorMessages,
       isDirty,
@@ -97,11 +98,8 @@ export const VInput = genericComponent<new <T>() => {
 
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
-    const { focusClasses, isFocused, blur, focus } = useFocus(props)
 
     const slotProps = computed<VInputSlot>(() => ({
-      blur,
-      focus,
       id,
       isDirty,
       isDisabled,
@@ -110,6 +108,8 @@ export const VInput = genericComponent<new <T>() => {
       isPristine,
       isValid,
       isValidating,
+      blur,
+      focus,
       reset,
       resetValidation,
       validate,
@@ -118,8 +118,8 @@ export const VInput = genericComponent<new <T>() => {
     provide(VInputSymbol, slotProps)
 
     useRender(() => {
-      const hasPrepend = (slots.prepend || props.prependIcon)
-      const hasAppend = (slots.append || props.appendIcon)
+      const hasPrepend = !!(slots.prepend || props.prependIcon)
+      const hasAppend = !!(slots.append || props.appendIcon)
       const hasHint = !!(slots.hint || props.hint)
       const hasMessages = !!(
         slots.messages ||
@@ -157,9 +157,11 @@ export const VInput = genericComponent<new <T>() => {
             </div>
           ) }
 
-          <div class="v-input__control">
-            { slots.default?.(slotProps.value) }
-          </div>
+          { slots.default && (
+            <div class="v-input__control">
+              { slots.default?.(slotProps.value) }
+            </div>
+          ) }
 
           { hasAppend && (
             <div
@@ -194,12 +196,11 @@ export const VInput = genericComponent<new <T>() => {
     })
 
     return {
-      isDirty,
-      isValid,
-      validate,
+      blur,
+      focus,
       reset,
       resetValidation,
-      errorMessages,
+      validate,
     }
   },
 })

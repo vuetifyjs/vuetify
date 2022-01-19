@@ -3,7 +3,7 @@ import { getUid, propsFactory } from '@/util'
 import { computed, inject, onBeforeUnmount, provide, ref } from 'vue'
 import { multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import { classicSelectStrategy, independentSelectStrategy, leafSelectStrategy } from './selectStrategies'
-import { classicActiveStrategy } from './activeStrategies'
+import { classicActiveStrategy, selectActiveStrategy } from './activeStrategies'
 
 // Types
 import type { InjectionKey, Prop, Ref } from 'vue'

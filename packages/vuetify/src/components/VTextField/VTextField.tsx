@@ -51,8 +51,6 @@ export const VTextField = genericComponent<new <T>() => {
   },
 
   emits: {
-    blur: (e: FocusEvent) => true,
-    focus: (e: FocusEvent) => true,
     'click:control': (e: MouseEvent) => true,
     'update:modelValue': (val: string) => true,
   },
@@ -95,16 +93,12 @@ export const VTextField = genericComponent<new <T>() => {
     function onFocus (e: FocusEvent) {
       isFocused.value = true
 
-      emit('focus', e)
-
       if (inputRef.value === document.activeElement) return
 
       inputRef.value?.focus()
     }
     function onBlur (e: FocusEvent) {
       isFocused.value = false
-
-      emit('blur', e)
     }
     function onControlClick (e: MouseEvent) {
       emit('click:control', e)
