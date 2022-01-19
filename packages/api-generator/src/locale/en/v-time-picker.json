@@ -1,6 +1,7 @@
 {
   "props": {
     "format": "Defines the format of a time displayed in picker. Available options are `ampm` and `24hr`.",
+    "activePicker": "Determines which picker is being displayed. Allowed values: `'HOUR'`, `'MINUTE'`, `'SECOND'`",
     "allowedHours": "Restricts which hours can be selected",
     "allowedMinutes": "Restricts which minutes can be selected",
     "allowedSeconds": "Restricts which seconds can be selected",
@@ -23,6 +24,7 @@
     "click:minute": "Emitted when user selects the minute",
     "click:second": "Emitted when user selects the second",
     "change": "Emitted when the time selection is done (when user changes the minute for HH:MM picker and the second for HH:MM:SS picker",
-    "update:period": "Emitted when user clicks the AM/PM button"
+    "update:period": "Emitted when user clicks the AM/PM button",
+    "update:active-picker": "The `.sync` event for `active-picker` prop"
   }
 }
