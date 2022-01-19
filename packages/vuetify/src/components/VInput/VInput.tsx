@@ -11,11 +11,11 @@ import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
-import { computed, provide } from 'vue'
+import { computed } from 'vue'
 import { genericComponent, getUid, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, ExtractPropTypes, InjectionKey, PropType, Ref, WritableComputedRef } from 'vue'
+import type { ComputedRef, ExtractPropTypes, PropType, Ref, WritableComputedRef } from 'vue'
 import type { MakeSlots } from '@/util'
 
 export interface VInputSlot {
@@ -33,8 +33,6 @@ export interface VInputSlot {
   resetValidation: () => void
   validate: () => void
 }
-
-export const VInputSymbol = 'VInput' as any as InjectionKey<ComputedRef<VInputSlot>>
 
 export const makeVInputProps = propsFactory({
   id: String,
@@ -114,8 +112,6 @@ export const VInput = genericComponent<new <T>() => {
       resetValidation,
       validate,
     }))
-
-    provide(VInputSymbol, slotProps)
 
     useRender(() => {
       const hasPrepend = !!(slots.prepend || props.prependIcon)
