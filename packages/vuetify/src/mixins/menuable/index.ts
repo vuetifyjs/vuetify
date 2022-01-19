@@ -139,7 +139,8 @@ export default baseMixins.extend<options>().extend({
       const activatorLeft = (this.attach !== false ? a.offsetLeft : a.left) || 0
       const minWidth = Math.max(a.width, c.width)
       let left = 0
-      left += this.left ? activatorLeft - (minWidth - a.width) : activatorLeft
+      left += activatorLeft
+      if (this.left || (this.$vuetify.rtl && !this.right)) left -= (minWidth - a.width)
       if (this.offsetX) {
         const maxWidth = isNaN(Number(this.maxWidth))
           ? a.width
