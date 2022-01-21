@@ -18,6 +18,11 @@
     @include tools.elevation($select-content-elevation)
     @include tools.rounded($select-content-border-radius)
 
+  &__menu-icon
+    order: 1
+    margin-inline-start: 4px
+    transition: $select-transition
+
   &__selections
     padding-inline-start: var(--v-field-padding-before)
     padding-inline-end: var(--v-field-padding-after)
@@ -26,6 +31,11 @@
 
   .v-field__input
     opacity: 0 !important // TODO: remove this
+
+  &--active-menu
+    .v-select__menu-icon
+      color: inherit
+      transform: rotate(180deg)
 
 .v-select__selections
   display: flex

@@ -3,6 +3,7 @@ import './VSelect.sass'
 
 // Components
 import { VChip } from '@/components/VChip'
+import { VIcon } from '@/components/VIcon'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
@@ -121,7 +122,12 @@ export const VSelect = genericComponent<new <T>() => {
       return (
         <VTextField
           ref={ vTextFieldRef }
-          class="v-select"
+          class={[
+            'v-select',
+            {
+              'v-select--active-menu': menu.value,
+            },
+          ]}
           readonly
           onClick:clear={ onClear }
           onClick:control={ () => menu.value = true }
@@ -130,6 +136,12 @@ export const VSelect = genericComponent<new <T>() => {
         >
           {{
             ...slots,
+            appendInner: () => (
+              <VIcon
+                class="v-select__menu-icon"
+                icon="mdi-menu-down"
+              />
+            ),
             default: () => (
               <>
                 { activator.value && (
