@@ -49,6 +49,7 @@ export const VSelect = genericComponent<new <T>() => {
   },
 
   emits: {
+    'click:clear': (e: MouseEvent) => true,
     'update:modelValue': (val: any) => true,
   },
 
@@ -82,10 +83,10 @@ export const VSelect = genericComponent<new <T>() => {
       },
     })
 
-    function onClear (e: Event) {
-      e.preventDefault()
+    function onClear (e: MouseEvent) {
+      active.value = []
 
-      if (props.openOnClear && !menu.value) {
+      if (props.openOnClear) {
         menu.value = true
       }
     }

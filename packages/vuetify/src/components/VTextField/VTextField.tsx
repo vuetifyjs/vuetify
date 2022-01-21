@@ -14,7 +14,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import Intersect from '@/directives/intersect'
 
 // Utilities
-import { computed, ref } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 import { filterInputAttrs, genericComponent, useRender } from '@/util'
 
 // Types
@@ -51,6 +51,7 @@ export const VTextField = genericComponent<new <T>() => {
   },
 
   emits: {
+    'click:clear': (e: MouseEvent) => true,
     'click:control': (e: MouseEvent) => true,
     'update:modelValue': (val: string) => true,
   },
@@ -83,6 +84,8 @@ export const VTextField = genericComponent<new <T>() => {
       (entries[0].target as HTMLInputElement)?.focus?.()
     }
 
+    const vInputRef = ref<VInput>()
+    const vFieldRef = ref<VInput>()
     const isFocused = ref(false)
     const inputRef = ref<HTMLInputElement>()
     const isActive = computed(() => (
@@ -90,24 +93,29 @@ export const VTextField = genericComponent<new <T>() => {
       activeTypes.includes(props.type) ||
       props.persistentPlaceholder
     ))
-    function onFocus (e: FocusEvent) {
-      isFocused.value = true
+    function onFocus () {
+      if (inputRef.value !== document.activeElement) {
+        inputRef.value?.focus()
+      }
 
-      if (inputRef.value === document.activeElement) return
-
-      inputRef.value?.focus()
-    }
-    function onBlur (e: FocusEvent) {
-      isFocused.value = false
+      if (!isFocused.value) isFocused.value = true
     }
     function onControlClick (e: MouseEvent) {
+      onFocus()
+
       emit('click:control', e)
-
-      inputRef.value?.focus()
     }
+    function onClear (e: MouseEvent) {
+      e.stopPropagation()
 
-    const vInputRef = ref<VInput>()
-    const vFieldRef = ref<VInput>()
+      onFocus()
+
+      nextTick(() => {
+        model.value = ''
+
+        emit('click:clear', e)
+      })
+    }
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
@@ -147,11 +155,7 @@ export const VTextField = genericComponent<new <T>() => {
                   e.preventDefault()
                 }}
                 onClick:control={ onControlClick }
-                onClick:clear={ e => {
-                  e.stopPropagation()
-
-                  model.value = ''
-                }}
+                onClick:clear={ onClear }
                 role="textbox"
                 { ...fieldProps }
               >
@@ -184,7 +188,7 @@ export const VTextField = genericComponent<new <T>() => {
                           size={ 1 }
                           type={ props.type }
                           onFocus={ onFocus }
-                          onBlur={ onBlur }
+                          onBlur={ () => (isFocused.value = false) }
                           { ...slotProps }
                           { ...inputAttrs }
                         />
@@ -218,6 +222,9 @@ export const VTextField = genericComponent<new <T>() => {
     })
 
     return useForwardRef({
+      isFocused,
+      inputRef,
+      onFocus,
       focus,
       blur,
     }, vInputRef, vFieldRef)
