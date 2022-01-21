@@ -34,6 +34,7 @@ export const VSelect = genericComponent<new <T>() => {
 
   props: {
     chips: Boolean,
+    hideSelected: Boolean,
     items: {
       type: Array as PropType<SelectItem[]>,
       default: () => ([]),
@@ -123,12 +124,15 @@ export const VSelect = genericComponent<new <T>() => {
                       activeStrategy={ props.multiple ? 'multiple' : 'single' }
                     >
                       {{
-                        item: (item: any) => (
-                          <VListItem
-                            onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                            { ...item }
-                          />
-                        ),
+                        item: (item: any) => {
+                          return (
+                            <VListItem
+                              onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                              v-show={ !props.hideSelected || !active.value.includes(item.value) }
+                              { ...item }
+                            />
+                          )
+                        },
                       }}
                     </VList>
                   </VMenu>
