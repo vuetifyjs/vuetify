@@ -3,18 +3,18 @@ import { VExpandTransition } from '@/components/transitions'
 import { VListChildren } from './VListChildren'
 
 // Composables
-import { useNestedGroup } from '@/composables/nested/nested'
+import { createList, useList } from './list'
 import { makeTagProps } from '@/composables/tag'
+import { useNestedGroup } from '@/composables/nested/nested'
 
 // Utilities
 import { computed } from 'vue'
 import { defineComponent, genericComponent } from '@/util'
-import { createList, useList } from './VList'
 
 // Types
-import type { Prop } from 'vue'
+import type { InternalListItem } from './VList'
 import type { MakeSlots } from '@/util'
-import type { ListItem } from './VList'
+import type { Prop } from 'vue'
 
 export type ListGroupHeaderSlot = {
   onClick: (e: Event) => void
@@ -27,7 +27,7 @@ const VListGroupItems = defineComponent({
 
   props: {
     open: Boolean,
-    items: Array as Prop<ListItem[]>,
+    items: Array as Prop<InternalListItem[]>,
   },
 
   setup (props, { slots }) {
@@ -45,7 +45,7 @@ const VListGroupItems = defineComponent({
   },
 })
 
-export const VListGroup = genericComponent<new <T extends ListItem>() => {
+export const VListGroup = genericComponent<new <T extends InternalListItem>() => {
   $props: {
     items?: T[]
   }
@@ -67,7 +67,7 @@ export const VListGroup = genericComponent<new <T extends ListItem>() => {
       type: String,
       default: '$expand',
     },
-    items: Array as Prop<ListItem[]>,
+    items: Array as Prop<InternalListItem[]>,
 
     ...makeTagProps(),
   },

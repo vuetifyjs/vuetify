@@ -1,4 +1,5 @@
 @forward './variables'
+@use 'sass:list'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -47,7 +48,6 @@
   font-weight: $list-subheader-font-weight
   line-height: $list-subheader-line-height
   padding-inline-end: $list-subheader-padding-end
-  padding-inline-start: $list-subheader-padding-start
   min-height: $list-subheader-min-height
   transition: $list-subheader-transition
 
@@ -59,8 +59,11 @@
 
   @at-root
     @include tools.density('v-list', $list-density) using ($modifier)
+      $base-padding: list.nth($list-item-padding, 2)
+
       #{$root}
         min-height: $list-subheader-min-height + ($modifier * $list-subheader-min-height-multiplier)
+        padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
 
   &--inset
     padding-inline-start: $list-subheader-inset-padding-start
@@ -68,7 +71,7 @@
   .v-list--nav &
     font-size: $list-nav-subheader-font-size
 
-  .v-list--subheader-sticky &
+  &--sticky
     background: inherit
     left: 0
     position: sticky

@@ -9,6 +9,7 @@ import { VListItemSubtitle } from './VListItemSubtitle'
 import { VListItemTitle } from './VListItemTitle'
 
 // Composables
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
@@ -17,7 +18,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { useList } from './list'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -26,7 +27,6 @@ import { Ripple } from '@/directives/ripple'
 import { computed, onMounted } from 'vue'
 import { genericComponent } from '@/util'
 import { useNestedItem } from '@/composables/nested/nested'
-import { useList } from './VList'
 
 // Types
 import type { MakeSlots } from '@/util'

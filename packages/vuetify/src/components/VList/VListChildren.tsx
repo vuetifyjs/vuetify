@@ -1,17 +1,19 @@
 // Components
+import { VDivider } from '../VDivider'
 import { VListGroup } from './VListGroup'
 import { VListItem } from './VListItem'
+import { VListSubheader } from './VListSubheader'
 
 // Utilities
 import { genericComponent } from '@/util'
 
 // Types
-import type { Prop } from 'vue'
-import type { MakeSlots } from '@/util'
+import type { InternalListItem } from './VList'
 import type { ListGroupHeaderSlot } from './VListGroup'
-import type { ListItem } from './VList'
+import type { MakeSlots } from '@/util'
+import type { Prop } from 'vue'
 
-export const VListChildren = genericComponent<new <T extends ListItem>() => {
+export const VListChildren = genericComponent<new <T extends InternalListItem>() => {
   $props: {
     items?: T[]
   }
@@ -24,26 +26,29 @@ export const VListChildren = genericComponent<new <T extends ListItem>() => {
   name: 'VListChildren',
 
   props: {
-    items: Array as Prop<ListItem[]>,
+    items: Array as Prop<InternalListItem[]>,
   },
 
   setup (props, { slots }) {
-    return () => slots.default?.() ?? props.items?.map(({ children, ...item }) => {
-      const { value, ...rest } = item
+    return () => slots.default?.() ?? props.items?.map(({ children, props: itemProps, type }) => {
+      if (type === 'divider') return <VDivider {...itemProps} />
+
+      if (type === 'subheader') return <VListSubheader {...itemProps} v-slots={ slots } />
+
       return children ? (
         <VListGroup
-          value={value}
-          items={children}
+          value={ itemProps?.value }
+          items={ children }
         >
           {{
             ...slots,
             header: headerProps => slots.externalHeader
-              ? slots.externalHeader({ ...rest, ...headerProps })
-              : <VListItem {...rest} {...headerProps} />,
+              ? slots.externalHeader({ ...itemProps, ...headerProps })
+              : <VListItem { ...itemProps } { ...headerProps } />,
           }}
         </VListGroup>
       ) : (
-        slots.item ? slots.item(item) : <VListItem {...item} v-slots={slots} />
+        slots.item ? slots.item(itemProps) : <VListItem { ...itemProps } v-slots={ slots } />
       )
     })
   },
