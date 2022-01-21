@@ -2,6 +2,7 @@
 import './VSelect.sass'
 
 // Components
+import { VChip } from '@/components/VChip'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
@@ -32,6 +33,7 @@ export const VSelect = genericComponent<new <T>() => {
   name: 'VSelect',
 
   props: {
+    chips: Boolean,
     items: {
       type: Array as PropType<SelectItem[]>,
       default: () => ([]),
@@ -64,13 +66,12 @@ export const VSelect = genericComponent<new <T>() => {
 
     const menu = ref(false)
     const items = computed(() => (
-      filteredItems.value.map(({ item }: any) => (
-        Object(item) === item
-          ? item
-          : { title: item, value: item }
-      ))
+      filteredItems.value.map(({ item }: any) => ({
+        title: item?.title ?? item,
+        value: item?.value ?? item,
+      }))
     ))
-    const activated = computed({
+    const active = computed({
       get: () => model.value,
       set: val => {
         model.value = val
@@ -79,10 +80,6 @@ export const VSelect = genericComponent<new <T>() => {
 
         menu.value = false
       },
-    })
-    const selections = computed({
-      get: () => model.value.join(', '),
-      set: (val: string) => !val && (model.value = []),
     })
 
     function onClear (e: Event) {
@@ -106,7 +103,7 @@ export const VSelect = genericComponent<new <T>() => {
           onClick:clear={ onClear }
           onClick:control={ () => menu.value = true }
           onBlur={ () => menu.value = false }
-          v-model={ selections.value }
+          modelValue={ model.value.join(', ') }
         >
           {{
             ...slots,
@@ -120,7 +117,7 @@ export const VSelect = genericComponent<new <T>() => {
                     openOnClick={ false }
                   >
                     <VList
-                      v-model:active={ activated.value }
+                      v-model:active={ active.value }
                       items={ items.value }
                       activeStrategy={ props.multiple ? 'multiple' : 'single' }
                     >
@@ -137,9 +134,19 @@ export const VSelect = genericComponent<new <T>() => {
                 ) }
 
                 <div class="v-select__selections">
-                  { model.value.map(selection => (
+                  { active.value.map((selection, index) => (
                     <div class="v-select__selection">
-                      { selection as string }
+                      { props.chips
+                        ? (<VChip text={ selection as any } size="small" />)
+                        : (
+                          <span>
+                            { selection as string }
+                            { index < model.value.length - 1 && (
+                              <span class="v-select__selection-comma">,&nbsp;</span>
+                            ) }
+                          </span>
+                        )
+                      }
                     </div>
                   )) }
                 </div>
