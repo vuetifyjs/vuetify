@@ -19,10 +19,6 @@ export const VDataTableHeaders = defineComponent({
     sortBy: Array as PropType<any[]>,
   },
 
-  emits: {
-    sort: (x: any) => true,
-  },
-
   setup (props, { slots, emit }) {
     const { toggleSort } = inject('v-data-table', {} as any)
 

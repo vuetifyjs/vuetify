@@ -6,7 +6,7 @@ import './VDataTable.sass'
 
 import type { PropType, Ref } from 'vue'
 import type { DataTableHeader } from '../types'
-import { useGroupBy, useHeaders, useOptions, usePagination, useSort, useSortedItems } from '../composables'
+import { createExpanded, useGroupBy, useHeaders, useOptions, usePagination, useSort, useSortedItems } from '../composables'
 import { VDataTableFooter } from './VDataTableFooter'
 import { VTable } from '@/components'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -53,20 +53,23 @@ export const VDataTable = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { headers, columns } = useHeaders(props)
+    const { expanded } = createExpanded()
 
+    const { headers, columns } = useHeaders(props)
     const { sortBy, toggleSort } = useSort(props)
     const { sortedItems } = useSortedItems(toRef(props, 'items'), sortBy)
-
     const { page, itemsPerPage, startIndex, stopIndex } = usePagination(props)
 
-    const paginatedItems = computed(() => itemsPerPage.value > 0 ? sortedItems.value.slice(startIndex.value, stopIndex.value) : sortedItems.value)
+    const paginatedItems = computed(() => {
+      return itemsPerPage.value > 0 ? sortedItems.value.slice(startIndex.value, stopIndex.value) : sortedItems.value
+    })
 
     const { items, toggleGroup } = useGroupBy(paginatedItems, toRef(props, 'groupBy'))
 
     provide('v-data-table', {
       toggleGroup,
       toggleSort,
+      sortBy,
     })
 
     useOptions(page, itemsPerPage, sortBy)
@@ -74,7 +77,7 @@ export const VDataTable = defineComponent({
     return () => (
       <VTable
         class="v-data-table-regular"
-        height={props.height}
+        height={ props.height }
       >
         {{
           default: () => (
@@ -85,10 +88,6 @@ export const VDataTable = defineComponent({
                     rows={ headers.value }
                     rowHeight={ 48 }
                     sticky={ props.fixedHeader }
-                    sortBy={ sortBy.value }
-                    onSort={ sorted => {
-                      sortBy.value = sorted
-                    } }
                   />
                 ) }
               </thead>
@@ -106,12 +105,12 @@ export const VDataTable = defineComponent({
           bottom: () => (
             <VDataTableFooter
               page={ page.value }
-              onPreviousPage={() => {
+              onPreviousPage={ () => {
                 page.value = Math.max(1, page.value - 1)
-              }}
-              onNextPage={() => {
+              } }
+              onNextPage={ () => {
                 page.value = Math.min(Math.floor(props.items.length / itemsPerPage.value), page.value + 1)
-              }}
+              } }
             />
           ),
         }}

@@ -27,14 +27,11 @@ export const VDataTableVirtual = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { headers, columns } = useHeaders(props)
-
     const { expanded } = createExpanded()
 
+    const { headers, columns } = useHeaders(props)
     const { sortBy, toggleSort } = useSort(props)
-
     const { sortedItems } = useSortedItems(toRef(props, 'items'), sortBy)
-
     const { items, toggleGroup, numGroups, numHiddenItems } = useGroupBy(sortedItems, toRef(props, 'groupBy'))
 
     const {
