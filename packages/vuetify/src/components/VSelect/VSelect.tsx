@@ -9,6 +9,7 @@ import { VTextField } from '@/components/VTextField'
 
 // Composables
 import { makeFilterProps, useFilter } from '@/composables/filter'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
@@ -34,6 +35,7 @@ export const VSelect = genericComponent<new <T>() => {
 
   props: {
     chips: Boolean,
+    hideNoData: Boolean,
     hideSelected: Boolean,
     items: {
       type: Array as PropType<SelectItem[]>,
@@ -44,6 +46,10 @@ export const VSelect = genericComponent<new <T>() => {
       default: () => ([]),
     },
     multiple: Boolean,
+    noDataText: {
+      type: String,
+      default: '$vuetify.noDataText',
+    },
     openOnClear: Boolean,
 
     ...makeFilterProps(),
@@ -55,6 +61,7 @@ export const VSelect = genericComponent<new <T>() => {
   },
 
   setup (props, { slots }) {
+    const { t } = useLocale()
     const vTextFieldRef = ref()
     const activator = ref()
     const model = useProxiedModel(
@@ -67,12 +74,6 @@ export const VSelect = genericComponent<new <T>() => {
     const { filteredItems } = useFilter(props, props.items)
 
     const menu = ref(false)
-    const items = computed(() => (
-      filteredItems.value.map(({ item }: any) => ({
-        title: item?.title ?? item,
-        value: item?.value ?? item,
-      }))
-    ))
     const active = computed({
       get: () => model.value,
       set: val => {
@@ -82,6 +83,26 @@ export const VSelect = genericComponent<new <T>() => {
 
         menu.value = false
       },
+    })
+    const items = computed(() => {
+      const array = []
+
+      for (const { item } of filteredItems.value as any) {
+        const title = item?.title ?? item
+        const value = item?.value ?? item
+
+        if (props.hideSelected && active.value.includes(value)) {
+          continue
+        }
+
+        array.push({ title, value })
+      }
+
+      if (!array.length && !props.hideNoData) {
+        array.push({ title: t(props.noDataText) })
+      }
+
+      return array
     })
 
     function onClear (e: MouseEvent) {
@@ -128,7 +149,6 @@ export const VSelect = genericComponent<new <T>() => {
                           return (
                             <VListItem
                               onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                              v-show={ !props.hideSelected || !active.value.includes(item.value) }
                               { ...item }
                             />
                           )
