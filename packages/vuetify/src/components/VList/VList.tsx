@@ -28,7 +28,7 @@ import type { ListGroupHeaderSlot } from './VListGroup'
 export type ListItem = {
   [key: string]: any
   $type?: 'item' | 'subheader' | 'divider'
-  $children?: ListItem[]
+  $children?: (string | ListItem)[]
 }
 
 export type InternalListItem = {
@@ -37,10 +37,14 @@ export type InternalListItem = {
   children?: InternalListItem[]
 }
 
-const parseItems = (items?: ListItem[]): InternalListItem[] | undefined => {
+const parseItems = (items?: (string | ListItem)[]): InternalListItem[] | undefined => {
   if (!items) return undefined
 
-  return items.map(({ $type, $children, ...props }) => {
+  return items.map(item => {
+    if (typeof item === 'string') return { type: 'item', value: item, title: item }
+
+    const { $type, $children, ...props } = item
+
     if ($type === 'subheader') return { type: 'subheader', props }
     if ($type === 'divider') return { type: 'divider', props }
 
