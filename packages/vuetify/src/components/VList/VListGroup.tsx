@@ -1,20 +1,18 @@
 // Components
 import { VExpandTransition } from '@/components/transitions'
-import { VListChildren } from './VListChildren'
 
 // Composables
-import { createList, useList } from './list'
+import { useList } from './list'
 import { makeTagProps } from '@/composables/tag'
 import { useNestedGroup } from '@/composables/nested/nested'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, genericComponent } from '@/util'
+import { genericComponent } from '@/util'
 
 // Types
 import type { InternalListItem } from './VList'
 import type { MakeSlots } from '@/util'
-import type { Prop } from 'vue'
 
 export type ListGroupHeaderSlot = {
   onClick: (e: Event) => void
@@ -22,36 +20,13 @@ export type ListGroupHeaderSlot = {
   class: string
 }
 
-const VListGroupItems = defineComponent({
-  name: 'VListGroupItems',
-
-  props: {
-    open: Boolean,
-    items: Array as Prop<InternalListItem[]>,
-  },
-
-  setup (props, { slots }) {
-    createList()
-
-    return () => {
-      return (
-        <VExpandTransition>
-          <div class="v-list-group__items" v-show={props.open}>
-            <VListChildren items={props.items} v-slots={slots} />
-          </div>
-        </VExpandTransition>
-      )
-    }
-  },
-})
-
 export const VListGroup = genericComponent<new <T extends InternalListItem>() => {
   $props: {
     items?: T[]
   }
   $slots: MakeSlots<{
     header: [ListGroupHeaderSlot]
-    item: [T]
+    items: []
     default: []
   }>
 }>()({
@@ -67,7 +42,6 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
       type: String,
       default: '$expand',
     },
-    items: Array as Prop<InternalListItem[]>,
 
     ...makeTagProps(),
   },
@@ -84,6 +58,7 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
       onClick,
       appendIcon: isOpen.value ? props.collapseIcon : props.expandIcon,
       class: 'v-list-group__header',
+      value: `${props.value}_header`,
     }))
 
     return () => {
@@ -97,7 +72,11 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
           ]}
         >
           { slots.header?.(headerProps.value) }
-          <VListGroupItems items={props.items} open={isOpen.value} v-slots={slots} />
+          <VExpandTransition>
+            <div class="v-list-group__items" v-show={isOpen.value}>
+              { slots.items?.() }
+            </div>
+          </VExpandTransition>
         </props.tag>
       )
     }

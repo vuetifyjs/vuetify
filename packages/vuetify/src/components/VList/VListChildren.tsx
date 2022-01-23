@@ -6,6 +6,7 @@ import { VListSubheader } from './VListSubheader'
 
 // Utilities
 import { genericComponent } from '@/util'
+import { createList } from './list'
 
 // Types
 import type { InternalListItem } from './VList'
@@ -30,6 +31,8 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
   },
 
   setup (props, { slots }) {
+    createList()
+
     return () => slots.default?.() ?? props.items?.map(({ children, props: itemProps, type }) => {
       if (type === 'divider') return <VDivider {...itemProps} />
 
@@ -38,10 +41,11 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
       return children ? (
         <VListGroup
           value={ itemProps?.value }
-          items={ children }
         >
           {{
-            ...slots,
+            items: () => (
+              <VListChildren items={ children } v-slots={ slots } />
+            ),
             header: headerProps => slots.externalHeader
               ? slots.externalHeader({ ...itemProps, ...headerProps })
               : <VListItem { ...itemProps } { ...headerProps } />,
