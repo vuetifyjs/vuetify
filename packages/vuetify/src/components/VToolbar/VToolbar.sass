@@ -1,11 +1,6 @@
-@import './index'
-
-+theme('v-toolbar.v-sheet') using ($material)
-  background-color: map-get($material, 'toolbar')
-
-
-// Sheet
-+sheet(v-toolbar, $toolbar-elevation, $toolbar-border-radius, $toolbar-shaped-border-radius)
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 // Block
 .v-toolbar
@@ -16,7 +11,8 @@
   transition: $toolbar-transition
   position: relative
 
-  +elevation(4)
+  @include tools.theme($toolbar-theme...)
+  @include tools.elevation(4)
 
   .v-input
     padding-top: 0
@@ -33,24 +29,24 @@
 
   > .v-btn.v-btn--icon
     &:first-child
-      +ltr()
+      @include tools.ltr()
         margin-left: -$toolbar-btn-icon-size * .25
 
-      +rtl()
+      @include tools.rtl()
         margin-right: -$toolbar-btn-icon-size * .25
 
       + .v-toolbar__title
-        +ltr()
+        @include tools.ltr()
           padding-left: $toolbar-title-padding
 
-        +rtl()
+        @include tools.rtl()
           padding-right: $toolbar-title-padding
 
     &:last-child
-      +ltr()
+      @include tools.ltr()
         margin-right: -$toolbar-btn-icon-size * .25
 
-      +rtl()
+      @include tools.rtl()
         margin-left: -$toolbar-btn-icon-size * .25
 
   > .v-tabs
@@ -121,10 +117,10 @@
   max-width: $toolbar-collapsed-max-width
   overflow: hidden
 
-  +ltr()
+  @include tools.ltr()
     border-bottom-right-radius: $toolbar-collapsed-border-radius
 
-  +rtl()
+  @include tools.rtl()
     border-bottom-left-radius: $toolbar-collapsed-border-radius
 
   .v-toolbar__title,
@@ -140,7 +136,7 @@
 // @deprecated
 // TODO: Remove in v3
 .v-toolbar--flat
-  +elevation(0, true)
+  @include tools.elevation(0, true)
 
 .v-toolbar--floating
   display: inline-flex

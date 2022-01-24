@@ -1,22 +1,6 @@
-// Components
-import VToolbar from './VToolbar'
+// @TODO figure out how to do functional components
 
-// Utilities
-import { createSimpleFunctional } from '@/util'
+// const VToolbarTitle = createSimpleFunctional('v-toolbar__title')
+// const VToolbarItems = createSimpleFunctional('v-toolbar__items')
 
-const VToolbarTitle = createSimpleFunctional('v-toolbar__title')
-const VToolbarItems = createSimpleFunctional('v-toolbar__items')
-
-export {
-  VToolbar,
-  VToolbarItems,
-  VToolbarTitle,
-}
-
-export default {
-  $_vuetify_subcomponents: {
-    VToolbar,
-    VToolbarItems,
-    VToolbarTitle,
-  },
-}
+export { VToolbar } from './VToolbar'

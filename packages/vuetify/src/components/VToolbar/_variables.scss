@@ -1,18 +1,22 @@
-// Defaults
+@use "sass:map";
+@use "../../styles/settings/variables";
+@use "../../styles/tools/functions";
+
+$toolbar-background: rgb(var(--v-theme-surface)) !default;
+$toolbar-color: rgb(var(--v-theme-on-surface)) !default;
 $toolbar-btn-icon-size: 48px !default;
 $toolbar-content-padding-y: 4px !default;
 $toolbar-content-padding-x: 16px !default;
 $toolbar-elevation: 4 !default;
 $toolbar-border-radius: 0 !default;
-$toolbar-shaped-border-radius: map-get($rounded, 'xl') $toolbar-border-radius !default;
+$toolbar-shaped-border-radius: map-get(variables.$rounded, 'xl') $toolbar-border-radius !default;
 $toolbar-title-padding: 20px !default;
-$toolbar-transition: 0.2s map-get($transition, 'fast-out-slow-in') transform,
-                     0.2s map-get($transition, 'fast-out-slow-in') background-color,
-                     0.2s map-get($transition, 'fast-out-slow-in') left,
-                     0.2s map-get($transition, 'fast-out-slow-in') right,
-                     280ms map-get($transition, 'fast-out-slow-in') box-shadow,
-                     0.25s map-get($transition, 'fast-out-slow-in') max-width,
-                     0.25s map-get($transition, 'fast-out-slow-in') width !default;
 $toolbar-collapsed-max-width: 112px !default;
 $toolbar-collapsed-border-radius: 24px !default;
 $toolbar-prominent-padding: 6px !default;
+$toolbar-transition: .2s variables.$standard-easing !default;
+
+$toolbar-theme: (
+  $toolbar-background,
+  $toolbar-color,
+) !default;
