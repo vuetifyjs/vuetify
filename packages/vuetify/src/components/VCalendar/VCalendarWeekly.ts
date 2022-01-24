@@ -90,6 +90,9 @@ export default CalendarBase.extend({
     genHead (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-calendar-weekly__head',
+        attrs: {
+          role: 'row',
+        },
       }, this.genHeadDays())
     },
     genHeadDays (): VNode[] {
@@ -111,6 +114,9 @@ export default CalendarBase.extend({
         key: day.date,
         staticClass: 'v-calendar-weekly__head-weekday',
         class: this.getRelativeClasses(day, outside),
+        attrs: {
+          role: 'columnheader',
+        },
       }), this.weekdayFormatter(day, this.shortWeekdays))
     },
     genWeeks (): VNode[] {
@@ -134,6 +140,9 @@ export default CalendarBase.extend({
       return this.$createElement('div', {
         key: week[0].date,
         staticClass: 'v-calendar-weekly__week',
+        attrs: {
+          role: 'row',
+        },
       }, weekNodes)
     },
     getWeekNumber (determineDay: CalendarTimestamp) {
@@ -159,6 +168,9 @@ export default CalendarBase.extend({
         key: day.date,
         staticClass: 'v-calendar-weekly__day',
         class: this.getRelativeClasses(day, outside),
+        attrs: {
+          role: 'cell',
+        },
         on: this.getDefaultMouseEventHandlers(':day', nativeEvent => {
           return { nativeEvent, ...day }
         }),

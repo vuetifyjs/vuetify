@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VCalendar should go to correct day when using next/prev public functions 1`] = `
-<div class="v-calendar v-calendar-daily theme--light">
+<div class="v-calendar v-calendar-daily theme--light"
+     role="grid"
+>
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
@@ -307,7 +309,9 @@ exports[`VCalendar should go to correct day when using next/prev public function
 `;
 
 exports[`VCalendar should go to correct day when using next/prev public functions 2`] = `
-<div class="v-calendar v-calendar-daily theme--light">
+<div class="v-calendar v-calendar-daily theme--light"
+     role="grid"
+>
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
@@ -613,7 +617,9 @@ exports[`VCalendar should go to correct day when using next/prev public function
 `;
 
 exports[`VCalendar should go to correct day when using next/prev public functions 3`] = `
-<div class="v-calendar v-calendar-daily theme--light">
+<div class="v-calendar v-calendar-daily theme--light"
+     role="grid"
+>
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
@@ -919,7 +925,9 @@ exports[`VCalendar should go to correct day when using next/prev public function
 `;
 
 exports[`VCalendar should render 4-day view 1`] = `
-<div class="v-calendar v-calendar-daily theme--light">
+<div class="v-calendar v-calendar-daily theme--light"
+     role="grid"
+>
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
@@ -1561,7 +1569,9 @@ exports[`VCalendar should render 4-day view 1`] = `
 `;
 
 exports[`VCalendar should render day view 1`] = `
-<div class="v-calendar v-calendar-daily theme--light">
+<div class="v-calendar v-calendar-daily theme--light"
+     role="grid"
+>
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
@@ -1867,32 +1877,54 @@ exports[`VCalendar should render day view 1`] = `
 `;
 
 exports[`VCalendar should render month view 1`] = `
-<div class="v-calendar-monthly v-calendar-weekly v-calendar theme--light">
-  <div class="v-calendar-weekly__head">
-    <div class="v-calendar-weekly__head-weekday v-present v-outside">
+<div class="v-calendar-monthly v-calendar-weekly v-calendar theme--light"
+     role="grid"
+>
+  <div role="row"
+       class="v-calendar-weekly__head"
+  >
+    <div role="columnheader"
+         class="v-calendar-weekly__head-weekday v-present v-outside"
+    >
       Sun
     </div>
-    <div class="v-calendar-weekly__head-weekday v-future">
+    <div role="columnheader"
+         class="v-calendar-weekly__head-weekday v-future"
+    >
       Mon
     </div>
-    <div class="v-calendar-weekly__head-weekday v-future">
+    <div role="columnheader"
+         class="v-calendar-weekly__head-weekday v-future"
+    >
       Tue
     </div>
-    <div class="v-calendar-weekly__head-weekday v-future">
+    <div role="columnheader"
+         class="v-calendar-weekly__head-weekday v-future"
+    >
       Wed
     </div>
-    <div class="v-calendar-weekly__head-weekday v-future">
+    <div role="columnheader"
+         class="v-calendar-weekly__head-weekday v-future"
+    >
       Thu
     </div>
-    <div class="v-calendar-weekly__head-weekday v-future">
+    <div role="columnheader"
+         class="v-calendar-weekly__head-weekday v-future"
+    >
       Fri
     </div>
-    <div class="v-calendar-weekly__head-weekday v-future">
+    <div role="columnheader"
+         class="v-calendar-weekly__head-weekday v-future"
+    >
       Sat
     </div>
   </div>
-  <div class="v-calendar-weekly__week">
-    <div class="v-calendar-weekly__day v-past v-outside">
+  <div role="row"
+       class="v-calendar-weekly__week"
+  >
+    <div role="cell"
+         class="v-calendar-weekly__day v-past v-outside"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -1903,7 +1935,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -1914,7 +1948,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -1925,7 +1961,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -1936,7 +1974,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -1947,7 +1987,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -1958,7 +2000,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -1970,8 +2014,12 @@ exports[`VCalendar should render month view 1`] = `
       </div>
     </div>
   </div>
-  <div class="v-calendar-weekly__week">
-    <div class="v-calendar-weekly__day v-past">
+  <div role="row"
+       class="v-calendar-weekly__week"
+  >
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -1982,7 +2030,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -1993,7 +2043,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2004,7 +2056,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2015,7 +2069,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2026,7 +2082,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2037,7 +2095,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2049,8 +2109,12 @@ exports[`VCalendar should render month view 1`] = `
       </div>
     </div>
   </div>
-  <div class="v-calendar-weekly__week">
-    <div class="v-calendar-weekly__day v-past">
+  <div role="row"
+       class="v-calendar-weekly__week"
+  >
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2061,7 +2125,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2072,7 +2138,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2083,7 +2151,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2094,7 +2164,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2105,7 +2177,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2116,7 +2190,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2128,8 +2204,12 @@ exports[`VCalendar should render month view 1`] = `
       </div>
     </div>
   </div>
-  <div class="v-calendar-weekly__week">
-    <div class="v-calendar-weekly__day v-past">
+  <div role="row"
+       class="v-calendar-weekly__week"
+  >
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2140,7 +2220,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2151,7 +2233,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2162,7 +2246,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2173,7 +2259,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2184,7 +2272,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2195,7 +2285,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2207,8 +2299,12 @@ exports[`VCalendar should render month view 1`] = `
       </div>
     </div>
   </div>
-  <div class="v-calendar-weekly__week">
-    <div class="v-calendar-weekly__day v-past">
+  <div role="row"
+       class="v-calendar-weekly__week"
+  >
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2219,7 +2315,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2230,7 +2328,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2241,7 +2341,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2252,7 +2354,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past v-outside">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past v-outside"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2263,7 +2367,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past v-outside">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past v-outside"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2274,7 +2380,9 @@ exports[`VCalendar should render month view 1`] = `
         </button>
       </div>
     </div>
-    <div class="v-calendar-weekly__day v-past v-outside">
+    <div role="cell"
+         class="v-calendar-weekly__day v-past v-outside"
+    >
       <div class="v-calendar-weekly__day-label">
         <button type="button"
                 class="v-btn v-btn--fab v-btn--has-bg v-btn--round theme--light v-size--small transparent"
@@ -2290,7 +2398,9 @@ exports[`VCalendar should render month view 1`] = `
 `;
 
 exports[`VCalendar should render week view 1`] = `
-<div class="v-calendar v-calendar-daily theme--light">
+<div class="v-calendar v-calendar-daily theme--light"
+     role="grid"
+>
   <div class="v-calendar-daily__head"
        style="margin-right: 0px;"
   >
