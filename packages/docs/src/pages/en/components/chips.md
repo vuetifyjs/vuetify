@@ -32,7 +32,7 @@ Chips come in the following variations: closeable, filter, outlined, pill. The d
 
 #### Closable
 
-Closable chips can be controlled with a v-model. You can also listen to the `click:close` event if you want to know when a chip has been closed."
+Closable chips can be controlled with a v-model. You can also listen to the `click:close` event if you want to know when a chip has been closed.
 
 <example file="v-chip/prop-closable" />
 

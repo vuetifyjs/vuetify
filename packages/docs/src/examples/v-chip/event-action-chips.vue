@@ -5,71 +5,50 @@
   >
     <v-img
       src="https://cdn.vuetifyjs.com/images/cards/house.jpg"
+      cover
       :aspect-ratio="16/9"
     >
     </v-img>
-    <v-card-title>
+    <v-card-title class="flex-column align-start">
       <div class="text-h4 mb-2">
         Welcome Home...
       </div>
-      <div class="text-h6 font-weight-regular grey--text">
+      <div class="text-h6 font-weight-regular text-grey">
         Monday, 12:30 PM, Mostly Sunny
       </div>
+      <div class="d-flex align-center">
+        <v-avatar
+          size="24"
+          class="mr-4"
+        >
+          <v-img
+            src="https://cdn.vuetifyjs.com/images/weather/part-cloud-48px.png"
+            contain
+          ></v-img>
+        </v-avatar>
+
+        <span class="text-body-2 text-grey">81° / 62°</span>
+      </div>
     </v-card-title>
-    <v-row
-      class="px-4 grey--text"
-      align="center"
-    >
-      <v-avatar
-        size="24"
-        class="mr-4"
-      >
-        <v-img
-          src="https://cdn.vuetifyjs.com/images/weather/part-cloud-48px.png"
-          contain
-        ></v-img>
-      </v-avatar>
 
-      <span>81° / 62°</span>
-    </v-row>
+    <v-divider class="mx-4"></v-divider>
 
-    <v-divider class="mt-6 mx-4"></v-divider>
-
-    <v-card-text>
+    <v-card-text class="d-flex justify-space-between">
       <v-chip
-        class="mr-2"
-        @click="lights"
+        prepend-icon="mdi-brightness-5"
       >
-        <v-icon left icon="mdi-brightness-5"></v-icon>
-        Turn on Lights
+        Turn on lights
       </v-chip>
       <v-chip
-        class="mr-2"
-        @click="alarm"
+        prepend-icon="mdi-alarm-check"
       >
-        <v-icon left icon="mdi-alarm-check"></v-icon>
         Set alarm
       </v-chip>
-      <v-chip @click="blinds">
-        <v-icon left icon="mdi-blinds"></v-icon>
+      <v-chip
+        icon="mdi-blinds"
+      >
         Close blinds
       </v-chip>
     </v-card-text>
   </v-card>
 </template>
-
-<script>
-  export default {
-    methods: {
-      alarm () {
-        alert('Turning on alarm...')
-      },
-      blinds () {
-        alert('Toggling Blinds...')
-      },
-      lights () {
-        alert('Toggling lights...')
-      },
-    },
-  }
-</script>

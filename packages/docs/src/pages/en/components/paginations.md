@@ -30,11 +30,11 @@ Pagination by default displays the number of pages based on the set **length** p
 
 ### Props
 
-#### Circle
+#### Rounded
 
-The **circle** prop gives you an alternate style for pagination buttons.
+The **rounded** prop allows you to render pagination buttons with alternative styles.
 
-<example file="v-pagination/prop-circle" />
+<example file="v-pagination/prop-rounded" />
 
 #### Disabled
 
