@@ -52,6 +52,7 @@ export const VToolbar = defineComponent({
       default: 'top',
       validator: (value: any) => ['top', 'bottom'].includes(value),
     },
+    title: String,
 
     ...makeBorderProps(),
     ...makeElevationProps(),
@@ -78,7 +79,8 @@ export const VToolbar = defineComponent({
     }, { scoped: true })
 
     return () => {
-      const hasContent = !!(slots.prepend || slots.default || slots.append)
+      const hasTitle = !!(props.title || slots.title)
+      const hasContent = !!(hasTitle || slots.prepend || slots.default || slots.append)
       const hasImage = !!(slots.image || props.image)
       const isExtended = !!(props.extended || slots.extension)
 
@@ -120,6 +122,15 @@ export const VToolbar = defineComponent({
               { slots.prepend && (
                 <div class="v-toolbar__prepend">
                   { slots.prepend?.() }
+                </div>
+              ) }
+
+              { hasTitle && (
+                <div class="v-toolbar-title">
+                  { props.title
+                    ? props.title
+                    : slots.title?.()
+                  }
                 </div>
               ) }
 

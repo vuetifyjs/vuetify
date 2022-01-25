@@ -11,6 +11,8 @@ export const VToolbarTitle = defineComponent({
   name: 'VToolbarTitle',
 
   props: {
+    text: String,
+
     ...makeTagProps(),
   },
 
@@ -21,7 +23,7 @@ export const VToolbarTitle = defineComponent({
           <div class="v-toolbar-title__placeholder">
             { slots.default() }
           </div>
-        ) }
+        ) || props.text }
       </props.tag>
     )
   },
