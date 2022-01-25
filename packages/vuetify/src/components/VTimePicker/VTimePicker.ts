@@ -202,10 +202,13 @@ export default mixins(
       if (value !== null) this.$emit('input', value)
     },
     emitPicker (value: SelectingTimes) {
-      let val = 'HOUR'
-      if (value === SelectingTimes.Minute) val = 'MINUTE'
-      else if (value === SelectingTimes.Second) val = 'SECOND'
-      this.$emit('update:active-picker', val)
+      let activePicker = 'HOUR'
+      if (value === SelectingTimes.Minute) {
+        activePicker = 'MINUTE'
+      } else if (value === SelectingTimes.Second) {
+        activePicker = 'SECOND'
+      }
+      this.$emit('update:active-picker', activePicker)
     },
     setPicker (picker: ActivePicker) {
       if (picker === 'HOUR') this.selecting = SelectingTimes.Hour
