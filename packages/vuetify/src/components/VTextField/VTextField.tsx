@@ -121,7 +121,7 @@ export const VTextField = genericComponent<new <T>() => {
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [inputProps] = filterInputProps(props)
+      const [{ modelValue: _, ...inputProps }] = filterInputProps(props)
       const [fieldProps] = filterFieldProps(props)
 
       return (
@@ -159,6 +159,7 @@ export const VTextField = genericComponent<new <T>() => {
                 onClick:clear={ onClear }
                 role="textbox"
                 { ...fieldProps }
+                modelValue={ model.value }
               >
                 {{
                   ...slots,
