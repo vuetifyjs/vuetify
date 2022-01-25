@@ -1,7 +1,9 @@
 @forward './variables'
+@use 'sass:selector'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
+@use '../VInput/variables' as *
 
 .v-select
   .v-field__field
@@ -36,6 +38,20 @@
     .v-select__menu-icon
       color: inherit
       transform: rotate(180deg)
+
+  &--chips
+    height: auto
+    min-height: var(--v-input-control-height)
+
+    .v-select__selection
+      margin: 2px
+
+      &:first-child
+        margin-inline-start: 0
+
+    @at-root
+      @include tools.density('v-input', $input-density) using ($modifier)
+        --v-input-control-height: #{$select-chips-control-min-height + $modifier}
 
 .v-select__selections
   display: flex

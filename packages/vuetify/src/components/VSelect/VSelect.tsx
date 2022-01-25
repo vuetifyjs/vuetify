@@ -142,6 +142,7 @@ export const VSelect = genericComponent<new <T>() => {
             'v-select',
             {
               'v-select--active-menu': menu.value,
+              'v-select--chips': !!props.chips,
             },
           ]}
           readonly
@@ -191,8 +192,12 @@ export const VSelect = genericComponent<new <T>() => {
                   { active.value.map((selection, index) => (
                     <div class="v-select__selection">
                       { props.chips
-                        ? (<VChip text={ selection as any } size="small" />)
-                        : (
+                        ? (
+                          <VChip
+                            text={ selection as any }
+                            size="small"
+                          />
+                        ) : (
                           <span>
                             { selection as string }
                             { index < model.value.length - 1 && (
