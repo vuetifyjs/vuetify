@@ -1,38 +1,44 @@
-// @TODO update local import paths
-
 // Styles
 import './VToolbar.sass'
 
 // Components
-import { VImg, srcObject } from '../VImg/VImg'
+import { VImg } from '@/components/VImg'
 
 // Composables
-import { makeBorderProps, useBorder } from '../../composables/border'
-import { makeDensityProps, useDensity } from '../../composables/density'
-import { makeElevationProps, useElevation } from '../../composables/elevation'
-import { makeLayoutItemProps, useLayoutItem } from '../../composables/layout'
-import { makeRoundedProps, useRounded } from '../../composables/rounded'
-import { makeTagProps } from '../../composables/tag'
-import { useBackgroundColor } from '../../composables/color'
-import { useProxiedModel } from '../../composables/proxiedModel'
+import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeTagProps } from '@/composables/tag'
+import { provideDefaults } from '@/composables/defaults'
+import { useBackgroundColor } from '@/composables/color'
+
+// Utilities
+import { computed, toRef } from 'vue'
+import { convertToUnit, defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
-// Utilities
-import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent } from '../../util'
+export type Density = typeof allowedDensities[number]
+
+const allowedDensities = [null, 'prominent', 'default', 'comfortable', 'compact'] as const
 
 export const VToolbar = defineComponent({
   name: 'VToolbar',
 
   props: {
+    absolute: Boolean,
     collapse: Boolean,
     color: String,
+    density: {
+      type: String as PropType<Density>,
+      default: 'default',
+      validator: (v: any) => allowedDensities.includes(v),
+    },
     extended: Boolean,
     extensionHeight: {
       type: [Number, String],
-      default: 48
+      default: 48,
     },
     flat: Boolean,
     floating: Boolean,
@@ -40,66 +46,41 @@ export const VToolbar = defineComponent({
       type: [Number, String],
       default: 64,
     },
-    modelValue: {
-      type: Boolean,
-      default: true,
-    },
+    image: String,
     position: {
       type: String as PropType<'top' | 'bottom'>,
       default: 'top',
       validator: (value: any) => ['top', 'bottom'].includes(value),
     },
-    prominent: Boolean,
-    prominentHeight: {
-      type: [Number, String],
-      default: 128,
-    },
-    short: Boolean,
-    src: {
-      type: [String, Object] as PropType<string | srcObject>,
-      default: '',
-    },
 
     ...makeBorderProps(),
-    ...makeDensityProps(),
     ...makeElevationProps(),
-    ...makeLayoutItemProps(),
     ...makeRoundedProps(),
     ...makeTagProps({ tag: 'header' }),
   },
 
-  emits: {
-    'update:modelValue': (value: boolean) => true,
-  },
-
   setup (props, { slots }) {
     const { borderClasses } = useBorder(props)
-    const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const isExtended = !!slots.extension
     const contentHeight = computed(() => (
-      Number(props.prominent ? props.prominentHeight : props.height) -
+      Number(props.height) +
+      (props.density === 'prominent' ? Number(props.height) : 0) -
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ))
-    const height = computed(() => (
-      contentHeight.value +
-      Number(isExtended ? props.extensionHeight : 0)
-    ))
-    const isActive = useProxiedModel(props, 'modelValue', props.modelValue)
-    const layoutStyles = useLayoutItem(
-      props.name,
-      computed(() => parseInt(props.priority, 10)),
-      toRef(props, 'position'),
-      height,
-      height,
-      isActive,
-    )
+
+    provideDefaults({
+      VBtn: {
+        flat: true,
+      },
+    }, { scoped: true })
 
     return () => {
-      const hasImage = !!(slots.image || props.src)
+      const hasContent = !!(slots.prepend || slots.default || slots.append)
+      const hasImage = !!(slots.image || props.image)
+      const isExtended = !!(props.extended || slots.extension)
 
       return (
         <props.tag
@@ -111,35 +92,46 @@ export const VToolbar = defineComponent({
               'v-toolbar--collapse': props.collapse,
               'v-toolbar--flat': props.flat,
               'v-toolbar--floating': props.floating,
-              'v-toolbar--is-active': isActive.value,
-              'v-toolbar--prominent': props.prominent,
+              [`v-toolbar--density-${props.density}`]: true,
             },
             backgroundColorClasses.value,
             borderClasses.value,
-            densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,
           ]}
           style={[
             backgroundColorStyles.value,
-            layoutStyles.value,
           ]}
         >
           { hasImage && (
             <div class="v-toolbar__image">
               { slots.image
-                ? slots.img?.({ src: props.src })
-                : (<VImg src={ props.src } cover />)
+                ? slots.img?.({ src: props.image })
+                : (<VImg src={ props.image } cover />)
               }
             </div>
           ) }
 
-          <div
-            class="v-toolbar__content"
-            style={{ height: convertToUnit(contentHeight.value) }}
-          >
-            { slots.default?.() }
-          </div>
+          { hasContent && (
+            <div
+              class="v-toolbar__content"
+              style={{ height: convertToUnit(contentHeight.value) }}
+            >
+              { slots.prepend && (
+                <div class="v-toolbar__prepend">
+                  { slots.prepend?.() }
+                </div>
+              ) }
+
+              { slots.default?.() }
+
+              { slots.append && (
+                <div class="v-toolbar__append">
+                  { slots.append?.() }
+                </div>
+              ) }
+            </div>
+          ) }
 
           { isExtended && (
             <div
