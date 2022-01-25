@@ -37,6 +37,8 @@ export const VTextField = genericComponent<new <T>() => {
     autofocus: Boolean,
     counter: [Boolean, Number, String] as PropType<true | number | string>,
     counterValue: Function as PropType<(value: any) => number>,
+    hint: String,
+    persistentHint: Boolean,
     prefix: String,
     placeholder: String,
     persistentPlaceholder: Boolean,
@@ -94,6 +96,11 @@ export const VTextField = genericComponent<new <T>() => {
       activeTypes.includes(props.type) ||
       props.persistentPlaceholder
     ))
+    const messages = computed(() => {
+      return props.messages.length
+        ? props.messages
+        : (isActive.value || props.persistentHint) ? props.hint : ''
+    })
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
         inputRef.value?.focus()
@@ -135,20 +142,18 @@ export const VTextField = genericComponent<new <T>() => {
               'v-text-field--suffixed': props.suffix,
             },
           ]}
-          focused={ isFocused.value }
           { ...rootAttrs }
           { ...inputProps }
+          messages={ messages.value }
         >
           {{
             ...slots,
             default: ({
               isDisabled,
-              isDirty,
               isReadonly,
             }) => (
               <VField
                 ref={ vFieldRef }
-                active={ isDirty.value || isActive.value }
                 focused={ isFocused.value }
                 onMousedown={ (e: MouseEvent) => {
                   if (e.target === inputRef.value) return
@@ -206,7 +211,7 @@ export const VTextField = genericComponent<new <T>() => {
                 }}
               </VField>
             ),
-            details: hasCounter ? ({ isFocused }) => (
+            details: hasCounter ? () => (
               <>
                 <span />
 

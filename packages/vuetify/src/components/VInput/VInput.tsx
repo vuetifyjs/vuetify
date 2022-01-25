@@ -7,7 +7,6 @@ import { VMessages } from '@/components/VMessages'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
@@ -15,20 +14,17 @@ import { computed } from 'vue'
 import { genericComponent, getUid, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, ExtractPropTypes, PropType, Ref, WritableComputedRef } from 'vue'
+import type { ComputedRef, ExtractPropTypes, PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
 
 export interface VInputSlot {
   id: ComputedRef<string>
   isDirty: ComputedRef<boolean>
   isDisabled: ComputedRef<boolean>
-  isFocused: WritableComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
   isPristine: Ref<boolean>
   isValid: ComputedRef<boolean | null>
   isValidating: Ref<boolean>
-  blur: () => void
-  focus: () => void
   reset: () => void
   resetValidation: () => void
   validate: () => void
@@ -39,12 +35,10 @@ export const makeVInputProps = propsFactory({
   appendIcon: String,
   prependIcon: String,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
-  hint: String,
   messages: {
     type: [Array, String] as PropType<string | string[]>,
     default: () => ([]),
   },
-  persistentHint: Boolean,
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal',
@@ -68,20 +62,17 @@ export const VInput = genericComponent<new <T>() => {
   name: 'VInput',
 
   props: {
-    ...makeFocusProps(),
     ...makeVInputProps(),
   },
 
   emits: {
-    'update:focused': (val: boolean) => true,
-    'update:modelValue': (val: any) => true,
     'click:prepend': (e: MouseEvent) => true,
     'click:append': (e: MouseEvent) => true,
+    'update:modelValue': (val: any) => true,
   },
 
   setup (props, { slots, emit }) {
     const { densityClasses } = useDensity(props)
-    const { focusClasses, isFocused } = useFocus(props)
     const {
       errorMessages,
       isDirty,
@@ -103,13 +94,10 @@ export const VInput = genericComponent<new <T>() => {
       id,
       isDirty,
       isDisabled,
-      isFocused,
       isReadonly,
       isPristine,
       isValid,
       isValidating,
-      blur,
-      focus,
       reset,
       resetValidation,
       validate,
@@ -118,7 +106,6 @@ export const VInput = genericComponent<new <T>() => {
     useRender(() => {
       const hasPrepend = !!(slots.prepend || props.prependIcon)
       const hasAppend = !!(slots.append || props.appendIcon)
-      const hasHint = !!(slots.hint || props.hint)
       const hasMessages = !!(
         slots.messages ||
         props.messages?.length ||
@@ -126,11 +113,7 @@ export const VInput = genericComponent<new <T>() => {
       )
       const hasDetails = !props.hideDetails || (
         props.hideDetails === 'auto' &&
-        (hasMessages || hasHint)
-      )
-      const showMessages = hasMessages || (
-        hasHint &&
-        (props.persistentHint || isFocused.value)
+        hasMessages
       )
 
       return (
@@ -138,7 +121,6 @@ export const VInput = genericComponent<new <T>() => {
           'v-input',
           `v-input--${props.direction}`,
           densityClasses.value,
-          focusClasses.value,
           validationClasses.value,
         ]}
         >
@@ -177,11 +159,10 @@ export const VInput = genericComponent<new <T>() => {
           { hasDetails && (
             <div class="v-input__details">
               <VMessages
-                active={ showMessages }
-                color={ isValid.value === false ? 'error' : undefined }
+                active={ hasMessages }
                 value={ errorMessages.value.length > 0
                   ? errorMessages.value
-                  : (hasMessages ? props.messages : props.hint)
+                  : props.messages
                 }
                 v-slots={{ default: slots.messages }}
               />
@@ -194,8 +175,6 @@ export const VInput = genericComponent<new <T>() => {
     })
 
     return {
-      blur,
-      focus,
       reset,
       resetValidation,
       validate,

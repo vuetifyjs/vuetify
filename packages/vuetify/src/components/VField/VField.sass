@@ -19,14 +19,39 @@
   grid-area: control
   height: var(--v-input-control-height)
   position: relative
+  padding-inline-start: #{$field-control-padding}
+  padding-inline-end: #{$field-control-padding}
+
   --v-field-padding-before: #{$field-control-padding}
   --v-field-padding-after: #{$field-control-padding}
 
-  &.v-field--prepended
-    padding-inline-start: $field-control-affixed-padding
+  &,
+  .v-icon
+    color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
 
-  &.v-field--appended
-    padding-inline-end: $field-control-affixed-padding
+  &--error,
+  &--disabled
+    .v-messages,
+    .v-icon
+      color: inherit
+
+  .v-label
+    color: inherit
+
+  &--focused
+    &,
+    .v-label
+      color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+
+  &--error
+    color: rgb(var(--v-theme-error))
+
+  &--disabled
+    pointer-events: none
+
+    &,
+    input
+      color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity))
 
   &.v-field--variant-contained
     background: $field-control-contained-background
@@ -48,8 +73,6 @@
     opacity: $field-input-opacity
     width: 100%
     height: 100%
-    padding-inline-start: var(--v-field-padding-before)
-    padding-inline-end: var(--v-field-padding-after)
     display: flex
     align-items: center
 
@@ -115,6 +138,12 @@
 
 /* endregion */
 /* region AFFIXES */
+.v-field__prepend-inner
+  padding-inline-end: var(--v-field-padding-after)
+
+.v-field__append-inner
+  padding-inline-start: var(--v-field-padding-after)
+
 .v-field__prepend-inner,
 .v-field__append-inner,
 .v-field__clearable
@@ -145,7 +174,8 @@
 .v-field__clearable
   cursor: pointer
   opacity: 0
-  margin-inline-end: $field-clearable-margin-inline-end
+  margin-inline-start: $field-clearable-margin
+  margin-inline-end: $field-clearable-margin
   transition: $field-transition-timing
   transition-property: opacity, transform, width
 
@@ -158,8 +188,6 @@
 /* region LABEL */
 .v-label.v-field-label
   contain: layout paint
-  margin-inline-end: var(--v-field-padding-after)
-  margin-inline-start: var(--v-field-padding-before)
   max-width: calc(100% - var(--v-field-padding-before) - var(--v-field-padding-after))
   pointer-events: none
   position: absolute

@@ -213,6 +213,8 @@ export const VField = genericComponent<new <T>() => {
             {
               'v-field--active': isActive.value,
               'v-field--appended': hasAppend,
+              'v-field--disabled': props.disabled,
+              'v-field--error': props.error,
               'v-field--has-background': !!props.bgColor,
               'v-field--persistent-clear': props.persistentClear,
               'v-field--prepended': hasPrepend,

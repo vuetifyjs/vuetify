@@ -17,8 +17,10 @@ export const VMessages = defineComponent({
   name: 'VMessages',
 
   props: {
+    // TODO: change this to modelValue
     active: Boolean,
     color: String,
+    // TODO: change to messages
     value: {
       type: [Array, String] as PropType<string | string[]>,
       default: () => ([]),

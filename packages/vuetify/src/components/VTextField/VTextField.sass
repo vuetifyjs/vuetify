@@ -6,8 +6,7 @@
 // TODO: abstract variables
 
 .v-text-field
-  &.v-input--dirty,
-  &.v-input--focused
+  .v-field--active
     input,
     .v-text-field__prefix,
     .v-text-field__suffix
@@ -27,19 +26,17 @@
     padding-bottom: var(--v-field-padding-bottom, 0)
 
   &__prefix
-    padding-inline-start: var(--v-field-padding-before)
+    padding-inline-end: var(--v-field-padding-before)
 
   &__suffix
-    padding-inline-end: var(--v-field-padding-after)
-
-  .v-field__input
-    @at-root #{selector.append('.v-text-field--prefixed', &)}
-      --v-field-padding-before: 6px
-    @at-root #{selector.append('.v-text-field--suffixed', &)}
-      --v-field-padding-after: 0
+    padding-inline-start: var(--v-field-padding-after)
 
   .v-field
     cursor: text
+
+  .v-input__details
+    padding-inline-start: $text-field-details-padding-inline
+    padding-inline-end: $text-field-details-padding-inline
 
   input
     flex: 1
