@@ -10,6 +10,7 @@ import { VTextField } from '@/components/VTextField'
 
 // Composables
 import { makeFilterProps, useFilter } from '@/composables/filter'
+import { useForwardRef } from '@/composables/forwardRef'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -113,6 +114,21 @@ export const VSelect = genericComponent<new <T>() => {
         menu.value = true
       }
     }
+    function onKeydown (e: KeyboardEvent) {
+      if (
+        ['Enter', ' '].includes(e.key) &&
+        !menu.value
+      ) {
+        menu.value = true
+      }
+
+      if (
+        e.key === 'Escape' &&
+        menu.value
+      ) {
+        menu.value = false
+      }
+    }
 
     watch(() => vTextFieldRef.value, val => {
       activator.value = val.$el.querySelector('.v-input__control')
@@ -133,6 +149,7 @@ export const VSelect = genericComponent<new <T>() => {
           onClick:control={ () => menu.value = true }
           onBlur={ () => menu.value = false }
           modelValue={ model.value.join(', ') }
+          onKeydown={ onKeydown }
         >
           {{
             ...slots,
@@ -194,7 +211,9 @@ export const VSelect = genericComponent<new <T>() => {
       )
     })
 
-    return {}
+    return useForwardRef({
+      //
+    }, vTextFieldRef)
   },
 })
 
