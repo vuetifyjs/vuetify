@@ -19,6 +19,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = 
                  type="text"
                  aria-readonly="false"
                  autocomplete="off"
+                 style="min-width: 0 !important; max-width: 0 !important; width: 0px !important; min-height: 0 !important; max-height: 0 !important; height: 0px;"
           >
         </div>
         <div class="v-input__append-inner">
@@ -79,6 +80,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] =
                  type="text"
                  aria-readonly="false"
                  autocomplete="off"
+                 style="min-width: 0 !important; max-width: 0 !important; width: 0px !important; min-height: 0 !important; max-height: 0 !important; height: 0px;"
           >
         </div>
         <div class="v-input__append-inner">
@@ -139,6 +141,7 @@ exports[`VSelect.ts should use scoped slot for selection generation 1`] = `
                  type="text"
                  aria-readonly="false"
                  autocomplete="off"
+                 style="min-width: 0 !important; max-width: 0 !important; width: 0px !important; min-height: 0 !important; max-height: 0 !important; height: 0px;"
           >
         </div>
         <div class="v-input__append-inner">

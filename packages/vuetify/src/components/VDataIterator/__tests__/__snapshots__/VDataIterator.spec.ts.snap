@@ -35,6 +35,7 @@ exports[`VDataIterator.ts should render and match snapshot 1`] = `
                        type="text"
                        aria-readonly="false"
                        autocomplete="off"
+                       style="min-width: 0 !important; max-width: 0 !important; width: 0px !important; min-height: 0 !important; max-height: 0 !important; height: 0px;"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -126,6 +127,7 @@ exports[`VDataIterator.ts should render and match snapshot with data 1`] = `
                        type="text"
                        aria-readonly="false"
                        autocomplete="off"
+                       style="min-width: 0 !important; max-width: 0 !important; width: 0px !important; min-height: 0 !important; max-height: 0 !important; height: 0px;"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -208,6 +210,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                        type="text"
                        aria-readonly="false"
                        autocomplete="off"
+                       style="min-width: 0 !important; max-width: 0 !important; width: 0px !important; min-height: 0 !important; max-height: 0 !important; height: 0px;"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -290,6 +293,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                        type="text"
                        aria-readonly="false"
                        autocomplete="off"
+                       style="min-width: 0 !important; max-width: 0 !important; width: 0px !important; min-height: 0 !important; max-height: 0 !important; height: 0px;"
                 >
               </div>
               <div class="v-input__append-inner">
@@ -372,6 +376,7 @@ exports[`VDataIterator.ts should render valid no-data, loading and no-results st
                        type="text"
                        aria-readonly="false"
                        autocomplete="off"
+                       style="min-width: 0 !important; max-width: 0 !important; width: 0px !important; min-height: 0 !important; max-height: 0 !important; height: 0px;"
                 >
               </div>
               <div class="v-input__append-inner">
