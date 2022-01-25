@@ -253,8 +253,9 @@ export default baseMixins.extend({
           this.$createElement('div', {
             class: this.contentClasses,
             attrs: {
-              role: 'document',
+              role: 'dialog',
               tabindex: this.isActive ? 0 : undefined,
+              'aria-modal': this.hideOverlay ? undefined : 'true',
               ...this.getScopeIdAttrs(),
             },
             on: { keydown: this.onKeydown },
@@ -318,7 +319,6 @@ export default baseMixins.extend({
           this.attach === true ||
           this.attach === 'attach',
       },
-      attrs: { role: 'dialog' },
     }, [
       this.genActivator(),
       this.genContent(),
