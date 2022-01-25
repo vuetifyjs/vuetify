@@ -72,19 +72,21 @@ export const makeVFieldProps = propsFactory({
   ...makeLoaderProps(),
 }, 'v-field')
 
+export type VFieldSlots = MakeSlots<{
+  clear: []
+  prependInner: [DefaultInputSlot & VInputSlot]
+  appendInner: [DefaultInputSlot & VInputSlot]
+  label: [DefaultInputSlot & VInputSlot]
+  loader: [LoaderSlotProps]
+  default: [VFieldSlot]
+}>
+
 export const VField = genericComponent<new <T>() => {
   $props: {
     modelValue?: T
     'onUpdate:modelValue'?: (val: T) => any
   }
-  $slots: MakeSlots<{
-    clear: []
-    prependInner: [DefaultInputSlot & VInputSlot]
-    appendInner: [DefaultInputSlot & VInputSlot]
-    label: [DefaultInputSlot & VInputSlot]
-    loader: [LoaderSlotProps]
-    default: [VFieldSlot]
-  }>
+  $slots: VFieldSlots
 }>()({
   name: 'VField',
 

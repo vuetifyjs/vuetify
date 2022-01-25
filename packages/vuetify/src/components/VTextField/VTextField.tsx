@@ -18,13 +18,14 @@ import { computed, nextTick, ref } from 'vue'
 import { filterInputAttrs, genericComponent, useRender } from '@/util'
 
 // Types
-import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
+import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VFieldSlots } from '@/components/VField/VField'
 
 const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
 export const VTextField = genericComponent<new <T>() => {
-  $slots: MakeSlots<{}>
+  $slots: VInputSlots & VFieldSlots
 }>()({
   name: 'VTextField',
 
@@ -221,13 +222,7 @@ export const VTextField = genericComponent<new <T>() => {
       )
     })
 
-    return useForwardRef({
-      isFocused,
-      inputRef,
-      onFocus,
-      focus,
-      blur,
-    }, vInputRef, vFieldRef)
+    return useForwardRef({}, vInputRef, vFieldRef, inputRef)
   },
 })
 

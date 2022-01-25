@@ -55,13 +55,15 @@ export const makeVInputProps = propsFactory({
   ...makeValidationProps(),
 })
 
+export type VInputSlots = MakeSlots<{
+  default: [VInputSlot]
+  prepend: [VInputSlot]
+  append: [VInputSlot]
+  details: [VInputSlot]
+}>
+
 export const VInput = genericComponent<new <T>() => {
-  $slots: MakeSlots<{
-    default: [VInputSlot]
-    prepend: [VInputSlot]
-    append: [VInputSlot]
-    details: [VInputSlot]
-  }>
+  $slots: VInputSlots
 }>()({
   name: 'VInput',
 
@@ -79,7 +81,7 @@ export const VInput = genericComponent<new <T>() => {
 
   setup (props, { slots, emit }) {
     const { densityClasses } = useDensity(props)
-    const { focusClasses, isFocused, blur, focus } = useFocus(props)
+    const { focusClasses, isFocused } = useFocus(props)
     const {
       errorMessages,
       isDirty,
