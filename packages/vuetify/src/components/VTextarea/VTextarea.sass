@@ -1,5 +1,14 @@
 @import './_variables.scss'
 
++theme(v-textarea) using ($material)
+  &.v-text-field--solo-inverted
+    &.v-input--is-focused
+      textarea
+        color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
+
+      textarea::placeholder
+        color: map-deep-get($material, 'inputs', 'solo-inverted-focused-placeholder')
+
 .v-textarea
   textarea
     align-self: stretch
@@ -48,6 +57,10 @@
 
   &.v-text-field--solo
     align-items: flex-start
+
+    .v-input__control
+      textarea
+        caret-color: auto
 
     // Essentially revert styles
     // applied by v-text-field

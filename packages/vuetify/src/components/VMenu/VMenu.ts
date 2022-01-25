@@ -75,10 +75,6 @@ export default baseMixins.extend({
     },
     offsetX: Boolean,
     offsetY: Boolean,
-    openOnClick: {
-      type: Boolean,
-      default: true,
-    },
     openOnHover: Boolean,
     origin: {
       type: String,
@@ -403,7 +399,7 @@ export default baseMixins.extend({
     mouseLeaveHandler (e: MouseEvent) {
       // Prevent accidental re-activation
       this.runDelay('close', () => {
-        if (this.$refs.content.contains(e.relatedTarget as HTMLElement)) return
+        if (this.$refs.content?.contains(e.relatedTarget as HTMLElement)) return
 
         requestAnimationFrame(() => {
           this.isActive = false

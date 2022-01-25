@@ -110,6 +110,7 @@ declare module 'vuetify/lib/components' {
   const VNavigationDrawer: VueConstructor
   const VOverflowBtn: VueConstructor
   const VOverlay: VueConstructor
+  const VOtpInput: VueConstructor
   const VPagination: VueConstructor
   const VSheet: VueConstructor
   const VParallax: VueConstructor
@@ -275,6 +276,7 @@ declare module 'vuetify/lib/components' {
     VNavigationDrawer,
     VOverflowBtn,
     VOverlay,
+    VOtpInput,
     VPagination,
     VSheet,
     VParallax,

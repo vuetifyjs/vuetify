@@ -65,11 +65,17 @@ export default Vue.extend({
             // Ref: https://developer.mozilla.org/en-US/docs/Web/API/Touch/target
             // This block of code aims to make sure touchEvent is always dispatched from the element that is being pointed at
             if (e && 'touches' in e) {
-              const currentTarget = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY)
+              const classSeparator = ' '
+
+              const eventTargetClasses = (e.currentTarget as HTMLElement)?.className.split(classSeparator)
+              const currentTargets = document.elementsFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY)
+
+              // Get "the same kind" current hovering target by checking
+              // If element has the same class of initial touch start element (which has touch event listener registered)
+              const currentTarget = currentTargets.find(t => t.className.split(classSeparator).some(c => eventTargetClasses.includes(c)))
 
               if (currentTarget &&
-                !(e.target as HTMLElement)?.isSameNode(currentTarget) &&
-                (e.target as HTMLElement)?.className === currentTarget.className
+                !(e.target as HTMLElement)?.isSameNode(currentTarget)
               ) {
                 currentTarget.dispatchEvent(new TouchEvent(e.type, {
                   changedTouches: e.changedTouches as unknown as Touch[],

@@ -1,14 +1,14 @@
 <template>
   <v-system-bar
-    v-if="false"
-    color="#1A265A"
+    v-if="hasPromotion"
+    color="#0F335F"
     app
     dark
-    height="76"
+    height="66"
   >
     <a
       class="cm-banner"
-      href="https://vueschool.io/sales/summer-vue?friend=vuetify"
+      href="https://store.vuetifyjs.com/products/ui-lib-bundle?utm_source=vuetify"
       rel="noopener"
       target="_blank"
       @click="onClick"
@@ -50,7 +50,7 @@
       onClick () {
         this.$gtag.event('click', {
           event_category: 'vuetify-banner',
-          event_label: 'vue-school-summer-vue',
+          event_label: 'ui-lib-road-to-vuetify-3',
           value: this.name.toLowerCase(),
         })
       },
@@ -68,7 +68,7 @@
     background-size: contain
     bottom: 0
     display: block
-    height: inherit
+    height: 100%
     left: 0
     overflow: hidden
     position: absolute
@@ -78,11 +78,11 @@
     white-space: nowrap
 
   .cm-banner
-    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-summer-sale-2021/vs-summer-mobile.png)
+    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-road-to-vuetify-3/ui-lib-road-to-vuetify-3-mobile.png)
 
-    @media (min-width: 660px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-summer-sale-2021/vs-summer-tablet.png)
+    @media (min-width: 437px)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-road-to-vuetify-3/ui-lib-road-to-vuetify-3-tablet.png)
 
     @media (min-width: 992px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-summer-sale-2021/vs-summer-desktop.png)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-road-to-vuetify-3/ui-lib-road-to-vuetify-3-desktop.png)
 </style>

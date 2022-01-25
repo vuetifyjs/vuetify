@@ -368,6 +368,7 @@ export default CalendarWithEvents.extend({
       }],
       on: {
         ...this.$listeners,
+
         'click:date': (day: CalendarTimestamp, e?: MouseEvent) => {
           if (this.$listeners.input) {
             this.$emit('input', day.date)

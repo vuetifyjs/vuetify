@@ -2,8 +2,7 @@
 
 exports[`activatable.ts should render activator slot with hover 1`] = `
 <div>
-  <button role="button"
-          aria-haspopup="true"
+  <button aria-haspopup="true"
           aria-expanded="false"
   >
   </button>

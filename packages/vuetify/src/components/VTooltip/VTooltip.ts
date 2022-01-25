@@ -34,6 +34,10 @@ export default mixins(Colorable, Delayable, Dependent, Menuable, Toggleable).ext
       type: Boolean,
       default: true,
     },
+    openOnFocus: {
+      type: Boolean,
+      default: true,
+    },
     tag: {
       type: String,
       default: 'span',
@@ -157,14 +161,17 @@ export default mixins(Colorable, Delayable, Dependent, Menuable, Toggleable).ext
     genActivatorListeners () {
       const listeners = Activatable.options.methods.genActivatorListeners.call(this)
 
-      listeners.focus = (e: Event) => {
-        this.getActivator(e)
-        this.runDelay('open')
+      if (this.openOnFocus) {
+        listeners.focus = (e: Event) => {
+          this.getActivator(e)
+          this.runDelay('open')
+        }
+        listeners.blur = (e: Event) => {
+          this.getActivator(e)
+          this.runDelay('close')
+        }
       }
-      listeners.blur = (e: Event) => {
-        this.getActivator(e)
-        this.runDelay('close')
-      }
+
       listeners.keydown = (e: KeyboardEvent) => {
         if (e.keyCode === keyCodes.esc) {
           this.getActivator(e)
