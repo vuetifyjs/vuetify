@@ -191,7 +191,11 @@ export const VTextField = genericComponent<new <T>() => {
                           autofocus={ props.autofocus }
                           readonly={ isReadonly.value }
                           disabled={ isDisabled.value }
-                          placeholder={ props.placeholder }
+                          placeholder={
+                            isFocused.value || props.persistentPlaceholder
+                              ? props.placeholder
+                              : undefined
+                          }
                           size={ 1 }
                           type={ props.type }
                           onFocus={ onFocus }
