@@ -64,6 +64,7 @@ export const VSliderThumb = defineComponent({
       isReversed,
       horizontalDirection,
       mousePressed,
+      decimals,
     } = slider
 
     const { textColorClasses, textColorStyles } = useTextColor(thumbColor)
@@ -165,7 +166,7 @@ export const VSliderThumb = defineComponent({
                 ]}
               >
                 <div>
-                  { slots['thumb-label']?.({ modelValue: props.modelValue }) ?? props.modelValue.toFixed(1) }
+                  { slots['thumb-label']?.({ modelValue: props.modelValue }) ?? props.modelValue.toFixed(step.value ? decimals.value : 1) }
                 </div>
               </div>
             </div>
