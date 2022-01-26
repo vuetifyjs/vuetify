@@ -198,10 +198,10 @@ export const VSelect = genericComponent<new <T>() => {
                             size="small"
                           />
                         ) : (
-                          <span>
+                          <span class="v-select__selection-text">
                             { selection as string }
                             { index < model.value.length - 1 && (
-                              <span class="v-select__selection-comma">,&nbsp;</span>
+                              <span class="v-select__selection-comma">,</span>
                             ) }
                           </span>
                         )

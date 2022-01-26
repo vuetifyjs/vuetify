@@ -6,6 +6,10 @@
 @use '../VInput/variables' as *
 
 .v-select
+  .v-field
+    height: auto
+    min-height: var(--v-input-control-height)
+
   .v-field__field
     cursor: pointer
 
@@ -25,11 +29,25 @@
     margin-inline-start: 4px
     transition: $select-transition
 
+  &__selection
+    display: inline-flex
+    margin-top: 2px
+    margin-inline-end: 2px
+
   &__selections
-    padding-inline-start: var(--v-field-padding-before)
+    color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+    display: flex
+    flex-wrap: wrap
+    max-width: 100%
+    min-height: inherit
+    min-width: 0
+    overflow: hidden
+    padding-bottom: var(--v-field-padding-bottom)
     padding-inline-end: var(--v-field-padding-after)
     padding-top: var(--v-field-padding-top)
-    padding-bottom: var(--v-field-padding-bottom)
+
+    .v-text-field--prefixed &
+      --v-field-padding-before: 6px
 
   .v-field__input
     opacity: 0 !important // TODO: remove this
@@ -40,21 +58,6 @@
       transform: rotate(180deg)
 
   &--chips
-    height: auto
-    min-height: var(--v-input-control-height)
-
     .v-select__selection
-      margin: 2px
-
       &:first-child
         margin-inline-start: 0
-
-      @include tools.density('v-input', $input-density) using ($modifier)
-        --v-input-control-height: #{$select-chips-control-min-height + $modifier}
-
-.v-select__selections
-  display: flex
-  color: rgb(var(--v-theme-on-surface))
-
-  .v-text-field--prefixed &
-    --v-field-padding-before: 6px
