@@ -18,10 +18,13 @@
 
   @include tools.theme($toolbar-theme...)
   @include tools.elevation($toolbar-elevation)
-  @include tools.density('v-toolbar', $toolbar-density) using ($modifier)
-    .v-toolbar__content
-      padding-top: $toolbar-padding + $modifier
-      padding-bottom: $toolbar-padding + $modifier
+  @include tools.rounded($toolbar-border-radius)
+
+  @at-root
+    @include tools.density('v-toolbar', $toolbar-density) using ($modifier)
+      .v-toolbar__content
+        padding-top: $toolbar-padding + $modifier
+        padding-bottom: $toolbar-padding + $modifier
 
   &--absolute
     position: absolute
@@ -39,7 +42,11 @@
   &--floating
     display: inline-flex
 
-.v-toolbar__content
+  &--rounded
+    @include tools.rounded($toolbar-rounded-border-radius)
+
+.v-toolbar__content,
+.v-toolbar__extension
   align-items: center
   display: flex
   flex: 0 0 auto
@@ -47,9 +54,17 @@
   transition: inherit
   width: 100%
 
+.v-toolbar__content
+  .v-toolbar--density-prominent &
+    align-items: flex-start
+
 .v-toolbar__image
   @include tools.absolute()
 
+  display: flex
+
+.v-toolbar__prepend,
+.v-toolbar__append
   display: flex
 
 .v-toolbar__prepend
@@ -57,5 +72,27 @@
     margin-inline-start: $toolbar-prepend-btn-margin-start
 
 .v-toolbar__append
-  > .v-btn:first-child
+  > .v-btn:last-child
     margin-inline-end: $toolbar-append-btn-margin-end
+
+.v-toolbar-title
+  font-size: $toolbar-title-font-size
+  min-width: 0
+  padding-left: $toolbar-title-padding
+
+  @include tools.typography($toolbar-title-typography...)
+
+  .v-toolbar--density-prominent &
+    align-self: flex-end
+    padding-bottom: 6px
+
+    @include tools.typography($toolbar-prominent-title-typography...)
+
+.v-toolbar-title__placeholder
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+.v-toolbar-items
+  display: flex
+  height: inherit

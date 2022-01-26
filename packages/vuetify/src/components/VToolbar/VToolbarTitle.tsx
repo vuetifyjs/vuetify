@@ -1,6 +1,3 @@
-// Styles
-import './VToolbarTitle.sass'
-
 // Composables
 import { makeTagProps } from '@/composables/tag'
 

@@ -1,6 +1,3 @@
-// Styles
-import './VToolbarItems.sass'
-
 // Composables
 import { makeVariantProps } from '@/composables/variant'
 import { provideDefaults } from '@/composables/defaults'
