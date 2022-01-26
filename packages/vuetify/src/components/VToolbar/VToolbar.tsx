@@ -18,6 +18,7 @@ import { convertToUnit, defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { VDefaultsProvider } from '..'
 
 export type Density = typeof allowedDensities[number]
 
@@ -71,12 +72,11 @@ export const VToolbar = defineComponent({
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ))
+    const affixDefaults = {
+      VBtn: { flat: true },
+    }
 
-    provideDefaults({
-      VBtn: {
-        flat: true,
-      },
-    }, { scoped: true })
+    provideDefaults(undefined, { scoped: true })
 
     return () => {
       const hasTitle = !!(props.title || slots.title)
@@ -120,9 +120,11 @@ export const VToolbar = defineComponent({
               style={{ height: convertToUnit(contentHeight.value) }}
             >
               { slots.prepend && (
-                <div class="v-toolbar__prepend">
-                  { slots.prepend?.() }
-                </div>
+                <VDefaultsProvider defaults={ affixDefaults }>
+                  <div class="v-toolbar__prepend">
+                    { slots.prepend?.() }
+                  </div>
+                </VDefaultsProvider>
               ) }
 
               { hasTitle && (
@@ -137,9 +139,11 @@ export const VToolbar = defineComponent({
               { slots.default?.() }
 
               { slots.append && (
-                <div class="v-toolbar__append">
-                  { slots.append?.() }
-                </div>
+                <VDefaultsProvider defaults={ affixDefaults }>
+                  <div class="v-toolbar__append">
+                    { slots.append?.() }
+                  </div>
+                </VDefaultsProvider>
               ) }
             </div>
           ) }
