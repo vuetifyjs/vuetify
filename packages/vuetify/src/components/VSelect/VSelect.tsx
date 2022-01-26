@@ -188,7 +188,7 @@ export const VSelect = genericComponent<new <T>() => {
                   </VMenu>
                 ) }
 
-                <div class="v-select__selections">
+                <div class="v-select__selections v-field__input">
                   { active.value.map((selection, index) => (
                     <div class="v-select__selection">
                       { props.chips

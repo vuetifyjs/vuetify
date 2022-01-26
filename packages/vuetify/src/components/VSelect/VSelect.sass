@@ -1,5 +1,6 @@
 @forward './variables'
 @use 'sass:selector'
+@use 'sass:math'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
@@ -10,13 +11,21 @@
     height: auto
     min-height: var(--v-input-control-height)
 
-  .v-field__field
-    cursor: pointer
-
     .v-text-field__prefix,
     .v-text-field__suffix,
     .v-field__input
       cursor: inherit
+
+  .v-field.v-field
+    cursor: pointer
+
+  .v-field__input
+    $root: &
+
+    @at-root
+      @include tools.density('v-input', $input-density) using ($modifier)
+        @at-root #{selector.append(&, $root)}
+          line-height: $select-line-height + math.div($modifier * .125, settings.$spacer) * 1.5
 
   &__content
     overflow: hidden
@@ -31,7 +40,6 @@
 
   &__selection
     display: inline-flex
-    margin-top: 2px
     margin-inline-end: 2px
 
   &__selections
@@ -49,7 +57,7 @@
     .v-text-field--prefixed &
       --v-field-padding-before: 6px
 
-  .v-field__input
+  input
     opacity: 0 !important // TODO: remove this
 
   &--active-menu
