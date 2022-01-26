@@ -62,9 +62,10 @@
   align-items: center
   justify-content: center
   font-size: $slider-thumb-label-font-size
-  width: $slider-thumb-label-width
+  min-width: $slider-thumb-label-min-width
   height: $slider-thumb-label-height
   border-radius: $slider-thumb-label-border-radius
+  padding: $slider-thumb-label-padding
   position: absolute
   user-select: none
   transition: $slider-thumb-label-transition
@@ -94,8 +95,12 @@
     top: 0
 
   .v-slider-thumb__label
-    left: math.div($slider-thumb-label-width, -2)
     bottom: $slider-thumb-label-offset
+
+    +tools.ltr()
+      transform: translateX(-50%)
+    +tools.rtl()
+      transform: translateX(50%)
 
     &::before
       border-left: $slider-thumb-label-wedge-size solid transparent
