@@ -11,6 +11,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -58,12 +59,14 @@ export const VToolbar = defineComponent({
     ...makeElevationProps(),
     ...makeRoundedProps(),
     ...makeTagProps({ tag: 'header' }),
+    ...makeThemeProps(),
   },
 
   setup (props, { slots }) {
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
+    const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const contentHeight = computed(() => (
       Number(props.height) +
@@ -104,6 +107,7 @@ export const VToolbar = defineComponent({
             borderClasses.value,
             elevationClasses.value,
             roundedClasses.value,
+            themeClasses.value,
           ]}
           style={[
             backgroundColorStyles.value,
