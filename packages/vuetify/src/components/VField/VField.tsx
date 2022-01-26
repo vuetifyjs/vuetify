@@ -119,10 +119,7 @@ export const VField = genericComponent<new <T>() => {
     const { focusClasses, isFocused, focus, blur } = useFocus(props)
 
     const isDirty = computed(() => wrapInArray(model.value || []).length > 0)
-    const isActive = computed(() => (
-      isDirty.value ||
-      isFocused.value
-    ))
+    const isActive = computed(() => isDirty.value || isFocused.value)
     const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
 
     const uid = getUid()
@@ -175,10 +172,9 @@ export const VField = genericComponent<new <T>() => {
           targetEl.style.removeProperty('visibility')
         })
       }
-    }, { flush: 'sync' })
+    }, { flush: 'post' })
 
     const slotProps = computed<DefaultInputSlot>(() => ({
-      model,
       isActive,
       isFocused,
       controlRef,
