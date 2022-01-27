@@ -11,7 +11,7 @@ import { createList } from './list'
 // Types
 import type { InternalListItem } from './VList'
 import type { ListItemSubtitleSlot, ListItemTitleSlot } from './VListItem'
-import type { ListGroupHeaderSlot } from './VListGroup'
+import type { ListGroupActivatorSlot } from './VListGroup'
 import type { MakeSlots } from '@/util'
 import type { Prop } from 'vue'
 
@@ -21,7 +21,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
   }
   $slots: MakeSlots<{
     default: []
-    header: [ListGroupHeaderSlot]
+    header: [ListGroupActivatorSlot]
     item: [T]
     title: [ListItemTitleSlot]
     subtitle: [ListItemSubtitleSlot]
@@ -49,7 +49,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
             default: () => (
               <VListChildren items={ children } v-slots={ slots } />
             ),
-            activator: activatorProps => slots.header
+            activator: ({ props: activatorProps }) => slots.header
               ? slots.header({ ...itemProps, ...activatorProps })
               : <VListItem { ...itemProps } { ...activatorProps } />,
           }}

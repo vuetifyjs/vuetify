@@ -14,10 +14,12 @@ import { genericComponent } from '@/util'
 import type { InternalListItem } from './VList'
 import type { MakeSlots } from '@/util'
 
-export type ListGroupHeaderSlot = {
-  onClick: (e: Event) => void
-  appendIcon: string
-  class: string
+export type ListGroupActivatorSlot = {
+  props: {
+    onClick: (e: Event) => void
+    appendIcon: string
+    class: string
+  }
 }
 
 export const VListGroup = genericComponent<new <T extends InternalListItem>() => {
@@ -25,7 +27,7 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
     items?: T[]
   }
   $slots: MakeSlots<{
-    activator: [ListGroupHeaderSlot]
+    activator: [ListGroupActivatorSlot]
     default: []
   }>
 }>()({
