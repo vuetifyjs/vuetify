@@ -1,11 +1,10 @@
 <template>
   <v-card>
-    <v-layout style="overflow: hidden">
+    <v-layout>
       <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
 
       <v-app-bar
         color="primary"
-        absolute
         prominent
       >
         <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
@@ -23,7 +22,6 @@
 
       <v-navigation-drawer
         v-model="drawer"
-        absolute
         bottom
         temporary
       >

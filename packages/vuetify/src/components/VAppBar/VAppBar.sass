@@ -11,7 +11,7 @@
   overflow: hidden
   padding-left: $app-bar-padding-start
   padding-right: calc(#{$app-bar-padding-end} + var(--v-scrollbar-offset))
-  position: fixed
+  position: absolute
   transition: $app-bar-transition
   transition-property: height, transform
 
@@ -22,9 +22,6 @@
   @include tools.border($app-bar-border...)
   @include tools.rounded($app-bar-border-radius)
   @include tools.theme($app-bar-theme...)
-
-  &--absolute
-    position: absolute
 
   &--border
     &.v-app-bar--bottom

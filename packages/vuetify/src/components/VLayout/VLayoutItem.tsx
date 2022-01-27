@@ -28,7 +28,7 @@ export const VLayoutItem = defineComponent({
   },
 
   setup (props, { slots }) {
-    const styles = useLayoutItem(
+    const { layoutItemStyles } = useLayoutItem(
       props.name,
       computed(() => parseInt(props.priority, 10)),
       toRef(props, 'position'),
@@ -41,11 +41,8 @@ export const VLayoutItem = defineComponent({
       <div
         class={[
           'v-layout-item',
-          {
-            'v-layout-item--absolute': props.absolute,
-          },
         ]}
-        style={ styles.value }
+        style={ layoutItemStyles.value }
       >
         { slots.default?.() }
       </div>

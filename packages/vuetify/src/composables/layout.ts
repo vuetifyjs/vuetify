@@ -1,3 +1,6 @@
+// Composables
+import { useResizeObserver } from '@/composables/resizeObserver'
+
 // Utilities
 import { computed, inject, onBeforeUnmount, provide, ref } from 'vue'
 import { convertToUnit, getUid, propsFactory } from '@/util'
@@ -25,11 +28,16 @@ interface LayoutProvide {
     elementSize: Ref<number | string>,
     active: Ref<boolean>,
     disableTransitions?: Ref<boolean>
-  ) => Ref<Record<string, unknown>>
+  ) => {
+    layoutItemStyles: Ref<Record<string, unknown>>
+    zIndex: Ref<number>
+  }
   unregister: (id: string) => void
   mainStyles: Ref<Record<string, unknown>>
   getLayoutItem: (id: string) => LayoutItem | undefined
   items: Ref<LayoutItem[]>
+  layoutRect: Ref<DOMRectReadOnly | undefined>
+  rootZIndex: Ref<number>
 }
 
 export const VuetifyLayoutKey: InjectionKey<LayoutProvide> = Symbol.for('vuetify:layout')
@@ -51,7 +59,6 @@ export const makeLayoutItemProps = propsFactory({
     type: [Number, String],
     default: 0,
   },
-  absolute: Boolean,
 }, 'layout-item')
 
 export function useLayout () {
@@ -77,11 +84,11 @@ export function useLayoutItem (
 
   const id = name ?? `layout-item-${getUid()}`
 
-  const styles = layout.register(id, priority, position, layoutSize, elementSize, active, disableTransitions)
+  const { layoutItemStyles, zIndex } = layout.register(id, priority, position, layoutSize, elementSize, active, disableTransitions)
 
   onBeforeUnmount(() => layout.unregister(id))
 
-  return styles
+  return { layoutItemStyles, layoutRect: layout.layoutRect, zIndex }
 }
 
 const generateLayers = (
@@ -118,12 +125,15 @@ const generateLayers = (
 
 // TODO: Remove undefined from layout and overlaps when vue typing for required: true prop is fixed
 export function createLayout (props: { layout?: string[], overlaps?: string[], fullHeight?: boolean }) {
+  const parentLayout = inject(VuetifyLayoutKey, { rootZIndex: ref(10000) } as any as LayoutProvide)
+  const rootZIndex = computed(() => parentLayout.rootZIndex.value - 100)
   const registered = ref<string[]>([])
   const positions = new Map<string, Ref<Position>>()
   const layoutSizes = new Map<string, Ref<number | string>>()
   const priorities = new Map<string, Ref<number>>()
   const activeItems = new Map<string, Ref<boolean>>()
   const transitions = new Map<string, Ref<boolean>>()
+  const { resizeRef, contentRect: layoutRect } = useResizeObserver()
 
   const computedOverlaps = computed(() => {
     const map = new Map<string, { position: Position, amount: number }>()
@@ -203,12 +213,13 @@ export function createLayout (props: { layout?: string[], overlaps?: string[], f
       disableTransitions && transitions.set(id, disableTransitions)
       registered.value.push(id)
 
-      return computed(() => {
-        const index = items.value.findIndex(i => i.id === id)
+      const index = computed(() => items.value.findIndex(i => i.id === id))
+      const zIndex = computed(() => rootZIndex.value + (layers.value.length * 2) - (index.value * 2))
 
-        if (index < 0) throw new Error(`Layout item "${id}" is missing from layout prop`)
+      const layoutItemStyles = computed(() => {
+        if (index.value < 0) throw new Error(`Layout item "${id}" is missing from layout prop`)
 
-        const item = items.value[index]
+        const item = items.value[index.value]
 
         if (!item) throw new Error(`Could not find layout item "${id}`)
 
@@ -229,11 +240,14 @@ export function createLayout (props: { layout?: string[], overlaps?: string[], f
           marginTop: position.value !== 'bottom' ? `${item.top}px` : undefined,
           marginBottom: position.value !== 'top' ? `${item.bottom}px` : undefined,
           width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : `${elementSize.value}px`,
-          zIndex: layers.value.length - index,
+          zIndex: zIndex.value,
           transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -110) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}%)`,
+          position: parentLayout.rootZIndex.value === 10000 ? 'fixed' : 'absolute',
           ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
         }
       })
+
+      return { layoutItemStyles, zIndex }
     },
     unregister: (id: string) => {
       priorities.delete(id)
@@ -246,6 +260,8 @@ export function createLayout (props: { layout?: string[], overlaps?: string[], f
     mainStyles,
     getLayoutItem,
     items,
+    layoutRect,
+    rootZIndex,
   })
 
   const layoutClasses = computed(() => [
@@ -253,9 +269,15 @@ export function createLayout (props: { layout?: string[], overlaps?: string[], f
     { 'v-layout--full-height': props.fullHeight },
   ])
 
+  const layoutStyles = computed(() => ({
+    zIndex: rootZIndex.value,
+  }))
+
   return {
     layoutClasses,
+    layoutStyles,
     getLayoutItem,
     items,
+    layoutRef: resizeRef,
   }
 }

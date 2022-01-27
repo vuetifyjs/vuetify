@@ -28,12 +28,6 @@ The navigation drawer is primarily used to house links to the pages in your appl
 
 ## Caveats
 
-<alert type="warning">
-
-  In most cases it is not necessary to add the **absolute** prop on the `v-navigation-drawer`. The examples on this page use it because the drawers are nested inside another application.
-
-</alert>
-
 <alert type="info">
 
   The **expand-on-hover** prop does not alter the content area of **v-main**. To have content area respond to **expand-on-hover**, bind **mini-variant.sync** to a data prop.

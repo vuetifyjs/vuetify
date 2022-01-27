@@ -28,12 +28,6 @@ By default, the order in which layout components will attempt to reserve space i
 
 <example file="application-layout/nav-drawer-first" />
 
-<alert type="info">
-
-  Please note that we are using the **absolute** prop in these examples only because we are nesting a layout (the example) inside another (the documentation itself). For most use-cases this is not necessary.
-
-</alert>
-
 As you can see, placing the **v-app-bar** before the **v-navigation-drawer** means that it will use the full width of the screen. When it it placed after the **v-navigation-drawer**, it will only use the free space left over.
 
 Some layout components accept a **position** prop with which you can place the component in the layout. In the example below, we use two **v-navigation-drawer** components, one on each side of the application.
