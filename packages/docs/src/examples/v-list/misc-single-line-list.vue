@@ -32,15 +32,15 @@
           ></v-img>
         </v-list-item-avatar>
 
-        <v-list-item-content>
+        <v-list-item-header>
           <v-list-item-title v-text="chat.title"></v-list-item-title>
-        </v-list-item-content>
+        </v-list-item-header>
 
-        <v-list-item-icon>
+        <v-list-item-avatar>
           <v-icon :color="chat.active ? 'deep-purple accent-4' : 'grey'">
             mdi-message-outline
           </v-icon>
-        </v-list-item-icon>
+        </v-list-item-avatar>
       </v-list-item>
     </v-list>
 
@@ -60,9 +60,9 @@
           ></v-img>
         </v-list-item-avatar>
 
-        <v-list-item-content>
+        <v-list-item-header>
           <v-list-item-title v-text="chat.title"></v-list-item-title>
-        </v-list-item-content>
+        </v-list-item-header>
       </v-list-item>
     </v-list>
   </v-card>

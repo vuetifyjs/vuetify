@@ -31,7 +31,7 @@
         <template v-for="(item, index) in items" :key="item.title">
           <v-list-item>
             <template v-slot:default="{ active }">
-              <v-list-item-content>
+              <v-list-item-header>
                 <v-list-item-title v-text="item.title"></v-list-item-title>
 
                 <v-list-item-subtitle
@@ -40,7 +40,7 @@
                 ></v-list-item-subtitle>
 
                 <v-list-item-subtitle v-text="item.subtitle"></v-list-item-subtitle>
-              </v-list-item-content>
+              </v-list-item-header>
 
               <v-list-item-action>
                 <v-list-item-action-text v-text="item.action"></v-list-item-action-text>
