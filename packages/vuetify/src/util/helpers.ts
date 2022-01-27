@@ -287,25 +287,22 @@ export function upperFirst (str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export function groupItems<T extends any = any> (
-  items: T[],
-  groupBy: string[],
-  groupDesc: boolean[]
-): ItemGroup<T>[] {
-  const key = groupBy[0]
+export function groupItems<T extends any = any> (items: T[], groupBy: string[], groupDesc: boolean[]): ItemGroup<T>[] {
   const groups: ItemGroup<T>[] = []
-  let current
+  //grouping
   for (let i = 0; i < items.length; i++) {
-    const item = items[i]
-    const val = getObjectValueByPath(item, key, null)
-    if (current !== val) {
-      current = val
-      groups.push({
-        name: val ?? '',
-        items: [],
-      })
-    }
-    groups[groups.length - 1].items.push(item)
+    let group_name = groupBy.reduce((previous, current) => getObjectValueByPath(items[i], previous) + ' ' + getObjectValueByPath(items[i], current)).toUpperCase().trim();
+    let index = groups.findIndex(g => g.name === group_name);
+    if (index !== -1) groups[index].items.push(items[i]);
+    else groups.push({name: group_name, items: [items[i]], keys: groupBy.map(n => getObjectValueByPath(items[i], n))});
+  }
+  //sorting
+  for (let i = groupDesc.length - 1; i >= 0; i--) {
+    groups.sort((a,b) => {
+      if (a.keys[i] < b.keys[i]) return groupDesc[i] ? 1 : -1;
+      if (a.keys[i] > b.keys[i]) return groupDesc[i] ? -1 : 1;
+      return 0;
+    });
   }
   return groups
 }
