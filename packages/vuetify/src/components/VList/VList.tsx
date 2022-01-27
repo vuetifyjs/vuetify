@@ -133,7 +133,9 @@ export const VList = genericComponent<new <T>() => {
             {{
               default: slots.default,
               item: slots.item,
-              externalHeader: slots.header,
+              title: slots.title,
+              subtitle: slots.subtitle,
+              header: slots.header,
             }}
           </VListChildren>
         </props.tag>

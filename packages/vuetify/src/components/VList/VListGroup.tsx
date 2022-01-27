@@ -25,8 +25,7 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
     items?: T[]
   }
   $slots: MakeSlots<{
-    header: [ListGroupHeaderSlot]
-    items: []
+    activator: [ListGroupHeaderSlot]
     default: []
   }>
 }>()({
@@ -54,7 +53,7 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
       open(!isOpen.value, e)
     }
 
-    const headerProps = computed(() => ({
+    const activatorProps = computed(() => ({
       onClick,
       appendIcon: isOpen.value ? props.collapseIcon : props.expandIcon,
       class: 'v-list-group__header',
@@ -71,10 +70,10 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
             },
           ]}
         >
-          { slots.header?.(headerProps.value) }
+          { slots.activator?.({ props: activatorProps.value }) }
           <VExpandTransition>
             <div class="v-list-group__items" v-show={isOpen.value}>
-              { slots.items?.() }
+              { slots.default?.() }
             </div>
           </VExpandTransition>
         </props.tag>

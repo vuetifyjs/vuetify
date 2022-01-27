@@ -38,13 +38,21 @@ type ListItemSlot = {
   select: (value: boolean) => void
 }
 
+export type ListItemTitleSlot = {
+  title?: string
+}
+
+export type ListItemSubtitleSlot = {
+  subtitle?: string
+}
+
 export const VListItem = genericComponent<new () => {
   $slots: MakeSlots<{
     prepend: [ListItemSlot]
     append: [ListItemSlot]
     default: [ListItemSlot]
-    title: []
-    subtitle: []
+    title: [ListItemTitleSlot]
+    subtitle: [ListItemSubtitleSlot]
   }>
 }>()({
   name: 'VListItem',
@@ -175,7 +183,7 @@ export const VListItem = genericComponent<new () => {
               { hasTitle && (
                 <VListItemTitle>
                   { slots.title
-                    ? slots.title()
+                    ? slots.title({ title: props.title })
                     : props.title
                   }
                 </VListItemTitle>
@@ -184,7 +192,7 @@ export const VListItem = genericComponent<new () => {
               { hasSubtitle && (
                 <VListItemSubtitle>
                   { slots.subtitle
-                    ? slots.subtitle()
+                    ? slots.subtitle({ subtitle: props.subtitle })
                     : props.subtitle
                   }
                 </VListItemSubtitle>
