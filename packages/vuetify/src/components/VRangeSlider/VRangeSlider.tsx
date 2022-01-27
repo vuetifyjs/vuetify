@@ -80,7 +80,6 @@ export const VRangeSlider = defineComponent({
         } else {
           model.value = [start, Math.max(start, newValue)]
         }
-
       },
       getActiveThumb,
       /* eslint-enable @typescript-eslint/no-use-before-define */

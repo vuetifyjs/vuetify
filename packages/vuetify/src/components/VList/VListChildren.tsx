@@ -10,7 +10,7 @@ import { createList } from './list'
 
 // Types
 import type { InternalListItem } from './VList'
-import type { ListItemTitleSlot, ListItemSubtitleSlot } from './VListItem'
+import type { ListItemSubtitleSlot, ListItemTitleSlot } from './VListItem'
 import type { ListGroupHeaderSlot } from './VListGroup'
 import type { MakeSlots } from '@/util'
 import type { Prop } from 'vue'
