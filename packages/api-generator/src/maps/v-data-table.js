@@ -31,7 +31,7 @@ const DataTableEvents = [
   {
     name: 'click:row',
     source: 'v-data-table',
-    value: `any, ${dataString}`,
+    value: `any, ${dataString}, MouseEvent | KeyboardEvent`,
   },
   {
     name: 'contextmenu:row',
