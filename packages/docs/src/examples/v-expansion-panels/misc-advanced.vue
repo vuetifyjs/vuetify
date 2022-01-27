@@ -1,19 +1,19 @@
 <template>
   <v-expansion-panels>
     <v-expansion-panel>
-      <v-expansion-panel-header>
-        <template v-slot:default="{ open }">
+      <v-expansion-panel-title>
+        <template v-slot:default="{ expanded }">
           <v-row no-gutters>
-            <v-col cols="4">
+            <v-col cols="4" class="d-flex justify-start">
               Trip name
             </v-col>
             <v-col
               cols="8"
-              class="text--secondary"
+              class="text-grey"
             >
               <v-fade-transition leave-absolute>
                 <span
-                  v-if="open"
+                  v-if="expanded"
                   key="0"
                 >
                   Enter a name for the trip
@@ -28,19 +28,20 @@
             </v-col>
           </v-row>
         </template>
-      </v-expansion-panel-header>
-      <v-expansion-panel-content>
+      </v-expansion-panel-title>
+      <v-expansion-panel-text>
         <v-text-field
           v-model="trip.name"
+          hide-details
           placeholder="Caribbean Cruise"
         ></v-text-field>
-      </v-expansion-panel-content>
+      </v-expansion-panel-text>
     </v-expansion-panel>
 
     <v-expansion-panel>
-      <v-expansion-panel-header v-slot="{ open }">
+      <v-expansion-panel-title v-slot="{ open }">
         <v-row no-gutters>
-          <v-col cols="4">
+          <v-col cols="4" class="d-flex justify-start">
             Location
           </v-col>
           <v-col
@@ -63,8 +64,8 @@
             </v-fade-transition>
           </v-col>
         </v-row>
-      </v-expansion-panel-header>
-      <v-expansion-panel-content>
+      </v-expansion-panel-title>
+      <v-expansion-panel-text>
         <v-row no-gutters>
           <v-spacer></v-spacer>
           <v-col cols="5">
@@ -104,13 +105,13 @@
             Save
           </v-btn>
         </v-card-actions>
-      </v-expansion-panel-content>
+      </v-expansion-panel-text>
     </v-expansion-panel>
 
     <v-expansion-panel>
-      <v-expansion-panel-header v-slot="{ open }">
+      <v-expansion-panel-title v-slot="{ open }">
         <v-row no-gutters>
-          <v-col cols="4">
+          <v-col cols="4" class="d-flex justify-start">
             Start and end dates
           </v-col>
           <v-col
@@ -124,18 +125,18 @@
                 no-gutters
                 style="width: 100%"
               >
-                <v-col cols="6">
+                <v-col cols="6" class="d-flex justify-start">
                   Start date: {{ trip.start || 'Not set' }}
                 </v-col>
-                <v-col cols="6">
+                <v-col cols="6" class="d-flex justify-start">
                   End date: {{ trip.end || 'Not set' }}
                 </v-col>
               </v-row>
             </v-fade-transition>
           </v-col>
         </v-row>
-      </v-expansion-panel-header>
-      <v-expansion-panel-content>
+      </v-expansion-panel-title>
+      <v-expansion-panel-text>
         <v-row
           justify="space-around"
           no-gutters
@@ -224,7 +225,7 @@
             </v-menu>
           </v-col>
         </v-row>
-      </v-expansion-panel-content>
+      </v-expansion-panel-text>
     </v-expansion-panel>
   </v-expansion-panels>
 </template>
