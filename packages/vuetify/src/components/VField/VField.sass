@@ -8,16 +8,16 @@
 
 /* region INPUT */
 .v-field
+  display: grid
+  grid-template-areas: "prepend-inner field clear append-inner"
+  grid-template-columns: min-content auto min-content min-content
   font-size: $field-font-size
   letter-spacing: $field-letter-spacing
   max-width: $field-max-width
-  align-items: center
   border-radius: $field-border-radius
   contain: layout
-  display: flex
   flex: 1 0
   grid-area: control
-  height: var(--v-input-control-height)
   position: relative
   --v-field-padding-before: #{$field-control-padding}
   --v-field-padding-after: #{$field-control-padding}
@@ -45,13 +45,12 @@
     padding: 0
 
   .v-field__input
+    letter-spacing: $field-letter-spacing
     opacity: $field-input-opacity
     width: 100%
-    height: 100%
     padding-inline-start: var(--v-field-padding-before)
     padding-inline-end: var(--v-field-padding-after)
-    display: flex
-    align-items: center
+    padding-top: calc(var(--v-field-padding-top) * .5)
 
     &:focus,
     &:active
@@ -73,24 +72,18 @@
 
   &.v-field--variant-contained,
   &.v-field--variant-filled
-    --v-field-padding-top: 21px
-    --v-field-padding-bottom: 6px
+    --v-field-padding-top: #{$field-control-padding}
 
     &.v-field--single-line
       --v-field-padding-top: 0
-      --v-field-padding-bottom: 0
 
-  &.v-field--variant-plain,
   &.v-field--variant-underlined
     $root: &
-
-    --v-field-padding-top: 16px
-    --v-field-padding-bottom: 8px
 
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
-          --v-field-padding-top: #{$field-input-padding-top + $modifier * $field-label-floating-scale}
+          --v-input-control-height: #{$field-control-height + $modifier}
 
   &--variant-filled,
   &--variant-outlined,
@@ -102,45 +95,34 @@
 /* endregion */
 /* region FIELD */
 .v-field__field
-  align-items: center
-  display: flex
   flex: 1 0
-  height: 100%
+  min-height: var(--v-input-control-height, $input-control-height)
+  grid-area: field
   position: relative
-
-  .v-field__input
-    letter-spacing: $field-letter-spacing
-    padding-top: var(--v-field-padding-top, 0)
-    padding-bottom: var(--v-field-padding-bottom, 0)
 
 /* endregion */
 /* region AFFIXES */
+.v-field__prepend-inner
+  grid-area: prepend-inner
+
+.v-field__clearable
+  grid-area: clear
+
+.v-field__append-inner
+  grid-area: append-inner
+
+.v-field__field,
 .v-field__prepend-inner,
 .v-field__append-inner,
 .v-field__clearable
-  align-items: center
+  align-items: flex-start
   display: flex
+  padding-top: var(--v-input-padding-top, $field-control-padding)
 
 .v-field__prepend-inner,
 .v-field__append-inner
   .v-field--focused &
     opacity: 1
-
-  .v-field--variant-plain &,
-  .v-field--variant-underlined &
-    $root: &
-    align-self: flex-end
-
-    @at-root
-      @include tools.density('v-input', $input-density) using ($modifier)
-        @at-root #{selector.nest(&, $root)}
-          margin-bottom: $field-underlined-margin-bottom + $modifier * .125
-
-.v-field .v-input__prepend,
-.v-field .v-input__append
-  .v-field--variant-plain &,
-  .v-field--variant-underlined &
-    align-self: flex-end
 
 .v-field__clearable
   cursor: pointer
@@ -174,15 +156,6 @@
   .v-input--error &
     color: inherit
 
-  .v-field--variant-plain &,
-  .v-field--variant-underlined &
-    $root: &
-
-    @at-root
-      @include tools.density('v-input', $input-density) using ($modifier)
-        @at-root #{selector.nest(&, $root)}
-          bottom: 4px + $modifier * .125
-
   &--floating
     --v-field-label-scale: #{$field-label-floating-scale}em
     font-size: var(--v-field-label-scale)
@@ -203,7 +176,7 @@
 
     .v-field--variant-plain &,
     .v-field--variant-underlined &
-      transform: translateY(-24px)
+      transform: translateY(-6px)
       margin: 0
 
     .v-field--variant-outlined &
@@ -316,15 +289,6 @@
 
       @include tools.rtl()
         border-radius: $field-border-radius 0 0 $field-border-radius
-
-/* endregion */
-/* region DETAILS */
-.v-input__details
-  .v-field--variant-plain &,
-  .v-field--variant-underlined &
-    padding-inline-start: 0
-    padding-inline-end: 0
-
 /* endregion */
 /* region LOADER */
 .v-field__loader

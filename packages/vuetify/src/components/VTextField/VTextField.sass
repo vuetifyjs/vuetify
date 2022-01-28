@@ -9,14 +9,12 @@
   &__prefix,
   &__suffix
     color: $text-field-affix-color
-    height: 100%
     display: flex
     align-items: center
     cursor: default
     transition: .15s opacity settings.$standard-easing
     white-space: nowrap
-    padding-top: calc(var(--v-field-padding-top, 0) + 1px)
-    padding-bottom: var(--v-field-padding-bottom, 0)
+    padding-top: calc(var(--v-field-padding-top) * .5)
 
   &__prefix
     padding-inline-start: var(--v-field-padding-before)
@@ -30,12 +28,14 @@
     @at-root #{selector.append('.v-text-field--suffixed', &)}
       --v-field-padding-after: 0
 
+  .v-input__details
+    padding: 0 16px
+
   .v-field
     cursor: text
 
   input
     flex: 1
-    opacity: 1
     transition: .15s opacity settings.$standard-easing
 
     &:focus,

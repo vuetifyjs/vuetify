@@ -25,6 +25,7 @@
   @at-root
     @include tools.density('v-input', $input-density) using ($modifier)
       --v-input-control-height: #{$input-control-height + $modifier}
+      --v-input-padding-top: #{16px + $modifier * .5}
 
 .v-input--vertical
   grid-template-areas: "append" "control" "prepend"
@@ -60,15 +61,12 @@
   min-height: $input-details-min-height
   padding-top: $input-details-padding-above
   overflow: hidden
-  padding-inline-start: $input-details-padding-inline
-  padding-inline-end: $input-details-padding-inline
   justify-content: space-between
 
 .v-input__prepend,
 .v-input__append
   display: flex
-  align-items: center
-  align-self: center
+  padding-top: var(--v-input-padding-top)
 
   .v-input--focused &
     opacity: 1

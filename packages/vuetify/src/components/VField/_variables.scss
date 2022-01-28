@@ -21,9 +21,10 @@ $field-control-filled-background: rgba(var(--v-theme-on-surface), var(--v-idle-o
 $field-control-padding: 16px !default;
 $field-control-affixed-padding: 12px !default;
 $field-control-affixed-inner-padding: 6px !default;
+$field-control-height: 50px !default;
 
 // INPUT
-$field-input-padding-top: 30px !default;
+$field-input-padding-top: 32px !default;
 $field-input-opacity: var(--v-high-emphasis-opacity) !default;
 
 // LABEL
