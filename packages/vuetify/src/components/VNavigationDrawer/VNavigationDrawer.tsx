@@ -111,7 +111,7 @@ export const VNavigationDrawer = defineComponent({
 
       return isDragging.value ? size * dragProgress.value : size
     })
-    const { layoutItemStyles, layoutRect, zIndex } = useLayoutItem(
+    const { layoutItemStyles, layoutRect, layoutItemScrimStyles } = useLayoutItem(
       props.name,
       computed(() => parseInt(props.priority, 10)),
       toRef(props, 'position'),
@@ -132,7 +132,7 @@ export const VNavigationDrawer = defineComponent({
         top: convertToUnit(layoutRect.value.top),
         bottom: convertToUnit(layoutRect.value.bottom),
       } : undefined,
-      zIndex: zIndex.value - 1,
+      ...layoutItemScrimStyles.value,
     }))
 
     return () => {
