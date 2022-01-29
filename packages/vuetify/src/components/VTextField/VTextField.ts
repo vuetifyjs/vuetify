@@ -194,6 +194,9 @@ export default baseMixins.extend<options>().extend({
     labelValue (): boolean {
       return this.isFocused || this.isLabelActive || this.persistentPlaceholder
     },
+    hasPrependInner (): boolean {
+      return !!this.$slots['prepend-inner'] || !!this.prependInnerIcon
+    },
   },
 
   watch: {
@@ -239,6 +242,9 @@ export default baseMixins.extend<options>().extend({
           this.onResize()
         }
       })
+    })
+    this.$watch('hasPrependInner', () => {
+      this.onResize()
     })
   },
 
@@ -516,9 +522,11 @@ export default baseMixins.extend<options>().extend({
       this.prefixWidth = this.$refs.prefix.offsetWidth
     },
     setPrependWidth () {
-      if (!this.outlined || !this.$refs['prepend-inner']) return
-
-      this.prependWidth = this.$refs['prepend-inner'].offsetWidth
+      if (!this.outlined || !this.$refs['prepend-inner']) {
+        this.prependWidth = 0
+      } else {
+        this.prependWidth = this.$refs['prepend-inner'].offsetWidth
+      }
     },
     tryAutofocus () {
       if (
