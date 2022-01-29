@@ -33,7 +33,7 @@ While `v-bottom navigation` is meant to be used with [vue-router](https://router
 
 #### Color
 
-The **color** prop applies a color to the background the bottom navigation. We recommend using the **light** and **dark** props to properly contrast text color.
+The **color** prop applies a color to the background of the bottom navigation. We recommend using the **light** and **dark** props to properly contrast text color.
 
 <example file="v-bottom-navigation/prop-color" />
 

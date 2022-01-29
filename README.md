@@ -53,6 +53,9 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
     <a href="https://tidelift.com/subscription/request-a-demo?utm_source=npm-vuetify&utm_medium=referral&utm_campaign=enterprise">Become a subscriber on Tidelift</a>
   </li>
   <li>
+    <a href="https://github.com/sponsors/johnleider?frequency=one-time&sponsor=johnleider">Make a one-time payment with GitHub</a>
+  </li>
+  <li>
     <a href="https://paypal.me/vuetify">Make a one-time payment with Paypal</a>
   </li>
   <li>
@@ -105,7 +108,7 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
       </td>
       <td>
         <a href="https://kintell.com/?utm_source=Vuetify&utm_medium=VuetifyReferral&utm_campaign=Vuetify-logo-click">
-          <img height="50px" src="https://imgix.cosmicjs.com/e13a39e0-ff78-11eb-a3f4-b70be1f3fd88-image.png">
+          <img height="40px" src="https://imgix.cosmicjs.com/e13a39e0-ff78-11eb-a3f4-b70be1f3fd88-image.png">
         </a>
       </td>
     </tr>
@@ -151,11 +154,6 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
         </a>
       </td>
       <td>
-        <a href="https://www.elfo.net/?ref=vuetify-github">
-          <img height="26px" src="https://cdn.cosmicjs.com/9e2dd530-974a-11eb-bf6a-1ffd0f06b0f7-elfo-logo-light.png">
-        </a>
-      </td>
-      <td>
         <a href="https://www.dealerdesk.de/?ref=vuetify-github">
           <img height="42px" src="https://imgix.cosmicjs.com/15326970-c482-11eb-9242-8105a76f57b3-dealerdesklogocmyk20210520-1515-3.png">
         </a>
@@ -166,14 +164,6 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
         </a>
       </td>
       <td>
-        <a href="https://www.topratedcasinosites.co.uk/">
-          <img height="30px" src="https://cdn.cosmicjs.com/d5a76910-9748-11eb-bf6a-1ffd0f06b0f7-toprated-light.png">
-        </a>
-      </td>
-    </tr>
-    <tr></tr>
-    <tr>
-      <td>
         <a href="https://aussiecasinohex.com/">
           <img height="30px" src="https://imgix.cosmicjs.com/5e118ca0-9748-11eb-bf6a-1ffd0f06b0f7-hex-light.png">
         </a>
@@ -183,22 +173,40 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
           <img height="26px" src="https://cdn.cosmicjs.com/cd0aa3a0-974b-11eb-bf6a-1ffd0f06b0f7-sun-light.png">
         </a>
       </td>
+    </tr>
+    <tr></tr>
+    <tr>
       <td>
         <a href="https://goread.io/buy-instagram-followers">
           <img height="26px" src="https://cdn.cosmicjs.com/3ab46070-9711-11eb-b593-972a7dbc1054-goread-light.png">
         </a>
       </td>
       <td>
-        <a href="https://onlinecasinohex.ca/">
-          <im
-      <td>
         <a href="https://www.casinoonlineaams.com/">
-          <img height="30px" src="https://imgix.cosmicjs.com/9d6390c0-c483-11eb-9242-8105a76f57b3-casinoonlineaams-light-md-1.png">
+          <img height="48px" src="https://imgix.cosmicjs.com/9d6390c0-c483-11eb-9242-8105a76f57b3-casinoonlineaams-light-md-1.png">
         </a>
       </td>
       <td>
         <a href="https://medium.com/theymakedesign/best-web-design-companies-3ecc85b32071">
           <img height="55px" src="https://imgix.cosmicjs.com/5a155730-c547-11eb-9242-8105a76f57b3-tm-logo-light-md.png">
+        </a>
+      </td>
+      <td>
+        <a href="https://www.nongamstopwager.com/casinos-not-on-gamstop/">
+          <img height="55px" src="https://imgix.cosmicjs.com/1647b850-43ea-11ec-9580-ebf669758fed-nongamstopwager-com.png">
+        </a>
+      </td>
+      <td>
+        <a href="https://cryptocasinos.com/">
+          <img height="32px" src="https://imgix.cosmicjs.com/f4b62cd0-4ca4-11ec-9940-53a088b36636-crypto-casinos.png">
+        </a>
+      </td>
+    </tr>
+    <tr></tr>
+    <tr>
+      <td>
+        <a href="https://www.instafollowers.co/buy-instagram-likes">
+          <img height="55px" src="https://imgix.cosmicjs.com/8fa4e150-520e-11ec-9aff-3d50541531a0-buy-instagram-likes-png-1.png">
         </a>
       </td>
     </tr>

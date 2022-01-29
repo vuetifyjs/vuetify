@@ -9,6 +9,7 @@
       <template v-slot:prepend-item>
         <v-list-item
           ripple
+          @mousedown.prevent
           @click="toggle"
         >
           <v-list-item-action>

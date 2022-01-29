@@ -75,6 +75,7 @@ export default baseMixins.extend<options>().extend({
     isFocused: 'updateValue',
     value (val) {
       this.lazyValue = val
+      this.otp = val?.split('') || []
     },
   },
 
@@ -266,6 +267,7 @@ export default baseMixins.extend<options>().extend({
         newOtp[appIdx] = inputDataArray[i].toString()
       }
       this.otp = newOtp
+      this.internalValue = this.otp.join('')
       const targetFocus = Math.min(index + inputDataArray.length, maxCursor)
       this.changeFocus(targetFocus)
 
