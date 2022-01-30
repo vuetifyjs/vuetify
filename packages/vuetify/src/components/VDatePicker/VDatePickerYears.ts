@@ -110,7 +110,13 @@ export default mixins<options &
         class: { active },
         on: mergeListeners({
           click: () => this.$emit('input', year),
-          keydown: (e: KeyboardEvent) => e.code === 'Space' && this.$emit('input', year),
+          keydown: (e: KeyboardEvent) => {
+            if (e.code === 'Enter' || e.code === 'Space') {
+              e.preventDefault()
+              this.$emit('update:should-autofocus', true)
+              this.$emit('input', year)
+            }
+          },
         }, createItemTypeNativeListeners(this, ':year', year)),
       }), formatted)
     },
@@ -141,7 +147,7 @@ export default mixins<options &
       staticClass: 'v-date-picker-years',
       ref: 'years',
       on: {
-        keydown: (e: KeyboardEvent) => this.handleKeydown(e),
+        keydown: this.handleKeydown,
       },
     }, this.genYearItems())
   },

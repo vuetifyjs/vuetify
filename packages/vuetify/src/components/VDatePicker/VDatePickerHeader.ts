@@ -116,6 +116,11 @@ export default mixins(
         },
         on: {
           click: () => this.$emit('toggle'),
+          keydown: (e: KeyboardEvent) => {
+            if (e.code === 'Space' || e.code === 'Enter') {
+              this.$emit('update:should-autofocus', true)
+            }
+          },
         },
       }, [this.$slots.default || this.formatter(String(this.value))])])
 

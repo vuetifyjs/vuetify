@@ -156,6 +156,7 @@ export default mixins(
       })(),
       focusedMonthIndex: 0,
       focusedDateIndex: 0,
+      shouldAutofocus: false,
     }
   },
 
@@ -414,6 +415,7 @@ export default mixins(
         on: {
           toggle: () => this.internalActivePicker = (this.internalActivePicker === 'DATE' ? 'MONTH' : 'YEAR'),
           input: (value: string) => this.tableDate = value,
+          'update:should-autofocus': (value: boolean) => this.shouldAutofocus = value,
         },
       })
     },
@@ -443,12 +445,14 @@ export default mixins(
           value: this.value,
           weekdayFormat: this.weekdayFormat,
           focusedDateIndex: this.focusedDateIndex,
+          shouldAutofocus: this.shouldAutofocus,
         },
         ref: 'table',
         on: {
           input: this.dateClick,
           'update:table-date': (value: string) => this.tableDate = value,
           'update:focused-date-index': (value: number) => this.focusedDateIndex = value,
+          'update:should-autofocus': (value: boolean) => this.shouldAutofocus = value,
           ...createItemTypeListeners(this, ':date'),
         },
       })
@@ -474,12 +478,14 @@ export default mixins(
           value: this.selectedMonths,
           tableDate: `${pad(this.tableYear, 4)}`,
           focusedMonthIndex: this.focusedMonthIndex,
+          shouldAutofocus: this.shouldAutofocus,
         },
         ref: 'table',
         on: {
           input: this.monthClick,
           'update:table-date': (value: string) => this.tableDate = value,
           'update:focused-month-index': (value: number) => this.focusedMonthIndex = value,
+          'update:should-autofocus': (value: boolean) => this.shouldAutofocus = value,
           ...createItemTypeListeners(this, ':month'),
         },
       })
@@ -496,6 +502,7 @@ export default mixins(
         },
         on: {
           input: this.yearClick,
+          'update:should-autofocus': (value: boolean) => this.shouldAutofocus = value,
           ...createItemTypeListeners(this, ':year'),
         },
       })

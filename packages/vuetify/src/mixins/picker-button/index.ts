@@ -26,7 +26,7 @@ export default mixins(
         this.$emit(`update:${kebabCase(prop)}`, value)
       }
       const keydown = (event: KeyboardEvent) => {
-        if (event.code === 'Space') {
+        if (event.code === 'Space' || event.code === 'Enter') {
           event.stopPropagation()
           event.preventDefault()
           this.$emit(`update:${kebabCase(prop)}`, value)

@@ -18,7 +18,7 @@ export default mixins(
   data () {
     return {
       monthButtons: [] as HTMLElement[],
-      isTransition: false,
+      isTableInTransition: false,
     }
   },
 
@@ -28,24 +28,42 @@ export default mixins(
     },
   },
 
-  watch: {
-    tableDate () {
-      setTimeout(() => this.monthButtons = Array.from(this.$el.querySelectorAll('button')), 500)
-    },
-  },
-
   mounted () {
-    this.$on('keydown:left', () => this.moveHorizontal('left'))
-    this.$on('keydown:right', () => this.moveHorizontal('right'))
-    this.$on('keydown:up', () => this.moveVertical('up'))
-    this.$on('keydown:down', () => this.moveVertical('down'))
+    this.$on('keydown:arrowleft', () => this.moveHorizontal('left'))
+    this.$on('keydown:arrowright', () => this.moveHorizontal('right'))
+    this.$on('keydown:arrowup', () => this.moveVertical('up'))
+    this.$on('keydown:arrowdown', () => this.moveVertical('down'))
+    this.$on('keydown:pageup', () => this.moveTo('firstRow'))
+    this.$on('keydown:pagedown', () => this.moveTo('lastRow'))
+    this.$on('keydown:home', () => this.moveTo('firstColumn'))
+    this.$on('keydown:end', () => this.moveTo('lastColumn'))
     this.$on('update-focused-cell', (index: number) => this.$emit('update:focused-month-index', index))
+    this.$on('table-transitionend', () => this.handleTableTransitionEnd())
 
     this.monthButtons = Array.from(this.$el.querySelectorAll('button'))
-    this.monthButtons[this.focusedMonthIndex].focus()
+
+    if (this.shouldAutofocus) {
+      this.monthButtons[this.focusedMonthIndex].focus()
+      this.$emit('update:should-autofocus', false)
+    }
   },
 
   methods: {
+    async moveTo (position: 'firstRow' | 'lastRow' | 'firstColumn' | 'lastColumn') {
+      const positions = {
+        firstRow: this.focusedMonthIndex % 3,
+        lastRow: this.focusedMonthIndex % 3 + 9,
+        firstColumn: this.focusedMonthIndex - (this.focusedMonthIndex % 3),
+        lastColumn: this.focusedMonthIndex + (2 - this.focusedMonthIndex % 3),
+      }
+
+      const nextPosition = positions[position]
+
+      this.$emit('update:focused-month-index', nextPosition)
+
+      await this.$nextTick()
+      this.monthButtons[this.focusedMonthIndex].focus()
+    },
     async moveVertical (direction: 'up' | 'down') {
       const nextIndex = {
         up: this.focusedMonthIndex - 3 < 0 ? this.focusedMonthIndex - 3 + 12 : this.focusedMonthIndex - 3,
@@ -58,7 +76,7 @@ export default mixins(
       this.monthButtons[this.focusedMonthIndex].focus()
     },
     async moveHorizontal (direction: 'left' | 'right') {
-      if (this.isTransition) {
+      if (this.isTableInTransition) {
         return
       }
 
@@ -70,18 +88,21 @@ export default mixins(
       const nextPageItem = direction === 'left' ? 2 : -2
 
       if (cantMove[direction]) {
-        this.isTransition = true
+        this.isTableInTransition = true
         this.$emit('update:table-date', `${Number(this.tableDate) + addition}`)
         this.$emit('update:focused-month-index', this.focusedMonthIndex + nextPageItem)
-        setTimeout(() => {
-          this.monthButtons = Array.from(this.$el.querySelectorAll('button'))
-          this.monthButtons[this.focusedMonthIndex].focus()
-          this.isTransition = false
-        }, 500)
       } else {
         this.$emit('update:focused-month-index', this.focusedMonthIndex + addition)
         await this.$nextTick()
         this.monthButtons[this.focusedMonthIndex].focus()
+      }
+    },
+    handleTableTransitionEnd () {
+      this.monthButtons = Array.from(this.$el.querySelectorAll('button'))
+
+      if (this.isTableInTransition) {
+        this.monthButtons[this.focusedMonthIndex].focus()
+        this.isTableInTransition = false
       }
     },
     calculateTableDate (delta: number) {

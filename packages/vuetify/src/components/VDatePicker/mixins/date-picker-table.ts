@@ -66,6 +66,7 @@ export default mixins(
     value: [String, Array] as PropType<string | string[]>,
     focusedMonthIndex: Number,
     focusedDateIndex: Number,
+    shouldAutofocus: Boolean,
   },
 
   data: () => ({
@@ -128,6 +129,11 @@ export default mixins(
             cellIndex !== undefined && this.$emit('update-focused-cell', cellIndex)
           }
         },
+        keydown: (e: KeyboardEvent) => {
+          if (isAllowed && !this.readonly && (e.code === 'Space' || e.code === 'Enter')) {
+            this.$emit('update:should-autofocus', true)
+          }
+        }
       }, createItemTypeNativeListeners(this, `:${mouseEventType}`, value))
     },
     genButton (
@@ -230,7 +236,12 @@ export default mixins(
     genTable (staticClass: string, children: VNodeChildren, calculateTableDate: CalculateTableDateFunction) {
       const transition = this.$createElement('transition', {
         props: { name: this.computedTransition },
-      }, [this.$createElement('table', { key: this.tableDate }, children)])
+        on: {
+          afterLeave: () => this.$emit('table-transitionend'),
+        },
+      }, [this.$createElement('table', {
+        key: this.tableDate,
+      }, children)])
 
       const touchDirective = {
         name: 'touch',
@@ -243,7 +254,7 @@ export default mixins(
       }
 
       const events: VNodeData['on'] = {
-        keydown: (e: KeyboardEvent) => this.handleKeydown(e),
+        keydown: this.handleKeydown,
       }
 
       if (!this.disabled && this.scrollable) {
@@ -276,25 +287,12 @@ export default mixins(
       return value === this.value
     },
     handleKeydown (e: KeyboardEvent) {
+      const availableKeyCodes = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End']
       e.stopPropagation()
-      if (e.code === 'ArrowLeft') {
-        e.preventDefault()
-        this.$emit('keydown:left')
-      }
 
-      if (e.code === 'ArrowRight') {
+      if (availableKeyCodes.includes(e.code)) {
         e.preventDefault()
-        this.$emit('keydown:right')
-      }
-
-      if (e.code === 'ArrowUp') {
-        e.preventDefault()
-        this.$emit('keydown:up')
-      }
-
-      if (e.code === 'ArrowDown') {
-        e.preventDefault()
-        this.$emit('keydown:down')
+        this.$emit(`keydown:${e.code.toLowerCase()}`)
       }
     },
   },
