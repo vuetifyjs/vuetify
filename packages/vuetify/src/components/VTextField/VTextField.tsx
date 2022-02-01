@@ -165,7 +165,7 @@ export const VTextField = genericComponent<new <T>() => {
                 onClick:clear={ onClear }
                 role="textbox"
                 { ...fieldProps }
-                modelValue={ model.value }
+                modelValue={ model.value || (props.placeholder && props.persistentPlaceholder) }
               >
                 {{
                   ...slots,
@@ -192,11 +192,7 @@ export const VTextField = genericComponent<new <T>() => {
                           autofocus={ props.autofocus }
                           readonly={ isReadonly.value }
                           disabled={ isDisabled.value }
-                          placeholder={
-                            isFocused.value || props.persistentPlaceholder
-                              ? props.placeholder
-                              : undefined
-                          }
+                          placeholder={ props.placeholder }
                           size={ 1 }
                           type={ props.type }
                           onFocus={ onFocus }
