@@ -118,6 +118,7 @@ export const VTextField = defineComponent({
             {
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
+              'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
             },
           ]}
           focused={ isFocused.value }

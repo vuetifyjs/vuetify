@@ -79,6 +79,7 @@
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
           --v-input-control-height: #{$field-control-height + $modifier}
+          --v-field-padding-bottom: #{$field-control-padding-bottom + $modifier * .5}
 
   &--variant-underlined
     $root: &
@@ -97,7 +98,6 @@
   padding-inline-start: var(--v-field-padding-start)
   padding-inline-end: var(--v-field-padding-end)
   padding-top: var(--v-field-padding-top, $field-control-padding-top)
-  padding-bottom: var(--v-field-padding-bottom, $field-control-padding-bottom)
   width: 100%
 
   &:focus,
@@ -112,6 +112,7 @@
   flex: 1 0
   min-height: var(--v-input-control-height, $input-control-height)
   grid-area: field
+  padding-bottom: var(--v-field-padding-bottom, $field-control-padding-bottom)
   position: relative
 
 /* endregion */
