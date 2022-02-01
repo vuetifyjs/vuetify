@@ -8,17 +8,10 @@
 
 .v-textarea
   .v-field__input
-    align-self: stretch
     flex: 1 1 auto
+    line-height: $textarea-line-height
     outline: none
     mask-image: linear-gradient(to bottom, transparent, transparent calc(var(--v-field-padding-top, 0) / 1.25), black var(--v-field-padding-top, 0))
-
-    $root: &
-
-    @at-root
-      @include tools.density('v-input', $input-density) using ($modifier)
-        @at-root #{selector.append(&, $root)}
-          line-height: $textarea-line-height + math.div($modifier * .125, settings.$spacer) * 1.5
 
   &--auto-grow
     .v-field__input
