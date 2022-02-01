@@ -3,9 +3,9 @@
     class="mx-auto"
     max-width="400"
   >
-    <v-list-item two-line>
+    <v-list-item>
       <v-list-item-content>
-        <v-list-item-title class="text-h5">
+        <v-list-item-title class="text-h5 pb-1">
           San Francisco
         </v-list-item-title>
         <v-list-item-subtitle>Mon, 12:30 PM, Mostly sunny</v-list-item-subtitle>
@@ -31,31 +31,34 @@
     </v-card-text>
 
     <v-list-item>
-      <v-list-item-icon>
-        <v-icon>mdi-send</v-icon>
-      </v-list-item-icon>
+      <v-list-item-avatar left>
+        <v-icon icon="mdi-send"></v-icon>
+      </v-list-item-avatar>
       <v-list-item-subtitle>23 km/h</v-list-item-subtitle>
     </v-list-item>
 
     <v-list-item>
-      <v-list-item-icon>
-        <v-icon>mdi-cloud-download</v-icon>
-      </v-list-item-icon>
+      <v-list-item-avatar left>
+        <v-icon icon="mdi-cloud-download"></v-icon>
+      </v-list-item-avatar>
       <v-list-item-subtitle>48%</v-list-item-subtitle>
     </v-list-item>
 
     <v-slider
       v-model="time"
+      color="primary"
       :max="6"
-      :tick-labels="labels"
+      :step="1"
+      :ticks="labels"
       class="mx-4"
-      ticks
+      show-ticks="always"
     ></v-slider>
 
-    <v-list class="transparent">
-      <v-list-item
+    <div class="d-flex flex-column">
+      <div
         v-for="item in forecast"
         :key="item.day"
+        class="d-flex justify-space-between pa-4"
       >
         <v-list-item-title>{{ item.day }}</v-list-item-title>
 
@@ -66,8 +69,8 @@
         <v-list-item-subtitle class="text-right">
           {{ item.temp }}
         </v-list-item-subtitle>
-      </v-list-item>
-    </v-list>
+      </div>
+    </div>
 
     <v-divider></v-divider>
 
@@ -83,7 +86,7 @@
   export default {
     data () {
       return {
-        labels: ['SU', 'MO', 'TU', 'WED', 'TH', 'FR', 'SA'],
+        labels: { 0: 'SU', 1: 'MO', 2: 'TU', 3: 'WED', 4: 'TH', 5: 'FR', 6: 'SA' },
         time: 0,
         forecast: [
           { day: 'Tuesday', icon: 'mdi-white-balance-sunny', temp: '24\xB0/12\xB0' },

@@ -30,6 +30,12 @@ Alerts in their simplest form are flat [sheets of paper](/components/sheets) tha
 
 ### Props
 
+#### Type
+
+The **type** prop provides 4 default `v-alert` styles: **success**, **info**, **warning**, and **error**. Each of these styles provides a default icon and color. The default colors can be configured globally by customizing [Vuetify's theme](/features/theme).
+
+<example file="v-alert/prop-type" />
+
 #### Border
 
 The **border** prop adds a simple border to one of the 4 sides of the alert. This can be combined with props like **color**, **dark**, and **type** to provide unique accents to the alert.
@@ -70,39 +76,27 @@ The **outlined** prop inverts the style of an alert, inheriting the currently ap
 
 #### Prominent
 
-The **prominent** prop provides a more pronounced alert by increasing the height and applying a halo to the icon. When applying both **prominent** and **dense** together, the alert will take on the appearance of a normal alert but with the **prominent** icon effects.
+The **prominent** prop provides a more pronounced alert by increasing the size of the icon.
 
 <example file="v-alert/prop-prominent" />
 
-#### Text
+#### Variant
 
-The **text** prop is a simple alert variant that applies a reduced opacity background of the provided **color**. Similar to other styled props, **text** can be combined with other props like **dense**, **prominent**, **outlined**, and **shaped** to create a unique and customized component.
+The **variant** prop provides an easy way to change the overall style of your alerts. Together with other props like **density**, **prominent**, **border**, and **shaped**, it allows you to create a unique and customized component.
 
-<example file="v-alert/prop-text" />
+<example file="v-alert/prop-variant" />
 
-#### Shaped
+#### Rounded
 
-The **shaped** prop will add **border-radius**  at the top-left and bottom-right of the alert. Similar to other styled props, **shaped** can be combined with other props like **dense**, **prominent**, **outlined** and **text** to create a unique and customized component
+The **rounded** prop will add or remove **border-radius** to the alert. Similar to other styled props, **rounded** can be combined with other props like **density**, **prominent**, and **variant** to create a unique and customized component.
 
-<example file="v-alert/prop-shaped" />
+<example file="v-alert/prop-rounded" />
 
-#### Transition
+#### Tip
 
-The **transition** prop allows you to apply a transition to the alert which is viewable when the component hides and shows. For more information, you can check out any of [Vuetify's prebuilt transitions](/styles/transitions#motion) or review how to [create your own](/styles/transitions#create-your-own).
+<!-- TODO: Write description. What is tip prop? It does not seem to be compatible with icon -->
 
-<example file="v-alert/prop-transition" />
-
-#### Twitter
-
-By combining **color**, **dismissible**, **border**, **elevation**, **icon**, and **colored-border** props, you can create stylish custom alerts such as this Twitter notification.
-
-<example file="v-alert/misc-twitter" />
-
-#### Type
-
-The **type** prop provides 4 default `v-alert` styles: **success**, **info**, **warning**, and **error**. Each of these styles provides a default icon and color. The default colors can be configured globally by customizing [Vuetify's theme](/features/theme).
-
-<example file="v-alert/prop-type" />
+<example file="v-alert/prop-tip" />
 
 ## Accessibility
 
