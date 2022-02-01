@@ -32,7 +32,7 @@ const globalOptions = {
   },
 }
 
-describe('VIcon', () => {
+describe.skip('VIcon', () => {
   it('should render ligature icon', () => {
     const wrapper = mount(VIcon, {
       props: {
