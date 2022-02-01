@@ -22,13 +22,16 @@ type LayoutItem = {
 interface LayoutProvide {
   register: (
     vm: ComponentInternalInstance,
-    id: string,
-    priority: Ref<number>,
-    position: Ref<Position>,
-    layoutSize: Ref<number | string>,
-    elementSize: Ref<number | string>,
-    active: Ref<boolean>,
-    disableTransitions?: Ref<boolean>
+    options: {
+      id: string
+      priority: Ref<number>
+      position: Ref<Position>
+      layoutSize: Ref<number | string>
+      elementSize: Ref<number | string>
+      active: Ref<boolean>
+      disableTransitions?: Ref<boolean>
+      absolute: Ref<boolean | undefined>
+    }
   ) => {
     layoutItemStyles: Ref<Record<string, unknown>>
     layoutItemScrimStyles: Ref<Record<string, unknown>>
@@ -60,6 +63,7 @@ export const makeLayoutItemProps = propsFactory({
     type: [Number, String],
     default: 0,
   },
+  absolute: Boolean,
 }, 'layout-item')
 
 export function useLayout () {
@@ -70,27 +74,31 @@ export function useLayout () {
   return layout
 }
 
-export function useLayoutItem (
-  name: string | undefined,
-  priority: Ref<number>,
-  position: Ref<Position>,
-  layoutSize: Ref<number | string>,
-  elementSize: Ref<number | string>,
-  active: Ref<boolean>,
-  disableTransitions?: Ref<boolean>,
-) {
+export function useLayoutItem (options: {
+  id: string | undefined
+  priority: Ref<number>
+  position: Ref<Position>
+  layoutSize: Ref<number | string>
+  elementSize: Ref<number | string>
+  active: Ref<boolean>
+  disableTransitions?: Ref<boolean>
+  absolute: Ref<boolean | undefined>
+}) {
   const layout = inject(VuetifyLayoutKey)
 
   if (!layout) throw new Error('Could not find injected Vuetify layout')
 
-  const id = name ?? `layout-item-${getUid()}`
+  const id = options.id ?? `layout-item-${getUid()}`
 
   const vm = getCurrentInstance('useLayoutItem')
 
   const {
     layoutItemStyles,
     layoutItemScrimStyles,
-  } = layout.register(vm, id, priority, position, layoutSize, elementSize, active, disableTransitions)
+  } = layout.register(vm, {
+    ...options,
+    id,
+  })
 
   onBeforeUnmount(() => layout.unregister(id))
 
@@ -208,13 +216,16 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
   provide(VuetifyLayoutKey, {
     register: (
       vm: ComponentInternalInstance,
-      id: string,
-      priority: Ref<number>,
-      position: Ref<Position>,
-      layoutSize: Ref<number | string>,
-      elementSize: Ref<number | string>,
-      active: Ref<boolean>,
-      disableTransitions?: Ref<boolean>
+      {
+        id,
+        priority,
+        position,
+        layoutSize,
+        elementSize,
+        active,
+        disableTransitions,
+        absolute,
+      }
     ) => {
       priorities.set(id, priority)
       positions.set(id, position)
@@ -257,7 +268,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
           width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : `${elementSize.value}px`,
           zIndex: zIndex.value,
           transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -110) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}%)`,
-          position: parentLayout.rootZIndex.value === 10000 ? 'fixed' : 'absolute',
+          position: absolute.value || parentLayout.rootZIndex.value !== 10000 ? 'absolute' : 'fixed',
           ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
         }
       })

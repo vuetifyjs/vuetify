@@ -111,15 +111,16 @@ export const VNavigationDrawer = defineComponent({
 
       return isDragging.value ? size * dragProgress.value : size
     })
-    const { layoutItemStyles, layoutRect, layoutItemScrimStyles } = useLayoutItem(
-      props.name,
-      computed(() => parseInt(props.priority, 10)),
-      toRef(props, 'position'),
+    const { layoutItemStyles, layoutRect, layoutItemScrimStyles } = useLayoutItem({
+      id: props.name,
+      priority: computed(() => parseInt(props.priority, 10)),
+      position: toRef(props, 'position'),
       layoutSize,
-      width,
-      computed(() => isActive.value || isDragging.value),
-      computed(() => isDragging.value)
-    )
+      elementSize: width,
+      active: computed(() => isActive.value || isDragging.value),
+      disableTransitions: computed(() => isDragging.value),
+      absolute: toRef(props, 'absolute'),
+    })
 
     const scrimStyles = computed(() => ({
       ...isDragging.value ? {

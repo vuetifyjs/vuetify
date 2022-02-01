@@ -67,14 +67,15 @@ export const VBottomNavigation = defineComponent({
       (props.density === 'compact' ? 16 : 0)
     ))
     const isActive = useProxiedModel(props, 'modelValue', props.modelValue)
-    const { layoutItemStyles } = useLayoutItem(
-      props.name,
-      computed(() => parseInt(props.priority, 10)),
-      computed(() => 'bottom'),
-      computed(() => isActive.value ? height.value : 0),
-      height,
-      isActive
-    )
+    const { layoutItemStyles } = useLayoutItem({
+      id: props.name,
+      priority: computed(() => parseInt(props.priority, 10)),
+      position: computed(() => 'bottom'),
+      layoutSize: computed(() => isActive.value ? height.value : 0),
+      elementSize: height,
+      active: isActive,
+      absolute: toRef(props, 'absolute'),
+    })
 
     useGroup(props, VBtnToggleSymbol)
 

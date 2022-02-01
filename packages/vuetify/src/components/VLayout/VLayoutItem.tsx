@@ -28,14 +28,15 @@ export const VLayoutItem = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { layoutItemStyles } = useLayoutItem(
-      props.name,
-      computed(() => parseInt(props.priority, 10)),
-      toRef(props, 'position'),
-      toRef(props, 'size'),
-      toRef(props, 'size'),
-      toRef(props, 'modelValue')
-    )
+    const { layoutItemStyles } = useLayoutItem({
+      id: props.name,
+      priority: computed(() => parseInt(props.priority, 10)),
+      position: toRef(props, 'position'),
+      elementSize: toRef(props, 'size'),
+      layoutSize: toRef(props, 'size'),
+      active: toRef(props, 'modelValue'),
+      absolute: toRef(props, 'absolute'),
+    })
 
     return () => (
       <div
