@@ -15,21 +15,33 @@
   &__prefix,
   &__suffix
     color: $text-field-affix-color
-    height: 100%
     display: flex
     align-items: center
     cursor: default
     opacity: 0
     transition: .15s opacity settings.$standard-easing
     white-space: nowrap
-    padding-top: calc(var(--v-field-padding-top, 0) + 1px)
-    padding-bottom: var(--v-field-padding-bottom, 0)
+    padding-top: var(--v-field-padding-top)
 
   &__prefix
     padding-inline-end: var(--v-field-padding-before)
 
   &__suffix
-    padding-inline-start: var(--v-field-padding-after)
+    padding-inline-end: var(--v-field-padding-end)
+
+  .v-field__input
+    @at-root #{selector.append('.v-text-field--prefixed', &)}
+      --v-field-padding-start: 6px
+    @at-root #{selector.append('.v-text-field--suffixed', &)}
+      --v-field-padding-end: 0
+
+  .v-input__details
+    padding: 0 16px
+
+
+  &--flush-details
+    .v-input__details
+      padding: 0
 
   .v-field
     cursor: text

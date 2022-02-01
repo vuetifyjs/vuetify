@@ -101,7 +101,7 @@ export const makeSliderProps = propsFactory({
   },
   showTicks: {
     type: [Boolean, String] as PropType<boolean | 'always'>,
-    default: true,
+    default: false,
     validator: (v: any) => typeof v === 'boolean' || v === 'always',
   },
   showTickLabels: {

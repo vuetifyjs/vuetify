@@ -48,6 +48,7 @@ export const VSlider = defineComponent({
       trackContainerRef,
       position,
       hasLabels,
+      readonly,
     } = useSlider({
       props,
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -93,8 +94,8 @@ export const VSlider = defineComponent({
             default: ({ id }) => (
               <div
                 class="v-slider__container"
-                onMousedown={ onSliderMousedown }
-                onTouchstartPassive={ onSliderTouchstart }
+                onMousedown={ !readonly.value ? onSliderMousedown : undefined }
+                onTouchstartPassive={ !readonly.value ? onSliderTouchstart : undefined }
               >
                 <input
                   id={ id.value }

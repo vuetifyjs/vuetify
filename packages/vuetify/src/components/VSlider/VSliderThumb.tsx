@@ -135,7 +135,7 @@ export const VSliderThumb = defineComponent({
           aria-valuenow={ props.modelValue }
           aria-readonly={ readonly.value }
           aria-orientation={ direction.value }
-          onKeydown={ onKeydown }
+          onKeydown={ !readonly.value ? onKeydown : undefined }
         >
           <div
             class={[

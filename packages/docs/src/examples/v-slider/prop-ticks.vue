@@ -1,66 +1,49 @@
 <template>
-  <v-card
-    flat
-    color="transparent"
-  >
-    <v-subheader>Show ticks when using slider</v-subheader>
+  <div>
+    <div class="text-caption">Show ticks when using slider</div>
 
-    <v-card-text>
-      <v-slider
-        v-model="value"
-        step="10"
-        ticks
-      ></v-slider>
-    </v-card-text>
+    <v-slider
+      step="10"
+      ticks
+    ></v-slider>
 
-    <v-subheader>Always show ticks</v-subheader>
+    <div class="text-caption">Always show ticks</div>
 
-    <v-card-text>
-      <v-slider
-        v-model="value"
-        step="10"
-        ticks="always"
-      ></v-slider>
-    </v-card-text>
+    <v-slider
+      step="10"
+      show-ticks="always"
+    ></v-slider>
 
-    <v-subheader>Tick size</v-subheader>
+    <div class="text-caption">Tick size</div>
 
-    <v-card-text>
-      <v-slider
-        v-model="value"
-        step="10"
-        ticks="always"
-        tick-size="4"
-      ></v-slider>
-    </v-card-text>
+    <v-slider
+      step="10"
+      show-ticks="always"
+      tick-size="4"
+    ></v-slider>
 
-    <v-subheader>Tick labels</v-subheader>
+    <div class="text-caption">Tick labels</div>
 
-    <v-card-text>
-      <v-slider
-        v-model="fruits"
-        :tick-labels="ticksLabels"
-        :max="3"
-        step="1"
-        ticks="always"
-        tick-size="4"
-      ></v-slider>
-    </v-card-text>
-  </v-card>
+    <v-slider
+      :ticks="tickLabels"
+      :max="3"
+      step="1"
+      show-ticks="always"
+      tick-size="4"
+    ></v-slider>
+  </div>
 </template>
 
 <script>
   export default {
     data () {
       return {
-        value: 0,
-        fruits: 0,
-        ticksLabels: [
-          'Figs',
-          'Lemon',
-          'Pear',
-          'Apple',
-        ],
+        tickLabels: {
+          0: 'Figs',
+          1: 'Lemon',
+          2: 'Pear',
+          3: 'Apple',
+        },
       }
     },
   }

@@ -140,6 +140,7 @@ export const VTextField = genericComponent<new <T>() => {
             {
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
+              'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
             },
           ]}
           { ...rootAttrs }
