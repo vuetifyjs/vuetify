@@ -133,7 +133,7 @@ export default mixins(
           if (isAllowed && !this.readonly && (e.code === 'Space' || e.code === 'Enter')) {
             this.$emit('update:should-autofocus', true)
           }
-        }
+        },
       }, createItemTypeNativeListeners(this, `:${mouseEventType}`, value))
     },
     genButton (
