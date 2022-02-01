@@ -4,9 +4,9 @@ meta:
   description: Vuetify supports Material Design Icons, Font awesome and other icon sets through prefixes and global options.
   keywords: vue icon component, iconfont, icon libraries, vuetify icons
 related:
-  - /components/icons/
-  - /components/buttons/
-  - /components/avatars/
+  - /components/icons
+  - /components/buttons
+  - /components/avatars
 ---
 
 # Icon Fonts
@@ -135,7 +135,7 @@ export default createVuetify({
 
 Use this tool to search for any Material Design Icons and copy them to your clipboard by clicking the item.
 
-<icon-list />
+<!-- <icon-list /> -->
 
 ### Material Design Icons - JS SVG
 
@@ -190,7 +190,16 @@ For projects without a build process, it is recommended to import the icons from
 <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
 ```
 
-Alternatively, it is possible to install locally using yarn or npm. Keep in mind that this is not an official google repository and may not receive updates
+Some Material Icons are missing by default. For example, `person` and `person_outline` are available, but `visibility_outline` isn't, while `visibility` is. To use the missing icons, replace the existing `<link>` with the following:
+
+```html
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+/>
+```
+
+Alternatively, it is possible to install locally using yarn or npm. Keep in mind that this is not an official google repository and may not contain all icons.
 
 ```bash
 $ yarn add material-design-icons-iconfont -D
@@ -222,15 +231,6 @@ export default createVuetify({
 </template>
 ```
 
-Some Material Icons are missing by default. For example, `person` and `person_outline` are available, but `visibility_outline` isn't, while `visibility` is. To use the missing icons, replace the existing `<link>` with the following:
-
-```html
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-/>
-```
-
 ### Font Awesome 5 Icons
 
 The easiest way to get started with **FontAwesome** is to use a CDN.
@@ -239,7 +239,7 @@ The easiest way to get started with **FontAwesome** is to use a CDN.
 <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 ```
 
-To install locally you can pull in the [Free](https://fontawesome.com/) version of **FontAwesome** using your preferred package manager:
+To install locally you can pull in the [free](https://fontawesome.com/) version of **FontAwesome** using your preferred package manager:
 
 ```bash
 $ yarn add @fortawesome/fontawesome-free -D
@@ -369,11 +369,9 @@ app.mount('#app')
 
 ## Creating a custom icon set
 
-An icon set consists of an object with one property `component` which should be a functional component that receives props of type `IconsProps`.
+An icon set consists of an object with one property `component` which should be a functional component that receives props of type `IconsProps`, and renders an icon.
 
-In order to use a custom icon set as the framework default, you **must** add the necessary *aliases* that correspond to values used by Vuetify components.
-
-The following snippet is a complete list of all supported icon types:
+In order to use a custom set as the default icon set, you must also add the necessary *aliases* that correspond to values used by Vuetify components.
 
 ```ts
 // src/iconsets/custom.ts

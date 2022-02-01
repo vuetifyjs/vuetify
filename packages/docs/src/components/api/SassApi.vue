@@ -22,10 +22,6 @@
 </template>
 
 <script>
-  // Utilities
-  import { get } from 'vuex-pathify'
-  import sassApi from '@/api/sass'
-
   export default {
     name: 'SassApi',
 
@@ -39,11 +35,11 @@
       types: {
         $vuetify: 'functional',
       },
-      sassApi,
+      // sassApi,
     }),
 
     computed: {
-      locale: get('route/params@locale'),
+      // locale: get('route/params@locale'),
       items () {
         const items = []
         for (const item of this.sassApi) {

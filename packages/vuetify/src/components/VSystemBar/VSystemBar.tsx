@@ -8,12 +8,12 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VSystemBar = defineComponent({
   name: 'VSystemBar',
 
   props: {
@@ -30,12 +30,12 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(props, 'v-system-bar')
+    const { themeClasses } = provideTheme(props)
+    const { borderClasses } = useBorder(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props, 'v-system-bar')
-    const { roundedClasses } = useRounded(props, 'v-system-bar')
+    const { positionClasses, positionStyles } = usePosition(props)
+    const { roundedClasses } = useRounded(props)
 
     return () => (
       <props.tag

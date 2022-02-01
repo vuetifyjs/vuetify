@@ -7,80 +7,50 @@
       color="light-blue"
       dark
     >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon variant="text"></v-app-bar-nav-icon>
 
       <v-toolbar-title>My files</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
+      <v-btn variant="text" icon="mdi-magnify"></v-btn>
 
-      <v-btn icon>
-        <v-icon>mdi-view-module</v-icon>
-      </v-btn>
+      <v-btn variant="text" icon="mdi-view-module"></v-btn>
     </v-toolbar>
 
-    <v-list
-      subheader
-      two-line
-    >
-      <v-subheader inset>Folders</v-subheader>
+    <v-list two-line>
+      <v-list-subheader inset>Folders</v-list-subheader>
 
       <v-list-item
         v-for="folder in folders"
         :key="folder.title"
+        prepend-icon="mdi-folder"
+        :title="folder.title"
+        :subtitle="folder.subtitle"
       >
-        <v-list-item-avatar>
-          <v-icon
-            class="grey lighten-1"
-            dark
-          >
-            mdi-folder
-          </v-icon>
-        </v-list-item-avatar>
-
-        <v-list-item-content>
-          <v-list-item-title v-text="folder.title"></v-list-item-title>
-
-          <v-list-item-subtitle v-text="folder.subtitle"></v-list-item-subtitle>
-        </v-list-item-content>
-
-        <v-list-item-action>
-          <v-btn icon>
-            <v-icon color="grey lighten-1">mdi-information</v-icon>
-          </v-btn>
-        </v-list-item-action>
+        <template v-slot:append>
+          <v-list-item-avatar right>
+            <v-btn variant="text" color="grey lighten-1" icon="mdi-information"></v-btn>
+          </v-list-item-avatar>
+        </template>
       </v-list-item>
 
       <v-divider inset></v-divider>
 
-      <v-subheader inset>Files</v-subheader>
+      <v-list-subheader inset>Files</v-list-subheader>
 
       <v-list-item
         v-for="file in files"
         :key="file.title"
+        :prepend-icon="file.icon"
+        :title="file.title"
+        :subtitle="file.subtitle"
       >
-        <v-list-item-avatar>
-          <v-icon
-            :class="file.color"
-            dark
-            v-text="file.icon"
-          ></v-icon>
-        </v-list-item-avatar>
-
-        <v-list-item-content>
-          <v-list-item-title v-text="file.title"></v-list-item-title>
-
-          <v-list-item-subtitle v-text="file.subtitle"></v-list-item-subtitle>
-        </v-list-item-content>
-
-        <v-list-item-action>
-          <v-btn icon>
-            <v-icon color="grey lighten-1">mdi-information</v-icon>
-          </v-btn>
-        </v-list-item-action>
+        <template v-slot:append>
+          <v-list-item-avatar right>
+            <v-btn variant="text" color="grey lighten-1" icon="mdi-information"></v-btn>
+          </v-list-item-avatar>
+        </template>
       </v-list-item>
     </v-list>
   </v-card>

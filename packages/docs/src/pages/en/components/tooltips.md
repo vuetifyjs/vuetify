@@ -1,10 +1,11 @@
 ---
+nav: Tooltips
 meta:
   title: Tooltip component
   description: The tooltip component displays textual information regarding the element it is attached to.
   keywords: tooltips, vuetify tooltip component, vue tooltip component
 related:
-  - /components/badges/
+  - /components/overlays/
   - /components/icons/
   - /components/menus/
 ---
@@ -23,27 +24,11 @@ Tooltips can wrap any element.
 
 ## API
 
-- [v-tooltip](/api/v-tooltip)
-
-<api-section page="components/tooltips" />
-
-## Caveats
-
-<alert type="info">
-
-  In order for `v-tooltip` to be positioned correctly a position prop ( `top` | `bottom` | `left` | `right` ) is required
-
-</alert>
+<api-inline />
 
 ## Examples
 
 ### Props
-
-#### Alignment
-
-A tooltip can be aligned to any of the four sides of the activator element.
-
-<example file="v-tooltip/prop-alignment" />
 
 #### Visibility
 

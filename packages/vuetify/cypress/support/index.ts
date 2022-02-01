@@ -1,5 +1,6 @@
-require('@percy/cypress')
-require('cypress-file-upload')
-require('@mdi/font/css/materialdesignicons.css')
-require('./mount')
-require('./selector')
+import '@percy/cypress'
+import 'cypress-file-upload'
+import 'cy-mobile-commands'
+import '@mdi/font/css/materialdesignicons.css'
+import './mount'
+import './selector'

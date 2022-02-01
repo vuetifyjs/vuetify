@@ -14,7 +14,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
@@ -23,7 +23,7 @@ import { Ripple } from '@/directives/ripple'
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VChip = defineComponent({
   name: 'VChip',
 
   directives: { Ripple },
@@ -57,6 +57,7 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    text: String,
     modelValue: {
       type: Boolean,
       default: true,
@@ -82,13 +83,13 @@ export default defineComponent({
   setup (props, { attrs, emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
 
-    const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(props, 'v-chip')
-    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-chip')
+    const { themeClasses } = provideTheme(props)
+    const { borderClasses } = useBorder(props)
+    const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props, 'v-chip')
-    const { sizeClasses } = useSize(props, 'v-chip')
-    const { densityClasses } = useDensity(props, 'v-chip')
+    const { roundedClasses } = useRounded(props)
+    const { sizeClasses } = useSize(props)
+    const { densityClasses } = useDensity(props)
     const link = useLink(props, attrs)
 
     function onCloseClick (e: Event) {
@@ -147,7 +148,7 @@ export default defineComponent({
             </div>
           ) }
 
-          { slots.default?.() }
+          { slots.default?.() ?? props.text }
 
           { hasAppend && (
             <div class="v-chip__append">
@@ -185,3 +186,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VChip = InstanceType<typeof VChip>

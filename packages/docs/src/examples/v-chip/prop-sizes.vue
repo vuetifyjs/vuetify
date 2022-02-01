@@ -2,14 +2,14 @@
   <div class="text-center">
     <v-chip
       class="ma-2"
-      x-small
+      size="x-small"
     >
       x-small chip
     </v-chip>
 
     <v-chip
       class="ma-2"
-      small
+      size="small"
     >
       small chip
     </v-chip>
@@ -22,14 +22,14 @@
 
     <v-chip
       class="ma-2"
-      large
+      size="large"
     >
       large chip
     </v-chip>
 
     <v-chip
       class="ma-2"
-      x-large
+      size="x-large"
     >
       x-large chip
     </v-chip>

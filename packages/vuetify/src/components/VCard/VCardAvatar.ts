@@ -1,3 +1,3 @@
 import { createSimpleFunctional } from '@/util'
 
-export default createSimpleFunctional('v-card-avatar')
+export const VCardAvatar = createSimpleFunctional('v-card-avatar')

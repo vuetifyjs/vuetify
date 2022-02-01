@@ -1,4 +1,7 @@
-@import './index'
+@forward './variables'
+@use 'sass:list'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-list-item
   align-items: center
@@ -9,13 +12,13 @@
   text-decoration: none
   transition: $list-item-transition
 
-  @include border($list-item-border...)
-  @include states('.v-list-item__overlay')
-  @include rounded($list-item-border-radius)
-  @include variant($list-item-variants...)
+  @include tools.border($list-item-border...)
+  @include tools.states('.v-list-item__overlay')
+  @include tools.rounded($list-item-border-radius)
+  @include tools.variant($list-item-variants...)
 
   &--rounded
-    @include rounded($list-item-rounded-border-radius)
+    @include tools.rounded($list-item-rounded-border-radius)
 
   &--disabled
     pointer-events: none
@@ -29,10 +32,8 @@
   $root: &
 
   align-self: center
-  height: $list-item-avatar-size
   transition: inherit
   transition-property: height, width
-  width: $list-item-avatar-size
 
   &--start
     margin-inline-end: $list-item-avatar-margin-end
@@ -41,11 +42,7 @@
     margin-inline-start: $list-item-avatar-margin-start
 
   @at-root
-    @include density('v-list', $list-density) using ($modifier)
-      #{$root}
-        height: $list-item-avatar-size + ($modifier * $list-item-avatar-size-multiplier)
-        width: $list-item-avatar-size + ($modifier * $list-item-avatar-size-multiplier)
-
+    @include tools.density('v-list', $list-density) using ($modifier)
       &.v-list--three-line #{$root}
         margin-top: $list-item-avatar-margin-y - $modifier
 
@@ -92,10 +89,10 @@
   .v-list--three-line &
     -webkit-line-clamp: 2
 
-  @include typography($list-item-subtitle-typography...)
+  @include tools.typography($list-item-subtitle-typography...)
 
   .v-list--nav &
-    @include typography($list-item-nav-subtitle-typography...)
+    @include tools.typography($list-item-nav-subtitle-typography...)
 
 .v-list-item-title
   hyphens: $list-item-title-hyphens
@@ -107,27 +104,27 @@
   word-break: $list-item-title-word-break
   word-wrap: $list-item-title-word-wrap
 
-  @include typography($list-item-title-typography...)
+  @include tools.typography($list-item-title-typography...)
 
   .v-list--nav &
-    @include typography($list-item-nav-title-typography...)
+    @include tools.typography($list-item-nav-title-typography...)
 
 .v-list-item
   $root: &
 
   @at-root
-    @include density('v-list', $list-density) using ($modifier)
+    @include tools.density('v-list', $list-density) using ($modifier)
       &.v-list--one-line #{$root}
         min-height: $list-item-min-height + $modifier
-        padding: (nth($list-item-padding, 1) + $modifier) nth($list-item-padding, 2)
+        padding: (list.nth($list-item-padding, 1) + $modifier) list.nth($list-item-padding, 2)
 
       &.v-list--two-line #{$root}
         min-height: $list-item-two-line-min-height + $modifier
-        padding: (nth($list-item-two-line-padding, 1) + $modifier) nth($list-item-two-line-padding, 2)
+        padding: (list.nth($list-item-two-line-padding, 1) + $modifier) list.nth($list-item-two-line-padding, 2)
 
       &.v-list--three-line #{$root}
         min-height: $list-item-three-line-min-height + $modifier
-        padding: (nth($list-item-three-line-padding, 1) + $modifier) nth($list-item-three-line-padding, 2)
+        padding: (list.nth($list-item-three-line-padding, 1) + $modifier) list.nth($list-item-three-line-padding, 2)
 
 .v-list-item__overlay
   background-color: currentColor
@@ -143,3 +140,26 @@
 
   .v-list-item--active.v-list-item--contained &
     --v-theme-overlay-multiplier: 0
+
+$base-padding: list.nth($list-item-padding, 2)
+.v-list
+  --indent-padding: 0px
+
+.v-list-group
+  --parent-padding: var(--indent-padding)
+  &--prepend
+    --parent-padding: calc(var(--indent-padding) + #{$list-item-avatar-size})
+
+.v-list-group__items
+  --indent-padding: calc(var(--parent-padding) + #{$list-indent-size})
+
+.v-list-group__items .v-list-item
+  padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
+
+.v-list-item--prepend,
+.v-list-group__items .v-list-item--prepend
+  padding-inline-start: calc(#{$base-padding} + var(--indent-padding) + #{$list-item-avatar-size} + #{$list-item-avatar-margin-start}) !important
+
+.v-list-group__header.v-list-item--active
+  .v-list-item__overlay
+    display: none

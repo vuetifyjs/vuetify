@@ -21,7 +21,7 @@ import { convertToUnit, defineComponent } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-export default defineComponent({
+export const VAppBar = defineComponent({
   name: 'VAppBar',
 
   props: {
@@ -64,7 +64,7 @@ export default defineComponent({
     ...makeDensityProps(),
     ...makeElevationProps(),
     ...makeRoundedProps(),
-    ...makeLayoutItemProps({ name: 'app-bar' }),
+    ...makeLayoutItemProps(),
     ...makeTagProps({ tag: 'header' }),
   },
 
@@ -73,10 +73,10 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
-    const { borderClasses } = useBorder(props, 'v-app-bar')
-    const { densityClasses } = useDensity(props, 'v-app-bar')
+    const { borderClasses } = useBorder(props)
+    const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props, 'v-app-bar')
+    const { roundedClasses } = useRounded(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const isExtended = !!slots.extension
     const contentHeight = computed(() => (
@@ -91,7 +91,7 @@ export default defineComponent({
     const isActive = useProxiedModel(props, 'modelValue', props.modelValue)
     const layoutStyles = useLayoutItem(
       props.name,
-      toRef(props, 'priority'),
+      computed(() => parseInt(props.priority, 10)),
       toRef(props, 'position'),
       height,
       height,
@@ -166,3 +166,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VAppBar = InstanceType<typeof VAppBar>

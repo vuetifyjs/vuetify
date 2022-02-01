@@ -1,1 +1,1 @@
-export { default as VSystemBar } from './VSystemBar'
+export { VSystemBar } from './VSystemBar'

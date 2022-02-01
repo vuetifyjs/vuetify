@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 // Components
-// import VSlideGroup from '../VSlideGroup'
+// import VSlideGroup, { calculateCenteredOffset, calculateUpdatedOffset } from '../VSlideGroup'
 
 // Services
 // import { Breakpoint } from '../../../services/breakpoint'
@@ -98,7 +98,6 @@ describe.skip('VSlideGroup.ts', () => {
   })
 
   it('should compute updatedOffset for active element', async () => {
-    const { calculateUpdatedOffset } = mountFunction().vm
     const testOffset = (offsetLeft: number, rtl: boolean, expectedOffset: number) => {
       const offset = calculateUpdatedOffset({
         offsetLeft,
@@ -123,7 +122,6 @@ describe.skip('VSlideGroup.ts', () => {
   })
 
   it('should compute centeredOffset for active element', async () => {
-    const { calculateCenteredOffset } = mountFunction().vm
     const testOffset = (offsetLeft: number, rtl: boolean, expectedOffset: number) => {
       const offset = calculateCenteredOffset({
         offsetLeft,

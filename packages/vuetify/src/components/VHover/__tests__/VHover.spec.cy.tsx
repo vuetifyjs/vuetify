@@ -1,7 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { CenteredGrid } from '@/../cypress/templates'
-import VHover from '../VHover'
+import { VHover } from '../VHover'
 
 describe('VHover', () => {
   it('should react on mouse events', () => {
@@ -9,7 +9,7 @@ describe('VHover', () => {
       <CenteredGrid width="200px" class="v-theme--light">
         <VHover>
           {{
-            default: ({ hover, props }: any) => <div {...props} class={['hover-element', hover && 'bg-primary']}>foobar</div>,
+            default: ({ isHovering, props }: any) => <div {...props} class={['hover-element', isHovering && 'bg-primary']}>foobar</div>,
           }}
         </VHover>
       </CenteredGrid>
@@ -26,7 +26,7 @@ describe('VHover', () => {
       <CenteredGrid width="200px" class="v-theme--light">
         <VHover disabled>
           {{
-            default: ({ hover, props }: any) => <div {...props} class={['hover-element', hover && 'bg-primary']}>foobar</div>,
+            default: ({ isHovering, props }: any) => <div {...props} class={['hover-element', isHovering && 'bg-primary']}>foobar</div>,
           }}
         </VHover>
       </CenteredGrid>
@@ -44,7 +44,7 @@ describe('VHover', () => {
       <CenteredGrid width="200px" class="v-theme--light">
         <VHover openDelay={100} closeDelay={100}>
           {{
-            default: ({ hover, props }: any) => <div {...props} class={['hover-element', hover && 'bg-primary']}>foobar</div>,
+            default: ({ isHovering, props }: any) => <div {...props} class={['hover-element', isHovering && 'bg-primary']}>foobar</div>,
           }}
         </VHover>
       </CenteredGrid>

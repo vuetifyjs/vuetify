@@ -1,5 +1,6 @@
-// Imports
-@import './index'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-divider
   display: block
@@ -8,7 +9,7 @@
   max-height: 0px
   transition: inherit
 
-  @include border($divider-border...)
+  @include tools.border($divider-border...)
 
   &--vertical
     align-self: stretch

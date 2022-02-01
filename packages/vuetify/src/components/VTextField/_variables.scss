@@ -1,6 +1,9 @@
-@import '../../styles/styles.sass';
+@use '../../styles/settings';
 
-$text-field-border-radius: $border-radius-root !default;
+// Defaults
+$text-field-affix-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+$text-field-disabled-affix-color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity)) !default;
+$text-field-border-radius: settings.$border-radius-root !default;
 $text-field-line-height: 20px !default;
 $text-field-padding: 8px 0 8px !default;
 $text-field-dense-padding: 4px 0 2px !default;

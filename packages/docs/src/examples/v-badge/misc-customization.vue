@@ -32,7 +32,7 @@
       bordered
     >
       <template v-slot:badge>
-        <v-avatar>
+        <v-avatar size="x-small">
           <v-img src="https://cdn.vuetifyjs.com/images/logos/v.png"></v-img>
         </v-avatar>
       </template>

@@ -6,9 +6,9 @@
     </v-toolbar-title>
     <v-autocomplete
       v-model="model"
+      v-model:search-input="search"
       :items="items"
       :loading="isLoading"
-      :search-input.sync="search"
       chips
       clearable
       hide-details

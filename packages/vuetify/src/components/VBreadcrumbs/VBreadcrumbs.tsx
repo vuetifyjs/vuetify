@@ -2,9 +2,9 @@
 import './VBreadcrumbs.sass'
 
 // Components
-import VBreadcrumbsItem from './VBreadcrumbsItem'
-import VBreadcrumbsDivider from './VBreadcrumbsDivider'
 import { VIcon } from '@/components/VIcon'
+import { VBreadcrumbsItem } from './VBreadcrumbsItem'
+import { VBreadcrumbsDivider } from './VBreadcrumbsDivider'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
@@ -25,7 +25,7 @@ export type BreadcrumbItem = string | (LinkProps & {
   text: string
 })
 
-export default defineComponent({
+export const VBreadcrumbs = defineComponent({
   name: 'VBreadcrumbs',
 
   props: {
@@ -47,8 +47,8 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
-    const { densityClasses } = useDensity(props, 'v-breadcrumbs')
-    const { roundedClasses } = useRounded(props, 'v-breadcrumbs')
+    const { densityClasses } = useDensity(props)
+    const { roundedClasses } = useRounded(props)
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
     const items = computed(() => {
       return props.items.map((item, index, array) => ({
@@ -102,3 +102,5 @@ export default defineComponent({
     )
   },
 })
+
+export type VBreadcrumbs = InstanceType<typeof VBreadcrumbs>

@@ -45,13 +45,19 @@
 
   .v-event-timed
     position: absolute
-    overflow: hidden
     white-space: nowrap
     text-overflow: ellipsis
     font-size: $calendar-event-font-size
     cursor: pointer
     border-radius: $calendar-event-border-radius
     pointer-events: all
+
+  .v-event-summary
+    display: inline-block
+    overflow: hidden
+    text-overflow: ellipsis
+    width: 100%
+    white-space: nowrap
 
   &.v-calendar-events
     .v-calendar-weekly__head-weekday

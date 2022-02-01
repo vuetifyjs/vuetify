@@ -1,12 +1,20 @@
 import type { VueWrapper } from '@vue/test-utils'
 import { mount as cyMount } from '@cypress/vue'
 import { createVuetify } from '../../src/entry-bundler'
+import { mergeDeep } from '../../src/util'
 
 /**
  * @example
  * cy.mount(<VBtn>My button</VBtn>)
  */
 Cypress.Commands.add('mount', (component, options, vuetifyOptions) => {
+  const root = document.getElementById("__cy_root");
+
+  // add the v-application class that allows Vuetify styles to work
+  if (!root.classList.contains("v-locale--is-rtl")) {
+    root.classList.add("v-locale--is-ltr");
+  }
+
   const vuetify = createVuetify(vuetifyOptions)
   const defaultOptions = {
     global: {
@@ -18,7 +26,7 @@ Cypress.Commands.add('mount', (component, options, vuetifyOptions) => {
     },
   }
 
-  return cyMount(component, { ...defaultOptions, ...options }).as('wrapper')
+  return cyMount(component, mergeDeep(defaultOptions, options)).as('wrapper')
 })
 
 /**
@@ -44,4 +52,8 @@ Cypress.Commands.add('setProps', (props: Record<string, unknown> = {}) => {
     await vueWrapper.setProps(props)
     return vueWrapper
   })
+})
+
+Cypress.Commands.add('vue', () => {
+  return cy.get('@wrapper')
 })

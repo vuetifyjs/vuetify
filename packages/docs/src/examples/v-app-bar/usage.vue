@@ -1,7 +1,6 @@
 <template>
   <v-app-bar
     v-bind="$attrs"
-    v-on="$listeners"
   >
     <v-app-bar-nav-icon></v-app-bar-nav-icon>
   </v-app-bar>
@@ -17,16 +16,23 @@
       show: true,
       defaults: {
         color: null,
+        elevation: 4,
         dense: false,
         flat: false,
+        outlined: false,
         prominent: false,
+        rounded: false,
+        shaped: false,
       },
       options: {
+        sliders: {
+          elevation: [0, 24],
+        },
         selects: {
           color: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
         },
       },
-      tabs: ['dense', 'flat', 'prominent'],
+      tabs: ['dense', 'flat', 'outlined', 'prominent', 'rounded', 'shaped'],
     }),
   }
 </script>

@@ -1,10 +1,9 @@
-// Defaults
-@import '../../styles/styles.sass';
+@use '../../styles/settings';
 
 $progress-linear-background: currentColor !default;
 $progress-linear-background-background: $progress-linear-background !default;
 $progress-linear-background-opacity: var(--v-border-opacity) !default;
-$progress-linear-border-radius: $border-radius-root !default;
+$progress-linear-border-radius: settings.$border-radius-root !default;
 $progress-linear-stream-opacity: 0.3 !default;
 $progress-linear-stripe-background-size: 40px 40px !default;
 $progress-linear-stream-border-width: 4px !default;
@@ -22,4 +21,4 @@ $progress-linear-indeteminate-animation-duration: 2.2s !default;
 $progress-linear-stream-animation: stream .25s infinite linear !default;
 $progress-linear-striped-animation: progress-linear-stripes 1s infinite linear !default;
 $progress-linear-striped-size: var(--v-progress-linear-height) !default;
-$progress-linear-transition: .2s $standard-easing !default;
+$progress-linear-transition: .2s settings.$standard-easing !default;

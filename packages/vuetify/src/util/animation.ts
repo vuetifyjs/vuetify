@@ -1,5 +1,7 @@
+import { Box } from '@/util/box'
+
 /** @see https://stackoverflow.com/a/57876601/2074736 */
-export function nullifyTransforms (el: HTMLElement): DOMRect {
+export function nullifyTransforms (el: HTMLElement): Box {
   const rect = el.getBoundingClientRect()
   const style = getComputedStyle(el)
   const tx = style.transform
@@ -19,7 +21,7 @@ export function nullifyTransforms (el: HTMLElement): DOMRect {
       dx = +ta[4]
       dy = +ta[5]
     } else {
-      return rect.toJSON()
+      return new Box(rect)
     }
 
     const to = style.transformOrigin
@@ -28,10 +30,8 @@ export function nullifyTransforms (el: HTMLElement): DOMRect {
     const w = sx ? rect.width / sx : el.offsetWidth
     const h = sy ? rect.height / sy : el.offsetHeight
 
-    return {
-      x, y, width: w, height: h, top: y, right: x + w, bottom: y + h, left: x,
-    } as DOMRect
+    return new Box({ x, y, width: w, height: h })
   } else {
-    return rect.toJSON()
+    return new Box(rect)
   }
 }

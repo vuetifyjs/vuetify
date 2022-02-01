@@ -7,9 +7,9 @@
       <v-menu
         ref="menu"
         v-model="menu2"
+        v-model:return-value="time"
         :close-on-content-click="false"
         :nudge-right="40"
-        :return-value.sync="time"
         transition="scale-transition"
         offset-y
         max-width="290px"
@@ -41,7 +41,7 @@
       <v-dialog
         ref="dialog"
         v-model="modal2"
-        :return-value.sync="time"
+        v-model:return-value="time"
         persistent
         width="290px"
       >

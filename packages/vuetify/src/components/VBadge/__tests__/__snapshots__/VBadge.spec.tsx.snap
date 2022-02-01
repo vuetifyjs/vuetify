@@ -332,7 +332,7 @@ exports[`VBadge.tsx should match snapshot without badge slot and { content: 'foo
             aria-live="polite"
             role="status"
       >
-        <i class="bar mdi v-icon notranslate v-icon--size-default"
+        <i class="bar mdi v-icon notranslate v-icon--size-default v-theme--light"
            aria-hidden="true"
         >
         </i>
@@ -352,7 +352,7 @@ exports[`VBadge.tsx should match snapshot without badge slot and { icon: 'foo' }
             aria-live="polite"
             role="status"
       >
-        <i class="foo mdi v-icon notranslate v-icon--size-default"
+        <i class="foo mdi v-icon notranslate v-icon--size-default v-theme--light"
            aria-hidden="true"
         >
         </i>

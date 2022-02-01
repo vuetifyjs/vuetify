@@ -1,10 +1,10 @@
 <template>
   <div>
     <v-data-table
+      v-model:sort-by="sortBy"
+      v-model:sort-desc="sortDesc"
       :headers="headers"
       :items="desserts"
-      :sort-by.sync="sortBy"
-      :sort-desc.sync="sortDesc"
       class="elevation-1"
     ></v-data-table>
     <div class="text-center pt-2">

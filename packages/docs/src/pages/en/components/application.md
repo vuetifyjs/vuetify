@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Application service
+  title: Application
   description: Vuetify comes equipped with a default markup that makes it easy to create layouts (boilerplate) for any Vue application.
   keywords: default layout, vuetify default markup, vuetify default layout
 related:
@@ -17,10 +17,7 @@ In Vuetify, the `v-app` component and the **app** prop on components like `v-nav
 
 ## API
 
-- [v-app](/api/v-app)
-- [v-main](/api/v-main)
-
-<api-section page="components/application" />
+<api-inline />
 
 <alert type="error">
 
@@ -36,7 +33,7 @@ In Vuetify, the `v-app` component and the **app** prop on components like `v-nav
 
 ## Default application markup
 
-This is an example of the default application markup for Vuetify. You can place your layout elements anywhere, as long as you apply the **app** property. The key component in all of this is `v-main`. This will be dynamically sized depending upon the structure of your designated **app** components. You can use combinations of any or all of the above components including `v-bottom-navigation`.
+This is an example of the default application markup for Vuetify. You can place your layout elements anywhere, as long as you apply the **app** property. The key component to making your page content work together with layout elements is `v-main`. The `v-main` component will be dynamically sized depending upon the structure of your designated **app** components. You can use combinations of any or all of the above components including `v-bottom-navigation`.
 
 When using [vue-router](https://router.vuejs.org/) it is recommended that you place your views inside `v-main`.
 

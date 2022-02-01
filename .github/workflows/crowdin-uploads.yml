@@ -1,4 +1,7 @@
 name: Crowdin Uploads
+concurrency:
+  group: crowdin-${{ github.ref }}
+  cancel-in-progress: true
 
 on:
   push:

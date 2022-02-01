@@ -1,10 +1,12 @@
-// Utilities
-import { computed, getCurrentInstance, inject, onBeforeUnmount, onMounted, provide, reactive, toRef } from 'vue'
+// Composables
 import { useProxiedModel } from './proxiedModel'
-import { consoleWarn, deepEqual, findChildren, getUid, propsFactory, wrapInArray } from '@/util'
+
+// Utilities
+import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef } from 'vue'
+import { consoleWarn, deepEqual, findChildren, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
-import type { ComponentInternalInstance, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
+import type { ComponentInternalInstance, ComputedRef, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
 
 interface GroupItem {
   id: number
@@ -13,14 +15,16 @@ interface GroupItem {
 }
 
 interface GroupProps {
-  modelValue?: unknown
+  disabled: boolean
+  modelValue: unknown
   multiple?: boolean
-  mandatory?: boolean | 'force'
-  max?: number
-  selectedClass?: string
+  mandatory?: boolean | 'force' | undefined
+  max?: number | undefined
+  selectedClass: string | undefined
+  'onUpdate:modelValue': ((val: unknown) => void) | undefined
 }
 
-interface GroupProvide {
+export interface GroupProvide {
   register: (item: GroupItem, cmp: ComponentInternalInstance) => void
   unregister: (id: number) => void
   select: (id: number, value: boolean) => void
@@ -29,34 +33,62 @@ interface GroupProvide {
   prev: () => void
   next: () => void
   selectedClass: Ref<string | undefined>
+  items: ComputedRef<{
+    id: number
+    value: unknown
+    disabled: boolean | undefined
+  }[]>
+  disabled: Ref<boolean | undefined>
+}
+
+export interface GroupItemProvide {
+  id: number
+  isSelected: Ref<boolean>
+  toggle: () => void
+  select: (value: boolean) => void
+  selectedClass: Ref<string | false | undefined>
+  value: Ref<unknown>
+  disabled: Ref<boolean | undefined>
+  group: GroupProvide
 }
 
 export const makeGroupProps = propsFactory({
   modelValue: {
-    type: [Number, Boolean, String, Array, Object],
+    type: null,
     default: undefined,
   },
   multiple: Boolean,
   mandatory: [Boolean, String] as PropType<boolean | 'force'>,
   max: Number,
   selectedClass: String,
+  disabled: Boolean,
 }, 'group')
 
 export const makeGroupItemProps = propsFactory({
-  value: {
-    type: [Number, Boolean, String, Object],
-    default: undefined,
-  },
+  value: null,
   disabled: Boolean,
   selectedClass: String,
 }, 'group-item')
 
+type GroupItemProps = ExtractPropTypes<ReturnType<typeof makeGroupItemProps>>
+
 // Composables
 export function useGroupItem (
-  props: { value?: unknown, disabled?: boolean, selectedClass?: string },
+  props: GroupItemProps,
   injectKey: InjectionKey<GroupProvide>,
-) {
-  const vm = getCurrentInstance()
+  required?: true,
+): GroupItemProvide
+export function useGroupItem (
+  props: GroupItemProps,
+  injectKey: InjectionKey<GroupProvide>,
+  required: false,
+): GroupItemProvide | null
+export function useGroupItem (
+  props: GroupItemProps,
+  injectKey: InjectionKey<GroupProvide>,
+  required = true,
+): GroupItemProvide | null {
+  const vm = getCurrentInstance('useGroupItem')
 
   if (!vm) {
     throw new Error(
@@ -67,12 +99,14 @@ export function useGroupItem (
   const group = inject(injectKey, null)
 
   if (!group) {
+    if (!required) return group
+
     throw new Error(`[Vuetify] Could not find useGroup injection with symbol ${injectKey.description}`)
   }
 
   const id = getUid()
   const value = toRef(props, 'value')
-  const disabled = toRef(props, 'disabled')
+  const disabled = computed(() => group.disabled.value || props.disabled)
 
   group.register({
     id,
@@ -91,12 +125,14 @@ export function useGroupItem (
   const selectedClass = computed(() => isSelected.value && (group.selectedClass.value ?? props.selectedClass))
 
   return {
+    id,
     isSelected,
     toggle: () => group.select(id, !isSelected.value),
     select: (value: boolean) => group.select(id, value),
     selectedClass,
     value,
     disabled,
+    group,
   }
 }
 
@@ -122,7 +158,7 @@ export function useGroup (
     }
   )
 
-  const groupVm = getCurrentInstance()
+  const groupVm = getCurrentInstance('useGroup')
 
   function register (item: GroupItem, vm: ComponentInternalInstance) {
     // Is there a better way to fix this typing?
@@ -141,7 +177,9 @@ export function useGroup (
   function unregister (id: number) {
     if (isUnmounted) return
 
-    selected.value = selected.value.filter(v => v !== id)
+    // TODO: re-evaluate this line's importance in the future
+    // should we only modify the model if mandatory is set.
+    // selected.value = selected.value.filter(v => v !== id)
 
     forceMandatoryValue()
 
@@ -231,10 +269,12 @@ export function useGroup (
     unregister,
     selected,
     select,
+    disabled: toRef(props, 'disabled'),
     prev: () => step(items.length - 1),
     next: () => step(1),
     isSelected: (id: number) => selected.value.includes(id),
     selectedClass: computed(() => props.selectedClass),
+    items: computed(() => items),
   }
 
   provide(injectKey, state)

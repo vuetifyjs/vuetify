@@ -10,29 +10,28 @@
 
     <v-card-text>
       <v-text-field
-        filled
+        variant="filled"
         label="Title"
         value="My new post"
       ></v-text-field>
 
       <v-textarea
-        filled
+        variant="filled"
         label="Text"
         value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse"
       ></v-textarea>
 
       <v-divider class="my-2"></v-divider>
 
-      <v-item-group multiple selected-class="purple--text">
+      <v-item-group multiple selected-class="bg-purple">
         <v-subheader>Tags</v-subheader>
         <v-item
           v-for="n in 8"
           :key="n"
-          v-slot="{ selected, selectedClass, toggle }"
+          v-slot="{ selectedClass, toggle }"
         >
           <v-chip
             :class="selectedClass"
-            :input-value="selected"
             @click="toggle"
           >
             Tag {{ n }}
@@ -47,7 +46,6 @@
       <v-spacer></v-spacer>
       <v-btn
         color="success"
-        depressed
       >
         Post
       </v-btn>

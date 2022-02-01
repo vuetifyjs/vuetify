@@ -57,7 +57,7 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
-type SelectItemKey = string | (string | number)[] | ((item: Dictionary<any>, fallback?: any) => any)
+type SelectItemKey = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: object,
@@ -92,7 +92,7 @@ export function getZIndex (el?: Element | null): number {
   return index
 }
 
-const tagsToReplace: Dictionary<string> = {
+const tagsToReplace: Record<string, string> = {
   '&': '&amp;',
   '<': '&lt;',
   '>': '&gt;',
@@ -190,12 +190,25 @@ type MaybePick<
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
-> (obj: T, paths: U[]): [MaybePick<T, U>, Omit<T, U>] {
+> (obj: T, paths: U[]): [yes: MaybePick<T, U>, no: Omit<T, U>]
+export function pick<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>]
+export function pick<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>] {
   const found = Object.create(null)
   const rest = Object.create(null)
 
   for (const key in obj) {
-    if (paths.includes(key as U)) {
+    if (
+      paths.some(path => path instanceof RegExp
+        ? path.test(key)
+        : path === key
+      )
+    ) {
       found[key] = obj[key]
     } else {
       rest[key] = obj[key]
@@ -203,6 +216,15 @@ export function pick<
   }
 
   return [found, rest]
+}
+
+/**
+ * Filter attributes that should be applied to
+ * the root element of a an input component. Remaining
+ * attributes should be passed to the <input> element inside.
+ */
+export function filterInputAttrs (attrs: Record<string, unknown>) {
+  return pick(attrs, ['class', 'style', 'id', /^data-/])
 }
 
 /**
@@ -337,6 +359,10 @@ export function throttle<T extends (...args: any[]) => any> (fn: T, limit: numbe
   }
 }
 
+type Writable<T> = {
+  -readonly [P in keyof T]: T[P]
+}
+
 /**
  * Filters slots to only those starting with `prefix`, removing the prefix
  */
@@ -444,7 +470,12 @@ export const randomHexColor = () => {
   return '#' + n.slice(0, 6)
 }
 
-export const toKebabCase = (str: string) => str.replace(/([A-Z])/g, match => `-${match.toLowerCase()}`)
+export function toKebabCase (str = '') {
+  return str
+    .replace(/[^a-z]/gi, '-')
+    .replace(/\B([A-Z])/g, '-$1')
+    .toLowerCase()
+}
 
 export type MaybeRef<T> = T | Ref<T>
 
@@ -477,3 +508,22 @@ export function findChildren (vnode?: VNodeChild): ComponentInternalInstance[] {
 
   return []
 }
+
+export class CircularBuffer<T = never> {
+  readonly #arr: Array<T> = []
+  #pointer = 0
+
+  constructor (public readonly size: number) {}
+
+  push (val: T) {
+    this.#arr[this.#pointer] = val
+    this.#pointer = (this.#pointer + 1) % this.size
+  }
+
+  values (): T[] {
+    return this.#arr.slice(this.#pointer).concat(this.#arr.slice(0, this.#pointer))
+  }
+}
+
+export type UnionToIntersection<U> =
+  (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never

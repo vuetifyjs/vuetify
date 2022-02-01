@@ -80,15 +80,15 @@ describe('group', () => {
     const GroupComponent = defineComponent({
       props: {
         ...makeGroupProps(),
-        disabled: Array,
+        disabledItems: Array,
       },
       setup (props) {
         return useGroup(props, Symbol.for('test'))
       },
       render () {
         return h('div', this.$slots.default?.() ?? [
-          h(GroupItemComponent, { value: 'one', disabled: !!this.disabled?.[0] }),
-          h(GroupItemComponent, { value: 'two', disabled: !!this.disabled?.[1] }),
+          h(GroupItemComponent, { value: 'one', disabled: !!this.disabledItems?.[0] }),
+          h(GroupItemComponent, { value: 'two', disabled: !!this.disabledItems?.[1] }),
         ])
       },
     })
@@ -110,7 +110,7 @@ describe('group', () => {
     it('should not emit new selection if clicking disabled item', async () => {
       const wrapper = mount(GroupComponent, {
         props: {
-          disabled: [true, false],
+          disabledItems: [true, false],
         },
       })
 
@@ -167,7 +167,7 @@ describe('group', () => {
         props: {
           mandatory: 'force',
           multiple: false,
-          disabled: [true, false],
+          disabledItems: [true, false],
         },
       })
 
@@ -260,13 +260,13 @@ describe('group', () => {
     const GroupComponent = defineComponent({
       props: {
         ...makeGroupProps(),
-        disabled: Array,
+        disabledItems: Array,
       },
       setup (props) {
         useGroup(props, Symbol.for('test'))
         return () => h('div', [
-          h(GroupItemComponent, { disabled: !!props.disabled?.[0] }),
-          h(GroupItemComponent, { disabled: !!props.disabled?.[1] }),
+          h(GroupItemComponent, { disabled: !!props.disabledItems?.[0] }),
+          h(GroupItemComponent, { disabled: !!props.disabledItems?.[1] }),
         ])
       },
     })
@@ -325,7 +325,7 @@ describe('group', () => {
         props: {
           mandatory: 'force',
           multiple: false,
-          disabled: [true, false],
+          disabledItems: [true, false],
         },
       })
 

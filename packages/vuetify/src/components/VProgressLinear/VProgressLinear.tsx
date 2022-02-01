@@ -4,7 +4,7 @@ import './VProgressLinear.sass'
 // Composables
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -14,7 +14,7 @@ import { useRtl } from '@/composables/rtl'
 import { convertToUnit, defineComponent } from '@/util'
 import { computed, Transition } from 'vue'
 
-export default defineComponent({
+export const VProgressLinear = defineComponent({
   name: 'VProgressLinear',
 
   props: {
@@ -60,17 +60,17 @@ export default defineComponent({
   setup (props, { slots }) {
     const progress = useProxiedModel(props, 'modelValue')
     const { isRtl } = useRtl()
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { textColorClasses, textColorStyles } = useTextColor(props, 'color')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => props.bgColor || props.color))
     const { backgroundColorClasses: barColorClasses, backgroundColorStyles: barColorStyles } = useBackgroundColor(props, 'color')
-    const { roundedClasses } = useRounded(props, 'v-progress-linear')
+    const { roundedClasses } = useRounded(props)
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
 
     const max = computed(() => parseInt(props.max, 10))
     const height = computed(() => parseInt(props.height, 10))
-    const normalizedBuffer = computed(() => Math.round(parseFloat(props.bufferValue) / max.value * 100))
-    const normalizedValue = computed(() => Math.round(parseFloat(progress.value) / max.value * 100))
+    const normalizedBuffer = computed(() => parseFloat(props.bufferValue) / max.value * 100)
+    const normalizedValue = computed(() => parseFloat(progress.value) / max.value * 100)
     const isReversed = computed(() => isRtl.value !== props.reverse)
     const transition = computed(() => props.indeterminate ? 'fade-transition' : 'slide-x-transition')
     const opacity = computed(() => {
@@ -126,8 +126,6 @@ export default defineComponent({
               opacity: opacity.value,
               top: `calc(50% - ${convertToUnit(height.value / 4)})`,
               width: convertToUnit(100 - normalizedBuffer.value, '%'),
-              // TODO: Fix typing
-              // @ts-expect-error
               '--v-progress-linear-stream-to': convertToUnit(height.value * (isReversed.value ? 1 : -1)),
             }}
           />

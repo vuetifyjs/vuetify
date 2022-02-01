@@ -2,14 +2,14 @@
 import './VApp.sass'
 
 // Composables
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { createLayout, makeLayoutProps } from '@/composables/layout'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 import { useRtl } from '@/composables/rtl'
 
-export default defineComponent({
+export const VApp = defineComponent({
   name: 'VApp',
 
   props: {
@@ -18,15 +18,15 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
-    const { layoutClasses } = createLayout(props)
+    const theme = provideTheme(props)
+    const { layoutClasses, getLayoutItem, items } = createLayout(props)
     const { rtlClasses } = useRtl()
 
-    return () => (
+    useRender(() => (
       <div
         class={[
           'v-application',
-          themeClasses.value,
+          theme.themeClasses.value,
           layoutClasses.value,
           rtlClasses.value,
         ]}
@@ -36,6 +36,14 @@ export default defineComponent({
           { slots.default?.() }
         </div>
       </div>
-    )
+    ))
+
+    return {
+      getLayoutItem,
+      items,
+      theme,
+    }
   },
 })
+
+export type VApp = InstanceType<typeof VApp>

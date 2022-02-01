@@ -1,5 +1,5 @@
 <template>
-  <v-card class="overflow-hidden">
+  <v-layout>
     <v-app-bar
       absolute
       color="#fcb69f"
@@ -33,12 +33,14 @@
         <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
     </v-app-bar>
-    <v-sheet
-      id="scrolling-techniques-2"
-      class="overflow-y-auto"
-      max-height="600"
-    >
-      <v-container style="height: 1000px;"></v-container>
-    </v-sheet>
-  </v-card>
+    <v-main>
+      <v-sheet
+        id="scrolling-techniques-2"
+        class="overflow-y-auto"
+        max-height="600"
+      >
+        <v-container style="height: 1000px;"></v-container>
+      </v-sheet>
+    </v-main>
+  </v-layout>
 </template>

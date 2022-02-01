@@ -1,4 +1,6 @@
-@import './index'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-app-bar
   align-items: flex-start
@@ -15,11 +17,11 @@
 
   // must be above border mixin for cascade
   &--is-active
-    @include elevation($app-bar-elevation)
+    @include tools.elevation($app-bar-elevation)
 
-  @include border($app-bar-border...)
-  @include rounded($app-bar-border-radius)
-  @include theme($app-bar-theme...)
+  @include tools.border($app-bar-border...)
+  @include tools.rounded($app-bar-border-radius)
+  @include tools.theme($app-bar-theme...)
 
   &--absolute
     position: absolute
@@ -33,20 +35,20 @@
     max-width: $app-bar-collapsed-max-width
     overflow: hidden
 
-    @include ltr()
+    @include tools.ltr()
       border-bottom-right-radius: $app-bar-collapsed-border-radius
 
-    @include rtl()
+    @include tools.rtl()
       border-bottom-left-radius: $app-bar-collapsed-border-radius
 
   &--flat
-    @include elevation($app-bar-flat-elevation)
+    @include tools.elevation($app-bar-flat-elevation)
 
   &--floating
     display: inline-flex
 
   &--rounded
-    @include rounded($app-bar-rounded-border-radius)
+    @include tools.rounded($app-bar-rounded-border-radius)
 
 .v-app-bar__content
   align-items: center

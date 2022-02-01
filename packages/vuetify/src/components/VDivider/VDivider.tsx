@@ -6,13 +6,13 @@ import { computed } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 
 // Composables
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Types
 type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'maxHeight' | 'maxWidth'
 type DividerStyles = Partial<Record<DividerKey, string>>
 
-export default defineComponent({
+export const VDivider = defineComponent({
   name: 'VDivider',
 
   props: {
@@ -24,7 +24,7 @@ export default defineComponent({
   },
 
   setup (props, { attrs }) {
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const dividerStyles = computed(() => {
       const styles: DividerStyles = {}
 

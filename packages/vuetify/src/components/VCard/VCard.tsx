@@ -2,16 +2,16 @@
 import './VCard.sass'
 
 // Components
-import VCardActions from './VCardActions'
-import VCardAvatar from './VCardAvatar'
-import VCardHeader from './VCardHeader'
-import VCardHeaderText from './VCardHeaderText'
-import VCardImg from './VCardImg'
-import VCardSubtitle from './VCardSubtitle'
-import VCardText from './VCardText'
-import VCardTitle from './VCardTitle'
 import { VAvatar } from '@/components/VAvatar'
 import { VImg } from '@/components/VImg'
+import { VCardActions } from './VCardActions'
+import { VCardAvatar } from './VCardAvatar'
+import { VCardHeader } from './VCardHeader'
+import { VCardHeaderText } from './VCardHeaderText'
+import { VCardImg } from './VCardImg'
+import { VCardSubtitle } from './VCardSubtitle'
+import { VCardText } from './VCardText'
+import { VCardTitle } from './VCardTitle'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -22,7 +22,7 @@ import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
@@ -31,7 +31,7 @@ import { Ripple } from '@/directives/ripple'
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VCard = defineComponent({
   name: 'VCard',
 
   directives: { Ripple },
@@ -64,14 +64,14 @@ export default defineComponent({
   },
 
   setup (props, { attrs, slots }) {
-    const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(props, 'v-card')
-    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-card')
-    const { densityClasses } = useDensity(props, 'v-card')
+    const { themeClasses } = provideTheme(props)
+    const { borderClasses } = useBorder(props)
+    const { colorClasses, colorStyles, variantClasses } = useVariant(props)
+    const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props, 'v-card')
-    const { roundedClasses } = useRounded(props, 'v-card')
+    const { positionClasses, positionStyles } = usePosition(props)
+    const { roundedClasses } = useRounded(props)
     const link = useLink(props, attrs)
 
     return () => {
@@ -197,3 +197,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VCard = InstanceType<typeof VCard>

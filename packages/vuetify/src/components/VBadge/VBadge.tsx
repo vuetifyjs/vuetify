@@ -17,7 +17,7 @@ import { convertToUnit, defineComponent, pick } from '@/util'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { useRtl } from '@/composables/rtl'
 
-export default defineComponent({
+export const VBadge = defineComponent({
   name: 'VBadge',
 
   inheritAttrs: false,
@@ -166,3 +166,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VBadge = InstanceType<typeof VBadge>

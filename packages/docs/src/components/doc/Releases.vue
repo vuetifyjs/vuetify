@@ -127,8 +127,6 @@
 </template>
 
 <script>
-  // Utilities
-  import { get } from 'vuex-pathify'
   import octokit from '@/plugins/octokit'
 
   export default {
@@ -145,12 +143,12 @@
     }),
 
     computed: {
-      ...get('app', ['modified']),
-      ...get('route', [
-        'params@category',
-        'params@page',
-      ]),
-      version: get('app/version'),
+      // ...get('app', ['modified']),
+      // ...get('route', [
+      //   'params@category',
+      //   'params@page',
+      // ]),
+      // version: get('app/version'),
       at () {
         const stat = this.modified[`/${this.category}/${this.page}/`] || {}
 

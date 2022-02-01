@@ -10,10 +10,15 @@ import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { defineComponent, getUid } from '@/util'
 import { computed } from 'vue'
+import { genericComponent, getUid } from '@/util'
 
-export default defineComponent({
+// Types
+import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
+
+export const VMenu = genericComponent<new () => {
+  $slots: OverlaySlots
+}>()({
   name: 'VMenu',
 
   inheritAttrs: false,
@@ -74,3 +79,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VMenu = InstanceType<typeof VMenu>

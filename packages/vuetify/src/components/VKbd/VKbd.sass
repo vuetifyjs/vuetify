@@ -1,5 +1,6 @@
-// Imports
-@import './index'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-kbd
   background: rgb(var(--v-kbd-background-color))
@@ -9,4 +10,4 @@
   font-weight: $kbd-font-weight
   padding: $kbd-padding
 
-  @include elevation($kbd-elevation)
+  @include tools.elevation($kbd-elevation)

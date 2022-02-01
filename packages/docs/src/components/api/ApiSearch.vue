@@ -5,7 +5,6 @@
     prepend-inner-icon="$mdiDatabaseSearch"
     solo
     v-bind="$attrs"
-    v-on="$listeners"
   >
     <template #selection="{ item, selected }">
       <v-chip

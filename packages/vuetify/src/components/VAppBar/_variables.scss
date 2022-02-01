@@ -1,7 +1,11 @@
+@use "sass:map";
+@use "../../styles/settings/variables";
+@use "../../styles/tools/functions";
+
 $app-bar-background: rgb(var(--v-theme-surface)) !default;
-$app-bar-border-color: $border-color-root !default;
-$app-bar-border-radius: map-get($rounded, '0') !default;
-$app-bar-border-style: $border-style-root !default;
+$app-bar-border-color: variables.$border-color-root !default;
+$app-bar-border-radius: map.get(variables.$rounded, '0') !default;
+$app-bar-border-style: variables.$border-style-root !default;
 $app-bar-border-thin-width: 0 0 thin !default;
 $app-bar-border-width: 0 !default;
 $app-bar-collapsed-border-radius: 24px !default;
@@ -18,12 +22,12 @@ $app-bar-image-width: inherit !default;
 $app-bar-padding-end: 4px !default;
 $app-bar-padding-start: 4px !default;
 $app-bar-prominent-height: 128px !default;
-$app-bar-rounded-border-radius: $border-radius-root !default;
+$app-bar-rounded-border-radius: variables.$border-radius-root !default;
 $app-bar-scrolled-title-padding-bottom: 9px !default;
-$app-bar-shaped-border-radius: map-get($rounded, 'xl') $app-bar-border-radius !default;
-$app-bar-title-font-size: map-deep-get($typography, 'h5', 'size') !default;
+$app-bar-shaped-border-radius: map.get(variables.$rounded, 'xl') $app-bar-border-radius !default;
+$app-bar-title-font-size: functions.map-deep-get(variables.$typography, 'h5', 'size') !default;
 $app-bar-title-padding: 6px 20px !default;
-$app-bar-transition: .2s $standard-easing !default;
+$app-bar-transition: .2s variables.$standard-easing !default;
 
 $app-bar-border: (
   $app-bar-border-color,

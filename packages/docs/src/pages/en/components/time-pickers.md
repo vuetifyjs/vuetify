@@ -23,9 +23,7 @@ Time pickers have the light theme enabled by default.
 
 ## API
 
-- [v-time-picker](/api/v-time-picker)
-
-<api-section page="components/time-pickers" />
+<api-inline />
 
 ## Examples
 

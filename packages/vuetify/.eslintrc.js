@@ -13,7 +13,6 @@ module.exports = {
     // 'plugin:import/typescript', // slow, only enable if needed
   ],
   rules: {
-    'no-var': 'error',
     'no-console': 'error',
     'no-debugger': 'error',
 
@@ -42,12 +41,12 @@ module.exports = {
         'jest/no-disabled-tests': 'off',
         'jest/no-large-snapshots': 'warn',
         'jest/prefer-spy-on': 'warn',
-        'jest/prefer-to-be-null': 'warn',
-        'jest/prefer-to-be-undefined': 'warn',
+        'jest/prefer-to-be': 'warn',
         'jest/prefer-to-contain': 'warn',
         'jest/prefer-to-have-length': 'warn',
         'jest/no-standalone-expect': 'off',
         'jest/no-conditional-expect': 'off',
+        'jest/no-identical-title': 'off',
       },
     },
     {

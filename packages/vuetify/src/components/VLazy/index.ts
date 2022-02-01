@@ -1,1 +1,1 @@
-export { default as VLazy } from './VLazy'
+export { VLazy } from './VLazy'

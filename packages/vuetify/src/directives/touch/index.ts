@@ -8,9 +8,9 @@ import type {
 import { keys } from '@/util'
 
 export interface TouchHandlers {
-  start?: (wrapperEvent: TouchEvent & TouchWrapper) => void
-  end?: (wrapperEvent: TouchEvent & TouchWrapper) => void
-  move?: (wrapperEvent: TouchEvent & TouchWrapper) => void
+  start?: (wrapperEvent: { originalEvent: TouchEvent } & TouchWrapper) => void
+  end?: (wrapperEvent: { originalEvent: TouchEvent } & TouchWrapper) => void
+  move?: (wrapperEvent: { originalEvent: TouchEvent } & TouchWrapper) => void
   left?: (wrapper: TouchWrapper) => void
   right?: (wrapper: TouchWrapper) => void
   up?: (wrapper: TouchWrapper) => void
@@ -39,7 +39,7 @@ export interface TouchStoredHandlers {
   touchmove: (e: TouchEvent) => void
 }
 
-interface TouchDirectiveBinding extends Omit<DirectiveBinding, 'value'> {
+export interface TouchDirectiveBinding extends Omit<DirectiveBinding, 'value'> {
   value?: TouchValue
 }
 
@@ -66,7 +66,7 @@ function touchstart (event: TouchEvent, wrapper: TouchWrapper) {
   wrapper.touchstartX = touch.clientX
   wrapper.touchstartY = touch.clientY
 
-  wrapper.start?.({ ...event, ...wrapper })
+  wrapper.start?.({ originalEvent: event, ...wrapper })
 }
 
 function touchend (event: TouchEvent, wrapper: TouchWrapper) {
@@ -74,7 +74,7 @@ function touchend (event: TouchEvent, wrapper: TouchWrapper) {
   wrapper.touchendX = touch.clientX
   wrapper.touchendY = touch.clientY
 
-  wrapper.end?.({ ...event, ...wrapper })
+  wrapper.end?.({ originalEvent: event, ...wrapper })
 
   handleGesture(wrapper)
 }
@@ -84,7 +84,7 @@ function touchmove (event: TouchEvent, wrapper: TouchWrapper) {
   wrapper.touchmoveX = touch.clientX
   wrapper.touchmoveY = touch.clientY
 
-  wrapper.move?.({ ...event, ...wrapper })
+  wrapper.move?.({ originalEvent: event, ...wrapper })
 }
 
 function createHandlers (value: TouchHandlers = {}): TouchStoredHandlers {

@@ -9,7 +9,7 @@ import { makeDensityProps } from '@/composables/density'
 import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
@@ -20,7 +20,7 @@ import { createRange, defineComponent, getUid } from '@/util'
 import type { Variant } from '@/composables/variant'
 import type { Prop } from 'vue'
 
-export default defineComponent({
+export const VRating = defineComponent({
   name: 'VRating',
 
   props: {
@@ -72,7 +72,7 @@ export default defineComponent({
 
   setup (props, { slots }) {
     const { t } = useLocale()
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const rating = useProxiedModel(props, 'modelValue')
 
     const range = computed(() => createRange(Number(props.length), 1))
@@ -206,6 +206,7 @@ export default defineComponent({
           class={[
             'v-rating',
             {
+              'v-rating--hover': props.hover,
               'v-rating--readonly': props.readonly,
             },
             themeClasses.value,
@@ -217,8 +218,8 @@ export default defineComponent({
             <div class="v-rating__wrapper">
               {
                 !hasLabels ? undefined
-                : slots['item-label'] ? slots['item-label']()
-                : props.itemLabels?.[i] ? <span>{ props.itemLabels?.[i] }</span>
+                : slots['item-label'] ? slots['item-label']({ value, index: i, label: props.itemLabels?.[i] })
+                : props.itemLabels?.[i] ? <span>{ props.itemLabels[i] }</span>
                 : <span>&nbsp;</span>
               }
               <div
@@ -245,3 +246,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VRating = InstanceType<typeof VRating>

@@ -2,7 +2,7 @@
 
 import { CenteredGrid } from '@/../cypress/templates'
 import { ref } from 'vue'
-import VFileInput from '../VFileInput'
+import { VFileInput } from '../VFileInput'
 
 const oneMBFile = new File([new ArrayBuffer(1021576)], '1MB file')
 const twoMBFile = new File([new ArrayBuffer(2021152)], '2MB file')
@@ -57,7 +57,7 @@ describe('VFileInput', () => {
         <VFileInput label="foo" v-model={model.value} />
       </CenteredGrid>
     ))
-      .get('.v-field__append-inner > .v-btn')
+      .get('.v-field__clearable > .v-icon')
       .click()
       .get('.v-input input')
       .should('have.value', '')
@@ -80,15 +80,15 @@ describe('VFileInput', () => {
       </CenteredGrid>
     ))
       .get('.v-file-input')
-      .should('have.class', 'v-field--disabled')
+      .should('have.class', 'v-input--disabled')
       .get('.v-file-input input')
       .should('have.attr', 'disabled')
   })
 
-  it('should support no prepend outer icon', () => {
+  it('should support no prepend icon', () => {
     cy.mount(() => (
       <CenteredGrid width="400px">
-        <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} prependOuterIcon="" />
+        <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} prependIcon="" />
       </CenteredGrid>
     ))
       .get('.v-file-input .v-input__prepend')
@@ -107,8 +107,8 @@ describe('VFileInput', () => {
 
   // https://github.com/vuetifyjs/vuetify/issues/8167
   it('should not emit change event when input is blurred', () => {
-    const change = cy.spy()
-    const update = cy.spy()
+    const change = cy.spy().as('change')
+    const update = cy.spy().as('update')
     cy.mount(() => (
       <VFileInput label="foo" />
     ), {

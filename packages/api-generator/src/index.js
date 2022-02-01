@@ -139,7 +139,7 @@ const getComponentApi = (componentName, locales) => {
   const componentMap = loadMap(kebabName, 'components', { props: [], slots: [], events: [], functions: [] })
 
   const component = app._context.components[componentName]
-  const props = Object.keys(component.props).reduce((arr, key) => {
+  const props = Object.keys(component.props || {}).reduce((arr, key) => {
     const prop = component.props[key]
 
     const type = getPropType(prop?.type)
@@ -260,16 +260,10 @@ const getCompleteApi = locales => {
   ].sort((a, b) => a.name.localeCompare(b.name))
 }
 
-const getHeaderLocale = locale => {
-  const { headers } = loadLocale('generic', locale)
-  return headers || {}
-}
-
 module.exports = {
   getApi,
   getCompleteApi,
   getComponentsApi,
   getComposablesApi,
   getDirectivesApi,
-  getHeaderLocale,
 }

@@ -43,7 +43,7 @@
                   width="30"
                   height="30"
                   class="mr-2"
-                  @click.native="toggle"
+                  @click="toggle"
                 ></v-card>
               </v-item>
             </v-row>

@@ -1,1 +1,1 @@
-export { default as VMain } from './VMain'
+export { VMain } from './VMain'

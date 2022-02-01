@@ -21,53 +21,11 @@ Control the size and style of text using the Typography helper classes. These va
 
 <example file="text-and-typography/typography" />
 
-These classes can be applied to all breakpoints from `xs` to `xl`. When using a base class, `.text-{value}`, it is inferred to be `.text-xs-${value}`.
+### Breakpoints
 
-- `.text-{value}` for `xs`
-- `.text-{breakpoint}-{value}` for `sm`, `md`, `lg` and `xl`
+All of the typography classes support the responsive breakpoints seen in other parts of the framework. The base class `.text-{value}` corresponds to the `xsAndUp` breakpoint, while the classes `.text-{breakpoint}-{value}` can be used for the rest of the breakpoints (`sm`, `md`, `lg` and `xl`).
 
-The _value_ property is one of:
-
-- `h1`
-- `h2`
-- `h3`
-- `h4`
-- `h5`
-- `h6`
-- `subtitle-1`
-- `subtitle-2`
-- `body-1`
-- `body-2`
-- `button`
-- `caption`
-- `overline`
-
-<br>
-
-<alert type="success">
-
-  **TIP**
-
-  In all versions prior to v2.3.0, these classes were one of the following:
-
-  <br>
-
-- `.display-4`
-- `.display-3`
-- `.display-2`
-- `.display-1`
-- `.headline`
-- `.title`
-- `.subtitle-1`
-- `.subtitle-2`
-- `.body-1`
-- `.body-2`
-- `.caption`
-- `.overline`
-
-</alert>
-
-The following example demonstrates how the various sizes would appear at different breakpoints:
+The following example shows a slightly contrived example of how one can use the different classes to effect:
 
 <example file="text-and-typography/typography-breakpoints" />
 
@@ -83,19 +41,13 @@ Material design, by default, supports **100, 300, 400, 500, 700, 900** font weig
 
 Alignment helper classes allow you to easily re-align text.
 
-<example file="text-and-typography/text-justify" />
+<example file="text-and-typography/text-alignment" />
 
-There are also available alignment classes that support responsive displays.
+The alignment classes also support responsive breakpoints.
 
-<example file="text-and-typography/text-align" />
+<example file="text-and-typography/text-alignment-responsive" />
 
 ### Decoration
-
-<alert type="info">
-
-  **New in v2.3.0+**
-
-</alert>
 
 Remove text decoration with the `.text-decoration-none` class or add an *overline, underline or line-through* by using `.text-decoration-overline`, `.text-decoration-underline`, and `.text-decoration-line-through`.
 
@@ -103,7 +55,7 @@ Remove text decoration with the `.text-decoration-none` class or add an *overlin
 
 ### Opacity
 
-Opacity helper classes allow you to easily adjust the emphasis of text. `text--primary` has the same opacity as default text. `text--secondary` is used for hints and helper text. De-emphasize text with `text--disabled`.
+Opacity helper classes allow you to easily adjust the emphasis of text. `text-high-emphasis` has the same opacity as default text. `text-medium-emphasis` is used for hints and helper text. De-emphasize text with `text-disabled`.
 
 <example file="text-and-typography/text-opacity" />
 
@@ -135,7 +87,9 @@ Longer content can be truncated with a text ellipsis using the `.text-truncate` 
 
 ## RTL Alignment
 
-When using [RTL](/features/bidirectionality), you may want to keep the alignment regardless of the **rtl** designation. This can be achieved using text alignment helper classes in the following format: `text-<breakpoint>-<direction>`, where breakpoint can be `sm`, `md`, `lg`, or `xl` and direction can be `left` or `right`. You may also want alignment to respond to rtl which can be done using directions `start` and `end`.
+When using [RTL](/features/bidirectionality), you may want to keep the alignment regardless of current text direction. This can be achieved by setting the direction to either `left` or `right`.
+
+If instead you want the alignment to respond to the current text direction, use `start` and `end`.
 
 <example file="text-and-typography/text-rtl" />
 

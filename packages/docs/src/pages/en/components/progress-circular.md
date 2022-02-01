@@ -17,15 +17,13 @@ The `v-progress-circular` component is used to convey data circularly to users. 
 
 ## Usage
 
-By default, progress circular uses the applications secondary color.
+In its simplest form, v-progress-circular displays a circular progress bar. Use the value prop to control the progress.
 
 <example file="v-progress-circular/usage" />
 
 ## API
 
-- [v-progress-circular](/api/v-progress-circular)
-
-<api-section page="components/progress-circular" />
+<api-inline />
 
 ## Examples
 

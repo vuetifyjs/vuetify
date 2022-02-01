@@ -2,13 +2,13 @@
 import './VThemeProvider.sass'
 
 // Composables
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VThemeProvider = defineComponent({
   name: 'VThemeProvider',
 
   props: {
@@ -19,7 +19,7 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
 
     return () => {
       if (!props.withBackground) return slots.default?.()

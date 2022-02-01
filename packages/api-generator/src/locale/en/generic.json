@@ -22,8 +22,5 @@
   "events": {
     "click": "Event that is emitted when the component is clicked",
     "input": "The updated bound model"
-  },
-  "headers": {
-    "links": "Component Pages"
   }
 }

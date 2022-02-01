@@ -19,6 +19,8 @@ import type { LocaleAdapter, LocaleOptions } from '@/composables/locale'
 import type { RtlOptions } from '@/composables/rtl'
 import type { DefaultsOptions } from '@/composables/defaults'
 
+export * from './composables'
+
 export interface VuetifyOptions {
   components?: Record<string, any>
   directives?: Record<string, any>
@@ -51,7 +53,7 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
 
     app.provide(DefaultsSymbol, createDefaults(options.defaults))
     app.provide(DisplaySymbol, createDisplay(options.display))
-    app.provide(ThemeSymbol, createTheme(options.theme))
+    app.provide(ThemeSymbol, createTheme(app, options.theme))
     app.provide(IconSymbol, mergeDeep({
       defaultSet: 'mdi',
       sets: {

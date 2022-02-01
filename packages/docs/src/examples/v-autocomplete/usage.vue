@@ -2,7 +2,6 @@
   <v-autocomplete
     :items="items"
     v-bind="$attrs"
-    v-on="$listeners"
   >
   </v-autocomplete>
 </template>

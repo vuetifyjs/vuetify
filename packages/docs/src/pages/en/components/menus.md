@@ -1,7 +1,7 @@
 ---
 meta:
   title: Menu component
-  description: The menu component exposes a drop down of potential selections or actions that the user can make.
+  description: The menu component exposes a dropdown of potential selections or actions that the user can make.
   keywords: menus, vuetify menu component, vue menu component
 related:
   - /components/dialogs/
@@ -23,9 +23,7 @@ Remember to put the element that activates the menu in the `activator` slot.
 
 ## API
 
-- [v-menu](/api/v-menu)
-
-<api-section page="components/menus" />
+<api-inline />
 
 ## Examples
 

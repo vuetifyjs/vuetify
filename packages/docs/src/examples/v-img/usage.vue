@@ -6,7 +6,6 @@
     <v-img
       class="grey lighten-2"
       v-bind="$attrs"
-      v-on="$listeners"
     ></v-img>
   </v-row>
 </template>

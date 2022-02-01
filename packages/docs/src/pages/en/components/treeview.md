@@ -24,9 +24,7 @@ A basic example
 
 ## API
 
-- [v-treeview](/api/v-treeview)
-
-<api-section page="components/treeview" />
+<api-inline />
 
 ## Examples
 

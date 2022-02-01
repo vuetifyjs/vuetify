@@ -1,21 +1,25 @@
+// Utilities
+import { computed, inject, provide, ref, watch, watchEffect } from 'vue'
 import {
   colorToInt,
   colorToRGB,
   createRange,
   darken,
+  getCurrentInstance,
   getLuma,
+  IN_BROWSER,
   intToHex,
   lighten,
   mergeDeep,
   propsFactory,
 } from '@/util'
-// Utilities
-import { computed, getCurrentInstance, inject, provide, ref, watch } from 'vue'
+import { APCAcontrast } from '@/util/color/APCA'
 
 // Types
-import type { InjectionKey, Ref } from 'vue'
-import { consoleError } from '@/util/console'
-import { APCAcontrast } from '@/util/color/APCA'
+import type { App, InjectionKey, Ref } from 'vue'
+import type { HeadClient } from '@vueuse/head'
+
+type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
 interface BaseColors {
   background: string
@@ -39,23 +43,13 @@ interface OnColors {
   'on-info': string
 }
 
-interface Colors extends BaseColors, OnColors {
+export interface Colors extends BaseColors, OnColors {
   [key: string]: string
 }
 
 interface InternalThemeDefinition {
   dark: boolean
   colors: Colors
-  variables: Record<string, string | number>
-}
-
-interface ThemeDefinitionColors extends BaseColors, Partial<OnColors> {
-  [key: string]: string | undefined
-}
-
-export interface ThemeDefinition {
-  dark: boolean
-  colors: ThemeDefinitionColors
   variables: Record<string, string | number>
 }
 
@@ -69,8 +63,10 @@ interface InternalThemeOptions {
   isDisabled: boolean
   defaultTheme: string
   variations: VariationsOptions
-  themes: Record<string, ThemeDefinition>
+  themes: Record<string, InternalThemeDefinition>
 }
+
+export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 
 export type ThemeOptions = false | {
   defaultTheme?: string
@@ -83,8 +79,9 @@ export interface ThemeInstance {
   themes: Ref<Record<string, InternalThemeDefinition>>
   current: Ref<string>
   themeClasses: Ref<string | undefined>
-  setTheme: (key: string, theme: ThemeDefinition) => void
+  setTheme: (key: string, theme: InternalThemeDefinition) => void
   getTheme: (key: string) => InternalThemeDefinition
+  styles: Ref<string>
 }
 
 export const ThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme')
@@ -102,6 +99,8 @@ const defaultThemeOptions: ThemeOptions = {
       colors: {
         background: '#FFFFFF',
         surface: '#FFFFFF',
+        'surface-variant': '#424242',
+        'on-surface-variant': '#EEEEEE',
         primary: '#6200EE',
         'primary-darken-1': '#3700B3',
         secondary: '#03DAC6',
@@ -117,13 +116,13 @@ const defaultThemeOptions: ThemeOptions = {
         'high-emphasis-opacity': 0.87,
         'medium-emphasis-opacity': 0.60,
         'disabled-opacity': 0.38,
-        'activated-opacity': 0.12,
         'idle-opacity': 0.04,
-        'hover-opacity': 0.12,
+        'hover-opacity': 0.04,
         'focus-opacity': 0.12,
         'selected-opacity': 0.08,
+        'activated-opacity': 0.12,
+        'pressed-opacity': 0.12,
         'dragged-opacity': 0.08,
-        'pressed-opacity': 0.16,
         'kbd-background-color': '#212529',
         'kbd-color': '#FFFFFF',
         'code-background-color': '#C2C2C2',
@@ -134,6 +133,8 @@ const defaultThemeOptions: ThemeOptions = {
       colors: {
         background: '#121212',
         surface: '#212121',
+        'surface-variant': '#BDBDBD',
+        'on-surface-variant': '#424242',
         primary: '#BB86FC',
         'primary-darken-1': '#3700B3',
         secondary: '#03DAC5',
@@ -149,13 +150,13 @@ const defaultThemeOptions: ThemeOptions = {
         'high-emphasis-opacity': 0.87,
         'medium-emphasis-opacity': 0.60,
         'disabled-opacity': 0.38,
-        'activated-opacity': 0.12,
         'idle-opacity': 0.10,
         'hover-opacity': 0.04,
         'focus-opacity': 0.12,
         'selected-opacity': 0.08,
-        'dragged-opacity': 0.08,
+        'activated-opacity': 0.12,
         'pressed-opacity': 0.16,
+        'dragged-opacity': 0.08,
         'kbd-background-color': '#212529',
         'kbd-color': '#FFFFFF',
         'code-background-color': '#B7B7B7',
@@ -167,14 +168,21 @@ const defaultThemeOptions: ThemeOptions = {
 const parseThemeOptions = (options: ThemeOptions = defaultThemeOptions): InternalThemeOptions => {
   if (!options) return { ...defaultThemeOptions, isDisabled: true } as InternalThemeOptions
 
+  const themes = Object.entries(options.themes ?? {}).reduce((obj, [key, theme]) => {
+    const defaultTheme = theme.dark ? defaultThemeOptions.themes?.dark : defaultThemeOptions.themes?.light
+    obj[key] = mergeDeep(defaultTheme, theme)
+    return obj
+  }, {} as Record<string, ThemeDefinition>)
+
   return mergeDeep(
     defaultThemeOptions,
-    options,
+    { ...options, themes },
   ) as InternalThemeOptions
 }
 
 // Composables
-export function createTheme (options?: ThemeOptions): ThemeInstance {
+export function createTheme (app: App, options?: ThemeOptions): ThemeInstance {
+  const head = app._context.provides.usehead as HeadClient | undefined
   const parsedOptions = parseThemeOptions(options)
   const styleEl = ref<HTMLStyleElement>()
   const current = ref(parsedOptions.defaultTheme)
@@ -182,13 +190,13 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
   const variations = ref(parsedOptions.variations)
 
   const computedThemes = computed(() => {
-    return Object.keys(themes.value).reduce((obj, key) => {
-      const theme: ThemeDefinition = {
-        ...themes.value[key],
+    return Object.entries(themes.value).reduce((obj, [name, original]) => {
+      const theme: InternalThemeDefinition = {
+        ...original,
         colors: {
-          ...themes.value[key].colors,
+          ...original.colors,
           ...(parsedOptions.variations.colors ?? []).reduce((obj, color) => {
-            return { ...obj, ...genColorVariations(color, themes.value[key].colors[color]!) }
+            return { ...obj, ...genColorVariations(color, original.colors[color]!) }
           }, {}),
         },
       }
@@ -215,7 +223,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
         theme.colors[onColor] = whiteContrast > Math.min(blackContrast, 50) ? '#fff' : '#000'
       }
 
-      obj[key] = theme as InternalThemeDefinition
+      obj[name] = theme
 
       return obj
     }, {} as Record<string, InternalThemeDefinition>)
@@ -232,6 +240,44 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
 
     return obj
   }
+
+  const styles = computed(() => {
+    const lines = []
+
+    for (const themeName of Object.keys(computedThemes.value)) {
+      const variables = computedThemes.value[themeName].variables
+
+      lines.push(...createCssClass(`.v-theme--${themeName}`, [
+        ...genCssVariables(themeName),
+        ...Object.keys(variables).map(key => {
+          const value = variables[key]
+          const color = typeof value === 'string' && value.startsWith('#') ? colorToRGB(value) : undefined
+          const rgb = color ? `${color.r}, ${color.g}, ${color.b}` : undefined
+
+          return `--v-${key}: ${rgb ?? value}`
+        }),
+      ]))
+    }
+
+    const colors = new Set(Object.values(computedThemes.value).flatMap(theme => Object.keys(theme.colors)))
+    for (const key of colors) {
+      if (/on-[a-z]/.test(key)) {
+        lines.push(...createCssClass(`.${key}`, [`color: rgb(var(--v-theme-${key})) !important`]))
+      } else {
+        lines.push(
+          ...createCssClass(`.bg-${key}`, [
+            `--v-theme-overlay-multiplier: var(--v-theme-${key}-overlay-multiplier)`,
+            `background: rgb(var(--v-theme-${key})) !important`,
+            `color: rgb(var(--v-theme-on-${key})) !important`,
+          ]),
+          ...createCssClass(`.text-${key}`, [`color: rgb(var(--v-theme-${key})) !important`]),
+          ...createCssClass(`.border-${key}`, [`--v-border-color: var(--v-theme-${key})`]),
+        )
+      }
+    }
+
+    return lines.map((str, i) => i === 0 ? str : `    ${str}`).join('')
+  })
 
   function genCssVariables (name: string) {
     const theme = computedThemes.value[name]
@@ -253,17 +299,6 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
     return variables
   }
 
-  function genStyleElement () {
-    if (typeof document === 'undefined' || styleEl.value) return
-
-    const el = document.createElement('style')
-    el.type = 'text/css'
-    el.id = 'vuetify-theme-stylesheet'
-
-    styleEl.value = el
-    document.head.appendChild(styleEl.value)
-  }
-
   function createCssClass (selector: string, content: string[]) {
     return [
       `${selector} {\n`,
@@ -272,71 +307,57 @@ export function createTheme (options?: ThemeOptions): ThemeInstance {
     ]
   }
 
-  function updateStyles () {
-    if (parsedOptions.isDisabled) return
+  if (head) {
+    head.addHeadObjs(computed(() => ({
+      style: [{
+        children: styles.value,
+        type: 'text/css',
+        id: 'vuetify-theme-stylesheet',
+      }],
+    })))
 
-    genStyleElement()
+    if (IN_BROWSER) {
+      watchEffect(() => head.updateDOM())
+    }
+  } else {
+    watch(themes, updateStyles, { deep: true, immediate: true })
 
-    const lines = []
+    function updateStyles () {
+      if (parsedOptions.isDisabled) return
 
-    for (const themeName of Object.keys(computedThemes.value)) {
-      const variables = computedThemes.value[themeName].variables
+      genStyleElement()
 
-      lines.push(...createCssClass(`.v-theme--${themeName}`, [
-        ...genCssVariables(themeName),
-        ...Object.keys(variables).map(key => {
-          const value = variables[key]
-          const color = typeof value === 'string' && value.startsWith('#') ? colorToRGB(value) : undefined
-          const rgb = color ? `${color.r}, ${color.g}, ${color.b}` : undefined
-
-          return `--v-${key}: ${rgb ?? value}`
-        }),
-      ]))
+      if (styleEl.value) styleEl.value.innerHTML = styles.value
     }
 
-    // Assumption is that all theme objects have the same keys, so it doesn't matter which one
-    // we use since the values are all css variables.
-    const firstTheme = Object.keys(computedThemes.value)[0]
-    for (const key of Object.keys(computedThemes.value[firstTheme].colors)) {
-      if (/on-[a-z]/.test(key)) {
-        lines.push(...createCssClass(`.${key}`, [`color: rgb(var(--v-theme-${key}))`]))
-      } else {
-        lines.push(
-          ...createCssClass(`.bg-${key}`, [
-            `--v-theme-overlay-multiplier: var(--v-theme-${key}-overlay-multiplier)`,
-            `background: rgb(var(--v-theme-${key}))`,
-            `color: rgb(var(--v-theme-on-${key}))`,
-          ]),
-          ...createCssClass(`.text-${key}`, [`color: rgb(var(--v-theme-${key}))`]),
-          ...createCssClass(`.border-${key}`, [`--v-border-color: var(--v-theme-${key})`]),
-        )
-      }
-    }
+    function genStyleElement () {
+      if (typeof document === 'undefined' || styleEl.value) return
 
-    if (styleEl.value) styleEl.value.innerHTML = lines.map((str, i) => i === 0 ? str : `    ${str}`).join('')
+      const el = document.createElement('style')
+      el.type = 'text/css'
+      el.id = 'vuetify-theme-stylesheet'
+
+      styleEl.value = el
+      document.head.appendChild(styleEl.value)
+    }
   }
-
-  watch(themes, updateStyles, { deep: true, immediate: true })
 
   return {
     isDisabled: parsedOptions.isDisabled,
     themes: computedThemes,
-    setTheme: (key: string, theme: ThemeDefinition) => themes.value[key] = theme,
+    setTheme: (key: string, theme: InternalThemeDefinition) => themes.value[key] = theme,
     getTheme: (key: string) => computedThemes.value[key],
     current,
     themeClasses: computed(() => parsedOptions.isDisabled ? undefined : `v-theme--${current.value}`),
+    styles,
   }
 }
 
-/**
- * Used to either set up and provide a new theme instance, or to pass
- * along the closest available already provided instance.
- */
-export function useTheme (props: { theme?: string }) {
-  const vm = getCurrentInstance()
+export function provideTheme (props: { theme?: string }) {
+  getCurrentInstance('provideTheme')
+
   const theme = inject(ThemeSymbol, null)
 
-  if (!vm) consoleError('provideTheme must be called from inside a setup function')
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
   const current = computed<string>(() => {
@@ -354,4 +375,14 @@ export function useTheme (props: { theme?: string }) {
   provide(ThemeSymbol, newTheme)
 
   return newTheme
+}
+
+export function useTheme () {
+  getCurrentInstance('useTheme')
+
+  const theme = inject(ThemeSymbol, null)
+
+  if (!theme) throw new Error('Could not find Vuetify theme injection')
+
+  return theme
 }

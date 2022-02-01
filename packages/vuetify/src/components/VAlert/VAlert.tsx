@@ -11,7 +11,7 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps, useVariant } from '@/composables/variant'
 import { useBorder } from '@/composables/border'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -24,11 +24,11 @@ import { defineComponent } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-export const allowedTypes = ['success', 'info', 'warning', 'error'] as const
+const allowedTypes = ['success', 'info', 'warning', 'error'] as const
 
-export type ContextualType = typeof allowedTypes[number]
+type ContextualType = typeof allowedTypes[number]
 
-export default defineComponent({
+export const VAlert = defineComponent({
   name: 'VAlert',
 
   props: {
@@ -100,13 +100,13 @@ export default defineComponent({
       variant: props.variant,
     }))
 
-    const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(borderProps.value, 'v-alert')
-    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps, 'v-alert')
-    const { densityClasses } = useDensity(props, 'v-alert')
+    const { themeClasses } = provideTheme(props)
+    const { borderClasses } = useBorder(borderProps.value)
+    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
+    const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props, 'v-alert')
-    const { roundedClasses } = useRounded(props, 'v-alert')
+    const { positionClasses, positionStyles } = usePosition(props)
+    const { roundedClasses } = useRounded(props)
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
       return props.borderColor ?? (props.tip ? variantProps.value.color : undefined)
     }))
@@ -204,3 +204,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VAlert = InstanceType<typeof VAlert>

@@ -5,7 +5,6 @@
         v-model="range"
         label="Range Slider"
         v-bind="$attrs"
-        v-on="$listeners"
       ></v-range-slider>
     </v-col>
   </v-row>

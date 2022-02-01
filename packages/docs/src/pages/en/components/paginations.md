@@ -1,4 +1,5 @@
 ---
+nav: Pagination
 meta:
   title: Pagination component
   description: The pagination component is used to separate long sets of data so that it is easier for a user to consume information.
@@ -23,19 +24,17 @@ Pagination by default displays the number of pages based on the set **length** p
 
 ## API
 
-- [v-pagination](/api/v-pagination)
-
-<api-section page="components/paginations" />
+<api-inline />
 
 ## Examples
 
 ### Props
 
-#### Circle
+#### Rounded
 
-The **circle** prop gives you an alternate style for pagination buttons.
+The **rounded** prop allows you to render pagination buttons with alternative styles.
 
-<example file="v-pagination/prop-circle" />
+<example file="v-pagination/prop-rounded" />
 
 #### Disabled
 

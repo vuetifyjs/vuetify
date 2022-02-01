@@ -1,1 +1,1 @@
-export { default as VFileInput } from './VFileInput'
+export { VFileInput } from './VFileInput'

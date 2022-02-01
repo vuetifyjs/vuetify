@@ -21,7 +21,7 @@
           </v-btn>
         </v-toolbar>
 
-        <v-list two-line>
+        <v-list lines="two">
           <template v-for="(item, index) in items">
             <v-subheader
               v-if="item.header"
@@ -42,17 +42,15 @@
             <v-list-item
               v-else
               :key="item.title"
+              :prepend-avatar="item.avatar"
               ripple
             >
-              <v-list-item-avatar>
-                <img :src="item.avatar">
-              </v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title v-html="item.title"></v-list-item-title>
-                <v-list-item-subtitle
-                  v-html="item.subtitle"
-                ></v-list-item-subtitle>
-              </v-list-item-content>
+              <template v-slot:title>
+                <div v-html="item.title"></div>
+              </template>
+              <template v-slot:subtitle>
+                <div v-html="item.subtitle"></div>
+              </template>
             </v-list-item>
           </template>
         </v-list>

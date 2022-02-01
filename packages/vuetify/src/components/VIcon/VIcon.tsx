@@ -6,6 +6,7 @@ import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { useIcon } from '@/composables/icons'
 import { useTextColor } from '@/composables/color'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -15,7 +16,7 @@ import { convertToUnit, defineComponent, flattenFragments } from '@/util'
 import type { IconValue } from '@/composables/icons'
 import type { ComputedRef, PropType } from 'vue'
 
-export default defineComponent({
+export const VIcon = defineComponent({
   name: 'VIcon',
 
   props: {
@@ -27,6 +28,7 @@ export default defineComponent({
     },
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'i' }),
+    ...makeThemeProps(),
   },
 
   setup (props, { slots }) {
@@ -42,8 +44,9 @@ export default defineComponent({
       })
     }
 
+    const { themeClasses } = provideTheme(props)
     const { iconData } = useIcon(slotIcon || props)
-    const { sizeClasses } = useSize(props, 'v-icon')
+    const { sizeClasses } = useSize(props)
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
 
     return () => {
@@ -56,6 +59,7 @@ export default defineComponent({
             'notranslate',
             sizeClasses.value,
             textColorClasses.value,
+            themeClasses.value,
             {
               'v-icon--left': props.left,
               'v-icon--right': props.right,

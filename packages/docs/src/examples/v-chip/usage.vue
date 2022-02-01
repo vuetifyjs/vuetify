@@ -5,7 +5,6 @@
   >
     <v-chip
       v-bind="$attrs"
-      v-on="$listeners"
     >
       Chip Component
     </v-chip>

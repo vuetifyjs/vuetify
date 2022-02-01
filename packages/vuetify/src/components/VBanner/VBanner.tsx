@@ -3,10 +3,10 @@ import './VBanner.sass'
 
 // Components
 import { VAvatar } from '@/components/VAvatar'
-import VBannerActions from './VBannerActions'
-import VBannerAvatar from './VBannerAvatar'
-import VBannerContent from './VBannerContent'
-import VBannerText from './VBannerText'
+import { VBannerActions } from './VBannerActions'
+import { VBannerAvatar } from './VBannerAvatar'
+import { VBannerContent } from './VBannerContent'
+import { VBannerText } from './VBannerText'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -16,7 +16,7 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useDisplay } from '@/composables/display'
 import { useTextColor } from '@/composables/color'
 
@@ -24,7 +24,7 @@ import { useTextColor } from '@/composables/color'
 import { toRef } from 'vue'
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VBanner = defineComponent({
   name: 'VBanner',
 
   props: {
@@ -49,14 +49,14 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(props, 'v-banner')
-    const { densityClasses } = useDensity(props, 'v-banner')
+    const { themeClasses } = provideTheme(props)
+    const { borderClasses } = useBorder(props)
+    const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { mobile } = useDisplay()
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props, 'v-banner')
-    const { roundedClasses } = useRounded(props, 'v-banner')
+    const { positionClasses, positionStyles } = usePosition(props)
+    const { roundedClasses } = useRounded(props)
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
 
     return () => {
@@ -123,3 +123,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VBanner = InstanceType<typeof VBanner>

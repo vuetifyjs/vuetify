@@ -25,6 +25,10 @@ import { h } from 'vue'
   }
 }
 
+const instance = {
+  $: { uid: 1 },
+}
+
 describe('v-mutate', () => {
   it('should bind event on mounted', () => {
     const callback = jest.fn()
@@ -36,6 +40,7 @@ describe('v-mutate', () => {
     Mutate.mounted?.(el, {
       value: callback,
       modifiers: {},
+      instance,
     } as any, vnode, null)
 
     expect(el._mutate).toBeTruthy()
@@ -43,9 +48,9 @@ describe('v-mutate', () => {
 
     document.body.removeChild(el)
 
-    Mutate.unmounted?.(el, {} as any, vnode, vnode)
+    Mutate.unmounted?.(el, { instance } as any, vnode, vnode)
 
-    expect(el._mutate).toBeUndefined()
+    expect(el._mutate![1]).toBeUndefined()
   })
 
   it('should invoke callback once and then unmount', async () => {
@@ -58,15 +63,16 @@ describe('v-mutate', () => {
     Mutate.mounted?.(el, {
       value: callback,
       modifiers: { once: true },
+      instance,
     } as any, vnode, null)
 
     expect(callback).not.toHaveBeenCalled()
     expect(el._mutate).toBeTruthy()
 
-    ;(el?._mutate?.observer as any)?.trigger([])
+    ;(el._mutate![1]!.observer as any)?.trigger([])
 
     expect(callback).toHaveBeenCalledTimes(1)
-    expect(el._mutate).toBeUndefined()
+    expect(el._mutate![1]).toBeUndefined()
   })
 
   it('should invoke callback on mount, on mutation and then unmount', async () => {
@@ -79,14 +85,15 @@ describe('v-mutate', () => {
     Mutate.mounted?.(el, {
       value: callback,
       modifiers: { immediate: true, once: true },
+      instance,
     } as any, vnode, null)
 
     expect(callback).toHaveBeenCalled()
     expect(el._mutate).toBeTruthy()
 
-    ;(el?._mutate?.observer as any)?.trigger([])
+    ;(el._mutate![1]!.observer as any)?.trigger([])
 
     expect(callback).toHaveBeenCalledTimes(2)
-    expect(el._mutate).toBeUndefined()
+    expect(el._mutate![1]).toBeUndefined()
   })
 })

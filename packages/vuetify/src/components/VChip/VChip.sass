@@ -1,10 +1,13 @@
-// Imports
-@import ./index
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
+@use './mixins' as *
 
 .v-chip
   align-items: center
   cursor: default
   display: inline-flex
+  font-weight: $chip-font-weight
   position: relative
   text-decoration: none
 
@@ -12,10 +15,10 @@
     @include chip-sizes()
     @include chip-density('height', $chip-density)
 
-  @include border($chip-border...)
-  @include elevation($chip-elevation)
-  @include rounded($chip-border-radius)
-  @include variant($chip-variants...)
+  @include tools.border($chip-border...)
+  @include tools.elevation($chip-elevation)
+  @include tools.rounded($chip-border-radius)
+  @include tools.variant($chip-variants...)
 
   &--border
     border-width: $chip-border-thin-width
@@ -24,19 +27,13 @@
     cursor: pointer
 
   &--label
-    @include rounded($chip-label-border-radius)
+    @include tools.rounded($chip-label-border-radius)
 
 // Elements
+.v-chip__prepend,
 .v-chip__append
-  margin-inline-start: $chip-append-margin-inline-start
-  margin-inline-end: $chip-append-margin-inline-end
-
-  + .v-chip__close
-    margin-inline-start: 0
-
-.v-chip__prepend
-  margin-inline-start: $chip-prepend-margin-inline-start
-  margin-inline-end: $chip-prepend-margin-inline-end
+  align-items: center
+  display: inline-flex
 
 .v-chip__close
   align-self: center
@@ -47,8 +44,6 @@
   max-height: $chip-close-size
   max-width: $chip-close-size
   user-select: none
-  margin-inline-start: $chip-close-margin-inline-start
-  margin-inline-end: $chip-close-margin-inline-end
 
   .v-icon
     font-size: inherit

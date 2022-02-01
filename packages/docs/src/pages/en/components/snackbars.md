@@ -23,9 +23,7 @@ a `v-snackbar` in its simplest form displays a temporary and closable notificati
 
 ## API
 
-- [v-snackbar](/api/v-snackbar)
-
-<api-section page="components/snackbars" />
+<api-inline />
 
 ## Examples
 

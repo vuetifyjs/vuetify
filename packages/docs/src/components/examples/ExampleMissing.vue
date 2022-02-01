@@ -1,4 +1,4 @@
-<template functional>
+<template>
   <app-md
     class="v-example-missing text-center"
     v-text="parent.$t('missing', data.attrs)"

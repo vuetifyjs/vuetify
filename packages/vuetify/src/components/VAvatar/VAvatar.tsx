@@ -16,7 +16,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { toRef } from 'vue'
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VAvatar = defineComponent({
   name: 'VAvatar',
 
   props: {
@@ -33,9 +33,9 @@ export default defineComponent({
 
   setup (props, { slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const { densityClasses } = useDensity(props, 'v-avatar')
-    const { roundedClasses } = useRounded(props, 'v-avatar')
-    const { sizeClasses, sizeStyles } = useSize(props, 'v-avatar')
+    const { densityClasses } = useDensity(props)
+    const { roundedClasses } = useRounded(props)
+    const { sizeClasses, sizeStyles } = useSize(props)
 
     return () => (
       <props.tag
@@ -64,3 +64,5 @@ export default defineComponent({
     )
   },
 })
+
+export type VAvatar = InstanceType<typeof VAvatar>

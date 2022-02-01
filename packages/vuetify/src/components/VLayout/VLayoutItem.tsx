@@ -5,13 +5,13 @@ import './VLayoutItem.sass'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 
 // Utilities
-import { toRef } from 'vue'
+import { computed, toRef } from 'vue'
 import { defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
-export default defineComponent({
+export const VLayoutItem = defineComponent({
   name: 'VLayoutItem',
 
   props: {
@@ -30,7 +30,7 @@ export default defineComponent({
   setup (props, { slots }) {
     const styles = useLayoutItem(
       props.name,
-      toRef(props, 'priority'),
+      computed(() => parseInt(props.priority, 10)),
       toRef(props, 'position'),
       toRef(props, 'size'),
       toRef(props, 'size'),

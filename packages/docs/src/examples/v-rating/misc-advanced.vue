@@ -60,10 +60,8 @@
         v-model="dialog"
         width="400"
       >
-        <template v-slot:activator="{ on }">
-          <v-icon v-on="on">
-            mdi-share-variant
-          </v-icon>
+        <template v-slot:activator="{ props }">
+          <v-icon v-bind="props" icon="mdi-share-variant"></v-icon>
         </template>
 
         <v-card>
@@ -81,32 +79,22 @@
           </v-card-title>
 
           <v-list>
-            <v-list-item>
-              <v-list-item-action>
-                <v-icon color="indigo">
-                  mdi-facebook
-                </v-icon>
-              </v-list-item-action>
-
-              <v-card-title>Facebook</v-card-title>
+            <v-list-item title="Facebook">
+              <template v-slot:prepend>
+                <v-icon color="indigo" icon="mdi-facebook"></v-icon>
+              </template>
             </v-list-item>
 
-            <v-list-item>
-              <v-list-item-action>
-                <v-icon color="cyan">
-                  mdi-twitter
-                </v-icon>
-              </v-list-item-action>
-
-              <v-card-title>Twitter</v-card-title>
+            <v-list-item title="Twitter">
+              <template v-slot:prepend>
+                <v-icon color="cyan" icon="mdi-twitter"></v-icon>
+              </template>
             </v-list-item>
 
-            <v-list-item>
-              <v-list-item-action>
-                <v-icon>mdi-email</v-icon>
-              </v-list-item-action>
-
-              <v-card-title>Email</v-card-title>
+            <v-list-item title="Email">
+              <template v-slot:prepend>
+                <v-icon icon="mdi-email"></v-icon>
+              </template>
             </v-list-item>
           </v-list>
 
@@ -138,7 +126,7 @@
           <v-icon
             large
             :color="props.isFilled ? 'purple-darken-4' : ''"
-            v-text="`mdi-numeric-${props.index}-box`"
+            :icon="`mdi-numeric-${props.index}-box`"
           ></v-icon>
         </template>
       </v-rating>

@@ -1,9 +1,9 @@
 <template>
   <v-container fluid>
     <v-data-iterator
+      v-model:items-per-page="itemsPerPage"
+      v-model:page="page"
       :items="items"
-      :items-per-page.sync="itemsPerPage"
-      :page.sync="page"
       :search="search"
       :sort-by="sortBy.toLowerCase()"
       :sort-desc="sortDesc"

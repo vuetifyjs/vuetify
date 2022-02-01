@@ -1,3 +1,1 @@
-import VDialog from './VDialog'
-
-export { VDialog }
+export { VDialog } from './VDialog'

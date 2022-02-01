@@ -4,7 +4,7 @@ import './VProgressCircular.sass'
 // Composables
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useTextColor } from '@/composables/color'
 
@@ -15,7 +15,7 @@ import { convertToUnit, defineComponent } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-export default defineComponent({
+export const VProgressCircular = defineComponent({
   name: 'VProgressCircular',
 
   props: {
@@ -44,8 +44,8 @@ export default defineComponent({
     const MAGIC_RADIUS_CONSTANT = 20
     const CIRCUMFERENCE = 2 * Math.PI * MAGIC_RADIUS_CONSTANT
 
-    const { themeClasses } = useTheme(props)
-    const { sizeClasses, sizeStyles } = useSize(props, 'v-progress-circular')
+    const { themeClasses } = provideTheme(props)
+    const { sizeClasses, sizeStyles } = useSize(props)
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
     const { textColorClasses: underlayColorClasses, textColorStyles: underlayColorStyles } = useTextColor(toRef(props, 'bgColor'))
     const { intersectionRef, isIntersecting } = useIntersectionObserver()

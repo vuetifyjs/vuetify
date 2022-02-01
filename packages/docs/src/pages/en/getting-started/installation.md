@@ -1,4 +1,5 @@
 ---
+nav: Installation
 meta:
   title: Get started with Vuetify 3 Alpha
   description: Details for v3 alpha release - faq, changes, and upgrading.
@@ -6,8 +7,7 @@ meta:
 related:
   - /getting-started/contributing/
   - /introduction/roadmap/
-  - /getting-started/v3-alpha-release-notes/
-nav: Installation
+  - /getting-started/release-notes/
 ---
 
 # Vuetify 3 Alpha
@@ -34,12 +34,12 @@ Once installed, generate a project with the following command using the **vue-cl
 vue create my-app
 ```
 
-When prompted, choose `Vue 3 Preview`:
+When prompted, choose **Vue 3** (possibly **Vue 3 Preview** depending on the exact version of vue-cli):
 
 ```bash
-? Please pick a preset:
+? Please pick a preset: (Use arrow keys)
     Default ([Vue 2] babel, eslint)
-  > Default (Vue 3 Preview) ([Vue 3] babel, eslint)
+  ❯ Default (Vue 3) ([Vue 3] babel, eslint)
     Manually select features
 ```
 
@@ -52,20 +52,20 @@ cd my-app
 vue add vuetify
 ```
 
-Once prompted, choose `v3 (alpha)`:
+Once prompted, choose `Vuetify 3 Preview`:
 
 ```bash
-? Choose a preset: (Use arrow keys)
-  Default (recommended)
-  Preview (Vuetify 3 + Vite)
-  Prototype (rapid development)
-> V3 (alpha)
+? Choose a preset:
   Configure (advanced)
+  Default (recommended)
+  Vite Preview (Vuetify 3 + Vite)
+  Prototype (rapid development)
+❯ Vuetify 3 Preview (Vuetify 3)
 ```
 
 ### Vite
 
-Installing Vuetify 3 using vite can be done using vue-cli[#vue-cli]. To start, use npm/yarn to set up your vite project outlined in the [Vite documentation](https://vitejs.dev/guide/#scaffolding-your-first-vite-project):
+Installing Vuetify 3 using vite can be done using [vue-cli](#vue-cli). To start, use npm/yarn to set up your vite project outlined in the [Vite documentation](https://vitejs.dev/guide/#scaffolding-your-first-vite-project):
 
 ```bash
 # npm 6.x
@@ -85,22 +85,16 @@ cd my-app
 vue add vuetify
 ```
 
-Once prompted, choose `Preview (Vuetify 3 + Vite)`:
+Once prompted, choose **Preview (Vuetify 3 + Vite)**:
 
 ```bash
-? Choose a preset: (Use arrow keys)
-  Default (recommended)
-> Preview (Vuetify 3 + Vite)
-  Prototype (rapid development)
-  V3 (alpha)
+? Choose a preset:
   Configure (advanced)
+  Default (recommended)
+❯ Vite Preview (Vuetify 3 + Vite)
+  Prototype (rapid development)
+  Vuetify 3 Preview (Vuetify 3)
 ```
-
-<alert type="warning">
-
-  During the vuetify cli installation there may be a warning regarding `conflicting versions for project dependency "vite"`. The cli will install the latest version of vite. Currently there is an issue with later versions of Vite. You will need to edit your `package.json` and set the Vite version to `~2.0.5` and rerun `yarn` / `npm i`.
-
-</alert>
 
 ## Usage
 
