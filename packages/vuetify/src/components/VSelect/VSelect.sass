@@ -8,9 +8,6 @@
 
 .v-select
   .v-field
-    height: auto
-    min-height: var(--v-input-control-height)
-
     .v-text-field__prefix,
     .v-text-field__suffix,
     .v-field__input
@@ -20,12 +17,9 @@
     cursor: pointer
 
   .v-field__input
-    $root: &
-
-    @at-root
-      @include tools.density('v-input', $input-density) using ($modifier)
-        @at-root #{selector.append(&, $root)}
-          line-height: $select-line-height + math.div($modifier * .125, settings.$spacer) * 1.5
+  &.v-input--dirty
+    input
+      opacity: 0
 
   &__content
     overflow: hidden
@@ -44,21 +38,6 @@
 
   &__selections
     color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
-    display: flex
-    flex-wrap: wrap
-    max-width: 100%
-    min-height: inherit
-    min-width: 0
-    overflow: hidden
-    padding-bottom: var(--v-field-padding-bottom)
-    padding-inline-end: var(--v-field-padding-after)
-    padding-top: var(--v-field-padding-top)
-
-    .v-text-field--prefixed &
-      --v-field-padding-before: 6px
-
-  input
-    opacity: 0 !important // TODO: remove this
 
   &--active-menu
     .v-select__menu-icon

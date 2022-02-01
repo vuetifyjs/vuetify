@@ -62,7 +62,7 @@ export const VSelect = genericComponent<new <T>() => {
     'update:modelValue': (val: any) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
     const activator = ref()
@@ -105,6 +105,9 @@ export const VSelect = genericComponent<new <T>() => {
       }
 
       return array
+    })
+    const selections = computed(() => {
+      return items.value.filter(item => active.value.includes(item.value))
     })
 
     function onClear (e: MouseEvent) {
@@ -151,6 +154,7 @@ export const VSelect = genericComponent<new <T>() => {
           onBlur={ () => menu.value = false }
           modelValue={ model.value.join(', ') }
           onKeydown={ onKeydown }
+          { ...attrs }
         >
           {{
             ...slots,
@@ -188,27 +192,29 @@ export const VSelect = genericComponent<new <T>() => {
                   </VMenu>
                 ) }
 
-                <div class="v-select__selections v-field__input">
-                  { active.value.map((selection, index) => (
-                    <div class="v-select__selection">
-                      { props.chips
-                        ? (
-                          <VChip
-                            text={ selection as any }
-                            size="small"
-                          />
-                        ) : (
-                          <span class="v-select__selection-text">
-                            { selection as string }
-                            { index < model.value.length - 1 && (
-                              <span class="v-select__selection-comma">,</span>
-                            ) }
-                          </span>
-                        )
-                      }
-                    </div>
-                  )) }
-                </div>
+                { selections.value.length > 0 && (
+                  <div class="v-select__selections v-field__input">
+                    { selections.value.map((selection, index) => (
+                      <div class="v-select__selection">
+                        { props.chips
+                          ? (
+                            <VChip
+                              text={ selection.title }
+                              size="small"
+                            />
+                          ) : (
+                            <span class="v-select__selection-text">
+                              { selection.title }
+                              { index < model.value.length - 1 && (
+                                <span class="v-select__selection-comma">,</span>
+                              ) }
+                            </span>
+                          )
+                        }
+                      </div>
+                    )) }
+                  </div>
+                ) }
               </>
             ),
           }}
