@@ -69,7 +69,7 @@ export const VBadge = defineComponent({
     const { roundedClasses } = useRounded(props, 'v-badge')
     const { t } = useLocale()
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'textColor'))
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = useTheme()
 
     const position = computed(() => {
       return props.floating
