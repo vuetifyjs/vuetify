@@ -64,7 +64,7 @@ export const VTextField = genericComponent<new <T>() => {
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function'
         ? props.counterValue(model.value)
-        : (model.value || '').toString().length
+        : (model.value ?? '').toString().length
     })
     const max = computed(() => {
       if (attrs.maxlength) return attrs.maxlength as undefined
@@ -151,6 +151,7 @@ export const VTextField = genericComponent<new <T>() => {
             ...slots,
             default: ({
               isDisabled,
+              isDirty,
               isReadonly,
             }) => (
               <VField
@@ -165,7 +166,7 @@ export const VTextField = genericComponent<new <T>() => {
                 onClick:clear={ onClear }
                 role="textbox"
                 { ...fieldProps }
-                modelValue={ model.value || (props.placeholder && props.persistentPlaceholder) }
+                modelValue={ isDirty.value }
               >
                 {{
                   ...slots,
