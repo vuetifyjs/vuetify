@@ -54,8 +54,12 @@ export const VTextField = genericComponent<new <T>() => {
   },
 
   emits: {
+    'click:append': (e: MouseEvent) => true,
+    'click:append-inner': (e: MouseEvent) => true,
     'click:clear': (e: MouseEvent) => true,
     'click:control': (e: MouseEvent) => true,
+    'click:prepend': (e: MouseEvent) => true,
+    'click:prepend-inner': (e: MouseEvent) => true,
     'update:modelValue': (val: string) => true,
   },
 
@@ -143,6 +147,8 @@ export const VTextField = genericComponent<new <T>() => {
               'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
             },
           ]}
+          onClick:prepend={ (e: MouseEvent) => emit('click:prepend', e) }
+          onClick:append={ (e: MouseEvent) => emit('click:append', e) }
           { ...rootAttrs }
           { ...inputProps }
           messages={ messages.value }
@@ -164,6 +170,8 @@ export const VTextField = genericComponent<new <T>() => {
                 }}
                 onClick:control={ onControlClick }
                 onClick:clear={ onClear }
+                onClick:prependInner={ (e: MouseEvent) => emit('click:prepend-inner', e) }
+                onClick:appendInner={ (e: MouseEvent) => emit('click:append-inner', e) }
                 role="textbox"
                 { ...fieldProps }
                 modelValue={ isDirty.value }
