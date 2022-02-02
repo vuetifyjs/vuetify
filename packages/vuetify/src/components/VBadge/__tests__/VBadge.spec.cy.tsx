@@ -1,6 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
-import VBadge from '../VBadge'
+import { VBadge } from '..'
 import { generate } from '@/../cypress/templates'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
