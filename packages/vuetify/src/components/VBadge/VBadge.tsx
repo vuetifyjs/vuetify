@@ -7,15 +7,15 @@ import { VIcon } from '@/components/VIcon'
 // Composables
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
+import { useRtl } from '@/composables/rtl'
 
 // Utilities
 import { computed, toRef } from 'vue'
 import { convertToUnit, defineComponent, pick } from '@/util'
-import { makeThemeProps, useTheme } from '@/composables/theme'
-import { useRtl } from '@/composables/rtl'
 
 export const VBadge = defineComponent({
   name: 'VBadge',
@@ -66,7 +66,7 @@ export const VBadge = defineComponent({
   setup (props, ctx) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { isRtl } = useRtl()
-    const { roundedClasses } = useRounded(props, 'v-badge')
+    const { roundedClasses } = useRounded(props)
     const { t } = useLocale()
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'textColor'))
     const { themeClasses } = useTheme()
