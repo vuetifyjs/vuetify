@@ -127,12 +127,14 @@ export const VInput = genericComponent<new <T>() => {
           { hasPrepend && (
             <div
               class="v-input__prepend"
-              onClick={ e => emit('click:prepend', e) }
             >
               { slots?.prepend?.(slotProps.value) }
 
               { props.prependIcon && (
-                <VIcon icon={ props.prependIcon } />
+                <VIcon
+                  onClick={ (e: MouseEvent) => emit('click:prepend', e) }
+                  icon={ props.prependIcon }
+                />
               ) }
             </div>
           ) }
@@ -146,12 +148,14 @@ export const VInput = genericComponent<new <T>() => {
           { hasAppend && (
             <div
               class="v-input__append"
-              onClick={ e => emit('click:append', e) }
             >
               { slots?.append?.(slotProps.value) }
 
               { props.appendIcon && (
-                <VIcon icon={ props.appendIcon } />
+                <VIcon
+                  onClick={ (e: MouseEvent) => emit('click:append', e) }
+                  icon={ props.appendIcon }
+                />
               ) }
             </div>
           ) }
