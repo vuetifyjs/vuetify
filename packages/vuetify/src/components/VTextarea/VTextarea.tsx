@@ -14,7 +14,7 @@ import Intersect from '@/directives/intersect'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { convertToUnit, defineComponent, filterInputAttrs, useRender } from '@/util'
+import { clamp, convertToUnit, defineComponent, filterInputAttrs, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -121,14 +121,17 @@ export const VTextarea = defineComponent({
         const style = getComputedStyle(sizerRef.value)
 
         const padding = parseFloat(style.getPropertyValue('--v-field-padding-top')) +
-        parseFloat(style.getPropertyValue('--v-field-padding-bottom'))
+          parseFloat(style.getPropertyValue('--v-input-padding-top')) +
+          parseFloat(style.getPropertyValue('--v-field-padding-bottom'))
+
+        const baseHeight = parseFloat(style.getPropertyValue('--v-textarea-base-height'))
 
         const height = sizerRef.value.scrollHeight
         const lineHeight = parseFloat(style.lineHeight)
-        const minHeight = parseFloat(props.rows) * lineHeight + padding
+        const minHeight = Math.max(parseFloat(props.rows) * lineHeight + padding, baseHeight)
         const maxHeight = parseFloat(props.maxRows!) * lineHeight + padding || Infinity
 
-        controlHeight.value = convertToUnit(Math.min(maxHeight, Math.max(minHeight, height ?? 0)))
+        controlHeight.value = convertToUnit(clamp(height ?? 0, minHeight, maxHeight))
       })
     }
 
@@ -136,6 +139,7 @@ export const VTextarea = defineComponent({
     watch(model, calculateInputHeight)
     watch(() => props.rows, calculateInputHeight)
     watch(() => props.maxRows, calculateInputHeight)
+    watch(() => props.density, calculateInputHeight)
 
     let observer: ResizeObserver | undefined
     watch(sizerRef, val => {

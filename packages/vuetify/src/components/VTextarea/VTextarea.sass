@@ -7,6 +7,8 @@
 @use '../VInput/variables' as *
 
 .v-textarea
+  --v-textarea-base-height: var(--v-input-control-height)
+
   .v-field__input
     flex: 1 1 auto
     line-height: $textarea-line-height
@@ -27,4 +29,5 @@
     top: 0
     left: 0
     height: 0 !important
+    min-height: 0 !important
     pointer-events: none
