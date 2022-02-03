@@ -52,10 +52,7 @@ export default baseMixins.extend<options>().extend({
             height: this.windowGroup.internalHeight,
           },
           on: this.$listeners,
-          scopedSlots: {
-            placeholder: this.$scopedSlots.placeholder,
-          },
-        }, getSlot(this)),
+        }, [getSlot(this), this.$createElement('template', { slot: 'placeholder' }, this.$slots.placeholder)]),
       ]
     },
     genWindowItem () {

@@ -13,6 +13,7 @@ import {
 } from '@vue/test-utils'
 import { waitAnimationFrame } from '../../../../test'
 import { VThemeProvider } from '../../VThemeProvider'
+import VImg from '../../VImg'
 
 describe('VCarousel.ts', () => {
   type Instance = InstanceType<typeof VCarousel>
@@ -203,5 +204,32 @@ describe('VCarousel.ts', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.find(VCarousel).exists()).toBeTruthy()
+  })
+
+  it('should render the placeholder slot inside the v-img', () => {
+    const placeholder = '...placeholding'
+    const wrapper = mount({
+      props: {
+        show: Boolean,
+      },
+      render (createElement) {
+        return createElement('div', [
+          createElement(VCarousel, [createElement(VCarouselItem, [createElement('template', { slot: 'placeholder' }, placeholder)])]),
+        ])
+      },
+    }, {
+      sync: false,
+      mocks: {
+        $vuetify: {
+          rtl: false,
+          lang: {
+            t: str => str,
+          },
+        },
+      },
+    }) as Wrapper<Instance>
+
+    const img = wrapper.find(VImg)
+    expect(img.find('.v-image__placeholder').text()).toEqual(placeholder)
   })
 })
