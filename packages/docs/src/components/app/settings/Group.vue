@@ -61,7 +61,7 @@
 
     setup () {
       const { t } = useI18n()
-      const theme = useTheme({})
+      const theme = useTheme()
 
       return { t, dark: computed(() => theme.getTheme(theme.current.value).dark) }
     },

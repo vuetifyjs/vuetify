@@ -85,9 +85,6 @@
     border-radius: 4px
     background: rgba(var(--v-border-color), var(--v-idle-opacity))
 
-  ul
-    list-style-type: none
-
   p
     margin-bottom: 1rem
 

@@ -2,6 +2,7 @@
 import { createForm, makeFormProps } from '@/composables/form'
 
 // Utilities
+import { ref } from 'vue'
 import { defineComponent, useRender } from '@/util'
 
 export const VForm = defineComponent({
@@ -13,20 +14,34 @@ export const VForm = defineComponent({
 
   emits: {
     'update:modelValue': (val: boolean | null) => true,
-    resetValidation: () => true,
-    reset: (e: Event) => true,
     submit: (e: Event) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { slots, emit }) {
     const form = createForm(props)
+    const formRef = ref<HTMLFormElement>()
+
+    function onReset (e: Event) {
+      e.preventDefault()
+      form.reset()
+    }
+
+    function onSubmit (e: Event) {
+      e.preventDefault()
+      form.validate().then(({ valid }) => {
+        if (valid) {
+          emit('submit', e)
+        }
+      })
+    }
 
     useRender(() => ((
       <form
+        ref={ formRef }
         class="v-form"
         novalidate
-        onReset={ form.reset }
-        onSubmit={ form.submit }
+        onReset={ onReset }
+        onSubmit={ onSubmit }
       >
         { slots.default?.(form) }
       </form>

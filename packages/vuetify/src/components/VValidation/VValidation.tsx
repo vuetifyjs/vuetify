@@ -11,6 +11,10 @@ export const VValidation = defineComponent({
     ...makeValidationProps(),
   },
 
+  emits: {
+    'update:modelValue': (val: any) => true,
+  },
+
   setup (props, { slots }) {
     const validation = useValidation(props, 'validation')
 

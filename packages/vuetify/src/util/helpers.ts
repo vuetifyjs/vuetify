@@ -57,7 +57,7 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
-type SelectItemKey = string | (string | number)[] | ((item: Dictionary<any>, fallback?: any) => any)
+type SelectItemKey = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: object,
@@ -92,7 +92,7 @@ export function getZIndex (el?: Element | null): number {
   return index
 }
 
-const tagsToReplace: Dictionary<string> = {
+const tagsToReplace: Record<string, string> = {
   '&': '&amp;',
   '<': '&lt;',
   '>': '&gt;',
@@ -359,6 +359,10 @@ export function throttle<T extends (...args: any[]) => any> (fn: T, limit: numbe
   }
 }
 
+type Writable<T> = {
+  -readonly [P in keyof T]: T[P]
+}
+
 /**
  * Filters slots to only those starting with `prefix`, removing the prefix
  */
@@ -520,3 +524,6 @@ export class CircularBuffer<T = never> {
     return this.#arr.slice(this.#pointer).concat(this.#arr.slice(0, this.#pointer))
   }
 }
+
+export type UnionToIntersection<U> =
+  (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never

@@ -6,7 +6,7 @@ import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef 
 import { consoleWarn, deepEqual, findChildren, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
-import type { ComponentInternalInstance, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
+import type { ComponentInternalInstance, ComputedRef, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
 
 interface GroupItem {
   id: number
@@ -17,9 +17,9 @@ interface GroupItem {
 interface GroupProps {
   disabled: boolean
   modelValue: unknown
-  multiple: boolean
-  mandatory: boolean | 'force' | undefined
-  max: number | undefined
+  multiple?: boolean
+  mandatory?: boolean | 'force' | undefined
+  max?: number | undefined
   selectedClass: string | undefined
   'onUpdate:modelValue': ((val: unknown) => void) | undefined
 }
@@ -33,7 +33,11 @@ export interface GroupProvide {
   prev: () => void
   next: () => void
   selectedClass: Ref<string | undefined>
-  items: Ref<number[]>
+  items: ComputedRef<{
+    id: number
+    value: unknown
+    disabled: boolean | undefined
+  }[]>
   disabled: Ref<boolean | undefined>
 }
 
@@ -270,7 +274,7 @@ export function useGroup (
     next: () => step(1),
     isSelected: (id: number) => selected.value.includes(id),
     selectedClass: computed(() => props.selectedClass),
-    items: computed(() => items.map(({ id }) => id)),
+    items: computed(() => items),
   }
 
   provide(injectKey, state)

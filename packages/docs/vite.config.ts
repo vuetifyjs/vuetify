@@ -48,6 +48,8 @@ export default defineConfig(({ mode }) => {
         },
       }),
 
+      Api(),
+
       // https://github.com/antfu/unplugin-vue-components
       // Components({
       //   deep: true,
@@ -104,8 +106,6 @@ export default defineConfig(({ mode }) => {
         },
       }),
 
-      Api(),
-
       // https://github.com/antfu/vite-plugin-pwa
       // VitePWA({
       //   registerType: 'autoUpdate',
@@ -147,7 +147,7 @@ export default defineConfig(({ mode }) => {
             : null
           if (!type) return
 
-          return `export default Comp => Comp['${type}'] = \`${code.replaceAll('`', '\\`')}\``
+          return `export default Comp => Comp['${type}'] = \`${code.replace(/`/g, '\\`')}\``
         },
       },
 

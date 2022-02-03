@@ -1,9 +1,10 @@
 // Utilities
-import { computed, inject, provide, ref } from 'vue'
+import { computed, inject, provide, ref, unref } from 'vue'
 import { mergeDeep } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
+import type { MaybeRef } from '@/util'
 
 export interface DefaultsInstance {
   [key: string]: undefined | Record<string, unknown>
@@ -26,21 +27,28 @@ export function useDefaults () {
   return defaults
 }
 
-export function provideDefaults (props?: {
-  defaults?: DefaultsInstance
-  reset?: number | string
-  root?: boolean
-  scoped?: boolean
-}) {
-  const defaults = useDefaults()
+export function provideDefaults (
+  defaults?: MaybeRef<DefaultsInstance | undefined>,
+  options?: {
+    reset?: MaybeRef<number | string | undefined>
+    root?: MaybeRef<boolean | undefined>
+    scoped?: MaybeRef<boolean | undefined>
+  }
+) {
+  const injectedDefaults = useDefaults()
+  const providedDefaults = ref(defaults)
 
   const newDefaults = computed(() => {
-    let properties = mergeDeep(props?.defaults, { prev: defaults.value })
+    const scoped = unref(options?.scoped)
+    const reset = unref(options?.reset)
+    const root = unref(options?.root)
 
-    if (props?.scoped) return properties
+    let properties = mergeDeep(providedDefaults.value, { prev: injectedDefaults.value })
 
-    if (props?.reset || props?.root) {
-      const len = Number(props.reset ?? Infinity)
+    if (scoped) return properties
+
+    if (reset || root) {
+      const len = Number(reset || Infinity)
 
       for (let i = 0; i <= len; i++) {
         if (!properties.prev) break
@@ -51,7 +59,7 @@ export function provideDefaults (props?: {
       return properties
     }
 
-    return mergeDeep(properties, defaults.value)
+    return mergeDeep(properties, properties.prev)
   }) as ComputedRef<DefaultsInstance>
 
   provide(DefaultsSymbol, newDefaults)

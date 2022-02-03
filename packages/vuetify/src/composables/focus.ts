@@ -1,7 +1,31 @@
-import { ref } from 'vue'
+// Components
+import { useProxiedModel } from '@/composables/proxiedModel'
 
-export const useFocus = () => {
-  const isFocused = ref(false)
+// Utilities
+import { computed } from 'vue'
+import { getCurrentInstanceName, propsFactory } from '@/util'
+
+// Types
+export interface FocusProps {
+  focused: boolean
+  'onUpdate:focused': ((val: boolean) => void) | undefined
+}
+
+// Composables
+export const makeFocusProps = propsFactory({
+  focused: Boolean,
+}, 'focus')
+
+export function useFocus (
+  props: FocusProps,
+  name = getCurrentInstanceName()
+) {
+  const isFocused = useProxiedModel(props, 'focused')
+  const focusClasses = computed(() => {
+    return ({
+      [`${name}--focused`]: isFocused.value,
+    })
+  })
 
   function focus () {
     isFocused.value = true
@@ -11,5 +35,5 @@ export const useFocus = () => {
     isFocused.value = false
   }
 
-  return { isFocused, focus, blur }
+  return { focusClasses, isFocused, focus, blur }
 }

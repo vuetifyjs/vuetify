@@ -69,7 +69,7 @@
 
     setup (props) {
       const user = useUserStore()
-      const theme = useTheme({})
+      const theme = useTheme()
       const clicked = ref(false)
       const root = ref<ComponentPublicInstance>()
 

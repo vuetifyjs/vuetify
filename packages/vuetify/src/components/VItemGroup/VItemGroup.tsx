@@ -4,7 +4,7 @@ import './VItemGroup.sass'
 // Composables
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { defineComponent } from '@/util'
@@ -27,7 +27,7 @@ export const VItemGroup = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { isSelected, select, next, prev, selected } = useGroup(props, VItemGroupSymbol)
 
     return () => (

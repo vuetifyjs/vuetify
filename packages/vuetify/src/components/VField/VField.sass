@@ -8,59 +8,89 @@
 
 /* region INPUT */
 .v-field
+  display: grid
+  grid-template-areas: "prepend-inner field clear append-inner"
+  grid-template-columns: min-content auto min-content min-content
   font-size: $field-font-size
   letter-spacing: $field-letter-spacing
   max-width: $field-max-width
-  --v-field-padding-before: #{$field-control-padding}
-  --v-field-padding-after: #{$field-control-padding}
+  border-radius: $field-border-radius
+  contain: layout
+  flex: 1 0
+  grid-area: control
+  position: relative
 
-  .v-field__input
-    opacity: $field-input-opacity
-    width: 100%
-    height: 100%
-    padding-inline-start: var(--v-field-padding-before)
-    padding-inline-end: var(--v-field-padding-after)
-    display: flex
-    align-items: center
+  &,
+  .v-icon
+    color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
 
-    &:focus,
-    &:active
-      outline: none
+  &--error,
+  &--disabled
+    .v-messages,
+    .v-icon
+      color: inherit
 
-    // Remove Firefox red outline
-    &:invalid
-      box-shadow: none
+  .v-label
+    color: inherit
+
+  &--focused
+    &,
+    .v-label
+      color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+
+  &--error
+    color: rgb(var(--v-theme-error))
+
+  &--disabled
+    pointer-events: none
+
+    &,
+    input
+      color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity))
+
+  --v-field-padding-start: #{$field-control-padding-start}
+  --v-field-padding-end: #{$field-control-padding-end}
+  --v-field-padding-top: #{$field-control-padding-top}
+  --v-field-padding-bottom: #{$field-control-padding-bottom}
+
+/* endregion */
+/* region MODIFIERS */
+.v-field
+  $root: &
+
+  &--prepended
+    padding-inline-start: $field-control-affixed-padding
+    --v-field-padding-start: #{$field-control-affixed-inner-padding}
+    --v-field-padding-end: #{$field-control-affixed-inner-padding}
+
+  &--appended
+    padding-inline-end: $field-control-affixed-padding
+
+  &--variant-contained
+    background: $field-control-contained-background
+    border-color: transparent
+
+    @include tools.elevation($field-control-contained-elevation)
+
+  &--variant-contained,
+  &--variant-filled
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0
 
   &--variant-plain,
   &--variant-underlined
-    --v-field-padding-before: 0
-    --v-field-padding-after: 0
-
-  &--prepended
-    --v-field-padding-before: #{$field-control-affixed-inner-padding}
-  &--appended
-    --v-field-padding-after: #{$field-control-affixed-inner-padding}
-
-  &.v-field--variant-contained,
-  &.v-field--variant-filled
-    --v-field-padding-top: 21px
-    --v-field-padding-bottom: 6px
+    border-radius: 0
+    padding: 0
+    --v-field-padding-start: 0
+    --v-field-padding-end: 0
+    --v-field-padding-top: 0
 
     &.v-field--single-line
       --v-field-padding-top: 0
-      --v-field-padding-bottom: 0
 
-  &.v-field--variant-plain,
-  &.v-field--variant-underlined
-    $root: &
-
-    --v-field-padding-top: 16px
-    --v-field-padding-bottom: 8px
-
-    @at-root
-      @include tools.density('v-input', $input-density) using ($modifier)
-        @at-root #{selector.append(&, $root)}
-          --v-field-padding-top: #{$field-input-padding-top + $modifier * $field-label-floating-scale}
+  &--variant-outlined,
+  &--single-line
+    --v-field-padding-top: 0
 
   &--variant-filled,
   &--variant-outlined,
@@ -69,92 +99,86 @@
       .v-label
         color: inherit
 
-/* endregion */
-/* region CONTROL */
-.v-field__control
-  align-items: center
-  border-radius: $field-border-radius
-  contain: layout
-  display: flex
-  flex: 1 0
-  grid-area: control
-  height: var(--v-input-control-height)
-  position: relative
+  &--variant-contained,
+  &--variant-filled
+    $root: &
 
-  .v-field--prepended &
-    padding-inline-start: $field-control-affixed-padding
+    @at-root
+      @include tools.density('v-input', $input-density) using ($modifier)
+        @at-root #{selector.nest(&, $root)}
+          --v-input-control-height: #{$field-control-height + $modifier}
+          --v-field-padding-bottom: #{$field-control-padding-bottom + $modifier * .5}
 
-  .v-field--appended &
-    padding-inline-end: $field-control-affixed-padding
+  &--variant-underlined
+    $root: &
 
-  .v-field--variant-contained &
-    background: $field-control-contained-background
-    border-color: transparent
-
-    @include tools.elevation($field-control-contained-elevation)
-
-  .v-field--variant-contained &,
-  .v-field--variant-filled &
-    border-bottom-left-radius: 0
-    border-bottom-right-radius: 0
-
-  .v-field--variant-plain &,
-  .v-field--variant-underlined &
-    border-radius: 0
-    padding: 0
+    @at-root
+      @include tools.density('v-input', $input-density) using ($modifier)
+        @at-root #{selector.nest(&, $root)}
+          --v-input-control-height: #{$field-control-underlined-height + $modifier}
+          --v-field-padding-bottom: #{$field-control-padding-bottom + $modifier * .25}
 
 /* endregion */
-/* region FIELD */
+/* region ELEMENTS */
+.v-field__input
+  letter-spacing: $field-letter-spacing
+  opacity: $field-input-opacity
+  padding-inline-start: var(--v-field-padding-start)
+  padding-inline-end: var(--v-field-padding-end)
+  padding-top: var(--v-field-padding-top, $field-control-padding-top)
+  width: 100%
+
+  &:focus,
+  &:active
+    outline: none
+
+  // Remove Firefox red outline
+  &:invalid
+    box-shadow: none
+
 .v-field__field
-  align-items: center
-  display: flex
   flex: 1 0
-  height: 100%
+  min-height: var(--v-input-control-height, $input-control-height)
+  grid-area: field
+  padding-bottom: var(--v-field-padding-bottom, $field-control-padding-bottom)
   position: relative
-
-  .v-field__input
-    letter-spacing: $field-letter-spacing
-    padding-top: var(--v-field-padding-top, 0)
-    padding-bottom: var(--v-field-padding-bottom, 0)
 
 /* endregion */
 /* region AFFIXES */
+.v-field__prepend-inner
+  grid-area: prepend-inner
+  padding-inline-end: var(--v-field-padding-after)
+
+.v-field__clearable
+  grid-area: clear
+
+.v-field__append-inner
+  grid-area: append-inner
+  padding-inline-start: var(--v-field-padding-after)
+
+.v-field__field,
 .v-field__prepend-inner,
 .v-field__append-inner,
 .v-field__clearable
-  align-items: center
+  align-items: flex-start
   display: flex
+  padding-top: var(--v-input-padding-top, $field-control-padding-top)
 
 .v-field__prepend-inner,
 .v-field__append-inner
   .v-field--focused &
     opacity: 1
 
-  .v-field--variant-plain &,
-  .v-field--variant-underlined &
-    $root: &
-    align-self: flex-end
-
-    @at-root
-      @include tools.density('v-input', $input-density) using ($modifier)
-        @at-root #{selector.append(&, $root)}
-          margin-bottom: $field-underlined-margin-bottom + $modifier * .125
-
-.v-field .v-input__prepend,
-.v-field .v-input__append
-  .v-field--variant-plain &,
-  .v-field--variant-underlined &
-    align-self: flex-end
-
 .v-field__clearable
   cursor: pointer
   opacity: 0
-  margin-inline-end: $field-clearable-margin-inline-end
+  margin-inline-start: $field-clearable-margin
+  margin-inline-end: $field-clearable-margin
   transition: $field-transition-timing
   transition-property: opacity, transform, width
 
+  .v-field:hover &,
   .v-input--focused &,
-  .v-field__control:hover &,
   .v-field--persistent-clear &
     opacity: 1
 
@@ -162,9 +186,9 @@
 /* region LABEL */
 .v-label.v-field-label
   contain: layout paint
-  margin-inline-end: var(--v-field-padding-after)
-  margin-inline-start: var(--v-field-padding-before)
-  max-width: calc(100% - var(--v-field-padding-before) - var(--v-field-padding-after))
+  margin-inline-start: var(--v-field-padding-start)
+  margin-inline-end: var(--v-field-padding-end)
+  max-width: calc(100% - var(--v-field-padding-start) - var(--v-field-padding-end))
   pointer-events: none
   position: absolute
   transform-origin: left center
@@ -177,15 +201,6 @@
   .v-input--disabled &,
   .v-input--error &
     color: inherit
-
-  .v-field--variant-plain &,
-  .v-field--variant-underlined &
-    $root: &
-
-    @at-root
-      @include tools.density('v-input', $input-density) using ($modifier)
-        @at-root #{selector.append(&, $root)}
-          bottom: 4px + $modifier * .125
 
   &--floating
     --v-field-label-scale: #{$field-label-floating-scale}em
@@ -202,12 +217,12 @@
 
       @at-root
         @include tools.density('v-input', $input-density) using ($modifier)
-          @at-root #{selector.append(&, $root)}
+          @at-root #{selector.nest(&, $root)}
             top: 7px + $modifier * .25
 
     .v-field--variant-plain &,
     .v-field--variant-underlined &
-      transform: translateY(-24px)
+      transform: translateY(-6px)
       margin: 0
 
     .v-field--variant-outlined &
@@ -231,11 +246,11 @@
   right: 0
   width: 100%
 
-  .v-field__control:hover &
+  .v-field:hover &
     --v-field-border-opacity: var(--v-high-emphasis-opacity)
 
   .v-field.v-field--focused &,
-  .v-field.v-input--error &
+  .v-input.v-input--error &
     --v-field-border-opacity: 1
 
   .v-field--variant-outlined.v-field--focused &
@@ -320,15 +335,6 @@
 
       @include tools.rtl()
         border-radius: $field-border-radius 0 0 $field-border-radius
-
-/* endregion */
-/* region DETAILS */
-.v-input__details
-  .v-field--variant-plain &,
-  .v-field--variant-underlined &
-    padding-inline-start: 0
-    padding-inline-end: 0
-
 /* endregion */
 /* region LOADER */
 .v-field__loader
@@ -352,10 +358,10 @@
   &.v-field--has-background .v-field__overlay
     opacity: 0
 
-  .v-field__control:hover .v-field__overlay
+  &:hover .v-field__overlay
     opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
 
-  &.v-field.v-field--focused .v-field__overlay
+  &.v-field--focused .v-field__overlay
     opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
 
 /* endregion */
@@ -370,7 +376,7 @@
 
 .v-field--variant-filled,
 .v-field--variant-underlined
-  &.v-input--disabled
+  .v-input--disabled &
     .v-field__outline::before
       border-image: repeating-linear-gradient(to right, $field-disabled-color 0px, $field-disabled-color 2px, transparent 2px, transparent 4px) 1 repeat
 

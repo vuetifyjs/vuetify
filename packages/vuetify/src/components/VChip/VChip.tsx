@@ -14,7 +14,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
@@ -83,7 +83,7 @@ export const VChip = defineComponent({
   setup (props, { attrs, emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
 
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { elevationClasses } = useElevation(props)

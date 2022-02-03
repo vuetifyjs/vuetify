@@ -8,6 +8,13 @@ import { mergeDeep } from '../../src/util'
  * cy.mount(<VBtn>My button</VBtn>)
  */
 Cypress.Commands.add('mount', (component, options, vuetifyOptions) => {
+  const root = document.getElementById("__cy_root");
+
+  // add the v-application class that allows Vuetify styles to work
+  if (!root.classList.contains("v-locale--is-rtl")) {
+    root.classList.add("v-locale--is-ltr");
+  }
+
   const vuetify = createVuetify(vuetifyOptions)
   const defaultOptions = {
     global: {
@@ -45,4 +52,8 @@ Cypress.Commands.add('setProps', (props: Record<string, unknown> = {}) => {
     await vueWrapper.setProps(props)
     return vueWrapper
   })
+})
+
+Cypress.Commands.add('vue', () => {
+  return cy.get('@wrapper')
 })

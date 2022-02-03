@@ -30,10 +30,12 @@ exports[`VRating should change icon on hover 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -59,10 +61,12 @@ exports[`VRating should change icon on hover 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -88,10 +92,12 @@ exports[`VRating should change icon on hover 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -117,10 +123,12 @@ exports[`VRating should change icon on hover 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -146,10 +154,12 @@ exports[`VRating should change icon on hover 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -311,10 +321,12 @@ exports[`VRating should render a scoped item-label slot 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -340,10 +352,12 @@ exports[`VRating should render a scoped item-label slot 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -369,10 +383,12 @@ exports[`VRating should render a scoped item-label slot 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -398,10 +414,12 @@ exports[`VRating should render a scoped item-label slot 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -427,10 +445,12 @@ exports[`VRating should render a scoped item-label slot 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -474,10 +494,12 @@ exports[`VRating should respond to prop value changes 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -503,10 +525,12 @@ exports[`VRating should respond to prop value changes 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -532,10 +556,12 @@ exports[`VRating should respond to prop value changes 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -561,10 +587,12 @@ exports[`VRating should respond to prop value changes 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -590,10 +618,12 @@ exports[`VRating should respond to prop value changes 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -637,10 +667,12 @@ exports[`VRating should respond to prop value changes 2`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -666,10 +698,12 @@ exports[`VRating should respond to prop value changes 2`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -695,10 +729,12 @@ exports[`VRating should respond to prop value changes 2`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -724,10 +760,12 @@ exports[`VRating should respond to prop value changes 2`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"
@@ -753,10 +791,12 @@ exports[`VRating should respond to prop value changes 2`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
-             aria-hidden="true"
-          >
-          </i>
+          <div class="v-btn__content">
+            <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+               aria-hidden="true"
+            >
+            </i>
+          </div>
         </span>
       </label>
       <input class="v-rating__hidden"

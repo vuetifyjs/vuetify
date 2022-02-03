@@ -2,7 +2,6 @@
 import './VList.sass'
 
 // Components
-import { VListSubheader } from './VListSubheader'
 import { VListChildren } from './VListChildren'
 
 // Composables
@@ -13,59 +12,44 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
+import { createList } from './list'
 
 // Utilities
-import { computed, inject, provide, ref, toRef } from 'vue'
+import { computed, toRef } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { InjectionKey, Prop, Ref } from 'vue'
+import type { Prop } from 'vue'
 import type { MakeSlots } from '@/util'
-import type { ListGroupHeaderSlot } from './VListGroup'
+import type { ListGroupActivatorSlot } from './VListGroup'
 
 export type ListItem = {
-  children?: ListItem[]
-  value?: string
+  [key: string]: any
+  $type?: 'item' | 'subheader' | 'divider'
+  $children?: (string | ListItem)[]
 }
 
-// Depth
-export const DepthKey: InjectionKey<Ref<number>> = Symbol.for('vuetify:depth')
-
-export const useDepth = (hasPrepend?: Ref<boolean>) => {
-  const parent = inject(DepthKey, ref(-1))
-
-  const depth = computed(() => parent.value + 1 + (hasPrepend?.value ? 1 : 0))
-
-  provide(DepthKey, depth)
-
-  return depth
+export type InternalListItem = {
+  type?: 'item' | 'subheader' | 'divider'
+  props?: Record<string, any>
+  children?: InternalListItem[]
 }
 
-// List
-export const ListKey: InjectionKey<{
-  hasPrepend: Ref<boolean>
-  updateHasPrepend: (value: boolean) => void
-}> = Symbol.for('vuetify:list')
+const parseItems = (items?: (string | ListItem)[]): InternalListItem[] | undefined => {
+  if (!items) return undefined
 
-export const createList = () => {
-  const parent = inject(ListKey, { hasPrepend: ref(false), updateHasPrepend: () => null })
+  return items.map(item => {
+    if (typeof item === 'string') return { type: 'item', value: item, title: item }
 
-  const data = {
-    hasPrepend: ref(false),
-    updateHasPrepend: (value: boolean) => {
-      if (value) data.hasPrepend.value = value
-    },
-  }
+    const { $type, $children, ...props } = item
 
-  provide(ListKey, data)
+    if ($type === 'subheader') return { type: 'subheader', props }
+    if ($type === 'divider') return { type: 'divider', props }
 
-  return parent
-}
-
-export const useList = () => {
-  return inject(ListKey, null)
+    return { type: 'item', props, children: parseItems($children) }
+  })
 }
 
 export const VList = genericComponent<new <T>() => {
@@ -74,7 +58,7 @@ export const VList = genericComponent<new <T>() => {
   }
   $slots: MakeSlots<{
     subheader: []
-    header: [ListGroupHeaderSlot]
+    header: [ListGroupActivatorSlot]
     item: [T]
   }>
 }>()({
@@ -88,10 +72,6 @@ export const VList = genericComponent<new <T>() => {
       default: 'one',
     },
     nav: Boolean,
-    subheader: {
-      type: [Boolean, String],
-      default: false,
-    },
     items: Array as Prop<ListItem[]>,
 
     ...makeNestedProps({
@@ -115,7 +95,8 @@ export const VList = genericComponent<new <T>() => {
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
+    const items = computed(() => parseItems(props.items))
+    const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
@@ -123,12 +104,10 @@ export const VList = genericComponent<new <T>() => {
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
     const { open, select, activate } = useNested(props)
-    const depth = useDepth()
+
     createList()
 
     useRender(() => {
-      const hasHeader = typeof props.subheader === 'string' || slots.subheader
-
       return (
         <props.tag
           class={[
@@ -136,8 +115,6 @@ export const VList = genericComponent<new <T>() => {
             {
               'v-list--disabled': props.disabled,
               'v-list--nav': props.nav,
-              'v-list--subheader': props.subheader,
-              'v-list--subheader-sticky': props.subheader === 'sticky',
               [`v-list--${props.lines}-line`]: true,
             },
             themeClasses.value,
@@ -150,22 +127,15 @@ export const VList = genericComponent<new <T>() => {
           style={[
             backgroundColorStyles.value,
             dimensionStyles.value,
-            {
-              '--v-list-depth': depth.value,
-            },
           ]}
         >
-          { hasHeader && (
-            slots.subheader
-              ? slots.subheader()
-              : <VListSubheader>{ props.subheader }</VListSubheader>
-          ) }
-
-          <VListChildren items={ props.items }>
+          <VListChildren items={ items.value }>
             {{
               default: slots.default,
               item: slots.item,
-              externalHeader: slots.header,
+              title: slots.title,
+              subtitle: slots.subtitle,
+              header: slots.header,
             }}
           </VListChildren>
         </props.tag>

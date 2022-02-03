@@ -15,7 +15,7 @@
       <router-link :to="{ path: `/${locale}/api/v-alert` }">v-alert</router-link>
       <router-link :to="{ path: `/${locale}/api/v-app-bar` }">v-app-bar</router-link>
     </div> -->
-    <app-list :items="items" />
+    <app-list :items="items" nav />
   </v-navigation-drawer>
 </template>
 

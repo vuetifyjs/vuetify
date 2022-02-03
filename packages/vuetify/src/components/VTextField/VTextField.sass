@@ -6,36 +6,53 @@
 // TODO: abstract variables
 
 .v-text-field
+  .v-field--active
+    input,
+    .v-text-field__prefix,
+    .v-text-field__suffix
+      opacity: 1
+
   &__prefix,
   &__suffix
     color: $text-field-affix-color
-    height: 100%
     display: flex
     align-items: center
     cursor: default
+    opacity: 0
     transition: .15s opacity settings.$standard-easing
     white-space: nowrap
-    padding-top: calc(var(--v-field-padding-top, 0) + 1px)
-    padding-bottom: var(--v-field-padding-bottom, 0)
+    padding-top: var(--v-field-padding-top)
 
   &__prefix
-    padding-inline-start: var(--v-field-padding-before)
+    padding-inline-end: var(--v-field-padding-before)
 
   &__suffix
-    padding-inline-end: var(--v-field-padding-after)
+    padding-inline-end: var(--v-field-padding-end)
 
   .v-field__input
     @at-root #{selector.append('.v-text-field--prefixed', &)}
-      --v-field-padding-before: 6px
+      --v-field-padding-start: 6px
     @at-root #{selector.append('.v-text-field--suffixed', &)}
-      --v-field-padding-after: 0
+      --v-field-padding-end: 0
 
-  .v-field__control
+  .v-input__details
+    padding: 0 16px
+
+
+  &--flush-details
+    .v-input__details
+      padding: 0
+
+  .v-field
     cursor: text
+
+  .v-input__details
+    padding-inline-start: $text-field-details-padding-inline
+    padding-inline-end: $text-field-details-padding-inline
 
   input
     flex: 1
-    opacity: 1
+    opacity: 0
     transition: .15s opacity settings.$standard-easing
 
     &:focus,
@@ -46,7 +63,7 @@
     &:invalid
       box-shadow: none
 
-  &.v-field--disabled
+  .v-field--disabled
     .v-text-field__prefix,
     .v-text-field__suffix
       color: $text-field-disabled-affix-color

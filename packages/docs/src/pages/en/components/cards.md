@@ -24,11 +24,9 @@ related:
 
 <api-inline />
 
-## Functional Components
+## Structure
 
-The `v-card` component has multiple special elements called **functional** components; very fast and stateless. Visit the official Vue documentation for more information on [functional components](https://v3.vuejs.org/guide/render-function.html#functional-components).
-
-The following snippet shows the default structure of a card:
+The following snippet shows the general structure of a card:
 
 ```html
 <v-card>
@@ -104,15 +102,15 @@ Provides a default **font-size** and **padding** for card titles. Font-size can 
 
 ### Props
 
-#### Loading
+<!-- #### Loading
 
 Cards can be set to a loading state when processing a user action. This disables further actions and provides visual feedback with an indeterminate [v-progress-linear](/components/progress-linear).
 
-<example file="v-card/prop-loading" />
+<example file="v-card/prop-loading" /> -->
 
 #### Outlined
 
-An **outlined** card has 0 elevation and contains a soft border.
+A card with the **variant** prop set to `outlined` has zero elevation.
 
 <example file="v-card/prop-outlined" />
 
@@ -144,15 +142,15 @@ Using grids, you can create beautiful layouts.
 
 #### Horizontal cards
 
-Using `v-col`, you can create customized horizontal cards. Use the `contain` property to shrink the `v-img` to fit inside the container, instead of covering.
+<!-- TODO: better description -->
 
 <example file="v-card/misc-horizontal-cards" />
 
-#### Information card
+<!-- #### Information card
 
 Cards are entry points to more detailed information. To keep things concise, ensure to limit the number of actions the user can take.
 
-<example file="v-card/misc-information-card" />
+<example file="v-card/misc-information-card" /> -->
 
 #### Media with text
 

@@ -1,9 +1,10 @@
 // Composables
 import { useForm } from '@/composables/form'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
-import { getCurrentInstance, getCurrentInstanceName, getUid, propsFactory } from '@/util'
+import { getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -16,14 +17,15 @@ export type ValidationRule =
   | ((value: any) => PromiseLike<ValidationResult>)
 
 export interface ValidationProps {
-  disabled?: boolean
-  error?: boolean
-  errorMessages?: string | string[]
-  maxErrors?: string | number
-  name?: string
-  readonly?: boolean
+  disabled: boolean
+  error: boolean
+  errorMessages: string | string[]
+  maxErrors: string | number
+  name: string | undefined
+  readonly: boolean
   rules: ValidationRule[]
-  modelValue?: any
+  modelValue: any
+  'onUpdate:modelValue': ((val: any) => void) | undefined
 }
 
 export const makeValidationProps = propsFactory({
@@ -50,9 +52,11 @@ export function useValidation (
   props: ValidationProps,
   name = getCurrentInstanceName(),
 ) {
+  const model = useProxiedModel(props, 'modelValue')
   const form = useForm()
   const errorMessages = ref<string[]>([])
   const isPristine = ref(true)
+  const isDirty = computed(() => wrapInArray(model.value || []).length > 0)
   const isDisabled = computed(() => !!(props.disabled || form?.isDisabled.value))
   const isReadonly = computed(() => !!(props.readonly || form?.isReadonly.value))
   const isValid = computed(() => {
@@ -68,12 +72,12 @@ export function useValidation (
   const validationClasses = computed(() => {
     return {
       [`${name}--error`]: isValid.value === false,
+      [`${name}--dirty`]: isDirty.value,
       [`${name}--disabled`]: isDisabled.value,
       [`${name}--readonly`]: isReadonly.value,
     }
   })
 
-  const vm = getCurrentInstance('useValidation')
   const uid = computed(() => props.name ?? getUid())
 
   onBeforeMount(() => {
@@ -86,8 +90,7 @@ export function useValidation (
 
   function reset () {
     resetValidation()
-
-    vm?.emit('update:modelValue', null)
+    model.value = null
   }
 
   function resetValidation () {
@@ -107,7 +110,7 @@ export function useValidation (
       }
 
       const handler = typeof rule === 'function' ? rule : () => rule
-      const result = await handler(props?.modelValue?.value ?? props.modelValue)
+      const result = await handler(model.value)
 
       if (result === true) continue
 
@@ -130,6 +133,7 @@ export function useValidation (
 
   return {
     errorMessages,
+    isDirty,
     isDisabled,
     isReadonly,
     isPristine,

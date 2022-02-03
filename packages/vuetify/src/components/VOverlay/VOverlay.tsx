@@ -5,7 +5,7 @@ import './VOverlay.sass'
 import { makeActivatorProps, useActivator } from './useActivator'
 import { makePositionStrategyProps, usePositionStrategies } from './positionStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackButton } from '@/composables/router'
 import { useBackgroundColor } from '@/composables/color'
@@ -68,7 +68,7 @@ function Scrim (props: ScrimProps) {
 
 export type OverlaySlots = MakeSlots<{
   default: [{ isActive: Ref<boolean> }]
-  activator: [{ isActive: boolean, props: Dictionary<any> }]
+  activator: [{ isActive: boolean, props: Record<string, any> }]
 }>
 
 export const VOverlay = genericComponent<new () => {
@@ -110,13 +110,13 @@ export const VOverlay = genericComponent<new () => {
   setup (props, { slots, attrs, emit }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { teleportTarget } = useTeleport(computed(() => props.attach || props.contained))
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
     const { hasContent, onAfterLeave } = useLazy(props, isActive)
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
-    const { activatorEl, activatorEvents } = useActivator(props, isActive)
+    const { activatorEl, activatorRef, activatorEvents } = useActivator(props, isActive)
     const { dimensionStyles } = useDimension(props)
     const { isTop } = useStack(isActive)
 
@@ -201,8 +201,7 @@ export const VOverlay = genericComponent<new () => {
         { slots.activator?.({
           isActive: isActive.value,
           props: mergeProps({
-            modelValue: isActive.value,
-            'onUpdate:modelValue': (val: boolean) => isActive.value = val,
+            ref: activatorRef,
           }, toHandlers(activatorEvents.value), props.activatorProps),
         }) }
         <Teleport

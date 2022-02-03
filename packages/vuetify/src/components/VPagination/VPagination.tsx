@@ -1,7 +1,7 @@
 import './VPagination.sass'
 
 // Components
-import { VPaginationBtn } from './VPaginationBtn'
+import { VBtn } from '../VBtn'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
@@ -9,21 +9,22 @@ import { useLocale } from '@/composables/locale'
 import { useRtl } from '@/composables/rtl'
 import { makeElevationProps } from '@/composables/elevation'
 import { makeDensityProps } from '@/composables/density'
-import { makeRoundedProps } from '@/composables/rounded'
 import { makeSizeProps } from '@/composables/size'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeBorderProps } from '@/composables/border'
 import { useRefs } from '@/composables/refs'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
-import { computed, nextTick, ref } from 'vue'
+import { computed, nextTick, ref, toRef } from 'vue'
 import { createRange, defineComponent, keyValues } from '@/util'
 
 // Types
 import type { ComponentPublicInstance } from 'vue'
+import { makeRoundedProps } from '@/composables/rounded'
 
 export const VPagination = defineComponent({
   name: 'VPagination',
@@ -94,12 +95,12 @@ export const VPagination = defineComponent({
     },
     showFirstLastPage: Boolean,
 
-    ...makeTagProps({ tag: 'nav' }),
-    ...makeElevationProps(),
-    ...makeDensityProps(),
     ...makeRoundedProps(),
-    ...makeSizeProps(),
     ...makeBorderProps(),
+    ...makeDensityProps(),
+    ...makeElevationProps(),
+    ...makeSizeProps(),
+    ...makeTagProps({ tag: 'nav' }),
     ...makeThemeProps(),
     ...makeVariantProps({ variant: 'text' } as const),
   },
@@ -116,8 +117,10 @@ export const VPagination = defineComponent({
     const page = useProxiedModel(props, 'modelValue')
     const { t, n } = useLocale()
     const { isRtl } = useRtl()
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const maxButtons = ref(-1)
+
+    provideDefaults(undefined, { scoped: true })
 
     const { resizeRef } = useResizeObserver((entries: ResizeObserverEntry[]) => {
       if (!entries.length) return
@@ -180,13 +183,16 @@ export const VPagination = defineComponent({
 
     const { refs, updateRef } = useRefs<ComponentPublicInstance>()
 
-    const items = computed(() => {
-      const sharedProps = {
-        density: props.density,
-        rounded: props.rounded,
-        size: props.size,
-      }
+    provideDefaults({
+      VBtn: {
+        border: toRef(props, 'border'),
+        density: toRef(props, 'density'),
+        size: toRef(props, 'size'),
+        variant: toRef(props, 'variant'),
+      },
+    })
 
+    const items = computed(() => {
       return range.value.map((item, index) => {
         const ref = (e: any) => updateRef(e, index)
 
@@ -195,13 +201,10 @@ export const VPagination = defineComponent({
             isActive: false,
             page: item,
             props: {
-              ...sharedProps,
               ref,
               ellipsis: true,
               icon: true,
               disabled: true,
-              variant: props.variant,
-              border: props.border,
             },
           }
         } else {
@@ -210,14 +213,12 @@ export const VPagination = defineComponent({
             isActive,
             page: n(item),
             props: {
-              ...sharedProps,
               ref,
               ellipsis: false,
               icon: true,
               disabled: !!props.disabled || props.length < 2,
               elevation: props.elevation,
-              variant: props.variant,
-              border: props.border,
+              rounded: props.rounded,
               color: isActive ? props.color : undefined,
               ariaCurrent: isActive,
               ariaLabel: t(isActive ? props.currentPageAriaLabel : props.pageAriaLabel, index + 1),
@@ -229,21 +230,11 @@ export const VPagination = defineComponent({
     })
 
     const controls = computed(() => {
-      const sharedProps = {
-        color: undefined,
-        density: props.density,
-        rounded: props.rounded,
-        size: props.size,
-        variant: props.variant,
-        border: props.border,
-      }
-
       const prevDisabled = !!props.disabled || page.value <= start.value
       const nextDisabled = !!props.disabled || page.value >= start.value + length.value - 1
 
       return {
         first: props.showFirstLastPage ? {
-          ...sharedProps,
           icon: isRtl.value ? props.lastIcon : props.firstIcon,
           onClick: (e: Event) => setValue(e, start.value, 'first'),
           disabled: prevDisabled,
@@ -251,7 +242,6 @@ export const VPagination = defineComponent({
           ariaDisabled: prevDisabled,
         } : undefined,
         prev: {
-          ...sharedProps,
           icon: isRtl.value ? props.nextIcon : props.prevIcon,
           onClick: (e: Event) => setValue(e, page.value - 1, 'prev'),
           disabled: prevDisabled,
@@ -259,7 +249,6 @@ export const VPagination = defineComponent({
           ariaDisabled: prevDisabled,
         },
         next: {
-          ...sharedProps,
           icon: isRtl.value ? props.prevIcon : props.nextIcon,
           onClick: (e: Event) => setValue(e, page.value + 1, 'next'),
           disabled: nextDisabled,
@@ -267,7 +256,6 @@ export const VPagination = defineComponent({
           ariaDisabled: nextDisabled,
         },
         last: props.showFirstLastPage ? {
-          ...sharedProps,
           icon: isRtl.value ? props.firstIcon : props.lastIcon,
           onClick: (e: Event) => setValue(e, start.value + length.value - 1, 'last'),
           disabled: nextDisabled,
@@ -308,14 +296,14 @@ export const VPagination = defineComponent({
           { props.showFirstLastPage && (
             <li class="v-pagination__first" data-test="v-pagination-first">
               { slots.first ? slots.first(controls.value.first) : (
-                <VPaginationBtn {...controls.value.first} />
+                <VBtn {...controls.value.first} />
               ) }
             </li>
           ) }
 
           <li class="v-pagination__prev" data-test="v-pagination-prev">
             { slots.prev ? slots.prev(controls.value.prev) : (
-              <VPaginationBtn {...controls.value.prev} />
+              <VBtn {...controls.value.prev} />
             ) }
           </li>
 
@@ -331,21 +319,21 @@ export const VPagination = defineComponent({
               data-test="v-pagination-item"
             >
               { slots.item ? slots.item(item) : (
-                <VPaginationBtn {...item.props}>{ item.page }</VPaginationBtn>
+                <VBtn {...item.props}>{ item.page }</VBtn>
               ) }
             </li>
           )) }
 
           <li class="v-pagination__next" data-test="v-pagination-next">
             { slots.next ? slots.next(controls.value.next) : (
-              <VPaginationBtn {...controls.value.next} />
+              <VBtn {...controls.value.next} />
             ) }
           </li>
 
           { props.showFirstLastPage && (
             <li class="v-pagination__last" data-test="v-pagination-last">
               { slots.last ? slots.last(controls.value.last) : (
-                <VPaginationBtn {...controls.value.last} />
+                <VBtn {...controls.value.last} />
               ) }
             </li>
           ) }

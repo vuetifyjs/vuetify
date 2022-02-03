@@ -141,22 +141,24 @@
   .v-list-item--active.v-list-item--contained &
     --v-theme-overlay-multiplier: 0
 
-.v-list-item--prepend, .v-list-group--prepend > .v-list-group__header
-  $root: &
+$base-padding: list.nth($list-item-padding, 2)
+.v-list
+  --indent-padding: 0px
 
-  @at-root
-    @include tools.density('v-list', $list-density) using ($modifier)
-      #{$root}
-        padding-inline-start: calc(#{$list-item-avatar-size + ($modifier * $list-item-avatar-size-multiplier) + $list-item-avatar-margin-end + $list-subheader-padding-start} + (var(--v-list-depth) * #{$list-item-avatar-size + ($modifier * $list-item-avatar-size-multiplier)})) !important
+.v-list-group
+  --parent-padding: var(--indent-padding)
+  &--prepend
+    --parent-padding: calc(var(--indent-padding) + #{$list-item-avatar-size})
 
 .v-list-group__items
-  .v-list-item:not(.v-list-item--prepend)
-    $root: &
+  --indent-padding: calc(var(--parent-padding) + #{$list-indent-size})
 
-    @at-root
-      @include tools.density('v-list', $list-density) using ($modifier)
-        #{$root}
-          padding-inline-start: calc(#{$list-subheader-padding-start} + (var(--v-list-depth) * #{$list-item-avatar-size + ($modifier * $list-item-avatar-size-multiplier)})) !important
+.v-list-group__items .v-list-item
+  padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
+
+.v-list-item--prepend,
+.v-list-group__items .v-list-item--prepend
+  padding-inline-start: calc(#{$base-padding} + var(--indent-padding) + #{$list-item-avatar-size} + #{$list-item-avatar-margin-start}) !important
 
 .v-list-group__header.v-list-item--active
   .v-list-item__overlay

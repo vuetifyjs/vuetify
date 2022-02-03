@@ -12,6 +12,8 @@ export const VListSubheader = defineComponent({
   props: {
     color: String,
     inset: Boolean,
+    sticky: Boolean,
+    text: String,
 
     ...makeTagProps(),
   },
@@ -19,23 +21,28 @@ export const VListSubheader = defineComponent({
   setup (props, { slots }) {
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
 
-    return () => (
-      <props.tag
-        class={[
-          'v-list-subheader',
-          {
-            'v-list-subheader--inset': props.inset,
-          },
-          textColorClasses.value,
-        ]}
-        style={{ textColorStyles }}
-      >
-        { slots.default && (
-          <div class="v-list-subheader__text">
-            { slots.default() }
-          </div>
-        ) }
-      </props.tag>
-    )
+    return () => {
+      const hasText = !!(slots.default || props.text)
+
+      return (
+        <props.tag
+          class={[
+            'v-list-subheader',
+            {
+              'v-list-subheader--inset': props.inset,
+              'v-list-subheader--sticky': props.sticky,
+            },
+            textColorClasses.value,
+          ]}
+          style={{ textColorStyles }}
+        >
+          { hasText && (
+            <div class="v-list-subheader__text">
+              { slots.default?.() ?? props.text }
+            </div>
+          ) }
+        </props.tag>
+      )
+    }
   },
 })

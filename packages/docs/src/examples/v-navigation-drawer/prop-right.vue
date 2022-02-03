@@ -1,40 +1,30 @@
 <template>
-  <v-card height="350px">
-    <v-navigation-drawer
-      absolute
-      permanent
-      right
-    >
-      <template v-slot:prepend>
-        <v-list-item two-line>
-          <v-list-item-avatar>
-            <img src="https://randomuser.me/api/portraits/women/81.jpg">
-          </v-list-item-avatar>
+  <v-card>
+    <v-layout>
+      <v-navigation-drawer
+        absolute
+        permanent
+        position="right"
+      >
+        <template v-slot:prepend>
+          <v-list-item
+            two-line
+            prepend-avatar="https://randomuser.me/api/portraits/women/81.jpg"
+            title="Jane Smith"
+            subtitle="Logged in"
+          ></v-list-item>
+        </template>
 
-          <v-list-item-content>
-            <v-list-item-title>Jane Smith</v-list-item-title>
-            <v-list-item-subtitle>Logged In</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </template>
+        <v-divider></v-divider>
 
-      <v-divider></v-divider>
-
-      <v-list dense>
-        <v-list-item
-          v-for="item in items"
-          :key="item.title"
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+        <v-list density="compact" nav>
+          <v-list-item prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
+          <v-list-item prepend-icon="mdi-account" title="My Account" value="account"></v-list-item>
+          <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+      <v-main style="height: 250px"></v-main>
+    </v-layout>
   </v-card>
 </template>
 

@@ -128,44 +128,45 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn global add now
 
-      - name: Download eo-UY
-        uses: crowdin/github-action@1.1.2
-        with:
-          config: crowdin.yml
-          upload_sources: false
-          download_translations: true
-          push_translations: false
-          export_only_approved: false
-          download_language: eo
-          localization_branch_name: ${{ env.LOCAL_BRANCH }}
-          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
-          debug_mode: true
+# TODO: crowdin is returning invalid markdown
+#      - name: Download eo-UY
+#        uses: crowdin/github-action@1.1.2
+#        with:
+#          config: crowdin.yml
+#          upload_sources: false
+#          download_translations: true
+#          push_translations: false
+#          export_only_approved: false
+#          download_language: eo
+#          localization_branch_name: ${{ env.LOCAL_BRANCH }}
+#          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+#          debug_mode: true
 
-      - name: Download ja
-        uses: crowdin/github-action@1.1.2
-        with:
-          config: crowdin.yml
-          upload_sources: false
-          download_translations: true
-          push_translations: false
-          export_only_approved: false
-          download_language: ja
-          localization_branch_name: ${{ env.LOCAL_BRANCH }}
-          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
-          debug_mode: true
-
-      - name: Download zh-CN
-        uses: crowdin/github-action@1.1.2
-        with:
-          config: crowdin.yml
-          upload_sources: false
-          download_translations: true
-          push_translations: false
-          export_only_approved: false
-          download_language: zh-CN
-          localization_branch_name: ${{ env.LOCAL_BRANCH }}
-          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
-          debug_mode: true
+#      - name: Download ja
+#        uses: crowdin/github-action@1.1.2
+#        with:
+#          config: crowdin.yml
+#          upload_sources: false
+#          download_translations: true
+#          push_translations: false
+#          export_only_approved: false
+#          download_language: ja
+#          localization_branch_name: ${{ env.LOCAL_BRANCH }}
+#          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+#          debug_mode: true
+#
+#      - name: Download zh-CN
+#        uses: crowdin/github-action@1.1.2
+#        with:
+#          config: crowdin.yml
+#          upload_sources: false
+#          download_translations: true
+#          push_translations: false
+#          export_only_approved: false
+#          download_language: zh-CN
+#          localization_branch_name: ${{ env.LOCAL_BRANCH }}
+#          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+#          debug_mode: true
 
       - run: node scripts/deploy-and-alias.js ${{ github.ref }}
         env:

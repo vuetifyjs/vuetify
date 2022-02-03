@@ -59,9 +59,9 @@ describe('VPagination', () => {
       <VPagination length="3" start="3" />
     ))
 
-    cy.get('.v-pagination__item').eq(0).should('have.text', '3')
-    cy.get('.v-pagination__item').eq(1).should('have.text', '4')
-    cy.get('.v-pagination__item').eq(2).should('have.text', '5')
+    cy.get('.v-pagination__item .v-btn').eq(0).should('have.text', '3')
+    cy.get('.v-pagination__item .v-btn').eq(1).should('have.text', '4')
+    cy.get('.v-pagination__item .v-btn').eq(2).should('have.text', '5')
   })
 
   it('should render disabled buttons when length is zero', () => {
@@ -86,7 +86,7 @@ describe('VPagination', () => {
       <VPagination length="100" />
     ))
 
-    cy.get('.v-pagination__item').should('have.length', 8)
+    cy.get('.v-pagination__item').should('have.length', 6)
   })
 
   it('should render in RTL mode', () => {

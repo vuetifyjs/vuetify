@@ -7,17 +7,11 @@
         cols="auto"
       >
         <v-card
-          :elevation="n - 1"
           height="100"
           width="100"
-          class="secondary"
+          :class="['d-flex justify-center align-center bg-secondary', `elevation-${n}`]"
         >
-          <v-row
-            class="fill-height"
-            align="center"
-            justify="center"
-            v-text="n - 1"
-          ></v-row>
+          <div>{{ n - 1 }}</div>
         </v-card>
       </v-col>
     </v-row>

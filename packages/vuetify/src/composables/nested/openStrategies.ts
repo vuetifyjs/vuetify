@@ -31,7 +31,7 @@ export const multipleOpenStrategy: OpenStrategyFn = ({ id, value, opened, parent
     let parent = parents.get(id)
     opened.add(id)
 
-    while (parent != null) {
+    while (parent != null && parent !== id) {
       opened.add(parent)
       parent = parents.get(parent)
     }

@@ -1,5 +1,5 @@
 <template>
-  <v-hover v-slot="{ hover, props }">
+  <v-hover v-slot="{ isHovering, props }">
     <v-card
       class="mx-auto"
       max-width="344"
@@ -27,7 +27,7 @@
       </v-card-title>
 
       <v-overlay
-        :model-value="hover"
+        :model-value="isHovering"
         contained
         scrim="#036358"
         class="align-center justify-center"

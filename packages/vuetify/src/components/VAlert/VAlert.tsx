@@ -11,7 +11,7 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps, useVariant } from '@/composables/variant'
 import { useBorder } from '@/composables/border'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -100,7 +100,7 @@ export const VAlert = defineComponent({
       variant: props.variant,
     }))
 
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(borderProps.value)
     const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
     const { densityClasses } = useDensity(props)
