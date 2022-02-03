@@ -282,6 +282,7 @@ export const BaseSlideGroup = mixins<options &
         ref: 'content',
         on: {
           focusin: this.onFocusin,
+          keydown: (e: KeyboardEvent) => this.$emit('keydown', e),
         },
       }, this.$slots.default)
     },

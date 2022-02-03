@@ -201,6 +201,7 @@ export default baseMixins.extend<options>().extend({
           change: (val: any) => {
             this.internalValue = val
           },
+          keydown: this.handleKeydown,
         },
         ref: 'items',
       }
@@ -252,6 +253,65 @@ export default baseMixins.extend<options>().extend({
 
       clearTimeout(this.resizeTimeout)
       this.resizeTimeout = window.setTimeout(this.callSlider, 0)
+    },
+    handleKeydown (e: KeyboardEvent) {
+      const previousItemKeyCode = this.vertical ? 'ArrowUp' : 'ArrowLeft'
+      const nextItemKeyCode = this.vertical ? 'ArrowDown' : 'ArrowRight'
+      const tabsWrapper = this.$refs.items.$refs.content
+      const currentFocus = tabsWrapper.ownerDocument.activeElement as HTMLElement
+      const role = currentFocus?.getAttribute('role')
+
+      if (role !== 'tab') {
+        return
+      }
+
+      if (e.code === previousItemKeyCode) {
+        e.preventDefault()
+        this.setNextFocusedItem(tabsWrapper, currentFocus, this.setPreviousItem)
+      }
+
+      if (e.code === nextItemKeyCode) {
+        e.preventDefault()
+        this.setNextFocusedItem(tabsWrapper, currentFocus, this.setNextItem)
+      }
+
+      if (e.code === 'Home') {
+        e.preventDefault()
+        this.setNextFocusedItem(tabsWrapper, null, this.setNextItem)
+      }
+
+      if (e.code === 'End') {
+        e.preventDefault()
+        this.setNextFocusedItem(tabsWrapper, null, this.setPreviousItem)
+      }
+    },
+    setNextFocusedItem (wrapper: HTMLElement, currentFocus: HTMLElement | null, moveFunction: Function) {
+      const nextFocus: HTMLDivElement = moveFunction(wrapper, currentFocus)
+      const nextFocusNotAvailable = nextFocus.classList.contains('v-tab--disabled') || nextFocus.getAttribute('role') !== 'tab'
+
+      if (nextFocusNotAvailable) {
+        this.setNextFocusedItem(wrapper, nextFocus, moveFunction)
+      } else {
+        nextFocus.focus()
+      }
+    },
+    setNextItem (wrapper: HTMLElement, item: HTMLElement) {
+      if (wrapper === item) {
+        return wrapper.firstChild
+      }
+      if (item && item.nextElementSibling) {
+        return item.nextElementSibling
+      }
+      return wrapper.firstChild
+    },
+    setPreviousItem (wrapper: HTMLElement, item: HTMLElement) {
+      if (wrapper === item) {
+        return wrapper.lastChild
+      }
+      if (item && item.previousElementSibling) {
+        return item.previousElementSibling
+      }
+      return wrapper.lastChild
     },
     parseNodes () {
       let items = null
