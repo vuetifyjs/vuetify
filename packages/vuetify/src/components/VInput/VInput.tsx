@@ -10,17 +10,17 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
-import { computed, provide, toRef } from 'vue'
+import { computed } from 'vue'
 import { genericComponent, getUid, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue'
+import type { ComputedRef, ExtractPropTypes, PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
 
 export interface VInputSlot {
   id: ComputedRef<string>
+  isDirty: ComputedRef<boolean>
   isDisabled: ComputedRef<boolean>
-  isFocused: Ref<boolean>
   isReadonly: ComputedRef<boolean>
   isPristine: Ref<boolean>
   isValid: ComputedRef<boolean | null>
@@ -30,19 +30,15 @@ export interface VInputSlot {
   validate: () => void
 }
 
-export const VInputSymbol = 'VInput' as any as InjectionKey<ComputedRef<VInputSlot>>
-
 export const makeVInputProps = propsFactory({
   id: String,
   appendIcon: String,
   prependIcon: String,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
-  hint: String,
   messages: {
     type: [Array, String] as PropType<string | string[]>,
     default: () => ([]),
   },
-  persistentHint: Boolean,
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal',
@@ -53,32 +49,33 @@ export const makeVInputProps = propsFactory({
   ...makeValidationProps(),
 })
 
+export type VInputSlots = MakeSlots<{
+  default: [VInputSlot]
+  prepend: [VInputSlot]
+  append: [VInputSlot]
+  details: [VInputSlot]
+}>
+
 export const VInput = genericComponent<new <T>() => {
-  $slots: MakeSlots<{
-    default: [VInputSlot]
-    prepend: [VInputSlot]
-    append: [VInputSlot]
-    details: [VInputSlot]
-  }>
+  $slots: VInputSlots
 }>()({
   name: 'VInput',
 
   props: {
-    focused: Boolean,
-
     ...makeVInputProps(),
   },
 
   emits: {
-    'update:modelValue': (val: any) => true,
     'click:prepend': (e: MouseEvent) => true,
     'click:append': (e: MouseEvent) => true,
+    'update:modelValue': (val: any) => true,
   },
 
   setup (props, { slots, emit }) {
     const { densityClasses } = useDensity(props)
     const {
       errorMessages,
+      isDirty,
       isDisabled,
       isReadonly,
       isPristine,
@@ -92,12 +89,11 @@ export const VInput = genericComponent<new <T>() => {
 
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
-    const isFocused = toRef(props, 'focused')
 
     const slotProps = computed<VInputSlot>(() => ({
       id,
+      isDirty,
       isDisabled,
-      isFocused,
       isReadonly,
       isPristine,
       isValid,
@@ -107,12 +103,9 @@ export const VInput = genericComponent<new <T>() => {
       validate,
     }))
 
-    provide(VInputSymbol, slotProps)
-
     useRender(() => {
-      const hasPrepend = (slots.prepend || props.prependIcon)
-      const hasAppend = (slots.append || props.appendIcon)
-      const hasHint = !!(slots.hint || props.hint)
+      const hasPrepend = !!(slots.prepend || props.prependIcon)
+      const hasAppend = !!(slots.append || props.appendIcon)
       const hasMessages = !!(
         slots.messages ||
         props.messages?.length ||
@@ -120,11 +113,7 @@ export const VInput = genericComponent<new <T>() => {
       )
       const hasDetails = !props.hideDetails || (
         props.hideDetails === 'auto' &&
-        (hasMessages || hasHint)
-      )
-      const showMessages = hasMessages || (
-        hasHint &&
-        (props.persistentHint || props.focused)
+        hasMessages
       )
 
       return (
@@ -148,9 +137,11 @@ export const VInput = genericComponent<new <T>() => {
             </div>
           ) }
 
-          <div class="v-input__control">
-            { slots.default?.(slotProps.value) }
-          </div>
+          { slots.default && (
+            <div class="v-input__control">
+              { slots.default?.(slotProps.value) }
+            </div>
+          ) }
 
           { hasAppend && (
             <div
@@ -168,11 +159,10 @@ export const VInput = genericComponent<new <T>() => {
           { hasDetails && (
             <div class="v-input__details">
               <VMessages
-                active={ showMessages }
-                color={ isValid.value === false ? 'error' : undefined }
+                active={ hasMessages }
                 value={ errorMessages.value.length > 0
                   ? errorMessages.value
-                  : (hasMessages ? props.messages : props.hint)
+                  : props.messages
                 }
                 v-slots={{ default: slots.messages }}
               />
@@ -185,11 +175,9 @@ export const VInput = genericComponent<new <T>() => {
     })
 
     return {
-      isValid,
-      validate,
       reset,
       resetValidation,
-      errorMessages,
+      validate,
     }
   },
 })

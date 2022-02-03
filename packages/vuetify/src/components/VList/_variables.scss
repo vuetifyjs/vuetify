@@ -33,7 +33,7 @@ $list-subheader-text-opacity: var(--v-medium-emphasis-opacity) !default;
 $list-subheader-transition: 0.2s min-height settings.$standard-easing !default;
 
 $list-item-border-color: settings.$border-color-root !default;
-$list-item-border-radius: settings.$border-radius-root !default;
+$list-item-border-radius: 0 !default;
 $list-item-border-style: settings.$border-style-root !default;
 $list-item-border-width: 0 !default;
 $list-item-border-thin-width: thin !default;

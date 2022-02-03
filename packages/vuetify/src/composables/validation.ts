@@ -1,13 +1,13 @@
 // Composables
 import { useForm } from '@/composables/form'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
-import { getCurrentInstanceName, getUid, propsFactory } from '@/util'
+import { getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 export type ValidationResult = string | true
 export type ValidationRule =
@@ -56,6 +56,7 @@ export function useValidation (
   const form = useForm()
   const errorMessages = ref<string[]>([])
   const isPristine = ref(true)
+  const isDirty = computed(() => wrapInArray(model.value || []).length > 0)
   const isDisabled = computed(() => !!(props.disabled || form?.isDisabled.value))
   const isReadonly = computed(() => !!(props.readonly || form?.isReadonly.value))
   const isValid = computed(() => {
@@ -71,6 +72,7 @@ export function useValidation (
   const validationClasses = computed(() => {
     return {
       [`${name}--error`]: isValid.value === false,
+      [`${name}--dirty`]: isDirty.value,
       [`${name}--disabled`]: isDisabled.value,
       [`${name}--readonly`]: isReadonly.value,
     }
@@ -131,6 +133,7 @@ export function useValidation (
 
   return {
     errorMessages,
+    isDirty,
     isDisabled,
     isReadonly,
     isPristine,
