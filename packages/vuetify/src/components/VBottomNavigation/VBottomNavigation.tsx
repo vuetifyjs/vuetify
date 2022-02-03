@@ -15,7 +15,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, reactive, toRef } from 'vue'
+import { computed, toRef } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 
 // Types
@@ -78,16 +78,14 @@ export const VBottomNavigation = defineComponent({
 
     useGroup(props, VBtnToggleSymbol)
 
-    provideDefaults(reactive({
-      defaults: {
-        VBtn: {
-          color: toRef(props, 'color'),
-          density: toRef(props, 'density'),
-          stacked: computed(() => props.mode !== 'horizontal'),
-          variant: 'text',
-        },
+    provideDefaults({
+      VBtn: {
+        color: toRef(props, 'color'),
+        density: toRef(props, 'density'),
+        stacked: computed(() => props.mode !== 'horizontal'),
+        variant: 'text',
       },
-    }))
+    })
 
     return () => {
       return (
