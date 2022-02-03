@@ -2,14 +2,17 @@
 
 exports[`VBreadcrumbsItem.ts should render component and match snapshot 1`] = `
 <li>
-  <div class="v-breadcrumbs__item">
+  <div tabindex="0"
+       class="v-breadcrumbs__item"
+  >
   </div>
 </li>
 `;
 
 exports[`VBreadcrumbsItem.ts should render component with active & link state and match snapshot 1`] = `
 <li>
-  <div class="v-breadcrumbs__item"
+  <div tabindex="0"
+       class="v-breadcrumbs__item"
        aria-current="page"
   >
   </div>

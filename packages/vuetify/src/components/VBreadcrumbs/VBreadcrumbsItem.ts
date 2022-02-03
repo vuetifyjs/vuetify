@@ -38,6 +38,7 @@ export default mixins(Routable).extend({
         attrs: {
           ...data.attrs,
           'aria-current': this.isActive && this.isLink ? 'page' : undefined,
+          tabindex: this.disabled ? -1 : 0,
         },
       }, this.$slots.default),
     ])
