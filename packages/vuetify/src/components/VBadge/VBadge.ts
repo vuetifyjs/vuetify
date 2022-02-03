@@ -162,7 +162,7 @@ export default mixins(
       const slot = getSlot(this, 'badge')
 
       if (slot) return slot
-      if (this.content) return String(this.content)
+      if (this.content || this.content === 0) return String(this.content)
       if (this.icon) return this.$createElement(VIcon, this.icon)
 
       return undefined
