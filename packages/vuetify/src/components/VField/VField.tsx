@@ -243,10 +243,12 @@ export const VField = genericComponent<new <T>() => {
           { hasPrepend && (
             <div
               class="v-field__prepend-inner"
-              onClick={ e => emit('click:prepend-inner', e) }
             >
               { props.prependInnerIcon && (
-                <VIcon icon={ props.prependInnerIcon } />
+                <VIcon
+                  onClick={ (e: MouseEvent) => emit('click:prepend-inner', e) }
+                  icon={ props.prependInnerIcon }
+                />
               ) }
 
               { slots?.prependInner?.(slotProps.value) }
@@ -297,12 +299,14 @@ export const VField = genericComponent<new <T>() => {
           { hasAppend && (
             <div
               class="v-field__append-inner"
-              onClick={ e => emit('click:append-inner', e) }
             >
               { slots?.appendInner?.(slotProps.value) }
 
               { props.appendInnerIcon && (
-                <VIcon icon={ props.appendInnerIcon } />
+                <VIcon
+                  onClick={ (e: MouseEvent) => emit('click:append-inner', e) }
+                  icon={ props.appendInnerIcon }
+                />
               ) }
             </div>
           ) }
