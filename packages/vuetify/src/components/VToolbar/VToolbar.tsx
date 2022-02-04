@@ -93,7 +93,6 @@ export const VToolbar = genericComponent<new () => {
 
     useRender(() => {
       const hasTitle = !!(props.title || slots.title)
-      const hasContent = !!(hasTitle || slots.prepend || slots.default || slots.append)
       const hasImage = !!(slots.image || props.image)
       const isExtended = !!(props.extended || slots.extension)
 
@@ -127,32 +126,30 @@ export const VToolbar = genericComponent<new () => {
             </div>
           ) }
 
-          { hasContent && (
-            <div
-              class="v-toolbar__content"
-              style={{ height: convertToUnit(contentHeight.value) }}
-            >
-              { slots.prepend && (
-                <div class="v-toolbar__prepend">
-                  { slots.prepend?.() }
-                </div>
-              ) }
+          <div
+            class="v-toolbar__content"
+            style={{ height: convertToUnit(contentHeight.value) }}
+          >
+            { slots.prepend && (
+              <div class="v-toolbar__prepend">
+                { slots.prepend?.() }
+              </div>
+            ) }
 
-              { hasTitle && (
-                <VToolbarTitle text={ props.title }>
-                  {{ text: slots.title }}
-                </VToolbarTitle>
-              ) }
+            { hasTitle && (
+              <VToolbarTitle text={ props.title }>
+                {{ text: slots.title }}
+              </VToolbarTitle>
+            ) }
 
-              { slots.default?.() }
+            { slots.default?.() }
 
-              { slots.append && (
-                <div class="v-toolbar__append">
-                  { slots.append?.() }
-                </div>
-              ) }
-            </div>
-          ) }
+            { slots.append && (
+              <div class="v-toolbar__append">
+                { slots.append?.() }
+              </div>
+            ) }
+          </div>
 
           { isExtended && (
             <div
