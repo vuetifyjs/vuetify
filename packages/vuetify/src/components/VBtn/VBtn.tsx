@@ -45,8 +45,6 @@ export const VBtn = defineComponent({
       default: true,
     },
 
-    text: String,
-
     ...makeBorderProps(),
     ...makeRoundedProps(),
     ...makeDensityProps(),
@@ -80,7 +78,6 @@ export const VBtn = defineComponent({
 
     return () => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
-      const hasText = !!(slots.default || props.text || props.icon)
 
       return (
         <Tag
@@ -131,20 +128,16 @@ export const VBtn = defineComponent({
             />
           ) }
 
-          { hasText && (
-            <div class="v-btn__content">
-              { typeof props.icon === 'boolean'
-                ? slots.default?.()
-                : (
-                  <VIcon
-                    class="v-btn__icon"
-                    icon={ props.icon }
-                    size={ props.size }
-                  />
-                )
-              }
-            </div>
-          ) }
+          { typeof props.icon === 'boolean'
+            ? slots.default?.()
+            : (
+              <VIcon
+                class="v-btn__icon"
+                icon={ props.icon }
+                size={ props.size }
+              />
+            )
+          }
 
           { !props.icon && props.appendIcon && (
             <VIcon
