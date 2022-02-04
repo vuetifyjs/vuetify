@@ -1,18 +1,55 @@
-// Defaults
-$toolbar-btn-icon-size: 48px !default;
-$toolbar-content-padding-y: 4px !default;
-$toolbar-content-padding-x: 16px !default;
-$toolbar-elevation: 4 !default;
+@use "sass:map";
+@use "../../styles/settings/variables";
+@use "../../styles/tools/functions";
+
+$toolbar-background: rgb(var(--v-theme-surface)) !default;
 $toolbar-border-radius: 0 !default;
-$toolbar-shaped-border-radius: map-get($rounded, 'xl') $toolbar-border-radius !default;
-$toolbar-title-padding: 20px !default;
-$toolbar-transition: 0.2s map-get($transition, 'fast-out-slow-in') transform,
-                     0.2s map-get($transition, 'fast-out-slow-in') background-color,
-                     0.2s map-get($transition, 'fast-out-slow-in') left,
-                     0.2s map-get($transition, 'fast-out-slow-in') right,
-                     280ms map-get($transition, 'fast-out-slow-in') box-shadow,
-                     0.25s map-get($transition, 'fast-out-slow-in') max-width,
-                     0.25s map-get($transition, 'fast-out-slow-in') width !default;
-$toolbar-collapsed-max-width: 112px !default;
+$toolbar-btn-icon-size: 48px !default;
 $toolbar-collapsed-border-radius: 24px !default;
-$toolbar-prominent-padding: 6px !default;
+$toolbar-collapsed-max-width: 112px !default;
+$toolbar-color: rgb(var(--v-theme-on-surface)) !default;
+$toolbar-content-padding-x: 16px !default;
+$toolbar-content-padding-y: 4px !default;
+$toolbar-density: ( 'default': 0, 'comfortable': -1, 'compact': -2, 'prominent': -3 ) !default;
+$toolbar-elevation: 4 !default;
+$toolbar-padding-end: 16px !default;
+$toolbar-padding-start: 16px !default;
+$toolbar-padding: 16px !default;
+$toolbar-prepend-btn-margin-start: -12px !default;
+$toolbar-append-btn-margin-end: -12px !default;
+$toolbar-rounded-border-radius: variables.$border-radius-root !default;
+$toolbar-transition: .2s variables.$standard-easing !default;
+
+$toolbar-title-padding: 20px !default;
+$toolbar-title-extended-padding: 56px !default;
+$toolbar-title-font-size: 1.25rem !default;
+$toolbar-title-font-weight: 400 !default;
+$toolbar-title-letter-spacing: 0 !default;
+$toolbar-title-line-height: 1.75rem !default;
+$toolbar-title-text-transform: none !default;
+$toolbar-prominent-title-font-size: 1.5rem !default;
+$toolbar-prominent-title-font-weight: 400 !default;
+$toolbar-prominent-title-letter-spacing: 0 !default;
+$toolbar-prominent-title-line-height: 2.25rem !default;
+$toolbar-prominent-title-text-transform: none !default;
+
+$toolbar-theme: (
+  $toolbar-background,
+  $toolbar-color,
+) !default;
+
+$toolbar-title-typography: (
+  $toolbar-title-font-size,
+  $toolbar-title-font-weight,
+  $toolbar-title-letter-spacing,
+  $toolbar-title-line-height,
+  $toolbar-title-text-transform
+);
+
+$toolbar-prominent-title-typography: (
+  $toolbar-prominent-title-font-size,
+  $toolbar-prominent-title-font-weight,
+  $toolbar-prominent-title-letter-spacing,
+  $toolbar-prominent-title-line-height,
+  $toolbar-prominent-title-text-transform
+);
