@@ -3,28 +3,39 @@ import './VToolbar.sass'
 
 // Components
 import { VImg } from '@/components/VImg'
+import { VToolbarTitle } from '..'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
 // Types
+import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
 
 export type Density = typeof allowedDensities[number]
 
 const allowedDensities = [null, 'prominent', 'default', 'comfortable', 'compact'] as const
 
-export const VToolbar = defineComponent({
+export const VToolbar = genericComponent<new () => {
+  $slots: MakeSlots<{
+    default: []
+    image: [{ image: string }]
+    prepend: []
+    append: []
+    title: []
+    extension: []
+  }>
+}>()({
   name: 'VToolbar',
 
   props: {
@@ -48,11 +59,6 @@ export const VToolbar = defineComponent({
       default: 64,
     },
     image: String,
-    position: {
-      type: String as PropType<'top' | 'bottom'>,
-      default: 'top',
-      validator: (value: any) => ['top', 'bottom'].includes(value),
-    },
     title: String,
 
     ...makeBorderProps(),
@@ -85,7 +91,7 @@ export const VToolbar = defineComponent({
       },
     }, { scoped: true })
 
-    return () => {
+    useRender(() => {
       const hasTitle = !!(props.title || slots.title)
       const hasContent = !!(hasTitle || slots.prepend || slots.default || slots.append)
       const hasImage = !!(slots.image || props.image)
@@ -97,7 +103,6 @@ export const VToolbar = defineComponent({
             'v-toolbar',
             {
               'v-toolbar--absolute': props.absolute,
-              'v-toolbar--bottom': props.position === 'bottom',
               'v-toolbar--collapse': props.collapse,
               'v-toolbar--flat': props.flat,
               'v-toolbar--floating': props.floating,
@@ -116,7 +121,7 @@ export const VToolbar = defineComponent({
           { hasImage && (
             <div class="v-toolbar__image">
               { slots.image
-                ? slots.img?.({ src: props.image })
+                ? slots.image?.({ src: props.image })
                 : (<VImg src={ props.image } cover />)
               }
             </div>
@@ -134,12 +139,9 @@ export const VToolbar = defineComponent({
               ) }
 
               { hasTitle && (
-                <div class="v-toolbar-title">
-                  { props.title
-                    ? props.title
-                    : slots.title?.()
-                  }
-                </div>
+                <VToolbarTitle text={ props.title }>
+                  {{ text: slots.title }}
+                </VToolbarTitle>
               ) }
 
               { slots.default?.() }
@@ -162,7 +164,9 @@ export const VToolbar = defineComponent({
           ) }
         </props.tag>
       )
-    }
+    })
+
+    return {}
   },
 })
 
