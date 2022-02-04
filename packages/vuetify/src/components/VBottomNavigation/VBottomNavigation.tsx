@@ -57,7 +57,7 @@ export const VBottomNavigation = defineComponent({
   setup (props, { slots }) {
     const { themeClasses } = useTheme()
     const { borderClasses } = useBorder(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => props.bgColor))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
@@ -85,7 +85,7 @@ export const VBottomNavigation = defineComponent({
         stacked: computed(() => props.mode !== 'horizontal'),
         variant: 'text',
       },
-    })
+    }, { scoped: true })
 
     return () => {
       return (
