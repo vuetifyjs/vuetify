@@ -3,7 +3,7 @@
 import { VTextarea } from '../VTextarea'
 import { ref } from 'vue'
 
-describe('VTextarea', () => {
+describe.skip('VTextarea', () => {
   it('should auto-grow', () => {
     const model = ref('Lorem ipsum dolor sit amet consectetur adipisicing elit. ')
     cy.mount(() => <VTextarea auto-grow rows="1" v-model={ model.value } />)

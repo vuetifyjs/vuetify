@@ -9,6 +9,10 @@
 .v-textarea
   --v-textarea-base-height: var(--v-input-control-height)
 
+  .v-field--active
+    textarea
+      opacity: 1
+
   .v-field__input
     flex: 1 1 auto
     line-height: $textarea-line-height
@@ -31,3 +35,16 @@
     height: 0 !important
     min-height: 0 !important
     pointer-events: none
+
+  textarea
+    flex: 1
+    opacity: 0
+    transition: .15s opacity settings.$standard-easing
+
+    &:focus,
+    &:active
+      outline: none
+
+    // Remove Firefox red outline
+    &:invalid
+      box-shadow: none

@@ -6,18 +6,25 @@
 // TODO: abstract variables
 
 .v-text-field
+  .v-field--active
+    input,
+    .v-text-field__prefix,
+    .v-text-field__suffix
+      opacity: 1
+
   &__prefix,
   &__suffix
     color: $text-field-affix-color
     display: flex
     align-items: center
     cursor: default
+    opacity: 0
     transition: .15s opacity settings.$standard-easing
     white-space: nowrap
     padding-top: var(--v-field-padding-top)
 
   &__prefix
-    padding-inline-start: var(--v-field-padding-start)
+    padding-inline-end: var(--v-field-padding-before)
 
   &__suffix
     padding-inline-end: var(--v-field-padding-end)
@@ -39,8 +46,13 @@
   .v-field
     cursor: text
 
+  .v-input__details
+    padding-inline-start: $text-field-details-padding-inline
+    padding-inline-end: $text-field-details-padding-inline
+
   input
     flex: 1
+    opacity: 0
     transition: .15s opacity settings.$standard-easing
 
     &:focus,
