@@ -8,11 +8,9 @@ exports[`VAppBarNavIcon should match a snapshot 1`] = `
   </div>
   <div class="v-btn__underlay">
   </div>
-  <div class="v-btn__content">
-    <i class="mdi-menu mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
-       aria-hidden="true"
-    >
-    </i>
-  </div>
+  <i class="mdi-menu mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
+     aria-hidden="true"
+  >
+  </i>
 </button>
 `;
