@@ -257,6 +257,12 @@ export default baseMixins.extend<options>().extend({
     internalValue (val) {
       this.initialValue = val
       this.setSelectedItems()
+
+      if (this.multiple) {
+        this.$nextTick(() => {
+          this.$refs.menu?.updateDimensions()
+        })
+      }
     },
     isMenuActive (val) {
       window.setTimeout(() => this.onMenuActiveChange(val))
@@ -835,14 +841,6 @@ export default baseMixins.extend<options>().extend({
         this.setValue(internalValue.map((i: object) => {
           return this.returnObject ? i : this.getValue(i)
         }))
-
-        // When selecting multiple
-        // adjust menu after each
-        // selection
-        this.$nextTick(() => {
-          this.$refs.menu &&
-            (this.$refs.menu as { [key: string]: any }).updateDimensions()
-        })
 
         // There is no item to re-highlight
         // when selections are hidden
