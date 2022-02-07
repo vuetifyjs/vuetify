@@ -9,10 +9,17 @@
     temporary
     width="300"
   >
+    <v-toolbar flat>
+      <v-toolbar-title text="Settings" class="pl-0" />
+
+      <template #append>
+        <v-btn icon="mdi-close" @click="app.settings = false" />
+      </template>
+    </v-toolbar>
+
+    <v-divider />
+
     <v-container>
-      <v-toolbar>
-        Title
-      </v-toolbar>
 
       <app-settings-pwa v-if="!!pwa.sw.install" />
 
