@@ -1,32 +1,26 @@
 // Styles
 import './VChipGroup.sass'
 
-// Extensions
-// import { BaseSlideGroup } from '../VSlideGroup/VSlideGroup'
-
-// Mixins
-// import Colorable from '../../mixins/colorable'
-
 // Composables
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-
-// Utilities
-// import mixins from '../../util/mixins'
-import { deepEqual, defineComponent } from '@/util'
-import type { PropType } from 'vue'
-import { toRef } from 'vue'
+import { makeVariantProps } from '@/composables/variant'
 import { provideDefaults } from '@/composables/defaults'
 
-/* @vue/component */
+// Utilities
+import { deepEqual, defineComponent } from '@/util'
+import { toRef } from 'vue'
+
+// Types
+import type { PropType } from 'vue'
+
 export const VChipGroupSymbol = Symbol.for('vuetify:v-chip-group')
 
 export const VChipGroup = defineComponent({
   name: 'VChipGroup',
 
   props: {
-    color: String,
     column: Boolean,
     valueComparator: {
       type: Function as PropType<typeof deepEqual>,
@@ -35,11 +29,10 @@ export const VChipGroup = defineComponent({
     // TODO: implement
     // mobileBreakpoint: [Number, String],
 
-    ...makeGroupProps({
-      selectedClass: 'v-chip--selected',
-    }),
-    ...makeTagProps({ tag: 'div' }),
+    ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
+    ...makeTagProps(),
     ...makeThemeProps(),
+    ...makeVariantProps({ variant: 'contained-text' }),
   },
 
   emits: {
@@ -52,11 +45,11 @@ export const VChipGroup = defineComponent({
 
     provideDefaults({
       VChip: {
-        activeColor: toRef(props, 'color'),
+        color: toRef(props, 'color'),
         selectedClass: toRef(props, 'selectedClass'),
-        variant: 'contained-text',
+        variant: toRef(props, 'variant'),
       },
-    })
+    }, { scoped: true })
 
     return () => (
       <props.tag

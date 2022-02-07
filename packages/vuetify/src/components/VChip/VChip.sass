@@ -48,6 +48,14 @@
   .v-icon
     font-size: inherit
 
+.v-chip__overlay
+  @include tools.absolute()
+  background-color: currentColor
+  border-radius: inherit
+  pointer-events: none
+  opacity: 0
+  transition: opacity .2s ease-in-out
+
 .v-chip--disabled
   opacity: $chip-disabled-opacity
   pointer-events: none
@@ -55,9 +63,3 @@
 
 .v-chip--label
   border-radius: $chip-label-border-radius
-
-// TODO: implement
-// .v-chip-group
-//   .v-chip.v-chip--selected:not(.v-chip--disabled)
-//     .v-chip__overlay
-//       opacity: var(--v-activated-opacity)
