@@ -4,7 +4,7 @@
 
 // Block
 .v-toolbar
-  align-items: flex-start
+  align-items: flex-startE
   display: flex
   flex-direction: column
   justify-content: space-between
@@ -38,6 +38,9 @@
 
     @include tools.rtl()
       border-bottom-left-radius: $toolbar-collapsed-border-radius
+
+  &--flat
+    @include tools.elevation($toolbar-bar-flat-elevation)
 
   &--floating
     display: inline-flex
@@ -76,6 +79,7 @@
     margin-inline-end: $toolbar-append-btn-margin-end
 
 .v-toolbar-title
+  flex: 1 1
   font-size: $toolbar-title-font-size
   min-width: 0
   padding-left: $toolbar-title-padding
