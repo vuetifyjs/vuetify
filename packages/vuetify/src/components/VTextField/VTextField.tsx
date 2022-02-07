@@ -159,6 +159,7 @@ export const VTextField = genericComponent<new <T>() => {
               isDisabled,
               isDirty,
               isReadonly,
+              isValid,
             }) => (
               <VField
                 ref={ vFieldRef }
@@ -174,6 +175,7 @@ export const VTextField = genericComponent<new <T>() => {
                 onClick:appendInner={ (e: MouseEvent) => emit('click:append-inner', e) }
                 role="textbox"
                 { ...fieldProps }
+                error={ isValid.value === false }
                 modelValue={ isDirty.value }
               >
                 {{
