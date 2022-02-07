@@ -54,17 +54,18 @@ export function useValidation (
 ) {
   const model = useProxiedModel(props, 'modelValue')
   const form = useForm()
-  const errorMessages = ref<string[]>([])
+  const internalErrorMessages = ref<string[]>([])
   const isPristine = ref(true)
   const isDirty = computed(() => wrapInArray(model.value || []).length > 0)
   const isDisabled = computed(() => !!(props.disabled || form?.isDisabled.value))
   const isReadonly = computed(() => !!(props.readonly || form?.isReadonly.value))
+  const errorMessages = computed(() => {
+    return props.errorMessages.length
+      ? wrapInArray(props.errorMessages)
+      : internalErrorMessages.value
+  })
   const isValid = computed(() => {
-    if (
-      props.error ||
-      props.errorMessages?.length ||
-      errorMessages.value.length
-    ) return false
+    if (props.error || errorMessages.value.length) return false
 
     return isPristine.value ? null : true
   })
@@ -95,13 +96,12 @@ export function useValidation (
 
   function resetValidation () {
     isPristine.value = true
-    errorMessages.value = []
+    internalErrorMessages.value = []
   }
 
   async function validate () {
     const results = []
 
-    errorMessages.value = []
     isValidating.value = true
 
     for (const rule of props.rules) {
@@ -124,11 +124,11 @@ export function useValidation (
       results.push(result)
     }
 
-    errorMessages.value = results
+    internalErrorMessages.value = results
     isValidating.value = false
     isPristine.value = false
 
-    return errorMessages.value
+    return internalErrorMessages.value
   }
 
   return {
