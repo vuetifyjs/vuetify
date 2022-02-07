@@ -42,6 +42,12 @@ Buttons in their simplest form contain uppercase text, a slight elevation, hover
 
 ### Props
 
+#### Variant
+
+The **variant** prop gives you easy access to several different button styles
+
+<example file="v-btn/prop-variant" />
+
 #### Block
 
 **block** buttons extend the full available width.
@@ -95,11 +101,5 @@ Use the **rounded** prop to control the border radius of buttons.
 Buttons can be given different sizing options to fit a multitude of scenarios.
 
 <example file="v-btn/prop-sizing" />
-
-#### Text
-
-Text buttons have no box shadow and no background. Only on hover is the container for the button shown. When used with the **color** prop, the supplied color is applied to the button text instead of the background.
-
-<example file="v-btn/prop-text" />
 
 <backmatter />

@@ -7,13 +7,12 @@
   max-width: 100%
   overflow: hidden
   position: fixed
-  transition: $bottom-navigation-transition
 
   @include tools.border($bottom-navigation-border...)
   @include tools.rounded($bottom-navigation-border-radius)
   @include tools.theme($bottom-navigation-theme...)
 
-  &--is-active
+  &--active
     @include tools.elevation($bottom-navigation-elevation)
 
   &--absolute
@@ -22,6 +21,46 @@
 .v-bottom-navigation__content
   display: flex
   flex: none
+  font-size: $bottom-navigation-content-font-size
   justify-content: center
-  transition: inherit
+  transition: $bottom-navigation-transition
   width: 100%
+
+  .v-bottom-navigation &
+    > .v-btn
+      font-size: inherit
+      height: $bottom-navigation-height
+      max-width: $bottom-navigation-max-width
+      min-width: $bottom-navigation-min-width
+      text-transform: $bottom-navigation-text-transform
+      transition: inherit
+      width: auto
+
+      @include tools.rounded(0)
+
+      .v-btn__content,
+      .v-btn__icon
+        transition: inherit
+
+      .v-btn__icon
+        font-size: $bottom-navigation-icon-font-size
+
+      &:not(.v-btn--selected):not(.v-btn--disabled)
+        color: $bottom-navigation-button-color
+
+  .v-bottom-navigation--grow &
+    > .v-btn
+      width: 100%
+
+  .v-bottom-navigation--shift &
+    > .v-btn
+      .v-btn__icon
+        top: $bottom-navigation-shift-icon-top
+        transform: $bottom-navigation-shift-icon-transform
+
+      &:not(.v-btn--selected)
+        .v-btn__content
+          color: $bottom-navigation-shift-content-color
+
+        .v-btn__icon
+          transform: translateY(0)

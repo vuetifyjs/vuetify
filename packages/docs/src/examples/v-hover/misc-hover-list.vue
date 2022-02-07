@@ -10,52 +10,41 @@
           cols="12"
           md="4"
         >
-          <v-hover v-slot="{ hover, props }">
+          <v-hover v-slot="{ isHovering, props }">
             <v-card
-              :elevation="hover ? 12 : 2"
-              :class="{ 'on-hover': hover }"
+              :elevation="isHovering ? 12 : 2"
+              :class="{ 'on-hover': isHovering }"
               v-bind="props"
             >
               <v-img
                 :src="item.img"
                 height="225px"
+                cover
               >
-                <v-card-title class="text-h6 white--text">
-                  <v-row
-                    class="fill-height flex-column"
-                    justify="space-between"
-                  >
-                    <p class="mt-4 subheading text-left">
-                      {{ item.title }}
+                <v-card-title class="text-h6 text-white d-flex flex-column">
+                  <p class="mt-4">
+                    {{ item.title }}
+                  </p>
+
+                  <div>
+                    <p class="ma-0 text-body-1 font-weight-bold">
+                      {{ item.text }}
                     </p>
-
-                    <div>
-                      <p class="ma-0 text-body-1 font-weight-bold font-italic text-left">
-                        {{ item.text }}
-                      </p>
-                      <p class="text-caption font-weight-medium font-italic text-left">
-                        {{ item.subtext }}
-                      </p>
-                    </div>
-
-                    <div class="align-self-center">
-                      <v-btn
-                        v-for="(icon, index) in icons"
-                        :key="index"
-                        :class="{ 'show-btns': hover }"
-                        :color="transparent"
-                        icon
-                      >
-                        <v-icon
-                          :class="{ 'show-btns': hover }"
-                          :color="transparent"
-                        >
-                          {{ icon }}
-                        </v-icon>
-                      </v-btn>
-                    </div>
-                  </v-row>
+                    <p class="text-caption font-weight-medium">
+                      {{ item.subtext }}
+                    </p>
+                  </div>
                 </v-card-title>
+                <div class="align-self-center">
+                  <v-btn
+                    v-for="(icon, index) in icons"
+                    :key="index"
+                    variant="text"
+                    :class="{ 'show-btns': isHovering }"
+                    :color="transparent"
+                    :icon="icon"
+                  ></v-btn>
+                </div>
               </v-img>
             </v-card>
           </v-hover>
@@ -95,15 +84,15 @@
 </script>
 
 <style scoped>
-.v-card {
-  transition: opacity .4s ease-in-out;
-}
+  .v-card {
+    transition: opacity .4s ease-in-out;
+  }
 
-.v-card:not(.on-hover) {
-  opacity: 0.6;
- }
+  .v-card:not(.on-hover) {
+    opacity: 0.6;
+  }
 
-.show-btns {
-  color: rgba(255, 255, 255, 1) !important;
-}
+  .show-btns {
+    color: rgba(255, 255, 255, 1) !important;
+  }
 </style>

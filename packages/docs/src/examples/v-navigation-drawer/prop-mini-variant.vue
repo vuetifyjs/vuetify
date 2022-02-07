@@ -1,43 +1,36 @@
 <template>
   <v-card>
-    <v-navigation-drawer
-      v-model="drawer"
-      v-model:mini-variant="mini"
-      permanent
-    >
-      <v-list-item class="px-2">
-        <v-list-item-avatar>
-          <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
-        </v-list-item-avatar>
-
-        <v-list-item-title>John Leider</v-list-item-title>
-
-        <v-btn
-          icon
-          @click.stop="mini = !mini"
-        >
-          <v-icon>mdi-chevron-left</v-icon>
-        </v-btn>
-      </v-list-item>
-
-      <v-divider></v-divider>
-
-      <v-list dense>
+    <v-layout>
+      <v-navigation-drawer
+        v-model="drawer"
+        :rail="rail"
+        permanent
+        absolute
+        @click="rail = false"
+      >
         <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          link
+          prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
+          title="John Leider"
         >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
+          <template v-slot:append>
+            <v-btn
+              variant="text"
+              icon="mdi-chevron-left"
+              @click.stop="rail = !rail"
+            ></v-btn>
+          </template>
         </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+
+        <v-divider></v-divider>
+
+        <v-list density="compact">
+          <v-list-item prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
+          <v-list-item prepend-icon="mdi-account" title="My Account" value="account"></v-list-item>
+          <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+      <v-main style="height: 250px"></v-main>
+    </v-layout>
   </v-card>
 </template>
 
@@ -51,7 +44,7 @@
           { title: 'My Account', icon: 'mdi-account' },
           { title: 'Users', icon: 'mdi-account-group-outline' },
         ],
-        mini: true,
+        rail: true,
       }
     },
   }

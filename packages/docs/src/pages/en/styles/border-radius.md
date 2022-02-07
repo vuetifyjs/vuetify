@@ -23,7 +23,7 @@ Use border utilities to quickly style the border-radius of any element.
 
 <alert type="info">
 
-  The infixes **sm**, **lg**, and **xl** correlate to the border radius *size* and are not affected by breakpoints.
+  The values **sm**, **md**, **lg**, and **xl** correlate to the border radius *size* and are not affected by breakpoints.
 
 </alert>
 
@@ -66,28 +66,26 @@ You can create pills with the `.rounded-pill` class and circles with the `.round
 
 <example file="border-radius/misc-pill-and-circle" />
 
-#### Removing Border Radius
-
-Use the `.rounded-0` helper class to *remove* all of an elements radius or select by side or corner; e.g. `.rounded-l-0` and `.rounded-tr-0`.
-
-<example file="border-radius/misc-removing-border-radius" />
-
-#### Rounding all corners
-
-The **rounded** helper classes allow you to modify the *border radius* of an element. Use the `.rounded-sm`, `.rounded`, `.rounded-lg`, and `.rounded-xl` to add a border radius of varying size.
-
-<example file="border-radius/misc-rounding-all-corners" />
-
 #### Rounding by side
 
-Border radius is configurable on a per side basis using the infix classes, **t, r, b, l**; e.g. `.rounded-b-xl` and `.rounded-t`.
+Border radius is configurable on a per side basis using the infix classes `-t`, `-r`, `-b`, and `-l` (corresponding respectively to the sides **top**, **right**, **left** and **right**).
+
+E.g. `.rounded-b-xl` and `.rounded-t`.
 
 <example file="border-radius/misc-rounding-by-side" />
 
 #### Rounding by corner
 
-Border radius is configurable on a per corner basis using the infix classes, **tl, tr, br, bl**; e.g. `.rounded-br-xl` and `.rounded-tr`.
+Border radius is configurable on a per corner basis using the infix classes, `-tl`, `-tr`, `-br`, `-bl` (corresponding respectively to the corners **top-left**, **top-right**, **bottom-right**, **bottom-left**)
+
+E.g. `.rounded-br-xl` and `.rounded-tr`.
 
 <example file="border-radius/misc-rounding-by-corner" />
+
+#### Removing Border Radius
+
+Use the `.rounded-0` helper class to remove all bordier radius on an element, or select by side or corner; e.g. `.rounded-l-0` and `.rounded-tr-0`.
+
+<example file="border-radius/misc-removing-border-radius" />
 
 <backmatter />

@@ -1,19 +1,20 @@
 <template>
-  <v-hover v-slot="{ hover, props }">
+  <v-hover v-slot="{ isHovering, props }">
     <v-card
       class="mx-auto"
-      color="grey lighten-4"
+      color="grey-lighten-4"
       max-width="600"
       v-bind="props"
     >
       <v-img
         :aspect-ratio="16/9"
+        cover
         src="https://cdn.vuetifyjs.com/images/cards/kitchen.png"
       >
         <v-expand-transition>
           <div
-            v-if="hover"
-            class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal text-h2 white--text"
+            v-if="isHovering"
+            class="d-flex transition-fast-in-fast-out bg-orange-darken-2 v-card--reveal text-h2 text-white"
             style="height: 100%;"
           >
             $14.99
@@ -24,21 +25,10 @@
         class="pt-6"
         style="position: relative;"
       >
-        <v-btn
-          absolute
-          color="orange"
-          class="white--text"
-          fab
-          large
-          right
-          top
-        >
-          <v-icon>mdi-cart</v-icon>
-        </v-btn>
-        <div class="font-weight-light grey--text text-h6 mb-2">
+        <div class="font-weight-light text-grey text-h6 mb-2">
           For the perfect meal
         </div>
-        <h3 class="text-h4 font-weight-light orange--text mb-2">
+        <h3 class="text-h4 font-weight-light text-orange mb-2">
           QW cooking utensils
         </h3>
         <div class="font-weight-light text-h6 mb-2">
@@ -51,12 +41,12 @@
 </template>
 
 <style>
-.v-card--reveal {
-  align-items: center;
-  bottom: 0;
-  justify-content: center;
-  opacity: .5;
-  position: absolute;
-  width: 100%;
-}
+  .v-card--reveal {
+    align-items: center;
+    bottom: 0;
+    justify-content: center;
+    opacity: .9;
+    position: absolute;
+    width: 100%;
+  }
 </style>

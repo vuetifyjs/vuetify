@@ -9,8 +9,8 @@ import { filterControlProps, makeSelectionControlProps, VSelectionControl } from
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, defineComponent } from 'vue'
-import { filterInputAttrs, useRender } from '@/util'
+import { computed } from 'vue'
+import { defineComponent, filterInputAttrs, useRender } from '@/util'
 
 export const VCheckbox = defineComponent({
   name: 'VCheckbox',

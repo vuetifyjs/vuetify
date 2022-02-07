@@ -1,34 +1,31 @@
 <template>
   <div>
     <v-slider
-      v-model="ex1.val"
-      :color="ex1.color"
-      :label="ex1.label"
+      v-model="slider1"
+      color="orange"
+      label="color"
     ></v-slider>
 
     <v-slider
-      v-model="ex2.val"
-      :label="ex2.label"
-      :track-color="ex2.color"
+      v-model="slider2"
+      track-color="green"
+      label="track-color"
     ></v-slider>
 
     <v-slider
-      v-model="ex3.val"
-      :label="ex3.label"
-      :thumb-color="ex3.color"
-      thumb-label="always"
+      v-model="slider3"
+      thumb-color="purple"
+      label="thumb-color"
     ></v-slider>
   </div>
 </template>
 
 <script>
   export default {
-    data () {
-      return {
-        ex1: { label: 'color', val: 25, color: 'orange darken-3' },
-        ex2: { label: 'track-color', val: 75, color: 'green lighten-1' },
-        ex3: { label: 'thumb-color', val: 50, color: 'red' },
-      }
-    },
+    data: () => ({
+      slider1: 0,
+      slider2: 50,
+      slider3: 100,
+    }),
   }
 </script>

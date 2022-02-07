@@ -95,16 +95,4 @@
     + p
       font-size: 1.25rem
       font-weight: 300
-
-  .v-theme--light,
-  .v-theme--dark
-    .v-bar--underline
-      border-width: 0 0 thin 0
-      border-style: solid
-
-      &.v-theme--light
-        border-bottom-color: #0000001F !important
-
-      &.v-theme--dark
-        border-bottom-color: #FFFFFF1F !important
 </style>

@@ -7,10 +7,11 @@
       location="top-left"
       transition="slide-x-transition"
     >
-      <v-hover v-model="hover">
+      <v-hover v-slot="{ props }" v-model="hover">
         <v-icon
           color="grey-lighten-1"
           size="large"
+          v-bind="props"
         >
           mdi-account
         </v-icon>

@@ -1,12 +1,10 @@
 <template>
   <v-card>
     <v-card-text>
-      <v-slider
+      <v-range-slider
         v-model="value"
-        step="10"
-        thumb-label
-        ticks
-      ></v-slider>
+        strict
+      ></v-range-slider>
     </v-card-text>
   </v-card>
 </template>
@@ -15,7 +13,7 @@
   export default {
     data () {
       return {
-        value: 0,
+        value: [20, 40],
       }
     },
   }

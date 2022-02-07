@@ -26,36 +26,6 @@ Lists come in three main variations. **single-line** (default), **two-line** and
 
 <api-inline />
 
-<!-- ## Sub-components
-
-### v-list-item
-
-v-list-item description
-
-### v-list-item-action
-
-v-list-item-action description
-
-### v-list-item-action-text
-
-v-list-item-action-text description
-
-### v-list-item-avatar
-
-v-list-item-avatar description
-
-### v-list-item-content
-
-v-list-item-content description
-
-### v-list-item-subtitle
-
-v-list-item-subtitle description
-
-### v-list-item-title
-
-v-list-item-title description -->
-
 ## Caveats
 
 <alert type="info">
@@ -68,25 +38,25 @@ v-list-item-title description -->
 
 ### Props
 
-#### Dense
+#### Density
 
-`v-list` can be lowered with **dense** property.
+`v-list` supports the **density** property.
 
-<example file="v-list/prop-dense" />
+<example file="v-list/prop-density" />
+
+<promoted-ad slug="vuetify-lux-admin-pro" />
 
 #### Disabled
 
 You cannot interact with disabled `v-list`.
 
-<promoted-ad slug="vuetify-lux-admin-pro" />
-
 <example file="v-list/prop-disabled" />
 
-#### Flat
+#### Variant
 
-Items don't change when selected in `v-list` with **flat** property.
+`v-list` supports the **variant** prop.
 
-<example file="v-list/prop-flat" />
+<example file="v-list/prop-variant" />
 
 #### Nav
 
@@ -108,7 +78,7 @@ Shaped lists have rounded borders on one side of the `v-list-item`.
 
 #### Sub group
 
-Using the `v-list-group` component you can create up to **2** levels in depth using the **sub-group** prop.
+Using the `v-list-group` component you can create sub-groups of items.
 
 <example file="v-list/prop-sub-group" />
 
@@ -124,27 +94,25 @@ Lists can contain subheaders, dividers, and can contain 1 or more lines. The sub
 
 <example file="v-list/prop-two-line-and-subheader" />
 
-### Slots
-
-#### Expansion Lists
-
-A list can contain a group of items which will display on click utilizing `v-list-group`'s `activator` slot. Expansion lists are also used within the **[v-navigation-drawer](/components/navigation-drawers)** component.
-
-<example file="v-list/slot-expansion-lists" />
-
 ### Misc
 
 #### Action and item groups
 
-A **three-line** list with actions. Utilizing **[v-list-item-group](/components/list-item-groups)**, easily connect actions to your tiles.
+A **three-line** list with actions. Utilizing **v-list-group**, easily connect actions to your tiles.
 
 <example file="v-list/misc-action-and-item-groups" />
 
-#### Action stack
+<!-- #### Action stack
 
 A list can contain a stack within an action. This is useful when you need to display meta text next to your action item.
 
 <example file="v-list/misc-action-stack" />
+
+#### Card list
+
+A list can be combined with a card.
+
+<example file="v-list/misc-card-list" />
 
 #### Card list
 
@@ -168,6 +136,6 @@ Here we combine **v-list-item-avatar** and **v-list-item-icon** in a single-line
 
 Lists can contain multiple subheaders and dividers.
 
-<example file="v-list/misc-subheadings-and-dividers" />
+<example file="v-list/misc-subheadings-and-dividers" /> -->
 
 <backmatter />

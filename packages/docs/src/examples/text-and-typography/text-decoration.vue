@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="d-flex justify-space-between flex-row">
     <a
       href="#"
       class="text-decoration-none"

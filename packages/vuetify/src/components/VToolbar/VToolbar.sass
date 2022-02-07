@@ -1,160 +1,98 @@
-@import './index'
-
-+theme('v-toolbar.v-sheet') using ($material)
-  background-color: map-get($material, 'toolbar')
-
-
-// Sheet
-+sheet(v-toolbar, $toolbar-elevation, $toolbar-border-radius, $toolbar-shaped-border-radius)
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 // Block
 .v-toolbar
-  contain: layout
-  display: block
-  flex: 1 1 auto
+  align-items: flex-start
+  display: flex
+  flex-direction: column
+  justify-content: space-between
   max-width: 100%
-  transition: $toolbar-transition
+  overflow: hidden
+  padding-inline-end: calc(#{$toolbar-padding-end} + var(--v-scrollbar-offset))
+  padding-inline-start: $toolbar-padding-start
   position: relative
+  transition-property: height, transform, max-width
+  transition: $toolbar-transition
 
-  +elevation(4)
+  @include tools.theme($toolbar-theme...)
+  @include tools.elevation($toolbar-elevation)
+  @include tools.rounded($toolbar-border-radius)
 
-  .v-input
-    padding-top: 0
-    margin-top: 0
+  @at-root
+    @include tools.density('v-toolbar', $toolbar-density) using ($modifier)
+      .v-toolbar__content
+        padding-top: $toolbar-padding + $modifier
+        padding-bottom: $toolbar-padding + $modifier
 
-// Element
-.v-toolbar__content,
-.v-toolbar__extension
-  padding: $toolbar-content-padding-y $toolbar-content-padding-x
+  &--absolute
+    position: absolute
 
-  .v-btn.v-btn--icon.v-size--default
-    height: $toolbar-btn-icon-size
-    width: $toolbar-btn-icon-size
+  &--collapse
+    max-width: $toolbar-collapsed-max-width
+    overflow: hidden
 
-  > .v-btn.v-btn--icon
-    &:first-child
-      +ltr()
-        margin-left: -$toolbar-btn-icon-size * .25
+    @include tools.ltr()
+      border-bottom-right-radius: $toolbar-collapsed-border-radius
 
-      +rtl()
-        margin-right: -$toolbar-btn-icon-size * .25
+    @include tools.rtl()
+      border-bottom-left-radius: $toolbar-collapsed-border-radius
 
-      + .v-toolbar__title
-        +ltr()
-          padding-left: $toolbar-title-padding
+  &--floating
+    display: inline-flex
 
-        +rtl()
-          padding-right: $toolbar-title-padding
-
-    &:last-child
-      +ltr()
-        margin-right: -$toolbar-btn-icon-size * .25
-
-      +rtl()
-        margin-left: -$toolbar-btn-icon-size * .25
-
-  > .v-tabs
-    height: inherit
-    margin-top: -$toolbar-content-padding-y
-    margin-bottom: -$toolbar-content-padding-y
-
-    > .v-slide-group.v-tabs-bar
-      background-color: inherit
-      height: inherit
-
-    &:first-child
-      margin-left: -$toolbar-content-padding-x
-
-    &:last-child
-      margin-right: -$toolbar-content-padding-x
+  &--rounded
+    @include tools.rounded($toolbar-rounded-border-radius)
 
 .v-toolbar__content,
 .v-toolbar__extension
   align-items: center
   display: flex
+  flex: 0 0 auto
   position: relative
-  z-index: 0
+  transition: inherit
+  width: 100%
+
+.v-toolbar__content
+  .v-toolbar--density-prominent &
+    align-items: flex-start
 
 .v-toolbar__image
-  border-radius: inherit
-  position: absolute
-  top: 0
-  bottom: 0
-  width: 100%
-  z-index: 0
-  contain: strict
+  @include tools.absolute()
 
-  .v-image
-    border-radius: inherit
-
-.v-toolbar__items
   display: flex
-  height: inherit
 
-  > .v-btn
-    border-radius: 0
-    height: 100% !important
-    max-height: none
+.v-toolbar__prepend,
+.v-toolbar__append
+  display: flex
 
-.v-toolbar__title
-  font-size: 1.25rem
-  line-height: 1.5
+.v-toolbar__prepend
+  > .v-btn:first-child
+    margin-inline-start: $toolbar-prepend-btn-margin-start
+
+.v-toolbar__append
+  > .v-btn:last-child
+    margin-inline-end: $toolbar-append-btn-margin-end
+
+.v-toolbar-title
+  font-size: $toolbar-title-font-size
+  min-width: 0
+  padding-left: $toolbar-title-padding
+
+  @include tools.typography($toolbar-title-typography...)
+
+  .v-toolbar--density-prominent &
+    align-self: flex-end
+    padding-bottom: 6px
+
+    @include tools.typography($toolbar-prominent-title-typography...)
+
+.v-toolbar-title__placeholder
   overflow: hidden
   text-overflow: ellipsis
   white-space: nowrap
 
-// Modifier
-.v-toolbar.v-toolbar--absolute
-  position: absolute
-  top: 0
-  z-index: 1
-
-.v-toolbar.v-toolbar--bottom
-  top: initial
-  bottom: 0
-
-.v-toolbar.v-toolbar--collapse
-  .v-toolbar__title
-    white-space: nowrap
-
-.v-toolbar.v-toolbar--collapsed
-  max-width: $toolbar-collapsed-max-width
-  overflow: hidden
-
-  +ltr()
-    border-bottom-right-radius: $toolbar-collapsed-border-radius
-
-  +rtl()
-    border-bottom-left-radius: $toolbar-collapsed-border-radius
-
-  .v-toolbar__title,
-  .v-toolbar__extension
-    display: none
-
-.v-toolbar--dense
-  .v-toolbar__content,
-  .v-toolbar__extension
-    padding-top: 0
-    padding-bottom: 0
-
-// @deprecated
-// TODO: Remove in v3
-.v-toolbar--flat
-  +elevation(0, true)
-
-.v-toolbar--floating
-  display: inline-flex
-
-.v-toolbar--prominent
-  .v-toolbar__content
-    align-items: flex-start
-
-  .v-toolbar__title
-    font-size: 1.5rem
-    padding-top: $toolbar-prominent-padding
-
-  &:not(.v-toolbar--bottom)
-    .v-toolbar__title
-      align-self: flex-end
-      padding-bottom: $toolbar-prominent-padding
-      padding-top: 0
+.v-toolbar-items
+  display: flex
+  height: inherit

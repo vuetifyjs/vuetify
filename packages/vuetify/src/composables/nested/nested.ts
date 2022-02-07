@@ -141,7 +141,7 @@ export const useNested = (props: NestedProps) => {
         return arr
       }),
       register: (id, parentId, isGroup) => {
-        parentId && parents.value.set(id, parentId)
+        parentId && id !== parentId && parents.value.set(id, parentId)
 
         isGroup && children.value.set(id, [])
 
