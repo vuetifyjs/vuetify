@@ -3,8 +3,8 @@ import './VChip.sass'
 
 // Components
 import { VAvatar } from '@/components/VAvatar'
-import { VIcon } from '@/components/VIcon'
 import { VChipGroupSymbol } from '@/components/VChipGroup/VChipGroup'
+import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
@@ -31,9 +31,6 @@ export const VChip = defineComponent({
   directives: { Ripple },
 
   props: {
-    // TODO: Implement
-    // active: Boolean,
-    // activeColor: String,
     activeClass: String,
     appendAvatar: String,
     appendIcon: String,

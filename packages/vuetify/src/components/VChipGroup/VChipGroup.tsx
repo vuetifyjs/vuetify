@@ -26,8 +26,6 @@ export const VChipGroup = defineComponent({
       type: Function as PropType<typeof deepEqual>,
       default: deepEqual,
     },
-    // TODO: implement
-    // mobileBreakpoint: [Number, String],
 
     ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
     ...makeTagProps(),
