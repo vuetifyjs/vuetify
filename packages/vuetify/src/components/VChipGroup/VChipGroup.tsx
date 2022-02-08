@@ -7,6 +7,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 import { provideDefaults } from '@/composables/defaults'
+import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { deepEqual, defineComponent } from '@/util'
@@ -32,7 +33,7 @@ export const VChipGroup = defineComponent({
     ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
     ...makeTagProps(),
     ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'contained-text' }),
+    ...makeVariantProps(),
   },
 
   emits: {
@@ -42,10 +43,10 @@ export const VChipGroup = defineComponent({
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
     const { isSelected, select, next, prev, selected } = useGroup(props, VChipGroupSymbol)
+    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
 
     provideDefaults({
       VChip: {
-        color: toRef(props, 'color'),
         selectedClass: toRef(props, 'selectedClass'),
         variant: toRef(props, 'variant'),
       },
@@ -58,8 +59,10 @@ export const VChipGroup = defineComponent({
           {
             'v-chip-group--column': props.column,
           },
+          textColorClasses.value,
           themeClasses.value,
         ]}
+        style={ textColorStyles.value }
       >
         { slots.default?.({
           isSelected,
