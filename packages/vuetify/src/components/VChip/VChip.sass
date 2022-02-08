@@ -10,13 +10,13 @@
   font-weight: $chip-font-weight
   position: relative
   text-decoration: none
+  vertical-align: middle
 
   @at-root
     @include chip-sizes()
     @include chip-density('height', $chip-density)
 
   @include tools.border($chip-border...)
-  @include tools.elevation($chip-elevation)
   @include tools.rounded($chip-border-radius)
   @include tools.variant($chip-variants...)
 
