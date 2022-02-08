@@ -22,6 +22,7 @@ export const VChipGroup = defineComponent({
 
   props: {
     column: Boolean,
+    filter: Boolean,
     valueComparator: {
       type: Function as PropType<typeof deepEqual>,
       default: deepEqual,
@@ -44,6 +45,7 @@ export const VChipGroup = defineComponent({
     provideDefaults({
       VChip: {
         color: toRef(props, 'color'),
+        filter: toRef(props, 'filter'),
         selectedClass: toRef(props, 'selectedClass'),
         variant: toRef(props, 'variant'),
       },

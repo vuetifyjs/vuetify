@@ -4,6 +4,7 @@ import './VChip.sass'
 // Components
 import { VAvatar } from '@/components/VAvatar'
 import { VChipGroupSymbol } from '@/components/VChipGroup/VChipGroup'
+import { VExpandXTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
@@ -105,6 +106,7 @@ export const VChip = defineComponent({
       const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasAppend = !!(slots.append || props.appendIcon || props.appendAvatar)
       const hasClose = !!(slots.close || props.closable)
+      const hasFilter = !!(slots.filter || props.filter) && group
       const hasPrepend = !!(slots.prepend || props.prependIcon || props.prependAvatar)
       const isClickable = !props.disabled && (!!group || link.isClickable.value || props.link)
       const onClickFunc = props.link ? props.link : group?.toggle
@@ -139,6 +141,20 @@ export const VChip = defineComponent({
           onClick={ isClickable && onClickFunc }
         >
           { genOverlays(isClickable, 'v-chip') }
+
+          { hasFilter && (
+            <VExpandXTransition>
+              <div
+                class="v-chip__filter"
+                v-show={ group.isSelected.value }
+              >
+                { slots.filter
+                  ? slots.filter()
+                  : <VIcon icon={ props.filterIcon } />
+                }
+              </div>
+            </VExpandXTransition>
+          ) }
 
           { hasPrepend && (
             <div class="v-chip__prepend">
