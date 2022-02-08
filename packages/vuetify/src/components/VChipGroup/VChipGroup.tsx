@@ -30,7 +30,7 @@ export const VChipGroup = defineComponent({
     ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
     ...makeTagProps(),
     ...makeThemeProps(),
-    ...makeVariantProps(),
+    ...makeVariantProps({ variant: 'contained-text' } as const),
   },
 
   emits: {
