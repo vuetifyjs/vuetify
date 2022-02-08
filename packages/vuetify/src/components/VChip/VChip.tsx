@@ -109,7 +109,7 @@ export const VChip = defineComponent({
       const hasAppend = !!(slots.append || props.appendIcon || props.appendAvatar)
       const hasClose = !!(slots.close || props.closable)
       const hasPrepend = !!(slots.prepend || props.prependIcon || props.prependAvatar)
-      const isClickable = !props.disabled && (!!VChipGroupSymbol || link.isClickable.value || props.link)
+      const isClickable = !props.disabled && (!!group || link.isClickable.value || props.link)
       const onClickFunc = props.link ? props.link : group?.toggle
 
       return isActive.value && (
