@@ -2,22 +2,18 @@
   <div>
     <v-alert
       v-model="alert"
-      dismissible
-      color="cyan"
       border="start"
-      elevation="2"
-      colored-border
+      border-color="cyan"
+      color="white"
+      closable
+      variant="contained"
       icon="mdi-twitter"
     >
       You've got <strong>5</strong> new updates on your timeline!.
     </v-alert>
 
-    <div class="text-center">
-      <v-btn
-        v-if="!alert"
-        dark
-        @click="alert = true"
-      >
+    <div v-if="!alert" class="text-center">
+      <v-btn @click="alert = true">
         Reset Alert
       </v-btn>
     </div>
@@ -26,10 +22,8 @@
 
 <script>
   export default {
-    data () {
-      return {
-        alert: true,
-      }
-    },
+    data: () => ({
+      alert: true,
+    }),
   }
 </script>
