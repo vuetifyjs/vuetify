@@ -8,7 +8,13 @@
       level="2"
     />
 
-    <i18n-t class="mb-3" keypath="ready-text" tag="div">
+    <!-- https://vue-i18n.intlify.dev/guide/advanced/component.html#scope-resolving -->
+    <i18n-t
+      class="mb-3"
+      keypath="ready-text"
+      scope="global"
+      tag="div"
+    >
       <template #team>
         <app-link :href="rpath('/about/meet-the-team')">
           {{ t('team') }}
