@@ -17,7 +17,7 @@ describe('VBreadcrumbs', () => {
   }
 
   it.each([
-    ['item'],
+    ['text'],
     ['divider'],
   ])('should generate slot content', slot => {
     const wrapper = mountFunction({
