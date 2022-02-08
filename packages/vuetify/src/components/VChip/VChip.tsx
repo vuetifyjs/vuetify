@@ -124,7 +124,7 @@ export const VChip = defineComponent({
             },
             themeClasses.value,
             borderClasses.value,
-            colorClasses.value,
+            !group || group.isSelected.value ? colorClasses.value : undefined,
             densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,
@@ -132,7 +132,9 @@ export const VChip = defineComponent({
             variantClasses.value,
             group?.selectedClass.value,
           ]}
-          style={ [colorStyles.value] }
+          style={[
+            !group || group.isSelected.value ? colorStyles.value : undefined,
+          ]}
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }
           href={ link.href.value }
