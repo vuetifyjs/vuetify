@@ -46,7 +46,6 @@ export const VChipGroup = defineComponent({
       VChip: {
         color: toRef(props, 'color'),
         filter: toRef(props, 'filter'),
-        selectedClass: toRef(props, 'selectedClass'),
         variant: toRef(props, 'variant'),
       },
     })
