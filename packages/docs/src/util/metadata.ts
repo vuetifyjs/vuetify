@@ -57,7 +57,7 @@ function genLink () {
   ]
   const link = [
     { rel: 'shortcut icon', href: '/favicon.ico' },
-    { rel: 'manifest', href: '/manifest.json' },
+    // { rel: 'manifest', href: '/manifest.json' },
     {
       rel: 'search',
       type: 'application/opensearchdescription+xml',

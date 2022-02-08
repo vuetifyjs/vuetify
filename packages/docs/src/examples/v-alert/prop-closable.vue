@@ -3,10 +3,10 @@
     <v-alert
       v-model="alert"
       border="start"
+      closable
       close-label="Close Alert"
       color="deep-purple accent-4"
       theme="dark"
-      closable
     >
       Aenean imperdiet. Quisque id odio. Cras dapibus. Pellentesque ut neque. Cras dapibus.
 
@@ -25,10 +25,8 @@
 
 <script>
   export default {
-    data () {
-      return {
-        alert: true,
-      }
-    },
+    data: () => ({
+      alert: true,
+    }),
   }
 </script>

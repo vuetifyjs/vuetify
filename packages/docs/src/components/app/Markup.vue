@@ -1,24 +1,44 @@
 <template>
-  <v-theme-provider :theme="isDark ? 'dark' : 'light'">
-    <v-sheet
-      ref="root"
-      class="app-markup overflow-hidden"
-      :color="isDark ? '#1F1F1F' : 'grey-lighten-5'"
-      rounded
-      outlined
-      dir="ltr"
-      v-bind="$attrs"
-    >
-      <slot>
-        <pre v-if="inline" :class="className">
-          <code :class="className" v-html="highlighted" />
-        </pre>
-        <code v-else :class="className" v-html="highlighted" />
-      </slot>
+  <v-sheet
+    ref="root"
+    :color="isDark ? '#1F1F1F' : 'grey-lighten-5'"
+    class="app-markup overflow-hidden"
+    dir="ltr"
+    outlined
+    rounded
+    v-bind="$attrs"
+  >
+
+    <div class="d-flex align-center mb-n7">
+      <div class="d-none">
+        <v-btn-toggle
+          v-model="type"
+          border="primary"
+          class="d-inline-flex"
+          color="primary"
+          density="compact"
+          rounded
+          variant="text"
+        >
+          <v-btn
+            icon="mdi-language-javascript"
+            value="js"
+            width="40"
+          />
+
+          <v-btn
+            icon="mdi-language-typescript"
+            value="ts"
+            width="40"
+          />
+        </v-btn-toggle>
+      </div>
+
+      <v-spacer />
 
       <v-btn
-        size="small"
-        class="v-btn--copy"
+        class="v-btn--copy mr-n9"
+        density="compact"
         icon
         variant="text"
         @click="copy"
@@ -26,16 +46,33 @@
         <v-fade-transition hide-on-leave>
           <v-icon
             :key="String(clicked)"
-            color="grey"
             :icon="clicked ? '$complete' : 'mdi-content-copy'"
+            color="grey"
           />
         </v-fade-transition>
       </v-btn>
-    </v-sheet>
-  </v-theme-provider>
+    </div>
+
+    <slot>
+      <pre v-if="inline" :class="className">
+        <code :class="className" v-html="highlighted" />
+      </pre>
+
+      <code v-else :class="className" v-html="highlighted" />
+    </slot>
+  </v-sheet>
 </template>
 
 <script lang="ts">
+  // Composables
+  import { useTheme } from 'vuetify'
+  import { useUserStore } from '@/store/user'
+
+  // Utilities
+  import { ComponentPublicInstance, computed, defineComponent, ref } from 'vue'
+  import { IN_BROWSER } from '@/util/globals'
+  import { wait } from '@/util/helpers'
+
   // Imports
   import Prism from 'prismjs'
   import 'prismjs/themes/prism.css'
@@ -46,12 +83,6 @@
   import 'prismjs/components/prism-sass.js'
   import 'prismjs/components/prism-scss.js'
   import 'prismjs/components/prism-typescript.js'
-
-  import { ComponentPublicInstance, computed, defineComponent, ref } from 'vue'
-  import { useTheme } from 'vuetify'
-  import { wait } from '@/util/helpers'
-  import { IN_BROWSER } from '@/util/globals'
-  import { useUserStore } from '@/store/user'
 
   export default defineComponent({
     name: 'Markup',
@@ -72,6 +103,7 @@
       const theme = useTheme()
       const clicked = ref(false)
       const root = ref<ComponentPublicInstance>()
+      const type = ref('js')
 
       const highlighted = computed(() => (
         props.code && props.language && Prism.highlight(props.code, Prism.languages[props.language], props.language)
@@ -105,7 +137,7 @@
         return user.mixedTheme || theme.getTheme(theme.current.value).dark
       })
 
-      return { root, isDark, highlighted, className, clicked, copy }
+      return { root, isDark, highlighted, className, clicked, copy, type }
     },
   })
 </script>
@@ -118,11 +150,6 @@
 
     &:not(:hover) .v-btn--copy .v-icon
       opacity: .4
-
-    .v-btn--copy
-      position: absolute
-      top: 4px
-      right: 4px
 
     pre, code
       background: transparent

@@ -76,7 +76,7 @@ export const VChip = defineComponent({
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'span' }),
     ...makeThemeProps(),
-    ...makeVariantProps(),
+    ...makeVariantProps({ variant: 'contained-text' } as const),
   },
 
   emits: {
