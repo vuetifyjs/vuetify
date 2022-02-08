@@ -91,7 +91,7 @@
       color: 'primary',
     },
     resources: {
-      icon: 'mdi-teach',
+      icon: 'mdi-human-male-board-poll',
       color: 'pink',
     },
     styles: {
