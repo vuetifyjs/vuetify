@@ -2,7 +2,7 @@
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, provide, reactive, ref, watch } from 'vue'
+import { computed, inject, onActivated, onBeforeUnmount, onDeactivated, provide, reactive, ref, watch } from 'vue'
 import { convertToUnit, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory } from '@/util'
 
 // Types
@@ -115,11 +115,16 @@ export function useLayoutItem (options: {
 
   const vm = getCurrentInstance('useLayoutItem')
 
+  const isKeptAlive = ref(false)
+  onDeactivated(() => isKeptAlive.value = true)
+  onActivated(() => isKeptAlive.value = false)
+
   const {
     layoutItemStyles,
     layoutItemScrimStyles,
   } = layout.register(vm, {
     ...options,
+    active: computed(() => isKeptAlive.value ? false : options.active.value),
     id,
   })
 
