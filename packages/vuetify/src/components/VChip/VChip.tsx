@@ -108,6 +108,7 @@ export const VChip = defineComponent({
       const hasClose = !!(slots.close || props.closable)
       const hasFilter = !!(slots.filter || props.filter) && group
       const hasPrepend = !!(slots.prepend || props.prependIcon || props.prependAvatar)
+      const hasColor = !group || group.isSelected.value
       const isClickable = !props.disabled && (!!group || link.isClickable.value || props.link)
       const onClickFunc = props.link ? props.link : group?.toggle
 
@@ -123,7 +124,7 @@ export const VChip = defineComponent({
             },
             themeClasses.value,
             borderClasses.value,
-            !group || group.isSelected.value ? colorClasses.value : undefined,
+            hasColor ? colorClasses.value : undefined,
             densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,
@@ -132,7 +133,7 @@ export const VChip = defineComponent({
             group?.selectedClass.value,
           ]}
           style={[
-            !group || group.isSelected.value ? colorStyles.value : undefined,
+            hasColor ? colorStyles.value : undefined,
           ]}
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }
