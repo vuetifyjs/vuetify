@@ -49,7 +49,7 @@ export const VChipGroup = defineComponent({
         selectedClass: toRef(props, 'selectedClass'),
         variant: toRef(props, 'variant'),
       },
-    }, { scoped: true })
+    })
 
     return () => (
       <props.tag
