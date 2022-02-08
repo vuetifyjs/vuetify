@@ -30,15 +30,15 @@
     @include tools.rounded($chip-label-border-radius)
 
 // Elements
+.v-chip__filter,
 .v-chip__prepend,
-.v-chip__append
+.v-chip__append,
+.v-chip__close
   align-items: center
   display: inline-flex
 
 .v-chip__close
-  align-self: center
   cursor: pointer
-  display: inline-flex
   flex: 0 1 auto
   font-size: $chip-close-size
   max-height: $chip-close-size
@@ -47,6 +47,14 @@
 
   .v-icon
     font-size: inherit
+
+.v-chip__overlay
+  @include tools.absolute()
+  background-color: currentColor
+  border-radius: inherit
+  pointer-events: none
+  opacity: 0
+  transition: opacity .2s ease-in-out
 
 .v-chip--disabled
   opacity: $chip-disabled-opacity

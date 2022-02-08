@@ -3,6 +3,8 @@ import './VChip.sass'
 
 // Components
 import { VAvatar } from '@/components/VAvatar'
+import { VChipGroupSymbol } from '@/components/VChipGroup/VChipGroup'
+import { VExpandXTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
@@ -10,6 +12,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeSizeProps, useSize } from '@/composables/size'
@@ -41,7 +44,6 @@ export const VChip = defineComponent({
       type: String,
       default: '$vuetify.close',
     },
-    disabled: Boolean,
     draggable: Boolean,
     filter: Boolean,
     filterIcon: {
@@ -66,6 +68,7 @@ export const VChip = defineComponent({
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
+    ...makeGroupItemProps(),
     ...makeRoundedProps(),
     ...makeRouterProps(),
     ...makeSizeProps(),
@@ -87,6 +90,7 @@ export const VChip = defineComponent({
     const { borderClasses } = useBorder(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { elevationClasses } = useElevation(props)
+    const group = useGroupItem(props, VChipGroupSymbol, false)
     const { roundedClasses } = useRounded(props)
     const { sizeClasses } = useSize(props)
     const { densityClasses } = useDensity(props)
@@ -102,8 +106,11 @@ export const VChip = defineComponent({
       const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasAppend = !!(slots.append || props.appendIcon || props.appendAvatar)
       const hasClose = !!(slots.close || props.closable)
+      const hasFilter = !!(slots.filter || props.filter) && group
       const hasPrepend = !!(slots.prepend || props.prependIcon || props.prependAvatar)
-      const isClickable = !props.disabled && (link.isClickable.value || props.link)
+      const hasColor = !group || group.isSelected.value
+      const isClickable = !props.disabled && (!!group || link.isClickable.value || props.link)
+      const onClickFunc = props.link ? props.link : group?.toggle
 
       return isActive.value && (
         <Tag
@@ -117,21 +124,38 @@ export const VChip = defineComponent({
             },
             themeClasses.value,
             borderClasses.value,
-            colorClasses.value,
+            hasColor ? colorClasses.value : undefined,
             densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,
             sizeClasses.value,
             variantClasses.value,
+            group?.selectedClass.value,
           ]}
-          style={ [colorStyles.value] }
+          style={[
+            hasColor ? colorStyles.value : undefined,
+          ]}
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }
           href={ link.href.value }
           v-ripple={ [isClickable && props.ripple, null] }
-          onClick={ isClickable && link.navigate }
+          onClick={ isClickable && onClickFunc }
         >
           { genOverlays(isClickable, 'v-chip') }
+
+          { hasFilter && (
+            <VExpandXTransition>
+              <div
+                class="v-chip__filter"
+                v-show={ group.isSelected.value }
+              >
+                { slots.filter
+                  ? slots.filter()
+                  : <VIcon icon={ props.filterIcon } />
+                }
+              </div>
+            </VExpandXTransition>
+          ) }
 
           { hasPrepend && (
             <div class="v-chip__prepend">
@@ -148,7 +172,14 @@ export const VChip = defineComponent({
             </div>
           ) }
 
-          { slots.default?.() ?? props.text }
+          { slots.default?.({
+            isSelected: group?.isSelected.value,
+            selectedClass: group?.selectedClass.value,
+            select: group?.select,
+            toggle: group?.toggle,
+            value: group?.value.value,
+            disabled: props.disabled,
+          }) ?? props.text }
 
           { hasAppend && (
             <div class="v-chip__append">
