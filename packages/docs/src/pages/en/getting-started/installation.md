@@ -82,7 +82,7 @@ Next, navigate to your project directory and add Vuetify to your project:
 
 ```bash
 cd my-app
-vue add vuetify
+npx @vue/cli add vuetify
 ```
 
 Once prompted, choose **Preview (Vuetify 3 + Vite)**:
