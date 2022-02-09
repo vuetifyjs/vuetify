@@ -89,14 +89,15 @@ export const VAppBar = defineComponent({
       Number(isExtended ? props.extensionHeight : 0)
     ))
     const isActive = useProxiedModel(props, 'modelValue', props.modelValue)
-    const layoutStyles = useLayoutItem(
-      props.name,
-      computed(() => parseInt(props.priority, 10)),
-      toRef(props, 'position'),
-      height,
-      height,
-      isActive,
-    )
+    const { layoutItemStyles } = useLayoutItem({
+      id: props.name,
+      priority: computed(() => parseInt(props.priority, 10)),
+      position: toRef(props, 'position'),
+      layoutSize: height,
+      elementSize: height,
+      active: isActive,
+      absolute: toRef(props, 'absolute'),
+    })
 
     return () => {
       const hasImage = !!(slots.image || props.image)
@@ -112,7 +113,6 @@ export const VAppBar = defineComponent({
               'v-app-bar--floating': props.floating,
               'v-app-bar--is-active': isActive.value,
               'v-app-bar--prominent': props.prominent,
-              'v-app-bar--absolute': props.absolute,
             },
             backgroundColorClasses.value,
             borderClasses.value,
@@ -122,7 +122,7 @@ export const VAppBar = defineComponent({
           ]}
           style={[
             backgroundColorStyles.value,
-            layoutStyles.value,
+            layoutItemStyles.value,
           ]}
         >
           { hasImage && (

@@ -2,7 +2,7 @@
 
 exports[`VAppBar should match a snapshot 1`] = `
 <header class="v-app-bar v-app-bar--is-active v-app-bar--density-default"
-        style="top: 0px; height: 64px; margin-left: 0px; margin-top: 0px; z-index: 2; transform: translateY(0%);"
+        style="top: 0px; height: 64px; margin-left: 0px; margin-top: 0px; z-index: 1004; transform: translateY(0%); position: fixed;"
 >
   <div class="v-app-bar__content"
        style="height: 64px;"
@@ -13,7 +13,7 @@ exports[`VAppBar should match a snapshot 1`] = `
 
 exports[`VAppBar should render image 1`] = `
 <header class="v-app-bar v-app-bar--is-active v-app-bar--density-default"
-        style="top: 0px; height: 64px; margin-left: 0px; margin-top: 0px; z-index: 2; transform: translateY(0%);"
+        style="top: 0px; height: 64px; margin-left: 0px; margin-top: 0px; z-index: 1004; transform: translateY(0%); position: fixed;"
 >
   <div class="v-app-bar__image">
     <div class="v-responsive v-img v-img--booting">

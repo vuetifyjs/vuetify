@@ -15,7 +15,7 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
-import { defineComponent } from '@/util'
+import { convertToUnit, defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -111,15 +111,30 @@ export const VNavigationDrawer = defineComponent({
 
       return isDragging.value ? size * dragProgress.value : size
     })
-    const layoutStyles = useLayoutItem(
-      props.name,
-      computed(() => parseInt(props.priority, 10)),
-      toRef(props, 'position'),
+    const { layoutItemStyles, layoutRect, layoutItemScrimStyles } = useLayoutItem({
+      id: props.name,
+      priority: computed(() => parseInt(props.priority, 10)),
+      position: toRef(props, 'position'),
       layoutSize,
-      width,
-      computed(() => isActive.value || isDragging.value),
-      computed(() => isDragging.value)
-    )
+      elementSize: width,
+      active: computed(() => isActive.value || isDragging.value),
+      disableTransitions: computed(() => isDragging.value),
+      absolute: toRef(props, 'absolute'),
+    })
+
+    const scrimStyles = computed(() => ({
+      ...isDragging.value ? {
+        opacity: dragProgress.value * 0.2,
+        transition: 'none',
+      } : undefined,
+      ...layoutRect.value ? {
+        left: convertToUnit(layoutRect.value.left),
+        right: convertToUnit(layoutRect.value.right),
+        top: convertToUnit(layoutRect.value.top),
+        bottom: convertToUnit(layoutRect.value.bottom),
+      } : undefined,
+      ...layoutItemScrimStyles.value,
+    }))
 
     return () => {
       const hasImage = (slots.image || props.image)
@@ -141,7 +156,6 @@ export const VNavigationDrawer = defineComponent({
                 'v-navigation-drawer--rail': props.rail,
                 'v-navigation-drawer--start': props.position === 'left',
                 'v-navigation-drawer--temporary': isTemporary.value,
-                'v-navigation-drawer--absolute': props.absolute,
               },
               themeClasses.value,
               backgroundColorClasses.value,
@@ -151,7 +165,7 @@ export const VNavigationDrawer = defineComponent({
             ]}
             style={[
               backgroundColorStyles.value,
-              layoutStyles.value,
+              layoutItemStyles.value,
               dragStyles.value,
             ]}
             { ...attrs }
@@ -186,10 +200,7 @@ export const VNavigationDrawer = defineComponent({
             { isTemporary.value && (isDragging.value || isActive.value) && (
               <div
                 class="v-navigation-drawer__scrim"
-                style={isDragging.value ? {
-                  opacity: dragProgress.value * 0.2,
-                  transition: 'none',
-                } : undefined}
+                style={ scrimStyles.value }
                 onClick={ () => isActive.value = false }
               />
             )}
