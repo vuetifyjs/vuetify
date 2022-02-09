@@ -3,10 +3,11 @@
 @use './variables' as *
 
 .v-alert
-  padding: $alert-padding
+  display: grid
+  grid-template-areas: "icon content close"
   position: relative
+  padding: $alert-padding
 
-  @include tools.elevation($alert-elevation)
   @include tools.position($alert-positions)
   @include tools.rounded($alert-border-radius)
   @include tools.theme($alert-theme...)
@@ -17,7 +18,7 @@
     --v-border-opacity: #{$alert-border-opacity}
 
   &--border
-    padding-inline-start: $alert-border-padding-inline-start
+    padding-inline-start: $alert-border-padding-inline
 
   &:not(.v-alert--prominent)
     .v-avatar
@@ -26,50 +27,18 @@
   &--variant-plain
     transition: $alert-plain-transition
 
+  // TODO
   @at-root
     @include tools.density('v-alert', $alert-density) using ($modifier)
-      padding-top: $alert-padding + $modifier
-      padding-bottom: $alert-padding + $modifier
+      padding: $alert-padding + $modifier
 
       &.v-alert--prominent
-        .v-alert__avatar
+        .v-alert-avatar
           margin-inline-start: $alert-prominent-avatar-margin-inline-start + $modifier * .5
           margin-inline-end: $alert-prominent-avatar-margin-inline-end + $modifier * .5
 
           .v-icon
             font-size: $alert-prominent-icon-font-size + ($modifier * $alert-icon-font-size-multiplier)
-
-.v-alert__avatar
-  align-self: flex-start
-  display: flex
-  position: relative
-  margin-inline-start: $alert-avatar-margin-inline-start
-  margin-inline-end: $alert-avatar-margin-inline-end
-
-  .v-alert--prominent &
-    align-self: center
-    flex: 1 0 auto
-    max-width: $alert-prominent-icon-size
-
-  .v-alert--tip &
-    margin-inline-start: $alert-tip-margin-inline-start
-    max-height: $alert-tip-max-height
-    max-width: $alert-tip-max-width
-
-    &::before
-      content: ''
-      top: 4px
-      left: 4px
-      position: absolute
-      width: 16px
-      height: 16px
-      background: $alert-tip-before-background
-      border-radius: 50%
-
-    .v-avatar
-      height: auto
-      max-width: inherit
-      max-height: inherit
 
 .v-alert__border
   border-radius: inherit
@@ -105,25 +74,31 @@
 
 .v-alert__close
   align-self: flex-start
+  cursor: pointer
   display: flex
   flex: 0 1 auto
-  margin-inline-start: $alert-close-margin-inline-start
-  padding-inline-start: $alert-close-padding-inline-start
-
-  .v-btn
-    height: inherit
-    width: inherit
+  grid-template: "close"
+  user-select: none
 
   .v-icon
     font-size: $alert-close-icon-font-size
 
-.v-alert__content
-  display: flex
+.v-alert__icon
+  grid-template: "icon"
 
+.v-alert-content
+  grid-template: "content"
   .v-alert--prominent &
     align-items: center
 
+  .v-alert--border-start &
+    padding-inline-start: $alert-border-padding-inline
+
+  .v-alert--border-end &
+    padding-inline-end: $alert-border-padding-inline
+
 .v-alert-text
+  grid-template: "text"
   padding: $alert-text-padding
 
   .v-alert--border-start &

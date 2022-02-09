@@ -2,8 +2,9 @@
 import './VAlert.sass'
 
 // Components
-import { VAvatar } from '@/components/VAvatar'
-import { VBtn } from '@/components/VBtn'
+import { VAlertContent } from './VAlertContent'
+import { VAlertText } from './VAlertText'
+import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
@@ -118,8 +119,9 @@ export const VAlert = defineComponent({
     return () => {
       const hasBorder = !!borderProps.value.border
       const hasClose = !!(slots.close || props.closable)
-      const hasPrepend = !!(slots.prepend || props.icon || props.type)
-      const hasText = !!(slots.default || props.text || hasClose)
+      const hasIcon = !!(slots.icon || icon.value)
+      const hasText = !!(slots.text || props.text)
+      const hasContent = hasText || slots.default
 
       return isActive.value && (
         <props.tag
@@ -155,50 +157,47 @@ export const VAlert = defineComponent({
             />
           ) }
 
-          <div class="v-alert__underlay" />
+          { hasIcon && (
+            <VIcon
+              class={[
+                'v-alert__icon',
+                props.tip && textColorClasses.value,
+              ]}
+              icon={ icon.value }
+              style={ props.tip && textColorStyles.value }
+            />
+          ) }
 
-          <div class="v-alert__content">
-            { hasPrepend && (
-              <div class="v-alert__avatar">
-                { slots.prepend
-                  ? slots.prepend()
-                  : (
-                    <VAvatar
-                      class={ props.tip && textColorClasses.value }
-                      style={ props.tip && textColorStyles.value }
-                      density={ props.density }
-                      icon={ icon.value }
-                    />
-                  )
-                }
-              </div>
-            ) }
+          { hasContent && (
+            <VAlertContent>
+              <div class="v-alert__underlay" />
 
-            { hasText && (
-              <div class="v-alert__text">
-                { slots.default
-                  ? slots.default()
-                  : props.text
-                }
+              { hasText && (
+                <VAlertText>
+                  { slots.text ? slots.text() : props.text }
+                </VAlertText>
+              ) }
 
-                { hasClose && (
-                  <div class="v-alert__close">
-                    { slots.close
-                      ? slots.close({ props: { onClick: onCloseClick } })
-                      : (
-                        <VBtn
-                          density={ props.density }
-                          icon={ props.closeIcon }
-                          variant="text"
-                          onClick={ onCloseClick }
-                        />
-                      )
-                    }
-                  </div>
-                ) }
-              </div>
-            ) }
-          </div>
+              { slots.default?.() }
+            </VAlertContent>
+          ) }
+
+          { hasClose && (
+            <div
+              class="v-alert__close"
+              onClick={ onCloseClick }
+            >
+              { slots.close
+                ? slots.close({ props: { onClick: onCloseClick } })
+                : (
+                  <VIcon
+                    icon={ props.closeIcon }
+                    size="small"
+                  />
+                )
+              }
+            </div>
+          ) }
         </props.tag>
       )
     }
