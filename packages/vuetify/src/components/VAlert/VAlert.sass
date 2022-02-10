@@ -3,131 +3,74 @@
 @use './variables' as *
 
 .v-alert
-  padding: $alert-padding
+  display: grid
+  grid-template-areas: "prepend content close"
+  grid-template-columns: min-content auto min-content
   position: relative
+  padding: $alert-padding
+  --v-alert-border-color: #{$alert-border-color}
 
-  @include tools.elevation($alert-elevation)
   @include tools.position($alert-positions)
   @include tools.rounded($alert-border-radius)
   @include tools.theme($alert-theme...)
   @include tools.variant($alert-variants...)
 
-  // has specificity issues without this selector
-  &.v-alert--border
-    --v-border-opacity: #{$alert-border-opacity}
-
   &--border
-    padding-inline-start: $alert-border-padding-inline-start
+    border-width: $alert-border-width
+    border-color: var(--v-alert-border-color)
+    border-style: $alert-border-style
 
-  &:not(.v-alert--prominent)
-    .v-avatar
-      --v-avatar-height: #{$alert-avatar-height}
+  &--border-start
+    border-inline-start-width: $alert-border-thin-width
+
+  &--border-end
+    border-inline-end-width: $alert-border-thin-width
+
+  &--border-top
+    border-top: $alert-border-thin-width
+
+  &--border-bottom
+    border-bottom: $alert-border-thin-width
 
   &--variant-plain
     transition: $alert-plain-transition
 
   @at-root
     @include tools.density('v-alert', $alert-density) using ($modifier)
-      padding-top: $alert-padding + $modifier
       padding-bottom: $alert-padding + $modifier
-
-      &.v-alert--prominent
-        .v-alert__avatar
-          margin-inline-start: $alert-prominent-avatar-margin-inline-start + $modifier * .5
-          margin-inline-end: $alert-prominent-avatar-margin-inline-end + $modifier * .5
-
-          .v-icon
-            font-size: $alert-prominent-icon-font-size + ($modifier * $alert-icon-font-size-multiplier)
-
-.v-alert__avatar
-  align-self: flex-start
-  display: flex
-  position: relative
-  margin-inline-start: $alert-avatar-margin-inline-start
-  margin-inline-end: $alert-avatar-margin-inline-end
-
-  .v-alert--prominent &
-    align-self: center
-    flex: 1 0 auto
-    max-width: $alert-prominent-icon-size
-
-  .v-alert--tip &
-    margin-inline-start: $alert-tip-margin-inline-start
-    max-height: $alert-tip-max-height
-    max-width: $alert-tip-max-width
-
-    &::before
-      content: ''
-      top: 4px
-      left: 4px
-      position: absolute
-      width: 16px
-      height: 16px
-      background: $alert-tip-before-background
-      border-radius: 50%
-
-    .v-avatar
-      height: auto
-      max-width: inherit
-      max-height: inherit
-
-.v-alert__border
-  border-radius: inherit
-  bottom: 0
-  left: 0
-  opacity: var(--v-border-opacity)
-  position: absolute
-  right: 0
-  top: 0
-  width: 100%
-
-  @include tools.border($alert-border...)
-
-  .v-alert--border-start &
-    border-inline-start-width: $alert-border-thin-width
-    border-inline-end-width: 0
-
-  .v-alert--border-top &
-    border-top-width: $alert-border-thin-width
-    border-bottom-width: 0
-
-  .v-alert--border-bottom &
-    border-bottom-width: $alert-border-thin-width
-    border-top-width: 0
-
-  .v-alert--border-end &
-    border-inline-end-width: $alert-border-thin-width
-    border-inline-start-width: 0
-
-  .v-alert--border.v-alert--tip &
-    --v-border-opacity: 1
-    border-inline-start-width: $alert-tip-border-inline-start-width
+      padding-top: $alert-padding + $modifier
 
 .v-alert__close
   align-self: flex-start
+  cursor: pointer
   display: flex
   flex: 0 1 auto
-  margin-inline-start: $alert-close-margin-inline-start
-  padding-inline-start: $alert-close-padding-inline-start
+  grid-area: close
+  user-select: none
 
-  .v-btn
-    height: inherit
-    width: inherit
-
-  .v-icon
-    font-size: $alert-close-icon-font-size
-
-.v-alert__content
-  display: flex
+.v-alert__prepend
+  grid-area: prepend
+  margin-inline-end: $alert-prepend-margin-inline-end
 
   .v-alert--prominent &
-    align-items: center
+    align-self: center
 
-.v-alert-text
-  padding: $alert-text-padding
+.v-alert__content
+  grid-area: content
 
+.v-alert__underlay
   .v-alert--border-start &
-    padding-inline-end: #{$alert-text-padding + $alert-border-thin-width}
+    border-top-left-radius: 0
+    border-bottom-left-radius: 0
 
   .v-alert--border-end &
-    padding-inline-start: #{$alert-text-padding + $alert-border-thin-width}
+    border-top-right-radius: 0
+    border-bottom-right-radius: 0
+
+  .v-alert--border-top &
+    border-top-left-radius: 0
+    border-top-right-radius: 0
+
+  .v-alert--border-bottom &
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0

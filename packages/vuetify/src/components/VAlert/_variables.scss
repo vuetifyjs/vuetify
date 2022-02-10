@@ -1,48 +1,20 @@
 @use '../../styles/settings';
 
 // Defaults
-$alert-avatar-height: 24px !default;
-$alert-avatar-margin-inline-end: 16px !default;
-$alert-avatar-margin-inline-start: 0 !default;
-$alert-avatar-margin-top: -6px !default;
-$alert-background: rgba(var(--v-theme-on-surface), var(--v-hover-opacity)) !default;
+$alert-background: rgb(var(--v-theme-on-surface-variant)) !default;
 $alert-border-color: currentColor !default;
-$alert-border-icon-margin: 8px !default;
-$alert-border-opacity: 0.26 !default;
-$alert-border-padding-inline-start: 24px !default;
 $alert-border-radius: settings.$border-radius-root !default;
 $alert-border-style: settings.$border-style-root !default;
 $alert-border-thin-width: 8px !default;
 $alert-border-width: 0 !default;
-$alert-close-icon-font-size: 20px !default;
-$alert-close-margin-inline-start: auto !default;
-$alert-close-padding-inline-start: 8px !default;
-$alert-color: rgb(var(--v-theme-on-surface)) !default;
+$alert-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $alert-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
-$alert-elevation: 0 !default;
-$alert-font-size: 16px !default;
-$alert-icon-font-size-multiplier: 1.5 !default;
+$alert-elevation: 1 !default;
 $alert-padding: 16px !default;
 $alert-plain-opacity: .62 !default;
 $alert-plain-transition: .2s opacity settings.$standard-easing !default;
-$alert-positions: absolute fixed !default;
-$alert-prominent-avatar-margin-inline-end: 16px !default;
-$alert-prominent-avatar-margin-inline-start: 0 !default;
-$alert-prominent-icon-font-size: 40px !default;
-$alert-prominent-icon-size: 40px !default;
-$alert-text-padding: 16px !default;
-$alert-tip-before-background: rgb(var(--v-theme-on-surface)) !default;
-$alert-tip-border-inline-start-width: 6px !default;
-$alert-tip-margin-inline-start: -33px !default;
-$alert-tip-max-height: 24px !default;
-$alert-tip-max-width: 24px !default;
-
-$alert-border: (
-  $alert-border-color,
-  $alert-border-style,
-  $alert-border-width,
-  $alert-border-thin-width
-) !default;
+$alert-positions: absolute fixed sticky !default;
+$alert-prepend-margin-inline-end: 16px !default;
 
 $alert-theme: (
   $alert-background,
