@@ -29,7 +29,7 @@
             />
           </template>
 
-          <span v-t="path" />
+          <span>{{ t(path) }}</span>
         </v-tooltip>
 
         <Codepen v-if="isLoaded" />
@@ -62,12 +62,15 @@
 
   // Composables
   import { useCodepen } from '@/composables/codepen'
+  import { useI18n } from 'vue-i18n'
   import { useTheme } from 'vuetify'
 
   // Utilities
   import { computed, mergeProps, onMounted, ref, shallowRef } from 'vue'
   import { getBranch } from '@/util/helpers'
   import { getExample } from 'virtual:examples'
+
+  const { t } = useI18n()
 
   const props = defineProps({
     file: {
