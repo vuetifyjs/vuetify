@@ -2,8 +2,6 @@
 import './VAlert.sass'
 
 // Components
-import { VAlertContent } from './VAlertContent'
-import { VAlertText } from './VAlertText'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
@@ -13,10 +11,8 @@ import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { makeVariantProps, useVariant } from '@/composables/variant'
-import { useBorder } from '@/composables/border'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed } from 'vue'
@@ -63,9 +59,7 @@ export const VAlert = defineComponent({
       default: true,
     },
     prominent: Boolean,
-    sticky: Boolean,
     text: String,
-    tip: Boolean,
     type: {
       type: String as PropType<ContextualType>,
       validator: (val: ContextualType) => allowedTypes.includes(val),
@@ -77,7 +71,7 @@ export const VAlert = defineComponent({
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
-    ...makeVariantProps(),
+    ...makeVariantProps({ variant: 'contained-flat' } as const),
   },
 
   emits: {
@@ -85,9 +79,6 @@ export const VAlert = defineComponent({
   },
 
   setup (props, { slots }) {
-    const borderProps = computed(() => ({
-      border: props.border === true || props.tip ? 'start' : props.border,
-    }))
     const isActive = useProxiedModel(props, 'modelValue')
     const icon = computed(() => {
       if (props.icon === false) return undefined
@@ -102,39 +93,33 @@ export const VAlert = defineComponent({
     }))
 
     const { themeClasses } = provideTheme(props)
-    const { borderClasses } = useBorder(borderProps.value)
     const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props)
     const { roundedClasses } = useRounded(props)
-    const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
-      return props.borderColor ?? (props.tip ? variantProps.value.color : undefined)
-    }))
 
     function onCloseClick (e: MouseEvent) {
       isActive.value = false
     }
 
     return () => {
-      const hasBorder = !!borderProps.value.border
       const hasClose = !!(slots.close || props.closable)
-      const hasIcon = !!(slots.icon || icon.value)
-      const hasText = !!(slots.text || props.text)
-      const hasContent = hasText || slots.default
+      const hasPrepend = !!(slots.prepend || icon.value)
 
       return isActive.value && (
         <props.tag
           class={[
             'v-alert',
+            props.border && {
+              'v-alert--border': true,
+              [`v-alert--border-${props.border === true ? 'start' : props.border}`]: true,
+            },
             {
-              [`v-alert--border-${borderProps.value.border}`]: hasBorder,
               'v-alert--prominent': props.prominent,
-              'v-alert--tip': props.tip,
             },
             themeClasses.value,
-            borderClasses.value,
-            !props.tip && colorClasses.value,
+            colorClasses.value,
             densityClasses.value,
             elevationClasses.value,
             positionClasses.value,
@@ -142,45 +127,33 @@ export const VAlert = defineComponent({
             variantClasses.value,
           ]}
           style={[
-            !props.tip && colorStyles.value,
+            colorStyles.value,
             positionStyles.value,
+            props.border && { '--v-alert-border-color': props.borderColor },
           ]}
           role="alert"
         >
-          { hasBorder && (
-            <div
-              class={[
-                'v-alert__border',
-                textColorClasses.value,
-              ]}
-              style={ textColorStyles.value }
-            />
+          { genOverlays(false, 'v-alert') }
+
+          { hasPrepend && (
+            <div class="v-alert__prepend">
+              { slots.prepend
+                ? slots.prepend()
+                : (
+                  <VIcon
+                    icon={ icon.value }
+                    size={ props.prominent ? 'large' : 'default' }
+                  />
+                )
+              }
+            </div>
           ) }
 
-          { hasIcon && (
-            <VIcon
-              class={[
-                'v-alert__icon',
-                props.tip && textColorClasses.value,
-              ]}
-              icon={ icon.value }
-              style={ props.tip && textColorStyles.value }
-            />
-          ) }
+          <div class="v-alert__content">
+            { slots.text ? slots.text() : props.text }
 
-          { hasContent && (
-            <VAlertContent>
-              <div class="v-alert__underlay" />
-
-              { hasText && (
-                <VAlertText>
-                  { slots.text ? slots.text() : props.text }
-                </VAlertText>
-              ) }
-
-              { slots.default?.() }
-            </VAlertContent>
-          ) }
+            { slots.default?.() }
+          </div>
 
           { hasClose && (
             <div
@@ -188,7 +161,7 @@ export const VAlert = defineComponent({
               onClick={ onCloseClick }
             >
               { slots.close
-                ? slots.close({ props: { onClick: onCloseClick } })
+                ? slots.close()
                 : (
                   <VIcon
                     icon={ props.closeIcon }
