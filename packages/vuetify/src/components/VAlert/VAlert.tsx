@@ -5,13 +5,13 @@ import './VAlert.sass'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
