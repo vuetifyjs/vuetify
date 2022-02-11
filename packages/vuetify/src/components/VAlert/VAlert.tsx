@@ -112,7 +112,7 @@ export const VAlert = defineComponent({
           class={[
             'v-alert',
             props.border && {
-              'v-alert--border': true,
+              'v-alert--border': !!props.border,
               [`v-alert--border-${props.border === true ? 'start' : props.border}`]: true,
             },
             {
@@ -129,11 +129,15 @@ export const VAlert = defineComponent({
           style={[
             colorStyles.value,
             positionStyles.value,
-            props.border && { '--v-alert-border-color': props.borderColor },
+            props.borderColor && { '--v-alert-border-color': props.borderColor },
           ]}
           role="alert"
         >
           { genOverlays(false, 'v-alert') }
+
+          { props.border && (
+            <div class="v-alert__border" />
+          ) }
 
           { hasPrepend && (
             <div class="v-alert__prepend">

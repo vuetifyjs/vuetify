@@ -7,6 +7,7 @@ $alert-border-radius: settings.$border-radius-root !default;
 $alert-border-style: settings.$border-style-root !default;
 $alert-border-thin-width: 8px !default;
 $alert-border-width: 0 !default;
+$alert-border-opacity: .38 !default;
 $alert-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $alert-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 $alert-elevation: 1 !default;
@@ -15,6 +16,13 @@ $alert-plain-opacity: .62 !default;
 $alert-plain-transition: .2s opacity settings.$standard-easing !default;
 $alert-positions: absolute fixed sticky !default;
 $alert-prepend-margin-inline-end: 16px !default;
+
+$alert-border: (
+  $alert-border-color,
+  $alert-border-style,
+  $alert-border-width,
+  $alert-border-thin-width
+) !default;
 
 $alert-theme: (
   $alert-background,
