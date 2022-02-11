@@ -2,6 +2,7 @@
 import './VAlert.sass'
 
 // Components
+import { VAlertTitle } from './VAlertTitle'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
@@ -59,6 +60,7 @@ export const VAlert = defineComponent({
       default: true,
     },
     prominent: Boolean,
+    title: String,
     text: String,
     type: {
       type: String as PropType<ContextualType>,
@@ -106,6 +108,7 @@ export const VAlert = defineComponent({
     return () => {
       const hasClose = !!(slots.close || props.closable)
       const hasPrepend = !!(slots.prepend || icon.value)
+      const hasTitle = !!(slots.title || props.title)
 
       return isActive.value && (
         <props.tag
@@ -154,6 +157,12 @@ export const VAlert = defineComponent({
           ) }
 
           <div class="v-alert__content">
+            { hasTitle && (
+              <VAlertTitle>
+                { slots.title ? slots.title() : props.title }
+              </VAlertTitle>
+            ) }
+
             { slots.text ? slots.text() : props.text }
 
             { slots.default?.() }
