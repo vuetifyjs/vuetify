@@ -14,7 +14,7 @@ related:
 
 The `v-divider` component is used to separate sections of lists or layouts.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

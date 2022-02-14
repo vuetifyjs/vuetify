@@ -13,7 +13,7 @@ related:
 
 The `v-input` component gives you a baseline to create your own custom inputs. It consists of a prepend/append slot, messages, and a default slot. It is _recommended_ that you extend this component, but it can be used as a standalone.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

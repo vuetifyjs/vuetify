@@ -13,7 +13,7 @@ related:
 
 The `v-avatar` component is typically used to display circular user profile pictures. This component will allow you to dynamically size and add a border radius of responsive images, icons, and text. A **tile** variation is available for displaying an avatar without border radius.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -47,7 +47,7 @@ The `v-avatar` default slot allows you to render content such as `v-icon` compon
 
 <example file="v-avatar/slot-default" />
 
-<discovery-ad />
+<discovery />
 
 ### Misc
 

@@ -13,7 +13,7 @@ related:
 
 The `v-expansion-panel` component is useful for reducing vertical space with large amounts of information. The default functionality of the component is to only display one expansion-panel body at a time; however, with the `multiple` property, the expansion-panel can remain open until explicitly closed.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

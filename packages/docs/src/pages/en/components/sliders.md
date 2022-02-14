@@ -14,7 +14,7 @@ related:
 
 The `v-slider` component can be used as an alternative visualization instead of a number input.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

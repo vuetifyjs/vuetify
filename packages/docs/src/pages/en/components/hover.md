@@ -14,7 +14,7 @@ related:
 
 The `v-hover` component provides a simple interface for handling hover states for any component.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

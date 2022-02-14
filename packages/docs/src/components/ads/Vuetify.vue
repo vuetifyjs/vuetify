@@ -1,6 +1,6 @@
 <template>
   <ads-base
-    class="v-vuetify-ad"
+    class="v-vuetify"
     v-bind="$attrs"
     comfortable
     border
@@ -78,7 +78,7 @@
 </script>
 
 <style lang="sass">
-  .v-vuetify-ad
+  .v-vuetify
     .powered-by
       color: rgba(0, 0, 0, .6)
       font-size: 0.625rem

@@ -13,7 +13,7 @@ related:
 
 The `v-progress-circular` component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

@@ -12,15 +12,28 @@ related:
 
 # Alerts
 
-The `v-alert` component is used to convey important information to the user through the use of contextual types, icons, and colors. These default types come in 4 variations: **success**, **info**, **warning**, and **error**. Default icons are assigned which help represent different actions each type portrays. Many parts of an alert such as `border`, `icon`, and `color` can also be customized to fit almost any situation.
+The `v-alert` component is used to convey important information to the user through the use of contextual types, icons, and colors.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
-Alerts in their simplest form are flat [sheets of paper](/components/sheets) that display a message.
+An alert is a [v-sheet](/components/sheets/) that specializes in getting the user's attention. While similar to [v-banner](/components/banners/) in functionality, `v-alert` is typically used inline with text and multiple times throughout an application.
 
 <usage name="v-alert" />
+
+## Specification
+
+The `v-alert` component consists of 3 main grid areas; **prepend**, **content**, and **close**.
+
+**[PICTURE PLACEHOLDER]**
+
+| Area       | Scope of Responsibility |
+| ---------- | ----------------------- |
+| 1. Prepend | Displays `v-icon` by **type** or a specifically defined **icon** |
+| 2. Content | Default slot, displays **text** prop if present |
+| 3. Title   | The `v-alert-title` is located within the content area, displays **title** prop if present |
+| 4. Close   | Displays `v-icon` that hides `v-alert` when clicked |
 
 ## API
 
@@ -72,7 +85,7 @@ The **outlined** prop inverts the style of an alert, inheriting the currently ap
 
 <example file="v-alert/prop-outlined" />
 
-<discovery-ad />
+<discovery />
 
 #### Prominent
 

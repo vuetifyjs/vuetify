@@ -9,7 +9,7 @@
     >
       <base-ad
         v-bind="$attrs"
-        class="v-vuetify-ad--promoted"
+        class="v-vuetify--promoted"
         compact
         color="transparent"
         dark
@@ -61,7 +61,7 @@
       ...createAdProps(),
       medium: {
         type: String,
-        default: 'promoted-ad',
+        default: 'promoted',
       },
     },
 
@@ -74,7 +74,7 @@
 
       function onClick () {
         // this.$gtag.event('click', {
-        //   event_category: 'vuetify-ads',
+        //   event_category: 'vuetifys',
         //   event_label: this.slug,
         //   value: 'promoted',
         // })
@@ -138,7 +138,7 @@
 </script>
 
 <style lang="sass">
-  .v-vuetify-ad--promoted
+  .v-vuetify--promoted
     p
       line-height: 1.1
 

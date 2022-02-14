@@ -14,7 +14,7 @@ related:
 
 Vuetify is always under development. We are constantly working towards improving the existing codebase, as well as adding new features and functionality that help make building applications even easier. Below is a tentative list of planned features. This is not an exhaustive list and is subject to change at any time without notice.
 
-<promoted-ad slug="vuetify-github-sponsors" />
+<promoted slug="vuetify-github-sponsors" />
 
 ## In Development
 
@@ -56,7 +56,7 @@ The following versions have continued maintenance for backwards compatible fixes
 
 ---
 
-<promoted-ad slug="vuetify-open-collective" />
+<promoted slug="vuetify-open-collective" />
 
 ## Released
 

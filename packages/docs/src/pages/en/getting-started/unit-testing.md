@@ -13,7 +13,7 @@ related:
 
 Unit tests are an important (and sometimes ignored) part of developing applications. They help us secure our processes and workflows, ensuring that the most critical parts of our projects are protected from accidental mistakes or oversights in our development. Because of this, Vue has its own testing utility called [vue-test-utils](https://vue-test-utils.vuejs.org/). It provides useful features for interacting with Vue components and works with many popular test runners.
 
-<entry-ad />
+<entry />
 
 <alert type="warning">
 
@@ -231,7 +231,7 @@ describe('CustomCard.vue', () => {
 })
 ```
 
-<vuetify-ad slug="material-dashboard-pro" />
+<vuetify slug="material-dashboard-pro" />
 
 ### Mocking Vuetify
 
@@ -352,6 +352,6 @@ describe('Test With Attribute', () => {
 })
 ```
 
-<promoted-ad type="theme" />
+<promoted type="theme" />
 
 <backmatter />

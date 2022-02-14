@@ -13,7 +13,7 @@ related:
 
 Textarea components are used for collecting large amounts of textual data.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

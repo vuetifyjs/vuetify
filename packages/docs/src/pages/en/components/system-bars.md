@@ -13,7 +13,7 @@ related:
 
 The `v-system-bar` component can be used for displaying statuses to the user. It looks like the Android system bar and can contain icons, spacers, and some text.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

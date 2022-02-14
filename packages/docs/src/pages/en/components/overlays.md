@@ -14,7 +14,7 @@ related:
 
 `v-overlay` is the base for components that float over the rest of the page, such as `v-menu` and `v-dialog`. It can also be used on its own and comes with everything you need to create a custom popover component.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

@@ -13,7 +13,7 @@ related:
 
 Stuck on a particular problem? Check some of these common gotchas before creating a ticket. If you still cannot find what you are looking for, you can submit an [issue](https://issues.vuetifyjs.com/) on GitHub or ask the in our [community](https://community.vuetifyjs.com/).
 
-<promoted-ad slug="vuetify-discord" />
+<promoted slug="vuetify-discord" />
 
 ## Table of Contents
 
@@ -159,7 +159,7 @@ export default {
 
   Apply the **fill-height** prop to `v-container`. This helper class normally only adds **height: 100%**, but for the container, it also looks for a child `v-layout` and applies the needed classes to vertically center the content.
 
-<promoted-ad slug="vuetify-reddit" />
+<promoted slug="vuetify-reddit" />
 
 - **My _/_ link is active when I'm on _/home_ page.**{ #link-active-home }
 
@@ -302,6 +302,6 @@ If you need help with an issue, please use one of our help channels:
 
 For additional inquiries, please reach out to [John Leider](mailto:john@vuetifyjs.com) or [Heather Leider](mailto:heather@vuetifyjs.com).
 
-<promoted-ad type="theme" />
+<promoted type="theme" />
 
 <backmatter />
