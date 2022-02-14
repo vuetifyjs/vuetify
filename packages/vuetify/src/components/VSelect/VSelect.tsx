@@ -44,7 +44,7 @@ export const VSelect = genericComponent<new <T>() => {
       default: () => ([]),
     },
     modelValue: {
-      type: [String, Array],
+      type: [Number, String, Array],
       default: () => ([]),
     },
     multiple: Boolean,
@@ -90,7 +90,7 @@ export const VSelect = genericComponent<new <T>() => {
       const array = []
 
       for (const { item } of filteredItems.value as any) {
-        const title = item?.title ?? item
+        const title = item?.title ?? String(item)
         const value = item?.value ?? item
 
         if (props.hideSelected && active.value.includes(value)) {
