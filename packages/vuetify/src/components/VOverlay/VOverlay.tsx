@@ -207,59 +207,62 @@ export const VOverlay = genericComponent<new () => {
             ref: activatorRef,
           }, toHandlers(activatorEvents.value), props.activatorProps),
         }) }
-        <Teleport
-          disabled={ !teleportTarget.value }
-          to={ teleportTarget.value }
-        >
-          { hasContent.value && (
-            <div
-              class={[
-                'v-overlay',
-                {
-                  'v-overlay--absolute': props.absolute || props.contained,
-                  'v-overlay--active': isActive.value,
-                  'v-overlay--contained': props.contained,
-                },
-                themeClasses.value,
-                rtlClasses.value,
-              ]}
-              style={{
-                top: convertToUnit(top.value),
-                zIndex: overlayZIndex.value,
-              }}
-              ref={ root }
-              {...attrs}
-            >
-              <Scrim
-                color={ scrimColor }
-                modelValue={ isActive.value && !!props.scrim }
-              />
-              <MaybeTransition
-                appear
-                onAfterLeave={ onAfterLeave }
-                persisted
-                transition={ props.transition }
-                target={ activatorEl.value }
+
+        { IN_BROWSER && (
+          <Teleport
+            disabled={ !teleportTarget.value }
+            to={ teleportTarget.value }
+          >
+            { hasContent.value && (
+              <div
+                class={[
+                  'v-overlay',
+                  {
+                    'v-overlay--absolute': props.absolute || props.contained,
+                    'v-overlay--active': isActive.value,
+                    'v-overlay--contained': props.contained,
+                  },
+                  themeClasses.value,
+                  rtlClasses.value,
+                ]}
+                style={{
+                  top: convertToUnit(top.value),
+                  zIndex: overlayZIndex.value,
+                }}
+                ref={ root }
+                {...attrs}
               >
-                <div
-                  ref={ contentEl }
-                  v-show={ isActive.value }
-                  v-click-outside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
-                  class={[
-                    'v-overlay__content',
-                    props.contentClass,
-                  ]}
-                  style={[
-                    dimensionStyles.value,
-                    contentStyles.value,
-                  ]}
+                <Scrim
+                  color={ scrimColor }
+                  modelValue={ isActive.value && !!props.scrim }
+                />
+                <MaybeTransition
+                  appear
+                  onAfterLeave={ onAfterLeave }
+                  persisted
+                  transition={ props.transition }
+                  target={ activatorEl.value }
                 >
-                  { slots.default?.({ isActive }) }
-                </div>
-              </MaybeTransition>
-            </div>
-          )}
-        </Teleport>
+                  <div
+                    ref={ contentEl }
+                    v-show={ isActive.value }
+                    v-click-outside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
+                    class={[
+                      'v-overlay__content',
+                      props.contentClass,
+                    ]}
+                    style={[
+                      dimensionStyles.value,
+                      contentStyles.value,
+                    ]}
+                  >
+                    { slots.default?.({ isActive }) }
+                  </div>
+                </MaybeTransition>
+              </div>
+            )}
+          </Teleport>
+        ) }
       </>
     ))
 
