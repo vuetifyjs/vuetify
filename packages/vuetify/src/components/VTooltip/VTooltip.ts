@@ -6,7 +6,6 @@ import Colorable from '../../mixins/colorable'
 import Delayable from '../../mixins/delayable'
 import Dependent from '../../mixins/dependent'
 import Menuable from '../../mixins/menuable'
-import Toggleable from '../../mixins/toggleable'
 
 // Helpers
 import { convertToUnit, keyCodes, getSlotType } from '../../util/helpers'
@@ -17,7 +16,7 @@ import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 
 /* @vue/component */
-export default mixins(Colorable, Delayable, Dependent, Menuable, Toggleable).extend({
+export default mixins(Colorable, Delayable, Dependent, Menuable).extend({
   name: 'v-tooltip',
 
   props: {

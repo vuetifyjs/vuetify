@@ -11,7 +11,6 @@ import Dependent from '../../mixins/dependent'
 import Menuable from '../../mixins/menuable'
 import Returnable from '../../mixins/returnable'
 import Roundable from '../../mixins/roundable'
-import Toggleable from '../../mixins/toggleable'
 import Themeable from '../../mixins/themeable'
 
 // Directives
@@ -33,11 +32,10 @@ import { VNode, VNodeDirective, VNodeData } from 'vue'
 const baseMixins = mixins(
   Dependent,
   Delayable,
-  Menuable,
   Returnable,
   Roundable,
-  Toggleable,
-  Themeable
+  Themeable,
+  Menuable,
 )
 
 /* @vue/component */
