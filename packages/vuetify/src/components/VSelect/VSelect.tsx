@@ -43,6 +43,10 @@ export const VSelect = genericComponent<new <T>() => {
       type: Array as PropType<SelectItem[]>,
       default: () => ([]),
     },
+    menuIcon: {
+      type: String,
+      default: 'mdi-menu-down',
+    },
     modelValue: {
       type: [Number, String, Array],
       default: () => ([]),
@@ -62,7 +66,7 @@ export const VSelect = genericComponent<new <T>() => {
     'update:modelValue': (val: any) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { slots, emit }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
     const activator = ref()
@@ -153,15 +157,20 @@ export const VSelect = genericComponent<new <T>() => {
           onBlur={ () => menu.value = false }
           modelValue={ model.value.join(', ') }
           onKeydown={ onKeydown }
-          { ...attrs }
         >
           {{
             ...slots,
-            appendInner: () => (
-              <VIcon
-                class="v-select__menu-icon"
-                icon="mdi-menu-down"
-              />
+            appendInner: slotProps => (
+              <>
+                { slots.appendInner?.(slotProps) }
+
+                { props.menuIcon && (
+                  <VIcon
+                    class="v-select__menu-icon"
+                    icon={ props.menuIcon }
+                  />
+                ) }
+              </>
             ),
             default: () => (
               <>
@@ -192,29 +201,29 @@ export const VSelect = genericComponent<new <T>() => {
                   </VMenu>
                 ) }
 
-                { selections.value.length > 0 && (
-                  <div class="v-select__selections v-field__input">
-                    { selections.value.map((selection, index) => (
-                      <div class="v-select__selection">
-                        { props.chips
-                          ? (
-                            <VChip
-                              text={ selection.title }
-                              size="small"
-                            />
-                          ) : (
-                            <span class="v-select__selection-text">
-                              { selection.title }
-                              { index < model.value.length - 1 && (
-                                <span class="v-select__selection-comma">,</span>
-                              ) }
-                            </span>
-                          )
-                        }
-                      </div>
-                    )) }
-                  </div>
-                ) }
+                <div class="v-select__selections v-field__input">
+                  { selections.value.map((selection, index) => (
+                    <div class="v-select__selection">
+                      { props.chips
+                        ? (
+                          <VChip
+                            text={ selection.title }
+                            size="small"
+                          />
+                        ) : (
+                          <span class="v-select__selection-text">
+                            { selection.title }
+                            { index < model.value.length - 1 && (
+                              <span class="v-select__selection-comma">,</span>
+                            ) }
+                          </span>
+                        )
+                      }
+                    </div>
+                  )) }
+
+                  { slots.selections?.() }
+                </div>
               </>
             ),
           }}

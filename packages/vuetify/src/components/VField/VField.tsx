@@ -49,6 +49,7 @@ export interface VFieldSlot extends DefaultInputSlot {
 }
 
 export const makeVFieldProps = propsFactory({
+  dirty: Boolean,
   appendInnerIcon: String,
   bgColor: String,
   clearable: Boolean,
@@ -118,7 +119,7 @@ export const VField = genericComponent<new <T>() => {
     const { loaderClasses } = useLoader(props)
     const { focusClasses, isFocused, focus, blur } = useFocus(props)
 
-    const isDirty = computed(() => wrapInArray(model.value || []).length > 0)
+    const isDirty = computed(() => wrapInArray(model.value || []).length > 0 || props.dirty)
     const isActive = computed(() => isDirty.value || isFocused.value)
     const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
 

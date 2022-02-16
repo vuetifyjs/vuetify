@@ -3,7 +3,6 @@ import './VAutocomplete.sass'
 
 // Components
 import { VChip } from '@/components/VChip'
-import { VIcon } from '@/components/VIcon'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
@@ -15,8 +14,8 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, ref, toRef, watch } from 'vue'
-import { genericComponent, getPropertyFromItem, useRender, wrapInArray } from '@/util'
+import { computed, ref, watch } from 'vue'
+import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { LinkProps } from '@/composables/router'
@@ -111,7 +110,21 @@ export const VAutocomplete = genericComponent<new <T>() => {
       return array
     })
     const selections = computed(() => {
-      return items.value.filter(item => active.value.includes(item.value))
+      const array = []
+
+      for (const value of active.value) {
+        const selection = props.items.find(item => {
+          return (
+            typeof item === 'string' ? item : item?.value
+          ) === value
+        })
+
+        if (selection) {
+          array.push(selection)
+        }
+      }
+
+      return array
     })
     const searchValue = computed({
       get: () => {
@@ -161,6 +174,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
       return (
         <VTextField
           ref={ vTextFieldRef }
+          v-model={ searchValue.value }
           class={[
             'v-autocomplete',
             {
@@ -169,6 +183,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
               [`v-autocomplete--${props.multiple ? 'multiple' : 'single'}`]: true,
             },
           ]}
+          dirty={ active.value.length > 0 }
           onClick:clear={ onClear }
           onClick:control={ () => props.openOnClick && (menu.value = true) }
           onFocus={ () => {
@@ -178,9 +193,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
             search.value = undefined
             menu.value = false
           } }
-          v-model={ searchValue.value }
           onKeydown={ onKeydown }
-          { ...attrs }
         >
           {{
             ...slots,
