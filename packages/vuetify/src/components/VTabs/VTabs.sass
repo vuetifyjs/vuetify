@@ -1,38 +1,50 @@
-// Imports
-@import './_variables.scss'
+@use 'sass:math'
+@forward './variables'
+@use 'sass:map'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
 
-+theme(v-tabs) using ($material)
-  > .v-tabs-bar
-    background-color: map-get($material, $tabs-bar-background-color)
+// +theme(v-tabs) using ($material)
+//   > .v-tabs-bar
+//     background-color: map-get($material, $tabs-bar-background-color)
 
-    .v-tab:not(.v-tab--active),
-    .v-tab:not(.v-tab--active) > .v-icon,
-    .v-tab:not(.v-tab--active) > .v-btn,
-    .v-tab--disabled
-      color: map-get($material, 'tabs')
+//     .v-tab:not(.v-tab--active),
+//     .v-tab:not(.v-tab--active) > .v-icon,
+//     .v-tab:not(.v-tab--active) > .v-btn,
+//     .v-tab--disabled
+//       color: map-get($material, 'tabs')
 
-  .v-tab
-    +states($material)
+//   .v-tab
+//     +states($material)
 
-+theme(v-tabs-items) using ($material)
-  background-color: map-get($material, 'cards')
+// +theme(v-tabs-items) using ($material)
+//   background-color: map-get($material, 'cards')
 
-.v-tabs-bar
-  &.primary,
-  &.secondary,
-  &.accent,
-  &.success,
-  &.error,
-  &.warning,
-  &.info
-    .v-tab,
-    .v-tabs-slider
-      color: map-deep-get($material-dark, 'text', 'primary')
+// .v-tabs-bar
+//   &.primary,
+//   &.secondary,
+//   &.accent,
+//   &.success,
+//   &.error,
+//   &.warning,
+//   &.info
+//     .v-tab,
+//     .v-tabs-slider
+//       color: map-deep-get($material-dark, 'text', 'primary')
 
 // Block
 .v-tabs
+  position: relative
+  display: flex
   flex: 1 1 auto
   width: 100%
+
+  &--vertical
+    flex-direction: column
+
+  &--horizontal
+    flex-direction: row
 
   .v-menu__activator
     height: 100%
@@ -66,81 +78,81 @@
   &.v-item-group > *
     cursor: initial
 
-.v-tab
-  align-items: center
-  cursor: pointer
-  display: flex
-  flex: 0 1 auto
-  font-size: $tab-font-size
-  font-weight: $tab-font-weight
-  justify-content: center
-  letter-spacing: $tabs-item-letter-spacing
-  line-height: $tab-line-height
-  min-width: $tabs-item-min-width
-  max-width: $tabs-item-max-width
-  outline: none
-  padding: $tabs-item-padding
-  position: relative
-  text-align: center
-  text-decoration: none
-  text-transform: uppercase
-  transition: none
-  user-select: none
+// .v-tab
+//   align-items: center
+//   cursor: pointer
+//   display: flex
+//   flex: 0 1 auto
+//   font-size: $tab-font-size
+//   font-weight: $tab-font-weight
+//   justify-content: center
+//   letter-spacing: $tabs-item-letter-spacing
+//   line-height: $tab-line-height
+//   min-width: $tabs-item-min-width
+//   max-width: $tabs-item-max-width
+//   outline: none
+//   padding: $tabs-item-padding
+//   position: relative
+//   text-align: center
+//   text-decoration: none
+//   text-transform: uppercase
+//   transition: none
+//   user-select: none
 
-  // Needs increased specificity
-  &.v-tab
-    color: inherit
+//   // Needs increased specificity
+//   &.v-tab
+//     color: inherit
 
-  &:before
-    background-color: currentColor
-    bottom: 0
-    content: ''
-    left: 0
-    opacity: 0
-    pointer-events: none
-    position: absolute
-    right: 0
-    top: 0
-    transition: $primary-transition
+//   &:before
+//     background-color: currentColor
+//     bottom: 0
+//     content: ''
+//     left: 0
+//     opacity: 0
+//     pointer-events: none
+//     position: absolute
+//     right: 0
+//     top: 0
+//     transition: settings.$standard-easing
 
 
-.v-tabs-slider
-  background-color: currentColor
-  height: 100%
-  width: 100%
+// .v-tabs-slider
+//   background-color: currentColor
+//   height: 100%
+//   width: 100%
 
-  &-wrapper
-    bottom: 0
-    margin: 0 !important
-    position: absolute
-    transition: $primary-transition
-    z-index: 1
+//   &-wrapper
+//     bottom: 0
+//     margin: 0 !important
+//     position: absolute
+//     transition: settings.$standard-easing
+//     z-index: 1
 
 // Modifier
 .v-tabs--align-with-title > .v-tabs-bar:not(.v-tabs-bar--show-arrows):not(.v-slide-group--is-overflowing) > .v-slide-group__wrapper > .v-tabs-bar__content
   & > .v-tab:first-child,
   & > .v-tabs-slider-wrapper + .v-tab
-    +ltr()
+    +tools.ltr()
       margin-left: $tabs-item-align-with-title-margin
 
-    +rtl()
+    +tools.rtl()
       margin-right: $tabs-item-align-with-title-margin
 
 .v-tabs--fixed-tabs > .v-tabs-bar,
 .v-tabs--centered > .v-tabs-bar
   .v-tabs-bar__content > *:last-child
-    +ltr()
+    +tools.ltr()
       margin-right: auto
 
-    +rtl()
+    +tools.rtl()
       margin-left: auto
 
   .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper),
   .v-tabs-slider-wrapper + *
-    +ltr()
+    +tools.ltr()
       margin-left: auto
 
-    +rtl()
+    +tools.rtl()
       margin-right: auto
 
 .v-tabs--fixed-tabs > .v-tabs-bar
@@ -169,17 +181,17 @@
 .v-tabs--right > .v-tabs-bar
   .v-tab:first-child,
   .v-tabs-slider-wrapper + .v-tab
-    +ltr()
+    +tools.ltr()
       margin-left: auto
 
-    +rtl()
+    +tools.rtl()
       margin-right: auto
 
   .v-tab:last-child
-    +ltr()
+    +tools.ltr()
       margin-right: 0
 
-    +rtl()
+    +tools.rtl()
       margin-left: 0
 
 .v-tabs--vertical
@@ -210,19 +222,19 @@
       .v-tab
         height: $tabs-item-vertical-icons-and-text-height
 
-.v-tab--active
-  color: inherit
+// .v-tab--active
+//   color: inherit
 
-  &.v-tab:not(:focus)::before
-    opacity: 0
+//   &.v-tab:not(:focus)::before
+//     opacity: 0
 
-  .v-icon,
-  .v-btn.v-btn--flat
-    color: inherit
+//   .v-icon,
+//   .v-btn.v-btn--flat
+//     color: inherit
 
-.v-tab--disabled
-  opacity: $tab-disabled-opacity
+// .v-tab--disabled
+//   opacity: $tab-disabled-opacity
 
-  &,
-  & *
-    pointer-events: none
+//   &,
+//   & *
+//     pointer-events: none

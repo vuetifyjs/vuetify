@@ -1,8 +1,13 @@
-@import '../../styles/styles.sass';
+@use 'sass:math';
+@use 'sass:map';
+@use '../../styles/settings';
+@use '../../styles/tools';
 
 $tab-disabled-opacity: .5 !default;
-$tab-font-size: map-deep-get($typography, 'subtitle-2', 'size') !default;
-$tab-font-weight: map-deep-get($typography, 'subtitle-2', 'weight') !default;
+// $tab-font-size: map-deep-get($typography, 'subtitle-2', 'size') !default;
+// $tab-font-weight: map-deep-get($typography, 'subtitle-2', 'weight') !default;
+$tab-font-size: '14px';
+$tab-font-weight: 'normal';
 $tab-line-height: normal !default;
 $tabs-bar-background-color: 'cards' !default;
 $tabs-bar-height: 48px !default;
@@ -15,3 +20,4 @@ $tabs-item-min-width: 90px !default;
 $tabs-item-padding: 0 16px !default;
 $tabs-item-vertical-height: $tabs-bar-height !default;
 $tabs-item-vertical-icons-and-text-height: $tabs-icons-and-text-bar-height !default;
+$tabs-slider-size: 2px !default;

@@ -1,0 +1,16 @@
+@forward './variables'
+@use './variables' as *
+@use '../../styles/settings'
+
+.v-tabs-slider
+  position: absolute
+  transition: .15s settings.$standard-easing
+  background: rgb(var(--v-theme-on-surface))
+
+  .v-tabs--horizontal &
+    height: $tabs-slider-size
+    bottom: 0
+
+  .v-tabs--vertical &
+    width: $tabs-slider-size
+    left: 0

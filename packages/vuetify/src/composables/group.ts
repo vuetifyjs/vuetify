@@ -2,7 +2,7 @@
 import { useProxiedModel } from './proxiedModel'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef } from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, shallowReactive, toRef } from 'vue'
 import { consoleWarn, deepEqual, findChildren, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -142,6 +142,7 @@ export function useGroup (
 ) {
   let isUnmounted = false
   const items = reactive<GroupItem[]>([])
+  // const refs = shallowReactive<HTMLElement[]>([])
   const selected = useProxiedModel(
     props,
     'modelValue',
@@ -170,8 +171,11 @@ export function useGroup (
       .filter(cmp => !!cmp.provides[injectKey as any]) // TODO: Fix in TS 4.4
     const index = instances.indexOf(vm)
 
-    if (index > -1) items.splice(index, 0, unwrapped)
-    else items.push(unwrapped)
+    if (index > -1) {
+      items.splice(index, 0, unwrapped)
+    } else {
+      items.push(unwrapped)
+    }
   }
 
   function unregister (id: number) {
