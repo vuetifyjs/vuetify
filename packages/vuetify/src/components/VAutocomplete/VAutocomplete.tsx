@@ -1,5 +1,5 @@
 // Styles
-import './VSelect.sass'
+import './VAutocomplete.sass'
 
 // Components
 import { VChip } from '@/components/VChip'
@@ -9,14 +9,14 @@ import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
 
 // Composables
-import { makeTransitionProps } from '@/composables/transition'
+import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useForwardRef } from '@/composables/forwardRef'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, ref, watch } from 'vue'
-import { genericComponent, useRender, wrapInArray } from '@/util'
+import { computed, ref, toRef, watch } from 'vue'
+import { genericComponent, getPropertyFromItem, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { LinkProps } from '@/composables/router'
@@ -27,13 +27,13 @@ export type SelectItem = string | (string | number)[] | ((item: Record<string, a
   text: string
 })
 
-export const VSelect = genericComponent<new <T>() => {
+export const VAutocomplete = genericComponent<new <T>() => {
   $slots: MakeSlots<{
     default: []
     title: []
   }>
 }>()({
-  name: 'VSelect',
+  name: 'VAutocomplete',
 
   props: {
     chips: Boolean,
@@ -53,19 +53,23 @@ export const VSelect = genericComponent<new <T>() => {
       default: '$vuetify.noDataText',
     },
     openOnClear: Boolean,
+    openOnClick: Boolean,
+    search: String,
 
-    ...makeTransitionProps({ transition: 'scale-transition' }),
+    ...makeFilterProps(),
   },
 
   emits: {
     'click:clear': (e: MouseEvent) => true,
+    'update:search': (val: any) => true,
     'update:modelValue': (val: any) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
     const activator = ref()
+    const search = useProxiedModel(props, 'search')
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -73,6 +77,7 @@ export const VSelect = genericComponent<new <T>() => {
       v => wrapInArray(v),
       (v: any) => props.multiple ? v : v[0]
     )
+    const { filteredItems } = useFilter(props, props.items, search)
 
     const menu = ref(false)
     const active = computed({
@@ -88,7 +93,7 @@ export const VSelect = genericComponent<new <T>() => {
     const items = computed(() => {
       const array = []
 
-      for (const item of props.items as any) {
+      for (const { item } of filteredItems.value as any) {
         const title = item?.title ?? String(item)
         const value = item?.value ?? item
 
@@ -108,6 +113,16 @@ export const VSelect = genericComponent<new <T>() => {
     const selections = computed(() => {
       return items.value.filter(item => active.value.includes(item.value))
     })
+    const searchValue = computed({
+      get: () => {
+        return String(search.value ?? '')
+      },
+      set: val => {
+        search.value = val
+
+        emit('update:search', val)
+      },
+    })
 
     function onClear (e: MouseEvent) {
       active.value = []
@@ -115,6 +130,8 @@ export const VSelect = genericComponent<new <T>() => {
       if (props.openOnClear) {
         menu.value = true
       }
+
+      search.value = undefined
     }
     function onKeydown (e: KeyboardEvent) {
       if (
@@ -136,42 +153,46 @@ export const VSelect = genericComponent<new <T>() => {
       activator.value = val.$el.querySelector('.v-input__control')
     })
 
+    watch(() => active.value, () => {
+      search.value = props.multiple ? undefined : selections.value[0]?.title
+    })
+
     useRender(() => {
       return (
         <VTextField
           ref={ vTextFieldRef }
           class={[
-            'v-select',
+            'v-autocomplete',
             {
-              'v-select--active-menu': menu.value,
-              'v-select--chips': !!props.chips,
+              'v-autocomplete--active-menu': menu.value,
+              'v-autocomplete--chips': !!props.chips,
+              [`v-autocomplete--${props.multiple ? 'multiple' : 'single'}`]: true,
             },
           ]}
-          readonly
           onClick:clear={ onClear }
-          onClick:control={ () => menu.value = true }
-          onBlur={ () => menu.value = false }
-          modelValue={ model.value.join(', ') }
+          onClick:control={ () => props.openOnClick && (menu.value = true) }
+          onFocus={ () => {
+            search.value = props.multiple ? undefined : selections.value[0]?.title
+          }}
+          onBlur={ () => {
+            search.value = undefined
+            menu.value = false
+          } }
+          v-model={ searchValue.value }
           onKeydown={ onKeydown }
           { ...attrs }
         >
           {{
             ...slots,
-            appendInner: () => (
-              <VIcon
-                class="v-select__menu-icon"
-                icon="mdi-menu-down"
-              />
-            ),
             default: () => (
               <>
                 { activator.value && (
                   <VMenu
                     v-model={ menu.value }
                     activator={ activator.value }
-                    contentClass="v-select__content"
+                    contentClass="v-autocomplete__content"
                     openOnClick={ false }
-                    transition={ props.transition }
+                    transition={ false }
                   >
                     <VList
                       v-model:active={ active.value }
@@ -192,29 +213,27 @@ export const VSelect = genericComponent<new <T>() => {
                   </VMenu>
                 ) }
 
-                { selections.value.length > 0 && (
-                  <div class="v-select__selections v-field__input">
-                    { selections.value.map((selection, index) => (
-                      <div class="v-select__selection">
-                        { props.chips
-                          ? (
-                            <VChip
-                              text={ selection.title }
-                              size="small"
-                            />
-                          ) : (
-                            <span class="v-select__selection-text">
-                              { selection.title }
-                              { index < model.value.length - 1 && (
-                                <span class="v-select__selection-comma">,</span>
-                              ) }
-                            </span>
-                          )
-                        }
-                      </div>
-                    )) }
-                  </div>
-                ) }
+                <div class="v-autocomplete__selections v-field__input">
+                  { selections.value.map((selection, index) => (
+                    <div class="v-autocomplete__selection">
+                      { props.chips
+                        ? (
+                          <VChip
+                            text={ selection.title }
+                            size="small"
+                          />
+                        ) : (
+                          <span class="v-autocomplete__selection-text">
+                            { selection.title }
+                            { index < model.value.length - 1 && (
+                              <span class="v-autocomplete__selection-comma">,</span>
+                            ) }
+                          </span>
+                        )
+                      }
+                    </div>
+                  )) }
+                </div>
               </>
             ),
           }}
@@ -228,4 +247,4 @@ export const VSelect = genericComponent<new <T>() => {
   },
 })
 
-export type VSelect = InstanceType<typeof VSelect>
+export type VAutocomplete = InstanceType<typeof VAutocomplete>

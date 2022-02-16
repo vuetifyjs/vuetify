@@ -117,7 +117,7 @@ export function filterItems (
 export function useFilter (
   props: FilterProps,
   items: Ref<any[]> | any[],
-  query?: Ref<string>,
+  query?: Ref<string | undefined> | undefined,
 ) {
   const strQuery = computed(() => (
     typeof query?.value !== 'string' &&
