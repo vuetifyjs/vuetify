@@ -107,7 +107,6 @@ export const VInput = genericComponent<new <T>() => {
       const hasPrepend = !!(slots.prepend || props.prependIcon)
       const hasAppend = !!(slots.append || props.appendIcon)
       const hasMessages = !!(
-        slots.item ||
         props.messages?.length ||
         errorMessages.value.length
       )
@@ -164,11 +163,11 @@ export const VInput = genericComponent<new <T>() => {
             <div class="v-input__details">
               <VMessages
                 active={ hasMessages }
-                value={ errorMessages.value.length > 0
+                messages={ errorMessages.value.length > 0
                   ? errorMessages.value
                   : props.messages
                 }
-                v-slots={{ item: slots.item }}
+                v-slots={{ message: slots.message }}
               />
 
               { slots.details?.(slotProps.value) }
