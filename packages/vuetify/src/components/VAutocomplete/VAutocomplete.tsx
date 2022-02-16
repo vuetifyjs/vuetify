@@ -26,6 +26,19 @@ export type SelectItem = string | (string | number)[] | ((item: Record<string, a
   text: string
 })
 
+function genCharacters (text: string, search: string) {
+  const searchInput = search.toLocaleLowerCase()
+  const index = text.toLocaleLowerCase().indexOf(searchInput)
+
+  if (index < 0) return { start: text, middle: '', end: '' }
+
+  const start = text.slice(0, index)
+  const middle = text.slice(index, index + searchInput.length)
+  const end = text.slice(index + searchInput.length)
+
+  return { start, middle, end }
+}
+
 export const VAutocomplete = genericComponent<new <T>() => {
   $slots: MakeSlots<{
     default: []
@@ -89,18 +102,29 @@ export const VAutocomplete = genericComponent<new <T>() => {
         menu.value = false
       },
     })
+    const searchValue = computed({
+      get: () => {
+        return String(search.value ?? '')
+      },
+      set: val => {
+        search.value = val
+
+        emit('update:search', val)
+      },
+    })
     const items = computed(() => {
       const array = []
 
       for (const { item } of filteredItems.value as any) {
         const title = item?.title ?? String(item)
+        const { start, middle, end } = genCharacters(title, searchValue.value)
         const value = item?.value ?? item
 
         if (props.hideSelected && active.value.includes(value)) {
           continue
         }
 
-        array.push({ title, value })
+        array.push({ start, middle, end, title, value })
       }
 
       if (!array.length && !props.hideNoData) {
@@ -125,16 +149,6 @@ export const VAutocomplete = genericComponent<new <T>() => {
       }
 
       return array
-    })
-    const searchValue = computed({
-      get: () => {
-        return String(search.value ?? '')
-      },
-      set: val => {
-        search.value = val
-
-        emit('update:search', val)
-      },
     })
 
     function onClear (e: MouseEvent) {
@@ -218,7 +232,19 @@ export const VAutocomplete = genericComponent<new <T>() => {
                             <VListItem
                               onMousedown={ (e: MouseEvent) => e.preventDefault() }
                               { ...item }
-                            />
+                            >
+                              {{
+                                title: () => (
+                                  <div>
+                                    { item.start }
+
+                                    <span class="v-autocomplete__match">{ item.middle }</span>
+
+                                    { item.end }
+                                  </div>
+                                ),
+                              }}
+                            </VListItem>
                           )
                         },
                       }}
