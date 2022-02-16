@@ -40,7 +40,6 @@ jobs:
           diff=$(($now - $last))
           if [ $diff -gt 173000 ]; then
               echo "Last commit was more than 48 hours ago, skipping release"
-              exit 1
           fi
       - uses: actions/cache@v2
         with:
@@ -50,18 +49,12 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn lerna version --conventional-commits --conventional-prerelease --no-push --no-commit-hooks --preid "$RELEASE_BRANCH-$(date +'%Y%m%d')" --yes
+      - run: yarn conventional-changelog -p angular -r 2
       - run: yarn conventional-changelog -p angular --outfile ./packages/vuetify/CHANGELOG.md -r 2
+      - run: cat ./packages/vuetify/CHANGELOG.md
       - run: >-
           node -e "fs.writeFileSync(
             './package.json',
             JSON.stringify({ ...require('./package.json'), name: '@vuetify/nightly' }, null, 2)
           )"
         working-directory: ./packages/vuetify
-      - run: yarn lerna run build --scope @vuetify/nightly
-      - name: NPM Release
-        run: |
-          npm config set //registry.npmjs.org/:_authToken ${NPM_API_KEY:?}
-          npm publish ./packages/vuetify --tag $RELEASE_TAG --access public
-        env:
-          NPM_API_KEY: ${{ secrets.NPM_TOKEN }}
-          TAG_NAME: ${{ env.RELEASE_TAG }}
