@@ -44,7 +44,8 @@
     "dist/",
     "lib/",
     "es5/",
-    "types/"
+    "types/",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "watch": "cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch",
