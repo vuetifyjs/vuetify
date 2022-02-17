@@ -68,7 +68,6 @@ export const VAutocomplete = genericComponent<new <T>() => {
       default: '$vuetify.noDataText',
     },
     openOnClear: Boolean,
-    openOnClick: Boolean,
     search: String,
 
     ...makeFilterProps({ filterKeys: ['title'] }),
