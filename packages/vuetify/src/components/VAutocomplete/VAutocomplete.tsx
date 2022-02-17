@@ -86,7 +86,9 @@ export const VAutocomplete = genericComponent<new <T>() => {
     const vTextFieldRef = ref()
     const activator = ref()
     const isFocused = ref(false)
-    const search = useProxiedModel(props, 'search')
+    const isPristine = ref(true)
+    const menu = ref(false)
+    const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -94,17 +96,6 @@ export const VAutocomplete = genericComponent<new <T>() => {
       v => wrapInArray(v),
       (v: any) => props.multiple ? v : v[0]
     )
-    const searchValue = computed({
-      get: () => {
-        return String(search.value ?? '')
-      },
-      set: val => {
-        search.value = val
-
-        emit('update:search', val)
-      },
-    })
-    const menu = ref(false)
     const items = computed(() => {
       const array = []
 
@@ -128,12 +119,13 @@ export const VAutocomplete = genericComponent<new <T>() => {
 
       return array
     })
-    const { filteredItems } = useFilter(props, items.value, search)
     const selections = computed(() => {
       return wrapInArray(model.value).map(value => {
         return items.value.find(item => item.value === value)
       })
     })
+    const searchValue = computed(() => isPristine.value ? undefined : search.value)
+    const { filteredItems } = useFilter(props, items.value, searchValue)
 
     function onClear (e: MouseEvent) {
       model.value = []
@@ -150,18 +142,17 @@ export const VAutocomplete = genericComponent<new <T>() => {
         !menu.value
       ) {
         menu.value = true
-      }
-
-      if (
+      } else if (
         e.key === 'Escape' &&
         menu.value
       ) {
         menu.value = false
+      } else if (
+        !e.ctrlKey &&
+        !e.shiftKey
+      ) {
+        isPristine.value = false
       }
-    }
-    function onFocus (e: FocusEvent) {
-      isFocused.value = true
-      search.value = props.multiple ? undefined : selections.value[0]?.title
     }
 
     watch(() => vTextFieldRef.value, val => {
@@ -169,18 +160,27 @@ export const VAutocomplete = genericComponent<new <T>() => {
     })
 
     watch(() => model.value, () => {
-      if (!isFocused.value) return
+      if (!isFocused.value || props.multiple) return
 
-      searchValue.value = props.multiple ? undefined : selections.value[0]?.title
+      menu.value = false
+      search.value = selections.value[0]?.title
+    })
+    watch(() => isFocused.value, val => {
+      menu.value = val
+      isPristine.value = true
 
-      if (!props.multiple) menu.value = false
+      if (val && !props.multiple) {
+        search.value = selections.value[0]?.title
+      } else if (!val) {
+        search.value = ''
+      }
     })
 
     useRender(() => {
       return (
         <VTextField
           ref={ vTextFieldRef }
-          v-model={ searchValue.value }
+          v-model={ search.value }
           class={[
             'v-autocomplete',
             {
@@ -191,16 +191,9 @@ export const VAutocomplete = genericComponent<new <T>() => {
           ]}
           dirty={ model.value.length > 0 }
           onClick:clear={ onClear }
-          onClick:control={ () => props.openOnClick && (menu.value = true) }
-          onFocus={ () => {
-            isFocused.value = true
-            search.value = props.multiple ? undefined : selections.value[0]?.title
-          } }
-          onBlur={ () => {
-            isFocused.value = false
-            search.value = undefined
-            menu.value = false
-          } }
+          onClick:control={ () => menu.value = true }
+          onFocus={ () => isFocused.value = true }
+          onBlur={ () => isFocused.value = false }
           onKeydown={ onKeydown }
         >
           {{
@@ -224,7 +217,13 @@ export const VAutocomplete = genericComponent<new <T>() => {
                           value={ item.value }
                           onMousedown={ (e: MouseEvent) => e.preventDefault() }
                         >
-                          {{ title: () => highlightResult(item.title, matches.title, searchValue.value?.length ?? 0) }}
+                          {{
+                            title: () => {
+                              return isPristine.value
+                                ? item.title
+                                : highlightResult(item.title, matches.title, search.value?.length ?? 0)
+                            },
+                          }}
                         </VListItem>
                       )) }
                     </VList>
