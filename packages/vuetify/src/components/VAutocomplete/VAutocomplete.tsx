@@ -8,6 +8,7 @@ import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
 
 // Composables
+import type { FilterMatch } from '@/composables/filter'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useForwardRef } from '@/composables/forwardRef'
 import { useLocale } from '@/composables/locale'
@@ -21,22 +22,24 @@ import { genericComponent, useRender, wrapInArray } from '@/util'
 import type { LinkProps } from '@/composables/router'
 import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
+import { makeTransitionProps } from '@/composables/transition'
 
 export type SelectItem = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any) | (LinkProps & {
   text: string
 })
 
-function genCharacters (text: string, search: string) {
-  const searchInput = search.toLocaleLowerCase()
-  const index = text.toLocaleLowerCase().indexOf(searchInput)
+function highlightResult (text: string, matches: FilterMatch, length: number) {
+  if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
 
-  if (index < 0) return { start: text, middle: '', end: '' }
-
-  const start = text.slice(0, index)
-  const middle = text.slice(index, index + searchInput.length)
-  const end = text.slice(index + searchInput.length)
-
-  return { start, middle, end }
+  return typeof matches === 'number' && ~matches
+    ? (
+      <>
+        <span class="v-autocomplete__unmask">{ text.substr(0, matches) }</span>
+        <span class="v-autocomplete__mask">{ text.substr(matches, length) }</span>
+        <span class="v-autocomplete__unmask">{ text.substr(matches + length) }</span>
+      </>
+    )
+    : text
 }
 
 export const VAutocomplete = genericComponent<new <T>() => {
@@ -52,7 +55,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
     hideNoData: Boolean,
     hideSelected: Boolean,
     items: {
-      type: Array as PropType<SelectItem[]>,
+      type: Array as PropType<any[]>,
       default: () => ([]),
     },
     modelValue: {
@@ -68,7 +71,8 @@ export const VAutocomplete = genericComponent<new <T>() => {
     openOnClick: Boolean,
     search: String,
 
-    ...makeFilterProps(),
+    ...makeFilterProps({ filterKeys: ['title'] }),
+    ...makeTransitionProps({ transition: false } as const),
   },
 
   emits: {
@@ -77,10 +81,11 @@ export const VAutocomplete = genericComponent<new <T>() => {
     'update:modelValue': (val: any) => true,
   },
 
-  setup (props, { attrs, emit, slots }) {
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
     const activator = ref()
+    const isFocused = ref(false)
     const search = useProxiedModel(props, 'search')
     const model = useProxiedModel(
       props,
@@ -89,19 +94,6 @@ export const VAutocomplete = genericComponent<new <T>() => {
       v => wrapInArray(v),
       (v: any) => props.multiple ? v : v[0]
     )
-    const { filteredItems } = useFilter(props, props.items, search)
-
-    const menu = ref(false)
-    const active = computed({
-      get: () => model.value,
-      set: val => {
-        model.value = val
-
-        if (props.multiple) return
-
-        menu.value = false
-      },
-    })
     const searchValue = computed({
       get: () => {
         return String(search.value ?? '')
@@ -112,19 +104,22 @@ export const VAutocomplete = genericComponent<new <T>() => {
         emit('update:search', val)
       },
     })
+    const menu = ref(false)
     const items = computed(() => {
       const array = []
 
-      for (const { item } of filteredItems.value as any) {
+      for (const item of props.items) {
         const title = item?.title ?? String(item)
-        const { start, middle, end } = genCharacters(title, searchValue.value)
         const value = item?.value ?? item
+        const active = model.value.includes(value)
 
-        if (props.hideSelected && active.value.includes(value)) {
-          continue
-        }
+        if (props.hideSelected && active) continue
 
-        array.push({ start, middle, end, title, value })
+        array.push({
+          active,
+          title,
+          value,
+        })
       }
 
       if (!array.length && !props.hideNoData) {
@@ -133,26 +128,15 @@ export const VAutocomplete = genericComponent<new <T>() => {
 
       return array
     })
+    const { filteredItems } = useFilter(props, items.value, search)
     const selections = computed(() => {
-      const array = []
-
-      for (const value of active.value) {
-        const selection = props.items.find(item => {
-          return (
-            typeof item === 'string' ? item : item?.value
-          ) === value
-        })
-
-        if (selection) {
-          array.push(selection)
-        }
-      }
-
-      return array
+      return wrapInArray(model.value).map(value => {
+        return items.value.find(item => item.value === value)
+      })
     })
 
     function onClear (e: MouseEvent) {
-      active.value = []
+      model.value = []
 
       if (props.openOnClear) {
         menu.value = true
@@ -175,13 +159,21 @@ export const VAutocomplete = genericComponent<new <T>() => {
         menu.value = false
       }
     }
+    function onFocus (e: FocusEvent) {
+      isFocused.value = true
+      search.value = props.multiple ? undefined : selections.value[0]?.title
+    }
 
     watch(() => vTextFieldRef.value, val => {
       activator.value = val.$el.querySelector('.v-input__control')
     })
 
-    watch(() => active.value, () => {
-      search.value = props.multiple ? undefined : selections.value[0]?.title
+    watch(() => model.value, () => {
+      if (!isFocused.value) return
+
+      searchValue.value = props.multiple ? undefined : selections.value[0]?.title
+
+      if (!props.multiple) menu.value = false
     })
 
     useRender(() => {
@@ -197,13 +189,15 @@ export const VAutocomplete = genericComponent<new <T>() => {
               [`v-autocomplete--${props.multiple ? 'multiple' : 'single'}`]: true,
             },
           ]}
-          dirty={ active.value.length > 0 }
+          dirty={ model.value.length > 0 }
           onClick:clear={ onClear }
           onClick:control={ () => props.openOnClick && (menu.value = true) }
           onFocus={ () => {
+            isFocused.value = true
             search.value = props.multiple ? undefined : selections.value[0]?.title
-          }}
+          } }
           onBlur={ () => {
+            isFocused.value = false
             search.value = undefined
             menu.value = false
           } }
@@ -219,59 +213,48 @@ export const VAutocomplete = genericComponent<new <T>() => {
                     activator={ activator.value }
                     contentClass="v-autocomplete__content"
                     openOnClick={ false }
-                    transition={ false }
+                    transition={ props.transition }
                   >
                     <VList
-                      v-model:active={ active.value }
-                      items={ items.value }
+                      v-model:active={ model.value }
                       activeStrategy={ props.multiple ? 'multiple' : 'single' }
                     >
-                      {{
-                        item: (item: any) => {
-                          return (
-                            <VListItem
-                              onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                              { ...item }
-                            >
-                              {{
-                                title: () => (
-                                  <div>
-                                    { item.start }
-
-                                    <span class="v-autocomplete__match">{ item.middle }</span>
-
-                                    { item.end }
-                                  </div>
-                                ),
-                              }}
-                            </VListItem>
-                          )
-                        },
-                      }}
+                      { filteredItems.value.map(({ item, matches }) => (
+                        <VListItem
+                          value={ item.value }
+                          onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                        >
+                          {{ title: () => highlightResult(item.title, matches.title, searchValue.value?.length ?? 0) }}
+                        </VListItem>
+                      )) }
                     </VList>
                   </VMenu>
                 ) }
 
                 <div class="v-autocomplete__selections v-field__input">
-                  { selections.value.map((selection, index) => (
-                    <div class="v-autocomplete__selection">
-                      { props.chips
-                        ? (
-                          <VChip
-                            text={ selection.title }
-                            size="small"
-                          />
-                        ) : (
-                          <span class="v-autocomplete__selection-text">
-                            { selection.title }
-                            { index < model.value.length - 1 && (
-                              <span class="v-autocomplete__selection-comma">,</span>
-                            ) }
-                          </span>
-                        )
-                      }
-                    </div>
-                  )) }
+                  { selections.value.map((selection, index) => {
+                    const title = typeof selection === 'string' ? selection : selection?.title
+
+                    return (
+                      <div class="v-autocomplete__selection">
+                        { props.chips
+                          ? (
+                            <VChip
+                              text={ title }
+                              size="small"
+                            />
+                          ) : (
+                            <span class="v-autocomplete__selection-text">
+                              { title }
+                              { index < model.value.length - 1 && (
+                                <span class="v-autocomplete__selection-comma">,</span>
+                              ) }
+                            </span>
+                          )
+                        }
+                      </div>
+                    )
+                  }) }
                 </div>
               </>
             ),
