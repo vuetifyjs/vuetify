@@ -44,7 +44,8 @@
   ],
   "files": [
     "dist/",
-    "lib/"
+    "lib/",
+    "CHANGELOG.md"
   ],
   "exports": {
     ".": {
