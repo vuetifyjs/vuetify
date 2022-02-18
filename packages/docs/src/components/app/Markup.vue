@@ -1,6 +1,7 @@
 <template>
   <v-sheet
     ref="root"
+    :theme="isDark ? 'dark' : 'light'"
     :color="isDark ? '#1F1F1F' : 'grey-lighten-5'"
     class="app-markup overflow-hidden"
     dir="ltr"
