@@ -14,9 +14,10 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 import { defineComponent } from '@/util'
 
 // Types
@@ -100,6 +101,7 @@ export const VAlert = defineComponent({
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props)
     const { roundedClasses } = useRounded(props)
+    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'borderColor'))
 
     function onCloseClick (e: MouseEvent) {
       isActive.value = false
@@ -132,14 +134,19 @@ export const VAlert = defineComponent({
           style={[
             colorStyles.value,
             positionStyles.value,
-            props.borderColor && { '--v-alert-border-color': props.borderColor },
           ]}
           role="alert"
         >
           { genOverlays(false, 'v-alert') }
 
           { props.border && (
-            <div class="v-alert__border" />
+            <div
+              class={[
+                'v-alert__border',
+                textColorClasses.value,
+              ]}
+              style={ textColorStyles.value }
+            />
           ) }
 
           { hasPrepend && (
