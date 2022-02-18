@@ -21,6 +21,10 @@
   @each $color_name, $color_value in colors.$shades {
     .bg-#{$color_name} {
       @include background-color($color_value);
+
+      @if (map.has-key(colors.$text-on-colors, 'shades')) {
+        @include background-text-color('shades', $color_name);
+      }
     }
 
     .text-#{$color_name} {

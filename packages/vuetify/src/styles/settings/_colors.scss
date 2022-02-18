@@ -10,6 +10,16 @@ $shades: map-deep-merge(
   $shades
 );
 
+$text-on-shades: () !default;
+$text-on-shades: map-deep-merge(
+  (
+    'black': map-get($shades, 'white'),
+    'white': map-get($shades, 'black'),
+    'transparent': currentColor
+  ),
+  $text-on-shades
+);
+
 $red: () !default;
 $red: map-deep-merge(
   (
@@ -829,7 +839,8 @@ $text-on-colors: map-deep-merge(
     'deep-orange': $text-on-deep-orange,
     'brown': $text-on-brown,
     'blue-grey': $text-on-blue-grey,
-    'grey': $text-on-grey
+    'grey': $text-on-grey,
+    'shades': $text-on-shades
   ),
   $text-on-colors
 );
