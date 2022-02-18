@@ -3,13 +3,14 @@ import './VAutocomplete.sass'
 
 // Components
 import { VChip } from '@/components/VChip'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
 
 // Composables
-import type { FilterMatch } from '@/composables/filter'
 import { makeFilterProps, useFilter } from '@/composables/filter'
+import { makeTransitionProps } from '@/composables/transition'
 import { useForwardRef } from '@/composables/forwardRef'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -19,14 +20,29 @@ import { computed, ref, watch } from 'vue'
 import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
+import type { FilterMatch } from '@/composables/filter'
 import type { LinkProps } from '@/composables/router'
 import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
-import { makeTransitionProps } from '@/composables/transition'
 
 export type SelectItem = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any) | (LinkProps & {
   text: string
 })
+
+export interface DefaultSelectionSlot {
+  selection: {
+    active: boolean
+    text: string
+    value: any
+  }
+}
+
+export interface DefaultChipSlot extends DefaultSelectionSlot {
+  props: {
+    'onClick:close': (e: Event) => void
+    modelValue: any
+  }
+}
 
 function highlightResult (text: string, matches: FilterMatch, length: number) {
   if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
@@ -44,14 +60,17 @@ function highlightResult (text: string, matches: FilterMatch, length: number) {
 
 export const VAutocomplete = genericComponent<new <T>() => {
   $slots: MakeSlots<{
-    default: []
-    title: []
+    chip: [DefaultChipSlot]
+    selection: [DefaultSelectionSlot]
   }>
 }>()({
   name: 'VAutocomplete',
 
   props: {
+    // TODO: implement post keyboard support
+    // autoSelectFirst: Boolean,
     chips: Boolean,
+    closableChips: Boolean,
     hideNoData: Boolean,
     hideSelected: Boolean,
     items: {
@@ -172,6 +191,8 @@ export const VAutocomplete = genericComponent<new <T>() => {
     })
 
     useRender(() => {
+      const hasChips = !!(props.chips || slots.chip)
+
       return (
         <VTextField
           ref={ vTextFieldRef }
@@ -230,26 +251,50 @@ export const VAutocomplete = genericComponent<new <T>() => {
 
                 <div class="v-autocomplete__selections v-field__input">
                   { selections.value.map((selection, index) => {
-                    const title = typeof selection === 'string' ? selection : selection?.title
+                    const active = selection?.active
+                    const title = selection?.title
+                    const value = selection?.value
+
+                    function onChipClose (e: Event) {
+                      e.stopPropagation()
+                      e.preventDefault()
+
+                      model.value = model.value.filter(item => item !== value)
+                    }
+
+                    const slotProps = {
+                      'onClick:close': onChipClose,
+                      modelValue: active,
+                    }
 
                     return (
-                      <div class="v-autocomplete__selection">
-                        { props.chips
-                          ? (
-                            <VChip
-                              text={ title }
-                              size="small"
-                            />
-                          ) : (
-                            <span class="v-autocomplete__selection-text">
-                              { title }
-                              { index < model.value.length - 1 && (
-                                <span class="v-autocomplete__selection-comma">,</span>
-                              ) }
-                            </span>
-                          )
-                        }
-                      </div>
+                      <VDefaultsProvider
+                        defaults={{
+                          VChip: {
+                            closable: props.closableChips,
+                            size: 'small',
+                            text: title,
+                          },
+                        }}
+                      >
+                        <div class="v-autocomplete__selection">
+                          { hasChips
+                            ? slots.chip
+                              ? slots.chip({ props: slotProps, selection })
+                              : (<VChip { ...slotProps } />)
+                            : slots.selection
+                              ? slots.selection({ selection })
+                              : (
+                                <span class="v-autocomplete__selection-text">
+                                  { title }
+                                  { index < model.value.length - 1 && (
+                                    <span class="v-autocomplete__selection-comma">,</span>
+                                  ) }
+                                </span>
+                              )
+                          }
+                        </div>
+                      </VDefaultsProvider>
                     )
                   }) }
                 </div>
