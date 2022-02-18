@@ -112,19 +112,15 @@ export const VAutocomplete = genericComponent<new <T>() => {
         })
       }
 
-      if (!array.length && !props.hideNoData) {
-        array.push({ title: t(props.noDataText) })
-      }
-
       return array
     })
     const selections = computed(() => {
-      return wrapInArray(model.value).map(value => {
+      return model.value.map(value => {
         return items.value.find(item => item.value === value)
       })
     })
     const searchValue = computed(() => isPristine.value ? undefined : search.value)
-    const { filteredItems } = useFilter(props, items.value, searchValue)
+    const { filteredItems } = useFilter(props, items, searchValue)
 
     function onClear (e: MouseEvent) {
       model.value = []
@@ -211,6 +207,9 @@ export const VAutocomplete = genericComponent<new <T>() => {
                       v-model:active={ model.value }
                       activeStrategy={ props.multiple ? 'multiple' : 'single' }
                     >
+                      { !filteredItems.value.length && !props.hideNoData && (
+                        <VListItem title={ t(props.noDataText) } />
+                      )}
                       { filteredItems.value.map(({ item, matches }) => (
                         <VListItem
                           value={ item.value }
@@ -262,7 +261,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
     })
 
     return useForwardRef({
-      //
+      filteredItems,
     }, vTextFieldRef)
   },
 })
