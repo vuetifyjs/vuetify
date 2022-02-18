@@ -71,6 +71,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
     // autoSelectFirst: Boolean,
     chips: Boolean,
     closableChips: Boolean,
+    eager: Boolean,
     hideNoData: Boolean,
     hideSelected: Boolean,
     items: {
@@ -221,6 +222,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
                     v-model={ menu.value }
                     activator={ activator.value }
                     contentClass="v-autocomplete__content"
+                    eager={ props.eager }
                     openOnClick={ false }
                     transition={ props.transition }
                   >
