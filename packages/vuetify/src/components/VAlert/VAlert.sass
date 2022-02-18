@@ -4,8 +4,8 @@
 
 .v-alert
   display: grid
-  grid-template-areas: "prepend content close"
-  grid-template-columns: min-content auto min-content
+  grid-template-areas: "prepend content append close"
+  grid-template-columns: max-content auto max-content min-content
   position: relative
   padding: $alert-padding
   overflow: hidden
@@ -71,6 +71,9 @@
   flex: 0 1 auto
   grid-area: close
   user-select: none
+
+.v-alert__append
+  grid-area: append
 
 .v-alert__prepend
   grid-area: prepend
