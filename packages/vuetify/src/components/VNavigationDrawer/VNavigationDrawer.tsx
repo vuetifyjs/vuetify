@@ -156,6 +156,7 @@ export const VNavigationDrawer = defineComponent({
                 'v-navigation-drawer--rail': props.rail,
                 'v-navigation-drawer--start': props.position === 'left',
                 'v-navigation-drawer--temporary': isTemporary.value,
+                'v-navigation-drawer--active': isActive.value,
               },
               themeClasses.value,
               backgroundColorClasses.value,
