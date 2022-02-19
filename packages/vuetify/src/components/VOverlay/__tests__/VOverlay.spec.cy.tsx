@@ -26,4 +26,22 @@ describe('VOverlay', () => {
         expect(model.value).to.be.false
       })
   })
+
+  it('should use activator', () => {
+    cy.mount(() => (
+      <VLayout>
+        <VOverlay>
+          {{
+            activator: ({ props }) => <div { ...props } data-test="activator">Click me</div>,
+            default: () => <div data-test="content">Content</div>,
+          }}
+        </VOverlay>
+      </VLayout>
+    ))
+      .get('[data-test="content"]').should('not.exist')
+      .get('[data-test="activator"]').should('exist').click()
+      .get('[data-test="content"]').should('be.visible')
+      .get('body').click()
+      .get('[data-test="content"]').should('not.exist')
+  })
 })
