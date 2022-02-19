@@ -1,15 +1,18 @@
 /// <reference types="../../../../types/cypress" />
 
 import { ref } from 'vue'
+import { VLayout } from '@/components'
 import { VOverlay } from '../VOverlay'
 
 describe('VOverlay', () => {
   it('without activator', () => {
     const model = ref(false)
     cy.mount(() => (
-      <VOverlay v-model={ model.value }>
-        <div data-test="content">Content</div>
-      </VOverlay>
+      <VLayout>
+        <VOverlay v-model={ model.value }>
+          <div data-test="content">Content</div>
+        </VOverlay>
+      </VLayout>
     ))
       .get('[data-test="content"]').should('not.exist')
       // .setProps({ modelValue: true })
