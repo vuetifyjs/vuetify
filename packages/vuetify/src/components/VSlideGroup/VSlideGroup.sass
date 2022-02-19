@@ -1,5 +1,9 @@
-// Imports
-@import './_variables.scss'
+@use 'sass:math'
+@forward './variables'
+@use 'sass:map'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
 
 // Block
 .v-slide-group
@@ -35,10 +39,10 @@
   display: flex
   flex: 1 0 auto
   position: relative
-  transition: $primary-transition
+  transition: 0.2s all settings.$standard-easing
   white-space: nowrap
 
-.v-slide-group__wrapper
+.v-slide-group__container
   contain: content
   display: flex
   flex: 1 1 auto

@@ -12,13 +12,15 @@ import Resize from '../../directives/resize'
 import { convertToUnit } from '../../util/helpers'
 import { defineComponent } from '@/util'
 import { makeTagProps } from '@/composables/tag'
-import { computed, ref, toRef, watchEffect } from 'vue'
+import { computed, ref, toRef, watch } from 'vue'
 
 // Types
 import type { InjectionKey, PropType } from 'vue'
 import { provideDefaults } from '@/composables/defaults'
 import type { GroupProvide } from '@/composables/group'
 import { makeGroupProps, useGroup } from '@/composables/group'
+import { useResizeObserver } from '@/composables/resizeObserver'
+import { useSlideGroup } from '@/composables/slideGroup'
 
 export type TabItem = string | Record<string, any>
 
@@ -45,7 +47,7 @@ export const VTabs = defineComponent({
     stacked: Boolean,
     color: String,
     direction: {
-      type: String,
+      type: String as PropType<'horizontal' | 'vertical'>,
       default: 'horizontal',
     },
     ...makeTagProps(),
@@ -54,9 +56,9 @@ export const VTabs = defineComponent({
     }),
     //     alignWithTitle: Boolean,
     //     backgroundColor: String,
-    //     centerActive: Boolean,
+    centerActive: Boolean,
     //     centered: Boolean,
-    //     fixedTabs: Boolean,
+    fixedTabs: Boolean,
     //     grow: Boolean,
     //     height: {
     //       type: [Number, String],
@@ -88,56 +90,86 @@ export const VTabs = defineComponent({
   },
 
   setup (props, { slots }) {
-    const rootRef = ref<HTMLElement | undefined>()
-    const items = computed(() => parseItems(props.items))
-    const group = useGroup(props, VTabsSymbol)
+    const parsedItems = computed(() => parseItems(props.items))
+    const {
+      containerRef,
+      containerListeners,
+      contentRef,
+      contentStyles,
+      items,
+      selected,
+    } = useSlideGroup(props, VTabsSymbol)
 
     provideDefaults({
       VTab: {
         stacked: toRef(props, 'stacked'),
         color: toRef(props, 'color'),
+        fixed: toRef(props, 'fixedTabs'),
       },
     })
 
     const sliderStyles = ref({})
 
-    watchEffect(() => {
-      const index = group.items.value.findIndex(item => item.id === group.selected.value[0])
+    function updateSliderStyles (el: HTMLElement) {
+      if (!selected.value.length) return
 
-      if (index < 0 || !rootRef.value) return
+      const index = items.value.findIndex(item => item.id === selected.value[0])
 
-      const el = rootRef.value.querySelectorAll('.v-tab')[index] as HTMLElement
+      if (index < 0 || !el) return
+
+      const selectedElement = el.querySelectorAll('.v-tab')[index] as HTMLElement
 
       if (props.direction === 'horizontal') {
         sliderStyles.value = {
-          left: convertToUnit(el.offsetLeft),
-          width: convertToUnit(el.offsetWidth),
+          left: convertToUnit(selectedElement.offsetLeft),
+          width: convertToUnit(selectedElement.offsetWidth),
         }
       } else {
         sliderStyles.value = {
-          top: convertToUnit(el.offsetTop),
-          height: convertToUnit(el.offsetHeight),
+          top: convertToUnit(selectedElement.offsetTop),
+          height: convertToUnit(selectedElement.offsetHeight),
         }
       }
-    }, {
+    }
+
+    const { resizeRef } = useResizeObserver(entries => {
+      if (!entries.length) return
+
+      updateSliderStyles(entries[0].target as HTMLElement)
+    })
+
+    watch(selected, () => resizeRef.value && updateSliderStyles(resizeRef.value as HTMLElement), {
       flush: 'post',
     })
 
     return () => (
       <props.tag
-        ref={ rootRef }
+        ref={ resizeRef }
         class={[
           'v-tabs',
           `v-tabs--${props.direction}`,
         ]}
+        role="tablist"
       >
-        { slots.default ? slots.default() : items.value.map(item => (
-          <VTab { ...item } key={ item.text } />
-        )) }
-        <VTabsSlider
-          style={ sliderStyles.value }
-          color={ props.color }
-        />
+        <div
+          ref={ containerRef }
+          class="v-tabs__container"
+          { ...containerListeners }
+        >
+          <div
+            ref={ contentRef }
+            class="v-tabs__content"
+            style={ contentStyles.value }
+          >
+            { slots.default ? slots.default() : parsedItems.value.map(item => (
+              <VTab { ...item } key={ item.text } />
+            )) }
+            <VTabsSlider
+              style={ sliderStyles.value }
+              color={ props.color }
+            />
+          </div>
+        </div>
       </props.tag>
     )
   },

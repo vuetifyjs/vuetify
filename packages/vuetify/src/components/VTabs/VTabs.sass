@@ -35,48 +35,52 @@
 
 // Block
 .v-tabs
-  position: relative
   display: flex
-  flex: 1 1 auto
-  width: 100%
 
-  &--vertical
+.v-tabs__container
+    contain: content
+    display: flex
+    flex: 1 1 auto
+    overflow: hidden
+
+.v-tabs__content
+    display: flex
+    flex: 1 0 auto
+    position: relative
+    transition: 0.2s all settings.$standard-easing
+    white-space: nowrap
+
+.v-tabs--vertical
+  .v-tabs__content, .v-tabs__container
     flex-direction: column
 
-  &--horizontal
+.v-tabs--horizontal
+  .v-tabs__content, .v-tabs__container
     flex-direction: row
 
-  .v-menu__activator
-    height: 100%
+  // .v-menu__activator
+  //   height: 100%
 
-  &.v.tabs--vertical.v-tabs--right
-    flex-direction: row-reverse
+  // &.v.tabs--vertical.v-tabs--right
+  //   flex-direction: row-reverse
 
-  &:not(.v-tabs--vertical)
-    .v-tab
-      white-space: normal
+  // &:not(.v-tabs--vertical)
+  //   .v-tab
+  //     white-space: normal
 
-    // https://github.com/vuetifyjs/vuetify/issues/8294
-    &.v-tabs--right
-      > .v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes)
-        .v-slide-group__next
-          display: initial
-          visibility: hidden
+  //   // https://github.com/vuetifyjs/vuetify/issues/8294
+  //   &.v-tabs--right
+  //     > .v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes)
+  //       .v-slide-group__next
+  //         display: initial
+  //         visibility: hidden
 
-    // https://github.com/vuetifyjs/vuetify/issues/6932
-    &:not(.v-tabs--right)
-      > .v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes)
-        .v-slide-group__prev
-          display: initial
-          visibility: hidden
-
-// Element
-.v-tabs-bar
-  border-radius: inherit
-  height: $tabs-bar-height
-
-  &.v-item-group > *
-    cursor: initial
+  //   // https://github.com/vuetifyjs/vuetify/issues/6932
+  //   &:not(.v-tabs--right)
+  //     > .v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes)
+  //       .v-slide-group__prev
+  //         display: initial
+  //         visibility: hidden
 
 // .v-tab
 //   align-items: center
@@ -194,33 +198,33 @@
     +tools.rtl()
       margin-left: 0
 
-.v-tabs--vertical
-  display: flex
+// .v-tabs--vertical
+//   display: flex
 
-  & > .v-tabs-bar
-    flex: 1 0 auto
-    height: auto
+//   & > .v-tabs-bar
+//     flex: 1 0 auto
+//     height: auto
 
-    .v-slide-group__next,
-    .v-slide-group__prev
-      display: none
+//     .v-slide-group__next,
+//     .v-slide-group__prev
+//       display: none
 
-    .v-tabs-bar__content
-      flex-direction: column
+//     .v-tabs-bar__content
+//       flex-direction: column
 
-    .v-tab
-      height: $tabs-item-vertical-height
+//     .v-tab
+//       height: $tabs-item-vertical-height
 
-    .v-tabs-slider
-      height: 100%
+//     .v-tabs-slider
+//       height: 100%
 
-  & > .v-window
-    flex: 0 1 100%
+//   & > .v-window
+//     flex: 0 1 100%
 
-  &.v-tabs--icons-and-text
-    & > .v-tabs-bar
-      .v-tab
-        height: $tabs-item-vertical-icons-and-text-height
+//   &.v-tabs--icons-and-text
+//     & > .v-tabs-bar
+//       .v-tab
+//         height: $tabs-item-vertical-icons-and-text-height
 
 // .v-tab--active
 //   color: inherit

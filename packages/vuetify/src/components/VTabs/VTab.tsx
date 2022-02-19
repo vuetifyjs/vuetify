@@ -19,6 +19,7 @@ export const VTab = defineComponent({
   name: 'VTab',
 
   props: {
+    fixed: Boolean,
     icon: [Boolean, String],
     prependIcon: String,
     appendIcon: String,
@@ -48,6 +49,7 @@ export const VTab = defineComponent({
         rounded: 0,
         minWidth: 90,
         maxWidth: 360,
+        block: toRef(props, 'fixed'),
         color: computed(() => isSelected.value ? props.color : undefined),
       },
     }, {
@@ -69,18 +71,16 @@ export const VTab = defineComponent({
       ])
 
       return (
-        <div>
-          <VBtn
-            class={[
-              'v-tab',
-              selectedClass.value,
-            ]}
-            onClick={ () => !props.disabled && select(!isSelected.value) }
-            { ...btnProps }
-          >
-            { slots.default ? slots.default() : props.title }
-          </VBtn>
-        </div>
+        <VBtn
+          class={[
+            'v-tab',
+            selectedClass.value,
+          ]}
+          onClick={ () => !props.disabled && select(!isSelected.value) }
+          { ...btnProps }
+        >
+          { slots.default ? slots.default() : props.title }
+        </VBtn>
       )
     }
   },

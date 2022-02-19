@@ -8,13 +8,13 @@ import { consoleWarn, deepEqual, findChildren, getCurrentInstance, getUid, props
 // Types
 import type { ComponentInternalInstance, ComputedRef, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
 
-interface GroupItem {
+export interface GroupItem {
   id: number
   value: Ref<unknown>
   disabled: Ref<boolean | undefined>
 }
 
-interface GroupProps {
+export interface GroupProps {
   disabled: boolean
   modelValue: unknown
   multiple?: boolean
@@ -70,7 +70,7 @@ export const makeGroupItemProps = propsFactory({
   selectedClass: String,
 }, 'group-item')
 
-type GroupItemProps = ExtractPropTypes<ReturnType<typeof makeGroupItemProps>>
+export type GroupItemProps = ExtractPropTypes<ReturnType<typeof makeGroupItemProps>>
 
 // Composables
 export function useGroupItem (
