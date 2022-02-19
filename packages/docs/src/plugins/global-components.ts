@@ -6,6 +6,7 @@ import ApiTable from '@/components/api/Table.vue'
 import AppBtn from '@/components/app/Btn.vue'
 import AppCaption from '@/components/app/Caption.vue'
 import AppDivider from '@/components/app/Divider.vue'
+import AppFigure from '@/components/app/Figure.vue'
 import AppHeading from '@/components/app/Heading.vue'
 import AppHeadline from '@/components/app/Headline.vue'
 import AppImg from '@/components/app/Img.vue'
@@ -44,6 +45,7 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
 
   // Used by markdown files
   app.component('Alert', Alert)
+  app.component('AppFigure', AppFigure)
   app.component('ApiInline', ApiInline)
   app.component('ApiLinks', ApiLinks)
   app.component('ApiSection', ApiSection)
