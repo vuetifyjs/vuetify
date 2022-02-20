@@ -189,12 +189,15 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
 
     const contentHeight = Math.min(configuredMaxHeight.value, contentBox.height)
 
+    // Regard undefined maxWidth as maximally occupying whole remaining space by default
+    const maxFreeSpaceWidth = props.maxWidth === undefined ? Number.MAX_VALUE : parseInt(props.maxWidth ?? 0, 10)
+
     const viewportMargin = 12
     const freeSpace = {
       top: targetBox.top - viewportMargin,
       bottom: viewportHeight - targetBox.bottom - viewportMargin,
-      left: targetBox.left - viewportMargin,
-      right: viewportWidth - targetBox.right - viewportMargin,
+      left: Math.min(targetBox.left - viewportMargin, maxFreeSpaceWidth),
+      right: Math.min(viewportWidth - targetBox.right - viewportMargin, maxFreeSpaceWidth),
     }
 
     const fitsY = (preferredAnchor.value.side === 'bottom' && contentHeight <= freeSpace.bottom) ||
@@ -208,13 +211,9 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
 
     const canFill = doesOverlap.value || ['center', 'top', 'bottom'].includes(anchor.side)
 
-    const maxWidthFromProps: number | undefined = typeof props.maxWidth === 'string' ? parseInt(props.maxWidth, 10) : props.maxWidth
-
-    const getEndStartMaxWidth = (lrSpace: number) => maxWidthFromProps ? Math.min(maxWidthFromProps, lrSpace) : lrSpace
-
     const maxWidth = canFill ? Math.min(viewportWidth, Math.max(targetBox.width, viewportWidth - viewportMargin * 2))
-      : anchor.side === 'end' ? getEndStartMaxWidth(freeSpace.right)
-      : anchor.side === 'start' ? getEndStartMaxWidth(freeSpace.left)
+      : anchor.side === 'end' ? freeSpace.right
+      : anchor.side === 'start' ? freeSpace.left
       : null
 
     const minWidth = Math.min(configuredMinWidth.value, maxWidth!, targetBox.width)

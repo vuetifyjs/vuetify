@@ -1,106 +1,12 @@
 // @ts-nocheck
 /* eslint-disable */
 
-// Components
-import { VTooltip } from '../VTooltip'
-
-// Utilities
+// import VTooltip from '../VTooltip'
 import {
   mount,
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
-import { createVuetify } from '@/framework'
-import { describe, expect, it } from '@jest/globals'
-
-describe('VTooltip - V3', () => {
-  const vuetify = createVuetify()
-
-  function mountFunction (options = {}) {
-    return mount(VTooltip, {
-      global: { 
-        plugins: [vuetify],
-      },
-      ...options,
-    })
-  }
-  beforeEach(() => {    
-    document.documentElement.style.overflowY = 'scroll'
-  })
-  
-  afterEach(() => {  
-    // clean up
-    document.body.outerHTML = '' // each test will create teleport target in packages\vuetify\src\composables\teleport.ts
-    jest.clearAllMocks()
-  })
-
-  // issue #14420
-  it('should render tooltip width fit into small screen if both max-width & content exceeds small screen width', async () => {
-    const SMALL_SCREEN_WIDTH = 200
-    jest.spyOn(document.documentElement, 'clientWidth', 'get').mockImplementation(() => SMALL_SCREEN_WIDTH)
-    
-    const buttonComponent = {
-      template: ` 
-        <button id="tooltip-parent">
-          <v-tooltip
-                :text="'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'"
-                :modelValue="true" 
-                activator="parent"
-                max-width="300" />
-          Example
-        </button>
-      `,
-      components: {
-        VTooltip
-      },
-    }
-    const buttonWrapper = mount(buttonComponent, {
-      global: { 
-        plugins: [vuetify],
-      }
-    })
-    await buttonWrapper.vm.$nextTick()
-    const overlayDom = document.getElementsByClassName('v-overlay')[0]
-    expect(overlayDom.classList.contains('v-overlay--active')).toBe(true)
-    const overlayContent = document.getElementsByClassName('v-overlay__content')[0]
-    
-    expect(parseInt(overlayContent.style['max-width'].replace('px', ''), 10) < SMALL_SCREEN_WIDTH).toBe(true)
-  })
-
-  // issue #14420
-  it('should respect max-width even if content exceeds max-width', async () => {
-    jest.spyOn(document.documentElement, 'clientWidth', 'get').mockImplementation(() => 1263)
-    
-    const buttonComponent = {
-      template: ` 
-        <button id="tooltip-parent">
-          <v-tooltip
-                :text="'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'"
-                :modelValue="true" 
-                activator="parent"
-                max-width="300" />
-          Example
-        </button>
-      `,
-      components: {
-        VTooltip
-      },
-    }
-    const buttonWrapper = mount(buttonComponent, {
-      global: { 
-        plugins: [vuetify],
-      }
-    })
-    await buttonWrapper.vm.$nextTick()
-    const overlayDom = document.getElementsByClassName('v-overlay')[0]
-    expect(overlayDom.classList.contains('v-overlay--active')).toBe(true)
-    const overlayContent = document.getElementsByClassName('v-overlay__content')[0]
-    expect(overlayContent.style['max-width']).toBe('300px')
-  })
-
-})
-
-
 
 describe.skip('VTooltip', () => {
   type Instance = InstanceType<typeof VTooltip>
