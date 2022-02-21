@@ -53,6 +53,7 @@ export const VSlideGroup = defineComponent({
             { slots.prepend(slotProps.value) }
           </div>
         ) }
+
         <div
           ref={ containerRef }
           class="v-slide-group__container"
@@ -65,6 +66,7 @@ export const VSlideGroup = defineComponent({
             { slots.default?.(slotProps.value) }
           </div>
         </div>
+
         { slots.append && (
           <div class="v-slide-group__append">
             { slots.append(slotProps.value) }

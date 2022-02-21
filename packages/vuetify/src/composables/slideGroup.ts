@@ -79,8 +79,8 @@ export function calculateCenteredOffset ({
 
 export function useSlideGroup (
   props: GroupProps & {
-    direction: 'vertical' | 'horizontal'
-    centerActive: boolean | undefined
+    direction?: 'vertical' | 'horizontal'
+    centerActive?: boolean | undefined
   },
   injectKey: InjectionKey<GroupProvide> = VSlideGroupSymbol
 ) {
