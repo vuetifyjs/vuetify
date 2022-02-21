@@ -2,16 +2,17 @@
 import './VNavigationDrawer.sass'
 
 // Composables
-import { useTouch } from './touch'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useDisplay } from '@/composables/display'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
+import { useDisplay } from '@/composables/display'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { useRouter } from '@/composables/router'
+import { useTouch } from './touch'
 
 // Utilities
 import { computed, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
@@ -26,6 +27,7 @@ export const VNavigationDrawer = defineComponent({
   props: {
     color: String,
     disableResizeWatcher: Boolean,
+    disableRouteWatcher: Boolean,
     expandOnHover: Boolean,
     floating: Boolean,
     modelValue: {
@@ -70,7 +72,7 @@ export const VNavigationDrawer = defineComponent({
     const { elevationClasses } = useElevation(props)
     const { mobile } = useDisplay()
     const { roundedClasses } = useRounded(props)
-
+    const router = useRouter()
     const isActive = useProxiedModel(props, 'modelValue')
     const isHovering = ref(false)
     const width = computed(() => {
@@ -82,6 +84,10 @@ export const VNavigationDrawer = defineComponent({
 
     if (!props.disableResizeWatcher) {
       watch(mobile, val => !props.permanent && (isActive.value = !val))
+    }
+
+    if (!props.disableRouteWatcher && router) {
+      watch(() => router.currentRoute.value, () => mobile && (isActive.value = false))
     }
 
     watch(props, val => {
