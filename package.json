@@ -20,6 +20,7 @@
     "prepare": "node scripts/post-install.js",
     "postversion": "node scripts/post-release-merge.js",
     "clean": "lerna clean",
+    "changelog": "conventional-changelog -u -p vuetify",
     "all-checks": "yarn lint && lerna run test && lerna run cy:run && yarn build"
   },
   "engines": {
@@ -41,6 +42,7 @@
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
     "conventional-changelog-cli": "^2.1.1",
+    "conventional-changelog-vuetify": "^1.0.0",
     "cross-env": "^7.0.3",
     "cross-spawn": "^6.0.5",
     "eslint": "^8.2.0",

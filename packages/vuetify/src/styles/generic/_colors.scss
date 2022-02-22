@@ -14,13 +14,17 @@
 @mixin background-text-color($color_name, $color_type) {
   $map_value: map-deep-get(colors.$text-on-colors, $color_name, $color_type);
 
-  color: rgba($map_value, var(--v-high-emphasis-opacity)) !important;
+  color: $map_value !important;
 }
 
 @if (settings.$color-pack) {
   @each $color_name, $color_value in colors.$shades {
     .bg-#{$color_name} {
       @include background-color($color_value);
+
+      @if (map.has-key(colors.$text-on-colors, 'shades')) {
+        @include background-text-color('shades', $color_name);
+      }
     }
 
     .text-#{$color_name} {
