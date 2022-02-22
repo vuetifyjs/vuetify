@@ -21,6 +21,7 @@ import type { GroupProvide } from '@/composables/group'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { useResizeObserver } from '@/composables/resizeObserver'
 import { useSlideGroup } from '@/composables/slideGroup'
+import { makeDensityProps, useDensity } from '@/composables/density'
 
 export type TabItem = string | Record<string, any>
 
@@ -40,25 +41,25 @@ export const VTabs = defineComponent({
   name: 'VTabs',
 
   props: {
-    items: {
-      type: Array as PropType<TabItem[]>,
-      default: () => ([]),
-    },
-    stacked: Boolean,
+    // alignWithTitle: Boolean,
+    centerActive: Boolean,
     color: String,
     direction: {
       type: String as PropType<'horizontal' | 'vertical'>,
       default: 'horizontal',
     },
-    ...makeTagProps(),
-    ...makeGroupProps({
-      mandatory: 'force' as const,
-    }),
-    //     alignWithTitle: Boolean,
-    //     backgroundColor: String,
-    centerActive: Boolean,
-    //     centered: Boolean,
     fixedTabs: Boolean,
+    items: {
+      type: Array as PropType<TabItem[]>,
+      default: () => ([]),
+    },
+    stacked: Boolean,
+
+    ...makeDensityProps(),
+    ...makeGroupProps({ mandatory: 'force' as const }),
+    ...makeTagProps(),
+    //     backgroundColor: String,
+    //     centered: Boolean,
     //     grow: Boolean,
     //     height: {
     //       type: [Number, String],
@@ -91,6 +92,7 @@ export const VTabs = defineComponent({
 
   setup (props, { slots }) {
     const parsedItems = computed(() => parseItems(props.items))
+    const { densityClasses } = useDensity(props)
     const {
       containerRef,
       containerListeners,
@@ -148,6 +150,7 @@ export const VTabs = defineComponent({
         class={[
           'v-tabs',
           `v-tabs--${props.direction}`,
+          densityClasses.value,
         ]}
         role="tablist"
       >

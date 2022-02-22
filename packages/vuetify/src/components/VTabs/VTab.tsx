@@ -9,7 +9,7 @@ import { defineComponent, pick } from '@/util'
 import { VBtn } from '..'
 import { provideDefaults } from '@/composables/defaults'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
-import { VTabsSymbol } from '.'
+import { VTabsSymbol } from './VTabs'
 import { computed, toRef } from 'vue'
 import { makeThemeProps } from '@/composables/theme'
 
@@ -32,6 +32,7 @@ export const VTab = defineComponent({
       default: true,
     },
     color: String,
+
     ...makeTagProps(),
     ...makeRouterProps(),
     ...makeGroupItemProps({
@@ -45,12 +46,12 @@ export const VTab = defineComponent({
 
     provideDefaults({
       VBtn: {
-        variant: 'text',
-        rounded: 0,
-        minWidth: 90,
-        maxWidth: 360,
         block: toRef(props, 'fixed'),
         color: computed(() => isSelected.value ? props.color : undefined),
+        height: 'auto',
+        maxWidth: 360,
+        minWidth: 90,
+        variant: 'text',
       },
     }, {
       scoped: true,
