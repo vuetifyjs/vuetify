@@ -13,7 +13,7 @@ related:
 
 When it comes to form validation, Vuetify has a multitude of integrations and baked in functionality. Want to use a 3rd party validation plugin? Out of the box you can use [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/vuelidate/vuelidate).
 
-<promoted-ad slug="vuemastery-forms" />
+<promoted slug="vuemastery-forms" />
 
 ## Usage
 

@@ -6,8 +6,8 @@ import { VExpansionPanelSymbol } from './VExpansionPanels'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
 
 // Utilities
+import { defineComponent, useRender } from '@/util'
 import { inject } from 'vue'
-import { defineComponent } from '@/util'
 
 export const VExpansionPanelText = defineComponent({
   name: 'VExpansionPanelText',
@@ -23,13 +23,11 @@ export const VExpansionPanelText = defineComponent({
 
     const { hasContent, onAfterLeave } = useLazy(props, expansionPanel.isSelected)
 
-    return () => (
+    useRender(() => (
       <VExpandTransition onAfterLeave={ onAfterLeave }>
         <div
+          class="v-expansion-panel-text"
           v-show={ expansionPanel.isSelected.value }
-          class={[
-            'v-expansion-panel-text',
-          ]}
         >
           { slots.default && hasContent.value && (
             <div class="v-expansion-panel-text__wrapper">
@@ -38,6 +36,10 @@ export const VExpansionPanelText = defineComponent({
           ) }
         </div>
       </VExpandTransition>
-    )
+    ))
+
+    return {}
   },
 })
+
+export type VExpansionPanelText = InstanceType<typeof VExpansionPanelText>

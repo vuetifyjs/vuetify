@@ -6,13 +6,14 @@ import { VExpansionPanelSymbol } from './VExpansionPanels'
 import { useBackgroundColor } from '@/composables/color'
 
 // Directives
-import ripple from '@/directives/ripple'
+import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { defineComponent, propsFactory } from '@/util'
+import { defineComponent, propsFactory, useRender } from '@/util'
 
 export const makeVExpansionPanelTitleProps = propsFactory({
+  color: String,
   expandIcon: {
     type: String,
     default: '$expand',
@@ -26,13 +27,12 @@ export const makeVExpansionPanelTitleProps = propsFactory({
     type: [Boolean, Object],
     default: false,
   },
-  color: String,
 })
 
 export const VExpansionPanelTitle = defineComponent({
   name: 'VExpansionPanelTitle',
 
-  directives: { ripple },
+  directives: { Ripple },
 
   props: {
     ...makeVExpansionPanelTitleProps(),
@@ -46,13 +46,13 @@ export const VExpansionPanelTitle = defineComponent({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
     const slotProps = computed(() => ({
-      expanded: expansionPanel.isSelected.value,
-      disabled: expansionPanel.disabled.value,
-      expandIcon: props.expandIcon,
       collapseIcon: props.collapseIcon,
+      disabled: expansionPanel.disabled.value,
+      expanded: expansionPanel.isSelected.value,
+      expandIcon: props.expandIcon,
     }))
 
-    return () => (
+    useRender(() => (
       <button
         class={[
           'v-expansion-panel-title',
@@ -70,7 +70,9 @@ export const VExpansionPanelTitle = defineComponent({
         v-ripple={ props.ripple }
       >
         <div class="v-expansion-panel-title__overlay" />
+
         { slots.default?.(slotProps.value) }
+
         { !props.hideActions && (
           <div class="v-expansion-panel-title__icon">
             {
@@ -80,6 +82,10 @@ export const VExpansionPanelTitle = defineComponent({
           </div>
         ) }
       </button>
-    )
+    ))
+
+    return {}
   },
 })
+
+export type VExpansionPanelTitle = InstanceType<typeof VExpansionPanelTitle>

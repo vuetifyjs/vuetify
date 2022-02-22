@@ -13,7 +13,7 @@ related:
 
 The `v-progress-linear` component is used to convey data visually to users. It supports both indeterminate amounts, such as loading or processing, and finite amounts of progress (including separate buffer values).
 
-<entry-ad />
+<entry />
 
 ## Usage
 

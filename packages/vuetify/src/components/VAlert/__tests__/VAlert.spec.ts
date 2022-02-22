@@ -32,8 +32,8 @@ describe('VAlert', () => {
     [{ icon: 'foobar' }, true],
   ])('should generate actions slot', (props, expected) => {
     const wrapper = mountFunction({ props })
-    const avatar = wrapper.find('.v-alert__avatar')
+    const icon = wrapper.find('.v-alert__prepend')
 
-    expect(avatar.exists()).toBe(expected)
+    expect(icon.exists()).toBe(expected)
   })
 })

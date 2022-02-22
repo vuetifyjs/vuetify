@@ -13,7 +13,7 @@ related:
 
 The `v-list-item-group` provides the ability to create a group of selectable `v-list-item`s. The `v-list-item-group` component utilizes [v-item-group](/components/item-groups) at its core to provide a clean interface for interactive lists.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

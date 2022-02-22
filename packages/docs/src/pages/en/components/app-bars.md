@@ -14,7 +14,7 @@ related:
 
 The `v-app-bar` component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation. The app-bar component works great in conjunction with a [v-navigation-drawer](/components/navigation-drawers) for providing site navigation in your application.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

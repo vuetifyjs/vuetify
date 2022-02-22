@@ -13,7 +13,7 @@ related:
 
 The `v-responsive` component can be used to fix any section to a specific aspect ratio
 
-<entry-ad />
+<entry />
 
 ## Usage
 

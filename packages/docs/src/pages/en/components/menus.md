@@ -13,7 +13,7 @@ related:
 
 The `v-menu` component shows a menu at the position of the element used to activate it.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

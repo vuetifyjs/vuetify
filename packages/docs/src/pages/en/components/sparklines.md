@@ -15,7 +15,7 @@ The sparkline component can be used to create simple graphs, like GitHub's contr
 
 Any [SVG attribute](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute) may be used in addition to the ones listed below.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

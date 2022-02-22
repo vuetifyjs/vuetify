@@ -13,7 +13,7 @@ related:
 
 The `v-bottom-navigation` component is an alternative to the sidebar. It is primarily used for mobile applications and comes in three variants, **icons** and **text**, and **shift**.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

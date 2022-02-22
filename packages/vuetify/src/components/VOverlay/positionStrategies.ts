@@ -130,15 +130,17 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
   })
 
   let observe = false
-  const observer = new ResizeObserver(() => {
-    if (observe) updatePosition()
-  })
-  observer.observe(data.activatorEl.value!)
-  observer.observe(data.contentEl.value!)
+  if (IN_BROWSER) {
+    const observer = new ResizeObserver(() => {
+      if (observe) updatePosition()
+    })
+    observer.observe(data.activatorEl.value!)
+    observer.observe(data.contentEl.value!)
 
-  onScopeDispose(() => {
-    observer.disconnect()
-  })
+    onScopeDispose(() => {
+      observer.disconnect()
+    })
+  }
 
   // eslint-disable-next-line max-statements
   function updatePosition () {

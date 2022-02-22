@@ -17,7 +17,7 @@
     </ads-base>
   </div>
 
-  <vuetify-ad v-else />
+  <vuetify v-else />
 </template>
 
 <script lang="ts">

@@ -6,11 +6,15 @@
   display: grid
   flex: 1 1 auto
 
-  input
-    color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
-
+  &,
   .v-icon
     color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
+
+  &--error,
+  &--disabled
+    .v-icon,
+    .v-messages
+      color: inherit
 
   &--error
     color: rgb(var(--v-theme-error))
@@ -67,9 +71,6 @@
 .v-input__append
   display: flex
   padding-top: var(--v-input-padding-top)
-
-  .v-input--focused &
-    opacity: 1
 
 .v-input__prepend
   grid-area: prepend

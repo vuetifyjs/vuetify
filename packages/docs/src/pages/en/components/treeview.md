@@ -14,7 +14,7 @@ related:
 
 The `v-treeview` component is useful for displaying large amounts of nested data.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

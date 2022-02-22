@@ -14,7 +14,7 @@ related:
 
 The `v-range-slider` component complements the `v-slider` component nicely when you are in need of representing a range of values.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

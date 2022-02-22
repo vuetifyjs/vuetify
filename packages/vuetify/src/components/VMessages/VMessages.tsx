@@ -19,7 +19,7 @@ export const VMessages = defineComponent({
   props: {
     active: Boolean,
     color: String,
-    value: {
+    messages: {
       type: [Array, String] as PropType<string | string[]>,
       default: () => ([]),
     },
@@ -34,7 +34,7 @@ export const VMessages = defineComponent({
   },
 
   setup (props, { slots }) {
-    const messages = computed(() => wrapInArray(props.value))
+    const messages = computed(() => wrapInArray(props.messages))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => props.color))
 
     return () => (
@@ -47,15 +47,16 @@ export const VMessages = defineComponent({
         ]}
         style={ textColorStyles.value }
       >
-        { (messages.value.length > 0 && props.active) && (
+        { props.active && (
           messages.value.map((message, i) => (
-            <div class="v-messages__message" key={ `${i}-${messages.value}` }>
-              { message }
+            <div
+              class="v-messages__item"
+              key={ `${i}-${messages.value}` }
+            >
+              { slots.message ? slots.message({ message }) : message }
             </div>
           ))
         ) }
-
-        { slots?.default?.() }
       </MaybeTransition>
     )
   },

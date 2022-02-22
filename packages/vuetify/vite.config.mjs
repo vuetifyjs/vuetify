@@ -29,7 +29,7 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       vue(),
-      vueJsx({ optimize: true, enableObjectSlots: true }),
+      vueJsx({ optimize: false, enableObjectSlots: true }),
       viteSSR(),
     ],
     define: {

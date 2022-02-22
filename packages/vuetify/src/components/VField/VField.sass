@@ -20,6 +20,34 @@
   grid-area: control
   position: relative
 
+  &,
+  .v-icon
+    color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
+
+  &--error,
+  &--disabled
+    .v-messages,
+    .v-icon
+      color: inherit
+
+  .v-label
+    color: inherit
+
+  &--focused
+    &,
+    .v-label
+      color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+
+  &--error
+    color: rgb(var(--v-theme-error))
+
+  &--disabled
+    pointer-events: none
+
+    &,
+    input
+      color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity))
+
   --v-field-padding-start: #{$field-control-padding-start}
   --v-field-padding-end: #{$field-control-padding-end}
   --v-field-padding-top: #{$field-control-padding-top}
@@ -119,12 +147,14 @@
 /* region AFFIXES */
 .v-field__prepend-inner
   grid-area: prepend-inner
+  padding-inline-end: var(--v-field-padding-after)
 
 .v-field__clearable
   grid-area: clear
 
 .v-field__append-inner
   grid-area: append-inner
+  padding-inline-start: var(--v-field-padding-after)
 
 .v-field__field,
 .v-field__prepend-inner,
@@ -142,7 +172,8 @@
 .v-field__clearable
   cursor: pointer
   opacity: 0
-  margin-inline-end: $field-clearable-margin-inline-end
+  margin-inline-start: $field-clearable-margin
+  margin-inline-end: $field-clearable-margin
   transition: $field-transition-timing
   transition-property: opacity, transform, width
 
@@ -187,7 +218,7 @@
       @at-root
         @include tools.density('v-input', $input-density) using ($modifier)
           @at-root #{selector.nest(&, $root)}
-            top: 9px + $modifier * .25
+            top: 7px + $modifier * .25
 
     .v-field--variant-plain &,
     .v-field--variant-underlined &

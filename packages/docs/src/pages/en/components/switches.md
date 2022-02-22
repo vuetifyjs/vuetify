@@ -13,7 +13,7 @@ related:
 
 The `v-switch` component provides users the ability to choose between two distinct values. These are very similar to a toggle, or on/off switch, though aesthetically different than a checkbox.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

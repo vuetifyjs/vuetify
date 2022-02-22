@@ -14,15 +14,12 @@
   transition-property: $navigation-drawer-transition-property
   transition-timing-function: $navigation-drawer-transition-timing-function
   will-change: $navigation-drawer-will-change
-  position: fixed
+  position: absolute
 
   @include tools.border($navigation-drawer-border...)
   @include tools.elevation($navigation-drawer-elevation)
   @include tools.rounded($navigation-drawer-border-radius)
   @include tools.theme($navigation-drawer-theme...)
-
-  &--absolute
-    position: absolute
 
   &--rounded
     @include tools.rounded($navigation-drawer-rounded-border-radius)
@@ -82,11 +79,9 @@
     width: $navigation-drawer-img-width
 
 .v-navigation-drawer__scrim
-  position: fixed
-  top: 0
-  right: 0
-  bottom: 0
-  left: 0
+  position: absolute
+  width: 100%
+  height: 100%
   background: black
   opacity: .2
   transition: opacity $navigation-drawer-transition-duration $navigation-drawer-transition-timing-function

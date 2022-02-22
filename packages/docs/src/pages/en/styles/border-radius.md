@@ -13,7 +13,7 @@ related:
 
 Use border utilities to quickly style the border-radius of any element.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

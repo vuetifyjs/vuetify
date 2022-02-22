@@ -13,7 +13,7 @@ related:
 
 The OTP input is used for MFA procedure of authenticating users by a one-time password.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

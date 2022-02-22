@@ -13,7 +13,7 @@ related:
 
 The `v-btn-toggle` component is a simple wrapper for `v-item-group` built specifically to work with `v-btn`.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

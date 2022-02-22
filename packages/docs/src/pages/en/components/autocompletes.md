@@ -13,7 +13,7 @@ related:
 
 The `v-autocomplete` component offers simple and flexible type-ahead functionality. This is useful when searching large sets of data or even dynamically requesting information from an API.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

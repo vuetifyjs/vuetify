@@ -13,7 +13,7 @@ related:
 
 The `v-combobox` component is a [v-autocomplete](/components/autocompletes) that allows the user to enter values that do not exist within the provided **items**. Created items will be returned as strings.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
