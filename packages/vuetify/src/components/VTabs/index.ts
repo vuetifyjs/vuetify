@@ -1,2 +1,2 @@
-export * from './VTabs'
-export * from './VTab'
+export { VTabs } from './VTabs'
+export { VTab } from './VTab'
