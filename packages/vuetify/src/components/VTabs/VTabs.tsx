@@ -41,7 +41,7 @@ export const VTabs = defineComponent({
   name: 'VTabs',
 
   props: {
-    // alignWithTitle: Boolean,
+    alignWithTitle: Boolean,
     centerActive: Boolean,
     color: String,
     direction: {
@@ -150,6 +150,9 @@ export const VTabs = defineComponent({
         class={[
           'v-tabs',
           `v-tabs--${props.direction}`,
+          {
+            'v-tabs--align-with-title': props.alignWithTitle,
+          },
           densityClasses.value,
         ]}
         role="tablist"

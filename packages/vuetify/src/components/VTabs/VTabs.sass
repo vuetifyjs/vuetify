@@ -5,37 +5,13 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-// +theme(v-tabs) using ($material)
-//   > .v-tabs-bar
-//     background-color: map-get($material, $tabs-bar-background-color)
-
-//     .v-tab:not(.v-tab--active),
-//     .v-tab:not(.v-tab--active) > .v-icon,
-//     .v-tab:not(.v-tab--active) > .v-btn,
-//     .v-tab--disabled
-//       color: map-get($material, 'tabs')
-
-//   .v-tab
-//     +states($material)
-
-// +theme(v-tabs-items) using ($material)
-//   background-color: map-get($material, 'cards')
-
-// .v-tabs-bar
-//   &.primary,
-//   &.secondary,
-//   &.accent,
-//   &.success,
-//   &.error,
-//   &.warning,
-//   &.info
-//     .v-tab,
-//     .v-tabs-slider
-//       color: map-deep-get($material-dark, 'text', 'primary')
-
 // Block
 .v-tabs
   display: flex
+
+  @at-root
+    @include tools.density('v-tabs', $tabs-density) using ($modifier)
+      height: $tabs-height + $modifier
 
 .v-tabs__container
     contain: content
@@ -57,6 +33,10 @@
 .v-tabs--horizontal
   .v-tabs__content, .v-tabs__container
     flex-direction: row
+
+.v-tabs--align-with-title
+  .v-tab:first-child
+    margin-inline-start: 40px
 
   // .v-menu__activator
   //   height: 100%
