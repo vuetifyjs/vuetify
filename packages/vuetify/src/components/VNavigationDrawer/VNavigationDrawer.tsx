@@ -87,7 +87,7 @@ export const VNavigationDrawer = defineComponent({
     }
 
     if (!props.disableRouteWatcher && router) {
-      watch(() => router.currentRoute.value, () => mobile && (isActive.value = false))
+      watch(() => router.currentRoute.value, () => isTemporary.value && (isActive.value = false))
     }
 
     watch(props, val => {
