@@ -10,42 +10,16 @@
       class="rounded px-2"
       style="min-height: inherit; width: 100%"
       v-bind="attrs"
+      :prepend-avatar="src"
+      :title="ad.title"
     >
-      <template #prepend>
-        <v-list-item-avatar
-          v-if="src"
-          class="my-0"
-          size="56"
-          tile
-        >
-          <v-img
-            :alt="`Link to ${ad.title}`"
-            :src="src"
-            class="rounded-tl rounded-bl"
-            contain
-          />
-        </v-list-item-avatar>
-      </template>
-
-      <v-list-item-title
-        class="font-weight-medium text-subtitle-1 hidden-xs-only"
-        v-text="ad.title"
-      />
-
-      <div>
+      <template #subtitle>
         <app-markdown
           v-if="description"
           class="text-caption text--secondary"
           :content="description"
         />
-      </div>
-
-      <div
-        v-if="!compact"
-        class="powered-by align-self-end justify-self-end pl-4 my-2 hidden-sm-and-down"
-      >
-        {{ t('ads-via-vuetify') }}
-      </div>
+      </template>
     </v-list-item>
   </ads-base>
 </template>
@@ -65,6 +39,7 @@
 
     props: {
       color: String,
+
       ...createAdProps(),
     },
 

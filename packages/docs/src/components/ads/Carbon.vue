@@ -16,8 +16,6 @@
       />
     </ads-base>
   </div>
-
-  <vuetify v-else />
 </template>
 
 <script lang="ts">
@@ -42,19 +40,20 @@
     > span
       display: flex
       position: relative
+      flex-wrap: wrap
 
     .carbon-wrap
       display: flex
+      flex-wrap: wrap
 
     .carbon-text,
     .carbon-poweredby
       max-width: 200px
-      padding: 0 0 0 16px
       text-decoration: none
 
     .carbon-img
       display: inline-flex
-      margin: 0.5rem
+      margin: 1rem auto
 
       img
         border-radius: 4px 0 0 4px
@@ -62,16 +61,20 @@
 
     .carbon-text
       color: inherit
-      font-size: 0.75rem
-      padding: 0.475rem
+      font-size: 0.70rem
+      padding: 0 0.475rem
+      margin: 0 auto
+      text-align: center
 
     .carbon-poweredby
-      bottom: 0.5rem
+      color: inherit
       font-size: 0.625rem
       font-weight: 400
-      letter-spacing: 0.09375rem
-      position: absolute
-      right: 0.5rem
+      letter-spacing: 0.075rem
+      margin: 0 auto
+      opacity: .56
+      padding: 8px 0 16px 0
+      text-align: center
       text-transform: uppercase
 
   .v-app-ad.theme--light
