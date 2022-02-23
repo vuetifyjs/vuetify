@@ -16,15 +16,11 @@ The `v-btn` component replaces the standard html button with a material design t
 
 <entry />
 
-<!--
-
 ## Usage
 
 Buttons in their simplest form contain uppercase text, a slight elevation, hover effect, and a ripple effect on click.
 
-<usage name="v-btn" />
-
--->
+<!-- <usage name="v-btn" /> -->
 
 ## API
 

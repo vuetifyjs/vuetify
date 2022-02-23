@@ -17,7 +17,7 @@
       />
     </template>
 
-    <ul class="mb-6 ml-5">
+    <ul class="mb-4 ml-5">
       <router-link
         v-for="({ to, level, text }, i) in toc"
         v-slot="{ href }"
@@ -47,22 +47,25 @@
       </router-link>
     </ul>
 
-    <div class="ml-5">
+    <v-container>
       <app-caption
         v-if="sponsors.length"
-        class="ml-2 mb-3"
-        path="platinum-sponsors"
+        path="sponsors"
+        class="mb-2 ml-2"
       />
 
-      <template v-for="sponsor of sponsors" :key="sponsor.slug">
-        <sponsor-card compact :sponsor="sponsor" />
-      </template>
+      <v-row no-gutters>
+        <v-col v-for="sponsor of sponsors" :key="sponsor.slug" cols="6">
+          <sponsor-card width="96" compact :sponsor="sponsor" max-height="36" />
+        </v-col>
+      </v-row>
 
-      <sponsor-link
-        class="ml-2"
-        size="small"
-      />
-    </div>
+      <v-row>
+        <v-col cols="12">
+          <carbon class="pl-2" />
+        </v-col>
+      </v-row>
+    </v-container>
   </v-navigation-drawer>
 </template>
 
@@ -73,7 +76,6 @@
   import { useSponsorsStore } from '../../store/sponsors'
 
   import SponsorCard from '@/components/sponsor/Card.vue'
-  import SponsorLink from '@/components/sponsor/Link.vue'
 
   type TocItem = {
     to: string;
@@ -174,7 +176,6 @@
 
     components: {
       SponsorCard,
-      SponsorLink,
     },
 
     setup () {

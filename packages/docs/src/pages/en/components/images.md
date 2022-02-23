@@ -20,7 +20,7 @@ The `v-img` component is packed with features to support rich media. Combined wi
 
 `v-img` component is used to display a responsive image with lazy-load and placeholder.
 
-<usage name="v-img" />
+<!-- <usage name="v-img" /> -->
 
 ## API
 

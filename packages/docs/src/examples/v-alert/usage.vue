@@ -1,52 +1,41 @@
 <template>
-  <v-alert
-    v-if="show"
-    v-model="show"
-    v-bind="$attrs"
+  <usage-example
+    v-model="model"
+    :options="options"
   >
-    I'm an Alert Usage Example
-  </v-alert>
+    <v-defaults-provider
+      :defaults="{
+        VAlert: {
+          border: model === 'border',
+          variant: model === 'contained' ? 'contained' : undefined,
+        }
+      }"
+    >
+      <v-alert
+        v-model="alert"
+        icon="mdi-vuetify"
+        title="I'm an Alert Usage Example"
+        text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam earum, est illo quae fugit voluptatum fuga magni hic maiores ipsa, illum, tenetur accusamus cupiditate? Dolorem ad nisi eveniet officia voluptatibus."
+      ></v-alert>
+    </v-defaults-provider>
 
-  <v-btn
-    v-else
-    class="mx-auto"
-    color="primary"
-    @click="show = !show"
-  >
-    Reset
-  </v-btn>
+    <div
+      v-if="!alert"
+      class="d-flex justify-center"
+    >
+      <v-btn @click="alert= true">Reset Alert</v-btn>
+    </div>
+  </usage-example>
 </template>
 
 <script>
   export default {
-    name: 'Usage',
-
-    inheritAttrs: false,
+    name: 'VAlertUsageExample',
 
     data: () => ({
-      show: true,
-      defaults: {
-        border: null,
-        dense: false,
-        dismissible: false,
-        icon: null,
-        prominent: false,
-        outlined: false,
-        text: false,
-        shaped: false,
-        type: 'success',
-      },
-      options: {
-        booleans: ['dismissible'],
-        selects: {
-          border: ['left', 'right', 'top', 'bottom'],
-          color: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
-          icon: ['$mdiAccount', '$mdiVuetify'],
-          type: ['success', 'info', 'warning', 'error'],
-        },
-        sliders: { elevation: [0, 24] },
-      },
-      tabs: ['dense', 'prominent', 'outlined', 'text', 'shaped'],
+      alert: true,
+      model: 'default',
+      options: ['contained', 'border'],
     }),
   }
 </script>

@@ -18,22 +18,23 @@ The `v-alert` component is used to convey important information to the user thro
 
 ## Usage
 
-An alert is a [v-sheet](/components/sheets/) that specializes in getting the user's attention. While similar to [v-banner](/components/banners/) in functionality, `v-alert` is typically used inline with text and multiple times throughout an application.
+An alert is a [v-sheet](/components/sheets/) that specializes in getting the user's attention. While similar to [v-banner](/components/banners/) in functionality, `v-alert` is typically inline with content and used multiple times throughout an application.
 
 <usage name="v-alert" />
 
 ## Specification
 
-The `v-alert` component consists of 3 main grid areas; **prepend**, **content**, and **close**.
+The `v-alert` component consists of 5 main areas; **prepend**, **content**, **title**, **append**, and **close**.
 
-**[PICTURE PLACEHOLDER]**
+![Alert Specification](https://cdn.vuetifyjs.com/docs/images/specifications/alerts.png "VAlert Specification")
 
 | Area       | Scope of Responsibility |
 | ---------- | ----------------------- |
 | 1. Prepend | Displays `v-icon` by **type** or a specifically defined **icon** |
-| 2. Content | Default slot, displays **text** prop if present |
-| 3. Title   | The `v-alert-title` is located within the content area, displays **title** prop if present |
-| 4. Close   | Displays `v-icon` that hides `v-alert` when clicked |
+| 2. Title   | The `v-alert-title` is located within the content area, displays **title** prop if present |
+| 3. Content | Default slot, displays **text** prop if present |
+| 4. Append  | Displays contents of the Append slot |
+| 5. Close   | Displays `v-icon` that hides `v-alert` when clicked |
 
 ## API
 

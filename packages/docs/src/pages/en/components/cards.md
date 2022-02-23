@@ -18,7 +18,7 @@ related:
 
 ## Usage
 
-<usage name="v-card" />
+<!-- <usage name="v-card" /> -->
 
 ## API
 
@@ -66,7 +66,7 @@ The following snippet shows the general structure of a card:
 
 ### v-card-actions
 
-The container used for placing **actions** for a card, such as [v-btn](/components/buttons) or [v-menu](/components/menus). Also applies *special margin* to buttons so that they properly line up with other card content areas.
+The container used for placing **actions** for a card, such as [v-btn](/components/buttons) or [v-menu](/components/menus). Also applies _special margin_ to buttons so that they properly line up with other card content areas.
 
 ### v-card-avatar
 

@@ -2,7 +2,7 @@
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, inject, onActivated, onBeforeUnmount, onDeactivated, provide, reactive, ref, watch } from 'vue'
+import { computed, inject, onActivated, onBeforeUnmount, onDeactivated, onMounted, provide, reactive, ref, watch } from 'vue'
 import { convertToUnit, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory } from '@/util'
 
 // Types
@@ -242,6 +242,11 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
   const rootVm = getCurrentInstance('createLayout')
 
+  const isMounted = ref(false)
+  onMounted(() => {
+    isMounted.value = true
+  })
+
   provide(VuetifyLayoutKey, {
     register: (
       vm: ComponentInternalInstance,
@@ -272,7 +277,21 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       const zIndex = computed(() => rootZIndex.value + (layers.value.length * 2) - (index.value * 2))
 
       const layoutItemStyles = computed(() => {
-        if (index.value < 0) throw new Error(`Layout item "${id}" is missing from layout prop`)
+        const isHorizontal = position.value === 'left' || position.value === 'right'
+        const isOppositeHorizontal = position.value === 'right'
+        const isOppositeVertical = position.value === 'bottom'
+
+        const styles = {
+          [position.value]: 0,
+          zIndex: zIndex.value,
+          transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -110) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}%)`,
+          position: absolute.value || rootZIndex.value !== ROOT_ZINDEX ? 'absolute' : 'fixed',
+          ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
+        }
+
+        if (!isMounted.value) return styles
+
+        if (index.value < 0) throw new Error(`Layout item "${id}" is missing`)
 
         const item = items.value[index.value]
 
@@ -283,22 +302,14 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
           item[overlap.position] += overlap.amount
         }
 
-        const isHorizontal = position.value === 'left' || position.value === 'right'
-        const isOppositeHorizontal = position.value === 'right'
-        const isOppositeVertical = position.value === 'bottom'
-
         return {
-          [position.value]: 0,
+          ...styles,
           height: isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)` : `${elementSize.value}px`,
           marginLeft: isOppositeHorizontal ? undefined : `${item.left}px`,
           marginRight: isOppositeHorizontal ? `${item.right}px` : undefined,
           marginTop: position.value !== 'bottom' ? `${item.top}px` : undefined,
           marginBottom: position.value !== 'top' ? `${item.bottom}px` : undefined,
           width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : `${elementSize.value}px`,
-          zIndex: zIndex.value,
-          transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -110) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}%)`,
-          position: absolute.value || rootZIndex.value !== ROOT_ZINDEX ? 'absolute' : 'fixed',
-          ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
         }
       })
 

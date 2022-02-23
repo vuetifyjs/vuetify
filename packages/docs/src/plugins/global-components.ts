@@ -6,6 +6,7 @@ import ApiTable from '@/components/api/Table.vue'
 import AppBtn from '@/components/app/Btn.vue'
 import AppCaption from '@/components/app/Caption.vue'
 import AppDivider from '@/components/app/Divider.vue'
+import AppFigure from '@/components/app/Figure.vue'
 import AppHeading from '@/components/app/Heading.vue'
 import AppHeadline from '@/components/app/Headline.vue'
 import AppImg from '@/components/app/Img.vue'
@@ -25,6 +26,8 @@ import PageComponent from '@/components/PageComponent.vue'
 import Promoted from '@/components/ads/Promoted.vue'
 import Random from '@/components/ads/Random.vue'
 import Usage from '@/components/examples/Usage.vue'
+import UsageExample from '@/components/examples/UsageExample.vue'
+import VueFile from '@/components/examples/VueFile.vue'
 import Vuetify from '@/components/ads/Vuetify.vue'
 
 import type { GlobalComponentsPlugin } from '@/types'
@@ -44,6 +47,7 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
 
   // Used by markdown files
   app.component('Alert', Alert)
+  app.component('AppFigure', AppFigure)
   app.component('ApiInline', ApiInline)
   app.component('ApiLinks', ApiLinks)
   app.component('ApiSection', ApiSection)
@@ -59,5 +63,7 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
   app.component('Promoted', Promoted)
   app.component('Random', Random)
   app.component('Usage', Usage)
+  app.component('UsageExample', UsageExample)
+  app.component('VueFile', VueFile)
   app.component('Vuetify', Vuetify)
 }
