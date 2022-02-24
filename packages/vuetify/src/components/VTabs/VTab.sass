@@ -1,2 +1,19 @@
+@forward './variables'
+@use './variables' as *
+
 .v-tab
   display: inline-flex
+  position: relative
+
+.v-tab__slider
+  position: absolute
+  bottom: 0
+  left: 0
+  height: $tab-slider-size
+  width: 100%
+  background: currentColor
+  pointer-events: none
+  opacity: 0
+
+  .v-tab--selected &
+    opacity: 1
