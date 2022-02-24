@@ -30,9 +30,7 @@
       async load () {
         try {
           const { component } = await getExample(this.file)
-
           this.component = component
-          // console.log(this.component)
         } catch (e) {
           console.error(e)
         }

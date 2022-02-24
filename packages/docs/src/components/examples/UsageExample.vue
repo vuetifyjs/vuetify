@@ -31,6 +31,10 @@
         <slot />
       </div>
     </v-sheet>
+
+    <v-divider />
+
+    <app-markup :code="formatAttributes" />
   </div>
 </template>
 
@@ -62,6 +66,16 @@
         set (val) {
           this.$emit('update:modelValue', val)
         },
+      },
+      formatAttributes () {
+        let attributeArray = []
+        if (this.options.includes(this.model)) {
+          attributeArray.push(this.model)
+        }
+        attributeArray = attributeArray.sort()
+        const indent = attributeArray.length ? '\r  ' : ''
+        const tail = `${attributeArray.length ? '\r' : ''}></${this.name}>`
+        return `<${this.name}${indent}${attributeArray.join('\r  ')}${tail}`
       },
     },
   }
