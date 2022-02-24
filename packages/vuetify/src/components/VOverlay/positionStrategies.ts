@@ -215,7 +215,6 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
       : anchor.side === 'end' ? freeSpace.right
       : anchor.side === 'start' ? freeSpace.left
       : null
-
     const minWidth = Math.min(configuredMinWidth.value, maxWidth!, targetBox.width)
     const maxHeight = fitsY ? configuredMaxHeight.value : Math.min(
       configuredMaxHeight.value,
