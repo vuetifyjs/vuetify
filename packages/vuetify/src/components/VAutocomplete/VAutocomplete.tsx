@@ -117,9 +117,10 @@ export const VAutocomplete = genericComponent<new <T>() => {
     )
     const items = computed(() => {
       const array = []
+      const target = props.filterKeys[0]
 
       for (const item of props.items) {
-        const title = item?.title ?? String(item)
+        const title = item?.[target] ?? String(item)
         const value = item?.value ?? item
         const active = model.value.includes(value)
 
