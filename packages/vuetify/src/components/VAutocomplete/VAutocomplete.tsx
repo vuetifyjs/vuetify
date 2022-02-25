@@ -2,6 +2,7 @@
 import './VAutocomplete.sass'
 
 // Components
+import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VList, VListItem } from '@/components/VList'
@@ -21,9 +22,7 @@ import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { FilterMatch } from '@/composables/filter'
-import type { LinkProps } from '@/composables/router'
 import type { MakeSlots } from '@/util'
-import { makeSelectProps } from '../VSelect/VSelect'
 
 export interface DefaultSelectionSlot {
   selection: {
@@ -57,6 +56,7 @@ function highlightResult (text: string, matches: FilterMatch, length: number) {
 export const VAutocomplete = genericComponent<new <T>() => {
   $slots: MakeSlots<{
     chip: [DefaultChipSlot]
+    default: []
     selection: [DefaultSelectionSlot]
   }>
 }>()({
@@ -84,7 +84,6 @@ export const VAutocomplete = genericComponent<new <T>() => {
     const activator = ref()
     const isFocused = ref(false)
     const isPristine = ref(true)
-    const menu = ref(false)
     const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
       props,
@@ -93,6 +92,18 @@ export const VAutocomplete = genericComponent<new <T>() => {
       v => wrapInArray(v),
       (v: any) => props.multiple ? v : v[0]
     )
+    const menu = ref(false)
+    const active = computed({
+      get: () => model.value,
+      set: val => {
+        model.value = val
+
+        if (props.multiple) return
+
+        menu.value = false
+        isPristine.value = true
+      },
+    })
     const items = computed(() => {
       const array = []
 
@@ -152,12 +163,17 @@ export const VAutocomplete = genericComponent<new <T>() => {
       activator.value = val.$el.querySelector('.v-input__control')
     })
 
-    watch(() => model.value, () => {
+    watch(() => active.value, () => {
       if (!isFocused.value || props.multiple) return
 
-      menu.value = false
       search.value = selections.value[0]?.title
     })
+    watch(() => searchValue.value, () => {
+      if (!isFocused.value || menu.value) return
+
+      menu.value = true
+    })
+
     watch(() => isFocused.value, val => {
       menu.value = val
       isPristine.value = true
@@ -205,12 +221,13 @@ export const VAutocomplete = genericComponent<new <T>() => {
                     transition={ props.transition }
                   >
                     <VList
-                      v-model:active={ model.value }
+                      v-model:active={ active.value }
                       activeStrategy={ props.multiple ? 'multiple' : 'single' }
                     >
                       { !filteredItems.value.length && !props.hideNoData && (
                         <VListItem title={ t(props.noDataText) } />
                       )}
+
                       { filteredItems.value.map(({ item, matches }) => (
                         <VListItem
                           value={ item.value }
