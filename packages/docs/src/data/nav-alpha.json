@@ -58,6 +58,7 @@
     "activeIcon": "mdi-view-dashboard",
     "group": "components",
     "items": [
+      "all",
       "alerts",
       "app-bars",
       "application",

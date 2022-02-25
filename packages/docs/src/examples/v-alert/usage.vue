@@ -2,6 +2,7 @@
   <usage-example
     v-model="model"
     :options="options"
+    name="v-alert"
   >
     <v-defaults-provider
       :defaults="{

@@ -142,6 +142,7 @@ export const VTextField = genericComponent<new <T>() => {
           class={[
             'v-text-field',
             {
+              'v-text-field--persistent-placeholder': props.persistentPlaceholder,
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
               'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
@@ -176,7 +177,7 @@ export const VTextField = genericComponent<new <T>() => {
                 role="textbox"
                 { ...fieldProps }
                 error={ isValid.value === false }
-                modelValue={ isDirty.value }
+                modelValue={ isDirty.value || isActive.value }
               >
                 {{
                   ...slots,
