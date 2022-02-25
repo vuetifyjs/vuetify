@@ -10,7 +10,7 @@
     v-bind="$attrs"
   >
 
-    <div class="d-flex align-center mb-n7">
+    <div class="d-flex align-center mb-n10">
       <div class="d-none">
         <v-btn-toggle
           v-model="type"
@@ -39,7 +39,7 @@
 
       <v-btn
         class="v-btn--copy mr-n9"
-        density="compact"
+        size="small"
         icon
         variant="text"
         @click="copy"
@@ -114,7 +114,7 @@
       async function copy () {
         if (!IN_BROWSER || !root.value) return
 
-        const el = root.value.$el.querySelector('pre')
+        const el = root.value.$el.querySelector('code')
 
         if (!el) return
 
