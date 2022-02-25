@@ -9,7 +9,7 @@
         :value="newJobs.length"
         color="#ED561B"
         dot
-        location="top-left"
+        location="top-end"
       >
         <v-icon
           class="mx-1"
