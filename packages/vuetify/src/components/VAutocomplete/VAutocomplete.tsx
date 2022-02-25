@@ -23,11 +23,7 @@ import { genericComponent, useRender, wrapInArray } from '@/util'
 import type { FilterMatch } from '@/composables/filter'
 import type { LinkProps } from '@/composables/router'
 import type { MakeSlots } from '@/util'
-import type { PropType } from 'vue'
-
-export type SelectItem = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any) | (LinkProps & {
-  text: string
-})
+import { makeSelectProps } from '../VSelect/VSelect'
 
 export interface DefaultSelectionSlot {
   selection: {
@@ -69,28 +65,10 @@ export const VAutocomplete = genericComponent<new <T>() => {
   props: {
     // TODO: implement post keyboard support
     // autoSelectFirst: Boolean,
-    chips: Boolean,
-    closableChips: Boolean,
-    eager: Boolean,
-    hideNoData: Boolean,
-    hideSelected: Boolean,
-    items: {
-      type: Array as PropType<any[]>,
-      default: () => ([]),
-    },
-    modelValue: {
-      type: [Number, String, Array],
-      default: () => ([]),
-    },
-    multiple: Boolean,
-    noDataText: {
-      type: String,
-      default: '$vuetify.noDataText',
-    },
-    openOnClear: Boolean,
     search: String,
 
     ...makeFilterProps({ filterKeys: ['title'] }),
+    ...makeSelectProps({ menuIcon: '' }),
     ...makeTransitionProps({ transition: false } as const),
   },
 
@@ -117,10 +95,9 @@ export const VAutocomplete = genericComponent<new <T>() => {
     )
     const items = computed(() => {
       const array = []
-      const target = props.filterKeys[0]
 
-      for (const item of props.items) {
-        const title = item?.[target] ?? String(item)
+      for (const item of props.items as any) {
+        const title = item?.title ?? String(item)
         const value = item?.value ?? item
         const active = model.value.includes(value)
 

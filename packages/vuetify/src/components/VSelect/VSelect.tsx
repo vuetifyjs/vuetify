@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
 import { computed, ref, watch } from 'vue'
-import { genericComponent, useRender, wrapInArray } from '@/util'
+import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { LinkProps } from '@/composables/router'
@@ -27,6 +27,32 @@ export type SelectItem = string | (string | number)[] | ((item: Record<string, a
   text: string
 })
 
+export const makeSelectProps = propsFactory({
+  chips: Boolean,
+  closableChips: Boolean,
+  eager: Boolean,
+  hideNoData: Boolean,
+  hideSelected: Boolean,
+  items: {
+    type: Array as PropType<SelectItem[]>,
+    default: () => ([]),
+  },
+  menuIcon: {
+    type: String,
+    default: '$dropdown',
+  },
+  modelValue: {
+    type: [Number, String, Array],
+    default: () => ([]),
+  },
+  multiple: Boolean,
+  noDataText: {
+    type: String,
+    default: '$vuetify.noDataText',
+  },
+  openOnClear: Boolean,
+}, 'select')
+
 export const VSelect = genericComponent<new <T>() => {
   $slots: MakeSlots<{
     default: []
@@ -36,28 +62,7 @@ export const VSelect = genericComponent<new <T>() => {
   name: 'VSelect',
 
   props: {
-    chips: Boolean,
-    hideNoData: Boolean,
-    hideSelected: Boolean,
-    items: {
-      type: Array as PropType<SelectItem[]>,
-      default: () => ([]),
-    },
-    menuIcon: {
-      type: String,
-      default: '$dropdown',
-    },
-    modelValue: {
-      type: [Number, String, Array],
-      default: () => ([]),
-    },
-    multiple: Boolean,
-    noDataText: {
-      type: String,
-      default: '$vuetify.noDataText',
-    },
-    openOnClear: Boolean,
-
+    ...makeSelectProps(),
     ...makeTransitionProps({ transition: 'scale-transition' }),
   },
 
