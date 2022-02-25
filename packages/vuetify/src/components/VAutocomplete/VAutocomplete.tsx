@@ -100,7 +100,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
     'update:modelValue': (val: any) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
     const activator = ref()

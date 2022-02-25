@@ -45,7 +45,7 @@ export const VSelect = genericComponent<new <T>() => {
     },
     menuIcon: {
       type: String,
-      default: 'mdi-menu-down',
+      default: '$dropdown',
     },
     modelValue: {
       type: [Number, String, Array],
