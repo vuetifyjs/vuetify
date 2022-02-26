@@ -7,7 +7,7 @@ import { makeTagProps } from '@/composables/tag'
 import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
 
 // Utilities
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, toRef } from 'vue'
 import { genericComponent } from '@/util'
 
 // Types
@@ -59,7 +59,7 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
   },
 
   setup (props, { slots }) {
-    const { isOpen, open } = useNestedItem(computed(() => props.value), true)
+    const { isOpen, open } = useNestedItem(toRef(props, 'value'), true)
     const list = useList()
 
     const onClick = (e: Event) => {
@@ -82,9 +82,11 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
             },
           ]}
         >
-          <VListGroupActivator>
-            { slots.activator?.({ props: activatorProps.value }) }
-          </VListGroupActivator>
+          { slots.activator && (
+            <VListGroupActivator>
+              { slots.activator({ props: activatorProps.value }) }
+            </VListGroupActivator>
+          ) }
           <VExpandTransition>
             <div class="v-list-group__items" v-show={isOpen.value}>
               { slots.default?.() }
