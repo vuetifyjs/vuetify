@@ -62,11 +62,11 @@ The **colored-border** prop removes the alert background in order to accent the 
 
 <example file="v-alert/prop-colored-border" />
 
-#### Dense
+#### Density
 
-The **dense** prop decreases the height of the alert to create a simple and compact style. When combined with the **border** prop, the border thickness will be decreased to stay consistent with the style.
+The **density** prop decreases the height of the alert based upon 1 of 3 levels of density; **default**, **comfortable**, and **compact**.
 
-<example file="v-alert/prop-dense" />
+<example file="v-alert/prop-density" />
 
 #### Closable
 
@@ -105,18 +105,6 @@ The **variant** prop provides an easy way to change the overall style of your al
 The **rounded** prop will add or remove **border-radius** to the alert. Similar to other styled props, **rounded** can be combined with other props like **density**, **prominent**, and **variant** to create a unique and customized component.
 
 <example file="v-alert/prop-rounded" />
-
-#### Tip
-
-<!-- TODO: Write description. What is tip prop? It does not seem to be compatible with icon -->
-
-<example file="v-alert/prop-tip" />
-
-#### Twitter
-
-Combine multiple properties—**color, closable, border, elevation, and more**—to create a customized and stylish `v-alert` component.
-
-<example file="v-alert/misc-twitter" />
 
 ## Accessibility
 

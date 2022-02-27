@@ -10,13 +10,17 @@
       Morbi mollis tellus ac sapien. Fusce vel dui. Praesent ut ligula non mi varius sagittis. Vivamus consectetuer hendrerit lacus. Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi.
     </v-alert>
 
+    <br>
+
     <v-alert
       border="top"
-      border-color="info"
+      border-color="success"
       elevation="2"
     >
       Vestibulum ullamcorper mauris at ligula. Nam pretium turpis et arcu. Ut varius tincidunt libero. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Morbi nec metus.
     </v-alert>
+
+    <br>
 
     <v-alert
       border="bottom"
@@ -25,6 +29,8 @@
     >
       Sed in libero ut nibh placerat accumsan. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.
     </v-alert>
+
+    <br>
 
     <v-alert
       border="end"
