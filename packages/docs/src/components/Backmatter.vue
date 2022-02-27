@@ -28,7 +28,7 @@
         :key="i"
         cols="12"
         sm="6"
-        lg="4"
+        md="4"
       >
         <app-sheet>
           <v-list-item
@@ -37,7 +37,11 @@
             :subtitle="item.subtitle"
           >
             <template #prepend>
-              <v-icon :icon="item.icon" :color="item.color" />
+              <v-icon
+                :icon="item.icon"
+                :color="item.color"
+                class="mr-5 ml-2"
+              />
             </template>
           </v-list-item>
         </app-sheet>
