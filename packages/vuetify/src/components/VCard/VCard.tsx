@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+
 // Styles
 import './VCard.sass'
 
@@ -155,12 +157,14 @@ export const VCard = defineComponent({
                     </VCardTitle>
                   ) }
 
-                  <VCardSubtitle>
-                    { slots.subtitle
-                      ? slots.subtitle()
-                      : props.subtitle
-                    }
-                  </VCardSubtitle>
+                  { hasSubtitle && (
+                    <VCardSubtitle>
+                      { slots.subtitle
+                        ? slots.subtitle()
+                        : props.subtitle
+                      }
+                    </VCardSubtitle>
+                  ) }
                 </VCardHeaderText>
               ) }
 
