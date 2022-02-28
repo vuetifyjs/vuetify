@@ -35,13 +35,13 @@ $card-subtitle-line-height: tools.map-deep-get(settings.$typography, 'body-2', '
 $card-subtitle-opacity: var(--v-medium-emphasis-opacity) !default;
 $card-subtitle-padding: 0 1rem !default;
 $card-subtitle-text-transform: none !default;
+$card-text-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $card-text-comfortable-line-height: 1.2rem !default;
 $card-text-compact-line-height: 1.15rem !default;
 $card-text-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size') !default;
 $card-text-font-weight: tools.map-deep-get(settings.$typography, 'body-2', 'weight') !default;
 $card-text-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
 $card-text-line-height: tools.map-deep-get(settings.$typography, 'body-2', 'line-height') !default;
-$card-text-opacity: var(--v-medium-emphasis-opacity) !default;
 $card-text-padding-bottom: 1rem !default;
 $card-text-padding: 1rem !default;
 $card-text-text-transform: tools.map-deep-get(settings.$typography, 'body-2', 'text-transform') !default;
