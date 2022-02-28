@@ -2,70 +2,57 @@
   <v-sheet
     ref="root"
     :theme="isDark ? 'dark' : 'light'"
-    :color="isDark ? '#1F1F1F' : 'grey-lighten-5'"
-    class="app-markup overflow-hidden"
+    class="app-markup overflow-hidden pa-2"
     dir="ltr"
-    outlined
     rounded
     v-bind="$attrs"
   >
-
-    <div class="d-flex align-center mb-n10">
-      <div class="d-none">
-        <v-btn-toggle
-          v-model="type"
-          border="primary"
-          class="d-inline-flex"
-          color="primary"
-          density="compact"
-          rounded
-          variant="text"
-        >
-          <v-btn
-            icon="mdi-language-javascript"
-            value="js"
-            width="40"
-          />
-
-          <v-btn
-            icon="mdi-language-typescript"
-            value="ts"
-            width="40"
-          />
-        </v-btn-toggle>
-      </div>
-
-      <v-spacer />
-
-      <v-btn
-        class="v-btn--copy mr-n9"
-        size="small"
-        icon
-        variant="text"
-        @click="copy"
+    <v-sheet
+      :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
+      class="border"
+      outlined
+      rounded
+    >
+      <v-toolbar
+        border="b"
+        class="px-1"
+        color="transparent"
+        flat
+        height="44"
       >
-        <v-fade-transition hide-on-leave>
-          <v-icon
-            :key="String(clicked)"
-            :icon="clicked ? '$complete' : 'mdi-content-copy'"
-            color="grey"
-          />
-        </v-fade-transition>
-      </v-btn>
-    </div>
+        <v-spacer />
 
-    <slot>
-      <pre v-if="inline" :class="className">
-        <code :class="className" v-html="highlighted" />
-      </pre>
+        <v-tooltip anchor="bottom">
+          <template #activator="{ props }">
+            <v-btn
+              :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text'"
+              class="mr-1 text-disabled"
+              density="comfortable"
+              v-bind="props"
+              @click="copy"
+            />
+          </template>
 
-      <code v-else :class="className" v-html="highlighted" />
-    </slot>
+          <span>{{ t('copy-example-source') }}</span>
+        </v-tooltip>
+      </v-toolbar>
+
+      <div class="pa-4">
+        <slot>
+          <pre v-if="inline" :class="className">
+            <code :class="className" v-html="highlighted" />
+          </pre>
+
+          <code v-else :class="className" v-html="highlighted" />
+        </slot>
+      </div>
+    </v-sheet>
   </v-sheet>
 </template>
 
 <script lang="ts">
   // Composables
+  import { useI18n } from 'vue-i18n'
   import { useTheme } from 'vuetify'
   import { useUserStore } from '@/store/user'
 
@@ -105,6 +92,7 @@
       const clicked = ref(false)
       const root = ref<ComponentPublicInstance>()
       const type = ref('js')
+      const { t } = useI18n()
 
       const highlighted = computed(() => (
         props.code && props.language && Prism.highlight(props.code, Prism.languages[props.language], props.language)
@@ -130,15 +118,25 @@
 
         await wait(500)
 
-        clicked.value = false
         window.getSelection()?.removeAllRanges()
+
+        clicked.value = false
       }
 
       const isDark = computed(() => {
         return user.mixedTheme || theme.getTheme(theme.current.value).dark
       })
 
-      return { root, isDark, highlighted, className, clicked, copy, type }
+      return {
+        root,
+        isDark,
+        highlighted,
+        className,
+        clicked,
+        copy,
+        type,
+        t,
+      }
     },
   })
 </script>
@@ -147,7 +145,6 @@
   .v-sheet.app-markup
     // margin: 16px 0
     position: relative
-    padding: 12px 50px 12px 16px
 
     &:not(:hover) .v-btn--copy .v-icon
       opacity: .4
@@ -157,7 +154,6 @@
       font-size: 1rem
       font-weight: 300
       margin: 0 !important
-      min-height: 48px
 
     > pre
       border-radius: inherit
@@ -181,17 +177,17 @@
 
     pre
       &::after
-        bottom: 0.75rem
+        bottom: 1rem
         color: hsla(0, 0%, 19%, 0.5)
         font-family: inherit
         font-size: 0.7rem
         font-weight: 700
         position: absolute
-        right: 1rem
+        right: 14px
         text-transform: uppercase
 
     pre.language-bash::after
-      content: 'sh'
+      content: ' sh '
 
     pre.language-html::after
       content: 'html'
