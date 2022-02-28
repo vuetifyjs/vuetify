@@ -2,8 +2,9 @@
 import './VToolbar.sass'
 
 // Components
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VImg } from '@/components/VImg'
-import { VToolbarTitle } from '..'
+import { VToolbarTitle } from './VToolbarTitle'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -122,10 +123,17 @@ export const VToolbar = genericComponent<new () => {
         >
           { hasImage && (
             <div class="v-toolbar__image">
-              { slots.image
-                ? slots.image?.({ src: props.image })
-                : (<VImg src={ props.image } cover />)
-              }
+              <VDefaultsProvider
+                defaults={{
+                  VImg: {
+                    cover: true,
+                    src: props.image,
+                  },
+                }}
+                scoped
+              >
+                { slots.image ? slots.image?.() : (<VImg />) }
+              </VDefaultsProvider>
             </div>
           ) }
 
