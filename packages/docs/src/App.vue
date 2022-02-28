@@ -95,4 +95,8 @@
     + p
       font-size: 1.25rem
       font-weight: 300
+
+  ul:not([class])
+    padding-left: 20px
+    margin-bottom: 16px
 </style>
