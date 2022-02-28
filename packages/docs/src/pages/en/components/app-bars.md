@@ -26,17 +26,24 @@ The `v-app-bar` component is used for application-wide actions and information.
 
 <api-inline />
 
-## Sub-components
+## Anatomy
 
-### v-app-bar-nav-icon
+The recommended placement of elements inside of `v-app-bar` is:
 
-A styled icon button component created specifically for use with [v-toolbar](/components/toolbars) and `v-app-bar`. Typically seen on the left side of a toolbar as a hamburger menu, it is often used to control the state of a navigation drawer. The `default` slot can be used to customize the icon and function of this component. This is a **functional** component.
+* Place `v-app-bar-nav-icon` or other navigation items on the far left
+* Place `v-app-bar-title` to the right of navigation
+* Place contextual actions to the right of navigation
+* Place overflow actions to the far right
 
-### v-app-bar-title
+**[FUTURE IMG LOCATION]**
 
-A modified [v-toolbar-title](/components/toolbars/) specifically for use with the `shrink-on-scroll` prop. `v-toolbar-title` will be truncated on small screens (see [issue #12514](https://github.com/vuetifyjs/vuetify/issues/12514)) but this component uses absolute positioning to be fully visible when expanded. We don't recommend using `v-app-bar-title` without `shrink-on-scroll` as it does add a resize watcher and some extra calculations.
-
-## Caveats
+| Element / Area | Description |
+| ------------ | ---------- |
+| 1. Container | The App Bar container holds all `v-app-bar` components |
+| 2. App Bar Icon (optional) | A styled icon button component created that is often used to control the state of a `v-navigation drawer` |
+| 3. Title (optional) | A heading with increased **font-size** |
+| 4. Action items (optional) | Used to highlight certain actions not in the overflow menu |
+| 5. Overflow menu (optional) | Place less often used action items into a hidden menu |
 
 <alert type="warning">
 
@@ -82,7 +89,7 @@ The background image of a `v-app-bar` can fade on scroll. Use the `fade-img-on-s
 
 `v-app-bar` can contain background images. You can set source via the `src` prop. If you need to customize the `v-img` properties, the app-bar provides you with an **img** slot.
 
-<example file="v-app-bar/prop-img" />
+<example file="v-app-bar/prop-image" />
 
 <!-- #### Inverted scrolling
 
@@ -102,7 +109,7 @@ An `v-app-bar` with the `prominent` prop can opt to have its height shrunk as th
 
 <example file="v-app-bar/prop-scroll-threshold" /> -->
 
-### Misc
+<!-- ### Misc
 
 #### Menu
 
@@ -114,6 +121,6 @@ You can easily extend the functionality of app bar by adding `VMenu` there. Clic
 
 Using the functional component `v-app-bar-nav-icon` you can toggle the state of other components such as a [v-navigation-drawer](/components/navigation-drawers).
 
-<example file="v-app-bar/misc-app-bar-nav" />
+<example file="v-app-bar/misc-app-bar-nav" />-->
 
 <backmatter />
