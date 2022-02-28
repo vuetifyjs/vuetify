@@ -135,3 +135,5 @@ export const VTabs = defineComponent({
     )
   },
 })
+
+export type VTabs = InstanceType<typeof VTabs>
