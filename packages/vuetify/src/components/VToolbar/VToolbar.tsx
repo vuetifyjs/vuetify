@@ -17,15 +17,45 @@ import { useForwardRef } from '@/composables/forwardRef'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { MakeSlots } from '@/util'
-import type { PropType } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 
 export type Density = typeof allowedDensities[number]
 
 const allowedDensities = [null, 'prominent', 'default', 'comfortable', 'compact'] as const
+
+export const makeVToolbarProps = propsFactory({
+  absolute: Boolean,
+  collapse: Boolean,
+  color: String,
+  density: {
+    type: String as PropType<Density>,
+    default: 'default',
+    validator: (v: any) => allowedDensities.includes(v),
+  },
+  extended: Boolean,
+  extensionHeight: {
+    type: [Number, String],
+    default: 48,
+  },
+  flat: Boolean,
+  floating: Boolean,
+  height: {
+    type: [Number, String],
+    default: 64,
+  },
+  image: String,
+  title: String,
+
+  ...makeBorderProps(),
+  ...makeElevationProps(),
+  ...makeRoundedProps(),
+  ...makeTagProps({ tag: 'header' }),
+  ...makeThemeProps(),
+}, 'v-toolbar')
 
 export const VToolbar = genericComponent<new () => {
   $slots: MakeSlots<{
@@ -39,35 +69,7 @@ export const VToolbar = genericComponent<new () => {
 }>()({
   name: 'VToolbar',
 
-  props: {
-    absolute: Boolean,
-    collapse: Boolean,
-    color: String,
-    density: {
-      type: String as PropType<Density>,
-      default: 'default',
-      validator: (v: any) => allowedDensities.includes(v),
-    },
-    extended: Boolean,
-    extensionHeight: {
-      type: [Number, String],
-      default: 48,
-    },
-    flat: Boolean,
-    floating: Boolean,
-    height: {
-      type: [Number, String],
-      default: 64,
-    },
-    image: String,
-    title: String,
-
-    ...makeBorderProps(),
-    ...makeElevationProps(),
-    ...makeRoundedProps(),
-    ...makeTagProps({ tag: 'header' }),
-    ...makeThemeProps(),
-  },
+  props: makeVToolbarProps(),
 
   setup (props, { slots }) {
     const { borderClasses } = useBorder(props)
@@ -169,3 +171,7 @@ export const VToolbar = genericComponent<new () => {
 })
 
 export type VToolbar = InstanceType<typeof VToolbar>
+
+export function filterToolbarProps (props: ExtractPropTypes<ReturnType<typeof makeVToolbarProps>>) {
+  return pick(props, Object.keys(VToolbar?.props ?? {}) as any)
+}

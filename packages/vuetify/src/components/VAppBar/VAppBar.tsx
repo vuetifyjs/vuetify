@@ -2,7 +2,7 @@
 import './VAppBar.sass'
 
 // Components
-import { VToolbar } from '@/components/VToolbar/VToolbar'
+import { filterToolbarProps, makeVToolbarProps, VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
@@ -36,6 +36,7 @@ export const VAppBar = defineComponent({
       validator: (value: any) => ['top', 'bottom'].includes(value),
     },
 
+    ...makeVToolbarProps(),
     ...makeLayoutItemProps(),
   },
 
@@ -58,6 +59,8 @@ export const VAppBar = defineComponent({
     })
 
     return () => {
+      const [toolbarProps] = filterToolbarProps(props)
+
       return (
         <VToolbar
           ref={ vToolbarRef }
@@ -67,15 +70,10 @@ export const VAppBar = defineComponent({
               'v-app-bar--bottom': props.position === 'bottom',
             },
           ]}
-          style={[
-            layoutItemStyles.value,
-          ]}
-          { ...props }
-        >
-          {{
-            ...slots,
-          }}
-        </VToolbar>
+          style={ layoutItemStyles.value }
+          { ...toolbarProps }
+          v-slots={ slots }
+        />
       )
     }
   },
