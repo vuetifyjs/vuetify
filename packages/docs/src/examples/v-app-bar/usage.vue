@@ -11,7 +11,10 @@
         }
       }"
     >
-      <v-layout class="elevation-2 rounded mx-auto" style="max-width: 448px;">
+      <v-layout
+        class="elevation-2 rounded mx-auto bg-grey-lighten-4"
+        style="max-width: 448px;"
+      >
         <v-app-bar :model-value="model !== 'hidden'">
           <template v-slot:prepend>
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
@@ -29,7 +32,7 @@
         </v-app-bar>
 
         <v-main>
-          <div class="text-center py-12 bg-grey-lighten-4">
+          <div class="text-center py-12">
             <div class="text-h5">Content</div>
           </div>
         </v-main>
