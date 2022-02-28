@@ -2,21 +2,15 @@
 import './VAppBar.sass'
 
 // Components
-import { VImg } from '@/components/VImg'
+import { VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
-import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { makeTagProps } from '@/composables/tag'
-import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
+import { computed, ref, toRef } from 'vue'
+import { defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -32,27 +26,9 @@ export const VAppBar = defineComponent({
     // elevateOnScroll: Boolean
     // shrinkOnScroll: Boolean
     // fadeImageOnScroll: Boolean
-    collapse: Boolean,
-    color: String,
-    flat: Boolean,
-    height: {
-      type: [Number, String],
-      default: 64,
-    },
-    extensionHeight: {
-      type: [Number, String],
-      default: 48,
-    },
-    floating: Boolean,
-    image: String,
     modelValue: {
       type: Boolean,
       default: true,
-    },
-    prominent: Boolean,
-    prominentHeight: {
-      type: [Number, String],
-      default: 128,
     },
     position: {
       type: String as PropType<'top' | 'bottom'>,
@@ -60,12 +36,7 @@ export const VAppBar = defineComponent({
       validator: (value: any) => ['top', 'bottom'].includes(value),
     },
 
-    ...makeBorderProps(),
-    ...makeDensityProps(),
-    ...makeElevationProps(),
-    ...makeRoundedProps(),
     ...makeLayoutItemProps(),
-    ...makeTagProps({ tag: 'header' }),
   },
 
   emits: {
@@ -73,22 +44,9 @@ export const VAppBar = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { borderClasses } = useBorder(props)
-    const { densityClasses } = useDensity(props)
-    const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const isExtended = !!slots.extension
-    const contentHeight = computed(() => (
-      Number(props.prominent ? props.prominentHeight : props.height) -
-      (props.density === 'comfortable' ? 8 : 0) -
-      (props.density === 'compact' ? 16 : 0)
-    ))
-    const height = computed(() => (
-      contentHeight.value +
-      Number(isExtended ? props.extensionHeight : 0)
-    ))
-    const isActive = useProxiedModel(props, 'modelValue', props.modelValue)
+    const vToolbarRef = ref()
+    const isActive = useProxiedModel(props, 'modelValue')
+    const height = computed(() => vToolbarRef.value?.contentHeight)
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       priority: computed(() => parseInt(props.priority, 10)),
@@ -100,68 +58,24 @@ export const VAppBar = defineComponent({
     })
 
     return () => {
-      const hasImage = !!(slots.image || props.image)
-
       return (
-        <props.tag
+        <VToolbar
+          ref={ vToolbarRef }
           class={[
             'v-app-bar',
             {
               'v-app-bar--bottom': props.position === 'bottom',
-              'v-app-bar--collapsed': props.collapse,
-              'v-app-bar--flat': props.flat,
-              'v-app-bar--floating': props.floating,
-              'v-app-bar--is-active': isActive.value,
-              'v-app-bar--prominent': props.prominent,
             },
-            backgroundColorClasses.value,
-            borderClasses.value,
-            densityClasses.value,
-            elevationClasses.value,
-            roundedClasses.value,
           ]}
           style={[
-            backgroundColorStyles.value,
             layoutItemStyles.value,
           ]}
+          { ...props }
         >
-          { hasImage && (
-            <div class="v-app-bar__image">
-              { slots.image
-                ? slots.img?.({ src: props.image })
-                : (<VImg src={ props.image } cover />)
-              }
-            </div>
-          ) }
-
-          <div
-            class="v-app-bar__content"
-            style={{ height: convertToUnit(contentHeight.value) }}
-          >
-            { slots.prepend && (
-              <div class="v-app-bar__prepend">
-                { slots.prepend() }
-              </div>
-            ) }
-
-            { slots.default?.() }
-
-            { slots.append && (
-              <div class="v-app-bar__append">
-                { slots.append() }
-              </div>
-            ) }
-          </div>
-
-          { isExtended && (
-            <div
-              class="v-app-bar__extension"
-              style={{ height: convertToUnit(props.extensionHeight) }}
-            >
-              { slots.extension?.() }
-            </div>
-          ) }
-        </props.tag>
+          {{
+            ...slots,
+          }}
+        </VToolbar>
       )
     }
   },
