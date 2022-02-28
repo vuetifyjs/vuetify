@@ -1,19 +1,20 @@
 import './VTab.sass'
 
-// Mixins
+// Components
+import { VBtn } from '@/components/VBtn'
+import { VTabsSymbol } from './VTabs'
 
-// Utilities
-import { makeRouterProps } from '@/composables/router'
-import { makeTagProps } from '@/composables/tag'
-import { defineComponent, pick, standardEasing } from '@/util'
-import { VBtn } from '..'
+// Composables
+import { useTextColor } from '@/composables/color'
 import { provideDefaults } from '@/composables/defaults'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
-import { VTabsSymbol } from './VTabs'
-import { computed, ref, toRef, watch } from 'vue'
+import { makeRouterProps } from '@/composables/router'
+import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps } from '@/composables/theme'
 
-// Types
+// Utilities
+import { computed, ref, toRef, watch } from 'vue'
+import { defineComponent, pick, standardEasing, useRender } from '@/util'
 
 export const VTab = defineComponent({
   name: 'VTab',
@@ -32,6 +33,7 @@ export const VTab = defineComponent({
       default: true,
     },
     color: String,
+    sliderColor: String,
 
     ...makeTagProps(),
     ...makeRouterProps(),
@@ -43,6 +45,7 @@ export const VTab = defineComponent({
 
   setup (props, { slots, attrs }) {
     const { isSelected, select, selectedClass } = useGroupItem(props, VTabsSymbol)
+    const { textColorClasses: sliderColorClasses, textColorStyles: sliderColorStyles } = useTextColor(props, 'sliderColor')
 
     provideDefaults({
       VBtn: {
@@ -66,6 +69,8 @@ export const VTab = defineComponent({
 
         if (!prevEl || !nextEl) return
 
+        const color = getComputedStyle(prevEl).color
+
         const prevBox = prevEl.getBoundingClientRect()
         const nextBox = nextEl.getBoundingClientRect()
 
@@ -79,6 +84,7 @@ export const VTab = defineComponent({
 
         const sigma = 1.5
         nextEl.animate({
+          backgroundColor: [color, ''],
           transform: [`translateX(${delta}px)`, `translateX(${delta / sigma}px) scaleX(${(scale - 1) / sigma + 1})`, ''],
           transformOrigin: Array(3).fill(origin),
         }, {
@@ -88,7 +94,7 @@ export const VTab = defineComponent({
       }
     })
 
-    return () => {
+    useRender(() => {
       const [btnProps] = pick(props, [
         'href',
         'to',
@@ -111,11 +117,23 @@ export const VTab = defineComponent({
           ]}
           onClick={ () => !props.disabled && select(!isSelected.value) }
           { ...btnProps }
+          { ...attrs }
         >
           { slots.default ? slots.default() : props.title }
-          <div ref={ sliderEl } class="v-tab__slider"></div>
+          <div
+            ref={ sliderEl }
+            class={[
+              'v-tab__slider',
+              sliderColorClasses.value,
+            ]}
+            style={ sliderColorStyles.value }
+          />
         </VBtn>
       )
+    })
+
+    return {
+      isSelected,
     }
   },
 })

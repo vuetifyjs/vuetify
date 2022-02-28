@@ -3,21 +3,21 @@ import './VTabs.sass'
 
 // Components
 import { VTab } from './VTab'
+import { VSlideGroup } from '@/components/VSlideGroup'
 
-// Directives
+// Composables
+import { provideDefaults } from '@/composables/defaults'
+import { makeDensityProps, useDensity } from '@/composables/density'
+import { makeGroupProps } from '@/composables/group'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent } from '@/util'
-import { makeTagProps } from '@/composables/tag'
 import { computed, toRef } from 'vue'
+import { defineComponent } from '@/util'
 
 // Types
 import type { InjectionKey, PropType } from 'vue'
-import { provideDefaults } from '@/composables/defaults'
 import type { GroupProvide } from '@/composables/group'
-import { makeGroupProps } from '@/composables/group'
-import { useSlideGroup } from '@/composables/slideGroup'
-import { makeDensityProps, useDensity } from '@/composables/density'
 
 export type TabItem = string | Record<string, any>
 
@@ -52,7 +52,6 @@ export const VTabs = defineComponent({
     stacked: Boolean,
 
     ...makeDensityProps(),
-    ...makeGroupProps({ mandatory: 'force' as const }),
     ...makeTagProps(),
     //     backgroundColor: String,
     //     centered: Boolean,
@@ -82,19 +81,9 @@ export const VTabs = defineComponent({
     //     },
   },
 
-  emits: {
-    'update:modelValue': (value: any) => true,
-  },
-
-  setup (props, { slots }) {
+  setup (props, { slots, attrs }) {
     const parsedItems = computed(() => parseItems(props.items))
     const { densityClasses } = useDensity(props)
-    const {
-      containerRef,
-      containerListeners,
-      contentRef,
-      contentStyles,
-    } = useSlideGroup(props, VTabsSymbol)
 
     provideDefaults({
       VTab: {
@@ -105,7 +94,7 @@ export const VTabs = defineComponent({
     })
 
     return () => (
-      <props.tag
+      <VSlideGroup
         class={[
           'v-tabs',
           `v-tabs--${props.direction}`,
@@ -115,23 +104,14 @@ export const VTabs = defineComponent({
           densityClasses.value,
         ]}
         role="tablist"
+        symbol={ VTabsSymbol }
+        mandatory="force"
+        { ...attrs }
       >
-        <div
-          ref={ containerRef }
-          class="v-tabs__container"
-          { ...containerListeners }
-        >
-          <div
-            ref={ contentRef }
-            class="v-tabs__content"
-            style={ contentStyles.value }
-          >
-            { slots.default ? slots.default() : parsedItems.value.map(item => (
-              <VTab { ...item } key={ item.text } />
-            )) }
-          </div>
-        </div>
-      </props.tag>
+        { slots.default ? slots.default() : parsedItems.value.map(item => (
+          <VTab { ...item } key={ item.title } />
+        )) }
+      </VSlideGroup>
     )
   },
 })

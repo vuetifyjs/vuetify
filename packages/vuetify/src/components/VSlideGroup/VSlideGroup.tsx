@@ -7,13 +7,14 @@ import { useSlideGroup } from '@/composables/slideGroup'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 import { computed } from 'vue'
 
 export const VSlideGroup = defineComponent({
   name: 'VSlideGroup',
 
   props: {
+    symbol: null,
     ...makeTagProps(),
     ...makeGroupProps({
       mandatory: true,
@@ -32,8 +33,9 @@ export const VSlideGroup = defineComponent({
       next,
       prev,
       select,
+      selected,
       isSelected,
-    } = useSlideGroup(props)
+    } = useSlideGroup(props, props.symbol)
 
     const slotProps = computed(() => ({
       next,
@@ -42,7 +44,7 @@ export const VSlideGroup = defineComponent({
       isSelected,
     }))
 
-    return () => (
+    useRender(() => (
       <props.tag
         class={[
           'v-slide-group',
@@ -52,7 +54,7 @@ export const VSlideGroup = defineComponent({
           <div class="v-slide-group__prepend">
             { slots.prepend(slotProps.value) }
           </div>
-        ) }
+        )}
 
         <div
           ref={ containerRef }
@@ -71,9 +73,13 @@ export const VSlideGroup = defineComponent({
           <div class="v-slide-group__append">
             { slots.append(slotProps.value) }
           </div>
-        ) }
+        )}
       </props.tag>
-    )
+    ))
+
+    return {
+      selected,
+    }
   },
 })
 
