@@ -76,6 +76,9 @@
   > .v-btn:first-child
     margin-inline-start: $toolbar-prepend-btn-margin-start
 
+  + .v-toolbar-title
+    padding-inline-start: $toolbar-title-padding
+
 .v-toolbar__append
   margin-inline-start: auto
 
@@ -86,7 +89,6 @@
   flex: 1 1
   font-size: $toolbar-title-font-size
   min-width: 0
-  padding-left: $toolbar-title-padding
 
   @include tools.typography($toolbar-title-typography...)
 
