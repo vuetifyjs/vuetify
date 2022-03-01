@@ -223,7 +223,6 @@ export const VField = genericComponent<new <T>() => {
             backgroundColorClasses.value,
             focusClasses.value,
             loaderClasses.value,
-            textColorClasses.value,
           ]}
           style={[
             backgroundColorStyles.value,
@@ -258,7 +257,11 @@ export const VField = genericComponent<new <T>() => {
 
           <div class="v-field__field">
             { ['contained', 'filled'].includes(props.variant) && hasLabel.value && (
-              <VFieldLabel ref={ floatingLabelRef } floating>
+              <VFieldLabel
+                ref={ floatingLabelRef }
+                class={[textColorClasses.value]}
+                floating
+              >
                 { label }
               </VFieldLabel>
             ) }
@@ -312,7 +315,12 @@ export const VField = genericComponent<new <T>() => {
             </div>
           ) }
 
-          <div class="v-field__outline">
+          <div
+            class={[
+              'v-field__outline',
+              textColorClasses.value,
+            ]}
+          >
             { isOutlined && (
               <>
                 <div class="v-field__outline__start" />

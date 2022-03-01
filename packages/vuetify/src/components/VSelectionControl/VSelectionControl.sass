@@ -14,26 +14,22 @@
   position: relative
   user-select: none
 
-  .v-icon
-    color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
-
   .v-label
     height: 100%
     width: 100%
-
-  &--dirty
-    .v-icon
-      color: inherit
 
   &--disabled
     opacity: var(--v-disabled-opacity)
     pointer-events: none
 
-  &--error
-    color: rgb(var(--v-theme-error))
+  &--error,
+  &--disabled
+    .v-label
+      opacity: 1
 
-    .v-icon
-      color: inherit
+  &--error:not(.v-selection-control--disabled)
+    .v-label
+      color: rgb(var(--v-theme-error))
 
   &--inline
     display: inline-flex
@@ -82,6 +78,18 @@
 
   &:hover::before
     opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
+
+  > .v-icon
+    opacity: var(--v-medium-emphasis-opacity)
+
+  .v-selection-control--disabled &,
+  .v-selection-control--error &
+    > .v-icon
+      opacity: 1
+
+  .v-selection-control--error:not(.v-selection-control--disabled) &
+    > .v-icon
+      color: rgb(var(--v-theme-error))
 
   .v-selection-control--focus-visible &::before
     opacity: calc(#{map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))

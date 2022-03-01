@@ -222,10 +222,13 @@ export const VSelectionControl = genericComponent<new <T>() => {
               'v-selection-control--inline': group?.inline.value || props.inline,
             },
             densityClasses.value,
-            textColorClasses.value,
           ]}
         >
-          <div class="v-selection-control__wrapper">
+          <div class={[
+            'v-selection-control__wrapper',
+            textColorClasses.value,
+          ]}
+          >
             { slots.default?.() }
 
             <div
@@ -268,11 +271,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
             </div>
           </div>
 
-          <VLabel
-            disabled={ props.disabled }
-            error={ props.error }
-            for={ id.value }
-          >
+          <VLabel for={ id.value }>
             { label }
           </VLabel>
         </div>

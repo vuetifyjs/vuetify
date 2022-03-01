@@ -65,15 +65,10 @@ export const VRadioGroup = defineComponent({
             default: ({
               isDisabled,
               isReadonly,
-              isValid,
             }) => (
               <>
                 { label && (
-                  <VLabel
-                    disabled={ isDisabled.value }
-                    error={ isValid.value === false }
-                    for={ id.value }
-                  >
+                  <VLabel for={ id.value }>
                     { label }
                   </VLabel>
                 ) }

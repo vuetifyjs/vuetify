@@ -6,25 +6,8 @@
   display: grid
   flex: 1 1 auto
 
-  &,
-  .v-icon
-    color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
-
-  &--error,
-  &--disabled
-    .v-icon,
-    .v-messages
-      color: inherit
-
-  &--error
-    color: rgb(var(--v-theme-error))
-
   &--disabled
     pointer-events: none
-
-    &,
-    input
-      color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity))
 
   @at-root
     @include tools.density('v-input', $input-density) using ($modifier)
@@ -66,6 +49,26 @@
   padding-top: $input-details-padding-above
   overflow: hidden
   justify-content: space-between
+
+.v-input__details,
+.v-input__prepend,
+.v-input__append
+  > .v-icon
+    opacity: var(--v-medium-emphasis-opacity)
+
+  .v-input--disabled &,
+  .v-input--error &
+    > .v-icon,
+    .v-messages
+      opacity: 1
+
+  .v-input--disabled &
+    opacity: var(--v-disabled-opacity)
+
+  .v-input--error:not(.v-input--disabled) &
+    > .v-icon,
+    .v-messages
+      color: rgb(var(--v-theme-error))
 
 .v-input__prepend,
 .v-input__append
