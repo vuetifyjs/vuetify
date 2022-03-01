@@ -151,7 +151,7 @@
     "vue-router": "^4.0.12"
   },
   "peerDependencies": {
-    "@formatjs/intl": "^1.0.0",
+    "@formatjs/intl": "^1.0.0 || ^2.0.0",
     "vue": "^3.2.19",
     "vue-i18n": "^9.0.0"
   },
