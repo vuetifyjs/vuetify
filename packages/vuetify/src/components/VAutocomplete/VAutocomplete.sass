@@ -65,6 +65,11 @@
       .v-autocomplete__selections
         opacity: 0
 
+    .v-field--active:not(.v-field--focused)
+      input.v-field__input
+        opacity: 0
+        transition: none
+
   &--multiple
     input.v-field__input
       padding-inline-start: 0
