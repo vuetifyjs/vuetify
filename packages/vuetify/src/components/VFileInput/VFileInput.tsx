@@ -40,7 +40,6 @@ export const VFileInput = defineComponent({
     hint: String,
     persistentHint: Boolean,
     placeholder: String,
-    persistentPlaceholder: Boolean,
     showSize: {
       type: [Boolean, Number] as PropType<boolean | 1000 | 1024>,
       default: false,
@@ -99,14 +98,10 @@ export const VFileInput = defineComponent({
     const vFieldRef = ref<VInput>()
     const isFocused = ref(false)
     const inputRef = ref<HTMLInputElement>()
-    const isActive = computed(() => (
-      isFocused.value ||
-      props.persistentPlaceholder
-    ))
     const messages = computed(() => {
       return props.messages.length
         ? props.messages
-        : (isActive.value || props.persistentHint) ? props.hint : ''
+        : (props.persistentHint) ? props.hint : ''
     })
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
@@ -158,16 +153,19 @@ export const VFileInput = defineComponent({
             ...slots,
             default: ({
               isDisabled,
+              isDirty,
               isReadonly,
+              isValid,
             }) => (
               <VField
                 ref={ vFieldRef }
+                dirty={ isDirty.value }
                 focused={ isFocused.value }
                 prepend-icon={ props.prependIcon }
                 onClick:control={ onControlClick }
                 onClick:clear={ onClear }
                 { ...fieldProps }
-                modelValue={ model.value }
+                error={ isValid.value === false }
               >
                 {{
                   ...slots,

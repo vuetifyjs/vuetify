@@ -53,22 +53,21 @@
         margin-inline-start: 0
 
   &--single
-    input.v-field__input
+    &.v-text-field input.v-field__input
       position: absolute
       left: 0
-      opacity: 0
+
+    .v-field--active
+        input.v-field__input
+          transition: none
+
+    .v-field--dirty:not(.v-field--focused)
+        input.v-field__input
+          opacity: 0
 
     .v-field--focused
-      input.v-field__input
-        opacity: 1
-
       .v-autocomplete__selections
         opacity: 0
-
-    .v-field--active:not(.v-field--focused)
-      input.v-field__input
-        opacity: 0
-        transition: none
 
   &--multiple
     input.v-field__input

@@ -96,7 +96,6 @@ export const VTextField = genericComponent<new <T>() => {
     const isFocused = ref(false)
     const inputRef = ref<HTMLInputElement>()
     const isActive = computed(() => (
-      isFocused.value ||
       activeTypes.includes(props.type) ||
       props.persistentPlaceholder
     ))
@@ -164,6 +163,8 @@ export const VTextField = genericComponent<new <T>() => {
             }) => (
               <VField
                 ref={ vFieldRef }
+                active={ isActive.value }
+                dirty={ isDirty.value }
                 focused={ isFocused.value }
                 onMousedown={ (e: MouseEvent) => {
                   if (e.target === inputRef.value) return
@@ -177,7 +178,6 @@ export const VTextField = genericComponent<new <T>() => {
                 role="textbox"
                 { ...fieldProps }
                 error={ isValid.value === false }
-                modelValue={ isDirty.value || isActive.value }
               >
                 {{
                   ...slots,
