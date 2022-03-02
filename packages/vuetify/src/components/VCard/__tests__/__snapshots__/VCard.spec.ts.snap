@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VCard should match a snapshot 1`] = `
-<div class="v-card v-theme--light v-card--density-default v-card--variant-contained">
+<div class="v-card v-theme--light bg-surface v-card--density-default v-card--variant-contained">
   <div class="v-card__underlay">
   </div>
 </div>
 `;
 
 exports[`VCard should render slots and match a snapshot 1`] = `
-<div class="v-card v-theme--light v-card--density-default v-card--variant-contained">
+<div class="v-card v-theme--light bg-surface v-card--density-default v-card--variant-contained">
   <div class="v-card__underlay">
   </div>
   <div class="v-card-img">
