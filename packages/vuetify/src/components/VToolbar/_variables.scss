@@ -2,6 +2,8 @@
 @use "../../styles/settings/variables";
 @use "../../styles/tools/functions";
 
+$toolbar-background: rgb(var(--v-theme-surface)) !default;
+$toolbar-color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity)) !default;
 $toolbar-border-radius: 0 !default;
 $toolbar-btn-icon-size: 48px !default;
 $toolbar-collapsed-border-radius: 24px !default;
@@ -47,3 +49,8 @@ $toolbar-prominent-title-typography: (
   $toolbar-prominent-title-line-height,
   $toolbar-prominent-title-text-transform
 );
+
+$toolbar-theme: (
+  $toolbar-background,
+  $toolbar-color
+) !default;

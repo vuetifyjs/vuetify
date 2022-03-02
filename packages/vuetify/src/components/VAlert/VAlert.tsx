@@ -74,10 +74,7 @@ export const VAlert = defineComponent({
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
-    ...makeVariantProps({
-      color: 'surface-variant',
-      variant: 'contained-flat',
-    } as const),
+    ...makeVariantProps({ variant: 'contained-flat' } as const),
   },
 
   emits: {
