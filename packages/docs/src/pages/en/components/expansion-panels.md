@@ -1,4 +1,5 @@
 ---
+nav: Expansion panels
 meta:
   title: Expansion panel component
   description: The expansion panel component is a lightweight container that hides information behind expandable and contractable containers.

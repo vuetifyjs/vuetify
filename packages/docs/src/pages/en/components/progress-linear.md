@@ -1,4 +1,5 @@
 ---
+nav: Progress linear
 meta:
   title: Progress linear component
   description: The progress-linear component is useful for displaying a visual indicator of numerical data in a straight line.

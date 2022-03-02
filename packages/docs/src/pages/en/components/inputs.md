@@ -1,4 +1,5 @@
 ---
+nav: Custom inputs
 meta:
   title: Input component
   description: The input component is the baseline functionality for all of Vuetify's form components and provides a baseline for custom implementations.

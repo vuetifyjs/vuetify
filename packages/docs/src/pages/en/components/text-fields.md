@@ -1,4 +1,5 @@
 ---
+nav: Text fields
 meta:
   title: Text field component
   description: The text field component accepts textual input from users.

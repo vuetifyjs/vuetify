@@ -1,4 +1,5 @@
 ---
+nav: Touch
 meta:
   title: Touch directive
   description: The touch directive provides an interface for responding to various user touch actions.
