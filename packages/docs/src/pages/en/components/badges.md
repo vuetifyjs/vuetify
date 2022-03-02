@@ -42,6 +42,12 @@ Inline badges can be placed anywhere with content and can render without a *defa
 
 <example file="v-badge/prop-inline" />
 
+#### Content
+
+For simple text, use the **content** property to display a *value* on the badge.
+
+<example file="v-badge/prop-content" />
+
 <!-- ### Misc
 
 #### Customization options
