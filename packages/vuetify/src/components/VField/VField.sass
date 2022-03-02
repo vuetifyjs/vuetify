@@ -20,33 +20,9 @@
   grid-area: control
   position: relative
 
-  &,
-  .v-icon
-    color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
-
-  &--error,
   &--disabled
-    .v-messages,
-    .v-icon
-      color: inherit
-
-  .v-label
-    color: inherit
-
-  &--focused
-    &,
-    .v-label
-      color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
-
-  &--error
-    color: rgb(var(--v-theme-error))
-
-  &--disabled
+    opacity: var(--v-disabled-opacity)
     pointer-events: none
-
-    &,
-    input
-      color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity))
 
   --v-field-padding-start: #{$field-control-padding-start}
   --v-field-padding-end: #{$field-control-padding-end}
@@ -92,13 +68,6 @@
   &--single-line
     --v-field-padding-top: 0
 
-  &--variant-filled,
-  &--variant-outlined,
-  &--variant-underlined
-    &.v-field--focused
-      .v-label
-        color: inherit
-
   &--variant-contained,
   &--variant-filled
     $root: &
@@ -121,6 +90,7 @@
 /* endregion */
 /* region ELEMENTS */
 .v-field__input
+  color: inherit
   letter-spacing: $field-letter-spacing
   opacity: $field-input-opacity
   padding-inline-start: var(--v-field-padding-start)
@@ -169,6 +139,21 @@
   .v-field--focused &
     opacity: 1
 
+.v-field__prepend-inner,
+.v-field__append-inner,
+.v-field__clearable
+  > .v-icon
+    opacity: var(--v-medium-emphasis-opacity)
+
+  .v-field--disabled &,
+  .v-field--error &
+    > .v-icon
+      opacity: 1
+
+  .v-field--error:not(.v-field--disabled) &
+    > .v-icon
+      color: rgb(var(--v-theme-error))
+
 .v-field__clearable
   cursor: pointer
   opacity: 0
@@ -198,9 +183,13 @@
   .v-field--active &
     visibility: hidden
 
-  .v-input--disabled &,
-  .v-input--error &
-    color: inherit
+  .v-field--disabled &,
+  .v-field--focused &,
+  .v-field--error &
+    opacity: 1
+
+  .v-field--error:not(.v-field--disabled) &
+    color: rgb(var(--v-theme-error))
 
   &--floating
     --v-field-label-scale: #{$field-label-floating-scale}em
@@ -248,6 +237,9 @@
 
   .v-field:hover &
     --v-field-border-opacity: var(--v-high-emphasis-opacity)
+
+  .v-field--error:not(.v-field--disabled) &
+    color: rgb(var(--v-theme-error))
 
   .v-field.v-field--focused &,
   .v-input.v-input--error &
@@ -348,7 +340,7 @@
 /* region OVERLAY */
 .v-field--variant-filled
   .v-field__overlay
-    background-color: rgb(var(--v-theme-on-surface))
+    background-color: currentColor
     border-radius: inherit
     opacity: $field-overlay-filled-opacity
     pointer-events: none

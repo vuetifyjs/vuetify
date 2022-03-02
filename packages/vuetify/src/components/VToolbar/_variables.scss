@@ -2,12 +2,10 @@
 @use "../../styles/settings/variables";
 @use "../../styles/tools/functions";
 
-$toolbar-background: rgb(var(--v-theme-surface)) !default;
 $toolbar-border-radius: 0 !default;
 $toolbar-btn-icon-size: 48px !default;
 $toolbar-collapsed-border-radius: 24px !default;
 $toolbar-collapsed-max-width: 112px !default;
-$toolbar-color: rgb(var(--v-theme-on-surface)) !default;
 $toolbar-content-padding-x: 16px !default;
 $toolbar-content-padding-y: 4px !default;
 $toolbar-density: ( 'default': 0, 'comfortable': -1, 'compact': -2, 'prominent': -3 ) !default;
@@ -33,11 +31,6 @@ $toolbar-prominent-title-font-weight: 400 !default;
 $toolbar-prominent-title-letter-spacing: 0 !default;
 $toolbar-prominent-title-line-height: 2.25rem !default;
 $toolbar-prominent-title-text-transform: none !default;
-
-$toolbar-theme: (
-  $toolbar-background,
-  $toolbar-color,
-) !default;
 
 $toolbar-title-typography: (
   $toolbar-title-font-size,

@@ -76,6 +76,7 @@ function getPosition (e: MouseEvent | TouchEvent, position: 'clientX' | 'clientY
 
 export const makeSliderProps = propsFactory({
   disabled: Boolean,
+  error: Boolean,
   readonly: Boolean,
   max: {
     type: [Number, String],
@@ -177,9 +178,9 @@ export const useSlider = ({
   const disabled = toRef(props, 'disabled')
   const vertical = computed(() => props.direction === 'vertical')
 
-  const thumbColor = computed(() => props.disabled ? undefined : props.thumbColor ?? props.color)
-  const trackColor = computed(() => props.disabled ? undefined : props.trackColor ?? props.color)
-  const trackFillColor = computed(() => props.disabled ? undefined : props.trackFillColor ?? props.color)
+  const thumbColor = computed(() => props.error || props.disabled ? undefined : props.thumbColor ?? props.color)
+  const trackColor = computed(() => props.error || props.disabled ? undefined : props.trackColor ?? props.color)
+  const trackFillColor = computed(() => props.error || props.disabled ? undefined : props.trackFillColor ?? props.color)
 
   const mousePressed = ref(false)
 

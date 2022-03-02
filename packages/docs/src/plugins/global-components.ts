@@ -26,6 +26,8 @@ import PageComponent from '@/components/PageComponent.vue'
 import Promoted from '@/components/ads/Promoted.vue'
 import Random from '@/components/ads/Random.vue'
 import Usage from '@/components/examples/Usage.vue'
+import UsageExample from '@/components/examples/UsageExample.vue'
+import VueFile from '@/components/examples/VueFile.vue'
 import Vuetify from '@/components/ads/Vuetify.vue'
 
 import type { GlobalComponentsPlugin } from '@/types'
@@ -61,5 +63,7 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
   app.component('Promoted', Promoted)
   app.component('Random', Random)
   app.component('Usage', Usage)
+  app.component('UsageExample', UsageExample)
+  app.component('VueFile', VueFile)
   app.component('Vuetify', Vuetify)
 }

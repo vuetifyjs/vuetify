@@ -24,6 +24,12 @@
   align-items: center
   cursor: pointer
 
+  .v-input--disabled &
+    opacity: var(--v-disabled-opacity)
+
+  .v-input--error:not(.v-input--disabled) &
+    color: rgb(var(--v-theme-error))
+
 // Modifiers
 .v-slider.v-input--horizontal
   margin-left: $slider-horizontal-left

@@ -20,7 +20,7 @@ The `v-banner` component is used as a middle-interrupting message to the user wi
 
 Banners can contain one to two lines of text, to which actions and icons can be added.
 
-<usage name="v-banner" />
+<!-- <usage name="v-banner" /> -->
 
 ## API
 

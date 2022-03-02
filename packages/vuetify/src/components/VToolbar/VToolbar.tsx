@@ -2,8 +2,9 @@
 import './VToolbar.sass'
 
 // Components
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VImg } from '@/components/VImg'
-import { VToolbarTitle } from '..'
+import { VToolbarTitle } from './VToolbarTitle'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -13,18 +14,52 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
+import { useForwardRef } from '@/composables/forwardRef'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { MakeSlots } from '@/util'
-import type { PropType } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 
 export type Density = typeof allowedDensities[number]
 
 const allowedDensities = [null, 'prominent', 'default', 'comfortable', 'compact'] as const
+
+export const makeVToolbarProps = propsFactory({
+  absolute: Boolean,
+  collapse: Boolean,
+  color: {
+    type: String,
+    default: 'surface',
+  },
+  density: {
+    type: String as PropType<Density>,
+    default: 'default',
+    validator: (v: any) => allowedDensities.includes(v),
+  },
+  extended: Boolean,
+  extensionHeight: {
+    type: [Number, String],
+    default: 48,
+  },
+  flat: Boolean,
+  floating: Boolean,
+  height: {
+    type: [Number, String],
+    default: 64,
+  },
+  image: String,
+  title: String,
+
+  ...makeBorderProps(),
+  ...makeElevationProps(),
+  ...makeRoundedProps(),
+  ...makeTagProps({ tag: 'header' }),
+  ...makeThemeProps(),
+}, 'v-toolbar')
 
 export const VToolbar = genericComponent<new () => {
   $slots: MakeSlots<{
@@ -38,35 +73,7 @@ export const VToolbar = genericComponent<new () => {
 }>()({
   name: 'VToolbar',
 
-  props: {
-    absolute: Boolean,
-    collapse: Boolean,
-    color: String,
-    density: {
-      type: String as PropType<Density>,
-      default: 'default',
-      validator: (v: any) => allowedDensities.includes(v),
-    },
-    extended: Boolean,
-    extensionHeight: {
-      type: [Number, String],
-      default: 48,
-    },
-    flat: Boolean,
-    floating: Boolean,
-    height: {
-      type: [Number, String],
-      default: 64,
-    },
-    image: String,
-    title: String,
-
-    ...makeBorderProps(),
-    ...makeElevationProps(),
-    ...makeRoundedProps(),
-    ...makeTagProps({ tag: 'header' }),
-    ...makeThemeProps(),
-  },
+  props: makeVToolbarProps(),
 
   setup (props, { slots }) {
     const { borderClasses } = useBorder(props)
@@ -119,10 +126,17 @@ export const VToolbar = genericComponent<new () => {
         >
           { hasImage && (
             <div class="v-toolbar__image">
-              { slots.image
-                ? slots.image?.({ src: props.image })
-                : (<VImg src={ props.image } cover />)
-              }
+              <VDefaultsProvider
+                defaults={{
+                  VImg: {
+                    cover: true,
+                    src: props.image,
+                  },
+                }}
+                scoped
+              >
+                { slots.image ? slots.image?.() : (<VImg />) }
+              </VDefaultsProvider>
             </div>
           ) }
 
@@ -163,8 +177,12 @@ export const VToolbar = genericComponent<new () => {
       )
     })
 
-    return {}
+    return useForwardRef({ contentHeight })
   },
 })
 
 export type VToolbar = InstanceType<typeof VToolbar>
+
+export function filterToolbarProps (props: ExtractPropTypes<ReturnType<typeof makeVToolbarProps>>) {
+  return pick(props, Object.keys(VToolbar?.props ?? {}) as any)
+}

@@ -41,6 +41,7 @@ $button-text-transform: tools.map-deep-get(settings.$typography, 'button', 'text
 $button-vertical-align: middle !default;
 $button-width-ratio: math.div(16, 9) !default;
 $button-stacked-width-ratio: 1 !default;
+$button-rounded-border-radius: map.get(settings.$rounded, 'xl') !default;
 
 $button-density: ('default': 0, 'comfortable': -2, 'compact': -3) !default;
 $button-stacked-density: ('default': 0, 'comfortable': -4, 'compact': -6) !default;

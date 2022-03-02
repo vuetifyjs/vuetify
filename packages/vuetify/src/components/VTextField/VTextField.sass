@@ -3,57 +3,12 @@
 @use '../../styles/settings'
 @use './variables' as *
 
-// TODO: abstract variables
-
+/* region BLOCK */
 .v-text-field
-  .v-field--active
-    input,
-    .v-text-field__prefix,
-    .v-text-field__suffix
-      opacity: 1
-
-  &__prefix,
-  &__suffix
-    color: $text-field-affix-color
-    display: flex
-    align-items: center
-    cursor: default
-    opacity: 0
-    transition: .15s opacity settings.$standard-easing
-    white-space: nowrap
-    padding-top: var(--v-field-padding-top)
-
-  &__prefix
-    padding-inline-end: var(--v-field-padding-before)
-
-  &__suffix
-    padding-inline-end: var(--v-field-padding-end)
-
-  .v-field__input
-    @at-root #{selector.append('.v-text-field--prefixed', &)}
-      --v-field-padding-start: 6px
-    @at-root #{selector.append('.v-text-field--suffixed', &)}
-      --v-field-padding-end: 0
-
-  &--flush-details
-    .v-input__details
-      padding: 0
-
-  .v-field
-    cursor: text
-
-    &--single-line
-      input
-        transition: none
-
-  .v-input__details
-    padding-inline-start: $text-field-details-padding-inline
-    padding-inline-end: $text-field-details-padding-inline
-
   input
-    flex: 1
+    flex: $text-field-input-flex
     opacity: 0
-    transition: .15s opacity settings.$standard-easing
+    transition: $text-field-input-transition
 
     &:focus,
     &:active
@@ -63,7 +18,62 @@
     &:invalid
       box-shadow: none
 
-  .v-field--disabled
-    .v-text-field__prefix,
-    .v-text-field__suffix
+  .v-field
+    cursor: text
+
+  .v-field__input
+    @at-root #{selector.append('.v-text-field--prefixed', &)}
+      --v-field-padding-start: #{$text-field-input-padding-start}
+
+    @at-root #{selector.append('.v-text-field--suffixed', &)}
+      --v-field-padding-end: #{$text-field-input-padding-end}
+
+  .v-input__details
+    padding-inline-start: $text-field-details-padding-inline
+    padding-inline-end: $text-field-details-padding-inline
+
+  .v-field--active
+    input
+      opacity: 1
+
+  .v-field--single-line
+    input
+      transition: none
+
+/* endregion */
+/* region ELEMENTS */
+.v-text-field
+  &__prefix,
+  &__suffix
+    align-items: center
+    color: $text-field-affix-color
+    cursor: default
+    display: flex
+    opacity: 0
+    padding-top: var(--v-field-padding-top)
+    transition: inherit
+    white-space: nowrap
+
+    .v-field--active &
+      opacity: 1
+
+    .v-field--disabled &
       color: $text-field-disabled-affix-color
+
+  &__prefix
+    padding-inline-start: var(--v-field-padding-start)
+
+  &__suffix
+    padding-inline-end: var(--v-field-padding-end)
+
+/* endregion */
+/* region MODIFIERS */
+.v-text-field
+  &--flush-details
+    .v-input__details
+      padding: 0
+
+  &--persistent-placeholder
+    input
+      opacity: 1
+/* endregion */

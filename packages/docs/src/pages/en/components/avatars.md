@@ -19,7 +19,7 @@ The `v-avatar` component is typically used to display circular user profile pict
 
 Avatars in their simplest form display content within a circular container.
 
-<usage name="v-avatar" />
+<!-- <usage name="v-avatar" /> -->
 
 ## API
 

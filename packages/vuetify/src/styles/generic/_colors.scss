@@ -14,7 +14,7 @@
 @mixin background-text-color($color_name, $color_type) {
   $map_value: map-deep-get(colors.$text-on-colors, $color_name, $color_type);
 
-  color: $map_value !important;
+  color: $map_value;
 }
 
 @if (settings.$color-pack) {

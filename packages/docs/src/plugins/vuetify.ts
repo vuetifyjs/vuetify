@@ -15,7 +15,6 @@ export const useVuetify: VuetifyPlugin = ({ app }) => {
         light: {
           colors: {
             primary: '#1867c0',
-            'on-background': '#333333',
             secondary: '#5CBBF6',
             tertiary: '#E57373',
             accent: '#005CAF',

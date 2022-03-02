@@ -1,4 +1,5 @@
 ---
+nav: Switches
 meta:
   title: Switch component
   description: The switch component is a simple and eloquent toggle used to select between two values.

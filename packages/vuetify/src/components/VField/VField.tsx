@@ -10,7 +10,6 @@ import { VFieldLabel } from './VFieldLabel'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 
 // Utilities
@@ -24,7 +23,6 @@ import {
   propsFactory,
   standardEasing,
   useRender,
-  wrapInArray,
 } from '@/util'
 
 // Types
@@ -93,10 +91,11 @@ export const VField = genericComponent<new <T>() => {
   inheritAttrs: false,
 
   props: {
+    active: Boolean,
+    dirty: Boolean,
     disabled: Boolean,
     error: Boolean,
     id: String,
-    modelValue: null,
 
     ...makeFocusProps(),
     ...makeVFieldProps(),
@@ -112,14 +111,11 @@ export const VField = genericComponent<new <T>() => {
   },
 
   setup (props, { attrs, emit, slots }) {
-    const model = useProxiedModel(props, 'modelValue')
-
     const { themeClasses } = provideTheme(props)
     const { loaderClasses } = useLoader(props)
     const { focusClasses, isFocused, focus, blur } = useFocus(props)
 
-    const isDirty = computed(() => wrapInArray(model.value || []).length > 0)
-    const isActive = computed(() => isDirty.value || isFocused.value)
+    const isActive = computed(() => props.dirty || props.active)
     const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
 
     const uid = getUid()
@@ -210,6 +206,7 @@ export const VField = genericComponent<new <T>() => {
               'v-field--active': isActive.value,
               'v-field--appended': hasAppend,
               'v-field--disabled': props.disabled,
+              'v-field--dirty': props.dirty,
               'v-field--error': props.error,
               'v-field--has-background': !!props.bgColor,
               'v-field--persistent-clear': props.persistentClear,
@@ -222,7 +219,6 @@ export const VField = genericComponent<new <T>() => {
             backgroundColorClasses.value,
             focusClasses.value,
             loaderClasses.value,
-            textColorClasses.value,
           ]}
           style={[
             backgroundColorStyles.value,
@@ -257,7 +253,11 @@ export const VField = genericComponent<new <T>() => {
 
           <div class="v-field__field">
             { ['contained', 'filled'].includes(props.variant) && hasLabel.value && (
-              <VFieldLabel ref={ floatingLabelRef } floating>
+              <VFieldLabel
+                ref={ floatingLabelRef }
+                class={[textColorClasses.value]}
+                floating
+              >
                 { label }
               </VFieldLabel>
             ) }
@@ -281,7 +281,7 @@ export const VField = genericComponent<new <T>() => {
             <VExpandXTransition>
               <div
                 class="v-field__clearable"
-                v-show={ isDirty.value }
+                v-show={ props.dirty }
               >
                 { slots.clear
                   ? slots.clear()
@@ -311,7 +311,12 @@ export const VField = genericComponent<new <T>() => {
             </div>
           ) }
 
-          <div class="v-field__outline">
+          <div
+            class={[
+              'v-field__outline',
+              textColorClasses.value,
+            ]}
+          >
             { isOutlined && (
               <>
                 <div class="v-field__outline__start" />

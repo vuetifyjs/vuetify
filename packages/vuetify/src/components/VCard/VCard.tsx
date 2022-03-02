@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+
 // Styles
 import './VCard.sass'
 
@@ -60,7 +62,10 @@ export const VCard = defineComponent({
     ...makeRoundedProps(),
     ...makeRouterProps(),
     ...makeTagProps(),
-    ...makeVariantProps({ variant: 'contained' } as const),
+    ...makeVariantProps({
+      color: 'surface',
+      variant: 'contained',
+    } as const),
   },
 
   setup (props, { attrs, slots }) {
@@ -155,12 +160,14 @@ export const VCard = defineComponent({
                     </VCardTitle>
                   ) }
 
-                  <VCardSubtitle>
-                    { slots.subtitle
-                      ? slots.subtitle()
-                      : props.subtitle
-                    }
-                  </VCardSubtitle>
+                  { hasSubtitle && (
+                    <VCardSubtitle>
+                      { slots.subtitle
+                        ? slots.subtitle()
+                        : props.subtitle
+                      }
+                    </VCardSubtitle>
+                  ) }
                 </VCardHeaderText>
               ) }
 

@@ -42,14 +42,6 @@ describe('filter.ts', () => {
       expect(filterItems(items, query, { filterKeys, filterMode: 'every' })).toHaveLength(expected)
     })
 
-    it('should filter an array of strings', () => {
-      const items = Array.from({ length: 50 }, (v, k) => `item-${k}`)
-
-      expect(filterItems(items, 'item-2')).toHaveLength(11)
-      expect(filterItems(items, 'item-29')).toHaveLength(1)
-      expect(filterItems(items, 'item')).toHaveLength(50)
-    })
-
     it('should filter by mode using customKeyFilter', () => {
       const customKeyFilter = {
         title: (s: string, q: string) => s === q,
@@ -110,7 +102,10 @@ describe('filter.ts', () => {
   })
 
   describe('useFilter', () => {
-    const items = ref(Array.from({ length: 50 }, (v, k) => `item-${k}`))
+    const items = ref(Array.from({ length: 50 }, (v, k) => ({
+      text: `item-${k}`,
+      value: k,
+    })))
 
     it.each([
       ['', items.value.length],

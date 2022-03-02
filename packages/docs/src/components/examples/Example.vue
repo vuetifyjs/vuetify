@@ -8,7 +8,7 @@
       <v-toolbar
         border="b"
         class="px-4"
-        height="38"
+        height="44"
         flat
         rounded="t"
       >
@@ -21,9 +21,8 @@
         >
           <template #activator="{ props: tooltip }">
             <v-btn
-              class="ml-2"
+              class="ml-2 text-medium-emphasis"
               density="comfortable"
-              size="small"
               variant="text"
               v-bind="mergeProps(action, tooltip)"
             />

@@ -1,4 +1,5 @@
 ---
+nav: Forms
 meta:
   title: Form component
   description: The form component provides a wrapper that makes it easy to process and control validation states of input components.

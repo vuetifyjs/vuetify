@@ -1,4 +1,5 @@
 ---
+nav: File inputs
 meta:
   title: File input component
   description: The file input component is a specialized input that provides a clean interface for selecting files, showing detailed selection information and upload progress.

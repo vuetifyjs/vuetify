@@ -1,4 +1,5 @@
 ---
+nav: Button groups
 meta:
   title: Button group component
   description: The button group component allows you to combine a series of selectable buttons together in a single-line.
