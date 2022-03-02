@@ -140,6 +140,11 @@ export const VAutocomplete = genericComponent<new <T>() => {
 
       search.value = undefined
     }
+    function onClickControl () {
+      if (props.hideNoData && !filteredItems.value.length) return
+
+      menu.value = true
+    }
     function onKeydown (e: KeyboardEvent) {
       if (
         ['Enter', ' '].includes(e.key) &&
@@ -180,13 +185,13 @@ export const VAutocomplete = genericComponent<new <T>() => {
     })
 
     watch(() => isFocused.value, val => {
-      menu.value = val
       isPristine.value = true
 
       if (val && !props.multiple) {
         search.value = selections.value[0]?.title
       } else if (!val) {
         search.value = ''
+        menu.value = false
       }
     })
 
@@ -207,7 +212,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
           ]}
           dirty={ model.value.length > 0 }
           onClick:clear={ onClear }
-          onClick:control={ () => menu.value = true }
+          onClick:control={ onClickControl }
           onFocus={ () => isFocused.value = true }
           onBlur={ () => isFocused.value = false }
           onKeydown={ onKeydown }
