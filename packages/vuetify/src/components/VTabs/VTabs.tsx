@@ -8,7 +8,6 @@ import { VSlideGroup } from '@/components/VSlideGroup'
 // Composables
 import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeGroupProps } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
@@ -50,35 +49,20 @@ export const VTabs = defineComponent({
       default: () => ([]),
     },
     stacked: Boolean,
+    backgroundColor: String,
+    centered: Boolean,
+    grow: Boolean,
+    height: {
+      type: [Number, String],
+      default: undefined,
+    },
+    hideSlider: Boolean,
+    optional: Boolean,
+    right: Boolean,
+    sliderColor: String,
 
     ...makeDensityProps(),
     ...makeTagProps(),
-    //     backgroundColor: String,
-    //     centered: Boolean,
-    //     grow: Boolean,
-    //     height: {
-    //       type: [Number, String],
-    //       default: undefined,
-    //     },
-    //     hideSlider: Boolean,
-    //     iconsAndText: Boolean,
-    //     mobileBreakpoint: [String, Number],
-    //     nextIcon: {
-    //       type: String,
-    //       default: '$next',
-    //     },
-    //     optional: Boolean,
-    //     prevIcon: {
-    //       type: String,
-    //       default: '$prev',
-    //     },
-    //     right: Boolean,
-    //     showArrows: [Boolean, String],
-    //     sliderColor: String,
-    //     sliderSize: {
-    //       type: [Number, String],
-    //       default: 2,
-    //     },
   },
 
   setup (props, { slots, attrs }) {
@@ -90,6 +74,7 @@ export const VTabs = defineComponent({
         stacked: toRef(props, 'stacked'),
         color: toRef(props, 'color'),
         fixed: toRef(props, 'fixedTabs'),
+        sliderColor: toRef(props, 'sliderColor'),
       },
     })
 
@@ -100,6 +85,9 @@ export const VTabs = defineComponent({
           `v-tabs--${props.direction}`,
           {
             'v-tabs--align-with-title': props.alignWithTitle,
+            'v-tabs--centered': props.centered,
+            'v-tabs--grow': props.grow,
+            'v-tabs--right': props.right,
           },
           densityClasses.value,
         ]}
