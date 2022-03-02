@@ -26,7 +26,7 @@ export const VBadge = defineComponent({
     bordered: Boolean,
     color: {
       type: String,
-      default: 'primary',
+      default: 'surface-variant',
     },
     content: String,
     dot: Boolean,
