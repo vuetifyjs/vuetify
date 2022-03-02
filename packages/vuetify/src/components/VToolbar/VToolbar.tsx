@@ -31,7 +31,10 @@ const allowedDensities = [null, 'prominent', 'default', 'comfortable', 'compact'
 export const makeVToolbarProps = propsFactory({
   absolute: Boolean,
   collapse: Boolean,
-  color: String,
+  color: {
+    type: String,
+    default: 'surface',
+  },
   density: {
     type: String as PropType<Density>,
     default: 'default',
