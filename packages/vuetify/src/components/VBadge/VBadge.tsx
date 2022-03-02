@@ -24,10 +24,7 @@ export const VBadge = defineComponent({
 
   props: {
     bordered: Boolean,
-    color: {
-      type: String,
-      default: 'surface-variant',
-    },
+    color: String,
     content: String,
     dot: Boolean,
     floating: Boolean,

@@ -54,7 +54,11 @@ export const makeVFieldProps = propsFactory({
     type: String,
     default: '$clear',
   },
+  active: Boolean,
   color: String,
+  dirty: Boolean,
+  disabled: Boolean,
+  error: Boolean,
   label: String,
   persistentClear: Boolean,
   prependInnerIcon: String,
@@ -91,10 +95,6 @@ export const VField = genericComponent<new <T>() => {
   inheritAttrs: false,
 
   props: {
-    active: Boolean,
-    dirty: Boolean,
-    disabled: Boolean,
-    error: Boolean,
     id: String,
 
     ...makeFocusProps(),

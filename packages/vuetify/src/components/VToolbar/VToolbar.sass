@@ -18,6 +18,7 @@
 
   @include tools.elevation($toolbar-elevation)
   @include tools.rounded($toolbar-border-radius)
+  @include tools.theme($toolbar-theme...)
 
   @at-root
     @include tools.density('v-toolbar', $toolbar-density) using ($modifier)

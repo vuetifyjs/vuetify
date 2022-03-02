@@ -38,6 +38,7 @@ $button-stacked-padding-ratio: 4.5 !default;
 $button-positions: absolute fixed !default;
 $button-text-letter-spacing: tools.map-deep-get(settings.$typography, 'button', 'letter-spacing') !default;
 $button-text-transform: tools.map-deep-get(settings.$typography, 'button', 'text-transform') !default;
+$button-transition-property: box-shadow, transform, opacity, background !default;
 $button-vertical-align: middle !default;
 $button-width-ratio: math.div(16, 9) !default;
 $button-stacked-width-ratio: 1 !default;

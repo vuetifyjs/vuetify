@@ -159,12 +159,13 @@ export const VFileInput = defineComponent({
             }) => (
               <VField
                 ref={ vFieldRef }
-                dirty={ isDirty.value }
-                focused={ isFocused.value }
                 prepend-icon={ props.prependIcon }
                 onClick:control={ onControlClick }
                 onClick:clear={ onClear }
                 { ...fieldProps }
+                active={ isDirty.value || isFocused.value }
+                dirty={ isDirty.value }
+                focused={ isFocused.value }
                 error={ isValid.value === false }
               >
                 {{

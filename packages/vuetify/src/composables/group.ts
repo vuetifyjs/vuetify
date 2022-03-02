@@ -293,7 +293,7 @@ function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
   const ids = []
   for (const item of items) {
     if (item.value != null) {
-      if (modelValue.find(value => deepEqual(value, item.value))) {
+      if (modelValue.find(value => deepEqual(value, item.value)) != null) {
         ids.push(item.id)
       }
     } else if (modelValue.includes(item.id)) {
