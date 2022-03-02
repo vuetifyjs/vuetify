@@ -1,6 +1,6 @@
-import { makeGroupItemProps } from '@/composables/group'
-import { useSlideGroupItem } from '@/composables/slideGroup'
+import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { defineComponent } from '@/util'
+import { VSlideGroupSymbol } from './VSlideGroup'
 
 export const VSlideGroupItem = defineComponent({
   name: 'VSlideGroupItem',
@@ -10,7 +10,7 @@ export const VSlideGroupItem = defineComponent({
   },
 
   setup (props, { slots }) {
-    const slideGroupItem = useSlideGroupItem(props)
+    const slideGroupItem = useGroupItem(props, VSlideGroupSymbol)
 
     return () => slots.default?.({
       isSelected: slideGroupItem.isSelected.value,

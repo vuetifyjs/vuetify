@@ -1,5 +1,5 @@
-@use 'sass:math'
 @forward './variables'
+@use 'sass:math'
 @use 'sass:map'
 @use '../../styles/settings'
 @use '../../styles/tools'
@@ -53,3 +53,11 @@
 .v-slide-group__prev
   &--disabled
     pointer-events: none
+    opacity: var(--v-disabled-opacity)
+
+.v-slide-group--vertical
+  &,
+  .v-slide-group__container,
+  .v-slide-group__content
+    flex-direction: column
+
