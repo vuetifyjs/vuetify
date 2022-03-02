@@ -89,7 +89,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
       props,
       'modelValue',
       [],
-      v => wrapInArray(v),
+      v => wrapInArray(v || []),
       (v: any) => props.multiple ? v : v[0]
     )
     const menu = ref(false)

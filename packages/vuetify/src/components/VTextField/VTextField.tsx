@@ -37,6 +37,7 @@ export const VTextField = genericComponent<new <T>() => {
     autofocus: Boolean,
     counter: [Boolean, Number, String] as PropType<true | number | string>,
     counterValue: Function as PropType<(value: any) => number>,
+    dirty: Boolean,
     hint: String,
     persistentHint: Boolean,
     prefix: String,
@@ -97,12 +98,13 @@ export const VTextField = genericComponent<new <T>() => {
     const inputRef = ref<HTMLInputElement>()
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
-      props.persistentPlaceholder
+      props.persistentPlaceholder ||
+      isFocused.value
     ))
     const messages = computed(() => {
       return props.messages.length
         ? props.messages
-        : (isActive.value || props.persistentHint) ? props.hint : ''
+        : (isFocused.value || props.persistentHint) ? props.hint : ''
     })
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
@@ -163,7 +165,7 @@ export const VTextField = genericComponent<new <T>() => {
             }) => (
               <VField
                 ref={ vFieldRef }
-                active={ isActive.value }
+                active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value }
                 focused={ isFocused.value }
                 onMousedown={ (e: MouseEvent) => {
