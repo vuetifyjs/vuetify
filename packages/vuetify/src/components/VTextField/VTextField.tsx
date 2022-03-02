@@ -37,7 +37,6 @@ export const VTextField = genericComponent<new <T>() => {
     autofocus: Boolean,
     counter: [Boolean, Number, String] as PropType<true | number | string>,
     counterValue: Function as PropType<(value: any) => number>,
-    dirty: Boolean,
     hint: String,
     persistentHint: Boolean,
     prefix: String,
@@ -165,9 +164,6 @@ export const VTextField = genericComponent<new <T>() => {
             }) => (
               <VField
                 ref={ vFieldRef }
-                active={ isActive.value || isDirty.value }
-                dirty={ isDirty.value }
-                focused={ isFocused.value }
                 onMousedown={ (e: MouseEvent) => {
                   if (e.target === inputRef.value) return
 
@@ -179,6 +175,9 @@ export const VTextField = genericComponent<new <T>() => {
                 onClick:appendInner={ (e: MouseEvent) => emit('click:append-inner', e) }
                 role="textbox"
                 { ...fieldProps }
+                active={ isActive.value || isDirty.value }
+                dirty={ isDirty.value || props.dirty }
+                focused={ isFocused.value }
                 error={ isValid.value === false }
               >
                 {{
