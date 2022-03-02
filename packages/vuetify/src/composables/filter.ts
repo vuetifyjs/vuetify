@@ -20,6 +20,7 @@ export interface FilterProps {
   customKeyFilter?: FilterKeyFunctions
   filterKeys?: FilterKeys
   filterMode?: FilterMode
+  noFilter?: boolean
 }
 
 // Composables
@@ -37,6 +38,7 @@ export const makeFilterProps = propsFactory({
     type: String as PropType<FilterMode>,
     default: 'intersection',
   },
+  noFilter: Boolean,
 }, 'filter')
 
 export function filterItems<T = Record<string, any>> (
@@ -47,6 +49,7 @@ export function filterItems<T = Record<string, any>> (
     default?: FilterFunction
     filterKeys?: FilterKeys
     filterMode?: FilterMode
+    noFilter?: boolean
   },
 ) {
   const array: { item: T, matches: Record<string, FilterMatch> }[] = []
@@ -63,7 +66,7 @@ export function filterItems<T = Record<string, any>> (
     const defaultMatches: Record<string, FilterMatch> = {}
     let match: FilterMatch = -1
 
-    if (query && typeof item === 'object') {
+    if (query && typeof item === 'object' && !options?.noFilter) {
       const filterKeys = keys || Object.keys(item)
 
       for (const key of filterKeys) {
@@ -127,6 +130,7 @@ export function useFilter<T> (
         default: props.customFilter,
         filterKeys: props.filterKeys,
         filterMode: props.filterMode,
+        noFilter: props.noFilter,
       },
     )
   })
