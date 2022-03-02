@@ -174,10 +174,10 @@ export const VAutocomplete = genericComponent<new <T>() => {
       search.value = selections.value[0]?.title
     })
 
-    watch(() => searchValue.value, () => {
+    watch(() => searchValue.value, val => {
       if (!isFocused.value) return
 
-      if (props.hideNoData && !filteredItems.value.length) {
+      if ((props.hideNoData && !filteredItems.value.length) || !val) {
         menu.value = false
       } else {
         menu.value = true
