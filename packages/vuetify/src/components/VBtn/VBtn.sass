@@ -47,9 +47,6 @@
     &:focus-visible::after
       opacity: calc(.25 * var(--v-theme-overlay-multiplier))
 
-  &--flat
-    box-shadow: none
-
   &--icon
     border-radius: $button-icon-border-radius
     min-width: 0
@@ -98,6 +95,9 @@
     @at-root
       @include button-sizes($button-stacked-sizes, true)
       @include button-density('height', $button-stacked-density)
+
+  &--rounded
+    @include tools.rounded($button-rounded-border-radius)
 
 .v-btn__content
   transition: $button-content-transition
