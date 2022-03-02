@@ -207,39 +207,42 @@ export function useGroup (
     isUnmounted = true
   })
 
-  function select (id: number, isSelected: boolean) {
+  function select (id: number, value?: boolean) {
     const item = items.find(item => item.id === id)
-    if (isSelected && item?.disabled) return
+    if (value && item?.disabled) return
 
     if (props.multiple) {
       const internalValue = selected.value.slice()
       const index = internalValue.findIndex(v => v === id)
+      const isSelected = !!~index
+      value = value ?? !isSelected
 
       // We can't remove value if group is
       // mandatory, value already exists,
       // and it is the only value
       if (
+        isSelected &&
         props.mandatory &&
-        index > -1 &&
         internalValue.length <= 1
       ) return
 
       // We can't add value if it would
       // cause max limit to be exceeded
       if (
+        !isSelected &&
         props.max != null &&
-        index < 0 &&
         internalValue.length + 1 > props.max
       ) return
 
-      if (index < 0 && isSelected) internalValue.push(id)
-      else if (index >= 0 && !isSelected) internalValue.splice(index, 1)
+      if (index < 0 && value) internalValue.push(id)
+      else if (index >= 0 && !value) internalValue.splice(index, 1)
 
       selected.value = internalValue
     } else {
-      if (props.mandatory && selected.value.includes(id)) return
+      const isSelected = selected.value.includes(id)
+      if (props.mandatory && isSelected) return
 
-      selected.value = isSelected ? [id] : []
+      selected.value = (value ?? !isSelected) ? [id] : []
     }
   }
 
