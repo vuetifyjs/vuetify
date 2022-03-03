@@ -7,8 +7,8 @@ import { isLeapYear } from '../../../util/dateTimeUtils'
 export const PARSE_REGEX = /^(\d{4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
 export const PARSE_TIME = /(\d\d?)(:(\d\d?)|)(:(\d\d?)|)/
 
-export const DAYS_IN_MONTH: number[] = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-export const DAYS_IN_MONTH_LEAP: number[] = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+export const DAYS_IN_MONTH: number[] = [ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ]
+export const DAYS_IN_MONTH_LEAP: number[] = [ 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ]
 export const DAYS_IN_MONTH_MIN = 28
 export const DAYS_IN_MONTH_MAX = 31
 export const MONTH_MAX = 12
@@ -37,7 +37,7 @@ export type VTimestampInput = number | string | Date;
 
 export function getStartOfWeek (timestamp: CalendarTimestamp, weekdays: number[], today?: CalendarTimestamp): CalendarTimestamp {
   const start = copyTimestamp(timestamp)
-  findWeekday(start, weekdays[0], prevDay)
+  findWeekday(start, weekdays[ 0 ], prevDay)
   updateFormatted(start)
   if (today) {
     updateRelative(start, today, start.hasTime)
@@ -48,7 +48,7 @@ export function getStartOfWeek (timestamp: CalendarTimestamp, weekdays: number[]
 
 export function getEndOfWeek (timestamp: CalendarTimestamp, weekdays: number[], today?: CalendarTimestamp): CalendarTimestamp {
   const end = copyTimestamp(timestamp)
-  findWeekday(end, weekdays[weekdays.length - 1])
+  findWeekday(end, weekdays[ weekdays.length - 1 ])
   updateFormatted(end)
   if (today) {
     updateRelative(end, today, end.hasTime)
@@ -92,7 +92,7 @@ export function parseTime (input: any): number | false {
       return false
     }
 
-    return parseInt(parts[1]) * 60 + parseInt(parts[3] || 0)
+    return parseInt(parts[ 1 ]) * 60 + parseInt(parts[ 3 ] || 0)
   } else if (typeof input === 'object') {
     // when an object is given, it must have hour and minute
     if (typeof input.hour !== 'number' || typeof input.minute !== 'number') {
@@ -131,7 +131,7 @@ export function parseTimestamp (input: VTimestampInput, required = false, now?: 
 
   if (typeof input !== 'string') {
     if (required) {
-      throw new Error(`${input} is not a valid timestamp. It must be a Date, number of milliseconds since Epoch, or a string in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
+      throw new Error(`${ input } is not a valid timestamp. It must be a Date, number of milliseconds since Epoch, or a string in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
     }
     return null
   }
@@ -141,7 +141,7 @@ export function parseTimestamp (input: VTimestampInput, required = false, now?: 
 
   if (!parts) {
     if (required) {
-      throw new Error(`${input} is not a valid timestamp. It must be a Date, number of milliseconds since Epoch, or a string in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
+      throw new Error(`${ input } is not a valid timestamp. It must be a Date, number of milliseconds since Epoch, or a string in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
     }
 
     return null
@@ -150,14 +150,14 @@ export function parseTimestamp (input: VTimestampInput, required = false, now?: 
   const timestamp: CalendarTimestamp = {
     date: input,
     time: '',
-    year: parseInt(parts[1]),
-    month: parseInt(parts[2]),
-    day: parseInt(parts[4]) || 1,
-    hour: parseInt(parts[6]) || 0,
-    minute: parseInt(parts[8]) || 0,
+    year: parseInt(parts[ 1 ]),
+    month: parseInt(parts[ 2 ]),
+    day: parseInt(parts[ 4 ]) || 1,
+    hour: parseInt(parts[ 6 ]) || 0,
+    minute: parseInt(parts[ 8 ]) || 0,
     weekday: 0,
-    hasDay: !!parts[4],
-    hasTime: !!(parts[6] && parts[8]),
+    hasDay: !!parts[ 4 ],
+    hasTime: !!(parts[ 6 ] && parts[ 8 ]),
     past: false,
     present: false,
     future: false,
@@ -281,7 +281,7 @@ export function getWeekday (timestamp: CalendarTimestamp): number {
 }
 
 export function daysInMonth (year: number, month: number) {
-  return isLeapYear(year) ? DAYS_IN_MONTH_LEAP[month] : DAYS_IN_MONTH[month]
+  return isLeapYear(year) ? DAYS_IN_MONTH_LEAP[ month ] : DAYS_IN_MONTH[ month ]
 }
 
 export function copyTimestamp (timestamp: CalendarTimestamp): CalendarTimestamp {
@@ -300,9 +300,9 @@ export function padNumber (x: number, length: number): string {
 }
 
 export function getDate (timestamp: CalendarTimestamp): string {
-  let str = `${padNumber(timestamp.year, 4)}-${padNumber(timestamp.month, 2)}`
+  let str = `${ padNumber(timestamp.year, 4) }-${ padNumber(timestamp.month, 2) }`
 
-  if (timestamp.hasDay) str += `-${padNumber(timestamp.day, 2)}`
+  if (timestamp.hasDay) str += `-${ padNumber(timestamp.day, 2) }`
 
   return str
 }
@@ -312,7 +312,7 @@ export function getTime (timestamp: CalendarTimestamp): string {
     return ''
   }
 
-  return `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
+  return `${ padNumber(timestamp.hour, 2) }:${ padNumber(timestamp.minute, 2) }`
 }
 
 export function nextMinutes (timestamp: CalendarTimestamp, minutes: number): CalendarTimestamp {
@@ -387,31 +387,31 @@ export function findWeekday (timestamp: CalendarTimestamp, weekday: number,
 }
 
 export function getWeekdaySkips (weekdays: number[]): number[] {
-  const skips: number[] = [1, 1, 1, 1, 1, 1, 1]
-  const filled: number[] = [0, 0, 0, 0, 0, 0, 0]
+  const skips: number[] = [ 1, 1, 1, 1, 1, 1, 1 ]
+  const filled: number[] = [ 0, 0, 0, 0, 0, 0, 0 ]
   for (let i = 0; i < weekdays.length; i++) {
-    filled[weekdays[i]] = 1
+    filled[ weekdays[ i ] ] = 1
   }
   for (let k = 0; k < DAYS_IN_WEEK; k++) {
     let skip = 1
     for (let j = 1; j < DAYS_IN_WEEK; j++) {
       const next = (k + j) % DAYS_IN_WEEK
-      if (filled[next]) {
+      if (filled[ next ]) {
         break
       }
       skip++
     }
-    skips[k] = filled[k] * skip
+    skips[ k ] = filled[ k ] * skip
   }
 
   return skips
 }
 
 export function timestampToDate (timestamp: CalendarTimestamp): Date {
-  const time = `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
+  const time = `${ padNumber(timestamp.hour, 2) }:${ padNumber(timestamp.minute, 2) }`
   const date = timestamp.date
 
-  return new Date(`${date}T${time}:00+00:00`)
+  return new Date(`${ date }T${ time }:00+00:00`)
 }
 
 export function createDayList (
@@ -435,7 +435,7 @@ export function createDayList (
   while ((!stopped || days.length < min) && days.length < max) {
     currentIdentifier = getDayIdentifier(current)
     stopped = stopped || currentIdentifier === stop
-    if (weekdaySkips[current.weekday] === 0) {
+    if (weekdaySkips[ current.weekday ] === 0) {
       current = nextDay(current)
       continue
     }
@@ -443,7 +443,7 @@ export function createDayList (
     updateFormatted(day)
     updateRelative(day, now)
     days.push(day)
-    current = relativeDays(current, nextDay, weekdaySkips[current.weekday])
+    current = relativeDays(current, nextDay, weekdaySkips[ current.weekday ])
   }
 
   if (!days.length) throw new Error('No dates found using specified start date, end date, and weekdays.')
