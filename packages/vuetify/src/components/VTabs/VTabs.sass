@@ -13,6 +13,9 @@
     @include tools.density('v-tabs', $tabs-density) using ($modifier)
       height: $tabs-height + $modifier
 
+      &.v-tabs--stacked
+        height: $tabs-stacked-height + $modifier
+
 .v-tabs__container
     contain: content
     display: flex
@@ -34,72 +37,32 @@
   .v-tabs__content, .v-tabs__container
     flex-direction: row
 
-.v-tabs--align-with-title
+.v-tabs--align-with-title:not(.v-slide-group--has-affixes)
   .v-tab:first-child
-    margin-inline-start: 40px
+    margin-inline-start: $tabs-item-align-with-title-margin
 
-// Modifier
-.v-tabs--align-with-title > .v-tabs-bar:not(.v-tabs-bar--show-arrows):not(.v-slide-group--is-overflowing) > .v-slide-group__wrapper > .v-tabs-bar__content
-  & > .v-tab:first-child,
-  & > .v-tabs-slider-wrapper + .v-tab
-    +tools.ltr()
-      margin-left: $tabs-item-align-with-title-margin
+.v-tabs--fixed-tabs,
+.v-tabs--centered
+  .v-slide-group__content > .v-tab:last-child
+    margin-inline-end: auto
 
-    +tools.rtl()
-      margin-right: $tabs-item-align-with-title-margin
+  .v-slide-group__content > .v-tab:first-child
+    margin-inline-start: auto
 
-.v-tabs--fixed-tabs > .v-tabs-bar,
-.v-tabs--centered > .v-tabs-bar
-  .v-tabs-bar__content > *:last-child
-    +tools.ltr()
-      margin-right: auto
+.v-tabs--grow .v-tab
+  flex: 1 0 auto
+  max-width: none
 
-    +tools.rtl()
-      margin-left: auto
-
-  .v-tabs-bar__content > *:first-child:not(.v-tabs-slider-wrapper),
-  .v-tabs-slider-wrapper + *
-    +tools.ltr()
-      margin-left: auto
-
-    +tools.rtl()
-      margin-right: auto
-
-.v-tabs--fixed-tabs > .v-tabs-bar
-  .v-tab
-    flex: 1 1 auto
-    width: 100%
-
-.v-tabs--grow > .v-tabs-bar
-  .v-tab
-    flex: 1 0 auto
-    max-width: none
-
-.v-tabs--icons-and-text > .v-tabs-bar
-  height: $tabs-icons-and-text-bar-height
-
-  .v-tab
-    flex-direction: column-reverse
-
-    > *:first-child
-      margin-bottom: $tabs-icons-and-text-first-tab-margin-bottom
-
-.v-tabs--overflow > .v-tabs-bar
-  .v-tab
-    flex: 1 0 auto
-
-.v-tabs--right > .v-tabs-bar
-  .v-tab:first-child,
-  .v-tabs-slider-wrapper + .v-tab
-    +tools.ltr()
-      margin-left: auto
-
-    +tools.rtl()
-      margin-right: auto
+.v-tabs--right
+  .v-tab:first-child
+    margin-inline-start: auto
 
   .v-tab:last-child
-    +tools.ltr()
-      margin-right: 0
+    margin-inline-end: 0
 
-    +tools.rtl()
-      margin-left: 0
+@media #{map-get(settings.$display-breakpoints, 'md-and-down')}
+  .v-tabs.v-slide-group--is-overflowing:not(.v-slide-group--has-affixes)
+    .v-tab:first-child
+      margin-inline-start: 52px
+    .v-tab:last-child
+      margin-inline-end: 52px

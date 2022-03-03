@@ -37,7 +37,6 @@ export const VTabs = defineComponent({
 
   props: {
     alignWithTitle: Boolean,
-    centerActive: Boolean,
     color: String,
     direction: {
       type: String as PropType<'horizontal' | 'vertical'>,
@@ -75,6 +74,7 @@ export const VTabs = defineComponent({
         color: toRef(props, 'color'),
         fixed: toRef(props, 'fixedTabs'),
         sliderColor: toRef(props, 'sliderColor'),
+        hideSlider: toRef(props, 'hideSlider'),
       },
     })
 
@@ -86,8 +86,10 @@ export const VTabs = defineComponent({
           {
             'v-tabs--align-with-title': props.alignWithTitle,
             'v-tabs--centered': props.centered,
+            'v-tabs--fixed-tabs': props.fixedTabs,
             'v-tabs--grow': props.grow,
             'v-tabs--right': props.right,
+            'v-tabs--stacked': props.stacked,
           },
           densityClasses.value,
         ]}

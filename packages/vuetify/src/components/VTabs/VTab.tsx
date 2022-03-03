@@ -34,6 +34,7 @@ export const VTab = defineComponent({
     },
     color: String,
     sliderColor: String,
+    hideSlider: Boolean,
 
     ...makeTagProps(),
     ...makeRouterProps(),
@@ -51,9 +52,6 @@ export const VTab = defineComponent({
       VBtn: {
         block: toRef(props, 'fixed'),
         color: computed(() => isSelected.value ? props.color : undefined),
-        height: 'auto',
-        maxWidth: 360,
-        minWidth: 90,
         variant: 'text',
       },
     }, {
@@ -120,14 +118,16 @@ export const VTab = defineComponent({
           { ...attrs }
         >
           { slots.default ? slots.default() : props.title }
-          <div
-            ref={ sliderEl }
-            class={[
-              'v-tab__slider',
-              sliderColorClasses.value,
-            ]}
-            style={ sliderColorStyles.value }
-          />
+          { !props.hideSlider && (
+            <div
+              ref={ sliderEl }
+              class={[
+                'v-tab__slider',
+                sliderColorClasses.value,
+              ]}
+              style={ sliderColorStyles.value }
+            />
+          )}
         </VBtn>
       )
     })

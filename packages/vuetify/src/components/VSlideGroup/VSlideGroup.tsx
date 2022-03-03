@@ -80,10 +80,12 @@ export const VSlideGroup = defineComponent({
     const { resizeRef: contentRef, contentRect } = useResizeObserver()
 
     watchEffect(() => {
+      if (!containerRect.value || !contentRect.value) return
+
       const sizeProperty = isHorizontal.value ? 'width' : 'height'
 
-      containerSize.value = containerRect.value?.[sizeProperty] ?? 0
-      contentSize.value = contentRect.value?.[sizeProperty] ?? 0
+      containerSize.value = containerRect.value[sizeProperty]
+      contentSize.value = contentRect.value[sizeProperty]
 
       isOverflowing.value = containerSize.value + 1 < contentSize.value
     })
@@ -234,7 +236,7 @@ export const VSlideGroup = defineComponent({
         // Always show arrows when
         // overflowed on desktop
         default: return (
-          mobile.value &&
+          !mobile.value &&
           (isOverflowing.value || Math.abs(scrollOffset.value) > 0)
         )
       }
@@ -262,19 +264,21 @@ export const VSlideGroup = defineComponent({
           },
         ]}
       >
-        <div
-          class={[
-            'v-slide-group__prev',
-            { 'v-slide-group__prev--disabled': !hasPrev.value },
-          ]}
-          onClick={ () => scrollTo('prev') }
-        >
-          { slots.prev?.(slotProps.value) ?? (
-            <VFadeTransition>
-              <VIcon icon={ props.prevIcon }></VIcon>
-            </VFadeTransition>
-          )}
-        </div>
+        { hasAffixes.value && (
+          <div
+            class={[
+              'v-slide-group__prev',
+              { 'v-slide-group__prev--disabled': !hasPrev.value },
+            ]}
+            onClick={ () => scrollTo('prev') }
+          >
+            { slots.prev?.(slotProps.value) ?? (
+              <VFadeTransition>
+                <VIcon icon={ props.prevIcon }></VIcon>
+              </VFadeTransition>
+            )}
+          </div>
+        )}
 
         <div
           ref={ containerRef }
@@ -294,19 +298,21 @@ export const VSlideGroup = defineComponent({
           </div>
         </div>
 
-        <div
-          class={[
-            'v-slide-group__next',
-            { 'v-slide-group__next--disabled': !hasNext.value },
-          ]}
-          onClick={ () => scrollTo('next') }
-        >
-          { slots.next?.(slotProps.value) ?? (
-            <VFadeTransition>
-              <VIcon icon={ props.nextIcon }></VIcon>
-            </VFadeTransition>
-          )}
-        </div>
+        { hasAffixes.value && (
+          <div
+            class={[
+              'v-slide-group__next',
+              { 'v-slide-group__next--disabled': !hasNext.value },
+            ]}
+            onClick={ () => scrollTo('next') }
+          >
+            { slots.next?.(slotProps.value) ?? (
+              <VFadeTransition>
+                <VIcon icon={ props.nextIcon }></VIcon>
+              </VFadeTransition>
+            )}
+          </div>
+        )}
       </props.tag>
     ))
 

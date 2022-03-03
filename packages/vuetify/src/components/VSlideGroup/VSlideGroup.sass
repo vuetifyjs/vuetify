@@ -9,19 +9,6 @@
 .v-slide-group
   display: flex
 
-  &:not(.v-slide-group--has-affixes)
-    > .v-slide-group__prev,
-    > .v-slide-group__next
-      display: none
-
-  // Needed increased specificity
-  // to overwrite v-tabs pointer
-  // replacement
-  &.v-item-group
-    > .v-slide-group__next,
-    > .v-slide-group__prev
-      cursor: pointer
-
 .v-slide-item
   display: inline-flex
   flex: 0 1 auto
@@ -34,6 +21,11 @@
   flex: 0 1 $slide-group-prev-basis
   justify-content: center
   min-width: $slide-group-prev-basis
+  cursor: pointer
+
+  &--disabled
+    pointer-events: none
+    opacity: var(--v-disabled-opacity)
 
 .v-slide-group__content
   display: flex
@@ -52,12 +44,6 @@
   overflow: hidden
 
 // Modifiers
-.v-slide-group__next,
-.v-slide-group__prev
-  &--disabled
-    pointer-events: none
-    opacity: var(--v-disabled-opacity)
-
 .v-slide-group--vertical
   &,
   .v-slide-group__container,
