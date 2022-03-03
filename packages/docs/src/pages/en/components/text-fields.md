@@ -108,11 +108,11 @@ The **prefix** and **suffix** properties allows you to prepend and append inline
 
 <example file="v-text-field/prop-single-line" />
 
-#### Solo
+#### Contained
 
-Text fields can be used with an alternative solo design.
+Text fields can be used with an alternative contained design.
 
-<example file="v-text-field/prop-solo" />
+<example file="v-text-field/prop-contained" />
 
 #### Validation
 

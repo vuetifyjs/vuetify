@@ -5,10 +5,10 @@
         <v-col cols="12">
           <v-text-field
             v-model="message"
-            outlined
             clearable
             label="Message"
             type="text"
+            variant="outlined"
           >
             <template v-slot:prepend>
               <v-tooltip

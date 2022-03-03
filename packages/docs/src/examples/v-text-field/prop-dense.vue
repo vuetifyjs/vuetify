@@ -19,8 +19,8 @@
           md="4"
         >
           <v-text-field
-            label="Filled"
-            filled
+            label="Contained"
+            variant="contained"
             dense
           ></v-text-field>
         </v-col>
@@ -33,7 +33,7 @@
           <v-text-field
             label="Filled"
             placeholder="Dense & Rounded"
-            filled
+            variant="filled"
             rounded
             dense
           ></v-text-field>
@@ -45,20 +45,8 @@
           md="4"
         >
           <v-text-field
-            label="Solo"
-            solo
-            dense
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            label="Outlined"
-            outlined
+            label="Underlined"
+            variant="underlined"
             dense
           ></v-text-field>
         </v-col>
@@ -71,7 +59,19 @@
           <v-text-field
             label="Outlined"
             placeholder="Placeholder"
-            outlined
+            variant="outlined"
+            dense
+          ></v-text-field>
+        </v-col>
+
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+        >
+          <v-text-field
+            label="Plain"
+            variant="plain"
             dense
           ></v-text-field>
         </v-col>
