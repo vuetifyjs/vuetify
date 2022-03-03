@@ -20,7 +20,7 @@ The `v-chip` component is used to convey small pieces of information. Using the 
 
 Chips come in the following variations: closeable, filter, outlined, pill. The default slot of `v-chip` will also accept avatars and icons alongside text.
 
-<!-- <usage name="v-chip" /> -->
+<usage name="v-chip" />
 
 ## API
 

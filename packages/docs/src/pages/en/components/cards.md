@@ -18,7 +18,7 @@ related:
 
 ## Usage
 
-<!-- <usage name="v-card" /> -->
+<usage name="v-card" />
 
 ## API
 
