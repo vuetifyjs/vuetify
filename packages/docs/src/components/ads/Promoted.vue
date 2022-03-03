@@ -35,7 +35,7 @@
 
             <app-markdown
               v-if="description"
-              class="text-subtitle-2 text-sm-h6 font-weight-light"
+              class="text-subtitle-2 text-sm-h6 font-weight-light text-white"
               :content="description"
             />
           </div>
