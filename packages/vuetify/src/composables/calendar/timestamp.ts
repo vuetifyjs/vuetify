@@ -33,29 +33,7 @@ export type VTime = number | string | {
   minute: number
 }
 
-export interface CalendarDaySlotScope extends CalendarTimestamp {
-  outside: boolean
-  index: number
-  week: CalendarTimestamp[]
-  category: CalendarCategory
-}
-
-export type CalendarEventTimedFunction = (event: CalendarEvent) => boolean
-
-export type CalendarEventCategoryFunction = (event: CalendarEvent) => string
-
-export type CalendarEventColorFunction = (event: CalendarEvent) => string
-
-export type CalendarEventNameFunction = (event: CalendarEventParsed, timedEvent: boolean) => string
-
-export type CalendarEventOverlapMode = (events: CalendarEventParsed[], firstWeekday: number, overlapThreshold: number) => (day: CalendarDaySlotScope, dayEvents: CalendarEventParsed[], timed: boolean, reset: boolean) => CalendarEventVisual[]
-
 export type VTimestampInput = number | string | Date;
-
-export interface CalendarDayBodySlotScope extends CalendarDaySlotScope {
-  timeToY: CalendarTimeToY
-  timeDelta: CalendarTimeDelta
-}
 
 export function getStartOfWeek (timestamp: CalendarTimestamp, weekdays: number[], today?: CalendarTimestamp): CalendarTimestamp {
   const start = copyTimestamp(timestamp)
@@ -449,6 +427,7 @@ export function createDayList (
   let current = copyTimestamp(start)
   let currentIdentifier = 0
   let stopped = currentIdentifier === stop
+
   if (stop < getDayIdentifier(start)) {
     throw new Error('End date is earlier than start date.')
   }
@@ -466,6 +445,7 @@ export function createDayList (
     days.push(day)
     current = relativeDays(current, nextDay, weekdaySkips[ current.weekday ])
   }
+
   if (!days.length) throw new Error('No dates found using specified start date, end date, and weekdays.')
 
   return days

@@ -1,32 +1,15 @@
-import { computed, defineComponent } from "vue";
-import type { ComputedRef } from 'vue'
+import { genericComponent, MakeSlots } from "@/util";
 
-import { VCalendarWeekly } from "./VCalendarWeekly";
-// import type { CalendarCategory } from '@/composables/calendar/timestamp'
-import { makeBaseProps, makeTimesProps, makeWeeksProps } from "./composables/props";
-import { makeThemeProps } from "@/composables/theme";
-import { makeVariantProps } from "@/composables/variant";
 
-export const VCalendarMonthly = defineComponent({
+
+export const VCalendarMonthly = genericComponent<new <T>() => {
+  $props: {}
+  $slots: MakeSlots<{}>
+}>()({
   name: 'VCalendarMonthly',
-  props: {
-    categories: Array,
-    maxDays: Number,
-    ...makeBaseProps(),
-    ...makeThemeProps(),
-    ...makeTimesProps(),
-    ...makeVariantProps(),
-    ...makeWeeksProps(),
-  },
-  setup(props, { attrs, slots }) {
+
+  setup(props, { slots }) {
     // Computeds
-    const staticClass: ComputedRef<string> = computed(() => {
-      return 'v-calendar-monthly v-calendar-weekly'
-    })
-    return () => (
-      <VCalendarWeekly class={staticClass.value} { ...props} v-slots={ slots }></VCalendarWeekly>
-    )
-   
     
   }
 

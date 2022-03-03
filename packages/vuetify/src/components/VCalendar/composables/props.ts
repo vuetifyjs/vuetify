@@ -7,24 +7,12 @@ import {
 import type {
   CalendarCategory,
   CalendarEvent,
-  CalendarEventCategoryFunction,
-  CalendarEventColorFunction,
-  CalendarEventNameFunction,
-  CalendarEventOverlapMode,
-  CalendarEventTimedFunction,
   CalendarFormatter,
   CalendarTimestamp,
 } from '@/composables/calendar/timestamp'
 import { propsFactory } from '@/util'
 import type { PropType } from 'vue'
 import { CalendarEventOverlapModes } from './modes'
-
-export const makeTimesProps = propsFactory({
-  now: {
-    type: String,
-    validator: validateTimestamp,
-  },
-})
 
 export const makeBaseProps = propsFactory({
   start: {
@@ -60,9 +48,9 @@ export const makeBaseProps = propsFactory({
 
 export const makeEventsProps = propsFactory({
   events: {
-    type: Array as PropType<CalendarEvent[]>,
+    type: Array,
     default: () => [],
-  },
+  } as CalendarEvent[],
   eventStart: {
     type: String,
     default: 'start',
@@ -100,10 +88,10 @@ export const makeEventsProps = propsFactory({
     default: 60,
   },
   eventOverlapMode: {
-    type: [ String, Function ] as 'stack' | 'column' | CalendarEventOverlapMode,
+    type: [ String, Function ],
     default: 'stack',
     validate: (mode: any) => mode in CalendarEventOverlapModes || typeof mode === 'function',
-  },
+  } as 'stack' | 'column' | CalendarEventOverlapMode,
   eventMore: {
     type: Boolean,
     default: true,
