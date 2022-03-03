@@ -20,6 +20,18 @@
         flat
         height="44"
       >
+        <v-sheet
+          v-if="resource"
+          class="text-body-2 px-3 pt-3 text-disabled"
+          color="transparent"
+          height="44"
+          rounded="tl"
+        >
+          <v-icon icon="mdi-file-tree" class="mr-1" />
+
+          {{ resource }}
+        </v-sheet>
+
         <v-spacer />
 
         <v-tooltip anchor="bottom">
@@ -78,6 +90,7 @@
     inheritAttrs: false,
 
     props: {
+      resource: String,
       code: String,
       inline: Boolean,
       language: {
@@ -183,7 +196,7 @@
         font-size: 0.7rem
         font-weight: 700
         position: absolute
-        right: 14px
+        right: 20px
         text-transform: uppercase
 
     pre.language-bash::after
