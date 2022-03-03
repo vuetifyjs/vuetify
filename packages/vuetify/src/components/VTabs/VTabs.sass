@@ -15,6 +15,12 @@
       &.v-tabs--stacked
         height: $tabs-stacked-height + $modifier
 
+  &.v-slide-group--vertical
+    height: auto
+
+    .v-tab
+      --v-btn-height: #{$tabs-height}
+
 .v-tabs--align-with-title:not(.v-slide-group--has-affixes)
   .v-tab:first-child
     margin-inline-start: $tab-align-with-title-margin

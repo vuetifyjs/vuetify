@@ -16,6 +16,9 @@ import { makeThemeProps } from '@/composables/theme'
 import { computed, ref, toRef, watch } from 'vue'
 import { defineComponent, pick, standardEasing, useRender } from '@/util'
 
+// Types
+import type { PropType } from 'vue'
+
 export const VTab = defineComponent({
   name: 'VTab',
 
@@ -36,6 +39,11 @@ export const VTab = defineComponent({
     sliderColor: String,
     hideSlider: Boolean,
 
+    direction: {
+      type: String as PropType<'horizontal' | 'vertical'>,
+      default: 'horizontal',
+    },
+
     ...makeTagProps(),
     ...makeRouterProps(),
     ...makeGroupItemProps({
@@ -47,6 +55,7 @@ export const VTab = defineComponent({
   setup (props, { slots, attrs }) {
     const { isSelected, select, selectedClass } = useGroupItem(props, VTabsSymbol)
     const { textColorClasses: sliderColorClasses, textColorStyles: sliderColorStyles } = useTextColor(props, 'sliderColor')
+    const isHorizontal = computed(() => props.direction === 'horizontal')
 
     provideDefaults({
       VBtn: {
@@ -72,18 +81,22 @@ export const VTab = defineComponent({
         const prevBox = prevEl.getBoundingClientRect()
         const nextBox = nextEl.getBoundingClientRect()
 
-        const delta = prevBox.x - nextBox.x
+        const xy = isHorizontal.value ? 'x' : 'y'
+        const XY = isHorizontal.value ? 'X' : 'Y'
+        const widthHeight = isHorizontal.value ? 'width' : 'height'
+
+        const delta = prevBox[xy] - nextBox[xy]
         const origin =
-          Math.sign(delta) > 0 ? 'right'
-          : Math.sign(delta) < 0 ? 'left'
+          Math.sign(delta) > 0 ? (isHorizontal.value ? 'right' : 'bottom')
+          : Math.sign(delta) < 0 ? (isHorizontal.value ? 'left' : 'top')
           : 'center'
-        const width = Math.abs(delta) + (origin === 'left' ? prevBox.width : nextBox.width)
-        const scale = width / nextBox.width
+        const size = Math.abs(delta) + (Math.sign(delta) < 0 ? prevBox[widthHeight] : nextBox[widthHeight])
+        const scale = size / nextBox[widthHeight]
 
         const sigma = 1.5
         nextEl.animate({
           backgroundColor: [color, ''],
-          transform: [`translateX(${delta}px)`, `translateX(${delta / sigma}px) scaleX(${(scale - 1) / sigma + 1})`, ''],
+          transform: [`translate${XY}(${delta}px)`, `translate${XY}(${delta / sigma}px) scale${XY}(${(scale - 1) / sigma + 1})`, ''],
           transformOrigin: Array(3).fill(origin),
         }, {
           duration: 225,

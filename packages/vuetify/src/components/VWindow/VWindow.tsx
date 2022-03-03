@@ -22,6 +22,7 @@ import { computed, defineComponent, provide, ref, watch } from 'vue'
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
 import type { GroupItemProvide } from '@/composables/group'
 import type { TouchHandlers } from '@/directives/touch'
+import { useRender } from '@/util'
 
 type WindowProvide = {
   transition: ComputedRef<undefined | string>
@@ -206,7 +207,7 @@ export const VWindow = defineComponent({
       }
     })
 
-    return () => (
+    useRender(() => (
       <props.tag
         ref={ rootRef }
         class={[
@@ -233,6 +234,10 @@ export const VWindow = defineComponent({
           ) }
         </div>
       </props.tag>
-    )
+    ))
+
+    return {
+      group,
+    }
   },
 })

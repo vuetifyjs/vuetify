@@ -70,8 +70,9 @@ export const VTabs = defineComponent({
 
     provideDefaults({
       VTab: {
-        stacked: toRef(props, 'stacked'),
         color: toRef(props, 'color'),
+        direction: toRef(props, 'direction'),
+        stacked: toRef(props, 'stacked'),
         fixed: toRef(props, 'fixedTabs'),
         sliderColor: toRef(props, 'sliderColor'),
         hideSlider: toRef(props, 'hideSlider'),
