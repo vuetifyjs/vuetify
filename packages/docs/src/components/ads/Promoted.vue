@@ -21,6 +21,7 @@
           :src="background"
           class="flex-1-1-auto rounded"
           max-height="56"
+          cover
         >
           <div class="d-flex align-center fill-height">
             <v-img
@@ -68,8 +69,8 @@
     setup (props) {
       const { ad, attrs } = useAd(props)
 
-      const description = computed(() => ad.value.metadata.description_short ?? ad.value.metadata.description)
-      const logo = computed(() => ad.value.metadata?.images?.logo?.url ?? ad.value.metadata?.images?.preview?.url)
+      const description = computed(() => ad.value.metadata.description_short || ad.value.metadata.description)
+      const logo = computed(() => ad.value.metadata?.images?.logo?.url || ad.value.metadata?.images?.preview?.url)
       const background = computed(() => ad.value.metadata?.images?.background?.url)
 
       function onClick () {

@@ -1,7 +1,7 @@
 <template>
   <v-alert
     border="start"
-    class="v-alert--doc mb-4"
+    class="v-alert--doc mb-4 border-opacity-100"
     variant="outlined"
   >
     <slot />
