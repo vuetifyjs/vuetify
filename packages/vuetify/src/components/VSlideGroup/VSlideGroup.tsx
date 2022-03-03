@@ -163,7 +163,10 @@ export const VSlideGroup = defineComponent({
       containerRef.value && (containerRef.value.scrollLeft = 0)
     }
 
+    const isFocused = ref(false)
     function onFocusin (e: FocusEvent) {
+      isFocused.value = true
+
       if (!isOverflowing.value || !contentRef.value) return
 
       // Focused element is likely to be the root of an item, so a
@@ -182,6 +185,55 @@ export const VSlideGroup = defineComponent({
             return
           }
         }
+      }
+    }
+
+    function onFocusout (e: FocusEvent) {
+      isFocused.value = false
+    }
+
+    function onFocus (e: FocusEvent) {
+      if (
+        !isFocused.value &&
+        !(e.relatedTarget && contentRef.value?.contains(e.relatedTarget as Node))
+      ) focus()
+    }
+
+    function onKeydown (e: KeyboardEvent) {
+      if (!contentRef.value) return
+
+      if (e.key === (isHorizontal.value ? 'ArrowRight' : 'ArrowDown')) {
+        focus('next')
+      } else if (e.key === (isHorizontal.value ? 'ArrowLeft' : 'ArrowUp')) {
+        focus('prev')
+      } else if (e.key === 'Home') {
+        focus('first')
+      } else if (e.key === 'End') {
+        focus('last')
+      }
+    }
+
+    function focus (location?: 'next' | 'prev' | 'first' | 'last') {
+      if (!contentRef.value) return
+
+      if (!location) {
+        contentRef.value.querySelector('[tabindex]')
+        const focusable = [...contentRef.value.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
+        focusable[0]?.focus()
+      } else if (location === 'next') {
+        const el = contentRef.value.querySelector(':focus')?.nextElementSibling as HTMLElement | undefined
+        if (el) el.focus()
+        else focus('first')
+      } else if (location === 'prev') {
+        const el = contentRef.value.querySelector(':focus')?.previousElementSibling as HTMLElement | undefined
+        if (el) el.focus()
+        else focus('last')
+      } else if (location === 'first') {
+        (contentRef.value.firstElementChild as HTMLElement)?.focus()
+      } else if (location === 'last') {
+        (contentRef.value.lastElementChild as HTMLElement)?.focus()
       }
     }
 
@@ -263,6 +315,8 @@ export const VSlideGroup = defineComponent({
             'v-slide-group--is-overflowing': isOverflowing.value,
           },
         ]}
+        tabindex={ (isFocused.value || group.selected.value.length) ? -1 : 0 }
+        onFocus={ onFocus }
       >
         { hasAffixes.value && (
           <div
@@ -293,6 +347,8 @@ export const VSlideGroup = defineComponent({
             onTouchmove={ onTouchmove }
             onTouchend={ onTouchend }
             onFocusin={ onFocusin }
+            onFocusout={ onFocusout }
+            onKeydown={ onKeydown }
           >
             { slots.default?.(slotProps.value) }
           </div>
@@ -320,6 +376,7 @@ export const VSlideGroup = defineComponent({
       selected: group.selected,
       scrollTo,
       scrollOffset,
+      focus,
     }
   },
 })

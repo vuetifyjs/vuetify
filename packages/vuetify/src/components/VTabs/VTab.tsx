@@ -113,6 +113,9 @@ export const VTab = defineComponent({
             'v-tab',
             selectedClass.value,
           ]}
+          tabindex={ isSelected.value ? 0 : -1 }
+          role="tab"
+          aria-selected={ String(isSelected.value) }
           onClick={ () => !props.disabled && select(!isSelected.value) }
           { ...btnProps }
           { ...attrs }
