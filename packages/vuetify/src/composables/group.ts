@@ -142,7 +142,6 @@ export function useGroup (
 ) {
   let isUnmounted = false
   const items = reactive<GroupItem[]>([])
-  // const refs = shallowReactive<HTMLElement[]>([])
   const selected = useProxiedModel(
     props,
     'modelValue',

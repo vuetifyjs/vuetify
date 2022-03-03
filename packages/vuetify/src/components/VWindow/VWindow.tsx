@@ -17,12 +17,12 @@ import { Touch } from '@/directives/touch'
 
 // Utilities
 import { computed, defineComponent, provide, ref, watch } from 'vue'
+import { useRender } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
 import type { GroupItemProvide } from '@/composables/group'
 import type { TouchHandlers } from '@/directives/touch'
-import { useRender } from '@/util'
 
 type WindowProvide = {
   transition: ComputedRef<undefined | string>

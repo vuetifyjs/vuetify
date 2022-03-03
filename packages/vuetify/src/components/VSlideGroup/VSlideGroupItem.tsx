@@ -1,6 +1,9 @@
+// Composables
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
-import { defineComponent } from '@/util'
 import { VSlideGroupSymbol } from './VSlideGroup'
+
+// Utilities
+import { defineComponent } from '@/util'
 
 export const VSlideGroupItem = defineComponent({
   name: 'VSlideGroupItem',

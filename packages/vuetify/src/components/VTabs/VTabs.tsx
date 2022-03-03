@@ -2,21 +2,21 @@
 import './VTabs.sass'
 
 // Components
-import { VTab } from './VTab'
 import { VSlideGroup } from '@/components/VSlideGroup'
+import { VTab } from './VTab'
 
 // Composables
-import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
+import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, toRef } from 'vue'
 import { defineComponent } from '@/util'
 
 // Types
-import type { InjectionKey, PropType } from 'vue'
 import type { GroupProvide } from '@/composables/group'
+import type { InjectionKey, PropType } from 'vue'
 
 export type TabItem = string | Record<string, any>
 

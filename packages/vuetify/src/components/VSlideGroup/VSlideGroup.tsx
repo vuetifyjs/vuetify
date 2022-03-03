@@ -7,19 +7,19 @@ import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { makeGroupProps, useGroup } from '@/composables/group'
+import { makeTagProps } from '@/composables/tag'
+import { useDisplay } from '@/composables'
 import { useResizeObserver } from '@/composables/resizeObserver'
 import { useRtl } from '@/composables/rtl'
-import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { computed, ref, watch, watchEffect } from 'vue'
-import { clamp, defineComponent, useRender } from '@/util'
 import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
+import { clamp, defineComponent, useRender } from '@/util'
+import { computed, ref, watch, watchEffect } from 'vue'
 
 // Types
-import type { InjectionKey } from 'vue'
 import type { GroupProvide } from '@/composables/group'
-import { useDisplay } from '@/composables'
+import type { InjectionKey } from 'vue'
 
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
 
@@ -330,9 +330,9 @@ export const VSlideGroup = defineComponent({
               <VFadeTransition>
                 <VIcon icon={ props.prevIcon }></VIcon>
               </VFadeTransition>
-            )}
+            ) }
           </div>
-        )}
+        ) }
 
         <div
           ref={ containerRef }
@@ -366,9 +366,9 @@ export const VSlideGroup = defineComponent({
               <VFadeTransition>
                 <VIcon icon={ props.nextIcon }></VIcon>
               </VFadeTransition>
-            )}
+            ) }
           </div>
-        )}
+        ) }
       </props.tag>
     ))
 

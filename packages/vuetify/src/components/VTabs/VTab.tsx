@@ -1,3 +1,4 @@
+// Styles
 import './VTab.sass'
 
 // Components
@@ -5,12 +6,12 @@ import { VBtn } from '@/components/VBtn'
 import { VTabsSymbol } from './VTabs'
 
 // Composables
-import { useTextColor } from '@/composables/color'
-import { provideDefaults } from '@/composables/defaults'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { makeRouterProps } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps } from '@/composables/theme'
+import { provideDefaults } from '@/composables/defaults'
+import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
@@ -143,7 +144,7 @@ export const VTab = defineComponent({
               ]}
               style={ sliderColorStyles.value }
             />
-          )}
+          ) }
         </VBtn>
       )
     })
