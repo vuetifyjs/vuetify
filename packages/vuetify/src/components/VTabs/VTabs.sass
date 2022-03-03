@@ -15,27 +15,6 @@
       &.v-tabs--stacked
         height: $tabs-stacked-height + $modifier
 
-.v-tabs__container
-  contain: content
-  display: flex
-  flex: 1 1 auto
-  overflow: hidden
-
-.v-tabs__content
-  display: flex
-  flex: 1 0 auto
-  position: relative
-  transition: 0.2s all settings.$standard-easing
-  white-space: nowrap
-
-.v-tabs--vertical
-  .v-tabs__content, .v-tabs__container
-    flex-direction: column
-
-.v-tabs--horizontal
-  .v-tabs__content, .v-tabs__container
-    flex-direction: row
-
 .v-tabs--align-with-title:not(.v-slide-group--has-affixes)
   .v-tab:first-child
     margin-inline-start: $tab-align-with-title-margin

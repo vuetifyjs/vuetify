@@ -96,6 +96,7 @@ export const VTabs = defineComponent({
         role="tablist"
         symbol={ VTabsSymbol }
         mandatory="force"
+        direction={ props.direction }
         { ...attrs }
       >
         { slots.default ? slots.default() : parsedItems.value.map(item => (
