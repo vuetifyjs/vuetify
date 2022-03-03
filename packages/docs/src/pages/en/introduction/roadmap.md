@@ -24,7 +24,7 @@ The following releases are currently under development:
 
 - **Target Release:** May 2022
 - **Alpha:** [Live](https://next.vuetifyjs.com/)
-- **Beta:** February 2022
+- **Beta:** March 2022
 - **Overview:**
   - Rebuilt for Vue 3 using the new [composition api](https://vue-composition-api-rfc.netlify.com/)
   - Global properties that allow you to make large overarching changes to your app
