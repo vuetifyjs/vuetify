@@ -24,8 +24,8 @@ import { useList } from './list'
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, onMounted } from 'vue'
-import { genericComponent } from '@/util'
+import { computed, onMounted, watch } from 'vue'
+import { genericComponent, useRender } from '@/util'
 import { useNestedItem } from '@/composables/nested/nested'
 
 // Types
@@ -105,6 +105,12 @@ export const VListItem = genericComponent<new () => {
       }
     })
 
+    watch(() => link.isExactActive?.value, val => {
+      if (val && parent.value != null) {
+        root.open(parent.value, true)
+      }
+    })
+
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
@@ -120,7 +126,7 @@ export const VListItem = genericComponent<new () => {
       isSelected: isSelected.value,
     }))
 
-    return () => {
+    useRender(() => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasTitle = (slots.title || props.title)
       const hasSubtitle = (slots.subtitle || props.subtitle)
@@ -217,7 +223,7 @@ export const VListItem = genericComponent<new () => {
           ) }
         </Tag>
       )
-    }
+    })
   },
 })
 
