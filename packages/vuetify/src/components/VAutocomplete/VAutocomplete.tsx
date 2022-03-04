@@ -144,7 +144,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
         menu.value = true
       }
 
-      search.value = undefined
+      search.value = ''
     }
     function onClickControl () {
       if (props.hideNoData && !filteredItems.value.length) return
@@ -175,12 +175,12 @@ export const VAutocomplete = genericComponent<new <T>() => {
     })
 
     watch(() => active.value, () => {
-      if (!isFocused.value || props.multiple) return
+      if (!isFocused.value || props.multiple || !selections.value.length) return
 
-      search.value = selections.value[0]?.title
+      search.value = selections.value[0]?.title ?? ''
     })
 
-    watch(() => searchValue.value, val => {
+    watch(() => search.value, val => {
       if (!isFocused.value) return
 
       if ((props.hideNoData && !filteredItems.value.length) || !val) {
@@ -191,15 +191,15 @@ export const VAutocomplete = genericComponent<new <T>() => {
     })
 
     watch(() => isFocused.value, val => {
-      isPristine.value = true
-
-      if (val && !props.multiple) {
-        search.value = selections.value[0]?.title
-      } else if (!val) {
+      if (val && !props.multiple && selections.value.length > 0) {
+        search.value = selections.value[0]?.title ?? ''
+      } else {
         search.value = ''
         menu.value = false
       }
     })
+
+    watch(menu, () => (isPristine.value = true))
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
@@ -219,6 +219,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
           dirty={ selections.value.length > 0 }
           onClick:clear={ onClear }
           onClick:control={ onClickControl }
+          onClick:input={ onClickControl }
           onFocus={ () => isFocused.value = true }
           onBlur={ () => isFocused.value = false }
           onKeydown={ onKeydown }
@@ -261,8 +262,6 @@ export const VAutocomplete = genericComponent<new <T>() => {
                     </VList>
                   </VMenu>
                 ) }
-
-                <div class="v-autocomplete__selections v-field__input">
                   { selections.value.map((selection, index) => {
                     const active = selection?.active
                     const title = selection?.title
@@ -310,7 +309,6 @@ export const VAutocomplete = genericComponent<new <T>() => {
                       </VDefaultsProvider>
                     )
                   }) }
-                </div>
               </>
             ),
           }}
@@ -320,6 +318,8 @@ export const VAutocomplete = genericComponent<new <T>() => {
 
     return useForwardRef({
       filteredItems,
+      isPristine,
+      searchValue,
     }, vTextFieldRef)
   },
 })
