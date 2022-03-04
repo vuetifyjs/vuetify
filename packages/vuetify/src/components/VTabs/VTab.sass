@@ -1,0 +1,30 @@
+@forward './variables'
+@use './variables' as *
+
+.v-tab
+  --v-btn-height: 100%
+  display: inline-flex
+  position: relative
+  max-width: $tab-max-width
+  min-width: $tab-min-width
+
+  .v-slide-group--vertical &
+    justify-content: start
+
+.v-tab__slider
+  position: absolute
+  bottom: 0
+  left: 0
+  height: $tab-slider-size
+  width: 100%
+  background: currentColor
+  pointer-events: none
+  opacity: 0
+
+  .v-tab--selected &
+    opacity: 1
+
+  .v-slide-group--vertical &
+    top: 0
+    height: 100%
+    width: $tab-slider-size
