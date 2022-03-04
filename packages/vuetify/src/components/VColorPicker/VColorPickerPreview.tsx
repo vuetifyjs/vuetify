@@ -5,13 +5,12 @@ import './VColorPickerPreview.sass'
 import { VSlider } from '@/components/VSlider'
 
 // Utilities
-import type { HSVA } from '../../util/colorUtils'
-import { HSVAtoCSS } from '../../util/colorUtils'
+import { defineComponent, HSVAtoCSS } from '@/util'
+import { nullColor } from './util'
 
 // Types
 import type { PropType } from 'vue'
-import { defineComponent } from '@/util'
-import { nullColor } from './util'
+import type { HSVA } from '@/util'
 
 export const VColorPickerPreview = defineComponent({
   name: 'VColorPickerPreview',

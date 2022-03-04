@@ -168,3 +168,5 @@ export const VColorPicker = defineComponent({
     )
   },
 })
+
+export type VColorPicker = InstanceType<typeof VColorPicker>
