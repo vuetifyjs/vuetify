@@ -318,8 +318,6 @@ export const VAutocomplete = genericComponent<new <T>() => {
 
     return useForwardRef({
       filteredItems,
-      isPristine,
-      searchValue,
     }, vTextFieldRef)
   },
 })
