@@ -1,6 +1,5 @@
 import { ViteSSG } from '@vuetify/vite-ssg'
 // import 'virtual:api'
-import generatedRoutes from 'virtual:generated-pages'
 import { setupLayouts } from 'virtual:generated-layouts'
 import App from './App.vue'
 
@@ -15,6 +14,7 @@ import { useLocaleStore } from './store/locale'
 import 'prism-theme-vars/base.css'
 import { useUserStore } from './store/user'
 import { useGlobalComponents } from './plugins/global-components'
+import { fallbackLocale, generatedRoutes, rpath, trailingSlash } from '@/util/routes'
 
 const routes = setupLayouts(generatedRoutes)
 
@@ -39,10 +39,20 @@ export const createApp = ViteSSG(
       {
         path: '/',
         redirect: () => {
-          return { path: `/${localeStore.locale}` }
+          return { path: `/${localeStore.locale}/` }
         },
       },
       ...routes,
+      {
+        path: `/:locale(${fallbackLocale})/:pathMatch(.*)*`,
+        component: () => import('@/layouts/404.vue'),
+      },
+      {
+        path: '/:pathMatch(.*)*',
+        redirect: to => {
+          return rpath(to.fullPath)
+        },
+      },
     ],
     scrollBehavior (to, from, savedPosition) {
       if (savedPosition) return savedPosition
@@ -57,6 +67,10 @@ export const createApp = ViteSSG(
     ctx.app.config.warnHandler = (err, vm, info) => {
       console.warn(err, vm, info)
     }
+
+    ctx.router.beforeEach(({ path, hash }, from, next) => {
+      return path.endsWith('/') ? next() : next(`${trailingSlash(path)}` + hash)
+    })
 
     useGlobalComponents(ctx)
     useI18n(ctx)

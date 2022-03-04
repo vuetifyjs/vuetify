@@ -1,35 +1,39 @@
 <template>
-  <div class="px-4 py-10 text-center">
-    <router-view />
-    <div>
-      <v-btn @click="router.back()">
-        {{ t('back') }}
-      </v-btn>
-    </div>
-    <div class="mt-5 mx-auto text-center">
-      [404 Layout]
-    </div>
-  </div>
+  <v-container
+    class="text-center fill-height"
+    style="height: calc(100vh - 58px);"
+  >
+    <v-row align="center">
+      <v-col>
+        <h1 class="text-h3 primary--text">
+          Whoops, 404
+        </h1>
+
+        <p>The page you were looking for does not exist</p>
+
+        <v-btn
+          :to="rpath('/getting-started/installation/')"
+          color="primary"
+          outlined
+        >
+          Get me out of here!
+        </v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">
-// Utilities
   import { defineComponent } from 'vue'
-  import { useRouter } from 'vue-router'
-  import { useI18n } from 'vue-i18n'
+  import { rpath } from '@/util/routes'
 
   export default defineComponent({
     name: '404Layout',
 
     setup () {
-      const router = useRouter()
-      const { t } = useI18n()
-
       return {
-        router,
-        t,
+        rpath,
       }
     },
-
   })
 </script>

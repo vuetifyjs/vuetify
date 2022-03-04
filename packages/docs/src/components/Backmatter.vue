@@ -32,7 +32,7 @@
       >
         <app-sheet>
           <v-list-item
-            :href="item.href"
+            :to="item.href"
             :title="item.title"
             :subtitle="item.subtitle"
           >
@@ -62,8 +62,7 @@
   import { computed } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { useRoute } from 'vue-router'
-  import { rpath } from '@/util/routes'
-  import generatedRoutes from 'virtual:generated-pages'
+  import { generatedRoutes, rpath } from '@/util/routes'
 
   const categoryIcons: Record<string, { icon: string, color: string }> = {
     api: {

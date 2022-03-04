@@ -30,9 +30,10 @@
 
   // Composables
   import { useRoute } from 'vue-router'
+  import { useAppStore } from '@/store/app'
 
   // Utilities
-  import { computed, defineComponent } from 'vue'
+  import { computed, defineComponent, onBeforeMount } from 'vue'
 
   export default defineComponent({
     name: 'DefaultLayout',
@@ -45,9 +46,14 @@
     },
 
     setup () {
+      const app = useAppStore()
       const route = useRoute()
       const isApi = computed(() => route.name?.toString().startsWith('api-'))
       const style = { maxWidth: isApi.value ? '1368px' : '960px' }
+
+      onBeforeMount(() => {
+        app.drawer = null
+      })
 
       return { isApi, style }
     },

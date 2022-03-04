@@ -19,7 +19,7 @@
   import { defineComponent } from 'vue'
 
   // Data
-  import nav from '@/data/nav-alpha'
+  import nav from '@/data/nav-alpha.json'
 
   export default defineComponent({
     name: 'AppDrawer',

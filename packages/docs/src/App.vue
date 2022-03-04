@@ -25,7 +25,7 @@
       const route = useRoute()
       const { locale } = useI18n()
 
-      const path = computed(() => route.path.replace(`/${locale.value}`, ''))
+      const path = computed(() => route.path.replace(`/${locale.value}/`, ''))
 
       const meta = computed(() => {
         return genAppMetaInfo(path.value === '' ? metadata : {
