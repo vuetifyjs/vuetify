@@ -124,9 +124,15 @@ export const VAutocomplete = genericComponent<new <T>() => {
       return array
     })
     const selections = computed(() => {
-      return model.value.map(value => {
-        return items.value.find(item => item.value === value)
-      })
+      const array = []
+
+      for (const value of model.value) {
+        const found = items.value.find(item => item.value === value)
+
+        if (found != null) array.push(found)
+      }
+
+      return array
     })
     const searchValue = computed(() => isPristine.value ? undefined : search.value)
     const { filteredItems } = useFilter(props, items, searchValue)
@@ -210,7 +216,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
               [`v-autocomplete--${props.multiple ? 'multiple' : 'single'}`]: true,
             },
           ]}
-          dirty={ model.value.length > 0 }
+          dirty={ selections.value.length > 0 }
           onClick:clear={ onClear }
           onClick:control={ onClickControl }
           onFocus={ () => isFocused.value = true }
