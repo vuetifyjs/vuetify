@@ -13,7 +13,7 @@ related:
 
 The `v-stepper` component displays progress through numbered steps.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

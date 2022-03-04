@@ -1,8 +1,8 @@
 // Utilities
-import { camelize, Fragment, isRef, ref } from 'vue'
+import { camelize, Fragment } from 'vue'
 
 // Types
-import type { ComponentInternalInstance, ComponentPublicInstance, Ref, Slots, VNode, VNodeChild } from 'vue'
+import type { ComponentInternalInstance, ComponentPublicInstance, InjectionKey, Ref, Slots, VNode, VNodeChild } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
@@ -479,12 +479,6 @@ export function toKebabCase (str = '') {
 
 export type MaybeRef<T> = T | Ref<T>
 
-export type ExtractMaybeRef<P> = P extends MaybeRef<infer T> ? T : P;
-
-export function wrapInRef <T> (x: T) {
-  return (isRef(x) ? x : ref(x)) as Ref<ExtractMaybeRef<T>>
-}
-
 export function findChildren (vnode?: VNodeChild): ComponentInternalInstance[] {
   if (!vnode || typeof vnode !== 'object') {
     return []
@@ -507,6 +501,12 @@ export function findChildren (vnode?: VNodeChild): ComponentInternalInstance[] {
   }
 
   return []
+}
+
+export function findChildrenWithProvide (provide: InjectionKey<any>, vnode?: VNodeChild): ComponentInternalInstance[] {
+  return findChildren(vnode)
+    .slice(1) // First one is group component itself
+    .filter(cmp => !!cmp.provides[provide as any]) // TODO: Fix in TS 4.4?
 }
 
 export class CircularBuffer<T = never> {

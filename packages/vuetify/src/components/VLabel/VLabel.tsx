@@ -11,8 +11,6 @@ export const VLabel = defineComponent({
   name: 'VLabel',
 
   props: {
-    disabled: Boolean,
-    error: Boolean,
     text: String,
 
     ...makeThemeProps(),
@@ -20,15 +18,7 @@ export const VLabel = defineComponent({
 
   setup (props, { slots }) {
     return () => (
-      <label
-        class={[
-          'v-label',
-          {
-            'v-label--disabled': props.disabled,
-            'v-label--error': props.error,
-          },
-        ]}
-      >
+      <label class="v-label">
         { props.text }
 
         { slots.default?.() }

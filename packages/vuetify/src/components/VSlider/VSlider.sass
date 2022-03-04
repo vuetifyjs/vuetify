@@ -24,6 +24,12 @@
   align-items: center
   cursor: pointer
 
+  .v-input--disabled &
+    opacity: var(--v-disabled-opacity)
+
+  .v-input--error:not(.v-input--disabled) &
+    color: rgb(var(--v-theme-error))
+
 // Modifiers
 .v-slider.v-input--horizontal
   margin-left: $slider-horizontal-left
@@ -31,6 +37,8 @@
 
   .v-input__control
     min-height: $slider-horizontal-min-height
+    display: flex
+    align-items: center
 
 .v-slider.v-input--vertical
   margin-top: $slider-vertical-margin-top

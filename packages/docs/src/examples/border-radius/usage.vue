@@ -1,18 +1,21 @@
 
 <template>
   <div class="text-center">
-    <v-slider
-      v-model="model"
-      :max="rounded.length - 1"
-      :tick-labels="rounded"
-    ></v-slider>
-
-    <div class="py-3"></div>
+    <v-row class="pa-4">
+      <v-radio v-model="model" value="rounded-0" label="rounded-0"></v-radio>
+      <v-radio v-model="model" value="rounded-sm" label="rounded-sm"></v-radio>
+      <v-radio v-model="model" value="rounded" label="rounded"></v-radio>
+      <v-radio v-model="model" value="rounded-lg" label="rounded-lg"></v-radio>
+      <v-radio v-model="model" value="rounded-xl" label="rounded-xl"></v-radio>
+      <v-radio v-model="model" value="rounded-pill" label="rounded-pill"></v-radio>
+      <v-radio v-model="model" value="rounded-circle" label="rounded-circle"></v-radio>
+      <v-radio v-model="model" value="rounded-shaped" label="rounded-shaped"></v-radio>
+    </v-row>
 
     <v-sheet
-      :class="radius"
-      :max-width="model === 6 ? 128 : 256"
-      class="mx-auto transition-swing secondary"
+      :class="model"
+      max-width="256"
+      class="mx-auto mt-8"
       elevation="12"
       height="128"
       width="100%"
@@ -20,36 +23,14 @@
 
     <div class="py-3"></div>
 
-    <code class="text-subtitle-1">.{{ radius }}</code>
+    <code class="text-subtitle-1">.{{ model }}</code>
   </div>
 </template>
 
 <script>
   export default {
     data: () => ({
-      model: 3,
-      rounded: [
-        '0',
-        'sm',
-        'md',
-        'lg',
-        'xl',
-        'pill',
-        'circle',
-      ],
+      model: 'rounded-0',
     }),
-
-    computed: {
-      radius () {
-        let rounded = 'rounded'
-        const value = this.rounded[this.model]
-
-        if (value !== 'md') {
-          rounded += `-${value}`
-        }
-
-        return rounded
-      },
-    },
   }
 </script>

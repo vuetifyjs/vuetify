@@ -12,14 +12,29 @@ export function useForwardRef<T extends {}, U extends Ref<{} | undefined>[]> (
       }
       for (const ref of refs) {
         if (ref.value && Reflect.has(ref.value, key)) {
-          return Reflect.get(ref.value, key)
+          const val = Reflect.get(ref.value, key)
+          return typeof val === 'function'
+            ? val.bind(ref.value)
+            : val
         }
       }
     },
     getOwnPropertyDescriptor (target, key) {
-      return Reflect.getOwnPropertyDescriptor(target, key) ?? (
-        refs.find(ref => ref.value && Reflect.getOwnPropertyDescriptor(ref.value, key))
-      )
+      const descriptor = Reflect.getOwnPropertyDescriptor(target, key)
+      if (descriptor) return descriptor
+
+      for (const ref of refs) {
+        if (!ref.value) continue
+        const descriptor = Reflect.getOwnPropertyDescriptor(ref.value, key)
+        if (descriptor) return descriptor
+      }
+      for (const ref of refs) {
+        const obj = ref.value && Object.getPrototypeOf(ref.value)
+        if (!obj) continue
+        const descriptor = Reflect.getOwnPropertyDescriptor(obj, key)
+        if (descriptor) return descriptor
+      }
+      return undefined
     },
   }) as any
 }

@@ -5,7 +5,6 @@
 
 .v-card
   display: block
-  color: $card-color
   overflow: hidden
   position: relative
   padding: $card-padding
@@ -110,6 +109,9 @@
   display: flex
   padding: $card-item-padding
 
+  + .v-card-text
+    padding-top: 0
+
 .v-card-media
   overflow: hidden
 
@@ -129,16 +131,19 @@
     padding: $card-subtitle-header-padding
 
 .v-card-text
+  color: $card-text-color
   font-size: $card-text-font-size
   font-weight: $card-text-font-weight
   letter-spacing: $card-text-letter-spacing
-  opacity: $card-text-opacity
   padding: $card-text-padding
   text-transform: $card-text-text-transform
   transition: inherit
   transition-property: color, opacity
 
   @include card-line-height-densities($card-text-densities)
+
+  + .v-card-actions
+    margin-top: -.5rem
 
 .v-card-title
   align-items: center

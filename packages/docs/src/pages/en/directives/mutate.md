@@ -14,7 +14,7 @@ related:
 
 The `v-mutate` directive utilizes the [Mutation Observer API](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver). It provides an easy to use interface for detecting when elements are updated.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

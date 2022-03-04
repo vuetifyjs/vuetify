@@ -9,7 +9,14 @@ import { getCurrentInstanceName, propsFactory } from '@/util'
 import type { PropType } from 'vue'
 import type { MaybeRef } from '@/util'
 
-export const allowedVariants = ['contained', 'outlined', 'plain', 'text', 'contained-text'] as const
+export const allowedVariants = [
+  'outlined',
+  'plain',
+  'text',
+  'contained',
+  'contained-flat',
+  'contained-text',
+] as const
 
 export type Variant = typeof allowedVariants[number]
 
@@ -52,7 +59,7 @@ export function useVariant (
     const { textColor, variant, color } = unref(props)
     return {
       text: textColor,
-      [variant === 'contained' ? 'background' : 'text']: color,
+      [['contained', 'contained-flat'].includes(variant) ? 'background' : 'text']: color,
     }
   }))
 

@@ -19,8 +19,8 @@
         >
           <v-text-field
             v-model="message2"
-            solo
-            label="Solo"
+            label="Contained"
+            variant="contained"
             clearable
           ></v-text-field>
         </v-col>
@@ -31,8 +31,8 @@
         >
           <v-text-field
             v-model="message3"
-            filled
-            label="Filled"
+            label="Underlined"
+            variant="underlined"
             clearable
           ></v-text-field>
         </v-col>
@@ -44,7 +44,7 @@
           <v-text-field
             v-model="message4"
             label="Outlined"
-            outlined
+            variant="outlined"
             clearable
           ></v-text-field>
         </v-col>

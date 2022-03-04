@@ -24,7 +24,7 @@ describe('VBadge.tsx', () => {
     [{ floating: true }],
     [{ icon: 'foo' }], // badge slot overrides icon
     [{ inline: true }],
-    [{ location: 'bottom-left' }],
+    [{ location: 'bottom-start' }],
     [{ location: undefined }],
     [{ location: null }],
     [{ content: '10', max: 9 }],

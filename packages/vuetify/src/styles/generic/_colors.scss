@@ -1,5 +1,7 @@
+@use 'sass:map';
 @use '../settings';
 @use '../settings/colors';
+@use '../tools/functions' as *;
 
 @mixin background-color($color_value) {
   background-color: $color_value !important;
@@ -9,11 +11,20 @@
   color: $color_value !important;
   caret-color: $color_value !important;
 }
+@mixin background-text-color($color_name, $color_type) {
+  $map_value: map-deep-get(colors.$text-on-colors, $color_name, $color_type);
+
+  color: $map_value !important;
+}
 
 @if (settings.$color-pack) {
   @each $color_name, $color_value in colors.$shades {
     .bg-#{$color_name} {
       @include background-color($color_value);
+
+      @if (map.has-key(colors.$text-on-colors, 'shades')) {
+        @include background-text-color('shades', $color_name);
+      }
     }
 
     .text-#{$color_name} {
@@ -26,6 +37,10 @@
       @if ($color_type == 'base') {
         .bg-#{$color_name} {
           @include background-color($color_value);
+
+          @if (map.has-key(colors.$text-on-colors, $color_name)) {
+            @include background-text-color($color_name, $color_type);
+          }
         }
 
         .text-#{$color_name} {
@@ -35,6 +50,10 @@
       @else if ($color_type != 'shades') {
         .bg-#{$color_name}-#{$color_type} {
           @include background-color($color_value);
+
+          @if (map.has-key(colors.$text-on-colors, $color_name)) {
+            @include background-text-color($color_name, $color_type);
+          }
         }
 
         .text-#{$color_name}-#{$color_type} {

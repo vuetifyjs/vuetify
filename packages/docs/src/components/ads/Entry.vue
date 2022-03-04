@@ -1,12 +1,9 @@
 <template>
   <div class="mb-8">
-    <vuetify-ad
-      v-if="slug"
+    <vuetify
       :slug="slug"
-      medium="entry-ad"
+      medium="entry"
     />
-
-    <carbon-ad v-else />
   </div>
 </template>
 

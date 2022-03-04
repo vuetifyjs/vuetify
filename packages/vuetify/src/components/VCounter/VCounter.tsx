@@ -6,7 +6,8 @@ import { VSlideYTransition } from '@/components/transitions'
 
 // Utilities
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { computed, defineComponent } from 'vue'
+import { computed } from 'vue'
+import { defineComponent } from '@/util'
 
 export const VCounter = defineComponent({
   name: 'VCounter',

@@ -1,5 +1,5 @@
-import { computed, inject, provide } from 'vue'
-import { consoleError, consoleWarn, getObjectValueByPath, wrapInRef } from '@/util'
+import { computed, inject, provide, ref } from 'vue'
+import { consoleError, consoleWarn, getObjectValueByPath } from '@/util'
 
 import en from '@/locale/en'
 
@@ -126,9 +126,9 @@ export function createDefaultLocaleAdapter (options?: LocaleOptions): LocaleAdap
     fallback: MaybeRef<string>
     messages: MaybeRef<LocaleMessages>
   }) => {
-    const current = wrapInRef(options.current)
-    const fallback = wrapInRef(options.fallback)
-    const messages = wrapInRef(options.messages)
+    const current = ref(options.current)
+    const fallback = ref(options.fallback)
+    const messages = ref(options.messages)
 
     return {
       current,

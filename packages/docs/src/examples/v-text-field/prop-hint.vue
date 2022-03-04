@@ -32,7 +32,7 @@
             label="Your product or service"
             value="Grocery delivery"
             hint="For example, flowers or used cars"
-            filled
+            variant="contained"
           ></v-text-field>
         </v-col>
 
@@ -44,7 +44,7 @@
             label="Your landing page"
             hint="www.example.com/page"
             persistent-hint
-            filled
+            variant="contained"
           ></v-text-field>
         </v-col>
 
@@ -56,7 +56,7 @@
             label="Your product or service"
             value="Grocery delivery"
             hint="For example, flowers or used cars"
-            outlined
+            variant="outlined"
           ></v-text-field>
         </v-col>
 
@@ -68,7 +68,7 @@
             label="Your landing page"
             hint="www.example.com/page"
             persistent-hint
-            outlined
+            variant="outlined"
           ></v-text-field>
         </v-col>
       </v-row>

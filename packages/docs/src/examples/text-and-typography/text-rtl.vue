@@ -4,17 +4,11 @@
       Agnostic RTL Alignment
     </p>
 
-    <p class="text-sm-left">
-      Left aligned text on viewports sized SM (small) or wider for rtl or ltr.
+    <p class="text-left">
+      Left aligned text, irrespective of RTL or LTR.
     </p>
-    <p class="text-md-left">
-      Left aligned text on viewports sized MD (medium) or wider for rtl or ltr.
-    </p>
-    <p class="text-lg-right">
-      Right aligned text on viewports sized LG (large) or wider for rtl or ltr.
-    </p>
-    <p class="text-xl-left">
-      Left aligned text on viewports sized XL (extra-large) or wider for rtl or ltr.
+    <p class="text-right">
+      Right aligned text, irrespective of RTL or LTR.
     </p>
 
     <p class="text-subtitle-2 text-center">
@@ -22,10 +16,10 @@
     </p>
 
     <p class="text-start">
-      Left aligned text on ltr and right aligned on rtl.
+      Left aligned text on LTR and right aligned on RTL.
     </p>
     <p class="text-end">
-      Right aligned text on ltr and left aligned on rtl.
+      Right aligned text on LTR and left aligned on RTL.
     </p>
   </div>
 </template>

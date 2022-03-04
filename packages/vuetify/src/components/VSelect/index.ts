@@ -1,4 +1,1 @@
-import VSelect from './VSelect'
-
-export { VSelect }
-export default VSelect
+export { VSelect } from './VSelect'

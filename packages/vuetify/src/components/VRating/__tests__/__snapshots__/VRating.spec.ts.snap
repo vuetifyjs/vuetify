@@ -30,7 +30,7 @@ exports[`VRating should change icon on hover 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -59,7 +59,7 @@ exports[`VRating should change icon on hover 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -88,7 +88,7 @@ exports[`VRating should change icon on hover 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -117,7 +117,7 @@ exports[`VRating should change icon on hover 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -146,7 +146,7 @@ exports[`VRating should change icon on hover 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -311,7 +311,7 @@ exports[`VRating should render a scoped item-label slot 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -340,7 +340,7 @@ exports[`VRating should render a scoped item-label slot 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -369,7 +369,7 @@ exports[`VRating should render a scoped item-label slot 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -398,7 +398,7 @@ exports[`VRating should render a scoped item-label slot 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -427,7 +427,7 @@ exports[`VRating should render a scoped item-label slot 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -474,7 +474,7 @@ exports[`VRating should respond to prop value changes 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -503,7 +503,7 @@ exports[`VRating should respond to prop value changes 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -532,7 +532,7 @@ exports[`VRating should respond to prop value changes 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -561,7 +561,7 @@ exports[`VRating should respond to prop value changes 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -590,7 +590,7 @@ exports[`VRating should respond to prop value changes 1`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -637,7 +637,7 @@ exports[`VRating should respond to prop value changes 2`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -666,7 +666,7 @@ exports[`VRating should respond to prop value changes 2`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -695,7 +695,7 @@ exports[`VRating should respond to prop value changes 2`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -724,7 +724,7 @@ exports[`VRating should respond to prop value changes 2`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>
@@ -753,7 +753,7 @@ exports[`VRating should respond to prop value changes 2`] = `
           </div>
           <div class="v-btn__underlay">
           </div>
-          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-btn__icon"
+          <i class="mdi-star-outline mdi v-icon notranslate v-icon--size-default v-theme--light v-btn__icon"
              aria-hidden="true"
           >
           </i>

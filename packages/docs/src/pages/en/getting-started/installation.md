@@ -101,6 +101,7 @@ Once prompted, choose **Preview (Vuetify 3 + Vite)**:
 With Vue 3.0, the initialization process for Vue apps (and by extension Vuetify) has changed. With the new `createVuetify` method, the options passed to it have also changed. Please see the pages in the Features section of the documentation for further details.
 
 ```js
+import 'vuetify/styles' // Global CSS has to be imported
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 import App from './App.vue'
@@ -111,6 +112,18 @@ const vuetify = createVuetify(...) // Replaces new Vuetify(...)
 app.use(vuetify)
 
 app.mount('#app')
+```
+
+Components and directives are no longer included by default, they either have to imported separately or loaded automatically with the appropriate [Vite](https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin) or [Webpack](https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vuetify-loader) plugin.
+
+```js
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+  components,
+  directives,
+})
 ```
 
 ## Frequently asked questions

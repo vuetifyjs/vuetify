@@ -45,7 +45,7 @@ function genHeader (component: string) {
   const header = [
     genFrontMatter(component),
     `# ${component} API`,
-    // '<entry-ad />', TODO: enable when component exists
+    // '<entry />', TODO: enable when component exists
   ]
 
   return `${header.join('\n\n')}\n\n`

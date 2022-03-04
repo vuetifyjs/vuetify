@@ -6,25 +6,13 @@
   display: grid
   flex: 1 1 auto
 
-  input
-    color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
-
-  .v-icon
-    color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
-
-  &--error
-    color: rgb(var(--v-theme-error))
-
   &--disabled
     pointer-events: none
-
-    &,
-    input
-      color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity))
 
   @at-root
     @include tools.density('v-input', $input-density) using ($modifier)
       --v-input-control-height: #{$input-control-height + $modifier}
+      --v-input-padding-top: #{16px + $modifier * .5}
 
 .v-input--vertical
   grid-template-areas: "append" "control" "prepend"
@@ -60,18 +48,32 @@
   min-height: $input-details-min-height
   padding-top: $input-details-padding-above
   overflow: hidden
-  padding-inline-start: $input-details-padding-inline
-  padding-inline-end: $input-details-padding-inline
   justify-content: space-between
+
+.v-input__details,
+.v-input__prepend,
+.v-input__append
+  > .v-icon
+    opacity: var(--v-medium-emphasis-opacity)
+
+  .v-input--disabled &,
+  .v-input--error &
+    > .v-icon,
+    .v-messages
+      opacity: 1
+
+  .v-input--disabled &
+    opacity: var(--v-disabled-opacity)
+
+  .v-input--error:not(.v-input--disabled) &
+    > .v-icon,
+    .v-messages
+      color: rgb(var(--v-theme-error))
 
 .v-input__prepend,
 .v-input__append
   display: flex
-  align-items: center
-  align-self: center
-
-  .v-input--focused &
-    opacity: 1
+  padding-top: var(--v-input-padding-top)
 
 .v-input__prepend
   grid-area: prepend

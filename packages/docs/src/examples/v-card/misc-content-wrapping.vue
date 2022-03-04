@@ -5,6 +5,8 @@
         <v-img
           height="200px"
           src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg"
+          cover
+          theme="dark"
         >
           <v-app-bar
             flat
@@ -20,10 +22,8 @@
 
             <v-btn
               color="white"
-              icon
-            >
-              <v-icon>mdi-dots-vertical</v-icon>
-            </v-btn>
+              icon="mdi-dots-vertical"
+            ></v-btn>
           </v-app-bar>
 
           <v-card-title class="white--text mt-8">
@@ -40,21 +40,21 @@
         </v-img>
 
         <v-card-text>
-          <div class="font-weight-bold ml-8 mb-2">
+          <div class="font-weight-bold ml-1 mb-2">
             Today
           </div>
 
           <v-timeline
-            align-top
-            dense
+            density="compact"
+            truncate-line="none"
           >
             <v-timeline-item
               v-for="message in messages"
               :key="message.time"
-              :color="message.color"
-              small
+              :dot-color="message.color"
+              size="x-small"
             >
-              <div>
+              <div class="mb-4">
                 <div class="font-weight-normal">
                   <strong>{{ message.from }}</strong> @{{ message.time }}
                 </div>

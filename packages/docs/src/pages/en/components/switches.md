@@ -1,4 +1,5 @@
 ---
+nav: Switches
 meta:
   title: Switch component
   description: The switch component is a simple and eloquent toggle used to select between two values.
@@ -13,7 +14,7 @@ related:
 
 The `v-switch` component provides users the ability to choose between two distinct values. These are very similar to a toggle, or on/off switch, though aesthetically different than a checkbox.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

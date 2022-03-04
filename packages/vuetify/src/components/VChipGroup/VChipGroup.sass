@@ -2,26 +2,20 @@
 
 // Block
 .v-chip-group
+  display: flex
+  max-width: 100%
+  min-width: 0
+  overflow-x: auto
+  padding: $chip-group-padding
+
   .v-chip
     margin: $chip-group-margin
 
-  .v-chip--active
-    color: inherit
-
-    &.v-chip--no-color
-      &:after
-        opacity: $chip-group-no-color-opacity
-
-      &:focus:after
-        opacity: $chip-group-no-color-focus-opacity
-
-// Element
-.v-chip-group .v-slide-group__content
-  padding: $chip-group-content-padding
+    &.v-chip--selected:not(.v-chip--disabled)
+      .v-chip__overlay
+        opacity: $chip-group-selected-opacity
 
 // Modifiers
 .v-chip-group--column
-  .v-slide-group__content
-    white-space: normal
-    flex-wrap: wrap
-    max-width: 100%
+  flex-wrap: wrap
+  white-space: normal

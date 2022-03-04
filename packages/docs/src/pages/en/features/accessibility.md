@@ -13,7 +13,7 @@ related:
 
 Web accessibility **(a11y for short)**, is the inclusive practice of ensuring there are no barriers that prevent the interaction with, or access to, websites on the World Wide Web by people with disabilities. Vuetify components are built to provide keyboard interactions for all mouse-based actions and utilize HTML5 semantic elements where applicable.
 
-<promoted-ad slug="vuetify-fundamentals-cheat-sheet" />
+<promoted slug="vuetify-fundamentals-cheat-sheet" />
 
 ## Material Design Accessibility
 
@@ -131,7 +131,7 @@ However, when using slots there are conditions in which you will need to utilize
 
 <example file="accessibility/select-list-item" />
 
-<promoted-ad slug="vuetify-github-sponsors" />
+<promoted slug="vuetify-github-sponsors" />
 
 When providing a `v-list-item` component in a slot, the aria attributes are passed through the **attrs** data property and can be bound with `v-bind`.
 

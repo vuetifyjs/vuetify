@@ -9,6 +9,7 @@ import { VListItemSubtitle } from './VListItemSubtitle'
 import { VListItemTitle } from './VListItemTitle'
 
 // Composables
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
@@ -17,16 +18,15 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { useList } from './list'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, onMounted } from 'vue'
-import { genericComponent } from '@/util'
+import { computed, onMounted, watch } from 'vue'
+import { genericComponent, useRender } from '@/util'
 import { useNestedItem } from '@/composables/nested/nested'
-import { useList } from './VList'
 
 // Types
 import type { MakeSlots } from '@/util'
@@ -38,13 +38,21 @@ type ListItemSlot = {
   select: (value: boolean) => void
 }
 
+export type ListItemTitleSlot = {
+  title?: string
+}
+
+export type ListItemSubtitleSlot = {
+  subtitle?: string
+}
+
 export const VListItem = genericComponent<new () => {
   $slots: MakeSlots<{
     prepend: [ListItemSlot]
     append: [ListItemSlot]
     default: [ListItemSlot]
-    title: []
-    subtitle: []
+    title: [ListItemTitleSlot]
+    subtitle: [ListItemSubtitleSlot]
   }>
 }>()({
   name: 'VListItem',
@@ -97,6 +105,12 @@ export const VListItem = genericComponent<new () => {
       }
     })
 
+    watch(() => link.isExactActive?.value, val => {
+      if (val && parent.value != null) {
+        root.open(parent.value, true)
+      }
+    })
+
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
@@ -112,7 +126,7 @@ export const VListItem = genericComponent<new () => {
       isSelected: isSelected.value,
     }))
 
-    return () => {
+    useRender(() => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasTitle = (slots.title || props.title)
       const hasSubtitle = (slots.subtitle || props.subtitle)
@@ -175,7 +189,7 @@ export const VListItem = genericComponent<new () => {
               { hasTitle && (
                 <VListItemTitle>
                   { slots.title
-                    ? slots.title()
+                    ? slots.title({ title: props.title })
                     : props.title
                   }
                 </VListItemTitle>
@@ -184,7 +198,7 @@ export const VListItem = genericComponent<new () => {
               { hasSubtitle && (
                 <VListItemSubtitle>
                   { slots.subtitle
-                    ? slots.subtitle()
+                    ? slots.subtitle({ subtitle: props.subtitle })
                     : props.subtitle
                   }
                 </VListItemSubtitle>
@@ -209,7 +223,7 @@ export const VListItem = genericComponent<new () => {
           ) }
         </Tag>
       )
-    }
+    })
   },
 })
 

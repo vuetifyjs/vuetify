@@ -19,6 +19,7 @@ type Tick = {
 }
 
 type SliderProvide = {
+  activeThumbRef: Ref<HTMLElement | undefined>
   color: Ref<string | undefined>
   decimals: Ref<number>
   direction: Ref<'vertical' | 'horizontal'>
@@ -75,6 +76,7 @@ function getPosition (e: MouseEvent | TouchEvent, position: 'clientX' | 'clientY
 
 export const makeSliderProps = propsFactory({
   disabled: Boolean,
+  error: Boolean,
   readonly: Boolean,
   max: {
     type: [Number, String],
@@ -100,7 +102,7 @@ export const makeSliderProps = propsFactory({
   },
   showTicks: {
     type: [Boolean, String] as PropType<boolean | 'always'>,
-    default: true,
+    default: false,
     validator: (v: any) => typeof v === 'boolean' || v === 'always',
   },
   showTickLabels: {
@@ -176,14 +178,15 @@ export const useSlider = ({
   const disabled = toRef(props, 'disabled')
   const vertical = computed(() => props.direction === 'vertical')
 
-  const thumbColor = computed(() => props.disabled ? undefined : props.thumbColor ?? props.color)
-  const trackColor = computed(() => props.disabled ? undefined : props.trackColor ?? props.color)
-  const trackFillColor = computed(() => props.disabled ? undefined : props.trackFillColor ?? props.color)
+  const thumbColor = computed(() => props.error || props.disabled ? undefined : props.thumbColor ?? props.color)
+  const trackColor = computed(() => props.error || props.disabled ? undefined : props.trackColor ?? props.color)
+  const trackFillColor = computed(() => props.error || props.disabled ? undefined : props.trackFillColor ?? props.color)
 
   const mousePressed = ref(false)
 
   const startOffset = ref(0)
   const trackContainerRef = ref<VSliderTrack | undefined>()
+  const activeThumbRef = ref<HTMLElement | undefined>()
 
   function roundValue (value: number) {
     if (step.value <= 0) return value
@@ -229,16 +232,16 @@ export const useSlider = ({
   }
 
   const handleStart = (e: MouseEvent | TouchEvent) => {
-    const activeThumb = getActiveThumb(e)
+    activeThumbRef.value = getActiveThumb(e)
 
-    if (!activeThumb) return
+    if (!activeThumbRef.value) return
 
-    activeThumb.focus()
+    activeThumbRef.value.focus()
     mousePressed.value = true
 
-    if (activeThumb.contains(e.target as Node)) {
+    if (activeThumbRef.value.contains(e.target as Node)) {
       thumbMoved = true
-      startOffset.value = getOffset(e, activeThumb, props.direction)
+      startOffset.value = getOffset(e, activeThumbRef.value, props.direction)
     } else {
       startOffset.value = 0
       handleMouseMove(parseMouseMove(e))
@@ -314,6 +317,7 @@ export const useSlider = ({
   const hasLabels = computed(() => parsedTicks.value.some(({ label }) => !!label))
 
   const data: SliderProvide = {
+    activeThumbRef,
     color: toRef(props, 'color'),
     decimals,
     disabled,

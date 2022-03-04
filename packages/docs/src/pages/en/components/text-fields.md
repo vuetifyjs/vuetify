@@ -1,4 +1,5 @@
 ---
+nav: Text fields
 meta:
   title: Text field component
   description: The text field component accepts textual input from users.
@@ -13,7 +14,7 @@ related:
 
 Text fields components are used for collecting user provided information.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -107,11 +108,11 @@ The **prefix** and **suffix** properties allows you to prepend and append inline
 
 <example file="v-text-field/prop-single-line" />
 
-#### Solo
+#### Contained
 
-Text fields can be used with an alternative solo design.
+Text fields can be used with an alternative contained design.
 
-<example file="v-text-field/prop-solo" />
+<example file="v-text-field/prop-contained" />
 
 #### Validation
 

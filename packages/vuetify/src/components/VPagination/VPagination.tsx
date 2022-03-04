@@ -24,6 +24,7 @@ import { createRange, defineComponent, keyValues } from '@/util'
 
 // Types
 import type { ComponentPublicInstance } from 'vue'
+import { makeRoundedProps } from '@/composables/rounded'
 
 export const VPagination = defineComponent({
   name: 'VPagination',
@@ -94,6 +95,7 @@ export const VPagination = defineComponent({
     },
     showFirstLastPage: Boolean,
 
+    ...makeRoundedProps(),
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
@@ -216,6 +218,7 @@ export const VPagination = defineComponent({
               icon: true,
               disabled: !!props.disabled || props.length < 2,
               elevation: props.elevation,
+              rounded: props.rounded,
               color: isActive ? props.color : undefined,
               ariaCurrent: isActive,
               ariaLabel: t(isActive ? props.currentPageAriaLabel : props.pageAriaLabel, index + 1),

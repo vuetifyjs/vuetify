@@ -14,7 +14,7 @@ related:
 
 The `v-pagination` component is used to separate long sets of data so that it is easier for a user to consume information. Depending on the length provided, the pagination component will automatically scale. To maintain the current page, simply supply a **v-model** attribute.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -30,11 +30,11 @@ Pagination by default displays the number of pages based on the set **length** p
 
 ### Props
 
-#### Circle
+#### Rounded
 
-The **circle** prop gives you an alternate style for pagination buttons.
+The **rounded** prop allows you to render pagination buttons with alternative styles.
 
-<example file="v-pagination/prop-circle" />
+<example file="v-pagination/prop-rounded" />
 
 #### Disabled
 

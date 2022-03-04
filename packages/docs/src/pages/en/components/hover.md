@@ -14,13 +14,13 @@ related:
 
 The `v-hover` component provides a simple interface for handling hover states for any component.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
  `v-hover` is a renderless component that uses the default slot to provide scoped access to its internal model; as well as mouse event listeners to modify it. To expliclty control the internal state, use the **model-value** property.
 
-<usage name="v-hover" />
+<!-- <usage name="v-hover" /> -->
 
 ## API
 

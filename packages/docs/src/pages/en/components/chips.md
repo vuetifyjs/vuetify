@@ -14,7 +14,7 @@ related:
 
 The `v-chip` component is used to convey small pieces of information. Using the `close` property, the chip becomes interactive, allowing user interaction. This component is used by the [v-chip-group](/components/chip-groups) for advanced selection options.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -32,7 +32,7 @@ Chips come in the following variations: closeable, filter, outlined, pill. The d
 
 #### Closable
 
-Closable chips can be controlled with a v-model. You can also listen to the `click:close` event if you want to know when a chip has been closed."
+Closable chips can be controlled with a v-model. You can also listen to the `click:close` event if you want to know when a chip has been closed.
 
 <example file="v-chip/prop-closable" />
 

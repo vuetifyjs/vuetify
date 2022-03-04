@@ -2,26 +2,21 @@
   <v-card
     class="mx-auto"
     max-width="300"
-    tile
   >
     <v-list shaped>
-      <v-subheader>REPORTS</v-subheader>
-      <v-list-item-group
-        v-model="selectedItem"
-        color="primary"
+      <v-list-subheader>REPORTS</v-list-subheader>
+      <v-list-item
+        v-for="(item, i) in items"
+        :key="i"
+        :value="item"
+        active-color="primary"
+        rounded="shaped"
       >
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-        >
-          <v-list-item-icon>
-            <v-icon v-text="item.icon"></v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.text"></v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list-item-group>
+        <v-list-item-avatar left>
+          <v-icon :icon="item.icon"></v-icon>
+        </v-list-item-avatar>
+        <v-list-item-title v-text="item.text"></v-list-item-title>
+      </v-list-item>
     </v-list>
   </v-card>
 </template>

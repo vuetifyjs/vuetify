@@ -1,4 +1,5 @@
 ---
+nav: Menus
 meta:
   title: Menu component
   description: The menu component exposes a dropdown of potential selections or actions that the user can make.
@@ -13,7 +14,7 @@ related:
 
 The `v-menu` component shows a menu at the position of the element used to activate it.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

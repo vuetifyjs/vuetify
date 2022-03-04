@@ -1,43 +1,33 @@
 <template>
-  <v-row
-    align="center"
-    justify="center"
+  <usage-example
+    v-model="model"
+    :options="options"
+    name="v-chip"
   >
-    <v-chip
-      v-bind="$attrs"
-    >
-      Chip Component
-    </v-chip>
-  </v-row>
+    <div class="text-center">
+      <v-defaults-provider
+        :defaults="{
+          VChip: {
+            label: model === 'label',
+            variant: model === 'outlined' ? 'outlined' : undefined
+          }
+        }"
+      >
+        <v-chip>
+          Chip Component
+        </v-chip>
+      </v-defaults-provider>
+    </div>
+  </usage-example>
 </template>
 
 <script>
   export default {
-    name: 'Usage',
-
-    inheritAttrs: false,
+    name: 'ChipUsageExample',
 
     data: () => ({
-      defaults: {
-        close: false,
-        'close-icon': null,
-        color: null,
-        filter: false,
-        label: false,
-        link: false,
-        outlined: false,
-        pill: false,
-      },
-      options: {
-        selects: {
-          'close-icon': ['mdi-close-outline', 'mdi-delete'],
-          color: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
-        },
-        booleans: [
-          'close',
-        ],
-      },
-      tabs: ['filter', 'label', 'link', 'outlined', 'pill'],
+      model: 'default',
+      options: ['label', 'outlined'],
     }),
   }
 </script>

@@ -11,9 +11,9 @@ related:
 
 # Theme configuration
 
-Easily change the colors of your application programmatically. Vuetify supports multiple themes with light and dark variants.
+Customize your application's default text colors, surfaces, and more. Easily modify your theme programmatically in real time. Vuetify comes with standard support for light and dark variants.
 
-<promoted-ad slug="vuemastery-themes" />
+<promoted slug="vuemastery-themes" />
 
 ## API
 
@@ -130,7 +130,7 @@ You can use the `<v-theme-provider>` component to dynamically apply different th
 
 ## Custom theme colors
 
-The Vuetify theme system supports adding *custom* colors. When configuring the Vuetify theme settings, add any number of custom colors to the **colors** object and Vuetify will generate a number of CSS classes and variables for you to use in your application.
+The Vuetify theme system supports adding _custom_ colors. When configuring the Vuetify theme settings, add any number of custom colors to the **colors** object and Vuetify will generate a number of CSS classes and variables for you to use in your application.
 
 ```js
 // src/plugins/vuetify.js

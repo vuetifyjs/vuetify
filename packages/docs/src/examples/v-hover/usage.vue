@@ -4,12 +4,12 @@
     justify="center"
   >
     <v-hover
-      v-slot="{ hover, props }"
+      v-slot="{ isHovering, props }"
       v-bind="$attrs"
     >
       <v-card
-        :elevation="hover ? 12 : 2"
-        :class="{ 'on-hover': hover }"
+        :elevation="isHovering ? 12 : 2"
+        :class="{ 'on-hover': isHovering }"
         height="200"
         max-width="350"
         class="mx-auto"

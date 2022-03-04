@@ -13,7 +13,7 @@ related:
 
 Out of the box, Vuetify supports 4 popular icon font libraries—[Material Design Icons](https://materialdesignicons.com/), [Material Icons](https://material.io/resources/icons/?style=baseline), [Font Awesome 4](https://fontawesome.com/v4.7.0/) and [Font Awesome 5](https://fontawesome.com/).
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -365,7 +365,7 @@ app.mount('#app')
 </template>
 ```
 
-<vuetify-ad slug="enterprise-support-through-tidelift" />
+<vuetify slug="enterprise-support-through-tidelift" />
 
 ## Creating a custom icon set
 

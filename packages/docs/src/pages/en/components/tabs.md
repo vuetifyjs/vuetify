@@ -1,4 +1,5 @@
 ---
+nav: Tabs
 meta:
   title: Tabs component
   description: The tabs component provides a way to organize and navigate between groups of content that are related at the same level of hierarchy.
@@ -13,7 +14,7 @@ related:
 
 The `v-tabs` component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation for a page, where the tabs are links and the tab-items are the content.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -67,7 +68,7 @@ Make `v-tabs` lined up with the `v-toolbar-title` component using the **align-wi
 
 <example file="v-tabs/prop-align-with-title" />
 
-<promoted-ad slug="vuetify-zero-theme-pro" />
+<promoted slug="vuetify-zero-theme-pro" />
 
 #### Center active
 

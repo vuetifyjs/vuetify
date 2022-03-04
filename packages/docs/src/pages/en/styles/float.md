@@ -13,7 +13,7 @@ related:
 
 Applies a custom float across any breakpoint with responsive float utilities.
 
-<entry-ad />
+<entry />
 
 ## Overview
 

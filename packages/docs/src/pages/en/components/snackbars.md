@@ -13,7 +13,7 @@ related:
 
 The `v-snackbar` component is used to display a quick message to a user. Snackbars support positioning, removal delay, and callbacks.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

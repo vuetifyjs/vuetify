@@ -10,11 +10,10 @@ import { VFieldLabel } from './VFieldLabel'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { useFocus } from '@/composables/focus'
+import { makeFocusProps, useFocus } from '@/composables/focus'
 
 // Utilities
-import { computed, inject, ref, toRef, watch, watchEffect } from 'vue'
+import { computed, ref, toRef, watch } from 'vue'
 import {
   convertToUnit,
   genericComponent,
@@ -27,7 +26,7 @@ import {
 } from '@/util'
 
 // Types
-import type { VInputSlot, VInputSymbol } from '@/components/VInput/VInput'
+import type { VInputSlot } from '@/components/VInput/VInput'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
@@ -36,8 +35,8 @@ const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain
 type Variant = typeof allowedVariants[number]
 
 export interface DefaultInputSlot {
-  isActive: boolean
-  isFocused: boolean
+  isActive: Ref<boolean>
+  isFocused: Ref<boolean>
   controlRef: Ref<HTMLElement | undefined>
   focus: () => void
   blur: () => void
@@ -55,7 +54,11 @@ export const makeVFieldProps = propsFactory({
     type: String,
     default: '$clear',
   },
+  active: Boolean,
   color: String,
+  dirty: Boolean,
+  disabled: Boolean,
+  error: Boolean,
   label: String,
   persistentClear: Boolean,
   prependInnerIcon: String,
@@ -71,56 +74,56 @@ export const makeVFieldProps = propsFactory({
   ...makeLoaderProps(),
 }, 'v-field')
 
+export type VFieldSlots = MakeSlots<{
+  clear: []
+  prependInner: [DefaultInputSlot & VInputSlot]
+  appendInner: [DefaultInputSlot & VInputSlot]
+  label: [DefaultInputSlot & VInputSlot]
+  loader: [LoaderSlotProps]
+  default: [VFieldSlot]
+}>
+
 export const VField = genericComponent<new <T>() => {
   $props: {
     modelValue?: T
     'onUpdate:modelValue'?: (val: T) => any
   }
-  $slots: MakeSlots<{
-    clear: []
-    prependInner: [DefaultInputSlot & VInputSlot]
-    appendInner: [DefaultInputSlot & VInputSlot]
-    label: [DefaultInputSlot & VInputSlot]
-    loader: [LoaderSlotProps]
-    default: [VFieldSlot]
-  }>
+  $slots: VFieldSlots
 }>()({
   name: 'VField',
 
   inheritAttrs: false,
 
   props: {
-    active: Boolean,
-    disabled: Boolean,
-    error: Boolean,
     id: String,
+
+    ...makeFocusProps(),
     ...makeVFieldProps(),
   },
 
   emits: {
-    'click:clear': (e: Event) => true,
+    'click:clear': (e: MouseEvent) => true,
     'click:prepend-inner': (e: MouseEvent) => true,
     'click:append-inner': (e: MouseEvent) => true,
-    'click:control': (props: DefaultInputSlot) => true,
-    'update:active': (active: boolean) => true,
+    'click:control': (e: MouseEvent) => true,
+    'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: any) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
     const { themeClasses } = provideTheme(props)
     const { loaderClasses } = useLoader(props)
-    const isActive = useProxiedModel(props, 'active')
-    const { isFocused, focus, blur } = useFocus()
+    const { focusClasses, isFocused, focus, blur } = useFocus(props)
+
+    const isActive = computed(() => props.dirty || props.active)
+    const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
 
     const uid = getUid()
+    const id = computed(() => props.id || `input-${uid}`)
 
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()
     const controlRef = ref<HTMLElement>()
-    const id = computed(() => props.id || `input-${uid}`)
-    const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
-
-    watchEffect(() => isActive.value = isFocused.value)
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
@@ -168,8 +171,8 @@ export const VField = genericComponent<new <T>() => {
     }, { flush: 'post' })
 
     const slotProps = computed<DefaultInputSlot>(() => ({
-      isActive: isActive.value,
-      isFocused: isFocused.value,
+      isActive,
+      isFocused,
       controlRef,
       blur,
       focus,
@@ -180,10 +183,8 @@ export const VField = genericComponent<new <T>() => {
         e.preventDefault()
       }
 
-      emit('click:control', slotProps.value)
+      emit('click:control', e)
     }
-
-    const VInput = inject('VInput' as any as typeof VInputSymbol, undefined)
 
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
@@ -204,7 +205,9 @@ export const VField = genericComponent<new <T>() => {
             {
               'v-field--active': isActive.value,
               'v-field--appended': hasAppend,
-              'v-field--focused': isFocused.value,
+              'v-field--disabled': props.disabled,
+              'v-field--dirty': props.dirty,
+              'v-field--error': props.error,
               'v-field--has-background': !!props.bgColor,
               'v-field--persistent-clear': props.persistentClear,
               'v-field--prepended': hasPrepend,
@@ -213,9 +216,9 @@ export const VField = genericComponent<new <T>() => {
               [`v-field--variant-${props.variant}`]: true,
             },
             themeClasses.value,
-            loaderClasses.value,
             backgroundColorClasses.value,
-            textColorClasses.value,
+            focusClasses.value,
+            loaderClasses.value,
           ]}
           style={[
             backgroundColorStyles.value,
@@ -229,26 +232,32 @@ export const VField = genericComponent<new <T>() => {
           <LoaderSlot
             name="v-field"
             active={ props.loading }
-            color={ VInput ? (!VInput.value.isValid.value ? undefined : props.color) : props.color }
+            color={ props.error ? 'error' : props.color }
             v-slots={{ default: slots.loader }}
           />
 
           { hasPrepend && (
             <div
               class="v-field__prepend-inner"
-              onClick={ e => emit('click:prepend-inner', e) }
             >
               { props.prependInnerIcon && (
-                <VIcon icon={ props.prependInnerIcon } />
+                <VIcon
+                  onClick={ (e: MouseEvent) => emit('click:prepend-inner', e) }
+                  icon={ props.prependInnerIcon }
+                />
               ) }
 
-              { slots?.prependInner?.(VInput?.value) }
+              { slots?.prependInner?.(slotProps.value) }
             </div>
           ) }
 
           <div class="v-field__field">
             { ['contained', 'filled'].includes(props.variant) && hasLabel.value && (
-              <VFieldLabel ref={ floatingLabelRef } floating>
+              <VFieldLabel
+                ref={ floatingLabelRef }
+                class={[textColorClasses.value]}
+                floating
+              >
                 { label }
               </VFieldLabel>
             ) }
@@ -258,13 +267,10 @@ export const VField = genericComponent<new <T>() => {
             </VFieldLabel>
 
             { slots.default?.({
-              ...VInput?.value,
               ...slotProps.value,
               props: {
                 id: id.value,
                 class: 'v-field__input',
-                onFocus: () => (isFocused.value = true),
-                onBlur: () => (isFocused.value = false),
               },
               focus,
               blur,
@@ -275,12 +281,16 @@ export const VField = genericComponent<new <T>() => {
             <VExpandXTransition>
               <div
                 class="v-field__clearable"
-                onClick={ (e: Event) => emit('click:clear', e) }
-                v-show={ props.active }
+                v-show={ props.dirty }
               >
                 { slots.clear
                   ? slots.clear()
-                  : <VIcon icon={ props.clearIcon } />
+                  : (
+                    <VIcon
+                      onClick={ (e: MouseEvent) => emit('click:clear', e) }
+                      icon={ props.clearIcon }
+                    />
+                  )
                 }
               </div>
             </VExpandXTransition>
@@ -289,17 +299,24 @@ export const VField = genericComponent<new <T>() => {
           { hasAppend && (
             <div
               class="v-field__append-inner"
-              onClick={ e => emit('click:append-inner', e) }
             >
-              { slots?.appendInner?.(VInput?.value) }
+              { slots?.appendInner?.(slotProps.value) }
 
               { props.appendInnerIcon && (
-                <VIcon icon={ props.appendInnerIcon } />
+                <VIcon
+                  onClick={ (e: MouseEvent) => emit('click:append-inner', e) }
+                  icon={ props.appendInnerIcon }
+                />
               ) }
             </div>
           ) }
 
-          <div class="v-field__outline">
+          <div
+            class={[
+              'v-field__outline',
+              textColorClasses.value,
+            ]}
+          >
             { isOutlined && (
               <>
                 <div class="v-field__outline__start" />

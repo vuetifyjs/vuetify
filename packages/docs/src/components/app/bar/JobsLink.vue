@@ -1,5 +1,6 @@
 <template>
   <app-tooltip-btn
+    to="/resources/jobs-for-vue/"
     class="jobs-link"
     path="jobs"
     @click="onClick"
@@ -9,7 +10,7 @@
         :value="newJobs.length"
         color="#ED561B"
         dot
-        location="top-left"
+        location="top-end"
       >
         <v-icon
           class="mx-1"
@@ -50,14 +51,6 @@
     // },
 
     setup () {
-      const to = {
-        name: 'Documentation',
-        params: {
-          category: 'resources',
-          page: 'jobs-for-vue',
-        },
-      }
-
       function onClick () {
         // this.$gtag.event('click', {
         //   event_category: 'toolbar',
@@ -67,7 +60,6 @@
       }
 
       return {
-        to,
         onClick,
         newJobs: [],
       }

@@ -30,7 +30,7 @@
         >
           <v-chip
             :disabled="loading"
-            close
+            closable
             @click:close="selected.splice(i, 1)"
           >
             <v-icon

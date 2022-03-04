@@ -62,7 +62,7 @@ describe('VList', () => {
       {
         title: 'Group',
         value: 'group',
-        children: [
+        $children: [
           {
             title: 'Child',
             subtitle: 'Subtitle',
@@ -91,7 +91,7 @@ describe('VList', () => {
       {
         title: 'Group',
         value: 'group',
-        children: [
+        $children: [
           {
             title: 'Child',
             subtitle: 'Subtitle',
