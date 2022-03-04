@@ -527,3 +527,11 @@ export class CircularBuffer<T = never> {
 
 export type UnionToIntersection<U> =
   (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+
+export function getEventCoordinates (e: MouseEvent | TouchEvent) {
+  if ('touches' in e) {
+    return { clientX: e.touches[0].clientX, clientY: e.touches[0].clientY }
+  }
+
+  return { clientX: e.clientX, clientY: e.clientY }
+}
