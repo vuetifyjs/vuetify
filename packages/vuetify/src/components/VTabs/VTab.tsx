@@ -84,20 +84,30 @@ export const VTab = defineComponent({
 
         const xy = isHorizontal.value ? 'x' : 'y'
         const XY = isHorizontal.value ? 'X' : 'Y'
+        const rightBottom = isHorizontal.value ? 'right' : 'bottom'
         const widthHeight = isHorizontal.value ? 'width' : 'height'
 
-        const delta = prevBox[xy] - nextBox[xy]
+        const prevPos = prevBox[xy]
+        const nextPos = nextBox[xy]
+        const delta = prevPos > nextPos
+          ? prevBox[rightBottom] - nextBox[rightBottom]
+          : prevBox[xy] - nextBox[xy]
         const origin =
           Math.sign(delta) > 0 ? (isHorizontal.value ? 'right' : 'bottom')
           : Math.sign(delta) < 0 ? (isHorizontal.value ? 'left' : 'top')
           : 'center'
         const size = Math.abs(delta) + (Math.sign(delta) < 0 ? prevBox[widthHeight] : nextBox[widthHeight])
-        const scale = size / nextBox[widthHeight]
+        const scale = size / Math.max(prevBox[widthHeight], nextBox[widthHeight])
+        const initialScale = prevBox[widthHeight] / nextBox[widthHeight]
 
         const sigma = 1.5
         nextEl.animate({
           backgroundColor: [color, ''],
-          transform: [`translate${XY}(${delta}px)`, `translate${XY}(${delta / sigma}px) scale${XY}(${(scale - 1) / sigma + 1})`, ''],
+          transform: [
+            `translate${XY}(${delta}px) scale${XY}(${initialScale})`,
+            `translate${XY}(${delta / sigma}px) scale${XY}(${(scale - 1) / sigma + 1})`,
+            '',
+          ],
           transformOrigin: Array(3).fill(origin),
         }, {
           duration: 225,
