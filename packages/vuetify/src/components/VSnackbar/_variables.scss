@@ -5,9 +5,11 @@ $snackbar-absolute-z-index: 1 !default;
 $snackbar-action-margin: 8px !default;
 $snackbar-background-color: #333333 !default;
 $snackbar-border-radius: settings.$border-radius-root !default;
+$snackbar-plain-opacity: .62 !default;
 $snackbar-bottom: 0 !default;
 $snackbar-btn-padding: 0 8px !default;
-$snackbar-color: hsla(0, 0%, 100%, .87) !default;
+$snackbar-background: #333333 !default;
+$snackbar-color: rgb(var(--v-theme-on-surface-variant)) !default;
 $snackbar-content-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size') !default;
 $snackbar-content-font-weight: tools.map-deep-get(settings.$typography, 'body-2', 'weight') !default;
 $snackbar-content-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
@@ -32,10 +34,10 @@ $snackbar-wrapper-padding: 0 !default;
 $snackbar-z-index: 1000 !default;
 
 $snackbar-variants: (
-  rgb(var(--v-theme-surface-variant)),
-  rgb(var(--v-theme-on-surface-variant)),
-  1,
-  1,
+  $snackbar-background,
+  $snackbar-color,
+  $snackbar-elevation,
+  $snackbar-plain-opacity,
   'v-snackbar'
 );
 

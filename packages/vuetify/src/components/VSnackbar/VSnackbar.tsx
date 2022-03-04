@@ -1,15 +1,19 @@
 // Styles
 import './VSnackbar.sass'
 
+// Components
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VSnackbarActions } from './VSnackbarActions'
+
 // Composables
-import { makePositionProps } from '@/composables/position'
-import { useProxiedModel } from '@/composables/proxiedModel'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { makePositionProps, usePosition } from '@/composables/position'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { makeVariantProps, useVariant } from '@/composables/variant'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onMounted, watch } from 'vue'
 import { defineComponent, useRender } from '@/util'
+import { onMounted, watch } from 'vue'
 
 export const VSnackbar = defineComponent({
   name: 'VSnackbar',
@@ -22,7 +26,6 @@ export const VSnackbar = defineComponent({
       default: '',
     },
     multiLine: Boolean,
-    text: Boolean,
     timeout: {
       type: [Number, String],
       default: 5000,
@@ -42,8 +45,9 @@ export const VSnackbar = defineComponent({
 
   setup (props, { slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
+    const { positionClasses, positionStyles } = usePosition(props)
 
-    const hasBackground = computed(() => !props.text && props.variant !== 'outlined')
+    // const hasBackground = computed(() => !props.text && props.variant !== 'outlined')
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
 
     watch(isActive, startTimeout)
@@ -74,20 +78,21 @@ export const VSnackbar = defineComponent({
         class={[
           'v-snackbar',
           {
-            'v-snackbar--absolute': props.absolute,
             'v-snackbar--active': isActive.value,
             'v-snackbar--bottom': props.bottom || !props.top,
             'v-snackbar--centered': props.centered,
-            'v-snackbar--has-background': hasBackground.value,
-            'v-snackbar--left': props.left,
+            'v-snackbar--end': props.right,
             'v-snackbar--multi-line': props.multiLine && !props.vertical,
-            'v-snackbar--right': props.right,
-            'v-snackbar--text': props.text,
+            'v-snackbar--start': props.left,
             'v-snackbar--top': props.top,
             'v-snackbar--vertical': props.vertical,
           },
+          positionClasses.value,
         ]}
-        style={ colorStyles.value }
+        style={[
+          colorStyles.value,
+          positionStyles.value,
+        ]}
       >
         <MaybeTransition transition={ props.transition }>
           <div
@@ -100,14 +105,34 @@ export const VSnackbar = defineComponent({
             onPointerenter={ onPointerenter }
             onPointerleave={ startTimeout }
           >
-            <div class={['v-snackbar__content', props.contentClass]} role="status" aria-live="polite">
-              { slots.default?.() }
-            </div>
-            <div class="v-snackbar__action">
-              { slots.action?.({
-                props: { class: 'v-snackbar__btn' },
-              }) }
-            </div>
+            { genOverlays(true, 'v-snackbar') }
+
+            { slots.default && (
+              <div
+                class={[
+                  'v-snackbar__content',
+                  props.contentClass,
+                ]}
+                role="status"
+                aria-live="polite"
+              >
+                { slots.default?.() }
+              </div>
+            ) }
+
+            <VDefaultsProvider
+              defaults={{
+                VBtn: {
+                  variant: 'text',
+                },
+              }}
+            >
+              { slots.actions && (
+                <VSnackbarActions>
+                  { slots.actions?.() }
+                </VSnackbarActions>
+              ) }
+            </VDefaultsProvider>
           </div>
         </MaybeTransition>
       </div>
