@@ -14,15 +14,21 @@
     &.v-field
       cursor: text
 
+  .v-field__input
+    input
+      align-self: flex-start
+      flex: 1 1
+
+  .v-field:not(.v-field--focused)
+    input
+      min-width: 0
+
 .v-autocomplete
   &__content
     overflow: hidden
 
     @include tools.elevation($autocomplete-content-elevation)
     @include tools.rounded($autocomplete-content-border-radius)
-
-  &__search-input
-    opacity: 0
 
   &__menu-icon
     order: 1
