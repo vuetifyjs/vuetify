@@ -2,63 +2,58 @@
   <v-sheet
     ref="root"
     :theme="isDark ? 'dark' : 'light'"
-    class="app-markup overflow-hidden pa-2"
+    :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
+    class="app-markup overflow-hidden border"
     dir="ltr"
+    outlined
     rounded
     v-bind="$attrs"
   >
-    <v-sheet
-      :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
-      class="border"
-      outlined
-      rounded
+    <v-toolbar
+      border="b"
+      class="px-1"
+      color="transparent"
+      flat
+      height="44"
     >
-      <v-toolbar
-        border="b"
-        class="px-1"
+      <v-sheet
+        v-if="resource"
+        class="text-body-2 px-3 pt-3 text-disabled"
         color="transparent"
-        flat
         height="44"
+        rounded="tl"
       >
-        <v-sheet
-          v-if="resource"
-          class="text-body-2 px-3 pt-3 text-disabled"
-          color="transparent"
-          height="44"
-          rounded="tl"
-        >
-          <v-icon icon="mdi-file-tree" class="mr-1" />
+        <v-icon icon="mdi-file-tree" class="mr-1" />
 
-          {{ resource }}
-        </v-sheet>
+        {{ resource }}
+      </v-sheet>
 
-        <v-spacer />
+      <v-spacer />
 
-        <v-tooltip anchor="bottom">
-          <template #activator="{ props }">
-            <v-btn
-              :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text'"
-              class="mr-1 text-disabled"
-              density="comfortable"
-              v-bind="props"
-              @click="copy"
-            />
-          </template>
+      <v-tooltip anchor="bottom">
+        <template #activator="{ props }">
+          <v-btn
+            :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text'"
+            class="mr-1 text-disabled"
+            density="comfortable"
+            v-bind="props"
+            @click="copy"
+          />
+        </template>
 
-          <span>{{ t('copy-example-source') }}</span>
-        </v-tooltip>
-      </v-toolbar>
+        <span>{{ t('copy-example-source') }}</span>
+      </v-tooltip>
+    </v-toolbar>
 
-      <div class="pa-4">
-        <slot>
-          <pre v-if="inline" :class="className">
-            <code :class="className" v-html="highlighted" />
-          </pre>
+    <div class="pa-4">
+      <slot>
+        <pre v-if="inline" :class="className">
+          <code :class="className" v-html="highlighted" />
+        </pre>
 
-          <code v-else :class="className" v-html="highlighted" />
-        </slot>
-      </div>
-    </v-sheet>
+        <code v-else :class="className" v-html="highlighted" />
+      </slot>
+    </div>
   </v-sheet>
 </template>
 
@@ -162,20 +157,16 @@
     &:not(:hover) .v-btn--copy .v-icon
       opacity: .4
 
-    pre, code
-      background: transparent
-      font-size: 1rem
-      font-weight: 300
-      margin: 0 !important
-
     > pre
       border-radius: inherit
 
     code,
     pre
       background: none
+      color: currentColor !important
       font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace
       font-size: 1rem
+      font-weight: 300
       hyphens: none
       line-height: 1.5
       margin: 0
@@ -190,13 +181,13 @@
 
     pre
       &::after
-        bottom: 1rem
+        bottom: .5rem
         color: hsla(0, 0%, 19%, 0.5)
         font-family: inherit
         font-size: 0.7rem
         font-weight: 700
         position: absolute
-        right: 20px
+        right: 12px
         text-transform: uppercase
 
     pre.language-bash::after
