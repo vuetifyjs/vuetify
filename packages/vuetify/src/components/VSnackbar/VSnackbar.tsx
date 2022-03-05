@@ -3,17 +3,16 @@ import './VSnackbar.sass'
 
 // Components
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VSnackbarActions } from './VSnackbarActions'
 
 // Composables
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { makePositionProps, usePosition } from '@/composables/position'
-import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
 import { onMounted, watch } from 'vue'
+import { defineComponent, useRender } from '@/util'
 
 export const VSnackbar = defineComponent({
   name: 'VSnackbar',
@@ -47,7 +46,6 @@ export const VSnackbar = defineComponent({
     const isActive = useProxiedModel(props, 'modelValue')
     const { positionClasses, positionStyles } = usePosition(props)
 
-    // const hasBackground = computed(() => !props.text && props.variant !== 'outlined')
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
 
     watch(isActive, startTimeout)
@@ -105,7 +103,7 @@ export const VSnackbar = defineComponent({
             onPointerenter={ onPointerenter }
             onPointerleave={ startTimeout }
           >
-            { genOverlays(true, 'v-snackbar') }
+            { genOverlays(false, 'v-snackbar') }
 
             { slots.default && (
               <div
@@ -120,19 +118,20 @@ export const VSnackbar = defineComponent({
               </div>
             ) }
 
-            <VDefaultsProvider
-              defaults={{
-                VBtn: {
-                  variant: 'text',
-                },
-              }}
-            >
-              { slots.actions && (
-                <VSnackbarActions>
+            { slots.actions && (
+              <VDefaultsProvider
+                defaults={{
+                  VBtn: {
+                    variant: 'text',
+                    ripple: false,
+                  },
+                }}
+              >
+                <div class="v-snackbar__actions">
                   { slots.actions?.() }
-                </VSnackbarActions>
-              ) }
-            </VDefaultsProvider>
+                </div>
+              </VDefaultsProvider>
+            ) }
           </div>
         </MaybeTransition>
       </div>

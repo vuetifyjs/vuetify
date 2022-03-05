@@ -6,7 +6,6 @@
 .v-snackbar
   bottom: $snackbar-bottom
   display: flex
-  font-size: $snackbar-font-size
   justify-content: center
   left: $snackbar-left
   pointer-events: none
@@ -44,31 +43,23 @@
 
   &__content
     flex-grow: 1
-    font-size: $snackbar-content-font-size
-    font-weight: $snackbar-content-font-weight
-    letter-spacing: $snackbar-content-letter-spacing
-    line-height: $snackbar-content-line-height
+    font-size: $snackbar-font-size
+    font-weight: $snackbar-font-weight
+    letter-spacing: $snackbar-letter-spacing
+    line-height: $snackbar-line-height
     margin-right: auto
     padding: $snackbar-content-padding
     text-align: initial
 
-  &-actions
+  &__actions
     align-items: center
     align-self: center
     display: flex
     margin-inline-end: $snackbar-action-margin
 
-  &__overlay
-    background-color: currentColor
-    border-radius: inherit
-    position: absolute
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
-    pointer-events: none
-    opacity: 0
-    transition: opacity 0.2s ease-in-out
+    & > .v-btn
+      padding: $snackbar-btn-padding
+      min-width: auto
 
   &--absolute
     height: 100%
@@ -99,14 +90,14 @@
   &--vertical &__wrapper
     flex-direction: column
 
-    .v-snackbar-actions
+    .v-snackbar__actions
       align-self: flex-end
       margin-bottom: $snackbar-vertical-action-margin-bottom
 
 .v-snackbar-transition
   &-enter-from
     &.v-snackbar__wrapper
-      transform: scale($snackbar-transition-wrapper-transform)
+      transform: scale($snackbar-transition-scale)
 
   &-enter-from,
   &-leave-to
