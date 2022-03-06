@@ -2,14 +2,14 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { getCurrentInstance, getUid, propsFactory } from '@/util'
 import { computed, inject, onBeforeUnmount, provide, ref } from 'vue'
 import { multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
-import { classicSelectStrategy, independentSelectStrategy, leafSelectStrategy } from './selectStrategies'
+import { classicSelectStrategy, independentSelectStrategy, independentSingleSelectStrategy, leafSelectStrategy } from './selectStrategies'
 
 // Types
 import type { InjectionKey, Prop, Ref } from 'vue'
 import type { SelectStrategyFn } from './selectStrategies'
 import type { OpenStrategyFn } from './openStrategies'
 
-export type SelectStrategy = 'single-leaf' | 'leaf' | 'independent' | 'classic' | SelectStrategyFn
+export type SelectStrategy = 'single-leaf' | 'leaf' | 'independent' | 'single-independent' | 'classic' | SelectStrategyFn
 export type OpenStrategy = 'single' | 'multiple' | OpenStrategyFn
 
 export interface NestedProps {
@@ -75,6 +75,7 @@ export const useNested = (props: NestedProps) => {
       case 'single-leaf': return leafSelectStrategy(true)
       case 'leaf': return leafSelectStrategy()
       case 'independent': return independentSelectStrategy
+      case 'single-independent': return independentSingleSelectStrategy
       case 'classic':
       default: return classicSelectStrategy
     }

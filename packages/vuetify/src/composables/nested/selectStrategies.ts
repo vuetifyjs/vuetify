@@ -57,6 +57,24 @@ export const independentSelectStrategy: SelectStrategy = {
   },
 }
 
+export const independentSingleSelectStrategy: SelectStrategy = {
+  select: ({ id, value, ...rest }) => {
+    return independentSelectStrategy.select({ ...rest, id, value, selected: new Map() })
+  },
+  in: (v, children, parents) => {
+    let map = new Map()
+
+    if (v?.length) {
+      map = independentSelectStrategy.in(v.slice(0, 1), children, parents)
+    }
+
+    return map
+  },
+  out: (v, children, parents) => {
+    return independentSelectStrategy.out(v, children, parents)
+  },
+}
+
 export const leafSelectStrategy = (single = false): SelectStrategy => {
   const strategy: SelectStrategy = {
     select: ({ id, value, selected, children }) => {
