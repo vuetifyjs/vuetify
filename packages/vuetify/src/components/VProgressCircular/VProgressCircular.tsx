@@ -7,6 +7,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useTextColor } from '@/composables/color'
+import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, ref, toRef, watchEffect } from 'vue'
@@ -14,7 +15,6 @@ import { convertToUnit, defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { useResizeObserver } from '@/composables/resizeObserver'
 
 export const VProgressCircular = defineComponent({
   name: 'VProgressCircular',
