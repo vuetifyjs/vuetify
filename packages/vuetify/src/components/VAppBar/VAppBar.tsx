@@ -70,7 +70,10 @@ export const VAppBar = defineComponent({
               'v-app-bar--bottom': props.position === 'bottom',
             },
           ]}
-          style={ layoutItemStyles.value }
+          style={{
+            ...layoutItemStyles.value,
+            height: undefined,
+          }}
           { ...toolbarProps }
           v-slots={ slots }
         />
