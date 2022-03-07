@@ -24,12 +24,12 @@
   }
 
   function generateApiItems (locale: string) {
-    return (routes as { path: string}[])
+    return routes
       .filter(route => route.path.includes(`${locale}/api/`))
       .sort((a, b) => a.path.localeCompare(b.path))
       .map(route => {
         return {
-          title: route.path.slice(route.path.lastIndexOf('/') + 1),
+          title: (route.meta!.title as string).slice(0, -4),
           to: route.path,
         }
       })
