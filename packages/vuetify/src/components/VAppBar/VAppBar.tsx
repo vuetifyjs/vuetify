@@ -7,9 +7,10 @@ import { filterToolbarProps, makeVToolbarProps, VToolbar } from '@/components/VT
 // Composables
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, ref, toRef } from 'vue'
+import { computed, toRef } from 'vue'
 import { defineComponent } from '@/util'
 
 // Types
@@ -45,15 +46,14 @@ export const VAppBar = defineComponent({
   },
 
   setup (props, { slots }) {
-    const vToolbarRef = ref()
     const isActive = useProxiedModel(props, 'modelValue')
-    const height = computed(() => vToolbarRef.value?.contentHeight)
+    const { resizeRef, contentRect } = useResizeObserver()
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       priority: computed(() => parseInt(props.priority, 10)),
       position: toRef(props, 'position'),
-      layoutSize: height,
-      elementSize: height,
+      layoutSize: computed(() => contentRect.value?.height ?? 0),
+      elementSize: computed(() => contentRect.value?.height ?? 0),
       active: isActive,
       absolute: toRef(props, 'absolute'),
     })
@@ -63,7 +63,7 @@ export const VAppBar = defineComponent({
 
       return (
         <VToolbar
-          ref={ vToolbarRef }
+          ref={ (vm: any) => resizeRef.value = vm?.$el }
           class={[
             'v-app-bar',
             {

@@ -6,7 +6,6 @@
   align-items: center
   display: flex
   flex: $system-bar-flex
-  height: $system-bar-height
   justify-content: $system-bar-justify-content
   padding: $system-bar-padding
   position: relative
@@ -24,9 +23,6 @@
 
   &--rounded
     @include tools.rounded($system-bar-border-radius)
-
-  &--window
-    height: $system-bar-window-height
 
     .v-icon
       font-size: $system-bar-window-icon-font-size
