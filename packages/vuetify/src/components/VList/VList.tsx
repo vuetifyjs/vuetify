@@ -15,13 +15,14 @@ import { useBackgroundColor } from '@/composables/color'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
 import { createList } from './list'
+import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, toRef } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { Prop } from 'vue'
+import type { Prop, PropType } from 'vue'
 import type { MakeSlots } from '@/util'
 import type { ListGroupActivatorSlot } from './VListGroup'
 
@@ -68,7 +69,7 @@ export const VList = genericComponent<new <T>() => {
     color: String,
     disabled: Boolean,
     lines: {
-      type: String,
+      type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
       default: 'one',
     },
     nav: Boolean,
@@ -104,8 +105,15 @@ export const VList = genericComponent<new <T>() => {
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
     const { open, select, activate } = useNested(props)
+    const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
 
     createList()
+
+    provideDefaults({
+      VListItem: {
+        lines: toRef(props, 'lines'),
+      },
+    })
 
     useRender(() => {
       return (
@@ -115,13 +123,13 @@ export const VList = genericComponent<new <T>() => {
             {
               'v-list--disabled': props.disabled,
               'v-list--nav': props.nav,
-              [`v-list--${props.lines}-line`]: true,
             },
             themeClasses.value,
             backgroundColorClasses.value,
             borderClasses.value,
             densityClasses.value,
             elevationClasses.value,
+            lineClasses.value,
             roundedClasses.value,
           ]}
           style={[

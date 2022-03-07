@@ -3,6 +3,8 @@ import './VListItem.sass'
 
 // Components
 import { VAvatar } from '@/components/VAvatar'
+import { VIcon } from '@/components/VIcon'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VListItemAvatar } from './VListItemAvatar'
 import { VListItemHeader } from './VListItemHeader'
 import { VListItemSubtitle } from './VListItemSubtitle'
@@ -30,6 +32,7 @@ import { useNestedItem } from '@/composables/nested/nested'
 
 // Types
 import type { MakeSlots } from '@/util'
+import type { PropType } from 'vue'
 
 type ListItemSlot = {
   isActive: boolean
@@ -66,6 +69,10 @@ export const VListItem = genericComponent<new () => {
     appendAvatar: String,
     appendIcon: String,
     disabled: Boolean,
+    lines: {
+      type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
+      default: false,
+    },
     link: Boolean,
     prependAvatar: String,
     prependIcon: String,
@@ -118,6 +125,7 @@ export const VListItem = genericComponent<new () => {
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
+    const lineClasses = computed(() => props.lines ? `v-list-item--${props.lines}-line` : undefined)
 
     const slotProps = computed(() => ({
       isActive: isActive.value,
@@ -153,6 +161,7 @@ export const VListItem = genericComponent<new () => {
             colorClasses.value,
             densityClasses.value,
             elevationClasses.value,
+            lineClasses.value,
             roundedClasses.value,
             variantClasses.value,
           ]}
@@ -171,17 +180,18 @@ export const VListItem = genericComponent<new () => {
           { genOverlays(isClickable || isActive.value, 'v-list-item') }
 
           { hasPrepend && (
-            slots.prepend
-              ? slots.prepend(slotProps.value)
-              : (
-                <VListItemAvatar left>
-                  <VAvatar
-                    density={ props.density }
-                    icon={ props.prependIcon }
-                    image={ props.prependAvatar }
-                  />
-                </VListItemAvatar>
-              )
+            <VDefaultsProvider
+              defaults={{
+                VAvatar: { image: props.prependAvatar },
+                VIcon: { icon: props.prependIcon },
+              }}
+            >
+              <VListItemAvatar start>
+                { props.prependAvatar && (<VAvatar />)}
+                { props.prependIcon && (<VIcon />)}
+                { slots.prepend?.(slotProps.value) }
+              </VListItemAvatar>
+            </VDefaultsProvider>
           ) }
 
           { hasHeader && (
@@ -209,17 +219,18 @@ export const VListItem = genericComponent<new () => {
           { slots.default?.(slotProps.value) }
 
           { hasAppend && (
-            slots.append
-              ? slots.append(slotProps.value)
-              : (
-                <VListItemAvatar right>
-                  <VAvatar
-                    density={ props.density }
-                    icon={ props.appendIcon }
-                    image={ props.appendAvatar }
-                  />
-                </VListItemAvatar>
-              )
+            <VDefaultsProvider
+              defaults={{
+                VAvatar: { image: props.appendAvatar },
+                VIcon: { icon: props.appendIcon },
+              }}
+            >
+              <VListItemAvatar end>
+                { slots.append?.(slotProps.value) }
+                { props.appendAvatar && (<VAvatar />)}
+                { props.appendIcon && (<VIcon />)}
+              </VListItemAvatar>
+            </VDefaultsProvider>
           ) }
         </Tag>
       )

@@ -32,27 +32,47 @@
   $root: &
 
   align-self: center
-  color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
+  display: flex
+  align-items: center
   transition: inherit
   transition-property: height, width
 
-  &--start
-    margin-inline-end: $list-item-avatar-margin-end
+  > .v-icon
+    opacity: var(--v-medium-emphasis-opacity)
 
-  &--end
-    margin-inline-start: $list-item-avatar-margin-start
+  .v-list-item &
+    &--start
+      > .v-avatar
+        margin-inline-end: $list-item-avatar-margin-end
+
+      > .v-icon
+        margin-inline-end: $list-item-icon-margin-end
+
+    &--end
+      > .v-avatar
+        margin-inline-start: $list-item-avatar-margin-start
+
+      > .v-icon
+        margin-inline-start: $list-item-icon-margin-start
 
   @at-root
-    @include tools.density('v-list', $list-density) using ($modifier)
-      &.v-list--three-line #{$root}
+    @include tools.density('v-list-item', $list-density) using ($modifier)
+      &.v-list-item--three-line #{$root}
         margin-top: $list-item-avatar-margin-y - $modifier
 
-  .v-list--two-line &
-    margin-top: $list-item-avatar-margin-y
-    margin-bottom: $list-item-avatar-margin-y
-
-  .v-list--three-line &
+  .v-list-item--three-line &
     align-self: flex-start
+
+.v-list-item-action
+  align-items: center
+  align-self: center
+  display: flex
+
+  &--start
+    margin-inline-end: 12px
+
+  &--end
+    margin-inline-start: 12px
 
 .v-list-item-media
   margin-top: $list-item-media-margin-top
@@ -64,11 +84,11 @@
   &--end
     margin-inline-start: $list-item-media-margin-start
 
-  .v-list--two-line &
+  .v-list-item--two-line &
     margin-top: $list-item-media-two-line-margin-top
     margin-bottom: $list-item-media-two-line-margin-bottom
 
-  .v-list--three-line &
+  .v-list-item--three-line &
     margin-top: $list-item-media-three-line-margin-top
     margin-bottom: $list-item-media-three-line-margin-bottom
 
@@ -84,11 +104,14 @@
   padding: $list-item-subtitle-padding
   text-overflow: ellipsis
 
-  .v-list--two-line &
+  .v-list-item--one-line &
     -webkit-line-clamp: 1
 
-  .v-list--three-line &
+  .v-list-item--two-line &
     -webkit-line-clamp: 2
+
+  .v-list-item--three-line &
+    -webkit-line-clamp: 3
 
   @include tools.typography($list-item-subtitle-typography...)
 
@@ -114,16 +137,16 @@
   $root: &
 
   @at-root
-    @include tools.density('v-list', $list-density) using ($modifier)
-      &.v-list--one-line #{$root}
+    @include tools.density('v-list-item', $list-density) using ($modifier)
+      &.v-list-item--one-line #{$root}
         min-height: $list-item-min-height + $modifier
         padding: (list.nth($list-item-padding, 1) + $modifier) list.nth($list-item-padding, 2)
 
-      &.v-list--two-line #{$root}
+      &.v-list-item--two-line #{$root}
         min-height: $list-item-two-line-min-height + $modifier
         padding: (list.nth($list-item-two-line-padding, 1) + $modifier) list.nth($list-item-two-line-padding, 2)
 
-      &.v-list--three-line #{$root}
+      &.v-list-item--three-line #{$root}
         min-height: $list-item-three-line-min-height + $modifier
         padding: (list.nth($list-item-three-line-padding, 1) + $modifier) list.nth($list-item-three-line-padding, 2)
 
