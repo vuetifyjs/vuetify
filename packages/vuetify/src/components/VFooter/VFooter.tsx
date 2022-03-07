@@ -26,7 +26,6 @@ export const VFooter = defineComponent({
     ...makeElevationProps(),
     ...makePositionProps(),
     ...makeRoundedProps(),
-    ...makeTagProps(),
     ...makeTagProps({ tag: 'footer' }),
     ...makeThemeProps(),
   },
