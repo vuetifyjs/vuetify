@@ -180,6 +180,7 @@ export const VFileInput = defineComponent({
                         readonly={ isReadonly.value }
                         disabled={ isDisabled.value }
                         multiple={ props.multiple }
+                        name={ props.name }
                         onClick={ e => {
                           e.stopPropagation()
 

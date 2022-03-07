@@ -208,6 +208,7 @@ export const VTextField = genericComponent<new <T>() => {
                           placeholder={ props.placeholder }
                           size={ 1 }
                           type={ props.type }
+                          name={ props.name }
                           onFocus={ onFocus }
                           onBlur={ () => (isFocused.value = false) }
                           { ...slotProps }

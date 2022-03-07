@@ -235,6 +235,7 @@ export const VTextarea = defineComponent({
                         disabled={ isDisabled.value }
                         placeholder={ props.placeholder }
                         rows={ props.rows }
+                        name={ props.name }
                         onFocus={ onFocus }
                         onBlur={ () => (isFocused.value = false) }
                         { ...slotProps }
