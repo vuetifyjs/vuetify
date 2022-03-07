@@ -7,9 +7,10 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useTextColor } from '@/composables/color'
+import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed, ref, toRef, watchEffect } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 
 // Types
@@ -44,26 +45,37 @@ export const VProgressCircular = defineComponent({
     const MAGIC_RADIUS_CONSTANT = 20
     const CIRCUMFERENCE = 2 * Math.PI * MAGIC_RADIUS_CONSTANT
 
+    const root = ref<HTMLElement>()
+
     const { themeClasses } = provideTheme(props)
     const { sizeClasses, sizeStyles } = useSize(props)
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
     const { textColorClasses: underlayColorClasses, textColorStyles: underlayColorStyles } = useTextColor(toRef(props, 'bgColor'))
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
+    const { resizeRef, contentRect } = useResizeObserver()
 
     const normalizedValue = computed(() => Math.max(0, Math.min(100, parseFloat(props.modelValue))))
     const width = computed(() => Number(props.width))
     const size = computed(() => {
       // Get size from element if size prop value is small, large etc
-      return sizeStyles.value ? Number(props.size) : intersectionRef.value
-        ? intersectionRef.value.getBoundingClientRect().width : Math.max(width.value, 32)
+      return sizeStyles.value
+        ? Number(props.size)
+        : contentRect.value
+          ? contentRect.value.width
+          : Math.max(width.value, 32)
     })
     const diameter = computed(() => (MAGIC_RADIUS_CONSTANT / (1 - width.value / size.value)) * 2)
     const strokeWidth = computed(() => width.value / size.value * diameter.value)
     const strokeDashOffset = computed(() => convertToUnit(((100 - normalizedValue.value) / 100) * CIRCUMFERENCE))
 
+    watchEffect(() => {
+      intersectionRef.value = root.value
+      resizeRef.value = root.value
+    })
+
     return () => (
       <props.tag
-        ref={ intersectionRef }
+        ref={ root }
         class={[
           'v-progress-circular',
           {
