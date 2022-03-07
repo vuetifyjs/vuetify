@@ -22,6 +22,7 @@
             label="Contained"
             variant="contained"
             clearable
+            clear-icon="mdi-delete"
           ></v-text-field>
         </v-col>
 
@@ -46,6 +47,7 @@
             label="Outlined"
             variant="outlined"
             clearable
+            clear-icon="mdi-cancel"
           ></v-text-field>
         </v-col>
       </v-row>
