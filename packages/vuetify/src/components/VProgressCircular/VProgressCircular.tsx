@@ -52,14 +52,17 @@ export const VProgressCircular = defineComponent({
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
     const { textColorClasses: underlayColorClasses, textColorStyles: underlayColorStyles } = useTextColor(toRef(props, 'bgColor'))
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
-    const { resizeRef, borderBoxSize } = useResizeObserver()
+    const { resizeRef, contentRect } = useResizeObserver()
 
     const normalizedValue = computed(() => Math.max(0, Math.min(100, parseFloat(props.modelValue))))
     const width = computed(() => Number(props.width))
     const size = computed(() => {
       // Get size from element if size prop value is small, large etc
-      return sizeStyles.value ? Number(props.size) : borderBoxSize.value
-        ? borderBoxSize.value.inlineSize : Math.max(width.value, 32)
+      return sizeStyles.value
+        ? Number(props.size)
+        : contentRect.value
+          ? contentRect.value.width
+          : Math.max(width.value, 32)
     })
     const diameter = computed(() => (MAGIC_RADIUS_CONSTANT / (1 - width.value / size.value)) * 2)
     const strokeWidth = computed(() => width.value / size.value * diameter.value)
