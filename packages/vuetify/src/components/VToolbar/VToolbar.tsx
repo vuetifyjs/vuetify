@@ -174,9 +174,7 @@ export const VToolbar = genericComponent<new () => {
       )
     })
 
-    return useForwardRef({
-      //
-    })
+    return useForwardRef({ contentHeight })
   },
 })
 
