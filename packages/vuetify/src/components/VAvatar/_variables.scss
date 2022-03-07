@@ -3,7 +3,7 @@
 @use "../../styles/tools/functions";
 
 // Defaults
-$avatar-background: rgb(var(--v-theme-surface)) !default;
+$avatar-background: transparent !default;
 $avatar-border-radius: map.get(variables.$rounded, 'circle') !default;
 $avatar-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $avatar-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
