@@ -77,15 +77,15 @@ export const VSlideGroup = defineComponent({
     const isHorizontal = computed(() => props.direction === 'horizontal')
 
     const { resizeRef: containerRef, contentRect: containerRect } = useResizeObserver()
-    const { resizeRef: contentRef, contentRect } = useResizeObserver()
+    const contentRef = ref<HTMLElement>()
 
     watchEffect(() => {
-      if (!containerRect.value || !contentRect.value) return
+      if (!containerRect.value || !contentRef.value) return
 
       const sizeProperty = isHorizontal.value ? 'width' : 'height'
 
       containerSize.value = containerRect.value[sizeProperty]
-      contentSize.value = contentRect.value[sizeProperty]
+      contentSize.value = contentRef.value.getBoundingClientRect()[sizeProperty]
 
       isOverflowing.value = containerSize.value + 1 < contentSize.value
     })
@@ -343,9 +343,9 @@ export const VSlideGroup = defineComponent({
             ref={ contentRef }
             class="v-slide-group__content"
             style={ contentStyles.value }
-            onTouchstart={ onTouchstart }
-            onTouchmove={ onTouchmove }
-            onTouchend={ onTouchend }
+            onTouchstartPassive={ onTouchstart }
+            onTouchmovePassive={ onTouchmove }
+            onTouchendPassive={ onTouchend }
             onFocusin={ onFocusin }
             onFocusout={ onFocusout }
             onKeydown={ onKeydown }
