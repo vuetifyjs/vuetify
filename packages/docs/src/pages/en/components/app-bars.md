@@ -26,14 +26,6 @@ The `v-app-bar` component is used for application-wide actions and information.
 
 <entry />
 
-## API
-
-| Component | Description |
-| - | - |
-| [v-app-bar](/api/v-app-bar/) | Primary Component |
-| [v-app-bar-nav-icon](/api/v-app-bar-nav-icon/) | A customized [v-btn](/components/buttons/) component that uses a default *icon* value of **$menu** |
-| [v-app-bar-title](/api/v-app-bar-title/) | An extension of `v-toolbar-title` that is used for scrolling techniques |
-
 ## Anatomy
 
 The recommended placement of elements inside of `v-app-bar` is:
@@ -46,12 +38,20 @@ The recommended placement of elements inside of `v-app-bar` is:
 ![App Bar Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-app-bar/v-app-bar-anatomy.png)
 
 | Element / Area | Description |
-| ------------ | ---------- |
+| - | - |
 | 1. Container | The App Bar container holds all `v-app-bar` components |
 | 2. App Bar Icon (optional) | A styled icon button component created that is often used to control the state of a `v-navigation drawer` |
 | 3. Title (optional) | A heading with increased **font-size** |
 | 4. Action items (optional) | Used to highlight certain actions not in the overflow menu |
 | 5. Overflow menu (optional) | Place less often used action items into a hidden menu |
+
+## API
+
+| Component | Description |
+| - | - |
+| [v-app-bar](/api/v-app-bar/) | Primary Component |
+| [v-app-bar-nav-icon](/api/v-app-bar-nav-icon/) | A customized [v-btn](/components/buttons/) component that uses a default *icon* value of **$menu** |
+| [v-app-bar-title](/api/v-app-bar-title/) | An extension of `v-toolbar-title` that is used for scrolling techniques |
 
 <alert type="warning">
 
