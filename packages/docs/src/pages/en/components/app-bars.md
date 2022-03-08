@@ -14,7 +14,9 @@ related:
 
 The `v-app-bar` component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation. The app-bar component works great in conjunction with a [v-navigation-drawer](/components/navigation-drawers) for providing site navigation in your application.
 
-<entry />
+![App Bar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-app-bar/v-app-bar-entry.png)
+
+---
 
 ## Usage
 
@@ -22,9 +24,15 @@ The `v-app-bar` component is used for application-wide actions and information.
 
 <usage name="v-app-bar" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-app-bar](/api/v-app-bar/) | Primary Component |
+| [v-app-bar-nav-icon](/api/v-app-bar-nav-icon/) | A customized [v-btn](/components/buttons/) component that uses a default *icon* value of **$menu** |
+| [v-app-bar-title](/api/v-app-bar-title/) | An extension of `v-toolbar-title` that is used for scrolling techniques |
 
 ## Anatomy
 
@@ -35,7 +43,7 @@ The recommended placement of elements inside of `v-app-bar` is:
 * Place contextual actions to the right of navigation
 * Place overflow actions to the far right
 
-**[FUTURE IMG LOCATION]**
+![App Bar Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-app-bar/v-app-bar-anatomy.png)
 
 | Element / Area | Description |
 | ------------ | ---------- |
