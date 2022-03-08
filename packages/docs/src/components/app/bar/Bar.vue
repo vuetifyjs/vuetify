@@ -7,7 +7,7 @@
   >
     <app-bar-logo
       :alt="lgAndUp"
-      class="ml-4 mr-2"
+      class="mr-2"
     />
 
     <v-app-bar-nav-icon

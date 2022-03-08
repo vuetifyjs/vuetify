@@ -12,7 +12,7 @@ related:
 
 # Text fields
 
-Text fields components are used for collecting user provided information.
+Text field components are used for collecting user provided information.
 
 <entry />
 
@@ -38,33 +38,27 @@ Use a **counter** prop to inform a user of the character limit. The counter does
 
 #### Clearable
 
-When **clearable**, you can customize the clear icon with **clear-icon**.
+The **clearable** prop appends an icon that clears the `text field` when clicked. The clearable icon is easily customizable by using **clearable** in combination with the **clear-icon** prop.
 
 <example file="v-text-field/prop-clearable" />
 
 #### Custom colors
 
-You can optionally change a text field into any color in the Material design palette. Below is an example implementation of a custom form with validation.
+The **color** prop provides an easy way to change the color of your text field.
 
 <example file="v-text-field/prop-custom-colors" />
 
-#### Dense
+#### Density
 
-You can reduce the text field height with **dense** prop.
+The **density** prop decreases the height of the text field based upon 1 of 3 levels of density; **default**, **comfortable**, and **compact**.
 
 <example file="v-text-field/prop-dense" />
 
 #### Disabled and readonly
 
-Text fields can be **disabled** or **readonly**.
+The state of a text field can be changed by providing the **disabled** or **readonly** props.
 
 <example file="v-text-field/prop-disabled-and-readonly" />
-
-#### Filled
-
-Text fields can be used with an alternative box design.
-
-<example file="v-text-field/prop-filled" />
 
 #### Hide details
 
@@ -84,12 +78,6 @@ You can add icons to the text field with **prepend-icon**, **append-icon** and *
 
 <example file="v-text-field/prop-icon" />
 
-#### Outlined
-
-Text fields can be used with an alternative outlined design.
-
-<example file="v-text-field/prop-outlined" />
-
 #### Prefixes and suffixes
 
 The **prefix** and **suffix** properties allows you to prepend and append inline non-modifiable text next to the text field.
@@ -108,17 +96,17 @@ The **prefix** and **suffix** properties allows you to prepend and append inline
 
 <example file="v-text-field/prop-single-line" />
 
-#### Contained
-
-Text fields can be used with an alternative contained design.
-
-<example file="v-text-field/prop-contained" />
-
 #### Validation
 
 Vuetify includes simple validation through the **rules** prop. The prop accepts a mixed array of types `function`, `boolean` and `string`. When the input value changes, each element in the array will be validated. Functions pass the current v-model as an argument and must return either `true` / `false` or a `string` containing an error message.
 
 <example file="v-text-field/prop-validation" />
+
+#### Variant
+
+The **variant** prop provides an easy way to customize the style of your text field. The following values are valid options: **contained**, **filled**, **outlined**, **plain**, and **underlined**.
+
+<example file="v-text-field/prop-variant" />
 
 ### Events
 

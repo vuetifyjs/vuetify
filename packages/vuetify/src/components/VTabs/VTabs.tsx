@@ -59,12 +59,17 @@ export const VTabs = defineComponent({
     optional: Boolean,
     right: Boolean,
     sliderColor: String,
+    modelValue: null,
 
     ...makeDensityProps(),
     ...makeTagProps(),
   },
 
-  setup (props, { slots, attrs }) {
+  emits: {
+    'update:modelValue': (v: unknown) => true,
+  },
+
+  setup (props, { slots, emit }) {
     const parsedItems = computed(() => parseItems(props.items))
     const { densityClasses } = useDensity(props)
 
@@ -98,7 +103,8 @@ export const VTabs = defineComponent({
         symbol={ VTabsSymbol }
         mandatory="force"
         direction={ props.direction }
-        { ...attrs }
+        modelValue={ props.modelValue }
+        onUpdate:modelValue={ v => emit('update:modelValue', v) }
       >
         { slots.default ? slots.default() : parsedItems.value.map(item => (
           <VTab { ...item } key={ item.title } />

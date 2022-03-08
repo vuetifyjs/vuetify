@@ -1,5 +1,9 @@
 <template>
-  <figure class="mb-6">
+  <figure
+    :class="[
+      caption ? 'mb-6' : 'mb-10'
+    ]"
+  >
     <app-img
       v-bind="attrs"
     />
@@ -27,7 +31,7 @@
     setup (props, { attrs }) {
       return {
         attrs,
-        caption: props.name || attrs.alt,
+        caption: attrs.title === 'null' ? null : attrs.title,
       }
     },
   })

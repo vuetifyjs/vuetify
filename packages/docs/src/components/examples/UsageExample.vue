@@ -2,7 +2,7 @@
   <div>
     <v-toolbar
       border="b"
-      class="px-2"
+      class="ps-1 pe-2"
       density="compact"
       flat
     >
@@ -11,7 +11,7 @@
         class="py-2"
         mandatory
       >
-        <v-btn value="default">Default</v-btn>
+        <v-btn value="default" rounded="tl">Default</v-btn>
 
         <v-btn
           v-for="(option, i) in options"
@@ -65,7 +65,9 @@
       </v-navigation-drawer>
     </v-layout>
 
-    <app-markup :code="formatAttributes" class="pt-0" />
+    <div class="pa-3">
+      <app-markup :code="formatAttributes" />
+    </div>
   </div>
 </template>
 

@@ -10,7 +10,7 @@ $app-bar-border-thin-width: 0 0 thin !default;
 $app-bar-border-width: 0 !default;
 $app-bar-collapsed-border-radius: 24px !default;
 $app-bar-collapsed-max-width: 112px !default;
-$app-bar-color: rgb(var(--v-theme-on-surface)) !default;
+$app-bar-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $app-bar-density-comfortable-padding: 4px !default;
 $app-bar-density-compact-padding: 0 !default;
 $app-bar-density-default-padding: 8px !default;

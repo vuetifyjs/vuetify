@@ -1,7 +1,7 @@
 // Utilities
 import { computed, inject, provide, ref } from 'vue'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { propsFactory } from '@/util'
+import { consoleWarn, propsFactory } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
@@ -106,6 +106,10 @@ export function createForm (props: FormProps) {
 
   provide(FormKey, {
     register: (id, validate, reset, resetValidation) => {
+      if (items.value.some(item => item.id === id)) {
+        consoleWarn(`Duplicate input name "${id}"`)
+      }
+
       items.value.push({
         id,
         validate,

@@ -10,6 +10,6 @@
     "vertical": "Stacks snackbar content on top of the actions (button)."
   },
   "slots": {
-    "action": "Used to bind styles to [v-btn](/components/buttons) to match MD2 specification."
+    "actions": "Used to bind styles to [v-btn](/components/buttons) to match MD2 specification."
   }
 }
