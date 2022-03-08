@@ -1,8 +1,12 @@
 // Utility
+import type { PropType } from 'vue'
 import { computed, defineComponent, ref } from 'vue'
 import { useRender, wrapInArray } from '@/util'
 import { VAutocomplete } from '../VAutocomplete'
 import { useProxiedModel } from '@/composables/proxiedModel'
+
+// Types
+export type VComboboxItem = number | string | Record<string, any>
 
 export const VCombobox = defineComponent({
   name: 'VCombobox',
@@ -13,11 +17,11 @@ export const VCombobox = defineComponent({
       default: true,
     },
     items: {
-      type: Array,
+      type: Array as PropType<VComboboxItem[]>,
       default: () => ([]),
     },
     modelValue: {
-      type: [Number, String, Array],
+      type: [Number, String, Array] as PropType<VComboboxItem | VComboboxItem[]>,
       default: () => ([]),
     },
     multiple: Boolean,
@@ -37,13 +41,20 @@ export const VCombobox = defineComponent({
     const filteredItems = computed(() => {
       return vAutocompleteRef.value?.filteredItems.value ?? []
     })
+
     const items = computed(() => {
-      const array = [...props.items]
+      const array = props.items.map(item => (
+        typeof item === 'object'
+          ? item
+          : { title: item, value: item }
+      ))
 
       for (const value of wrapInArray(model.value)) {
-        if (!array.includes(value) && value) {
-          array.push(value)
-        }
+        const val = typeof value === 'object' ? value?.value : value
+
+        if (array.find(item => item.value === val)) continue
+
+        array.push(val)
       }
 
       return array
