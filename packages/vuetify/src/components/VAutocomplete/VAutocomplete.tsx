@@ -93,7 +93,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
       (v: any) => props.multiple ? v : v[0]
     )
     const menu = ref(false)
-    const active = computed({
+    const selected = computed({
       get: () => model.value,
       set: val => {
         model.value = val
@@ -174,7 +174,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
       activator.value = val.$el.querySelector('.v-input__control')
     })
 
-    watch(() => active.value, () => {
+    watch(() => selected.value, () => {
       if (!isFocused.value || props.multiple) return
 
       search.value = selections.value[0]?.title
@@ -237,8 +237,8 @@ export const VAutocomplete = genericComponent<new <T>() => {
                     transition={ props.transition }
                   >
                     <VList
-                      v-model:active={ active.value }
-                      activeStrategy={ props.multiple ? 'multiple' : 'single' }
+                      v-model:selected={ selected.value }
+                      selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                     >
                       { !filteredItems.value.length && !props.hideNoData && (
                         <VListItem title={ t(props.noDataText) } />
