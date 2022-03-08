@@ -6,5 +6,7 @@
   display: flex
 
   &.v-toolbar
-    @include tools.elevation($app-bar-elevation)
     @include tools.theme($app-bar-theme...)
+
+    &:not(.v-toolbar--flat)
+      @include tools.elevation($app-bar-elevation)
