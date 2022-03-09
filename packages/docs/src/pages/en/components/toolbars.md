@@ -1,4 +1,5 @@
 ---
+nav: Toolbars
 meta:
   title: Toolbar component
   description: The toolbar component sits above the content that it affects and provides an area for labeling and additional actions.
@@ -19,7 +20,7 @@ The `v-toolbar` component is pivotal to any graphical user interface (GUI), as i
 
 A toolbar is a flexible container that can be used in a number of ways. By default, the toolbar is 64px high on desktop and 56px high on mobile. There are a number of helper components available to use with the toolbar. The `v-toolbar-title` is used for displaying a title and `v-toolbar-items` allow [v-btn](/components/buttons) to extend full height.
 
-<usage name="v-toolbar" />
+<!-- <usage name="v-toolbar" /> -->
 
 ## API
 

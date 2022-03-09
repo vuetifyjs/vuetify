@@ -1,4 +1,5 @@
 ---
+nav: Radio buttons
 meta:
   title: Radio button component
   description: A radio button allows the user to choose only one of a set of options using a radio group.

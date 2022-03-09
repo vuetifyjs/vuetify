@@ -7,7 +7,7 @@ $btn-group-border-radius: settings.$border-radius-root !default;
 $btn-group-border-style: settings.$border-style-root !default;
 $btn-group-border-thin-width: thin !default;
 $btn-group-border-width: 0 !default;
-$btn-group-color: rgb(var(--v-theme-on-surface)) !default;
+$btn-group-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $btn-group-height: 48px !default;
 $btn-group-elevation: 0 !default;
 $btn-group-tile-border-radius: 0 !default;

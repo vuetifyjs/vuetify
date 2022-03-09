@@ -1,28 +1,20 @@
-// Styles
-import './VAppBarTitle.sass'
-
 // Composables
-import { makeTagProps } from '@/composables/tag'
+import { VToolbarTitle } from '@/components/VToolbar'
 
 // Utilities
 import { defineComponent } from '@/util'
 
 export const VAppBarTitle = defineComponent({
+  ...VToolbarTitle,
+
   name: 'VAppBarTitle',
 
-  props: {
-    ...makeTagProps({ tag: 'header' }),
-  },
-
-  setup (props, { slots }) {
+  setup (_, { slots }) {
     return () => (
-      <props.tag class="v-app-bar-title">
-        { slots.default && (
-          <div class="v-app-bar-title__placeholder">
-            { slots.default() }
-          </div>
-        ) }
-      </props.tag>
+      <VToolbarTitle
+        class="v-app-bar-title"
+        v-slots={ slots }
+      />
     )
   },
 })

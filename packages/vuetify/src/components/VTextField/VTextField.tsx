@@ -96,14 +96,14 @@ export const VTextField = genericComponent<new <T>() => {
     const isFocused = ref(false)
     const inputRef = ref<HTMLInputElement>()
     const isActive = computed(() => (
-      isFocused.value ||
       activeTypes.includes(props.type) ||
-      props.persistentPlaceholder
+      props.persistentPlaceholder ||
+      isFocused.value
     ))
     const messages = computed(() => {
       return props.messages.length
         ? props.messages
-        : (isActive.value || props.persistentHint) ? props.hint : ''
+        : (isFocused.value || props.persistentHint) ? props.hint : ''
     })
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
@@ -142,6 +142,7 @@ export const VTextField = genericComponent<new <T>() => {
           class={[
             'v-text-field',
             {
+              'v-text-field--persistent-placeholder': props.persistentPlaceholder,
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
               'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
@@ -163,7 +164,6 @@ export const VTextField = genericComponent<new <T>() => {
             }) => (
               <VField
                 ref={ vFieldRef }
-                focused={ isFocused.value }
                 onMousedown={ (e: MouseEvent) => {
                   if (e.target === inputRef.value) return
 
@@ -175,8 +175,10 @@ export const VTextField = genericComponent<new <T>() => {
                 onClick:appendInner={ (e: MouseEvent) => emit('click:append-inner', e) }
                 role="textbox"
                 { ...fieldProps }
+                active={ isActive.value || isDirty.value }
+                dirty={ isDirty.value || props.dirty }
+                focused={ isFocused.value }
                 error={ isValid.value === false }
-                modelValue={ isDirty.value }
               >
                 {{
                   ...slots,
@@ -206,6 +208,7 @@ export const VTextField = genericComponent<new <T>() => {
                           placeholder={ props.placeholder }
                           size={ 1 }
                           type={ props.type }
+                          name={ props.name }
                           onFocus={ onFocus }
                           onBlur={ () => (isFocused.value = false) }
                           { ...slotProps }

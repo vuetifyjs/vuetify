@@ -6,8 +6,9 @@ function addCodeRules (md: MarkdownIt) {
 
   md.renderer.rules.fence = function (tokens, idx, options, env, self) {
     const handler = fence || self.renderToken
+    const token = tokens[idx]
 
-    return `<app-markup class="mb-4">${handler(tokens, idx, options, env, self)}</app-markup>`
+    return `<app-markup resource="${token?.attrs?.[0][1] ?? ''}" class="mb-4">${handler(tokens, idx, options, env, self)}</app-markup>`
   }
 }
 

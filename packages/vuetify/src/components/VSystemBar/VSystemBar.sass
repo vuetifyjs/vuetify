@@ -4,35 +4,29 @@
 
 .v-system-bar
   align-items: center
-  background: $system-bar-background
   display: flex
   flex: $system-bar-flex
-  font-size: $system-bar-font-size
-  font-weight: $system-bar-font-weight
   height: $system-bar-height
-  justify-content: flex-end
+  justify-content: $system-bar-justify-content
   padding: $system-bar-padding
   position: relative
+  text-align: $system-bar-text-align
 
-  i
-    color: $system-bar-icon-color
+  .v-icon
     font-size: $system-bar-icon-font-size
+    margin-inline-start: $system-bar-icon-margin-inline-start
+    opacity: $system-bar-icon-opacity
 
-  // Defaults missing in variables @include border($system-bar-query)
   @include tools.elevation($system-bar-elevation)
   @include tools.position($system-bar-positions)
-  @include tools.rounded($system-bar-border-radius)
-
-  text-align: end
-
-  &--lights-out
-    background: $system-bar-lights-out-background
+  @include tools.theme($system-bar-theme...)
+  @include tools.typography($system-bar-typography...)
 
   &--rounded
-    @include tools.rounded($system-bar-rounded-border-radius)
+    @include tools.rounded($system-bar-border-radius)
 
   &--window
     height: $system-bar-window-height
 
-    i
+    .v-icon
       font-size: $system-bar-window-icon-font-size

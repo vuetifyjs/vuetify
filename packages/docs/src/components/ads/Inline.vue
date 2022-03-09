@@ -1,12 +1,15 @@
 <template>
-  <base-ad>
-    <app-markdown
-      v-if="ad"
-      class="v-markdown--inline d-inline"
-      tag="span"
-      :content="description"
-    />
-  </base-ad>
+  <div class="d-none">
+    <!-- TODO: resolve style issues -->
+    <base-ad>
+      <app-markdown
+        v-if="ad"
+        class="v-markdown--inline d-inline"
+        tag="span"
+        :content="description"
+      />
+    </base-ad>
+  </div>
 </template>
 
 <script>

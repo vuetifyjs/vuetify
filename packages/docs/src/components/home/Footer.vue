@@ -12,7 +12,7 @@
             class="mx-auto"
             contain
             height="64px"
-            src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-dark.svg"
+            src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-v3-slim-light.svg"
             width="64px"
           />
         </v-col>

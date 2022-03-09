@@ -1,4 +1,5 @@
 ---
+nav: Scroll
 meta:
   title: Scroll directive
   description: The scroll directive gives you the ability to conditionally invoke methods when the screen or an element are scrolled.

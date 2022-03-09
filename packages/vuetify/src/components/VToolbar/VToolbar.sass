@@ -4,7 +4,7 @@
 
 // Block
 .v-toolbar
-  align-items: flex-startE
+  align-items: flex-start
   display: flex
   flex-direction: column
   justify-content: space-between
@@ -16,9 +16,9 @@
   transition-property: height, transform, max-width
   transition: $toolbar-transition
 
-  @include tools.theme($toolbar-theme...)
   @include tools.elevation($toolbar-elevation)
   @include tools.rounded($toolbar-border-radius)
+  @include tools.theme($toolbar-theme...)
 
   @at-root
     @include tools.density('v-toolbar', $toolbar-density) using ($modifier)
@@ -32,6 +32,9 @@
   &--collapse
     max-width: $toolbar-collapsed-max-width
     overflow: hidden
+
+    .v-toolbar-title
+      display: none
 
     @include tools.ltr()
       border-bottom-right-radius: $toolbar-collapsed-border-radius
@@ -76,6 +79,9 @@
   > .v-btn:first-child
     margin-inline-start: $toolbar-prepend-btn-margin-start
 
+  + .v-toolbar-title
+    padding-inline-start: $toolbar-title-padding
+
 .v-toolbar__append
   margin-inline-start: auto
 
@@ -86,7 +92,6 @@
   flex: 1 1
   font-size: $toolbar-title-font-size
   min-width: 0
-  padding-left: $toolbar-title-padding
 
   @include tools.typography($toolbar-title-typography...)
 

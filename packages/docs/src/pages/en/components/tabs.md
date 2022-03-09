@@ -1,4 +1,5 @@
 ---
+nav: Tabs
 meta:
   title: Tabs component
   description: The tabs component provides a way to organize and navigate between groups of content that are related at the same level of hierarchy.

@@ -24,7 +24,7 @@
       const theme = useTheme()
 
       const logo = computed(() => {
-        return `vuetify-logo-${theme.current.value}-atom.svg`
+        return `vuetify-logo-v3-${theme.current.value}.svg`
       })
 
       return { logo }

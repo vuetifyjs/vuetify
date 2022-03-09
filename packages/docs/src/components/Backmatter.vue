@@ -28,16 +28,20 @@
         :key="i"
         cols="12"
         sm="6"
-        lg="4"
+        md="4"
       >
         <app-sheet>
           <v-list-item
-            :href="item.href"
+            :to="item.href"
             :title="item.title"
             :subtitle="item.subtitle"
           >
             <template #prepend>
-              <v-icon :icon="item.icon" :color="item.color" />
+              <v-icon
+                :icon="item.icon"
+                :color="item.color"
+                class="mr-5 ml-2"
+              />
             </template>
           </v-list-item>
         </app-sheet>
@@ -58,8 +62,7 @@
   import { computed } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { useRoute } from 'vue-router'
-  import { rpath } from '@/util/routes'
-  import generatedRoutes from 'virtual:generated-pages'
+  import { generatedRoutes, rpath } from '@/util/routes'
 
   const categoryIcons: Record<string, { icon: string, color: string }> = {
     api: {

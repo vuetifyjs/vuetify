@@ -1,4 +1,5 @@
 ---
+nav: Textareas
 meta:
   title: Textarea component
   description: The textarea component is a text field that accepts lengthy textual input from users.

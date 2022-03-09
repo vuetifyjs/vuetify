@@ -1,5 +1,5 @@
 // Utilities
-import { camelize, Fragment, isRef, ref } from 'vue'
+import { camelize, Fragment } from 'vue'
 
 // Types
 import type { ComponentInternalInstance, ComponentPublicInstance, InjectionKey, Ref, Slots, VNode, VNodeChild } from 'vue'
@@ -419,8 +419,10 @@ export function camelizeObjectKeys (obj: Record<string, any> | null | undefined)
 export function mergeDeep (
   source: Record<string, any> = {},
   target: Record<string, any> = {},
-  out: Record<string, any> = {},
+  arrayFn?: (a: unknown[], b: unknown[]) => unknown[],
 ) {
+  const out: Record<string, any> = {}
+
   for (const key in source) {
     out[key] = source[key]
   }
@@ -435,7 +437,13 @@ export function mergeDeep (
       isObject(sourceProperty) &&
       isObject(targetProperty)
     ) {
-      out[key] = mergeDeep(sourceProperty, targetProperty)
+      out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn)
+
+      continue
+    }
+
+    if (Array.isArray(sourceProperty) && Array.isArray(targetProperty) && arrayFn) {
+      out[key] = arrayFn(sourceProperty, targetProperty)
 
       continue
     }
@@ -478,12 +486,6 @@ export function toKebabCase (str = '') {
 }
 
 export type MaybeRef<T> = T | Ref<T>
-
-export type ExtractMaybeRef<P> = P extends MaybeRef<infer T> ? T : P;
-
-export function wrapInRef <T> (x: T) {
-  return (isRef(x) ? x : ref(x)) as Ref<ExtractMaybeRef<T>>
-}
 
 export function findChildren (vnode?: VNodeChild): ComponentInternalInstance[] {
   if (!vnode || typeof vnode !== 'object') {
@@ -533,3 +535,11 @@ export class CircularBuffer<T = never> {
 
 export type UnionToIntersection<U> =
   (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+
+export function getEventCoordinates (e: MouseEvent | TouchEvent) {
+  if ('touches' in e) {
+    return { clientX: e.touches[0].clientX, clientY: e.touches[0].clientY }
+  }
+
+  return { clientX: e.clientX, clientY: e.clientY }
+}

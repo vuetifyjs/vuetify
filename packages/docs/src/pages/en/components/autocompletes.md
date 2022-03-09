@@ -1,4 +1,5 @@
 ---
+nav: Autocompletes
 meta:
   title: Autocomplete component
   description: The autocomplete component provides type-ahead autocomplete functionality and provides a list of available options.
@@ -19,7 +20,7 @@ The `v-autocomplete` component offers simple and flexible type-ahead functionali
 
 The autocomplete component extends `v-select` and adds the ability to filter items.
 
-<usage name="v-autocomplete" />
+<!-- <usage name="v-autocomplete" /> -->
 
 ## API
 

@@ -7,8 +7,11 @@ import { VIcon } from '@/components/VIcon'
 // Composables
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
+import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
+import { useLocale } from '@/composables/locale'
+import { useRtl } from '@/composables/rtl'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -21,10 +24,7 @@ export const VBadge = defineComponent({
 
   props: {
     bordered: Boolean,
-    color: {
-      type: String,
-      default: 'primary',
-    },
+    color: String,
     content: String,
     dot: Boolean,
     floating: Boolean,
@@ -36,13 +36,13 @@ export const VBadge = defineComponent({
     },
     location: {
       type: String,
-      default: 'top-right',
+      default: 'top-end',
       validator: (value: string) => {
         const [vertical, horizontal] = (value ?? '').split('-')
 
         return (
           ['top', 'bottom'].includes(vertical) &&
-          ['left', 'right'].includes(horizontal)
+          ['start', 'end'].includes(horizontal)
         )
       },
     },
@@ -56,13 +56,17 @@ export const VBadge = defineComponent({
     textColor: String,
     ...makeRoundedProps(),
     ...makeTagProps(),
+    ...makeThemeProps(),
     ...makeTransitionProps({ transition: 'scale-rotate-transition' }),
   },
 
   setup (props, ctx) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { isRtl } = useRtl()
     const { roundedClasses } = useRounded(props)
+    const { t } = useLocale()
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'textColor'))
+    const { themeClasses } = useTheme()
 
     const position = computed(() => {
       return props.floating
@@ -77,8 +81,6 @@ export const VBadge = defineComponent({
     const locationStyles = computed(() => {
       const [vertical, horizontal] = (props.location ?? '').split('-')
 
-      // TODO: RTL support
-
       const styles = {
         bottom: 'auto',
         left: 'auto',
@@ -87,7 +89,9 @@ export const VBadge = defineComponent({
       }
 
       if (!props.inline) {
-        styles[horizontal === 'left' ? 'right' : 'left'] = calculatePosition(props.offsetX)
+        const isRight = (isRtl.value && horizontal === 'end') || (!isRtl.value && horizontal === 'start')
+
+        styles[isRight ? 'right' : 'left'] = calculatePosition(props.offsetX)
         styles[vertical === 'top' ? 'bottom' : 'top'] = calculatePosition(props.offsetY)
       }
 
@@ -132,6 +136,7 @@ export const VBadge = defineComponent({
                   backgroundColorClasses.value,
                   roundedClasses.value,
                   textColorClasses.value,
+                  themeClasses.value,
                 ]}
                 style={[
                   backgroundColorStyles.value,
@@ -139,7 +144,7 @@ export const VBadge = defineComponent({
                   textColorStyles.value,
                 ]}
                 aria-atomic="true"
-                aria-label="locale string here" // TODO: locale string here
+                aria-label={ t(props.label, value) }
                 aria-live="polite"
                 role="status"
                 { ...badgeAttrs }

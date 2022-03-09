@@ -83,19 +83,19 @@ export const VNavigationDrawer = defineComponent({
     const isTemporary = computed(() => !props.permanent && (mobile.value || props.temporary))
 
     if (!props.disableResizeWatcher) {
-      watch(mobile, val => !props.permanent && (isActive.value = !val))
+      watch(isTemporary, val => !props.permanent && (isActive.value = !val))
     }
 
     if (!props.disableRouteWatcher && router) {
-      watch(() => router.currentRoute.value, () => isTemporary.value && (isActive.value = false))
+      watch(router.currentRoute, () => isTemporary.value && (isActive.value = false))
     }
 
-    watch(props, val => {
-      if (val.permanent) isActive.value = true
+    watch(() => props.permanent, val => {
+      if (val) isActive.value = true
     })
 
     onBeforeMount(() => {
-      if (props.modelValue != null) return
+      if (props.modelValue != null || isTemporary.value) return
 
       isActive.value = props.permanent || !mobile.value
     })

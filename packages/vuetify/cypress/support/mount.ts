@@ -26,7 +26,7 @@ Cypress.Commands.add('mount', (component, options, vuetifyOptions) => {
     },
   }
 
-  return cyMount(component, mergeDeep(defaultOptions, options)).as('wrapper')
+  return cyMount(component, mergeDeep(defaultOptions, options, (a, b) => a.concat(b))).as('wrapper')
 })
 
 /**

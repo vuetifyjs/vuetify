@@ -1,4 +1,5 @@
 ---
+nav: Progress circular
 meta:
   title: Progress circular component
   description: The progress circular component is useful for displaying a visual indicator of numerical data in a circle.

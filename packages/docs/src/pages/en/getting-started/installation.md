@@ -26,9 +26,9 @@ Installation of the alpha is limited to new cli projects at this time and intend
 
 ### vue-cli
 
-In order for the installation to proceed correctly, **vue-cli 4.0** is required. Further instructions are available at [vue-cli](https://github.com/vuejs/vue-cli).
+In order for the installation to proceed correctly, **vue-cli 5.0** is required. Further instructions are available at [vue-cli](https://github.com/vuejs/vue-cli).
 
-Once installed, generate a project with the following command using the **vue-cli 4.0**:
+Once installed, generate a project with the following command using the **vue-cli 5.0**:
 
 ```bash
 vue create my-app

@@ -1,4 +1,5 @@
 ---
+nav: Resize
 meta:
   title: Resize directive
   description: The resize directive provides the ability to conditionally invoke functions when the screen is resized.

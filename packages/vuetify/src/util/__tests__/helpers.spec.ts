@@ -437,5 +437,9 @@ describe('helpers', () => {
     it('should not recursively merge arrays', () => {
       expect(mergeDeep({ a: ['foo'] }, { a: ['bar'] })).toEqual({ a: ['bar'] })
     })
+
+    it('should use arrayFn function if provided', () => {
+      expect(mergeDeep({ a: ['foo'] }, { a: ['bar'] }, (a, b) => [...a, ...b])).toEqual({ a: ['foo', 'bar'] })
+    })
   })
 })

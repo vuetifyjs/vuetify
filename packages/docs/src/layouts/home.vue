@@ -4,6 +4,8 @@
 
     <app-bar />
 
+    <app-drawer temporary />
+
     <v-main>
       <v-container class="px-4 text-center font-weight-light">
         <router-view />
@@ -18,15 +20,24 @@
 
 <script lang="ts">
   // Utilities
-  import { defineComponent } from 'vue'
+  import { defineComponent, onBeforeMount } from 'vue'
+  import { useAppStore } from '@/store/app'
 
-  import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
   import AppBar from '@/components/app/bar/Bar.vue'
+  import AppDrawer from '@/components/app/drawer/Drawer.vue'
+  import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
   import HomeFooter from '@/components/home/Footer.vue'
 
   export default defineComponent({
     name: 'HomeLayout',
-    components: { AppSettingsDrawer, AppBar, HomeFooter },
+    components: { AppBar, AppDrawer, AppSettingsDrawer, HomeFooter },
+
+    setup () {
+      const app = useAppStore()
+      onBeforeMount(() => {
+        app.drawer = null
+      })
+    },
   })
 </script>
 

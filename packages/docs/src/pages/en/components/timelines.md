@@ -1,4 +1,5 @@
 ---
+nav: Timelines
 meta:
   title: Timeline component
   description: The timeline component is used to display chronological information either vertically or horizontally.
@@ -19,7 +20,7 @@ The `v-timeline` is useful for stylistically displaying chronological informatio
 <!--
 ## Usage
 
-`v-timeline`'s in their simplest form display a vertical timeline that should contain at least one `v-timeline-item`.
+`v-timeline`s in their simplest form display a vertical timeline that should contain at least one `v-timeline-item`.
 
 <example file="v-timeline/usage" />
 -->

@@ -1,4 +1,5 @@
 ---
+nav: Menus
 meta:
   title: Menu component
   description: The menu component exposes a dropdown of potential selections or actions that the user can make.

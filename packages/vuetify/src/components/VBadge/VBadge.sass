@@ -23,6 +23,8 @@
   transition: $badge-transition
   white-space: nowrap
 
+  @include tools.theme($badge-theme...)
+
   .v-badge--bordered &
     &::after
       border-radius: inherit
@@ -43,8 +45,6 @@
     min-width: 0
     padding: 0
     width: $badge-dot-width
-
-    @include tools.theme($badge-theme...)
 
     &::after
       border-width: $badge-dot-border-width

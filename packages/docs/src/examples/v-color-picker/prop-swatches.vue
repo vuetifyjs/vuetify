@@ -1,20 +1,16 @@
 <template>
-  <v-row justify="space-around">
+  <div class="d-flex justify-space-around">
     <v-color-picker
       class="ma-2"
       show-swatches
+      swatches-max-height="400px"
     ></v-color-picker>
     <v-color-picker
       class="ma-2"
       :swatches="swatches"
       show-swatches
     ></v-color-picker>
-    <v-color-picker
-      class="ma-2"
-      show-swatches
-      swatches-max-height="300px"
-    ></v-color-picker>
-  </v-row>
+  </div>
 </template>
 
 <script>

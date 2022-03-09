@@ -1,6 +1,8 @@
-@import './_variables.scss'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
-.v-color-picker__swatches
+.v-color-picker-swatches
   overflow-y: auto
 
   > div
@@ -9,12 +11,12 @@
     justify-content: center
     padding: $color-picker-swatches-border-radius
 
-.v-color-picker__swatch
+.v-color-picker-swatches__swatch
   display: flex
   flex-direction: column
   margin-bottom: $color-picker-swatch-margin-bottom
 
-.v-color-picker__color
+.v-color-picker-swatches__color
   position: relative
   height: $color-picker-swatch-color-height
   max-height: $color-picker-swatch-color-height

@@ -24,8 +24,8 @@ import { useList } from './list'
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, onMounted } from 'vue'
-import { genericComponent } from '@/util'
+import { computed, onMounted, watch } from 'vue'
+import { genericComponent, useRender } from '@/util'
 import { useNestedItem } from '@/composables/nested/nested'
 
 // Types
@@ -87,20 +87,28 @@ export const VListItem = genericComponent<new () => {
   setup (props, { attrs, slots }) {
     const link = useLink(props, attrs)
     const id = computed(() => props.value ?? link.href.value)
-    const { activate, isActive: isNestedActive, select, isSelected, root, parent } = useNestedItem(id)
+    const { select, isSelected, root, parent } = useNestedItem(id, false)
     const list = useList()
     const isActive = computed(() => {
-      return props.active || link.isExactActive?.value || isNestedActive.value
+      return props.active || link.isExactActive?.value || isSelected.value
     })
-    const activeColor = props.activeColor ?? props.color
-    const variantProps = computed(() => ({
-      color: isActive.value ? activeColor : props.color,
-      textColor: props.textColor,
-      variant: props.variant,
-    }))
+    const variantProps = computed(() => {
+      const activeColor = props.activeColor ?? props.color
+      return {
+        color: isActive.value ? activeColor : props.color,
+        textColor: props.textColor,
+        variant: props.variant,
+      }
+    })
 
     onMounted(() => {
       if (link.isExactActive?.value && parent.value != null) {
+        root.open(parent.value, true)
+      }
+    })
+
+    watch(() => link.isExactActive?.value, val => {
+      if (val && parent.value != null) {
         root.open(parent.value, true)
       }
     })
@@ -115,12 +123,11 @@ export const VListItem = genericComponent<new () => {
 
     const slotProps = computed(() => ({
       isActive: isActive.value,
-      activate,
       select,
       isSelected: isSelected.value,
     }))
 
-    return () => {
+    useRender(() => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasTitle = (slots.title || props.title)
       const hasSubtitle = (slots.subtitle || props.subtitle)
@@ -158,7 +165,7 @@ export const VListItem = genericComponent<new () => {
           tabindex={ isClickable ? 0 : undefined }
           onClick={ isClickable && ((e: MouseEvent) => {
             link.navigate?.(e)
-            props.value != null && activate(!isNestedActive.value, e)
+            select(!isSelected.value, e)
           })}
           v-ripple={ isClickable }
         >
@@ -217,7 +224,7 @@ export const VListItem = genericComponent<new () => {
           ) }
         </Tag>
       )
-    }
+    })
   },
 })
 
