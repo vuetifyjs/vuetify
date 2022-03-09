@@ -17,7 +17,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
 import { computed, ref, watch } from 'vue'
-import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, getPropertyFromItem, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { LinkProps } from '@/composables/router'
@@ -52,6 +52,14 @@ export const makeSelectProps = propsFactory({
   items: {
     type: Array as PropType<SelectItem[]>,
     default: () => ([]),
+  },
+  itemText: {
+    type: String,
+    default: 'text',
+  },
+  itemValue: {
+    type: String,
+    default: 'value',
   },
   menuIcon: {
     type: String,
@@ -114,8 +122,8 @@ export const VSelect = genericComponent<new <T>() => {
       const array = []
 
       for (const item of props.items as any) {
-        const title = item?.title ?? String(item)
-        const value = item?.value ?? item
+        const title = getText(item) ?? String(item)
+        const value = getValue(item) ?? item
         const active = model.value.includes(value)
 
         if (props.hideSelected && active) continue
@@ -134,6 +142,14 @@ export const VSelect = genericComponent<new <T>() => {
         return items.value.find(item => item.value === value)
       })
     })
+
+    function getText (item: object) {
+      return getPropertyFromItem(item, props.itemText)
+    }
+
+    function getValue (item: object) {
+      return getPropertyFromItem(item, props.itemValue, getText(item))
+    }
 
     function onClear (e: MouseEvent) {
       active.value = []
