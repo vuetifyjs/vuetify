@@ -39,12 +39,10 @@ export const VDivider = defineComponent({
         styles[props.vertical ? 'borderRightWidth' : 'borderTopWidth'] = convertToUnit(props.thickness)
       }
 
-
       return styles
     })
 
     return () => {
-
       return (
         <hr
           class={[
