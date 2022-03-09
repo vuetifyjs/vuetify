@@ -19,7 +19,7 @@ describe('VSlider', () => {
     cy.vue().then(wrapper => {
       const slider = wrapper.getComponent('.v-slider')
       const emits = slider.emitted('update:modelValue')
-      expect(emits).length.to.be.gt(0)
+      expect(emits).to.have.length(1)
     })
   })
 
