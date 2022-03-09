@@ -43,7 +43,6 @@ export const VDivider = defineComponent({
     })
 
     return () => {
-
       return (
         <hr
           class={[
