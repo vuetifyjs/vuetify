@@ -1,4 +1,5 @@
 import 'cypress-file-upload'
+import 'cypress-real-events'
 import type { mount as cyMount } from '@cypress/vue'
 import type { SnapshotOptions } from '@percy/core'
 import type { MountingOptions, VueWrapper } from '@vue/test-utils'

@@ -50,7 +50,7 @@ export const VMessages = defineComponent({
         { props.active && (
           messages.value.map((message, i) => (
             <div
-              class="v-messages__item"
+              class="v-messages__message"
               key={ `${i}-${messages.value}` }
             >
               { slots.message ? slots.message({ message }) : message }

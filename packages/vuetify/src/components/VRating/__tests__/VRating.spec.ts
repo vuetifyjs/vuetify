@@ -61,7 +61,6 @@ describe('VRating', () => {
 
     expect(wrapper.emitted('update:modelValue')).toEqual([
       [0],
-      [1],
     ])
   })
 
