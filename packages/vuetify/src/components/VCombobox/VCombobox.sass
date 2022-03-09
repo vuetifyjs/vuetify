@@ -1,0 +1,70 @@
+@forward './variables'
+@use 'sass:selector'
+@use 'sass:math'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+@use '../VInput/variables' as *
+
+.v-combobox
+  .v-field
+    .v-text-field__prefix,
+    .v-text-field__suffix,
+    .v-field__input,
+    &.v-field
+      cursor: text
+
+  .v-field__input
+    input
+      align-self: flex-start
+      flex: 1 1
+
+  .v-field:not(.v-field--focused)
+    input
+      min-width: 0
+
+.v-combobox
+  &__content
+    overflow: hidden
+
+    @include tools.elevation($combobox-content-elevation)
+    @include tools.rounded($combobox-content-border-radius)
+
+  &__menu-icon
+    order: 1
+    margin-inline-start: 4px
+    transition: $combobox-transition
+
+  &__mask
+    background: rgb(var(--v-theme-on-surface-variant))
+
+  &__selection
+    display: inline-flex
+    margin-inline-end: 2px
+
+  &--active-menu
+    .v-combobox__menu-icon
+      color: inherit
+      transform: rotate(180deg)
+
+  &--chips
+    .v-combobox__selection
+      &:first-child
+        margin-inline-start: 0
+
+  &--single
+    &.v-text-field input
+      flex: 1 1
+      position: absolute
+      left: 0
+      right: 0
+      padding-inline-start: inherit
+      padding-inline-end: inherit
+
+    .v-field--active
+      input
+        transition: none
+
+    // .v-field--dirty:not(.v-field--focused)
+    //   input
+    //     opacity: 0
