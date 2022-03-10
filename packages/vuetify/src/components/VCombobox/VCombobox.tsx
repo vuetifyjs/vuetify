@@ -72,20 +72,6 @@ export const VCombobox = genericComponent<new <T>() => {
   props: {
     // TODO: implement post keyboard support
     // autoSelectFirst: Boolean,
-    // hideNoData: {
-    //   type: Boolean,
-    //   default: true,
-    // },
-    // items: {
-    //   type: Array as PropType<VComboboxItem[]>,
-    //   default: () => ([]),
-    // },
-    // modelValue: {
-    //   type: [Number, String, Array] as PropType<VComboboxItem | VComboboxItem[]>,
-    //   default: () => ([]),
-    // },
-    // multiple: Boolean,
-    search: String,
 
     ...makeFilterProps({ filterKeys: ['title'] }),
     ...makeSelectProps({ menuIcon: '' }),
@@ -109,12 +95,17 @@ export const VCombobox = genericComponent<new <T>() => {
     const activator = ref()
     const isFocused = ref(false)
     const isPristine = ref(true)
-    const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
       props,
       'modelValue',
       [],
-      v => wrapInArray(v || []),
+      v => {
+        const value = wrapInArray(v || [])
+
+        if (!props.multiple) return v
+
+        return value[value.length - 1] ?? ''
+      },
       (v: any) => props.multiple ? v : v[0]
     )
     const menu = ref(false)
@@ -135,7 +126,7 @@ export const VCombobox = genericComponent<new <T>() => {
 
       return array
     })
-    const searchValue = computed(() => isPristine.value ? undefined : search.value)
+    const searchValue = computed(() => isPristine.value ? undefined : model.value)
     const { filteredItems } = useFilter(props, items, searchValue)
 
     function onClear (e: MouseEvent) {
@@ -144,8 +135,6 @@ export const VCombobox = genericComponent<new <T>() => {
       if (props.openOnClear) {
         menu.value = true
       }
-
-      search.value = ''
     }
     function onClickControl () {
       if (props.hideNoData && !filteredItems.value.length) return
@@ -153,31 +142,25 @@ export const VCombobox = genericComponent<new <T>() => {
       menu.value = true
     }
     function onKeydown (e: KeyboardEvent) {
-      if (
-        ['Enter'].includes(e.key) &&
-        filteredItems.value.length === 0 &&
-        search.value != null
-      ) {
-        if (props.multiple) {
-          model.value = [
-            ...wrapInArray(model.value),
-            search.value,
-          ]
-          search.value = ''
-        } else {
-          model.value = [search.value]
-        }
-      }
+      // if (
+      //   ['Enter'].includes(e.key) &&
+      //   filteredItems.value.length === 0 &&
+      //   search.value != null
+      // ) {
+      //   if (props.multiple) {
+      //     model.value = [
+      //       ...wrapInArray(model.value),
+      //       search.value,
+      //     ]
+      //     search.value = ''
+      //   } else {
+      //     model.value = [search.value]
+      //   }
+      // }
     }
 
     watch(() => vTextFieldRef.value, val => {
       activator.value = val.$el.querySelector('.v-input__control')
-    })
-
-    watch(model, val => {
-      const value = String(val[0] ?? '')
-
-      search.value = value
     })
 
     watch(menu, val => {
@@ -190,7 +173,7 @@ export const VCombobox = genericComponent<new <T>() => {
       return (
         <VTextField
           ref={ vTextFieldRef }
-          modelValue={ search.value }
+          modelValue={ model.value }
           class={[
             'v-combobox',
             {
@@ -199,7 +182,6 @@ export const VCombobox = genericComponent<new <T>() => {
               [`v-combobox--${props.multiple ? 'multiple' : 'single'}`]: true,
             },
           ]}
-          dirty={ !!search.value || model.value.length > 0 }
           onUpdate:modelValue={ val => {
             if (!isFocused.value) return
 
@@ -232,7 +214,6 @@ export const VCombobox = genericComponent<new <T>() => {
                     transition={ props.transition }
                   >
                     <VList
-                      v-model:selected={ model.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                     >
                       { !filteredItems.value.length && !props.hideNoData && (
@@ -248,7 +229,7 @@ export const VCombobox = genericComponent<new <T>() => {
                             title: () => {
                               return isPristine.value
                                 ? item.title
-                                : highlightResult(item.title, matches.title, search.value?.length ?? 0)
+                                : highlightResult(item.title, matches.title, model.value?.length ?? 0)
                             },
                           }}
                         </VListItem>
