@@ -100,14 +100,24 @@ export const VCombobox = genericComponent<new <T>() => {
       'modelValue',
       [],
       v => {
-        const value = wrapInArray(v || [])
-
         if (!props.multiple) return v
 
+        const value = wrapInArray(v || [])
         return value[value.length - 1] ?? ''
       },
-      (v: any) => props.multiple ? v : v[0]
+      (v: any) => v
     )
+    const search = computed({
+      get: () => props.multiple ? (model.value as any[]).at(-1) : model.value,
+      set: (v: any) => {
+        if (props.multiple) {
+          model.value = (model.value as any[]).slice().splice(-1, 1, v)
+        } else {
+          model.value = v
+        }
+      },
+    })
+
     const menu = ref(false)
     const items = computed(() => {
       return (props.items || []).map((item: string | Record<string, any>) => {
@@ -173,7 +183,7 @@ export const VCombobox = genericComponent<new <T>() => {
       return (
         <VTextField
           ref={ vTextFieldRef }
-          modelValue={ model.value }
+          v-model={ search.value }
           class={[
             'v-combobox',
             {
@@ -182,17 +192,6 @@ export const VCombobox = genericComponent<new <T>() => {
               [`v-combobox--${props.multiple ? 'multiple' : 'single'}`]: true,
             },
           ]}
-          onUpdate:modelValue={ val => {
-            if (!isFocused.value) return
-
-            const value = val ? [val] : []
-
-            if (value) {
-              isPristine.value = false
-            }
-
-            model.value = value
-          } }
           onClick:clear={ onClear }
           onClick:control={ onClickControl }
           onClick:input={ onClickControl }
