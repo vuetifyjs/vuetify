@@ -95,6 +95,8 @@ export const VCombobox = genericComponent<new <T>() => {
     const activator = ref()
     const isFocused = ref(false)
     const isPristine = ref(true)
+    const isSelecting = ref(false)
+    const menu = ref(false)
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -115,10 +117,13 @@ export const VCombobox = genericComponent<new <T>() => {
         } else {
           model.value = v
         }
+
+        if (!isSelecting.value) {
+          isPristine.value = !v
+          menu.value = true
+        }
       },
     })
-
-    const menu = ref(false)
     const items = computed(() => {
       return (props.items || []).map((item: string | Record<string, any>) => {
         return genItem(item)
@@ -173,9 +178,7 @@ export const VCombobox = genericComponent<new <T>() => {
       activator.value = val.$el.querySelector('.v-input__control')
     })
 
-    watch(menu, val => {
-      if (!val) isPristine.value = true
-    })
+    watch(menu, val => !val && (isPristine.value = true))
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
@@ -212,28 +215,33 @@ export const VCombobox = genericComponent<new <T>() => {
                     openOnClick={ false }
                     transition={ props.transition }
                   >
-                    <VList
-                      selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
-                    >
+                    <div class="bg-white elevation-2">
                       { !filteredItems.value.length && !props.hideNoData && (
                         <VListItem title={ t(props.noDataText) } />
                       )}
 
                       { filteredItems.value.map(({ item, matches }) => (
                         <VListItem
-                          value={ item.value }
                           onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                          onClick={ () => {
+                            if (!props.multiple) {
+                              isSelecting.value = true
+                              menu.value = false
+                              search.value = item.title
+                              isSelecting.value = false
+                            }
+                          } }
                         >
                           {{
                             title: () => {
                               return isPristine.value
                                 ? item.title
-                                : highlightResult(item.title, matches.title, model.value?.length ?? 0)
+                                : highlightResult(item.title, matches.title, search.value?.length ?? 0)
                             },
                           }}
                         </VListItem>
                       )) }
-                    </VList>
+                    </div>
                   </VMenu>
                 ) }
                   { selections.value.map((selection, index) => {
