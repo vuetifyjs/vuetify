@@ -3,6 +3,8 @@
 import { ref } from 'vue'
 import { VLayout } from '@/components'
 import { VOverlay } from '../VOverlay'
+import { Application } from '../../../../cypress/templates'
+import { VLayoutItem } from '@/components/VLayout'
 
 describe('VOverlay', () => {
   it('without activator', () => {
@@ -43,5 +45,26 @@ describe('VOverlay', () => {
       .get('[data-test="content"]').should('be.visible')
       .get('body').click()
       .get('[data-test="content"]').should('not.exist')
+  })
+
+  it('should have correct z-index inside layout item', () => {
+    cy.mount(() => (
+      <Application>
+        <VLayoutItem position="left" size="300" modelValue data-test="layout-item">
+          <VOverlay data-test="overlay">
+            {{
+              activator: ({ props }) => <div { ...props } data-test="activator">Click me</div>,
+              default: () => <div data-test="content">Content</div>,
+            }}
+          </VOverlay>
+        </VLayoutItem>
+      </Application>
+    ))
+
+    cy.get('[data-test="activator"]').should('exist').click()
+
+    cy.get('[data-test="layout-item"').should('have.css', 'z-index').then(zIndex => {
+      cy.get('[data-test="overlay"]').should('have.css', 'z-index', String(Number(zIndex) + 1))
+    })
   })
 })

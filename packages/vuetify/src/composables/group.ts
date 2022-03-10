@@ -3,7 +3,7 @@ import { useProxiedModel } from './proxiedModel'
 
 // Utilities
 import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef } from 'vue'
-import { consoleWarn, deepEqual, findChildren, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
+import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { ComponentInternalInstance, ComputedRef, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
@@ -96,6 +96,10 @@ export function useGroupItem (
     )
   }
 
+  const id = getUid()
+
+  provide(Symbol.for(`${injectKey.description}:id`), id)
+
   const group = inject(injectKey, null)
 
   if (!group) {
@@ -104,7 +108,6 @@ export function useGroupItem (
     throw new Error(`[Vuetify] Could not find useGroup injection with symbol ${injectKey.description}`)
   }
 
-  const id = getUid()
   const value = toRef(props, 'value')
   const disabled = computed(() => group.disabled.value || props.disabled)
 
@@ -164,11 +167,9 @@ export function useGroup (
     // Is there a better way to fix this typing?
     const unwrapped = item as unknown as UnwrapRef<GroupItem>
 
-    const children = findChildren(groupVm?.vnode)
-    const instances = children
-      .slice(1) // First one is group component itself
-      .filter(cmp => !!cmp.provides[injectKey as any]) // TODO: Fix in TS 4.4
-    const index = instances.indexOf(vm)
+    const key = Symbol.for(`${injectKey.description}:id`)
+    const children = findChildrenWithProvide(key, groupVm?.vnode)
+    const index = children.indexOf(vm)
 
     if (index > -1) {
       items.splice(index, 0, unwrapped)
@@ -290,12 +291,14 @@ export function useGroup (
 
 function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
   const ids = []
-  for (const item of items) {
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i]
+
     if (item.value != null) {
       if (modelValue.find(value => deepEqual(value, item.value)) != null) {
         ids.push(item.id)
       }
-    } else if (modelValue.includes(item.id)) {
+    } else if (modelValue.includes(i)) {
       ids.push(item.id)
     }
   }
@@ -306,9 +309,11 @@ function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
 function getValues (items: UnwrapRef<GroupItem[]>, ids: any[]) {
   const values = []
 
-  for (const item of items) {
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i]
+
     if (ids.includes(item.id)) {
-      values.push(item.value != null ? item.value : item.id)
+      values.push(item.value != null ? item.value : i)
     }
   }
 
