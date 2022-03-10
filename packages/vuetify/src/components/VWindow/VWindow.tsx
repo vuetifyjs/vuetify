@@ -16,13 +16,14 @@ import { useRtl } from '@/composables/rtl'
 import { Touch } from '@/directives/touch'
 
 // Utilities
-import { computed, defineComponent, provide, ref, watch } from 'vue'
-import { useRender } from '@/util'
+import { computed, provide, ref, watch } from 'vue'
+import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
-import type { GroupItemProvide } from '@/composables/group'
+import type { GroupItemProvide, GroupProvide } from '@/composables/group'
 import type { TouchHandlers } from '@/directives/touch'
+import type { MakeSlots } from '@/util'
 
 type WindowProvide = {
   transition: ComputedRef<undefined | string>
@@ -35,7 +36,12 @@ type WindowProvide = {
 export const VWindowSymbol: InjectionKey<WindowProvide> = Symbol.for('vuetify:v-window')
 export const VWindowGroupSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-window-group')
 
-export const VWindow = defineComponent({
+export const VWindow = genericComponent<new () => {
+  $slots: MakeSlots<{
+    default: [{ group: GroupProvide }]
+    additional: [{ group: GroupProvide }]
+  }>
+}>()({
   name: 'VWindow',
 
   directives: {
@@ -225,14 +231,16 @@ export const VWindow = defineComponent({
             height: transitionHeight.value,
           }}
         >
-          { slots.default?.() }
+          { slots.default?.({ group }) }
 
           { props.showArrows !== false && (
             <div class="v-window__controls">
               { arrows.value }
             </div>
-          ) }
+          )}
         </div>
+
+        { slots.additional?.({ group }) }
       </props.tag>
     ))
 
@@ -241,3 +249,5 @@ export const VWindow = defineComponent({
     }
   },
 })
+
+export type VWindow = InstanceType<typeof VWindow>

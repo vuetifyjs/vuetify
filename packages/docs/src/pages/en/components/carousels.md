@@ -1,4 +1,5 @@
 ---
+nav: Carousels
 meta:
   title: Carousel component
   description: The carousel component is used to cycle through visual content such as images or slides of text.
