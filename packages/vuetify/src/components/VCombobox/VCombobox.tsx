@@ -215,7 +215,9 @@ export const VCombobox = genericComponent<new <T>() => {
                     openOnClick={ false }
                     transition={ props.transition }
                   >
-                    <div class="bg-white elevation-2">
+                    <VList
+                      selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
+                    >
                       { !filteredItems.value.length && !props.hideNoData && (
                         <VListItem title={ t(props.noDataText) } />
                       )}
@@ -241,7 +243,7 @@ export const VCombobox = genericComponent<new <T>() => {
                           }}
                         </VListItem>
                       )) }
-                    </div>
+                    </VList>
                   </VMenu>
                 ) }
                   { selections.value.map((selection, index) => {
