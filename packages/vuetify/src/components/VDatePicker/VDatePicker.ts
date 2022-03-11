@@ -171,9 +171,9 @@ export default mixins(
       if (!this.value || this.type === 'month') {
         return this.value
       } else if (this.isMultiple) {
-        return this.multipleValue.map(val => val.substr(0, 7))
+        return this.multipleValue.map(val => val.slice(0, 7))
       } else {
-        return (this.value as string).substr(0, 7)
+        return (this.value as string).slice(0, 7)
       }
     },
     current (): string | null {

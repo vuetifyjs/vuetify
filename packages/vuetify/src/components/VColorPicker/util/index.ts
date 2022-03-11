@@ -32,7 +32,7 @@ export function fromHSVA (hsva: HSVA): VColorPickerColor {
   const rgba = HSVAtoRGBA(hsva)
   return {
     alpha: hsva.a,
-    hex: hexa.substr(0, 7),
+    hex: hexa.slice(0, 7),
     hexa,
     hsla,
     hsva,
@@ -47,7 +47,7 @@ export function fromHSLA (hsla: HSLA): VColorPickerColor {
   const rgba = HSVAtoRGBA(hsva)
   return {
     alpha: hsva.a,
-    hex: hexa.substr(0, 7),
+    hex: hexa.slice(0, 7),
     hexa,
     hsla,
     hsva,
@@ -62,7 +62,7 @@ export function fromRGBA (rgba: RGBA): VColorPickerColor {
   const hsla = HSVAtoHSLA(hsva)
   return {
     alpha: hsva.a,
-    hex: hexa.substr(0, 7),
+    hex: hexa.slice(0, 7),
     hexa,
     hsla,
     hsva,
@@ -77,7 +77,7 @@ export function fromHexa (hexa: Hexa): VColorPickerColor {
   const rgba = HSVAtoRGBA(hsva)
   return {
     alpha: hsva.a,
-    hex: hexa.substr(0, 7),
+    hex: hexa.slice(0, 7),
     hexa,
     hsla,
     hsva,

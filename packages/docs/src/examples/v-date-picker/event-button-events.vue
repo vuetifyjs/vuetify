@@ -50,7 +50,7 @@
 <script>
   export default {
     data: () => ({
-      date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().slice(0, 10),
       done: [false, false, false],
       mouseMonth: null,
     }),

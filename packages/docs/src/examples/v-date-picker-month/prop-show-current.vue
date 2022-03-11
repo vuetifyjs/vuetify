@@ -17,7 +17,7 @@
   export default {
     data () {
       return {
-        month1: new Date().toISOString().substr(0, 7),
+        month1: new Date().toISOString().slice(0, 7),
         month2: '2013-09',
       }
     },

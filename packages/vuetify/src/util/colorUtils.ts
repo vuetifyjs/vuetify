@@ -168,7 +168,7 @@ export function RGBtoCSS (rgba: RGBA): string {
 export function RGBAtoHex (rgba: RGBA): Hex {
   const toHex = (v: number) => {
     const h = Math.round(v).toString(16)
-    return ('00'.substr(0, 2 - h.length) + h).toUpperCase()
+    return ('00'.substring(0, 2 - h.length) + h).toUpperCase()
   }
 
   return `#${[
@@ -216,7 +216,7 @@ export function parseHex (hex: string): Hex {
     hex = padEnd(padEnd(hex, 6), 8, 'F')
   }
 
-  return `#${hex}`.toUpperCase().substr(0, 9)
+  return `#${hex}`.toUpperCase().slice(0, 9)
 }
 
 export function parseGradient (

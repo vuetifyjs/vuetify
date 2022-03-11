@@ -27,8 +27,8 @@
   export default {
     data: () => ({
       arrayEvents: null,
-      date1: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-      date2: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      date1: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().slice(0, 10),
+      date2: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().slice(0, 10),
     }),
 
     mounted () {
@@ -36,7 +36,7 @@
         const day = Math.floor(Math.random() * 30)
         const d = new Date()
         d.setDate(day)
-        return d.toISOString().substr(0, 10)
+        return d.toISOString().slice(0, 10)
       })
     },
 

@@ -32,7 +32,7 @@ function createNativeLocaleFormatter (
     return (dateString: string) => intlFormatter.format(new Date(`${makeIsoString(dateString)}T00:00:00+00:00`))
   } catch (e) {
     return (substrOptions.start || substrOptions.length)
-      ? (dateString: string) => makeIsoString(dateString).substr(substrOptions.start || 0, substrOptions.length)
+      ? (dateString: string) => makeIsoString(dateString).slice(substrOptions.start || 0, (substrOptions.start || 0) + substrOptions.length)
       : undefined
   }
 }

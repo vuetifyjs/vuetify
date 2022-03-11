@@ -117,7 +117,7 @@ export default Vue.extend({
     genInputs (): VNode[] | VNode {
       if (this.internalMode === 'hexa') {
         const hex = this.color.hexa
-        const value = this.hideAlpha && hex.endsWith('FF') ? hex.substr(0, 7) : hex
+        const value = this.hideAlpha && hex.endsWith('FF') ? hex.slice(0, 7) : hex
         return this.genInput(
           'hex',
           {

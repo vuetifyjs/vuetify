@@ -439,7 +439,7 @@ export function chunk (str: string, size = 1) {
   const chunked: string[] = []
   let index = 0
   while (index < str.length) {
-    chunked.push(str.substr(index, size))
+    chunked.push(str.slice(index, index + size))
     index += size
   }
   return chunked

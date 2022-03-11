@@ -106,7 +106,7 @@
       },
       convertToClass (str) {
         const end = this.endStr(str)
-        const sub = str.substr(0, str.length - 1)
+        const sub = str.slice(0, -1)
 
         if (isNaN(parseInt(end))) return str
 

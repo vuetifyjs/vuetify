@@ -15,7 +15,7 @@
   export default {
     data () {
       return {
-        picker: new Date().toISOString().substr(0, 7),
+        picker: new Date().toISOString().slice(0, 7),
         landscape: false,
       }
     },
