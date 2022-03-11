@@ -69,7 +69,7 @@ export const VListItem = genericComponent<new () => {
     link: Boolean,
     prependAvatar: String,
     prependIcon: String,
-    subtitle: String,
+    subtitle: [Number, String],
     title: String,
     value: null,
 
