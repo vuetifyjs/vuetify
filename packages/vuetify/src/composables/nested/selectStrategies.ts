@@ -28,15 +28,10 @@ export type SelectStrategy = {
 
 export const independentSelectStrategy: SelectStrategy = {
   select: ({ id, value, mandatory, selected }) => {
-    if (!mandatory || (
-      value || (
-        Array.from(selected.entries()).find(([key, value]) => {
-          return value === 'on' && key !== id
-        })
-      )
-    )) {
-      selected.set(id, value ? 'on' : 'off')
-    }
+    selected.set(id, value ? 'on' : (
+      mandatory &&
+      !Array.from(selected.entries()).find(([key, value]) => value === 'on' && key !== id)
+    ) ? 'on' : 'off')
 
     return selected
   },
