@@ -18,6 +18,7 @@ declare global {
       ): Chainable
       vue (): Cypress.Chainable<VueWrapper<any>>
       swipe (...path: Swipe[]): Cypress.Chainable<void>
+      emitted (selector: string, event: string): Cypress.Chainable<unknown[]>
     }
   }
 }

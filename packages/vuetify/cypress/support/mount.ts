@@ -29,6 +29,10 @@ Cypress.Commands.add('mount', (component, options, vuetifyOptions) => {
   return cyMount(component, mergeDeep(defaultOptions, options, (a, b) => a.concat(b))).as('wrapper')
 })
 
+Cypress.Commands.add('vue', () => {
+  return cy.get('@wrapper')
+})
+
 /**
  * Update the props and wait for Vue to re-render.
  * Must be chained of a chain that starts with `cy.mount`.
@@ -48,12 +52,19 @@ Cypress.Commands.add('setProps', (props: Record<string, unknown> = {}) => {
     // generally receive a Cypress.Chainable as the first arg (the "subject").
     // the custom `mount` command defined above returns a
     // Test Utils' `VueWrapper`, so we need to cast this as `unknown` first.
-    let vueWrapper = (wrapper || Cypress.vueWrapper) as unknown as VueWrapper<any>
+    const vueWrapper = (wrapper || Cypress.vueWrapper) as unknown as VueWrapper<any>
     await vueWrapper.setProps(props)
     return vueWrapper
   })
 })
 
-Cypress.Commands.add('vue', () => {
-  return cy.get('@wrapper')
+Cypress.Commands.add('emitted', (selector: string, event: string) => {
+  return cy.get('@wrapper').then(wrapper => {
+    const vueWrapper = (wrapper || Cypress.vueWrapper) as unknown as VueWrapper<any>
+    const cmp = vueWrapper.findComponent(selector)
+
+    if (!cmp) return []
+
+    return cmp.emitted(event)
+  })
 })
