@@ -65,8 +65,7 @@ export const VCheckbox = defineComponent({
       const [inputProps, _1] = filterInputProps(props)
       const [controlProps, _2] = filterControlProps(props)
       
-      const inputSlots = pick(slots, ['prepend', 'append', 'details']);
-      const selectionControlSlots = pick(slots, ['default', 'input']);
+      const [inputSlots, selectionControlSlots] = pick(slots, ['prepend', 'append', 'details']);
 
       return (
         <VInput
