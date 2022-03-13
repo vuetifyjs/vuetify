@@ -10,7 +10,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
 import { computed } from 'vue'
-import { defineComponent, filterInputAttrs, useRender } from '@/util'
+import { pick, defineComponent, filterInputAttrs, useRender } from '@/util'
 
 export const VCheckbox = defineComponent({
   name: 'VCheckbox',
@@ -64,6 +64,9 @@ export const VCheckbox = defineComponent({
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
       const [inputProps, _1] = filterInputProps(props)
       const [controlProps, _2] = filterControlProps(props)
+      
+      const inputSlots = pick(slots, ['prepend', 'append', 'details']);
+      const selectionControlSlots = pick(slots, ['default', 'input']);
 
       return (
         <VInput
@@ -72,7 +75,7 @@ export const VCheckbox = defineComponent({
           { ...inputProps }
         >
           {{
-            ...slots,
+            ...inputSlots,
             default: ({
               isDisabled,
               isReadonly,
@@ -86,6 +89,7 @@ export const VCheckbox = defineComponent({
                 aria-checked={ indeterminate.value ? 'mixed' : undefined }
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
+                v-slots={ selectionControlSlots }
                 { ...controlAttrs }
               />
             ),
