@@ -35,6 +35,7 @@ interface LayoutProvide {
   ) => {
     layoutItemStyles: Ref<Record<string, unknown>>
     layoutItemScrimStyles: Ref<Record<string, unknown>>
+    zIndex: Ref<number>
   }
   unregister: (id: string) => void
   mainStyles: Ref<Record<string, unknown>>
@@ -42,10 +43,16 @@ interface LayoutProvide {
   items: Ref<LayoutItem[]>
   layoutRect: Ref<DOMRectReadOnly | undefined>
   rootZIndex: Ref<number>
+}
+
+type OverlayProvide = {
   overlays: Ref<number[]>
+  zIndex: Ref<number>
 }
 
 export const VuetifyLayoutKey: InjectionKey<LayoutProvide> = Symbol.for('vuetify:layout')
+
+export const VuetifyOverlayKey: InjectionKey<OverlayProvide> = Symbol.for('vuetify:overlay')
 
 const ROOT_ZINDEX = 1000
 
@@ -78,7 +85,7 @@ export function useLayout () {
 }
 
 export function useOverlay (isActive: Ref<boolean | undefined>) {
-  const layout = useLayout()
+  const layout = inject(VuetifyOverlayKey, { zIndex: ref(ROOT_ZINDEX), overlays: ref([]) })
 
   const id = getUid()
 
@@ -92,9 +99,9 @@ export function useOverlay (isActive: Ref<boolean | undefined>) {
     immediate: true,
   })
 
-  const overlayZIndex = computed(() => ROOT_ZINDEX + layout.overlays.value.indexOf(id) + 1)
+  const overlayZIndex = computed(() => layout.zIndex.value + layout.overlays.value.indexOf(id) + 1)
 
-  return { overlayZIndex, layoutRect: layout.layoutRect }
+  return { overlayZIndex }
 }
 
 export function useLayoutItem (options: {
@@ -122,6 +129,7 @@ export function useLayoutItem (options: {
   const {
     layoutItemStyles,
     layoutItemScrimStyles,
+    zIndex,
   } = layout.register(vm, {
     ...options,
     active: computed(() => isKeptAlive.value ? false : options.active.value),
@@ -129,6 +137,13 @@ export function useLayoutItem (options: {
   })
 
   onBeforeUnmount(() => layout.unregister(id))
+
+  const overlays = ref<number[]>([])
+
+  provide(VuetifyOverlayKey, {
+    overlays,
+    zIndex,
+  })
 
   return { layoutItemStyles, layoutRect: layout.layoutRect, layoutItemScrimStyles }
 }
@@ -173,7 +188,6 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
   const activeItems = reactive(new Map<string, Ref<boolean>>())
   const disabledTransitions = reactive(new Map<string, Ref<boolean>>())
   const { resizeRef, contentRect: layoutRect } = useResizeObserver()
-  const overlays = ref<number[]>([])
 
   const computedOverlaps = computed(() => {
     const map = new Map<string, { position: Position, amount: number }>()
@@ -318,7 +332,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
         position: rootZIndex.value === ROOT_ZINDEX ? 'fixed' : 'absolute',
       }))
 
-      return { layoutItemStyles, layoutItemScrimStyles }
+      return { layoutItemStyles, layoutItemScrimStyles, zIndex }
     },
     unregister: (id: string) => {
       priorities.delete(id)
@@ -333,7 +347,6 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     items,
     layoutRect,
     rootZIndex,
-    overlays,
   })
 
   const layoutClasses = computed(() => [

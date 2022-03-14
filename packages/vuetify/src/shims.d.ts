@@ -1,9 +1,12 @@
-import type { ComponentPublicInstance, FunctionalComponent } from 'vue'
+import type { ComponentPublicInstance, FunctionalComponent, VNodeChild } from 'vue'
+
+// @skip-build
+import type { DefaultsInstance, DisplayInstance, IconOptions, LocaleAdapter, RtlInstance, ThemeInstance } from './framework'
 
 declare global {
   namespace JSX {
     interface ElementChildrenAttribute {
-      $children
+      $children: {}
     }
   }
 }
@@ -13,8 +16,6 @@ declare module 'vue' {
 }
 
 declare module '@vue/runtime-dom' {
-  import type { VNodeChild } from '@vue/runtime-core'
-
   export interface HTMLAttributes {
     $children?: VNodeChild
   }
@@ -24,9 +25,6 @@ declare module '@vue/runtime-dom' {
 }
 
 declare module '@vue/runtime-core' {
-  // @skip-build
-  import type { DefaultsInstance, DisplayInstance, IconOptions, LocaleAdapter, RtlInstance, ThemeInstance } from './framework'
-
   interface Vuetify {
     defaults: DefaultsInstance
     display: DisplayInstance
