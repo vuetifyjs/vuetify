@@ -173,6 +173,22 @@ export const VCombobox = genericComponent<new <T>() => {
       }
     }
 
+    function select (item: any) {
+      if (!props.multiple) {
+        model.value = item.value
+
+        return
+      }
+
+      const index = selections.value.findIndex(selection => selection.value === item.value)
+
+      if (index === -1) {
+        model.value.splice(-1, 0, item.value)
+      } else {
+        model.value = selected.value.filter(selection => selection !== item.value)
+      }
+    }
+
     watch(() => vTextFieldRef.value, val => {
       activator.value = val.$el.querySelector('.v-input__control')
     })
@@ -247,13 +263,7 @@ export const VCombobox = genericComponent<new <T>() => {
                             } else {
                               search.value = ''
 
-                              const index = selections.value.findIndex(selection => selection.value === item.value)
-
-                              if (index === -1) {
-                                model.value.splice(-1, 0, item.value)
-                              } else {
-                                model.value = model.value.filter(value => genItem(value).value !== item.value)
-                              }
+                              select(item)
                             }
 
                             isSelecting.value = false
@@ -274,13 +284,12 @@ export const VCombobox = genericComponent<new <T>() => {
                   { selections.value.map((selection, index) => {
                     const selected = selection?.selected
                     const title = selection?.title
-                    const value = selection?.value
 
                     function onChipClose (e: Event) {
                       e.stopPropagation()
                       e.preventDefault()
 
-                      model.value = selected.value.filter(item => item !== value)
+                      select(selection)
                     }
 
                     const slotProps = {
@@ -308,7 +317,7 @@ export const VCombobox = genericComponent<new <T>() => {
                               : (
                                 <span class="v-combobox__selection-text">
                                   { title }
-                                  { props.multiple && (index < selections.value.length - 1 || !!search.value) && (
+                                  { props.multiple && (index < selections.value.length - 1) && (
                                     <span class="v-combobox__selection-comma">,</span>
                                   ) }
                                 </span>
