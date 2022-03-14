@@ -169,6 +169,7 @@ export const VCombobox = genericComponent<new <T>() => {
 
       if (e.key === 'Enter' && props.multiple) {
         model.value.push(search.value)
+        search.value = ''
       }
     }
 
@@ -177,7 +178,7 @@ export const VCombobox = genericComponent<new <T>() => {
     })
 
     watch(filteredItems, val => {
-      // if (!val.length && props.hideNoData) menu.value = false
+      if (!val.length && props.hideNoData) menu.value = false
     })
 
     watch(isFocused, val => {
@@ -203,6 +204,7 @@ export const VCombobox = genericComponent<new <T>() => {
               [`v-combobox--${props.multiple ? 'multiple' : 'single'}`]: true,
             },
           ]}
+          dirty={ selected.value.length > 0 }
           onClick:clear={ onClear }
           onClick:control={ onClickControl }
           onClick:input={ onClickControl }
