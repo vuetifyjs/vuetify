@@ -101,25 +101,19 @@ export const VCombobox = genericComponent<new <T>() => {
       props,
       'modelValue',
       [],
-      v => {
-        if (!props.multiple) return v
-
-        const value = wrapInArray(v || [])
-        return value[value.length - 1] ?? ''
-      },
-      (v: any) => v
+      v => wrapInArray(v ?? [])
     )
     const search = computed({
-      get: () => props.multiple ? (model.value as any[]).at(-1) : model.value,
+      get: () => props.multiple ? (model.value as any[]).at(-1) : model.value[0],
       set: (v: any) => {
         if (props.multiple) {
-          model.value = (model.value as any[]).slice().splice(-1, 1, v)
+          model.value.splice(-1, 1, v)
         } else {
           model.value = v
         }
 
         if (!isSelecting.value) {
-          isPristine.value = !v
+          isPristine.value = false
           menu.value = true
         }
       },
@@ -131,18 +125,21 @@ export const VCombobox = genericComponent<new <T>() => {
     })
     const selections = computed(() => {
       const array: any[] = []
-      const wrapped = wrapInArray((model.value ?? '') || [])
 
-      for (const unwrapped of wrapped) {
-        const value = genItem(unwrapped).value
-        const found = array.find(selection => selection === value)
+      for (const unwrapped of model.value) {
+        const item = genItem(unwrapped)
 
-        if (found == null) array.push(value)
+        if (props.multiple && item.value === search.value) continue
+
+        const found = array.find(selection => selection.value === item.value)
+
+        if (found == null) array.push(item)
       }
 
       return array
     })
-    const searchValue = computed(() => isPristine.value ? undefined : model.value)
+    const selected = computed(() => selections.value.map(selection => selection.value))
+    const searchValue = computed(() => isPristine.value ? undefined : search.value)
     const { filteredItems } = useFilter(props, items, searchValue)
 
     function onClear (e: MouseEvent) {
@@ -169,6 +166,10 @@ export const VCombobox = genericComponent<new <T>() => {
       if (['Enter', 'Escape', 'Tab'].includes(e.key)) {
         isPristine.value = true
       }
+
+      if (e.key === 'Enter' && props.multiple) {
+        model.value.push(search.value)
+      }
     }
 
     watch(() => vTextFieldRef.value, val => {
@@ -176,7 +177,15 @@ export const VCombobox = genericComponent<new <T>() => {
     })
 
     watch(filteredItems, val => {
-      if (!val.length && props.hideNoData) menu.value = false
+      // if (!val.length && props.hideNoData) menu.value = false
+    })
+
+    watch(isFocused, val => {
+      if (!val) {
+        setTimeout(() => {
+          isPristine.value = true
+        })
+      }
     })
 
     useRender(() => {
@@ -216,7 +225,7 @@ export const VCombobox = genericComponent<new <T>() => {
                   >
                     <VList
                       mandatory
-                      selected={ selections.value }
+                      selected={ selected.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                     >
                       { !filteredItems.value.length && !props.hideNoData && (
@@ -228,12 +237,24 @@ export const VCombobox = genericComponent<new <T>() => {
                           value={ item.value }
                           onMousedown={ (e: MouseEvent) => e.preventDefault() }
                           onClick={ () => {
+                            isSelecting.value = true
+
                             if (!props.multiple) {
-                              isSelecting.value = true
                               menu.value = false
                               search.value = item.title
-                              isSelecting.value = false
+                            } else {
+                              search.value = ''
+
+                              const index = selections.value.findIndex(selection => selection.value === item.value)
+
+                              if (index === -1) {
+                                model.value.splice(-1, 0, item.value)
+                              } else {
+                                model.value = model.value.filter(value => genItem(value).value !== item.value)
+                              }
                             }
+
+                            isSelecting.value = false
                           } }
                         >
                           {{
@@ -257,7 +278,7 @@ export const VCombobox = genericComponent<new <T>() => {
                       e.stopPropagation()
                       e.preventDefault()
 
-                      model.value = selections.value.filter(item => item !== value)
+                      model.value = selected.value.filter(item => item !== value)
                     }
 
                     const slotProps = {
@@ -285,7 +306,7 @@ export const VCombobox = genericComponent<new <T>() => {
                               : (
                                 <span class="v-combobox__selection-text">
                                   { title }
-                                  { index < selections.value.length - 1 && (
+                                  { props.multiple && (index < selections.value.length - 1 || !!search.value) && (
                                     <span class="v-combobox__selection-comma">,</span>
                                   ) }
                                 </span>
