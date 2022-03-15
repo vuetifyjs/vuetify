@@ -167,7 +167,7 @@ export const VCombobox = genericComponent<new <T>() => {
       const index = selections.value.findIndex(selection => selection.value === item.value)
 
       if (index === -1) {
-        model.value.splice(-1, 0, item.value)
+        model.value.push(item.value)
       } else {
         model.value = selected.value.filter(selection => selection !== item.value)
       }
