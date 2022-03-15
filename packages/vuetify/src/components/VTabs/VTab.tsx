@@ -61,8 +61,10 @@ export const VTab = defineComponent({
     provideDefaults({
       VBtn: {
         block: toRef(props, 'fixed'),
+        maxWidth: computed(() => props.fixed ? 300 : undefined),
         color: computed(() => isSelected.value ? props.color : undefined),
         variant: 'text',
+        rounded: 0,
       },
     }, {
       scoped: true,
