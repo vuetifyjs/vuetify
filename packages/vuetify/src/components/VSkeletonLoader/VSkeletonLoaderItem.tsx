@@ -15,7 +15,6 @@ const rootTypes = {
   chip: 'chip',
   heading: 'heading',
   image: 'image',
-  table: 'table-heading, table-thead, table-tbody, table-tfoot',
   text: 'text',
 } as Record<string, string>
 
