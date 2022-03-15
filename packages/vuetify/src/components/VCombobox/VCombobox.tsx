@@ -152,8 +152,11 @@ export const VCombobox = genericComponent<new <T>() => {
         isPristine.value = true
       }
 
-      if (e.key === 'Enter' && props.multiple) {
-        model.value.push(search.value)
+      if (props.multiple && ['Enter', ','].includes(e.key)) {
+        if (e.key === ',') e.preventDefault()
+
+        select({ value: search.value })
+
         search.value = ''
       }
     }
