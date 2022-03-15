@@ -106,6 +106,7 @@ export const VOverlay = genericComponent<new () => {
   emits: {
     'click:outside': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
+    afterLeave: () => true,
   },
 
   setup (props, { slots, attrs, emit }) {
@@ -238,7 +239,7 @@ export const VOverlay = genericComponent<new () => {
                 />
                 <MaybeTransition
                   appear
-                  onAfterLeave={ onAfterLeave }
+                  onAfterLeave={ [onAfterLeave, () => emit('afterLeave')] }
                   persisted
                   transition={ props.transition }
                   target={ activatorEl.value }

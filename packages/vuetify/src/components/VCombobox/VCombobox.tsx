@@ -172,6 +172,9 @@ export const VCombobox = genericComponent<new <T>() => {
         model.value = selected.value.filter(selection => selection !== item.value)
       }
     }
+    function onAfterLeave () {
+      if (isFocused.value) isPristine.value = true
+    }
 
     watch(() => vTextFieldRef.value, val => {
       activator.value = val.$el.querySelector('.v-input__control')
@@ -182,25 +185,18 @@ export const VCombobox = genericComponent<new <T>() => {
     })
 
     watch(isFocused, val => {
-      if (!val) {
-        setTimeout(() => {
-          isPristine.value = true
-        })
+      if (!val && props.multiple && search.value) {
+        model.value.push(search.value)
+        search.value = ''
       }
     })
 
     watch(search, val => {
-      if (!props.multiple) {
-        model.value = [val]
-      }
-      // if (props.multiple) {
-      //   model.value.splice(-1, 1, v)
-      // } else {
-      //   model.value = v
-      // }
+      if (!props.multiple) model.value = [val]
 
       isPristine.value = false
-      menu.value = true
+
+      if (isFocused.value) menu.value = true
     })
 
     useRender(() => {
@@ -238,6 +234,7 @@ export const VCombobox = genericComponent<new <T>() => {
                     eager={ props.eager }
                     openOnClick={ false }
                     transition={ props.transition }
+                    onAfterLeave={ onAfterLeave }
                   >
                     <VList
                       mandatory
