@@ -1,38 +1,35 @@
 // Imports
-@import './_variables.scss'
-@import '../VAvatar/_variables.scss'
+@use './variables' as *
 
-// Theme
-+theme(v-skeleton-loader) using ($material)
-  .v-skeleton-loader__bone::after
-    background: map-get($material, 'skeleton')
+.v-skeleton-loader__bone::after
+  background: $skeleton-loader-background
 
-  .v-skeleton-loader__avatar,
-  .v-skeleton-loader__button,
-  .v-skeleton-loader__chip,
-  .v-skeleton-loader__divider,
-  .v-skeleton-loader__heading,
-  .v-skeleton-loader__image,
-  .v-skeleton-loader__text
-    background: map-get($material, 'dividers')
+.v-skeleton-loader__avatar,
+.v-skeleton-loader__button,
+.v-skeleton-loader__chip,
+.v-skeleton-loader__divider,
+.v-skeleton-loader__heading,
+.v-skeleton-loader__image,
+.v-skeleton-loader__text
+  background: $skeleton-loader-text-background
 
-  .v-skeleton-loader__actions,
-  .v-skeleton-loader__article,
-  .v-skeleton-loader__card-heading,
-  .v-skeleton-loader__card-text,
-  .v-skeleton-loader__date-picker,
-  .v-skeleton-loader__list-item,
-  .v-skeleton-loader__list-item-avatar,
-  .v-skeleton-loader__list-item-text,
-  .v-skeleton-loader__list-item-two-line,
-  .v-skeleton-loader__list-item-avatar-two-line,
-  .v-skeleton-loader__list-item-three-line,
-  .v-skeleton-loader__list-item-avatar-three-line,
-  .v-skeleton-loader__table-heading,
-  .v-skeleton-loader__table-thead,
-  .v-skeleton-loader__table-tbody,
-  .v-skeleton-loader__table-tfoot
-    background: map-get($material, 'cards')
+.v-skeleton-loader__actions,
+.v-skeleton-loader__article,
+.v-skeleton-loader__card-heading,
+.v-skeleton-loader__card-text,
+.v-skeleton-loader__date-picker,
+.v-skeleton-loader__list-item,
+.v-skeleton-loader__list-item-avatar,
+.v-skeleton-loader__list-item-text,
+.v-skeleton-loader__list-item-two-line,
+.v-skeleton-loader__list-item-avatar-two-line,
+.v-skeleton-loader__list-item-three-line,
+.v-skeleton-loader__list-item-avatar-three-line,
+.v-skeleton-loader__table-heading,
+.v-skeleton-loader__table-thead,
+.v-skeleton-loader__table-tbody,
+.v-skeleton-loader__table-tfoot
+  background: $skeleton-loader-table-tfoot-background
 
 .v-skeleton-loader
   border-radius: $skeleton-loader-border-radius
@@ -47,11 +44,7 @@
       display: inline-block
 
       &:first-child
-        +ltr()
-          margin-right: $skeleton-loader-actions-button-margin
-
-        +rtl()
-          margin-left: $skeleton-loader-actions-button-margin
+          margin-inline-end: $skeleton-loader-actions-button-margin
 
 
   .v-skeleton-loader__list-item,
@@ -94,11 +87,8 @@
 
   &__article
     .v-skeleton-loader__heading
-      +ltr()
-        margin: $skeleton-loader-article-heading-margin-top-left 0 $skeleton-loader-article-heading-margin-x $skeleton-loader-article-heading-margin-top-left
-
-      +rtl()
-        margin: $skeleton-loader-article-heading-margin-top-left $skeleton-loader-article-heading-margin-x 0 $skeleton-loader-article-heading-margin-top-left
+      margin-top: $skeleton-loader-article-heading-margin-top-left 0
+      margin-inline-start: $skeleton-loader-article-heading-margin-x
 
     .v-skeleton-loader__paragraph
       padding: $skeleton-loader-article-paragraph-padding
@@ -181,12 +171,7 @@
 
       &:nth-child(2)
         margin-left: auto
-
-        +ltr()
-          margin-right: $skeleton-loader-date-picker-options-avatar-child-margin
-
-        +rtl()
-          margin-left: $skeleton-loader-date-picker-options-avatar-child-margin
+        margin-inline-end: $skeleton-loader-date-picker-options-avatar-child-margin
 
     .v-skeleton-loader__text.v-skeleton-loader__bone:first-child
       margin-bottom: 0px
@@ -257,11 +242,7 @@
     padding: $skeleton-loader-item-padding
 
     .v-skeleton-loader__avatar
-      +ltr()
-        margin-right: $skeleton-loader-item-avatar-margin
-
-      +rtl()
-        margin-left: $skeleton-loader-item-avatar-margin
+      margin-inline-end: $skeleton-loader-item-avatar-margin
 
     .v-skeleton-loader__text:last-child,
     .v-skeleton-loader__text:only-child
@@ -321,11 +302,7 @@
     padding: $skeleton-loader-table-tfoot-padding
 
     > *
-      +ltr()
-        margin-left: $skeleton-loader-table-tfoot-children-margin
-
-      +rtl()
-        margin-right: $skeleton-loader-table-tfoot-children-margin
+        margin-inline-start: $skeleton-loader-table-tfoot-children-margin
 
     .v-skeleton-loader__avatar
       height: $skeleton-loader-table-tfoot-avatar-height

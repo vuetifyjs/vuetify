@@ -1,4 +1,9 @@
-@import '../../styles/styles.sass';
+@use '../../styles/settings';
+@forward '../VAvatar/variables';
+
+$skeleton-loader-background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .3), rgba(255, 255, 255, 0)) !default;
+$skeleton-loader-text-background: rgba(map-get(settings.$text-on-shades, 'white'), 0.12) !default;
+$skeleton-loader-table-tfoot-background: map-get(settings.$shades, 'white') !default;
 
 $skeleton-loader-actions-button-margin: 12px !default;
 $skeleton-loader-actions-padding: 16px 16px 8px !default;
@@ -8,8 +13,8 @@ $skeleton-loader-article-paragraph-padding: 16px !default;
 $skeleton-loader-avatar-height: 48px !default;
 $skeleton-loader-avatar-height: 56px !default;
 $skeleton-loader-avatar-width: 48px !default;
-$skeleton-loader-border-radius: $border-radius-root !default;
-$skeleton-loader-button-border-radius: $border-radius-root !default;
+$skeleton-loader-border-radius: settings.$border-radius-root !default;
+$skeleton-loader-button-border-radius: settings.$border-radius-root !default;
 $skeleton-loader-button-height: 36px !default;
 $skeleton-loader-button-width: 64px !default;
 $skeleton-loader-card-heading-loader-heading-margin: 16px !default;
