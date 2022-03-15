@@ -211,18 +211,24 @@ export const VCombobox = genericComponent<new <T>() => {
       }
     }
     function select (item: any) {
-      if (!props.multiple) {
-        model.value = item.value
+      if (props.multiple) {
+        const index = selections.value.findIndex(selection => selection.value === item.value)
 
-        return
-      }
+        if (index === -1) {
+          model.value.push(item.value)
+        } else {
+          model.value = selected.value.filter(selection => selection !== item.value)
+        }
 
-      const index = selections.value.findIndex(selection => selection.value === item.value)
-
-      if (index === -1) {
-        model.value.push(item.value)
+        search.value = ''
       } else {
-        model.value = selected.value.filter(selection => selection !== item.value)
+        search.value = item.title
+
+        // watch for search watcher to trigger
+        nextTick(() => {
+          menu.value = false
+          isPristine.value = true
+        })
       }
     }
     function onAfterLeave () {
@@ -306,16 +312,7 @@ export const VCombobox = genericComponent<new <T>() => {
                         <VListItem
                           value={ item.value }
                           onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                          onClick={ () => {
-                            if (!props.multiple) {
-                              menu.value = false
-                              search.value = item.title
-                            } else {
-                              search.value = ''
-
-                              select(item)
-                            }
-                          } }
+                          onClick={ () => select(item) }
                         >
                           {{
                             title: () => {
