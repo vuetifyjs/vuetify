@@ -15,9 +15,10 @@ import { makeTransitionProps } from '@/composables/transition'
 import { useForwardRef } from '@/composables/forwardRef'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useTextColor } from '@/composables/color'
 
 // Utility
-import { computed, ComputedRef, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -89,13 +90,18 @@ export const VCombobox = genericComponent<new <T>() => {
     'update:modelValue': (val: any) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
     const activator = ref()
     const isFocused = ref(false)
     const isPristine = ref(true)
     const menu = ref(false)
+    const search = ref('')
+    const selectionIndex = ref(-1)
+    const color = computed(() => vTextFieldRef.value?.color)
+    const items = computed(() => props.items.map(genItem))
+    const { textColorClasses, textColorStyles } = useTextColor(color)
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -103,13 +109,7 @@ export const VCombobox = genericComponent<new <T>() => {
       v => wrapInArray(v || []),
       (v: any) => props.multiple ? v : v[0]
     )
-    const search = ref('')
 
-    const items = computed(() => {
-      return (props.items || []).map((item: string | Record<string, any>) => {
-        return genItem(item)
-      })
-    })
     const selections = computed(() => {
       const array: any[] = []
 
@@ -124,6 +124,7 @@ export const VCombobox = genericComponent<new <T>() => {
       return array
     })
     const selected = computed(() => selections.value.map(selection => selection.value))
+    const selection = computed(() => selections.value[selectionIndex.value])
     const searchValue = computed(() => isPristine.value ? undefined : search.value)
     const { filteredItems } = useFilter(props, items, searchValue)
 
@@ -140,6 +141,11 @@ export const VCombobox = genericComponent<new <T>() => {
       menu.value = true
     }
     function onKeydown (e: KeyboardEvent) {
+      const selectionStart = vTextFieldRef.value.selectionStart
+      const length = selected.value.length
+
+      if (selectionIndex.value > -1) e.preventDefault()
+
       if (['Enter', 'ArrowDown'].includes(e.key)) {
         menu.value = true
       }
@@ -152,7 +158,51 @@ export const VCombobox = genericComponent<new <T>() => {
         isPristine.value = true
       }
 
-      if (props.multiple && ['Enter', ','].includes(e.key)) {
+      if (!props.multiple) return
+
+      if (['Backspace', 'Delete'].includes(e.key)) {
+        if (selectionIndex.value < 0) {
+          if (e.key === 'Backspace' && !search.value) {
+            selectionIndex.value = length - 1
+          }
+
+          return
+        }
+
+        select(selection.value)
+
+        nextTick(() => !selection.value && (selectionIndex.value = length - 2))
+      }
+
+      if (e.key === 'ArrowLeft') {
+        if (selectionIndex.value < 0 && selectionStart > 0) return
+
+        const prev = selectionIndex.value > -1
+          ? selectionIndex.value - 1
+          : length - 1
+
+        if (selections.value[prev]) {
+          selectionIndex.value = prev
+        } else {
+          selectionIndex.value = -1
+          vTextFieldRef.value.setSelectionRange(search.value.length, search.value.length)
+        }
+      }
+
+      if (e.key === 'ArrowRight') {
+        if (selectionIndex.value < 0) return
+
+        const next = selectionIndex.value + 1
+
+        if (selections.value[next]) {
+          selectionIndex.value = next
+        } else {
+          selectionIndex.value = -1
+          vTextFieldRef.value.setSelectionRange(0, 0)
+        }
+      }
+
+      if (['Enter', ','].includes(e.key)) {
         if (e.key === ',') e.preventDefault()
 
         select({ value: search.value })
@@ -191,15 +241,18 @@ export const VCombobox = genericComponent<new <T>() => {
       if (!val && props.multiple && search.value) {
         model.value.push(search.value)
         search.value = ''
+      } else {
+        isPristine.value = true
+        selectionIndex.value = -1
       }
     })
 
     watch(search, val => {
       if (!props.multiple) model.value = [val]
-
-      isPristine.value = false
-
+      if (!val) selectionIndex.value = -1
       if (isFocused.value) menu.value = true
+
+      isPristine.value = !val
     })
 
     useRender(() => {
@@ -214,6 +267,7 @@ export const VCombobox = genericComponent<new <T>() => {
             {
               'v-combobox--active-menu': menu.value,
               'v-combobox--chips': !!props.chips,
+              'v-combobox--selecting-index': selectionIndex.value > -1,
               [`v-combobox--${props.multiple ? 'multiple' : 'single'}`]: true,
             },
           ]}
@@ -276,7 +330,7 @@ export const VCombobox = genericComponent<new <T>() => {
                   </VMenu>
                 ) }
                   { selections.value.map((selection, index) => {
-                    const selected = selection?.selected
+                    const isSelected = index === selectionIndex.value
                     const title = selection?.title
 
                     function onChipClose (e: Event) {
@@ -288,7 +342,7 @@ export const VCombobox = genericComponent<new <T>() => {
 
                     const slotProps = {
                       'onClick:close': onChipClose,
-                      modelValue: selected,
+                      modelValue: isSelected,
                     }
 
                     return (
@@ -301,7 +355,13 @@ export const VCombobox = genericComponent<new <T>() => {
                           },
                         }}
                       >
-                        <div class="v-combobox__selection">
+                        <div
+                          class={[
+                            'v-combobox__selection',
+                            isSelected && textColorClasses.value,
+                          ]}
+                          style={ isSelected ? textColorStyles.value : {} }
+                        >
                           { hasChips
                             ? slots.chip
                               ? slots.chip({ props: slotProps, selection })
