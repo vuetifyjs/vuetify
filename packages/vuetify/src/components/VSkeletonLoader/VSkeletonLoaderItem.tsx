@@ -30,6 +30,10 @@ export const VSkeletonLoaderItem = defineComponent({
         class={[
           'v-skeleton-loader',
           'v-skeleton-loader__bone',
+          {
+            'v-skeleton-loader--boilerplate': props.boilerplate,
+            'v-skeleton-loader--is-loading': props.loading,
+          },
           `v-skeleton-loader__${props.type}`,
           themeClasses.value,
           elevationClasses.value,
@@ -38,6 +42,9 @@ export const VSkeletonLoaderItem = defineComponent({
         style={[
           dimensionStyles.value,
         ]}
+        aria-busy="true"
+        aria-live="polite"
+        role="alert"
       />
     ))
   },
