@@ -101,23 +101,11 @@ export const VCombobox = genericComponent<new <T>() => {
       props,
       'modelValue',
       [],
-      v => wrapInArray(v ?? [])
+      v => wrapInArray(v || []),
+      (v: any) => props.multiple ? v : v[0]
     )
-    const search = computed({
-      get: () => props.multiple ? (model.value as any[]).at(-1) : model.value[0],
-      set: (v: any) => {
-        if (props.multiple) {
-          model.value.splice(-1, 1, v)
-        } else {
-          model.value = v
-        }
+    const search = ref('')
 
-        if (!isSelecting.value) {
-          isPristine.value = false
-          menu.value = true
-        }
-      },
-    })
     const items = computed(() => {
       return (props.items || []).map((item: string | Record<string, any>) => {
         return genItem(item)
@@ -128,8 +116,6 @@ export const VCombobox = genericComponent<new <T>() => {
 
       for (const unwrapped of model.value) {
         const item = genItem(unwrapped)
-
-        if (props.multiple && item.value === search.value) continue
 
         const found = array.find(selection => selection.value === item.value)
 
@@ -172,7 +158,6 @@ export const VCombobox = genericComponent<new <T>() => {
         search.value = ''
       }
     }
-
     function select (item: any) {
       if (!props.multiple) {
         model.value = item.value
@@ -203,6 +188,22 @@ export const VCombobox = genericComponent<new <T>() => {
           isPristine.value = true
         })
       }
+    })
+
+    watch(search, val => {
+      if (!props.multiple) {
+        model.value = [val]
+      }
+      // if (props.multiple) {
+      //   model.value.splice(-1, 1, v)
+      // } else {
+      //   model.value = v
+      // }
+
+      // if (!isSelecting.value) {
+      //   isPristine.value = false
+      //   menu.value = true
+      // }
     })
 
     useRender(() => {
