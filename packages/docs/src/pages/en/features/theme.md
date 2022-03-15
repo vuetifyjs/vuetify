@@ -153,6 +153,8 @@ export default createVuetify({
 })
 ```
 
+Custom properties for colors are a list of `red, green, blue`, so the `rgb()` or `rgba()` function has to be used:
+
 ```html
 <template>
   <div class="bg-green on-green">background color with appropriate text color contrast</div>
@@ -164,8 +166,8 @@ export default createVuetify({
 
 <style>
   .custom-class {
-    background: var(--v-theme-green)
-    color: var(--v-theme-on-green)
+    background: rgb(var(--v-theme-green))
+    color: rgba(var(--v-theme-on-green), 0.9)
   }
 </style>
 ```
