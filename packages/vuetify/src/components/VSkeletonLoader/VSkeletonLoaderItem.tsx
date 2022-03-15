@@ -9,14 +9,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { defineComponent, useRender } from '@/util'
 
-const rootTypes = {
-  avatar: 'avatar',
-  button: 'button',
-  chip: 'chip',
-  heading: 'heading',
-  image: 'image',
-  text: 'text',
-} as Record<string, string>
+const rootTypes = ['avatar', 'button', 'chip', 'heading', 'image', 'text']
 
 export const VSkeletonLoaderItem = defineComponent({
   props: {
@@ -24,7 +17,7 @@ export const VSkeletonLoaderItem = defineComponent({
     loading: Boolean,
     type: {
       type: String,
-      validator: (val: string) => val in Object.keys(rootTypes),
+      validator: (val: string) => val in rootTypes,
       default: '',
     },
     ...makeElevationProps(),
