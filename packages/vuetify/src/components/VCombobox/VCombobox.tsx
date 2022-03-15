@@ -95,7 +95,6 @@ export const VCombobox = genericComponent<new <T>() => {
     const activator = ref()
     const isFocused = ref(false)
     const isPristine = ref(true)
-    const isSelecting = ref(false)
     const menu = ref(false)
     const model = useProxiedModel(
       props,
@@ -200,10 +199,8 @@ export const VCombobox = genericComponent<new <T>() => {
       //   model.value = v
       // }
 
-      // if (!isSelecting.value) {
-      //   isPristine.value = false
-      //   menu.value = true
-      // }
+      isPristine.value = false
+      menu.value = true
     })
 
     useRender(() => {
@@ -256,8 +253,6 @@ export const VCombobox = genericComponent<new <T>() => {
                           value={ item.value }
                           onMousedown={ (e: MouseEvent) => e.preventDefault() }
                           onClick={ () => {
-                            isSelecting.value = true
-
                             if (!props.multiple) {
                               menu.value = false
                               search.value = item.title
@@ -266,8 +261,6 @@ export const VCombobox = genericComponent<new <T>() => {
 
                               select(item)
                             }
-
-                            isSelecting.value = false
                           } }
                         >
                           {{
